@@ -29,7 +29,7 @@ col1 = [
 ]
 col2 = [
     [sg.Text(tr.columns[lang][1], size=(16, 1), font=("arial", 12), key="col1")],
-    [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), key="gamma")],
+    [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), default=True, key="gamma")],
     [sg.Checkbox("sRGB", size=(16, 1), key="srgb")],
     [sg.Text(tr.gui_br[lang][0]+":", size=(18, 1), key="br0")],
     [sg.Radio(tr.gui_br[lang][1], "rad", size=(15, 1), default=True, key="br1")], # Cannot be translated 

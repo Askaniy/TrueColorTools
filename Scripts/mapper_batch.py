@@ -6,7 +6,7 @@ import time
 import spectra, convert
 
 
-path = spectra.folder + "/Maps/"
+path = spectra.folder + "/Maps"
 
 
 for request in spectra.maps:

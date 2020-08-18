@@ -40,7 +40,7 @@ def to_rgb(spectrum, mode="1", albedo=None, inp_bit=None, exp_bit=None, rnd=0, g
         g = np.vectorize(lambda x: 12.92*x if x < 0.0031308 else 1.055*(x**(1.0/2.4))-0.055)
         rgb = g(rgb)
     if html:
-        return "#{:02x}{:02x}{:02x}".format(*[int(b) for b in to_bit(8, rgb)])
+        return "#{:02x}{:02x}{:02x}".format(*[int(round(b)) for b in to_bit(8, rgb)])
     if exp_bit:
         rgb = to_bit(exp_bit, rgb)
     if rnd != 0:
