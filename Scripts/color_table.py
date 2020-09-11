@@ -2,13 +2,13 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageShow
 from scipy.interpolate import Akima1DInterpolator, PchipInterpolator
 import translator as tr
-import spectra, convert
+import config, spectra, convert
 
 
 config = {
-    "path": spectra.folder + "/Tables/",
+    "path": config.folder() + "/Tables/",
     "name": "color_table-",
-    "lang": "en",
+    "lang": config.lang(),
     "srgb": False,
     "gamma": False,
     "albedo": False,
@@ -68,10 +68,15 @@ for name, spectrum in spectra.objects.items():
         nm = convert.xyz_nm
     else:
         nm = convert.rgb_nm
-    if spectrum["nm"][0] > nm[0] or spectrum["nm"][-1] < nm[-1]:
-        interp = PchipInterpolator(spectrum["nm"], spectrum["br"], extrapolate=True)
-    else:
-        interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
+    try:
+        if spectrum["nm"][0] > nm[0] or spectrum["nm"][-1] < nm[-1]:
+            interp = PchipInterpolator(spectrum["nm"], spectrum["br"], extrapolate=True)
+        else:
+            interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
+    except ValueError:
+        print("\n" + tr.error1[config["lang"]][0])
+        print(tr.error1[config["lang"]][1].format(name, len(spectrum["nm"]), len(spectrum["br"])) + "\n")
+        break
     albedo = None
     if config["albedo"]:
         if "albedo" not in spectrum:
@@ -87,6 +92,10 @@ for name, spectrum in spectra.objects.items():
     else:
         mode = "chromaticity"
     rgb = convert.to_rgb(interp(nm), mode=mode, albedo=albedo, exp_bit=8, gamma=config["gamma"], srgb=config["srgb"])
+    if not np.array_equal(np.absolute(rgb), rgb):
+        print("\n" + tr.error2[config["lang"]][0])
+        print(tr.error2[config["lang"]][1].format(name, *rgb) + "\n")
+        break
     # object drawing
     center_x = 100 * (1 + n%15)
     center_y = name_step + 100 * int(1 + n/15)

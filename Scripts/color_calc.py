@@ -2,11 +2,11 @@ import numpy as np
 import plotly.graph_objects as go
 from scipy.interpolate import Akima1DInterpolator, PchipInterpolator
 import translator as tr
-import spectra, convert
+import config, spectra, convert
 
 
 config = {
-    "lang": "en",
+    "lang": config.lang(),
     "srgb": False,
     "gamma": True,
     "albedo": True
@@ -27,10 +27,15 @@ for request in objects:
         nm = convert.xyz_nm
     else:
         nm = convert.rgb_nm
-    if spectrum["nm"][0] > nm[0] or spectrum["nm"][-1] < nm[-1]:
-        interp = PchipInterpolator(spectrum["nm"], spectrum["br"], extrapolate=True)
-    else:
-        interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
+    try:
+        if spectrum["nm"][0] > nm[0] or spectrum["nm"][-1] < nm[-1]:
+            interp = PchipInterpolator(spectrum["nm"], spectrum["br"], extrapolate=True)
+        else:
+            interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
+    except ValueError:
+        print("\n" + tr.error1[config["lang"]][0])
+        print(tr.error1[config["lang"]][1].format(name, len(spectrum["nm"]), len(spectrum["br"])) + "\n")
+        break
     albedo = None
     if config["albedo"]:
         if "albedo" not in spectrum:
@@ -46,6 +51,10 @@ for request in objects:
     else:
         mode = "chromaticity"
     rgb = convert.to_rgb(interp(nm), mode=mode, albedo=albedo, exp_bit=8, gamma=config["gamma"], srgb=config["srgb"])
+    if not np.array_equal(np.absolute(rgb), rgb):
+        print("\n" + tr.error2[config["lang"]][0])
+        print(tr.error2[config["lang"]][1].format(name, *rgb) + "\n")
+        break
     if "|" in request:
         name = "{} [{}]".format(*request.split("|"))
     else:

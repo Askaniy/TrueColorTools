@@ -2,10 +2,10 @@ import numpy as np
 import plotly.graph_objects as go
 from scipy.interpolate import Akima1DInterpolator, PchipInterpolator, CubicSpline
 import translator as tr
-import spectra, convert
+import config, spectra, convert
 import PySimpleGUI as sg
 sg.theme("DarkGrey6")
-lang = "en"
+lang = config.lang()
 
 def obj_list():
     global lang
@@ -36,7 +36,7 @@ col2 = [
     [sg.Radio(tr.gui_br[lang][2], "rad", size=(15, 1), key="br2")],               # due to parameter update issues
     [sg.Radio(tr.gui_br[lang][3], "rad", size=(15, 1), key="br3")],               # in sg.Radio and sg.Checkbox
     [sg.Text(tr.gui_interp[lang][0]+":", size=(18, 1), key="interp0")],
-    [sg.Radio(tr.gui_interp[lang][1], "interp", size=(8, 1), default=True, key="interp1")],
+    [sg.Radio(tr.gui_interp[lang][1], "interp", size=(15, 1), default=True, key="interp1")],
     [sg.Radio(tr.gui_interp[lang][2], "interp", size=(6, 1), key="interp2"), sg.Radio(tr.gui_interp[lang][3], "interp", size=(6, 1), key="interp3")],
     [sg.Text(tr.gui_bit[lang]+":", size=(12, 1), key="bit"), sg.InputText("8", size=(4, 1), key="bit_num")],
     [sg.Text(tr.gui_rnd[lang]+":", size=(12, 1), key="rnd"), sg.InputText("3", size=(4, 1), key="rnd_num")],
@@ -56,7 +56,7 @@ layout = [
     [sg.Menu(tr.gui_menu[lang], key="menu")],
     [sg.Column(col1), sg.VSeperator(), sg.Column(col2), sg.VSeperator(), sg.Column(col3)]
 ]
-window = sg.Window("Color calculator", layout)
+window = sg.Window("True color calculator", layout)
 window.Finalize()
 graph = window["graph"]
 preview = graph.DrawCircle((52, 50), 46, fill_color="black", line_color="white")
@@ -65,7 +65,7 @@ fig = go.Figure()
 names = []
 while True:
     event, values = window.Read()
-    print(event, values)
+    #print(event, values)
     if event in [sg.WIN_CLOSED, tr.gui_exit[lang]]:
         break
     elif event in tr.lang_list[lang]:
@@ -117,15 +117,20 @@ while True:
             nm = convert.xyz_nm
         else:
             nm = convert.rgb_nm
-        if values["interp1"]:
-            if spectrum["nm"][0] > nm[0] or spectrum["nm"][-1] < nm[-1]:
+        try:
+            if values["interp1"]:
+                if spectrum["nm"][0] > nm[0] or spectrum["nm"][-1] < nm[-1]:
+                    interp = PchipInterpolator(spectrum["nm"], spectrum["br"], extrapolate=True)
+                else:
+                    interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
+            elif values["interp2"]:
                 interp = PchipInterpolator(spectrum["nm"], spectrum["br"], extrapolate=True)
-            else:
-                interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
-        elif values["interp2"]:
-            interp = PchipInterpolator(spectrum["nm"], spectrum["br"], extrapolate=True)
-        elif values["interp3"]:
-            interp = CubicSpline(spectrum["nm"], spectrum["br"], extrapolate=True)
+            elif values["interp3"]:
+                interp = CubicSpline(spectrum["nm"], spectrum["br"], extrapolate=True)
+        except ValueError:
+            print("\n" + tr.error1[lang][0])
+            print(tr.error1[lang][1].format(values["list"][0], len(spectrum["nm"]), len(spectrum["br"])) + "\n")
+            break
         rgb = convert.to_rgb(
             interp(nm), 
             mode=mode, albedo=albedo, 
@@ -141,6 +146,10 @@ while True:
             srgb=values["srgb"],
             html=True
         )
+        if not np.array_equal(np.absolute(rgb), rgb):
+            print("\n" + tr.error2[lang][0])
+            print(tr.error2[lang][1].format(values["list"][0], *rgb) + "\n")
+            break
         graph.TKCanvas.itemconfig(preview, fill=rgb_show)
         window["rgb"].update(rgb)
         window["hex"].update(rgb_show)

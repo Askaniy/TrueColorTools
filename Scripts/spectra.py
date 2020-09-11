@@ -1,19 +1,10 @@
 
-folder = "X:/Documents/Astronomy/Creating/Colors/Colors 2020" # Needs to be customized to work with table and maps!
-
-
 # Wavelengths and albedo/brightness measurements
 
 objects = {
     #"Zero Mag": {"filters": "Landolt", "indices": {"U-B": 0, "B-V": 0, "V-R": 0, "R-I": 0}},
     "Vega|1": {
-        "nm": [100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 200, 205, 210, 215, 220, 225, 230, 235, 
-        240, 245, 250, 255, 260, 265, 270, 275, 280, 285, 290, 295, 300, 305, 310, 315, 320, 325, 330, 335, 340, 345, 350, 355, 360, 365, 370, 375, 380, 
-        385, 390, 395, 400, 405, 410, 415, 420, 425, 430, 435, 440, 445, 450, 455, 460, 465, 470, 475, 480, 485, 490, 495, 500, 505, 510, 515, 520, 525, 
-        530, 535, 540, 545, 550, 555, 560, 565, 570, 575, 580, 585, 590, 595, 600, 605, 610, 615, 620, 625, 630, 635, 640, 645, 650, 655, 660, 665, 670, 
-        675, 680, 685, 690, 695, 700, 705, 710, 715, 720, 725, 730, 735, 740, 745, 750, 755, 760, 765, 770, 775, 780, 785, 790, 795, 800, 805, 810, 815, 
-        820, 825, 830, 835, 840, 845, 850, 855, 860, 865, 870, 875, 880, 885, 890, 895, 900, 905, 910, 915, 920, 925, 930, 935, 940, 945, 950, 955, 960, 
-        965, 970, 975, 980, 985, 990, 995, 1000],
+        "nm": list(range(100, 1005, 5)),
         "br": [6e-05, 0.00025, 0.00576, 0.03232, 0.00055, 0.08193, 0.63839, 1.10497, 1.31761, 1.49697, 1.59407, 1.56707, 1.62778, 1.52787, 1.48626, 1.4522, 
         1.47706, 1.37099, 1.36909, 1.35627, 1.2874, 1.23782, 1.2184, 1.12704, 1.10038, 1.03818, 1.02341, 0.93665, 0.89169, 0.89966, 0.89559, 0.84866, 
         0.87022, 0.89975, 0.86962, 0.83412, 0.8045, 0.82241, 0.83534, 0.82666, 0.83803, 0.82499, 0.80312, 0.7947, 0.77471, 0.76373, 0.76404, 0.74179, 
@@ -29,12 +20,7 @@ objects = {
         "obl": 0.161817 # https://iopscience.iop.org/article/10.1088/0004-637X/708/1/71
     },
     "Sun|1": {
-        "nm": [200, 205, 210, 215, 220, 225, 230, 235, 240, 245, 250, 255, 260, 265, 270, 275, 280, 285, 290, 295, 300, 305, 310, 315, 320, 325, 330, 335, 
-        340, 345, 350, 355, 360, 365, 370, 375, 380, 385, 390, 395, 400, 405, 410, 415, 420, 425, 430, 435, 440, 445, 450, 455, 460, 465, 470, 475, 480, 
-        485, 490, 495, 500, 505, 510, 515, 520, 525, 530, 535, 540, 545, 550, 555, 560, 565, 570, 575, 580, 585, 590, 595, 600, 605, 610, 615, 620, 625, 
-        630, 635, 640, 645, 650, 655, 660, 665, 670, 675, 680, 685, 690, 695, 700, 705, 710, 715, 720, 725, 730, 735, 740, 745, 750, 755, 760, 765, 770, 
-        775, 780, 785, 790, 795, 800, 805, 810, 815, 820, 825, 830, 835, 840, 845, 850, 855, 860, 865, 870, 875, 880, 885, 890, 895, 900, 905, 910, 915, 
-        920, 925, 930, 935, 940, 945, 950, 955, 960, 965, 970, 975, 980, 985, 990, 995, 1000],
+        "nm": list(range(200, 1005, 5)),
         "br": [0.0014, 0.01011, 0.02381, 0.03433, 0.04319, 0.0517, 0.04901, 0.04446, 0.04279, 0.055, 0.05044, 0.07057, 0.09784, 0.22107, 0.23546, 0.18081, 
         0.13324, 0.24966, 0.47614, 0.50681, 0.44031, 0.57326, 0.59473, 0.63443, 0.69563, 0.79136, 0.95555, 0.87621, 0.91949, 0.87208, 0.92131, 0.98853, 
         0.85355, 1.06107, 1.12238, 0.95982, 1.12773, 0.88242, 1.14262, 0.91021, 1.59446, 1.59842, 1.60575, 1.64867, 1.61866, 1.60261, 1.37227, 1.64495, 
@@ -87,13 +73,9 @@ objects = {
         "albedo": 0.12, "obl": 0.005886 # albedo https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2001JE001580
     },
     #"Jupiter|2": {"nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.358, 0.443, 0.538, 0.513, 0.495, 0.389, 0.321], "obl": 0.06487},
-    #"Jupiter|3": {"nm": [350, 450, 550, 650, 750, 850], "br": [0.604, 0.824, 1.000, 1.006, 0.832, 0.636], "obl": 0.06487},
+    "Jupiter|3": {"nm": [350, 450, 550, 650, 750, 850], "br": [0.604, 0.824, 1.000, 1.006, 0.832, 0.636], "obl": 0.06487},
     "Jupiter|5": {
-        "nm": [300, 305, 310, 315, 320, 325, 330, 335, 340, 345, 350, 355, 360, 365, 370, 375, 380, 385, 390, 395, 400, 405, 410, 415, 420, 425, 430, 435, 
-        440, 445, 450, 455, 460, 465, 470, 475, 480, 485, 490, 495, 500, 505, 510, 515, 520, 525, 530, 535, 540, 545, 550, 555, 560, 565, 570, 575, 580, 
-        585, 590, 595, 600, 605, 610, 615, 620, 625, 630, 635, 640, 645, 650, 655, 660, 665, 670, 675, 680, 685, 690, 695, 700, 705, 710, 715, 720, 725, 
-        730, 735, 740, 745, 750, 755, 760, 765, 770, 775, 780, 785, 790, 795, 800, 805, 810, 815, 820, 825, 830, 835, 840, 845, 850, 855, 860, 865, 870, 
-        875, 880, 885, 890, 895, 900, 905, 910, 915, 920, 925, 930, 935, 940, 945, 950, 955, 960, 965, 970, 975, 980, 985, 990, 995],
+        "nm": list(range(300, 1000, 5)),
         "br": [0.29378, 0.28429, 0.27608, 0.27136, 0.27249, 0.27212, 0.27459, 0.28014, 0.28171, 0.28694, 0.29027, 0.29465, 0.30181, 0.30318, 0.30942, 
         0.31845, 0.32228, 0.32985, 0.33479, 0.3483, 0.34522, 0.35446, 0.36173, 0.3716, 0.38007, 0.38811, 0.39714, 0.40009, 0.40802, 0.4144, 0.42059, 
         0.42694, 0.43275, 0.43956, 0.44462, 0.44928, 0.45416, 0.45455, 0.4655, 0.47041, 0.47498, 0.4778, 0.48142, 0.48899, 0.49216, 0.49489, 0.49725, 
@@ -128,11 +110,7 @@ objects = {
     #"Saturn|2": {"nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.203, 0.339, 0.499, 0.646, 0.568, 0.543, 0.423], "obl": 0.09796},
     #"Saturn|3": {"nm": [350, 450, 550, 650, 750, 850], "br": [0.445, 0.684, 1.000, 1.144, 1.001, 0.776], "obl": 0.09796},
     "Saturn|5": {
-        "nm": [300, 305, 310, 315, 320, 325, 330, 335, 340, 345, 350, 355, 360, 365, 370, 375, 380, 385, 390, 395, 400, 405, 410, 415, 420, 425, 430, 435, 
-        440, 445, 450, 455, 460, 465, 470, 475, 480, 485, 490, 495, 500, 505, 510, 515, 520, 525, 530, 535, 540, 545, 550, 555, 560, 565, 570, 575, 580, 
-        585, 590, 595, 600, 605, 610, 615, 620, 625, 630, 635, 640, 645, 650, 655, 660, 665, 670, 675, 680, 685, 690, 695, 700, 705, 710, 715, 720, 725, 
-        730, 735, 740, 745, 750, 755, 760, 765, 770, 775, 780, 785, 790, 795, 800, 805, 810, 815, 820, 825, 830, 835, 840, 845, 850, 855, 860, 865, 870, 
-        875, 880, 885, 890, 895, 900, 905, 910, 915, 920, 925, 930, 935, 940, 945, 950, 955, 960, 965, 970, 975, 980, 985, 990, 995],
+        "nm": list(range(300, 1000, 5)),
         "br": [0.25845, 0.25605, 0.24952, 0.23874, 0.23387, 0.22685, 0.22264, 0.21964, 0.21405, 0.21096, 0.20684, 0.20468, 0.20455, 0.20151, 0.20191, 
         0.20496, 0.20594, 0.20962, 0.21328, 0.22295, 0.22405, 0.23403, 0.24293, 0.25509, 0.26686, 0.27894, 0.29168, 0.30152, 0.31439, 0.32584, 0.33679, 
         0.34745, 0.35724, 0.36685, 0.3755, 0.38363, 0.39057, 0.39448, 0.40676, 0.41362, 0.42072, 0.42719, 0.43207, 0.4407, 0.44692, 0.45191, 0.45758, 
@@ -158,11 +136,7 @@ objects = {
     },
     #"Titan|3": {"nm": [350, 450, 550, 650, 750, 850], "br": [0.344, 0.584, 1.000, 1.248, 1.101, 0.879]},
     "Titan|5": {
-        "nm": [300, 305, 310, 315, 320, 325, 330, 335, 340, 345, 350, 355, 360, 365, 370, 375, 380, 385, 390, 395, 400, 405, 410, 415, 420, 425, 430, 435, 
-        440, 445, 450, 455, 460, 465, 470, 475, 480, 485, 490, 495, 500, 505, 510, 515, 520, 525, 530, 535, 540, 545, 550, 555, 560, 565, 570, 575, 580, 
-        585, 590, 595, 600, 605, 610, 615, 620, 625, 630, 635, 640, 645, 650, 655, 660, 665, 670, 675, 680, 685, 690, 695, 700, 705, 710, 715, 720, 725, 
-        730, 735, 740, 745, 750, 755, 760, 765, 770, 775, 780, 785, 790, 795, 800, 805, 810, 815, 820, 825, 830, 835, 840, 845, 850, 855, 860, 865, 870, 
-        875, 880, 885, 890, 895, 900, 905, 910, 915, 920, 925, 930, 935, 940, 945, 950, 955, 960, 965, 970, 975, 980, 985, 990, 995],
+        "nm": list(range(300, 1000, 5)),
         "br": [0.06505, 0.05856, 0.05638, 0.05807, 0.0603, 0.06186, 0.06338, 0.06517, 0.06666, 0.06874, 0.07017, 0.07212, 0.07408, 0.07608, 0.07853, 
         0.0811, 0.0835, 0.08513, 0.08827, 0.09123, 0.09332, 0.09631, 0.09867, 0.1027, 0.10647, 0.10989, 0.11321, 0.11655, 0.12048, 0.12456, 0.12877, 
         0.13279, 0.13668, 0.14085, 0.14481, 0.14926, 0.15348, 0.15718, 0.1631, 0.16837, 0.17338, 0.17853, 0.18298, 0.1886, 0.19378, 0.1979, 0.20247, 
@@ -176,11 +150,7 @@ objects = {
     #"Uranus|2": {"nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.502, 0.561, 0.488, 0.264, 0.202, 0.089, 0.079], "obl": 0.02293},
     #"Uranus|3": {"nm": [350, 450, 550, 650, 750, 850], "br": [0.984, 1.067, 1.000, 0.647, 0.292, 0.148], "obl": 0.02293},
     "Uranus|5": {
-        "nm": [300, 305, 310, 315, 320, 325, 330, 335, 340, 345, 350, 355, 360, 365, 370, 375, 380, 385, 390, 395, 400, 405, 410, 415, 420, 425, 430, 435, 
-        440, 445, 450, 455, 460, 465, 470, 475, 480, 485, 490, 495, 500, 505, 510, 515, 520, 525, 530, 535, 540, 545, 550, 555, 560, 565, 570, 575, 580, 
-        585, 590, 595, 600, 605, 610, 615, 620, 625, 630, 635, 640, 645, 650, 655, 660, 665, 670, 675, 680, 685, 690, 695, 700, 705, 710, 715, 720, 725, 
-        730, 735, 740, 745, 750, 755, 760, 765, 770, 775, 780, 785, 790, 795, 800, 805, 810, 815, 820, 825, 830, 835, 840, 845, 850, 855, 860, 865, 870, 
-        875, 880, 885, 890, 895, 900, 905, 910, 915, 920, 925, 930, 935, 940, 945, 950, 955, 960, 965, 970, 975, 980, 985, 990, 995],
+        "nm": list(range(300, 1000, 5)),
         "br": [0.53, 0.52915, 0.53383, 0.52396, 0.52481, 0.51762, 0.51994, 0.53179, 0.51993, 0.52475, 0.51689, 0.51507, 0.52749, 0.51285, 0.52179, 0.53988, 
         0.53582, 0.5555, 0.53676, 0.57531, 0.52632, 0.53684, 0.54856, 0.55668, 0.56234, 0.57533, 0.5903, 0.57235, 0.55516, 0.58489, 0.58799, 0.58555, 
         0.57635, 0.60338, 0.61043, 0.60925, 0.56945, 0.49064, 0.61783, 0.62374, 0.62342, 0.58807, 0.53888, 0.63396, 0.60169, 0.6039, 0.60351, 0.51239, 
@@ -195,11 +165,7 @@ objects = {
     #"Neptune|2": {"nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.578, 0.562, 0.442, 0.226, 0.181, 0.072, 0.067], "obl": 0.0171},
     #"Neptune|3": {"nm": [350, 450, 550, 650, 750, 850], "br": [1.252, 1.235, 1.000, 0.555, 0.237, 0.132], "obl": 0.0171},
     "Neptune|5": {
-        "nm": [300, 305, 310, 315, 320, 325, 330, 335, 340, 345, 350, 355, 360, 365, 370, 375, 380, 385, 390, 395, 400, 405, 410, 415, 420, 425, 430, 435, 
-        440, 445, 450, 455, 460, 465, 470, 475, 480, 485, 490, 495, 500, 505, 510, 515, 520, 525, 530, 535, 540, 545, 550, 555, 560, 565, 570, 575, 580, 
-        585, 590, 595, 600, 605, 610, 615, 620, 625, 630, 635, 640, 645, 650, 655, 660, 665, 670, 675, 680, 685, 690, 695, 700, 705, 710, 715, 720, 725, 
-        730, 735, 740, 745, 750, 755, 760, 765, 770, 775, 780, 785, 790, 795, 800, 805, 810, 815, 820, 825, 830, 835, 840, 845, 850, 855, 860, 865, 870, 
-        875, 880, 885, 890, 895, 900, 905, 910, 915, 920, 925, 930, 935, 940, 945, 950, 955, 960, 965, 970, 975, 980, 985, 990, 995],
+        "nm": list(range(300, 1000, 5)),
         "br": [0.55168, 0.57462, 0.5749, 0.56581, 0.56727, 0.55883, 0.56295, 0.5772, 0.56453, 0.5712, 0.56445, 0.56291, 0.57946, 0.5619, 0.57126, 0.59178, 
         0.58364, 0.60495, 0.57921, 0.62125, 0.56071, 0.56722, 0.57935, 0.58255, 0.58109, 0.59381, 0.60457, 0.57878, 0.54865, 0.58534, 0.5848, 0.57342, 
         0.55558, 0.58414, 0.58875, 0.58025, 0.52666, 0.43538, 0.57688, 0.58207, 0.5751, 0.52714, 0.47207, 0.5743, 0.5355, 0.54054, 0.5359, 0.43401, 
@@ -229,6 +195,17 @@ objects = {
         723.628, 729.787, 740.426, 744.345, 751.064, 766.181, 782.419, 788.578, 794.737, 809.295, 813.774, 826.652, 841.209, 860.246],
         "br": [0.89, 0.971, 1.106, 1.059, 1.127, 1.133, 1.125, 1.157, 1.137, 1.155, 1.116, 1.139, 1.03, 1.179, 1.182, 1.143, 1.163, 1.088, 1.16, 1.084,
         1.201, 1.201, 1.087, 1.159, 1.018, 1.079, 0.881, 1.072, 1.13]
+    },
+    "Eros|11": {
+        "nm": list(range(350, 895, 5)),
+        "br": [0.39114, 0.40755, 0.43474, 0.48806, 0.49886, 0.51646, 0.49042, 0.44175, 0.53512, 0.55996, 0.62863, 0.6198, 0.67636, 0.66499, 0.68589, 0.67764,
+        0.68227, 0.73805, 0.7302, 0.76963, 0.7911, 0.8021, 0.8124, 0.81771, 0.82751, 0.8589, 0.87197, 0.89604, 0.89299, 0.90126, 0.91716, 0.91591, 0.91854,
+        0.92926, 0.93106, 0.95902, 0.96679, 0.97107, 0.96876, 0.98038, 1.0, 0.9954, 0.98526, 1.00648, 0.98666, 1.01316, 1.01612, 1.02944, 1.02794, 1.05006,
+        1.0472, 1.05417, 1.06109, 1.05626, 1.06517, 1.0627, 1.0777, 1.08487, 1.08937, 1.08957, 1.10265, 1.1198, 1.11823, 1.12239, 1.12993, 1.1458, 1.13856,
+        1.12816, 1.13752, 1.14195, 1.12574, 1.14946, 1.13265, 1.17224, 1.12637, 1.13412, 1.15489, 1.16516, 1.13524, 1.13512, 1.16729, 1.19448, 1.21084,
+        1.15377, 1.12806, 1.17343, 1.21881, 1.14669, 1.14314, 1.14373, 1.16095, 1.09179, 1.0755, 1.13114, 1.16251, 1.21117, 1.13878, 1.20665, 1.0951, 1.047,
+        1.00354, 0.9945, 1.01803, 1.14228, 1.05281, 1.18387, 1.09958, 1.16424, 0.91067],
+        "albedo": 0.098 # https://www.lpi.usra.edu/meetings/lpsc2004/pdf/2080.pdf
     },
     "Class A|7": {"nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.708, 0.868, 1.109, 1.214, 1.298, 1.311, 1.250, 1.187, 1.143],
         "albedo": 0.274}, # https://arxiv.org/abs/1307.2424
@@ -297,400 +274,23 @@ sources = [
     "[1]: CALSPEC calatog of stellar spectra (STScI)"
     "\nhttps://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec",
     "[2]: Comprehensive wide-band magnitudes and albedos for the planets, with applications to exo-planets and Planet Nine"
-    "\nDOI:10.1016/j.icarus.2016.09.023; https://www.sciencedirect.com/science/article/abs/pii/S0019103516301014",
+    "\nDOI: 10.1016/j.icarus.2016.09.023; https://www.sciencedirect.com/science/article/abs/pii/S0019103516301014",
     "[3]: Views from EPOXI: colors in our Solar system as an analog for extrasolar planets"
-    "\nDOI:10.1088/0004-637X/729/2/130; https://iopscience.iop.org/article/10.1088/0004-637X/729/2/130",
+    "\nDOI: 10.1088/0004-637X/729/2/130; https://iopscience.iop.org/article/10.1088/0004-637X/729/2/130",
     "[4]: About the Spectra of the Planets and Satellites (USGS Archive)"
     "\nhttps://archive.usgs.gov/archive/sites/speclab.cr.usgs.gov/planetary.spectra/planetary-sp.html",
     "[5]: Spectrophotometry of the Jovian Planets and Titan at 300- to 1000-nm Wavelength: The Methane Spectrum"
-    "\nDOI:10.1006/icar.1994.1139; https://atmos.nmsu.edu/planetary_datasets/indexinfrared.html",
+    "\nDOI: 10.1006/icar.1994.1139; https://atmos.nmsu.edu/planetary_datasets/indexinfrared.html",
     "[6]: The Spectrum of Pluto, 0.40 - 0.93 um I. Secular and longitudinal distribution of ices and complex organics"
-    "\nDOI:10.1051/0004-6361/201527281; https://arxiv.org/abs/1509.00417",
+    "\nDOI: 10.1051/0004-6361/201527281; https://arxiv.org/abs/1509.00417",
     "[7]: Phase II of the Small Main-Belt Asteroid Spectroscopic Survey: A Feature-Based Taxonomy"
-    "\nDOI:10.1006/icar.2002.6856; https://www.sciencedirect.com/science/article/abs/pii/S0019103502968569",
+    "\nDOI: 10.1006/icar.2002.6856; https://www.sciencedirect.com/science/article/abs/pii/S0019103502968569",
     "[8]: Visible spectroscopic and photometric survey of Jupiter Trojans: final results on dynamical families"
-    "\nDOI:10.1016/j.icarus.2007.03.033; https://arxiv.org/abs/0704.0350",
+    "\nDOI: 10.1016/j.icarus.2007.03.033; https://arxiv.org/abs/0704.0350",
     "[9]: Minor Bodies in the Outer Solar System: Magnitudes and Colours"
     "\nhttp://www.eso.org/~ohainaut/MBOSS/; http://www.eso.org/~ohainaut/MBOSS/mbossClasses.txt",
     "[10]: Polarized reflected light from the exoplanet HD189733b: First multicolor observations and confirmation of detection"
-    "\nDOI:10.1088/2041-8205/728/1/L6/; https://arxiv.org/abs/1101.0059"
+    "\nDOI: 10.1088/2041-8205/728/1/L6/; https://arxiv.org/abs/1101.0059",
+    "[11]: Observations, compositional, and physical characterization of near-Earth and Mars-crosser asteroids from a spectroscopic survey"
+    "\nDOI: 10.1051/0004-6361/200913852; https://ui.adsabs.harvard.edu/abs/2010A%26A...517A..23D/abstract"
 ]
-
-
-# File names and wavelengths [nm] of maps
-
-maps = {
-    "Jupiter 2015b": ("Jupiter|3", [
-        (275, "hlsp_opal_hst_wfc3-uvis_jupiter-2015b_f275w_v1_globalmap-small.png"),
-        (343, "hlsp_opal_hst_wfc3-uvis_jupiter-2015b_f343n_v1_globalmap-small.png"),
-        (395, "hlsp_opal_hst_wfc3-uvis_jupiter-2015b_f395n_v1_globalmap-small.png"),
-        (502, "hlsp_opal_hst_wfc3-uvis_jupiter-2015b_f502n_v1_globalmap-small.png"),
-        (631, "hlsp_opal_hst_wfc3-uvis_jupiter-2015b_f631n_v1_globalmap-small.png"),
-        (658, "hlsp_opal_hst_wfc3-uvis_jupiter-2015b_f658n_v1_globalmap-small.png"),
-        (889, "hlsp_opal_hst_wfc3-uvis_jupiter-2015b_fq889n_v1_globalmap-small.png")
-    ]),
-    "Jupiter 2019a": ("Jupiter|3", [
-        (275, "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f275w_v1_globalmap-small.tif"),
-        (365, "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f395n_v1_globalmap-small.tif"),
-        (467, "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f467m_v1_globalmap-small.tif"),
-        (502, "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f502n_v1_globalmap-small.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f547m_v1_globalmap-small.tif"),
-        (631, "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f631n_v1_globalmap-small.tif"),
-        (658, "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f658n_v1_globalmap-small.tif"),
-        (889, "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_fq889n_v1_globalmap-small.tif"),
-    ]),
-    "Jupiter 2019b": ("Jupiter|3", [
-        (275, "hlsp_opal_hst_wfc3-uvis_jupiter-2019b_f275w_v1_globalmap-small.tif"),
-        (343, "hlsp_opal_hst_wfc3-uvis_jupiter-2019b_f343n_v1_globalmap-small.tif"),
-        (365, "hlsp_opal_hst_wfc3-uvis_jupiter-2019b_f395n_v1_globalmap-small.tif"),
-        (467, "hlsp_opal_hst_wfc3-uvis_jupiter-2019b_f467m_v1_globalmap-small.tif"),
-        (502, "hlsp_opal_hst_wfc3-uvis_jupiter-2019b_f502n_v1_globalmap-small.tif"),
-        (631, "hlsp_opal_hst_wfc3-uvis_jupiter-2019b_f631n_v1_globalmap-small.tif"),
-        (658, "hlsp_opal_hst_wfc3-uvis_jupiter-2019b_f658n_v1_globalmap-small.tif"),
-        (889, "hlsp_opal_hst_wfc3-uvis_jupiter-2019b_fq889n_v1_globalmap-small.tif"),
-    ]),
-    "OPAL Jupiter 2015a": ("Jupiter|3", [
-        (275, "hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f275w_v1_globalmap.tif"),
-        (395, "hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f395n_v1_globalmap.tif"),
-        (502, "hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f502n_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f547m_v1_globalmap.tif"),
-        (631, "hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f631n_v1_globalmap.tif"),
-        (658, "hlsp_opal_hst_wfc3-uvis_jupiter-2015a_f658n_v1_globalmap.tif"),
-        (889, "hlsp_opal_hst_wfc3-uvis_jupiter-2015a_fq889n_v1_globalmap.tif")
-    ]),
-    "OPAL Jupiter 2015b": ("Jupiter|3", [
-        (275, "hlsp_opal_hst_wfc3-uvis_jupiter-2015b_f275w_v1_globalmap.tif"),
-        (343, "hlsp_opal_hst_wfc3-uvis_jupiter-2015b_f343n_v1_globalmap.tif"),
-        (395, "hlsp_opal_hst_wfc3-uvis_jupiter-2015b_f395n_v1_globalmap.tif"),
-        (502, "hlsp_opal_hst_wfc3-uvis_jupiter-2015b_f502n_v1_globalmap.tif"),
-        (631, "hlsp_opal_hst_wfc3-uvis_jupiter-2015b_f631n_v1_globalmap.tif"),
-        (658, "hlsp_opal_hst_wfc3-uvis_jupiter-2015b_f658n_v1_globalmap.tif"),
-        (889, "hlsp_opal_hst_wfc3-uvis_jupiter-2015b_fq889n_v1_globalmap.tif")
-    ]),
-    "OPAL Jupiter 2016a": ("Jupiter|3", [
-        (275, "hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f275w_v1_globalmap.tif"),
-        (395, "hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f395n_v1_globalmap.tif"),
-        (467, "hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f467m_v1_globalmap.tif"),
-        (502, "hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f502n_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f547m_v1_globalmap.tif"),
-        (631, "hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f631n_v1_globalmap.tif"),
-        (658, "hlsp_opal_hst_wfc3-uvis_jupiter-2016a_f658n_v1_globalmap.tif"),
-        (889, "hlsp_opal_hst_wfc3-uvis_jupiter-2016a_fq889n_v1_globalmap.tif")
-    ]),
-    "OPAL Jupiter 2016b": ("Jupiter|3", [
-        (275, "hlsp_opal_hst_wfc3-uvis_jupiter-2016b_f275w_v1_globalmap.tif"),
-        (343, "hlsp_opal_hst_wfc3-uvis_jupiter-2016b_f343n_v1_globalmap.tif"),
-        (395, "hlsp_opal_hst_wfc3-uvis_jupiter-2016b_f395n_v1_globalmap.tif"),
-        (467, "hlsp_opal_hst_wfc3-uvis_jupiter-2016b_f467m_v1_globalmap.tif"),
-        (502, "hlsp_opal_hst_wfc3-uvis_jupiter-2016b_f502n_v1_globalmap.tif"),
-        (631, "hlsp_opal_hst_wfc3-uvis_jupiter-2016b_f631n_v1_globalmap.tif"),
-        (658, "hlsp_opal_hst_wfc3-uvis_jupiter-2016b_f658n_v1_globalmap.tif"),
-        (889, "hlsp_opal_hst_wfc3-uvis_jupiter-2016b_fq889n_v1_globalmap.tif")
-    ]),
-    "OPAL Jupiter 2017a": ("Jupiter|3", [
-        (275, "hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f275w_v1_globalmap.tif"),
-        (395, "hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f395n_v1_globalmap.tif"),
-        (467, "hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f467m_v1_globalmap.tif"),
-        (502, "hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f502n_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f547m_v1_globalmap.tif"),
-        (631, "hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f631n_v1_globalmap.tif"),
-        (658, "hlsp_opal_hst_wfc3-uvis_jupiter-2017a_f658n_v1_globalmap.tif"),
-        (889, "hlsp_opal_hst_wfc3-uvis_jupiter-2017a_fq889n_v1_globalmap.tif")
-    ]),
-    "OPAL Jupiter 2017b": ("Jupiter|3", [
-        (275, "hlsp_opal_hst_wfc3-uvis_jupiter-2017b_f275w_v1_globalmap.tif"),
-        (343, "hlsp_opal_hst_wfc3-uvis_jupiter-2017b_f343n_v1_globalmap.tif"),
-        (395, "hlsp_opal_hst_wfc3-uvis_jupiter-2017b_f395n_v1_globalmap.tif"),
-        (467, "hlsp_opal_hst_wfc3-uvis_jupiter-2017b_f467m_v1_globalmap.tif"),
-        (502, "hlsp_opal_hst_wfc3-uvis_jupiter-2017b_f502n_v1_globalmap.tif"),
-        (631, "hlsp_opal_hst_wfc3-uvis_jupiter-2017b_f631n_v1_globalmap.tif"),
-        (658, "hlsp_opal_hst_wfc3-uvis_jupiter-2017b_f658n_v1_globalmap.tif"),
-        (889, "hlsp_opal_hst_wfc3-uvis_jupiter-2017b_fq889n_v1_globalmap.tif")
-    ]),
-    "OPAL Jupiter 2018a": ("Jupiter|3", [
-        (275, "hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f275w_v1_globalmap.tif"),
-        (395, "hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f395n_v1_globalmap.tif"),
-        (467, "hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f467m_v1_globalmap.tif"),
-        (502, "hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f502n_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f547m_v1_globalmap.tif"),
-        (631, "hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f631n_v1_globalmap.tif"),
-        (658, "hlsp_opal_hst_wfc3-uvis_jupiter-2018a_f658n_v1_globalmap.tif"),
-        (889, "hlsp_opal_hst_wfc3-uvis_jupiter-2018a_fq889n_v1_globalmap.tif")
-    ]),
-    "OPAL Jupiter 2018b": ("Jupiter|3", [
-        (275, "hlsp_opal_hst_wfc3-uvis_jupiter-2018b_f275w_v1_globalmap.tif"),
-        (343, "hlsp_opal_hst_wfc3-uvis_jupiter-2018b_f343n_v1_globalmap.tif"),
-        (395, "hlsp_opal_hst_wfc3-uvis_jupiter-2018b_f395n_v1_globalmap.tif"),
-        (467, "hlsp_opal_hst_wfc3-uvis_jupiter-2018b_f467m_v1_globalmap.tif"),
-        (502, "hlsp_opal_hst_wfc3-uvis_jupiter-2018b_f502n_v1_globalmap.tif"),
-        (631, "hlsp_opal_hst_wfc3-uvis_jupiter-2018b_f631n_v1_globalmap.tif"),
-        (658, "hlsp_opal_hst_wfc3-uvis_jupiter-2018b_f658n_v1_globalmap.tif"),
-        (889, "hlsp_opal_hst_wfc3-uvis_jupiter-2018b_fq889n_v1_globalmap.tif")
-    ]),
-    "OPAL Jupiter 2019a": ("Jupiter|3", [
-        (275, "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f275w_v1_globalmap.tif"),
-        (395, "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f395n_v1_globalmap.tif"),
-        (467, "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f467m_v1_globalmap.tif"),
-        (502, "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f502n_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f547m_v1_globalmap.tif"),
-        (631, "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f631n_v1_globalmap.tif"),
-        (658, "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_f658n_v1_globalmap.tif"),
-        (889, "hlsp_opal_hst_wfc3-uvis_jupiter-2019a_fq889n_v1_globalmap.tif")
-    ]),
-    "OPAL Jupiter 2019b": ("Jupiter|3", [
-        (275, "hlsp_opal_hst_wfc3-uvis_jupiter-2019b_f275w_v1_globalmap.tif"),
-        (343, "hlsp_opal_hst_wfc3-uvis_jupiter-2019b_f343n_v1_globalmap.tif"),
-        (395, "hlsp_opal_hst_wfc3-uvis_jupiter-2019b_f395n_v1_globalmap.tif"),
-        (467, "hlsp_opal_hst_wfc3-uvis_jupiter-2019b_f467m_v1_globalmap.tif"),
-        (502, "hlsp_opal_hst_wfc3-uvis_jupiter-2019b_f502n_v1_globalmap.tif"),
-        (631, "hlsp_opal_hst_wfc3-uvis_jupiter-2019b_f631n_v1_globalmap.tif"),
-        (658, "hlsp_opal_hst_wfc3-uvis_jupiter-2019b_f658n_v1_globalmap.tif"),
-        (889, "hlsp_opal_hst_wfc3-uvis_jupiter-2019b_fq889n_v1_globalmap.tif")
-    ]),
-    "OPAL Saturn 2018a": ("Saturn|3", [
-        (225, "hlsp_opal_hst_wfc3-uvis_saturn-2018a_f225w_v1_globalmap.tif"),
-        (275, "hlsp_opal_hst_wfc3-uvis_saturn-2018a_f275w_v1_globalmap.tif"),
-        (343, "hlsp_opal_hst_wfc3-uvis_saturn-2018a_f343n_v1_globalmap.tif"),
-        (395, "hlsp_opal_hst_wfc3-uvis_saturn-2018a_f395n_v1_globalmap.tif"),
-        (467, "hlsp_opal_hst_wfc3-uvis_saturn-2018a_f467m_v1_globalmap.tif"),
-        (502, "hlsp_opal_hst_wfc3-uvis_saturn-2018a_f502n_v1_globalmap.tif"),
-        (631, "hlsp_opal_hst_wfc3-uvis_saturn-2018a_f631n_v1_globalmap.tif"),
-        (658, "hlsp_opal_hst_wfc3-uvis_saturn-2018a_f658n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_saturn-2018a_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_saturn-2018a_f763m_v1_globalmap.tif")
-    ]),
-    "OPAL Saturn 2018b": ("Saturn|3", [
-        (225, "hlsp_opal_hst_wfc3-uvis_saturn-2018b_f225w_v1_globalmap.tif"),
-        (275, "hlsp_opal_hst_wfc3-uvis_saturn-2018b_f275w_v1_globalmap.tif"),
-        (343, "hlsp_opal_hst_wfc3-uvis_saturn-2018b_f343n_v1_globalmap.tif"),
-        (395, "hlsp_opal_hst_wfc3-uvis_saturn-2018b_f395n_v1_globalmap.tif"),
-        (467, "hlsp_opal_hst_wfc3-uvis_saturn-2018b_f467m_v1_globalmap.tif"),
-        (502, "hlsp_opal_hst_wfc3-uvis_saturn-2018b_f502n_v1_globalmap.tif"),
-        (631, "hlsp_opal_hst_wfc3-uvis_saturn-2018b_f631n_v1_globalmap.tif"),
-        (658, "hlsp_opal_hst_wfc3-uvis_saturn-2018b_f658n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_saturn-2018b_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_saturn-2018b_f763m_v1_globalmap.tif")
-    ]),
-    "OPAL Saturn 2019a": ("Saturn|3", [
-        (395, "hlsp_opal_hst_wfc3-uvis_saturn-2019a_f395n_v1_globalmap.tif"),
-        (467, "hlsp_opal_hst_wfc3-uvis_saturn-2019a_f467m_v1_globalmap.tif"),
-        (502, "hlsp_opal_hst_wfc3-uvis_saturn-2019a_f502n_v1_globalmap.tif"),
-        (631, "hlsp_opal_hst_wfc3-uvis_saturn-2019a_f631n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_saturn-2019a_f763m_v1_globalmap.tif")
-    ]),
-    "OPAL Saturn 2019b": ("Saturn|3", [
-        (343, "hlsp_opal_hst_wfc3-uvis_saturn-2019b_f343n_v1_globalmap.tif"),
-        (395, "hlsp_opal_hst_wfc3-uvis_saturn-2019b_f395n_v1_globalmap.tif"),
-        (467, "hlsp_opal_hst_wfc3-uvis_saturn-2019b_f467m_v1_globalmap.tif"),
-        (502, "hlsp_opal_hst_wfc3-uvis_saturn-2019b_f502n_v1_globalmap.tif"),
-        (631, "hlsp_opal_hst_wfc3-uvis_saturn-2019b_f631n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_saturn-2019b_f763m_v1_globalmap.tif"),
-        (889, "hlsp_opal_hst_wfc3-uvis_saturn-2019b_f889n_v1_globalmap.tif")
-    ]),
-    "OPAL Uranus 2014a": ("Uranus|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_uranus-2014a_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_uranus-2014a_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_uranus-2014a_fq619n_v1_globalmap.tif"),
-        (658, "hlsp_opal_hst_wfc3-uvis_uranus-2014a_f658n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_uranus-2014a_fq727n_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_uranus-2014a_f845m_v1_globalmap.tif"),
-        (924, "hlsp_opal_hst_wfc3-uvis_uranus-2014a_fq924n_v1_globalmap.tif")
-    ]),
-    "OPAL Uranus 2014b": ("Uranus|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_uranus-2014b_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_uranus-2014b_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_uranus-2014b_fq619n_v1_globalmap.tif"),
-        (658, "hlsp_opal_hst_wfc3-uvis_uranus-2014b_f658n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_uranus-2014b_fq727n_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_uranus-2014b_f845m_v1_globalmap.tif"),
-        (924, "hlsp_opal_hst_wfc3-uvis_uranus-2014b_fq924n_v1_globalmap.tif")
-    ]),
-    "OPAL Uranus 2015a": ("Uranus|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_uranus-2015a_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_uranus-2015a_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_uranus-2015a_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_uranus-2015a_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_uranus-2015a_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_uranus-2015a_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_uranus-2015a_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Uranus 2015b": ("Uranus|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_uranus-2015b_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_uranus-2015b_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_uranus-2015b_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_uranus-2015b_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_uranus-2015b_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_uranus-2015b_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_uranus-2015b_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Uranus 2016a": ("Uranus|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_uranus-2016a_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_uranus-2016a_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_uranus-2016a_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_uranus-2016a_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_uranus-2016a_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_uranus-2016a_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_uranus-2016a_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Uranus 2016b": ("Uranus|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_uranus-2016b_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_uranus-2016b_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_uranus-2016b_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_uranus-2016b_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_uranus-2016b_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_uranus-2016b_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_uranus-2016b_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Uranus 2017a": ("Uranus|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_uranus-2017a_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_uranus-2017a_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_uranus-2017a_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_uranus-2017a_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_uranus-2017a_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_uranus-2017a_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_uranus-2017a_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Uranus 2017b": ("Uranus|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_uranus-2017b_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_uranus-2017b_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_uranus-2017b_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_uranus-2017b_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_uranus-2017b_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_uranus-2017b_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_uranus-2017b_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Uranus 2018a": ("Uranus|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_uranus-2018a_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_uranus-2018a_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_uranus-2018a_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_uranus-2018a_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_uranus-2018a_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_uranus-2018a_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_uranus-2018a_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Uranus 2018b": ("Uranus|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_uranus-2018b_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_uranus-2018b_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_uranus-2018b_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_uranus-2018b_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_uranus-2018b_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_uranus-2018b_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_uranus-2018b_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Uranus 2019a": ("Uranus|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_uranus-2019a_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_uranus-2019a_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_uranus-2019a_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_uranus-2019a_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_uranus-2019a_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_uranus-2019a_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_uranus-2019a_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Uranus 2019b": ("Uranus|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_uranus-2019b_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_uranus-2019b_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_uranus-2019b_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_uranus-2019b_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_uranus-2019b_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_uranus-2019b_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_uranus-2019b_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Neptune 2015a": ("Neptune|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_neptune-2015a_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_neptune-2015a_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_neptune-2015a_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_neptune-2015a_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_neptune-2015a_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_neptune-2015a_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_neptune-2015a_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Neptune 2015b": ("Neptune|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_neptune-2015b_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_neptune-2015b_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_neptune-2015b_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_neptune-2015b_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_neptune-2015b_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_neptune-2015b_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_neptune-2015b_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Neptune 2016a": ("Neptune|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_neptune-2016a_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_neptune-2016a_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_neptune-2016a_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_neptune-2016a_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_neptune-2016a_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_neptune-2016a_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_neptune-2016a_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Neptune 2016b": ("Neptune|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_neptune-2016b_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_neptune-2016b_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_neptune-2016b_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_neptune-2016b_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_neptune-2016b_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_neptune-2016b_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_neptune-2016b_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Neptune 2017a": ("Neptune|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_neptune-2017a_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_neptune-2017a_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_neptune-2017a_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_neptune-2017a_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_neptune-2017a_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_neptune-2017a_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_neptune-2017a_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Neptune 2017b": ("Neptune|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_neptune-2017b_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_neptune-2017b_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_neptune-2017b_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_neptune-2017b_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_neptune-2017b_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_neptune-2017b_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_neptune-2017b_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Neptune 2018a": ("Neptune|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_neptune-2018a_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_neptune-2018a_f547m_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_neptune-2018a_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_neptune-2018a_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_neptune-2018a_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_neptune-2018a_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Neptune 2018b": ("Neptune|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_neptune-2018b_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_neptune-2018b_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_neptune-2018b_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_neptune-2018b_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_neptune-2018b_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_neptune-2018b_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_neptune-2018b_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Neptune 2018c": ("Neptune|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_neptune-2018c_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_neptune-2018c_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_neptune-2018c_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_neptune-2018c_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_neptune-2018c_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_neptune-2018c_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_neptune-2018c_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Neptune 2019a": ("Neptune|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_neptune-2019a_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_neptune-2019a_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_neptune-2019a_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_neptune-2019a_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_neptune-2019a_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_neptune-2019a_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_neptune-2019a_f845m_v1_globalmap.tif")
-    ]),
-    "OPAL Neptune 2019b": ("Neptune|3", [
-        (467, "hlsp_opal_hst_wfc3-uvis_neptune-2019b_f467m_v1_globalmap.tif"),
-        (547, "hlsp_opal_hst_wfc3-uvis_neptune-2019b_f547m_v1_globalmap.tif"),
-        (619, "hlsp_opal_hst_wfc3-uvis_neptune-2019b_fq619n_v1_globalmap.tif"),
-        (657, "hlsp_opal_hst_wfc3-uvis_neptune-2019b_f657n_v1_globalmap.tif"),
-        (727, "hlsp_opal_hst_wfc3-uvis_neptune-2019b_fq727n_v1_globalmap.tif"),
-        (763, "hlsp_opal_hst_wfc3-uvis_neptune-2019b_f763m_v1_globalmap.tif"),
-        (845, "hlsp_opal_hst_wfc3-uvis_neptune-2019b_f845m_v1_globalmap.tif")
-    ])
-}

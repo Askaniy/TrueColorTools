@@ -61,8 +61,8 @@ info = {
 }
 
 langs = {
-    "en": ["Английский"],
-    "ru": ["Russian"],
+    "en": ["English", "Английский"],
+    "ru": ["Russian", "Русский"],
     "de": ["German", "Немецкий"]
 }
 lang_list = {
@@ -102,7 +102,7 @@ gui_br = {
 }
 gui_interp = {
     "en": ["Interpolator/extrapolator", "default", "pchip", "cubic"],
-    "ru": ["Интерполятор/экстраполятор", "по умолчанию", "pchip", "кубический"],
+    "ru": ["Интер/экстраполятор", "по умолчанию", "pchip", "кубич."],
     "de": []
 }
 gui_bit = {
@@ -171,4 +171,16 @@ yaxis_text = {
     "en": "Normalized brightness",
     "ru": "Нормализованная яркость",
     "de": ""
+}
+
+error1 = {
+    "en": ["Error 1: mismatch in the number of coordinates to create a spectrum.", "Object name: {}\nWavelength values: {}\nBrightness values: {}"],
+    "ru": ["Ошибка 1: несовпадение количества координат для построения спектра.", "Название объекта: {}\nЗначений длин волн: {}\nЗначений яркости: {}"],
+    "de": [""]
+}
+
+error2 = {
+    "en": ["Error 2: value of one of the color bands is negative.", "Object name: {}\nR: {}\nG: {}\nB: {}"],
+    "ru": ["Ошибка 2: яркость одного из цветов получилась отрицательной.", "Название объекта: {}\nR: {}\nG: {}\nB: {}"],
+    "de": [""]
 }
