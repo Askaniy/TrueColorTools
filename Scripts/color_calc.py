@@ -1,6 +1,6 @@
 import numpy as np
 import plotly.graph_objects as go
-from scipy.interpolate import Akima1DInterpolator, PchipInterpolator
+from scipy.interpolate import Akima1DInterpolator
 import translator as tr
 import config, spectra, convert
 
@@ -13,30 +13,21 @@ config = {
 }
 
 
-objects = ["Jupiter|5", "Saturn|5", "Uranus|5", "Neptune|5", "Titan|5"] #["Sun|1", "Vega|1"] #["Pluto|6", "Pluto|9"]
+objects = ["Jupiter|5", "Saturn|5", "Uranus|5", "Neptune|5", "Titan|5"] #["Sun|1", "Vega|1"]
 
 
 fig = go.Figure()
 
 names = []
 for request in objects:
-    spectrum = spectra.objects[request]
-    if "filters" in spectrum:
-        spectrum = convert.to_spectrum(spectrum)
+    # Parameter recognition
     if config["srgb"]:
         nm = convert.xyz_nm
     else:
         nm = convert.rgb_nm
-    try:
-        if spectrum["nm"][0] > nm[0] or spectrum["nm"][-1] < nm[-1]:
-            interp = PchipInterpolator(spectrum["nm"], spectrum["br"], extrapolate=True)
-        else:
-            interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
-    except ValueError:
-        print("\n" + tr.error1[config["lang"]][0])
-        print(tr.error1[config["lang"]][1].format(name, len(spectrum["nm"]), len(spectrum["br"])) + "\n")
-        break
     albedo = None
+    # Spectrum processing
+    spectrum = spectra.objects[request]
     if config["albedo"]:
         if "albedo" not in spectrum:
             mode = "chromaticity"
@@ -50,7 +41,22 @@ for request in objects:
             albedo = spectrum["albedo"]
     else:
         mode = "chromaticity"
-    rgb = convert.to_rgb(interp(nm), mode=mode, albedo=albedo, exp_bit=8, gamma=config["gamma"], srgb=config["srgb"])
+    if "filters" in spectrum:
+        spectrum = convert.from_indeces(spectrum) # spectrum from color indices
+    if "sun" in spectrum:
+        if spectrum["sun"]:
+            spectrum = convert.subtract_sun(spectrum, spectra.objects["Sun|1"]) # subtract solar spectrum
+    try:
+        interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
+    except ValueError:
+        print("\n" + tr.error1[config["lang"]][0])
+        print(tr.error1[config["lang"]][1].format(name, len(spectrum["nm"]), len(spectrum["br"])) + "\n")
+        break
+    if spectrum["nm"][0] > nm[0] or spectrum["nm"][-1] < nm[-1]:
+        curve = convert.AskaniyExtrapolator(spectrum["nm"], spectrum["br"], nm)
+    else:
+        curve = interp(nm)
+    rgb = convert.to_rgb(curve, mode=mode, albedo=albedo, exp_bit=8, gamma=config["gamma"], srgb=config["srgb"])
     if not np.array_equal(np.absolute(rgb), rgb):
         print("\n" + tr.error2[config["lang"]][0])
         print(tr.error2[config["lang"]][1].format(name, *rgb) + "\n")
@@ -67,7 +73,7 @@ for request in objects:
     names.append(name)
     fig.add_trace(go.Scatter(
         x = nm,
-        y = interp(nm),
+        y = curve,
         name = name,
         line = dict(color="rgb"+str(rgb), width=4)
         ))

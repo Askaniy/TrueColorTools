@@ -21,6 +21,8 @@ names = {
     "Pluto": {"ru": "Плутон", "de": ""},
     "Eris": {"ru": "Эрида", "de": ""},
     "Makemake": {"ru": "Макемаке", "de": ""},
+    "Eros": {"ru": "Эрос", "de": ""},
+    "Itokawa": {"ru": "Итокава", "de": ""},
     "Comets": {"ru": "Кометы", "de": ""},
     "J. trojans": {"ru": "Троянцы", "de": ""},
     "Centaurs": {"ru": "Кентавры", "de": ""},
@@ -68,7 +70,12 @@ langs = {
 lang_list = {
     "en": ["Russian", "German"],
     "ru": ["Английский", "Немецкий"],
-    "de": []
+    "de": [""]
+}
+gui_name = {
+    "en": "True color calculator",
+    "ru": "Калькулятор истинных цветов",
+    "de": ""
 }
 gui_info = {
     "en": "Info",
@@ -83,12 +90,32 @@ gui_exit = {
 gui_menu = {
     "en": [["File", [source["en"], note["en"], gui_info["en"], gui_exit["en"]]], ["Language", lang_list["en"]]],
     "ru": [["Файл", [source["ru"], note["ru"], gui_info["ru"], gui_exit["ru"]]], ["Язык", lang_list["ru"]]],
-    "de": [["", ["", ""]], ["", lang_list["de"]]]
+    "de": [["", ["", "", "", ""]], ["", lang_list["de"]]]
 }
 columns = {
-    "en": ["Available spectra", "Parameters", "Results"],
-    "ru": ["Доступные спектры", "Параметры", "Результат"],
-    "de": []
+    "en": ["Spectra", "Parameters", "Results"],
+    "ru": ["Спектры", "Параметры", "Результат"],
+    "de": [""]
+}
+gui_add = {
+    "en": "Add spectrum to plot",
+    "ru": "Добавить спектр к графику",
+    "de": ""
+}
+gui_plot = {
+    "en": "Plot added spectra",
+    "ru": "Построить график спектров",
+    "de": ""
+}
+gui_export = {
+    "en": "Export all colors to console",
+    "ru": "Экспортировать все цвета",
+    "de": ""
+}
+gui_col = {
+    "en": ["Red", "Green", "Blue", "Names"],
+    "ru": ["Красный", "Зелёный", "Синий", "Названия"],
+    "de": [""]
 }
 gui_gamma = {
     "en": "gamma correction",
@@ -98,12 +125,12 @@ gui_gamma = {
 gui_br = {
     "en": ["Brightness display mode", "chromaticity", "normalization", "albedo"],
     "ru": ["Отображение яркости", "цветность", "нормализация", "альбедо"],
-    "de": []
+    "de": [""]
 }
 gui_interp = {
     "en": ["Interpolator/extrapolator", "default", "pchip", "cubic"],
     "ru": ["Интер/экстраполятор", "по умолчанию", "pchip", "кубич."],
-    "de": []
+    "de": [""]
 }
 gui_bit = {
     "en": "Color (bit) depth",
@@ -128,16 +155,6 @@ gui_rgb = {
 gui_hex = {
     "en": "HEX color",
     "ru": "Цвет HEX",
-    "de": ""
-}
-gui_add = {
-    "en": "Add spectrum to plot",
-    "ru": "Добавить спектр к графику",
-    "de": ""
-}
-gui_plot = {
-    "en": "Plot added spectra",
-    "ru": "Построить график спектров",
     "de": ""
 }
 

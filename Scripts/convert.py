@@ -1,6 +1,23 @@
 import numpy as np
+from scipy.interpolate import Akima1DInterpolator
 
-def to_spectrum(data):
+def AskaniyExtrapolator(x, y, curve):
+    interp = Akima1DInterpolator(x, y)
+    x1 = 550
+    y1 = interp(x1)
+    line1 = lambda wl: y[0] + (wl - x[0]) * (y1 - y[0]) / (x1 - x[0])
+    line2 = lambda wl: y1 + (wl - x1) * (y[-1] - y1) / (x[-1] - x1)
+    br = []
+    for nm in curve:
+        if nm < x[0]:
+            br.append(line1(nm))
+        elif nm > x[-1]:
+            br.append(line2(nm))
+        else:
+            br.append(interp(nm))
+    return br
+
+def from_indeces(data):
     result = {}
     for index, value in data["indices"].items():
         bands = index.split("-")
@@ -14,9 +31,23 @@ def to_spectrum(data):
     for band, value in result.items():
         nm.append(filters[data["filters"]][band]["nm"])
         br.append(value / (filters[data["filters"]][band]["nm"]/1e9)**2)
-    return {"nm": nm, "br": br}
+    data.update({"nm": nm, "br": br})
+    return data
+
+def subtract_sun(spectrum, sun):
+    nm = []
+    br = []
+    interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
+    for i in range(len(sun["br"])):
+        corrected = interp(sun["nm"][i]) / sun["br"][i]
+        if not np.isnan(corrected):
+            br.append(corrected)
+            nm.append(sun["nm"][i])
+    spectrum.update({"nm": nm, "br": br})
+    return spectrum
 
 def to_rgb(spectrum, mode="1", albedo=None, inp_bit=None, exp_bit=None, rnd=0, gamma=False, srgb=False, html=False):
+    spectrum = np.clip(spectrum, 0, None)
     if inp_bit:
         spectrum = (spectrum + 1) / 2**inp_bit
     if srgb:

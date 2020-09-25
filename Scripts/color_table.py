@@ -1,6 +1,6 @@
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageShow
-from scipy.interpolate import Akima1DInterpolator, PchipInterpolator
+from scipy.interpolate import Akima1DInterpolator
 import translator as tr
 import config, spectra, convert
 
@@ -60,23 +60,27 @@ for note, translation in tr.notes.items(): # x = 0.75, br = 224
 
 # Generator
 
-n = 0
+n = 0 # object counter
 for name, spectrum in spectra.objects.items():
     if "filters" in spectrum:
-        spectrum = convert.to_spectrum(spectrum)
+        spectrum = convert.from_indeces(spectrum) # spectrum from color indices
+    if "sun" in spectrum:
+        if spectrum["sun"]:
+            spectrum = convert.subtract_sun(spectrum, spectra.objects["Sun|1"]) # subtract solar spectrum
     if config["srgb"]:
         nm = convert.xyz_nm
     else:
         nm = convert.rgb_nm
     try:
-        if spectrum["nm"][0] > nm[0] or spectrum["nm"][-1] < nm[-1]:
-            interp = PchipInterpolator(spectrum["nm"], spectrum["br"], extrapolate=True)
-        else:
-            interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
+        interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
     except ValueError:
         print("\n" + tr.error1[config["lang"]][0])
         print(tr.error1[config["lang"]][1].format(name, len(spectrum["nm"]), len(spectrum["br"])) + "\n")
         break
+    if spectrum["nm"][0] > nm[0] or spectrum["nm"][-1] < nm[-1]:
+        curve = convert.AskaniyExtrapolator(spectrum["nm"], spectrum["br"], nm)
+    else:
+        curve = interp(nm)
     albedo = None
     if config["albedo"]:
         if "albedo" not in spectrum:
@@ -91,7 +95,7 @@ for name, spectrum in spectra.objects.items():
             albedo = spectrum["albedo"]
     else:
         mode = "chromaticity"
-    rgb = convert.to_rgb(interp(nm), mode=mode, albedo=albedo, exp_bit=8, gamma=config["gamma"], srgb=config["srgb"])
+    rgb = convert.to_rgb(curve, mode=mode, albedo=albedo, exp_bit=8, gamma=config["gamma"], srgb=config["srgb"])
     if not np.array_equal(np.absolute(rgb), rgb):
         print("\n" + tr.error2[config["lang"]][0])
         print(tr.error2[config["lang"]][1].format(name, *rgb) + "\n")
@@ -105,15 +109,22 @@ for name, spectrum in spectra.objects.items():
     else:
         draw.ellipse([center_x-r, center_y-r, center_x+r, center_y+r], fill=rgb)
     # name processing
+    if name[0] == "(":
+        link_right = True
+        index = name.split(")")
+        name = index[1].strip()
+        draw.text((center_x-40, center_y-22), f"({index[0][1:]})", fill=(0, 0, 0), font=link_font)
+    else:
+        link_right = False
     if "|" in name:
         link = name.split("|")
-        name = link[0]
+        name = link[0].strip()
         ll = len(link[1])
-        if ll == 1:
-            shift = 6
-        elif ll == 2:
-            shift = 9
-        draw.text((center_x-shift, center_y-22), f"[{link[1]}]", fill=(0, 0, 0), font=link_font)
+        if link_right:
+            shift = 26 - 7*(ll-1)
+        else:
+            shift = -(6 + 3*(ll-1))
+        draw.text((center_x+shift, center_y-22), f"[{link[1]}]", fill=(0, 0, 0), font=link_font)
     if config["lang"] != "en":
         for obj_name, tranlation in tr.names.items():
             if name.startswith(obj_name):
@@ -121,7 +132,7 @@ for name, spectrum in spectra.objects.items():
                 pass
     width = 0
     for letter in name:
-        if letter in ["I", "i", "j", "l", "f", "r", "t", "[", "]", ":", ".", " "]:
+        if letter in ["I", "i", "j", "l", "f", "r", "t", "[", "]", "/", ":", "*" ".", " "]:
             width += 0.5
         elif letter.isupper():
             width += 1.5
@@ -143,7 +154,6 @@ for name, spectrum in spectra.objects.items():
         draw.text((center_x-42, center_y-(objt_size/2)), f"{name[:10]}\n    {name[10:]}", fill=(0, 0, 0), font=narr_font)
     n += 1
     print(rgb, name)
-
 
 save = ""
 for key, value in config.items():

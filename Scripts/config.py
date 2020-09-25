@@ -10,7 +10,7 @@ def lang(manually=""):
         return locale.windows_locale[ctypes.windll.kernel32.GetUserDefaultUILanguage()][:2]
     else:
         for lang, names in tr.langs.items():
-            if manually == lang or manually in names:
+            if manually.lower() == lang or manually.title() in names:
                 return lang
 
 def folder(manually="", follow_symlinks=True):
