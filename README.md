@@ -8,14 +8,12 @@ A set of Python scripts for calculating human-visible colors of celestial bodies
 - `spectra.py` is a database of spectra, color indices and their sources;
 - `translator.py` contains almost all used inscriptions of other scripts in supported languages.
 
-________________
-### Requirements
+## Requirements
 Probably Windows (due to system calls in `config.py`) and Python 3.6+ (due to f-strings).
 
 Libraries for all scripts to work: [NumPy](https://numpy.org/), [SciPy](https://www.scipy.org/), [Plotly](https://plotly.com/python/), [Pillow](https://pillow.readthedocs.io/), [PySimpleGUI](https://pysimplegui.readthedocs.io/).
 
-_______
-### FAQ
+## FAQ
 > ***How can I get formatted colors for Celestia?***
 
 Celestia uses chromaticity values from 0 to 1 for each color channel, where 1 is the value of the brightest channel. In the GUI version, you need to make sure that the `chromaticity` mode is used and `Decimal places` is greater than zero (by default it is), and then set the `Color (bit) depth` parameter to zero.
@@ -54,6 +52,10 @@ lang = config.lang("ru") # the same as config.lang("Russian") and config.lang("Ð
 
 German is a stub in the file for storing titles in different languages, `translator.py`. If someone wants to add support for any language, this can be done simply.
 
-________________
-### Known issues
-* In `color_calc_GUI.py` not all titles can be translated after the program launch due to PySimpleGUI limitations.
+## Images
+
+### True color calculator GUI
+![color_calc_GUI](color_calc_GUI.png)
+
+### Color table (not gamma corrected)
+![color_table-en](Tables/color_table-en.png)
