@@ -1,0 +1,6 @@
+numpy
+scipy
+pip
+Pillow
+plotly
+pysimplegui

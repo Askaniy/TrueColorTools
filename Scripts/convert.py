@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.interpolate import Akima1DInterpolator
 
-def AskaniyExtrapolator(x, y, curve):
+def AskaniyExtrapolator(x, y, curve, norm550=False):
     interp = Akima1DInterpolator(x, y)
     x1 = 550
     y1 = interp(x1)
@@ -15,7 +15,10 @@ def AskaniyExtrapolator(x, y, curve):
             br.append(line2(nm))
         else:
             br.append(interp(nm))
-    return br
+    if norm550:
+        return np.array(br) / y1
+    else:
+        return np.array(br)
 
 def from_indeces(data):
     result = {}
