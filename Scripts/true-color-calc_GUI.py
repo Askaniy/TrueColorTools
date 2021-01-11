@@ -5,7 +5,7 @@ import translator as tr
 import config, spectra, convert
 import PySimpleGUI as sg
 sg.theme("DarkGrey6")
-lang = config.lang()
+lang = config.lang("en")
 
 def obj_list():
     global lang

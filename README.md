@@ -1,10 +1,10 @@
 # True Color Tools
-A set of Python scripts for calculating human-visible colors of celestial bodies by spectra and color indices.
+A set of Python scripts for calculating human-visible colors of celestial bodies from their spectra or color indices.
 
 ### Tools:
-- [`tool_true-color-calc.py`](Scripts/tool_true-color-calc.py) calculates colors of one or several objects and build their spectra;
-- [`tool_true-color-calc_GUI.py`](Scripts/tool_true-color-calc_GUI.py) calculates colors much more conveniently with a graphical interface and visualization;
-- [`tool_true-color-table.py`](Scripts/tool_true-color-table.py) generates a customizable table of the celestial bodies' colors.
+- [`true-color-calc.py`](Scripts/true-color-calc.py) calculates colors of one or several objects and build their spectra;
+- [`true-color-calc_GUI.py`](Scripts/true-color-calc_GUI.py) calculates colors much more conveniently with a graphical interface and visualization;
+- [`true-color-table.py`](Scripts/true-color-table.py) generates a customizable table of the celestial bodies' colors.
 
 ### Auxiliary:
 - [`config.py`](Scripts/config.py) automatically detects the system language and the main folder for other scripts;

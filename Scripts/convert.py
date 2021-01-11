@@ -80,13 +80,13 @@ def to_rgb(spectrum, mode="1", albedo=None, inp_bit=None, exp_bit=None, rnd=0, g
     if rnd != 0:
         return tuple([round(color, rnd) for color in rgb])
     else:
-        return tuple([int(color) for color in rgb])
+        return tuple([int(round(color)) for color in rgb])
 
 def xyz_from_xy(x, y):
     return np.array((x, y, 1-x-y))
 
 def to_bit(bit, rgb):
-    return rgb * 2**bit - 1
+    return rgb * (2**bit - 1)
 
 def xyz_to_sRGB(xyz):
     # https://scipython.com/blog/converting-a-spectrum-to-a-colour/
