@@ -2,16 +2,17 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageShow
 from scipy.interpolate import Akima1DInterpolator
 import translator as tr
-import config, spectra, convert
+import user, spectra, convert
 
 
 config = {
-    "path": config.folder() + "/Tables/",
+    "path": user.folder() + "/Tables/",
     "name": "color_table-",
-    "lang": config.lang(),
+    "lang": user.lang(), # ReadMe -> FAQ -> How to choose a language?
     "srgb": False,
     "gamma": False,
     "albedo": False,
+    "author info": False,
     "extension": ".png"
 }
 
@@ -20,7 +21,7 @@ config = {
 
 r = 46 # radius in px
 l = len(spectra.objects)
-w = 100*(l+1) if l < 15 else 1600
+w = 100*(l + 1) if l < 15 else 1600
 s = len(spectra.sources)
 name_step = 75
 objt_size = 18
@@ -28,8 +29,8 @@ srce_size = 15
 srce_step = 10 + 2 * srce_size
 note_size = 16
 note_step = 4 + note_size
-auth_size = 12
-h0 = name_step + 100*int(np.ceil(l/15)+1)
+auth_size = 10
+h0 = name_step + 100 * int(np.ceil(l / 15) + 1)
 h1 = h0 + s * srce_step
 img = Image.new("RGB", (w, h1 + 50), (0, 0, 0))
 draw = ImageDraw.Draw(img)
@@ -42,19 +43,17 @@ srce_font = ImageFont.truetype("arial.ttf", srce_size)
 note_font = ImageFont.truetype("arial.ttf", note_size)
 auth_font = ImageFont.truetype("arial.ttf", auth_size)
 # text brightness formula: br = 255 * (x^(1/2.2))
-draw.text((100-r, 50), tr.name_text[config["lang"]], fill=(255, 255, 255), font=name_font) # x = 1, br = 255
-draw.text((100-r, h0 - 25), tr.source[config["lang"]]+":", fill=(230, 230, 230), font=help_font) # x = 0.8, br = 230
-draw.text((w*2/3, h0 - 25), tr.note[config["lang"]]+":", fill=(230, 230, 230), font=help_font) # x = 0.8, br = 230
-if config["lang"] == "ru":
-    auth_step = 266
-else:
-    auth_step = 249
-draw.text((w-auth_step, h1-auth_size), tr.info[config["lang"]], fill=(136, 136, 136), font=help_font) # x = 0.25, br = 136
+draw.text((100 - r, 50), tr.name_text[config["lang"]], fill=(255, 255, 255), font=name_font) # x = 1, br = 255
+draw.text((100 - r, h0 - 25), tr.source[config["lang"]]+":", fill=(230, 230, 230), font=help_font) # x = 0.8, br = 230
+draw.text((w * 2/3, h0 - 25), tr.note[config["lang"]]+":", fill=(230, 230, 230), font=help_font) # x = 0.8, br = 230
+if config["author info"]:
+    auth_step = 302 if config["lang"] == "ru" else 284
+    draw.text((w - auth_step, h1 - auth_size), tr.info[config["lang"]], fill=(136, 136, 136), font=help_font) # x = 0.25, br = 136
 for srce_num in range(s): # x = 0.5, br = 186
-    draw.multiline_text((100-r, h1 - srce_step*(s-srce_num)), spectra.sources[srce_num], fill=(186, 186, 186), font=srce_font)
+    draw.multiline_text((100 - r, h1 - srce_step * (s-srce_num)), spectra.sources[srce_num], fill=(186, 186, 186), font=srce_font)
 note_num = 0
 for note, translation in tr.notes.items(): # x = 0.75, br = 224
-    draw.multiline_text((w*2/3, h0 + note_step*note_num), f'{note} {translation[config["lang"]]}', fill=(224, 224, 224), font=note_font)
+    draw.multiline_text((w * 2/3, h0 + note_step * note_num), f'{note} {translation[config["lang"]]}', fill=(224, 224, 224), font=note_font)
     note_num += 1
 
 

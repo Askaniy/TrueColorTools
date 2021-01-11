@@ -57,8 +57,8 @@ note = {
     "de": ""
 }
 info = {
-    "en": "Anpilogov Askaniy, 2020",
-    "ru": "Анпилогов Асканий, 2020",
+    "en": "Anpilogov Askaniy, 2020-2021",
+    "ru": "Анпилогов Асканий, 2020-2021",
     "de": ""
 }
 

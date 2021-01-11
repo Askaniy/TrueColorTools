@@ -2,18 +2,19 @@ import numpy as np
 import plotly.graph_objects as go
 from scipy.interpolate import Akima1DInterpolator
 import translator as tr
-import config, spectra, convert
+import user, spectra, convert
 
 
 config = {
-    "lang": config.lang(),
+    "lang": user.lang(), # ReadMe -> FAQ -> How to choose a language?
     "srgb": False,
-    "gamma": True,
-    "albedo": True
+    "gamma": False,
+    "albedo": False
 }
 
 
-objects = ["Jupiter|5", "Saturn|5", "Uranus|5", "Neptune|5", "Titan|5"] #["Sun|1", "Vega|1"]
+objects = ["Jupiter|5", "Saturn|5", "Uranus|5", "Neptune|5", "Titan|5"]
+# objects = ["Sun|1", "Vega|1"]
 
 
 fig = go.Figure()
@@ -77,7 +78,7 @@ for request in objects:
         name = name,
         line = dict(color="rgb"+str(rgb), width=4)
         ))
-    print(rgb)
+    print(rgb, name)
 
 if len(objects) == 1:
     title_text = tr.single_title_text[config["lang"]] + name

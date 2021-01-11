@@ -2,10 +2,11 @@ import numpy as np
 import plotly.graph_objects as go
 from scipy.interpolate import Akima1DInterpolator, PchipInterpolator, CubicSpline
 import translator as tr
-import config, spectra, convert
+import user, spectra, convert
 import PySimpleGUI as sg
 sg.theme("DarkGrey6")
-lang = config.lang("en")
+
+lang = user.lang() # ReadMe -> FAQ -> How to choose a language?
 
 def obj_list():
     global lang

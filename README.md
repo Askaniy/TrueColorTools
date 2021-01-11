@@ -7,13 +7,14 @@ A set of Python scripts for calculating human-visible colors of celestial bodies
 - [`true-color-table.py`](Scripts/true-color-table.py) generates a customizable table of the celestial bodies' colors.
 
 ### Auxiliary:
-- [`config.py`](Scripts/config.py) automatically detects the system language and the main folder for other scripts;
+- [`user.py`](Scripts/user.py) returns the specified language and path to the tools, or determines them automatically;
+- [`config.py`](Scripts/config.py) allows you to specify in it the language and path applicable to all tools;
 - [`convert.py`](Scripts/convert.py) contains everything that is directly related to calculations (functions, zero points of photometric systems, used curves of color space and sensitivity of human perception);
 - [`spectra.py`](Scripts/spectra.py) is a database of spectra, color indices and their sources;
 - [`translator.py`](Scripts/translator.py) contains almost all used inscriptions of other scripts in supported languages.
 
 ## Requirements
-You need Python 3.6 or higher (due to f-strings) and probably Windows (due to system calls in [`config.py`](Scripts/config.py)). No internet connection is required for all scripts to work.
+You need Python 3.6 or higher (due to f-strings) and probably Windows (due to system calls in [`user.py`](Scripts/user.py)). No internet connection is required for all scripts to work.
 
 Also, you need [NumPy](https://numpy.org/), [SciPy](https://www.scipy.org/), [Pillow](https://pillow.readthedocs.io/), [Plotly](https://plotly.com/python/) and [PySimpleGUI](https://pysimplegui.readthedocs.io/). If you use Anaconda, the first 4 libraries are already preinstalled. You can (wasn't checked) install the libraries all at once using [`requirements.txt`](requirements.txt):
 ```py
@@ -47,17 +48,21 @@ Optional parameters:
 "tags" # not used for now
 ```
 
-> ***How can I choose a language?***
+> ***How to choose a language?***
 
-The scripts use the system language by default (tested only on Windows). However, it can be specified manually in the function (same with the main folder path, [`config.folder()`](Scripts/config.py)).
+Language detection priority order:
+1) Manual language indication on the top of a tool's code;
+2) Using the language specified in the [`config.py`](Scripts/config.py);
+3) Automatic system language detection.
+
 ```py
-lang = config.lang() # system language
-lang = config.lang("ru") # the same as config.lang("Russian") and config.lang("Русский")
+lang = user.lang() # config.py or system language
+```
+```py
+lang = user.lang("ru") # the same as user.lang("Russian") and user.lang("Русский")
 ```
 
-> ***Why it crashes if I choose German?***
-
-German is a stub in the file for storing titles in different languages, [`translator.py`](Scripts/translator.py). If someone wants to add support for any language, this can be done simply.
+The tools support English and Russian. German is a stub in the file for storing titles in different languages, [`translator.py`](Scripts/translator.py). If someone wants to add support for any language, this can be done simply.
 
 ## Images
 
