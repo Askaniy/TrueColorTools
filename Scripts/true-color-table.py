@@ -1,5 +1,5 @@
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont, ImageShow
+from PIL import Image, ImageDraw, ImageFont
 from scipy.interpolate import Akima1DInterpolator
 import translator as tr
 import user, spectra, convert
@@ -57,19 +57,29 @@ for note, translation in tr.notes.items(): # x = 0.75, br = 224
     note_num += 1
 
 
-# Generator
+# Table generator
+
+nm = convert.xyz_nm if config["srgb"] else convert.rgb_nm
 
 n = 0 # object counter
 for name, spectrum in spectra.objects.items():
+    mode = "albedo" if config["albedo"] else "chromaticity"
+
+    # Spectral data processing
+    albedo = 0
+    if "albedo" not in spectrum:
+        if config["albedo"]:
+            mode = "chromaticity"
+        spectrum.update({"albedo": False})
+    elif type(spectrum["albedo"]) != bool:
+        albedo = spectrum["albedo"]
     if "filters" in spectrum:
-        spectrum = convert.from_indeces(spectrum) # spectrum from color indices
+        spectrum = convert.from_indices(spectrum) # spectrum from color indices
     if "sun" in spectrum:
         if spectrum["sun"]:
             spectrum = convert.subtract_sun(spectrum, spectra.objects["Sun|1"]) # subtract solar spectrum
-    if config["srgb"]:
-        nm = convert.xyz_nm
-    else:
-        nm = convert.rgb_nm
+    
+    # Spectrum interpolation
     try:
         interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
     except ValueError:
@@ -77,29 +87,23 @@ for name, spectrum in spectra.objects.items():
         print(tr.error1[config["lang"]][1].format(name, len(spectrum["nm"]), len(spectrum["br"])) + "\n")
         break
     if spectrum["nm"][0] > nm[0] or spectrum["nm"][-1] < nm[-1]:
-        curve = convert.AskaniyExtrapolator(spectrum["nm"], spectrum["br"], nm)
+        curve = convert.AskaniyExtrapolator(spectrum["nm"], spectrum["br"], nm, albedo)
     else:
-        curve = interp(nm)
-    albedo = None
-    if config["albedo"]:
-        if "albedo" not in spectrum:
-            mode = "chromaticity"
-        elif type(spectrum["albedo"]) == bool:
-            if spectrum["albedo"]:
-                mode = "albedo"
-            else:
-                mode = "chromaticity"
-        else:
-            mode = "albedo"
-            albedo = spectrum["albedo"]
-    else:
-        mode = "chromaticity"
-    rgb = convert.to_rgb(curve, mode=mode, albedo=albedo, exp_bit=8, gamma=config["gamma"], srgb=config["srgb"])
+        curve = interp(nm) / interp(550) * albedo if albedo else interp(nm)
+    curve = np.clip(curve, 0, None)
+
+    # Color calculation
+    rgb = convert.to_rgb(
+        curve, mode=mode,
+        albedo = spectrum["albedo"] or albedo,
+        exp_bit=8, gamma=config["gamma"], srgb=config["srgb"]
+    )
     if not np.array_equal(np.absolute(rgb), rgb):
         print("\n" + tr.error2[config["lang"]][0])
         print(tr.error2[config["lang"]][1].format(name, *rgb) + "\n")
         break
-    # object drawing
+
+    # Object drawing
     center_x = 100 * (1 + n%15)
     center_y = name_step + 100 * int(1 + n/15)
     if "obl" in spectrum:
@@ -107,7 +111,8 @@ for name, spectrum in spectra.objects.items():
         draw.ellipse([center_x-r, center_y-b, center_x+r, center_y+b], fill=rgb)
     else:
         draw.ellipse([center_x-r, center_y-r, center_x+r, center_y+r], fill=rgb)
-    # name processing
+    
+    # Name processing
     if name[0] == "(":
         link_right = True
         index = name.split(")")

@@ -18,35 +18,28 @@ objects = ["Jupiter|5", "Saturn|5", "Uranus|5", "Neptune|5", "Titan|5"]
 
 
 fig = go.Figure()
+nm = convert.xyz_nm if config["srgb"] else convert.rgb_nm
 
 names = []
 for request in objects:
-    # Parameter recognition
-    if config["srgb"]:
-        nm = convert.xyz_nm
-    else:
-        nm = convert.rgb_nm
-    albedo = None
-    # Spectrum processing
+    mode = "albedo" if config["albedo"] else "chromaticity"
+
+    # Spectral data processing
     spectrum = spectra.objects[request]
-    if config["albedo"]:
-        if "albedo" not in spectrum:
+    albedo = 0
+    if "albedo" not in spectrum:
+        if config["albedo"]:
             mode = "chromaticity"
-        elif type(spectrum["albedo"]) == bool:
-            if spectrum["albedo"]:
-                mode = "albedo"
-            else:
-                mode = "chromaticity"
-        else:
-            mode = "albedo"
-            albedo = spectrum["albedo"]
-    else:
-        mode = "chromaticity"
+        spectrum.update({"albedo": False})
+    elif type(spectrum["albedo"]) != bool:
+        albedo = spectrum["albedo"]
     if "filters" in spectrum:
-        spectrum = convert.from_indeces(spectrum) # spectrum from color indices
+        spectrum = convert.from_indices(spectrum) # spectrum from color indices
     if "sun" in spectrum:
         if spectrum["sun"]:
             spectrum = convert.subtract_sun(spectrum, spectra.objects["Sun|1"]) # subtract solar spectrum
+    
+    # Spectrum interpolation
     try:
         interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
     except ValueError:
@@ -54,10 +47,17 @@ for request in objects:
         print(tr.error1[config["lang"]][1].format(name, len(spectrum["nm"]), len(spectrum["br"])) + "\n")
         break
     if spectrum["nm"][0] > nm[0] or spectrum["nm"][-1] < nm[-1]:
-        curve = convert.AskaniyExtrapolator(spectrum["nm"], spectrum["br"], nm)
+        curve = convert.AskaniyExtrapolator(spectrum["nm"], spectrum["br"], nm, albedo)
     else:
-        curve = interp(nm)
-    rgb = convert.to_rgb(curve, mode=mode, albedo=albedo, exp_bit=8, gamma=config["gamma"], srgb=config["srgb"])
+        curve = interp(nm) / interp(550) * albedo if albedo else interp(nm)
+    curve = np.clip(curve, 0, None)
+
+    # Color calculation
+    rgb = convert.to_rgb(
+        curve, mode=mode,
+        albedo = spectrum["albedo"] or albedo,
+        exp_bit=8, gamma=config["gamma"], srgb=config["srgb"]
+    )
     if not np.array_equal(np.absolute(rgb), rgb):
         print("\n" + tr.error2[config["lang"]][0])
         print(tr.error2[config["lang"]][1].format(name, *rgb) + "\n")
@@ -66,6 +66,8 @@ for request in objects:
         name = "{} [{}]".format(*request.split("|"))
     else:
         name = request
+    
+    # Output
     if config["lang"] != "en":
         for obj_name, tranlation in tr.names.items():
             if name.startswith(obj_name):

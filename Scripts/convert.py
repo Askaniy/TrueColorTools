@@ -1,26 +1,28 @@
 import numpy as np
 from scipy.interpolate import Akima1DInterpolator
 
-def AskaniyExtrapolator(x, y, curve, norm550=False):
+def AskaniyExtrapolator(x, y, scope, albedo=0):
+    x = [x[0] - 500] + x + [x[-1] + 500]
+    y = [0] + y + [0]
     interp = Akima1DInterpolator(x, y)
-    x1 = 550
-    y1 = interp(x1)
-    line1 = lambda wl: y[0] + (wl - x[0]) * (y1 - y[0]) / (x1 - x[0])
-    line2 = lambda wl: y1 + (wl - x1) * (y[-1] - y1) / (x[-1] - x1)
+    line = lambda wl: y[1] + (wl - x[1]) * (y[-2] - y[1]) / (x[-2] - x[1])
+    #x1 = 550
+    #y1 = interp(x1)
+    #line1 = lambda wl: y[1] + (wl - x[1]) * (y1 - y[1]) / (x1 - x[1])
+    #line2 = lambda wl: y1 + (wl - x1) * (y[-2] - y1) / (x[-2] - x1)
     br = []
-    for nm in curve:
-        if nm < x[0]:
-            br.append(line1(nm))
-        elif nm > x[-1]:
-            br.append(line2(nm))
-        else:
+    for nm in scope:
+        if x[1] < nm < x[-2]:
             br.append(interp(nm))
-    if norm550:
-        return np.array(br) / y1
+        else:
+            br.append((line(nm) + interp(nm)) / 2)
+    if albedo:
+        br550 = interp(550) if x[1] < 550 < x[-2] else (line(550) + interp(550)) / 2
+        return np.array(br) / br550 * albedo
     else:
         return np.array(br)
 
-def from_indeces(data):
+def from_indices(data):
     result = {}
     for index, value in data["indices"].items():
         bands = index.split("-")
@@ -49,8 +51,7 @@ def subtract_sun(spectrum, sun):
     spectrum.update({"nm": nm, "br": br})
     return spectrum
 
-def to_rgb(spectrum, mode="1", albedo=None, inp_bit=None, exp_bit=None, rnd=0, gamma=False, srgb=False, html=False):
-    spectrum = np.clip(spectrum, 0, None)
+def to_rgb(spectrum, mode="1", inp_bit=None, exp_bit=None, rnd=0, albedo=False, gamma=False, srgb=False, html=False):
     if inp_bit:
         spectrum = (spectrum + 1) / 2**inp_bit
     if srgb:
@@ -59,15 +60,13 @@ def to_rgb(spectrum, mode="1", albedo=None, inp_bit=None, exp_bit=None, rnd=0, g
     else:
         rgb = np.sum(spectrum[:, np.newaxis] * rgb_curves, axis=0)
     try:
-        if mode in ["1", "chromaticity"]:
+        if mode == "chromaticity":
             rgb /= np.max(rgb)
-        elif mode in ["2", "normalization"]:
+        elif mode == "normalization":
             rgb /= 2*rgb[1]
-        elif mode in ["3", "albedo"]:
-            if albedo is None:
-                pass
-            else:
-                rgb = albedo * rgb / rgb[1]
+        elif mode == "albedo":
+            if not albedo:
+                rgb /= np.max(rgb)
     except ZeroDivisionError:
         rgb = np.array([0.5, 0.5, 0.5])
     if gamma:

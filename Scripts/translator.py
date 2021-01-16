@@ -185,8 +185,8 @@ xaxis_text = {
     "de": ""
 }
 yaxis_text = {
-    "en": "Normalized brightness",
-    "ru": "Нормализованная яркость",
+    "en": "Reflectivity",
+    "ru": "Отражательная способность",
     "de": ""
 }
 
