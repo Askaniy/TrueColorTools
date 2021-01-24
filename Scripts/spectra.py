@@ -1,3 +1,38 @@
+sources = [
+    "[1]: CALSPEC calatog of stellar spectra (STScI)"
+    "\nhttps://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec",
+    "[2]: Comprehensive wide-band magnitudes and albedos for the planets, with applications to exo-planets and Planet Nine"
+    "\nDOI: 10.1016/j.icarus.2016.09.023; https://www.sciencedirect.com/science/article/abs/pii/S0019103516301014",
+    "[3]: Views from EPOXI: colors in our Solar system as an analog for extrasolar planets"
+    "\nDOI: 10.1088/0004-637X/729/2/130; https://iopscience.iop.org/article/10.1088/0004-637X/729/2/130",
+    "[4]: About the Spectra of the Planets and Satellites (USGS Archive)"
+    "\nhttps://archive.usgs.gov/archive/sites/speclab.cr.usgs.gov/planetary.spectra/planetary-sp.html",
+    "[5]: Spectrophotometry of the Jovian Planets and Titan at 300- to 1000-nm Wavelength: The Methane Spectrum"
+    "\nDOI: 10.1006/icar.1994.1139; https://atmos.nmsu.edu/planetary_datasets/indexinfrared.html",
+    "[6]: The Spectrum of Pluto, 0.40 - 0.93 um I. Secular and longitudinal distribution of ices and complex organics"
+    "\nDOI: 10.1051/0004-6361/201527281; https://arxiv.org/abs/1509.00417",
+    "[7]: Phase II of the Small Main-Belt Asteroid Spectroscopic Survey: A Feature-Based Taxonomy"
+    "\nDOI: 10.1006/icar.2002.6856; https://www.sciencedirect.com/science/article/abs/pii/S0019103502968569",
+    "[8]: Visible spectroscopic and photometric survey of Jupiter Trojans: final results on dynamical families"
+    "\nDOI: 10.1016/j.icarus.2007.03.033; https://arxiv.org/abs/0704.0350",
+    "[9]: Minor Bodies in the Outer Solar System: Magnitudes and Colours"
+    "\nhttp://www.eso.org/~ohainaut/MBOSS/; http://www.eso.org/~ohainaut/MBOSS/mbossClasses.txt",
+    "[10]: Polarized reflected light from the exoplanet HD189733b: First multicolor observations and confirmation of detection"
+    "\nDOI: 10.1088/2041-8205/728/1/L6/; https://arxiv.org/abs/1101.0059",
+    "[11]: Observations, compositional, and physical characterization of near-Earth and Mars-crosser asteroids from a spectroscopic survey"
+    "\nDOI: 10.1051/0004-6361/200913852; https://ui.adsabs.harvard.edu/abs/2010A%26A...517A..23D/abstract",
+    "[12]: Physical properties of Asteroid (25143) Itokawa — Target of the Hayabusa sample return mission"
+    "\nDOI: 10.1016/j.icarus.2005.02.002; https://ui.adsabs.harvard.edu/abs/2005Icar..176..408L/abstract",
+    "[13]: The Deep Blue Color of HD189733b: Albedo Measurements with Hubble Space Telescope/Space Telescope Imaging Spectrograph at Visible Wavelengths"
+    "\nDOI: 10.1088/2041-8205/772/2/L16; https://arxiv.org/abs/1307.3239",
+    "[14]: Balancing the energy budget of short-period giant planets: evidence for reflective clouds and optical absorbers"
+    "\nDOI: 10.1093/mnras/stv470; https://academic.oup.com/mnras/article/449/4/4192/1172734",
+    "[15]: Upsilon Andromedae b in polarized light: New constraints on the planet size, density and albedo"
+    "\nDOI: ...; https://arxiv.org/abs/1109.3116",
+    "[16]: Photometric study of the major satellites of Uranus"
+    "\nDOI: 10.1134/S0038094607030021; https://academic.oup.com/mnras/article/449/4/4192/1172734"
+]
+
 
 # Reflectivity measurements by wavelengths
 
@@ -163,6 +198,11 @@ objects = {
         0.15181, 0.09542, 0.08876, 0.04618, 0.01896, 0.01611, 0.01781, 0.01818, 0.01391, 0.01367, 0.01475],
         "albedo": True, "obl": 0.02293
     },
+	"Miranda|16": {"nm": [250, 410, 480, 560, 750, 910], "br": [0.51, 0.49, 0.48, 0.47, 0.46, 0.45], "albedo": True},
+	"Ariel|16": {"nm": [250, 410, 480, 560, 750, 910], "br": [0.50, 0.51, 0.51, 0.51, 0.51, 0.52], "albedo": True},
+	"Umbriel|16": {"nm": [250, 410, 480, 560, 750, 910], "br": [0.25, 0.25, 0.25, 0.25, 0.26, 0.26], "albedo": True},
+	"Titania|16": {"nm": [250, 410, 480, 560, 750, 910], "br": [0.30, 0.32, 0.33, 0.34, 0.36, 0.37], "albedo": True},
+	"Oberon|16": {"nm": [250, 410, 480, 560, 750, 910], "br": [0.27, 0.29, 0.30, 0.31, 0.33, 0.35], "albedo": True},
     #"Neptune|2": {"nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.578, 0.562, 0.442, 0.226, 0.181, 0.072, 0.067], "obl": 0.0171},
     #"Neptune|3": {"nm": [350, 450, 550, 650, 750, 850], "br": [1.252, 1.235, 1.000, 0.555, 0.237, 0.132], "obl": 0.0171},
     "Neptune|5": {
@@ -1059,6 +1099,18 @@ objects = {
 	"(90482) Orcus|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
 		"filters": "Landolt", "indices": {"B-V": 0.670, "V-R": 0.376, "R-I": 0.372}, "sun": True
 	},
+	#"(90482) Orcus|17": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+	#	"filters": "Hubble", "bands": ["F606W", "F814W", "F110W", "F160W"], "mag": [19.186, 18.62, 20.64, 21.65], "vega": False
+	#},
+	#"Vanth|17": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+	#	"filters": "Hubble", "bands": ["F606W", "F814W", "F110W", "F160W"], "mag": [21.73, 20.90, 23.3, 24.0], "vega": False
+	#},
+	"(90482) Orcus|17": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+		"filters": "Landolt", "indices": {"V-I": 0.73}
+	},
+	"Vanth|17": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+		"filters": "Landolt", "indices": {"V-I": 1.03}
+	},
 	"(90568) 2004 GV9|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
 		"filters": "Landolt", "indices": {"B-V": 0.895, "V-R": 0.520}, "sun": True
 	},
@@ -1535,32 +1587,10 @@ objects = {
     #"Scattered|8": {"filters": "Landolt", "indices": {"B-V": 0.875, "V-R": 0.553, "V-I": 1.070}, "sun": True},
     "Scattered|9": {"filters": "Landolt", "indices": {"U-B": 0.33, "B-V": 0.85, "V-R": 0.52, "R-I": 0.51}, "sun": True},
     "Detached|9": {"filters": "Landolt", "indices": {"U-B": 0.18, "B-V": 0.88, "V-R": 0.54, "R-I": 0.51}, "sun": True},
-    "HD 189733 b|10": {"nm": [358.9, 437.2, 549.3], "br": [0.62, 0.61, 0.28], "albedo": True}
+    "HD 189733 b|10, 15": {"filters": "Landolt", "bands": ["U", "B", "V", "I"], "br": [0.62, 0.61, 0.28, 0], "albedo": True},
+	"HD 189733 b|13, 14": {"nm": [290, 368, 370, 416, 459, 510, 547, 875], "br": [0.45, 0.39, 0.374, 0.32, 0.17, 0.043, 0.02, 0.025], "albedo": True},
+	"Ups And b|15": {"filters": "Landolt", "bands": ["U", "B", "V"], "br": [0.53, 0.67, 0.29], "albedo": True},
+	#"WASP-18 b": {"nm": [440, 788, 900], "br": [0.075, 0.048, 0.05], "albedo": True},
+	#"WASP-12 b": {"nm": [271, 430, 900], "br": [0.039, 0.032, 0.17], "albedo": True},
+	#"WASP-43 b": {"nm": [398, 538, 788, 1400, 4050], "br": [0.28, 0.05, 0.12, 0.24, 0.09], "albedo": True}
 }
-
-sources = [
-    "[1]: CALSPEC calatog of stellar spectra (STScI)"
-    "\nhttps://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec",
-    "[2]: Comprehensive wide-band magnitudes and albedos for the planets, with applications to exo-planets and Planet Nine"
-    "\nDOI: 10.1016/j.icarus.2016.09.023; https://www.sciencedirect.com/science/article/abs/pii/S0019103516301014",
-    "[3]: Views from EPOXI: colors in our Solar system as an analog for extrasolar planets"
-    "\nDOI: 10.1088/0004-637X/729/2/130; https://iopscience.iop.org/article/10.1088/0004-637X/729/2/130",
-    "[4]: About the Spectra of the Planets and Satellites (USGS Archive)"
-    "\nhttps://archive.usgs.gov/archive/sites/speclab.cr.usgs.gov/planetary.spectra/planetary-sp.html",
-    "[5]: Spectrophotometry of the Jovian Planets and Titan at 300- to 1000-nm Wavelength: The Methane Spectrum"
-    "\nDOI: 10.1006/icar.1994.1139; https://atmos.nmsu.edu/planetary_datasets/indexinfrared.html",
-    "[6]: The Spectrum of Pluto, 0.40 - 0.93 um I. Secular and longitudinal distribution of ices and complex organics"
-    "\nDOI: 10.1051/0004-6361/201527281; https://arxiv.org/abs/1509.00417",
-    "[7]: Phase II of the Small Main-Belt Asteroid Spectroscopic Survey: A Feature-Based Taxonomy"
-    "\nDOI: 10.1006/icar.2002.6856; https://www.sciencedirect.com/science/article/abs/pii/S0019103502968569",
-    "[8]: Visible spectroscopic and photometric survey of Jupiter Trojans: final results on dynamical families"
-    "\nDOI: 10.1016/j.icarus.2007.03.033; https://arxiv.org/abs/0704.0350",
-    "[9]: Minor Bodies in the Outer Solar System: Magnitudes and Colours"
-    "\nhttp://www.eso.org/~ohainaut/MBOSS/; http://www.eso.org/~ohainaut/MBOSS/mbossClasses.txt",
-    "[10]: Polarized reflected light from the exoplanet HD189733b: First multicolor observations and confirmation of detection"
-    "\nDOI: 10.1088/2041-8205/728/1/L6/; https://arxiv.org/abs/1101.0059",
-    "[11]: Observations, compositional, and physical characterization of near-Earth and Mars-crosser asteroids from a spectroscopic survey"
-    "\nDOI: 10.1051/0004-6361/200913852; https://ui.adsabs.harvard.edu/abs/2010A%26A...517A..23D/abstract",
-    "[12]: Physical properties of Asteroid (25143) Itokawa — Target of the Hayabusa sample return mission"
-    "\nDOI: 10.1016/j.icarus.2005.02.002; https://ui.adsabs.harvard.edu/abs/2005Icar..176..408L/abstract"
-]

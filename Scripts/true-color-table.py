@@ -73,11 +73,7 @@ for name, spectrum in spectra.objects.items():
         spectrum.update({"albedo": False})
     elif type(spectrum["albedo"]) != bool:
         albedo = spectrum["albedo"]
-    if "filters" in spectrum:
-        spectrum = convert.from_indices(spectrum) # spectrum from color indices
-    if "sun" in spectrum:
-        if spectrum["sun"]:
-            spectrum = convert.subtract_sun(spectrum, spectra.objects["Sun|1"]) # subtract solar spectrum
+    spectrum = convert.transform(spectrum)
     
     # Spectrum interpolation
     try:

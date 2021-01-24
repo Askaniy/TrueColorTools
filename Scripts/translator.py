@@ -15,14 +15,23 @@ names = {
     "Saturn": {"ru": "Сатурн", "de": ""},
     "Rings": {"ru": "Кольца", "de": ""},
     "Rhea": {"ru": "Рея", "de": ""},
+    "Titania": {"ru": "Титания", "de": ""},
     "Titan": {"ru": "Титан", "de": ""},
     "Uranus": {"ru": "Уран", "de": ""},
+    "Miranda": {"ru": "Миранда", "de": ""},
+    "Ariel": {"ru": "Ариэль", "de": ""},
+    "Umbriel": {"ru": "Умбриэль", "de": ""},
+    "Oberon": {"ru": "Оберон", "de": ""},
     "Neptune": {"ru": "Нептун", "de": ""},
+    "Itokawa": {"ru": "Итокава", "de": ""},
+    "Eros": {"ru": "Эрос", "de": ""},
+    "Sedna": {"ru": "Седна", "de": ""},
+    "Orcus": {"ru": "Орк", "de": ""},
+    "Vanth": {"ru": "Вант", "de": ""},
     "Pluto": {"ru": "Плутон", "de": ""},
+    "Haumea": {"ru": "Хаумеа", "de": ""},
     "Eris": {"ru": "Эрида", "de": ""},
     "Makemake": {"ru": "Макемаке", "de": ""},
-    "Eros": {"ru": "Эрос", "de": ""},
-    "Itokawa": {"ru": "Итокава", "de": ""},
     "Comets": {"ru": "Кометы", "de": ""},
     "J. trojans": {"ru": "Троянцы", "de": ""},
     "Centaurs": {"ru": "Кентавры", "de": ""},
@@ -42,8 +51,7 @@ notes = {
     "LP:": {"en": "long-period", "ru": "долгопериодические", "de": ""},
     "SP:": {"en": "short-period", "ru": "короткопериодические", "de": ""},
     "H:": {"en": "hot, inner objects", "ru": "тёплые, внутренние объекты", "de": ""},
-    "C:": {"en": "cold, outer objects", "ru": "холодные, внешние объекты", "de": ""},
-    #"*": {"en": "from color indices", "ru": "из показателей цвета", "de": ""}
+    "C:": {"en": "cold, outer objects", "ru": "холодные, внешние объекты", "de": ""}
 }
 
 source = {
@@ -191,8 +199,8 @@ yaxis_text = {
 }
 
 error1 = {
-    "en": ["Error 1: mismatch in the number of coordinates to create a spectrum.", "Object name: {}\nWavelength values: {}\nBrightness values: {}"],
-    "ru": ["Ошибка 1: несовпадение количества координат для построения спектра.", "Название объекта: {}\nЗначений длин волн: {}\nЗначений яркости: {}"],
+    "en": ["Error 1: data length mismatch or order of increasing wavelength is not observed.", "Object name: {}\nWavelength values: {}\nBrightness values: {}"],
+    "ru": ["Ошибка 1: несовпадение списков данных или длины волн не в порядке возрастания.", "Название объекта: {}\nЗначений длин волн: {}\nЗначений яркости: {}"],
     "de": [""]
 }
 

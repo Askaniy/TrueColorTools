@@ -13,43 +13,43 @@ A set of Python scripts for calculating human-visible colors of celestial bodies
 - [`spectra.py`](Scripts/spectra.py) is a database of spectra, color indices and their sources;
 - [`translator.py`](Scripts/translator.py) contains almost all used inscriptions of other scripts in supported languages.
 
-## Requirements
-You need Python 3.6 or higher (due to f-strings) and probably Windows (due to system calls in [`user.py`](Scripts/user.py)). No internet connection is required for all scripts to work.
+## Installation
+Press the button `Code`, then I recommend choosing `Download ZIP`. After downloading, unpack the archive. You can also clone the repository.
+
+The tool requires Python 3.6 or higher (due to f-strings) and probably Windows (due to system calls in [`user.py`](Scripts/user.py)). No internet connection is required for all scripts to work.
 
 Also, you need [NumPy](https://numpy.org/), [SciPy](https://www.scipy.org/), [Pillow](https://pillow.readthedocs.io/), [Plotly](https://plotly.com/python/) and [PySimpleGUI](https://pysimplegui.readthedocs.io/). If you use Anaconda, the first 4 libraries are already preinstalled. You can (wasn't checked) install the libraries all at once using [`requirements.txt`](requirements.txt):
-```py
+```
 python -m pip install -r requirements.txt
 ```
 
-## FAQ
-> ***How can I get formatted colors for Celestia?***
+## Using tools
+You probably want to use `true-color-calc_GUI.py` as the other two tools require understanding the code. This is what the interface looks like:
+![color_calc_GUI](color_calc_GUI.png)
 
-Celestia uses chromaticity values from 0 to 1 for each color channel, where 1 is the value of the brightest channel. In the GUI version, you need to make sure that the `chromaticity` mode is used and `Decimal places` is greater than zero (by default it is), and then set the `Color (bit) depth` parameter to zero.
+On the left is a list of all available spectra in the database. The number of the source is indicated in square brackets, a list of which can be found in `File` → `Sources`. Also, after the an object's name there can be abbreviations, the decoding of which is indicated in `File` → `Notes`.
 
+You can get colors formatted for Celestia. It uses chromaticity values from 0 to 1 for each color channel, where 1 is the value of the brightest channel. In the GUI version, you need to make sure that the `chromaticity` mode is used and `Decimal places` is greater than zero (by default it is), and then set the `Color (bit) depth` parameter to zero.
 
-> ***How do I add my own spectrum?***
+You can add spectra in the database. It's the `objects` dictionary in [`spectra.py`](Scripts/spectra.py). The spectrum can be set in many ways, below is a list of the parameters used.
 
-Add it to the dictionary `objects` in [`spectra.py`](Scripts/spectra.py). It can be in two forms, for spectra or color indices:
 ```py
-"Object name": {
-  "nm": [], # list of wavelengths in nm
-  "br": [] # same-size list of reflectivity
-}
-"Object name": {
-  "filters": "", # one from convert.py → filters
-  "indices": {"": 0, …, "": 0} # min wavelength color index → max wavelength color index
-}
-```
+Mandatory parameters:
+"nm" # list of wavelengths in nm
+"br" # same-size list of reflectivity
+"mag" # same-size list of magnitudes
+"filters" # filter system, one from convert.py → filters
+"indices" # dictionary of color indices, use only with "filters"; min wavelength color index → max wavelength color index
+"bands" # list of filters' names, use only with "filters" 
+
 Optional parameters:
-```py
-"albedo" # True (if reflectivity values are albedo values), False, or value (in V band or on 550 nm)
-"sun" # True (if it's a spectrum with solar reflection) or False
-"obl" # oblateness (from 0 to 1)
+"albedo" # bool (True if reflectivity was set by albedo values) or float (in V band or on 550 nm)
+"sun" # bool (True if spectrum contains the solar reflection)
+"obl" # oblateness (float, from 0 to 1)
 "tags" # not used for now
 ```
 
-> ***How to choose a language?***
-
+## Localization
 Language detection priority order:
 1) Manual language indication on the top of a tool's code;
 2) Using the language specified in the [`config.py`](Scripts/config.py);
@@ -57,17 +57,8 @@ Language detection priority order:
 
 ```py
 lang = user.lang() # config.py or system language
-```
-```py
+
 lang = user.lang("ru") # the same as user.lang("Russian") and user.lang("Русский")
 ```
 
 The tools support English and Russian. German is a stub in the file for storing titles in different languages, [`translator.py`](Scripts/translator.py). If someone wants to add support for any language, this can be done simply.
-
-## Images
-
-### True color calculator GUI
-![color_calc_GUI](color_calc_GUI.png)
-
-### Color table (not gamma corrected)
-![color_table-en](Tables/color_table-en.png)
