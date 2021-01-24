@@ -49,12 +49,12 @@ def from_filters(data):
 def from_indices(data):
     result = {}
     for index, value in data["indices"].items():
-        bands = index.split("-")
+        band1, band2 = index.lower().split("-")
         if result == {}:
-            result.update({bands[0]: 1.0})
-        if bands[0] in result:
-            k = filters[data["filters"]][bands[0]]["zp"] - filters[data["filters"]][bands[1]]["zp"]
-            result.update({bands[1]: result[bands[0]] * 10**(0.4*(value + k))})
+            result.update({band1: 1.0})
+        if band1 in result:
+            k = filters[data["filters"]][band1]["zp"] - filters[data["filters"]][band2]["zp"]
+            result.update({band2: result[band1] * 10**(0.4*(value + k))})
     nm = []
     br = []
     for band, value in result.items():
