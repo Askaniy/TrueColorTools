@@ -25,6 +25,7 @@ python -m pip install -r requirements.txt
 
 ## Using tools
 You probably want to use `true-color-calc_GUI.py` as the other two tools require understanding the code. This is what the interface looks like:
+
 ![color_calc_GUI](color_calc_GUI.png)
 
 On the left is a list of all available spectra in the database. The number of the source is indicated in square brackets, a list of which can be found in `File` → `Sources`. Also, after the an object's name there can be abbreviations, the decoding of which is indicated in `File` → `Notes`.
@@ -33,21 +34,19 @@ You can get colors formatted for Celestia. It uses chromaticity values from 0 to
 
 You can add spectra in the database. It's the `objects` dictionary in [`spectra.py`](Scripts/spectra.py). The spectrum can be set in many ways, below is a list of the parameters used.
 
-```py
-Mandatory parameters:
-"nm" # list of wavelengths in nm
-"br" # same-size list of reflectivity
-"mag" # same-size list of magnitudes
-"filters" # filter system, one from convert.py → filters
-"indices" # dictionary of color indices, use only with "filters"; min wavelength color index → max wavelength color index
-"bands" # list of filters' names, use only with "filters" 
+### Mandatory parameters
+- `nm`: list of wavelengths in nm
+- `br`: same-size list of reflectivity
+- `mag`: same-size list of magnitudes
+- `filters`: filter system, one from convert.py → filters
+- `indices`: dictionary of color indices, use only with `filters`; min wavelength color index → max wavelength color index
+- `bands`: list of filters' names, use only with `filters` 
 
-Optional parameters:
-"albedo" # bool (True if reflectivity was set by albedo values) or float (in V band or on 550 nm)
-"sun" # bool (True if spectrum contains the solar reflection)
-"obl" # oblateness (float, from 0 to 1)
-"tags" # not used for now
-```
+### Optional parameters
+- `albedo`: bool (True if reflectivity was set by albedo values) or float (in V band or on 550 nm)
+- `sun`: bool (True if spectrum contains the solar reflection)
+- `obl`: oblateness (float, from 0 to 1)
+- `tags`: not used for now
 
 ## Localization
 Language detection priority order:
