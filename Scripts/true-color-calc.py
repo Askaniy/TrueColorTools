@@ -43,7 +43,7 @@ for request in objects:
         print(tr.error1[config["lang"]][1].format(name, len(spectrum["nm"]), len(spectrum["br"])) + "\n")
         break
     if spectrum["nm"][0] > nm[0] or spectrum["nm"][-1] < nm[-1]:
-        curve = convert.AskaniyExtrapolator(spectrum["nm"], spectrum["br"], nm, albedo)
+        curve = convert.DefaultExtrapolator(spectrum["nm"], spectrum["br"], nm, albedo)
     else:
         curve = interp(nm) / interp(550) * albedo if albedo else interp(nm)
     curve = np.clip(curve, 0, None)

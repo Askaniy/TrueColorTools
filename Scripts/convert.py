@@ -2,20 +2,10 @@ import numpy as np
 from scipy.interpolate import Akima1DInterpolator
 import spectra
 
-def transform(spectrum):
-    if "filters" in spectrum:
-        if "bands" in spectrum:
-            spectrum = from_filters(spectrum) # replacement of filters for their wavelengths
-        elif "indices" in spectrum:
-            spectrum = from_indices(spectrum) # spectrum from color indices
-    if "mag" in spectrum:
-        spectrum = from_magnitudes(spectrum, spectra.objects["Vega|1"]) # spectrum from magnitudes
-    if "sun" in spectrum:
-        if spectrum["sun"]:
-            spectrum = subtract_sun(spectrum, spectra.objects["Sun|1"]) # subtract solar spectrum
-    return spectrum
 
-def AskaniyExtrapolator(x, y, scope, albedo=0):
+# Spectrum processing functions
+
+def DefaultExtrapolator(x, y, scope, albedo=0):
     x = [x[0] - 500] + x + [x[-1] + 500]
     y = [0] + y + [0]
     interp = Akima1DInterpolator(x, y)
@@ -87,41 +77,23 @@ def subtract_sun(spectrum, sun):
     spectrum.update({"nm": nm, "br": br})
     return spectrum
 
-def to_rgb(spectrum, mode="1", inp_bit=None, exp_bit=None, rnd=0, albedo=False, gamma=False, srgb=False, html=False):
-    if inp_bit:
-        spectrum = (spectrum + 1) / 2**inp_bit
-    if srgb:
-        xyz = np.sum(spectrum[:, np.newaxis] * xyz_curves, axis=0)
-        rgb = xyz_to_sRGB(xyz)
-    else:
-        rgb = np.sum(spectrum[:, np.newaxis] * rgb_curves, axis=0)
-    try:
-        if mode == "chromaticity":
-            rgb /= np.max(rgb)
-        elif mode == "normalization":
-            rgb /= 2*rgb[1]
-        elif mode == "albedo":
-            if not albedo:
-                rgb /= np.max(rgb)
-    except ZeroDivisionError:
-        rgb = np.array([0.5, 0.5, 0.5])
-    if gamma:
-        g = np.vectorize(lambda x: 12.92*x if x < 0.0031308 else 1.055 * x**(1.0/2.4) - 0.055)
-        rgb = g(rgb)
-    if html:
-        return "#{:02x}{:02x}{:02x}".format(*[int(round(b)) for b in to_bit(8, rgb)])
-    if exp_bit:
-        rgb = to_bit(exp_bit, rgb)
-    if rnd != 0:
-        return tuple([round(color, rnd) for color in rgb])
-    else:
-        return tuple([int(round(color)) for color in rgb])
+def transform(spectrum):
+    if "filters" in spectrum:
+        if "bands" in spectrum:
+            spectrum = from_filters(spectrum) # replacement of filters for their wavelengths
+        elif "indices" in spectrum:
+            spectrum = from_indices(spectrum) # spectrum from color indices
+    if "mag" in spectrum:
+        spectrum = from_magnitudes(spectrum, spectra.objects["Vega|1"]) # spectrum from magnitudes
+    if "sun" in spectrum:
+        if spectrum["sun"]:
+            spectrum = subtract_sun(spectrum, spectra.objects["Sun|1"]) # subtract solar spectrum
+    return spectrum
 
-def xyz_from_xy(x, y):
-    return np.array((x, y, 1-x-y))
 
-def to_bit(bit, rgb):
-    return rgb * (2**bit - 1)
+# Color processing functions
+
+xyz_from_xy = lambda x, y: np.array((x, y, 1-x-y))
 
 def xyz_to_sRGB(xyz):
     # https://scipython.com/blog/converting-a-spectrum-to-a-colour/
@@ -138,6 +110,30 @@ def xyz_to_sRGB(xyz):
         w = - np.min(rgb)
         rgb += w
     return rgb
+
+gamma_correction = np.vectorize(lambda grayscale: grayscale * 12.92 if grayscale < 0.0031308 else 1.055 * grayscale**(1.0/2.4) - 0.055)
+rounder = np.vectorize(lambda grayscale, d_places: int(round(grayscale)) if d_places == 0 else round(grayscale, d_places))
+to_bit = lambda color, bit: color * (2**bit - 1)
+to_html = lambda color: "#{:02x}{:02x}{:02x}".format(*rounder(to_bit(color, 8), 0))
+
+def to_rgb(spectrum, mode="chromaticity", inp_bit=None, exp_bit=None, rnd=0, albedo=False, gamma=False, srgb=False, html=False):
+    spectrum = (spectrum + 1) / 2**inp_bit if inp_bit else spectrum
+    if srgb:
+        xyz = np.sum(spectrum[:, np.newaxis] * xyz_curves, axis=0)
+        rgb = xyz_to_sRGB(xyz)
+    else:
+        rgb = np.sum(spectrum[:, np.newaxis] * rgb_curves, axis=0)
+    try:
+        if mode == "normalization":
+            rgb /= 2*rgb[1]
+        elif mode == "albedo" and albedo:
+            pass
+        else: # "chromaticity" and when albedo == False
+            rgb /= np.max(rgb)
+    except ZeroDivisionError:
+        rgb = np.array([1.0, 0.0, 0.0])
+    rgb = gamma_correction(rgb) if gamma else rgb
+    return to_html(rgb) if html else tuple(rounder(rgb if not exp_bit else to_bit(rgb, exp_bit), rnd))
 
 
 # Pivot wavelengths and ZeroPoints of filter bandpasses

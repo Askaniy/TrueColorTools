@@ -1,3 +1,4 @@
+
 sources = [
     "[1]: CALSPEC calatog of stellar spectra (STScI)"
     "\nhttps://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec",
@@ -30,7 +31,7 @@ sources = [
     "[15]: Upsilon Andromedae b in polarized light: New constraints on the planet size, density and albedo"
     "\nDOI: ...; https://arxiv.org/abs/1109.3116",
     "[16]: Photometric study of the major satellites of Uranus"
-    "\nDOI: 10.1134/S0038094607030021; https://academic.oup.com/mnras/article/449/4/4192/1172734"
+    "\nDOI: 10.1134/S0038094607030021; https://link.springer.com/article/10.1134%2FS0038094607030021"
 ]
 
 
@@ -198,11 +199,11 @@ objects = {
         0.15181, 0.09542, 0.08876, 0.04618, 0.01896, 0.01611, 0.01781, 0.01818, 0.01391, 0.01367, 0.01475],
         "albedo": True, "obl": 0.02293
     },
-	"Miranda|16": {"nm": [250, 410, 480, 560, 750, 910], "br": [0.51, 0.49, 0.48, 0.47, 0.46, 0.45], "albedo": True},
-	"Ariel|16": {"nm": [250, 410, 480, 560, 750, 910], "br": [0.50, 0.51, 0.51, 0.51, 0.51, 0.52], "albedo": True},
-	"Umbriel|16": {"nm": [250, 410, 480, 560, 750, 910], "br": [0.25, 0.25, 0.25, 0.25, 0.26, 0.26], "albedo": True},
-	"Titania|16": {"nm": [250, 410, 480, 560, 750, 910], "br": [0.30, 0.32, 0.33, 0.34, 0.36, 0.37], "albedo": True},
-	"Oberon|16": {"nm": [250, 410, 480, 560, 750, 910], "br": [0.27, 0.29, 0.30, 0.31, 0.33, 0.35], "albedo": True},
+	"Miranda|16": {"nm": [250, 410, 480, 560, 750, 910], "br": [0.51, 0.49, 0.48, 0.47, 0.46, 0.45], "albedo": 0.34},
+	"Ariel|16": {"nm": [250, 410, 480, 560, 750, 910], "br": [0.50, 0.51, 0.51, 0.51, 0.51, 0.52], "albedo": 0.37},
+	"Umbriel|16": {"nm": [250, 410, 480, 560, 750, 910], "br": [0.25, 0.25, 0.25, 0.25, 0.26, 0.26], "albedo": 0.19},
+	"Titania|16": {"nm": [250, 410, 480, 560, 750, 910], "br": [0.30, 0.32, 0.33, 0.34, 0.36, 0.37], "albedo": 0.27},
+	"Oberon|16": {"nm": [250, 410, 480, 560, 750, 910], "br": [0.27, 0.29, 0.30, 0.31, 0.33, 0.35], "albedo": 0.23},
     #"Neptune|2": {"nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.578, 0.562, 0.442, 0.226, 0.181, 0.072, 0.067], "obl": 0.0171},
     #"Neptune|3": {"nm": [350, 450, 550, 650, 750, 850], "br": [1.252, 1.235, 1.000, 0.555, 0.237, 0.132], "obl": 0.0171},
     "Neptune|5": {

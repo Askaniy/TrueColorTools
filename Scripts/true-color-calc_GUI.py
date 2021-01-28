@@ -137,7 +137,7 @@ while True:
             break
         if spectrum["nm"][0] > nm[0] or spectrum["nm"][-1] < nm[-1]:
             if values["interp0"]:
-                curve = convert.AskaniyExtrapolator(spectrum["nm"], spectrum["br"], nm, albedo)
+                curve = convert.DefaultExtrapolator(spectrum["nm"], spectrum["br"], nm, albedo)
             elif values["interp1"]:
                 extrap = PchipInterpolator(spectrum["nm"], spectrum["br"], extrapolate=True)
                 curve = extrap(nm) / extrap(550) * albedo if albedo else extrap(nm)
@@ -219,7 +219,7 @@ while True:
                 break
             if spectrum["nm"][0] > nm[0] or spectrum["nm"][-1] < nm[-1]:
                 if values["interp0"]:
-                    curve = convert.AskaniyExtrapolator(spectrum["nm"], spectrum["br"], nm, albedo)
+                    curve = convert.DefaultExtrapolator(spectrum["nm"], spectrum["br"], nm, albedo)
                 elif values["interp1"]:
                     extrap = PchipInterpolator(spectrum["nm"], spectrum["br"], extrapolate=True)
                     curve = extrap(nm) / extrap(550) * albedo if albedo else extrap(nm)
