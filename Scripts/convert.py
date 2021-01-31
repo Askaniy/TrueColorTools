@@ -26,6 +26,23 @@ def DefaultExtrapolator(x, y, scope, albedo=0):
     else:
         return np.array(br)
 
+# to do - def gauss(x): return np.exp(- x**2 / 2) / np.sqrt(2 * np.pi)
+def get_points(pivots, nm_list, br_list, wide=100, low_res=True):
+    r = int(wide/2)
+    scopes = []
+    if low_res:
+        for pivot in pivots:
+            scope = DefaultExtrapolator(nm_list, br_list, range(pivot-r, pivot+r, 5))
+            scopes.append(np.mean(scope))
+    else:
+        for pivot in pivots:
+            scope = []
+            for nm, br in zip(nm_list, br_list):
+                if nm-r < pivot < nm+r:
+                    scope.append(br)
+            scopes.append(np.mean(scope))
+    return scopes
+
 def from_filters(data):
     nm = []
     for band in data["bands"]:
@@ -56,24 +73,22 @@ def from_indices(data):
 def from_magnitudes(data, vega):
     if "vega" not in data:
         data.update({"vega": True})
-    if data["vega"]:
-        interp = Akima1DInterpolator(vega["nm"], vega["br"])
     br = []
-    for nm, mag in zip(data["nm"], data["mag"]):
-        br.append(interp(nm) * 10**(-0.4*mag) if data["vega"] else 10**(-0.4*mag))
+    waves = get_points(data["nm"], vega["nm"], vega["br"], low_res=False)
+    for ref, mag in zip(waves, data["mag"]):
+        br.append(ref * 10**(-0.4*mag) if data["vega"] else 10**(-0.4*mag))
     data.update({"br": br})
-    print(br)
     return data
 
 def subtract_sun(spectrum, sun):
     nm = []
     br = []
     interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
-    for i in range(len(sun["br"])):
-        corrected = interp(sun["nm"][i]) / sun["br"][i]
+    for sun_nm, sun_br in zip(sun["nm"], sun["br"]):
+        corrected = interp(sun_nm) / sun_br
         if not np.isnan(corrected):
             br.append(corrected)
-            nm.append(sun["nm"][i])
+            nm.append(sun_nm)
     spectrum.update({"nm": nm, "br": br})
     return spectrum
 
@@ -113,8 +128,8 @@ def xyz_to_sRGB(xyz):
 
 gamma_correction = np.vectorize(lambda grayscale: grayscale * 12.92 if grayscale < 0.0031308 else 1.055 * grayscale**(1.0/2.4) - 0.055)
 rounder = np.vectorize(lambda grayscale, d_places: int(round(grayscale)) if d_places == 0 else round(grayscale, d_places))
-to_bit = lambda color, bit: color * (2**bit - 1)
-to_html = lambda color: "#{:02x}{:02x}{:02x}".format(*rounder(to_bit(color, 8), 0))
+def to_bit(color, bit): return color * (2**bit - 1)
+def to_html(color): return "#{:02x}{:02x}{:02x}".format(*rounder(to_bit(color, 8), 0))
 
 def to_rgb(spectrum, mode="chromaticity", inp_bit=None, exp_bit=None, rnd=0, albedo=False, gamma=False, srgb=False, html=False):
     spectrum = (spectrum + 1) / 2**inp_bit if inp_bit else spectrum
