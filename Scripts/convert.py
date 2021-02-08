@@ -6,7 +6,7 @@ import spectra
 # Spectrum processing functions
 
 def DefaultExtrapolator(x, y, scope, albedo=0):
-    x = [x[0] - 500] + x + [x[-1] + 500]
+    x = [x[0] - 250] + x + [x[-1] + 500]
     y = [0] + y + [0]
     interp = Akima1DInterpolator(x, y)
     line = lambda wl: y[1] + (wl - x[1]) * (y[-2] - y[1]) / (x[-2] - x[1])
@@ -27,12 +27,12 @@ def DefaultExtrapolator(x, y, scope, albedo=0):
         return np.array(br)
 
 # to do - def gauss(x): return np.exp(- x**2 / 2) / np.sqrt(2 * np.pi)
-def get_points(pivots, nm_list, br_list, wide=100, low_res=True):
+def get_points(pivots, nm_list, br_list, albedo=0, wide=100, low_res=True):
     r = int(wide/2)
     scopes = []
     if low_res:
         for pivot in pivots:
-            scope = DefaultExtrapolator(nm_list, br_list, range(pivot-r, pivot+r, 5))
+            scope = DefaultExtrapolator(nm_list, br_list, range(pivot-r, pivot+r, 5), albedo)
             scopes.append(np.mean(scope))
     else:
         for pivot in pivots:
@@ -140,9 +140,10 @@ def to_rgb(spectrum, mode="chromaticity", inp_bit=None, exp_bit=None, rnd=0, alb
         rgb = np.sum(spectrum[:, np.newaxis] * rgb_curves, axis=0)
     try:
         if mode == "normalization":
-            rgb /= 2*rgb[1]
-        elif mode == "albedo" and albedo:
-            pass
+            rgb /= 2 * rgb[1]
+        elif mode == "albedo":
+            if albedo:
+                rgb = albedo * rgb / rgb[1]
         else: # "chromaticity" and when albedo == False
             rgb /= np.max(rgb)
     except ZeroDivisionError:
@@ -195,6 +196,14 @@ filters = {
         "r": {"nm": 617.6, "zp": 0.003},
         "i": {"nm": 749.0, "zp": 0.011},
         "z": {"nm": 889.2, "zp": 0.007}
+    },
+    "New Horizons": { # New Horizons SOC to Instrument Pipeline ICD, p.76
+        "pan1": {"nm": 651},
+        "pan2": {"nm": 651},
+        "blue": {"nm": 488},
+        "red": {"nm": 612},
+        "nir": {"nm": 850},
+        "ch4": {"nm": 886}
     },
     "Hubble": {
         "f200lp": {"nm": 497.19, "zp": 26.931},

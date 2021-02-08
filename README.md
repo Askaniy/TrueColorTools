@@ -4,7 +4,8 @@ A set of Python scripts for calculating human-visible colors of celestial bodies
 ### Tools:
 - [`true-color-calc.py`](Scripts/true-color-calc.py) calculates colors of one or several objects and build their spectra;
 - [`true-color-calc_GUI.py`](Scripts/true-color-calc_GUI.py) calculates colors much more conveniently with a graphical interface and visualization;
-- [`true-color-table.py`](Scripts/true-color-table.py) generates a customizable table of the celestial bodies' colors.
+- [`true-color-table.py`](Scripts/true-color-table.py) generates a customizable table of the celestial bodies' colors;
+- [`true-color-img.py`](Scripts/true-color-table.py) processes images by calculating the spectrum of each pixel (work in progress).
 
 ### Auxiliary:
 - [`user.py`](Scripts/user.py) returns the specified language and path to the tools, or determines them automatically;
@@ -23,7 +24,7 @@ Also, you need [NumPy](https://numpy.org/), [SciPy](https://www.scipy.org/), [Pi
 python -m pip install -r requirements.txt
 ```
 
-## Using tools
+## How to use
 You probably want to use `true-color-calc_GUI.py` as the other two tools require understanding the code. This is what the interface looks like:
 
 ![color_calc_GUI](color_calc_GUI.png)
