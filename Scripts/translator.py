@@ -100,10 +100,20 @@ gui_menu = {
     "ru": [["Файл", [source["ru"], note["ru"], gui_info["ru"], gui_exit["ru"]]], ["Язык", lang_list["ru"]]],
     "de": [["", ["", "", "", ""]], ["", lang_list["de"]]]
 }
-columns = {
-    "en": ["Spectra", "Parameters", "Results"],
-    "ru": ["Спектры", "Параметры", "Результат"],
-    "de": [""]
+gui_spectra = {
+    "en": "Spectra",
+    "ru": "Спектры",
+    "de": ""
+}
+gui_settings = {
+    "en": "Settings",
+    "ru": "Параметры",
+    "de": ""
+}
+gui_results = {
+    "en": "Results",
+    "ru": "Результат",
+    "de": ""
 }
 gui_add = {
     "en": "Add spectrum to plot",
@@ -118,6 +128,16 @@ gui_plot = {
 gui_export = {
     "en": "Export all colors to console",
     "ru": "Экспортировать все цвета",
+    "de": ""
+}
+gui_preview = {
+    "en": "Show preview",
+    "ru": "Предпросмотр",
+    "de": ""
+}
+gui_process = {
+    "en": "Process and save",
+    "ru": "Обработать и сохранить",
     "de": ""
 }
 gui_col = {

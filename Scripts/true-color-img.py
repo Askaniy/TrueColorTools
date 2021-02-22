@@ -17,15 +17,15 @@ def k(lat_planetographic, obl=0):
 
 info = {
     "path": "X:/Documents/Astronomy/Creating/Bodies/Dwarf planets/2 Pluto-Charon/0 Pluto/v4/TCT/",
-    "img": ["1K_nh_pluto_band4_BLUE.png", "1K_nh_pluto_band3_RED.png", "1K_nh_pluto_band2_NIR.png"],
+    "img": ["nh_pluto_band4_BLUE.png", "nh_pluto_band3_RED.png", "nh_pluto_band2_NIR.png"],
     "filters": "New Horizons",
     "bands": ["Blue", "Red", "NIR"],
     "ref": "(134340) Pluto|6",
     "br": [0.473, 0.627, 0.747], # Characteristics of Pluto’s haze and surface from an analytic radiative transfer model, p.16
-    "calib": False,
-    "srgb": False,
     "gamma": False,
-    "albedo": False,
+    "srgb": False,
+    #"albedo": False,
+    "calib": False,
     "name": "TCT result " + time.strftime("%Y-%m-%d %H-%M"),
     "extension": ".png"
 }

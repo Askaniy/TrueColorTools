@@ -4,9 +4,9 @@ from scipy.interpolate import Akima1DInterpolator, PchipInterpolator, CubicSplin
 import translator as tr
 import user, spectra, convert
 import PySimpleGUI as sg
-sg.theme("DarkGrey6")
 
 lang = user.lang() # ReadMe -> FAQ -> How to choose a language?
+
 
 def obj_list():
     global lang
@@ -30,15 +30,25 @@ def obj_list():
         names.update({name_1: name_0})
     return names
 
+
+sg.LOOK_AND_FEEL_TABLE["MaterialDark"] = {
+    'BACKGROUND': '#333333', 'TEXT': '#FFFFFF',
+    'INPUT': '#424242', 'TEXT_INPUT': '#FFFFFF', 'SCROLL': '#86A8FF',
+    'BUTTON': ('#FFFFFF', '#007ACC'), 'PROGRESS': ('#000000', '#000000'),
+    'BORDER': 0, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0,
+    'ACCENT1': '#FF0266', 'ACCENT2': '#FF5C93', 'ACCENT3': '#C5003C'
+}
+sg.ChangeLookAndFeel("MaterialDark")
+
 col1 = [
-    [sg.Text(tr.columns[lang][0], size=(16, 1), font=("arial", 12), key="col0")],
+    [sg.Text(tr.gui_spectra[lang], size=(16, 1), font=("arial", 12), key="title0")],
     [sg.Listbox(values=tuple(obj_list().keys()), size=(22, 12), enable_events=True, key="list")],
     [sg.Button(button_text=tr.gui_add[lang], key="add")],
     [sg.Button(button_text=tr.gui_plot[lang], key="plot")],
     [sg.Button(button_text=tr.gui_export[lang], key="export")]
 ]
 col2 = [
-    [sg.Text(tr.columns[lang][1], size=(16, 1), font=("arial", 12), key="col1")],
+    [sg.Text(tr.gui_settings[lang], size=(16, 1), font=("arial", 12), key="title1")],
     [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), enable_events=True, default=True, key="gamma")],
     [sg.Checkbox("sRGB", enable_events=True, size=(16, 1), key="srgb")],
     [sg.Text(tr.gui_br[lang][0]+":", size=(18, 1), key="br_mode")],
@@ -53,7 +63,7 @@ col2 = [
     [sg.Text(tr.gui_rnd[lang]+":", size=(12, 1), key="rnd"), sg.InputText("3", size=(4, 1), enable_events=True, key="rnd_num")]
 ]
 col3 = [
-    [sg.Text(tr.columns[lang][2], size=(16, 1), font=("arial", 12), key="col2")],
+    [sg.Text(tr.gui_results[lang], size=(16, 1), font=("arial", 12), key="title2")],
     [sg.Graph(canvas_size=(180, 190), graph_bottom_left=(0, 0), graph_top_right=(100, 100), background_color=None, key="graph")],
     [sg.Text(tr.gui_rgb[lang]+":", size=(8, 1), key="colorRGB")],
     [sg.In(size=(25, 1), key="rgb")],
@@ -86,8 +96,9 @@ while True:
                 lang = lng
                 break
         window["menu"].update(tr.gui_menu[lang])
-        for i in range(3):
-            window["col"+str(i)].update(tr.columns[lang][i])
+        window["title0"].update(tr.gui_spectra[lang])
+        window["title1"].update(tr.gui_settings[lang])
+        window["title2"].update(tr.gui_results[lang])
         window["list"].update(values=tuple(obj_list().keys()))
         window["add"].update(tr.gui_add[lang])
         window["plot"].update(tr.gui_plot[lang])
@@ -170,7 +181,11 @@ while True:
             break
 
         # Output
-        graph.TKCanvas.itemconfig(preview, fill=rgb_show)
+        try:
+            graph.TKCanvas.itemconfig(preview, fill=rgb_show)
+        except Exception as e:
+            graph.TKCanvas.itemconfig(preview, fill="#000000")
+            print(e)
         window["rgb"].update(rgb)
         window["hex"].update(rgb_show)
     

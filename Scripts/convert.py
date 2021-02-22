@@ -141,9 +141,8 @@ def to_rgb(spectrum, mode="chromaticity", inp_bit=None, exp_bit=None, rnd=0, alb
     try:
         if mode == "normalization":
             rgb /= 2 * rgb[1]
-        elif mode == "albedo":
-            if albedo:
-                rgb = albedo * rgb / rgb[1]
+        elif mode == "albedo" and albedo:
+            pass
         else: # "chromaticity" and when albedo == False
             rgb /= np.max(rgb)
     except ZeroDivisionError:
