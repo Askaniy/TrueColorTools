@@ -94,6 +94,8 @@ def subtract_sun(spectrum, sun):
 
 def transform(spectrum):
     if "filters" in spectrum:
+        if "i/r" in spectrum:
+            spectrum.update({"br": spectrum["i/r"]}) # important for subtract_sun
         if "bands" in spectrum:
             spectrum = from_filters(spectrum) # replacement of filters for their wavelengths
         elif "indices" in spectrum:

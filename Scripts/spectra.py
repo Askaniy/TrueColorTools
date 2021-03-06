@@ -31,7 +31,13 @@ sources = [
     "[15]: Upsilon Andromedae b in polarized light: New constraints on the planet size, density and albedo"
     "\nDOI: ...; https://arxiv.org/abs/1109.3116",
     "[16]: Photometric study of the major satellites of Uranus"
-    "\nDOI: 10.1134/S0038094607030021; https://link.springer.com/article/10.1134%2FS0038094607030021"
+    "\nDOI: 10.1134/S0038094607030021; https://link.springer.com/article/10.1134%2FS0038094607030021",
+	"[17]: Colors of (486958) 2014 MU69 as Observed by New Horizons' Multi-Spectral Visible Imaging Camera (MVIC)"
+	"\nDOI: ...; https://ui.adsabs.harvard.edu/abs/2019LPI....50.1982H/abstract",
+	"[18]: Interstellar Interloper 1I/2017 U1: Observations from the NOT and WIYN Telescopes"
+	"\nDOI: 10.3847/2041-8213/aa9b2f; https://arxiv.org/abs/1711.05687",
+	"[19]: Col-OSSOS: Colors of the Interstellar Planetesimal 1I/`Oumuamua"
+	"\nDOI: 10.3847/2041-8213/aaa07c; https://arxiv.org/abs/1711.06214",
 ]
 
 
@@ -1458,6 +1464,18 @@ objects = {
 	"(474640) 2004 VN112|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
 		"filters": "Landolt", "indices": {"B-V": 0.900, "V-R": 0.520, "R-I": 0.450}, "sun": True
 	},
+	#"(486958) Arrokoth|17": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+	#	"filters": "Hubble", "indices": {"F606W-F814W": 1.03}, "sun": True
+	#},
+	"(486958) Ultima|17": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+		"filters": "New Horizons", "bands": ["blue", "red", "nir"], "i/r": [0.053, 0.079, 0.117], "sun": True, "albedo": True
+	},
+	"(486958) Thule|17": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+		"filters": "New Horizons", "bands": ["blue", "red", "nir"], "i/r": [0.058, 0.084, 0.122], "sun": True, "albedo": True
+	},
+	'(486958) "neck"|17': {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+		"filters": "New Horizons", "bands": ["blue", "red", "nir"], "i/r": [0.066, 0.090, 0.125], "sun": True, "albedo": True
+	},
 	"(506479) 2003 HB57|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
 		"filters": "Landolt", "indices": {"B-V": 0.830, "V-R": 0.480, "R-I": 0.540}, "sun": True
 	},
@@ -1528,6 +1546,8 @@ objects = {
 		"filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.400}, "sun": True
 	},
     #"1998 KY26|9": {"filters": "Landolt", "indices": {"B-R": 0.083, "V-R": 0.058, "R-I": 0.088}, "sun": False},
+	"ʻOumuamua|18": {"filters": "Landolt", "indices": {"B-V": 0.70, "V-R": 0.45}, "sun": True, "albedo": 0.1},
+	"ʻOumuamua|19": {"filters": "Sloan Vacuum", "indices": {"g-r": 0.47, "r-i": 0.36}, "sun": True, "albedo": 0.07},
     "Class A|7": {"nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.708, 0.868, 1.109, 1.214, 1.298, 1.311, 1.250, 1.187, 1.143],
         "albedo": 0.274}, # https://arxiv.org/abs/1307.2424
     "Class B|7": {"nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [1.008, 1.004, 0.989, 0.985, 0.978, 0.975, 0.969, 0.961, 0.938],
@@ -1588,9 +1608,9 @@ objects = {
     #"Scattered|8": {"filters": "Landolt", "indices": {"B-V": 0.875, "V-R": 0.553, "V-I": 1.070}, "sun": True},
     "Scattered|9": {"filters": "Landolt", "indices": {"U-B": 0.33, "B-V": 0.85, "V-R": 0.52, "R-I": 0.51}, "sun": True},
     "Detached|9": {"filters": "Landolt", "indices": {"U-B": 0.18, "B-V": 0.88, "V-R": 0.54, "R-I": 0.51}, "sun": True},
-    "HD 189733 b|10, 15": {"filters": "Landolt", "bands": ["U", "B", "V", "I"], "br": [0.62, 0.61, 0.28, 0], "albedo": True},
+    "HD 189733 b|10, 15": {"filters": "Landolt", "bands": ["U", "B", "V", "I"], "i/r": [0.62, 0.61, 0.28, 0], "albedo": True},
 	"HD 189733 b|13, 14": {"nm": [290, 368, 370, 416, 459, 510, 547, 875], "br": [0.45, 0.39, 0.374, 0.32, 0.17, 0.043, 0.02, 0.025], "albedo": True},
-	"Ups And b|15": {"filters": "Landolt", "bands": ["U", "B", "V"], "br": [0.53, 0.67, 0.29], "albedo": True},
+	"Ups And b|15": {"filters": "Landolt", "bands": ["U", "B", "V"], "i/r": [0.53, 0.67, 0.29], "albedo": True},
 	#"WASP-18 b": {"nm": [440, 788, 900], "br": [0.075, 0.048, 0.05], "albedo": True},
 	#"WASP-12 b": {"nm": [271, 430, 900], "br": [0.039, 0.032, 0.17], "albedo": True},
 	#"WASP-43 b": {"nm": [398, 538, 788, 1400, 4050], "br": [0.28, 0.05, 0.12, 0.24, 0.09], "albedo": True}

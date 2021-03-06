@@ -5,7 +5,7 @@ A set of Python scripts for calculating human-visible colors of celestial bodies
 - [`true-color-calc.py`](Scripts/true-color-calc.py) calculates colors of one or several objects and build their spectra;
 - [`true-color-calc_GUI.py`](Scripts/true-color-calc_GUI.py) calculates colors much more conveniently with a graphical interface and visualization;
 - [`true-color-table.py`](Scripts/true-color-table.py) generates a customizable table of the celestial bodies' colors;
-- [`true-color-img.py`](Scripts/true-color-table.py) processes images by calculating the spectrum of each pixel (work in progress).
+- [`true-color-img.py`](Scripts/true-color-img.py) and [`true-color-img_GUI.py`](Scripts/true-color-img_GUI.py) process images by calculating a spectrum of each pixel *(work in progress)*.
 
 ### Auxiliary:
 - [`user.py`](Scripts/user.py) returns the specified language and path to the tools, or determines them automatically;
@@ -41,7 +41,7 @@ You can add spectra in the database. It's the `objects` dictionary in [`spectra.
 - `mag`: same-size list of magnitudes
 - `filters`: filter system, one from convert.py → filters
 - `indices`: dictionary of color indices, use only with `filters`; min wavelength color index → max wavelength color index
-- `bands`: list of filters' names, use only with `filters` 
+- `bands`: list of filters' names, use only with `filters` and `i/f` instead of `br`
 
 ### Optional parameters
 - `albedo`: bool (True if reflectivity was set by albedo values) or float (in V band or on 550 nm)

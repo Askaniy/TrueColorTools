@@ -176,9 +176,10 @@ while True:
             html=True
         )
         if not np.array_equal(np.absolute(rgb), rgb):
+            rgb_show = "#000000"
             print("\n" + tr.error2[lang][0])
             print(tr.error2[lang][1].format(values["list"][0], *rgb) + "\n")
-            break
+            #break
 
         # Output
         try:
