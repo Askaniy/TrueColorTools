@@ -89,7 +89,7 @@ def subtract_sun(spectrum, sun):
         if not np.isnan(corrected):
             br.append(corrected)
             nm.append(sun_nm)
-    spectrum.update({"nm": nm, "br": br})
+    spectrum.update({"nm": nm, "br": br, "sun": False})
     return spectrum
 
 def transform(spectrum):

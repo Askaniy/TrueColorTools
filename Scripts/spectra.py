@@ -38,6 +38,8 @@ sources = [
 	"\nDOI: 10.3847/2041-8213/aa9b2f; https://arxiv.org/abs/1711.05687",
 	"[19]: Col-OSSOS: Colors of the Interstellar Planetesimal 1I/`Oumuamua"
 	"\nDOI: 10.3847/2041-8213/aaa07c; https://arxiv.org/abs/1711.06214",
+	"[20]: A Visual Spectrum of Triton from the Hubble Space Telescope"
+	"\nDOI: 10.1006/icar.1999.6224; https://www.sciencedirect.com/science/article/abs/pii/S0019103599962243"
 ]
 
 
@@ -224,6 +226,11 @@ objects = {
         0.03146, 0.02746, 0.03408, 0.03774, 0.0298, 0.01621, 0.01774, 0.01806, 0.02114, 0.02931, 0.03572, 0.03514, 0.04545, 0.06665, 0.10763, 0.16505, 
         0.16553, 0.08372, 0.05606, 0.05255, 0.03725, 0.02468, 0.02116, 0.02346, 0.02395, 0.01784, 0.01751, 0.01883],
         "albedo": True, "obl": 0.0171
+    },
+    "Triton|20": {
+        "nm": list(range(300, 1000, 100)),
+        "br": [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
+        "albedo": True # Geom. !
     },
     "C/1995O1-HB|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
 		"filters": "Landolt", "indices": {"B-V": 0.810, "V-R": 0.390}, "sun": True
