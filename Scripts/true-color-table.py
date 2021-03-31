@@ -8,6 +8,7 @@ import user, spectra, convert
 config = {
     "path": user.folder() + "/Tables/",
     "name": "color_table-",
+    "tags": ["featured"],
     "lang": user.lang(), # ReadMe -> FAQ -> How to choose a language?
     "srgb": False,
     "gamma": False,
@@ -17,10 +18,22 @@ config = {
 }
 
 
+# Preprocessing
+
+data = {}
+l = 0 # object precounter
+for name, spectrum in spectra.objects.items():
+    if "tags" in spectrum:
+        for tag in config["tags"]:
+            if tag in spectrum["tags"]:
+                data.update({name: spectrum})
+                l += 1
+                break
+
+
 # Layout
 
 r = 46 # radius in px
-l = len(spectra.objects)
 w = 100*(l + 1) if l < 15 else 1600
 s = len(spectra.sources)
 name_step = 75
@@ -62,7 +75,7 @@ for note, translation in tr.notes.items(): # x = 0.75, br = 224
 nm = convert.xyz_nm if config["srgb"] else convert.rgb_nm
 
 n = 0 # object counter
-for name, spectrum in spectra.objects.items():
+for name, spectrum in data.items():
     mode = "albedo" if config["albedo"] else "chromaticity"
 
     # Spectral data processing
@@ -159,9 +172,10 @@ save = ""
 for key, value in config.items():
     if type(value) == str:
         save += value
-    else:
-        if value:
-            save += f"-{key}"
+    elif type(value) == list:
+        save += "_".join(value) + "-"
+    elif value:
+        save += f"-{key}"
 
 img.save(save)
 img.show()
