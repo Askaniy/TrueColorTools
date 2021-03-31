@@ -1608,10 +1608,10 @@ objects = {
     #"1998 KY26|9": {"tags": ["solar_system", "minor_body", "asteroid"],
 	#	"filters": "Landolt", "indices": {"B-R": 0.083, "V-R": 0.058, "R-I": 0.088}, "sun": False
 	#},
-	"ʻOumuamua|18": {"tags": ["featured", "solar_system", "extrasolar", "asteroid"],
+	"1I/ʻOumuamua|18": {"tags": ["featured", "solar_system", "extrasolar", "asteroid"],
 		"filters": "Landolt", "indices": {"B-V": 0.70, "V-R": 0.45}, "sun": True, "albedo": 0.1
 		},
-	"ʻOumuamua|19": {"tags": ["solar_system", "extrasolar", "asteroid"],
+	"1I/ʻOumuamua|19": {"tags": ["solar_system", "extrasolar", "asteroid"],
 		"filters": "Sloan Vacuum", "indices": {"g-r": 0.47, "r-i": 0.36}, "sun": True, "albedo": 0.07
 		},
     "Class A|7": {"tags": ["featured", "solar_system", "class", "asteroid"],
@@ -1711,21 +1711,41 @@ objects = {
 		"nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.900, 0.959, 1.033, 1.061, 1.084, 1.097, 1.098, 1.098, 1.098]
 		},
     #"Comets|8": {"filters": "Landolt", "indices": {"B-V": 0.795, "V-R": 0.441, "V-I": 0.935}, "sun": True},
-    "Comets:SP|9": {"filters": "Landolt", "indices": {"B-V": 0.87, "V-R": 0.50, "R-I": 0.45}, "sun": True},
-    "Comets:LP|9": {"filters": "Landolt", "indices": {"B-V": 0.79, "V-R": 0.46, "R-I": 0.44}, "sun": True},
+    "Comets:SP|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+		"filters": "Landolt", "indices": {"B-V": 0.87, "V-R": 0.50, "R-I": 0.45}, "sun": True
+		},
+    "Comets:LP|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+		"filters": "Landolt", "indices": {"B-V": 0.79, "V-R": 0.46, "R-I": 0.44}, "sun": True
+		},
     #"J. trojans|8": {"filters": "Landolt", "indices": {"B-V": 0.777, "V-R": 0.445, "V-I": 0.861}, "sun": True},
-    "J. trojans|9": {"filters": "Landolt", "indices": {"U-B": 0.1, "B-V": 0.78, "V-R": 0.45, "R-I": 0.42}, "sun": True},
+    "J. trojans|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+		"filters": "Landolt", "indices": {"U-B": 0.1, "B-V": 0.78, "V-R": 0.45, "R-I": 0.42}, "sun": True
+		},
     #"Centaurs|8": {"filters": "Landolt", "indices": {"B-V": 0.886, "V-R": 0.573, "V-I": 1.104}, "sun": True},
-    "Centaurs|9": {"filters": "Landolt", "indices": {"B-V": 0.87, "V-R": 0.55, "R-I": 0.50}, "sun": True},
+    "Centaurs|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+		"filters": "Landolt", "indices": {"B-V": 0.87, "V-R": 0.55, "R-I": 0.50}, "sun": True
+		},
     #"Plutinos|8": {"filters": "Landolt", "indices": {"B-V": 0.895, "V-R": 0.568, "V-I": 1.095}, "sun": True},
-    "Plutinos|9": {"filters": "Landolt", "indices": {"B-V": 0.88, "V-R": 0.55, "R-I": 0.53}, "sun": True},
-    "Other res.|9": {"filters": "Landolt", "indices": {"U-B": 0.27, "B-V": 0.95, "V-R": 0.59, "R-I": 0.54}, "sun": True},
+    "Plutinos|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+		"filters": "Landolt", "indices": {"B-V": 0.88, "V-R": 0.55, "R-I": 0.53}, "sun": True
+		},
+    "Other res.|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+		"filters": "Landolt", "indices": {"U-B": 0.27, "B-V": 0.95, "V-R": 0.59, "R-I": 0.54}, "sun": True
+		},
     #"Classic|8": {"filters": "Landolt", "indices": {"B-V": 0.973, "V-R": 0.622, "V-I": 1.181}, "sun": True},
-    "Classic:H|9": {"filters": "Landolt", "indices": {"U-B": 0.27, "B-V": 0.88, "V-R": 0.54, "R-I": 0.53}, "sun": True},
-    "Classic:C|9": {"filters": "Landolt", "indices": {"U-B": 0.59, "B-V": 1.00, "V-R": 0.63, "R-I": 0.59}, "sun": True},
+    "Classic:H|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+		"filters": "Landolt", "indices": {"U-B": 0.27, "B-V": 0.88, "V-R": 0.54, "R-I": 0.53}, "sun": True
+		},
+    "Classic:C|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+		"filters": "Landolt", "indices": {"U-B": 0.59, "B-V": 1.00, "V-R": 0.63, "R-I": 0.59}, "sun": True
+		},
     #"Scattered|8": {"filters": "Landolt", "indices": {"B-V": 0.875, "V-R": 0.553, "V-I": 1.070}, "sun": True},
-    "Scattered|9": {"filters": "Landolt", "indices": {"U-B": 0.33, "B-V": 0.85, "V-R": 0.52, "R-I": 0.51}, "sun": True},
-    "Detached|9": {"filters": "Landolt", "indices": {"U-B": 0.18, "B-V": 0.88, "V-R": 0.54, "R-I": 0.51}, "sun": True},
+    "Scattered|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+		"filters": "Landolt", "indices": {"U-B": 0.33, "B-V": 0.85, "V-R": 0.52, "R-I": 0.51}, "sun": True
+		},
+    "Detached|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+		"filters": "Landolt", "indices": {"U-B": 0.18, "B-V": 0.88, "V-R": 0.54, "R-I": 0.51}, "sun": True
+		},
     "HD 189733 b|10, 15": {"tags": ["featured", "extrasolar", "planet"],
 		"filters": "Landolt", "bands": ["U", "B", "V", "I"], "i/r": [0.62, 0.61, 0.28, 0], "albedo": True
 		},

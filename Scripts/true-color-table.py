@@ -7,28 +7,33 @@ import user, spectra, convert
 
 config = {
     "path": user.folder() + "/Tables/",
-    "name": "color_table-",
+    "name": "color_table",
     "tags": ["featured"],
     "lang": user.lang(), # ReadMe -> FAQ -> How to choose a language?
     "srgb": False,
     "gamma": False,
     "albedo": False,
-    "author info": False,
+    "author_info": False,
     "extension": ".png"
 }
 
 
-# Preprocessing
+# Database preprocessing
 
-data = {}
-l = 0 # object precounter
-for name, spectrum in spectra.objects.items():
-    if "tags" in spectrum:
-        for tag in config["tags"]:
-            if tag in spectrum["tags"]:
-                data.update({name: spectrum})
-                l += 1
-                break
+if config["tags"] in ([], ["all"], ["all_objects"], [""], "", None):
+    data = spectra.objects
+    l = len(data)
+    config.update({"tags": "all_objects"})
+else:
+    data = {}
+    l = 0
+    for name, spectrum in spectra.objects.items():
+        if "tags" in spectrum:
+            for tag in config["tags"]:
+                if tag in spectrum["tags"]:
+                    data.update({name: spectrum})
+                    l += 1
+                    break
 
 
 # Layout
@@ -38,13 +43,15 @@ w = 100*(l + 1) if l < 15 else 1600
 s = len(spectra.sources)
 name_step = 75
 objt_size = 18
-srce_size = 15
-srce_step = 10 + 2 * srce_size
+srce_size = 11
+srce_step = 6 + 2 * srce_size
 note_size = 16
 note_step = 4 + note_size
 auth_size = 10
 h0 = name_step + 100 * int(np.ceil(l / 15) + 1)
 h1 = h0 + s * srce_step
+w0 = 100 - r
+w1 = int(w * 3/5)
 img = Image.new("RGB", (w, h1 + 50), (0, 0, 0))
 draw = ImageDraw.Draw(img)
 name_font = ImageFont.truetype("arial.ttf", 42)
@@ -56,18 +63,20 @@ srce_font = ImageFont.truetype("arial.ttf", srce_size)
 note_font = ImageFont.truetype("arial.ttf", note_size)
 auth_font = ImageFont.truetype("arial.ttf", auth_size)
 # text brightness formula: br = 255 * (x^(1/2.2))
-draw.text((100 - r, 50), tr.name_text[config["lang"]], fill=(255, 255, 255), font=name_font) # x = 1, br = 255
-draw.text((100 - r, h0 - 25), tr.source[config["lang"]]+":", fill=(230, 230, 230), font=help_font) # x = 0.8, br = 230
-draw.text((w * 2/3, h0 - 25), tr.note[config["lang"]]+":", fill=(230, 230, 230), font=help_font) # x = 0.8, br = 230
-if config["author info"]:
+draw.text((w0, 50), tr.name_text[config["lang"]], fill=(255, 255, 255), font=name_font) # x = 1, br = 255
+draw.text((w0, h0 - 25), tr.source[config["lang"]]+":", fill=(230, 230, 230), font=help_font) # x = 0.8, br = 230
+draw.text((w1, h0 - 25), tr.note[config["lang"]]+":", fill=(230, 230, 230), font=help_font) # x = 0.8, br = 230
+if config["author_info"]:
     auth_step = 302 if config["lang"] == "ru" else 284
-    draw.text((w - auth_step, h1 - auth_size), tr.info[config["lang"]], fill=(136, 136, 136), font=help_font) # x = 0.25, br = 136
+    draw.text((w - auth_step, h1 - auth_size), tr.auth_info[config["lang"]], fill=(136, 136, 136), font=help_font) # x = 0.25, br = 136
 for srce_num in range(s): # x = 0.5, br = 186
-    draw.multiline_text((100 - r, h1 - srce_step * (s-srce_num)), spectra.sources[srce_num], fill=(186, 186, 186), font=srce_font)
+    draw.multiline_text((w0, h1 - srce_step * (s-srce_num)), spectra.sources[srce_num], fill=(186, 186, 186), font=srce_font)
 note_num = 0
-for note, translation in tr.notes.items(): # x = 0.75, br = 224
-    draw.multiline_text((w * 2/3, h0 + note_step * note_num), f'{note} {translation[config["lang"]]}', fill=(224, 224, 224), font=note_font)
+for note, translation in tr.notes.items(): # x = 0.6, br = 202
+    draw.multiline_text((w1, h0 + note_step * note_num), f'{note} {translation[config["lang"]]}', fill=(202, 202, 202), font=note_font)
     note_num += 1
+for info_num, info in enumerate([", ".join(config["tags"]), config["srgb"], config["gamma"], config["albedo"]]): # x = 0.75, br = 224
+    draw.multiline_text((w1, h0 + note_step * (note_num + info_num + 1)), f'{tr.info[config["lang"]][info_num]}: {info}', fill=(224, 224, 224), font=note_font)
 
 
 # Table generator
@@ -122,11 +131,15 @@ for name, spectrum in data.items():
         draw.ellipse([center_x-r, center_y-r, center_x+r, center_y+r], fill=rgb)
     
     # Name processing
+    link_right = True
     if name[0] == "(":
-        link_right = True
-        index = name.split(")")
-        name = index[1].strip()
-        draw.text((center_x-40, center_y-22), f"({index[0][1:]})", fill=(0, 0, 0), font=link_font)
+        parts = name.split(")", 1)
+        name = parts[1].strip()
+        draw.text((center_x-40, center_y-22), f"({parts[0][1:]})", fill=(0, 0, 0), font=link_font)
+    elif "/" in name:
+        parts = name.split("/", 1)
+        name = parts[1].strip()
+        draw.text((center_x-40, center_y-22), f"{parts[0]}/", fill=(0, 0, 0), font=link_font)
     else:
         link_right = False
     if "|" in name:
@@ -173,9 +186,9 @@ for key, value in config.items():
     if type(value) == str:
         save += value
     elif type(value) == list:
-        save += "_".join(value) + "-"
+        save += f'-{"_".join(value)}-'
     elif value:
-        save += f"-{key}"
+        save += f'-{key}'
 
 img.save(save)
 img.show()

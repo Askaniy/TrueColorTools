@@ -22,6 +22,10 @@ def obj_list():
                 parts = name_1.split(")", 1)
                 index = parts[0] + ") "
                 name_1 = parts[1].strip()
+            elif "/" in name_1:
+                parts = name_1.split("/", 1)
+                index = parts[0] + "/"
+                name_1 = parts[1].strip()
             for obj_name, tranlation in tr.names.items():
                 if name_1.startswith(obj_name):
                     name_1 = name_1.replace(obj_name, tranlation[lang])
@@ -120,7 +124,7 @@ while True:
         sg.popup("\n".join(notes), title=event)
     
     elif event == tr.gui_info[lang]:
-        sg.popup(tr.info[lang], title=event)
+        sg.popup(tr.auth_info[lang], title=event)
     
     elif event in events and values["list"] != []:
         nm = convert.xyz_nm if values["srgb"] else convert.rgb_nm

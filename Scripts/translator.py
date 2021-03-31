@@ -26,8 +26,14 @@ names = {
     "Oberon": {"ru": "Оберон", "de": ""},
     "Neptune": {"ru": "Нептун", "de": ""},
     "Triton": {"ru": "Тритон", "de": ""},
-    "Itokawa": {"ru": "Итокава", "de": ""},
+    "Halley": {"ru": "Галлея", "de": ""},
     "Eros": {"ru": "Эрос", "de": ""},
+    "Chiron": {"ru": "Хирон", "de": ""},
+    "Pholus": {"ru": "Фол", "de": ""},
+    "Chariklo": {"ru": "Харикло", "de": ""},
+    "Varuna": {"ru": "Варуна", "de": ""},
+    "Itokawa": {"ru": "Итокава", "de": ""},
+    "Quaoar": {"ru": "Квавар", "de": ""},
     "Sedna": {"ru": "Седна", "de": ""},
     "Orcus": {"ru": "Орк", "de": ""},
     "Vanth": {"ru": "Вант", "de": ""},
@@ -61,6 +67,11 @@ notes = {
     "H:": {"en": "hot, inner objects", "ru": "тёплые, внутренние объекты", "de": ""},
     "C:": {"en": "cold, outer objects", "ru": "холодные, внешние объекты", "de": ""}
 }
+info = {
+    "en": ["Categories shown", "sRGB color space", "Gamma-correction", "Brightness by albedo"],
+    "ru": ["Представленные категории", "Пространство sRGB", "Гамма-коррекция", "Яркость по альбедо"],
+    "de": [""]
+}
 
 source = {
     "en": "Sources",
@@ -72,7 +83,7 @@ note = {
     "ru": "Примечания",
     "de": ""
 }
-info = {
+auth_info = {
     "en": "Anpilogov Askaniy, 2020-2021",
     "ru": "Анпилогов Асканий, 2020-2021",
     "de": ""
