@@ -23,7 +23,7 @@ config = {
 if config["tags"] in ([], ["all"], ["all_objects"], [""], "", None):
     data = spectra.objects
     l = len(data)
-    config.update({"tags": "all_objects"})
+    config.update({"tags": ["all_objects"]})
 else:
     data = {}
     l = 0
@@ -122,6 +122,7 @@ for name, spectrum in data.items():
         break
 
     # Object drawing
+
     center_x = 100 * (1 + n%15)
     center_y = name_step + 100 * int(1 + n/15)
     if "obl" in spectrum:
@@ -130,18 +131,20 @@ for name, spectrum in data.items():
     else:
         draw.ellipse([center_x-r, center_y-r, center_x+r, center_y+r], fill=rgb)
     
-    # Name processing
+    text_color = (0, 0, 0) if np.mean(rgb) >= 127 else (255, 255, 255)
+    
     link_right = True
-    if name[0] == "(":
+    if name[0] == "(": # Name processing
         parts = name.split(")", 1)
         name = parts[1].strip()
-        draw.text((center_x-40, center_y-22), f"({parts[0][1:]})", fill=(0, 0, 0), font=link_font)
+        draw.text((center_x-40, center_y-22), f"({parts[0][1:]})", fill=text_color, font=link_font)
     elif "/" in name:
         parts = name.split("/", 1)
         name = parts[1].strip()
-        draw.text((center_x-40, center_y-22), f"{parts[0]}/", fill=(0, 0, 0), font=link_font)
+        draw.text((center_x-40, center_y-22), f"{parts[0]}/", fill=text_color, font=link_font)
     else:
         link_right = False
+    
     if "|" in name:
         link = name.split("|")
         name = link[0].strip()
@@ -150,12 +153,14 @@ for name, spectrum in data.items():
             shift = 26 - 7*(ll-1)
         else:
             shift = -(6 + 3*(ll-1))
-        draw.text((center_x+shift, center_y-22), f"[{link[1]}]", fill=(0, 0, 0), font=link_font)
+        draw.text((center_x+shift, center_y-22), f"[{link[1]}]", fill=text_color, font=link_font)
+    
     if config["lang"] != "en":
         for obj_name, tranlation in tr.names.items():
             if name.startswith(obj_name):
                 name = name.replace(obj_name, tranlation[config["lang"]])
                 pass
+    
     width = 0
     for letter in name:
         if letter in ["I", "i", "j", "l", "f", "r", "t", "[", "]", "/", ":", "*" ".", " "]:
@@ -165,19 +170,20 @@ for name, spectrum in data.items():
         else:
             width += 1
     if width < 8:
-        draw.text((center_x-40, center_y-(objt_size/2)), name, fill=(0, 0, 0), font=wide_font)
+        draw.text((center_x-40, center_y-(objt_size/2)), name, fill=text_color, font=wide_font)
     elif width < 9:
-        draw.text((center_x-42, center_y-(objt_size/2)), name, fill=(0, 0, 0), font=wide_font)
+        draw.text((center_x-42, center_y-(objt_size/2)), name, fill=text_color, font=wide_font)
     elif width < 10:
-        draw.text((center_x-40, center_y-(objt_size/2)), name, fill=(0, 0, 0), font=narr_font)
+        draw.text((center_x-40, center_y-(objt_size/2)), name, fill=text_color, font=narr_font)
     elif width < 11:
-        draw.text((center_x-42, center_y-(objt_size/2)), name, fill=(0, 0, 0), font=narr_font)
+        draw.text((center_x-42, center_y-(objt_size/2)), name, fill=text_color, font=narr_font)
     elif width < 12:
-        draw.text((center_x-42, center_y-(objt_size/2)), name.replace(":", "\n    :"), fill=(0, 0, 0), font=narr_font)
+        draw.text((center_x-42, center_y-(objt_size/2)), name.replace(":", "\n    :"), fill=text_color, font=narr_font)
     elif width < 13:
-        draw.text((center_x-42, center_y-(objt_size/2)), name.replace(":", "\n    :"), fill=(0, 0, 0), font=narr_font)
+        draw.text((center_x-42, center_y-(objt_size/2)), name.replace(":", "\n    :"), fill=text_color, font=narr_font)
     else:
-        draw.text((center_x-42, center_y-(objt_size/2)), f"{name[:10]}\n    {name[10:]}", fill=(0, 0, 0), font=narr_font)
+        draw.text((center_x-42, center_y-(objt_size/2)), f"{name[:10]}\n    {name[10:]}", fill=text_color, font=narr_font)
+    
     n += 1
     print(rgb, name)
 
