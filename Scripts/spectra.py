@@ -47,7 +47,13 @@ sources = [
 	"[23]: Spectral evidence for a carbonaceous chondrite surface composition on Deimos"
 	"\nDOI: ...; https://www.nature.com/articles/283277a0",
 	"[24]: A Catalog of Spectra, Albedos, and Colors of Solar System Bodies for Exoplanet Comparison"
-	"\nDOI: 10.1089/ast.2017.1763; https://www.liebertpub.com/doi/10.1089/ast.2017.1763; https://zenodo.org/record/3930987"
+	"\nDOI: 10.1089/ast.2017.1763; https://www.liebertpub.com/doi/10.1089/ast.2017.1763; https://zenodo.org/record/3930987",
+	"[25]: Albedo and Reflection Spectra of Extrasolar Giant Planets"
+	"\nDOI: 10.1086/309160; https://iopscience.iop.org/article/10.1086/309160/meta",
+	"[26]: Photometric Modeling and VIS-IR Albedo Maps of Tethys From Cassini-VIMS"
+	"\nDOI: 10.1029/2018GL078602; https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2018GL078602",
+	"[27]: Photometric Modeling and VIS-IR Albedo Maps of Dione From Cassini-VIMS"
+	"\nDOI: 10.1002/2017GL076869; https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2017GL076869"
 ]
 
 
@@ -276,6 +282,16 @@ objects = {
 		0.89856, 0.8948, 0.88908, 0.88148, 0.87591, 0.87254, 0.87289, 0.87138, 0.86872, 0.86844, 0.86666, 0.86272, 0.85763, 0.85736, 0.85775, 0.8582,
 		0.85978, 0.8618, 0.86378, 0.85962, 0.85873, 0.86179, 0.8675, 0.86622, 0.86095, 0.85417, 0.84934, 0.84628, 0.84573, 0.84331, 0.84024, 0.83994,
 		0.84243, 0.84372, 0.84021, 0.84098, 0.84359, 0.84824, 0.84469, 0.84304, 0.8458, 0.84796, 0.85031, 0.85254],
+		"albedo": True
+    	},
+    "Tethys|26": {"tags": ["featured", "solar_system", "moon"],
+        "nm": [350, 440, 550, 700, 950],
+        "br": [0.75042, 0.77108, 0.79707, 0.76842, 0.74823],
+		"albedo": True
+    	},
+    "Dione|27": {"tags": ["featured", "solar_system", "moon"],
+        "nm": [350, 440, 550, 700, 950],
+        "br": [0.57582, 0.61407, 0.61977, 0.58411, 0.58268],
 		"albedo": True
     	},
     "Rhea|4": {"tags": ["featured", "solar_system", "moon"],
@@ -1839,6 +1855,31 @@ objects = {
 		},
     "Detached|9": {"tags": ["featured", "solar_system", "class", "orbit"],
 		"filters": "Landolt", "indices": {"U-B": 0.18, "B-V": 0.88, "V-R": 0.54, "R-I": 0.51}, "sun": True, "albedo": 0.108 # fyr02's sheet
+		},
+	"Class I|25": {"tags": ["extrasolar", "planet", "class"],
+		"nm": [300, 350, 400, 450, 500, 550, 600, 650, 700, 800, 900, 1000],
+		"br": [0.88, 0.85, 0.78, 0.69, 0.67, 0.69, 0.67, 0.64, 0.58, 0.6, 0.45, 0.5],
+		"albedo": True
+		},
+	"Class II|25": {"tags": ["extrasolar", "planet", "class"],
+		"nm": [300, 350, 400, 450, 500, 550, 600, 650, 700, 800, 900, 1000],
+		"br": [0.99, 0.99, 0.99, 0.99, 0.98, 0.97, 0.94, 0.95, 0.9, 0.85, 0.75, 0.75],
+		"albedo": True
+		},
+	"Class III|25": {"tags": ["extrasolar", "planet", "class"],
+		"nm": [300, 350, 400, 450, 500, 550, 600, 650, 700, 800, 900, 1000],
+		"br": [0.67, 0.52, 0.42, 0.3, 0.2, 0.13, 0.07, 0.06, 0.04, 0.02, 0, 0],
+		"albedo": True
+		},
+	"Class IV|25": {"tags": ["extrasolar", "planet", "class"],
+		"nm": [300, 350, 400, 450, 500, 550, 600, 650, 700, 800, 900, 1000],
+		"br": [0.2, 0.15, 0.1, 0.06, 0.03, 0.01, 0, 0.01, 0, 0, 0, 0],
+		"albedo": True
+		},
+	"Class V|25": {"tags": ["extrasolar", "planet", "class"],
+		"nm": [300, 350, 400, 450, 500, 550, 585, 620, 650, 700, 800, 900, 1000],
+		"br": [0.4, 0.57, 0.65, 0.66, 0.66, 0.55, 0, 0.5, 0.62, 0.65, 0.5, 0.65, 0.64],
+		"albedo": True
 		},
     "HD 189733 b|10, 15": {"tags": ["featured", "extrasolar", "planet"],
 		"filters": "Landolt", "bands": ["U", "B", "V", "I"], "i/r": [0.62, 0.61, 0.28, 0], "albedo": True
