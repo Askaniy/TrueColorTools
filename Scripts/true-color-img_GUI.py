@@ -1,9 +1,18 @@
 import user, spectra, convert
-import translator as tr
+import strings as tr
 import PySimpleGUI as sg
 
 lang = user.lang("en") # ReadMe -> FAQ -> How to choose a language?
 
+vis = 2
+def frame(num):
+    n = str(num)
+    l = [
+        [sg.FileBrowse(disabled=False, key="browse"+n), sg.Input(size=(12, 1), disabled=False, disabled_readonly_background_color="#3A3A3A", key="path"+n)],
+        [sg.Text("Filter name", text_color="#A3A3A3", key="filterN"+n), sg.InputCombo([], size=(7, 1), disabled=True, enable_events=True, key="filter"+n)],
+        [sg.Text("Wavelength (nm)", key="wavelengthN"+n), sg.Input(size=(5, 1), disabled_readonly_background_color="#3A3A3A", disabled=False, enable_events=True, key="wavelength"+n)]
+    ]
+    return sg.Frame(title=f"Band {num+1}", layout=l, visible=num < vis, key="band"+n)
 
 def obj_list():
     global lang
@@ -49,51 +58,29 @@ col1 = [
     [sg.InputCombo(list(obj_list().keys()), size=(24, 1), enable_events=True, disabled=True, key="ref")],
 ]
 col2 = [
+    [sg.Text("Image bands", size=(10, 1), font=("arial", 12), key="title2"), sg.Button(button_text="+", size=(2, 1)), sg.Button(button_text="-", size=(2, 1), disabled=True)],
+    [frame(0)],
+    [frame(1)],
+    [frame(2)],
+    [frame(3)],
+    [frame(4)]
+]
+col3 = [
     [sg.Text(tr.gui_results[lang], size=(12, 1), font=("arial", 12), key="title1")],
     [sg.Image(background_color="black", size=(256, 128), key="preview")],
-    [sg.Button(tr.gui_preview[lang], key="show"), sg.Button(tr.gui_process[lang], disabled=True, key="process")],
+    [sg.Button(tr.gui_preview[lang], disabled=True, key="show"), sg.Button(tr.gui_process[lang], disabled=True, key="process")],
     [sg.Text("Saving folder"), sg.Input(size=(15, 1), enable_events=True, key="folder"), sg.FileBrowse()],
     [sg.Text("Progress"), sg.ProgressBar(100, orientation="h", size=(16, 25), key="progbar")]
 ]
 layout = [
-    [sg.Column(col1), sg.VSeperator(), sg.Column(col2)],
-    [sg.Text("")],
-    [sg.Text("Image bands", size=(10, 1), font=("arial", 12), key="title2"), sg.Button(button_text="Add", key="add")],
-    [
-        sg.Column([
-            [sg.FileBrowse(disabled=False, key="browse0"), sg.Input(size=(12, 1), disabled=False, disabled_readonly_background_color="#3A3A3A", key="path0")],
-            [sg.Text("Filter name"), sg.InputCombo([], size=(7, 1), enable_events=True, disabled=True, key="filter0")],
-            [sg.Text("Wavelength (nm)"), sg.Input(size=(5, 1), disabled_readonly_background_color="#3A3A3A", disabled=False, key="wavelength0")]
-        ], visible=True, key="band0"),
-        sg.Column([
-            [sg.FileBrowse(disabled=False, key="browse1"), sg.Input(size=(12, 1), disabled=False, disabled_readonly_background_color="#3A3A3A", key="path1")],
-            [sg.Text("Filter name"), sg.InputCombo([], size=(7, 1), enable_events=True, disabled=True, key="filter1")],
-            [sg.Text("Wavelength (nm)"), sg.Input(size=(5, 1), disabled_readonly_background_color="#3A3A3A", disabled=False, key="wavelength1")]
-        ], visible=True, key="band1"),
-        sg.Column([
-            [sg.FileBrowse(disabled=False, key="browse2"), sg.Input(size=(12, 1), disabled=False, disabled_readonly_background_color="#3A3A3A", key="path2")],
-            [sg.Text("Filter name"), sg.InputCombo([], size=(7, 1), enable_events=True, disabled=True, key="filter2")],
-            [sg.Text("Wavelength (nm)"), sg.Input(size=(5, 1), disabled_readonly_background_color="#3A3A3A", disabled=False, key="wavelength2")]
-        ], visible=False, key="band2"),
-        sg.Column([
-            [sg.FileBrowse(disabled=False, key="browse3"), sg.Input(size=(12, 1), disabled=False, disabled_readonly_background_color="#3A3A3A", key="path3")],
-            [sg.Text("Filter name"), sg.InputCombo([], size=(7, 1), enable_events=True, disabled=True, key="filter3")],
-            [sg.Text("Wavelength (nm)"), sg.Input(size=(5, 1), disabled_readonly_background_color="#3A3A3A", disabled=False, key="wavelength3")]
-        ], visible=False, key="band3"),
-        sg.Column([
-            [sg.FileBrowse(disabled=False, key="browse4"), sg.Input(size=(12, 1), disabled=False, disabled_readonly_background_color="#3A3A3A", key="path4")],
-            [sg.Text("Filter name"), sg.InputCombo([], size=(7, 1), enable_events=True, disabled=True, key="filter4")],
-            [sg.Text("Wavelength (nm)"), sg.Input(size=(5, 1), disabled_readonly_background_color="#3A3A3A", disabled=False, key="wavelength4")]
-        ], visible=False, key="band4")
-    ]
+    [sg.Column(col1), sg.VSeperator(), sg.Column(col2), sg.VSeperator(), sg.Column(col3)],
 ]
 window = sg.Window("True color image processing tool", layout)
 
-num = len(layout[3])
-vis = 2
+num = len(col2) - 1
 while True:
     event, values = window.Read()
-    print(values)
+    #print(values)
 
     if event == sg.WIN_CLOSED:
         break
@@ -104,6 +91,12 @@ while True:
         for i in range(num):
             window["browse"+str(i)].update(disabled=values["single"])
             window["path"+str(i)].update(disabled=values["single"])
+        if values["single"]:
+            vis = 3
+            for i in range(num):
+                window["band"+str(i)].update(visible=False)
+            for i in range(3):
+                window["band"+str(i)].update(visible=True)
 
     if event == "preset":
         window["filter"].update(disabled=not values["preset"])
@@ -125,10 +118,41 @@ while True:
     if event == "folder":
         window["process"].update(disabled=False)
     
-    if event == "add":
+    if event == "+":
         window["band"+str(vis)].update(visible=True)
         vis += 1
-        if vis == num:
-            window["add"].update(disabled=True)
+    
+    if event == "-":
+        window["band"+str(vis-1)].update(visible=False)
+        vis -= 1
+    
+    window["+"].update(disabled=values["single"] or not 2 <= vis < num)
+    window["-"].update(disabled=values["single"] or not 2 < vis <= num)
+    for i in range(num):
+        window["filterN"+str(i)].update(text_color=("#A3A3A3", "#FFFFFF")[values["preset"]])
+        window["wavelengthN"+str(i)].update(text_color=("#A3A3A3", "#FFFFFF")[not values["preset"]])
+    
+    input_data = {"gamma": values["gamma"], "srgb": values["srgb"], "nm": []}
+    window["show"].update(disabled=False)
+    window["process"].update(disabled=False)
+    if values["preset"]:
+        for i in range(vis):
+            if bool(values["filter"+str(i)]):
+                input_data["nm"].append(convert.filters[values["filter"]][values["filter"+str(i)]]["nm"])
+            else:
+                window["show"].update(disabled=True)
+                window["process"].update(disabled=True)
+                break
+    else:
+        for i in range(vis):
+            if values["wavelength"+str(i)].replace(".", "").isnumeric():
+                input_data["nm"].append(float(values["wavelength"+str(i)]))
+            else:
+                window["show"].update(disabled=True)
+                window["process"].update(disabled=True)
+                break
+    
+    if event == "process":
+        print(input_data)
 
 window.Close()

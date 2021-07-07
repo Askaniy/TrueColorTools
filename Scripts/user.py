@@ -3,10 +3,10 @@ import ctypes
 import inspect
 import os
 import sys
-import config, translator
+import config, strings
 
 def lang_check(name):
-    for lang, names in translator.langs.items():
+    for lang, names in strings.langs.items():
         if name.lower() == lang or name.title() in names:
             return lang
     return "en"

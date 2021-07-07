@@ -1,7 +1,7 @@
 import numpy as np
 import plotly.graph_objects as go
 from scipy.interpolate import Akima1DInterpolator
-import translator as tr
+import strings as tr
 import user, spectra, convert
 
 
