@@ -158,8 +158,8 @@ gui_preview = {
     "de": ""
 }
 gui_process = {
-    "en": "Process and save",
-    "ru": "Обработать и сохранить",
+    "en": "Start processing",
+    "ru": "Обработать",
     "de": ""
 }
 gui_col = {
