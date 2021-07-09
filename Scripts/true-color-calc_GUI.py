@@ -78,7 +78,7 @@ layout = [
     [sg.Menu(tr.gui_menu[lang], key="menu")],
     [sg.Column(col1), sg.VSeperator(), sg.Column(col2), sg.VSeperator(), sg.Column(col3)]
 ]
-window = sg.Window(tr.gui_name[lang], layout)
+window = sg.Window(tr.gui_name1[lang], layout)
 window.Finalize()
 graph = window["graph"]
 preview = graph.DrawCircle((52, 50), 46, fill_color="black", line_color="white")

@@ -4,9 +4,8 @@ import PySimpleGUI as sg
 from PIL import Image, ImageDraw
 import numpy as np
 import io
-import sys
 
-lang = user.lang("en") # ReadMe -> FAQ -> How to choose a language?
+lang = user.lang() # ReadMe -> FAQ -> How to choose a language?
 
 vis = 3
 preview = (256, 128)
@@ -29,11 +28,11 @@ def convert_to_bytes(img):
 def frame(num):
     n = str(num)
     l = [
-        [sg.FileBrowse(disabled=False, key="browse"+n), sg.Input(size=(15, 1), disabled=False, disabled_readonly_background_color="#3A3A3A", key="path"+n)],
-        [sg.Text("Filter name", text_color="#A3A3A3", key="filterN"+n), sg.InputCombo([], size=(10, 1), disabled=True, enable_events=True, key="filter"+n)],
-        [sg.Text("Wavelength (nm)", key="wavelengthN"+n), sg.Input(size=(8, 1), disabled_readonly_background_color="#3A3A3A", disabled=False, enable_events=True, key="wavelength"+n)]
+        [sg.Input(size=(15, 1), disabled=False, disabled_readonly_background_color="#3A3A3A", key="path"+n), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(6, 1), disabled=False, key="browse"+n)],
+        [sg.Text(tr.gui_filter[lang], size=(8, 1), text_color="#A3A3A3", key="filterN"+n), sg.InputCombo([], size=(11, 1), disabled=True, enable_events=True, key="filter"+n)],
+        [sg.Text(tr.gui_wavelength[lang], size=(14, 1), key="wavelengthN"+n), sg.Input(size=(6, 1), disabled_readonly_background_color="#3A3A3A", disabled=False, enable_events=True, key="wavelength"+n)]
     ]
-    return sg.Frame(title=f"Band {num+1}", layout=l, visible=num < vis, key="band"+n)
+    return sg.Frame(title=f"{tr.gui_band[lang]} {num+1}", layout=l, visible=num < vis, key="band"+n)
 
 def obj_list():
     global lang
@@ -59,11 +58,11 @@ def obj_list():
 
 presets = ["Hubble maps"]
 col1 = [
-    [sg.Text("Input data", size=(12, 1), font=("arial", 12), key="title2"), sg.Button(button_text="+", size=(2, 1)), sg.Button(button_text="-", size=(2, 1), disabled=False)],
-    [sg.Checkbox("Preset", size=(16, 1), enable_events=True, key="preset")],
+    [sg.Text(tr.gui_input[lang], size=(12, 1), font=("arial", 12), key="title1"), sg.Button(button_text="+", size=(2, 1)), sg.Button(button_text="-", size=(2, 1), disabled=False)],
+    [sg.Checkbox(tr.gui_preset[lang], size=(20, 1), enable_events=True, key="preset")],
     [sg.InputCombo(presets, size=(24, 1), enable_events=True, disabled=True, key="template")],
-    [sg.Checkbox("Single image mode", size=(16, 1), enable_events=True, key="single")],
-    [sg.Input(size=(16, 1), disabled=True, disabled_readonly_background_color="#3A3A3A", key="path"), sg.FileBrowse(disabled=True, key="browse")],
+    [sg.Checkbox(tr.gui_single[lang], size=(20, 1), enable_events=True, key="single")],
+    [sg.Input(size=(16, 1), disabled=True, disabled_readonly_background_color="#3A3A3A", key="path"), sg.FileBrowse(button_text=tr.gui_browse[lang], disabled=True, key="browse")],
     [frame(0)],
     [frame(1)],
     [frame(2)],
@@ -71,21 +70,23 @@ col1 = [
     [frame(4)] # just add more frames here
 ]
 col2 = [
-    [sg.Text("Processing and output", size=(20, 1), font=("arial", 12), key="title1")],
-    [sg.Checkbox(tr.gui_gamma[lang], size=(15, 1), key="gamma")], [sg.Checkbox("sRGB", size=(15, 1), key="srgb")],
-    [sg.Checkbox("Photometric system", size=(24, 1), enable_events=True, key="system")],
+    [sg.Text(tr.gui_output[lang], size=(20, 1), font=("arial", 12), key="title2")],
+    [sg.Checkbox(tr.gui_gamma[lang], size=(20, 1), key="gamma")],
+    [sg.Checkbox("sRGB", size=(20, 1), key="srgb")],
+    [sg.Checkbox(tr.gui_system[lang], size=(24, 1), enable_events=True, key="system")],
     [sg.InputCombo(list(convert.filters.keys()), size=(24, 1), enable_events=True, disabled=True, key="filter")],
-    [sg.Checkbox("Reference body calibration", size=(20, 1), enable_events=True, key="calib")],
+    [sg.Checkbox(tr.gui_calib[lang], size=(20, 1), enable_events=True, key="calib")],
     [sg.InputCombo(list(obj_list().keys()), size=(24, 1), enable_events=True, disabled=True, key="ref")],
     [sg.T("")],
-    [sg.Text("Saving folder"), sg.Input(size=(15, 1), enable_events=True, key="folder"), sg.FolderBrowse()],
+    [sg.Text(tr.gui_folder[lang])],
+    [sg.Input(size=(20, 1), enable_events=True, key="folder"), sg.FolderBrowse(button_text=tr.gui_browse[lang], key="browse_folder")],
     [sg.Button(tr.gui_preview[lang], size=(15, 1), disabled=True, key="show"), sg.Button(tr.gui_process[lang], size=(15, 1), disabled=True, key="process")],
     [sg.Image(background_color="black", size=preview, key="preview")]
 ]
 layout = [
     [sg.Column(col1), sg.VSeperator(), sg.Column(col2)],
 ]
-window = sg.Window("True color image processing tool", layout)
+window = sg.Window(tr.gui_name2[lang], layout)
 
 num = len(col1) - 5
 while True:
@@ -100,7 +101,6 @@ while True:
     
     if event == "template":
         if values["template"] == "Hubble maps":
-            #("single", True), ("system", True), ("filter", "Hubble"), ("filter0", "f395n"), ("filter1", "f502n"), ("filter2", "f631n")
             vis = 3
             window["single"].update(True)
             window["browse"].update(disabled=False)

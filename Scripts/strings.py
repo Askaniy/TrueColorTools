@@ -102,9 +102,14 @@ lang_list = {
     "ru": ["Английский", "Немецкий"],
     "de": [""]
 }
-gui_name = {
+gui_name1 = {
     "en": "True color calculator",
     "ru": "Калькулятор истинных цветов",
+    "de": ""
+}
+gui_name2 = {
+    "en": "True color image processing tool",
+    "ru": "Инструмент обработки изображений в истинных цветах",
     "de": ""
 }
 gui_info = {
@@ -137,6 +142,16 @@ gui_results = {
     "ru": "Результат",
     "de": ""
 }
+gui_input = {
+    "en": "Input data",
+    "ru": "Ввод",
+    "de": ""
+}
+gui_output = {
+    "en": "Processing and output",
+    "ru": "Обработка и вывод",
+    "de": ""
+}
 gui_add = {
     "en": "Add spectrum to plot",
     "ru": "Добавить спектр к графику",
@@ -150,16 +165,6 @@ gui_plot = {
 gui_export = {
     "en": "Export all colors to console",
     "ru": "Экспортировать все цвета",
-    "de": ""
-}
-gui_preview = {
-    "en": "Show preview",
-    "ru": "Предпросмотр",
-    "de": ""
-}
-gui_process = {
-    "en": "Start processing",
-    "ru": "Обработать",
     "de": ""
 }
 gui_col = {
@@ -205,6 +210,61 @@ gui_rgb = {
 gui_hex = {
     "en": "HEX color",
     "ru": "Цвет HEX",
+    "de": ""
+}
+gui_preset = {
+    "en": "Preset",
+    "ru": "Пресет",
+    "de": ""
+}
+gui_single = {
+    "en": "Single image mode",
+    "ru": "Одно изображение",
+    "de": ""
+}
+gui_browse = {
+    "en": "Browse",
+    "ru": "Обзор",
+    "de": ""
+}
+gui_band = {
+    "en": "Band",
+    "ru": "Канал",
+    "de": ""
+}
+gui_filter = {
+    "en": "Filter name",
+    "ru": "Фильтр",
+    "de": ""
+}
+gui_wavelength = {
+    "en": "Wavelength (nm)",
+    "ru": "Длина волны (нм)",
+    "de": ""
+}
+gui_system = {
+    "en": "Photometric system",
+    "ru": "Фотометрическая система",
+    "de": ""
+}
+gui_calib = {
+    "en": "Reference body calibration",
+    "ru": "Калибровка по объекту",
+    "de": ""
+}
+gui_folder = {
+    "en": "Saving folder",
+    "ru": "Папка для сохранения",
+    "de": ""
+}
+gui_preview = {
+    "en": "Show preview",
+    "ru": "Предпросмотр",
+    "de": ""
+}
+gui_process = {
+    "en": "Start processing",
+    "ru": "Обработать",
     "de": ""
 }
 
