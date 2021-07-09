@@ -1,4 +1,4 @@
-import user, spectra, convert
+import user, spectra, filters, convert
 import strings as tr
 import PySimpleGUI as sg
 from PIL import Image, ImageDraw
@@ -62,7 +62,7 @@ col1 = [
     [sg.Checkbox(tr.gui_preset[lang], size=(20, 1), enable_events=True, key="preset")],
     [sg.InputCombo(presets, size=(24, 1), enable_events=True, disabled=True, key="template")],
     [sg.Checkbox(tr.gui_single[lang], size=(20, 1), enable_events=True, key="single")],
-    [sg.Input(size=(16, 1), disabled=True, disabled_readonly_background_color="#3A3A3A", key="path"), sg.FileBrowse(button_text=tr.gui_browse[lang], disabled=True, key="browse")],
+    [sg.Input(size=(16, 1), disabled=True, disabled_readonly_background_color="#3A3A3A", key="path"), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(6, 1), disabled=True, key="browse")],
     [frame(0)],
     [frame(1)],
     [frame(2)],
@@ -73,13 +73,13 @@ col2 = [
     [sg.Text(tr.gui_output[lang], size=(20, 1), font=("arial", 12), key="title2")],
     [sg.Checkbox(tr.gui_gamma[lang], size=(20, 1), key="gamma")],
     [sg.Checkbox("sRGB", size=(20, 1), key="srgb")],
-    [sg.Checkbox(tr.gui_system[lang], size=(24, 1), enable_events=True, key="system")],
-    [sg.InputCombo(list(convert.filters.keys()), size=(24, 1), enable_events=True, disabled=True, key="filter")],
-    [sg.Checkbox(tr.gui_calib[lang], size=(20, 1), enable_events=True, key="calib")],
-    [sg.InputCombo(list(obj_list().keys()), size=(24, 1), enable_events=True, disabled=True, key="ref")],
+    [sg.Checkbox(tr.gui_system[lang], size=(26, 1), enable_events=True, key="system")],
+    [sg.InputCombo(filters.get_sets(), size=(26, 1), enable_events=True, disabled=True, key="filter")],
+    [sg.Checkbox(tr.gui_calib[lang], size=(26, 1), enable_events=True, key="calib")],
+    [sg.InputCombo(list(obj_list().keys()), size=(26, 1), enable_events=True, disabled=True, key="ref")],
     [sg.T("")],
     [sg.Text(tr.gui_folder[lang])],
-    [sg.Input(size=(20, 1), enable_events=True, key="folder"), sg.FolderBrowse(button_text=tr.gui_browse[lang], key="browse_folder")],
+    [sg.Input(size=(27, 1), enable_events=True, key="folder"), sg.FolderBrowse(button_text=tr.gui_browse[lang], size=(6, 1), key="browse_folder")],
     [sg.Button(tr.gui_preview[lang], size=(15, 1), disabled=True, key="show"), sg.Button(tr.gui_process[lang], size=(15, 1), disabled=True, key="process")],
     [sg.Image(background_color="black", size=preview, key="preview")]
 ]
@@ -131,11 +131,11 @@ while True:
 
     if event == "filter":
         for i in range(num):
-            window["filter"+str(i)].update(values=list(convert.filters[values["filter"]].keys()))
+            window["filter"+str(i)].update(values=filters.get_filters(values["filter"]))
 
     if event in ["filter"+str(i) for i in range(num)]:
         i = event[-1]
-        window["wavelength"+i].update(convert.filters[values["filter"]][values["filter"+i]]["nm"])
+        window["wavelength"+i].update(filters.get_param(values["filter"], values["filter"+i], "L_mean"))
 
     if event == "calib":
         window["ref"].update(disabled=not values["calib"])
@@ -164,7 +164,7 @@ while True:
     if values["system"]:
         for i in range(vis):
             if bool(values["filter"+str(i)]):
-                input_data["nm"].append(convert.filters[values["filter"]][values["filter"+str(i)]]["nm"])
+                input_data["nm"].append(filters.get_param(values["filter"], values["filter"+str(i)], "L_mean"))
             else:
                 window["show"].update(disabled=True)
                 window["process"].update(disabled=True)
