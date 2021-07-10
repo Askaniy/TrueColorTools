@@ -157,6 +157,11 @@ gui_output = {
     "ru": "Обработка и вывод",
     "de": ""
 }
+gui_tags = {
+    "en": "By tags",
+    "ru": "По тегам",
+    "de": ""
+}
 gui_add = {
     "en": "Add spectrum to plot",
     "ru": "Добавить спектр к графику",
@@ -224,7 +229,7 @@ gui_preset = {
 }
 gui_single = {
     "en": "Single image mode",
-    "ru": "Одно изображение",
+    "ru": "Режим одного изображения",
     "de": ""
 }
 gui_browse = {
@@ -260,6 +265,11 @@ gui_calib = {
 gui_folder = {
     "en": "Saving folder",
     "ru": "Папка для сохранения",
+    "de": ""
+}
+gui_signature = {
+    "en": "Signature",
+    "ru": "Подпись",
     "de": ""
 }
 gui_extension = {
