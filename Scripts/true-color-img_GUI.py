@@ -220,7 +220,7 @@ while True:
                 bit = 8
                 depth = 255
             
-            nm = convert.xyz_nm if values["srgb"] else convert.rgb_nm
+            nm = convert.xyz_nm if input_data["srgb"] else convert.rgb_nm
             img = Image.new("RGB", (w, h), (0, 0, 0))
             draw = ImageDraw.Draw(img)
             counter = 0
@@ -244,8 +244,5 @@ while True:
         
         except Exception as e:
             print(e)
-    
-    if event == "process":
-        print(input_data)
 
 window.Close()
