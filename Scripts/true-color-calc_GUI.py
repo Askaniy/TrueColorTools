@@ -45,7 +45,7 @@ sg.LOOK_AND_FEEL_TABLE["MaterialDark"] = {
 sg.ChangeLookAndFeel("MaterialDark")
 
 col1 = [
-    [sg.Text(tr.gui_spectra[lang], size=(16, 1), font=("arial", 12), key="title0")],
+    [sg.Text(tr.gui_database[lang], size=(16, 1), font=("arial", 12), key="title0")],
     [sg.Listbox(values=tuple(obj_list().keys()), size=(22, 12), enable_events=True, key="list")],
     [sg.Button(button_text=tr.gui_add[lang], key="add")],
     [sg.Button(button_text=tr.gui_plot[lang], key="plot")],
@@ -100,7 +100,7 @@ while True:
                 lang = lng
                 break
         window["menu"].update(tr.gui_menu[lang])
-        window["title0"].update(tr.gui_spectra[lang])
+        window["title0"].update(tr.gui_database[lang])
         window["title1"].update(tr.gui_settings[lang])
         window["title2"].update(tr.gui_results[lang])
         window["list"].update(values=tuple(obj_list().keys()))

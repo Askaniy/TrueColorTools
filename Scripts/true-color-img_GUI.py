@@ -91,7 +91,6 @@ window = sg.Window(tr.gui_name2[lang], layout)
 num = len(col1) - 5
 while True:
     event, values = window.Read()
-    #print(values)
 
     if event == sg.WIN_CLOSED:
         break

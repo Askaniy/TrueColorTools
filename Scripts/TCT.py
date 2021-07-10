@@ -62,7 +62,7 @@ sg.LOOK_AND_FEEL_TABLE["MaterialDark"] = {
 sg.ChangeLookAndFeel("MaterialDark")
 
 T1_col1 = [
-    [sg.Text(tr.gui_spectra[lang], size=(16, 1), font=("arial", 12), key="T1_title0")],
+    [sg.Text(tr.gui_database[lang], size=(16, 1), font=("arial", 12), key="T1_title0")],
     [sg.Listbox(values=tuple(obj_list().keys()), size=(22, 12), enable_events=True, key="T1_list")],
     [sg.Button(button_text=tr.gui_add[lang], key="T1_add")],
     [sg.Button(button_text=tr.gui_plot[lang], key="T1_plot")],
@@ -96,7 +96,7 @@ T2_vis = 3
 T2_preview = (256, 128)
 T2_presets = ["Hubble maps"]
 T2_col1 = [
-    [sg.Text(tr.gui_input[lang], size=(12, 1), font=("arial", 12), key="T2_title1"), sg.Button(button_text="+", size=(2, 1)), sg.Button(button_text="-", size=(2, 1), disabled=False)],
+    [sg.Text(tr.gui_input[lang], size=(12, 1), font=("arial", 12), key="T2_title1"), sg.Button(button_text="+", size=(2, 1), key="T2_+"), sg.Button(button_text="-", size=(2, 1), disabled=False, key="T2_-")],
     [sg.Checkbox(tr.gui_preset[lang], size=(20, 1), enable_events=True, key="T2_preset")],
     [sg.InputCombo(T2_presets, size=(24, 1), enable_events=True, disabled=True, key="T2_template")],
     [sg.Checkbox(tr.gui_single[lang], size=(20, 1), enable_events=True, key="T2_single")],
@@ -123,17 +123,36 @@ T2_col2 = [
 ]
 T2_num = len(T2_col1) - 5
 
+T3_col1 = [
+    [sg.Text(tr.gui_settings[lang], size=(20, 1), font=("arial", 12), key="T3_title1")],
+    [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), enable_events=True, default=True, key="T3_gamma")],
+    [sg.Checkbox("sRGB", enable_events=True, size=(16, 1), key="T3_srgb")],
+    [sg.Text(tr.gui_br[lang][0]+":", size=(18, 1), key="T3_br_mode")],
+    [sg.Radio(tr.gui_br[lang][1], "T3_rad", size=(15, 1), enable_events=True, default=True, key="T3_br_mode0")],
+    [sg.Radio(tr.gui_br[lang][2], "T3_rad", size=(15, 1), enable_events=True, key="T3_br_mode1")],
+    [sg.Radio(tr.gui_br[lang][3], "T3_rad", size=(15, 1), enable_events=True, key="T3_br_mode2")]
+]
+T3_col2 = [
+    [sg.Text(tr.gui_results[lang], size=(30, 1), font=("arial", 12), key="T3_title2")],
+    [sg.Text(tr.gui_extension[lang], size=(17, 1), key="ext"), sg.InputCombo([".png", ".jpeg"], default_value=".png", size=(22, 1), enable_events=True, key="T3_extension")],
+    [sg.Text(tr.gui_folder[lang], size=(17, 1), key="T3_folderN"), sg.Input(size=(16, 1), enable_events=True, key="T3_folder"), sg.FolderBrowse(button_text=tr.gui_browse[lang], size=(6, 1), key="T3_browse_folder")],
+    [sg.T("")],
+    [sg.Button(tr.gui_process[lang], size=(15, 1), disabled=True, key="T3_process")]
+]
+
 tab1 = [
     [sg.Column(T1_col1), sg.VSeperator(), sg.Column(T1_col2), sg.VSeperator(), sg.Column(T1_col3)]
 ]
 tab2 = [
     [sg.Column(T2_col1), sg.VSeperator(), sg.Column(T2_col2)]
 ]
-tab3 = []
+tab3 = [
+    [sg.Column(T3_col1), sg.VSeperator(), sg.Column(T3_col2)]
+]
 
 layout = [
     [sg.Menu(tr.gui_menu[lang], key="menu")],
-    [sg.TabGroup([[sg.Tab("Spectra", tab1), sg.Tab("Images", tab2), sg.Tab("Table", tab3)]])]
+    [sg.TabGroup([[sg.Tab(tr.gui_tabs[lang][0], tab1, key="tab0"), sg.Tab(tr.gui_tabs[lang][1], tab2, key="tab2"), sg.Tab(tr.gui_tabs[lang][2], tab3, key="tab3")]])]
 ]
 
 window = sg.Window("True Color Tools", layout)    
@@ -158,7 +177,10 @@ while True:
                 lang = lng
                 break
         window["menu"].update(tr.gui_menu[lang])
-        window["T1_title0"].update(tr.gui_spectra[lang])
+        #window["tab0"].update(title=tr.gui_tabs[lang][0])
+        #window["tab1"].update(title=tr.gui_tabs[lang][1])
+        #window["tab2"].update(title=tr.gui_tabs[lang][2])
+        window["T1_title0"].update(tr.gui_database[lang])
         window["T1_title1"].update(tr.gui_settings[lang])
         window["T1_title2"].update(tr.gui_results[lang])
         window["T1_list"].update(values=tuple(obj_list().keys()))
@@ -188,7 +210,12 @@ while True:
         window["T2_browse_folder"].update(tr.gui_browse[lang])
         window["T2_show"].update(tr.gui_preview[lang])
         window["T2_process"].update(tr.gui_process[lang])
-        #window[""].update(tr.[lang])
+        window["T3_title1"].update(tr.gui_settings[lang])
+        window["T3_title2"].update(tr.gui_results[lang])
+        window["T3_br_mode"].update(tr.gui_br[lang][0]+":")
+        window["ext"].update(tr.gui_extension[lang])
+        window["T3_folderN"].update(tr.gui_folder[lang])
+        window["T3_process"].update(tr.gui_process[lang])
     
     elif event == tr.source[lang]:
         sg.popup("\n\n".join(spectra.sources), title=event, line_width=120, location=(16, 25))
@@ -346,7 +373,7 @@ while True:
         
         elif event == "template":
             if values["T2_template"] == "Hubble maps":
-                vis = 3
+                T2_vis = 3
                 window["T2_single"].update(True)
                 window["T2_browse"].update(disabled=False)
                 window["T2_system"].update(True)
@@ -362,7 +389,7 @@ while True:
                 window["bT2_rowse"+str(i)].update(disabled=values["T2_single"])
                 window["T2_path"+str(i)].update(disabled=values["T2_single"])
             if values["T2_single"]:
-                vis = 3
+                T2_vis = 3
                 for i in range(T2_num):
                     window["T2_band"+str(i)].update(visible=False)
                 for i in range(3):
@@ -388,16 +415,16 @@ while True:
         elif event == "T2_folder":
             window["T2_process"].update(disabled=False)
         
-        elif event == "+":
-            window["T2_band"+str(vis)].update(visible=True)
-            vis += 1
+        elif event == "T2_+":
+            window["T2_band"+str(T2_vis)].update(visible=True)
+            T2_vis += 1
         
-        elif event == "-":
-            window["T2_band"+str(vis-1)].update(visible=False)
-            vis -= 1
+        elif event == "T2_-":
+            window["T2_band"+str(T2_vis-1)].update(visible=False)
+            T2_vis -= 1
         
-        window["+"].update(disabled=values["T2_single"] or not 2 <= T2_vis < T2_num)
-        window["-"].update(disabled=values["T2_single"] or not 2 < T2_vis <= T2_num)
+        window["T2_+"].update(disabled=values["T2_single"] or not 2 <= T2_vis < T2_num)
+        window["T2_-"].update(disabled=values["T2_single"] or not 2 < T2_vis <= T2_num)
         for i in range(T2_num):
             window["T2_filterN"+str(i)].update(text_color=("#A3A3A3", "#FFFFFF")[values["T2_system"]])
             window["T2_wavelengthN"+str(i)].update(text_color=("#A3A3A3", "#FFFFFF")[not values["T2_system"]])
@@ -443,7 +470,7 @@ while True:
                     for i in [b, g, r]:
                         load.append(np.array(i))
                 else:
-                    for i in range(vis):
+                    for i in range(T2_vis):
                         if values["T2_path"+str(i)] == "":
                             raise ValueError(f'Path {i+1} is empty')
                         bw_img = Image.open(values["T2_path"+str(i)])

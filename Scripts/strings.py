@@ -102,6 +102,11 @@ lang_list = {
     "ru": ["Английский", "Немецкий"],
     "de": [""]
 }
+gui_tabs = {
+    "en": ["Spectra", "Images", "Table"],
+    "ru": ["Спектры", "Изображения", "Таблица"],
+    "de": []
+}
 gui_name1 = {
     "en": "True color calculator",
     "ru": "Калькулятор истинных цветов",
@@ -127,9 +132,9 @@ gui_menu = {
     "ru": [["Файл", [source["ru"], note["ru"], gui_info["ru"], gui_exit["ru"]]], ["Язык", lang_list["ru"]]],
     "de": [["", ["", "", "", ""]], ["", lang_list["de"]]]
 }
-gui_spectra = {
-    "en": "Spectra",
-    "ru": "Спектры",
+gui_database = {
+    "en": "Database",
+    "ru": "База данных",
     "de": ""
 }
 gui_settings = {
@@ -255,6 +260,11 @@ gui_calib = {
 gui_folder = {
     "en": "Saving folder",
     "ru": "Папка для сохранения",
+    "de": ""
+}
+gui_extension = {
+    "en": "Extension",
+    "ru": "Расширение",
     "de": ""
 }
 gui_preview = {
