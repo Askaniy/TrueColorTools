@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 import io
 import numpy as np
 from scipy.interpolate import Akima1DInterpolator, PchipInterpolator, CubicSpline
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 import plotly.graph_objects as go
 import user, spectra, filters, convert
 import strings as tr
@@ -36,6 +36,8 @@ def obj_list():
         names.update({name_1: name_0})
     return names
 
+tag_list = []
+
 def frame(num):
     n = str(num)
     l = [
@@ -63,7 +65,7 @@ sg.ChangeLookAndFeel("MaterialDark")
 
 T1_col1 = [
     [sg.Text(tr.gui_database[lang], size=(16, 1), font=("arial", 12), key="T1_title0")],
-    [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T1_tagsN"), sg.InputCombo([], size=(12, 1), enable_events=True, disabled=True, key="T1_tags")],
+    [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T1_tagsN"), sg.InputCombo(tag_list, size=(12, 1), enable_events=True, disabled=True, key="T1_tags")],
     [sg.Listbox(values=tuple(obj_list().keys()), size=(22, 22), enable_events=True, key="T1_list")]
 ]
 T1_col2 = [
@@ -131,7 +133,7 @@ T2_num = len(T2_col1) - 5
 
 T3_col1 = [
     [sg.Text(tr.gui_settings[lang], size=(20, 1), font=("arial", 12), key="T3_title1")],
-    [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T3_tagsN"), sg.InputCombo([], size=(14, 1), enable_events=True, disabled=True, key="T3_tags")],
+    [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T3_tagsN"), sg.InputCombo(tag_list, size=(14, 1), enable_events=True, disabled=True, key="T3_tags")],
     [sg.HorizontalSeparator()],
     [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), enable_events=True, default=True, key="T3_gamma")],
     [sg.Checkbox("sRGB", enable_events=True, size=(16, 1), key="T3_srgb")],
@@ -145,7 +147,7 @@ T3_col1 = [
 ]
 T3_col2 = [
     [sg.Text(tr.gui_results[lang], size=(30, 1), font=("arial", 12), key="T3_title2")],
-    [sg.Text(tr.gui_extension[lang], size=(17, 1), key="ext"), sg.InputCombo([".png", ".jpeg"], default_value=".png", size=(22, 1), enable_events=True, key="T3_extension")],
+    [sg.Text(tr.gui_extension[lang], size=(17, 1), key="ext"), sg.InputCombo(["png", "jpeg"], default_value="png", size=(22, 1), enable_events=True, key="T3_extension")],
     [sg.Text(tr.gui_folder[lang], size=(17, 1), key="T3_folderN"), sg.Input(size=(16, 1), enable_events=True, key="T3_folder"), sg.FolderBrowse(button_text=tr.gui_browse[lang], size=(6, 1), key="T3_browse_folder")],
     [sg.T("")],
     [sg.Button(tr.gui_process[lang], size=(15, 1), disabled=True, key="T3_process")]
@@ -245,80 +247,80 @@ while True:
     
     elif event.startswith("T1"):
         if event in T1_events and values["T1_list"] != []:
-            nm = convert.xyz_nm if values["T1_srgb"] else convert.rgb_nm
+            T1_nm = convert.xyz_nm if values["T1_srgb"] else convert.rgb_nm
             for i in range(3):
                 if values["T1_br_mode"+str(i)]:
-                    mode = br_modes[i]
+                    T1_mode = br_modes[i]
 
             # Spectral data import and processing
-            spectrum = spectra.objects[obj_list()[values["T1_list"][0]]]
-            albedo = 0
-            if "albedo" not in spectrum:
-                if mode == "albedo":
-                    mode = "chromaticity"
-                spectrum.update({"albedo": False})
-            elif type(spectrum["albedo"]) != bool:
-                albedo = spectrum["albedo"]
-            spectrum = convert.transform(spectrum)
+            T1_spectrum = spectra.objects[obj_list()[values["T1_list"][0]]]
+            T1_albedo = 0
+            if "albedo" not in T1_spectrum:
+                if T1_mode == "albedo":
+                    T1_mode = "chromaticity"
+                T1_spectrum.update({"albedo": False})
+            elif type(T1_spectrum["albedo"]) != bool:
+                T1_albedo = T1_spectrum["albedo"]
+            T1_spectrum = convert.transform(T1_spectrum)
             
             # Spectrum interpolation
             try:
-                interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
+                interp = Akima1DInterpolator(T1_spectrum["nm"], T1_spectrum["br"])
             except ValueError:
                 print("\n" + tr.error1[lang][0])
-                print(tr.error1[lang][1].format(values["T1_list"][0], len(spectrum["nm"]), len(spectrum["br"])) + "\n")
+                print(tr.error1[lang][1].format(values["T1_list"][0], len(T1_spectrum["nm"]), len(T1_spectrum["br"])) + "\n")
                 break
-            if spectrum["nm"][0] > nm[0] or spectrum["nm"][-1] < nm[-1]:
+            if T1_spectrum["nm"][0] > T1_nm[0] or T1_spectrum["nm"][-1] < T1_nm[-1]:
                 if values["T1_interp0"]:
-                    curve = convert.DefaultExtrapolator(spectrum["nm"], spectrum["br"], nm, albedo)
+                    curve = convert.DefaultExtrapolator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo)
                 elif values["T1_interp1"]:
-                    extrap = PchipInterpolator(spectrum["nm"], spectrum["br"], extrapolate=True)
-                    curve = extrap(nm) / extrap(550) * albedo if albedo else extrap(nm)
+                    extrap = PchipInterpolator(T1_spectrum["nm"], T1_spectrum["br"], extrapolate=True)
+                    curve = extrap(T1_nm) / extrap(550) * T1_albedo if T1_albedo else extrap(T1_nm)
                 elif values["T1_interp2"]:
-                    extrap = CubicSpline(spectrum["nm"], spectrum["br"], extrapolate=True)
-                    curve = extrap(nm) / extrap(550) * albedo if albedo else extrap(nm)
+                    extrap = CubicSpline(T1_spectrum["nm"], T1_spectrum["br"], extrapolate=True)
+                    curve = extrap(T1_nm) / extrap(550) * T1_albedo if T1_albedo else extrap(T1_nm)
             else:
-                curve = interp(nm) / interp(550) * albedo if albedo else interp(nm)
+                curve = interp(T1_nm) / interp(550) * T1_albedo if T1_albedo else interp(T1_nm)
             curve = np.clip(curve, 0, None)
             
             # Color calculation
-            rgb = convert.to_rgb(
-                curve, mode=mode,
-                albedo = spectrum["albedo"] or albedo,
+            T3_rgb = convert.to_rgb(
+                curve, mode=T1_mode,
+                albedo = T1_spectrum["albedo"] or T1_albedo,
                 exp_bit=int(values["T1_bit_num"]), 
                 gamma=values["T1_gamma"], 
                 rnd=int(values["T1_rnd_num"]),
                 srgb=values["T1_srgb"]
             )
-            rgb_show = convert.to_rgb(
-                curve, mode=mode,
-                albedo = spectrum["albedo"] or albedo,
+            T3_rgb_show = convert.to_rgb(
+                curve, mode=T1_mode,
+                albedo = T1_spectrum["albedo"] or T1_albedo,
                 gamma=values["T1_gamma"],
                 srgb=values["T1_srgb"],
                 html=True
             )
-            if not np.array_equal(np.absolute(rgb), rgb):
-                rgb_show = "#000000"
+            if not np.array_equal(np.absolute(T3_rgb), T3_rgb):
+                T3_rgb_show = "#000000"
                 print("\n" + tr.error2[lang][0])
-                print(tr.error2[lang][1].format(values["T1_list"][0], *rgb) + "\n")
+                print(tr.error2[lang][1].format(values["T1_list"][0], *T3_rgb) + "\n")
                 #break
 
             # Output
             try:
-                graph.TKCanvas.itemconfig(T1_preview, fill=rgb_show)
+                graph.TKCanvas.itemconfig(T1_preview, fill=T3_rgb_show)
             except Exception as e:
                 graph.TKCanvas.itemconfig(T1_preview, fill="#000000")
                 print(e)
-            window["T1_rgb"].update(rgb)
-            window["T1_hex"].update(rgb_show)
+            window["T1_rgb"].update(T3_rgb)
+            window["T1_hex"].update(T3_rgb_show)
         
         elif event == "T1_add" and values["T1_list"] != []:
             names.append(values["T1_list"][0])
             T1_fig.add_trace(go.Scatter(
-                x = nm,
+                x = T1_nm,
                 y = curve,
                 name = values["T1_list"][0],
-                line = dict(color=rgb_show, width=4)
+                line = dict(color=T3_rgb_show, width=4)
                 ))
         
         elif event == "T1_plot":
@@ -331,47 +333,47 @@ while True:
         
         elif event == "T1_export":
             print("\n" + "\t".join(tr.gui_col[lang]) + "\n" + "_" * 36)
-            nm = convert.xyz_nm if values["T1_srgb"] else convert.rgb_nm
+            T1_nm = convert.xyz_nm if values["T1_srgb"] else convert.rgb_nm
             
             # Spectrum processing
             for name_1, name_0 in obj_list().items():
-                spectrum = spectra.objects[name_0]
+                T1_spectrum = spectra.objects[name_0]
                 for i in range(3):
                     if values["T1_br_mode"+str(i)]:
-                        mode = br_modes[i]
-                albedo = 0
-                if "albedo" not in spectrum:
-                    if mode == "albedo":
-                        mode = "chromaticity"
-                    spectrum.update({"albedo": False})
-                elif type(spectrum["albedo"]) != bool:
-                    albedo = spectrum["albedo"]
-                spectrum = convert.transform(spectrum)
+                        T1_mode = br_modes[i]
+                T1_albedo = 0
+                if "albedo" not in T1_spectrum:
+                    if T1_mode == "albedo":
+                        T1_mode = "chromaticity"
+                    T1_spectrum.update({"albedo": False})
+                elif type(T1_spectrum["albedo"]) != bool:
+                    T1_albedo = T1_spectrum["albedo"]
+                T1_spectrum = convert.transform(T1_spectrum)
                 
                 # Spectrum interpolation
                 try:
-                    interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
+                    interp = Akima1DInterpolator(T1_spectrum["nm"], T1_spectrum["br"])
                 except ValueError:
                     print("\n" + tr.error1[lang][0])
-                    print(tr.error1[lang][1].format(values["list"][0], len(spectrum["nm"]), len(spectrum["br"])) + "\n")
+                    print(tr.error1[lang][1].format(values["list"][0], len(T1_spectrum["nm"]), len(T1_spectrum["br"])) + "\n")
                     break
-                if spectrum["nm"][0] > nm[0] or spectrum["nm"][-1] < nm[-1]:
+                if T1_spectrum["nm"][0] > T1_nm[0] or T1_spectrum["nm"][-1] < T1_nm[-1]:
                     if values["T1_interp0"]:
-                        curve = convert.DefaultExtrapolator(spectrum["nm"], spectrum["br"], nm, albedo)
+                        curve = convert.DefaultExtrapolator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo)
                     elif values["T1_interp1"]:
-                        extrap = PchipInterpolator(spectrum["nm"], spectrum["br"], extrapolate=True)
-                        curve = extrap(nm) / extrap(550) * albedo if albedo else extrap(nm)
+                        extrap = PchipInterpolator(T1_spectrum["nm"], T1_spectrum["br"], extrapolate=True)
+                        curve = extrap(T1_nm) / extrap(550) * T1_albedo if T1_albedo else extrap(T1_nm)
                     elif values["T1_interp2"]:
-                        extrap = CubicSpline(spectrum["nm"], spectrum["br"], extrapolate=True)
-                        curve = extrap(nm) / extrap(550) * albedo if albedo else extrap(nm)
+                        extrap = CubicSpline(T1_spectrum["nm"], T1_spectrum["br"], extrapolate=True)
+                        curve = extrap(T1_nm) / extrap(550) * T1_albedo if T1_albedo else extrap(T1_nm)
                 else:
-                    curve = interp(nm) / interp(550) * albedo if albedo else interp(nm)
+                    curve = interp(T1_nm) / interp(550) * T1_albedo if T1_albedo else interp(T1_nm)
                 curve = np.clip(curve, 0, None)
 
                 # Color calculation
-                rgb = convert.to_rgb(
-                    curve, mode=mode,
-                    albedo = spectrum["albedo"] or albedo,
+                T3_rgb = convert.to_rgb(
+                    curve, mode=T1_mode,
+                    albedo = T1_spectrum["albedo"] or T1_albedo,
                     exp_bit=int(values["T1_bit_num"]), 
                     gamma=values["T1_gamma"], 
                     rnd=int(values["T1_rnd_num"]),
@@ -379,7 +381,7 @@ while True:
                 )
 
                 # Output
-                print("\t".join([str(i) for i in rgb]) + "\t" + name_1)
+                print("\t".join([str(i) for i in T3_rgb]) + "\t" + name_1)
     
     elif event.startswith("T2"):
         if event == "T2_preset":
@@ -396,11 +398,11 @@ while True:
                 window["T2_filter1"].update("f502n")
                 window["T2_filter2"].update("f631n")
 
-        elif event == "single":
+        elif event == "T2_single":
             window["T2_browse"].update(disabled=not values["T2_single"])
             window["T2_path"].update(disabled=not values["T2_single"])
             for i in range(T2_num):
-                window["bT2_rowse"+str(i)].update(disabled=values["T2_single"])
+                window["T2_browse"+str(i)].update(disabled=values["T2_single"])
                 window["T2_path"+str(i)].update(disabled=values["T2_single"])
             if values["T2_single"]:
                 T2_vis = 3
@@ -473,14 +475,14 @@ while True:
                 if values["T2_single"]:
                     if values["T2_path"] == "":
                         raise ValueError("Path is empty")
-                    rgb_img = Image.open(values["T2_path"])
+                    T2_rgb_img = Image.open(values["T2_path"])
                     if event == "show":
-                        rgb_img = rgb_img.resize(T2_preview, resample=Image.HAMMING)
-                    if len(rgb_img.getbands()) == 3:
-                        r, g, b = rgb_img.split()
+                        T2_rgb_img = T2_rgb_img.resize(T2_preview, resample=Image.HAMMING)
+                    if len(T2_rgb_img.getbands()) == 3:
+                        r, g, b = T2_rgb_img.split()
                         a = False
-                    elif len(rgb_img.getbands()) == 4:
-                        r, g, b, a = rgb_img.split()
+                    elif len(T2_rgb_img.getbands()) == 4:
+                        r, g, b, a = T2_rgb_img.split()
                     for i in [b, g, r]:
                         load.append(np.array(i))
                 else:
@@ -494,41 +496,218 @@ while True:
                             raise TypeError("Band image should be b/w")
                         load.append(np.array(bw_img))
                 
-                data = np.array(load, dtype="float64")
-                l = data.shape[0] # number of maps
-                h = data.shape[1] # height of maps
-                w = data.shape[2] # width of maps
+                T2_data = np.array(load, dtype="float64")
+                T2_l = T2_data.shape[0] # number of maps
+                T2_h = T2_data.shape[1] # height of maps
+                T2_w = T2_data.shape[2] # width of maps
 
-                if data.max() > 255:
-                    bit = 16
-                    depth = 65535
+                if T2_data.max() > 255:
+                    T2_bit = 16
+                    T2_depth = 65535
                 else:
-                    bit = 8
-                    depth = 255
+                    T2_bit = 8
+                    T2_depth = 255
                 
-                nm = convert.xyz_nm if input_data["srgb"] else convert.rgb_nm
-                img = Image.new("RGB", (w, h), (0, 0, 0))
-                draw = ImageDraw.Draw(img)
+                T2_nm = convert.xyz_nm if input_data["srgb"] else convert.rgb_nm
+                T2_img = Image.new("RGB", (T2_w, T2_h), (0, 0, 0))
+                T2_draw = ImageDraw.Draw(T2_img)
                 counter = 0
-                px_num = w*h
+                px_num = T2_w*T2_h
 
-                for x in range(w):
-                    for y in range(h):
-                        spectrum = data[:, y, x]
-                        if np.sum(spectrum) > 0:
-                            curve = convert.DefaultExtrapolator(input_data["nm"], list(spectrum), nm)
-                            rgb = convert.to_rgb(curve, mode="albedo", albedo=True, inp_bit=bit, exp_bit=8, gamma=input_data["gamma"])
-                            draw.point((x, y), rgb)
+                for x in range(T2_w):
+                    for y in range(T2_h):
+                        T2_spectrum = T2_data[:, y, x]
+                        if np.sum(T2_spectrum) > 0:
+                            T2_curve = convert.DefaultExtrapolator(input_data["nm"], list(T2_spectrum), T2_nm)
+                            T2_rgb = convert.to_rgb(T2_curve, mode="albedo", albedo=True, inp_bit=T2_bit, exp_bit=8, gamma=input_data["gamma"])
+                            T2_draw.point((x, y), T2_rgb)
                         counter += 1
                         sg.OneLineProgressMeter("Progress", counter, px_num)
                 
                 #img.show()
                 if event == "T2_show":
-                    window["T2_preview"].update(data=convert_to_bytes(img))
+                    window["T2_preview"].update(data=convert_to_bytes(T2_img))
                 else:
-                    img.save(values["T2_folder"]+"/TCT_result.png")
+                    T2_img.save(values["T2_folder"]+"/TCT_result.png")
             
             except Exception as e:
                 print(e)
+    
+    elif event.startswith("T3"):
+        if values["T3_folder"] != "":
+            window["T3_process"].update(disabled=False)
+
+        if event == "T3_process":
+
+            # Database preprocessing
+            if values["T3_tags"] == "":
+                T3_data = spectra.objects
+                T3_l = len(T3_data)
+                #config.update({"tags": ["all_objects"]})
+            else:
+                T3_data = {}
+                T3_l = 0
+                for name, spectrum in spectra.objects.items():
+                    if "tags" in spectrum:
+                        for tag in tag_list:
+                            if tag in spectrum["tags"]:
+                                T3_data.update({name: spectrum})
+                                T3_l += 1
+                                break
+            for i in range(3):
+                if values["T3_br_mode"+str(i)]:
+                    T3_mode0 = br_modes[i]
+            
+            # Layout
+            T3_r = 46 # radius in px
+            T3_w = 100*(T3_l + 1) if T3_l < 15 else 1600
+            T3_s = len(spectra.sources)
+            T3_name_step = 75
+            T3_objt_size = 18
+            T3_srce_size = 11
+            T3_srce_step = 6 + 2 * T3_srce_size
+            T3_note_size = 16
+            T3_note_step = 4 + T3_note_size
+            T3_auth_size = 10
+            T3_h0 = T3_name_step + 100 * int(np.ceil(T3_l / 15) + 1)
+            T3_h1 = T3_h0 + T3_s * T3_srce_step
+            T3_w0 = 100 - T3_r
+            T3_w1 = int(T3_w * 3/5)
+            T3_img = Image.new("RGB", (T3_w, T3_h1 + 50), (0, 0, 0))
+            T3_draw = ImageDraw.Draw(T3_img)
+            T3_name_font = ImageFont.truetype("arial.ttf", 42)
+            T3_help_font = ImageFont.truetype("arial.ttf", 18)
+            T3_narr_font = ImageFont.truetype("ARIALN.TTF", T3_objt_size)
+            T3_wide_font = ImageFont.truetype("arial.ttf", T3_objt_size)
+            T3_link_font = ImageFont.truetype("arial.ttf", 12)
+            T3_srce_font = ImageFont.truetype("arial.ttf", T3_srce_size)
+            T3_note_font = ImageFont.truetype("arial.ttf", T3_note_size)
+            T3_auth_font = ImageFont.truetype("arial.ttf", T3_auth_size)
+            # text brightness formula: br = 255 * (x^(1/2.2))
+            T3_draw.text((T3_w0, 50), tr.name_text[lang], fill=(255, 255, 255), font=T3_name_font) # x = 1, br = 255
+            T3_draw.text((T3_w0, T3_h0 - 25), tr.source[lang]+":", fill=(230, 230, 230), font=T3_help_font) # x = 0.8, br = 230
+            T3_draw.text((T3_w1, T3_h0 - 25), tr.note[lang]+":", fill=(230, 230, 230), font=T3_help_font) # x = 0.8, br = 230
+            if values["T3_signature"]:
+                T3_auth_step = 302 if lang == "ru" else 284
+                T3_draw.text((T3_w - T3_auth_step, T3_h1 - T3_auth_size), tr.auth_info[lang], fill=(136, 136, 136), font=T3_help_font) # x = 0.25, br = 136
+            for srce_num in range(T3_s): # x = 0.5, br = 186
+                T3_draw.multiline_text((T3_w0, T3_h1 - T3_srce_step * (T3_s-srce_num)), spectra.sources[srce_num], fill=(186, 186, 186), font=T3_srce_font)
+            T3_note_num = 0
+            for note, translation in tr.notes.items(): # x = 0.6, br = 202
+                T3_draw.multiline_text((T3_w1, T3_h0 + T3_note_step * T3_note_num), f'{note} {translation[lang]}', fill=(202, 202, 202), font=T3_note_font)
+                T3_note_num += 1
+            for info_num, info in enumerate([", ".join(values["T3_tags"]), T3_mode0, values["T3_srgb"], values["T3_gamma"]]): # x = 0.75, br = 224
+                T3_draw.multiline_text((T3_w1, T3_h0 + T3_note_step * (T3_note_num + info_num + 1)), f'{tr.info[lang][info_num]}: {info}', fill=(224, 224, 224), font=T3_note_font)
+            
+            # Table generator
+
+            T3_nm = convert.xyz_nm if values["T3_srgb"] else convert.rgb_nm
+        
+            T3_n = 0 # object counter
+            for name, spectrum in T3_data.items():
+                T3_mode = T3_mode0
+
+                # Spectral data import and processing
+                T3_albedo = 0
+                if "albedo" not in spectrum:
+                    if T3_mode == "albedo":
+                        T3_mode = "chromaticity"
+                    spectrum.update({"albedo": False})
+                elif type(spectrum["albedo"]) != bool:
+                    T3_albedo = spectrum["albedo"]
+                spectrum = convert.transform(spectrum)
+                
+                # Spectrum interpolation
+                try:
+                    interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
+                except ValueError:
+                    print("\n" + tr.error1[lang][0])
+                    print(tr.error1[lang][1].format(name, len(spectrum["nm"]), len(spectrum["br"])) + "\n")
+                    break
+                if spectrum["nm"][0] > T3_nm[0] or spectrum["nm"][-1] < T3_nm[-1]:
+                    T3_curve = convert.DefaultExtrapolator(spectrum["nm"], spectrum["br"], T3_nm, T3_albedo)
+                else:
+                    T3_curve = interp(T3_nm) / interp(550) * T3_albedo if T3_albedo else interp(T3_nm)
+                T3_curve = np.clip(T3_curve, 0, None)
+
+                # Color calculation
+                T3_rgb = convert.to_rgb(
+                    T3_curve, mode=T3_mode,
+                    albedo = spectrum["albedo"] or T3_albedo,
+                    exp_bit=8, gamma=values["T3_gamma"], srgb=values["T3_srgb"]
+                )
+                if not np.array_equal(np.absolute(T3_rgb), T3_rgb):
+                    print("\n" + tr.error2[lang][0])
+                    print(tr.error2[lang][1].format(name, *T3_rgb) + "\n")
+                    break
+
+                # Object drawing
+
+                center_x = 100 * (1 + T3_n%15)
+                center_y = T3_name_step + 100 * int(1 + T3_n/15)
+                if "obl" in spectrum:
+                    T3_b = int(T3_r * (1 - spectrum["obl"]))
+                    T3_draw.ellipse([center_x-T3_r, center_y-T3_b, center_x+T3_r, center_y+T3_b], fill=T3_rgb)
+                else:
+                    T3_draw.ellipse([center_x-T3_r, center_y-T3_r, center_x+T3_r, center_y+T3_r], fill=T3_rgb)
+                
+                T3_text_color = (0, 0, 0) if np.mean(T3_rgb) >= 127 else (255, 255, 255)
+                
+                link_right = True
+                if name[0] == "(": # Name processing
+                    parts = name.split(")", 1)
+                    name = parts[1].strip()
+                    T3_draw.text((center_x-40, center_y-22), f"({parts[0][1:]})", fill=T3_text_color, font=T3_link_font)
+                elif "/" in name:
+                    parts = name.split("/", 1)
+                    name = parts[1].strip()
+                    T3_draw.text((center_x-40, center_y-22), f"{parts[0]}/", fill=T3_text_color, font=T3_link_font)
+                else:
+                    link_right = False
+                
+                if "|" in name:
+                    link = name.split("|")
+                    name = link[0].strip()
+                    ll = len(link[1])
+                    if link_right:
+                        shift = 26 - 7*(ll-1)
+                    else:
+                        shift = -(6 + 3*(ll-1))
+                    T3_draw.text((center_x+shift, center_y-22), f"[{link[1]}]", fill=T3_text_color, font=T3_link_font)
+                
+                if lang != "en":
+                    for obj_name, tranlation in tr.names.items():
+                        if name.startswith(obj_name):
+                            name = name.replace(obj_name, tranlation[lang])
+                            pass
+                
+                T3_width = 0
+                for letter in name:
+                    if letter in ["I", "i", "j", "l", "f", "r", "t", "[", "]", "/", ":", "*" ".", " "]:
+                        T3_width += 0.5
+                    elif letter.isupper():
+                        T3_width += 1.5
+                    else:
+                        T3_width += 1
+                if T3_width < 8:
+                    T3_draw.text((center_x-40, center_y-(T3_objt_size/2)), name, fill=T3_text_color, font=T3_wide_font)
+                elif T3_width < 9:
+                    T3_draw.text((center_x-42, center_y-(T3_objt_size/2)), name, fill=T3_text_color, font=T3_wide_font)
+                elif T3_width < 10:
+                    T3_draw.text((center_x-40, center_y-(T3_objt_size/2)), name, fill=T3_text_color, font=T3_narr_font)
+                elif T3_width < 11:
+                    T3_draw.text((center_x-42, center_y-(T3_objt_size/2)), name, fill=T3_text_color, font=T3_narr_font)
+                elif T3_width < 12:
+                    T3_draw.text((center_x-42, center_y-(T3_objt_size/2)), name.replace(":", "\n    :"), fill=T3_text_color, font=T3_narr_font)
+                elif T3_width < 13:
+                    T3_draw.text((center_x-42, center_y-(T3_objt_size/2)), name.replace(":", "\n    :"), fill=T3_text_color, font=T3_narr_font)
+                else:
+                    T3_draw.text((center_x-42, center_y-(T3_objt_size/2)), f"{name[:10]}\n    {name[10:]}", fill=T3_text_color, font=T3_narr_font)
+                
+                T3_n += 1
+                print(T3_rgb, name)
+
+            T3_img.save(f'{values["T3_folder"]}/TCT_table-{T3_mode}.{values["T3_extension"]}')
+            T3_img.show()
 
 window.Close()
