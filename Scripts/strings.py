@@ -222,11 +222,6 @@ gui_hex = {
     "ru": "Цвет HEX",
     "de": ""
 }
-gui_preset = {
-    "en": "Preset",
-    "ru": "Пресет",
-    "de": ""
-}
 gui_single = {
     "en": "Single image mode",
     "ru": "Режим одного изображения",

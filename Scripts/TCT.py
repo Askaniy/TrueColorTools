@@ -101,11 +101,8 @@ T1_col3 = [
 
 T2_vis = 3
 T2_preview = (256, 128)
-T2_presets = ["Hubble maps"]
 T2_col1 = [
     [sg.Text(tr.gui_input[lang], size=(17, 1), font=("arial", 12), key="T2_title1"), sg.Button(button_text="+", size=(2, 1), key="T2_+"), sg.Button(button_text="-", size=(2, 1), disabled=False, key="T2_-")],
-    [sg.Checkbox(tr.gui_preset[lang], size=(22, 1), enable_events=True, key="T2_preset")],
-    [sg.InputCombo(T2_presets, size=(29, 1), enable_events=True, disabled=True, key="T2_template")],
     [sg.Checkbox(tr.gui_single[lang], size=(22, 1), enable_events=True, key="T2_single")],
     [sg.Input(size=(22, 1), disabled=True, disabled_readonly_background_color="#3A3A3A", key="T2_path"), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(6, 1), disabled=True, key="T2_browse")],
     [frame(0)],
@@ -209,7 +206,6 @@ while True:
         window["T1_export"].update(tr.gui_export[lang])
         window["T2_title1"].update(tr.gui_input[lang])
         window["T2_title2"].update(tr.gui_output[lang])
-        #window["T2_preset"].update(tr.gui_preset[lang])
         #window["T2_single"].update(tr.gui_single[lang])
         window["T2_browse"].update(tr.gui_browse[lang])
         for i in range(T2_num):
@@ -384,10 +380,7 @@ while True:
                 print("\t".join([str(i) for i in T3_rgb]) + "\t" + name_1)
     
     elif event.startswith("T2"):
-        if event == "T2_preset":
-            window["T2_template"].update(disabled=not values["T2_preset"])
-        
-        elif event == "template":
+        if event == "template":
             if values["T2_template"] == "Hubble maps":
                 T2_vis = 3
                 window["T2_single"].update(True)
