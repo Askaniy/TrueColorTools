@@ -249,7 +249,7 @@ gui_wavelength = {
 }
 gui_system = {
     "en": "Photometric system",
-    "ru": "Фотометрическая система",
+    "ru": "Набор фильтров",
     "de": ""
 }
 gui_calib = {

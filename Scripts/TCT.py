@@ -174,9 +174,14 @@ T1_fig = go.Figure()
 T1_events = ["T1_list", "T1_gamma", "T1_srgb", "T1_br_mode0", "T1_br_mode1", "T1_br_mode2", "T1_interp0", "T1_interp1", "T1_interp2", "T1_bit_num", "T1_rnd_num"]
 br_modes = ["chromaticity", "normalization", "albedo"]
 
+
+# Window events loop
+
 names = []
 while True:
     event, values = window.Read()
+
+    # Global window events
 
     if event in [sg.WIN_CLOSED, tr.gui_exit[lang]]:
         break
@@ -241,7 +246,10 @@ while True:
     elif event == tr.gui_info[lang]:
         sg.popup(tr.auth_info[lang], title=event)
     
+    # Events in tab "Spectra"
+
     elif event.startswith("T1"):
+
         if event in T1_events and values["T1_list"] != []:
             T1_nm = convert.xyz_nm if values["T1_srgb"] else convert.rgb_nm
             for i in range(3):
@@ -379,19 +387,11 @@ while True:
                 # Output
                 print("\t".join([str(i) for i in T3_rgb]) + "\t" + name_1)
     
-    elif event.startswith("T2"):
-        if event == "template":
-            if values["T2_template"] == "Hubble maps":
-                T2_vis = 3
-                window["T2_single"].update(True)
-                window["T2_browse"].update(disabled=False)
-                window["T2_system"].update(True)
-                window["T2_filter"].update("Hubble")
-                window["T2_filter0"].update("f395n")
-                window["T2_filter1"].update("f502n")
-                window["T2_filter2"].update("f631n")
+    # Events in tab "Images"
 
-        elif event == "T2_single":
+    elif event.startswith("T2"):
+
+        if event == "T2_single":
             window["T2_browse"].update(disabled=not values["T2_single"])
             window["T2_path"].update(disabled=not values["T2_single"])
             for i in range(T2_num):
@@ -501,6 +501,27 @@ while True:
                     T2_bit = 8
                     T2_depth = 255
                 
+                # Calibration of maps by spectrum (legasy)
+                #if info["calib"]:
+                #    if "br" in info:
+                #        br = np.array(info["br"])
+                #        obl = 0
+                #    elif "ref" in info:
+                #        ref = convert.transform(spectra.objects[info["ref"]])
+                #        albedo = ref["albedo"] if "albedo" in ref else 0
+                #        br = convert.get_points(bands, ref["nm"], ref["br"], albedo)
+                #        obl = ref["obl"] if "obl" in ref else 0
+                #    for u in range(n): # calibration cycles
+                #        for y in range(h):
+                #            for layer in range(l):
+                #                if np.sum(data[layer][y]) != 0:
+                #                    calib[layer][0].append(np.sum(data[layer][y]) / np.count_nonzero(data[layer][y]))
+                #                    calib[layer][1].append(k(np.pi * (0.5 - (y + 0.5) / h), obl))
+                #        for layer in range(l):
+                #            avg = np.average(calib[layer][0], weights=calib[layer][1])
+                #            color = depth * br[layer]
+                #            data[layer] = data[layer] * color / avg
+
                 T2_nm = convert.xyz_nm if input_data["srgb"] else convert.rgb_nm
                 T2_img = Image.new("RGB", (T2_w, T2_h), (0, 0, 0))
                 T2_draw = ImageDraw.Draw(T2_img)
@@ -526,7 +547,10 @@ while True:
             except Exception as e:
                 print(e)
     
+    # Events in tab "Table"
+
     elif event.startswith("T3"):
+        
         if values["T3_folder"] != "":
             window["T3_process"].update(disabled=False)
 
