@@ -103,30 +103,30 @@ T2_vis = 3
 T2_preview = (256, 128)
 T2_col1 = [
     [sg.Text(tr.gui_input[lang], size=(17, 1), font=("arial", 12), key="T2_title1"), sg.Button(button_text="+", size=(2, 1), key="T2_+"), sg.Button(button_text="-", size=(2, 1), disabled=False, key="T2_-")],
-    [sg.Checkbox(tr.gui_single[lang], size=(22, 1), enable_events=True, key="T2_single")],
-    [sg.Input(size=(22, 1), disabled=True, disabled_readonly_background_color="#3A3A3A", key="T2_path"), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(6, 1), disabled=True, key="T2_browse")],
     [frame(0)],
     [frame(1)],
     [frame(2)],
     [frame(3)],
-    [frame(4)] # just add more frames here
+    [frame(4)],
+    [frame(5)],
+    [frame(6)] # just add more frames here
 ]
 T2_col2 = [
     [sg.Text(tr.gui_output[lang], size=(20, 1), font=("arial", 12), key="T2_title2")],
     [sg.Checkbox(tr.gui_gamma[lang], size=(20, 1), key="T2_gamma")],
     [sg.Checkbox("sRGB", size=(20, 1), key="T2_srgb")],
     [sg.HorizontalSeparator()],
+    [sg.Checkbox(tr.gui_single[lang], size=(22, 1), enable_events=True, key="T2_single")],
+    [sg.Input(size=(22, 1), disabled=True, disabled_readonly_background_color="#3A3A3A", key="T2_path"), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(6, 1), disabled=True, key="T2_browse")],
     [sg.Checkbox(tr.gui_system[lang], size=(26, 1), enable_events=True, key="T2_system")],
     [sg.InputCombo(filters.get_sets(), size=(26, 1), enable_events=True, disabled=True, key="T2_filter")],
-    [sg.Checkbox(tr.gui_calib[lang], size=(26, 1), enable_events=True, key="T2_calib")],
-    [sg.InputCombo(list(obj_list().keys()), size=(26, 1), enable_events=True, disabled=True, key="T2_ref")],
     [sg.T("")],
     [sg.Text(tr.gui_folder[lang], key="T2_folderN")],
     [sg.Input(size=(27, 1), enable_events=True, key="T2_folder"), sg.FolderBrowse(button_text=tr.gui_browse[lang], size=(6, 1), key="T2_browse_folder")],
     [sg.Button(tr.gui_preview[lang], size=(15, 1), disabled=True, key="T2_show"), sg.Button(tr.gui_process[lang], size=(15, 1), disabled=True, key="T2_process")],
     [sg.Image(background_color="black", size=T2_preview, key="T2_preview")]
 ]
-T2_num = len(T2_col1) - 5
+T2_num = len(T2_col1) - 1
 
 T3_col1 = [
     [sg.Text(tr.gui_settings[lang], size=(20, 1), font=("arial", 12), key="T3_title1")],
@@ -220,7 +220,6 @@ while True:
             window["T2_band"+str(i)].update(f"{tr.gui_band[lang]} {i+1}")
         #window["T2_gamma"].update(tr.gui_gamma[lang])
         #window["T2_system"].update(tr.gui_system[lang])
-        #window["T2_calib"].update(tr.gui_calib[lang])
         window["T2_folderN"].update(tr.gui_folder[lang])
         window["T2_browse_folder"].update(tr.gui_browse[lang])
         window["T2_show"].update(tr.gui_preview[lang])
@@ -276,63 +275,63 @@ while True:
                 break
             if T1_spectrum["nm"][0] > T1_nm[0] or T1_spectrum["nm"][-1] < T1_nm[-1]:
                 if values["T1_interp0"]:
-                    curve = convert.DefaultExtrapolator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo)
+                    T1_curve = convert.DefaultExtrapolator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo)
                 elif values["T1_interp1"]:
                     extrap = PchipInterpolator(T1_spectrum["nm"], T1_spectrum["br"], extrapolate=True)
-                    curve = extrap(T1_nm) / extrap(550) * T1_albedo if T1_albedo else extrap(T1_nm)
+                    T1_curve = extrap(T1_nm) / extrap(550) * T1_albedo if T1_albedo else extrap(T1_nm)
                 elif values["T1_interp2"]:
                     extrap = CubicSpline(T1_spectrum["nm"], T1_spectrum["br"], extrapolate=True)
-                    curve = extrap(T1_nm) / extrap(550) * T1_albedo if T1_albedo else extrap(T1_nm)
+                    T1_curve = extrap(T1_nm) / extrap(550) * T1_albedo if T1_albedo else extrap(T1_nm)
             else:
-                curve = interp(T1_nm) / interp(550) * T1_albedo if T1_albedo else interp(T1_nm)
-            curve = np.clip(curve, 0, None)
+                T1_curve = interp(T1_nm) / interp(550) * T1_albedo if T1_albedo else interp(T1_nm)
+            T1_curve = np.clip(T1_curve, 0, None)
             
             # Color calculation
-            T3_rgb = convert.to_rgb(
-                curve, mode=T1_mode,
+            T1_rgb = convert.to_rgb(
+                T1_curve, mode=T1_mode,
                 albedo = T1_spectrum["albedo"] or T1_albedo,
                 exp_bit=int(values["T1_bit_num"]), 
                 gamma=values["T1_gamma"], 
                 rnd=int(values["T1_rnd_num"]),
                 srgb=values["T1_srgb"]
             )
-            T3_rgb_show = convert.to_rgb(
-                curve, mode=T1_mode,
+            T1_rgb_show = convert.to_rgb(
+                T1_curve, mode=T1_mode,
                 albedo = T1_spectrum["albedo"] or T1_albedo,
                 gamma=values["T1_gamma"],
                 srgb=values["T1_srgb"],
                 html=True
             )
-            if not np.array_equal(np.absolute(T3_rgb), T3_rgb):
-                T3_rgb_show = "#000000"
+            if not np.array_equal(np.absolute(T1_rgb), T1_rgb):
+                T1_rgb_show = "#000000"
                 print("\n" + tr.error2[lang][0])
-                print(tr.error2[lang][1].format(values["T1_list"][0], *T3_rgb) + "\n")
+                print(tr.error2[lang][1].format(values["T1_list"][0], *T1_rgb) + "\n")
                 #break
 
             # Output
             try:
-                graph.TKCanvas.itemconfig(T1_preview, fill=T3_rgb_show)
+                graph.TKCanvas.itemconfig(T1_preview, fill=T1_rgb_show)
             except Exception as e:
                 graph.TKCanvas.itemconfig(T1_preview, fill="#000000")
                 print(e)
-            window["T1_rgb"].update(T3_rgb)
-            window["T1_hex"].update(T3_rgb_show)
+            window["T1_rgb"].update(T1_rgb)
+            window["T1_hex"].update(T1_rgb_show)
         
         elif event == "T1_add" and values["T1_list"] != []:
             names.append(values["T1_list"][0])
             T1_fig.add_trace(go.Scatter(
                 x = T1_nm,
-                y = curve,
+                y = T1_curve,
                 name = values["T1_list"][0],
-                line = dict(color=T3_rgb_show, width=4)
+                line = dict(color=T1_rgb_show, width=4)
                 ))
         
         elif event == "T1_plot":
             if len(names) == 1:
-                title_text = tr.single_title_text[lang] + names[0]
+                T1_title_text = tr.single_title_text[lang] + names[0]
             else:
-                title_text = tr.batch_title_text[lang] + ", ".join(names)
-            T1_fig.update_layout(title=title_text, xaxis_title=tr.xaxis_text[lang], yaxis_title=tr.yaxis_text[lang])
+                T1_title_text = tr.batch_title_text[lang] + ", ".join(names)
+            T1_fig.update_layout(title=T1_title_text, xaxis_title=tr.xaxis_text[lang], yaxis_title=tr.yaxis_text[lang])
             T1_fig.show()
         
         elif event == "T1_export":
@@ -363,20 +362,20 @@ while True:
                     break
                 if T1_spectrum["nm"][0] > T1_nm[0] or T1_spectrum["nm"][-1] < T1_nm[-1]:
                     if values["T1_interp0"]:
-                        curve = convert.DefaultExtrapolator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo)
+                        T1_curve = convert.DefaultExtrapolator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo)
                     elif values["T1_interp1"]:
                         extrap = PchipInterpolator(T1_spectrum["nm"], T1_spectrum["br"], extrapolate=True)
-                        curve = extrap(T1_nm) / extrap(550) * T1_albedo if T1_albedo else extrap(T1_nm)
+                        T1_curve = extrap(T1_nm) / extrap(550) * T1_albedo if T1_albedo else extrap(T1_nm)
                     elif values["T1_interp2"]:
                         extrap = CubicSpline(T1_spectrum["nm"], T1_spectrum["br"], extrapolate=True)
-                        curve = extrap(T1_nm) / extrap(550) * T1_albedo if T1_albedo else extrap(T1_nm)
+                        T1_curve = extrap(T1_nm) / extrap(550) * T1_albedo if T1_albedo else extrap(T1_nm)
                 else:
-                    curve = interp(T1_nm) / interp(550) * T1_albedo if T1_albedo else interp(T1_nm)
-                curve = np.clip(curve, 0, None)
+                    T1_curve = interp(T1_nm) / interp(550) * T1_albedo if T1_albedo else interp(T1_nm)
+                T1_curve = np.clip(T1_curve, 0, None)
 
                 # Color calculation
-                T3_rgb = convert.to_rgb(
-                    curve, mode=T1_mode,
+                T1_rgb = convert.to_rgb(
+                    T1_curve, mode=T1_mode,
                     albedo = T1_spectrum["albedo"] or T1_albedo,
                     exp_bit=int(values["T1_bit_num"]), 
                     gamma=values["T1_gamma"], 
@@ -385,7 +384,7 @@ while True:
                 )
 
                 # Output
-                print("\t".join([str(i) for i in T3_rgb]) + "\t" + name_1)
+                print("\t".join([str(i) for i in T1_rgb]) + "\t" + name_1)
     
     # Events in tab "Images"
 
@@ -417,9 +416,6 @@ while True:
         elif event in ["T2_filter"+str(i) for i in range(T2_num)]:
             i = event[-1]
             window["T2_wavelength"+i].update(filters.get_param(values["T2_filter"], values["T2_filter"+i], "L_mean"))
-
-        elif event == "T2_calib":
-            window["T2_ref"].update(disabled=not values["T2_calib"])
 
         elif event == "T2_folder":
             window["T2_process"].update(disabled=False)
@@ -469,7 +465,7 @@ while True:
                     if values["T2_path"] == "":
                         raise ValueError("Path is empty")
                     T2_rgb_img = Image.open(values["T2_path"])
-                    if event == "show":
+                    if event == "T2_show":
                         T2_rgb_img = T2_rgb_img.resize(T2_preview, resample=Image.HAMMING)
                     if len(T2_rgb_img.getbands()) == 3:
                         r, g, b = T2_rgb_img.split()
@@ -482,24 +478,29 @@ while True:
                     for i in range(T2_vis):
                         if values["T2_path"+str(i)] == "":
                             raise ValueError(f'Path {i+1} is empty')
-                        bw_img = Image.open(values["T2_path"+str(i)])
-                        if event == "show":
-                            bw_img = bw_img.resize(T2_preview, resample=Image.HAMMING)
-                        if len(bw_img.getbands()) != 1:
+                        T2_bw_img = Image.open(values["T2_path"+str(i)])
+                        if event == "T2_show":
+                            T2_bw_img = T2_bw_img.resize(T2_preview, resample=Image.HAMMING)
+                        if len(T2_bw_img.getbands()) != 1:
                             raise TypeError("Band image should be b/w")
-                        load.append(np.array(bw_img))
+                        load.append(np.array(T2_bw_img))
                 
-                T2_data = np.array(load, dtype="float64")
+                T2_data = np.array(load, dtype="float32")
                 T2_l = T2_data.shape[0] # number of maps
                 T2_h = T2_data.shape[1] # height of maps
                 T2_w = T2_data.shape[2] # width of maps
-
-                if T2_data.max() > 255:
+                
+                T2_max = T2_data.max()
+                if T2_max > 256:
                     T2_bit = 16
                     T2_depth = 65535
+                elif T2_max < 2:
+                    T2_bit = 0
+                    T2_depth = 1
                 else:
                     T2_bit = 8
                     T2_depth = 255
+                T2_data = np.clip(T2_data, 0, T2_depth)
                 
                 # Calibration of maps by spectrum (legasy)
                 #if info["calib"]:
@@ -527,6 +528,9 @@ while True:
                 T2_draw = ImageDraw.Draw(T2_img)
                 counter = 0
                 px_num = T2_w*T2_h
+                
+                T2_fig = go.Figure()
+                T2_fig.update_layout(title=tr.map_title_text[lang], xaxis_title=tr.xaxis_text[lang], yaxis_title=tr.yaxis_text[lang])
 
                 for x in range(T2_w):
                     for y in range(T2_h):
@@ -535,10 +539,17 @@ while True:
                             T2_curve = convert.DefaultExtrapolator(input_data["nm"], list(T2_spectrum), T2_nm)
                             T2_rgb = convert.to_rgb(T2_curve, mode="albedo", albedo=True, inp_bit=T2_bit, exp_bit=8, gamma=input_data["gamma"])
                             T2_draw.point((x, y), T2_rgb)
+                            if x % 32 == 0 and y % 32 == 0:
+                                T2_fig.add_trace(go.Scatter(
+                                    x = T2_nm,
+                                    y = T2_curve,
+                                    name = px_num,
+                                    line = dict(color="rgb"+str(T2_rgb), width=2)
+                                    ))
                         counter += 1
                         sg.OneLineProgressMeter("Progress", counter, px_num)
                 
-                #img.show()
+                T2_fig.show()
                 if event == "T2_show":
                     window["T2_preview"].update(data=convert_to_bytes(T2_img))
                 else:

@@ -304,6 +304,11 @@ table_title_text = {
     "ru": "Спектры и цвета космических объектов",
     "de": ""
 }
+map_title_text = {
+    "en": "Spectrum and color of some pixels of the map",
+    "ru": "Спектр и цвет некоторых пикселей карты",
+    "de": ""
+}
 xaxis_text = {
     "en": "Wavelength [nm]",
     "ru": "Длина волны [нм]",
