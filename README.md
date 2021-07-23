@@ -1,21 +1,23 @@
 # True Color Tools
-A set of Python scripts for calculating human-visible colors of celestial bodies from their spectra or color indices.
+Astronomy-focused set of Python tools with GUI that use spectra construction and eye absorption to calculate realistic colors.
 
-### Tools:
-- [`true-color-calc.py`](Scripts/true-color-calc.py) calculates colors of one or several objects and build their spectra;
-- [`true-color-calc_GUI.py`](Scripts/true-color-calc_GUI.py) calculates colors much more conveniently with a graphical interface and visualization;
-- [`true-color-table.py`](Scripts/true-color-table.py) generates a customizable table of the celestial bodies' colors;
-- [`true-color-img.py`](Scripts/true-color-img.py) and [`true-color-img_GUI.py`](Scripts/true-color-img_GUI.py) process images by calculating a spectrum of each pixel *(work in progress)*.
+Input data is accepted in the form of channel measurements, color indices, magnitudes and even images.
+Customizable output in RGB, Hex or spectra database table.
+
+### Tools in [`TCT.py`](Scripts/TCT.py):
+- `Spectra` tab provides access to the built-in spectra database and allows you to calculate a color with the selected settings just by clicking on an object;
+- `Images` tab allows you to load images, specify their wavelength and display a true color image, for each pixel of which a spectrum was built;
+- `Table` tab generates a customizable table of calculated colors from the spectra database.
 
 ### Auxiliary:
 - [`user.py`](Scripts/user.py) returns the specified language and path to the tools, or determines them automatically;
 - [`config.py`](Scripts/config.py) allows you to specify in it the language and path applicable to all tools;
 - [`convert.py`](Scripts/convert.py) contains everything that is directly related to calculations (functions, zero points of photometric systems, used curves of color space and sensitivity of human perception);
 - [`spectra.py`](Scripts/spectra.py) is a database of spectra, color indices and their sources;
-- [`translator.py`](Scripts/translator.py) contains almost all used inscriptions of other scripts in supported languages.
+- [`strings.py`](Scripts/strings.py) contains almost all used inscriptions of other scripts in supported languages.
 
 ## Installation
-Press the button `Code`, then I recommend choosing `Download ZIP`. After downloading, unpack the archive. You can also clone the repository.
+For the GitHub web interface: press the button `Code`, then I recommend choosing `Download ZIP`. After downloading, unpack the archive. You can also clone the repository.
 
 The tool requires Python 3.6 or higher (due to f-strings) and probably Windows (due to system calls in [`user.py`](Scripts/user.py)). No internet connection is required for all scripts to work.
 
@@ -25,7 +27,6 @@ python -m pip install -r requirements.txt
 ```
 
 ## How to use
-You probably want to use `true-color-calc_GUI.py` as the other two tools require understanding the code. This is what the interface looks like:
 
 ![color_calc_GUI](color_calc_GUI.png)
 
@@ -61,4 +62,4 @@ lang = user.lang() # config.py or system language
 lang = user.lang("ru") # the same as user.lang("Russian") and user.lang("Русский")
 ```
 
-The tools support English and Russian. German is a stub in the file for storing titles in different languages, [`translator.py`](Scripts/translator.py). If someone wants to add support for any language, this can be done simply.
+The tools support English and Russian. German is a stub in the file for storing titles in different languages, [`strings.py`](Scripts/strings.py). If someone wants to add support for any language, this can be done simply.
