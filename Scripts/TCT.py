@@ -10,33 +10,48 @@ import strings as tr
 lang = user.lang() # ReadMe -> FAQ -> How to choose a language?
 
 
-def obj_list():
-    global lang
-    names = {}
-    for name_0 in spectra.objects.keys():
-        if "|" in name_0:
-            name_1 = "{} [{}]".format(*name_0.split("|"))
-        else:
-            name_1 = name_0
-        if lang != "en":
-            index = ""
-            if name_1[0] == "(":
-                parts = name_1.split(")", 1)
-                index = parts[0] + ") "
-                name_1 = parts[1].strip()
-            elif "/" in name_1:
-                parts = name_1.split("/", 1)
-                index = parts[0] + "/"
-                name_1 = parts[1].strip()
-            for obj_name, tranlation in tr.names.items():
-                if name_1.startswith(obj_name):
-                    name_1 = name_1.replace(obj_name, tranlation[lang])
-                    break
-            name_1 = index + name_1
-        names.update({name_1: name_0})
-    return names
+def tag_list():
+    tag_set = set(["all"])
+    for data in spectra.objects.values():
+        if "tags" in data:
+            tag_set.update(data["tags"])
+    return list(tag_set)
 
-tag_list = []
+def obj_list(tag="all"):
+    names = {}
+    for name_0, data in spectra.objects.items():
+
+        flag = True
+        if tag != "all":
+            if "tags" in data:
+                if tag not in data["tags"]:
+                    flag = False
+            else:
+                flag = False
+        
+        if flag:
+            if "|" in name_0:
+                name_1 = "{} [{}]".format(*name_0.split("|"))
+            else:
+                name_1 = name_0
+            if lang != "en":
+                index = ""
+                if name_1[0] == "(":
+                    parts = name_1.split(")", 1)
+                    index = parts[0] + ") "
+                    name_1 = parts[1].strip()
+                elif "/" in name_1:
+                    parts = name_1.split("/", 1)
+                    index = parts[0] + "/"
+                    name_1 = parts[1].strip()
+                for obj_name, tranlation in tr.names.items():
+                    if name_1.startswith(obj_name):
+                        name_1 = name_1.replace(obj_name, tranlation[lang])
+                        break
+                name_1 = index + name_1
+            names.update({name_1: name_0})
+
+    return names
 
 def frame(num):
     n = str(num)
@@ -65,8 +80,8 @@ sg.ChangeLookAndFeel("MaterialDark")
 
 T1_col1 = [
     [sg.Text(tr.gui_database[lang], size=(16, 1), font=("arial", 12), key="T1_title0")],
-    [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T1_tagsN"), sg.InputCombo(tag_list, size=(12, 1), enable_events=True, disabled=True, key="T1_tags")],
-    [sg.Listbox(values=tuple(obj_list().keys()), size=(22, 22), enable_events=True, key="T1_list")]
+    [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T1_tagsN"), sg.InputCombo(tag_list(), default_value="featured", size=(12, 1), enable_events=True, key="T1_tags")],
+    [sg.Listbox(values=tuple(obj_list(tag="featured").keys()), size=(22, 22), enable_events=True, key="T1_list")]
 ]
 T1_col2 = [
     [sg.Text(tr.gui_settings[lang], size=(16, 1), font=("arial", 12), key="T1_title1")],
@@ -130,7 +145,7 @@ T2_num = len(T2_col1) - 1
 
 T3_col1 = [
     [sg.Text(tr.gui_settings[lang], size=(20, 1), font=("arial", 12), key="T3_title1")],
-    [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T3_tagsN"), sg.InputCombo(tag_list, size=(14, 1), enable_events=True, disabled=True, key="T3_tags")],
+    [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T3_tagsN"), sg.InputCombo(tag_list(), default_value="featured", size=(14, 1), enable_events=True, key="T3_tags")],
     [sg.HorizontalSeparator()],
     [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), enable_events=True, default=True, key="T3_gamma")],
     [sg.Checkbox("sRGB", enable_events=True, size=(16, 1), key="T3_srgb")],
@@ -199,7 +214,7 @@ while True:
         window["T1_title1"].update(tr.gui_settings[lang])
         window["T1_title2"].update(tr.gui_results[lang])
         window["T1_tagsN"].update(tr.gui_tags[lang])
-        window["T1_list"].update(values=tuple(obj_list().keys()))
+        window["T1_list"].update(values=tuple(obj_list(tag=values["T1_tags"]).keys()))
         window["T1_br_mode"].update(tr.gui_br[lang][0])
         window["T1_interp"].update(tr.gui_interp[lang][0])
         window["T1_bit"].update(tr.gui_bit[lang])
@@ -317,6 +332,9 @@ while True:
             window["T1_rgb"].update(T1_rgb)
             window["T1_hex"].update(T1_rgb_show)
         
+        elif event == "T1_tags":
+            window["T1_list"].update(tuple(obj_list(tag=values["T1_tags"]).keys()))
+        
         elif event == "T1_add" and values["T1_list"] != []:
             names.append(values["T1_list"][0])
             T1_fig.add_trace(go.Scatter(
@@ -339,7 +357,7 @@ while True:
             T1_nm = convert.xyz_nm if values["T1_srgb"] else convert.rgb_nm
             
             # Spectrum processing
-            for name_1, name_0 in obj_list().items():
+            for name_1, name_0 in obj_list(tag=values["T1_tags"]).items():
                 T1_spectrum = spectra.objects[name_0]
                 for i in range(3):
                     if values["T1_br_mode"+str(i)]:
@@ -568,20 +586,17 @@ while True:
         if event == "T3_process":
 
             # Database preprocessing
-            if values["T3_tags"] == "":
+            if values["T3_tags"] == "all":
                 T3_data = spectra.objects
                 T3_l = len(T3_data)
-                #config.update({"tags": ["all_objects"]})
             else:
                 T3_data = {}
                 T3_l = 0
                 for name, spectrum in spectra.objects.items():
                     if "tags" in spectrum:
-                        for tag in tag_list:
-                            if tag in spectrum["tags"]:
-                                T3_data.update({name: spectrum})
-                                T3_l += 1
-                                break
+                        if values["T3_tags"] in spectrum["tags"]:
+                            T3_data.update({name: spectrum})
+                            T3_l += 1
             for i in range(3):
                 if values["T3_br_mode"+str(i)]:
                     T3_mode0 = br_modes[i]
@@ -624,7 +639,7 @@ while True:
             for note, translation in tr.notes.items(): # x = 0.6, br = 202
                 T3_draw.multiline_text((T3_w1, T3_h0 + T3_note_step * T3_note_num), f'{note} {translation[lang]}', fill=(202, 202, 202), font=T3_note_font)
                 T3_note_num += 1
-            for info_num, info in enumerate([", ".join(values["T3_tags"]), T3_mode0, values["T3_srgb"], values["T3_gamma"]]): # x = 0.75, br = 224
+            for info_num, info in enumerate([values["T3_tags"], T3_mode0, values["T3_srgb"], values["T3_gamma"]]): # x = 0.75, br = 224
                 T3_draw.multiline_text((T3_w1, T3_h0 + T3_note_step * (T3_note_num + info_num + 1)), f'{tr.info[lang][info_num]}: {info}', fill=(224, 224, 224), font=T3_note_font)
             
             # Table generator
@@ -735,7 +750,7 @@ while True:
                 T3_n += 1
                 print(T3_rgb, name)
 
-            T3_img.save(f'{values["T3_folder"]}/TCT_table-{T3_mode}.{values["T3_extension"]}')
+            T3_img.save(f'{values["T3_folder"]}/TCT-table_{values["T3_tags"]}_{T3_mode}.{values["T3_extension"]}')
             T3_img.show()
 
 window.Close()

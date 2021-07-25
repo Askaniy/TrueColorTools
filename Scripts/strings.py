@@ -71,8 +71,8 @@ notes = {
     "C:": {"en": "cold, outer objects", "ru": "холодные, внешние объекты", "de": ""}
 }
 info = {
-    "en": ["Categories shown", "Brightness mode", "sRGB color space", "Gamma-correction"],
-    "ru": ["Представленные категории", "Режим яркости", "Пространство sRGB", "Гамма-коррекция"],
+    "en": ["Category shown", "Brightness mode", "sRGB color space", "Gamma-correction"],
+    "ru": ["Представленная категория", "Режим яркости", "Пространство sRGB", "Гамма-коррекция"],
     "de": [""]
 }
 
