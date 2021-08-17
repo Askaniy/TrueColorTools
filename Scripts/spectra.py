@@ -53,7 +53,9 @@ sources = [
 	"[26]: Photometric Modeling and VIS-IR Albedo Maps of Tethys From Cassini-VIMS"
 	"\nDOI: 10.1029/2018GL078602; https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2018GL078602",
 	"[27]: Photometric Modeling and VIS-IR Albedo Maps of Dione From Cassini-VIMS"
-	"\nDOI: 10.1002/2017GL076869; https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2017GL076869"
+	"\nDOI: 10.1002/2017GL076869; https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2017GL076869",
+	"[28]: Investigating Surface Color Variegation on Near-Earth Asteroid Bennu Using OSIRIS-REx Mapcam Data "
+	"\nDOI: ...; https://ui.adsabs.harvard.edu/abs/2019LPI....50.2794L/abstract"
 ]
 
 
@@ -140,9 +142,9 @@ objects = {
 		"albedo": True, "obl": 0.001438435
 		},
     "Mars|2": {"tags": ["solar_system", "planet"],
-		"nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.060, 0.088, 0.170, 0.250, 0.288, 0.285, 0.330], "albedo": 0.170, "obl": 0.005886
+		"nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.060, 0.088, 0.170, 0.250, 0.288, 0.285, 0.330], "albedo": True, "obl": 0.005886
 		},
-    "Mars|3": {"tags": ["solar_system", "planet"],
+    "Mars|3": {"tags": ["featured", "solar_system", "planet"],
 		"nm": [350, 450, 550, 650, 750, 850, 950], "br": [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31], "albedo": 0.170, "obl": 0.005886
 		},
     "Mars:B|4": {"tags": ["featured", "solar_system", "planet"],
@@ -1294,6 +1296,16 @@ objects = {
 		},
 	"(99328) 2001 UY123|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
 		"filters": "Landolt", "indices": {"B-V": 0.890, "V-R": 0.537, "R-I": 0.434}, "sun": True
+		},
+	"(101955) Bennu|28": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "main_belt"],
+        "nm": [473.228, 549.146, 697.569, 847.937],
+        "br": [0.0175, 0.01736, 0.0174, 0.01727],
+        "albedo": True
+		},
+	"(101955) Bennu:D|28": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "main_belt"],
+        "nm": [473.228, 549.146, 697.569, 847.937],
+        "br": [0.01604, 0.01573, 0.016, 0.01605],
+        "albedo": True
 		},
 	"(105685) 2000 SC51|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
 		"filters": "Landolt", "indices": {"B-V": 1.016, "V-R": 0.444, "R-I": 0.452}, "sun": True
