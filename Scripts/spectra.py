@@ -1868,27 +1868,27 @@ objects = {
     "Detached|9": {"tags": ["featured", "solar_system", "class", "orbit"],
 		"filters": "Landolt", "indices": {"U-B": 0.18, "B-V": 0.88, "V-R": 0.54, "R-I": 0.51}, "sun": True, "albedo": 0.108 # fyr02's sheet
 		},
-	"Class I|25": {"tags": ["extrasolar", "planet", "class"],
+	"Class I|25": {"tags": ["featured", "extrasolar", "planet", "class"],
 		"nm": [300, 350, 400, 450, 500, 550, 600, 650, 700, 800, 900, 1000],
 		"br": [0.88, 0.85, 0.78, 0.69, 0.67, 0.69, 0.67, 0.64, 0.58, 0.6, 0.45, 0.5],
 		"albedo": True
 		},
-	"Class II|25": {"tags": ["extrasolar", "planet", "class"],
+	"Class II|25": {"tags": ["featured", "extrasolar", "planet", "class"],
 		"nm": [300, 350, 400, 450, 500, 550, 600, 650, 700, 800, 900, 1000],
 		"br": [0.99, 0.99, 0.99, 0.99, 0.98, 0.97, 0.94, 0.95, 0.9, 0.85, 0.75, 0.75],
 		"albedo": True
 		},
-	"Class III|25": {"tags": ["extrasolar", "planet", "class"],
+	"Class III|25": {"tags": ["featured", "extrasolar", "planet", "class"],
 		"nm": [300, 350, 400, 450, 500, 550, 600, 650, 700, 800, 900, 1000],
 		"br": [0.67, 0.52, 0.42, 0.3, 0.2, 0.13, 0.07, 0.06, 0.04, 0.02, 0, 0],
 		"albedo": True
 		},
-	"Class IV|25": {"tags": ["extrasolar", "planet", "class"],
+	"Class IV|25": {"tags": ["featured", "extrasolar", "planet", "class"],
 		"nm": [300, 350, 400, 450, 500, 550, 600, 650, 700, 800, 900, 1000],
 		"br": [0.2, 0.15, 0.1, 0.06, 0.03, 0.01, 0, 0.01, 0, 0, 0, 0],
 		"albedo": True
 		},
-	"Class V|25": {"tags": ["extrasolar", "planet", "class"],
+	"Class V|25": {"tags": ["featured", "extrasolar", "planet", "class"],
 		"nm": [300, 350, 400, 450, 500, 550, 585, 620, 650, 700, 800, 900, 1000],
 		"br": [0.4, 0.57, 0.65, 0.66, 0.66, 0.55, 0, 0.5, 0.62, 0.65, 0.5, 0.65, 0.64],
 		"albedo": True
