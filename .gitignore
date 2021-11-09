@@ -1,0 +1,4 @@
+Scripts/__pycache__/
+Scripts/build/
+Scripts/dist/
+Scripts/*.spec
