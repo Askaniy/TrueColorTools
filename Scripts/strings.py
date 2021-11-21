@@ -66,7 +66,7 @@ names = {
     "Ultima": {"ru": "Ультима", "de": ""},
     "Thule": {"ru": "Туле", "de": ""},
     '"neck"': {"ru": '"шея"', "de": '"neck"'},
-    "ʻOumuamua": {"ru": "Оумуамуа", "de": ""},
+    "'Oumuamua": {"ru": "Оумуамуа", "de": ""},
     "Comets": {"ru": "Кометы", "de": ""},
     "J. trojans": {"ru": "Троянцы", "de": ""},
     "Centaurs": {"ru": "Кентавры", "de": ""},

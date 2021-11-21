@@ -1790,7 +1790,7 @@ objects = {
 		"filters": "Landolt", "indices": {"B-V": 0.710, "V-R": 0.530}, "sun": True
 		},
 	"(136108) Haumea|9": {"tags": ["featured", "solar_system", "dwarf_planet", "minor_body", "tno", "classical", "classical-h"],
-		"filters": "Landolt", "indices": {"B-V": 0.633, "V-R": 0.353, "R-I": 0.330}, "sun": True, "albedo": 0.486 # fyr02's sheet
+		"filters": "Landolt", "indices": {"B-V": 0.633, "V-R": 0.353, "R-I": 0.330}, "sun": True, "albedo": 0.66 # https://arxiv.org/abs/1904.00522
 		},
     "(136199) Eris|6": {"tags": ["featured", "solar_system", "dwarf_planet", "minor_body", "tno", "detached"],
         "nm": [417.357, 479.507, 532.699, 585.89, 601.008, 604.367, 622.844, 637.962, 653.08, 656.439, 659.239, 673.236, 679.955, 692.273, 702.912, 
@@ -2124,10 +2124,10 @@ objects = {
     #"1998 KY26|9": {"tags": ["solar_system", "minor_body", "asteroid"],
 	#	"filters": "Landolt", "indices": {"B-R": 0.083, "V-R": 0.058, "R-I": 0.088}, "sun": False
 	#},
-	"1I/ʻOumuamua|18": {"tags": ["featured", "solar_system", "extrasolar", "asteroid"],
+	"1I/'Oumuamua|18": {"tags": ["featured", "solar_system", "extrasolar", "asteroid"],
 		"filters": "Landolt", "indices": {"B-V": 0.70, "V-R": 0.45}, "sun": True, "albedo": 0.1
 		},
-	"1I/ʻOumuamua|19": {"tags": ["solar_system", "extrasolar", "asteroid"],
+	"1I/'Oumuamua|19": {"tags": ["solar_system", "extrasolar", "asteroid"],
 		"filters": "Sloan Vacuum", "indices": {"g-r": 0.47, "r-i": 0.36}, "sun": True, "albedo": 0.07
 		},
     "Class A|7": {"tags": ["featured", "solar_system", "class", "asteroid"],
