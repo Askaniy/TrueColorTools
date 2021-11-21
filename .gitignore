@@ -1,4 +1,11 @@
+.vscode/
+Maps/
 Scripts/__pycache__/
 Scripts/build/
 Scripts/dist/
+Scripts/test.py
 Scripts/*.spec
+Scripts_local/
+Sources/
+Work/
+.gitignore

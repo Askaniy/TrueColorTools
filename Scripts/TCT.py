@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 import user, spectra, filters, convert
 import strings as tr
 
-lang = user.lang() # ReadMe -> FAQ -> How to choose a language?
+lang = user.lang() # ReadMe -> FAQ -> Localization
 
 
 def tag_list():
@@ -520,7 +520,7 @@ while True:
                     T2_depth = 255
                 T2_data = np.clip(T2_data, 0, T2_depth)
                 
-                # Calibration of maps by spectrum (legasy)
+                # Calibration of maps by spectrum (legacy)
                 #if info["calib"]:
                 #    if "br" in info:
                 #        br = np.array(info["br"])
@@ -607,7 +607,7 @@ while True:
             T3_s = len(spectra.sources)
             T3_name_step = 75
             T3_objt_size = 18
-            T3_srce_size = 11
+            T3_srce_size = 9
             T3_srce_step = 6 + 2 * T3_srce_size
             T3_note_size = 16
             T3_note_step = 4 + T3_note_size
@@ -750,7 +750,7 @@ while True:
                 T3_n += 1
                 print(T3_rgb, name)
 
-            T3_img.save(f'{values["T3_folder"]}/TCT-table_{values["T3_tags"]}_{T3_mode}.{values["T3_extension"]}')
+            T3_img.save(f'{values["T3_folder"]}/TCT-table_{values["T3_tags"]}{"_srgb" if values["T3_srgb"] else ""}_{T3_mode}{"_gamma-corrected" if values["T3_gamma"] else ""}_{lang}.{values["T3_extension"]}')
             T3_img.show()
 
 window.Close()
