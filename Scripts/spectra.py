@@ -57,7 +57,13 @@ sources = [
 	"[28]: Investigating Surface Color Variegation on Near-Earth Asteroid Bennu Using OSIRIS-REx Mapcam Data"
 	"\nDOI: ...; https://ui.adsabs.harvard.edu/abs/2019LPI....50.2794L/abstract",
 	"[29]: SMASS: Small Main-Belt Asteroid Spectroscopic Survey"
-	"\nDOI: ...; http://smass.mit.edu/smass.html"
+	"\nDOI: ...; http://smass.mit.edu/smass.html",
+	"[30]: Colors and Shapes of the Irregular Planetary Satellites"
+	"\nDOI: 10.3847/1538-3881/aab49b; https://iopscience.iop.org/article/10.3847/1538-3881/aab49b",
+	"[31]: A deeper look at the colors of the saturnian irregular satellites"
+	"\nDOI: 10.1016/j.icarus.2007.04.020; https://arxiv.org/abs/astro-ph/0611590",
+	"[32]: Nereid Has Complex Large-Amplitude Photometric Variability (Due to Chaotic Rotation)"
+	"\nDOI: 10.1006/icar.2000.6417; https://arxiv.org/abs/astro-ph/0005050v1"
 ]
 
 
@@ -183,13 +189,13 @@ objects = {
         "br": [0.04, 0.05, 0.051, 0.05, 0.049, 0.053, 0.055, 0.058, 0.062, 0.067, 0.069],
         "albedo": 0.068 # Geom. ! https://ssd.jpl.nasa.gov/?sat_phys_par
     	},
-    "Jupiter|2": {"tags": ["solar_system", "planet"],
+    "Jupiter|2": {"tags": ["solar_system", "planet", "jovian_system"],
 		"nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.358, 0.443, 0.538, 0.513, 0.495, 0.389, 0.321], "obl": 0.06487
 		},
-    "Jupiter|3": {"tags": ["solar_system", "planet"],
+    "Jupiter|3": {"tags": ["solar_system", "planet", "jovian_system"],
 		"nm": [350, 450, 550, 650, 750, 850], "br": [0.604, 0.824, 1.000, 1.006, 0.832, 0.636], "obl": 0.06487
 		},
-    "Jupiter|5": {"tags": ["featured", "solar_system", "planet"],
+    "Jupiter|5": {"tags": ["featured", "solar_system", "planet", "jovian_system"],
         "nm": list(range(300, 1000, 5)),
         "br": [0.29378, 0.28429, 0.27608, 0.27136, 0.27249, 0.27212, 0.27459, 0.28014, 0.28171, 0.28694, 0.29027, 0.29465, 0.30181, 0.30318, 0.30942, 
         0.31845, 0.32228, 0.32985, 0.33479, 0.3483, 0.34522, 0.35446, 0.36173, 0.3716, 0.38007, 0.38811, 0.39714, 0.40009, 0.40802, 0.4144, 0.42059, 
@@ -202,61 +208,124 @@ objects = {
         0.41455, 0.4393, 0.44514, 0.42942, 0.43015, 0.37152, 0.23525, 0.18172, 0.18811, 0.15767, 0.10329, 0.07357, 0.08545],
         "albedo": True, "obl": 0.06487
     	},
-    "Io:T|4": {"tags": ["featured", "solar_system", "moon"],
+    "Io:T|4": {"tags": ["featured", "solar_system", "moon", "jovian_system", "regular"],
         "nm": [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 739.8, 751.9, 763.6, 775.6, 786.3, 799, 811.7, 822.4, 837.1, 849.8, 862.5],
         "br": [0.126856, 0.161157, 0.189998, 0.312668, 0.455349, 0.642046, 0.775382, 0.801427, 0.811630, 0.890139, 0.942953, 1.004252, 1.005697, 1.015561,
         1.031987, 1.019722, 1.008961, 1.000501, 1.015732, 1.006328, 1.003697, 0.986871, 0.973683, 0.987817],
 		"albedo": 0.5014384 # |24
     	},
-    "Io|24": {"tags": ["solar_system", "moon"],
+    "Io|24": {"tags": ["solar_system", "moon", "jovian_system", "regular"],
         "nm": [295.98, 349.54, 376.84, 395.48, 405.46, 428.85, 443.62, 475.98, 538.43, 600.68, 672.13, 787.28, 880.37, 964.69],
         "br": [0.06645, 0.09565, 0.13699, 0.18699, 0.24564, 0.31289, 0.39051, 0.46464, 0.49727, 0.51954, 0.56077, 0.57946, 0.5982, 0.62042],
 		"albedo": True
     	},
-    "Europa:T|4": {"tags": ["featured", "solar_system", "moon"],
+    "Europa:T|4": {"tags": ["featured", "solar_system", "moon", "jovian_system", "regular"],
         "nm": [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
         "br": [0.352826, 0.410782, 0.467415, 0.602579, 0.688769, 0.806425, 0.839300, 0.852109, 0.913667, 0.961235, 0.979446, 1.006591, 1.026941, 1.038414,
         1.067850, 1.062889, 1.063046],
 		"albedo": 0.6110393 # |24
     	},
-    "Europa:T|24": {"tags": ["solar_system", "moon"],
+    "Europa:T|24": {"tags": ["solar_system", "moon", "jovian_system", "regular"],
         "nm": [340.98, 358.07, 375.17, 381.3, 391.27, 419.79, 441.32, 451.3, 459.94, 468.22, 476.49, 484.82, 492.05, 503.62, 518.47, 551.04, 598.92, 647.01,
 		695.29, 743.72, 792.14, 840.63, 889.18, 931.13, 954.13, 995.11],
         "br": [0.38563, 0.40049, 0.41506, 0.42872, 0.44588, 0.46115, 0.47493, 0.49191, 0.50931, 0.52444, 0.53987, 0.55339, 0.5672, 0.58258, 0.59866, 0.61138,
 		0.62658, 0.63586, 0.63949, 0.639, 0.63841, 0.63616, 0.63216, 0.6371, 0.64146, 0.62304],
 		"albedo": True
     	},
-    "Ganymede:L|4": {"tags": ["featured", "solar_system", "moon"],
+    "Ganymede:L|4": {"tags": ["featured", "solar_system", "moon", "jovian_system", "regular"],
         "nm": [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
         "br": [0.488778, 0.590744, 0.632155, 0.752500, 0.783059, 0.869610, 0.918507, 0.955278, 0.973874, 1.010833, 1.021557, 1.046712, 1.040900, 1.035977,
         1.049606, 1.044146, 1.036557],
 		"albedo": 0.4636778 # |24
     	},
-    "Ganymede:L|24": {"tags": ["solar_system", "moon"],
+    "Ganymede:L|24": {"tags": ["solar_system", "moon", "jovian_system", "regular"],
         "nm": [320.0, 336.21, 352.99, 363.67, 377.95, 388.61, 404.13, 424.95, 446.14, 463.01, 478.07, 506.08, 548.23, 573.42, 625.63, 680.99, 715.56,
 		779.75, 830.75, 876.4, 932.56, 968.8],
         "br": [0.24109, 0.26866, 0.29261, 0.30188, 0.32175, 0.34435, 0.36224, 0.37519, 0.39892, 0.42008, 0.4301, 0.44725, 0.463, 0.47268, 0.49018, 0.50107,
 		0.49825, 0.48741, 0.48884, 0.49226, 0.49704, 0.49245],
 		"albedo": True
     	},
-    "Callisto:L|4": {"tags": ["featured", "solar_system", "moon"],
+    "Callisto:L|4": {"tags": ["featured", "solar_system", "moon", "jovian_system", "regular"],
         "nm": [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 837.1, 849.8, 862.5],
         "br": [0.406242, 0.456089, 0.518130, 0.652152, 0.691349, 0.777651, 0.840575, 0.881522, 0.918704, 0.941487, 0.969265, 0.990831, 0.997041, 0.993501,
         1.007422, 0.986979, 1.001239, 0.985442, 1.006188],
 		"albedo": 0.1688978 # |24
     	},
-    "Callisto:L|24": {"tags": ["solar_system", "moon"],
+    "Callisto:L|24": {"tags": ["solar_system", "moon", "jovian_system", "regular"],
         "nm": [353.4, 377.13, 402.86, 433.37, 496.32, 544.31, 592.48, 640.67, 666.97, 745.88, 794.39, 842.94, 891.47, 926.57],
         "br": [0.0891, 0.10305, 0.12241, 0.1311, 0.15594, 0.16799, 0.17514, 0.18138, 0.18453, 0.19318, 0.19019, 0.18602, 0.18271, 0.18578],
 		"albedo": True
     	},
-    "Saturn|2": {"tags": ["solar_system", "planet"],
+	"Sinope|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.77, "V-R": 0.48}, "sun": True
+		},
+	"Lysithea|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.41}, "sun": True
+		},
+	"Carme|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.76, "V-R": 0.48}, "sun": True
+		},
+	"Leda|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.66, "V-R": 0.43}, "sun": True
+		},
+	"Themisto|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.80, "V-R": 0.48}, "sun": True
+		},
+	"Megaclite|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.82, "V-R": 0.44}, "sun": True
+		},
+	"Taygete|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.84, "V-R": 0.47}, "sun": True
+		},
+	"Chaldene|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.82, "V-R": 0.50}, "sun": True
+		},
+	"Harpalyke|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.70, "V-R": 0.42}, "sun": True
+		},
+	"Kalyke|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.69, "V-R": 0.46}, "sun": True
+		},
+	"Iocaste|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.86, "V-R": 0.38}, "sun": True
+		},
+	"Erinome|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.42}, "sun": True
+		},
+	"Isonoe|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.78, "V-R": 0.53}, "sun": True
+		},
+	"Praxidike|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.71, "V-R": 0.32}, "sun": True
+		},
+	"Autonoe|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.51}, "sun": True
+		},
+	"Thyone|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.71, "V-R": 0.45}, "sun": True
+		},
+	"Hermippe|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.73, "V-R": 0.49}, "sun": True
+		},
+	"Callirrhoe|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.81, "V-R": 0.23}, "sun": True
+		},
+	"Eukelade|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.79, "V-R": 0.50}, "sun": True
+		},
+	"Cyllene|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.73, "V-R": 0.46}, "sun": True
+		},
+	"Jovian irregulars|30": {"tags": ["featured", "solar_system", "class", "moon", "jovian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.75, "V-R": 0.44}, "sun": True
+		},
+    "Saturn|2": {"tags": ["solar_system", "planet", "saturnian_system"],
 		"nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.203, 0.339, 0.499, 0.646, 0.568, 0.543, 0.423], "obl": 0.09796
 		},
-    "Saturn|3": {"tags": ["solar_system", "planet"],
+    "Saturn|3": {"tags": ["solar_system", "planet", "saturnian_system"],
 		"nm": [350, 450, 550, 650, 750, 850], "br": [0.445, 0.684, 1.000, 1.144, 1.001, 0.776], "obl": 0.09796
 		},
-    "Saturn|5": {"tags": ["featured", "solar_system", "planet"],
+    "Saturn|5": {"tags": ["featured", "solar_system", "planet", "saturnian_system"],
         "nm": list(range(300, 1000, 5)),
         "br": [0.25845, 0.25605, 0.24952, 0.23874, 0.23387, 0.22685, 0.22264, 0.21964, 0.21405, 0.21096, 0.20684, 0.20468, 0.20455, 0.20151, 0.20191, 
         0.20496, 0.20594, 0.20962, 0.21328, 0.22295, 0.22405, 0.23403, 0.24293, 0.25509, 0.26686, 0.27894, 0.29168, 0.30152, 0.31439, 0.32584, 0.33679, 
@@ -269,7 +338,7 @@ objects = {
         0.54184, 0.54968, 0.52981, 0.50034, 0.50075, 0.43722, 0.27446, 0.22052, 0.24216, 0.22974, 0.13768, 0.10328, 0.12643],
         "albedo": True, "obl": 0.09796
     	},
-    "Rings|4": {"tags": ["featured", "solar_system", "ring"],
+    "Rings|4": {"tags": ["featured", "solar_system", "ring", "saturnian_system"],
         "nm": [326, 343, 360, 383, 403, 435, 469, 500, 534, 566, 599, 633, 644.1, 656, 667.9, 679.9, 691.7, 704.7, 716.4, 728.9, 739.8, 751.9, 763.6,
         775.6, 786.3, 799, 811.7, 822.4, 837.1, 849.8, 862.5],
         "br": [0.3132, 0.3528, 0.3933, 0.4455, 0.5112, 0.5886, 0.6966, 0.7686, 0.8604, 0.9000, 0.9234, 0.9612, 1.081513, 1.065072, 1.088894, 1.094878,
@@ -277,7 +346,7 @@ objects = {
         1.016596],
 		"albedo": 0.5, "obl": 0.5
     	},
-    "Enceladus|24": {"tags": ["featured", "solar_system", "moon"],
+    "Enceladus|24": {"tags": ["featured", "solar_system", "moon", "saturnian_system", "regular"],
         "nm": list(range(350, 890, 5)),
         "br": [0.8816, 0.87372, 0.87059, 0.87494, 0.86546, 0.85415, 0.84686, 0.85811, 0.86617, 0.8733, 0.88373, 0.8831, 0.87806, 0.87006, 0.86713, 0.86532,
 		0.86426, 0.87688, 0.88714, 0.88488, 0.89243, 0.89924, 0.90296, 0.90052, 0.90437, 0.91443, 0.91511, 0.91539, 0.92768, 0.92002, 0.91779, 0.9203,
@@ -288,23 +357,23 @@ objects = {
 		0.84243, 0.84372, 0.84021, 0.84098, 0.84359, 0.84824, 0.84469, 0.84304, 0.8458, 0.84796, 0.85031, 0.85254],
 		"albedo": True
     	},
-    "Tethys|26": {"tags": ["featured", "solar_system", "moon"],
+    "Tethys|26": {"tags": ["featured", "solar_system", "moon", "saturnian_system", "regular"],
         "nm": [350, 440, 550, 700, 950],
         "br": [0.75042, 0.77108, 0.79707, 0.76842, 0.74823],
 		"albedo": True
     	},
-    "Dione|27": {"tags": ["featured", "solar_system", "moon"],
+    "Dione|27": {"tags": ["featured", "solar_system", "moon", "saturnian_system", "regular"],
         "nm": [350, 440, 550, 700, 950],
         "br": [0.57582, 0.61407, 0.61977, 0.58411, 0.58268],
 		"albedo": True
     	},
-    "Rhea|4": {"tags": ["featured", "solar_system", "moon"],
+    "Rhea|4": {"tags": ["featured", "solar_system", "moon", "saturnian_system", "regular"],
         "nm": [325, 350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
         "br": [0.734770, 0.732256, 0.745028, 0.844831, 0.859745, 0.910340, 0.925726, 0.991097, 0.992538, 1.016375, 1.006958, 1.049296, 1.060323, 1.034402,
         1.082394, 1.054788, 1.060017, 1.028328],
 		"albedo": 0.75691 # |24
     	},
-    "Rhea|24": {"tags": ["solar_system", "moon"],
+    "Rhea|24": {"tags": ["solar_system", "moon", "saturnian_system", "regular"],
         "nm": list(range(450, 895, 5)),
         "br": [0.80064, 0.79731, 0.82162, 0.79365, 0.83878, 0.81235, 0.85642, 0.80113, 0.8009, 0.79458, 0.78575, 0.77766, 0.77484, 0.78457, 0.76513, 0.76585, 
 		0.76538, 0.75955, 0.77142, 0.75809, 0.75691, 0.75356, 0.74991, 0.74386, 0.73731, 0.72666, 0.72249, 0.73429, 0.71973, 0.71943, 0.71654, 0.71214,
@@ -314,10 +383,10 @@ objects = {
 		0.59506, 0.52898, 0.57511, 0.53865, 0.54182, 0.55485, 0.51589, 0.53527],
 		"albedo": True
     	},
-    "Titan|3": {"tags": ["solar_system", "moon"],
+    "Titan|3": {"tags": ["solar_system", "moon", "saturnian_system", "regular"],
 		"nm": [350, 450, 550, 650, 750, 850], "br": [0.344, 0.584, 1.000, 1.248, 1.101, 0.879]
 		},
-    "Titan|5": {"tags": ["featured", "solar_system", "moon"],
+    "Titan|5": {"tags": ["featured", "solar_system", "moon", "saturnian_system", "regular"],
         "nm": list(range(300, 1000, 5)),
         "br": [0.06505, 0.05856, 0.05638, 0.05807, 0.0603, 0.06186, 0.06338, 0.06517, 0.06666, 0.06874, 0.07017, 0.07212, 0.07408, 0.07608, 0.07853, 
         0.0811, 0.0835, 0.08513, 0.08827, 0.09123, 0.09332, 0.09631, 0.09867, 0.1027, 0.10647, 0.10989, 0.11321, 0.11655, 0.12048, 0.12456, 0.12877, 
@@ -330,13 +399,94 @@ objects = {
         0.27305, 0.27734, 0.22799, 0.19868, 0.19731, 0.16681, 0.12782, 0.11507, 0.11953, 0.11382, 0.09641, 0.08534, 0.08749],
 		"albedo": True
     	},
-    "Uranus|2": {"tags": ["solar_system", "planet"],
+	"Phoebe|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.57, "V-R": 0.34}, "sun": True
+		},
+	"Ymir|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.80, "V-R": 0.45, "V-I": 0.89}, "sun": True
+		},
+	"Paaliaq|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.86, "V-R": 0.40, "V-I": 0.92}, "sun": True
+		},
+	"Tarvos|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.71, "V-R": 0.42}, "sun": True
+		},
+	"Tarvos|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.78, "V-R": 0.43, "V-I": 0.82}, "sun": True
+		},
+	"Ijiraq|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-R": 1.40}, "sun": True
+		},
+	"Ijiraq|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 1.05, "V-R": 0.58, "V-I": 1.09}, "sun": True
+		},
+	"Suttungr|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.47, "V-R": 0.65, "V-I": 0.78}, "sun": True
+		},
+	"Kiviuq|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.86, "V-R": 0.48, "V-I": 0.98}, "sun": True
+		},
+	"Mundilfari|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.58, "V-R": 0.41, "V-I": 0.52}, "sun": True
+		},
+	"Albiorix|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.80, "V-R": 0.50}, "sun": True
+		},
+	"Albiorix|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.96, "V-R": 0.52, "V-I": 0.96}, "sun": True
+		},
+	"Skathi|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.37, "V-I": 0.88}, "sun": True
+		},
+	"Erriapus|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.78, "V-R": 0.41}, "sun": True
+		},
+	"Erriapus|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.71, "V-R": 0.40, "V-I": 0.86}, "sun": True
+		},
+	"Siarnaq|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.87, "V-R": 0.48, "V-I": 1.03}, "sun": True
+		},
+	"Thrymr|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.41, "V-R": 0.59, "V-I": 0.86}, "sun": True
+		},
+	"Narvi|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-R": 1.29}, "sun": True
+		},
+	"Bebhionn|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.61, "V-R": 0.51}, "sun": True
+		},
+	"Aegir|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-R": 1.30}, "sun": True
+		},
+	"Bergelmir|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-R": 1.10}, "sun": True
+		},
+	"Bestla|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-R": 1.32}, "sun": True
+		},
+	"Fornjot|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-R": 1.40}, "sun": True
+		},
+	"Hyrrokkin|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-R": 1.23}, "sun": True
+		},
+	"Tarqeq|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-R": 1.37}, "sun": True
+		},
+	"S/2007 S 2|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-R": 1.37}, "sun": True
+		},
+	"Saturnian irregulars|30": {"tags": ["featured", "solar_system", "class", "moon", "saturnian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.69, "V-R": 0.44}, "sun": True
+		},
+    "Uranus|2": {"tags": ["solar_system", "planet", "uranian_system"],
 		"nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.502, 0.561, 0.488, 0.264, 0.202, 0.089, 0.079], "obl": 0.02293
 		},
-    "Uranus|3": {"tags": ["solar_system", "planet"],
+    "Uranus|3": {"tags": ["solar_system", "planet", "uranian_system"],
 		"nm": [350, 450, 550, 650, 750, 850], "br": [0.984, 1.067, 1.000, 0.647, 0.292, 0.148], "obl": 0.02293
 		},
-    "Uranus|5": {"tags": ["featured", "solar_system", "planet"],
+    "Uranus|5": {"tags": ["featured", "solar_system", "planet", "uranian_system"],
         "nm": list(range(300, 1000, 5)),
         "br": [0.53, 0.52915, 0.53383, 0.52396, 0.52481, 0.51762, 0.51994, 0.53179, 0.51993, 0.52475, 0.51689, 0.51507, 0.52749, 0.51285, 0.52179, 0.53988, 
         0.53582, 0.5555, 0.53676, 0.57531, 0.52632, 0.53684, 0.54856, 0.55668, 0.56234, 0.57533, 0.5903, 0.57235, 0.55516, 0.58489, 0.58799, 0.58555, 
@@ -349,20 +499,38 @@ objects = {
         0.15181, 0.09542, 0.08876, 0.04618, 0.01896, 0.01611, 0.01781, 0.01818, 0.01391, 0.01367, 0.01475],
         "albedo": True, "obl": 0.02293
     	},
-	"Miranda|16": {"tags": ["featured", "solar_system", "moon"],
+	"Miranda|16": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
 		"nm": [250, 410, 480, 560, 750, 910], "br": [0.51, 0.49, 0.48, 0.47, 0.46, 0.45], "albedo": 0.34
 		},
-	"Ariel|16": {"tags": ["featured", "solar_system", "moon"],
+	"Ariel|16": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
 		"nm": [250, 410, 480, 560, 750, 910], "br": [0.50, 0.51, 0.51, 0.51, 0.51, 0.52], "albedo": 0.37
 		},
-	"Umbriel|16": {"tags": ["featured", "solar_system", "moon"],
+	"Umbriel|16": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
 		"nm": [250, 410, 480, 560, 750, 910], "br": [0.25, 0.25, 0.25, 0.25, 0.26, 0.26], "albedo": 0.19
 		},
-	"Titania|16": {"tags": ["featured", "solar_system", "moon"],
+	"Titania|16": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
 		"nm": [250, 410, 480, 560, 750, 910], "br": [0.30, 0.32, 0.33, 0.34, 0.36, 0.37], "albedo": 0.27
 		},
-	"Oberon|16": {"tags": ["featured", "solar_system", "moon"],
+	"Oberon|16": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
 		"nm": [250, 410, 480, 560, 750, 910], "br": [0.27, 0.29, 0.30, 0.31, 0.33, 0.35], "albedo": 0.23
+		},
+	"Caliban|30": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.81, "V-R": 0.47}, "sun": True
+		},
+	"Sycorax|30": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.81, "V-R": 0.54}, "sun": True
+		},
+	"Prospero|30": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.81, "V-R": 0.51}, "sun": True
+		},
+	"Setebos|30": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.78, "V-R": 0.49}, "sun": True
+		},
+	"Stephano|30": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.97, "V-R": 0.66}, "sun": True
+		},
+	"Uranian irregulars|30": {"tags": ["featured", "solar_system", "class", "moon", "uranian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.84, "V-R": 0.53}, "sun": True
 		},
     "Neptune|2": {"tags": ["solar_system", "planet"],
 		"nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.578, 0.562, 0.442, 0.226, 0.181, 0.072, 0.067], "obl": 0.0171
@@ -370,7 +538,7 @@ objects = {
     "Neptune|3": {"tags": ["solar_system", "planet"],
 		"nm": [350, 450, 550, 650, 750, 850], "br": [1.252, 1.235, 1.000, 0.555, 0.237, 0.132], "obl": 0.0171
 		},
-    "Neptune|5": {"tags": ["featured", "solar_system", "planet"],
+    "Neptune|5": {"tags": ["featured", "solar_system", "planet", "neptunian_system"],
         "nm": list(range(300, 1000, 5)),
         "br": [0.55168, 0.57462, 0.5749, 0.56581, 0.56727, 0.55883, 0.56295, 0.5772, 0.56453, 0.5712, 0.56445, 0.56291, 0.57946, 0.5619, 0.57126, 0.59178, 
         0.58364, 0.60495, 0.57921, 0.62125, 0.56071, 0.56722, 0.57935, 0.58255, 0.58109, 0.59381, 0.60457, 0.57878, 0.54865, 0.58534, 0.5848, 0.57342, 
@@ -383,11 +551,23 @@ objects = {
         0.16553, 0.08372, 0.05606, 0.05255, 0.03725, 0.02468, 0.02116, 0.02346, 0.02395, 0.01784, 0.01751, 0.01883],
         "albedo": True, "obl": 0.0171
     	},
-    "Triton|20": {"tags": ["featured", "solar_system", "moon"],
+    "Triton|20": {"tags": ["featured", "solar_system", "moon", "neptunian_system"],
         "nm": list(range(300, 1000, 100)),
         "br": [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
         "albedo": True # Geom. !
     	},
+	"Halimede|30": {"tags": ["solar_system", "moon", "neptunian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.89, "V-R": 0.56}, "sun": True
+		},
+	"Nereid|30": {"tags": ["solar_system", "moon", "neptunian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.67, "V-R": 0.38}, "sun": True
+		},
+	"Nereid|32": {"tags": ["featured", "solar_system", "moon", "neptunian_system", "irregular"],
+		"filters": "Landolt", "bands": ["U", "B", "V", "R", "I"], "i/r": [0.90, 0.93, 1, 1.13, 0.99], "albedo": 0.24 # https://arxiv.org/abs/1601.02395
+		},
+	"Neptunian irregulars|30": {"tags": ["featured", "solar_system", "class", "moon", "neptunian_system", "irregular"],
+		"filters": "Landolt", "indices": {"B-V": 0.77, "V-R": 0.50}, "sun": True
+		},
     "C/1995O1-HB|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
 		"filters": "Landolt", "indices": {"B-V": 0.810, "V-R": 0.390}, "sun": True
 		},
@@ -796,7 +976,7 @@ objects = {
 		1.0193, 1.0173, 1.0193, 1.0223, 1.0229, 1.0239, 1.0278, 1.0175, 1.0149, 1.0184, 1.0147, 1.0184, 1.0213, 1.0120, 1.0067, 1.0142, 1.0167, 1.0119, 
 		1.0162, 1.0243, 1.0127, 1.0124, 1.0103, 1.0174, 1.0181, 1.0198, 1.0166, 1.0123, 1.0177, 1.0175, 1.0119, 1.0165, 1.0140, 1.0092, 1.0129, 1.0148, 
 		1.0211, 1.0244, 1.0208, 1.0103, 1.0149, 1.0207, 1.0197, 1.0182, 1.0212, 1.0178, 1.0225, 1.0236, 1.0201],
-        "albedo": 0.09
+        "albedo": 0.09  # Geom. !
 		},
 	"(2) Pallas|29": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
 		"nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
@@ -861,7 +1041,7 @@ objects = {
 		0.9875, 0.9786, 0.9638, 0.9528, 0.9555, 0.9403, 0.9470, 0.9319, 0.9224, 0.9225, 0.9194, 0.9089, 0.8965, 0.8896, 0.8863, 0.8792, 0.8730, 0.8621, 
 		0.8665, 0.8570, 0.8524, 0.8466, 0.8350, 0.8316, 0.8295, 0.8253, 0.8181, 0.8129, 0.8133, 0.8088, 0.8066, 0.8007, 0.7967, 0.7961, 0.7914, 0.7858, 
 		0.7921, 0.7974, 0.7879, 0.7846, 0.7938, 0.7897, 0.7914, 0.7965, 0.7975, 0.8024, 0.7952],
-        "albedo": 0.423
+        "albedo": 0.423  # Geom. !
 		},
 	"(7) Iris|29": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
 		"nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 

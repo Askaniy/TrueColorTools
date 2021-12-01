@@ -9,11 +9,13 @@ names = {
     "Mars": {"ru": "Марс", "de": ""},
     "Phobos": {"ru": "Фобос", "de": ""},
     "Deimos": {"ru": "Деймос", "de": ""},
+    "Jovian irregulars": {"ru": "Нерег. сп. Юпитера", "de": ""},
     "Jupiter": {"ru": "Юпитер", "de": ""},
     "Io": {"ru": "Ио", "de": ""},
     "Europa": {"ru": "Европа", "de": ""},
     "Ganymede": {"ru": "Ганимед", "de": ""},
     "Callisto": {"ru": "Каллисто", "de": ""},
+    "Saturnian irregulars": {"ru": "Нерег. сп. Сатурна", "de": ""},
     "Saturn": {"ru": "Сатурн", "de": ""},
     "Rings": {"ru": "Кольца", "de": ""},
     "Enceladus": {"ru": "Энцелад", "de": ""},
@@ -22,12 +24,15 @@ names = {
     "Rhea": {"ru": "Рея", "de": ""},
     "Titania": {"ru": "Титания", "de": ""},
     "Titan": {"ru": "Титан", "de": ""},
+    "Uranian irregulars": {"ru": "Нерег. сп. Урана", "de": ""},
     "Uranus": {"ru": "Уран", "de": ""},
     "Miranda": {"ru": "Миранда", "de": ""},
     "Ariel": {"ru": "Ариэль", "de": ""},
     "Umbriel": {"ru": "Умбриэль", "de": ""},
     "Oberon": {"ru": "Оберон", "de": ""},
+    "Neptunian irregulars": {"ru": "Нерег. сп. Нептуна", "de": ""},
     "Neptune": {"ru": "Нептун", "de": ""},
+    "Nereid": {"ru": "Нереида", "de": ""},
     "Triton": {"ru": "Тритон", "de": ""},
     "Halley": {"ru": "Галлея", "de": ""},
     "Ceres": {"ru": "Церера", "de": ""},
@@ -75,7 +80,7 @@ names = {
     "Classic": {"ru": "Классич.", "de": ""},
     "Scattered": {"ru": "Рассеянный диск", "de": ""},
     "Detached": {"ru": "Обособл.", "de": ""},
-    "Class": {"ru": "Класс", "de": ""},
+    "Class": {"ru": "Класс", "de": ""}
 }
 
 notes = {
