@@ -4,7 +4,9 @@ import numpy as np
 from scipy.interpolate import Akima1DInterpolator, PchipInterpolator, CubicSpline
 from PIL import Image, ImageDraw, ImageFont
 import plotly.graph_objects as go
-import user, spectra, filters, convert
+import user, cmf, filters
+import calculations as calc
+import database as db
 import strings as tr
 
 lang = user.lang() # ReadMe -> FAQ -> Localization
@@ -12,14 +14,14 @@ lang = user.lang() # ReadMe -> FAQ -> Localization
 
 def tag_list():
     tag_set = set(["all"])
-    for data in spectra.objects.values():
+    for data in db.objects.values():
         if "tags" in data:
             tag_set.update(data["tags"])
     return list(tag_set)
 
 def obj_list(tag="all"):
     names = {}
-    for name_0, data in spectra.objects.items():
+    for name_0, data in db.objects.items():
 
         flag = True
         if tag != "all":
@@ -124,7 +126,10 @@ T2_col1 = [
     [frame(3)],
     [frame(4)],
     [frame(5)],
-    [frame(6)] # just add more frames here
+    [frame(6)],
+    [frame(7)],
+    [frame(8)],
+    [frame(9)] # just add more frames here
 ]
 T2_col2 = [
     [sg.Text(tr.gui_output[lang], size=(20, 1), font=("arial", 12), key="T2_title2")],
@@ -249,7 +254,7 @@ while True:
         window["T3_process"].update(tr.gui_process[lang])
     
     elif event == tr.source[lang]:
-        sg.popup("\n\n".join(spectra.sources), title=event, line_width=120, location=(16, 25))
+        sg.popup("\n\n".join(db.sources), title=event, line_width=120, location=(16, 25))
     
     elif event == tr.note[lang]:
         notes = []
@@ -260,18 +265,18 @@ while True:
     elif event == tr.gui_info[lang]:
         sg.popup(tr.auth_info[lang], title=event)
     
-    # Events in tab "Spectra"
+    # ------------ Events in the tab "Spectra" ------------
 
     elif event.startswith("T1"):
 
         if event in T1_events and values["T1_list"] != []:
-            T1_nm = convert.xyz_nm if values["T1_srgb"] else convert.rgb_nm
+            T1_nm = cmf.xyz_nm if values["T1_srgb"] else cmf.rgb_nm
             for i in range(3):
                 if values["T1_br_mode"+str(i)]:
                     T1_mode = br_modes[i]
 
             # Spectral data import and processing
-            T1_spectrum = spectra.objects[obj_list()[values["T1_list"][0]]]
+            T1_spectrum = db.objects[obj_list()[values["T1_list"][0]]]
             T1_albedo = 0
             if "albedo" not in T1_spectrum:
                 if T1_mode == "albedo":
@@ -279,7 +284,7 @@ while True:
                 T1_spectrum.update({"albedo": False})
             elif type(T1_spectrum["albedo"]) != bool:
                 T1_albedo = T1_spectrum["albedo"]
-            T1_spectrum = convert.transform(T1_spectrum)
+            T1_spectrum = calc.transform(T1_spectrum)
             
             # Spectrum interpolation
             try:
@@ -290,7 +295,7 @@ while True:
                 break
             if T1_spectrum["nm"][0] > T1_nm[0] or T1_spectrum["nm"][-1] < T1_nm[-1]:
                 if values["T1_interp0"]:
-                    T1_curve = convert.DefaultExtrapolator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo)
+                    T1_curve = calc.DefaultExtrapolator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo)
                 elif values["T1_interp1"]:
                     extrap = PchipInterpolator(T1_spectrum["nm"], T1_spectrum["br"], extrapolate=True)
                     T1_curve = extrap(T1_nm) / extrap(550) * T1_albedo if T1_albedo else extrap(T1_nm)
@@ -302,7 +307,7 @@ while True:
             T1_curve = np.clip(T1_curve, 0, None)
             
             # Color calculation
-            T1_rgb = convert.to_rgb(
+            T1_rgb = calc.to_rgb(
                 T1_curve, mode=T1_mode,
                 albedo = T1_spectrum["albedo"] or T1_albedo,
                 exp_bit=int(values["T1_bit_num"]), 
@@ -310,7 +315,7 @@ while True:
                 rnd=int(values["T1_rnd_num"]),
                 srgb=values["T1_srgb"]
             )
-            T1_rgb_show = convert.to_rgb(
+            T1_rgb_show = calc.to_rgb(
                 T1_curve, mode=T1_mode,
                 albedo = T1_spectrum["albedo"] or T1_albedo,
                 gamma=values["T1_gamma"],
@@ -354,11 +359,11 @@ while True:
         
         elif event == "T1_export":
             print("\n" + "\t".join(tr.gui_col[lang]) + "\n" + "_" * 36)
-            T1_nm = convert.xyz_nm if values["T1_srgb"] else convert.rgb_nm
+            T1_nm = cmf.xyz_nm if values["T1_srgb"] else cmf.rgb_nm
             
             # Spectrum processing
             for name_1, name_0 in obj_list(tag=values["T1_tags"]).items():
-                T1_spectrum = spectra.objects[name_0]
+                T1_spectrum = db.objects[name_0]
                 for i in range(3):
                     if values["T1_br_mode"+str(i)]:
                         T1_mode = br_modes[i]
@@ -369,7 +374,7 @@ while True:
                     T1_spectrum.update({"albedo": False})
                 elif type(T1_spectrum["albedo"]) != bool:
                     T1_albedo = T1_spectrum["albedo"]
-                T1_spectrum = convert.transform(T1_spectrum)
+                T1_spectrum = calc.transform(T1_spectrum)
                 
                 # Spectrum interpolation
                 try:
@@ -380,7 +385,7 @@ while True:
                     break
                 if T1_spectrum["nm"][0] > T1_nm[0] or T1_spectrum["nm"][-1] < T1_nm[-1]:
                     if values["T1_interp0"]:
-                        T1_curve = convert.DefaultExtrapolator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo)
+                        T1_curve = calc.DefaultExtrapolator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo)
                     elif values["T1_interp1"]:
                         extrap = PchipInterpolator(T1_spectrum["nm"], T1_spectrum["br"], extrapolate=True)
                         T1_curve = extrap(T1_nm) / extrap(550) * T1_albedo if T1_albedo else extrap(T1_nm)
@@ -392,7 +397,7 @@ while True:
                 T1_curve = np.clip(T1_curve, 0, None)
 
                 # Color calculation
-                T1_rgb = convert.to_rgb(
+                T1_rgb = calc.to_rgb(
                     T1_curve, mode=T1_mode,
                     albedo = T1_spectrum["albedo"] or T1_albedo,
                     exp_bit=int(values["T1_bit_num"]), 
@@ -404,7 +409,7 @@ while True:
                 # Output
                 print("\t".join([str(i) for i in T1_rgb]) + "\t" + name_1)
     
-    # Events in tab "Images"
+    # ------------ Events in the tab "Images" ------------
 
     elif event.startswith("T2"):
 
@@ -526,9 +531,9 @@ while True:
                 #        br = np.array(info["br"])
                 #        obl = 0
                 #    elif "ref" in info:
-                #        ref = convert.transform(spectra.objects[info["ref"]])
+                #        ref = calc.transform(db.objects[info["ref"]])
                 #        albedo = ref["albedo"] if "albedo" in ref else 0
-                #        br = convert.get_points(bands, ref["nm"], ref["br"], albedo)
+                #        br = calc.get_points(bands, ref["nm"], ref["br"], albedo)
                 #        obl = ref["obl"] if "obl" in ref else 0
                 #    for u in range(n): # calibration cycles
                 #        for y in range(h):
@@ -541,7 +546,7 @@ while True:
                 #            color = depth * br[layer]
                 #            data[layer] = data[layer] * color / avg
 
-                T2_nm = convert.xyz_nm if input_data["srgb"] else convert.rgb_nm
+                T2_nm = cmf.xyz_nm if input_data["srgb"] else cmf.rgb_nm
                 T2_img = Image.new("RGB", (T2_w, T2_h), (0, 0, 0))
                 T2_draw = ImageDraw.Draw(T2_img)
                 counter = 0
@@ -554,8 +559,8 @@ while True:
                     for y in range(T2_h):
                         T2_spectrum = T2_data[:, y, x]
                         if np.sum(T2_spectrum) > 0:
-                            T2_curve = convert.DefaultExtrapolator(input_data["nm"], list(T2_spectrum), T2_nm)
-                            T2_rgb = convert.to_rgb(T2_curve, mode="albedo", albedo=True, inp_bit=T2_bit, exp_bit=8, gamma=input_data["gamma"])
+                            T2_curve = calc.DefaultExtrapolator(input_data["nm"], list(T2_spectrum), T2_nm)
+                            T2_rgb = calc.to_rgb(T2_curve, mode="albedo", albedo=True, inp_bit=T2_bit, exp_bit=8, gamma=input_data["gamma"])
                             T2_draw.point((x, y), T2_rgb)
                             if x % 32 == 0 and y % 32 == 0:
                                 T2_fig.add_trace(go.Scatter(
@@ -576,7 +581,7 @@ while True:
             except Exception as e:
                 print(e)
     
-    # Events in tab "Table"
+    # ------------ Events in the tab "Table" ------------
 
     elif event.startswith("T3"):
         
@@ -587,12 +592,12 @@ while True:
 
             # Database preprocessing
             if values["T3_tags"] == "all":
-                T3_data = spectra.objects
+                T3_data = db.objects
                 T3_l = len(T3_data)
             else:
                 T3_data = {}
                 T3_l = 0
-                for name, spectrum in spectra.objects.items():
+                for name, spectrum in db.objects.items():
                     if "tags" in spectrum:
                         if values["T3_tags"] in spectrum["tags"]:
                             T3_data.update({name: spectrum})
@@ -604,7 +609,7 @@ while True:
             # Layout
             T3_r = 46 # radius in px
             T3_w = 100*(T3_l + 1) if T3_l < 15 else 1600
-            T3_s = len(spectra.sources)
+            T3_s = len(db.sources)
             T3_name_step = 75
             T3_objt_size = 18
             T3_srce_size = 9
@@ -634,7 +639,7 @@ while True:
                 T3_auth_step = 302 if lang == "ru" else 284
                 T3_draw.text((T3_w - T3_auth_step, T3_h1 - T3_auth_size), tr.auth_info[lang], fill=(136, 136, 136), font=T3_help_font) # x = 0.25, br = 136
             for srce_num in range(T3_s): # x = 0.5, br = 186
-                T3_draw.multiline_text((T3_w0, T3_h1 - T3_srce_step * (T3_s-srce_num)), spectra.sources[srce_num], fill=(186, 186, 186), font=T3_srce_font)
+                T3_draw.multiline_text((T3_w0, T3_h1 - T3_srce_step * (T3_s-srce_num)), db.sources[srce_num], fill=(186, 186, 186), font=T3_srce_font)
             T3_note_num = 0
             for note, translation in tr.notes.items(): # x = 0.6, br = 202
                 T3_draw.multiline_text((T3_w1, T3_h0 + T3_note_step * T3_note_num), f'{note} {translation[lang]}', fill=(202, 202, 202), font=T3_note_font)
@@ -644,7 +649,7 @@ while True:
             
             # Table generator
 
-            T3_nm = convert.xyz_nm if values["T3_srgb"] else convert.rgb_nm
+            T3_nm = cmf.xyz_nm if values["T3_srgb"] else cmf.rgb_nm
         
             T3_n = 0 # object counter
             for name, spectrum in T3_data.items():
@@ -658,7 +663,7 @@ while True:
                     spectrum.update({"albedo": False})
                 elif type(spectrum["albedo"]) != bool:
                     T3_albedo = spectrum["albedo"]
-                spectrum = convert.transform(spectrum)
+                spectrum = calc.transform(spectrum)
                 
                 # Spectrum interpolation
                 try:
@@ -668,13 +673,13 @@ while True:
                     print(tr.error1[lang][1].format(name, len(spectrum["nm"]), len(spectrum["br"])) + "\n")
                     break
                 if spectrum["nm"][0] > T3_nm[0] or spectrum["nm"][-1] < T3_nm[-1]:
-                    T3_curve = convert.DefaultExtrapolator(spectrum["nm"], spectrum["br"], T3_nm, T3_albedo)
+                    T3_curve = calc.DefaultExtrapolator(spectrum["nm"], spectrum["br"], T3_nm, T3_albedo)
                 else:
                     T3_curve = interp(T3_nm) / interp(550) * T3_albedo if T3_albedo else interp(T3_nm)
                 T3_curve = np.clip(T3_curve, 0, None)
 
                 # Color calculation
-                T3_rgb = convert.to_rgb(
+                T3_rgb = calc.to_rgb(
                     T3_curve, mode=T3_mode,
                     albedo = spectrum["albedo"] or T3_albedo,
                     exp_bit=8, gamma=values["T3_gamma"], srgb=values["T3_srgb"]
