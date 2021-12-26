@@ -2,7 +2,7 @@
 Astronomy-focused set of Python tools with GUI that use spectra construction and eye absorption to calculate realistic colors.
 
 Input data is accepted in the form of channel measurements, color indices, magnitudes and even images.
-Customizable output in RGB, Hex or spectra database table.
+Customizable output in RGB, Hex, image or spectra database table.
 
 ### Tools in [`TCT.py`](Scripts/TCT.py):
 - `Spectra` tab provides access to the built-in spectra database and allows you to calculate a color with the selected settings just by clicking on an object;
@@ -12,8 +12,9 @@ Customizable output in RGB, Hex or spectra database table.
 ### Auxiliary:
 - [`user.py`](Scripts/user.py) returns the specified language and path to the tools, or determines them automatically;
 - [`config.py`](Scripts/config.py) allows you to specify in it the language and path applicable to all tools;
-- [`convert.py`](Scripts/convert.py) contains everything that is directly related to calculations (functions, zero points of photometric systems, used curves of color space and sensitivity of human perception);
-- [`spectra.py`](Scripts/spectra.py) is a database of spectra, color indices and their sources;
+- [`calculations.py`](Scripts/calculations.py) is the mathematical core. It contains most of functions and some zero points of photometric systems;
+- [`cmf.py`](Scripts/cmf.py) contains sensitivity of human perception and used curve of color space;
+- [`database.py`](Scripts/database.py) contains spectra, color indices and their sources;
 - [`strings.py`](Scripts/strings.py) contains almost all used inscriptions of other scripts in supported languages.
 
 ## Installation
@@ -28,27 +29,34 @@ python -m pip install -r requirements.txt
 
 ## How to use
 
-![color_calc_GUI](color_calc_GUI.png)
+[TCT.py](Scripts/TCT.py) includes three tabs for different purposes: *Spectra*, *Images* and *Table*. The first and last tabs are linked to the database, the *Images* tab asks for input.
 
-On the left is a list of all available spectra in the database. The number of the source is indicated in square brackets, a list of which can be found in `File` → `Sources`. Also, after the an object's name there can be abbreviations, the decoding of which is indicated in `File` → `Notes`.
+![Spectra Tab](SpectraTab.png)
 
-You can get colors formatted for Celestia. It uses chromaticity values from 0 to 1 for each color channel, where 1 is the value of the brightest channel. In the GUI version, you need to make sure that the `chromaticity` mode is used and `Decimal places` is greater than zero (by default it is), and then set the `Color (bit) depth` parameter to zero.
+Several global concepts:
+- The wavelengths are always increasing. This is important for customizing the database and for numbering images.
+- Database of spectra. Its format is just a dictionary in a Python file and is practically json. You can modify it with your own spectra, and, if you want, share data for TCT.
+- Tag system. Each object in the database can be assigned an arbitrary set of tags. Same tags form a lists in the *Spectra* and *Table* tabs, which simplify interaction with a huge database.
+- System of sources. Each object in the database can be easily linked to one or several sources by its number. You can see the list in `File`→`Sources`. Also, after an object's name there can be abbreviations, the decoding of which is indicated in `File`→`Notes`.
 
-You can add spectra in the database. It's the `objects` dictionary in [`spectra.py`](Scripts/spectra.py). The spectrum can be set in many ways, below is a list of the parameters used.
+
+In the *Images* tab you can get colors formatted for Celestia. It uses chromaticity values from 0 to 1 for each color channel, where 1 is the value of the brightest channel. In the GUI version, you need to make sure that the `chromaticity` mode is used and `Decimal places` is greater than zero (by default it is), and then set the `Color (bit) depth` parameter to zero.
+
+## Database format
 
 ### Mandatory parameters
 - `nm`: list of wavelengths in nm
 - `br`: same-size list of reflectivity
 - `mag`: same-size list of magnitudes
 - `filters`: filter system, one from convert.py → filters
-- `indices`: dictionary of color indices, use only with `filters`; min wavelength color index → max wavelength color index
+- `indices`: dictionary of color indices, use only with `filters`
 - `bands`: list of filters' names, use only with `filters` and `i/f` instead of `br`
 
 ### Optional parameters
-- `albedo`: bool (True if reflectivity was set by albedo values) or float (in V band or on 550 nm)
-- `sun`: bool (True if spectrum contains the solar reflection)
-- `obl`: oblateness (float, from 0 to 1)
-- `tags`: not used for now
+- `albedo`: bool (`True` if reflectivity was set by albedo values) or float (in V band or on 550 nm)
+- `sun`: bool (`True` if spectrum contains the solar reflection)
+- `obl`: oblateness for the `Table` tab (float, from 0 to 1)
+- `tags`: list of strings, categorizes a spectrum
 
 ## Localization
 Language detection priority order:
@@ -62,4 +70,4 @@ lang = user.lang() # config.py or system language
 lang = user.lang("ru") # the same as user.lang("Russian") and user.lang("Русский")
 ```
 
-The tools support English and Russian. German is a stub in the file for storing titles in different languages, [`strings.py`](Scripts/strings.py). If someone wants to add support for any language, this can be done simply.
+The tools support English and Russian. German is a stub in the file for storing titles in different languages, [`strings.py`](Scripts/strings.py). If someone wants to add support for any language, this can be easily done.

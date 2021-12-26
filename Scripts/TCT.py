@@ -9,7 +9,7 @@ import calculations as calc
 import database as db
 import strings as tr
 
-lang = user.lang() # ReadMe -> FAQ -> Localization
+lang = user.lang("en") # ReadMe -> FAQ -> Localization
 
 
 def tag_list():
