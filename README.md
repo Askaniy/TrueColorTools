@@ -4,34 +4,29 @@ Astronomy-focused set of Python tools with GUI that use spectra construction and
 Input data is accepted in the form of channel measurements, color indices, magnitudes and even images.
 Customizable output in RGB, Hex, image or spectra database table.
 
-### Tools in [`TCT.py`](Scripts/TCT.py):
-- `Spectra` tab provides access to the built-in spectra database and allows you to calculate a color with the selected settings just by clicking on an object;
-- `Images` tab allows you to load images, specify their wavelength and display a true color image, for each pixel of which a spectrum was built;
-- `Table` tab generates a customizable table of calculated colors from the spectra database.
+![Spectra Tab](SpectraTab.png)
 
-### Auxiliary:
-- [`user.py`](Scripts/user.py) returns the specified language and path to the tools, or determines them automatically;
-- [`config.py`](Scripts/config.py) allows you to specify in it the language and path applicable to all tools;
-- [`calculations.py`](Scripts/calculations.py) is the mathematical core. It contains most of functions and some zero points of photometric systems;
-- [`cmf.py`](Scripts/cmf.py) contains sensitivity of human perception and used curve of color space;
-- [`database.py`](Scripts/database.py) contains spectra, color indices and their sources;
-- [`strings.py`](Scripts/strings.py) contains almost all used inscriptions of other scripts in supported languages.
 
 ## Installation
-For the GitHub web interface: press the button `Code`, then I recommend choosing `Download ZIP`. After downloading, unpack the archive. You can also clone the repository.
 
-The tool requires Python 3.6 or higher (due to f-strings) and probably Windows (due to system calls in [`user.py`](Scripts/user.py)). No internet connection is required for all scripts to work.
+**Basic installation way**
+Tested on Windows 10/11 and Linux (openSUSE).
 
-Also, you need [NumPy](https://numpy.org/), [SciPy](https://www.scipy.org/), [Pillow](https://pillow.readthedocs.io/), [Plotly](https://plotly.com/python/) and [PySimpleGUI](https://pysimplegui.readthedocs.io/). If you use Anaconda, the first 4 libraries are already preinstalled. You can (wasn't checked) install the libraries all at once using [`requirements.txt`](requirements.txt):
-```
-python -m pip install -r requirements.txt
-```
+1. Clone the repository or download archive by the GitHub web interface (press the button `Code`, then I recommend choosing `Download ZIP`, unpack the archive after downloading);
+2. Make sure you have Python 3.6 or higher (due to f-strings) and the required libraries: [NumPy](https://numpy.org/), [SciPy](https://www.scipy.org/), [Pillow](https://pillow.readthedocs.io/), [Plotly](https://plotly.com/python/) and [PySimpleGUI](https://pysimplegui.readthedocs.io/). If you use Anaconda, the first 4 libraries are already preinstalled. You can install the libraries all at once using [`requirements.txt`](requirements.txt): `python -m pip install -r requirements.txt`;
+3. Run [TCT.py](Scripts/TCT.py)
+
+**Executable file (no Python)**
+Only for Windows. Please note that this installation way is [SevenSpheres](https://github.com/SevenSpheres)' initiative and the relevance of updates is not guaranteed.
+
+1. Go to [releases of SevenSpheres' fork](https://github.com/SevenSpheres/TrueColorTools/releases);
+1. Select, download and unpack the desired archive from the assets;
+1. Run TCT.exe
+
 
 ## How to use
 
-[TCT.py](Scripts/TCT.py) includes three tabs for different purposes: *Spectra*, *Images* and *Table*. The first and last tabs are linked to the database, the *Images* tab asks for input.
-
-![Spectra Tab](SpectraTab.png)
+[TCT.py](Scripts/TCT.py) includes three tabs for different purposes: *Spectra*, *Images* and *Table*. The first and last tabs are linked to the database, the *Images* tab asks for input. No internet connection is required.
 
 Several global concepts:
 - The wavelengths are always increasing. This is important for customizing the database and for numbering images.
@@ -39,8 +34,22 @@ Several global concepts:
 - Tag system. Each object in the database can be assigned an arbitrary set of tags. Same tags form a lists in the *Spectra* and *Table* tabs, which simplify interaction with a huge database.
 - System of sources. Each object in the database can be easily linked to one or several sources by its number. You can see the list in `File`→`Sources`. Also, after an object's name there can be abbreviations, the decoding of which is indicated in `File`→`Notes`.
 
+**Spectra tab** provides access to the built-in spectra database and allows you to calculate a color with the selected settings just by clicking on an object.
+For example, you can get colors formatted for [Celestia](https://github.com/CelestiaProject/Celestia), which uses chromaticity values from 0 to 1 for each color channel, where 1 is the value of the brightest channel. Make sure that the `chromaticity` mode is used and `Decimal places` is greater than zero (by default it is), and then set the `Color (bit) depth` parameter to zero.
 
-In the *Images* tab you can get colors formatted for Celestia. It uses chromaticity values from 0 to 1 for each color channel, where 1 is the value of the brightest channel. In the GUI version, you need to make sure that the `chromaticity` mode is used and `Decimal places` is greater than zero (by default it is), and then set the `Color (bit) depth` parameter to zero.
+**Images tab** allows you to load images, specify their wavelength and display a true color image, for each pixel of which a spectrum was built.
+
+**Table tab** generates a customizable table of calculated colors from the spectra database.
+
+
+### Auxiliary
+- [`user.py`](Scripts/user.py) returns the specified language and path to the tools, or determines them automatically;
+- [`config.py`](Scripts/config.py) allows you to specify in it the language and path applicable to all tools;
+- [`calculations.py`](Scripts/calculations.py) is the mathematical core. It contains most of functions and some zero points of photometric systems;
+- [`cmf.py`](Scripts/cmf.py) contains sensitivity of human perception and used curve of color space;
+- [`database.py`](Scripts/database.py) contains spectra, color indices and their sources;
+- [`strings.py`](Scripts/strings.py) contains almost all used inscriptions of other scripts in supported languages.
+
 
 ## Database format
 
