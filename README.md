@@ -10,6 +10,7 @@ Customizable output in RGB, Hex, image or spectra database table.
 ## Installation
 
 **Basic installation way**
+
 Tested on Windows 10/11 and Linux (openSUSE).
 
 1. Clone the repository or download archive by the GitHub web interface (press the button `Code`, then I recommend choosing `Download ZIP`, unpack the archive after downloading);
@@ -17,6 +18,7 @@ Tested on Windows 10/11 and Linux (openSUSE).
 3. Run [TCT.py](Scripts/TCT.py)
 
 **Executable file (no Python)**
+
 Only for Windows. Please note that this installation way is [SevenSpheres](https://github.com/SevenSpheres)' initiative and the relevance of updates is not guaranteed.
 
 1. Go to [releases of SevenSpheres' fork](https://github.com/SevenSpheres/TrueColorTools/releases);
@@ -26,7 +28,7 @@ Only for Windows. Please note that this installation way is [SevenSpheres](https
 
 ## How to use
 
-[TCT.py](Scripts/TCT.py) includes three tabs for different purposes: *Spectra*, *Images* and *Table*. The first and last tabs are linked to the database, the *Images* tab asks for input. No internet connection is required.
+[`TCT.py`](Scripts/TCT.py) includes three tabs for different purposes: *Spectra*, *Images* and *Table*. The first and last tabs are linked to the database, the *Images* tab asks for input. No internet connection is required.
 
 Several global concepts:
 - The wavelengths are always increasing. This is important for customizing the database and for numbering images.
@@ -34,12 +36,13 @@ Several global concepts:
 - Tag system. Each object in the database can be assigned an arbitrary set of tags. Same tags form a lists in the *Spectra* and *Table* tabs, which simplify interaction with a huge database.
 - System of sources. Each object in the database can be easily linked to one or several sources by its number. You can see the list in `File`→`Sources`. Also, after an object's name there can be abbreviations, the decoding of which is indicated in `File`→`Notes`.
 
-**Spectra tab** provides access to the built-in spectra database and allows you to calculate a color with the selected settings just by clicking on an object.
+**Spectra tab** provides access to the built-in spectra database and allows to calculate a color with the selected settings just by clicking on an object.
+
 For example, you can get colors formatted for [Celestia](https://github.com/CelestiaProject/Celestia), which uses chromaticity values from 0 to 1 for each color channel, where 1 is the value of the brightest channel. Make sure that the `chromaticity` mode is used and `Decimal places` is greater than zero (by default it is), and then set the `Color (bit) depth` parameter to zero.
 
-**Images tab** allows you to load images, specify their wavelength and display a true color image, for each pixel of which a spectrum was built.
+**Images tab** allows you to load image(s), specify wavelengths and save a processed image, for each pixel of which a spectrum was built. It takes a very long time with the current algorithm, so you can check out the preview.
 
-**Table tab** generates a customizable table of calculated colors from the spectra database.
+**Table tab** generates a customizable table of calculated colors from the spectra database. You can see examples [here](Tables/).
 
 
 ### Auxiliary
@@ -48,18 +51,19 @@ For example, you can get colors formatted for [Celestia](https://github.com/Cele
 - [`calculations.py`](Scripts/calculations.py) is the mathematical core. It contains most of functions and some zero points of photometric systems;
 - [`cmf.py`](Scripts/cmf.py) contains sensitivity of human perception and used curve of color space;
 - [`database.py`](Scripts/database.py) contains spectra, color indices and their sources;
+- [`filters.py`](Scripts/filters.py) is a database of spacecraft photometric systems;
 - [`strings.py`](Scripts/strings.py) contains almost all used inscriptions of other scripts in supported languages.
 
 
 ## Database format
 
 ### Mandatory parameters
-- `nm`: list of wavelengths in nm
+- `nm`: list of wavelengths in nanometers
 - `br`: same-size list of reflectivity
 - `mag`: same-size list of magnitudes
-- `filters`: filter system, one from convert.py → filters
+- `filters`: filter system, linked with [`filters.py`](Scripts/filters.py)
 - `indices`: dictionary of color indices, use only with `filters`
-- `bands`: list of filters' names, use only with `filters` and `i/f` instead of `br`
+- `bands`: list of filters' names, use only with `filters`
 
 ### Optional parameters
 - `albedo`: bool (`True` if reflectivity was set by albedo values) or float (in V band or on 550 nm)

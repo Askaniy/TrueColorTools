@@ -90,19 +90,19 @@ def subtract_sun(spectrum, sun):
             br.append(corrected)
             nm.append(sun_nm)
     spectrum.update({"nm": nm, "br": br, "sun": False})
-    spectrum.pop("filters")
+    
     return spectrum
 
 def transform(spectrum):
     if "filters" in spectrum:
-        if "i/r" in spectrum:
-            spectrum.update({"br": spectrum["i/r"]}) # important for subtract_sun
         if "bands" in spectrum:
             spectrum = from_filters(spectrum) # replacement of filters for their wavelengths
         elif "indices" in spectrum:
             spectrum = from_indices(spectrum) # spectrum from color indices
+        spectrum.pop("filters")
     if "mag" in spectrum:
         spectrum = from_magnitudes(spectrum, database.objects["Vega|1"]) # spectrum from magnitudes
+        spectrum.pop("mag")
     if "sun" in spectrum:
         if spectrum["sun"]:
             spectrum = subtract_sun(spectrum, database.objects["Sun|1"]) # subtract solar spectrum

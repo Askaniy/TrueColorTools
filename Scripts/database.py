@@ -563,7 +563,7 @@ objects = {
 		"filters": "Landolt", "indices": {"B-V": 0.67, "V-R": 0.38}, "sun": True
 		},
 	"Nereid|32": {"tags": ["featured", "solar_system", "moon", "neptunian_system", "irregular"],
-		"filters": "Landolt", "bands": ["U", "B", "V", "R", "I"], "i/r": [0.90, 0.93, 1, 1.13, 0.99], "albedo": 0.24 # https://arxiv.org/abs/1601.02395
+		"filters": "Landolt", "bands": ["U", "B", "V", "R", "I"], "br": [0.90, 0.93, 1, 1.13, 0.99], "albedo": 0.24 # https://arxiv.org/abs/1601.02395
 		},
 	"Neptunian irregulars|30": {"tags": ["featured", "solar_system", "class", "moon", "neptunian_system", "irregular"],
 		"filters": "Landolt", "indices": {"B-V": 0.77, "V-R": 0.50}, "sun": True
@@ -2224,13 +2224,13 @@ objects = {
 	#	"filters": "Hubble", "indices": {"F606W-F814W": 1.03}, "sun": True
 	#},
 	"(486958) Ultima|17": {"tags": ["featured", "solar_system", "minor_body", "tno", "classical", "classical-h"],
-		"filters": "New Horizons", "bands": ["blue", "red", "nir"], "i/r": [0.053, 0.079, 0.117], "sun": True, "albedo": True
+		"filters": "New Horizons", "bands": ["blue", "red", "nir"], "br": [0.053, 0.079, 0.117], "sun": True, "albedo": True
 		},
 	"(486958) Thule|17": {"tags": ["featured", "solar_system", "minor_body", "tno", "classical", "classical-h"],
-		"filters": "New Horizons", "bands": ["blue", "red", "nir"], "i/r": [0.058, 0.084, 0.122], "sun": True, "albedo": True
+		"filters": "New Horizons", "bands": ["blue", "red", "nir"], "br": [0.058, 0.084, 0.122], "sun": True, "albedo": True
 		},
 	'(486958) "neck"|17': {"tags": ["featured", "solar_system", "minor_body", "tno", "classical", "classical-h"],
-		"filters": "New Horizons", "bands": ["blue", "red", "nir"], "i/r": [0.066, 0.090, 0.125], "sun": True, "albedo": True
+		"filters": "New Horizons", "bands": ["blue", "red", "nir"], "br": [0.066, 0.090, 0.125], "sun": True, "albedo": True
 		},
 	"(506479) 2003 HB57|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
 		"filters": "Landolt", "indices": {"B-V": 0.830, "V-R": 0.480, "R-I": 0.540}, "sun": True
@@ -2468,13 +2468,13 @@ objects = {
 		"albedo": True
 		},
     "HD 189733 b|10, 15": {"tags": ["featured", "extrasolar", "planet"],
-		"filters": "Landolt", "bands": ["U", "B", "V", "I"], "i/r": [0.62, 0.61, 0.28, 0], "albedo": True
+		"filters": "Landolt", "bands": ["U", "B", "V", "I"], "br": [0.62, 0.61, 0.28, 0], "albedo": True
 		},
 	"HD 189733 b|13, 14": {"tags": ["extrasolar", "planet"],
 		"nm": [290, 368, 370, 416, 459, 510, 547, 875], "br": [0.45, 0.39, 0.374, 0.32, 0.17, 0.043, 0.02, 0.025], "albedo": True
 		},
 	"Ups And b|15": {"tags": ["featured", "extrasolar", "planet"],
-		"filters": "Landolt", "bands": ["U", "B", "V"], "i/r": [0.53, 0.67, 0.29], "albedo": True
+		"filters": "Landolt", "bands": ["U", "B", "V"], "br": [0.53, 0.67, 0.29], "albedo": True
 		},
 	"WASP-18 b": {"tags": ["extrasolar", "planet"],
 		"nm": [440, 788, 900], "br": [0.075, 0.048, 0.05], "albedo": True

@@ -254,7 +254,7 @@ while True:
         window["T3_process"].update(tr.gui_process[lang])
     
     elif event == tr.source[lang]:
-        sg.popup("\n\n".join(db.sources), title=event, line_width=120, location=(16, 25))
+        sg.popup_scrolled("\n\n".join(db.sources), title=event, size=(100, 20))
     
     elif event == tr.note[lang]:
         notes = []
@@ -263,7 +263,7 @@ while True:
         sg.popup("\n".join(notes), title=event)
     
     elif event == tr.gui_info[lang]:
-        sg.popup(tr.auth_info[lang], title=event)
+        sg.popup("https://github.com/Askaniy/TrueColorTools\n"+tr.auth_info[lang], title=event)
     
     # ------------ Events in the tab "Spectra" ------------
 
