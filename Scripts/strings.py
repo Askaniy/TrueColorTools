@@ -94,7 +94,7 @@ notes = {
     "C:": {"en": "cold, outer objects", "ru": "холодные, внешние объекты", "de": ""}
 }
 info = {
-    "en": ["Category shown", "Brightness mode", "sRGB color space", "Gamma-correction"],
+    "en": ["Category shown", "Brightness mode", "sRGB color space", "Gamma correction"],
     "ru": ["Представленная категория", "Режим яркости", "Пространство sRGB", "Гамма-коррекция"],
     "de": [""]
 }
@@ -182,7 +182,7 @@ gui_output = {
 }
 gui_tags = {
     "en": "By tags",
-    "ru": "По тегам",
+    "ru": "Ярлыки",
     "de": ""
 }
 gui_add = {
@@ -211,8 +211,8 @@ gui_gamma = {
     "de": ""
 }
 gui_br = {
-    "en": ["Brightness display mode", "chromaticity", "normalization", "albedo"],
-    "ru": ["Отображение яркости", "цветность", "нормализация", "альбедо"],
+    "en": ["Brightness display mode", "chromaticity", "albedo 0.5", "albedo"],
+    "ru": ["Отображение яркости", "цветность", "альбедо 0,5", "альбедо"],
     "de": [""]
 }
 gui_interp = {

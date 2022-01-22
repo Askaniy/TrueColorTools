@@ -81,8 +81,8 @@ sg.ChangeLookAndFeel("MaterialDark")
 
 T1_col1 = [
     [sg.Text(tr.gui_database[lang], size=(16, 1), font=("arial", 12), key="T1_title0")],
-    [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T1_tagsN"), sg.InputCombo(tag_list(), default_value="featured", size=(12, 1), enable_events=True, key="T1_tags")],
-    [sg.Listbox(values=tuple(obj_list(tag="featured").keys()), size=(22, 22), enable_events=True, key="T1_list")]
+    [sg.Text(tr.gui_tags[lang], size=(6, 1), key="T1_tagsN"), sg.InputCombo(tag_list(), default_value="featured", size=(16, 1), enable_events=True, key="T1_tags")],
+    [sg.Listbox(values=tuple(obj_list(tag="featured").keys()), size=(24, 22), enable_events=True, key="T1_list")]
 ]
 T1_col2 = [
     [sg.Text(tr.gui_settings[lang], size=(16, 1), font=("arial", 12), key="T1_title1")],
@@ -96,7 +96,7 @@ T1_col2 = [
     [sg.HorizontalSeparator()],
     [sg.Text(tr.gui_interp[lang][0], size=(18, 1), key="T1_interp")],
     [sg.Radio(tr.gui_interp[lang][1], "T1_interp", size=(15, 1), enable_events=True, default=True, key="T1_interp0")],
-    [sg.Radio(tr.gui_interp[lang][2], "T1_interp", size=(6, 1), enable_events=True, key="T1_interp1")],
+    [sg.Radio(tr.gui_interp[lang][2], "T1_interp", size=(15, 1), enable_events=True, key="T1_interp1")],
     [sg.HorizontalSeparator()],
     [sg.Text(tr.gui_bit[lang], size=(12, 1), key="T1_bit"), sg.InputText("8", size=(4, 1), enable_events=True, key="T1_bit_num")],
     [sg.Text(tr.gui_rnd[lang], size=(12, 1), key="T1_rnd"), sg.InputText("3", size=(4, 1), enable_events=True, key="T1_rnd_num")]
@@ -131,15 +131,17 @@ T2_col1 = [
 ]
 T2_col2 = [
     [sg.Text(tr.gui_output[lang], size=(20, 1), font=("arial", 12), key="T2_title2")],
-    [sg.Checkbox(tr.gui_gamma[lang], size=(20, 1), key="T2_gamma")],
-    [sg.Checkbox("sRGB", size=(20, 1), key="T2_srgb")],
+    [sg.Checkbox(tr.gui_gamma[lang], size=(15, 1), key="T2_gamma"),
+    sg.Radio(tr.gui_interp[lang][1], "T2_interp", size=(12, 1), enable_events=True, default=True, key="T2_interp0")],
+    [sg.Checkbox("sRGB", size=(15, 1), key="T2_srgb"),
+    sg.Radio(tr.gui_interp[lang][2], "T2_interp", size=(12, 1), enable_events=True, key="T2_interp1")],
     [sg.HorizontalSeparator()],
     [sg.Checkbox(tr.gui_single[lang], size=(22, 1), enable_events=True, key="T2_single")],
     [sg.Input(size=(22, 1), disabled=True, disabled_readonly_background_color="#3A3A3A", key="T2_path"), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(6, 1), disabled=True, key="T2_browse")],
     [sg.Checkbox(tr.gui_system[lang], size=(26, 1), enable_events=True, key="T2_system")],
     [sg.InputCombo(filters.get_sets(), size=(26, 1), enable_events=True, disabled=True, key="T2_filter")],
     [sg.T("")],
-    [sg.Text(tr.gui_folder[lang], key="T2_folderN")],
+    [sg.Text(tr.gui_folder[lang], size=(22, 1), key="T2_folderN")],
     [sg.Input(size=(27, 1), enable_events=True, key="T2_folder"), sg.FolderBrowse(button_text=tr.gui_browse[lang], size=(6, 1), key="T2_browse_folder")],
     [sg.Button(tr.gui_preview[lang], size=(15, 1), disabled=True, key="T2_show"), sg.Button(tr.gui_process[lang], size=(15, 1), disabled=True, key="T2_process")],
     [sg.Image(background_color="black", size=T2_preview, key="T2_preview")]
