@@ -31,8 +31,10 @@ def polator(x, y, scope, albedo=0, fast=False):
                 ay = y[i]
                 bx = x[i+1]
                 by = y[i+1]
-                a = (ay - by) / (ax - bx)
-                b = by - (ay * bx - bx * by) / (ax - bx)
+                ay_by = ay - by
+                ax_bx = ax - bx
+                a = ay_by / ax_bx
+                b = by - bx * a
     else: # qualitatively
         if not extrap:
             br = Akima1DInterpolator(x, y)(scope)

@@ -126,8 +126,8 @@ lang_list = {
     "de": [""]
 }
 gui_tabs = {
-    "en": ["Spectra", "Images", "Table"],
-    "ru": ["Спектры", "Изображения", "Таблица"],
+    "en": ["Spectra", "Images", "Table", "WIP", "WIP"],
+    "ru": ["Спектры", "Изображения", "Таблица", "WIP", "WIP"],
     "de": []
 }
 gui_name1 = {

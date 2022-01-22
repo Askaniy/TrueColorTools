@@ -150,7 +150,7 @@ T2_num = len(T2_col1) - 1
 
 T3_col1 = [
     [sg.Text(tr.gui_settings[lang], size=(20, 1), font=("arial", 12), key="T3_title1")],
-    [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T3_tagsN"), sg.InputCombo(tag_list(), default_value="featured", size=(14, 1), enable_events=True, key="T3_tags")],
+    [sg.Text(tr.gui_tags[lang], size=(6, 1), key="T3_tagsN"), sg.InputCombo(tag_list(), default_value="featured", size=(16, 1), enable_events=True, key="T3_tags")],
     [sg.HorizontalSeparator()],
     [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), enable_events=True, default=True, key="T3_gamma")],
     [sg.Checkbox("sRGB", enable_events=True, size=(16, 1), key="T3_srgb")],
@@ -170,6 +170,12 @@ T3_col2 = [
     [sg.Button(tr.gui_process[lang], size=(15, 1), disabled=True, key="T3_process")]
 ]
 
+T4_col1 = []
+T4_col2 = []
+
+T5_col1 = []
+T5_col2 = []
+
 tab1 = [
     [sg.Column(T1_col1), sg.VSeperator(), sg.Column(T1_col2), sg.VSeperator(), sg.Column(T1_col3)]
 ]
@@ -179,10 +185,23 @@ tab2 = [
 tab3 = [
     [sg.Column(T3_col1), sg.VSeperator(), sg.Column(T3_col2)]
 ]
+tab4 = [
+    [sg.Column(T4_col1), sg.VSeperator(), sg.Column(T4_col2)]
+]
+tab5 = [
+    [sg.Column(T5_col1), sg.VSeperator(), sg.Column(T5_col2)]
+]
 
 layout = [
     [sg.Menu(tr.gui_menu[lang], key="menu")],
-    [sg.TabGroup([[sg.Tab(tr.gui_tabs[lang][0], tab1, key="tab0"), sg.Tab(tr.gui_tabs[lang][1], tab2, key="tab2"), sg.Tab(tr.gui_tabs[lang][2], tab3, key="tab3")]])]
+    [sg.TabGroup([[
+        sg.Tab(tr.gui_tabs[lang][0], tab1, key="tab0"),
+        sg.Tab(tr.gui_tabs[lang][1], tab2, key="tab2"),
+        sg.Tab(tr.gui_tabs[lang][2], tab3, key="tab3"),
+        sg.Tab(tr.gui_tabs[lang][3], tab4, key="tab4"),
+        sg.Tab(tr.gui_tabs[lang][4], tab5, key="tab5")
+        ]])
+    ]
 ]
 
 window = sg.Window("True Color Tools", layout)    
@@ -716,5 +735,9 @@ while True:
 
             T3_img.save(f'{values["T3_folder"]}/TCT-table_{values["T3_tags"]}{"_srgb" if values["T3_srgb"] else ""}_{T3_mode}{"_gamma-corrected" if values["T3_gamma"] else ""}_{lang}.{values["T3_extension"]}')
             T3_img.show()
+    
+    # ------------ Events in the tab "4" ------------
+    
+    # ------------ Events in the tab "5" ------------
 
 window.Close()
