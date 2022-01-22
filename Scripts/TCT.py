@@ -192,7 +192,7 @@ T1_preview = graph.DrawCircle((48, 46), 42, fill_color="black", line_color="whit
 
 T1_fig = go.Figure()
 T1_events = ["T1_list", "T1_gamma", "T1_srgb", "T1_br_mode0", "T1_br_mode1", "T1_br_mode2", "T1_interp0", "T1_interp1", "T1_bit_num", "T1_rnd_num"]
-br_modes = ["chromaticity", "normalization", "albedo"]
+br_modes = ["chromaticity", "albedo 0.5", "albedo"]
 
 
 # Window events loop
@@ -514,6 +514,7 @@ while True:
                 #            color = depth * br[layer]
                 #            data[layer] = data[layer] * color / avg
 
+                T2_fast = True if values["T2_interp1"] else False
                 T2_nm = cmf.xyz_nm if input_data["srgb"] else cmf.rgb_nm
                 T2_img = Image.new("RGB", (T2_w, T2_h), (0, 0, 0))
                 T2_draw = ImageDraw.Draw(T2_img)
@@ -527,7 +528,7 @@ while True:
                     for y in range(T2_h):
                         T2_spectrum = T2_data[:, y, x]
                         if np.sum(T2_spectrum) > 0:
-                            T2_curve = calc.polator(input_data["nm"], list(T2_spectrum), T2_nm)
+                            T2_curve = calc.polator(input_data["nm"], list(T2_spectrum), T2_nm, fast=T2_fast)
                             T2_rgb = calc.to_rgb(T2_curve, mode="albedo", albedo=True, inp_bit=T2_bit, exp_bit=8, gamma=input_data["gamma"])
                             T2_draw.point((x, y), T2_rgb)
                             if x % 32 == 0 and y % 32 == 0:

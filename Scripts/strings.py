@@ -216,8 +216,8 @@ gui_br = {
     "de": [""]
 }
 gui_interp = {
-    "en": ["Interpolator/extrapolator", "qualitatively", "fast (WIP)"],
-    "ru": ["Интер/экстраполятор", "качественно", "быстро (WIP)"],
+    "en": ["Interpolator/extrapolator", "qualitatively", "fast"],
+    "ru": ["Интер/экстраполятор", "качественно", "быстро"],
     "de": [""]
 }
 gui_bit = {

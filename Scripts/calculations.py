@@ -6,35 +6,38 @@ import cmf, database
 # Spectrum processing functions
 
 def polator(x, y, scope, albedo=0, fast=False):
-    #print(x, y, scope, albedo, fast)
     mn = scope[0]
     mx = scope[-1]
     extrap = True if x[0] > mn or x[-1] < mx else False
-    #print("extrap ", extrap)
     br = []
     if fast:
         a = y[0] / x[0]
         b = 0
+        x.append(x[-1] + 1000)
+        y.append(0)
         nm = mn
-        for i, current_wl in enumerate(x):
-            while nm <= current_wl and nm <= mx:
-                br.append(a * nm + b)
-                nm += 5
-            ax = current_wl
-            ay = y[i]
-            if i == len(x)-1:
-                bx = 2000
-                by = 0
+        flag = False
+        for i, ax in enumerate(x):
+            while nm <= ax:
+                if nm <= mx:
+                    br.append(a * nm + b)
+                    nm += 5
+                else:
+                    flag = True
+                    break
+            if flag:
+                break
             else:
+                ay = y[i]
                 bx = x[i+1]
                 by = y[i+1]
-            a = (ay - by) / (ax - bx)
-            b = by - (ay * bx - bx * by) / (ax - bx)
+                a = (ay - by) / (ax - bx)
+                b = by - (ay * bx - bx * by) / (ax - bx)
     else: # qualitatively
         if not extrap:
             br = Akima1DInterpolator(x, y)(scope)
         else: # if extrapolation is needed
-            x = [x[0] - 250] + x + [x[-1] + 500]
+            x = [x[0] - 250] + x + [x[-1] + 1000]
             y = [0] + y + [0]
             interp = Akima1DInterpolator(x, y)
             line = lambda wl: y[1] + (wl - x[1]) * (y[-2] - y[1]) / (x[-2] - x[1])
