@@ -1,7 +1,6 @@
 import PySimpleGUI as sg
 import io
 import numpy as np
-from scipy.interpolate import Akima1DInterpolator, PchipInterpolator, CubicSpline
 from PIL import Image, ImageDraw, ImageFont
 import plotly.graph_objects as go
 import user, cmf, filters
@@ -97,8 +96,7 @@ T1_col2 = [
     [sg.HorizontalSeparator()],
     [sg.Text(tr.gui_interp[lang][0], size=(18, 1), key="T1_interp")],
     [sg.Radio(tr.gui_interp[lang][1], "T1_interp", size=(15, 1), enable_events=True, default=True, key="T1_interp0")],
-    [sg.Radio(tr.gui_interp[lang][2], "T1_interp", size=(6, 1), enable_events=True, key="T1_interp1"),
-    sg.Radio(tr.gui_interp[lang][3], "T1_interp", size=(6, 1), enable_events=True, key="T1_interp2")],
+    [sg.Radio(tr.gui_interp[lang][2], "T1_interp", size=(6, 1), enable_events=True, key="T1_interp1")],
     [sg.HorizontalSeparator()],
     [sg.Text(tr.gui_bit[lang], size=(12, 1), key="T1_bit"), sg.InputText("8", size=(4, 1), enable_events=True, key="T1_bit_num")],
     [sg.Text(tr.gui_rnd[lang], size=(12, 1), key="T1_rnd"), sg.InputText("3", size=(4, 1), enable_events=True, key="T1_rnd_num")]
@@ -191,7 +189,7 @@ graph = window["T1_graph"]
 T1_preview = graph.DrawCircle((48, 46), 42, fill_color="black", line_color="white")
 
 T1_fig = go.Figure()
-T1_events = ["T1_list", "T1_gamma", "T1_srgb", "T1_br_mode0", "T1_br_mode1", "T1_br_mode2", "T1_interp0", "T1_interp1", "T1_interp2", "T1_bit_num", "T1_rnd_num"]
+T1_events = ["T1_list", "T1_gamma", "T1_srgb", "T1_br_mode0", "T1_br_mode1", "T1_br_mode2", "T1_interp0", "T1_interp1", "T1_bit_num", "T1_rnd_num"]
 br_modes = ["chromaticity", "normalization", "albedo"]
 
 
@@ -287,24 +285,8 @@ while True:
             T1_spectrum = calc.transform(T1_spectrum)
             
             # Spectrum interpolation
-            try:
-                interp = Akima1DInterpolator(T1_spectrum["nm"], T1_spectrum["br"])
-            except ValueError:
-                print("\n" + tr.error1[lang][0])
-                print(tr.error1[lang][1].format(values["T1_list"][0], len(T1_spectrum["nm"]), len(T1_spectrum["br"])) + "\n")
-                break
-            if T1_spectrum["nm"][0] > T1_nm[0] or T1_spectrum["nm"][-1] < T1_nm[-1]:
-                if values["T1_interp0"]:
-                    T1_curve = calc.DefaultExtrapolator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo)
-                elif values["T1_interp1"]:
-                    extrap = PchipInterpolator(T1_spectrum["nm"], T1_spectrum["br"], extrapolate=True)
-                    T1_curve = extrap(T1_nm) / extrap(550) * T1_albedo if T1_albedo else extrap(T1_nm)
-                elif values["T1_interp2"]:
-                    extrap = CubicSpline(T1_spectrum["nm"], T1_spectrum["br"], extrapolate=True)
-                    T1_curve = extrap(T1_nm) / extrap(550) * T1_albedo if T1_albedo else extrap(T1_nm)
-            else:
-                T1_curve = interp(T1_nm) / interp(550) * T1_albedo if T1_albedo else interp(T1_nm)
-            T1_curve = np.clip(T1_curve, 0, None)
+            T1_fast = True if values["T1_interp1"] else False
+            T1_curve = calc.polator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo, T1_fast)
             
             # Color calculation
             T1_rgb = calc.to_rgb(
@@ -377,24 +359,8 @@ while True:
                 T1_spectrum = calc.transform(T1_spectrum)
                 
                 # Spectrum interpolation
-                try:
-                    interp = Akima1DInterpolator(T1_spectrum["nm"], T1_spectrum["br"])
-                except ValueError:
-                    print("\n" + tr.error1[lang][0])
-                    print(tr.error1[lang][1].format(values["list"][0], len(T1_spectrum["nm"]), len(T1_spectrum["br"])) + "\n")
-                    break
-                if T1_spectrum["nm"][0] > T1_nm[0] or T1_spectrum["nm"][-1] < T1_nm[-1]:
-                    if values["T1_interp0"]:
-                        T1_curve = calc.DefaultExtrapolator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo)
-                    elif values["T1_interp1"]:
-                        extrap = PchipInterpolator(T1_spectrum["nm"], T1_spectrum["br"], extrapolate=True)
-                        T1_curve = extrap(T1_nm) / extrap(550) * T1_albedo if T1_albedo else extrap(T1_nm)
-                    elif values["T1_interp2"]:
-                        extrap = CubicSpline(T1_spectrum["nm"], T1_spectrum["br"], extrapolate=True)
-                        T1_curve = extrap(T1_nm) / extrap(550) * T1_albedo if T1_albedo else extrap(T1_nm)
-                else:
-                    T1_curve = interp(T1_nm) / interp(550) * T1_albedo if T1_albedo else interp(T1_nm)
-                T1_curve = np.clip(T1_curve, 0, None)
+                T1_fast = True if values["T1_interp1"] else False
+                T1_curve = calc.polator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo, T1_fast)
 
                 # Color calculation
                 T1_rgb = calc.to_rgb(
@@ -559,7 +525,7 @@ while True:
                     for y in range(T2_h):
                         T2_spectrum = T2_data[:, y, x]
                         if np.sum(T2_spectrum) > 0:
-                            T2_curve = calc.DefaultExtrapolator(input_data["nm"], list(T2_spectrum), T2_nm)
+                            T2_curve = calc.polator(input_data["nm"], list(T2_spectrum), T2_nm)
                             T2_rgb = calc.to_rgb(T2_curve, mode="albedo", albedo=True, inp_bit=T2_bit, exp_bit=8, gamma=input_data["gamma"])
                             T2_draw.point((x, y), T2_rgb)
                             if x % 32 == 0 and y % 32 == 0:
@@ -666,17 +632,7 @@ while True:
                 spectrum = calc.transform(spectrum)
                 
                 # Spectrum interpolation
-                try:
-                    interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
-                except ValueError:
-                    print("\n" + tr.error1[lang][0])
-                    print(tr.error1[lang][1].format(name, len(spectrum["nm"]), len(spectrum["br"])) + "\n")
-                    break
-                if spectrum["nm"][0] > T3_nm[0] or spectrum["nm"][-1] < T3_nm[-1]:
-                    T3_curve = calc.DefaultExtrapolator(spectrum["nm"], spectrum["br"], T3_nm, T3_albedo)
-                else:
-                    T3_curve = interp(T3_nm) / interp(550) * T3_albedo if T3_albedo else interp(T3_nm)
-                T3_curve = np.clip(T3_curve, 0, None)
+                T3_curve = calc.polator(spectrum["nm"], spectrum["br"], T3_nm, T3_albedo)
 
                 # Color calculation
                 T3_rgb = calc.to_rgb(

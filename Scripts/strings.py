@@ -216,8 +216,8 @@ gui_br = {
     "de": [""]
 }
 gui_interp = {
-    "en": ["Interpolator/extrapolator", "default", "pchip", "cubic"],
-    "ru": ["Интер/экстраполятор", "по умолчанию", "pchip", "кубич."],
+    "en": ["Interpolator/extrapolator", "qualitatively", "fast (WIP)"],
+    "ru": ["Интер/экстраполятор", "качественно", "быстро (WIP)"],
     "de": [""]
 }
 gui_bit = {

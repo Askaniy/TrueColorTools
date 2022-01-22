@@ -5,26 +5,49 @@ import cmf, database
 
 # Spectrum processing functions
 
-def DefaultExtrapolator(x, y, scope, albedo=0):
-    x = [x[0] - 250] + x + [x[-1] + 500]
-    y = [0] + y + [0]
-    interp = Akima1DInterpolator(x, y)
-    line = lambda wl: y[1] + (wl - x[1]) * (y[-2] - y[1]) / (x[-2] - x[1])
-    #x1 = 550
-    #y1 = interp(x1)
-    #line1 = lambda wl: y[1] + (wl - x[1]) * (y1 - y[1]) / (x1 - x[1])
-    #line2 = lambda wl: y1 + (wl - x1) * (y[-2] - y1) / (x[-2] - x1)
+def polator(x, y, scope, albedo=0, fast=False):
+    #print(x, y, scope, albedo, fast)
+    mn = scope[0]
+    mx = scope[-1]
+    extrap = True if x[0] > mn or x[-1] < mx else False
+    #print("extrap ", extrap)
     br = []
-    for nm in scope:
-        if x[1] < nm < x[-2]:
-            br.append(interp(nm))
-        else:
-            br.append((line(nm) + interp(nm)) / 2)
+    if fast:
+        a = y[0] / x[0]
+        b = 0
+        nm = mn
+        for i, current_wl in enumerate(x):
+            while nm <= current_wl and nm <= mx:
+                br.append(a * nm + b)
+                nm += 5
+            ax = current_wl
+            ay = y[i]
+            if i == len(x)-1:
+                bx = 2000
+                by = 0
+            else:
+                bx = x[i+1]
+                by = y[i+1]
+            a = (ay - by) / (ax - bx)
+            b = by - (ay * bx - bx * by) / (ax - bx)
+    else: # qualitatively
+        if not extrap:
+            br = Akima1DInterpolator(x, y)(scope)
+        else: # if extrapolation is needed
+            x = [x[0] - 250] + x + [x[-1] + 500]
+            y = [0] + y + [0]
+            interp = Akima1DInterpolator(x, y)
+            line = lambda wl: y[1] + (wl - x[1]) * (y[-2] - y[1]) / (x[-2] - x[1])
+            for nm in scope:
+                if x[1] < nm < x[-2]:
+                    br.append(interp(nm))
+                else:
+                    br.append((line(nm) + interp(nm)) / 2)
+    curve = np.clip(br, 0, None)
     if albedo:
-        br550 = interp(550) if x[1] < 550 < x[-2] else (line(550) + interp(550)) / 2
-        return np.array(br) / br550 * albedo
-    else:
-        return np.array(br)
+        br550 = curve[scope.index(550)]
+        curve = curve / br550 * albedo
+    return curve
 
 # to do - def gauss(x): return np.exp(- x**2 / 2) / np.sqrt(2 * np.pi)
 def get_points(pivots, nm_list, br_list, albedo=0, wide=100, low_res=True):
@@ -32,7 +55,7 @@ def get_points(pivots, nm_list, br_list, albedo=0, wide=100, low_res=True):
     scopes = []
     if low_res:
         for pivot in pivots:
-            scope = DefaultExtrapolator(nm_list, br_list, range(pivot-r, pivot+r, 5), albedo)
+            scope = polator(nm_list, br_list, range(pivot-r, pivot+r, 5), albedo)
             scopes.append(np.mean(scope))
     else:
         for pivot in pivots:
@@ -90,7 +113,6 @@ def subtract_sun(spectrum, sun):
             br.append(corrected)
             nm.append(sun_nm)
     spectrum.update({"nm": nm, "br": br, "sun": False})
-    
     return spectrum
 
 def transform(spectrum):

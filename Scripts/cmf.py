@@ -5,7 +5,7 @@ import numpy as np
 # https://colour.readthedocs.io/en/v0.3.15/generated/colour.RGB_CMFS.html?highlight=dataset.cmfs
 
 
-rgb_nm = np.arange(390, 831, 5)
+rgb_nm = list(range(390, 831, 5)) # np.arange breaks the function polator()
 rgb = np.array([
     [3.346603970102795e-05, -2.0587412568294118e-05, 0.0005668672223374708],
     [8.47806339092708e-05, -5.1468531420735294e-05, 0.0014720261741344],
@@ -98,7 +98,7 @@ rgb = np.array([
     [1.0151365375978477e-07, -1.4256783203543677e-10, 4.04121471408326e-12]
 ], dtype="float32")
 
-xyz_nm = np.arange(360, 831, 5)
+xyz_nm = list(range(360, 831, 5))
 xyz = np.array([
     [1.222e-07, 1.3398e-08, 5.35027e-07],
     [9.1927e-07, 1.0065e-07, 4.0283e-06],
