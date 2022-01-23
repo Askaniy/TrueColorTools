@@ -171,28 +171,33 @@ gui_output = {
     "de": ""
 }
 gui_chrom = {
-    "en": "Chromaticity",
-    "ru": "Цветность",
+    "en": "chromaticity mode",
+    "ru": "режим цветности",
     "de": ""
 }
 gui_temp = {
-    "en": "Tempurature (K)",
-    "ru": "Температура (K)",
+    "en": "Tempurature [K]",
+    "ru": "Температура [K]",
     "de": ""
 }
 gui_velocity = {
-    "en": "Velocity (c)",
-    "ru": "Скорость (c)",
+    "en": "Velocity [c]",
+    "ru": "Скорость [c]",
     "de": ""
 }
 gui_vI = {
-    "en": "Circ. orb. vel. (c)",
-    "ru": "I косм. ск. (c)",
+    "en": "Circ. orb. vel. [c]",
+    "ru": "I косм. ск. [c]",
     "de": ""
 }
 gui_scale = {
     "en": "Scale (10^x)",
     "ru": "Масштаб (10^x)",
+    "de": ""
+}
+gui_maxtemp = {
+    "en": "Max. temp.",
+    "ru": "Макс. темп.",
     "de": ""
 }
 gui_tags = {

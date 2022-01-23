@@ -174,13 +174,14 @@ slider_size = (28, 16)
 T4_text_colors = ("#424242", "#FFFFFF")
 T4_col1 = [
     [sg.Text(tr.gui_input[lang], size=(16, 1), font=("arial", 12), key="T4_title1")],
-    [sg.Text(tr.gui_temp[lang], size=(13, 1), key="T4_temp"), sg.Slider(range=(0, 30000), default_value=0, resolution=100, orientation="h", size=slider_size, enable_events=True, key="T4_slider1")],
+    [sg.Text(tr.gui_temp[lang], size=(13, 1), key="T4_temp"), sg.Slider(range=(0, 20000), default_value=0, resolution=100, orientation="h", size=slider_size, enable_events=True, key="T4_slider1")],
     [sg.Text(tr.gui_velocity[lang], size=(13, 1), key="T4_velocity"), sg.Slider(range=(-1, 1), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, key="T4_slider2")],
     [sg.Text(tr.gui_vI[lang], size=(13, 1), key="T4_vI"), sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, key="T4_slider3")],
-    [sg.Checkbox(tr.gui_chrom[lang]+":", size=(16, 1), enable_events=True, default=True, key="T4_chrom")],
     [sg.Text(tr.gui_scale[lang], size=(13, 1), text_color=T4_text_colors[0], key="T4_scale"), sg.Slider(range=(-20, 0), default_value=-20, resolution=0.1, orientation="h", size=slider_size, enable_events=True, disabled=True, key="T4_slider4")],
     [sg.T("")],
     [sg.HorizontalSeparator()],
+    [sg.Checkbox(tr.gui_chrom[lang], size=(16, 1), enable_events=True, default=True, key="T4_chrom"),
+    sg.Text(tr.gui_maxtemp[lang], size=(12, 1), key="T4_maxtemp"), sg.InputText("20000", size=(8, 1), enable_events=True, key="T4_maxtemp_num")],
     [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), enable_events=True, default=True, key="T4_gamma"),
     sg.Text(tr.gui_bit[lang], size=(12, 1), key="T4_bit"), sg.InputText("8", size=(4, 1), enable_events=True, key="T4_bit_num")],
     [sg.Checkbox("sRGB", enable_events=True, size=(16, 1), key="T4_srgb"),
@@ -292,10 +293,11 @@ while True:
         window["T4_velocity"].update(tr.gui_velocity[lang])
         window["T4_vI"].update(tr.gui_vI[lang])
         window["T4_scale"].update(tr.gui_scale[lang])
-        window["T4_colorRGB"].update(tr.gui_rgb[lang])
-        window["T4_colorHEX"].update(tr.gui_hex[lang])
+        window["T4_maxtemp"].update(tr.gui_maxtemp[lang])
         window["T4_bit"].update(tr.gui_bit[lang])
         window["T4_rnd"].update(tr.gui_rnd[lang])
+        window["T4_colorRGB"].update(tr.gui_rgb[lang])
+        window["T4_colorHEX"].update(tr.gui_hex[lang])
     
     elif event == tr.source[lang]:
         sg.popup_scrolled("\n\n".join(db.sources), title=event, size=(100, 20))
@@ -761,38 +763,42 @@ while True:
     
     elif event.startswith("T4"):
         
-        if event == "T4_chrom":
-            window["T4_scale"].update(text_color=T4_text_colors[not values["T4_chrom"]])
-            window["T4_slider4"].update(disabled=values["T4_chrom"])
+        if event == "T4_maxtemp_num":
+            window["T4_slider1"].update(range=(0, int(values["T4_maxtemp_num"])))
+        else:
+
+            if event == "T4_chrom":
+                window["T4_scale"].update(text_color=T4_text_colors[not values["T4_chrom"]])
+                window["T4_slider4"].update(disabled=values["T4_chrom"])
+            
+            T4_mode = "chromaticity" if values["T4_chrom"] else "albedo"
+            T4_nm = cmf.xyz_nm if values["T4_srgb"] else cmf.rgb_nm
+            T4_curve = calc.blackbody_redshift(T4_nm, values["T4_slider1"], values["T4_slider2"], values["T4_slider3"])
+            if not values["T4_chrom"]:
+                try:
+                    T4_curve *= 10**values["T4_slider4"]
+                except np.core._exceptions.UFuncTypeError:
+                    pass
+            T4_rgb = calc.to_rgb(
+                T4_curve, mode=T4_mode,
+                albedo=not values["T4_chrom"],
+                exp_bit=int(values["T4_bit_num"]), 
+                gamma=values["T4_gamma"], 
+                rnd=int(values["T4_rnd_num"]),
+                srgb=values["T4_srgb"]
+            )
+            T4_rgb_show = calc.to_rgb(
+                T4_curve, mode=T4_mode,
+                albedo=not values["T4_chrom"],
+                gamma=values["T4_gamma"],
+                srgb=values["T4_srgb"],
+                html=True
+            )
         
-        T4_mode = "chromaticity" if values["T4_chrom"] else "albedo"
-        T4_nm = cmf.xyz_nm if values["T4_srgb"] else cmf.rgb_nm
-        T4_curve = calc.blackbody_redshift(T4_nm, values["T4_slider1"], values["T4_slider2"], values["T4_slider3"])
-        if not values["T4_chrom"]:
-            try:
-                T4_curve *= 10**values["T4_slider4"]
-            except np.core._exceptions.UFuncTypeError:
-                pass
-        T4_rgb = calc.to_rgb(
-            T4_curve, mode=T4_mode,
-            albedo=not values["T4_chrom"],
-            exp_bit=int(values["T4_bit_num"]), 
-            gamma=values["T4_gamma"], 
-            rnd=int(values["T4_rnd_num"]),
-            srgb=values["T4_srgb"]
-        )
-        T4_rgb_show = calc.to_rgb(
-            T4_curve, mode=T4_mode,
-            albedo=not values["T4_chrom"],
-            gamma=values["T4_gamma"],
-            srgb=values["T4_srgb"],
-            html=True
-        )
-    
-        # Output
-        window["T4_graph"].TKCanvas.itemconfig(T4_preview, fill=T4_rgb_show)
-        window["T4_rgb"].update(T4_rgb)
-        window["T4_hex"].update(T4_rgb_show)
+            # Output
+            window["T4_graph"].TKCanvas.itemconfig(T4_preview, fill=T4_rgb_show)
+            window["T4_rgb"].update(T4_rgb)
+            window["T4_hex"].update(T4_rgb_show)
 
 
 window.Close()
