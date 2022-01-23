@@ -8,15 +8,27 @@ import cmf, database
 H = 6.626e-34
 C = 299792458
 K = 1.381e-23
+break_flag = False
 def blackbody(nm, t):
+    global break_flag
     m = nm / 1e9
-    return 2*H * C**2 / m**5 / (np.exp(H*C/(m*K*t)) - 1)
+    try:
+        r = 2*H * C**2 / m**5 / (np.exp(H*C/(m*K*t)) - 1)
+    except ZeroDivisionError:
+        print("0 K sounds wrong")
+        r = 0
+        break_flag = True
+    return r
 
 def blackbody_redshift(scope, tempurature):
+    global break_flag
     shift = 0
     br = []
     for nm in scope:
         br.append(blackbody(nm+shift, tempurature))
+        if break_flag:
+            break_flag = False
+            break
     return np.array(br)
 
 def polator(x, y, scope, albedo=0, fast=False):
@@ -182,16 +194,19 @@ def to_rgb(spectrum, mode="chromaticity", inp_bit=None, exp_bit=None, rnd=0, alb
         rgb = xyz_to_sRGB(xyz)
     else:
         rgb = np.sum(spectrum[:, np.newaxis] * cmf.rgb, axis=0)
-    try:
-        if mode == "normalization":
+    if mode == "albedo 0.5":
+        if rgb[1] != 0:
             rgb /= 2 * rgb[1]
-        elif mode == "albedo" and albedo:
-            pass
-        else: # "chromaticity" and when albedo == False
-            rgb /= np.max(rgb)
-    except ZeroDivisionError:
-        rgb = np.array([1.0, 0.0, 0.0])
+    elif mode == "albedo" and albedo:
+        pass
+    else: # "chromaticity" and when albedo == False
+        mx = np.max(rgb)
+        if mx != 0:
+            rgb /= mx
     rgb = gamma_correction(rgb) if gamma else rgb
+    if rgb[0]*rgb[1]*rgb[2] < 0:
+        print(f'Negative RGB values have been clipped: {rgb}')
+        rgb = np.clip(rgb, 0, None)
     return to_html(rgb) if html else tuple(rounder(rgb if not exp_bit else to_bit(rgb, exp_bit), rnd))
 
 
