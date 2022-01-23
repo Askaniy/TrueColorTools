@@ -126,8 +126,8 @@ lang_list = {
     "de": [""]
 }
 gui_tabs = {
-    "en": ["Spectra", "Images", "Table", "Blackbody & Redshifts (WIP)"],
-    "ru": ["Спектры", "Изображения", "Таблица", "АЧТ и красные смещения (WIP)"],
+    "en": ["Spectra", "Images", "Table", "Blackbody & Redshifts"],
+    "ru": ["Спектры", "Изображения", "Таблица", "АЧТ и красные смещения"],
     "de": []
 }
 gui_info = {
@@ -191,8 +191,8 @@ gui_vI = {
     "de": ""
 }
 gui_scale = {
-    "en": "Brightness scale",
-    "ru": "Масштаб яркости",
+    "en": "Scale (10^x)",
+    "ru": "Масштаб (10^x)",
     "de": ""
 }
 gui_tags = {

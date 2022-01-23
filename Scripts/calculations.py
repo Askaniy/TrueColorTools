@@ -12,36 +12,34 @@ break_flag = False
 def blackbody(nm, t):
     global break_flag
     m = nm / 1e9
-    try:
-        r = 2*H * C**2 / m**5 / (np.exp(H*C/(m*K*t)) - 1)
-    except ZeroDivisionError:
-        print("You tried to break the laws of physics")
-        r = 0
-        break_flag = True
-    return r
+    return 2*H * C**2 / m**5 / (np.exp(H*C/(m*K*t)) - 1)
 
 def blackbody_redshift(scope, tempurature, velocity, vI):
     global break_flag
-    if velocity == 0:
-        doppler = 1
+    if tempurature == 0:
+        physics = False
     else:
-        if abs(velocity) != 1:
-            doppler = np.sqrt((1-velocity) / (1+velocity))
+        physics = True
+        if velocity == 0:
+            doppler = 1
         else:
-            doppler = 0
-    if vI == 0:
-        grav = 1
-    else:
-        if vI != 1:
-            grav = np.e**(-vI*vI)
+            if abs(velocity) != 1:
+                doppler = np.sqrt((1-velocity) / (1+velocity))
+            else:
+                physics = False
+        if vI == 0:
+            grav = 1
         else:
-            grav = 0
+            if vI != 1:
+                grav = np.e**(-vI*vI)
+            else:
+                physics = False
     br = []
     for nm in scope:
-        br.append(blackbody(nm*doppler*grav, tempurature))
-        if break_flag:
-            break_flag = False
-            break
+        if physics:
+            br.append(blackbody(nm*doppler*grav, tempurature))
+        else:
+            br.append(0)
     return np.array(br)
 
 def polator(x, y, scope, albedo=0, fast=False):
@@ -211,7 +209,8 @@ def to_rgb(spectrum, mode="chromaticity", inp_bit=None, exp_bit=None, rnd=0, alb
         if rgb[1] != 0:
             rgb /= 2 * rgb[1]
     elif mode == "albedo" and albedo:
-        pass
+        if html:
+            rgb = np.clip(rgb, 0, 1)
     else: # "chromaticity" and when albedo == False
         mx = np.max(rgb)
         if mx != 0:
@@ -220,7 +219,13 @@ def to_rgb(spectrum, mode="chromaticity", inp_bit=None, exp_bit=None, rnd=0, alb
     if rgb[0]*rgb[1]*rgb[2] < 0:
         print(f'Negative RGB values have been clipped: {rgb}')
         rgb = np.clip(rgb, 0, None)
-    return to_html(rgb) if html else tuple(rounder(rgb if not exp_bit else to_bit(rgb, exp_bit), rnd))
+    if html:
+        try:
+            return to_html(rgb)
+        except ValueError:
+            return "#000000"
+    else:
+        return tuple(rounder(rgb if not exp_bit else to_bit(rgb, exp_bit), rnd))
 
 
 # Pivot wavelengths and ZeroPoints of filter bandpasses
