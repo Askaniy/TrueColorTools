@@ -5,6 +5,20 @@ import cmf, database
 
 # Spectrum processing functions
 
+H = 6.626e-34
+C = 299792458
+K = 1.381e-23
+def blackbody(nm, t):
+    m = nm / 1e9
+    return 2*H * C**2 / m**5 / (np.exp(H*C/(m*K*t)) - 1)
+
+def blackbody_redshift(scope, tempurature):
+    shift = 0
+    br = []
+    for nm in scope:
+        br.append(blackbody(nm+shift, tempurature))
+    return np.array(br)
+
 def polator(x, y, scope, albedo=0, fast=False):
     mn = scope[0]
     mx = scope[-1]
