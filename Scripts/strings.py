@@ -191,7 +191,7 @@ gui_velocity = {
     "de": ""
 }
 gui_vI = {
-    "en": "I cosmic vel. (c)",
+    "en": "Circ. orb. vel. (c)",
     "ru": "I косм. ск. (c)",
     "de": ""
 }

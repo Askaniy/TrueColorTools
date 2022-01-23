@@ -72,7 +72,7 @@ def convert_to_bytes(img):
 
 sg.LOOK_AND_FEEL_TABLE["MaterialDark"] = {
     'BACKGROUND': '#333333', 'TEXT': '#FFFFFF',
-    'INPUT': '#424242', 'TEXT_INPUT': '#FFFFFF', 'SCROLL': '#86A8FF',
+    'INPUT': '#424242', 'TEXT_INPUT': '#FFFFFF', 'SCROLL': '#424242',
     'BUTTON': ('#FFFFFF', '#007ACC'), 'PROGRESS': ('#000000', '#000000'),
     'BORDER': 0, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0,
     'ACCENT1': '#FF0266', 'ACCENT2': '#FF5C93', 'ACCENT3': '#C5003C'
@@ -104,9 +104,9 @@ T1_col2 = [
 T1_col3 = [
     [sg.Text(tr.gui_results[lang], size=(16, 1), font=("arial", 12), key="T1_title3")],
     [sg.Graph(canvas_size=(180, 175), graph_bottom_left=(0, 0), graph_top_right=(100, 100), background_color=None, key="T1_graph")],
-    [sg.Text(tr.gui_rgb[lang], size=(8, 1), key="T1_colorRGB")],
+    [sg.Text(tr.gui_rgb[lang], size=(12, 1), key="T1_colorRGB")],
     [sg.In(size=(25, 1), key="T1_rgb")],
-    [sg.Text(tr.gui_hex[lang], size=(8, 1), key="T1_colorHEX")],
+    [sg.Text(tr.gui_hex[lang], size=(12, 1), key="T1_colorHEX")],
     [sg.In(size=(25, 1), key="T1_hex")],
     [sg.T("")],
     [sg.Button(button_text=tr.gui_add[lang], size=(22, 1), key="T1_add")],
@@ -171,14 +171,15 @@ T3_col2 = [
 ]
 
 slider_size = (28, 16)
+T4_text_colors = ("#424242", "#FFFFFF")
 T4_col1 = [
     [sg.Text(tr.gui_input[lang], size=(16, 1), font=("arial", 12), key="T4_title1")],
     [sg.Text(tr.gui_temp[lang], size=(13, 1), key="T4_temp"), sg.Slider(range=(0, 10000), default_value=5500, resolution=100, orientation="h", size=slider_size, enable_events=True, key="T4_slider1")],
     [sg.Text(tr.gui_velocity[lang], size=(13, 1), key="T4_velocity"), sg.Slider(range=(-1, 1), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, key="T4_slider2")],
-    [sg.Checkbox(tr.gui_grav[lang], size=(16, 1), enable_events=True, default=False, key="T4_grav")],
-    [sg.Text(tr.gui_vI[lang], size=(13, 1), key="T4_vI"), sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, key="T4_slider3")],
-    [sg.Checkbox(tr.gui_chrom[lang], size=(16, 1), enable_events=True, default=True, key="T4_chrom")],
-    [sg.Text(tr.gui_scale[lang], size=(13, 1), key="T4_scale"), sg.Slider(range=(0, 1), default_value=0.5, resolution=0.01, orientation="h", size=slider_size, enable_events=True, disabled=True, key="T4_slider4")],
+    [sg.Checkbox(tr.gui_grav[lang]+":", size=(16, 1), enable_events=True, default=False, key="T4_grav")],
+    [sg.Text(tr.gui_vI[lang], size=(13, 1), text_color=T4_text_colors[0], key="T4_vI"), sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, disabled=True, key="T4_slider3")],
+    [sg.Checkbox(tr.gui_chrom[lang]+":", size=(16, 1), enable_events=True, default=True, key="T4_chrom")],
+    [sg.Text(tr.gui_scale[lang], size=(13, 1), text_color=T4_text_colors[0], key="T4_scale"), sg.Slider(range=(0, 1), default_value=0.5, resolution=0.01, orientation="h", size=slider_size, enable_events=True, disabled=True, key="T4_slider4")],
     [sg.T("")],
     [sg.HorizontalSeparator()],
     [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), enable_events=True, default=True, key="T4_gamma"),
@@ -189,9 +190,9 @@ T4_col1 = [
 T4_col2 = [
     [sg.Text(tr.gui_results[lang], size=(16, 1), font=("arial", 12), key="T4_title2")],
     [sg.Graph(canvas_size=(180, 175), graph_bottom_left=(0, 0), graph_top_right=(100, 100), background_color=None, key="T4_graph")],
-    [sg.Text(tr.gui_rgb[lang], size=(8, 1), key="T4_colorRGB")],
+    [sg.Text(tr.gui_rgb[lang], size=(12, 1), key="T4_colorRGB")],
     [sg.In(size=(25, 1), key="T4_rgb")],
-    [sg.Text(tr.gui_hex[lang], size=(8, 1), key="T4_colorHEX")],
+    [sg.Text(tr.gui_hex[lang], size=(12, 1), key="T4_colorHEX")],
     [sg.In(size=(25, 1), key="T4_hex")]
 ]
 
@@ -221,8 +222,8 @@ layout = [
 
 window = sg.Window("True Color Tools", layout)    
 window.Finalize()
-graph = window["T1_graph"]
-T1_preview = graph.DrawCircle((48, 46), 42, fill_color="black", line_color="white")
+T1_preview = window["T1_graph"].DrawCircle((48, 46), 42, fill_color="black", line_color="white")
+T4_preview = window["T4_graph"].DrawCircle((48, 46), 42, fill_color="black", line_color="white")
 
 T1_fig = go.Figure()
 T1_events = ["T1_list", "T1_gamma", "T1_srgb", "T1_br_mode0", "T1_br_mode1", "T1_br_mode2", "T1_interp0", "T1_interp1", "T1_bit_num", "T1_rnd_num"]
@@ -358,9 +359,9 @@ while True:
 
             # Output
             try:
-                graph.TKCanvas.itemconfig(T1_preview, fill=T1_rgb_show)
+                window["T1_graph"].TKCanvas.itemconfig(T1_preview, fill=T1_rgb_show)
             except Exception as e:
-                graph.TKCanvas.itemconfig(T1_preview, fill="#000000")
+                window["T1_graph"].TKCanvas.itemconfig(T1_preview, fill="#000000")
                 print(e)
             window["T1_rgb"].update(T1_rgb)
             window["T1_hex"].update(T1_rgb_show)
@@ -763,5 +764,12 @@ while True:
     
     # ------------ Events in the tab "Blackbody & Redshift" ------------
     
+    elif event.startswith("T4"):
+        if event == "T4_grav":
+            window["T4_vI"].update(text_color=T4_text_colors[values["T4_grav"]])
+            window["T4_slider3"].update(disabled=not values["T4_grav"])
+        elif event == "T4_chrom":
+            window["T4_scale"].update(text_color=T4_text_colors[not values["T4_chrom"]])
+            window["T4_slider4"].update(disabled=values["T4_chrom"])
 
 window.Close()
