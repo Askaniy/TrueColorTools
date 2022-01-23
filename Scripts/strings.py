@@ -126,8 +126,8 @@ lang_list = {
     "de": [""]
 }
 gui_tabs = {
-    "en": ["Spectra", "Images", "Table", "Blackbody & Redshift (WIP)"],
-    "ru": ["Спектры", "Изображения", "Таблица", "АЧТ и красное смещение (WIP)"],
+    "en": ["Spectra", "Images", "Table", "Blackbody & Redshifts (WIP)"],
+    "ru": ["Спектры", "Изображения", "Таблица", "АЧТ и красные смещения (WIP)"],
     "de": []
 }
 gui_info = {
@@ -168,11 +168,6 @@ gui_input = {
 gui_output = {
     "en": "Processing and output",
     "ru": "Обработка и вывод",
-    "de": ""
-}
-gui_grav = {
-    "en": "Gravitational redshift",
-    "ru": "Гравитационное красное смещение",
     "de": ""
 }
 gui_chrom = {

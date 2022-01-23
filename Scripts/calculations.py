@@ -15,17 +15,30 @@ def blackbody(nm, t):
     try:
         r = 2*H * C**2 / m**5 / (np.exp(H*C/(m*K*t)) - 1)
     except ZeroDivisionError:
-        print("0 K sounds wrong")
+        print("You tried to break the laws of physics")
         r = 0
         break_flag = True
     return r
 
-def blackbody_redshift(scope, tempurature):
+def blackbody_redshift(scope, tempurature, velocity, vI):
     global break_flag
-    shift = 0
+    if velocity == 0:
+        doppler = 1
+    else:
+        if abs(velocity) != 1:
+            doppler = np.sqrt((1-velocity) / (1+velocity))
+        else:
+            doppler = 0
+    if vI == 0:
+        grav = 1
+    else:
+        if vI != 1:
+            grav = np.e**(-vI*vI)
+        else:
+            grav = 0
     br = []
     for nm in scope:
-        br.append(blackbody(nm+shift, tempurature))
+        br.append(blackbody(nm*doppler*grav, tempurature))
         if break_flag:
             break_flag = False
             break
