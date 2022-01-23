@@ -126,19 +126,9 @@ lang_list = {
     "de": [""]
 }
 gui_tabs = {
-    "en": ["Spectra", "Images", "Table", "WIP", "WIP"],
-    "ru": ["Спектры", "Изображения", "Таблица", "WIP", "WIP"],
+    "en": ["Spectra", "Images", "Table", "Blackbody & Redshift (WIP)"],
+    "ru": ["Спектры", "Изображения", "Таблица", "АЧТ и красное смещение (WIP)"],
     "de": []
-}
-gui_name1 = {
-    "en": "True color calculator",
-    "ru": "Калькулятор истинных цветов",
-    "de": ""
-}
-gui_name2 = {
-    "en": "True color image processing tool",
-    "ru": "Инструмент обработки изображений в истинных цветах",
-    "de": ""
 }
 gui_info = {
     "en": "Info",
@@ -178,6 +168,36 @@ gui_input = {
 gui_output = {
     "en": "Processing and output",
     "ru": "Обработка и вывод",
+    "de": ""
+}
+gui_grav = {
+    "en": "Gravitational redshift",
+    "ru": "Гравитационное красное смещение",
+    "de": ""
+}
+gui_chrom = {
+    "en": "Chromaticity",
+    "ru": "Цветность",
+    "de": ""
+}
+gui_temp = {
+    "en": "Tempurature (K)",
+    "ru": "Температура (K)",
+    "de": ""
+}
+gui_velocity = {
+    "en": "Velocity (c)",
+    "ru": "Скорость (c)",
+    "de": ""
+}
+gui_vI = {
+    "en": "I cosmic vel. (c)",
+    "ru": "I косм. ск. (c)",
+    "de": ""
+}
+gui_scale = {
+    "en": "Brightness scale",
+    "ru": "Масштаб яркости",
     "de": ""
 }
 gui_tags = {

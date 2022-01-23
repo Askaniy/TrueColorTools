@@ -80,12 +80,12 @@ sg.LOOK_AND_FEEL_TABLE["MaterialDark"] = {
 sg.ChangeLookAndFeel("MaterialDark")
 
 T1_col1 = [
-    [sg.Text(tr.gui_database[lang], size=(16, 1), font=("arial", 12), key="T1_title0")],
+    [sg.Text(tr.gui_database[lang], size=(16, 1), font=("arial", 12), key="T1_title1")],
     [sg.Text(tr.gui_tags[lang], size=(6, 1), key="T1_tagsN"), sg.InputCombo(tag_list(), default_value="featured", size=(16, 1), enable_events=True, key="T1_tags")],
     [sg.Listbox(values=tuple(obj_list(tag="featured").keys()), size=(24, 22), enable_events=True, key="T1_list")]
 ]
 T1_col2 = [
-    [sg.Text(tr.gui_settings[lang], size=(16, 1), font=("arial", 12), key="T1_title1")],
+    [sg.Text(tr.gui_settings[lang], size=(16, 1), font=("arial", 12), key="T1_title2")],
     [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), enable_events=True, default=True, key="T1_gamma")],
     [sg.Checkbox("sRGB", enable_events=True, size=(16, 1), key="T1_srgb")],
     [sg.HorizontalSeparator()],
@@ -102,7 +102,7 @@ T1_col2 = [
     [sg.Text(tr.gui_rnd[lang], size=(12, 1), key="T1_rnd"), sg.InputText("3", size=(4, 1), enable_events=True, key="T1_rnd_num")]
 ]
 T1_col3 = [
-    [sg.Text(tr.gui_results[lang], size=(16, 1), font=("arial", 12), key="T1_title2")],
+    [sg.Text(tr.gui_results[lang], size=(16, 1), font=("arial", 12), key="T1_title3")],
     [sg.Graph(canvas_size=(180, 175), graph_bottom_left=(0, 0), graph_top_right=(100, 100), background_color=None, key="T1_graph")],
     [sg.Text(tr.gui_rgb[lang], size=(8, 1), key="T1_colorRGB")],
     [sg.In(size=(25, 1), key="T1_rgb")],
@@ -170,11 +170,30 @@ T3_col2 = [
     [sg.Button(tr.gui_process[lang], size=(15, 1), disabled=True, key="T3_process")]
 ]
 
-T4_col1 = []
-T4_col2 = []
-
-T5_col1 = []
-T5_col2 = []
+slider_size = (28, 16)
+T4_col1 = [
+    [sg.Text(tr.gui_input[lang], size=(16, 1), font=("arial", 12), key="T4_title1")],
+    [sg.Text(tr.gui_temp[lang], size=(13, 1), key="T4_temp"), sg.Slider(range=(0, 10000), default_value=5500, resolution=100, orientation="h", size=slider_size, enable_events=True, key="T4_slider1")],
+    [sg.Text(tr.gui_velocity[lang], size=(13, 1), key="T4_velocity"), sg.Slider(range=(-1, 1), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, key="T4_slider2")],
+    [sg.Checkbox(tr.gui_grav[lang], size=(16, 1), enable_events=True, default=False, key="T4_grav")],
+    [sg.Text(tr.gui_vI[lang], size=(13, 1), key="T4_vI"), sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, key="T4_slider3")],
+    [sg.Checkbox(tr.gui_chrom[lang], size=(16, 1), enable_events=True, default=True, key="T4_chrom")],
+    [sg.Text(tr.gui_scale[lang], size=(13, 1), key="T4_scale"), sg.Slider(range=(0, 1), default_value=0.5, resolution=0.01, orientation="h", size=slider_size, enable_events=True, disabled=True, key="T4_slider4")],
+    [sg.T("")],
+    [sg.HorizontalSeparator()],
+    [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), enable_events=True, default=True, key="T4_gamma"),
+    sg.Text(tr.gui_bit[lang], size=(12, 1), key="T4_bit"), sg.InputText("8", size=(4, 1), enable_events=True, key="T4_bit_num")],
+    [sg.Checkbox("sRGB", enable_events=True, size=(16, 1), key="T4_srgb"),
+    sg.Text(tr.gui_rnd[lang], size=(12, 1), key="T4_rnd"), sg.InputText("3", size=(4, 1), enable_events=True, key="T4_rnd_num")]
+]
+T4_col2 = [
+    [sg.Text(tr.gui_results[lang], size=(16, 1), font=("arial", 12), key="T4_title2")],
+    [sg.Graph(canvas_size=(180, 175), graph_bottom_left=(0, 0), graph_top_right=(100, 100), background_color=None, key="T4_graph")],
+    [sg.Text(tr.gui_rgb[lang], size=(8, 1), key="T4_colorRGB")],
+    [sg.In(size=(25, 1), key="T4_rgb")],
+    [sg.Text(tr.gui_hex[lang], size=(8, 1), key="T4_colorHEX")],
+    [sg.In(size=(25, 1), key="T4_hex")]
+]
 
 tab1 = [
     [sg.Column(T1_col1), sg.VSeperator(), sg.Column(T1_col2), sg.VSeperator(), sg.Column(T1_col3)]
@@ -188,9 +207,6 @@ tab3 = [
 tab4 = [
     [sg.Column(T4_col1), sg.VSeperator(), sg.Column(T4_col2)]
 ]
-tab5 = [
-    [sg.Column(T5_col1), sg.VSeperator(), sg.Column(T5_col2)]
-]
 
 layout = [
     [sg.Menu(tr.gui_menu[lang], key="menu")],
@@ -198,8 +214,7 @@ layout = [
         sg.Tab(tr.gui_tabs[lang][0], tab1, key="tab0"),
         sg.Tab(tr.gui_tabs[lang][1], tab2, key="tab2"),
         sg.Tab(tr.gui_tabs[lang][2], tab3, key="tab3"),
-        sg.Tab(tr.gui_tabs[lang][3], tab4, key="tab4"),
-        sg.Tab(tr.gui_tabs[lang][4], tab5, key="tab5")
+        sg.Tab(tr.gui_tabs[lang][3], tab4, key="tab4")
         ]])
     ]
 ]
@@ -234,9 +249,9 @@ while True:
         #window["tab0"].update(title=tr.gui_tabs[lang][0])
         #window["tab1"].update(title=tr.gui_tabs[lang][1])
         #window["tab2"].update(title=tr.gui_tabs[lang][2])
-        window["T1_title0"].update(tr.gui_database[lang])
-        window["T1_title1"].update(tr.gui_settings[lang])
-        window["T1_title2"].update(tr.gui_results[lang])
+        window["T1_title1"].update(tr.gui_database[lang])
+        window["T1_title2"].update(tr.gui_settings[lang])
+        window["T1_title3"].update(tr.gui_results[lang])
         window["T1_tagsN"].update(tr.gui_tags[lang])
         window["T1_list"].update(values=tuple(obj_list(tag=values["T1_tags"]).keys()))
         window["T1_br_mode"].update(tr.gui_br[lang][0])
@@ -271,6 +286,16 @@ while True:
         window["ext"].update(tr.gui_extension[lang])
         window["T3_folderN"].update(tr.gui_folder[lang])
         window["T3_process"].update(tr.gui_process[lang])
+        window["T4_title1"].update(tr.gui_input[lang])
+        window["T4_title2"].update(tr.gui_results[lang])
+        window["T4_temp"].update(tr.gui_temp[lang])
+        window["T4_velocity"].update(tr.gui_velocity[lang])
+        window["T4_vI"].update(tr.gui_vI[lang])
+        window["T4_scale"].update(tr.gui_scale[lang])
+        window["T4_colorRGB"].update(tr.gui_rgb[lang])
+        window["T4_colorHEX"].update(tr.gui_hex[lang])
+        window["T4_bit"].update(tr.gui_bit[lang])
+        window["T4_rnd"].update(tr.gui_rnd[lang])
     
     elif event == tr.source[lang]:
         sg.popup_scrolled("\n\n".join(db.sources), title=event, size=(100, 20))
@@ -736,8 +761,7 @@ while True:
             T3_img.save(f'{values["T3_folder"]}/TCT-table_{values["T3_tags"]}{"_srgb" if values["T3_srgb"] else ""}_{T3_mode}{"_gamma-corrected" if values["T3_gamma"] else ""}_{lang}.{values["T3_extension"]}')
             T3_img.show()
     
-    # ------------ Events in the tab "4" ------------
+    # ------------ Events in the tab "Blackbody & Redshift" ------------
     
-    # ------------ Events in the tab "5" ------------
 
 window.Close()
