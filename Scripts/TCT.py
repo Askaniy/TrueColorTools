@@ -171,7 +171,7 @@ T3_col2 = [
 ]
 
 slider_size = (28, 16)
-T4_text_colors = ("#424242", "#FFFFFF")
+T4_text_colors = ("#A3A3A3", "#FFFFFF")
 T4_col1 = [
     [sg.Text(tr.gui_input[lang], size=(16, 1), font=("arial", 12), key="T4_title1")],
     [sg.Text(tr.gui_temp[lang], size=(13, 1), key="T4_temp"), sg.Slider(range=(0, 20000), default_value=0, resolution=100, orientation="h", size=slider_size, enable_events=True, key="T4_slider1")],

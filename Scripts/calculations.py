@@ -14,7 +14,7 @@ def blackbody(nm, t):
     m = nm / 1e9
     return 2*H * C**2 / m**5 / (np.exp(H*C/(m*K*t)) - 1)
 
-def blackbody_redshift(scope, tempurature, velocity, vI):
+def blackbody_redshift(scope, tempurature, velocity, vII):
     global break_flag
     if tempurature == 0:
         physics = False
@@ -27,11 +27,11 @@ def blackbody_redshift(scope, tempurature, velocity, vI):
                 doppler = np.sqrt((1-velocity) / (1+velocity))
             else:
                 physics = False
-        if vI == 0:
+        if vII == 0:
             grav = 1
         else:
-            if vI != 1:
-                grav = np.e**(-vI*vI)
+            if vII != 1:
+                grav = np.exp(-vII*vII/2)
             else:
                 physics = False
     br = []

@@ -186,8 +186,8 @@ gui_velocity = {
     "de": ""
 }
 gui_vI = {
-    "en": "Circ. orb. vel. [c]",
-    "ru": "I косм. ск. [c]",
+    "en": "Escape vel. [c]",
+    "ru": "II косм. ск. [c]",
     "de": ""
 }
 gui_scale = {
