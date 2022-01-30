@@ -94,6 +94,9 @@ T1_col2 = [
     [sg.Radio(tr.gui_br[lang][2], "T1_rad", size=(15, 1), enable_events=True, key="T1_br_mode1")],
     [sg.Radio(tr.gui_br[lang][3], "T1_rad", size=(15, 1), enable_events=True, key="T1_br_mode2")],
     [sg.HorizontalSeparator()],
+    [sg.Text("Phase function [deg]", size=(18, 1), key="T1_phase")],
+    [sg.Slider(range=(-180, 180), default_value=0, resolution=1, orientation="h", size=(16, 16), enable_events=True, key="T1_slider")],
+    [sg.HorizontalSeparator()],
     [sg.Text(tr.gui_interp[lang][0], size=(18, 1), key="T1_interp")],
     [sg.Radio(tr.gui_interp[lang][1], "T1_interp", size=(15, 1), enable_events=True, default=True, key="T1_interp0")],
     [sg.Radio(tr.gui_interp[lang][2], "T1_interp", size=(15, 1), enable_events=True, key="T1_interp1")],
@@ -226,7 +229,7 @@ T1_preview = window["T1_graph"].DrawCircle((48, 46), 42, fill_color="black", lin
 T4_preview = window["T4_graph"].DrawCircle((48, 46), 42, fill_color="black", line_color="white")
 
 T1_fig = go.Figure()
-T1_events = ["T1_list", "T1_gamma", "T1_srgb", "T1_br_mode0", "T1_br_mode1", "T1_br_mode2", "T1_interp0", "T1_interp1", "T1_bit_num", "T1_rnd_num"]
+T1_events = ["T1_list", "T1_gamma", "T1_srgb", "T1_br_mode0", "T1_br_mode1", "T1_br_mode2", "T1_interp0", "T1_interp1", "T1_slider", "T1_bit_num", "T1_rnd_num"]
 br_modes = ["chromaticity", "albedo 0.5", "albedo"]
 
 
@@ -333,13 +336,17 @@ while True:
             T1_spectrum = calc.transform(T1_spectrum)
             
             # Spectrum interpolation
-            T1_fast = True if values["T1_interp1"] else False
-            T1_curve = calc.polator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo, T1_fast)
+            T1_curve = calc.polator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo, values["T1_interp1"])
             
             # Color calculation
+            try:
+                T1_phase = 0 if "star" in T1_spectrum["tags"] else values["T1_slider"]
+            except Exception:
+                T1_phase = values["T1_slider"]
             T1_rgb = calc.to_rgb(
                 T1_curve, mode=T1_mode,
                 albedo = T1_spectrum["albedo"] or T1_albedo,
+                phase=T1_phase,
                 exp_bit=int(values["T1_bit_num"]), 
                 gamma=values["T1_gamma"], 
                 rnd=int(values["T1_rnd_num"]),
@@ -348,6 +355,7 @@ while True:
             T1_rgb_show = calc.to_rgb(
                 T1_curve, mode=T1_mode,
                 albedo = T1_spectrum["albedo"] or T1_albedo,
+                phase=T1_phase,
                 gamma=values["T1_gamma"],
                 srgb=values["T1_srgb"],
                 html=True
@@ -403,8 +411,7 @@ while True:
                 T1_spectrum = calc.transform(T1_spectrum)
                 
                 # Spectrum interpolation
-                T1_fast = True if values["T1_interp1"] else False
-                T1_curve = calc.polator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo, T1_fast)
+                T1_curve = calc.polator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo, values["T1_interp1"])
 
                 # Color calculation
                 T1_rgb = calc.to_rgb(

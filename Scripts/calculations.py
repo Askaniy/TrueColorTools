@@ -3,6 +3,13 @@ from scipy.interpolate import Akima1DInterpolator
 import cmf, database
 
 
+# Phase curves processing functions
+
+def lambert(phase):
+    phi = abs(np.deg2rad(phase))
+    return (np.sin(phi) + np.pi * np.cos(phi) - phi * np.cos(phi)) / np.pi # * 2/3 * albedo
+
+
 # Spectrum processing functions
 
 H = 6.626e-34 # Planck constant
@@ -198,7 +205,7 @@ rounder = np.vectorize(lambda grayscale, d_places: int(round(grayscale)) if d_pl
 def to_bit(color, bit): return color * (2**bit - 1)
 def to_html(color): return "#{:02x}{:02x}{:02x}".format(*rounder(to_bit(color, 8), 0))
 
-def to_rgb(spectrum, mode="chromaticity", inp_bit=None, exp_bit=None, rnd=0, albedo=False, gamma=False, srgb=False, html=False):
+def to_rgb(spectrum, mode="chromaticity", inp_bit=None, exp_bit=None, rnd=0, albedo=False, phase=0, gamma=False, srgb=False, html=False):
     spectrum = (spectrum + 1) / 2**inp_bit if inp_bit else spectrum
     if srgb:
         xyz = np.sum(spectrum[:, np.newaxis] * cmf.xyz, axis=0)
@@ -215,6 +222,8 @@ def to_rgb(spectrum, mode="chromaticity", inp_bit=None, exp_bit=None, rnd=0, alb
         mx = np.max(rgb)
         if mx != 0:
             rgb /= mx
+    if phase != 0:
+        rgb *= lambert(phase)
     rgb = gamma_correction(rgb) if gamma else rgb
     if rgb[0]*rgb[1]*rgb[2] < 0:
         print(f'Negative RGB values have been clipped: {rgb}')
