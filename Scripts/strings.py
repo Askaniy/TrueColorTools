@@ -1,118 +1,118 @@
 
 names = {
-    "Vega": {"ru": "Вега", "de": ""},
-    "Sun": {"ru": "Солнце", "de": ""},
-    "Mercury": {"ru": "Меркурий", "de": ""},
-    "Venus": {"ru": "Венера", "de": ""},
-    "Earth": {"ru": "Земля", "de": ""},
-    "Moon": {"ru": "Луна", "de": ""},
-    "Mars": {"ru": "Марс", "de": ""},
-    "Phobos": {"ru": "Фобос", "de": ""},
-    "Deimos": {"ru": "Деймос", "de": ""},
-    "Jovian irregulars": {"ru": "Нерег. сп. Юпитера", "de": ""},
-    "Jupiter": {"ru": "Юпитер", "de": ""},
-    "Io": {"ru": "Ио", "de": ""},
-    "Europa": {"ru": "Европа", "de": ""},
-    "Ganymede": {"ru": "Ганимед", "de": ""},
-    "Callisto": {"ru": "Каллисто", "de": ""},
-    "Saturnian irregulars": {"ru": "Нерег. сп. Сатурна", "de": ""},
-    "Saturn": {"ru": "Сатурн", "de": ""},
-    "Rings": {"ru": "Кольца", "de": ""},
-    "Enceladus": {"ru": "Энцелад", "de": ""},
-    "Tethys": {"ru": "Тефия", "de": ""},
-    "Dione": {"ru": "Диона", "de": ""},
-    "Rhea": {"ru": "Рея", "de": ""},
-    "Titania": {"ru": "Титания", "de": ""},
-    "Titan": {"ru": "Титан", "de": ""},
-    "Uranian irregulars": {"ru": "Нерег. сп. Урана", "de": ""},
-    "Uranus": {"ru": "Уран", "de": ""},
-    "Miranda": {"ru": "Миранда", "de": ""},
-    "Ariel": {"ru": "Ариэль", "de": ""},
-    "Umbriel": {"ru": "Умбриэль", "de": ""},
-    "Oberon": {"ru": "Оберон", "de": ""},
-    "Neptunian irregulars": {"ru": "Нерег. сп. Нептуна", "de": ""},
-    "Neptune": {"ru": "Нептун", "de": ""},
-    "Nereid": {"ru": "Нереида", "de": ""},
-    "Triton": {"ru": "Тритон", "de": ""},
-    "Halley": {"ru": "Галлея", "de": ""},
-    "Ceres": {"ru": "Церера", "de": ""},
-    "Pallas": {"ru": "Паллада", "de": ""},
-    "Juno": {"ru": "Юнона", "de": ""},
-    "Vesta": {"ru": "Веста", "de": ""},
-    "Iris": {"ru": "Ирида", "de": ""},
-    "Psyche": {"ru": "Психея", "de": ""},
-    "Kalliope": {"ru": "Каллиопа", "de": ""},
-    "Euphrosyne": {"ru": "Евфросина", "de": ""},
-    "Daphne": {"ru": "Дафна", "de": ""},
-    "Eugenia": {"ru": "Евгения", "de": ""},
-    "Sylvia": {"ru": "Сильвия", "de": ""},
-    "Antiope": {"ru": "Антиопа", "de": ""},
-    "Minerva": {"ru": "Минерва", "de": ""},
-    "Camilla": {"ru": "Камилла", "de": ""},
-    "Hermione": {"ru": "Гермиона", "de": ""},
-    "Elektra": {"ru": "Электра", "de": ""},
-    "Kleopatra": {"ru": "Клеопатра", "de": ""},
-    "Eros": {"ru": "Эрос", "de": ""},
-    "Chiron": {"ru": "Хирон", "de": ""},
-    "Pholus": {"ru": "Фол", "de": ""},
-    "Chariklo": {"ru": "Харикло", "de": ""},
-    "Varuna": {"ru": "Варуна", "de": ""},
-    "Itokawa": {"ru": "Итокава", "de": ""},
-    "Quaoar": {"ru": "Квавар", "de": ""},
-    "Sedna": {"ru": "Седна", "de": ""},
-    "Orcus": {"ru": "Орк", "de": ""},
-    "Vanth": {"ru": "Вант", "de": ""},
-    "Bennu": {"ru": "Бенну", "de": ""},
-    "Pluto": {"ru": "Плутон", "de": ""},
-    "Haumea": {"ru": "Хаумеа", "de": ""},
-    "Eris": {"ru": "Эрида", "de": ""},
-    "Makemake": {"ru": "Макемаке", "de": ""},
-    "Arrokoth": {"ru": "Аррокот", "de": ""},
-    "Ultima": {"ru": "Ультима", "de": ""},
-    "Thule": {"ru": "Туле", "de": ""},
-    '"neck"': {"ru": '"шея"', "de": '"neck"'},
-    "'Oumuamua": {"ru": "Оумуамуа", "de": ""},
-    "Comets": {"ru": "Кометы", "de": ""},
-    "J. trojans": {"ru": "Троянцы", "de": ""},
-    "Centaurs": {"ru": "Кентавры", "de": ""},
-    "Plutinos": {"ru": "Плутино", "de": ""},
-    "Other res.": {"ru": "Др. рез.", "de": ""},
-    "Classic": {"ru": "Классич.", "de": ""},
-    "Scattered": {"ru": "Рассеянный диск", "de": ""},
-    "Detached": {"ru": "Обособл.", "de": ""},
-    "Class": {"ru": "Класс", "de": ""}
+    "Vega": {"ru": "Вега", "de": "Wega"},
+    "Sun": {"ru": "Солнце", "de": "Sonne"},
+    "Mercury": {"ru": "Меркурий", "de": "Merkur"},
+    "Venus": {"ru": "Венера", "de": "Venus"},
+    "Earth": {"ru": "Земля", "de": "Erde"},
+    "Moon": {"ru": "Луна", "de": "Mond"},
+    "Mars": {"ru": "Марс", "de": "Mars"},
+    "Phobos": {"ru": "Фобос", "de": "Phobos"},
+    "Deimos": {"ru": "Деймос", "de": "Deimos"},
+    "Jovian irregulars": {"ru": "Нерег. сп. Юпитера", "de": "irreguläre Jupitermonde"},
+    "Jupiter": {"ru": "Юпитер", "de": "Jupiter"},
+    "Io": {"ru": "Ио", "de": "Io"},
+    "Europa": {"ru": "Европа", "de": "Europa"},
+    "Ganymede": {"ru": "Ганимед", "de": "Ganymed"},
+    "Callisto": {"ru": "Каллисто", "de": "Kallisto"},
+    "Saturnian irregulars": {"ru": "Нерег. сп. Сатурна", "de": "irreguläre Saturnmonde"},
+    "Saturn": {"ru": "Сатурн", "de": "Saturn"},
+    "Rings": {"ru": "Кольца", "de": "Ringe"},
+    "Enceladus": {"ru": "Энцелад", "de": "Enceladus"},
+    "Tethys": {"ru": "Тефия", "de": "Tethys"},
+    "Dione": {"ru": "Диона", "de": "Dione"},
+    "Rhea": {"ru": "Рея", "de": "Rhea"},
+    "Titania": {"ru": "Титания", "de": "Titania"},
+    "Titan": {"ru": "Титан", "de": "Titan"},
+    "Uranian irregulars": {"ru": "Нерег. сп. Урана", "de": "irreguläre Uranusmonde"},
+    "Uranus": {"ru": "Уран", "de": "Uranus"},
+    "Miranda": {"ru": "Миранда", "de": "Miranda"},
+    "Ariel": {"ru": "Ариэль", "de": "Ariel"},
+    "Umbriel": {"ru": "Умбриэль", "de": "Umbriel"},
+    "Oberon": {"ru": "Оберон", "de": "Oberon"},
+    "Neptunian irregulars": {"ru": "Нерег. сп. Нептуна", "de": "irreguläre Neptunmonde"},
+    "Neptune": {"ru": "Нептун", "de": "Neptun"},
+    "Nereid": {"ru": "Нереида", "de": "Nereid"},
+    "Triton": {"ru": "Тритон", "de": "Triton"},
+    "Halley": {"ru": "Галлея", "de": "Halley"},
+    "Ceres": {"ru": "Церера", "de": "Ceres"},
+    "Pallas": {"ru": "Паллада", "de": "Pallas"},
+    "Juno": {"ru": "Юнона", "de": "Juno"},
+    "Vesta": {"ru": "Веста", "de": "Vesta"},
+    "Iris": {"ru": "Ирида", "de": "Iris"},
+    "Psyche": {"ru": "Психея", "de": "Psyche"},
+    "Kalliope": {"ru": "Каллиопа", "de": "Kalliope"},
+    "Euphrosyne": {"ru": "Евфросина", "de": "Euphrosyne"},
+    "Daphne": {"ru": "Дафна", "de": "Daphne"},
+    "Eugenia": {"ru": "Евгения", "de": "Eugenia"},
+    "Sylvia": {"ru": "Сильвия", "de": "Sylvia"},
+    "Antiope": {"ru": "Антиопа", "de": "Antiope"},
+    "Minerva": {"ru": "Минерва", "de": "Minerva"},
+    "Camilla": {"ru": "Камилла", "de": "Camilla"},
+    "Hermione": {"ru": "Гермиона", "de": "Hermione"},
+    "Elektra": {"ru": "Электра", "de": "Elektra"},
+    "Kleopatra": {"ru": "Клеопатра", "de": "Kleopatra"},
+    "Eros": {"ru": "Эрос", "de": "Eros"},
+    "Chiron": {"ru": "Хирон", "de": "Chiron"},
+    "Pholus": {"ru": "Фол", "de": "Pholus"},
+    "Chariklo": {"ru": "Харикло", "de": "Chariklo"},
+    "Varuna": {"ru": "Варуна", "de": "Varuna"},
+    "Itokawa": {"ru": "Итокава", "de": "Itokawa"},
+    "Quaoar": {"ru": "Квавар", "de": "Quaoar"},
+    "Sedna": {"ru": "Седна", "de": "Sedna"},
+    "Orcus": {"ru": "Орк", "de": "Orcus"},
+    "Vanth": {"ru": "Вант", "de": "Vanth"},
+    "Bennu": {"ru": "Бенну", "de": "Bennu"},
+    "Pluto": {"ru": "Плутон", "de": "Pluto"},
+    "Haumea": {"ru": "Хаумеа", "de": "Haumea"},
+    "Eris": {"ru": "Эрида", "de": "Eris"},
+    "Makemake": {"ru": "Макемаке", "de": "Makemake"},
+    "Arrokoth": {"ru": "Аррокот", "de": "Arrokoth"},
+    "Ultima": {"ru": "Ультима", "de": "Ultima"},
+    "Thule": {"ru": "Туле", "de": "Thule"},
+    '"neck"': {"ru": '"шея"', "de": '"Nacken"'},
+    "'Oumuamua": {"ru": "Оумуамуа", "de": "'Oumuamua"},
+    "Comets": {"ru": "Кометы", "de": "Kometen"},
+    "J. trojans": {"ru": "Троянцы", "de": "J-Trojaner"},
+    "Centaurs": {"ru": "Кентавры", "de": "Zentauren"},
+    "Plutinos": {"ru": "Плутино", "de": "Plutinos"},
+    "Other res.": {"ru": "Др. рез.", "de": "Andere res."},
+    "Cubewano": {"ru": "Классич.", "de": "Cubewano"},
+    "SDO": {"ru": "Рассеянный диск", "de": "SDO"},
+    "Detached": {"ru": "Обособл.", "de": "Detached"},
+    "Class": {"ru": "Класс", "de": "Spektraltyp"}
 }
 
 notes = {
-    "B:": {"en": "bright regions", "ru": "яркие участки", "de": ""},
-    "D:": {"en": "dark regions", "ru": "тёмные участки", "de": ""},
-    "L:": {"en": "leading hemisphere", "ru": "ведущее полушарие", "de": ""},
-    "T:": {"en": "trailing hemisphere", "ru": "ведомое полушарие", "de": ""},
-    "LP:": {"en": "long-period", "ru": "долгопериодические", "de": ""},
-    "SP:": {"en": "short-period", "ru": "короткопериодические", "de": ""},
-    "H:": {"en": "hot, inner objects", "ru": "тёплые, внутренние объекты", "de": ""},
-    "C:": {"en": "cold, outer objects", "ru": "холодные, внешние объекты", "de": ""}
+    "B:": {"en": "bright regions", "ru": "яркие участки", "de": "helle Regionen"},
+    "D:": {"en": "dark regions", "ru": "тёмные участки", "de": "dunkle Regionen"},
+    "L:": {"en": "leading hemisphere", "ru": "ведущее полушарие", "de": "führende Hemisphäre"},
+    "T:": {"en": "trailing hemisphere", "ru": "ведомое полушарие", "de": "folgende Hemisphäre"},
+    "LP:": {"en": "long-period", "ru": "долгопериодические", "de": "langperiodisch"},
+    "SP:": {"en": "short-period", "ru": "короткопериодические", "de": "kurzperiodisch"},
+    "H:": {"en": "hot, inner objects", "ru": "тёплые, внутренние объекты", "de": "heiße, innere Objekte"},
+    "C:": {"en": "cold, outer objects", "ru": "холодные, внешние объекты", "de": "kalte, äußere Objekte"}
 }
 info = {
     "en": ["Category shown", "Brightness mode", "sRGB color space", "Gamma correction"],
     "ru": ["Представленная категория", "Режим яркости", "Пространство sRGB", "Гамма-коррекция"],
-    "de": [""]
+    "de": ["angezeigte Kategorie", "Helligkeitsmodus", "sRGB-Farbraum", "Gammakorrektur"]
 }
 
 source = {
     "en": "Sources",
     "ru": "Источники",
-    "de": ""
+    "de": "Quellen"
 }
 note = {
     "en": "Notes",
     "ru": "Примечания",
-    "de": ""
+    "de": "Anmerkungen"
 }
 auth_info = {
     "en": "Anpilogov Askaniy, 2020-2022",
     "ru": "Анпилогов Асканий, 2020-2022",
-    "de": ""
+    "de": "Anpilogov Askaniy, 2020-2022"
 }
 
 langs = {
@@ -123,254 +123,254 @@ langs = {
 lang_list = {
     "en": ["Russian", "German"],
     "ru": ["Английский", "Немецкий"],
-    "de": [""]
+    "de": ["Englisch", "Russisch"]
 }
 gui_tabs = {
     "en": ["Spectra", "Images", "Table", "Blackbody & Redshifts"],
     "ru": ["Спектры", "Изображения", "Таблица", "АЧТ и красные смещения"],
-    "de": []
+    "de": ["Spektren", "Bilder", "Vergleich", "Schwarzkörper & Rotverschiebung"]
 }
 gui_info = {
     "en": "Info",
     "ru": "О программе",
-    "de": ""
+    "de": "Info"
 }
 gui_exit = {
     "en": "Exit",
     "ru": "Выход",
-    "de": ""
+    "de": "Schließen"
 }
 gui_menu = {
     "en": [["File", [source["en"], note["en"], gui_info["en"], gui_exit["en"]]], ["Language", lang_list["en"]]],
     "ru": [["Файл", [source["ru"], note["ru"], gui_info["ru"], gui_exit["ru"]]], ["Язык", lang_list["ru"]]],
-    "de": [["", ["", "", "", ""]], ["", lang_list["de"]]]
+    "de": [["Datei", [source["de"], note["de"], gui_info["de"], gui_exit["de"]]], ["Sprache", lang_list["de"]]],
 }
 gui_database = {
     "en": "Database",
     "ru": "База данных",
-    "de": ""
+    "de": "Datenbank"
 }
 gui_settings = {
     "en": "Settings",
     "ru": "Параметры",
-    "de": ""
+    "de": "Einstellungen"
 }
 gui_results = {
     "en": "Results",
     "ru": "Результат",
-    "de": ""
+    "de": "Ergebnisse"
 }
 gui_input = {
     "en": "Input data",
     "ru": "Ввод",
-    "de": ""
+    "de": "Eingaben"
 }
 gui_output = {
     "en": "Processing and output",
     "ru": "Обработка и вывод",
-    "de": ""
+    "de": "Verarbeitung und Ausgabe"
 }
 gui_irr = {
     "en": "irradiance mode",
     "ru": "режим фикс. изл.",
-    "de": ""
+    "de": "Bestrahlungsmodus"
 }
 gui_temp = {
     "en": "Tempurature [K]",
     "ru": "Температура [K]",
-    "de": ""
+    "de": "Temperatur [K]"
 }
 gui_velocity = {
     "en": "Velocity [c]",
     "ru": "Скорость [c]",
-    "de": ""
+    "de": "Geschwindigkeit [c]"
 }
 gui_vI = {
     "en": "Escape vel. [c]",
     "ru": "II косм. ск. [c]",
-    "de": ""
+    "de": "Fluchtgeschw. [c]"
 }
 gui_scale = {
     "en": "[log10 W/(m²nm)]",
     "ru": "[log10 Вт/(м²нм)]",
-    "de": ""
+    "de": "[log10 W/(m²nm)]"
 }
 gui_maxtemp = {
     "en": "Max. temp.",
     "ru": "Макс. темп.",
-    "de": ""
+    "de": "Max. Temp."
 }
 gui_tags = {
     "en": "By tags",
     "ru": "Ярлыки",
-    "de": ""
+    "de": "Kategorie"
 }
 gui_add = {
     "en": "Add spectrum to plot",
     "ru": "Добавить спектр к графику",
-    "de": ""
+    "de": "Spektrum hinzufügen"
 }
 gui_plot = {
-    "en": "Plot added spectra",
+    "en": "Plot spectra",
     "ru": "Построить график спектров",
-    "de": ""
+    "de": "Spektren plotten"
 }
 gui_export = {
     "en": "Export all colors to console",
     "ru": "Экспортировать все цвета",
-    "de": ""
+    "de": "Alle Farben in die Konsole exportieren"
 }
 gui_col = {
     "en": ["Red", "Green", "Blue", "Names"],
     "ru": ["Красный", "Зелёный", "Синий", "Названия"],
-    "de": [""]
+    "de": ["Rot", "Grün", "Blau", "Namen"]
 }
 gui_gamma = {
     "en": "gamma correction",
     "ru": "гамма-коррекция",
-    "de": ""
+    "de": "Gammakorrektur"
 }
 gui_br = {
-    "en": ["Brightness display mode", "chromaticity", "albedo 0.5", "albedo"],
+    "en": ["Brightness display mode", "chromaticity", "albedo 0.5", "true albedo"],
     "ru": ["Отображение яркости", "цветность", "альбедо 0,5", "альбедо"],
-    "de": [""]
+    "de": ["Helligkeitsmodus", "Farbton", "Albedo 0,5", "Farbe mit Albedo" ]
 }
 gui_interp = {
     "en": ["Interpolator/extrapolator", "qualitatively", "fast"],
     "ru": ["Интер/экстраполятор", "качественно", "быстро"],
-    "de": [""]
+    "de": ["Interpolation/Extrapolation", "qualitativ", "schnell"]
 }
 gui_bit = {
     "en": "Color (bit) depth",
     "ru": "Битность цвета",
-    "de": ""
+    "de": "Farbtiefe (bit)"
 }
 gui_rnd = {
     "en": "Decimal places",
     "ru": "Округление",
-    "de": ""
+    "de": "Nachkommastellen"
 }
 gui_apply = {
     "en": "Apply",
     "ru": "Применить",
-    "de": ""
+    "de": "Anwenden"
 }
 gui_rgb = {
     "en": "RGB color",
     "ru": "Цвет RGB",
-    "de": ""
+    "de": "RGB Farbe"
 }
 gui_hex = {
     "en": "HEX color",
     "ru": "Цвет HEX",
-    "de": ""
+    "de": "HTML Farbe"
 }
 gui_single = {
     "en": "Single image mode",
     "ru": "Режим одного изображения",
-    "de": ""
+    "de": "Ein-Bild-Modus"
 }
 gui_browse = {
     "en": "Browse",
     "ru": "Обзор",
-    "de": ""
+    "de": "Durchsuchen"
 }
 gui_band = {
     "en": "Band",
     "ru": "Канал",
-    "de": ""
+    "de": "Band"
 }
 gui_filter = {
     "en": "Filter name",
     "ru": "Фильтр",
-    "de": ""
+    "de": "Filter Name"
 }
 gui_wavelength = {
     "en": "Wavelength (nm)",
     "ru": "Длина волны (нм)",
-    "de": ""
+    "de": "Wellenlänge (nm)"
 }
 gui_system = {
     "en": "Photometric system",
     "ru": "Набор фильтров",
-    "de": ""
+    "de": "Phtotometrisches System"
 }
 gui_calib = {
     "en": "Reference body calibration",
     "ru": "Калибровка по объекту",
-    "de": ""
+    "de": "Kalibrierung an Vergleichsobjekt"
 }
 gui_folder = {
-    "en": "Saving folder",
+    "en": "Save file location",
     "ru": "Папка для сохранения",
-    "de": ""
+    "de": "Speicherort"
 }
 gui_signature = {
     "en": "Signature",
     "ru": "Подпись",
-    "de": ""
+    "de": "Signatur"
 }
 gui_extension = {
-    "en": "Extension",
+    "en": "File format",
     "ru": "Расширение",
-    "de": ""
+    "de": "Dateiformat"
 }
 gui_preview = {
     "en": "Show preview",
     "ru": "Предпросмотр",
-    "de": ""
+    "de": "Vorschau anzeigen"
 }
 gui_process = {
     "en": "Start processing",
     "ru": "Обработать",
-    "de": ""
+    "de": "Bild erzeugen"
 }
 
 name_text = {
     "en": "Colors of celestial bodies from spectra",
     "ru": "Цвета небесных тел, полученные из спектров",
-    "de": ""
+    "de": "Farben von Himmelskörpen aus Spektren"
 }
 
 single_title_text = {
     "en": "Spectrum and color of ",
     "ru": "Спектр и цвет объекта ",
-    "de": ""
+    "de": "Spektrum und Farbe von"
 }
 batch_title_text = {
     "en": "Spectra and colors of ",
     "ru": "Спектр и цвет следующих объектов: ",
-    "de": ""
+    "de": "Spektren und Farben von"
 }
 table_title_text = {
     "en": "Spectra and colors of celestial bodies",
     "ru": "Спектры и цвета космических объектов",
-    "de": ""
+    "de": "Spektren und Farben von Himmelskörpern"
 }
 map_title_text = {
     "en": "Spectrum and color of some pixels of the map",
     "ru": "Спектр и цвет некоторых пикселей карты",
-    "de": ""
+    "de": "Spektren und Farben einiger Pixel der Karte"
 }
 xaxis_text = {
     "en": "Wavelength [nm]",
     "ru": "Длина волны [нм]",
-    "de": ""
+    "de": "Wellenlänge [nm]"
 }
 yaxis_text = {
     "en": "Reflectivity",
     "ru": "Отражательная способность",
-    "de": ""
+    "de": "Reflektivität"
 }
 
 error1 = {
-    "en": ["Error 1: data length mismatch or order of increasing wavelength is not observed.", "Object name: {}\nWavelength values: {}\nBrightness values: {}"],
+    "en": ["Error 1: data length mismatch or wavelengths not in increasing order.", "Object name: {}\nWavelength values: {}\nBrightness values: {}"],
     "ru": ["Ошибка 1: несовпадение списков данных или длины волн не в порядке возрастания.", "Название объекта: {}\nЗначений длин волн: {}\nЗначений яркости: {}"],
-    "de": [""]
+    "de": ["Fehler 1: Datenlänge stimmt nicht überein, oder Wellenlängen sind nicht in aufsteigender Reihenfolge", "Objektname: {}\nWellenlängenwerte: {}\nHelligkeitswerte: {}"]
 }
 
 error2 = {
     "en": ["Error 2: value of one of the color bands is negative.", "Object name: {}\nR: {}\nG: {}\nB: {}"],
     "ru": ["Ошибка 2: яркость одного из цветов получилась отрицательной.", "Название объекта: {}\nR: {}\nG: {}\nB: {}"],
-    "de": [""]
+    "de": ["Error 2: Werte eines Farbbands sind negativ.", "Objektname: {}\nR: {}\nG: {}\nB: {}"
 }
