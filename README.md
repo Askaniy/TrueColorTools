@@ -1,10 +1,10 @@
 # True Color Tools
 Astronomy-focused set of Python tools with GUI that use spectra construction and eye absorption to calculate realistic colors.
 
-Input data is accepted in the form of channel measurements, color indices, magnitudes and even images.
+Input data is accepted in the form of channel measurements, color indices, magnitudes, physical parameters and even images.
 Customizable output in RGB, Hex, image or spectra database table.
 
-![Spectra Tab](SpectraTab.png)
+![TCT preview](ViewMe.png)
 
 
 ## Installation
@@ -28,7 +28,7 @@ Only for Windows. Please note that this installation way is [SevenSpheres](https
 
 ## How to use
 
-[`TCT.py`](Scripts/TCT.py) includes three tabs for different purposes: *Spectra*, *Images* and *Table*. The first and last tabs are linked to the database, the *Images* tab asks for input. No internet connection is required.
+[`TCT.py`](Scripts/TCT.py) includes four tabs for different purposes: *Spectra*, *Images*, *Table* and *Blackbody & Redshifts*. *Spectra* and *Table* tabs are linked to the database, other tabs ask for input. No internet connection is required.
 
 Several global concepts:
 - The wavelengths are always increasing. This is important for customizing the database and for numbering images.
@@ -43,6 +43,8 @@ For example, you can get colors formatted for [Celestia](https://github.com/Cele
 **Images tab** allows you to load image(s), specify wavelengths and save a processed image, for each pixel of which a spectrum was built. It takes a very long time with the current algorithm, so you can check out the preview.
 
 **Table tab** generates a customizable table of calculated colors from the spectra database. You can see examples [here](Tables/).
+
+**Blackbody & Redshifts tab** calculates the influence of physical phenomena on color. Based on the blackbody spectrum, the program displays the changes in color and brightness from Doppler and gravitational redshifts. You can lock the exposure through the logarithmic spectral irradiance scale. It is measured in energy from 1 m² on 550 nm in the 1 nm range.
 
 
 ### Auxiliary
@@ -68,7 +70,7 @@ For example, you can get colors formatted for [Celestia](https://github.com/Cele
 ### Optional parameters
 - `albedo`: bool (`True` if reflectivity was set by albedo values) or float (in V band or on 550 nm)
 - `sun`: bool (`True` if spectrum contains the solar reflection)
-- `obl`: oblateness for the `Table` tab (float, from 0 to 1)
+- `obl`: oblateness for the *Table* tab (float, from 0 to 1)
 - `tags`: list of strings, categorizes a spectrum
 
 ## Localization
