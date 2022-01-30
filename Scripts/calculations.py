@@ -5,17 +5,17 @@ import cmf, database
 
 # Spectrum processing functions
 
-H = 6.626e-34
-C = 299792458
-K = 1.381e-23
-break_flag = False
-def blackbody(nm, t):
-    global break_flag
+H = 6.626e-34 # Planck constant
+C = 299792458 # Speed of light
+K = 1.381e-23 # Boltzmann constant
+const1 = 2 * np.pi * H * C * C
+const2 = H * C / K
+
+def irradiance(nm, t):
     m = nm / 1e9
-    return 2*H * C**2 / m**5 / (np.exp(H*C/(m*K*t)) - 1)
+    return const1 / (m**5 * (np.exp(const2 / m / t) - 1) )
 
 def blackbody_redshift(scope, tempurature, velocity, vII):
-    global break_flag
     if tempurature == 0:
         physics = False
     else:
@@ -37,7 +37,7 @@ def blackbody_redshift(scope, tempurature, velocity, vII):
     br = []
     for nm in scope:
         if physics:
-            br.append(blackbody(nm*doppler*grav, tempurature))
+            br.append(irradiance(nm*doppler*grav, tempurature) / 1e9) # per m -> per nm
         else:
             br.append(0)
     return np.array(br)

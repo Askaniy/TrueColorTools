@@ -170,9 +170,9 @@ gui_output = {
     "ru": "Обработка и вывод",
     "de": ""
 }
-gui_chrom = {
-    "en": "chromaticity mode",
-    "ru": "режим цветности",
+gui_irr = {
+    "en": "irradiance mode",
+    "ru": "режим фикс. изл.",
     "de": ""
 }
 gui_temp = {
@@ -191,8 +191,8 @@ gui_vI = {
     "de": ""
 }
 gui_scale = {
-    "en": "Scale (10^x)",
-    "ru": "Масштаб (10^x)",
+    "en": "[log10 W/(m²nm)]",
+    "ru": "[log10 Вт/(м²нм)]",
     "de": ""
 }
 gui_maxtemp = {
