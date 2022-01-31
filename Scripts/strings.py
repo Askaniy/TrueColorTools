@@ -163,7 +163,7 @@ gui_input = {
 gui_results = {
     "en": "Output",
     "ru": "Результат",
-    "de": "Ergebnisse" # to update?
+    "de": "Ergebnisse"
 }
 gui_output = {
     "en": "Processing and output",
@@ -173,7 +173,7 @@ gui_output = {
 gui_irr = {
     "en": "550 nm irradiance mode",
     "ru": "режим излуч. на 550 нм",
-    "de": "Bestrahlungsmodus" # to update
+    "de": "Strahlung rel. zu 550 nm"
 }
 gui_temp = {
     "en": "Tempurature [K]",
@@ -218,12 +218,12 @@ gui_plot = {
 gui_export = {
     "en": "Export category colors",
     "ru": "Экспортировать все цвета",
-    "de": "Alle Farben in die Konsole exportieren" # to update
+    "de": "Farben der Kategorie exp."
 }
 gui_col = {
     "en": ["Red", "Green", "Blue", "| Object"],
     "ru": ["Красный", "Зелёный", "Синий", "| Объект"],
-    "de": ["Rot", "Grün", "Blau", "| Namen"] # to update
+    "de": ["Rot", "Grün", "Blau", "| Objekt"]
 }
 gui_gamma = {
     "en": "gamma correction",
@@ -238,7 +238,7 @@ gui_br = {
 gui_phase = {
     "en": "Phase angle [°]",
     "ru": "Фазовый угол [°]",
-    "de": "Phasenwinkel [°]" # to check
+    "de": "Phasenwinkel [°]"
 }
 gui_interp = {
     "en": ["Interpolator/extrapolator", "qualitatively", "fast"],
