@@ -69,6 +69,17 @@ def convert_to_bytes(img):
     del img
     return bio.getvalue()
 
+def export(rgb):
+    lst = []
+    mx = 0
+    for i in rgb:
+        lst.append(str(i))
+        l = len(lst[-1])
+        if l > mx:
+            mx = l
+    w = 8 if mx < 8 else mx+1
+    return "".join([i.ljust(w) for i in lst])
+
 
 sg.LOOK_AND_FEEL_TABLE["MaterialDark"] = {
     'BACKGROUND': '#333333', 'TEXT': '#FFFFFF',
@@ -394,7 +405,7 @@ while True:
             T1_fig.show()
         
         elif event == "T1_export":
-            print("\n" + "\t".join(tr.gui_col[lang]) + "\n" + "_" * 36)
+            T1_export = "\n" + "\t".join(tr.gui_col[lang]) + "\n" + "_" * 36
             T1_nm = cmf.xyz_nm if values["T1_srgb"] else cmf.rgb_nm
             
             # Spectrum processing
@@ -426,7 +437,9 @@ while True:
                 )
 
                 # Output
-                print("\t".join([str(i) for i in T1_rgb]) + "\t" + name_1)
+                T1_export += "\n" + export(T1_rgb) + "\t" + name_1
+
+            sg.popup_scrolled(T1_export, title=tr.gui_results[lang], size=(72, 32), font=("Consolas", 10))
     
     # ------------ Events in the tab "Images" ------------
 

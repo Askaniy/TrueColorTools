@@ -155,15 +155,15 @@ gui_settings = {
     "ru": "Параметры",
     "de": "Einstellungen"
 }
-gui_results = {
-    "en": "Results",
-    "ru": "Результат",
-    "de": "Ergebnisse"
-}
 gui_input = {
     "en": "Input data",
     "ru": "Ввод",
     "de": "Eingaben"
+}
+gui_results = {
+    "en": "Output",
+    "ru": "Результат",
+    "de": "Ergebnisse" # to update?
 }
 gui_output = {
     "en": "Processing and output",
@@ -216,14 +216,14 @@ gui_plot = {
     "de": "Spektren plotten"
 }
 gui_export = {
-    "en": "Export all colors to console",
+    "en": "Export category colors",
     "ru": "Экспортировать все цвета",
-    "de": "Alle Farben in die Konsole exportieren" # to shorten
+    "de": "Alle Farben in die Konsole exportieren" # to update
 }
 gui_col = {
-    "en": ["Red", "Green", "Blue", "Names"],
-    "ru": ["Красный", "Зелёный", "Синий", "Названия"],
-    "de": ["Rot", "Grün", "Blau", "Namen"]
+    "en": ["Red", "Green", "Blue", "| Object"],
+    "ru": ["Красный", "Зелёный", "Синий", "| Объект"],
+    "de": ["Rot", "Grün", "Blau", "| Namen"] # to update
 }
 gui_gamma = {
     "en": "gamma correction",
