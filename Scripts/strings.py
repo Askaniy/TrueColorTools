@@ -116,9 +116,9 @@ auth_info = {
 }
 
 langs = {
-    "en": ["English", "Английский"],
-    "ru": ["Russian", "Русский"],
-    "de": ["German", "Немецкий"]
+    "en": ["English", "Английский", "Englisch"],
+    "ru": ["Russian", "Русский", "Russisch"],
+    "de": ["German", "Немецкий", "Deutsch"]
 }
 lang_list = {
     "en": ["Russian", "German"],
@@ -372,5 +372,5 @@ error1 = {
 error2 = {
     "en": ["Error 2: value of one of the color bands is negative.", "Object name: {}\nR: {}\nG: {}\nB: {}"],
     "ru": ["Ошибка 2: яркость одного из цветов получилась отрицательной.", "Название объекта: {}\nR: {}\nG: {}\nB: {}"],
-    "de": ["Error 2: Werte eines Farbbands sind negativ.", "Objektname: {}\nR: {}\nG: {}\nB: {}"
+    "de": ["Error 2: Werte eines Farbbands sind negativ.", "Objektname: {}\nR: {}\nG: {}\nB: {}"]
 }
