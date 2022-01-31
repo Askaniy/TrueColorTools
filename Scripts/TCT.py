@@ -51,23 +51,7 @@ def obj_list(tag="all"):
                         break
                 name_1 = index + name_1
             names.update({name_1: name_0})
-
     return names
-
-def frame(num):
-    n = str(num)
-    l = [
-        [sg.Input(size=(20, 1), disabled=False, disabled_readonly_background_color="#3A3A3A", key="T2_path"+n), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(10, 1), disabled=False, key="T2_browse"+n)],
-        [sg.Text(tr.gui_filter[lang], size=(14, 1), text_color="#A3A3A3", key="T2_filterN"+n), sg.InputCombo([], size=(12, 1), disabled=True, enable_events=True, key="T2_filter"+n)],
-        [sg.Text(tr.gui_wavelength[lang], size=(14, 1), key="T2_wavelengthN"+n), sg.Input(size=(14, 1), disabled_readonly_background_color="#3A3A3A", disabled=False, enable_events=True, key="T2_wavelength"+n)]
-    ]
-    return sg.Frame(f"{tr.gui_band[lang]} {num+1}", l, visible=num < T2_vis, key="T2_band"+n)
-
-def convert_to_bytes(img):
-    bio = io.BytesIO()
-    img.save(bio, format="PNG")
-    del img
-    return bio.getvalue()
 
 def export(rgb):
     lst = []
@@ -79,6 +63,68 @@ def export(rgb):
             mx = l
     w = 8 if mx < 8 else mx+1
     return "".join([i.ljust(w) for i in lst])
+
+short_list = ["I", "i", "j", "l", "f", "r", "t", "[", "]", "/", ":", "*", "°", ".", " "]
+T3_max_width = 11
+def width(line):
+    w = 0
+    for letter in line:
+        if letter in short_list:
+            w += 0.5
+        elif letter.isupper():
+            w += 1.5
+        else:
+            w += 1
+    return w
+
+def recurse(lst):
+    w_list = []
+    for i in lst:
+        w_list.append(width(i))
+    if max(w_list) < T3_max_width:
+        for i in range(len(w_list)-1):
+            if w_list[i]+w_list[i+1] < T3_max_width:
+                lst[i] += " " + lst[i+1]
+                lst.pop(i+1)
+                recurse(lst)
+                break
+    else:
+        for i in range(len(lst)):
+            if width(lst[i]) > T3_max_width:
+                try:
+                    lst[i+1] = lst[i][-1] + lst[i+1]
+                except IndexError:
+                    lst.append(lst[i][-1])
+                finally:
+                    lst[i] = lst[i][:-1]
+                while width(lst[i]) >= T3_max_width:
+                    lst[i+1] = lst[i][-1] + lst[i+1]
+                    lst[i] = lst[i][:-1]
+                recurse(lst)
+                break
+    return lst
+    
+def line_splitter(line):
+    w = width(line)
+    if w < T3_max_width:
+        return [line]
+    else:
+        return recurse(line.split())
+
+def convert_to_bytes(img):
+    bio = io.BytesIO()
+    img.save(bio, format="PNG")
+    del img
+    return bio.getvalue()
+
+def frame(num):
+    n = str(num)
+    l = [
+        [sg.Input(size=(20, 1), disabled=False, disabled_readonly_background_color="#3A3A3A", key="T2_path"+n), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(10, 1), disabled=False, key="T2_browse"+n)],
+        [sg.Text(tr.gui_filter[lang], size=(14, 1), text_color="#A3A3A3", key="T2_filterN"+n), sg.InputCombo([], size=(12, 1), disabled=True, enable_events=True, key="T2_filter"+n)],
+        [sg.Text(tr.gui_wavelength[lang], size=(14, 1), key="T2_wavelengthN"+n), sg.Input(size=(14, 1), disabled_readonly_background_color="#3A3A3A", disabled=False, enable_events=True, key="T2_wavelength"+n)]
+    ]
+    return sg.Frame(f"{tr.gui_band[lang]} {num+1}", l, visible=num < T2_vis, key="T2_band"+n)
 
 
 sg.LOOK_AND_FEEL_TABLE["MaterialDark"] = {
@@ -162,6 +208,7 @@ T2_col2 = [
 ]
 T2_num = len(T2_col1) - 1
 
+T3_num = 15
 T3_col1 = [
     [sg.Text(tr.gui_settings[lang], size=(20, 1), font=("arial", 12), key="T3_title1")],
     [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T3_tagsN"), sg.InputCombo(tag_list(), default_value="featured", size=(16, 1), enable_events=True, key="T3_tags")],
@@ -661,6 +708,7 @@ while True:
             T3_narr_font = ImageFont.truetype("ARIALN.TTF", T3_objt_size)
             T3_wide_font = ImageFont.truetype("arial.ttf", T3_objt_size)
             T3_link_font = ImageFont.truetype("arial.ttf", 12)
+            T3_cnsl_font = ImageFont.truetype("consola.ttf", 12)
             T3_srce_font = ImageFont.truetype("arial.ttf", T3_srce_size)
             T3_note_font = ImageFont.truetype("arial.ttf", T3_note_size)
             T3_auth_font = ImageFont.truetype("arial.ttf", T3_auth_size)
@@ -713,70 +761,38 @@ while True:
                     break
 
                 # Object drawing
-
-                center_x = 100 * (1 + T3_n%15)
-                center_y = T3_name_step + 100 * int(1 + T3_n/15)
-                if "obl" in spectrum:
-                    T3_b = int(T3_r * (1 - spectrum["obl"]))
-                    T3_draw.ellipse([center_x-T3_r, center_y-T3_b, center_x+T3_r, center_y+T3_b], fill=T3_rgb)
-                else:
-                    T3_draw.ellipse([center_x-T3_r, center_y-T3_r, center_x+T3_r, center_y+T3_r], fill=T3_rgb)
+                center_x = 100 * (1 + T3_n%T3_num)
+                center_y = T3_name_step + 100 * int(1 + T3_n/T3_num)
+                T3_draw.rounded_rectangle((center_x-T3_r, center_y-T3_r, center_x+T3_r, center_y+T3_r), radius=5, fill=T3_rgb)
                 
                 T3_text_color = (0, 0, 0) if np.mean(T3_rgb) >= 127 else (255, 255, 255)
                 
-                link_right = True
                 if name[0] == "(": # Name processing
                     parts = name.split(")", 1)
                     name = parts[1].strip()
-                    T3_draw.text((center_x-40, center_y-22), f"({parts[0][1:]})", fill=T3_text_color, font=T3_link_font)
+                    T3_draw.text((center_x-42, center_y-36), f"({parts[0][1:]})", fill=T3_text_color, font=T3_link_font)
                 elif "/" in name:
                     parts = name.split("/", 1)
                     name = parts[1].strip()
-                    T3_draw.text((center_x-40, center_y-22), f"{parts[0]}/", fill=T3_text_color, font=T3_link_font)
-                else:
-                    link_right = False
+                    T3_draw.text((center_x-42, center_y-36), f"{parts[0]}/", fill=T3_text_color, font=T3_link_font)
                 
                 if "|" in name:
                     link = name.split("|")
                     name = link[0].strip()
                     ll = len(link[1])
-                    if link_right:
-                        shift = 26 - 7*(ll-1)
-                    else:
-                        shift = -(6 + 3*(ll-1))
-                    T3_draw.text((center_x+shift, center_y-22), f"[{link[1]}]", fill=T3_text_color, font=T3_link_font)
+                    T3_draw.text((center_x+25-7*(ll-1), center_y-42), f"[{link[1]}]", fill=T3_text_color, font=T3_cnsl_font)
                 
                 if lang != "en":
                     for obj_name, tranlation in tr.names.items():
                         if name.startswith(obj_name):
                             name = name.replace(obj_name, tranlation[lang])
-                            pass
                 
-                T3_width = 0
-                for letter in name:
-                    if letter in ["I", "i", "j", "l", "f", "r", "t", "[", "]", "/", ":", "*" ".", " "]:
-                        T3_width += 0.5
-                    elif letter.isupper():
-                        T3_width += 1.5
-                    else:
-                        T3_width += 1
-                if T3_width < 8:
-                    T3_draw.text((center_x-40, center_y-(T3_objt_size/2)), name, fill=T3_text_color, font=T3_wide_font)
-                elif T3_width < 9:
-                    T3_draw.text((center_x-42, center_y-(T3_objt_size/2)), name, fill=T3_text_color, font=T3_wide_font)
-                elif T3_width < 10:
-                    T3_draw.text((center_x-40, center_y-(T3_objt_size/2)), name, fill=T3_text_color, font=T3_narr_font)
-                elif T3_width < 11:
-                    T3_draw.text((center_x-42, center_y-(T3_objt_size/2)), name, fill=T3_text_color, font=T3_narr_font)
-                elif T3_width < 12:
-                    T3_draw.text((center_x-42, center_y-(T3_objt_size/2)), name.replace(":", "\n    :"), fill=T3_text_color, font=T3_narr_font)
-                elif T3_width < 13:
-                    T3_draw.text((center_x-42, center_y-(T3_objt_size/2)), name.replace(":", "\n    :"), fill=T3_text_color, font=T3_narr_font)
-                else:
-                    T3_draw.text((center_x-42, center_y-(T3_objt_size/2)), f"{name[:10]}\n    {name[10:]}", fill=T3_text_color, font=T3_narr_font)
+                T3_splitted = line_splitter(name)
+                shift = T3_objt_size/2 if len(T3_splitted) == 1 else T3_objt_size
+                T3_draw.multiline_text((center_x-42, center_y-shift), "\n".join(T3_splitted), fill=T3_text_color, font=T3_narr_font)
                 
                 T3_n += 1
-                print(T3_rgb, name)
+                print(export(T3_rgb), name)
 
             T3_img.save(f'{values["T3_folder"]}/TCT-table_{values["T3_tags"]}{"_srgb" if values["T3_srgb"] else ""}_{T3_mode}{"_gamma-corrected" if values["T3_gamma"] else ""}_{lang}.{values["T3_extension"]}')
             T3_img.show()

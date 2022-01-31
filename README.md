@@ -70,7 +70,6 @@ For example, you can get colors formatted for [Celestia](https://github.com/Cele
 ### Optional parameters
 - `albedo`: bool (`True` if reflectivity was set by albedo values) or float (in V band or on 550 nm)
 - `sun`: bool (`True` if spectrum contains the solar reflection)
-- `obl`: oblateness for the *Table* tab (float, from 0 to 1)
 - `tags`: list of strings, categorizes a spectrum
 
 ## Localization
