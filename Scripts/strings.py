@@ -171,9 +171,9 @@ gui_output = {
     "de": "Verarbeitung und Ausgabe"
 }
 gui_irr = {
-    "en": "irradiance mode",
-    "ru": "режим фикс. изл.",
-    "de": "Bestrahlungsmodus"
+    "en": "550 nm irradiance mode",
+    "ru": "режим излуч. на 550 нм",
+    "de": "Bestrahlungsmodus" # to update
 }
 gui_temp = {
     "en": "Tempurature [K]",
@@ -218,7 +218,7 @@ gui_plot = {
 gui_export = {
     "en": "Export all colors to console",
     "ru": "Экспортировать все цвета",
-    "de": "Alle Farben in die Konsole exportieren"
+    "de": "Alle Farben in die Konsole exportieren" # to shorten
 }
 gui_col = {
     "en": ["Red", "Green", "Blue", "Names"],
@@ -234,6 +234,11 @@ gui_br = {
     "en": ["Brightness display mode", "chromaticity", "albedo 0.5", "true albedo"],
     "ru": ["Отображение яркости", "цветность", "альбедо 0,5", "альбедо"],
     "de": ["Helligkeitsmodus", "Farbton", "Albedo 0,5", "Farbe mit Albedo" ]
+}
+gui_phase = {
+    "en": "Phase angle [°]",
+    "ru": "Фазовый угол [°]",
+    "de": "Phasenwinkel [°]" # to check
 }
 gui_interp = {
     "en": ["Interpolator/extrapolator", "qualitatively", "fast"],
@@ -262,7 +267,7 @@ gui_rgb = {
 }
 gui_hex = {
     "en": "HEX color",
-    "ru": "Цвет HEX",
+    "ru": "Цвет HTML",
     "de": "HTML Farbe"
 }
 gui_single = {
@@ -295,16 +300,11 @@ gui_system = {
     "ru": "Набор фильтров",
     "de": "Phtotometrisches System"
 }
-gui_calib = {
-    "en": "Reference body calibration",
-    "ru": "Калибровка по объекту",
-    "de": "Kalibrierung an Vergleichsobjekt"
-}
-gui_folder = {
-    "en": "Save file location",
-    "ru": "Папка для сохранения",
-    "de": "Speicherort"
-}
+#gui_calib = {
+#    "en": "Reference body calibration",
+#    "ru": "Калибровка по объекту",
+#    "de": "Kalibrierung an Vergleichsobjekt"
+#}
 gui_signature = {
     "en": "Signature",
     "ru": "Подпись",
@@ -312,8 +312,13 @@ gui_signature = {
 }
 gui_extension = {
     "en": "File format",
-    "ru": "Расширение",
+    "ru": "Расширение файла",
     "de": "Dateiformat"
+}
+gui_folder = {
+    "en": "Save file location",
+    "ru": "Путь сохранения",
+    "de": "Speicherort"
 }
 gui_preview = {
     "en": "Show preview",

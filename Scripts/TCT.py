@@ -57,9 +57,9 @@ def obj_list(tag="all"):
 def frame(num):
     n = str(num)
     l = [
-        [sg.Input(size=(21, 1), disabled=False, disabled_readonly_background_color="#3A3A3A", key="T2_path"+n), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(6, 1), disabled=False, key="T2_browse"+n)],
-        [sg.Text(tr.gui_filter[lang], size=(8, 1), text_color="#A3A3A3", key="T2_filterN"+n), sg.InputCombo([], size=(17, 1), disabled=True, enable_events=True, key="T2_filter"+n)],
-        [sg.Text(tr.gui_wavelength[lang], size=(14, 1), key="T2_wavelengthN"+n), sg.Input(size=(12, 1), disabled_readonly_background_color="#3A3A3A", disabled=False, enable_events=True, key="T2_wavelength"+n)]
+        [sg.Input(size=(20, 1), disabled=False, disabled_readonly_background_color="#3A3A3A", key="T2_path"+n), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(10, 1), disabled=False, key="T2_browse"+n)],
+        [sg.Text(tr.gui_filter[lang], size=(14, 1), text_color="#A3A3A3", key="T2_filterN"+n), sg.InputCombo([], size=(12, 1), disabled=True, enable_events=True, key="T2_filter"+n)],
+        [sg.Text(tr.gui_wavelength[lang], size=(14, 1), key="T2_wavelengthN"+n), sg.Input(size=(14, 1), disabled_readonly_background_color="#3A3A3A", disabled=False, enable_events=True, key="T2_wavelength"+n)]
     ]
     return sg.Frame(f"{tr.gui_band[lang]} {num+1}", l, visible=num < T2_vis, key="T2_band"+n)
 
@@ -81,28 +81,28 @@ sg.ChangeLookAndFeel("MaterialDark")
 
 T1_col1 = [
     [sg.Text(tr.gui_database[lang], size=(16, 1), font=("arial", 12), key="T1_title1")],
-    [sg.Text(tr.gui_tags[lang], size=(6, 1), key="T1_tagsN"), sg.InputCombo(tag_list(), default_value="featured", size=(16, 1), enable_events=True, key="T1_tags")],
-    [sg.Listbox(values=tuple(obj_list(tag="featured").keys()), size=(24, 22), enable_events=True, key="T1_list")]
+    [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T1_tagsN"), sg.InputCombo(tag_list(), default_value="featured", size=(16, 1), enable_events=True, key="T1_tags")],
+    [sg.Listbox(values=tuple(obj_list(tag="featured").keys()), size=(25, 22), enable_events=True, key="T1_list")]
 ]
 T1_col2 = [
     [sg.Text(tr.gui_settings[lang], size=(16, 1), font=("arial", 12), key="T1_title2")],
     [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), enable_events=True, default=True, key="T1_gamma")],
     [sg.Checkbox("sRGB", enable_events=True, size=(16, 1), key="T1_srgb")],
     [sg.HorizontalSeparator()],
-    [sg.Text(tr.gui_br[lang][0], size=(18, 1), key="T1_br_mode")],
+    [sg.Text(tr.gui_br[lang][0], size=(20, 1), key="T1_br_mode")],
     [sg.Radio(tr.gui_br[lang][1], "T1_rad", size=(15, 1), enable_events=True, default=True, key="T1_br_mode0")],
     [sg.Radio(tr.gui_br[lang][2], "T1_rad", size=(15, 1), enable_events=True, key="T1_br_mode1")],
     [sg.Radio(tr.gui_br[lang][3], "T1_rad", size=(15, 1), enable_events=True, key="T1_br_mode2")],
     [sg.HorizontalSeparator()],
-    [sg.Text("Phase function [deg]", size=(18, 1), key="T1_phase")],
-    [sg.Slider(range=(-180, 180), default_value=0, resolution=1, orientation="h", size=(16, 16), enable_events=True, key="T1_slider")],
+    [sg.Text(tr.gui_phase[lang], size=(20, 1), key="T1_phase")],
+    [sg.Slider(range=(-180, 180), default_value=0, resolution=1, orientation="h", size=(18, 16), enable_events=True, key="T1_slider")],
     [sg.HorizontalSeparator()],
-    [sg.Text(tr.gui_interp[lang][0], size=(18, 1), key="T1_interp")],
+    [sg.Text(tr.gui_interp[lang][0], size=(20, 1), key="T1_interp")],
     [sg.Radio(tr.gui_interp[lang][1], "T1_interp", size=(15, 1), enable_events=True, default=True, key="T1_interp0")],
     [sg.Radio(tr.gui_interp[lang][2], "T1_interp", size=(15, 1), enable_events=True, key="T1_interp1")],
     [sg.HorizontalSeparator()],
-    [sg.Text(tr.gui_bit[lang], size=(12, 1), key="T1_bit"), sg.InputText("8", size=(4, 1), enable_events=True, key="T1_bit_num")],
-    [sg.Text(tr.gui_rnd[lang], size=(12, 1), key="T1_rnd"), sg.InputText("3", size=(4, 1), enable_events=True, key="T1_rnd_num")]
+    [sg.Text(tr.gui_bit[lang], size=(14, 1), key="T1_bit"), sg.InputText("8", size=(4, 1), enable_events=True, key="T1_bit_num")],
+    [sg.Text(tr.gui_rnd[lang], size=(14, 1), key="T1_rnd"), sg.InputText("3", size=(4, 1), enable_events=True, key="T1_rnd_num")]
 ]
 T1_col3 = [
     [sg.Text(tr.gui_results[lang], size=(16, 1), font=("arial", 12), key="T1_title3")],
@@ -120,7 +120,7 @@ T1_col3 = [
 T2_vis = 3
 T2_preview = (256, 128)
 T2_col1 = [
-    [sg.Text(tr.gui_input[lang], size=(17, 1), font=("arial", 12), key="T2_title1"), sg.Button(button_text="+", size=(2, 1), key="T2_+"), sg.Button(button_text="-", size=(2, 1), disabled=False, key="T2_-")],
+    [sg.Text(tr.gui_input[lang], size=(20, 1), font=("arial", 12), key="T2_title1"), sg.Button(button_text="+", size=(2, 1), key="T2_+"), sg.Button(button_text="-", size=(2, 1), disabled=False, key="T2_-")],
     [frame(0)],
     [frame(1)],
     [frame(2)],
@@ -133,19 +133,19 @@ T2_col1 = [
     [frame(9)] # just add more frames here
 ]
 T2_col2 = [
-    [sg.Text(tr.gui_output[lang], size=(20, 1), font=("arial", 12), key="T2_title2")],
-    [sg.Checkbox(tr.gui_gamma[lang], size=(15, 1), key="T2_gamma"),
+    [sg.Text(tr.gui_output[lang], size=(30, 1), font=("arial", 12), key="T2_title2")],
+    [sg.Checkbox(tr.gui_gamma[lang], size=(17, 1), key="T2_gamma"),
     sg.Radio(tr.gui_interp[lang][1], "T2_interp", size=(12, 1), enable_events=True, default=True, key="T2_interp0")],
-    [sg.Checkbox("sRGB", size=(15, 1), key="T2_srgb"),
+    [sg.Checkbox("sRGB", size=(17, 1), key="T2_srgb"),
     sg.Radio(tr.gui_interp[lang][2], "T2_interp", size=(12, 1), enable_events=True, key="T2_interp1")],
     [sg.HorizontalSeparator()],
     [sg.Checkbox(tr.gui_single[lang], size=(22, 1), enable_events=True, key="T2_single")],
-    [sg.Input(size=(22, 1), disabled=True, disabled_readonly_background_color="#3A3A3A", key="T2_path"), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(6, 1), disabled=True, key="T2_browse")],
+    [sg.Input(size=(32, 1), disabled=True, disabled_readonly_background_color="#3A3A3A", key="T2_path"), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(10, 1), disabled=True, key="T2_browse")],
     [sg.Checkbox(tr.gui_system[lang], size=(26, 1), enable_events=True, key="T2_system")],
     [sg.InputCombo(filters.get_sets(), size=(26, 1), enable_events=True, disabled=True, key="T2_filter")],
     [sg.T("")],
     [sg.Text(tr.gui_folder[lang], size=(22, 1), key="T2_folderN")],
-    [sg.Input(size=(27, 1), enable_events=True, key="T2_folder"), sg.FolderBrowse(button_text=tr.gui_browse[lang], size=(6, 1), key="T2_browse_folder")],
+    [sg.Input(size=(32, 1), enable_events=True, key="T2_folder"), sg.FolderBrowse(button_text=tr.gui_browse[lang], size=(10, 1), key="T2_browse_folder")],
     [sg.Button(tr.gui_preview[lang], size=(15, 1), disabled=True, key="T2_show"), sg.Button(tr.gui_process[lang], size=(15, 1), disabled=True, key="T2_process")],
     [sg.Image(background_color="black", size=T2_preview, key="T2_preview")]
 ]
@@ -153,7 +153,7 @@ T2_num = len(T2_col1) - 1
 
 T3_col1 = [
     [sg.Text(tr.gui_settings[lang], size=(20, 1), font=("arial", 12), key="T3_title1")],
-    [sg.Text(tr.gui_tags[lang], size=(6, 1), key="T3_tagsN"), sg.InputCombo(tag_list(), default_value="featured", size=(16, 1), enable_events=True, key="T3_tags")],
+    [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T3_tagsN"), sg.InputCombo(tag_list(), default_value="featured", size=(16, 1), enable_events=True, key="T3_tags")],
     [sg.HorizontalSeparator()],
     [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), enable_events=True, default=True, key="T3_gamma")],
     [sg.Checkbox("sRGB", enable_events=True, size=(16, 1), key="T3_srgb")],
@@ -167,8 +167,8 @@ T3_col1 = [
 ]
 T3_col2 = [
     [sg.Text(tr.gui_results[lang], size=(30, 1), font=("arial", 12), key="T3_title2")],
-    [sg.Text(tr.gui_extension[lang], size=(17, 1), key="ext"), sg.InputCombo(["png", "jpeg"], default_value="png", size=(22, 1), enable_events=True, key="T3_extension")],
-    [sg.Text(tr.gui_folder[lang], size=(17, 1), key="T3_folderN"), sg.Input(size=(16, 1), enable_events=True, key="T3_folder"), sg.FolderBrowse(button_text=tr.gui_browse[lang], size=(6, 1), key="T3_browse_folder")],
+    [sg.Text(tr.gui_extension[lang], size=(15, 1), key="T3_ext"), sg.InputCombo(["png", "jpeg"], default_value="png", size=(10, 1), enable_events=True, key="T3_extension")],
+    [sg.Text(tr.gui_folder[lang], size=(15, 1), key="T3_folderN"), sg.Input(size=(16, 1), enable_events=True, key="T3_folder"), sg.FolderBrowse(button_text=tr.gui_browse[lang], size=(10, 1), key="T3_browse_folder")],
     [sg.T("")],
     [sg.Button(tr.gui_process[lang], size=(15, 1), disabled=True, key="T3_process")]
 ]
@@ -177,17 +177,17 @@ slider_size = (28, 16)
 T4_text_colors = ("#A3A3A3", "#FFFFFF")
 T4_col1 = [
     [sg.Text(tr.gui_input[lang], size=(16, 1), font=("arial", 12), key="T4_title1")],
-    [sg.Text(tr.gui_temp[lang], size=(13, 1), key="T4_temp"), sg.Slider(range=(0, 20000), default_value=0, resolution=100, orientation="h", size=slider_size, enable_events=True, key="T4_slider1")],
-    [sg.Text(tr.gui_velocity[lang], size=(13, 1), key="T4_velocity"), sg.Slider(range=(-1, 1), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, key="T4_slider2")],
-    [sg.Text(tr.gui_vI[lang], size=(13, 1), key="T4_vI"), sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, key="T4_slider3")],
-    [sg.Text(tr.gui_scale[lang], size=(13, 1), text_color=T4_text_colors[0], key="T4_scale"), sg.Slider(range=(-10, 10), default_value=0, resolution=0.1, orientation="h", size=slider_size, enable_events=True, disabled=True, key="T4_slider4")],
+    [sg.Text(tr.gui_temp[lang], size=(15, 1), key="T4_temp"), sg.Slider(range=(0, 20000), default_value=0, resolution=100, orientation="h", size=slider_size, enable_events=True, key="T4_slider1")],
+    [sg.Text(tr.gui_velocity[lang], size=(15, 1), key="T4_velocity"), sg.Slider(range=(-1, 1), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, key="T4_slider2")],
+    [sg.Text(tr.gui_vI[lang], size=(15, 1), key="T4_vI"), sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, key="T4_slider3")],
+    [sg.Text(tr.gui_scale[lang], size=(15, 1), text_color=T4_text_colors[0], key="T4_scale"), sg.Slider(range=(-10, 10), default_value=0, resolution=0.1, orientation="h", size=slider_size, enable_events=True, disabled=True, key="T4_slider4")],
     [sg.T("")],
     [sg.HorizontalSeparator()],
-    [sg.Checkbox(tr.gui_irr[lang], size=(16, 1), enable_events=True, default=False, key="T4_irr"),
+    [sg.Checkbox(tr.gui_irr[lang], size=(20, 1), enable_events=True, default=False, key="T4_irr"),
     sg.Text(tr.gui_maxtemp[lang], size=(12, 1), key="T4_maxtemp"), sg.InputText("20000", size=(8, 1), enable_events=True, key="T4_maxtemp_num")],
-    [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), enable_events=True, default=True, key="T4_gamma"),
+    [sg.Checkbox(tr.gui_gamma[lang], size=(20, 1), enable_events=True, default=True, key="T4_gamma"),
     sg.Text(tr.gui_bit[lang], size=(12, 1), key="T4_bit"), sg.InputText("8", size=(4, 1), enable_events=True, key="T4_bit_num")],
-    [sg.Checkbox("sRGB", enable_events=True, size=(16, 1), key="T4_srgb"),
+    [sg.Checkbox("sRGB", enable_events=True, size=(20, 1), key="T4_srgb"),
     sg.Text(tr.gui_rnd[lang], size=(12, 1), key="T4_rnd"), sg.InputText("3", size=(4, 1), enable_events=True, key="T4_rnd_num")]
 ]
 T4_col2 = [
@@ -259,6 +259,7 @@ while True:
         window["T1_tagsN"].update(tr.gui_tags[lang])
         window["T1_list"].update(values=tuple(obj_list(tag=values["T1_tags"]).keys()))
         window["T1_br_mode"].update(tr.gui_br[lang][0])
+        window["T1_phase"].update(tr.gui_phase[lang])
         window["T1_interp"].update(tr.gui_interp[lang][0])
         window["T1_bit"].update(tr.gui_bit[lang])
         window["T1_rnd"].update(tr.gui_rnd[lang])
@@ -287,7 +288,8 @@ while True:
         window["T3_tagsN"].update(tr.gui_tags[lang])
         window["T3_br_mode"].update(tr.gui_br[lang][0])
         #window["T3_signature"].update(tr.gui_signature[lang])
-        window["ext"].update(tr.gui_extension[lang])
+        window["T3_ext"].update(tr.gui_extension[lang])
+        window["T3_browse_folder"].update(tr.gui_browse[lang])
         window["T3_folderN"].update(tr.gui_folder[lang])
         window["T3_process"].update(tr.gui_process[lang])
         window["T4_title1"].update(tr.gui_input[lang])
