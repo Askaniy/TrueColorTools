@@ -64,6 +64,12 @@ def export(rgb):
     w = 8 if mx < 8 else mx+1
     return "".join([i.ljust(w) for i in lst])
 
+def denumerized_sources(lst):
+    res = []
+    for i in range(len(lst)):
+       res.append(lst[i].split("]: ")[1])
+    return res
+
 short_list = ["I", "i", "j", "l", "f", "r", "t", "[", "]", "/", ":", "*", "°", ".", " "]
 T3_max_width = 11
 def width(line):
@@ -208,7 +214,6 @@ T2_col2 = [
 ]
 T2_num = len(T2_col1) - 1
 
-T3_num = 15
 T3_col1 = [
     [sg.Text(tr.gui_settings[lang], size=(20, 1), font=("arial", 12), key="T3_title1")],
     [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T3_tagsN"), sg.InputCombo(tag_list(), default_value="featured", size=(16, 1), enable_events=True, key="T3_tags")],
@@ -686,18 +691,30 @@ while True:
                 if values["T3_br_mode"+str(i)]:
                     T3_mode0 = br_modes[i]
             
+            denumerized_sources_list = denumerized_sources(db.sources)
+            adapted_sources_list = []
+            orig_num_list = []
+            redirect_list = []
+
             # Layout
-            T3_r = 46 # radius in px
-            T3_w = 100*(T3_l + 1) if T3_l < 15 else 1600
-            T3_s = len(db.sources)
+            T3_num = 15 # objects per row
+            T3_r = 46 # half a side of a square
+            T3_rr = 5 # rounding radius
+            if T3_l < 11:
+                T3_w = 1200
+            elif T3_l < T3_num:
+                T3_w = 100*(T3_l + 1)
+            else:
+                T3_w = 1600
+            T3_s = len(denumerized_sources_list)
             T3_name_step = 75
             T3_objt_size = 18
             T3_srce_size = 9
-            T3_srce_step = 6 + 2 * T3_srce_size
+            T3_srce_step = 7 + 2 * T3_srce_size
             T3_note_size = 16
             T3_note_step = 4 + T3_note_size
             T3_auth_size = 10
-            T3_h0 = T3_name_step + 100 * int(np.ceil(T3_l / 15) + 1)
+            T3_h0 = T3_name_step + 100 * int(np.ceil(T3_l / T3_num) + 1)
             T3_h1 = T3_h0 + T3_s * T3_srce_step
             T3_w0 = 100 - T3_r
             T3_w1 = int(T3_w * 3/5)
@@ -713,20 +730,20 @@ while True:
             T3_note_font = ImageFont.truetype("arial.ttf", T3_note_size)
             T3_auth_font = ImageFont.truetype("arial.ttf", T3_auth_size)
             # text brightness formula: br = 255 * (x^(1/2.2))
-            T3_draw.text((T3_w0, 50), tr.name_text[lang], fill=(255, 255, 255), font=T3_name_font) # x = 1, br = 255
+            T3_draw.text((T3_w0, 50), values["T3_tags"].join(tr.name_text[lang]), fill=(255, 255, 255), font=T3_name_font) # x = 1, br = 255
             T3_draw.text((T3_w0, T3_h0 - 25), tr.source[lang]+":", fill=(230, 230, 230), font=T3_help_font) # x = 0.8, br = 230
             T3_draw.text((T3_w1, T3_h0 - 25), tr.note[lang]+":", fill=(230, 230, 230), font=T3_help_font) # x = 0.8, br = 230
             if values["T3_signature"]:
                 T3_auth_step = 302 if lang == "ru" else 284
                 T3_draw.text((T3_w - T3_auth_step, T3_h1 - T3_auth_size), tr.auth_info[lang], fill=(136, 136, 136), font=T3_help_font) # x = 0.25, br = 136
-            for srce_num in range(T3_s): # x = 0.5, br = 186
-                T3_draw.multiline_text((T3_w0, T3_h1 - T3_srce_step * (T3_s-srce_num)), db.sources[srce_num], fill=(186, 186, 186), font=T3_srce_font)
             T3_note_num = 0
             for note, translation in tr.notes.items(): # x = 0.6, br = 202
                 T3_draw.multiline_text((T3_w1, T3_h0 + T3_note_step * T3_note_num), f'{note} {translation[lang]}', fill=(202, 202, 202), font=T3_note_font)
                 T3_note_num += 1
-            for info_num, info in enumerate([values["T3_tags"], T3_mode0, values["T3_srgb"], values["T3_gamma"]]): # x = 0.75, br = 224
+            T3_info_num = 0
+            for info_num, info in enumerate([T3_mode0, values["T3_srgb"], values["T3_gamma"]]): # x = 0.75, br = 224
                 T3_draw.multiline_text((T3_w1, T3_h0 + T3_note_step * (T3_note_num + info_num + 1)), f'{tr.info[lang][info_num]}: {info}', fill=(224, 224, 224), font=T3_note_font)
+                T3_info_num += 1
             
             # Table generator
 
@@ -763,7 +780,7 @@ while True:
                 # Object drawing
                 center_x = 100 * (1 + T3_n%T3_num)
                 center_y = T3_name_step + 100 * int(1 + T3_n/T3_num)
-                T3_draw.rounded_rectangle((center_x-T3_r, center_y-T3_r, center_x+T3_r, center_y+T3_r), radius=5, fill=T3_rgb)
+                T3_draw.rounded_rectangle((center_x-T3_r, center_y-T3_r, center_x+T3_r, center_y+T3_r), radius=T3_rr, fill=T3_rgb)
                 
                 T3_text_color = (0, 0, 0) if np.mean(T3_rgb) >= 127 else (255, 255, 255)
                 
@@ -777,10 +794,22 @@ while True:
                     T3_draw.text((center_x-42, center_y-36), f"{parts[0]}/", fill=T3_text_color, font=T3_link_font)
                 
                 if "|" in name:
-                    link = name.split("|")
-                    name = link[0].strip()
-                    ll = len(link[1])
-                    T3_draw.text((center_x+25-7*(ll-1), center_y-42), f"[{link[1]}]", fill=T3_text_color, font=T3_cnsl_font)
+                    name, link = name.split("|")
+                    name = name.strip()
+                    new_link = []
+                    for i in link.split(", "):
+                        orig_num = int(i)-1 # source number
+                        if orig_num in orig_num_list: # it was already numbered
+                            new_link.append(str(redirect_list[orig_num_list.index(orig_num)]))
+                        else:
+                            orig_num_list.append(orig_num)
+                            srce_num = len(orig_num_list) # its new number
+                            redirect_list.append(srce_num)
+                            adapted_sources_list.append(denumerized_sources_list[orig_num])
+                            new_link.append(str(srce_num))
+                            T3_draw.multiline_text((T3_w0, T3_h1 + (srce_num-1 - T3_s) * T3_srce_step), f'[{srce_num}] {adapted_sources_list[-1]}', fill=(186, 186, 186), font=T3_srce_font) # x = 0.5, br = 186
+                    new_link = f'[{", ".join(new_link)}]'
+                    T3_draw.text((center_x+38-7*(len(new_link)-1), center_y-42), new_link, fill=T3_text_color, font=T3_cnsl_font)
                 
                 if lang != "en":
                     for obj_name, tranlation in tr.names.items():
@@ -792,8 +821,12 @@ while True:
                 T3_draw.multiline_text((center_x-42, center_y-shift), "\n".join(T3_splitted), fill=T3_text_color, font=T3_narr_font)
                 
                 T3_n += 1
-                print(export(T3_rgb), name)
-
+                # print(export(T3_rgb), name)
+            
+            T3_s2 = len(adapted_sources_list)
+            T3_h2 = T3_h1 + (T3_s2 - T3_s) * T3_srce_step
+            T3_min_limit = T3_h0 + T3_note_step * (T3_note_num + info_num + 1)
+            T3_img = T3_img.crop((0, 0, T3_w, T3_h2+50 if T3_h2 > T3_min_limit else T3_min_limit+50))
             T3_img.save(f'{values["T3_folder"]}/TCT-table_{values["T3_tags"]}{"_srgb" if values["T3_srgb"] else ""}_{T3_mode}{"_gamma-corrected" if values["T3_gamma"] else ""}_{lang}.{values["T3_extension"]}')
             T3_img.show()
     

@@ -94,9 +94,9 @@ notes = {
     "C:": {"en": "cold, outer objects", "ru": "холодные, внешние объекты", "de": "kalte, äußere Objekte"}
 }
 info = {
-    "en": ["Category shown", "Brightness mode", "sRGB color space", "Gamma correction"],
-    "ru": ["Представленная категория", "Режим яркости", "Пространство sRGB", "Гамма-коррекция"],
-    "de": ["angezeigte Kategorie", "Helligkeitsmodus", "sRGB-Farbraum", "Gammakorrektur"]
+    "en": ["Brightness mode", "sRGB color space", "Gamma correction"],
+    "ru": ["Режим яркости", "Пространство sRGB", "Гамма-коррекция"],
+    "de": ["Helligkeitsmodus", "sRGB-Farbraum", "Gammakorrektur"]
 }
 
 source = {
@@ -332,9 +332,9 @@ gui_process = {
 }
 
 name_text = {
-    "en": "Colors of celestial bodies from spectra",
-    "ru": "Цвета небесных тел, полученные из спектров",
-    "de": "Farben von Himmelskörpen aus Spektren"
+    "en": ['Colors calculated from spectra for the "', '" category'],
+    "ru": ["Цвета, вычисленные по спектрам для категории «", "»"],
+    "de": ["Farben von Himmelskörpen aus Spektren «", "»"] # update
 }
 
 single_title_text = {
