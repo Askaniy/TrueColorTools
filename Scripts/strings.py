@@ -109,6 +109,7 @@ note = {
     "ru": "Примечания",
     "de": "Anmerkungen"
 }
+link = "github.com/Askaniy/TrueColorTools"
 auth_info = {
     "en": "Anpilogov Askaniy, 2020-2022",
     "ru": "Анпилогов Асканий, 2020-2022",
@@ -305,11 +306,11 @@ gui_system = {
 #    "ru": "Калибровка по объекту",
 #    "de": "Kalibrierung an Vergleichsobjekt"
 #}
-gui_signature = {
-    "en": "Signature",
-    "ru": "Подпись",
-    "de": "Signatur"
-}
+#gui_signature = {
+#    "en": "Signature",
+#    "ru": "Подпись",
+#    "de": "Signatur"
+#}
 gui_extension = {
     "en": "File format",
     "ru": "Расширение файла",
@@ -334,7 +335,7 @@ gui_process = {
 name_text = {
     "en": ['Colors calculated from spectra for the "', '" category'],
     "ru": ["Цвета, вычисленные по спектрам для категории «", "»"],
-    "de": ["Farben von Himmelskörpen aus Spektren «", "»"] # update
+    "de": ['Farben von Himmelskörpen aus Spektren der "', '" Kategorie']
 }
 
 single_title_text = {
