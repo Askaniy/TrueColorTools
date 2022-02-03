@@ -84,4 +84,4 @@ lang = user.lang() # config.py or system language
 lang = user.lang("ru") # the same as user.lang("Russian") and user.lang("Русский")
 ```
 
-The tools support English and Russian. German is a stub in the file for storing titles in different languages, [`strings.py`](Scripts/strings.py). If someone wants to add support for any language, this can be easily done.
+TCT supports English, German and Russian. If you want to add support for your language, you can do it in the same way as Russian and German in [`strings.py`](Scripts/strings.py).
