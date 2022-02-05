@@ -73,7 +73,8 @@ def denumerized_sources(lst):
 def width(line, font):
     return font.getsize(line)[0]
 
-def recurse(lst, font, maxW):
+def recurse(lst0, font, maxW, hyphen=True):
+    lst = lst0
     w_list = []
     for i in lst:
         w_list.append(width(i, font))
@@ -85,18 +86,23 @@ def recurse(lst, font, maxW):
                 recurse(lst, font, maxW)
                 break
     else:
+        hyphen_w = width("-", font) if hyphen else 0
         for i in range(len(lst)):
             if width(lst[i], font) > maxW:
                 try:
-                    lst[i+1] = lst[i][-1] + lst[i+1]
+                    lst[i+1] = lst[i][-1] + " " + lst[i+1]
                 except IndexError:
                     lst.append(lst[i][-1])
                 finally:
                     lst[i] = lst[i][:-1]
-                while width(lst[i], font) >= maxW:
+                while width(lst[i], font)+hyphen_w > maxW:
                     lst[i+1] = lst[i][-1] + lst[i+1]
                     lst[i] = lst[i][:-1]
-                recurse(lst, font, maxW)
+                if lst[i][-1] in [" ", ":", "-"]:
+                    recurse(lst0, font, maxW, hyphen=False)
+                else:
+                    lst[i] += "-"
+                    recurse(lst, font, maxW)
                 break
     return lst
     
@@ -230,7 +236,7 @@ T4_col1 = [
     [sg.Text(tr.gui_input[lang], size=(16, 1), font=("arial", 12), key="T4_title1")],
     [sg.Text(tr.gui_temp[lang], size=(15, 1), key="T4_temp"), sg.Slider(range=(0, 20000), default_value=0, resolution=100, orientation="h", size=slider_size, enable_events=True, key="T4_slider1")],
     [sg.Text(tr.gui_velocity[lang], size=(15, 1), key="T4_velocity"), sg.Slider(range=(-1, 1), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, key="T4_slider2")],
-    [sg.Text(tr.gui_vI[lang], size=(15, 1), key="T4_vI"), sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, key="T4_slider3")],
+    [sg.Text(tr.gui_vII[lang], size=(15, 1), key="T4_vII"), sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, key="T4_slider3")],
     [sg.Text(tr.gui_scale[lang], size=(15, 1), text_color=T4_text_colors[0], key="T4_scale"), sg.Slider(range=(-10, 10), default_value=0, resolution=0.1, orientation="h", size=slider_size, enable_events=True, disabled=True, key="T4_slider4")],
     [sg.T("")],
     [sg.HorizontalSeparator()],
@@ -251,16 +257,16 @@ T4_col2 = [
 ]
 
 tab1 = [
-    [sg.Column(T1_col1), sg.VSeperator(), sg.Column(T1_col2), sg.VSeperator(), sg.Column(T1_col3)]
+    [sg.vtop(sg.Column(T1_col1)), sg.VSeperator(), sg.vtop(sg.Column(T1_col2)), sg.VSeperator(), sg.vtop(sg.Column(T1_col3))]
 ]
 tab2 = [
-    [sg.Column(T2_col1), sg.VSeperator(), sg.Column(T2_col2)]
+    [sg.vtop(sg.Column(T2_col1)), sg.VSeperator(), sg.vtop(sg.Column(T2_col2))]
 ]
 tab3 = [
-    [sg.Column(T3_col1), sg.VSeperator(), sg.Column(T3_col2)]
+    [sg.vtop(sg.Column(T3_col1)), sg.VSeperator(), sg.vtop(sg.Column(T3_col2))]
 ]
 tab4 = [
-    [sg.Column(T4_col1), sg.VSeperator(), sg.Column(T4_col2)]
+    [sg.vtop(sg.Column(T4_col1)), sg.VSeperator(), sg.vtop(sg.Column(T4_col2))]
 ]
 
 layout = [
@@ -274,8 +280,7 @@ layout = [
     ]
 ]
 
-window = sg.Window("True Color Tools", layout)    
-window.Finalize()
+window = sg.Window("True Color Tools", layout, finalize=True)
 T1_preview = window["T1_graph"].DrawCircle((48, 46), 42, fill_color="black", line_color="white")
 T4_preview = window["T4_graph"].DrawCircle((48, 46), 42, fill_color="black", line_color="white")
 
@@ -309,7 +314,9 @@ while True:
         window["T1_title3"].update(tr.gui_results[lang])
         window["T1_tagsN"].update(tr.gui_tags[lang])
         window["T1_list"].update(values=tuple(obj_list(tag=values["T1_tags"]).keys()))
+        window["T1_gamma"].update(text=tr.gui_gamma[lang])
         window["T1_br_mode"].update(tr.gui_br[lang][0])
+        window["T1_br_mode0"].update(text=tr.gui_br[lang][1])
         window["T1_phase"].update(tr.gui_phase[lang])
         window["T1_interp"].update(tr.gui_interp[lang][0])
         window["T1_bit"].update(tr.gui_bit[lang])
@@ -321,15 +328,15 @@ while True:
         window["T1_export"].update(tr.gui_export[lang])
         window["T2_title1"].update(tr.gui_input[lang])
         window["T2_title2"].update(tr.gui_output[lang])
-        #window["T2_single"].update(tr.gui_single[lang])
-        window["T2_browse"].update(tr.gui_browse[lang])
         for i in range(T2_num):
             window["T2_browse"+str(i)].update(tr.gui_browse[lang])
             window["T2_filterN"+str(i)].update(tr.gui_filter[lang])
             window["T2_wavelengthN"+str(i)].update(tr.gui_wavelength[lang])
             window["T2_band"+str(i)].update(f"{tr.gui_band[lang]} {i+1}")
-        #window["T2_gamma"].update(tr.gui_gamma[lang])
-        #window["T2_system"].update(tr.gui_system[lang])
+        window["T2_gamma"].update(text=tr.gui_gamma[lang])
+        window["T2_single"].update(text=tr.gui_single[lang])
+        window["T2_browse"].update(tr.gui_browse[lang])
+        window["T2_system"].update(text=tr.gui_system[lang])
         window["T2_folderN"].update(tr.gui_folder[lang])
         window["T2_browse_folder"].update(tr.gui_browse[lang])
         window["T2_show"].update(tr.gui_preview[lang])
@@ -337,6 +344,7 @@ while True:
         window["T3_title1"].update(tr.gui_settings[lang])
         window["T3_title2"].update(tr.gui_results[lang])
         window["T3_tagsN"].update(tr.gui_tags[lang])
+        window["T3_gamma"].update(text=tr.gui_gamma[lang])
         window["T3_br_mode"].update(tr.gui_br[lang][0])
         window["T3_ext"].update(tr.gui_extension[lang])
         window["T3_browse_folder"].update(tr.gui_browse[lang])
@@ -346,8 +354,10 @@ while True:
         window["T4_title2"].update(tr.gui_results[lang])
         window["T4_temp"].update(tr.gui_temp[lang])
         window["T4_velocity"].update(tr.gui_velocity[lang])
-        window["T4_vI"].update(tr.gui_vI[lang])
+        window["T4_vII"].update(tr.gui_vII[lang])
         window["T4_scale"].update(tr.gui_scale[lang])
+        window["T4_irr"].update(text=tr.gui_irr[lang])
+        window["T4_gamma"].update(text=tr.gui_gamma[lang])
         window["T4_maxtemp"].update(tr.gui_maxtemp[lang])
         window["T4_bit"].update(tr.gui_bit[lang])
         window["T4_rnd"].update(tr.gui_rnd[lang])
@@ -696,7 +706,7 @@ while True:
                 T3_w = 1600
             T3_s = len(denumerized_sources_list)
             T3_name_step = 75
-            T3_objt_size = 18
+            T3_objt_size = 17
             T3_srce_size = 9
             T3_srce_step = 3 * T3_srce_size
             T3_note_size = 16
@@ -709,14 +719,14 @@ while True:
             T3_img = Image.new("RGB", (T3_w, T3_h1 + 50), (0, 0, 0))
             T3_draw = ImageDraw.Draw(T3_img)
             try:
-                T3_name_font = ImageFont.truetype("arial.ttf", 42)
+                T3_name_font = ImageFont.truetype("arial.ttf", 40)
                 T3_help_font = ImageFont.truetype("arial.ttf", 18)
                 T3_objt_font = ImageFont.truetype("ARIALN.TTF", T3_objt_size)
                 T3_smll_font = ImageFont.truetype("arial.ttf", 12)
                 T3_srce_font = ImageFont.truetype("arial.ttf", T3_srce_size)
                 T3_note_font = ImageFont.truetype("arial.ttf", T3_note_size)
             except OSError: # Linux
-                T3_name_font = ImageFont.truetype("/usr/share/fonts/truetype/NotoSans-Regular.ttf", 42)
+                T3_name_font = ImageFont.truetype("/usr/share/fonts/truetype/NotoSans-Regular.ttf", 40)
                 T3_help_font = ImageFont.truetype("/usr/share/fonts/truetype/NotoSans-Regular.ttf", 18)
                 T3_objt_font = ImageFont.truetype("/usr/share/fonts/truetype/NotoSans-Condensed.ttf", T3_objt_size)
                 T3_smll_font = ImageFont.truetype("/usr/share/fonts/truetype/NotoSans-Regular.ttf", 12)

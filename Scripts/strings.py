@@ -186,7 +186,7 @@ gui_velocity = {
     "ru": "Скорость [c]",
     "de": "Geschwindigkeit [c]"
 }
-gui_vI = {
+gui_vII = {
     "en": "Escape vel. [c]",
     "ru": "II косм. ск. [c]",
     "de": "Fluchtgeschw. [c]"
@@ -254,7 +254,7 @@ gui_bit = {
 gui_rnd = {
     "en": "Decimal places",
     "ru": "Округление",
-    "de": "Nachkommastellen"
+    "de": "Dezimalstellen"
 }
 gui_apply = {
     "en": "Apply",

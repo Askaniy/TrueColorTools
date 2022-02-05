@@ -14,7 +14,7 @@ Customizable output in RGB, Hex, image or spectra database table.
 Tested on Windows 10/11 and Linux (openSUSE).
 
 1. Clone the repository or download archive by the GitHub web interface (press the button `Code`, then I recommend choosing `Download ZIP`, unpack the archive after downloading);
-2. Make sure you have Python 3.6 or higher (due to f-strings) and the required libraries: [NumPy](https://numpy.org/), [SciPy](https://www.scipy.org/), [Pillow](https://pillow.readthedocs.io/), [Plotly](https://plotly.com/python/) and [PySimpleGUI](https://pysimplegui.readthedocs.io/). If you use Anaconda, the first 4 libraries are already preinstalled. You can install the libraries all at once using [`requirements.txt`](requirements.txt): `python -m pip install -r requirements.txt`;
+2. Make sure you have Python (3.6 or higher due to f-strings) and the required libraries: [NumPy](https://numpy.org/), [SciPy](https://www.scipy.org/), [Pillow](https://pillow.readthedocs.io/), [Plotly](https://plotly.com/python/) and [PySimpleGUI](https://pysimplegui.readthedocs.io/) (4.29 or higher). If you use Anaconda, the first 4 libraries are already preinstalled. You can install the libraries all at once using [`requirements.txt`](requirements.txt): `python -m pip install -r requirements.txt`;
 3. Run [TCT.py](Scripts/TCT.py)
 
 **Executable file (no Python)**
