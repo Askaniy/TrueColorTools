@@ -33,8 +33,9 @@ Only for Windows. Please note that this installation way is [SevenSpheres](https
 Several global concepts:
 - The wavelengths are always increasing. This is important for customizing the database and for numbering images.
 - Database of spectra. Its format is just a dictionary in a Python file and is practically json. You can modify it with your own spectra, and, if you want, share data for TCT.
-- Tag system. Each object in the database can be assigned an arbitrary set of tags. Same tags form a lists in the *Spectra* and *Table* tabs, which simplify interaction with a huge database.
-- System of sources. Each object in the database can be easily linked to one or several sources by its number. You can see the list in `File`→`Sources`. Also, after an object's name there can be abbreviations, the decoding of which is indicated in `File`→`Notes`.
+- Tag system. Each object in the database can be assigned an arbitrary set of tags. They form lists of categories in the *Spectra* and *Table* tabs, which makes it easier to work with a huge database.
+- System of sources. Each object in the database can be easily linked to one or several sources by its number. You can see the list in `File`→`Sources`. Note: the *Table* tab renumbers the sources by usage in the processed category. Also, after an object's name there can be abbreviations, the decoding of which is indicated in `File`→`Notes`.
+- The language can be changed through the top menu. Runtime translation is not available only for tab titles (due to PySimpleGUI limitations). For full localization, you can change the `lang` variable in the [`TCT.py`](Scripts/TCT.py) code. TCT supports English, German and Russian. If you want to add support for your language, you can do it by analogy in [`strings.py`](Scripts/strings.py).
 
 **Spectra tab** provides access to the built-in spectra database and allows to calculate a color with the selected settings just by clicking on an object.
 
@@ -48,8 +49,6 @@ For example, you can get colors formatted for [Celestia](https://github.com/Cele
 
 
 ### Auxiliary
-- [`user.py`](Scripts/user.py) returns the specified language and path to the tools, or determines them automatically;
-- [`config.py`](Scripts/config.py) allows you to specify in it the language and path applicable to all tools;
 - [`calculations.py`](Scripts/calculations.py) is the mathematical core. It contains most of functions and some zero points of photometric systems;
 - [`cmf.py`](Scripts/cmf.py) contains sensitivity of human perception and used curve of color space;
 - [`database.py`](Scripts/database.py) contains spectra, color indices and their sources;
@@ -71,17 +70,3 @@ For example, you can get colors formatted for [Celestia](https://github.com/Cele
 - `albedo`: bool (`True` if reflectivity was set by albedo values) or float (in V band or on 550 nm)
 - `sun`: bool (`True` if spectrum contains the solar reflection)
 - `tags`: list of strings, categorizes a spectrum
-
-## Localization
-Language detection priority order:
-1) Manual language indication on the top of a tool's code;
-2) Using the language specified in the [`config.py`](Scripts/config.py);
-3) Automatic system language detection.
-
-```py
-lang = user.lang() # config.py or system language
-
-lang = user.lang("ru") # the same as user.lang("Russian") and user.lang("Русский")
-```
-
-TCT supports English, German and Russian. If you want to add support for your language, you can do it in the same way as Russian and German in [`strings.py`](Scripts/strings.py).

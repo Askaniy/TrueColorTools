@@ -3,12 +3,12 @@ import io
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 import plotly.graph_objects as go
-import user, cmf, filters
+import cmf, filters
 import calculations as calc
 import database as db
 import strings as tr
 
-lang = user.lang("ru") # ReadMe -> FAQ -> Localization
+lang = "en" # "de" "ru"
 
 
 def tag_list():
