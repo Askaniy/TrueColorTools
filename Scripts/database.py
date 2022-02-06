@@ -384,13 +384,13 @@ objects = {
 		"filters": "Landolt", "indices": {"B-V": 0.73, "V-R": 0.46}, "sun": True
 		},
 	"Jovian irregulars|30": {"tags": ["featured", "solar_system", "class", "moon", "jovian_system", "irregular"],
-		"filters": "Landolt", "indices": {"B-V": 0.75, "V-R": 0.44}, "sun": True
+		"filters": "Landolt", "indices": {"B-V": 0.75, "V-R": 0.44}, "sun": True, "albedo": 0.04 # estimation
 		},
 	"Jovian irregulars i=28°|33": {"tags": ["featured", "solar_system", "class", "moon", "jovian_system", "irregular"],
-		"filters": "Landolt", "indices": {"B-V": 0.66, "V-R": 0.36}, "sun": True
+		"filters": "Landolt", "indices": {"B-V": 0.66, "V-R": 0.36}, "sun": True, "albedo": 0.04 # estimation
 		},
 	"Jovian irregulars i=149°|33": {"tags": ["featured", "solar_system", "class", "moon", "jovian_system", "irregular"],
-		"filters": "Landolt", "indices": {"B-V": 0.75, "V-R": 0.41}, "sun": True
+		"filters": "Landolt", "indices": {"B-V": 0.75, "V-R": 0.41}, "sun": True, "albedo": 0.04 # estimation
 		},
     "Saturn|2": {"tags": ["solar_system", "planet", "saturnian_system"],
 		"nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.203, 0.339, 0.499, 0.646, 0.568, 0.543, 0.423]
@@ -575,13 +575,13 @@ objects = {
 		"filters": "Landolt", "indices": {"B-R": 1.37}, "sun": True
 		},
 	"Saturnian irregulars|30": {"tags": ["featured", "solar_system", "class", "moon", "saturnian_system", "irregular"],
-		"filters": "Landolt", "indices": {"B-V": 0.69, "V-R": 0.44}, "sun": True
+		"filters": "Landolt", "indices": {"B-V": 0.69, "V-R": 0.44}, "sun": True, "albedo": 0.04 # estimation
 		},
 	"Saturnian irregulars i=34°|33": {"tags": ["featured", "solar_system", "class", "moon", "saturnian_system", "irregular"],
-		"filters": "Landolt", "indices": {"B-V": 0.91, "V-R": 0.48}, "sun": True
+		"filters": "Landolt", "indices": {"B-V": 0.91, "V-R": 0.48}, "sun": True, "albedo": 0.04 # estimation
 		},
 	"Saturnian irregulars i=46°|33": {"tags": ["featured", "solar_system", "class", "moon", "saturnian_system", "irregular"],
-		"filters": "Landolt", "indices": {"B-V": 0.79, "V-R": 0.51}, "sun": True
+		"filters": "Landolt", "indices": {"B-V": 0.79, "V-R": 0.51}, "sun": True, "albedo": 0.04 # estimation
 		},
     "Uranus|2": {"tags": ["solar_system", "planet", "uranian_system"],
 		"nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.502, 0.561, 0.488, 0.264, 0.202, 0.089, 0.079]
@@ -603,19 +603,19 @@ objects = {
         "albedo": True
     	},
 	"Miranda|16": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
-		"nm": [250, 410, 480, 560, 750, 910], "br": [0.51, 0.49, 0.48, 0.47, 0.46, 0.45], "albedo": 0.34
+		"nm": [250, 410, 480, 560, 750, 910], "br": [0.51, 0.49, 0.48, 0.47, 0.46, 0.45], "albedo": True # spherical is 0.34
 		},
 	"Ariel|16": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
-		"nm": [250, 410, 480, 560, 750, 910], "br": [0.50, 0.51, 0.51, 0.51, 0.51, 0.52], "albedo": 0.37
+		"nm": [250, 410, 480, 560, 750, 910], "br": [0.50, 0.51, 0.51, 0.51, 0.51, 0.52], "albedo": True # spherical is 0.37
 		},
 	"Umbriel|16": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
-		"nm": [250, 410, 480, 560, 750, 910], "br": [0.25, 0.25, 0.25, 0.25, 0.26, 0.26], "albedo": 0.19
+		"nm": [250, 410, 480, 560, 750, 910], "br": [0.25, 0.25, 0.25, 0.25, 0.26, 0.26], "albedo": True # spherical is 0.19
 		},
 	"Titania|16": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
-		"nm": [250, 410, 480, 560, 750, 910], "br": [0.30, 0.32, 0.33, 0.34, 0.36, 0.37], "albedo": 0.27
+		"nm": [250, 410, 480, 560, 750, 910], "br": [0.30, 0.32, 0.33, 0.34, 0.36, 0.37], "albedo": True # spherical is 0.27
 		},
 	"Oberon|16": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
-		"nm": [250, 410, 480, 560, 750, 910], "br": [0.27, 0.29, 0.30, 0.31, 0.33, 0.35], "albedo": 0.23
+		"nm": [250, 410, 480, 560, 750, 910], "br": [0.27, 0.29, 0.30, 0.31, 0.33, 0.35], "albedo": True # spherical is 0.23
 		},
 	"Caliban|30": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
 		"filters": "Landolt", "indices": {"B-V": 0.81, "V-R": 0.47}, "sun": True
@@ -633,7 +633,7 @@ objects = {
 		"filters": "Landolt", "indices": {"B-V": 0.97, "V-R": 0.66}, "sun": True
 		},
 	"Uranian irregulars|30": {"tags": ["featured", "solar_system", "class", "moon", "uranian_system", "irregular"],
-		"filters": "Landolt", "indices": {"B-V": 0.84, "V-R": 0.53}, "sun": True
+		"filters": "Landolt", "indices": {"B-V": 0.84, "V-R": 0.53}, "sun": True, "albedo": 0.04 # estimation
 		},
     "Neptune|2": {"tags": ["solar_system", "planet"],
 		"nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.578, 0.562, 0.442, 0.226, 0.181, 0.072, 0.067]
@@ -669,7 +669,7 @@ objects = {
 		"filters": "Landolt", "bands": ["U", "B", "V", "R", "I"], "br": [0.90, 0.93, 1, 1.13, 0.99], "albedo": 0.24 # https://arxiv.org/abs/1601.02395
 		},
 	"Neptunian irregulars|30": {"tags": ["featured", "solar_system", "class", "moon", "neptunian_system", "irregular"],
-		"filters": "Landolt", "indices": {"B-V": 0.77, "V-R": 0.50}, "sun": True
+		"filters": "Landolt", "indices": {"B-V": 0.77, "V-R": 0.50}, "sun": True, "albedo": 0.04 # estimation
 		},
     "C/1995O1-HB|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
 		"filters": "Landolt", "indices": {"B-V": 0.810, "V-R": 0.390}, "sun": True

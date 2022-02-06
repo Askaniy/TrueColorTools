@@ -210,6 +210,7 @@ def to_rgb(spectrum, mode="chromaticity", inp_bit=None, exp_bit=None, rnd=0, alb
     if srgb:
         xyz = np.sum(spectrum[:, np.newaxis] * cmf.xyz, axis=0)
         rgb = xyz_to_sRGB(xyz)
+        rgb = rgb / rgb[1] * spectrum[38] # xyz cmf is not normalized, to result was overexposed; spectrum[38] is 550 nm
     else:
         rgb = np.sum(spectrum[:, np.newaxis] * cmf.rgb, axis=0)
     if mode == "albedo 0.5":

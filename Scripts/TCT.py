@@ -8,7 +8,7 @@ import calculations as calc
 import database as db
 import strings as tr
 
-lang = user.lang("en") # ReadMe -> FAQ -> Localization
+lang = user.lang("ru") # ReadMe -> FAQ -> Localization
 
 
 def tag_list():
@@ -237,7 +237,7 @@ T4_col1 = [
     [sg.Text(tr.gui_temp[lang], size=(15, 1), key="T4_temp"), sg.Slider(range=(0, 20000), default_value=0, resolution=100, orientation="h", size=slider_size, enable_events=True, key="T4_slider1")],
     [sg.Text(tr.gui_velocity[lang], size=(15, 1), key="T4_velocity"), sg.Slider(range=(-1, 1), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, key="T4_slider2")],
     [sg.Text(tr.gui_vII[lang], size=(15, 1), key="T4_vII"), sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, key="T4_slider3")],
-    [sg.Text(tr.gui_scale[lang], size=(15, 1), text_color=T4_text_colors[0], key="T4_scale"), sg.Slider(range=(-10, 10), default_value=0, resolution=0.1, orientation="h", size=slider_size, enable_events=True, disabled=True, key="T4_slider4")],
+    [sg.Text(tr.gui_scale[lang], size=(15, 1), text_color=T4_text_colors[0], key="T4_scale"), sg.Slider(range=(-10, 10), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, disabled=True, key="T4_slider4")],
     [sg.T("")],
     [sg.HorizontalSeparator()],
     [sg.Checkbox(tr.gui_irr[lang], size=(20, 1), enable_events=True, default=False, key="T4_irr"),
@@ -696,7 +696,7 @@ while True:
             # Layout
             T3_num = 15 # objects per row
             T3_r = 46 # half a side of a square
-            T3_rr = 5 # rounding radius
+            T3_rr = 4 # rounding radius
             T3_ar = T3_r-4 # active space
             if T3_l < 11:
                 T3_w = 1200
