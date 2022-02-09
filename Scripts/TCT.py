@@ -715,7 +715,7 @@ while True:
             T3_h0 = T3_name_step + 100 * int(np.ceil(T3_l / T3_num) + 1)
             T3_h1 = T3_h0 + T3_s * T3_srce_step
             T3_w0 = 100 - T3_r
-            T3_w1 = int(T3_w * 3/5)
+            T3_w1 = int(T3_w * 0.618034) # golden ratio
             T3_img = Image.new("RGB", (T3_w, T3_h1 + 50), (0, 0, 0))
             T3_draw = ImageDraw.Draw(T3_img)
             try:
@@ -819,7 +819,7 @@ while True:
                 
                 T3_splitted = line_splitter(name, T3_objt_font, T3_ar*2)
                 shift = T3_objt_size/2 if len(T3_splitted) == 1 else T3_objt_size
-                T3_draw.multiline_text((center_x-T3_ar, center_y-shift), "\n".join(T3_splitted), fill=T3_text_color, font=T3_objt_font)
+                T3_draw.multiline_text((center_x-T3_ar, center_y-shift), "\n".join(T3_splitted), fill=T3_text_color, font=T3_objt_font, spacing=5)
                 
                 T3_n += 1
                 # print(export(T3_rgb), name)
@@ -830,8 +830,8 @@ while True:
             T3_min_limit = T3_h0 + T3_note_step * (T3_note_num + T3_info_num + 1)
             T3_img = T3_img.crop((0, 0, T3_w, T3_h2+50 if T3_h2 > T3_min_limit else T3_min_limit+50))
             T3_img.save(f'{values["T3_folder"]}/{T3_file_name}')
-            #T3_img.show()
-            print("Done, saves as", T3_file_name)
+            # T3_img.show()
+            print("Done, saved as", T3_file_name)
     
     # ------------ Events in the tab "Blackbody & Redshifts" ------------
     

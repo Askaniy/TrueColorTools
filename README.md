@@ -43,7 +43,9 @@ For example, you can get colors formatted for [Celestia](https://github.com/Cele
 
 **Images tab** allows you to load image(s), specify wavelengths and save a processed image, for each pixel of which a spectrum was built. It takes a very long time with the current algorithm, so you can check out the preview.
 
-**Table tab** generates a customizable table of calculated colors from the spectra database. You can see examples [here](Tables/).
+**Table tab** generates an image of all the colors of the selected category and their sources. You can see examples [here](Tables/).
+
+Note: to use the *Table* tab on Linux, the NotoSans font family must be installed in `/usr/share/fonts/truetype/`.
 
 **Blackbody & Redshifts tab** calculates the influence of physical phenomena on color. Based on the blackbody spectrum, the program displays the changes in color and brightness from Doppler and gravitational redshifts. You can lock the exposure through the logarithmic spectral irradiance scale. It is measured in energy from 1 m² on 550 nm in the 1 nm range.
 
