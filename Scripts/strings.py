@@ -70,7 +70,7 @@ names = {
     "Arrokoth": {"ru": "Аррокот", "de": "Arrokoth"},
     "Ultima": {"ru": "Ультима", "de": "Ultima"},
     "Thule": {"ru": "Туле", "de": "Thule"},
-    '"neck"': {"ru": '"шея"', "de": '"Nacken"'},
+    "Akasa": {"ru": "Акаса", "de": "Akasa"}, # to check 'de'
     "'Oumuamua": {"ru": "Оумуамуа", "de": "'Oumuamua"},
     "Comets": {"ru": "Кометы", "de": "Kometen"},
     "J. trojans": {"ru": "Троянцы", "de": "J-Trojaner"},
