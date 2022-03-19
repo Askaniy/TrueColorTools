@@ -553,8 +553,11 @@ while True:
             window["T2_process"].update(disabled=False)
         if values["T2_system"]:
             for i in range(T2_vis):
-                if bool(values["T2_filter"+str(i)]):
-                    input_data["nm"].append(filters.get_param(values["T2_filter"], values["T2_filter"+str(i)], "L_mean"))
+                if values["T2_filter"+str(i)]:
+                    try:
+                        input_data["nm"].append(filters.get_param(values["T2_filter"], values["T2_filter"+str(i)], "L_mean"))
+                    except KeyError:
+                        window["T2_filter"+str(i)].update([])
                 else:
                     window["T2_show"].update(disabled=True)
                     window["T2_process"].update(disabled=True)
