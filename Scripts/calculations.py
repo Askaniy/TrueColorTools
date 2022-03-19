@@ -206,11 +206,12 @@ def to_bit(color, bit): return color * (2**bit - 1)
 def to_html(color): return "#{:02x}{:02x}{:02x}".format(*rounder(to_bit(color, 8), 0))
 
 def to_rgb(spectrum, mode="chromaticity", inp_bit=None, exp_bit=None, rnd=0, albedo=False, phase=0, gamma=False, srgb=False, html=False):
-    spectrum = (spectrum + 1) / 2**inp_bit if inp_bit else spectrum
+    if inp_bit:
+        spectrum /= (2**inp_bit - 1)
     if srgb:
         xyz = np.sum(spectrum[:, np.newaxis] * cmf.xyz, axis=0)
         rgb = xyz_to_sRGB(xyz)
-        rgb = rgb / rgb[1] * spectrum[38] # xyz cmf is not normalized, to result was overexposed; spectrum[38] is 550 nm
+        rgb = rgb / rgb[1] * spectrum[38] # xyz cmf is not normalized, so result was overexposed; spectrum[38] is 550 nm
     else:
         rgb = np.sum(spectrum[:, np.newaxis] * cmf.rgb, axis=0)
     if mode == "albedo 0.5":
@@ -225,15 +226,13 @@ def to_rgb(spectrum, mode="chromaticity", inp_bit=None, exp_bit=None, rnd=0, alb
             rgb /= mx
     if phase != 0:
         rgb *= lambert(phase)
-    rgb = gamma_correction(rgb) if gamma else rgb
-    if rgb[0]*rgb[1]*rgb[2] < 0:
-        print(f'Negative RGB values have been clipped: {rgb}')
+    if gamma:
+        rgb = gamma_correction(rgb)
+    if rgb.min() < 0:
+        # print(f'Negative RGB values were clipped: {rgb}')
         rgb = np.clip(rgb, 0, None)
     if html:
-        try:
-            return to_html(rgb)
-        except ValueError:
-            return "#000000"
+        return to_html(rgb)
     else:
         return tuple(rounder(rgb if not exp_bit else to_bit(rgb, exp_bit), rnd))
 

@@ -271,11 +271,6 @@ gui_hex = {
     "ru": "Цвет HTML",
     "de": "HTML Farbe"
 }
-gui_single = {
-    "en": "Single image mode",
-    "ru": "Режим одного изображения",
-    "de": "Ein-Bild-Modus"
-}
 gui_browse = {
     "en": "Browse",
     "ru": "Обзор",
@@ -296,6 +291,16 @@ gui_wavelength = {
     "ru": "Длина волны (нм)",
     "de": "Wellenlänge (nm)"
 }
+gui_autoexp = {
+    "en": "Auto exposure",
+    "ru": "Автоэкспозиция",
+    "de": "Automatische Belichtung"
+}
+gui_single = {
+    "en": "Single image mode",
+    "ru": "Режим одного изображения",
+    "de": "Ein-Bild-Modus"
+}
 gui_system = {
     "en": "Photometric system",
     "ru": "Набор фильтров",
@@ -306,16 +311,6 @@ gui_system = {
 #    "ru": "Калибровка по объекту",
 #    "de": "Kalibrierung an Vergleichsobjekt"
 #}
-#gui_signature = {
-#    "en": "Signature",
-#    "ru": "Подпись",
-#    "de": "Signatur"
-#}
-gui_extension = {
-    "en": "File format",
-    "ru": "Расширение файла",
-    "de": "Dateiformat"
-}
 gui_folder = {
     "en": "Save file location",
     "ru": "Путь сохранения",
@@ -330,6 +325,11 @@ gui_process = {
     "en": "Start processing",
     "ru": "Обработать",
     "de": "Bild erzeugen"
+}
+gui_extension = {
+    "en": "File format",
+    "ru": "Расширение файла",
+    "de": "Dateiformat"
 }
 
 name_text = {

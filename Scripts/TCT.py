@@ -197,12 +197,11 @@ T2_col2 = [
     sg.Radio(tr.gui_interp[lang][1], "T2_interp", size=(12, 1), enable_events=True, default=True, key="T2_interp0")],
     [sg.Checkbox("sRGB", size=(17, 1), key="T2_srgb"),
     sg.Radio(tr.gui_interp[lang][2], "T2_interp", size=(12, 1), enable_events=True, key="T2_interp1")],
-    [sg.HorizontalSeparator()],
+    [sg.Checkbox(tr.gui_autoexp[lang], size=(22, 1), key="T2_autoexp")],
     [sg.Checkbox(tr.gui_single[lang], size=(22, 1), enable_events=True, key="T2_single")],
     [sg.Input(size=(32, 1), disabled=True, disabled_readonly_background_color="#3A3A3A", key="T2_path"), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(10, 1), disabled=True, key="T2_browse")],
     [sg.Checkbox(tr.gui_system[lang], size=(26, 1), enable_events=True, key="T2_system")],
     [sg.InputCombo(filters.get_sets(), size=(26, 1), enable_events=True, disabled=True, key="T2_filter")],
-    [sg.T("")],
     [sg.Text(tr.gui_folder[lang], size=(22, 1), key="T2_folderN")],
     [sg.Input(size=(32, 1), enable_events=True, key="T2_folder"), sg.FolderBrowse(button_text=tr.gui_browse[lang], size=(10, 1), key="T2_browse_folder")],
     [sg.Button(tr.gui_preview[lang], size=(15, 1), disabled=True, key="T2_show"), sg.Button(tr.gui_process[lang], size=(15, 1), disabled=True, key="T2_process")],
@@ -340,6 +339,7 @@ while True:
         window["T2_gamma"].update(text=tr.gui_gamma[lang])
         window["T2_interp0"].update(text=tr.gui_interp[lang][1])
         window["T2_interp1"].update(text=tr.gui_interp[lang][2])
+        window["T2_autoexp"].update(text=tr.gui_autoexp[lang])
         window["T2_single"].update(text=tr.gui_single[lang])
         window["T2_browse"].update(tr.gui_browse[lang])
         window["T2_system"].update(text=tr.gui_system[lang])
@@ -572,105 +572,103 @@ while True:
             window["T2_process"].update(disabled=True)
         
         if event in ("T2_show", "T2_process"):
-            try:
-                load = []
-                if values["T2_single"]:
-                    if values["T2_path"] == "":
-                        raise ValueError("Path is empty")
-                    T2_rgb_img = Image.open(values["T2_path"])
-                    if event == "T2_show":
-                        T2_rgb_img = T2_rgb_img.resize(T2_preview, resample=Image.HAMMING)
-                    if len(T2_rgb_img.getbands()) == 3:
-                        r, g, b = T2_rgb_img.split()
-                        a = False
-                    elif len(T2_rgb_img.getbands()) == 4:
-                        r, g, b, a = T2_rgb_img.split()
-                    for i in [b, g, r]:
-                        load.append(np.array(i))
-                else:
-                    for i in range(T2_vis):
-                        if values["T2_path"+str(i)] == "":
-                            raise ValueError(f'Path {i+1} is empty')
-                        T2_bw_img = Image.open(values["T2_path"+str(i)])
-                        if event == "T2_show":
-                            T2_bw_img = T2_bw_img.resize(T2_preview, resample=Image.HAMMING)
-                        if len(T2_bw_img.getbands()) != 1:
-                            raise TypeError("Band image should be b/w")
-                        load.append(np.array(T2_bw_img))
-                
-                T2_data = np.array(load, dtype="float32")
-                T2_l = T2_data.shape[0] # number of maps
-                T2_h = T2_data.shape[1] # height of maps
-                T2_w = T2_data.shape[2] # width of maps
-                
-                T2_max = T2_data.max()
-                if T2_max > 256:
-                    T2_bit = 16
-                    T2_depth = 65535
-                elif T2_max < 2:
-                    T2_bit = 0
-                    T2_depth = 1
-                else:
-                    T2_bit = 8
-                    T2_depth = 255
-                T2_data = np.clip(T2_data, 0, T2_depth)
-                
-                # Calibration of maps by spectrum (legacy)
-                #if info["calib"]:
-                #    if "br" in info:
-                #        br = np.array(info["br"])
-                #        obl = 0
-                #    elif "ref" in info:
-                #        ref = calc.transform(db.objects[info["ref"]])
-                #        albedo = ref["albedo"] if "albedo" in ref else 0
-                #        br = calc.get_points(bands, ref["nm"], ref["br"], albedo)
-                #        obl = ref["obl"] if "obl" in ref else 0
-                #    for u in range(n): # calibration cycles
-                #        for y in range(h):
-                #            for layer in range(l):
-                #                if np.sum(data[layer][y]) != 0:
-                #                    calib[layer][0].append(np.sum(data[layer][y]) / np.count_nonzero(data[layer][y]))
-                #                    calib[layer][1].append(k(np.pi * (0.5 - (y + 0.5) / h), obl))
-                #        for layer in range(l):
-                #            avg = np.average(calib[layer][0], weights=calib[layer][1])
-                #            color = depth * br[layer]
-                #            data[layer] = data[layer] * color / avg
-
-                T2_fast = True if values["T2_interp1"] else False
-                T2_nm = cmf.xyz_nm if input_data["srgb"] else cmf.rgb_nm
-                T2_img = Image.new("RGB", (T2_w, T2_h), (0, 0, 0))
-                T2_draw = ImageDraw.Draw(T2_img)
-                counter = 0
-                px_num = T2_w*T2_h
-                
-                T2_fig = go.Figure()
-                T2_fig.update_layout(title=tr.map_title_text[lang], xaxis_title=tr.xaxis_text[lang], yaxis_title=tr.yaxis_text[lang])
-
-                for x in range(T2_w):
-                    for y in range(T2_h):
-                        T2_spectrum = T2_data[:, y, x]
-                        if np.sum(T2_spectrum) > 0:
-                            T2_curve = calc.polator(input_data["nm"], list(T2_spectrum), T2_nm, fast=T2_fast)
-                            T2_rgb = calc.to_rgb(T2_curve, mode="albedo", albedo=True, inp_bit=T2_bit, exp_bit=8, gamma=input_data["gamma"])
-                            T2_draw.point((x, y), T2_rgb)
-                            if x % 32 == 0 and y % 32 == 0:
-                                T2_fig.add_trace(go.Scatter(
-                                    x = T2_nm,
-                                    y = T2_curve,
-                                    name = px_num,
-                                    line = dict(color="rgb"+str(T2_rgb), width=2)
-                                    ))
-                        counter += 1
-                        sg.OneLineProgressMeter("Progress", counter, px_num)
-                
-                T2_fig.show()
+            #try:
+            T2_load = []
+            if values["T2_single"]:
+                if values["T2_path"] == "":
+                    raise ValueError("Path is empty")
+                T2_rgb_img = Image.open(values["T2_path"])
                 if event == "T2_show":
-                    window["T2_preview"].update(data=convert_to_bytes(T2_img))
-                else:
-                    T2_img.save(values["T2_folder"]+"/TCT_result.png")
+                    T2_rgb_img = T2_rgb_img.resize((T2_preview[0], int(T2_preview[0]/T2_rgb_img.width*T2_rgb_img.height)), resample=Image.HAMMING)
+                if len(T2_rgb_img.getbands()) == 3:
+                    r, g, b = T2_rgb_img.split()
+                    a = False
+                elif len(T2_rgb_img.getbands()) == 4:
+                    r, g, b, a = T2_rgb_img.split()
+                for i in [b, g, r]:
+                    T2_load.append(np.array(i))
+            else:
+                for i in range(T2_vis):
+                    if values["T2_path"+str(i)] == "":
+                        raise ValueError(f'Path {i+1} is empty')
+                    T2_bw_img = Image.open(values["T2_path"+str(i)])
+                    if event == "T2_show":
+                        T2_bw_img = T2_bw_img.resize((T2_preview[0], int(T2_preview[0]/T2_bw_img.width*T2_bw_img.height)), resample=Image.HAMMING)
+                    if len(T2_bw_img.getbands()) != 1:
+                        raise TypeError("Band image should be b/w")
+                    T2_load.append(np.array(T2_bw_img))
             
-            except Exception as e:
-                print(e)
+            T2_data = np.array(T2_load, dtype="float16")
+            T2_l = T2_data.shape[0] # number of maps
+            T2_h = T2_data.shape[1] # height of maps
+            T2_w = T2_data.shape[2] # width of maps
+            
+            T2_max = T2_data.max()
+            if values["T2_autoexp"]:
+                T2_data *= 65500 / T2_max
+                T2_input_bit = 16
+                T2_input_depth = 65535
+            else:
+                T2_input_bit = 16 if T2_max > 255 else 8
+                T2_input_depth = 65535 if T2_max > 255 else 255
+            #T2_data = np.clip(T2_data, 0, T2_input_depth)
+            
+            # Calibration of maps by spectrum (legacy)
+            #if info["calib"]:
+            #    if "br" in info:
+            #        br = np.array(info["br"])
+            #        obl = 0
+            #    elif "ref" in info:
+            #        ref = calc.transform(db.objects[info["ref"]])
+            #        albedo = ref["albedo"] if "albedo" in ref else 0
+            #        br = calc.get_points(bands, ref["nm"], ref["br"], albedo)
+            #        obl = ref["obl"] if "obl" in ref else 0
+            #    for u in range(n): # calibration cycles
+            #        for y in range(h):
+            #            for layer in range(l):
+            #                if np.sum(data[layer][y]) != 0:
+            #                    calib[layer][0].append(np.sum(data[layer][y]) / np.count_nonzero(data[layer][y]))
+            #                    calib[layer][1].append(k(np.pi * (0.5 - (y + 0.5) / h), obl))
+            #        for layer in range(l):
+            #            avg = np.average(calib[layer][0], weights=calib[layer][1])
+            #            color = depth * br[layer]
+            #            data[layer] = data[layer] * color / avg
+
+            T2_fast = True if values["T2_interp1"] else False
+            T2_nm = cmf.xyz_nm if input_data["srgb"] else cmf.rgb_nm
+            T2_img = Image.new("RGB", (T2_w, T2_h), (0, 0, 0))
+            T2_draw = ImageDraw.Draw(T2_img)
+            T2_counter = 0
+            T2_px_num = T2_w*T2_h
+            
+            T2_fig = go.Figure()
+            T2_fig.update_layout(title=tr.map_title_text[lang], xaxis_title=tr.xaxis_text[lang], yaxis_title=tr.yaxis_text[lang])
+
+            for x in range(T2_w):
+                for y in range(T2_h):
+                    T2_spectrum = T2_data[:, y, x]
+                    if np.sum(T2_spectrum) > 0:
+                        T2_curve = calc.polator(input_data["nm"], list(T2_spectrum), T2_nm, fast=T2_fast)
+                        T2_rgb = calc.to_rgb(T2_curve, mode="albedo", albedo=True, inp_bit=T2_input_bit, exp_bit=8, gamma=input_data["gamma"])
+                        T2_draw.point((x, y), T2_rgb)
+                        if x % 32 == 0 and y % 32 == 0:
+                            T2_fig.add_trace(go.Scatter(
+                                x = T2_nm,
+                                y = T2_curve,
+                                name = T2_px_num,
+                                line = dict(color="rgb"+str(T2_rgb), width=2)
+                                ))
+                    T2_counter += 1
+                    sg.OneLineProgressMeter("Progress", T2_counter, T2_px_num)
+            
+            T2_fig.show()
+            if event == "T2_show":
+                window["T2_preview"].update(data=convert_to_bytes(T2_img))
+            else:
+                T2_img.save(values["T2_folder"]+"/TCT_result.png")
+        
+            #except Exception as e:
+            #    print(e)
     
     # ------------ Events in the tab "Table" ------------
 
