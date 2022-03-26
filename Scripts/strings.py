@@ -294,7 +294,12 @@ gui_wavelength = {
 gui_autoexp = {
     "en": "Auto exposure",
     "ru": "Автоэкспозиция",
-    "de": "Automatische Belichtung"
+    "de": "Automatische Belichtung" # to check
+}
+gui_autoalign = {
+    "en": "Auto align",
+    "ru": "Автовыравнивание",
+    "de": "Automatische ausrichten" # to check
 }
 gui_single = {
     "en": "Single image mode",

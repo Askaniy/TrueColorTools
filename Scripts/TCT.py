@@ -113,6 +113,27 @@ def line_splitter(line, font, maxW):
     else:
         return recurse(line.split(), font, maxW)
 
+def mod_shift(c, size): # 0->size shift to -s/2->s/2
+    size05 = int(size/2) # floor rounding
+    return (c+size05)%size-size05
+
+def relative_shifts(sums):
+    diffs = []
+    for i in range(len(sums)-1):
+        size = len(sums[i])
+        temp_diff_list = []
+        for j in range(size):
+            diff = np.abs(sums[i] - np.roll(sums[i+1], j))
+            temp_diff_list.append(np.sum(diff))
+        diffs.append(mod_shift(np.argmin(temp_diff_list), size))
+    return diffs
+
+def absolute_shifts(diffs): # separated to allow modify relative_shifts
+    p = [0]
+    for d in diffs:
+        p.append(p[-1]+d)
+    return np.array(p) - max(p)
+
 def convert_to_bytes(img):
     bio = io.BytesIO()
     img.save(bio, format="PNG")
@@ -197,7 +218,8 @@ T2_col2 = [
     sg.Radio(tr.gui_interp[lang][1], "T2_interp", size=(12, 1), enable_events=True, default=True, key="T2_interp0")],
     [sg.Checkbox("sRGB", size=(17, 1), key="T2_srgb"),
     sg.Radio(tr.gui_interp[lang][2], "T2_interp", size=(12, 1), enable_events=True, key="T2_interp1")],
-    [sg.Checkbox(tr.gui_autoexp[lang], size=(22, 1), key="T2_autoexp")],
+    [sg.Checkbox(tr.gui_autoexp[lang], size=(17, 1), key="T2_autoexp"),
+    sg.Checkbox(tr.gui_autoalign[lang], size=(12, 1), key="T2_autoalign")],
     [sg.Checkbox(tr.gui_single[lang], size=(22, 1), enable_events=True, key="T2_single")],
     [sg.Input(size=(32, 1), disabled=True, disabled_readonly_background_color="#3A3A3A", key="T2_path"), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(10, 1), disabled=True, key="T2_browse")],
     [sg.Checkbox(tr.gui_system[lang], size=(26, 1), enable_events=True, key="T2_system")],
@@ -340,6 +362,7 @@ while True:
         window["T2_interp0"].update(text=tr.gui_interp[lang][1])
         window["T2_interp1"].update(text=tr.gui_interp[lang][2])
         window["T2_autoexp"].update(text=tr.gui_autoexp[lang])
+        window["T2_autoalign"].update(text=tr.gui_autoalign[lang])
         window["T2_single"].update(text=tr.gui_single[lang])
         window["T2_browse"].update(tr.gui_browse[lang])
         window["T2_system"].update(text=tr.gui_system[lang])
@@ -575,7 +598,6 @@ while True:
             window["T2_process"].update(disabled=True)
         
         if event in ("T2_show", "T2_process"):
-            #try:
             T2_load = []
             if values["T2_single"]:
                 if values["T2_path"] == "":
@@ -601,11 +623,26 @@ while True:
                         raise TypeError("Band image should be b/w")
                     T2_load.append(np.array(T2_bw_img))
             
-            T2_data = np.array(T2_load, dtype="float16")
+            T2_data = np.array(T2_load)
             T2_l = T2_data.shape[0] # number of maps
             T2_h = T2_data.shape[1] # height of maps
             T2_w = T2_data.shape[2] # width of maps
             
+            if values["T2_autoalign"]:
+                T2_sums_x = []
+                T2_sums_y = []
+                for layer in T2_data:
+                    T2_sums_x.append(np.sum(layer, 0))
+                    T2_sums_y.append(np.sum(layer, 1))
+                T2_shift_x = absolute_shifts(relative_shifts(T2_sums_x))
+                T2_shift_y = absolute_shifts(relative_shifts(T2_sums_y))
+                T2_w = T2_w + T2_shift_x.min()
+                T2_h = T2_h + T2_shift_y.min()
+                for i in range(T2_l):
+                    T2_data[i] = np.roll(T2_data[i], (T2_shift_y[i], T2_shift_x[i]))
+                T2_data = T2_data[:, :T2_h, :T2_w]
+
+            T2_data = T2_data.astype("float16")
             T2_max = T2_data.max()
             if values["T2_autoexp"]:
                 T2_data *= 65500 / T2_max
