@@ -128,7 +128,29 @@ def relative_shifts(sums):
         diffs.append(mod_shift(np.argmin(temp_diff_list), size))
     return diffs
 
-def absolute_shifts(diffs): # separated to allow modify relative_shifts
+def recurce_shift(img0, img1, shift_x, shift_y):
+    #print("start of recursion with ", shift_x, shift_y)
+    diff0 = np.sum(np.abs(img0 - np.roll(img1, (shift_y, shift_x))))
+    diffU = np.sum(np.abs(img0 - np.roll(img1, (shift_y-1, shift_x))))
+    diffD = np.sum(np.abs(img0 - np.roll(img1, (shift_y+1, shift_x))))
+    diffL = np.sum(np.abs(img0 - np.roll(img1, (shift_y, shift_x-1))))
+    diffR = np.sum(np.abs(img0 - np.roll(img1, (shift_y, shift_x+1))))
+    #print(f'\t{diffU}\n{diffL} {diff0} {diffR}\n\t{diffD}')
+    argmin = np.argmin((diff0, diffU, diffD, diffL, diffR))
+    if argmin != 0:
+        if argmin == 1:
+            shift_y -= 1
+        elif argmin == 2:
+            shift_y += 1
+        elif argmin == 3:
+            shift_x -= 1
+        elif argmin == 4:
+            shift_x += 1
+        return recurce_shift(img0, img1, shift_x, shift_y)
+    else:
+        return shift_x, shift_y
+
+def absolute_shifts(diffs):
     p = [0]
     for d in diffs:
         p.append(p[-1]+d)
@@ -634,12 +656,23 @@ while True:
                 for layer in T2_data:
                     T2_sums_x.append(np.sum(layer, 0))
                     T2_sums_y.append(np.sum(layer, 1))
-                T2_shift_x = absolute_shifts(relative_shifts(T2_sums_x))
-                T2_shift_y = absolute_shifts(relative_shifts(T2_sums_y))
-                T2_w = T2_w + T2_shift_x.min()
-                T2_h = T2_h + T2_shift_y.min()
+                T2_shifts0_x = relative_shifts(T2_sums_x)
+                T2_shifts0_y = relative_shifts(T2_sums_y)
+                #print(T2_shifts0_x, T2_shifts0_y)
+                T2_shifts_x = []
+                T2_shifts_y = []
+                for i in range(T2_l-1):
+                    T2_shift_x, T2_shift_y = recurce_shift(T2_data[i], T2_data[i+1], T2_shifts0_x[i], T2_shifts0_y[i])
+                    T2_shifts_x.append(T2_shift_x)
+                    T2_shifts_y.append(T2_shift_y)
+                #print(T2_shifts_x, T2_shifts_y)
+                #quit()
+                T2_shifts_x = absolute_shifts(T2_shifts_x)
+                T2_shifts_y = absolute_shifts(T2_shifts_y)
+                T2_w = T2_w + T2_shifts_x.min()
+                T2_h = T2_h + T2_shifts_y.min()
                 for i in range(T2_l):
-                    T2_data[i] = np.roll(T2_data[i], (T2_shift_y[i], T2_shift_x[i]))
+                    T2_data[i] = np.roll(T2_data[i], (T2_shifts_y[i], T2_shifts_x[i]))
                 T2_data = T2_data[:, :T2_h, :T2_w]
 
             T2_data = T2_data.astype("float16")
@@ -681,8 +714,8 @@ while True:
             T2_counter = 0
             T2_px_num = T2_w*T2_h
             
-            T2_fig = go.Figure()
-            T2_fig.update_layout(title=tr.map_title_text[lang], xaxis_title=tr.xaxis_text[lang], yaxis_title=tr.yaxis_text[lang])
+            #T2_fig = go.Figure()
+            #T2_fig.update_layout(title=tr.map_title_text[lang], xaxis_title=tr.xaxis_text[lang], yaxis_title=tr.yaxis_text[lang])
 
             for x in range(T2_w):
                 for y in range(T2_h):
@@ -691,17 +724,17 @@ while True:
                         T2_curve = calc.polator(input_data["nm"], list(T2_spectrum), T2_nm, fast=T2_fast)
                         T2_rgb = calc.to_rgb(T2_curve, mode="albedo", albedo=True, inp_bit=T2_input_bit, exp_bit=8, gamma=input_data["gamma"])
                         T2_draw.point((x, y), T2_rgb)
-                        if x % 32 == 0 and y % 32 == 0:
-                            T2_fig.add_trace(go.Scatter(
-                                x = T2_nm,
-                                y = T2_curve,
-                                name = T2_px_num,
-                                line = dict(color="rgb"+str(T2_rgb), width=2)
-                                ))
+                        #if x % 32 == 0 and y % 32 == 0:
+                        #    T2_fig.add_trace(go.Scatter(
+                        #        x = T2_nm,
+                        #        y = T2_curve,
+                        #        name = T2_px_num,
+                        #        line = dict(color="rgb"+str(T2_rgb), width=2)
+                        #        ))
                     T2_counter += 1
                     sg.OneLineProgressMeter("Progress", T2_counter, T2_px_num)
             
-            T2_fig.show()
+            #T2_fig.show()
             if event == "T2_show":
                 window["T2_preview"].update(data=convert_to_bytes(T2_img))
             else:

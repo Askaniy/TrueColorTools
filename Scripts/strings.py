@@ -297,8 +297,8 @@ gui_autoexp = {
     "de": "Automatische Belichtung" # to check
 }
 gui_autoalign = {
-    "en": "Auto align",
-    "ru": "Автовыравнивание",
+    "en": "Auto alignment",
+    "ru": "Выравниванить",
     "de": "Automatische ausrichten" # to check
 }
 gui_single = {
