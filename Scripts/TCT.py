@@ -236,12 +236,12 @@ T2_col1 = [
 ]
 T2_col2 = [
     [sg.Text(tr.gui_output[lang], size=(30, 1), font=("arial", 12), key="T2_title2")],
-    [sg.Checkbox(tr.gui_gamma[lang], size=(17, 1), key="T2_gamma"),
+    [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), key="T2_gamma"),
     sg.Radio(tr.gui_interp[lang][1], "T2_interp", size=(12, 1), enable_events=True, default=True, key="T2_interp0")],
-    [sg.Checkbox("sRGB", size=(17, 1), key="T2_srgb"),
+    [sg.Checkbox("sRGB", size=(16, 1), key="T2_srgb"),
     sg.Radio(tr.gui_interp[lang][2], "T2_interp", size=(12, 1), enable_events=True, key="T2_interp1")],
-    [sg.Checkbox(tr.gui_autoexp[lang], size=(17, 1), key="T2_autoexp"),
-    sg.Checkbox(tr.gui_autoalign[lang], size=(12, 1), key="T2_autoalign")],
+    [sg.Checkbox(tr.gui_autoexp[lang], size=(16, 1), key="T2_autoexp"),
+    sg.Checkbox(tr.gui_autoalign[lang], size=(16, 1), key="T2_autoalign")],
     [sg.Checkbox(tr.gui_single[lang], size=(22, 1), enable_events=True, key="T2_single")],
     [sg.Input(size=(32, 1), disabled=True, disabled_readonly_background_color="#3A3A3A", key="T2_path"), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(10, 1), disabled=True, key="T2_browse")],
     [sg.Checkbox(tr.gui_system[lang], size=(26, 1), enable_events=True, key="T2_system")],

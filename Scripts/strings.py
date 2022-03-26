@@ -70,7 +70,7 @@ names = {
     "Arrokoth": {"ru": "Аррокот", "de": "Arrokoth"},
     "Ultima": {"ru": "Ультима", "de": "Ultima"},
     "Thule": {"ru": "Туле", "de": "Thule"},
-    "Akasa": {"ru": "Акаса", "de": "Akasa"}, # to check 'de'
+    "Akasa": {"ru": "Акаса", "de": "Akasa"},
     "'Oumuamua": {"ru": "Оумуамуа", "de": "'Oumuamua"},
     "Comets": {"ru": "Кометы", "de": "Kometen"},
     "J. trojans": {"ru": "Троянцы", "de": "J-Trojaner"},
@@ -294,12 +294,12 @@ gui_wavelength = {
 gui_autoexp = {
     "en": "Auto exposure",
     "ru": "Автоэкспозиция",
-    "de": "Automatische Belichtung" # to check
+    "de": "Autom. Belichtung"
 }
 gui_autoalign = {
     "en": "Auto alignment",
-    "ru": "Выравниванить",
-    "de": "Automatische ausrichten" # to check
+    "ru": "Выровнять каналы",
+    "de": "Autom. ausrichten"
 }
 gui_single = {
     "en": "Single image mode",
