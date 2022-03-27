@@ -1,6 +1,7 @@
-import PySimpleGUI as sg
 import io
+import time
 import numpy as np
+import PySimpleGUI as sg
 from PIL import Image, ImageDraw, ImageFont
 import plotly.graph_objects as go
 import cmf, filters
@@ -129,7 +130,7 @@ def relative_shifts(sums):
     return diffs
 
 def recurce_shift(img0, img1, shift_x, shift_y):
-    #print("start of recursion with ", shift_x, shift_y)
+    #print("\nstart of recursion with ", shift_x, shift_y)
     diff0 = np.sum(np.abs(img0 - np.roll(img1, (shift_y, shift_x))))
     diffU = np.sum(np.abs(img0 - np.roll(img1, (shift_y-1, shift_x))))
     diffD = np.sum(np.abs(img0 - np.roll(img1, (shift_y+1, shift_x))))
@@ -221,6 +222,7 @@ T1_col3 = [
 
 T2_vis = 3
 T2_preview = (256, 128)
+T2_area = T2_preview[0]*T2_preview[1]
 T2_col1 = [
     [sg.Text(tr.gui_input[lang], size=(20, 1), font=("arial", 12), key="T2_title1"), sg.Button(button_text="+", size=(2, 1), key="T2_+"), sg.Button(button_text="-", size=(2, 1), disabled=False, key="T2_-")],
     [frame(0)],
@@ -244,12 +246,12 @@ T2_col2 = [
     sg.Checkbox(tr.gui_autoalign[lang], size=(16, 1), key="T2_autoalign")],
     [sg.Checkbox(tr.gui_single[lang], size=(22, 1), enable_events=True, key="T2_single")],
     [sg.Input(size=(32, 1), disabled=True, disabled_readonly_background_color="#3A3A3A", key="T2_path"), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(10, 1), disabled=True, key="T2_browse")],
-    [sg.Checkbox(tr.gui_system[lang], size=(26, 1), enable_events=True, key="T2_system")],
+    [sg.Checkbox(tr.gui_filterset[lang], size=(26, 1), enable_events=True, key="T2_filterset")],
     [sg.InputCombo(filters.get_sets(), size=(26, 1), enable_events=True, disabled=True, key="T2_filter")],
     [sg.Text(tr.gui_folder[lang], size=(22, 1), key="T2_folderN")],
     [sg.Input(size=(32, 1), enable_events=True, key="T2_folder"), sg.FolderBrowse(button_text=tr.gui_browse[lang], size=(10, 1), key="T2_browse_folder")],
-    [sg.Button(tr.gui_preview[lang], size=(15, 1), disabled=True, key="T2_show"), sg.Button(tr.gui_process[lang], size=(15, 1), disabled=True, key="T2_process")],
-    [sg.Image(background_color="black", size=T2_preview, key="T2_preview")]
+    [sg.Button(tr.gui_preview[lang], size=(15, 1), disabled=True, key="T2_preview"), sg.Button(tr.gui_process[lang], size=(15, 1), disabled=True, key="T2_process")],
+    [sg.Image(background_color="black", size=T2_preview, key="T2_image")]
 ]
 T2_num = len(T2_col1) - 1
 
@@ -387,10 +389,10 @@ while True:
         window["T2_autoalign"].update(text=tr.gui_autoalign[lang])
         window["T2_single"].update(text=tr.gui_single[lang])
         window["T2_browse"].update(tr.gui_browse[lang])
-        window["T2_system"].update(text=tr.gui_system[lang])
+        window["T2_filterset"].update(text=tr.gui_filterset[lang])
         window["T2_folderN"].update(tr.gui_folder[lang])
         window["T2_browse_folder"].update(tr.gui_browse[lang])
-        window["T2_show"].update(tr.gui_preview[lang])
+        window["T2_preview"].update(tr.gui_preview[lang])
         window["T2_process"].update(tr.gui_process[lang])
         window["T3_title1"].update(tr.gui_settings[lang])
         window["T3_title2"].update(tr.gui_results[lang])
@@ -561,11 +563,11 @@ while True:
                 for i in range(3):
                     window["T2_band"+str(i)].update(visible=True)
 
-        elif event == "T2_system":
-            window["T2_filter"].update(disabled=not values["T2_system"])
+        elif event == "T2_filterset":
+            window["T2_filter"].update(disabled=not values["T2_filterset"])
             for i in range(T2_num):
-                window["T2_filter"+str(i)].update(disabled=not values["T2_system"])
-                window["T2_wavelength"+str(i)].update(disabled=values["T2_system"])
+                window["T2_filter"+str(i)].update(disabled=not values["T2_filterset"])
+                window["T2_wavelength"+str(i)].update(disabled=values["T2_filterset"])
 
         elif event == "T2_filter":
             for i in range(T2_num):
@@ -589,14 +591,24 @@ while True:
         window["T2_+"].update(disabled=values["T2_single"] or not 2 <= T2_vis < T2_num)
         window["T2_-"].update(disabled=values["T2_single"] or not 2 < T2_vis <= T2_num)
         for i in range(T2_num):
-            window["T2_filterN"+str(i)].update(text_color=("#A3A3A3", "#FFFFFF")[values["T2_system"]])
-            window["T2_wavelengthN"+str(i)].update(text_color=("#A3A3A3", "#FFFFFF")[not values["T2_system"]])
+            window["T2_filterN"+str(i)].update(text_color=("#A3A3A3", "#FFFFFF")[values["T2_filterset"]])
+            window["T2_wavelengthN"+str(i)].update(text_color=("#A3A3A3", "#FFFFFF")[not values["T2_filterset"]])
         
         input_data = {"gamma": values["T2_gamma"], "srgb": values["T2_srgb"], "nm": []}
-        window["T2_show"].update(disabled=False)
+        window["T2_preview"].update(disabled=False)
         if values["T2_folder"] != "":
             window["T2_process"].update(disabled=False)
-        if values["T2_system"]:
+        if values["T2_single"]:
+            if values["T2_path"] == "":
+                window["T2_preview"].update(disabled=False)
+                window["T2_process"].update(disabled=False)
+        else:
+            for i in range(T2_vis):
+                if values["T2_path"+str(i)] == "":
+                    window["T2_preview"].update(disabled=True)
+                    window["T2_process"].update(disabled=True)
+                    break
+        if values["T2_filterset"]:
             for i in range(T2_vis):
                 if values["T2_filter"+str(i)]:
                     try:
@@ -604,7 +616,7 @@ while True:
                     except KeyError:
                         window["T2_filter"+str(i)].update([])
                 else:
-                    window["T2_show"].update(disabled=True)
+                    window["T2_preview"].update(disabled=True)
                     window["T2_process"].update(disabled=True)
                     break
         else:
@@ -612,21 +624,22 @@ while True:
                 if values["T2_wavelength"+str(i)].replace(".", "").isnumeric():
                     input_data["nm"].append(float(values["T2_wavelength"+str(i)]))
                 else:
-                    window["T2_show"].update(disabled=True)
+                    window["T2_preview"].update(disabled=True)
                     window["T2_process"].update(disabled=True)
                     break
         if not all(a > b for a, b in zip(input_data["nm"][1:], input_data["nm"])): # increasing check
-            window["T2_show"].update(disabled=True)
+            window["T2_preview"].update(disabled=True)
             window["T2_process"].update(disabled=True)
         
-        if event in ("T2_show", "T2_process"):
+        if event in ("T2_preview", "T2_process"):
             T2_load = []
             if values["T2_single"]:
                 if values["T2_path"] == "":
                     raise ValueError("Path is empty")
                 T2_rgb_img = Image.open(values["T2_path"])
-                if event == "T2_show":
-                    T2_rgb_img = T2_rgb_img.resize((T2_preview[0], int(T2_preview[0]/T2_rgb_img.width*T2_rgb_img.height)), resample=Image.HAMMING)
+                if event == "T2_preview":
+                    T2_ratio = T2_rgb_img.width / T2_rgb_img.height
+                    T2_rgb_img = T2_rgb_img.resize((int(np.sqrt(T2_area*T2_ratio)), int(np.sqrt(T2_area/T2_ratio))), resample=Image.HAMMING)
                 if len(T2_rgb_img.getbands()) == 3:
                     r, g, b = T2_rgb_img.split()
                     a = False
@@ -639,8 +652,9 @@ while True:
                     if values["T2_path"+str(i)] == "":
                         raise ValueError(f'Path {i+1} is empty')
                     T2_bw_img = Image.open(values["T2_path"+str(i)])
-                    if event == "T2_show":
-                        T2_bw_img = T2_bw_img.resize((T2_preview[0], int(T2_preview[0]/T2_bw_img.width*T2_bw_img.height)), resample=Image.HAMMING)
+                    if event == "T2_preview":
+                        T2_ratio = T2_bw_img.width / T2_bw_img.height
+                        T2_bw_img = T2_bw_img.resize((int(np.sqrt(T2_area*T2_ratio)), int(np.sqrt(T2_area/T2_ratio))), resample=Image.HAMMING)
                     if len(T2_bw_img.getbands()) != 1:
                         raise TypeError("Band image should be b/w")
                     T2_load.append(np.array(T2_bw_img))
@@ -662,7 +676,7 @@ while True:
                 T2_shifts_x = []
                 T2_shifts_y = []
                 for i in range(T2_l-1):
-                    T2_shift_x, T2_shift_y = recurce_shift(T2_data[i], T2_data[i+1], T2_shifts0_x[i], T2_shifts0_y[i])
+                    T2_shift_x, T2_shift_y = recurce_shift(np.multiply(T2_data[i], T2_data[i]), np.multiply(T2_data[i+1], T2_data[i+1]), T2_shifts0_x[i], T2_shifts0_y[i])
                     T2_shifts_x.append(T2_shift_x)
                     T2_shifts_y.append(T2_shift_y)
                 #print(T2_shifts_x, T2_shifts_y)
@@ -714,8 +728,8 @@ while True:
             T2_counter = 0
             T2_px_num = T2_w*T2_h
             
-            #T2_fig = go.Figure()
-            #T2_fig.update_layout(title=tr.map_title_text[lang], xaxis_title=tr.xaxis_text[lang], yaxis_title=tr.yaxis_text[lang])
+            T2_fig = go.Figure()
+            T2_fig.update_layout(title=tr.map_title_text[lang], xaxis_title=tr.xaxis_text[lang], yaxis_title=tr.yaxis_text[lang])
 
             for x in range(T2_w):
                 for y in range(T2_h):
@@ -724,21 +738,21 @@ while True:
                         T2_curve = calc.polator(input_data["nm"], list(T2_spectrum), T2_nm, fast=T2_fast)
                         T2_rgb = calc.to_rgb(T2_curve, mode="albedo", albedo=True, inp_bit=T2_input_bit, exp_bit=8, gamma=input_data["gamma"])
                         T2_draw.point((x, y), T2_rgb)
-                        #if x % 32 == 0 and y % 32 == 0:
-                        #    T2_fig.add_trace(go.Scatter(
-                        #        x = T2_nm,
-                        #        y = T2_curve,
-                        #        name = T2_px_num,
-                        #        line = dict(color="rgb"+str(T2_rgb), width=2)
-                        #        ))
+                        if x % 32 == 0 and y % 32 == 0:
+                            T2_fig.add_trace(go.Scatter(
+                                x = T2_nm,
+                                y = T2_curve,
+                                name = f'({x}; {y})',
+                                line = dict(color="rgb"+str(T2_rgb), width=2)
+                                ))
                     T2_counter += 1
                     sg.OneLineProgressMeter("Progress", T2_counter, T2_px_num)
             
-            #T2_fig.show()
-            if event == "T2_show":
-                window["T2_preview"].update(data=convert_to_bytes(T2_img))
+            T2_fig.show()
+            if event == "T2_preview":
+                window["T2_image"].update(data=convert_to_bytes(T2_img))
             else:
-                T2_img.save(values["T2_folder"]+"/TCT_result.png")
+                T2_img.save(f'{values["T2_folder"]}/TCT-result_{time.strftime("%Y-%m-%d_%H-%M", time.localtime(time.time()))}.png')
         
             #except Exception as e:
             #    print(e)

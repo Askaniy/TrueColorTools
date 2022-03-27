@@ -306,10 +306,10 @@ gui_single = {
     "ru": "Режим одного изображения",
     "de": "Ein-Bild-Modus"
 }
-gui_system = {
-    "en": "Photometric system",
-    "ru": "Набор фильтров",
-    "de": "Phtotometrisches System"
+gui_filterset = {
+    "en": "Camera filter set",
+    "ru": "Набор фильтров КА",
+    "de": "Kamera Filterset"
 }
 #gui_calib = {
 #    "en": "Reference body calibration",
