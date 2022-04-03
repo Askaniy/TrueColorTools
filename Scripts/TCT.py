@@ -659,7 +659,7 @@ while True:
                         raise TypeError("Band image should be b/w")
                     T2_load.append(np.array(T2_bw_img))
             
-            T2_data = np.array(T2_load)
+            T2_data = np.array(T2_load) # , "int64"
             T2_l = T2_data.shape[0] # number of maps
             T2_h = T2_data.shape[1] # height of maps
             T2_w = T2_data.shape[2] # width of maps
@@ -679,7 +679,28 @@ while True:
                     T2_shift_x, T2_shift_y = recurce_shift(np.multiply(T2_data[i], T2_data[i]), np.multiply(T2_data[i+1], T2_data[i+1]), T2_shifts0_x[i], T2_shifts0_y[i])
                     T2_shifts_x.append(T2_shift_x)
                     T2_shifts_y.append(T2_shift_y)
-                #print(T2_shifts_x, T2_shifts_y)
+                
+                #T2_corrections_x = []
+                #T2_corrections_y = []
+                #for l in range(T2_l-1):
+                #    T2_arr0, T2_arr1 = np.multiply(T2_data[l], T2_data[l]), np.multiply(T2_data[l+1], T2_data[l+1])
+                #    T2_coord = (0, 0)
+                #    T2_min = 1e18
+                #    for i in range(-25, 26):
+                #        for j in range(-25, 26):
+                #            T2_diff = np.sum(np.abs(T2_arr0 - np.roll(T2_arr1, (T2_shifts0_y[l]+j, T2_shifts0_x[l]+i))))
+                #            if T2_diff < T2_min:
+                #                T2_min = T2_diff
+                #                T2_coord = (i, j)
+                #                print(T2_min, T2_coord)
+                #    T2_corrections_x.append(T2_coord[0])
+                #    T2_corrections_y.append(T2_coord[1])
+                #quit()
+                #print(T2_corrections_x, T2_corrections_y)
+
+                #T2_shifts0_x = np.array(T2_shifts0_x) + np.array(T2_shifts_x)
+                #T2_shifts0_y = np.array(T2_shifts0_y) + np.array(T2_shifts_y)
+                #print(T2_shifts0_x, T2_shifts0_y)
                 #quit()
                 T2_shifts_x = absolute_shifts(T2_shifts_x)
                 T2_shifts_y = absolute_shifts(T2_shifts_y)
