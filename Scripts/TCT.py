@@ -118,6 +118,7 @@ def line_splitter(line, font, maxW):
 def square(array):
     #return array
     return np.multiply(array, array)
+    #return np.clip(array, np.mean(array), None)
 
 def mod_shift(c, size): # 0->size shift to -s/2->s/2
     size05 = int(size/2) # floor rounding
@@ -266,7 +267,7 @@ T2_col2 = [
     [sg.Checkbox("sRGB", size=(16, 1), key="T2_srgb"),
     sg.Radio(tr.gui_interp[lang][2], "T2_interp", size=(12, 1), enable_events=True, key="T2_interp1")],
     [sg.Checkbox(tr.gui_autoexp[lang], size=(16, 1), key="T2_autoexp"),
-    sg.Checkbox(tr.gui_autoalign[lang], size=(16, 1), key="T2_autoalign")],
+    sg.Checkbox(tr.gui_autoalign[lang]+" [beta]", size=(16, 1), key="T2_autoalign")],
     [sg.Checkbox(tr.gui_single[lang], size=(22, 1), enable_events=True, key="T2_single")],
     [sg.Input(size=(32, 1), disabled=True, disabled_readonly_background_color="#3A3A3A", key="T2_path"), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(10, 1), disabled=True, key="T2_browse")],
     [sg.Checkbox(tr.gui_filterset[lang], size=(26, 1), enable_events=True, key="T2_filterset")],
@@ -681,6 +682,8 @@ while True:
                     if len(T2_bw_img.getbands()) != 1:
                         raise TypeError("Band image should be b/w")
                     T2_load.append(np.array(T2_bw_img))
+                    #array = np.array(T2_bw_img)
+                    #T2_load.append(np.where(array>np.mean(array), array, 0))
             
             T2_data = np.array(T2_load, "int64")
             T2_l = T2_data.shape[0] # number of maps
