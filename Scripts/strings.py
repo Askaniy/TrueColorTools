@@ -297,9 +297,9 @@ gui_autoexp = {
     "de": "Autom. Belichtung"
 }
 gui_autoalign = {
-    "en": "Auto alignment",
-    "ru": "Выровнять каналы",
-    "de": "Autom. ausrichten"
+    "en": "Auto alignment [beta]",
+    "ru": "Выровнять каналы [beta]",
+    "de": "Autom. ausrichten [beta]"
 }
 gui_single = {
     "en": "Single image mode",
@@ -372,16 +372,4 @@ yaxis_text = {
     "en": "Reflectivity",
     "ru": "Отражательная способность",
     "de": "Reflektivität"
-}
-
-error1 = {
-    "en": ["Error 1: data length mismatch or wavelengths not in increasing order.", "Object name: {}\nWavelength values: {}\nBrightness values: {}"],
-    "ru": ["Ошибка 1: несовпадение списков данных или длины волн не в порядке возрастания.", "Название объекта: {}\nЗначений длин волн: {}\nЗначений яркости: {}"],
-    "de": ["Fehler 1: Datenlänge stimmt nicht überein, oder Wellenlängen sind nicht in aufsteigender Reihenfolge", "Objektname: {}\nWellenlängenwerte: {}\nHelligkeitswerte: {}"]
-}
-
-error2 = {
-    "en": ["Error 2: value of one of the color bands is negative.", "Object name: {}\nR: {}\nG: {}\nB: {}"],
-    "ru": ["Ошибка 2: яркость одного из цветов получилась отрицательной.", "Название объекта: {}\nR: {}\nG: {}\nB: {}"],
-    "de": ["Error 2: Werte eines Farbbands sind negativ.", "Objektname: {}\nR: {}\nG: {}\nB: {}"]
 }

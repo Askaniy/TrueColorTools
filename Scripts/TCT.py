@@ -267,7 +267,7 @@ T2_col2 = [
     [sg.Checkbox("sRGB", size=(16, 1), key="T2_srgb"),
     sg.Radio(tr.gui_interp[lang][2], "T2_interp", size=(12, 1), enable_events=True, key="T2_interp1")],
     [sg.Checkbox(tr.gui_autoexp[lang], size=(16, 1), key="T2_autoexp"),
-    sg.Checkbox(tr.gui_autoalign[lang]+" [beta]", size=(16, 1), key="T2_autoalign")],
+    sg.Checkbox(tr.gui_autoalign[lang], size=(16, 1), key="T2_autoalign")],
     [sg.Checkbox(tr.gui_single[lang], size=(22, 1), enable_events=True, key="T2_single")],
     [sg.Input(size=(32, 1), disabled=True, disabled_readonly_background_color="#3A3A3A", key="T2_path"), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(10, 1), disabled=True, key="T2_browse")],
     [sg.Checkbox(tr.gui_filterset[lang], size=(26, 1), enable_events=True, key="T2_filterset")],
@@ -461,13 +461,14 @@ while True:
     elif event.startswith("T1"):
 
         if event in T1_events and values["T1_list"] != []:
+            T1_name = values["T1_list"][0]
             T1_nm = cmf.xyz_nm if values["T1_srgb"] else cmf.rgb_nm
             for i in range(3):
                 if values["T1_br_mode"+str(i)]:
                     T1_mode = br_modes[i]
 
             # Spectral data import and processing
-            T1_spectrum = db.objects[obj_list()[values["T1_list"][0]]]
+            T1_spectrum = db.objects[obj_list()[T1_name]]
             T1_albedo = 0
             if "albedo" not in T1_spectrum:
                 if T1_mode == "albedo":
@@ -486,7 +487,7 @@ while True:
             except Exception:
                 T1_phase = values["T1_slider"]
             T1_rgb = calc.to_rgb(
-                T1_curve, mode=T1_mode,
+                T1_name, T1_curve, mode=T1_mode,
                 albedo = T1_spectrum["albedo"] or T1_albedo,
                 phase=T1_phase,
                 exp_bit=int(values["T1_bit_num"]), 
@@ -495,18 +496,13 @@ while True:
                 srgb=values["T1_srgb"]
             )
             T1_rgb_show = calc.to_rgb(
-                T1_curve, mode=T1_mode,
+                T1_name, T1_curve, mode=T1_mode,
                 albedo = T1_spectrum["albedo"] or T1_albedo,
                 phase=T1_phase,
                 gamma=values["T1_gamma"],
                 srgb=values["T1_srgb"],
                 html=True
             )
-            if not np.array_equal(np.absolute(T1_rgb), T1_rgb):
-                T1_rgb_show = "#000000"
-                print("\n" + tr.error2[lang][0])
-                print(tr.error2[lang][1].format(values["T1_list"][0], *T1_rgb) + "\n")
-                #break
 
             # Output
             window["T1_graph"].TKCanvas.itemconfig(T1_preview, fill=T1_rgb_show)
@@ -557,7 +553,7 @@ while True:
 
                 # Color calculation
                 T1_rgb = calc.to_rgb(
-                    T1_curve, mode=T1_mode,
+                    name_0, T1_curve, mode=T1_mode,
                     albedo = T1_spectrum["albedo"] or T1_albedo,
                     exp_bit=int(values["T1_bit_num"]), 
                     gamma=values["T1_gamma"], 
@@ -787,14 +783,15 @@ while True:
                 for y in range(T2_h):
                     T2_spectrum = T2_data[:, y, x]
                     if np.sum(T2_spectrum) > 0:
+                        T2_name = f'({x}; {y})'
                         T2_curve = calc.polator(input_data["nm"], list(T2_spectrum), T2_nm, fast=T2_fast)
-                        T2_rgb = calc.to_rgb(T2_curve, mode="albedo", albedo=True, inp_bit=T2_input_bit, exp_bit=8, gamma=input_data["gamma"])
+                        T2_rgb = calc.to_rgb(T2_name, T2_curve, mode="albedo", albedo=True, inp_bit=T2_input_bit, exp_bit=8, gamma=input_data["gamma"])
                         T2_draw.point((x, y), T2_rgb)
                         if x % 32 == 0 and y % 32 == 0:
                             T2_fig.add_trace(go.Scatter(
                                 x = T2_nm,
                                 y = T2_curve,
-                                name = f'({x}; {y})',
+                                name = T2_name,
                                 line = dict(color="rgb"+str(T2_rgb), width=2)
                                 ))
                     T2_counter += 1
@@ -915,14 +912,10 @@ while True:
 
                 # Color calculation
                 T3_rgb = calc.to_rgb(
-                    T3_curve, mode=T3_mode,
+                    name, T3_curve, mode=T3_mode,
                     albedo = spectrum["albedo"] or T3_albedo,
                     exp_bit=8, gamma=values["T3_gamma"], srgb=values["T3_srgb"]
                 )
-                if not np.array_equal(np.absolute(T3_rgb), T3_rgb):
-                    print("\n" + tr.error2[lang][0])
-                    print(tr.error2[lang][1].format(name, *T3_rgb) + "\n")
-                    break
 
                 # Object drawing
                 center_x = 100 * (1 + T3_n%T3_num)
@@ -977,7 +970,7 @@ while True:
             T3_img = T3_img.crop((0, 0, T3_w, T3_h2+50 if T3_h2 > T3_min_limit else T3_min_limit+50))
             T3_img.save(f'{values["T3_folder"]}/{T3_file_name}')
             # T3_img.show()
-            print("Done, saved as", T3_file_name)
+            print("Done, saved as", T3_file_name, "\n")
     
     # ------------ Events in the tab "Blackbody & Redshifts" ------------
     
@@ -985,8 +978,8 @@ while True:
         
         if event == "T4_maxtemp_num":
             window["T4_slider1"].update(range=(0, int(values["T4_maxtemp_num"])))
+        
         else:
-
             if event == "T4_irr":
                 window["T4_scale"].update(text_color=T4_text_colors[values["T4_irr"]])
                 window["T4_slider4"].update(disabled=not values["T4_irr"])
@@ -999,8 +992,9 @@ while True:
                     T4_curve *= 10**(-values["T4_slider4"])
                 except np.core._exceptions.UFuncTypeError:
                     pass
+            T4_name = f'{values["T4_slider1"]} {values["T4_slider2"]} {values["T4_slider3"]}'
             T4_rgb = calc.to_rgb(
-                T4_curve, mode=T4_mode,
+                T4_name, T4_curve, mode=T4_mode,
                 albedo=values["T4_irr"],
                 exp_bit=int(values["T4_bit_num"]), 
                 gamma=values["T4_gamma"], 
@@ -1008,7 +1002,7 @@ while True:
                 srgb=values["T4_srgb"]
             )
             T4_rgb_show = calc.to_rgb(
-                T4_curve, mode=T4_mode,
+                T4_name, T4_curve, mode=T4_mode,
                 albedo=values["T4_irr"],
                 gamma=values["T4_gamma"],
                 srgb=values["T4_srgb"],

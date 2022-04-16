@@ -1,3 +1,4 @@
+import traceback
 import numpy as np
 from scipy.interpolate import Akima1DInterpolator
 import cmf, database
@@ -205,36 +206,41 @@ rounder = np.vectorize(lambda grayscale, d_places: int(round(grayscale)) if d_pl
 def to_bit(color, bit): return color * (2**bit - 1)
 def to_html(color): return "#{:02x}{:02x}{:02x}".format(*rounder(to_bit(color, 8), 0))
 
-def to_rgb(spectrum, mode="chromaticity", inp_bit=None, exp_bit=None, rnd=0, albedo=False, phase=0, gamma=False, srgb=False, html=False):
-    if inp_bit:
-        spectrum /= (2**inp_bit - 1)
-    if srgb:
-        xyz = np.sum(spectrum[:, np.newaxis] * cmf.xyz, axis=0)
-        rgb = xyz_to_sRGB(xyz)
-        rgb = rgb / rgb[1] * spectrum[38] # xyz cmf is not normalized, so result was overexposed; spectrum[38] is 550 nm
-    else:
-        rgb = np.sum(spectrum[:, np.newaxis] * cmf.rgb, axis=0)
-    if mode == "albedo 0.5":
-        if rgb[1] != 0:
-            rgb /= 2 * rgb[1]
-    elif mode == "albedo" and albedo:
+def to_rgb(target, spectrum, mode="chromaticity", inp_bit=None, exp_bit=None, rnd=0, albedo=False, phase=0, gamma=False, srgb=False, html=False):
+    try:
+        if inp_bit:
+            spectrum /= (2**inp_bit - 1)
+        if srgb:
+            xyz = np.sum(spectrum[:, np.newaxis] * cmf.xyz, axis=0)
+            rgb = xyz_to_sRGB(xyz)
+            rgb = rgb / rgb[1] * spectrum[38] # xyz cmf is not normalized, so result was overexposed; spectrum[38] is 550 nm
+        else:
+            rgb = np.sum(spectrum[:, np.newaxis] * cmf.rgb, axis=0)
+        if mode == "albedo 0.5":
+            if rgb[1] != 0:
+                rgb /= 2 * rgb[1]
+        elif mode == "albedo" and albedo:
+            if html:
+                rgb = np.clip(rgb, 0, 1)
+        else: # "chromaticity" and when albedo == False
+            mx = np.max(rgb)
+            if mx != 0:
+                rgb /= mx
+        if phase != 0:
+            rgb *= lambert(phase)
+        if gamma:
+            rgb = gamma_correction(rgb)
+        if rgb.min() < 0:
+            print("NegativeColorValues:", target, rgb)
+            rgb = np.clip(rgb, 0, None)
         if html:
-            rgb = np.clip(rgb, 0, 1)
-    else: # "chromaticity" and when albedo == False
-        mx = np.max(rgb)
-        if mx != 0:
-            rgb /= mx
-    if phase != 0:
-        rgb *= lambert(phase)
-    if gamma:
-        rgb = gamma_correction(rgb)
-    if rgb.min() < 0:
-        # print(f'Negative RGB values were clipped: {rgb}')
-        rgb = np.clip(rgb, 0, None)
-    if html:
-        return to_html(rgb)
-    else:
-        return tuple(rounder(rgb if not exp_bit else to_bit(rgb, exp_bit), rnd))
+            return to_html(rgb)
+        else:
+            return tuple(rounder(rgb if not exp_bit else to_bit(rgb, exp_bit), rnd))
+    except:
+        print("ColorCalcError:", target)
+        print(traceback.format_exc())
+        return "#000000" if html else (0, 0, 0)
 
 
 # Pivot wavelengths and ZeroPoints of filter bandpasses
