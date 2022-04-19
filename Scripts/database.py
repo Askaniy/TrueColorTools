@@ -69,7 +69,9 @@ sources = [
     "[34]: Implied Evolutionary Differences of the Jovian Irregular Satellites from a BVR Color Survey"
     "\nDOI: 10.1006/icar.2001.6715; https://www.sciencedirect.com/science/article/abs/pii/S0019103501967156",
     "[35]: The ExoColors table by Zelario (Fireon)"
-    "\nhttps://docs.google.com/spreadsheets/d/1kg9lktTwNhHVVyAS2FhccvLMnddI4L0Ot67f-kYFIFM"
+    "\nhttps://docs.google.com/spreadsheets/d/1kg9lktTwNhHVVyAS2FhccvLMnddI4L0Ot67f-kYFIFM",
+    "[36]: Colors of Irregular Satellites of Saturn with DECam"
+    "\nDOI: ...; https://arxiv.org/abs/2204.08391"
 ]
 
 
@@ -480,11 +482,17 @@ objects = {
     "Phoebe|33": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.63, "V-R": 0.35, "V-I": 0.64}, "sun": True
     },
+    "Phoebe|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+        "filters": "Sloan Vacuum", "indices": {"g-r": 0.27, "r-i": 0.06}, "sun": True
+    },
     "Ymir|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.789, "V-R": 0.438, "V-I": 0.884}, "sun": True
     },
     "Ymir|33": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.56, "V-R": 0.52, "V-I": 0.96}, "sun": True
+    },
+    "Ymir|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+        "filters": "Sloan Vacuum", "indices": {"g-r": 0.50, "r-i": 0.25}, "sun": True
     },
     "Paaliaq|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.86, "V-R": 0.40, "V-I": 0.92}, "sun": True
@@ -501,14 +509,23 @@ objects = {
     "Tarvos|33": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.77, "V-R": 0.57, "V-I": 0.88}, "sun": True
     },
+    "Tarvos|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+        "filters": "Sloan Vacuum", "indices": {"g-r": 0.52, "r-i": 0.30}, "sun": True
+    },
     "Ijiraq|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-R": 1.40}, "sun": True
     },
     "Ijiraq|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 1.05, "V-R": 0.58, "V-I": 1.09}, "sun": True
     },
+    "Ijiraq|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+        "filters": "Sloan Vacuum", "indices": {"g-r": 0.70, "r-i": 0.20}, "sun": True
+    },
     "Suttungr|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.47, "V-R": 0.65, "V-I": 0.78}, "sun": True
+    },
+    "Suttungr|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+        "filters": "Sloan Vacuum", "indices": {"g-r": 0.40, "r-i": 0.17}, "sun": True
     },
     "Kiviuq|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.872, "V-R": 0.482, "V-I": 0.98}, "sun": True
@@ -516,8 +533,14 @@ objects = {
     "Kiviuq|33": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.87, "V-R": 0.66, "V-I": 0.97}, "sun": True
     },
+    "Kiviuq|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+        "filters": "Sloan Vacuum", "indices": {"g-r": 0.51, "r-i": 0.28}, "sun": True
+    },
     "Mundilfari|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.58, "V-R": 0.41, "V-I": 0.52}, "sun": True
+    },
+    "Mundilfari|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+        "filters": "Sloan Vacuum", "indices": {"g-r": 0.38, "r-i": 0.03}, "sun": True
     },
     "Albiorix|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.80, "V-R": 0.50}, "sun": True
@@ -528,8 +551,14 @@ objects = {
     "Albiorix|33": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.935, "V-R": 0.482, "V-I": 0.916}, "sun": True
     },
+    "Albiorix|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+        "filters": "Sloan Vacuum", "indices": {"g-r": 0.46, "r-i": 0.31}, "sun": True
+    },
     "Skathi|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.37, "V-I": 0.88}, "sun": True
+    },
+    "Skathi|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+        "filters": "Sloan Vacuum", "indices": {"g-r": 0.24, "r-i": -0.005}, "sun": True
     },
     "Erriapus|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.78, "V-R": 0.41}, "sun": True
@@ -540,17 +569,29 @@ objects = {
     "Erriapus|33": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.83, "V-R": 0.49, "V-I": 0.61}, "sun": True
     },
+    "Erriapus|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+        "filters": "Sloan Vacuum", "indices": {"g-r": 0.20, "r-i": 0.42}, "sun": True
+    },
     "Siarnaq|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.875, "V-R": 0.485, "V-I": 1.025}, "sun": True
     },
     "Siarnaq|33": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.80, "V-R": 0.52, "V-I": 0.96}, "sun": True
     },
+    "Siarnaq|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+        "filters": "Sloan Vacuum", "indices": {"g-r": 0.53, "r-i": 0.24}, "sun": True
+    },
     "Thrymr|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.41, "V-R": 0.59, "V-I": 0.86}, "sun": True
     },
+    "Thrymr|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+        "filters": "Sloan Vacuum", "indices": {"g-r": 0.40, "r-i": 0.15}, "sun": True
+    },
     "Narvi|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-R": 1.29}, "sun": True
+    },
+    "Narvi|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+        "filters": "Sloan Vacuum", "indices": {"g-r": 0.24, "r-i": 0.42}, "sun": True
     },
     "Bebhionn|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.61, "V-R": 0.51}, "sun": True
@@ -564,17 +605,26 @@ objects = {
     "Bestla|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-R": 1.32}, "sun": True
     },
+    "Bestla|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+        "filters": "Sloan Vacuum", "indices": {"g-r": 0.72, "r-i": 0.38}, "sun": True
+    },
     "Fornjot|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-R": 1.40}, "sun": True
     },
     "Hyrrokkin|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-R": 1.23}, "sun": True
     },
+    "Hyrrokkin|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+        "filters": "Sloan Vacuum", "indices": {"g-r": 0.50, "r-i": 0.34}, "sun": True
+    },
     "Tarqeq|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-R": 1.37}, "sun": True
     },
     "S/2007 S 2|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-R": 1.37}, "sun": True
+    },
+    "Kari|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+        "filters": "Sloan Vacuum", "indices": {"g-r": 0.31, "r-i": 0.53}, "sun": True
     },
     "Saturnian irregulars|30": {"tags": ["featured", "solar_system", "class", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.69, "V-R": 0.44}, "sun": True, "albedo": 0.04 # estimation

@@ -1,6 +1,7 @@
 .vscode/
 Maps/
 Scripts/__pycache__/
+Scripts/tempCodeRunnerFile.py
 Scripts/build/
 Scripts/dist/
 Scripts/test.py
