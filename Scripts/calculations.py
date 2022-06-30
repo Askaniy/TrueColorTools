@@ -3,6 +3,8 @@ import numpy as np
 from scipy.interpolate import Akima1DInterpolator
 import cmf, database
 
+debug = False
+
 
 # Phase curves processing functions
 
@@ -231,7 +233,8 @@ def to_rgb(target, spectrum, mode="chromaticity", inp_bit=None, exp_bit=None, rn
         if gamma:
             rgb = gamma_correction(rgb)
         if rgb.min() < 0:
-            print("NegativeColorValues:", target, rgb)
+            if debug:
+                print("NegativeColorValues:", target, rgb)
             rgb = np.clip(rgb, 0, None)
         if html:
             return to_html(rgb)

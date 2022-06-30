@@ -1,4 +1,5 @@
 import io
+#import sys
 import time
 import numpy as np
 import PySimpleGUI as sg
@@ -174,6 +175,28 @@ def recursive_shift(img0, img1, shift_x, shift_y):
         return recursive_shift(img0, img1, shift_x, shift_y)
     else:
         return shift_x, shift_y
+    #while True:
+    #    if debug:
+    #        print("\nstart of recursion with ", shift_x, shift_y)
+    #    diffs = []
+    #    for i in range(9):
+    #        x = i % 3 - 1
+    #        y = i // 3 - 1
+    #        diff = abs(np.sum(np.abs(img0 - np.roll(img1, (shift_y+y, shift_x+x)))))
+    #        diffs.append(diff)
+    #    if debug:
+    #        for i in range(3):
+    #            for j in range(3):
+    #                sys.stdout.write(str(diffs[i*3+j]) + " ")
+    #            print("")
+    #    argmin = np.argmin(diffs)
+    #    shift_x += argmin % 3 - 1
+    #    shift_y += argmin // 3 - 1
+    #    print(argmin)
+    #    print(diffs)
+    #    if argmin == 4:
+    #        break
+    #return shift_x, shift_y
 
 def absolute_shifts(diffs):
     p = [0]
@@ -262,7 +285,7 @@ T2_col1 = [
 ]
 T2_col2 = [
     [sg.Text(tr.gui_output[lang], size=(30, 1), font=("arial", 12), key="T2_title2")],
-    [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), key="T2_gamma"),
+    [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), default=True, key="T2_gamma"),
     sg.Radio(tr.gui_interp[lang][1], "T2_interp", size=(12, 1), enable_events=True, default=True, key="T2_interp0")],
     [sg.Checkbox("sRGB", size=(16, 1), key="T2_srgb"),
     sg.Radio(tr.gui_interp[lang][2], "T2_interp", size=(12, 1), enable_events=True, key="T2_interp1")],
@@ -652,6 +675,10 @@ while True:
             window["T2_process"].update(disabled=True)
         
         if event in ("T2_preview", "T2_process"):
+
+            if debug:
+                T2_time = time.monotonic()
+            
             T2_load = []
             if values["T2_single"]:
                 if values["T2_path"] == "":
@@ -696,7 +723,7 @@ while True:
                 T2_shifts0_y = relative_shifts(square(T2_sums_y))
                 if debug:
                     print("\nBase", T2_shifts0_x, T2_shifts0_y)
-
+                
                 T2_shiftsR_x = []
                 T2_shiftsR_y = []
                 for i in range(T2_l-1):
@@ -728,7 +755,7 @@ while True:
                 #T2_shiftsC_y = np.array(T2_shifts0_y) + np.array(T2_corrections_y)
                 #if debug:
                 #   print("\nCorrected", T2_shiftsC_x, T2_shiftsC_y)
-
+                
                 T2_shifts_x = absolute_shifts(T2_shiftsR_x)
                 T2_shifts_y = absolute_shifts(T2_shiftsR_y)
                 T2_w = T2_w + T2_shifts_x.min()
@@ -736,7 +763,7 @@ while True:
                 for i in range(T2_l):
                     T2_data[i] = np.roll(T2_data[i], (T2_shifts_y[i], T2_shifts_x[i]))
                 T2_data = T2_data[:, :T2_h, :T2_w]
-
+            
             T2_data = T2_data.astype("float16")
             T2_max = T2_data.max()
             if values["T2_autoexp"]:
@@ -779,14 +806,48 @@ while True:
             T2_fig = go.Figure()
             T2_fig.update_layout(title=tr.map_title_text[lang], xaxis_title=tr.xaxis_text[lang], yaxis_title=tr.yaxis_text[lang])
 
+            if debug:
+                print(f'{round(time.monotonic() - T2_time, 3)} sec for loading, autoalign and output templates')
+                T2_time = time.monotonic()
+                T2_get_spectrum_time = 0
+                T2_calc_polator_time = 0
+                T2_calc_rgb_time = 0
+                T2_draw_point_time = 0
+                T2_add_to_plot_time = 0
+                T2_progress_bar_time = 0
+
             for x in range(T2_w):
                 for y in range(T2_h):
+
+                    if debug:
+                        T2_temp_time = time.monotonic_ns()
                     T2_spectrum = T2_data[:, y, x]
+                    if debug:
+                        T2_get_spectrum_time += time.monotonic_ns() - T2_temp_time
+
                     if np.sum(T2_spectrum) > 0:
                         T2_name = f'({x}; {y})'
+
+                        if debug:
+                            T2_temp_time = time.monotonic_ns()
                         T2_curve = calc.polator(input_data["nm"], list(T2_spectrum), T2_nm, fast=T2_fast)
+                        if debug:
+                            T2_calc_polator_time += time.monotonic_ns() - T2_temp_time
+
+                        if debug:
+                            T2_temp_time = time.monotonic_ns()
                         T2_rgb = calc.to_rgb(T2_name, T2_curve, mode="albedo", albedo=True, inp_bit=T2_input_bit, exp_bit=8, gamma=input_data["gamma"])
+                        if debug:
+                            T2_calc_rgb_time += time.monotonic_ns() - T2_temp_time
+
+                        if debug:
+                            T2_temp_time = time.monotonic_ns()
                         T2_draw.point((x, y), T2_rgb)
+                        if debug:
+                            T2_draw_point_time += time.monotonic_ns() - T2_temp_time
+
+                        if debug:
+                            T2_temp_time = time.monotonic_ns()
                         if x % 32 == 0 and y % 32 == 0:
                             T2_fig.add_trace(go.Scatter(
                                 x = T2_nm,
@@ -794,8 +855,26 @@ while True:
                                 name = T2_name,
                                 line = dict(color="rgb"+str(T2_rgb), width=2)
                                 ))
+                        if debug:
+                            T2_add_to_plot_time += time.monotonic_ns() - T2_temp_time
+                    
+                    if debug:
+                        T2_temp_time = time.monotonic_ns()
                     T2_counter += 1
                     sg.OneLineProgressMeter("Progress", T2_counter, T2_px_num)
+                    if debug:
+                        T2_progress_bar_time += time.monotonic_ns() - T2_temp_time
+            
+            if debug:
+                T2_end_time = time.monotonic()
+                print(f'{round(T2_end_time - T2_time, 3)} sec for color processing, where:')
+                print(f'\t{T2_get_spectrum_time / 1e9} sec for getting spectrum for pixel')
+                print(f'\t{T2_calc_polator_time / 1e9} sec for inter/extrapolating')
+                print(f'\t{T2_calc_rgb_time / 1e9} sec for color calculating')
+                print(f'\t{T2_draw_point_time / 1e9} sec for pixel drawing')
+                print(f'\t{T2_add_to_plot_time / 1e9} sec for adding spectrum to plot')
+                print(f'\t{T2_progress_bar_time / 1e9} sec for progress bar')
+                print(f'\t{round(T2_end_time-T2_time-(T2_get_spectrum_time+T2_calc_polator_time+T2_calc_rgb_time+T2_draw_point_time+T2_add_to_plot_time+T2_progress_bar_time)/1e9, 3)} sec for other (time, black-pixel check)')
             
             T2_fig.show()
             if event == "T2_preview":
