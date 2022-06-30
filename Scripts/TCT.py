@@ -806,48 +806,40 @@ while True:
             T2_fig = go.Figure()
             T2_fig.update_layout(title=tr.map_title_text[lang], xaxis_title=tr.xaxis_text[lang], yaxis_title=tr.yaxis_text[lang])
 
-            if debug:
-                print(f'{round(time.monotonic() - T2_time, 3)} sec for loading, autoalign and output templates')
-                T2_time = time.monotonic()
-                T2_get_spectrum_time = 0
-                T2_calc_polator_time = 0
-                T2_calc_rgb_time = 0
-                T2_draw_point_time = 0
-                T2_add_to_plot_time = 0
-                T2_progress_bar_time = 0
+            sg.Print(f'{round(time.monotonic() - T2_time, 3)} seconds for loading, autoalign and creating output templates\n')
+            sg.Print(f'{time.strftime("%H:%M:%S")} 0%')
+
+            T2_time = time.monotonic()
+            T2_get_spectrum_time = 0
+            T2_calc_polator_time = 0
+            T2_calc_rgb_time = 0
+            T2_draw_point_time = 0
+            T2_add_to_plot_time = 0
+            T2_progress_bar_time = 0
 
             for x in range(T2_w):
                 for y in range(T2_h):
 
-                    if debug:
-                        T2_temp_time = time.monotonic_ns()
+                    T2_temp_time = time.monotonic_ns()
                     T2_spectrum = T2_data[:, y, x]
-                    if debug:
-                        T2_get_spectrum_time += time.monotonic_ns() - T2_temp_time
+                    T2_get_spectrum_time += time.monotonic_ns() - T2_temp_time
 
                     if np.sum(T2_spectrum) > 0:
                         T2_name = f'({x}; {y})'
 
-                        if debug:
-                            T2_temp_time = time.monotonic_ns()
+                        T2_temp_time = time.monotonic_ns()
                         T2_curve = calc.polator(input_data["nm"], list(T2_spectrum), T2_nm, fast=T2_fast)
-                        if debug:
-                            T2_calc_polator_time += time.monotonic_ns() - T2_temp_time
+                        T2_calc_polator_time += time.monotonic_ns() - T2_temp_time
 
-                        if debug:
-                            T2_temp_time = time.monotonic_ns()
+                        T2_temp_time = time.monotonic_ns()
                         T2_rgb = calc.to_rgb(T2_name, T2_curve, mode="albedo", albedo=True, inp_bit=T2_input_bit, exp_bit=8, gamma=input_data["gamma"])
-                        if debug:
-                            T2_calc_rgb_time += time.monotonic_ns() - T2_temp_time
+                        T2_calc_rgb_time += time.monotonic_ns() - T2_temp_time
 
-                        if debug:
-                            T2_temp_time = time.monotonic_ns()
+                        T2_temp_time = time.monotonic_ns()
                         T2_draw.point((x, y), T2_rgb)
-                        if debug:
-                            T2_draw_point_time += time.monotonic_ns() - T2_temp_time
+                        T2_draw_point_time += time.monotonic_ns() - T2_temp_time
 
-                        if debug:
-                            T2_temp_time = time.monotonic_ns()
+                        T2_temp_time = time.monotonic_ns()
                         if x % 32 == 0 and y % 32 == 0:
                             T2_fig.add_trace(go.Scatter(
                                 x = T2_nm,
@@ -855,26 +847,24 @@ while True:
                                 name = T2_name,
                                 line = dict(color="rgb"+str(T2_rgb), width=2)
                                 ))
-                        if debug:
-                            T2_add_to_plot_time += time.monotonic_ns() - T2_temp_time
+                        T2_add_to_plot_time += time.monotonic_ns() - T2_temp_time
                     
-                    if debug:
-                        T2_temp_time = time.monotonic_ns()
+                    T2_temp_time = time.monotonic_ns()
                     T2_counter += 1
-                    sg.OneLineProgressMeter("Progress", T2_counter, T2_px_num)
-                    if debug:
-                        T2_progress_bar_time += time.monotonic_ns() - T2_temp_time
+                    if T2_counter % 2048 == 0:
+                        sg.Print(f'{time.strftime("%H:%M:%S")} {round(T2_counter/T2_px_num * 100)}%, {round(T2_counter/(time.monotonic()-T2_time))} px/sec')
+                    T2_progress_bar_time += time.monotonic_ns() - T2_temp_time
             
             if debug:
                 T2_end_time = time.monotonic()
-                print(f'{round(T2_end_time - T2_time, 3)} sec for color processing, where:')
-                print(f'\t{T2_get_spectrum_time / 1e9} sec for getting spectrum for pixel')
-                print(f'\t{T2_calc_polator_time / 1e9} sec for inter/extrapolating')
-                print(f'\t{T2_calc_rgb_time / 1e9} sec for color calculating')
-                print(f'\t{T2_draw_point_time / 1e9} sec for pixel drawing')
-                print(f'\t{T2_add_to_plot_time / 1e9} sec for adding spectrum to plot')
-                print(f'\t{T2_progress_bar_time / 1e9} sec for progress bar')
-                print(f'\t{round(T2_end_time-T2_time-(T2_get_spectrum_time+T2_calc_polator_time+T2_calc_rgb_time+T2_draw_point_time+T2_add_to_plot_time+T2_progress_bar_time)/1e9, 3)} sec for other (time, black-pixel check)')
+                sg.Print(f'\n{round(T2_end_time - T2_time, 3)} seconds for color processing, where:')
+                sg.Print(f'\t{T2_get_spectrum_time / 1e9} for getting spectrum')
+                sg.Print(f'\t{T2_calc_polator_time / 1e9} for inter/extrapolating')
+                sg.Print(f'\t{T2_calc_rgb_time / 1e9} for color calculating')
+                sg.Print(f'\t{T2_draw_point_time / 1e9} for pixel drawing')
+                sg.Print(f'\t{T2_add_to_plot_time / 1e9} for adding spectrum to plot')
+                sg.Print(f'\t{T2_progress_bar_time / 1e9} for progress bar')
+                sg.Print(f'\t{round(T2_end_time-T2_time-(T2_get_spectrum_time+T2_calc_polator_time+T2_calc_rgb_time+T2_draw_point_time+T2_add_to_plot_time+T2_progress_bar_time)/1e9, 3)} sec for other (time, black-pixel check)')
             
             T2_fig.show()
             if event == "T2_preview":
