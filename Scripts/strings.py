@@ -298,17 +298,17 @@ gui_autoexp = {
 }
 gui_autoalign = {
     "en": "Auto alignment [beta]",
-    "ru": "Выровнять каналы [beta]",
+    "ru": "Автосовмещ. [beta]",
     "de": "Autom. ausrichten [beta]"
 }
 gui_single = {
-    "en": "Single image mode",
-    "ru": "Режим одного изображения",
+    "en": "Single image",
+    "ru": "1 изображение",
     "de": "Ein-Bild-Modus"
 }
 gui_filterset = {
     "en": "Camera filter set",
-    "ru": "Набор фильтров КА",
+    "ru": "Набор фильтров",
     "de": "Kamera Filterset"
 }
 #gui_calib = {
@@ -316,6 +316,11 @@ gui_filterset = {
 #    "ru": "Калибровка по объекту",
 #    "de": "Kalibrierung an Vergleichsobjekt"
 #}
+gui_plotpixels = {
+    "en": "Plot spectra of some pixels",
+    "ru": "Построить спектры некоторых пикселей",
+    "de": "Zeichnen Sie Spektren einiger Pixel"
+}
 gui_folder = {
     "en": "Save file location",
     "ru": "Путь сохранения",
