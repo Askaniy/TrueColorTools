@@ -213,11 +213,11 @@ def convert_to_bytes(img):
 def frame(num):
     n = str(num)
     l = [
-        [sg.Input(size=(20, 1), disabled=False, disabled_readonly_background_color="#3A3A3A", key="T2_path"+n), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(10, 1), disabled=False, key="T2_browse"+n)],
+        [sg.Input(size=(20, 1), disabled=False, disabled_readonly_background_color="#3A3A3A", enable_events=True, key="T2_path"+n), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(10, 1), disabled=False, key="T2_browse"+n)],
         [sg.Text(tr.gui_filter[lang], size=(14, 1), text_color="#A3A3A3", key="T2_filterN"+n), sg.InputCombo([], size=(12, 1), disabled=True, enable_events=True, key="T2_filter"+n)],
         [sg.Text(tr.gui_wavelength[lang], size=(14, 1), key="T2_wavelengthN"+n), sg.Input(size=(14, 1), disabled_readonly_background_color="#3A3A3A", disabled=False, enable_events=True, key="T2_wavelength"+n)]
     ]
-    return sg.Frame(f"{tr.gui_band[lang]} {num+1}", l, visible=num < T2_vis, key="T2_band"+n)
+    return sg.Frame(f"{tr.gui_band[lang]} {num+1}", l, visible=num<T2_vis, key="T2_band"+n)
 
 
 sg.LOOK_AND_FEEL_TABLE["MaterialDark"] = {
@@ -645,18 +645,15 @@ while True:
             window["T2_wavelengthN"+str(i)].update(text_color=("#A3A3A3", "#FFFFFF")[not values["T2_filterset"]])
         
         input_data = {"gamma": values["T2_gamma"], "srgb": values["T2_srgb"], "nm": []}
-        window["T2_preview"].update(disabled=False)
-        if values["T2_folder"] != "":
-            window["T2_process"].update(disabled=False)
+        
+        T2_preview_status = True
         if values["T2_single"]:
             if values["T2_path"] == "":
-                window["T2_preview"].update(disabled=False)
-                window["T2_process"].update(disabled=False)
+                T2_preview_status = False
         else:
             for i in range(T2_vis):
                 if values["T2_path"+str(i)] == "":
-                    window["T2_preview"].update(disabled=True)
-                    window["T2_process"].update(disabled=True)
+                    T2_preview_status = False
                     break
         if values["T2_filterset"]:
             for i in range(T2_vis):
@@ -666,32 +663,30 @@ while True:
                     except KeyError:
                         window["T2_filter"+str(i)].update([])
                 else:
-                    window["T2_preview"].update(disabled=True)
-                    window["T2_process"].update(disabled=True)
+                    T2_preview_status = False
                     break
         else:
             for i in range(T2_vis):
                 if values["T2_wavelength"+str(i)].replace(".", "").isnumeric():
                     input_data["nm"].append(float(values["T2_wavelength"+str(i)]))
                 else:
-                    window["T2_preview"].update(disabled=True)
-                    window["T2_process"].update(disabled=True)
+                    T2_preview_status = False
                     break
         if not all(a > b for a, b in zip(input_data["nm"][1:], input_data["nm"])): # increasing check
-            window["T2_preview"].update(disabled=True)
-            window["T2_process"].update(disabled=True)
+            T2_preview_status = False
+        window["T2_preview"].update(disabled=not T2_preview_status)
+        window["T2_process"].update(disabled=not T2_preview_status) if values["T2_folder"] != "" else window["T2_process"].update(disabled=True)
         
         if event in ("T2_preview", "T2_process"):
 
             T2_time = time.monotonic()
-            
             T2_load = []
+
             if values["T2_single"]:
-                if values["T2_path"] == "":
-                    raise ValueError("Path is empty")
                 T2_rgb_img = Image.open(values["T2_path"])
-                if T2_rgb_img.getbands() == ("P",): # NameError if color is indexed
+                if T2_rgb_img.mode == "P": # NameError if color is indexed
                     T2_rgb_img = T2_rgb_img.convert("RGB")
+                    sg.Print('Note: image converted from "P" (indexed color) mode to "RGB"')
                 if event == "T2_preview":
                     T2_ratio = T2_rgb_img.width / T2_rgb_img.height
                     T2_rgb_img = T2_rgb_img.resize((int(np.sqrt(T2_area*T2_ratio)), int(np.sqrt(T2_area/T2_ratio))), resample=Image.HAMMING)
@@ -704,17 +699,20 @@ while True:
                     T2_load.append(np.array(i))
             else:
                 for i in range(T2_vis):
-                    if values["T2_path"+str(i)] == "":
-                        raise ValueError(f'Path {i+1} is empty')
                     T2_bw_img = Image.open(values["T2_path"+str(i)])
+                    if T2_bw_img.mode not in ("L", "I", "F"): # image should be b/w
+                        sg.Print(f'Note: image of band {i+1} converted from "{T2_bw_img.mode}" mode to "L"')
+                        T2_bw_img = T2_bw_img.convert("L")
+                    if i == 0:
+                        T2_size = T2_bw_img.size
+                    else:
+                        if T2_size != T2_bw_img.size:
+                            sg.Print(f'Note: image of band {i+1} resized from {T2_bw_img.size} to {T2_size}')
+                            T2_bw_img = T2_bw_img.resize(T2_size)
                     if event == "T2_preview":
                         T2_ratio = T2_bw_img.width / T2_bw_img.height
                         T2_bw_img = T2_bw_img.resize((int(np.sqrt(T2_area*T2_ratio)), int(np.sqrt(T2_area/T2_ratio))), resample=Image.HAMMING)
-                    if len(T2_bw_img.getbands()) != 1:
-                        raise TypeError("Band image should be b/w")
                     T2_load.append(np.array(T2_bw_img))
-                    #array = np.array(T2_bw_img)
-                    #T2_load.append(np.where(array>np.mean(array), array, 0))
             
             T2_data = np.array(T2_load, "int64")
             T2_l = T2_data.shape[0] # number of maps
@@ -815,7 +813,7 @@ while True:
                 T2_fig = go.Figure()
                 T2_fig.update_layout(title=tr.map_title_text[lang], xaxis_title=tr.xaxis_text[lang], yaxis_title=tr.yaxis_text[lang])
 
-            sg.Print(f'{round(time.monotonic() - T2_time, 3)} seconds for loading, autoalign and creating output templates\n')
+            sg.Print(f'\n{round(time.monotonic() - T2_time, 3)} seconds for loading, autoalign and creating output templates\n')
             sg.Print(f'{time.strftime("%H:%M:%S")} 0%')
 
             T2_time = time.monotonic()
