@@ -690,6 +690,8 @@ while True:
                 if values["T2_path"] == "":
                     raise ValueError("Path is empty")
                 T2_rgb_img = Image.open(values["T2_path"])
+                if T2_rgb_img.getbands() == ("P",): # NameError if color is indexed
+                    T2_rgb_img = T2_rgb_img.convert("RGB")
                 if event == "T2_preview":
                     T2_ratio = T2_rgb_img.width / T2_rgb_img.height
                     T2_rgb_img = T2_rgb_img.resize((int(np.sqrt(T2_area*T2_ratio)), int(np.sqrt(T2_area/T2_ratio))), resample=Image.HAMMING)
