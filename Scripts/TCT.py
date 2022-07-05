@@ -770,7 +770,7 @@ while True:
                     T2_data[i] = np.roll(T2_data[i], (T2_shifts_y[i], T2_shifts_x[i]))
                 T2_data = T2_data[:, :T2_h, :T2_w]
             
-            T2_data = T2_data.astype("float16")
+            T2_data = T2_data.astype("float32")
             T2_max = T2_data.max()
             if values["T2_autoexp"]:
                 T2_data *= 65500 / T2_max
@@ -878,7 +878,7 @@ while True:
             if event == "T2_preview":
                 window["T2_image"].update(data=convert_to_bytes(T2_img))
             else:
-                T2_img.save(f'{values["T2_folder"]}/TCT-result_{time.strftime("%Y-%m-%d_%H-%M", time.localtime(time.time()))}.png')
+                T2_img.save(f'{values["T2_folder"]}/TCT-result_{time.strftime("%Y-%m-%d_%H-%M")}.png')
         
             #except Exception as e:
             #    print(e)
