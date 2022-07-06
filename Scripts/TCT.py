@@ -215,7 +215,8 @@ def frame(num):
     l = [
         [sg.Input(size=(20, 1), disabled=False, disabled_readonly_background_color="#3A3A3A", enable_events=True, key="T2_path"+n), sg.FileBrowse(button_text=tr.gui_browse[lang], size=(10, 1), disabled=False, key="T2_browse"+n)],
         [sg.Text(tr.gui_filter[lang], size=(14, 1), text_color="#A3A3A3", key="T2_filterN"+n), sg.InputCombo([], size=(12, 1), disabled=True, enable_events=True, key="T2_filter"+n)],
-        [sg.Text(tr.gui_wavelength[lang], size=(14, 1), key="T2_wavelengthN"+n), sg.Input(size=(14, 1), disabled_readonly_background_color="#3A3A3A", disabled=False, enable_events=True, key="T2_wavelength"+n)]
+        [sg.Text(tr.gui_wavelength[lang], size=(14, 1), key="T2_wavelengthN"+n), sg.Input(size=(14, 1), disabled_readonly_background_color="#3A3A3A", disabled=False, enable_events=True, key="T2_wavelength"+n)],
+        [sg.Text(tr.gui_exposure[lang], size=(14, 1), key="T2_exposureN"+n), sg.Input("1.0", size=(14, 1), disabled_readonly_background_color="#3A3A3A", disabled=False, key="T2_exposure"+n)]
     ]
     return sg.Frame(f"{tr.gui_band[lang]} {num+1}", l, visible=num<T2_vis, key="T2_band"+n)
 
@@ -290,7 +291,7 @@ T2_col2 = [
     [sg.Checkbox("sRGB", size=(16, 1), key="T2_srgb"),
     sg.Radio(tr.gui_interp[lang][2], "T2_interp", size=(12, 1), enable_events=True, key="T2_interp1")],
     [sg.HorizontalSeparator()],
-    [sg.Checkbox(tr.gui_autoexp[lang], size=(16, 1), key="T2_autoexp"),
+    [sg.Checkbox(tr.gui_makebright[lang], size=(16, 1), key="T2_makebright"),
     sg.Checkbox(tr.gui_autoalign[lang], size=(16, 1), key="T2_autoalign")],
     [sg.Checkbox(tr.gui_single[lang], size=(11, 1), enable_events=True, key="T2_single"),
     sg.Input(size=(14, 1), disabled=True, disabled_readonly_background_color="#3A3A3A", key="T2_path"),
@@ -431,14 +432,15 @@ while True:
         window["T2_title1"].update(tr.gui_input[lang])
         window["T2_title2"].update(tr.gui_output[lang])
         for i in range(T2_num):
+            window["T2_band"+str(i)].update(f"{tr.gui_band[lang]} {i+1}")
             window["T2_browse"+str(i)].update(tr.gui_browse[lang])
             window["T2_filterN"+str(i)].update(tr.gui_filter[lang])
             window["T2_wavelengthN"+str(i)].update(tr.gui_wavelength[lang])
-            window["T2_band"+str(i)].update(f"{tr.gui_band[lang]} {i+1}")
+            window["T2_exposureN"+str(i)].update(tr.gui_exposure[lang])
         window["T2_gamma"].update(text=tr.gui_gamma[lang])
         window["T2_interp0"].update(text=tr.gui_interp[lang][1])
         window["T2_interp1"].update(text=tr.gui_interp[lang][2])
-        window["T2_autoexp"].update(text=tr.gui_autoexp[lang])
+        window["T2_makebright"].update(text=tr.gui_makebright[lang])
         window["T2_autoalign"].update(text=tr.gui_autoalign[lang])
         window["T2_single"].update(text=tr.gui_single[lang])
         window["T2_browse"].update(tr.gui_browse[lang])
@@ -606,6 +608,7 @@ while True:
             for i in range(T2_num):
                 window["T2_browse"+str(i)].update(disabled=values["T2_single"])
                 window["T2_path"+str(i)].update(disabled=values["T2_single"])
+                window["T2_exposure"+str(i)].update(disabled=values["T2_single"])
             if values["T2_single"]:
                 T2_vis = 3
                 for i in range(T2_num):
@@ -643,6 +646,7 @@ while True:
         for i in range(T2_num):
             window["T2_filterN"+str(i)].update(text_color=("#A3A3A3", "#FFFFFF")[values["T2_filterset"]])
             window["T2_wavelengthN"+str(i)].update(text_color=("#A3A3A3", "#FFFFFF")[not values["T2_filterset"]])
+            window["T2_exposureN"+str(i)].update(text_color=("#A3A3A3", "#FFFFFF")[not values["T2_single"]])
         
         input_data = {"gamma": values["T2_gamma"], "srgb": values["T2_srgb"], "nm": []}
         
@@ -692,12 +696,14 @@ while True:
                     T2_rgb_img = T2_rgb_img.resize((int(np.sqrt(T2_area*T2_ratio)), int(np.sqrt(T2_area/T2_ratio))), resample=Image.HAMMING)
                 if len(T2_rgb_img.getbands()) == 3:
                     r, g, b = T2_rgb_img.split()
-                    a = False
+                    a = None
                 elif len(T2_rgb_img.getbands()) == 4:
                     r, g, b, a = T2_rgb_img.split()
                 for i in [b, g, r]:
                     T2_load.append(np.array(i))
             else:
+                T2_exposures = [float(values["T2_exposure"+str(i)]) for i in range(T2_vis)]
+                T2_max_exposure = max(T2_exposures)
                 for i in range(T2_vis):
                     T2_bw_img = Image.open(values["T2_path"+str(i)])
                     if T2_bw_img.mode not in ("L", "I", "F"): # image should be b/w
@@ -712,7 +718,7 @@ while True:
                     if event == "T2_preview":
                         T2_ratio = T2_bw_img.width / T2_bw_img.height
                         T2_bw_img = T2_bw_img.resize((int(np.sqrt(T2_area*T2_ratio)), int(np.sqrt(T2_area/T2_ratio))), resample=Image.HAMMING)
-                    T2_load.append(np.array(T2_bw_img))
+                    T2_load.append(np.array(T2_bw_img) / T2_exposures[i] * T2_max_exposure)
             
             T2_data = np.array(T2_load, "int64")
             T2_l = T2_data.shape[0] # number of maps
@@ -772,7 +778,7 @@ while True:
             
             T2_data = T2_data.astype("float32")
             T2_max = T2_data.max()
-            if values["T2_autoexp"]:
+            if values["T2_makebright"]:
                 T2_data *= 65500 / T2_max
                 T2_input_bit = 16
                 T2_input_depth = 65535

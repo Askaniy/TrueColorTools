@@ -287,19 +287,24 @@ gui_filter = {
     "de": "Filter Name"
 }
 gui_wavelength = {
-    "en": "Wavelength (nm)",
-    "ru": "Длина волны (нм)",
-    "de": "Wellenlänge (nm)"
+    "en": "Wavelength [nm]",
+    "ru": "Длина волны [нм]",
+    "de": "Wellenlänge [nm]"
 }
-gui_autoexp = {
-    "en": "Auto exposure",
-    "ru": "Автоэкспозиция",
-    "de": "Autom. Belichtung"
+gui_exposure = {
+    "en": "Exposure",
+    "ru": "Экспозиция",
+    "de": "Belichtung"
+}
+gui_makebright = {
+    "en": "Make bright",
+    "ru": "Сделать ярким",
+    "de": "Hell machen"
 }
 gui_autoalign = {
-    "en": "Auto alignment [beta]",
-    "ru": "Автосовмещ. [beta]",
-    "de": "Autom. ausrichten [beta]"
+    "en": "Align bands (β)",
+    "ru": "Совместить (β)",
+    "de": "Ausrichten (β)"
 }
 gui_single = {
     "en": "Single image",
