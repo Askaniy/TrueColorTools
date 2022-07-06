@@ -293,6 +293,7 @@ T2_col2 = [
     [sg.HorizontalSeparator()],
     [sg.Checkbox(tr.gui_makebright[lang], size=(16, 1), key="T2_makebright"),
     sg.Checkbox(tr.gui_autoalign[lang], size=(16, 1), key="T2_autoalign")],
+    [sg.Checkbox(tr.gui_desun[lang], size=(30, 1), key="T2_desun")],
     [sg.Checkbox(tr.gui_single[lang], size=(11, 1), enable_events=True, key="T2_single"),
     sg.Input(size=(14, 1), disabled=True, disabled_readonly_background_color="#3A3A3A", key="T2_path"),
     sg.FileBrowse(button_text=tr.gui_browse[lang], size=(10, 1), disabled=True, key="T2_browse")],
@@ -442,6 +443,7 @@ while True:
         window["T2_interp1"].update(text=tr.gui_interp[lang][2])
         window["T2_makebright"].update(text=tr.gui_makebright[lang])
         window["T2_autoalign"].update(text=tr.gui_autoalign[lang])
+        window["T2_desun"].update(text=tr.gui_desun[lang])
         window["T2_single"].update(text=tr.gui_single[lang])
         window["T2_browse"].update(tr.gui_browse[lang])
         window["T2_filterset"].update(text=tr.gui_filterset[lang])
@@ -511,7 +513,11 @@ while True:
             T1_spectrum = calc.transform(T1_spectrum)
             
             # Spectrum interpolation
-            T1_curve = calc.polator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo, values["T1_interp1"])
+            if "sun" in T1_spectrum:
+                T1_sun = T1_spectrum["sun"]
+            else:
+                T1_sun = False
+            T1_curve = calc.polator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo, values["T1_interp1"], desun=T1_sun)
             
             # Color calculation
             try:
@@ -648,7 +654,7 @@ while True:
             window["T2_wavelengthN"+str(i)].update(text_color=("#A3A3A3", "#FFFFFF")[not values["T2_filterset"]])
             window["T2_exposureN"+str(i)].update(text_color=("#A3A3A3", "#FFFFFF")[not values["T2_single"]])
         
-        input_data = {"gamma": values["T2_gamma"], "srgb": values["T2_srgb"], "nm": []}
+        input_data = {"gamma": values["T2_gamma"], "srgb": values["T2_srgb"], "desun": values["T2_desun"], "nm": []}
         
         T2_preview_status = True
         if values["T2_single"]:
@@ -841,7 +847,7 @@ while True:
                         T2_name = f'({x}; {y})'
 
                         T2_temp_time = time.monotonic_ns()
-                        T2_curve = calc.polator(input_data["nm"], list(T2_spectrum), T2_nm, fast=T2_fast)
+                        T2_curve = calc.polator(input_data["nm"], list(T2_spectrum), T2_nm, fast=T2_fast, desun=input_data["desun"])
                         T2_calc_polator_time += time.monotonic_ns() - T2_temp_time
 
                         T2_temp_time = time.monotonic_ns()

@@ -306,6 +306,11 @@ gui_autoalign = {
     "ru": "Совместить (β)",
     "de": "Ausrichten (β)"
 }
+gui_desun = {
+    "en": "Subtract the solar spectrum",
+    "ru": "Вычесть солнечный спектр",
+    "de": "Subtrahiere das Sonnenspektrum"
+}
 gui_single = {
     "en": "Single image",
     "ru": "1 изображение",

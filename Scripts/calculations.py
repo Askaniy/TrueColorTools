@@ -2,6 +2,8 @@ import traceback
 import numpy as np
 from scipy.interpolate import Akima1DInterpolator
 import cmf, database
+sun = database.objects["Sun|1"]
+vega = database.objects["Vega|1"]
 
 debug = False
 
@@ -52,7 +54,7 @@ def blackbody_redshift(scope, tempurature, velocity, vII):
             br.append(0)
     return np.array(br)
 
-def polator(x, y, scope, albedo=0, fast=False):
+def polator(x, y, scope, albedo=0, fast=False, desun=False):
     mn = scope[0]
     mx = scope[-1]
     extrap = True if x[0] > mn or x[-1] < mx else False
@@ -96,6 +98,9 @@ def polator(x, y, scope, albedo=0, fast=False):
                 else:
                     br.append((line(nm) + interp(nm)) / 2)
     curve = np.clip(br, 0, None)
+    if desun:
+        for i, nm in enumerate(scope):
+            curve[i] = curve[i] / sun["br"][sun["nm"].index(nm)]
     if albedo:
         br550 = curve[scope.index(550)]
         curve = curve / br550 * albedo
@@ -155,18 +160,6 @@ def from_magnitudes(data, vega):
     data.update({"br": br})
     return data
 
-def subtract_sun(spectrum, sun):
-    nm = []
-    br = []
-    interp = Akima1DInterpolator(spectrum["nm"], spectrum["br"])
-    for sun_nm, sun_br in zip(sun["nm"], sun["br"]):
-        corrected = interp(sun_nm) / sun_br
-        if not np.isnan(corrected):
-            br.append(corrected)
-            nm.append(sun_nm)
-    spectrum.update({"nm": nm, "br": br, "sun": False})
-    return spectrum
-
 def transform(spectrum):
     if "filters" in spectrum:
         if "bands" in spectrum:
@@ -175,11 +168,8 @@ def transform(spectrum):
             spectrum = from_indices(spectrum) # spectrum from color indices
         spectrum.pop("filters")
     if "mag" in spectrum:
-        spectrum = from_magnitudes(spectrum, database.objects["Vega|1"]) # spectrum from magnitudes
+        spectrum = from_magnitudes(spectrum, vega) # spectrum from magnitudes
         spectrum.pop("mag")
-    if "sun" in spectrum:
-        if spectrum["sun"]:
-            spectrum = subtract_sun(spectrum, database.objects["Sun|1"]) # subtract solar spectrum
     return spectrum
 
 
