@@ -520,10 +520,9 @@ while True:
             T1_spectrum = calc.transform(T1_spectrum)
             
             # Spectrum interpolation
+            T1_sun = False
             if "sun" in T1_spectrum:
                 T1_sun = T1_spectrum["sun"]
-            else:
-                T1_sun = False
             T1_curve = calc.polator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo, values["T1_interp1"], desun=T1_sun)
             
             # Color calculation
@@ -594,7 +593,10 @@ while True:
                 T1_spectrum = calc.transform(T1_spectrum)
                 
                 # Spectrum interpolation
-                T1_curve = calc.polator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo, values["T1_interp1"])
+                T1_sun = False
+                if "sun" in T1_spectrum:
+                    T1_sun = T1_spectrum["sun"]
+                T1_curve = calc.polator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo, values["T1_interp1"], desun=T1_sun)
 
                 # Color calculation
                 T1_rgb = calc.to_rgb(
@@ -1004,7 +1006,10 @@ while True:
                 spectrum = calc.transform(spectrum)
                 
                 # Spectrum interpolation
-                T3_curve = calc.polator(spectrum["nm"], spectrum["br"], T3_nm, T3_albedo)
+                T3_sun = False
+                if "sun" in spectrum:
+                    T3_sun = spectrum["sun"]
+                T3_curve = calc.polator(spectrum["nm"], spectrum["br"], T3_nm, T3_albedo, desun=T3_sun)
 
                 # Color calculation
                 T3_rgb = calc.to_rgb(
