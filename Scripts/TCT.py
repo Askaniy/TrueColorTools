@@ -341,10 +341,10 @@ T4_col1 = [
     [sg.Text(tr.gui_temp[lang], size=(16, 1), key="T4_temp"), sg.Slider(range=(0, 20000), default_value=0, resolution=100, orientation="h", size=slider_size, enable_events=True, key="T4_slider1")],
     [sg.Text(tr.gui_velocity[lang], size=(16, 1), key="T4_velocity"), sg.Slider(range=(-1, 1), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, key="T4_slider2")],
     [sg.Text(tr.gui_vII[lang], size=(16, 1), key="T4_vII"), sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, key="T4_slider3")],
-    [sg.Text(tr.gui_scale[lang], size=(16, 1), text_color=T4_text_colors[0], key="T4_scale"), sg.Slider(range=(-10, 10), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, disabled=True, key="T4_slider4")],
+    [sg.Text(tr.gui_irr[lang], size=(16, 1), text_color=T4_text_colors[0], key="T4_scale"), sg.Slider(range=(-50, 50), default_value=0, resolution=0.01, orientation="h", size=slider_size, enable_events=True, disabled=True, key="T4_slider4")],
     [sg.T("")],
     [sg.HorizontalSeparator()],
-    [sg.Checkbox(tr.gui_irr[lang], size=(23, 1), enable_events=True, default=False, key="T4_irr"),
+    [sg.Checkbox(tr.gui_surfacebr[lang], size=(23, 1), enable_events=True, default=False, key="T4_surfacebr"),
     sg.Text(tr.gui_maxtemp[lang], size=(14, 1), key="T4_maxtemp"), sg.InputText("20000", size=(8, 1), enable_events=True, key="T4_maxtemp_num")],
     [sg.Checkbox(tr.gui_gamma[lang], size=(23, 1), enable_events=True, default=True, key="T4_gamma"),
     sg.Text(tr.gui_bit[lang], size=(14, 1), key="T4_bit"), sg.InputText("8", size=(4, 1), enable_events=True, key="T4_bit_num")],
@@ -476,8 +476,8 @@ while True:
         window["T4_temp"].update(tr.gui_temp[lang])
         window["T4_velocity"].update(tr.gui_velocity[lang])
         window["T4_vII"].update(tr.gui_vII[lang])
-        window["T4_scale"].update(tr.gui_scale[lang])
-        window["T4_irr"].update(text=tr.gui_irr[lang])
+        window["T4_scale"].update(tr.gui_irr[lang])
+        window["T4_surfacebr"].update(text=tr.gui_surfacebr[lang])
         window["T4_gamma"].update(text=tr.gui_gamma[lang])
         window["T4_maxtemp"].update(tr.gui_maxtemp[lang])
         window["T4_bit"].update(tr.gui_bit[lang])
@@ -708,7 +708,7 @@ while True:
                     sg.Print('Note: image converted from "P" (indexed color) mode to "RGB"')
                 if event == "T2_preview":
                     T2_ratio = T2_rgb_img.width / T2_rgb_img.height
-                    T2_rgb_img = T2_rgb_img.resize((int(np.sqrt(T2_area*T2_ratio)), int(np.sqrt(T2_area/T2_ratio))), resample=Image.HAMMING)
+                    T2_rgb_img = T2_rgb_img.resize((int(np.sqrt(T2_area*T2_ratio)), int(np.sqrt(T2_area/T2_ratio))), resample=Image.Resampling.HAMMING)
                 if len(T2_rgb_img.getbands()) == 3:
                     r, g, b = T2_rgb_img.split()
                     a = None
@@ -732,7 +732,7 @@ while True:
                             T2_bw_img = T2_bw_img.resize(T2_size)
                     if event == "T2_preview":
                         T2_ratio = T2_bw_img.width / T2_bw_img.height
-                        T2_bw_img = T2_bw_img.resize((int(np.sqrt(T2_area*T2_ratio)), int(np.sqrt(T2_area/T2_ratio))), resample=Image.HAMMING)
+                        T2_bw_img = T2_bw_img.resize((int(np.sqrt(T2_area*T2_ratio)), int(np.sqrt(T2_area/T2_ratio))), resample=Image.Resampling.HAMMING)
                     T2_load.append(np.array(T2_bw_img) / T2_exposures[i] * T2_max_exposure)
             
             T2_data = np.array(T2_load, "int64")
@@ -1081,30 +1081,30 @@ while True:
             window["T4_slider1"].update(range=(0, int(values["T4_maxtemp_num"])))
         
         else:
-            if event == "T4_irr":
-                window["T4_scale"].update(text_color=T4_text_colors[values["T4_irr"]])
-                window["T4_slider4"].update(disabled=not values["T4_irr"])
+            if event == "T4_surfacebr":
+                window["T4_scale"].update(text_color=T4_text_colors[values["T4_surfacebr"]])
+                window["T4_slider4"].update(disabled=not values["T4_surfacebr"])
             
-            T4_mode = "albedo" if values["T4_irr"] else "chromaticity"
+            T4_mode = "albedo" if values["T4_surfacebr"] else "chromaticity"
             T4_nm = cmf.xyz_nm if values["T4_srgb"] else cmf.rgb_nm
             T4_curve = calc.blackbody_redshift(T4_nm, values["T4_slider1"], values["T4_slider2"], values["T4_slider3"])
-            if values["T4_irr"]:
+            if values["T4_surfacebr"]:
                 try:
-                    T4_curve *= 10**(-values["T4_slider4"])
+                    T4_curve /= calc.mag2intensity(values["T4_slider4"])
                 except np.core._exceptions.UFuncTypeError:
                     pass
             T4_name = f'{values["T4_slider1"]} {values["T4_slider2"]} {values["T4_slider3"]}'
             T4_rgb = calc.to_rgb(
                 T4_name, T4_curve, mode=T4_mode,
-                albedo=values["T4_irr"],
-                exp_bit=int(values["T4_bit_num"]), 
-                gamma=values["T4_gamma"], 
+                albedo=values["T4_surfacebr"],
+                exp_bit=int(values["T4_bit_num"]),
+                gamma=values["T4_gamma"],
                 rnd=int(values["T4_rnd_num"]),
                 srgb=values["T4_srgb"]
             )
             T4_rgb_show = calc.to_rgb(
                 T4_name, T4_curve, mode=T4_mode,
-                albedo=values["T4_irr"],
+                albedo=values["T4_surfacebr"],
                 gamma=values["T4_gamma"],
                 srgb=values["T4_srgb"],
                 html=True

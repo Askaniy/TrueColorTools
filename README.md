@@ -50,7 +50,7 @@ For example, you can get colors formatted for [Celestia](https://github.com/Cele
 
 Notes: sources are renumbered by usage in the processed category; to use the *Table* tab on Linux, the NotoSans font family must be installed in `/usr/share/fonts/truetype/`.
 
-**Blackbody & Redshifts tab** calculates the influence of physical phenomena on color. Based on the blackbody spectrum, the program displays the changes in color and brightness from Doppler and gravitational redshifts. You can lock the exposure through the logarithmic spectral irradiance scale. It is measured in energy from 1 m² on 550 nm in the 1 nm range.
+**Blackbody & Redshifts tab** calculates the influence of physical phenomena on color. Based on the blackbody spectrum, the program displays the changes in color and brightness from Doppler and gravitational redshifts. You can lock the exposure through the spectral irradiance scale, converted into stellar magnitudes per 1 nm. The surface brightness selected by the slider is assumed to be unity.
 
 ### Auxiliary
 - [`calculations.py`](Scripts/calculations.py) is the mathematical core. It contains most of functions and some zero points of photometric systems;

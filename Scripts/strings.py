@@ -171,10 +171,10 @@ gui_output = {
     "ru": "Обработка и вывод",
     "de": "Verarbeitung und Ausgabe"
 }
-gui_irr = {
-    "en": "550 nm irradiance mode",
-    "ru": "режим излуч. на 550 нм",
-    "de": "Strahlung rel. zu 550 nm"
+gui_surfacebr = {
+    "en": "Surface brightness (550 nm)",
+    "ru": "Поверхн. яркость (550 нм)",
+    "de": "Oberflächenhelligkeit (550 nm)"
 }
 gui_temp = {
     "en": "Tempurature [K]",
@@ -191,10 +191,10 @@ gui_vII = {
     "ru": "II косм. ск. [c]",
     "de": "Fluchtgeschw. [c]"
 }
-gui_scale = {
-    "en": "[log10 W/(m²nm)]",
-    "ru": "[log10 Вт/(м²нм)]",
-    "de": "[log10 W/(m²nm)]"
+gui_irr = {
+    "en": "Irradiance [mag/nm]",
+    "ru": "Излуч. [зв. вел/нм]",
+    "de": "Bestrahlung [mag/nm]"
 }
 gui_maxtemp = {
     "en": "Max. temp.",

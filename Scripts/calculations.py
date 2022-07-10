@@ -54,6 +54,14 @@ def blackbody_redshift(scope, tempurature, velocity, vII):
             br.append(0)
     return np.array(br)
 
+V = 2.518021002e-8 # 1 Vega in W/m^2, https://arxiv.org/abs/1510.06262
+
+def intensity2mag(e):
+    return -2.5 * np.log10(e / V)
+
+def mag2intensity(m):
+    return V * 10**(-0.4 * m)
+
 def polator(x, y, scope, albedo=0, fast=False, desun=False):
     mn = scope[0]
     mx = scope[-1]
