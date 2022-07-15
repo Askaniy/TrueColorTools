@@ -404,7 +404,7 @@ while True:
 
     # Global window events
 
-    if event in [sg.WIN_CLOSED, tr.gui_exit[lang]]:
+    if event == sg.WIN_CLOSED or event == tr.gui_exit[lang]:
         break
 
     elif event in tr.lang_list[lang]:
@@ -881,7 +881,10 @@ while True:
                     T2_temp_time = time.monotonic_ns()
                     T2_counter += 1
                     if T2_counter % 2048 == 0:
-                        sg.Print(f'{time.strftime("%H:%M:%S")} {round(T2_counter/T2_px_num * 100)}%, {round(T2_counter/(time.monotonic()-T2_time))} px/sec')
+                        try:
+                            sg.Print(f'{time.strftime("%H:%M:%S")} {round(T2_counter/T2_px_num * 100)}%, {round(T2_counter/(time.monotonic()-T2_time))} px/sec')
+                        except ZeroDivisionError:
+                            sg.Print(f'{time.strftime("%H:%M:%S")} {round(T2_counter/T2_px_num * 100)}% (ZeroDivisionError)')
                     T2_progress_bar_time += time.monotonic_ns() - T2_temp_time
             
             T2_end_time = time.monotonic()
@@ -899,7 +902,7 @@ while True:
             if event == "T2_preview":
                 window["T2_image"].update(data=convert_to_bytes(T2_img))
             else:
-                T2_img.save(f'{values["T2_folder"]}/TCT-result_{time.strftime("%Y-%m-%d_%H-%M")}.png')
+                T2_img.save(f'{values["T2_folder"]}/TCT_{time.strftime("%Y-%m-%d_%H-%M")}.png')
         
             #except Exception as e:
             #    print(e)
@@ -1115,5 +1118,4 @@ while True:
             window["T4_rgb"].update(T4_rgb)
             window["T4_hex"].update(T4_rgb_show)
 
-
-window.Close()
+window.close()
