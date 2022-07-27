@@ -74,7 +74,7 @@ def denumerized_sources(lst):
     return res
 
 def width(line, font):
-    return font.getsize(line)[0]
+    return font.getlength(line)
 
 def recurse(lst0, font, maxW, hyphen=True):
     lst = lst0
