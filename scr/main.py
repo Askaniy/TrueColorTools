@@ -650,7 +650,8 @@ def launch_window(lang, debug):
                 
                 if values["T2_autoalign"]:
                     T2_data = scr.experimental.autoalign(T2_data, debug)
-                    
+                    T2_l, T2_h, T2_w = T2_data.shape
+                
                 T2_data = T2_data.astype("float32")
                 T2_max = T2_data.max()
                 if values["T2_makebright"]:
