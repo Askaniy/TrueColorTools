@@ -1,9 +1,10 @@
 import traceback
 import numpy as np
 from scipy.interpolate import Akima1DInterpolator
-import cmf, database
-sun = database.objects["Sun|1"]
-vega = database.objects["Vega|1"]
+import scr.cmf as cmf
+import scr.database as db
+sun = db.objects["Sun|1"]
+vega = db.objects["Vega|1"]
 
 debug = False
 
