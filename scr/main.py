@@ -9,6 +9,7 @@ import scr.filters as filters
 import scr.calculations as calc
 import scr.database as db
 import scr.strings as tr
+import scr.experimental
 
 
 def tag_list():
@@ -105,101 +106,13 @@ def recurse(lst0, font, maxW, hyphen=True):
                     recurse(lst, font, maxW)
                 break
     return lst
-    
+
 def line_splitter(line, font, maxW):
     w = width(line, font)
     if w < maxW:
         return [line]
     else:
         return recurse(line.split(), font, maxW)
-
-def square(array):
-    #return array
-    return np.multiply(array, array)
-    #return np.clip(array, np.mean(array), None)
-
-def mod_shift(c, size): # 0->size shift to -s/2->s/2
-    size05 = int(size/2) # floor rounding
-    return (c+size05)%size-size05
-
-def relative_shifts(sums):
-    diffs = []
-    for i in range(len(sums)-1):
-        size = len(sums[i])
-        temp_diff_list = []
-        for j in range(size):
-            diff = np.abs(sums[i] - np.roll(sums[i+1], j))
-            temp_diff_list.append(np.sum(diff))
-        diffs.append(mod_shift(np.argmin(temp_diff_list), size))
-    return diffs
-
-def recursive_shift(img0, img1, shift_x, shift_y, debug):
-    if debug:
-        print("\nstart of recursion with ", shift_x, shift_y)
-    diff0 = abs(np.sum(np.abs(img0 - np.roll(img1, (shift_y, shift_x)))))
-    diffU = abs(np.sum(np.abs(img0 - np.roll(img1, (shift_y-1, shift_x)))))
-    diffD = abs(np.sum(np.abs(img0 - np.roll(img1, (shift_y+1, shift_x)))))
-    diffL = abs(np.sum(np.abs(img0 - np.roll(img1, (shift_y, shift_x-1)))))
-    diffR = abs(np.sum(np.abs(img0 - np.roll(img1, (shift_y, shift_x+1)))))
-    diffUL = abs(np.sum(np.abs(img0 - np.roll(img1, (shift_y-1, shift_x-1)))))
-    diffUR = abs(np.sum(np.abs(img0 - np.roll(img1, (shift_y-1, shift_x+1)))))
-    diffDL = abs(np.sum(np.abs(img0 - np.roll(img1, (shift_y+1, shift_x-1)))))
-    diffDR = abs(np.sum(np.abs(img0 - np.roll(img1, (shift_y+1, shift_x+1)))))
-    if debug:
-        print(f'{diffUL} {diffU} {diffUR}\n{diffL} {diff0} {diffR}\n{diffDL} {diffD} {diffDR}')
-    argmin = np.argmin((diff0, diffU, diffD, diffL, diffR, diffUL, diffUR, diffDL, diffDR))
-    if argmin != 0: # box 3x3
-        if argmin == 1:
-            shift_y -= 1
-        elif argmin == 2:
-            shift_y += 1
-        elif argmin == 3:
-            shift_x -= 1
-        elif argmin == 4:
-            shift_x += 1
-        elif argmin == 5:
-            shift_x -= 1
-            shift_y -= 1
-        elif argmin == 6:
-            shift_x += 1
-            shift_y -= 1
-        elif argmin == 7:
-            shift_x -= 1
-            shift_y += 1
-        elif argmin == 8:
-            shift_x += 1
-            shift_y += 1
-        return recursive_shift(img0, img1, shift_x, shift_y, debug)
-    else:
-        return shift_x, shift_y
-    #while True:
-    #    if debug:
-    #        print("\nstart of recursion with ", shift_x, shift_y)
-    #    diffs = []
-    #    for i in range(9):
-    #        x = i % 3 - 1
-    #        y = i // 3 - 1
-    #        diff = abs(np.sum(np.abs(img0 - np.roll(img1, (shift_y+y, shift_x+x)))))
-    #        diffs.append(diff)
-    #    if debug:
-    #        for i in range(3):
-    #            for j in range(3):
-    #                sys.stdout.write(str(diffs[i*3+j]) + " ")
-    #            print("")
-    #    argmin = np.argmin(diffs)
-    #    shift_x += argmin % 3 - 1
-    #    shift_y += argmin // 3 - 1
-    #    print(argmin)
-    #    print(diffs)
-    #    if argmin == 4:
-    #        break
-    #return shift_x, shift_y
-
-def absolute_shifts(diffs):
-    p = [0]
-    for d in diffs:
-        p.append(p[-1]+d)
-    return np.array(p) - max(p)
 
 def convert_to_bytes(img):
     bio = io.BytesIO()
@@ -733,61 +646,11 @@ def launch_window(lang, debug):
                         T2_load.append(np.array(T2_bw_img) / T2_exposures[i] * T2_max_exposure)
                 
                 T2_data = np.array(T2_load, "int64")
-                T2_l = T2_data.shape[0] # number of maps
-                T2_h = T2_data.shape[1] # height of maps
-                T2_w = T2_data.shape[2] # width of maps
+                T2_l, T2_h, T2_w = T2_data.shape
                 
                 if values["T2_autoalign"]:
-                    T2_sums_x = []
-                    T2_sums_y = []
-                    for layer in T2_data:
-                        T2_sums_x.append(np.sum(layer, 0))
-                        T2_sums_y.append(np.sum(layer, 1))
-                    T2_shifts0_x = relative_shifts(square(T2_sums_x))
-                    T2_shifts0_y = relative_shifts(square(T2_sums_y))
-                    if debug:
-                        print("\nBase", T2_shifts0_x, T2_shifts0_y)
+                    T2_data = scr.experimental.autoalign(T2_data, debug)
                     
-                    T2_shiftsR_x = []
-                    T2_shiftsR_y = []
-                    for i in range(T2_l-1):
-                        T2_shift_x, T2_shift_y = recursive_shift(square(T2_data[i]), square(T2_data[i+1]), T2_shifts0_x[i], T2_shifts0_y[i], debug)
-                        T2_shiftsR_x.append(T2_shift_x)
-                        T2_shiftsR_y.append(T2_shift_y)
-                    if debug:
-                        print("\nRecursion", T2_shiftsR_x, T2_shiftsR_y)
-                    
-                    #T2_corrections_x = []
-                    #T2_corrections_y = []
-                    #for l in range(T2_l-1):
-                    #    T2_arr0, T2_arr1 = square(T2_data[l]), square(T2_data[l+1])
-                    #    T2_coord = (0, 0)
-                    #    T2_min = 1e18
-                    #    for i in range(-25, 26):
-                    #        for j in range(-25, 26):
-                    #            T2_diff = abs(np.sum(np.abs(T2_arr0 - np.roll(T2_arr1, (T2_shifts0_y[l]+j, T2_shifts0_x[l]+i)))))
-                    #            if T2_diff < T2_min:
-                    #                T2_min = T2_diff
-                    #                T2_coord = (i, j)
-                    #                print(T2_min, T2_coord)
-                    #    T2_corrections_x.append(T2_coord[0])
-                    #    T2_corrections_y.append(T2_coord[1])
-                    #quit()
-                    #if debug:
-                    #   print("\nCorrection", T2_corrections_x, T2_corrections_y)
-                    #T2_shiftsC_x = np.array(T2_shifts0_x) + np.array(T2_corrections_x)
-                    #T2_shiftsC_y = np.array(T2_shifts0_y) + np.array(T2_corrections_y)
-                    #if debug:
-                    #   print("\nCorrected", T2_shiftsC_x, T2_shiftsC_y)
-                    
-                    T2_shifts_x = absolute_shifts(T2_shiftsR_x)
-                    T2_shifts_y = absolute_shifts(T2_shiftsR_y)
-                    T2_w = T2_w + T2_shifts_x.min()
-                    T2_h = T2_h + T2_shifts_y.min()
-                    for i in range(T2_l):
-                        T2_data[i] = np.roll(T2_data[i], (T2_shifts_y[i], T2_shifts_x[i]))
-                    T2_data = T2_data[:, :T2_h, :T2_w]
-                
                 T2_data = T2_data.astype("float32")
                 T2_max = T2_data.max()
                 if values["T2_makebright"]:

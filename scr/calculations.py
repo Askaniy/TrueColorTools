@@ -3,17 +3,11 @@ import numpy as np
 from scipy.interpolate import Akima1DInterpolator
 import scr.cmf as cmf
 import scr.database as db
+import scr.experimental
 sun = db.objects["Sun|1"]
 vega = db.objects["Vega|1"]
 
 debug = False
-
-
-# Phase curves processing functions
-
-def lambert(phase):
-    phi = abs(np.deg2rad(phase))
-    return (np.sin(phi) + np.pi * np.cos(phi) - phi * np.cos(phi)) / np.pi # * 2/3 * albedo
 
 
 # Spectrum processing functions
@@ -228,7 +222,7 @@ def to_rgb(target, spectrum, mode="chromaticity", inp_bit=None, exp_bit=None, rn
             if mx != 0:
                 rgb /= mx
         if phase != 0:
-            rgb *= lambert(phase)
+            rgb *= scr.experimental.lambert(phase)
         if gamma:
             rgb = gamma_correction(rgb)
         if rgb.min() < 0:
