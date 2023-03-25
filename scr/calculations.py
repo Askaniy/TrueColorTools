@@ -2,8 +2,8 @@ import traceback
 import numpy as np
 from scipy.interpolate import Akima1DInterpolator
 import scr.cmf as cmf
-import scr.database as db
 import scr.experimental
+import spectra.database as db
 sun = db.objects["Sun|1"]
 vega = db.objects["Vega|1"]
 

@@ -7,52 +7,11 @@ import plotly.graph_objects as go
 import scr.cmf as cmf
 import scr.filters as filters
 import scr.calculations as calc
-import scr.database as db
+import spectra.database as db
+import scr.data_import as di
 import scr.strings as tr
 import scr.experimental
 
-
-def tag_list():
-    tag_set = set(["all"])
-    for data in db.objects.values():
-        if "tags" in data:
-            tag_set.update(data["tags"])
-    return list(tag_set)
-
-def obj_list(tag, lang):
-    names = {}
-    for name_0, data in db.objects.items():
-
-        flag = True
-        if tag != "all":
-            if "tags" in data:
-                if tag not in data["tags"]:
-                    flag = False
-            else:
-                flag = False
-        
-        if flag:
-            if "|" in name_0:
-                name_1 = "{} [{}]".format(*name_0.split("|"))
-            else:
-                name_1 = name_0
-            if lang != "en":
-                index = ""
-                if name_1[0] == "(":
-                    parts = name_1.split(")", 1)
-                    index = parts[0] + ") "
-                    name_1 = parts[1].strip()
-                elif "/" in name_1:
-                    parts = name_1.split("/", 1)
-                    index = parts[0] + "/"
-                    name_1 = parts[1].strip()
-                for obj_name, tranlation in tr.names.items():
-                    if name_1.startswith(obj_name):
-                        name_1 = name_1.replace(obj_name, tranlation[lang])
-                        break
-                name_1 = index + name_1
-            names.update({name_1: name_0})
-    return names
 
 def export(rgb):
     lst = []
@@ -142,8 +101,8 @@ def launch_window(lang, debug):
 
     T1_col1 = [
         [sg.Text(tr.gui_database[lang], size=(16, 1), font=("arial", 12), key="T1_title1")],
-        [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T1_tagsN"), sg.InputCombo(tag_list(), default_value="featured", size=(17, 1), enable_events=True, key="T1_tags")],
-        [sg.Listbox(values=tuple(obj_list("featured", lang).keys()), size=(27, 22), enable_events=True, key="T1_list")]
+        [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T1_tagsN"), sg.InputCombo(di.tag_list(), default_value="featured", size=(17, 1), enable_events=True, key="T1_tags")],
+        [sg.Listbox(values=tuple(di.obj_list("featured", lang).keys()), size=(27, 22), enable_events=True, key="T1_list")]
     ]
     T1_col2 = [
         [sg.Text(tr.gui_settings[lang], size=(16, 1), font=("arial", 12), key="T1_title2")],
@@ -226,7 +185,7 @@ def launch_window(lang, debug):
 
     T3_col1 = [
         [sg.Text(tr.gui_settings[lang], size=(20, 1), font=("arial", 12), key="T3_title1")],
-        [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T3_tagsN"), sg.InputCombo(tag_list(), default_value="featured", size=(16, 1), enable_events=True, key="T3_tags")],
+        [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T3_tagsN"), sg.InputCombo(di.tag_list(), default_value="featured", size=(16, 1), enable_events=True, key="T3_tags")],
         [sg.HorizontalSeparator()],
         [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), enable_events=True, default=True, key="T3_gamma")],
         [sg.Checkbox("sRGB", enable_events=True, size=(16, 1), key="T3_srgb")],
@@ -330,7 +289,7 @@ def launch_window(lang, debug):
             window["T1_title2"].update(tr.gui_settings[lang])
             window["T1_title3"].update(tr.gui_results[lang])
             window["T1_tagsN"].update(tr.gui_tags[lang])
-            window["T1_list"].update(values=tuple(obj_list(values["T1_tags"], lang).keys()))
+            window["T1_list"].update(values=tuple(di.obj_list(values["T1_tags"], lang).keys()))
             window["T1_gamma"].update(text=tr.gui_gamma[lang])
             window["T1_br_mode"].update(tr.gui_br[lang][0])
             window["T1_br_mode0"].update(text=tr.gui_br[lang][1])
@@ -419,7 +378,7 @@ def launch_window(lang, debug):
                         T1_mode = br_modes[i]
 
                 # Spectral data import and processing
-                T1_spectrum = db.objects[obj_list("all", lang)[T1_name]]
+                T1_spectrum = db.objects[di.obj_list("all", lang)[T1_name]]
                 T1_albedo = 0
                 if "albedo" not in T1_spectrum:
                     if T1_mode == "albedo":
@@ -464,7 +423,7 @@ def launch_window(lang, debug):
                 window["T1_hex"].update(T1_rgb_show)
             
             elif event == "T1_tags":
-                window["T1_list"].update(tuple(obj_list(values["T1_tags"], lang).keys()))
+                window["T1_list"].update(tuple(di.obj_list(values["T1_tags"], lang).keys()))
             
             elif event == "T1_add" and values["T1_list"] != []:
                 names.append(values["T1_list"][0])
@@ -488,7 +447,7 @@ def launch_window(lang, debug):
                 T1_nm = cmf.xyz_nm if values["T1_srgb"] else cmf.rgb_nm
                 
                 # Spectrum processing
-                for name_1, name_0 in obj_list(values["T1_tags"], lang).items():
+                for name_1, name_0 in di.obj_list(values["T1_tags"], lang).items():
                     T1_spectrum = db.objects[name_0]
                     for i in range(3):
                         if values["T1_br_mode"+str(i)]:
