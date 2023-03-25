@@ -383,10 +383,10 @@ def launch_window(lang, debug):
                 if "albedo" not in T1_spectrum:
                     if T1_mode == "albedo":
                         T1_mode = "chromaticity"
-                    T1_spectrum.update({"albedo": False})
+                    T1_spectrum |= {"albedo": False}
                 elif type(T1_spectrum["albedo"]) != bool:
                     T1_albedo = T1_spectrum["albedo"]
-                T1_spectrum = calc.transform(T1_spectrum)
+                T1_spectrum = calc.standardize_photometry(T1_spectrum)
                 
                 # Spectrum interpolation
                 T1_sun = False
@@ -456,10 +456,10 @@ def launch_window(lang, debug):
                     if "albedo" not in T1_spectrum:
                         if T1_mode == "albedo":
                             T1_mode = "chromaticity"
-                        T1_spectrum.update({"albedo": False})
+                        T1_spectrum |= {"albedo": False}
                     elif type(T1_spectrum["albedo"]) != bool:
                         T1_albedo = T1_spectrum["albedo"]
-                    T1_spectrum = calc.transform(T1_spectrum)
+                    T1_spectrum = calc.standardize_photometry(T1_spectrum)
                     
                     # Spectrum interpolation
                     T1_sun = False
@@ -628,7 +628,7 @@ def launch_window(lang, debug):
                 #        br = np.array(info["br"])
                 #        obl = 0
                 #    elif "ref" in info:
-                #        ref = calc.transform(db.objects[info["ref"]])
+                #        ref = calc.standardize_photometry(db.objects[info["ref"]])
                 #        albedo = ref["albedo"] if "albedo" in ref else 0
                 #        br = calc.get_points(bands, ref["nm"], ref["br"], albedo)
                 #        obl = ref["obl"] if "obl" in ref else 0
@@ -746,7 +746,7 @@ def launch_window(lang, debug):
                     for name, spectrum in db.objects.items():
                         if "tags" in spectrum:
                             if values["T3_tags"] in spectrum["tags"]:
-                                T3_data.update({name: spectrum})
+                                T3_data |= {name: spectrum}
                                 T3_l += 1
                 for i in range(3):
                     if values["T3_br_mode"+str(i)]:
@@ -823,10 +823,10 @@ def launch_window(lang, debug):
                     if "albedo" not in spectrum:
                         if T3_mode == "albedo":
                             T3_mode = "chromaticity"
-                        spectrum.update({"albedo": False})
+                        spectrum |= {"albedo": False}
                     elif type(spectrum["albedo"]) != bool:
                         T3_albedo = spectrum["albedo"]
-                    spectrum = calc.transform(spectrum)
+                    spectrum = calc.standardize_photometry(spectrum)
                     
                     # Spectrum interpolation
                     T3_sun = False
