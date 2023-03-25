@@ -102,7 +102,7 @@ def launch_window(lang, debug):
     T1_col1 = [
         [sg.Text(tr.gui_database[lang], size=(16, 1), font=("arial", 12), key="T1_title1")],
         [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T1_tagsN"), sg.InputCombo(di.tag_list(), default_value="featured", size=(17, 1), enable_events=True, key="T1_tags")],
-        [sg.Listbox(values=tuple(di.obj_list("featured", lang).keys()), size=(27, 22), enable_events=True, key="T1_list")]
+        [sg.Listbox(values=tuple(di.obj_dict("featured", lang).keys()), size=(27, 22), enable_events=True, key="T1_list")]
     ]
     T1_col2 = [
         [sg.Text(tr.gui_settings[lang], size=(16, 1), font=("arial", 12), key="T1_title2")],
@@ -289,7 +289,7 @@ def launch_window(lang, debug):
             window["T1_title2"].update(tr.gui_settings[lang])
             window["T1_title3"].update(tr.gui_results[lang])
             window["T1_tagsN"].update(tr.gui_tags[lang])
-            window["T1_list"].update(values=tuple(di.obj_list(values["T1_tags"], lang).keys()))
+            window["T1_list"].update(values=tuple(di.obj_dict(values["T1_tags"], lang).keys()))
             window["T1_gamma"].update(text=tr.gui_gamma[lang])
             window["T1_br_mode"].update(tr.gui_br[lang][0])
             window["T1_br_mode0"].update(text=tr.gui_br[lang][1])
@@ -378,7 +378,7 @@ def launch_window(lang, debug):
                         T1_mode = br_modes[i]
 
                 # Spectral data import and processing
-                T1_spectrum = db.objects[di.obj_list("all", lang)[T1_name]]
+                T1_spectrum = db.objects[di.obj_dict("all", lang)[T1_name]]
                 T1_albedo = 0
                 if "albedo" not in T1_spectrum:
                     if T1_mode == "albedo":
@@ -423,7 +423,7 @@ def launch_window(lang, debug):
                 window["T1_hex"].update(T1_rgb_show)
             
             elif event == "T1_tags":
-                window["T1_list"].update(tuple(di.obj_list(values["T1_tags"], lang).keys()))
+                window["T1_list"].update(tuple(di.obj_dict(values["T1_tags"], lang).keys()))
             
             elif event == "T1_add" and values["T1_list"] != []:
                 names.append(values["T1_list"][0])
@@ -447,7 +447,7 @@ def launch_window(lang, debug):
                 T1_nm = cmf.xyz_nm if values["T1_srgb"] else cmf.rgb_nm
                 
                 # Spectrum processing
-                for name_1, name_0 in di.obj_list(values["T1_tags"], lang).items():
+                for name_1, name_0 in di.obj_dict(values["T1_tags"], lang).items():
                     T1_spectrum = db.objects[name_0]
                     for i in range(3):
                         if values["T1_br_mode"+str(i)]:

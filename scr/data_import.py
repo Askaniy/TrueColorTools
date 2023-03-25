@@ -2,44 +2,42 @@
 import spectra.database as db
 import scr.strings as tr
 
-def tag_list():
-    tag_set = set(["all"])
-    for data in db.objects.values():
-        if "tags" in data:
-            tag_set.update(data["tags"])
+
+def tag_list() -> list:
+    """Generates a list of tags found in the spectra database"""
+    tag_set = set(['all'])
+    for obj_data in db.objects.values():
+        if 'tags' in obj_data:
+            tag_set.update(obj_data['tags'])
     return list(tag_set)
 
-def obj_list(tag, lang):
+def obj_dict(tag: str, lang: str) -> dict:
+    """Maps front-end spectrum names allowed by the tag to names in the database"""
     names = {}
-    for name_0, data in db.objects.items():
-
-        flag = True
-        if tag != "all":
-            if "tags" in data:
-                if tag not in data["tags"]:
-                    flag = False
-            else:
+    for raw_name, obj_data in db.objects.items():
+        if tag == 'all':
+            flag = True
+        else:
+            try:
+                flag = tag in obj_data['tags']
+            except KeyError:
                 flag = False
-        
         if flag:
-            if "|" in name_0:
-                name_1 = "{} [{}]".format(*name_0.split("|"))
-            else:
-                name_1 = name_0
-            if lang != "en":
-                index = ""
-                if name_1[0] == "(":
-                    parts = name_1.split(")", 1)
-                    index = parts[0] + ") "
-                    name_1 = parts[1].strip()
-                elif "/" in name_1:
-                    parts = name_1.split("/", 1)
-                    index = parts[0] + "/"
-                    name_1 = parts[1].strip()
+            new_name = '{} [{}]'.format(*raw_name.split('|')) if '|' in raw_name else raw_name
+            if lang != 'en': # parsing and translating
+                index = ''
+                if new_name[0] == '(': # minor body indices parsing
+                    parts = new_name.split(')', 1)
+                    index = parts[0] + ') '
+                    new_name = parts[1].strip()
+                elif '/' in new_name: # comet names parsing
+                    parts = new_name.split('/', 1)
+                    index = parts[0] + '/'
+                    new_name = parts[1].strip()
                 for obj_name, tranlation in tr.names.items():
-                    if name_1.startswith(obj_name):
-                        name_1 = name_1.replace(obj_name, tranlation[lang])
+                    if new_name.startswith(obj_name):
+                        new_name = new_name.replace(obj_name, tranlation[lang])
                         break
-                name_1 = index + name_1
-            names.update({name_1: name_0})
+                new_name = index + new_name
+            names |= {new_name: raw_name}
     return names
