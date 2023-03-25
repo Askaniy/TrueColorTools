@@ -1,6 +1,21 @@
-#import json5
+from pathlib import Path
+import json5
 import spectra.database as db
 import scr.strings as tr
+
+
+# Support of database extension via json5 files
+
+def import_folder(folder: str) -> dict:
+    database = {}
+    if Path.cwd().name == 'TrueColorTools':
+        for file in Path(folder).iterdir():
+            if file.suffix == '.json5' and not file.is_dir():
+                with open(file) as f:
+                    database |= json5.load(f)
+    else:
+        print('Failed to import addons. Please try to launch from "/TrueColorTools" directory.')
+    return database
 
 
 # Front-end view on spectra database

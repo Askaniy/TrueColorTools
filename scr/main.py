@@ -90,6 +90,8 @@ def frame(num, lang):
     return sg.Frame(f"{tr.gui_band[lang]} {num+1}", l, visible=True, key="T2_band"+n)
 
 def launch_window(lang, debug):
+    db.objects |= di.import_folder('spectra')
+
     sg.LOOK_AND_FEEL_TABLE["MaterialDark"] = {
         'BACKGROUND': '#333333', 'TEXT': '#FFFFFF',
         'INPUT': '#424242', 'TEXT_INPUT': '#FFFFFF', 'SCROLL': '#424242',
