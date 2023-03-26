@@ -4,8 +4,8 @@ from scipy.interpolate import Akima1DInterpolator
 import scr.cmf as cmf
 import scr.experimental
 import spectra.database as db
-sun = db.objects['Sun|1']
-vega = db.objects['Vega|1']
+sun = db.objects['Sun|CALSPEC']
+vega = db.objects['Vega|CALSPEC']
 
 debug = False
 

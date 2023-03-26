@@ -1,85 +1,156 @@
-
-sources = [
-    "[1]: CALSPEC calatog of stellar spectra (STScI)"
-    "\nhttps://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec",
-    "[2]: Comprehensive wide-band magnitudes and albedos for the planets, with applications to exo-planets and Planet Nine"
-    "\nDOI: 10.1016/j.icarus.2016.09.023; https://www.sciencedirect.com/science/article/abs/pii/S0019103516301014",
-    "[3]: Views from EPOXI: colors in our Solar system as an analog for extrasolar planets"
-    "\nDOI: 10.1088/0004-637X/729/2/130; https://iopscience.iop.org/article/10.1088/0004-637X/729/2/130",
-    "[4]: About the Spectra of the Planets and Satellites (USGS Archive)"
-    "\nhttps://archive.usgs.gov/archive/sites/speclab.cr.usgs.gov/planetary.spectra/planetary-sp.html",
-    "[5]: Spectrophotometry of the Jovian Planets and Titan at 300- to 1000-nm Wavelength: The Methane Spectrum"
-    "\nDOI: 10.1006/icar.1994.1139; https://atmos.nmsu.edu/planetary_datasets/indexinfrared.html",
-    "[6]: The Spectrum of Pluto, 0.40 - 0.93 um I. Secular and longitudinal distribution of ices and complex organics"
-    "\nDOI: 10.1051/0004-6361/201527281; https://arxiv.org/abs/1509.00417",
-    "[7]: Phase II of the Small Main-Belt Asteroid Spectroscopic Survey: A Feature-Based Taxonomy"
-    "\nDOI: 10.1006/icar.2002.6856; https://www.sciencedirect.com/science/article/abs/pii/S0019103502968569",
-    "[8]: Visible spectroscopic and photometric survey of Jupiter Trojans: final results on dynamical families"
-    "\nDOI: 10.1016/j.icarus.2007.03.033; https://arxiv.org/abs/0704.0350",
-    "[9]: Minor Bodies in the Outer Solar System: Magnitudes and Colours"
-    "\nhttp://www.eso.org/~ohainaut/MBOSS/; http://www.eso.org/~ohainaut/MBOSS/mbossClasses.txt",
-    "[10]: Polarized reflected light from the exoplanet HD189733b: First multicolor observations and confirmation of detection"
-    "\nDOI: 10.1088/2041-8205/728/1/L6/; https://arxiv.org/abs/1101.0059",
-    "[11]: Observations, compositional, and physical characterization of near-Earth and Mars-crosser asteroids from a spectroscopic survey"
-    "\nDOI: 10.1051/0004-6361/200913852; https://ui.adsabs.harvard.edu/abs/2010A%26A...517A..23D/abstract",
-    "[12]: Physical properties of Asteroid (25143) Itokawa — Target of the Hayabusa sample return mission"
-    "\nDOI: 10.1016/j.icarus.2005.02.002; https://ui.adsabs.harvard.edu/abs/2005Icar..176..408L/abstract",
-    "[13]: The Deep Blue Color of HD189733b: Albedo Measurements with Hubble Space Telescope/Space Telescope Imaging Spectrograph at Visible Wavelengths"
-    "\nDOI: 10.1088/2041-8205/772/2/L16; https://arxiv.org/abs/1307.3239",
-    "[14]: Balancing the energy budget of short-period giant planets: evidence for reflective clouds and optical absorbers"
-    "\nDOI: 10.1093/mnras/stv470; https://academic.oup.com/mnras/article/449/4/4192/1172734",
-    "[15]: Upsilon Andromedae b in polarized light: New constraints on the planet size, density and albedo"
-    "\nDOI: ...; https://arxiv.org/abs/1109.3116",
-    "[16]: Photometric study of the major satellites of Uranus"
-    "\nDOI: 10.1134/S0038094607030021; https://link.springer.com/article/10.1134%2FS0038094607030021",
-    "[17]: Colors of (486958) 2014 MU69 as Observed by New Horizons' Multi-Spectral Visible Imaging Camera (MVIC)"
-    "\nDOI: ...; https://ui.adsabs.harvard.edu/abs/2019LPI....50.1982H/abstract",
-    "[18]: Interstellar Interloper 1I/2017 U1: Observations from the NOT and WIYN Telescopes"
-    "\nDOI: 10.3847/2041-8213/aa9b2f; https://arxiv.org/abs/1711.05687",
-    "[19]: Col-OSSOS: Colors of the Interstellar Planetesimal 1I/`Oumuamua"
-    "\nDOI: 10.3847/2041-8213/aaa07c; https://arxiv.org/abs/1711.06214",
-    "[20]: A Visual Spectrum of Triton from the Hubble Space Telescope"
-    "\nDOI: 10.1006/icar.1999.6224; https://www.sciencedirect.com/science/article/abs/pii/S0019103599962243",
-    "[21]: Phobos as a D-type Captured Asteroid, Spectral Modeling from 0.25 to 4.0 μm"
-    "\nDOI: 10.1088/0004-637X/777/2/127; https://iopscience.iop.org/article/10.1088/0004-637X/777/2/127",
-    "[22]: Spectral absorptions on Phobos and Deimos in the visible/near infrared wavelengths and their compositional constraints"
-    "\nDOI: 10.1016/j.icarus.2013.11.021; https://www.sciencedirect.com/science/article/abs/pii/S0019103513004934",
-    "[23]: Spectral evidence for a carbonaceous chondrite surface composition on Deimos"
-    "\nDOI: ...; https://www.nature.com/articles/283277a0",
-    "[24]: A Catalog of Spectra, Albedos, and Colors of Solar System Bodies for Exoplanet Comparison"
-    "\nDOI: 10.1089/ast.2017.1763; https://www.liebertpub.com/doi/10.1089/ast.2017.1763; https://zenodo.org/record/3930987",
-    "[25]: Albedo and Reflection Spectra of Extrasolar Giant Planets"
-    "\nDOI: 10.1086/309160; https://iopscience.iop.org/article/10.1086/309160/meta",
-    "[26]: Photometric Modeling and VIS-IR Albedo Maps of Tethys From Cassini-VIMS"
-    "\nDOI: 10.1029/2018GL078602; https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2018GL078602",
-    "[27]: Photometric Modeling and VIS-IR Albedo Maps of Dione From Cassini-VIMS"
-    "\nDOI: 10.1002/2017GL076869; https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2017GL076869",
-    "[28]: Investigating Surface Color Variegation on Near-Earth Asteroid Bennu Using OSIRIS-REx Mapcam Data"
-    "\nDOI: ...; https://ui.adsabs.harvard.edu/abs/2019LPI....50.2794L/abstract",
-    "[29]: SMASS: Small Main-Belt Asteroid Spectroscopic Survey"
-    "\nDOI: ...; http://smass.mit.edu/smass.html",
-    "[30]: Colors and Shapes of the Irregular Planetary Satellites"
-    "\nDOI: 10.3847/1538-3881/aab49b; https://iopscience.iop.org/article/10.3847/1538-3881/aab49b",
-    "[31]: A deeper look at the colors of the saturnian irregular satellites"
-    "\nDOI: 10.1016/j.icarus.2007.04.020; https://arxiv.org/abs/astro-ph/0611590",
-    "[32]: Nereid Has Complex Large-Amplitude Photometric Variability (Due to Chaotic Rotation)"
-    "\nDOI: 10.1006/icar.2000.6417; https://arxiv.org/abs/astro-ph/0005050v1",
-    "[33]: Photometric survey of the irregular satellites"
-    "\nDOI: 10.1016/j.icarus.2003.07.005; https://arxiv.org/abs/astro-ph/0301016",
-    "[34]: Implied Evolutionary Differences of the Jovian Irregular Satellites from a BVR Color Survey"
-    "\nDOI: 10.1006/icar.2001.6715; https://www.sciencedirect.com/science/article/abs/pii/S0019103501967156",
-    "[35]: The ExoColors table by Zelario (Fireon)"
-    "\nhttps://docs.google.com/spreadsheets/d/1kg9lktTwNhHVVyAS2FhccvLMnddI4L0Ot67f-kYFIFM",
-    "[36]: Colors of Irregular Satellites of Saturn with DECam"
-    "\nDOI: ...; https://arxiv.org/abs/2204.08391"
-]
+refs = {
+    "CALSPEC": [
+        "CALSPEC calatog of stellar spectra (STScI)",
+        "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec"
+    ],
+    "Mallama2017": [
+        "Comprehensive wide-band magnitudes and albedos for the planets, with applications to exo-planets and Planet Nine",
+        "DOI: 10.1016/j.icarus.2016.09.023", "https://www.sciencedirect.com/science/article/abs/pii/S0019103516301014"
+    ],
+    "Crow2011": [
+        "Views from EPOXI: colors in our Solar system as an analog for extrasolar planets",
+        "DOI: 10.1088/0004-637X/729/2/130", "https://iopscience.iop.org/article/10.1088/0004-637X/729/2/130"
+    ],
+    "USGSarchive": [ # not avalible anymore, even by Wayback Machine
+        "About the Spectra of the Planets and Satellites",
+        "https://archive.usgs.gov/archive/sites/speclab.cr.usgs.gov/planetary.spectra/planetary-sp.html"
+    ],
+    "Karkoshschka1994": [
+        "Spectrophotometry of the Jovian Planets and Titan at 300- to 1000-nm Wavelength: The Methane Spectrum",
+        "DOI: 10.1006/icar.1994.1139", "https://atmos.nmsu.edu/planetary_datasets/indexinfrared.html"
+    ],
+    "Lorenzi2016": [
+        "The Spectrum of Pluto, 0.40 - 0.93 um I. Secular and longitudinal distribution of ices and complex organics",
+        "DOI: 10.1051/0004-6361/201527281", "https://arxiv.org/abs/1509.00417"
+    ],
+    "Bus2002": [
+        "Phase II of the Small Main-Belt Asteroid Spectroscopic Survey: A Feature-Based Taxonomy",
+        "DOI: 10.1006/icar.2002.6856", "https://www.sciencedirect.com/science/article/abs/pii/S0019103502968569"
+    ],
+    "Fornasier2007": [
+        "Visible spectroscopic and photometric survey of Jupiter Trojans: final results on dynamical families",
+        "DOI: 10.1016/j.icarus.2007.03.033", "https://arxiv.org/abs/0704.0350"
+    ],
+    "MBOSS": [
+        "Minor Bodies in the Outer Solar System: Magnitudes and Colours",
+        "http://www.eso.org/~ohainaut/MBOSS/", "http://www.eso.org/~ohainaut/MBOSS/mbossClasses.txt"
+    ],
+    "Berdyugina2010": [
+        "Polarized reflected light from the exoplanet HD189733b: First multicolor observations and confirmation of detection",
+        "DOI: 10.1088/2041-8205/728/1/L6/", "https://arxiv.org/abs/1101.0059"
+    ],
+    "deLeon2010": [ # last name is...?
+        "Observations, compositional, and physical characterization of near-Earth and Mars-crosser asteroids from a spectroscopic survey",
+        "DOI: 10.1051/0004-6361/200913852", "https://ui.adsabs.harvard.edu/abs/2010A%26A...517A..23D/abstract"
+    ],
+    "Lowry2005": [
+        "Physical properties of Asteroid (25143) Itokawa — Target of the Hayabusa sample return mission",
+        "DOI: 10.1016/j.icarus.2005.02.002", "https://ui.adsabs.harvard.edu/abs/2005Icar..176..408L/abstract"
+    ],
+    "Evans2013": [
+        "The Deep Blue Color of HD189733b: Albedo Measurements with Hubble Space Telescope/Space Telescope Imaging Spectrograph at Visible Wavelengths",
+        "DOI: 10.1088/2041-8205/772/2/L16", "https://arxiv.org/abs/1307.3239"
+    ],
+    "Schwartz2015": [
+        "Balancing the energy budget of short-period giant planets: evidence for reflective clouds and optical absorbers",
+        "DOI: 10.1093/mnras/stv470", "https://academic.oup.com/mnras/article/449/4/4192/1172734"
+    ],
+    "Berdyugina2011": [
+        "Upsilon Andromedae b in polarized light: New constraints on the planet size, density and albedo",
+        "https://arxiv.org/abs/1109.3116"
+    ],
+    "Avramchuk2007": [
+        "Photometric study of the major satellites of Uranus",
+        "DOI: 10.1134/S0038094607030021", "https://link.springer.com/article/10.1134%2FS0038094607030021"
+    ],
+    "Howett2019": [
+        "Colors of (486958) 2014 MU69 as Observed by New Horizons' Multi-Spectral Visible Imaging Camera (MVIC)",
+        "https://ui.adsabs.harvard.edu/abs/2019LPI....50.1982H/abstract"
+    ],
+    "Jewitt2017": [
+        "Interstellar Interloper 1I/2017 U1: Observations from the NOT and WIYN Telescopes",
+        "DOI: 10.3847/2041-8213/aa9b2f", "https://arxiv.org/abs/1711.05687"
+    ],
+    "Bannister2017": [
+        "Col-OSSOS: Colors of the Interstellar Planetesimal 1I/`Oumuamua",
+        "DOI: 10.3847/2041-8213/aaa07c", "https://arxiv.org/abs/1711.06214"
+    ],
+    "Tryka1999": [
+        "A Visual Spectrum of Triton from the Hubble Space Telescope",
+        "DOI: 10.1006/icar.1999.6224", "https://www.sciencedirect.com/science/article/abs/pii/S0019103599962243"
+    ],
+    "Pajola2013": [
+        "Phobos as a D-type Captured Asteroid, Spectral Modeling from 0.25 to 4.0 μm",
+        "DOI: 10.1088/0004-637X/777/2/127", "https://iopscience.iop.org/article/10.1088/0004-637X/777/2/127"
+    ],
+    "Fraeman2013": [
+        "Spectral absorptions on Phobos and Deimos in the visible/near infrared wavelengths and their compositional constraints",
+        "DOI: 10.1016/j.icarus.2013.11.021", "https://www.sciencedirect.com/science/article/abs/pii/S0019103513004934"
+    ],
+    "Pang1980": [
+        "Spectral evidence for a carbonaceous chondrite surface composition on Deimos",
+        "https://www.nature.com/articles/283277a0"
+    ],
+    "Madden2018": [
+        "A Catalog of Spectra, Albedos, and Colors of Solar System Bodies for Exoplanet Comparison",
+        "DOI: 10.1089/ast.2017.1763", "https://www.liebertpub.com/doi/10.1089/ast.2017.1763", "https://zenodo.org/record/3930987"
+    ],
+    "Sudarsky2000": [
+        "Albedo and Reflection Spectra of Extrasolar Giant Planets",
+        "DOI: 10.1086/309160", "https://iopscience.iop.org/article/10.1086/309160/meta"
+    ],
+    "Filacchione2018": [
+        "Photometric Modeling and VIS-IR Albedo Maps of Tethys From Cassini-VIMS",
+        "DOI: 10.1029/2018GL078602", "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2018GL078602"
+    ],
+    "Filacchione2017": [
+        "Photometric Modeling and VIS-IR Albedo Maps of Dione From Cassini-VIMS",
+        "DOI: 10.1002/2017GL076869", "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2017GL076869"
+    ],
+    "LeCorre2019": [
+        "Investigating Surface Color Variegation on Near-Earth Asteroid Bennu Using OSIRIS-REx Mapcam Data",
+        "https://ui.adsabs.harvard.edu/abs/2019LPI....50.2794L/abstract"
+    ],
+    "SMASS": [
+        "SMASS: Small Main-Belt Asteroid Spectroscopic Survey",
+        "http://smass.mit.edu/smass.html"
+    ],
+    "Graykowski2018": [
+        "Colors and Shapes of the Irregular Planetary Satellites",
+        "DOI: 10.3847/1538-3881/aab49b", "https://iopscience.iop.org/article/10.3847/1538-3881/aab49b"
+    ],
+    "Grav2007": [
+        "A deeper look at the colors of the saturnian irregular satellites",
+        "DOI: 10.1016/j.icarus.2007.04.020", "https://arxiv.org/abs/astro-ph/0611590"
+    ],
+    "Schaefer2000": [
+        "Nereid Has Complex Large-Amplitude Photometric Variability (Due to Chaotic Rotation)",
+        "DOI: 10.1006/icar.2000.6417", "https://arxiv.org/abs/astro-ph/0005050v1"
+    ],
+    "Grav2003": [
+        "Photometric survey of the irregular satellites",
+        "DOI: 10.1016/j.icarus.2003.07.005", "https://arxiv.org/abs/astro-ph/0301016"
+    ],
+    "Rettig2001": [
+        "Implied Evolutionary Differences of the Jovian Irregular Satellites from a BVR Color Survey",
+        "DOI: 10.1006/icar.2001.6715", "https://www.sciencedirect.com/science/article/abs/pii/S0019103501967156"
+    ],
+    "Zelario": [
+        "The ExoColors table by Zelario (Fireon)",
+        "https://docs.google.com/spreadsheets/d/1kg9lktTwNhHVVyAS2FhccvLMnddI4L0Ot67f-kYFIFM"
+    ],
+    "Pena2022": [
+        "Colors of Irregular Satellites of Saturn with DECam",
+        "DOI: 10.3847/1538-3881/ac6258", "https://arxiv.org/abs/2204.08391"
+    ]
+}
 
 
 # Reflectivity measurements by wavelengths
 
 objects = {
     #"Zero Mag": {"filters": "Landolt", "indices": {"U-B": 0, "B-V": 0, "V-R": 0, "R-I": 0}},
-    "Vega|1": {"tags": ["featured", "extrasolar", "star"],
+    "Vega|CALSPEC": {"tags": ["featured", "extrasolar", "star"],
         "nm": list(range(100, 1005, 5)),
         "br": [6e-05, 0.00025, 0.00576, 0.03232, 0.00055, 0.08193, 0.63839, 1.10497, 1.31761, 1.49697, 1.59407, 1.56707, 1.62778, 1.52787, 1.48626, 1.4522, 
         1.47706, 1.37099, 1.36909, 1.35627, 1.2874, 1.23782, 1.2184, 1.12704, 1.10038, 1.03818, 1.02341, 0.93665, 0.89169, 0.89966, 0.89559, 0.84866, 
@@ -94,7 +165,7 @@ objects = {
         0.17369, 0.18799, 0.19469, 0.19582, 0.17148, 0.16286, 0.18356, 0.18016, 0.17867, 0.17445, 0.16444, 0.13792, 0.16047, 0.16176, 0.16256, 0.15818, 
         0.15698, 0.1527, 0.15107, 0.14542, 0.13953]
         },
-    "Sun|1": {"tags": ["featured", "solar_system", "star"],
+    "Sun|CALSPEC": {"tags": ["featured", "solar_system", "star"],
         "nm": list(range(200, 1005, 5)),
         "br": [0.0014, 0.01011, 0.02381, 0.03433, 0.04319, 0.0517, 0.04901, 0.04446, 0.04279, 0.055, 0.05044, 0.07057, 0.09784, 0.22107, 0.23546, 0.18081, 
         0.13324, 0.24966, 0.47614, 0.50681, 0.44031, 0.57326, 0.59473, 0.63443, 0.69563, 0.79136, 0.95555, 0.87621, 0.91949, 0.87208, 0.92131, 0.98853, 
@@ -108,14 +179,14 @@ objects = {
         0.77385, 0.78083, 0.78548, 0.76315, 0.7571, 0.76035, 0.74407, 0.7436, 0.73145, 0.71822, 0.7206, 0.71192, 0.70569, 0.69804, 0.6884, 0.68677, 
         0.68053]
         },
-    "Mercury|2": {"tags": ["featured", "solar_system", "planet"],
+    "Mercury|Mallama2017": {"tags": ["featured", "solar_system", "planet"],
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.087, 0.105, 0.142, 0.158, 0.172, 0.180, 0.208], "albedo": True
         },
-    "Mercury|3": {"tags": ["solar_system", "planet"],
+    "Mercury|Crow2011": {"tags": ["solar_system", "planet"],
         "nm": [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5], "br": [0.61, 0.56, 0.66, 0.71, 0.86, 1.00, 1.37, 1.50, 1.77, 2.01],
         "albedo": 0.142
         },
-    "Mercury|24": {"tags": ["solar_system", "planet"],
+    "Mercury|Madden2018": {"tags": ["solar_system", "planet"],
         "nm": [299.63, 315.33, 335.22, 348.71, 366.62, 385.46, 406.4, 429.43, 448.27, 467.11, 490.14, 513.17, 536.2, 559.23, 582.25, 605.28, 628.31,
         651.34, 674.37, 697.4, 720.43, 743.46, 766.49, 789.51, 812.54, 835.57, 858.6, 881.63, 904.66, 927.69, 950.72, 973.74, 996.77],
         "br": [0.00765, 0.00849, 0.00927, 0.01017, 0.01104, 0.01178, 0.01255, 0.01318, 0.01378, 0.01455, 0.01536, 0.01595, 0.01637, 0.01665, 0.01706,
@@ -123,28 +194,28 @@ objects = {
         0.02258, 0.02302],
         "albedo": True
         },
-    "Venus|2": {"tags": ["featured", "solar_system", "planet"],
+    "Venus|Mallama2017": {"tags": ["featured", "solar_system", "planet"],
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.348, 0.658, 0.689, 0.658, 0.708, 0.640, 0.584], "albedo": True
         },
-    "Venus|3": {"tags": ["solar_system", "planet"],
+    "Venus|Crow2011": {"tags": ["solar_system", "planet"],
         "nm": [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5], "br": [0.59, 0.64, 0.72, 0.58, 0.95, 1.00, 1.16, 1.08, 1.16, 1.12],
         "albedo": 0.689
         },
-    "Venus|24": {"tags": ["solar_system", "planet"],
+    "Venus|Madden2018": {"tags": ["solar_system", "planet"],
         "nm": [480.52, 600.74, 722.74, 807.16, 887.92, 966.48, 996.22],
         "br": [0.4762, 0.46407, 0.45882, 0.45564, 0.44893, 0.44337, 0.42979],
         "albedo": True
         },
-    "Earth|2": {"tags": ["solar_system", "planet"],
+    "Earth|Mallama2017": {"tags": ["solar_system", "planet"],
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.688, 0.512, 0.434, 0.392, 0.418, 0.396, 0.430], "albedo": True
         },
-    "Earth|3": {"tags": ["featured", "solar_system", "planet"],
+    "Earth|Crow2011": {"tags": ["featured", "solar_system", "planet"],
         "nm": [350, 450, 550, 650, 750, 850, 950], "br": [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79], "albedo": 0.434
         },
-    "Moon|3": {"tags": ["featured", "solar_system", "moon"],
-        "nm": [350, 450, 550, 650, 750, 850, 950], "br": [13.83, 18.06, 22.54, 26.68, 30.74, 34.86, 34.14], "albedo": 0.09948, # |24
+    "Moon|Crow2011": {"tags": ["featured", "solar_system", "moon"],
+        "nm": [350, 450, 550, 650, 750, 850, 950], "br": [13.83, 18.06, 22.54, 26.68, 30.74, 34.86, 34.14], "albedo": 0.09948, # |Madden2018
     },
-    "Moon|24": {"tags": ["solar_system", "moon"],
+    "Moon|Madden2018": {"tags": ["solar_system", "moon"],
         "nm": list(range(450, 895, 5)),
         "br": [0.12894, 0.12827, 0.12833, 0.12049, 0.12152, 0.11801, 0.11888, 0.10276, 0.10624, 0.10734, 0.10659, 0.10483, 0.10482, 0.10586, 0.10583, 0.10377, 
         0.10273, 0.10111, 0.10124, 0.09872, 0.09948, 0.09881, 0.09755, 0.09794, 0.09592, 0.09507, 0.09502, 0.0956, 0.09492, 0.09621, 0.09716, 0.0979, 0.09899,
@@ -154,20 +225,20 @@ objects = {
         0.11203, 0.11971, 0.10748, 0.11364, 0.10462, 0.10882],
         "albedo": True
     },
-    "Mars|2": {"tags": ["solar_system", "planet"],
+    "Mars|Mallama2017": {"tags": ["solar_system", "planet"],
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.060, 0.088, 0.170, 0.250, 0.288, 0.285, 0.330], "albedo": True
     },
-    "Mars|3": {"tags": ["featured", "solar_system", "planet"],
+    "Mars|Crow2011": {"tags": ["featured", "solar_system", "planet"],
         "nm": [350, 450, 550, 650, 750, 850, 950], "br": [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31], "albedo": 0.170
     },
-    "Mars:B|4": {"tags": ["featured", "solar_system", "planet", "surface_feature"],
+    "Mars:B|USGSarchive": {"tags": ["featured", "solar_system", "planet", "surface_feature"],
         "nm": [330, 342, 363, 381, 404, 440, 475, 504, 540, 566, 600, 633, 666, 700, 704.7, 716.4, 728.9, 739.8, 751.9, 763.6, 775.6, 786.3, 799, 811.7,
         822.4, 837.1, 849.8, 862.5],
         "br": [0.091700, 0.095981, 0.108666, 0.098961, 0.130791, 0.180553, 0.247580, 0.302547, 0.398298, 0.527668, 0.704229, 0.790133, 0.861244, 0.907984,
         0.927670, 0.950918, 0.968006, 0.973932, 1.007903, 1.009743, 0.983539, 0.998712, 1.002135, 0.990941, 0.984577, 0.981692, 0.969340, 0.963597],
         "albedo": 0.26 # https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2001JE001580
         },
-    "Mars:D|4": {"tags": ["featured", "solar_system", "planet", "surface_feature"],
+    "Mars:D|USGSarchive": {"tags": ["featured", "solar_system", "planet", "surface_feature"],
         "nm": [330, 342, 363, 381, 404, 440, 475, 504, 540, 566, 600, 633, 644.1, 656, 667.9, 679.9, 691.7, 704.7, 716.4, 728.9, 739.8, 751.9, 763.6,
         775.6, 786.3, 799, 811.7, 822.4, 837.1, 849.8, 862.5],
         "br": [0.214259, 0.225981, 0.208343, 0.207151, 0.242350, 0.304599, 0.368299, 0.435753, 0.552943, 0.686686, 0.832221, 0.931029, 1.086725, 1.096983, 
@@ -175,32 +246,32 @@ objects = {
         1.026548, 1.020545, 1.028644],
         "albedo": 0.12 # https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2001JE001580
         },
-    "Mars|24": {"tags": ["solar_system", "planet"],
+    "Mars|Madden2018": {"tags": ["solar_system", "planet"],
         "nm": [316.04, 360.96, 389.97, 435.05, 464.12, 502.86, 528.88, 567.92, 597.46, 626.82, 659.28, 697.97, 717.38, 762.51, 804.31, 846.12, 900.65,
         951.86, 993.64],
         "br": [0.04554, 0.04851, 0.05933, 0.07176, 0.0866, 0.10343, 0.12899, 0.16342, 0.20522, 0.23077, 0.24945, 0.25602, 0.26244, 0.26437, 0.2722, 0.28349,
         0.26732, 0.24827, 0.25628],
         "albedo": True
         },
-    "Phobos|21": {"tags": ["featured", "solar_system", "moon"],
+    "Phobos|Pajola2013": {"tags": ["featured", "solar_system", "moon"],
         "nm": [245.5, 258.0, 263.5, 295.0, 308.5, 355.0, 360.0, 374.5, 387.0, 480.0, 535.0, 571.0, 589.5, 611.5, 650.5, 700.5, 742.5, 804.5, 882.5, 932.0,
         992.0],
         "br": [0.01305, 0.01312, 0.01484, 0.01489, 0.01699, 0.01766, 0.02037, 0.02137, 0.02177, 0.02641, 0.02769, 0.02743, 0.02732, 0.02835, 0.03083,
         0.03316, 0.03499, 0.03713, 0.03940, 0.04057, 0.03880],
         "albedo": 0.071 # Geom. ! https://ssd.jpl.nasa.gov/?sat_phys_par
         },
-    "Deimos|22, 23": {"tags": ["featured", "solar_system", "moon"],
+    "Deimos|Fraeman2013, Pang1980": {"tags": ["featured", "solar_system", "moon"],
         "nm": [250, 300, 350, 400, 450, 500, 550, 600, 700, 750, 800],
         "br": [0.04, 0.05, 0.051, 0.05, 0.049, 0.053, 0.055, 0.058, 0.062, 0.067, 0.069],
         "albedo": 0.068 # Geom. ! https://ssd.jpl.nasa.gov/?sat_phys_par
         },
-    "Jupiter|2": {"tags": ["solar_system", "planet", "jovian_system"],
+    "Jupiter|Mallama2017": {"tags": ["solar_system", "planet", "jovian_system"],
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.358, 0.443, 0.538, 0.513, 0.495, 0.389, 0.321]
     },
-    "Jupiter|3": {"tags": ["solar_system", "planet", "jovian_system"],
+    "Jupiter|Crow2011": {"tags": ["solar_system", "planet", "jovian_system"],
         "nm": [350, 450, 550, 650, 750, 850], "br": [0.604, 0.824, 1.000, 1.006, 0.832, 0.636]
     },
-    "Jupiter|5": {"tags": ["featured", "solar_system", "planet", "jovian_system"],
+    "Jupiter|Karkoshschka1994": {"tags": ["featured", "solar_system", "planet", "jovian_system"],
         "nm": list(range(300, 1000, 5)),
         "br": [0.29378, 0.28429, 0.27608, 0.27136, 0.27249, 0.27212, 0.27459, 0.28014, 0.28171, 0.28694, 0.29027, 0.29465, 0.30181, 0.30318, 0.30942, 
         0.31845, 0.32228, 0.32985, 0.33479, 0.3483, 0.34522, 0.35446, 0.36173, 0.3716, 0.38007, 0.38811, 0.39714, 0.40009, 0.40802, 0.4144, 0.42059, 
@@ -213,196 +284,196 @@ objects = {
         0.41455, 0.4393, 0.44514, 0.42942, 0.43015, 0.37152, 0.23525, 0.18172, 0.18811, 0.15767, 0.10329, 0.07357, 0.08545],
         "albedo": True
         },
-    "Io:T|4": {"tags": ["featured", "solar_system", "moon", "jovian_system", "regular"],
+    "Io:T|USGSarchive": {"tags": ["featured", "solar_system", "moon", "jovian_system", "regular"],
         "nm": [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 739.8, 751.9, 763.6, 775.6, 786.3, 799, 811.7, 822.4, 837.1, 849.8, 862.5],
         "br": [0.126856, 0.161157, 0.189998, 0.312668, 0.455349, 0.642046, 0.775382, 0.801427, 0.811630, 0.890139, 0.942953, 1.004252, 1.005697, 1.015561,
         1.031987, 1.019722, 1.008961, 1.000501, 1.015732, 1.006328, 1.003697, 0.986871, 0.973683, 0.987817],
-        "albedo": 0.5014384 # |24
+        "albedo": 0.5014384 # |Madden2018
         },
-    "Io|24": {"tags": ["solar_system", "moon", "jovian_system", "regular"],
+    "Io|Madden2018": {"tags": ["solar_system", "moon", "jovian_system", "regular"],
         "nm": [295.98, 349.54, 376.84, 395.48, 405.46, 428.85, 443.62, 475.98, 538.43, 600.68, 672.13, 787.28, 880.37, 964.69],
         "br": [0.06645, 0.09565, 0.13699, 0.18699, 0.24564, 0.31289, 0.39051, 0.46464, 0.49727, 0.51954, 0.56077, 0.57946, 0.5982, 0.62042],
         "albedo": True
         },
-    "Europa:T|4": {"tags": ["featured", "solar_system", "moon", "jovian_system", "regular"],
+    "Europa:T|USGSarchive": {"tags": ["featured", "solar_system", "moon", "jovian_system", "regular"],
         "nm": [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
         "br": [0.352826, 0.410782, 0.467415, 0.602579, 0.688769, 0.806425, 0.839300, 0.852109, 0.913667, 0.961235, 0.979446, 1.006591, 1.026941, 1.038414,
         1.067850, 1.062889, 1.063046],
-        "albedo": 0.6110393 # |24
+        "albedo": 0.6110393 # |Madden2018
         },
-    "Europa:T|24": {"tags": ["solar_system", "moon", "jovian_system", "regular"],
+    "Europa:T|Madden2018": {"tags": ["solar_system", "moon", "jovian_system", "regular"],
         "nm": [340.98, 358.07, 375.17, 381.3, 391.27, 419.79, 441.32, 451.3, 459.94, 468.22, 476.49, 484.82, 492.05, 503.62, 518.47, 551.04, 598.92, 647.01,
         695.29, 743.72, 792.14, 840.63, 889.18, 931.13, 954.13, 995.11],
         "br": [0.38563, 0.40049, 0.41506, 0.42872, 0.44588, 0.46115, 0.47493, 0.49191, 0.50931, 0.52444, 0.53987, 0.55339, 0.5672, 0.58258, 0.59866, 0.61138,
         0.62658, 0.63586, 0.63949, 0.639, 0.63841, 0.63616, 0.63216, 0.6371, 0.64146, 0.62304],
         "albedo": True
         },
-    "Ganymede:L|4": {"tags": ["featured", "solar_system", "moon", "jovian_system", "regular"],
+    "Ganymede:L|USGSarchive": {"tags": ["featured", "solar_system", "moon", "jovian_system", "regular"],
         "nm": [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
         "br": [0.488778, 0.590744, 0.632155, 0.752500, 0.783059, 0.869610, 0.918507, 0.955278, 0.973874, 1.010833, 1.021557, 1.046712, 1.040900, 1.035977,
         1.049606, 1.044146, 1.036557],
-        "albedo": 0.4636778 # |24
+        "albedo": 0.4636778 # |Madden2018
         },
-    "Ganymede:L|24": {"tags": ["solar_system", "moon", "jovian_system", "regular"],
+    "Ganymede:L|Madden2018": {"tags": ["solar_system", "moon", "jovian_system", "regular"],
         "nm": [320.0, 336.21, 352.99, 363.67, 377.95, 388.61, 404.13, 424.95, 446.14, 463.01, 478.07, 506.08, 548.23, 573.42, 625.63, 680.99, 715.56,
         779.75, 830.75, 876.4, 932.56, 968.8],
         "br": [0.24109, 0.26866, 0.29261, 0.30188, 0.32175, 0.34435, 0.36224, 0.37519, 0.39892, 0.42008, 0.4301, 0.44725, 0.463, 0.47268, 0.49018, 0.50107,
         0.49825, 0.48741, 0.48884, 0.49226, 0.49704, 0.49245],
         "albedo": True
         },
-    "Callisto:L|4": {"tags": ["featured", "solar_system", "moon", "jovian_system", "regular"],
+    "Callisto:L|USGSarchive": {"tags": ["featured", "solar_system", "moon", "jovian_system", "regular"],
         "nm": [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 837.1, 849.8, 862.5],
         "br": [0.406242, 0.456089, 0.518130, 0.652152, 0.691349, 0.777651, 0.840575, 0.881522, 0.918704, 0.941487, 0.969265, 0.990831, 0.997041, 0.993501,
         1.007422, 0.986979, 1.001239, 0.985442, 1.006188],
-        "albedo": 0.1688978 # |24
+        "albedo": 0.1688978 # |Madden2018
         },
-    "Callisto:L|24": {"tags": ["solar_system", "moon", "jovian_system", "regular"],
+    "Callisto:L|Madden2018": {"tags": ["solar_system", "moon", "jovian_system", "regular"],
         "nm": [353.4, 377.13, 402.86, 433.37, 496.32, 544.31, 592.48, 640.67, 666.97, 745.88, 794.39, 842.94, 891.47, 926.57],
         "br": [0.0891, 0.10305, 0.12241, 0.1311, 0.15594, 0.16799, 0.17514, 0.18138, 0.18453, 0.19318, 0.19019, 0.18602, 0.18271, 0.18578],
         "albedo": True
         },
-    "Himalia|34": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Himalia|Rettig2001": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.632, "V-R": 0.375}, "sun": True
     },
-    "Elara|34": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Elara|Rettig2001": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.66, "V-R": 0.357}, "sun": True
     },
-    "Pasiphae|33": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Pasiphae|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.74, "V-R": 0.38, "V-I": 0.74}, "sun": True
     },
-    "Pasiphae (weighted)|33": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Pasiphae (weighted)|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.71, "V-R": 0.39, "V-I": 0.75}, "sun": True
     },
-    "Pasiphae|34": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Pasiphae|Rettig2001": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.68, "V-R": 0.41}, "sun": True
     },
-    "Sinope|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Sinope|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.77, "V-R": 0.48}, "sun": True
     },
-    "Sinope|33": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Sinope|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.84, "V-R": 0.46, "V-I": 0.93}, "sun": True
     },
-    "Sinope|34": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Sinope|Rettig2001": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.749, "V-R": 0.481}, "sun": True
     },
-    "Lysithea|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Lysithea|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.41}, "sun": True
     },
-    "Lysithea|33": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Lysithea|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.36, "V-I": 0.74}, "sun": True
     },
-    "Lysithea|34": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Lysithea|Rettig2001": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.671, "V-R": 0.378}, "sun": True
     },
-    "Carme|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Carme|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.76, "V-R": 0.48}, "sun": True
     },
-    "Carme|33": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Carme|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.76, "V-R": 0.47, "V-I": 0.97}, "sun": True
     },
-    "Carme|34": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Carme|Rettig2001": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.445}, "sun": True
     },
-    "Ananke|33": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Ananke|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.90, "V-R": 0.38, "V-I": 0.86}, "sun": True
     },
-    "Ananke (weighted)|33": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Ananke (weighted)|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.77, "V-R": 0.42, "V-I": 0.83}, "sun": True
     },
-    "Ananke|34": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Ananke|Rettig2001": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.758, "V-R": 0.428}, "sun": True
     },
-    "Leda|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Leda|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.66, "V-R": 0.43}, "sun": True
     },
-    "Leda|34": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Leda|Rettig2001": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.644, "V-R": 0.348}, "sun": True
     },
-    "Callirrhoe|33": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Callirrhoe|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.50, "V-I": 1.02}, "sun": True
     },
-    "Themisto|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Themisto|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.80, "V-R": 0.48}, "sun": True
     },
-    "Themisto|33": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Themisto|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.83, "V-R": 0.46, "V-I": 0.94}, "sun": True
     },
-    "Megaclite|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Megaclite|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.82, "V-R": 0.44}, "sun": True
     },
-    "Megaclite|33": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Megaclite|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.94, "V-R": 0.41, "V-I": 1.05}, "sun": True
     },
-    "Taygete|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Taygete|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.84, "V-R": 0.47}, "sun": True
     },
-    "Taygete|33": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Taygete|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.56, "V-R": 0.52, "V-I": 0.96}, "sun": True
     },
-    "Chaldene|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Chaldene|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.82, "V-R": 0.50}, "sun": True
     },
-    "Harpalyke|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Harpalyke|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.70, "V-R": 0.42}, "sun": True
     },
-    "Kalyke|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Kalyke|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.69, "V-R": 0.46}, "sun": True
     },
-    "Kalyke|33": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Kalyke|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.94, "V-R": 0.705, "V-I": 0.890}, "sun": True
     },
-    "Iocaste|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Iocaste|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.86, "V-R": 0.38}, "sun": True
     },
-    "Iocaste|33": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Iocaste|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.63, "V-R": 0.36, "V-I": 0.62}, "sun": True
     },
-    "Erinome|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Erinome|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.42}, "sun": True
     },
-    "Isonoe|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Isonoe|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.78, "V-R": 0.53}, "sun": True
     },
-    "Praxidike|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Praxidike|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.71, "V-R": 0.32}, "sun": True
     },
-    "Praxidike|33": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Praxidike|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.77, "V-R": 0.34, "V-I": 0.74}, "sun": True
     },
-    "Autonoe|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Autonoe|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.51}, "sun": True
     },
-    "Thyone|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Thyone|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.71, "V-R": 0.45}, "sun": True
     },
-    "Hermippe|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Hermippe|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.73, "V-R": 0.49}, "sun": True
     },
-    "Callirrhoe|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Callirrhoe|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.81, "V-R": 0.23}, "sun": True
     },
-    "Eukelade|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Eukelade|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.79, "V-R": 0.50}, "sun": True
     },
-    "Cyllene|30": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+    "Cyllene|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.73, "V-R": 0.46}, "sun": True
     },
-    "Jovian irregulars|30": {"tags": ["featured", "solar_system", "class", "moon", "jovian_system", "irregular"],
+    "Jovian irregulars|Graykowski2018": {"tags": ["featured", "solar_system", "class", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.75, "V-R": 0.44}, "sun": True, "albedo": 0.04 # estimation
     },
-    "Jovian irregulars i=28°|33": {"tags": ["featured", "solar_system", "class", "moon", "jovian_system", "irregular"],
+    "Jovian irregulars i=28°|Grav2003": {"tags": ["featured", "solar_system", "class", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.66, "V-R": 0.36}, "sun": True, "albedo": 0.04 # estimation
     },
-    "Jovian irregulars i=149°|33": {"tags": ["featured", "solar_system", "class", "moon", "jovian_system", "irregular"],
+    "Jovian irregulars i=149°|Grav2003": {"tags": ["featured", "solar_system", "class", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.75, "V-R": 0.41}, "sun": True, "albedo": 0.04 # estimation
     },
-    "Saturn|2": {"tags": ["solar_system", "planet", "saturnian_system"],
+    "Saturn|Mallama2017": {"tags": ["solar_system", "planet", "saturnian_system"],
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.203, 0.339, 0.499, 0.646, 0.568, 0.543, 0.423]
     },
-    "Saturn|3": {"tags": ["solar_system", "planet", "saturnian_system"],
+    "Saturn|Crow2011": {"tags": ["solar_system", "planet", "saturnian_system"],
         "nm": [350, 450, 550, 650, 750, 850], "br": [0.445, 0.684, 1.000, 1.144, 1.001, 0.776]
     },
-    "Saturn|5": {"tags": ["featured", "solar_system", "planet", "saturnian_system"],
+    "Saturn|Karkoshschka1994": {"tags": ["featured", "solar_system", "planet", "saturnian_system"],
         "nm": list(range(300, 1000, 5)),
         "br": [0.25845, 0.25605, 0.24952, 0.23874, 0.23387, 0.22685, 0.22264, 0.21964, 0.21405, 0.21096, 0.20684, 0.20468, 0.20455, 0.20151, 0.20191, 
         0.20496, 0.20594, 0.20962, 0.21328, 0.22295, 0.22405, 0.23403, 0.24293, 0.25509, 0.26686, 0.27894, 0.29168, 0.30152, 0.31439, 0.32584, 0.33679, 
@@ -415,7 +486,7 @@ objects = {
         0.54184, 0.54968, 0.52981, 0.50034, 0.50075, 0.43722, 0.27446, 0.22052, 0.24216, 0.22974, 0.13768, 0.10328, 0.12643],
         "albedo": True
         },
-    "Rings|4": {"tags": ["featured", "solar_system", "ring", "saturnian_system"],
+    "Rings|USGSarchive": {"tags": ["featured", "solar_system", "ring", "saturnian_system"],
         "nm": [326, 343, 360, 383, 403, 435, 469, 500, 534, 566, 599, 633, 644.1, 656, 667.9, 679.9, 691.7, 704.7, 716.4, 728.9, 739.8, 751.9, 763.6,
         775.6, 786.3, 799, 811.7, 822.4, 837.1, 849.8, 862.5],
         "br": [0.3132, 0.3528, 0.3933, 0.4455, 0.5112, 0.5886, 0.6966, 0.7686, 0.8604, 0.9000, 0.9234, 0.9612, 1.081513, 1.065072, 1.088894, 1.094878,
@@ -423,7 +494,7 @@ objects = {
         1.016596],
         "albedo": 0.5
         },
-    "Enceladus|24": {"tags": ["featured", "solar_system", "moon", "saturnian_system", "regular"],
+    "Enceladus|Madden2018": {"tags": ["featured", "solar_system", "moon", "saturnian_system", "regular"],
         "nm": list(range(350, 890, 5)),
         "br": [0.8816, 0.87372, 0.87059, 0.87494, 0.86546, 0.85415, 0.84686, 0.85811, 0.86617, 0.8733, 0.88373, 0.8831, 0.87806, 0.87006, 0.86713, 0.86532,
         0.86426, 0.87688, 0.88714, 0.88488, 0.89243, 0.89924, 0.90296, 0.90052, 0.90437, 0.91443, 0.91511, 0.91539, 0.92768, 0.92002, 0.91779, 0.9203,
@@ -434,23 +505,23 @@ objects = {
         0.84243, 0.84372, 0.84021, 0.84098, 0.84359, 0.84824, 0.84469, 0.84304, 0.8458, 0.84796, 0.85031, 0.85254],
         "albedo": True
         },
-    "Tethys|26": {"tags": ["featured", "solar_system", "moon", "saturnian_system", "regular"],
+    "Tethys|Filacchione2018": {"tags": ["featured", "solar_system", "moon", "saturnian_system", "regular"],
         "nm": [350, 440, 550, 700, 950],
         "br": [0.75042, 0.77108, 0.79707, 0.76842, 0.74823],
         "albedo": True
         },
-    "Dione|27": {"tags": ["featured", "solar_system", "moon", "saturnian_system", "regular"],
+    "Dione|Filacchione2017": {"tags": ["featured", "solar_system", "moon", "saturnian_system", "regular"],
         "nm": [350, 440, 550, 700, 950],
         "br": [0.57582, 0.61407, 0.61977, 0.58411, 0.58268],
         "albedo": True
         },
-    "Rhea|4": {"tags": ["featured", "solar_system", "moon", "saturnian_system", "regular"],
+    "Rhea|USGSarchive": {"tags": ["featured", "solar_system", "moon", "saturnian_system", "regular"],
         "nm": [325, 350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
         "br": [0.734770, 0.732256, 0.745028, 0.844831, 0.859745, 0.910340, 0.925726, 0.991097, 0.992538, 1.016375, 1.006958, 1.049296, 1.060323, 1.034402,
         1.082394, 1.054788, 1.060017, 1.028328],
-        "albedo": 0.75691 # |24
+        "albedo": 0.75691 # |Madden2018
         },
-    "Rhea|24": {"tags": ["solar_system", "moon", "saturnian_system", "regular"],
+    "Rhea|Madden2018": {"tags": ["solar_system", "moon", "saturnian_system", "regular"],
         "nm": list(range(450, 895, 5)),
         "br": [0.80064, 0.79731, 0.82162, 0.79365, 0.83878, 0.81235, 0.85642, 0.80113, 0.8009, 0.79458, 0.78575, 0.77766, 0.77484, 0.78457, 0.76513, 0.76585, 
         0.76538, 0.75955, 0.77142, 0.75809, 0.75691, 0.75356, 0.74991, 0.74386, 0.73731, 0.72666, 0.72249, 0.73429, 0.71973, 0.71943, 0.71654, 0.71214,
@@ -460,10 +531,10 @@ objects = {
         0.59506, 0.52898, 0.57511, 0.53865, 0.54182, 0.55485, 0.51589, 0.53527],
         "albedo": True
         },
-    "Titan|3": {"tags": ["solar_system", "moon", "saturnian_system", "regular"],
+    "Titan|Crow2011": {"tags": ["solar_system", "moon", "saturnian_system", "regular"],
         "nm": [350, 450, 550, 650, 750, 850], "br": [0.344, 0.584, 1.000, 1.248, 1.101, 0.879]
     },
-    "Titan|5": {"tags": ["featured", "solar_system", "moon", "saturnian_system", "regular"],
+    "Titan|Karkoshschka1994": {"tags": ["featured", "solar_system", "moon", "saturnian_system", "regular"],
         "nm": list(range(300, 1000, 5)),
         "br": [0.06505, 0.05856, 0.05638, 0.05807, 0.0603, 0.06186, 0.06338, 0.06517, 0.06666, 0.06874, 0.07017, 0.07212, 0.07408, 0.07608, 0.07853, 
         0.0811, 0.0835, 0.08513, 0.08827, 0.09123, 0.09332, 0.09631, 0.09867, 0.1027, 0.10647, 0.10989, 0.11321, 0.11655, 0.12048, 0.12456, 0.12877, 
@@ -476,172 +547,172 @@ objects = {
         0.27305, 0.27734, 0.22799, 0.19868, 0.19731, 0.16681, 0.12782, 0.11507, 0.11953, 0.11382, 0.09641, 0.08534, 0.08749],
         "albedo": True
         },
-    "Phoebe|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Phoebe|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.57, "V-R": 0.34}, "sun": True
     },
-    "Phoebe|33": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Phoebe|Grav2003": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.63, "V-R": 0.35, "V-I": 0.64}, "sun": True
     },
-    "Phoebe|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Phoebe|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.27, "r-i": 0.06}, "sun": True
     },
-    "Ymir|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Ymir|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.789, "V-R": 0.438, "V-I": 0.884}, "sun": True
     },
-    "Ymir|33": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Ymir|Grav2003": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.56, "V-R": 0.52, "V-I": 0.96}, "sun": True
     },
-    "Ymir|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Ymir|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.50, "r-i": 0.25}, "sun": True
     },
-    "Paaliaq|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Paaliaq|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.86, "V-R": 0.40, "V-I": 0.92}, "sun": True
     },
-    "Paaliaq|33": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Paaliaq|Grav2003": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.77, "V-R": 0.48, "V-I": 0.94}, "sun": True
     },
-    "Tarvos|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Tarvos|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.71, "V-R": 0.42}, "sun": True
     },
-    "Tarvos|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Tarvos|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.78, "V-R": 0.43, "V-I": 0.82}, "sun": True
     },
-    "Tarvos|33": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Tarvos|Grav2003": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.77, "V-R": 0.57, "V-I": 0.88}, "sun": True
     },
-    "Tarvos|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Tarvos|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.52, "r-i": 0.30}, "sun": True
     },
-    "Ijiraq|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Ijiraq|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-R": 1.40}, "sun": True
     },
-    "Ijiraq|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Ijiraq|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 1.05, "V-R": 0.58, "V-I": 1.09}, "sun": True
     },
-    "Ijiraq|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Ijiraq|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.70, "r-i": 0.20}, "sun": True
     },
-    "Suttungr|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Suttungr|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.47, "V-R": 0.65, "V-I": 0.78}, "sun": True
     },
-    "Suttungr|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Suttungr|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.40, "r-i": 0.17}, "sun": True
     },
-    "Kiviuq|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Kiviuq|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.872, "V-R": 0.482, "V-I": 0.98}, "sun": True
     },
-    "Kiviuq|33": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Kiviuq|Grav2003": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.87, "V-R": 0.66, "V-I": 0.97}, "sun": True
     },
-    "Kiviuq|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Kiviuq|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.51, "r-i": 0.28}, "sun": True
     },
-    "Mundilfari|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Mundilfari|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.58, "V-R": 0.41, "V-I": 0.52}, "sun": True
     },
-    "Mundilfari|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Mundilfari|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.38, "r-i": 0.03}, "sun": True
     },
-    "Albiorix|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Albiorix|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.80, "V-R": 0.50}, "sun": True
     },
-    "Albiorix|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Albiorix|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.879, "V-R": 0.510, "V-I": 0.902}, "sun": True
     },
-    "Albiorix|33": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Albiorix|Grav2003": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.935, "V-R": 0.482, "V-I": 0.916}, "sun": True
     },
-    "Albiorix|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Albiorix|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.46, "r-i": 0.31}, "sun": True
     },
-    "Skathi|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Skathi|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.37, "V-I": 0.88}, "sun": True
     },
-    "Skathi|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Skathi|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.24, "r-i": -0.005}, "sun": True
     },
-    "Erriapus|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Erriapus|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.78, "V-R": 0.41}, "sun": True
     },
-    "Erriapus|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Erriapus|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.71, "V-R": 0.40, "V-I": 0.86}, "sun": True
     },
-    "Erriapus|33": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Erriapus|Grav2003": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.83, "V-R": 0.49, "V-I": 0.61}, "sun": True
     },
-    "Erriapus|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Erriapus|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.20, "r-i": 0.42}, "sun": True
     },
-    "Siarnaq|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Siarnaq|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.875, "V-R": 0.485, "V-I": 1.025}, "sun": True
     },
-    "Siarnaq|33": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Siarnaq|Grav2003": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.80, "V-R": 0.52, "V-I": 0.96}, "sun": True
     },
-    "Siarnaq|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Siarnaq|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.53, "r-i": 0.24}, "sun": True
     },
-    "Thrymr|31": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Thrymr|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.41, "V-R": 0.59, "V-I": 0.86}, "sun": True
     },
-    "Thrymr|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Thrymr|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.40, "r-i": 0.15}, "sun": True
     },
-    "Narvi|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Narvi|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-R": 1.29}, "sun": True
     },
-    "Narvi|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Narvi|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.24, "r-i": 0.42}, "sun": True
     },
-    "Bebhionn|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Bebhionn|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.61, "V-R": 0.51}, "sun": True
     },
-    "Aegir|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Aegir|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-R": 1.30}, "sun": True
     },
-    "Bergelmir|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Bergelmir|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-R": 1.10}, "sun": True
     },
-    "Bestla|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Bestla|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-R": 1.32}, "sun": True
     },
-    "Bestla|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Bestla|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.72, "r-i": 0.38}, "sun": True
     },
-    "Fornjot|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Fornjot|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-R": 1.40}, "sun": True
     },
-    "Hyrrokkin|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Hyrrokkin|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-R": 1.23}, "sun": True
     },
-    "Hyrrokkin|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Hyrrokkin|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.50, "r-i": 0.34}, "sun": True
     },
-    "Tarqeq|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Tarqeq|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-R": 1.37}, "sun": True
     },
-    "S/2007 S 2|30": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "S/2007 S 2|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-R": 1.37}, "sun": True
     },
-    "Kari|36": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
+    "Kari|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.31, "r-i": 0.53}, "sun": True
     },
-    "Saturnian irregulars|30": {"tags": ["featured", "solar_system", "class", "moon", "saturnian_system", "irregular"],
+    "Saturnian irregulars|Graykowski2018": {"tags": ["featured", "solar_system", "class", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.69, "V-R": 0.44}, "sun": True, "albedo": 0.04 # estimation
     },
-    "Saturnian irregulars i=34°|33": {"tags": ["featured", "solar_system", "class", "moon", "saturnian_system", "irregular"],
+    "Saturnian irregulars i=34°|Grav2003": {"tags": ["featured", "solar_system", "class", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.91, "V-R": 0.48}, "sun": True, "albedo": 0.04 # estimation
     },
-    "Saturnian irregulars i=46°|33": {"tags": ["featured", "solar_system", "class", "moon", "saturnian_system", "irregular"],
+    "Saturnian irregulars i=46°|Grav2003": {"tags": ["featured", "solar_system", "class", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.79, "V-R": 0.51}, "sun": True, "albedo": 0.04 # estimation
     },
-    "Uranus|2": {"tags": ["solar_system", "planet", "uranian_system"],
+    "Uranus|Mallama2017": {"tags": ["solar_system", "planet", "uranian_system"],
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.502, 0.561, 0.488, 0.264, 0.202, 0.089, 0.079]
     },
-    "Uranus|3": {"tags": ["solar_system", "planet", "uranian_system"],
+    "Uranus|Crow2011": {"tags": ["solar_system", "planet", "uranian_system"],
         "nm": [350, 450, 550, 650, 750, 850], "br": [0.984, 1.067, 1.000, 0.647, 0.292, 0.148]
     },
-    "Uranus|5": {"tags": ["featured", "solar_system", "planet", "uranian_system"],
+    "Uranus|Karkoshschka1994": {"tags": ["featured", "solar_system", "planet", "uranian_system"],
         "nm": list(range(300, 1000, 5)),
         "br": [0.53, 0.52915, 0.53383, 0.52396, 0.52481, 0.51762, 0.51994, 0.53179, 0.51993, 0.52475, 0.51689, 0.51507, 0.52749, 0.51285, 0.52179, 0.53988, 
         0.53582, 0.5555, 0.53676, 0.57531, 0.52632, 0.53684, 0.54856, 0.55668, 0.56234, 0.57533, 0.5903, 0.57235, 0.55516, 0.58489, 0.58799, 0.58555, 
@@ -654,46 +725,46 @@ objects = {
         0.15181, 0.09542, 0.08876, 0.04618, 0.01896, 0.01611, 0.01781, 0.01818, 0.01391, 0.01367, 0.01475],
         "albedo": True
         },
-    "Miranda|16": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
+    "Miranda|Avramchuk2007": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
         "nm": [250, 410, 480, 560, 750, 910], "br": [0.51, 0.49, 0.48, 0.47, 0.46, 0.45], "albedo": True # spherical is 0.34
     },
-    "Ariel|16": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
+    "Ariel|Avramchuk2007": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
         "nm": [250, 410, 480, 560, 750, 910], "br": [0.50, 0.51, 0.51, 0.51, 0.51, 0.52], "albedo": True # spherical is 0.37
     },
-    "Umbriel|16": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
+    "Umbriel|Avramchuk2007": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
         "nm": [250, 410, 480, 560, 750, 910], "br": [0.25, 0.25, 0.25, 0.25, 0.26, 0.26], "albedo": True # spherical is 0.19
     },
-    "Titania|16": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
+    "Titania|Avramchuk2007": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
         "nm": [250, 410, 480, 560, 750, 910], "br": [0.30, 0.32, 0.33, 0.34, 0.36, 0.37], "albedo": True # spherical is 0.27
     },
-    "Oberon|16": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
+    "Oberon|Avramchuk2007": {"tags": ["featured", "solar_system", "moon", "uranian_system", "regular"],
         "nm": [250, 410, 480, 560, 750, 910], "br": [0.27, 0.29, 0.30, 0.31, 0.33, 0.35], "albedo": True # spherical is 0.23
     },
-    "Caliban|30": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
+    "Caliban|Graykowski2018": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.81, "V-R": 0.47}, "sun": True
     },
-    "Sycorax|30": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
+    "Sycorax|Graykowski2018": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.81, "V-R": 0.54}, "sun": True
     },
-    "Prospero|30": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
+    "Prospero|Graykowski2018": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.81, "V-R": 0.51}, "sun": True
     },
-    "Setebos|30": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
+    "Setebos|Graykowski2018": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.78, "V-R": 0.49}, "sun": True
     },
-    "Stephano|30": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
+    "Stephano|Graykowski2018": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.97, "V-R": 0.66}, "sun": True
     },
-    "Uranian irregulars|30": {"tags": ["featured", "solar_system", "class", "moon", "uranian_system", "irregular"],
+    "Uranian irregulars|Graykowski2018": {"tags": ["featured", "solar_system", "class", "moon", "uranian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.84, "V-R": 0.53}, "sun": True, "albedo": 0.04 # estimation
     },
-    "Neptune|2": {"tags": ["solar_system", "planet"],
+    "Neptune|Mallama2017": {"tags": ["solar_system", "planet"],
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.578, 0.562, 0.442, 0.226, 0.181, 0.072, 0.067]
     },
-    "Neptune|3": {"tags": ["solar_system", "planet"],
+    "Neptune|Crow2011": {"tags": ["solar_system", "planet"],
         "nm": [350, 450, 550, 650, 750, 850], "br": [1.252, 1.235, 1.000, 0.555, 0.237, 0.132]
     },
-    "Neptune|5": {"tags": ["featured", "solar_system", "planet", "neptunian_system"],
+    "Neptune|Karkoshschka1994": {"tags": ["featured", "solar_system", "planet", "neptunian_system"],
         "nm": list(range(300, 1000, 5)),
         "br": [0.55168, 0.57462, 0.5749, 0.56581, 0.56727, 0.55883, 0.56295, 0.5772, 0.56453, 0.5712, 0.56445, 0.56291, 0.57946, 0.5619, 0.57126, 0.59178, 
         0.58364, 0.60495, 0.57921, 0.62125, 0.56071, 0.56722, 0.57935, 0.58255, 0.58109, 0.59381, 0.60457, 0.57878, 0.54865, 0.58534, 0.5848, 0.57342, 
@@ -706,411 +777,411 @@ objects = {
         0.16553, 0.08372, 0.05606, 0.05255, 0.03725, 0.02468, 0.02116, 0.02346, 0.02395, 0.01784, 0.01751, 0.01883],
         "albedo": True
         },
-    "Triton|20": {"tags": ["featured", "solar_system", "moon", "neptunian_system"],
+    "Triton|Tryka1999": {"tags": ["featured", "solar_system", "moon", "neptunian_system"],
         "nm": list(range(300, 1000, 100)),
         "br": [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
         "albedo": True # Geom. !
         },
-    "Halimede|30": {"tags": ["solar_system", "moon", "neptunian_system", "irregular"],
+    "Halimede|Graykowski2018": {"tags": ["solar_system", "moon", "neptunian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.89, "V-R": 0.56}, "sun": True
     },
-    "Nereid|30": {"tags": ["solar_system", "moon", "neptunian_system", "irregular"],
+    "Nereid|Graykowski2018": {"tags": ["solar_system", "moon", "neptunian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.67, "V-R": 0.38}, "sun": True
     },
-    "Nereid|32": {"tags": ["featured", "solar_system", "moon", "neptunian_system", "irregular"],
+    "Nereid|Schaefer2000": {"tags": ["featured", "solar_system", "moon", "neptunian_system", "irregular"],
         "filters": "Landolt", "bands": ["U", "B", "V", "R", "I"], "br": [0.90, 0.93, 1, 1.13, 0.99], "albedo": 0.24 # https://arxiv.org/abs/1601.02395
     },
-    "Neptunian irregulars|30": {"tags": ["featured", "solar_system", "class", "moon", "neptunian_system", "irregular"],
+    "Neptunian irregulars|Graykowski2018": {"tags": ["featured", "solar_system", "class", "moon", "neptunian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.77, "V-R": 0.50}, "sun": True, "albedo": 0.04 # estimation
     },
-    "C/1995O1-HB|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/1995O1-HB|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.810, "V-R": 0.390}, "sun": True
     },
-    "C/1999J2|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/1999J2|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.687, "V-R": 0.426, "R-I": 0.403}, "sun": True
     },
-    "C/2001G1|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2001G1|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.752, "V-R": 0.430, "R-I": 0.433}, "sun": True
     },
-    "C/2001M10|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "C/2001M10|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.963, "V-R": 0.350, "R-I": 0.520}, "sun": True
     },
-    "C/2002CE10-LINEA|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2002CE10-LINEA|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.770, "V-R": 0.542, "R-I": 0.504}, "sun": True
     },
-    "C/2002VQ94-LINEA|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2002VQ94-LINEA|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.850, "V-R": 0.500, "R-I": 0.480}, "sun": True
     },
-    "C/2003A2-Gleason|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2003A2-Gleason|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.610, "V-R": 0.470, "R-I": 0.460}, "sun": True
     },
-    "C/2004D1-NEAT|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2004D1-NEAT|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.430, "R-I": 0.510}, "sun": True
     },
-    "C/2006S3-Loneos|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2006S3-Loneos|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.740, "V-R": 0.580}, "sun": True
     },
-    "C/2007D1-LINEAR|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2007D1-LINEAR|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.750, "V-R": 0.440, "R-I": 0.410}, "sun": True
     },
-    "C/2008S3-Boattin|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2008S3-Boattin|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.769, "V-R": 0.448, "R-I": 0.364}, "sun": True
     },
-    "C/2009T1-McNaugh|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2009T1-McNaugh|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.640, "V-R": 0.530, "R-I": 0.450}, "sun": True
     },
-    "C/2010D4-WISE|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2010D4-WISE|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.740, "V-R": 0.460}, "sun": True
     },
-    "C/2010DG56-WISE|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2010DG56-WISE|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.770, "V-R": 0.370}, "sun": True
     },
-    "C/2010L3-Catalin|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2010L3-Catalin|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.750, "V-R": 0.420, "R-I": 0.410}, "sun": True
     },
-    "C/2010U3-Boattin|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2010U3-Boattin|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.778, "V-R": 0.520, "R-I": 0.320}, "sun": True
     },
-    "C/2011P2-PANSTAR|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2011P2-PANSTAR|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.919, "V-R": 0.323}, "sun": True
     },
-    "C/2011Q1-PANSTAR|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2011Q1-PANSTAR|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.819, "V-R": 0.489}, "sun": True
     },
-    "C/2012A1-PANSTAR|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2012A1-PANSTAR|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.740, "V-R": 0.450}, "sun": True
     },
-    "C/2012E1-Hill|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2012E1-Hill|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.790, "V-R": 0.400}, "sun": True
     },
-    "C/2012LP26-Palom|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2012LP26-Palom|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.854, "V-R": 0.516}, "sun": True
     },
-    "C/2012Q1-Kowalsk|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2012Q1-Kowalsk|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.907, "V-R": 0.537}, "sun": True
     },
-    "C/2013C2|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2013C2|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.887, "V-R": 0.533}, "sun": True
     },
-    "C/2013E1-McNaugh|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2013E1-McNaugh|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.750, "V-R": 0.480}, "sun": True
     },
-    "C/2013H2-Boattin|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2013H2-Boattin|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.770, "V-R": 0.490}, "sun": True
     },
-    "C/2013P3-Palomar|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2013P3-Palomar|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.920, "V-R": 0.450}, "sun": True
     },
-    "C/2013P4|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2013P4|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.827, "V-R": 0.487}, "sun": True
     },
-    "C/2014AA52-CATAL|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2014AA52-CATAL|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.770, "V-R": 0.410}, "sun": True
     },
-    "C/2014B1-Schwarz|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2014B1-Schwarz|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.850, "V-R": 0.580}, "sun": True
     },
-    "C/2014R1-Borisov|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2014R1-Borisov|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.810, "V-R": 0.460}, "sun": True
     },
-    "C/2014W6-Catalin|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2014W6-Catalin|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.810, "V-R": 0.450}, "sun": True
     },
-    "C/2014XB8-PANSTA|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2014XB8-PANSTA|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.790, "V-R": 0.440}, "sun": True
     },
-    "C/2015B1-PANSTAR|9": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
+    "C/2015B1-PANSTAR|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.780, "V-R": 0.450}, "sun": True
     },
-    "P/2011S1-Gibbs|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "P/2011S1-Gibbs|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 0.960, "V-R": 0.590}, "sun": True
     },
-    "1P/Halley|9": {"tags": ["featured", "solar_system", "minor_body", "comet", "comet-sp"],
+    "1P/Halley|MBOSS": {"tags": ["featured", "solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.410, "R-I": 0.390}, "sun": True, "albedo": 0.04
     },
-    "2P/Encke|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "2P/Encke|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 0.780, "V-R": 0.424, "R-I": 0.408}, "sun": True
     },
-    "6P/dArrest|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "6P/dArrest|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 0.770, "V-R": 0.563, "R-I": 0.450}, "sun": True
     },
-    "8P/Tuttle|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "8P/Tuttle|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 0.890, "V-R": 0.530, "R-I": 0.530}, "sun": True
     },
-    "10P/Tempel2|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "10P/Tempel2|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 0.800, "V-R": 0.521, "R-I": 0.520}, "sun": True
     },
-    "21P/GZ|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "21P/GZ|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 0.800, "V-R": 0.500}, "sun": True
     },
-    "22P/Kopff|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "22P/Kopff|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 0.795, "V-R": 0.519, "R-I": 0.450}, "sun": True
     },
-    "39P/Oterma|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "39P/Oterma|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 0.890, "V-R": 0.386, "R-I": 0.412}, "sun": True
     },
-    "45P/HMP|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "45P/HMP|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 1.080, "V-R": 0.440, "R-I": 0.210}, "sun": True
     },
-    "47P/AJ|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "47P/AJ|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 0.780, "V-R": 0.400}, "sun": True
     },
-    "49P/AR|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "49P/AR|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 0.770, "V-R": 0.471, "R-I": 0.444}, "sun": True
     },
-    "55P/TT|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "55P/TT|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 0.750, "V-R": 0.510, "R-I": 0.420}, "sun": True
     },
-    "86P/Wild3|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "86P/Wild3|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 1.580, "V-R": 0.555}, "sun": True
     },
-    "106P/Schuster|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "106P/Schuster|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 1.010, "V-R": 0.520, "R-I": 0.450}, "sun": True
     },
-    "107P/WH|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "107P/WH|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 0.674, "V-R": 0.361}, "sun": True
     },
-    "114P/WS|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "114P/WS|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 0.850, "V-R": 0.460, "R-I": 0.540}, "sun": True
     },
-    "143P/KM|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "143P/KM|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.580, "R-I": 0.560}, "sun": True
     },
-    "166P/2001T4|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "166P/2001T4|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.870, "V-R": 0.695, "R-I": 0.735}, "sun": True
     },
-    "166P/NEAT|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "166P/NEAT|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 0.890, "V-R": 0.560}, "sun": True
     },
-    "167P/CINEOS|9": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
+    "167P/CINEOS|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
         "filters": "Landolt", "indices": {"B-V": 0.758, "V-R": 0.516, "R-I": 0.504}, "sun": True
     },
-    "1994 EV3|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "1994 EV3|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.065, "V-R": 0.588, "R-I": 0.800}, "sun": True
     },
-    "1994 TA|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "1994 TA|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.261, "V-R": 0.672, "R-I": 0.740}, "sun": True
     },
-    "1995 HM5|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "1995 HM5|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.649, "V-R": 0.460, "R-I": 0.428}, "sun": True
     },
-    "1996 RQ20|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "1996 RQ20|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.935, "V-R": 0.558, "R-I": 0.591}, "sun": True
     },
-    "1996 RR20|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "1996 RR20|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 1.143, "V-R": 0.730, "R-I": 0.628}, "sun": True
     },
-    "1996 TK66|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "1996 TK66|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 0.993, "V-R": 0.680, "R-I": 0.551}, "sun": True
     },
-    "1996 TS66|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "1996 TS66|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 1.028, "V-R": 0.672, "R-I": 0.637}, "sun": True
     },
-    "1997 QH4|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "1997 QH4|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 1.088, "V-R": 0.641, "R-I": 0.631}, "sun": True
     },
-    "1998 FS144|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "1998 FS144|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.950, "V-R": 0.588, "R-I": 0.510}, "sun": True
     },
-    "1998 KS65|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "1998 KS65|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.090, "V-R": 0.640}, "sun": True
     },
-    "1998 UR43|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "1998 UR43|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.784, "V-R": 0.583, "R-I": 0.354}, "sun": True
     },
-    "1998 WS31|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "1998 WS31|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.726, "V-R": 0.606, "R-I": 0.439}, "sun": True
     },
-    "1998 WU24|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "1998 WU24|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.780, "V-R": 0.530, "R-I": 0.460}, "sun": True
     },
-    "1998 WV24|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "1998 WV24|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 0.770, "V-R": 0.502, "R-I": 0.450}, "sun": True
     },
-    "1998 WV31|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "1998 WV31|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.790, "V-R": 0.521, "R-I": 0.481}, "sun": True
     },
-    "1998 WX24|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "1998 WX24|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.090, "V-R": 0.727, "R-I": 0.500}, "sun": True
     },
-    "1998 WZ31|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "1998 WZ31|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.727, "V-R": 0.489, "R-I": 0.339}, "sun": True
     },
-    "1999 CB119|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "1999 CB119|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 1.212, "V-R": 0.714, "R-I": 0.645}, "sun": True
     },
-    "1999 CX131|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "1999 CX131|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 0.918, "V-R": 0.664, "R-I": 0.434}, "sun": True
     },
-    "1999 HS11|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "1999 HS11|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.121, "V-R": 0.698, "R-I": 0.600}, "sun": True
     },
-    "1999 HV11|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "1999 HV11|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.110, "V-R": 0.590}, "sun": True
     },
-    "1999 LE31|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "1999 LE31|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.748, "V-R": 0.467, "R-I": 0.521}, "sun": True
     },
-    "1999 OJ4|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "1999 OJ4|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.098, "V-R": 0.668, "R-I": 0.549}, "sun": True
     },
-    "1999 RX214|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "1999 RX214|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 1.054, "V-R": 0.593, "R-I": 0.530}, "sun": True
     },
-    "1999 TR11|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "1999 TR11|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 1.020, "V-R": 0.750, "R-I": 0.650}, "sun": True
     },
-    "2000 CL104|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "2000 CL104|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.223, "V-R": 0.600, "R-I": 0.612}, "sun": True
     },
-    "2000 FS53|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "2000 FS53|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.060, "V-R": 0.710}, "sun": True
     },
-    "2000 HE46|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "2000 HE46|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.870, "V-R": 0.550, "R-I": 0.400}, "sun": True
     },
-    "2000 KK4|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "2000 KK4|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.910, "V-R": 0.580, "R-I": 0.640}, "sun": True
     },
-    "2001 FM194|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "2001 FM194|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.760, "V-R": 0.440}, "sun": True
     },
-    "2001 KA77|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "2001 KA77|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 1.104, "V-R": 0.704, "R-I": 0.716}, "sun": True
     },
-    "2001 KD77|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "2001 KD77|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 1.123, "V-R": 0.624, "R-I": 0.565}, "sun": True
     },
-    "2001 KG77|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "2001 KG77|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.810, "V-R": 0.440}, "sun": True
     },
-    "2001 QC298|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "2001 QC298|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.750, "V-R": 0.490, "R-I": 0.480}, "sun": True
     },
-    "2001 QR322|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "2001 QR322|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 0.800, "V-R": 0.460, "R-I": 0.360}, "sun": True
     },
-    "2001 QX322|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "2001 QX322|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.914, "V-R": 0.562}, "sun": True
     },
-    "2001 XZ255|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "2001 XZ255|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.224, "V-R": 0.709}, "sun": True
     },
-    "2002 GH32|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "2002 GH32|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.990, "V-R": 0.570, "R-I": 0.590}, "sun": True
     },
-    "2002 PQ152|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "2002 PQ152|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.130, "V-R": 0.720}, "sun": True
     },
-    "2002 XV93|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "2002 XV93|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.375}, "sun": True
     },
-    "2003 FZ129|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "2003 FZ129|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.840, "V-R": 0.480, "R-I": 0.460}, "sun": True
     },
-    "2003 QA92|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "2003 QA92|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.040, "V-R": 0.630}, "sun": True
     },
-    "2003 QK91|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "2003 QK91|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.870, "V-R": 0.500, "R-I": 0.470}, "sun": True
     },
-    "2003 QQ91|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "2003 QQ91|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.670, "V-R": 0.510}, "sun": True
     },
-    "2003 UY291|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "2003 UY291|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.880, "V-R": 0.510, "R-I": 0.670}, "sun": True
     },
-    "2003 WN188|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "2003 WN188|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.780, "V-R": 0.480, "R-I": 0.500}, "sun": True
     },
-    "2004 DA62|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "2004 DA62|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.850, "V-R": 0.520, "R-I": 0.550}, "sun": True
     },
-    "2004 OJ14|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "2004 OJ14|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.900, "V-R": 0.520, "R-I": 0.540}, "sun": True
     },
-    "2004 XR190|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "2004 XR190|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.790, "V-R": 0.450, "R-I": 0.520}, "sun": True
     },
-    "2005 TN53|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "2005 TN53|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.470, "R-I": 0.470}, "sun": True
     },
-    "2006 RJ103|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "2006 RJ103|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.470, "R-I": 0.270}, "sun": True
     },
-    "2007 VH305|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "2007 VH305|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.690, "V-R": 0.491, "R-I": 0.480}, "sun": True
     },
-    "2009 YG19|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "2009 YG19|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 1.000, "V-R": 0.610}, "sun": True
     },
-    "2010 BK118|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "2010 BK118|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.794, "V-R": 0.525, "R-I": 0.480}, "sun": True
     },
-    "2010 BL4|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "2010 BL4|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.860, "V-R": 0.390, "R-I": 0.470}, "sun": True
     },
-    "2010 OM101|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "2010 OM101|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.795, "V-R": 0.588, "R-I": 0.360}, "sun": True
     },
-    "2010 OR1|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "2010 OR1|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.781, "V-R": 0.517, "R-I": 0.447}, "sun": True
     },
-    "2010 TS191|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "2010 TS191|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.760, "V-R": 0.390}, "sun": True
     },
-    "2010 TT191|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "2010 TT191|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.750, "V-R": 0.470}, "sun": True
     },
-    "2010 WG9|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "2010 WG9|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.781, "V-R": 0.492, "R-I": 0.458}, "sun": True
     },
-    "2011 HM102|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "2011 HM102|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.410, "R-I": 0.520}, "sun": True
     },
-    "2012 DR30|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "2012 DR30|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.647, "V-R": 0.563, "R-I": 0.422}, "sun": True
     },
-    "2012 VP113|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "2012 VP113|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.920, "V-R": 0.520, "R-I": 0.530}, "sun": True
     },
-    "2013 AZ60|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "2013 AZ60|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.540}, "sun": True
     },
-    "2013 BL76|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "2013 BL76|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.920, "V-R": 0.450}, "sun": True
     },
-    "2013 BO16|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "2013 BO16|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 1.140, "V-R": 0.650}, "sun": True
     },
-    "2013 CX217|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "2013 CX217|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.850, "V-R": 0.280}, "sun": True
     },
-    "2013 CY197|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "2013 CY197|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.880, "V-R": 0.510, "R-I": 0.610}, "sun": True
     },
-    "2013 KY18|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "2013 KY18|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.760, "V-R": 0.360}, "sun": True
     },
-    "2013 LD16|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "2013 LD16|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.860, "V-R": 0.440}, "sun": True
     },
-    "2013 NS11|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "2013 NS11|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.740, "V-R": 0.560}, "sun": True
     },
-    "2013 TZ158|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "2013 TZ158|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.790, "V-R": 0.536, "R-I": 0.497}, "sun": True
     },
-    "2013 YG48|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "2013 YG48|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.800, "V-R": 0.515}, "sun": True
     },
-    "2014 CW14|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "2014 CW14|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.870, "V-R": 0.510}, "sun": True
     },
-    "2014 QO441|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "2014 QO441|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.750, "V-R": 0.470}, "sun": True
     },
-    "(1) Ceres|29": {"tags": ["featured", "solar_system", "minor_body", "dwarf_planet", "asteroid", "main_belt"],
+    "(1) Ceres|SMASS": {"tags": ["featured", "solar_system", "minor_body", "dwarf_planet", "asteroid", "main_belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
         492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 
         552.5, 555, 557.5, 560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 
@@ -1133,7 +1204,7 @@ objects = {
         1.0211, 1.0244, 1.0208, 1.0103, 1.0149, 1.0207, 1.0197, 1.0182, 1.0212, 1.0178, 1.0225, 1.0236, 1.0201],
         "albedo": 0.09  # Geom. !
     },
-    "(2) Pallas|29": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
+    "(2) Pallas|SMASS": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
         492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 
         552.5, 555, 557.5, 560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 
@@ -1155,7 +1226,7 @@ objects = {
         0.9886, 0.9972, 1.0034, 0.9752, 0.9676, 0.9848, 0.9853, 1.0065, 0.9754, 0.9796, 0.9910, 0.9851, 0.9830, 0.9783, 0.9713, 0.9783, 0.9701, 0.9824, 
         0.9982, 1.0137, 1.0026, 0.9753, 0.9616, 0.9966, 0.9963, 0.9841, 0.9780, 0.9672, 0.9565, 0.9728, 0.9859]
     },
-    "(3) Juno|29": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
+    "(3) Juno|SMASS": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
         492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 
         552.5, 555, 557.5, 560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 
@@ -1176,7 +1247,7 @@ objects = {
         1.0136, 1.0103, 1.0183, 1.0180, 1.0084, 1.0057, 0.9968, 1.0097, 1.0134, 1.0022, 1.0061, 1.0157, 1.0080, 0.9991, 1.0249, 1.0192, 0.9972, 1.0067, 
         1.0091, 0.9920]
         },
-    "(4) Vesta|29": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "main_belt"],
+    "(4) Vesta|SMASS": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "main_belt"],
         "nm": [435, 437.5, 440, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 492.5, 
         495, 497.5, 500, 502.5, 505, 507.5, 510, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 552.5, 555, 557.5, 560, 
         562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 612.5, 615, 617.5, 620, 
@@ -1198,7 +1269,7 @@ objects = {
         0.7921, 0.7974, 0.7879, 0.7846, 0.7938, 0.7897, 0.7914, 0.7965, 0.7975, 0.8024, 0.7952],
         "albedo": 0.423  # Geom. !
     },
-    "(7) Iris|29": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
+    "(7) Iris|SMASS": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
         492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 
         552.5, 555, 557.5, 560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 
@@ -1220,7 +1291,7 @@ objects = {
         1.0872, 1.0854, 1.0870, 1.0893, 1.0875, 1.0799, 1.0790, 1.0700, 1.0817, 1.0761, 1.0706, 1.0673, 1.0627, 1.0630, 1.0600, 1.0613, 1.0634, 1.0603, 
         1.0583, 1.0557, 1.0558, 1.0534, 1.0574, 1.0530, 1.0481, 1.0578, 1.0556, 1.0524, 1.0596, 1.0602, 1.0577, 1.0587]
         },
-    "(16) Psyche:B|29": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "main_belt", "surface_feature"],
+    "(16) Psyche:B|SMASS": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "main_belt", "surface_feature"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
         492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 
         552.5, 555, 557.5, 560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 
@@ -1243,7 +1314,7 @@ objects = {
         1.1806, 1.1791, 1.1766, 1.1766, 1.1738, 1.1811, 1.1835, 1.1762, 1.1818, 1.1751, 1.1759, 1.1882, 1.1797, 1.1823, 1.1905],
         "albedo": 0.1888
     },
-    "(16) Psyche:D|29": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "main_belt", "surface_feature"],
+    "(16) Psyche:D|SMASS": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "main_belt", "surface_feature"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
         492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 
         552.5, 555, 557.5, 560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 
@@ -1266,7 +1337,7 @@ objects = {
         1.1806, 1.1791, 1.1766, 1.1766, 1.1738, 1.1811, 1.1835, 1.1762, 1.1818, 1.1751, 1.1759, 1.1882, 1.1797, 1.1823, 1.1905],
         "albedo": 0.128
     },
-    "(22) Kalliope|29": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
+    "(22) Kalliope|SMASS": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
         492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 
         552.5, 555, 557.5, 560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 
@@ -1287,7 +1358,7 @@ objects = {
         1.1070, 1.0918, 1.1076, 1.1169, 1.1031, 1.1048, 1.1047, 1.1048, 1.1048, 1.1179, 1.1208, 1.1317, 1.1282, 1.0959, 1.0898, 1.1340, 1.1210, 1.0982, 
         1.1426, 1.1166, 1.0794, 1.1339, 1.1567, 1.1042, 1.1493, 1.1600]
         },
-    "(31) Euphrosyne|29": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
+    "(31) Euphrosyne|SMASS": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
         492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 
         552.5, 555, 557.5, 560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 
@@ -1309,7 +1380,7 @@ objects = {
         1.0108, 1.0262, 1.0173, 1.0265, 1.0107, 1.0183, 1.0195, 1.0178, 1.0268, 1.0073, 1.0159, 1.0177, 1.0177, 1.0217, 1.0219, 1.0136, 1.0158, 1.0169, 
         1.0223, 1.0166, 1.0131, 1.0063, 1.0010, 1.0064, 1.0181, 1.0042, 1.0034, 1.0029, 1.0042, 1.0054, 1.0138, 1.0167, 1.0114]
         },
-    "(41) Daphne|29": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
+    "(41) Daphne|SMASS": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
         492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 552.5, 555, 557.5, 
         560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 612.5, 615, 617.5, 
@@ -1330,7 +1401,7 @@ objects = {
         1.0135, 1.0067, 1.0180, 1.0112, 1.0249, 1.0189, 1.0168, 1.0294, 1.0115, 1.0241, 1.0226, 1.0230, 1.0307, 1.0220, 1.0214, 0.9945, 1.0012, 1.0500, 
         1.0359, 0.9928, 1.0289, 1.0304, 1.0019, 1.0380, 1.0253, 1.0227, 1.0435]
         },
-    "(45) Eugenia|29": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
+    "(45) Eugenia|SMASS": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
         492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 
         552.5, 555, 557.5, 560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 
@@ -1352,7 +1423,7 @@ objects = {
         1.0091, 1.0133, 1.0142, 1.0123, 1.0095, 1.0073, 1.0086, 1.0113, 1.0082, 1.0090, 1.0059, 1.0031, 1.0031, 1.0059, 1.0041, 1.0029, 0.9985, 1.0018, 
         1.0037, 0.9969, 0.9911, 0.9878, 0.9920, 0.9905, 0.9872, 0.9884, 0.9881, 0.9921, 0.9904, 0.9942, 0.9891, 0.9884]
         },
-    "(87) Sylvia|29": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
+    "(87) Sylvia|SMASS": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
         492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 
         552.5, 555, 557.5, 560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 
@@ -1373,7 +1444,7 @@ objects = {
         1.0838, 1.0853, 1.0841, 1.0832, 1.0838, 1.0851, 1.0827, 1.0687, 1.0648, 1.0555, 1.0554, 1.0639, 1.0627, 1.0568, 1.0656, 1.0631, 1.0552, 1.0690, 
         1.0503, 1.0553]
         },
-    "(90) Antiope|29": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
+    "(90) Antiope|SMASS": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
         492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 542.5, 545, 547.5, 550, 552.5, 555, 557.5, 560, 562.5, 565, 567.5, 
         570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 612.5, 615, 617.5, 620, 622.5, 625, 627.5, 
@@ -1394,7 +1465,7 @@ objects = {
         0.9899, 0.9840, 0.9837, 0.9822, 0.9915, 0.9916, 0.9842, 0.9887, 0.9818, 0.9739, 0.9819, 0.9757, 0.9784, 0.9736, 0.9783, 0.9789, 0.9736, 0.9832, 
         0.9769]
         },
-    "(93) Minerva|29": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
+    "(93) Minerva|SMASS": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
         492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 
         552.5, 555, 557.5, 560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 
@@ -1415,7 +1486,7 @@ objects = {
         1.0369, 1.0227, 1.0258, 1.0252, 1.0363, 1.0399, 1.0130, 1.0175, 1.0301, 1.0214, 1.0121, 1.0114, 1.0246, 1.0285, 1.0184, 1.0277, 1.0336, 1.0282, 
         1.0226, 1.0046, 1.0074, 1.0490, 1.0280, 1.0027, 1.0142, 1.0092, 1.0014, 1.0143, 1.0226, 1.0261]
         },
-    "(107) Camilla|29": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
+    "(107) Camilla|SMASS": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
         492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 
         552.5, 555, 557.5, 560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 
@@ -1436,7 +1507,7 @@ objects = {
         1.0495, 1.0329, 1.0490, 1.0592, 1.0519, 1.0573, 1.0696, 1.0431, 1.0583, 1.0597, 1.0706, 1.0647, 1.0552, 1.0521, 1.0371, 1.0574, 1.1025, 1.0551, 
         1.0284, 1.0728, 1.0644, 1.0624, 1.0835, 1.0625, 1.0681, 1.0830]
         },
-    "(121) Hermione|29": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
+    "(121) Hermione|SMASS": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
         492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 
         552.5, 555, 557.5, 560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 
@@ -1458,7 +1529,7 @@ objects = {
         1.0145, 0.9989, 1.0076, 1.0106, 1.0170, 1.0178, 1.0141, 1.0173, 1.0160, 1.0153, 1.0164, 1.0188, 1.0171, 1.0245, 1.0255, 1.0206, 1.0204, 1.0192, 
         1.0157, 1.0214, 1.0306, 1.0299, 1.0258, 1.0285, 1.0285, 1.0293, 1.0376, 1.0450, 1.0373, 1.0326, 1.0475, 1.0497, 1.0447, 1.0492, 1.0575, 1.0634]
         },
-    "(130) Elektra|29": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
+    "(130) Elektra|SMASS": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
         492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 
         552.5, 555, 557.5, 560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 
@@ -1480,7 +1551,7 @@ objects = {
         0.9926, 0.9700, 0.9695, 0.9751, 0.9903, 0.9881, 0.9817, 0.9700, 0.9749, 0.9938, 0.9838, 0.9848, 0.9946, 0.9887, 1.0032, 0.9999, 0.9869, 0.9812, 
         0.9819, 0.9861, 0.9746, 0.9785, 0.9879, 0.9899, 0.9724, 0.9750, 0.9969, 0.9996, 0.9794, 0.9902, 0.9950, 0.9832]
         },
-    "(216) Kleopatra|29": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
+    "(216) Kleopatra|SMASS": {"tags": ["solar_system", "minor_body", "asteroid", "main_belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
         492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 
         552.5, 555, 557.5, 560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 
@@ -1502,7 +1573,7 @@ objects = {
         1.1133, 1.1164, 1.1179, 1.1084, 1.1208, 1.1111, 1.1249, 1.1013, 1.1146, 1.1105, 1.1141, 1.1142, 1.1039, 1.1116, 1.1216, 1.1153, 1.1144, 1.1160, 
         1.1169, 1.1157, 1.1139, 1.1260, 1.1244, 1.1202, 1.1208, 1.1132, 1.1046, 1.1196, 1.1154, 1.1098, 1.1166, 1.1102, 1.1178, 1.1287, 1.1304, 1.1222]
         },
-    "(433) Eros|11": { "tags": ["featured", "solar_system", "minor_body", "asteroid", "main_belt"],
+    "(433) Eros|deLeon2010": { "tags": ["featured", "solar_system", "minor_body", "asteroid", "main_belt"],
         "nm": list(range(350, 895, 5)),
         "br": [0.39114, 0.40755, 0.43474, 0.48806, 0.49886, 0.51646, 0.49042, 0.44175, 0.53512, 0.55996, 0.62863, 0.6198, 0.67636, 0.66499, 0.68589, 0.67764,
         0.68227, 0.73805, 0.7302, 0.76963, 0.7911, 0.8021, 0.8124, 0.81771, 0.82751, 0.8589, 0.87197, 0.89604, 0.89299, 0.90126, 0.91716, 0.91591, 0.91854,
@@ -1513,603 +1584,603 @@ objects = {
         1.00354, 0.9945, 1.01803, 1.14228, 1.05281, 1.18387, 1.09958, 1.16424, 0.91067],
         "albedo": 0.098 # https://www.lpi.usra.edu/meetings/lpsc2004/pdf/2080.pdf
         },
-    "(1172) Aneas|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(1172) Aneas|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.727, "V-R": 0.510, "R-I": 0.400}, "sun": True
     },
-    "(1173) Anchises|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(1173) Anchises|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.811, "V-R": 0.402, "R-I": 0.403}, "sun": True
     },
-    "(1871) Astyanax|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(1871) Astyanax|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.716, "V-R": 0.456, "R-I": 0.424}, "sun": True
     },
-    "(2060) Chiron|9": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "centaur"],
+    "(2060) Chiron|MBOSS": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.660, "V-R": 0.359, "R-I": 0.324}, "sun": True, "albedo": 0.16
     },
-    "(2223) Sarpedon|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(2223) Sarpedon|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.753, "V-R": 0.465, "R-I": 0.440}, "sun": True
     },
-    "(2357) Phereclos|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(2357) Phereclos|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.718, "V-R": 0.427, "R-I": 0.463}, "sun": True
     },
-    "(3548) Eurybates|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(3548) Eurybates|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.677, "V-R": 0.352, "R-I": 0.339}, "sun": True
     },
-    "(4035) 1986 WD|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(4035) 1986 WD|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.752, "V-R": 0.484, "R-I": 0.451}, "sun": True
     },
-    "(4829) Sergestus|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(4829) Sergestus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.851, "V-R": 0.420, "R-I": 0.372}, "sun": True
     },
-    "(5130) Ilioneus|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(5130) Ilioneus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.763, "V-R": 0.481, "R-I": 0.424}, "sun": True
     },
-    "(5145) Pholus|9": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "centaur"],
+    "(5145) Pholus|MBOSS": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.261, "V-R": 0.791, "R-I": 0.818}, "sun": True, "albedo": 0.155
     },
-    "(5511) Cloanthus|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(5511) Cloanthus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.906, "V-R": 0.442, "R-I": 0.526}, "sun": True
     },
-    "(6545) 1986 TR6|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(6545) 1986 TR6|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.734, "V-R": 0.499, "R-I": 0.436}, "sun": True
     },
-    "(6998) Tithonus|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(6998) Tithonus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.787, "V-R": 0.455, "R-I": 0.438}, "sun": True
     },
-    "(7066) Nessus|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(7066) Nessus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.090, "V-R": 0.763, "R-I": 0.689}, "sun": True
     },
-    "(7352) 1994 CO|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(7352) 1994 CO|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.713, "V-R": 0.417, "R-I": 0.397}, "sun": True
     },
-    "(8405) Asbolus|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(8405) Asbolus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.738, "V-R": 0.508, "R-I": 0.505}, "sun": True
     },
-    "(9030) 1989 UX5|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(9030) 1989 UX5|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.887, "V-R": 0.493, "R-I": 0.480}, "sun": True
     },
-    "(9430) Erichthonio|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(9430) Erichthonio|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.742, "V-R": 0.488, "R-I": 0.456}, "sun": True
     },
-    "(9818) Eurymachos|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(9818) Eurymachos|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.673, "V-R": 0.339, "R-I": 0.355}, "sun": True
     },
-    "(10199) Chariklo|9": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "centaur"],
+    "(10199) Chariklo|MBOSS": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.802, "V-R": 0.491, "R-I": 0.519}, "sun": True, "albedo": 0.035 # https://arxiv.org/abs/1409.7259
     },
-    "(10370) Hylonome|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(10370) Hylonome|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.690, "V-R": 0.469, "R-I": 0.496}, "sun": True
     },
-    "(11089) 1994 CS8|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(11089) 1994 CS8|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.689, "V-R": 0.423, "R-I": 0.384}, "sun": True
     },
-    "(11351) Leucus|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(11351) Leucus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.739, "V-R": 0.498, "R-I": 0.402}, "sun": True
     },
-    "(11488) 1988 RM11|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(11488) 1988 RM11|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.777, "V-R": 0.436, "R-I": 0.420}, "sun": True
     },
-    "(11663) 1997 GO24|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(11663) 1997 GO24|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.837, "V-R": 0.409, "R-I": 0.463}, "sun": True
     },
-    "(12917) 1998 TG16|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(12917) 1998 TG16|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.724, "V-R": 0.537, "R-I": 0.410}, "sun": True
     },
-    "(12921) 1998 WZ5|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(12921) 1998 WZ5|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.673, "V-R": 0.403, "R-I": 0.380}, "sun": True
     },
-    "(13463) Antiphos|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(13463) Antiphos|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.692, "V-R": 0.449, "R-I": 0.412}, "sun": True
     },
-    "(14707) 2000 CC20|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(14707) 2000 CC20|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.752, "V-R": 0.412, "R-I": 0.385}, "sun": True
     },
-    "(15094) Polymele|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(15094) Polymele|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.652, "V-R": 0.477, "R-I": 0.322}, "sun": True
     },
-    "(15502) 1999 NV27|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(15502) 1999 NV27|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.766, "V-R": 0.445, "R-I": 0.430}, "sun": True
     },
-    "(15504) 1999 RG33|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(15504) 1999 RG33|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.817, "V-R": 0.495, "R-I": 0.350}, "sun": True
     },
-    "(15535) 2000 AT177|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(15535) 2000 AT177|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.739, "V-R": 0.470, "R-I": 0.461}, "sun": True
     },
-    "(15760) Albion|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(15760) Albion|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 0.869, "V-R": 0.707, "R-I": 0.651}, "sun": True
     },
-    "(15788) 1993 SB|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(15788) 1993 SB|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.802, "V-R": 0.475, "R-I": 0.514}, "sun": True
     },
-    "(15789) 1993 SC|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(15789) 1993 SC|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 1.045, "V-R": 0.688, "R-I": 0.697}, "sun": True
     },
-    "(15810) Arawn|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(15810) Arawn|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 1.010, "V-R": 0.632, "R-I": 0.538}, "sun": True
     },
-    "(15820) 1994 TB|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(15820) 1994 TB|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 1.107, "V-R": 0.697, "R-I": 0.739}, "sun": True
     },
-    "(15874) 1996 TL66|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(15874) 1996 TL66|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.687, "V-R": 0.369, "R-I": 0.370}, "sun": True
     },
-    "(15875) 1996 TP66|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(15875) 1996 TP66|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 1.031, "V-R": 0.655, "R-I": 0.673}, "sun": True
     },
-    "(15883) 1997 CR29|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(15883) 1997 CR29|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.750, "V-R": 0.538, "R-I": 0.620}, "sun": True
     },
-    "(15977) 1998 MA11|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(15977) 1998 MA11|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.748, "V-R": 0.465, "R-I": 0.441}, "sun": True
     },
-    "(16684) 1994 JQ1|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(16684) 1994 JQ1|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.134, "V-R": 0.736, "R-I": 0.650}, "sun": True
     },
-    "(17416) 1988 RR10|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(17416) 1988 RR10|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.742, "V-R": 0.488, "R-I": 0.498}, "sun": True
     },
-    "(18060) 1999 XJ156|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(18060) 1999 XJ156|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.758, "V-R": 0.412, "R-I": 0.364}, "sun": True
     },
-    "(18137) 2000 OU30|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(18137) 2000 OU30|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.733, "V-R": 0.496, "R-I": 0.409}, "sun": True
     },
-    "(18268) Dardanos|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(18268) Dardanos|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.795, "V-R": 0.529, "R-I": 0.451}, "sun": True
     },
-    "(18493) Demoleon|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(18493) Demoleon|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.703, "V-R": 0.395, "R-I": 0.380}, "sun": True
     },
-    "(18940) 2000 QV49|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(18940) 2000 QV49|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.709, "V-R": 0.465, "R-I": 0.429}, "sun": True
     },
-    "(19255) 1994 VK8|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(19255) 1994 VK8|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.010, "V-R": 0.659, "R-I": 0.490}, "sun": True
     },
-    "(19299) 1996 SZ4|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(19299) 1996 SZ4|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.754, "V-R": 0.522, "R-I": 0.446}, "sun": True
     },
-    "(19308) 1996 TO66|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(19308) 1996 TO66|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.671, "V-R": 0.389, "R-I": 0.356}, "sun": True
     },
-    "(19521) Chaos|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(19521) Chaos|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.932, "V-R": 0.608, "R-I": 0.571}, "sun": True
     },
-    "(20000) Varuna|9": {"tags": ["featured", "solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(20000) Varuna|MBOSS": {"tags": ["featured", "solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.906, "V-R": 0.626, "R-I": 0.628}, "sun": True, "albedo": 0.172 # fyr02's sheet
     },
-    "(20108) 1995 QZ9|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(20108) 1995 QZ9|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.880, "V-R": 0.515}, "sun": True
     },
-    "(20738) 1999 XG191|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(20738) 1999 XG191|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.776, "V-R": 0.472, "R-I": 0.467}, "sun": True
     },
-    "(23549) Epicles|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(23549) Epicles|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.800, "V-R": 0.485, "R-I": 0.387}, "sun": True
     },
-    "(23694) 1997 KZ3|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(23694) 1997 KZ3|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.723, "V-R": 0.474, "R-I": 0.418}, "sun": True
     },
-    "(24233) 1999 XD94|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(24233) 1999 XD94|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.704, "V-R": 0.481, "R-I": 0.418}, "sun": True
     },
-    "(24341) 2000 AJ87|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(24341) 2000 AJ87|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.713, "V-R": 0.369, "R-I": 0.390}, "sun": True
     },
-    "(24380) 2000 AA160|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(24380) 2000 AA160|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.734, "V-R": 0.391, "R-I": 0.336}, "sun": True
     },
-    "(24390) 2000 AD177|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(24390) 2000 AD177|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.700, "V-R": 0.513, "R-I": 0.462}, "sun": True
     },
-    "(24420) 2000 BU22|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(24420) 2000 BU22|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.937, "V-R": 0.441, "R-I": 0.304}, "sun": True
     },
-    "(24426) 2000 CR12|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(24426) 2000 CR12|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.717, "V-R": 0.414, "R-I": 0.424}, "sun": True
     },
-    "(24444) 2000 OP32|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(24444) 2000 OP32|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.712, "V-R": 0.437, "R-I": 0.409}, "sun": True
     },
-    "(24452) 2000 QU167|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(24452) 2000 QU167|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.872, "V-R": 0.441, "R-I": 0.406}, "sun": True
     },
-    "(24467) 2000 SS165|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(24467) 2000 SS165|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.927, "V-R": 0.460, "R-I": 0.513}, "sun": True
     },
-    "(24835) 1995 SM55|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(24835) 1995 SM55|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.652, "V-R": 0.357, "R-I": 0.356}, "sun": True
     },
-    "(24952) 1997 QJ4|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(24952) 1997 QJ4|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.763, "V-R": 0.431, "R-I": 0.396}, "sun": True
     },
-    "(24978) 1998 HJ151|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(24978) 1998 HJ151|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.110, "V-R": 0.710}, "sun": True
     },
-    "(25143) Itokawa|12": { "tags": ["featured", "solar_system", "minor_body", "asteroid", "main_belt"],
+    "(25143) Itokawa|Lowry2005": { "tags": ["featured", "solar_system", "minor_body", "asteroid", "main_belt"],
         "nm": list(range(325, 1025, 25)),
         "br": [0.388, 0.568, 0.676, 0.773, 0.824, 0.856, 0.888, 0.914, 0.964, 1.0, 1.036, 1.058, 1.076, 1.094, 1.122, 1.140, 1.147, 1.144, 1.129, 1.101,
         1.068, 1.029, 1.0, 0.978, 0.975, 0.946, 0.917, 0.935],
         "albedo": 0.29 # https://academic.oup.com/pasj/article/66/3/52/1438030
         },
-    "(25347) 1999 RQ116|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(25347) 1999 RQ116|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.618, "V-R": 0.488, "R-I": 0.461}, "sun": True
     },
-    "(26181) 1996 GQ21|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "(26181) 1996 GQ21|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 0.999, "V-R": 0.697, "R-I": 0.694}, "sun": True
     },
-    "(26308) 1998 SM165|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "(26308) 1998 SM165|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 0.989, "V-R": 0.641, "R-I": 0.666}, "sun": True
     },
-    "(26375) 1999 DE9|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "(26375) 1999 DE9|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 0.967, "V-R": 0.579, "R-I": 0.568}, "sun": True
     },
-    "(28958) 2001 CQ42|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(28958) 2001 CQ42|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.730, "V-R": 0.364, "R-I": 0.230}, "sun": True
     },
-    "(28978) Ixion|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(28978) Ixion|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 1.018, "V-R": 0.605, "R-I": 0.580}, "sun": True
     },
-    "(29981) 1999 TD10|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(29981) 1999 TD10|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.808, "V-R": 0.502, "R-I": 0.511}, "sun": True
     },
-    "(30698) Hippokoon|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(30698) Hippokoon|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.715, "V-R": 0.458, "R-I": 0.412}, "sun": True
     },
-    "(31820) 1999 RT186|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(31820) 1999 RT186|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.889, "V-R": 0.520, "R-I": 0.396}, "sun": True
     },
-    "(31821) 1999 RK225|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(31821) 1999 RK225|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.980, "V-R": 0.440, "R-I": 0.461}, "sun": True
     },
-    "(31824) Elatus|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(31824) Elatus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.020, "V-R": 0.620, "R-I": 0.630}, "sun": True
     },
-    "(32430) 2000 RQ83|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(32430) 2000 RQ83|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.772, "V-R": 0.474, "R-I": 0.425}, "sun": True
     },
-    "(32532) Thereus|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(32532) Thereus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.764, "V-R": 0.501, "R-I": 0.479}, "sun": True
     },
-    "(32615) 2001 QU277|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(32615) 2001 QU277|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.807, "V-R": 0.452, "R-I": 0.474}, "sun": True
     },
-    "(32794) 1989 UE5|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(32794) 1989 UE5|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.923, "V-R": 0.393, "R-I": 0.486}, "sun": True
     },
-    "(32929) 1995 QY9|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(32929) 1995 QY9|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.740, "V-R": 0.561}, "sun": True
     },
-    "(33001) 1997 CU29|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(33001) 1997 CU29|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.157, "V-R": 0.645, "R-I": 0.634}, "sun": True
     },
-    "(33128) 1998 BU48|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(33128) 1998 BU48|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 1.044, "V-R": 0.631, "R-I": 0.644}, "sun": True
     },
-    "(33340) 1998 VG44|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(33340) 1998 VG44|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.955, "V-R": 0.555, "R-I": 0.598}, "sun": True
     },
-    "(34785) 2001 RG87|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(34785) 2001 RG87|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.728, "V-R": 0.386, "R-I": 0.419}, "sun": True
     },
-    "(35671) 1998 SN165|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(35671) 1998 SN165|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 0.712, "V-R": 0.444, "R-I": 0.437}, "sun": True
     },
-    "(38083) Rhadamanth|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(38083) Rhadamanth|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.650, "V-R": 0.527, "R-I": 0.412}, "sun": True
     },
-    "(38084) 1999 HB12|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "(38084) 1999 HB12|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 0.893, "V-R": 0.544, "R-I": 0.481}, "sun": True
     },
-    "(38628) Huya|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(38628) Huya|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.963, "V-R": 0.609, "R-I": 0.593}, "sun": True
     },
-    "(39285) 2001 BP75|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(39285) 2001 BP75|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.810, "V-R": 0.381, "R-I": 0.291}, "sun": True
     },
-    "(40314) 1999 KR16|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(40314) 1999 KR16|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 1.123, "V-R": 0.738, "R-I": 0.750}, "sun": True
     },
-    "(42301) 2001 UR163|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "(42301) 2001 UR163|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 1.290, "V-R": 0.839, "R-I": 0.673}, "sun": True
     },
-    "(42355) Typhon|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(42355) Typhon|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.758, "V-R": 0.518, "R-I": 0.378}, "sun": True
     },
-    "(44594) 1999 OX3|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(44594) 1999 OX3|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 1.138, "V-R": 0.708, "R-I": 0.640}, "sun": True
     },
-    "(47171) Lempo|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(47171) Lempo|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 1.029, "V-R": 0.693, "R-I": 0.619}, "sun": True
     },
-    "(47932) 2000 GN171|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(47932) 2000 GN171|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.960, "V-R": 0.607, "R-I": 0.617}, "sun": True
     },
-    "(47967) 2000 SL298|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(47967) 2000 SL298|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.899, "V-R": 0.489, "R-I": 0.476}, "sun": True
     },
-    "(48249) 2001 SY345|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(48249) 2001 SY345|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.758, "V-R": 0.530, "R-I": 0.420}, "sun": True
     },
-    "(48252) 2001 TL212|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(48252) 2001 TL212|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.949, "V-R": 0.467, "R-I": 0.436}, "sun": True
     },
-    "(48639) 1995 TL8|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(48639) 1995 TL8|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 1.008, "V-R": 0.621, "R-I": 0.551}, "sun": True
     },
-    "(49036) Pelion|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(49036) Pelion|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.746, "V-R": 0.556, "R-I": 0.368}, "sun": True
     },
-    "(50000) Quaoar|9": {"tags": ["featured", "solar_system", "minor_body", "dwarf_planet", "tno", "classical", "classical-h"],
+    "(50000) Quaoar|MBOSS": {"tags": ["featured", "solar_system", "minor_body", "dwarf_planet", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.958, "V-R": 0.650, "R-I": 0.610}, "sun": True, "albedo": 0.109 # fyr02's sheet
     },
-    "(51359) 2000 SC17|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(51359) 2000 SC17|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.864, "V-R": 0.447, "R-I": 0.438}, "sun": True
     },
-    "(52747) 1998 HM151|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(52747) 1998 HM151|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 0.930, "V-R": 0.620}, "sun": True
     },
-    "(52872) Okyrhoe|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(52872) Okyrhoe|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.743, "V-R": 0.495, "R-I": 0.480}, "sun": True
     },
-    "(52975) Cyllarus|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(52975) Cyllarus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.096, "V-R": 0.680, "R-I": 0.669}, "sun": True
     },
-    "(53469) 2000 AX8|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(53469) 2000 AX8|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.663, "V-R": 0.356, "R-I": 0.361}, "sun": True
     },
-    "(54598) Bienor|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(54598) Bienor|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.711, "V-R": 0.476, "R-I": 0.400}, "sun": True
     },
-    "(55565) 2002 AW197|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(55565) 2002 AW197|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.915, "V-R": 0.589, "R-I": 0.581}, "sun": True
     },
-    "(55576) Amycus|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(55576) Amycus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.111, "V-R": 0.705, "R-I": 0.666}, "sun": True
     },
-    "(55636) 2002 TX300|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(55636) 2002 TX300|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.679, "V-R": 0.359, "R-I": 0.323}, "sun": True
     },
-    "(55637) 2002 UX25|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(55637) 2002 UX25|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.979, "V-R": 0.552}, "sun": True
     },
-    "(55638) 2002 VE95|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(55638) 2002 VE95|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 1.094, "V-R": 0.733, "R-I": 0.760}, "sun": True
     },
-    "(56968) 2000 SA92|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(56968) 2000 SA92|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.986, "V-R": 0.494, "R-I": 0.509}, "sun": True
     },
-    "(58534) Logos|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(58534) Logos|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 0.990, "V-R": 0.729, "R-I": 0.602}, "sun": True
     },
-    "(59358) 1999 CL158|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(59358) 1999 CL158|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.800, "V-R": 0.390, "R-I": 0.470}, "sun": True
     },
-    "(60454) 2000 CH105|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(60454) 2000 CH105|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.019, "V-R": 0.643, "R-I": 0.583}, "sun": True
     },
-    "(60458) 2000 CM114|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "(60458) 2000 CM114|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.730, "V-R": 0.500}, "sun": True
     },
-    "(60558) Echeclus|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(60558) Echeclus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.841, "V-R": 0.502, "R-I": 0.486}, "sun": True
     },
-    "(60608) 2000 EE173|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(60608) 2000 EE173|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.665, "V-R": 0.488, "R-I": 0.543}, "sun": True
     },
-    "(60620) 2000 FD8|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "(60620) 2000 FD8|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 1.151, "V-R": 0.664, "R-I": 0.648}, "sun": True
     },
-    "(60621) 2000 FE8|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "(60621) 2000 FE8|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 0.750, "V-R": 0.480, "R-I": 0.500}, "sun": True
     },
-    "(63252) 2001 BL41|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(63252) 2001 BL41|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.718, "V-R": 0.509, "R-I": 0.381}, "sun": True
     },
-    "(65150) 2002 CA126|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(65150) 2002 CA126|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.651, "V-R": 0.377, "R-I": 0.407}, "sun": True
     },
-    "(65225) 2002 EK44|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(65225) 2002 EK44|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.693, "V-R": 0.401, "R-I": 0.334}, "sun": True
     },
-    "(65407) 2002 RP120|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(65407) 2002 RP120|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.846, "V-R": 0.489, "R-I": 0.484}, "sun": True
     },
-    "(65489) Ceto|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(65489) Ceto|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.879, "V-R": 0.547, "R-I": 0.411}, "sun": True
     },
-    "(66452) 1999 OF4|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(66452) 1999 OF4|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.032, "V-R": 0.673, "R-I": 0.601}, "sun": True
     },
-    "(66652) Borasisi|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(66652) Borasisi|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.646, "R-I": 0.647}, "sun": True
     },
-    "(69986) 1998 WW24|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(69986) 1998 WW24|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.756, "V-R": 0.463, "R-I": 0.659}, "sun": True
     },
-    "(69988) 1998 WA31|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "(69988) 1998 WA31|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 0.786, "V-R": 0.492, "R-I": 0.530}, "sun": True
     },
-    "(69990) 1998 WU31|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(69990) 1998 WU31|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.505, "R-I": 0.722}, "sun": True
     },
-    "(73480) 2002 PN34|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(73480) 2002 PN34|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.818, "V-R": 0.514}, "sun": True
     },
-    "(76804) 2000 QE|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(76804) 2000 QE|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.803, "V-R": 0.446, "R-I": 0.443}, "sun": True
     },
-    "(79360) Sila-Nunam|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(79360) Sila-Nunam|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.055, "V-R": 0.666, "R-I": 0.609}, "sun": True
     },
-    "(79978) 1999 CC158|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "(79978) 1999 CC158|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 0.996, "V-R": 0.611, "R-I": 0.619}, "sun": True
     },
-    "(79983) 1999 DF9|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(79983) 1999 DF9|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.920, "V-R": 0.710, "R-I": 0.650}, "sun": True
     },
-    "(82075) 2000 YW134|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "(82075) 2000 YW134|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 0.922, "V-R": 0.503, "R-I": 0.581}, "sun": True
     },
-    "(82155) 2001 FZ173|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(82155) 2001 FZ173|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.864, "V-R": 0.546, "R-I": 0.508}, "sun": True
     },
-    "(82158) 2001 FP185|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(82158) 2001 FP185|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.572, "R-I": 0.458}, "sun": True
     },
-    "(83982) Crantor|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(83982) Crantor|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.105, "V-R": 0.761, "R-I": 0.667}, "sun": True
     },
-    "(84522) 2002 TC302|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "(84522) 2002 TC302|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 1.067, "V-R": 0.655, "R-I": 0.660}, "sun": True
     },
-    "(84709) 2002 VW120|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(84709) 2002 VW120|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.855, "V-R": 0.462, "R-I": 0.548}, "sun": True
     },
-    "(84719) 2002 VR128|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(84719) 2002 VR128|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.935, "V-R": 0.605}, "sun": True
     },
-    "(84922) 2003 VS2|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(84922) 2003 VS2|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.930, "V-R": 0.590}, "sun": True
     },
-    "(85633) 1998 KR65|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(85633) 1998 KR65|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.095, "V-R": 0.628, "R-I": 0.790}, "sun": True
     },
-    "(86047) 1999 OY3|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(86047) 1999 OY3|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.726, "V-R": 0.345, "R-I": 0.277}, "sun": True
     },
-    "(86177) 1999 RY215|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(86177) 1999 RY215|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.719, "V-R": 0.358, "R-I": 0.631}, "sun": True
     },
-    "(87269) 2000 OO67|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(87269) 2000 OO67|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 1.080, "V-R": 0.654, "R-I": 0.593}, "sun": True
     },
-    "(87555) 2000 QB243|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(87555) 2000 QB243|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.763, "V-R": 0.383, "R-I": 0.729}, "sun": True
     },
-    "(88269) 2001 KF77|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(88269) 2001 KF77|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.080, "V-R": 0.730}, "sun": True
     },
-    "(90377) Sedna|9": {"tags": ["featured", "solar_system", "dwarf_planet", "minor_body", "tno", "detached"],
+    "(90377) Sedna|MBOSS": {"tags": ["featured", "solar_system", "dwarf_planet", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 1.179, "V-R": 0.739, "R-I": 0.654}, "sun": True, "albedo": 0.399 # fyr02's sheet
     },
-    "(90482) Orcus|9": {"tags": ["featured", "solar_system", "dwarf_planet", "minor_body", "tno", "plutino"],
+    "(90482) Orcus|MBOSS": {"tags": ["featured", "solar_system", "dwarf_planet", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.670, "V-R": 0.376, "R-I": 0.372}, "sun": True, "albedo": 0.231 # fyr02's sheet
     },
-    #"(90482) Orcus|17": {"tags": ["solar_system", "minor_body", "dwarf_planet", "tno", "plutino"],
+    #"(90482) Orcus|Howett2019": {"tags": ["solar_system", "minor_body", "dwarf_planet", "tno", "plutino"],
     #	"filters": "Hubble", "bands": ["F606W", "F814W", "F110W", "F160W"], "mag": [19.186, 18.62, 20.64, 21.65], "vega": False
     #},
-    #"Vanth|17": {"tags": ["solar_system", "minor_body", "tno", "plutino", "moon"],
+    #"Vanth|Howett2019": {"tags": ["solar_system", "minor_body", "tno", "plutino", "moon"],
     #	"filters": "Hubble", "bands": ["F606W", "F814W", "F110W", "F160W"], "mag": [21.73, 20.90, 23.3, 24.0], "vega": False
     #},
-    "(90482) Orcus|17": {"tags": ["solar_system", "minor_body", "dwarf_planet", "tno", "plutino"],
+    "(90482) Orcus|Howett2019": {"tags": ["solar_system", "minor_body", "dwarf_planet", "tno", "plutino"],
         "filters": "Landolt", "indices": {"V-I": 0.73}
     },
-    "Vanth|17": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "Vanth|Howett2019": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"V-I": 1.03}
     },
-    "(90568) 2004 GV9|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(90568) 2004 GV9|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.895, "V-R": 0.520}, "sun": True
     },
-    "(91133) 1998 HK151|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(91133) 1998 HK151|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.645, "V-R": 0.520, "R-I": 0.390}, "sun": True
     },
-    "(91205) 1998 US43|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(91205) 1998 US43|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.691, "V-R": 0.446, "R-I": 0.347}, "sun": True
     },
-    "(91554) 1999 RZ215|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(91554) 1999 RZ215|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.771, "V-R": 0.575, "R-I": 0.539}, "sun": True
     },
-    "(95626) 2002 GZ32|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(95626) 2002 GZ32|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.674, "V-R": 0.576, "R-I": 0.538}, "sun": True
     },
-    "(99328) 2001 UY123|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(99328) 2001 UY123|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.890, "V-R": 0.537, "R-I": 0.434}, "sun": True
     },
-    "(101955) Bennu|28": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "main_belt"],
+    "(101955) Bennu|LeCorre2019": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "main_belt"],
         "nm": [473.228, 549.146, 697.569, 847.937],
         "br": [0.0175, 0.01736, 0.0174, 0.01727],
         "albedo": True
     },
-    "(101955) Bennu:D|28": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "main_belt", "surface_feature"],
+    "(101955) Bennu:D|LeCorre2019": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "main_belt", "surface_feature"],
         "nm": [473.228, 549.146, 697.569, 847.937],
         "br": [0.01604, 0.01573, 0.016, 0.01605],
         "albedo": True
     },
-    "(105685) 2000 SC51|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(105685) 2000 SC51|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 1.016, "V-R": 0.444, "R-I": 0.452}, "sun": True
     },
-    "(111113) 2001 VK85|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(111113) 2001 VK85|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.822, "V-R": 0.462, "R-I": 0.558}, "sun": True
     },
-    "(118228) 1996 TQ66|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(118228) 1996 TQ66|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 1.186, "V-R": 0.670, "R-I": 0.746}, "sun": True
     },
-    "(118379) 1999 HC12|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(118379) 1999 HC12|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.894, "V-R": 0.490, "R-I": 0.343}, "sun": True
     },
-    "(118702) 2000 OM67|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "(118702) 2000 OM67|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.470, "R-I": 0.590}, "sun": True
     },
-    "(119068) 2001 KC77|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "(119068) 2001 KC77|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 0.910, "V-R": 0.560}, "sun": True
     },
-    "(119315) 2001 SQ73|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(119315) 2001 SQ73|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.670, "V-R": 0.460}, "sun": True
     },
-    "(119951) 2002 KX14|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(119951) 2002 KX14|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.050, "V-R": 0.607}, "sun": True
     },
-    "(119979) 2002 WC19|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "(119979) 2002 WC19|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 1.040, "V-R": 0.630}, "sun": True
     },
-    "(120061) 2003 CO1|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(120061) 2003 CO1|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.743, "V-R": 0.472, "R-I": 0.494}, "sun": True
     },
-    "(120132) 2003 FY128|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "(120132) 2003 FY128|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 1.021, "V-R": 0.614, "R-I": 0.540}, "sun": True
     },
-    "(120178) 2003 OP32|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(120178) 2003 OP32|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.662, "V-R": 0.375, "R-I": 0.305}, "sun": True
     },
-    "(120181) 2003 UR292|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(120181) 2003 UR292|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 1.025, "V-R": 0.635}, "sun": True
     },
-    "(120216) 2004 EW95|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(120216) 2004 EW95|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.693, "V-R": 0.375, "R-I": 0.215}, "sun": True
     },
-    "(120347) Salacia|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(120347) Salacia|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.664, "V-R": 0.403, "R-I": 0.433}, "sun": True
     },
-    "(120348) 2004 TY364|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(120348) 2004 TY364|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 1.059, "V-R": 0.601, "R-I": 0.520}, "sun": True
     },
-    "(120453) 1988 RE12|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(120453) 1988 RE12|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.826, "V-R": 0.388, "R-I": 0.483}, "sun": True
     },
-    "(121725) Aphidas|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(121725) Aphidas|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.060, "V-R": 0.648, "R-I": 0.679}, "sun": True
     },
-    "(124729) 2001 SB173|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(124729) 2001 SB173|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.992, "V-R": 0.503, "R-I": 0.424}, "sun": True
     },
-    "(127546) 2002 XU93|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(127546) 2002 XU93|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.731, "V-R": 0.410, "R-I": 0.443}, "sun": True
     },
-    "(129772) 1999 HR11|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(129772) 1999 HR11|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 0.920, "V-R": 0.530, "R-I": 0.800}, "sun": True
     },
-    "(134340) Pluto|6": {"tags": ["featured", "solar_system", "minor_body", "dwarf_planet", "tno", "plutino"],
+    "(134340) Pluto|Lorenzi2016": {"tags": ["featured", "solar_system", "minor_body", "dwarf_planet", "tno", "plutino"],
         "nm": [400.551, 423.678, 440.749, 458.37, 466.079, 493.062, 496.366, 499.119, 553.634, 555.837, 559.692, 582.819, 587.225, 630.727, 658.811, 
         670.925, 680.286, 697.907, 729.846, 761.233, 762.885, 773.348, 784.912, 790.419, 795.925, 803.084, 807.489, 812.996, 816.85, 836.674],
         "br": [0.642, 0.695, 0.766, 0.799, 0.832, 0.887, 0.872, 0.902, 1.019, 1.012, 1.031, 1.056, 1.07, 1.121, 1.137, 0.735, 1.156, 1.169, 1.152, 
         1.18, 1.157, 1.172, 1.099, 1.144, 1.118, 0.988, 1.072, 1.062, 1.135, 1.169],
         "albedo": 0.52
         },
-    "(134340) Pluto|9": {"tags": ["solar_system", "minor_body", "dwarf_planet", "tno", "plutino"],
+    "(134340) Pluto|MBOSS": {"tags": ["solar_system", "minor_body", "dwarf_planet", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.867, "V-R": 0.515, "R-I": 0.400}, "albedo": 0.52, "sun": True
     },
-    "(134340) Pluto|24": {"tags": ["solar_system", "minor_body", "dwarf_planet", "tno", "plutino"],
+    "(134340) Pluto|Madden2018": {"tags": ["solar_system", "minor_body", "dwarf_planet", "tno", "plutino"],
         "nm": [410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540, 550, 560, 570, 580, 590, 600, 610, 620, 630, 640, 650, 660, 670,
         680, 690, 700, 710, 720, 730, 740, 750, 760, 770, 780, 790, 800, 810, 820, 830, 840, 850, 860, 870, 880, 890, 900, 910, 920, 930, 992.71],
         "br": [0.31848, 0.33024, 0.34045, 0.36136, 0.38311, 0.39087, 0.40592, 0.42545, 0.43835, 0.44743, 0.4584, 0.46743, 0.48603, 0.49388, 0.50692,
@@ -2118,514 +2189,514 @@ objects = {
         0.60355, 0.48914, 0.56542, 0.62153, 0.62718, 0.62923, 0.53279],
         "albedo": True
         },
-    "(134860) 2000 OJ67|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(134860) 2000 OJ67|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.050, "V-R": 0.670, "R-I": 0.600}, "sun": True
     },
-    "(135182) 2001 QT322|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(135182) 2001 QT322|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 0.710, "V-R": 0.530}, "sun": True
     },
-    "(136108) Haumea|9": {"tags": ["featured", "solar_system", "dwarf_planet", "minor_body", "tno", "classical", "classical-h"],
+    "(136108) Haumea|MBOSS": {"tags": ["featured", "solar_system", "dwarf_planet", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.633, "V-R": 0.353, "R-I": 0.330}, "sun": True, "albedo": 0.66 # https://arxiv.org/abs/1904.00522
     },
-    "(136199) Eris|6": {"tags": ["featured", "solar_system", "dwarf_planet", "minor_body", "tno", "detached"],
+    "(136199) Eris|Lorenzi2016": {"tags": ["featured", "solar_system", "dwarf_planet", "minor_body", "tno", "detached"],
         "nm": [417.357, 479.507, 532.699, 585.89, 601.008, 604.367, 622.844, 637.962, 653.08, 656.439, 659.239, 673.236, 679.955, 692.273, 702.912, 
         712.43, 734.267, 740.426, 747.704, 750.504, 765.062, 779.059, 788.578, 793.617, 809.295, 813.774, 826.652, 841.209, 860.246],
         "br": [0.995, 1.059, 1.084, 1.101, 1.08, 1.104, 1.111, 1.103, 1.121, 1.104, 1.11, 1.097, 1.117, 1.034, 1.121, 1.13, 1.11, 1.073, 1.11, 1.077, 
         1.132, 1.138, 1.087, 1.126, 1.018, 1.079, 0.881, 1.072, 1.13],
         "albedo": 0.957 # fyr02's sheet
         },
-    "(136199) Eris|9": {"tags": ["solar_system", "minor_body", "dwarf_planet", "tno", "detached"],
+    "(136199) Eris|MBOSS": {"tags": ["solar_system", "minor_body", "dwarf_planet", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.781, "V-R": 0.393, "R-I": 0.363}, "sun": True, "albedo": 0.957 # fyr02's sheet
     },
-    "(136204) 2003 WL7|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(136204) 2003 WL7|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.480}, "sun": True
     },
-    "(136472) Makemake|6": {"tags": ["featured", "solar_system", "minor_body", "dwarf_planet", "tno", "classical", "classical-h"],
+    "(136472) Makemake|Lorenzi2016": {"tags": ["featured", "solar_system", "minor_body", "dwarf_planet", "tno", "classical", "classical-h"],
         "nm": [417.357, 466.069, 588.13, 601.568, 609.406, 631.243, 642.441, 649.72, 656.439, 664.278, 672.116, 679.955, 691.153, 706.271, 715.789,
         723.628, 729.787, 740.426, 744.345, 751.064, 766.181, 782.419, 788.578, 794.737, 809.295, 813.774, 826.652, 841.209, 860.246],
         "br": [0.89, 0.971, 1.106, 1.059, 1.127, 1.133, 1.125, 1.157, 1.137, 1.155, 1.116, 1.139, 1.03, 1.179, 1.182, 1.143, 1.163, 1.088, 1.16, 1.084,
         1.201, 1.201, 1.087, 1.159, 1.018, 1.079, 0.881, 1.072, 1.13],
         "albedo": 0.83 # fyr02's sheet
         },
-    "(136472) Makemake|9": {"tags": ["solar_system", "minor_body", "dwarf_planet", "tno", "classical", "classical-h"],
+    "(136472) Makemake|MBOSS": {"tags": ["solar_system", "minor_body", "dwarf_planet", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.840, "V-R": 0.480}, "sun": True, "albedo": 0.83 # fyr02's sheet
     },
-    "(137294) 1999 RE215|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(137294) 1999 RE215|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.003, "V-R": 0.710, "R-I": 0.571}, "sun": True
     },
-    "(137295) 1999 RB216|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "(137295) 1999 RB216|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 0.897, "V-R": 0.522, "R-I": 0.506}, "sun": True
     },
-    "(138537) 2000 OK67|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(138537) 2000 OK67|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 0.821, "V-R": 0.583, "R-I": 0.524}, "sun": True
     },
-    "(143707) 2003 UY117|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "(143707) 2003 UY117|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 0.950, "V-R": 0.590}, "sun": True
     },
-    "(144897) 2004 UX10|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(144897) 2004 UX10|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.950, "V-R": 0.575}, "sun": True
     },
-    "(145451) 2005 RM43|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(145451) 2005 RM43|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.590, "V-R": 0.390}, "sun": True
     },
-    "(145452) 2005 RN43|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(145452) 2005 RN43|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.940, "V-R": 0.592, "R-I": 0.486}, "sun": True
     },
-    "(145453) 2005 RR43|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(145453) 2005 RR43|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.790, "V-R": 0.389}, "sun": True
     },
-    "(145480) 2005 TB190|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "(145480) 2005 TB190|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.980, "V-R": 0.562, "R-I": 0.578}, "sun": True
     },
-    "(145486) 2005 UJ438|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(145486) 2005 UJ438|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.946, "V-R": 0.641, "R-I": 0.510}, "sun": True
     },
-    "(148209) 2000 CR105|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "(148209) 2000 CR105|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.771, "V-R": 0.509, "R-I": 0.590}, "sun": True
     },
-    "(148975) 2001 XA255|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(148975) 2001 XA255|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.810, "V-R": 0.680, "R-I": 0.440}, "sun": True
     },
-    "(160427) 2005 RL43|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(160427) 2005 RL43|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.120, "V-R": 0.730}, "sun": True
     },
-    "(163135) 2002 CT22|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(163135) 2002 CT22|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.690, "V-R": 0.382, "R-I": 0.360}, "sun": True
     },
-    "(168703) 2000 GP183|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(168703) 2000 GP183|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 0.669, "V-R": 0.445, "R-I": 0.463}, "sun": True
     },
-    "(174567) Varda|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(174567) Varda|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.892, "V-R": 0.556, "R-I": 0.510}, "sun": True
     },
-    "(181708) 1993 FW|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(181708) 1993 FW|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 1.023, "V-R": 0.583, "R-I": 0.439}, "sun": True
     },
-    "(181855) 1998 WT31|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(181855) 1998 WT31|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.774, "V-R": 0.453, "R-I": 0.326}, "sun": True
     },
-    "(181874) 1999 HW11|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "(181874) 1999 HW11|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.840, "V-R": 0.499, "R-I": 0.493}, "sun": True
     },
-    "(182397) 2001 QW297|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(182397) 2001 QW297|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 1.020, "V-R": 0.580, "R-I": 0.670}, "sun": True
     },
-    "(182934) 2002 GJ32|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(182934) 2002 GJ32|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 1.330, "V-R": 0.590, "R-I": 0.420}, "sun": True
     },
-    "(192388) 1996 RD29|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(192388) 1996 RD29|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.741, "V-R": 0.421, "R-I": 0.388}, "sun": True
     },
-    "(192929) 2000 AT44|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(192929) 2000 AT44|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.707, "V-R": 0.354, "R-I": 0.318}, "sun": True
     },
-    "(208996) 2003 AZ84|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(208996) 2003 AZ84|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.738, "V-R": 0.430, "R-I": 0.473}, "sun": True
     },
-    "(248835) 2006 SX368|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(248835) 2006 SX368|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.758, "V-R": 0.478, "R-I": 0.471}, "sun": True
     },
-    "(250112) 2002 KY14|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(250112) 2002 KY14|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.060, "V-R": 0.709, "R-I": 0.650}, "sun": True
     },
-    "(275809) 2001 QY297|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(275809) 2001 QY297|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 0.947, "V-R": 0.479, "R-I": 0.651}, "sun": True
     },
-    "(278361) 2007 JJ43|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(278361) 2007 JJ43|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 1.020, "V-R": 0.590, "R-I": 0.500}, "sun": True
     },
-    "(281371) 2008 FC76|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(281371) 2008 FC76|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.987, "V-R": 0.685, "R-I": 0.652}, "sun": True
     },
-    "(303775) 2005 QU182|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(303775) 2005 QU182|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.877, "V-R": 0.593}, "sun": True
     },
-    "(307261) 2002 MS4|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(307261) 2002 MS4|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.690, "V-R": 0.380}, "sun": True
     },
-    "(307982) 2004 PG115|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "(307982) 2004 PG115|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.966, "V-R": 0.664, "R-I": 0.633}, "sun": True
     },
-    "(308933) 2006 SQ372|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(308933) 2006 SQ372|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 1.030, "V-R": 0.590, "R-I": 0.650}, "sun": True
     },
-    "(309139) 2006 XQ51|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(309139) 2006 XQ51|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.740, "V-R": 0.410}, "sun": True
     },
-    "(309737) 2008 SJ236|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(309737) 2008 SJ236|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.010, "V-R": 0.588, "R-I": 0.500}, "sun": True
     },
-    "(309741) 2008 UZ6|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(309741) 2008 UZ6|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.920, "V-R": 0.590}, "sun": True
     },
-    "(315898) 2008 QD4|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(315898) 2008 QD4|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.740, "V-R": 0.460}, "sun": True
     },
-    "(316431) 2010 TH167|9": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
+    "(316431) 2010 TH167|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
         "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.460}, "sun": True
     },
-    "(330759) 2008 SO218|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(330759) 2008 SO218|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.890, "V-R": 0.550, "R-I": 0.500}, "sun": True
     },
-    "(336756) 2010 NV1|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(336756) 2010 NV1|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.765, "V-R": 0.512, "R-I": 0.390}, "sun": True
     },
-    "(341275) 2007 RG283|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(341275) 2007 RG283|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.790, "V-R": 0.470}, "sun": True
     },
-    "(341520) Mors-Somn|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(341520) Mors-Somn|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 1.290, "V-R": 0.740, "R-I": 0.630}, "sun": True
     },
-    "(342842) 2008 YB3|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(342842) 2008 YB3|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.774, "V-R": 0.472, "R-I": 0.490}, "sun": True
     },
-    "(346889) Rhiphonos|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(346889) Rhiphonos|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.550}, "sun": True
     },
-    "(349933) 2009 YF7|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(349933) 2009 YF7|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.460}, "sun": True
     },
-    "(382004) 2010 RM64|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(382004) 2010 RM64|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.000, "V-R": 0.550}, "sun": True
     },
-    "(385185) 1993 RO|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(385185) 1993 RO|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.850, "V-R": 0.590, "R-I": 0.480}, "sun": True
     },
-    "(385191) 1997 RT5|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(385191) 1997 RT5|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 1.075, "V-R": 0.474, "R-I": 0.539}, "sun": True
     },
-    "(385194) 1998 KG62|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(385194) 1998 KG62|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.039, "V-R": 0.609, "R-I": 0.610}, "sun": True
     },
-    "(385199) 1999 OE4|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(385199) 1999 OE4|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.103, "V-R": 0.567, "R-I": 0.414}, "sun": True
     },
-    "(385437) 2003 GH55|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(385437) 2003 GH55|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.120, "V-R": 0.665, "R-I": 0.859}, "sun": True
     },
-    "(385571) Otrera|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(385571) Otrera|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.740, "V-R": 0.420, "R-I": 0.460}, "sun": True
     },
-    "(385607) 2005 EO297|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "(385607) 2005 EO297|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 0.840, "V-R": 0.480, "R-I": 0.570}, "sun": True
     },
-    "(385695) 2005 TO74|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(385695) 2005 TO74|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.850, "V-R": 0.490, "R-I": 0.420}, "sun": True
     },
-    "(416400) 2003 UZ117|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(416400) 2003 UZ117|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.663, "V-R": 0.354, "R-I": 0.335}, "sun": True
     },
-    "(418993) 2009 MS9|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(418993) 2009 MS9|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.840, "V-R": 0.520}, "sun": True
     },
-    "(427507) 2002 DH5|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(427507) 2002 DH5|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.663, "V-R": 0.391, "R-I": 0.416}, "sun": True
     },
-    "(444030) 2004 NT33|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(444030) 2004 NT33|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.641, "V-R": 0.403, "R-I": 0.403}, "sun": True
     },
-    "(445473) 2010 VZ98|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "(445473) 2010 VZ98|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 1.100, "V-R": 0.670}, "sun": True
     },
-    "(447178) 2005 RO43|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(447178) 2005 RO43|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.770, "V-R": 0.470}, "sun": True
     },
-    "(449097) 2012 UT68|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(449097) 2012 UT68|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.020, "V-R": 0.660}, "sun": True
     },
-    "(455171) 1999 OM4|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(455171) 1999 OM4|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.137, "V-R": 0.602, "R-I": 0.499}, "sun": True
     },
-    "(459865) 2013 XZ8|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(459865) 2013 XZ8|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.450}, "sun": True
     },
-    "(459971) 2014 ON6|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(459971) 2014 ON6|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.970, "V-R": 0.580}, "sun": True
     },
-    "(463368) 2012 VU85|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(463368) 2012 VU85|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.070, "V-R": 0.630}, "sun": True
     },
-    "(463663) 2014 HY123|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(463663) 2014 HY123|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.670, "V-R": 0.490}, "sun": True
     },
-    "(469306) 1999 CD158|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "(469306) 1999 CD158|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 0.864, "V-R": 0.520, "R-I": 0.575}, "sun": True
     },
-    "(469333) 2000 PE30|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "(469333) 2000 PE30|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.752, "V-R": 0.373, "R-I": 0.410}, "sun": True
     },
-    "(469362) 2001 KB77|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(469362) 2001 KB77|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.890, "V-R": 0.457, "R-I": 0.548}, "sun": True
     },
-    "(469372) 2001 QF298|9": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
+    "(469372) 2001 QF298|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
         "filters": "Landolt", "indices": {"B-V": 0.695, "V-R": 0.388, "R-I": 0.360}, "sun": True
     },
-    "(469750) 2005 PU21|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(469750) 2005 PU21|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 1.140, "V-R": 0.650, "R-I": 0.680}, "sun": True
     },
-    "(470316) 2007 OC10|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "(470316) 2007 OC10|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.876, "V-R": 0.553, "R-I": 0.471}, "sun": True
     },
-    "(470599) 2008 OG19|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "(470599) 2008 OG19|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.940, "V-R": 0.530, "R-I": 0.590}, "sun": True
     },
-    "(471339) 2011 ON45|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(471339) 2011 ON45|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.110, "V-R": 0.705}, "sun": True
     },
-    "(474640) 2004 VN112|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "(474640) 2004 VN112|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.900, "V-R": 0.520, "R-I": 0.450}, "sun": True
     },
-    #"(486958) Arrokoth|17": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    #"(486958) Arrokoth|Howett2019": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
     #	"filters": "Hubble", "indices": {"F606W-F814W": 1.03}, "sun": True
     #},
-    "(486958) Ultima|17": {"tags": ["featured", "solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(486958) Ultima|Howett2019": {"tags": ["featured", "solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "New Horizons", "bands": ["blue", "red", "nir"], "br": [0.053, 0.079, 0.117], "sun": True, "albedo": True
     },
-    "(486958) Thule|17": {"tags": ["featured", "solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(486958) Thule|Howett2019": {"tags": ["featured", "solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "New Horizons", "bands": ["blue", "red", "nir"], "br": [0.058, 0.084, 0.122], "sun": True, "albedo": True
     },
-    "(486958) Akasa|17": {"tags": ["featured", "solar_system", "minor_body", "tno", "classical", "classical-h", "surface_feature"],
+    "(486958) Akasa|Howett2019": {"tags": ["featured", "solar_system", "minor_body", "tno", "classical", "classical-h", "surface_feature"],
         "filters": "New Horizons", "bands": ["blue", "red", "nir"], "br": [0.066, 0.090, 0.125], "sun": True, "albedo": True
     },
-    "(506479) 2003 HB57|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(506479) 2003 HB57|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.830, "V-R": 0.480, "R-I": 0.540}, "sun": True
     },
-    "(508770) 1995 WY2|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(508770) 1995 WY2|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.030, "V-R": 0.600, "R-I": 0.510}, "sun": True
     },
-    "(523588) 2000 CN105|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(523588) 2000 CN105|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.100, "V-R": 0.636, "R-I": 0.640}, "sun": True
     },
-    "(523591) 2001 QD298|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(523591) 2001 QD298|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.970, "V-R": 0.670}, "sun": True
     },
-    "(523597) 2002 QX47|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(523597) 2002 QX47|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.700, "V-R": 0.380}, "sun": True
     },
-    "(523620) 2007 RH283|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(523620) 2007 RH283|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.430}, "sun": True
     },
-    "(523622) 2007 TG422|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(523622) 2007 TG422|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.880, "V-R": 0.510, "R-I": 0.510}, "sun": True
     },
-    "(523676) 2013 UL10|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(523676) 2013 UL10|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.970, "V-R": 0.670}, "sun": True
     },
-    "(523785) 2015 CM3|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(523785) 2015 CM3|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 1.210, "V-R": 0.570}, "sun": True
     },
-    "(523899) 1997 CV29|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(523899) 1997 CV29|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 1.210, "V-R": 0.650}, "sun": True
     },
-    "(523965) 1998 XY95|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "(523965) 1998 XY95|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.930, "V-R": 0.720, "R-I": 0.752}, "sun": True
     },
-    "(523983) 1999 RY214|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(523983) 1999 RY214|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "Landolt", "indices": {"B-V": 0.693, "V-R": 0.565, "R-I": 0.530}, "sun": True
     },
-    "(524049) 2000 CQ105|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "(524049) 2000 CQ105|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.671, "V-R": 0.449, "R-I": 0.346}, "sun": True
     },
-    "(524217) 2001 RZ143|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(524217) 2001 RZ143|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 1.080, "V-R": 0.510, "R-I": 0.490}, "sun": True
     },
-    "(524834) 2003 YL179|9": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
+    "(524834) 2003 YL179|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
         "filters": "Landolt", "indices": {"B-V": 0.810, "V-R": 0.450}, "sun": True
     },
-    "(525815) 2005 SD278|9": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
+    "(525815) 2005 SD278|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
         "filters": "Landolt", "indices": {"B-V": 0.970, "V-R": 0.560, "R-I": 0.530}, "sun": True
     },
-    "(527328) 2007 TK422|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(527328) 2007 TK422|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.710, "V-R": 0.510}, "sun": True
     },
-    "(527443) 2007 UM126|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "(527443) 2007 UM126|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.740, "V-R": 0.435, "R-I": 0.440}, "sun": True
     },
-    "(527603) 2007 VJ305|9": {"tags": ["solar_system", "minor_body", "tno", "detached"],
+    "(527603) 2007 VJ305|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
         "filters": "Landolt", "indices": {"B-V": 0.920, "V-R": 0.520, "R-I": 0.520}, "sun": True
     },
-    "527604|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "527604|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.830, "V-R": 0.470, "R-I": 0.480}, "sun": True
     },
-    "(528219) 2008 KV42|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "(528219) 2008 KV42|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.470, "R-I": 0.420}, "sun": True
     },
-    "530664|9": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
+    "530664|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
         "filters": "Landolt", "indices": {"B-V": 0.690, "V-R": 0.390}, "sun": True
     },
-    "530930|9": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
+    "530930|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
         "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.400}, "sun": True
     },
-    #"1998 KY26|9": {"tags": ["solar_system", "minor_body", "asteroid"],
+    #"1998 KY26|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid"],
     #	"filters": "Landolt", "indices": {"B-R": 0.083, "V-R": 0.058, "R-I": 0.088}, "sun": False
     #},
-    "1I/'Oumuamua|18": {"tags": ["featured", "solar_system", "extrasolar", "asteroid"],
+    "1I/'Oumuamua|Jewitt2017": {"tags": ["featured", "solar_system", "extrasolar", "asteroid"],
         "filters": "Landolt", "indices": {"B-V": 0.70, "V-R": 0.45}, "sun": True, "albedo": 0.1
     },
-    "1I/'Oumuamua|19": {"tags": ["solar_system", "extrasolar", "asteroid"],
+    "1I/'Oumuamua|Bannister2017": {"tags": ["solar_system", "extrasolar", "asteroid"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.47, "r-i": 0.36}, "sun": True, "albedo": 0.07
     },
-    "Class A|7": {"tags": ["featured", "solar_system", "class", "asteroid"],
+    "Class A|Bus2002": {"tags": ["featured", "solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.708, 0.868, 1.109, 1.214, 1.298, 1.311, 1.250, 1.187, 1.143],
         "albedo": 0.274 # https://arxiv.org/abs/1307.2424
     },
-    "Class B|7": {"tags": ["featured", "solar_system", "class", "asteroid"],
+    "Class B|Bus2002": {"tags": ["featured", "solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [1.008, 1.004, 0.989, 0.985, 0.978, 0.975, 0.969, 0.961, 0.938],
         "albedo": 0.071 # https://arxiv.org/abs/1307.2424
     },
-    "Class C|7": {"tags": ["featured", "solar_system", "class", "asteroid"],
+    "Class C|Bus2002": {"tags": ["featured", "solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.936, 0.979, 1.007, 1.013, 1.014, 1.016, 1.014, 1.008, 0.993],
         "albedo": 0.083 # https://arxiv.org/abs/1307.2424
     },
-    "Class Cb|7": {"tags": ["solar_system", "class", "asteroid"],
+    "Class Cb|Bus2002": {"tags": ["solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.981, 0.995, 0.999, 1.002, 1.002, 1.005, 1.003, 0.994, 0.979],
         "albedo": 0.083 # https://arxiv.org/abs/1307.2424
     },
-    "Class Cg|7": {"tags": ["solar_system", "class", "asteroid"],
+    "Class Cg|Bus2002": {"tags": ["solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.852, 0.945, 1.018, 1.028, 1.027, 1.025, 1.026, 1.022, 1.007],
         "albedo": 0.083 # https://arxiv.org/abs/1307.2424
     },
-    "Class Cgh|7": {"tags": ["solar_system", "class", "asteroid"],
+    "Class Cgh|Bus2002": {"tags": ["solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.870, 0.962, 0.997, 0.985, 0.972, 0.973, 0.987, 0.991, 0.980],
         "albedo": 0.083 # https://arxiv.org/abs/1307.2424
     },
-    "Class Ch|7": {"tags": [ "solar_system", "class", "asteroid"],
+    "Class Ch|Bus2002": {"tags": [ "solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.941, 0.986, 0.991, 0.983, 0.977, 0.982, 0.991, 0.996, 0.993],
         "albedo": 0.083 # https://arxiv.org/abs/1307.2424
     },
-    "Class D|7": {"tags": ["featured", "solar_system", "class", "asteroid"],
+    "Class D|Bus2002": {"tags": ["featured", "solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.882, 0.951, 1.046, 1.098, 1.150, 1.199, 1.222, 1.247, 1.287],
         "albedo": 0.098 # https://arxiv.org/abs/1307.2424
     },
-    "Class K|7": {"tags": ["featured", "solar_system", "class", "asteroid"],
+    "Class K|Bus2002": {"tags": ["featured", "solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.863, 0.943, 1.043, 1.087, 1.121, 1.138, 1.125, 1.110, 1.085],
         "albedo": 0.178 # https://arxiv.org/abs/1307.2424
     },
-    "Class L|7": {"tags": ["featured", "solar_system", "class", "asteroid"],
+    "Class L|Bus2002": {"tags": ["featured", "solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.818, 0.922, 1.066, 1.130, 1.179, 1.207, 1.201, 1.193, 1.188],
         "albedo": 0.183 # https://arxiv.org/abs/1307.2424
     },
-    "Class Ld|7": {"tags": ["solar_system", "class", "asteroid"],
+    "Class Ld|Bus2002": {"tags": ["solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.799, 0.913, 1.080, 1.163, 1.228, 1.270, 1.280, 1.282, 1.288],
         "albedo": 0.183 # https://arxiv.org/abs/1307.2424
     },
-    "Class O|7": {"tags": ["solar_system", "class", "asteroid"],
+    "Class O|Bus2002": {"tags": ["solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.878, 0.952, 1.022, 1.042, 1.057, 1.036, 0.958, 0.870, 0.798]
     },
-    "Class Q|7": {"tags": ["solar_system", "class", "asteroid"],
+    "Class Q|Bus2002": {"tags": ["solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.830, 0.930, 1.047, 1.087, 1.118, 1.107, 1.041, 0.952, 0.873]
     },
-    "Class R|7": {"tags": ["solar_system", "class", "asteroid"],
+    "Class R|Bus2002": {"tags": ["solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.792, 0.907, 1.073, 1.145, 1.209, 1.224, 1.110, 0.971, 0.889]
     },
-    "Class S|7": {"tags": ["featured", "solar_system", "class", "asteroid"],
+    "Class S|Bus2002": {"tags": ["featured", "solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.813, 0.920, 1.060, 1.121, 1.170, 1.188, 1.145, 1.084, 1.034],
         "albedo": 0.258 # https://arxiv.org/abs/1307.2424
     },
-    "Class Sa|7": {"tags": ["solar_system", "class", "asteroid"],
+    "Class Sa|Bus2002": {"tags": ["solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.748, 0.892, 1.094, 1.178, 1.243, 1.260, 1.216, 1.150, 1.091],
         "albedo": 0.258 # https://arxiv.org/abs/1307.2424
     },
-    "Class Sk|7": {"tags": ["solar_system", "class", "asteroid"],
+    "Class Sk|Bus2002": {"tags": ["solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.859, 0.939, 1.039, 1.082, 1.115, 1.130, 1.092, 1.039, 1.001],
         "albedo": 0.258 # https://arxiv.org/abs/1307.2424
     },
-    "Class Sl|7": {"tags": ["solar_system", "class", "asteroid"],
+    "Class Sl|Bus2002": {"tags": ["solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.790, 0.909, 1.076, 1.149, 1.209, 1.237, 1.205, 1.158, 1.131],
         "albedo": 0.258 # https://arxiv.org/abs/1307.2424
     },
-    "Class Sq|7": {"tags": ["solar_system", "class", "asteroid"],
+    "Class Sq|Bus2002": {"tags": ["solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.851, 0.938, 1.039, 1.082, 1.115, 1.120, 1.069, 1.000, 0.936],
         "albedo": 0.258 # https://arxiv.org/abs/1307.2424
     },
-    "Class Sr|7": {"tags": ["solar_system", "class", "asteroid"],
+    "Class Sr|Bus2002": {"tags": ["solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.777, 0.904, 1.069, 1.137, 1.188, 1.193, 1.123, 1.030, 0.936],
         "albedo": 0.258 # https://arxiv.org/abs/1307.2424
     },
-    "Class T|7": {"tags": ["solar_system", "class", "asteroid"],
+    "Class T|Bus2002": {"tags": ["solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.896, 0.956, 1.041, 1.083, 1.119, 1.149, 1.163, 1.174, 1.184]
     },
-    "Class V|7": {"tags": ["featured", "solar_system", "class", "asteroid"],
+    "Class V|Bus2002": {"tags": ["featured", "solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.808, 0.916, 1.063, 1.124, 1.176, 1.183, 1.048, 0.879, 0.745],
         "albedo": 0.352 # https://arxiv.org/abs/1307.2424
     },
-    "Class X|7": {"tags": ["solar_system", "class", "asteroid"],
+    "Class X|Bus2002": {"tags": ["solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.940, 0.977, 1.013, 1.030, 1.045, 1.057, 1.062, 1.060, 1.058]
     },
-    "Class Xc|7": {"tags": ["solar_system", "class", "asteroid"],
+    "Class Xc|Bus2002": {"tags": ["solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.920, 0.969, 1.019, 1.038, 1.049, 1.054, 1.047, 1.037, 1.020]
     },
-    "Class Xe|7": {"tags": ["solar_system", "class", "asteroid"],
+    "Class Xe|Bus2002": {"tags": ["solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.921, 0.948, 1.032, 1.060, 1.082, 1.094, 1.093, 1.088, 1.078]
     },
-    "Class Xk|7": {"tags": ["solar_system", "class", "asteroid"],
+    "Class Xk|Bus2002": {"tags": ["solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.900, 0.959, 1.033, 1.061, 1.084, 1.097, 1.098, 1.098, 1.098]
     },
-    #"Comets|8": {"filters": "Landolt", "indices": {"B-V": 0.795, "V-R": 0.441, "V-I": 0.935}, "sun": True},
-    "Comets:SP|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+    #"Comets|Fornasier2007": {"filters": "Landolt", "indices": {"B-V": 0.795, "V-R": 0.441, "V-I": 0.935}, "sun": True},
+    "Comets:SP|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
         "filters": "Landolt", "indices": {"B-V": 0.87, "V-R": 0.50, "R-I": 0.45}, "sun": True, "albedo": 0.04
     },
-    "Comets:LP|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+    "Comets:LP|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
         "filters": "Landolt", "indices": {"B-V": 0.79, "V-R": 0.46, "R-I": 0.44}, "sun": True, "albedo": 0.04
     },
-    #"J. trojans|8": {"filters": "Landolt", "indices": {"B-V": 0.777, "V-R": 0.445, "V-I": 0.861}, "sun": True},
-    "J. trojans|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+    #"J. trojans|Fornasier2007": {"filters": "Landolt", "indices": {"B-V": 0.777, "V-R": 0.445, "V-I": 0.861}, "sun": True},
+    "J. trojans|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
         "filters": "Landolt", "indices": {"U-B": 0.1, "B-V": 0.78, "V-R": 0.45, "R-I": 0.42}, "sun": True, "albedo": 0.05
     },
-    #"Centaurs|8": {"filters": "Landolt", "indices": {"B-V": 0.886, "V-R": 0.573, "V-I": 1.104}, "sun": True},
-    "Centaurs|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+    #"Centaurs|Fornasier2007": {"filters": "Landolt", "indices": {"B-V": 0.886, "V-R": 0.573, "V-I": 1.104}, "sun": True},
+    "Centaurs|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
         "filters": "Landolt", "indices": {"B-V": 0.87, "V-R": 0.55, "R-I": 0.50}, "sun": True, "albedo": 0.078
     },
-    #"Plutinos|8": {"filters": "Landolt", "indices": {"B-V": 0.895, "V-R": 0.568, "V-I": 1.095}, "sun": True},
-    "Plutinos|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+    #"Plutinos|Fornasier2007": {"filters": "Landolt", "indices": {"B-V": 0.895, "V-R": 0.568, "V-I": 1.095}, "sun": True},
+    "Plutinos|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
         "filters": "Landolt", "indices": {"B-V": 0.88, "V-R": 0.55, "R-I": 0.53}, "sun": True, "albedo": 0.114 # fyr02's sheet
     },
-    "Other res.|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+    "Other res.|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
         "filters": "Landolt", "indices": {"U-B": 0.27, "B-V": 0.95, "V-R": 0.59, "R-I": 0.54}, "sun": True, "albedo": 0.148 # fyr02's sheet
     },
-    #"Cubewano|8": {"filters": "Landolt", "indices": {"B-V": 0.973, "V-R": 0.622, "V-I": 1.181}, "sun": True},
-    "Cubewano:H|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+    #"Cubewano|Fornasier2007": {"filters": "Landolt", "indices": {"B-V": 0.973, "V-R": 0.622, "V-I": 1.181}, "sun": True},
+    "Cubewano:H|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
         "filters": "Landolt", "indices": {"U-B": 0.27, "B-V": 0.88, "V-R": 0.54, "R-I": 0.53}, "sun": True, "albedo": 0.102 # fyr02's sheet
     },
-    "Cubewano:C|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+    "Cubewano:C|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
         "filters": "Landolt", "indices": {"U-B": 0.59, "B-V": 1.00, "V-R": 0.63, "R-I": 0.59}, "sun": True, "albedo": 0.132 # fyr02's sheet
     },
-    #"SDO|8": {"filters": "Landolt", "indices": {"B-V": 0.875, "V-R": 0.553, "V-I": 1.070}, "sun": True},
-    "SDO|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+    #"SDO|Fornasier2007": {"filters": "Landolt", "indices": {"B-V": 0.875, "V-R": 0.553, "V-I": 1.070}, "sun": True},
+    "SDO|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
         "filters": "Landolt", "indices": {"U-B": 0.33, "B-V": 0.85, "V-R": 0.52, "R-I": 0.51}, "sun": True, "albedo": 0.075 # fyr02's sheet
     },
-    "Detached|9": {"tags": ["featured", "solar_system", "class", "orbit"],
+    "Detached|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
         "filters": "Landolt", "indices": {"U-B": 0.18, "B-V": 0.88, "V-R": 0.54, "R-I": 0.51}, "sun": True, "albedo": 0.108 # fyr02's sheet
     },
-    "Class I|25": {"tags": ["featured", "extrasolar", "planet", "class"],
+    "Class I|Sudarsky2000": {"tags": ["featured", "extrasolar", "planet", "class"],
         "nm": [300, 350, 400, 450, 500, 550, 600, 650, 700, 800, 900, 1000],
         "br": [0.88, 0.85, 0.78, 0.69, 0.67, 0.69, 0.67, 0.64, 0.58, 0.6, 0.45, 0.5],
         "albedo": True
     },
-    "Class II|25": {"tags": ["featured", "extrasolar", "planet", "class"],
+    "Class II|Sudarsky2000": {"tags": ["featured", "extrasolar", "planet", "class"],
         "nm": [300, 350, 400, 450, 500, 550, 600, 650, 700, 800, 900, 1000],
         "br": [0.99, 0.99, 0.99, 0.99, 0.98, 0.97, 0.94, 0.95, 0.9, 0.85, 0.75, 0.75],
         "albedo": True
     },
-    "Class III|25": {"tags": ["featured", "extrasolar", "planet", "class"],
+    "Class III|Sudarsky2000": {"tags": ["featured", "extrasolar", "planet", "class"],
         "nm": [300, 350, 400, 450, 500, 550, 600, 650, 700, 800, 900, 1000],
         "br": [0.67, 0.52, 0.42, 0.3, 0.2, 0.13, 0.07, 0.06, 0.04, 0.02, 0, 0],
         "albedo": True
     },
-    "Class IV|25": {"tags": ["featured", "extrasolar", "planet", "class"],
+    "Class IV|Sudarsky2000": {"tags": ["featured", "extrasolar", "planet", "class"],
         "nm": [300, 350, 400, 450, 500, 550, 600, 650, 700, 800, 900, 1000],
         "br": [0.2, 0.15, 0.1, 0.06, 0.03, 0.01, 0, 0.01, 0, 0, 0, 0],
         "albedo": True
     },
-    "Class V|25": {"tags": ["featured", "extrasolar", "planet", "class"],
+    "Class V|Sudarsky2000": {"tags": ["featured", "extrasolar", "planet", "class"],
         "nm": [300, 350, 400, 450, 500, 550, 585, 620, 650, 700, 800, 900, 1000],
         "br": [0.4, 0.57, 0.65, 0.66, 0.66, 0.55, 0, 0.5, 0.62, 0.65, 0.5, 0.65, 0.64],
         "albedo": True
     },
-    "HD 189733 b|10, 15": {"tags": ["extrasolar", "planet"],
+    "HD 189733 b|Berdyugina2010, Berdyugina2011": {"tags": ["extrasolar", "planet"],
         "filters": "Landolt", "bands": ["U", "B", "V", "I"], "br": [0.62, 0.61, 0.28, 0], "albedo": True
     },
-    "HD 189733 b|13, 14": {"tags": ["extrasolar", "planet"],
+    "HD 189733 b|Evans2013, Schwartz2015": {"tags": ["extrasolar", "planet"],
         "nm": [290, 368, 370, 416, 459, 510, 547, 875], "br": [0.45, 0.39, 0.374, 0.32, 0.17, 0.043, 0.02, 0.025], "albedo": True
     },
     "Ups And b|15": {"tags": ["extrasolar", "planet"],
@@ -2640,139 +2711,139 @@ objects = {
     "WASP-43 b": {"tags": ["extrasolar", "planet"],
         "nm": [398, 538, 788, 1400, 4050], "br": [0.28, 0.05, 0.12, 0.24, 0.09], "albedo": True
     },
-    "TAU Boo b|35": {
+    "TAU Boo b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [415, 430, 460, 780],
         "br": [0.117, 0.234, 0.029, 0.022],
         "albedo": True
     },
-    "UPS And b|35": {
+    "UPS And b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [367, 440, 460, 542],
         "br": [0.467, 0.584, 0.329, 0.251],
         "albedo": True
     },
-    "51 Pegasi b|35": {
+    "51 Pegasi b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [490, 560],
         "br": [0.113, 0.043],
         "albedo": True
     },
-    "55 Cancri e|35": {
+    "55 Cancri e|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [521, 581, 746],
         "br": [0.211, 0.588, 0.244],
         "albedo": True
     },
-    "CoRoT-1 b|35": {
+    "CoRoT-1 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [439, 546, 600, 710, 907],
         "br": [0.340, 0.376, 0.167, 0.064, 0.330],
         "albedo": True
     },
-    "CoRoT-2 b|35": {
+    "CoRoT-2 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [439, 546, 600, 710],
         "br": [0.040, 0.023, 0.076, 0.139],
         "albedo": True
     },
-    "CoRoT-3 b|35": {
+    "CoRoT-3 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [600, 710],
         "br": [0.672, 0.050],
         "albedo": True
     },
-    "HAT-P-7 b|35": {
+    "HAT-P-7 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [558, 598, 746],
         "br": [0.157, 0.137, 0.163],
         "albedo": True
     },
-    "HD 189733 b|35": {
+    "HD 189733 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [325, 368, 416, 446, 459, 502, 547, 1000],
         "br": [0.477, 0.467, 0.290, 0.116, 0.147, 0.093, 0.055, 0.055],
         "albedo": True
     },
-    "HD 209458 b|35": {
+    "HD 209458 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [521, 581],
         "br": [0.036, 0.105],
         "albedo": True
     },
-    "Kepler-13 b|35": {
+    "Kepler-13 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [598, 746],
         "br": [0.466, 0.727],
         "albedo": True
     },
-    "TrES-2 b|35": {
+    "TrES-2 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [558, 598],
         "br": [0.932, 0.031],
         "albedo": True
     },
-    "TrES-3 b|35": {
+    "TrES-3 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [350, 558, 746, 766, 980],
         "br": [0.210, 0.109, 0.130, 0.115, 0.213],
         "albedo": True
     },
-    "KELT-1 b|35": {
+    "KELT-1 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [746, 910],
         "br": [0.468, 0.385],
         "albedo": True
     },
-    "KELT-9 b|35": {
+    "KELT-9 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [363, 746, 910],
         "br": [0.040, 0.150, 0.361],
         "albedo": True
     },
-    "WASP-3 b|35": {
+    "WASP-3 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [558, 746],
         "br": [0.439, 0.153],
         "albedo": True
     },
-    "WASP-12 b|35": {
+    "WASP-12 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [360, 460, 547, 746, 847, 910, 1022, 1050],
         "br": [0.062, 0.027, 0.015, 0.159, 0.055, 0.615, 0.270, 0.085],
         "albedo": True
     },
-    "WASP-18 b|35": {
+    "WASP-18 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [474, 746, 904, 1400],
         "br": [0.032, 0.196, 0.354, 0.005],
         "albedo": True
     },
-    "WASP-19 b|35": {
+    "WASP-19 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [476, 685, 746, 806, 916],
         "br": [0.083, 0.150, 0.157, 0.108, 0.035],
         "albedo": True
     },
-    "WASP-33 b|35": {
+    "WASP-33 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [356, 515, 546, 746, 908, 910, 1037],
         "br": [0.010, 0.100, 0.133, 0.079, 0.912, 0.134, 0.584],
         "albedo": True
     },
-    "WASP-43 b|35": {
+    "WASP-43 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [398, 556, 580, 680, 746, 760, 785, 893, 916, 1400],
         "br": [0.277, 0.009, 0.002, 0.108, 0.108, 0.335, 0.317, 0.133, 0.167, 0.32],
         "albedo": True
     },
-    "WASP-46 b|35": {
+    "WASP-46 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [450, 610, 746, 760, 893],
         "br": [0.740, 0.533, 0.119, 0.464, 0.028],
         "albedo": True
     },
-    "WASP-121 b|35": {
+    "WASP-121 b|Zelario": {
         "tags": ["featured", "extrasolar", "planet"],
         "nm": [746, 830, 916, 937, 1035],
         "br": [0.186, 0.004, 0.078, 0.078, 0.013],

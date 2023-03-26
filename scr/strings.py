@@ -99,8 +99,8 @@ info = {
     "de": ["Helligkeitsmodus", "sRGB-Farbraum", "Gammakorrektur"]
 }
 
-source = {
-    "en": "Sources",
+ref = {
+    "en": "References",
     "ru": "Источники",
     "de": "Quellen"
 }
@@ -142,9 +142,9 @@ gui_exit = {
     "de": "Schließen"
 }
 gui_menu = {
-    "en": [["File", [source["en"], note["en"], gui_info["en"], gui_exit["en"]]], ["Language", lang_list["en"]]],
-    "ru": [["Файл", [source["ru"], note["ru"], gui_info["ru"], gui_exit["ru"]]], ["Язык", lang_list["ru"]]],
-    "de": [["Datei", [source["de"], note["de"], gui_info["de"], gui_exit["de"]]], ["Sprache", lang_list["de"]]],
+    "en": [["File", [ref["en"], note["en"], gui_info["en"], gui_exit["en"]]], ["Language", lang_list["en"]]],
+    "ru": [["Файл", [ref["ru"], note["ru"], gui_info["ru"], gui_exit["ru"]]], ["Язык", lang_list["ru"]]],
+    "de": [["Datei", [ref["de"], note["de"], gui_info["de"], gui_exit["de"]]], ["Sprache", lang_list["de"]]],
 }
 gui_database = {
     "en": "Database",

@@ -6,16 +6,22 @@ import scr.strings as tr
 
 # Support of database extension via json5 files
 
-def import_folder(folder: str) -> dict:
-    database = {}
+def import_folder(folder: str) -> tuple:
+    objects = {}
+    refs = {}
     if Path.cwd().name == 'TrueColorTools':
         for file in Path(folder).iterdir():
             if file.suffix == '.json5' and not file.is_dir():
                 with open(file) as f:
-                    database |= json5.load(f)
+                    content = json5.load(f)
+                    for key, value in content.items():
+                        if type(value) == list:
+                            refs |= {key: value}
+                        else:
+                            objects |= {key: value}
     else:
-        print('Failed to import addons. Please try to launch from "/TrueColorTools" directory.')
-    return database
+        print(f'Failed to import {folder=}. Please try to launch from "/TrueColorTools" directory.')
+    return objects, refs
 
 
 # Front-end view on spectra database

@@ -24,7 +24,7 @@ def export(rgb):
     w = 8 if mx < 8 else mx+1
     return "".join([i.ljust(w) for i in lst])
 
-def denumerized_sources(lst):
+def denumerized_references(lst):
     res = []
     for i in range(len(lst)):
        res.append(lst[i].split("]: ")[1])
@@ -90,7 +90,9 @@ def frame(num, lang):
     return sg.Frame(f"{tr.gui_band[lang]} {num+1}", l, visible=True, key="T2_band"+n)
 
 def launch_window(lang, debug):
-    db.objects |= di.import_folder('spectra')
+    additional_spectra = di.import_folder('spectra')
+    db.objects |= additional_spectra[0]
+    db.refs |= additional_spectra[1]
 
     sg.LOOK_AND_FEEL_TABLE["MaterialDark"] = {
         'BACKGROUND': '#333333', 'TEXT': '#FFFFFF',
@@ -356,8 +358,14 @@ def launch_window(lang, debug):
             window["T4_colorRGB"].update(tr.gui_rgb[lang])
             window["T4_colorHEX"].update(tr.gui_hex[lang])
         
-        elif event == tr.source[lang]:
-            sg.popup_scrolled("\n\n".join(db.sources), title=event, size=(100, 20))
+        elif event == tr.ref[lang]:
+            to_show = ''
+            for key, value in db.refs.items():
+                to_show += f'"{key}": {value[0]}\n'
+                for info in value[1:]:
+                    to_show += info + '\n'
+                to_show += '\n'
+            sg.popup_scrolled(to_show, title=event, size=(150, 25))
         
         elif event == tr.note[lang]:
             notes = []
@@ -754,8 +762,8 @@ def launch_window(lang, debug):
                     if values["T3_br_mode"+str(i)]:
                         T3_mode0 = br_modes[i]
                 
-                denumerized_sources_list = denumerized_sources(db.sources)
-                adapted_sources_list = []
+                denumerized_references_list = denumerized_references(db.references)
+                adapted_references_list = []
                 orig_num_list = []
                 redirect_list = []
 
@@ -770,7 +778,7 @@ def launch_window(lang, debug):
                     T3_w = 100*(T3_l + 1)
                 else:
                     T3_w = 1600
-                T3_s = len(denumerized_sources_list)
+                T3_s = len(denumerized_references_list)
                 T3_name_step = 75
                 T3_objt_size = 17
                 T3_srce_size = 9
@@ -800,7 +808,7 @@ def launch_window(lang, debug):
                     T3_note_font = ImageFont.truetype("/usr/share/fonts/truetype/NotoSans-Regular.ttf", T3_note_size)
                 # text brightness formula: br = 255 * (x^(1/2.2))
                 T3_draw.text((T3_w0, 50), values["T3_tags"].join(tr.name_text[lang]), fill=(255, 255, 255), font=T3_name_font) # x = 1, br = 255
-                T3_draw.text((T3_w0, T3_h0 - 25), tr.source[lang]+":", fill=(230, 230, 230), font=T3_help_font) # x = 0.8, br = 230
+                T3_draw.text((T3_w0, T3_h0 - 25), tr.ref[lang]+":", fill=(230, 230, 230), font=T3_help_font) # x = 0.8, br = 230
                 T3_draw.text((T3_w1, T3_h0 - 25), tr.note[lang]+":", fill=(230, 230, 230), font=T3_help_font) # x = 0.8, br = 230
                 T3_note_num = 0
                 for note, translation in tr.notes.items(): # x = 0.6, br = 202
@@ -864,16 +872,16 @@ def launch_window(lang, debug):
                         name = name.strip()
                         new_link = []
                         for i in link.split(", "):
-                            orig_num = int(i)-1 # source number
+                            orig_num = int(i)-1 # reference number
                             if orig_num in orig_num_list: # it was already numbered
                                 new_link.append(str(redirect_list[orig_num_list.index(orig_num)]))
                             else:
                                 orig_num_list.append(orig_num)
                                 srce_num = len(orig_num_list) # its new number
                                 redirect_list.append(srce_num)
-                                adapted_sources_list.append(denumerized_sources_list[orig_num])
+                                adapted_references_list.append(denumerized_references_list[orig_num])
                                 new_link.append(str(srce_num))
-                                T3_draw.multiline_text((T3_w0, T3_h1 + (srce_num-1 - T3_s) * T3_srce_step), f'[{srce_num}] {adapted_sources_list[-1]}', fill=(186, 186, 186), font=T3_srce_font) # x = 0.5, br = 186
+                                T3_draw.multiline_text((T3_w0, T3_h1 + (srce_num-1 - T3_s) * T3_srce_step), f'[{srce_num}] {adapted_references_list[-1]}', fill=(186, 186, 186), font=T3_srce_font) # x = 0.5, br = 186
                         new_link = f'[{", ".join(new_link)}]'
                         T3_draw.text((center_x+T3_ar-width(new_link, T3_smll_font), center_y-T3_ar), new_link, fill=T3_text_color, font=T3_smll_font)
                     
@@ -890,7 +898,7 @@ def launch_window(lang, debug):
                     # print(export(T3_rgb), name)
                 
                 T3_file_name = f'TCT-table_{values["T3_tags"]}{"_srgb" if values["T3_srgb"] else ""}_{T3_mode}{"_gamma-corrected" if values["T3_gamma"] else ""}_{lang}.{values["T3_extension"]}'
-                T3_s2 = len(adapted_sources_list)
+                T3_s2 = len(adapted_references_list)
                 T3_h2 = T3_h1 + (T3_s2 - T3_s) * T3_srce_step
                 T3_min_limit = T3_h0 + T3_note_step * (T3_note_num + T3_info_num + 1)
                 T3_img = T3_img.crop((0, 0, T3_w, T3_h2+50 if T3_h2 > T3_min_limit else T3_min_limit+50))
