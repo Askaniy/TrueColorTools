@@ -9,6 +9,7 @@ import scr.filters as filters
 import scr.calculations as calc
 import scr.data_import as di
 import scr.strings as tr
+import scr.table_generator as tg
 import scr.experimental
 
 
@@ -22,55 +23,6 @@ def export(rgb):
             mx = l
     w = 8 if mx < 8 else mx+1
     return "".join([i.ljust(w) for i in lst])
-
-def denumerized_references(lst):
-    res = []
-    for i in range(len(lst)):
-       res.append(lst[i].split("]: ")[1])
-    return res
-
-def width(line, font):
-    return font.getlength(line)
-
-def recurse(lst0, font, maxW, hyphen=True):
-    lst = lst0
-    w_list = []
-    for i in lst:
-        w_list.append(width(i, font))
-    if max(w_list) < maxW:
-        for i in range(len(w_list)-1):
-            if w_list[i]+w_list[i+1] < maxW:
-                lst[i] += " " + lst[i+1]
-                lst.pop(i+1)
-                recurse(lst, font, maxW)
-                break
-    else:
-        hyphen_w = width("-", font) if hyphen else 0
-        for i in range(len(lst)):
-            if width(lst[i], font) > maxW:
-                try:
-                    lst[i+1] = lst[i][-1] + " " + lst[i+1]
-                except IndexError:
-                    lst.append(lst[i][-1])
-                finally:
-                    lst[i] = lst[i][:-1]
-                while width(lst[i], font)+hyphen_w > maxW:
-                    lst[i+1] = lst[i][-1] + lst[i+1]
-                    lst[i] = lst[i][:-1]
-                if lst[i][-1] in [" ", ":", "-"]:
-                    recurse(lst0, font, maxW, hyphen=False)
-                else:
-                    lst[i] += "-"
-                    recurse(lst, font, maxW)
-                break
-    return lst
-
-def line_splitter(line, font, maxW):
-    w = width(line, font)
-    if w < maxW:
-        return [line]
-    else:
-        return recurse(line.split(), font, maxW)
 
 def convert_to_bytes(img):
     bio = io.BytesIO()
@@ -746,164 +698,12 @@ def launch_window(lang, debug):
             if event == "T3_process":
 
                 # Database preprocessing
-                if values["T3_tags"] == "all":
-                    T3_data = objectsDB
-                    T3_l = len(T3_data)
-                else:
-                    T3_data = {}
-                    T3_l = 0
-                    for name, spectrum in objectsDB.items():
-                        if "tags" in spectrum:
-                            if values["T3_tags"] in spectrum["tags"]:
-                                T3_data |= {name: spectrum}
-                                T3_l += 1
                 for i in range(3):
                     if values["T3_br_mode"+str(i)]:
                         T3_mode0 = br_modes[i]
                 
-                denumerized_references_list = denumerized_references(refsDB)
-                adapted_references_list = []
-                orig_num_list = []
-                redirect_list = []
+                tg.generate_table(objectsDB, refsDB, values["T3_tags"], T3_mode0, values["T3_srgb"], values["T3_gamma"], values["T3_folder"], values["T3_extension"], lang)
 
-                # Layout
-                T3_num = 15 # objects per row
-                T3_r = 46 # half a side of a square
-                T3_rr = 4 # rounding radius
-                T3_ar = T3_r-4 # active space
-                if T3_l < 11:
-                    T3_w = 1200
-                elif T3_l < T3_num:
-                    T3_w = 100*(T3_l + 1)
-                else:
-                    T3_w = 1600
-                T3_s = len(denumerized_references_list)
-                T3_name_step = 75
-                T3_objt_size = 17
-                T3_srce_size = 9
-                T3_srce_step = 3 * T3_srce_size
-                T3_note_size = 16
-                T3_note_step = 4 + T3_note_size
-                T3_auth_size = 10
-                T3_h0 = T3_name_step + 100 * int(np.ceil(T3_l / T3_num) + 1)
-                T3_h1 = T3_h0 + T3_s * T3_srce_step
-                T3_w0 = 100 - T3_r
-                T3_w1 = int(T3_w * 0.618034) # golden ratio
-                T3_img = Image.new("RGB", (T3_w, T3_h1 + 50), (0, 0, 0))
-                T3_draw = ImageDraw.Draw(T3_img)
-                try:
-                    T3_name_font = ImageFont.truetype("arial.ttf", 40)
-                    T3_help_font = ImageFont.truetype("arial.ttf", 18)
-                    T3_objt_font = ImageFont.truetype("ARIALN.TTF", T3_objt_size)
-                    T3_smll_font = ImageFont.truetype("arial.ttf", 12)
-                    T3_srce_font = ImageFont.truetype("arial.ttf", T3_srce_size)
-                    T3_note_font = ImageFont.truetype("arial.ttf", T3_note_size)
-                except OSError: # Linux
-                    T3_name_font = ImageFont.truetype("/usr/share/fonts/truetype/NotoSans-Regular.ttf", 40)
-                    T3_help_font = ImageFont.truetype("/usr/share/fonts/truetype/NotoSans-Regular.ttf", 18)
-                    T3_objt_font = ImageFont.truetype("/usr/share/fonts/truetype/NotoSans-Condensed.ttf", T3_objt_size)
-                    T3_smll_font = ImageFont.truetype("/usr/share/fonts/truetype/NotoSans-Regular.ttf", 12)
-                    T3_srce_font = ImageFont.truetype("/usr/share/fonts/truetype/NotoSans-Regular.ttf", T3_srce_size)
-                    T3_note_font = ImageFont.truetype("/usr/share/fonts/truetype/NotoSans-Regular.ttf", T3_note_size)
-                # text brightness formula: br = 255 * (x^(1/2.2))
-                T3_draw.text((T3_w0, 50), values["T3_tags"].join(tr.name_text[lang]), fill=(255, 255, 255), font=T3_name_font) # x = 1, br = 255
-                T3_draw.text((T3_w0, T3_h0 - 25), tr.ref[lang]+":", fill=(230, 230, 230), font=T3_help_font) # x = 0.8, br = 230
-                T3_draw.text((T3_w1, T3_h0 - 25), tr.note[lang]+":", fill=(230, 230, 230), font=T3_help_font) # x = 0.8, br = 230
-                T3_note_num = 0
-                for note, translation in tr.notes.items(): # x = 0.6, br = 202
-                    T3_draw.multiline_text((T3_w1, T3_h0 + T3_note_step * T3_note_num), f'{note} {translation[lang]}', fill=(202, 202, 202), font=T3_note_font)
-                    T3_note_num += 1
-                T3_info_num = 1
-                for info_num, info in enumerate([T3_mode0, values["T3_srgb"], values["T3_gamma"]]): # x = 0.75, br = 224
-                    T3_draw.multiline_text((T3_w1, T3_h0 + T3_note_step * (T3_note_num + info_num + 1)), f'{tr.info[lang][info_num]}: {info}', fill=(224, 224, 224), font=T3_note_font)
-                    T3_info_num += 1
-                T3_draw.multiline_text((T3_w1, T3_h0 + T3_note_step * (T3_note_num + T3_info_num)), tr.link, fill=(0, 200, 255), font=T3_note_font)
-                
-                # Table generator
-
-                T3_nm = cmf.xyz_nm if values["T3_srgb"] else cmf.rgb_nm
-            
-                T3_n = 0 # object counter
-                for name, spectrum in T3_data.items():
-                    T3_mode = T3_mode0
-
-                    # Spectral data import and processing
-                    T3_albedo = 0
-                    if "albedo" not in spectrum:
-                        if T3_mode == "albedo":
-                            T3_mode = "chromaticity"
-                        spectrum |= {"albedo": False}
-                    elif type(spectrum["albedo"]) != bool:
-                        T3_albedo = spectrum["albedo"]
-                    spectrum = calc.standardize_photometry(spectrum)
-                    
-                    # Spectrum interpolation
-                    T3_sun = False
-                    if "sun" in spectrum:
-                        T3_sun = spectrum["sun"]
-                    T3_curve = calc.polator(spectrum["nm"], spectrum["br"], T3_nm, T3_albedo, desun=T3_sun)
-
-                    # Color calculation
-                    T3_rgb = calc.to_rgb(
-                        name, T3_curve, mode=T3_mode,
-                        albedo = spectrum["albedo"] or T3_albedo,
-                        exp_bit=8, gamma=values["T3_gamma"], srgb=values["T3_srgb"]
-                    )
-
-                    # Object drawing
-                    center_x = 100 * (1 + T3_n%T3_num)
-                    center_y = T3_name_step + 100 * int(1 + T3_n/T3_num)
-                    T3_draw.rounded_rectangle((center_x-T3_r, center_y-T3_r, center_x+T3_r, center_y+T3_r), radius=T3_rr, fill=T3_rgb)
-                    
-                    T3_text_color = (0, 0, 0) if np.mean(T3_rgb) >= 127 else (255, 255, 255)
-                    
-                    if name[0] == "(": # Name processing
-                        parts = name.split(")", 1)
-                        name = parts[1].strip()
-                        T3_draw.text((center_x-T3_ar, center_y-T3_ar), f"({parts[0][1:]})", fill=T3_text_color, font=T3_smll_font)
-                    elif "/" in name:
-                        parts = name.split("/", 1)
-                        name = parts[1].strip()
-                        T3_draw.text((center_x-T3_ar, center_y-T3_ar), f"{parts[0]}/", fill=T3_text_color, font=T3_smll_font)
-                    
-                    if "|" in name:
-                        name, link = name.split("|")
-                        name = name.strip()
-                        new_link = []
-                        for i in link.split(", "):
-                            orig_num = int(i)-1 # reference number
-                            if orig_num in orig_num_list: # it was already numbered
-                                new_link.append(str(redirect_list[orig_num_list.index(orig_num)]))
-                            else:
-                                orig_num_list.append(orig_num)
-                                srce_num = len(orig_num_list) # its new number
-                                redirect_list.append(srce_num)
-                                adapted_references_list.append(denumerized_references_list[orig_num])
-                                new_link.append(str(srce_num))
-                                T3_draw.multiline_text((T3_w0, T3_h1 + (srce_num-1 - T3_s) * T3_srce_step), f'[{srce_num}] {adapted_references_list[-1]}', fill=(186, 186, 186), font=T3_srce_font) # x = 0.5, br = 186
-                        new_link = f'[{", ".join(new_link)}]'
-                        T3_draw.text((center_x+T3_ar-width(new_link, T3_smll_font), center_y-T3_ar), new_link, fill=T3_text_color, font=T3_smll_font)
-                    
-                    if lang != "en":
-                        for obj_name, tranlation in tr.names.items():
-                            if name.startswith(obj_name):
-                                name = name.replace(obj_name, tranlation[lang])
-                    
-                    T3_splitted = line_splitter(name, T3_objt_font, T3_ar*2)
-                    shift = T3_objt_size/2 if len(T3_splitted) == 1 else T3_objt_size
-                    T3_draw.multiline_text((center_x-T3_ar, center_y-shift), "\n".join(T3_splitted), fill=T3_text_color, font=T3_objt_font, spacing=5)
-                    
-                    T3_n += 1
-                    # print(export(T3_rgb), name)
-                
-                T3_file_name = f'TCT-table_{values["T3_tags"]}{"_srgb" if values["T3_srgb"] else ""}_{T3_mode}{"_gamma-corrected" if values["T3_gamma"] else ""}_{lang}.{values["T3_extension"]}'
-                T3_s2 = len(adapted_references_list)
-                T3_h2 = T3_h1 + (T3_s2 - T3_s) * T3_srce_step
-                T3_min_limit = T3_h0 + T3_note_step * (T3_note_num + T3_info_num + 1)
-                T3_img = T3_img.crop((0, 0, T3_w, T3_h2+50 if T3_h2 > T3_min_limit else T3_min_limit+50))
-                T3_img.save(f'{values["T3_folder"]}/{T3_file_name}')
-                # T3_img.show()
-                print("Done, saved as", T3_file_name, "\n")
         
         # ------------ Events in the tab "Blackbody & Redshifts" ------------
         
