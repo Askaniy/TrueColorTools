@@ -1,10 +1,16 @@
 from pathlib import Path
 import json5
-import spectra.database as db
+import spectra.core_database as db
 import scr.strings as tr
 
 
 # Support of database extension via json5 files
+
+def import_core_objs() -> dict:
+    return db.objects
+
+def import_core_refs() -> dict:
+    return db.refs
 
 def import_folder(folder: str) -> tuple:
     objects = {}
@@ -26,10 +32,10 @@ def import_folder(folder: str) -> tuple:
 
 # Front-end view on spectra database
 
-def obj_dict(tag: str, lang: str) -> dict:
+def obj_dict(database: dict, tag: str, lang: str) -> dict:
     """Maps front-end spectrum names allowed by the tag to names in the database"""
     names = {}
-    for raw_name, obj_data in db.objects.items():
+    for raw_name, obj_data in database.items():
         if tag == 'all':
             flag = True
         else:
@@ -57,10 +63,10 @@ def obj_dict(tag: str, lang: str) -> dict:
             names |= {new_name: raw_name}
     return names
 
-def tag_list() -> list:
+def tag_list(database: dict) -> list:
     """Generates a list of tags found in the spectra database"""
     tag_set = set(['all'])
-    for obj_data in db.objects.values():
+    for obj_data in database.values():
         if 'tags' in obj_data:
             tag_set.update(obj_data['tags'])
     return list(tag_set)

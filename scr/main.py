@@ -7,7 +7,6 @@ import plotly.graph_objects as go
 import scr.cmf as cmf
 import scr.filters as filters
 import scr.calculations as calc
-import spectra.database as db
 import scr.data_import as di
 import scr.strings as tr
 import scr.experimental
@@ -90,9 +89,9 @@ def frame(num, lang):
     return sg.Frame(f"{tr.gui_band[lang]} {num+1}", l, visible=True, key="T2_band"+n)
 
 def launch_window(lang, debug):
-    additional_spectra = di.import_folder('spectra')
-    db.objects |= additional_spectra[0]
-    db.refs |= additional_spectra[1]
+    additional_data = di.import_folder('spectra')
+    objectsDB = di.import_core_objs() | additional_data[0]
+    refsDB = di.import_core_refs() | additional_data[1]
 
     sg.LOOK_AND_FEEL_TABLE["MaterialDark"] = {
         'BACKGROUND': '#333333', 'TEXT': '#FFFFFF',
@@ -105,8 +104,8 @@ def launch_window(lang, debug):
 
     T1_col1 = [
         [sg.Text(tr.gui_database[lang], size=(16, 1), font=("arial", 12), key="T1_title1")],
-        [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T1_tagsN"), sg.InputCombo(di.tag_list(), default_value="featured", size=(17, 1), enable_events=True, key="T1_tags")],
-        [sg.Listbox(values=tuple(di.obj_dict("featured", lang).keys()), size=(27, 22), enable_events=True, key="T1_list")]
+        [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T1_tagsN"), sg.InputCombo(di.tag_list(objectsDB), default_value="featured", size=(17, 1), enable_events=True, key="T1_tags")],
+        [sg.Listbox(values=tuple(di.obj_dict(objectsDB, "featured", lang).keys()), size=(27, 22), enable_events=True, key="T1_list")]
     ]
     T1_col2 = [
         [sg.Text(tr.gui_settings[lang], size=(16, 1), font=("arial", 12), key="T1_title2")],
@@ -189,7 +188,7 @@ def launch_window(lang, debug):
 
     T3_col1 = [
         [sg.Text(tr.gui_settings[lang], size=(20, 1), font=("arial", 12), key="T3_title1")],
-        [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T3_tagsN"), sg.InputCombo(di.tag_list(), default_value="featured", size=(16, 1), enable_events=True, key="T3_tags")],
+        [sg.Text(tr.gui_tags[lang], size=(7, 1), key="T3_tagsN"), sg.InputCombo(di.tag_list(objectsDB), default_value="featured", size=(16, 1), enable_events=True, key="T3_tags")],
         [sg.HorizontalSeparator()],
         [sg.Checkbox(tr.gui_gamma[lang], size=(16, 1), enable_events=True, default=True, key="T3_gamma")],
         [sg.Checkbox("sRGB", enable_events=True, size=(16, 1), key="T3_srgb")],
@@ -293,7 +292,7 @@ def launch_window(lang, debug):
             window["T1_title2"].update(tr.gui_settings[lang])
             window["T1_title3"].update(tr.gui_results[lang])
             window["T1_tagsN"].update(tr.gui_tags[lang])
-            window["T1_list"].update(values=tuple(di.obj_dict(values["T1_tags"], lang).keys()))
+            window["T1_list"].update(values=tuple(di.obj_dict(objectsDB, values["T1_tags"], lang).keys()))
             window["T1_gamma"].update(text=tr.gui_gamma[lang])
             window["T1_br_mode"].update(tr.gui_br[lang][0])
             window["T1_br_mode0"].update(text=tr.gui_br[lang][1])
@@ -360,7 +359,7 @@ def launch_window(lang, debug):
         
         elif event == tr.ref[lang]:
             to_show = ''
-            for key, value in db.refs.items():
+            for key, value in refsDB.items():
                 to_show += f'"{key}": {value[0]}\n'
                 for info in value[1:]:
                     to_show += info + '\n'
@@ -388,7 +387,7 @@ def launch_window(lang, debug):
                         T1_mode = br_modes[i]
 
                 # Spectral data import and processing
-                T1_spectrum = db.objects[di.obj_dict("all", lang)[T1_name]]
+                T1_spectrum = objectsDB[di.obj_dict(objectsDB, "all", lang)[T1_name]]
                 T1_albedo = 0
                 if "albedo" not in T1_spectrum:
                     if T1_mode == "albedo":
@@ -433,7 +432,7 @@ def launch_window(lang, debug):
                 window["T1_hex"].update(T1_rgb_show)
             
             elif event == "T1_tags":
-                window["T1_list"].update(tuple(di.obj_dict(values["T1_tags"], lang).keys()))
+                window["T1_list"].update(tuple(di.obj_dict(objectsDB, values["T1_tags"], lang).keys()))
             
             elif event == "T1_add" and values["T1_list"] != []:
                 names.append(values["T1_list"][0])
@@ -457,8 +456,8 @@ def launch_window(lang, debug):
                 T1_nm = cmf.xyz_nm if values["T1_srgb"] else cmf.rgb_nm
                 
                 # Spectrum processing
-                for name_1, name_0 in di.obj_dict(values["T1_tags"], lang).items():
-                    T1_spectrum = db.objects[name_0]
+                for name_1, name_0 in di.obj_dict(objectsDB, values["T1_tags"], lang).items():
+                    T1_spectrum = objectsDB[name_0]
                     for i in range(3):
                         if values["T1_br_mode"+str(i)]:
                             T1_mode = br_modes[i]
@@ -748,12 +747,12 @@ def launch_window(lang, debug):
 
                 # Database preprocessing
                 if values["T3_tags"] == "all":
-                    T3_data = db.objects
+                    T3_data = objectsDB
                     T3_l = len(T3_data)
                 else:
                     T3_data = {}
                     T3_l = 0
-                    for name, spectrum in db.objects.items():
+                    for name, spectrum in objectsDB.items():
                         if "tags" in spectrum:
                             if values["T3_tags"] in spectrum["tags"]:
                                 T3_data |= {name: spectrum}
@@ -762,7 +761,7 @@ def launch_window(lang, debug):
                     if values["T3_br_mode"+str(i)]:
                         T3_mode0 = br_modes[i]
                 
-                denumerized_references_list = denumerized_references(db.references)
+                denumerized_references_list = denumerized_references(refsDB)
                 adapted_references_list = []
                 orig_num_list = []
                 redirect_list = []

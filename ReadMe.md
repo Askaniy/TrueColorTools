@@ -50,25 +50,18 @@ Notes: sources are renumbered by usage in the processed category; to use the *Ta
 
 **Blackbody & Redshifts tab** calculates the influence of physical phenomena on color. Based on the blackbody spectrum, the program displays the changes in color and brightness from Doppler and gravitational redshifts. You can lock the exposure through the spectral irradiance scale, converted into stellar magnitudes per 1 nm. The surface brightness selected by the slider is assumed to be unity.
 
-### Auxiliary
-- [`calculations.py`](scr/calculations.py) is the mathematical core. It contains most of functions and some zero points of photometric systems;
-- [`cmf.py`](scr/cmf.py) contains sensitivity of human perception and used curve of color space;
-- [`database.py`](scr/database.py) contains spectra, color indices and their sources;
-- [`filters.py`](scr/filters.py) is a database of spacecraft photometric systems;
-- [`strings.py`](scr/strings.py) contains almost all used inscriptions of other scripts in supported languages.
-
 ### Important notes
 - Tag system. Each object in the database can be assigned an arbitrary set of tags. They form lists of categories in the *Spectra* and *Table* tabs, which makes it easier to work with a huge database.
-- System of sources. Each object in the database can be easily linked to one or several sources by its number. You can see the list in `File`→`Sources`. Also, after an object's name there can be abbreviations, the decoding of which is indicated in `File`→`Notes`.
+- Reference system. Each object in the database can be easily linked to one or several data sources by its short name. You can see the list in `File`→`Sources`. Also, after an object's name there can be abbreviations, the decoding of which is indicated in `File`→`Notes`.
 - The language can be changed through the top menu. Runtime translation is not available only for tab titles (due to PySimpleGUI limitations). For full localization, you can change the `lang` variable in the [`runTCT.py`](runTCT.py) code. TCT supports English, German and Russian. If you want to add support for your language, you can do it by analogy in [`strings.py`](scr/strings.py).
 
 
-## Database modification
-Format of spectra database is just a dictionary in a Python file. You can modify it with your own spectra, and, if you want, share data for TCT. There are many examples in the database and the easiest way is to do by analogy. Note that any parameters must increase with wavelength.
+## Database extension
+Spectra and their references are stored in the `core_database.py` and complementary `*.json5` files. The `core_database.py` can affect internal processes, so it is not recommended to change it. But you can add custom json5 files to the `/spectra` folder and they will be detected. Newly read spectra, if they suddenly have the same names, replace the old ones. You can help the project by creating and sharing database files. Note that any parameters must increase with wavelength.
 
 ### Dictionary keys
 - `nm`: list of wavelengths in nanometers
-- `br`: same-size list of reflectivity
+- `br`: same-size list of linear physical property, representing "brightness"
 - `mag`: same-size list of magnitudes
 - `filters`: filter system, linked with [`filters.py`](scr/filters.py)
 - `indices`: dictionary of color indices, use only with `filters`

@@ -1,0 +1,137 @@
+{
+    "Jovian irregulars|Graykowski2018": {"tags": ["featured", "solar_system", "class", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.75, "V-R": 0.44}, "sun": true, "albedo": 0.04, // estimation
+    },
+    "Jovian irregulars i=28°|Grav2003": {"tags": ["featured", "solar_system", "class", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.66, "V-R": 0.36}, "sun": true, "albedo": 0.04, // estimation
+    },
+    "Jovian irregulars i=149°|Grav2003": {"tags": ["featured", "solar_system", "class", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.75, "V-R": 0.41}, "sun": true, "albedo": 0.04, // estimation
+    },
+    "Himalia|Rettig2001": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.632, "V-R": 0.375}, "sun": true
+    },
+    "Elara|Rettig2001": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.66, "V-R": 0.357}, "sun": true
+    },
+    "Pasiphae|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.74, "V-R": 0.38, "V-I": 0.74}, "sun": true
+    },
+    "Pasiphae (weighted)|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.71, "V-R": 0.39, "V-I": 0.75}, "sun": true
+    },
+    "Pasiphae|Rettig2001": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.68, "V-R": 0.41}, "sun": true
+    },
+    "Sinope|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.77, "V-R": 0.48}, "sun": true
+    },
+    "Sinope|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.84, "V-R": 0.46, "V-I": 0.93}, "sun": true
+    },
+    "Sinope|Rettig2001": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.749, "V-R": 0.481}, "sun": true
+    },
+    "Lysithea|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.41}, "sun": true
+    },
+    "Lysithea|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.36, "V-I": 0.74}, "sun": true
+    },
+    "Lysithea|Rettig2001": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.671, "V-R": 0.378}, "sun": true
+    },
+    "Carme|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.76, "V-R": 0.48}, "sun": true
+    },
+    "Carme|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.76, "V-R": 0.47, "V-I": 0.97}, "sun": true
+    },
+    "Carme|Rettig2001": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.445}, "sun": true
+    },
+    "Ananke|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.90, "V-R": 0.38, "V-I": 0.86}, "sun": true
+    },
+    "Ananke (weighted)|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.77, "V-R": 0.42, "V-I": 0.83}, "sun": true
+    },
+    "Ananke|Rettig2001": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.758, "V-R": 0.428}, "sun": true
+    },
+    "Leda|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.66, "V-R": 0.43}, "sun": true
+    },
+    "Leda|Rettig2001": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.644, "V-R": 0.348}, "sun": true
+    },
+    "Callirrhoe|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.50, "V-I": 1.02}, "sun": true
+    },
+    "Themisto|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.80, "V-R": 0.48}, "sun": true
+    },
+    "Themisto|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.83, "V-R": 0.46, "V-I": 0.94}, "sun": true
+    },
+    "Megaclite|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.82, "V-R": 0.44}, "sun": true
+    },
+    "Megaclite|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.94, "V-R": 0.41, "V-I": 1.05}, "sun": true
+    },
+    "Taygete|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.84, "V-R": 0.47}, "sun": true
+    },
+    "Taygete|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.56, "V-R": 0.52, "V-I": 0.96}, "sun": true
+    },
+    "Chaldene|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.82, "V-R": 0.50}, "sun": true
+    },
+    "Harpalyke|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.70, "V-R": 0.42}, "sun": true
+    },
+    "Kalyke|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.69, "V-R": 0.46}, "sun": true
+    },
+    "Kalyke|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.94, "V-R": 0.705, "V-I": 0.890}, "sun": true
+    },
+    "Iocaste|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.86, "V-R": 0.38}, "sun": true
+    },
+    "Iocaste|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.63, "V-R": 0.36, "V-I": 0.62}, "sun": true
+    },
+    "Erinome|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.42}, "sun": true
+    },
+    "Isonoe|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.78, "V-R": 0.53}, "sun": true
+    },
+    "Praxidike|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.71, "V-R": 0.32}, "sun": true
+    },
+    "Praxidike|Grav2003": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.77, "V-R": 0.34, "V-I": 0.74}, "sun": true
+    },
+    "Autonoe|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.51}, "sun": true
+    },
+    "Thyone|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.71, "V-R": 0.45}, "sun": true
+    },
+    "Hermippe|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.73, "V-R": 0.49}, "sun": true
+    },
+    "Callirrhoe|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.81, "V-R": 0.23}, "sun": true
+    },
+    "Eukelade|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.79, "V-R": 0.50}, "sun": true
+    },
+    "Cyllene|Graykowski2018": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.73, "V-R": 0.46}, "sun": true
+    },
+}

@@ -3,7 +3,7 @@ import numpy as np
 from scipy.interpolate import Akima1DInterpolator
 import scr.cmf as cmf
 import scr.experimental
-import spectra.database as db
+import spectra.core_database as db
 sun = db.objects['Sun|CALSPEC']
 vega = db.objects['Vega|CALSPEC']
 

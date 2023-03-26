@@ -1,0 +1,20 @@
+{
+    "Uranian irregulars|Graykowski2018": {"tags": ["featured", "solar_system", "class", "moon", "uranian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.84, "V-R": 0.53}, "sun": true, "albedo": 0.04, // estimation
+    },
+    "Caliban|Graykowski2018": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.81, "V-R": 0.47}, "sun": true
+    },
+    "Sycorax|Graykowski2018": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.81, "V-R": 0.54}, "sun": true
+    },
+    "Prospero|Graykowski2018": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.81, "V-R": 0.51}, "sun": true
+    },
+    "Setebos|Graykowski2018": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.78, "V-R": 0.49}, "sun": true
+    },
+    "Stephano|Graykowski2018": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
+        "filters": "Landolt", "indices": {"B-V": 0.97, "V-R": 0.66}, "sun": true
+    },
+}
