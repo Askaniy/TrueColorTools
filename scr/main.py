@@ -350,9 +350,10 @@ def launch_window(lang, debug):
                 T1_spectrum = calc.standardize_photometry(T1_spectrum)
                 
                 # Spectrum interpolation
-                T1_sun = False
-                if "sun" in T1_spectrum:
-                    T1_sun = T1_spectrum["sun"]
+                try:
+                    T1_sun = T1_spectrum['sun']
+                except KeyError:
+                    T1_sun = False
                 T1_curve = calc.polator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo, values["T1_interp1"], desun=T1_sun)
                 
                 # Color calculation
@@ -423,9 +424,10 @@ def launch_window(lang, debug):
                     T1_spectrum = calc.standardize_photometry(T1_spectrum)
                     
                     # Spectrum interpolation
-                    T1_sun = False
-                    if "sun" in T1_spectrum:
-                        T1_sun = T1_spectrum["sun"]
+                    try:
+                        T1_sun = T1_spectrum['sun']
+                    except KeyError:
+                        T1_sun = False
                     T1_curve = calc.polator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo, values["T1_interp1"], desun=T1_sun)
 
                     # Color calculation
@@ -701,8 +703,7 @@ def launch_window(lang, debug):
                 for i in range(3):
                     if values["T3_br_mode"+str(i)]:
                         T3_mode0 = br_modes[i]
-                
-                tg.generate_table(objectsDB, refsDB, values["T3_tags"], T3_mode0, values["T3_srgb"], values["T3_gamma"], values["T3_folder"], values["T3_extension"], lang)
+                tg.generate_table(objectsDB, values["T3_tags"], T3_mode0, values["T3_srgb"], values["T3_gamma"], values["T3_folder"], values["T3_extension"], lang)
 
         
         # ------------ Events in the tab "Blackbody & Redshifts" ------------

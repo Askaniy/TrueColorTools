@@ -104,6 +104,11 @@ ref = {
     "ru": "Источники",
     "de": "Quellen"
 }
+legend = {
+    "en": "Legend",
+    "ru": "Легенда",
+    "de": "Legende"
+}
 note = {
     "en": "Notes",
     "ru": "Примечания",
@@ -111,9 +116,9 @@ note = {
 }
 link = "github.com/Askaniy/TrueColorTools"
 auth_info = {
-    "en": "Anpilogov Askaniy, 2020-2022",
-    "ru": "Анпилогов Асканий, 2020-2022",
-    "de": "Anpilogov Askaniy, 2020-2022"
+    "en": "Anpilogov Askaniy, 2020-2023",
+    "ru": "Анпилогов Асканий, 2020-2023",
+    "de": "Anpilogov Askaniy, 2020-2023"
 }
 
 langs = {
