@@ -156,6 +156,16 @@ gui_database = {
     "ru": "База данных",
     "de": "Datenbank"
 }
+gui_load = {
+    "en": "Load database",
+    "ru": "Загрузить базу данных",
+    "de": "Datenbank laden"
+}
+gui_update = {
+    "en": "Update database",
+    "ru": "Обновить базу данных",
+    "de": "Aktualisierung"
+}
 gui_settings = {
     "en": "Settings",
     "ru": "Параметры",

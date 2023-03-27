@@ -25,14 +25,14 @@ def export(rgb):
     return "".join([i.ljust(w) for i in lst])
 
 def launch_window(lang, debug):
-    additional_data = di.import_folder('spectra')
-    objectsDB = di.import_core_objs() | additional_data[0]
-    refsDB = di.import_core_refs() | additional_data[1]
+    objectsDB, refsDB = {}, {} # initial loading became too long with separate json5 database files
+    tagsDB = []
+    default_tag = 'featured'
 
     T2_preview = (256, 128)
     T2_area = T2_preview[0]*T2_preview[1]
     T4_text_colors = ("#A3A3A3", "#FFFFFF")
-    window = sg.Window("True Color Tools", gui.generate_layout(objectsDB, T2_preview, T4_text_colors, lang), finalize=True)
+    window = sg.Window("True Color Tools", gui.generate_layout(T2_preview, T4_text_colors, lang), finalize=True)
     T2_vis = 3  # current number of visible image bands
     T2_num = 10 # max number of image bands, ~ len(window["T2_frames"])
 
@@ -83,6 +83,19 @@ def launch_window(lang, debug):
         
         elif event == tr.gui_info[lang]:
             sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event)
+        
+        elif event.endswith('database'): # global loading of spectra database
+            objectsDB, refsDB = di.import_DBs(['spectra'])
+            tagsDB = di.tag_list(objectsDB)
+            window['T1_tagsN'].update(visible=True)
+            window['T1_tags'].update(default_tag, values=tagsDB, visible=True)
+            window['T3_tagsN'].update(visible=True)
+            window['T3_tags'].update(default_tag, values=tagsDB, visible=True)
+            window['T1_list'].update(values=tuple(di.obj_dict(objectsDB, default_tag, lang).keys()), visible=True)
+            window['T1_database'].metadata=False
+            window['T1_database'].update(tr.gui_update[lang])
+            window['T3_database'].metadata=False
+            window['T3_database'].update(tr.gui_update[lang])
         
         # ------------ Events in the tab "Spectra" ------------
 
@@ -460,7 +473,7 @@ def launch_window(lang, debug):
                 for i in range(3):
                     if values["T3_br_mode"+str(i)]:
                         T3_mode0 = br_modes[i]
-                tg.generate_table(objectsDB, values["T3_tags"], T3_mode0, values["T3_srgb"], values["T3_gamma"], values["T3_folder"], values["T3_extension"], lang)
+                tg.generate_table(objectsDB, tagsDB, T3_mode0, values["T3_srgb"], values["T3_gamma"], values["T3_folder"], values["T3_extension"], lang)
 
         
         # ------------ Events in the tab "Blackbody & Redshifts" ------------

@@ -6,11 +6,14 @@ import scr.strings as tr
 
 # Support of database extension via json5 files
 
-def import_core_objs() -> dict:
-    return db.objects
-
-def import_core_refs() -> dict:
-    return db.refs
+def import_DBs(folders: list):
+    objectsDB = db.objects
+    refsDB = db.refs
+    for folder in folders:
+        additional_data = import_folder(folder)
+        objectsDB |= additional_data[0]
+        refsDB |= additional_data[1]
+    return objectsDB, refsDB
 
 def import_folder(folder: str) -> tuple:
     objects = {}

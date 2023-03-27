@@ -2,7 +2,6 @@ import io
 import PySimpleGUI as sg
 import scr.strings as tr
 import scr.filters as filters
-import scr.data_import as di
 
 sg.LOOK_AND_FEEL_TABLE['MaterialDark'] = {
         'BACKGROUND': '#333333', 'TEXT': '#FFFFFF',
@@ -29,11 +28,12 @@ def frame(num, lang):
     ]
     return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, visible=True, key='T2_band'+n)
 
-def generate_layout(objectsDB, T2_preview: tuple, T4_text_colors: tuple, lang: str):
+def generate_layout(T2_preview: tuple, T4_text_colors: tuple, lang: str):
     T1_col1 = [
         [sg.Text(tr.gui_database[lang], size=16, font=('arial', 12), key='T1_title1')],
-        [sg.Text(tr.gui_tags[lang], size=7, key='T1_tagsN'), sg.InputCombo(di.tag_list(objectsDB), default_value='featured', size=17, enable_events=True, key='T1_tags')],
-        [sg.Listbox(values=tuple(di.obj_dict(objectsDB, 'featured', lang).keys()), size=(27, 22), enable_events=True, key='T1_list')]
+        [sg.Text(tr.gui_tags[lang], size=7, key='T1_tagsN', visible=False), sg.InputCombo([], default_value='', size=17, enable_events=True, key='T1_tags', visible=False)],
+        [sg.Listbox(values=(), size=(27, 22), enable_events=True, key='T1_list', visible=False)],
+        [sg.Button(button_text=tr.gui_load[lang], size=22, key='T1_database', metadata=True)]
     ]
     T1_col2 = [
         [sg.Text(tr.gui_settings[lang], size=16, font=('arial', 12), key='T1_title2')],
@@ -112,7 +112,8 @@ def generate_layout(objectsDB, T2_preview: tuple, T4_text_colors: tuple, lang: s
 
     T3_col1 = [
         [sg.Text(tr.gui_settings[lang], size=20, font=('arial', 12), key='T3_title1')],
-        [sg.Text(tr.gui_tags[lang], size=7, key='T3_tagsN'), sg.InputCombo(di.tag_list(objectsDB), default_value='featured', size=16, enable_events=True, key='T3_tags')],
+        [sg.Text(tr.gui_tags[lang], size=7, key='T3_tagsN', visible=False), sg.InputCombo([], default_value='', size=16, enable_events=True, key='T3_tags', visible=False)],
+        [sg.Button(button_text=tr.gui_load[lang], size=22, key='T3_database', metadata=True)],
         [sg.HorizontalSeparator()],
         [sg.Checkbox(tr.gui_gamma[lang], size=16, enable_events=True, default=True, key='T3_gamma')],
         [sg.Checkbox('sRGB', enable_events=True, size=16, key='T3_srgb')],
@@ -187,6 +188,7 @@ def translate(window: sg.Window, T2_num: int, lang: str):
     window['T1_title1'].update(tr.gui_database[lang])
     window['T1_title2'].update(tr.gui_settings[lang])
     window['T1_title3'].update(tr.gui_results[lang])
+    window['T1_database'].update(tr.gui_load[lang] if window['T1_database'].metadata else tr.gui_update[lang])
     window['T1_tagsN'].update(tr.gui_tags[lang])
     window['T1_gamma'].update(text=tr.gui_gamma[lang])
     window['T1_br_mode'].update(tr.gui_br[lang][0])
@@ -229,6 +231,7 @@ def translate(window: sg.Window, T2_num: int, lang: str):
     window['T3_title1'].update(tr.gui_settings[lang])
     window['T3_title2'].update(tr.gui_results[lang])
     window['T3_tagsN'].update(tr.gui_tags[lang])
+    window['T3_database'].update(tr.gui_load[lang] if window['T3_database'].metadata else tr.gui_update[lang])
     window['T3_gamma'].update(text=tr.gui_gamma[lang])
     window['T3_br_mode'].update(tr.gui_br[lang][0])
     window['T3_br_mode0'].update(text=tr.gui_br[lang][1])
