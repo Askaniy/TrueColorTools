@@ -10,7 +10,6 @@ sg.LOOK_AND_FEEL_TABLE['MaterialDark'] = {
         'BORDER': 0, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0,
         'ACCENT1': '#FF0266', 'ACCENT2': '#FF5C93', 'ACCENT3': '#C5003C'
     }
-sg.ChangeLookAndFeel('MaterialDark')
 
 def convert_to_bytes(img):
     bio = io.BytesIO()
@@ -28,15 +27,15 @@ def frame(num, lang):
     ]
     return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, visible=True, key='T2_band'+n)
 
-def generate_layout(T2_preview: tuple, T4_text_colors: tuple, lang: str):
+def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple, lang: str):
     T1_col1 = [
-        [sg.Text(tr.gui_database[lang], size=16, font=('arial', 12), key='T1_title1')],
+        [sg.Push(), sg.Text(tr.gui_database[lang], font=('arial', 12), key='T1_title1'), sg.Push()],
         [sg.Text(tr.gui_tags[lang], size=7, key='T1_tagsN', visible=False), sg.InputCombo([], default_value='', size=17, enable_events=True, key='T1_tags', visible=False)],
         [sg.Listbox(values=(), size=(27, 22), enable_events=True, key='T1_list', visible=False)],
         [sg.Button(button_text=tr.gui_load[lang], size=22, key='T1_database', metadata=True)]
     ]
     T1_col2 = [
-        [sg.Text(tr.gui_settings[lang], size=16, font=('arial', 12), key='T1_title2')],
+        [sg.Push(), sg.Text(tr.gui_settings[lang], font=('arial', 12), key='T1_title2'), sg.Push()],
         [sg.Checkbox(tr.gui_gamma[lang], size=16, enable_events=True, default=True, key='T1_gamma')],
         [sg.Checkbox('sRGB', enable_events=True, size=16, key='T1_srgb')],
         [sg.HorizontalSeparator()],
@@ -56,8 +55,8 @@ def generate_layout(T2_preview: tuple, T4_text_colors: tuple, lang: str):
         [sg.Text(tr.gui_rnd[lang], size=14, key='T1_rnd'), sg.InputText('3', size=4, enable_events=True, key='T1_rnd_num')]
     ]
     T1_col3 = [
-        [sg.Text(tr.gui_results[lang], size=16, font=('arial', 12), key='T1_title3')],
-        [sg.Graph(canvas_size=(180, 175), graph_bottom_left=(0, 0), graph_top_right=(100, 100), background_color=None, key='T1_graph')],
+        [sg.Push(), sg.Text(tr.gui_results[lang], font=('arial', 12), key='T1_title3'), sg.Push()],
+        [sg.Push(), sg.Graph(canvas_size=canvas_size, graph_bottom_left=(0, 0), graph_top_right=canvas_size, background_color=None, key='T1_graph'), sg.Push()],
         [sg.Text(tr.gui_rgb[lang], size=12, key='T1_colorRGB')],
         [sg.In(size=25, key='T1_rgb')],
         [sg.Text(tr.gui_hex[lang], size=12, key='T1_colorHEX')],
@@ -107,7 +106,7 @@ def generate_layout(T2_preview: tuple, T4_text_colors: tuple, lang: str):
         sg.FolderBrowse(button_text=tr.gui_browse[lang], size=10, key='T2_browse_folder')],
         [sg.Button(tr.gui_preview[lang], size=19, disabled=True, key='T2_preview'),
         sg.Button(tr.gui_process[lang], size=19, disabled=True, key='T2_process')],
-        [sg.Image(background_color='black', size=T2_preview, key='T2_image')]
+        [sg.Push(), sg.Image(background_color='black', size=T2_preview, key='T2_image'), sg.Push()]
     ]
 
     T3_col1 = [
@@ -134,7 +133,7 @@ def generate_layout(T2_preview: tuple, T4_text_colors: tuple, lang: str):
     slider_size = (30, 15)
     T4_text_colors = ('#A3A3A3', '#FFFFFF')
     T4_col1 = [
-        [sg.Text(tr.gui_input[lang], size=16, font=('arial', 12), key='T4_title1')],
+        [sg.Push(), sg.Text(tr.gui_input[lang], font=('arial', 12), key='T4_title1'), sg.Push()],
         [sg.Text(tr.gui_temp[lang], size=16, key='T4_temp'), sg.Slider(range=(0, 20000), default_value=0, resolution=100, orientation='h', size=slider_size, enable_events=True, key='T4_slider1')],
         [sg.Text(tr.gui_velocity[lang], size=16, key='T4_velocity'), sg.Slider(range=(-1, 1), default_value=0, resolution=0.01, orientation='h', size=slider_size, enable_events=True, key='T4_slider2')],
         [sg.Text(tr.gui_vII[lang], size=16, key='T4_vII'), sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation='h', size=slider_size, enable_events=True, key='T4_slider3')],
@@ -149,8 +148,8 @@ def generate_layout(T2_preview: tuple, T4_text_colors: tuple, lang: str):
         sg.Text(tr.gui_rnd[lang], size=14, key='T4_rnd'), sg.InputText('3', size=4, enable_events=True, key='T4_rnd_num')]
     ]
     T4_col2 = [
-        [sg.Text(tr.gui_results[lang], size=16, font=('arial', 12), key='T4_title2')],
-        [sg.Graph(canvas_size=(180, 175), graph_bottom_left=(0, 0), graph_top_right=(100, 100), background_color=None, key='T4_graph')],
+        [sg.Push(), sg.Text(tr.gui_results[lang], font=('arial', 12), key='T4_title2'), sg.Push()],
+        [sg.Push(), sg.Graph(canvas_size=canvas_size, graph_bottom_left=(0, 0), graph_top_right=canvas_size, background_color=None, key='T4_graph'), sg.Push()],
         [sg.Text(tr.gui_rgb[lang], size=12, key='T4_colorRGB')],
         [sg.In(size=25, key='T4_rgb')],
         [sg.Text(tr.gui_hex[lang], size=12, key='T4_colorHEX')],

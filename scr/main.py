@@ -29,15 +29,19 @@ def launch_window(lang, debug):
     tagsDB = []
     default_tag = 'featured'
 
+    circle_r = 72 # radius in pixels of color preview circle
+    circle_coord = (circle_r, circle_r+1)
     T2_preview = (256, 128)
     T2_area = T2_preview[0]*T2_preview[1]
     T4_text_colors = ("#A3A3A3", "#FFFFFF")
-    window = sg.Window("True Color Tools", gui.generate_layout(T2_preview, T4_text_colors, lang), finalize=True)
+
+    sg.ChangeLookAndFeel('MaterialDark')
+    window = sg.Window("True Color Tools", gui.generate_layout((2*circle_r+1, 2*circle_r+1), T2_preview, T4_text_colors, lang), finalize=True)
     T2_vis = 3  # current number of visible image bands
     T2_num = 10 # max number of image bands, ~ len(window["T2_frames"])
 
-    T1_preview = window["T1_graph"].DrawCircle((48, 46), 42, fill_color="black", line_color="white")
-    T4_preview = window["T4_graph"].DrawCircle((48, 46), 42, fill_color="black", line_color="white")
+    T1_preview = window["T1_graph"].DrawCircle(circle_coord, circle_r, fill_color="black", line_color=None)
+    T4_preview = window["T4_graph"].DrawCircle(circle_coord, circle_r, fill_color="black", line_color=None)
 
     T1_fig = go.Figure()
     T1_events = ["T1_list", "T1_gamma", "T1_srgb", "T1_br_mode0", "T1_br_mode1", "T1_br_mode2", "T1_interp0", "T1_interp1", "T1_slider", "T1_bit_num", "T1_rnd_num"]
