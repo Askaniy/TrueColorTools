@@ -1,5 +1,5 @@
 from pathlib import Path
-import json5
+from json5 import load
 import spectra.core_database as db
 import scr.strings as tr
 
@@ -19,8 +19,7 @@ def import_folder(folder: str) -> tuple:
         for file in Path(folder).iterdir():
             if file.suffix == '.json5' and not file.is_dir():
                 with open(file) as f:
-                    content = json5.load(f)
-                    for key, value in content.items():
+                    for key, value in load(f).items():
                         if type(value) == list:
                             refs |= {key: value}
                         else:
