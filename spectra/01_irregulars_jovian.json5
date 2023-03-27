@@ -1,13 +1,4 @@
 {
-    "Jovian irregulars|Graykowski2018": {"tags": ["featured", "solar_system", "class", "moon", "jovian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.75, "V-R": 0.44}, "sun": true, "albedo": 0.04, // estimation
-    },
-    "Jovian irregulars i=28°|Grav2003": {"tags": ["featured", "solar_system", "class", "moon", "jovian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.66, "V-R": 0.36}, "sun": true, "albedo": 0.04, // estimation
-    },
-    "Jovian irregulars i=149°|Grav2003": {"tags": ["featured", "solar_system", "class", "moon", "jovian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.75, "V-R": 0.41}, "sun": true, "albedo": 0.04, // estimation
-    },
     "Himalia|Rettig2001": {"tags": ["solar_system", "moon", "jovian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.632, "V-R": 0.375}, "sun": true
     },

@@ -3,36 +3,6 @@
         "Minor Bodies in the Outer Solar System: Magnitudes and Colours",
         "http://www.eso.org/~ohainaut/MBOSS/", "http://www.eso.org/~ohainaut/MBOSS/mbossClasses.txt"
     ],
-    "Comets:SP|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
-        "filters": "Landolt", "indices": {"B-V": 0.87, "V-R": 0.50, "R-I": 0.45}, "sun": true, "albedo": 0.04
-    },
-    "Comets:LP|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
-        "filters": "Landolt", "indices": {"B-V": 0.79, "V-R": 0.46, "R-I": 0.44}, "sun": true, "albedo": 0.04
-    },
-    "J. trojans|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
-        "filters": "Landolt", "indices": {"U-B": 0.1, "B-V": 0.78, "V-R": 0.45, "R-I": 0.42}, "sun": true, "albedo": 0.05
-    },
-    "Centaurs|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
-        "filters": "Landolt", "indices": {"B-V": 0.87, "V-R": 0.55, "R-I": 0.50}, "sun": true, "albedo": 0.078
-    },
-    "Plutinos|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
-        "filters": "Landolt", "indices": {"B-V": 0.88, "V-R": 0.55, "R-I": 0.53}, "sun": true, "albedo": 0.114
-    }, // albedo from zelario's sheet
-    "Other res.|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
-        "filters": "Landolt", "indices": {"U-B": 0.27, "B-V": 0.95, "V-R": 0.59, "R-I": 0.54}, "sun": true, "albedo": 0.148
-    }, // albedo from zelario's sheet
-    "Cubewano:H|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
-        "filters": "Landolt", "indices": {"U-B": 0.27, "B-V": 0.88, "V-R": 0.54, "R-I": 0.53}, "sun": true, "albedo": 0.102
-    }, // albedo from zelario's sheet
-    "Cubewano:C|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
-        "filters": "Landolt", "indices": {"U-B": 0.59, "B-V": 1.00, "V-R": 0.63, "R-I": 0.59}, "sun": true, "albedo": 0.132
-    }, // albedo from zelario's sheet
-    "SDO|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
-        "filters": "Landolt", "indices": {"U-B": 0.33, "B-V": 0.85, "V-R": 0.52, "R-I": 0.51}, "sun": true, "albedo": 0.075
-    }, // albedo from zelario's sheet
-    "Detached|MBOSS": {"tags": ["featured", "solar_system", "class", "orbit"],
-        "filters": "Landolt", "indices": {"U-B": 0.18, "B-V": 0.88, "V-R": 0.54, "R-I": 0.51}, "sun": true, "albedo": 0.108
-    }, // albedo from zelario's sheet
     "C/1995O1-HB|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
         "filters": "Landolt", "indices": {"B-V": 0.810, "V-R": 0.390}, "sun": true
     },

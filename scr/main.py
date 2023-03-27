@@ -473,7 +473,7 @@ def launch_window(lang, debug):
                 for i in range(3):
                     if values["T3_br_mode"+str(i)]:
                         T3_mode0 = br_modes[i]
-                tg.generate_table(objectsDB, tagsDB, T3_mode0, values["T3_srgb"], values["T3_gamma"], values["T3_folder"], values["T3_extension"], lang)
+                tg.generate_table(objectsDB, values["T3_tags"], T3_mode0, values["T3_srgb"], values["T3_gamma"], values["T3_folder"], values["T3_extension"], lang)
 
         
         # ------------ Events in the tab "Blackbody & Redshifts" ------------

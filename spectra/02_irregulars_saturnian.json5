@@ -3,15 +3,6 @@
         "Colors of Irregular Satellites of Saturn with DECam",
         "DOI: 10.3847/1538-3881/ac6258", "https://arxiv.org/abs/2204.08391"
     ],
-    "Saturnian irregulars|Graykowski2018": {"tags": ["featured", "solar_system", "class", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.69, "V-R": 0.44}, "sun": true, "albedo": 0.04, // estimation
-    },
-    "Saturnian irregulars i=34°|Grav2003": {"tags": ["featured", "solar_system", "class", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.91, "V-R": 0.48}, "sun": true, "albedo": 0.04, // estimation
-    },
-    "Saturnian irregulars i=46°|Grav2003": {"tags": ["featured", "solar_system", "class", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.79, "V-R": 0.51}, "sun": true, "albedo": 0.04, // estimation
-    },
     "Phoebe|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.57, "V-R": 0.34}, "sun": true
     },

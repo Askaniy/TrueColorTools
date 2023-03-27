@@ -1,7 +1,4 @@
 {
-    "Uranian irregulars|Graykowski2018": {"tags": ["featured", "solar_system", "class", "moon", "uranian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.84, "V-R": 0.53}, "sun": true, "albedo": 0.04, // estimation
-    },
     "Caliban|Graykowski2018": {"tags": ["solar_system", "moon", "uranian_system", "irregular"],
         "filters": "Landolt", "indices": {"B-V": 0.81, "V-R": 0.47}, "sun": true
     },

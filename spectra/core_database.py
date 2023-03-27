@@ -417,7 +417,7 @@ objects = {
         0.16553, 0.08372, 0.05606, 0.05255, 0.03725, 0.02468, 0.02116, 0.02346, 0.02395, 0.01784, 0.01751, 0.01883],
         "albedo": True
         },
-    "Triton|Tryka1999": {"tags": ["featured", "solar_system", "moon", "neptunian_system"],
+    "Triton|Tryka1999": {"tags": ["featured", "solar_system", "moon", "neptunian_system", "irregular"],
         "nm": list(range(300, 1000, 100)),
         "br": [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
         "albedo": True # Geom. !
