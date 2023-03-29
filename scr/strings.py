@@ -116,9 +116,9 @@ note = {
 }
 link = "github.com/Askaniy/TrueColorTools"
 auth_info = {
-    "en": "Anpilogov Askaniy, 2020-2023",
+    "en": "Askaniy Anpilogov, 2020-2023",
     "ru": "Анпилогов Асканий, 2020-2023",
-    "de": "Anpilogov Askaniy, 2020-2023"
+    "de": "Askaniy Anpilogov, 2020-2023"
 }
 
 langs = {
@@ -173,7 +173,7 @@ gui_settings = {
 }
 gui_input = {
     "en": "Input data",
-    "ru": "Ввод",
+    "ru": "Входные данные",
     "de": "Eingaben"
 }
 gui_results = {
@@ -207,9 +207,9 @@ gui_irr = {
     "de": "Bestrahlung [mag/nm]"
 }
 gui_surfacebr = {
-    "en": "Lock exposure by surface irradiance on 550 nm",
-    "ru": "Экспозиция через поверхн. яркость на 550 нм",
-    "de": "Oberflächenhelligkeit (550 nm)"
+    "en": "Scale irradiance at λ=550 nm (lock exposure)",
+    "ru": "Регулировка яркости на λ=550 nm (задать экспозицию)",
+    "de": "Bestrahlungsstärke bei 550 nm skalieren (konstante Belichtung)"
 }
 gui_maxtemp = {
     "en": "Maximum temperature [K]",
@@ -217,8 +217,8 @@ gui_maxtemp = {
     "de": "Maximale Temperatur [K]"
 }
 gui_tags = {
-    "en": "By tags",
-    "ru": "Ярлыки",
+    "en": "Category",
+    "ru": "Категория",
     "de": "Kategorie"
 }
 gui_add = {
@@ -260,6 +260,11 @@ gui_interp = {
     "en": ["Interpolator/extrapolator", "qualitatively", "fast"],
     "ru": ["Интер/экстраполятор", "качественно", "быстро"],
     "de": ["Interpolation/Extrapolation", "qualitativ", "schnell"]
+}
+gui_formatting = {
+    "en": "Output formatting",
+    "ru": "Форматирование",
+    "de": "Ausgabeformatierung"
 }
 gui_bit = {
     "en": "Color (bit) depth",
@@ -327,8 +332,8 @@ gui_desun = {
     "de": "Subtrahiere das Sonnenspektrum"
 }
 gui_single = {
-    "en": "Single image",
-    "ru": "1 изображение",
+    "en": "Single image mode",
+    "ru": "Режим одного изображения",
     "de": "Ein-Bild-Modus"
 }
 gui_filterset = {
