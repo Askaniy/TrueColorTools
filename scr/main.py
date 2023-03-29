@@ -36,7 +36,7 @@ def launch_window(lang, debug):
     T4_text_colors = ("#A3A3A3", "#FFFFFF")
 
     sg.ChangeLookAndFeel('MaterialDark')
-    window = sg.Window("True Color Tools", gui.generate_layout((2*circle_r+1, 2*circle_r+1), T2_preview, T4_text_colors, lang), finalize=True)
+    window = sg.Window("True Color Tools", gui.generate_layout((2*circle_r+1, 2*circle_r+1), T2_preview, T4_text_colors, lang), finalize=True, resizable=True)
     T2_vis = 3  # current number of visible image bands
     T2_num = 10 # max number of image bands, ~ len(window["T2_frames"])
 

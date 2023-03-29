@@ -51,7 +51,7 @@ For example, you can get colors formatted for [Celestia](https://github.com/Cele
 ### Important notes
 - Tag system. Each object in the database can be assigned an arbitrary set of tags. They form lists of categories in the *Spectra* and *Table* tabs, which makes it easier to work with a huge database.
 - Reference system. Each object in the database can be easily linked to one or several data sources by its short name. You can see the list in `File`→`Sources`. Also, after an object's name there can be abbreviations, the decoding of which is indicated in `File`→`Notes`.
-- The language can be changed through the top menu. Runtime translation is not available only for tab titles (due to PySimpleGUI limitations). For full localization, you can change the `lang` variable in the [`runTCT.py`](runTCT.py) code. TCT supports English, German and Russian. If you want to add support for your language, you can do it by analogy in [`strings.py`](scr/strings.py).
+- The language can be changed through the top menu in runtime. For full localization, you can change the `lang` variable in the [`runTCT.py`](runTCT.py) code. TCT supports English, German and Russian. If you want to add support for your language, you can do it by analogy in [`strings.py`](scr/strings.py).
 
 
 ## Database extension

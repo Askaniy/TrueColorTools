@@ -28,14 +28,15 @@ def frame(num, lang):
     return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, visible=True, key='T2_band'+n)
 
 def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple, lang: str):
+    title_font = ('arial', 12)
     T1_col1 = [
-        [sg.Push(), sg.Text(tr.gui_database[lang], font=('arial', 12), key='T1_title1'), sg.Push()],
+        [sg.Push(), sg.Text(tr.gui_database[lang], font=title_font, key='T1_title1'), sg.Push()],
         [sg.Text(tr.gui_tags[lang], size=7, key='T1_tagsN', visible=False), sg.InputCombo([], default_value='', size=17, enable_events=True, key='T1_tags', visible=False)],
         [sg.Listbox(values=(), size=(27, 22), enable_events=True, key='T1_list', visible=False)],
         [sg.Button(button_text=tr.gui_load[lang], size=22, key='T1_database', metadata=True)]
     ]
     T1_col2 = [
-        [sg.Push(), sg.Text(tr.gui_settings[lang], font=('arial', 12), key='T1_title2'), sg.Push()],
+        [sg.Push(), sg.Text(tr.gui_settings[lang], font=title_font, key='T1_title2'), sg.Push()],
         [sg.Checkbox(tr.gui_gamma[lang], size=16, enable_events=True, default=True, key='T1_gamma')],
         [sg.Checkbox('sRGB', enable_events=True, size=16, key='T1_srgb')],
         [sg.HorizontalSeparator()],
@@ -55,7 +56,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple
         [sg.Text(tr.gui_rnd[lang], size=14, key='T1_rnd'), sg.InputText('3', size=4, enable_events=True, key='T1_rnd_num')]
     ]
     T1_col3 = [
-        [sg.Push(), sg.Text(tr.gui_results[lang], font=('arial', 12), key='T1_title3'), sg.Push()],
+        [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T1_title3'), sg.Push()],
         [sg.Push(), sg.Graph(canvas_size=canvas_size, graph_bottom_left=(0, 0), graph_top_right=canvas_size, background_color=None, key='T1_graph'), sg.Push()],
         [sg.Text(tr.gui_rgb[lang], size=12, key='T1_colorRGB')],
         [sg.In(size=25, key='T1_rgb')],
@@ -80,12 +81,12 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple
         [frame(9, lang)] # just add more frames here
     ]
     T2_col1 = [
-        [sg.Text(tr.gui_input[lang], size=18, font=('arial', 12), key='T2_title1'),
-        sg.Button(button_text='+', size=2, key='T2_+'), sg.Button(button_text='-', size=2, disabled=False, key='T2_-')],
+        [sg.Push(), sg.Text(tr.gui_input[lang], font=title_font, key='T2_title1'),
+        sg.Button(button_text='+', size=2, key='T2_+'), sg.Button(button_text='-', size=2, disabled=False, key='T2_-'), sg.Push()],
         [sg.Column(T2_frames, size=(250, 400), scrollable=True, vertical_scroll_only=True, key='T2_frames')]
     ]
     T2_col2 = [
-        [sg.Text(tr.gui_output[lang], size=30, font=('arial', 12), key='T2_title2')],
+        [sg.Push(), sg.Text(tr.gui_output[lang], font=title_font, key='T2_title2'), sg.Push()],
         [sg.Checkbox(tr.gui_gamma[lang], size=16, default=True, key='T2_gamma'),
         sg.Radio(tr.gui_interp[lang][1], 'T2_interp', size=12, enable_events=True, default=True, key='T2_interp0')],
         [sg.Checkbox('sRGB', size=16, key='T2_srgb'),
@@ -110,7 +111,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple
     ]
 
     T3_col1 = [
-        [sg.Text(tr.gui_settings[lang], size=20, font=('arial', 12), key='T3_title1')],
+        [sg.Push(), sg.Text(tr.gui_settings[lang], font=title_font, key='T3_title1'), sg.Push()],
         [sg.Text(tr.gui_tags[lang], size=7, key='T3_tagsN', visible=False), sg.InputCombo([], default_value='', size=16, enable_events=True, key='T3_tags', visible=False)],
         [sg.Button(button_text=tr.gui_load[lang], size=22, key='T3_database', metadata=True)],
         [sg.HorizontalSeparator()],
@@ -123,7 +124,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple
         [sg.Radio(tr.gui_br[lang][3], 'T3_rad', size=15, enable_events=True, key='T3_br_mode2')]
     ]
     T3_col2 = [
-        [sg.Text(tr.gui_results[lang], size=30, font=('arial', 12), key='T3_title2')],
+        [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T3_title2'), sg.Push()],
         [sg.Text(tr.gui_extension[lang], size=15, key='T3_ext'), sg.InputCombo(['png', 'jpeg', 'pdf'], default_value='png', size=10, enable_events=True, key='T3_extension')],
         [sg.Text(tr.gui_folder[lang], size=15, key='T3_folderN'), sg.Input(size=22, enable_events=True, key='T3_folder'), sg.FolderBrowse(button_text=tr.gui_browse[lang], size=10, key='T3_browse_folder')],
         [sg.T('')],
@@ -133,7 +134,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple
     slider_size = (30, 15)
     T4_text_colors = ('#A3A3A3', '#FFFFFF')
     T4_col1 = [
-        [sg.Push(), sg.Text(tr.gui_input[lang], font=('arial', 12), key='T4_title1'), sg.Push()],
+        [sg.Push(), sg.Text(tr.gui_input[lang], font=title_font, key='T4_title1'), sg.Push()],
         [sg.Text(tr.gui_temp[lang], size=16, key='T4_temp'), sg.Slider(range=(0, 20000), default_value=0, resolution=100, orientation='h', size=slider_size, enable_events=True, key='T4_slider1')],
         [sg.Text(tr.gui_velocity[lang], size=16, key='T4_velocity'), sg.Slider(range=(-1, 1), default_value=0, resolution=0.01, orientation='h', size=slider_size, enable_events=True, key='T4_slider2')],
         [sg.Text(tr.gui_vII[lang], size=16, key='T4_vII'), sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation='h', size=slider_size, enable_events=True, key='T4_slider3')],
@@ -148,7 +149,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple
         sg.Text(tr.gui_rnd[lang], size=14, key='T4_rnd'), sg.InputText('3', size=4, enable_events=True, key='T4_rnd_num')]
     ]
     T4_col2 = [
-        [sg.Push(), sg.Text(tr.gui_results[lang], font=('arial', 12), key='T4_title2'), sg.Push()],
+        [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T4_title2'), sg.Push()],
         [sg.Push(), sg.Graph(canvas_size=canvas_size, graph_bottom_left=(0, 0), graph_top_right=canvas_size, background_color=None, key='T4_graph'), sg.Push()],
         [sg.Text(tr.gui_rgb[lang], size=12, key='T4_colorRGB')],
         [sg.In(size=25, key='T4_rgb')],
@@ -157,33 +158,47 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple
     ]
 
     tab1 = [
-        [sg.vtop(sg.Column(T1_col1)), sg.VSeperator(), sg.vtop(sg.Column(T1_col2)), sg.VSeperator(), sg.vtop(sg.Column(T1_col3))]
+        [
+            sg.Column(T1_col1, justification='top', expand_x=True, expand_y=True), sg.VSeperator(),
+            sg.Column(T1_col2, justification='top', expand_x=True, expand_y=True), sg.VSeperator(),
+            sg.Column(T1_col3, justification='top', expand_x=True, expand_y=True)
+        ]
     ]
     tab2 = [
-        [sg.vtop(sg.Column(T2_col1)), sg.VSeperator(), sg.vtop(sg.Column(T2_col2))]
+        [
+            sg.Column(T2_col1, justification='top', expand_x=True, expand_y=True), sg.VSeperator(),
+            sg.Column(T2_col2, justification='top', expand_x=True, expand_y=True)
+        ]
     ]
     tab3 = [
-        [sg.vtop(sg.Column(T3_col1)), sg.VSeperator(), sg.vtop(sg.Column(T3_col2))]
+        [
+            sg.Column(T3_col1, justification='top', expand_x=True, expand_y=True), sg.VSeperator(),
+            sg.Column(T3_col2, justification='top', expand_x=True, expand_y=True)
+        ]
     ]
     tab4 = [
-        [sg.vtop(sg.Column(T4_col1)), sg.VSeperator(), sg.vtop(sg.Column(T4_col2))]
+        [
+            sg.Column(T4_col1, justification='top', expand_x=True, expand_y=True), sg.VSeperator(),
+            sg.Column(T4_col2, justification='top', expand_x=True, expand_y=True)
+        ]
     ]
     return [
         [sg.Menu(tr.gui_menu[lang], key='menu')],
         [sg.TabGroup([[
-            sg.Tab(tr.gui_tabs[lang][0], tab1, key='tab0'),
+            sg.Tab(tr.gui_tabs[lang][0], tab1, key='tab1'),
             sg.Tab(tr.gui_tabs[lang][1], tab2, key='tab2'),
             sg.Tab(tr.gui_tabs[lang][2], tab3, key='tab3'),
             sg.Tab(tr.gui_tabs[lang][3], tab4, key='tab4')
-            ]])
+            ]], expand_x=True, expand_y=True)
         ]
     ]
 
 def translate(window: sg.Window, T2_num: int, lang: str):
     window['menu'].update(tr.gui_menu[lang])
-    #window['tab0'].update(title=tr.gui_tabs[lang][0])
-    #window['tab1'].update(title=tr.gui_tabs[lang][1])
-    #window['tab2'].update(title=tr.gui_tabs[lang][2])
+    window['tab1'].update(title=tr.gui_tabs[lang][0])
+    window['tab2'].update(title=tr.gui_tabs[lang][1])
+    window['tab3'].update(title=tr.gui_tabs[lang][2])
+    window['tab4'].update(title=tr.gui_tabs[lang][3])
     window['T1_title1'].update(tr.gui_database[lang])
     window['T1_title2'].update(tr.gui_settings[lang])
     window['T1_title3'].update(tr.gui_results[lang])
