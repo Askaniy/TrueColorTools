@@ -110,15 +110,15 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple
             sg.InputCombo(filters.get_sets(), size=24, enable_events=True, disabled=True, key='T2_filter')
         ],
         [sg.HorizontalSeparator()],
-        [sg.Checkbox(tr.gui_plotpixels[lang], size=30, enable_events=True, key='T2_plotpixels')],
+        [sg.Checkbox(tr.gui_plotpixels[lang], size=42, enable_events=True, key='T2_plotpixels')],
         [
             sg.Text(tr.gui_folder[lang], size=16, key='T2_folderN'),
             sg.Input(size=14, enable_events=True, key='T2_folder'),
             sg.FolderBrowse(button_text=tr.gui_browse[lang], size=10, key='T2_browse_folder')
         ],
         [
-            sg.Button(tr.gui_preview[lang], size=19, disabled=True, key='T2_preview'),
-            sg.Button(tr.gui_process[lang], size=19, disabled=True, key='T2_process')
+            sg.Push(), sg.Button(tr.gui_preview[lang], size=19, disabled=True, key='T2_preview'),
+            sg.Button(tr.gui_process[lang], size=19, disabled=True, key='T2_process'), sg.Push()
         ],
         [sg.Push(), sg.Image(background_color='black', size=T2_preview, key='T2_image'), sg.Push()]
     ]
@@ -131,18 +131,29 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple
         [sg.Button(tr.gui_process[lang], size=22, disabled=True, key='T3_process')]
     ]
 
-    slider_size = (30, 15)
+    slider_size = (15, 15)
     T4_text_colors = ('#A3A3A3', '#FFFFFF')
     T4_col1 = [
         [sg.Push(), sg.Text(tr.gui_input[lang], font=title_font, key='T4_title1'), sg.Push()],
-        [sg.Text(tr.gui_temp[lang], size=16, key='T4_temp'), sg.Slider(range=(0, 20000), default_value=0, resolution=100, orientation='h', size=slider_size, enable_events=True, key='T4_slider1')],
-        [sg.Text(tr.gui_velocity[lang], size=16, key='T4_velocity'), sg.Slider(range=(-1, 1), default_value=0, resolution=0.01, orientation='h', size=slider_size, enable_events=True, key='T4_slider2')],
-        [sg.Text(tr.gui_vII[lang], size=16, key='T4_vII'), sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation='h', size=slider_size, enable_events=True, key='T4_slider3')],
-        [sg.Text(tr.gui_irr[lang], size=16, text_color=T4_text_colors[0], key='T4_scale'), sg.Slider(range=(-50, 50), default_value=0, resolution=0.01, orientation='h', size=slider_size, enable_events=True, disabled=True, key='T4_slider4')],
+        [
+            sg.Text(tr.gui_temp[lang], size=18, key='T4_temp'),
+            sg.Slider(range=(0, 20000), default_value=0, resolution=100, orientation='h', size=slider_size, enable_events=True, key='T4_slider1', expand_x=True)
+        ],
+        [
+            sg.Text(tr.gui_velocity[lang], size=18, key='T4_velocity'),
+            sg.Slider(range=(-1, 1), default_value=0, resolution=0.01, orientation='h', size=slider_size, enable_events=True, key='T4_slider2', expand_x=True)
+        ],
+        [
+            sg.Text(tr.gui_vII[lang], size=18, key='T4_vII'),
+            sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation='h', size=slider_size, enable_events=True, key='T4_slider3', expand_x=True)
+        ],
+        [
+            sg.Text(tr.gui_irr[lang], size=18, text_color=T4_text_colors[0], key='T4_scale'),
+            sg.Slider(range=(-50, 50), default_value=0, resolution=0.01, orientation='h', size=slider_size, enable_events=True, disabled=True, key='T4_slider4', expand_x=True)
+        ],
         [sg.T('')],
-        [sg.HorizontalSeparator()],
-        [sg.Checkbox(tr.gui_surfacebr[lang], size=23, enable_events=True, default=False, key='T4_surfacebr')],
-        [sg.Text(tr.gui_maxtemp[lang], size=14, key='T4_maxtemp'), sg.InputText('20000', size=8, enable_events=True, key='T4_maxtemp_num')]
+        [sg.Checkbox(tr.gui_surfacebr[lang], size=42, enable_events=True, default=False, key='T4_surfacebr')],
+        [sg.Text(tr.gui_maxtemp[lang], size=30, key='T4_maxtemp'), sg.InputText('20000', size=8, enable_events=True, key='T4_maxtemp_num')]
     ]
     T4_col2 = [
         [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T4_title2'), sg.Push()],
@@ -218,9 +229,6 @@ def translate(window: sg.Window, T2_num: int, lang: str):
         window['T2_filterN'+str(i)].update(tr.gui_filter[lang])
         window['T2_wavelengthN'+str(i)].update(tr.gui_wavelength[lang])
         window['T2_exposureN'+str(i)].update(tr.gui_exposure[lang])
-    window['T2_gamma'].update(text=tr.gui_gamma[lang])
-    window['T2_interp0'].update(text=tr.gui_interp[lang][1])
-    window['T2_interp1'].update(text=tr.gui_interp[lang][2])
     window['T2_makebright'].update(text=tr.gui_makebright[lang])
     window['T2_autoalign'].update(text=tr.gui_autoalign[lang])
     window['T2_desun'].update(text=tr.gui_desun[lang])
@@ -232,15 +240,8 @@ def translate(window: sg.Window, T2_num: int, lang: str):
     window['T2_plotpixels'].update(text=tr.gui_plotpixels[lang])
     window['T2_preview'].update(tr.gui_preview[lang])
     window['T2_process'].update(tr.gui_process[lang])
-    window['T3_title1'].update(tr.gui_settings[lang])
-    window['T3_title2'].update(tr.gui_results[lang])
     window['T3_tagsN'].update(tr.gui_tags[lang])
-    window['T1_database'].update(tr.gui_update[lang] if window['T3_database'].metadata else tr.gui_load[lang])
-    window['T3_gamma'].update(text=tr.gui_gamma[lang])
-    window['T3_br_mode'].update(tr.gui_br[lang][0])
-    window['T3_br_mode0'].update(text=tr.gui_br[lang][1])
-    window['T3_br_mode1'].update(text=tr.gui_br[lang][2])
-    window['T3_br_mode2'].update(text=tr.gui_br[lang][3])
+    window['T3_database'].update(tr.gui_update[lang] if window['T3_database'].metadata else tr.gui_load[lang])
     window['T3_ext'].update(tr.gui_extension[lang])
     window['T3_browse_folder'].update(tr.gui_browse[lang])
     window['T3_folderN'].update(tr.gui_folder[lang])
@@ -252,10 +253,7 @@ def translate(window: sg.Window, T2_num: int, lang: str):
     window['T4_vII'].update(tr.gui_vII[lang])
     window['T4_scale'].update(tr.gui_irr[lang])
     window['T4_surfacebr'].update(text=tr.gui_surfacebr[lang])
-    window['T4_gamma'].update(text=tr.gui_gamma[lang])
     window['T4_maxtemp'].update(tr.gui_maxtemp[lang])
-    window['T4_bit'].update(tr.gui_bit[lang])
-    window['T4_rnd'].update(tr.gui_rnd[lang])
     window['T4_colorRGB'].update(tr.gui_rgb[lang])
     window['T4_colorHEX'].update(tr.gui_hex[lang])
     return window

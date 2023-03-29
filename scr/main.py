@@ -29,7 +29,7 @@ def launch_window(lang, debug):
     tagsDB = []
     default_tag = 'featured'
 
-    circle_r = 72 # radius in pixels of color preview circle
+    circle_r = 100 # radius in pixels of color preview circle
     circle_coord = (circle_r, circle_r+1)
     T2_preview = (256, 128)
     T2_area = T2_preview[0]*T2_preview[1]
@@ -38,7 +38,7 @@ def launch_window(lang, debug):
     sg.ChangeLookAndFeel('MaterialDark')
     window = sg.Window(
         "True Color Tools", gui.generate_layout((2*circle_r+1, 2*circle_r+1), T2_preview, T4_text_colors, lang),
-        finalize=True, resizable=True, margins=(0, 0), size=(800, 600))
+        finalize=True, resizable=True, margins=(0, 0), size=(900, 600))
     T2_vis = 3  # current number of visible image bands
     T2_num = 10 # max number of image bands, ~ len(window["T2_frames"])
 

@@ -186,11 +186,6 @@ gui_output = {
     "ru": "Обработка и вывод",
     "de": "Verarbeitung und Ausgabe"
 }
-gui_surfacebr = {
-    "en": "Surface brightness (550 nm)",
-    "ru": "Поверхн. яркость (550 нм)",
-    "de": "Oberflächenhelligkeit (550 nm)"
-}
 gui_temp = {
     "en": "Tempurature [K]",
     "ru": "Температура [K]",
@@ -211,10 +206,15 @@ gui_irr = {
     "ru": "Излуч. [зв. вел/нм]",
     "de": "Bestrahlung [mag/nm]"
 }
+gui_surfacebr = {
+    "en": "Lock exposure by surface irradiance on 550 nm",
+    "ru": "Экспозиция через поверхн. яркость на 550 нм",
+    "de": "Oberflächenhelligkeit (550 nm)"
+}
 gui_maxtemp = {
-    "en": "Max. temp.",
-    "ru": "Макс. темп.",
-    "de": "Max. Temp."
+    "en": "Maximum temperature [K]",
+    "ru": "Максимальная температура [K]",
+    "de": "Maximale Temperatur [K]"
 }
 gui_tags = {
     "en": "By tags",
