@@ -36,7 +36,9 @@ def launch_window(lang, debug):
     T4_text_colors = ("#A3A3A3", "#FFFFFF")
 
     sg.ChangeLookAndFeel('MaterialDark')
-    window = sg.Window("True Color Tools", gui.generate_layout((2*circle_r+1, 2*circle_r+1), T2_preview, T4_text_colors, lang), finalize=True, resizable=True)
+    window = sg.Window(
+        "True Color Tools", gui.generate_layout((2*circle_r+1, 2*circle_r+1), T2_preview, T4_text_colors, lang),
+        finalize=True, resizable=True, margins=(0, 0), size=(800, 600))
     T2_vis = 3  # current number of visible image bands
     T2_num = 10 # max number of image bands, ~ len(window["T2_frames"])
 
@@ -44,7 +46,7 @@ def launch_window(lang, debug):
     T4_preview = window["T4_graph"].DrawCircle(circle_coord, circle_r, fill_color="black", line_color=None)
 
     T1_fig = go.Figure()
-    T1_events = ["T1_list", "T1_gamma", "T1_srgb", "T1_br_mode0", "T1_br_mode1", "T1_br_mode2", "T1_interp0", "T1_interp1", "T1_slider", "T1_bit_num", "T1_rnd_num"]
+    triggers = ["-gamma-", "-srgb-", "-brMode0-", "-brMode1-", "-brMode2-", "-interpMode0-", "-interpMode1-", "-phase-", '-bitness-', '-rounding-']
     br_modes = ["chromaticity", "albedo 0.5", "albedo"]
 
     for i in range(T2_vis, T2_num):
@@ -96,21 +98,24 @@ def launch_window(lang, debug):
             window['T3_tagsN'].update(visible=True)
             window['T3_tags'].update(default_tag, values=tagsDB, visible=True)
             window['T1_list'].update(values=tuple(di.obj_dict(objectsDB, default_tag, lang).keys()), visible=True)
-            window['T1_database'].metadata=False
+            window['T1_database'].metadata=True
             window['T1_database'].update(tr.gui_update[lang])
-            window['T3_database'].metadata=False
+            window['T3_database'].metadata=True
             window['T3_database'].update(tr.gui_update[lang])
+            if values["T3_folder"] != "":
+                window["T3_process"].update(disabled=False)
         
         # ------------ Events in the tab "Spectra" ------------
 
-        elif event.startswith("T1"):
+        elif values['-currentTab-'] == 'tab1':
 
-            if event in T1_events and values["T1_list"] != []:
+            if (event in triggers or event == "T1_list") and values["T1_list"] != []:
                 T1_name = values["T1_list"][0]
-                T1_nm = cmf.xyz_nm if values["T1_srgb"] else cmf.rgb_nm
+                T1_nm = cmf.xyz_nm if values["-srgb-"] else cmf.rgb_nm
                 for i in range(3):
-                    if values["T1_br_mode"+str(i)]:
+                    if values[f'-brMode{i}-']:
                         T1_mode = br_modes[i]
+                        break
 
                 # Spectral data import and processing
                 T1_spectrum = objectsDB[di.obj_dict(objectsDB, "all", lang)[T1_name]]
@@ -128,28 +133,26 @@ def launch_window(lang, debug):
                     T1_sun = T1_spectrum['sun']
                 except KeyError:
                     T1_sun = False
-                T1_curve = calc.polator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo, values["T1_interp1"], desun=T1_sun)
+                T1_curve = calc.polator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo, values["-interpMode1-"], desun=T1_sun)
                 
                 # Color calculation
-                try:
-                    T1_phase = 0 if "star" in T1_spectrum["tags"] else values["T1_slider"]
-                except Exception:
-                    T1_phase = values["T1_slider"]
+                #try:
+                #    T1_phase = 0 if "star" in T1_spectrum["tags"] else values["-phase-"]
+                #except Exception:
+                #    T1_phase = values["-phase-"]
                 T1_rgb = calc.to_rgb(
                     T1_name, T1_curve, mode=T1_mode,
                     albedo = T1_spectrum["albedo"] or T1_albedo,
-                    phase=T1_phase,
-                    exp_bit=int(values["T1_bit_num"]), 
-                    gamma=values["T1_gamma"], 
-                    rnd=int(values["T1_rnd_num"]),
-                    srgb=values["T1_srgb"]
+                    exp_bit=int(values["-bitness-"]), 
+                    gamma=values["-gamma-"], 
+                    rnd=int(values["-rounding-"]),
+                    srgb=values["-srgb-"]
                 )
                 T1_rgb_show = calc.to_rgb(
                     T1_name, T1_curve, mode=T1_mode,
                     albedo = T1_spectrum["albedo"] or T1_albedo,
-                    phase=T1_phase,
-                    gamma=values["T1_gamma"],
-                    srgb=values["T1_srgb"],
+                    gamma=values["-gamma-"],
+                    srgb=values["-srgb-"],
                     html=True
                 )
 
@@ -180,14 +183,15 @@ def launch_window(lang, debug):
             
             elif event == "T1_export":
                 T1_export = "\n" + "\t".join(tr.gui_col[lang]) + "\n" + "_" * 36
-                T1_nm = cmf.xyz_nm if values["T1_srgb"] else cmf.rgb_nm
+                T1_nm = cmf.xyz_nm if values["-srgb-"] else cmf.rgb_nm
                 
                 # Spectrum processing
                 for name_1, name_0 in di.obj_dict(objectsDB, values["T1_tags"], lang).items():
                     T1_spectrum = objectsDB[name_0]
                     for i in range(3):
-                        if values["T1_br_mode"+str(i)]:
+                        if values[f'-brMode{i}-']:
                             T1_mode = br_modes[i]
+                            break
                     T1_albedo = 0
                     if "albedo" not in T1_spectrum:
                         if T1_mode == "albedo":
@@ -202,16 +206,16 @@ def launch_window(lang, debug):
                         T1_sun = T1_spectrum['sun']
                     except KeyError:
                         T1_sun = False
-                    T1_curve = calc.polator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo, values["T1_interp1"], desun=T1_sun)
+                    T1_curve = calc.polator(T1_spectrum["nm"], T1_spectrum["br"], T1_nm, T1_albedo, values["-interpMode1-"], desun=T1_sun)
 
                     # Color calculation
                     T1_rgb = calc.to_rgb(
                         name_0, T1_curve, mode=T1_mode,
                         albedo = T1_spectrum["albedo"] or T1_albedo,
-                        exp_bit=int(values["T1_bit_num"]), 
-                        gamma=values["T1_gamma"], 
-                        rnd=int(values["T1_rnd_num"]),
-                        srgb=values["T1_srgb"]
+                        exp_bit=int(values["-bitness-"]), 
+                        gamma=values["-gamma-"], 
+                        rnd=int(values["-rounding-"]),
+                        srgb=values["-srgb-"]
                     )
 
                     # Output
@@ -221,7 +225,7 @@ def launch_window(lang, debug):
         
         # ------------ Events in the tab "Images" ------------
 
-        elif event.startswith("T2"):
+        elif values['-currentTab-'] == 'tab2':
 
             if event == "T2_single":
                 window["T2_browse"].update(disabled=not values["T2_single"])
@@ -269,7 +273,7 @@ def launch_window(lang, debug):
                 window["T2_wavelengthN"+str(i)].update(text_color=("#A3A3A3", "#FFFFFF")[not values["T2_filterset"]])
                 window["T2_exposureN"+str(i)].update(text_color=("#A3A3A3", "#FFFFFF")[not values["T2_single"]])
             
-            input_data = {"gamma": values["T2_gamma"], "srgb": values["T2_srgb"], "desun": values["T2_desun"], "nm": []}
+            input_data = {"gamma": values['-gamma-'], "srgb": values['-srgb-'], "desun": values["T2_desun"], "nm": []}
             
             T2_preview_status = True
             if values["T2_single"]:
@@ -466,23 +470,21 @@ def launch_window(lang, debug):
         
         # ------------ Events in the tab "Table" ------------
 
-        elif event.startswith("T3"):
-            
-            if values["T3_folder"] != "":
-                window["T3_process"].update(disabled=False)
+        elif values['-currentTab-'] == 'tab3':
 
             if event == "T3_process":
 
                 # Database preprocessing
                 for i in range(3):
-                    if values["T3_br_mode"+str(i)]:
-                        T3_mode0 = br_modes[i]
-                tg.generate_table(objectsDB, values["T3_tags"], T3_mode0, values["T3_srgb"], values["T3_gamma"], values["T3_folder"], values["T3_extension"], lang)
+                    if values[f'-brMode{i}-']:
+                        T3_mode = br_modes[i]
+                        break
+                tg.generate_table(objectsDB, values["T3_tags"], T3_mode, values['-srgb-'], values['-gamma-'], values["T3_folder"], values["T3_extension"], lang)
 
         
         # ------------ Events in the tab "Blackbody & Redshifts" ------------
         
-        elif event.startswith("T4"):
+        elif values['-currentTab-'] == 'tab4':
             
             if event == "T4_maxtemp_num":
                 window["T4_slider1"].update(range=(0, int(values["T4_maxtemp_num"])))
@@ -493,7 +495,7 @@ def launch_window(lang, debug):
                     window["T4_slider4"].update(disabled=not values["T4_surfacebr"])
                 
                 T4_mode = "albedo" if values["T4_surfacebr"] else "chromaticity"
-                T4_nm = cmf.xyz_nm if values["T4_srgb"] else cmf.rgb_nm
+                T4_nm = cmf.xyz_nm if values["-srgb-"] else cmf.rgb_nm
                 T4_curve = calc.blackbody_redshift(T4_nm, values["T4_slider1"], values["T4_slider2"], values["T4_slider3"])
                 if values["T4_surfacebr"]:
                     try:
@@ -504,16 +506,16 @@ def launch_window(lang, debug):
                 T4_rgb = calc.to_rgb(
                     T4_name, T4_curve, mode=T4_mode,
                     albedo=values["T4_surfacebr"],
-                    exp_bit=int(values["T4_bit_num"]),
-                    gamma=values["T4_gamma"],
-                    rnd=int(values["T4_rnd_num"]),
-                    srgb=values["T4_srgb"]
+                    exp_bit=int(values['-bitness-']),
+                    gamma=values["-gamma-"],
+                    rnd=int(values["-rounding-"]),
+                    srgb=values["-srgb-"]
                 )
                 T4_rgb_show = calc.to_rgb(
                     T4_name, T4_curve, mode=T4_mode,
                     albedo=values["T4_surfacebr"],
-                    gamma=values["T4_gamma"],
-                    srgb=values["T4_srgb"],
+                    gamma=values["-gamma-"],
+                    srgb=values["-srgb-"],
                     html=True
                 )
             
