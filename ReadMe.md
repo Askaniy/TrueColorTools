@@ -29,7 +29,7 @@ This installation way supports by [SevenSpheres](https://github.com/SevenSpheres
 ## How it works?
 
 The key processing method is converting the data into a continuous (5 nm step) spectrum and applying the absorption function of the eye to it. The key idea is to apply this method to a variety of use cases. Summarizing the standard steps:
-1. Reading data, converting to the form "wavelength — brightness value". Built-in filter information is used to work with color indices and spacecraft images.
+1. Reading data, converting to the form "wavelength: brightness value". Built-in filter information is used to work with color indices and spacecraft images.
 2. The obtained values ​​are interpolated (and extrapolated if required). There are two modes, fast linear (built-in) and slow Akima interpolator (imported from SciPy) with linear extrapolation. I know this is a bit of a simplification, but developing full spectrum reconstruction from absorption curves would be at the expense of other features.
 3. Stiles & Burch 1959 10 Degree RGB CMFs are used to convert spectrum to color. Directly, without converting to a XYZ color space, since this caused additional problems. If you want to try, sRGB mode is for you, but I don't recommend it.
 
@@ -44,20 +44,20 @@ For example, you can get colors formatted for [Celestia](https://github.com/Cele
 
 **Images tab** allows you to load image(s), specify wavelengths and save a processed image, for each pixel of which a spectrum was built. It takes a long time, so you can check out the preview. The wavelength values can be set by the choice of spacecraft filters and they should always increase. Input can be in form of color image (`Single image mode`) or ≥2 b/w images.
 
-**Table tab** generates an image of all the colors of the selected category and their sources. You can see examples [here](Tables/).
+**Table tab** generates an image of all the colors of the selected category and their sources. You can see examples [here](tables/).
 
 **Blackbody & Redshifts tab** calculates the influence of physical phenomena on color. Based on the blackbody spectrum, the program displays the changes in color and brightness from Doppler and gravitational redshifts. You can lock the exposure through the spectral irradiance scale, converted into stellar magnitudes per 1 nm. The surface brightness selected by the slider is assumed to be unity.
 
 ### Important notes
 - Tag system. Each object in the database can be assigned an arbitrary set of tags. They form lists of categories in the *Spectra* and *Table* tabs, which makes it easier to work with a huge database.
 - Reference system. Each object in the database can be easily linked to one or several data sources by its short name. You can see the list in `File`→`Sources`. Also, after an object's name there can be abbreviations, the decoding of which is indicated in `File`→`Notes`.
-- The language can be changed through the top menu in runtime. For full localization, you can change the `lang` variable in the [`runTCT.py`](runTCT.py) code. TCT supports English, German and Russian. If you want to add support for your language, you can do it by analogy in [`strings.py`](scr/strings.py).
+- The language can be changed through the top menu in runtime. TCT supports English, German and Russian. If you want to add support for your language, you can do it by analogy in [`strings.py`](scr/strings.py).
 
 
 ## Database extension
-Spectra and their references are stored in the `core_database.py` and complementary `*.json5` files. The `core_database.py` can affect internal processes, so it is not recommended to change it. But you can add custom json5 files to the `/spectra` folder and they will be detected. Newly read spectra, if they suddenly have the same names, replace the old ones. You can help the project by creating and sharing database files. Note that any parameters must increase with wavelength.
+Spectra and their references are stored in the [`core_database.py`](spectra/core_database.py) and complementary `*.json5` files. The [`core_database.py`](spectra/core_database.py) can affect internal processes, so it is not recommended to change it. But you can add custom json5 files to the `/spectra` folder and they will be detected. Newly read spectra, if they suddenly have the same names, replace the old ones. You can help the project by creating and sharing database files. Note that any parameters must increase with wavelength.
 
-### Dictionary keys
+### Database keys
 - `nm`: list of wavelengths in nanometers
 - `br`: same-size list of linear physical property, representing "brightness"
 - `mag`: same-size list of magnitudes

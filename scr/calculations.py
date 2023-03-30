@@ -199,7 +199,7 @@ rounder = np.vectorize(lambda grayscale, d_places: int(round(grayscale)) if d_pl
 def to_bit(color, bit): return color * (2**bit - 1)
 def to_html(color): return '#{:02x}{:02x}{:02x}'.format(*rounder(to_bit(color, 8), 0))
 
-def to_rgb(target, spectrum, mode='chromaticity', inp_bit=None, exp_bit=None, rnd=0, albedo=False, phase=0, gamma=False, srgb=False, html=False):
+def to_rgb(target, spectrum, mode='chromaticity', inp_bit=None, exp_bit=None, rnd=0, albedo=False, phase=0, gamma=False, srgb=False, html=False) -> tuple|str:
     try:
         if inp_bit:
             spectrum /= (2**inp_bit - 1)

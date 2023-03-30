@@ -1,4 +1,5 @@
 
+# Celestial bodies
 names = {
     "Vega": {"ru": "Вега", "de": "Wega"},
     "Sun": {"ru": "Солнце", "de": "Sonne"},
@@ -83,6 +84,256 @@ names = {
     "Class": {"ru": "Класс", "de": "Spektraltyp"}
 }
 
+# Window
+ref = {
+    "en": "References",
+    "ru": "Источники",
+    "de": "Quellen"
+}
+note = {
+    "en": "Notes",
+    "ru": "Примечания",
+    "de": "Anmerkungen"
+}
+gui_info = {
+    "en": "Info",
+    "ru": "О программе",
+    "de": "Info"
+}
+link = "github.com/Askaniy/TrueColorTools"
+auth_info = {
+    "en": "Askaniy Anpilogov, 2020-2023",
+    "ru": "Анпилогов Асканий, 2020-2023",
+    "de": "Askaniy Anpilogov, 2020-2023"
+}
+gui_exit = {
+    "en": "Exit",
+    "ru": "Выход",
+    "de": "Schließen"
+}
+langs = {
+    "en": ["English", "Английский", "Englisch"],
+    "ru": ["Russian", "Русский", "Russisch"],
+    "de": ["German", "Немецкий", "Deutsch"]
+}
+lang_list = {
+    "en": ["Russian", "German"],
+    "ru": ["Английский", "Немецкий"],
+    "de": ["Englisch", "Russisch"]
+}
+gui_tabs = {
+    "en": ["Spectra", "Images", "Table", "Blackbody & Redshifts"],
+    "ru": ["Спектры", "Изображения", "Таблица", "АЧТ и красные смещения"],
+    "de": ["Spektren", "Bilder", "Vergleich", "Schwarzkörper & Rotverschiebung"]
+}
+gui_menu = {
+    "en": [["File", [ref["en"], note["en"], gui_info["en"], gui_exit["en"]]], ["Language", lang_list["en"]]],
+    "ru": [["Файл", [ref["ru"], note["ru"], gui_info["ru"], gui_exit["ru"]]], ["Язык", lang_list["ru"]]],
+    "de": [["Datei", [ref["de"], note["de"], gui_info["de"], gui_exit["de"]]], ["Sprache", lang_list["de"]]],
+}
+
+# Settings sidebar
+gui_settings = {
+    "en": "Settings",
+    "ru": "Параметры",
+    "de": "Einstellungen"
+}
+gui_gamma = {
+    "en": "gamma correction",
+    "ru": "гамма-коррекция",
+    "de": "Gammakorrektur"
+}
+gui_br = {
+    "en": ["Brightness display mode", "chromaticity", "albedo 0.5", "true albedo"],
+    "ru": ["Отображение яркости", "цветность", "альбедо 0,5", "альбедо"],
+    "de": ["Helligkeitsmodus", "Farbton", "Albedo 0,5", "Farbe mit Albedo" ]
+}
+#gui_phase = {
+#    "en": "Phase angle [°]",
+#    "ru": "Фазовый угол [°]",
+#    "de": "Phasenwinkel [°]"
+#}
+gui_interp = {
+    "en": ["Interpolator/extrapolator", "qualitatively", "fast"],
+    "ru": ["Интер/экстраполятор", "качественно", "быстро"],
+    "de": ["Interpolation/Extrapolation", "qualitativ", "schnell"]
+}
+gui_formatting = {
+    "en": "Output formatting",
+    "ru": "Форматирование",
+    "de": "Ausgabeformatierung"
+}
+gui_bit = {
+    "en": "Color (bit) depth",
+    "ru": "Битность цвета",
+    "de": "Farbtiefe (bit)"
+}
+gui_rnd = {
+    "en": "Decimal places",
+    "ru": "Округление",
+    "de": "Dezimalstellen"
+}
+
+# Tab 1 - Spectra
+gui_database = {
+    "en": "Database",
+    "ru": "База данных",
+    "de": "Datenbank"
+}
+gui_load = {
+    "en": "Load database",
+    "ru": "Загрузить базу данных",
+    "de": "Datenbank laden"
+}
+gui_update = {
+    "en": "Update database",
+    "ru": "Обновить базу данных",
+    "de": "Aktualisierung"
+}
+gui_tags = {
+    "en": "Category",
+    "ru": "Категория",
+    "de": "Kategorie"
+}
+gui_results = {
+    "en": "Output",
+    "ru": "Результат",
+    "de": "Ergebnisse"
+}
+gui_rgb = {
+    "en": "RGB color",
+    "ru": "Цвет RGB",
+    "de": "RGB Farbe"
+}
+gui_hex = {
+    "en": "HEX color",
+    "ru": "Цвет HTML",
+    "de": "HTML Farbe"
+}
+gui_add = {
+    "en": "Add spectrum to plot",
+    "ru": "Добавить спектр к графику",
+    "de": "Spektrum hinzufügen"
+}
+gui_plot = {
+    "en": "Plot spectra",
+    "ru": "Построить график спектров",
+    "de": "Spektren plotten"
+}
+gui_clear = {
+    "en": "Clear plot",
+    "ru": "Очистить график",
+    "de": "Klare Handlung"
+}
+gui_export = {
+    "en": "Export category colors",
+    "ru": "Экспортировать все цвета",
+    "de": "Farben der Kategorie exp."
+}
+gui_col = {
+    "en": ["Red", "Green", "Blue", "| Object"],
+    "ru": ["Красный", "Зелёный", "Синий", "| Объект"],
+    "de": ["Rot", "Grün", "Blau", "| Objekt"]
+}
+
+# Tab 2 - Images
+gui_input = {
+    "en": "Input data",
+    "ru": "Входные данные",
+    "de": "Eingaben"
+}
+gui_band = {
+    "en": "Band",
+    "ru": "Канал",
+    "de": "Band"
+}
+gui_browse = {
+    "en": "Browse",
+    "ru": "Обзор",
+    "de": "Durchsuchen"
+}
+gui_filter = {
+    "en": "Filter name",
+    "ru": "Фильтр",
+    "de": "Filter Name"
+}
+gui_wavelength = {
+    "en": "Wavelength [nm]",
+    "ru": "Длина волны [нм]",
+    "de": "Wellenlänge [nm]"
+}
+gui_exposure = {
+    "en": "Exposure",
+    "ru": "Экспозиция",
+    "de": "Belichtung"
+}
+gui_output = {
+    "en": "Processing and output",
+    "ru": "Обработка и вывод",
+    "de": "Verarbeitung und Ausgabe"
+}
+gui_makebright = {
+    "en": "Maximize brightness",
+    "ru": "Максимизировать яркость",
+    "de": "Maximieren Sie die Helligkeit"
+}
+gui_autoalign = {
+    "en": "Align bands (β)",
+    "ru": "Совместить (β)",
+    "de": "Ausrichten (β)"
+}
+gui_desun = {
+    "en": "Subtract the solar spectrum",
+    "ru": "Вычесть солнечный спектр",
+    "de": "Subtrahiere das Sonnenspektrum"
+}
+gui_plotpixels = {
+    "en": "Plot spectra of some pixels",
+    "ru": "Построить спектры некоторых пикселей",
+    "de": "Zeichnen Sie Spektren einiger Pixel"
+}
+gui_filterset = {
+    "en": "Camera filter set",
+    "ru": "Набор фильтров",
+    "de": "Kamera Filterset"
+}
+gui_single = {
+    "en": "Single image mode",
+    "ru": "Режим одного изображения",
+    "de": "Ein-Bild-Modus"
+}
+gui_folder = {
+    "en": "Save file location",
+    "ru": "Путь сохранения",
+    "de": "Speicherort"
+}
+gui_preview = {
+    "en": "Show preview",
+    "ru": "Предпросмотр",
+    "de": "Vorschau anzeigen"
+}
+gui_process = {
+    "en": "Start processing",
+    "ru": "Обработать",
+    "de": "Bild erzeugen"
+}
+
+# Tab 3 - Table
+gui_extension = {
+    "en": "File format",
+    "ru": "Расширение файла",
+    "de": "Dateiformat"
+}
+name_text = {
+    "en": ['Colors calculated from spectra for the "', '" category'],
+    "ru": ["Цвета, вычисленные по спектрам для категории «", "»"],
+    "de": ['Farben von Himmelskörpen aus Spektren der "', '" Kategorie']
+}
+legend = {
+    "en": "Legend",
+    "ru": "Легенда",
+    "de": "Legende"
+}
 notes = {
     "B:": {"en": "bright regions", "ru": "яркие участки", "de": "helle Regionen"},
     "D:": {"en": "dark regions", "ru": "тёмные участки", "de": "dunkle Regionen"},
@@ -99,93 +350,7 @@ info = {
     "de": ["Helligkeitsmodus", "sRGB-Farbraum", "Gammakorrektur"]
 }
 
-ref = {
-    "en": "References",
-    "ru": "Источники",
-    "de": "Quellen"
-}
-legend = {
-    "en": "Legend",
-    "ru": "Легенда",
-    "de": "Legende"
-}
-note = {
-    "en": "Notes",
-    "ru": "Примечания",
-    "de": "Anmerkungen"
-}
-link = "github.com/Askaniy/TrueColorTools"
-auth_info = {
-    "en": "Askaniy Anpilogov, 2020-2023",
-    "ru": "Анпилогов Асканий, 2020-2023",
-    "de": "Askaniy Anpilogov, 2020-2023"
-}
-
-langs = {
-    "en": ["English", "Английский", "Englisch"],
-    "ru": ["Russian", "Русский", "Russisch"],
-    "de": ["German", "Немецкий", "Deutsch"]
-}
-lang_list = {
-    "en": ["Russian", "German"],
-    "ru": ["Английский", "Немецкий"],
-    "de": ["Englisch", "Russisch"]
-}
-gui_tabs = {
-    "en": ["Spectra", "Images", "Table", "Blackbody & Redshifts"],
-    "ru": ["Спектры", "Изображения", "Таблица", "АЧТ и красные смещения"],
-    "de": ["Spektren", "Bilder", "Vergleich", "Schwarzkörper & Rotverschiebung"]
-}
-gui_info = {
-    "en": "Info",
-    "ru": "О программе",
-    "de": "Info"
-}
-gui_exit = {
-    "en": "Exit",
-    "ru": "Выход",
-    "de": "Schließen"
-}
-gui_menu = {
-    "en": [["File", [ref["en"], note["en"], gui_info["en"], gui_exit["en"]]], ["Language", lang_list["en"]]],
-    "ru": [["Файл", [ref["ru"], note["ru"], gui_info["ru"], gui_exit["ru"]]], ["Язык", lang_list["ru"]]],
-    "de": [["Datei", [ref["de"], note["de"], gui_info["de"], gui_exit["de"]]], ["Sprache", lang_list["de"]]],
-}
-gui_database = {
-    "en": "Database",
-    "ru": "База данных",
-    "de": "Datenbank"
-}
-gui_load = {
-    "en": "Load database",
-    "ru": "Загрузить базу данных",
-    "de": "Datenbank laden"
-}
-gui_update = {
-    "en": "Update database",
-    "ru": "Обновить базу данных",
-    "de": "Aktualisierung"
-}
-gui_settings = {
-    "en": "Settings",
-    "ru": "Параметры",
-    "de": "Einstellungen"
-}
-gui_input = {
-    "en": "Input data",
-    "ru": "Входные данные",
-    "de": "Eingaben"
-}
-gui_results = {
-    "en": "Output",
-    "ru": "Результат",
-    "de": "Ergebnisse"
-}
-gui_output = {
-    "en": "Processing and output",
-    "ru": "Обработка и вывод",
-    "de": "Verarbeitung und Ausgabe"
-}
+# Tab 4 - Blackbody & Redshifts
 gui_temp = {
     "en": "Tempurature [K]",
     "ru": "Температура [K]",
@@ -211,173 +376,8 @@ gui_surfacebr = {
     "ru": "Регулировка яркости на λ=550 nm (задать экспозицию)",
     "de": "Bestrahlungsstärke bei 550 nm skalieren (konstante Belichtung)"
 }
-gui_maxtemp = {
-    "en": "Maximum temperature [K]",
-    "ru": "Максимальная температура [K]",
-    "de": "Maximale Temperatur [K]"
-}
-gui_tags = {
-    "en": "Category",
-    "ru": "Категория",
-    "de": "Kategorie"
-}
-gui_add = {
-    "en": "Add spectrum to plot",
-    "ru": "Добавить спектр к графику",
-    "de": "Spektrum hinzufügen"
-}
-gui_plot = {
-    "en": "Plot spectra",
-    "ru": "Построить график спектров",
-    "de": "Spektren plotten"
-}
-gui_export = {
-    "en": "Export category colors",
-    "ru": "Экспортировать все цвета",
-    "de": "Farben der Kategorie exp."
-}
-gui_col = {
-    "en": ["Red", "Green", "Blue", "| Object"],
-    "ru": ["Красный", "Зелёный", "Синий", "| Объект"],
-    "de": ["Rot", "Grün", "Blau", "| Objekt"]
-}
-gui_gamma = {
-    "en": "gamma correction",
-    "ru": "гамма-коррекция",
-    "de": "Gammakorrektur"
-}
-gui_br = {
-    "en": ["Brightness display mode", "chromaticity", "albedo 0.5", "true albedo"],
-    "ru": ["Отображение яркости", "цветность", "альбедо 0,5", "альбедо"],
-    "de": ["Helligkeitsmodus", "Farbton", "Albedo 0,5", "Farbe mit Albedo" ]
-}
-gui_phase = {
-    "en": "Phase angle [°]",
-    "ru": "Фазовый угол [°]",
-    "de": "Phasenwinkel [°]"
-}
-gui_interp = {
-    "en": ["Interpolator/extrapolator", "qualitatively", "fast"],
-    "ru": ["Интер/экстраполятор", "качественно", "быстро"],
-    "de": ["Interpolation/Extrapolation", "qualitativ", "schnell"]
-}
-gui_formatting = {
-    "en": "Output formatting",
-    "ru": "Форматирование",
-    "de": "Ausgabeformatierung"
-}
-gui_bit = {
-    "en": "Color (bit) depth",
-    "ru": "Битность цвета",
-    "de": "Farbtiefe (bit)"
-}
-gui_rnd = {
-    "en": "Decimal places",
-    "ru": "Округление",
-    "de": "Dezimalstellen"
-}
-gui_apply = {
-    "en": "Apply",
-    "ru": "Применить",
-    "de": "Anwenden"
-}
-gui_rgb = {
-    "en": "RGB color",
-    "ru": "Цвет RGB",
-    "de": "RGB Farbe"
-}
-gui_hex = {
-    "en": "HEX color",
-    "ru": "Цвет HTML",
-    "de": "HTML Farbe"
-}
-gui_browse = {
-    "en": "Browse",
-    "ru": "Обзор",
-    "de": "Durchsuchen"
-}
-gui_band = {
-    "en": "Band",
-    "ru": "Канал",
-    "de": "Band"
-}
-gui_filter = {
-    "en": "Filter name",
-    "ru": "Фильтр",
-    "de": "Filter Name"
-}
-gui_wavelength = {
-    "en": "Wavelength [nm]",
-    "ru": "Длина волны [нм]",
-    "de": "Wellenlänge [nm]"
-}
-gui_exposure = {
-    "en": "Exposure",
-    "ru": "Экспозиция",
-    "de": "Belichtung"
-}
-gui_makebright = {
-    "en": "Make bright",
-    "ru": "Сделать ярким",
-    "de": "Hell machen"
-}
-gui_autoalign = {
-    "en": "Align bands (β)",
-    "ru": "Совместить (β)",
-    "de": "Ausrichten (β)"
-}
-gui_desun = {
-    "en": "Subtract the solar spectrum",
-    "ru": "Вычесть солнечный спектр",
-    "de": "Subtrahiere das Sonnenspektrum"
-}
-gui_single = {
-    "en": "Single image mode",
-    "ru": "Режим одного изображения",
-    "de": "Ein-Bild-Modus"
-}
-gui_filterset = {
-    "en": "Camera filter set",
-    "ru": "Набор фильтров",
-    "de": "Kamera Filterset"
-}
-#gui_calib = {
-#    "en": "Reference body calibration",
-#    "ru": "Калибровка по объекту",
-#    "de": "Kalibrierung an Vergleichsobjekt"
-#}
-gui_plotpixels = {
-    "en": "Plot spectra of some pixels",
-    "ru": "Построить спектры некоторых пикселей",
-    "de": "Zeichnen Sie Spektren einiger Pixel"
-}
-gui_folder = {
-    "en": "Save file location",
-    "ru": "Путь сохранения",
-    "de": "Speicherort"
-}
-gui_preview = {
-    "en": "Show preview",
-    "ru": "Предпросмотр",
-    "de": "Vorschau anzeigen"
-}
-gui_process = {
-    "en": "Start processing",
-    "ru": "Обработать",
-    "de": "Bild erzeugen"
-}
-gui_extension = {
-    "en": "File format",
-    "ru": "Расширение файла",
-    "de": "Dateiformat"
-}
 
-name_text = {
-    "en": ['Colors calculated from spectra for the "', '" category'],
-    "ru": ["Цвета, вычисленные по спектрам для категории «", "»"],
-    "de": ['Farben von Himmelskörpen aus Spektren der "', '" Kategorie']
-}
-
+# Plots
 single_title_text = {
     "en": "Spectrum and color of ",
     "ru": "Спектр и цвет объекта ",
@@ -387,11 +387,6 @@ batch_title_text = {
     "en": "Spectra and colors of ",
     "ru": "Спектр и цвет следующих объектов: ",
     "de": "Spektren und Farben von"
-}
-table_title_text = {
-    "en": "Spectra and colors of celestial bodies",
-    "ru": "Спектры и цвета космических объектов",
-    "de": "Spektren und Farben von Himmelskörpern"
 }
 map_title_text = {
     "en": "Spectrum and color of some pixels of the map",

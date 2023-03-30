@@ -1,3 +1,4 @@
+import io
 import time
 import numpy as np
 import PySimpleGUI as sg
@@ -13,7 +14,15 @@ import scr.table_generator as tg
 import scr.experimental
 
 
-def export(rgb):
+def convert_to_bytes(img: Image.Image):
+    """Prepares PIL's image to be displayed in the window"""
+    bio = io.BytesIO()
+    img.save(bio, format='png')
+    del img
+    return bio.getvalue()
+
+def export_colors(rgb: tuple):
+    """Generated formatted string of colors"""
     lst = []
     mx = 0
     for i in rgb:
@@ -24,7 +33,9 @@ def export(rgb):
     w = 8 if mx < 8 else mx+1
     return ''.join([i.ljust(w) for i in lst])
 
-def launch_window(lang, debug):
+def launch_window():
+    lang = 'en' # can be translated into German or Russian at runtime
+    debug = False
     objectsDB, refsDB = {}, {} # initial loading became too long with separate json5 database files
     tagsDB = []
     default_tag = 'featured'
@@ -33,11 +44,11 @@ def launch_window(lang, debug):
     circle_coord = (circle_r, circle_r+1)
     T2_preview = (256, 128)
     T2_area = T2_preview[0]*T2_preview[1]
-    T4_text_colors = ('#A3A3A3', '#FFFFFF')
+    text_colors = ('#A3A3A3', '#FFFFFF')
 
     sg.ChangeLookAndFeel('MaterialDark')
     window = sg.Window(
-        'True Color Tools', gui.generate_layout((2*circle_r+1, 2*circle_r+1), T2_preview, T4_text_colors, lang),
+        'True Color Tools', gui.generate_layout((2*circle_r+1, 2*circle_r+1), T2_preview, text_colors, lang),
         finalize=True, resizable=True, margins=(0, 0), size=(900, 600))
     T2_vis = 3  # current number of visible image bands
     T2_num = 10 # max number of image bands, ~ len(window['T2_frames'])
@@ -95,7 +106,7 @@ def launch_window(lang, debug):
             tagsDB = di.tag_list(objectsDB)
             window['T1_tagsN'].update(visible=True)
             window['T1_tags'].update(default_tag, values=tagsDB, visible=True)
-            window['T3_tagsN'].update(text_color='#FFFFFF')
+            window['T3_tagsN'].update(text_color=text_colors[1])
             window['T3_tags'].update(default_tag, values=tagsDB, disabled=False)
             window['T1_list'].update(values=tuple(di.obj_dict(objectsDB, default_tag, lang).keys()), visible=True)
             window['T1_database'].metadata=True
@@ -105,6 +116,15 @@ def launch_window(lang, debug):
             if values['T3_folder'] != '':
                 window['T3_process'].update(disabled=False)
         
+        elif event == '-currentTab-':
+            is_color_circle = int(values['-currentTab-'] in ('tab1', 'tab4'))
+            window['-formattingText-'].update(text_color=text_colors[is_color_circle])
+            window['-bitnessText-'].update(text_color=text_colors[is_color_circle])
+            window['-roundingText-'].update(text_color=text_colors[is_color_circle])
+            window['-bitness-'].update(disabled=not is_color_circle)
+            window['-rounding-'].update(disabled=not is_color_circle)
+
+
         # ------------ Events in the tab "Spectra" ------------
 
         elif values['-currentTab-'] == 'tab1':
@@ -181,6 +201,10 @@ def launch_window(lang, debug):
                 T1_fig.update_layout(title=T1_title_text, xaxis_title=tr.xaxis_text[lang], yaxis_title=tr.yaxis_text[lang])
                 T1_fig.show()
             
+            elif event == 'T1_clear':
+                names = []
+                T1_fig.data = []
+            
             elif event == 'T1_export':
                 T1_export = '\n' + '\t'.join(tr.gui_col[lang]) + '\n' + '_' * 36
                 T1_nm = cmf.xyz_nm if values['-srgb-'] else cmf.rgb_nm
@@ -219,7 +243,7 @@ def launch_window(lang, debug):
                     )
 
                     # Output
-                    T1_export += f'\n{export(T1_rgb)}\t{name_1}'
+                    T1_export += f'\n{export_colors(T1_rgb)}\t{name_1}'
 
                 sg.popup_scrolled(T1_export, title=tr.gui_results[lang], size=(72, 32), font=('Consolas', 10))
         
@@ -269,9 +293,9 @@ def launch_window(lang, debug):
             window['T2_+'].update(disabled=values['T2_single'] or not 2 <= T2_vis < T2_num)
             window['T2_-'].update(disabled=values['T2_single'] or not 2 < T2_vis <= T2_num)
             for i in range(T2_num):
-                window['T2_filterN'+str(i)].update(text_color=('#A3A3A3', '#FFFFFF')[values['T2_filterset']])
-                window['T2_wavelengthN'+str(i)].update(text_color=('#A3A3A3', '#FFFFFF')[not values['T2_filterset']])
-                window['T2_exposureN'+str(i)].update(text_color=('#A3A3A3', '#FFFFFF')[not values['T2_single']])
+                window['T2_filterN'+str(i)].update(text_color=text_colors[values['T2_filterset']])
+                window['T2_wavelengthN'+str(i)].update(text_color=text_colors[not values['T2_filterset']])
+                window['T2_exposureN'+str(i)].update(text_color=text_colors[not values['T2_single']])
             
             input_data = {'gamma': values['-gamma-'], 'srgb': values['-srgb-'], 'desun': values['T2_desun'], 'nm': []}
             
@@ -362,29 +386,8 @@ def launch_window(lang, debug):
                     T2_input_bit = 16 if T2_max > 255 else 8
                     T2_input_depth = 65535 if T2_max > 255 else 255
                 #T2_data = np.clip(T2_data, 0, T2_input_depth)
-                
-                # Calibration of maps by spectrum (legacy)
-                #if info['calib']:
-                #    if 'br' in info:
-                #        br = np.array(info['br'])
-                #        obl = 0
-                #    elif 'ref' in info:
-                #        ref = calc.standardize_photometry(db.objects[info['ref']])
-                #        albedo = ref['albedo'] if 'albedo' in ref else 0
-                #        br = calc.get_points(bands, ref['nm'], ref['br'], albedo)
-                #        obl = ref['obl'] if 'obl' in ref else 0
-                #    for u in range(n): # calibration cycles
-                #        for y in range(h):
-                #            for layer in range(l):
-                #                if np.sum(data[layer][y]) != 0:
-                #                    calib[layer][0].append(np.sum(data[layer][y]) / np.count_nonzero(data[layer][y]))
-                #                    calib[layer][1].append(k(np.pi * (0.5 - (y + 0.5) / h), obl))
-                #        for layer in range(l):
-                #            avg = np.average(calib[layer][0], weights=calib[layer][1])
-                #            color = depth * br[layer]
-                #            data[layer] = data[layer] * color / avg
 
-                T2_fast = True if values['T2_interp1'] else False
+                T2_fast = True if values['-interpMode1-'] else False
                 T2_nm = cmf.xyz_nm if input_data['srgb'] else cmf.rgb_nm
                 T2_img = Image.new('RGB', (T2_w, T2_h), (0, 0, 0))
                 T2_draw = ImageDraw.Draw(T2_img)
@@ -461,7 +464,7 @@ def launch_window(lang, debug):
                 if values['T2_plotpixels']:
                     T2_fig.show()
                 if event == 'T2_preview':
-                    window['T2_image'].update(data=gui.convert_to_bytes(T2_img))
+                    window['T2_image'].update(data=convert_to_bytes(T2_img))
                 else:
                     T2_img.save(f'{values["T2_folder"]}/TCT_{time.strftime("%Y-%m-%d_%H-%M")}.png')
             
@@ -491,7 +494,7 @@ def launch_window(lang, debug):
             
             else:
                 if event == 'T4_surfacebr':
-                    window['T4_scale'].update(text_color=T4_text_colors[values['T4_surfacebr']])
+                    window['T4_scale'].update(text_color=text_colors[values['T4_surfacebr']])
                     window['T4_slider4'].update(disabled=not values['T4_surfacebr'])
                 
                 T4_mode = 'albedo' if values['T4_surfacebr'] else 'chromaticity'

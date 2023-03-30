@@ -1,4 +1,3 @@
-import io
 import PySimpleGUI as sg
 import scr.strings as tr
 import scr.filters as filters
@@ -6,22 +5,16 @@ import scr.filters as filters
 sg.LOOK_AND_FEEL_TABLE['MaterialDark'] = {
         'BACKGROUND': '#333333', 'TEXT': '#FFFFFF',
         'INPUT': '#424242', 'TEXT_INPUT': '#FFFFFF', 'SCROLL': '#424242',
-        'BUTTON': ('#FFFFFF', '#007ACC'), 'PROGRESS': ('#000000', '#000000'),
+        'BUTTON': ('#FFFFFF', '#108BB4'), 'PROGRESS': ('#000000', '#000000'),
         'BORDER': 0, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0,
         'ACCENT1': '#FF0266', 'ACCENT2': '#FF5C93', 'ACCENT3': '#C5003C'
     }
 
-def convert_to_bytes(img):
-    bio = io.BytesIO()
-    img.save(bio, format='PNG')
-    del img
-    return bio.getvalue()
-
-def frame(num: int, lang: str):
+def frame(num: int, disabled_background: str, lang: str):
     n = str(num)
     l = [
         [         # sets frame width
-            sg.Input(size=20, disabled=False, disabled_readonly_background_color='#3A3A3A', enable_events=True, key='T2_path'+n, expand_x=True),
+            sg.Input(size=20, disabled=False, disabled_readonly_background_color=disabled_background, enable_events=True, key='T2_path'+n, expand_x=True),
             sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, disabled=False, key='T2_browse'+n)
         ],
         [
@@ -30,17 +23,21 @@ def frame(num: int, lang: str):
         ],
         [
             sg.Text(tr.gui_wavelength[lang], key='T2_wavelengthN'+n),
-            sg.Input(size=0, disabled_readonly_background_color='#3A3A3A', disabled=False, enable_events=True, key='T2_wavelength'+n, expand_x=True)
+            sg.Input(size=0, disabled_readonly_background_color=disabled_background, disabled=False, enable_events=True, key='T2_wavelength'+n, expand_x=True)
         ],
         [
             sg.Text(tr.gui_exposure[lang], key='T2_exposureN'+n),
-            sg.Input('1.0', size=0, disabled_readonly_background_color='#3A3A3A', disabled=False, key='T2_exposure'+n, expand_x=True)
+            sg.Input('1.0', size=0, disabled_readonly_background_color=disabled_background, disabled=False, key='T2_exposure'+n, expand_x=True)
         ]
     ]
     return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, visible=True, key='T2_band'+n)
 
-def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple, lang: str):
+def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, lang: str):
     title_font = ('arial', 12)
+    tags_input_size = 20
+    button_size = 22
+    slider_size = (0, 15)
+    disabled_background = '#3A3A3A'
 
     settings_column = sg.Column([
         [sg.Push(), sg.Text(tr.gui_settings[lang], font=title_font, key='-settingsTitle-'), sg.Push()],
@@ -61,16 +58,22 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple
         [sg.Radio(tr.gui_interp[lang][2], 'interpRadio', enable_events=True, key='-interpMode1-')],
         [sg.T('')],
         [sg.Push(), sg.Text(tr.gui_formatting[lang], key='-formattingText-'), sg.Push()],
-        [sg.Text(tr.gui_bit[lang], key='-bitnessText-'), sg.InputText('8', size=0, expand_x=True, enable_events=True, key='-bitness-')],
-        [sg.Text(tr.gui_rnd[lang], key='-roundingText-'), sg.InputText('3', size=0, expand_x=True, enable_events=True, key='-rounding-')]
+        [
+            sg.Text(tr.gui_bit[lang], key='-bitnessText-'),
+            sg.InputText('8', size=0, disabled_readonly_background_color=disabled_background, expand_x=True, enable_events=True, key='-bitness-')
+        ],
+        [
+            sg.Text(tr.gui_rnd[lang], key='-roundingText-'),
+            sg.InputText('3', size=0, disabled_readonly_background_color=disabled_background, expand_x=True, enable_events=True, key='-rounding-')
+        ]
     ])
 
     T1_col1 = [
         [sg.Push(), sg.Text(tr.gui_database[lang], font=title_font, key='T1_title1'), sg.Push()],
-        [sg.Push(), sg.Button(button_text=tr.gui_load[lang], size=22, key='T1_database', metadata=False), sg.Push()],
+        [sg.Push(), sg.Button(button_text=tr.gui_load[lang], size=button_size, key='T1_database', metadata=False), sg.Push()],
         [
             sg.Push(), sg.Text(tr.gui_tags[lang], key='T1_tagsN', visible=False),
-            sg.InputCombo([], default_value='', size=20, enable_events=True, key='T1_tags', visible=False)
+            sg.InputCombo([], default_value='', size=tags_input_size, enable_events=True, key='T1_tags', visible=False)
         ],
         [sg.Listbox(values=(), enable_events=True, key='T1_list', visible=False, expand_x=True, expand_y=True)]
     ]
@@ -81,22 +84,24 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple
         [sg.Text(tr.gui_rgb[lang], key='T1_colorRGB'), sg.Input(size=0, key='T1_rgb', expand_x=True)],
         [sg.Text(tr.gui_hex[lang], key='T1_colorHEX'), sg.Input(size=0, key='T1_hex', expand_x=True)],
         [sg.T('')],
-        [sg.Push(), sg.Button(button_text=tr.gui_add[lang], size=22, key='T1_add'), sg.Push()],
-        [sg.Push(), sg.Button(button_text=tr.gui_plot[lang], size=22, key='T1_plot'), sg.Push()],
-        [sg.Push(), sg.Button(button_text=tr.gui_export[lang], size=22, key='T1_export'), sg.Push()]
+        [sg.Push(), sg.Button(button_text=tr.gui_add[lang], size=button_size, key='T1_add'), sg.Push()],
+        [sg.Push(), sg.Button(button_text=tr.gui_plot[lang], size=button_size, key='T1_plot'), sg.Push()],
+        [sg.Push(), sg.Button(button_text=tr.gui_clear[lang], size=button_size, key='T1_clear'), sg.Push()],
+        [sg.T('')],
+        [sg.Push(), sg.Button(button_text=tr.gui_export[lang], size=button_size, key='T1_export'), sg.Push()]
     ]
 
     T2_frames = [
-        [frame(0, lang)],
-        [frame(1, lang)],
-        [frame(2, lang)],
-        [frame(3, lang)],
-        [frame(4, lang)],
-        [frame(5, lang)],
-        [frame(6, lang)],
-        [frame(7, lang)],
-        [frame(8, lang)],
-        [frame(9, lang)] # just add more frames here
+        [frame(0, disabled_background, lang)],
+        [frame(1, disabled_background, lang)],
+        [frame(2, disabled_background, lang)],
+        [frame(3, disabled_background, lang)],
+        [frame(4, disabled_background, lang)],
+        [frame(5, disabled_background, lang)],
+        [frame(6, disabled_background, lang)],
+        [frame(7, disabled_background, lang)],
+        [frame(8, disabled_background, lang)],
+        [frame(9, disabled_background, lang)] # just add more frames here
     ]
     T2_col1 = [
         [
@@ -110,14 +115,14 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple
         [sg.Checkbox(tr.gui_makebright[lang], key='T2_makebright')],
         [sg.Checkbox(tr.gui_autoalign[lang], key='T2_autoalign')],
         [sg.Checkbox(tr.gui_desun[lang], key='T2_desun')],
+        [sg.Checkbox(tr.gui_plotpixels[lang], enable_events=True, key='T2_plotpixels')],
         [
             sg.Checkbox(tr.gui_filterset[lang], enable_events=True, key='T2_filterset'),
             sg.InputCombo(filters.get_sets(), enable_events=True, disabled=True, key='T2_filter', expand_x=True)
         ],
-        [sg.Checkbox(tr.gui_plotpixels[lang], enable_events=True, key='T2_plotpixels')],
         [
             sg.Checkbox(tr.gui_single[lang], enable_events=True, key='T2_single'),
-            sg.Input(size=14, disabled=True, disabled_readonly_background_color='#3A3A3A', key='T2_path', expand_x=True),
+            sg.Input(size=14, disabled=True, disabled_readonly_background_color=disabled_background, key='T2_path', expand_x=True),
             sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, disabled=True, key='T2_browse')
         ],
         [
@@ -142,10 +147,10 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple
         [
             sg.Push(),
             sg.Column([
-                [sg.Push(), sg.Button(button_text=tr.gui_load[lang], size=22, key='T3_database', metadata=False), sg.Push()],
+                [sg.Push(), sg.Button(button_text=tr.gui_load[lang], size=button_size, key='T3_database', metadata=False), sg.Push()],
                 [
                     sg.Push(), sg.Text(tr.gui_tags[lang], text_color='#A3A3A3', key='T3_tagsN'),
-                    sg.InputCombo([], default_value='', size=20, enable_events=True, disabled=True, key='T3_tags'), sg.Push()
+                    sg.InputCombo([], default_value='', size=tags_input_size, enable_events=True, disabled=True, key='T3_tags'), sg.Push()
                 ]
             ]),
             sg.Push(),
@@ -154,17 +159,15 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple
                     sg.Push(), sg.Text(tr.gui_extension[lang], key='T3_ext'),
                     sg.InputCombo(['png', 'jpeg', 'pdf'], default_value='png', size=10, enable_events=True, key='T3_extension'), sg.Push()
                 ],
-                [sg.Push(), sg.Button(tr.gui_process[lang], size=22, disabled=True, key='T3_process'), sg.Push()]
+                [sg.Push(), sg.Button(tr.gui_process[lang], size=button_size, disabled=True, key='T3_process'), sg.Push()]
             ]),
             sg.Push()
         ]
     ]
 
-    slider_size = (0, 15)
-    T4_text_colors = ('#A3A3A3', '#FFFFFF')
     T4_col1 = [
         [sg.Push(), sg.Text(tr.gui_input[lang], font=title_font, key='T4_title1'), sg.Push()],
-        [sg.Text(tr.gui_maxtemp[lang], key='T4_maxtemp'), sg.InputText('20000', size=8, enable_events=True, key='T4_maxtemp_num')],
+        [sg.Push(), sg.Text('max ='), sg.InputText('20000', size=8, enable_events=True, key='T4_maxtemp_num'), sg.Text('K')],
         [
             sg.Text(tr.gui_temp[lang], justification='right', size=18, key='T4_temp'),
             sg.Slider(range=(0, 20000), default_value=0, resolution=100, orientation='h', size=slider_size, enable_events=True, key='T4_slider1', expand_x=True)
@@ -180,7 +183,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple
         [sg.T('')],
         [sg.Checkbox(tr.gui_surfacebr[lang], enable_events=True, default=False, key='T4_surfacebr')],
         [
-            sg.Text(tr.gui_irr[lang], size=18, text_color=T4_text_colors[0], justification='right', key='T4_scale'),
+            sg.Text(tr.gui_irr[lang], size=18, text_color=text_colors[0], justification='right', key='T4_scale'),
             sg.Slider(range=(-50, 50), default_value=0, resolution=0.01, orientation='h', size=slider_size, enable_events=True, disabled=True, key='T4_slider4', expand_x=True)
         ]
     ]
@@ -194,20 +197,20 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, T4_text_colors: tuple
 
     tab1 = [
         [
-            sg.Column(T1_col1, justification='top', expand_x=True, expand_y=True), sg.VSeperator(),
-            sg.Column(T1_col2, justification='top', expand_x=True, expand_y=True)
+            sg.Column(T1_col1, expand_x=True, expand_y=True), sg.VSeperator(),
+            sg.Column(T1_col2, expand_x=True, expand_y=True)
         ]
     ]
     tab2 = [
         [
-            sg.Column(T2_col1, justification='top'), sg.VSeperator(),
-            sg.Column(T2_col2, justification='top', expand_x=True, expand_y=True)
+            sg.Column(T2_col1), sg.VSeperator(),
+            sg.Column(T2_col2, expand_x=True, expand_y=True)
         ]
     ]
     tab4 = [
         [
-            sg.Column(T4_col1, justification='top', expand_x=True, expand_y=True), sg.VSeperator(),
-            sg.Column(T4_col2, justification='top', expand_x=True, expand_y=True)
+            sg.Column(T4_col1, expand_x=True, expand_y=True), sg.VSeperator(),
+            sg.Column(T4_col2, expand_x=True, expand_y=True)
         ]
     ]
     tabs = sg.TabGroup([[
@@ -261,19 +264,19 @@ def translate(window: sg.Window, T2_num: int, lang: str):
     window['T2_makebright'].update(text=tr.gui_makebright[lang])
     window['T2_autoalign'].update(text=tr.gui_autoalign[lang])
     window['T2_desun'].update(text=tr.gui_desun[lang])
+    window['T2_plotpixels'].update(text=tr.gui_plotpixels[lang])
+    window['T2_filterset'].update(text=tr.gui_filterset[lang])
     window['T2_single'].update(text=tr.gui_single[lang])
     window['T2_browse'].update(tr.gui_browse[lang])
-    window['T2_filterset'].update(text=tr.gui_filterset[lang])
     window['T2_folderN'].update(tr.gui_folder[lang])
     window['T2_browse_folder'].update(tr.gui_browse[lang])
-    window['T2_plotpixels'].update(text=tr.gui_plotpixels[lang])
     window['T2_preview'].update(tr.gui_preview[lang])
     window['T2_process'].update(tr.gui_process[lang])
-    window['T3_tagsN'].update(tr.gui_tags[lang])
-    window['T3_database'].update(tr.gui_update[lang] if window['T3_database'].metadata else tr.gui_load[lang])
-    window['T3_ext'].update(tr.gui_extension[lang])
     window['T3_browse_folder'].update(tr.gui_browse[lang])
     window['T3_folderN'].update(tr.gui_folder[lang])
+    window['T3_database'].update(tr.gui_update[lang] if window['T3_database'].metadata else tr.gui_load[lang])
+    window['T3_tagsN'].update(tr.gui_tags[lang])
+    window['T3_ext'].update(tr.gui_extension[lang])
     window['T3_process'].update(tr.gui_process[lang])
     window['T4_title1'].update(tr.gui_input[lang])
     window['T4_title2'].update(tr.gui_results[lang])
@@ -282,7 +285,6 @@ def translate(window: sg.Window, T2_num: int, lang: str):
     window['T4_vII'].update(tr.gui_vII[lang])
     window['T4_scale'].update(tr.gui_irr[lang])
     window['T4_surfacebr'].update(text=tr.gui_surfacebr[lang])
-    window['T4_maxtemp'].update(tr.gui_maxtemp[lang])
     window['T4_colorRGB'].update(tr.gui_rgb[lang])
     window['T4_colorHEX'].update(tr.gui_hex[lang])
     return window
