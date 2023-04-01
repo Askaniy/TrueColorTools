@@ -57,12 +57,13 @@ def intensity2mag(e):
 def mag2intensity(m):
     return V * 10**(-0.4 * m)
 
-def polator(x, y, scope, albedo=0, fast=False, desun=False):
+interp_modes = ['fast', 'qualitatively']#, 'new']
+def polator(x, y, scope, albedo=0, mode='qualitatively', desun=False):
     mn = scope[0]
     mx = scope[-1]
     extrap = True if x[0] > mn or x[-1] < mx else False
     br = []
-    if fast:
+    if mode == 'fast':
         a = y[0] / x[0]
         b = 0
         x.append(x[-1] + 1000)
@@ -199,6 +200,7 @@ rounder = np.vectorize(lambda grayscale, d_places: int(round(grayscale)) if d_pl
 def to_bit(color, bit): return color * (2**bit - 1)
 def to_html(color): return '#{:02x}{:02x}{:02x}'.format(*rounder(to_bit(color, 8), 0))
 
+br_modes = ['chromaticity', 'albedo 0.5', 'albedo']
 def to_rgb(target, spectrum, mode='chromaticity', inp_bit=None, exp_bit=None, rnd=0, albedo=False, phase=0, gamma=False, srgb=False, html=False) -> tuple|str:
     try:
         if inp_bit:
@@ -230,7 +232,7 @@ def to_rgb(target, spectrum, mode='chromaticity', inp_bit=None, exp_bit=None, rn
         if html:
             return to_html(rgb)
         else:
-            return tuple(rounder(rgb if not exp_bit else to_bit(rgb, exp_bit), rnd))
+            return tuple(rounder(rgb if exp_bit == None else to_bit(rgb, exp_bit), rnd))
     except:
         print('ColorCalcError:', target)
         print(traceback.format_exc())

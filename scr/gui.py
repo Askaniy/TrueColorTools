@@ -23,11 +23,11 @@ def frame(num: int, disabled_background: str, lang: str):
         ],
         [
             sg.Text(tr.gui_wavelength[lang], key='T2_wavelengthN'+n),
-            sg.Input(size=0, disabled_readonly_background_color=disabled_background, disabled=False, enable_events=True, key='T2_wavelength'+n, expand_x=True)
+            sg.Input(size=1, disabled_readonly_background_color=disabled_background, disabled=False, enable_events=True, key='T2_wavelength'+n, expand_x=True)
         ],
         [
             sg.Text(tr.gui_exposure[lang], key='T2_exposureN'+n),
-            sg.Input('1.0', size=0, disabled_readonly_background_color=disabled_background, disabled=False, key='T2_exposure'+n, expand_x=True)
+            sg.Input('1.0', size=1, disabled_readonly_background_color=disabled_background, disabled=False, key='T2_exposure'+n, expand_x=True)
         ]
     ]
     return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, visible=True, key='T2_band'+n)
@@ -36,7 +36,8 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, l
     title_font = ('arial', 12)
     tags_input_size = 20
     button_size = 22
-    slider_size = (0, 15)
+    browse_size = 10
+    slider_size = (1, 15)
     disabled_background = '#3A3A3A'
 
     settings_column = sg.Column([
@@ -60,11 +61,11 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, l
         [sg.Push(), sg.Text(tr.gui_formatting[lang], key='-formattingText-'), sg.Push()],
         [
             sg.Text(tr.gui_bit[lang], key='-bitnessText-'),
-            sg.InputText('8', size=0, disabled_readonly_background_color=disabled_background, expand_x=True, enable_events=True, key='-bitness-')
+            sg.InputText('1', size=1, disabled_readonly_background_color=disabled_background, expand_x=True, enable_events=True, key='-bitness-')
         ],
         [
             sg.Text(tr.gui_rnd[lang], key='-roundingText-'),
-            sg.InputText('3', size=0, disabled_readonly_background_color=disabled_background, expand_x=True, enable_events=True, key='-rounding-')
+            sg.InputText('3', size=1, disabled_readonly_background_color=disabled_background, expand_x=True, enable_events=True, key='-rounding-')
         ]
     ])
 
@@ -81,8 +82,8 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, l
         [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T1_title2'), sg.Push()],
         [sg.Push(), sg.Graph(canvas_size=canvas_size, graph_bottom_left=(0, 0), graph_top_right=canvas_size, background_color=None, key='T1_graph'), sg.Push()],
         [sg.T('')],
-        [sg.Text(tr.gui_rgb[lang], key='T1_colorRGB'), sg.Input(size=0, key='T1_rgb', expand_x=True)],
-        [sg.Text(tr.gui_hex[lang], key='T1_colorHEX'), sg.Input(size=0, key='T1_hex', expand_x=True)],
+        [sg.Text(tr.gui_rgb[lang], key='T1_colorRGB'), sg.Input(size=1, key='T1_rgb', expand_x=True)],
+        [sg.Text(tr.gui_hex[lang], key='T1_colorHEX'), sg.Input(size=1, key='T1_hex', expand_x=True)],
         [sg.T('')],
         [sg.Push(), sg.Button(button_text=tr.gui_add[lang], size=button_size, key='T1_add'), sg.Push()],
         [sg.Push(), sg.Button(button_text=tr.gui_plot[lang], size=button_size, key='T1_plot'), sg.Push()],
@@ -106,7 +107,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, l
     T2_col1 = [
         [
             sg.Push(), sg.Text(tr.gui_input[lang], font=title_font, key='T2_title1'),
-            sg.Button(button_text='+', size=2, key='T2_+'), sg.Button(button_text='-', size=2, disabled=False, key='T2_-'), sg.Push()
+            sg.Button(button_text='+', key='T2_+'), sg.Button(button_text='−', key='T2_-'), sg.Push()
         ],
         [sg.Column(T2_frames, scrollable=True, vertical_scroll_only=True, key='T2_frames', expand_x=True, expand_y=True)]
     ]
@@ -122,18 +123,18 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, l
         ],
         [
             sg.Checkbox(tr.gui_single[lang], enable_events=True, key='T2_single'),
-            sg.Input(size=14, disabled=True, disabled_readonly_background_color=disabled_background, key='T2_path', expand_x=True),
-            sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, disabled=True, key='T2_browse')
+            sg.Input(size=1, disabled=True, disabled_readonly_background_color=disabled_background, key='T2_path', expand_x=True),
+            sg.FileBrowse(button_text=tr.gui_browse[lang], size=browse_size, disabled=True, key='T2_browse')
         ],
         [
             sg.Text(tr.gui_folder[lang], key='T2_folderN'),
-            sg.Input(size=14, enable_events=True, key='T2_folder', expand_x=True),
-            sg.FolderBrowse(button_text=tr.gui_browse[lang], size=10, key='T2_browse_folder')
+            sg.Input(size=1, enable_events=True, key='T2_folder', expand_x=True),
+            sg.FolderBrowse(button_text=tr.gui_browse[lang], size=browse_size, key='T2_browse_folder')
         ],
         [sg.T('')],
         [
-            sg.Push(), sg.Button(tr.gui_preview[lang], size=19, disabled=True, key='T2_preview'),
-            sg.Button(tr.gui_process[lang], size=19, disabled=True, key='T2_process'), sg.Push()
+            sg.Push(), sg.Button(tr.gui_preview[lang], size=button_size, disabled=True, key='T2_preview'),
+            sg.Button(tr.gui_process[lang], size=button_size, disabled=True, key='T2_process'), sg.Push()
         ],
         [sg.Push(), sg.Image(background_color='black', size=T2_preview, key='T2_image'), sg.Push()]
     ]
@@ -141,8 +142,8 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, l
     tab3 = [
         [
             sg.Text(tr.gui_folder[lang], key='T3_folderN'),
-            sg.Input(size=0, enable_events=True, key='T3_folder', expand_x=True),
-            sg.FolderBrowse(button_text=tr.gui_browse[lang], size=10, key='T3_browse_folder')
+            sg.Input(size=1, enable_events=True, key='T3_folder', expand_x=True),
+            sg.FolderBrowse(button_text=tr.gui_browse[lang], size=browse_size, key='T3_browse_folder')
         ],
         [
             sg.Push(),
@@ -157,7 +158,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, l
             sg.Column([
                 [
                     sg.Push(), sg.Text(tr.gui_extension[lang], key='T3_ext'),
-                    sg.InputCombo(['png', 'jpeg', 'pdf'], default_value='png', size=10, enable_events=True, key='T3_extension'), sg.Push()
+                    sg.InputCombo(['png', 'jpeg', 'pdf'], default_value='png', enable_events=True, key='T3_extension'), sg.Push()
                 ],
                 [sg.Push(), sg.Button(tr.gui_process[lang], size=button_size, disabled=True, key='T3_process'), sg.Push()]
             ]),
@@ -191,8 +192,8 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, l
         [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T4_title2'), sg.Push()],
         [sg.Push(), sg.Graph(canvas_size=canvas_size, graph_bottom_left=(0, 0), graph_top_right=canvas_size, background_color=None, key='T4_graph'), sg.Push()],
         [sg.T('')],
-        [sg.Text(tr.gui_rgb[lang], key='T4_colorRGB'), sg.Input(size=0, key='T4_rgb', expand_x=True)],
-        [sg.Text(tr.gui_hex[lang], key='T4_colorHEX'), sg.Input(size=0, key='T4_hex', expand_x=True)],
+        [sg.Text(tr.gui_rgb[lang], key='T4_colorRGB'), sg.Input(size=1, key='T4_rgb', expand_x=True)],
+        [sg.Text(tr.gui_hex[lang], key='T4_colorHEX'), sg.Input(size=1, key='T4_hex', expand_x=True)],
     ]
 
     tab1 = [

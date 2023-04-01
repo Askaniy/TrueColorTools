@@ -39,8 +39,7 @@ The key processing method is converting the data into a continuous (5 nm step) s
 [`TCT.py`](scr/TCT.py) is functionally divided into 4 tabs: *Spectra*, *Images*, *Table* and *Blackbody & Redshifts*. No internet connection is required.
 
 **Spectra tab** provides access to the built-in spectra database and allows to calculate a color with the selected settings just by clicking on an object.
-
-For example, you can get colors formatted for [Celestia](https://github.com/CelestiaProject/Celestia), which uses chromaticity values from 0 to 1 for each color channel, where 1 is the value of the brightest channel. Make sure that the `chromaticity` mode is used and `Decimal places` is greater than zero (by default it is), and then set the `Color (bit) depth` parameter to zero.
+It is possible to plot its spectrum (will open in your default browser) and to work with categories of objects.
 
 **Images tab** allows you to load image(s), specify wavelengths and save a processed image, for each pixel of which a spectrum was built. It takes a long time, so you can check out the preview. The wavelength values can be set by the choice of spacecraft filters and they should always increase. Input can be in form of color image (`Single image mode`) or ≥2 b/w images.
 

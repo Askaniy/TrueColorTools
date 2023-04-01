@@ -52,23 +52,49 @@ def launch_window():
         finalize=True, resizable=True, margins=(0, 0), size=(900, 600))
     T2_vis = 3  # current number of visible image bands
     T2_num = 10 # max number of image bands, ~ len(window['T2_frames'])
+    for i in range(T2_vis, T2_num):
+        window['T2_band'+str(i)].update(visible=False)
 
     T1_preview = window['T1_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
     T4_preview = window['T4_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
 
     T1_fig = go.Figure()
     triggers = ['-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-brMode2-', '-interpMode0-', '-interpMode1-', '-phase-', '-bitness-', '-rounding-']
-    br_modes = ['chromaticity', 'albedo 0.5', 'albedo']
-
-    for i in range(T2_vis, T2_num):
-        window['T2_band'+str(i)].update(visible=False)
+    
+    brMode = calc.br_modes[0] # default brightness mode
+    interpMode = calc.interp_modes[0] # default interpolation mode
+    bitness = int(window['-bitness-'].get())
+    rounding = int(window['-rounding-'].get())
 
 
     # Window events loop
 
-    names = []
+    T1_plot_list = []
     while True:
         event, values = window.Read()
+
+        # Radio selection to be independent
+        if event in ('-brMode0-', '-brMode1-', '-brMode2-'):
+            for i in range(3):
+                if values[f'-brMode{i}-']:
+                    brMode = calc.br_modes[i]
+                    break
+        elif event in ('-interpMode0-', '-interpMode1-'):
+            for i in range(2):
+                if values[f'-interpMode{i}-']:
+                    interpMode = calc.interp_modes[i]
+                    break
+        # Checks for empty input
+        elif event == '-bitness-':
+            try:
+                bitness = int(values['-bitness-'])
+            except ValueError:
+                pass
+        elif event == '-rounding-':
+            try:
+                rounding = int(values['-rounding-'])
+            except ValueError:
+                pass
 
         # Global window events
 
@@ -132,10 +158,7 @@ def launch_window():
             if (event in triggers or event == 'T1_list') and values['T1_list'] != []:
                 T1_name = values['T1_list'][0]
                 T1_nm = cmf.xyz_nm if values['-srgb-'] else cmf.rgb_nm
-                for i in range(3):
-                    if values[f'-brMode{i}-']:
-                        T1_mode = br_modes[i]
-                        break
+                T1_mode = brMode
 
                 # Spectral data import and processing
                 T1_spectrum = objectsDB[di.obj_dict(objectsDB, 'all', lang)[T1_name]]
@@ -153,7 +176,7 @@ def launch_window():
                     T1_sun = T1_spectrum['sun']
                 except KeyError:
                     T1_sun = False
-                T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], T1_nm, T1_albedo, values['-interpMode1-'], desun=T1_sun)
+                T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], T1_nm, T1_albedo, mode=interpMode, desun=T1_sun)
                 
                 # Color calculation
                 #try:
@@ -163,9 +186,9 @@ def launch_window():
                 T1_rgb = calc.to_rgb(
                     T1_name, T1_curve, mode=T1_mode,
                     albedo = T1_spectrum['albedo'] or T1_albedo,
-                    exp_bit=int(values['-bitness-']), 
+                    exp_bit=bitness, 
                     gamma=values['-gamma-'], 
-                    rnd=int(values['-rounding-']),
+                    rnd=rounding,
                     srgb=values['-srgb-']
                 )
                 T1_rgb_show = calc.to_rgb(
@@ -185,7 +208,7 @@ def launch_window():
                 window['T1_list'].update(tuple(di.obj_dict(objectsDB, values['T1_tags'], lang).keys()))
             
             elif event == 'T1_add' and values['T1_list'] != []:
-                names.append(values['T1_list'][0])
+                T1_plot_list.append(values['T1_list'][0])
                 T1_fig.add_trace(go.Scatter(
                     x = T1_nm,
                     y = T1_curve,
@@ -194,15 +217,15 @@ def launch_window():
                     ))
             
             elif event == 'T1_plot':
-                if len(names) == 1:
-                    T1_title_text = tr.single_title_text[lang] + names[0]
+                if len(T1_plot_list) == 1:
+                    T1_title_text = tr.single_title_text[lang] + T1_plot_list[0]
                 else:
-                    T1_title_text = tr.batch_title_text[lang] + ', '.join(names)
+                    T1_title_text = tr.batch_title_text[lang] + ', '.join(T1_plot_list)
                 T1_fig.update_layout(title=T1_title_text, xaxis_title=tr.xaxis_text[lang], yaxis_title=tr.yaxis_text[lang])
                 T1_fig.show()
             
             elif event == 'T1_clear':
-                names = []
+                T1_plot_list = []
                 T1_fig.data = []
             
             elif event == 'T1_export':
@@ -212,10 +235,7 @@ def launch_window():
                 # Spectrum processing
                 for name_1, name_0 in di.obj_dict(objectsDB, values['T1_tags'], lang).items():
                     T1_spectrum = objectsDB[name_0]
-                    for i in range(3):
-                        if values[f'-brMode{i}-']:
-                            T1_mode = br_modes[i]
-                            break
+                    T1_mode = brMode
                     T1_albedo = 0
                     if 'albedo' not in T1_spectrum:
                         if T1_mode == 'albedo':
@@ -230,15 +250,15 @@ def launch_window():
                         T1_sun = T1_spectrum['sun']
                     except KeyError:
                         T1_sun = False
-                    T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], T1_nm, T1_albedo, values['-interpMode1-'], desun=T1_sun)
+                    T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], T1_nm, T1_albedo, mode=interpMode, desun=T1_sun)
 
                     # Color calculation
                     T1_rgb = calc.to_rgb(
                         name_0, T1_curve, mode=T1_mode,
                         albedo = T1_spectrum['albedo'] or T1_albedo,
-                        exp_bit=int(values['-bitness-']), 
+                        exp_bit=bitness, 
                         gamma=values['-gamma-'], 
-                        rnd=int(values['-rounding-']),
+                        rnd=rounding,
                         srgb=values['-srgb-']
                     )
 
@@ -325,7 +345,7 @@ def launch_window():
                     else:
                         T2_preview_status = False
                         break
-            if not all(a > b for a, b in zip(input_data['nm'][1:], input_data['nm'])): # increasing check
+            if not all(a > b for a, b in zip(input_data['nm'][1:], input_data['nm'])): # check for increasing
                 T2_preview_status = False
             window['T2_preview'].update(disabled=not T2_preview_status)
             window['T2_process'].update(disabled=not T2_preview_status) if values['T2_folder'] != '' else window['T2_process'].update(disabled=True)
@@ -387,7 +407,6 @@ def launch_window():
                     T2_input_depth = 65535 if T2_max > 255 else 255
                 #T2_data = np.clip(T2_data, 0, T2_input_depth)
 
-                T2_fast = True if values['-interpMode1-'] else False
                 T2_nm = cmf.xyz_nm if input_data['srgb'] else cmf.rgb_nm
                 T2_img = Image.new('RGB', (T2_w, T2_h), (0, 0, 0))
                 T2_draw = ImageDraw.Draw(T2_img)
@@ -420,7 +439,7 @@ def launch_window():
                             T2_name = f'({x}; {y})'
 
                             T2_temp_time = time.monotonic_ns()
-                            T2_curve = calc.polator(input_data['nm'], list(T2_spectrum), T2_nm, fast=T2_fast, desun=input_data['desun'])
+                            T2_curve = calc.polator(input_data['nm'], list(T2_spectrum), T2_nm, mode=interpMode, desun=input_data['desun'])
                             T2_calc_polator_time += time.monotonic_ns() - T2_temp_time
 
                             T2_temp_time = time.monotonic_ns()
@@ -467,22 +486,12 @@ def launch_window():
                     window['T2_image'].update(data=convert_to_bytes(T2_img))
                 else:
                     T2_img.save(f'{values["T2_folder"]}/TCT_{time.strftime("%Y-%m-%d_%H-%M")}.png')
-            
-                #except Exception as e:
-                #    print(e)
         
         # ------------ Events in the tab "Table" ------------
 
         elif values['-currentTab-'] == 'tab3':
-
             if event == 'T3_process':
-
-                # Database preprocessing
-                for i in range(3):
-                    if values[f'-brMode{i}-']:
-                        T3_mode = br_modes[i]
-                        break
-                tg.generate_table(objectsDB, values['T3_tags'], T3_mode, values['-srgb-'], values['-gamma-'], values['T3_folder'], values['T3_extension'], lang)
+                tg.generate_table(objectsDB, values['T3_tags'], brMode, values['-srgb-'], values['-gamma-'], values['T3_folder'], values['T3_extension'], lang)
 
         
         # ------------ Events in the tab 'Blackbody & Redshifts' ------------
@@ -509,9 +518,9 @@ def launch_window():
                 T4_rgb = calc.to_rgb(
                     T4_name, T4_curve, mode=T4_mode,
                     albedo=values['T4_surfacebr'],
-                    exp_bit=int(values['-bitness-']),
+                    exp_bit=bitness,
                     gamma=values['-gamma-'],
-                    rnd=int(values['-rounding-']),
+                    rnd=rounding,
                     srgb=values['-srgb-']
                 )
                 T4_rgb_show = calc.to_rgb(

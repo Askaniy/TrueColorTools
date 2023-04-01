@@ -164,8 +164,8 @@ gui_formatting = {
     "de": "Ausgabeformatierung"
 }
 gui_bit = {
-    "en": "Color (bit) depth",
-    "ru": "Битность цвета",
+    "en": "Color depth (bit)",
+    "ru": "Глубина цвета",
     "de": "Farbtiefe (bit)"
 }
 gui_rnd = {
