@@ -73,8 +73,12 @@ def launch_window():
     while True:
         event, values = window.Read()
 
-        # Radio selection to be independent
-        if event in ('-brMode0-', '-brMode1-', '-brMode2-'):
+        # Independent window events
+
+        if event == sg.WIN_CLOSED or event == tr.gui_exit[lang]:
+            break
+        # Radio selection
+        elif event in ('-brMode0-', '-brMode1-', '-brMode2-'):
             for i in range(3):
                 if values[f'-brMode{i}-']:
                     brMode = calc.br_modes[i]
@@ -95,13 +99,18 @@ def launch_window():
                 rounding = int(values['-rounding-'])
             except ValueError:
                 pass
+        # (allows other tab checks to happen)
+        elif event == '-currentTab-':
+            is_color_circle = int(values['-currentTab-'] in ('tab1', 'tab4'))
+            window['-formattingText-'].update(text_color=text_colors[is_color_circle])
+            window['-bitnessText-'].update(text_color=text_colors[is_color_circle])
+            window['-roundingText-'].update(text_color=text_colors[is_color_circle])
+            window['-bitness-'].update(disabled=not is_color_circle)
+            window['-rounding-'].update(disabled=not is_color_circle)
 
         # Global window events
 
-        if event == sg.WIN_CLOSED or event == tr.gui_exit[lang]:
-            break
-
-        elif event in tr.lang_list[lang]:
+        if event in tr.lang_list[lang]:
             for lng, lst in tr.langs.items(): # determine language to translate
                 if event in lst:
                     lang = lng
@@ -139,17 +148,6 @@ def launch_window():
             window['T1_database'].update(tr.gui_update[lang])
             window['T3_database'].metadata=True
             window['T3_database'].update(tr.gui_update[lang])
-            if values['T3_folder'] != '':
-                window['T3_process'].update(disabled=False)
-        
-        elif event == '-currentTab-':
-            is_color_circle = int(values['-currentTab-'] in ('tab1', 'tab4'))
-            window['-formattingText-'].update(text_color=text_colors[is_color_circle])
-            window['-bitnessText-'].update(text_color=text_colors[is_color_circle])
-            window['-roundingText-'].update(text_color=text_colors[is_color_circle])
-            window['-bitness-'].update(disabled=not is_color_circle)
-            window['-rounding-'].update(disabled=not is_color_circle)
-
 
         # ------------ Events in the tab "Spectra" ------------
 
@@ -490,7 +488,11 @@ def launch_window():
         # ------------ Events in the tab "Table" ------------
 
         elif values['-currentTab-'] == 'tab3':
-            if event == 'T3_process':
+
+            if values['T3_folder'] != '' and objectsDB != {}:
+                window['T3_process'].update(disabled=False)
+            
+            elif event == 'T3_process':
                 tg.generate_table(objectsDB, values['T3_tags'], brMode, values['-srgb-'], values['-gamma-'], values['T3_folder'], values['T3_extension'], lang)
 
         
