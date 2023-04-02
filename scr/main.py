@@ -489,10 +489,9 @@ def launch_window():
 
         elif values['-currentTab-'] == 'tab3':
 
-            if values['T3_folder'] != '' and objectsDB != {}:
-                window['T3_process'].update(disabled=False)
+            window['T3_process'].update(disabled = values['T3_folder'] == '' or objectsDB == {})
             
-            elif event == 'T3_process':
+            if event == 'T3_process':
                 tg.generate_table(objectsDB, values['T3_tags'], brMode, values['-srgb-'], values['-gamma-'], values['T3_folder'], values['T3_extension'], lang)
 
         

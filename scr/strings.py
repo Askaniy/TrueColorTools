@@ -298,9 +298,9 @@ gui_filterset = {
     "de": "Kamera Filterset"
 }
 gui_single = {
-    "en": "Single image mode",
-    "ru": "Режим одного изображения",
-    "de": "Ein-Bild-Modus"
+    "en": "Input RGB image",
+    "ru": "Ввод RGB изображения",
+    "de": "RGB-Bild eingeben"
 }
 gui_folder = {
     "en": "Save file location",

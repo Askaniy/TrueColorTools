@@ -180,7 +180,7 @@ objects = {
     "Mars|Mallama2017": {"tags": ["solar_system", "planet"],
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.060, 0.088, 0.170, 0.250, 0.288, 0.285, 0.330], "albedo": True
     },
-    "Mars|Crow2011": {"tags": ["featured", "solar_system", "planet"],
+    "Mars|Crow2011": {"tags": ["solar_system", "planet"],
         "nm": [350, 450, 550, 650, 750, 850, 950], "br": [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31], "albedo": 0.170
     },
     "Mars:B|USGSarchive": {"tags": ["featured", "solar_system", "planet", "surface_feature"],

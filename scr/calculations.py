@@ -57,7 +57,7 @@ def intensity2mag(e):
 def mag2intensity(m):
     return V * 10**(-0.4 * m)
 
-interp_modes = ['fast', 'qualitatively']#, 'new']
+interp_modes = ['qualitatively', 'fast']#, 'new']
 def polator(x, y, scope, albedo=0, mode='qualitatively', desun=False):
     mn = scope[0]
     mx = scope[-1]
@@ -111,7 +111,7 @@ def polator(x, y, scope, albedo=0, mode='qualitatively', desun=False):
     return curve
 
 
-def standardize_photometry(spectrum: dict) -> dict:
+def standardize_photometry(spectrum: dict):
     if 'filters' in spectrum:
         if 'bands' in spectrum:
             spectrum = from_filters(spectrum) # replacement of filters for their wavelengths
@@ -123,7 +123,7 @@ def standardize_photometry(spectrum: dict) -> dict:
         spectrum.pop('mag')
     return spectrum
 
-def from_filters(data: dict) -> dict:
+def from_filters(data: dict):
     nm = []
     for band in data['bands']:
         name = band.lower()
@@ -132,7 +132,7 @@ def from_filters(data: dict) -> dict:
                 nm.append(info['nm'])
     return data | {'nm': nm}
 
-def from_indices(data: dict) -> dict:
+def from_indices(data: dict):
     result = {}
     for index, value in data['indices'].items():
         band1, band2 = index.lower().split('-')
@@ -148,7 +148,7 @@ def from_indices(data: dict) -> dict:
         br.append(value / (filters[data['filters']][band]['nm']/1e9)**2)
     return data | {'nm': nm, 'br': br}
 
-def from_magnitudes(data: dict, vega: dict) -> dict:
+def from_magnitudes(data: dict, vega: dict):
     if 'vega' not in data:
         data |= {'vega': True}
     br = []
@@ -158,7 +158,7 @@ def from_magnitudes(data: dict, vega: dict) -> dict:
     return data | {'br': br}
 
 # to do - def gauss(x): return np.exp(- x**2 / 2) / np.sqrt(2 * np.pi)
-def get_points(pivots: list, nm_list: list, br_list: list, albedo=0, wide=100, low_res=True) -> list:
+def get_points(pivots: list, nm_list: list, br_list: list, albedo=0, wide=100, low_res=True):
     r = int(wide/2)
     scopes = []
     if low_res:

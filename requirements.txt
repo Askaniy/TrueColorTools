@@ -2,4 +2,5 @@ numpy>=1.23.0
 scipy>=1.8.1
 Pillow>=9.2.0
 plotly>=5.9.0
-pysimplegui>=4.60.1
+pysimplegui>=4.60.3
+json5>=0.9.9

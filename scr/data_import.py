@@ -15,7 +15,7 @@ def import_DBs(folders: list):
         refsDB |= additional_data[1]
     return objectsDB, refsDB
 
-def import_folder(folder: str) -> tuple:
+def import_folder(folder: str):
     objects = {}
     refs = {}
     if Path.cwd().name == 'TrueColorTools':
@@ -34,7 +34,7 @@ def import_folder(folder: str) -> tuple:
 
 # Front-end view on spectra database
 
-def obj_dict(database: dict, tag: str, lang: str) -> dict:
+def obj_dict(database: dict, tag: str, lang: str):
     """Maps front-end spectrum names allowed by the tag to names in the database"""
     names = {}
     for raw_name, obj_data in database.items():
@@ -65,10 +65,10 @@ def obj_dict(database: dict, tag: str, lang: str) -> dict:
             names |= {new_name: raw_name}
     return names
 
-def tag_list(database: dict) -> list:
+def tag_list(database: dict):
     """Generates a list of tags found in the spectra database"""
     tag_set = set(['all'])
     for obj_data in database.values():
         if 'tags' in obj_data:
             tag_set.update(obj_data['tags'])
-    return list(tag_set)
+    return sorted(tag_set)
