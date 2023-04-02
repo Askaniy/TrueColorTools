@@ -217,8 +217,10 @@ def to_rgb(target, spectrum, mode='chromaticity', inp_bit=None, exp_bit=None, rn
         else:
             rgb = np.sum(spectrum[:, np.newaxis] * cmf.rgb, axis=0)
         if mode == 'albedo 0.5':
-            if rgb[1] != 0:
+            if rgb[1] > np.max(rgb)/2:
                 rgb /= 2 * rgb[1]
+            else: # too saturated for g=0.5 matching
+                rgb /= np.max(rgb)
         elif mode == 'albedo' and albedo:
             if html:
                 rgb = np.clip(rgb, 0, 1)
