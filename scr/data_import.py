@@ -18,14 +18,17 @@ def import_DBs(folders: list):
 def import_folder(folder: str):
     objects = {}
     refs = {}
-    for file in Path(folder).iterdir():
-        if file.suffix == '.json5' and not file.is_dir():
-            with open(file) as f:
-                for key, value in load(f).items():
-                    if type(value) == list:
-                        refs |= {key: value}
-                    else:
-                        objects |= {key: value}
+    try:
+        for file in Path(folder).iterdir():
+            if file.suffix == '.json5' and not file.is_dir():
+                with open(file) as f:
+                    for key, value in load(f).items():
+                        if type(value) == list:
+                            refs |= {key: value}
+                        else:
+                            objects |= {key: value}
+    except FileNotFoundError:
+        pass
     return objects, refs
 
 
