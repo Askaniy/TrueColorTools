@@ -18,17 +18,14 @@ def import_DBs(folders: list):
 def import_folder(folder: str):
     objects = {}
     refs = {}
-    if Path.cwd().name == 'TrueColorTools':
-        for file in Path(folder).iterdir():
-            if file.suffix == '.json5' and not file.is_dir():
-                with open(file) as f:
-                    for key, value in load(f).items():
-                        if type(value) == list:
-                            refs |= {key: value}
-                        else:
-                            objects |= {key: value}
-    else:
-        print(f'Failed to import {folder=}. Please try to launch from "/TrueColorTools" directory.')
+    for file in Path(folder).iterdir():
+        if file.suffix == '.json5' and not file.is_dir():
+            with open(file) as f:
+                for key, value in load(f).items():
+                    if type(value) == list:
+                        refs |= {key: value}
+                    else:
+                        objects |= {key: value}
     return objects, refs
 
 
