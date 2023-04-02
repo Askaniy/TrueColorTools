@@ -7,8 +7,6 @@ import spectra.core_database as db
 sun = db.objects['Sun|CALSPEC']
 vega = db.objects['Vega|CALSPEC']
 
-debug = False
-
 
 # Spectrum processing functions
 
@@ -197,8 +195,15 @@ def xyz_to_sRGB(xyz):
 
 gamma_correction = np.vectorize(lambda grayscale: grayscale * 12.92 if grayscale < 0.0031308 else 1.055 * grayscale**(1.0/2.4) - 0.055)
 rounder = np.vectorize(lambda grayscale, d_places: int(round(grayscale)) if d_places == 0 else round(grayscale, d_places))
+
 def to_bit(color, bit): return color * (2**bit - 1)
-def to_html(color): return '#{:02x}{:02x}{:02x}'.format(*rounder(to_bit(color, 8), 0))
+
+def to_html(color):
+    html = '#{:02x}{:02x}{:02x}'.format(*rounder(to_bit(color, 8), 0))
+    if len(html) == 7:
+        return html
+    else:
+        raise Exception(f'HTML color code {html} is invalid. Input color is {color}')
 
 br_modes = ['chromaticity', 'albedo 0.5', 'albedo']
 def to_rgb(target, spectrum, mode='chromaticity', inp_bit=None, exp_bit=None, rnd=0, albedo=False, phase=0, gamma=False, srgb=False, html=False) -> tuple|str:
@@ -226,8 +231,7 @@ def to_rgb(target, spectrum, mode='chromaticity', inp_bit=None, exp_bit=None, rn
         if gamma:
             rgb = gamma_correction(rgb)
         if rgb.min() < 0:
-            if debug:
-                print('NegativeColorValues:', target, rgb)
+            print('NegativeColorValues:', target, rgb)
             rgb = np.clip(rgb, 0, None)
         if html:
             return to_html(rgb)
