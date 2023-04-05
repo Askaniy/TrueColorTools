@@ -59,6 +59,7 @@ Spectra and their references are stored in the [`core_database.py`](spectra/core
 - `nm`: list of wavelengths in nanometers
 - `br`: same-size list of linear physical property, representing "brightness"
 - `mag`: same-size list of magnitudes
+- `nm_range`: list of [`start`, `stop`, `step`] integer values with including endpoint
 - `filters`: filter system, linked with [`filters.py`](scr/filters.py)
 - `indices`: dictionary of color indices, use only with `filters`
 - `bands`: list of filters' names, use only with `filters`

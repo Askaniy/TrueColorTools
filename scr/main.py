@@ -168,6 +168,8 @@ def launch_window():
                 elif type(T1_spectrum['albedo']) != bool:
                     T1_albedo = T1_spectrum['albedo']
                 T1_spectrum = calc.standardize_photometry(T1_spectrum)
+                T1_spectrum |= calc.matching_check(T1_name, T1_spectrum)
+                
                 
                 # Spectrum interpolation
                 try:
@@ -231,8 +233,8 @@ def launch_window():
                 T1_nm = cmf.xyz_nm if values['-srgb-'] else cmf.rgb_nm
                 
                 # Spectrum processing
-                for name_1, name_0 in di.obj_dict(objectsDB, values['T1_tags'], lang).items():
-                    T1_spectrum = objectsDB[name_0]
+                for name, raw_name in di.obj_dict(objectsDB, values['T1_tags'], lang).items():
+                    T1_spectrum = objectsDB[raw_name]
                     T1_mode = brMode
                     T1_albedo = 0
                     if 'albedo' not in T1_spectrum:
@@ -242,6 +244,7 @@ def launch_window():
                     elif type(T1_spectrum['albedo']) != bool:
                         T1_albedo = T1_spectrum['albedo']
                     T1_spectrum = calc.standardize_photometry(T1_spectrum)
+                    T1_spectrum |= calc.matching_check(T1_name, T1_spectrum)
                     
                     # Spectrum interpolation
                     try:
@@ -252,7 +255,7 @@ def launch_window():
 
                     # Color calculation
                     T1_rgb = calc.to_rgb(
-                        name_0, T1_curve, mode=T1_mode,
+                        raw_name, T1_curve, mode=T1_mode,
                         albedo = T1_spectrum['albedo'] or T1_albedo,
                         exp_bit=bitness, 
                         gamma=values['-gamma-'], 
@@ -261,7 +264,7 @@ def launch_window():
                     )
 
                     # Output
-                    T1_export += f'\n{export_colors(T1_rgb)}\t{name_1}'
+                    T1_export += f'\n{export_colors(T1_rgb)}\t{name}'
 
                 sg.popup_scrolled(T1_export, title=tr.gui_results[lang], size=(72, 32), font=('Consolas', 10))
         

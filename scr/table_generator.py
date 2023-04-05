@@ -85,6 +85,7 @@ def generate_table(objectsDB: dict, tag: str, br_mode: str, srgb: bool, gamma: b
         elif type(spectrum['albedo']) != bool:
             albedo = spectrum['albedo']
         spectrum = calc.standardize_photometry(spectrum)
+        spectrum |= calc.matching_check(name, spectrum)
         
         # Spectrum interpolation
         try:

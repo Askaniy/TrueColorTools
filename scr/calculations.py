@@ -109,7 +109,22 @@ def polator(x, y, scope, albedo=0, mode='qualitatively', desun=False):
     return curve
 
 
+def matching_check(name: str, spectrum: dict):
+    nm_len = len(spectrum['nm'])
+    br_len = len(spectrum['br'])
+    if nm_len != br_len:
+        print(f'Attention! The sizes of the list of wavelengths ({nm_len}) and brightness ({br_len}) for "{name}" do not match.')
+        print('The larger list has been truncated to the size of the smaller one.\n')
+        min_len = min(nm_len, br_len)
+        to_cut = 'nm' if nm_len > br_len else 'br'
+        return {to_cut: spectrum[to_cut][:min_len]}
+    else:
+        return {}
+
 def standardize_photometry(spectrum: dict):
+    if 'nm_range' in spectrum:
+        spectrum |= range2nm(spectrum['nm_range'])
+        spectrum.pop('nm_range')
     if 'filters' in spectrum:
         if 'bands' in spectrum:
             spectrum = from_filters(spectrum) # replacement of filters for their wavelengths
@@ -120,6 +135,12 @@ def standardize_photometry(spectrum: dict):
         spectrum = from_magnitudes(spectrum, vega) # spectrum from magnitudes
         spectrum.pop('mag')
     return spectrum
+
+def range2nm(nm_range: list):
+    nm_range[1] += 1 # to include an endpoint
+    if len(nm_range) == 2:
+        nm_range.append(5) # default step, but it's better not to use
+    return {'nm': list(range(*nm_range))}
 
 def from_filters(data: dict):
     nm = []
