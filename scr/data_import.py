@@ -1,5 +1,6 @@
 from pathlib import Path
-from json5 import load
+import json5
+import traceback
 import spectra.core_database as db
 import scr.strings as tr
 
@@ -7,6 +8,7 @@ import scr.strings as tr
 # Support of database extension via json5 files
 
 def import_DBs(folders: list):
+    """Returns databases of objects and references were found in the given folders"""
     objectsDB = db.objects
     refsDB = db.refs
     for folder in folders:
@@ -16,19 +18,26 @@ def import_DBs(folders: list):
     return objectsDB, refsDB
 
 def import_folder(folder: str):
+    """Returns objects and references were found in the given folder"""
     objects = {}
     refs = {}
     try:
         for file in Path(folder).iterdir():
             if file.suffix == '.json5' and not file.is_dir():
                 with open(file) as f:
-                    for key, value in load(f).items():
-                        if type(value) == list:
-                            refs |= {key: value}
-                        else:
-                            objects |= {key: value}
+                    try:
+                        content = json5.load(f)
+                        for key, value in content.items():
+                            if type(value) == list:
+                                refs |= {key: value}
+                            else:
+                                objects |= {key: value}
+                    except ValueError:
+                        print(f'Error in JSON5 syntax of file "{file.name}", its upload was cancelled.')
+                        print(f'More precisely, {traceback.format_exc(limit=0)}')
     except FileNotFoundError:
-        pass
+        print(f'The database in folder "{folder}" was not found and will not be loaded.')
+        print(f'More precisely, {traceback.format_exc(limit=0)}')
     return objects, refs
 
 

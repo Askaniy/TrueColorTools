@@ -13,7 +13,7 @@ Input data is accepted in the form of channel measurements, color indices, or ma
 TrueColorTools has been tested on Windows 10/11 and Linux (openSUSE).
 
 1. Clone the repository or download archive by the GitHub web interface (press the button `Code`, then choose `Download ZIP` and unpack the archive after downloading);
-2. Ensure that you have Python (version 3.9 or higher) and the libraries required in [requirements.txt](requirements.txt). You can install the libraries all at once using the following command: `python -m pip install -r requirements.txt`;
+2. Ensure that you have Python (version 3.10 or higher) and the libraries required in [requirements.txt](requirements.txt). You can install the libraries all at once using the following command: `python -m pip install -r requirements.txt`;
 3. Execute `python -u runTCT.py`.
 
 ### Executable file (Windows)
