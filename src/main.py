@@ -4,14 +4,14 @@ import numpy as np
 import PySimpleGUI as sg
 from PIL import Image, ImageDraw
 import plotly.graph_objects as go
-import scr.cmf as cmf
-import scr.gui as gui
-import scr.filters as filters
-import scr.calculations as calc
-import scr.data_import as di
-import scr.strings as tr
-import scr.table_generator as tg
-import scr.experimental
+import src.cmf as cmf
+import src.gui as gui
+import src.filters as filters
+import src.calculations as calc
+import src.data_import as di
+import src.strings as tr
+import src.table_generator as tg
+import src.experimental
 
 
 def convert_to_bytes(img: Image.Image):
@@ -394,7 +394,7 @@ def launch_window():
                 T2_l, T2_h, T2_w = T2_data.shape
                 
                 if values['T2_autoalign']:
-                    T2_data = scr.experimental.autoalign(T2_data, debug)
+                    T2_data = src.experimental.autoalign(T2_data, debug)
                     T2_l, T2_h, T2_w = T2_data.shape
                 
                 T2_data = T2_data.astype('float32')
@@ -479,7 +479,7 @@ def launch_window():
                 sg.Print(f'\t{T2_draw_point_time / 1e9} for pixel drawing')
                 sg.Print(f'\t{T2_plot_pixels_time / 1e9} for adding spectrum to plot')
                 sg.Print(f'\t{T2_progress_bar_time / 1e9} for progress bar')
-                sg.Print(f'\t{round(T2_end_time-T2_time-(T2_get_spectrum_time+T2_calc_polator_time+T2_calc_rgb_time+T2_draw_point_time+T2_plot_pixels_time+T2_progress_bar_time)/1e9, 3)} sec for other (time, black-pixel check)')
+                sg.Print(f'\t{round(T2_end_time-T2_time-(T2_get_spectrum_time+T2_calc_polator_time+T2_calc_rgb_time+T2_draw_point_time+T2_plot_pixels_time+T2_progress_bar_time)/1e9, 3)} for other (time, black-pixel check)')
                 
                 if values['T2_plotpixels']:
                     T2_fig.show()

@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
-import scr.strings as tr
-import scr.filters as filters
+import src.strings as tr
+import src.filters as filters
 
 sg.LOOK_AND_FEEL_TABLE['MaterialDark'] = {
         'BACKGROUND': '#333333', 'TEXT': '#FFFFFF',

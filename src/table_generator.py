@@ -1,9 +1,9 @@
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
-import scr.cmf as cmf
-import scr.calculations as calc
-import scr.data_import as di
-import scr.strings as tr
+import src.cmf as cmf
+import src.calculations as calc
+import src.data_import as di
+import src.strings as tr
 
 
 def generate_table(objectsDB: dict, tag: str, br_mode: str, srgb: bool, gamma: bool, folder: str, extension: str, lang: str):

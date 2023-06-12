@@ -2,7 +2,7 @@ from pathlib import Path
 import json5
 import traceback
 import spectra.core_database as db
-import scr.strings as tr
+import src.strings as tr
 
 
 # Support of database extension via json5 files

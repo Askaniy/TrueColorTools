@@ -1,8 +1,8 @@
 import traceback
 import numpy as np
 from scipy.interpolate import Akima1DInterpolator
-import scr.cmf as cmf
-import scr.experimental
+import src.cmf as cmf
+import src.experimental
 import spectra.core_database as db
 sun = db.objects['Sun|CALSPEC']
 vega = db.objects['Vega|CALSPEC']
@@ -250,11 +250,11 @@ def to_rgb(target, spectrum, mode='chromaticity', inp_bit=None, exp_bit=None, rn
             if mx != 0:
                 rgb /= mx
         if phase != 0:
-            rgb *= scr.experimental.lambert(phase)
+            rgb *= src.experimental.lambert(phase)
         if gamma:
             rgb = gamma_correction(rgb)
         if rgb.min() < 0:
-            print('NegativeColorValues:', target, rgb)
+            #print('NegativeColorValues:', target, rgb)
             rgb = np.clip(rgb, 0, None)
         if html:
             return to_html(rgb)
