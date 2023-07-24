@@ -2,32 +2,40 @@ import PySimpleGUI as sg
 import src.strings as tr
 import src.filters as filters
 
+# TCT style colors
+main_color = '#108BB4'
+text_color = '#FFFFFF'
+muted_color = '#A3A3A3'
+bg_color = '#333333'
+inputON_color = '#424242'
+inputOFF_color = '#3A3A3A'
+
+# PySimpleGUI custom theme
 sg.LOOK_AND_FEEL_TABLE['MaterialDark'] = {
-        'BACKGROUND': '#333333', 'TEXT': '#FFFFFF',
-        'INPUT': '#424242', 'TEXT_INPUT': '#FFFFFF', 'SCROLL': '#424242',
-        'BUTTON': ('#FFFFFF', '#108BB4'), 'PROGRESS': ('#000000', '#000000'),
-        'BORDER': 0, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0,
-        'ACCENT1': '#FF0266', 'ACCENT2': '#FF5C93', 'ACCENT3': '#C5003C'
+        'BACKGROUND': bg_color, 'TEXT': text_color,
+        'INPUT': inputON_color, 'TEXT_INPUT': text_color, 'SCROLL': inputON_color,
+        'BUTTON': (text_color, main_color), 'PROGRESS': ('#000000', '#000000'),
+        'BORDER': 0, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0
     }
 
-def frame(num: int, disabled_background: str, lang: str):
+def frame(num: int, inputOFF_color: str, lang: str):
     n = str(num)
     l = [
         [         # sets frame width
-            sg.Input(size=20, disabled=False, disabled_readonly_background_color=disabled_background, enable_events=True, key='T2_path'+n, expand_x=True),
+            sg.Input(size=20, disabled=False, disabled_readonly_background_color=inputOFF_color, enable_events=True, key='T2_path'+n, expand_x=True),
             sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, disabled=False, key='T2_browse'+n)
         ],
         [
-            sg.Text(tr.gui_filter[lang], text_color='#A3A3A3', key='T2_filterN'+n),
+            sg.Text(tr.gui_filter[lang], text_color=muted_color, key='T2_filterN'+n),
             sg.InputCombo([], disabled=True, enable_events=True, key='T2_filter'+n, expand_x=True)
         ],
         [
             sg.Text(tr.gui_wavelength[lang], key='T2_wavelengthN'+n),
-            sg.Input(size=1, disabled_readonly_background_color=disabled_background, disabled=False, enable_events=True, key='T2_wavelength'+n, expand_x=True)
+            sg.Input(size=1, disabled_readonly_background_color=inputOFF_color, disabled=False, enable_events=True, key='T2_wavelength'+n, expand_x=True)
         ],
         [
             sg.Text(tr.gui_exposure[lang], key='T2_exposureN'+n),
-            sg.Input('1.0', size=1, disabled_readonly_background_color=disabled_background, disabled=False, key='T2_exposure'+n, expand_x=True)
+            sg.Input('1.0', size=1, disabled_readonly_background_color=inputOFF_color, disabled=False, key='T2_exposure'+n, expand_x=True)
         ]
     ]
     return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, visible=True, key='T2_band'+n)
@@ -38,7 +46,6 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, l
     button_size = 22
     browse_size = 10
     slider_size = (1, 15)
-    disabled_background = '#3A3A3A'
 
     settings_column = sg.Column([
         [sg.Push(), sg.Text(tr.gui_settings[lang], font=title_font, key='-settingsTitle-'), sg.Push()],
@@ -61,11 +68,11 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, l
         [sg.Push(), sg.Text(tr.gui_formatting[lang], key='-formattingText-'), sg.Push()],
         [
             sg.Text(tr.gui_bit[lang], key='-bitnessText-'),
-            sg.InputText('1', size=1, disabled_readonly_background_color=disabled_background, expand_x=True, enable_events=True, key='-bitness-')
+            sg.InputText('1', size=1, disabled_readonly_background_color=inputOFF_color, expand_x=True, enable_events=True, key='-bitness-')
         ],
         [
             sg.Text(tr.gui_rnd[lang], key='-roundingText-'),
-            sg.InputText('3', size=1, disabled_readonly_background_color=disabled_background, expand_x=True, enable_events=True, key='-rounding-')
+            sg.InputText('3', size=1, disabled_readonly_background_color=inputOFF_color, expand_x=True, enable_events=True, key='-rounding-')
         ]
     ])
 
@@ -93,16 +100,16 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, l
     ]
 
     T2_frames = [
-        [frame(0, disabled_background, lang)],
-        [frame(1, disabled_background, lang)],
-        [frame(2, disabled_background, lang)],
-        [frame(3, disabled_background, lang)],
-        [frame(4, disabled_background, lang)],
-        [frame(5, disabled_background, lang)],
-        [frame(6, disabled_background, lang)],
-        [frame(7, disabled_background, lang)],
-        [frame(8, disabled_background, lang)],
-        [frame(9, disabled_background, lang)] # just add more frames here
+        [frame(0, inputOFF_color, lang)],
+        [frame(1, inputOFF_color, lang)],
+        [frame(2, inputOFF_color, lang)],
+        [frame(3, inputOFF_color, lang)],
+        [frame(4, inputOFF_color, lang)],
+        [frame(5, inputOFF_color, lang)],
+        [frame(6, inputOFF_color, lang)],
+        [frame(7, inputOFF_color, lang)],
+        [frame(8, inputOFF_color, lang)],
+        [frame(9, inputOFF_color, lang)] # just add more frames here
     ]
     T2_col1 = [
         [
@@ -123,7 +130,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, l
         ],
         [
             sg.Checkbox(tr.gui_single[lang], enable_events=True, key='T2_single'),
-            sg.Input(size=1, disabled=True, disabled_readonly_background_color=disabled_background, key='T2_path', expand_x=True),
+            sg.Input(size=1, disabled=True, disabled_readonly_background_color=inputOFF_color, key='T2_path', expand_x=True),
             sg.FileBrowse(button_text=tr.gui_browse[lang], size=browse_size, disabled=True, key='T2_browse')
         ],
         [
@@ -150,7 +157,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, l
             sg.Column([
                 [sg.Push(), sg.Button(button_text=tr.gui_load[lang], size=button_size, key='T3_database', metadata=False), sg.Push()],
                 [
-                    sg.Push(), sg.Text(tr.gui_tags[lang], text_color='#A3A3A3', key='T3_tagsN'),
+                    sg.Push(), sg.Text(tr.gui_tags[lang], text_color=muted_color, key='T3_tagsN'),
                     sg.InputCombo([], default_value='', size=tags_input_size, enable_events=True, disabled=True, key='T3_tags'), sg.Push()
                 ]
             ]),

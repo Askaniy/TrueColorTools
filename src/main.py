@@ -44,7 +44,7 @@ def launch_window():
     circle_coord = (circle_r, circle_r+1)
     T2_preview = (256, 128)
     T2_area = T2_preview[0]*T2_preview[1]
-    text_colors = ('#A3A3A3', '#FFFFFF')
+    text_colors = (gui.muted_color, gui.text_color)
 
     sg.ChangeLookAndFeel('MaterialDark')
     window = sg.Window(
