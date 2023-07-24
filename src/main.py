@@ -3,12 +3,12 @@ import time
 import numpy as np
 import PySimpleGUI as sg
 from PIL import Image, ImageDraw
-import plotly.graph_objects as go
 import src.cmf as cmf
 import src.gui as gui
 import src.filters as filters
 import src.calculations as calc
 import src.data_import as di
+import src.plotter as pl
 import src.strings as tr
 import src.table_generator as tg
 import src.experimental
@@ -58,7 +58,6 @@ def launch_window():
     T1_preview = window['T1_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
     T4_preview = window['T4_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
 
-    T1_fig = go.Figure()
     triggers = ['-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-brMode2-', '-interpMode0-', '-interpMode1-', '-phase-', '-bitness-', '-rounding-']
     
     brMode = calc.br_modes[0] # default brightness mode
@@ -66,10 +65,12 @@ def launch_window():
     bitness = int(window['-bitness-'].get())
     rounding = int(window['-rounding-'].get())
 
+    T1_plot_list = [] # list of objects names to plot
+    T1_plot_data = [] # list of X, Y and color for each object to plot
+
 
     # Window events loop
 
-    T1_plot_list = []
     while True:
         event, values = window.Read()
 
@@ -209,24 +210,14 @@ def launch_window():
             
             elif event == 'T1_add' and values['T1_list'] != []:
                 T1_plot_list.append(values['T1_list'][0])
-                T1_fig.add_trace(go.Scatter(
-                    x = T1_nm,
-                    y = T1_curve,
-                    name = values['T1_list'][0],
-                    line = dict(color=T1_rgb_show, width=4)
-                    ))
+                T1_plot_data.append((T1_nm, T1_curve, T1_rgb_show))
             
             elif event == 'T1_plot':
-                if len(T1_plot_list) == 1:
-                    T1_title_text = tr.single_title_text[lang] + T1_plot_list[0]
-                else:
-                    T1_title_text = tr.batch_title_text[lang] + ', '.join(T1_plot_list)
-                T1_fig.update_layout(title=T1_title_text, xaxis_title=tr.xaxis_text[lang], yaxis_title=tr.yaxis_text[lang])
-                T1_fig.show()
+                pl.plot_spectra(T1_plot_list, T1_plot_data, lang)
             
             elif event == 'T1_clear':
                 T1_plot_list = []
-                T1_fig.data = []
+                T1_plot_data = []
             
             elif event == 'T1_export':
                 T1_export = '\n' + '\t'.join(tr.gui_col[lang]) + '\n' + '_' * 36
@@ -414,9 +405,9 @@ def launch_window():
                 T2_counter = 0
                 T2_px_num = T2_w*T2_h
                 
-                if values['T2_plotpixels']:
-                    T2_fig = go.Figure()
-                    T2_fig.update_layout(title=tr.map_title_text[lang], xaxis_title=tr.xaxis_text[lang], yaxis_title=tr.yaxis_text[lang])
+                #if values['T2_plotpixels']:
+                #    T2_fig = go.Figure()
+                #    T2_fig.update_layout(title=tr.map_title_text[lang], xaxis_title=tr.xaxis_text[lang], yaxis_title=tr.yaxis_text[lang])
 
                 sg.Print(f'\n{round(time.monotonic() - T2_time, 3)} seconds for loading, autoalign and creating output templates\n')
                 sg.Print(f'{time.strftime("%H:%M:%S")} 0%')
@@ -451,16 +442,16 @@ def launch_window():
                             T2_draw.point((x, y), T2_rgb)
                             T2_draw_point_time += time.monotonic_ns() - T2_temp_time
 
-                            if values['T2_plotpixels']:
-                                T2_temp_time = time.monotonic_ns()
-                                if x % 32 == 0 and y % 32 == 0:
-                                    T2_fig.add_trace(go.Scatter(
-                                        x = T2_nm,
-                                        y = T2_curve,
-                                        name = T2_name,
-                                        line = dict(color='rgb'+str(T2_rgb), width=2)
-                                        ))
-                                T2_plot_pixels_time += time.monotonic_ns() - T2_temp_time
+                            #if values['T2_plotpixels']:
+                            #    T2_temp_time = time.monotonic_ns()
+                            #    if x % 32 == 0 and y % 32 == 0:
+                            #        T2_fig.add_trace(go.Scatter(
+                            #            x = T2_nm,
+                            #            y = T2_curve,
+                            #            name = T2_name,
+                            #            line = dict(color='rgb'+str(T2_rgb), width=2)
+                            #            ))
+                            #    T2_plot_pixels_time += time.monotonic_ns() - T2_temp_time
                         
                         T2_temp_time = time.monotonic_ns()
                         T2_counter += 1
@@ -481,8 +472,8 @@ def launch_window():
                 sg.Print(f'\t{T2_progress_bar_time / 1e9} for progress bar')
                 sg.Print(f'\t{round(T2_end_time-T2_time-(T2_get_spectrum_time+T2_calc_polator_time+T2_calc_rgb_time+T2_draw_point_time+T2_plot_pixels_time+T2_progress_bar_time)/1e9, 3)} for other (time, black-pixel check)')
                 
-                if values['T2_plotpixels']:
-                    T2_fig.show()
+                #if values['T2_plotpixels']:
+                #    T2_fig.show()
                 if event == 'T2_preview':
                     window['T2_image'].update(data=convert_to_bytes(T2_img))
                 else:

@@ -6,6 +6,7 @@ import src.filters as filters
 main_color = '#108BB4'
 text_color = '#FFFFFF'
 muted_color = '#A3A3A3'
+highlight_color = '#5A5A5A'
 bg_color = '#333333'
 inputON_color = '#424242'
 inputOFF_color = '#3A3A3A'
