@@ -65,14 +65,13 @@ def launch_window():
     bitness = int(window['-bitness-'].get())
     rounding = int(window['-rounding-'].get())
 
-    T1_plot_list = [] # list of objects names to plot
-    T1_plot_data = [] # list of X, Y and color for each object to plot
+    T1_plot_data = [] # list of X, Y, color and name for each object to plot
 
 
     # Window events loop
 
     while True:
-        event, values = window.Read()
+        event, values = window.read()
 
         # Independent window events
 
@@ -209,14 +208,12 @@ def launch_window():
                 window['T1_list'].update(tuple(di.obj_dict(objectsDB, values['T1_tags'], lang).keys()))
             
             elif event == 'T1_add' and values['T1_list'] != []:
-                T1_plot_list.append(values['T1_list'][0])
-                T1_plot_data.append((T1_nm, T1_curve, T1_rgb_show))
+                T1_plot_data.append((T1_nm, T1_curve, T1_rgb_show, values['T1_list'][0]))
             
             elif event == 'T1_plot':
-                pl.plot_spectra(T1_plot_list, T1_plot_data, lang)
+                pl.plot_spectra(T1_plot_data, lang)
             
             elif event == 'T1_clear':
-                T1_plot_list = []
                 T1_plot_data = []
             
             elif event == 'T1_export':

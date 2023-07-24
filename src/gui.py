@@ -261,6 +261,7 @@ def translate(window: sg.Window, T2_num: int, lang: str):
     window['T1_colorHEX'].update(tr.gui_hex[lang])
     window['T1_add'].update(tr.gui_add[lang])
     window['T1_plot'].update(tr.gui_plot[lang])
+    window['T1_clear'].update(tr.gui_clear[lang])
     window['T1_export'].update(tr.gui_export[lang])
     window['T2_title1'].update(tr.gui_input[lang])
     window['T2_title2'].update(tr.gui_output[lang])

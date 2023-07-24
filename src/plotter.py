@@ -24,14 +24,27 @@ def draw_figure(canvas, figure):
     figure_canvas_agg.get_tk_widget().pack(side='top', fill='both', expand=1)
     return figure_canvas_agg
 
-def plot_spectra(names: list, objects: list, lang: str):
-    title = tr.single_title_text[lang] + names[0] if len(names) == 1 else tr.batch_title_text[lang] + ', '.join(names)
-    fig = plt.Figure(figsize=(6, 4), dpi=125)
+def plot_spectra(objects: list, lang: str):
+    """Creates a separate window with plotted spectra from the list"""
+    fig = plt.Figure(figsize=(9, 6), dpi=100)
     ax = fig.add_subplot(111, xlabel=tr.xaxis_text[lang])
-    for name, obj in zip(names, objects):
-        ax.plot(obj[0], obj[1], color=obj[2], label=name)
-    layout = [[sg.Text(title)], [sg.Canvas(key='-canvas-')]]
-    window = sg.Window('True Color Tools: Plot', layout, finalize=True, font='arial 18')
+    for obj in objects:
+        ax.plot(obj[0], obj[1], color=obj[2], label=obj[3])
+    if len(objects) > 0:
+        ax.legend()
+    title = tr.spectral_plot[lang]
+    layout = [
+        [sg.Text(title, font=('arial', 16)), sg.Push(), sg.InputText(visible=False, enable_events=True, key='-path-'),
+         sg.FileSaveAs(tr.gui_save[lang], file_types=('PNG {png}', 'PDF {pdf}', 'SVG {svg}'), default_extension='.png')],
+        [sg.Canvas(key='-canvas-')]
+    ]
+    window = sg.Window(title, layout, finalize=True, element_justification='center')
     fig_canvas_agg = draw_figure(window['-canvas-'].TKCanvas, fig)
-    event, values = window.read()
+    while True:
+        event, values = window.read()
+        if event == sg.WIN_CLOSED:
+            break
+        elif event == '-path-':
+            path = values['-path-']
+            fig.savefig(path, dpi=133.4) # 1200x800
     window.close()
