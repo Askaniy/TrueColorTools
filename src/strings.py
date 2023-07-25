@@ -257,11 +257,6 @@ gui_browse = {
     'ru': 'Обзор',
     'de': 'Durchsuchen'
 }
-gui_filter = {
-    'en': 'Filter name',
-    'ru': 'Фильтр',
-    'de': 'Filter Name'
-}
 gui_wavelength = {
     'en': 'Wavelength [nm]',
     'ru': 'Длина волны [нм]',
@@ -330,9 +325,9 @@ gui_extension = {
     'de': 'Dateiformat'
 }
 name_text = {
-    'en': ['Colors calculated from spectra for the '', '' category'],
+    'en': ['Colors calculated from spectra for the "', '" category'],
     'ru': ['Цвета, вычисленные по спектрам для категории «', '»'],
-    'de': ['Farben von Himmelskörpen aus Spektren der '', '' Kategorie']
+    'de': ['Farben von Himmelskörpen aus Spektren der "', '" Kategorie']
 }
 legend = {
     'en': 'Legend',
@@ -386,27 +381,32 @@ gui_surfacebr = {
 gui_step1 = {
     'en': '1. Choose input data type',
     'ru': '1. Выберите формат вводимых данных',
-    'de': '1. '
+    'de': '1. Eingabe-Datentyp auswählen'
 }
 gui_spectrum = {
     'en': 'Multiband spectrum',
     'ru': 'Многоканальный спектр',
-    'de': '-'
+    'de': 'Multiband Spektrum'
 }
 gui_image = {
     'en': 'Multiband image',
     'ru': 'Многоканальное изображение',
-    'de': '-'
+    'de': 'Multiband Aufnahme'
 }
 gui_step2 = {
-    'en': '2. Choose set of filters',
-    'ru': '2. Выберите набор фильтров',
-    'de': '2. '
+    'en': '2. Match several filters with data',
+    'ru': '2. Соотнесите фильтры с данными',
+    'de': '2. Mehrere Filter an Daten anpassen'
 }
-gui_step3 = {
-    'en': '3. Match several filters with data',
-    'ru': '3. Соотнесите фильтры с данными',
-    'de': '3. '
+gui_filter = {
+    'en': 'Filter',
+    'ru': 'Фильтр',
+    'de': 'Filter'
+}
+gui_brightness = {
+    'en': 'Brightness',
+    'ru': 'Яркость',
+    'de': 'Helligkeit'
 }
 
 # Plots

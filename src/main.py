@@ -39,6 +39,7 @@ def launch_window():
     objectsDB, refsDB = {}, {} # initial loading became too long with separate json5 database files
     tagsDB = []
     default_tag = 'featured'
+    filtersDB = di.list_filters()
 
     circle_r = 100 # radius in pixels of color preview circle
     circle_coord = (circle_r, circle_r+1)
@@ -48,11 +49,11 @@ def launch_window():
 
     sg.ChangeLookAndFeel('MaterialDark')
     window = sg.Window(
-        'True Color Tools', gui.generate_layout((2*circle_r+1, 2*circle_r+1), T2_preview, text_colors, lang),
+        'True Color Tools', gui.generate_layout((2*circle_r+1, 2*circle_r+1), T2_preview, text_colors, filtersDB, lang),
         finalize=True, resizable=True, margins=(0, 0), size=(900, 600))
     T2_vis = 3  # current number of visible image bands
     T2_num = 10 # max number of image bands, ~ len(window['T2_frames'])
-    T5_num = 7
+    T5_num = 8
     for i in range(T2_vis, T2_num):
         window['T2_band'+str(i)].update(visible=False)
 
@@ -116,7 +117,7 @@ def launch_window():
                 if event in lst:
                     lang = lng
                     break
-            window = gui.translate(window, T2_num, lang)
+            window = gui.translate(window, T2_num, T5_num, lang)
             window['T1_list'].update(values=tuple(di.obj_dict(objectsDB, values['T1_tags'], lang).keys()))
         
         elif event == tr.ref[lang]:

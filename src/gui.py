@@ -41,24 +41,24 @@ def frame(num: int, inputOFF_color: str, lang: str):
     ]
     return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, visible=True, key='T2_band'+n)
 
-def frame_new(num: int, lang: str):
+def frame_new(num: int, filtersDB: list, lang: str):
     n = str(num)
     l = [
         [
             sg.Text(tr.gui_filter[lang], key='T5_filterText'+n),
-            sg.InputCombo([], size=15, enable_events=True, key='T5_filter'+n)
+            sg.InputCombo(filtersDB, enable_events=True, expand_x=True, key='T5_filter'+n)
         ],
-        [   # Every moment displays this
-            sg.Text('Brightness', key='T5_brText'+n),
-            sg.Input(size=18, enable_events=True, key='T5_br'+n, expand_x=True),
-            # or this, depends on radio box
-            sg.Input(size=14, enable_events=True, key='T5_path'+n, expand_x=True, visible=False),
+        [   # Every moment displays brightness input
+            sg.Text(tr.gui_brightness[lang], key='T5_brText'+n),
+            sg.Input(size=1, enable_events=True, key='T5_br'+n, expand_x=True),
+            # or image input, depends on radio box
+            sg.Input(enable_events=True, size=1, key='T5_path'+n, expand_x=True, visible=False),
             sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, key='T5_pathText'+n, visible=False)
-        ]
+        ]   # size=1 is VERY important! Now column depends on max length of filter file names
     ]
-    return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, visible=True, key='T5_band'+n)
+    return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, key='T5_band'+n)
 
-def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, lang: str):
+def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, filtersDB: list, lang: str):
     title_font = ('arial', 12)
     tags_input_size = 20
     button_size = 22
@@ -222,14 +222,14 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, l
     ]
 
     T5_frames = [
-        [frame_new(0, lang)],
-        [frame_new(1, lang)],
-        [frame_new(2, lang)],
-        [frame_new(3, lang)],
-        [frame_new(4, lang)],
-        [frame_new(5, lang)],
-        [frame_new(6, lang)],
-        [frame_new(7, lang)] # just add more frames here
+        [frame_new(0, filtersDB, lang)],
+        [frame_new(1, filtersDB, lang)],
+        [frame_new(2, filtersDB, lang)],
+        [frame_new(3, filtersDB, lang)],
+        [frame_new(4, filtersDB, lang)],
+        [frame_new(5, filtersDB, lang)],
+        [frame_new(6, filtersDB, lang)],
+        [frame_new(7, filtersDB, lang)] # just add more frames here
     ]
     T5_col1 = [
         [sg.Push(), sg.Text(tr.gui_input[lang], font=title_font, key='T5_title1'), sg.Push()],
@@ -237,12 +237,11 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, l
         [sg.Radio(tr.gui_spectrum[lang], 'DataTypeRadio', enable_events=True, default=True, key='-typeSpectrum-')],
         [sg.Radio(tr.gui_image[lang], 'DataTypeRadio', enable_events=True, key='-typeImage-')],
         [sg.Text(tr.gui_step2[lang], key='T5_step2')],
-        [sg.InputCombo(filters.get_sets(), size=32, enable_events=True, disabled=False, key='T5_filter')],
-        [sg.Text(tr.gui_step3[lang], key='T5_step3')],
         [sg.Column(T5_frames, scrollable=True, vertical_scroll_only=True, key='T5_frames', expand_y=True)]
     ]
     T5_col2 = [
-        [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T5_title2'), sg.Push()]
+        [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T5_title2'), sg.Push()],
+        [sg.T('ъ'*50)]
     ]
 
     tab1 = [
@@ -282,7 +281,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, l
     ]
 
 
-def translate(window: sg.Window, T2_num: int, lang: str):
+def translate(window: sg.Window, T2_num: int, T5_num: int, lang: str):
     window['menu'].update(tr.gui_menu[lang])
     window['tab1'].update(title=tr.gui_tabs[lang][0])
     window['tab2'].update(title=tr.gui_tabs[lang][1])
@@ -345,9 +344,15 @@ def translate(window: sg.Window, T2_num: int, lang: str):
     window['T4_surfacebr'].update(text=tr.gui_surfacebr[lang])
     window['T4_colorRGB'].update(tr.gui_rgb[lang])
     window['T4_colorHEX'].update(tr.gui_hex[lang])
+    window['T5_title1'].update(tr.gui_input[lang])
+    window['T5_title2'].update(tr.gui_results[lang])
     window['T5_step1'].update(tr.gui_step1[lang])
     window['T5_step2'].update(tr.gui_step2[lang])
-    window['T5_step3'].update(tr.gui_step3[lang])
+    for i in range(T5_num):
+        window['T5_band'+str(i)].update(f'{tr.gui_band[lang]} {i+1}')
+        window['T5_filterText'+str(i)].update(tr.gui_filter[lang])
+        window['T5_brText'+str(i)].update(tr.gui_brightness[lang])
+        window['T5_pathText'+str(i)].update(tr.gui_browse[lang])
     window['-typeSpectrum-'].update(text=tr.gui_spectrum[lang])
     window['-typeImage-'].update(text=tr.gui_image[lang])
     return window

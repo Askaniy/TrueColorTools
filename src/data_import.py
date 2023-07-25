@@ -5,6 +5,21 @@ import spectra.core_database as db
 import src.strings as tr
 
 
+# Listing available filters
+
+def list_filters():
+    """Returns list of file names were found in the filters folder"""
+    filters = []
+    try:
+        for file in Path('filters').iterdir():
+            if file.suffix == '.dat' and not file.is_dir():
+                filters.append(file.stem)
+    except FileNotFoundError:
+        print(f'The database in folder "filters" was not found and will not be loaded.')
+        print(f'More precisely, {traceback.format_exc(limit=0)}')
+    return sorted(filters)
+
+
 # Support of database extension via json5 files
 
 def import_DBs(folders: list):
