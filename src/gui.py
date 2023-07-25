@@ -41,6 +41,23 @@ def frame(num: int, inputOFF_color: str, lang: str):
     ]
     return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, visible=True, key='T2_band'+n)
 
+def frame_new(num: int, lang: str):
+    n = str(num)
+    l = [
+        [
+            sg.Text(tr.gui_filter[lang], key='T5_filterText'+n),
+            sg.InputCombo([], size=15, enable_events=True, key='T5_filter'+n)
+        ],
+        [   # Every moment displays this
+            sg.Text('Brightness', key='T5_brText'+n),
+            sg.Input(size=18, enable_events=True, key='T5_br'+n, expand_x=True),
+            # or this, depends on radio box
+            sg.Input(size=14, enable_events=True, key='T5_path'+n, expand_x=True, visible=False),
+            sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, key='T5_pathText'+n, visible=False)
+        ]
+    ]
+    return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, visible=True, key='T5_band'+n)
+
 def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, lang: str):
     title_font = ('arial', 12)
     tags_input_size = 20
@@ -204,6 +221,30 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, l
         [sg.Text(tr.gui_hex[lang], key='T4_colorHEX'), sg.Input(size=1, key='T4_hex', expand_x=True)],
     ]
 
+    T5_frames = [
+        [frame_new(0, lang)],
+        [frame_new(1, lang)],
+        [frame_new(2, lang)],
+        [frame_new(3, lang)],
+        [frame_new(4, lang)],
+        [frame_new(5, lang)],
+        [frame_new(6, lang)],
+        [frame_new(7, lang)] # just add more frames here
+    ]
+    T5_col1 = [
+        [sg.Push(), sg.Text(tr.gui_input[lang], font=title_font, key='T5_title1'), sg.Push()],
+        [sg.Text(tr.gui_step1[lang], key='T5_step1')],
+        [sg.Radio(tr.gui_spectrum[lang], 'DataTypeRadio', enable_events=True, default=True, key='-typeSpectrum-')],
+        [sg.Radio(tr.gui_image[lang], 'DataTypeRadio', enable_events=True, key='-typeImage-')],
+        [sg.Text(tr.gui_step2[lang], key='T5_step2')],
+        [sg.InputCombo(filters.get_sets(), size=32, enable_events=True, disabled=False, key='T5_filter')],
+        [sg.Text(tr.gui_step3[lang], key='T5_step3')],
+        [sg.Column(T5_frames, scrollable=True, vertical_scroll_only=True, key='T5_frames', expand_y=True)]
+    ]
+    T5_col2 = [
+        [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T5_title2'), sg.Push()]
+    ]
+
     tab1 = [
         [
             sg.Column(T1_col1, expand_x=True, expand_y=True), sg.VSeperator(),
@@ -222,11 +263,18 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, l
             sg.Column(T4_col2, expand_x=True, expand_y=True)
         ]
     ]
+    tab5 = [
+        [
+            sg.Column(T5_col1, expand_x=True, expand_y=True), sg.VSeperator(),
+            sg.Column(T5_col2, expand_x=True, expand_y=True)
+        ]
+    ]
     tabs = sg.TabGroup([[
             sg.Tab(tr.gui_tabs[lang][0], tab1, key='tab1'),
             sg.Tab(tr.gui_tabs[lang][1], tab2, key='tab2'),
             sg.Tab(tr.gui_tabs[lang][2], tab3, key='tab3'),
-            sg.Tab(tr.gui_tabs[lang][3], tab4, key='tab4')
+            sg.Tab(tr.gui_tabs[lang][3], tab4, key='tab4'),
+            sg.Tab('WIP', tab5, key='tab5')
     ]], expand_x=True, expand_y=True, enable_events=True, key='-currentTab-')
     return [
         [sg.Menu(tr.gui_menu[lang], key='menu')],
@@ -297,4 +345,9 @@ def translate(window: sg.Window, T2_num: int, lang: str):
     window['T4_surfacebr'].update(text=tr.gui_surfacebr[lang])
     window['T4_colorRGB'].update(tr.gui_rgb[lang])
     window['T4_colorHEX'].update(tr.gui_hex[lang])
+    window['T5_step1'].update(tr.gui_step1[lang])
+    window['T5_step2'].update(tr.gui_step2[lang])
+    window['T5_step3'].update(tr.gui_step3[lang])
+    window['-typeSpectrum-'].update(text=tr.gui_spectrum[lang])
+    window['-typeImage-'].update(text=tr.gui_image[lang])
     return window

@@ -52,6 +52,7 @@ def launch_window():
         finalize=True, resizable=True, margins=(0, 0), size=(900, 600))
     T2_vis = 3  # current number of visible image bands
     T2_num = 10 # max number of image bands, ~ len(window['T2_frames'])
+    T5_num = 7
     for i in range(T2_vis, T2_num):
         window['T2_band'+str(i)].update(visible=False)
 
@@ -527,5 +528,17 @@ def launch_window():
                 window['T4_graph'].TKCanvas.itemconfig(T4_preview, fill=T4_rgb_show)
                 window['T4_rgb'].update(T4_rgb)
                 window['T4_hex'].update(T4_rgb_show)
+        
+        # ------------ Events in the tab 'WIP' ------------
+        
+        elif values['-currentTab-'] == 'tab5':
+            T5_image_flag = values['-typeImage-']
+
+            if event in ('-typeSpectrum-', '-typeImage-'):
+                for i in range(T5_num):
+                    window['T5_path'+str(i)].update(visible=T5_image_flag)
+                    window['T5_pathText'+str(i)].update(visible=T5_image_flag)
+                    window['T5_brText'+str(i)].update(visible=not T5_image_flag)
+                    window['T5_br'+str(i)].update(visible=not T5_image_flag)
 
     window.close()

@@ -382,6 +382,33 @@ gui_surfacebr = {
     'de': 'Bestrahlungsstärke bei 550 nm skalieren (konstante Belichtung)'
 }
 
+# Tab 5 - WIP
+gui_step1 = {
+    'en': '1. Choose input data type',
+    'ru': '1. Выберите формат вводимых данных',
+    'de': '1. '
+}
+gui_spectrum = {
+    'en': 'Multiband spectrum',
+    'ru': 'Многоканальный спектр',
+    'de': '-'
+}
+gui_image = {
+    'en': 'Multiband image',
+    'ru': 'Многоканальное изображение',
+    'de': '-'
+}
+gui_step2 = {
+    'en': '2. Choose set of filters',
+    'ru': '2. Выберите набор фильтров',
+    'de': '2. '
+}
+gui_step3 = {
+    'en': '3. Match several filters with data',
+    'ru': '3. Соотнесите фильтры с данными',
+    'de': '3. '
+}
+
 # Plots
 spectral_plot = {
     'en': 'Spectral plot',
