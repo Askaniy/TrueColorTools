@@ -19,45 +19,6 @@ sg.LOOK_AND_FEEL_TABLE['MaterialDark'] = {
         'BORDER': 0, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0
     }
 
-def frame(num: int, inputOFF_color: str, lang: str):
-    n = str(num)
-    l = [
-        [         # sets frame width
-            sg.Input(size=20, disabled=False, disabled_readonly_background_color=inputOFF_color, enable_events=True, key='T2_path'+n, expand_x=True),
-            sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, disabled=False, key='T2_browse'+n)
-        ],
-        [
-            sg.Text(tr.gui_filter[lang], text_color=muted_color, key='T2_filterN'+n),
-            sg.InputCombo([], disabled=True, enable_events=True, key='T2_filter'+n, expand_x=True)
-        ],
-        [
-            sg.Text(tr.gui_wavelength[lang], key='T2_wavelengthN'+n),
-            sg.Input(size=1, disabled_readonly_background_color=inputOFF_color, disabled=False, enable_events=True, key='T2_wavelength'+n, expand_x=True)
-        ],
-        [
-            sg.Text(tr.gui_exposure[lang], key='T2_exposureN'+n),
-            sg.Input('1.0', size=1, disabled_readonly_background_color=inputOFF_color, disabled=False, key='T2_exposure'+n, expand_x=True)
-        ]
-    ]
-    return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, visible=True, key='T2_band'+n)
-
-def frame_new(num: int, filtersDB: list, lang: str):
-    n = str(num)
-    l = [
-        [
-            sg.Text(tr.gui_filter[lang], key='T5_filterText'+n),
-            sg.InputCombo(filtersDB, enable_events=True, expand_x=True, key='T5_filter'+n)
-        ],
-        [   # Every moment displays brightness input
-            sg.Text(tr.gui_brightness[lang], key='T5_brText'+n),
-            sg.Input(size=1, enable_events=True, key='T5_br'+n, expand_x=True),
-            # or image input, depends on radio box
-            sg.Input(enable_events=True, size=1, key='T5_path'+n, expand_x=True, visible=False),
-            sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, key='T5_pathText'+n, visible=False)
-        ]   # size=1 is VERY important! Now column depends on max length of filter file names
-    ]
-    return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, key='T5_band'+n)
-
 def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, filtersDB: list, lang: str):
     title_font = ('arial', 12)
     tags_input_size = 20
@@ -116,6 +77,28 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, f
         [sg.T('')],
         [sg.Push(), sg.Button(button_text=tr.gui_export[lang], size=button_size, key='T1_export'), sg.Push()]
     ]
+
+    def frame(num: int, inputOFF_color: str, lang: str):
+        n = str(num)
+        l = [
+            [         # sets frame width
+                sg.Input(size=20, disabled=False, disabled_readonly_background_color=inputOFF_color, enable_events=True, key='T2_path'+n, expand_x=True),
+                sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, disabled=False, key='T2_browse'+n)
+            ],
+            [
+                sg.Text(tr.gui_filter[lang], text_color=muted_color, key='T2_filterN'+n),
+                sg.InputCombo([], disabled=True, enable_events=True, key='T2_filter'+n, expand_x=True)
+            ],
+            [
+                sg.Text(tr.gui_wavelength[lang], key='T2_wavelengthN'+n),
+                sg.Input(size=1, disabled_readonly_background_color=inputOFF_color, disabled=False, enable_events=True, key='T2_wavelength'+n, expand_x=True)
+            ],
+            [
+                sg.Text(tr.gui_exposure[lang], key='T2_exposureN'+n),
+                sg.Input('1.0', size=1, disabled_readonly_background_color=inputOFF_color, disabled=False, key='T2_exposure'+n, expand_x=True)
+            ]
+        ]
+        return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, visible=True, key='T2_band'+n)
 
     T2_frames = [
         [frame(0, inputOFF_color, lang)],
@@ -221,6 +204,23 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, f
         [sg.Text(tr.gui_hex[lang], key='T4_colorHEX'), sg.Input(size=1, key='T4_hex', expand_x=True)],
     ]
 
+    def frame_new(num: int, filtersDB: list, lang: str):
+        n = str(num)
+        l = [
+            [
+                sg.Text(tr.gui_filter[lang], key='T5_filterText'+n),
+                sg.InputCombo(filtersDB, enable_events=True, expand_x=True, key='T5_filter'+n)
+            ],
+            [   # Every moment displays brightness input
+                sg.Text(tr.gui_brightness[lang], key='T5_brText'+n),
+                sg.Input(size=1, enable_events=True, key='T5_br'+n, expand_x=True),
+                # or image input, depends on radio box
+                sg.Input(enable_events=True, size=1, key='T5_path'+n, expand_x=True, visible=False),
+                sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, key='T5_pathText'+n, visible=False)
+            ]   # size=1 is VERY important! Now column depends on max length of filter file names
+        ]
+        return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, key='T5_band'+n)
+    
     T5_frames = [
         [frame_new(0, filtersDB, lang)],
         [frame_new(1, filtersDB, lang)],
@@ -241,7 +241,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, f
     ]
     T5_col2 = [
         [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T5_title2'), sg.Push()],
-        [sg.T('ъ'*50)]
+        [sg.Canvas(key='T5_canvas')]
     ]
 
     tab1 = [

@@ -1,6 +1,7 @@
 from pathlib import Path
 import json5
 import traceback
+import numpy as np
 import spectra.core_database as db
 import src.strings as tr
 
@@ -18,6 +19,11 @@ def list_filters():
         print(f'The database in folder "filters" was not found and will not be loaded.')
         print(f'More precisely, {traceback.format_exc(limit=0)}')
     return sorted(filters)
+
+def import_filter(name):
+    with open(f'filters/{name}.dat') as f:
+        angstrem, response = np.loadtxt(f).transpose()
+        return (angstrem/10, response, name)
 
 
 # Support of database extension via json5 files

@@ -25,11 +25,11 @@ def draw_figure(canvas, figure):
     return figure_canvas_agg
 
 def plot_spectra(objects: list, lang: str):
-    """Creates a separate window with plotted spectra from the list"""
+    """ Creates a separate window with plotted spectra from the input list """
     fig = plt.Figure(figsize=(9, 6), dpi=100)
     ax = fig.add_subplot(111, xlabel=tr.xaxis_text[lang])
     for obj in objects:
-        ax.plot(obj[0], obj[1], color=obj[2], label=obj[3])
+        ax.plot(obj[0], obj[1], label=obj[2], color=obj[3])
     if len(objects) > 0:
         ax.legend()
     title = tr.spectral_plot[lang]
@@ -48,3 +48,33 @@ def plot_spectra(objects: list, lang: str):
             path = values['-path-']
             fig.savefig(path, dpi=133.4) # 1200x800
     window.close()
+
+def plot_filters(objects: list, x, y):
+    """ Creates a figure with plotted sensitive curves and CMFs """
+    fig = plt.Figure(figsize=(5, 2), dpi=90)
+    ax = fig.add_subplot(111)
+    #x0 = np.array(cmf.rgb_nm)
+    #flag = np.where((min_nm < x0) & (x0 < max_nm))
+    #x = x0[flag]
+    #y = cmf.rgb[flag]
+    nm_min = 400
+    nm_max = 700
+    br_max = 0
+    for obj in objects:
+        if obj[0][0] < nm_min: # not pythonic, but fast
+            nm_min = obj[0][0]
+        if obj[0][-1] > nm_max:
+            nm_max = obj[0][-1]
+        max_y = max(obj[1])
+        if max_y > br_max:
+            br_max = max_y
+    y = y / max(y[:,2]) # max is in B
+    if br_max != 0:
+        y *= br_max
+    ax.plot(x, y[:,2], color='#5050a0', alpha=1) # B
+    ax.plot(x, y[:,1], color='#3c783c', alpha=1) # G
+    ax.plot(x, y[:,0], color='#804040', alpha=1) # R
+    for obj in objects:
+        ax.plot(obj[0], obj[1], label=obj[2], color='#AAAAAA')
+    ax.set_xlim(nm_min, nm_max)
+    return fig

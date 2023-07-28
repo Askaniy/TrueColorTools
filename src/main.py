@@ -67,7 +67,9 @@ def launch_window():
     bitness = int(window['-bitness-'].get())
     rounding = int(window['-rounding-'].get())
 
-    T1_plot_data = [] # list of X, Y, color and name for each object to plot
+    T1_plot_data = [] # list of X, Y, name and color for each object to plot
+    T5_fig = pl.plot_filters([], cmf.rgb_nm, cmf.rgb)
+    figure_canvas_agg = pl.draw_figure(window['T5_canvas'].TKCanvas, T5_fig)
 
 
     # Window events loop
@@ -210,7 +212,7 @@ def launch_window():
                 window['T1_list'].update(tuple(di.obj_dict(objectsDB, values['T1_tags'], lang).keys()))
             
             elif event == 'T1_add' and values['T1_list'] != []:
-                T1_plot_data.append((T1_nm, T1_curve, T1_rgb_show, values['T1_list'][0]))
+                T1_plot_data.append((T1_nm, T1_curve, values['T1_list'][0], T1_rgb_show))
             
             elif event == 'T1_plot':
                 pl.plot_spectra(T1_plot_data, lang)
@@ -541,5 +543,17 @@ def launch_window():
                     window['T5_pathText'+str(i)].update(visible=T5_image_flag)
                     window['T5_brText'+str(i)].update(visible=not T5_image_flag)
                     window['T5_br'+str(i)].update(visible=not T5_image_flag)
+            
+            elif event.startswith('T5_filter'):
+                T5_plot_data = []
+                for i in range(T5_num):
+                    T5_filter_name = values['T5_filter'+str(i)]
+                    if T5_filter_name != '':
+                        # TODO: T5_filter_color with new calculation
+                        T5_plot_data.append(di.import_filter(T5_filter_name))
+                T5_fig.clf()
+                T5_fig = pl.plot_filters(T5_plot_data, cmf.rgb_nm, cmf.rgb)
+                figure_canvas_agg.get_tk_widget().forget()
+                figure_canvas_agg = pl.draw_figure(window['T5_canvas'].TKCanvas, T5_fig)
 
     window.close()
