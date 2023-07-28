@@ -36,9 +36,9 @@ The key processing method is converting the data into a continuous (5 nm step) s
 
 ## How to use?
 
-[`TCT.py`](scr/TCT.py) is functionally divided into 4 tabs: *Spectra*, *Images*, *Table* and *Blackbody & Redshifts*. No internet connection is required.
+True Color Tools GUI is functionally divided into tabs: *Spectra*, *Images*, *Table* and *Blackbody & Redshifts*. The color output format, often common to tabs, has been moved to the sidebar settings. No internet connection is required, the databases are stored in the appropriate folders of the repository, and you can replenish them.
 
-**Spectra tab** provides access to the built-in spectra database and allows you to calculate a color with the selected settings just by clicking on an object. It is possible to plot one or several spectra from the database, and the figure will open in your default browser.
+**Spectra tab** provides access to the spectra database and allows you to calculate a color with the selected settings just by clicking on an object. It is possible to plot one or several spectra from the database in a pop-up window.
 
 **Images tab** allows you to load one color or several monochrome images, specify wavelengths, and save a processed image, for each pixel of which a spectrum was built. It takes a long time, so you can check out the preview. The wavelength values can be set by the choice of spacecraft filters, and they should always increase.
 
@@ -49,11 +49,13 @@ The key processing method is converting the data into a continuous (5 nm step) s
 ### Features
 - Tag system: Each object in the database can be assigned an arbitrary set of tags. They form lists of categories in the *Spectra* and *Table* tabs, which makes it easier to work with a huge database.
 - Reference system: Each object in the database can be easily linked to one or several data sources by its short name. You can see the list in `File`→`Sources`. Also, after an object's name there can be abbreviations, the decoding of which is indicated in `File`→`Notes`.
-- Multilingual support: The language can be changed through the top menu in runtime. TCT supports English, German and Russian. If you want to add support for your language, you can do it by analogy in [`strings.py`](scr/strings.py).
+- Multilingual support: The language can be changed through the top menu in runtime. TCT supports English, German and Russian. If you want to add support for your language, you can do it by analogy in [`strings.py`](scr/strings.py) and make a commit or contact me.
 
 
 ## Database Extension
 Spectra and their references are stored in the [`core_database.py`](spectra/core_database.py) and complementary `*.json5` files. The [`core_database.py`](spectra/core_database.py) can affect internal processes, so it is not recommended to change it. However, you can add custom json5 files to the `/spectra` folder and they will be detected. Newly read spectra, if they suddenly have the same names, replace the old ones. You can help the project by creating and sharing database files. Note that any parameters must increase with wavelength.
+
+For more accurate spectrum restoration, filter sensitivity profiles are used. They are provided by [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php) and stored [here](/filters). To replenish the database, select a filter on the site, choose the `ascii` data file and place it in the folder.
 
 ### Database keys
 - `nm`: list of wavelengths in nanometers
