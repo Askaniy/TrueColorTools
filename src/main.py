@@ -70,7 +70,7 @@ def launch_window():
     T1_plot_data = [] # list of X, Y, name and color for each object to plot
     T5_fig = pl.plot_filters([], cmf.rgb_nm, cmf.rgb)
     figure_canvas_agg = pl.draw_figure(window['T5_canvas'].TKCanvas, T5_fig)
-
+    
 
     # Window events loop
 
@@ -545,7 +545,7 @@ def launch_window():
                     window['T5_br'+str(i)].update(visible=not T5_image_flag)
             
             elif event.startswith('T5_filter'):
-                T5_plot_data = []
+                T5_plot_data = [] # list of core.Spectrum objects
                 for i in range(T5_num):
                     T5_filter_name = values['T5_filter'+str(i)]
                     if T5_filter_name != '':

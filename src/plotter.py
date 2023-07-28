@@ -1,7 +1,9 @@
 import warnings
+from typing import TypeVar, Iterable, Tuple
 import PySimpleGUI as sg
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import src.core as core
 import src.strings as tr
 import src.gui as gui
 
@@ -24,7 +26,7 @@ def draw_figure(canvas, figure):
     figure_canvas_agg.get_tk_widget().pack(side='top', fill='both', expand=1)
     return figure_canvas_agg
 
-def plot_spectra(objects: list, lang: str):
+def plot_spectra(objects: Iterable, lang: str):
     """ Creates a separate window with plotted spectra from the input list """
     fig = plt.Figure(figsize=(9, 6), dpi=100)
     ax = fig.add_subplot(111, xlabel=tr.xaxis_text[lang])
@@ -39,7 +41,7 @@ def plot_spectra(objects: list, lang: str):
         [sg.Canvas(key='-canvas-')]
     ]
     window = sg.Window(title, layout, finalize=True, element_justification='center')
-    fig_canvas_agg = draw_figure(window['-canvas-'].TKCanvas, fig)
+    draw_figure(window['-canvas-'].TKCanvas, fig)
     while True:
         event, values = window.read()
         if event == sg.WIN_CLOSED:
@@ -49,7 +51,7 @@ def plot_spectra(objects: list, lang: str):
             fig.savefig(path, dpi=133.4) # 1200x800
     window.close()
 
-def plot_filters(objects: list, x, y):
+def plot_filters(filters: Iterable[core.Spectrum], x, y):
     """ Creates a figure with plotted sensitive curves and CMFs """
     fig = plt.Figure(figsize=(5, 2), dpi=90)
     ax = fig.add_subplot(111)
@@ -60,12 +62,12 @@ def plot_filters(objects: list, x, y):
     nm_min = 400
     nm_max = 700
     br_max = 0
-    for obj in objects:
-        if obj[0][0] < nm_min: # not pythonic, but fast
-            nm_min = obj[0][0]
-        if obj[0][-1] > nm_max:
-            nm_max = obj[0][-1]
-        max_y = max(obj[1])
+    for obj in filters:
+        if obj.nm[0] < nm_min: # not pythonic, but fast
+            nm_min = obj.nm[0]
+        if obj.nm[-1] > nm_max:
+            nm_max = obj.nm[-1]
+        max_y = max(obj.br)
         if max_y > br_max:
             br_max = max_y
     y = y / max(y[:,2]) # max is in B
@@ -74,7 +76,7 @@ def plot_filters(objects: list, x, y):
     ax.plot(x, y[:,2], color='#5050a0', alpha=1) # B
     ax.plot(x, y[:,1], color='#3c783c', alpha=1) # G
     ax.plot(x, y[:,0], color='#804040', alpha=1) # R
-    for obj in objects:
-        ax.plot(obj[0], obj[1], label=obj[2], color='#AAAAAA')
+    for obj in filters:
+        ax.plot(obj.nm, obj.br, label=obj.name, color='#AAAAAA')
     ax.set_xlim(nm_min, nm_max)
     return fig

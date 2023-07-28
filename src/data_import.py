@@ -3,13 +3,15 @@ import json5
 import traceback
 import numpy as np
 import spectra.core_database as db
+import src.core as core
 import src.strings as tr
 
 
-# Listing available filters
+# Support of filters database provided by Filter Profile Service
+# http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php
 
 def list_filters():
-    """Returns list of file names were found in the filters folder"""
+    """ Returns list of file names were found in the filters folder """
     filters = []
     try:
         for file in Path('filters').iterdir():
@@ -20,16 +22,23 @@ def list_filters():
         print(f'More precisely, {traceback.format_exc(limit=0)}')
     return sorted(filters)
 
-def import_filter(name):
+def import_filter(name: str):
+    """ Loads filter data with Filter Profile Service standard into a Spectrum object """
     with open(f'filters/{name}.dat') as f:
         angstrem, response = np.loadtxt(f).transpose()
-        return (angstrem/10, response, name)
+        return core.Spectrum(name, angstrem/10, response)
+
+
+# Support for spectra distributed via the FITS format
+
+def import_fits():
+    pass
 
 
 # Support of database extension via json5 files
 
 def import_DBs(folders: list):
-    """Returns databases of objects and references were found in the given folders"""
+    """ Returns databases of objects and references were found in the given folders """
     objectsDB = db.objects
     refsDB = db.refs
     for folder in folders:
@@ -39,7 +48,7 @@ def import_DBs(folders: list):
     return objectsDB, refsDB
 
 def import_folder(folder: str):
-    """Returns objects and references were found in the given folder"""
+    """ Returns objects and references were found in the given folder """
     objects = {}
     refs = {}
     try:
@@ -65,7 +74,7 @@ def import_folder(folder: str):
 # Front-end view on spectra database
 
 def obj_dict(database: dict, tag: str, lang: str):
-    """Maps front-end spectrum names allowed by the tag to names in the database"""
+    """ Maps front-end spectrum names allowed by the tag to names in the database """
     names = {}
     for raw_name, obj_data in database.items():
         if tag == 'all':
@@ -96,7 +105,7 @@ def obj_dict(database: dict, tag: str, lang: str):
     return names
 
 def tag_list(database: dict):
-    """Generates a list of tags found in the spectra database"""
+    """ Generates a list of tags found in the spectra database """
     tag_set = set(['all'])
     for obj_data in database.values():
         if 'tags' in obj_data:
