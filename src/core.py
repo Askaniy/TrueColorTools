@@ -1,5 +1,5 @@
 import numpy as np
-
+from copy import deepcopy
 
 def divisible(array: np.ndarray, number: int):
     """ Boolean function, checks all array to be divisible by the number """
@@ -33,13 +33,13 @@ class Spectrum:
 
         # --- Checking and creating a uniform grid ---
         if to_res == -1:
-            steps = nm[1:] - nm[:-1] # =np.diff(self.nm)
+            steps = nm[1:] - nm[:-1] # =np.diff(nm)
             blocks = set(steps)
             if len(blocks) == 1: # uniform grid
                 res = int(*blocks)
                 if divisible(nm, res) and res in self._resolutions: # perfect grid
                     self.br = br
-                    self.nm = nm
+                    self.nm = nm.astype(int)
                     self.res = res
                     return
             else:
@@ -68,15 +68,32 @@ class Spectrum:
                 break
         return res
     
+    def to_resolution(self, request: int):
+        """ Creates new Spectrum object with changed wavelength grid step size """
+        other = deepcopy(self)
+        if request not in self._resolutions:
+            # TODO: make it Error
+            print(f'Invalid operation: resolution change allowed only for {self._resolutions}, not {request} nm.')
+        elif request == self.res:
+            print(f'Note: current and requested resolutions are the same ({request} nm), nothing changed.')
+        else:
+            if request > other.res:
+                while request != other.res: # remove all odd elements
+                    other.res *= 2
+                    other.nm = np.arange(self.nm[0], self.nm[-1]+1, other.res, dtype=int)
+                    other.br = self.br[::2]
+            else:
+                while request != other.res: # middle linear interpolation
+                    new_br = np.empty(self.br.size * 2 - 1)
+                    new_br[0::2] = self.br
+                    new_br[1::2] = (self.br[:-1] + self.br[1:]) / 2
+                    other.res = int(other.res / 2)
+                    other.nm = np.arange(self.nm[0], self.nm[-1]+1, other.res, dtype=int)
+                    other.br = new_br
+        return other
+    
     def integrate(self):
         """ Calculates the flux over the spectrum using the mean rectangle method """
         midpoints = (self.br[:-1] + self.br[1:]) / 2
         area = np.sum(midpoints * self.res)
         return area # / 1e9 # convert to SI (nm -> m)
-
-    
-    def convolve_with(self, filter):
-        """
-        Method that applies convolution to the spectrum with filter.
-        """
-        pass
