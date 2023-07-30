@@ -552,7 +552,8 @@ def launch_window():
                         T5_filter = di.import_filter(T5_filter_name)
                         #print(T5_filter.to_resolution(12).nm)
                         # TODO: T5_filter_color with new calculation
-                        T5_plot_data.append(T5_filter.to_resolution(5))
+                        T5_plot_data.append(T5_filter)
+                        print(T5_filter * T5_plot_data[0])
                 T5_fig.clf()
                 T5_fig = pl.plot_filters(T5_plot_data, cmf.rgb_nm, cmf.rgb)
                 figure_canvas_agg.get_tk_widget().forget()

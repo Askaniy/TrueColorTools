@@ -102,13 +102,33 @@ class Spectrum:
             print(f'- Current and requested resolutions are the same ({request} nm), nothing changed.')
         return other
 
-    def __and__(self, other):
+    def __mul__(self, other):
         """ Implementation of convolution between emission spectrum and transmission spectrum """
-        common_nm = np.arange(max(self.nm[0], other.nm[0]), min(self.nm[-1], other.nm[-1]))
-        return Spectrum(f'{self.name} & {other.name}', common_nm, self.br)
+        name = f'{self.name} * {other.name}'
+        start = max(self.nm[0], other.nm[0])
+        end = min(self.nm[-1], other.nm[-1])
+        if start > end:
+            print(f'# Note for convolution "{name}"')
+            print('- Zero will be returned since there is no intersection between the spectra.')
+            the_first = self.name
+            the_second = other.name
+            if self.nm[0] > other.nm[0]:
+                the_first, the_second = the_second, the_first
+            print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
+            return 0.
+        else:
+            if self.res < other.res:
+                other = other.to_resolution(self.res)
+            elif self.res > other.res:
+                self = self.to_resolution(other.res)
+            nm = np.arange(start, end+1, self.res)
+            br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
+            br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
+            return Spectrum(name, nm, br0*br1).integrate()
     
     def integrate(self):
-        """ Calculates the flux over the spectrum using the mean rectangle method """
-        midpoints = (self.br[:-1] + self.br[1:]) / 2
-        area = np.sum(midpoints * self.res)
+        """ Calculates the flux over the spectrum after interpolation using the mean rectangle method """
+        curve = self.to_resolution(self._resolutions[0])
+        midpoints = (curve.br[:-1] + curve.br[1:]) / 2
+        area = np.sum(midpoints * curve.res)
         return area # / 1e9 # convert to SI (nm -> m)
