@@ -6,7 +6,7 @@ def divisible(array: np.ndarray, number: int):
     return not np.any(array % number > 0)
 
 def averaging(x1: np.ndarray, x0: np.ndarray, y0: np.ndarray):
-    """ Returns brightness values of spectrum with decreased resolution """
+    """ Returns spectrum brightness values with decreased resolution """
     semistep = (x1[1] - x1[0]) / 2 # most likely semistep = 2.5 nm
     y1 = [np.mean(y0[np.where(x0 < x1[0]+semistep)])]
     for x in x1[1:-1]:
@@ -15,9 +15,18 @@ def averaging(x1: np.ndarray, x0: np.ndarray, y0: np.ndarray):
     y1.append(np.mean(y0[np.where(x0 > x1[-1]-semistep)]))
     return np.array(y1)
 
+def custom_interp(y0: np.ndarray):
+    """ Returns spectrum brightness values with twice the resolution """
+    k = 7 # interpolation non-linearity coefficient
+    y1 = np.empty(y0.size * 2 - 1)
+    y1[0::2] = y0
+    delta_left = np.append(0., y0[1:-1] - y0[:-2])
+    delta_right = np.append(y0[2:] - y0[1:-1], 0.)
+    y1[1::2] = (k*y0[:-1] + k*y0[1:] + delta_left - delta_right) / (2*k)
+    return y1
 
 class Spectrum:
-    def __init__(self, name: str, nm: np.ndarray, br: np.ndarray, to_res=-1):
+    def __init__(self, name: str, nm: np.ndarray, br: np.ndarray):
         """
         Constructor of the class to work with single, continuous spectrum.
         When creating an object, the spectrum grid is automatically checked and adjusted to uniform, if necessary.
@@ -27,25 +36,21 @@ class Spectrum:
         and additional info (separated by ":")
         - nm (np.array): list of wavelengths in nanometers
         - br (np.array): same-size list of linear physical property, representing "brightness"
-        - to_res (int, optional): spectrum resolution in nanometers, checks are canceled
         """
         self.name = name
 
         # --- Checking and creating a uniform grid ---
-        if to_res == -1:
-            steps = nm[1:] - nm[:-1] # =np.diff(nm)
-            blocks = set(steps)
-            if len(blocks) == 1: # uniform grid
-                res = int(*blocks)
-                if divisible(nm, res) and res in self._resolutions: # perfect grid
-                    self.br = br
-                    self.nm = nm.astype(int)
-                    self.res = res
-                    return
-            else:
-                res = np.mean(steps)
+        steps = nm[1:] - nm[:-1] # =np.diff(nm)
+        blocks = set(steps)
+        if len(blocks) == 1: # uniform grid
+            res = int(*blocks)
+            if divisible(nm, res) and res in self._resolutions: # perfect grid
+                self.br = br
+                self.nm = nm.astype(int)
+                self.res = res
+                return
         else:
-            res = to_res # force setting
+            res = np.mean(steps)
         self.res = self._standardize_resolution(res)
         if nm[0] % self.res == 0:
             start_point = nm[0]
@@ -57,7 +62,7 @@ class Spectrum:
         else: # decreasing resolution if step less than 5 nm
             self.br = averaging(self.nm, nm, br)
     
-    _resolutions = [5, 10, 20, 40] # nm
+    _resolutions = [5, 10, 20, 40, 80, 160] # nm
 
     def _standardize_resolution(self, input: int):
         """ Redirects the step size to one of the valid values """
@@ -72,25 +77,29 @@ class Spectrum:
         """ Creates new Spectrum object with changed wavelength grid step size """
         other = deepcopy(self)
         if request not in self._resolutions:
-            # TODO: make it Error
-            print(f'Invalid operation: resolution change allowed only for {self._resolutions}, not {request} nm.')
-        elif request == self.res:
-            print(f'Note: current and requested resolutions are the same ({request} nm), nothing changed.')
+            print(f'# Note for the Spectrum object "{self.name}"')
+            print(f'- Resolution change allowed only for {self._resolutions} nm, not {request} nm.')
+            request = self._standardize_resolution(request)
+            print(f'- The optimal resolution was chosen automatically: {request} nm.')
+        if request > other.res:
+            while request != other.res: # remove all odd elements
+                other.res *= 2
+                other.nm = np.arange(other.nm[0], other.nm[-1]+1, other.res, dtype=int)
+                other.br = other.br[::2]
+        elif request < other.res:
+            while request != other.res: # middle linear interpolation
+                other.res = int(other.res / 2)
+                other.nm = np.arange(other.nm[0], other.nm[-1]+1, other.res, dtype=int)
+                other.br = custom_interp(other.br)
         else:
-            if request > other.res:
-                while request != other.res: # remove all odd elements
-                    other.res *= 2
-                    other.nm = np.arange(self.nm[0], self.nm[-1]+1, other.res, dtype=int)
-                    other.br = self.br[::2]
-            else:
-                while request != other.res: # middle linear interpolation
-                    new_br = np.empty(self.br.size * 2 - 1)
-                    new_br[0::2] = self.br
-                    new_br[1::2] = (self.br[:-1] + self.br[1:]) / 2
-                    other.res = int(other.res / 2)
-                    other.nm = np.arange(self.nm[0], self.nm[-1]+1, other.res, dtype=int)
-                    other.br = new_br
+            print(f'# Note for the Spectrum object "{self.name}"')
+            print(f'- Current and requested resolutions are the same ({request} nm), nothing changed.')
         return other
+
+    def __and__(self, other):
+        """ Implementation of convolution between emission spectrum and transmission spectrum """
+        common_nm = np.arange(max(self.nm[0], other.nm[0]), min(self.nm[-1], other.nm[-1]))
+        return Spectrum(f'{self.name} & {other.name}', common_nm, self.br)
     
     def integrate(self):
         """ Calculates the flux over the spectrum using the mean rectangle method """
