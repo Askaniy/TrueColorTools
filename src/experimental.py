@@ -149,3 +149,32 @@ def absolute_shifts(diffs):
     for d in diffs:
         p.append(p[-1]+d)
     return np.array(p) - max(p)
+
+def custom_interp(x1: np.ndarray, x0: np.ndarray, y0: np.ndarray, k=4):
+    """ Unsuccessful generalization of the interpolation algorithm """
+    step = x0[1] - x0[0]
+    y1 = []
+    counter = 0
+    for x in x1:
+        if x <= x0[0] or x >= x0[-1]: # extrapolation is not supported
+            y1.append(0.)
+        else:
+            t = x - x0[counter]
+            while t > step:
+                counter += 1
+                t = x - x0[counter]
+            xi = t / step
+            l = y0[counter]
+            try:
+                ll = y0[counter-1]
+            except IndexError:
+                ll = l
+            r = y0[counter+1]
+            try:
+                rr = y0[counter+2]
+            except IndexError:
+                rr = r
+            m = (l+r)/2
+            y = m + (xi*(rr-ll) + m - rr) / k
+            y1.append(y)
+    return y1

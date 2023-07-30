@@ -15,14 +15,20 @@ def averaging(x1: np.ndarray, x0: np.ndarray, y0: np.ndarray):
     y1.append(np.mean(y0[np.where(x0 > x1[-1]-semistep)]))
     return np.array(y1)
 
-def custom_interp(y0: np.ndarray):
-    """ Returns spectrum brightness values with twice the resolution """
-    k = 7 # interpolation non-linearity coefficient
+def custom_interp(y0: np.ndarray, k=8):
+    """
+    Returns curve values on an uniform grid with twice the resolution.
+    Optimal in terms of speed to quality ratio. Invented while trying to sleep.
+
+    Args:
+    - y0 (np.ndarray): values to be interpolated
+    - k (int): lower -> more chaotic, higher -> more linear, best results around 5-10
+    """
     y1 = np.empty(y0.size * 2 - 1)
     y1[0::2] = y0
     delta_left = np.append(0., y0[1:-1] - y0[:-2])
     delta_right = np.append(y0[2:] - y0[1:-1], 0.)
-    y1[1::2] = (k*y0[:-1] + k*y0[1:] + delta_left - delta_right) / (2*k)
+    y1[1::2] = (y0[:-1] + y0[1:] + (delta_left - delta_right) / k) / 2
     return y1
 
 class Spectrum:
