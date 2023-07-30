@@ -55,10 +55,6 @@ def plot_filters(filters: Iterable[core.Spectrum], x, y):
     """ Creates a figure with plotted sensitive curves and CMFs """
     fig = plt.Figure(figsize=(5, 2), dpi=90)
     ax = fig.add_subplot(111)
-    #x0 = np.array(cmf.rgb_nm)
-    #flag = np.where((min_nm < x0) & (x0 < max_nm))
-    #x = x0[flag]
-    #y = cmf.rgb[flag]
     nm_min = 400
     nm_max = 700
     br_max = 0

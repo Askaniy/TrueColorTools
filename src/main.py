@@ -15,14 +15,14 @@ import src.experimental
 
 
 def convert_to_bytes(img: Image.Image):
-    """Prepares PIL's image to be displayed in the window"""
+    """ Prepares PIL's image to be displayed in the window """
     bio = io.BytesIO()
     img.save(bio, format='png')
     del img
     return bio.getvalue()
 
 def export_colors(rgb: tuple):
-    """Generated formatted string of colors"""
+    """ Generated formatted string of colors """
     lst = []
     mx = 0
     for i in rgb:
@@ -60,9 +60,9 @@ def launch_window():
     T1_preview = window['T1_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
     T4_preview = window['T4_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
 
-    triggers = ['-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-brMode2-', '-interpMode0-', '-interpMode1-', '-phase-', '-bitness-', '-rounding-']
+    triggers = ['-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-interpMode0-', '-interpMode1-', '-bitness-', '-rounding-']
     
-    brMode = calc.br_modes[0] # default brightness mode
+    albedoFlag = True # default brightness mode
     interpMode = calc.interp_modes[0] # default interpolation mode
     bitness = int(window['-bitness-'].get())
     rounding = int(window['-rounding-'].get())
@@ -82,11 +82,8 @@ def launch_window():
         if event == sg.WIN_CLOSED or event == tr.gui_exit[lang]:
             break
         # Radio selection
-        elif event in ('-brMode0-', '-brMode1-', '-brMode2-'):
-            for i in range(3):
-                if values[f'-brMode{i}-']:
-                    brMode = calc.br_modes[i]
-                    break
+        elif event in ('-brMode0-', '-brMode1-'):
+            albedoFlag = values['-brMode0-']
         elif event in ('-interpMode0-', '-interpMode1-'):
             for i in range(2):
                 if values[f'-interpMode{i}-']:
@@ -141,7 +138,7 @@ def launch_window():
             sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event)
         
         elif event.endswith('database'): # global loading of spectra database
-            objectsDB, refsDB = di.import_DBs(['spectra', 'extras'])
+            objectsDB, refsDB = di.import_DBs(['spectra']) # ['spectra', 'extras']
             tagsDB = di.tag_list(objectsDB)
             window['T1_tagsN'].update(visible=True)
             window['T1_tags'].update(default_tag, values=tagsDB, visible=True)
@@ -155,25 +152,23 @@ def launch_window():
 
         # ------------ Events in the tab "Spectra" ------------
 
-        elif values['-currentTab-'] == 'tab1':
+        if values['-currentTab-'] == 'tab1':
 
             if (event in triggers or event == 'T1_list') and values['T1_list'] != []:
                 T1_name = values['T1_list'][0]
                 T1_nm = cmf.xyz_nm if values['-srgb-'] else cmf.rgb_nm
-                T1_mode = brMode
 
                 # Spectral data import and processing
                 T1_spectrum = objectsDB[di.obj_dict(objectsDB, 'all', lang)[T1_name]]
-                T1_albedo = 0
-                if 'albedo' not in T1_spectrum:
-                    if T1_mode == 'albedo':
-                        T1_mode = 'chromaticity'
-                    T1_spectrum |= {'albedo': False}
-                elif type(T1_spectrum['albedo']) != bool:
-                    T1_albedo = T1_spectrum['albedo']
+                T1_albedo = albedoFlag
+                if T1_albedo:
+                    try:
+                        T1_albedo = T1_spectrum['albedo']
+                    except KeyError:
+                        T1_albedo = False
+                        T1_spectrum |= {'albedo': False}
                 T1_spectrum = calc.standardize_photometry(T1_spectrum)
                 T1_spectrum |= calc.matching_check(T1_name, T1_spectrum)
-                
                 
                 # Spectrum interpolation
                 try:
@@ -183,21 +178,15 @@ def launch_window():
                 T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], T1_nm, T1_albedo, mode=interpMode, desun=T1_sun)
                 
                 # Color calculation
-                #try:
-                #    T1_phase = 0 if 'star' in T1_spectrum['tags'] else values['-phase-']
-                #except Exception:
-                #    T1_phase = values['-phase-']
                 T1_rgb = calc.to_rgb(
-                    T1_name, T1_curve, mode=T1_mode,
-                    albedo = T1_spectrum['albedo'] or T1_albedo,
+                    T1_name, T1_curve, albedo=T1_albedo,
                     exp_bit=bitness, 
                     gamma=values['-gamma-'], 
                     rnd=rounding,
                     srgb=values['-srgb-']
                 )
                 T1_rgb_show = calc.to_rgb(
-                    T1_name, T1_curve, mode=T1_mode,
-                    albedo = T1_spectrum['albedo'] or T1_albedo,
+                    T1_name, T1_curve, albedo=T1_albedo,
                     gamma=values['-gamma-'],
                     srgb=values['-srgb-'],
                     html=True
@@ -227,14 +216,13 @@ def launch_window():
                 # Spectrum processing
                 for name, raw_name in di.obj_dict(objectsDB, values['T1_tags'], lang).items():
                     T1_spectrum = objectsDB[raw_name]
-                    T1_mode = brMode
-                    T1_albedo = 0
-                    if 'albedo' not in T1_spectrum:
-                        if T1_mode == 'albedo':
-                            T1_mode = 'chromaticity'
-                        T1_spectrum |= {'albedo': False}
-                    elif type(T1_spectrum['albedo']) != bool:
-                        T1_albedo = T1_spectrum['albedo']
+                    T1_albedo = albedoFlag
+                    if T1_albedo:
+                        try:
+                            T1_albedo = T1_spectrum['albedo']
+                        except KeyError:
+                            T1_albedo = False
+                            T1_spectrum |= {'albedo': False}
                     T1_spectrum = calc.standardize_photometry(T1_spectrum)
                     T1_spectrum |= calc.matching_check(T1_name, T1_spectrum)
                     
@@ -247,8 +235,7 @@ def launch_window():
 
                     # Color calculation
                     T1_rgb = calc.to_rgb(
-                        raw_name, T1_curve, mode=T1_mode,
-                        albedo = T1_spectrum['albedo'] or T1_albedo,
+                        raw_name, T1_curve, albedo=T1_albedo,
                         exp_bit=bitness, 
                         gamma=values['-gamma-'], 
                         rnd=rounding,
@@ -260,7 +247,7 @@ def launch_window():
 
                 sg.popup_scrolled(T1_export, title=tr.gui_results[lang], size=(72, 32), font=('Consolas', 10))
         
-        # ------------ Events in the tab 'Images' ------------
+        # ------------ Events in the tab "Images" ------------
 
         elif values['-currentTab-'] == 'tab2':
 
@@ -436,7 +423,7 @@ def launch_window():
                             T2_calc_polator_time += time.monotonic_ns() - T2_temp_time
 
                             T2_temp_time = time.monotonic_ns()
-                            T2_rgb = calc.to_rgb(T2_name, T2_curve, mode='albedo', albedo=True, inp_bit=T2_input_bit, exp_bit=8, gamma=input_data['gamma'])
+                            T2_rgb = calc.to_rgb(T2_name, T2_curve, albedo=True, inp_bit=T2_input_bit, exp_bit=8, gamma=input_data['gamma'])
                             T2_calc_rgb_time += time.monotonic_ns() - T2_temp_time
 
                             T2_temp_time = time.monotonic_ns()
@@ -484,13 +471,13 @@ def launch_window():
 
         elif values['-currentTab-'] == 'tab3':
 
-            window['T3_process'].update(disabled = values['T3_folder'] == '' or objectsDB == {})
+            window['T3_process'].update(disabled = values['T3_folder']=='' or window['T3_database'].metadata==False)
             
             if event == 'T3_process':
-                tg.generate_table(objectsDB, values['T3_tags'], brMode, values['-srgb-'], values['-gamma-'], values['T3_folder'], values['T3_extension'], lang)
+                tg.generate_table(objectsDB, values['T3_tags'], albedoFlag, values['-srgb-'], values['-gamma-'], values['T3_folder'], values['T3_extension'], lang)
 
         
-        # ------------ Events in the tab 'Blackbody & Redshifts' ------------
+        # ------------ Events in the tab "Blackbody & Redshifts" ------------
         
         elif values['-currentTab-'] == 'tab4':
             
@@ -502,7 +489,6 @@ def launch_window():
                     window['T4_scale'].update(text_color=text_colors[values['T4_surfacebr']])
                     window['T4_slider4'].update(disabled=not values['T4_surfacebr'])
                 
-                T4_mode = 'albedo' if values['T4_surfacebr'] else 'chromaticity'
                 T4_nm = cmf.xyz_nm if values['-srgb-'] else cmf.rgb_nm
                 T4_curve = calc.blackbody_redshift(T4_nm, values['T4_slider1'], values['T4_slider2'], values['T4_slider3'])
                 if values['T4_surfacebr']:
@@ -512,16 +498,14 @@ def launch_window():
                         pass
                 T4_name = f'{values["T4_slider1"]} {values["T4_slider2"]} {values["T4_slider3"]}'
                 T4_rgb = calc.to_rgb(
-                    T4_name, T4_curve, mode=T4_mode,
-                    albedo=values['T4_surfacebr'],
+                    T4_name, T4_curve, albedo=values['T4_surfacebr'],
                     exp_bit=bitness,
                     gamma=values['-gamma-'],
                     rnd=rounding,
                     srgb=values['-srgb-']
                 )
                 T4_rgb_show = calc.to_rgb(
-                    T4_name, T4_curve, mode=T4_mode,
-                    albedo=values['T4_surfacebr'],
+                    T4_name, T4_curve, albedo=values['T4_surfacebr'],
                     gamma=values['-gamma-'],
                     srgb=values['-srgb-'],
                     html=True
@@ -532,7 +516,7 @@ def launch_window():
                 window['T4_rgb'].update(T4_rgb)
                 window['T4_hex'].update(T4_rgb_show)
         
-        # ------------ Events in the tab 'WIP' ------------
+        # ------------ Events in the tab "WIP" ------------
         
         elif values['-currentTab-'] == 'tab5':
             T5_image_flag = values['-typeImage-']
@@ -553,7 +537,7 @@ def launch_window():
                         #print(T5_filter.to_resolution(12).nm)
                         # TODO: T5_filter_color with new calculation
                         T5_plot_data.append(T5_filter)
-                        print(T5_filter * T5_plot_data[0])
+                        #print(T5_filter * T5_plot_data[0])
                 T5_fig.clf()
                 T5_fig = pl.plot_filters(T5_plot_data, cmf.rgb_nm, cmf.rgb)
                 figure_canvas_agg.get_tk_widget().forget()

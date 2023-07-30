@@ -35,7 +35,6 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, f
         [sg.Push(), sg.Text(tr.gui_br[lang][0], key='-brModeText-'), sg.Push()],
         [sg.Radio(tr.gui_br[lang][1], 'brRadio', enable_events=True, default=True, key='-brMode0-')],
         [sg.Radio(tr.gui_br[lang][2], 'brRadio', enable_events=True, key='-brMode1-')],
-        [sg.Radio(tr.gui_br[lang][3], 'brRadio', enable_events=True, key='-brMode2-')],
         #[sg.HorizontalSeparator()],
         #[sg.Text(tr.gui_phase[lang], key='-phaseText-')],
         #[sg.Slider(range=(-180, 180), default_value=0, resolution=1, orientation='h', size=(18, 16), enable_events=True, key='-phase-')],
@@ -296,8 +295,6 @@ def translate(window: sg.Window, T2_num: int, T5_num: int, lang: str):
     window['-brModeText-'].update(tr.gui_br[lang][0])
     window['-brMode0-'].update(text=tr.gui_br[lang][1])
     window['-brMode1-'].update(text=tr.gui_br[lang][2])
-    window['-brMode2-'].update(text=tr.gui_br[lang][3])
-    #window['-phaseText-'].update(tr.gui_phase[lang])
     window['-interpModeText-'].update(tr.gui_interp[lang][0])
     window['-interpMode0-'].update(text=tr.gui_interp[lang][1])
     window['-interpMode1-'].update(text=tr.gui_interp[lang][2])

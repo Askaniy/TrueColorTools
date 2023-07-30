@@ -144,15 +144,10 @@ gui_gamma = {
     'de': 'Gammakorrektur'
 }
 gui_br = {
-    'en': ['Brightness display mode', 'chromaticity', 'albedo 0.5', 'true albedo'],
-    'ru': ['Отображение яркости', 'цветность', 'альбедо 0,5', 'альбедо'],
-    'de': ['Helligkeitsmodus', 'Farbton', 'Albedo 0,5', 'Farbe mit Albedo' ]
+    'en': ['Brightness display mode', 'true albedo', 'chromaticity'],
+    'ru': ['Отображение яркости', 'альбедо', 'цветность'],
+    'de': ['Helligkeitsmodus', 'Farbe mit Albedo', 'Farbton']
 }
-#gui_phase = {
-#    'en': 'Phase angle [°]',
-#    'ru': 'Фазовый угол [°]',
-#    'de': 'Phasenwinkel [°]'
-#}
 gui_interp = {
     'en': ['Interpolator/extrapolator', 'qualitatively', 'fast'],
     'ru': ['Интер/экстраполятор', 'качественно', 'быстро'],

@@ -103,9 +103,10 @@ def polator(x, y, scope, albedo=0, mode='qualitatively', desun=False):
     if desun:
         for i, nm in enumerate(scope):
             curve[i] = curve[i] / sun['br'][sun['nm'].index(nm)]
-    if albedo:
-        br550 = curve[scope.index(550)]
-        curve = curve / br550 * albedo
+    if type(albedo) != bool:
+        if albedo:
+            br550 = curve[scope.index(550)]
+            curve = curve / br550 * albedo
     return curve
 
 
@@ -226,8 +227,7 @@ def to_html(color):
     else:
         raise Exception(f'HTML color code {html} is invalid. Input color is {color}')
 
-br_modes = ['chromaticity', 'albedo 0.5', 'albedo']
-def to_rgb(target, spectrum, mode='chromaticity', inp_bit=None, exp_bit=None, rnd=0, albedo=False, phase=0, gamma=False, srgb=False, html=False) -> tuple|str:
+def to_rgb(target, spectrum, albedo=False, inp_bit=None, exp_bit=None, rnd=0, gamma=False, srgb=False, html=False) -> tuple|str:
     try:
         if inp_bit:
             spectrum /= (2**inp_bit - 1)
@@ -237,20 +237,13 @@ def to_rgb(target, spectrum, mode='chromaticity', inp_bit=None, exp_bit=None, rn
             rgb = rgb / rgb[1] * spectrum[38] # xyz cmf is not normalized, so result was overexposed; spectrum[38] is 550 nm
         else:
             rgb = np.sum(spectrum[:, np.newaxis] * cmf.rgb, axis=0)
-        if mode == 'albedo 0.5':
-            if rgb[1] > np.max(rgb)/2:
-                rgb /= 2 * rgb[1]
-            else: # too saturated for g=0.5 matching
-                rgb /= np.max(rgb)
-        elif mode == 'albedo' and albedo:
+        if albedo:
             if html:
                 rgb = np.clip(rgb, 0, 1)
-        else: # 'chromaticity' and when albedo == False
+        else:
             mx = np.max(rgb)
             if mx != 0:
                 rgb /= mx
-        if phase != 0:
-            rgb *= src.experimental.lambert(phase)
         if gamma:
             rgb = gamma_correction(rgb)
         if rgb.min() < 0:

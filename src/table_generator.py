@@ -6,7 +6,7 @@ import src.data_import as di
 import src.strings as tr
 
 
-def generate_table(objectsDB: dict, tag: str, br_mode: str, srgb: bool, gamma: bool, folder: str, extension: str, lang: str):
+def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamma: bool, folder: str, extension: str, lang: str):
     """Creates and saves a table of colored squares for each spectrum with the specified tag"""
     objects = di.obj_dict(objectsDB, tag, lang)
     l = len(objects)
@@ -64,7 +64,7 @@ def generate_table(objectsDB: dict, tag: str, br_mode: str, srgb: bool, gamma: b
     for note, text in tr.notes.items(): # x = 0.6, br = 202
         draw.text((w0 if note_num < 4 else w1, h2 + note_step*(note_num%4)), f'{note} {text[lang]}', fill=(202, 202, 202), font=note_font, anchor='la')
         note_num += 1
-    for info_num, info in enumerate([br_mode, srgb, gamma]): # x = 0.75, br = 224
+    for info_num, info in enumerate([albedoFlag, srgb, gamma]): # x = 0.75, br = 224
         draw.text((w2, h2 + note_step*info_num), f'{tr.info[lang][info_num]}: {info}', fill=(224, 224, 224), font=note_font, anchor='la')
     draw.text((w2, h2 + note_step*(1+info_num)), tr.link, fill=(0, 200, 255), font=note_font, anchor='la')
     
@@ -74,16 +74,15 @@ def generate_table(objectsDB: dict, tag: str, br_mode: str, srgb: bool, gamma: b
     n = 0 # object counter
     for name, raw_name in objects.items():
         spectrum = objectsDB[raw_name]
-        mode = br_mode
 
         # Spectral data import and processing
-        albedo = 0
-        if 'albedo' not in spectrum:
-            if mode == 'albedo':
-                mode = 'chromaticity'
-            spectrum |= {'albedo': False}
-        elif type(spectrum['albedo']) != bool:
-            albedo = spectrum['albedo']
+        albedo = albedoFlag
+        if albedo:
+            try:
+                T1_albedo = T1_spectrum['albedo']
+            except KeyError:
+                T1_albedo = False
+                T1_spectrum |= {'albedo': False}
         spectrum = calc.standardize_photometry(spectrum)
         spectrum |= calc.matching_check(name, spectrum)
         
@@ -96,8 +95,7 @@ def generate_table(objectsDB: dict, tag: str, br_mode: str, srgb: bool, gamma: b
 
         # Color calculation
         rgb = calc.to_rgb(
-            name, curve, mode=mode,
-            albedo = spectrum['albedo'] or albedo,
+            name, curve, albedo=albedo,
             exp_bit=8, gamma=gamma, srgb=srgb
         )
 
@@ -138,7 +136,7 @@ def generate_table(objectsDB: dict, tag: str, br_mode: str, srgb: bool, gamma: b
         draw.multiline_text((center_x-ar, center_y-shift), '\n'.join(splitted), fill=text_color, font=objt_font, spacing=0)
         n += 1
     
-    file_name = f'TCT-table_{tag}{"_srgb" if srgb else ""}_{mode}{"_gamma-corrected" if gamma else ""}_{lang}.{extension}'
+    file_name = f'TCT-table_{tag}{"_albedo" if albedoFlag else ""}{"_srgb" if srgb else ""}{"_gamma-corrected" if gamma else ""}_{lang}.{extension}'
     img.save(f'{folder}/{file_name}')
     print(f'Color table saved as {file_name}\n')
 
