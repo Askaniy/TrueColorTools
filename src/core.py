@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.interpolate import Akima1DInterpolator
 from typing import TypeVar, Iterable, Tuple
 from copy import deepcopy
 
@@ -67,7 +68,7 @@ class Spectrum:
                 start_point = nm[0] + self.res - nm[0] % self.res
             self.nm = np.arange(start_point, nm[-1]+1, self.res, dtype=int) # new grid
             if self.res <= res: # interpolation, increasing resolution
-                self.br = np.interp(self.nm, nm, br)
+                self.br = Akima1DInterpolator(nm, br)(self.nm)
             else: # decreasing resolution if step less than 5 nm
                 self.br = averaging(self.nm, nm, br)
         else: # input could be trusted
@@ -104,9 +105,9 @@ class Spectrum:
                 other.res = int(other.res / 2)
                 other.nm = np.arange(other.nm[0], other.nm[-1]+1, other.res, dtype=int)
                 other.br = custom_interp(other.br)
-        else:
-            print(f'# Note for the Spectrum object "{self.name}"')
-            print(f'- Current and requested resolutions are the same ({request} nm), nothing changed.')
+        #else:
+        #    print(f'# Note for the Spectrum object "{self.name}"')
+        #    print(f'- Current and requested resolutions are the same ({request} nm), nothing changed.')
         return other
 
     def __mul__(self, other):
@@ -114,7 +115,7 @@ class Spectrum:
         name = f'{self.name} * {other.name}'
         start = max(self.nm[0], other.nm[0])
         end = min(self.nm[-1], other.nm[-1])
-        if start > end:
+        if start >= end:
             print(f'# Note for convolution "{name}"')
             print('- Zero will be returned since there is no intersection between the spectra.')
             the_first = self.name
@@ -143,10 +144,9 @@ class Spectrum:
 
 
 # The CIE color matching function for 380-780 nm in 5 nm intervals
-cmf = np.loadtxt('src/cie-cmf.txt').transpose() # columns are: nm, x, y, z
-x = Spectrum('x', cmf[0], cmf[1], res=5)
-y = Spectrum('y', cmf[0], cmf[2], res=5)
-z = Spectrum('z', cmf[0], cmf[3], res=5)
+x = Spectrum('x', *np.loadtxt('src/cie-cmf.x.dat').transpose(), res=5)
+y = Spectrum('y', *np.loadtxt('src/cie-cmf.y.dat').transpose(), res=5)
+z = Spectrum('z', *np.loadtxt('src/cie-cmf.z.dat').transpose(), res=5)
 
 def xy2xyz(xy):
     return np.array((xy[0], xy[1], 1-xy[0]-xy[0])) # (x, y, 1-x-y)
@@ -213,7 +213,7 @@ class Color:
         rgb = color_system.T.dot(xyz)
         if np.any(rgb < 0):
             print(f'# Note for the Color object "{name}"')
-            print(f'- The converted x-y-z turned out to be outside the color space: rgb={rgb}')
+            print(f'- RGB derived from XYZ turned out to be outside the color space: rgb={rgb}')
             rgb -= rgb.min()
             print(f'- Approximating by desaturating: rgb={rgb}')
         return Color(name, rgb)

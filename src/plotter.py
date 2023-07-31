@@ -51,7 +51,7 @@ def plot_spectra(objects: Iterable, lang: str):
             fig.savefig(path, dpi=133.4) # 1200x800
     window.close()
 
-def plot_filters(filters: Iterable[core.Spectrum], x, y):
+def plot_filters(filters: Iterable[core.Spectrum]):
     """ Creates a figure with plotted sensitive curves and CMFs """
     fig = plt.Figure(figsize=(5, 2), dpi=90)
     ax = fig.add_subplot(111)
@@ -66,13 +66,12 @@ def plot_filters(filters: Iterable[core.Spectrum], x, y):
         max_y = max(obj.br)
         if max_y > br_max:
             br_max = max_y
-    y = y / max(y[:,2]) # max is in B
-    if br_max != 0:
-        y *= br_max
-    ax.plot(x, y[:,2], color='#5050a0', alpha=1) # B
-    ax.plot(x, y[:,1], color='#3c783c', alpha=1) # G
-    ax.plot(x, y[:,0], color='#804040', alpha=1) # R
+    if br_max == 0:
+        br_max = 1
+    ax.plot(core.x.nm, core.x.br*br_max, color='#804040', alpha=1) # R
+    ax.plot(core.y.nm, core.y.br*br_max, color='#3c783c', alpha=1) # G
+    ax.plot(core.z.nm, core.z.br*br_max, color='#5050a0', alpha=1) # B
     for obj in filters:
-        ax.plot(obj.nm, obj.br, label=obj.name, color='#AAAAAA')
+        ax.plot(obj.nm, obj.br, label=obj.name, color=core.Color.from_spectrum(obj).to_html())
     ax.set_xlim(nm_min, nm_max)
     return fig

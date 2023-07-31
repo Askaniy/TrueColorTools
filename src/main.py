@@ -68,7 +68,7 @@ def launch_window():
     rounding = int(window['-rounding-'].get())
 
     T1_plot_data = [] # list of X, Y, name and color for each object to plot
-    T5_fig = pl.plot_filters([], cmf.rgb_nm, cmf.rgb)
+    T5_fig = pl.plot_filters(T1_plot_data)
     figure_canvas_agg = pl.draw_figure(window['T5_canvas'].TKCanvas, T5_fig)
     
 
@@ -534,12 +534,9 @@ def launch_window():
                     T5_filter_name = values['T5_filter'+str(i)]
                     if T5_filter_name != '':
                         T5_filter = di.import_filter(T5_filter_name)
-                        #print(T5_filter.to_resolution(12).nm)
-                        # TODO: T5_filter_color with new calculation
                         T5_plot_data.append(T5_filter)
-                        #print(T5_filter * T5_plot_data[0])
                 T5_fig.clf()
-                T5_fig = pl.plot_filters(T5_plot_data, cmf.rgb_nm, cmf.rgb)
+                T5_fig = pl.plot_filters(T5_plot_data)
                 figure_canvas_agg.get_tk_widget().forget()
                 figure_canvas_agg = pl.draw_figure(window['T5_canvas'].TKCanvas, T5_fig)
 
