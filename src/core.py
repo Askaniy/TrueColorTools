@@ -3,59 +3,6 @@ from typing import TypeVar, Iterable, Tuple
 from copy import deepcopy
 
 
-gamma_correction = np.vectorize(lambda grayscale: grayscale * 12.92 if grayscale < 0.0031308 else 1.055 * grayscale**(1.0/2.4) - 0.055)
-
-class Color:
-    def __init__(self, name: str, rgb: Iterable, albedo=False):
-        """
-        Constructor of the class to work with color represented by three float values in [0, 1] range.
-        The albedo flag on means that you have already normalized the brightness over the range.
-        By default, initialization implies normalization and you get chromaticity.
-        
-        Args:
-        - name (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
-        - rgb (Iterable): array of three values that are red, green and blue
-        - albedo (Iterable): flag to disable normalization
-        """
-        self.name = name
-        rgb = np.array(rgb, dtype=float) # could brake even with np input, don't remove
-        if rgb.min() < 0:
-            print(f'# Note for the Color object "{self.name}"')
-            print(f'- Negative values detected during object initialization: rgb={rgb}')
-            rgb = np.clip(rgb, 0, None)
-            print('- These values have been replaced with zeros.')
-        rgb_max = rgb.max()
-        if rgb_max == 0:
-            print(f'# Note for the Color object "{self.name}"')
-            print(f'- All values are zero: rgb={rgb}')
-        else:
-            if rgb_max > 1 and albedo:
-                albedo = False
-                print(f'# Note for the Color object "{self.name}"')
-                print(f'- Values greater than 1 detected in the albedo mode: rgb={rgb}')
-                print('- Not recommended. The processing mode has been switched to chromaticity.')
-            if not albedo: # normalization
-                rgb /= rgb_max
-        self.rgb = rgb
-
-    def gamma_corrected(self):
-        """ Creates a new Color object with applied gamma correction """
-        other = deepcopy(self)
-        other.rgb = gamma_correction(other.rgb)
-        return other
-
-    def to_bit(self, bit: int) -> np.ndarray:
-        """ Returns rounded color array, scaled to the appropriate power of two """
-        rgb = self.rgb * (2**bit - 1)
-        return rgb.round().astype(int)
-
-    def to_html(self):
-        """ Converts fractional rgb values to HTML-style hex string """
-        return '#{:02x}{:02x}{:02x}'.format(*self.to_bit(8))
-
-
-
-
 def divisible(array: np.ndarray, number: int):
     """ Boolean function, checks all array to be divisible by the number """
     return not np.any(array % number > 0)
@@ -192,14 +139,96 @@ class Spectrum:
         midpoints = (curve.br[:-1] + curve.br[1:]) / 2
         area = np.sum(midpoints * curve.res)
         return area # / 1e9 # convert to SI (nm -> m)
-    
-    def to_color(self, system):
-        return Color()
 
 
 
-# The CIE color matching function for 380 - 780 nm in 5 nm intervals
+# The CIE color matching function for 380-780 nm in 5 nm intervals
 cmf = np.loadtxt('src/cie-cmf.txt').transpose() # columns are: nm, x, y, z
 x = Spectrum('x', cmf[0], cmf[1], res=5)
 y = Spectrum('y', cmf[0], cmf[2], res=5)
 z = Spectrum('z', cmf[0], cmf[3], res=5)
+
+def xy2xyz(xy):
+    return np.array((xy[0], xy[1], 1-xy[0]-xy[0])) # (x, y, 1-x-y)
+
+class ColorSystem:
+    def __init__(self, red: Iterable, green: Iterable, blue: Iterable, white: Iterable):
+        """
+        Initialise the ColorSystem object.
+        The implementation is based on https://scipython.com/blog/converting-a-spectrum-to-a-colour/
+
+        Defining the color system requires four 2d vectors (primary illuminants and the "white point")
+        """
+        self.red, self.green, self.blue, self.white = map(xy2xyz, [red, green, blue, white]) # chromaticities
+        self.M = np.vstack((self.red, self.green, self.blue)).T # the chromaticity matrix (rgb -> xyz) and its inverse
+        self.MI = np.linalg.inv(self.M) # white scaling array
+        self.wscale = self.MI.dot(self.white) # xyz -> rgb transformation matrix
+        self.T = self.MI / self.wscale[:, np.newaxis]
+
+illuminant_D65 = (0.3127, 0.3291)
+cs_hdtv = ColorSystem((0.67, 0.33), (0.21, 0.71), (0.15, 0.06), illuminant_D65)
+cs_smpte = ColorSystem((0.63, 0.34), (0.31, 0.595), (0.155, 0.070), illuminant_D65)
+cs_srgb = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_D65)
+
+
+
+gamma_correction = np.vectorize(lambda p: p * 12.92 if p < 0.0031308 else 1.055 * p**(1.0/2.4) - 0.055)
+
+class Color:
+    def __init__(self, name: str, rgb: Iterable, albedo=False):
+        """
+        Constructor of the class to work with color represented by three float values in [0, 1] range.
+        The albedo flag on means that you have already normalized the brightness over the range.
+        By default, initialization implies normalization and you get chromaticity.
+        
+        Args:
+        - name (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
+        - rgb (Iterable): array of three values that are red, green and blue
+        - albedo (Iterable): flag to disable normalization
+        """
+        self.name = name
+        rgb = np.array(rgb, dtype=float) # could brake even with np input, don't remove
+        if rgb.min() < 0:
+            print(f'# Note for the Color object "{self.name}"')
+            print(f'- Negative values detected during object initialization: rgb={rgb}')
+            rgb = np.clip(rgb, 0, None)
+            print('- These values have been replaced with zeros.')
+        rgb_max = rgb.max()
+        if rgb_max == 0:
+            print(f'# Note for the Color object "{self.name}"')
+            print(f'- All values are zero: rgb={rgb}')
+        else:
+            if rgb_max > 1 and albedo:
+                albedo = False
+                print(f'# Note for the Color object "{self.name}"')
+                print(f'- Values greater than 1 detected in the albedo mode: rgb={rgb}')
+                print('- Not recommended. The processing mode has been switched to chromaticity.')
+            if not albedo: # normalization
+                rgb /= rgb_max
+        self.rgb = rgb
+
+    def from_spectrum(spectrum: Spectrum, color_system=cs_srgb):
+        name = spectrum.name
+        xyz = [spectrum * i for i in (x, y, z)] # convolution
+        rgb = color_system.T.dot(xyz)
+        if np.any(rgb < 0):
+            print(f'# Note for the Color object "{name}"')
+            print(f'- The converted x-y-z turned out to be outside the color space: rgb={rgb}')
+            rgb -= rgb.min()
+            print(f'- Approximating by desaturating: rgb={rgb}')
+        return Color(name, rgb)
+
+    def gamma_corrected(self):
+        """ Creates a new Color object with applied gamma correction """
+        other = deepcopy(self)
+        other.rgb = gamma_correction(other.rgb)
+        return other
+
+    def to_bit(self, bit: int) -> np.ndarray:
+        """ Returns rounded color array, scaled to the appropriate power of two """
+        rgb = self.rgb * (2**bit - 1)
+        return rgb.round().astype(int)
+
+    def to_html(self):
+        """ Converts fractional rgb values to HTML-style hex string """
+        return '#{:02x}{:02x}{:02x}'.format(*self.to_bit(8))
