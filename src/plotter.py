@@ -55,27 +55,18 @@ def plot_filters(filters: Iterable[core.Spectrum]):
     """ Creates a figure with plotted sensitive curves and CMFs """
     fig = plt.Figure(figsize=(5, 2), dpi=90)
     ax = fig.add_subplot(111)
-    nm_min = 400
-    nm_max = 700
-    br_max = 0
-    for obj in filters:
-        if obj.nm[0] < nm_min: # not pythonic, but fast
-            nm_min = obj.nm[0]
-        if obj.nm[-1] > nm_max:
-            nm_max = obj.nm[-1]
-        max_y = max(obj.br)
-        if max_y > br_max:
-            br_max = max_y
-    if br_max == 0:
-        br_max = 1
+    max_y = []
+    for spectrum in filters[3:]:
+        max_y.append(spectrum.br.max())
+    k = max(max_y) / filters[2].br.max() if max_y != [] else 1
     rgb_muted = ('#804040', '#3c783c', '#5050a0')
-    for i, obj in enumerate(filters):
+    for i, spectrum in enumerate(filters):
+        hires = spectrum.to_resolution(5)
         if i < 3: # the first three spectra are scaled sensitivity curves
-            br = obj.br*br_max
+            br = hires.br*k
             color = rgb_muted[i]
         else:
-            br = obj.br
-            color = core.Color.from_spectrum_legacy(obj).to_html()
-        ax.plot(obj.nm, br, label=obj.name, color=color)
-    ax.set_xlim(nm_min, nm_max)
+            br = hires.br
+            color = core.Color.from_spectrum_legacy(hires).gamma_corrected().to_html()
+        ax.plot(hires.nm, br, label=hires.name, color=color)
     return fig

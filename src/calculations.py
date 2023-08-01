@@ -1,11 +1,12 @@
-import traceback
 import numpy as np
 from scipy.interpolate import Akima1DInterpolator
-import src.cmf as cmf
-import src.experimental
 import spectra.core_database as db
 sun = db.objects['Sun|CALSPEC']
 vega = db.objects['Vega|CALSPEC']
+
+
+# Legacy wavelength range
+rgb_nm = list(range(390, 831, 5)) # np.arange breaks the function polator()
 
 
 # Spectrum processing functions
@@ -20,8 +21,8 @@ def irradiance(nm, t):
     m = nm / 1e9
     return const1 / (m**5 * (np.exp(const2 / m / t) - 1) )
 
-def blackbody_redshift(scope, tempurature, velocity, vII):
-    if tempurature == 0:
+def blackbody_redshift(scope, temperature, velocity, vII):
+    if temperature == 0:
         physics = False
     else:
         physics = True
@@ -42,7 +43,7 @@ def blackbody_redshift(scope, tempurature, velocity, vII):
     br = []
     for nm in scope:
         if physics:
-            br.append(irradiance(nm*doppler*grav, tempurature) / 1e9) # per m -> per nm
+            br.append(irradiance(nm*doppler*grav, temperature) / 1e9) # per m -> per nm
         else:
             br.append(0)
     return np.array(br)
@@ -193,70 +194,6 @@ def get_points(pivots: list, nm_list: list, br_list: list, albedo=0, wide=100, l
                     scope.append(br)
             scopes.append(np.mean(scope))
     return scopes
-
-
-# Color processing functions
-
-xyz_from_xy = lambda x, y: np.array((x, y, 1-x-y))
-
-def xyz_to_sRGB(xyz):
-    # https://scipython.com/blog/converting-a-spectrum-to-a-colour/
-    r = xyz_from_xy(0.64, 0.33)
-    g = xyz_from_xy(0.30, 0.60)
-    b = xyz_from_xy(0.15, 0.06)
-    white = xyz_from_xy(0.3127, 0.3291) # D65
-    M = np.vstack((r, g, b)).T
-    MI = np.linalg.inv(M)
-    wscale = MI.dot(white)
-    T = MI / wscale[:, np.newaxis]
-    rgb = T.dot(xyz)
-    if np.any(rgb < 0): # We're not in the sRGB gamut: approximate by desaturating
-        w = - np.min(rgb)
-        rgb += w
-    return rgb
-
-gamma_correction = np.vectorize(lambda grayscale: grayscale * 12.92 if grayscale < 0.0031308 else 1.055 * grayscale**(1.0/2.4) - 0.055)
-rounder = np.vectorize(lambda grayscale, d_places: int(round(grayscale)) if d_places == 0 else round(grayscale, d_places))
-
-def to_bit(color, bit): return color * (2**bit - 1)
-
-def to_html(color):
-    html = '#{:02x}{:02x}{:02x}'.format(*rounder(to_bit(color, 8), 0))
-    if len(html) == 7:
-        return html
-    else:
-        raise Exception(f'HTML color code {html} is invalid. Input color is {color}')
-
-def to_rgb(target, spectrum, albedo=False, inp_bit=None, exp_bit=None, rnd=0, gamma=False, srgb=False, html=False) -> tuple|str:
-    try:
-        if inp_bit:
-            spectrum /= (2**inp_bit - 1)
-        if srgb:
-            xyz = np.sum(spectrum[:, np.newaxis] * cmf.xyz, axis=0)
-            rgb = xyz_to_sRGB(xyz)
-            rgb = rgb / rgb[1] * spectrum[38] # xyz cmf is not normalized, so result was overexposed; spectrum[38] is 550 nm
-        else:
-            rgb = np.sum(spectrum[:, np.newaxis] * cmf.rgb, axis=0)
-        if albedo:
-            if html:
-                rgb = np.clip(rgb, 0, 1)
-        else:
-            mx = np.max(rgb)
-            if mx != 0:
-                rgb /= mx
-        if gamma:
-            rgb = gamma_correction(rgb)
-        if rgb.min() < 0:
-            #print('NegativeColorValues:', target, rgb)
-            rgb = np.clip(rgb, 0, None)
-        if html:
-            return to_html(rgb)
-        else:
-            return tuple(rounder(rgb if exp_bit == None else to_bit(rgb, exp_bit), rnd))
-    except:
-        print('ColorCalcError:', target)
-        print(traceback.format_exc())
-        return '#000000' if html else (0, 0, 0)
 
 
 # Pivot wavelengths and ZeroPoints of filter bandpasses

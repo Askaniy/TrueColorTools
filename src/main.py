@@ -4,7 +4,6 @@ import numpy as np
 import PySimpleGUI as sg
 from PIL import Image, ImageDraw
 import src.core as core
-import src.cmf as cmf
 import src.gui as gui
 import src.filters as filters
 import src.calculations as calc
@@ -158,7 +157,6 @@ def launch_window():
 
             if (event in triggers or event == 'T1_list') and values['T1_list'] != []:
                 T1_name = values['T1_list'][0]
-                T1_nm = cmf.xyz_nm if values['-srgb-'] else cmf.rgb_nm
 
                 # Spectral data import and processing
                 T1_spectrum = objectsDB[di.obj_dict(objectsDB, 'all', lang)[T1_name]]
@@ -177,22 +175,18 @@ def launch_window():
                     T1_sun = T1_spectrum['sun']
                 except KeyError:
                     T1_sun = False
-                T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], T1_nm, T1_albedo, mode=interpMode, desun=T1_sun)
+                T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], calc.rgb_nm, T1_albedo, mode=interpMode, desun=T1_sun)
                 
                 # Color calculation
-                T1_rgb = calc.to_rgb(
-                    T1_name, T1_curve, albedo=T1_albedo,
-                    exp_bit=bitness, 
-                    gamma=values['-gamma-'], 
-                    rnd=rounding,
-                    srgb=values['-srgb-']
-                )
-                T1_rgb_show = calc.to_rgb(
-                    T1_name, T1_curve, albedo=T1_albedo,
-                    gamma=values['-gamma-'],
-                    srgb=values['-srgb-'],
-                    html=True
-                )
+                T1_spec = core.Spectrum(T1_name, calc.rgb_nm, T1_curve)
+                if values['-srgb-']:
+                    T1_color = core.Color.from_spectrum(T1_spec, albedo=T1_albedo)
+                else:
+                    T1_color = core.Color.from_spectrum_legacy(T1_spec, albedo=T1_albedo)
+                if values['-gamma-']:
+                    T1_color = T1_color.gamma_corrected()
+                T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
+                T1_rgb_show = T1_color.to_html()
 
                 # Output
                 window['T1_graph'].TKCanvas.itemconfig(T1_preview, fill=T1_rgb_show)
@@ -203,7 +197,7 @@ def launch_window():
                 window['T1_list'].update(tuple(di.obj_dict(objectsDB, values['T1_tags'], lang).keys()))
             
             elif event == 'T1_add' and values['T1_list'] != []:
-                T1_plot_data.append((T1_nm, T1_curve, values['T1_list'][0], T1_rgb_show))
+                T1_plot_data.append((calc.rgb_nm, T1_curve, values['T1_list'][0], T1_rgb_show))
             
             elif event == 'T1_plot':
                 pl.plot_spectra(T1_plot_data, lang)
@@ -213,7 +207,6 @@ def launch_window():
             
             elif event == 'T1_export':
                 T1_export = '\n' + '\t'.join(tr.gui_col[lang]) + '\n' + '_' * 36
-                T1_nm = cmf.xyz_nm if values['-srgb-'] else cmf.rgb_nm
                 
                 # Spectrum processing
                 for name, raw_name in di.obj_dict(objectsDB, values['T1_tags'], lang).items():
@@ -233,16 +226,17 @@ def launch_window():
                         T1_sun = T1_spectrum['sun']
                     except KeyError:
                         T1_sun = False
-                    T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], T1_nm, T1_albedo, mode=interpMode, desun=T1_sun)
+                    T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], calc.rgb_nm, T1_albedo, mode=interpMode, desun=T1_sun)
 
                     # Color calculation
-                    T1_rgb = calc.to_rgb(
-                        raw_name, T1_curve, albedo=T1_albedo,
-                        exp_bit=bitness, 
-                        gamma=values['-gamma-'], 
-                        rnd=rounding,
-                        srgb=values['-srgb-']
-                    )
+                    T1_spec = core.Spectrum(T1_name, calc.rgb_nm, T1_curve)
+                    if values['-srgb-']:
+                        T1_color = core.Color.from_spectrum(T1_spec, albedo=T1_albedo)
+                    else:
+                        T1_color = core.Color.from_spectrum_legacy(T1_spec, albedo=T1_albedo)
+                    if values['-gamma-']:
+                        T1_color = T1_color.gamma_corrected()
+                    T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
 
                     # Output
                     T1_export += f'\n{export_colors(T1_rgb)}\t{name}'
@@ -389,7 +383,6 @@ def launch_window():
                     T2_input_depth = 65535 if T2_max > 255 else 255
                 #T2_data = np.clip(T2_data, 0, T2_input_depth)
 
-                T2_nm = cmf.xyz_nm if input_data['srgb'] else cmf.rgb_nm
                 T2_img = Image.new('RGB', (T2_w, T2_h), (0, 0, 0))
                 T2_draw = ImageDraw.Draw(T2_img)
                 T2_counter = 0
@@ -421,7 +414,7 @@ def launch_window():
                             T2_name = f'({x}; {y})'
 
                             T2_temp_time = time.monotonic_ns()
-                            T2_curve = calc.polator(input_data['nm'], list(T2_spectrum), T2_nm, mode=interpMode, desun=input_data['desun'])
+                            T2_curve = calc.polator(input_data['nm'], list(T2_spectrum), calc.rgb_nm, mode=interpMode, desun=input_data['desun'])
                             T2_calc_polator_time += time.monotonic_ns() - T2_temp_time
 
                             T2_temp_time = time.monotonic_ns()
@@ -436,7 +429,7 @@ def launch_window():
                             #    T2_temp_time = time.monotonic_ns()
                             #    if x % 32 == 0 and y % 32 == 0:
                             #        T2_fig.add_trace(go.Scatter(
-                            #            x = T2_nm,
+                            #            x = calc.rgb_nm,
                             #            y = T2_curve,
                             #            name = T2_name,
                             #            line = dict(color='rgb'+str(T2_rgb), width=2)
@@ -491,27 +484,24 @@ def launch_window():
                     window['T4_scale'].update(text_color=text_colors[values['T4_surfacebr']])
                     window['T4_slider4'].update(disabled=not values['T4_surfacebr'])
                 
-                T4_nm = cmf.xyz_nm if values['-srgb-'] else cmf.rgb_nm
-                T4_curve = calc.blackbody_redshift(T4_nm, values['T4_slider1'], values['T4_slider2'], values['T4_slider3'])
+                T4_curve = calc.blackbody_redshift(calc.rgb_nm, values['T4_slider1'], values['T4_slider2'], values['T4_slider3'])
                 if values['T4_surfacebr']:
                     try:
                         T4_curve /= calc.mag2intensity(values['T4_slider4'])
                     except np.core._exceptions.UFuncTypeError:
                         pass
                 T4_name = f'{values["T4_slider1"]} {values["T4_slider2"]} {values["T4_slider3"]}'
-                T4_rgb = calc.to_rgb(
-                    T4_name, T4_curve, albedo=values['T4_surfacebr'],
-                    exp_bit=bitness,
-                    gamma=values['-gamma-'],
-                    rnd=rounding,
-                    srgb=values['-srgb-']
-                )
-                T4_rgb_show = calc.to_rgb(
-                    T4_name, T4_curve, albedo=values['T4_surfacebr'],
-                    gamma=values['-gamma-'],
-                    srgb=values['-srgb-'],
-                    html=True
-                )
+
+                # Color calculation
+                T4_spec = core.Spectrum(T4_name, calc.rgb_nm, T4_curve)
+                if values['-srgb-']:
+                    T4_color = core.Color.from_spectrum(T4_spec)
+                else:
+                    T4_color = core.Color.from_spectrum_legacy(T4_spec)
+                if values['-gamma-']:
+                    T4_color = T4_color.gamma_corrected()
+                T4_rgb = tuple(T4_color.to_bit(bitness).round(rounding))
+                T4_rgb_show = T4_color.to_html()
             
                 # Output
                 window['T4_graph'].TKCanvas.itemconfig(T4_preview, fill=T4_rgb_show)
@@ -530,11 +520,11 @@ def launch_window():
                     window['T5_brText'+str(i)].update(visible=not T5_image_flag)
                     window['T5_br'+str(i)].update(visible=not T5_image_flag)
             
-            elif event.startswith('T5_filter'):
-                if True:
-                    T5_plot_data = [core.r, core.g, core.b]
-                else:
+            elif event.startswith('T5_filter') or event == '-srgb-':
+                if values['-srgb-']:
                     T5_plot_data = [core.x, core.y, core.z]
+                else:
+                    T5_plot_data = [core.r, core.g, core.b]
                 for i in range(T5_num):
                     T5_filter_name = values['T5_filter'+str(i)]
                     if T5_filter_name != '':

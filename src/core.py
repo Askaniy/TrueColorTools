@@ -35,7 +35,7 @@ def custom_interp(y0: np.ndarray, k=8):
     return y1
 
 class Spectrum:
-    def __init__(self, name: str, nm: np.ndarray, br: np.ndarray, res=0):
+    def __init__(self, name: str, nm: Iterable, br: np.ndarray, res=0):
         """
         Constructor of the class to work with single, continuous spectrum, with strictly defined resolutions.
         When creating an object, the spectrum grid is automatically checked and adjusted to uniform, if necessary.
@@ -48,7 +48,7 @@ class Spectrum:
         - res (int, optional): 
         """
         self.name = name
-
+        nm = np.array(nm, dtype=int)
         if res == 0: # checking and creating a uniform grid if necessary
             steps = nm[1:] - nm[:-1] # =np.diff(nm)
             blocks = set(steps)
@@ -134,12 +134,12 @@ class Spectrum:
             br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
             return Spectrum(name, nm, br0*br1, res=self.res).integrate()
 
-    def integrate(self):
-        """ Calculates the flux over the spectrum after interpolation using the mean rectangle method """
+    def integrate(self) -> float:
+        """ Calculates the area over the spectrum using the mean rectangle method. Divide by 1e9 to use as a SI flux. """
         curve = self.to_resolution(self._resolutions[0])
         midpoints = (curve.br[:-1] + curve.br[1:]) / 2
         area = np.sum(midpoints * curve.res)
-        return area # / 1e9 # convert to SI (nm -> m)
+        return area
 
 
 
@@ -148,6 +148,11 @@ class Spectrum:
 x = Spectrum('x', *np.loadtxt('src/cie-cmf.x.dat').transpose(), res=5)
 y = Spectrum('y', *np.loadtxt('src/cie-cmf.y.dat').transpose(), res=5)
 z = Spectrum('z', *np.loadtxt('src/cie-cmf.z.dat').transpose(), res=5)
+# Normalization (they are already normalized, but area not 1)
+mean_integral = np.mean([x.integrate(), y.integrate(), z.integrate()])
+x.br /= mean_integral
+y.br /= mean_integral
+z.br /= mean_integral
 
 # Stiles & Burch (1959) mean, published 10-deg color matching data
 # http://www.cvrl.org/stilesburch10_ind.htm
@@ -178,9 +183,10 @@ class ColorSystem:
         self.T = self.MI / self.wscale[:, np.newaxis]
 
 illuminant_D65 = (0.3127, 0.3291)
-cs_hdtv = ColorSystem((0.67, 0.33), (0.21, 0.71), (0.15, 0.06), illuminant_D65)
-cs_smpte = ColorSystem((0.63, 0.34), (0.31, 0.595), (0.155, 0.070), illuminant_D65)
-cs_srgb = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_D65)
+illuminant_E = (0.33333, 0.33333)
+#cs_hdtv = ColorSystem((0.67, 0.33), (0.21, 0.71), (0.15, 0.06), illuminant_D65)
+#cs_smpte = ColorSystem((0.63, 0.34), (0.31, 0.595), (0.155, 0.070), illuminant_D65)
+cs_srgb = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_E)
 
 
 
@@ -199,7 +205,7 @@ class Color:
         - albedo (Iterable): flag to disable normalization
         """
         self.name = name
-        rgb = np.array(rgb, dtype=float) # could brake even with np input, don't remove
+        rgb = np.array(rgb, dtype=float)
         if rgb.min() < 0:
             print(f'# Note for the Color object "{self.name}"')
             print(f'- Negative values detected during object initialization: rgb={rgb}')
@@ -219,12 +225,12 @@ class Color:
                 rgb /= rgb_max
         self.rgb = rgb
 
-    def from_spectrum_legacy(spectrum: Spectrum):
+    def from_spectrum_legacy(spectrum: Spectrum, albedo=False):
         name = spectrum.name
         rgb = [spectrum * i for i in (r, g, b)] # convolution
-        return Color(name, rgb)
+        return Color(name, rgb, albedo)
 
-    def from_spectrum(spectrum: Spectrum, color_system=cs_srgb):
+    def from_spectrum(spectrum: Spectrum, color_system=cs_srgb, albedo=False):
         name = spectrum.name
         xyz = [spectrum * i for i in (x, y, z)] # convolution
         rgb = color_system.T.dot(xyz)
@@ -233,7 +239,7 @@ class Color:
             print(f'- RGB derived from XYZ turned out to be outside the color space: rgb={rgb}')
             rgb -= rgb.min()
             print(f'- Approximating by desaturating: rgb={rgb}')
-        return Color(name, rgb)
+        return Color(name, rgb, albedo)
 
     def gamma_corrected(self):
         """ Creates a new Color object with applied gamma correction """
@@ -243,9 +249,8 @@ class Color:
 
     def to_bit(self, bit: int) -> np.ndarray:
         """ Returns rounded color array, scaled to the appropriate power of two """
-        rgb = self.rgb * (2**bit - 1)
-        return rgb.round().astype(int)
+        return self.rgb * (2**bit - 1)
 
     def to_html(self):
         """ Converts fractional rgb values to HTML-style hex string """
-        return '#{:02x}{:02x}{:02x}'.format(*self.to_bit(8))
+        return '#{:02x}{:02x}{:02x}'.format(*self.to_bit(8).round().astype(int))

@@ -1,13 +1,13 @@
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
-import src.cmf as cmf
+import src.core as core
 import src.calculations as calc
 import src.data_import as di
 import src.strings as tr
 
 
 def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamma: bool, folder: str, extension: str, lang: str):
-    """Creates and saves a table of colored squares for each spectrum with the specified tag"""
+    """ Creates and saves a table of colored squares for each spectrum with the specified tag """
     objects = di.obj_dict(objectsDB, tag, lang)
     l = len(objects)
 
@@ -27,7 +27,7 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
     w = 2*w_border + w_table # calculate image width
 
     name_size = 42
-    objt_size = 17
+    object_size = 17
     help_size = 17
     help_step = 5 + help_size
     note_size = 16
@@ -35,10 +35,10 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
 
     # Load fonts
     name_font = ImageFont.truetype('fonts/NotoSans-DisplayCondensedSemiBold.ttf', name_size)
-    objt_font = ImageFont.truetype('fonts/NotoSans-DisplayExtraCondensed.ttf', objt_size)
+    object_font = ImageFont.truetype('fonts/NotoSans-DisplayExtraCondensed.ttf', object_size)
     help_font = ImageFont.truetype('fonts/NotoSans-DisplayCondensedSemiBold.ttf', help_size)
     note_font = ImageFont.truetype('fonts/NotoSans-DisplayCondensed.ttf', note_size)
-    smll_font = ImageFont.truetype('fonts/NotoSans-DisplayCondensed.ttf', 12)
+    small_font = ImageFont.truetype('fonts/NotoSans-DisplayCondensed.ttf', 12)
 
     # Support for multiline title
     title_lines = line_splitter(tag.join(tr.name_text[lang]), name_font, w_table)
@@ -69,7 +69,6 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
     draw.text((w2, h2 + note_step*(1+info_num)), tr.link, fill=(0, 200, 255), font=note_font, anchor='la')
     
     # Table generator
-    nm = cmf.xyz_nm if srgb else cmf.rgb_nm
 
     n = 0 # object counter
     for name, raw_name in objects.items():
@@ -79,10 +78,10 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
         albedo = albedoFlag
         if albedo:
             try:
-                T1_albedo = T1_spectrum['albedo']
+                albedo = spectrum['albedo']
             except KeyError:
-                T1_albedo = False
-                T1_spectrum |= {'albedo': False}
+                albedo = False
+                spectrum |= {'albedo': False}
         spectrum = calc.standardize_photometry(spectrum)
         spectrum |= calc.matching_check(name, spectrum)
         
@@ -91,30 +90,35 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
             sun = spectrum['sun']
         except KeyError:
             sun = False
-        curve = calc.polator(spectrum['nm'], spectrum['br'], nm, albedo, desun=sun)
+        curve = calc.polator(spectrum['nm'], spectrum['br'], calc.rgb_nm, albedo, desun=sun)
 
         # Color calculation
-        rgb = calc.to_rgb(
-            name, curve, albedo=albedo,
-            exp_bit=8, gamma=gamma, srgb=srgb
-        )
+        spec = core.Spectrum(name, calc.rgb_nm, curve)
+        if srgb:
+            color = core.Color.from_spectrum(spec, albedo)
+        else:
+            color = core.Color.from_spectrum_legacy(spec, albedo)
+        if gamma:
+            color = color.gamma_corrected()
+        rgb = color.to_bit(8)
+        rgb_show = color.to_html()
 
         # Object drawing
         center_x = w_border + half_square + 2*half_square * (n%objects_per_raw)
         center_y = h0 + half_square + 2*half_square * int(n/objects_per_raw)
-        draw.rounded_rectangle((center_x-r, center_y-r, center_x+r, center_y+r), radius=rr, fill=rgb)
+        draw.rounded_rectangle((center_x-r, center_y-r, center_x+r, center_y+r), radius=rr, fill=rgb_show)
         
-        text_color = (0, 0, 0) if np.mean(rgb) >= 127 else (255, 255, 255)
+        text_color = (0, 0, 0) if rgb.mean() >= 127 else (255, 255, 255)
         
         # Name processing
         if name[0] == '(':
             parts = name.split(')', 1)
             name = parts[1].strip()
-            draw.text((center_x-ar, center_y-ar), f'({parts[0][1:]})', fill=text_color, font=smll_font)
+            draw.text((center_x-ar, center_y-ar), f'({parts[0][1:]})', fill=text_color, font=small_font)
         elif '/' in name:
             parts = name.split('/', 1)
             name = parts[1].strip()
-            draw.text((center_x-ar, center_y-ar), f'{parts[0]}/', fill=text_color, font=smll_font)
+            draw.text((center_x-ar, center_y-ar), f'{parts[0]}/', fill=text_color, font=small_font)
         
         if '[' in name:
             parts = name.split('[', -1)
@@ -125,15 +129,15 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
             elif ref[-4:].isnumeric() and (ref[-5].isalpha() or ref[-5]==''): # check for the year in the reference name to print it on the second line
                 author = ref[:-4].strip()
                 year = ref[-4:]
-                if width(author, smll_font) > width(year, smll_font):
+                if width(author, small_font) > width(year, small_font):
                     ref = f'{author}\n{year}'
                 else:
                     ref = spacing_year(ref)
-            draw.multiline_text((center_x+ar, center_y-ar), ref, fill=text_color, font=smll_font, anchor='ra', align='right', spacing=0)
+            draw.multiline_text((center_x+ar, center_y-ar), ref, fill=text_color, font=small_font, anchor='ra', align='right', spacing=0)
         
-        splitted = line_splitter(name, objt_font, ar+br)
-        shift = objt_size/2 if len(splitted) == 1 else objt_size
-        draw.multiline_text((center_x-ar, center_y-shift), '\n'.join(splitted), fill=text_color, font=objt_font, spacing=0)
+        splitted = line_splitter(name, object_font, ar+br)
+        shift = object_size/2 if len(splitted) == 1 else object_size
+        draw.multiline_text((center_x-ar, center_y-shift), '\n'.join(splitted), fill=text_color, font=object_font, spacing=0)
         n += 1
     
     file_name = f'TCT-table_{tag}{"_albedo" if albedoFlag else ""}{"_srgb" if srgb else ""}{"_gamma-corrected" if gamma else ""}_{lang}.{extension}'
@@ -142,21 +146,21 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
 
 
 def spacing_year(line: str):
-    """Adds space between author and year in a reference name"""
+    """ Adds space between author and year in a reference name """
     if line[-4:].isnumeric() and line[-5].isalpha():
         line = f'{line[:-4]} {line[-4:]}'
     return line
 
 def width(line: str, font: ImageFont.FreeTypeFont):
-    """Alias for measuring line width in pixels"""
+    """ Alias for measuring line width in pixels """
     return font.getlength(line)
 
 def hight(line: str, font: ImageFont.FreeTypeFont):
-    """Alias for measuring line width in pixels"""
+    """ Alias for measuring line width in pixels """
     return font.get
 
 def line_splitter(line: str, font: ImageFont.FreeTypeFont, maxW: int):
-    """Performs an adaptive line break at the specified width in pixels"""
+    """ Performs an adaptive line break at the specified width in pixels """
     if width(line, font) < maxW:
         return [line]
     else:
