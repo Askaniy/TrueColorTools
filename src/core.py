@@ -253,4 +253,10 @@ class Color:
 
     def to_html(self):
         """ Converts fractional rgb values to HTML-style hex string """
-        return '#{:02x}{:02x}{:02x}'.format(*self.to_bit(8).round().astype(int))
+        html = '#{:02x}{:02x}{:02x}'.format(*self.to_bit(8).round().astype(int))
+        if len(html) != 7:
+            print(f'# Note for the Color object "{self.name}"')
+            print(f'- HTML-style color code feels wrong: {html}')
+            html = '#000000'
+            print(f'- It has been replaced with {html}.')
+        return html
