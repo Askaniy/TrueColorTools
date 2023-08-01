@@ -347,7 +347,7 @@ info = {
 
 # Tab 4 - Blackbody & Redshifts
 gui_temp = {
-    'en': 'Tempurature [K]',
+    'en': 'Temperature [K]',
     'ru': 'Температура [K]',
     'de': 'Temperatur [K]'
 }

@@ -68,10 +68,14 @@ def plot_filters(filters: Iterable[core.Spectrum]):
             br_max = max_y
     if br_max == 0:
         br_max = 1
-    ax.plot(core.x.nm, core.x.br*br_max, color='#804040', alpha=1) # R
-    ax.plot(core.y.nm, core.y.br*br_max, color='#3c783c', alpha=1) # G
-    ax.plot(core.z.nm, core.z.br*br_max, color='#5050a0', alpha=1) # B
-    for obj in filters:
-        ax.plot(obj.nm, obj.br, label=obj.name, color=core.Color.from_spectrum(obj).to_html())
+    rgb_muted = ('#804040', '#3c783c', '#5050a0')
+    for i, obj in enumerate(filters):
+        if i < 3: # the first three spectra are scaled sensitivity curves
+            br = obj.br*br_max
+            color = rgb_muted[i]
+        else:
+            br = obj.br
+            color = core.Color.from_spectrum_legacy(obj).to_html()
+        ax.plot(obj.nm, br, label=obj.name, color=color)
     ax.set_xlim(nm_min, nm_max)
     return fig

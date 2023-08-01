@@ -3,6 +3,7 @@ import time
 import numpy as np
 import PySimpleGUI as sg
 from PIL import Image, ImageDraw
+import src.core as core
 import src.cmf as cmf
 import src.gui as gui
 import src.filters as filters
@@ -67,8 +68,9 @@ def launch_window():
     bitness = int(window['-bitness-'].get())
     rounding = int(window['-rounding-'].get())
 
-    T1_plot_data = [] # list of X, Y, name and color for each object to plot
-    T5_fig = pl.plot_filters(T1_plot_data)
+    T1_plot_data = []
+    T5_plot_data = [core.r, core.g, core.b] # list of X, Y, name and color for each object to plot
+    T5_fig = pl.plot_filters(T5_plot_data)
     figure_canvas_agg = pl.draw_figure(window['T5_canvas'].TKCanvas, T5_fig)
     
 
@@ -529,7 +531,10 @@ def launch_window():
                     window['T5_br'+str(i)].update(visible=not T5_image_flag)
             
             elif event.startswith('T5_filter'):
-                T5_plot_data = [] # list of core.Spectrum objects
+                if True:
+                    T5_plot_data = [core.r, core.g, core.b]
+                else:
+                    T5_plot_data = [core.x, core.y, core.z]
                 for i in range(T5_num):
                     T5_filter_name = values['T5_filter'+str(i)]
                     if T5_filter_name != '':

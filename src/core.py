@@ -144,9 +144,21 @@ class Spectrum:
 
 
 # The CIE color matching function for 380-780 nm in 5 nm intervals
+# https://scipython.com/static/media/blog/colours/cie-cmf.txt
 x = Spectrum('x', *np.loadtxt('src/cie-cmf.x.dat').transpose(), res=5)
 y = Spectrum('y', *np.loadtxt('src/cie-cmf.y.dat').transpose(), res=5)
 z = Spectrum('z', *np.loadtxt('src/cie-cmf.z.dat').transpose(), res=5)
+
+# Stiles & Burch (1959) mean, published 10-deg color matching data
+# http://www.cvrl.org/stilesburch10_ind.htm
+# Sensitivity modulo values less than 10^-4 were previously removed
+r = Spectrum('r', *np.loadtxt('src/StilesBurch10deg.r.dat').transpose(), res=5)
+g = Spectrum('g', *np.loadtxt('src/StilesBurch10deg.g.dat').transpose(), res=5)
+b = Spectrum('b', *np.loadtxt('src/StilesBurch10deg.b.dat').transpose(), res=5)
+# Normalization (integral of each one to be 1)
+r.br /= r.integrate()
+g.br /= g.integrate()
+b.br /= b.integrate()
 
 def xy2xyz(xy):
     return np.array((xy[0], xy[1], 1-xy[0]-xy[0])) # (x, y, 1-x-y)
@@ -206,6 +218,11 @@ class Color:
             if not albedo: # normalization
                 rgb /= rgb_max
         self.rgb = rgb
+
+    def from_spectrum_legacy(spectrum: Spectrum):
+        name = spectrum.name
+        rgb = [spectrum * i for i in (r, g, b)] # convolution
+        return Color(name, rgb)
 
     def from_spectrum(spectrum: Spectrum, color_system=cs_srgb):
         name = spectrum.name
