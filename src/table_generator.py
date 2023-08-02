@@ -140,7 +140,7 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
         draw.multiline_text((center_x-ar, center_y-shift), '\n'.join(splitted), fill=text_color, font=object_font, spacing=0)
         n += 1
     
-    file_name = f'TCT-table_{tag}{"_albedo" if albedoFlag else ""}{"_srgb" if srgb else ""}{"_gamma-corrected" if gamma else ""}_{lang}.{extension}'
+    file_name = f'TCT-table_{tag}_{lang}{"_gamma-corrected" if gamma else ""}{"_srgb" if srgb else ""}{"_albedo" if albedoFlag else ""}.{extension}'
     img.save(f'{folder}/{file_name}')
     print(f'Color table saved as {file_name}\n')
 
