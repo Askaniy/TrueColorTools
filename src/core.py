@@ -182,15 +182,17 @@ r.br /= r.integrate()
 g.br /= g.integrate()
 b.br /= b.integrate()
 
-# The CIE color matching function for 380-780 nm in 5 nm intervals
-# https://scipython.com/static/media/blog/colours/cie-cmf.txt
-x = Spectrum('x', *np.loadtxt('cmf/cie-cmf.x.dat').transpose(), res=5)
-y = Spectrum('y', *np.loadtxt('cmf/cie-cmf.y.dat').transpose(), res=5)
-z = Spectrum('z', *np.loadtxt('cmf/cie-cmf.z.dat').transpose(), res=5)
-# Normalization (255 was guessed, result seems to be brighter than necessary, to check later)
-x.br /= 255
-y.br /= 255
-z.br /= 255
+# CIE XYZ functions transformed from the CIE (2006) LMS functions, 10-deg
+# http://www.cvrl.org/ciexyzpr.htm
+# Sensitivity modulo values less than 10^-4 were previously removed
+x = Spectrum('x', *np.loadtxt('cmf/cie10deg.x.dat').transpose(), res=5)
+y = Spectrum('y', *np.loadtxt('cmf/cie10deg.y.dat').transpose(), res=5)
+z = Spectrum('z', *np.loadtxt('cmf/cie10deg.z.dat').transpose(), res=5)
+# Normalization. TODO: find an official way to calibrate brightness for albedo!
+# 355.5 was guessed so that the brightness was approximately the same as that of the legacy version
+x.br /= 355.5
+y.br /= 355.5
+z.br /= 355.5
 
 
 
@@ -236,15 +238,14 @@ class Color:
 
     def from_spectrum(spectrum: Spectrum, albedo=False, color_system=srgb):
         """ Conventional color processing method: spectrum -> CIE XYZ -> sRGB with illuminant E """
-        name = spectrum.name
         xyz = [spectrum * i for i in (x, y, z)] # convolution
         rgb = color_system.T.dot(xyz)
         if np.any(rgb < 0):
-            print(f'# Note for the Color object "{name}"')
+            print(f'# Note for the Color object "{spectrum.name}"')
             print(f'- RGB derived from XYZ turned out to be outside the color space: rgb={rgb}')
             rgb -= rgb.min()
             print(f'- Approximating by desaturating: rgb={rgb}')
-        return Color(name, rgb, albedo)
+        return Color(spectrum.name, rgb, albedo)
 
     def gamma_corrected(self):
         """ Creates a new Color object with applied gamma correction """
