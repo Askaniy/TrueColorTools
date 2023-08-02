@@ -68,7 +68,7 @@ def launch_window():
     rounding = int(window['-rounding-'].get())
 
     T1_plot_data = []
-    T5_plot_data = [core.r, core.g, core.b] # list of X, Y, name and color for each object to plot
+    T5_plot_data = [core.r, core.g, core.b]
     T5_fig = pl.plot_filters(T5_plot_data)
     figure_canvas_agg = pl.draw_figure(window['T5_canvas'].TKCanvas, T5_fig)
     
@@ -197,10 +197,10 @@ def launch_window():
                 window['T1_list'].update(tuple(di.obj_dict(objectsDB, values['T1_tags'], lang).keys()))
             
             elif event == 'T1_add' and values['T1_list'] != []:
-                T1_plot_data.append((calc.rgb_nm, T1_curve, values['T1_list'][0], T1_rgb_show))
+                T1_plot_data.append(T1_spec)
             
             elif event == 'T1_plot':
-                pl.plot_spectra(T1_plot_data, lang)
+                pl.plot_spectra(T1_plot_data, values['-gamma-'], values['-srgb-'], albedoFlag, lang)
             
             elif event == 'T1_clear':
                 T1_plot_data = []

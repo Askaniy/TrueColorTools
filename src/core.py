@@ -174,9 +174,9 @@ srgb = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_E)
 # Stiles & Burch (1959) 10-deg color matching data, direct experimental data
 # http://www.cvrl.org/stilesburch10_ind.htm
 # Sensitivity modulo values less than 10^-4 were previously removed
-r = Spectrum('r', *np.loadtxt('cmf/StilesBurch10deg.r.dat').transpose(), res=5)
-g = Spectrum('g', *np.loadtxt('cmf/StilesBurch10deg.g.dat').transpose(), res=5)
-b = Spectrum('b', *np.loadtxt('cmf/StilesBurch10deg.b.dat').transpose(), res=5)
+r = Spectrum('r CMF', *np.loadtxt('cmf/StilesBurch10deg.r.dat').transpose(), res=5)
+g = Spectrum('g CMF', *np.loadtxt('cmf/StilesBurch10deg.g.dat').transpose(), res=5)
+b = Spectrum('b CMF', *np.loadtxt('cmf/StilesBurch10deg.b.dat').transpose(), res=5)
 # Normalization (integral of each one to be 1)
 r.br /= r.integrate()
 g.br /= g.integrate()
@@ -185,9 +185,9 @@ b.br /= b.integrate()
 # CIE XYZ functions transformed from the CIE (2006) LMS functions, 10-deg
 # http://www.cvrl.org/ciexyzpr.htm
 # Sensitivity modulo values less than 10^-4 were previously removed
-x = Spectrum('x', *np.loadtxt('cmf/cie10deg.x.dat').transpose(), res=5)
-y = Spectrum('y', *np.loadtxt('cmf/cie10deg.y.dat').transpose(), res=5)
-z = Spectrum('z', *np.loadtxt('cmf/cie10deg.z.dat').transpose(), res=5)
+x = Spectrum('x CMF', *np.loadtxt('cmf/cie10deg.x.dat').transpose(), res=5)
+y = Spectrum('y CMF', *np.loadtxt('cmf/cie10deg.y.dat').transpose(), res=5)
+z = Spectrum('z CMF', *np.loadtxt('cmf/cie10deg.z.dat').transpose(), res=5)
 # Normalization. TODO: find an official way to calibrate brightness for albedo!
 # 355.5 was guessed so that the brightness was approximately the same as that of the legacy version
 x.br /= 355.5
