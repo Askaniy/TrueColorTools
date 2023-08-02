@@ -143,28 +143,6 @@ class Spectrum:
 
 
 
-# The CIE color matching function for 380-780 nm in 5 nm intervals
-# https://scipython.com/static/media/blog/colours/cie-cmf.txt
-x = Spectrum('x', *np.loadtxt('src/cie-cmf.x.dat').transpose(), res=5)
-y = Spectrum('y', *np.loadtxt('src/cie-cmf.y.dat').transpose(), res=5)
-z = Spectrum('z', *np.loadtxt('src/cie-cmf.z.dat').transpose(), res=5)
-# Normalization (they are already normalized, but area not 1)
-mean_integral = np.mean([x.integrate(), y.integrate(), z.integrate()])
-x.br /= mean_integral
-y.br /= mean_integral
-z.br /= mean_integral
-
-# Stiles & Burch (1959) mean, published 10-deg color matching data
-# http://www.cvrl.org/stilesburch10_ind.htm
-# Sensitivity modulo values less than 10^-4 were previously removed
-r = Spectrum('r', *np.loadtxt('src/StilesBurch10deg.r.dat').transpose(), res=5)
-g = Spectrum('g', *np.loadtxt('src/StilesBurch10deg.g.dat').transpose(), res=5)
-b = Spectrum('b', *np.loadtxt('src/StilesBurch10deg.b.dat').transpose(), res=5)
-# Normalization (integral of each one to be 1)
-r.br /= r.integrate()
-g.br /= g.integrate()
-b.br /= b.integrate()
-
 def xy2xyz(xy):
     return np.array((xy[0], xy[1], 1-xy[0]-xy[0])) # (x, y, 1-x-y)
 
@@ -182,11 +160,37 @@ class ColorSystem:
         self.wscale = self.MI.dot(self.white) # xyz -> rgb transformation matrix
         self.T = self.MI / self.wscale[:, np.newaxis]
 
-illuminant_D65 = (0.3127, 0.3291)
+
+
+# Used white points
 illuminant_E = (0.33333, 0.33333)
-#cs_hdtv = ColorSystem((0.67, 0.33), (0.21, 0.71), (0.15, 0.06), illuminant_D65)
-#cs_smpte = ColorSystem((0.63, 0.34), (0.31, 0.595), (0.155, 0.070), illuminant_D65)
-cs_srgb = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_E)
+#illuminant_D65 = (0.3127, 0.3291)
+
+# Used color systems
+srgb = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_E)
+#hdtv = ColorSystem((0.67, 0.33), (0.21, 0.71), (0.15, 0.06), illuminant_D65)
+#smpte = ColorSystem((0.63, 0.34), (0.31, 0.595), (0.155, 0.070), illuminant_D65)
+
+# Stiles & Burch (1959) 10-deg color matching data, direct experimental data
+# http://www.cvrl.org/stilesburch10_ind.htm
+# Sensitivity modulo values less than 10^-4 were previously removed
+r = Spectrum('r', *np.loadtxt('cmf/StilesBurch10deg.r.dat').transpose(), res=5)
+g = Spectrum('g', *np.loadtxt('cmf/StilesBurch10deg.g.dat').transpose(), res=5)
+b = Spectrum('b', *np.loadtxt('cmf/StilesBurch10deg.b.dat').transpose(), res=5)
+# Normalization (integral of each one to be 1)
+r.br /= r.integrate()
+g.br /= g.integrate()
+b.br /= b.integrate()
+
+# The CIE color matching function for 380-780 nm in 5 nm intervals
+# https://scipython.com/static/media/blog/colours/cie-cmf.txt
+x = Spectrum('x', *np.loadtxt('cmf/cie-cmf.x.dat').transpose(), res=5)
+y = Spectrum('y', *np.loadtxt('cmf/cie-cmf.y.dat').transpose(), res=5)
+z = Spectrum('z', *np.loadtxt('cmf/cie-cmf.z.dat').transpose(), res=5)
+# Normalization (255 was guessed, result seems to be brighter than necessary, to check later)
+x.br /= 255
+y.br /= 255
+z.br /= 255
 
 
 
@@ -202,7 +206,7 @@ class Color:
         Args:
         - name (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
         - rgb (Iterable): array of three values that are red, green and blue
-        - albedo (Iterable): flag to disable normalization
+        - albedo (bool): flag to disable normalization
         """
         self.name = name
         rgb = np.array(rgb, dtype=float)
@@ -226,11 +230,12 @@ class Color:
         self.rgb = rgb
 
     def from_spectrum_legacy(spectrum: Spectrum, albedo=False):
-        name = spectrum.name
+        """ A simple and concrete color processing method based on experimental eye sensitivity curves """
         rgb = [spectrum * i for i in (r, g, b)] # convolution
-        return Color(name, rgb, albedo)
+        return Color(spectrum.name, rgb, albedo)
 
-    def from_spectrum(spectrum: Spectrum, color_system=cs_srgb, albedo=False):
+    def from_spectrum(spectrum: Spectrum, albedo=False, color_system=srgb):
+        """ Conventional color processing method: spectrum -> CIE XYZ -> sRGB with illuminant E """
         name = spectrum.name
         xyz = [spectrum * i for i in (x, y, z)] # convolution
         rgb = color_system.T.dot(xyz)

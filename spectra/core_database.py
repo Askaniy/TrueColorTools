@@ -494,10 +494,10 @@ objects = {
     #"(486958) Arrokoth|Howett2019": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
     #	"filters": "Hubble", "indices": {"F606W-F814W": 1.03}, "sun": True
     #},
-    "(486958) Ultima|Howett2019": {"tags": ["featured", "solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(486958) Wenu|Howett2019": {"tags": ["featured", "solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "New Horizons", "bands": ["blue", "red", "nir"], "br": [0.053, 0.079, 0.117], "sun": True, "albedo": True
     },
-    "(486958) Thule|Howett2019": {"tags": ["featured", "solar_system", "minor_body", "tno", "classical", "classical-h"],
+    "(486958) Weeyo|Howett2019": {"tags": ["featured", "solar_system", "minor_body", "tno", "classical", "classical-h"],
         "filters": "New Horizons", "bands": ["blue", "red", "nir"], "br": [0.058, 0.084, 0.122], "sun": True, "albedo": True
     },
     "(486958) Akasa|Howett2019": {"tags": ["featured", "solar_system", "minor_body", "tno", "classical", "classical-h", "surface_feature"],

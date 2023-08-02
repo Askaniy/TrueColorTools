@@ -95,7 +95,7 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
         # Color calculation
         spec = core.Spectrum(name, calc.rgb_nm, curve)
         if srgb:
-            color = core.Color.from_spectrum(spec, albedo=albedo)
+            color = core.Color.from_spectrum(spec, albedo)
         else:
             color = core.Color.from_spectrum_legacy(spec, albedo)
         if gamma:

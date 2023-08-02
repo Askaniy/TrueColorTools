@@ -180,9 +180,9 @@ def launch_window():
                 # Color calculation
                 T1_spec = core.Spectrum(T1_name, calc.rgb_nm, T1_curve)
                 if values['-srgb-']:
-                    T1_color = core.Color.from_spectrum(T1_spec, albedo=T1_albedo)
+                    T1_color = core.Color.from_spectrum(T1_spec, T1_albedo)
                 else:
-                    T1_color = core.Color.from_spectrum_legacy(T1_spec, albedo=T1_albedo)
+                    T1_color = core.Color.from_spectrum_legacy(T1_spec, T1_albedo)
                 if values['-gamma-']:
                     T1_color = T1_color.gamma_corrected()
                 T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
@@ -231,9 +231,9 @@ def launch_window():
                     # Color calculation
                     T1_spec = core.Spectrum(T1_name, calc.rgb_nm, T1_curve)
                     if values['-srgb-']:
-                        T1_color = core.Color.from_spectrum(T1_spec, albedo=T1_albedo)
+                        T1_color = core.Color.from_spectrum(T1_spec, T1_albedo)
                     else:
-                        T1_color = core.Color.from_spectrum_legacy(T1_spec, albedo=T1_albedo)
+                        T1_color = core.Color.from_spectrum_legacy(T1_spec, T1_albedo)
                     if values['-gamma-']:
                         T1_color = T1_color.gamma_corrected()
                     T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
