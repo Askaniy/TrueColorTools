@@ -44,7 +44,7 @@ def custom_interp(y0: np.ndarray, k=8):
     delta_left = np.append(0., y0[1:-1] - y0[:-2])
     delta_right = np.append(y0[2:] - y0[1:-1], 0.)
     y1[1::2] = (y0[:-1] + y0[1:] + (delta_left - delta_right) / k) / 2
-    return y1
+    return np.clip(y1, 0, None)
 
 class Spectrum:
     def __init__(self, name: str, nm: Iterable, br: np.ndarray, res=0):
@@ -161,6 +161,33 @@ class Spectrum:
             br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
             br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
             return Spectrum(name, nm, br0*br1, res=self.res).integrate()
+    
+    def __truediv__(self, other):
+        """ Returns a new spectrum with the emitter removed, i.e. the reflection spectrum """
+        divided = deepcopy(self)
+        divided.name = f'{divided.name} / {other.name}'
+        start = max(divided.nm[0], other.nm[0])
+        end = min(divided.nm[-1], other.nm[-1])
+        if start >= end:
+            print(f'# Note for division "{divided.name}"')
+            print('- There is no intersection between the spectra, nothing changed.')
+            the_first = self.name
+            the_second = other.name
+            if divided.nm[0] > other.nm[0]:
+                the_first, the_second = the_second, the_first
+            print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
+        else:
+            if divided.res < other.res:
+                other = other.to_resolution(divided.res)
+            elif divided.res > other.res:
+                divided = divided.to_resolution(other.res)
+            divided.nm = np.arange(start, end+1, divided.res)
+            br0 = divided.br[np.where((divided.nm >= start) & (divided.nm <= end))]
+            print(br0.min())
+            br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
+            print(br1.min())
+            divided.br = br0 / br1
+        return divided
     
     def integrate(self) -> float:
         """ Calculates the area over the spectrum using the mean rectangle method. Divide by 1e9 to use as a SI flux. """

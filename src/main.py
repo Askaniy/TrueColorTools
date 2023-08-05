@@ -528,7 +528,7 @@ def launch_window():
                 for i in range(T5_num):
                     T5_filter_name = values['T5_filter'+str(i)]
                     if T5_filter_name != '':
-                        T5_filter = core.Spectrum.from_filter(T5_filter_name)
+                        T5_filter = core.Spectrum.from_filter(T5_filter_name) / core.sun
                         T5_plot_data.append(T5_filter)
                 T5_fig.clf()
                 T5_fig = pl.plot_filters(T5_plot_data)
