@@ -1,7 +1,14 @@
 import numpy as np
 from scipy.interpolate import Akima1DInterpolator
+from astropy.io import fits
+from astropy.table import Table
 from typing import TypeVar, Iterable, Tuple
 from copy import deepcopy
+
+
+# This code was written in an effort to work not only with the optical range, but with any, depending on the data.
+# But too long and heterogeneous FITS files demanded to set the upper limit of the range to mid-wavelength infrared (3 μm).
+nm_limit = 3000
 
 
 def divisible(array: np.ndarray, number: int):
@@ -12,11 +19,16 @@ def averaging(x1: np.ndarray, x0: np.ndarray, y0: np.ndarray):
     """ Returns spectrum brightness values with decreased resolution """
     semistep = (x1[1] - x1[0]) / 2 # most likely semistep = 2.5 nm
     y1 = [np.mean(y0[np.where(x0 < x1[0]+semistep)])]
-    for x in x1[1:-1]:
-        y = np.mean(y0[np.where((x-semistep < x0) & (x0 < x+semistep))]) # average the brightness around X points
-        y1.append(y)
+    for x in x1[1:-1]: # RuntimeWarning: Mean of empty slice.
+        flag = np.where((x-semistep < x0) & (x0 < x+semistep))
+        if flag[0].size == 0: # the spectrum is no longer dense enough to be averaged down to 5 nm
+            x1 = x1[np.where(x1 <= x)]
+            break
+        else:
+            y = np.mean(y0[flag]) # average the brightness around X points
+            y1.append(y)
     y1.append(np.mean(y0[np.where(x0 > x1[-1]-semistep)]))
-    return np.array(y1)
+    return x1, np.array(y1)
 
 def custom_interp(y0: np.ndarray, k=8):
     """
@@ -49,6 +61,10 @@ class Spectrum:
         """
         self.name = name
         nm = np.array(nm, dtype=int)
+        if nm[-1] > nm_limit:
+            flag = np.where(nm < nm_limit + self._resolutions[0]) # to be averaged to nm_limit
+            nm = nm[flag]
+            br = br[flag]
         if res == 0: # checking and creating a uniform grid if necessary
             steps = nm[1:] - nm[:-1] # =np.diff(nm)
             blocks = set(steps)
@@ -70,11 +86,23 @@ class Spectrum:
             if self.res <= res: # interpolation, increasing resolution
                 self.br = Akima1DInterpolator(nm, br)(self.nm)
             else: # decreasing resolution if step less than 5 nm
-                self.br = averaging(self.nm, nm, br)
-        else: # input could be trusted
+                self.nm, self.br = averaging(self.nm, nm, br) # updates wavelengths if at the end
+        else: # input could be trusted                          the spectrum is not dense enough to be averaged
             self.nm = nm
             self.br = br
             self.res = res
+    
+    def from_filter(name: str):
+        """ Creates a Spectrum object based on the loaded data in Filter Profile Service standard """
+        with open(f'filters/{name}.dat') as f:
+            angstrom, response = np.loadtxt(f).transpose()
+            return Spectrum(name, angstrom/10, response)
+    
+    def from_FITS(name: str, file: str):
+        """ Creates a Spectrum object based on the loaded data in CALSPEC standard """
+        with fits.open(f'spectra/{file}') as hdul:
+            tbl = Table(hdul[1].data)
+            return Spectrum(name, tbl['WAVELENGTH']/10, tbl['FLUX'])
     
     _resolutions = [5, 10, 20, 40, 80, 160] # nm
 
@@ -133,13 +161,18 @@ class Spectrum:
             br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
             br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
             return Spectrum(name, nm, br0*br1, res=self.res).integrate()
-
+    
     def integrate(self) -> float:
         """ Calculates the area over the spectrum using the mean rectangle method. Divide by 1e9 to use as a SI flux. """
         curve = self.to_resolution(self._resolutions[0])
         midpoints = (curve.br[:-1] + curve.br[1:]) / 2
         area = np.sum(midpoints * curve.res)
         return area
+
+
+
+sun = Spectrum.from_FITS('Sun|CALSPEC', 'sun_reference_stis_002.fits')
+vega = Spectrum.from_FITS('Vega|CALSPEC', 'alpha_lyr_stis_011.fits')
 
 
 

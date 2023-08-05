@@ -22,18 +22,6 @@ def list_filters():
         print(f'More precisely, {traceback.format_exc(limit=0)}')
     return sorted(filters)
 
-def import_filter(name: str):
-    """ Loads filter data with Filter Profile Service standard into a Spectrum object """
-    with open(f'filters/{name}.dat') as f:
-        angstrem, response = np.loadtxt(f).transpose()
-        return core.Spectrum(name, angstrem/10, response)
-
-
-# Support for spectra distributed via the FITS format
-
-def import_fits():
-    pass
-
 
 # Support of database extension via json5 files
 
