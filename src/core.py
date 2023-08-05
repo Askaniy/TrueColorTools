@@ -116,7 +116,7 @@ class Spectrum:
         return res
     
     def to_resolution(self, request: int):
-        """ Creates a new Spectrum object with changed wavelength grid step size """
+        """ Returns a new Spectrum object with changed wavelength grid step size """
         other = deepcopy(self)
         if request not in self._resolutions:
             print(f'# Note for the Spectrum object "{self.name}"')
@@ -163,13 +163,13 @@ class Spectrum:
             return Spectrum(name, nm, br0*br1, res=self.res).integrate()
     
     def __truediv__(self, other):
-        """ Returns a new spectrum with the emitter removed, i.e. the reflection spectrum """
+        """ Returns a new Spectrum object with the emitter removed, i.e. the reflection spectrum """
         divided = deepcopy(self)
         divided.name = f'{divided.name} / {other.name}'
         start = max(divided.nm[0], other.nm[0])
         end = min(divided.nm[-1], other.nm[-1])
         if start >= end:
-            print(f'# Note for division "{divided.name}"')
+            print(f'# Note for spectral division "{divided.name}"')
             print('- There is no intersection between the spectra, nothing changed.')
             the_first = self.name
             the_second = other.name
@@ -183,9 +183,7 @@ class Spectrum:
                 divided = divided.to_resolution(other.res)
             divided.nm = np.arange(start, end+1, divided.res)
             br0 = divided.br[np.where((divided.nm >= start) & (divided.nm <= end))]
-            print(br0.min())
             br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
-            print(br1.min())
             divided.br = br0 / br1
         return divided
     
@@ -195,11 +193,22 @@ class Spectrum:
         midpoints = (curve.br[:-1] + curve.br[1:]) / 2
         area = np.sum(midpoints * curve.res)
         return area
+    
+    def normalized(self, request=550):
+        """ Returns a new Spectrum object with brightness scaled to be equal 1 at the specified wavelength """
+        other = deepcopy(self)
+        if request not in other.nm:
+            print(f'# Note for the Spectrum object "{other.name}"')
+            print(f'- Requested wavelength to normalize ({request}) not in the spectrum range ({other.nm[0]} to {other.nm[-1]} by {other.res} nm).')
+            request = other.nm[np.abs(other.nm - request).argmin()]
+            print(f'- {request} was chosen as the closest value.')
+        other.br /= other.br[np.where(other.nm == request)]
+        return other
 
 
 
-sun = Spectrum.from_FITS('Sun|CALSPEC', 'sun_reference_stis_002.fits')
-vega = Spectrum.from_FITS('Vega|CALSPEC', 'alpha_lyr_stis_011.fits')
+sun = Spectrum.from_FITS('Sun|CALSPEC', 'sun_reference_stis_002.fits').normalized()
+vega = Spectrum.from_FITS('Vega|CALSPEC', 'alpha_lyr_stis_011.fits').normalized()
 
 
 

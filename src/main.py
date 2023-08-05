@@ -179,6 +179,8 @@ def launch_window():
                 
                 # Color calculation
                 T1_spec = core.Spectrum(T1_name, calc.rgb_nm, T1_curve)
+                #if T1_sun:
+                #    T1_spec /= core.sun
                 if values['-srgb-']:
                     T1_color = core.Color.from_spectrum(T1_spec, T1_albedo)
                 else:
