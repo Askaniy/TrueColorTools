@@ -56,8 +56,8 @@ def intensity2mag(e):
 def mag2intensity(m):
     return V * 10**(-0.4 * m)
 
-interp_modes = ['qualitatively', 'fast']#, 'new']
-def polator(x, y, scope, albedo=0, mode='qualitatively', desun=False):
+interp_modes = ['qualitatively', 'fast']
+def polator(x, y, scope, mode='qualitatively'):
     mn = scope[0]
     mx = scope[-1]
     extrap = True if x[0] > mn or x[-1] < mx else False
@@ -100,15 +100,7 @@ def polator(x, y, scope, albedo=0, mode='qualitatively', desun=False):
                     br.append(interp(nm))
                 else:
                     br.append((line(nm) + interp(nm)) / 2)
-    curve = np.clip(br, 0, None)
-    if desun:
-        for i, nm in enumerate(scope):
-            curve[i] = curve[i] / sun['br'][sun['nm'].index(nm)]
-    if type(albedo) != bool:
-        if albedo:
-            br550 = curve[scope.index(550)]
-            curve = curve / br550 * albedo
-    return curve
+    return np.clip(br, 0, None)
 
 
 def matching_check(name: str, spectrum: dict):

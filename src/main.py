@@ -171,16 +171,21 @@ def launch_window():
                 T1_spectrum |= calc.matching_check(T1_name, T1_spectrum)
                 
                 # Spectrum interpolation
-                try:
-                    T1_sun = T1_spectrum['sun']
-                except KeyError:
-                    T1_sun = False
-                T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], calc.rgb_nm, T1_albedo, mode=interpMode, desun=T1_sun)
+                T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], calc.rgb_nm, mode=interpMode)
                 
                 # Color calculation
                 T1_spec = core.Spectrum(T1_name, calc.rgb_nm, T1_curve)
-                #if T1_sun:
-                #    T1_spec /= core.sun
+                try:
+                    if T1_spectrum['sun']:
+                        T1_spec /= core.sun
+                except KeyError:
+                    pass
+                if albedoFlag:
+                    try:
+                        if isinstance(T1_spectrum['albedo'], float):
+                            T1_spec = T1_spec.scaled_to_albedo(T1_spectrum['albedo'], core.bessell_v)
+                    except KeyError:
+                        pass
                 if values['-srgb-']:
                     T1_color = core.Color.from_spectrum(T1_spec, T1_albedo)
                 else:
@@ -224,14 +229,21 @@ def launch_window():
                     T1_spectrum |= calc.matching_check(T1_name, T1_spectrum)
                     
                     # Spectrum interpolation
-                    try:
-                        T1_sun = T1_spectrum['sun']
-                    except KeyError:
-                        T1_sun = False
-                    T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], calc.rgb_nm, T1_albedo, mode=interpMode, desun=T1_sun)
+                    T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], calc.rgb_nm, mode=interpMode)
 
                     # Color calculation
                     T1_spec = core.Spectrum(T1_name, calc.rgb_nm, T1_curve)
+                    try:
+                        if T1_spectrum['sun']:
+                            T1_spec /= core.sun
+                    except KeyError:
+                        pass
+                    if albedoFlag:
+                        try:
+                            if isinstance(T1_spectrum['albedo'], float):
+                                T1_spec = T1_spec.scaled_to_albedo(T1_spectrum['albedo'], core.bessell_v)
+                        except KeyError:
+                            pass
                     if values['-srgb-']:
                         T1_color = core.Color.from_spectrum(T1_spec, T1_albedo)
                     else:
@@ -530,7 +542,7 @@ def launch_window():
                 for i in range(T5_num):
                     T5_filter_name = values['T5_filter'+str(i)]
                     if T5_filter_name != '':
-                        T5_filter = core.Spectrum.from_filter(T5_filter_name) / core.sun
+                        T5_filter = core.Spectrum.from_filter(T5_filter_name)
                         T5_plot_data.append(T5_filter)
                 T5_fig.clf()
                 T5_fig = pl.plot_filters(T5_plot_data)

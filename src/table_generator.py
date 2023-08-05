@@ -86,14 +86,21 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
         spectrum |= calc.matching_check(name, spectrum)
         
         # Spectrum interpolation
-        try:
-            sun = spectrum['sun']
-        except KeyError:
-            sun = False
-        curve = calc.polator(spectrum['nm'], spectrum['br'], calc.rgb_nm, albedo, desun=sun)
+        curve = calc.polator(spectrum['nm'], spectrum['br'], calc.rgb_nm, albedo)
 
         # Color calculation
         spec = core.Spectrum(name, calc.rgb_nm, curve)
+        try:
+            if spectrum['sun']:
+                spec /= core.sun
+        except KeyError:
+            pass
+        if albedoFlag:
+            try:
+                if isinstance(spectrum['albedo'], float):
+                    spec = spec.scaled_to_albedo(spectrum['albedo'], core.bessell_v)
+            except KeyError:
+                pass
         if srgb:
             color = core.Color.from_spectrum(spec, albedo)
         else:

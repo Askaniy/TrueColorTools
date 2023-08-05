@@ -194,7 +194,13 @@ class Spectrum:
         area = np.sum(midpoints * curve.res)
         return area
     
-    def normalized(self, request=550):
+    def normalized_by_area(self):
+        """ Returns a new Spectrum object with brightness scaled to its area be equal 1 """
+        other = deepcopy(self)
+        other.br /= other.integrate()
+        return other
+    
+    def normalized_on_wavelength(self, request: int):
         """ Returns a new Spectrum object with brightness scaled to be equal 1 at the specified wavelength """
         other = deepcopy(self)
         if request not in other.nm:
@@ -204,11 +210,19 @@ class Spectrum:
             print(f'- {request} was chosen as the closest value.')
         other.br /= other.br[np.where(other.nm == request)]
         return other
+    
+    def scaled_to_albedo(self, albedo: float, transmission):
+        """ Returns a new Spectrum object with brightness scaled to give the albedo after convolution with the filter """
+        other = deepcopy(self)
+        current_albedo = other * transmission.normalized_by_area()
+        other.br *= albedo / current_albedo
+        return other
 
 
 
-sun = Spectrum.from_FITS('Sun|CALSPEC', 'sun_reference_stis_002.fits').normalized()
-vega = Spectrum.from_FITS('Vega|CALSPEC', 'alpha_lyr_stis_011.fits').normalized()
+bessell_v = Spectrum.from_filter('Generic_Bessell.V')
+sun = Spectrum.from_FITS('Sun|CALSPEC', 'sun_reference_stis_002.fits').scaled_to_albedo(1, bessell_v)
+vega = Spectrum.from_FITS('Vega|CALSPEC', 'alpha_lyr_stis_011.fits').scaled_to_albedo(1, bessell_v)
 
 
 
@@ -243,13 +257,9 @@ srgb = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_E)
 # Stiles & Burch (1959) 10-deg color matching data, direct experimental data
 # http://www.cvrl.org/stilesburch10_ind.htm
 # Sensitivity modulo values less than 10^-4 were previously removed
-r = Spectrum('r CMF', *np.loadtxt('cmf/StilesBurch10deg.r.dat').transpose(), res=5)
-g = Spectrum('g CMF', *np.loadtxt('cmf/StilesBurch10deg.g.dat').transpose(), res=5)
-b = Spectrum('b CMF', *np.loadtxt('cmf/StilesBurch10deg.b.dat').transpose(), res=5)
-# Normalization (integral of each one to be 1)
-r.br /= r.integrate()
-g.br /= g.integrate()
-b.br /= b.integrate()
+r = Spectrum('r CMF', *np.loadtxt('cmf/StilesBurch10deg.r.dat').transpose(), res=5).normalized_by_area()
+g = Spectrum('g CMF', *np.loadtxt('cmf/StilesBurch10deg.g.dat').transpose(), res=5).normalized_by_area()
+b = Spectrum('b CMF', *np.loadtxt('cmf/StilesBurch10deg.b.dat').transpose(), res=5).normalized_by_area()
 
 # CIE XYZ functions transformed from the CIE (2006) LMS functions, 10-deg
 # http://www.cvrl.org/ciexyzpr.htm
