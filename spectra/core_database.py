@@ -1,6 +1,6 @@
 refs = {
     "CALSPEC": [
-        "CALSPEC calatog of stellar spectra (STScI)",
+        "CALSPEC catalog of stellar spectra (STScI)",
         "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec"
     ],
     "Mallama2017": [
@@ -11,7 +11,7 @@ refs = {
         "Views from EPOXI: colors in our Solar system as an analog for extrasolar planets",
         "DOI: 10.1088/0004-637X/729/2/130", "https://iopscience.iop.org/article/10.1088/0004-637X/729/2/130"
     ],
-    "USGSarchive": [ # not avalible anymore, even by Wayback Machine
+    "USGSarchive": [ # not available anymore, even by Wayback Machine
         "About the Spectra of the Planets and Satellites",
         "https://archive.usgs.gov/archive/sites/speclab.cr.usgs.gov/planetary.spectra/planetary-sp.html"
     ],
@@ -503,10 +503,10 @@ objects = {
     "(486958) Akasa|Howett2019": {"tags": ["featured", "solar_system", "minor_body", "tno", "classical", "classical-h", "surface_feature"],
         "filters": "New Horizons", "bands": ["blue", "red", "nir"], "br": [0.066, 0.090, 0.125], "sun": True, "albedo": True
     },
-    "1I/'Oumuamua|Jewitt2017": {"tags": ["featured", "solar_system", "extrasolar", "asteroid"],
+    "1I/ʻOumuamua|Jewitt2017": {"tags": ["featured", "solar_system", "extrasolar", "asteroid"],
         "filters": "Landolt", "indices": {"B-V": 0.70, "V-R": 0.45}, "sun": True, "albedo": 0.1
     },
-    "1I/'Oumuamua|Bannister2017": {"tags": ["solar_system", "extrasolar", "asteroid"],
+    "1I/ʻOumuamua|Bannister2017": {"tags": ["solar_system", "extrasolar", "asteroid"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.47, "r-i": 0.36}, "sun": True, "albedo": 0.07
     }
 }

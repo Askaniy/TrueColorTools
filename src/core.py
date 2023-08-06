@@ -8,13 +8,64 @@ from copy import deepcopy
 
 # This code was written in an effort to work not only with the optical range, but with any, depending on the data.
 # But too long and heterogeneous FITS files demanded to set the upper limit of the range to mid-wavelength infrared (3 μm).
-nm_limit = 3000
+nm_limit = 3000 # nm
 
+# For the sake of simplifying work with the spectrum, its discretization steps are strictly given below.
+# Grid points are divisible by the selected step.
+resolutions = [5, 10, 20, 40, 80, 160] # nm
+
+
+
+class InitError(ValueError): pass
 
 class Photometry:
     def __init__(self, name: str, dictionary: dict):
-        """ Constructor of the class to work with photometric parameters, imported from the database """
+        """
+        Constructor of the class to work with photometric parameters, imported from the database.
+
+        Allowed input dictionary keys:
+        - `nm` (Iterable): list of wavelengths in nanometers
+        - `br` (Iterable): same-size list of linear physical property, representing "brightness"
+        - `mag`: same-size list of magnitudes
+        - `nm_range`: list of [`start`, `stop`, `step`] integer values with including endpoint
+        - `filters`: filter system, linked with [`filters.py`](src/filters.py)
+        - `indices`: dictionary of color indices, use only with `filters`
+        - `bands`: list of filters' names, use only with `filters`
+        - *(optional)* `albedo` (bool or float):
+            - `albedo=True` means that the input photometry is in the [0, 1] range
+            - `albedo=False` means that albedo mode is impossible
+            - `albedo=`*float* means that photometry after converting to spectrum can be scaled to be in the range
+        - *(optional)* `sun` (bool): `True` if spectrum must be divided by the solar to become reflective
+        - *(optional)* `tags`: list of strings, categorizes a spectrum
+
+        Class attributes:
+        - `nm` (np.array): list of wavelengths in nanometers
+        - `br` (np.array): same-size list of linear physical property, representing "brightness"
+        - `albedo` (bool or float): the same definition
+        - `sun` (bool): `True` if spectrum must be divided by the solar to become reflective
+        """
         self.name = name
+        try:
+            try:
+                self.sun = dictionary['sun']
+            except KeyError:
+                self.sun = False
+            try:
+                self.albedo = dictionary['albedo']
+            except KeyError:
+                self.albedo = False
+            try:
+                start, stop, step = dictionary['nm_range']
+                self.nm = np.arange(start, stop+1, step)
+            except KeyError:
+                pass
+            except ValueError:
+                print(f'# Note for the Photometry object "{self.name}"')
+                print(f'- Wavelength range issues during object initialization: [start, end, step]={dictionary["nm_range"]}')
+                raise InitError
+        except InitError:
+            print(f'# Initialization of the Photometry object "{self.name}" failed')
+            self.nm, self.br, self.albedo, self.sun = None, None, None, None
 
 
 
@@ -43,8 +94,8 @@ def custom_interp(y0: np.ndarray, k=8):
     Optimal in terms of speed to quality ratio. Invented while trying to sleep.
 
     Args:
-    - y0 (np.ndarray): values to be interpolated
-    - k (int): lower -> more chaotic, higher -> more linear, best results around 5-10
+    - `y0` (np.ndarray): values to be interpolated
+    - `k` (int): lower -> more chaotic, higher -> more linear, best results around 5-10
     """
     y1 = np.empty(y0.size * 2 - 1)
     y1[0::2] = y0
@@ -58,18 +109,18 @@ class Spectrum:
         """
         Constructor of the class to work with single, continuous spectrum, with strictly defined resolutions.
         When creating an object, the spectrum grid is automatically checked and adjusted to uniform, if necessary.
-        Specifying resolution removes checks. This is only recommended for speeding up code that is definitely trustworthy.
+        Specifying resolution removes the check. This is only recommended for speeding up code that is definitely trustworthy.
         
         Args:
-        - name (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
-        - nm (np.array): list of wavelengths in nanometers
-        - br (np.array): same-size list of linear physical property, representing "brightness"
-        - res (int, optional): 
+        - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
+        - `nm` (np.array): list of wavelengths in nanometers
+        - `br` (np.array): same-size list of linear physical property, representing "brightness"
+        - `res` (int, optional): assigns a number, cancel the check
         """
         self.name = name
         nm = np.array(nm, dtype=int)
         if nm[-1] > nm_limit:
-            flag = np.where(nm < nm_limit + self._resolutions[0]) # to be averaged to nm_limit
+            flag = np.where(nm < nm_limit + resolutions[0]) # to be averaged to nm_limit
             nm = nm[flag]
             br = br[flag]
         if res == 0: # checking and creating a uniform grid if necessary
@@ -77,7 +128,7 @@ class Spectrum:
             blocks = set(steps)
             if len(blocks) == 1: # uniform grid
                 res = int(*blocks)
-                if divisible(nm, res) and res in self._resolutions: # perfect grid
+                if divisible(nm, res) and res in resolutions: # perfect grid
                     self.br = br
                     self.nm = nm.astype(int)
                     self.res = res
@@ -110,24 +161,22 @@ class Spectrum:
         with fits.open(f'spectra/{file}') as hdul:
             tbl = Table(hdul[1].data)
             return Spectrum(name, tbl['WAVELENGTH']/10, tbl['FLUX'])
-    
-    _resolutions = [5, 10, 20, 40, 80, 160] # nm
 
     def _standardize_resolution(self, input: int):
         """ Redirects the step size to one of the valid values """
-        res = self._resolutions[-1] # max possible step
-        for i in range(1, len(self._resolutions)):
-            if input < self._resolutions[i]:
-                res = self._resolutions[i-1] # accuracy is always in reserve
+        res = resolutions[-1] # max possible step
+        for i in range(1, len(resolutions)):
+            if input < resolutions[i]:
+                res = resolutions[i-1] # accuracy is always in reserve
                 break
         return res
     
     def to_resolution(self, request: int):
         """ Returns a new Spectrum object with changed wavelength grid step size """
         other = deepcopy(self)
-        if request not in self._resolutions:
+        if request not in resolutions:
             print(f'# Note for the Spectrum object "{self.name}"')
-            print(f'- Resolution change allowed only for {self._resolutions} nm, not {request} nm.')
+            print(f'- Resolution change allowed only for {resolutions} nm, not {request} nm.')
             request = self._standardize_resolution(request)
             print(f'- The optimal resolution was chosen automatically: {request} nm.')
         if request > other.res:
@@ -196,7 +245,7 @@ class Spectrum:
     
     def integrate(self) -> float:
         """ Calculates the area over the spectrum using the mean rectangle method. Divide by 1e9 to use as a SI flux. """
-        curve = self.to_resolution(self._resolutions[0])
+        curve = self.to_resolution(resolutions[0])
         midpoints = (curve.br[:-1] + curve.br[1:]) / 2
         area = np.sum(midpoints * curve.res)
         return area
@@ -292,9 +341,9 @@ class Color:
         By default, initialization implies normalization and you get chromaticity.
         
         Args:
-        - name (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
-        - rgb (Iterable): array of three values that are red, green and blue
-        - albedo (bool): flag to disable normalization
+        - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
+        - `rgb` (Iterable): array of three values that are red, green and blue
+        - `albedo` (bool): flag to disable normalization
         """
         self.name = name
         rgb = np.array(rgb, dtype=float)

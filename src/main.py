@@ -166,6 +166,8 @@ def launch_window():
                         T1_spectrum |= {'albedo': False}
                 T1_spectrum = calc.standardize_photometry(T1_spectrum)
                 T1_spectrum |= calc.matching_check(T1_name, T1_spectrum)
+
+                #T1_photometry = core.Photometry(T1_name, T1_spectrum)
                 
                 # Spectrum interpolation
                 T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], calc.rgb_nm)
