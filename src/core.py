@@ -11,6 +11,13 @@ from copy import deepcopy
 nm_limit = 3000
 
 
+class Photometry:
+    def __init__(self, name: str, dictionary: dict):
+        """ Constructor of the class to work with photometric parameters, imported from the database """
+        self.name = name
+
+
+
 def divisible(array: np.ndarray, number: int):
     """ Boolean function, checks all array to be divisible by the number """
     return not np.any(array % number > 0)
@@ -19,7 +26,7 @@ def averaging(x1: np.ndarray, x0: np.ndarray, y0: np.ndarray):
     """ Returns spectrum brightness values with decreased resolution """
     semistep = (x1[1] - x1[0]) / 2 # most likely semistep = 2.5 nm
     y1 = [np.mean(y0[np.where(x0 < x1[0]+semistep)])]
-    for x in x1[1:-1]: # RuntimeWarning: Mean of empty slice.
+    for x in x1[1:-1]:
         flag = np.where((x-semistep < x0) & (x0 < x+semistep))
         if flag[0].size == 0: # the spectrum is no longer dense enough to be averaged down to 5 nm
             x1 = x1[np.where(x1 <= x)]

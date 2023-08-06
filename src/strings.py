@@ -149,9 +149,9 @@ gui_br = {
     'de': ['Helligkeitsmodus', 'Farbe mit Albedo', 'Farbton']
 }
 gui_interp = {
-    'en': ['Interpolator/extrapolator', 'qualitatively', 'fast'],
-    'ru': ['Интер/экстраполятор', 'качественно', 'быстро'],
-    'de': ['Interpolation/Extrapolation', 'qualitativ', 'schnell']
+    'en': ['Interpolator/extrapolator', 'old', 'new'],
+    'ru': ['Интер/экстраполятор', 'старый', 'новый'],
+    'de': ['Interpolation/Extrapolation', 'alt', 'neu']
 }
 gui_formatting = {
     'en': 'Output formatting',

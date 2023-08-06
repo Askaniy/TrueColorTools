@@ -56,50 +56,23 @@ def intensity2mag(e):
 def mag2intensity(m):
     return V * 10**(-0.4 * m)
 
-interp_modes = ['qualitatively', 'fast']
-def polator(x, y, scope, mode='qualitatively'):
+def polator(x, y, scope):
     mn = scope[0]
     mx = scope[-1]
     extrap = True if x[0] > mn or x[-1] < mx else False
     br = []
-    if mode == 'fast':
-        a = y[0] / x[0]
-        b = 0
-        x.append(x[-1] + 1000)
-        y.append(0)
-        nm = mn
-        flag = False
-        for i, ax in enumerate(x):
-            while nm <= ax:
-                if nm <= mx:
-                    br.append(a * nm + b)
-                    nm += 5
-                else:
-                    flag = True
-                    break
-            if flag:
-                break
+    if not extrap:
+        br = Akima1DInterpolator(x, y)(scope)
+    else: # if extrapolation is needed
+        x = [x[0] - 250] + x + [x[-1] + 1000]
+        y = [0] + y + [0]
+        interp = Akima1DInterpolator(x, y)
+        line = lambda wl: y[1] + (wl - x[1]) * (y[-2] - y[1]) / (x[-2] - x[1])
+        for nm in scope:
+            if x[1] < nm < x[-2]:
+                br.append(interp(nm))
             else:
-                ay = y[i]
-                bx = x[i+1]
-                by = y[i+1]
-                ay_by = ay - by
-                ax_bx = ax - bx
-                a = ay_by / ax_bx
-                b = by - bx * a
-    else: # qualitatively
-        if not extrap:
-            br = Akima1DInterpolator(x, y)(scope)
-        else: # if extrapolation is needed
-            x = [x[0] - 250] + x + [x[-1] + 1000]
-            y = [0] + y + [0]
-            interp = Akima1DInterpolator(x, y)
-            line = lambda wl: y[1] + (wl - x[1]) * (y[-2] - y[1]) / (x[-2] - x[1])
-            for nm in scope:
-                if x[1] < nm < x[-2]:
-                    br.append(interp(nm))
-                else:
-                    br.append((line(nm) + interp(nm)) / 2)
+                br.append((line(nm) + interp(nm)) / 2)
     return np.clip(br, 0, None)
 
 

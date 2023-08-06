@@ -63,7 +63,7 @@ def launch_window():
     triggers = ['-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-interpMode0-', '-interpMode1-', '-bitness-', '-rounding-']
     
     albedoFlag = True # default brightness mode
-    interpMode = calc.interp_modes[0] # default interpolation mode
+    oldInterpFlag = True # default interpolation mode
     bitness = int(window['-bitness-'].get())
     rounding = int(window['-rounding-'].get())
 
@@ -86,10 +86,7 @@ def launch_window():
         elif event in ('-brMode0-', '-brMode1-'):
             albedoFlag = values['-brMode0-']
         elif event in ('-interpMode0-', '-interpMode1-'):
-            for i in range(2):
-                if values[f'-interpMode{i}-']:
-                    interpMode = calc.interp_modes[i]
-                    break
+            oldInterpFlag = values['-interpMode0-']
         # Checks for empty input
         elif event == '-bitness-':
             try:
@@ -171,7 +168,7 @@ def launch_window():
                 T1_spectrum |= calc.matching_check(T1_name, T1_spectrum)
                 
                 # Spectrum interpolation
-                T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], calc.rgb_nm, mode=interpMode)
+                T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], calc.rgb_nm)
                 
                 # Color calculation
                 T1_spec = core.Spectrum(T1_name, calc.rgb_nm, T1_curve)
@@ -229,7 +226,7 @@ def launch_window():
                     T1_spectrum |= calc.matching_check(T1_name, T1_spectrum)
                     
                     # Spectrum interpolation
-                    T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], calc.rgb_nm, mode=interpMode)
+                    T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], calc.rgb_nm)
 
                     # Color calculation
                     T1_spec = core.Spectrum(T1_name, calc.rgb_nm, T1_curve)
@@ -428,7 +425,7 @@ def launch_window():
                             T2_name = f'({x}; {y})'
 
                             T2_temp_time = time.monotonic_ns()
-                            T2_curve = calc.polator(input_data['nm'], list(T2_spectrum), calc.rgb_nm, mode=interpMode, desun=input_data['desun'])
+                            T2_curve = calc.polator(input_data['nm'], list(T2_spectrum), calc.rgb_nm, desun=input_data['desun'])
                             T2_calc_polator_time += time.monotonic_ns() - T2_temp_time
 
                             T2_temp_time = time.monotonic_ns()
