@@ -154,9 +154,10 @@ def launch_window():
 
             if (event in triggers or event == 'T1_list') and values['T1_list'] != []:
                 T1_name = values['T1_list'][0]
+                T1_id = di.obj_dict(objectsDB, 'all', lang)[T1_name]
 
                 # Spectral data import and processing
-                T1_spectrum = objectsDB[di.obj_dict(objectsDB, 'all', lang)[T1_name]]
+                """ T1_spectrum = objectsDB[di.obj_dict(objectsDB, 'all', lang)[T1_name]]
                 T1_albedo = albedoFlag
                 if T1_albedo:
                     try:
@@ -165,30 +166,24 @@ def launch_window():
                         T1_albedo = False
                         T1_spectrum |= {'albedo': False}
                 T1_spectrum = calc.standardize_photometry(T1_spectrum)
-                T1_spectrum |= calc.matching_check(T1_name, T1_spectrum)
+                T1_spectrum |= calc.matching_check(T1_name, T1_spectrum) """
 
-                #T1_photometry = core.Photometry(T1_name, T1_spectrum)
+                T1_photometry = core.Photometry(T1_id, objectsDB[T1_id])
                 
                 # Spectrum interpolation
-                T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], calc.rgb_nm)
+                T1_curve = calc.polator(T1_photometry.nm, T1_photometry.br, calc.rgb_nm)
                 
                 # Color calculation
-                T1_spec = core.Spectrum(T1_name, calc.rgb_nm, T1_curve)
-                try:
-                    if T1_spectrum['sun']:
-                        T1_spec /= core.sun
-                except KeyError:
-                    pass
+                T1_spec = core.Spectrum(T1_id, calc.rgb_nm, T1_curve)
+                if T1_photometry.sun:
+                    T1_spec /= core.sun
                 if albedoFlag:
-                    try:
-                        if isinstance(T1_spectrum['albedo'], float):
-                            T1_spec = T1_spec.scaled_to_albedo(T1_spectrum['albedo'], core.bessell_v)
-                    except KeyError:
-                        pass
+                    if isinstance(T1_photometry.albedo, float):
+                        T1_spec = T1_spec.scaled_to_albedo(T1_photometry.albedo, core.bessell_v)
                 if values['-srgb-']:
-                    T1_color = core.Color.from_spectrum(T1_spec, T1_albedo)
+                    T1_color = core.Color.from_spectrum(T1_spec, albedoFlag)
                 else:
-                    T1_color = core.Color.from_spectrum_legacy(T1_spec, T1_albedo)
+                    T1_color = core.Color.from_spectrum_legacy(T1_spec, albedoFlag)
                 if values['-gamma-']:
                     T1_color = T1_color.gamma_corrected()
                 T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))

@@ -4,6 +4,7 @@ from astropy.io import fits
 from astropy.table import Table
 from typing import TypeVar, Iterable, Tuple
 from copy import deepcopy
+from src.calculations import filters as legacy_filters
 
 
 # This code was written in an effort to work not only with the optical range, but with any, depending on the data.
@@ -23,7 +24,7 @@ class Photometry:
         """
         Constructor of the class to work with photometric parameters, imported from the database.
 
-        Allowed input dictionary keys:
+        Supported input dictionary keys:
         - `nm` (Iterable): list of wavelengths in nanometers
         - `br` (Iterable): same-size list of linear physical property, representing "brightness"
         - `mag`: same-size list of magnitudes
@@ -31,29 +32,41 @@ class Photometry:
         - `filters`: filter system, linked with [`filters.py`](src/filters.py)
         - `indices`: dictionary of color indices, use only with `filters`
         - `bands`: list of filters' names, use only with `filters`
-        - *(optional)* `albedo` (bool or float):
+        - `albedo` (bool or float, optional):
             - `albedo=True` means that the input photometry is in the [0, 1] range
             - `albedo=False` means that albedo mode is impossible
             - `albedo=`*float* means that photometry after converting to spectrum can be scaled to be in the range
-        - *(optional)* `sun` (bool): `True` if spectrum must be divided by the solar to become reflective
-        - *(optional)* `tags`: list of strings, categorizes a spectrum
-
-        Class attributes:
-        - `nm` (np.array): list of wavelengths in nanometers
-        - `br` (np.array): same-size list of linear physical property, representing "brightness"
-        - `albedo` (bool or float): the same definition
-        - `sun` (bool): `True` if spectrum must be divided by the solar to become reflective
+        - `sun` (bool, optional): `True` if spectrum must be divided by the Solar to become reflective
+        - `vega` (bool, optional): `True` if spectrum must be divided by the Vegan to become reflective
+        - `tags` (list, optional): list of strings, categorizes a spectrum
         """
         self.name = name
+        self.nm = np.empty(1)
+        self.br = np.empty(1)
+        self.sun = False
+        self.vega = False
+        self.albedo = False
         try:
+            try:
+                self.nm = np.array(dictionary['nm'])
+            except KeyError:
+                pass
+            try:
+                self.br = np.array(dictionary['br'])
+            except KeyError:
+                pass
             try:
                 self.sun = dictionary['sun']
             except KeyError:
-                self.sun = False
+                pass
+            try:
+                self.sun = dictionary['vega']
+            except KeyError:
+                pass
             try:
                 self.albedo = dictionary['albedo']
             except KeyError:
-                self.albedo = False
+                pass
             try:
                 start, stop, step = dictionary['nm_range']
                 self.nm = np.arange(start, stop+1, step)
@@ -63,9 +76,48 @@ class Photometry:
                 print(f'# Note for the Photometry object "{self.name}"')
                 print(f'- Wavelength range issues during object initialization: [start, end, step]={dictionary["nm_range"]}')
                 raise InitError
+            try: # TODO: this code needs reworking!
+                filters = dictionary['filters']
+                if 'bands' in dictionary: # replacement of filters for their wavelengths
+                    nm = []
+                    for band in dictionary['bands']:
+                        for filter, info in legacy_filters[filters].items():
+                            if filter == band.lower():
+                                nm.append(info['nm'])
+                    self.nm = np.array(nm)
+                elif 'indices' in dictionary: # spectrum from color indices
+                    result = {}
+                    for index, value in dictionary['indices'].items():
+                        band1, band2 = index.lower().split('-')
+                        if result == {}:
+                            result |= {band1: 1.0}
+                        if band1 in result:
+                            k = legacy_filters[filters][band1]['zp'] - legacy_filters[filters][band2]['zp']
+                            result |= {band2: result[band1] * 10**(0.4*(value + k))}
+                    nm = []
+                    br = []
+                    for band, value in result.items():
+                        nm.append(legacy_filters[filters][band]['nm'])
+                        br.append(value / (legacy_filters[filters][band]['nm']/1e9)**2)
+                    self.nm = np.array(nm)
+                    self.br = np.array(br)
+            except KeyError:
+                pass
+            try: # spectrum from magnitudes
+                self.br = 10**(-0.4*np.array(dictionary['mag']))
+            except KeyError:
+                pass
+            try: # the last check
+                if self.nm.size != self.nm.size:
+                    print(f'# Note for the Photometry object "{self.name}"')
+                    print(f'- Wavelength range issues during object initialization: [start, end, step]={dictionary["nm_range"]}')
+                    raise InitError
+            except AttributeError:
+                print(f'# Note for the Photometry object "{self.name}"')
+                print(f'- The sizes of the wavelengths ({self.nm.size}) and brightness ({self.nm.size}) arrays do not match.')
+                raise InitError
         except InitError:
             print(f'# Initialization of the Photometry object "{self.name}" failed')
-            self.nm, self.br, self.albedo, self.sun = None, None, None, None
 
 
 
@@ -364,6 +416,11 @@ class Color:
                 print('- Not recommended. The processing mode has been switched to chromaticity.')
             if not albedo: # normalization
                 rgb /= rgb_max
+        if np.any(np.isnan(rgb)):
+            print(f'# Note for the Color object "{self.name}"')
+            print(f'- NaN values detected during object initialization: rgb={rgb}')
+            rgb = np.array([0., 0., 0.])
+            print(f'- It has been replaced with {rgb}.')
         self.rgb = rgb
 
     def from_spectrum_legacy(spectrum: Spectrum, albedo=False):
@@ -394,10 +451,4 @@ class Color:
 
     def to_html(self):
         """ Converts fractional rgb values to HTML-style hex string """
-        html = '#{:02x}{:02x}{:02x}'.format(*self.to_bit(8).round().astype(int))
-        if len(html) != 7:
-            print(f'# Note for the Color object "{self.name}"')
-            print(f'- HTML-style color code feels wrong: {html}')
-            html = '#000000'
-            print(f'- It has been replaced with {html}.')
-        return html
+        return '#{:02x}{:02x}{:02x}'.format(*self.to_bit(8).round().astype(int))

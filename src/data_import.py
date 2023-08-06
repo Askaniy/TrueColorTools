@@ -2,7 +2,6 @@ from pathlib import Path
 import json5
 import traceback
 import numpy as np
-import spectra.core_database as db
 import src.core as core
 import src.strings as tr
 
@@ -27,8 +26,8 @@ def list_filters():
 
 def import_DBs(folders: list):
     """ Returns databases of objects and references were found in the given folders """
-    objectsDB = db.objects
-    refsDB = db.refs
+    objectsDB = {}
+    refsDB = {}
     for folder in folders:
         additional_data = import_folder(folder)
         objectsDB |= additional_data[0]
@@ -40,7 +39,7 @@ def import_folder(folder: str):
     objects = {}
     refs = {}
     try:
-        for file in Path(folder).iterdir():
+        for file in sorted(Path(folder).iterdir()):
             if file.suffix == '.json5' and not file.is_dir():
                 with open(file) as f:
                     try:
