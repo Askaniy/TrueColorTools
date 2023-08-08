@@ -1,5 +1,6 @@
 numpy>=1.23.0
 scipy>=1.8.1
+astropy
 matplotlib>=3.6
 Pillow>=9.2.0
 pysimplegui>=4.60.3
