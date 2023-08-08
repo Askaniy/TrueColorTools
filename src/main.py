@@ -168,22 +168,22 @@ def launch_window():
                 T1_spectrum = calc.standardize_photometry(T1_spectrum)
                 T1_spectrum |= calc.matching_check(T1_name, T1_spectrum) """
 
-                T1_photometry = core.Photometry(T1_id, objectsDB[T1_id])
+                T1_photometry = core.Photometry(T1_name, objectsDB[T1_id])
                 
                 # Spectrum interpolation
                 T1_curve = calc.polator(T1_photometry.nm, T1_photometry.br, calc.rgb_nm)
                 
                 # Color calculation
-                T1_spec = core.Spectrum(T1_id, calc.rgb_nm, T1_curve)
+                T1_spec = core.Spectrum(T1_name, calc.rgb_nm, T1_curve)
                 if T1_photometry.sun:
                     T1_spec /= core.sun
                 if albedoFlag:
                     if isinstance(T1_photometry.albedo, float):
                         T1_spec = T1_spec.scaled_to_albedo(T1_photometry.albedo, core.bessell_v)
                 if values['-srgb-']:
-                    T1_color = core.Color.from_spectrum(T1_spec, albedoFlag)
+                    T1_color = core.Color.from_spectrum(T1_spec, albedoFlag and T1_photometry.albedo)
                 else:
-                    T1_color = core.Color.from_spectrum_legacy(T1_spec, albedoFlag)
+                    T1_color = core.Color.from_spectrum_legacy(T1_spec, albedoFlag and T1_photometry.albedo)
                 if values['-gamma-']:
                     T1_color = T1_color.gamma_corrected()
                 T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))

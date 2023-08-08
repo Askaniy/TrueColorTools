@@ -7,6 +7,7 @@ from copy import deepcopy
 from src.calculations import filters as legacy_filters
 
 
+
 # This code was written in an effort to work not only with the optical range, but with any, depending on the data.
 # But too long and heterogeneous FITS files demanded to set the upper limit of the range to mid-wavelength infrared (3 μm).
 nm_limit = 3000 # nm
@@ -14,6 +15,10 @@ nm_limit = 3000 # nm
 # For the sake of simplifying work with the spectrum, its discretization steps are strictly given below.
 # Grid points are divisible by the selected step.
 resolutions = [5, 10, 20, 40, 80, 160] # nm
+
+# To calculate color, it is necessary to achieve a definition of the spectrum in the visible range.
+# Boundaries have been defined based on the CMF (color matching functions) used, but can be any.
+visible_range = np.arange(390, 780, 5)
 
 
 
@@ -33,9 +38,9 @@ class Photometry:
         - `indices`: dictionary of color indices, use only with `filters`
         - `bands`: list of filters' names, use only with `filters`
         - `albedo` (bool or float, optional):
-            - `albedo=True` means that the input photometry is in the [0, 1] range
+            - `albedo=True` means that the input brightness is in the [0, 1] range
             - `albedo=False` means that albedo mode is impossible
-            - `albedo=`*float* means that photometry after converting to spectrum can be scaled to be in the range
+            - `albedo=`*float* means that brightness after converting to spectrum can be scaled to be in the range
         - `sun` (bool, optional): `True` if spectrum must be divided by the Solar to become reflective
         - `vega` (bool, optional): `True` if spectrum must be divided by the Vegan to become reflective
         - `tags` (list, optional): list of strings, categorizes a spectrum
@@ -60,7 +65,7 @@ class Photometry:
             except KeyError:
                 pass
             try:
-                self.sun = dictionary['vega']
+                self.vega = dictionary['vega']
             except KeyError:
                 pass
             try:
@@ -108,13 +113,13 @@ class Photometry:
             except KeyError:
                 pass
             try: # the last check
-                if self.nm.size != self.nm.size:
+                if self.nm.size != self.br.size:
                     print(f'# Note for the Photometry object "{self.name}"')
                     print(f'- Wavelength range issues during object initialization: [start, end, step]={dictionary["nm_range"]}')
                     raise InitError
             except AttributeError:
                 print(f'# Note for the Photometry object "{self.name}"')
-                print(f'- The sizes of the wavelengths ({self.nm.size}) and brightness ({self.nm.size}) arrays do not match.')
+                print(f'- The sizes of the wavelengths ({self.nm.size}) and brightness ({self.br.size}) arrays do not match.')
                 raise InitError
         except InitError:
             print(f'# Initialization of the Photometry object "{self.name}" failed')
@@ -201,6 +206,10 @@ class Spectrum:
             self.nm = nm
             self.br = br
             self.res = res
+        if np.any(np.isnan(self.br)):
+            self.br = np.nan_to_num(self.br)
+            print(f'# Note for the Spectrum object "{self.name}"')
+            print(f'- NaN values detected during object initialization, they been replaced with zeros.')
     
     def from_filter(name: str):
         """ Creates a Spectrum object based on the loaded data in Filter Profile Service standard """
@@ -323,7 +332,11 @@ class Spectrum:
         """ Returns a new Spectrum object with brightness scaled to give the albedo after convolution with the filter """
         other = deepcopy(self)
         current_albedo = other * transmission.normalized_by_area()
-        other.br *= albedo / current_albedo
+        if current_albedo == 0:
+            print(f'# Note for the Spectrum object "{other.name}"')
+            print(f'- The spectrum cannot be scaled to an albedo of {albedo} because its current albedo is zero.')
+        else:
+            other.br *= albedo / current_albedo
         return other
 
 
