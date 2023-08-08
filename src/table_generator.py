@@ -72,39 +72,21 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
 
     n = 0 # object counter
     for name, raw_name in objects.items():
-        spectrum = objectsDB[raw_name]
 
         # Spectral data import and processing
-        albedo = albedoFlag
-        if albedo:
-            try:
-                albedo = spectrum['albedo']
-            except KeyError:
-                albedo = False
-                spectrum |= {'albedo': False}
-        spectrum = calc.standardize_photometry(spectrum)
-        spectrum |= calc.matching_check(name, spectrum)
-        
-        # Spectrum interpolation
-        curve = calc.polator(spectrum['nm'], spectrum['br'], calc.rgb_nm, albedo)
-
-        # Color calculation
-        spec = core.Spectrum(name, calc.rgb_nm, curve)
-        try:
-            if spectrum['sun']:
-                spec /= core.sun
-        except KeyError:
-            pass
+        photometry = core.Photometry(name, objectsDB[raw_name])
+        spectrum = core.Spectrum.from_photometry_legacy(photometry, core.visible_range)
+        if photometry.sun:
+            spectrum /= core.sun
         if albedoFlag:
-            try:
-                if isinstance(spectrum['albedo'], float):
-                    spec = spec.scaled_to_albedo(spectrum['albedo'], core.bessell_v)
-            except KeyError:
-                pass
+            if isinstance(photometry.albedo, float):
+                spectrum = spectrum.scaled_to_albedo(photometry.albedo, core.bessell_v)
+        
+        # Color calculation
         if srgb:
-            color = core.Color.from_spectrum(spec, albedo)
+            color = core.Color.from_spectrum(spectrum, albedoFlag and photometry.albedo)
         else:
-            color = core.Color.from_spectrum_legacy(spec, albedo)
+            color = core.Color.from_spectrum_legacy(spectrum, albedoFlag and photometry.albedo)
         if gamma:
             color = color.gamma_corrected()
         rgb = color.to_bit(8)

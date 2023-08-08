@@ -210,6 +210,30 @@ class Spectrum:
             self.br = np.nan_to_num(self.br)
             print(f'# Note for the Spectrum object "{self.name}"')
             print(f'- NaN values detected during object initialization, they been replaced with zeros.')
+
+    def from_photometry_legacy(data: Photometry, scope: np.ndarray):
+        """ Creates a Spectrum object with inter- and extrapolated photometry data to fit the wavelength scope """
+        x = data.nm
+        y = data.br
+        br = []
+        if x[0] > scope[0] or x[-1] < scope[-1]: # extrapolation
+            x = [x[0] - 250] + x + [x[-1] + 1000]
+            y = [0] + y + [0]
+            interp = Akima1DInterpolator(x, y)
+            line = lambda wl: y[1] + (wl - x[1]) * (y[-2] - y[1]) / (x[-2] - x[1])
+            for nm in scope:
+                if x[1] < nm < x[-2]:
+                    br.append(interp(nm))
+                else:
+                    br.append((line(nm) + interp(nm)) / 2)
+            br = np.array(br)
+        else: # if extrapolation is not needed
+            br = Akima1DInterpolator(x, y)(scope)
+        if br.min() < 0:
+            br = np.clip(br, 0, None)
+            print(f'# Note for the Spectrum object "{data.name}"')
+            print(f'- Negative values detected during conversion from photometry, they been replaced with zeros.')
+        return Spectrum(data.name, scope, br)
     
     def from_filter(name: str):
         """ Creates a Spectrum object based on the loaded data in Filter Profile Service standard """

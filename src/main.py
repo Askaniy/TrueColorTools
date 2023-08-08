@@ -154,36 +154,22 @@ def launch_window():
 
             if (event in triggers or event == 'T1_list') and values['T1_list'] != []:
                 T1_name = values['T1_list'][0]
-                T1_id = di.obj_dict(objectsDB, 'all', lang)[T1_name]
+                T1_raw_name = di.obj_dict(objectsDB, 'all', lang)[T1_name]
 
                 # Spectral data import and processing
-                """ T1_spectrum = objectsDB[di.obj_dict(objectsDB, 'all', lang)[T1_name]]
-                T1_albedo = albedoFlag
-                if T1_albedo:
-                    try:
-                        T1_albedo = T1_spectrum['albedo']
-                    except KeyError:
-                        T1_albedo = False
-                        T1_spectrum |= {'albedo': False}
-                T1_spectrum = calc.standardize_photometry(T1_spectrum)
-                T1_spectrum |= calc.matching_check(T1_name, T1_spectrum) """
-
-                T1_photometry = core.Photometry(T1_name, objectsDB[T1_id])
-                
-                # Spectrum interpolation
-                T1_curve = calc.polator(T1_photometry.nm, T1_photometry.br, calc.rgb_nm)
-                
-                # Color calculation
-                T1_spec = core.Spectrum(T1_name, calc.rgb_nm, T1_curve)
+                T1_photometry = core.Photometry(T1_name, objectsDB[T1_raw_name])
+                T1_spectrum = core.Spectrum.from_photometry_legacy(T1_photometry, core.visible_range)
                 if T1_photometry.sun:
-                    T1_spec /= core.sun
+                    T1_spectrum /= core.sun
                 if albedoFlag:
                     if isinstance(T1_photometry.albedo, float):
-                        T1_spec = T1_spec.scaled_to_albedo(T1_photometry.albedo, core.bessell_v)
+                        T1_spectrum = T1_spectrum.scaled_to_albedo(T1_photometry.albedo, core.bessell_v)
+                
+                # Color calculation
                 if values['-srgb-']:
-                    T1_color = core.Color.from_spectrum(T1_spec, albedoFlag and T1_photometry.albedo)
+                    T1_color = core.Color.from_spectrum(T1_spectrum, albedoFlag and T1_photometry.albedo)
                 else:
-                    T1_color = core.Color.from_spectrum_legacy(T1_spec, albedoFlag and T1_photometry.albedo)
+                    T1_color = core.Color.from_spectrum_legacy(T1_spectrum, albedoFlag and T1_photometry.albedo)
                 if values['-gamma-']:
                     T1_color = T1_color.gamma_corrected()
                 T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
@@ -198,7 +184,7 @@ def launch_window():
                 window['T1_list'].update(tuple(di.obj_dict(objectsDB, values['T1_tags'], lang).keys()))
             
             elif event == 'T1_add' and values['T1_list'] != []:
-                T1_plot_data.append(T1_spec)
+                T1_plot_data.append(T1_spectrum)
             
             elif event == 'T1_plot':
                 pl.plot_spectra(T1_plot_data, values['-gamma-'], values['-srgb-'], albedoFlag, lang)
@@ -209,39 +195,22 @@ def launch_window():
             elif event == 'T1_export':
                 T1_export = '\n' + '\t'.join(tr.gui_col[lang]) + '\n' + '_' * 36
                 
-                # Spectrum processing
                 for name, raw_name in di.obj_dict(objectsDB, values['T1_tags'], lang).items():
-                    T1_spectrum = objectsDB[raw_name]
-                    T1_albedo = albedoFlag
-                    if T1_albedo:
-                        try:
-                            T1_albedo = T1_spectrum['albedo']
-                        except KeyError:
-                            T1_albedo = False
-                            T1_spectrum |= {'albedo': False}
-                    T1_spectrum = calc.standardize_photometry(T1_spectrum)
-                    T1_spectrum |= calc.matching_check(T1_name, T1_spectrum)
-                    
-                    # Spectrum interpolation
-                    T1_curve = calc.polator(T1_spectrum['nm'], T1_spectrum['br'], calc.rgb_nm)
 
-                    # Color calculation
-                    T1_spec = core.Spectrum(T1_name, calc.rgb_nm, T1_curve)
-                    try:
-                        if T1_spectrum['sun']:
-                            T1_spec /= core.sun
-                    except KeyError:
-                        pass
+                    # Spectral data import and processing
+                    T1_photometry = core.Photometry(name, objectsDB[raw_name])
+                    T1_spectrum = core.Spectrum.from_photometry_legacy(T1_photometry, core.visible_range)
+                    if T1_photometry.sun:
+                        T1_spectrum /= core.sun
                     if albedoFlag:
-                        try:
-                            if isinstance(T1_spectrum['albedo'], float):
-                                T1_spec = T1_spec.scaled_to_albedo(T1_spectrum['albedo'], core.bessell_v)
-                        except KeyError:
-                            pass
+                        if isinstance(T1_photometry.albedo, float):
+                            T1_spectrum = T1_spectrum.scaled_to_albedo(T1_photometry.albedo, core.bessell_v)
+                    
+                    # Color calculation
                     if values['-srgb-']:
-                        T1_color = core.Color.from_spectrum(T1_spec, T1_albedo)
+                        T1_color = core.Color.from_spectrum(T1_spectrum, albedoFlag and T1_photometry.albedo)
                     else:
-                        T1_color = core.Color.from_spectrum_legacy(T1_spec, T1_albedo)
+                        T1_color = core.Color.from_spectrum_legacy(T1_spectrum, albedoFlag and T1_photometry.albedo)
                     if values['-gamma-']:
                         T1_color = T1_color.gamma_corrected()
                     T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
@@ -422,7 +391,7 @@ def launch_window():
                             T2_name = f'({x}; {y})'
 
                             T2_temp_time = time.monotonic_ns()
-                            T2_curve = calc.polator(input_data['nm'], list(T2_spectrum), calc.rgb_nm, desun=input_data['desun'])
+                            T2_curve = calc.polator(input_data['nm'], list(T2_spectrum), core.visible_range, desun=input_data['desun'])
                             T2_calc_polator_time += time.monotonic_ns() - T2_temp_time
 
                             T2_temp_time = time.monotonic_ns()
@@ -437,7 +406,7 @@ def launch_window():
                             #    T2_temp_time = time.monotonic_ns()
                             #    if x % 32 == 0 and y % 32 == 0:
                             #        T2_fig.add_trace(go.Scatter(
-                            #            x = calc.rgb_nm,
+                            #            x = core.visible_range,
                             #            y = T2_curve,
                             #            name = T2_name,
                             #            line = dict(color='rgb'+str(T2_rgb), width=2)
@@ -492,7 +461,7 @@ def launch_window():
                     window['T4_scale'].update(text_color=text_colors[values['T4_surfacebr']])
                     window['T4_slider4'].update(disabled=not values['T4_surfacebr'])
                 
-                T4_curve = calc.blackbody_redshift(calc.rgb_nm, values['T4_slider1'], values['T4_slider2'], values['T4_slider3'])
+                T4_curve = calc.blackbody_redshift(core.visible_range, values['T4_slider1'], values['T4_slider2'], values['T4_slider3'])
                 if values['T4_surfacebr']:
                     try:
                         T4_curve /= calc.mag2intensity(values['T4_slider4'])
@@ -501,11 +470,11 @@ def launch_window():
                 T4_name = f'{values["T4_slider1"]} {values["T4_slider2"]} {values["T4_slider3"]}'
 
                 # Color calculation
-                T4_spec = core.Spectrum(T4_name, calc.rgb_nm, T4_curve)
+                T4_spectrum = core.Spectrum(T4_name, core.visible_range, T4_curve)
                 if values['-srgb-']:
-                    T4_color = core.Color.from_spectrum(T4_spec)
+                    T4_color = core.Color.from_spectrum(T4_spectrum)
                 else:
-                    T4_color = core.Color.from_spectrum_legacy(T4_spec)
+                    T4_color = core.Color.from_spectrum_legacy(T4_spectrum)
                 if values['-gamma-']:
                     T4_color = T4_color.gamma_corrected()
                 T4_rgb = tuple(T4_color.to_bit(bitness).round(rounding))
