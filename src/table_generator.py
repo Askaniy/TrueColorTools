@@ -1,7 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 import src.core as core
-import src.calculations as calc
 import src.data_import as di
 import src.strings as tr
 

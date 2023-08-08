@@ -6,7 +6,6 @@ from PIL import Image, ImageDraw
 import src.core as core
 import src.gui as gui
 import src.filters as filters
-import src.calculations as calc
 import src.data_import as di
 import src.plotter as pl
 import src.strings as tr
@@ -391,11 +390,11 @@ def launch_window():
                             T2_name = f'({x}; {y})'
 
                             T2_temp_time = time.monotonic_ns()
-                            T2_curve = calc.polator(input_data['nm'], list(T2_spectrum), core.visible_range, desun=input_data['desun'])
+                            T2_curve = core.polator(input_data['nm'], list(T2_spectrum), core.visible_range, desun=input_data['desun'])
                             T2_calc_polator_time += time.monotonic_ns() - T2_temp_time
 
                             T2_temp_time = time.monotonic_ns()
-                            T2_rgb = calc.to_rgb(T2_name, T2_curve, albedo=True, inp_bit=T2_input_bit, exp_bit=8, gamma=input_data['gamma'])
+                            T2_rgb = core.to_rgb(T2_name, T2_curve, albedo=True, inp_bit=T2_input_bit, exp_bit=8, gamma=input_data['gamma'])
                             T2_calc_rgb_time += time.monotonic_ns() - T2_temp_time
 
                             T2_temp_time = time.monotonic_ns()
@@ -461,10 +460,10 @@ def launch_window():
                     window['T4_scale'].update(text_color=text_colors[values['T4_surfacebr']])
                     window['T4_slider4'].update(disabled=not values['T4_surfacebr'])
                 
-                T4_curve = calc.blackbody_redshift(core.visible_range, values['T4_slider1'], values['T4_slider2'], values['T4_slider3'])
+                T4_curve = core.blackbody_redshift(core.visible_range, values['T4_slider1'], values['T4_slider2'], values['T4_slider3'])
                 if values['T4_surfacebr']:
                     try:
-                        T4_curve /= calc.mag2intensity(values['T4_slider4'])
+                        T4_curve /= core.mag2intensity(values['T4_slider4'])
                     except np.core._exceptions.UFuncTypeError:
                         pass
                 T4_name = f'{values["T4_slider1"]} {values["T4_slider2"]} {values["T4_slider3"]}'
