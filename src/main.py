@@ -10,7 +10,7 @@ import src.data_import as di
 import src.plotter as pl
 import src.strings as tr
 import src.table_generator as tg
-import src.experimental
+#import src.experimental
 
 
 def convert_to_bytes(img: Image.Image):
@@ -159,7 +159,7 @@ def launch_window():
                 T1_photometry = core.Photometry(T1_name, objectsDB[T1_raw_name])
                 T1_spectrum = core.Spectrum.from_photometry_legacy(T1_photometry, core.visible_range)
                 if T1_photometry.sun:
-                    T1_spectrum /= core.sun_in_V
+                    T1_spectrum /= core.sun_norm
                 if albedoFlag:
                     if isinstance(T1_photometry.albedo, float):
                         T1_spectrum = T1_spectrum.scaled_to_albedo(T1_photometry.albedo, core.bessell_v)
@@ -200,7 +200,7 @@ def launch_window():
                     T1_photometry = core.Photometry(name, objectsDB[raw_name])
                     T1_spectrum = core.Spectrum.from_photometry_legacy(T1_photometry, core.visible_range)
                     if T1_photometry.sun:
-                        T1_spectrum /= core.sun_in_V
+                        T1_spectrum /= core.sun_norm
                     if albedoFlag:
                         if isinstance(T1_photometry.albedo, float):
                             T1_spectrum = T1_spectrum.scaled_to_albedo(T1_photometry.albedo, core.bessell_v)
@@ -344,9 +344,9 @@ def launch_window():
                 T2_data = np.array(T2_load, 'int64')
                 T2_l, T2_h, T2_w = T2_data.shape
                 
-                if values['T2_autoalign']:
-                    T2_data = src.experimental.autoalign(T2_data, debug)
-                    T2_l, T2_h, T2_w = T2_data.shape
+                #if values['T2_autoalign']:
+                #    T2_data = src.experimental.autoalign(T2_data, debug)
+                #    T2_l, T2_h, T2_w = T2_data.shape
                 
                 T2_data = T2_data.astype('float32')
                 T2_max = T2_data.max()
@@ -446,7 +446,6 @@ def launch_window():
             
             if event == 'T3_process':
                 tg.generate_table(objectsDB, values['T3_tags'], albedoFlag, values['-srgb-'], values['-gamma-'], values['T3_folder'], values['T3_extension'], lang)
-
         
         # ------------ Events in the tab "Blackbody & Redshifts" ------------
         
@@ -460,20 +459,16 @@ def launch_window():
                     window['T4_scale'].update(text_color=text_colors[values['T4_surfacebr']])
                     window['T4_slider4'].update(disabled=not values['T4_surfacebr'])
                 
-                T4_curve = core.blackbody_redshift(core.visible_range, values['T4_slider1'], values['T4_slider2'], values['T4_slider3'])
+                # Spectral data processing
+                T4_spectrum = core.Spectrum.from_blackbody_redshift(core.visible_range, values['T4_slider1'], values['T4_slider2'], values['T4_slider3'])
                 if values['T4_surfacebr']:
-                    try:
-                        T4_curve /= core.mag2intensity(values['T4_slider4'])
-                    except np.core._exceptions.UFuncTypeError:
-                        pass
-                T4_name = f'{values["T4_slider1"]} {values["T4_slider2"]} {values["T4_slider3"]}'
+                    T4_spectrum.br /= values['T4_slider4'] * core.sun_in_V
 
                 # Color calculation
-                T4_spectrum = core.Spectrum(T4_name, core.visible_range, T4_curve)
                 if values['-srgb-']:
-                    T4_color = core.Color.from_spectrum(T4_spectrum)
+                    T4_color = core.Color.from_spectrum(T4_spectrum, albedo=values['T4_surfacebr'])
                 else:
-                    T4_color = core.Color.from_spectrum_legacy(T4_spectrum)
+                    T4_color = core.Color.from_spectrum_legacy(T4_spectrum, albedo=values['T4_surfacebr'])
                 if values['-gamma-']:
                     T4_color = T4_color.gamma_corrected()
                 T4_rgb = tuple(T4_color.to_bit(bitness).round(rounding))

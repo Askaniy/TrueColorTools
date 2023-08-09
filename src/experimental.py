@@ -8,6 +8,17 @@ def lambert(phase: float):
     return (np.sin(phi) + np.pi * np.cos(phi) - phi * np.cos(phi)) / np.pi # * 2/3 * albedo
 
 
+# Magnitudes processing functions
+
+V = 2.518021002e-8 # 1 Vega in W/m^2, https://arxiv.org/abs/1510.06262
+
+def mag2intensity(m: int|float|np.ndarray):
+    return V * 10**(-0.4 * m)
+
+#def intensity2mag(e):
+#    return -2.5 * np.log10(e / V)
+
+
 # Align mustispectral image bands
 
 def autoalign(data: np.ndarray, debug: bool):

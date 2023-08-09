@@ -21,9 +21,11 @@ resolutions = [5, 10, 20, 40, 80, 160] # nm
 visible_range = np.arange(390, 780, 5) # nm
 
 
+
 # Units of spectral flux density by wavelength and frequency in FITS
-FNU = u.def_unit('fnu',  (u.erg / u.s) / (u.cm**2 * u.Hz))
-FLAM = u.def_unit('flam',  (u.erg / u.s) / (u.cm**2 * u.AA))
+FLAM = u.def_unit('flam', (u.erg / u.s) / (u.cm**2 * u.AA))
+#FNU = u.def_unit('fnu', (u.erg / u.s) / (u.cm**2 * u.Hz))
+
 
 H = 6.626e-34 # Planck constant
 C = 299792458 # Speed of light
@@ -31,45 +33,9 @@ K = 1.381e-23 # Boltzmann constant
 const1 = 2 * np.pi * H * C * C
 const2 = H * C / K
 
-def irradiance(nm, T):
+def irradiance(nm: int|float|np.ndarray, T: int|float):
     m = nm / 1e9
-    return const1 / (m**5 * (np.exp(const2 / m / T) - 1) )
-
-def blackbody_redshift(scope, temperature, velocity, vII):
-    if temperature == 0:
-        physics = False
-    else:
-        physics = True
-        if velocity == 0:
-            doppler = 1
-        else:
-            if abs(velocity) != 1:
-                doppler = np.sqrt((1-velocity) / (1+velocity))
-            else:
-                physics = False
-        if vII == 0:
-            grav = 1
-        else:
-            if vII != 1:
-                grav = np.exp(-vII*vII/2)
-            else:
-                physics = False
-    br = []
-    for nm in scope:
-        if physics:
-            br.append(irradiance(nm*doppler*grav, temperature) / 1e9) # per m -> per nm
-        else:
-            br.append(0)
-    return np.array(br)
-
-
-V = 2.518021002e-8 # 1 Vega in W/m^2, https://arxiv.org/abs/1510.06262
-
-def mag2intensity(m):
-    return V * 10**(-0.4 * m)
-
-#def intensity2mag(e):
-#    return -2.5 * np.log10(e / V)
+    return const1 / (m**5 * (np.exp(const2 / (m * T)) - 1))
 
 
 
@@ -301,6 +267,32 @@ class Spectrum:
             x = tbl['WAVELENGTH'] * u.AA
             y = tbl['FLUX'] * FLAM
             return Spectrum(name, x.to(u.nm), y.to(u.W / u.m**2 / u.nm))
+    
+    def from_blackbody_redshift(scope: np.ndarray, temperature: int|float, velocity=0., vII=0.):
+        """ Creates a Spectrum object based on Planck's law and redshift formulas """
+        if temperature == 0:
+            physics = False
+        else:
+            physics = True
+            if velocity == 0:
+                doppler = 1
+            else:
+                if abs(velocity) != 1:
+                    doppler = np.sqrt((1-velocity) / (1+velocity))
+                else:
+                    physics = False
+            if vII == 0:
+                grav = 1
+            else:
+                if vII != 1:
+                    grav = np.exp(-vII*vII/2)
+                else:
+                    physics = False
+        if physics:
+            br = irradiance(scope*doppler*grav, temperature) * 1e-9 # per m -> per nm
+        else:
+            br = np.zeros(scope.size)
+        return Spectrum('Blackbody spectrum', scope, br)
 
     def _standardize_resolution(self, input: int):
         """ Redirects the step size to one of the valid values """
@@ -423,10 +415,11 @@ class Spectrum:
 bessell_v = Spectrum.from_filter('Generic_Bessell.V')
 
 sun_SI = Spectrum.from_FITS('Sun', 'sun_reference_stis_002.fits') # W / (m² nm)
-sun_in_V = sun_SI.scaled_to_albedo(1, bessell_v)
+sun_in_V = sun_SI * bessell_v.normalized_by_area()
+sun_norm = sun_SI.scaled_to_albedo(1, bessell_v)
 
 vega_SI = Spectrum.from_FITS('Vega', 'alpha_lyr_stis_011.fits') # W / (m² nm)
-vega_in_V = vega_SI.scaled_to_albedo(1, bessell_v)
+vega_norm = vega_SI.scaled_to_albedo(1, bessell_v)
 
 
 
@@ -506,10 +499,10 @@ class Color:
             print(f'- All values are zero: rgb={rgb}')
         else:
             if rgb_max > 1 and albedo:
-                albedo = False
                 print(f'# Note for the Color object "{self.name}"')
-                print(f'- Values greater than 1 detected in the albedo mode: rgb={rgb}')
-                print('- Not recommended. The processing mode has been switched to chromaticity.')
+                print(f'- Overexposure (because it is albedo mode): rgb={rgb}')
+                #albedo = False
+                #print('- Not recommended. The processing mode has been switched to chromaticity.')
             if not albedo: # normalization
                 rgb /= rgb_max
         if np.any(np.isnan(rgb)):
@@ -547,7 +540,13 @@ class Color:
 
     def to_html(self):
         """ Converts fractional rgb values to HTML-style hex string """
-        return '#{:02x}{:02x}{:02x}'.format(*self.to_bit(8).round().astype(int))
+        html = '#{:02x}{:02x}{:02x}'.format(*self.to_bit(8).round().astype(int))
+        if len(html) != 7:
+            print(f'# Note for the Color object "{self.name}"')
+            print(f'- HTML-style color code feels wrong: {html}')
+            html = '#FFFFFF'
+            print(f'- It has been replaced with {html}.')
+        return html
 
 
 

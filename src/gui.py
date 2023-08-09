@@ -192,7 +192,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, f
         [sg.Checkbox(tr.gui_surfacebr[lang], enable_events=True, default=False, key='T4_surfacebr')],
         [
             sg.Text(tr.gui_irr[lang], size=18, text_color=text_colors[0], justification='right', key='T4_scale'),
-            sg.Slider(range=(-50, 50), default_value=0, resolution=0.01, orientation='h', size=slider_size, enable_events=True, disabled=True, key='T4_slider4', expand_x=True)
+            sg.Slider(range=(0.1, 1000), default_value=0.1, resolution=0.01, orientation='h', size=slider_size, enable_events=True, disabled=True, key='T4_slider4', expand_x=True)
         ]
     ]
     T4_col2 = [
