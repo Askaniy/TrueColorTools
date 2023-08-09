@@ -2,6 +2,7 @@ import numpy as np
 from scipy.interpolate import Akima1DInterpolator
 from astropy.io import fits
 from astropy.table import Table
+import astropy.units as u
 from typing import TypeVar, Iterable, Tuple
 from copy import deepcopy
 
@@ -20,6 +21,9 @@ resolutions = [5, 10, 20, 40, 80, 160] # nm
 visible_range = np.arange(390, 780, 5) # nm
 
 
+# Units of spectral flux density by wavelength and frequency in FITS
+FNU = u.def_unit('fnu',  (u.erg / u.s) / (u.cm**2 * u.Hz))
+FLAM = u.def_unit('flam',  (u.erg / u.s) / (u.cm**2 * u.AA))
 
 H = 6.626e-34 # Planck constant
 C = 299792458 # Speed of light
@@ -209,7 +213,7 @@ def custom_interp(y0: np.ndarray, k=8):
     return np.clip(y1, 0, None)
 
 class Spectrum:
-    def __init__(self, name: str, nm: Iterable, br: np.ndarray, res=0):
+    def __init__(self, name: str, nm: Iterable, br: Iterable, res=0):
         """
         Constructor of the class to work with single, continuous spectrum, with strictly defined resolutions.
         When creating an object, the spectrum grid is automatically checked and adjusted to uniform, if necessary.
@@ -217,12 +221,13 @@ class Spectrum:
         
         Args:
         - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
-        - `nm` (np.array): list of wavelengths in nanometers
-        - `br` (np.array): same-size list of linear physical property, representing "brightness"
+        - `nm` (Iterable): list of wavelengths in nanometers
+        - `br` (Iterable): same-size list of linear physical property, representing "brightness"
         - `res` (int, optional): assigns a number, cancel the check
         """
         self.name = name
         nm = np.array(nm, dtype=int)
+        br = np.array(br)
         if nm[-1] > nm_limit:
             flag = np.where(nm < nm_limit + resolutions[0]) # to be averaged to nm_limit
             nm = nm[flag]
@@ -291,8 +296,11 @@ class Spectrum:
     def from_FITS(name: str, file: str):
         """ Creates a Spectrum object based on the loaded data in CALSPEC standard """
         with fits.open(f'spectra/{file}') as hdul:
+            #print(hdul[1].columns)
             tbl = Table(hdul[1].data)
-            return Spectrum(name, tbl['WAVELENGTH']/10, tbl['FLUX'])
+            x = tbl['WAVELENGTH'] * u.AA
+            y = tbl['FLUX'] * FLAM
+            return Spectrum(name, x.to(u.nm), y.to(u.W / u.m**2 / u.nm))
 
     def _standardize_resolution(self, input: int):
         """ Redirects the step size to one of the valid values """
@@ -376,7 +384,7 @@ class Spectrum:
         return divided
     
     def integrate(self) -> float:
-        """ Calculates the area over the spectrum using the mean rectangle method. Divide by 1e9 to use as a SI flux. """
+        """ Calculates the area over the spectrum using the mean rectangle method, per nm """
         curve = self.to_resolution(resolutions[0])
         midpoints = (curve.br[:-1] + curve.br[1:]) / 2
         area = np.sum(midpoints * curve.res)
@@ -413,8 +421,12 @@ class Spectrum:
 
 
 bessell_v = Spectrum.from_filter('Generic_Bessell.V')
-sun = Spectrum.from_FITS('Sun|CALSPEC', 'sun_reference_stis_002.fits').scaled_to_albedo(1, bessell_v)
-vega = Spectrum.from_FITS('Vega|CALSPEC', 'alpha_lyr_stis_011.fits').scaled_to_albedo(1, bessell_v)
+
+sun_SI = Spectrum.from_FITS('Sun', 'sun_reference_stis_002.fits') # W / (m² nm)
+sun_in_V = sun_SI.scaled_to_albedo(1, bessell_v)
+
+vega_SI = Spectrum.from_FITS('Vega', 'alpha_lyr_stis_011.fits') # W / (m² nm)
+vega_in_V = vega_SI.scaled_to_albedo(1, bessell_v)
 
 
 

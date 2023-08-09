@@ -159,7 +159,7 @@ def launch_window():
                 T1_photometry = core.Photometry(T1_name, objectsDB[T1_raw_name])
                 T1_spectrum = core.Spectrum.from_photometry_legacy(T1_photometry, core.visible_range)
                 if T1_photometry.sun:
-                    T1_spectrum /= core.sun
+                    T1_spectrum /= core.sun_in_V
                 if albedoFlag:
                     if isinstance(T1_photometry.albedo, float):
                         T1_spectrum = T1_spectrum.scaled_to_albedo(T1_photometry.albedo, core.bessell_v)
@@ -200,7 +200,7 @@ def launch_window():
                     T1_photometry = core.Photometry(name, objectsDB[raw_name])
                     T1_spectrum = core.Spectrum.from_photometry_legacy(T1_photometry, core.visible_range)
                     if T1_photometry.sun:
-                        T1_spectrum /= core.sun
+                        T1_spectrum /= core.sun_in_V
                     if albedoFlag:
                         if isinstance(T1_photometry.albedo, float):
                             T1_spectrum = T1_spectrum.scaled_to_albedo(T1_photometry.albedo, core.bessell_v)

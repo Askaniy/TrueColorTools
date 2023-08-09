@@ -76,7 +76,7 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
         photometry = core.Photometry(name, objectsDB[raw_name])
         spectrum = core.Spectrum.from_photometry_legacy(photometry, core.visible_range)
         if photometry.sun:
-            spectrum /= core.sun
+            spectrum /= core.sun_in_V
         if albedoFlag:
             if isinstance(photometry.albedo, float):
                 spectrum = spectrum.scaled_to_albedo(photometry.albedo, core.bessell_v)
