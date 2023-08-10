@@ -61,12 +61,12 @@ def launch_window():
 
     triggers = ['-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-interpMode0-', '-interpMode1-', '-bitness-', '-rounding-']
     
-    albedoFlag = True # default brightness mode
+    albedoFlag = False # default brightness mode
     oldInterpFlag = True # default interpolation mode
     bitness = int(window['-bitness-'].get())
     rounding = int(window['-rounding-'].get())
 
-    T1_plot_data = []
+    plot_data = [] # of the tabs 1 and 4
     T5_plot_data = [core.r, core.g, core.b]
     T5_fig = pl.plot_filters(T5_plot_data)
     figure_canvas_agg = pl.draw_figure(window['T5_canvas'].TKCanvas, T5_fig)
@@ -183,13 +183,13 @@ def launch_window():
                 window['T1_list'].update(tuple(di.obj_dict(objectsDB, values['T1_tags'], lang).keys()))
             
             elif event == 'T1_add' and values['T1_list'] != []:
-                T1_plot_data.append(T1_spectrum)
+                plot_data.append(T1_spectrum)
             
             elif event == 'T1_plot':
-                pl.plot_spectra(T1_plot_data, values['-gamma-'], values['-srgb-'], albedoFlag, lang)
+                pl.plot_spectra(plot_data, values['-gamma-'], values['-srgb-'], albedoFlag, lang)
             
             elif event == 'T1_clear':
-                T1_plot_data = []
+                plot_data = []
             
             elif event == 'T1_export':
                 T1_export = '\n' + '\t'.join(tr.gui_col[lang]) + '\n' + '_' * 36
@@ -453,22 +453,31 @@ def launch_window():
             
             if event == 'T4_maxtemp_num':
                 window['T4_slider1'].update(range=(0, int(values['T4_maxtemp_num'])))
+
+            elif event == 'T4_add':
+                plot_data.append(T4_spectrum)
+            
+            elif event == 'T4_plot':
+                pl.plot_spectra(plot_data, values['-gamma-'], values['-srgb-'], albedoFlag, lang)
+            
+            elif event == 'T4_clear':
+                plot_data = []
             
             else:
-                if event == 'T4_surfacebr':
-                    window['T4_scale'].update(text_color=text_colors[values['T4_surfacebr']])
-                    window['T4_slider4'].update(disabled=not values['T4_surfacebr'])
+                if event == 'T4_overexposure':
+                    window['T4_mag'].update(text_color=text_colors[values['T4_overexposure']])
+                    window['T4_slider4'].update(disabled=not values['T4_overexposure'])
                 
                 # Spectral data processing
                 T4_spectrum = core.Spectrum.from_blackbody_redshift(core.visible_range, values['T4_slider1'], values['T4_slider2'], values['T4_slider3'])
-                if values['T4_surfacebr']:
+                if values['T4_overexposure']:
                     T4_spectrum.br /= values['T4_slider4'] * core.sun_in_V
 
                 # Color calculation
                 if values['-srgb-']:
-                    T4_color = core.Color.from_spectrum(T4_spectrum, albedo=values['T4_surfacebr'])
+                    T4_color = core.Color.from_spectrum(T4_spectrum, albedo=values['T4_overexposure'])
                 else:
-                    T4_color = core.Color.from_spectrum_legacy(T4_spectrum, albedo=values['T4_surfacebr'])
+                    T4_color = core.Color.from_spectrum_legacy(T4_spectrum, albedo=values['T4_overexposure'])
                 if values['-gamma-']:
                     T4_color = T4_color.gamma_corrected()
                 T4_rgb = tuple(T4_color.to_bit(bitness).round(rounding))

@@ -27,15 +27,20 @@ FLAM = u.def_unit('flam', (u.erg / u.s) / (u.cm**2 * u.AA))
 #FNU = u.def_unit('fnu', (u.erg / u.s) / (u.cm**2 * u.Hz))
 
 
-H = 6.626e-34 # Planck constant
-C = 299792458 # Speed of light
-K = 1.381e-23 # Boltzmann constant
-const1 = 2 * np.pi * H * C * C
-const2 = H * C / K
+h = 6.626e-34 # Planck constant
+c = 299792458 # Speed of light
+k = 1.381e-23 # Boltzmann constant
+const1 = 2 * np.pi * h * c * c
+const2 = h * c / k
+r = 6.957e8 # Solar radius, meters
+au = 149597870700 # astronomical unit, meters
+w = (1 - np.sqrt(1 - (r / au)**2)) / 2 # dilution to compare with Solar light on Earth
 
-def irradiance(nm: int|float|np.ndarray, T: int|float):
+# Now it does not work as intended: the spectrum should be comparable to the sun_SI
+def irradiance(nm: int|float|np.ndarray, T: int|float) -> float|np.ndarray:
     m = nm / 1e9
-    return const1 / (m**5 * (np.exp(const2 / (m * T)) - 1))
+    return w * const1 / (m**5 * (np.exp(const2 / (m * T)) - 1)) / 1e9 # per m -> per nm
+
 
 
 
@@ -289,10 +294,10 @@ class Spectrum:
                 else:
                     physics = False
         if physics:
-            br = irradiance(scope*doppler*grav, temperature) * 1e-9 # per m -> per nm
+            br = irradiance(scope*doppler*grav, temperature)
         else:
             br = np.zeros(scope.size)
-        return Spectrum('Blackbody spectrum', scope, br)
+        return Spectrum(f'BB with T={int(temperature)}', scope, br)
 
     def _standardize_resolution(self, input: int):
         """ Redirects the step size to one of the valid values """

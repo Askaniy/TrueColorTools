@@ -361,15 +361,20 @@ gui_vII = {
     'ru': 'II косм. ск. [c]',
     'de': 'Fluchtgeschw. [c]'
 }
-gui_irr = {
-    'en': 'Irradiance [mag/nm]',
-    'ru': 'Излуч. [зв. вел/нм]',
-    'de': 'Bestrahlung [mag/nm]'
+gui_overexposure = {
+    'en': 'Adjust overexposure limit',
+    'ru': 'Регулировать предел переэкспонирования',
+    'de': ''
 }
-gui_surfacebr = {
-    'en': 'Scale irradiance at λ=550 nm (lock exposure)',
-    'ru': 'Регулировка яркости на λ=550 nm (задать экспозицию)',
-    'de': 'Bestrahlungsstärke bei 550 nm skalieren (konstante Belichtung)'
+gui_mag = {
+    'en': 'App. magnitude*',
+    'ru': 'Вид. зв. величина*',
+    'de': '*'
+}
+gui_explanation = {
+    'en': '* if the Solar disk in the sky is replaced by this blackbody sphere',
+    'ru': '* если диск Солнца на небе заменить данной чёрнотельной сферой',
+    'de': '*'
 }
 
 # Tab 5 - WIP

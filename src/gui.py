@@ -33,8 +33,8 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, f
         [sg.Checkbox('sRGB', enable_events=True, key='-srgb-')],
         [sg.T('')],
         [sg.Push(), sg.Text(tr.gui_br[lang][0], key='-brModeText-'), sg.Push()],
-        [sg.Radio(tr.gui_br[lang][1], 'brRadio', enable_events=True, default=True, key='-brMode0-')],
-        [sg.Radio(tr.gui_br[lang][2], 'brRadio', enable_events=True, key='-brMode1-')],
+        [sg.Radio(tr.gui_br[lang][1], 'brRadio', enable_events=True, key='-brMode0-')],
+        [sg.Radio(tr.gui_br[lang][2], 'brRadio', enable_events=True, default=True, key='-brMode1-')],
         #[sg.HorizontalSeparator()],
         #[sg.Text(tr.gui_phase[lang], key='-phaseText-')],
         #[sg.Slider(range=(-180, 180), default_value=0, resolution=1, orientation='h', size=(18, 16), enable_events=True, key='-phase-')],
@@ -189,11 +189,12 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, f
             sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation='h', size=slider_size, enable_events=True, key='T4_slider3', expand_x=True)
         ],
         [sg.T('')],
-        [sg.Checkbox(tr.gui_surfacebr[lang], enable_events=True, default=False, key='T4_surfacebr')],
+        [sg.Checkbox(tr.gui_overexposure[lang], enable_events=True, default=False, key='T4_overexposure')],
         [
-            sg.Text(tr.gui_irr[lang], size=18, text_color=text_colors[0], justification='right', key='T4_scale'),
-            sg.Slider(range=(0.1, 1000), default_value=0.1, resolution=0.01, orientation='h', size=slider_size, enable_events=True, disabled=True, key='T4_slider4', expand_x=True)
-        ]
+            sg.Text(tr.gui_mag[lang], size=18, text_color=text_colors[0], justification='right', key='T4_mag'),
+            sg.Slider(range=(-100, 0), default_value=-26.7, resolution=0.1, orientation='h', size=slider_size, enable_events=True, disabled=True, key='T4_slider4', expand_x=True)
+        ],
+        [sg.Text(tr.gui_explanation[lang], key='T4_explanation')]
     ]
     T4_col2 = [
         [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T4_title2'), sg.Push()],
@@ -201,6 +202,10 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, f
         [sg.T('')],
         [sg.Text(tr.gui_rgb[lang], key='T4_colorRGB'), sg.Input(size=1, key='T4_rgb', expand_x=True)],
         [sg.Text(tr.gui_hex[lang], key='T4_colorHEX'), sg.Input(size=1, key='T4_hex', expand_x=True)],
+        [sg.T('')],
+        [sg.Push(), sg.Button(button_text=tr.gui_add[lang], size=button_size, key='T4_add'), sg.Push()],
+        [sg.Push(), sg.Button(button_text=tr.gui_plot[lang], size=button_size, key='T4_plot'), sg.Push()],
+        [sg.Push(), sg.Button(button_text=tr.gui_clear[lang], size=button_size, key='T4_clear'), sg.Push()],
     ]
 
     def frame_new(num: int, filtersDB: list, lang: str):
@@ -337,10 +342,14 @@ def translate(window: sg.Window, T2_num: int, T5_num: int, lang: str):
     window['T4_temp'].update(tr.gui_temp[lang])
     window['T4_velocity'].update(tr.gui_velocity[lang])
     window['T4_vII'].update(tr.gui_vII[lang])
-    window['T4_scale'].update(tr.gui_irr[lang])
-    window['T4_surfacebr'].update(text=tr.gui_surfacebr[lang])
+    window['T4_mag'].update(tr.gui_mag[lang])
+    window['T4_overexposure'].update(text=tr.gui_overexposure[lang])
+    window['T4_explanation'].update(tr.gui_explanation[lang])
     window['T4_colorRGB'].update(tr.gui_rgb[lang])
     window['T4_colorHEX'].update(tr.gui_hex[lang])
+    window['T4_add'].update(tr.gui_add[lang])
+    window['T4_plot'].update(tr.gui_plot[lang])
+    window['T4_clear'].update(tr.gui_clear[lang])
     window['T5_title1'].update(tr.gui_input[lang])
     window['T5_title2'].update(tr.gui_results[lang])
     window['T5_step1'].update(tr.gui_step1[lang])
