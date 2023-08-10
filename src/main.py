@@ -471,7 +471,7 @@ def launch_window():
                 # Spectral data processing
                 T4_spectrum = core.Spectrum.from_blackbody_redshift(core.visible_range, values['T4_slider1'], values['T4_slider2'], values['T4_slider3'])
                 if values['T4_overexposure']:
-                    T4_spectrum.br /= values['T4_slider4'] * core.sun_in_V
+                    T4_spectrum.br /= core.mag2irradiance(values['T4_slider4'], core.vega_in_V) * core.sun_in_V
 
                 # Color calculation
                 if values['-srgb-']:

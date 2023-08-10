@@ -192,7 +192,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, f
         [sg.Checkbox(tr.gui_overexposure[lang], enable_events=True, default=False, key='T4_overexposure')],
         [
             sg.Text(tr.gui_mag[lang], size=18, text_color=text_colors[0], justification='right', key='T4_mag'),
-            sg.Slider(range=(-100, 0), default_value=-26.7, resolution=0.1, orientation='h', size=slider_size, enable_events=True, disabled=True, key='T4_slider4', expand_x=True)
+            sg.Slider(range=(-50, 0), default_value=-26.7, resolution=0.1, orientation='h', size=slider_size, enable_events=True, disabled=True, key='T4_slider4', expand_x=True)
         ],
         [sg.Text(tr.gui_explanation[lang], key='T4_explanation')]
     ]
@@ -205,7 +205,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, f
         [sg.T('')],
         [sg.Push(), sg.Button(button_text=tr.gui_add[lang], size=button_size, key='T4_add'), sg.Push()],
         [sg.Push(), sg.Button(button_text=tr.gui_plot[lang], size=button_size, key='T4_plot'), sg.Push()],
-        [sg.Push(), sg.Button(button_text=tr.gui_clear[lang], size=button_size, key='T4_clear'), sg.Push()],
+        [sg.Push(), sg.Button(button_text=tr.gui_clear[lang], size=button_size, key='T4_clear'), sg.Push()]
     ]
 
     def frame_new(num: int, filtersDB: list, lang: str):

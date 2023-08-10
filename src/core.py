@@ -35,12 +35,15 @@ const2 = h * c / k
 r = 6.957e8 # Solar radius, meters
 au = 149597870700 # astronomical unit, meters
 w = (1 - np.sqrt(1 - (r / au)**2)) / 2 # dilution to compare with Solar light on Earth
+temp_coef_to_make_it_work = 1.8 / 0.448 # 1.8 is expected of irradiance(500, 5770), 0.448 is actual. TODO
 
 # Now it does not work as intended: the spectrum should be comparable to the sun_SI
 def irradiance(nm: int|float|np.ndarray, T: int|float) -> float|np.ndarray:
     m = nm / 1e9
-    return w * const1 / (m**5 * (np.exp(const2 / (m * T)) - 1)) / 1e9 # per m -> per nm
+    return temp_coef_to_make_it_work * w * const1 / (m**5 * (np.exp(const2 / (m * T)) - 1)) / 1e9 # per m -> per nm
 
+def mag2irradiance(m: int|float|np.ndarray, vega_zero_point: float):
+    return vega_zero_point * 10**(-0.4 * m)
 
 
 
@@ -418,12 +421,14 @@ class Spectrum:
 
 
 bessell_v = Spectrum.from_filter('Generic_Bessell.V')
+bessell_v_norm = bessell_v.normalized_by_area() # used as an averager for reference spectra
 
 sun_SI = Spectrum.from_FITS('Sun', 'sun_reference_stis_002.fits') # W / (m² nm)
-sun_in_V = sun_SI * bessell_v.normalized_by_area()
+sun_in_V = sun_SI * bessell_v_norm
 sun_norm = sun_SI.scaled_to_albedo(1, bessell_v)
 
 vega_SI = Spectrum.from_FITS('Vega', 'alpha_lyr_stis_011.fits') # W / (m² nm)
+vega_in_V = vega_SI * bessell_v_norm
 vega_norm = vega_SI.scaled_to_albedo(1, bessell_v)
 
 
@@ -503,9 +508,9 @@ class Color:
             print(f'# Note for the Color object "{self.name}"')
             print(f'- All values are zero: rgb={rgb}')
         else:
-            if rgb_max > 1 and albedo:
-                print(f'# Note for the Color object "{self.name}"')
-                print(f'- Overexposure (because it is albedo mode): rgb={rgb}')
+            #if rgb_max > 1 and albedo:
+                #print(f'# Note for the Color object "{self.name}"')
+                #print(f'- Overexposure (because it is albedo mode): rgb={rgb}')
                 #albedo = False
                 #print('- Not recommended. The processing mode has been switched to chromaticity.')
             if not albedo: # normalization
@@ -547,10 +552,10 @@ class Color:
         """ Converts fractional rgb values to HTML-style hex string """
         html = '#{:02x}{:02x}{:02x}'.format(*self.to_bit(8).round().astype(int))
         if len(html) != 7:
-            print(f'# Note for the Color object "{self.name}"')
-            print(f'- HTML-style color code feels wrong: {html}')
+            #print(f'# Note for the Color object "{self.name}"')
+            #print(f'- HTML-style color code feels wrong: {html}')
             html = '#FFFFFF'
-            print(f'- It has been replaced with {html}.')
+            #print(f'- It has been replaced with {html}.')
         return html
 
 
