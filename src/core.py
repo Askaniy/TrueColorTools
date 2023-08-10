@@ -47,21 +47,20 @@ def mag2irradiance(m: int|float|np.ndarray, vega_zero_point: float):
 
 
 
-class InitError(ValueError): pass
-
 class Photometry:
     def __init__(self, name: str, dictionary: dict):
         """
         Constructor of the class to work with photometric parameters, imported from the database.
 
         Supported input dictionary keys:
-        - `nm` (Iterable): list of wavelengths in nanometers
-        - `br` (Iterable): same-size list of linear physical property, representing "brightness"
-        - `mag`: same-size list of magnitudes
-        - `nm_range`: list of [`start`, `stop`, `step`] integer values with including endpoint
-        - `filters`: filter system, linked with [`filters.py`](src/filters.py)
-        - `indices`: dictionary of color indices, use only with `filters`
-        - `bands`: list of filters' names, use only with `filters`
+        - `nm` (list): list of wavelengths in nanometers
+        - `br` (list): same-size list of linear physical property, representing "brightness"
+        - `mag` (list): same-size list of magnitudes
+        - `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
+        - `file_name` (str): file name with DAT extension (with columns of wavelengths and brightness) or FITS
+        - `filters` (list): filter system, linked with [`filters.py`](src/filters.py)
+        - `indices` (list): dictionary of color indices, use only with `filters`
+        - `bands` (list): list of filters' names, use only with `filters`
         - `albedo` (bool or float, optional):
             - `albedo=True` means that the input brightness is in the [0, 1] range
             - `albedo=False` means that albedo mode is impossible
@@ -71,83 +70,87 @@ class Photometry:
         - `tags` (list, optional): list of strings, categorizes a spectrum
         """
         self.name = name
-        self.nm = np.empty(1)
-        self.br = np.empty(1)
+        self.nm = np.array([])
+        self.br = np.array([])
         self.sun = False
         self.vega = False
         self.albedo = False
         try:
-            try:
-                self.nm = np.array(dictionary['nm'])
-            except KeyError:
-                pass
-            try:
-                self.br = np.array(dictionary['br'])
-            except KeyError:
-                pass
-            try:
-                self.sun = dictionary['sun']
-            except KeyError:
-                pass
-            try:
-                self.vega = dictionary['vega']
-            except KeyError:
-                pass
-            try:
-                self.albedo = dictionary['albedo']
-            except KeyError:
-                pass
-            try:
-                start, stop, step = dictionary['nm_range']
-                self.nm = np.arange(start, stop+1, step)
-            except KeyError:
-                pass
-            except ValueError:
-                print(f'# Note for the Photometry object "{self.name}"')
-                print(f'- Wavelength range issues during object initialization: [start, end, step]={dictionary["nm_range"]}')
-                raise InitError
-            try: # TODO: this code needs reworking!
-                filters = dictionary['filters']
-                if 'bands' in dictionary: # replacement of filters for their wavelengths
-                    nm = []
-                    for band in dictionary['bands']:
-                        for filter, info in legacy_filters[filters].items():
-                            if filter == band.lower():
-                                nm.append(info['nm'])
-                    self.nm = np.array(nm)
-                elif 'indices' in dictionary: # spectrum from color indices
-                    result = {}
-                    for index, value in dictionary['indices'].items():
-                        band1, band2 = index.lower().split('-')
-                        if result == {}:
-                            result |= {band1: 1.0}
-                        if band1 in result:
-                            k = legacy_filters[filters][band1]['zp'] - legacy_filters[filters][band2]['zp']
-                            result |= {band2: result[band1] * 10**(0.4*(value + k))}
-                    nm = []
-                    br = []
-                    for band, value in result.items():
-                        nm.append(legacy_filters[filters][band]['nm'])
-                        br.append(value / (legacy_filters[filters][band]['nm']/1e9)**2)
-                    self.nm = np.array(nm)
-                    self.br = np.array(br)
-            except KeyError:
-                pass
-            try: # spectrum from magnitudes
-                self.br = 10**(-0.4*np.array(dictionary['mag']))
-            except KeyError:
-                pass
-            try: # the last check
-                if self.nm.size != self.br.size:
-                    print(f'# Note for the Photometry object "{self.name}"')
-                    print(f'- Wavelength range issues during object initialization: [start, end, step]={dictionary["nm_range"]}')
-                    raise InitError
-            except AttributeError:
-                print(f'# Note for the Photometry object "{self.name}"')
-                print(f'- The sizes of the wavelengths ({self.nm.size}) and brightness ({self.br.size}) arrays do not match.')
-                raise InitError
-        except InitError:
-            print(f'# Initialization of the Photometry object "{self.name}" failed')
+            self.nm = np.array(dictionary['nm'])
+        except KeyError:
+            pass
+        try:
+            self.br = np.array(dictionary['br'])
+        except KeyError:
+            pass
+        try:
+            self.sun = dictionary['sun']
+        except KeyError:
+            pass
+        try:
+            self.vega = dictionary['vega']
+        except KeyError:
+            pass
+        try:
+            self.albedo = dictionary['albedo']
+        except KeyError:
+            pass
+        try:
+            start, stop, step = dictionary['nm_range']
+            self.nm = np.arange(start, stop+1, step)
+        except KeyError:
+            pass
+        except ValueError:
+            print(f'# Note for the Photometry object "{self.name}"')
+            print(f'- Wavelength range issues during object initialization: [start, end, step]={dictionary["nm_range"]}')
+        try:
+            file_name = dictionary['file_name']
+            
+        except KeyError:
+            pass
+        try: # TODO: this code needs reworking!
+            filters = dictionary['filters']
+            if 'bands' in dictionary: # replacement of filters for their wavelengths
+                nm = []
+                for band in dictionary['bands']:
+                    for filter, info in legacy_filters[filters].items():
+                        if filter == band.lower():
+                            nm.append(info['nm'])
+                self.nm = np.array(nm)
+            elif 'indices' in dictionary: # spectrum from color indices
+                result = {}
+                for index, value in dictionary['indices'].items():
+                    band1, band2 = index.lower().split('-')
+                    if result == {}:
+                        result |= {band1: 1.0}
+                    if band1 in result:
+                        k = legacy_filters[filters][band1]['zp'] - legacy_filters[filters][band2]['zp']
+                        result |= {band2: result[band1] * 10**(0.4*(value + k))}
+                nm = []
+                br = []
+                for band, value in result.items():
+                    nm.append(legacy_filters[filters][band]['nm'])
+                    br.append(value / (legacy_filters[filters][band]['nm']/1e9)**2)
+                self.nm = np.array(nm)
+                self.br = np.array(br)
+        except KeyError:
+            pass
+        try: # spectrum from magnitudes
+            self.br = 10**(-0.4*np.array(dictionary['mag']))
+        except KeyError:
+            pass
+        if 0 in (self.nm.size, self.br.size):
+            print(f'# Note for the Photometry object "{self.name}"')
+            print(f'- No wavelengths or brightness data: nm={self.nm}, br={self.br}')
+            self.nm = np.array([550])
+            self.br = np.zeros(1)
+        elif self.nm.size != self.br.size:
+            print(f'# Note for the Photometry object "{self.name}"')
+            print(f'- The sizes of the wavelengths ({self.nm.size}) and brightness ({self.br.size}) arrays do not match.')
+            min_size = min(self.nm.size, self.br.size)
+            self.nm = self.nm[:min_size]
+            self.br = self.br[:min_size]
+            print('- The larger array is reduced to a smaller one.')
 
 
 
@@ -200,7 +203,7 @@ class Spectrum:
         - `res` (int, optional): assigns a number, cancel the check
         """
         self.name = name
-        nm = np.array(nm, dtype=int)
+        nm = np.array(nm)
         br = np.array(br)
         if nm[-1] > nm_limit:
             flag = np.where(nm < nm_limit + resolutions[0]) # to be averaged to nm_limit
@@ -417,6 +420,9 @@ class Spectrum:
         else:
             other.br *= albedo / current_albedo
         return other
+    
+    def mean_wavelength(self) -> float:
+        return np.average(self.nm, weights=self.br)
 
 
 

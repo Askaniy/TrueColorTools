@@ -58,13 +58,17 @@ Spectra and their references are stored in the [`core_database.py`](spectra/core
 TCT uses filter sensitivity profiles for more accurate spectrum restoration. They are provided by [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php) and stored [here](/filters). To replenish the database, select a filter on the site, choose the `ascii` data file and place it in the folder.
 
 ### Database keys
-- `nm`: list of wavelengths in nanometers
-- `br`: same-size list of linear physical property, representing "brightness"
-- `mag`: same-size list of magnitudes
-- `nm_range`: list of [`start`, `stop`, `step`] integer values with including endpoint
-- `filters`: filter system, linked with [`filters.py`](src/filters.py)
-- `indices`: dictionary of color indices, use only with `filters`
-- `bands`: list of filters' names, use only with `filters`
-- *(optional)* `albedo`: bool (`True` if reflectivity was set by albedo values) or float (in V band or on 550 nm)
-- *(optional)* `sun`: bool (`True` if spectrum contains the solar reflection)
-- *(optional)* `tags`: list of strings, categorizes a spectrum
+- `nm` (list): list of wavelengths in nanometers
+- `br` (list): same-size list of linear physical property, representing "brightness"
+- `mag` (list): same-size list of magnitudes
+- `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
+- `filters` (list): filter system, linked with [`filters.py`](src/filters.py)
+- `indices` (list): dictionary of color indices, use only with `filters`
+- `bands` (list): list of filters' names, use only with `filters`
+- `albedo` (bool or float, optional):
+    - `albedo=True` means that the input brightness is in the [0, 1] range
+    - `albedo=False` means that albedo mode is impossible
+    - `albedo=`*float* means that brightness after converting to spectrum can be scaled to be in the range
+- `sun` (bool, optional): `True` if spectrum must be divided by the Solar to become reflective
+- `vega` (bool, optional): `True` if spectrum must be divided by the Vegan to become reflective
+- `tags` (list, optional): list of strings, categorizes a spectrum
