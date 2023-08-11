@@ -62,6 +62,7 @@ TCT uses filter sensitivity profiles for more accurate spectrum restoration. The
 - `br` (list): same-size list of linear physical property, representing "brightness"
 - `mag` (list): same-size list of magnitudes
 - `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
+- `file_name` (str): set data via FITS file from CALSPEC database
 - `filters` (list): filter system, linked with [`filters.py`](src/filters.py)
 - `indices` (list): dictionary of color indices, use only with `filters`
 - `bands` (list): list of filters' names, use only with `filters`

@@ -364,17 +364,17 @@ gui_vII = {
 gui_overexposure = {
     'en': 'Adjust overexposure limit',
     'ru': 'Регулировать предел переэкспонирования',
-    'de': ''
+    'de': 'Überbelichtungslimit anpassen'
 }
 gui_mag = {
     'en': 'App. magnitude*',
     'ru': 'Вид. зв. величина*',
-    'de': '*'
+    'de': 'scheinb. Helligkeit*'
 }
 gui_explanation = {
     'en': '* if the Solar disk in the sky is replaced by this blackbody sphere',
     'ru': '* если диск Солнца на небе заменить данной чёрнотельной сферой',
-    'de': '*'
+    'de': '* wenn die Sonne am Taghimmel durch einen Schwarzkörper ersetzt würde'
 }
 
 # Tab 5 - WIP
