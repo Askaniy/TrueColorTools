@@ -193,6 +193,8 @@ def custom_interp(y0: np.ndarray, k=8):
 def line_generator(x1, y1, x2, y2):
     return np.vectorize(lambda wl: y1 + (wl - x1) * (y2 - y1) / (x2 - x1))
 
+exp_const = 1 / np.sqrt(np.e)
+
 def grid(start: int|float, end: int|float, res: int):
     """ Returns grid points in the range that are divisible by the selected step """
     if start % res != 0:
@@ -255,31 +257,40 @@ class Spectrum:
         else:
             nm = grid(data.nm[0], data.nm[-1], res=5)
             br = Akima1DInterpolator(data.nm, data.br)(nm)
-            no_extrap = br[np.where((scope[0] <= nm) & (scope[-1] >= nm))]
-            if scope[0] < nm[0] or scope[-1] > nm[-1]: # extrapolation is needed
-                x = np.concatenate(([nm[0] - 250], nm, [nm[-1] + 1000]))
-                y = np.concatenate(([0], br, [0]))
-                interp = Akima1DInterpolator(x, y)
-                line = line_generator(x[1], y[1], x[-2], y[-2])
-                blue_nm = scope[np.where(scope < nm[0])]
-                try:
-                    b_extrap = (line(blue_nm) + interp(blue_nm)) / 2
-                except ValueError:
-                    b_extrap = []
-                red_nm = scope[np.where(scope > nm[-1])]
-                try:
-                    r_extrap = (line(red_nm) + interp(red_nm)) / 2
-                except ValueError:
-                    r_extrap = []
-                br = np.concatenate((b_extrap, no_extrap, r_extrap))
-            else:
-                br = no_extrap
-            spectrum = Spectrum(data.name, scope, br, res=5)
+            spectrum = Spectrum(data.name, nm, br, res=5)
+        spectrum = spectrum.extrapolate_to(scope)
         if spectrum.br.min() < 0:
             spectrum.br = np.clip(spectrum.br, 0, None)
             print(f'# Note for the Spectrum object "{spectrum.name}"')
             print(f'- Negative values detected during conversion from photometry, they been replaced with zeros.')
         return spectrum
+    
+    def extrapolate_to(self, scope: np.ndarray):
+        """ Returns a new Spectrum object that fits in the range """
+        if self.nm[0] > scope[0] or self.nm[-1] < scope[-1]:
+            other = deepcopy(self)
+            line = line_generator(other.nm[0], other.br[0], other.nm[-1], other.br[-1]) # to reduce the chance of a very bad result
+            if other.nm[0] > scope[0]: # extrapolation to blue
+                nm = np.arange(scope[0], other.nm[0], other.res)
+                delta = (other.br[1] - other.br[0]) / other.res # derivative
+                if delta == 0: # extrapolation by constant
+                    br = np.full(nm.size, nm[0])
+                else:
+                    br = np.exp(-np.e/2 * (np.abs(delta) * (nm - other.nm[0]) - exp_const * np.sign(delta))**2) / exp_const * other.br[0]
+                other.nm = np.append(nm, other.nm)
+                other.br = np.append((br+line(nm))/2, other.br)
+            if other.nm[-1] < scope[-1]: # extrapolation to red
+                nm = np.arange(other.nm[-1], scope[-1], other.res) + other.res
+                delta = (other.br[-1] - other.br[-2]) / other.res # derivative
+                if delta == 0: # extrapolation by constant
+                    br = np.full(nm.size, nm[-1])
+                else:
+                    br = np.exp(-np.e/2 * (np.abs(delta) * (nm - other.nm[-1]) - exp_const * np.sign(delta))**2) / exp_const * other.br[-1]
+                other.nm = np.append(other.nm, nm)
+                other.br = np.append(other.br, (br+line(nm))/2)
+            return other
+        else:
+            return self
     
     def from_filter(name: str):
         """ Creates a Spectrum object based on the loaded data in Filter Profile Service standard """
