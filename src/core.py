@@ -70,6 +70,7 @@ class Photometry:
         - `tags` (list, optional): list of strings, categorizes a spectrum
         """
         self.name = name
+        self.file_name = ''
         self.nm = np.array([])
         self.br = np.array([])
         self.sun = False
@@ -104,8 +105,7 @@ class Photometry:
             print(f'# Note for the Photometry object "{self.name}"')
             print(f'- Wavelength range issues during object initialization: [start, end, step]={dictionary["nm_range"]}')
         try:
-            file_name = dictionary['file_name']
-            
+            self.file_name = dictionary['file_name']
         except KeyError:
             pass
         try: # TODO: this code needs reworking!
@@ -139,18 +139,19 @@ class Photometry:
             self.br = 10**(-0.4*np.array(dictionary['mag']))
         except KeyError:
             pass
-        if 0 in (self.nm.size, self.br.size):
-            print(f'# Note for the Photometry object "{self.name}"')
-            print(f'- No wavelengths or brightness data: nm={self.nm}, br={self.br}')
-            self.nm = np.array([550])
-            self.br = np.zeros(1)
-        elif self.nm.size != self.br.size:
-            print(f'# Note for the Photometry object "{self.name}"')
-            print(f'- The sizes of the wavelengths ({self.nm.size}) and brightness ({self.br.size}) arrays do not match.')
-            min_size = min(self.nm.size, self.br.size)
-            self.nm = self.nm[:min_size]
-            self.br = self.br[:min_size]
-            print('- The larger array is reduced to a smaller one.')
+        if self.file_name == '': # file reading parsed in the Spectrum class. TODO: move magnitudes there too
+            if 0 in (self.nm.size, self.br.size):
+                print(f'# Note for the Photometry object "{self.name}"')
+                print(f'- No wavelengths or brightness data: nm={self.nm}, br={self.br}')
+                self.nm = np.array([550])
+                self.br = np.zeros(1)
+            elif self.nm.size != self.br.size:
+                print(f'# Note for the Photometry object "{self.name}"')
+                print(f'- The sizes of the wavelengths ({self.nm.size}) and brightness ({self.br.size}) arrays do not match.')
+                min_size = min(self.nm.size, self.br.size)
+                self.nm = self.nm[:min_size]
+                self.br = self.br[:min_size]
+                print('- The larger array is reduced to a smaller one.')
 
 
 
@@ -189,6 +190,17 @@ def custom_interp(y0: np.ndarray, k=8):
     y1[1::2] = (y0[:-1] + y0[1:] + (delta_left - delta_right) / k) / 2
     return np.clip(y1, 0, None)
 
+def line_generator(x1, y1, x2, y2):
+    return np.vectorize(lambda wl: y1 + (wl - x1) * (y2 - y1) / (x2 - x1))
+
+def grid(start: int|float, end: int|float, res: int):
+    """ Returns grid points in the range that are divisible by the selected step """
+    if start % res != 0:
+        start += res - start % res
+    if end % res == 0:
+        end += 1 # to include the last point
+    return np.arange(start, end, res, dtype=int)
+
 class Spectrum:
     def __init__(self, name: str, nm: Iterable, br: Iterable, res=0):
         """
@@ -222,17 +234,13 @@ class Spectrum:
             else:
                 res = np.mean(steps)
             self.res = self._standardize_resolution(res)
-            if nm[0] % self.res == 0:
-                start_point = nm[0]
-            else:
-                start_point = nm[0] + self.res - nm[0] % self.res
-            self.nm = np.arange(start_point, nm[-1]+1, self.res, dtype=int) # new grid
+            self.nm = grid(nm[0], nm[-1], self.res) # new grid
             if self.res <= res: # interpolation, increasing resolution
                 self.br = Akima1DInterpolator(nm, br)(self.nm)
             else: # decreasing resolution if step less than 5 nm
                 self.nm, self.br = averaging(self.nm, nm, br) # updates wavelengths if at the end
         else: # input could be trusted                          the spectrum is not dense enough to be averaged
-            self.nm = nm
+            self.nm = nm.astype(int)
             self.br = br
             self.res = res
         if np.any(np.isnan(self.br)):
@@ -242,27 +250,36 @@ class Spectrum:
 
     def from_photometry_legacy(data: Photometry, scope: np.ndarray):
         """ Creates a Spectrum object with inter- and extrapolated photometry data to fit the wavelength scope """
-        x = data.nm
-        y = data.br
-        br = []
-        if scope[0] >= x[0] and scope[-1] <= x[-1]: # extrapolation is not needed
-            br = Akima1DInterpolator(x, y)(scope)
-        else: # extrapolation
-            x = np.concatenate(([x[0] - 250], x, [x[-1] + 1000]))
-            y = np.concatenate(([0], y, [0]))
-            interp = Akima1DInterpolator(x, y)
-            line = lambda wl: y[1] + (wl - x[1]) * (y[-2] - y[1]) / (x[-2] - x[1])
-            for nm in scope:
-                if x[1] < nm < x[-2]:
-                    br.append(interp(nm))
-                else:
-                    br.append((line(nm) + interp(nm)) / 2)
-            br = np.array(br)
-        if br.min() < 0:
-            br = np.clip(br, 0, None)
-            print(f'# Note for the Spectrum object "{data.name}"')
+        if data.file_name != '':
+            spectrum = Spectrum.from_FITS(data.name, data.file_name)
+        else:
+            nm = grid(data.nm[0], data.nm[-1], res=5)
+            br = Akima1DInterpolator(data.nm, data.br)(nm)
+            no_extrap = br[np.where((scope[0] <= nm) & (scope[-1] >= nm))]
+            if scope[0] < nm[0] or scope[-1] > nm[-1]: # extrapolation is needed
+                x = np.concatenate(([nm[0] - 250], nm, [nm[-1] + 1000]))
+                y = np.concatenate(([0], br, [0]))
+                interp = Akima1DInterpolator(x, y)
+                line = line_generator(x[1], y[1], x[-2], y[-2])
+                blue_nm = scope[np.where(scope < nm[0])]
+                try:
+                    b_extrap = (line(blue_nm) + interp(blue_nm)) / 2
+                except ValueError:
+                    b_extrap = []
+                red_nm = scope[np.where(scope > nm[-1])]
+                try:
+                    r_extrap = (line(red_nm) + interp(red_nm)) / 2
+                except ValueError:
+                    r_extrap = []
+                br = np.concatenate((b_extrap, no_extrap, r_extrap))
+            else:
+                br = no_extrap
+            spectrum = Spectrum(data.name, scope, br, res=5)
+        if spectrum.br.min() < 0:
+            spectrum.br = np.clip(spectrum.br, 0, None)
+            print(f'# Note for the Spectrum object "{spectrum.name}"')
             print(f'- Negative values detected during conversion from photometry, they been replaced with zeros.')
-        return Spectrum(data.name, scope, br)
+        return spectrum
     
     def from_filter(name: str):
         """ Creates a Spectrum object based on the loaded data in Filter Profile Service standard """
