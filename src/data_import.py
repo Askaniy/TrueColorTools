@@ -75,17 +75,17 @@ def obj_dict(database: dict, tag: str, lang: str):
             new_name = '{} [{}]'.format(*raw_name.split('|')) if '|' in raw_name else raw_name
             if lang != 'en': # parsing and translating
                 index = ''
-                if new_name[0] == '(': # minor body indices parsing
+                if new_name[0] == '(': # minor body index or stellar spectral type parsing
                     parts = new_name.split(')', 1)
                     index = parts[0] + ') '
                     new_name = parts[1].strip()
-                elif '/' in new_name: # comet names parsing
+                elif '/' in new_name: # comet name parsing
                     parts = new_name.split('/', 1)
                     index = parts[0] + '/'
                     new_name = parts[1].strip()
-                for obj_name, tranlation in tr.names.items():
+                for obj_name, translation in tr.names.items():
                     if new_name.startswith(obj_name):
-                        new_name = new_name.replace(obj_name, tranlation[lang])
+                        new_name = new_name.replace(obj_name, translation[lang])
                         break
                 new_name = index + new_name
             names |= {new_name: raw_name}

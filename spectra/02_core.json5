@@ -1,8 +1,4 @@
 {
-    "CALSPEC": [
-        "CALSPEC catalog of stellar spectra (STScI)",
-        "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec"
-    ],
     "Mallama2017": [
         "Comprehensive wide-band magnitudes and albedos for the planets, with applications to exo-planets and Planet Nine",
         "DOI: 10.1016/j.icarus.2016.09.023", "https://www.sciencedirect.com/science/article/abs/pii/S0019103516301014"
@@ -95,16 +91,6 @@
         "Implied Evolutionary Differences of the Jovian Irregular Satellites from a BVR Color Survey",
         "DOI: 10.1006/icar.2001.6715", "https://www.sciencedirect.com/science/article/abs/pii/S0019103501967156"
     ],
-    //"Zero Mag": {"filters": "Landolt", "indices": {"U-B": 0, "B-V": 0, "V-R": 0, "R-I": 0}},
-    "Vega|CALSPEC": {"tags": ["featured", "extrasolar", "star"],
-        "file_name": "alpha_lyr_stis_011.fits"
-    },
-    "Sun|CALSPEC": {"tags": ["featured", "solar_system", "star"],
-        "file_name": "sun_reference_stis_002.fits"
-    },
-    "Sirius|CALSPEC": {"tags": ["featured", "extrasolar", "star"],
-        "file_name": "sirius_stis_005.fits"
-    },
     "Mercury|Mallama2017": {"tags": ["featured", "solar_system", "planet"],
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.087, 0.105, 0.142, 0.158, 0.172, 0.180, 0.208], "albedo": true
     },

@@ -1,0 +1,316 @@
+{
+    "CALSPEC": [
+        "CALSPEC catalog of stellar spectra (STScI)",
+        "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec"
+    ],
+    
+    // The database was downloaded as of 12 June 2023 and contains all spectra that include the visible range
+    "(sdO) AGK+81 266|CALSPEC": {"tags": ["6_subdwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/agk_81d266_stisnic_007.fits"
+    },
+    "(sdO) BD+28 4211|CALSPEC": {"tags": ["6_subdwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/bd_28d4211_stis_005.fits"
+    }, // BD+28 4211 has a companion at 2.8 arcsec (Landolt & Uomoto (2007))
+    "(sdO) FEIGE110|CALSPEC": {"tags": ["6_subdwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/feige110_stisnic_008.fits"
+    },
+    "(sdO) FEIGE34|CALSPEC": {"tags": ["6_subdwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/feige34_stis_006.fits"
+    },
+    "(sdO5) BD+75 325|CALSPEC": {"tags": ["6_subdwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/bd_75d325_stis_006.fits"
+    },
+    "(O9V) 10 LAC|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/10lac_stis_007.fits"
+    },
+    "(O9Vp) HD93521|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd93521_stis_007.fits"
+    },
+    "(O9.5V) MU COL|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/mucol_stis_007.fits"
+    },
+    "(O9.5V+B0.2V) SIGMA ORI|CALSPEC": {"tags": ["8_other", "extrasolar", "star"],
+        "file_name": "CALSPEC/sigori_stis_001.fits"
+    },
+    "(B0.5V) LAMBDA LEP|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/lamlep_stis_007.fits"
+    },
+    "(B2Ve) HD200775|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd200775_stis_001.fits"
+    },
+    "(B3IV) HD60753|CALSPEC": {"tags": ["4_subgiants", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd60753_stis_004.fits"
+    }, // No single model fits well in the sense that an unresolved cool companion would explain the problem
+    "(B3V) ETA UMA|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/etauma_stis_007.fits"
+    },
+    "(sdB) HZ44|CALSPEC": {"tags": ["6_subdwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/hz44_stis_006.fits"
+    },
+    "(sdB) SNAP-1|CALSPEC": {"tags": ["6_subdwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/snap1_stisnic_008.fits"
+    },
+    "(sdB) WD0308-565|CALSPEC": {"tags": ["6_subdwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/wd0308_565_stis_009.fits"
+    },
+    "(B9III) KSI2 CETI|CALSPEC": {"tags": ["3_giants", "extrasolar", "star"],
+        "file_name": "CALSPEC/ksi2ceti_stis_006.fits"
+    },
+    "(A0III) 109 VIR|CALSPEC": {"tags": ["3_giants", "extrasolar", "star"],
+        "file_name": "CALSPEC/109vir_stis_003.fits"
+    },
+    "(A0V) Vega|CALSPEC": {"tags": ["featured", "5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/alpha_lyr_stis_011.fits"
+    },
+    "(A0V) ETA1 DOR|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/eta1dor_stis_004.fits"
+    },
+    "(A0V) HD116405|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd116405_stis_006.fits"
+    },
+    "(A0V) HD172728|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd172728_stis_002.fits"
+    },
+    "(A0V) HD180609|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd180609_stis_006.fits"
+    },
+    "(A1V) BD+60 1753|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/bd60d1753_stiswfc_004.fits"
+    },
+    "(A1V) DELTA UMI|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/delumi_stis_004.fits"
+    },
+    "(A1V) Sirius|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/sirius_stis_005.fits"
+    },
+    "(A2V) 1802271|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/1802271_stiswfcnic_004.fits"
+    },
+    "(A2/3) HD101452|CALSPEC": {"tags": ["8_other", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd101452_stis_003.fits"
+    },
+    "(A3V) HD2811|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd2811_stis_004.fits"
+    },
+    "(A1V) HD128998|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd128998_stis_003.fits"
+    },
+    "(A3V) 1757132|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/1757132_stiswfc_004.fits"
+    },
+    "(A3V) 1808347|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/1808347_stiswfc_004.fits"
+    },
+    "(A3V) 1812095|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/1812095_stisnic_006.fits"
+    },
+    "(A3V) HD37725|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd37725_stiswfc_004.fits"
+    },
+    "(A4V) 1732526|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/1732526_stisnic_007.fits"
+    },
+    "(A4V) 1805292|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/1805292_stisnic_006.fits"
+    },
+    "(A4V) HD55677|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd55677_stis_004.fits"
+    },
+    "(A4V) HD158485|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd158485_stis_005.fits"
+    },
+    "(A4V) HD165459|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd165459_stisnic_006.fits"
+    }, // Dust ring (Bohlin et al, 2011)
+    "(A5V) HD14943|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd14943_stis_005.fits"
+    },
+    "(A5) BD+02 3375|CALSPEC": {"tags": ["8_other", "extrasolar", "star"],
+        "file_name": "CALSPEC/bd02d3375_stis_006.fits"
+    },
+    "(A5) BD+26 2606|CALSPEC": {"tags": ["8_other", "extrasolar", "star"],
+        "file_name": "CALSPEC/bd26d2606_stis_006.fits"
+    },
+    "(A6V) 1740346|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/1740346_stisnic_005.fits"
+    }, // Dust ring (Bohlin et al, 2011). Variable at +/- 0.01 mag (Pancino et al. 2012).
+    "(A6V) HD163466|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd163466_stis_005.fits"
+    },
+    "(A8III) 1743045|CALSPEC": {"tags": ["3_giants", "extrasolar", "star"],
+        "file_name": "CALSPEC/1743045_stisnic_007.fits"
+    },
+    "(F2) BD+21 0607|CALSPEC": {"tags": ["8_other", "extrasolar", "star"],
+        "file_name": "CALSPEC/bd21d0607_stis_006.fits"
+    },
+    "(F4V) HD031128|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd031128_stis_006.fits"
+    },
+    "(F5) BD+29 2091|CALSPEC": {"tags": ["8_other", "extrasolar", "star"],
+        "file_name": "CALSPEC/bd29d2091_stis_006.fits"
+    },
+    "(sdF6) BD+54 1216|CALSPEC": {"tags": ["6_subdwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/bd54d1216_stis_005.fits"
+    },
+    "(sdF6) HD074000|CALSPEC": {"tags": ["6_subdwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd074000_stis_006.fits"
+    },
+    "(F7V) HD111980|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd111980_stis_006.fits"
+    },
+    "(F8IV) C26202|CALSPEC": {"tags": ["4_subgiants", "extrasolar", "star"],
+        "file_name": "CALSPEC/c26202_stiswfcnic_005.fits"
+    },
+    "(sdF8) BD+17 4708|CALSPEC": {"tags": ["6_subdwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/bd_17d4708_stisnic_007.fits"
+    }, // BD+17 4708 is variable (Bohlin & Landolt 2015)
+    "(F) HD160617|CALSPEC": {"tags": ["8_other", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd160617_stis_005.fits"
+    },
+    "(G0V) HD209458|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd209458_stisnic_008.fits"
+    }, // Transiting Planet
+    "(G0V) P041C|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/p041c_stisnic_009.fits"
+    }, // P041C has an M companion 0.57arcsec away (Gilliland & Rajan 2011)
+    "(G0V) P177D|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/p177d_stisnic_010.fits"
+    },
+    "(G0) HD106252|CALSPEC": {"tags": ["8_other", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd106252_stis_007.fits"
+    },
+    "(G0-5) SNAP-2|CALSPEC": {"tags": ["8_other", "extrasolar", "star"],
+        "file_name": "CALSPEC/snap2_stiswfcnic_005.fits"
+    },
+    "(G1V) HD159222|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd159222_stis_007.fits"
+    },
+    "(G1V) HD38949|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd38949_stis_007.fits"
+    },
+    "(G1V) NGC2506-G31|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/ngc2506g31_stis_003.fits"
+    },
+    "(G2V) 18 SCO|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/18sco_stis_004.fits"
+    },
+    "(G2V) HD205905|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd205905_stis_008.fits"
+    },
+    "(G2V) HD37962|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd37962_stis_009.fits"
+    },
+    "(G2V) P330E|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/p330e_stiswfcnic_005.fits"
+    },
+    "(G2V) Sun|CALSPEC": {"tags": ["featured", "5_main-seq", "solar_system", "star"],
+        "file_name": "CALSPEC/sun_reference_stis_002.fits"
+    },
+    "(G3V) 16 CYG B|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/16cygb_stis_003.fits"
+    },
+    "(G3V) HD115169|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd115169_stis_003.fits"
+    },
+    "(G3V) HD167060|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd167060_stis_004.fits"
+    },
+    "(G3V) HD185975|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd185975_stis_007.fits"
+    },
+    "(G) HD200654|CALSPEC": {"tags": ["8_other", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd200654_stis_007.fits"
+    },
+    "(G) SF1615+001A|CALSPEC": {"tags": ["8_other", "extrasolar", "star"],
+        "file_name": "CALSPEC/sf1615_001a_stisnic_010.fits"
+    },
+    "(G5V) HD142331|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd142331_stis_004.fits"
+    },
+    "(G7III) HD009051|CALSPEC": {"tags": ["3_giants", "extrasolar", "star"],
+        "file_name": "CALSPEC/hd009051_stis_007.fits"
+    },
+    "(K0.5III) KF08T3|CALSPEC": {"tags": ["3_giants", "extrasolar", "star"],
+        "file_name": "CALSPEC/kf08t3_stisnic_004.fits"
+    },
+    "(K1.5III) KF06T1|CALSPEC": {"tags": ["3_giants", "extrasolar", "star"],
+        "file_name": "CALSPEC/kf06t1_nic_004.fits"
+    },
+    "(K1.5III) KF06T2|CALSPEC": {"tags": ["3_giants", "extrasolar", "star"],
+        "file_name": "CALSPEC/kf06t2_stiswfcnic_005.fits"
+    },
+    "(M3.5V) BD-11 3759|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/bd11d3759_stis_003.fits"
+    },
+    "(M7V) VB8|CALSPEC": {"tags": ["5_main-seq", "extrasolar", "star"],
+        "file_name": "CALSPEC/vb8_stiswfcnic_004.fits"
+    },
+
+    // VII - white dwarfs
+    "(DO2) HZ21|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/hz21_stis_007.fits"
+    },
+    "(DBQ4) LDS749B|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/lds749b_stisnic_008.fits"
+    },
+    "(DBQA5) GJ754.1A|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/gj7541a_stis_004.fits"
+    },
+    "(DA) HZ43(8)|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/hz43_stis_005.fits"
+    }, // HZ43 and HZ3B are separated by ~3arcsec (BDC)
+    "(DA) WD1026+453|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/wd1026_453_stis_007.fits"
+    },
+    "(DA0.8) G191B2B|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/g191b2b_stiswfcnic_004.fits"
+    },
+    "(DA1.2) GD153|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/gd153_stiswfcnic_004.fits"
+    },
+    "(DA1.5) GD71|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/gd71_stiswfcnic_004.fits"
+    },
+    "(DA1.8) SDSSJ151421|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/sdssj151421_stis_005.fits"
+    },
+    "(DA2.4) GRW+70 5824|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/grw_70d5824_stiswfcnic_003.fits"
+    },
+    "(DA2.5) WD0227+050|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/wd0227_050_stiswfc_002.fits"
+    },
+    "(DA2.8) WD2149+021|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/wd2149_021_stiswfc_001.fits"
+    },
+    "(DA3.0) WD2039-682|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/wd2039_682_stiswfc_001.fits"
+    },
+    "(DA3.1) WD2126+734|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/wd2126_734_stiswfc_002.fits"
+    },
+    "(DA3.3) WD1919+145|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/wd1919_145_stiswfc_001.fits"
+    },
+    "(DA3.4) HZ4|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/hz4_stis_008.fits"
+    },
+    "(DA3.5) WD1327-083|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/wd1327_083_stiswfc_004.fits"
+    },
+    "(DA3.6) WD0148+467|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/wd0148_467_stiswfc_001.fits"
+    },
+    "(DA3.6) WD1105-340|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/wd1105_340_stiswfc_002.fits"
+    },
+    "(DA3.8) WD2341+322|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/wd2341_322_stiswfc_004.fits"
+    },
+    "(DA4.8) WD1544-377|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/wd1544_377_stiswfc_002.fits"
+    },
+    "(DA5.7) WD1202-232|CALSPEC": {"tags": ["7_white_dwarfs", "extrasolar", "star"],
+        "file_name": "CALSPEC/wd1202_232_stiswfc_002.fits"
+    }
+}

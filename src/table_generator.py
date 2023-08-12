@@ -102,7 +102,8 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
         if name[0] == '(':
             parts = name.split(')', 1)
             name = parts[1].strip()
-            draw.text((center_x-ar, center_y-ar), f'({parts[0][1:]})', fill=text_color, font=small_font)
+            index = parts[0][1:].replace('+', '\n+')
+            draw.multiline_text((center_x-ar, center_y-ar), f'{index}', fill=text_color, font=small_font, anchor='la', align='left', spacing=0)
         elif '/' in name:
             parts = name.split('/', 1)
             name = parts[1].strip()

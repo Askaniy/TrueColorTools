@@ -268,7 +268,7 @@ class Spectrum:
     def extrapolate_to(self, scope: np.ndarray):
         """ Returns a new Spectrum object that fits in the range """
         if self.nm[0] > scope[0] or self.nm[-1] < scope[-1]:
-            other = deepcopy(self)
+            other = self.to_resolution(5) # 5 is resolution of the scope, it's workaround
             line = line_generator(other.nm[0], other.br[0], other.nm[-1], other.br[-1]) # to reduce the chance of a very bad result
             if other.nm[0] > scope[0]: # extrapolation to blue
                 nm = np.arange(scope[0], other.nm[0], other.res)
@@ -457,11 +457,11 @@ class Spectrum:
 bessell_v = Spectrum.from_filter('Generic_Bessell.V')
 bessell_v_norm = bessell_v.normalized_by_area() # used as an averager for reference spectra
 
-sun_SI = Spectrum.from_FITS('Sun', 'sun_reference_stis_002.fits') # W / (m² nm)
+sun_SI = Spectrum.from_FITS('Sun', 'CALSPEC/sun_reference_stis_002.fits') # W / (m² nm)
 sun_in_V = sun_SI * bessell_v_norm
 sun_norm = sun_SI.scaled_to_albedo(1, bessell_v)
 
-vega_SI = Spectrum.from_FITS('Vega', 'alpha_lyr_stis_011.fits') # W / (m² nm)
+vega_SI = Spectrum.from_FITS('Vega', 'CALSPEC/alpha_lyr_stis_011.fits') # W / (m² nm)
 vega_in_V = vega_SI * bessell_v_norm
 vega_norm = vega_SI.scaled_to_albedo(1, bessell_v)
 
