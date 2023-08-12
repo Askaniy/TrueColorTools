@@ -10,15 +10,15 @@ Input data is accepted in the form of channel measurements, color indices, or ma
 
 ### Basic installation way
 
-True Color Tools has been tested on Windows 10/11 and Linux (openSUSE).
+True Color Tools has been tested on Windows 10/11 and Linux (openSUSE). It requires Python 3.10 or higher version, which do not support Windows 7. [This](https://github.com/adang1345/PythonWin7) can be used for the case, has been confirmed by the [user](https://github.com/GurrenLagannTSS).
 
 1. Clone the repository or download archive by the GitHub web interface (press the button `Code`, then choose `Download ZIP` and unpack the archive after downloading);
-2. Ensure that you have Python (version 3.10 or higher) and the libraries required in [requirements.txt](requirements.txt). You can install the libraries all at once using the following command: `python3 -m pip install -r requirements.txt`;
+2. Ensure that you have libraries listed in [requirements.txt](requirements.txt). You can install them all at once using the following command: `python3 -m pip install -r requirements.txt`;
 3. Execute `python3 -u runTCT.py`.
 
-### Executable file (Windows)
+### Executable file
 
-This installation way supports by [SevenSpheres](https://github.com/SevenSpheres) and the relevance of updates is not guaranteed.
+[SevenSpheres](https://github.com/SevenSpheres) compiles stable versions of True Color Tools for Windows 8/10/11. Thus, Python is not required in this installation way.
 
 1. Go to [releases of SevenSpheres' fork](https://github.com/SevenSpheres/TrueColorTools/releases);
 2. Select, download and unpack the desired archive from the assets;
@@ -53,11 +53,14 @@ True Color Tools GUI is functionally divided into tabs: *Spectra*, *Images*, *Ta
 
 
 ## Database Extension
-Spectra and their references are stored in the [`core_database.py`](spectra/core_database.py) and complementary `*.json5` files. The [`core_database.py`](spectra/core_database.py) can affect internal processes, so it is not recommended to change it. However, you can add custom json5 files to the `/spectra` folder and they will be detected. Newly read spectra, if they suddenly have the same names, replace the old ones. You can help the project by creating and sharing database files. Note that any parameters must increase with wavelength.
+The data in the [spectra folder](spectra/) can be modified by the user (except for the vital spectra of the [Sun](spectra/CALSPEC/sun_reference_stis_002.fits) and [Vega](spectra/CALSPEC/alpha_lyr_stis_011.fits), they cannot be edited). Spectrum and reference information is stored in JSON5 files. The program reads all the JSON5 files in the folder. The display order within TCT is determined by the file names and the order within the file. When duplicating, the last spectrum replaces the previously specified one. You can help the project by creating and sharing database files.
 
-TCT uses filter sensitivity profiles for more accurate spectrum restoration. They are provided by [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php) and stored [here](/filters). To replenish the database, select a filter on the site, choose the `ascii` data file and place it in the folder.
+101 stellar spectra are stored as FITS files in the [spectra/CALSPEC](spectra/CALSPEC) folder. [Database](https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec) as of August 12, 2023. If you add CALSPEC FITS spectrum, it is recommended to take the "stis" version and pay attention to the presence of the B−V color index in the table.
+
+TCT will use filter sensitivity profiles for more accurate spectrum restoration. They are provided by [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php) and stored [here](/filters). To replenish the database, select a filter on the site, choose the `ascii` data file and place it in the folder.
 
 ### Database keys
+Note that any parameters must increase with wavelength.
 - `nm` (list): list of wavelengths in nanometers
 - `br` (list): same-size list of linear physical property, representing "brightness"
 - `mag` (list): same-size list of magnitudes
