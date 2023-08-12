@@ -72,7 +72,10 @@ def obj_dict(database: dict, tag: str, lang: str):
             except KeyError:
                 flag = False
         if flag:
-            new_name = '{} [{}]'.format(*raw_name.split('|')) if '|' in raw_name else raw_name
+            if '|' in raw_name:
+                new_name, source = raw_name.split('|', 1)
+            else:
+                new_name, source = raw_name, ''
             if lang != 'en': # parsing and translating
                 index = ''
                 if new_name[0] == '(': # minor body index or stellar spectral type parsing
@@ -84,10 +87,11 @@ def obj_dict(database: dict, tag: str, lang: str):
                     index = parts[0] + '/'
                     new_name = parts[1].strip()
                 for obj_name, translation in tr.names.items():
-                    if new_name.startswith(obj_name):
+                    if new_name.startswith(obj_name) or new_name.endswith(obj_name):
                         new_name = new_name.replace(obj_name, translation[lang])
                         break
                 new_name = index + new_name
+            new_name = new_name if source == '' else f'{new_name} [{source}]'
             names |= {new_name: raw_name}
     return names
 

@@ -1,7 +1,19 @@
 
 # Celestial bodies
 names = {
+    'Lacertae': {'ru': 'Ящерицы', 'de': 'Lacertae'},
+    'Columbae': {'ru': 'Голубя', 'de': 'Columbae'},
+    'Orionis': {'ru': 'Ориона', 'de': 'Orionis'},
+    'Leporis': {'ru': 'Зайца', 'de': 'Leporis'},
+    'Ceti': {'ru': 'Кита', 'de': 'Ceti'},
+    'Virginis': {'ru': 'Девы', 'de': 'Virginis'},
+    'Doradus': {'ru': 'Золотой Рыбы', 'de': 'Doradus'},
+    'Scorpii': {'ru': 'Скорпиона', 'de': 'Scorpii'},
+    'Cygni': {'ru': 'Лебедя', 'de': 'Cygni'},
+    'Alkaid': {'ru': 'Алькаид', 'de': 'Alkaid'},
     'Vega': {'ru': 'Вега', 'de': 'Wega'},
+    'Yildun': {'ru': 'Йильдун', 'de': 'Yildun'},
+    'Sirius': {'ru': 'Сириус', 'de': 'Sirius'},
     'Sun': {'ru': 'Солнце', 'de': 'Sonne'},
     'Mercury': {'ru': 'Меркурий', 'de': 'Merkur'},
     'Venus': {'ru': 'Венера', 'de': 'Venus'},
