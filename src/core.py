@@ -54,10 +54,10 @@ class Photometry:
 
         Supported input dictionary keys:
         - `nm` (list): list of wavelengths in nanometers
-        - `br` (list): same-size list of linear physical property, representing "brightness"
+        - `br` (list): same-size list of "brightness" of an energy counter detector (not photon counter)
         - `mag` (list): same-size list of magnitudes
         - `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
-        - `file_name` (str): set data via FITS file from CALSPEC database
+        - `file` (str): path to a FITS file in the `spectra` folder
         - `filters` (list): filter system, linked with [`filters.py`](src/filters.py)
         - `indices` (list): dictionary of color indices, use only with `filters`
         - `bands` (list): list of filters' names, use only with `filters`
@@ -70,7 +70,7 @@ class Photometry:
         - `tags` (list, optional): list of strings, categorizes a spectrum
         """
         self.name = name
-        self.file_name = ''
+        self.file = ''
         self.nm = np.array([])
         self.br = np.array([])
         self.sun = False
@@ -105,7 +105,7 @@ class Photometry:
             print(f'# Note for the Photometry object "{self.name}"')
             print(f'- Wavelength range issues during object initialization: [start, end, step]={dictionary["nm_range"]}')
         try:
-            self.file_name = dictionary['file_name']
+            self.file = dictionary['file']
         except KeyError:
             pass
         try: # TODO: this code needs reworking!
@@ -139,7 +139,7 @@ class Photometry:
             self.br = 10**(-0.4*np.array(dictionary['mag']))
         except KeyError:
             pass
-        if self.file_name == '': # file reading parsed in the Spectrum class. TODO: move magnitudes there too
+        if self.file == '': # file reading parsed in the Spectrum class. TODO: move magnitudes there too
             if 0 in (self.nm.size, self.br.size):
                 print(f'# Note for the Photometry object "{self.name}"')
                 print(f'- No wavelengths or brightness data: nm={self.nm}, br={self.br}')
@@ -252,8 +252,8 @@ class Spectrum:
 
     def from_photometry_legacy(data: Photometry, scope: np.ndarray):
         """ Creates a Spectrum object with inter- and extrapolated photometry data to fit the wavelength scope """
-        if data.file_name != '':
-            spectrum = Spectrum.from_FITS(data.name, data.file_name)
+        if data.file != '':
+            spectrum = Spectrum.from_FITS(data.name, data.file)
         else:
             nm = grid(data.nm[0], data.nm[-1], res=5)
             br = Akima1DInterpolator(data.nm, data.br)(nm)
@@ -454,16 +454,16 @@ class Spectrum:
 
 
 
-bessell_v = Spectrum.from_filter('Generic_Bessell.V')
-bessell_v_norm = bessell_v.normalized_by_area() # used as an averager for reference spectra
+bessell_V = Spectrum.from_filter('Generic_Bessell.V')
+bessell_V_norm = bessell_V.normalized_by_area() # used as an averager for the reference spectra
 
-sun_SI = Spectrum.from_FITS('Sun', 'CALSPEC/sun_reference_stis_002.fits') # W / (m² nm)
-sun_in_V = sun_SI * bessell_v_norm
-sun_norm = sun_SI.scaled_to_albedo(1, bessell_v)
+sun_SI = Spectrum.from_FITS('Sun', 'FITS/CALSPEC/sun_reference_stis_002.fits') # W / (m² nm)
+sun_in_V = sun_SI * bessell_V_norm
+sun_norm = sun_SI.scaled_to_albedo(1, bessell_V)
 
-vega_SI = Spectrum.from_FITS('Vega', 'CALSPEC/alpha_lyr_stis_011.fits') # W / (m² nm)
-vega_in_V = vega_SI * bessell_v_norm
-vega_norm = vega_SI.scaled_to_albedo(1, bessell_v)
+vega_SI = Spectrum.from_FITS('Vega', 'FITS/CALSPEC/alpha_lyr_stis_011.fits') # W / (m² nm)
+vega_in_V = vega_SI * bessell_V_norm
+vega_norm = vega_SI.scaled_to_albedo(1, bessell_V)
 
 
 

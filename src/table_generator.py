@@ -79,7 +79,7 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
             spectrum /= core.sun_norm
         if albedoFlag:
             if isinstance(photometry.albedo, float):
-                spectrum = spectrum.scaled_to_albedo(photometry.albedo, core.bessell_v)
+                spectrum = spectrum.scaled_to_albedo(photometry.albedo, core.bessell_V)
         
         # Color calculation
         if srgb:

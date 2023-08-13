@@ -162,7 +162,7 @@ def launch_window():
                     T1_spectrum /= core.sun_norm
                 if albedoFlag:
                     if isinstance(T1_photometry.albedo, float):
-                        T1_spectrum = T1_spectrum.scaled_to_albedo(T1_photometry.albedo, core.bessell_v)
+                        T1_spectrum = T1_spectrum.scaled_to_albedo(T1_photometry.albedo, core.bessell_V)
                 
                 # Color calculation
                 if values['-srgb-']:
@@ -203,7 +203,7 @@ def launch_window():
                         T1_spectrum /= core.sun_norm
                     if albedoFlag:
                         if isinstance(T1_photometry.albedo, float):
-                            T1_spectrum = T1_spectrum.scaled_to_albedo(T1_photometry.albedo, core.bessell_v)
+                            T1_spectrum = T1_spectrum.scaled_to_albedo(T1_photometry.albedo, core.bessell_V)
                     
                     # Color calculation
                     if values['-srgb-']:
