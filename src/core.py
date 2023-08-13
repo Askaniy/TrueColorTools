@@ -20,7 +20,8 @@ resolutions = [5, 10, 20, 40, 80, 160] # nm
 # Boundaries have been defined based on the CMF (color matching functions) used, but can be any.
 visible_range = np.arange(390, 780, 5) # nm
 
-
+# Returned on problems with initialization
+nm_br_stub = (np.array([550, 560]), np.zeros(2))
 
 # Units of spectral flux density by wavelength and frequency in FITS
 flam = u.def_unit('flam', (u.erg / u.s) / (u.cm**2 * u.AA))
@@ -41,6 +42,22 @@ def str2unit(string: str, br: bool):
         else:
             unit = u.nm
     return unit
+
+def txt_reader(file: str):
+    """ Imports spectrum data from a simple text file. Wavelength only in angstroms """
+    with open(file) as f:
+        angstrom, response = np.loadtxt(f).transpose()
+    return angstrom/10, response
+
+def fits_reader(file: str):
+    """ Imports spectrum data from FITS file in standards of CALSPEC, VizeR, etc """
+    with fits.open(file) as hdul:
+        #hdul.info()
+        columns = hdul[1].columns # most likely the second HDU contains data
+        tbl = Table(hdul[1].data)
+        x = tbl[columns[0].name] * str2unit(columns[0].unit, br=False)
+        y = tbl[columns[1].name] * str2unit(columns[1].unit, br=True)
+    return x.to(u.nm), y.to(flux_density_SI)
 
 h = 6.626e-34 # Planck constant
 c = 299792458 # Speed of light
@@ -158,8 +175,7 @@ class Photometry:
             if 0 in (self.nm.size, self.br.size):
                 print(f'# Note for the Photometry object "{self.name}"')
                 print(f'- No wavelengths or brightness data: nm={self.nm}, br={self.br}')
-                self.nm = np.array([550])
-                self.br = np.zeros(1)
+                self.nm, self.br = nm_br_stub
             elif self.nm.size != self.br.size:
                 print(f'# Note for the Photometry object "{self.name}"')
                 print(f'- The sizes of the wavelengths ({self.nm.size}) and brightness ({self.br.size}) arrays do not match.')
@@ -267,7 +283,7 @@ class Spectrum:
     def from_photometry_legacy(data: Photometry, scope: np.ndarray):
         """ Creates a Spectrum object with inter- and extrapolated photometry data to fit the wavelength scope """
         if data.file != '':
-            spectrum = Spectrum.from_FITS(data.name, data.file)
+            spectrum = Spectrum.from_file(data.name, data.file)
         else:
             nm = grid(data.nm[0], data.nm[-1], res=5)
             br = Akima1DInterpolator(data.nm, data.br)(nm)
@@ -308,19 +324,22 @@ class Spectrum:
     
     def from_filter(name: str):
         """ Creates a Spectrum object based on the loaded data in Filter Profile Service standard """
-        with open(f'filters/{name}.dat') as f:
-            angstrom, response = np.loadtxt(f).transpose()
-            return Spectrum(name, angstrom/10, response)
+        return Spectrum(name, *txt_reader(f'filters/{name}.dat'))
     
-    def from_FITS(name: str, file: str):
-        """ Creates a Spectrum object based on the loaded data in standards of CALSPEC, VizeR """
-        with fits.open(f'spectra/{file}') as hdul:
-            #hdul.info()
-            columns = hdul[1].columns
-            tbl = Table(hdul[1].data)
-            x = tbl[columns[0].name] * str2unit(columns[0].unit, br=False)
-            y = tbl[columns[1].name] * str2unit(columns[1].unit, br=True)
-            return Spectrum(name, x.to(u.nm), y.to(flux_density_SI))
+    def from_file(name: str, file: str):
+        """ Creates a Spectrum object based on the external loaded data """
+        path = 'spectra/'+file
+        extension = file.split('.')[-1].lower()
+        try:
+            if extension in ('fits', 'fit'):
+                nm, br = fits_reader(path)
+            else:
+                nm, br = txt_reader(path)
+        except FileNotFoundError:
+            print(f'# Note for the Spectrum object "{name}"')
+            print(f'- No such file: {path}')
+            nm, br = nm_br_stub
+        return Spectrum(name, nm, br)
     
     def from_blackbody_redshift(scope: np.ndarray, temperature: int|float, velocity=0., vII=0.):
         """ Creates a Spectrum object based on Planck's law and redshift formulas """
@@ -472,11 +491,11 @@ class Spectrum:
 bessell_V = Spectrum.from_filter('Generic_Bessell.V')
 bessell_V_norm = bessell_V.normalized_by_area() # used as an averager for the reference spectra
 
-sun_SI = Spectrum.from_FITS('Sun', 'FITS/CALSPEC/sun_reference_stis_002.fits') # W / (m² nm)
+sun_SI = Spectrum.from_file('Sun', 'files/CALSPEC/sun_reference_stis_002.fits') # W / (m² nm)
 sun_in_V = sun_SI * bessell_V_norm
 sun_norm = sun_SI.scaled_to_albedo(1, bessell_V)
 
-vega_SI = Spectrum.from_FITS('Vega', 'FITS/CALSPEC/alpha_lyr_stis_011.fits') # W / (m² nm)
+vega_SI = Spectrum.from_file('Vega', 'files/CALSPEC/alpha_lyr_stis_011.fits') # W / (m² nm)
 vega_in_V = vega_SI * bessell_V_norm
 vega_norm = vega_SI.scaled_to_albedo(1, bessell_V)
 

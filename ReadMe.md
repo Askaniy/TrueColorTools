@@ -53,11 +53,13 @@ True Color Tools GUI is functionally divided into tabs: *Spectra*, *Images*, *Ta
 
 
 ## Database Extension
-The data in the [spectra folder](spectra/) can be modified by the user (except for the "vital" spectra of the [Sun](spectra/FITS/CALSPEC/sun_reference_stis_002.fits) and [Vega](spectra/FITS/CALSPEC/alpha_lyr_stis_011.fits), they cannot be edited). Spectrum and reference information is stored in JSON5 files. The program reads all the JSON5 files in the folder. The display order within TCT is determined by the file names and the order within the file. When duplicating, the last spectrum replaces the previously specified one. Tags can be anything, nothing will break. Their list is formed after reading the files. You can help the project by creating and sharing database files.
+The data in the [spectra folder](spectra/) can be modified by the user (except for the "vital" spectra of the [Sun](spectra/files/CALSPEC/sun_reference_stis_002.fits) and [Vega](spectra/files/CALSPEC/alpha_lyr_stis_011.fits), they cannot be edited). Spectrum and reference information is stored in JSON5 files. The program reads all the JSON5 files in the folder. The display order within TCT is determined by the file names and the order within the file. When duplicating, the last spectrum replaces the previously specified one. Tags can be anything, nothing will break. Their list is formed after reading the files. You can help the project by creating and sharing database files.
 
 Spectrum brightness scale does not affect anything. If you know that the spectrum is reflectivity (where 0 is total absorption and 1 is total reflection), then you can set `albedo=true` and TCT will be able to show the true brightness. Specifying a floating point number will require TCT to make this spectrum in Bessell V filter give such an albedo. Optional internal standard (e.g. for "vital" Solar and Vegan spectra, *Blackbody & Redshifts* tab) is flux spectral density measured in W / (m² nm).
 
-101 stellar spectra of [CALSPEC database](https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec) (as of August 12, 2023) are stored as FITS files in the [spectra/FITS/CALSPEC](spectra/FITS/CALSPEC) folder. If you add spectrum from the database, it is recommended to take the "stis" version and pay attention to the presence of the B−V color index in the table.
+You can not contain the values of wavelengths and brightness inside the JSON5 file, but give a link to an external file there. Text and FITS (*.fits, *.fit) formats are supported. The text file must be in two columns without a header, and the first column of wavelengths must be in angstroms. In FITS files assumed data containing in the second HDU and the first two columns contain wavelengths and flux. If you have problems reading FITS, contact me, I'll improve the parsing on this one.
+
+101 stellar spectra of [CALSPEC database](https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec) (as of August 12, 2023) are stored as FITS files in the [spectra/files/CALSPEC](spectra/files/CALSPEC) folder. If you add spectrum from the database, it is recommended to take the "stis" version and pay attention to the presence of the B−V color index in the table.
 
 TCT will use filter sensitivity profiles for more accurate spectrum restoration. They are provided by [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php) and stored [here](/filters). To replenish the database, select a filter on the site, choose the `ascii` data file and place it in the folder.
 
@@ -67,7 +69,7 @@ Note that any parameters must increase with wavelength.
 - `br` (list): same-size list of "brightness" of an energy counter detector (not photon counter)
 - `mag` (list): same-size list of magnitudes
 - `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
-- `file` (str): path to a FITS file in the `spectra` folder
+- `file` (str): path to a text or FITS file in the `spectra` folder
 - `filters` (list): filter system, linked with [`filters.py`](src/filters.py)
 - `indices` (list): dictionary of color indices, use only with `filters`
 - `bands` (list): list of filters' names, use only with `filters`
