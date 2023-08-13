@@ -23,9 +23,24 @@ visible_range = np.arange(390, 780, 5) # nm
 
 
 # Units of spectral flux density by wavelength and frequency in FITS
-FLAM = u.def_unit('flam', (u.erg / u.s) / (u.cm**2 * u.AA))
+flam = u.def_unit('flam', (u.erg / u.s) / (u.cm**2 * u.AA))
 #FNU = u.def_unit('fnu', (u.erg / u.s) / (u.cm**2 * u.Hz))
+flux_density_SI = u.def_unit('W / (m² nm)', u.W / u.m**2 / u.nm)
 
+def str2unit(string: str, br: bool):
+    """ Simple unit parser for FITS files """
+    string = string.lower()
+    if br: # spectral flux density
+        if string == 'flam':
+            unit = flam
+        else:
+            unit = flux_density_SI
+    else:
+        if string in ('a', 'angstroms'):
+            unit = u.AA
+        else:
+            unit = u.nm
+    return unit
 
 h = 6.626e-34 # Planck constant
 c = 299792458 # Speed of light
@@ -159,20 +174,19 @@ def divisible(array: np.ndarray, number: int):
     """ Boolean function, checks all array to be divisible by the number """
     return not np.any(array % number > 0)
 
-def averaging(x1: np.ndarray, x0: np.ndarray, y0: np.ndarray):
+def averaging(x0: np.ndarray, y0: np.ndarray, x1: np.ndarray):
     """ Returns spectrum brightness values with decreased resolution """
     semistep = (x1[1] - x1[0]) / 2 # most likely semistep = 2.5 nm
     y1 = [np.mean(y0[np.where(x0 < x1[0]+semistep)])]
     for x in x1[1:-1]:
         flag = np.where((x-semistep < x0) & (x0 < x+semistep))
         if flag[0].size == 0: # the spectrum is no longer dense enough to be averaged down to 5 nm
-            x1 = x1[np.where(x1 <= x)]
-            break
+            y = y1[-1] # lengthening the last recorded brightness as the simplest solution
         else:
             y = np.mean(y0[flag]) # average the brightness around X points
-            y1.append(y)
+        y1.append(y)
     y1.append(np.mean(y0[np.where(x0 > x1[-1]-semistep)]))
-    return x1, np.array(y1)
+    return np.array(y1)
 
 def custom_interp(y0: np.ndarray, k=8):
     """
@@ -240,8 +254,8 @@ class Spectrum:
             if self.res <= res: # interpolation, increasing resolution
                 self.br = Akima1DInterpolator(nm, br)(self.nm)
             else: # decreasing resolution if step less than 5 nm
-                self.nm, self.br = averaging(self.nm, nm, br) # updates wavelengths if at the end
-        else: # input could be trusted                          the spectrum is not dense enough to be averaged
+                self.br = averaging(nm, br, self.nm) # updates wavelengths if at the end
+        else: # input could be trusted                 the spectrum is not dense enough to be averaged
             self.nm = nm.astype(int)
             self.br = br
             self.res = res
@@ -299,13 +313,14 @@ class Spectrum:
             return Spectrum(name, angstrom/10, response)
     
     def from_FITS(name: str, file: str):
-        """ Creates a Spectrum object based on the loaded data in CALSPEC standard """
+        """ Creates a Spectrum object based on the loaded data in standards of CALSPEC, VizeR """
         with fits.open(f'spectra/{file}') as hdul:
-            #print(hdul[1].columns)
+            #hdul.info()
+            columns = hdul[1].columns
             tbl = Table(hdul[1].data)
-            x = tbl['WAVELENGTH'] * u.AA
-            y = tbl['FLUX'] * FLAM
-            return Spectrum(name, x.to(u.nm), y.to(u.W / u.m**2 / u.nm))
+            x = tbl[columns[0].name] * str2unit(columns[0].unit, br=False)
+            y = tbl[columns[1].name] * str2unit(columns[1].unit, br=True)
+            return Spectrum(name, x.to(u.nm), y.to(flux_density_SI))
     
     def from_blackbody_redshift(scope: np.ndarray, temperature: int|float, velocity=0., vII=0.):
         """ Creates a Spectrum object based on Planck's law and redshift formulas """

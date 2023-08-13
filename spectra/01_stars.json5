@@ -244,7 +244,7 @@
     },
     "(M5.5Ve) Proxima Centauri|Ribas2017": {"tags": ["featured", "star V dwarf", "extrasolar", "star"],
         "file": "FITS/ProximaCentauri.fit"
-    }
+    },
     "(M7V) VB8|CALSPEC": {"tags": ["featured", "star V dwarf", "extrasolar", "star"],
         "file": "FITS/CALSPEC/vb8_stiswfcnic_004.fits"
     },
