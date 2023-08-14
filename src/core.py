@@ -203,7 +203,7 @@ class Spectrum:
         Constructor of the class to work with single, continuous spectrum, with strictly defined resolutions.
         When creating an object, the spectrum grid is automatically checked and adjusted to uniform, if necessary.
         Specifying resolution removes the check. This is only recommended for speeding up code that is definitely trustworthy.
-        
+
         Args:
         - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
         - `nm` (Iterable): list of wavelengths in nanometers
@@ -244,6 +244,7 @@ class Spectrum:
             print(f'# Note for the Spectrum object "{self.name}"')
             print(f'- NaN values detected during object initialization, they been replaced with zeros.')
 
+    @staticmethod
     def from_photometry_legacy(data: Photometry, scope: np.ndarray):
         """ Creates a Spectrum object with inter- and extrapolated photometry data to fit the wavelength scope """
         if data.file != '':
@@ -258,7 +259,7 @@ class Spectrum:
             print(f'# Note for the Spectrum object "{spectrum.name}"')
             print(f'- Negative values detected during conversion from photometry, they been replaced with zeros.')
         return spectrum
-    
+
     def extrapolate_to(self, scope: np.ndarray):
         """ Returns a new Spectrum object that fits in the range """
         if self.nm[0] > scope[0] or self.nm[-1] < scope[-1]:
@@ -285,11 +286,13 @@ class Spectrum:
             return other
         else:
             return self
-    
+
+    @staticmethod
     def from_filter(name: str):
         """ Creates a Spectrum object based on the loaded data in Filter Profile Service standard """
         return Spectrum(name, *di.txt_reader(f'filters/{name}.dat'))
-    
+
+    @staticmethod
     def from_file(name: str, file: str):
         """ Creates a Spectrum object based on the external loaded data """
         path = 'spectra/'+file
@@ -304,7 +307,8 @@ class Spectrum:
             print(f'- No such file: {path}')
             nm, br = nm_br_stub
         return Spectrum(name, nm, br)
-    
+
+    @staticmethod
     def from_blackbody_redshift(scope: np.ndarray, temperature: int|float, velocity=0., vII=0.):
         """ Creates a Spectrum object based on Planck's law and redshift formulas """
         if temperature == 0:
@@ -339,7 +343,7 @@ class Spectrum:
                 res = resolutions[i-1] # accuracy is always in reserve
                 break
         return res
-    
+
     def to_resolution(self, request: int):
         """ Returns a new Spectrum object with changed wavelength grid step size """
         other = deepcopy(self)
@@ -386,7 +390,7 @@ class Spectrum:
             br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
             br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
             return Spectrum(name, nm, br0*br1, res=self.res).integrate()
-    
+
     def __truediv__(self, other):
         """ Returns a new Spectrum object with the emitter removed, i.e. the reflection spectrum """
         divided = deepcopy(self)
@@ -411,20 +415,20 @@ class Spectrum:
             br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
             divided.br = br0 / br1
         return divided
-    
+
     def integrate(self) -> float:
         """ Calculates the area over the spectrum using the mean rectangle method, per nm """
         curve = self.to_resolution(resolutions[0])
         midpoints = (curve.br[:-1] + curve.br[1:]) / 2
         area = np.sum(midpoints * curve.res)
         return area
-    
+
     def normalized_by_area(self):
         """ Returns a new Spectrum object with brightness scaled to its area be equal 1 """
         other = deepcopy(self)
         other.br /= other.integrate()
         return other
-    
+
     def normalized_on_wavelength(self, request: int):
         """ Returns a new Spectrum object with brightness scaled to be equal 1 at the specified wavelength """
         other = deepcopy(self)
@@ -435,7 +439,7 @@ class Spectrum:
             print(f'- {request} was chosen as the closest value.')
         other.br /= other.br[np.where(other.nm == request)]
         return other
-    
+
     def scaled_to_albedo(self, albedo: float, transmission):
         """ Returns a new Spectrum object with brightness scaled to give the albedo after convolution with the filter """
         other = deepcopy(self)
@@ -446,7 +450,7 @@ class Spectrum:
         else:
             other.br *= albedo / current_albedo
         return other
-    
+
     def mean_wavelength(self) -> float:
         return np.average(self.nm, weights=self.br)
 
@@ -522,7 +526,7 @@ class Color:
         Constructor of the class to work with color represented by three float values in [0, 1] range.
         The albedo flag on means that you have already normalized the brightness over the range.
         By default, initialization implies normalization and you get chromaticity.
-        
+
         Args:
         - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
         - `rgb` (Iterable): array of three values that are red, green and blue
@@ -554,11 +558,13 @@ class Color:
             print(f'- It has been replaced with {rgb}.')
         self.rgb = rgb
 
+    @staticmethod
     def from_spectrum_legacy(spectrum: Spectrum, albedo=False):
         """ A simple and concrete color processing method based on experimental eye sensitivity curves """
         rgb = [spectrum * i for i in (r, g, b)] # convolution
         return Color(spectrum.name, rgb, albedo)
 
+    @staticmethod
     def from_spectrum(spectrum: Spectrum, albedo=False, color_system=srgb):
         """ Conventional color processing method: spectrum -> CIE XYZ -> sRGB with illuminant E """
         xyz = [spectrum * i for i in (x, y, z)] # convolution
