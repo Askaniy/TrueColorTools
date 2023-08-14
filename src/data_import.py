@@ -73,7 +73,7 @@ def obj_dict(database: dict, tag: str, lang: str):
                 flag = False
         if flag:
             if '|' in raw_name:
-                new_name, source = raw_name.split('|', 1)
+                new_name, source = raw_name.split('|', -1)
             else:
                 new_name, source = raw_name, ''
             if lang != 'en': # parsing and translating

@@ -99,30 +99,42 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
         text_color = (0, 0, 0) if rgb.mean() >= 127 else (255, 255, 255)
         
         # Name processing
-        if name[0] == '(':
-            parts = name.split(')', 1)
-            name = parts[1].strip()
-            index = parts[0][1:].replace('+', '\n+')
-            draw.multiline_text((center_x-ar, center_y-ar), f'{index}', fill=text_color, font=small_font, anchor='la', align='left', spacing=0)
-        elif '/' in name:
-            parts = name.split('/', 1)
-            name = parts[1].strip()
-            draw.text((center_x-ar, center_y-ar), f'{parts[0]}/', fill=text_color, font=small_font)
+        workaround_shift = 3 # it is not possible to use "lt" and "rt" anchors for multiline text https://pillow.readthedocs.io/en/stable/handbook/text-anchors.html
         
+        ref_len = 0 # to avoid intersections with indices in the left corner
         if '[' in name:
             parts = name.split('[', -1)
             name = parts[0].strip()
             ref = parts[1][:-1]
             if ',' in ref: # check for several references, no more than 3 supported
-                ref = '\n'.join([spacing_year(i.strip()) for i in ref.split(',', 2)]) 
-            elif ref[-4:].isnumeric() and (ref[-5].isalpha() or ref[-5]==''): # check for the year in the reference name to print it on the second line
+                refs = [spacing_year(i.strip()) for i in ref.split(',', 2)]
+                ref = '\n'.join(refs) 
+                ref_len = width(refs[0], small_font)
+            elif ref[-4:].isnumeric() and (ref[-5].isalpha() or ref[-5] in separators): # check for the year in the reference name to print it on the second line
                 author = ref[:-4].strip()
                 year = ref[-4:]
                 if width(author, small_font) > width(year, small_font):
                     ref = f'{author}\n{year}'
+                    ref_len = width(author, small_font)
                 else:
                     ref = spacing_year(ref)
-            draw.multiline_text((center_x+ar, center_y-ar), ref, fill=text_color, font=small_font, anchor='ra', align='right', spacing=0)
+                    ref_len = width(ref, small_font)
+            draw.multiline_text((center_x+ar, center_y-ar-workaround_shift), ref, fill=text_color, font=small_font, anchor='ra', align='right', spacing=0)
+        
+        if name[0] == '(':
+            parts = name.split(')', 1)
+            name = parts[1].strip()
+            index = parts[0][1:].strip()
+            if '+' in index:
+                index = index.replace('+', '\n+')
+            else:
+                free_space = ar + br - ref_len - 3
+                index = '\n'.join(line_splitter(index, small_font, free_space))
+            draw.multiline_text((center_x-ar, center_y-ar-workaround_shift), f'{index}', fill=text_color, font=small_font, anchor='la', align='left', spacing=0)
+        elif '/' in name:
+            parts = name.split('/', 1)
+            name = parts[1].strip()
+            draw.text((center_x-ar, center_y-ar-workaround_shift), f'{parts[0]}/', fill=text_color, font=small_font)
         
         splitted = line_splitter(name, object_font, ar+br)
         shift = object_size/2 if len(splitted) == 1 else object_size
@@ -134,6 +146,8 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
     print(f'Color table saved as {file_name}\n')
 
 
+separators = (' ', ':', '+', '-')
+
 def spacing_year(line: str):
     """ Adds space between author and year in a reference name """
     if line[-4:].isnumeric() and line[-5].isalpha():
@@ -143,10 +157,6 @@ def spacing_year(line: str):
 def width(line: str, font: ImageFont.FreeTypeFont):
     """ Alias for measuring line width in pixels """
     return font.getlength(line)
-
-def hight(line: str, font: ImageFont.FreeTypeFont):
-    """ Alias for measuring line width in pixels """
-    return font.get
 
 def line_splitter(line: str, font: ImageFont.FreeTypeFont, maxW: int):
     """ Performs an adaptive line break at the specified width in pixels """
@@ -180,7 +190,7 @@ def recursive_split(lst0: list, font: ImageFont.FreeTypeFont, maxW: int, hyphen=
                 while width(lst[i], font)+hyphen_w > maxW:
                     lst[i+1] = lst[i][-1] + lst[i+1]
                     lst[i] = lst[i][:-1]
-                if lst[i][-1] in [' ', ':', '-']:
+                if lst[i][-1] in separators:
                     recursive_split(lst0, font, maxW, hyphen=False)
                 else:
                     lst[i] += '-'
