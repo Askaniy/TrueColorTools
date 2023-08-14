@@ -33,11 +33,11 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
     note_step = 4 + note_size
 
     # Load fonts
-    name_font = ImageFont.truetype('fonts/NotoSans-DisplayCondensedSemiBold.ttf', name_size)
-    object_font = ImageFont.truetype('fonts/NotoSans-DisplayExtraCondensed.ttf', object_size)
-    help_font = ImageFont.truetype('fonts/NotoSans-DisplayCondensedSemiBold.ttf', help_size)
-    note_font = ImageFont.truetype('fonts/NotoSans-DisplayCondensed.ttf', note_size)
-    small_font = ImageFont.truetype('fonts/NotoSans-DisplayCondensed.ttf', 12)
+    name_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensedSemiBold.ttf', name_size)
+    object_font = ImageFont.truetype('src/fonts/NotoSans-DisplayExtraCondensed.ttf', object_size)
+    help_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensedSemiBold.ttf', help_size)
+    note_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensed.ttf', note_size)
+    small_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensed.ttf', 12)
 
     # Support for multiline title
     title_lines = line_splitter(tag.join(tr.name_text[lang]), name_font, w_table)

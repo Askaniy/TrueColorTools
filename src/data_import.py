@@ -1,9 +1,32 @@
 from pathlib import Path
+from astropy.io import fits
+from astropy.table import Table
+import astropy.units as u
 import json5
 import traceback
 import numpy as np
-import src.core as core
 import src.strings as tr
+
+
+# Units of spectral flux density by wavelength and frequency
+flam = u.def_unit('flam', (u.erg / u.s) / (u.cm**2 * u.AA))
+#FNU = u.def_unit('fnu', (u.erg / u.s) / (u.cm**2 * u.Hz))
+flux_density_SI = u.def_unit('W / (m² nm)', u.W / u.m**2 / u.nm)
+
+def str2unit(string: str, br: bool):
+    """ Simple unit parser for FITS files """
+    string = string.lower()
+    if br: # spectral flux density
+        if string == 'flam':
+            unit = flam
+        else:
+            unit = flux_density_SI
+    else:
+        if string in ('a', 'angstroms'):
+            unit = u.AA
+        else:
+            unit = u.nm
+    return unit
 
 
 # Support of filters database provided by Filter Profile Service
@@ -57,6 +80,21 @@ def import_folder(folder: str):
         print(f'More precisely, {traceback.format_exc(limit=0)}')
     return objects, refs
 
+def txt_reader(file: str):
+    """ Imports spectrum data from a simple text file. Wavelength only in angstroms """
+    with open(file) as f:
+        angstrom, response = np.loadtxt(f).transpose()
+    return angstrom/10, response
+
+def fits_reader(file: str):
+    """ Imports spectrum data from FITS file in standards of CALSPEC, VizeR, etc """
+    with fits.open(file) as hdul:
+        #hdul.info()
+        columns = hdul[1].columns # most likely the second HDU contains data
+        tbl = Table(hdul[1].data)
+        x = tbl[columns[0].name] * str2unit(columns[0].unit, br=False)
+        y = tbl[columns[1].name] * str2unit(columns[1].unit, br=True)
+    return x.to(u.nm), y.to(flux_density_SI)
 
 # Front-end view on spectra database
 

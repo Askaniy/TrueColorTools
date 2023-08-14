@@ -311,67 +311,67 @@
     "(DO2) HZ21|CALSPEC": {"tags": ["featured", "VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/hz21_stis_007.fits"
     },
-    "(DBQ4) LDS749 B|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
+    "(DBQ4) LDS 749 B|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/lds749b_stisnic_008.fits"
     },
-    "(DBQA5) GJ754.1 A|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
+    "(DBQA5) GJ 754.1 A|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/gj7541a_stis_004.fits"
     },
     "(DA) HZ43(8)|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/hz43_stis_005.fits"
     }, // HZ43 and HZ3B are separated by ~3arcsec (BDC)
-    "(DA) WD1026+453|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
+    "(DA) WD 1026+453|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/wd1026_453_stis_007.fits"
     },
-    "(DA0.8) G191-B2B|CALSPEC": {"tags": ["featured", "VII white dwarf", "extrasolar", "star"],
+    "(DA0.8) G191-B2B|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/g191b2b_stiswfcnic_004.fits"
     },
-    "(DA1.2) GD153|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
+    "(DA1.2) GD 153|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/gd153_stiswfcnic_004.fits"
     },
-    "(DA1.5) GD71|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
+    "(DA1.5) GD 71|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/gd71_stiswfcnic_004.fits"
     },
-    "(DA1.8) SDSS J151421|CALSPEC": {"tags": ["featured", "VII white dwarf", "extrasolar", "star"],
+    "(DA1.8) SDSS J151421|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/sdssj151421_stis_005.fits"
     },
     "(DA2.4) GRW+70 5824|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/grw_70d5824_stiswfcnic_003.fits"
     },
-    "(DA2.5) WD0227+050|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
+    "(DA2.5) WD 0227+050|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/wd0227_050_stiswfc_002.fits"
     },
-    "(DA2.8) WD2149+021|CALSPEC": {"tags": ["featured", "VII white dwarf", "extrasolar", "star"],
+    "(DA2.8) WD 2149+021|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/wd2149_021_stiswfc_001.fits"
     },
-    "(DA3.0) WD2039-682|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
+    "(DA3.0) WD 2039-682|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/wd2039_682_stiswfc_001.fits"
     },
-    "(DA3.1) WD2126+734|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
+    "(DA3.1) WD 2126+734|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/wd2126_734_stiswfc_002.fits"
     },
-    "(DA3.3) WD1919+145|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
+    "(DA3.3) WD 1919+145|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/wd1919_145_stiswfc_001.fits"
     },
     "(DA3.4) HZ4|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/hz4_stis_008.fits"
     },
-    "(DA3.5) WD1327-083|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
+    "(DA3.5) WD 1327-083|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/wd1327_083_stiswfc_004.fits"
     },
-    "(DA3.6) WD0148+467|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
+    "(DA3.6) WD 0148+467|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/wd0148_467_stiswfc_001.fits"
     },
-    "(DA3.6) WD1105-340|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
+    "(DA3.6) WD 1105-340|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/wd1105_340_stiswfc_002.fits"
     },
-    "(DA3.8) WD2341+322|CALSPEC": {"tags": ["featured", "VII white dwarf", "extrasolar", "star"],
+    "(DA3.8) WD 2341+322|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/wd2341_322_stiswfc_004.fits"
     },
-    "(DA4.8) WD1544-377|CALSPEC": {"tags": ["featured", "VII white dwarf", "extrasolar", "star"],
+    "(DA4.8) WD 1544-377|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/wd1544_377_stiswfc_002.fits"
     },
-    "(DA5.7) WD1202-232|CALSPEC": {"tags": ["featured", "VII white dwarf", "extrasolar", "star"],
+    "(DA5.7) WD 1202-232|CALSPEC": {"tags": ["featured", "VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/wd1202_232_stiswfc_002.fits"
     }
 }

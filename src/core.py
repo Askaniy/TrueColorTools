@@ -1,10 +1,8 @@
-import numpy as np
 from scipy.interpolate import Akima1DInterpolator
-from astropy.io import fits
-from astropy.table import Table
-import astropy.units as u
 from typing import TypeVar, Iterable, Tuple
 from copy import deepcopy
+import numpy as np
+import src.data_import as di
 
 
 
@@ -23,41 +21,7 @@ visible_range = np.arange(390, 780, 5) # nm
 # Returned on problems with initialization
 nm_br_stub = (np.array([550, 560]), np.zeros(2))
 
-# Units of spectral flux density by wavelength and frequency in FITS
-flam = u.def_unit('flam', (u.erg / u.s) / (u.cm**2 * u.AA))
-#FNU = u.def_unit('fnu', (u.erg / u.s) / (u.cm**2 * u.Hz))
-flux_density_SI = u.def_unit('W / (m² nm)', u.W / u.m**2 / u.nm)
 
-def str2unit(string: str, br: bool):
-    """ Simple unit parser for FITS files """
-    string = string.lower()
-    if br: # spectral flux density
-        if string == 'flam':
-            unit = flam
-        else:
-            unit = flux_density_SI
-    else:
-        if string in ('a', 'angstroms'):
-            unit = u.AA
-        else:
-            unit = u.nm
-    return unit
-
-def txt_reader(file: str):
-    """ Imports spectrum data from a simple text file. Wavelength only in angstroms """
-    with open(file) as f:
-        angstrom, response = np.loadtxt(f).transpose()
-    return angstrom/10, response
-
-def fits_reader(file: str):
-    """ Imports spectrum data from FITS file in standards of CALSPEC, VizeR, etc """
-    with fits.open(file) as hdul:
-        #hdul.info()
-        columns = hdul[1].columns # most likely the second HDU contains data
-        tbl = Table(hdul[1].data)
-        x = tbl[columns[0].name] * str2unit(columns[0].unit, br=False)
-        y = tbl[columns[1].name] * str2unit(columns[1].unit, br=True)
-    return x.to(u.nm), y.to(flux_density_SI)
 
 h = 6.626e-34 # Planck constant
 c = 299792458 # Speed of light
@@ -324,7 +288,7 @@ class Spectrum:
     
     def from_filter(name: str):
         """ Creates a Spectrum object based on the loaded data in Filter Profile Service standard """
-        return Spectrum(name, *txt_reader(f'filters/{name}.dat'))
+        return Spectrum(name, *di.txt_reader(f'filters/{name}.dat'))
     
     def from_file(name: str, file: str):
         """ Creates a Spectrum object based on the external loaded data """
@@ -332,9 +296,9 @@ class Spectrum:
         extension = file.split('.')[-1].lower()
         try:
             if extension in ('fits', 'fit'):
-                nm, br = fits_reader(path)
+                nm, br = di.fits_reader(path)
             else:
-                nm, br = txt_reader(path)
+                nm, br = di.txt_reader(path)
         except FileNotFoundError:
             print(f'# Note for the Spectrum object "{name}"')
             print(f'- No such file: {path}')
@@ -532,16 +496,16 @@ srgb = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_E)
 # Stiles & Burch (1959) 10-deg color matching data, direct experimental data
 # http://www.cvrl.org/stilesburch10_ind.htm
 # Sensitivity modulo values less than 10^-4 were previously removed
-r = Spectrum('r CMF', *np.loadtxt('cmf/StilesBurch10deg.r.dat').transpose(), res=5).normalized_by_area()
-g = Spectrum('g CMF', *np.loadtxt('cmf/StilesBurch10deg.g.dat').transpose(), res=5).normalized_by_area()
-b = Spectrum('b CMF', *np.loadtxt('cmf/StilesBurch10deg.b.dat').transpose(), res=5).normalized_by_area()
+r = Spectrum('r CMF', *np.loadtxt('src/cmf/StilesBurch10deg.r.dat').transpose(), res=5).normalized_by_area()
+g = Spectrum('g CMF', *np.loadtxt('src/cmf/StilesBurch10deg.g.dat').transpose(), res=5).normalized_by_area()
+b = Spectrum('b CMF', *np.loadtxt('src/cmf/StilesBurch10deg.b.dat').transpose(), res=5).normalized_by_area()
 
 # CIE XYZ functions transformed from the CIE (2006) LMS functions, 10-deg
 # http://www.cvrl.org/ciexyzpr.htm
 # Sensitivity modulo values less than 10^-4 were previously removed
-x = Spectrum('x CMF', *np.loadtxt('cmf/cie10deg.x.dat').transpose(), res=5)
-y = Spectrum('y CMF', *np.loadtxt('cmf/cie10deg.y.dat').transpose(), res=5)
-z = Spectrum('z CMF', *np.loadtxt('cmf/cie10deg.z.dat').transpose(), res=5)
+x = Spectrum('x CMF', *np.loadtxt('src/cmf/cie10deg.x.dat').transpose(), res=5)
+y = Spectrum('y CMF', *np.loadtxt('src/cmf/cie10deg.y.dat').transpose(), res=5)
+z = Spectrum('z CMF', *np.loadtxt('src/cmf/cie10deg.z.dat').transpose(), res=5)
 # Normalization. TODO: find an official way to calibrate brightness for albedo!
 # 355.5 was guessed so that the brightness was approximately the same as that of the legacy version
 x.br /= 355.5
