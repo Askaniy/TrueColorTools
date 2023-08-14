@@ -64,7 +64,7 @@ def import_folder(folder: str):
     try:
         for file in sorted(Path(folder).iterdir()):
             if file.suffix == '.json5' and not file.is_dir():
-                with open(file) as f:
+                with open(file, 'rt', encoding='UTF-8') as f:
                     try:
                         content = json5.load(f)
                         for key, value in content.items():
@@ -82,7 +82,7 @@ def import_folder(folder: str):
 
 def txt_reader(file: str):
     """ Imports spectrum data from a simple text file. Wavelength only in angstroms """
-    with open(file) as f:
+    with open(file, 'rt', encoding='UTF-8') as f:
         angstrom, response = np.loadtxt(f).transpose()
     return angstrom/10, response
 
