@@ -19,7 +19,13 @@ def mag2intensity(m: int|float|np.ndarray):
 #    return -2.5 * np.log10(e / V)
 
 
-# Align mustispectral image bands
+# Linear extrapolation
+
+def line_generator(x1, y1, x2, y2):
+    return np.vectorize(lambda wl: y1 + (wl - x1) * (y2 - y1) / (x2 - x1))
+
+
+# Align multiband image
 
 def autoalign(data: np.ndarray, debug: bool):
     l, h, w = data.shape

@@ -170,7 +170,7 @@ def averaging(x0: np.ndarray, y0: np.ndarray, x1: np.ndarray):
 
 def custom_interp(y0: np.ndarray, k=8):
     """
-    Returns curve values on an uniform grid with twice the resolution.
+    Returns curve values on an uniform grid with twice the resolution. Can be used in a loop.
     Optimal in terms of speed to quality ratio. Invented while trying to sleep.
 
     Args:
@@ -184,10 +184,14 @@ def custom_interp(y0: np.ndarray, k=8):
     y1[1::2] = (y0[:-1] + y0[1:] + (delta_left - delta_right) / k) / 2
     return np.clip(y1, 0, None)
 
-def line_generator(x1, y1, x2, y2):
-    return np.vectorize(lambda wl: y1 + (wl - x1) * (y2 - y1) / (x2 - x1))
-
-exp_const = 1 / np.sqrt(np.e)
+def custom_extrap(grid: np.ndarray, derivative: float, corner_x: int|float, corner_y: float) -> np.ndarray:
+    """
+    Returns an intuitive continuation of the function on the grid using information about the last point.
+    Extrapolation bases on function f(x) = exp( (1-x²)/2 ): f' has extrema of ±1 in (-1, 1) and (1, 1).
+    Therefore, it scales to complement the spectrum more easily than similar functions.
+    """
+    sign = np.sign(derivative)
+    return np.exp((1 - (np.abs(derivative) * (grid - corner_x) / corner_y - sign)**2) / 2) * corner_y
 
 def grid(start: int|float, end: int|float, res: int):
     """ Returns grid points in the range that are divisible by the selected step """
@@ -261,28 +265,28 @@ class Spectrum:
         return spectrum
 
     def extrapolate_to(self, scope: np.ndarray):
-        """ Returns a new Spectrum object that fits in the range """
+        """ Returns a Spectrum object that at least defined in the scope """
         if self.nm[0] > scope[0] or self.nm[-1] < scope[-1]:
-            other = self.to_resolution(5) # 5 is resolution of the scope, it's workaround
-            line = line_generator(other.nm[0], other.br[0], other.nm[-1], other.br[-1]) # to reduce the chance of a very bad result
+            res = int(scope[1] - scope[0]) # =5 most likely
+            other = self.to_resolution(res)
             if other.nm[0] > scope[0]: # extrapolation to blue
-                nm = np.arange(scope[0], other.nm[0], other.res)
-                delta = (other.br[1] - other.br[0]) / other.res # derivative
-                if delta == 0: # extrapolation by constant
+                nm = np.arange(scope[0], other.nm[0], res)
+                derivative = (other.br[1] - other.br[0]) / res
+                if derivative == 0: # extrapolation by constant
                     br = np.full(nm.size, nm[0])
                 else:
-                    br = np.exp(-np.e/2 * (np.abs(delta) * (nm - other.nm[0]) - exp_const * np.sign(delta))**2) / exp_const * other.br[0]
+                    br = custom_extrap(nm, derivative, other.nm[0], other.br[0])
                 other.nm = np.append(nm, other.nm)
-                other.br = np.append((br+line(nm))/2, other.br)
+                other.br = np.append(br, other.br)
             if other.nm[-1] < scope[-1]: # extrapolation to red
-                nm = np.arange(other.nm[-1], scope[-1], other.res) + other.res
-                delta = (other.br[-1] - other.br[-2]) / other.res # derivative
-                if delta == 0: # extrapolation by constant
+                nm = np.arange(other.nm[-1], scope[-1], res) + res
+                derivative = (other.br[-1] - other.br[-2]) / res
+                if derivative == 0: # extrapolation by constant
                     br = np.full(nm.size, nm[-1])
                 else:
-                    br = np.exp(-np.e/2 * (np.abs(delta) * (nm - other.nm[-1]) - exp_const * np.sign(delta))**2) / exp_const * other.br[-1]
+                    br = custom_extrap(nm, derivative, other.nm[-1], other.br[-1])
                 other.nm = np.append(other.nm, nm)
-                other.br = np.append(other.br, (br+line(nm))/2)
+                other.br = np.append(other.br, br)
             return other
         else:
             return self
