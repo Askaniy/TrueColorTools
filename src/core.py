@@ -150,9 +150,14 @@ class Photometry:
 
 
 
-def divisible(array: np.ndarray, number: int):
+def is_divisible(array: np.ndarray, number: int):
     """ Boolean function, checks all array to be divisible by the number """
     return not np.any(array % number > 0)
+
+def is_smooth(br: Iterable):
+    """ Boolean function, checks the second derivative for sign reversal, a simple criterion for smoothness """
+    diff2 = np.diff(np.diff(br))
+    return np.all(diff2 <= 0) | np.all(diff2 >= 0)
 
 def averaging(x0: np.ndarray, y0: np.ndarray, x1: np.ndarray):
     """ Returns spectrum brightness values with decreased resolution """
@@ -190,8 +195,13 @@ def custom_extrap(grid: np.ndarray, derivative: float, corner_x: int|float, corn
     Extrapolation bases on function f(x) = exp( (1-x²)/2 ): f' has extrema of ±1 in (-1, 1) and (1, 1).
     Therefore, it scales to complement the spectrum more easily than similar functions.
     """
-    sign = np.sign(derivative)
-    return np.exp((1 - (np.abs(derivative) * (grid - corner_x) / corner_y - sign)**2) / 2) * corner_y
+    if derivative == 0: # extrapolation by constant
+        return np.full(grid, corner_y)
+    else:
+        sign = np.sign(derivative)
+        return np.exp((1 - (np.abs(derivative) * (grid - corner_x) / corner_y - sign)**2) / 2) * corner_y
+
+weights_center_of_mass = 1 - 1 / np.sqrt(2)
 
 def grid(start: int|float, end: int|float, res: int):
     """ Returns grid points in the range that are divisible by the selected step """
@@ -226,7 +236,7 @@ class Spectrum:
             blocks = set(steps)
             if len(blocks) == 1: # uniform grid
                 res = int(*blocks)
-                if divisible(nm, res) and res in resolutions: # perfect grid
+                if is_divisible(nm, res) and res in resolutions: # perfect grid
                     self.br = br
                     self.nm = nm.astype(int)
                     self.res = res
@@ -238,8 +248,8 @@ class Spectrum:
             if self.res <= res: # interpolation, increasing resolution
                 self.br = Akima1DInterpolator(nm, br)(self.nm)
             else: # decreasing resolution if step less than 5 nm
-                self.br = averaging(nm, br, self.nm) # updates wavelengths if at the end
-        else: # input could be trusted                 the spectrum is not dense enough to be averaged
+                self.br = averaging(nm, br, self.nm)
+        else: # input could be trusted
             self.nm = nm.astype(int)
             self.br = br
             self.res = res
@@ -264,27 +274,39 @@ class Spectrum:
             print(f'- Negative values detected during conversion from photometry, they been replaced with zeros.')
         return spectrum
 
-    def extrapolate_to(self, scope: np.ndarray):
-        """ Returns a Spectrum object that at least defined in the scope """
+    def extrapolate_to(self, scope: np.ndarray, avg_steps=20):
+        """
+        Returns a Spectrum object that at least defined in the scope.
+        `avg_steps` is a number of corner spectrum points to be averaged if the spectrum is not smooth.
+        Averaging weights on this range grow linearly closer to the edge (from 0 to 1).
+        """
         if self.nm[0] > scope[0] or self.nm[-1] < scope[-1]:
-            res = int(scope[1] - scope[0]) # =5 most likely
+            res = int(scope[1] - scope[0])
             other = self.to_resolution(res)
             if other.nm[0] > scope[0]: # extrapolation to blue
                 nm = np.arange(scope[0], other.nm[0], res)
-                derivative = (other.br[1] - other.br[0]) / res
-                if derivative == 0: # extrapolation by constant
-                    br = np.full(nm.size, nm[0])
-                else:
-                    br = custom_extrap(nm, derivative, other.nm[0], other.br[0])
+                br_scope = other.br[:avg_steps]
+                if is_smooth(br_scope):
+                    diff = other.br[1]-other.br[0]
+                    corner_y = other.br[0]
+                else:           # weights could be more complicated, but there is no need
+                    avg_weights = np.abs(np.arange(-avg_steps, 0))
+                    diff = np.average(br_scope[1:]-br_scope[:-1], weights=avg_weights[:-1])
+                    corner_y = np.average(br_scope, weights=avg_weights) - diff * avg_steps * weights_center_of_mass
+                br = custom_extrap(nm, diff/res, other.nm[0], corner_y)
                 other.nm = np.append(nm, other.nm)
                 other.br = np.append(br, other.br)
             if other.nm[-1] < scope[-1]: # extrapolation to red
                 nm = np.arange(other.nm[-1], scope[-1], res) + res
-                derivative = (other.br[-1] - other.br[-2]) / res
-                if derivative == 0: # extrapolation by constant
-                    br = np.full(nm.size, nm[-1])
+                br_scope = other.br[-avg_steps:]
+                if is_smooth(br_scope):
+                    diff = other.br[-1]-other.br[-2]
+                    corner_y = other.br[-1]
                 else:
-                    br = custom_extrap(nm, derivative, other.nm[-1], other.br[-1])
+                    avg_weights = np.arange(avg_steps) + 1
+                    diff = np.average(br_scope[1:]-br_scope[:-1], weights=avg_weights[1:])
+                    corner_y = np.average(br_scope, weights=avg_weights) + diff * avg_steps * weights_center_of_mass
+                br = custom_extrap(nm, diff/res, other.nm[-1], corner_y)
                 other.nm = np.append(other.nm, nm)
                 other.br = np.append(other.br, br)
             return other
