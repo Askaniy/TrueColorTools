@@ -1,24 +1,15 @@
-import io
-import time
-import numpy as np
 import PySimpleGUI as sg
-from PIL import Image, ImageDraw
 import src.core as core
 import src.gui as gui
 import src.filters as filters
 import src.data_import as di
+import src.image as im
 import src.plotter as pl
 import src.strings as tr
 import src.table_generator as tg
 #import src.experimental
 
 
-def convert_to_bytes(img: Image.Image):
-    """ Prepares PIL's image to be displayed in the window """
-    bio = io.BytesIO()
-    img.save(bio, format='png')
-    del img
-    return bio.getvalue()
 
 def export_colors(rgb: tuple):
     """ Generated formatted string of colors """
@@ -34,7 +25,6 @@ def export_colors(rgb: tuple):
 
 def launch_window():
     lang = 'en' # can be translated into German or Russian at runtime
-    debug = False
     objectsDB, refsDB = {}, {} # initial loading became too long with separate json5 database files
     tagsDB = []
     default_tag = 'featured'
@@ -42,13 +32,13 @@ def launch_window():
 
     circle_r = 100 # radius in pixels of color preview circle
     circle_coord = (circle_r, circle_r+1)
-    T2_preview = (256, 128)
-    T2_area = T2_preview[0]*T2_preview[1]
+    T2_preview_size = (256, 128)
+    T2_preview_area = T2_preview_size[0]*T2_preview_size[1]
     text_colors = (gui.muted_color, gui.text_color)
 
     sg.ChangeLookAndFeel('MaterialDark')
     window = sg.Window(
-        'True Color Tools', gui.generate_layout((2*circle_r+1, 2*circle_r+1), T2_preview, text_colors, filtersDB, lang),
+        'True Color Tools', gui.generate_layout((2*circle_r+1, 2*circle_r+1), T2_preview_size, text_colors, filtersDB, lang),
         finalize=True, resizable=True, margins=(0, 0), size=(900, 600))
     T2_vis = 3  # current number of visible image bands
     T2_num = 10 # max number of image bands, ~ len(window['T2_frames'])
@@ -303,132 +293,22 @@ def launch_window():
             window['T2_process'].update(disabled=not T2_preview_status) if values['T2_folder'] != '' else window['T2_process'].update(disabled=True)
             
             if event in ('T2_preview', 'T2_process'):
-
-                T2_time = time.monotonic()
-                T2_load = []
-
-                if values['T2_single']:
-                    T2_rgb_img = Image.open(values['T2_path'])
-                    if T2_rgb_img.mode == 'P': # NameError if color is indexed
-                        T2_rgb_img = T2_rgb_img.convert('RGB')
-                        sg.Print('Note: image converted from "P" (indexed color) mode to "RGB"')
-                    if event == 'T2_preview':
-                        T2_ratio = T2_rgb_img.width / T2_rgb_img.height
-                        T2_rgb_img = T2_rgb_img.resize((int(np.sqrt(T2_area*T2_ratio)), int(np.sqrt(T2_area/T2_ratio))), resample=Image.Resampling.HAMMING)
-                    if len(T2_rgb_img.getbands()) == 3:
-                        r, g, b = T2_rgb_img.split()
-                        a = None
-                    elif len(T2_rgb_img.getbands()) == 4:
-                        r, g, b, a = T2_rgb_img.split()
-                    for i in [b, g, r]:
-                        T2_load.append(np.array(i))
-                else:
-                    T2_exposures = [float(values['T2_exposure'+str(i)]) for i in range(T2_vis)]
-                    T2_max_exposure = max(T2_exposures)
-                    for i in range(T2_vis):
-                        T2_bw_img = Image.open(values['T2_path'+str(i)])
-                        if T2_bw_img.mode not in ('L', 'I', 'F'): # image should be b/w
-                            sg.Print(f'Note: image of band {i+1} converted from "{T2_bw_img.mode}" mode to "L"')
-                            T2_bw_img = T2_bw_img.convert('L')
-                        if i == 0:
-                            T2_size = T2_bw_img.size
-                        else:
-                            if T2_size != T2_bw_img.size:
-                                sg.Print(f'Note: image of band {i+1} resized from {T2_bw_img.size} to {T2_size}')
-                                T2_bw_img = T2_bw_img.resize(T2_size)
-                        if event == 'T2_preview':
-                            T2_ratio = T2_bw_img.width / T2_bw_img.height
-                            T2_bw_img = T2_bw_img.resize((int(np.sqrt(T2_area*T2_ratio)), int(np.sqrt(T2_area/T2_ratio))), resample=Image.Resampling.HAMMING)
-                        T2_load.append(np.array(T2_bw_img) / T2_exposures[i] * T2_max_exposure)
-                
-                T2_data = np.array(T2_load, 'int64')
-                T2_l, T2_h, T2_w = T2_data.shape
-                
-                #if values['T2_autoalign']:
-                #    T2_data = src.experimental.autoalign(T2_data, debug)
-                #    T2_l, T2_h, T2_w = T2_data.shape
-                
-                T2_data = T2_data.astype('float32')
-                T2_max = T2_data.max()
-                if values['T2_makebright']:
-                    T2_data *= 65500 / T2_max
-                    T2_input_bit = 16
-                    T2_input_depth = 65535
-                else:
-                    T2_input_bit = 16 if T2_max > 255 else 8
-                    T2_input_depth = 65535 if T2_max > 255 else 255
-                #T2_data = np.clip(T2_data, 0, T2_input_depth)
-
-                T2_img = Image.new('RGB', (T2_w, T2_h), (0, 0, 0))
-                T2_draw = ImageDraw.Draw(T2_img)
-                T2_counter = 0
-                T2_px_num = T2_w*T2_h
-
-                sg.Print(f'\n{round(time.monotonic() - T2_time, 3)} seconds for loading, autoalign and creating output templates\n')
-                sg.Print(f'{time.strftime("%H:%M:%S")} 0%')
-
-                T2_time = time.monotonic()
-                T2_get_spectrum_time = 0
-                T2_calc_polator_time = 0
-                T2_calc_rgb_time = 0
-                T2_draw_point_time = 0
-                T2_plot_pixels_time = 0
-                T2_progress_bar_time = 0
-
-                for x in range(T2_w):
-                    for y in range(T2_h):
-
-                        T2_temp_time = time.monotonic_ns()
-                        T2_slice = T2_data[:, y, x]
-                        T2_get_spectrum_time += time.monotonic_ns() - T2_temp_time
-
-                        if np.sum(T2_slice) > 0:
-                            T2_name = f'({x}; {y})'
-
-                            T2_temp_time = time.monotonic_ns() # Spectral data processing
-                            T2_spectrum = core.Spectrum(T2_name, input_data['nm'], list(T2_slice), scope=core.visible_range)
-                            if input_data['desun']:
-                                T2_spectrum /= core.sun_norm
-                            T2_calc_polator_time += time.monotonic_ns() - T2_temp_time
-
-                            T2_temp_time = time.monotonic_ns() # Color calculation
-                            if input_data['srgb']:
-                                T2_color = core.Color.from_spectrum(T2_spectrum, albedo=True)
-                            else:
-                                T2_color = core.Color.from_spectrum_legacy(T2_spectrum, albedo=True)
-                            if input_data['gamma']:
-                                T2_color = T2_color.gamma_corrected()
-                            T2_color.rgb /= T2_input_bit
-                            T2_rgb = tuple(T2_color.to_bit(8).round().astype(int))
-                            T2_calc_rgb_time += time.monotonic_ns() - T2_temp_time
-
-                            T2_temp_time = time.monotonic_ns()
-                            T2_draw.point((x, y), T2_rgb)
-                            T2_draw_point_time += time.monotonic_ns() - T2_temp_time
-
-                        T2_temp_time = time.monotonic_ns()
-                        T2_counter += 1
-                        if T2_counter % 2048 == 0:
-                            try:
-                                sg.Print(f'{time.strftime("%H:%M:%S")} {round(T2_counter/T2_px_num * 100)}%, {round(T2_counter/(time.monotonic()-T2_time))} px/sec')
-                            except ZeroDivisionError:
-                                sg.Print(f'{time.strftime("%H:%M:%S")} {round(T2_counter/T2_px_num * 100)}% (ZeroDivisionError)')
-                        T2_progress_bar_time += time.monotonic_ns() - T2_temp_time
-                
-                T2_end_time = time.monotonic()
-                sg.Print(f'\n{round(T2_end_time - T2_time, 3)} seconds for color processing, where:')
-                sg.Print(f'\t{T2_get_spectrum_time / 1e9} for getting spectrum')
-                sg.Print(f'\t{T2_calc_polator_time / 1e9} for inter/extrapolating')
-                sg.Print(f'\t{T2_calc_rgb_time / 1e9} for color calculating')
-                sg.Print(f'\t{T2_draw_point_time / 1e9} for pixel drawing')
-                sg.Print(f'\t{T2_plot_pixels_time / 1e9} for adding spectrum to plot')
-                sg.Print(f'\t{T2_progress_bar_time / 1e9} for progress bar')
-                sg.Print(f'\t{round(T2_end_time-T2_time-(T2_get_spectrum_time+T2_calc_polator_time+T2_calc_rgb_time+T2_draw_point_time+T2_plot_pixels_time+T2_progress_bar_time)/1e9, 3)} for other (time, black-pixel check)')
+                input_data |= {
+                    'vis': T2_vis,
+                    'single': values['T2_single'],
+                    'makebright': values['T2_makebright'],
+                    'autoalign': values['T2_autoalign'],
+                    'path': values['T2_path'],
+                    'paths': [values['T2_path'+str(i)] for i in range(T2_vis)],
+                    'exposures': [float(values['T2_exposure'+str(i)]) for i in range(T2_vis)],
+                    'save': values['T2_folder'],
+                    'preview': event=='T2_preview',
+                    'area': T2_preview_area
+                }
+                T2_img = im.image_processing(input_data)
                 
                 if event == 'T2_preview':
-                    window['T2_image'].update(data=convert_to_bytes(T2_img))
-                else:
-                    T2_img.save(f'{values["T2_folder"]}/TCT_{time.strftime("%Y-%m-%d_%H-%M")}.png')
+                    window['T2_image'].update(data=im.convert_to_bytes(T2_img))
         
         # ------------ Events in the tab "Table" ------------
 
