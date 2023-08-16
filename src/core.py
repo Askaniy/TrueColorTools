@@ -558,10 +558,10 @@ class Color:
         self.name = name
         rgb = np.array(rgb, dtype=float)
         if rgb.min() < 0:
-            print(f'# Note for the Color object "{self.name}"')
-            print(f'- Negative values detected during object initialization: rgb={rgb}')
+            #print(f'# Note for the Color object "{self.name}"')
+            #print(f'- Negative values detected during object initialization: rgb={rgb}')
             rgb = np.clip(rgb, 0, None)
-            print('- These values have been replaced with zeros.')
+            #print('- These values have been replaced with zeros.')
         if rgb.max() != 0 and not albedo: # normalization
             rgb /= rgb.max()
         if np.any(np.isnan(rgb)):

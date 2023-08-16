@@ -35,13 +35,10 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, f
         [sg.Push(), sg.Text(tr.gui_br[lang][0], key='-brModeText-'), sg.Push()],
         [sg.Radio(tr.gui_br[lang][1], 'brRadio', enable_events=True, key='-brMode0-')],
         [sg.Radio(tr.gui_br[lang][2], 'brRadio', enable_events=True, default=True, key='-brMode1-')],
-        #[sg.HorizontalSeparator()],
-        #[sg.Text(tr.gui_phase[lang], key='-phaseText-')],
-        #[sg.Slider(range=(-180, 180), default_value=0, resolution=1, orientation='h', size=(18, 16), enable_events=True, key='-phase-')],
-        [sg.T('')],
-        [sg.Push(), sg.Text(tr.gui_interp[lang][0], key='-interpModeText-'), sg.Push()],
-        [sg.Radio(tr.gui_interp[lang][1], 'interpRadio', enable_events=True, default=True, key='-interpMode0-')],
-        [sg.Radio(tr.gui_interp[lang][2], 'interpRadio', enable_events=True, key='-interpMode1-')],
+        #[sg.T('')],
+        #[sg.Push(), sg.Text(tr.gui_interp[lang][0], key='-interpModeText-'), sg.Push()],
+        #[sg.Radio(tr.gui_interp[lang][1], 'interpRadio', enable_events=True, default=True, key='-interpMode0-')],
+        #[sg.Radio(tr.gui_interp[lang][2], 'interpRadio', enable_events=True, key='-interpMode1-')],
         [sg.T('')],
         [sg.Push(), sg.Text(tr.gui_formatting[lang], key='-formattingText-'), sg.Push()],
         [
@@ -123,7 +120,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, f
         [sg.Checkbox(tr.gui_makebright[lang], key='T2_makebright')],
         [sg.Checkbox(tr.gui_autoalign[lang], key='T2_autoalign')],
         [sg.Checkbox(tr.gui_desun[lang], key='T2_desun')],
-        [sg.Checkbox(tr.gui_plotpixels[lang], enable_events=True, key='T2_plotpixels')],
+        #[sg.Checkbox(tr.gui_plotpixels[lang], enable_events=True, key='T2_plotpixels')],
         [
             sg.Checkbox(tr.gui_filterset[lang], enable_events=True, key='T2_filterset'),
             sg.InputCombo(filters.get_sets(), enable_events=True, disabled=True, key='T2_filter', expand_x=True)
@@ -300,9 +297,9 @@ def translate(window: sg.Window, T2_num: int, T5_num: int, lang: str):
     window['-brModeText-'].update(tr.gui_br[lang][0])
     window['-brMode0-'].update(text=tr.gui_br[lang][1])
     window['-brMode1-'].update(text=tr.gui_br[lang][2])
-    window['-interpModeText-'].update(tr.gui_interp[lang][0])
-    window['-interpMode0-'].update(text=tr.gui_interp[lang][1])
-    window['-interpMode1-'].update(text=tr.gui_interp[lang][2])
+    #window['-interpModeText-'].update(tr.gui_interp[lang][0])
+    #window['-interpMode0-'].update(text=tr.gui_interp[lang][1])
+    #window['-interpMode1-'].update(text=tr.gui_interp[lang][2])
     window['-formattingText-'].update(tr.gui_formatting[lang])
     window['-bitnessText-'].update(tr.gui_bit[lang])
     window['-roundingText-'].update(tr.gui_rnd[lang])
@@ -323,7 +320,7 @@ def translate(window: sg.Window, T2_num: int, T5_num: int, lang: str):
     window['T2_makebright'].update(text=tr.gui_makebright[lang])
     window['T2_autoalign'].update(text=tr.gui_autoalign[lang])
     window['T2_desun'].update(text=tr.gui_desun[lang])
-    window['T2_plotpixels'].update(text=tr.gui_plotpixels[lang])
+    #window['T2_plotpixels'].update(text=tr.gui_plotpixels[lang])
     window['T2_filterset'].update(text=tr.gui_filterset[lang])
     window['T2_single'].update(text=tr.gui_single[lang])
     window['T2_browse'].update(tr.gui_browse[lang])

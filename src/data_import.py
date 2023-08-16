@@ -13,7 +13,6 @@ import src.strings as tr
 # Units of spectral flux density by wavelength and frequency
 flam = u.def_unit('FLAM', (u.erg / u.s) / (u.cm**2 * u.AA))
 #FNU = u.def_unit('fnu', (u.erg / u.s) / (u.cm**2 * u.Hz))
-uves = u.def_unit('UVES', (10e-16 * u.erg / u.s) / (u.cm**2 * u.AA)) # unit, used in UVES data example
 flux_density_SI = u.def_unit('W / (m² nm)', u.W / u.m**2 / u.nm)
 
 def str2unit(string: str, axis: str):
@@ -28,7 +27,7 @@ def str2unit(string: str, axis: str):
         if string == 'FLAM':
             unit = flam
         elif string == '10**(-16)erg.cm**(-2).s**(-1).angstrom**(-1)':
-            unit = uves
+            unit = 10e-16 * flam # used in UVES data example
         else:
             unit = flux_density_SI
     return unit
@@ -92,7 +91,7 @@ def list_filters():
     return sorted(filters)
 
 
-# Support of database extension via json5 files
+# Support of database extension via JSON5 files
 
 def import_DBs(folders: list):
     """ Returns databases of objects and references were found in the given folders """

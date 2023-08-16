@@ -62,7 +62,7 @@ def launch_window():
     triggers = ['-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-interpMode0-', '-interpMode1-', '-bitness-', '-rounding-']
     
     albedoFlag = False # default brightness mode
-    oldInterpFlag = True # default interpolation mode
+    #oldInterpFlag = True # default interpolation mode
     bitness = int(window['-bitness-'].get())
     rounding = int(window['-rounding-'].get())
 
@@ -84,8 +84,8 @@ def launch_window():
         # Radio selection
         elif event in ('-brMode0-', '-brMode1-'):
             albedoFlag = values['-brMode0-']
-        elif event in ('-interpMode0-', '-interpMode1-'):
-            oldInterpFlag = values['-interpMode0-']
+        #elif event in ('-interpMode0-', '-interpMode1-'):
+        #    oldInterpFlag = values['-interpMode0-']
         # Checks for empty input
         elif event == '-bitness-':
             try:
@@ -363,10 +363,6 @@ def launch_window():
                 T2_draw = ImageDraw.Draw(T2_img)
                 T2_counter = 0
                 T2_px_num = T2_w*T2_h
-                
-                #if values['T2_plotpixels']:
-                #    T2_fig = go.Figure()
-                #    T2_fig.update_layout(title=tr.map_title_text[lang], xaxis_title=tr.xaxis_text[lang], yaxis_title=tr.yaxis_text[lang])
 
                 sg.Print(f'\n{round(time.monotonic() - T2_time, 3)} seconds for loading, autoalign and creating output templates\n')
                 sg.Print(f'{time.strftime("%H:%M:%S")} 0%')
@@ -383,35 +379,33 @@ def launch_window():
                     for y in range(T2_h):
 
                         T2_temp_time = time.monotonic_ns()
-                        T2_spectrum = T2_data[:, y, x]
+                        T2_slice = T2_data[:, y, x]
                         T2_get_spectrum_time += time.monotonic_ns() - T2_temp_time
 
-                        if np.sum(T2_spectrum) > 0:
+                        if np.sum(T2_slice) > 0:
                             T2_name = f'({x}; {y})'
 
-                            T2_temp_time = time.monotonic_ns()
-                            T2_curve = core.polator(input_data['nm'], list(T2_spectrum), core.visible_range, desun=input_data['desun'])
+                            T2_temp_time = time.monotonic_ns() # Spectral data processing
+                            T2_spectrum = core.Spectrum(T2_name, input_data['nm'], list(T2_slice), scope=core.visible_range)
+                            if input_data['desun']:
+                                T2_spectrum /= core.sun_norm
                             T2_calc_polator_time += time.monotonic_ns() - T2_temp_time
 
-                            T2_temp_time = time.monotonic_ns()
-                            T2_rgb = core.to_rgb(T2_name, T2_curve, albedo=True, inp_bit=T2_input_bit, exp_bit=8, gamma=input_data['gamma'])
+                            T2_temp_time = time.monotonic_ns() # Color calculation
+                            if input_data['srgb']:
+                                T2_color = core.Color.from_spectrum(T2_spectrum, albedo=True)
+                            else:
+                                T2_color = core.Color.from_spectrum_legacy(T2_spectrum, albedo=True)
+                            if input_data['gamma']:
+                                T2_color = T2_color.gamma_corrected()
+                            T2_color.rgb /= T2_input_bit
+                            T2_rgb = tuple(T2_color.to_bit(8).round().astype(int))
                             T2_calc_rgb_time += time.monotonic_ns() - T2_temp_time
 
                             T2_temp_time = time.monotonic_ns()
                             T2_draw.point((x, y), T2_rgb)
                             T2_draw_point_time += time.monotonic_ns() - T2_temp_time
 
-                            #if values['T2_plotpixels']:
-                            #    T2_temp_time = time.monotonic_ns()
-                            #    if x % 32 == 0 and y % 32 == 0:
-                            #        T2_fig.add_trace(go.Scatter(
-                            #            x = core.visible_range,
-                            #            y = T2_curve,
-                            #            name = T2_name,
-                            #            line = dict(color='rgb'+str(T2_rgb), width=2)
-                            #            ))
-                            #    T2_plot_pixels_time += time.monotonic_ns() - T2_temp_time
-                        
                         T2_temp_time = time.monotonic_ns()
                         T2_counter += 1
                         if T2_counter % 2048 == 0:
@@ -431,8 +425,6 @@ def launch_window():
                 sg.Print(f'\t{T2_progress_bar_time / 1e9} for progress bar')
                 sg.Print(f'\t{round(T2_end_time-T2_time-(T2_get_spectrum_time+T2_calc_polator_time+T2_calc_rgb_time+T2_draw_point_time+T2_plot_pixels_time+T2_progress_bar_time)/1e9, 3)} for other (time, black-pixel check)')
                 
-                #if values['T2_plotpixels']:
-                #    T2_fig.show()
                 if event == 'T2_preview':
                     window['T2_image'].update(data=convert_to_bytes(T2_img))
                 else:
