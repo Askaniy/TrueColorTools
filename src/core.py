@@ -20,7 +20,7 @@ resolutions = [5, 10, 20, 40, 80, 160] # nm
 visible_range = np.arange(390, 780, 5) # nm
 
 # Returned on problems with initialization
-nm_br_stub = (np.array([550, 560]), np.zeros(2))
+nm_br_stub = (np.array([550, 555]), np.zeros(2))
 
 
 
@@ -204,6 +204,40 @@ def custom_extrap(grid: np.ndarray, derivative: float, corner_x: int|float, corn
 
 weights_center_of_mass = 1 - 1 / np.sqrt(2)
 
+def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int, avg_steps=20):
+    """
+    Defines a curve with an intuitive continuation on the scope, if needed.
+    `avg_steps` is a number of corner curve points to be averaged if the curve is not smooth.
+    Averaging weights on this range grow linearly closer to the edge (from 0 to 1).
+    """
+    if x[0] > scope[0]: # extrapolation to blue
+        x1 = np.arange(scope[0], x[0], step)
+        y_scope = y[:avg_steps]
+        if is_smooth(y_scope):
+            diff = y[1]-y[0]
+            corner_y = y[0]
+        else:
+            avg_weights = np.abs(np.arange(-avg_steps, 0)) # weights could be more complicated, but there is no need
+            diff = np.average(y_scope[1:]-y_scope[:-1], weights=avg_weights[:-1])
+            corner_y = np.average(y_scope, weights=avg_weights) - diff * avg_steps * weights_center_of_mass
+        y1 = custom_extrap(x1, diff/step, x[0], corner_y)
+        x = np.append(x1, x)
+        y = np.append(y1, y)
+    if x[-1] < scope[-1]: # extrapolation to red
+        x1 = np.arange(x[-1], scope[-1], step) + step
+        y_scope = y[-avg_steps:]
+        if is_smooth(y_scope):
+            diff = y[-1]-y[-2]
+            corner_y = y[-1]
+        else:
+            avg_weights = np.arange(avg_steps) + 1
+            diff = np.average(y_scope[1:]-y_scope[:-1], weights=avg_weights[1:])
+            corner_y = np.average(y_scope, weights=avg_weights) + diff * avg_steps * weights_center_of_mass
+        y1 = custom_extrap(x1, diff/step, x[-1], corner_y)
+        x = np.append(x, x1)
+        y = np.append(y, y1)
+    return x, y
+
 def grid(start: int|float, end: int|float, res: int):
     """ Returns grid points in the range that are divisible by the selected step """
     if start % res != 0:
@@ -212,18 +246,29 @@ def grid(start: int|float, end: int|float, res: int):
         end += 1 # to include the last point
     return np.arange(start, end, res, dtype=int)
 
+def standardize_resolution(input: int):
+    """ Redirects the step size to one of the valid values """
+    res = resolutions[-1] # max possible step
+    for i in range(1, len(resolutions)):
+        if input < resolutions[i]:
+            res = resolutions[i-1] # accuracy is always in reserve
+            break
+    return res
+
 class Spectrum:
-    def __init__(self, name: str, nm: Iterable, br: Iterable, res=0):
+    def __init__(self, name: str, nm: Iterable, br: Iterable, res=0, scope=[]):
         """
         Constructor of the class to work with single, continuous spectrum, with strictly defined resolutions.
         When creating an object, the spectrum grid is automatically checked and adjusted to uniform, if necessary.
         Specifying resolution removes the check. This is only recommended for speeding up code that is definitely trustworthy.
+        The idea has been simplified, and the initialization step is only 5 nanometers, but it works with other valid ones.
 
         Args:
         - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
         - `nm` (Iterable): list of wavelengths in nanometers
-        - `br` (Iterable): same-size list of linear physical property, representing "brightness"
+        - `br` (Iterable): same-size list of "brightness" of an energy counter detector (not photon counter)
         - `res` (int, optional): assigns a number, cancel the check
+        - `scope` (Iterable, optional): makes a spectrum of the same resolution as at least defined at the given wavelengths
         """
         self.name = name
         nm = np.array(nm)
@@ -233,93 +278,57 @@ class Spectrum:
                 flag = np.where(nm < nm_limit + resolutions[0]) # to be averaged to nm_limit
                 nm = nm[flag]
                 br = br[flag]
-            if res == 0: # checking and creating a uniform grid if necessary
-                steps = nm[1:] - nm[:-1] # =np.diff(nm)
-                blocks = set(steps)
-                if len(blocks) == 1: # uniform grid
-                    res = int(*blocks)
-                    if is_divisible(nm, res) and res in resolutions: # perfect grid
-                        self.br = br
-                        self.nm = nm.astype(int)
-                        self.res = res
-                        return
-                else:
-                    res = np.mean(steps)
-                self.res = self._standardize_resolution(res)
-                self.nm = grid(nm[0], nm[-1], self.res) # new grid
-                if self.res <= res: # interpolation, increasing resolution
-                    self.br = Akima1DInterpolator(nm, br)(self.nm)
-                else: # decreasing resolution if step less than 5 nm
-                    self.br = averaging(nm, br, self.nm)
-            else: # input could be trusted
+            if res != 0: # input could be trusted
                 self.nm = nm.astype(int)
                 self.br = br
                 self.res = res
+            else:
+                self.res = 5 # nm. Initialization simplification by leaving only one default option.
+                mean_res = np.mean(nm[1:]-nm[:-1])
+                if is_divisible(nm, self.res) and round(mean_res) == self.res:
+                    self.nm = nm
+                    self.br = br
+                else:
+                    self.nm = grid(nm[0], nm[-1], self.res)
+                    if mean_res >= self.res: # interpolation, increasing resolution
+                        self.br = Akima1DInterpolator(nm, br)(self.nm)
+                    else: # decreasing resolution if step less than 5 nm
+                        self.br = averaging(nm, br, self.nm)
+            if scope != []:
+                self.nm, self.br = extrapolating(self.nm, self.br, scope, self.res)
             if np.any(np.isnan(self.br)):
                 self.br = np.nan_to_num(self.br)
                 print(f'# Note for the Spectrum object "{self.name}"')
                 print(f'- NaN values detected during object initialization, they been replaced with zeros.')
         except Exception:
             self.nm, self.br = nm_br_stub
-            self.res = 10
+            self.res = 5
             print(f'# Note for the Spectrum object "{self.name}"')
             print(f'- Something unexpected happened during initialization. The spectrum was replaced by a stub.')
             print(f'- More precisely, {traceback.format_exc(limit=0)}')
 
     @staticmethod
-    def from_photometry_legacy(data: Photometry, scope: np.ndarray):
+    def from_photometry(data: Photometry, scope: np.ndarray):
         """ Creates a Spectrum object with inter- and extrapolated photometry data to fit the wavelength scope """
         if data.file != '':
-            spectrum = Spectrum.from_file(data.name, data.file)
+            try:
+                if data.file.split('.')[-1].lower() in ('fits', 'fit'):
+                    nm, br = di.fits_reader('spectra/'+data.file)
+                else:
+                    nm, br = di.txt_reader('spectra/'+data.file)
+            except Exception:
+                print(f'# Note for the Spectrum object "{data.name}"')
+                print(f'- Something unexpected happened during external file reading. The data was replaced by a stub.')
+                print(f'- More precisely, {traceback.format_exc(limit=0)}')
+                nm, br = nm_br_stub
         else:
-            nm = grid(data.nm[0], data.nm[-1], res=5)
-            br = Akima1DInterpolator(data.nm, data.br)(nm)
-            spectrum = Spectrum(data.name, nm, br, res=5)
-        spectrum = spectrum.extrapolate_to(scope)
+            nm, br = data.nm, data.br
+        spectrum = Spectrum(data.name, nm, br, scope=scope)
         if spectrum.br.min() < 0:
             spectrum.br = np.clip(spectrum.br, 0, None)
             print(f'# Note for the Spectrum object "{spectrum.name}"')
             print(f'- Negative values detected during conversion from photometry, they been replaced with zeros.')
         return spectrum
-
-    def extrapolate_to(self, scope: np.ndarray, avg_steps=20):
-        """
-        Returns a Spectrum object that at least defined in the scope.
-        `avg_steps` is a number of corner spectrum points to be averaged if the spectrum is not smooth.
-        Averaging weights on this range grow linearly closer to the edge (from 0 to 1).
-        """
-        if self.nm[0] > scope[0] or self.nm[-1] < scope[-1]:
-            res = int(scope[1] - scope[0])
-            other = self.to_resolution(res)
-            if other.nm[0] > scope[0]: # extrapolation to blue
-                nm = np.arange(scope[0], other.nm[0], res)
-                br_scope = other.br[:avg_steps]
-                if is_smooth(br_scope):
-                    diff = other.br[1]-other.br[0]
-                    corner_y = other.br[0]
-                else:           # weights could be more complicated, but there is no need
-                    avg_weights = np.abs(np.arange(-avg_steps, 0))
-                    diff = np.average(br_scope[1:]-br_scope[:-1], weights=avg_weights[:-1])
-                    corner_y = np.average(br_scope, weights=avg_weights) - diff * avg_steps * weights_center_of_mass
-                br = custom_extrap(nm, diff/res, other.nm[0], corner_y)
-                other.nm = np.append(nm, other.nm)
-                other.br = np.append(br, other.br)
-            if other.nm[-1] < scope[-1]: # extrapolation to red
-                nm = np.arange(other.nm[-1], scope[-1], res) + res
-                br_scope = other.br[-avg_steps:]
-                if is_smooth(br_scope):
-                    diff = other.br[-1]-other.br[-2]
-                    corner_y = other.br[-1]
-                else:
-                    avg_weights = np.arange(avg_steps) + 1
-                    diff = np.average(br_scope[1:]-br_scope[:-1], weights=avg_weights[1:])
-                    corner_y = np.average(br_scope, weights=avg_weights) + diff * avg_steps * weights_center_of_mass
-                br = custom_extrap(nm, diff/res, other.nm[-1], corner_y)
-                other.nm = np.append(other.nm, nm)
-                other.br = np.append(other.br, br)
-            return other
-        else:
-            return self
 
     @staticmethod
     def from_filter(name: str):
@@ -327,25 +336,9 @@ class Spectrum:
         return Spectrum(name, *di.txt_reader(f'filters/{name}.dat'))
 
     @staticmethod
-    def from_file(name: str, file: str):
-        """ Creates a Spectrum object based on the external loaded data """
-        path = 'spectra/'+file
-        extension = file.split('.')[-1].lower()
-        try:
-            if extension in ('fits', 'fit'):
-                nm, br = di.fits_reader(path)
-            else:
-                nm, br = di.txt_reader(path)
-        except FileNotFoundError:
-            print(f'# Note for the Spectrum object "{name}"')
-            print(f'- No such file: {path}')
-            nm, br = nm_br_stub
-        except Exception:
-            print(f'# Note for the Spectrum object "{name}"')
-            print(f'- Something unexpected happened during external file reading. The data was replaced by a stub.')
-            print(f'- More precisely, {traceback.format_exc(limit=0)}')
-            nm, br = nm_br_stub
-        return Spectrum(name, nm, br)
+    def from_CALSPEC(name: str, file: str):
+        """ Creates a Spectrum object based on the external CALSPEC FITS file """
+        return Spectrum(name, *di.fits_reader(f'spectra/files/CALSPEC/{file}.fits'))
 
     @staticmethod
     def from_blackbody_redshift(scope: np.ndarray, temperature: int|float, velocity=0., vII=0.):
@@ -374,22 +367,13 @@ class Spectrum:
             br = np.zeros(scope.size)
         return Spectrum(f'BB with T={int(temperature)}', scope, br)
 
-    def _standardize_resolution(self, input: int):
-        """ Redirects the step size to one of the valid values """
-        res = resolutions[-1] # max possible step
-        for i in range(1, len(resolutions)):
-            if input < resolutions[i]:
-                res = resolutions[i-1] # accuracy is always in reserve
-                break
-        return res
-
     def to_resolution(self, request: int):
         """ Returns a new Spectrum object with changed wavelength grid step size """
         other = deepcopy(self)
         if request not in resolutions:
             print(f'# Note for the Spectrum object "{self.name}"')
             print(f'- Resolution change allowed only for {resolutions} nm, not {request} nm.')
-            request = self._standardize_resolution(request)
+            request = standardize_resolution(request)
             print(f'- The optimal resolution was chosen automatically: {request} nm.')
         if request > other.res:
             while request != other.res: # remove all odd elements
@@ -498,11 +482,11 @@ class Spectrum:
 bessell_V = Spectrum.from_filter('Generic_Bessell.V')
 bessell_V_norm = bessell_V.normalized_by_area() # used as an averager for the reference spectra
 
-sun_SI = Spectrum.from_file('Sun', 'files/CALSPEC/sun_reference_stis_002.fits') # W / (m² nm)
+sun_SI = Spectrum.from_CALSPEC('Sun', 'sun_reference_stis_002') # W / (m² nm)
 sun_in_V = sun_SI * bessell_V_norm
 sun_norm = sun_SI.scaled_to_albedo(1, bessell_V)
 
-vega_SI = Spectrum.from_file('Vega', 'files/CALSPEC/alpha_lyr_stis_011.fits') # W / (m² nm)
+vega_SI = Spectrum.from_CALSPEC('Vega', 'alpha_lyr_stis_011') # W / (m² nm)
 vega_in_V = vega_SI * bessell_V_norm
 vega_norm = vega_SI.scaled_to_albedo(1, bessell_V)
 

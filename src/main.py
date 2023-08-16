@@ -157,7 +157,7 @@ def launch_window():
 
                 # Spectral data import and processing
                 T1_photometry = core.Photometry(T1_name, objectsDB[T1_raw_name])
-                T1_spectrum = core.Spectrum.from_photometry_legacy(T1_photometry, core.visible_range)
+                T1_spectrum = core.Spectrum.from_photometry(T1_photometry, core.visible_range)
                 if T1_photometry.sun:
                     T1_spectrum /= core.sun_norm
                 if albedoFlag:
@@ -198,7 +198,7 @@ def launch_window():
 
                     # Spectral data import and processing
                     T1_photometry = core.Photometry(name, objectsDB[raw_name])
-                    T1_spectrum = core.Spectrum.from_photometry_legacy(T1_photometry, core.visible_range)
+                    T1_spectrum = core.Spectrum.from_photometry(T1_photometry, core.visible_range)
                     if T1_photometry.sun:
                         T1_spectrum /= core.sun_norm
                     if albedoFlag:

@@ -69,6 +69,12 @@ def fits_reader(file: str):
         y = y_column * str2unit(columns[y_id].unit, 'y')
     return x.to(u.nm), y.to(flux_density_SI)
 
+def txt_reader(file: str):
+    """ Imports spectrum data from a simple text file. Wavelength only in angstroms """
+    with open(file, 'rt', encoding='UTF-8') as f:
+        angstrom, response = np.loadtxt(f).transpose()
+    return angstrom/10, response
+
 
 # Support of filters database provided by Filter Profile Service
 # http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php
@@ -120,12 +126,6 @@ def import_folder(folder: str):
         print(f'The database in folder "{folder}" was not found and will not be loaded.')
         print(f'More precisely, {traceback.format_exc(limit=0)}')
     return objects, refs
-
-def txt_reader(file: str):
-    """ Imports spectrum data from a simple text file. Wavelength only in angstroms """
-    with open(file, 'rt', encoding='UTF-8') as f:
-        angstrom, response = np.loadtxt(f).transpose()
-    return angstrom/10, response
 
 
 # Front-end view on spectra database
