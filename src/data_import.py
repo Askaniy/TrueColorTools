@@ -8,25 +8,66 @@ import numpy as np
 import src.strings as tr
 
 
+# FITS spectrum reader
+
 # Units of spectral flux density by wavelength and frequency
-flam = u.def_unit('flam', (u.erg / u.s) / (u.cm**2 * u.AA))
+flam = u.def_unit('FLAM', (u.erg / u.s) / (u.cm**2 * u.AA))
 #FNU = u.def_unit('fnu', (u.erg / u.s) / (u.cm**2 * u.Hz))
+uves = u.def_unit('UVES', (10e-16 * u.erg / u.s) / (u.cm**2 * u.AA)) # unit, used in UVES data example
 flux_density_SI = u.def_unit('W / (m² nm)', u.W / u.m**2 / u.nm)
 
-def str2unit(string: str, br: bool):
+def str2unit(string: str, axis: str):
     """ Simple unit parser for FITS files """
-    string = string.lower()
-    if br: # spectral flux density
-        if string == 'flam':
-            unit = flam
-        else:
-            unit = flux_density_SI
-    else:
-        if string in ('a', 'angstroms'):
+    string = string.upper()
+    if axis == 'x':
+        if string in ('A', 'ANGSTROM', 'ANGSTROMS'):
             unit = u.AA
         else:
             unit = u.nm
+    else:
+        if string == 'FLAM':
+            unit = flam
+        elif string == '10**(-16)erg.cm**(-2).s**(-1).angstrom**(-1)':
+            unit = uves
+        else:
+            unit = flux_density_SI
     return unit
+
+x_names = {'WAVELENGTH', 'WAVE', 'LAMBDA'}
+y_names = {'FLUX'}
+
+def search_column(names: list[str], axis: str):
+    """ Returns the index of the FITS column of interest """
+    names = [name.upper() for name in names]
+    names_set = set(names)
+    if axis == 'x':
+        candidates = names_set & x_names
+    else:
+        candidates = names_set & y_names
+    try:
+        return names.index(list(candidates)[0])
+    except IndexError:
+        return 0 if axis == 'x' else 1 # by default the first column is wavelength, the second is flux
+
+def fits_reader(file: str):
+    """ Imports spectrum data from FITS file in standards of CALSPEC, VizeR, UVES, etc """
+    with fits.open(file) as hdul:
+        #hdul.info()
+        columns = hdul[1].columns # most likely the second HDU contains data
+        #print(columns.names)
+        #print(columns.units)
+        x_id = search_column(columns.names, 'x')
+        y_id = search_column(columns.names, 'y')
+        tbl = Table(hdul[1].data)
+        x_column = tbl[columns[x_id].name]
+        y_column = tbl[columns[y_id].name]
+        if len(x_column.shape) > 1:
+            x_column = x_column[0]
+        if len(y_column.shape) > 1:
+            y_column = y_column[0]
+        x = x_column * str2unit(columns[x_id].unit, 'x')
+        y = y_column * str2unit(columns[y_id].unit, 'y')
+    return x.to(u.nm), y.to(flux_density_SI)
 
 
 # Support of filters database provided by Filter Profile Service
@@ -86,15 +127,6 @@ def txt_reader(file: str):
         angstrom, response = np.loadtxt(f).transpose()
     return angstrom/10, response
 
-def fits_reader(file: str):
-    """ Imports spectrum data from FITS file in standards of CALSPEC, VizeR, etc """
-    with fits.open(file) as hdul:
-        #hdul.info()
-        columns = hdul[1].columns # most likely the second HDU contains data
-        tbl = Table(hdul[1].data)
-        x = tbl[columns[0].name] * str2unit(columns[0].unit, br=False)
-        y = tbl[columns[1].name] * str2unit(columns[1].unit, br=True)
-    return x.to(u.nm), y.to(flux_density_SI)
 
 # Front-end view on spectra database
 

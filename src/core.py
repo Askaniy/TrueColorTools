@@ -1,6 +1,7 @@
 from scipy.interpolate import Akima1DInterpolator
 from typing import TypeVar, Iterable, Tuple
 from copy import deepcopy
+import traceback
 import numpy as np
 import src.data_import as di
 
@@ -196,7 +197,7 @@ def custom_extrap(grid: np.ndarray, derivative: float, corner_x: int|float, corn
     Therefore, it scales to complement the spectrum more easily than similar functions.
     """
     if derivative == 0: # extrapolation by constant
-        return np.full(grid, corner_y)
+        return np.full(grid.size, corner_y)
     else:
         sign = np.sign(derivative)
         return np.exp((1 - (np.abs(derivative) * (grid - corner_x) / corner_y - sign)**2) / 2) * corner_y
@@ -227,36 +228,43 @@ class Spectrum:
         self.name = name
         nm = np.array(nm)
         br = np.array(br)
-        if nm[-1] > nm_limit:
-            flag = np.where(nm < nm_limit + resolutions[0]) # to be averaged to nm_limit
-            nm = nm[flag]
-            br = br[flag]
-        if res == 0: # checking and creating a uniform grid if necessary
-            steps = nm[1:] - nm[:-1] # =np.diff(nm)
-            blocks = set(steps)
-            if len(blocks) == 1: # uniform grid
-                res = int(*blocks)
-                if is_divisible(nm, res) and res in resolutions: # perfect grid
-                    self.br = br
-                    self.nm = nm.astype(int)
-                    self.res = res
-                    return
-            else:
-                res = np.mean(steps)
-            self.res = self._standardize_resolution(res)
-            self.nm = grid(nm[0], nm[-1], self.res) # new grid
-            if self.res <= res: # interpolation, increasing resolution
-                self.br = Akima1DInterpolator(nm, br)(self.nm)
-            else: # decreasing resolution if step less than 5 nm
-                self.br = averaging(nm, br, self.nm)
-        else: # input could be trusted
-            self.nm = nm.astype(int)
-            self.br = br
-            self.res = res
-        if np.any(np.isnan(self.br)):
-            self.br = np.nan_to_num(self.br)
+        try:
+            if nm[-1] > nm_limit:
+                flag = np.where(nm < nm_limit + resolutions[0]) # to be averaged to nm_limit
+                nm = nm[flag]
+                br = br[flag]
+            if res == 0: # checking and creating a uniform grid if necessary
+                steps = nm[1:] - nm[:-1] # =np.diff(nm)
+                blocks = set(steps)
+                if len(blocks) == 1: # uniform grid
+                    res = int(*blocks)
+                    if is_divisible(nm, res) and res in resolutions: # perfect grid
+                        self.br = br
+                        self.nm = nm.astype(int)
+                        self.res = res
+                        return
+                else:
+                    res = np.mean(steps)
+                self.res = self._standardize_resolution(res)
+                self.nm = grid(nm[0], nm[-1], self.res) # new grid
+                if self.res <= res: # interpolation, increasing resolution
+                    self.br = Akima1DInterpolator(nm, br)(self.nm)
+                else: # decreasing resolution if step less than 5 nm
+                    self.br = averaging(nm, br, self.nm)
+            else: # input could be trusted
+                self.nm = nm.astype(int)
+                self.br = br
+                self.res = res
+            if np.any(np.isnan(self.br)):
+                self.br = np.nan_to_num(self.br)
+                print(f'# Note for the Spectrum object "{self.name}"')
+                print(f'- NaN values detected during object initialization, they been replaced with zeros.')
+        except Exception:
+            self.nm, self.br = nm_br_stub
+            self.res = 10
             print(f'# Note for the Spectrum object "{self.name}"')
-            print(f'- NaN values detected during object initialization, they been replaced with zeros.')
+            print(f'- Something unexpected happened during initialization. The spectrum was replaced by a stub.')
+            print(f'- More precisely, {traceback.format_exc(limit=0)}')
 
     @staticmethod
     def from_photometry_legacy(data: Photometry, scope: np.ndarray):
@@ -331,6 +339,11 @@ class Spectrum:
         except FileNotFoundError:
             print(f'# Note for the Spectrum object "{name}"')
             print(f'- No such file: {path}')
+            nm, br = nm_br_stub
+        except Exception:
+            print(f'# Note for the Spectrum object "{name}"')
+            print(f'- Something unexpected happened during external file reading. The data was replaced by a stub.')
+            print(f'- More precisely, {traceback.format_exc(limit=0)}')
             nm, br = nm_br_stub
         return Spectrum(name, nm, br)
 
@@ -565,18 +578,8 @@ class Color:
             print(f'- Negative values detected during object initialization: rgb={rgb}')
             rgb = np.clip(rgb, 0, None)
             print('- These values have been replaced with zeros.')
-        rgb_max = rgb.max()
-        if rgb_max == 0:
-            print(f'# Note for the Color object "{self.name}"')
-            print(f'- All values are zero: rgb={rgb}')
-        else:
-            #if rgb_max > 1 and albedo:
-                #print(f'# Note for the Color object "{self.name}"')
-                #print(f'- Overexposure (because it is albedo mode): rgb={rgb}')
-                #albedo = False
-                #print('- Not recommended. The processing mode has been switched to chromaticity.')
-            if not albedo: # normalization
-                rgb /= rgb_max
+        if rgb.max() != 0 and not albedo: # normalization
+            rgb /= rgb.max()
         if np.any(np.isnan(rgb)):
             print(f'# Note for the Color object "{self.name}"')
             print(f'- NaN values detected during object initialization: rgb={rgb}')
