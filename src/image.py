@@ -5,9 +5,7 @@ import PySimpleGUI as sg
 from PIL import Image, ImageDraw
 import src.core as core
 
-
 # This file needs revision
-
 
 def convert_to_bytes(img: Image.Image):
     """ Prepares PIL's image to be displayed in the window """
@@ -39,7 +37,6 @@ def to_supported_mode(mode: str):
 
 def color_depth(mode: str):
     """ Corresponds the image mode of the Pillow library and its bitness """
-    # https://pillow.readthedocs.io/en/latest/handbook/concepts.html#concept-modes
     match mode:
         case 'RGB' | 'L': # 8 bit
             return 255
@@ -73,7 +70,7 @@ def image_processing(input_data: dict):
             if bw_img.mode == 'RGB': # image should be b/w
                 sg.Print(f'Note: image of band {i+1} converted from "{bw_img.mode}" mode to "L"')
                 bw_img = bw_img.convert('L')
-            depth = color_depth(rgb_img.mode)
+            depth = color_depth(bw_img.mode)
             if i == 0:
                 size = bw_img.size
             else:
@@ -85,16 +82,14 @@ def image_processing(input_data: dict):
             load.append(np.array(bw_img) / depth / max_exposure * exposures[i])
     
     data = np.array(load)
-    l, h, w = data.shape
+
+    if input_data['makebright']:
+        data /= data.max()
     
     if input_data['autoalign']:
         data = experimental_autoalign(data, debug=False)
-        l, h, w = data.shape
     
-    data_max = data.max()
-    if input_data['makebright']:
-        data /= data_max
-
+    l, h, w = data.shape
     img = Image.new('RGB', (w, h), (0, 0, 0))
     draw = ImageDraw.Draw(img)
     counter = 0
@@ -104,11 +99,10 @@ def image_processing(input_data: dict):
     sg.Print(f'{time.strftime("%H:%M:%S")} 0%')
 
     start_time = time.monotonic()
-    get_spectrum_time = 0
-    calc_polator_time = 0
-    calc_rgb_time = 0
+    get_slice_time = 0
+    calc_spectrum_time = 0
+    calc_color_time = 0
     draw_point_time = 0
-    plot_pixels_time = 0
     progress_bar_time = 0
 
     for x in range(w):
@@ -116,7 +110,7 @@ def image_processing(input_data: dict):
 
             temp_time = time.monotonic_ns()
             slice = data[:, y, x]
-            get_spectrum_time += time.monotonic_ns() - temp_time
+            get_slice_time += time.monotonic_ns() - temp_time
 
             if np.sum(slice) > 0:
                 name = f'({x}; {y})'
@@ -125,7 +119,7 @@ def image_processing(input_data: dict):
                 spectrum = core.Spectrum(name, input_data['nm'], list(slice), scope=core.visible_range)
                 if input_data['desun']:
                     spectrum /= core.sun_norm
-                calc_polator_time += time.monotonic_ns() - temp_time
+                calc_spectrum_time += time.monotonic_ns() - temp_time
 
                 temp_time = time.monotonic_ns() # Color calculation
                 if input_data['srgb']:
@@ -135,7 +129,7 @@ def image_processing(input_data: dict):
                 if input_data['gamma']:
                     color = color.gamma_corrected()
                 rgb = tuple(color.to_bit(8).round().astype(int))
-                calc_rgb_time += time.monotonic_ns() - temp_time
+                calc_color_time += time.monotonic_ns() - temp_time
 
                 temp_time = time.monotonic_ns()
                 draw.point((x, y), rgb)
@@ -152,19 +146,18 @@ def image_processing(input_data: dict):
     
     end_time = time.monotonic()
     sg.Print(f'\n{round(end_time - start_time, 3)} seconds for color processing, where:')
-    sg.Print(f'\t{get_spectrum_time / 1e9} for getting spectrum')
-    sg.Print(f'\t{calc_polator_time / 1e9} for inter/extrapolating')
-    sg.Print(f'\t{calc_rgb_time / 1e9} for color calculating')
+    sg.Print(f'\t{get_slice_time / 1e9} for getting spectrum')
+    sg.Print(f'\t{calc_spectrum_time / 1e9} for inter/extrapolating')
+    sg.Print(f'\t{calc_color_time / 1e9} for color calculating')
     sg.Print(f'\t{draw_point_time / 1e9} for pixel drawing')
-    sg.Print(f'\t{plot_pixels_time / 1e9} for adding spectrum to plot')
     sg.Print(f'\t{progress_bar_time / 1e9} for progress bar')
-    sg.Print(f'\t{round(end_time-start_time-(get_spectrum_time+calc_polator_time+calc_rgb_time+draw_point_time+plot_pixels_time+progress_bar_time)/1e9, 3)} for other (time, black-pixel check)')
+    sum_time = get_slice_time + calc_spectrum_time + calc_color_time + draw_point_time + progress_bar_time
+    sg.Print(f'\t{round((end_time-start_time-sum_time)/1e9, 3)} for other (time, black-pixel check)')
 
     if not input_data['preview']:
         img.save(f'{input_data["save"]}/TCT_{time.strftime("%Y-%m-%d_%H-%M")}.png')
 
     return img
-
 
 
 
