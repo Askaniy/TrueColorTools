@@ -16,37 +16,64 @@ def convert_to_bytes(img: Image.Image):
     del img
     return bio.getvalue()
 
-def preview_size(area, ratio):
+def preview_size(width: int, height: int, area: int):
+    """ Returns size of the scaled preview image, keeping the same area """
+    ratio = width / height
     return int(np.sqrt(area*ratio)), int(np.sqrt(area/ratio))
 
+def to_supported_mode(mode: str):
+    """ Corresponds the image mode of the Pillow library and supported one """
+    # https://pillow.readthedocs.io/en/latest/handbook/concepts.html#concept-modes
+    match mode:
+        case 'P' | 'PA' | 'RGB' | 'RGBA' | 'RGBX' | 'RGBa' | 'CMYK' | 'YCbCr' | 'LAB' | 'HSV': # 8-bit indexed color palette, alpha channels, color spaces
+            return 'RGB'
+        case 'L' | 'La' | 'LA': # 8-bit grayscale
+            return 'L'
+        case 'I' | 'I;16' | 'I;16L' | 'I;16B' | 'I;16N' | 'BGR;15' | 'BGR;16' | 'BGR;24': # 32-bit grayscale
+            return 'I'
+        case 'F': # 32-bit floating point grayscale
+            return 'F'
+        case _:
+            sg.Print(f'Mode {mode} is not recognized. Would be processed as RGB image.')
+            return 'RGB'
+
+def color_depth(mode: str):
+    """ Corresponds the image mode of the Pillow library and its bitness """
+    # https://pillow.readthedocs.io/en/latest/handbook/concepts.html#concept-modes
+    match mode:
+        case 'RGB' | 'L': # 8 bit
+            return 255
+        case 'I' | 'F': # 32 bit
+            return 65535
+        case _:
+            sg.Print(f'Mode {mode} is not supported. Would be processed as 8-bit image.')
+            return 255
+
 def image_processing(input_data: dict):
-    t = time.monotonic()
+    """ Block of code responsible from loading to processing and saving the image """
+    start_time = time.monotonic()
     load = []
 
+    # Combine images into an array containing brightness values from 0 to 1
     if input_data['single']:
         rgb_img = Image.open(input_data['path'])
-        
-        if rgb_img.mode == 'P': # NameError if color is indexed
-            rgb_img = rgb_img.convert('RGB')
-            sg.Print('Note: image converted from "P" (indexed color) mode to "RGB"')
+        rgb_img = rgb_img.convert(to_supported_mode(rgb_img.mode))
+        depth = color_depth(rgb_img.mode)
         if input_data['preview']:
-            ratio = rgb_img.width / rgb_img.height
-            rgb_img = rgb_img.resize(preview_size(input_data['area'], ratio), resample=Image.Resampling.HAMMING)
-        if len(rgb_img.getbands()) == 3:
-            r, g, b = rgb_img.split()
-            a = None
-        elif len(rgb_img.getbands()) == 4:
-            r, g, b, a = rgb_img.split()
+            rgb_img = rgb_img.resize(preview_size(rgb_img.width, rgb_img.height, input_data['area']), resample=Image.Resampling.HAMMING)
+        r, g, b = rgb_img.split()
         for i in [b, g, r]:
-            load.append(np.array(i))
+            load.append(np.array(i) / depth)
     else:
         exposures = input_data['exposures']
         max_exposure = max(exposures)
         for i in range(input_data['vis']):
             bw_img = Image.open(input_data['paths'][i])
-            if bw_img.mode not in ('L', 'I', 'F'): # image should be b/w
+            bw_img = bw_img.convert(to_supported_mode(bw_img.mode))
+            if bw_img.mode == 'RGB': # image should be b/w
                 sg.Print(f'Note: image of band {i+1} converted from "{bw_img.mode}" mode to "L"')
                 bw_img = bw_img.convert('L')
+            depth = color_depth(rgb_img.mode)
             if i == 0:
                 size = bw_img.size
             else:
@@ -54,37 +81,29 @@ def image_processing(input_data: dict):
                     sg.Print(f'Note: image of band {i+1} resized from {bw_img.size} to {size}')
                     bw_img = bw_img.resize(size)
             if input_data['preview']:
-                ratio = bw_img.width / bw_img.height
-                bw_img = bw_img.resize(preview_size(input_data['area'], ratio), resample=Image.Resampling.HAMMING)
-            load.append(np.array(bw_img) / exposures[i] * max_exposure)
+                bw_img = bw_img.resize(preview_size(bw_img.width, bw_img.height, input_data['area']), resample=Image.Resampling.HAMMING)
+            load.append(np.array(bw_img) / depth / max_exposure * exposures[i])
     
-    data = np.array(load, 'int64')
+    data = np.array(load)
     l, h, w = data.shape
     
     if input_data['autoalign']:
         data = experimental_autoalign(data, debug=False)
         l, h, w = data.shape
     
-    data = data.astype('float32')
     data_max = data.max()
     if input_data['makebright']:
-        data *= 65500 / data_max
-        input_bit = 16
-        input_depth = 65535
-    else:
-        input_bit = 16 if data_max > 255 else 8
-        input_depth = 65535 if data_max > 255 else 255
-    #data = np.clip(data, 0, input_depth)
+        data /= data_max
 
     img = Image.new('RGB', (w, h), (0, 0, 0))
     draw = ImageDraw.Draw(img)
     counter = 0
     px_num = w*h
 
-    sg.Print(f'\n{round(time.monotonic() - t, 3)} seconds for loading, autoalign and creating output templates\n')
+    sg.Print(f'\n{round(time.monotonic() - start_time, 3)} seconds for loading, autoalign and creating output templates\n')
     sg.Print(f'{time.strftime("%H:%M:%S")} 0%')
 
-    t = time.monotonic()
+    start_time = time.monotonic()
     get_spectrum_time = 0
     calc_polator_time = 0
     calc_rgb_time = 0
@@ -115,7 +134,6 @@ def image_processing(input_data: dict):
                     color = core.Color.from_spectrum_legacy(spectrum, albedo=True)
                 if input_data['gamma']:
                     color = color.gamma_corrected()
-                color.rgb /= input_bit
                 rgb = tuple(color.to_bit(8).round().astype(int))
                 calc_rgb_time += time.monotonic_ns() - temp_time
 
@@ -127,20 +145,20 @@ def image_processing(input_data: dict):
             counter += 1
             if counter % 2048 == 0:
                 try:
-                    sg.Print(f'{time.strftime("%H:%M:%S")} {round(counter/px_num * 100)}%, {round(counter/(time.monotonic()-t))} px/sec')
+                    sg.Print(f'{time.strftime("%H:%M:%S")} {round(counter/px_num * 100)}%, {round(counter/(time.monotonic()-start_time))} px/sec')
                 except ZeroDivisionError:
                     sg.Print(f'{time.strftime("%H:%M:%S")} {round(counter/px_num * 100)}% (ZeroDivisionError)')
             progress_bar_time += time.monotonic_ns() - temp_time
     
     end_time = time.monotonic()
-    sg.Print(f'\n{round(end_time - t, 3)} seconds for color processing, where:')
+    sg.Print(f'\n{round(end_time - start_time, 3)} seconds for color processing, where:')
     sg.Print(f'\t{get_spectrum_time / 1e9} for getting spectrum')
     sg.Print(f'\t{calc_polator_time / 1e9} for inter/extrapolating')
     sg.Print(f'\t{calc_rgb_time / 1e9} for color calculating')
     sg.Print(f'\t{draw_point_time / 1e9} for pixel drawing')
     sg.Print(f'\t{plot_pixels_time / 1e9} for adding spectrum to plot')
     sg.Print(f'\t{progress_bar_time / 1e9} for progress bar')
-    sg.Print(f'\t{round(end_time-t-(get_spectrum_time+calc_polator_time+calc_rgb_time+draw_point_time+plot_pixels_time+progress_bar_time)/1e9, 3)} for other (time, black-pixel check)')
+    sg.Print(f'\t{round(end_time-start_time-(get_spectrum_time+calc_polator_time+calc_rgb_time+draw_point_time+plot_pixels_time+progress_bar_time)/1e9, 3)} for other (time, black-pixel check)')
 
     if not input_data['preview']:
         img.save(f'{input_data["save"]}/TCT_{time.strftime("%Y-%m-%d_%H-%M")}.png')
