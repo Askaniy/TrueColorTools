@@ -16,8 +16,8 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
     rr = 4 # rounding radius
     ar = r-4 # active space
     br = r-2 # ...is higher for the right side of the square
-    w_border = 50 # pixels of left and right spaces
-    h_border = 50 # pixels of top and bottom spaces
+    w_border = 32 # pixels of left and right spaces
+    h_border = 32 # pixels of top and bottom spaces
 
     max_obj_per_raw = 14
     min_obj_to_scale = 8
@@ -141,7 +141,7 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
         draw.multiline_text((center_x-ar, center_y-shift), '\n'.join(splitted), fill=text_color, font=object_font, spacing=0)
         n += 1
     
-    file_name = f'TCT-table_{tag}_{lang}{"_gamma-corrected" if gamma else ""}{"_srgb" if srgb else ""}{"_albedo" if albedoFlag else ""}.{extension}'
+    file_name = f'TCT_{lang}_{tag}{"_gamma-corrected" if gamma else ""}{"_srgb" if srgb else ""}{"_albedo" if albedoFlag else ""}.{extension}'
     img.save(f'{folder}/{file_name}')
     print(f'Color table saved as {file_name}\n')
 
@@ -166,19 +166,17 @@ def line_splitter(line: str, font: ImageFont.FreeTypeFont, maxW: int):
         return recursive_split(line.split(), font, maxW)
 
 def recursive_split(lst0: list, font: ImageFont.FreeTypeFont, maxW: int, hyphen=True):
+    words_widths = [width(i, font) for i in lst0]
     lst = lst0
-    w_list = []
-    for i in lst:
-        w_list.append(width(i, font))
-    if max(w_list) < maxW:
-        for i in range(len(w_list)-1):
-            if w_list[i]+w_list[i+1] < maxW:
+    if max(words_widths) < maxW:
+        for i in range(len(words_widths)-1):
+            if words_widths[i]+words_widths[i+1] < maxW:
                 lst[i] += ' ' + lst[i+1]
                 lst.pop(i+1)
                 recursive_split(lst, font, maxW)
                 break
     else:
-        hyphen_w = width('-', font) if hyphen else 0
+        hyphen_width = width('-', font) if hyphen else 0
         for i in range(len(lst)):
             if width(lst[i], font) > maxW:
                 try:
@@ -187,7 +185,7 @@ def recursive_split(lst0: list, font: ImageFont.FreeTypeFont, maxW: int, hyphen=
                     lst.append(lst[i][-1])
                 finally:
                     lst[i] = lst[i][:-1]
-                while width(lst[i], font)+hyphen_w > maxW:
+                while width(lst[i], font)+hyphen_width > maxW:
                     lst[i+1] = lst[i][-1] + lst[i+1]
                     lst[i] = lst[i][:-1]
                 if lst[i][-1] in separators:

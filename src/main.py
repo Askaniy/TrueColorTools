@@ -7,21 +7,7 @@ import src.image as im
 import src.plotter as pl
 import src.strings as tr
 import src.table_generator as tg
-#import src.experimental
 
-
-
-def export_colors(rgb: tuple):
-    """ Generated formatted string of colors """
-    lst = []
-    mx = 0
-    for i in rgb:
-        lst.append(str(i))
-        l = len(lst[-1])
-        if l > mx:
-            mx = l
-    w = 8 if mx < 8 else mx+1
-    return ''.join([i.ljust(w) for i in lst])
 
 def launch_window():
     lang = 'en' # can be translated into German or Russian at runtime
@@ -388,3 +374,16 @@ def launch_window():
                 figure_canvas_agg = pl.draw_figure(window['T5_canvas'].TKCanvas, T5_fig)
 
     window.close()
+
+
+def export_colors(rgb: tuple):
+    """ Generated formatted string of colors """
+    lst = []
+    mx = 0
+    for i in rgb:
+        lst.append(str(i))
+        l = len(lst[-1])
+        if l > mx:
+            mx = l
+    w = 8 if mx < 8 else mx+1
+    return ''.join([i.ljust(w) for i in lst])

@@ -156,7 +156,7 @@ def obj_dict(database: dict, tag: str, lang: str):
                     index = parts[0] + '/'
                     new_name = parts[1].strip()
                 for obj_name, translation in tr.names.items():
-                    if new_name.startswith(obj_name) or new_name.endswith(obj_name):
+                    if new_name.startswith(obj_name) or obj_name in new_name.split():
                         new_name = new_name.replace(obj_name, translation[lang])
                         break
                 new_name = index + new_name

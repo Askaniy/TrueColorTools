@@ -4,1266 +4,1266 @@
         "http://www.eso.org/~ohainaut/MBOSS/", "http://www.eso.org/~ohainaut/MBOSS/mbossClasses.txt"
     ],
     "C/1995O1-HB|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.810, "V-R": 0.390}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.810, "V-R": 0.390}, "sun": true
     },
     "C/1999J2|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.687, "V-R": 0.426, "R-I": 0.403}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.687, "V-R": 0.426, "R-I": 0.403}, "sun": true
     },
     "C/2001G1|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.752, "V-R": 0.430, "R-I": 0.433}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.752, "V-R": 0.430, "R-I": 0.433}, "sun": true
     },
     "C/2001M10|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.963, "V-R": 0.350, "R-I": 0.520}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.963, "V-R": 0.350, "R-I": 0.520}, "sun": true
     },
     "C/2002CE10-LINEA|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.770, "V-R": 0.542, "R-I": 0.504}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.770, "V-R": 0.542, "R-I": 0.504}, "sun": true
     },
     "C/2002VQ94-LINEA|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.850, "V-R": 0.500, "R-I": 0.480}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.850, "V-R": 0.500, "R-I": 0.480}, "sun": true
     },
     "C/2003A2-Gleason|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.610, "V-R": 0.470, "R-I": 0.460}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.610, "V-R": 0.470, "R-I": 0.460}, "sun": true
     },
     "C/2004D1-NEAT|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.430, "R-I": 0.510}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.820, "V-R": 0.430, "R-I": 0.510}, "sun": true
     },
     "C/2006S3-Loneos|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.740, "V-R": 0.580}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.740, "V-R": 0.580}, "sun": true
     },
     "C/2007D1-LINEAR|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.750, "V-R": 0.440, "R-I": 0.410}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.750, "V-R": 0.440, "R-I": 0.410}, "sun": true
     },
     "C/2008S3-Boattin|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.769, "V-R": 0.448, "R-I": 0.364}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.769, "V-R": 0.448, "R-I": 0.364}, "sun": true
     },
     "C/2009T1-McNaugh|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.640, "V-R": 0.530, "R-I": 0.450}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.640, "V-R": 0.530, "R-I": 0.450}, "sun": true
     },
     "C/2010D4-WISE|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.740, "V-R": 0.460}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.740, "V-R": 0.460}, "sun": true
     },
     "C/2010DG56-WISE|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.770, "V-R": 0.370}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.770, "V-R": 0.370}, "sun": true
     },
     "C/2010L3-Catalin|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.750, "V-R": 0.420, "R-I": 0.410}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.750, "V-R": 0.420, "R-I": 0.410}, "sun": true
     },
     "C/2010U3-Boattin|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.778, "V-R": 0.520, "R-I": 0.320}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.778, "V-R": 0.520, "R-I": 0.320}, "sun": true
     },
     "C/2011P2-PANSTAR|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.919, "V-R": 0.323}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.919, "V-R": 0.323}, "sun": true
     },
     "C/2011Q1-PANSTAR|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.819, "V-R": 0.489}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.819, "V-R": 0.489}, "sun": true
     },
     "C/2012A1-PANSTAR|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.740, "V-R": 0.450}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.740, "V-R": 0.450}, "sun": true
     },
     "C/2012E1-Hill|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.790, "V-R": 0.400}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.790, "V-R": 0.400}, "sun": true
     },
     "C/2012LP26-Palom|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.854, "V-R": 0.516}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.854, "V-R": 0.516}, "sun": true
     },
     "C/2012Q1-Kowalsk|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.907, "V-R": 0.537}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.907, "V-R": 0.537}, "sun": true
     },
     "C/2013C2|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.887, "V-R": 0.533}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.887, "V-R": 0.533}, "sun": true
     },
     "C/2013E1-McNaugh|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.750, "V-R": 0.480}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.750, "V-R": 0.480}, "sun": true
     },
     "C/2013H2-Boattin|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.770, "V-R": 0.490}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.770, "V-R": 0.490}, "sun": true
     },
     "C/2013P3-Palomar|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.920, "V-R": 0.450}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.920, "V-R": 0.450}, "sun": true
     },
     "C/2013P4|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.827, "V-R": 0.487}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.827, "V-R": 0.487}, "sun": true
     },
     "C/2014AA52-CATAL|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.770, "V-R": 0.410}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.770, "V-R": 0.410}, "sun": true
     },
     "C/2014B1-Schwarz|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.850, "V-R": 0.580}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.850, "V-R": 0.580}, "sun": true
     },
     "C/2014R1-Borisov|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.810, "V-R": 0.460}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.810, "V-R": 0.460}, "sun": true
     },
     "C/2014W6-Catalin|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.810, "V-R": 0.450}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.810, "V-R": 0.450}, "sun": true
     },
     "C/2014XB8-PANSTA|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.790, "V-R": 0.440}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.790, "V-R": 0.440}, "sun": true
     },
     "C/2015B1-PANSTAR|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-lp"],
-        "filters": "Landolt", "indices": {"B-V": 0.780, "V-R": 0.450}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.780, "V-R": 0.450}, "sun": true
     },
     "P/2011S1-Gibbs|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 0.960, "V-R": 0.590}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.960, "V-R": 0.590}, "sun": true
     },
     "1P/Halley|MBOSS": {"tags": ["featured", "solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.410, "R-I": 0.390}, "sun": true, "albedo": 0.04
+        "filters": "UBVRI", "indices": {"B-V": 0.720, "V-R": 0.410, "R-I": 0.390}, "sun": true, "albedo": 0.04
     },
     "2P/Encke|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 0.780, "V-R": 0.424, "R-I": 0.408}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.780, "V-R": 0.424, "R-I": 0.408}, "sun": true
     },
     "6P/dArrest|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 0.770, "V-R": 0.563, "R-I": 0.450}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.770, "V-R": 0.563, "R-I": 0.450}, "sun": true
     },
     "8P/Tuttle|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 0.890, "V-R": 0.530, "R-I": 0.530}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.890, "V-R": 0.530, "R-I": 0.530}, "sun": true
     },
     "10P/Tempel2|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 0.800, "V-R": 0.521, "R-I": 0.520}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.800, "V-R": 0.521, "R-I": 0.520}, "sun": true
     },
     "21P/GZ|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 0.800, "V-R": 0.500}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.800, "V-R": 0.500}, "sun": true
     },
     "22P/Kopff|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 0.795, "V-R": 0.519, "R-I": 0.450}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.795, "V-R": 0.519, "R-I": 0.450}, "sun": true
     },
     "39P/Oterma|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 0.890, "V-R": 0.386, "R-I": 0.412}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.890, "V-R": 0.386, "R-I": 0.412}, "sun": true
     },
     "45P/HMP|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 1.080, "V-R": 0.440, "R-I": 0.210}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.080, "V-R": 0.440, "R-I": 0.210}, "sun": true
     },
     "47P/AJ|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 0.780, "V-R": 0.400}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.780, "V-R": 0.400}, "sun": true
     },
     "49P/AR|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 0.770, "V-R": 0.471, "R-I": 0.444}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.770, "V-R": 0.471, "R-I": 0.444}, "sun": true
     },
     "55P/TT|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 0.750, "V-R": 0.510, "R-I": 0.420}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.750, "V-R": 0.510, "R-I": 0.420}, "sun": true
     },
     "86P/Wild3|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 1.580, "V-R": 0.555}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.580, "V-R": 0.555}, "sun": true
     },
     "106P/Schuster|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 1.010, "V-R": 0.520, "R-I": 0.450}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.010, "V-R": 0.520, "R-I": 0.450}, "sun": true
     },
     "107P/WH|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 0.674, "V-R": 0.361}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.674, "V-R": 0.361}, "sun": true
     },
     "114P/WS|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 0.850, "V-R": 0.460, "R-I": 0.540}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.850, "V-R": 0.460, "R-I": 0.540}, "sun": true
     },
     "143P/KM|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.580, "R-I": 0.560}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.820, "V-R": 0.580, "R-I": 0.560}, "sun": true
     },
     "166P/2001T4|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.870, "V-R": 0.695, "R-I": 0.735}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.870, "V-R": 0.695, "R-I": 0.735}, "sun": true
     },
     "166P/NEAT|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 0.890, "V-R": 0.560}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.890, "V-R": 0.560}, "sun": true
     },
     "167P/CINEOS|MBOSS": {"tags": ["solar_system", "minor_body", "comet", "comet-sp"],
-        "filters": "Landolt", "indices": {"B-V": 0.758, "V-R": 0.516, "R-I": 0.504}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.758, "V-R": 0.516, "R-I": 0.504}, "sun": true
     },
     "1994 EV3|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.065, "V-R": 0.588, "R-I": 0.800}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.065, "V-R": 0.588, "R-I": 0.800}, "sun": true
     },
     "1994 TA|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.261, "V-R": 0.672, "R-I": 0.740}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.261, "V-R": 0.672, "R-I": 0.740}, "sun": true
     },
     "1995 HM5|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.649, "V-R": 0.460, "R-I": 0.428}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.649, "V-R": 0.460, "R-I": 0.428}, "sun": true
     },
     "1996 RQ20|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.935, "V-R": 0.558, "R-I": 0.591}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.935, "V-R": 0.558, "R-I": 0.591}, "sun": true
     },
     "1996 RR20|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 1.143, "V-R": 0.730, "R-I": 0.628}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.143, "V-R": 0.730, "R-I": 0.628}, "sun": true
     },
     "1996 TK66|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 0.993, "V-R": 0.680, "R-I": 0.551}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.993, "V-R": 0.680, "R-I": 0.551}, "sun": true
     },
     "1996 TS66|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 1.028, "V-R": 0.672, "R-I": 0.637}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.028, "V-R": 0.672, "R-I": 0.637}, "sun": true
     },
     "1997 QH4|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 1.088, "V-R": 0.641, "R-I": 0.631}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.088, "V-R": 0.641, "R-I": 0.631}, "sun": true
     },
     "1998 FS144|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.950, "V-R": 0.588, "R-I": 0.510}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.950, "V-R": 0.588, "R-I": 0.510}, "sun": true
     },
     "1998 KS65|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.090, "V-R": 0.640}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.090, "V-R": 0.640}, "sun": true
     },
     "1998 UR43|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.784, "V-R": 0.583, "R-I": 0.354}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.784, "V-R": 0.583, "R-I": 0.354}, "sun": true
     },
     "1998 WS31|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.726, "V-R": 0.606, "R-I": 0.439}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.726, "V-R": 0.606, "R-I": 0.439}, "sun": true
     },
     "1998 WU24|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.780, "V-R": 0.530, "R-I": 0.460}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.780, "V-R": 0.530, "R-I": 0.460}, "sun": true
     },
     "1998 WV24|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 0.770, "V-R": 0.502, "R-I": 0.450}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.770, "V-R": 0.502, "R-I": 0.450}, "sun": true
     },
     "1998 WV31|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.790, "V-R": 0.521, "R-I": 0.481}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.790, "V-R": 0.521, "R-I": 0.481}, "sun": true
     },
     "1998 WX24|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.090, "V-R": 0.727, "R-I": 0.500}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.090, "V-R": 0.727, "R-I": 0.500}, "sun": true
     },
     "1998 WZ31|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.727, "V-R": 0.489, "R-I": 0.339}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.727, "V-R": 0.489, "R-I": 0.339}, "sun": true
     },
     "1999 CB119|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 1.212, "V-R": 0.714, "R-I": 0.645}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.212, "V-R": 0.714, "R-I": 0.645}, "sun": true
     },
     "1999 CX131|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 0.918, "V-R": 0.664, "R-I": 0.434}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.918, "V-R": 0.664, "R-I": 0.434}, "sun": true
     },
     "1999 HS11|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.121, "V-R": 0.698, "R-I": 0.600}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.121, "V-R": 0.698, "R-I": 0.600}, "sun": true
     },
     "1999 HV11|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.110, "V-R": 0.590}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.110, "V-R": 0.590}, "sun": true
     },
     "1999 LE31|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.748, "V-R": 0.467, "R-I": 0.521}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.748, "V-R": 0.467, "R-I": 0.521}, "sun": true
     },
     "1999 OJ4|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.098, "V-R": 0.668, "R-I": 0.549}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.098, "V-R": 0.668, "R-I": 0.549}, "sun": true
     },
     "1999 RX214|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 1.054, "V-R": 0.593, "R-I": 0.530}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.054, "V-R": 0.593, "R-I": 0.530}, "sun": true
     },
     "1999 TR11|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 1.020, "V-R": 0.750, "R-I": 0.650}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.020, "V-R": 0.750, "R-I": 0.650}, "sun": true
     },
     "2000 CL104|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.223, "V-R": 0.600, "R-I": 0.612}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.223, "V-R": 0.600, "R-I": 0.612}, "sun": true
     },
     "2000 FS53|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.060, "V-R": 0.710}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.060, "V-R": 0.710}, "sun": true
     },
     "2000 HE46|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.870, "V-R": 0.550, "R-I": 0.400}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.870, "V-R": 0.550, "R-I": 0.400}, "sun": true
     },
     "2000 KK4|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.910, "V-R": 0.580, "R-I": 0.640}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.910, "V-R": 0.580, "R-I": 0.640}, "sun": true
     },
     "2001 FM194|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.760, "V-R": 0.440}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.760, "V-R": 0.440}, "sun": true
     },
     "2001 KA77|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 1.104, "V-R": 0.704, "R-I": 0.716}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.104, "V-R": 0.704, "R-I": 0.716}, "sun": true
     },
     "2001 KD77|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 1.123, "V-R": 0.624, "R-I": 0.565}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.123, "V-R": 0.624, "R-I": 0.565}, "sun": true
     },
     "2001 KG77|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.810, "V-R": 0.440}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.810, "V-R": 0.440}, "sun": true
     },
     "2001 QC298|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.750, "V-R": 0.490, "R-I": 0.480}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.750, "V-R": 0.490, "R-I": 0.480}, "sun": true
     },
     "2001 QR322|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 0.800, "V-R": 0.460, "R-I": 0.360}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.800, "V-R": 0.460, "R-I": 0.360}, "sun": true
     },
     "2001 QX322|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.914, "V-R": 0.562}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.914, "V-R": 0.562}, "sun": true
     },
     "2001 XZ255|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.224, "V-R": 0.709}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.224, "V-R": 0.709}, "sun": true
     },
     "2002 GH32|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.990, "V-R": 0.570, "R-I": 0.590}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.990, "V-R": 0.570, "R-I": 0.590}, "sun": true
     },
     "2002 PQ152|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.130, "V-R": 0.720}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.130, "V-R": 0.720}, "sun": true
     },
     "2002 XV93|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.375}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.720, "V-R": 0.375}, "sun": true
     },
     "2003 FZ129|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.840, "V-R": 0.480, "R-I": 0.460}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.840, "V-R": 0.480, "R-I": 0.460}, "sun": true
     },
     "2003 QA92|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.040, "V-R": 0.630}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.040, "V-R": 0.630}, "sun": true
     },
     "2003 QK91|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.870, "V-R": 0.500, "R-I": 0.470}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.870, "V-R": 0.500, "R-I": 0.470}, "sun": true
     },
     "2003 QQ91|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.670, "V-R": 0.510}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.670, "V-R": 0.510}, "sun": true
     },
     "2003 UY291|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.880, "V-R": 0.510, "R-I": 0.670}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.880, "V-R": 0.510, "R-I": 0.670}, "sun": true
     },
     "2003 WN188|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.780, "V-R": 0.480, "R-I": 0.500}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.780, "V-R": 0.480, "R-I": 0.500}, "sun": true
     },
     "2004 DA62|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.850, "V-R": 0.520, "R-I": 0.550}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.850, "V-R": 0.520, "R-I": 0.550}, "sun": true
     },
     "2004 OJ14|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.900, "V-R": 0.520, "R-I": 0.540}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.900, "V-R": 0.520, "R-I": 0.540}, "sun": true
     },
     "2004 XR190|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.790, "V-R": 0.450, "R-I": 0.520}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.790, "V-R": 0.450, "R-I": 0.520}, "sun": true
     },
     "2005 TN53|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.470, "R-I": 0.470}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.820, "V-R": 0.470, "R-I": 0.470}, "sun": true
     },
     "2006 RJ103|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.470, "R-I": 0.270}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.820, "V-R": 0.470, "R-I": 0.270}, "sun": true
     },
     "2007 VH305|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.690, "V-R": 0.491, "R-I": 0.480}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.690, "V-R": 0.491, "R-I": 0.480}, "sun": true
     },
     "2009 YG19|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 1.000, "V-R": 0.610}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.000, "V-R": 0.610}, "sun": true
     },
     "2010 BK118|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.794, "V-R": 0.525, "R-I": 0.480}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.794, "V-R": 0.525, "R-I": 0.480}, "sun": true
     },
     "2010 BL4|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.860, "V-R": 0.390, "R-I": 0.470}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.860, "V-R": 0.390, "R-I": 0.470}, "sun": true
     },
     "2010 OM101|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.795, "V-R": 0.588, "R-I": 0.360}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.795, "V-R": 0.588, "R-I": 0.360}, "sun": true
     },
     "2010 OR1|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.781, "V-R": 0.517, "R-I": 0.447}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.781, "V-R": 0.517, "R-I": 0.447}, "sun": true
     },
     "2010 TS191|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.760, "V-R": 0.390}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.760, "V-R": 0.390}, "sun": true
     },
     "2010 TT191|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.750, "V-R": 0.470}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.750, "V-R": 0.470}, "sun": true
     },
     "2010 WG9|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.781, "V-R": 0.492, "R-I": 0.458}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.781, "V-R": 0.492, "R-I": 0.458}, "sun": true
     },
     "2011 HM102|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.410, "R-I": 0.520}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.720, "V-R": 0.410, "R-I": 0.520}, "sun": true
     },
     "2012 DR30|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.647, "V-R": 0.563, "R-I": 0.422}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.647, "V-R": 0.563, "R-I": 0.422}, "sun": true
     },
     "2012 VP113|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.920, "V-R": 0.520, "R-I": 0.530}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.920, "V-R": 0.520, "R-I": 0.530}, "sun": true
     },
     "2013 AZ60|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.540}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.820, "V-R": 0.540}, "sun": true
     },
     "2013 BL76|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.920, "V-R": 0.450}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.920, "V-R": 0.450}, "sun": true
     },
     "2013 BO16|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 1.140, "V-R": 0.650}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.140, "V-R": 0.650}, "sun": true
     },
     "2013 CX217|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.850, "V-R": 0.280}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.850, "V-R": 0.280}, "sun": true
     },
     "2013 CY197|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.880, "V-R": 0.510, "R-I": 0.610}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.880, "V-R": 0.510, "R-I": 0.610}, "sun": true
     },
     "2013 KY18|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.760, "V-R": 0.360}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.760, "V-R": 0.360}, "sun": true
     },
     "2013 LD16|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.860, "V-R": 0.440}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.860, "V-R": 0.440}, "sun": true
     },
     "2013 NS11|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.740, "V-R": 0.560}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.740, "V-R": 0.560}, "sun": true
     },
     "2013 TZ158|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.790, "V-R": 0.536, "R-I": 0.497}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.790, "V-R": 0.536, "R-I": 0.497}, "sun": true
     },
     "2013 YG48|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.800, "V-R": 0.515}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.800, "V-R": 0.515}, "sun": true
     },
     "2014 CW14|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.870, "V-R": 0.510}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.870, "V-R": 0.510}, "sun": true
     },
     "2014 QO441|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.750, "V-R": 0.470}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.750, "V-R": 0.470}, "sun": true
     },
     "(1172) Aneas|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.727, "V-R": 0.510, "R-I": 0.400}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.727, "V-R": 0.510, "R-I": 0.400}, "sun": true
     },
     "(1173) Anchises|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.811, "V-R": 0.402, "R-I": 0.403}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.811, "V-R": 0.402, "R-I": 0.403}, "sun": true
     },
     "(1871) Astyanax|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.716, "V-R": 0.456, "R-I": 0.424}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.716, "V-R": 0.456, "R-I": 0.424}, "sun": true
     },
     "(2060) Chiron|MBOSS": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.660, "V-R": 0.359, "R-I": 0.324}, "sun": true, "albedo": 0.16
+        "filters": "UBVRI", "indices": {"B-V": 0.660, "V-R": 0.359, "R-I": 0.324}, "sun": true, "albedo": 0.16
     },
     "(2223) Sarpedon|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.753, "V-R": 0.465, "R-I": 0.440}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.753, "V-R": 0.465, "R-I": 0.440}, "sun": true
     },
     "(2357) Phereclos|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.718, "V-R": 0.427, "R-I": 0.463}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.718, "V-R": 0.427, "R-I": 0.463}, "sun": true
     },
     "(3548) Eurybates|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.677, "V-R": 0.352, "R-I": 0.339}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.677, "V-R": 0.352, "R-I": 0.339}, "sun": true
     },
     "(4035) 1986 WD|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.752, "V-R": 0.484, "R-I": 0.451}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.752, "V-R": 0.484, "R-I": 0.451}, "sun": true
     },
     "(4829) Sergestus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.851, "V-R": 0.420, "R-I": 0.372}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.851, "V-R": 0.420, "R-I": 0.372}, "sun": true
     },
     "(5130) Ilioneus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.763, "V-R": 0.481, "R-I": 0.424}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.763, "V-R": 0.481, "R-I": 0.424}, "sun": true
     },
     "(5145) Pholus|MBOSS": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.261, "V-R": 0.791, "R-I": 0.818}, "sun": true, "albedo": 0.155
+        "filters": "UBVRI", "indices": {"B-V": 1.261, "V-R": 0.791, "R-I": 0.818}, "sun": true, "albedo": 0.155
     },
     "(5511) Cloanthus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.906, "V-R": 0.442, "R-I": 0.526}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.906, "V-R": 0.442, "R-I": 0.526}, "sun": true
     },
     "(6545) 1986 TR6|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.734, "V-R": 0.499, "R-I": 0.436}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.734, "V-R": 0.499, "R-I": 0.436}, "sun": true
     },
     "(6998) Tithonus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.787, "V-R": 0.455, "R-I": 0.438}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.787, "V-R": 0.455, "R-I": 0.438}, "sun": true
     },
     "(7066) Nessus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.090, "V-R": 0.763, "R-I": 0.689}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.090, "V-R": 0.763, "R-I": 0.689}, "sun": true
     },
     "(7352) 1994 CO|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.713, "V-R": 0.417, "R-I": 0.397}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.713, "V-R": 0.417, "R-I": 0.397}, "sun": true
     },
     "(8405) Asbolus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.738, "V-R": 0.508, "R-I": 0.505}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.738, "V-R": 0.508, "R-I": 0.505}, "sun": true
     },
     "(9030) 1989 UX5|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.887, "V-R": 0.493, "R-I": 0.480}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.887, "V-R": 0.493, "R-I": 0.480}, "sun": true
     },
     "(9430) Erichthonio|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.742, "V-R": 0.488, "R-I": 0.456}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.742, "V-R": 0.488, "R-I": 0.456}, "sun": true
     },
     "(9818) Eurymachos|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.673, "V-R": 0.339, "R-I": 0.355}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.673, "V-R": 0.339, "R-I": 0.355}, "sun": true
     },
     "(10199) Chariklo|MBOSS": {"tags": ["featured", "solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.802, "V-R": 0.491, "R-I": 0.519}, "sun": true, "albedo": 0.035
+        "filters": "UBVRI", "indices": {"B-V": 0.802, "V-R": 0.491, "R-I": 0.519}, "sun": true, "albedo": 0.035
     }, // albedo from https://arxiv.org/abs/1409.7259
     "(10370) Hylonome|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.690, "V-R": 0.469, "R-I": 0.496}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.690, "V-R": 0.469, "R-I": 0.496}, "sun": true
     },
     "(11089) 1994 CS8|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.689, "V-R": 0.423, "R-I": 0.384}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.689, "V-R": 0.423, "R-I": 0.384}, "sun": true
     },
     "(11351) Leucus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.739, "V-R": 0.498, "R-I": 0.402}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.739, "V-R": 0.498, "R-I": 0.402}, "sun": true
     },
     "(11488) 1988 RM11|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.777, "V-R": 0.436, "R-I": 0.420}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.777, "V-R": 0.436, "R-I": 0.420}, "sun": true
     },
     "(11663) 1997 GO24|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.837, "V-R": 0.409, "R-I": 0.463}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.837, "V-R": 0.409, "R-I": 0.463}, "sun": true
     },
     "(12917) 1998 TG16|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.724, "V-R": 0.537, "R-I": 0.410}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.724, "V-R": 0.537, "R-I": 0.410}, "sun": true
     },
     "(12921) 1998 WZ5|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.673, "V-R": 0.403, "R-I": 0.380}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.673, "V-R": 0.403, "R-I": 0.380}, "sun": true
     },
     "(13463) Antiphos|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.692, "V-R": 0.449, "R-I": 0.412}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.692, "V-R": 0.449, "R-I": 0.412}, "sun": true
     },
     "(14707) 2000 CC20|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.752, "V-R": 0.412, "R-I": 0.385}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.752, "V-R": 0.412, "R-I": 0.385}, "sun": true
     },
     "(15094) Polymele|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.652, "V-R": 0.477, "R-I": 0.322}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.652, "V-R": 0.477, "R-I": 0.322}, "sun": true
     },
     "(15502) 1999 NV27|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.766, "V-R": 0.445, "R-I": 0.430}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.766, "V-R": 0.445, "R-I": 0.430}, "sun": true
     },
     "(15504) 1999 RG33|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.817, "V-R": 0.495, "R-I": 0.350}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.817, "V-R": 0.495, "R-I": 0.350}, "sun": true
     },
     "(15535) 2000 AT177|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.739, "V-R": 0.470, "R-I": 0.461}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.739, "V-R": 0.470, "R-I": 0.461}, "sun": true
     },
     "(15760) Albion|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 0.869, "V-R": 0.707, "R-I": 0.651}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.869, "V-R": 0.707, "R-I": 0.651}, "sun": true
     },
     "(15788) 1993 SB|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.802, "V-R": 0.475, "R-I": 0.514}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.802, "V-R": 0.475, "R-I": 0.514}, "sun": true
     },
     "(15789) 1993 SC|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 1.045, "V-R": 0.688, "R-I": 0.697}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.045, "V-R": 0.688, "R-I": 0.697}, "sun": true
     },
     "(15810) Arawn|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 1.010, "V-R": 0.632, "R-I": 0.538}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.010, "V-R": 0.632, "R-I": 0.538}, "sun": true
     },
     "(15820) 1994 TB|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 1.107, "V-R": 0.697, "R-I": 0.739}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.107, "V-R": 0.697, "R-I": 0.739}, "sun": true
     },
     "(15874) 1996 TL66|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.687, "V-R": 0.369, "R-I": 0.370}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.687, "V-R": 0.369, "R-I": 0.370}, "sun": true
     },
     "(15875) 1996 TP66|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 1.031, "V-R": 0.655, "R-I": 0.673}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.031, "V-R": 0.655, "R-I": 0.673}, "sun": true
     },
     "(15883) 1997 CR29|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.750, "V-R": 0.538, "R-I": 0.620}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.750, "V-R": 0.538, "R-I": 0.620}, "sun": true
     },
     "(15977) 1998 MA11|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.748, "V-R": 0.465, "R-I": 0.441}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.748, "V-R": 0.465, "R-I": 0.441}, "sun": true
     },
     "(16684) 1994 JQ1|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.134, "V-R": 0.736, "R-I": 0.650}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.134, "V-R": 0.736, "R-I": 0.650}, "sun": true
     },
     "(17416) 1988 RR10|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.742, "V-R": 0.488, "R-I": 0.498}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.742, "V-R": 0.488, "R-I": 0.498}, "sun": true
     },
     "(18060) 1999 XJ156|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.758, "V-R": 0.412, "R-I": 0.364}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.758, "V-R": 0.412, "R-I": 0.364}, "sun": true
     },
     "(18137) 2000 OU30|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.733, "V-R": 0.496, "R-I": 0.409}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.733, "V-R": 0.496, "R-I": 0.409}, "sun": true
     },
     "(18268) Dardanos|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.795, "V-R": 0.529, "R-I": 0.451}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.795, "V-R": 0.529, "R-I": 0.451}, "sun": true
     },
     "(18493) Demoleon|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.703, "V-R": 0.395, "R-I": 0.380}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.703, "V-R": 0.395, "R-I": 0.380}, "sun": true
     },
     "(18940) 2000 QV49|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.709, "V-R": 0.465, "R-I": 0.429}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.709, "V-R": 0.465, "R-I": 0.429}, "sun": true
     },
     "(19255) 1994 VK8|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.010, "V-R": 0.659, "R-I": 0.490}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.010, "V-R": 0.659, "R-I": 0.490}, "sun": true
     },
     "(19299) 1996 SZ4|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.754, "V-R": 0.522, "R-I": 0.446}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.754, "V-R": 0.522, "R-I": 0.446}, "sun": true
     },
     "(19308) 1996 TO66|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.671, "V-R": 0.389, "R-I": 0.356}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.671, "V-R": 0.389, "R-I": 0.356}, "sun": true
     },
     "(19521) Chaos|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.932, "V-R": 0.608, "R-I": 0.571}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.932, "V-R": 0.608, "R-I": 0.571}, "sun": true
     },
     "(20000) Varuna|MBOSS": {"tags": ["featured", "solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.906, "V-R": 0.626, "R-I": 0.628}, "sun": true, "albedo": 0.172
+        "filters": "UBVRI", "indices": {"B-V": 0.906, "V-R": 0.626, "R-I": 0.628}, "sun": true, "albedo": 0.172
     }, // albedo from fyr02's sheet
     "(20108) 1995 QZ9|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.880, "V-R": 0.515}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.880, "V-R": 0.515}, "sun": true
     },
     "(20738) 1999 XG191|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.776, "V-R": 0.472, "R-I": 0.467}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.776, "V-R": 0.472, "R-I": 0.467}, "sun": true
     },
     "(23549) Epicles|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.800, "V-R": 0.485, "R-I": 0.387}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.800, "V-R": 0.485, "R-I": 0.387}, "sun": true
     },
     "(23694) 1997 KZ3|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.723, "V-R": 0.474, "R-I": 0.418}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.723, "V-R": 0.474, "R-I": 0.418}, "sun": true
     },
     "(24233) 1999 XD94|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.704, "V-R": 0.481, "R-I": 0.418}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.704, "V-R": 0.481, "R-I": 0.418}, "sun": true
     },
     "(24341) 2000 AJ87|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.713, "V-R": 0.369, "R-I": 0.390}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.713, "V-R": 0.369, "R-I": 0.390}, "sun": true
     },
     "(24380) 2000 AA160|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.734, "V-R": 0.391, "R-I": 0.336}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.734, "V-R": 0.391, "R-I": 0.336}, "sun": true
     },
     "(24390) 2000 AD177|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.700, "V-R": 0.513, "R-I": 0.462}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.700, "V-R": 0.513, "R-I": 0.462}, "sun": true
     },
     "(24420) 2000 BU22|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.937, "V-R": 0.441, "R-I": 0.304}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.937, "V-R": 0.441, "R-I": 0.304}, "sun": true
     },
     "(24426) 2000 CR12|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.717, "V-R": 0.414, "R-I": 0.424}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.717, "V-R": 0.414, "R-I": 0.424}, "sun": true
     },
     "(24444) 2000 OP32|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.712, "V-R": 0.437, "R-I": 0.409}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.712, "V-R": 0.437, "R-I": 0.409}, "sun": true
     },
     "(24452) 2000 QU167|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.872, "V-R": 0.441, "R-I": 0.406}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.872, "V-R": 0.441, "R-I": 0.406}, "sun": true
     },
     "(24467) 2000 SS165|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.927, "V-R": 0.460, "R-I": 0.513}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.927, "V-R": 0.460, "R-I": 0.513}, "sun": true
     },
     "(24835) 1995 SM55|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.652, "V-R": 0.357, "R-I": 0.356}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.652, "V-R": 0.357, "R-I": 0.356}, "sun": true
     },
     "(24952) 1997 QJ4|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.763, "V-R": 0.431, "R-I": 0.396}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.763, "V-R": 0.431, "R-I": 0.396}, "sun": true
     },
     "(24978) 1998 HJ151|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.110, "V-R": 0.710}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.110, "V-R": 0.710}, "sun": true
     },
     "(25347) 1999 RQ116|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.618, "V-R": 0.488, "R-I": 0.461}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.618, "V-R": 0.488, "R-I": 0.461}, "sun": true
     },
     "(26181) 1996 GQ21|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 0.999, "V-R": 0.697, "R-I": 0.694}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.999, "V-R": 0.697, "R-I": 0.694}, "sun": true
     },
     "(26308) 1998 SM165|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 0.989, "V-R": 0.641, "R-I": 0.666}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.989, "V-R": 0.641, "R-I": 0.666}, "sun": true
     },
     "(26375) 1999 DE9|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 0.967, "V-R": 0.579, "R-I": 0.568}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.967, "V-R": 0.579, "R-I": 0.568}, "sun": true
     },
     "(28958) 2001 CQ42|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.730, "V-R": 0.364, "R-I": 0.230}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.730, "V-R": 0.364, "R-I": 0.230}, "sun": true
     },
     "(28978) Ixion|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 1.018, "V-R": 0.605, "R-I": 0.580}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.018, "V-R": 0.605, "R-I": 0.580}, "sun": true
     },
     "(29981) 1999 TD10|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.808, "V-R": 0.502, "R-I": 0.511}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.808, "V-R": 0.502, "R-I": 0.511}, "sun": true
     },
     "(30698) Hippokoon|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.715, "V-R": 0.458, "R-I": 0.412}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.715, "V-R": 0.458, "R-I": 0.412}, "sun": true
     },
     "(31820) 1999 RT186|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.889, "V-R": 0.520, "R-I": 0.396}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.889, "V-R": 0.520, "R-I": 0.396}, "sun": true
     },
     "(31821) 1999 RK225|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.980, "V-R": 0.440, "R-I": 0.461}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.980, "V-R": 0.440, "R-I": 0.461}, "sun": true
     },
     "(31824) Elatus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.020, "V-R": 0.620, "R-I": 0.630}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.020, "V-R": 0.620, "R-I": 0.630}, "sun": true
     },
     "(32430) 2000 RQ83|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.772, "V-R": 0.474, "R-I": 0.425}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.772, "V-R": 0.474, "R-I": 0.425}, "sun": true
     },
     "(32532) Thereus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.764, "V-R": 0.501, "R-I": 0.479}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.764, "V-R": 0.501, "R-I": 0.479}, "sun": true
     },
     "(32615) 2001 QU277|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.807, "V-R": 0.452, "R-I": 0.474}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.807, "V-R": 0.452, "R-I": 0.474}, "sun": true
     },
     "(32794) 1989 UE5|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.923, "V-R": 0.393, "R-I": 0.486}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.923, "V-R": 0.393, "R-I": 0.486}, "sun": true
     },
     "(32929) 1995 QY9|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.740, "V-R": 0.561}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.740, "V-R": 0.561}, "sun": true
     },
     "(33001) 1997 CU29|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.157, "V-R": 0.645, "R-I": 0.634}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.157, "V-R": 0.645, "R-I": 0.634}, "sun": true
     },
     "(33128) 1998 BU48|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 1.044, "V-R": 0.631, "R-I": 0.644}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.044, "V-R": 0.631, "R-I": 0.644}, "sun": true
     },
     "(33340) 1998 VG44|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.955, "V-R": 0.555, "R-I": 0.598}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.955, "V-R": 0.555, "R-I": 0.598}, "sun": true
     },
     "(34785) 2001 RG87|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.728, "V-R": 0.386, "R-I": 0.419}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.728, "V-R": 0.386, "R-I": 0.419}, "sun": true
     },
     "(35671) 1998 SN165|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 0.712, "V-R": 0.444, "R-I": 0.437}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.712, "V-R": 0.444, "R-I": 0.437}, "sun": true
     },
     "(38083) Rhadamanth|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.650, "V-R": 0.527, "R-I": 0.412}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.650, "V-R": 0.527, "R-I": 0.412}, "sun": true
     },
     "(38084) 1999 HB12|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 0.893, "V-R": 0.544, "R-I": 0.481}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.893, "V-R": 0.544, "R-I": 0.481}, "sun": true
     },
     "(38628) Huya|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.963, "V-R": 0.609, "R-I": 0.593}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.963, "V-R": 0.609, "R-I": 0.593}, "sun": true
     },
     "(39285) 2001 BP75|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.810, "V-R": 0.381, "R-I": 0.291}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.810, "V-R": 0.381, "R-I": 0.291}, "sun": true
     },
     "(40314) 1999 KR16|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 1.123, "V-R": 0.738, "R-I": 0.750}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.123, "V-R": 0.738, "R-I": 0.750}, "sun": true
     },
     "(42301) 2001 UR163|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 1.290, "V-R": 0.839, "R-I": 0.673}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.290, "V-R": 0.839, "R-I": 0.673}, "sun": true
     },
     "(42355) Typhon|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.758, "V-R": 0.518, "R-I": 0.378}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.758, "V-R": 0.518, "R-I": 0.378}, "sun": true
     },
     "(44594) 1999 OX3|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 1.138, "V-R": 0.708, "R-I": 0.640}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.138, "V-R": 0.708, "R-I": 0.640}, "sun": true
     },
     "(47171) Lempo|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 1.029, "V-R": 0.693, "R-I": 0.619}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.029, "V-R": 0.693, "R-I": 0.619}, "sun": true
     },
     "(47932) 2000 GN171|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.960, "V-R": 0.607, "R-I": 0.617}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.960, "V-R": 0.607, "R-I": 0.617}, "sun": true
     },
     "(47967) 2000 SL298|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.899, "V-R": 0.489, "R-I": 0.476}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.899, "V-R": 0.489, "R-I": 0.476}, "sun": true
     },
     "(48249) 2001 SY345|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.758, "V-R": 0.530, "R-I": 0.420}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.758, "V-R": 0.530, "R-I": 0.420}, "sun": true
     },
     "(48252) 2001 TL212|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.949, "V-R": 0.467, "R-I": 0.436}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.949, "V-R": 0.467, "R-I": 0.436}, "sun": true
     },
     "(48639) 1995 TL8|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 1.008, "V-R": 0.621, "R-I": 0.551}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.008, "V-R": 0.621, "R-I": 0.551}, "sun": true
     },
     "(49036) Pelion|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.746, "V-R": 0.556, "R-I": 0.368}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.746, "V-R": 0.556, "R-I": 0.368}, "sun": true
     },
     "(50000) Quaoar|MBOSS": {"tags": ["featured", "solar_system", "minor_body", "dwarf_planet", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.958, "V-R": 0.650, "R-I": 0.610}, "sun": true, "albedo": 0.109
+        "filters": "UBVRI", "indices": {"B-V": 0.958, "V-R": 0.650, "R-I": 0.610}, "sun": true, "albedo": 0.109
     }, // albedo from fyr02's sheet
     "(51359) 2000 SC17|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.864, "V-R": 0.447, "R-I": 0.438}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.864, "V-R": 0.447, "R-I": 0.438}, "sun": true
     },
     "(52747) 1998 HM151|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 0.930, "V-R": 0.620}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.930, "V-R": 0.620}, "sun": true
     },
     "(52872) Okyrhoe|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.743, "V-R": 0.495, "R-I": 0.480}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.743, "V-R": 0.495, "R-I": 0.480}, "sun": true
     },
     "(52975) Cyllarus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.096, "V-R": 0.680, "R-I": 0.669}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.096, "V-R": 0.680, "R-I": 0.669}, "sun": true
     },
     "(53469) 2000 AX8|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.663, "V-R": 0.356, "R-I": 0.361}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.663, "V-R": 0.356, "R-I": 0.361}, "sun": true
     },
     "(54598) Bienor|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.711, "V-R": 0.476, "R-I": 0.400}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.711, "V-R": 0.476, "R-I": 0.400}, "sun": true
     },
     "(55565) 2002 AW197|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.915, "V-R": 0.589, "R-I": 0.581}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.915, "V-R": 0.589, "R-I": 0.581}, "sun": true
     },
     "(55576) Amycus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.111, "V-R": 0.705, "R-I": 0.666}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.111, "V-R": 0.705, "R-I": 0.666}, "sun": true
     },
     "(55636) 2002 TX300|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.679, "V-R": 0.359, "R-I": 0.323}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.679, "V-R": 0.359, "R-I": 0.323}, "sun": true
     },
     "(55637) 2002 UX25|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.979, "V-R": 0.552}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.979, "V-R": 0.552}, "sun": true
     },
     "(55638) 2002 VE95|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 1.094, "V-R": 0.733, "R-I": 0.760}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.094, "V-R": 0.733, "R-I": 0.760}, "sun": true
     },
     "(56968) 2000 SA92|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.986, "V-R": 0.494, "R-I": 0.509}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.986, "V-R": 0.494, "R-I": 0.509}, "sun": true
     },
     "(58534) Logos|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 0.990, "V-R": 0.729, "R-I": 0.602}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.990, "V-R": 0.729, "R-I": 0.602}, "sun": true
     },
     "(59358) 1999 CL158|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.800, "V-R": 0.390, "R-I": 0.470}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.800, "V-R": 0.390, "R-I": 0.470}, "sun": true
     },
     "(60454) 2000 CH105|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.019, "V-R": 0.643, "R-I": 0.583}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.019, "V-R": 0.643, "R-I": 0.583}, "sun": true
     },
     "(60458) 2000 CM114|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.730, "V-R": 0.500}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.730, "V-R": 0.500}, "sun": true
     },
     "(60558) Echeclus|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.841, "V-R": 0.502, "R-I": 0.486}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.841, "V-R": 0.502, "R-I": 0.486}, "sun": true
     },
     "(60608) 2000 EE173|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.665, "V-R": 0.488, "R-I": 0.543}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.665, "V-R": 0.488, "R-I": 0.543}, "sun": true
     },
     "(60620) 2000 FD8|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 1.151, "V-R": 0.664, "R-I": 0.648}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.151, "V-R": 0.664, "R-I": 0.648}, "sun": true
     },
     "(60621) 2000 FE8|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 0.750, "V-R": 0.480, "R-I": 0.500}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.750, "V-R": 0.480, "R-I": 0.500}, "sun": true
     },
     "(63252) 2001 BL41|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.718, "V-R": 0.509, "R-I": 0.381}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.718, "V-R": 0.509, "R-I": 0.381}, "sun": true
     },
     "(65150) 2002 CA126|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.651, "V-R": 0.377, "R-I": 0.407}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.651, "V-R": 0.377, "R-I": 0.407}, "sun": true
     },
     "(65225) 2002 EK44|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.693, "V-R": 0.401, "R-I": 0.334}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.693, "V-R": 0.401, "R-I": 0.334}, "sun": true
     },
     "(65407) 2002 RP120|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.846, "V-R": 0.489, "R-I": 0.484}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.846, "V-R": 0.489, "R-I": 0.484}, "sun": true
     },
     "(65489) Ceto|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.879, "V-R": 0.547, "R-I": 0.411}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.879, "V-R": 0.547, "R-I": 0.411}, "sun": true
     },
     "(66452) 1999 OF4|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.032, "V-R": 0.673, "R-I": 0.601}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.032, "V-R": 0.673, "R-I": 0.601}, "sun": true
     },
     "(66652) Borasisi|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.646, "R-I": 0.647}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.820, "V-R": 0.646, "R-I": 0.647}, "sun": true
     },
     "(69986) 1998 WW24|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.756, "V-R": 0.463, "R-I": 0.659}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.756, "V-R": 0.463, "R-I": 0.659}, "sun": true
     },
     "(69988) 1998 WA31|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 0.786, "V-R": 0.492, "R-I": 0.530}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.786, "V-R": 0.492, "R-I": 0.530}, "sun": true
     },
     "(69990) 1998 WU31|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.505, "R-I": 0.722}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.720, "V-R": 0.505, "R-I": 0.722}, "sun": true
     },
     "(73480) 2002 PN34|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.818, "V-R": 0.514}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.818, "V-R": 0.514}, "sun": true
     },
     "(76804) 2000 QE|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.803, "V-R": 0.446, "R-I": 0.443}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.803, "V-R": 0.446, "R-I": 0.443}, "sun": true
     },
     "(79360) Sila-Nunam|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.055, "V-R": 0.666, "R-I": 0.609}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.055, "V-R": 0.666, "R-I": 0.609}, "sun": true
     },
     "(79978) 1999 CC158|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 0.996, "V-R": 0.611, "R-I": 0.619}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.996, "V-R": 0.611, "R-I": 0.619}, "sun": true
     },
     "(79983) 1999 DF9|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.920, "V-R": 0.710, "R-I": 0.650}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.920, "V-R": 0.710, "R-I": 0.650}, "sun": true
     },
     "(82075) 2000 YW134|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 0.922, "V-R": 0.503, "R-I": 0.581}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.922, "V-R": 0.503, "R-I": 0.581}, "sun": true
     },
     "(82155) 2001 FZ173|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.864, "V-R": 0.546, "R-I": 0.508}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.864, "V-R": 0.546, "R-I": 0.508}, "sun": true
     },
     "(82158) 2001 FP185|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.572, "R-I": 0.458}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.820, "V-R": 0.572, "R-I": 0.458}, "sun": true
     },
     "(83982) Crantor|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.105, "V-R": 0.761, "R-I": 0.667}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.105, "V-R": 0.761, "R-I": 0.667}, "sun": true
     },
     "(84522) 2002 TC302|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 1.067, "V-R": 0.655, "R-I": 0.660}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.067, "V-R": 0.655, "R-I": 0.660}, "sun": true
     },
     "(84709) 2002 VW120|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.855, "V-R": 0.462, "R-I": 0.548}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.855, "V-R": 0.462, "R-I": 0.548}, "sun": true
     },
     "(84719) 2002 VR128|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.935, "V-R": 0.605}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.935, "V-R": 0.605}, "sun": true
     },
     "(84922) 2003 VS2|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.930, "V-R": 0.590}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.930, "V-R": 0.590}, "sun": true
     },
     "(85633) 1998 KR65|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.095, "V-R": 0.628, "R-I": 0.790}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.095, "V-R": 0.628, "R-I": 0.790}, "sun": true
     },
     "(86047) 1999 OY3|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.726, "V-R": 0.345, "R-I": 0.277}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.726, "V-R": 0.345, "R-I": 0.277}, "sun": true
     },
     "(86177) 1999 RY215|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.719, "V-R": 0.358, "R-I": 0.631}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.719, "V-R": 0.358, "R-I": 0.631}, "sun": true
     },
     "(87269) 2000 OO67|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 1.080, "V-R": 0.654, "R-I": 0.593}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.080, "V-R": 0.654, "R-I": 0.593}, "sun": true
     },
     "(87555) 2000 QB243|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.763, "V-R": 0.383, "R-I": 0.729}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.763, "V-R": 0.383, "R-I": 0.729}, "sun": true
     },
     "(88269) 2001 KF77|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.080, "V-R": 0.730}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.080, "V-R": 0.730}, "sun": true
     },
     "(90377) Sedna|MBOSS": {"tags": ["featured", "solar_system", "dwarf_planet", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 1.179, "V-R": 0.739, "R-I": 0.654}, "sun": true, "albedo": 0.399
+        "filters": "UBVRI", "indices": {"B-V": 1.179, "V-R": 0.739, "R-I": 0.654}, "sun": true, "albedo": 0.399
     }, // albedo from fyr02's sheet
     "(90482) Orcus|MBOSS": {"tags": ["featured", "solar_system", "dwarf_planet", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.670, "V-R": 0.376, "R-I": 0.372}, "sun": true, "albedo": 0.231
+        "filters": "UBVRI", "indices": {"B-V": 0.670, "V-R": 0.376, "R-I": 0.372}, "sun": true, "albedo": 0.231
     }, // albedo from fyr02's sheet
     "(90568) 2004 GV9|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.895, "V-R": 0.520}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.895, "V-R": 0.520}, "sun": true
     },
     "(91133) 1998 HK151|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.645, "V-R": 0.520, "R-I": 0.390}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.645, "V-R": 0.520, "R-I": 0.390}, "sun": true
     },
     "(91205) 1998 US43|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.691, "V-R": 0.446, "R-I": 0.347}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.691, "V-R": 0.446, "R-I": 0.347}, "sun": true
     },
     "(91554) 1999 RZ215|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.771, "V-R": 0.575, "R-I": 0.539}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.771, "V-R": 0.575, "R-I": 0.539}, "sun": true
     },
     "(95626) 2002 GZ32|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.674, "V-R": 0.576, "R-I": 0.538}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.674, "V-R": 0.576, "R-I": 0.538}, "sun": true
     },
     "(99328) 2001 UY123|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.890, "V-R": 0.537, "R-I": 0.434}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.890, "V-R": 0.537, "R-I": 0.434}, "sun": true
     },
     "(105685) 2000 SC51|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 1.016, "V-R": 0.444, "R-I": 0.452}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.016, "V-R": 0.444, "R-I": 0.452}, "sun": true
     },
     "(111113) 2001 VK85|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.822, "V-R": 0.462, "R-I": 0.558}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.822, "V-R": 0.462, "R-I": 0.558}, "sun": true
     },
     "(118228) 1996 TQ66|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 1.186, "V-R": 0.670, "R-I": 0.746}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.186, "V-R": 0.670, "R-I": 0.746}, "sun": true
     },
     "(118379) 1999 HC12|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.894, "V-R": 0.490, "R-I": 0.343}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.894, "V-R": 0.490, "R-I": 0.343}, "sun": true
     },
     "(118702) 2000 OM67|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.470, "R-I": 0.590}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.820, "V-R": 0.470, "R-I": 0.590}, "sun": true
     },
     "(119068) 2001 KC77|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 0.910, "V-R": 0.560}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.910, "V-R": 0.560}, "sun": true
     },
     "(119315) 2001 SQ73|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.670, "V-R": 0.460}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.670, "V-R": 0.460}, "sun": true
     },
     "(119951) 2002 KX14|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.050, "V-R": 0.607}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.050, "V-R": 0.607}, "sun": true
     },
     "(119979) 2002 WC19|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 1.040, "V-R": 0.630}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.040, "V-R": 0.630}, "sun": true
     },
     "(120061) 2003 CO1|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.743, "V-R": 0.472, "R-I": 0.494}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.743, "V-R": 0.472, "R-I": 0.494}, "sun": true
     },
     "(120132) 2003 FY128|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 1.021, "V-R": 0.614, "R-I": 0.540}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.021, "V-R": 0.614, "R-I": 0.540}, "sun": true
     },
     "(120178) 2003 OP32|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.662, "V-R": 0.375, "R-I": 0.305}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.662, "V-R": 0.375, "R-I": 0.305}, "sun": true
     },
     "(120181) 2003 UR292|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 1.025, "V-R": 0.635}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.025, "V-R": 0.635}, "sun": true
     },
     "(120216) 2004 EW95|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.693, "V-R": 0.375, "R-I": 0.215}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.693, "V-R": 0.375, "R-I": 0.215}, "sun": true
     },
     "(120347) Salacia|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.664, "V-R": 0.403, "R-I": 0.433}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.664, "V-R": 0.403, "R-I": 0.433}, "sun": true
     },
     "(120348) 2004 TY364|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 1.059, "V-R": 0.601, "R-I": 0.520}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.059, "V-R": 0.601, "R-I": 0.520}, "sun": true
     },
     "(120453) 1988 RE12|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.826, "V-R": 0.388, "R-I": 0.483}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.826, "V-R": 0.388, "R-I": 0.483}, "sun": true
     },
     "(121725) Aphidas|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.060, "V-R": 0.648, "R-I": 0.679}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.060, "V-R": 0.648, "R-I": 0.679}, "sun": true
     },
     "(124729) 2001 SB173|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.992, "V-R": 0.503, "R-I": 0.424}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.992, "V-R": 0.503, "R-I": 0.424}, "sun": true
     },
     "(127546) 2002 XU93|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.731, "V-R": 0.410, "R-I": 0.443}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.731, "V-R": 0.410, "R-I": 0.443}, "sun": true
     },
     "(129772) 1999 HR11|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 0.920, "V-R": 0.530, "R-I": 0.800}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.920, "V-R": 0.530, "R-I": 0.800}, "sun": true
     },
     "(134340) Pluto|MBOSS": {"tags": ["solar_system", "minor_body", "dwarf_planet", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.867, "V-R": 0.515, "R-I": 0.400}, "albedo": 0.52, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.867, "V-R": 0.515, "R-I": 0.400}, "albedo": 0.52, "sun": true
     },
     "(134860) 2000 OJ67|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.050, "V-R": 0.670, "R-I": 0.600}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.050, "V-R": 0.670, "R-I": 0.600}, "sun": true
     },
     "(135182) 2001 QT322|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 0.710, "V-R": 0.530}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.710, "V-R": 0.530}, "sun": true
     },
     "(136108) Haumea|MBOSS": {"tags": ["featured", "solar_system", "dwarf_planet", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.633, "V-R": 0.353, "R-I": 0.330}, "sun": true, "albedo": 0.66
+        "filters": "UBVRI", "indices": {"B-V": 0.633, "V-R": 0.353, "R-I": 0.330}, "sun": true, "albedo": 0.66
     }, // albedo from https://arxiv.org/abs/1904.00522
     "(136199) Eris|MBOSS": {"tags": ["solar_system", "minor_body", "dwarf_planet", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.781, "V-R": 0.393, "R-I": 0.363}, "sun": true, "albedo": 0.957
+        "filters": "UBVRI", "indices": {"B-V": 0.781, "V-R": 0.393, "R-I": 0.363}, "sun": true, "albedo": 0.957
     }, // albedo from fyr02's sheet
     "(136204) 2003 WL7|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.480}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.720, "V-R": 0.480}, "sun": true
     },
     "(136472) Makemake|MBOSS": {"tags": ["solar_system", "minor_body", "dwarf_planet", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.840, "V-R": 0.480}, "sun": true, "albedo": 0.83
+        "filters": "UBVRI", "indices": {"B-V": 0.840, "V-R": 0.480}, "sun": true, "albedo": 0.83
     }, // albedo from fyr02's sheet
     "(137294) 1999 RE215|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.003, "V-R": 0.710, "R-I": 0.571}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.003, "V-R": 0.710, "R-I": 0.571}, "sun": true
     },
     "(137295) 1999 RB216|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 0.897, "V-R": 0.522, "R-I": 0.506}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.897, "V-R": 0.522, "R-I": 0.506}, "sun": true
     },
     "(138537) 2000 OK67|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 0.821, "V-R": 0.583, "R-I": 0.524}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.821, "V-R": 0.583, "R-I": 0.524}, "sun": true
     },
     "(143707) 2003 UY117|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 0.950, "V-R": 0.590}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.950, "V-R": 0.590}, "sun": true
     },
     "(144897) 2004 UX10|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.950, "V-R": 0.575}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.950, "V-R": 0.575}, "sun": true
     },
     "(145451) 2005 RM43|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.590, "V-R": 0.390}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.590, "V-R": 0.390}, "sun": true
     },
     "(145452) 2005 RN43|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.940, "V-R": 0.592, "R-I": 0.486}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.940, "V-R": 0.592, "R-I": 0.486}, "sun": true
     },
     "(145453) 2005 RR43|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.790, "V-R": 0.389}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.790, "V-R": 0.389}, "sun": true
     },
     "(145480) 2005 TB190|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.980, "V-R": 0.562, "R-I": 0.578}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.980, "V-R": 0.562, "R-I": 0.578}, "sun": true
     },
     "(145486) 2005 UJ438|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.946, "V-R": 0.641, "R-I": 0.510}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.946, "V-R": 0.641, "R-I": 0.510}, "sun": true
     },
     "(148209) 2000 CR105|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.771, "V-R": 0.509, "R-I": 0.590}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.771, "V-R": 0.509, "R-I": 0.590}, "sun": true
     },
     "(148975) 2001 XA255|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.810, "V-R": 0.680, "R-I": 0.440}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.810, "V-R": 0.680, "R-I": 0.440}, "sun": true
     },
     "(160427) 2005 RL43|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.120, "V-R": 0.730}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.120, "V-R": 0.730}, "sun": true
     },
     "(163135) 2002 CT22|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.690, "V-R": 0.382, "R-I": 0.360}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.690, "V-R": 0.382, "R-I": 0.360}, "sun": true
     },
     "(168703) 2000 GP183|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 0.669, "V-R": 0.445, "R-I": 0.463}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.669, "V-R": 0.445, "R-I": 0.463}, "sun": true
     },
     "(174567) Varda|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.892, "V-R": 0.556, "R-I": 0.510}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.892, "V-R": 0.556, "R-I": 0.510}, "sun": true
     },
     "(181708) 1993 FW|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 1.023, "V-R": 0.583, "R-I": 0.439}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.023, "V-R": 0.583, "R-I": 0.439}, "sun": true
     },
     "(181855) 1998 WT31|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.774, "V-R": 0.453, "R-I": 0.326}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.774, "V-R": 0.453, "R-I": 0.326}, "sun": true
     },
     "(181874) 1999 HW11|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.840, "V-R": 0.499, "R-I": 0.493}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.840, "V-R": 0.499, "R-I": 0.493}, "sun": true
     },
     "(182397) 2001 QW297|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 1.020, "V-R": 0.580, "R-I": 0.670}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.020, "V-R": 0.580, "R-I": 0.670}, "sun": true
     },
     "(182934) 2002 GJ32|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 1.330, "V-R": 0.590, "R-I": 0.420}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.330, "V-R": 0.590, "R-I": 0.420}, "sun": true
     },
     "(192388) 1996 RD29|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.741, "V-R": 0.421, "R-I": 0.388}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.741, "V-R": 0.421, "R-I": 0.388}, "sun": true
     },
     "(192929) 2000 AT44|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.707, "V-R": 0.354, "R-I": 0.318}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.707, "V-R": 0.354, "R-I": 0.318}, "sun": true
     },
     "(208996) 2003 AZ84|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.738, "V-R": 0.430, "R-I": 0.473}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.738, "V-R": 0.430, "R-I": 0.473}, "sun": true
     },
     "(248835) 2006 SX368|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.758, "V-R": 0.478, "R-I": 0.471}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.758, "V-R": 0.478, "R-I": 0.471}, "sun": true
     },
     "(250112) 2002 KY14|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.060, "V-R": 0.709, "R-I": 0.650}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.060, "V-R": 0.709, "R-I": 0.650}, "sun": true
     },
     "(275809) 2001 QY297|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 0.947, "V-R": 0.479, "R-I": 0.651}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.947, "V-R": 0.479, "R-I": 0.651}, "sun": true
     },
     "(278361) 2007 JJ43|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 1.020, "V-R": 0.590, "R-I": 0.500}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.020, "V-R": 0.590, "R-I": 0.500}, "sun": true
     },
     "(281371) 2008 FC76|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.987, "V-R": 0.685, "R-I": 0.652}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.987, "V-R": 0.685, "R-I": 0.652}, "sun": true
     },
     "(303775) 2005 QU182|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.877, "V-R": 0.593}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.877, "V-R": 0.593}, "sun": true
     },
     "(307261) 2002 MS4|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.690, "V-R": 0.380}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.690, "V-R": 0.380}, "sun": true
     },
     "(307982) 2004 PG115|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.966, "V-R": 0.664, "R-I": 0.633}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.966, "V-R": 0.664, "R-I": 0.633}, "sun": true
     },
     "(308933) 2006 SQ372|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 1.030, "V-R": 0.590, "R-I": 0.650}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.030, "V-R": 0.590, "R-I": 0.650}, "sun": true
     },
     "(309139) 2006 XQ51|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.740, "V-R": 0.410}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.740, "V-R": 0.410}, "sun": true
     },
     "(309737) 2008 SJ236|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.010, "V-R": 0.588, "R-I": 0.500}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.010, "V-R": 0.588, "R-I": 0.500}, "sun": true
     },
     "(309741) 2008 UZ6|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.920, "V-R": 0.590}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.920, "V-R": 0.590}, "sun": true
     },
     "(315898) 2008 QD4|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.740, "V-R": 0.460}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.740, "V-R": 0.460}, "sun": true
     },
     "(316431) 2010 TH167|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "trojan", "trojan-j"],
-        "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.460}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.720, "V-R": 0.460}, "sun": true
     },
     "(330759) 2008 SO218|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.890, "V-R": 0.550, "R-I": 0.500}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.890, "V-R": 0.550, "R-I": 0.500}, "sun": true
     },
     "(336756) 2010 NV1|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.765, "V-R": 0.512, "R-I": 0.390}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.765, "V-R": 0.512, "R-I": 0.390}, "sun": true
     },
     "(341275) 2007 RG283|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.790, "V-R": 0.470}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.790, "V-R": 0.470}, "sun": true
     },
     "(341520) Mors-Somn|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 1.290, "V-R": 0.740, "R-I": 0.630}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.290, "V-R": 0.740, "R-I": 0.630}, "sun": true
     },
     "(342842) 2008 YB3|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.774, "V-R": 0.472, "R-I": 0.490}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.774, "V-R": 0.472, "R-I": 0.490}, "sun": true
     },
     "(346889) Rhiphonos|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.550}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.820, "V-R": 0.550}, "sun": true
     },
     "(349933) 2009 YF7|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.460}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.720, "V-R": 0.460}, "sun": true
     },
     "(382004) 2010 RM64|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.000, "V-R": 0.550}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.000, "V-R": 0.550}, "sun": true
     },
     "(385185) 1993 RO|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.850, "V-R": 0.590, "R-I": 0.480}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.850, "V-R": 0.590, "R-I": 0.480}, "sun": true
     },
     "(385191) 1997 RT5|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 1.075, "V-R": 0.474, "R-I": 0.539}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.075, "V-R": 0.474, "R-I": 0.539}, "sun": true
     },
     "(385194) 1998 KG62|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.039, "V-R": 0.609, "R-I": 0.610}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.039, "V-R": 0.609, "R-I": 0.610}, "sun": true
     },
     "(385199) 1999 OE4|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.103, "V-R": 0.567, "R-I": 0.414}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.103, "V-R": 0.567, "R-I": 0.414}, "sun": true
     },
     "(385437) 2003 GH55|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.120, "V-R": 0.665, "R-I": 0.859}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.120, "V-R": 0.665, "R-I": 0.859}, "sun": true
     },
     "(385571) Otrera|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.740, "V-R": 0.420, "R-I": 0.460}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.740, "V-R": 0.420, "R-I": 0.460}, "sun": true
     },
     "(385607) 2005 EO297|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 0.840, "V-R": 0.480, "R-I": 0.570}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.840, "V-R": 0.480, "R-I": 0.570}, "sun": true
     },
     "(385695) 2005 TO74|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.850, "V-R": 0.490, "R-I": 0.420}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.850, "V-R": 0.490, "R-I": 0.420}, "sun": true
     },
     "(416400) 2003 UZ117|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.663, "V-R": 0.354, "R-I": 0.335}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.663, "V-R": 0.354, "R-I": 0.335}, "sun": true
     },
     "(418993) 2009 MS9|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.840, "V-R": 0.520}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.840, "V-R": 0.520}, "sun": true
     },
     "(427507) 2002 DH5|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.663, "V-R": 0.391, "R-I": 0.416}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.663, "V-R": 0.391, "R-I": 0.416}, "sun": true
     },
     "(444030) 2004 NT33|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.641, "V-R": 0.403, "R-I": 0.403}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.641, "V-R": 0.403, "R-I": 0.403}, "sun": true
     },
     "(445473) 2010 VZ98|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 1.100, "V-R": 0.670}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.100, "V-R": 0.670}, "sun": true
     },
     "(447178) 2005 RO43|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.770, "V-R": 0.470}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.770, "V-R": 0.470}, "sun": true
     },
     "(449097) 2012 UT68|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.020, "V-R": 0.660}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.020, "V-R": 0.660}, "sun": true
     },
     "(455171) 1999 OM4|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.137, "V-R": 0.602, "R-I": 0.499}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.137, "V-R": 0.602, "R-I": 0.499}, "sun": true
     },
     "(459865) 2013 XZ8|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.450}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.720, "V-R": 0.450}, "sun": true
     },
     "(459971) 2014 ON6|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.970, "V-R": 0.580}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.970, "V-R": 0.580}, "sun": true
     },
     "(463368) 2012 VU85|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.070, "V-R": 0.630}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.070, "V-R": 0.630}, "sun": true
     },
     "(463663) 2014 HY123|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.670, "V-R": 0.490}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.670, "V-R": 0.490}, "sun": true
     },
     "(469306) 1999 CD158|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 0.864, "V-R": 0.520, "R-I": 0.575}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.864, "V-R": 0.520, "R-I": 0.575}, "sun": true
     },
     "(469333) 2000 PE30|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.752, "V-R": 0.373, "R-I": 0.410}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.752, "V-R": 0.373, "R-I": 0.410}, "sun": true
     },
     "(469362) 2001 KB77|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.890, "V-R": 0.457, "R-I": 0.548}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.890, "V-R": 0.457, "R-I": 0.548}, "sun": true
     },
     "(469372) 2001 QF298|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "plutino"],
-        "filters": "Landolt", "indices": {"B-V": 0.695, "V-R": 0.388, "R-I": 0.360}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.695, "V-R": 0.388, "R-I": 0.360}, "sun": true
     },
     "(469750) 2005 PU21|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 1.140, "V-R": 0.650, "R-I": 0.680}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.140, "V-R": 0.650, "R-I": 0.680}, "sun": true
     },
     "(470316) 2007 OC10|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.876, "V-R": 0.553, "R-I": 0.471}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.876, "V-R": 0.553, "R-I": 0.471}, "sun": true
     },
     "(470599) 2008 OG19|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.940, "V-R": 0.530, "R-I": 0.590}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.940, "V-R": 0.530, "R-I": 0.590}, "sun": true
     },
     "(471339) 2011 ON45|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.110, "V-R": 0.705}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.110, "V-R": 0.705}, "sun": true
     },
     "(474640) 2004 VN112|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.900, "V-R": 0.520, "R-I": 0.450}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.900, "V-R": 0.520, "R-I": 0.450}, "sun": true
     },
     "(506479) 2003 HB57|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.830, "V-R": 0.480, "R-I": 0.540}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.830, "V-R": 0.480, "R-I": 0.540}, "sun": true
     },
     "(508770) 1995 WY2|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.030, "V-R": 0.600, "R-I": 0.510}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.030, "V-R": 0.600, "R-I": 0.510}, "sun": true
     },
     "(523588) 2000 CN105|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.100, "V-R": 0.636, "R-I": 0.640}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.100, "V-R": 0.636, "R-I": 0.640}, "sun": true
     },
     "(523591) 2001 QD298|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.970, "V-R": 0.670}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.970, "V-R": 0.670}, "sun": true
     },
     "(523597) 2002 QX47|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.700, "V-R": 0.380}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.700, "V-R": 0.380}, "sun": true
     },
     "(523620) 2007 RH283|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.430}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.720, "V-R": 0.430}, "sun": true
     },
     "(523622) 2007 TG422|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.880, "V-R": 0.510, "R-I": 0.510}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.880, "V-R": 0.510, "R-I": 0.510}, "sun": true
     },
     "(523676) 2013 UL10|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.970, "V-R": 0.670}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.970, "V-R": 0.670}, "sun": true
     },
     "(523785) 2015 CM3|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 1.210, "V-R": 0.570}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.210, "V-R": 0.570}, "sun": true
     },
     "(523899) 1997 CV29|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 1.210, "V-R": 0.650}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.210, "V-R": 0.650}, "sun": true
     },
     "(523965) 1998 XY95|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.930, "V-R": 0.720, "R-I": 0.752}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.930, "V-R": 0.720, "R-I": 0.752}, "sun": true
     },
     "(523983) 1999 RY214|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-h"],
-        "filters": "Landolt", "indices": {"B-V": 0.693, "V-R": 0.565, "R-I": 0.530}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.693, "V-R": 0.565, "R-I": 0.530}, "sun": true
     },
     "(524049) 2000 CQ105|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.671, "V-R": 0.449, "R-I": 0.346}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.671, "V-R": 0.449, "R-I": 0.346}, "sun": true
     },
     "(524217) 2001 RZ143|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 1.080, "V-R": 0.510, "R-I": 0.490}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.080, "V-R": 0.510, "R-I": 0.490}, "sun": true
     },
     "(524834) 2003 YL179|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "classical", "classical-c"],
-        "filters": "Landolt", "indices": {"B-V": 0.810, "V-R": 0.450}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.810, "V-R": 0.450}, "sun": true
     },
     "(525815) 2005 SD278|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "resonant"],
-        "filters": "Landolt", "indices": {"B-V": 0.970, "V-R": 0.560, "R-I": 0.530}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.970, "V-R": 0.560, "R-I": 0.530}, "sun": true
     },
     "(527328) 2007 TK422|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.710, "V-R": 0.510}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.710, "V-R": 0.510}, "sun": true
     },
     "(527443) 2007 UM126|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.740, "V-R": 0.435, "R-I": 0.440}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.740, "V-R": 0.435, "R-I": 0.440}, "sun": true
     },
     "(527603) 2007 VJ305|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 0.920, "V-R": 0.520, "R-I": 0.520}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.920, "V-R": 0.520, "R-I": 0.520}, "sun": true
     },
     "527604|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.830, "V-R": 0.470, "R-I": 0.480}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.830, "V-R": 0.470, "R-I": 0.480}, "sun": true
     },
     "(528219) 2008 KV42|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.820, "V-R": 0.470, "R-I": 0.420}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.820, "V-R": 0.470, "R-I": 0.420}, "sun": true
     },
     "530664|MBOSS": {"tags": ["solar_system", "minor_body", "tno", "scattered"],
-        "filters": "Landolt", "indices": {"B-V": 0.690, "V-R": 0.390}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.690, "V-R": 0.390}, "sun": true
     },
     "530930|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid", "centaur"],
-        "filters": "Landolt", "indices": {"B-V": 0.720, "V-R": 0.400}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.720, "V-R": 0.400}, "sun": true
     },
     /*"1998 KY26|MBOSS": {"tags": ["solar_system", "minor_body", "asteroid"],
-    #	"filters": "Landolt", "indices": {"B-R": 0.083, "V-R": 0.058, "R-I": 0.088}, "sun": false
+    #	"filters": "UBVRI", "indices": {"B-R": 0.083, "V-R": 0.058, "R-I": 0.088}, "sun": false
     #},*/
 }

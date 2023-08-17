@@ -4,12 +4,12 @@
         "DOI: 10.1006/icar.2000.6417", "https://arxiv.org/abs/astro-ph/0005050v1"
     ],
     "Halimede|Graykowski2018": {"tags": ["solar_system", "moon", "neptunian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.89, "V-R": 0.56}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.89, "V-R": 0.56}, "sun": true
     },
     "Nereid|Graykowski2018": {"tags": ["solar_system", "moon", "neptunian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.67, "V-R": 0.38}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.67, "V-R": 0.38}, "sun": true
     },
     "Nereid|Schaefer2000": {"tags": ["featured", "solar_system", "moon", "neptunian_system", "irregular"],
-        "filters": "Landolt", "bands": ["U", "B", "V", "R", "I"], "br": [0.90, 0.93, 1, 1.13, 0.99], "albedo": 0.24
+        "filters": "UBVRI", "bands": ["U", "B", "V", "R", "I"], "br": [0.90, 0.93, 1, 1.13, 0.99], "albedo": 0.24
     }, // albedo from https://arxiv.org/abs/1601.02395
 }

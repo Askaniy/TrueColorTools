@@ -1,7 +1,10 @@
 
-# Celestial bodies
+# Objects localization. Order is important for nested words: longer ones must come first.
 names = {
     'Proxima Centauri': {'ru': 'Проксима Центавра', 'de': 'Proxima Centauri'},
+    'Centauri': {'ru': 'Центавра', 'de': 'Centauri'},
+    'Andromedae': {'ru': 'Андромеды', 'de': 'Andromedae'},
+    'Bootis': {'ru': 'Волопаса', 'de': 'Bootis'},
     'Lacertae': {'ru': 'Ящерицы', 'de': 'Lacertae'},
     'Columbae': {'ru': 'Голубя', 'de': 'Columbae'},
     'Orionis': {'ru': 'Ориона', 'de': 'Orionis'},
@@ -40,6 +43,7 @@ names = {
     'Phobos': {'ru': 'Фобос', 'de': 'Phobos'},
     'Deimos': {'ru': 'Деймос', 'de': 'Deimos'},
     'Jovian irregulars': {'ru': 'Нерег. сп. Юпитера', 'de': 'irreguläre Jupitermonde'},
+    'Jupiter trojans': {'ru': 'Троянцы Юпитера', 'de': 'Jupiter-Trojaner'},
     'Jupiter': {'ru': 'Юпитер', 'de': 'Jupiter'},
     'Io': {'ru': 'Ио', 'de': 'Io'},
     'Europa': {'ru': 'Европа', 'de': 'Europa'},
@@ -103,13 +107,12 @@ names = {
     'Akasa': {'ru': 'Акаса', 'de': 'Akasa'},
     'ʻOumuamua': {'ru': 'Оумуамуа', 'de': 'ʻOumuamua'},
     'Comets': {'ru': 'Кометы', 'de': 'Kometen'},
-    'J. trojans': {'ru': 'Троянцы', 'de': 'J-Trojaner'},
     'Centaurs': {'ru': 'Кентавры', 'de': 'Zentauren'},
     'Plutinos': {'ru': 'Плутино', 'de': 'Plutinos'},
-    'Other res.': {'ru': 'Др. рез.', 'de': 'Andere res.'},
-    'Cubewano': {'ru': 'Классич.', 'de': 'Cubewano'},
+    'Other resonances': {'ru': 'Другие резонансы', 'de': 'Andere Resonanzen'},
+    'Cubewano': {'ru': 'Кьюбивано', 'de': 'Cubewano'},
     'SDO': {'ru': 'Рассеянный диск', 'de': 'SDO'},
-    'Detached': {'ru': 'Обособл.', 'de': 'Detached'},
+    'Detached objects': {'ru': 'Обособл. ТНО', 'de': 'Detached Objects'},
     'Class': {'ru': 'Класс', 'de': 'Spektraltyp'}
 }
 
@@ -369,9 +372,9 @@ notes = {
     'C:': {'en': 'cold, outer objects', 'ru': 'холодные, внешние объекты', 'de': 'kalte, äußere Objekte'}
 }
 info = {
-    'en': ['Brightness mode', 'sRGB color space', 'Gamma correction'],
-    'ru': ['Режим яркости', 'Пространство sRGB', 'Гамма-коррекция'],
-    'de': ['Helligkeitsmodus', 'sRGB-Farbraum', 'Gammakorrektur']
+    'en': ['Albedo mode', 'sRGB color space', 'Gamma correction'],
+    'ru': ['Режим альбедо', 'Пространство sRGB', 'Гамма-коррекция'],
+    'de': ['Albedo-Modus', 'sRGB-Farbraum', 'Gammakorrektur']
 }
 
 # Tab 4 - Blackbody & Redshifts

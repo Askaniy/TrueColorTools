@@ -4,151 +4,151 @@
         "DOI: 10.3847/1538-3881/ac6258", "https://arxiv.org/abs/2204.08391"
     ],
     "Phoebe|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.57, "V-R": 0.34}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.57, "V-R": 0.34}, "sun": true
     },
     "Phoebe|Grav2003": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.63, "V-R": 0.35, "V-I": 0.64}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.63, "V-R": 0.35, "V-I": 0.64}, "sun": true
     },
     "Phoebe|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.27, "r-i": 0.06}, "sun": true
     },
     "Ymir|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.789, "V-R": 0.438, "V-I": 0.884}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.789, "V-R": 0.438, "V-I": 0.884}, "sun": true
     },
     "Ymir|Grav2003": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.56, "V-R": 0.52, "V-I": 0.96}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.56, "V-R": 0.52, "V-I": 0.96}, "sun": true
     },
     "Ymir|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.50, "r-i": 0.25}, "sun": true
     },
     "Paaliaq|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.86, "V-R": 0.40, "V-I": 0.92}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.86, "V-R": 0.40, "V-I": 0.92}, "sun": true
     },
     "Paaliaq|Grav2003": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.77, "V-R": 0.48, "V-I": 0.94}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.77, "V-R": 0.48, "V-I": 0.94}, "sun": true
     },
     "Tarvos|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.71, "V-R": 0.42}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.71, "V-R": 0.42}, "sun": true
     },
     "Tarvos|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.78, "V-R": 0.43, "V-I": 0.82}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.78, "V-R": 0.43, "V-I": 0.82}, "sun": true
     },
     "Tarvos|Grav2003": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.77, "V-R": 0.57, "V-I": 0.88}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.77, "V-R": 0.57, "V-I": 0.88}, "sun": true
     },
     "Tarvos|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.52, "r-i": 0.30}, "sun": true
     },
     "Ijiraq|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-R": 1.40}, "sun": true
+        "filters": "UBVRI", "indices": {"B-R": 1.40}, "sun": true
     },
     "Ijiraq|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 1.05, "V-R": 0.58, "V-I": 1.09}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 1.05, "V-R": 0.58, "V-I": 1.09}, "sun": true
     },
     "Ijiraq|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.70, "r-i": 0.20}, "sun": true
     },
     "Suttungr|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.47, "V-R": 0.65, "V-I": 0.78}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.47, "V-R": 0.65, "V-I": 0.78}, "sun": true
     },
     "Suttungr|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.40, "r-i": 0.17}, "sun": true
     },
     "Kiviuq|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.872, "V-R": 0.482, "V-I": 0.98}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.872, "V-R": 0.482, "V-I": 0.98}, "sun": true
     },
     "Kiviuq|Grav2003": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.87, "V-R": 0.66, "V-I": 0.97}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.87, "V-R": 0.66, "V-I": 0.97}, "sun": true
     },
     "Kiviuq|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.51, "r-i": 0.28}, "sun": true
     },
     "Mundilfari|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.58, "V-R": 0.41, "V-I": 0.52}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.58, "V-R": 0.41, "V-I": 0.52}, "sun": true
     },
     "Mundilfari|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.38, "r-i": 0.03}, "sun": true
     },
     "Albiorix|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.80, "V-R": 0.50}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.80, "V-R": 0.50}, "sun": true
     },
     "Albiorix|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.879, "V-R": 0.510, "V-I": 0.902}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.879, "V-R": 0.510, "V-I": 0.902}, "sun": true
     },
     "Albiorix|Grav2003": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.935, "V-R": 0.482, "V-I": 0.916}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.935, "V-R": 0.482, "V-I": 0.916}, "sun": true
     },
     "Albiorix|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.46, "r-i": 0.31}, "sun": true
     },
     "Skathi|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.72, "V-R": 0.37, "V-I": 0.88}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.72, "V-R": 0.37, "V-I": 0.88}, "sun": true
     },
     "Skathi|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.24, "r-i": -0.005}, "sun": true
     },
     "Erriapus|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.78, "V-R": 0.41}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.78, "V-R": 0.41}, "sun": true
     },
     "Erriapus|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.71, "V-R": 0.40, "V-I": 0.86}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.71, "V-R": 0.40, "V-I": 0.86}, "sun": true
     },
     "Erriapus|Grav2003": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.83, "V-R": 0.49, "V-I": 0.61}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.83, "V-R": 0.49, "V-I": 0.61}, "sun": true
     },
     "Erriapus|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.20, "r-i": 0.42}, "sun": true
     },
     "Siarnaq|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.875, "V-R": 0.485, "V-I": 1.025}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.875, "V-R": 0.485, "V-I": 1.025}, "sun": true
     },
     "Siarnaq|Grav2003": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.80, "V-R": 0.52, "V-I": 0.96}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.80, "V-R": 0.52, "V-I": 0.96}, "sun": true
     },
     "Siarnaq|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.53, "r-i": 0.24}, "sun": true
     },
     "Thrymr|Grav2007": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.41, "V-R": 0.59, "V-I": 0.86}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.41, "V-R": 0.59, "V-I": 0.86}, "sun": true
     },
     "Thrymr|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.40, "r-i": 0.15}, "sun": true
     },
     "Narvi|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-R": 1.29}, "sun": true
+        "filters": "UBVRI", "indices": {"B-R": 1.29}, "sun": true
     },
     "Narvi|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.24, "r-i": 0.42}, "sun": true
     },
     "Bebhionn|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-V": 0.61, "V-R": 0.51}, "sun": true
+        "filters": "UBVRI", "indices": {"B-V": 0.61, "V-R": 0.51}, "sun": true
     },
     "Aegir|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-R": 1.30}, "sun": true
+        "filters": "UBVRI", "indices": {"B-R": 1.30}, "sun": true
     },
     "Bergelmir|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-R": 1.10}, "sun": true
+        "filters": "UBVRI", "indices": {"B-R": 1.10}, "sun": true
     },
     "Bestla|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-R": 1.32}, "sun": true
+        "filters": "UBVRI", "indices": {"B-R": 1.32}, "sun": true
     },
     "Bestla|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.72, "r-i": 0.38}, "sun": true
     },
     "Fornjot|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-R": 1.40}, "sun": true
+        "filters": "UBVRI", "indices": {"B-R": 1.40}, "sun": true
     },
     "Hyrrokkin|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-R": 1.23}, "sun": true
+        "filters": "UBVRI", "indices": {"B-R": 1.23}, "sun": true
     },
     "Hyrrokkin|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.50, "r-i": 0.34}, "sun": true
     },
     "Tarqeq|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-R": 1.37}, "sun": true
+        "filters": "UBVRI", "indices": {"B-R": 1.37}, "sun": true
     },
     "S/2007 S 2|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
-        "filters": "Landolt", "indices": {"B-R": 1.37}, "sun": true
+        "filters": "UBVRI", "indices": {"B-R": 1.37}, "sun": true
     },
     "Kari|Pena2022": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "Sloan Vacuum", "indices": {"g-r": 0.31, "r-i": 0.53}, "sun": true
