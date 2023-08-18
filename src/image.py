@@ -52,6 +52,8 @@ def image_processing(input_data: dict):
     load = []
 
     # Combine images into an array containing brightness values from 0 to 1
+    exposures = input_data['exposures'][:input_data['vis']]
+    max_exposure = max(input_data['exposures'])
     if input_data['single']:
         rgb_img = Image.open(input_data['path'])
         rgb_img = rgb_img.convert(to_supported_mode(rgb_img.mode))
@@ -59,11 +61,9 @@ def image_processing(input_data: dict):
         if input_data['preview']:
             rgb_img = rgb_img.resize(preview_size(rgb_img.width, rgb_img.height, input_data['area']), resample=Image.Resampling.HAMMING)
         r, g, b = rgb_img.split()
-        for i in [b, g, r]:
-            load.append(np.array(i) / depth)
+        for i, channel in enumerate([b, g, r]):
+            load.append(np.array(channel) / depth / max_exposure * exposures[i])
     else:
-        exposures = input_data['exposures']
-        max_exposure = max(exposures)
         for i in range(input_data['vis']):
             bw_img = Image.open(input_data['paths'][i])
             bw_img = bw_img.convert(to_supported_mode(bw_img.mode))
@@ -152,7 +152,7 @@ def image_processing(input_data: dict):
     sg.Print(f'\t{draw_point_time / 1e9} for pixel drawing')
     sg.Print(f'\t{progress_bar_time / 1e9} for progress bar')
     sum_time = get_slice_time + calc_spectrum_time + calc_color_time + draw_point_time + progress_bar_time
-    sg.Print(f'\t{round((end_time-start_time-sum_time)/1e9, 3)} for other (time, black-pixel check)')
+    sg.Print(f'\t{round(end_time - start_time - sum_time/1e9, 3)} for other (time, black-pixel check)')
 
     if not input_data['preview']:
         img.save(f'{input_data["save"]}/TCT_{time.strftime("%Y-%m-%d_%H-%M")}.png')

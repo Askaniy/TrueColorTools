@@ -1,3 +1,4 @@
+import traceback
 import PySimpleGUI as sg
 import src.core as core
 import src.gui as gui
@@ -205,7 +206,6 @@ def launch_window():
                 for i in range(T2_num):
                     window['T2_browse'+str(i)].update(disabled=values['T2_single'])
                     window['T2_path'+str(i)].update(disabled=values['T2_single'])
-                    window['T2_exposure'+str(i)].update(disabled=values['T2_single'])
                 if values['T2_single']:
                     T2_vis = 3
                     for i in range(T2_num):
@@ -243,7 +243,6 @@ def launch_window():
             for i in range(T2_num):
                 window['T2_filterN'+str(i)].update(text_color=text_colors[values['T2_filterset']])
                 window['T2_wavelengthN'+str(i)].update(text_color=text_colors[not values['T2_filterset']])
-                window['T2_exposureN'+str(i)].update(text_color=text_colors[not values['T2_single']])
             
             input_data = {'gamma': values['-gamma-'], 'srgb': values['-srgb-'], 'desun': values['T2_desun'], 'nm': []}
             
@@ -279,22 +278,25 @@ def launch_window():
             window['T2_process'].update(disabled=not T2_preview_status) if values['T2_folder'] != '' else window['T2_process'].update(disabled=True)
             
             if event in ('T2_preview', 'T2_process'):
-                input_data |= {
-                    'vis': T2_vis,
-                    'single': values['T2_single'],
-                    'makebright': values['T2_makebright'],
-                    'autoalign': values['T2_autoalign'],
-                    'path': values['T2_path'],
-                    'paths': [values['T2_path'+str(i)] for i in range(T2_vis)],
-                    'exposures': [float(values['T2_exposure'+str(i)]) for i in range(T2_vis)],
-                    'save': values['T2_folder'],
-                    'preview': event=='T2_preview',
-                    'area': T2_preview_area
-                }
-                T2_img = im.image_processing(input_data)
-                
-                if event == 'T2_preview':
-                    window['T2_image'].update(data=im.convert_to_bytes(T2_img))
+                try:
+                    input_data |= {
+                        'vis': T2_vis,
+                        'single': values['T2_single'],
+                        'makebright': values['T2_makebright'],
+                        'autoalign': values['T2_autoalign'],
+                        'path': values['T2_path'],
+                        'paths': [values['T2_path'+str(i)] for i in range(T2_vis)],
+                        'exposures': [float(values['T2_exposure'+str(i)]) for i in range(T2_vis)],
+                        'save': values['T2_folder'],
+                        'preview': event=='T2_preview',
+                        'area': T2_preview_area
+                    }
+                    T2_img = im.image_processing(input_data)
+                    
+                    if event == 'T2_preview':
+                        window['T2_image'].update(data=im.convert_to_bytes(T2_img))
+                except Exception:
+                    sg.Print(traceback.format_exc(limit=0))
         
         # ------------ Events in the tab "Table" ------------
 
