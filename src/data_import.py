@@ -48,25 +48,38 @@ def search_column(names: list[str], axis: str):
     except IndexError:
         return 0 if axis == 'x' else 1 # by default the first column is wavelength, the second is flux
 
+def header_printer(header):
+    """ Wrap lines for readable output to the console """
+    n = 80
+    print([header[i:i+n]+'\n' for i in range(0, len(header), n)])
+
 def fits_reader(file: str):
-    """ Imports spectrum data from FITS file in standards of CALSPEC, VizeR, UVES, etc """
+    """ Imports spectrum data from FITS file in standards of CALSPEC, VizeR, UVES, BAAVSS, etc """
     with fits.open(file) as hdul:
         #hdul.info()
-        columns = hdul[1].columns # most likely the second HDU contains data
-        #print(columns.names)
-        #print(columns.units)
-        x_id = search_column(columns.names, 'x')
-        y_id = search_column(columns.names, 'y')
-        tbl = Table(hdul[1].data)
-        x_column = tbl[columns[x_id].name]
-        y_column = tbl[columns[y_id].name]
-        if len(x_column.shape) > 1:
-            x_column = x_column[0]
-        if len(y_column.shape) > 1:
-            y_column = y_column[0]
-        x = x_column * str2unit(columns[x_id].unit, 'x')
-        y = y_column * str2unit(columns[y_id].unit, 'y')
-    return x.to(u.nm), y.to(flux_density_SI)
+        try:
+            columns = hdul[1].columns # most likely the second HDU contains data
+            #print(columns.names)
+            #print(columns.units)
+            tbl = Table(hdul[1].data)
+            x_id = search_column(columns.names, 'x')
+            y_id = search_column(columns.names, 'y')
+            x_column = tbl[columns[x_id].name]
+            y_column = tbl[columns[y_id].name]
+            if len(x_column.shape) > 1:
+                x_column = x_column[0]
+            if len(y_column.shape) > 1:
+                y_column = y_column[0]
+            x = x_column * str2unit(columns[x_id].unit, 'x')
+            y = y_column * str2unit(columns[y_id].unit, 'y')
+            return x.to(u.nm), y.to(flux_density_SI)
+        except IndexError:
+            header = hdul[0].header # but sometimes they are in the primary HDU, like in BAAVSS
+            #header_printer(header)
+            x_column = header['CRVAL1'] + header['CDELT1']*(np.arange(header['NAXIS1'])-1)
+            x = x_column * str2unit(header['CUNIT1'], 'x')
+            y = list(Table(hdul[0].data)[0])
+            return x.to(u.nm), y
 
 def txt_reader(file: str):
     """ Imports spectrum data from a simple text file. Wavelength only in angstroms """
