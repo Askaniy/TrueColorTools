@@ -54,7 +54,7 @@
     "HD 189733 b|Evans2013, Schwartz2015": {"tags": ["exoplanet", "extrasolar", "planet"],
         "nm": [290, 368, 370, 416, 459, 510, 547, 875], "br": [0.45, 0.39, 0.374, 0.32, 0.17, 0.043, 0.02, 0.025], "albedo": true
     },
-    "υ Andromedae b|Berdyugina2011": {"tags": ["featured", "exoplanet", "extrasolar", "planet"],
+    "υ Andromedae b|Berdyugina2011": {"tags": ["exoplanet", "extrasolar", "planet"],
         "filters": "UBVRI", "bands": ["U", "B", "V"], "br": [0.53, 0.67, 0.29], "albedo": true
     },
     "WASP-18 b": {"tags": ["exoplanet", "extrasolar", "planet"],

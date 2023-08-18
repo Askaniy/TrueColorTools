@@ -14,7 +14,7 @@
 
     "(sdO) BD+28 4211|CALSPEC": {"tags": ["VI subdwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/bd_28d4211_stis_005.fits"
-    }, // BD+28 4211 has a companion at 2.8 arcsec (UBVRI & Uomoto (2007))
+    }, // BD+28 4211 has a companion at 2.8 arcsec (Landolt & Uomoto (2007))
     "(sdO) FEIGE110|CALSPEC": {"tags": ["VI subdwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/feige110_stisnic_008.fits"
     },
@@ -206,7 +206,7 @@
     },
     "(sdF8) BD+17 4708|CALSPEC": {"tags": ["VI subdwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/bd_17d4708_stisnic_007.fits"
-    }, // BD+17 4708 is variable (Bohlin & UBVRI 2015)
+    }, // BD+17 4708 is variable (Bohlin & Landolt 2015)
     "(F) HD 160617|CALSPEC": {"tags": ["extrasolar", "star"],
         "file": "files/CALSPEC/hd160617_stis_005.fits"
     },
@@ -344,7 +344,7 @@
     "(DA2.8) WD 2149+021|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/wd2149_021_stiswfc_001.fits"
     },
-    "(DA3.0) WD 2039-682|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
+    "(DA3.0) WD 2039-682|CALSPEC": {"tags": ["featured", "VII white dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/wd2039_682_stiswfc_001.fits"
     },
     "(DA3.1) WD 2126+734|CALSPEC": {"tags": ["VII white dwarf", "extrasolar", "star"],
