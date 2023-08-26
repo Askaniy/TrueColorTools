@@ -94,15 +94,15 @@
     "Maiorov2005": [
         "A New Analysis of the Spectra Obtained by the Venera Missions in the Venusian Atmosphere. I. The Analysis of the Data Received from the Venera-11 Probe at Altitudes Below 37 km in the 0.44–0.66 µm Wavelength Range",
         "DOI: 10.1007/s11208-005-0042-1", "https://link.springer.com/article/10.1007/s11208-005-0042-1"
-    ]
+    ],
     "Karkoschka2012": [
         "The reflectivity spectrum and opposition effect of Titan's surface observed by Huygens' DISR spectrometers",
         "DOI: 10.1016/j.pss.2011.10.014", "https://www.sciencedirect.com/science/article/pii/S0032063311003254"
-    ]
+    ],
     "Karkoschka2016": [
         "Eight-color maps of Titan’s surface from spectroscopy with Huygens’ DISR",
         "DOI: 10.1016/j.icarus.2015.06.010", "https://www.sciencedirect.com/science/article/pii/S0019103515002547"
-    ]
+    ],
     "Mercury|Mallama2017": {"tags": ["featured", "solar_system", "planet-geophys", "planet"],
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.087, 0.105, 0.142, 0.158, 0.172, 0.180, 0.208], "albedo": true
     },
