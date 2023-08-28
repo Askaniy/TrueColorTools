@@ -3,6 +3,7 @@
         "Nereid Has Complex Large-Amplitude Photometric Variability (Due to Chaotic Rotation)",
         "DOI: 10.1006/icar.2000.6417", "https://arxiv.org/abs/astro-ph/0005050v1"
     ],
+    
     "Halimede|Graykowski2018": {"tags": ["solar_system", "moon", "neptunian_system", "irregular"],
         "filters": "UBVRI", "indices": {"B-V": 0.89, "V-R": 0.56}, "sun": true
     },

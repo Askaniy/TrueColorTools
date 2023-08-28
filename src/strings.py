@@ -176,7 +176,7 @@ gui_gamma = {
     'de': 'Gammakorrektur'
 }
 gui_br = {
-    'en': ['Brightness display mode', 'true albedo', 'chromaticity'],
+    'en': ['Brightness display mode', 'albedo', 'chromaticity'],
     'ru': ['Отображение яркости', 'альбедо', 'цветность'],
     'de': ['Helligkeitsmodus', 'Farbe mit Albedo', 'Farbton']
 }

@@ -256,7 +256,7 @@ def standardize_resolution(input: int):
     return res
 
 class Spectrum:
-    def __init__(self, name: str, nm: Iterable, br: Iterable, res=0, scope=[]):
+    def __init__(self, name: str, nm: Iterable, br: Iterable, res=0, scope: np.ndarray = None):
         """
         Constructor of the class to work with single, continuous spectrum, with strictly defined resolutions.
         When creating an object, the spectrum grid is automatically checked and adjusted to uniform, if necessary.
@@ -268,7 +268,7 @@ class Spectrum:
         - `nm` (Iterable): list of wavelengths in nanometers
         - `br` (Iterable): same-size list of "brightness" of an energy counter detector (not photon counter)
         - `res` (int, optional): assigns a number, cancel the check
-        - `scope` (Iterable, optional): makes a spectrum of the same resolution as at least defined at the given wavelengths
+        - `scope` (np.ndarray, optional): makes a spectrum of the same resolution as at least defined at the given wavelengths
         """
         self.name = name
         nm = np.array(nm)
@@ -294,13 +294,13 @@ class Spectrum:
                         self.br = Akima1DInterpolator(nm, br)(self.nm)
                     else: # decreasing resolution if step less than 5 nm
                         self.br = averaging(nm, br, self.nm)
-            if scope != []:
+            if isinstance(scope, np.ndarray):
                 self.nm, self.br = extrapolating(self.nm, self.br, scope, self.res)
             if np.any(np.isnan(self.br)):
                 self.br = np.nan_to_num(self.br)
                 print(f'# Note for the Spectrum object "{self.name}"')
                 print(f'- NaN values detected during object initialization, they been replaced with zeros.')
-        except Exception:
+        except EnvironmentError:
             self.nm, self.br = nm_br_stub
             self.res = 5
             print(f'# Note for the Spectrum object "{self.name}"')

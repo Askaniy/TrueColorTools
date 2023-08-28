@@ -14,8 +14,11 @@ def launch_window():
     lang = 'en' # can be translated into German or Russian at runtime
     objectsDB, refsDB = {}, {} # initial loading became too long with separate json5 database files
     tagsDB = []
-    default_tag = 'featured'
     filtersDB = di.list_filters()
+
+    default_tag = 'featured'
+    albedoFlag = True # default brightness mode
+    #oldInterpFlag = True # default interpolation mode
 
     circle_r = 100 # radius in pixels of color preview circle
     circle_coord = (circle_r, circle_r+1)
@@ -25,7 +28,7 @@ def launch_window():
 
     sg.ChangeLookAndFeel('MaterialDark')
     window = sg.Window(
-        'True Color Tools', gui.generate_layout((2*circle_r+1, 2*circle_r+1), T2_preview_size, text_colors, filtersDB, lang),
+        'True Color Tools', gui.generate_layout((2*circle_r+1, 2*circle_r+1), T2_preview_size, text_colors, filtersDB, albedoFlag, lang),
         finalize=True, resizable=True, margins=(0, 0), size=(900, 600))
     T2_vis = 3  # current number of visible image bands
     T2_num = 10 # max number of image bands, ~ len(window['T2_frames'])
@@ -38,8 +41,6 @@ def launch_window():
 
     triggers = ['-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-interpMode0-', '-interpMode1-', '-bitness-', '-rounding-']
     
-    albedoFlag = False # default brightness mode
-    #oldInterpFlag = True # default interpolation mode
     bitness = int(window['-bitness-'].get())
     rounding = int(window['-rounding-'].get())
 

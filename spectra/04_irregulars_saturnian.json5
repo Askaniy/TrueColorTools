@@ -3,6 +3,7 @@
         "Colors of Irregular Satellites of Saturn with DECam",
         "DOI: 10.3847/1538-3881/ac6258", "https://arxiv.org/abs/2204.08391"
     ],
+    
     "Phoebe|Graykowski2018": {"tags": ["solar_system", "moon", "saturnian_system", "irregular"],
         "filters": "UBVRI", "indices": {"B-V": 0.57, "V-R": 0.34}, "sun": true
     },

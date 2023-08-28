@@ -19,7 +19,7 @@ sg.LOOK_AND_FEEL_TABLE['MaterialDark'] = {
         'BORDER': 0, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0
     }
 
-def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, filtersDB: list, lang: str):
+def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, filtersDB: list, albedoFlag: bool, lang: str):
     title_font = ('arial', 12)
     tags_input_size = 20
     button_size = 22
@@ -33,8 +33,8 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, f
         [sg.Checkbox('sRGB', enable_events=True, key='-srgb-')],
         [sg.T('')],
         [sg.Push(), sg.Text(tr.gui_br[lang][0], key='-brModeText-'), sg.Push()],
-        [sg.Radio(tr.gui_br[lang][1], 'brRadio', enable_events=True, key='-brMode0-')],
-        [sg.Radio(tr.gui_br[lang][2], 'brRadio', enable_events=True, default=True, key='-brMode1-')],
+        [sg.Radio(tr.gui_br[lang][1], 'brRadio', enable_events=True, default=albedoFlag, key='-brMode0-')],
+        [sg.Radio(tr.gui_br[lang][2], 'brRadio', enable_events=True, default=not albedoFlag, key='-brMode1-')],
         #[sg.T('')],
         #[sg.Push(), sg.Text(tr.gui_interp[lang][0], key='-interpModeText-'), sg.Push()],
         #[sg.Radio(tr.gui_interp[lang][1], 'interpRadio', enable_events=True, default=True, key='-interpMode0-')],

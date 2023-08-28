@@ -3,6 +3,7 @@
         "Phase II of the Small Main-Belt Asteroid Spectroscopic Survey: A Feature-Based Taxonomy",
         "DOI: 10.1006/icar.2002.6856", "https://www.sciencedirect.com/science/article/abs/pii/S0019103502968569"
     ],
+    
     "Class A|Bus2002": {"tags": ["featured", "solar_system", "class", "asteroid"],
         "nm": [440, 500, 600, 650, 700, 750, 800, 850, 920], "br": [0.708, 0.868, 1.109, 1.214, 1.298, 1.311, 1.250, 1.187, 1.143],
         "albedo": 0.274, // https://arxiv.org/abs/1307.2424
