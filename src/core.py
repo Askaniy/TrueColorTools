@@ -300,7 +300,7 @@ class Spectrum:
                 self.br = np.nan_to_num(self.br)
                 print(f'# Note for the Spectrum object "{self.name}"')
                 print(f'- NaN values detected during object initialization, they been replaced with zeros.')
-        except EnvironmentError:
+        except Exception:
             self.nm, self.br = nm_br_stub
             self.res = 5
             print(f'# Note for the Spectrum object "{self.name}"')
