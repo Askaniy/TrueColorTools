@@ -131,7 +131,7 @@ def launch_window():
 
             if (event in triggers or event == 'T1_list') and values['T1_list'] != []:
                 T1_name = values['T1_list'][0]
-                T1_raw_name = di.obj_dict(objectsDB, 'all', lang)[T1_name]
+                T1_raw_name = di.obj_dict(objectsDB, '_all_', lang)[T1_name]
 
                 # Spectral data import and processing
                 T1_photometry = core.Photometry(T1_name, objectsDB[T1_raw_name])

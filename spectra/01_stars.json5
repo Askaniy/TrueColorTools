@@ -246,7 +246,7 @@
     "(G2 V) P330E|CALSPEC": {"tags": ["V dwarf", "extrasolar", "star"],
         "file": "files/CALSPEC/p330e_stiswfcnic_005.fits"
     },
-    "(G2 V) Sun|CALSPEC": {"tags": ["featured", "V dwarf", "solar_system", "star"],
+    "(G2 V) Sun|CALSPEC": {"tags": ["featured", "V dwarf", "solar system", "star"],
         "file": "files/CALSPEC/sun_reference_stis_002.fits"
     },
     "(G3 V) 16 Cygni B|CALSPEC": {"tags": ["V dwarf", "extrasolar", "star"],

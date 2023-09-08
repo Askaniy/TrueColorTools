@@ -146,7 +146,7 @@ def obj_dict(database: dict, tag: str, lang: str):
     """ Maps front-end spectrum names allowed by the tag to names in the database """
     names = {}
     for raw_name, obj_data in database.items():
-        if tag == 'all':
+        if tag == '_all_':
             flag = True
         else:
             try:
@@ -179,7 +179,7 @@ def obj_dict(database: dict, tag: str, lang: str):
 
 def tag_list(database: dict):
     """ Generates a list of tags found in the spectra database """
-    tag_set = set(['all'])
+    tag_set = set(['_all_'])
     for obj_data in database.values():
         if 'tags' in obj_data:
             tag_set.update(obj_data['tags'])
