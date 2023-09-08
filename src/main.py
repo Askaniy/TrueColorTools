@@ -164,7 +164,7 @@ def launch_window():
                 plot_data.append(T1_spectrum)
             
             elif event == 'T1_plot':
-                pl.plot_spectra(plot_data, values['-gamma-'], values['-srgb-'], albedoFlag, lang)
+                pl.plot_spectra(plot_data, values['-gamma-'], values['-srgb-'], albedoFlag and T1_photometry.albedo, lang)
             
             elif event == 'T1_clear':
                 plot_data = []

@@ -90,6 +90,7 @@ names = {
     'Virginis': {'ru': 'Девы', 'de': 'Virginis'},
     #'Volantis': {'ru': '', 'de': 'Volantis'},
     #'Vulpeculae': {'ru': '', 'de': 'Vulpeculae'},
+    'Gliese': {'ru': 'Глизе', 'de': 'Gliese'},
     'Ankaa': {'ru': 'Анкаа', 'de': 'Ankaa'},
     'Rigel': {'ru': 'Ригель', 'de': 'Rigel'},
     'Bellatrix': {'ru': 'Беллатрикс', 'de': 'Bellatrix'},
