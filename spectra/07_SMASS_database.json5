@@ -3,7 +3,7 @@
         "SMASS: Small Main-Belt Asteroid Spectroscopic Survey",
         "http://smass.mit.edu/smass.html"
     ],
-    "(1) Ceres|SMASS": {"tags": ["featured", "solar system", "planet-geophys", "minor body", "dwarf planet", "asteroid", "main belt"],
+    "(1) Ceres|SMASS": {"tags": ["featured", "solar system", "planet geophysical", "minor body", "dwarf planet", "asteroid", "main belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
         492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 
         552.5, 555, 557.5, 560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 
