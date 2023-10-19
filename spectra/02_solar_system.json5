@@ -433,6 +433,9 @@
         1.201, 1.201, 1.087, 1.159, 1.018, 1.079, 0.881, 1.072, 1.13],
         "albedo": 0.83, // albedo from zelario's sheet
     },
+    "(225088) Gonggong|Boehnhardt2014": {"tags": ["featured", "solar system", "planet geophysical", "minor body", "dwarf planet", "tno", "detached"],
+        "filters": "Landolt", "indices": {"B-V": 1.38, "V-R": 0.86, "R-I": 0.79}, "sun": true, "albedo": 0.14
+    }, // albedo from Kiss et al. 2019
     //"(486958) Arrokoth|Howett2019": {"tags": ["solar system", "minor body", "tno", "classical", "classical-h"],
     //	"filters": "Hubble", "indices": {"F606W-F814W": 1.03}, "sun": true
     //},
