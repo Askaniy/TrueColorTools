@@ -713,8 +713,8 @@
         "filters": "UBVRI", "indices": {"B-V": 0.746, "V-R": 0.556, "R-I": 0.368}, "sun": true
     },
     "(50000) Quaoar|MBOSS": {"tags": ["featured", "solar system", "planet geophysical", "minor body", "dwarf planet", "tno", "classical", "classical-h"],
-        "filters": "UBVRI", "indices": {"B-V": 0.958, "V-R": 0.650, "R-I": 0.610}, "sun": true, "albedo": 0.109
-    }, // albedo from fyr02's sheet
+        "filters": "UBVRI", "indices": {"B-V": 0.958, "V-R": 0.650, "R-I": 0.610}, "sun": true, "albedo": 0.124
+    }, // albedo from Pereira et al. 2023
     "(51359) 2000 SC17|MBOSS": {"tags": ["solar system", "minor body", "asteroid", "trojan", "trojan-j"],
         "filters": "UBVRI", "indices": {"B-V": 0.864, "V-R": 0.447, "R-I": 0.438}, "sun": true
     },
