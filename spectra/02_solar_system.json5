@@ -136,8 +136,8 @@
         "albedo": true
     },
     "Venusian surface|Maiorov2005": {"tags": ["featured", "solar system", "planet geophysical", "planet"],
-        "nm": [440, 450, 460, 470, 480, 490, 500, 700],
-        "br": [0.089, 0.092, 0.095, 0.097, 0.098, 0.099, 0.1, 0.1],
+        "nm": [440, 450, 460, 470, 480, 490, 500, 505, 700],
+        "br": [0.089, 0.092, 0.095, 0.097, 0.098, 0.099, 0.1, 0.1, 0.1],
         "albedo": true
     },
     "Earth|Mallama2017": {"tags": ["solar system", "planet geophysical", "planet"],
