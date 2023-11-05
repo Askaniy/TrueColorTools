@@ -18,7 +18,7 @@ def launch_window():
     parser.add_argument('-v', '--verbose', '--verbosity', action='count', help='increase level of output verbosity (-v, -vv, etc.)')
     parser.add_argument('-l', '--lang', '--language', type=str, default='en', help='set startup language, editable in GUI (en, de, ru)')
     args = parser.parse_args()
-    lang = args.lang
+    lang: str = args.lang
 
     # Databases declaration, to be filled by the json5 database later
     objectsDB, refsDB = {}, {}
@@ -61,12 +61,12 @@ def launch_window():
 
     # Setting plots templates
     plot_data = [] # of the tabs 1 and 4
-    T5_plot_data = [core.r, core.g, core.b]
+    T5_plot_data = (core.r, core.g, core.b)
     T5_fig = pl.plot_filters(T5_plot_data)
     figure_canvas_agg = pl.draw_figure(window['T5_canvas'].TKCanvas, T5_fig)
     
     # List of events that cause color recalculation
-    triggers = ['-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-interpMode0-', '-interpMode1-', '-bitness-', '-rounding-']
+    triggers = ('-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-interpMode0-', '-interpMode1-', '-bitness-', '-rounding-')
 
     # Window events loop
     while True:

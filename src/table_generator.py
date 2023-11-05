@@ -1,5 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
-import numpy as np
+from math import ceil
 import src.core as core
 import src.data_import as di
 import src.strings as tr
@@ -46,7 +46,7 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
 
     # Guide grid
     h0 = h_border + name_size
-    h1 = h0 + 2*half_square * int(np.ceil(l / objects_per_raw)) + note_step
+    h1 = h0 + 2*half_square * int(ceil(l / objects_per_raw)) + note_step
     h2 = h1 + help_step
     h = h1 + help_step + 4*note_step + h_border # calculate image width
     w0 = w_border + half_square - r

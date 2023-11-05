@@ -1,9 +1,9 @@
 from pathlib import Path
+from traceback import format_exc
+from json5 import load as json5load
 from astropy.io import fits
 from astropy.table import Table
 import astropy.units as u
-import json5
-import traceback
 import numpy as np
 import src.strings as tr
 
@@ -100,7 +100,7 @@ def list_filters():
                 filters.append(file.stem)
     except FileNotFoundError:
         print(f'The database in folder "filters" was not found and will not be loaded.')
-        print(f'More precisely, {traceback.format_exc(limit=0)}')
+        print(f'More precisely, {format_exc(limit=0)}')
     return sorted(filters)
 
 
@@ -125,7 +125,7 @@ def import_folder(folder: str):
             if file.suffix == '.json5' and not file.is_dir():
                 with open(file, 'rt', encoding='UTF-8') as f:
                     try:
-                        content = json5.load(f)
+                        content = json5load(f)
                         for key, value in content.items():
                             if type(value) == list:
                                 refs |= {key: value}
@@ -133,10 +133,10 @@ def import_folder(folder: str):
                                 objects |= {key: value}
                     except ValueError:
                         print(f'Error in JSON5 syntax of file "{file.name}", its upload was cancelled.')
-                        print(f'More precisely, {traceback.format_exc(limit=0)}')
+                        print(f'More precisely, {format_exc(limit=0)}')
     except FileNotFoundError:
         print(f'The database in folder "{folder}" was not found and will not be loaded.')
-        print(f'More precisely, {traceback.format_exc(limit=0)}')
+        print(f'More precisely, {format_exc(limit=0)}')
     return objects, refs
 
 

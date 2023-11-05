@@ -1,7 +1,7 @@
 from scipy.interpolate import Akima1DInterpolator
 from typing import TypeVar, Iterable, Tuple
 from copy import deepcopy
-import traceback
+from traceback import format_exc
 import numpy as np
 import src.data_import as di
 
@@ -13,7 +13,7 @@ nm_limit = 3000 # nm
 
 # For the sake of simplifying work with the spectrum, its discretization steps are strictly given below.
 # Grid points are divisible by the selected step.
-resolutions = [5, 10, 20, 40, 80, 160] # nm
+resolutions = (5, 10, 20, 40, 80, 160) # nm
 
 # To calculate color, it is necessary to achieve a definition of the spectrum in the visible range.
 # Boundaries have been defined based on the CMF (color matching functions) used, but can be any.
@@ -305,7 +305,7 @@ class Spectrum:
             self.res = 5
             print(f'# Note for the Spectrum object "{self.name}"')
             print(f'- Something unexpected happened during initialization. The spectrum was replaced by a stub.')
-            print(f'- More precisely, {traceback.format_exc(limit=0)}')
+            print(f'- More precisely, {format_exc(limit=0)}')
 
     @staticmethod
     def from_photometry(data: Photometry, scope: np.ndarray):
@@ -319,7 +319,7 @@ class Spectrum:
             except Exception:
                 print(f'# Note for the Spectrum object "{data.name}"')
                 print(f'- Something unexpected happened during external file reading. The data was replaced by a stub.')
-                print(f'- More precisely, {traceback.format_exc(limit=0)}')
+                print(f'- More precisely, {format_exc(limit=0)}')
                 nm, br = nm_br_stub
         else:
             nm, br = data.nm, data.br

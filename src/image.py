@@ -1,15 +1,15 @@
-import io
-import time
+from io import BytesIO
+from time import monotonic, monotonic_ns, strftime
+from PIL import Image, ImageDraw
 import numpy as np
 import PySimpleGUI as sg
-from PIL import Image, ImageDraw
 import src.core as core
 
 # This file needs revision
 
 def convert_to_bytes(img: Image.Image):
     """ Prepares PIL's image to be displayed in the window """
-    bio = io.BytesIO()
+    bio = BytesIO()
     img.save(bio, format='png')
     del img
     return bio.getvalue()
@@ -48,7 +48,7 @@ def color_depth(mode: str):
 
 def image_processing(input_data: dict):
     """ Block of code responsible from loading to processing and saving the image """
-    start_time = time.monotonic()
+    start_time = monotonic()
     load = []
 
     # Combine images into an array containing brightness values from 0 to 1
@@ -95,10 +95,10 @@ def image_processing(input_data: dict):
     counter = 0
     px_num = w*h
 
-    sg.Print(f'\n{round(time.monotonic() - start_time, 3)} seconds for loading, autoalign and creating output templates\n')
-    sg.Print(f'{time.strftime("%H:%M:%S")} 0%')
+    sg.Print(f'\n{round(monotonic() - start_time, 3)} seconds for loading, autoalign and creating output templates\n')
+    sg.Print(f'{strftime("%H:%M:%S")} 0%')
 
-    start_time = time.monotonic()
+    start_time = monotonic()
     get_slice_time = 0
     calc_spectrum_time = 0
     calc_color_time = 0
@@ -108,20 +108,20 @@ def image_processing(input_data: dict):
     for x in range(w):
         for y in range(h):
 
-            temp_time = time.monotonic_ns()
+            temp_time = monotonic_ns()
             slice = data[:, y, x]
-            get_slice_time += time.monotonic_ns() - temp_time
+            get_slice_time += monotonic_ns() - temp_time
 
             if np.sum(slice) > 0:
                 name = f'({x}; {y})'
 
-                temp_time = time.monotonic_ns() # Spectral data processing
+                temp_time = monotonic_ns() # Spectral data processing
                 spectrum = core.Spectrum(name, input_data['nm'], list(slice), scope=core.visible_range)
                 if input_data['desun']:
                     spectrum /= core.sun_norm
-                calc_spectrum_time += time.monotonic_ns() - temp_time
+                calc_spectrum_time += monotonic_ns() - temp_time
 
-                temp_time = time.monotonic_ns() # Color calculation
+                temp_time = monotonic_ns() # Color calculation
                 if input_data['srgb']:
                     color = core.Color.from_spectrum(spectrum, albedo=True)
                 else:
@@ -129,22 +129,22 @@ def image_processing(input_data: dict):
                 if input_data['gamma']:
                     color = color.gamma_corrected()
                 rgb = tuple(color.to_bit(8).round().astype(int))
-                calc_color_time += time.monotonic_ns() - temp_time
+                calc_color_time += monotonic_ns() - temp_time
 
-                temp_time = time.monotonic_ns()
+                temp_time = monotonic_ns()
                 draw.point((x, y), rgb)
-                draw_point_time += time.monotonic_ns() - temp_time
+                draw_point_time += monotonic_ns() - temp_time
 
-            temp_time = time.monotonic_ns()
+            temp_time = monotonic_ns()
             counter += 1
             if counter % 2048 == 0:
                 try:
-                    sg.Print(f'{time.strftime("%H:%M:%S")} {round(counter/px_num * 100)}%, {round(counter/(time.monotonic()-start_time))} px/sec')
+                    sg.Print(f'{strftime("%H:%M:%S")} {round(counter/px_num * 100)}%, {round(counter/(monotonic()-start_time))} px/sec')
                 except ZeroDivisionError:
-                    sg.Print(f'{time.strftime("%H:%M:%S")} {round(counter/px_num * 100)}% (ZeroDivisionError)')
-            progress_bar_time += time.monotonic_ns() - temp_time
+                    sg.Print(f'{strftime("%H:%M:%S")} {round(counter/px_num * 100)}% (ZeroDivisionError)')
+            progress_bar_time += monotonic_ns() - temp_time
     
-    end_time = time.monotonic()
+    end_time = monotonic()
     sg.Print(f'\n{round(end_time - start_time, 3)} seconds for color processing, where:')
     sg.Print(f'\t{get_slice_time / 1e9} for getting spectrum')
     sg.Print(f'\t{calc_spectrum_time / 1e9} for inter/extrapolating')
@@ -155,7 +155,7 @@ def image_processing(input_data: dict):
     sg.Print(f'\t{round(end_time - start_time - sum_time/1e9, 3)} for other (time, black-pixel check)')
 
     if not input_data['preview']:
-        img.save(f'{input_data["save"]}/TCT_{time.strftime("%Y-%m-%d_%H-%M")}.png')
+        img.save(f'{input_data["save"]}/TCT_{strftime("%Y-%m-%d_%H-%M")}.png')
 
     return img
 

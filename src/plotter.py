@@ -1,14 +1,14 @@
-import warnings
+from warnings import simplefilter
 from typing import TypeVar, Iterable, Tuple
-import PySimpleGUI as sg
-import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import matplotlib.pyplot as plt
+import PySimpleGUI as sg
 import src.core as core
 import src.strings as tr
 import src.gui as gui
 
 # Filling empty space on a plot
-warnings.simplefilter('ignore', UserWarning)
+simplefilter('ignore', UserWarning)
 plt.rcParams['figure.autolayout'] = True
 
 # MatPlotLib custom theme
@@ -37,8 +37,8 @@ def plot_spectra(objects: Iterable[core.Spectrum], gamma, srgb, albedo, lang: st
     max_y = []
     for spectrum in objects:
         max_y.append(spectrum.br.max())
-    rgb = [core.x, core.y, core.z] if srgb else [core.r, core.g, core.b]
-    k = max(max_y) / rgb[2].br.max() if max_y != [] else 1
+    rgb = (core.x, core.y, core.z) if srgb else (core.r, core.g, core.b)
+    k = max(max_y) / rgb[2].br.max() if len(max_y) != 0 else 1
     # adding CMFs on the background
     for i, spectrum in enumerate(rgb):
         ax.plot(spectrum.nm, spectrum.br*k, label=spectrum.name, color=rgb_muted[i])
@@ -78,7 +78,7 @@ def plot_filters(filters: Iterable[core.Spectrum]):
     max_y = []
     for spectrum in filters[3:]:
         max_y.append(spectrum.br.max())
-    k = max(max_y) / filters[2].br.max() if max_y != [] else 1
+    k = max(max_y) / filters[2].br.max() if len(max_y) != 0 else 1
     # color calculating and plotting
     for i, spectrum in enumerate(filters):
         hires = spectrum.to_resolution(5)
