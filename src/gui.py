@@ -19,7 +19,7 @@ sg.LOOK_AND_FEEL_TABLE['MaterialDark'] = {
         'BORDER': 0, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0
     }
 
-def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tuple, filtersDB: list, albedoFlag: bool, bitness: int, rounding: int, T2_num: int, T5_num: int, lang: str):
+def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tuple, filtersDB: tuple, albedoFlag: bool, bitness: int, rounding: int, T2_num: int, T5_num: int, lang: str):
     title_font = ('arial', 12)
     tags_input_size = 20
     button_size = 22
@@ -194,7 +194,7 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         [sg.Push(), sg.Button(button_text=tr.gui_clear[lang], size=button_size, key='T4_clear'), sg.Push()]
     ]
 
-    def frame_new(num: int, filtersDB: list, lang: str):
+    def frame_new(num: int, filtersDB: tuple, lang: str):
         n = str(num)
         l = [
             [

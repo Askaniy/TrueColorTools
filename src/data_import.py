@@ -93,15 +93,8 @@ def txt_reader(file: str):
 
 def list_filters():
     """ Returns list of file names were found in the filters folder """
-    filters = []
-    try:
-        for file in Path('filters').iterdir():
-            if file.suffix == '.dat' and not file.is_dir():
-                filters.append(file.stem)
-    except FileNotFoundError:
-        print(f'The database in folder "filters" was not found and will not be loaded.')
-        print(f'More precisely, {format_exc(limit=0)}')
-    return sorted(filters)
+    files = sorted(Path('filters').glob('*.dat'))
+    return tuple(file.stem for file in files)
 
 
 # Support of database extension via JSON5 files
@@ -120,23 +113,19 @@ def import_folder(folder: str):
     """ Returns objects and references were found in the given folder """
     objects = {}
     refs = {}
-    try:
-        for file in sorted(Path(folder).iterdir()):
-            if file.suffix == '.json5' and not file.is_dir():
-                with open(file, 'rt', encoding='UTF-8') as f:
-                    try:
-                        content = json5load(f)
-                        for key, value in content.items():
-                            if type(value) == list:
-                                refs |= {key: value}
-                            else:
-                                objects |= {key: value}
-                    except ValueError:
-                        print(f'Error in JSON5 syntax of file "{file.name}", its upload was cancelled.')
-                        print(f'More precisely, {format_exc(limit=0)}')
-    except FileNotFoundError:
-        print(f'The database in folder "{folder}" was not found and will not be loaded.')
-        print(f'More precisely, {format_exc(limit=0)}')
+    files = sorted(Path(folder).glob('**/*.json5'))
+    for file in files:
+        with open(file, 'rt', encoding='UTF-8') as f:
+            try:
+                content = json5load(f)
+                for key, value in content.items():
+                    if type(value) == list:
+                        refs |= {key: value}
+                    else:
+                        objects |= {key: value}
+            except ValueError:
+                print(f'Error in JSON5 syntax of file "{file.name}", its upload was cancelled.')
+                print(f'More precisely, {format_exc(limit=0)}')
     return objects, refs
 
 

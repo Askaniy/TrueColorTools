@@ -313,9 +313,9 @@ class Spectrum:
         if data.file != '':
             try:
                 if data.file.split('.')[-1].lower() in ('fits', 'fit'):
-                    nm, br = di.fits_reader('spectra/'+data.file)
+                    nm, br = di.fits_reader(data.file)
                 else:
-                    nm, br = di.txt_reader('spectra/'+data.file)
+                    nm, br = di.txt_reader(data.file)
             except Exception:
                 print(f'# Note for the Spectrum object "{data.name}"')
                 print(f'- Something unexpected happened during external file reading. The data was replaced by a stub.')
