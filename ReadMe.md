@@ -10,7 +10,7 @@ Input data is accepted in the form of channel measurements, color indices, or ma
 
 ### Basic installation way
 
-True Color Tools has been tested on Windows 10/11 and Linux (openSUSE). It requires Python 3.10 or higher version, which do not support Windows 7. [This](https://github.com/adang1345/PythonWin7) can be used for the case, has been confirmed by the [user](https://github.com/GurrenLagannTSS).
+True Color Tools has been tested on Windows 10/11, macOS and Linux. It requires Python 3.10 or higher version, which do not support Windows 7. [This](https://github.com/adang1345/PythonWin7) launch tool can be used for the case.
 
 1. Clone the repository or download archive by the GitHub web interface (press the button `Code`, then choose `Download ZIP` and unpack the archive after downloading);
 2. Ensure that you have libraries listed in [requirements.txt](requirements.txt). You can install them all at once using the following command: `python3 -m pip install -r requirements.txt`;
@@ -35,8 +35,9 @@ The key processing method is converting the photometry data into a continuous sp
 
 
 ## How to use?
+GUI is the only way to interact with True Color Tools. When running it from the command line, you can set the startup language and CLI verbosity level (run with `--help` for details). No internet connection is required, the databases are stored in the appropriate folders of the repository, and you can replenish them.
 
-True Color Tools GUI is functionally divided into tabs: *Spectra*, *Images*, *Table* and *Blackbody & Redshifts*. The color output format, often common to tabs, has been moved to the sidebar settings. No internet connection is required, the databases are stored in the appropriate folders of the repository, and you can replenish them.
+Program interface is functionally divided into tabs: *Spectra*, *Images*, *Table* and *Blackbody & Redshifts*. Color output formatting, often common to tabs, is located in the sidebar settings.
 
 **Spectra tab** provides access to the spectra database and allows you to calculate a color with the selected settings just by clicking on an object. It is possible to plot one or several spectra from the database in a pop-up window.
 

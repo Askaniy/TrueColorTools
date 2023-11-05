@@ -19,7 +19,7 @@ sg.LOOK_AND_FEEL_TABLE['MaterialDark'] = {
         'BORDER': 0, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0
     }
 
-def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, filtersDB: list, albedoFlag: bool, lang: str):
+def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tuple, filtersDB: list, albedoFlag: bool, bitness: int, rounding: int, T2_num: int, T5_num: int, lang: str):
     title_font = ('arial', 12)
     tags_input_size = 20
     button_size = 22
@@ -43,11 +43,11 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, f
         [sg.Push(), sg.Text(tr.gui_formatting[lang], key='-formattingText-'), sg.Push()],
         [
             sg.Text(tr.gui_bit[lang], key='-bitnessText-'),
-            sg.InputText('1', size=1, disabled_readonly_background_color=inputOFF_color, expand_x=True, enable_events=True, key='-bitness-')
+            sg.InputText(bitness, size=1, disabled_readonly_background_color=inputOFF_color, expand_x=True, enable_events=True, key='-bitness-')
         ],
         [
             sg.Text(tr.gui_rnd[lang], key='-roundingText-'),
-            sg.InputText('3', size=1, disabled_readonly_background_color=inputOFF_color, expand_x=True, enable_events=True, key='-rounding-')
+            sg.InputText(rounding, size=1, disabled_readonly_background_color=inputOFF_color, expand_x=True, enable_events=True, key='-rounding-')
         ]
     ])
 
@@ -96,18 +96,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, f
         ]
         return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, visible=True, key='T2_band'+n)
 
-    T2_frames = [
-        [frame(0, inputOFF_color, lang)],
-        [frame(1, inputOFF_color, lang)],
-        [frame(2, inputOFF_color, lang)],
-        [frame(3, inputOFF_color, lang)],
-        [frame(4, inputOFF_color, lang)],
-        [frame(5, inputOFF_color, lang)],
-        [frame(6, inputOFF_color, lang)],
-        [frame(7, inputOFF_color, lang)],
-        [frame(8, inputOFF_color, lang)],
-        [frame(9, inputOFF_color, lang)] # just add more frames here
-    ]
+    T2_frames = [[frame(i, inputOFF_color, lang)] for i in range(T2_num)]
     T2_col1 = [
         [
             sg.Push(), sg.Text(tr.gui_input[lang], font=title_font, key='T2_title1'),
@@ -140,7 +129,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, f
             sg.Push(), sg.Button(tr.gui_preview[lang], size=button_size, disabled=True, key='T2_preview'),
             sg.Button(tr.gui_process[lang], size=button_size, disabled=True, key='T2_process'), sg.Push()
         ],
-        [sg.Push(), sg.Image(background_color='black', size=T2_preview, key='T2_image'), sg.Push()]
+        [sg.Push(), sg.Image(background_color='black', size=img_preview_size, key='T2_image'), sg.Push()]
     ]
 
     tab3 = [
@@ -222,16 +211,7 @@ def generate_layout(canvas_size: tuple, T2_preview: tuple, text_colors: tuple, f
         ]
         return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, key='T5_band'+n)
     
-    T5_frames = [
-        [frame_new(0, filtersDB, lang)],
-        [frame_new(1, filtersDB, lang)],
-        [frame_new(2, filtersDB, lang)],
-        [frame_new(3, filtersDB, lang)],
-        [frame_new(4, filtersDB, lang)],
-        [frame_new(5, filtersDB, lang)],
-        [frame_new(6, filtersDB, lang)],
-        [frame_new(7, filtersDB, lang)] # just add more frames here
-    ]
+    T5_frames = [[frame_new(i, filtersDB, lang)] for i in range(T5_num)]
     T5_col1 = [
         [sg.Push(), sg.Text(tr.gui_input[lang], font=title_font, key='T5_title1'), sg.Push()],
         [sg.Text(tr.gui_step1[lang], key='T5_step1')],

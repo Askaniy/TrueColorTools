@@ -1,4 +1,5 @@
-import traceback
+from argparse import ArgumentParser
+from traceback import format_exc
 import PySimpleGUI as sg
 import src.core as core
 import src.gui as gui
@@ -11,47 +12,63 @@ import src.table_generator as tg
 
 
 def launch_window():
-    lang = 'en' # can be translated into German or Russian at runtime
-    objectsDB, refsDB = {}, {} # initial loading became too long with separate json5 database files
+
+    # CLI parsing
+    parser = ArgumentParser(description='See ReadMe on the GitHub page: https://github.com/Askaniy/TrueColorTools#readme')
+    parser.add_argument('-v', '--verbose', '--verbosity', action='count', help='increase level of output verbosity (-v, -vv, etc.)')
+    parser.add_argument('-l', '--lang', '--language', type=str, default='en', help='set startup language, editable in GUI (en, de, ru)')
+    args = parser.parse_args()
+    lang = args.lang
+
+    # Databases declaration, to be filled by the json5 database later
+    objectsDB, refsDB = {}, {}
     tagsDB = []
     filtersDB = di.list_filters()
 
+    # Processing configuration
     default_tag = 'featured'
     albedoFlag = True # default brightness mode
     #oldInterpFlag = True # default interpolation mode
+    bitness = 1
+    rounding = 3
 
+    # GUI configuration
+    T2_num = 10 # max number of image bands
+    T5_num = 8
+    T2_vis = 3  # current number of visible image bands
     circle_r = 100 # radius in pixels of color preview circle
     circle_coord = (circle_r, circle_r+1)
-    T2_preview_size = (256, 128)
-    T2_preview_area = T2_preview_size[0]*T2_preview_size[1]
+    img_preview_size = (256, 128)
+    img_preview_area = img_preview_size[0]*img_preview_size[1]
     text_colors = (gui.muted_color, gui.text_color)
 
+    # Launching window
     sg.ChangeLookAndFeel('MaterialDark')
     window = sg.Window(
-        'True Color Tools', gui.generate_layout((2*circle_r+1, 2*circle_r+1), T2_preview_size, text_colors, filtersDB, albedoFlag, lang),
-        finalize=True, resizable=True, margins=(0, 0), size=(900, 600))
-    T2_vis = 3  # current number of visible image bands
-    T2_num = 10 # max number of image bands, ~ len(window['T2_frames'])
-    T5_num = 8
+        'True Color Tools', finalize=True, resizable=True, margins=(0, 0), size=(900, 600),
+        layout=gui.generate_layout(
+            (2*circle_r+1, 2*circle_r+1), img_preview_size, text_colors, filtersDB, albedoFlag, bitness, rounding, T2_num, T5_num, lang
+            )
+        )
+    
+    # Setting visibility of multiband inputs
     for i in range(T2_vis, T2_num):
         window['T2_band'+str(i)].update(visible=False)
 
+    # Setting default color preview circle
     T1_preview = window['T1_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
     T4_preview = window['T4_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
 
-    triggers = ['-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-interpMode0-', '-interpMode1-', '-bitness-', '-rounding-']
-    
-    bitness = int(window['-bitness-'].get())
-    rounding = int(window['-rounding-'].get())
-
+    # Setting plots templates
     plot_data = [] # of the tabs 1 and 4
     T5_plot_data = [core.r, core.g, core.b]
     T5_fig = pl.plot_filters(T5_plot_data)
     figure_canvas_agg = pl.draw_figure(window['T5_canvas'].TKCanvas, T5_fig)
     
+    # List of events that cause color recalculation
+    triggers = ['-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-interpMode0-', '-interpMode1-', '-bitness-', '-rounding-']
 
     # Window events loop
-
     while True:
         event, values = window.read()
 
@@ -290,14 +307,14 @@ def launch_window():
                         'exposures': [float(values['T2_exposure'+str(i)]) for i in range(T2_vis)],
                         'save': values['T2_folder'],
                         'preview': event=='T2_preview',
-                        'area': T2_preview_area
+                        'area': img_preview_area
                     }
                     T2_img = im.image_processing(input_data)
                     
                     if event == 'T2_preview':
                         window['T2_image'].update(data=im.convert_to_bytes(T2_img))
                 except Exception:
-                    sg.Print(traceback.format_exc(limit=0))
+                    sg.Print(format_exc(limit=0))
         
         # ------------ Events in the tab "Table" ------------
 
