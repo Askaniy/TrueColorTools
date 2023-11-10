@@ -27,10 +27,10 @@ True Color Tools has been tested on Windows 10/11, macOS and Linux. It requires 
 
 ## How it works?
 
-The key processing method is converting the photometry data into a continuous spectrum and convolve it with color matching functions of an eye. The key idea is to apply this method to a variety of use cases. Summarizing the standard steps:
+The key processing method is converting a photometry data into a continuous spectrum and convolve it with color matching functions of an eye. Summarizing the standard steps:
 
 1. Reading data, converting to the form "wavelength: brightness value". Built-in filter information is used to work with color indices and spacecraft images.
-2. The obtained values ​​are interpolated (and extrapolated if required). There are two modes, fast linear (built-in) and slow Akima interpolator (imported from SciPy) with linear extrapolation. I know this is a bit of a simplification, but developing full spectrum reconstruction from absorption curves would be at the expense of other features.
+2. The obtained values ​​are interpolated (and extrapolated if required). The program uses its own functions for this, which work faster and more reliably than from SciPy. In plans replacing interpolation with a multidimensional minimum search.
 3. There are two ways to get color. The first (default) convolve spectrum with experimentally obtained sensitivity curves directly. In the sRGB mode the calculations are more complex, but generally accepted: processing a spectrum first into the XYZ space, from which it transformed into sRGB with illuminant E (the equal energy white point is much better for our purposes than the standard D65).
 
 

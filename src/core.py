@@ -1,4 +1,3 @@
-from scipy.interpolate import Akima1DInterpolator
 from typing import TypeVar, Iterable, Tuple
 from copy import deepcopy
 from traceback import format_exc
@@ -156,9 +155,9 @@ def is_smooth(br: Iterable):
     diff2 = np.diff(np.diff(br))
     return np.all(diff2 <= 0) | np.all(diff2 >= 0)
 
-def averaging(x0: np.ndarray, y0: np.ndarray, x1: np.ndarray):
+def averaging(x0: np.ndarray, y0: np.ndarray, x1: np.ndarray, step: int|float):
     """ Returns spectrum brightness values with decreased resolution """
-    semistep = 2.5 # (x1[1] - x1[0]) / 2 in general
+    semistep = step * 0.5
     y1 = [np.mean(y0[np.where(x0 < x1[0]+semistep)])]
     for x in x1[1:-1]:
         flag = np.where((x-semistep < x0) & (x0 < x+semistep))
@@ -169,6 +168,34 @@ def averaging(x0: np.ndarray, y0: np.ndarray, x1: np.ndarray):
         y1.append(y)
     y1.append(np.mean(y0[np.where(x0 > x1[-1]-semistep)]))
     return np.array(y1)
+
+def custom_interp(xy0: np.ndarray, k=16):
+    """
+    Returns curve values with twice the resolution. Can be used in a loop.
+    Optimal in terms of speed to quality ratio: around 2 times faster than splines in scipy.
+
+    Args:
+    - `xy0` (np.ndarray): values to be interpolated in shape (2, N)
+    - `k` (int): lower -> more chaotic, higher -> more linear, best results around 10-20
+    """
+    xy1 = np.empty((2, xy0.shape[1]*2-1), dtype=xy0.dtype)
+    xy1[:,0::2] = xy0
+    xy1[:,1::2] = (xy0[:,:-1] + xy0[:,1:]) * 0.5
+    delta_left = np.append(0., xy0[1,1:-1] - xy0[1,:-2])
+    delta_right = np.append(xy0[1,2:] - xy0[1,1:-1], 0.)
+    xy1[1,1::2] += (delta_left - delta_right) / k
+    return xy1
+
+def interpolating(x0: np.ndarray, y0: np.ndarray, x1: np.ndarray, step: int|float):
+    """
+    Returns interpolated brightness values on uniform grid.
+    Combination of custom_interp (which returns an uneven mesh) and linear interpolation after it.
+    The chaotic-linearity parameter increases with each iteration to reduce the disadvantages of custom_interp.
+    """
+    xy0 = np.array([x0, y0])
+    for i in range(int(np.log2(np.diff(x0).max() / step))):
+        xy0 = custom_interp(xy0, k=11+i)
+    return np.interp(x1, xy0[0], xy0[1])
 
 def custom_extrap(grid: np.ndarray, derivative: float, corner_x: int|float, corner_y: float) -> np.ndarray:
     """
@@ -184,7 +211,7 @@ def custom_extrap(grid: np.ndarray, derivative: float, corner_x: int|float, corn
 
 weights_center_of_mass = 1 - 1 / np.sqrt(2)
 
-def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int, avg_steps=20):
+def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int|float, avg_steps=20):
     """
     Defines a curve with an intuitive continuation on the scope, if needed.
     `avg_steps` is a number of corner curve points to be averaged if the curve is not smooth.
@@ -268,9 +295,9 @@ class Spectrum:
             if np.any((diff := np.diff(nm)) != resolution): # if not uniform 5 nm grid
                 uniform_nm = grid(nm[0], nm[-1], resolution)
                 if diff.mean() >= resolution: # interpolation, increasing resolution
-                    br = Akima1DInterpolator(nm, br)(uniform_nm)
+                    br = interpolating(nm, br, uniform_nm, resolution)
                 else: # decreasing resolution if step less than 5 nm
-                    br = averaging(nm, br, uniform_nm)
+                    br = averaging(nm, br, uniform_nm, resolution)
                 nm = uniform_nm
             if isinstance(scope, np.ndarray):
                 nm, br = extrapolating(nm, br, scope, resolution)

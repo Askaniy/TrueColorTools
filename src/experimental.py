@@ -22,24 +22,6 @@ def intensity2mag(e):
     return -2.5 * np.log10(e / V)
 
 
-# Interpolating
-
-def custom_interp(y0: np.ndarray, k=8):
-    """
-    Returns curve values on an uniform grid with twice the resolution. Can be used in a loop.
-    Optimal in terms of speed to quality ratio. Invented while trying to sleep.
-
-    Args:
-    - `y0` (np.ndarray): values to be interpolated
-    - `k` (int): lower -> more chaotic, higher -> more linear, best results around 5-10
-    """
-    y1 = np.empty(y0.size * 2 - 1)
-    y1[0::2] = y0
-    delta_left = np.append(0., y0[1:-1] - y0[:-2])
-    delta_right = np.append(y0[2:] - y0[1:-1], 0.)
-    y1[1::2] = (y0[:-1] + y0[1:] + (delta_left - delta_right) / k) / 2
-    return np.clip(y1, 0, None)
-
 
 # Legacy core.py multiresolution spectrum processing
 # Code of summer 2023. Simplified in November 2023.
