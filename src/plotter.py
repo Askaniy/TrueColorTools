@@ -81,12 +81,11 @@ def plot_filters(filters: Iterable[core.Spectrum]):
     k = max(max_y) / filters[2].br.max() if len(max_y) != 0 else 1
     # color calculating and plotting
     for i, spectrum in enumerate(filters):
-        hires = spectrum.to_resolution(5)
         if i < 3: # the first three spectra are scaled sensitivity curves
-            br = hires.br*k
+            br = spectrum.br*k
             color = rgb_muted[i]
         else:
-            br = hires.br
-            color = core.Color.from_spectrum_legacy(hires).gamma_corrected().to_html()
-        ax.plot(hires.nm, br, label=hires.name, color=color)
+            br = spectrum.br
+            color = core.Color.from_spectrum_legacy(spectrum).gamma_corrected().to_html()
+        ax.plot(spectrum.nm, br, label=spectrum.name, color=color)
     return fig

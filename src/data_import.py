@@ -72,14 +72,14 @@ def fits_reader(file: str):
                 y_column = y_column[0]
             x = x_column * str2unit(columns[x_id].unit, 'x')
             y = y_column * str2unit(columns[y_id].unit, 'y')
-            return x.to(u.nm), y.to(flux_density_SI)
+            return np.array(x.to(u.nm)), np.array(y.to(flux_density_SI))
         except IndexError:
             header = hdul[0].header # but sometimes they are in the primary HDU, like in BAAVSS
             #header_printer(header)
             x_column = header['CRVAL1'] + header['CDELT1']*(np.arange(header['NAXIS1'])-1)
             x = x_column * str2unit(header['CUNIT1'], 'x')
             y = list(Table(hdul[0].data)[0])
-            return x.to(u.nm), y
+            return np.array(x.to(u.nm)), np.array(y)
 
 def txt_reader(file: str):
     """ Imports spectrum data from a simple text file. Wavelength only in angstroms """

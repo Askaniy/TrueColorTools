@@ -1,4 +1,3 @@
-from argparse import ArgumentParser
 from traceback import format_exc
 import PySimpleGUI as sg
 import src.core as core
@@ -11,14 +10,7 @@ import src.strings as tr
 import src.table_generator as tg
 
 
-def launch_window():
-
-    # CLI parsing
-    parser = ArgumentParser(description='See ReadMe on the GitHub page: https://github.com/Askaniy/TrueColorTools#readme')
-    parser.add_argument('-v', '--verbose', '--verbosity', action='count', help='increase level of output verbosity (-v, -vv, etc.)')
-    parser.add_argument('-l', '--lang', '--language', type=str, default='en', help='set startup language, editable in GUI (en, de, ru)')
-    args = parser.parse_args()
-    lang: str = args.lang
+def launch_window(lang: str):
 
     # Databases declaration, to be filled by the json5 database later
     objectsDB, refsDB = {}, {}
@@ -61,9 +53,7 @@ def launch_window():
 
     # Setting plots templates
     plot_data = [] # of the tabs 1 and 4
-    T5_plot_data = (core.r, core.g, core.b)
-    T5_fig = pl.plot_filters(T5_plot_data)
-    figure_canvas_agg = pl.draw_figure(window['T5_canvas'].TKCanvas, T5_fig)
+    T5_first_time = True
     
     # List of events that cause color recalculation
     triggers = ('-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-interpMode0-', '-interpMode1-', '-bitness-', '-rounding-')
@@ -369,6 +359,15 @@ def launch_window():
         # ------------ Events in the tab "WIP" ------------
         
         elif values['-currentTab-'] == 'tab5':
+            if T5_first_time:
+                if values['-srgb-']:
+                    T5_plot_data = [core.x, core.y, core.z]
+                else:
+                    T5_plot_data = [core.r, core.g, core.b]
+                T5_fig = pl.plot_filters(T5_plot_data)
+                figure_canvas_agg = pl.draw_figure(window['T5_canvas'].TKCanvas, T5_fig)
+                T5_first_time = False
+
             T5_image_flag = values['-typeImage-']
 
             if event in ('-typeSpectrum-', '-typeImage-'):

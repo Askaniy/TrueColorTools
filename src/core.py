@@ -6,14 +6,14 @@ import numpy as np
 import src.data_import as di
 
 
-
 # This code was written in an effort to work not only with the optical range, but with any, depending on the data.
 # But too long and heterogeneous FITS files demanded to set the upper limit of the range to mid-wavelength infrared (3 μm).
-nm_limit = 3000 # nm
+nm_red_limit = 3000 # nm
+# Actually, dtype=uint16 is used to store wavelength. It's possible to set the limit to 65535 nm with no compression,
+# and to 327 675 nm with 5 nm compression.
 
-# For the sake of simplifying work with the spectrum, its discretization steps are strictly given below.
-# Grid points are divisible by the selected step.
-resolutions = (5, 10, 20, 40, 80, 160) # nm
+# For the sake of simplifying work with the spectrum, its discretization step in only 5 nm.
+resolution = 5 # nm
 
 # To calculate color, it is necessary to achieve a definition of the spectrum in the visible range.
 # Boundaries have been defined based on the CMF (color matching functions) used, but can be any.
@@ -151,10 +151,6 @@ class Photometry:
 
 
 
-def is_divisible(array: np.ndarray, number: int):
-    """ Boolean function, checks all array to be divisible by the number """
-    return not np.any(array % number > 0)
-
 def is_smooth(br: Iterable):
     """ Boolean function, checks the second derivative for sign reversal, a simple criterion for smoothness """
     diff2 = np.diff(np.diff(br))
@@ -162,33 +158,17 @@ def is_smooth(br: Iterable):
 
 def averaging(x0: np.ndarray, y0: np.ndarray, x1: np.ndarray):
     """ Returns spectrum brightness values with decreased resolution """
-    semistep = (x1[1] - x1[0]) / 2 # most likely semistep = 2.5 nm
+    semistep = 2.5 # (x1[1] - x1[0]) / 2 in general
     y1 = [np.mean(y0[np.where(x0 < x1[0]+semistep)])]
     for x in x1[1:-1]:
         flag = np.where((x-semistep < x0) & (x0 < x+semistep))
         if flag[0].size == 0: # the spectrum is no longer dense enough to be averaged down to 5 nm
-            y = y1[-1] # lengthening the last recorded brightness as the simplest solution
+            y = y1[-1] # lengthening the last recorded brightness is the simplest solution
         else:
             y = np.mean(y0[flag]) # average the brightness around X points
         y1.append(y)
     y1.append(np.mean(y0[np.where(x0 > x1[-1]-semistep)]))
     return np.array(y1)
-
-def custom_interp(y0: np.ndarray, k=8):
-    """
-    Returns curve values on an uniform grid with twice the resolution. Can be used in a loop.
-    Optimal in terms of speed to quality ratio. Invented while trying to sleep.
-
-    Args:
-    - `y0` (np.ndarray): values to be interpolated
-    - `k` (int): lower -> more chaotic, higher -> more linear, best results around 5-10
-    """
-    y1 = np.empty(y0.size * 2 - 1)
-    y1[0::2] = y0
-    delta_left = np.append(0., y0[1:-1] - y0[:-2])
-    delta_right = np.append(y0[2:] - y0[1:-1], 0.)
-    y1[1::2] = (y0[:-1] + y0[1:] + (delta_left - delta_right) / k) / 2
-    return np.clip(y1, 0, None)
 
 def custom_extrap(grid: np.ndarray, derivative: float, corner_x: int|float, corner_y: float) -> np.ndarray:
     """
@@ -239,74 +219,72 @@ def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int, av
     return x, y
 
 def grid(start: int|float, end: int|float, res: int):
-    """ Returns grid points in the range that are divisible by the selected step """
-    if start % res != 0:
-        start += res - start % res
+    """ Returns uniform grid points for the non-integer range that are divisible by the selected step """
+    if (shift := start % res) != 0:
+        start += res - shift
     if end % res == 0:
         end += 1 # to include the last point
-    return np.arange(start, end, res, dtype=int)
+    return np.arange(start, end, res, dtype='uint16')
 
-def standardize_resolution(input: int):
-    """ Redirects the step size to one of the valid values """
-    res = resolutions[-1] # max possible step
-    for i in range(1, len(resolutions)):
-        if input < resolutions[i]:
-            res = resolutions[i-1] # accuracy is always in reserve
-            break
-    return res
 
 class Spectrum:
-    def __init__(self, name: str, nm: Iterable, br: Iterable, res=0, scope: np.ndarray = None):
+    def __init__(self, name: str, nm: Iterable, br: Iterable):
         """
-        Constructor of the class to work with single, continuous spectrum, with strictly defined resolutions.
-        When creating an object, the spectrum grid is automatically checked and adjusted to uniform, if necessary.
-        Specifying resolution removes the check. This is only recommended for speeding up code that is definitely trustworthy.
-        The idea has been simplified, and the initialization step is only 5 nanometers, but it works with other valid ones.
+        Constructor of the class to work with single, continuous spectrum, with strictly defined resolution step of 5 nm.
+        It is assumed that the input grid can be trusted. If preprocessing is needed, see `Spectrum.from_array`.
 
         Args:
         - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
-        - `nm` (Iterable): list of wavelengths in nanometers
+        - `nm` (Iterable): list of wavelengths in nanometers with resolution step of 5 nm
         - `br` (Iterable): same-size list of "brightness" of an energy counter detector (not photon counter)
-        - `res` (int, optional): assigns a number, cancel the check
-        - `scope` (np.ndarray, optional): makes a spectrum of the same resolution as at least defined at the given wavelengths
         """
         self.name = name
-        nm = np.array(nm)
-        br = np.array(br)
+        self.nm = np.array(nm, dtype='uint16')
+        self.br = np.array(br, dtype='float')
+        if np.any(np.isnan(self.br)):
+            self.br = np.nan_to_num(self.br)
+            print(f'# Note for the Spectrum object "{self.name}"')
+            print(f'- NaN values detected during object initialization, they been replaced with zeros.')
+        # There are no checks for negativity, since such spectra exist, for example, red CMF.
+
+    @staticmethod
+    def from_array(name: str, nm: Iterable, br: Iterable, scope: np.ndarray = None):
+        """
+        Creates a Spectrum object from wavelength array with a check for uniformity and possible extrapolation.
+
+        Args:
+        - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
+        - `nm` (Iterable): list of wavelengths, any grid
+        - `br` (Iterable): same-size list of "brightness" of an energy counter detector (not photon counter)
+        - `scope` (np.ndarray): makes a spectrum of the same resolution as at least defined at the given wavelengths
+        """
         try:
-            if nm[-1] > nm_limit:
-                flag = np.where(nm < nm_limit + resolutions[0]) # to be averaged to nm_limit
+            if nm[-1] > nm_red_limit:
+                flag = np.where(nm < nm_red_limit + resolution) # with reserve to be averaged
                 nm = nm[flag]
                 br = br[flag]
-            if res != 0: # input could be trusted
-                self.nm = nm.astype(int)
-                self.br = br
-                self.res = res
-            else:
-                self.res = 5 # nm. Initialization simplification by leaving only one default option.
-                mean_res = np.mean(nm[1:]-nm[:-1])
-                if is_divisible(nm, self.res) and round(mean_res) == self.res:
-                    self.nm = nm
-                    self.br = br
-                else:
-                    self.nm = grid(nm[0], nm[-1], self.res)
-                    if mean_res >= self.res: # interpolation, increasing resolution
-                        self.br = Akima1DInterpolator(nm, br)(self.nm)
-                    else: # decreasing resolution if step less than 5 nm
-                        self.br = averaging(nm, br, self.nm)
+            nm = np.array(nm) # numpy decides int or float
+            br = np.array(br, dtype='float')
+            if np.any((diff := np.diff(nm)) != resolution): # if not uniform 5 nm grid
+                uniform_nm = grid(nm[0], nm[-1], resolution)
+                if diff.mean() >= resolution: # interpolation, increasing resolution
+                    br = Akima1DInterpolator(nm, br)(uniform_nm)
+                else: # decreasing resolution if step less than 5 nm
+                    br = averaging(nm, br, uniform_nm)
+                nm = uniform_nm
             if isinstance(scope, np.ndarray):
-                self.nm, self.br = extrapolating(self.nm, self.br, scope, self.res)
-            if np.any(np.isnan(self.br)):
-                self.br = np.nan_to_num(self.br)
-                print(f'# Note for the Spectrum object "{self.name}"')
-                print(f'- NaN values detected during object initialization, they been replaced with zeros.')
+                nm, br = extrapolating(nm, br, scope, resolution)
+            if br.min() < 0:
+                br = np.clip(br, 0, None)
+                print(f'# Note for the Spectrum object "{name}"')
+                print(f'- Negative values detected while trying to create the object from array, they been replaced with zeros.')
         except Exception:
-            self.nm, self.br = nm_br_stub
-            self.res = 5
-            print(f'# Note for the Spectrum object "{self.name}"')
-            print(f'- Something unexpected happened during initialization. The spectrum was replaced by a stub.')
+            nm, br = nm_br_stub
+            print(f'# Note for the Spectrum object "{name}"')
+            print(f'- Something unexpected happened while trying to create the object from array. It was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0)}')
-
+        return Spectrum(name, nm, br)
+    
     @staticmethod
     def from_photometry(data: Photometry, scope: np.ndarray):
         """ Creates a Spectrum object with inter- and extrapolated photometry data to fit the wavelength scope """
@@ -317,28 +295,19 @@ class Spectrum:
                 else:
                     nm, br = di.txt_reader(data.file)
             except Exception:
+                nm, br = nm_br_stub
                 print(f'# Note for the Spectrum object "{data.name}"')
                 print(f'- Something unexpected happened during external file reading. The data was replaced by a stub.')
                 print(f'- More precisely, {format_exc(limit=0)}')
-                nm, br = nm_br_stub
         else:
+            # TODO: move here complex photometry processing?
             nm, br = data.nm, data.br
-        spectrum = Spectrum(data.name, nm, br, scope=scope)
-        if spectrum.br.min() < 0:
-            spectrum.br = np.clip(spectrum.br, 0, None)
-            print(f'# Note for the Spectrum object "{spectrum.name}"')
-            print(f'- Negative values detected during conversion from photometry, they been replaced with zeros.')
-        return spectrum
+        return Spectrum.from_array(data.name, nm, br, scope)
 
     @staticmethod
     def from_filter(name: str):
         """ Creates a Spectrum object based on the loaded data in Filter Profile Service standard """
-        return Spectrum(name, *di.txt_reader(f'filters/{name}.dat'))
-
-    @staticmethod
-    def from_CALSPEC(name: str, file: str):
-        """ Creates a Spectrum object based on the external CALSPEC FITS file """
-        return Spectrum(name, *di.fits_reader(f'spectra/files/CALSPEC/{file}.fits'))
+        return Spectrum.from_array(name, *di.txt_reader(f'filters/{name}.dat'))
 
     @staticmethod
     def from_blackbody_redshift(scope: np.ndarray, temperature: int|float, velocity=0., vII=0.):
@@ -365,30 +334,7 @@ class Spectrum:
             br = irradiance(scope*doppler*grav, temperature)
         else:
             br = np.zeros(scope.size)
-        return Spectrum(f'BB with T={int(temperature)}', scope, br)
-
-    def to_resolution(self, request: int):
-        """ Returns a new Spectrum object with changed wavelength grid step size """
-        other = deepcopy(self)
-        if request not in resolutions:
-            print(f'# Note for the Spectrum object "{self.name}"')
-            print(f'- Resolution change allowed only for {resolutions} nm, not {request} nm.')
-            request = standardize_resolution(request)
-            print(f'- The optimal resolution was chosen automatically: {request} nm.')
-        if request > other.res:
-            while request != other.res: # remove all odd elements
-                other.res *= 2
-                other.nm = np.arange(other.nm[0], other.nm[-1]+1, other.res, dtype=int)
-                other.br = other.br[::2]
-        elif request < other.res:
-            while request != other.res: # middle linear interpolation
-                other.res = int(other.res / 2)
-                other.nm = np.arange(other.nm[0], other.nm[-1]+1, other.res, dtype=int)
-                other.br = custom_interp(other.br)
-        #else:
-        #    print(f'# Note for the Spectrum object "{self.name}"')
-        #    print(f'- Current and requested resolutions are the same ({request} nm), nothing changed.')
-        return other
+        return Spectrum(f'BB with T={round(temperature)}', scope, br)
 
     def __mul__(self, other):
         """ Implementation of convolution between emission spectrum and transmission spectrum """
@@ -405,74 +351,57 @@ class Spectrum:
             print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
             return 0.
         else:
-            if self.res < other.res:
-                other = other.to_resolution(self.res)
-            elif self.res > other.res:
-                self = self.to_resolution(other.res)
-            nm = np.arange(start, end+1, self.res)
+            nm = np.arange(start, end+1, resolution, dtype='uint16')
             br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
             br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
-            return Spectrum(name, nm, br0*br1, res=self.res).integrate()
+            return Spectrum(name, nm, br0*br1).integrate()
 
     def __truediv__(self, other):
         """ Returns a new Spectrum object with the emitter removed, i.e. the reflection spectrum """
-        divided = deepcopy(self)
-        divided.name = f'{divided.name} / {other.name}'
-        start = max(divided.nm[0], other.nm[0])
-        end = min(divided.nm[-1], other.nm[-1])
+        name = f'{self.name} / {other.name}'
+        start = max(self.nm[0], other.nm[0])
+        end = min(self.nm[-1], other.nm[-1])
         if start >= end:
-            print(f'# Note for spectral division "{divided.name}"')
+            print(f'# Note for spectral division "{name}"')
             print('- There is no intersection between the spectra, nothing changed.')
             the_first = self.name
             the_second = other.name
-            if divided.nm[0] > other.nm[0]:
+            if self.nm[0] > other.nm[0]:
                 the_first, the_second = the_second, the_first
             print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
+            return self
         else:
-            if divided.res < other.res:
-                other = other.to_resolution(divided.res)
-            elif divided.res > other.res:
-                divided = divided.to_resolution(other.res)
-            divided.nm = np.arange(start, end+1, divided.res)
-            br0 = divided.br[np.where((divided.nm >= start) & (divided.nm <= end))]
+            nm = np.arange(start, end+1, resolution, dtype='uint16')
+            br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
             br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
-            divided.br = br0 / br1
-        return divided
+            return Spectrum(name, nm, br0 / br1)
 
     def integrate(self) -> float:
         """ Calculates the area over the spectrum using the mean rectangle method, per nm """
-        curve = self.to_resolution(resolutions[0])
-        midpoints = (curve.br[:-1] + curve.br[1:]) / 2
-        area = np.sum(midpoints * curve.res)
-        return area
+        return np.sum(resolution * (self.br[:-1] + self.br[1:]) / 2)
 
     def normalized_by_area(self):
         """ Returns a new Spectrum object with brightness scaled to its area be equal 1 """
-        other = deepcopy(self)
-        other.br /= other.integrate()
-        return other
+        return Spectrum(self.name, self.nm, self.br / self.integrate())
 
     def normalized_on_wavelength(self, request: int):
         """ Returns a new Spectrum object with brightness scaled to be equal 1 at the specified wavelength """
-        other = deepcopy(self)
-        if request not in other.nm:
-            print(f'# Note for the Spectrum object "{other.name}"')
-            print(f'- Requested wavelength to normalize ({request}) not in the spectrum range ({other.nm[0]} to {other.nm[-1]} by {other.res} nm).')
-            request = other.nm[np.abs(other.nm - request).argmin()]
+        if request not in self.nm:
+            print(f'# Note for the Spectrum object "{self.name}"')
+            print(f'- Requested wavelength to normalize ({request}) not in the spectrum range ({self.nm[0]} to {self.nm[-1]} by {resolution} nm).')
+            request = self.nm[np.abs(self.nm - request).argmin()]
             print(f'- {request} was chosen as the closest value.')
-        other.br /= other.br[np.where(other.nm == request)]
-        return other
+        return Spectrum(self.name, self.nm, self.br / self.br[np.where(self.nm == request)])
 
     def scaled_to_albedo(self, albedo: float, transmission):
         """ Returns a new Spectrum object with brightness scaled to give the albedo after convolution with the filter """
-        other = deepcopy(self)
-        current_albedo = other * transmission.normalized_by_area()
+        current_albedo = self * transmission.normalized_by_area()
         if current_albedo == 0:
-            print(f'# Note for the Spectrum object "{other.name}"')
-            print(f'- The spectrum cannot be scaled to an albedo of {albedo} because its current albedo is zero.')
+            print(f'# Note for the Spectrum object "{self.name}"')
+            print(f'- The spectrum cannot be scaled to an albedo of {albedo} because its current albedo is zero, nothing changed.')
+            return self
         else:
-            other.br *= albedo / current_albedo
-        return other
+            return Spectrum(self.name, self.nm, self.br * albedo / current_albedo)
 
     def mean_wavelength(self) -> float:
         return np.average(self.nm, weights=self.br)
@@ -482,11 +411,11 @@ class Spectrum:
 bessell_V = Spectrum.from_filter('Generic_Bessell.V')
 bessell_V_norm = bessell_V.normalized_by_area() # used as an averager for the reference spectra
 
-sun_SI = Spectrum.from_CALSPEC('Sun', 'sun_reference_stis_002') # W / (m² nm)
+sun_SI = Spectrum.from_array('Sun', *di.fits_reader('spectra/files/CALSPEC/sun_reference_stis_002.fits')) # W / (m² nm)
 sun_in_V = sun_SI * bessell_V_norm
 sun_norm = sun_SI.scaled_to_albedo(1, bessell_V)
 
-vega_SI = Spectrum.from_CALSPEC('Vega', 'alpha_lyr_stis_011') # W / (m² nm)
+vega_SI = Spectrum.from_array('Vega', *di.fits_reader('spectra/files/CALSPEC/alpha_lyr_stis_011.fits')) # W / (m² nm)
 vega_in_V = vega_SI * bessell_V_norm
 vega_norm = vega_SI.scaled_to_albedo(1, bessell_V)
 
@@ -523,16 +452,16 @@ srgb = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_E)
 # Stiles & Burch (1959) 10-deg color matching data, direct experimental data
 # http://www.cvrl.org/stilesburch10_ind.htm
 # Sensitivity modulo values less than 10^-4 were previously removed
-r = Spectrum('r CMF', *np.loadtxt('src/cmf/StilesBurch10deg.r.dat').transpose(), res=5).normalized_by_area()
-g = Spectrum('g CMF', *np.loadtxt('src/cmf/StilesBurch10deg.g.dat').transpose(), res=5).normalized_by_area()
-b = Spectrum('b CMF', *np.loadtxt('src/cmf/StilesBurch10deg.b.dat').transpose(), res=5).normalized_by_area()
+r = Spectrum('r CMF', *np.loadtxt('src/cmf/StilesBurch10deg.r.dat').transpose()).normalized_by_area()
+g = Spectrum('g CMF', *np.loadtxt('src/cmf/StilesBurch10deg.g.dat').transpose()).normalized_by_area()
+b = Spectrum('b CMF', *np.loadtxt('src/cmf/StilesBurch10deg.b.dat').transpose()).normalized_by_area()
 
 # CIE XYZ functions transformed from the CIE (2006) LMS functions, 10-deg
 # http://www.cvrl.org/ciexyzpr.htm
 # Sensitivity modulo values less than 10^-4 were previously removed
-x = Spectrum('x CMF', *np.loadtxt('src/cmf/cie10deg.x.dat').transpose(), res=5)
-y = Spectrum('y CMF', *np.loadtxt('src/cmf/cie10deg.y.dat').transpose(), res=5)
-z = Spectrum('z CMF', *np.loadtxt('src/cmf/cie10deg.z.dat').transpose(), res=5)
+x = Spectrum('x CMF', *np.loadtxt('src/cmf/cie10deg.x.dat').transpose())
+y = Spectrum('y CMF', *np.loadtxt('src/cmf/cie10deg.y.dat').transpose())
+z = Spectrum('z CMF', *np.loadtxt('src/cmf/cie10deg.z.dat').transpose())
 # Normalization. TODO: find an official way to calibrate brightness for albedo!
 # 355.5 was guessed so that the brightness was approximately the same as that of the legacy version
 x.br /= 355.5
