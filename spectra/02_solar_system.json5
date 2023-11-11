@@ -113,7 +113,7 @@
     },
     "Mercury|Crow2011": {"tags": ["solar system", "planet geophysical", "planet"],
         "nm": [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5], "br": [0.61, 0.56, 0.66, 0.71, 0.86, 1.00, 1.37, 1.50, 1.77, 2.01],
-        "albedo": 0.142
+        "scale": ["Generic_Bessell.V", 0.142]
     },
     "Mercury|Madden2018": {"tags": ["solar system", "planet geophysical", "planet"],
         "nm": [299.63, 315.33, 335.22, 348.71, 366.62, 385.46, 406.4, 429.43, 448.27, 467.11, 490.14, 513.17, 536.2, 559.23, 582.25, 605.28, 628.31,
@@ -128,7 +128,7 @@
     },
     "Venus|Crow2011": {"tags": ["solar system", "planet geophysical", "planet"],
         "nm": [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5], "br": [0.59, 0.64, 0.72, 0.58, 0.95, 1.00, 1.16, 1.08, 1.16, 1.12],
-        "albedo": 0.689
+        "scale": ["Generic_Bessell.V", 0.689]
     },
     "Venus|Madden2018": {"tags": ["solar system", "planet geophysical", "planet"],
         "nm": [480.52, 600.74, 722.74, 807.16, 887.92, 966.48, 996.22],
@@ -144,10 +144,10 @@
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.688, 0.512, 0.434, 0.392, 0.418, 0.396, 0.430], "albedo": true
     },
     "Earth|Crow2011": {"tags": ["featured", "solar system", "planet geophysical", "planet"],
-        "nm": [350, 450, 550, 650, 750, 850, 950], "br": [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79], "albedo": 0.434
+        "nm": [350, 450, 550, 650, 750, 850, 950], "br": [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79], "scale": ["Generic_Bessell.V", 0.434]
     },
     "Moon|Crow2011": {"tags": ["featured", "solar system", "planet geophysical", "moon"],
-        "nm": [350, 450, 550, 650, 750, 850, 950], "br": [13.83, 18.06, 22.54, 26.68, 30.74, 34.86, 34.14], "albedo": 0.09948, // |Madden2018
+        "nm": [350, 450, 550, 650, 750, 850, 950], "br": [13.83, 18.06, 22.54, 26.68, 30.74, 34.86, 34.14], "scale": ["Generic_Bessell.V", 0.09948], // |Madden2018
     },
     "Moon|Madden2018": {"tags": ["solar system", "planet geophysical", "moon"],
         "nm_range": [450, 890, 5],
@@ -163,14 +163,14 @@
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.060, 0.088, 0.170, 0.250, 0.288, 0.285, 0.330], "albedo": true
     },
     "Mars|Crow2011": {"tags": ["solar system", "planet geophysical", "planet"],
-        "nm": [350, 450, 550, 650, 750, 850, 950], "br": [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31], "albedo": 0.170
+        "nm": [350, 450, 550, 650, 750, 850, 950], "br": [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31], "scale": ["Generic_Bessell.V", 0.170]
     },
     "Mars:B|USGSarchive": {"tags": ["featured", "solar system", "planet geophysical", "planet", "surface feature"],
         "nm": [330, 342, 363, 381, 404, 440, 475, 504, 540, 566, 600, 633, 666, 700, 704.7, 716.4, 728.9, 739.8, 751.9, 763.6, 775.6, 786.3, 799, 811.7,
         822.4, 837.1, 849.8, 862.5],
         "br": [0.091700, 0.095981, 0.108666, 0.098961, 0.130791, 0.180553, 0.247580, 0.302547, 0.398298, 0.527668, 0.704229, 0.790133, 0.861244, 0.907984,
         0.927670, 0.950918, 0.968006, 0.973932, 1.007903, 1.009743, 0.983539, 0.998712, 1.002135, 0.990941, 0.984577, 0.981692, 0.969340, 0.963597],
-        "albedo": 0.26, // https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2001JE001580
+        "scale": ["Generic_Bessell.V", 0.26], // https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2001JE001580
     },
     "Mars:D|USGSarchive": {"tags": ["featured", "solar system", "planet geophysical", "planet", "surface feature"],
         "nm": [330, 342, 363, 381, 404, 440, 475, 504, 540, 566, 600, 633, 644.1, 656, 667.9, 679.9, 691.7, 704.7, 716.4, 728.9, 739.8, 751.9, 763.6,
@@ -178,7 +178,7 @@
         "br": [0.214259, 0.225981, 0.208343, 0.207151, 0.242350, 0.304599, 0.368299, 0.435753, 0.552943, 0.686686, 0.832221, 0.931029, 1.086725, 1.096983, 
         1.117898, 1.128430, 1.139110, 1.147979, 1.159085, 1.143423, 1.145229, 1.126660, 1.111953, 1.092715, 1.076242, 1.085038, 1.046774, 1.033783,
         1.026548, 1.020545, 1.028644],
-        "albedo": 0.12, // https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2001JE001580
+        "scale": ["Generic_Bessell.V", 0.12], // https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2001JE001580
     },
     "Mars|Madden2018": {"tags": ["solar system", "planet geophysical", "planet"],
         "nm": [316.04, 360.96, 389.97, 435.05, 464.12, 502.86, 528.88, 567.92, 597.46, 626.82, 659.28, 697.97, 717.38, 762.51, 804.31, 846.12, 900.65,
@@ -192,12 +192,12 @@
         992.0],
         "br": [0.01305, 0.01312, 0.01484, 0.01489, 0.01699, 0.01766, 0.02037, 0.02137, 0.02177, 0.02641, 0.02769, 0.02743, 0.02732, 0.02835, 0.03083,
         0.03316, 0.03499, 0.03713, 0.03940, 0.04057, 0.03880],
-        "albedo": 0.071, // Geom. ! https://ssd.jpl.nasa.gov/?sat_phys_par
+        "scale": ["Generic_Bessell.V", 0.071], // Geom. ! https://ssd.jpl.nasa.gov/?sat_phys_par
     },
     "Deimos|Fraeman2013, Pang1980": {"tags": ["featured", "solar system", "moon"],
         "nm": [250, 300, 350, 400, 450, 500, 550, 600, 700, 750, 800],
         "br": [0.04, 0.05, 0.051, 0.05, 0.049, 0.053, 0.055, 0.058, 0.062, 0.067, 0.069],
-        "albedo": 0.068, // Geom. ! https://ssd.jpl.nasa.gov/?sat_phys_par
+        "scale": ["Generic_Bessell.V", 0.068], // Geom. ! https://ssd.jpl.nasa.gov/?sat_phys_par
     },
     "Jupiter|Mallama2017": {"tags": ["solar system", "planet geophysical", "planet", "jovian system"],
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.358, 0.443, 0.538, 0.513, 0.495, 0.389, 0.321]
@@ -212,7 +212,7 @@
         "nm": [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 739.8, 751.9, 763.6, 775.6, 786.3, 799, 811.7, 822.4, 837.1, 849.8, 862.5],
         "br": [0.126856, 0.161157, 0.189998, 0.312668, 0.455349, 0.642046, 0.775382, 0.801427, 0.811630, 0.890139, 0.942953, 1.004252, 1.005697, 1.015561,
         1.031987, 1.019722, 1.008961, 1.000501, 1.015732, 1.006328, 1.003697, 0.986871, 0.973683, 0.987817],
-        "albedo": 0.5014384, // |Madden2018
+        "scale": ["Generic_Bessell.V", 0.5014384], // |Madden2018
     },
     "Io|Madden2018": {"tags": ["solar system", "planet geophysical", "moon", "jovian system", "regular"],
         "nm": [295.98, 349.54, 376.84, 395.48, 405.46, 428.85, 443.62, 475.98, 538.43, 600.68, 672.13, 787.28, 880.37, 964.69],
@@ -223,7 +223,7 @@
         "nm": [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
         "br": [0.352826, 0.410782, 0.467415, 0.602579, 0.688769, 0.806425, 0.839300, 0.852109, 0.913667, 0.961235, 0.979446, 1.006591, 1.026941, 1.038414,
         1.067850, 1.062889, 1.063046],
-        "albedo": 0.6110393, // |Madden2018
+        "scale": ["Generic_Bessell.V", 0.6110393], // |Madden2018
     },
     "Europa:T|Madden2018": {"tags": ["solar system", "planet geophysical", "moon", "jovian system", "regular"],
         "nm": [340.98, 358.07, 375.17, 381.3, 391.27, 419.79, 441.32, 451.3, 459.94, 468.22, 476.49, 484.82, 492.05, 503.62, 518.47, 551.04, 598.92, 647.01,
@@ -236,7 +236,7 @@
         "nm": [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
         "br": [0.488778, 0.590744, 0.632155, 0.752500, 0.783059, 0.869610, 0.918507, 0.955278, 0.973874, 1.010833, 1.021557, 1.046712, 1.040900, 1.035977,
         1.049606, 1.044146, 1.036557],
-        "albedo": 0.4636778, // |Madden2018
+        "scale": ["Generic_Bessell.V", 0.4636778], // |Madden2018
     },
     "Ganymede:L|Madden2018": {"tags": ["solar system", "planet geophysical", "moon", "jovian system", "regular"],
         "nm": [320.0, 336.21, 352.99, 363.67, 377.95, 388.61, 404.13, 424.95, 446.14, 463.01, 478.07, 506.08, 548.23, 573.42, 625.63, 680.99, 715.56,
@@ -249,7 +249,7 @@
         "nm": [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 837.1, 849.8, 862.5],
         "br": [0.406242, 0.456089, 0.518130, 0.652152, 0.691349, 0.777651, 0.840575, 0.881522, 0.918704, 0.941487, 0.969265, 0.990831, 0.997041, 0.993501,
         1.007422, 0.986979, 1.001239, 0.985442, 1.006188],
-        "albedo": 0.1688978, // |Madden2018
+        "scale": ["Generic_Bessell.V", 0.1688978], // |Madden2018
     },
     "Callisto:L|Madden2018": {"tags": ["solar system", "planet geophysical", "moon", "jovian system", "regular"],
         "nm": [353.4, 377.13, 402.86, 433.37, 496.32, 544.31, 592.48, 640.67, 666.97, 745.88, 794.39, 842.94, 891.47, 926.57],
@@ -271,7 +271,7 @@
         "br": [0.3132, 0.3528, 0.3933, 0.4455, 0.5112, 0.5886, 0.6966, 0.7686, 0.8604, 0.9000, 0.9234, 0.9612, 1.081513, 1.065072, 1.088894, 1.094878,
         1.092790, 1.097008, 1.098860, 1.088170, 1.079328, 1.086258, 1.092842, 1.072758, 1.064449, 1.052381, 1.049213, 1.039174, 1.038871, 1.028878,
         1.016596],
-        "albedo": 0.5
+        "scale": ["Generic_Bessell.V", 0.5]
     },
     "Enceladus|Madden2018": {"tags": ["featured", "solar system", "planet geophysical", "moon", "saturnian system", "regular"],
         "nm_range": [350, 885, 5],
@@ -298,7 +298,7 @@
         "nm": [325, 350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
         "br": [0.734770, 0.732256, 0.745028, 0.844831, 0.859745, 0.910340, 0.925726, 0.991097, 0.992538, 1.016375, 1.006958, 1.049296, 1.060323, 1.034402,
         1.082394, 1.054788, 1.060017, 1.028328],
-        "albedo": 0.75691, // |Madden2018
+        "scale": ["Generic_Bessell.V", 0.75691], // |Madden2018
     },
     "Rhea|Madden2018": {"tags": ["solar system", "planet geophysical", "moon", "saturnian system", "regular"],
         "nm_range": [450, 890, 5],
@@ -377,25 +377,25 @@
         1.12816, 1.13752, 1.14195, 1.12574, 1.14946, 1.13265, 1.17224, 1.12637, 1.13412, 1.15489, 1.16516, 1.13524, 1.13512, 1.16729, 1.19448, 1.21084,
         1.15377, 1.12806, 1.17343, 1.21881, 1.14669, 1.14314, 1.14373, 1.16095, 1.09179, 1.0755, 1.13114, 1.16251, 1.21117, 1.13878, 1.20665, 1.0951, 1.047,
         1.00354, 0.9945, 1.01803, 1.14228, 1.05281, 1.18387, 1.09958, 1.16424, 0.91067],
-        "albedo": 0.098, // https://www.lpi.usra.edu/meetings/lpsc2004/pdf/2080.pdf
+        "scale": ["Generic_Bessell.V", 0.098], // https://www.lpi.usra.edu/meetings/lpsc2004/pdf/2080.pdf
     },
     "(25143) Itokawa|Lowry2005": { "tags": ["featured", "solar system", "minor body", "asteroid", "main belt"],
         "nm_range": [325, 1000, 25],
         "br": [0.388, 0.568, 0.676, 0.773, 0.824, 0.856, 0.888, 0.914, 0.964, 1.0, 1.036, 1.058, 1.076, 1.094, 1.122, 1.140, 1.147, 1.144, 1.129, 1.101,
         1.068, 1.029, 1.0, 0.978, 0.975, 0.946, 0.917, 0.935],
-        "albedo": 0.29, // https://academic.oup.com/pasj/article/66/3/52/1438030
+        "scale": ["Generic_Bessell.V", 0.29], // https://academic.oup.com/pasj/article/66/3/52/1438030
     },
     //"(90482) Orcus|Howett2019": {"tags": ["solar system", "minor body", "dwarf planet", "tno", "plutino"],
-    //	"filters": "Hubble", "bands": ["F606W", "F814W", "F110W", "F160W"], "mag": [19.186, 18.62, 20.64, 21.65], "vega": false
+    //	"system": "Hubble", "filters": ["F606W", "F814W", "F110W", "F160W"], "mag": [19.186, 18.62, 20.64, 21.65], "vega": false
     //},
     //"Vanth|Howett2019": {"tags": ["solar system", "minor body", "tno", "plutino", "moon"],
-    //	"filters": "Hubble", "bands": ["F606W", "F814W", "F110W", "F160W"], "mag": [21.73, 20.90, 23.3, 24.0], "vega": false
+    //	"system": "Hubble", "filters": ["F606W", "F814W", "F110W", "F160W"], "mag": [21.73, 20.90, 23.3, 24.0], "vega": false
     //},
     "(90482) Orcus|Howett2019": {"tags": ["solar system", "planet geophysical", "minor body", "dwarf planet", "tno", "plutino"],
-        "filters": "UBVRI", "indices": {"V-I": 0.73}
+        "system": "Generic_Bessell", "indices": {"V-I": 0.73}, "sun": true, "vega": true
     },
     "Vanth|Howett2019": {"tags": ["solar system", "minor body", "tno", "plutino"],
-        "filters": "UBVRI", "indices": {"V-I": 1.03}
+        "system": "Generic_Bessell", "indices": {"V-I": 1.03}, "sun": true, "vega": true
     },
     "(101955) Bennu|LeCorre2019": {"tags": ["featured", "solar system", "minor body", "asteroid", "main belt"],
         "nm": [473.228, 549.146, 697.569, 847.937],
@@ -412,7 +412,7 @@
         670.925, 680.286, 697.907, 729.846, 761.233, 762.885, 773.348, 784.912, 790.419, 795.925, 803.084, 807.489, 812.996, 816.85, 836.674],
         "br": [0.642, 0.695, 0.766, 0.799, 0.832, 0.887, 0.872, 0.902, 1.019, 1.012, 1.031, 1.056, 1.07, 1.121, 1.137, 0.735, 1.156, 1.169, 1.152, 
         1.18, 1.157, 1.172, 1.099, 1.144, 1.118, 0.988, 1.072, 1.062, 1.135, 1.169],
-        "albedo": 0.52
+        "scale": ["Generic_Bessell.V", 0.52]
     },
     "(134340) Pluto|Madden2018": {"tags": ["solar system", "planet geophysical", "minor body", "dwarf planet", "tno", "plutino"],
         "nm": [410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540, 550, 560, 570, 580, 590, 600, 610, 620, 630, 640, 650, 660, 670,
@@ -428,34 +428,31 @@
         712.43, 734.267, 740.426, 747.704, 750.504, 765.062, 779.059, 788.578, 793.617, 809.295, 813.774, 826.652, 841.209, 860.246],
         "br": [0.995, 1.059, 1.084, 1.101, 1.08, 1.104, 1.111, 1.103, 1.121, 1.104, 1.11, 1.097, 1.117, 1.034, 1.121, 1.13, 1.11, 1.073, 1.11, 1.077, 
         1.132, 1.138, 1.087, 1.126, 1.018, 1.079, 0.881, 1.072, 1.13],
-        "albedo": 0.957, // albedo from zelario's sheet
+        "scale": ["Generic_Bessell.V", 0.957], // albedo from zelario's sheet
     },
     "(136472) Makemake|Lorenzi2016": {"tags": ["featured", "solar system", "planet geophysical", "minor body", "dwarf planet", "tno", "classical", "classical-h"],
         "nm": [417.357, 466.069, 588.13, 601.568, 609.406, 631.243, 642.441, 649.72, 656.439, 664.278, 672.116, 679.955, 691.153, 706.271, 715.789,
         723.628, 729.787, 740.426, 744.345, 751.064, 766.181, 782.419, 788.578, 794.737, 809.295, 813.774, 826.652, 841.209, 860.246],
         "br": [0.89, 0.971, 1.106, 1.059, 1.127, 1.133, 1.125, 1.157, 1.137, 1.155, 1.116, 1.139, 1.03, 1.179, 1.182, 1.143, 1.163, 1.088, 1.16, 1.084,
         1.201, 1.201, 1.087, 1.159, 1.018, 1.079, 0.881, 1.072, 1.13],
-        "albedo": 0.83, // albedo from zelario's sheet
+        "scale": ["Generic_Bessell.V", 0.83], // albedo from zelario's sheet
     },
     "(225088) Gonggong|Boehnhardt2014": {"tags": ["featured", "solar system", "planet geophysical", "minor body", "dwarf planet", "tno", "detached"],
-        "filters": "Landolt", "indices": {"B-V": 1.38, "V-R": 0.86, "R-I": 0.79}, "sun": true, "albedo": 0.14
+        "system": "Generic_Bessell", "indices": {"B-V": 1.38, "V-R": 0.86, "R-I": 0.79}, "sun": true, "vega": true, "scale": ["Generic_Bessell.V", 0.14]
     }, // albedo from Kiss et al. 2019
-    //"(486958) Arrokoth|Howett2019": {"tags": ["solar system", "minor body", "tno", "classical", "classical-h"],
-    //	"filters": "Hubble", "indices": {"F606W-F814W": 1.03}, "sun": true
-    //},
     "(486958) Wenu|Howett2019": {"tags": ["featured", "solar system", "minor body", "tno", "classical", "classical-h"],
-        "filters": "New Horizons", "bands": ["blue", "red", "nir"], "br": [0.053, 0.079, 0.117], "sun": true, "albedo": true
+        "system": "NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.053, 0.079, 0.117], "sun": true, "albedo": true
     },
     "(486958) Weeyo|Howett2019": {"tags": ["featured", "solar system", "minor body", "tno", "classical", "classical-h"],
-        "filters": "New Horizons", "bands": ["blue", "red", "nir"], "br": [0.058, 0.084, 0.122], "sun": true, "albedo": true
+        "system": "NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.058, 0.084, 0.122], "sun": true, "albedo": true
     },
     "(486958) Akasa|Howett2019": {"tags": ["featured", "solar system", "minor body", "tno", "classical", "classical-h", "surface feature"],
-        "filters": "New Horizons", "bands": ["blue", "red", "nir"], "br": [0.066, 0.090, 0.125], "sun": true, "albedo": true
+        "system": "NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.066, 0.090, 0.125], "sun": true, "albedo": true
     },
     "1I/ʻOumuamua|Jewitt2017": {"tags": ["featured", "solar system", "extrasolar", "asteroid"],
-        "filters": "UBVRI", "indices": {"B-V": 0.70, "V-R": 0.45}, "sun": true, "albedo": 0.1
+        "system": "Generic_Bessell", "indices": {"B-V": 0.70, "V-R": 0.45}, "sun": true, "vega": true, "scale": ["Generic_Bessell.V", 0.1]
     },
     "1I/ʻOumuamua|Bannister2017": {"tags": ["solar system", "extrasolar", "asteroid"],
-        "filters": "Sloan Vacuum", "indices": {"g-r": 0.47, "r-i": 0.36}, "sun": true, "albedo": 0.07
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.47, "r-i": 0.36}, "sun": true, "vega": true, "scale": ["Generic_Bessell.V", 0.07]
     }
 }

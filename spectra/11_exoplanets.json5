@@ -50,13 +50,13 @@
         "albedo": true
     },
     "HD 189733 b|Berdyugina2010, Berdyugina2011": {"tags": ["extrasolar", "exoplanet", "planet", "planet geophysical"],
-        "filters": "UBVRI", "bands": ["U", "B", "V", "I"], "br": [0.62, 0.61, 0.28, 0], "albedo": true
+        "system": "Generic_Bessell", "filters": ["U", "B", "V", "I"], "br": [0.62, 0.61, 0.28, 0], "albedo": true
     },
     "HD 189733 b|Evans2013, Schwartz2015": {"tags": ["extrasolar", "exoplanet", "planet", "planet geophysical"],
         "nm": [290, 368, 370, 416, 459, 510, 547, 875], "br": [0.45, 0.39, 0.374, 0.32, 0.17, 0.043, 0.02, 0.025], "albedo": true
     },
     "υ Andromedae b|Berdyugina2011": {"tags": ["extrasolar", "exoplanet", "planet", "planet geophysical"],
-        "filters": "UBVRI", "bands": ["U", "B", "V"], "br": [0.53, 0.67, 0.29], "albedo": true
+        "system": "Generic_Bessell", "filters": ["U", "B", "V"], "br": [0.53, 0.67, 0.29], "albedo": true
     },
     "WASP-18 b": {"tags": ["extrasolar", "exoplanet", "planet", "planet geophysical"],
         "nm": [440, 788, 900], "br": [0.075, 0.048, 0.05], "albedo": true

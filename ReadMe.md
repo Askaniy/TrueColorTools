@@ -62,7 +62,12 @@ You can store the file with the spectrum outside of JSON5, and put a link in it.
 
 100 stellar spectra of [CALSPEC database](https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec) (as of August 12, 2023) are stored as FITS files in the [spectra/files/CALSPEC](spectra/files/CALSPEC) folder. If you add spectrum from the database, it is recommended to take the "stis" version and pay attention to the presence of the B−V color index in the table.
 
-TCT will use filter sensitivity profiles for more accurate spectrum restoration. They are provided by [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php) and stored [here](/filters). To replenish the database, select a filter on the site, choose the `ascii` data file and place it in the folder.
+TCT use filter sensitivity profiles for accurate spectrum restoration. They are provided by [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php) and stored [here](/filters). To replenish the database, select a filter on the site, choose the `ascii` data file and place it in the folder. If you see `Detector Type: Photon counter` in the filter description there (instead of `Energy counter` we need) rename the file by putting "-" at the beginning.
+
+Brief help on the UBVRI photometric system implementations:
+- Generic_Johnson takes into account the sensitivity of photomultiplier tubes, mostly affected on R and I bands. Use **only** if the measurements were actually recorded on a PMT.
+- Generic_Cousins contains only R and I bands. Can be used with the U, B, V from Johnson system directly, but the error is expected to be large.
+- Generic_Bessell is actually Johnson—Cousins system for CCD receiver. Recommended by default.
 
 ### Database keys
 Note that any parameters must increase with wavelength.
