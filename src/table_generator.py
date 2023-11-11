@@ -72,7 +72,7 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
     n = 0 # object counter
     for name, raw_name in objects.items():
         object_db = objectsDB[raw_name]
-        albedo = object_db['albedo'] if 'albedo' in objectsDB else False # local albedo flag
+        albedo = ('albedo' in object_db and object_db['albedo']) or 'scale' in object_db
 
         # Spectral data import and processing
         spectrum = core.from_database(name, object_db).to_scope(core.visible_range)

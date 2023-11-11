@@ -209,7 +209,10 @@ class Spectrum:
     @staticmethod
     def from_filter(name: str): # TODO: cache them!
         """ Creates a Spectrum object based on the loaded data in Filter Profile Service standard """
-        return Spectrum.from_array(name, *di.txt_reader(f'filters/{name}.dat'))
+        nm, br = di.txt_reader(f'filters/{name}.dat')
+        if name[0] == '-': # indicator of photon counter
+            br /= nm # multiplying by scaled photon energy E=hc/λ
+        return Spectrum.from_array(name, nm, br)
 
     @staticmethod
     def from_blackbody_redshift(scope: np.ndarray, temperature: int|float, velocity=0., vII=0.):
@@ -378,8 +381,8 @@ class Photometry:
         """ Creates a Spectrum object with inter- and extrapolated photometry data to fit the wavelength scope """
         nm0 = np.array([band.mean_wavelength() for band in self.filters])
         nm1 = grid(nm0[0], nm0[-1], resolution)
-        br = interpolating(nm0, self.br, nm1)
-        nm, br = extrapolating(nm, br, scope, resolution)
+        br = interpolating(nm0, self.br, nm1, resolution)
+        nm, br = extrapolating(nm1, br, scope, resolution)
         return Spectrum(self.name, nm, br, self)
 
     def __pow__(self, other: Spectrum) -> np.ndarray[float]:
@@ -485,10 +488,10 @@ def from_database(name: str, content: dict) -> Spectrum | Photometry:
             print(f'# Note for the database object "{name}"')
             print(f'- No wavelength data. Spectrum stub object was created.')
             return Spectrum(name, *nm_br_stub)
-        if 'sun' in content and content['sun']:
-            result /= sun_norm
         if 'vega' in content and content['vega']:
             result *= vega_norm
+        if 'sun' in content and content['sun']:
+            result /= sun_norm
         return result
 
 

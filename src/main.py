@@ -140,7 +140,7 @@ def launch_window(lang: str):
                 T1_name = values['T1_list'][0]
                 T1_raw_name = di.obj_dict(objectsDB, '_all_', lang)[T1_name]
                 T1_object_db = objectsDB[T1_raw_name]
-                T1_albedo = T1_object_db['albedo'] if 'albedo' in objectsDB else False # local albedo flag
+                T1_albedo = ('albedo' in T1_object_db and T1_object_db['albedo']) or 'scale' in T1_object_db
 
                 # Spectral data import and processing
                 T1_spectrum = core.from_database(T1_name, T1_object_db).to_scope(core.visible_range)
@@ -179,7 +179,7 @@ def launch_window(lang: str):
                 
                 for name, raw_name in di.obj_dict(objectsDB, values['T1_tags'], lang).items():
                     T1_object_db = objectsDB[raw_name]
-                    T1_albedo = T1_object_db['albedo'] if 'albedo' in objectsDB else False # local albedo flag
+                    T1_albedo = ('albedo' in T1_object_db and T1_object_db['albedo']) or 'scale' in T1_object_db
 
                     # Spectral data import and processing
                     T1_spectrum = core.from_database(T1_name, T1_object_db).to_scope(core.visible_range)
