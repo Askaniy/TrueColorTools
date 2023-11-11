@@ -5,7 +5,7 @@ parameters = ["L_ref", "L_mean", "L_eff", "L_min", "L_max", "W_eff", "ZP_V", "ZP
 def get_sets():
     return list(filter_sets.keys())
 
-def get_filters(set_name):
+def Spectrum.from_filters(set_name):
     return list(filter_sets[set_name].keys())
 
 def get_param(set_name, filter_name, param):

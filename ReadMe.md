@@ -70,14 +70,12 @@ Note that any parameters must increase with wavelength.
 - `br` (list): same-size list of "brightness" of an energy counter detector (not photon counter)
 - `mag` (list): same-size list of magnitudes
 - `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
-- `file` (str): path to a text or FITS file in the `spectra` folder
-- `filters` (list): filter system, linked with [`filters.py`](src/filters.py)
-- `indices` (list): dictionary of color indices, use only with `filters`
-- `bands` (list): list of filters' names, use only with `filters`
-- `albedo` (bool or float, optional):
-    - `albedo=true` means that the input brightness is in the [0, 1] range
-    - `albedo=false` means that albedo mode is impossible
-    - `albedo=*float*` means that brightness after converting to spectrum can be scaled to be in the range
-- `sun` (bool, optional): `true` if spectrum must be divided by the Solar to become reflective
-- `vega` (bool, optional): `true` if spectrum must be divided by the Vegan to become reflective
-- `tags` (list, optional): list of strings, categorizes a spectrum
+- `file` (str): path to a text or FITS file, recommended placing in `spectra` or `extras` folder
+- `filters` (list): list of filter names that can be found in the `filters` folder
+- `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': *float*, ...}`
+- `system` (str): a way to bracket the name of the photometric system
+- `albedo` (bool): `true` if brightness in the [0, 1] range represents scaled (reflective) spectrum
+- `scale` (list): sets the (reflectivity) at the wavelength, formatted `[*nm or filter name*, *float*]`
+- `sun` (bool): `true` to remove Sun as emitter
+- `vega` (bool): `true` to untie from the white standard according to Vega
+- `tags` (list): strings, categorizes a spectrum

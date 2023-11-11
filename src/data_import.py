@@ -8,6 +8,38 @@ import numpy as np
 import src.strings as tr
 
 
+# Support of database extension via JSON5 files
+
+def import_DBs(folders: list):
+    """ Returns databases of objects and references were found in the given folders """
+    objectsDB = {}
+    refsDB = {}
+    for folder in folders:
+        additional_data = import_folder(folder)
+        objectsDB |= additional_data[0]
+        refsDB |= additional_data[1]
+    return objectsDB, refsDB
+
+def import_folder(folder: str):
+    """ Returns objects and references were found in the given folder """
+    objects = {}
+    refs = {}
+    files = sorted(Path(folder).glob('**/*.json5'))
+    for file in files:
+        with open(file, 'rt', encoding='UTF-8') as f:
+            try:
+                content = json5load(f)
+                for key, value in content.items():
+                    if type(value) == list:
+                        refs |= {key: value}
+                    else:
+                        objects |= {key: value}
+            except ValueError:
+                print(f'Error in JSON5 syntax of file "{file.name}", its upload was cancelled.')
+                print(f'More precisely, {format_exc(limit=0)}')
+    return objects, refs
+
+
 # FITS spectrum reader
 
 # Units of spectral flux density by wavelength and frequency
@@ -95,38 +127,6 @@ def list_filters():
     """ Returns list of file names were found in the filters folder """
     files = sorted(Path('filters').glob('*.dat'))
     return tuple(file.stem for file in files)
-
-
-# Support of database extension via JSON5 files
-
-def import_DBs(folders: list):
-    """ Returns databases of objects and references were found in the given folders """
-    objectsDB = {}
-    refsDB = {}
-    for folder in folders:
-        additional_data = import_folder(folder)
-        objectsDB |= additional_data[0]
-        refsDB |= additional_data[1]
-    return objectsDB, refsDB
-
-def import_folder(folder: str):
-    """ Returns objects and references were found in the given folder """
-    objects = {}
-    refs = {}
-    files = sorted(Path(folder).glob('**/*.json5'))
-    for file in files:
-        with open(file, 'rt', encoding='UTF-8') as f:
-            try:
-                content = json5load(f)
-                for key, value in content.items():
-                    if type(value) == list:
-                        refs |= {key: value}
-                    else:
-                        objects |= {key: value}
-            except ValueError:
-                print(f'Error in JSON5 syntax of file "{file.name}", its upload was cancelled.')
-                print(f'More precisely, {format_exc(limit=0)}')
-    return objects, refs
 
 
 # Front-end view on spectra database

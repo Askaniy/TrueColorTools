@@ -43,112 +43,6 @@ def mag2irradiance(m: int|float|np.ndarray, vega_zero_point: float):
 
 
 
-class Photometry:
-    def __init__(self, name: str, dictionary: dict):
-        """
-        Constructor of the class to work with photometric parameters, imported from the database.
-
-        Supported input dictionary keys:
-        - `nm` (list): list of wavelengths in nanometers
-        - `br` (list): same-size list of "brightness" of an energy counter detector (not photon counter)
-        - `mag` (list): same-size list of magnitudes
-        - `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
-        - `file` (str): path to a FITS file in the `spectra` folder
-        - `filters` (list): filter system, linked with [`filters.py`](src/filters.py)
-        - `indices` (list): dictionary of color indices, use only with `filters`
-        - `bands` (list): list of filters' names, use only with `filters`
-        - `albedo` (bool or float, optional):
-            - `albedo=True` means that the input brightness is in the [0, 1] range
-            - `albedo=False` means that albedo mode is impossible
-            - `albedo=`*float* means that brightness after converting to spectrum can be scaled to be in the range
-        - `sun` (bool, optional): `True` if spectrum must be divided by the Solar to become reflective
-        - `vega` (bool, optional): `True` if spectrum must be divided by the Vegan to become reflective
-        - `tags` (list, optional): list of strings, categorizes a spectrum
-        """
-        self.name = name
-        self.file = ''
-        self.nm = np.array([])
-        self.br = np.array([])
-        self.sun = False
-        self.vega = False
-        self.albedo = False
-        try:
-            self.nm = np.array(dictionary['nm'])
-        except KeyError:
-            pass
-        try:
-            self.br = np.array(dictionary['br'])
-        except KeyError:
-            pass
-        try:
-            self.sun = dictionary['sun']
-        except KeyError:
-            pass
-        try:
-            self.vega = dictionary['vega']
-        except KeyError:
-            pass
-        try:
-            self.albedo = dictionary['albedo']
-        except KeyError:
-            pass
-        try:
-            start, stop, step = dictionary['nm_range']
-            self.nm = np.arange(start, stop+1, step)
-        except KeyError:
-            pass
-        except ValueError:
-            print(f'# Note for the Photometry object "{self.name}"')
-            print(f'- Wavelength range issues during object initialization: [start, end, step]={dictionary["nm_range"]}')
-        try:
-            self.file = dictionary['file']
-        except KeyError:
-            pass
-        try: # TODO: this code needs reworking!
-            filters = dictionary['filters']
-            if 'bands' in dictionary: # replacement of filters for their wavelengths
-                nm = []
-                for band in dictionary['bands']:
-                    for filter, info in legacy_filters[filters].items():
-                        if filter == band.lower():
-                            nm.append(info['nm'])
-                self.nm = np.array(nm)
-            elif 'indices' in dictionary: # spectrum from color indices
-                result = {}
-                for index, value in dictionary['indices'].items():
-                    band1, band2 = index.lower().split('-')
-                    if result == {}:
-                        result |= {band1: 1.0}
-                    if band1 in result:
-                        k = legacy_filters[filters][band1]['zp'] - legacy_filters[filters][band2]['zp']
-                        result |= {band2: result[band1] * 10**(0.4*(value + k))}
-                nm = []
-                br = []
-                for band, value in result.items():
-                    nm.append(legacy_filters[filters][band]['nm'])
-                    br.append(value / (legacy_filters[filters][band]['nm']/1e9)**2)
-                self.nm = np.array(nm)
-                self.br = np.array(br)
-        except KeyError:
-            pass
-        try: # spectrum from magnitudes
-            self.br = 10**(-0.4*np.array(dictionary['mag']))
-        except KeyError:
-            pass
-        if self.file == '': # file reading parsed in the Spectrum class. TODO: move magnitudes there too
-            if 0 in (self.nm.size, self.br.size):
-                print(f'# Note for the Photometry object "{self.name}"')
-                print(f'- No wavelengths or brightness data: nm={self.nm}, br={self.br}')
-                self.nm, self.br = nm_br_stub
-            elif self.nm.size != self.br.size:
-                print(f'# Note for the Photometry object "{self.name}"')
-                print(f'- The sizes of the wavelengths ({self.nm.size}) and brightness ({self.br.size}) arrays do not match.')
-                min_size = min(self.nm.size, self.br.size)
-                self.nm = self.nm[:min_size]
-                self.br = self.br[:min_size]
-                print('- The larger array is reduced to a smaller one.')
-
-
 
 def is_smooth(br: Iterable):
     """ Boolean function, checks the second derivative for sign reversal, a simple criterion for smoothness """
@@ -186,7 +80,7 @@ def custom_interp(xy0: np.ndarray, k=16):
     xy1[1,1::2] += (delta_left - delta_right) / k
     return xy1
 
-def interpolating(x0: np.ndarray, y0: np.ndarray, x1: np.ndarray, step: int|float):
+def interpolating(x0: np.ndarray, y0: np.ndarray, x1: np.ndarray, step: int|float) -> np.ndarray:
     """
     Returns interpolated brightness values on uniform grid.
     Combination of custom_interp (which returns an uneven mesh) and linear interpolation after it.
@@ -255,7 +149,7 @@ def grid(start: int|float, end: int|float, res: int):
 
 
 class Spectrum:
-    def __init__(self, name: str, nm: Iterable, br: Iterable):
+    def __init__(self, name: str, nm: Iterable, br: Iterable, photometry=None):
         """
         Constructor of the class to work with single, continuous spectrum, with strictly defined resolution step of 5 nm.
         It is assumed that the input grid can be trusted. If preprocessing is needed, see `Spectrum.from_array`.
@@ -264,10 +158,12 @@ class Spectrum:
         - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
         - `nm` (Iterable): list of wavelengths in nanometers with resolution step of 5 nm
         - `br` (Iterable): same-size list of "brightness" of an energy counter detector (not photon counter)
+        - `photometry` (Photometry, optional): way to store original information, for example, to plot it
         """
         self.name = name
         self.nm = np.array(nm, dtype='uint16')
         self.br = np.array(br, dtype='float')
+        self.photometry = photometry
         if np.any(np.isnan(self.br)):
             self.br = np.nan_to_num(self.br)
             print(f'# Note for the Spectrum object "{self.name}"')
@@ -275,7 +171,7 @@ class Spectrum:
         # There are no checks for negativity, since such spectra exist, for example, red CMF.
 
     @staticmethod
-    def from_array(name: str, nm: Iterable, br: Iterable, scope: np.ndarray = None):
+    def from_array(name: str, nm: Iterable, br: Iterable):
         """
         Creates a Spectrum object from wavelength array with a check for uniformity and possible extrapolation.
 
@@ -299,8 +195,6 @@ class Spectrum:
                 else: # decreasing resolution if step less than 5 nm
                     br = averaging(nm, br, uniform_nm, resolution)
                 nm = uniform_nm
-            if isinstance(scope, np.ndarray):
-                nm, br = extrapolating(nm, br, scope, resolution)
             if br.min() < 0:
                 br = np.clip(br, 0, None)
                 print(f'# Note for the Spectrum object "{name}"')
@@ -313,26 +207,7 @@ class Spectrum:
         return Spectrum(name, nm, br)
     
     @staticmethod
-    def from_photometry(data: Photometry, scope: np.ndarray):
-        """ Creates a Spectrum object with inter- and extrapolated photometry data to fit the wavelength scope """
-        if data.file != '':
-            try:
-                if data.file.split('.')[-1].lower() in ('fits', 'fit'):
-                    nm, br = di.fits_reader(data.file)
-                else:
-                    nm, br = di.txt_reader(data.file)
-            except Exception:
-                nm, br = nm_br_stub
-                print(f'# Note for the Spectrum object "{data.name}"')
-                print(f'- Something unexpected happened during external file reading. The data was replaced by a stub.')
-                print(f'- More precisely, {format_exc(limit=0)}')
-        else:
-            # TODO: move here complex photometry processing?
-            nm, br = data.nm, data.br
-        return Spectrum.from_array(data.name, nm, br, scope)
-
-    @staticmethod
-    def from_filter(name: str):
+    def from_filter(name: str): # TODO: cache them!
         """ Creates a Spectrum object based on the loaded data in Filter Profile Service standard """
         return Spectrum.from_array(name, *di.txt_reader(f'filters/{name}.dat'))
 
@@ -362,46 +237,61 @@ class Spectrum:
         else:
             br = np.zeros(scope.size)
         return Spectrum(f'BB with T={round(temperature)}', scope, br)
+    
+    def to_scope(self, scope: np.ndarray):
+        """ Guarantees spectrum continuity over the entire requested range """
+        self.nm, self.br = extrapolating(self.nm, self.br, scope, resolution)
+        return self
+
+    def __pow__(self, other) -> float:
+        """ Implementation of convolution between emission spectrum and transmission spectrum """
+        return (self * other).integrate()
 
     def __mul__(self, other):
-        """ Implementation of convolution between emission spectrum and transmission spectrum """
-        name = f'{self.name} * {other.name}'
-        start = max(self.nm[0], other.nm[0])
-        end = min(self.nm[-1], other.nm[-1])
-        if start >= end:
-            print(f'# Note for convolution "{name}"')
-            print('- Zero will be returned since there is no intersection between the spectra.')
-            the_first = self.name
-            the_second = other.name
-            if self.nm[0] > other.nm[0]:
-                the_first, the_second = the_second, the_first
-            print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
-            return 0.
-        else:
-            nm = np.arange(start, end+1, resolution, dtype='uint16')
-            br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
-            br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
-            return Spectrum(name, nm, br0*br1).integrate()
+        """ Returns a new Photometry object with the emitter added (untied from a white standard spectrum) """
+        if isinstance(other, Spectrum):
+            name = f'{self.name} * {other.name}'
+            start = max(self.nm[0], other.nm[0])
+            end = min(self.nm[-1], other.nm[-1])
+            if start >= end:
+                print(f'# Note for spectral multiplication "{name}"')
+                print('- There is no intersection between the spectra, nothing changed.')
+                the_first = self.name
+                the_second = other.name
+                if self.nm[0] > other.nm[0]:
+                    the_first, the_second = the_second, the_first
+                print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
+                return self
+            else:
+                nm = np.arange(start, end+1, resolution, dtype='uint16')
+                br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
+                br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
+                return Spectrum(name, nm, br0 * br1)
+        else: # assuming number
+            return Spectrum(self.name, self.nm, self.br * other)
 
     def __truediv__(self, other):
-        """ Returns a new Spectrum object with the emitter removed, i.e. the reflection spectrum """
-        name = f'{self.name} / {other.name}'
-        start = max(self.nm[0], other.nm[0])
-        end = min(self.nm[-1], other.nm[-1])
-        if start >= end:
-            print(f'# Note for spectral division "{name}"')
-            print('- There is no intersection between the spectra, nothing changed.')
-            the_first = self.name
-            the_second = other.name
-            if self.nm[0] > other.nm[0]:
-                the_first, the_second = the_second, the_first
-            print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
-            return self
-        else:
-            nm = np.arange(start, end+1, resolution, dtype='uint16')
-            br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
-            br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
-            return Spectrum(name, nm, br0 / br1)
+        """ Returns a new Spectrum object with the emitter removed (apply a white standard spectrum) """
+        if isinstance(other, Spectrum):
+            name = f'{self.name} / {other.name}'
+            start = max(self.nm[0], other.nm[0])
+            end = min(self.nm[-1], other.nm[-1])
+            if start >= end:
+                print(f'# Note for spectral division "{name}"')
+                print('- There is no intersection between the spectra, nothing changed.')
+                the_first = self.name
+                the_second = other.name
+                if self.nm[0] > other.nm[0]:
+                    the_first, the_second = the_second, the_first
+                print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
+                return self
+            else:
+                nm = np.arange(start, end+1, resolution, dtype='uint16')
+                br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
+                br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
+                return Spectrum(name, nm, br0 / br1)
+        else: # assuming number
+            return Spectrum(self.name, self.nm, self.br / other)
 
     def integrate(self) -> float:
         """ Calculates the area over the spectrum using the mean rectangle method, per nm """
@@ -411,7 +301,7 @@ class Spectrum:
         """ Returns a new Spectrum object with brightness scaled to its area be equal 1 """
         return Spectrum(self.name, self.nm, self.br / self.integrate())
 
-    def normalized_on_wavelength(self, request: int):
+    def normalized_on_wavelength(self, request: int|float):
         """ Returns a new Spectrum object with brightness scaled to be equal 1 at the specified wavelength """
         if request not in self.nm:
             print(f'# Note for the Spectrum object "{self.name}"')
@@ -422,13 +312,20 @@ class Spectrum:
 
     def scaled_to_albedo(self, albedo: float, transmission):
         """ Returns a new Spectrum object with brightness scaled to give the albedo after convolution with the filter """
-        current_albedo = self * transmission.normalized_by_area()
+        current_albedo = self ** transmission.normalized_by_area()
         if current_albedo == 0:
             print(f'# Note for the Spectrum object "{self.name}"')
             print(f'- The spectrum cannot be scaled to an albedo of {albedo} because its current albedo is zero, nothing changed.')
             return self
         else:
             return Spectrum(self.name, self.nm, self.br * albedo / current_albedo)
+    
+    def scaled(self, where, how):
+        """ Returns a new Spectrum object to fit the request of wavelength zone and brightness there """
+        if isinstance(where, str):
+            return self.scaled_to_albedo(how, Spectrum.from_filter(where))
+        else: # assuming number
+            return self.normalized_on_wavelength(where) * how
 
     def mean_wavelength(self) -> float:
         return np.average(self.nm, weights=self.br)
@@ -439,13 +336,160 @@ bessell_V = Spectrum.from_filter('Generic_Bessell.V')
 bessell_V_norm = bessell_V.normalized_by_area() # used as an averager for the reference spectra
 
 sun_SI = Spectrum.from_array('Sun', *di.fits_reader('spectra/files/CALSPEC/sun_reference_stis_002.fits')) # W / (m² nm)
-sun_in_V = sun_SI * bessell_V_norm
+sun_in_V = sun_SI ** bessell_V_norm
 sun_norm = sun_SI.scaled_to_albedo(1, bessell_V)
 
 vega_SI = Spectrum.from_array('Vega', *di.fits_reader('spectra/files/CALSPEC/alpha_lyr_stis_011.fits')) # W / (m² nm)
-vega_in_V = vega_SI * bessell_V_norm
+vega_in_V = vega_SI ** bessell_V_norm
 vega_norm = vega_SI.scaled_to_albedo(1, bessell_V)
 
+
+class Photometry:
+    def __init__(self, name: str, filters: Iterable[Spectrum], br: Iterable):
+        """
+        Constructor of the class to work with set of filters measurements.
+
+        Args:
+        - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
+        - `filters` (Iterable): list of energy response functions, storing as Spectrum objects (see `filters` folder)
+        - `br` (Iterable): same-size list of intensity
+        """
+        self.name = name
+        self.filters = tuple(filters)
+        self.br = np.array(br, dtype='float')
+        if np.any(np.isnan(self.br)):
+            self.br = np.nan_to_num(self.br)
+            print(f'# Note for the Photometry object "{self.name}"')
+            print(f'- NaN values detected during object initialization, they been replaced with zeros.')
+    
+    @staticmethod
+    def from_list(name: str, filters: Iterable[str], br: Iterable):
+        """
+        Creates a Photometry object from a list of filter's names. Files with such names must be in the `filters` folder.
+
+        Args:
+        - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
+        - `filters` (Iterable): list of file names in the `filters` folder
+        - `br` (Iterable): same-size list of intensity
+        """
+        return Photometry(name, [Spectrum.from_filter(band) for band in filters], br)
+    
+    def to_scope(self, scope: np.ndarray): # TODO: use optimization algorithm!
+        """ Creates a Spectrum object with inter- and extrapolated photometry data to fit the wavelength scope """
+        nm0 = np.array([band.mean_wavelength() for band in self.filters])
+        nm1 = grid(nm0[0], nm0[-1], resolution)
+        br = interpolating(nm0, self.br, nm1)
+        nm, br = extrapolating(nm, br, scope, resolution)
+        return Spectrum(self.name, nm, br, self)
+
+    def __pow__(self, other: Spectrum) -> np.ndarray[float]:
+        """ Convolve all the filters with a spectrum, assuming equal output for a flat spectrum """
+        return np.array([other ** band.normalized_by_area() for band in self.filters])
+
+    def __mul__(self, other: Spectrum):
+        """ Returns a new Photometry object with the emitter added (untied from a white standard spectrum) """
+        return Photometry(f'{self.name} + {other.name}', self.filters, self.br * (self ** other))
+
+    def __truediv__(self, other: Spectrum):
+        """ Returns a new Photometry object with the emitter removed (apply a white standard spectrum) """
+        return Photometry(f'{self.name} - {other.name}', self.filters, self.br / (self ** other))
+
+
+
+def mag2vega(mag: int|float|np.ndarray):
+    return 10**(-0.4 * mag) # linear brightness in Vegas
+
+def color_indices_parsing(indices: dict):
+    """ Converts color indices to linear brightness, assuming 1 Vega intensity in the first filter """
+    # Names parsing
+    keys = tuple(indices.keys())
+    filters = [keys[0].split('-')[0]]
+    for key in keys:
+        filters.append(key.split('-')[-1])
+    # Magnitudes parsing
+    values = np.array(tuple(indices.values()))
+    return filters, np.append(1., mag2vega(np.cumsum(-values)))
+
+def from_database(name: str, content: dict) -> Spectrum | Photometry:
+    """
+    Depending on the contents of the object read from the database, returns a class that has `to_scope()` method
+
+    Supported input keys of database unit:
+    - `nm` (list): list of wavelengths in nanometers
+    - `br` (list): same-size list of "brightness" of an energy counter detector (not photon counter)
+    - `mag` (list): same-size list of magnitudes
+    - `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
+    - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `extras` folder
+    - `filters` (list): list of filter names that can be found in the `filters` folder
+    - `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': *float*, ...}`
+    - `system` (str): a way to bracket the name of the photometric system
+    - `albedo` (bool): `true` if brightness in the [0, 1] range represents scaled (reflective) spectrum
+    - `scale` (list): sets the (reflectivity) at the wavelength, formatted `[*nm or filter name*, *float*]`
+    - `sun` (bool): `true` to remove Sun as emitter
+    - `vega` (bool): `true` to untie from the white standard according to Vega
+    - `tags` (list): strings, categorizes a spectrum
+    """
+    br = []
+    nm = [] # Spectrum object indicator
+    filters = [] # Photometry object indicator
+    if 'file' in content:
+        try:
+            if content['file'].split('.')[-1].lower() in ('fits', 'fit'):
+                nm, br = di.fits_reader(content['file'])
+            else:
+                nm, br = di.txt_reader(content['file'])
+        except Exception:
+            nm, br = nm_br_stub
+            print(f'# Note for the Spectrum object "{name}"')
+            print(f'- Something unexpected happened during external file reading. The data was replaced by a stub.')
+            print(f'- More precisely, {format_exc(limit=0)}')
+    else:
+        # brightness reading
+        if 'br' in content:
+            br = content['br']
+        elif 'mag' in content:
+            br = mag2vega(np.array(content['mag']))
+        # spectrum reading
+        if 'nm' in content:
+            nm = content['nm']
+        elif 'nm_range' in content:
+            start, stop, step = content['nm_range']
+            nm = np.arange(start, stop+1, step)
+        # photometry reading
+        elif 'filters' in content:
+            filters = content['filters']
+        elif 'indices' in content:
+            filters, br = color_indices_parsing(content['indices'])
+    if (len_br := len(br)) == 0:
+        print(f'# Note for the database object "{name}"')
+        print(f'- No brightness data. Spectrum stub object was created.')
+        return Spectrum(name, *nm_br_stub)
+    else:
+        if (len_nm := len(nm)) > 0:
+            if len_nm != len_br:
+                print(f'# Note for the database object "{name}"')
+                print(f'- Arrays of wavelengths and brightness do not match ({len_nm} vs {len_br}). Spectrum stub object was created.')
+                result = Spectrum(name, *nm_br_stub)
+            else:
+                result = Spectrum.from_array(name, nm, br)
+        elif (len_filters := len(filters)) > 0:
+            if len_filters != len_br:
+                print(f'# Note for the database object "{name}"')
+                print(f'- Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br}). Spectrum stub object was created.')
+                result = Spectrum(name, *nm_br_stub)
+            else:
+                if 'system' in content:
+                    filters = [content['system'] + '.' + short_name for short_name in filters]
+                result = Photometry.from_list(name, filters, br)
+        else:
+            print(f'# Note for the database object "{name}"')
+            print(f'- No wavelength data. Spectrum stub object was created.')
+            return Spectrum(name, *nm_br_stub)
+        if 'sun' in content and content['sun']:
+            result /= sun_norm
+        if 'vega' in content and content['vega']:
+            result *= vega_norm
+        return result
 
 
 def xy2xyz(xy):
@@ -530,13 +574,13 @@ class Color:
     @staticmethod
     def from_spectrum_legacy(spectrum: Spectrum, albedo=False):
         """ A simple and concrete color processing method based on experimental eye sensitivity curves """
-        rgb = [spectrum * i for i in (r, g, b)] # convolution
+        rgb = [spectrum ** i for i in (r, g, b)]
         return Color(spectrum.name, rgb, albedo)
 
     @staticmethod
     def from_spectrum(spectrum: Spectrum, albedo=False, color_system=srgb):
         """ Conventional color processing method: spectrum -> CIE XYZ -> sRGB with illuminant E """
-        xyz = [spectrum * i for i in (x, y, z)] # convolution
+        xyz = [spectrum ** i for i in (x, y, z)]
         rgb = color_system.T.dot(xyz)
         if np.any(rgb < 0):
             print(f'# Note for the Color object "{spectrum.name}"')

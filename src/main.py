@@ -139,21 +139,19 @@ def launch_window(lang: str):
             if (event in triggers or event == 'T1_list') and values['T1_list'] != []:
                 T1_name = values['T1_list'][0]
                 T1_raw_name = di.obj_dict(objectsDB, '_all_', lang)[T1_name]
+                T1_object_db = objectsDB[T1_raw_name]
+                T1_albedo = T1_object_db['albedo'] if 'albedo' in objectsDB else False # local albedo flag
 
                 # Spectral data import and processing
-                T1_photometry = core.Photometry(T1_name, objectsDB[T1_raw_name])
-                T1_spectrum = core.Spectrum.from_photometry(T1_photometry, core.visible_range)
-                if T1_photometry.sun:
-                    T1_spectrum /= core.sun_norm
-                if albedoFlag:
-                    if isinstance(T1_photometry.albedo, float):
-                        T1_spectrum = T1_spectrum.scaled_to_albedo(T1_photometry.albedo, core.bessell_V)
+                T1_spectrum = core.from_database(T1_name, T1_object_db).to_scope(core.visible_range)
+                if albedoFlag and 'scale' in T1_object_db:
+                    T1_spectrum = T1_spectrum.scaled(*T1_object_db['scale'])
                 
                 # Color calculation
                 if values['-srgb-']:
-                    T1_color = core.Color.from_spectrum(T1_spectrum, albedoFlag and T1_photometry.albedo)
+                    T1_color = core.Color.from_spectrum(T1_spectrum, albedoFlag and T1_albedo)
                 else:
-                    T1_color = core.Color.from_spectrum_legacy(T1_spectrum, albedoFlag and T1_photometry.albedo)
+                    T1_color = core.Color.from_spectrum_legacy(T1_spectrum, albedoFlag and T1_albedo)
                 if values['-gamma-']:
                     T1_color = T1_color.gamma_corrected()
                 T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
@@ -171,7 +169,7 @@ def launch_window(lang: str):
                 plot_data.append(T1_spectrum)
             
             elif event == 'T1_plot':
-                pl.plot_spectra(plot_data, values['-gamma-'], values['-srgb-'], albedoFlag and T1_photometry.albedo, lang)
+                pl.plot_spectra(plot_data, values['-gamma-'], values['-srgb-'], albedoFlag and T1_albedo, lang)
             
             elif event == 'T1_clear':
                 plot_data = []
@@ -180,21 +178,19 @@ def launch_window(lang: str):
                 T1_export = '\n' + '\t'.join(tr.gui_col[lang]) + '\n' + '_' * 36
                 
                 for name, raw_name in di.obj_dict(objectsDB, values['T1_tags'], lang).items():
+                    T1_object_db = objectsDB[raw_name]
+                    T1_albedo = T1_object_db['albedo'] if 'albedo' in objectsDB else False # local albedo flag
 
                     # Spectral data import and processing
-                    T1_photometry = core.Photometry(name, objectsDB[raw_name])
-                    T1_spectrum = core.Spectrum.from_photometry(T1_photometry, core.visible_range)
-                    if T1_photometry.sun:
-                        T1_spectrum /= core.sun_norm
-                    if albedoFlag:
-                        if isinstance(T1_photometry.albedo, float):
-                            T1_spectrum = T1_spectrum.scaled_to_albedo(T1_photometry.albedo, core.bessell_V)
+                    T1_spectrum = core.from_database(T1_name, T1_object_db).to_scope(core.visible_range)
+                    if albedoFlag and 'scale' in T1_object_db:
+                        T1_spectrum = T1_spectrum.scaled(*T1_object_db['scale'])
                     
                     # Color calculation
                     if values['-srgb-']:
-                        T1_color = core.Color.from_spectrum(T1_spectrum, albedoFlag and T1_photometry.albedo)
+                        T1_color = core.Color.from_spectrum(T1_spectrum, albedoFlag and T1_albedo)
                     else:
-                        T1_color = core.Color.from_spectrum_legacy(T1_spectrum, albedoFlag and T1_photometry.albedo)
+                        T1_color = core.Color.from_spectrum_legacy(T1_spectrum, albedoFlag and T1_albedo)
                     if values['-gamma-']:
                         T1_color = T1_color.gamma_corrected()
                     T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
@@ -229,7 +225,7 @@ def launch_window(lang: str):
 
             elif event == 'T2_filter':
                 for i in range(T2_num):
-                    window['T2_filter'+str(i)].update(values=filters.get_filters(values['T2_filter']))
+                    window['T2_filter'+str(i)].update(values=filters.Spectrum.from_filters(values['T2_filter']))
 
             elif event in ['T2_filter'+str(i) for i in range(T2_num)]:
                 i = event[-1]

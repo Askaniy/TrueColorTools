@@ -71,21 +71,19 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
 
     n = 0 # object counter
     for name, raw_name in objects.items():
+        object_db = objectsDB[raw_name]
+        albedo = object_db['albedo'] if 'albedo' in objectsDB else False # local albedo flag
 
         # Spectral data import and processing
-        photometry = core.Photometry(name, objectsDB[raw_name])
-        spectrum = core.Spectrum.from_photometry(photometry, core.visible_range)
-        if photometry.sun:
-            spectrum /= core.sun_norm
-        if albedoFlag:
-            if isinstance(photometry.albedo, float):
-                spectrum = spectrum.scaled_to_albedo(photometry.albedo, core.bessell_V)
+        spectrum = core.from_database(name, object_db).to_scope(core.visible_range)
+        if albedoFlag and 'scale' in object_db:
+            spectrum = spectrum.scaled(*object_db['scale'])
         
         # Color calculation
         if srgb:
-            color = core.Color.from_spectrum(spectrum, albedoFlag and photometry.albedo)
+            color = core.Color.from_spectrum(spectrum, albedoFlag and albedo)
         else:
-            color = core.Color.from_spectrum_legacy(spectrum, albedoFlag and photometry.albedo)
+            color = core.Color.from_spectrum_legacy(spectrum, albedoFlag and albedo)
         if gamma:
             color = color.gamma_corrected()
         rgb = color.to_bit(8)
