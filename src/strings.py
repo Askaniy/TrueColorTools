@@ -231,9 +231,9 @@ lang_list = {
     'de': ['Englisch', 'Russisch']
 }
 gui_tabs = {
-    'en': ['Spectra', 'Images', 'Table', 'Blackbody & Redshifts'],
-    'ru': ['Спектры', 'Изображения', 'Таблица', 'АЧТ и красные смещения'],
-    'de': ['Spektren', 'Bilder', 'Vergleich', 'Schwarzkörper & Rotverschiebung']
+    'en': ['Database viewer', 'Multiband processing', '', 'Blackbody & Redshifts'],
+    'ru': ['Просмотр базы спектров', 'Многоканальная обработка', '', 'АЧТ и красные смещения'],
+    'de': ['Datenbank-Viewer', 'Multiband-Verarbeitung', '', 'Schwarzkörper & Rotverschiebung']
 }
 gui_menu = {
     'en': [['File', [ref['en'], note['en'], gui_info['en'], gui_exit['en']]], ['Language', lang_list['en']]],
@@ -329,10 +329,15 @@ gui_clear = {
     'ru': 'Очистить график',
     'de': 'Klare Handlung'
 }
-gui_export = {
-    'en': 'Export category colors',
-    'ru': 'Экспортировать все цвета',
-    'de': 'Farben der Kategorie exp.'
+gui_export2text = {
+    'en': 'Export category to text',
+    'ru': 'Экспортировать в текст',
+    'de': 'Kategorie in Text exportieren'
+}
+gui_export2table = {
+    'en': 'Export category to table',
+    'ru': 'Экспортировать в таблицу',
+    'de': 'Kategorie in Tabelle exportieren'
 }
 gui_save = {
     'en': 'Save',

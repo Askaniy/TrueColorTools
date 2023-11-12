@@ -3,6 +3,8 @@ Astronomy-focused set of Python tools with GUI that use spectra construction and
 
 Input data is accepted in the form of channel measurements, color indices, or magnitudes. Customizable output in floating point or hexadecimal formats. Multiband image processing and blackbody/redshifts colors calculating are also supported.
 
+**Note**: images processing is temporarily not works. Go to the commit #13cd296 for something stable.
+
 ![TCT screenshot](screenshot.png)
 
 
@@ -37,18 +39,16 @@ The key processing method is converting a photometry data into a continuous spec
 ## How to use?
 GUI is the only way to interact with True Color Tools. When running it from the command line, you can set the startup language and CLI verbosity level (run with `--help` for details). No internet connection is required, the databases are stored in the appropriate folders of the repository, and you can replenish them.
 
-Program interface is functionally divided into tabs: *Spectra*, *Images*, *Table* and *Blackbody & Redshifts*. Color output formatting, often common to tabs, is located in the sidebar settings.
+Program interface is functionally divided into tabs: *Database viewer*, *Multiband processing* and *Blackbody & Redshifts*. Color output formatting, often common to tabs, is located in the sidebar settings.
 
-**Spectra tab** provides access to the spectra database and allows you to calculate a color with the selected settings just by clicking on an object. It is possible to plot one or several spectra from the database in a pop-up window.
+**Database viewer** provides access to the spectra database and allows you to calculate a color with the selected settings just by clicking on an object. It is possible to plot one or several spectra from the database in a pop-up window. You can process the colors of an entire category at once, and get the output in the text form or a graphic table ([examples](tables/)).
 
-**Images tab** allows you to load one color or several monochrome images, specify wavelengths, and save a processed image, for each pixel of which a spectrum was built. It takes a long time, so you can check out the preview. The wavelength values can be set by the choice of spacecraft filters, and they should always increase.
-
-**Table tab** generates an image of all the colors of the selected category. You can see examples [here](tables/).
+**Multiband processing** allows you to directly access photometry calculations. Single measurements or set of images in different filters, or spectral cubes are accepted as input. For each pixel of an image, its spectrum is restored and converted into color.
 
 **Blackbody & Redshifts tab** calculates the influence of physical phenomena on color. Based on the blackbody spectrum, the program displays the changes in color and brightness from Doppler and gravitational redshifts. You can lock the exposure on the apparent magnitude logarithmic scale, adjusting the overexposure limit for a tuned blackbody object if it was in the sky replacing the Sun (with the angular size).
 
 ### Features
-- Tag system: Each object in the database can be assigned an arbitrary set of tags. They form lists of categories in the *Spectra* and *Table* tabs, which makes it easier to work with a huge database.
+- Tag system: Each object in the database can be assigned an arbitrary set of tags. They form lists of categories for the *Database viewer* tab, which makes it easier to work with a huge database.
 - Reference system: Each object in the database can be easily linked to one or several data sources by its short name. You can see the list in `File`→`Sources`. Also, after an object's name there can be abbreviations, the decoding of which is indicated in `File`→`Notes`.
 - Multilingual support: The language can be changed through the top menu in runtime. TCT supports English, German and Russian. If you want to add support for your language, you can do it by analogy in [`strings.py`](src/strings.py) and make a commit or contact me.
 

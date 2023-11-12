@@ -37,7 +37,7 @@ def launch_window(lang: str):
     # Launching window
     sg.ChangeLookAndFeel('MaterialDark')
     window = sg.Window(
-        'True Color Tools', finalize=True, resizable=True, margins=(0, 0), size=(900, 600),
+        'True Color Tools', finalize=True, resizable=True, margins=(0, 0), size=(900, 640),
         layout=gui.generate_layout(
             (2*circle_r+1, 2*circle_r+1), img_preview_size, text_colors, filtersDB, albedoFlag, bitness, rounding, T2_num, T5_num, lang
             )
@@ -119,18 +119,14 @@ def launch_window(lang: str):
         elif event == tr.gui_info[lang]:
             sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event)
         
-        elif event.endswith('database'): # global loading of spectra database
+        elif event == 'T1_database': # global loading of spectra database, was needed for separate Table tab
             objectsDB, refsDB = di.import_DBs(['extras', 'spectra'])
             tagsDB = di.tag_list(objectsDB)
             window['T1_tagsN'].update(visible=True)
             window['T1_tags'].update(default_tag, values=tagsDB, visible=True)
-            window['T3_tagsN'].update(text_color=text_colors[1])
-            window['T3_tags'].update(default_tag, values=tagsDB, disabled=False)
             window['T1_list'].update(values=tuple(di.obj_dict(objectsDB, default_tag, lang).keys()), visible=True)
-            window['T1_database'].metadata=True
             window['T1_database'].update(tr.gui_update[lang])
-            window['T3_database'].metadata=True
-            window['T3_database'].update(tr.gui_update[lang])
+            window['T1_database'].metadata=True # switcher from "Load" to "Update"
 
         # ------------ Events in the tab "Spectra" ------------
 
@@ -174,7 +170,7 @@ def launch_window(lang: str):
             elif event == 'T1_clear':
                 plot_data = []
             
-            elif event == 'T1_export':
+            elif event == 'T1_export2text':
                 T1_export = '\n' + '\t'.join(tr.gui_col[lang]) + '\n' + '_' * 36
                 
                 for name, raw_name in di.obj_dict(objectsDB, values['T1_tags'], lang).items():
@@ -182,7 +178,7 @@ def launch_window(lang: str):
                     T1_albedo = ('albedo' in T1_object_unit and T1_object_unit['albedo']) or 'scale' in T1_object_unit
 
                     # Spectral data import and processing
-                    T1_spectrum = core.from_database(T1_name, T1_object_unit).to_scope(core.visible_range)
+                    T1_spectrum = core.from_database(name, T1_object_unit).to_scope(core.visible_range)
                     if albedoFlag and 'scale' in T1_object_unit:
                         T1_spectrum = T1_spectrum.scaled(*T1_object_unit['scale'])
                     
@@ -199,6 +195,9 @@ def launch_window(lang: str):
                     T1_export += f'\n{export_colors(T1_rgb)}\t{name}'
 
                 sg.popup_scrolled(T1_export, title=tr.gui_results[lang], size=(72, 32), font=('Consolas', 10))
+            
+            elif event == 'T1_path':
+                tg.generate_table(objectsDB, values['T1_tags'], albedoFlag, values['-srgb-'], values['-gamma-'], values['T1_path'], 'png', lang)
         
         # ------------ Events in the tab "Images" ------------
 
@@ -301,15 +300,6 @@ def launch_window(lang: str):
                         window['T2_image'].update(data=im.convert_to_bytes(T2_img))
                 except Exception:
                     sg.Print(format_exc(limit=0))
-        
-        # ------------ Events in the tab "Table" ------------
-
-        elif values['-currentTab-'] == 'tab3':
-
-            window['T3_process'].update(disabled = values['T3_folder']=='' or window['T3_database'].metadata==False)
-            
-            if event == 'T3_process':
-                tg.generate_table(objectsDB, values['T3_tags'], albedoFlag, values['-srgb-'], values['-gamma-'], values['T3_folder'], values['T3_extension'], lang)
         
         # ------------ Events in the tab "Blackbody & Redshifts" ------------
         

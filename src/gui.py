@@ -22,7 +22,7 @@ sg.LOOK_AND_FEEL_TABLE['MaterialDark'] = {
 def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tuple, filtersDB: tuple, albedoFlag: bool, bitness: int, rounding: int, T2_num: int, T5_num: int, lang: str):
     title_font = ('arial', 12)
     tags_input_size = 20
-    button_size = 22
+    button_size = 24
     browse_size = 10
     slider_size = (1, 15)
 
@@ -35,10 +35,6 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         [sg.Push(), sg.Text(tr.gui_br[lang][0], key='-brModeText-'), sg.Push()],
         [sg.Radio(tr.gui_br[lang][1], 'brRadio', enable_events=True, default=albedoFlag, key='-brMode0-')],
         [sg.Radio(tr.gui_br[lang][2], 'brRadio', enable_events=True, default=not albedoFlag, key='-brMode1-')],
-        #[sg.T('')],
-        #[sg.Push(), sg.Text(tr.gui_interp[lang][0], key='-interpModeText-'), sg.Push()],
-        #[sg.Radio(tr.gui_interp[lang][1], 'interpRadio', enable_events=True, default=True, key='-interpMode0-')],
-        #[sg.Radio(tr.gui_interp[lang][2], 'interpRadio', enable_events=True, key='-interpMode1-')],
         [sg.T('')],
         [sg.Push(), sg.Text(tr.gui_formatting[lang], key='-formattingText-'), sg.Push()],
         [
@@ -71,7 +67,8 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         [sg.Push(), sg.Button(button_text=tr.gui_plot[lang], size=button_size, key='T1_plot'), sg.Push()],
         [sg.Push(), sg.Button(button_text=tr.gui_clear[lang], size=button_size, key='T1_clear'), sg.Push()],
         [sg.T('')],
-        [sg.Push(), sg.Button(button_text=tr.gui_export[lang], size=button_size, key='T1_export'), sg.Push()]
+        [sg.Push(), sg.Button(button_text=tr.gui_export2text[lang], size=button_size, key='T1_export2text'), sg.Push()],
+        [sg.Push(), sg.Input(enable_events=True, key='T1_path', visible=False), sg.FolderBrowse(button_text=tr.gui_export2table[lang], size=button_size, key='T1_export2table'), sg.Push()]
     ]
 
     def frame(num: int, inputOFF_color: str, lang: str):
@@ -130,33 +127,6 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
             sg.Button(tr.gui_process[lang], size=button_size, disabled=True, key='T2_process'), sg.Push()
         ],
         [sg.Push(), sg.Image(background_color='black', size=img_preview_size, key='T2_image'), sg.Push()]
-    ]
-
-    tab3 = [
-        [
-            sg.Text(tr.gui_folder[lang], key='T3_folderN'),
-            sg.Input(size=1, enable_events=True, key='T3_folder', expand_x=True),
-            sg.FolderBrowse(button_text=tr.gui_browse[lang], size=browse_size, key='T3_browse_folder')
-        ],
-        [
-            sg.Push(),
-            sg.Column([
-                [sg.Push(), sg.Button(button_text=tr.gui_load[lang], size=button_size, key='T3_database', metadata=False), sg.Push()],
-                [
-                    sg.Push(), sg.Text(tr.gui_tags[lang], text_color=muted_color, key='T3_tagsN'),
-                    sg.InputCombo([], default_value='', size=tags_input_size, enable_events=True, disabled=True, key='T3_tags'), sg.Push()
-                ]
-            ]),
-            sg.Push(),
-            sg.Column([
-                [
-                    sg.Push(), sg.Text(tr.gui_extension[lang], key='T3_ext'),
-                    sg.InputCombo(['png', 'jpeg', 'pdf'], default_value='png', enable_events=True, key='T3_extension'), sg.Push()
-                ],
-                [sg.Push(), sg.Button(tr.gui_process[lang], size=button_size, disabled=True, key='T3_process'), sg.Push()]
-            ]),
-            sg.Push()
-        ]
     ]
 
     T4_col1 = [
@@ -266,7 +236,6 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
     tabs = sg.TabGroup([[
             sg.Tab(tr.gui_tabs[lang][0], tab1, key='tab1'),
             sg.Tab(tr.gui_tabs[lang][1], tab2, key='tab2'),
-            sg.Tab(tr.gui_tabs[lang][2], tab3, key='tab3'),
             sg.Tab(tr.gui_tabs[lang][3], tab4, key='tab4'),
             sg.Tab('WIP', tab5, key='tab5')
     ]], expand_x=True, expand_y=True, enable_events=True, key='-currentTab-')
@@ -280,7 +249,6 @@ def translate(window: sg.Window, T2_num: int, T5_num: int, lang: str):
     window['menu'].update(tr.gui_menu[lang])
     window['tab1'].update(title=tr.gui_tabs[lang][0])
     window['tab2'].update(title=tr.gui_tabs[lang][1])
-    window['tab3'].update(title=tr.gui_tabs[lang][2])
     window['tab4'].update(title=tr.gui_tabs[lang][3])
     window['T1_title1'].update(tr.gui_database[lang])
     window['-settingsTitle-'].update(tr.gui_settings[lang])
@@ -291,9 +259,6 @@ def translate(window: sg.Window, T2_num: int, T5_num: int, lang: str):
     window['-brModeText-'].update(tr.gui_br[lang][0])
     window['-brMode0-'].update(text=tr.gui_br[lang][1])
     window['-brMode1-'].update(text=tr.gui_br[lang][2])
-    #window['-interpModeText-'].update(tr.gui_interp[lang][0])
-    #window['-interpMode0-'].update(text=tr.gui_interp[lang][1])
-    #window['-interpMode1-'].update(text=tr.gui_interp[lang][2])
     window['-formattingText-'].update(tr.gui_formatting[lang])
     window['-bitnessText-'].update(tr.gui_bit[lang])
     window['-roundingText-'].update(tr.gui_rnd[lang])
@@ -302,7 +267,8 @@ def translate(window: sg.Window, T2_num: int, T5_num: int, lang: str):
     window['T1_add'].update(tr.gui_add[lang])
     window['T1_plot'].update(tr.gui_plot[lang])
     window['T1_clear'].update(tr.gui_clear[lang])
-    window['T1_export'].update(tr.gui_export[lang])
+    window['T1_export2text'].update(tr.gui_export2text[lang])
+    window['T1_export2table'].update(tr.gui_export2table[lang])
     window['T2_title1'].update(tr.gui_input[lang])
     window['T2_title2'].update(tr.gui_output[lang])
     for i in range(T2_num):
@@ -322,12 +288,6 @@ def translate(window: sg.Window, T2_num: int, T5_num: int, lang: str):
     window['T2_browse_folder'].update(tr.gui_browse[lang])
     window['T2_preview'].update(tr.gui_preview[lang])
     window['T2_process'].update(tr.gui_process[lang])
-    window['T3_browse_folder'].update(tr.gui_browse[lang])
-    window['T3_folderN'].update(tr.gui_folder[lang])
-    window['T3_database'].update(tr.gui_update[lang] if window['T3_database'].metadata else tr.gui_load[lang])
-    window['T3_tagsN'].update(tr.gui_tags[lang])
-    window['T3_ext'].update(tr.gui_extension[lang])
-    window['T3_process'].update(tr.gui_process[lang])
     window['T4_title1'].update(tr.gui_input[lang])
     window['T4_title2'].update(tr.gui_results[lang])
     window['T4_temp'].update(tr.gui_temp[lang])
