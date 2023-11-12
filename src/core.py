@@ -197,8 +197,8 @@ class Spectrum:
                 nm = uniform_nm
             if br.min() < 0:
                 br = np.clip(br, 0, None)
-                print(f'# Note for the Spectrum object "{name}"')
-                print(f'- Negative values detected while trying to create the object from array, they been replaced with zeros.')
+                #print(f'# Note for the Spectrum object "{name}"')
+                #print(f'- Negative values detected while trying to create the object from array, they been replaced with zeros.')
         except Exception:
             nm, br = nm_br_stub
             print(f'# Note for the Spectrum object "{name}"')

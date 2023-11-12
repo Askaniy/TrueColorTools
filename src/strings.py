@@ -492,15 +492,15 @@ gui_step1 = {
     'ru': '1. Выберите формат вводимых данных',
     'de': '1. Eingabe-Datentyp auswählen'
 }
-gui_spectrum = {
-    'en': 'Multiband spectrum',
-    'ru': 'Многоканальный спектр',
-    'de': 'Multiband Spektrum'
+gui_datatype = {
+    'en': ['Multiband spectrum', 'Multiband image', 'RGB image', 'Spectral cube'],
+    'ru': ['Многоканальный спектр', 'Многоканальное изображение', 'RGB изображение', 'Спектральный куб'],
+    'de': ['Multiband Spektrum', 'Multiband Aufnahme', 'RGB-Bild', 'Spektraler Würfel']
 }
-gui_image = {
-    'en': 'Multiband image',
-    'ru': 'Многоканальное изображение',
-    'de': 'Multiband Aufnahme'
+gui_BGRcolors = {
+    'en': ['(Blue channel)', '(Green channel)', '(Red channel)'],
+    'ru': ['(Синий канал)', '(Зелёный канал)', '(Красный канал)'],
+    'de': ['(Blauer Kanal)', '(Grüner Kanal)', '(Roter Kanal)'],
 }
 gui_step2 = {
     'en': '2. Match several filters with data',

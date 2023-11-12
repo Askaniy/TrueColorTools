@@ -196,6 +196,10 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
 
     def frame_new(num: int, filtersDB: tuple, lang: str):
         n = str(num)
+        try:
+            bgr_text = sg.Text(tr.gui_BGRcolors[lang][num], key='T5_bgrText'+n)
+        except IndexError:
+            bgr_text = sg.Text('', key='T5_bgrText'+n)
         l = [
             [
                 sg.Text(tr.gui_filter[lang], key='T5_filterText'+n),
@@ -204,10 +208,13 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
             [   # Every moment displays brightness input
                 sg.Text(tr.gui_brightness[lang], key='T5_brText'+n),
                 sg.Input(size=1, enable_events=True, key='T5_br'+n, expand_x=True),
-                # or image input, depends on radio box
+                # or image input
                 sg.Input(enable_events=True, size=1, key='T5_path'+n, expand_x=True, visible=False),
-                sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, key='T5_pathText'+n, visible=False)
-            ]   # size=1 is VERY important! Now column depends on max length of filter file names
+                # size=1 is VERY important! Now column depends on max length of filter file names
+                sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, key='T5_pathText'+n, visible=False),
+                # or label of RGB image bands, depends on radio box
+                bgr_text
+            ]
         ]
         return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, key='T5_band'+n)
     
@@ -215,9 +222,16 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
     T5_col1 = [
         [sg.Push(), sg.Text(tr.gui_input[lang], font=title_font, key='T5_title1'), sg.Push()],
         [sg.Text(tr.gui_step1[lang], key='T5_step1')],
-        [sg.Radio(tr.gui_spectrum[lang], 'DataTypeRadio', enable_events=True, default=True, key='-typeSpectrum-')],
-        [sg.Radio(tr.gui_image[lang], 'DataTypeRadio', enable_events=True, key='-typeImage-')],
-        [sg.Text(tr.gui_step2[lang], key='T5_step2')],
+        [sg.Radio(tr.gui_datatype[lang][0], 'DataTypeRadio', enable_events=True, key='-typeSpectrum-', default=True)],
+        [sg.Radio(tr.gui_datatype[lang][1], 'DataTypeRadio', enable_events=True, key='-typeImage-')],
+        [sg.Radio(tr.gui_datatype[lang][2], 'DataTypeRadio', enable_events=True, key='-typeImageRGB-')],
+        [sg.Radio(tr.gui_datatype[lang][3], 'DataTypeRadio', enable_events=True, key='-typeImageCube-')],
+        [
+            sg.Text(tr.gui_step2[lang], key='T5_step2'),
+            # or image input
+            sg.Input(enable_events=True, size=1, key='T5_path', expand_x=True, visible=False),
+            sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, key='T5_pathText', visible=False),
+        ],
         [sg.Column(T5_frames, scrollable=True, vertical_scroll_only=True, key='T5_frames', expand_y=True)]
     ]
     T5_col2 = [
@@ -330,12 +344,18 @@ def translate(window: sg.Window, T2_num: int, T5_num: int, lang: str):
     window['T5_title1'].update(tr.gui_input[lang])
     window['T5_title2'].update(tr.gui_results[lang])
     window['T5_step1'].update(tr.gui_step1[lang])
+    window['-typeSpectrum-'].update(text=tr.gui_datatype[lang][0])
+    window['-typeImage-'].update(text=tr.gui_datatype[lang][1])
+    window['-typeImageRGB-'].update(text=tr.gui_datatype[lang][2])
+    window['-typeImageCube-'].update(text=tr.gui_datatype[lang][3])
+    window['T5_bgrText0'].update(tr.gui_BGRcolors[lang][0])
+    window['T5_bgrText1'].update(tr.gui_BGRcolors[lang][1])
+    window['T5_bgrText2'].update(tr.gui_BGRcolors[lang][2])
     window['T5_step2'].update(tr.gui_step2[lang])
+    window['T5_pathText'].update(tr.gui_browse[lang])
     for i in range(T5_num):
-        window['T5_band'+str(i)].update(f'{tr.gui_band[lang]} {i+1}')
+        window['T5_band'+str(i)].update(f'{tr.gui_band[lang]} {i+1}', visible=window['T5_band'+str(i)].visible)
         window['T5_filterText'+str(i)].update(tr.gui_filter[lang])
         window['T5_brText'+str(i)].update(tr.gui_brightness[lang])
         window['T5_pathText'+str(i)].update(tr.gui_browse[lang])
-    window['-typeSpectrum-'].update(text=tr.gui_spectrum[lang])
-    window['-typeImage-'].update(text=tr.gui_image[lang])
     return window

@@ -364,16 +364,36 @@ def launch_window(lang: str):
                 figure_canvas_agg = pl.draw_figure(window['T5_canvas'].TKCanvas, T5_fig)
                 T5_first_time = False
 
-            T5_image_flag = values['-typeImage-']
+            # Getting input data mode name
+            T5_mode = tr.gui_datatype['en'][get_flag_index(
+                (values['-typeSpectrum-'], values['-typeImage-'], values['-typeImageRGB-'], values['-typeImageCube-']))]
 
-            if event in ('-typeSpectrum-', '-typeImage-'):
-                for i in range(T5_num):
-                    window['T5_path'+str(i)].update(visible=T5_image_flag)
-                    window['T5_pathText'+str(i)].update(visible=T5_image_flag)
-                    window['T5_brText'+str(i)].update(visible=not T5_image_flag)
-                    window['T5_br'+str(i)].update(visible=not T5_image_flag)
+            # Setting template for the band list
+            # BUG in PySimpleGUI: after translating, bands where visible=False become visible
+            for i in range(T5_num):
+                window['T5_band'+str(i)].update(visible=False)
+                window['T5_path'+str(i)].update(visible=values['-typeImage-'])
+                window['T5_pathText'+str(i)].update(visible=values['-typeImage-'])
+                window['T5_brText'+str(i)].update(visible=values['-typeSpectrum-'])
+                window['T5_br'+str(i)].update(visible=values['-typeSpectrum-'])
+                window['T5_bgrText'+str(i)].update(visible=values['-typeImageRGB-'])
+            match event:
+                case '-typeImageRGB-':
+                    T5_limit = 3
+                case '-typeImageCube-':
+                    T5_limit = 0
+                case _:
+                    T5_limit = T5_num
+            for i in range(T5_limit):
+                window['T5_band'+str(i)].update(visible=True)
             
-            elif event.startswith('T5_filter') or event == '-srgb-':
+            # Setting single file choice
+            T5_single_file = values['-typeImageRGB-'] or values['-typeImageCube-']
+            window['T5_step2'].update(visible=not T5_single_file)
+            window['T5_path'].update(visible=T5_single_file)
+            window['T5_pathText'].update(visible=T5_single_file)
+            
+            if event.startswith('T5_filter') or event == '-srgb-':
                 if values['-srgb-']:
                     T5_plot_data = [core.x, core.y, core.z]
                 else:
@@ -402,3 +422,8 @@ def export_colors(rgb: tuple):
             mx = l
     w = 8 if mx < 8 else mx+1
     return ''.join([i.ljust(w) for i in lst])
+
+def get_flag_index(flags: tuple):
+    for index, flag in enumerate(flags):
+        if flag:
+            return index
