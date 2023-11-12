@@ -231,9 +231,9 @@ lang_list = {
     'de': ['Englisch', 'Russisch']
 }
 gui_tabs = {
-    'en': ['Database viewer', 'Multiband processing', '', 'Blackbody & Redshifts'],
-    'ru': ['Просмотр базы спектров', 'Многоканальная обработка', '', 'АЧТ и красные смещения'],
-    'de': ['Datenbank-Viewer', 'Multiband-Verarbeitung', '', 'Schwarzkörper & Rotverschiebung']
+    'en': ['Database viewer', 'Multiband processing', 'Blackbody & Redshifts'],
+    'ru': ['Просмотр базы спектров', 'Многоканальная обработка', 'АЧТ и красные смещения'],
+    'de': ['Datenbank-Viewer', 'Multiband-Verarbeitung', 'Schwarzkörper & Rotverschiebung']
 }
 gui_menu = {
     'en': [['File', [ref['en'], note['en'], gui_info['en'], gui_exit['en']]], ['Language', lang_list['en']]],
@@ -278,7 +278,7 @@ gui_rnd = {
     'de': 'Dezimalstellen'
 }
 
-# Tab 1 - Spectra
+# Tab 1 - Database viewer
 gui_database = {
     'en': 'Database',
     'ru': 'База данных',
@@ -349,90 +349,6 @@ gui_col = {
     'ru': ['Красный', 'Зелёный', 'Синий', '| Объект'],
     'de': ['Rot', 'Grün', 'Blau', '| Objekt']
 }
-
-# Tab 2 - Images
-gui_input = {
-    'en': 'Input data',
-    'ru': 'Входные данные',
-    'de': 'Eingaben'
-}
-gui_band = {
-    'en': 'Band',
-    'ru': 'Канал',
-    'de': 'Band'
-}
-gui_browse = {
-    'en': 'Browse',
-    'ru': 'Обзор',
-    'de': 'Durchsuchen'
-}
-gui_wavelength = {
-    'en': 'Wavelength [nm]',
-    'ru': 'Длина волны [нм]',
-    'de': 'Wellenlänge [nm]'
-}
-gui_exposure = {
-    'en': 'Exposure',
-    'ru': 'Экспозиция',
-    'de': 'Belichtung'
-}
-gui_output = {
-    'en': 'Processing and output',
-    'ru': 'Обработка и вывод',
-    'de': 'Verarbeitung und Ausgabe'
-}
-gui_makebright = {
-    'en': 'Maximize brightness',
-    'ru': 'Максимизировать яркость',
-    'de': 'Maximieren Sie die Helligkeit'
-}
-gui_autoalign = {
-    'en': 'Align bands (β)',
-    'ru': 'Совместить (β)',
-    'de': 'Ausrichten (β)'
-}
-gui_desun = {
-    'en': 'Subtract the solar spectrum',
-    'ru': 'Вычесть солнечный спектр',
-    'de': 'Subtrahiere das Sonnenspektrum'
-}
-gui_plotpixels = {
-    'en': 'Plot spectra of some pixels',
-    'ru': 'Построить спектры некоторых пикселей',
-    'de': 'Zeichnen Sie Spektren einiger Pixel'
-}
-gui_filterset = {
-    'en': 'Camera filter set',
-    'ru': 'Набор фильтров',
-    'de': 'Kamera Filterset'
-}
-gui_single = {
-    'en': 'Input RGB image',
-    'ru': 'Ввод RGB изображения',
-    'de': 'RGB-Bild eingeben'
-}
-gui_folder = {
-    'en': 'Save file location',
-    'ru': 'Путь сохранения',
-    'de': 'Speicherort'
-}
-gui_preview = {
-    'en': 'Show preview',
-    'ru': 'Предпросмотр',
-    'de': 'Vorschau anzeigen'
-}
-gui_process = {
-    'en': 'Start processing',
-    'ru': 'Обработать',
-    'de': 'Bild erzeugen'
-}
-
-# Tab 3 - Table
-gui_extension = {
-    'en': 'File format',
-    'ru': 'Расширение файла',
-    'de': 'Dateiformat'
-}
 name_text = {
     'en': ['Colors calculated from spectra for the "', '" category'],
     'ru': ['Цвета, вычисленные по спектрам для категории «', '»'],
@@ -459,7 +375,85 @@ info = {
     'de': ['Albedo-Modus', 'sRGB-Farbraum', 'Gammakorrektur']
 }
 
-# Tab 4 - Blackbody & Redshifts
+# Tab 2 - Multiband processing
+gui_input = {
+    'en': 'Input data',
+    'ru': 'Входные данные',
+    'de': 'Eingaben'
+}
+gui_step1 = {
+    'en': '1. Choose input data type',
+    'ru': '1. Выберите формат вводимых данных',
+    'de': '1. Eingabe-Datentyp auswählen'
+}
+gui_datatype = {
+    'en': ['Multiband spectrum', 'Multiband image', 'RGB image', 'Spectral cube'],
+    'ru': ['Многоканальный спектр', 'Многоканальное изображение', 'RGB изображение', 'Спектральный куб'],
+    'de': ['Multiband Spektrum', 'Multiband Aufnahme', 'RGB-Bild', 'Spektraler Würfel']
+}
+gui_BGRcolors = {
+    'en': ['(Blue channel)', '(Green channel)', '(Red channel)'],
+    'ru': ['(Синий канал)', '(Зелёный канал)', '(Красный канал)'],
+    'de': ['(Blauer Kanal)', '(Grüner Kanal)', '(Roter Kanal)'],
+}
+gui_step2 = {
+    'en': '2. Match several filters with data',
+    'ru': '2. Соотнесите фильтры с данными',
+    'de': '2. Mehrere Filter an Daten anpassen'
+}
+gui_browse = {
+    'en': 'Browse',
+    'ru': 'Обзор',
+    'de': 'Durchsuchen'
+}
+gui_band = {
+    'en': 'Band',
+    'ru': 'Канал',
+    'de': 'Band'
+}
+gui_filter = {
+    'en': 'Filter',
+    'ru': 'Фильтр',
+    'de': 'Filter'
+}
+gui_brightness = {
+    'en': 'Brightness',
+    'ru': 'Яркость',
+    'de': 'Helligkeit'
+}
+gui_desun = {
+    'en': 'Remove Sun as emitter',
+    'ru': 'Убрать отражённый спектр Солнца',
+    'de': 'Entfernen Sie die Sonne als Emitter'
+}
+gui_devega = {
+    'en': 'Untie from the white standard according to Vega',
+    'ru': 'Отвязать от эталона белого по Веге',
+    'de': 'Vom Weißstandard nach Vega lösen'
+}
+gui_makebright = {
+    'en': 'Maximize brightness',
+    'ru': 'Максимизировать яркость',
+    'de': 'Maximieren Sie die Helligkeit'
+}
+#gui_autoalign = {
+#    'en': 'Align image bands (β)',
+#    'ru': 'Совместить изображения (β)',
+#    'de': 'Bildbänder ausrichten (β)'
+#}
+gui_preview = {
+    'en': 'Show preview',
+    'ru': 'Предпросмотр',
+    'de': 'Vorschau anzeigen'
+}
+gui_process = {
+    'en': 'Start processing',
+    'ru': 'Обработать',
+    'de': 'Bild erzeugen'
+}
+
+
+# Tab 3 - Blackbody & Redshifts
 gui_temp = {
     'en': 'Temperature [K]',
     'ru': 'Температура [K]',
@@ -489,38 +483,6 @@ gui_explanation = {
     'en': '* if the Solar disk in the sky is replaced by this blackbody sphere',
     'ru': '* если диск Солнца на небе заменить данной чёрнотельной сферой',
     'de': '* wenn die Sonne am Taghimmel durch einen Schwarzkörper ersetzt würde'
-}
-
-# Tab 5 - WIP
-gui_step1 = {
-    'en': '1. Choose input data type',
-    'ru': '1. Выберите формат вводимых данных',
-    'de': '1. Eingabe-Datentyp auswählen'
-}
-gui_datatype = {
-    'en': ['Multiband spectrum', 'Multiband image', 'RGB image', 'Spectral cube'],
-    'ru': ['Многоканальный спектр', 'Многоканальное изображение', 'RGB изображение', 'Спектральный куб'],
-    'de': ['Multiband Spektrum', 'Multiband Aufnahme', 'RGB-Bild', 'Spektraler Würfel']
-}
-gui_BGRcolors = {
-    'en': ['(Blue channel)', '(Green channel)', '(Red channel)'],
-    'ru': ['(Синий канал)', '(Зелёный канал)', '(Красный канал)'],
-    'de': ['(Blauer Kanal)', '(Grüner Kanal)', '(Roter Kanal)'],
-}
-gui_step2 = {
-    'en': '2. Match several filters with data',
-    'ru': '2. Соотнесите фильтры с данными',
-    'de': '2. Mehrere Filter an Daten anpassen'
-}
-gui_filter = {
-    'en': 'Filter',
-    'ru': 'Фильтр',
-    'de': 'Filter'
-}
-gui_brightness = {
-    'en': 'Brightness',
-    'ru': 'Яркость',
-    'de': 'Helligkeit'
 }
 
 # Plots
