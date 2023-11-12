@@ -139,13 +139,13 @@ def launch_window(lang: str):
             if (event in triggers or event == 'T1_list') and values['T1_list'] != []:
                 T1_name = values['T1_list'][0]
                 T1_raw_name = di.obj_dict(objectsDB, '_all_', lang)[T1_name]
-                T1_object_db = objectsDB[T1_raw_name]
-                T1_albedo = ('albedo' in T1_object_db and T1_object_db['albedo']) or 'scale' in T1_object_db
+                T1_object_unit = objectsDB[T1_raw_name]
+                T1_albedo = ('albedo' in T1_object_unit and T1_object_unit['albedo']) or 'scale' in T1_object_unit
 
                 # Spectral data import and processing
-                T1_spectrum = core.from_database(T1_name, T1_object_db).to_scope(core.visible_range)
-                if albedoFlag and 'scale' in T1_object_db:
-                    T1_spectrum = T1_spectrum.scaled(*T1_object_db['scale'])
+                T1_spectrum = core.from_database(T1_name, T1_object_unit).to_scope(core.visible_range)
+                if albedoFlag and 'scale' in T1_object_unit:
+                    T1_spectrum = T1_spectrum.scaled(*T1_object_unit['scale'])
                 
                 # Color calculation
                 if values['-srgb-']:
@@ -178,13 +178,13 @@ def launch_window(lang: str):
                 T1_export = '\n' + '\t'.join(tr.gui_col[lang]) + '\n' + '_' * 36
                 
                 for name, raw_name in di.obj_dict(objectsDB, values['T1_tags'], lang).items():
-                    T1_object_db = objectsDB[raw_name]
-                    T1_albedo = ('albedo' in T1_object_db and T1_object_db['albedo']) or 'scale' in T1_object_db
+                    T1_object_unit = objectsDB[raw_name]
+                    T1_albedo = ('albedo' in T1_object_unit and T1_object_unit['albedo']) or 'scale' in T1_object_unit
 
                     # Spectral data import and processing
-                    T1_spectrum = core.from_database(T1_name, T1_object_db).to_scope(core.visible_range)
-                    if albedoFlag and 'scale' in T1_object_db:
-                        T1_spectrum = T1_spectrum.scaled(*T1_object_db['scale'])
+                    T1_spectrum = core.from_database(T1_name, T1_object_unit).to_scope(core.visible_range)
+                    if albedoFlag and 'scale' in T1_object_unit:
+                        T1_spectrum = T1_spectrum.scaled(*T1_object_unit['scale'])
                     
                     # Color calculation
                     if values['-srgb-']:

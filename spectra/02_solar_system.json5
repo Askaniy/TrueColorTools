@@ -441,13 +441,13 @@
         "system": "Generic_Bessell", "indices": {"B-V": 1.38, "V-R": 0.86, "R-I": 0.79}, "sun": true, "vega": true, "scale": ["Generic_Bessell.V", 0.14]
     }, // albedo from Kiss et al. 2019
     "(486958) Wenu|Howett2019": {"tags": ["featured", "solar system", "minor body", "tno", "classical", "classical-h"],
-        "system": "-NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.053, 0.079, 0.117], "sun": true, "albedo": true
+        "system": "-NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.053, 0.079, 0.117], "albedo": true
     },
     "(486958) Weeyo|Howett2019": {"tags": ["featured", "solar system", "minor body", "tno", "classical", "classical-h"],
-        "system": "-NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.058, 0.084, 0.122], "sun": true, "albedo": true
+        "system": "-NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.058, 0.084, 0.122], "albedo": true
     },
     "(486958) Akasa|Howett2019": {"tags": ["featured", "solar system", "minor body", "tno", "classical", "classical-h", "surface feature"],
-        "system": "-NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.066, 0.090, 0.125], "sun": true, "albedo": true
+        "system": "-NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.066, 0.090, 0.125], "albedo": true
     },
     "1I/ʻOumuamua|Jewitt2017": {"tags": ["featured", "solar system", "extrasolar", "asteroid"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.70, "V-R": 0.45}, "sun": true, "vega": true, "scale": ["Generic_Bessell.V", 0.1]

@@ -38,7 +38,7 @@ def irradiance(nm: int|float|np.ndarray, T: int|float) -> float|np.ndarray:
     m = nm / 1e9
     return temp_coef_to_make_it_work * w * const1 / (m**5 * (np.exp(const2 / (m * T)) - 1)) / 1e9 # per m -> per nm
 
-def mag2irradiance(m: int|float|np.ndarray, vega_zero_point: float):
+def mag2irradiance(m: int|float|np.ndarray, vega_zero_point: float = 1.):
     return vega_zero_point * 10**(-0.4 * m)
 
 
@@ -252,70 +252,64 @@ class Spectrum:
 
     def __mul__(self, other):
         """ Returns a new Photometry object with the emitter added (untied from a white standard spectrum) """
-        if isinstance(other, Spectrum):
-            name = f'{self.name} * {other.name}'
-            start = max(self.nm[0], other.nm[0])
-            end = min(self.nm[-1], other.nm[-1])
-            if start >= end:
-                print(f'# Note for spectral multiplication "{name}"')
-                print('- There is no intersection between the spectra, nothing changed.')
-                the_first = self.name
-                the_second = other.name
-                if self.nm[0] > other.nm[0]:
-                    the_first, the_second = the_second, the_first
-                print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
-                return self
-            else:
-                nm = np.arange(start, end+1, resolution, dtype='uint16')
-                br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
-                br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
-                return Spectrum(name, nm, br0 * br1)
-        else: # assuming number
-            return Spectrum(self.name, self.nm, self.br * other)
+        name = f'{self.name} * {other.name}'
+        start = max(self.nm[0], other.nm[0])
+        end = min(self.nm[-1], other.nm[-1])
+        if start >= end:
+            print(f'# Note for spectral multiplication "{name}"')
+            print('- There is no intersection between the spectra, nothing changed.')
+            the_first = self.name
+            the_second = other.name
+            if self.nm[0] > other.nm[0]:
+                the_first, the_second = the_second, the_first
+            print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
+            return self
+        else:
+            nm = np.arange(start, end+1, resolution, dtype='uint16')
+            br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
+            br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
+            return Spectrum(name, nm, br0 * br1)
 
     def __truediv__(self, other):
         """ Returns a new Spectrum object with the emitter removed (apply a white standard spectrum) """
-        if isinstance(other, Spectrum):
-            name = f'{self.name} / {other.name}'
-            start = max(self.nm[0], other.nm[0])
-            end = min(self.nm[-1], other.nm[-1])
-            if start >= end:
-                print(f'# Note for spectral division "{name}"')
-                print('- There is no intersection between the spectra, nothing changed.')
-                the_first = self.name
-                the_second = other.name
-                if self.nm[0] > other.nm[0]:
-                    the_first, the_second = the_second, the_first
-                print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
-                return self
-            else:
-                nm = np.arange(start, end+1, resolution, dtype='uint16')
-                br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
-                br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
-                return Spectrum(name, nm, br0 / br1)
-        else: # assuming number
-            return Spectrum(self.name, self.nm, self.br / other)
+        name = f'{self.name} / {other.name}'
+        start = max(self.nm[0], other.nm[0])
+        end = min(self.nm[-1], other.nm[-1])
+        if start >= end:
+            print(f'# Note for spectral division "{name}"')
+            print('- There is no intersection between the spectra, nothing changed.')
+            the_first = self.name
+            the_second = other.name
+            if self.nm[0] > other.nm[0]:
+                the_first, the_second = the_second, the_first
+            print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
+            return self
+        else:
+            nm = np.arange(start, end+1, resolution, dtype='uint16')
+            br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
+            br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
+            return Spectrum(name, nm, br0 / br1)
 
     def integrate(self) -> float:
         """ Calculates the area over the spectrum using the mean rectangle method, per nm """
         return np.sum(resolution * (self.br[:-1] + self.br[1:]) / 2)
 
-    def normalized_by_area(self):
-        """ Returns a new Spectrum object with brightness scaled to its area be equal 1 """
-        return Spectrum(self.name, self.nm, self.br / self.integrate())
+    def scaled_by_area(self, factor: int|float = 1):
+        """ Returns a new Spectrum object with brightness scaled to its area be equal the scale factor """
+        return Spectrum(self.name, self.nm, self.br / self.integrate() * factor)
 
-    def normalized_on_wavelength(self, request: int|float):
-        """ Returns a new Spectrum object with brightness scaled to be equal 1 at the specified wavelength """
-        if request not in self.nm:
+    def scaled_on_wavelength(self, wavelength: int|float, factor: int|float = 1):
+        """ Returns a new Spectrum object with brightness scaled to be equal the scale factor at the specified wavelength """
+        if wavelength not in self.nm:
             print(f'# Note for the Spectrum object "{self.name}"')
-            print(f'- Requested wavelength to normalize ({request}) not in the spectrum range ({self.nm[0]} to {self.nm[-1]} by {resolution} nm).')
-            request = self.nm[np.abs(self.nm - request).argmin()]
-            print(f'- {request} was chosen as the closest value.')
-        return Spectrum(self.name, self.nm, self.br / self.br[np.where(self.nm == request)])
+            print(f'- Requested wavelength to normalize ({wavelength}) not in the spectrum range ({self.nm[0]} to {self.nm[-1]} by {resolution} nm).')
+            wavelength = self.nm[np.abs(self.nm - wavelength).argmin()]
+            print(f'- {wavelength} was chosen as the closest value.')
+        return Spectrum(self.name, self.nm, self.br / self.br[np.where(self.nm == wavelength)] * factor)
 
     def scaled_to_albedo(self, albedo: float, transmission):
         """ Returns a new Spectrum object with brightness scaled to give the albedo after convolution with the filter """
-        current_albedo = self ** transmission.normalized_by_area()
+        current_albedo = self ** transmission.scaled_by_area()
         if current_albedo == 0:
             print(f'# Note for the Spectrum object "{self.name}"')
             print(f'- The spectrum cannot be scaled to an albedo of {albedo} because its current albedo is zero, nothing changed.')
@@ -323,12 +317,12 @@ class Spectrum:
         else:
             return Spectrum(self.name, self.nm, self.br * albedo / current_albedo)
     
-    def scaled(self, where, how):
+    def scaled(self, where: str|int|float, how: int|float):
         """ Returns a new Spectrum object to fit the request of wavelength zone and brightness there """
         if isinstance(where, str):
             return self.scaled_to_albedo(how, Spectrum.from_filter(where))
         else: # assuming number
-            return self.normalized_on_wavelength(where) * how
+            return self.scaled_on_wavelength(where, how)
 
     def mean_wavelength(self) -> float:
         return np.average(self.nm, weights=self.br)
@@ -336,14 +330,13 @@ class Spectrum:
 
 
 bessell_V = Spectrum.from_filter('Generic_Bessell.V')
-bessell_V_norm = bessell_V.normalized_by_area() # used as an averager for the reference spectra
 
 sun_SI = Spectrum.from_array('Sun', *di.fits_reader('spectra/files/CALSPEC/sun_reference_stis_002.fits')) # W / (m² nm)
-sun_in_V = sun_SI ** bessell_V_norm
+sun_in_V = sun_SI ** bessell_V.scaled_by_area()
 sun_norm = sun_SI.scaled_to_albedo(1, bessell_V)
 
 vega_SI = Spectrum.from_array('Vega', *di.fits_reader('spectra/files/CALSPEC/alpha_lyr_stis_011.fits')) # W / (m² nm)
-vega_in_V = vega_SI ** bessell_V_norm
+vega_in_V = vega_SI ** bessell_V.scaled_by_area()
 vega_norm = vega_SI.scaled_to_albedo(1, bessell_V)
 
 
@@ -375,11 +368,11 @@ class Photometry:
         - `filters` (Iterable): list of file names in the `filters` folder
         - `br` (Iterable): same-size list of intensity
         """
-        return Photometry(name, [Spectrum.from_filter(band) for band in filters], br)
+        return Photometry(name, [Spectrum.from_filter(passband) for passband in filters], br)
     
     def to_scope(self, scope: np.ndarray): # TODO: use optimization algorithm!
         """ Creates a Spectrum object with inter- and extrapolated photometry data to fit the wavelength scope """
-        nm0 = np.array([band.mean_wavelength() for band in self.filters])
+        nm0 = np.array([passband.mean_wavelength() for passband in self.filters])
         nm1 = grid(nm0[0], nm0[-1], resolution)
         br = interpolating(nm0, self.br, nm1, resolution)
         nm, br = extrapolating(nm1, br, scope, resolution)
@@ -387,20 +380,21 @@ class Photometry:
 
     def __pow__(self, other: Spectrum) -> np.ndarray[float]:
         """ Convolve all the filters with a spectrum, assuming equal output for a flat spectrum """
-        return np.array([other ** band.normalized_by_area() for band in self.filters])
+        return np.array([other ** passband.scaled_by_area() for passband in self.filters])
 
     def __mul__(self, other: Spectrum):
         """ Returns a new Photometry object with the emitter added (untied from a white standard spectrum) """
-        return Photometry(f'{self.name} + {other.name}', self.filters, self.br * (self ** other))
+        # Scaling brightness scales filters' profiles too! I'll leave the area the same just in case
+        filters = [(passband * other).scaled_by_area(passband.integrate()) for passband in self.filters]
+        return Photometry(f'{self.name} * {other.name}', filters, self.br * (self ** other))
 
     def __truediv__(self, other: Spectrum):
         """ Returns a new Photometry object with the emitter removed (apply a white standard spectrum) """
-        return Photometry(f'{self.name} - {other.name}', self.filters, self.br / (self ** other))
+        # Scaling brightness scales filters' profiles too! I'll leave the area the same just in case
+        filters = [(passband / other).scaled_by_area(passband.integrate()) for passband in self.filters]
+        return Photometry(f'{self.name} / {other.name}', filters, self.br / (self ** other))
 
 
-
-def mag2vega(mag: int|float|np.ndarray):
-    return 10**(-0.4 * mag) # linear brightness in Vegas
 
 def color_indices_parsing(indices: dict):
     """ Converts color indices to linear brightness, assuming 1 Vega intensity in the first filter """
@@ -411,7 +405,7 @@ def color_indices_parsing(indices: dict):
         filters.append(key.split('-')[-1])
     # Magnitudes parsing
     values = np.array(tuple(indices.values()))
-    return filters, np.append(1., mag2vega(np.cumsum(-values)))
+    return filters, np.append(1., mag2irradiance(np.cumsum(-values)))
 
 def from_database(name: str, content: dict) -> Spectrum | Photometry:
     """
@@ -451,7 +445,7 @@ def from_database(name: str, content: dict) -> Spectrum | Photometry:
         if 'br' in content:
             br = content['br']
         elif 'mag' in content:
-            br = mag2vega(np.array(content['mag']))
+            br = mag2irradiance(np.array(content['mag']))
         # spectrum reading
         if 'nm' in content:
             nm = content['nm']
@@ -526,9 +520,9 @@ srgb = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_E)
 # Stiles & Burch (1959) 10-deg color matching data, direct experimental data
 # http://www.cvrl.org/stilesburch10_ind.htm
 # Sensitivity modulo values less than 10^-4 were previously removed
-r = Spectrum('r CMF', *np.loadtxt('src/cmf/StilesBurch10deg.r.dat').transpose()).normalized_by_area()
-g = Spectrum('g CMF', *np.loadtxt('src/cmf/StilesBurch10deg.g.dat').transpose()).normalized_by_area()
-b = Spectrum('b CMF', *np.loadtxt('src/cmf/StilesBurch10deg.b.dat').transpose()).normalized_by_area()
+r = Spectrum('r CMF', *np.loadtxt('src/cmf/StilesBurch10deg.r.dat').transpose()).scaled_by_area()
+g = Spectrum('g CMF', *np.loadtxt('src/cmf/StilesBurch10deg.g.dat').transpose()).scaled_by_area()
+b = Spectrum('b CMF', *np.loadtxt('src/cmf/StilesBurch10deg.b.dat').transpose()).scaled_by_area()
 
 # CIE XYZ functions transformed from the CIE (2006) LMS functions, 10-deg
 # http://www.cvrl.org/ciexyzpr.htm

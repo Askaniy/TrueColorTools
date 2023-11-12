@@ -71,13 +71,13 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
 
     n = 0 # object counter
     for name, raw_name in objects.items():
-        object_db = objectsDB[raw_name]
-        albedo = ('albedo' in object_db and object_db['albedo']) or 'scale' in object_db
+        object_unit = objectsDB[raw_name]
+        albedo = ('albedo' in object_unit and object_unit['albedo']) or 'scale' in object_unit
 
         # Spectral data import and processing
-        spectrum = core.from_database(name, object_db).to_scope(core.visible_range)
-        if albedoFlag and 'scale' in object_db:
-            spectrum = spectrum.scaled(*object_db['scale'])
+        spectrum = core.from_database(name, object_unit).to_scope(core.visible_range)
+        if albedoFlag and 'scale' in object_unit:
+            spectrum = spectrum.scaled(*object_unit['scale'])
         
         # Color calculation
         if srgb:
