@@ -1,6 +1,6 @@
-numpy>=1.23.0
-astropy
-matplotlib>=3.6
-Pillow>=9.2.0
-pysimplegui>=4.60.3
-json5>=0.9.9
+numpy==1.26.1
+astropy==5.3.4
+matplotlib==3.8.1
+Pillow==10.1.0
+pysimplegui==4.60.5
+json5==0.9.14

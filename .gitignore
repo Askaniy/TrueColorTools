@@ -1,4 +1,5 @@
 extras/
+.venv/
 .vscode/
 **/__pycache__/
 **/tempCodeRunnerFile.py

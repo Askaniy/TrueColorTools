@@ -18,6 +18,12 @@ True Color Tools has been tested on Windows 10/11, macOS and Linux. It requires 
 2. Ensure that you have libraries listed in [requirements.txt](requirements.txt). You can install them all at once using the following command: `python3 -m pip install -r requirements.txt`;
 3. Execute `python3 -u runTCT.py`.
 
+### In a virtual environment
+
+2. Open the folder in terminal and create a virtual environment with `python3 -m venv .venv`;
+3. Install the libraries needed by `.venv/bin/pip install -r requirements.txt` (versions were frozen as of November 12, 2023);
+4. Execute `.venv/bin/python3 -u runTCT.py`.
+
 ### Executable file
 
 [SevenSpheres](https://github.com/SevenSpheres) compiles stable versions of True Color Tools for Windows 8/10/11. Thus, Python is not required in this installation way.
