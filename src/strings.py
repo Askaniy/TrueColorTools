@@ -1,6 +1,7 @@
 
 # Objects localization. Order is important for nested words: longer ones must come first.
 names = {
+    'Equal-energy spectrum': {'ru': 'Плоский спектр', 'de': 'Gleiches Energiespektrum'},
     'Proxima Centauri': {'ru': 'Проксима Центавра', 'de': 'Proxima Centauri'},
     'Andromedae': {'ru': 'Андромеды', 'de': 'Andromedae'},
     #'Antliae': {'ru': '', 'de': 'Antliae'},
@@ -113,6 +114,7 @@ names = {
     'Sirius': {'ru': 'Сириус', 'de': 'Sirius'},
     'Sun': {'ru': 'Солнце', 'de': 'Sonne'},
     'Mercury': {'ru': 'Меркурий', 'de': 'Merkur'},
+    'Venus surface': {'ru': 'Поверхность Венеры', 'de': 'Venusoberfläche'},
     'Venus': {'ru': 'Венера', 'de': 'Venus'},
     'Earth': {'ru': 'Земля', 'de': 'Erde'},
     'Moon': {'ru': 'Луна', 'de': 'Mond'},
@@ -134,6 +136,7 @@ names = {
     'Dione': {'ru': 'Диона', 'de': 'Dione'},
     'Rhea': {'ru': 'Рея', 'de': 'Rhea'},
     'Titania': {'ru': 'Титания', 'de': 'Titania'},
+    'Titan surface': {'ru': 'Поверхность Титана', 'de': 'Titanoberfläche'},
     'Titan': {'ru': 'Титан', 'de': 'Titan'},
     'Uranian irregulars': {'ru': 'Нерег. сп. Урана', 'de': 'irreguläre Uranusmonde'},
     'Uranus': {'ru': 'Уран', 'de': 'Uranus'},
@@ -151,14 +154,25 @@ names = {
     'Juno': {'ru': 'Юнона', 'de': 'Juno'},
     'Vesta': {'ru': 'Веста', 'de': 'Vesta'},
     'Iris': {'ru': 'Ирида', 'de': 'Iris'},
+    'Metis': {'ru': 'Метида', 'de': 'Metis'},
+    'Egeria': {'ru': 'Эгерия', 'de': 'Egeria'},
+    'Eunomia': {'ru': 'Эвномия', 'de': 'Eunomia'},
     'Psyche': {'ru': 'Психея', 'de': 'Psyche'},
+    'Fortuna': {'ru': 'Фортуна', 'de': 'Fortuna'},
     'Kalliope': {'ru': 'Каллиопа', 'de': 'Kalliope'},
+    'Themis': {'ru': 'Фемида', 'de': 'Themis'},
+    'Amphitrite': {'ru': 'Амфитрита', 'de': 'Amphitrite'},
     'Euphrosyne': {'ru': 'Евфросина', 'de': 'Euphrosyne'},
     'Daphne': {'ru': 'Дафна', 'de': 'Daphne'},
     'Eugenia': {'ru': 'Евгения', 'de': 'Eugenia'},
+    'Doris': {'ru': 'Дорида', 'de': 'Doris'},
+    'Europa': {'ru': 'Европа', 'de': 'Europa'},
+    'Cybele': {'ru': 'Кибела', 'de': 'Cybele'},
     'Sylvia': {'ru': 'Сильвия', 'de': 'Sylvia'},
+    'Thisbe': {'ru': 'Фисба', 'de': 'Thisbe'},
     'Antiope': {'ru': 'Антиопа', 'de': 'Antiope'},
     'Minerva': {'ru': 'Минерва', 'de': 'Minerva'},
+    'Aurora': {'ru': 'Аврора', 'de': 'Aurora'},
     'Camilla': {'ru': 'Камилла', 'de': 'Camilla'},
     'Hermione': {'ru': 'Гермиона', 'de': 'Hermione'},
     'Elektra': {'ru': 'Электра', 'de': 'Elektra'},
@@ -178,6 +192,7 @@ names = {
     'Haumea': {'ru': 'Хаумеа', 'de': 'Haumea'},
     'Eris': {'ru': 'Эрида', 'de': 'Eris'},
     'Makemake': {'ru': 'Макемаке', 'de': 'Makemake'},
+    'Gonggong': {'ru': 'Гунгун', 'de': 'Gonggong'},
     'Arrokoth': {'ru': 'Аррокот', 'de': 'Arrokoth'},
     'Wenu': {'ru': 'Уэну', 'de': 'Wenu'},
     'Weeyo': {'ru': 'Уээйо', 'de': 'Weeyo'},
@@ -253,8 +268,8 @@ gui_gamma = {
     'de': 'Gammakorrektur'
 }
 gui_br = {
-    'en': ['Brightness display mode', 'albedo', 'chromaticity'],
-    'ru': ['Отображение яркости', 'альбедо', 'цветность'],
+    'en': ['Brightness mode', 'albedo', 'chromaticity'],
+    'ru': ['Режим яркости', 'альбедо', 'цветность'],
     'de': ['Helligkeitsmodus', 'Farbe mit Albedo', 'Farbton']
 }
 gui_interp = {

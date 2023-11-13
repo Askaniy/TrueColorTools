@@ -54,29 +54,23 @@ Program interface is functionally divided into tabs: *Database viewer*, *Multiba
 **Blackbody & Redshifts tab** calculates the influence of physical phenomena on color. Based on the blackbody spectrum, the program displays the changes in color and brightness from Doppler and gravitational redshifts. You can lock the exposure on the apparent magnitude logarithmic scale, adjusting the overexposure limit for a tuned blackbody object if it was in the sky replacing the Sun (with the angular size).
 
 ### Features
-- Tag system: Each object in the database can be assigned an arbitrary set of tags. They form lists of categories for the *Database viewer* tab, which makes it easier to work with a huge database.
-- Reference system: Each object in the database can be easily linked to one or several data sources by its short name. You can see the list in `File`→`Sources`. Also, after an object's name there can be abbreviations, the decoding of which is indicated in `File`→`Notes`.
+- Tag system: Each spectrum in the database can be assigned an arbitrary set of tags. They form lists of categories for the *Database viewer* tab, which makes working with the database easier.
+- Reference system: Each object in the database can be easily linked to one or several data sources by its short name. You can see the list in `File`→`References`. Also, object name can contain abbreviations, the decoding of which is indicated in `File`→`Notes`.
 - Multilingual support: The language can be changed through the top menu in runtime. TCT supports English, German and Russian. If you want to add support for your language, you can do it by analogy in [`strings.py`](src/strings.py) and make a commit or contact me.
 
 
-## Database Extension
-The data in the [spectra folder](spectra/) can be modified by the user (except for the "vital" spectra of the [Sun](spectra/files/CALSPEC/sun_reference_stis_002.fits) and [Vega](spectra/files/CALSPEC/alpha_lyr_stis_011.fits), they cannot be edited). Also, an `extras` folder can be created nearby, the contents of which will also be replenished with the database, at the top of the first tab's list. Spectrum and reference information is stored in JSON5 files. The program reads all the JSON5 files in the folder. The display order within TCT is determined by the file names and the order within the file. When duplicating, the last spectrum replaces the previously specified one. Tags can be anything, nothing will break. Their list is formed after reading the files. You can help the project by creating and sharing database files.
+## Databases
 
-Spectrum brightness scale does not affect anything. If you know that the spectrum is reflectivity (where 0 is total absorption and 1 is total reflection), then you can set `albedo=true` and TCT will be able to show the true brightness. Specifying a floating point number will require TCT to make this spectrum in Bessell V filter give such an albedo. Optional internal standard (e.g. for "vital" Solar and Vegan spectra, *Blackbody & Redshifts* tab) is flux spectral density measured in W / (m² nm).
+### Spectra database structure
+Data listed in a JSON5 file can be of two types: reference and photometry. There are no restrictions on their order and relative position at all (source and data can be in different files), but it is usually convenient to list the sources at the beginning of the file, then the spectra.
+
+The brightness scale is not strictly tied to physical quantities. Using the `albedo` flag, you can indicate that the incoming spectrum is scaled and the brightness in the range 0 to 1 should be treated as reflectance. The scaling task can be left to the program by specifying a wavelength or filter for which the albedo is known. Optional internal standard is flux spectral density measured in W / (m² nm).
+
+It is assumed that all data is indicated in ascending wavelength order, and for measurements that are calibrated according to Vega, a flag about this is required! TCT doesn't store information about which photometric systems use Vega as a white standard and which do not.
 
 You can store the file with the spectrum outside of JSON5, and put a link in it. Text and FITS (*.fits, *.fit) formats are supported for external files. The text file must be in two columns without a header, and the first column of wavelengths must be in angstroms. In FITS files assumed data containing in the second HDU. If you have problems reading FITS, contact me, I'll improve the parsing on this example.
 
-100 stellar spectra of [CALSPEC database](https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec) (as of August 12, 2023) are stored as FITS files in the [spectra/files/CALSPEC](spectra/files/CALSPEC) folder. If you add spectrum from the database, it is recommended to take the "stis" version and pay attention to the presence of the B−V color index in the table.
-
-TCT use filter sensitivity profiles for accurate spectrum restoration. They are provided by [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php) and stored [here](/filters). To replenish the database, select a filter on the site, choose the `ascii` data file and place it in the folder. If you see `Detector Type: Photon counter` in the filter description there (instead of `Energy counter` we need) rename the file by putting "-" at the beginning.
-
-Brief help on the UBVRI photometric system implementations:
-- Generic_Johnson takes into account the sensitivity of photomultiplier tubes, mostly affected on R and I bands. Use **only** if the measurements were actually recorded on a PMT.
-- Generic_Cousins contains only R and I bands. Can be used with the U, B, V from Johnson system directly, but the error is expected to be large.
-- Generic_Bessell is actually Johnson—Cousins system for CCD receiver. Recommended by default.
-
-### Database keys
-Note that any parameters must increase with wavelength.
+Supported input keys of a database unit:
 - `nm` (list): list of wavelengths in nanometers
 - `br` (list): same-size list of "brightness" of an energy counter detector (not photon counter)
 - `mag` (list): same-size list of magnitudes
@@ -90,3 +84,18 @@ Note that any parameters must increase with wavelength.
 - `sun` (bool): `true` to remove Sun as emitter
 - `vega` (bool): `true` to untie from the white standard according to Vega
 - `tags` (list): strings, categorizes a spectrum
+
+### Spectra database extension
+The data in the `/spectra` folder can be modified by user (except for the "vital" spectra of the [Sun](spectra/files/CALSPEC/sun_reference_stis_002.fits) and [Vega](spectra/files/CALSPEC/alpha_lyr_stis_011.fits)). The display order in the *Database viewer* is determined by the file names and the order within the file. When repeating the spectrum header in the database, the last spectrum replaces the previously specified one. Tags can be anything, nothing will break. Their list is formed after reading the files. `"/spectra extras"` is recommended as a storage location for user files; they will be shown first in the GUI. You can help the project by creating and sharing database files.
+
+100 stellar spectra of [CALSPEC database](https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec) (as of August 12, 2023) are stored as FITS files in the [spectra/files/CALSPEC](spectra/files/CALSPEC) folder. If you add spectrum from the database, it is recommended to take the "stis" version and pay attention to the presence of the B−V color index in the table.
+
+### Filters database extension
+TCT use filter sensitivity profiles for accurate spectrum restoration. They are provided by [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php) and stored [here](/filters). To replenish the database, select a filter on the site, choose the "ascii" data file and place it in the folder. If you see "Detector Type: Photon counter" in the filter description there (instead of "Energy counter" we need) rename the file by putting `-` at the beginning.
+
+Some of files in the `/filters` folder are "vital": [V band filter](filters/Generic_Bessell.V.dat) and human eye's color matching functions. You can create `"/filter extras"` folder for personal use.
+
+Brief help on the UBVRI photometric system implementations:
+- `Generic_Johnson` takes into account the sensitivity of photomultiplier tubes, mostly affected on R and I bands. Use **only** if the measurements were actually recorded on a PMT.
+- `Generic_Cousins` contains only R and I bands. Can be used with the U, B, V from Johnson system directly, but the error is expected to be large.
+- `Generic_Bessell` is actually Johnson—Cousins system for CCD receiver. Recommended by default.

@@ -110,6 +110,7 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         [sg.Column(T2_frames, scrollable=True, vertical_scroll_only=True, key='T2_frames', expand_y=True)]
     ]
     T2_col2 = [
+        [sg.Text('The tab temporarily not works!', font=title_font, text_color='red')],
         [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T2_title2'), sg.Push()],
         [sg.Canvas(key='T2_canvas')],
         [sg.Checkbox(tr.gui_desun[lang], key='T2_desun')],
@@ -187,7 +188,7 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
     ]
 
 
-def translate(window: sg.Window, T2_vis: int, lang: str):
+def translate(window: sg.Window, T2_num: int, lang: str):
     window['menu'].update(tr.gui_menu[lang])
     window['tab1'].update(title=tr.gui_tabs[lang][0])
     window['tab2'].update(title=tr.gui_tabs[lang][1])
@@ -223,7 +224,7 @@ def translate(window: sg.Window, T2_vis: int, lang: str):
     window['T2_bgrText2'].update(tr.gui_BGRcolors[lang][2])
     window['T2_step2'].update(tr.gui_step2[lang])
     window['T2_pathText'].update(tr.gui_browse[lang])
-    for i in range(T2_vis):
+    for i in range(T2_num):
         window['T2_band'+str(i)].update(f'{tr.gui_band[lang]} {i+1}')
         window['T2_filterText'+str(i)].update(tr.gui_filter[lang])
         window['T2_brText'+str(i)].update(tr.gui_brightness[lang])

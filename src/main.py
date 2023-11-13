@@ -77,7 +77,7 @@ def launch_window(lang: str):
                 pass
         # (allows other tab checks to happen)
         elif event == '-currentTab-':
-            is_color_circle = int(values['-currentTab-'] in ('tab1', 'tab4'))
+            is_color_circle = int(values['-currentTab-'] in ('tab1', 'tab3'))
             window['-formattingText-'].update(text_color=text_colors[is_color_circle])
             window['-bitnessText-'].update(text_color=text_colors[is_color_circle])
             window['-roundingText-'].update(text_color=text_colors[is_color_circle])
@@ -113,7 +113,7 @@ def launch_window(lang: str):
             sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event)
         
         elif event == 'T1_database': # global loading of spectra database, was needed for separate Table tab
-            objectsDB, refsDB = di.import_DBs(['extras', 'spectra'])
+            objectsDB, refsDB = di.import_DBs(['spectra extras', 'spectra'])
             tagsDB = di.tag_list(objectsDB)
             window['T1_tagsN'].update(visible=True)
             window['T1_tags'].update(default_tag, values=tagsDB, visible=True)

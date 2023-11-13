@@ -118,8 +118,8 @@ def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int|flo
             diff = y[1]-y[0]
             corner_y = y[0]
         else:
-            avg_weights = np.abs(np.arange(-avg_steps, 0)) # weights could be more complicated, but there is no need
-            diff = np.average(y_scope[1:]-y_scope[:-1], weights=avg_weights[:-1])
+            avg_weights = np.abs(np.arange(-avg_steps, 0)[avg_steps-y_scope.size:]) # weights could be more complicated, but there is no need
+            diff = np.average(np.diff(y_scope), weights=avg_weights[:-1])
             corner_y = np.average(y_scope, weights=avg_weights) - diff * avg_steps * weights_center_of_mass
         y1 = custom_extrap(x1, diff/step, x[0], corner_y)
         x = np.append(x1, x)
@@ -131,8 +131,8 @@ def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int|flo
             diff = y[-1]-y[-2]
             corner_y = y[-1]
         else:
-            avg_weights = np.arange(avg_steps) + 1
-            diff = np.average(y_scope[1:]-y_scope[:-1], weights=avg_weights[1:])
+            avg_weights = np.arange(avg_steps)[:y_scope.size] + 1
+            diff = np.average(np.diff(y_scope), weights=avg_weights[1:])
             corner_y = np.average(y_scope, weights=avg_weights) + diff * avg_steps * weights_center_of_mass
         y1 = custom_extrap(x1, diff/step, x[-1], corner_y)
         x = np.append(x, x1)
@@ -182,12 +182,12 @@ class Spectrum:
         - `scope` (np.ndarray): makes a spectrum of the same resolution as at least defined at the given wavelengths
         """
         try:
+            nm = np.array(nm) # numpy decides int or float
+            br = np.array(br, dtype='float')
             if nm[-1] > nm_red_limit:
                 flag = np.where(nm < nm_red_limit + resolution) # with reserve to be averaged
                 nm = nm[flag]
                 br = br[flag]
-            nm = np.array(nm) # numpy decides int or float
-            br = np.array(br, dtype='float')
             if np.any((diff := np.diff(nm)) != resolution): # if not uniform 5 nm grid
                 uniform_nm = grid(nm[0], nm[-1], resolution)
                 if diff.mean() >= resolution: # interpolation, increasing resolution
@@ -411,7 +411,7 @@ def from_database(name: str, content: dict) -> Spectrum | Photometry:
     """
     Depending on the contents of the object read from the database, returns a class that has `to_scope()` method
 
-    Supported input keys of database unit:
+    Supported input keys of a database unit:
     - `nm` (list): list of wavelengths in nanometers
     - `br` (list): same-size list of "brightness" of an energy counter detector (not photon counter)
     - `mag` (list): same-size list of magnitudes
