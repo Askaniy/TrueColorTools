@@ -75,7 +75,7 @@ Supported input keys of a database unit:
 - `br` (list): same-size list of "brightness" of an energy counter detector (not photon counter)
 - `mag` (list): same-size list of magnitudes
 - `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
-- `file` (str): path to a text or FITS file, recommended placing in `spectra` or `extras` folder
+- `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
 - `filters` (list): list of filter names that can be found in the `filters` folder
 - `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': *float*, ...}`
 - `system` (str): a way to bracket the name of the photometric system
@@ -86,14 +86,12 @@ Supported input keys of a database unit:
 - `tags` (list): strings, categorizes a spectrum
 
 ### Spectra database extension
-The data in the `/spectra` folder can be modified by user (except for the "vital" spectra of the [Sun](spectra/files/CALSPEC/sun_reference_stis_002.fits) and [Vega](spectra/files/CALSPEC/alpha_lyr_stis_011.fits)). The display order in the *Database viewer* is determined by the file names and the order within the file. When repeating the spectrum header in the database, the last spectrum replaces the previously specified one. Tags can be anything, nothing will break. Their list is formed after reading the files. `"/spectra extras"` is recommended as a storage location for user files; they will be shown first in the GUI. You can help the project by creating and sharing database files.
+The data in the `/spectra` folder can be modified by user (except for the "vital" spectra of the [Sun](spectra/files/CALSPEC/sun_reference_stis_002.fits) and [Vega](spectra/files/CALSPEC/alpha_lyr_stis_011.fits)). The display order in the *Database viewer* is determined by the file names and the order within the file. When repeating the spectrum header in the database, the last spectrum replaces the previously specified one. Tags can be anything, nothing will break. Their list is formed after reading the files. `/spectra_extras` is recommended as a storage location for user files; they will be shown first in the GUI. You can help the project by creating and sharing database files.
 
 100 stellar spectra of [CALSPEC database](https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec) (as of August 12, 2023) are stored as FITS files in the [spectra/files/CALSPEC](spectra/files/CALSPEC) folder. If you add spectrum from the database, it is recommended to take the "stis" version and pay attention to the presence of the B−V color index in the table.
 
 ### Filters database extension
-TCT use filter sensitivity profiles for accurate spectrum restoration. They are provided by [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php) and stored [here](/filters). To replenish the database, select a filter on the site, choose the "ascii" data file and place it in the folder. If you see "Detector Type: Photon counter" in the filter description there (instead of "Energy counter" we need) rename the file by putting `-` at the beginning.
-
-Some of files in the `/filters` folder are "vital": [V band filter](filters/Generic_Bessell.V.dat) and human eye's color matching functions. You can create `"/filter extras"` folder for personal use.
+TCT use filter sensitivity profiles for accurate spectrum restoration. They are provided by [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php) and stored [here](/filters). To replenish the database, select a filter on the site, choose the "ascii" data file and place it in the folder. If you see "Detector Type: Photon counter" in the filter description there (instead of "Energy counter" we need) rename the file by putting `-` at the beginning. Please note that [V band filter](filters/Generic_Bessell.V.dat) in the `/filters` folder is "vital".
 
 Brief help on the UBVRI photometric system implementations:
 - `Generic_Johnson` takes into account the sensitivity of photomultiplier tubes, mostly affected on R and I bands. Use **only** if the measurements were actually recorded on a PMT.

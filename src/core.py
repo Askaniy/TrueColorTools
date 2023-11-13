@@ -416,7 +416,7 @@ def from_database(name: str, content: dict) -> Spectrum | Photometry:
     - `br` (list): same-size list of "brightness" of an energy counter detector (not photon counter)
     - `mag` (list): same-size list of magnitudes
     - `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
-    - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `extras` folder
+    - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
     - `filters` (list): list of filter names that can be found in the `filters` folder
     - `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': *float*, ...}`
     - `system` (str): a way to bracket the name of the photometric system

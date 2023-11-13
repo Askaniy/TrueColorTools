@@ -113,7 +113,7 @@ def launch_window(lang: str):
             sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event)
         
         elif event == 'T1_database': # global loading of spectra database, was needed for separate Table tab
-            objectsDB, refsDB = di.import_DBs(['spectra extras', 'spectra'])
+            objectsDB, refsDB = di.import_DBs(['spectra_extras', 'spectra'])
             tagsDB = di.tag_list(objectsDB)
             window['T1_tagsN'].update(visible=True)
             window['T1_tags'].update(default_tag, values=tagsDB, visible=True)
