@@ -397,15 +397,15 @@ class Photometry:
 
 
 def color_indices_parsing(indices: dict):
-    """ Converts color indices to linear brightness, assuming 1 Vega intensity in the first filter """
-    # Names parsing
-    keys = tuple(indices.keys())
-    filters = [keys[0].split('-')[0]]
-    for key in keys:
-        filters.append(key.split('-')[-1])
-    # Magnitudes parsing
-    values = np.array(tuple(indices.values()))
-    return filters, np.append(1., mag2irradiance(np.cumsum(-values)))
+    """
+    Converts color indices to linear brightness, assuming 1 Vega intensity in the first filter.
+    Filters should be specified in ascending order, with the second filter having faster iteration.
+    """
+    filters = {tuple(indices.keys())[0].split('-')[0]: 1} # assuming 1 Vega intensity in the first filter
+    for key, value in indices.items():
+        reference_filter, current_filter = key.split('-')
+        filters |= {current_filter: filters[reference_filter] - value}
+    return filters.keys(), mag2irradiance(np.array(tuple(filters.values())))
 
 def from_database(name: str, content: dict) -> Spectrum | Photometry:
     """

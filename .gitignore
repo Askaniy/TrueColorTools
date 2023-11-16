@@ -1,4 +1,4 @@
-extras/
+spectra_extras/
 .venv/
 .vscode/
 **/__pycache__/
