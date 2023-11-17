@@ -107,6 +107,14 @@
         "Photometry of Transneptunian Objects for the Herschel Key Program ‘TNOs are Cool’",
         "DOI: 10.1007/s11038-014-9450-x", "https://link.springer.com/article/10.1007/s11038-014-9450-x"
     ],
+    "Thirouin2019": [
+        "Colors of Trans-Neptunian Contact Binaries",
+        "DOI: 10.3847/1538-3881/ab27bc", "https://iopscience.iop.org/article/10.3847/1538-3881/ab27bc"
+    ],
+    "Markwardt2023": [
+        "Photometric Survey of Neptune's Trojan Asteroids. I. The Color Distribution",
+        "DOI: 10.3847/PSJ/ace528", "https://iopscience.iop.org/article/10.3847/PSJ/ace528"
+    ],
 
     "Mercury|Mallama2017": {"tags": ["featured", "solar system", "planet geophysical", "planet"],
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.087, 0.105, 0.142, 0.158, 0.172, 0.180, 0.208], "albedo": true
@@ -385,17 +393,11 @@
         1.068, 1.029, 1.0, 0.978, 0.975, 0.946, 0.917, 0.935],
         "scale": ["Generic_Bessell.V", 0.29], // https://academic.oup.com/pasj/article/66/3/52/1438030
     },
-    //"(90482) Orcus|Howett2019": {"tags": ["solar system", "minor body", "dwarf planet", "tno", "plutino"],
-    //	"system": "Hubble", "filters": ["F606W", "F814W", "F110W", "F160W"], "mag": [19.186, 18.62, 20.64, 21.65], "vega": false
-    //},
-    //"Vanth|Howett2019": {"tags": ["solar system", "minor body", "tno", "plutino", "moon"],
-    //	"system": "Hubble", "filters": ["F606W", "F814W", "F110W", "F160W"], "mag": [21.73, 20.90, 23.3, 24.0], "vega": false
-    //},
     "(90482) Orcus|Howett2019": {"tags": ["solar system", "planet geophysical", "minor body", "dwarf planet", "tno", "plutino"],
-        "system": "Generic_Bessell", "indices": {"V-I": 0.73}, "sun": true, "calib": "Vega"
+        "system": "Generic_Bessell", "indices": {"V-I": 0.73}, "calib": "Vega", "sun": true
     },
     "Vanth|Howett2019": {"tags": ["solar system", "minor body", "tno", "plutino"],
-        "system": "Generic_Bessell", "indices": {"V-I": 1.03}, "sun": true, "calib": "Vega"
+        "system": "Generic_Bessell", "indices": {"V-I": 1.03}, "calib": "Vega", "sun": true
     },
     "(101955) Bennu|LeCorre2019": {"tags": ["featured", "solar system", "minor body", "asteroid", "main belt"],
         "nm": [473.228, 549.146, 697.569, 847.937],
@@ -438,7 +440,7 @@
         "scale": ["Generic_Bessell.V", 0.83], // albedo from zelario's sheet
     },
     "(225088) Gonggong|Boehnhardt2014": {"tags": ["featured", "solar system", "planet geophysical", "minor body", "dwarf planet", "tno", "detached"],
-        "system": "Generic_Bessell", "indices": {"B-V": 1.38, "V-R": 0.86, "R-I": 0.79}, "sun": true, "calib": "Vega", "scale": ["Generic_Bessell.V", 0.14]
+        "system": "Generic_Bessell", "indices": {"B-V": 1.38, "V-R": 0.86, "R-I": 0.79}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.14]
     }, // albedo from Kiss et al. 2019
     "(486958) Wenu|Howett2019": {"tags": ["featured", "solar system", "minor body", "tno", "classical", "classical-h"],
         "system": "-NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.053, 0.079, 0.117], "albedo": true
@@ -450,9 +452,75 @@
         "system": "-NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.066, 0.090, 0.125], "albedo": true
     },
     "1I/ʻOumuamua|Jewitt2017": {"tags": ["featured", "solar system", "extrasolar", "asteroid"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.70, "V-R": 0.45}, "sun": true, "calib": "Vega", "scale": ["Generic_Bessell.V", 0.1]
+        "system": "Generic_Bessell", "indices": {"B-V": 0.70, "V-R": 0.45}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.1]
     },
     "1I/ʻOumuamua|Bannister2017": {"tags": ["solar system", "extrasolar", "asteroid"],
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.47, "r-i": 0.36}, "sun": true, "calib": "Vega", "scale": ["Generic_Bessell.V", 0.07]
-    }
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.47, "r-i": 0.36}, "calib": "AB", "sun": true, "scale": ["Generic_Bessell.V", 0.07]
+    },
+    "2004 VC131|Thirouin2019": {"tags": ["solar system", "minor body", "tno", "classical", "classical-c"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.89, "g-i": 1.40}, "calib": "AB", "sun": true
+    },
+    "2004 VU75|Thirouin2019": {"tags": ["solar system", "minor body", "tno", "classical", "classical-c"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.96, "g-i": 1.42}, "calib": "AB", "sun": true
+    },
+    "2012 DX98|Thirouin2019": {"tags": ["solar system", "minor body", "tno", "classical", "classical-h"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.85, "g-i": 1.25}, "calib": "AB", "sun": true
+    },
+    "2013 FR28|Thirouin2019": {"tags": ["solar system", "minor body", "tno", "classical", "classical-h"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.95, "g-i": 1.36}, "calib": "AB", "sun": true
+    },
+    "2014 JL80|Thirouin2019": {"tags": ["solar system", "minor body", "tno", "classical", "classical-h"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.74}, "calib": "AB", "sun": true
+    },
+    "2014 JO80|Thirouin2019": {"tags": ["solar system", "minor body", "tno", "classical", "classical-h"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.67, "g-i": 0.91}, "calib": "AB", "sun": true
+    },
+    "2014 JQ80|Thirouin2019": {"tags": ["solar system", "minor body", "tno", "classical", "classical-h"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.76, "g-i": 1.05}, "calib": "AB", "sun": true
+    },
+    "2006 RJ103|Markwardt2023": {"tags": ["solar system", "minor body", "neptune's trojan"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.59, "r-i": 0.16}, "calib": "AB", "sun": true
+    },
+    "2007 VL305|Markwardt2023": {"tags": ["solar system", "minor body", "neptune's trojan"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.60, "r-i": 0.25}, "calib": "AB", "sun": true
+    },
+    "2010 TS191|Markwardt2023": {"tags": ["solar system", "minor body", "neptune's trojan"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.61, "r-i": 0.30}, "calib": "AB", "sun": true
+    },
+    "2011 SO277|Markwardt2023": {"tags": ["solar system", "minor body", "neptune's trojan"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.60, "r-i": 0.57}, "calib": "AB", "sun": true
+    },
+    "2012 UD185|Markwardt2023": {"tags": ["solar system", "minor body", "neptune's trojan"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.61, "r-i": 0.37}, "calib": "AB", "sun": true
+    },
+    "2012 UV177|Markwardt2023": {"tags": ["solar system", "minor body", "neptune's trojan"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.71, "r-i": 0.23}, "calib": "AB", "sun": true
+    },
+    "2013 RL124|Markwardt2023": {"tags": ["solar system", "minor body", "neptune's trojan"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.38, "r-i": 0.54}, "calib": "AB", "sun": true
+    },
+    "2013 TZ187|Markwardt2023": {"tags": ["solar system", "minor body", "neptune's trojan"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.90, "r-i": 0.30}, "calib": "AB", "sun": true
+    },
+    "2013 VX30|Markwardt2023": {"tags": ["solar system", "minor body", "neptune's trojan"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 1.01, "r-i": 0.44}, "calib": "AB", "sun": true
+    },
+    "2014 RO74|Markwardt2023": {"tags": ["solar system", "minor body", "neptune's trojan"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.65, "r-i": 0.42}, "calib": "AB", "sun": true
+    },
+    "2014 SC374|Markwardt2023": {"tags": ["solar system", "minor body", "neptune's trojan"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.43, "r-i": 0.12}, "calib": "AB", "sun": true
+    },
+    "2014 YB92|Markwardt2023": {"tags": ["solar system", "minor body", "neptune's trojan"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.46, "r-i": 0.07}, "calib": "AB", "sun": true
+    },
+    "2015 VU207|Markwardt2023": {"tags": ["solar system", "minor body", "neptune's trojan"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.31, "r-i": 0.24}, "calib": "AB", "sun": true
+    },
+    "2015 VV165|Markwardt2023": {"tags": ["solar system", "minor body", "neptune's trojan"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.87, "r-i": 0.32}, "calib": "AB", "sun": true
+    },
+    "2015 VW165|Markwardt2023": {"tags": ["solar system", "minor body", "neptune's trojan"], // added 17.11.2023
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.45, "r-i": 0.36}, "calib": "AB", "sun": true
+    },
 }
