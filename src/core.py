@@ -339,6 +339,10 @@ vega_SI = Spectrum.from_array('Vega', *di.fits_reader('spectra/files/CALSPEC/alp
 vega_in_V = vega_SI ** bessell_V.scaled_by_area()
 vega_norm = vega_SI.scaled_to_albedo(1, bessell_V)
 
+lambdas = np.arange(5, nm_red_limit+1, 5)
+equal_frequency_density = Spectrum('AB', lambdas, 1/lambdas**2).scaled_to_albedo(1, bessell_V) # f_lambda=f_nu*c/lambda^2
+del lambdas
+
 
 class Photometry:
     def __init__(self, name: str, filters: Iterable[Spectrum], br: Iterable):
@@ -420,10 +424,10 @@ def from_database(name: str, content: dict) -> Spectrum | Photometry:
     - `filters` (list): list of filter names that can be found in the `filters` folder
     - `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': *float*, ...}`
     - `system` (str): a way to bracket the name of the photometric system
+    - `calib` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
     - `albedo` (bool): `true` if brightness in the [0, 1] range represents scaled (reflective) spectrum
     - `scale` (list): sets the (reflectivity) at the wavelength, formatted `[*nm or filter name*, *float*]`
     - `sun` (bool): `true` to remove Sun as emitter
-    - `vega` (bool): `true` to untie from the white standard according to Vega
     - `tags` (list): strings, categorizes a spectrum
     """
     br = []
@@ -482,12 +486,17 @@ def from_database(name: str, content: dict) -> Spectrum | Photometry:
             print(f'# Note for the database object "{name}"')
             print(f'- No wavelength data. Spectrum stub object was created.')
             return Spectrum(name, *nm_br_stub)
-        if 'vega' in content and content['vega']:
-            result *= vega_norm
+        if 'calib' in content:
+            match content['calib'].lower():
+                case 'vega':
+                    result *= vega_norm
+                case 'ab':
+                    result *= equal_frequency_density
+                case _:
+                    pass
         if 'sun' in content and content['sun']:
             result /= sun_norm
         return result
-
 
 def xy2xyz(xy):
     return np.array((xy[0], xy[1], 1-xy[0]-xy[0])) # (x, y, 1-x-y)

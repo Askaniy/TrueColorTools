@@ -392,10 +392,10 @@
     //	"system": "Hubble", "filters": ["F606W", "F814W", "F110W", "F160W"], "mag": [21.73, 20.90, 23.3, 24.0], "vega": false
     //},
     "(90482) Orcus|Howett2019": {"tags": ["solar system", "planet geophysical", "minor body", "dwarf planet", "tno", "plutino"],
-        "system": "Generic_Bessell", "indices": {"V-I": 0.73}, "sun": true, "vega": true
+        "system": "Generic_Bessell", "indices": {"V-I": 0.73}, "sun": true, "calib": "Vega"
     },
     "Vanth|Howett2019": {"tags": ["solar system", "minor body", "tno", "plutino"],
-        "system": "Generic_Bessell", "indices": {"V-I": 1.03}, "sun": true, "vega": true
+        "system": "Generic_Bessell", "indices": {"V-I": 1.03}, "sun": true, "calib": "Vega"
     },
     "(101955) Bennu|LeCorre2019": {"tags": ["featured", "solar system", "minor body", "asteroid", "main belt"],
         "nm": [473.228, 549.146, 697.569, 847.937],
@@ -438,7 +438,7 @@
         "scale": ["Generic_Bessell.V", 0.83], // albedo from zelario's sheet
     },
     "(225088) Gonggong|Boehnhardt2014": {"tags": ["featured", "solar system", "planet geophysical", "minor body", "dwarf planet", "tno", "detached"],
-        "system": "Generic_Bessell", "indices": {"B-V": 1.38, "V-R": 0.86, "R-I": 0.79}, "sun": true, "vega": true, "scale": ["Generic_Bessell.V", 0.14]
+        "system": "Generic_Bessell", "indices": {"B-V": 1.38, "V-R": 0.86, "R-I": 0.79}, "sun": true, "calib": "Vega", "scale": ["Generic_Bessell.V", 0.14]
     }, // albedo from Kiss et al. 2019
     "(486958) Wenu|Howett2019": {"tags": ["featured", "solar system", "minor body", "tno", "classical", "classical-h"],
         "system": "-NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.053, 0.079, 0.117], "albedo": true
@@ -450,9 +450,9 @@
         "system": "-NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.066, 0.090, 0.125], "albedo": true
     },
     "1I/ʻOumuamua|Jewitt2017": {"tags": ["featured", "solar system", "extrasolar", "asteroid"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.70, "V-R": 0.45}, "sun": true, "vega": true, "scale": ["Generic_Bessell.V", 0.1]
+        "system": "Generic_Bessell", "indices": {"B-V": 0.70, "V-R": 0.45}, "sun": true, "calib": "Vega", "scale": ["Generic_Bessell.V", 0.1]
     },
     "1I/ʻOumuamua|Bannister2017": {"tags": ["solar system", "extrasolar", "asteroid"],
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.47, "r-i": 0.36}, "sun": true, "vega": true, "scale": ["Generic_Bessell.V", 0.07]
+        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.47, "r-i": 0.36}, "sun": true, "calib": "Vega", "scale": ["Generic_Bessell.V", 0.07]
     }
 }

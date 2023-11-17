@@ -5,10 +5,10 @@
     ],
     
     "Halimede|Graykowski2018": {"tags": ["solar system", "moon", "neptunian system", "irregular"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.89, "V-R": 0.56}, "sun": true, "vega": true
+        "system": "Generic_Bessell", "indices": {"B-V": 0.89, "V-R": 0.56}, "sun": true, "calib": "Vega"
     },
     "Nereid|Graykowski2018": {"tags": ["solar system", "moon", "neptunian system", "irregular"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.67, "V-R": 0.38}, "sun": true, "vega": true
+        "system": "Generic_Bessell", "indices": {"B-V": 0.67, "V-R": 0.38}, "sun": true, "calib": "Vega"
     },
     "Nereid|Schaefer2000": {"tags": ["featured", "solar system", "moon", "neptunian system", "irregular"],
         "system": "Generic_Bessell", "filters": ["U", "B", "V", "R", "I"], "br": [0.90, 0.93, 1, 1.13, 0.99], "scale": ["Generic_Bessell.V", 0.24]

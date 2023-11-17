@@ -66,7 +66,7 @@ Data listed in a JSON5 file can be of two types: reference and photometry. There
 
 The brightness scale is not strictly tied to physical quantities. Using the `albedo` flag, you can indicate that the incoming spectrum is scaled and the brightness in the range 0 to 1 should be treated as reflectance. The scaling task can be left to the program by specifying a wavelength or filter for which the albedo is known. Optional internal standard is flux spectral density measured in W / (m² nm).
 
-It is assumed that all data is indicated in ascending wavelength order, and for measurements that are calibrated according to Vega, a flag about this is required! TCT doesn't store information about which photometric systems use Vega as a white standard and which do not.
+It is assumed that all data is indicated in ascending wavelength order, and it is necessary to specify "white spectrum" for calibration if photometric system you use not determines it by equal-energy one by wavelengths ([this link](https://hst-docs.stsci.edu/acsdhb/chapter-5-acs-data-analysis/5-1-photometry#id-5.1Photometry-5.1.15.1.1PhotometricSystems,Units,andZeropoints) may help).
 
 You can store the file with the spectrum outside of JSON5, and put a link in it. Text and FITS (*.fits, *.fit) formats are supported for external files. The text file must be in two columns without a header, and the first column of wavelengths must be in angstroms. In FITS files assumed data containing in the second HDU. If you have problems reading FITS, contact me, I'll improve the parsing on this example.
 
@@ -79,10 +79,10 @@ Supported input keys of a database unit:
 - `filters` (list): list of filter names that can be found in the `filters` folder
 - `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': *float*, ...}`
 - `system` (str): a way to bracket the name of the photometric system
+- `calib` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
 - `albedo` (bool): `true` if brightness in the [0, 1] range represents scaled (reflective) spectrum
 - `scale` (list): sets the (reflectivity) at the wavelength, formatted `[*nm or filter name*, *float*]`
 - `sun` (bool): `true` to remove Sun as emitter
-- `vega` (bool): `true` to untie from the white standard according to Vega
 - `tags` (list): strings, categorizes a spectrum
 
 ### Spectra database extension
