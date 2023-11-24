@@ -115,6 +115,11 @@
         "Photometric Survey of neptune trojan Asteroids. I. The Color Distribution",
         "DOI: 10.3847/PSJ/ace528", "https://iopscience.iop.org/article/10.3847/PSJ/ace528"
     ],
+    "Sheppard2018": [
+        "The Albedos, Sizes, Colors, and Satellites of Dwarf Planets Compared with Newly Measured Dwarf Planet 2013 FY27",
+        "DOI: 10.3847/1538-3881/aae92a", "https://iopscience.iop.org/article/10.3847/1538-3881/aae92a"
+    ],
+    
 
     "Mercury|Mallama2017": {"tags": ["featured", "Solar system", "planet geophysical", "planet"],
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.087, 0.105, 0.142, 0.158, 0.172, 0.180, 0.208], "albedo": true
@@ -450,6 +455,13 @@
     },
     "(486958) Akasa|Howett2019": {"tags": ["featured", "Solar system", "minor body", "TNO", "classical", "classical-h", "surface feature"],
         "system": "-NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.066, 0.090, 0.125], "albedo": true
+    },
+    "(532037) 2013 FY27|Sheppard2018": {"tags": ["Solar system", "minor body", "TNO", "detached"],
+        "system": "Generic_Bessell",
+        "indices": {"V-R": 0.56, "R-I": 0.52},
+        "calib": "Vega",
+        "sun": true,
+        "scale": ["Generic_Bessell.V", 0.17]
     },
     "1I/ʻOumuamua|Jewitt2017": {"tags": ["featured", "Solar system", "extrasolar", "asteroid"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.70, "V-R": 0.45}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.1]
