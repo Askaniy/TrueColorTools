@@ -620,8 +620,8 @@
         "system": "Generic_Bessell", "indices": {"B-V": 0.730, "V-R": 0.364, "R-I": 0.230}, "calib": "Vega", "sun": true
     },
     "(28978) Ixion|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "plutino"],
-        "system": "Generic_Bessell", "indices": {"B-V": 1.018, "V-R": 0.605, "R-I": 0.580}, "calib": "Vega", "sun": true
-    },
+        "system": "Generic_Bessell", "indices": {"B-V": 1.018, "V-R": 0.605, "R-I": 0.580}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.108]
+    }, // albedo from Verbiscer et al. (2022)
     "(29981) 1999 TD10|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "scattered"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.808, "V-R": 0.502, "R-I": 0.511}, "calib": "Vega", "sun": true
     },
@@ -734,8 +734,8 @@
         "system": "Generic_Bessell", "indices": {"B-V": 0.711, "V-R": 0.476, "R-I": 0.400}, "calib": "Vega", "sun": true
     },
     "(55565) 2002 AW197|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.915, "V-R": 0.589, "R-I": 0.581}, "calib": "Vega", "sun": true
-    },
+        "system": "Generic_Bessell", "indices": {"B-V": 0.915, "V-R": 0.589, "R-I": 0.581}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.112]
+    }, // albedo from Vilenius et al. (2014)
     "(55576) Amycus|MBOSS": {"tags": ["Solar system", "minor body", "asteroid", "centaur"],
         "system": "Generic_Bessell", "indices": {"B-V": 1.111, "V-R": 0.705, "R-I": 0.666}, "calib": "Vega", "sun": true
     },
@@ -929,8 +929,8 @@
         "system": "Generic_Bessell", "indices": {"B-V": 0.693, "V-R": 0.375, "R-I": 0.215}, "calib": "Vega", "sun": true
     },
     "(120347) Salacia|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.664, "V-R": 0.403, "R-I": 0.433}, "calib": "Vega", "sun": true
-    },
+        "system": "Generic_Bessell", "indices": {"B-V": 0.664, "V-R": 0.403, "R-I": 0.433}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.042]
+    }, // albedo from Brown and Butler (2017)
     "(120348) 2004 TY364|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "plutino"],
         "system": "Generic_Bessell", "indices": {"B-V": 1.059, "V-R": 0.601, "R-I": 0.520}, "calib": "Vega", "sun": true
     },
@@ -1016,8 +1016,8 @@
         "system": "Generic_Bessell", "indices": {"B-V": 0.669, "V-R": 0.445, "R-I": 0.463}, "calib": "Vega", "sun": true
     },
     "(174567) Varda|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.892, "V-R": 0.556, "R-I": 0.510}, "calib": "Vega", "sun": true
-    },
+        "system": "Generic_Bessell", "indices": {"B-V": 0.892, "V-R": 0.556, "R-I": 0.510}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.099]
+    }, // albedo from Souami et al. (2020)
     "(181708) 1993 FW|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
         "system": "Generic_Bessell", "indices": {"B-V": 1.023, "V-R": 0.583, "R-I": 0.439}, "calib": "Vega", "sun": true
     },
@@ -1061,8 +1061,8 @@
         "system": "Generic_Bessell", "indices": {"B-V": 0.877, "V-R": 0.593}, "calib": "Vega", "sun": true
     },
     "(307261) 2002 MS4|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.690, "V-R": 0.380}, "calib": "Vega", "sun": true
-    },
+        "system": "Generic_Bessell", "indices": {"B-V": 0.690, "V-R": 0.380}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.1]
+    }, // albedo from Rommel et al. (2023)
     "(307982) 2004 PG115|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "detached"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.966, "V-R": 0.664, "R-I": 0.633}, "calib": "Vega", "sun": true
     },
