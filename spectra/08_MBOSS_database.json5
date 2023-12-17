@@ -1042,6 +1042,9 @@
     "(208996) 2003 AZ84|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "plutino"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.738, "V-R": 0.430, "R-I": 0.473}, "calib": "Vega", "sun": true
     },
+    "(229762) Gǃkúnǁʼhòmdímà|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "detached"],
+        "system": "Generic_Bessell", "indices": {"V-R": 0.582, "R-I": 0.470}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.142]
+    }, // albedo from Ortiz et al. (2019)
     "(248835) 2006 SX368|MBOSS": {"tags": ["Solar system", "minor body", "asteroid", "centaur"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.758, "V-R": 0.478, "R-I": 0.471}, "calib": "Vega", "sun": true
     },
