@@ -401,8 +401,8 @@
         "system": "Generic_Bessell", "indices": {"B-V": 0.716, "V-R": 0.456, "R-I": 0.424}, "calib": "Vega", "sun": true
     },
     "(2060) Chiron|MBOSS": {"tags": ["featured", "Solar system", "minor body", "asteroid", "centaur"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.660, "V-R": 0.359, "R-I": 0.324}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.16]
-    },
+        "system": "Generic_Bessell", "indices": {"B-V": 0.660, "V-R": 0.359, "R-I": 0.324}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.076]
+    }, // geometric albedo from https://ui.adsabs.harvard.edu/abs/2023A%26A...676A..72B/abstract
     "(2223) Sarpedon|MBOSS": {"tags": ["Solar system", "minor body", "asteroid", "Jupiter trojan"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.753, "V-R": 0.465, "R-I": 0.440}, "calib": "Vega", "sun": true
     },
@@ -674,8 +674,8 @@
         "system": "Generic_Bessell", "indices": {"B-V": 0.893, "V-R": 0.544, "R-I": 0.481}, "calib": "Vega", "sun": true
     },
     "(38628) Huya|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "plutino"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.963, "V-R": 0.609, "R-I": 0.593}, "calib": "Vega", "sun": true
-    },
+        "system": "Generic_Bessell", "indices": {"B-V": 0.963, "V-R": 0.609, "R-I": 0.593}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.079]
+    }, // geometric albedo from Santos-Sanz et al. (2022)
     "(39285) 2001 BP75|MBOSS": {"tags": ["Solar system", "minor body", "asteroid", "Jupiter trojan"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.810, "V-R": 0.381, "R-I": 0.291}, "calib": "Vega", "sun": true
     },
@@ -867,7 +867,7 @@
     }, // albedo from fyr02's sheet
     "(90482) Orcus|MBOSS": {"tags": ["featured", "Solar system", "planet geophysical", "dwarf planet", "minor body", "TNO", "plutino"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.670, "V-R": 0.376, "R-I": 0.372}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.231]
-    }, // albedo from fyr02's sheet
+    }, // albedo from Fornasier et al. (2013)
     "(90568) 2004 GV9|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.895, "V-R": 0.520}, "calib": "Vega", "sun": true
     },
