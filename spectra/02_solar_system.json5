@@ -119,7 +119,22 @@
         "The Albedos, Sizes, Colors, and Satellites of Dwarf Planets Compared with Newly Measured Dwarf Planet 2013 FY27",
         "DOI: 10.3847/1538-3881/aae92a", "https://iopscience.iop.org/article/10.3847/1538-3881/aae92a"
     ],
-    
+    "Verbiscer2022": [
+        "The Diverse Shapes of Dwarf Planet and Large KBO Phase Curves Observed from New Horizons",
+        "DOI: 10.3847/PSJ/ac63a6", "https://iopscience.iop.org/article/10.3847/PSJ/ac63a6"
+    ],
+    "Grundy2015": [
+        "The mutual orbit, mass, and density of the large transneptunian binary system Varda and Ilmarë",
+        "DOI: 10.1016/j.icarus.2015.04.036", "https://arxiv.org/abs/1505.00510"
+    ],
+    "Kiss2019": [
+        "The mass and density of the dwarf planet (225088) 2007 OR10",
+        "DOI: 10.1016/j.icarus.2019.03.013", "https://arxiv.org/abs/1903.05439"
+    ],
+    "Grundy2018": [
+        "The mutual orbit, mass, and density of transneptunian binary Gǃkúnǁ'hòmdímà (229762 2007 UK126)",
+        "DOI: 10.1016/j.icarus.2018.12.037", "http://www2.lowell.edu/users/grundy/abstracts/2019.G-G.html"
+    ],
 
     "Mercury|Mallama2017": {"tags": ["featured", "Solar system", "planet geophysical", "planet"],
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.087, 0.105, 0.142, 0.158, 0.172, 0.180, 0.208], "albedo": true
@@ -401,9 +416,9 @@
     "(90482) Orcus|Howett2019": {"tags": ["Solar system", "planet geophysical", "minor body", "dwarf planet", "TNO", "plutino"],
         "system": "Generic_Bessell", "indices": {"V-I": 0.73}, "calib": "Vega", "sun": true
     },
-    "Vanth|Howett2019": {"tags": ["Solar system", "minor body", "TNO", "plutino"],
-        "system": "Generic_Bessell", "indices": {"V-I": 1.03}, "calib": "Vega", "sun": true
-    },
+    "Vanth|Howett2019": {"tags": ["Solar system", "moon", "minor body", "TNO", "plutino"],
+        "system": "Generic_Bessell", "indices": {"V-I": 1.03}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.08]
+    }, // albedo from Brown and Butler (2018)
     "(101955) Bennu|LeCorre2019": {"tags": ["featured", "Solar system", "minor body", "asteroid", "main belt"],
         "nm": [473.228, 549.146, 697.569, 847.937],
         "br": [0.0175, 0.01736, 0.0174, 0.01727],
@@ -430,6 +445,9 @@
         0.60355, 0.48914, 0.56542, 0.62153, 0.62718, 0.62923, 0.53279],
         "albedo": true
     },
+    "Charon|Verbiscer2022": {"tags": ["featured", "Solar system", "planet geophysical", "moon", "minor body", "TNO", "plutino"],
+        "system": "Generic_Bessell", "indices": {"B-V": 0.7315, "V-R": 0.4}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.41]
+    },
     "(136199) Eris|Lorenzi2016": {"tags": ["featured", "Solar system", "planet geophysical", "dwarf planet", "minor body", "TNO", "detached"],
         "nm": [417.357, 479.507, 532.699, 585.89, 601.008, 604.367, 622.844, 637.962, 653.08, 656.439, 659.239, 673.236, 679.955, 692.273, 702.912, 
         712.43, 734.267, 740.426, 747.704, 750.504, 765.062, 779.059, 788.578, 793.617, 809.295, 813.774, 826.652, 841.209, 860.246],
@@ -444,9 +462,24 @@
         1.201, 1.201, 1.087, 1.159, 1.018, 1.079, 0.881, 1.072, 1.13],
         "scale": ["Generic_Bessell.V", 0.83], // albedo from zelario's sheet
     },
+    "(174567) Varda|Grundy2015": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
+        "system": "Generic_Bessell", "indices": {"B-V": 0.892, "V-I": 1.133}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.099]
+    }, // albedo from Souami et al. (2020)
+    "Ilmarë|Grundy2015": {"tags": ["Solar system", "moon", "minor body", "TNO", "classical", "classical-h"],
+        "system": "Generic_Bessell", "indices": {"B-V": 0.857, "V-I": 1.266}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.085]
+    }, // albedo from Souami et al. (2020)
     "(225088) Gonggong|Boehnhardt2014": {"tags": ["featured", "Solar system", "planet geophysical", "minor body", "dwarf planet", "TNO", "detached"],
         "system": "Generic_Bessell", "indices": {"B-V": 1.38, "V-R": 0.86, "R-I": 0.79}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.14]
     }, // albedo from Kiss et al. 2019
+    "Xiangliu|Kiss2019": {"tags": ["Solar system", "moon", "minor body", "TNO", "detached"],
+        "system": "Generic_Bessell", "indices": {"V-I": 1.22}, "calib": "Vega", "sun": true
+    },
+    "(229762) Gǃkúnǁʼhòmdímà|Grundy2018": {"tags": ["Solar system", "minor body", "TNO", "detached"],
+        "system": "Generic_Bessell", "indices": {"V-I": 1.028}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.142]
+    }, // albedo from Ortiz et al. (2019)
+    "Gǃòʼé ǃHú|Grundy2018": {"tags": ["Solar system", "moon", "minor body", "TNO", "detached"],
+        "system": "Generic_Bessell", "indices": {"V-I": 1.803}, "calib": "Vega", "sun": true
+    },
     "(486958) Wenu|Howett2019": {"tags": ["featured", "Solar system", "minor body", "TNO", "classical", "classical-h"],
         "system": "-NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.053, 0.079, 0.117], "albedo": true
     },
