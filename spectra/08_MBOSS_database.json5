@@ -401,8 +401,8 @@
         "system": "Generic_Bessell", "indices": {"B-V": 0.716, "V-R": 0.456, "R-I": 0.424}, "calib": "Vega", "sun": true
     },
     "(2060) Chiron|MBOSS": {"tags": ["featured", "Solar system", "minor body", "asteroid", "centaur"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.660, "V-R": 0.359, "R-I": 0.324}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.076]
-    }, // geometric albedo from https://ui.adsabs.harvard.edu/abs/2023A%26A...676A..72B/abstract
+        "system": "Generic_Bessell", "indices": {"B-V": 0.660, "V-R": 0.359, "R-I": 0.324}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.16]
+    },
     "(2223) Sarpedon|MBOSS": {"tags": ["Solar system", "minor body", "asteroid", "Jupiter trojan"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.753, "V-R": 0.465, "R-I": 0.440}, "calib": "Vega", "sun": true
     },
