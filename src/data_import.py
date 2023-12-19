@@ -116,7 +116,7 @@ def fits_reader(file: str):
 def txt_reader(file: str):
     """ Imports spectrum data from a simple text file. Wavelength only in angstroms """
     with open(file, 'rt', encoding='UTF-8') as f:
-        angstrom, response = np.loadtxt(f).transpose()
+        angstrom, response = np.loadtxt(f).transpose()[:2]
     return angstrom/10, response
 
 
