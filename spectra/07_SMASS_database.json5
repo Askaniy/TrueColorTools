@@ -3,6 +3,10 @@
         "SMASS: Small Main-Belt Asteroid Spectroscopic Survey",
         "http://smass.mit.edu/smass.html"
     ],
+    "MITHNEOS": [
+        "MITHNEOS MIT-Hawaii Near-Earth Object Spectroscopic Survey",
+        "http://smass.mit.edu/minus.html"
+    ],
     
     "(1) Ceres|SMASS": {"tags": ["featured", "Solar system", "planet geophysical", "minor body", "dwarf planet", "asteroid", "main belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 
@@ -431,4 +435,16 @@
     "(704) Interamnia|SMASS": {"tags": ["Solar system", "minor body", "asteroid", "main belt"],
         "file": "spectra/files/SMASS/a000704.2.txt", "scale": ["Generic_Bessell.V", 0.067]
     }, // albedo from Vernazza et al. (2021)
+    "(944) Hidalgo|MITHNEOS": {"tags": ["Solar system", "minor body", "asteroid", "centaur"],
+        "file": "spectra/files/SMASS/a000944.sp31.txt"
+    },
+    "(2060) Chiron|SMASS": {"tags": ["featured", "Solar system", "minor body", "asteroid", "centaur"],
+        "file": "spectra/files/SMASS/a002060.2.txt", "scale": ["Generic_Bessell.V", 0.076]
+    }, // albedo from Braga-Ribas et al. (2023)
+    "(5145) Pholus|SMASS": {"tags": ["featured", "Solar system", "minor body", "asteroid", "centaur"],
+        "file": "spectra/files/SMASS/a005145.1.txt", "scale": ["Generic_Bessell.V", 0.155]
+    }, // albedo from Duffard et al. (2014)
+    "(10199) Chariklo|SMASS": {"tags": ["featured", "Solar system", "minor body", "asteroid", "centaur"],
+        "file": "spectra/files/SMASS/a010199.2.txt", "scale": ["Generic_Bessell.V", 0.037]
+    }, // albedo from Leiva et al. (2017); ellipsoid model
 }

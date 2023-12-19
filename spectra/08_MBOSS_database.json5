@@ -400,9 +400,9 @@
     "(1871) Astyanax|MBOSS": {"tags": ["Solar system", "minor body", "asteroid", "Jupiter trojan"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.716, "V-R": 0.456, "R-I": 0.424}, "calib": "Vega", "sun": true
     },
-    "(2060) Chiron|MBOSS": {"tags": ["featured", "Solar system", "minor body", "asteroid", "centaur"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.660, "V-R": 0.359, "R-I": 0.324}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.16]
-    },
+    "(2060) Chiron|MBOSS": {"tags": ["Solar system", "minor body", "asteroid", "centaur"],
+        "system": "Generic_Bessell", "indices": {"B-V": 0.660, "V-R": 0.359, "R-I": 0.324}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.076]
+    }, // albedo from Braga-Ribas et al. (2023)
     "(2223) Sarpedon|MBOSS": {"tags": ["Solar system", "minor body", "asteroid", "Jupiter trojan"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.753, "V-R": 0.465, "R-I": 0.440}, "calib": "Vega", "sun": true
     },
@@ -421,9 +421,9 @@
     "(5130) Ilioneus|MBOSS": {"tags": ["Solar system", "minor body", "asteroid", "Jupiter trojan"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.763, "V-R": 0.481, "R-I": 0.424}, "calib": "Vega", "sun": true
     },
-    "(5145) Pholus|MBOSS": {"tags": ["featured", "Solar system", "minor body", "asteroid", "centaur"],
+    "(5145) Pholus|MBOSS": {"tags": ["Solar system", "minor body", "asteroid", "centaur"],
         "system": "Generic_Bessell", "indices": {"B-V": 1.261, "V-R": 0.791, "R-I": 0.818}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.155]
-    },
+    }, // albedo from Duffard et al. (2014)
     "(5511) Cloanthus|MBOSS": {"tags": ["Solar system", "minor body", "asteroid", "Jupiter trojan"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.906, "V-R": 0.442, "R-I": 0.526}, "calib": "Vega", "sun": true
     },
@@ -451,9 +451,9 @@
     "(9818) Eurymachos|MBOSS": {"tags": ["Solar system", "minor body", "asteroid", "Jupiter trojan"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.673, "V-R": 0.339, "R-I": 0.355}, "calib": "Vega", "sun": true
     },
-    "(10199) Chariklo|MBOSS": {"tags": ["featured", "Solar system", "minor body", "asteroid", "centaur"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.802, "V-R": 0.491, "R-I": 0.519}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.035]
-    }, // albedo from https://arxiv.org/abs/1409.7259
+    "(10199) Chariklo|MBOSS": {"tags": ["Solar system", "minor body", "asteroid", "centaur"],
+        "system": "Generic_Bessell", "indices": {"B-V": 0.802, "V-R": 0.491, "R-I": 0.519}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.037]
+    }, // albedo from Leiva et al. (2017)
     "(10370) Hylonome|MBOSS": {"tags": ["Solar system", "minor body", "asteroid", "centaur"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.690, "V-R": 0.469, "R-I": 0.496}, "calib": "Vega", "sun": true
     },
