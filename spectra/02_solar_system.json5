@@ -135,6 +135,10 @@
         "The mutual orbit, mass, and density of transneptunian binary Gǃkúnǁ'hòmdímà (229762 2007 UK126)",
         "DOI: 10.1016/j.icarus.2018.12.037", "http://www2.lowell.edu/users/grundy/abstracts/2019.G-G.html"
     ],
+    "Bolin2023": [
+        "Keck and Gemini spectral characterization of Lucy mission fly-by target (152830) Dinkinesh",
+        "https://ui.adsabs.harvard.edu/abs/2023Icar..40015562B/abstract"
+    ],
 
     "Mercury|Mallama2017": {"tags": ["featured", "Solar system", "planet geophysical", "planet"],
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.087, 0.105, 0.142, 0.158, 0.172, 0.180, 0.208], "albedo": true
@@ -462,6 +466,13 @@
         1.201, 1.201, 1.087, 1.159, 1.018, 1.079, 0.881, 1.072, 1.13],
         "scale": ["Generic_Bessell.V", 0.83], // albedo from zelario's sheet
     },
+    "(152830) Dinkinesh|Bolin2023": {"tags": ["Solar system", "minor body", "asteroid", "main belt"],
+        "system": "-SLOAN_SDSS",
+        "indices": {"g-r": 0.67, "r-i": 0.28, "i-z": 0.11},
+        "calib": "AB",
+        "sun": true,
+        "scale": ["Generic_Bessell.V", 0.27]
+    }, // albedo from McFadden et al. (2023)
     "(174567) Varda|Grundy2015": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.892, "V-I": 1.133}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.099]
     }, // albedo from Souami et al. (2020)
