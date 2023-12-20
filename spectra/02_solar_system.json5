@@ -483,8 +483,8 @@
         "system": "Generic_Bessell", "indices": {"B-V": 1.38, "V-R": 0.86, "R-I": 0.79}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.14]
     }, // albedo from Kiss et al. 2019
     "Xiangliu|Kiss2019": {"tags": ["Solar system", "moon", "minor body", "TNO", "detached"],
-        "system": "Generic_Bessell", "indices": {"V-I": 1.22}, "calib": "Vega", "sun": true
-    },
+        "system": "Generic_Bessell", "indices": {"V-I": 1.22}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.08]
+    }, // albedo assuming radius of 100 km from Arakawa et al. (2021) https://ui.adsabs.harvard.edu/abs/2021AJ....162..226A/abstract
     "(229762) Gǃkúnǁʼhòmdímà|Grundy2018": {"tags": ["Solar system", "minor body", "TNO", "detached"],
         "system": "Generic_Bessell", "indices": {"V-I": 1.028}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.142]
     }, // albedo from Ortiz et al. (2019)
