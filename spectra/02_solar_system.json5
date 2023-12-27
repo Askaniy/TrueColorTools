@@ -473,7 +473,7 @@
         "sun": true,
         "scale": ["Generic_Bessell.V", 0.27]
     }, // albedo from McFadden et al. (2023)
-    "(174567) Varda|Grundy2015": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
+    "(174567) Varda|Grundy2015": {"tags": ["Solar system", "minor body", "TNO", "TNO-midsize", "classical", "classical-h"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.892, "V-I": 1.133}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.099]
     }, // albedo from Souami et al. (2020)
     "Ilmarë|Grundy2015": {"tags": ["Solar system", "moon", "minor body", "TNO", "classical", "classical-h"],
@@ -485,7 +485,7 @@
     "Xiangliu|Kiss2019": {"tags": ["Solar system", "moon", "minor body", "TNO", "detached"],
         "system": "Generic_Bessell", "indices": {"V-I": 1.22}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.08]
     }, // albedo assuming radius of 100 km from Arakawa et al. (2021) https://ui.adsabs.harvard.edu/abs/2021AJ....162..226A/abstract
-    "(229762) Gǃkúnǁʼhòmdímà|Grundy2018": {"tags": ["Solar system", "minor body", "TNO", "detached"],
+    "(229762) Gǃkúnǁʼhòmdímà|Grundy2018": {"tags": ["Solar system", "minor body", "TNO", "TNO-midsize", "detached"],
         "system": "Generic_Bessell", "indices": {"V-I": 1.028}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.142]
     }, // albedo from Ortiz et al. (2019)
     "Gǃòʼé ǃHú|Grundy2018": {"tags": ["Solar system", "moon", "minor body", "TNO", "detached"],
@@ -500,7 +500,7 @@
     "(486958) Akasa|Howett2019": {"tags": ["featured", "Solar system", "minor body", "TNO", "classical", "classical-h", "surface feature"],
         "system": "-NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.066, 0.090, 0.125], "albedo": true
     },
-    "(532037) 2013 FY27|Sheppard2018": {"tags": ["Solar system", "minor body", "TNO", "detached"],
+    "(532037) 2013 FY27|Sheppard2018": {"tags": ["Solar system", "minor body", "TNO", "TNO-midsize", "detached"],
         "system": "Generic_Bessell",
         "indices": {"V-R": 0.56, "R-I": 0.52},
         "calib": "Vega",

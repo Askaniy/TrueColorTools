@@ -553,7 +553,7 @@
     "(19521) Chaos|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.932, "V-R": 0.608, "R-I": 0.571}, "calib": "Vega", "sun": true
     },
-    "(20000) Varuna|MBOSS": {"tags": ["featured", "Solar system", "minor body", "TNO", "classical", "classical-h"],
+    "(20000) Varuna|MBOSS": {"tags": ["featured", "Solar system", "minor body", "TNO", "TNO-midsize", "classical", "classical-h"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.906, "V-R": 0.626, "R-I": 0.628}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.172]
     }, // albedo from fyr02's sheet
     "(20108) 1995 QZ9|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "plutino"],
@@ -619,7 +619,7 @@
     "(28958) 2001 CQ42|MBOSS": {"tags": ["Solar system", "minor body", "asteroid", "Jupiter trojan"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.730, "V-R": 0.364, "R-I": 0.230}, "calib": "Vega", "sun": true
     },
-    "(28978) Ixion|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "plutino"],
+    "(28978) Ixion|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "TNO-midsize", "plutino"],
         "system": "Generic_Bessell", "indices": {"B-V": 1.018, "V-R": 0.605, "R-I": 0.580}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.108]
     }, // albedo from Verbiscer et al. (2022)
     "(29981) 1999 TD10|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "scattered"],
@@ -733,7 +733,7 @@
     "(54598) Bienor|MBOSS": {"tags": ["Solar system", "minor body", "asteroid", "centaur"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.711, "V-R": 0.476, "R-I": 0.400}, "calib": "Vega", "sun": true
     },
-    "(55565) 2002 AW197|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
+    "(55565) 2002 AW197|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "TNO-midsize", "classical", "classical-h"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.915, "V-R": 0.589, "R-I": 0.581}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.112]
     }, // albedo from Vilenius et al. (2014)
     "(55576) Amycus|MBOSS": {"tags": ["Solar system", "minor body", "asteroid", "centaur"],
@@ -742,9 +742,9 @@
     "(55636) 2002 TX300|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.679, "V-R": 0.359, "R-I": 0.323}, "calib": "Vega", "sun": true
     },
-    "(55637) 2002 UX25|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.979, "V-R": 0.552}, "calib": "Vega", "sun": true
-    },
+    "(55637) 2002 UX25|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "TNO-midsize", "classical", "classical-h"],
+        "system": "Generic_Bessell", "indices": {"B-V": 0.979, "V-R": 0.552}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.107]
+    }, // albedo from Lellouch et al. (2013)
     "(55638) 2002 VE95|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "plutino"],
         "system": "Generic_Bessell", "indices": {"B-V": 1.094, "V-R": 0.733, "R-I": 0.760}, "calib": "Vega", "sun": true
     },
@@ -868,9 +868,9 @@
     "(90482) Orcus|MBOSS": {"tags": ["featured", "Solar system", "planet geophysical", "dwarf planet", "minor body", "TNO", "plutino"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.670, "V-R": 0.376, "R-I": 0.372}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.231]
     }, // albedo from Fornasier et al. (2013)
-    "(90568) 2004 GV9|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.895, "V-R": 0.520}, "calib": "Vega", "sun": true
-    },
+    "(90568) 2004 GV9|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "TNO-midsize", "classical", "classical-h"],
+        "system": "Generic_Bessell", "indices": {"B-V": 0.895, "V-R": 0.520}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.0770]
+    }, // albedo from Vilenius et al. (2012)
     "(91133) 1998 HK151|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "plutino"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.645, "V-R": 0.520, "R-I": 0.390}, "calib": "Vega", "sun": true
     },
@@ -928,7 +928,7 @@
     "(120216) 2004 EW95|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "plutino"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.693, "V-R": 0.375, "R-I": 0.215}, "calib": "Vega", "sun": true
     },
-    "(120347) Salacia|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
+    "(120347) Salacia|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "TNO-midsize", "classical", "classical-h"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.664, "V-R": 0.403, "R-I": 0.433}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.042]
     }, // albedo from Brown and Butler (2017)
     "(120348) 2004 TY364|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "plutino"],
@@ -988,9 +988,9 @@
     "(145451) 2005 RM43|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "scattered"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.590, "V-R": 0.390}, "calib": "Vega", "sun": true
     },
-    "(145452) 2005 RN43|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.940, "V-R": 0.592, "R-I": 0.486}, "calib": "Vega", "sun": true
-    },
+    "(145452) 2005 RN43|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "TNO-midsize", "classical", "classical-h"],
+        "system": "Generic_Bessell", "indices": {"B-V": 0.940, "V-R": 0.592, "R-I": 0.486}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.107]
+    }, // albedo from Vilenius et al. (2012)
     "(145453) 2005 RR43|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.790, "V-R": 0.389}, "calib": "Vega", "sun": true
     },
@@ -1015,7 +1015,7 @@
     "(168703) 2000 GP183|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-c"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.669, "V-R": 0.445, "R-I": 0.463}, "calib": "Vega", "sun": true
     },
-    "(174567) Varda|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
+    "(174567) Varda|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "TNO-midsize", "classical", "classical-h"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.892, "V-R": 0.556, "R-I": 0.510}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.099]
     }, // albedo from Souami et al. (2020)
     "(181708) 1993 FW|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
@@ -1039,9 +1039,9 @@
     "(192929) 2000 AT44|MBOSS": {"tags": ["Solar system", "minor body", "asteroid", "Jupiter trojan"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.707, "V-R": 0.354, "R-I": 0.318}, "calib": "Vega", "sun": true
     },
-    "(208996) 2003 AZ84|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "plutino"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.738, "V-R": 0.430, "R-I": 0.473}, "calib": "Vega", "sun": true
-    },
+    "(208996) 2003 AZ84|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "TNO-midsize", "plutino"],
+        "system": "Generic_Bessell", "indices": {"B-V": 0.738, "V-R": 0.430, "R-I": 0.473}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.097]
+    }, // albedo from Dias-Oliveira et al. (2017)
     "(229762) Gǃkúnǁʼhòmdímà|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "detached"],
         "system": "Generic_Bessell", "indices": {"V-R": 0.582, "R-I": 0.470}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.142]
     }, // albedo from Ortiz et al. (2019)
@@ -1063,7 +1063,7 @@
     "(303775) 2005 QU182|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "scattered"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.877, "V-R": 0.593}, "calib": "Vega", "sun": true
     },
-    "(307261) 2002 MS4|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"],
+    "(307261) 2002 MS4|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "TNO-midsize", "classical", "classical-h"],
         "system": "Generic_Bessell", "indices": {"B-V": 0.690, "V-R": 0.380}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.1]
     }, // albedo from Rommel et al. (2023)
     "(307982) 2004 PG115|MBOSS": {"tags": ["Solar system", "minor body", "TNO", "detached"],
