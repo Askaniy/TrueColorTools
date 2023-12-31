@@ -419,6 +419,7 @@ def from_database(name: str, content: dict) -> Spectrum | Photometry:
     - `nm` (list): list of wavelengths in nanometers
     - `br` (list): same-size list of "brightness" of an energy counter detector (not photon counter)
     - `mag` (list): same-size list of magnitudes
+    - `sd` (list): same-size list of standard deviations (ignored, may be supported in the future)
     - `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
     - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
     - `filters` (list): list of filter names that can be found in the `filters` folder
