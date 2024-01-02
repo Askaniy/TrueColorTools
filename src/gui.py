@@ -110,7 +110,7 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         [sg.Column(T2_frames, scrollable=True, vertical_scroll_only=True, key='T2_frames', expand_y=True)]
     ]
     T2_col2 = [
-        [sg.Text('The tab temporarily not works!', font=title_font, text_color='red')],
+        [sg.Text('The tab is temporarily not working!', font=title_font, text_color='red')],
         [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T2_title2'), sg.Push()],
         [sg.Canvas(key='T2_canvas')],
         [sg.Checkbox(tr.gui_desun[lang], key='T2_desun')],

@@ -1,4 +1,3 @@
-from warnings import simplefilter
 from typing import TypeVar, Iterable, Tuple
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
@@ -6,10 +5,6 @@ import PySimpleGUI as sg
 import src.core as core
 import src.strings as tr
 import src.gui as gui
-
-# Filling empty space on a plot
-simplefilter('ignore', UserWarning)
-plt.rcParams['figure.autolayout'] = True
 
 # MatPlotLib custom theme
 # https://matplotlib.org/stable/tutorials/introductory/customizing.html
@@ -20,7 +15,7 @@ plt.rcParams |= {
     'axes.grid': True, 'grid.color': gui.highlight_color
     }
 
-rgb_muted = ('#804040', '#3c783c', '#5050a0')
+rgb_muted = ('#904040', '#3c783c', '#5050e0')
 
 def draw_figure(canvas, figure):
     figure_canvas_agg = FigureCanvasTkAgg(figure, canvas)
@@ -30,9 +25,8 @@ def draw_figure(canvas, figure):
 
 def plot_spectra(objects: Iterable[core.Spectrum], gamma, srgb, albedo, lang: str):
     """ Opens a separate window with plotted spectra from the input list """
-    # creating the plot template
-    fig = plt.Figure(figsize=(9, 6), dpi=100)
-    ax = fig.add_subplot(111, xlabel=tr.xaxis_text[lang])
+    fig, ax = plt.subplots(1, 1, figsize=(9, 6), dpi=100)
+    ax.set_xlabel(tr.xaxis_text[lang])
     # determining the scale for CMFs in the background
     max_y = []
     for spectrum in objects:
@@ -52,6 +46,7 @@ def plot_spectra(objects: Iterable[core.Spectrum], gamma, srgb, albedo, lang: st
             color = color.gamma_corrected()
         ax.plot(spectrum.nm, spectrum.br, label=spectrum.name, color=color.to_html())
     ax.legend()
+    fig.tight_layout()
     # creating and opening the window
     title = tr.spectral_plot[lang]
     layout = [
@@ -72,8 +67,7 @@ def plot_spectra(objects: Iterable[core.Spectrum], gamma, srgb, albedo, lang: st
 
 def plot_filters(filters: Iterable[core.Spectrum]):
     """ Creates a figure with plotted sensitive curves and CMFs """
-    fig = plt.Figure(figsize=(5, 1.5), dpi=90)
-    ax = fig.add_subplot(111)
+    fig, ax = plt.subplots(1, 1, figsize=(5, 1.5), dpi=90)
     # determining the scale for CMFs in the background
     max_y = []
     for spectrum in filters[3:]:
@@ -88,4 +82,5 @@ def plot_filters(filters: Iterable[core.Spectrum]):
             br = spectrum.br
             color = core.Color.from_spectrum_legacy(spectrum).gamma_corrected().to_html()
         ax.plot(spectrum.nm, br, label=spectrum.name, color=color)
+    fig.tight_layout()
     return fig
