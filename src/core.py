@@ -399,15 +399,28 @@ class Photometry:
         return Photometry(f'{self.name} / {other.name}', filters, self.br / (self ** other))
 
 
+def color_index_splitter(index: str):
+    """
+    Dashes in filter names are allowed in the SVO Filter Profile Service.
+    This function should fix all or most of the problems caused.
+    """
+    try:
+        filter1, filter2 = index.split('-')
+    except ValueError:
+        dotpart1, dotpart2, dotpart3 = index.split('.') # one dot per full filter name
+        dashpart1, dashpart2 = dotpart2.split('-', 1)
+        filter1 = dotpart1 + '.' + dashpart1
+        filter2 = dashpart2 + '.' + dotpart3
+    return filter1, filter2
 
 def color_indices_parsing(indices: dict):
     """
     Converts color indices to linear brightness, assuming 1 Vega intensity in the first filter.
     Filters should be specified in ascending order, with the second filter having faster iteration.
     """
-    filters = {tuple(indices.keys())[0].split('-')[0]: 1} # assuming 1 Vega intensity in the first filter
+    filters = {color_index_splitter(tuple(indices.keys())[0])[0]: 1} # assuming 1 Vega intensity in the first filter
     for key, value in indices.items():
-        reference_filter, current_filter = key.split('-')
+        reference_filter, current_filter = color_index_splitter(key)
         filters |= {current_filter: filters[reference_filter] - value}
     return filters.keys(), mag2irradiance(np.array(tuple(filters.values())))
 
