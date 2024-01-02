@@ -111,32 +111,36 @@ def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int|flo
     `avg_steps` is a number of corner curve points to be averaged if the curve is not smooth.
     Averaging weights on this range grow linearly closer to the edge (from 0 to 1).
     """
-    if x[0] > scope[0]: # extrapolation to blue
-        x1 = np.arange(scope[0], x[0], step)
-        y_scope = y[:avg_steps]
-        if is_smooth(y_scope):
-            diff = y[1]-y[0]
-            corner_y = y[0]
-        else:
-            avg_weights = np.abs(np.arange(-avg_steps, 0)[avg_steps-y_scope.size:]) # weights could be more complicated, but there is no need
-            diff = np.average(np.diff(y_scope), weights=avg_weights[:-1])
-            corner_y = np.average(y_scope, weights=avg_weights) - diff * avg_steps * weights_center_of_mass
-        y1 = custom_extrap(x1, diff/step, x[0], corner_y)
-        x = np.append(x1, x)
-        y = np.append(y1, y)
-    if x[-1] < scope[-1]: # extrapolation to red
-        x1 = np.arange(x[-1], scope[-1], step) + step
-        y_scope = y[-avg_steps:]
-        if is_smooth(y_scope):
-            diff = y[-1]-y[-2]
-            corner_y = y[-1]
-        else:
-            avg_weights = np.arange(avg_steps)[:y_scope.size] + 1
-            diff = np.average(np.diff(y_scope), weights=avg_weights[1:])
-            corner_y = np.average(y_scope, weights=avg_weights) + diff * avg_steps * weights_center_of_mass
-        y1 = custom_extrap(x1, diff/step, x[-1], corner_y)
-        x = np.append(x, x1)
-        y = np.append(y, y1)
+    if len(x) == 1: # filling with equal-energy spectrum
+        x = np.arange(min(scope[0], x[0]), max(scope[-1], x[0])+1, step, dtype='uint16')
+        y = np.full_like(x, y[0], dtype='float')
+    else:
+        if x[0] > scope[0]: # extrapolation to blue
+            x1 = np.arange(scope[0], x[0], step)
+            y_scope = y[:avg_steps]
+            if is_smooth(y_scope):
+                diff = y[1]-y[0]
+                corner_y = y[0]
+            else:
+                avg_weights = np.abs(np.arange(-avg_steps, 0)[avg_steps-y_scope.size:]) # weights could be more complicated, but there is no need
+                diff = np.average(np.diff(y_scope), weights=avg_weights[:-1])
+                corner_y = np.average(y_scope, weights=avg_weights) - diff * avg_steps * weights_center_of_mass
+            y1 = custom_extrap(x1, diff/step, x[0], corner_y)
+            x = np.append(x1, x)
+            y = np.append(y1, y)
+        if x[-1] < scope[-1]: # extrapolation to red
+            x1 = np.arange(x[-1], scope[-1], step) + step
+            y_scope = y[-avg_steps:]
+            if is_smooth(y_scope):
+                diff = y[-1]-y[-2]
+                corner_y = y[-1]
+            else:
+                avg_weights = np.arange(avg_steps)[:y_scope.size] + 1
+                diff = np.average(np.diff(y_scope), weights=avg_weights[1:])
+                corner_y = np.average(y_scope, weights=avg_weights) + diff * avg_steps * weights_center_of_mass
+            y1 = custom_extrap(x1, diff/step, x[-1], corner_y)
+            x = np.append(x, x1)
+            y = np.append(y, y1)
     return x, y
 
 def grid(start: int|float, end: int|float, res: int):
