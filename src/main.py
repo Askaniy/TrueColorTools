@@ -241,7 +241,7 @@ def launch_window(lang: str):
                 for i in range(T2_num):
                     T2_filter_name = values['T2_filter'+str(i)]
                     if T2_filter_name != '':
-                        T2_filter = core.Spectrum.from_filter(T2_filter_name)
+                        T2_filter = core.Spectrum.get_filter(T2_filter_name)
                         T2_plot_data.append(T2_filter)
                 T2_fig.clf()
                 T2_fig = pl.plot_filters(T2_plot_data)

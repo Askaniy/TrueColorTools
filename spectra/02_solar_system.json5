@@ -242,7 +242,7 @@
         "nm": [350, 450, 550, 650, 750, 850], "br": [0.604, 0.824, 1.000, 1.006, 0.832, 0.636]
     },
     "Jupiter|Karkoschka1994": {"tags": ["featured", "Solar system", "planet geophysical", "planet", "Jovian system"],
-        "file": "spectra/files/Karkoschka1994/jupiter.txt", "albedo": true
+        "file": "spectra/files/Karkoschka1994/jupiter.txtA", "albedo": true
     },
     "Io:T|USGSarchive": {"tags": ["featured", "Solar system", "planet geophysical", "moon", "Jovian system", "regular"],
         "nm": [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 739.8, 751.9, 763.6, 775.6, 786.3, 799, 811.7, 822.4, 837.1, 849.8, 862.5],
@@ -299,7 +299,7 @@
         "nm": [350, 450, 550, 650, 750, 850], "br": [0.445, 0.684, 1.000, 1.144, 1.001, 0.776]
     },
     "Saturn|Karkoschka1994": {"tags": ["featured", "Solar system", "planet geophysical", "planet", "Saturnian system"],
-        "file": "spectra/files/Karkoschka1994/saturn.txt", "albedo": true
+        "file": "spectra/files/Karkoschka1994/saturn.txtA", "albedo": true
     },
     "Rings|USGSarchive": {"tags": ["featured", "Solar system", "ring", "Saturnian system"],
         "nm": [326, 343, 360, 383, 403, 435, 469, 500, 534, 566, 599, 633, 644.1, 656, 667.9, 679.9, 691.7, 704.7, 716.4, 728.9, 739.8, 751.9, 763.6,
@@ -350,7 +350,7 @@
         "nm": [350, 450, 550, 650, 750, 850], "br": [0.344, 0.584, 1.000, 1.248, 1.101, 0.879]
     },
     "Titan|Karkoschka1994": {"tags": ["featured", "Solar system", "planet geophysical", "moon", "Saturnian system", "regular"],
-        "file": "spectra/files/Karkoschka1994/titan.txt", "albedo": true
+        "file": "spectra/files/Karkoschka1994/titan.txtA", "albedo": true
     },
     "Titan surface|Karkoschka2012": {"tags": ["Solar system", "planet geophysical", "moon", "Saturnian system", "regular"],
         "nm_range": [300, 801, 10],
@@ -373,7 +373,7 @@
         "nm": [350, 450, 550, 650, 750, 850], "br": [0.984, 1.067, 1.000, 0.647, 0.292, 0.148]
     },
     "Uranus|Karkoschka1994": {"tags": ["featured", "Solar system", "planet geophysical", "planet", "Uranian system"],
-        "file": "spectra/files/Karkoschka1994/uranus.txt", "albedo": true
+        "file": "spectra/files/Karkoschka1994/uranus.txtA", "albedo": true
     },
     "Miranda|Avramchuk2007": {"tags": ["featured", "Solar system", "planet geophysical", "moon", "Uranian system", "regular"],
         "nm": [250, 410, 480, 560, 750, 910], "br": [0.51, 0.49, 0.48, 0.47, 0.46, 0.45], "albedo": true, // spherical is 0.34
@@ -397,7 +397,7 @@
         "nm": [350, 450, 550, 650, 750, 850], "br": [1.252, 1.235, 1.000, 0.555, 0.237, 0.132]
     },
     "Neptune|Karkoschka1994": {"tags": ["featured", "Solar system", "planet geophysical", "planet", "Neptunian system"],
-        "file": "spectra/files/Karkoschka1994/neptune.txt", "albedo": true
+        "file": "spectra/files/Karkoschka1994/neptune.txtA", "albedo": true
     },
     "Triton|Tryka1999": {"tags": ["featured", "Solar system", "planet geophysical", "moon", "Neptunian system", "irregular"],
         "nm_range": [300, 900, 100],
@@ -471,28 +471,28 @@
         "scale": ["Generic_Bessell.V", 0.83], // albedo from zelario's sheet
     },
     "(152830) Dinkinesh|Bolin2023": {"tags": ["Solar system", "minor body", "asteroid", "main belt"],
-        "system": "-SLOAN_SDSS",
+        "system": "SLOAN_SDSS",
         "indices": {"g-r": 0.67, "r-i": 0.28, "i-z": 0.11},
         "calib": "AB",
         "sun": true,
         "scale": ["Generic_Bessell.V", 0.27]
     }, // albedo from McFadden et al. (2023)
     "(162173) Ryugu|Yokota2021": {"tags": ["featured", "Solar system", "minor body", "asteroid", "main belt"],
-        "system": "-Hayabusa2_ONC-T",
+        "system": "Hayabusa2_ONC-T",
         "filters": ["ul", "b", "v", "Na", "w", "x", "p"],
         "br": [0.0438, 0.0408, 0.0406, 0.0408, 0.0405, 0.0411, 0.03987],
         "sd": [0.0012, 0.0011, 0.0010, 0.0009, 0.0008, 0.0006, 0.00050],
         "albedo": true
     }, // normal (=geometric) albedo spectrum from the Table 3
     "(162173) Ryugu:B|Yokota2021": {"tags": ["featured", "Solar system", "minor body", "asteroid", "main belt", "surface feature"],
-        "system": "-Hayabusa2_ONC-T",
+        "system": "Hayabusa2_ONC-T",
         "filters": ["ul", "b", "v", "Na", "w", "x", "p"],
         "br": [0.0473, 0.0445, 0.0439, 0.0439, 0.0430, 0.0427, 0.0410],
         "sd": [0.0018, 0.0017, 0.0016, 0.0015, 0.0011, 0.0009, 0.0008],
         "albedo": true
     }, // normal (=geometric) albedo spectrum of N-pole bright area from the Table 6
     "(162173) Ryugu:D|Yokota2021": {"tags": ["featured", "Solar system", "minor body", "asteroid", "main belt", "surface feature"],
-        "system": "-Hayabusa2_ONC-T",
+        "system": "Hayabusa2_ONC-T",
         "filters": ["ul", "b", "v", "Na", "w", "x", "p"],
         "br": [0.0427, 0.0398, 0.0398, 0.0400, 0.0399, 0.0407, 0.0396],
         "sd": [0.0006, 0.0006, 0.0005, 0.0004, 0.0003, 0.0003, 0.0002],
@@ -517,13 +517,13 @@
         "system": "Generic_Bessell", "indices": {"V-I": 1.803}, "calib": "Vega", "sun": true
     },
     "(486958) Wenu|Howett2019": {"tags": ["featured", "Solar system", "minor body", "TNO", "classical", "classical-h"],
-        "system": "-NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.053, 0.079, 0.117], "albedo": true
+        "system": "NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.053, 0.079, 0.117], "albedo": true
     },
     "(486958) Weeyo|Howett2019": {"tags": ["featured", "Solar system", "minor body", "TNO", "classical", "classical-h"],
-        "system": "-NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.058, 0.084, 0.122], "albedo": true
+        "system": "NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.058, 0.084, 0.122], "albedo": true
     },
     "(486958) Akasa|Howett2019": {"tags": ["featured", "Solar system", "minor body", "TNO", "classical", "classical-h", "surface feature"],
-        "system": "-NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.066, 0.090, 0.125], "albedo": true
+        "system": "NewHorizons_MVIC", "filters": ["Blue", "Red", "NIR"], "br": [0.066, 0.090, 0.125], "albedo": true
     },
     "(532037) 2013 FY27|Sheppard2018": {"tags": ["Solar system", "minor body", "TNO", "TNO-midsize", "detached"],
         "system": "Generic_Bessell",
@@ -536,72 +536,72 @@
         "system": "Generic_Bessell", "indices": {"B-V": 0.70, "V-R": 0.45}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.1]
     },
     "1I/ʻOumuamua|Bannister2017": {"tags": ["Solar system", "extrasolar", "asteroid"],
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.47, "r-i": 0.36}, "calib": "AB", "sun": true, "scale": ["Generic_Bessell.V", 0.07]
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.47, "r-i": 0.36}, "calib": "AB", "sun": true, "scale": ["Generic_Bessell.V", 0.07]
     },
     "2004 VC131|Thirouin2019": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-c"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.89, "g-i": 1.40}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.89, "g-i": 1.40}, "calib": "AB", "sun": true
     },
     "2004 VU75|Thirouin2019": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-c"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.96, "g-i": 1.42}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.96, "g-i": 1.42}, "calib": "AB", "sun": true
     },
     "2012 DX98|Thirouin2019": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.85, "g-i": 1.25}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.85, "g-i": 1.25}, "calib": "AB", "sun": true
     },
     "2013 FR28|Thirouin2019": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.95, "g-i": 1.36}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.95, "g-i": 1.36}, "calib": "AB", "sun": true
     },
     "2014 JL80|Thirouin2019": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.74}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.74}, "calib": "AB", "sun": true
     },
     "2014 JO80|Thirouin2019": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.67, "g-i": 0.91}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.67, "g-i": 0.91}, "calib": "AB", "sun": true
     },
     "2014 JQ80|Thirouin2019": {"tags": ["Solar system", "minor body", "TNO", "classical", "classical-h"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.76, "g-i": 1.05}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.76, "g-i": 1.05}, "calib": "AB", "sun": true
     },
     "2006 RJ103|Markwardt2023": {"tags": ["Solar system", "minor body", "Neptune trojan"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.59, "r-i": 0.16}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.59, "r-i": 0.16}, "calib": "AB", "sun": true
     },
     "2007 VL305|Markwardt2023": {"tags": ["Solar system", "minor body", "Neptune trojan"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.60, "r-i": 0.25}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.60, "r-i": 0.25}, "calib": "AB", "sun": true
     },
     "2010 TS191|Markwardt2023": {"tags": ["Solar system", "minor body", "Neptune trojan"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.61, "r-i": 0.30}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.61, "r-i": 0.30}, "calib": "AB", "sun": true
     },
     "2011 SO277|Markwardt2023": {"tags": ["Solar system", "minor body", "Neptune trojan"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.60, "r-i": 0.57}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.60, "r-i": 0.57}, "calib": "AB", "sun": true
     },
     "2012 UD185|Markwardt2023": {"tags": ["Solar system", "minor body", "Neptune trojan"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.61, "r-i": 0.37}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.61, "r-i": 0.37}, "calib": "AB", "sun": true
     },
     "2012 UV177|Markwardt2023": {"tags": ["Solar system", "minor body", "Neptune trojan"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.71, "r-i": 0.23}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.71, "r-i": 0.23}, "calib": "AB", "sun": true
     },
     "2013 RL124|Markwardt2023": {"tags": ["Solar system", "minor body", "Neptune trojan"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.38, "r-i": 0.54}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.38, "r-i": 0.54}, "calib": "AB", "sun": true
     },
     "2013 TZ187|Markwardt2023": {"tags": ["Solar system", "minor body", "Neptune trojan"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.90, "r-i": 0.30}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.90, "r-i": 0.30}, "calib": "AB", "sun": true
     },
     "2013 VX30|Markwardt2023": {"tags": ["Solar system", "minor body", "Neptune trojan"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 1.01, "r-i": 0.44}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 1.01, "r-i": 0.44}, "calib": "AB", "sun": true
     },
     "2014 RO74|Markwardt2023": {"tags": ["Solar system", "minor body", "Neptune trojan"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.65, "r-i": 0.42}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.65, "r-i": 0.42}, "calib": "AB", "sun": true
     },
     "2014 SC374|Markwardt2023": {"tags": ["Solar system", "minor body", "Neptune trojan"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.43, "r-i": 0.12}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.43, "r-i": 0.12}, "calib": "AB", "sun": true
     },
     "2014 YB92|Markwardt2023": {"tags": ["Solar system", "minor body", "Neptune trojan"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.46, "r-i": 0.07}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.46, "r-i": 0.07}, "calib": "AB", "sun": true
     },
     "2015 VU207|Markwardt2023": {"tags": ["Solar system", "minor body", "Neptune trojan"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.31, "r-i": 0.24}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.31, "r-i": 0.24}, "calib": "AB", "sun": true
     },
     "2015 VV165|Markwardt2023": {"tags": ["Solar system", "minor body", "Neptune trojan"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.87, "r-i": 0.32}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.87, "r-i": 0.32}, "calib": "AB", "sun": true
     },
     "2015 VW165|Markwardt2023": {"tags": ["Solar system", "minor body", "Neptune trojan"], // added 17.11.2023
-        "system": "-SLOAN_SDSS", "indices": {"g-r": 0.45, "r-i": 0.36}, "calib": "AB", "sun": true
+        "system": "SLOAN_SDSS", "indices": {"g-r": 0.45, "r-i": 0.36}, "calib": "AB", "sun": true
     },
 }

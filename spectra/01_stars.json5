@@ -41,22 +41,22 @@
         "file": "spectra/files/CALSPEC/sigori_stis_001.fits"
     },
     "(O9.7b+O9 III+B0 II-IV) ξ Orionis|Krisciunas2017": {"tags": ["extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr1948_final.txt"
+        "file": "spectra/files/Krisciunas2017/hr1948_final.txtA"
     },
     "(B0.5 III) Mimosa|Krisciunas2017": {"tags": ["III giant", "extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr4853_blue_fin.txt"
+        "file": "spectra/files/Krisciunas2017/hr4853_blue_fin.txtA"
     },
     "(B0.5 V) λ Leporis|CALSPEC": {"tags": ["V dwarf", "extrasolar", "star"],
         "file": "spectra/files/CALSPEC/lamlep_stis_007.fits"
     },
     "(B1 II-III) Mirzam|Krisciunas2017": {"tags": ["II bright giant", "III giant", "extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr2294_final.txt"
+        "file": "spectra/files/Krisciunas2017/hr2294_final.txtA"
     },
     "(B2 II) Adhara|Krisciunas2017": {"tags": ["II bright giant", "extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr2618_blue_fin.txt"
+        "file": "spectra/files/Krisciunas2017/hr2618_blue_fin.txtA"
     },
     "(B2 III) Bellatrix|Krisciunas2017": {"tags": ["III giant", "extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr1790_final.txt"
+        "file": "spectra/files/Krisciunas2017/hr1790_final.txtA"
     },
     "(B2 Ve) HD 200775|CALSPEC": {"tags": ["V dwarf", "extrasolar", "star"],
         "file": "spectra/files/CALSPEC/hd200775_stis_001.fits"
@@ -77,7 +77,7 @@
         "file": "spectra/files/CALSPEC/wd0308_565_stis_009.fits"
     },
     "(B8 Ia) Rigel|Krisciunas2017": {"tags": ["I supergiant", "extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr1713_final.txt"
+        "file": "spectra/files/Krisciunas2017/hr1713_final.txtA"
     },
     "(B9 III) ξ² Ceti|CALSPEC": {"tags": ["III giant", "extrasolar", "star"],
         "file": "spectra/files/CALSPEC/ksi2ceti_stis_006.fits"
@@ -101,7 +101,7 @@
         "file": "spectra/files/CALSPEC/hd180609_stis_006.fits"
     },
     "(A1 V) Alsephina|Krisciunas2017": {"tags": ["V dwarf", "extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr3485_blue_fin.txt"
+        "file": "spectra/files/Krisciunas2017/hr3485_blue_fin.txtA"
     },
     "(A1 V) BD+60 1753|CALSPEC": {"tags": ["V dwarf", "extrasolar", "star"],
         "file": "spectra/files/CALSPEC/bd60d1753_stiswfc_004.fits"
@@ -116,13 +116,13 @@
         "file": "spectra/files/CALSPEC/sirius_stis_005.fits"
     },
     "(A1 Vn) π² Orionis|Krisciunas2017": {"tags": ["V dwarf", "extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr1544_final.txt"
+        "file": "spectra/files/Krisciunas2017/hr1544_final.txtA"
     },
     "(A1 IV s+A9m) θ Virginis|Krisciunas2017": {"tags": ["extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr4963_blue_fin.txt"
+        "file": "spectra/files/Krisciunas2017/hr4963_blue_fin.txtA"
     },
     "(A2 IV) Miaplacidus|Krisciunas2017": {"tags": ["IV subgiant", "extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr3685_final.txt"
+        "file": "spectra/files/Krisciunas2017/hr3685_final.txtA"
     },
     "(A2 V) 1802271|CALSPEC": {"tags": ["V dwarf", "extrasolar", "star"],
         "file": "spectra/files/CALSPEC/1802271_stiswfcnic_004.fits"
@@ -179,7 +179,7 @@
         "file": "spectra/files/CALSPEC/1743045_stisnic_007.fits"
     },
     "(A9 II) Canopus|Krisciunas2017": {"tags": ["II bright giant", "extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr2326_final.txt"
+        "file": "spectra/files/Krisciunas2017/hr2326_final.txtA"
     },
     "(F2) BD+21 0607|CALSPEC": {"tags": ["extrasolar", "star"],
         "file": "spectra/files/CALSPEC/bd21d0607_stis_006.fits"
@@ -188,7 +188,7 @@
         "file": "spectra/files/CALSPEC/hd031128_stis_006.fits"
     },
     "(F5 IV-V) Procyon|Krisciunas2017": {"tags": ["featured", "IV subgiant", "V dwarf", "extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr2943_final.txt"
+        "file": "spectra/files/Krisciunas2017/hr2943_final.txtA"
     },
     "(F5) BD+29 2091|CALSPEC": {"tags": ["extrasolar", "star"],
         "file": "spectra/files/CALSPEC/bd29d2091_stis_006.fits"
@@ -203,7 +203,7 @@
         "file": "spectra/files/CALSPEC/hd111980_stis_006.fits"
     },
     "(F8 Ia) Wezen|Krisciunas2017": {"tags": ["I supergiant", "extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr2693_blue_fin.txt"
+        "file": "spectra/files/Krisciunas2017/hr2693_blue_fin.txtA"
     },
     "(F8 IV) C26202|CALSPEC": {"tags": ["IV subgiant", "extrasolar", "star"],
         "file": "spectra/files/CALSPEC/c26202_stiswfcnic_005.fits"
@@ -278,7 +278,7 @@
         "file": "spectra/files/CALSPEC/hd009051_stis_007.fits"
     },
     "(K0 III) Ankaa|Krisciunas2017": {"tags": ["featured", "III giant", "extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr0099_blue_fin.txt"
+        "file": "spectra/files/Krisciunas2017/hr0099_blue_fin.txtA"
     },
     "(K0.5 III) KF08T3|CALSPEC": {"tags": ["III giant", "extrasolar", "star"],
         "file": "spectra/files/CALSPEC/kf08t3_stisnic_004.fits"
@@ -287,28 +287,28 @@
         "file": "spectra/files/CALSPEC/kf06t2_stiswfcnic_005.fits"
     },
     "(K3 II-III) Alphard|Krisciunas2017": {"tags": ["featured", "II bright giant", "III giant", "extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr3748_blue_fin.txt"
+        "file": "spectra/files/Krisciunas2017/hr3748_blue_fin.txtA"
     },
     "(K3 III+B2 Vp) Avior|Krisciunas2017": {"tags": ["extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr3307_final.txt"
+        "file": "spectra/files/Krisciunas2017/hr3307_final.txtA"
     },
     "(K4.5 Ib-II) Suhail|Krisciunas2017": {"tags": ["featured", "I supergiant", "II bright giant", "extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr3634_blue_fin.txt"
+        "file": "spectra/files/Krisciunas2017/hr3634_blue_fin.txtA"
     },
     "(M1-2 Ia-Iab) Betelgeuse|Krisciunas2017": {"tags": ["featured", "I supergiant", "extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr2061_final.txt"
+        "file": "spectra/files/Krisciunas2017/hr2061_final.txtA"
     },
     "(M1.5 V) Gliese 832|HAZMAT": {"tags": ["V dwarf", "extrasolar", "star"],
-        "file": "spectra/files/HAZMAT/Gliese832_model.txt"
+        "file": "spectra/files/HAZMAT/Gliese832_model.txtA"
     },
     "(M2 V) Gliese 176|HAZMAT": {"tags": ["V dwarf", "extrasolar", "star"],
-        "file": "spectra/files/HAZMAT/Gliese176_model.txt"
+        "file": "spectra/files/HAZMAT/Gliese176_model.txtA"
     },
     "(M2.5 V) Gliese 436|HAZMAT": {"tags": ["V dwarf", "extrasolar", "star"],
-        "file": "spectra/files/HAZMAT/Gliese436_model.txt"
+        "file": "spectra/files/HAZMAT/Gliese436_model.txtA"
     },
     "(M3.5 III) Gacrux|Krisciunas2017": {"tags": ["III giant", "extrasolar", "star"],
-        "file": "spectra/files/Krisciunas2017/hr4763_blue_fin.txt"
+        "file": "spectra/files/Krisciunas2017/hr4763_blue_fin.txtA"
     },
     "(M3.5 V) BD-11 3759|CALSPEC": {"tags": ["V dwarf", "extrasolar", "star"],
         "file": "spectra/files/CALSPEC/bd11d3759_stis_003.fits"

@@ -127,7 +127,7 @@
         "scale": ["Generic_Bessell.V", 0.18]
     }, // albedo from Vernazza et al. (2021)
     "(10) Hygiea|SMASS": {"tags": ["Solar system", "minor body", "asteroid", "main belt"],
-        "file": "spectra/files/SMASS/a000010.2.txt", "scale": ["Generic_Bessell.V", 0.063]
+        "file": "spectra/files/SMASS/a000010.2.txtA", "scale": ["Generic_Bessell.V", 0.063]
     }, // albedo from Vernazza et al. (2021)
     "(13) Egeria|SMASS": {"tags": ["Solar system", "minor body", "asteroid", "main belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 552.5, 555, 557.5, 560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 612.5, 615, 617.5, 620, 622.5, 625, 627.5, 630, 632.5, 635, 637.5, 640, 642.5, 645, 647.5, 650, 652.5, 655, 657.5, 660, 662.5, 665, 667.5, 670, 672.5, 675, 677.5, 680, 682.5, 685, 687.5, 690, 692.5, 695, 697.5, 700, 702.5, 705, 707.5, 710, 712.5, 715, 717.5, 720, 722.5, 725, 727.5, 730, 732.5, 735, 737.5, 740, 742.5, 745, 747.5, 750, 752.5, 755, 757.5, 760, 770, 772.5, 775, 777.5, 780, 782.5, 785, 787.5, 790, 792.5, 795, 797.5, 800, 802.5, 805, 807.5, 810, 812.5, 815, 817.5, 820, 822.5, 825, 827.5, 830, 832.5, 835, 837.5, 840, 842.5, 845, 847.5, 850, 852.5, 855, 857.5, 860, 862.5, 865, 867.5, 870, 872.5, 875, 877.5, 880, 882.5, 885, 887.5, 890, 892.5, 895, 897.5, 900, 902.5, 905, 907.5, 910, 912.5, 915, 917.5, 920, 922.5, 925, ],
@@ -140,13 +140,13 @@
         "scale": ["Generic_Bessell.V", 0.187]
     }, // albedo from Vernazza et al. (2021)
     "(16) Psyche|SMASS": {"tags": ["featured", "Solar system", "minor body", "asteroid", "main belt"],
-        "file": "spectra/files/SMASS/a000016.2.txt", "scale": ["Generic_Bessell.V", 0.16]
+        "file": "spectra/files/SMASS/a000016.2.txtA", "scale": ["Generic_Bessell.V", 0.16]
     }, // albedo from Shepard et al. (2021)
     "(16) Psyche:B|SMASS": {"tags": ["featured", "Solar system", "minor body", "asteroid", "main belt", "surface feature"],
-        "file": "spectra/files/SMASS/a000016.2.txt", "scale": ["Generic_Bessell.V", 0.1888]
+        "file": "spectra/files/SMASS/a000016.2.txtA", "scale": ["Generic_Bessell.V", 0.1888]
     },
     "(16) Psyche:D|SMASS": {"tags": ["featured", "Solar system", "minor body", "asteroid", "main belt", "surface feature"],
-        "file": "spectra/files/SMASS/a000016.2.txt", "scale": ["Generic_Bessell.V", 0.128]
+        "file": "spectra/files/SMASS/a000016.2.txtA", "scale": ["Generic_Bessell.V", 0.128]
     },
     "(19) Fortuna|SMASS": {"tags": ["Solar system", "minor body", "asteroid", "main belt"],
         "nm": [435, 437.5, 440, 442.5, 445, 447.5, 450, 452.5, 455, 457.5, 460, 462.5, 465, 467.5, 470, 472.5, 475, 477.5, 480, 482.5, 485, 487.5, 490, 492.5, 495, 497.5, 500, 502.5, 505, 507.5, 510, 512.5, 515, 517.5, 520, 522.5, 525, 527.5, 530, 532.5, 535, 537.5, 540, 542.5, 545, 547.5, 550, 552.5, 555, 557.5, 560, 562.5, 565, 567.5, 570, 572.5, 575, 577.5, 580, 582.5, 585, 587.5, 590, 592.5, 595, 597.5, 600, 602.5, 605, 607.5, 610, 612.5, 615, 617.5, 620, 622.5, 625, 627.5, 630, 632.5, 635, 637.5, 640, 642.5, 645, 647.5, 650, 652.5, 655, 657.5, 660, 662.5, 665, 667.5, 670, 672.5, 675, 677.5, 680, 682.5, 685, 687.5, 690, 692.5, 695, 697.5, 700, 702.5, 705, 707.5, 710, 712.5, 715, 717.5, 720, 722.5, 725, 727.5, 730, 732.5, 735, 737.5, 740, 742.5, 745, 747.5, 750, 752.5, 755, 757.5, 760, 762.5, 765, 767.5, 770, 772.5, 775, 777.5, 780, 782.5, 785, 787.5, 790, 792.5, 795, 797.5, 800, 802.5, 805, 807.5, 810, 812.5, 815, 817.5, 820, 822.5, 825, 827.5, 830, 832.5, 835, 837.5, 840, 842.5, 845, 847.5, 850, 852.5, 855, 857.5, 860, 862.5, 865, 867.5, 870, 872.5, 875, 877.5, 880, 882.5, 885, 887.5, 890, 892.5, 895, 897.5, 900, 902.5, 905, 907.5, 910, 912.5, 915, 917.5, 920, 922.5, 925],
@@ -430,21 +430,21 @@
         "scale": ["Generic_Bessell.V", 0.152]
     }, // albedo from Vernazza et al. (2021)
     "(511) Davida|SMASS": {"tags": ["Solar system", "minor body", "asteroid", "main belt"],
-        "file": "spectra/files/SMASS/a000511.2.txt", "scale": ["Generic_Bessell.V", 0.063]
+        "file": "spectra/files/SMASS/a000511.2.txtA", "scale": ["Generic_Bessell.V", 0.063]
     }, // albedo from Vernazza et al. (2021)
     "(704) Interamnia|SMASS": {"tags": ["Solar system", "minor body", "asteroid", "main belt"],
-        "file": "spectra/files/SMASS/a000704.2.txt", "scale": ["Generic_Bessell.V", 0.067]
+        "file": "spectra/files/SMASS/a000704.2.txtA", "scale": ["Generic_Bessell.V", 0.067]
     }, // albedo from Vernazza et al. (2021)
     "(944) Hidalgo|MITHNEOS": {"tags": ["Solar system", "minor body", "asteroid", "centaur"],
-        "file": "spectra/files/SMASS/a000944.sp31.txt"
+        "file": "spectra/files/SMASS/a000944.sp31.txtA"
     },
     "(2060) Chiron|SMASS": {"tags": ["featured", "Solar system", "minor body", "asteroid", "centaur"],
-        "file": "spectra/files/SMASS/a002060.2.txt", "scale": ["Generic_Bessell.V", 0.076]
+        "file": "spectra/files/SMASS/a002060.2.txtA", "scale": ["Generic_Bessell.V", 0.076]
     }, // albedo from Braga-Ribas et al. (2023)
     "(5145) Pholus|SMASS": {"tags": ["featured", "Solar system", "minor body", "asteroid", "centaur"],
-        "file": "spectra/files/SMASS/a005145.1.txt", "scale": ["Generic_Bessell.V", 0.155]
+        "file": "spectra/files/SMASS/a005145.1.txtA", "scale": ["Generic_Bessell.V", 0.155]
     }, // albedo from Duffard et al. (2014)
     "(10199) Chariklo|SMASS": {"tags": ["featured", "Solar system", "minor body", "asteroid", "centaur"],
-        "file": "spectra/files/SMASS/a010199.2.txt", "scale": ["Generic_Bessell.V", 0.037]
+        "file": "spectra/files/SMASS/a010199.2.txtA", "scale": ["Generic_Bessell.V", 0.037]
     }, // albedo from Leiva et al. (2017); ellipsoid model
 }
