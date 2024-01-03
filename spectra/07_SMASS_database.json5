@@ -104,8 +104,9 @@
     "(269) Justitia|SMASS": {"tags": ["Solar system", "minor body", "asteroid", "main belt"],
         "file": "spectra/files/SMASS/a000269.2.txtU",
     },
-    "(433) Eros|SMASS": {"tags": ["Solar system", "minor body", "asteroid", "main belt"],
+    "(433) Eros|SMASS": {"tags": ["Solar system", "minor body", "asteroid", "NEO", "NEO-Amor"],
         "file": "spectra/files/SMASS/a000433.8.txtU",
+        "scale": ["Generic_Bessell.V", 0.098], // https://www.lpi.usra.edu/meetings/lpsc2004/pdf/2080.pdf
     },
     "(511) Davida|SMASS": {"tags": ["Solar system", "minor body", "asteroid", "main belt"],
         "file": "spectra/files/SMASS/a000511.2.txtU", "scale": ["Generic_Bessell.V", 0.063]
@@ -116,13 +117,13 @@
     "(944) Hidalgo|MITHNEOS": {"tags": ["Solar system", "minor body", "asteroid", "centaur"],
         "file": "spectra/files/SMASS/a000944.sp31.txtU"
     },
-    "(1036) Ganymed|SMASS": {"tags": ["Solar system", "minor body", "asteroid", "main belt"],
+    "(1036) Ganymed|SMASS": {"tags": ["Solar system", "minor body", "asteroid", "NEO", "NEO-Amor"],
         "file": "spectra/files/SMASS/a001036.8.txtU",
     },
     "(1252) Celestia|SMASS": {"tags": ["Solar system", "minor body", "asteroid", "main belt"],
-        "file": "spectra/files/SMASS/a001252.8.txtU",
+        "file": "spectra/files/SMASS/a001252.2.txtU",
     },
-    "(1620) Geographos|SMASS": {"tags": ["Solar system", "minor body", "asteroid", "main belt"],
+    "(1620) Geographos|SMASS": {"tags": ["Solar system", "minor body", "asteroid", "NEO", "NEO-Apollo"],
         "file": "spectra/files/SMASS/a001620.8.txtU",
     },
     "(2060) Chiron|SMASS": {"tags": ["featured", "Solar system", "minor body", "asteroid", "centaur"],
