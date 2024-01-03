@@ -130,7 +130,7 @@
         "file": "spectra/files/SMASS/a002060.2.txtU", "scale": ["Generic_Bessell.V", 0.076]
     }, // albedo from Braga-Ribas et al. (2023)
     "(5145) Pholus|SMASS": {"tags": ["featured", "Solar system", "minor body", "asteroid", "centaur"],
-        "file": "spectra/files/SMASS/a005145.1.txtU", "scale": ["Generic_Bessell.V", 0.155]
+        "file": "spectra/files/SMASS/a005145.1.txtA", "scale": ["Generic_Bessell.V", 0.155]
     }, // albedo from Duffard et al. (2014)
     "(10199) Chariklo|SMASS": {"tags": ["featured", "Solar system", "minor body", "asteroid", "centaur"],
         "file": "spectra/files/SMASS/a010199.2.txtU", "scale": ["Generic_Bessell.V", 0.037]
