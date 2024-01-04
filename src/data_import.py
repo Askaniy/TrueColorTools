@@ -57,12 +57,12 @@ def txt_reader(file: str, type_info: str) -> tuple:
         nm = data[0]
         br = data[1]
         try:
-            sd = data[3]
+            sd = data[2]
         except IndexError:
             sd = np.zeros_like(br)
     return nm*to_nm_factor, br, sd
 
-def fits_reader(file: str, type_info: str):
+def fits_reader(file: str, type_info: str) -> tuple:
     """ Imports spectral data from a FITS file in standards of CALSPEC, VizeR, UVES, BAAVSS, etc """
     if 'n' in type_info:
         to_nm_factor = 1
@@ -88,7 +88,7 @@ def fits_reader(file: str, type_info: str):
             if len(y_column.shape) > 1:
                 y_column = y_column[0]
             if not to_nm_factor:
-                to_nm_factor = 0.1 if columns[x_id].unit in angstroms else 1
+                to_nm_factor = 0.1 if columns[x_id].unit.lower() in angstroms else 1
             y = (y_column * str2unit(columns[y_id].unit)).to(flux_density_SI)
         except IndexError:
             header = hdul[0].header # but sometimes they are in the primary HDU, like in BAAVSS
@@ -101,7 +101,7 @@ def fits_reader(file: str, type_info: str):
     y = np.array(y)
     return x, y, np.zeros_like(y) # TODO: add support for standard deviation
 
-angstroms = ('A', 'ANGSTROM', 'ANGSTROMS')
+angstroms = ('a', 'angstrom', 'angstroms')
 
 # Units of spectral flux density by wavelength and frequency
 flam = u.def_unit('FLAM', (u.erg / u.s) / (u.cm**2 * u.AA))
