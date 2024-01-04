@@ -143,6 +143,10 @@
         "Opposition Observations of 162173 Ryugu: Normal Albedo Map Highlights Variations in Regolith Characteristics",
         "DOI: 10.3847/PSJ/ac14ba", "https://iopscience.iop.org/article/10.3847/PSJ/ac14ba"
     ],
+    "Bernardi2006": [ // the last observation reported
+        "Pluto New Horizons Mission — Supporting Observations for 2002 JF56 Encounter",
+        "http://smass.mit.edu/2002jf56.html"
+    ],
 
     "Mercury|Mallama2017": {"tags": ["featured", "Solar system", "planet geophysical", "planet"],
         "nm": [360, 436, 549, 641, 700, 798, 900], "br": [0.087, 0.105, 0.142, 0.158, 0.172, 0.180, 0.208], "albedo": true
@@ -436,6 +440,13 @@
         "nm": [473.228, 549.146, 697.569, 847.937],
         "br": [0.01604, 0.01573, 0.016, 0.01605],
         "albedo": true
+    },
+    "(132524) APL|Bernardi2006": {"tags": ["Solar system", "minor body", "asteroid", "main belt"],
+        "system": "Generic_Bessell",
+        "indices": {"B-V": 0.84, "V-R": 0.49},
+        "calib": "Vega",
+        "sun": true,
+        "scale": ["Generic_Bessell.V", 0.178], // mean diameter = 2.5 km, H = 15.5
     },
     "(134340) Pluto|Lorenzi2016": {"tags": ["featured", "Solar system", "planet geophysical", "minor body", "dwarf planet", "TNO", "plutino"],
         "nm": [400.551, 423.678, 440.749, 458.37, 466.079, 493.062, 496.366, 499.119, 553.634, 555.837, 559.692, 582.819, 587.225, 630.727, 658.811, 
