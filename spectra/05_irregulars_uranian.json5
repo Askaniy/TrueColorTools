@@ -1,17 +1,37 @@
 {
-    "Caliban|Graykowski2018": {"tags": ["Solar system", "moon", "Uranian system", "irregular"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.81, "V-R": 0.47}, "calib": "Vega", "sun": true
+    'Caliban|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Uranian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.81, 'V-R': 0.47},
+        calib: 'Vega',
+        sun: true
     },
-    "Sycorax|Graykowski2018": {"tags": ["Solar system", "moon", "Uranian system", "irregular"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.81, "V-R": 0.54}, "calib": "Vega", "sun": true
+    'Sycorax|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Uranian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.81, 'V-R': 0.54},
+        calib: 'Vega',
+        sun: true
     },
-    "Prospero|Graykowski2018": {"tags": ["Solar system", "moon", "Uranian system", "irregular"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.81, "V-R": 0.51}, "calib": "Vega", "sun": true
+    'Prospero|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Uranian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.81, 'V-R': 0.51},
+        calib: 'Vega',
+        sun: true
     },
-    "Setebos|Graykowski2018": {"tags": ["Solar system", "moon", "Uranian system", "irregular"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.78, "V-R": 0.49}, "calib": "Vega", "sun": true
+    'Setebos|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Uranian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.78, 'V-R': 0.49},
+        calib: 'Vega',
+        sun: true
     },
-    "Stephano|Graykowski2018": {"tags": ["Solar system", "moon", "Uranian system", "irregular"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.97, "V-R": 0.66}, "calib": "Vega", "sun": true
+    'Stephano|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Uranian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.97, 'V-R': 0.66},
+        calib: 'Vega',
+        sun: true
     },
 }

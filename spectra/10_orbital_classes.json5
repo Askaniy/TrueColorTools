@@ -1,56 +1,146 @@
 {
-    "Jovian irregulars|Graykowski2018": {"tags": ["featured", "Solar system", "class", "orbit", "moon", "Jovian system", "irregular"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.75, "V-R": 0.44}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.04], // estimation
+    'Jovian irregulars|Graykowski2018': {
+        tags: ['featured', 'Solar system', 'class', 'orbit', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.75, 'V-R': 0.44},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.04], // estimation
     },
-    "Jovian irregulars i=28°|Grav2003": {"tags": ["featured", "Solar system", "class", "orbit", "moon", "Jovian system", "irregular"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.66, "V-R": 0.36}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.04], // estimation
+    'Jovian irregulars i=28°|Grav2003': {
+        tags: ['featured', 'Solar system', 'class', 'orbit', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.66, 'V-R': 0.36},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.04], // estimation
     },
-    "Jovian irregulars i=149°|Grav2003": {"tags": ["featured", "Solar system", "class", "orbit", "moon", "Jovian system", "irregular"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.75, "V-R": 0.41}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.04], // estimation
+    'Jovian irregulars i=149°|Grav2003': {
+        tags: ['featured', 'Solar system', 'class', 'orbit', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.75, 'V-R': 0.41},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.04], // estimation
     },
-    "Saturnian irregulars|Graykowski2018": {"tags": ["featured", "Solar system", "class", "moon", "Saturnian system", "irregular"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.69, "V-R": 0.44}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.04], // estimation
+    'Saturnian irregulars|Graykowski2018': {
+        tags: ['featured', 'Solar system', 'class', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.69, 'V-R': 0.44},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.04], // estimation
     },
-    "Saturnian irregulars i=34°|Grav2003": {"tags": ["featured", "Solar system", "class", "moon", "Saturnian system", "irregular"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.91, "V-R": 0.48}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.04], // estimation
+    'Saturnian irregulars i=34°|Grav2003': {
+        tags: ['featured', 'Solar system', 'class', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.91, 'V-R': 0.48},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.04], // estimation
     },
-    "Saturnian irregulars i=46°|Grav2003": {"tags": ["featured", "Solar system", "class", "moon", "Saturnian system", "irregular"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.79, "V-R": 0.51}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.04], // estimation
+    'Saturnian irregulars i=46°|Grav2003': {
+        tags: ['featured', 'Solar system', 'class', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.79, 'V-R': 0.51},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.04], // estimation
     },
-    "Uranian irregulars|Graykowski2018": {"tags": ["featured", "Solar system", "class", "moon", "Uranian system", "irregular"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.84, "V-R": 0.53}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.04], // estimation
+    'Uranian irregulars|Graykowski2018': {
+        tags: ['featured', 'Solar system', 'class', 'moon', 'Uranian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.84, 'V-R': 0.53},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.04], // estimation
     },
-    "Neptunian irregulars|Graykowski2018": {"tags": ["featured", "Solar system", "class", "moon", "Neptunian system", "irregular"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.77, "V-R": 0.50}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.04], // estimation
+    'Neptunian irregulars|Graykowski2018': {
+        tags: ['featured', 'Solar system', 'class', 'moon', 'Neptunian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.77, 'V-R': 0.50},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.04], // estimation
     },
-    "Comets:SP|MBOSS": {"tags": ["featured", "Solar system", "class", "orbit"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.87, "V-R": 0.50, "R-I": 0.45}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.04]
+    'Comets:SP|MBOSS': {
+        tags: ['featured', 'Solar system', 'class', 'orbit'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.87, 'V-R': 0.50, 'R-I': 0.45},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.04]
     },
-    "Comets:LP|MBOSS": {"tags": ["featured", "Solar system", "class", "orbit"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.79, "V-R": 0.46, "R-I": 0.44}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.04]
+    'Comets:LP|MBOSS': {
+        tags: ['featured', 'Solar system', 'class', 'orbit'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.79, 'V-R': 0.46, 'R-I': 0.44},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.04]
     },
-    "Jupiter trojans|MBOSS": {"tags": ["featured", "Solar system", "class", "orbit"],
-        "system": "Generic_Bessell", "indices": {"U-B": 0.1, "B-V": 0.78, "V-R": 0.45, "R-I": 0.42}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.05]
+    'Jupiter trojans|MBOSS': {
+        tags: ['featured', 'Solar system', 'class', 'orbit'],
+        system: 'Generic_Bessell',
+        indices: {'U-B': 0.1, 'B-V': 0.78, 'V-R': 0.45, 'R-I': 0.42},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.05]
     },
-    "Centaurs|MBOSS": {"tags": ["featured", "Solar system", "class", "orbit"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.87, "V-R": 0.55, "R-I": 0.50}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.078]
+    'Centaurs|MBOSS': {
+        tags: ['featured', 'Solar system', 'class', 'orbit'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.87, 'V-R': 0.55, 'R-I': 0.50},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.078]
     },
-    "Plutinos|MBOSS": {"tags": ["featured", "Solar system", "class", "orbit"],
-        "system": "Generic_Bessell", "indices": {"B-V": 0.88, "V-R": 0.55, "R-I": 0.53}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.114]
-    }, // albedo from Zelario's sheet
-    "Other resonances|MBOSS": {"tags": ["featured", "Solar system", "class", "orbit"],
-        "system": "Generic_Bessell", "indices": {"U-B": 0.27, "B-V": 0.95, "V-R": 0.59, "R-I": 0.54}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.148]
-    }, // albedo from Zelario's sheet
-    "Cubewano:H|MBOSS": {"tags": ["featured", "Solar system", "class", "orbit"],
-        "system": "Generic_Bessell", "indices": {"U-B": 0.27, "B-V": 0.88, "V-R": 0.54, "R-I": 0.53}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.102]
-    }, // albedo from Zelario's sheet
-    "Cubewano:C|MBOSS": {"tags": ["featured", "Solar system", "class", "orbit"],
-        "system": "Generic_Bessell", "indices": {"U-B": 0.59, "B-V": 1.00, "V-R": 0.63, "R-I": 0.59}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.132]
-    }, // albedo from Zelario's sheet
-    "SDO|MBOSS": {"tags": ["featured", "Solar system", "class", "orbit"],
-        "system": "Generic_Bessell", "indices": {"U-B": 0.33, "B-V": 0.85, "V-R": 0.52, "R-I": 0.51}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.075]
-    }, // albedo from Zelario's sheet
-    "Detached objects|MBOSS": {"tags": ["featured", "Solar system", "class", "orbit"],
-        "system": "Generic_Bessell", "indices": {"U-B": 0.18, "B-V": 0.88, "V-R": 0.54, "R-I": 0.51}, "calib": "Vega", "sun": true, "scale": ["Generic_Bessell.V", 0.108]
-    }, // albedo from Zelario's sheet
+    'Plutinos|MBOSS': {
+        tags: ['featured', 'Solar system', 'class', 'orbit'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.88, 'V-R': 0.55, 'R-I': 0.53},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.114], // albedo from Zelario’s sheet
+    },
+    'Other resonances|MBOSS': {
+        tags: ['featured', 'Solar system', 'class', 'orbit'],
+        system: 'Generic_Bessell',
+        indices: {'U-B': 0.27, 'B-V': 0.95, 'V-R': 0.59, 'R-I': 0.54},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.148], // albedo from Zelario’s sheet
+    },
+    'Cubewano:H|MBOSS': {
+        tags: ['featured', 'Solar system', 'class', 'orbit'],
+        system: 'Generic_Bessell',
+        indices: {'U-B': 0.27, 'B-V': 0.88, 'V-R': 0.54, 'R-I': 0.53},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.102], // albedo from Zelario’s sheet
+    },
+    'Cubewano:C|MBOSS': {
+        tags: ['featured', 'Solar system', 'class', 'orbit'],
+        system: 'Generic_Bessell',
+        indices: {'U-B': 0.59, 'B-V': 1.00, 'V-R': 0.63, 'R-I': 0.59},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.132], // albedo from Zelario’s sheet
+    },
+    'SDO|MBOSS': {
+        tags: ['featured', 'Solar system', 'class', 'orbit'],
+        system: 'Generic_Bessell',
+        indices: {'U-B': 0.33, 'B-V': 0.85, 'V-R': 0.52, 'R-I': 0.51},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.075], // albedo from Zelario’s sheet
+    },
+    'Detached objects|MBOSS': {
+        tags: ['featured', 'Solar system', 'class', 'orbit'],
+        system: 'Generic_Bessell',
+        indices: {'U-B': 0.18, 'B-V': 0.88, 'V-R': 0.54, 'R-I': 0.51},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.108], // albedo from Zelario’s sheet
+    },
 }
