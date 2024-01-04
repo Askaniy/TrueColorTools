@@ -437,9 +437,9 @@ def from_database(name: str, content: dict) -> Spectrum | Photometry:
 
     Supported input keys of a database unit:
     - `nm` (list): list of wavelengths in nanometers
-    - `br` (list): same-size list of "brightness" of an energy counter detector (not photon counter)
+    - `br` (list): same-size list of "brightness", flux in units of energy (not a photon counter)
     - `mag` (list): same-size list of magnitudes
-    - `sd` (list): same-size list of standard deviations (ignored, may be supported in the future)
+    - `sd` (list): same-size list of standard deviations
     - `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
     - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
     - `filters` (list): list of filter names that can be found in the `filters` folder

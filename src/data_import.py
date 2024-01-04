@@ -27,7 +27,7 @@ def file_reader(file: str) -> tuple:
     """
     Gets the file path within the TCT main folder (text or FITS) and returns the spectrum points (nm, br, sd).
     The internal measurement standards are nanometers and energy spectral density ("energy counter").
-    For FITS files it will try to determine them from internal data.
+    For FITS files, it will try to determine the wavelength unit from internal data.
     You can also forcefully specify the data type through letters in the file extension (.txt for example):
     - .txtN for nanometers, .txtA for angstroms, .txtU for micrometers;
     - .txtE for energy counters, .txtP for photon counters.

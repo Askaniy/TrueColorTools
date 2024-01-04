@@ -34,7 +34,7 @@ def launch_window(lang: str):
     # Launching window
     sg.ChangeLookAndFeel('MaterialDark')
     window = sg.Window(
-        'True Color Tools', finalize=True, resizable=True, margins=(0, 0), size=(900, 640),
+        'TrueColorTools', finalize=True, resizable=True, margins=(0, 0), size=(900, 640),
         layout=gui.generate_layout(
             (2*circle_r+1, 2*circle_r+1), img_preview_size, text_colors, filtersDB, albedoFlag, bitness, rounding, T2_num, lang
             )
@@ -113,7 +113,7 @@ def launch_window(lang: str):
             sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event)
         
         elif event == 'T1_database': # global loading of spectra database, was needed for separate Table tab
-            objectsDB, refsDB = di.import_DBs(['spectra_extras', 'spectra'])
+            objectsDB, refsDB = di.import_DBs(['spectra', 'spectra_extras'])
             tagsDB = di.tag_list(objectsDB)
             window['T1_tagsN'].update(visible=True)
             window['T1_tags'].update(default_tag, values=tagsDB, visible=True)
