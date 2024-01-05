@@ -147,6 +147,10 @@
         'Pluto New Horizons Mission — Supporting Observations for 2002 JF56 Encounter',
         'http://smass.mit.edu/2002jf56.html'
     ],
+    'Hicks2004': [
+        '(2867) Steins',
+        'https://ui.adsabs.harvard.edu/abs/2004IAUC.8315....3H/abstract'
+    ],
 
     'Mercury|Mallama2017': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
@@ -500,7 +504,7 @@
         br: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
         albedo: true, // geometric albedo!
     },
-    '(433) Eros|deLeon2010': { tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+    '(433) Eros|deLeon2010': { tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Amor'],
         nm_range: [350, 890, 5],
         br: [0.39114, 0.40755, 0.43474, 0.48806, 0.49886, 0.51646, 0.49042, 0.44175, 0.53512, 0.55996, 0.62863, 0.6198, 0.67636, 0.66499, 0.68589, 0.67764,
             0.68227, 0.73805, 0.7302, 0.76963, 0.7911, 0.8021, 0.8124, 0.81771, 0.82751, 0.8589, 0.87197, 0.89604, 0.89299, 0.90126, 0.91716, 0.91591, 0.91854,
@@ -509,13 +513,21 @@
             1.12816, 1.13752, 1.14195, 1.12574, 1.14946, 1.13265, 1.17224, 1.12637, 1.13412, 1.15489, 1.16516, 1.13524, 1.13512, 1.16729, 1.19448, 1.21084,
             1.15377, 1.12806, 1.17343, 1.21881, 1.14669, 1.14314, 1.14373, 1.16095, 1.09179, 1.0755, 1.13114, 1.16251, 1.21117, 1.13878, 1.20665, 1.0951, 1.047,
             1.00354, 0.9945, 1.01803, 1.14228, 1.05281, 1.18387, 1.09958, 1.16424, 0.91067],
-        scale: ['Generic_Bessell.V', 0.098], // https://www.lpi.usra.edu/meetings/lpsc2004/pdf/2080.pdf
+        scale: ['Generic_Bessell.V', 0.093], // Bond albedo from Li et al. (2004), https://ui.adsabs.harvard.edu/abs/2004Icar..172..415L/abstract
     },
-    '(25143) Itokawa|Lowry2005': { tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+    '(2867) Steins|Hicks2004': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.798, 'V-R': 0.513, 'R-I': 0.440},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Rosetta_OSIRIS_WAC.OI', 0.24], // Bond albedo from Spjuth et al. (2012), https://ui.adsabs.harvard.edu/abs/2012Icar..221.1101S/abstract
+    },
+    '(25143) Itokawa|Lowry2005': { tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         nm_range: [325, 1000, 25],
         br: [0.388, 0.568, 0.676, 0.773, 0.824, 0.856, 0.888, 0.914, 0.964, 1.0, 1.036, 1.058, 1.076, 1.094, 1.122, 1.140, 1.147, 1.144, 1.129, 1.101,
             1.068, 1.029, 1.0, 0.978, 0.975, 0.946, 0.917, 0.935],
-        scale: ['Generic_Bessell.V', 0.29], // https://academic.oup.com/pasj/article/66/3/52/1438030
+        scale: ['Generic_Bessell.V', 0.033], // Bond albedo from Tatsumi et al. (2018), https://kar.kent.ac.uk/66973/1/Lowry_Vis-NIR%20Disk-integrated%20Photometry.pdf
     },
     '(90482) Orcus|Howett2019': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
@@ -534,13 +546,13 @@
         scale: ['Generic_Bessell.V', 0.08], // albedo from Brown and Butler (2018)
     },
     '(101955) Bennu|LeCorre2019': {
-        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         nm: [473.228, 549.146, 697.569, 847.937],
         br: [0.0175, 0.01736, 0.0174, 0.01727],
         albedo: true
     },
     '(101955) Bennu:D|LeCorre2019': {
-        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt', 'surface feature'],
+        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
         nm: [473.228, 549.146, 697.569, 847.937],
         br: [0.01604, 0.01573, 0.016, 0.01605],
         albedo: true
@@ -604,7 +616,7 @@
         scale: ['Generic_Bessell.V', 0.27], // albedo from McFadden et al. (2023)
     },
     '(162173) Ryugu|Yokota2021': {
-        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         system: 'Hayabusa2_ONC-T',
         filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
         br: [0.0438, 0.0408, 0.0406, 0.0408, 0.0405, 0.0411, 0.03987],
@@ -612,7 +624,7 @@
         albedo: true, // normal (=geometric) albedo spectrum from the Table 3
     },
     '(162173) Ryugu:B|Yokota2021': {
-        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt', 'surface feature'],
+        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
         system: 'Hayabusa2_ONC-T',
         filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
         br: [0.0473, 0.0445, 0.0439, 0.0439, 0.0430, 0.0427, 0.0410],
@@ -620,7 +632,7 @@
         albedo: true, // normal (=geometric) albedo spectrum of N-pole bright area from the Table 6
     },
     '(162173) Ryugu:D|Yokota2021': {
-        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt', 'surface feature'],
+        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
         system: 'Hayabusa2_ONC-T',
         filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
         br: [0.0427, 0.0398, 0.0398, 0.0400, 0.0399, 0.0407, 0.0396],
