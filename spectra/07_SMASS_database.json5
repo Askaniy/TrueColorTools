@@ -187,7 +187,7 @@
     '(1252) Celestia|SMASS': {
         tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a001252.2.txtU',
-        scale: ['Generic_Bessell.V', 0.215], // albedo from Mainzer et al. (2016)
+        scale: ['Generic_Bessell.V', 0.215], // albedo from Mainzer et al. (2016), https://ui.adsabs.harvard.edu/abs/2016PDSS..247.....M/abstract
     },
     '(1620) Geographos|SMASS': {
         tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
