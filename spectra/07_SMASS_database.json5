@@ -160,6 +160,7 @@
     '(269) Justitia|SMASS': {
         tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000269.2.txtU',
+        scale: ['Generic_Bessell.V', 0.061], // albedo from JPL Small-Body Database
     },
     '(433) Eros|SMASS': {
         tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Amor'],
@@ -183,6 +184,7 @@
     '(1036) Ganymed|SMASS': {
         tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Amor'],
         file: 'spectra/files/SMASS/a001036.8.txtU',
+        scale: ['Generic_Bessell.V', 0.238], // albedo from Mainzer et al. (2016), https://ui.adsabs.harvard.edu/abs/2016PDSS..247.....M/abstract
     },
     '(1252) Celestia|SMASS': {
         tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
@@ -192,20 +194,36 @@
     '(1620) Geographos|SMASS': {
         tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         file: 'spectra/files/SMASS/a001620.8.txtU',
+        scale: ['Generic_Bessell.V', 0.290], // albedo from Nugent et al. (2015), https://ui.adsabs.harvard.edu/abs/2015ApJ...814..117N/abstract
     },
     '(2060) Chiron|SMASS': {
         tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'centaur'],
         file: 'spectra/files/SMASS/a002060.2.txtU',
         scale: ['Generic_Bessell.V', 0.076], // albedo from Braga-Ribas et al. (2023)
     },
+    '(2063) Bacchus|SMASS': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
+        file: 'spectra/files/SMASS/a002063.7.txtU',
+        scale: ['Generic_Bessell.V', 0.203], // albedo from JPL Small-Body Database
+    },
     '(5145) Pholus|SMASS': {
         tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'centaur'],
         file: 'spectra/files/SMASS/a005145.1.txtA',
         scale: ['Generic_Bessell.V', 0.155], // albedo from Duffard et al. (2014)
     },
+    '(6489) Golevka|SMASS': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
+        file: 'spectra/files/SMASS/a006489visir8.visir.txtU',
+        scale: ['Generic_Bessell.V', 0.151], // albedo from JPL Small-Body Database
+    },
     '(10199) Chariklo|SMASS': {
         tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'centaur'],
         file: 'spectra/files/SMASS/a010199.2.txtU',
         scale: ['Generic_Bessell.V', 0.037], // albedo from Leiva et al. (2017); ellipsoid model
+    },
+    '(162173) Ryugu|SMASS': {
+        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a162173.sp273.txtU',
+        scale: ['Generic_Bessell.V', 0.0406], // global averaged normal albedo from Yokota et al. (2021)
     },
 }
