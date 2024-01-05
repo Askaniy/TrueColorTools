@@ -522,7 +522,8 @@
         system: 'Generic_Bessell',
         indices: {'V-I': 0.73},
         calib: 'Vega',
-        sun: true
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.231], // albedo from Fornasier et al. (2013)
     },
     'Vanth|Howett2019': {
         tags: ['Solar system', 'moon', 'minor body', 'TNO', 'plutino'],
