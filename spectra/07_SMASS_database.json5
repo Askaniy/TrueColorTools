@@ -206,6 +206,11 @@
         file: 'spectra/files/SMASS/a002063.7.txtU',
         scale: ['Generic_Bessell.V', 0.203], // albedo from JPL Small-Body Database
     },
+    '(3200) Phaethon|SMASS': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
+        file: 'spectra/files/SMASS/a003200.8.txtU',
+        scale: ['Generic_Bessell.V', 0.1066], // albedo from JPL Small-Body Database
+    },
     '(5145) Pholus|SMASS': {
         tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'centaur'],
         file: 'spectra/files/SMASS/a005145.1.txtA',
