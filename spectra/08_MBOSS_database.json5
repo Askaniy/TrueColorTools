@@ -2025,7 +2025,7 @@
         scale: ['Generic_Bessell.V', 0.399], // albedo from fyr02’s sheet
     },
     '(90482) Orcus|MBOSS': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'dwarf planet', 'minor body', 'TNO', 'plutino'],
+        tags: ['Solar system', 'planet geophysical', 'dwarf planet', 'minor body', 'TNO', 'plutino'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.670, 'V-R': 0.376, 'R-I': 0.372},
         calib: 'Vega',

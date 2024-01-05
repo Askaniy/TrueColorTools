@@ -518,11 +518,12 @@
         scale: ['Generic_Bessell.V', 0.29], // https://academic.oup.com/pasj/article/66/3/52/1438030
     },
     '(90482) Orcus|Howett2019': {
-        tags: ['Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
+        tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
         system: 'Generic_Bessell',
         indices: {'V-I': 0.73},
         calib: 'Vega',
-        sun: true
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.231], // albedo from Fornasier et al. (2013)
     },
     'Vanth|Howett2019': {
         tags: ['Solar system', 'moon', 'minor body', 'TNO', 'plutino'],
