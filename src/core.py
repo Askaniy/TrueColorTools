@@ -19,7 +19,7 @@ resolution = 5 # nm
 visible_range = np.arange(390, 780, 5) # nm
 
 # Returned on problems with initialization
-nm_br_stub = (np.array([555]), np.zeros(1))
+nm_br_sd_stub = (np.array([555]), np.zeros(1), None)
 
 
 
@@ -37,10 +37,6 @@ temp_coef_to_make_it_work = 1.8 / 0.448 # 1.8 is expected of irradiance(500, 577
 def irradiance(nm: int|float|np.ndarray, T: int|float) -> float|np.ndarray:
     m = nm / 1e9
     return temp_coef_to_make_it_work * w * const1 / (m**5 * (np.exp(const2 / (m * T)) - 1)) / 1e9 # per m -> per nm
-
-def mag2irradiance(m: int|float|np.ndarray, vega_zero_point: float = 1.):
-    return vega_zero_point * 10**(-0.4 * m)
-
 
 
 
@@ -153,7 +149,7 @@ def grid(start: int|float, end: int|float, res: int):
 
 
 class Spectrum:
-    def __init__(self, name: str, nm: Iterable, br: Iterable, photometry=None):
+    def __init__(self, name: str, nm: Iterable, br: Iterable, sd: Iterable = None, photometry=None):
         """
         Constructor of the class to work with single, continuous spectrum, with strictly defined resolution step of 5 nm.
         It is assumed that the input grid can be trusted. If preprocessing is needed, see `Spectrum.from_array`.
@@ -161,12 +157,17 @@ class Spectrum:
         Args:
         - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
         - `nm` (Iterable): list of wavelengths in nanometers with resolution step of 5 nm
-        - `br` (Iterable): same-size list of "brightness" of an energy counter detector (not photon counter)
+        - `br` (Iterable): same-size list of "brightness", flux in units of energy (not a photon counter)
+        - `sd` (Iterable): same-size list of standard deviations
         - `photometry` (Photometry, optional): way to store original information, for example, to plot it
         """
         self.name = name
         self.nm = np.array(nm, dtype='uint16')
         self.br = np.array(br, dtype='float')
+        if sd is not None:
+            self.sd = np.array(sd, dtype='float')
+        else:
+            self.sd = None
         self.photometry = photometry
         if np.any(np.isnan(self.br)):
             self.br = np.nan_to_num(self.br)
@@ -188,11 +189,16 @@ class Spectrum:
         try:
             nm = np.array(nm) # numpy decides int or float
             br = np.array(br, dtype='float')
+            if sd is not None:
+                sd = np.array(sd, dtype='float')
             if nm[-1] > nm_red_limit:
                 flag = np.where(nm < nm_red_limit + resolution) # with reserve to be averaged
                 nm = nm[flag]
                 br = br[flag]
+                if sd is not None:
+                    sd = sd[flag]
             if np.any((diff := np.diff(nm)) != resolution): # if not uniform 5 nm grid
+                sd = None # standard deviations is undefined then. TODO: process somehow
                 uniform_nm = grid(nm[0], nm[-1], resolution)
                 if diff.mean() >= resolution: # interpolation, increasing resolution
                     br = interpolating(nm, br, uniform_nm, resolution)
@@ -204,11 +210,11 @@ class Spectrum:
                 #print(f'# Note for the Spectrum object "{name}"')
                 #print(f'- Negative values detected while trying to create the object from array, they been replaced with zeros.')
         except Exception:
-            nm, br = nm_br_stub
+            nm, br, sd = nm_br_sd_stub
             print(f'# Note for the Spectrum object "{name}"')
             print(f'- Something unexpected happened while trying to create the object from array. It was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0)}')
-        return Spectrum(name, nm, br)
+        return Spectrum(name, nm, br, sd)
     
     @staticmethod
     def from_file(name: str, file: str):
@@ -350,7 +356,7 @@ del lambdas
 
 
 class Photometry:
-    def __init__(self, name: str, filters: Iterable[Spectrum], br: Iterable):
+    def __init__(self, name: str, filters: Iterable[Spectrum], br: Iterable, sd: Iterable = None):
         """
         Constructor of the class to work with set of filters measurements.
 
@@ -358,17 +364,22 @@ class Photometry:
         - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
         - `filters` (Iterable): list of energy response functions, storing as Spectrum objects (see `filters` folder)
         - `br` (Iterable): same-size list of intensity
+        - `sd` (Iterable): same-size list of standard deviations
         """
         self.name = name
         self.filters = tuple(filters)
         self.br = np.array(br, dtype='float')
+        if sd is not None:
+            self.sd = np.array(sd, dtype='float')
+        else:
+            self.sd = None
         if np.any(np.isnan(self.br)):
             self.br = np.nan_to_num(self.br)
             print(f'# Note for the Photometry object "{self.name}"')
             print(f'- NaN values detected during object initialization, they been replaced with zeros.')
     
     @staticmethod
-    def from_list(name: str, filters: Iterable[str], br: Iterable):
+    def from_list(name: str, filters: Iterable[str], br: Iterable, sd: Iterable = None):
         """
         Creates a Photometry object from a list of filter's names. Files with such names must be in the `filters` folder.
 
@@ -376,8 +387,9 @@ class Photometry:
         - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
         - `filters` (Iterable): list of file names in the `filters` folder
         - `br` (Iterable): same-size list of intensity
+        - `sd` (Iterable): same-size list of standard deviations
         """
-        return Photometry(name, [get_filter(passband) for passband in filters], br)
+        return Photometry(name, [get_filter(passband) for passband in filters], br, sd)
     
     def to_scope(self, scope: np.ndarray): # TODO: use optimization algorithm!
         """ Creates a Spectrum object with inter- and extrapolated photometry data to fit the wavelength scope """
@@ -385,7 +397,7 @@ class Photometry:
         nm1 = grid(nm0[0], nm0[-1], resolution)
         br = interpolating(nm0, self.br, nm1, resolution)
         nm, br = extrapolating(nm1, br, scope, resolution)
-        return Spectrum(self.name, nm, br, self)
+        return Spectrum(self.name, nm, br, photometry=self)
 
     def __pow__(self, other: Spectrum) -> np.ndarray[float]:
         """ Convolve all the filters with a spectrum, assuming equal output for a flat spectrum """
@@ -403,6 +415,24 @@ class Photometry:
         filters = [(passband / other).scaled_by_area(passband.integrate()) for passband in self.filters]
         return Photometry(f'{self.name} / {other.name}', filters, self.br / (self ** other))
 
+
+
+def mag2flux(mag: int|float|np.ndarray, zero_point: float = 1.):
+    """ Converts magnitudes to flux (by default in Vega units) """
+    return zero_point * 10**(-0.4 * mag)
+
+def sd_mag2sd_flux(sd_mag: int|float|np.ndarray, irr: int|float|np.ndarray):
+    """ Converts standard deviation of magnitude to standard deviation of flux """
+    return sd_mag * irr * 0.4 * np.log(10)
+
+def sd_indices2sd_mag(sd_indices: Iterable):
+    """ Calculates standard deviations from color indices' deviations """
+    l = len(sd_indices)
+    sd_mag = np.zeros(l+1, dtype='float')
+    sd_mag[0:1] = sd_indices[0] / np.sqrt(2) # assuming the first two points to be with equal uncertainty
+    for i in range(2, sd_mag.size):
+        sd_mag[i] = np.sqrt(sd_indices[i-1]**2 - sd_mag[i-1]**2)
+    return sd_mag
 
 def color_index_splitter(index: str):
     """
@@ -427,7 +457,7 @@ def color_indices_parsing(indices: dict):
     for key, value in indices.items():
         reference_filter, current_filter = color_index_splitter(key)
         filters |= {current_filter: filters[reference_filter] - value}
-    return filters.keys(), mag2irradiance(np.array(tuple(filters.values())))
+    return filters.keys(), mag2flux(np.array(tuple(filters.values())))
 
 def from_database(name: str, content: dict) -> Spectrum | Photometry:
     """
@@ -450,13 +480,14 @@ def from_database(name: str, content: dict) -> Spectrum | Photometry:
     - `tags` (list): strings, categorizes a spectrum
     """
     br = []
+    sd = None
     nm = [] # Spectrum object indicator
     filters = [] # Photometry object indicator
     if 'file' in content:
         try:
             nm, br, sd = di.file_reader(content['file'])
         except Exception:
-            nm, br = nm_br_stub
+            nm, br, sd = nm_br_sd_stub
             print(f'# Note for the Spectrum object "{name}"')
             print(f'- Something unexpected happened during external file reading. The data was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0)}')
@@ -464,8 +495,12 @@ def from_database(name: str, content: dict) -> Spectrum | Photometry:
         # brightness reading
         if 'br' in content:
             br = content['br']
+            if 'sd' in content:
+                sd = content['br']
         elif 'mag' in content:
-            br = mag2irradiance(np.array(content['mag']))
+            br = mag2flux(np.array(content['mag']))
+            if 'sd' in content:
+                sd = sd_mag2sd_flux(np.array(content['sd']), br)
         # spectrum reading
         if 'nm' in content:
             nm = content['nm']
@@ -477,31 +512,37 @@ def from_database(name: str, content: dict) -> Spectrum | Photometry:
             filters = content['filters']
         elif 'indices' in content:
             filters, br = color_indices_parsing(content['indices'])
+            if 'sd' in content:
+                sd = sd_mag2sd_flux(sd_indices2sd_mag(content['sd']), br)
     if (len_br := len(br)) == 0:
         print(f'# Note for the database object "{name}"')
         print(f'- No brightness data. Spectrum stub object was created.')
-        return Spectrum(name, *nm_br_stub)
+        return Spectrum(name, *nm_br_sd_stub)
     else:
+        if sd is not None and (len_sd := len(sd)) != len_br:
+            print(f'# Note for the database object "{name}"')
+            print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
+            sd = None
         if (len_nm := len(nm)) > 0:
             if len_nm != len_br:
                 print(f'# Note for the database object "{name}"')
                 print(f'- Arrays of wavelengths and brightness do not match ({len_nm} vs {len_br}). Spectrum stub object was created.')
-                result = Spectrum(name, *nm_br_stub)
+                result = Spectrum(name, *nm_br_sd_stub)
             else:
-                result = Spectrum.from_array(name, nm, br)
+                result = Spectrum.from_array(name, nm, br, sd)
         elif (len_filters := len(filters)) > 0:
             if len_filters != len_br:
                 print(f'# Note for the database object "{name}"')
                 print(f'- Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br}). Spectrum stub object was created.')
-                result = Spectrum(name, *nm_br_stub)
+                result = Spectrum(name, *nm_br_sd_stub)
             else:
                 if 'system' in content:
                     filters = [content['system'] + '.' + short_name for short_name in filters]
-                result = Photometry.from_list(name, filters, br)
+                result = Photometry.from_list(name, filters, br, sd)
         else:
             print(f'# Note for the database object "{name}"')
             print(f'- No wavelength data. Spectrum stub object was created.')
-            return Spectrum(name, *nm_br_stub)
+            return Spectrum(name, *nm_br_sd_stub)
         if 'calib' in content:
             match content['calib'].lower():
                 case 'vega':
@@ -522,7 +563,6 @@ class ColorSystem:
         """
         Initialise the ColorSystem object.
         The implementation is based on https://scipython.com/blog/converting-a-spectrum-to-a-colour/
-
         Defining the color system requires four 2d vectors (primary illuminants and the "white point")
         """
         self.red, self.green, self.blue, self.white = map(xy2xyz, [red, green, blue, white]) # chromaticities

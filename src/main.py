@@ -273,7 +273,7 @@ def launch_window(lang: str):
                 # Spectral data processing
                 T3_spectrum = core.Spectrum.from_blackbody_redshift(core.visible_range, values['T3_slider1'], values['T3_slider2'], values['T3_slider3'])
                 if values['T3_overexposure']:
-                    T3_spectrum.br /= core.mag2irradiance(values['T3_slider4'], core.vega_in_V) * core.sun_in_V
+                    T3_spectrum.br /= core.mag2flux(values['T3_slider4'], core.vega_in_V) * core.sun_in_V
 
                 # Color calculation
                 if values['-srgb-']:
