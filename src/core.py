@@ -158,7 +158,7 @@ class Spectrum:
         - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
         - `nm` (Iterable): list of wavelengths in nanometers with resolution step of 5 nm
         - `br` (Iterable): same-size list of "brightness", flux in units of energy (not a photon counter)
-        - `sd` (Iterable): same-size list of standard deviations
+        - `sd` (Iterable, optional): same-size list of standard deviations
         - `photometry` (Photometry, optional): way to store original information, for example, to plot it
         """
         self.name = name
@@ -254,6 +254,48 @@ class Spectrum:
         self.nm, self.br = extrapolating(self.nm, self.br, scope, resolution)
         return self
 
+    def integrate(self) -> float:
+        """ Calculates the area over the spectrum using the mean rectangle method, per nm """
+        return np.sum(resolution * (self.br[:-1] + self.br[1:]) / 2)
+
+    def scaled_by_area(self, factor: int|float = 1):
+        """ Returns a new Spectrum object with brightness scaled to its area be equal the scale factor """
+        return Spectrum(self.name, self.nm, self.br / self.integrate() * factor)
+
+    def scaled_on_wavelength(self, wavelength: int|float, factor: int|float = 1):
+        """ Returns a new Spectrum object with brightness scaled to be equal the scale factor at the specified wavelength """
+        if wavelength not in self.nm:
+            print(f'# Note for the Spectrum object "{self.name}"')
+            print(f'- Requested wavelength to normalize ({wavelength}) not in the spectrum range ({self.nm[0]} to {self.nm[-1]} by {resolution} nm).')
+            wavelength = self.nm[np.abs(self.nm - wavelength).argmin()]
+            print(f'- {wavelength} was chosen as the closest value.')
+        return Spectrum(self.name, self.nm, self.br / self.br[np.where(self.nm == wavelength)] * factor)
+
+    def scaled_to_albedo(self, albedo: float, transmission):
+        """ Returns a new Spectrum object with brightness scaled to give the albedo after convolution with the filter """
+        current_albedo = self ** transmission.scaled_by_area()
+        if current_albedo == 0:
+            print(f'# Note for the Spectrum object "{self.name}"')
+            print(f'- The spectrum cannot be scaled to an albedo of {albedo} because its current albedo is zero, nothing changed.')
+            return self
+        else:
+            return Spectrum(self.name, self.nm, self.br * albedo / current_albedo)
+    
+    def scaled(self, where: str|int|float, how: int|float):
+        """ Returns a new Spectrum object to fit the request of wavelength zone and brightness there """
+        if isinstance(where, str):
+            return self.scaled_to_albedo(how, get_filter(where))
+        else: # assuming number
+            return self.scaled_on_wavelength(where, how)
+
+    def mean_wavelength(self) -> float:
+        """ Returns mean wavelength of the spectrum """
+        return np.average(self.nm, weights=self.br)
+
+    def standard_deviation(self) -> float:
+        """ Returns uncorrected standard deviation of the spectrum """
+        return np.sqrt(np.average((self.nm - self.mean_wavelength())**2, weights=self.br))
+
     def __pow__(self, other) -> float:
         """ Implementation of convolution between emission spectrum and transmission spectrum """
         return (self * other).integrate()
@@ -297,43 +339,6 @@ class Spectrum:
             br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
             br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
             return Spectrum(name, nm, br0 / br1)
-
-    def integrate(self) -> float:
-        """ Calculates the area over the spectrum using the mean rectangle method, per nm """
-        return np.sum(resolution * (self.br[:-1] + self.br[1:]) / 2)
-
-    def scaled_by_area(self, factor: int|float = 1):
-        """ Returns a new Spectrum object with brightness scaled to its area be equal the scale factor """
-        return Spectrum(self.name, self.nm, self.br / self.integrate() * factor)
-
-    def scaled_on_wavelength(self, wavelength: int|float, factor: int|float = 1):
-        """ Returns a new Spectrum object with brightness scaled to be equal the scale factor at the specified wavelength """
-        if wavelength not in self.nm:
-            print(f'# Note for the Spectrum object "{self.name}"')
-            print(f'- Requested wavelength to normalize ({wavelength}) not in the spectrum range ({self.nm[0]} to {self.nm[-1]} by {resolution} nm).')
-            wavelength = self.nm[np.abs(self.nm - wavelength).argmin()]
-            print(f'- {wavelength} was chosen as the closest value.')
-        return Spectrum(self.name, self.nm, self.br / self.br[np.where(self.nm == wavelength)] * factor)
-
-    def scaled_to_albedo(self, albedo: float, transmission):
-        """ Returns a new Spectrum object with brightness scaled to give the albedo after convolution with the filter """
-        current_albedo = self ** transmission.scaled_by_area()
-        if current_albedo == 0:
-            print(f'# Note for the Spectrum object "{self.name}"')
-            print(f'- The spectrum cannot be scaled to an albedo of {albedo} because its current albedo is zero, nothing changed.')
-            return self
-        else:
-            return Spectrum(self.name, self.nm, self.br * albedo / current_albedo)
-    
-    def scaled(self, where: str|int|float, how: int|float):
-        """ Returns a new Spectrum object to fit the request of wavelength zone and brightness there """
-        if isinstance(where, str):
-            return self.scaled_to_albedo(how, get_filter(where))
-        else: # assuming number
-            return self.scaled_on_wavelength(where, how)
-
-    def mean_wavelength(self) -> float:
-        return np.average(self.nm, weights=self.br)
 
 
 def get_filter(name: str): # TODO: cache them!
@@ -391,13 +396,21 @@ class Photometry:
         """
         return Photometry(name, [get_filter(passband) for passband in filters], br, sd)
     
-    def to_scope(self, scope: np.ndarray): # TODO: use optimization algorithm!
+    def to_scope(self, scope: np.ndarray): # TODO: use optimization algorithm here!
         """ Creates a Spectrum object with inter- and extrapolated photometry data to fit the wavelength scope """
-        nm0 = np.array([passband.mean_wavelength() for passband in self.filters])
+        nm0 = self.mean_wavelengths()
         nm1 = grid(nm0[0], nm0[-1], resolution)
         br = interpolating(nm0, self.br, nm1, resolution)
         nm, br = extrapolating(nm1, br, scope, resolution)
         return Spectrum(self.name, nm, br, photometry=self)
+    
+    def mean_wavelengths(self):
+        """ Returns an array of mean wavelengths for each filter """
+        return np.array([passband.mean_wavelength() for passband in self.filters])
+    
+    def standard_deviations(self):
+        """ Returns an array of uncorrected standard deviations for each filter """
+        return np.array([passband.standard_deviation() for passband in self.filters])
 
     def __pow__(self, other: Spectrum) -> np.ndarray[float]:
         """ Convolve all the filters with a spectrum, assuming equal output for a flat spectrum """
@@ -496,7 +509,7 @@ def from_database(name: str, content: dict) -> Spectrum | Photometry:
         if 'br' in content:
             br = content['br']
             if 'sd' in content:
-                sd = content['br']
+                sd = content['sd']
         elif 'mag' in content:
             br = mag2flux(np.array(content['mag']))
             if 'sd' in content:
