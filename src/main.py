@@ -241,7 +241,7 @@ def launch_window(lang: str):
                 for i in range(T2_num):
                     T2_filter_name = values['T2_filter'+str(i)]
                     if T2_filter_name != '':
-                        T2_filter = core.Spectrum.get_filter(T2_filter_name)
+                        T2_filter = core.get_filter(T2_filter_name)
                         T2_plot_data.append(T2_filter)
                 T2_fig.clf()
                 T2_fig = pl.plot_filters(T2_plot_data)
@@ -294,7 +294,7 @@ def launch_window(lang: str):
 
 
 def export_colors(rgb: tuple):
-    """ Generated formatted string of colors """
+    """ Generates formatted string of colors """
     lst = []
     mx = 0
     for i in rgb:
@@ -306,6 +306,7 @@ def export_colors(rgb: tuple):
     return ''.join([i.ljust(w) for i in lst])
 
 def get_flag_index(flags: tuple):
+    """ Returns index of active radio button """
     for index, flag in enumerate(flags):
         if flag:
             return index

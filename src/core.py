@@ -175,15 +175,15 @@ class Spectrum:
         # There are no checks for negativity, since such spectra exist, for example, red CMF.
 
     @staticmethod
-    def from_array(name: str, nm: Iterable, br: Iterable):
+    def from_array(name: str, nm: Iterable, br: Iterable, sd: Iterable = None):
         """
         Creates a Spectrum object from wavelength array with a check for uniformity and possible extrapolation.
 
         Args:
         - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
         - `nm` (Iterable): list of wavelengths, any grid
-        - `br` (Iterable): same-size list of "brightness" of an energy counter detector (not photon counter)
-        - `scope` (np.ndarray): makes a spectrum of the same resolution as at least defined at the given wavelengths
+        - `br` (Iterable): same-size list of "brightness", flux in units of energy (not a photon counter)
+        - `sd` (Iterable): same-size list of standard deviations
         """
         try:
             nm = np.array(nm) # numpy decides int or float
@@ -214,12 +214,7 @@ class Spectrum:
     def from_file(name: str, file: str):
         """ Creates a Spectrum object based on loaded data from the specified file """
         nm, br, sd = di.file_reader(file)
-        return Spectrum.from_array(name, nm, br)
-    
-    @staticmethod
-    def get_filter(name: str): # TODO: cache them!
-        """ Creates a Spectrum object based on data file to be found in the `filters` folder """
-        return Spectrum.from_file(name, di.find_filter(name))
+        return Spectrum.from_array(name, nm, br, sd)
 
     @staticmethod
     def from_blackbody_redshift(scope: np.ndarray, temperature: int|float, velocity=0., vII=0.):
@@ -327,7 +322,7 @@ class Spectrum:
     def scaled(self, where: str|int|float, how: int|float):
         """ Returns a new Spectrum object to fit the request of wavelength zone and brightness there """
         if isinstance(where, str):
-            return self.scaled_to_albedo(how, Spectrum.get_filter(where))
+            return self.scaled_to_albedo(how, get_filter(where))
         else: # assuming number
             return self.scaled_on_wavelength(where, how)
 
@@ -335,8 +330,11 @@ class Spectrum:
         return np.average(self.nm, weights=self.br)
 
 
+def get_filter(name: str): # TODO: cache them!
+    """ Creates a Spectrum object based on data file to be found in the `filters` folder """
+    return Spectrum.from_file(name, di.find_filter(name))
 
-bessell_V = Spectrum.get_filter('Generic_Bessell.V')
+bessell_V = get_filter('Generic_Bessell.V')
 
 sun_SI = Spectrum.from_file('Sun', 'spectra/files/CALSPEC/sun_reference_stis_002.fits') # W / (m² nm)
 sun_in_V = sun_SI ** bessell_V.scaled_by_area()
@@ -379,7 +377,7 @@ class Photometry:
         - `filters` (Iterable): list of file names in the `filters` folder
         - `br` (Iterable): same-size list of intensity
         """
-        return Photometry(name, [Spectrum.get_filter(passband) for passband in filters], br)
+        return Photometry(name, [get_filter(passband) for passband in filters], br)
     
     def to_scope(self, scope: np.ndarray): # TODO: use optimization algorithm!
         """ Creates a Spectrum object with inter- and extrapolated photometry data to fit the wavelength scope """
