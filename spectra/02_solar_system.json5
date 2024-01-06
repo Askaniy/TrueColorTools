@@ -538,7 +538,7 @@
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.700, 0.894, 0.992, 1.000, 0.909, 0.882],
         sd: 0.018,
-        scale: ['Galileo_SSI.Green', 0.197], // ±0.038, normal albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
+        scale: ['Galileo_SSI.Clear', 0.197], // ±0.038, normal albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
     },
     '(433) Eros|deLeon2010': { tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Amor'],
         nm_range: [350, 890, 5],
