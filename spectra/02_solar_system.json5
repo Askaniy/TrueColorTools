@@ -570,7 +570,7 @@
         scale: ['Generic_Bessell.V', 0.231], // geometric albedo from Fornasier et al. (2013)
     },
     '(90482) Orcus|Howett2019': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
+        tags: ['Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
         system: 'Generic_Bessell',
         indices: {'V-I': 0.73},
         calib: 'Vega',
