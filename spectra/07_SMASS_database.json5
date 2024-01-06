@@ -11,7 +11,7 @@
     '(1) Ceres|SMASS': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000001.2.txtU',
-        scale: ['Generic_Bessell.V', 0.09], // geometric albedo!
+        scale: ['Generic_Bessell.V', 0.09], // geometric albedo
     },
     '(2) Pallas|SMASS': {
         tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
@@ -26,7 +26,7 @@
     '(4) Vesta|SMASS': {
         tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000004.2.txtU',
-        scale: ['Generic_Bessell.V', 0.423], // geometric albedo!
+        scale: ['Generic_Bessell.V', 0.423], // geometric albedo
     },
     '(7) Iris|SMASS': {
         tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
@@ -76,7 +76,7 @@
     '(21) Lutetia|SMASS': {
         tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000021.2.txtU',
-        scale: ['Generic_Bessell.V', 0.073], // Bond albedo from Sierks et al. (2011), https://dspace.mit.edu/bitstream/handle/1721.1/110553/Sierks_2011_open_access.pdf
+        scale: ['Generic_Bessell.V', 0.073], // spherical albedo from Sierks et al. (2011), https://dspace.mit.edu/bitstream/handle/1721.1/110553/Sierks_2011_open_access.pdf
     },
     '(22) Kalliope|SMASS': {
         tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
@@ -180,7 +180,7 @@
     '(433) Eros|SMASS': {
         tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Amor'],
         file: 'spectra/files/SMASS/a000433.8.txtU',
-        scale: ['Generic_Bessell.V', 0.093], // Bond albedo from Li et al. (2004), https://ui.adsabs.harvard.edu/abs/2004Icar..172..415L/abstract
+        scale: ['Generic_Bessell.V', 0.093], // spherical albedo from Li et al. (2004), https://ui.adsabs.harvard.edu/abs/2004Icar..172..415L/abstract
     },
     '(511) Davida|SMASS': {
         tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
@@ -199,7 +199,7 @@
     '(951) Gaspra|SMASS': {
         tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000951.2.txtU',
-        scale: ['Galileo_SSI.Green', 0.1], // spherical albedo from Helfenstein et al. (1994), https://ui.adsabs.harvard.edu/abs/1994Icar..107...37H/abstract
+        scale: ['Galileo_SSI.Green', 0.11], // spherical albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract
     },
     '(1036) Ganymed|SMASS': {
         tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Amor'],
