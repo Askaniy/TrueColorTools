@@ -262,14 +262,24 @@ class Spectrum:
         """ Returns a new Spectrum object with brightness scaled to its area be equal the scale factor """
         return Spectrum(self.name, self.nm, self.br / self.integrate() * factor)
 
-    def scaled_on_wavelength(self, wavelength: int|float, factor: int|float = 1):
-        """ Returns a new Spectrum object with brightness scaled to be equal the scale factor at the specified wavelength """
+    def scaled_on_wavelength(self, wavelength: int|float, request: int|float = 1):
+        """ Returns a new Spectrum object with brightness scaled to be equal the request at the specified wavelength """
         if wavelength not in self.nm:
             print(f'# Note for the Spectrum object "{self.name}"')
             print(f'- Requested wavelength to normalize ({wavelength}) not in the spectrum range ({self.nm[0]} to {self.nm[-1]} by {resolution} nm).')
             wavelength = self.nm[np.abs(self.nm - wavelength).argmin()]
             print(f'- {wavelength} was chosen as the closest value.')
-        return Spectrum(self.name, self.nm, self.br / self.br[np.where(self.nm == wavelength)] * factor)
+        scale_factor = request / self.br[np.where(self.nm == wavelength)]
+        sd = None
+        if self.sd is not None:
+            sd = self.sd * scale_factor
+        photometry = None
+        if self.photometry is not None:
+            photometry = self.photometry
+            photometry.br *= scale_factor
+            if photometry.sd is not None:
+                photometry.sd *= scale_factor
+        return Spectrum(self.name, self.nm, self.br*scale_factor, sd, photometry)
 
     def scaled_to_albedo(self, albedo: float, transmission):
         """ Returns a new Spectrum object with brightness scaled to give the albedo after convolution with the filter """
@@ -279,7 +289,17 @@ class Spectrum:
             print(f'- The spectrum cannot be scaled to an albedo of {albedo} because its current albedo is zero, nothing changed.')
             return self
         else:
-            return Spectrum(self.name, self.nm, self.br * albedo / current_albedo)
+            scale_factor = albedo / current_albedo
+            sd = None
+            if self.sd is not None:
+                sd = self.sd * scale_factor
+            photometry = None
+            if self.photometry is not None:
+                photometry = self.photometry
+                photometry.br *= scale_factor
+                if photometry.sd is not None:
+                    photometry.sd *= scale_factor
+            return Spectrum(self.name, self.nm, self.br*scale_factor, sd, photometry)
     
     def scaled(self, where: str|int|float, how: int|float):
         """ Returns a new Spectrum object to fit the request of wavelength zone and brightness there """
@@ -302,7 +322,7 @@ class Spectrum:
 
     def __mul__(self, other):
         """ Returns a new Photometry object with the emitter added (untied from a white standard spectrum) """
-        name = f'{self.name} * {other.name}'
+        name = f'{self.name} ∙ {other.name}'
         start = max(self.nm[0], other.nm[0])
         end = min(self.nm[-1], other.nm[-1])
         if start >= end:
@@ -345,14 +365,14 @@ def get_filter(name: str): # TODO: cache them!
     """ Creates a Spectrum object based on data file to be found in the `filters` folder """
     return Spectrum.from_file(name, di.find_filter(name))
 
-bessell_V = get_filter('Generic_Bessell.V')
+bessell_V = get_filter('Generic_Bessell.V').scaled_by_area()
 
 sun_SI = Spectrum.from_file('Sun', 'spectra/files/CALSPEC/sun_reference_stis_002.fits') # W / (m² nm)
-sun_in_V = sun_SI ** bessell_V.scaled_by_area()
+sun_in_V = sun_SI ** bessell_V
 sun_norm = sun_SI.scaled_to_albedo(1, bessell_V)
 
 vega_SI = Spectrum.from_file('Vega', 'spectra/files/CALSPEC/alpha_lyr_stis_011.fits') # W / (m² nm)
-vega_in_V = vega_SI ** bessell_V.scaled_by_area()
+vega_in_V = vega_SI ** bessell_V
 vega_norm = vega_SI.scaled_to_albedo(1, bessell_V)
 
 lambdas = np.arange(5, nm_red_limit+1, 5)
@@ -420,7 +440,7 @@ class Photometry:
         """ Returns a new Photometry object with the emitter added (untied from a white standard spectrum) """
         # Scaling brightness scales filters' profiles too! I'll leave the area the same just in case
         filters = [(passband * other).scaled_by_area(passband.integrate()) for passband in self.filters]
-        return Photometry(f'{self.name} * {other.name}', filters, self.br * (self ** other))
+        return Photometry(f'{self.name} ∙ {other.name}', filters, self.br * (self ** other))
 
     def __truediv__(self, other: Spectrum):
         """ Returns a new Photometry object with the emitter removed (apply a white standard spectrum) """

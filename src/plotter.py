@@ -46,10 +46,11 @@ def plot_spectra(objects: Iterable[core.Spectrum], gamma, srgb, albedo, lang: st
             color = color.gamma_corrected()
         ax.plot(spectrum.nm, spectrum.br, label=spectrum.name, color=color.to_html())
         if spectrum.photometry is not None:
+            fmt = 'o' if spectrum.photometry.sd is None else ''
             ax.errorbar(
                 x=spectrum.photometry.mean_wavelengths(), y=spectrum.photometry.br,
                 xerr=spectrum.photometry.standard_deviations(), yerr=spectrum.photometry.sd,
-                fmt='o', linestyle='none', color='#7F7F7F'
+                fmt=fmt, linestyle='none', color='#7F7F7F'
             )
     ax.legend()
     fig.tight_layout()
