@@ -155,6 +155,10 @@
         'Galileo Photometry of Asteroid 951 Gaspra',
         'DOI: 10.1006/icar.1994.1005', 'https://www.sciencedirect.com/science/article/pii/S0019103584710050'
     ],
+    'Veverka1996': [
+        'Dactyl: Galileo Observations of Ida’s Satellite',
+        'DOI: 10.1006/icar.1996.0045', 'https://www.sciencedirect.com/science/article/pii/S0019103596900457'
+    ],
     'deBergh2005': [
         'The surface of the transneptunian object 90482 Orcus',
         'https://ui.adsabs.harvard.edu/abs/2005A%26A...437.1115D/abstract'
@@ -511,6 +515,30 @@
         nm_range: [300, 900, 100],
         br: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
         albedo: true, // geometric albedo
+    },
+    '(243) Ida:B|Veverka1996': {
+        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
+        br: [0.756, 0.892, 0.978, 1.000, 0.936, 0.917],
+        sd: 0.018,
+        scale: ['Galileo_SSI.Green', 0.217], // ±0.026, normal albedo of Terrain B from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
+    },
+    '(243) Ida:D|Veverka1996': {
+        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
+        br: [0.690, 0.856, 0.956, 1.000, 0.979, 0.965],
+        sd: 0.018,
+        scale: ['Galileo_SSI.Green', 0.204], // ±0.016, normal albedo of Terrain A from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
+    },
+    'Dactyl|Veverka1996': {
+        tags: ['featured', 'Solar system', 'moon', 'minor body', 'asteroid', 'main belt'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
+        br: [0.700, 0.894, 0.992, 1.000, 0.909, 0.882],
+        sd: 0.018,
+        scale: ['Galileo_SSI.Green', 0.197], // ±0.038, normal albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
     },
     '(433) Eros|deLeon2010': { tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Amor'],
         nm_range: [350, 890, 5],

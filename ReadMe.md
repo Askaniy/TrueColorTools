@@ -72,7 +72,7 @@ Supported input keys of a database unit:
 - `nm` (list): list of wavelengths in nanometers
 - `br` (list): same-size list of "brightness", flux in units of energy (not a photon counter)
 - `mag` (list): same-size list of magnitudes
-- `sd` (list): same-size list of standard deviations
+- `sd` (list or number): same-size list of standard deviations or general value
 - `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
 - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
 - `filters` (list): list of filter names that can be found in the `filters` folder

@@ -500,7 +500,7 @@ def from_database(name: str, content: dict) -> Spectrum | Photometry:
     - `nm` (list): list of wavelengths in nanometers
     - `br` (list): same-size list of "brightness", flux in units of energy (not a photon counter)
     - `mag` (list): same-size list of magnitudes
-    - `sd` (list): same-size list of standard deviations
+    - `sd` (list or number): same-size list of standard deviations or general value
     - `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
     - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
     - `filters` (list): list of filter names that can be found in the `filters` folder
@@ -528,12 +528,8 @@ def from_database(name: str, content: dict) -> Spectrum | Photometry:
         # brightness reading
         if 'br' in content:
             br = content['br']
-            if 'sd' in content:
-                sd = content['sd']
         elif 'mag' in content:
             br = mag2flux(np.array(content['mag']))
-            if 'sd' in content:
-                sd = sd_mag2sd_flux(np.array(content['sd']), br)
         # spectrum reading
         if 'nm' in content:
             nm = content['nm']
@@ -545,8 +541,16 @@ def from_database(name: str, content: dict) -> Spectrum | Photometry:
             filters = content['filters']
         elif 'indices' in content:
             filters, br = color_indices_parsing(content['indices'])
-            if 'sd' in content:
-                sd = sd_mag2sd_flux(sd_indices2sd_mag(content['sd']), br)
+        # standard deviation reading
+        if 'sd' in content:
+            if isinstance(content['sd'], (int, float)):
+                sd = np.full(len(br), content['sd']) # general standard deviation for all the points
+            else:
+                sd = np.array(content['sd'])
+            if 'indices' in content:
+                sd = sd_indices2sd_mag(sd)
+            if 'indices' in content or 'mag' in content:
+                sd = sd_mag2sd_flux(sd, br)
     if (len_br := len(br)) == 0:
         print(f'# Note for the database object "{name}"')
         print(f'- No brightness data. Spectrum stub object was created.')
