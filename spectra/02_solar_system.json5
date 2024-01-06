@@ -151,6 +151,10 @@
         '(2867) Steins',
         'https://ui.adsabs.harvard.edu/abs/2004IAUC.8315....3H/abstract'
     ],
+    'Helfenstein1994': [
+        'Galileo Photometry of Asteroid 951 Gaspra',
+        'DOI: 10.1006/icar.1994.1005', 'https://www.sciencedirect.com/science/article/pii/S0019103584710050'
+    ],
     'deBergh2005': [
         'The surface of the transneptunian object 90482 Orcus',
         'https://ui.adsabs.harvard.edu/abs/2005A%26A...437.1115D/abstract'
@@ -273,13 +277,13 @@
             992.0],
         br: [0.01305, 0.01312, 0.01484, 0.01489, 0.01699, 0.01766, 0.02037, 0.02137, 0.02177, 0.02641, 0.02769, 0.02743, 0.02732, 0.02835, 0.03083,
             0.03316, 0.03499, 0.03713, 0.03940, 0.04057, 0.03880],
-        scale: ['Generic_Bessell.V', 0.071], // geometric albedo! https://ssd.jpl.nasa.gov/?sat_phys_par
+        scale: ['Generic_Bessell.V', 0.071], // geometric albedo https://ssd.jpl.nasa.gov/?sat_phys_par
     },
     'Deimos|Fraeman2013, Pang1980': {
         tags: ['featured', 'Solar system', 'moon'],
         nm: [250, 300, 350, 400, 450, 500, 550, 600, 700, 750, 800],
         br: [0.04, 0.05, 0.051, 0.05, 0.049, 0.053, 0.055, 0.058, 0.062, 0.067, 0.069],
-        scale: ['Generic_Bessell.V', 0.068], // geometric albedo! https://ssd.jpl.nasa.gov/?sat_phys_par
+        scale: ['Generic_Bessell.V', 0.068], // geometric albedo https://ssd.jpl.nasa.gov/?sat_phys_par
     },
     'Jupiter|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Jovian system'],
@@ -506,7 +510,7 @@
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Neptunian system', 'irregular'],
         nm_range: [300, 900, 100],
         br: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
-        albedo: true, // geometric albedo!
+        albedo: true, // geometric albedo
     },
     '(433) Eros|deLeon2010': { tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Amor'],
         nm_range: [350, 890, 5],
@@ -517,7 +521,31 @@
             1.12816, 1.13752, 1.14195, 1.12574, 1.14946, 1.13265, 1.17224, 1.12637, 1.13412, 1.15489, 1.16516, 1.13524, 1.13512, 1.16729, 1.19448, 1.21084,
             1.15377, 1.12806, 1.17343, 1.21881, 1.14669, 1.14314, 1.14373, 1.16095, 1.09179, 1.0755, 1.13114, 1.16251, 1.21117, 1.13878, 1.20665, 1.0951, 1.047,
             1.00354, 0.9945, 1.01803, 1.14228, 1.05281, 1.18387, 1.09958, 1.16424, 0.91067],
-        scale: ['Generic_Bessell.V', 0.093], // Bond albedo from Li et al. (2004), https://ui.adsabs.harvard.edu/abs/2004Icar..172..415L/abstract
+        scale: ['Generic_Bessell.V', 0.093], // spherical albedo from Li et al. (2004), https://ui.adsabs.harvard.edu/abs/2004Icar..172..415L/abstract
+    },
+    '(951) Gaspra|Helfenstein1994': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
+        br: [0.17, 0.23, 0.26, 0.27, 0.26, 0.26],
+        sd: [0.05, 0.06, 0.07, 0.07, 0.07, 0.06],
+        albedo: true, // global mean normal albedo from the Table VI
+    },
+    '(951) Gaspra:B|Helfenstein1994': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
+        br: [0.19, 0.25, 0.27, 0.28, 0.27, 0.26],
+        sd: [0.03, 0.06, 0.06, 0.04, 0.05, 0.05],
+        albedo: true, // normal albedo of PC2-α material from the Table VI
+    },
+    '(951) Gaspra:D|Helfenstein1994': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
+        br: [0.16, 0.22, 0.26, 0.27, 0.26, 0.26],
+        sd: [0.04, 0.04, 0.05, 0.04, 0.03, 0.02],
+        albedo: true, // normal albedo of PC2-γ material from the Table VI
     },
     '(2867) Steins|Hicks2004': {
         tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
@@ -525,13 +553,13 @@
         indices: {'B-V': 0.798, 'V-R': 0.513, 'R-I': 0.440},
         calib: 'Vega',
         sun: true,
-        scale: ['Rosetta_OSIRIS_WAC.OI', 0.24], // Bond albedo from Spjuth et al. (2012), https://ui.adsabs.harvard.edu/abs/2012Icar..221.1101S/abstract
+        scale: ['Rosetta_OSIRIS_WAC.OI', 0.24], // spherical albedo from Spjuth et al. (2012), https://ui.adsabs.harvard.edu/abs/2012Icar..221.1101S/abstract
     },
     '(25143) Itokawa|Lowry2005': { tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         nm_range: [325, 1000, 25],
         br: [0.388, 0.568, 0.676, 0.773, 0.824, 0.856, 0.888, 0.914, 0.964, 1.0, 1.036, 1.058, 1.076, 1.094, 1.122, 1.140, 1.147, 1.144, 1.129, 1.101,
             1.068, 1.029, 1.0, 0.978, 0.975, 0.946, 0.917, 0.935],
-        scale: ['Generic_Bessell.V', 0.033], // Bond albedo from Tatsumi et al. (2018), https://kar.kent.ac.uk/66973/1/Lowry_Vis-NIR%20Disk-integrated%20Photometry.pdf
+        scale: ['Generic_Bessell.V', 0.033], // spherical albedo from Tatsumi et al. (2018), https://kar.kent.ac.uk/66973/1/Lowry_Vis-NIR%20Disk-integrated%20Photometry.pdf
     },
     '(90482) Orcus|deBergh2005': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
@@ -539,15 +567,15 @@
         indices: {'B-V': 0.68, 'V-R': 0.37, 'V-I': 0.74},
         calib: 'Vega',
         sun: true,
-        scale: ['Generic_Bessell.V', 0.231], // albedo from Fornasier et al. (2013)
+        scale: ['Generic_Bessell.V', 0.231], // geometric albedo from Fornasier et al. (2013)
     },
     '(90482) Orcus|Howett2019': {
-        tags: ['Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
+        tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
         system: 'Generic_Bessell',
         indices: {'V-I': 0.73},
         calib: 'Vega',
         sun: true,
-        scale: ['Generic_Bessell.V', 0.231], // albedo from Fornasier et al. (2013)
+        scale: ['Generic_Bessell.V', 0.231], // geometric albedo from Fornasier et al. (2013)
     },
     'Vanth|Howett2019': {
         tags: ['Solar system', 'moon', 'minor body', 'TNO', 'plutino'],
