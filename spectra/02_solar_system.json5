@@ -155,6 +155,10 @@
         'Galileo Photometry of Asteroid 951 Gaspra',
         'DOI: 10.1006/icar.1994.1005', 'https://www.sciencedirect.com/science/article/pii/S0019103584710050'
     ],
+    'deBergh2005': [
+        'The surface of the transneptunian object 90482 Orcus',
+        'https://ui.adsabs.harvard.edu/abs/2005A%26A...437.1115D/abstract'
+    ],
 
     'Mercury|Mallama2017': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
@@ -557,13 +561,21 @@
             1.068, 1.029, 1.0, 0.978, 0.975, 0.946, 0.917, 0.935],
         scale: ['Generic_Bessell.V', 0.033], // spherical albedo from Tatsumi et al. (2018), https://kar.kent.ac.uk/66973/1/Lowry_Vis-NIR%20Disk-integrated%20Photometry.pdf
     },
-    '(90482) Orcus|Howett2019': {
+    '(90482) Orcus|deBergh2005': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.68, 'V-R': 0.37, 'V-I': 0.74},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.231], // geometric albedo from Fornasier et al. (2013)
+    },
+    '(90482) Orcus|Howett2019': {
+        tags: ['Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
         system: 'Generic_Bessell',
         indices: {'V-I': 0.73},
         calib: 'Vega',
         sun: true,
-        scale: ['Generic_Bessell.V', 0.231], // albedo from Fornasier et al. (2013)
+        scale: ['Generic_Bessell.V', 0.231], // geometric albedo from Fornasier et al. (2013)
     },
     'Vanth|Howett2019': {
         tags: ['Solar system', 'moon', 'minor body', 'TNO', 'plutino'],
