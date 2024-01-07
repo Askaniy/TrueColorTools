@@ -1503,21 +1503,25 @@
         'The surface of the transneptunian object 90482 Orcus',
         'https://ui.adsabs.harvard.edu/abs/2005A%26A...437.1115D/abstract'
     ],
+    'Brown2010': [
+        'The Size, Density, and Formation of the Orcus-Vanth System in the Kuiper Belt',
+        'DOI: 10.1088/0004-6256/139/6/2700', 'https://iopscience.iop.org/article/10.1088/0004-6256/139/6/2700'
+    ],
     '(90482) Orcus|deBergh2005': {
         tags: ['Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.68, 'V-R': 0.37, 'V-I': 0.74},
         calib: 'Vega',
         sun: true,
-        scale: ['Generic_Bessell.V', 0.231], // geometric albedo from Fornasier et al. (2013)
+        scale: ['Generic_Bessell.V', 0.23], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
     },
-    '(90482) Orcus|Howett2019': { // wrong reference!
+    '(90482) Orcus|Brown2010': {
         tags: ['Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
-        system: 'Generic_Bessell',
-        indices: {'V-I': 0.73},
+        filters: ['Generic_Bessell.V', 'Generic_Bessell.I'],
+        mag: [19.36, 18.63],
         calib: 'Vega',
         sun: true,
-        scale: ['Generic_Bessell.V', 0.231], // geometric albedo from Fornasier et al. (2013)
+        scale: ['Generic_Bessell.V', 0.23], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
     },
     '(90482) Orcus|MBOSS': {
         tags: ['featured', 'MBOSS', 'Solar system', 'planet geophysical', 'dwarf planet', 'minor body', 'TNO', 'plutino'],
@@ -1525,15 +1529,15 @@
         indices: {'B-V': 0.670, 'V-R': 0.376, 'R-I': 0.372},
         calib: 'Vega',
         sun: true,
-        scale: ['Generic_Bessell.V', 0.231], // geometric albedo from Fornasier et al. (2013)
+        scale: ['Generic_Bessell.V', 0.23], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
     },
-    'Vanth|Howett2019': { // wrong reference!
-        tags: ['Solar system', 'moon', 'minor body', 'TNO', 'plutino'],
-        system: 'Generic_Bessell',
-        indices: {'V-I': 1.03},
+    'Vanth|Brown2010': {
+        tags: ['featured', 'Solar system', 'moon', 'minor body', 'TNO', 'plutino'],
+        filters: ['Generic_Bessell.V', 'Generic_Bessell.I'],
+        mag: [21.97, 20.94],
         calib: 'Vega',
         sun: true,
-        scale: ['Generic_Bessell.V', 0.08], // albedo from Brown and Butler (2018)
+        scale: ['Generic_Bessell.V', 0.08], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
     },
     'LeCorre2019': [
         'Investigating Surface Color Variegation on Near-Earth Asteroid Bennu Using OSIRIS-REx Mapcam Data',
