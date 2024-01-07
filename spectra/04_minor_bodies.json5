@@ -373,7 +373,7 @@
         '(2867) Steins',
         'https://ui.adsabs.harvard.edu/abs/2004IAUC.8315....3H/abstract'
     ],
-    '(2867) Steins|Hicks2004': {
+    '(2867) Šteins|Hicks2004': {
         tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.798, 'V-R': 0.513, 'R-I': 0.440},
