@@ -183,12 +183,17 @@
         file: 'spectra/files/SMASS/a000216.2.txtU',
         scale: ['Generic_Bessell.V', 0.152], // albedo from Vernazza et al. (2021)
     },
+    '(243) Ida|SMASS': {
+        tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000243.2.txtU',
+        scale: ['Galileo_SSI.Green', 0.069], // spherical albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Table VIII
+    },
     'Veverka1996': [
         'Dactyl: Galileo Observations of Ida’s Satellite',
         'DOI: 10.1006/icar.1996.0045', 'https://www.sciencedirect.com/science/article/pii/S0019103596900457'
     ],
     '(243) Ida:B|Veverka1996': {
-        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
         system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.756, 0.892, 0.978, 1.000, 0.936, 0.917],
@@ -196,7 +201,7 @@
         scale: ['Galileo_SSI.Green', 0.217], // ±0.026, normal albedo of Terrain B from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
     },
     '(243) Ida:D|Veverka1996': {
-        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
         system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.690, 0.856, 0.956, 1.000, 0.979, 0.965],
@@ -204,17 +209,12 @@
         scale: ['Galileo_SSI.Green', 0.204], // ±0.016, normal albedo of Terrain A from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
     },
     'Dactyl|Veverka1996': {
-        tags: ['featured', 'Solar system', 'moon', 'minor body', 'asteroid', 'main belt'],
+        tags: ['Solar system', 'moon', 'minor body', 'asteroid', 'main belt'],
         system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.700, 0.894, 0.992, 1.000, 0.909, 0.882],
         sd: 0.018,
         scale: ['Galileo_SSI.Clear', 0.197], // ±0.038, normal albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
-    },
-    '(243) Ida|SMASS': {
-        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
-        file: 'spectra/files/SMASS/a000243.2.txtU',
-        scale: ['Galileo_SSI.Green', 0.069], // spherical albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Table VIII
     },
     'Dactyl|Veverka1996': {
         tags: ['featured', 'Solar system', 'moon', 'minor body', 'asteroid', 'main belt'],
@@ -1504,7 +1504,7 @@
         'https://ui.adsabs.harvard.edu/abs/2005A%26A...437.1115D/abstract'
     ],
     '(90482) Orcus|deBergh2005': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
+        tags: ['Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.68, 'V-R': 0.37, 'V-I': 0.74},
         calib: 'Vega',
@@ -1520,12 +1520,12 @@
         scale: ['Generic_Bessell.V', 0.231], // geometric albedo from Fornasier et al. (2013)
     },
     '(90482) Orcus|MBOSS': {
-        tags: ['MBOSS', 'Solar system', 'planet geophysical', 'dwarf planet', 'minor body', 'TNO', 'plutino'],
+        tags: ['featured', 'MBOSS', 'Solar system', 'planet geophysical', 'dwarf planet', 'minor body', 'TNO', 'plutino'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.670, 'V-R': 0.376, 'R-I': 0.372},
         calib: 'Vega',
         sun: true,
-        scale: ['Generic_Bessell.V', 0.231], // albedo from Fornasier et al. (2013)
+        scale: ['Generic_Bessell.V', 0.231], // geometric albedo from Fornasier et al. (2013)
     },
     'Vanth|Howett2019': { // wrong reference!
         tags: ['Solar system', 'moon', 'minor body', 'TNO', 'plutino'],
@@ -2091,10 +2091,6 @@
         sun: true,
         scale: ['Generic_Bessell.V', 0.097], // albedo from Dias-Oliveira et al. (2017)
     },
-    'Grundy2018': [
-        'The mutual orbit, mass, and density of transneptunian binary Gǃkúnǁʼhòmdímà (229762 2007 UK126)',
-        'DOI: 10.1016/j.icarus.2018.12.037', 'http://www2.lowell.edu/users/grundy/abstracts/2019.G-G.html'
-    ],
     '(225088) Gonggong|Boehnhardt2014': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'detached'],
         system: 'Generic_Bessell',
@@ -2123,6 +2119,10 @@
         sun: true,
         scale: ['Generic_Bessell.V', 0.142], // albedo from Ortiz et al. (2019)
     },
+    'Grundy2018': [
+        'The mutual orbit, mass, and density of transneptunian binary Gǃkúnǁʼhòmdímà (229762 2007 UK126)',
+        'DOI: 10.1016/j.icarus.2018.12.037', 'http://www2.lowell.edu/users/grundy/abstracts/2019.G-G.html'
+    ],
     '(229762) Gǃkúnǁʼhòmdímà|Grundy2018': {
         tags: ['Solar system', 'minor body', 'TNO', 'TNO-midsize', 'detached'],
         system: 'Generic_Bessell',
@@ -2132,7 +2132,7 @@
         scale: ['Generic_Bessell.V', 0.142], // albedo from Ortiz et al. (2019)
     },
     'Gǃòʼé ǃHú|Grundy2018': {
-        tags: ['featured', 'Solar system', 'moon', 'minor body', 'TNO', 'detached'],
+        tags: ['Solar system', 'moon', 'minor body', 'TNO', 'detached'],
         system: 'Generic_Bessell',
         indices: {'V-I': 1.803},
         calib: 'Vega',

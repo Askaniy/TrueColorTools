@@ -351,26 +351,43 @@
         br: [0.093, 0.107, 0.116, 0.130, 0.139, 0.147, 0.151, 0.151, 0.151, 0.151, 0.145, 0.124, 0.070, 0.071],
         albedo: true
     },
+    'Miller2011': [
+        'Comparing Phoebe’s 2005 opposition surge in four visible light filters',
+        'DOI: 10.1016/j.icarus.2010.12.024', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103510004926'
+    ],
+    'Phoebe|Miller2011': { // variant with g=−0.35 as the most likely by Voyager data Simonelli et al. (1999)
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        filters: ['B', 'V', 'R', 'I'],
+        br: [0.0274, 0.0267, 0.0265, 0.0310], // spherical albedo
+        sd: [0.0079, 0.0083, 0.0079, 0.0050],
+        //br: [0.0855, 0.0857, 0.0843, 0.0839], // geometric albedo
+        //sd: [0.0031, 0.0022, 0.0016, 0.0021],
+        albedo: true
+    },
     'Phoebe|Graykowski2018': {
         tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.57, 'V-R': 0.34},
         calib: 'Vega',
-        sun: true
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.03], // averaged spherical albedo from Miller2011
     },
     'Phoebe|Grav2003': {
         tags: ['featured', 'Solar system', 'moon', 'Saturnian system', 'irregular'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.63, 'V-R': 0.35, 'V-I': 0.64},
         calib: 'Vega',
-        sun: true
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.03], // averaged spherical albedo from Miller2011
     },
     'Phoebe|Pena2022': {
         tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
         system: 'CTIO_DECam',
         indices: {'g-r': 0.27, 'r-i': 0.06},
         calib: 'AB',
-        sun: true
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.03], // averaged spherical albedo from Miller2011
     },
     'Uranus|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Uranian system'],
