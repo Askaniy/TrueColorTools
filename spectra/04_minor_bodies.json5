@@ -217,7 +217,7 @@
         scale: ['Galileo_SSI.Clear', 0.197], // ±0.038, normal albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
     },
     'Dactyl|Veverka1996': {
-        tags: ['featured', 'Solar system', 'moon', 'minor body', 'asteroid', 'main belt'],
+        tags: ['Solar system', 'moon', 'minor body', 'asteroid', 'main belt'],
         system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.700, 0.894, 0.992, 1.000, 0.909, 0.882],
@@ -321,7 +321,7 @@
         sun: true
     },
     '(1252) Celestia|SMASS': {
-        tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a001252.2.txtU',
         scale: ['Generic_Bessell.V', 0.215], // albedo from Mainzer et al. (2016), https://ui.adsabs.harvard.edu/abs/2016PDSS..247.....M/abstract
     },
@@ -2027,7 +2027,7 @@
         scale: ['Generic_Bessell.V', 0.099], // albedo from Souami et al. (2020)
     },
     'Ilmarë|Grundy2015': {
-        tags: ['featured', 'Solar system', 'moon', 'minor body', 'TNO', 'classical', 'classical-h'],
+        tags: ['Solar system', 'moon', 'minor body', 'TNO', 'classical', 'classical-h'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.857, 'V-I': 1.266},
         calib: 'Vega',
