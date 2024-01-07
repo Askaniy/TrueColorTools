@@ -1519,6 +1519,7 @@
         tags: ['Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
         filters: ['Generic_Bessell.V', 'Generic_Bessell.I'],
         mag: [19.36, 18.63],
+        sd: 0.05,
         calib: 'Vega',
         sun: true,
         scale: ['Generic_Bessell.V', 0.23], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
@@ -1535,6 +1536,7 @@
         tags: ['featured', 'Solar system', 'moon', 'minor body', 'TNO', 'plutino'],
         filters: ['Generic_Bessell.V', 'Generic_Bessell.I'],
         mag: [21.97, 20.94],
+        sd: 0.05,
         calib: 'Vega',
         sun: true,
         scale: ['Generic_Bessell.V', 0.08], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
