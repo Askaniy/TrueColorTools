@@ -1,4 +1,5 @@
 {
+    // Common references, used in several places
     'Mallama2017': [
         'Comprehensive wide-band magnitudes and albedos for the planets, with applications to exo-planets and Planet Nine',
         'DOI: 10.1016/j.icarus.2016.09.023', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103516301014'
@@ -19,149 +20,17 @@
         'Spectrophotometry of the Jovian Planets and Titan at 300- to 1000-nm Wavelength: The Methane Spectrum',
         'DOI: 10.1006/icar.1994.1139', 'https://atmos.nmsu.edu/planetary_datasets/indexinfrared.html'
     ],
-    'Lorenzi2016': [
-        'The Spectrum of Pluto, 0.40 - 0.93 um I. Secular and longitudinal distribution of ices and complex organics',
-        'DOI: 10.1051/0004-6361/201527281', 'https://arxiv.org/abs/1509.00417'
-    ],
-    'deLeon2010': [ // last name is...?
-        'Observations, compositional, and physical characterization of near-Earth and Mars-crosser asteroids from a spectroscopic survey',
-        'DOI: 10.1051/0004-6361/200913852', 'https://ui.adsabs.harvard.edu/abs/2010A%26A...517A..23D/abstract'
-    ],
-    'Lowry2005': [
-        'Physical properties of Asteroid (25143) Itokawa — Target of the Hayabusa sample return mission',
-        'DOI: 10.1016/j.icarus.2005.02.002', 'https://ui.adsabs.harvard.edu/abs/2005Icar..176..408L/abstract'
-    ],
-    'Avramchuk2007': [
-        'Photometric study of the major satellites of Uranus',
-        'DOI: 10.1134/S0038094607030021', 'https://link.springer.com/article/10.1134%2FS0038094607030021'
-    ],
-    'Howett2019': [
-        'Colors of (486958) 2014 MU69 as Observed by New Horizons’ Multi-Spectral Visible Imaging Camera (MVIC)',
-        'https://ui.adsabs.harvard.edu/abs/2019LPI....50.1982H/abstract'
-    ],
-    'Jewitt2017': [
-        'Interstellar Interloper 1I/2017 U1: Observations from the NOT and WIYN Telescopes',
-        'DOI: 10.3847/2041-8213/aa9b2f', 'https://arxiv.org/abs/1711.05687'
-    ],
-    'Bannister2017': [
-        'Col-OSSOS: Colors of the Interstellar Planetesimal 1I/`Oumuamua',
-        'DOI: 10.3847/2041-8213/aaa07c', 'https://arxiv.org/abs/1711.06214'
-    ],
-    'Tryka1999': [
-        'A Visual Spectrum of Triton from the Hubble Space Telescope',
-        'DOI: 10.1006/icar.1999.6224', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103599962243'
-    ],
-    'Pajola2013': [
-        'Phobos as a D-type Captured Asteroid, Spectral Modeling from 0.25 to 4.0 μm',
-        'DOI: 10.1088/0004-637X/777/2/127', 'https://iopscience.iop.org/article/10.1088/0004-637X/777/2/127'
-    ],
-    'Fraeman2013': [
-        'Spectral absorptions on Phobos and Deimos in the visible/near infrared wavelengths and their compositional constraints',
-        'DOI: 10.1016/j.icarus.2013.11.021', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103513004934'
-    ],
-    'Pang1980': [
-        'Spectral evidence for a carbonaceous chondrite surface composition on Deimos',
-        'https://www.nature.com/articles/283277a0'
-    ],
-    'Filacchione2018': [
-        'Photometric Modeling and VIS-IR Albedo Maps of Tethys From Cassini-VIMS',
-        'DOI: 10.1029/2018GL078602', 'https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2018GL078602'
-    ],
-    'Filacchione2017': [
-        'Photometric Modeling and VIS-IR Albedo Maps of Dione From Cassini-VIMS',
-        'DOI: 10.1002/2017GL076869', 'https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2017GL076869'
-    ],
-    'LeCorre2019': [
-        'Investigating Surface Color Variegation on Near-Earth Asteroid Bennu Using OSIRIS-REx Mapcam Data',
-        'https://ui.adsabs.harvard.edu/abs/2019LPI....50.2794L/abstract'
-    ],
     'Graykowski2018': [
         'Colors and Shapes of the Irregular Planetary Satellites',
         'DOI: 10.3847/1538-3881/aab49b', 'https://iopscience.iop.org/article/10.3847/1538-3881/aab49b'
-    ],
-    'Grav2007': [
-        'A deeper look at the colors of the saturnian irregular satellites',
-        'DOI: 10.1016/j.icarus.2007.04.020', 'https://arxiv.org/abs/astro-ph/0611590'
     ],
     'Grav2003': [
         'Photometric survey of the irregular satellites',
         'DOI: 10.1016/j.icarus.2003.07.005', 'https://arxiv.org/abs/astro-ph/0301016'
     ],
-    'Rettig2001': [
-        'Implied Evolutionary Differences of the Jovian Irregular Satellites from a BVR Color Survey',
-        'DOI: 10.1006/icar.2001.6715', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103501967156'
-    ],
-    'Maiorov2005': [
-        'A New Analysis of the Spectra Obtained by the Venera Missions in the Venusian Atmosphere. I. The Analysis of the Data Received from the Venera-11 Probe at Altitudes Below 37 km in the 0.44–0.66 µm Wavelength Range',
-        'DOI: 10.1007/s11208-005-0042-1', 'https://link.springer.com/article/10.1007/s11208-005-0042-1'
-    ],
-    'Karkoschka2012': [
-        'The reflectivity spectrum and opposition effect of Titan’s surface observed by Huygens’ DISR spectrometers',
-        'DOI: 10.1016/j.pss.2011.10.014', 'https://www.sciencedirect.com/science/article/pii/S0032063311003254'
-    ],
-    'Karkoschka2016': [
-        'Eight-color maps of Titan’s surface from spectroscopy with Huygens’ DISR',
-        'DOI: 10.1016/j.icarus.2015.06.010', 'https://www.sciencedirect.com/science/article/pii/S0019103515002547'
-    ],
-    'Boehnhardt2014': [
-        'Photometry of Transneptunian Objects for the Herschel Key Program ‘TNOs are Cool’',
-        'DOI: 10.1007/s11038-014-9450-x', 'https://link.springer.com/article/10.1007/s11038-014-9450-x'
-    ],
-    'Thirouin2019': [
-        'Colors of Trans-Neptunian Contact Binaries',
-        'DOI: 10.3847/1538-3881/ab27bc', 'https://iopscience.iop.org/article/10.3847/1538-3881/ab27bc'
-    ],
-    'Markwardt2023': [
-        'Photometric Survey of neptune trojan Asteroids. I. The Color Distribution',
-        'DOI: 10.3847/PSJ/ace528', 'https://iopscience.iop.org/article/10.3847/PSJ/ace528'
-    ],
-    'Sheppard2018': [
-        'The Albedos, Sizes, Colors, and Satellites of Dwarf Planets Compared with Newly Measured Dwarf Planet 2013 FY27',
-        'DOI: 10.3847/1538-3881/aae92a', 'https://iopscience.iop.org/article/10.3847/1538-3881/aae92a'
-    ],
-    'Verbiscer2022': [
-        'The Diverse Shapes of Dwarf Planet and Large KBO Phase Curves Observed from New Horizons',
-        'DOI: 10.3847/PSJ/ac63a6', 'https://iopscience.iop.org/article/10.3847/PSJ/ac63a6'
-    ],
-    'Grundy2015': [
-        'The mutual orbit, mass, and density of the large transneptunian binary system Varda and Ilmarë',
-        'DOI: 10.1016/j.icarus.2015.04.036', 'https://arxiv.org/abs/1505.00510'
-    ],
-    'Kiss2019': [
-        'The mass and density of the dwarf planet (225088) 2007 OR10',
-        'DOI: 10.1016/j.icarus.2019.03.013', 'https://arxiv.org/abs/1903.05439'
-    ],
-    'Grundy2018': [
-        'The mutual orbit, mass, and density of transneptunian binary Gǃkúnǁʼhòmdímà (229762 2007 UK126)',
-        'DOI: 10.1016/j.icarus.2018.12.037', 'http://www2.lowell.edu/users/grundy/abstracts/2019.G-G.html'
-    ],
-    'Bolin2023': [
-        'Keck and Gemini spectral characterization of Lucy mission fly-by target (152830) Dinkinesh',
-        'https://ui.adsabs.harvard.edu/abs/2023Icar..40015562B/abstract'
-    ],
-    'Yokota2021': [
-        'Opposition Observations of 162173 Ryugu: Normal Albedo Map Highlights Variations in Regolith Characteristics',
-        'DOI: 10.3847/PSJ/ac14ba', 'https://iopscience.iop.org/article/10.3847/PSJ/ac14ba'
-    ],
-    'Bernardi2006': [ // the last observation reported
-        'Pluto New Horizons Mission — Supporting Observations for 2002 JF56 Encounter',
-        'http://smass.mit.edu/2002jf56.html'
-    ],
-    'Hicks2004': [
-        '(2867) Steins',
-        'https://ui.adsabs.harvard.edu/abs/2004IAUC.8315....3H/abstract'
-    ],
-    'Helfenstein1994': [
-        'Galileo Photometry of Asteroid 951 Gaspra',
-        'DOI: 10.1006/icar.1994.1005', 'https://www.sciencedirect.com/science/article/pii/S0019103584710050'
-    ],
-    'Veverka1996': [
-        'Dactyl: Galileo Observations of Ida’s Satellite',
-        'DOI: 10.1006/icar.1996.0045', 'https://www.sciencedirect.com/science/article/pii/S0019103596900457'
-    ],
-    'deBergh2005': [
-        'The surface of the transneptunian object 90482 Orcus',
-        'https://ui.adsabs.harvard.edu/abs/2005A%26A...437.1115D/abstract'
+    'Pena2022': [
+        'Colors of Irregular Satellites of Saturn with DECam',
+        'DOI: 10.3847/1538-3881/ac6258', 'https://arxiv.org/abs/2204.08391'
     ],
 
     'Mercury|Mallama2017': {
@@ -203,6 +72,10 @@
         br: [0.4762, 0.46407, 0.45882, 0.45564, 0.44893, 0.44337, 0.42979],
         albedo: true
     },
+    'Maiorov2005': [
+        'A New Analysis of the Spectra Obtained by the Venera Missions in the Venusian Atmosphere. I. The Analysis of the Data Received from the Venera-11 Probe at Altitudes Below 37 km in the 0.44–0.66 µm Wavelength Range',
+        'DOI: 10.1007/s11208-005-0042-1', 'https://link.springer.com/article/10.1007/s11208-005-0042-1'
+    ],
     'Venus surface|Maiorov2005': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
         nm: [440, 450, 460, 470, 480, 490, 500, 505, 700],
@@ -275,6 +148,10 @@
             0.26732, 0.24827, 0.25628],
         albedo: true
     },
+    'Pajola2013': [
+        'Phobos as a D-type Captured Asteroid, Spectral Modeling from 0.25 to 4.0 μm',
+        'DOI: 10.1088/0004-637X/777/2/127', 'https://iopscience.iop.org/article/10.1088/0004-637X/777/2/127'
+    ],
     'Phobos|Pajola2013': {
         tags: ['featured', 'Solar system', 'moon'],
         nm: [245.5, 258.0, 263.5, 295.0, 308.5, 355.0, 360.0, 374.5, 387.0, 480.0, 535.0, 571.0, 589.5, 611.5, 650.5, 700.5, 742.5, 804.5, 882.5, 932.0,
@@ -283,6 +160,14 @@
             0.03316, 0.03499, 0.03713, 0.03940, 0.04057, 0.03880],
         scale: ['Generic_Bessell.V', 0.071], // geometric albedo https://ssd.jpl.nasa.gov/?sat_phys_par
     },
+    'Fraeman2013': [
+        'Spectral absorptions on Phobos and Deimos in the visible/near infrared wavelengths and their compositional constraints',
+        'DOI: 10.1016/j.icarus.2013.11.021', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103513004934'
+    ],
+    'Pang1980': [
+        'Spectral evidence for a carbonaceous chondrite surface composition on Deimos',
+        'https://www.nature.com/articles/283277a0'
+    ],
     'Deimos|Fraeman2013, Pang1980': {
         tags: ['featured', 'Solar system', 'moon'],
         nm: [250, 300, 350, 400, 450, 500, 550, 600, 700, 750, 800],
@@ -396,12 +281,20 @@
             0.84243, 0.84372, 0.84021, 0.84098, 0.84359, 0.84824, 0.84469, 0.84304, 0.8458, 0.84796, 0.85031, 0.85254],
         albedo: true
     },
+    'Filacchione2018': [
+        'Photometric Modeling and VIS-IR Albedo Maps of Tethys From Cassini-VIMS',
+        'DOI: 10.1029/2018GL078602', 'https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2018GL078602'
+    ],
     'Tethys|Filacchione2018': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm: [350, 440, 550, 700, 950],
         br: [0.75042, 0.77108, 0.79707, 0.76842, 0.74823],
         albedo: true
     },
+    'Filacchione2017': [
+        'Photometric Modeling and VIS-IR Albedo Maps of Dione From Cassini-VIMS',
+        'DOI: 10.1002/2017GL076869', 'https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2017GL076869'
+    ],
     'Dione|Filacchione2017': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm: [350, 440, 550, 700, 950],
@@ -436,6 +329,10 @@
         file: 'spectra/files/Karkoschka1994/titan.txtA',
         albedo: true
     },
+    'Karkoschka2012': [
+        'The reflectivity spectrum and opposition effect of Titan’s surface observed by Huygens’ DISR spectrometers',
+        'DOI: 10.1016/j.pss.2011.10.014', 'https://www.sciencedirect.com/science/article/pii/S0032063311003254'
+    ],
     'Titan surface|Karkoschka2012': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm_range: [300, 801, 10],
@@ -444,11 +341,36 @@
             0.447, 0.448, 0.449, 0.449, 0.450, 0.450, 0.450, 0.449, 0.449, 0.448, 0.447],
 		albedo: true
     },
+    'Karkoschka2016': [
+        'Eight-color maps of Titan’s surface from spectroscopy with Huygens’ DISR',
+        'DOI: 10.1016/j.icarus.2015.06.010', 'https://www.sciencedirect.com/science/article/pii/S0019103515002547'
+    ],
     'Titan surface|Karkoschka2016': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm: [520, 563, 595, 642, 685, 754, 823, 830, 935, 940, 1070, 1280, 1550, 1590],
         br: [0.093, 0.107, 0.116, 0.130, 0.139, 0.147, 0.151, 0.151, 0.151, 0.151, 0.145, 0.124, 0.070, 0.071],
         albedo: true
+    },
+    'Phoebe|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.57, 'V-R': 0.34},
+        calib: 'Vega',
+        sun: true
+    },
+    'Phoebe|Grav2003': {
+        tags: ['featured', 'Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.63, 'V-R': 0.35, 'V-I': 0.64},
+        calib: 'Vega',
+        sun: true
+    },
+    'Phoebe|Pena2022': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'CTIO_DECam',
+        indices: {'g-r': 0.27, 'r-i': 0.06},
+        calib: 'AB',
+        sun: true
     },
     'Uranus|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Uranian system'],
@@ -465,6 +387,10 @@
         file: 'spectra/files/Karkoschka1994/uranus.txtA',
         albedo: true
     },
+    'Avramchuk2007': [
+        'Photometric study of the major satellites of Uranus',
+        'DOI: 10.1134/S0038094607030021', 'https://link.springer.com/article/10.1134%2FS0038094607030021'
+    ],
     'Miranda|Avramchuk2007': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
         nm: [250, 410, 480, 560, 750, 910],
@@ -510,447 +436,32 @@
         file: 'spectra/files/Karkoschka1994/neptune.txtA',
         albedo: true
     },
+    'Tryka1999': [
+        'A Visual Spectrum of Triton from the Hubble Space Telescope',
+        'DOI: 10.1006/icar.1999.6224', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103599962243'
+    ],
     'Triton|Tryka1999': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Neptunian system', 'irregular'],
         nm_range: [300, 900, 100],
         br: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
         albedo: true, // geometric albedo
     },
-    '(243) Ida:B|Veverka1996': {
-        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
-        system: 'Galileo_SSI',
-        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
-        br: [0.756, 0.892, 0.978, 1.000, 0.936, 0.917],
-        sd: 0.018,
-        scale: ['Galileo_SSI.Green', 0.217], // ±0.026, normal albedo of Terrain B from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
-    },
-    '(243) Ida:D|Veverka1996': {
-        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
-        system: 'Galileo_SSI',
-        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
-        br: [0.690, 0.856, 0.956, 1.000, 0.979, 0.965],
-        sd: 0.018,
-        scale: ['Galileo_SSI.Green', 0.204], // ±0.016, normal albedo of Terrain A from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
-    },
-    'Dactyl|Veverka1996': {
-        tags: ['featured', 'Solar system', 'moon', 'minor body', 'asteroid', 'main belt'],
-        system: 'Galileo_SSI',
-        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
-        br: [0.700, 0.894, 0.992, 1.000, 0.909, 0.882],
-        sd: 0.018,
-        scale: ['Galileo_SSI.Clear', 0.197], // ±0.038, normal albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
-    },
-    '(433) Eros|deLeon2010': { tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Amor'],
-        nm_range: [350, 890, 5],
-        br: [0.39114, 0.40755, 0.43474, 0.48806, 0.49886, 0.51646, 0.49042, 0.44175, 0.53512, 0.55996, 0.62863, 0.6198, 0.67636, 0.66499, 0.68589, 0.67764,
-            0.68227, 0.73805, 0.7302, 0.76963, 0.7911, 0.8021, 0.8124, 0.81771, 0.82751, 0.8589, 0.87197, 0.89604, 0.89299, 0.90126, 0.91716, 0.91591, 0.91854,
-            0.92926, 0.93106, 0.95902, 0.96679, 0.97107, 0.96876, 0.98038, 1.0, 0.9954, 0.98526, 1.00648, 0.98666, 1.01316, 1.01612, 1.02944, 1.02794, 1.05006,
-            1.0472, 1.05417, 1.06109, 1.05626, 1.06517, 1.0627, 1.0777, 1.08487, 1.08937, 1.08957, 1.10265, 1.1198, 1.11823, 1.12239, 1.12993, 1.1458, 1.13856,
-            1.12816, 1.13752, 1.14195, 1.12574, 1.14946, 1.13265, 1.17224, 1.12637, 1.13412, 1.15489, 1.16516, 1.13524, 1.13512, 1.16729, 1.19448, 1.21084,
-            1.15377, 1.12806, 1.17343, 1.21881, 1.14669, 1.14314, 1.14373, 1.16095, 1.09179, 1.0755, 1.13114, 1.16251, 1.21117, 1.13878, 1.20665, 1.0951, 1.047,
-            1.00354, 0.9945, 1.01803, 1.14228, 1.05281, 1.18387, 1.09958, 1.16424, 0.91067],
-        scale: ['Generic_Bessell.V', 0.093], // spherical albedo from Li et al. (2004), https://ui.adsabs.harvard.edu/abs/2004Icar..172..415L/abstract
-    },
-    '(951) Gaspra|Helfenstein1994': {
-        tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
-        system: 'Galileo_SSI',
-        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
-        br: [0.17, 0.23, 0.26, 0.27, 0.26, 0.26],
-        sd: [0.05, 0.06, 0.07, 0.07, 0.07, 0.06],
-        albedo: true, // global mean normal albedo from the Table VI
-    },
-    '(951) Gaspra:B|Helfenstein1994': {
-        tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
-        system: 'Galileo_SSI',
-        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
-        br: [0.19, 0.25, 0.27, 0.28, 0.27, 0.26],
-        sd: [0.03, 0.06, 0.06, 0.04, 0.05, 0.05],
-        albedo: true, // normal albedo of PC2-α material from the Table VI
-    },
-    '(951) Gaspra:D|Helfenstein1994': {
-        tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
-        system: 'Galileo_SSI',
-        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
-        br: [0.16, 0.22, 0.26, 0.27, 0.26, 0.26],
-        sd: [0.04, 0.04, 0.05, 0.04, 0.03, 0.02],
-        albedo: true, // normal albedo of PC2-γ material from the Table VI
-    },
-    '(2867) Steins|Hicks2004': {
-        tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
+    'Nereid|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Neptunian system', 'irregular'],
         system: 'Generic_Bessell',
-        indices: {'B-V': 0.798, 'V-R': 0.513, 'R-I': 0.440},
-        calib: 'Vega',
-        sun: true,
-        scale: ['Rosetta_OSIRIS_WAC.OI', 0.24], // spherical albedo from Spjuth et al. (2012), https://ui.adsabs.harvard.edu/abs/2012Icar..221.1101S/abstract
-    },
-    '(25143) Itokawa|Lowry2005': { tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
-        nm_range: [325, 1000, 25],
-        br: [0.388, 0.568, 0.676, 0.773, 0.824, 0.856, 0.888, 0.914, 0.964, 1.0, 1.036, 1.058, 1.076, 1.094, 1.122, 1.140, 1.147, 1.144, 1.129, 1.101,
-            1.068, 1.029, 1.0, 0.978, 0.975, 0.946, 0.917, 0.935],
-        scale: ['Generic_Bessell.V', 0.033], // spherical albedo from Tatsumi et al. (2018), https://kar.kent.ac.uk/66973/1/Lowry_Vis-NIR%20Disk-integrated%20Photometry.pdf
-    },
-    '(90482) Orcus|deBergh2005': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
-        system: 'Generic_Bessell',
-        indices: {'B-V': 0.68, 'V-R': 0.37, 'V-I': 0.74},
-        calib: 'Vega',
-        sun: true,
-        scale: ['Generic_Bessell.V', 0.231], // geometric albedo from Fornasier et al. (2013)
-    },
-    '(90482) Orcus|Howett2019': {
-        tags: ['Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
-        system: 'Generic_Bessell',
-        indices: {'V-I': 0.73},
-        calib: 'Vega',
-        sun: true,
-        scale: ['Generic_Bessell.V', 0.231], // geometric albedo from Fornasier et al. (2013)
-    },
-    'Vanth|Howett2019': {
-        tags: ['Solar system', 'moon', 'minor body', 'TNO', 'plutino'],
-        system: 'Generic_Bessell',
-        indices: {'V-I': 1.03},
-        calib: 'Vega',
-        sun: true,
-        scale: ['Generic_Bessell.V', 0.08], // albedo from Brown and Butler (2018)
-    },
-    '(101955) Bennu|LeCorre2019': {
-        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
-        nm: [473.228, 549.146, 697.569, 847.937],
-        br: [0.0175, 0.01736, 0.0174, 0.01727],
-        albedo: true
-    },
-    '(101955) Bennu:D|LeCorre2019': {
-        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
-        nm: [473.228, 549.146, 697.569, 847.937],
-        br: [0.01604, 0.01573, 0.016, 0.01605],
-        albedo: true
-    },
-    '(132524) APL|Bernardi2006': {
-        tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
-        system: 'Generic_Bessell',
-        indices: {'B-V': 0.84, 'V-R': 0.49},
-        calib: 'Vega',
-        sun: true,
-        scale: ['Generic_Bessell.V', 0.178], // mean diameter = 2.5 km, H = 15.5
-    },
-    '(134340) Pluto|Lorenzi2016': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
-        nm: [400.551, 423.678, 440.749, 458.37, 466.079, 493.062, 496.366, 499.119, 553.634, 555.837, 559.692, 582.819, 587.225, 630.727, 658.811, 
-            670.925, 680.286, 697.907, 729.846, 761.233, 762.885, 773.348, 784.912, 790.419, 795.925, 803.084, 807.489, 812.996, 816.85, 836.674],
-        br: [0.642, 0.695, 0.766, 0.799, 0.832, 0.887, 0.872, 0.902, 1.019, 1.012, 1.031, 1.056, 1.07, 1.121, 1.137, 0.735, 1.156, 1.169, 1.152, 
-            1.18, 1.157, 1.172, 1.099, 1.144, 1.118, 0.988, 1.072, 1.062, 1.135, 1.169],
-        scale: ['Generic_Bessell.V', 0.52]
-    },
-    '(134340) Pluto|Madden2018': {
-        tags: ['Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
-        nm: [410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540, 550, 560, 570, 580, 590, 600, 610, 620, 630, 640, 650, 660, 670,
-            680, 690, 700, 710, 720, 730, 740, 750, 760, 770, 780, 790, 800, 810, 820, 830, 840, 850, 860, 870, 880, 890, 900, 910, 920, 930, 992.71],
-        br: [0.31848, 0.33024, 0.34045, 0.36136, 0.38311, 0.39087, 0.40592, 0.42545, 0.43835, 0.44743, 0.4584, 0.46743, 0.48603, 0.49388, 0.50692,
-            0.51397, 0.52309, 0.53866, 0.54639, 0.55549, 0.5629, 0.56749, 0.57886, 0.58535, 0.59163, 0.59688, 0.6017, 0.60816, 0.61239, 0.61481, 0.61961,
-            0.6102, 0.60285, 0.63038, 0.63607, 0.6348, 0.63782, 0.63538, 0.63423, 0.63182, 0.63682, 0.64078, 0.64593, 0.63929, 0.63921, 0.62098, 0.54141,
-            0.60355, 0.48914, 0.56542, 0.62153, 0.62718, 0.62923, 0.53279],
-        albedo: true
-    },
-    'Charon|Verbiscer2022': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'minor body', 'TNO', 'plutino'],
-        system: 'Generic_Bessell',
-        indices: {'B-V': 0.7315, 'V-R': 0.4},
-        calib: 'Vega',
-        sun: true,
-        scale: ['Generic_Bessell.V', 0.41]
-    },
-    '(136199) Eris|Lorenzi2016': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'dwarf planet', 'minor body', 'TNO', 'detached'],
-        nm: [417.357, 479.507, 532.699, 585.89, 601.008, 604.367, 622.844, 637.962, 653.08, 656.439, 659.239, 673.236, 679.955, 692.273, 702.912, 
-            712.43, 734.267, 740.426, 747.704, 750.504, 765.062, 779.059, 788.578, 793.617, 809.295, 813.774, 826.652, 841.209, 860.246],
-        br: [0.995, 1.059, 1.084, 1.101, 1.08, 1.104, 1.111, 1.103, 1.121, 1.104, 1.11, 1.097, 1.117, 1.034, 1.121, 1.13, 1.11, 1.073, 1.11, 1.077, 
-            1.132, 1.138, 1.087, 1.126, 1.018, 1.079, 0.881, 1.072, 1.13],
-        scale: ['Generic_Bessell.V', 0.957], // albedo from zelario’s sheet
-    },
-    '(136472) Makemake|Lorenzi2016': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'classical', 'classical-h'],
-        nm: [417.357, 466.069, 588.13, 601.568, 609.406, 631.243, 642.441, 649.72, 656.439, 664.278, 672.116, 679.955, 691.153, 706.271, 715.789,
-            723.628, 729.787, 740.426, 744.345, 751.064, 766.181, 782.419, 788.578, 794.737, 809.295, 813.774, 826.652, 841.209, 860.246],
-        br: [0.89, 0.971, 1.106, 1.059, 1.127, 1.133, 1.125, 1.157, 1.137, 1.155, 1.116, 1.139, 1.03, 1.179, 1.182, 1.143, 1.163, 1.088, 1.16, 1.084,
-            1.201, 1.201, 1.087, 1.159, 1.018, 1.079, 0.881, 1.072, 1.13],
-        scale: ['Generic_Bessell.V', 0.83], // albedo from zelario’s sheet
-    },
-    '(152830) Dinkinesh|Bolin2023': {
-        tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.67, 'r-i': 0.28, 'i-z': 0.11},
-        calib: 'AB',
-        sun: true,
-        scale: ['Generic_Bessell.V', 0.27], // albedo from McFadden et al. (2023)
-    },
-    '(162173) Ryugu|Yokota2021': {
-        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
-        system: 'Hayabusa2_ONC-T',
-        filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
-        br: [0.0438, 0.0408, 0.0406, 0.0408, 0.0405, 0.0411, 0.03987],
-        sd: [0.0012, 0.0011, 0.0010, 0.0009, 0.0008, 0.0006, 0.00050],
-        albedo: true, // normal (=geometric) albedo spectrum from the Table 3
-    },
-    '(162173) Ryugu:B|Yokota2021': {
-        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
-        system: 'Hayabusa2_ONC-T',
-        filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
-        br: [0.0473, 0.0445, 0.0439, 0.0439, 0.0430, 0.0427, 0.0410],
-        sd: [0.0018, 0.0017, 0.0016, 0.0015, 0.0011, 0.0009, 0.0008],
-        albedo: true, // normal (=geometric) albedo spectrum of N-pole bright area from the Table 6
-    },
-    '(162173) Ryugu:D|Yokota2021': {
-        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
-        system: 'Hayabusa2_ONC-T',
-        filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
-        br: [0.0427, 0.0398, 0.0398, 0.0400, 0.0399, 0.0407, 0.0396],
-        sd: [0.0006, 0.0006, 0.0005, 0.0004, 0.0003, 0.0003, 0.0002],
-        albedo: true, // normal (=geometric) albedo spectrum of N-Plain area from the Table 6
-    },
-    '(174567) Varda|Grundy2015': {
-        tags: ['Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
-        system: 'Generic_Bessell',
-        indices: {'B-V': 0.892, 'V-I': 1.133},
-        calib: 'Vega',
-        sun: true,
-        scale: ['Generic_Bessell.V', 0.099], // albedo from Souami et al. (2020)
-    },
-    'Ilmarë|Grundy2015': {
-        tags: ['Solar system', 'moon', 'minor body', 'TNO', 'classical', 'classical-h'],
-        system: 'Generic_Bessell',
-        indices: {'B-V': 0.857, 'V-I': 1.266},
-        calib: 'Vega',
-        sun: true,
-        scale: ['Generic_Bessell.V', 0.085], // albedo from Souami et al. (2020)
-    },
-    '(225088) Gonggong|Boehnhardt2014': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'detached'],
-        system: 'Generic_Bessell',
-        indices: {'B-V': 1.38, 'V-R': 0.86, 'R-I': 0.79},
-        calib: 'Vega',
-        sun: true,
-        scale: ['Generic_Bessell.V', 0.14], // albedo from Kiss et al. 2019
-    },
-    'Xiangliu|Kiss2019': {
-        tags: ['Solar system', 'moon', 'minor body', 'TNO', 'detached'],
-        system: 'Generic_Bessell',
-        indices: {'V-I': 1.22},
-        calib: 'Vega',
-        sun: true,
-        scale: ['Generic_Bessell.V', 0.08], // albedo assuming radius of 100 km from Arakawa et al. (2021) https://ui.adsabs.harvard.edu/abs/2021AJ....162..226A/abstract
-    },
-    '(229762) Gǃkúnǁʼhòmdímà|Grundy2018': {
-        tags: ['Solar system', 'minor body', 'TNO', 'TNO-midsize', 'detached'],
-        system: 'Generic_Bessell',
-        indices: {'V-I': 1.028},
-        calib: 'Vega',
-        sun: true,
-        scale: ['Generic_Bessell.V', 0.142], // albedo from Ortiz et al. (2019)
-    },
-    'Gǃòʼé ǃHú|Grundy2018': {
-        tags: ['Solar system', 'moon', 'minor body', 'TNO', 'detached'],
-        system: 'Generic_Bessell',
-        indices: {'V-I': 1.803},
+        indices: {'B-V': 0.67, 'V-R': 0.38},
         calib: 'Vega',
         sun: true
     },
-    '(486958) Wenu|Howett2019': {
-        tags: ['featured', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
-        system: 'NewHorizons_MVIC',
-        filters: ['Blue', 'Red', 'NIR'],
-        br: [0.053, 0.079, 0.117],
-        albedo: true
-    },
-    '(486958) Weeyo|Howett2019': {
-        tags: ['featured', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
-        system: 'NewHorizons_MVIC',
-        filters: ['Blue', 'Red', 'NIR'],
-        br: [0.058, 0.084, 0.122],
-        albedo: true
-    },
-    '(486958) Akasa|Howett2019': {
-        tags: ['featured', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h', 'surface feature'],
-        system: 'NewHorizons_MVIC',
-        filters: ['Blue', 'Red', 'NIR'],
-        br: [0.066, 0.090, 0.125],
-        albedo: true
-    },
-    '(532037) 2013 FY27|Sheppard2018': {
-        tags: ['Solar system', 'minor body', 'TNO', 'TNO-midsize', 'detached'],
+    'Schaefer2000': [
+        'Nereid Has Complex Large-Amplitude Photometric Variability (Due to Chaotic Rotation)',
+        'DOI: 10.1006/icar.2000.6417', 'https://arxiv.org/abs/astro-ph/0005050v1'
+    ],
+    'Nereid|Schaefer2000': {
+        tags: ['featured', 'Solar system', 'moon', 'Neptunian system', 'irregular'],
         system: 'Generic_Bessell',
-        indices: {'V-R': 0.56, 'R-I': 0.52},
-        calib: 'Vega',
-        sun: true,
-        scale: ['Generic_Bessell.V', 0.17]
-    },
-    '1I/ʻOumuamua|Jewitt2017': {
-        tags: ['featured', 'Solar system', 'extrasolar', 'asteroid'],
-        system: 'Generic_Bessell',
-        indices: {'B-V': 0.70, 'V-R': 0.45},
-        calib: 'Vega',
-        sun: true,
-        scale: ['Generic_Bessell.V', 0.1]
-    },
-    '1I/ʻOumuamua|Bannister2017': {
-        tags: ['Solar system', 'extrasolar', 'asteroid'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.47, 'r-i': 0.36},
-        calib: 'AB',
-        sun: true,
-        scale: ['Generic_Bessell.V', 0.07]
-    },
-    '2004 VC131|Thirouin2019': {
-        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.89, 'g-i': 1.40},
-        calib: 'AB',
-        sun: true
-    },
-    '2004 VU75|Thirouin2019': {
-        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.96, 'g-i': 1.42},
-        calib: 'AB',
-        sun: true
-    },
-    '2012 DX98|Thirouin2019': {
-        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.85, 'g-i': 1.25},
-        calib: 'AB',
-        sun: true
-    },
-    '2013 FR28|Thirouin2019': {
-        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.95, 'g-i': 1.36},
-        calib: 'AB',
-        sun: true
-    },
-    '2014 JL80|Thirouin2019': {
-        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.74},
-        calib: 'AB',
-        sun: true
-    },
-    '2014 JO80|Thirouin2019': {
-        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.67, 'g-i': 0.91},
-        calib: 'AB',
-        sun: true
-    },
-    '2014 JQ80|Thirouin2019': {
-        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.76, 'g-i': 1.05},
-        calib: 'AB',
-        sun: true
-    },
-    '2006 RJ103|Markwardt2023': {
-        tags: ['Solar system', 'minor body', 'Neptune trojan'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.59, 'r-i': 0.16},
-        calib: 'AB',
-        sun: true
-    },
-    '2007 VL305|Markwardt2023': {
-        tags: ['Solar system', 'minor body', 'Neptune trojan'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.60, 'r-i': 0.25},
-        calib: 'AB',
-        sun: true
-    },
-    '2010 TS191|Markwardt2023': {
-        tags: ['Solar system', 'minor body', 'Neptune trojan'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.61, 'r-i': 0.30},
-        calib: 'AB',
-        sun: true
-    },
-    '2011 SO277|Markwardt2023': {
-        tags: ['Solar system', 'minor body', 'Neptune trojan'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.60, 'r-i': 0.57},
-        calib: 'AB',
-        sun: true
-    },
-    '2012 UD185|Markwardt2023': {
-        tags: ['Solar system', 'minor body', 'Neptune trojan'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.61, 'r-i': 0.37},
-        calib: 'AB',
-        sun: true
-    },
-    '2012 UV177|Markwardt2023': {
-        tags: ['Solar system', 'minor body', 'Neptune trojan'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.71, 'r-i': 0.23},
-        calib: 'AB',
-        sun: true
-    },
-    '2013 RL124|Markwardt2023': {
-        tags: ['Solar system', 'minor body', 'Neptune trojan'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.38, 'r-i': 0.54},
-        calib: 'AB',
-        sun: true
-    },
-    '2013 TZ187|Markwardt2023': {
-        tags: ['Solar system', 'minor body', 'Neptune trojan'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.90, 'r-i': 0.30},
-        calib: 'AB',
-        sun: true
-    },
-    '2013 VX30|Markwardt2023': {
-        tags: ['Solar system', 'minor body', 'Neptune trojan'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 1.01, 'r-i': 0.44},
-        calib: 'AB',
-        sun: true
-    },
-    '2014 RO74|Markwardt2023': {
-        tags: ['Solar system', 'minor body', 'Neptune trojan'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.65, 'r-i': 0.42},
-        calib: 'AB',
-        sun: true
-    },
-    '2014 SC374|Markwardt2023': {
-        tags: ['Solar system', 'minor body', 'Neptune trojan'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.43, 'r-i': 0.12},
-        calib: 'AB',
-        sun: true
-    },
-    '2014 YB92|Markwardt2023': {
-        tags: ['Solar system', 'minor body', 'Neptune trojan'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.46, 'r-i': 0.07},
-        calib: 'AB',
-        sun: true
-    },
-    '2015 VU207|Markwardt2023': {
-        tags: ['Solar system', 'minor body', 'Neptune trojan'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.31, 'r-i': 0.24},
-        calib: 'AB',
-        sun: true
-    },
-    '2015 VV165|Markwardt2023': {
-        tags: ['Solar system', 'minor body', 'Neptune trojan'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.87, 'r-i': 0.32},
-        calib: 'AB',
-        sun: true
-    },
-    '2015 VW165|Markwardt2023': {
-        tags: ['Solar system', 'minor body', 'Neptune trojan'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.45, 'r-i': 0.36},
-        calib: 'AB',
-        sun: true
+        filters: ['U', 'B', 'V', 'R', 'I'],
+        br: [0.90, 0.93, 1, 1.13, 0.99],
+        scale: ['Generic_Bessell.V', 0.24], // albedo from https://arxiv.org/abs/1601.02395
     },
 }

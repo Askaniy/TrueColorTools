@@ -1,0 +1,682 @@
+{
+    // Jovian small irregulars
+    'Rettig2001': [
+        'Implied Evolutionary Differences of the Jovian Irregular Satellites from a BVR Color Survey',
+        'DOI: 10.1006/icar.2001.6715', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103501967156'
+    ],
+    'Himalia|Rettig2001': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.632, 'V-R': 0.375},
+        calib: 'Vega',
+        sun: true
+    },
+    'Elara|Rettig2001': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.66, 'V-R': 0.357},
+        calib: 'Vega',
+        sun: true
+    },
+    'Pasiphae|Grav2003': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.74, 'V-R': 0.38, 'V-I': 0.74},
+        calib: 'Vega',
+        sun: true
+    },
+    'Pasiphae (weighted)|Grav2003': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.71, 'V-R': 0.39, 'V-I': 0.75},
+        calib: 'Vega',
+        sun: true
+    },
+    'Pasiphae|Rettig2001': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.68, 'V-R': 0.41},
+        calib: 'Vega',
+        sun: true
+    },
+    'Sinope|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.77, 'V-R': 0.48},
+        calib: 'Vega',
+        sun: true
+    },
+    'Sinope|Grav2003': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.84, 'V-R': 0.46, 'V-I': 0.93},
+        calib: 'Vega',
+        sun: true
+    },
+    'Sinope|Rettig2001': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.749, 'V-R': 0.481},
+        calib: 'Vega',
+        sun: true
+    },
+    'Lysithea|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.72, 'V-R': 0.41},
+        calib: 'Vega',
+        sun: true
+    },
+    'Lysithea|Grav2003': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.72, 'V-R': 0.36, 'V-I': 0.74},
+        calib: 'Vega',
+        sun: true
+    },
+    'Lysithea|Rettig2001': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.671, 'V-R': 0.378},
+        calib: 'Vega',
+        sun: true
+    },
+    'Carme|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.76, 'V-R': 0.48},
+        calib: 'Vega',
+        sun: true
+    },
+    'Carme|Grav2003': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.76, 'V-R': 0.47, 'V-I': 0.97},
+        calib: 'Vega',
+        sun: true
+    },
+    'Carme|Rettig2001': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.72, 'V-R': 0.445},
+        calib: 'Vega',
+        sun: true
+    },
+    'Ananke|Grav2003': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.90, 'V-R': 0.38, 'V-I': 0.86},
+        calib: 'Vega',
+        sun: true
+    },
+    'Ananke (weighted)|Grav2003': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.77, 'V-R': 0.42, 'V-I': 0.83},
+        calib: 'Vega',
+        sun: true
+    },
+    'Ananke|Rettig2001': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.758, 'V-R': 0.428},
+        calib: 'Vega',
+        sun: true
+    },
+    'Leda|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.66, 'V-R': 0.43},
+        calib: 'Vega',
+        sun: true
+    },
+    'Leda|Rettig2001': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.644, 'V-R': 0.348},
+        calib: 'Vega',
+        sun: true
+    },
+    'Callirrhoe|Grav2003': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.72, 'V-R': 0.50, 'V-I': 1.02},
+        calib: 'Vega',
+        sun: true
+    },
+    'Themisto|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.80, 'V-R': 0.48},
+        calib: 'Vega',
+        sun: true
+    },
+    'Themisto|Grav2003': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.83, 'V-R': 0.46, 'V-I': 0.94},
+        calib: 'Vega',
+        sun: true
+    },
+    'Megaclite|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.82, 'V-R': 0.44},
+        calib: 'Vega',
+        sun: true
+    },
+    'Megaclite|Grav2003': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.94, 'V-R': 0.41, 'V-I': 1.05},
+        calib: 'Vega',
+        sun: true
+    },
+    'Taygete|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.84, 'V-R': 0.47},
+        calib: 'Vega',
+        sun: true
+    },
+    'Taygete|Grav2003': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.56, 'V-R': 0.52, 'V-I': 0.96},
+        calib: 'Vega',
+        sun: true
+    },
+    'Chaldene|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.82, 'V-R': 0.50},
+        calib: 'Vega',
+        sun: true
+    },
+    'Harpalyke|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.70, 'V-R': 0.42},
+        calib: 'Vega',
+        sun: true
+    },
+    'Kalyke|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.69, 'V-R': 0.46},
+        calib: 'Vega',
+        sun: true
+    },
+    'Kalyke|Grav2003': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.94, 'V-R': 0.705, 'V-I': 0.890},
+        calib: 'Vega',
+        sun: true
+    },
+    'Iocaste|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.86, 'V-R': 0.38},
+        calib: 'Vega',
+        sun: true
+    },
+    'Iocaste|Grav2003': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.63, 'V-R': 0.36, 'V-I': 0.62},
+        calib: 'Vega',
+        sun: true
+    },
+    'Erinome|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.72, 'V-R': 0.42},
+        calib: 'Vega',
+        sun: true
+    },
+    'Isonoe|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.78, 'V-R': 0.53},
+        calib: 'Vega',
+        sun: true
+    },
+    'Praxidike|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.71, 'V-R': 0.32},
+        calib: 'Vega',
+        sun: true
+    },
+    'Praxidike|Grav2003': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.77, 'V-R': 0.34, 'V-I': 0.74},
+        calib: 'Vega',
+        sun: true
+    },
+    'Autonoe|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.72, 'V-R': 0.51},
+        calib: 'Vega',
+        sun: true
+    },
+    'Thyone|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.71, 'V-R': 0.45},
+        calib: 'Vega',
+        sun: true
+    },
+    'Hermippe|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.73, 'V-R': 0.49},
+        calib: 'Vega',
+        sun: true
+    },
+    'Callirrhoe|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.81, 'V-R': 0.23},
+        calib: 'Vega',
+        sun: true
+    },
+    'Eukelade|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.79, 'V-R': 0.50},
+        calib: 'Vega',
+        sun: true
+    },
+    'Cyllene|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.73, 'V-R': 0.46},
+        calib: 'Vega',
+        sun: true
+    },
+
+    // Saturnian small irregulars
+    'Grav2007': [
+        'A deeper look at the colors of the saturnian irregular satellites',
+        'DOI: 10.1016/j.icarus.2007.04.020', 'https://arxiv.org/abs/astro-ph/0611590'
+    ],
+    'Ymir|Grav2007': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.789, 'V-R': 0.438, 'V-I': 0.884},
+        calib: 'Vega',
+        sun: true
+    },
+    'Ymir|Grav2003': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.56, 'V-R': 0.52, 'V-I': 0.96},
+        calib: 'Vega',
+        sun: true
+    },
+    'Ymir|Pena2022': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'CTIO_DECam',
+        indices: {'g-r': 0.50, 'r-i': 0.25},
+        calib: 'AB',
+        sun: true
+    },
+    'Paaliaq|Grav2007': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.86, 'V-R': 0.40, 'V-I': 0.92},
+        calib: 'Vega',
+        sun: true
+    },
+    'Paaliaq|Grav2003': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.77, 'V-R': 0.48, 'V-I': 0.94},
+        calib: 'Vega',
+        sun: true
+    },
+    'Tarvos|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.71, 'V-R': 0.42},
+        calib: 'AB',
+        sun: true
+    },
+    'Tarvos|Grav2007': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.78, 'V-R': 0.43, 'V-I': 0.82},
+        calib: 'Vega',
+        sun: true
+    },
+    'Tarvos|Grav2003': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.77, 'V-R': 0.57, 'V-I': 0.88},
+        calib: 'Vega',
+        sun: true
+    },
+    'Tarvos|Pena2022': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'CTIO_DECam',
+        indices: {'g-r': 0.52, 'r-i': 0.30},
+        calib: 'AB',
+        sun: true
+    },
+    'Ijiraq|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-R': 1.40},
+        calib: 'Vega',
+        sun: true
+    },
+    'Ijiraq|Grav2007': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.05, 'V-R': 0.58, 'V-I': 1.09},
+        calib: 'Vega',
+        sun: true
+    },
+    'Ijiraq|Pena2022': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'CTIO_DECam',
+        indices: {'g-r': 0.70, 'r-i': 0.20},
+        calib: 'AB',
+        sun: true
+    },
+    'Suttungr|Grav2007': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.47, 'V-R': 0.65, 'V-I': 0.78},
+        calib: 'Vega',
+        sun: true
+    },
+    'Suttungr|Pena2022': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'CTIO_DECam',
+        indices: {'g-r': 0.40, 'r-i': 0.17},
+        calib: 'AB',
+        sun: true
+    },
+    'Kiviuq|Grav2007': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.872, 'V-R': 0.482, 'V-I': 0.98},
+        calib: 'Vega',
+        sun: true
+    },
+    'Kiviuq|Grav2003': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.87, 'V-R': 0.66, 'V-I': 0.97},
+        calib: 'Vega',
+        sun: true
+    },
+    'Kiviuq|Pena2022': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'CTIO_DECam',
+        indices: {'g-r': 0.51, 'r-i': 0.28},
+        calib: 'AB',
+        sun: true
+    },
+    'Mundilfari|Grav2007': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.58, 'V-R': 0.41, 'V-I': 0.52},
+        calib: 'Vega',
+        sun: true
+    },
+    'Mundilfari|Pena2022': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'CTIO_DECam',
+        indices: {'g-r': 0.38, 'r-i': 0.03},
+        calib: 'AB',
+        sun: true
+    },
+    'Albiorix|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.80, 'V-R': 0.50},
+        calib: 'Vega',
+        sun: true
+    },
+    'Albiorix|Grav2007': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.879, 'V-R': 0.510, 'V-I': 0.902},
+        calib: 'Vega',
+        sun: true
+    },
+    'Albiorix|Grav2003': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.935, 'V-R': 0.482, 'V-I': 0.916},
+        calib: 'Vega',
+        sun: true
+    },
+    'Albiorix|Pena2022': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'CTIO_DECam',
+        indices: {'g-r': 0.46, 'r-i': 0.31},
+        calib: 'AB',
+        sun: true
+    },
+    'Skathi|Grav2007': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.72, 'V-R': 0.37, 'V-I': 0.88},
+        calib: 'Vega',
+        sun: true
+    },
+    'Skathi|Pena2022': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'CTIO_DECam',
+        indices: {'g-r': 0.24, 'r-i': -0.005},
+        calib: 'AB',
+        sun: true
+    },
+    'Erriapus|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.78, 'V-R': 0.41},
+        calib: 'Vega',
+        sun: true
+    },
+    'Erriapus|Grav2007': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.71, 'V-R': 0.40, 'V-I': 0.86},
+        calib: 'Vega',
+        sun: true
+    },
+    'Erriapus|Grav2003': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.83, 'V-R': 0.49, 'V-I': 0.61},
+        calib: 'Vega',
+        sun: true
+    },
+    'Erriapus|Pena2022': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'CTIO_DECam',
+        indices: {'g-r': 0.20, 'r-i': 0.42},
+        calib: 'AB',
+        sun: true
+    },
+    'Siarnaq|Grav2007': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.875, 'V-R': 0.485, 'V-I': 1.025},
+        calib: 'Vega',
+        sun: true
+    },
+    'Siarnaq|Grav2003': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.80, 'V-R': 0.52, 'V-I': 0.96},
+        calib: 'Vega',
+        sun: true
+    },
+    'Siarnaq|Pena2022': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'CTIO_DECam',
+        indices: {'g-r': 0.53, 'r-i': 0.24},
+        calib: 'AB',
+        sun: true
+    },
+    'Thrymr|Grav2007': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.41, 'V-R': 0.59, 'V-I': 0.86},
+        calib: 'Vega',
+        sun: true
+    },
+    'Thrymr|Pena2022': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'CTIO_DECam',
+        indices: {'g-r': 0.40, 'r-i': 0.15},
+        calib: 'AB',
+        sun: true
+    },
+    'Narvi|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-R': 1.29},
+        calib: 'Vega',
+        sun: true
+    },
+    'Narvi|Pena2022': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'CTIO_DECam',
+        indices: {'g-r': 0.24, 'r-i': 0.42},
+        calib: 'AB',
+        sun: true
+    },
+    'Bebhionn|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.61, 'V-R': 0.51},
+        calib: 'Vega',
+        sun: true
+    },
+    'Aegir|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-R': 1.30},
+        calib: 'Vega',
+        sun: true
+    },
+    'Bergelmir|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-R': 1.10},
+        calib: 'Vega',
+        sun: true
+    },
+    'Bestla|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-R': 1.32},
+        calib: 'Vega',
+        sun: true
+    },
+    'Bestla|Pena2022': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'CTIO_DECam',
+        indices: {'g-r': 0.72, 'r-i': 0.38},
+        calib: 'AB',
+        sun: true
+    },
+    'Fornjot|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-R': 1.40},
+        calib: 'Vega',
+        sun: true
+    },
+    'Hyrrokkin|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-R': 1.23},
+        calib: 'Vega',
+        sun: true
+    },
+    'Hyrrokkin|Pena2022': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'CTIO_DECam',
+        indices: {'g-r': 0.50, 'r-i': 0.34},
+        calib: 'AB',
+        sun: true
+    },
+    'Tarqeq|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-R': 1.37},
+        calib: 'Vega',
+        sun: true
+    },
+    'S/2007 S 2|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-R': 1.37},
+        calib: 'Vega',
+        sun: true
+    },
+    'Kari|Pena2022': {
+        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        system: 'CTIO_DECam',
+        indices: {'g-r': 0.31, 'r-i': 0.53},
+        calib: 'AB',
+        sun: true
+    },
+
+    // Uranian small irregulars
+    'Caliban|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Uranian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.81, 'V-R': 0.47},
+        calib: 'Vega',
+        sun: true
+    },
+    'Sycorax|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Uranian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.81, 'V-R': 0.54},
+        calib: 'Vega',
+        sun: true
+    },
+    'Prospero|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Uranian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.81, 'V-R': 0.51},
+        calib: 'Vega',
+        sun: true
+    },
+    'Setebos|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Uranian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.78, 'V-R': 0.49},
+        calib: 'Vega',
+        sun: true
+    },
+    'Stephano|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Uranian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.97, 'V-R': 0.66},
+        calib: 'Vega',
+        sun: true
+    },
+
+    // Neptunian small irregulars
+    'Halimede|Graykowski2018': {
+        tags: ['Solar system', 'moon', 'Neptunian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.89, 'V-R': 0.56},
+        calib: 'Vega',
+        sun: true
+    },
+}

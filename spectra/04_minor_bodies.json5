@@ -1,0 +1,3782 @@
+{
+    // Common references, used in several places
+    'SMASS': [
+        'SMASS: Small Main-Belt Asteroid Spectroscopic Survey',
+        'http://smass.mit.edu/smass.html'
+    ],
+    'MBOSS': [
+        'Minor Bodies in the Outer Solar System: Magnitudes and Colours',
+        'http://www.eso.org/~ohainaut/MBOSS/', 'http://www.eso.org/~ohainaut/MBOSS/mbossClasses.txt'
+    ],
+    'MITHNEOS': [
+        'MITHNEOS MIT-Hawaii Near-Earth Object Spectroscopic Survey',
+        'http://smass.mit.edu/minus.html'
+    ],
+    'Markwardt2023': [
+        'Photometric Survey of neptune trojan Asteroids. I. The Color Distribution',
+        'DOI: 10.3847/PSJ/ace528', 'https://iopscience.iop.org/article/10.3847/PSJ/ace528'
+    ],
+    'Thirouin2019': [
+        'Colors of Trans-Neptunian Contact Binaries',
+        'DOI: 10.3847/1538-3881/ab27bc', 'https://iopscience.iop.org/article/10.3847/1538-3881/ab27bc'
+    ],
+    'Boehnhardt2014': [
+        'Photometry of Transneptunian Objects for the Herschel Key Program ‘TNOs are Cool’',
+        'DOI: 10.1007/s11038-014-9450-x', 'https://link.springer.com/article/10.1007/s11038-014-9450-x'
+    ],
+    'Lorenzi2016': [
+        'The Spectrum of Pluto, 0.40 - 0.93 um I. Secular and longitudinal distribution of ices and complex organics',
+        'DOI: 10.1051/0004-6361/201527281', 'https://arxiv.org/abs/1509.00417'
+    ],
+    
+    '(1) Ceres|SMASS': {
+        tags: ['featured', 'SMASS', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000001.2.txtU',
+        scale: ['Generic_Bessell.V', 0.09], // geometric albedo
+    },
+    '(2) Pallas|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000002.2.txtU',
+        scale: ['Generic_Bessell.V', 0.155], // albedo from Vernazza et al. (2021)
+    },
+    '(3) Juno|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000003.2.txtU',
+        scale: ['Generic_Bessell.V', 0.202], // albedo from Vernazza et al. (2021)
+    },
+    '(4) Vesta|SMASS': {
+        tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000004.2.txtU',
+        scale: ['Generic_Bessell.V', 0.423], // geometric albedo
+    },
+    '(7) Iris|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000007.2.txtU',
+        scale: ['Generic_Bessell.V', 0.279], // albedo from Vernazza et al. (2021)
+    },
+	'(9) Metis|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000009.sp75.txtU',
+        scale: ['Generic_Bessell.V', 0.18], // albedo from Vernazza et al. (2021)
+    },
+    '(10) Hygiea|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000010.2.txtU',
+        scale: ['Generic_Bessell.V', 0.063], // albedo from Vernazza et al. (2021)
+    },
+    '(13) Egeria|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000013.2.txtU',
+        scale: ['Generic_Bessell.V', 0.087], // albedo from Vernazza et al. (2021)
+    },
+    '(15) Eunomia|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000015.2.txtU',
+        scale: ['Generic_Bessell.V', 0.187], // albedo from Vernazza et al. (2021)
+    },
+    '(16) Psyche|SMASS': {
+        tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000016.2.txtU',
+        scale: ['Generic_Bessell.V', 0.16], // albedo from Shepard et al. (2021)
+    },
+    '(16) Psyche:B|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt', 'surface feature'],
+        file: 'spectra/files/SMASS/a000016.2.txtU',
+        scale: ['Generic_Bessell.V', 0.1888]
+    },
+    '(16) Psyche:D|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt', 'surface feature'],
+        file: 'spectra/files/SMASS/a000016.2.txtU',
+        scale: ['Generic_Bessell.V', 0.128]
+    },
+    '(19) Fortuna|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000019.2.txtU',
+        scale: ['Generic_Bessell.V', 0.056], // albedo from Vernazza et al. (2021)
+    },
+    '(21) Lutetia|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000021.2.txtU',
+        scale: ['Generic_Bessell.V', 0.073], // spherical albedo from Sierks et al. (2011), https://dspace.mit.edu/bitstream/handle/1721.1/110553/Sierks_2011_open_access.pdf
+    },
+    '(22) Kalliope|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000022.2.txtU',
+        scale: ['Generic_Bessell.V', 0.198], // albedo from Vernazza et al. (2021)
+    },
+    '(24) Themis|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000024.2.txtU',
+        scale: ['Generic_Bessell.V', 0.06], // albedo from Vernazza et al. (2021)
+    },
+    '(29) Amphitrite|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000029.2.txtU',
+        scale: ['Generic_Bessell.V', 0.194], // albedo from Vernazza et al. (2021)
+    },
+    '(31) Euphrosyne|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000031.2.txtU',
+        scale: ['Generic_Bessell.V', 0.05], // albedo from Vernazza et al. (2021)
+    },
+    '(41) Daphne|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000041.2.txtU',
+        scale: ['Generic_Bessell.V', 0.052], // albedo from Vernazza et al. (2021)
+    },
+    '(45) Eugenia|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000045.2.txtU',
+        scale: ['Generic_Bessell.V', 0.065], // albedo from Vernazza et al. (2021)
+    },
+    '(48) Doris|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000048.2.txtU',
+        scale: ['Generic_Bessell.V', 0.066], // albedo from Vernazza et al. (2021)
+    },
+    '(52) Europa|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000052.2.txtU',
+        scale: ['Generic_Bessell.V', 0.052], // albedo from Vernazza et al. (2021)
+    },
+    '(65) Cybele|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000065.2.txtU',
+    },
+    '(87) Sylvia|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000087.2.txtU',
+        scale: ['Generic_Bessell.V', 0.04], // albedo from Vernazza et al. (2021)
+    },
+    '(88) Thisbe|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000088.2.txtU',
+        scale: ['Generic_Bessell.V', 0.057], // albedo from Vernazza et al. (2021)
+    },
+    '(90) Antiope|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000090.2.txtU',
+    },
+    '(93) Minerva|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000093.2.txtU',
+    },
+    '(94) Aurora|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000094.2.txtU',
+    },
+    '(107) Camilla|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000107.2.txtU',
+    },
+    '(121) Hermione|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000121.2.txtU',
+    },
+    '(130) Elektra|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000130.2.txtU',
+        scale: ['Generic_Bessell.V', 0.067], // albedo from Vernazza et al. (2021)
+    },
+    '(216) Kleopatra|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000216.2.txtU',
+        scale: ['Generic_Bessell.V', 0.152], // albedo from Vernazza et al. (2021)
+    },
+    'Veverka1996': [
+        'Dactyl: Galileo Observations of Ida’s Satellite',
+        'DOI: 10.1006/icar.1996.0045', 'https://www.sciencedirect.com/science/article/pii/S0019103596900457'
+    ],
+    '(243) Ida:B|Veverka1996': {
+        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
+        br: [0.756, 0.892, 0.978, 1.000, 0.936, 0.917],
+        sd: 0.018,
+        scale: ['Galileo_SSI.Green', 0.217], // ±0.026, normal albedo of Terrain B from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
+    },
+    '(243) Ida:D|Veverka1996': {
+        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
+        br: [0.690, 0.856, 0.956, 1.000, 0.979, 0.965],
+        sd: 0.018,
+        scale: ['Galileo_SSI.Green', 0.204], // ±0.016, normal albedo of Terrain A from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
+    },
+    'Dactyl|Veverka1996': {
+        tags: ['featured', 'Solar system', 'moon', 'minor body', 'asteroid', 'main belt'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
+        br: [0.700, 0.894, 0.992, 1.000, 0.909, 0.882],
+        sd: 0.018,
+        scale: ['Galileo_SSI.Clear', 0.197], // ±0.038, normal albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
+    },
+    '(243) Ida|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000243.2.txtU',
+        scale: ['Galileo_SSI.Green', 0.069], // spherical albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Table VIII
+    },
+    'Dactyl|Veverka1996': {
+        tags: ['featured', 'Solar system', 'moon', 'minor body', 'asteroid', 'main belt'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
+        br: [0.700, 0.894, 0.992, 1.000, 0.909, 0.882],
+        sd: 0.018,
+        scale: ['Galileo_SSI.Clear', 0.063], // spherical albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Table VIII
+    },
+    '(253) Mathilde|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000253.2.txtU',
+        scale: ['Generic_Bessell.V', 0.013], // spherical albedo from Clark et al. (1999), https://ui.adsabs.harvard.edu/abs/1999Icar..140...53C/abstract
+    },
+    '(269) Justitia|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000269.2.txtU',
+        scale: ['Generic_Bessell.V', 0.061], // albedo from JPL Small-Body Database
+    },
+    'deLeon2010': [
+        'Observations, compositional, and physical characterization of near-Earth and Mars-crosser asteroids from a spectroscopic survey',
+        'DOI: 10.1051/0004-6361/200913852', 'https://ui.adsabs.harvard.edu/abs/2010A%26A...517A..23D/abstract'
+    ],
+    '(433) Eros|deLeon2010': { tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Amor'],
+        nm_range: [350, 890, 5],
+        br: [0.39114, 0.40755, 0.43474, 0.48806, 0.49886, 0.51646, 0.49042, 0.44175, 0.53512, 0.55996, 0.62863, 0.6198, 0.67636, 0.66499, 0.68589, 0.67764,
+            0.68227, 0.73805, 0.7302, 0.76963, 0.7911, 0.8021, 0.8124, 0.81771, 0.82751, 0.8589, 0.87197, 0.89604, 0.89299, 0.90126, 0.91716, 0.91591, 0.91854,
+            0.92926, 0.93106, 0.95902, 0.96679, 0.97107, 0.96876, 0.98038, 1.0, 0.9954, 0.98526, 1.00648, 0.98666, 1.01316, 1.01612, 1.02944, 1.02794, 1.05006,
+            1.0472, 1.05417, 1.06109, 1.05626, 1.06517, 1.0627, 1.0777, 1.08487, 1.08937, 1.08957, 1.10265, 1.1198, 1.11823, 1.12239, 1.12993, 1.1458, 1.13856,
+            1.12816, 1.13752, 1.14195, 1.12574, 1.14946, 1.13265, 1.17224, 1.12637, 1.13412, 1.15489, 1.16516, 1.13524, 1.13512, 1.16729, 1.19448, 1.21084,
+            1.15377, 1.12806, 1.17343, 1.21881, 1.14669, 1.14314, 1.14373, 1.16095, 1.09179, 1.0755, 1.13114, 1.16251, 1.21117, 1.13878, 1.20665, 1.0951, 1.047,
+            1.00354, 0.9945, 1.01803, 1.14228, 1.05281, 1.18387, 1.09958, 1.16424, 0.91067],
+        scale: ['Generic_Bessell.V', 0.093], // spherical albedo from Li et al. (2004), https://ui.adsabs.harvard.edu/abs/2004Icar..172..415L/abstract
+    },
+    '(433) Eros|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Amor'],
+        file: 'spectra/files/SMASS/a000433.8.txtU',
+        scale: ['Generic_Bessell.V', 0.093], // spherical albedo from Li et al. (2004), https://ui.adsabs.harvard.edu/abs/2004Icar..172..415L/abstract
+    },
+    '(511) Davida|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000511.2.txtU',
+        scale: ['Generic_Bessell.V', 0.063], // albedo from Vernazza et al. (2021)
+    },
+    '(704) Interamnia|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000704.2.txtU',
+        scale: ['Generic_Bessell.V', 0.067], // albedo from Vernazza et al. (2021)
+    },
+    '(944) Hidalgo|MITHNEOS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        file: 'spectra/files/SMASS/a000944.sp31.txtU'
+    },
+    'Helfenstein1994': [
+        'Galileo Photometry of Asteroid 951 Gaspra',
+        'DOI: 10.1006/icar.1994.1005', 'https://www.sciencedirect.com/science/article/pii/S0019103584710050'
+    ],
+    '(951) Gaspra|Helfenstein1994': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
+        br: [0.17, 0.23, 0.26, 0.27, 0.26, 0.26],
+        sd: [0.05, 0.06, 0.07, 0.07, 0.07, 0.06],
+        albedo: true, // global mean normal albedo from the Table VI
+    },
+    '(951) Gaspra:B|Helfenstein1994': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
+        br: [0.19, 0.25, 0.27, 0.28, 0.27, 0.26],
+        sd: [0.03, 0.06, 0.06, 0.04, 0.05, 0.05],
+        albedo: true, // normal albedo of PC2-α material from the Table VI
+    },
+    '(951) Gaspra:D|Helfenstein1994': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
+        br: [0.16, 0.22, 0.26, 0.27, 0.26, 0.26],
+        sd: [0.04, 0.04, 0.05, 0.04, 0.03, 0.02],
+        albedo: true, // normal albedo of PC2-γ material from the Table VI
+    },
+    '(951) Gaspra|SMASS': {
+        tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a000951.2.txtU',
+        scale: ['Galileo_SSI.Green', 0.11], // spherical albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Table VIII
+    },
+    '(1036) Ganymed|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Amor'],
+        file: 'spectra/files/SMASS/a001036.8.txtU',
+        scale: ['Generic_Bessell.V', 0.238], // albedo from Mainzer et al. (2016), https://ui.adsabs.harvard.edu/abs/2016PDSS..247.....M/abstract
+    },
+    '(1172) Aneas|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.727, 'V-R': 0.510, 'R-I': 0.400},
+        calib: 'Vega',
+        sun: true
+    },
+    '(1173) Anchises|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.811, 'V-R': 0.402, 'R-I': 0.403},
+        calib: 'Vega',
+        sun: true
+    },
+    '(1252) Celestia|SMASS': {
+        tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        file: 'spectra/files/SMASS/a001252.2.txtU',
+        scale: ['Generic_Bessell.V', 0.215], // albedo from Mainzer et al. (2016), https://ui.adsabs.harvard.edu/abs/2016PDSS..247.....M/abstract
+    },
+    '(1620) Geographos|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
+        file: 'spectra/files/SMASS/a001620.8.txtU',
+        scale: ['Generic_Bessell.V', 0.290], // albedo from Nugent et al. (2015), https://ui.adsabs.harvard.edu/abs/2015ApJ...814..117N/abstract
+    },
+    '(1871) Astyanax|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.716, 'V-R': 0.456, 'R-I': 0.424},
+        calib: 'Vega',
+        sun: true
+    },
+    '(2060) Chiron|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.660, 'V-R': 0.359, 'R-I': 0.324},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.076], // albedo from Braga-Ribas et al. (2023)
+    },
+    '(2060) Chiron|SMASS': {
+        tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        file: 'spectra/files/SMASS/a002060.2.txtU',
+        scale: ['Generic_Bessell.V', 0.076], // albedo from Braga-Ribas et al. (2023)
+    },
+    '(2063) Bacchus|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
+        file: 'spectra/files/SMASS/a002063.7.txtU',
+        scale: ['Generic_Bessell.V', 0.203], // albedo from JPL Small-Body Database
+    },
+    '(2223) Sarpedon|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.753, 'V-R': 0.465, 'R-I': 0.440},
+        calib: 'Vega',
+        sun: true
+    },
+    '(2357) Phereclos|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.718, 'V-R': 0.427, 'R-I': 0.463},
+        calib: 'Vega',
+        sun: true
+    },
+    'Hicks2004': [
+        '(2867) Steins',
+        'https://ui.adsabs.harvard.edu/abs/2004IAUC.8315....3H/abstract'
+    ],
+    '(2867) Steins|Hicks2004': {
+        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.798, 'V-R': 0.513, 'R-I': 0.440},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Rosetta_OSIRIS_WAC.OI', 0.24], // spherical albedo from Spjuth et al. (2012), https://ui.adsabs.harvard.edu/abs/2012Icar..221.1101S/abstract
+    },
+    '(3200) Phaethon|SMASS': {
+        tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
+        file: 'spectra/files/SMASS/a003200.8.txtU',
+        scale: ['Generic_Bessell.V', 0.1066], // albedo from JPL Small-Body Database
+    },
+    '(3548) Eurybates|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.677, 'V-R': 0.352, 'R-I': 0.339},
+        calib: 'Vega',
+        sun: true
+    },
+    '(4035) 1986 WD|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.752, 'V-R': 0.484, 'R-I': 0.451},
+        calib: 'Vega',
+        sun: true
+    },
+    '(4179) Toutatis|MITHNEOS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
+        file: 'spectra/files/SMASS/a004179.sp30.txtU',
+        scale: ['Generic_Bessell.V', 0.185], // geometric albedo from Bach et al. (2019), https://ui.adsabs.harvard.edu/abs/2019JKAS...52...71B/abstract
+    },
+    '(4829) Sergestus|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.851, 'V-R': 0.420, 'R-I': 0.372},
+        calib: 'Vega',
+        sun: true
+    },
+    '(5130) Ilioneus|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.763, 'V-R': 0.481, 'R-I': 0.424},
+        calib: 'Vega',
+        sun: true
+    },
+    '(5145) Pholus|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.261, 'V-R': 0.791, 'R-I': 0.818},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.155], // albedo from Duffard et al. (2014)
+    },
+    '(5145) Pholus|SMASS': {
+        tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        file: 'spectra/files/SMASS/a005145.1.txtA',
+        scale: ['Generic_Bessell.V', 0.155], // albedo from Duffard et al. (2014)
+    },
+    '(5511) Cloanthus|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.906, 'V-R': 0.442, 'R-I': 0.526},
+        calib: 'Vega',
+        sun: true
+    },
+    '(6489) Golevka|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
+        file: 'spectra/files/SMASS/a006489visir8.visir.txtU',
+        scale: ['Generic_Bessell.V', 0.151], // albedo from JPL Small-Body Database
+    },
+    '(6545) 1986 TR6|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.734, 'V-R': 0.499, 'R-I': 0.436},
+        calib: 'Vega',
+        sun: true
+    },
+    '(6998) Tithonus|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.787, 'V-R': 0.455, 'R-I': 0.438},
+        calib: 'Vega',
+        sun: true
+    },
+    '(7066) Nessus|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.090, 'V-R': 0.763, 'R-I': 0.689},
+        calib: 'Vega',
+        sun: true
+    },
+    '(7352) 1994 CO|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.713, 'V-R': 0.417, 'R-I': 0.397},
+        calib: 'Vega',
+        sun: true
+    },
+    '(8405) Asbolus|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.738, 'V-R': 0.508, 'R-I': 0.505},
+        calib: 'Vega',
+        sun: true
+    },
+    '(9030) 1989 UX5|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.887, 'V-R': 0.493, 'R-I': 0.480},
+        calib: 'Vega',
+        sun: true
+    },
+    '(9430) Erichthonio|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.742, 'V-R': 0.488, 'R-I': 0.456},
+        calib: 'Vega',
+        sun: true
+    },
+    '(9818) Eurymachos|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.673, 'V-R': 0.339, 'R-I': 0.355},
+        calib: 'Vega',
+        sun: true
+    },
+    '(9969) Braille|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'Mars-crosser'],
+        file: 'spectra/files/SMASS/a009969.4.txtU',
+        scale: ['Generic_Bessell.V', 0.34], // geometric albedo from Buratti et al. (2004), https://www.lpl.arizona.edu/~yelle/eprints/Buratti04a.pdf
+    },
+    '(10199) Chariklo|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.802, 'V-R': 0.491, 'R-I': 0.519},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.037], // albedo from Leiva et al. (2017)
+    },
+    '(10199) Chariklo|SMASS': {
+        tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        file: 'spectra/files/SMASS/a010199.2.txtU',
+        scale: ['Generic_Bessell.V', 0.037], // albedo from Leiva et al. (2017); ellipsoid model
+    },
+    '(10370) Hylonome|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.690, 'V-R': 0.469, 'R-I': 0.496},
+        calib: 'Vega',
+        sun: true
+    },
+    '(11089) 1994 CS8|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.689, 'V-R': 0.423, 'R-I': 0.384},
+        calib: 'Vega',
+        sun: true
+    },
+    '(11351) Leucus|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.739, 'V-R': 0.498, 'R-I': 0.402},
+        calib: 'Vega',
+        sun: true
+    },
+    '(11488) 1988 RM11|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.777, 'V-R': 0.436, 'R-I': 0.420},
+        calib: 'Vega',
+        sun: true
+    },
+    '(11663) 1997 GO24|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.837, 'V-R': 0.409, 'R-I': 0.463},
+        calib: 'Vega',
+        sun: true
+    },
+    '(12917) 1998 TG16|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.724, 'V-R': 0.537, 'R-I': 0.410},
+        calib: 'Vega',
+        sun: true
+    },
+    '(12921) 1998 WZ5|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.673, 'V-R': 0.403, 'R-I': 0.380},
+        calib: 'Vega',
+        sun: true
+    },
+    '(13463) Antiphos|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.692, 'V-R': 0.449, 'R-I': 0.412},
+        calib: 'Vega',
+        sun: true
+    },
+    '(14707) 2000 CC20|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.752, 'V-R': 0.412, 'R-I': 0.385},
+        calib: 'Vega',
+        sun: true
+    },
+    '(15094) Polymele|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.652, 'V-R': 0.477, 'R-I': 0.322},
+        calib: 'Vega',
+        sun: true
+    },
+    '(15502) 1999 NV27|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.766, 'V-R': 0.445, 'R-I': 0.430},
+        calib: 'Vega',
+        sun: true
+    },
+    '(15504) 1999 RG33|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.817, 'V-R': 0.495, 'R-I': 0.350},
+        calib: 'Vega',
+        sun: true
+    },
+    '(15535) 2000 AT177|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.739, 'V-R': 0.470, 'R-I': 0.461},
+        calib: 'Vega',
+        sun: true
+    },
+    '(15760) Albion|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.869, 'V-R': 0.707, 'R-I': 0.651},
+        calib: 'Vega',
+        sun: true
+    },
+    '(15788) 1993 SB|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.802, 'V-R': 0.475, 'R-I': 0.514},
+        calib: 'Vega',
+        sun: true
+    },
+    '(15789) 1993 SC|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.045, 'V-R': 0.688, 'R-I': 0.697},
+        calib: 'Vega',
+        sun: true
+    },
+    '(15810) Arawn|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.010, 'V-R': 0.632, 'R-I': 0.538},
+        calib: 'Vega',
+        sun: true
+    },
+    '(15820) 1994 TB|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.107, 'V-R': 0.697, 'R-I': 0.739},
+        calib: 'Vega',
+        sun: true
+    },
+    '(15874) 1996 TL66|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.687, 'V-R': 0.369, 'R-I': 0.370},
+        calib: 'Vega',
+        sun: true
+    },
+    '(15875) 1996 TP66|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.031, 'V-R': 0.655, 'R-I': 0.673},
+        calib: 'Vega',
+        sun: true
+    },
+    '(15883) 1997 CR29|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.750, 'V-R': 0.538, 'R-I': 0.620},
+        calib: 'Vega',
+        sun: true
+    },
+    '(15977) 1998 MA11|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.748, 'V-R': 0.465, 'R-I': 0.441},
+        calib: 'Vega',
+        sun: true
+    },
+    '(16684) 1994 JQ1|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.134, 'V-R': 0.736, 'R-I': 0.650},
+        calib: 'Vega',
+        sun: true
+    },
+    '(17416) 1988 RR10|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.742, 'V-R': 0.488, 'R-I': 0.498},
+        calib: 'Vega',
+        sun: true
+    },
+    '(18060) 1999 XJ156|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.758, 'V-R': 0.412, 'R-I': 0.364},
+        calib: 'Vega',
+        sun: true
+    },
+    '(18137) 2000 OU30|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.733, 'V-R': 0.496, 'R-I': 0.409},
+        calib: 'Vega',
+        sun: true
+    },
+    '(18268) Dardanos|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.795, 'V-R': 0.529, 'R-I': 0.451},
+        calib: 'Vega',
+        sun: true
+    },
+    '(18493) Demoleon|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.703, 'V-R': 0.395, 'R-I': 0.380},
+        calib: 'Vega',
+        sun: true
+    },
+    '(18940) 2000 QV49|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.709, 'V-R': 0.465, 'R-I': 0.429},
+        calib: 'Vega',
+        sun: true
+    },
+    '(19255) 1994 VK8|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.010, 'V-R': 0.659, 'R-I': 0.490},
+        calib: 'Vega',
+        sun: true
+    },
+    '(19299) 1996 SZ4|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.754, 'V-R': 0.522, 'R-I': 0.446},
+        calib: 'Vega',
+        sun: true
+    },
+    '(19308) 1996 TO66|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.671, 'V-R': 0.389, 'R-I': 0.356},
+        calib: 'Vega',
+        sun: true
+    },
+    '(19521) Chaos|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.932, 'V-R': 0.608, 'R-I': 0.571},
+        calib: 'Vega',
+        sun: true
+    },
+    '(20000) Varuna|MBOSS': {
+        tags: ['featured', 'MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.906, 'V-R': 0.626, 'R-I': 0.628},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.172], // albedo from fyr02’s sheet
+    },
+    '(20108) 1995 QZ9|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.880, 'V-R': 0.515},
+        calib: 'Vega',
+        sun: true
+    },
+    '(20738) 1999 XG191|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.776, 'V-R': 0.472, 'R-I': 0.467},
+        calib: 'Vega',
+        sun: true
+    },
+    '(23549) Epicles|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.800, 'V-R': 0.485, 'R-I': 0.387},
+        calib: 'Vega',
+        sun: true
+    },
+    '(23694) 1997 KZ3|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.723, 'V-R': 0.474, 'R-I': 0.418},
+        calib: 'Vega',
+        sun: true
+    },
+    '(24233) 1999 XD94|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.704, 'V-R': 0.481, 'R-I': 0.418},
+        calib: 'Vega',
+        sun: true
+    },
+    '(24341) 2000 AJ87|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.713, 'V-R': 0.369, 'R-I': 0.390},
+        calib: 'Vega',
+        sun: true
+    },
+    '(24380) 2000 AA160|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.734, 'V-R': 0.391, 'R-I': 0.336},
+        calib: 'Vega',
+        sun: true
+    },
+    '(24390) 2000 AD177|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.700, 'V-R': 0.513, 'R-I': 0.462},
+        calib: 'Vega',
+        sun: true
+    },
+    '(24420) 2000 BU22|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.937, 'V-R': 0.441, 'R-I': 0.304},
+        calib: 'Vega',
+        sun: true
+    },
+    '(24426) 2000 CR12|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.717, 'V-R': 0.414, 'R-I': 0.424},
+        calib: 'Vega',
+        sun: true
+    },
+    '(24444) 2000 OP32|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.712, 'V-R': 0.437, 'R-I': 0.409},
+        calib: 'Vega',
+        sun: true
+    },
+    '(24452) 2000 QU167|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.872, 'V-R': 0.441, 'R-I': 0.406},
+        calib: 'Vega',
+        sun: true
+    },
+    '(24467) 2000 SS165|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.927, 'V-R': 0.460, 'R-I': 0.513},
+        calib: 'Vega',
+        sun: true
+    },
+    '(24835) 1995 SM55|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.652, 'V-R': 0.357, 'R-I': 0.356},
+        calib: 'Vega',
+        sun: true
+    },
+    '(24952) 1997 QJ4|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.763, 'V-R': 0.431, 'R-I': 0.396},
+        calib: 'Vega',
+        sun: true
+    },
+    '(24978) 1998 HJ151|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.110, 'V-R': 0.710},
+        calib: 'Vega',
+        sun: true
+    },
+    'Lowry2005': [
+        'Physical properties of Asteroid (25143) Itokawa — Target of the Hayabusa sample return mission',
+        'DOI: 10.1016/j.icarus.2005.02.002', 'https://ui.adsabs.harvard.edu/abs/2005Icar..176..408L/abstract'
+    ],
+    '(25143) Itokawa|Lowry2005': { tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
+        nm_range: [325, 1000, 25],
+        br: [0.388, 0.568, 0.676, 0.773, 0.824, 0.856, 0.888, 0.914, 0.964, 1.0, 1.036, 1.058, 1.076, 1.094, 1.122, 1.140, 1.147, 1.144, 1.129, 1.101,
+            1.068, 1.029, 1.0, 0.978, 0.975, 0.946, 0.917, 0.935],
+        scale: ['Generic_Bessell.V', 0.033], // spherical albedo from Tatsumi et al. (2018), https://kar.kent.ac.uk/66973/1/Lowry_Vis-NIR%20Disk-integrated%20Photometry.pdf
+    },
+    '(25347) 1999 RQ116|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.618, 'V-R': 0.488, 'R-I': 0.461},
+        calib: 'Vega',
+        sun: true
+    },
+    '(26181) 1996 GQ21|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.999, 'V-R': 0.697, 'R-I': 0.694},
+        calib: 'Vega',
+        sun: true
+    },
+    '(26308) 1998 SM165|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.989, 'V-R': 0.641, 'R-I': 0.666},
+        calib: 'Vega',
+        sun: true
+    },
+    '(26375) 1999 DE9|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.967, 'V-R': 0.579, 'R-I': 0.568},
+        calib: 'Vega',
+        sun: true
+    },
+    '(28958) 2001 CQ42|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.730, 'V-R': 0.364, 'R-I': 0.230},
+        calib: 'Vega',
+        sun: true
+    },
+    '(28978) Ixion|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.018, 'V-R': 0.605, 'R-I': 0.580},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.108], // albedo from Verbiscer et al. (2022)
+    },
+    '(29981) 1999 TD10|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.808, 'V-R': 0.502, 'R-I': 0.511},
+        calib: 'Vega',
+        sun: true
+    },
+    '(30698) Hippokoon|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.715, 'V-R': 0.458, 'R-I': 0.412},
+        calib: 'Vega',
+        sun: true
+    },
+    '(31820) 1999 RT186|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.889, 'V-R': 0.520, 'R-I': 0.396},
+        calib: 'Vega',
+        sun: true
+    },
+    '(31821) 1999 RK225|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.980, 'V-R': 0.440, 'R-I': 0.461},
+        calib: 'Vega',
+        sun: true
+    },
+    '(31824) Elatus|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.020, 'V-R': 0.620, 'R-I': 0.630},
+        calib: 'Vega',
+        sun: true
+    },
+    '(32430) 2000 RQ83|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.772, 'V-R': 0.474, 'R-I': 0.425},
+        calib: 'Vega',
+        sun: true
+    },
+    '(32532) Thereus|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.764, 'V-R': 0.501, 'R-I': 0.479},
+        calib: 'Vega',
+        sun: true
+    },
+    '(32615) 2001 QU277|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.807, 'V-R': 0.452, 'R-I': 0.474},
+        calib: 'Vega',
+        sun: true
+    },
+    '(32794) 1989 UE5|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.923, 'V-R': 0.393, 'R-I': 0.486},
+        calib: 'Vega',
+        sun: true
+    },
+    '(32929) 1995 QY9|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.740, 'V-R': 0.561},
+        calib: 'Vega',
+        sun: true
+    },
+    '(33001) 1997 CU29|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.157, 'V-R': 0.645, 'R-I': 0.634},
+        calib: 'Vega',
+        sun: true
+    },
+    '(33128) 1998 BU48|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.044, 'V-R': 0.631, 'R-I': 0.644},
+        calib: 'Vega',
+        sun: true
+    },
+    '(33340) 1998 VG44|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.955, 'V-R': 0.555, 'R-I': 0.598},
+        calib: 'Vega',
+        sun: true
+    },
+    '(34785) 2001 RG87|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.728, 'V-R': 0.386, 'R-I': 0.419},
+        calib: 'Vega',
+        sun: true
+    },
+    '(35671) 1998 SN165|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.712, 'V-R': 0.444, 'R-I': 0.437},
+        calib: 'Vega',
+        sun: true
+    },
+    '(38083) Rhadamanth|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.650, 'V-R': 0.527, 'R-I': 0.412},
+        calib: 'Vega',
+        sun: true
+    },
+    '(38084) 1999 HB12|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.893, 'V-R': 0.544, 'R-I': 0.481},
+        calib: 'Vega',
+        sun: true
+    },
+    '(38628) Huya|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.963, 'V-R': 0.609, 'R-I': 0.593},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.079], // geometric albedo from Santos-Sanz et al. (2022)
+    },
+    '(39285) 2001 BP75|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.810, 'V-R': 0.381, 'R-I': 0.291},
+        calib: 'Vega',
+        sun: true
+    },
+    '(40314) 1999 KR16|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.123, 'V-R': 0.738, 'R-I': 0.750},
+        calib: 'Vega',
+        sun: true
+    },
+    '(42301) 2001 UR163|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.290, 'V-R': 0.839, 'R-I': 0.673},
+        calib: 'Vega',
+        sun: true
+    },
+    '(42355) Typhon|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.758, 'V-R': 0.518, 'R-I': 0.378},
+        calib: 'Vega',
+        sun: true
+    },
+    '(44594) 1999 OX3|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.138, 'V-R': 0.708, 'R-I': 0.640},
+        calib: 'Vega',
+        sun: true
+    },
+    '(47171) Lempo|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.029, 'V-R': 0.693, 'R-I': 0.619},
+        calib: 'Vega',
+        sun: true
+    },
+    '(47932) 2000 GN171|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.960, 'V-R': 0.607, 'R-I': 0.617},
+        calib: 'Vega',
+        sun: true
+    },
+    '(47967) 2000 SL298|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.899, 'V-R': 0.489, 'R-I': 0.476},
+        calib: 'Vega',
+        sun: true
+    },
+    '(48249) 2001 SY345|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.758, 'V-R': 0.530, 'R-I': 0.420},
+        calib: 'Vega',
+        sun: true
+    },
+    '(48252) 2001 TL212|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.949, 'V-R': 0.467, 'R-I': 0.436},
+        calib: 'Vega',
+        sun: true
+    },
+    '(48639) 1995 TL8|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.008, 'V-R': 0.621, 'R-I': 0.551},
+        calib: 'Vega',
+        sun: true
+    },
+    '(49036) Pelion|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.746, 'V-R': 0.556, 'R-I': 0.368},
+        calib: 'Vega',
+        sun: true
+    },
+    '(50000) Quaoar|MBOSS': {
+        tags: ['featured', 'MBOSS', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.958, 'V-R': 0.650, 'R-I': 0.610},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.124], // albedo from Pereira et al. 2023
+    },
+    '(51359) 2000 SC17|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.864, 'V-R': 0.447, 'R-I': 0.438},
+        calib: 'Vega',
+        sun: true
+    },
+    '(52747) 1998 HM151|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.930, 'V-R': 0.620},
+        calib: 'Vega',
+        sun: true
+    },
+    '(52872) Okyrhoe|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.743, 'V-R': 0.495, 'R-I': 0.480},
+        calib: 'Vega',
+        sun: true
+    },
+    '(52975) Cyllarus|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.096, 'V-R': 0.680, 'R-I': 0.669},
+        calib: 'Vega',
+        sun: true
+    },
+    '(53469) 2000 AX8|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.663, 'V-R': 0.356, 'R-I': 0.361},
+        calib: 'Vega',
+        sun: true
+    },
+    '(54598) Bienor|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.711, 'V-R': 0.476, 'R-I': 0.400},
+        calib: 'Vega',
+        sun: true
+    },
+    '(55565) 2002 AW197|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.915, 'V-R': 0.589, 'R-I': 0.581},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.112], // albedo from Vilenius et al. (2014)
+    },
+    '(55576) Amycus|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.111, 'V-R': 0.705, 'R-I': 0.666},
+        calib: 'Vega',
+        sun: true
+    },
+    '(55636) 2002 TX300|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.679, 'V-R': 0.359, 'R-I': 0.323},
+        calib: 'Vega',
+        sun: true
+    },
+    '(55637) 2002 UX25|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.979, 'V-R': 0.552},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.107], // albedo from Lellouch et al. (2013)
+    },
+    '(55638) 2002 VE95|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.094, 'V-R': 0.733, 'R-I': 0.760},
+        calib: 'Vega',
+        sun: true
+    },
+    '(56968) 2000 SA92|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.986, 'V-R': 0.494, 'R-I': 0.509},
+        calib: 'Vega',
+        sun: true
+    },
+    '(58534) Logos|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.990, 'V-R': 0.729, 'R-I': 0.602},
+        calib: 'Vega',
+        sun: true
+    },
+    '(59358) 1999 CL158|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.800, 'V-R': 0.390, 'R-I': 0.470},
+        calib: 'Vega',
+        sun: true
+    },
+    '(60454) 2000 CH105|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.019, 'V-R': 0.643, 'R-I': 0.583},
+        calib: 'Vega',
+        sun: true
+    },
+    '(60458) 2000 CM114|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.730, 'V-R': 0.500},
+        calib: 'Vega',
+        sun: true
+    },
+    '(60558) Echeclus|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.841, 'V-R': 0.502, 'R-I': 0.486},
+        calib: 'Vega',
+        sun: true
+    },
+    '(60608) 2000 EE173|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.665, 'V-R': 0.488, 'R-I': 0.543},
+        calib: 'Vega',
+        sun: true
+    },
+    '(60620) 2000 FD8|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.151, 'V-R': 0.664, 'R-I': 0.648},
+        calib: 'Vega',
+        sun: true
+    },
+    '(60621) 2000 FE8|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.750, 'V-R': 0.480, 'R-I': 0.500},
+        calib: 'Vega',
+        sun: true
+    },
+    '(63252) 2001 BL41|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.718, 'V-R': 0.509, 'R-I': 0.381},
+        calib: 'Vega',
+        sun: true
+    },
+    '(65150) 2002 CA126|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.651, 'V-R': 0.377, 'R-I': 0.407},
+        calib: 'Vega',
+        sun: true
+    },
+    '(65225) 2002 EK44|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.693, 'V-R': 0.401, 'R-I': 0.334},
+        calib: 'Vega',
+        sun: true
+    },
+    '(65407) 2002 RP120|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.846, 'V-R': 0.489, 'R-I': 0.484},
+        calib: 'Vega',
+        sun: true
+    },
+    '(65489) Ceto|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.879, 'V-R': 0.547, 'R-I': 0.411},
+        calib: 'Vega',
+        sun: true
+    },
+    '(65803) Didymos|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
+        file: 'spectra/files/SMASS/au1996GT.7.txtU',
+        scale: ['Generic_Bessell.V', 0.15], // geometric albedo from Daly et al. (2023), https://ui.adsabs.harvard.edu/abs/2023Natur.616..443D/abstract
+    },
+    '(66452) 1999 OF4|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.032, 'V-R': 0.673, 'R-I': 0.601},
+        calib: 'Vega',
+        sun: true
+    },
+    '(66652) Borasisi|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.820, 'V-R': 0.646, 'R-I': 0.647},
+        calib: 'Vega',
+        sun: true
+    },
+    '(69986) 1998 WW24|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.756, 'V-R': 0.463, 'R-I': 0.659},
+        calib: 'Vega',
+        sun: true
+    },
+    '(69988) 1998 WA31|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.786, 'V-R': 0.492, 'R-I': 0.530},
+        calib: 'Vega',
+        sun: true
+    },
+    '(69990) 1998 WU31|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.720, 'V-R': 0.505, 'R-I': 0.722},
+        calib: 'Vega',
+        sun: true
+    },
+    '(73480) 2002 PN34|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.818, 'V-R': 0.514},
+        calib: 'Vega',
+        sun: true
+    },
+    '(76804) 2000 QE|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.803, 'V-R': 0.446, 'R-I': 0.443},
+        calib: 'Vega',
+        sun: true
+    },
+    '(79360) Sila-Nunam|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.055, 'V-R': 0.666, 'R-I': 0.609},
+        calib: 'Vega',
+        sun: true
+    },
+    '(79978) 1999 CC158|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.996, 'V-R': 0.611, 'R-I': 0.619},
+        calib: 'Vega',
+        sun: true
+    },
+    '(79983) 1999 DF9|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.920, 'V-R': 0.710, 'R-I': 0.650},
+        calib: 'Vega',
+        sun: true
+    },
+    '(82075) 2000 YW134|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.922, 'V-R': 0.503, 'R-I': 0.581},
+        calib: 'Vega',
+        sun: true
+    },
+    '(82155) 2001 FZ173|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.864, 'V-R': 0.546, 'R-I': 0.508},
+        calib: 'Vega',
+        sun: true
+    },
+    '(82158) 2001 FP185|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.820, 'V-R': 0.572, 'R-I': 0.458},
+        calib: 'Vega',
+        sun: true
+    },
+    '(83982) Crantor|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.105, 'V-R': 0.761, 'R-I': 0.667},
+        calib: 'Vega',
+        sun: true
+    },
+    '(84522) 2002 TC302|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.067, 'V-R': 0.655, 'R-I': 0.660},
+        calib: 'Vega',
+        sun: true
+    },
+    '(84709) 2002 VW120|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.855, 'V-R': 0.462, 'R-I': 0.548},
+        calib: 'Vega',
+        sun: true
+    },
+    '(84719) 2002 VR128|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.935, 'V-R': 0.605},
+        calib: 'Vega',
+        sun: true
+    },
+    '(84922) 2003 VS2|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.930, 'V-R': 0.590},
+        calib: 'Vega',
+        sun: true
+    },
+    '(85633) 1998 KR65|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.095, 'V-R': 0.628, 'R-I': 0.790},
+        calib: 'Vega',
+        sun: true
+    },
+    '(86047) 1999 OY3|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.726, 'V-R': 0.345, 'R-I': 0.277},
+        calib: 'Vega',
+        sun: true
+    },
+    '(86177) 1999 RY215|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.719, 'V-R': 0.358, 'R-I': 0.631},
+        calib: 'Vega',
+        sun: true
+    },
+    '(87269) 2000 OO67|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.080, 'V-R': 0.654, 'R-I': 0.593},
+        calib: 'Vega',
+        sun: true
+    },
+    '(87555) 2000 QB243|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.763, 'V-R': 0.383, 'R-I': 0.729},
+        calib: 'Vega',
+        sun: true
+    },
+    '(88269) 2001 KF77|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.080, 'V-R': 0.730},
+        calib: 'Vega',
+        sun: true
+    },
+    '(90377) Sedna|MBOSS': {
+        tags: ['featured', 'MBOSS', 'Solar system', 'planet geophysical', 'dwarf planet', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.179, 'V-R': 0.739, 'R-I': 0.654},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.399], // albedo from fyr02’s sheet
+    },
+    'deBergh2005': [
+        'The surface of the transneptunian object 90482 Orcus',
+        'https://ui.adsabs.harvard.edu/abs/2005A%26A...437.1115D/abstract'
+    ],
+    '(90482) Orcus|deBergh2005': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.68, 'V-R': 0.37, 'V-I': 0.74},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.231], // geometric albedo from Fornasier et al. (2013)
+    },
+    '(90482) Orcus|Howett2019': { // wrong reference!
+        tags: ['Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'V-I': 0.73},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.231], // geometric albedo from Fornasier et al. (2013)
+    },
+    '(90482) Orcus|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'planet geophysical', 'dwarf planet', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.670, 'V-R': 0.376, 'R-I': 0.372},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.231], // albedo from Fornasier et al. (2013)
+    },
+    'Vanth|Howett2019': { // wrong reference!
+        tags: ['Solar system', 'moon', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'V-I': 1.03},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.08], // albedo from Brown and Butler (2018)
+    },
+    'LeCorre2019': [
+        'Investigating Surface Color Variegation on Near-Earth Asteroid Bennu Using OSIRIS-REx Mapcam Data',
+        'https://ui.adsabs.harvard.edu/abs/2019LPI....50.2794L/abstract'
+    ],
+    '(90568) 2004 GV9|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.895, 'V-R': 0.520},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.0770], // albedo from Vilenius et al. (2012)
+    },
+    '(91133) 1998 HK151|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.645, 'V-R': 0.520, 'R-I': 0.390},
+        calib: 'Vega',
+        sun: true
+    },
+    '(91205) 1998 US43|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.691, 'V-R': 0.446, 'R-I': 0.347},
+        calib: 'Vega',
+        sun: true
+    },
+    '(91554) 1999 RZ215|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.771, 'V-R': 0.575, 'R-I': 0.539},
+        calib: 'Vega',
+        sun: true
+    },
+    '(95626) 2002 GZ32|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.674, 'V-R': 0.576, 'R-I': 0.538},
+        calib: 'Vega',
+        sun: true
+    },
+    '(99328) 2001 UY123|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.890, 'V-R': 0.537, 'R-I': 0.434},
+        calib: 'Vega',
+        sun: true
+    },
+    '(101955) Bennu|LeCorre2019': {
+        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
+        system: 'OSIRIS-REX_MapCam',
+        filters: ['Bf', 'Vf', 'Wf', 'Xf'],
+        br: [0.0175, 0.01736, 0.0174, 0.01727],
+        albedo: true
+    },
+    '(101955) Bennu:D|LeCorre2019': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
+        system: 'OSIRIS-REX_MapCam',
+        filters: ['Bf', 'Vf', 'Wf', 'Xf'],
+        br: [0.01604, 0.01573, 0.016, 0.01605],
+        albedo: true
+    },
+    '(105685) 2000 SC51|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.016, 'V-R': 0.444, 'R-I': 0.452},
+        calib: 'Vega',
+        sun: true
+    },
+    '(111113) 2001 VK85|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.822, 'V-R': 0.462, 'R-I': 0.558},
+        calib: 'Vega',
+        sun: true
+    },
+    '(118228) 1996 TQ66|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.186, 'V-R': 0.670, 'R-I': 0.746},
+        calib: 'Vega',
+        sun: true
+    },
+    '(118379) 1999 HC12|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.894, 'V-R': 0.490, 'R-I': 0.343},
+        calib: 'Vega',
+        sun: true
+    },
+    '(118702) 2000 OM67|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.820, 'V-R': 0.470, 'R-I': 0.590},
+        calib: 'Vega',
+        sun: true
+    },
+    '(119068) 2001 KC77|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.910, 'V-R': 0.560},
+        calib: 'Vega',
+        sun: true
+    },
+    '(119315) 2001 SQ73|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.670, 'V-R': 0.460},
+        calib: 'Vega',
+        sun: true
+    },
+    '(119951) 2002 KX14|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.050, 'V-R': 0.607},
+        calib: 'Vega',
+        sun: true
+    },
+    '(119979) 2002 WC19|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.040, 'V-R': 0.630},
+        calib: 'Vega',
+        sun: true
+    },
+    '(120061) 2003 CO1|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.743, 'V-R': 0.472, 'R-I': 0.494},
+        calib: 'Vega',
+        sun: true
+    },
+    '(120132) 2003 FY128|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.021, 'V-R': 0.614, 'R-I': 0.540},
+        calib: 'Vega',
+        sun: true
+    },
+    '(120178) 2003 OP32|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.662, 'V-R': 0.375, 'R-I': 0.305},
+        calib: 'Vega',
+        sun: true
+    },
+    '(120181) 2003 UR292|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.025, 'V-R': 0.635},
+        calib: 'Vega',
+        sun: true
+    },
+    '(120216) 2004 EW95|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.693, 'V-R': 0.375, 'R-I': 0.215},
+        calib: 'Vega',
+        sun: true
+    },
+    '(120347) Salacia|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.664, 'V-R': 0.403, 'R-I': 0.433},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.042], // albedo from Brown and Butler (2017)
+    },
+    '(120348) 2004 TY364|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.059, 'V-R': 0.601, 'R-I': 0.520},
+        calib: 'Vega',
+        sun: true
+    },
+    '(120453) 1988 RE12|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.826, 'V-R': 0.388, 'R-I': 0.483},
+        calib: 'Vega',
+        sun: true
+    },
+    '(121725) Aphidas|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.060, 'V-R': 0.648, 'R-I': 0.679},
+        calib: 'Vega',
+        sun: true
+    },
+    '(124729) 2001 SB173|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.992, 'V-R': 0.503, 'R-I': 0.424},
+        calib: 'Vega',
+        sun: true
+    },
+    '(127546) 2002 XU93|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.731, 'V-R': 0.410, 'R-I': 0.443},
+        calib: 'Vega',
+        sun: true
+    },
+    '(129772) 1999 HR11|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.920, 'V-R': 0.530, 'R-I': 0.800},
+        calib: 'Vega',
+        sun: true
+    },
+    'Bernardi2006': [ // the last observation reported
+        'Pluto New Horizons Mission — Supporting Observations for 2002 JF56 Encounter',
+        'http://smass.mit.edu/2002jf56.html'
+    ],
+    '(132524) APL|Bernardi2006': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.84, 'V-R': 0.49},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.178], // mean diameter = 2.5 km, H = 15.5
+    },
+    '(134340) Pluto|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.867, 'V-R': 0.515, 'R-I': 0.400},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.52]
+    },
+    '(134340) Pluto|Lorenzi2016': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
+        nm: [400.551, 423.678, 440.749, 458.37, 466.079, 493.062, 496.366, 499.119, 553.634, 555.837, 559.692, 582.819, 587.225, 630.727, 658.811, 
+            670.925, 680.286, 697.907, 729.846, 761.233, 762.885, 773.348, 784.912, 790.419, 795.925, 803.084, 807.489, 812.996, 816.85, 836.674],
+        br: [0.642, 0.695, 0.766, 0.799, 0.832, 0.887, 0.872, 0.902, 1.019, 1.012, 1.031, 1.056, 1.07, 1.121, 1.137, 0.735, 1.156, 1.169, 1.152, 
+            1.18, 1.157, 1.172, 1.099, 1.144, 1.118, 0.988, 1.072, 1.062, 1.135, 1.169],
+        scale: ['Generic_Bessell.V', 0.52]
+    },
+    '(134340) Pluto|Madden2018': {
+        tags: ['Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
+        nm: [410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540, 550, 560, 570, 580, 590, 600, 610, 620, 630, 640, 650, 660, 670,
+            680, 690, 700, 710, 720, 730, 740, 750, 760, 770, 780, 790, 800, 810, 820, 830, 840, 850, 860, 870, 880, 890, 900, 910, 920, 930, 992.71],
+        br: [0.31848, 0.33024, 0.34045, 0.36136, 0.38311, 0.39087, 0.40592, 0.42545, 0.43835, 0.44743, 0.4584, 0.46743, 0.48603, 0.49388, 0.50692,
+            0.51397, 0.52309, 0.53866, 0.54639, 0.55549, 0.5629, 0.56749, 0.57886, 0.58535, 0.59163, 0.59688, 0.6017, 0.60816, 0.61239, 0.61481, 0.61961,
+            0.6102, 0.60285, 0.63038, 0.63607, 0.6348, 0.63782, 0.63538, 0.63423, 0.63182, 0.63682, 0.64078, 0.64593, 0.63929, 0.63921, 0.62098, 0.54141,
+            0.60355, 0.48914, 0.56542, 0.62153, 0.62718, 0.62923, 0.53279],
+        albedo: true
+    },
+    'Verbiscer2022': [
+        'The Diverse Shapes of Dwarf Planet and Large KBO Phase Curves Observed from New Horizons',
+        'DOI: 10.3847/PSJ/ac63a6', 'https://iopscience.iop.org/article/10.3847/PSJ/ac63a6'
+    ],
+    'Charon|Verbiscer2022': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.7315, 'V-R': 0.4},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.41]
+    },
+    '(134860) 2000 OJ67|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.050, 'V-R': 0.670, 'R-I': 0.600},
+        calib: 'Vega',
+        sun: true
+    },
+    '(135182) 2001 QT322|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.710, 'V-R': 0.530},
+        calib: 'Vega',
+        sun: true
+    },
+    '(136108) Haumea|MBOSS': {
+        tags: ['featured', 'MBOSS', 'Solar system', 'planet geophysical', 'dwarf planet', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.633, 'V-R': 0.353, 'R-I': 0.330},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.66], // albedo from https://arxiv.org/abs/1904.00522
+    },
+    '(136199) Eris|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.781, 'V-R': 0.393, 'R-I': 0.363},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.957], // albedo from fyr02’s sheet
+    },
+    '(136199) Eris|Lorenzi2016': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'dwarf planet', 'minor body', 'TNO', 'detached'],
+        nm: [417.357, 479.507, 532.699, 585.89, 601.008, 604.367, 622.844, 637.962, 653.08, 656.439, 659.239, 673.236, 679.955, 692.273, 702.912, 
+            712.43, 734.267, 740.426, 747.704, 750.504, 765.062, 779.059, 788.578, 793.617, 809.295, 813.774, 826.652, 841.209, 860.246],
+        br: [0.995, 1.059, 1.084, 1.101, 1.08, 1.104, 1.111, 1.103, 1.121, 1.104, 1.11, 1.097, 1.117, 1.034, 1.121, 1.13, 1.11, 1.073, 1.11, 1.077, 
+            1.132, 1.138, 1.087, 1.126, 1.018, 1.079, 0.881, 1.072, 1.13],
+        scale: ['Generic_Bessell.V', 0.957], // albedo from zelario’s sheet
+    },
+    '(136204) 2003 WL7|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.720, 'V-R': 0.480},
+        calib: 'Vega',
+        sun: true
+    },
+    '(136472) Makemake|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.840, 'V-R': 0.480},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.83], // albedo from fyr02’s sheet
+    },
+    '(136472) Makemake|Lorenzi2016': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'classical', 'classical-h'],
+        nm: [417.357, 466.069, 588.13, 601.568, 609.406, 631.243, 642.441, 649.72, 656.439, 664.278, 672.116, 679.955, 691.153, 706.271, 715.789,
+            723.628, 729.787, 740.426, 744.345, 751.064, 766.181, 782.419, 788.578, 794.737, 809.295, 813.774, 826.652, 841.209, 860.246],
+        br: [0.89, 0.971, 1.106, 1.059, 1.127, 1.133, 1.125, 1.157, 1.137, 1.155, 1.116, 1.139, 1.03, 1.179, 1.182, 1.143, 1.163, 1.088, 1.16, 1.084,
+            1.201, 1.201, 1.087, 1.159, 1.018, 1.079, 0.881, 1.072, 1.13],
+        scale: ['Generic_Bessell.V', 0.83], // albedo from zelario’s sheet
+    },
+    '(137294) 1999 RE215|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.003, 'V-R': 0.710, 'R-I': 0.571},
+        calib: 'Vega',
+        sun: true
+    },
+    '(137295) 1999 RB216|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.897, 'V-R': 0.522, 'R-I': 0.506},
+        calib: 'Vega',
+        sun: true
+    },
+    '(138537) 2000 OK67|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.821, 'V-R': 0.583, 'R-I': 0.524},
+        calib: 'Vega',
+        sun: true
+    },
+    '(143707) 2003 UY117|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.950, 'V-R': 0.590},
+        calib: 'Vega',
+        sun: true
+    },
+    '(144897) 2004 UX10|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.950, 'V-R': 0.575},
+        calib: 'Vega',
+        sun: true
+    },
+    '(145451) 2005 RM43|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.590, 'V-R': 0.390},
+        calib: 'Vega',
+        sun: true
+    },
+    '(145452) 2005 RN43|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.940, 'V-R': 0.592, 'R-I': 0.486},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.107], // albedo from Vilenius et al. (2012)
+    },
+    '(145453) 2005 RR43|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.790, 'V-R': 0.389},
+        calib: 'Vega',
+        sun: true
+    },
+    '(145480) 2005 TB190|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.980, 'V-R': 0.562, 'R-I': 0.578},
+        calib: 'Vega',
+        sun: true
+    },
+    '(145486) 2005 UJ438|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.946, 'V-R': 0.641, 'R-I': 0.510},
+        calib: 'Vega',
+        sun: true
+    },
+    '(148209) 2000 CR105|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.771, 'V-R': 0.509, 'R-I': 0.590},
+        calib: 'Vega',
+        sun: true
+    },
+    '(148975) 2001 XA255|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.810, 'V-R': 0.680, 'R-I': 0.440},
+        calib: 'Vega',
+        sun: true
+    },
+    'Bolin2023': [
+        'Keck and Gemini spectral characterization of Lucy mission fly-by target (152830) Dinkinesh',
+        'https://ui.adsabs.harvard.edu/abs/2023Icar..40015562B/abstract'
+    ],
+    '(152830) Dinkinesh|Bolin2023': {
+        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.67, 'r-i': 0.28, 'i-z': 0.11},
+        calib: 'AB',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.27], // albedo from McFadden et al. (2023)
+    },
+    '(160427) 2005 RL43|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.120, 'V-R': 0.730},
+        calib: 'Vega',
+        sun: true
+    },
+    'Yokota2021': [
+        'Opposition Observations of 162173 Ryugu: Normal Albedo Map Highlights Variations in Regolith Characteristics',
+        'DOI: 10.3847/PSJ/ac14ba', 'https://iopscience.iop.org/article/10.3847/PSJ/ac14ba'
+    ],
+    '(162173) Ryugu|Yokota2021': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
+        system: 'Hayabusa2_ONC-T',
+        filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
+        br: [0.0438, 0.0408, 0.0406, 0.0408, 0.0405, 0.0411, 0.03987],
+        sd: [0.0012, 0.0011, 0.0010, 0.0009, 0.0008, 0.0006, 0.00050],
+        albedo: true, // normal (=geometric) albedo spectrum from the Table 3
+    },
+    '(162173) Ryugu:B|Yokota2021': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
+        system: 'Hayabusa2_ONC-T',
+        filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
+        br: [0.0473, 0.0445, 0.0439, 0.0439, 0.0430, 0.0427, 0.0410],
+        sd: [0.0018, 0.0017, 0.0016, 0.0015, 0.0011, 0.0009, 0.0008],
+        albedo: true, // normal (=geometric) albedo spectrum of N-pole bright area from the Table 6
+    },
+    '(162173) Ryugu:D|Yokota2021': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
+        system: 'Hayabusa2_ONC-T',
+        filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
+        br: [0.0427, 0.0398, 0.0398, 0.0400, 0.0399, 0.0407, 0.0396],
+        sd: [0.0006, 0.0006, 0.0005, 0.0004, 0.0003, 0.0003, 0.0002],
+        albedo: true, // normal (=geometric) albedo spectrum of N-Plain area from the Table 6
+    },
+    '(162173) Ryugu|SMASS': {
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
+        file: 'spectra/files/SMASS/a162173.sp273.txtU',
+        scale: ['Generic_Bessell.V', 0.0406], // global averaged normal albedo from Yokota et al. (2021)
+    },
+    '(163135) 2002 CT22|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.690, 'V-R': 0.382, 'R-I': 0.360},
+        calib: 'Vega',
+        sun: true
+    },
+    '(168703) 2000 GP183|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.669, 'V-R': 0.445, 'R-I': 0.463},
+        calib: 'Vega',
+        sun: true
+    },
+    '(174567) Varda|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.892, 'V-R': 0.556, 'R-I': 0.510},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.099], // albedo from Souami et al. (2020)
+    },
+    'Grundy2015': [
+        'The mutual orbit, mass, and density of the large transneptunian binary system Varda and Ilmarë',
+        'DOI: 10.1016/j.icarus.2015.04.036', 'https://arxiv.org/abs/1505.00510'
+    ],
+    '(174567) Varda|Grundy2015': {
+        tags: ['featured', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.892, 'V-I': 1.133},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.099], // albedo from Souami et al. (2020)
+    },
+    'Ilmarë|Grundy2015': {
+        tags: ['featured', 'Solar system', 'moon', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.857, 'V-I': 1.266},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.085], // albedo from Souami et al. (2020)
+    },
+    '(181708) 1993 FW|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.023, 'V-R': 0.583, 'R-I': 0.439},
+        calib: 'Vega',
+        sun: true
+    },
+    '(181855) 1998 WT31|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.774, 'V-R': 0.453, 'R-I': 0.326},
+        calib: 'Vega',
+        sun: true
+    },
+    '(181874) 1999 HW11|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.840, 'V-R': 0.499, 'R-I': 0.493},
+        calib: 'Vega',
+        sun: true
+    },
+    '(182397) 2001 QW297|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.020, 'V-R': 0.580, 'R-I': 0.670},
+        calib: 'Vega',
+        sun: true
+    },
+    '(182934) 2002 GJ32|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.330, 'V-R': 0.590, 'R-I': 0.420},
+        calib: 'Vega',
+        sun: true
+    },
+    '(192388) 1996 RD29|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.741, 'V-R': 0.421, 'R-I': 0.388},
+        calib: 'Vega',
+        sun: true
+    },
+    '(192929) 2000 AT44|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.707, 'V-R': 0.354, 'R-I': 0.318},
+        calib: 'Vega',
+        sun: true
+    },
+    '(208996) 2003 AZ84|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.738, 'V-R': 0.430, 'R-I': 0.473},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.097], // albedo from Dias-Oliveira et al. (2017)
+    },
+    'Grundy2018': [
+        'The mutual orbit, mass, and density of transneptunian binary Gǃkúnǁʼhòmdímà (229762 2007 UK126)',
+        'DOI: 10.1016/j.icarus.2018.12.037', 'http://www2.lowell.edu/users/grundy/abstracts/2019.G-G.html'
+    ],
+    '(225088) Gonggong|Boehnhardt2014': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.38, 'V-R': 0.86, 'R-I': 0.79},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.14], // albedo from Kiss et al. 2019
+    },
+    'Kiss2019': [
+        'The mass and density of the dwarf planet (225088) 2007 OR10',
+        'DOI: 10.1016/j.icarus.2019.03.013', 'https://arxiv.org/abs/1903.05439'
+    ],
+    'Xiangliu|Kiss2019': {
+        tags: ['featured', 'Solar system', 'moon', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'V-I': 1.22},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.08], // albedo assuming radius of 100 km from Arakawa et al. (2021) https://ui.adsabs.harvard.edu/abs/2021AJ....162..226A/abstract
+    },
+    '(229762) Gǃkúnǁʼhòmdímà|MBOSS': {
+        tags: ['featured', 'MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'V-R': 0.582, 'R-I': 0.470},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.142], // albedo from Ortiz et al. (2019)
+    },
+    '(229762) Gǃkúnǁʼhòmdímà|Grundy2018': {
+        tags: ['Solar system', 'minor body', 'TNO', 'TNO-midsize', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'V-I': 1.028},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.142], // albedo from Ortiz et al. (2019)
+    },
+    'Gǃòʼé ǃHú|Grundy2018': {
+        tags: ['featured', 'Solar system', 'moon', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'V-I': 1.803},
+        calib: 'Vega',
+        sun: true
+    },
+    '(248835) 2006 SX368|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.758, 'V-R': 0.478, 'R-I': 0.471},
+        calib: 'Vega',
+        sun: true
+    },
+    '(250112) 2002 KY14|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.060, 'V-R': 0.709, 'R-I': 0.650},
+        calib: 'Vega',
+        sun: true
+    },
+    '(275809) 2001 QY297|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.947, 'V-R': 0.479, 'R-I': 0.651},
+        calib: 'Vega',
+        sun: true
+    },
+    '(278361) 2007 JJ43|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.020, 'V-R': 0.590, 'R-I': 0.500},
+        calib: 'Vega',
+        sun: true
+    },
+    '(281371) 2008 FC76|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.987, 'V-R': 0.685, 'R-I': 0.652},
+        calib: 'Vega',
+        sun: true
+    },
+    '(303775) 2005 QU182|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.877, 'V-R': 0.593},
+        calib: 'Vega',
+        sun: true
+    },
+    '(307261) 2002 MS4|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.690, 'V-R': 0.380},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.1], // albedo from Rommel et al. (2023)
+    },
+    '(307982) 2004 PG115|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.966, 'V-R': 0.664, 'R-I': 0.633},
+        calib: 'Vega',
+        sun: true
+    },
+    '(308933) 2006 SQ372|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.030, 'V-R': 0.590, 'R-I': 0.650},
+        calib: 'Vega',
+        sun: true
+    },
+    '(309139) 2006 XQ51|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.740, 'V-R': 0.410},
+        calib: 'Vega',
+        sun: true
+    },
+    '(309737) 2008 SJ236|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.010, 'V-R': 0.588, 'R-I': 0.500},
+        calib: 'Vega',
+        sun: true
+    },
+    '(309741) 2008 UZ6|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.920, 'V-R': 0.590},
+        calib: 'Vega',
+        sun: true
+    },
+    '(315898) 2008 QD4|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.740, 'V-R': 0.460},
+        calib: 'Vega',
+        sun: true
+    },
+    '(316431) 2010 TH167|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.720, 'V-R': 0.460},
+        calib: 'Vega',
+        sun: true
+    },
+    '(330759) 2008 SO218|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.890, 'V-R': 0.550, 'R-I': 0.500},
+        calib: 'Vega',
+        sun: true
+    },
+    '(336756) 2010 NV1|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.765, 'V-R': 0.512, 'R-I': 0.390},
+        calib: 'Vega',
+        sun: true
+    },
+    '(341275) 2007 RG283|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.790, 'V-R': 0.470},
+        calib: 'Vega',
+        sun: true
+    },
+    '(341520) Mors-Somn|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.290, 'V-R': 0.740, 'R-I': 0.630},
+        calib: 'Vega',
+        sun: true
+    },
+    '(342842) 2008 YB3|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.774, 'V-R': 0.472, 'R-I': 0.490},
+        calib: 'Vega',
+        sun: true
+    },
+    '(346889) Rhiphonos|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.820, 'V-R': 0.550},
+        calib: 'Vega',
+        sun: true
+    },
+    '(349933) 2009 YF7|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.720, 'V-R': 0.460},
+        calib: 'Vega',
+        sun: true
+    },
+    '(382004) 2010 RM64|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.000, 'V-R': 0.550},
+        calib: 'Vega',
+        sun: true
+    },
+    '(385185) 1993 RO|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.850, 'V-R': 0.590, 'R-I': 0.480},
+        calib: 'Vega',
+        sun: true
+    },
+    '(385191) 1997 RT5|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.075, 'V-R': 0.474, 'R-I': 0.539},
+        calib: 'Vega',
+        sun: true
+    },
+    '(385194) 1998 KG62|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.039, 'V-R': 0.609, 'R-I': 0.610},
+        calib: 'Vega',
+        sun: true
+    },
+    '(385199) 1999 OE4|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.103, 'V-R': 0.567, 'R-I': 0.414},
+        calib: 'Vega',
+        sun: true
+    },
+    '(385437) 2003 GH55|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.120, 'V-R': 0.665, 'R-I': 0.859},
+        calib: 'Vega',
+        sun: true
+    },
+    '(385571) Otrera|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.740, 'V-R': 0.420, 'R-I': 0.460},
+        calib: 'Vega',
+        sun: true
+    },
+    '(385607) 2005 EO297|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.840, 'V-R': 0.480, 'R-I': 0.570},
+        calib: 'Vega',
+        sun: true
+    },
+    '(385695) 2005 TO74|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.850, 'V-R': 0.490, 'R-I': 0.420},
+        calib: 'Vega',
+        sun: true
+    },
+    '(416400) 2003 UZ117|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.663, 'V-R': 0.354, 'R-I': 0.335},
+        calib: 'Vega',
+        sun: true
+    },
+    '(418993) 2009 MS9|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.840, 'V-R': 0.520},
+        calib: 'Vega',
+        sun: true
+    },
+    '(427507) 2002 DH5|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.663, 'V-R': 0.391, 'R-I': 0.416},
+        calib: 'Vega',
+        sun: true
+    },
+    '(444030) 2004 NT33|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.641, 'V-R': 0.403, 'R-I': 0.403},
+        calib: 'Vega',
+        sun: true
+    },
+    '(445473) 2010 VZ98|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.100, 'V-R': 0.670},
+        calib: 'Vega',
+        sun: true
+    },
+    '(447178) 2005 RO43|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.770, 'V-R': 0.470},
+        calib: 'Vega',
+        sun: true
+    },
+    '(449097) 2012 UT68|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.020, 'V-R': 0.660},
+        calib: 'Vega',
+        sun: true
+    },
+    '(455171) 1999 OM4|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.137, 'V-R': 0.602, 'R-I': 0.499},
+        calib: 'Vega',
+        sun: true
+    },
+    '(459865) 2013 XZ8|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.720, 'V-R': 0.450},
+        calib: 'Vega',
+        sun: true
+    },
+    '(459971) 2014 ON6|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.970, 'V-R': 0.580},
+        calib: 'Vega',
+        sun: true
+    },
+    '(463368) 2012 VU85|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.070, 'V-R': 0.630},
+        calib: 'Vega',
+        sun: true
+    },
+    '(463663) 2014 HY123|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.670, 'V-R': 0.490},
+        calib: 'Vega',
+        sun: true
+    },
+    '(469306) 1999 CD158|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.864, 'V-R': 0.520, 'R-I': 0.575},
+        calib: 'Vega',
+        sun: true
+    },
+    '(469333) 2000 PE30|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.752, 'V-R': 0.373, 'R-I': 0.410},
+        calib: 'Vega',
+        sun: true
+    },
+    '(469362) 2001 KB77|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.890, 'V-R': 0.457, 'R-I': 0.548},
+        calib: 'Vega',
+        sun: true
+    },
+    '(469372) 2001 QF298|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.695, 'V-R': 0.388, 'R-I': 0.360},
+        calib: 'Vega',
+        sun: true
+    },
+    '(469750) 2005 PU21|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.140, 'V-R': 0.650, 'R-I': 0.680},
+        calib: 'Vega',
+        sun: true
+    },
+    '(470316) 2007 OC10|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.876, 'V-R': 0.553, 'R-I': 0.471},
+        calib: 'Vega',
+        sun: true
+    },
+    '(470599) 2008 OG19|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.940, 'V-R': 0.530, 'R-I': 0.590},
+        calib: 'Vega',
+        sun: true
+    },
+    '(471339) 2011 ON45|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.110, 'V-R': 0.705},
+        calib: 'Vega',
+        sun: true
+    },
+    '(474640) 2004 VN112|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.900, 'V-R': 0.520, 'R-I': 0.450},
+        calib: 'Vega',
+        sun: true
+    },
+    'Howett2019': [
+        'Colors of (486958) 2014 MU69 as Observed by New Horizons’ Multi-Spectral Visible Imaging Camera (MVIC)',
+        'https://ui.adsabs.harvard.edu/abs/2019LPI....50.1982H/abstract'
+    ],
+    '(486958) Wenu|Howett2019': {
+        tags: ['featured', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'NewHorizons_MVIC',
+        filters: ['Blue', 'Red', 'NIR'],
+        br: [0.053, 0.079, 0.117],
+        albedo: true
+    },
+    '(486958) Weeyo|Howett2019': {
+        tags: ['featured', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'NewHorizons_MVIC',
+        filters: ['Blue', 'Red', 'NIR'],
+        br: [0.058, 0.084, 0.122],
+        albedo: true
+    },
+    '(486958) Akasa|Howett2019': {
+        tags: ['featured', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h', 'surface feature'],
+        system: 'NewHorizons_MVIC',
+        filters: ['Blue', 'Red', 'NIR'],
+        br: [0.066, 0.090, 0.125],
+        albedo: true
+    },
+    '(506479) 2003 HB57|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.830, 'V-R': 0.480, 'R-I': 0.540},
+        calib: 'Vega',
+        sun: true
+    },
+    '(508770) 1995 WY2|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.030, 'V-R': 0.600, 'R-I': 0.510},
+        calib: 'Vega',
+        sun: true
+    },
+    '(523588) 2000 CN105|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.100, 'V-R': 0.636, 'R-I': 0.640},
+        calib: 'Vega',
+        sun: true
+    },
+    '(523591) 2001 QD298|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.970, 'V-R': 0.670},
+        calib: 'Vega',
+        sun: true
+    },
+    '(523597) 2002 QX47|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.700, 'V-R': 0.380},
+        calib: 'Vega',
+        sun: true
+    },
+    '(523620) 2007 RH283|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.720, 'V-R': 0.430},
+        calib: 'Vega',
+        sun: true
+    },
+    '(523622) 2007 TG422|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.880, 'V-R': 0.510, 'R-I': 0.510},
+        calib: 'Vega',
+        sun: true
+    },
+    '(523676) 2013 UL10|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.970, 'V-R': 0.670},
+        calib: 'Vega',
+        sun: true
+    },
+    '(523785) 2015 CM3|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.210, 'V-R': 0.570},
+        calib: 'Vega',
+        sun: true
+    },
+    '(523899) 1997 CV29|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.210, 'V-R': 0.650},
+        calib: 'Vega',
+        sun: true
+    },
+    '(523965) 1998 XY95|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.930, 'V-R': 0.720, 'R-I': 0.752},
+        calib: 'Vega',
+        sun: true
+    },
+    '(523983) 1999 RY214|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.693, 'V-R': 0.565, 'R-I': 0.530},
+        calib: 'Vega',
+        sun: true
+    },
+    '(524049) 2000 CQ105|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.671, 'V-R': 0.449, 'R-I': 0.346},
+        calib: 'Vega',
+        sun: true
+    },
+    '(524217) 2001 RZ143|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.080, 'V-R': 0.510, 'R-I': 0.490},
+        calib: 'Vega',
+        sun: true
+    },
+    '(524834) 2003 YL179|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.810, 'V-R': 0.450},
+        calib: 'Vega',
+        sun: true
+    },
+    '(525815) 2005 SD278|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.970, 'V-R': 0.560, 'R-I': 0.530},
+        calib: 'Vega',
+        sun: true
+    },
+    '(527328) 2007 TK422|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.710, 'V-R': 0.510},
+        calib: 'Vega',
+        sun: true
+    },
+    '(527443) 2007 UM126|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.740, 'V-R': 0.435, 'R-I': 0.440},
+        calib: 'Vega',
+        sun: true
+    },
+    '(527603) 2007 VJ305|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.920, 'V-R': 0.520, 'R-I': 0.520},
+        calib: 'Vega',
+        sun: true
+    },
+    '(527604) 2007 VL305|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.830, 'V-R': 0.470, 'R-I': 0.480},
+        calib: 'Vega',
+        sun: true
+    },
+    '(528219) 2008 KV42|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.820, 'V-R': 0.470, 'R-I': 0.420},
+        calib: 'Vega',
+        sun: true
+    },
+    '(530664) 2011 SO277|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.690, 'V-R': 0.390},
+        calib: 'Vega',
+        sun: true
+    },
+    '(530930) 2011 WG157|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.720, 'V-R': 0.400},
+        calib: 'Vega',
+        sun: true
+    },
+    'Sheppard2018': [
+        'The Albedos, Sizes, Colors, and Satellites of Dwarf Planets Compared with Newly Measured Dwarf Planet 2013 FY27',
+        'DOI: 10.3847/1538-3881/aae92a', 'https://iopscience.iop.org/article/10.3847/1538-3881/aae92a'
+    ],
+    '(532037) 2013 FY27|Sheppard2018': {
+        tags: ['Solar system', 'minor body', 'TNO', 'TNO-midsize', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'V-R': 0.56, 'R-I': 0.52},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.17]
+    },
+    '(601411) 2013 CY197|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.880, 'V-R': 0.510, 'R-I': 0.610},
+        calib: 'Vega',
+        sun: true
+    },
+    '(612019) 1994 EV3|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.065, 'V-R': 0.588, 'R-I': 0.800},
+        calib: 'Vega',
+        sun: true
+    },
+    '(612029) 1995 HM5|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.649, 'V-R': 0.460, 'R-I': 0.428},
+        calib: 'Vega',
+        sun: true
+    },
+    '(612045) 1996 RR20|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.143, 'V-R': 0.730, 'R-I': 0.628},
+        calib: 'Vega',
+        sun: true
+    },
+    '(612047) 1996 TK66|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.993, 'V-R': 0.680, 'R-I': 0.551},
+        calib: 'Vega',
+        sun: true
+    },
+    '(612048) 1996 TS66|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.028, 'V-R': 0.672, 'R-I': 0.637},
+        calib: 'Vega',
+        sun: true
+    },
+    '1994 TA|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.261, 'V-R': 0.672, 'R-I': 0.740},
+        calib: 'Vega',
+        sun: true
+    },
+    '1996 RQ20|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.935, 'V-R': 0.558, 'R-I': 0.591},
+        calib: 'Vega',
+        sun: true
+    },
+    '1997 QH4|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.088, 'V-R': 0.641, 'R-I': 0.631},
+        calib: 'Vega',
+        sun: true
+    },
+    '1998 FS144|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.950, 'V-R': 0.588, 'R-I': 0.510},
+        calib: 'Vega',
+        sun: true
+    },
+    '1998 KS65|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.090, 'V-R': 0.640},
+        calib: 'Vega',
+        sun: true
+    },
+    '1998 UR43|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.784, 'V-R': 0.583, 'R-I': 0.354},
+        calib: 'Vega',
+        sun: true
+    },
+    '1998 WS31|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.726, 'V-R': 0.606, 'R-I': 0.439},
+        calib: 'Vega',
+        sun: true
+    },
+    '1998 WU24|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.780, 'V-R': 0.530, 'R-I': 0.460},
+        calib: 'Vega',
+        sun: true
+    },
+    '1998 WV24|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.770, 'V-R': 0.502, 'R-I': 0.450},
+        calib: 'Vega',
+        sun: true
+    },
+    '1998 WV31|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.790, 'V-R': 0.521, 'R-I': 0.481},
+        calib: 'Vega',
+        sun: true
+    },
+    '1998 WX24|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.090, 'V-R': 0.727, 'R-I': 0.500},
+        calib: 'Vega',
+        sun: true
+    },
+    '1998 WZ31|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.727, 'V-R': 0.489, 'R-I': 0.339},
+        calib: 'Vega',
+        sun: true
+    },
+    '1999 CB119|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.212, 'V-R': 0.714, 'R-I': 0.645},
+        calib: 'Vega',
+        sun: true
+    },
+    '1999 CX131|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.918, 'V-R': 0.664, 'R-I': 0.434},
+        calib: 'Vega',
+        sun: true
+    },
+    '1999 HS11|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.121, 'V-R': 0.698, 'R-I': 0.600},
+        calib: 'Vega',
+        sun: true
+    },
+    '1999 HV11|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.110, 'V-R': 0.590},
+        calib: 'Vega',
+        sun: true
+    },
+    '1999 LE31|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.748, 'V-R': 0.467, 'R-I': 0.521},
+        calib: 'Vega',
+        sun: true
+    },
+    '1999 OJ4|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.098, 'V-R': 0.668, 'R-I': 0.549},
+        calib: 'Vega',
+        sun: true
+    },
+    '1999 RX214|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.054, 'V-R': 0.593, 'R-I': 0.530},
+        calib: 'Vega',
+        sun: true
+    },
+    '1999 TR11|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.020, 'V-R': 0.750, 'R-I': 0.650},
+        calib: 'Vega',
+        sun: true
+    },
+    '2000 CL104|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.223, 'V-R': 0.600, 'R-I': 0.612},
+        calib: 'Vega',
+        sun: true
+    },
+    '2000 FS53|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.060, 'V-R': 0.710},
+        calib: 'Vega',
+        sun: true
+    },
+    '2000 HE46|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.870, 'V-R': 0.550, 'R-I': 0.400},
+        calib: 'Vega',
+        sun: true
+    },
+    '2000 KK4|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.910, 'V-R': 0.580, 'R-I': 0.640},
+        calib: 'Vega',
+        sun: true
+    },
+    '2001 FM194|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.760, 'V-R': 0.440},
+        calib: 'Vega',
+        sun: true
+    },
+    '2001 KA77|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.104, 'V-R': 0.704, 'R-I': 0.716},
+        calib: 'Vega',
+        sun: true
+    },
+    '2001 KD77|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.123, 'V-R': 0.624, 'R-I': 0.565},
+        calib: 'Vega',
+        sun: true
+    },
+    '2001 KG77|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.810, 'V-R': 0.440},
+        calib: 'Vega',
+        sun: true
+    },
+    '2001 QC298|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.750, 'V-R': 0.490, 'R-I': 0.480},
+        calib: 'Vega',
+        sun: true
+    },
+    '2001 QR322|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.800, 'V-R': 0.460, 'R-I': 0.360},
+        calib: 'Vega',
+        sun: true
+    },
+    '2001 QX322|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.914, 'V-R': 0.562},
+        calib: 'Vega',
+        sun: true
+    },
+    '2001 XZ255|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.224, 'V-R': 0.709},
+        calib: 'Vega',
+        sun: true
+    },
+    '2002 GH32|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.990, 'V-R': 0.570, 'R-I': 0.590},
+        calib: 'Vega',
+        sun: true
+    },
+    '2002 PQ152|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.130, 'V-R': 0.720},
+        calib: 'Vega',
+        sun: true
+    },
+    '2002 XV93|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.720, 'V-R': 0.375},
+        calib: 'Vega',
+        sun: true
+    },
+    '2003 FZ129|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.840, 'V-R': 0.480, 'R-I': 0.460},
+        calib: 'Vega',
+        sun: true
+    },
+    '2003 QA92|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.040, 'V-R': 0.630},
+        calib: 'Vega',
+        sun: true
+    },
+    '2003 QK91|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.870, 'V-R': 0.500, 'R-I': 0.470},
+        calib: 'Vega',
+        sun: true
+    },
+    '2003 QQ91|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.670, 'V-R': 0.510},
+        calib: 'Vega',
+        sun: true
+    },
+    '2003 UY291|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.880, 'V-R': 0.510, 'R-I': 0.670},
+        calib: 'Vega',
+        sun: true
+    },
+    '2003 WN188|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.780, 'V-R': 0.480, 'R-I': 0.500},
+        calib: 'Vega',
+        sun: true
+    },
+    '2004 DA62|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.850, 'V-R': 0.520, 'R-I': 0.550},
+        calib: 'Vega',
+        sun: true
+    },
+    '2004 OJ14|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.900, 'V-R': 0.520, 'R-I': 0.540},
+        calib: 'Vega',
+        sun: true
+    },
+    '2004 VC131|Thirouin2019': {
+        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.89, 'g-i': 1.40},
+        calib: 'AB',
+        sun: true
+    },
+    '2004 VU75|Thirouin2019': {
+        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.96, 'g-i': 1.42},
+        calib: 'AB',
+        sun: true
+    },
+    '2004 XR190|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.790, 'V-R': 0.450, 'R-I': 0.520},
+        calib: 'Vega',
+        sun: true
+    },
+    '2005 TN53|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.820, 'V-R': 0.470, 'R-I': 0.470},
+        calib: 'Vega',
+        sun: true
+    },
+    '2006 RJ103|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur', 'Neptune trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.820, 'V-R': 0.470, 'R-I': 0.270},
+        calib: 'Vega',
+        sun: true
+    },
+    '2006 RJ103|Markwardt2023': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.59, 'r-i': 0.16},
+        calib: 'AB',
+        sun: true
+    },
+    '2007 VH305|MBOSS': { // misprint?
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.690, 'V-R': 0.491, 'R-I': 0.480},
+        calib: 'Vega',
+        sun: true
+    },
+    '2007 VL305|Markwardt2023': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.60, 'r-i': 0.25},
+        calib: 'AB',
+        sun: true
+    },
+    '2009 YG19|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.000, 'V-R': 0.610},
+        calib: 'Vega',
+        sun: true
+    },
+    '2010 BK118|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.794, 'V-R': 0.525, 'R-I': 0.480},
+        calib: 'Vega',
+        sun: true
+    },
+    '2010 BL4|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.860, 'V-R': 0.390, 'R-I': 0.470},
+        calib: 'Vega',
+        sun: true
+    },
+    '2010 OM101|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.795, 'V-R': 0.588, 'R-I': 0.360},
+        calib: 'Vega',
+        sun: true
+    },
+    '2010 OR1|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.781, 'V-R': 0.517, 'R-I': 0.447},
+        calib: 'Vega',
+        sun: true
+    },
+    '2010 TS191|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.760, 'V-R': 0.390},
+        calib: 'Vega',
+        sun: true
+    },
+    '2010 TS191|Markwardt2023': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.61, 'r-i': 0.30},
+        calib: 'AB',
+        sun: true
+    },
+    '2010 TT191|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.750, 'V-R': 0.470},
+        calib: 'Vega',
+        sun: true
+    },
+    '2010 WG9|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.781, 'V-R': 0.492, 'R-I': 0.458},
+        calib: 'Vega',
+        sun: true
+    },
+    '2011 HM102|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.720, 'V-R': 0.410, 'R-I': 0.520},
+        calib: 'Vega',
+        sun: true
+    },
+    '2011 SO277|Markwardt2023': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.60, 'r-i': 0.57},
+        calib: 'AB',
+        sun: true
+    },
+    '2012 DR30|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.647, 'V-R': 0.563, 'R-I': 0.422},
+        calib: 'Vega',
+        sun: true
+    },
+    '2012 DX98|Thirouin2019': {
+        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.85, 'g-i': 1.25},
+        calib: 'AB',
+        sun: true
+    },
+    '2012 UD185|Markwardt2023': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.61, 'r-i': 0.37},
+        calib: 'AB',
+        sun: true
+    },
+    '2012 UV177|Markwardt2023': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.71, 'r-i': 0.23},
+        calib: 'AB',
+        sun: true
+    },
+    '2012 VP113|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.920, 'V-R': 0.520, 'R-I': 0.530},
+        calib: 'Vega',
+        sun: true
+    },
+    '2013 AZ60|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.820, 'V-R': 0.540},
+        calib: 'Vega',
+        sun: true
+    },
+    '2013 BL76|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.920, 'V-R': 0.450},
+        calib: 'Vega',
+        sun: true
+    },
+    '2013 BO16|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.140, 'V-R': 0.650},
+        calib: 'Vega',
+        sun: true
+    },
+    '2013 CX217|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.850, 'V-R': 0.280},
+        calib: 'Vega',
+        sun: true
+    },
+    '2013 FR28|Thirouin2019': {
+        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.95, 'g-i': 1.36},
+        calib: 'AB',
+        sun: true
+    },
+    '2013 KY18|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.760, 'V-R': 0.360},
+        calib: 'Vega',
+        sun: true
+    },
+    '2013 LD16|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.860, 'V-R': 0.440},
+        calib: 'Vega',
+        sun: true
+    },
+    '2013 NS11|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.740, 'V-R': 0.560},
+        calib: 'Vega',
+        sun: true
+    },
+    '2013 RL124|Markwardt2023': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.38, 'r-i': 0.54},
+        calib: 'AB',
+        sun: true
+    },
+    '2013 TZ158|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.790, 'V-R': 0.536, 'R-I': 0.497},
+        calib: 'Vega',
+        sun: true
+    },
+    '2013 TZ187|Markwardt2023': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.90, 'r-i': 0.30},
+        calib: 'AB',
+        sun: true
+    },
+    '2013 VX30|Markwardt2023': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 1.01, 'r-i': 0.44},
+        calib: 'AB',
+        sun: true
+    },
+    '2013 YG48|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.800, 'V-R': 0.515},
+        calib: 'Vega',
+        sun: true
+    },
+    '2014 CW14|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.870, 'V-R': 0.510},
+        calib: 'Vega',
+        sun: true
+    },
+    '2014 JL80|Thirouin2019': {
+        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.74},
+        calib: 'AB',
+        sun: true
+    },
+    '2014 JO80|Thirouin2019': {
+        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.67, 'g-i': 0.91},
+        calib: 'AB',
+        sun: true
+    },
+    '2014 JQ80|Thirouin2019': {
+        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.76, 'g-i': 1.05},
+        calib: 'AB',
+        sun: true
+    },
+    '2014 QO441|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.750, 'V-R': 0.470},
+        calib: 'Vega',
+        sun: true
+    },
+    '2014 RO74|Markwardt2023': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.65, 'r-i': 0.42},
+        calib: 'AB',
+        sun: true
+    },
+    '2014 SC374|Markwardt2023': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.43, 'r-i': 0.12},
+        calib: 'AB',
+        sun: true
+    },
+    '2014 YB92|Markwardt2023': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.46, 'r-i': 0.07},
+        calib: 'AB',
+        sun: true
+    },
+    '2015 VU207|Markwardt2023': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.31, 'r-i': 0.24},
+        calib: 'AB',
+        sun: true
+    },
+    '2015 VV165|Markwardt2023': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.87, 'r-i': 0.32},
+        calib: 'AB',
+        sun: true
+    },
+    '2015 VW165|Markwardt2023': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.45, 'r-i': 0.36},
+        calib: 'AB',
+        sun: true
+    },
+    // Periodic comets
+    '1P/Halley|MBOSS': {
+        tags: ['featured', 'MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.720, 'V-R': 0.410, 'R-I': 0.390},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.04]
+    },
+    '2P/Encke|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.780, 'V-R': 0.424, 'R-I': 0.408},
+        calib: 'Vega',
+        sun: true
+    },
+    '6P/dArrest|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.770, 'V-R': 0.563, 'R-I': 0.450},
+        calib: 'Vega',
+        sun: true
+    },
+    '8P/Tuttle|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.890, 'V-R': 0.530, 'R-I': 0.530},
+        calib: 'Vega',
+        sun: true
+    },
+    '10P/Tempel2|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.800, 'V-R': 0.521, 'R-I': 0.520},
+        calib: 'Vega',
+        sun: true
+    },
+    '21P/GZ|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.800, 'V-R': 0.500},
+        calib: 'Vega',
+        sun: true
+    },
+    '22P/Kopff|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.795, 'V-R': 0.519, 'R-I': 0.450},
+        calib: 'Vega',
+        sun: true
+    },
+    '39P/Oterma|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.890, 'V-R': 0.386, 'R-I': 0.412},
+        calib: 'Vega',
+        sun: true
+    },
+    '45P/HMP|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.080, 'V-R': 0.440, 'R-I': 0.210},
+        calib: 'Vega',
+        sun: true
+    },
+    '47P/AJ|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.780, 'V-R': 0.400},
+        calib: 'Vega',
+        sun: true
+    },
+    '49P/AR|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.770, 'V-R': 0.471, 'R-I': 0.444},
+        calib: 'Vega',
+        sun: true
+    },
+    '55P/TT|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.750, 'V-R': 0.510, 'R-I': 0.420},
+        calib: 'Vega',
+        sun: true
+    },
+    '86P/Wild3|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.580, 'V-R': 0.555},
+        calib: 'Vega',
+        sun: true
+    },
+    '106P/Schuster|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.010, 'V-R': 0.520, 'R-I': 0.450},
+        calib: 'Vega',
+        sun: true
+    },
+    '107P/WH|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.674, 'V-R': 0.361},
+        calib: 'Vega',
+        sun: true
+    },
+    '114P/WS|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.850, 'V-R': 0.460, 'R-I': 0.540},
+        calib: 'Vega',
+        sun: true
+    },
+    '143P/KM|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.820, 'V-R': 0.580, 'R-I': 0.560},
+        calib: 'Vega',
+        sun: true
+    },
+    '166P/2001T4|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.870, 'V-R': 0.695, 'R-I': 0.735},
+        calib: 'Vega',
+        sun: true
+    },
+    '166P/NEAT|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.890, 'V-R': 0.560},
+        calib: 'Vega',
+        sun: true
+    },
+    '167P/CINEOS|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.758, 'V-R': 0.516, 'R-I': 0.504},
+        calib: 'Vega',
+        sun: true
+    },
+    // Non-periodic comets
+    'C/1995O1-HB|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.810, 'V-R': 0.390},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/1999J2|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.687, 'V-R': 0.426, 'R-I': 0.403},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2001G1|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.752, 'V-R': 0.430, 'R-I': 0.433},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2001M10|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.963, 'V-R': 0.350, 'R-I': 0.520},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2002CE10-LINEA|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.770, 'V-R': 0.542, 'R-I': 0.504},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2002VQ94-LINEA|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.850, 'V-R': 0.500, 'R-I': 0.480},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2003A2-Gleason|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.610, 'V-R': 0.470, 'R-I': 0.460},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2004D1-NEAT|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.820, 'V-R': 0.430, 'R-I': 0.510},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2006S3-Loneos|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.740, 'V-R': 0.580},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2007D1-LINEAR|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.750, 'V-R': 0.440, 'R-I': 0.410},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2008S3-Boattin|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.769, 'V-R': 0.448, 'R-I': 0.364},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2009T1-McNaugh|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.640, 'V-R': 0.530, 'R-I': 0.450},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2010D4-WISE|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.740, 'V-R': 0.460},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2010DG56-WISE|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.770, 'V-R': 0.370},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2010L3-Catalin|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.750, 'V-R': 0.420, 'R-I': 0.410},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2010U3-Boattin|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.778, 'V-R': 0.520, 'R-I': 0.320},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2011P2-PANSTAR|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.919, 'V-R': 0.323},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2011Q1-PANSTAR|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.819, 'V-R': 0.489},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2012A1-PANSTAR|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.740, 'V-R': 0.450},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2012E1-Hill|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.790, 'V-R': 0.400},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2012LP26-Palom|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.854, 'V-R': 0.516},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2012Q1-Kowalsk|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.907, 'V-R': 0.537},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2013C2|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.887, 'V-R': 0.533},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2013E1-McNaugh|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.750, 'V-R': 0.480},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2013H2-Boattin|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.770, 'V-R': 0.490},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2013P3-Palomar|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.920, 'V-R': 0.450},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2013P4|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.827, 'V-R': 0.487},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2014AA52-CATAL|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.770, 'V-R': 0.410},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2014B1-Schwarz|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.850, 'V-R': 0.580},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2014R1-Borisov|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.810, 'V-R': 0.460},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2014W6-Catalin|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.810, 'V-R': 0.450},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2014XB8-PANSTA|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.790, 'V-R': 0.440},
+        calib: 'Vega',
+        sun: true
+    },
+    'C/2015B1-PANSTAR|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.780, 'V-R': 0.450},
+        calib: 'Vega',
+        sun: true
+    },
+    'P/2011S1-Gibbs|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.960, 'V-R': 0.590},
+        calib: 'Vega',
+        sun: true
+    },
+    // Interstellar objects
+    'Jewitt2017': [
+        'Interstellar Interloper 1I/2017 U1: Observations from the NOT and WIYN Telescopes',
+        'DOI: 10.3847/2041-8213/aa9b2f', 'https://arxiv.org/abs/1711.05687'
+    ],
+    '1I/ʻOumuamua|Jewitt2017': {
+        tags: ['featured', 'Solar system', 'extrasolar', 'asteroid'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.70, 'V-R': 0.45},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.1]
+    },
+    'Bannister2017': [
+        'Col-OSSOS: Colors of the Interstellar Planetesimal 1I/`Oumuamua',
+        'DOI: 10.3847/2041-8213/aaa07c', 'https://arxiv.org/abs/1711.06214'
+    ],
+    '1I/ʻOumuamua|Bannister2017': {
+        tags: ['Solar system', 'extrasolar', 'asteroid'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.47, 'r-i': 0.36},
+        calib: 'AB',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.07]
+    },
+}
