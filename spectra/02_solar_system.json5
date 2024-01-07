@@ -124,7 +124,7 @@
         scale: ['Generic_Bessell.V', 0.170]
     },
     'Mars:B|USGSarchive': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'surface feature'],
+        tags: ['Solar system', 'planet geophysical', 'planet', 'surface feature'],
         nm: [330, 342, 363, 381, 404, 440, 475, 504, 540, 566, 600, 633, 666, 700, 704.7, 716.4, 728.9, 739.8, 751.9, 763.6, 775.6, 786.3, 799, 811.7,
             822.4, 837.1, 849.8, 862.5],
         br: [0.091700, 0.095981, 0.108666, 0.098961, 0.130791, 0.180553, 0.247580, 0.302547, 0.398298, 0.527668, 0.704229, 0.790133, 0.861244, 0.907984,
@@ -132,7 +132,7 @@
         scale: ['Generic_Bessell.V', 0.26], // https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2001JE001580
     },
     'Mars:D|USGSarchive': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'surface feature'],
+        tags: ['Solar system', 'planet geophysical', 'planet', 'surface feature'],
         nm: [330, 342, 363, 381, 404, 440, 475, 504, 540, 566, 600, 633, 644.1, 656, 667.9, 679.9, 691.7, 704.7, 716.4, 728.9, 739.8, 751.9, 763.6,
             775.6, 786.3, 799, 811.7, 822.4, 837.1, 849.8, 862.5],
         br: [0.214259, 0.225981, 0.208343, 0.207151, 0.242350, 0.304599, 0.368299, 0.435753, 0.552943, 0.686686, 0.832221, 0.931029, 1.086725, 1.096983, 
@@ -141,7 +141,7 @@
         scale: ['Generic_Bessell.V', 0.12], // https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2001JE001580
     },
     'Mars|Madden2018': {
-        tags: ['Solar system', 'planet geophysical', 'planet'],
+        tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
         nm: [316.04, 360.96, 389.97, 435.05, 464.12, 502.86, 528.88, 567.92, 597.46, 626.82, 659.28, 697.97, 717.38, 762.51, 804.31, 846.12, 900.65,
             951.86, 993.64],
         br: [0.04554, 0.04851, 0.05933, 0.07176, 0.0866, 0.10343, 0.12899, 0.16342, 0.20522, 0.23077, 0.24945, 0.25602, 0.26244, 0.26437, 0.2722, 0.28349,
