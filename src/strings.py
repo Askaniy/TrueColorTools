@@ -339,7 +339,7 @@ gui_load = {
 gui_update = {
     'en': 'Update database',
     'ru': 'Обновить базу данных',
-    'de': 'Aktualisierung'
+    'de': 'Aktualisieren'
 }
 gui_tags = {
     'en': 'Category',
@@ -379,7 +379,7 @@ gui_plot = {
 gui_clear = {
     'en': 'Clear plot',
     'ru': 'Очистить график',
-    'de': 'Klare Handlung'
+    'de': 'Plot löschen'
 }
 gui_export2text = {
     'en': 'Export category to text',
