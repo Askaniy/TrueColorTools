@@ -717,4 +717,15 @@
         calib: 'Vega',
         sun: true
     },
+    'Maris2018': [
+        'Multicolor Photometry of the Neptune Irregular Satellite Neso',
+        'DOI: 10.3847/2515-5172/aab7fc', 'https://ui.adsabs.harvard.edu/abs/2018RNAAS...2...42M/abstract'
+    ],
+    '(N XIII) Neso|Maris2018': {
+        tags: ['Solar system', 'moon', 'Neptunian system', 'irregular'],
+        system: 'Generic_Bessell',
+        indices: {'V-I': 1.0, 'V-R': 0.3},
+        calib: 'Vega',
+        sun: true
+    },
 }
