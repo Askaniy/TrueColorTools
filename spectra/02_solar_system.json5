@@ -76,7 +76,7 @@
         'A New Analysis of the Spectra Obtained by the Venera Missions in the Venusian Atmosphere. I. The Analysis of the Data Received from the Venera-11 Probe at Altitudes Below 37 km in the 0.44–0.66 µm Wavelength Range',
         'DOI: 10.1007/s11208-005-0042-1', 'https://link.springer.com/article/10.1007/s11208-005-0042-1'
     ],
-    'Venus surface|Maiorov2005': {
+    'Venus:Surface|Maiorov2005': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
         nm: [440, 450, 460, 470, 480, 490, 500, 505, 700],
         br: [0.089, 0.092, 0.095, 0.097, 0.098, 0.099, 0.1, 0.1, 0.1],
@@ -333,7 +333,7 @@
         'The reflectivity spectrum and opposition effect of Titan’s surface observed by Huygens’ DISR spectrometers',
         'DOI: 10.1016/j.pss.2011.10.014', 'https://www.sciencedirect.com/science/article/pii/S0032063311003254'
     ],
-    '(S VI) Titan surface|Karkoschka2012': {
+    '(S VI) Titan:Surface 0 deg|Karkoschka2012': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm_range: [300, 801, 10],
         br: [0.025, 0.035, 0.046, 0.059, 0.073, 0.089, 0.105, 0.122, 0.140, 0.158, 0.176, 0.194, 0.211, 0.229, 0.245, 0.261, 0.277, 0.292, 0.306, 0.319, 
@@ -345,7 +345,7 @@
         'Eight-color maps of Titan’s surface from spectroscopy with Huygens’ DISR',
         'DOI: 10.1016/j.icarus.2015.06.010', 'https://www.sciencedirect.com/science/article/pii/S0019103515002547'
     ],
-    '(S VI) Titan surface|Karkoschka2016': {
+    '(S VI) Titan:Surface 45 deg|Karkoschka2016': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm: [520, 563, 595, 642, 685, 754, 823, 830, 935, 940, 1070, 1280, 1550, 1590],
         br: [0.093, 0.107, 0.116, 0.130, 0.139, 0.147, 0.151, 0.151, 0.151, 0.151, 0.145, 0.124, 0.070, 0.071],
@@ -496,7 +496,8 @@
         system: 'Generic_Bessell',
         indices: {'B-V': 0.67, 'V-R': 0.38},
         calib: 'Vega',
-        sun: true
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.24], // albedo from https://arxiv.org/abs/1601.02395
     },
     'Schaefer2000': [
         'Nereid Has Complex Large-Amplitude Photometric Variability (Due to Chaotic Rotation)',
