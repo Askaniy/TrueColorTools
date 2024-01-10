@@ -1,9 +1,19 @@
 {
+    'Grav2003': [
+        'Photometric survey of the irregular satellites',
+        'DOI: 10.1016/j.icarus.2003.07.005', 'https://ui.adsabs.harvard.edu/abs/2003Icar..166...33G/abstract'
+    ],
+    'Graykowski2018': [
+        'Colors and Shapes of the Irregular Planetary Satellites',
+        'DOI: 10.3847/1538-3881/aab49b', 'https://ui.adsabs.harvard.edu/abs/2018AJ....155..184G/abstract'
+    ],
+    
     // Jovian small irregulars
     'Rettig2001': [
         'Implied Evolutionary Differences of the Jovian Irregular Satellites from a BVR Color Survey',
         'DOI: 10.1006/icar.2001.6715', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103501967156'
     ],
+
     'Himalia|Rettig2001': {
         tags: ['Solar system', 'moon', 'Jovian system', 'irregular'],
         system: 'Generic_Bessell',
@@ -329,6 +339,11 @@
         'A deeper look at the colors of the saturnian irregular satellites',
         'DOI: 10.1016/j.icarus.2007.04.020', 'https://arxiv.org/abs/astro-ph/0611590'
     ],
+    'Pena2022': [
+        'Colors of Irregular Satellites of Saturn with the Dark Energy Camera',
+        'DOI: 10.3847/1538-3881/ac6258', 'https://ui.adsabs.harvard.edu/abs/2022AJ....163..274P/abstract'
+    ],
+
     'Ymir|Grav2007': {
         tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
         system: 'Generic_Bessell',
