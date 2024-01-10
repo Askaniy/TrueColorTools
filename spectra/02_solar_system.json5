@@ -438,6 +438,34 @@
         br: [0.27, 0.29, 0.30, 0.31, 0.33, 0.35],
         albedo: true, // spherical albedo is 0.23
     },
+    'Helfenstein1991': [
+        'Oberon: Color photometry from Voyager and its geological implications',
+        'DOI: 10.1016/0019-1035(91)90065-2', 'https://www.sciencedirect.com/science/article/pii/0019103591900652'
+    ],
+    'Oberon|Helfenstein1991': { // Average cratered
+        tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
+        system: 'Voyager_ISS-NAC',
+        filters: ['Violet', 'Clear', 'Green'],
+        br: [0.30, 0.27, 0.33],
+        sd: [0.04, 0.03, 0.04],
+        albedo: true, // average normal albedo
+    },
+    'Oberon:B|Helfenstein1991': { // Bright crater rays
+        tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular', 'surface feature'],
+        system: 'Voyager_ISS-NAC',
+        filters: ['Violet', 'Clear', 'Green'],
+        br: [0.37, 0.34, 0.39],
+        sd: [0.04, 0.03, 0.03],
+        albedo: true, // average normal albedo
+    },
+    'Oberon:D|Helfenstein1991': { // Dark materials
+        tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular', 'surface feature'],
+        system: 'Voyager_ISS-NAC',
+        filters: ['Violet', 'Clear', 'Green'],
+        br: [0.24, 0.21, 0.28],
+        sd: [0.03, 0.02, 0.03],
+        albedo: true, // average normal albedo
+    },
     'Neptune|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         nm: [360, 436, 549, 641, 700, 798, 900],

@@ -310,7 +310,12 @@ class Spectrum:
 
     def mean_wavelength(self) -> float:
         """ Returns mean wavelength of the spectrum """
-        return np.average(self.nm, weights=self.br)
+        try:
+            return np.average(self.nm, weights=self.br)
+        except ZeroDivisionError:
+            print(f'# Note for the Spectrum object "{self.name}"')
+            print(f'- Bolometric brightness is zero, the mean wavelength cannot be calculated. Returns 0 nm.')
+            return 0.
 
     def standard_deviation(self) -> float:
         """ Returns uncorrected standard deviation of the spectrum """
@@ -363,7 +368,13 @@ class Spectrum:
 
 def get_filter(name: str): # TODO: cache them!
     """ Creates a Spectrum object based on data file to be found in the `filters` folder """
-    return Spectrum.from_file(name, di.find_filter(name))
+    try:
+        return Spectrum.from_file(name, di.find_filter(name))
+    except StopIteration:
+        print(f'# Note for the Spectrum object "{name}"')
+        print(f'- No filter with the same name in the "filters" folder. Spectrum stub object was created.')
+        return Spectrum(name, *nm_br_sd_stub)
+
 
 bessell_V = get_filter('Generic_Bessell.V').scaled_by_area()
 
@@ -418,11 +429,17 @@ class Photometry:
     
     def to_scope(self, scope: np.ndarray): # TODO: use optimization algorithm here!
         """ Creates a Spectrum object with inter- and extrapolated photometry data to fit the wavelength scope """
-        nm0 = self.mean_wavelengths()
-        nm1 = grid(nm0[0], nm0[-1], resolution)
-        br = interpolating(nm0, self.br, nm1, resolution)
-        nm, br = extrapolating(nm1, br, scope, resolution)
-        return Spectrum(self.name, nm, br, photometry=self)
+        try:
+            nm0 = self.mean_wavelengths()
+            nm1 = grid(nm0[0], nm0[-1], resolution)
+            br = interpolating(nm0, self.br, nm1, resolution)
+            nm, br = extrapolating(nm1, br, scope, resolution)
+            return Spectrum(self.name, nm, br, photometry=self)
+        except Exception:
+            print(f'# Note for the Photometry object "{self.name}"')
+            print(f'- Something unexpected happened while trying to inter/extrapolate to Spectrum object. It was replaced by a stub.')
+            print(f'- More precisely, {format_exc(limit=0)}')
+            return Spectrum(self.name, *nm_br_sd_stub)
     
     def mean_wavelengths(self):
         """ Returns an array of mean wavelengths for each filter """
