@@ -208,7 +208,7 @@
         sd: 0.018,
         scale: ['Galileo_SSI.Green', 0.204], // ±0.016, normal albedo of Terrain A from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
     },
-    'Dactyl|Veverka1996': {
+    '(243 I) Dactyl|Veverka1996': {
         tags: ['Solar system', 'moon', 'minor body', 'asteroid', 'main belt'],
         system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
@@ -216,7 +216,7 @@
         sd: 0.018,
         scale: ['Galileo_SSI.Clear', 0.197], // ±0.038, normal albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
     },
-    'Dactyl|Veverka1996': {
+    '(243 I) Dactyl|Veverka1996': {
         tags: ['Solar system', 'moon', 'minor body', 'asteroid', 'main belt'],
         system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
@@ -1532,7 +1532,7 @@
         sun: true,
         scale: ['Generic_Bessell.V', 0.23], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
     },
-    'Vanth|Brown2010': {
+    '(90482 I) Vanth|Brown2010': {
         tags: ['featured', 'Solar system', 'moon', 'minor body', 'TNO', 'plutino'],
         filters: ['Generic_Bessell.V', 'Generic_Bessell.I'],
         mag: [21.97, 20.94],
@@ -1792,7 +1792,7 @@
         'The Diverse Shapes of Dwarf Planet and Large KBO Phase Curves Observed from New Horizons',
         'DOI: 10.3847/PSJ/ac63a6', 'https://iopscience.iop.org/article/10.3847/PSJ/ac63a6'
     ],
-    'Charon|Verbiscer2022': {
+    '(P I) Charon|Verbiscer2022': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'minor body', 'TNO', 'plutino'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.7315, 'V-R': 0.4},
@@ -2032,7 +2032,7 @@
         sun: true,
         scale: ['Generic_Bessell.V', 0.099], // albedo from Souami et al. (2020)
     },
-    'Ilmarë|Grundy2015': {
+    '(174567 I) Ilmarë|Grundy2015': {
         tags: ['Solar system', 'moon', 'minor body', 'TNO', 'classical', 'classical-h'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.857, 'V-I': 1.266},
@@ -2109,7 +2109,7 @@
         'The mass and density of the dwarf planet (225088) 2007 OR10',
         'DOI: 10.1016/j.icarus.2019.03.013', 'https://arxiv.org/abs/1903.05439'
     ],
-    'Xiangliu|Kiss2019': {
+    '(225088 I) Xiangliu|Kiss2019': {
         tags: ['featured', 'Solar system', 'moon', 'minor body', 'TNO', 'detached'],
         system: 'Generic_Bessell',
         indices: {'V-I': 1.22},
@@ -2137,7 +2137,7 @@
         sun: true,
         scale: ['Generic_Bessell.V', 0.142], // albedo from Ortiz et al. (2019)
     },
-    'Gǃòʼé ǃHú|Grundy2018': {
+    '(229762 I) Gǃòʼé ǃHú|Grundy2018': {
         tags: ['Solar system', 'moon', 'minor body', 'TNO', 'detached'],
         system: 'Generic_Bessell',
         indices: {'V-I': 1.803},
