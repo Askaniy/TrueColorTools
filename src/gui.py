@@ -61,13 +61,21 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         [sg.T('')],
         [sg.Text(tr.gui_rgb[lang], key='T1_colorRGB'), sg.Input(size=1, key='T1_rgb', expand_x=True)],
         [sg.Text(tr.gui_hex[lang], key='T1_colorHEX'), sg.Input(size=1, key='T1_hex', expand_x=True)],
+        [
+            sg.Input(size=1, key='T1_convolved', expand_x=True),
+            sg.Text(tr.gui_in_filter[lang], key='T1_in_filter'),
+            sg.InputCombo(filtersDB, 'Generic_Bessell.V', enable_events=True, key='T1_filter')
+        ],
         [sg.T('')],
         [sg.Push(), sg.Button(button_text=tr.gui_add[lang], size=button_size, key='T1_add'), sg.Push()],
         [sg.Push(), sg.Button(button_text=tr.gui_plot[lang], size=button_size, key='T1_plot'), sg.Push()],
         [sg.Push(), sg.Button(button_text=tr.gui_clear[lang], size=button_size, key='T1_clear'), sg.Push()],
         [sg.T('')],
         [sg.Push(), sg.Button(button_text=tr.gui_export2text[lang], size=button_size, key='T1_export2text'), sg.Push()],
-        [sg.Push(), sg.Input(enable_events=True, key='T1_folder', visible=False), sg.FolderBrowse(button_text=tr.gui_export2table[lang], size=button_size, key='T1_export2table'), sg.Push()]
+        [
+            sg.Push(), sg.Input(enable_events=True, key='T1_folder', visible=False),
+            sg.FolderBrowse(button_text=tr.gui_export2table[lang], size=button_size, key='T1_export2table'), sg.Push()
+        ]
     ]
     def frame(num: int, filtersDB: tuple, lang: str):
         n = str(num)
@@ -207,6 +215,7 @@ def translate(window: sg.Window, T2_num: int, lang: str):
     window['-roundingText-'].update(tr.gui_rnd[lang])
     window['T1_colorRGB'].update(tr.gui_rgb[lang])
     window['T1_colorHEX'].update(tr.gui_hex[lang])
+    window['T1_in_filter'].update(tr.gui_in_filter[lang])
     window['T1_add'].update(tr.gui_add[lang])
     window['T1_plot'].update(tr.gui_plot[lang])
     window['T1_clear'].update(tr.gui_clear[lang])

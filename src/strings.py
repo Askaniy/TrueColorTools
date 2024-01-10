@@ -361,6 +361,11 @@ gui_hex = {
     'ru': 'Цвет HTML',
     'de': 'HTML Farbe'
 }
+gui_in_filter = {
+    'en': 'in filter',
+    'ru': 'в фильтре',
+    'de': 'im Filter'
+}
 gui_add = {
     'en': 'Add spectrum to plot',
     'ru': 'Добавить спектр к графику',

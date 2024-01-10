@@ -48,7 +48,7 @@ def launch_window(lang: str):
     plot_data = [] # of the tabs 1 and 3
     T2_first_time = True
     
-    # List of events that cause color recalculation
+    # List of settings events that cause color recalculation
     triggers = ('-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-interpMode0-', '-interpMode1-', '-bitness-', '-rounding-')
 
     # Window events loop
@@ -125,7 +125,7 @@ def launch_window(lang: str):
 
         if values['-currentTab-'] == 'tab1':
 
-            if (event in triggers or event == 'T1_list') and values['T1_list'] != []:
+            if (event in triggers or event == 'T1_list' or event == 'T1_filter') and values['T1_list'] != []:
                 T1_name = values['T1_list'][0]
                 T1_raw_name = di.obj_dict(objectsDB, '_all_', lang)[T1_name]
                 T1_object_unit = objectsDB[T1_raw_name]
@@ -150,6 +150,7 @@ def launch_window(lang: str):
                 window['T1_graph'].TKCanvas.itemconfig(T1_preview, fill=T1_rgb_show)
                 window['T1_rgb'].update(T1_rgb)
                 window['T1_hex'].update(T1_rgb_show)
+                window['T1_convolved'].update(round(T1_spectrum**core.get_filter(values['T1_filter']), rounding))
             
             elif event == 'T1_tags':
                 window['T1_list'].update(tuple(di.obj_dict(objectsDB, values['T1_tags'], lang).keys()))

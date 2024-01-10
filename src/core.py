@@ -283,7 +283,7 @@ class Spectrum:
 
     def scaled_to_albedo(self, albedo: float, transmission):
         """ Returns a new Spectrum object with brightness scaled to give the albedo after convolution with the filter """
-        current_albedo = self ** transmission.scaled_by_area()
+        current_albedo = self ** transmission
         if current_albedo == 0:
             print(f'# Note for the Spectrum object "{self.name}"')
             print(f'- The spectrum cannot be scaled to an albedo of {albedo} because its current albedo is zero, nothing changed.')
@@ -367,16 +367,16 @@ class Spectrum:
 
 
 def get_filter(name: str): # TODO: cache them!
-    """ Creates a Spectrum object based on data file to be found in the `filters` folder """
+    """ Creates a scaled to the unit area Spectrum object based on data file to be found in the `filters` folder """
     try:
-        return Spectrum.from_file(name, di.find_filter(name))
+        return Spectrum.from_file(name, di.find_filter(name)).scaled_by_area()
     except StopIteration:
         print(f'# Note for the Spectrum object "{name}"')
         print(f'- No filter with the same name in the "filters" folder. Spectrum stub object was created.')
         return Spectrum(name, *nm_br_sd_stub)
 
 
-bessell_V = get_filter('Generic_Bessell.V').scaled_by_area()
+bessell_V = get_filter('Generic_Bessell.V')
 
 sun_SI = Spectrum.from_file('Sun', 'spectra/files/CALSPEC/sun_reference_stis_002.fits') # W / (m² nm)
 sun_in_V = sun_SI ** bessell_V
@@ -398,7 +398,7 @@ class Photometry:
 
         Args:
         - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
-        - `filters` (Iterable): list of energy response functions, storing as Spectrum objects (see `filters` folder)
+        - `filters` (Iterable): list of energy response functions scaled to the unit area, storing as Spectrum objects
         - `br` (Iterable): same-size list of intensity
         - `sd` (Iterable): same-size list of standard deviations
         """
@@ -450,19 +450,19 @@ class Photometry:
         return np.array([passband.standard_deviation() for passband in self.filters])
 
     def __pow__(self, other: Spectrum) -> np.ndarray[float]:
-        """ Convolve all the filters with a spectrum, assuming equal output for a flat spectrum """
-        return np.array([other ** passband.scaled_by_area() for passband in self.filters])
+        """ Convolve all the filters with a spectrum """
+        return np.array([other ** passband for passband in self.filters])
 
     def __mul__(self, other: Spectrum):
         """ Returns a new Photometry object with the emitter added (untied from a white standard spectrum) """
-        # Scaling brightness scales filters' profiles too! I'll leave the area the same just in case
-        filters = [(passband * other).scaled_by_area(passband.integrate()) for passband in self.filters]
+        # Scaling brightness scales filters' profiles too!
+        filters = [(passband * other).scaled_by_area() for passband in self.filters]
         return Photometry(f'{self.name} ∙ {other.name}', filters, self.br * (self ** other))
 
     def __truediv__(self, other: Spectrum):
         """ Returns a new Photometry object with the emitter removed (apply a white standard spectrum) """
-        # Scaling brightness scales filters' profiles too! I'll leave the area the same just in case
-        filters = [(passband / other).scaled_by_area(passband.integrate()) for passband in self.filters]
+        # Scaling brightness scales filters' profiles too!
+        filters = [(passband / other).scaled_by_area() for passband in self.filters]
         return Photometry(f'{self.name} / {other.name}', filters, self.br / (self ** other))
 
 
