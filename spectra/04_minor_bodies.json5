@@ -79,12 +79,12 @@
         file: 'spectra/files/SMASS/a000016.2.txtU',
         scale: ['Generic_Bessell.V', 0.16], // albedo from Shepard et al. (2021)
     },
-    '(16) Psyche: Bright materials|SMASS': {
+    '(16) Psyche: Bright areas|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt', 'surface feature'],
         file: 'spectra/files/SMASS/a000016.2.txtU',
         scale: ['Generic_Bessell.V', 0.1888]
     },
-    '(16) Psyche: Dark materials|SMASS': {
+    '(16) Psyche: Dark areas|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt', 'surface feature'],
         file: 'spectra/files/SMASS/a000016.2.txtU',
         scale: ['Generic_Bessell.V', 0.128]
@@ -192,7 +192,7 @@
         'Dactyl: Galileo Observations of Ida’s Satellite',
         'DOI: 10.1006/icar.1996.0045', 'https://www.sciencedirect.com/science/article/pii/S0019103596900457'
     ],
-    '(243) Ida: Bright materials|Veverka1996': {
+    '(243) Ida: Bright areas|Veverka1996': {
         tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
         system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
@@ -200,7 +200,7 @@
         sd: 0.018,
         scale: ['Galileo_SSI.Green', 0.217], // ±0.026, normal albedo of Terrain B from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
     },
-    '(243) Ida: Dark materials|Veverka1996': {
+    '(243) Ida: Dark areas|Veverka1996': {
         tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
         system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
@@ -280,7 +280,7 @@
         sd: [0.05, 0.06, 0.07, 0.07, 0.07, 0.06],
         albedo: true, // global mean normal albedo from the Table VI
     },
-    '(951) Gaspra: Bright materials|Helfenstein1994': {
+    '(951) Gaspra: Bright areas|Helfenstein1994': {
         tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
         system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
@@ -288,7 +288,7 @@
         sd: [0.03, 0.06, 0.06, 0.04, 0.05, 0.05],
         albedo: true, // normal albedo of PC2-α material from the Table VI
     },
-    '(951) Gaspra: Dark materials|Helfenstein1994': {
+    '(951) Gaspra: Dark areas|Helfenstein1994': {
         tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
         system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
@@ -1595,7 +1595,7 @@
         br: [0.0175, 0.01736, 0.0174, 0.01727],
         albedo: true
     },
-    '(101955) Bennu: Dark materials|LeCorre2019': {
+    '(101955) Bennu: Dark areas|LeCorre2019': {
         tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
         system: 'OSIRIS-REX_MapCam',
         filters: ['Bf', 'Vf', 'Wf', 'Xf'],
@@ -1977,7 +1977,7 @@
         sd: [0.0012, 0.0011, 0.0010, 0.0009, 0.0008, 0.0006, 0.00050],
         albedo: true, // normal (=geometric) albedo spectrum from the Table 3
     },
-    '(162173) Ryugu: Bright materials|Yokota2021': {
+    '(162173) Ryugu: Bright areas|Yokota2021': {
         tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
         system: 'Hayabusa2_ONC-T',
         filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
@@ -1985,7 +1985,7 @@
         sd: [0.0018, 0.0017, 0.0016, 0.0015, 0.0011, 0.0009, 0.0008],
         albedo: true, // normal (=geometric) albedo spectrum of N-pole bright area from the Table 6
     },
-    '(162173) Ryugu: Dark materials|Yokota2021': {
+    '(162173) Ryugu: Dark areas|Yokota2021': {
         tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
         system: 'Hayabusa2_ONC-T',
         filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],

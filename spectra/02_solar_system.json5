@@ -123,7 +123,7 @@
         br: [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31],
         scale: ['Generic_Bessell.V', 0.170]
     },
-    'Mars: Bright materials|USGSarchive': {
+    'Mars: Bright areas|USGSarchive': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'surface feature'],
         nm: [330, 342, 363, 381, 404, 440, 475, 504, 540, 566, 600, 633, 666, 700, 704.7, 716.4, 728.9, 739.8, 751.9, 763.6, 775.6, 786.3, 799, 811.7,
             822.4, 837.1, 849.8, 862.5],
@@ -131,7 +131,7 @@
             0.927670, 0.950918, 0.968006, 0.973932, 1.007903, 1.009743, 0.983539, 0.998712, 1.002135, 0.990941, 0.984577, 0.981692, 0.969340, 0.963597],
         scale: ['Generic_Bessell.V', 0.26], // https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2001JE001580
     },
-    'Mars: Dark materials|USGSarchive': {
+    'Mars: Dark areas|USGSarchive': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'surface feature'],
         nm: [330, 342, 363, 381, 404, 440, 475, 504, 540, 566, 600, 633, 644.1, 656, 667.9, 679.9, 691.7, 704.7, 716.4, 728.9, 739.8, 751.9, 763.6,
             775.6, 786.3, 799, 811.7, 822.4, 837.1, 849.8, 862.5],
@@ -450,7 +450,7 @@
         sd: [0.04, 0.03, 0.04],
         albedo: true, // average normal albedo
     },
-    '(U IV) Oberon: Bright materials|Helfenstein1991': { // crater rays
+    '(U IV) Oberon: Bright areas|Helfenstein1991': { // crater rays
         tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular', 'surface feature'],
         system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Clear', 'Green'],
@@ -458,7 +458,7 @@
         sd: [0.04, 0.03, 0.03],
         albedo: true, // average normal albedo
     },
-    '(U IV) Oberon: Dark materials|Helfenstein1991': {
+    '(U IV) Oberon: Dark areas|Helfenstein1991': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular', 'surface feature'],
         system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Clear', 'Green'],

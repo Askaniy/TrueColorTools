@@ -196,7 +196,7 @@ def obj_dict(database: dict, tag: str, lang: str):
                 flag = False
         if flag:
             if '|' in raw_name:
-                new_name, source = raw_name.split('|', -1)
+                new_name, source = raw_name.split('|', 1)
             else:
                 new_name, source = raw_name, ''
             if lang != 'en': # parsing and translating
@@ -209,11 +209,19 @@ def obj_dict(database: dict, tag: str, lang: str):
                     parts = new_name.split('/', 1)
                     index = parts[0] + '/'
                     new_name = parts[1].strip()
+                note = ''
+                if ':' in new_name:
+                    parts = new_name.split(':', 1)
+                    note = parts[1].strip()
+                    new_name = parts[0].strip()
+                    if note in tr.notes:
+                        note = tr.notes[note][lang]
+                    note = ': ' + note
                 for obj_name, translation in tr.names.items():
                     if new_name.startswith(obj_name) or obj_name in new_name.split():
                         new_name = new_name.replace(obj_name, translation[lang])
                         break
-                new_name = index + new_name
+                new_name = index + new_name + note
             new_name = new_name if source == '' else f'{new_name} [{source}]'
             names |= {new_name: raw_name}
     return names
