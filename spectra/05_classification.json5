@@ -64,7 +64,7 @@
         sun: true,
         scale: ['Generic_Bessell.V', 0.04], // estimation
     },
-    'Comets:SP|MBOSS': {
+    'Comets: Short-period|MBOSS': {
         tags: ['featured', 'Solar system', 'class', 'orbit'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.87, 'V-R': 0.50, 'R-I': 0.45},
@@ -72,7 +72,7 @@
         sun: true,
         scale: ['Generic_Bessell.V', 0.04]
     },
-    'Comets:LP|MBOSS': {
+    'Comets: Long-period|MBOSS': {
         tags: ['featured', 'Solar system', 'class', 'orbit'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.79, 'V-R': 0.46, 'R-I': 0.44},
@@ -112,7 +112,7 @@
         sun: true,
         scale: ['Generic_Bessell.V', 0.148], // albedo from Zelario’s sheet
     },
-    'Cubewano:H|MBOSS': {
+    'Cubewano: Hot, inner objects|MBOSS': {
         tags: ['featured', 'Solar system', 'class', 'orbit'],
         system: 'Generic_Bessell',
         indices: {'U-B': 0.27, 'B-V': 0.88, 'V-R': 0.54, 'R-I': 0.53},
@@ -120,7 +120,7 @@
         sun: true,
         scale: ['Generic_Bessell.V', 0.102], // albedo from Zelario’s sheet
     },
-    'Cubewano:C|MBOSS': {
+    'Cubewano: Cold, outer objects|MBOSS': {
         tags: ['featured', 'Solar system', 'class', 'orbit'],
         system: 'Generic_Bessell',
         indices: {'U-B': 0.59, 'B-V': 1.00, 'V-R': 0.63, 'R-I': 0.59},

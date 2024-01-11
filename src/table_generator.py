@@ -10,6 +10,19 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
     objects = di.obj_dict(objectsDB, tag, lang)
     l = len(objects)
 
+    # Load fonts
+    name_size = 42
+    object_size = 17
+    help_size = 17
+    help_step = 5 + help_size
+    note_size = 16
+    note_step = 4 + note_size
+    name_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensedSemiBold.ttf', name_size)
+    object_font = ImageFont.truetype('src/fonts/NotoSans-DisplayExtraCondensed.ttf', object_size)
+    help_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensedSemiBold.ttf', help_size)
+    note_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensed.ttf', note_size)
+    small_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensed.ttf', 12)
+
     # Layout
     half_square = 50 # half of square width
     r = 46 # half a side of a square
@@ -19,53 +32,54 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
     w_border = 32 # pixels of left and right spaces
     h_border = 32 # pixels of top and bottom spaces
 
+    # Calculating grid widths
     max_obj_per_raw = 14
     min_obj_to_scale = 8
     objects_per_raw = min(max(l, min_obj_to_scale), max_obj_per_raw)
     w_table = 2*half_square*objects_per_raw
-    w = 2*w_border + w_table # calculate image width
-
-    name_size = 42
-    object_size = 17
-    help_size = 17
-    help_step = 5 + help_size
-    note_size = 16
-    note_step = 4 + note_size
-
-    # Load fonts
-    name_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensedSemiBold.ttf', name_size)
-    object_font = ImageFont.truetype('src/fonts/NotoSans-DisplayExtraCondensed.ttf', object_size)
-    help_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensedSemiBold.ttf', help_size)
-    note_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensed.ttf', note_size)
-    small_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensed.ttf', 12)
+    w = 2*w_border + w_table # image width
+    w0 = w_border + half_square - r # using shift width
+    w1 = int(w * 0.618034) # golden ratio for the info column
 
     # Support for multiline title
     title_lines = line_splitter(tag.join(tr.name_text[lang]), name_font, w_table)
     title = '\n'.join(title_lines)
     name_size *= len(title_lines)
 
-    # Guide grid
+    # Notes calculations
+    notes = di.notes_list(objects.keys()) # not in the main cycle because may influence on the template
+    notes_numbered = [f'{superscript(note_num+1)} {note}' for note_num, note in enumerate(notes)]
+    w_notes = w0 + max(width(note_text, note_font) for note_text in notes_numbered) # notes columns width
+    notes_columns_num = (w1 - w0) // w_notes # max possible number of columns
+    info_hight = 4
+    notes_per_column = info_hight if info_hight * notes_columns_num >= len(notes) else round(len(notes) // notes_columns_num + 1)
+
+    # Calculating grid hights
     h0 = h_border + name_size
     h1 = h0 + 2*half_square * int(ceil(l / objects_per_raw)) + note_step
     h2 = h1 + help_step
-    h = h1 + help_step + 4*note_step + h_border # calculate image width
-    w0 = w_border + half_square - r
-    w1 = 2*w0 + max([width(f'{note} {text[lang]}', note_font) for note, text in list(tr.notes.items())[:4]]) # second column depends on the width of the first
-    w2 = int(w * 0.618034) # golden ratio
+    h = h1 + help_step + notes_per_column*note_step + h_border # image hight
 
     # Create image template
     img = Image.new('RGB', (w, h), (0, 0, 0))
-    draw = ImageDraw.Draw(img)                                                              # text brightness formula: br = 255 * (x^(1/2.2))
-    draw.multiline_text((int(w/2), int(h0/2)), title, fill=(255, 255, 255), font=name_font, anchor='mm', align='center', spacing=0)
-    draw.text((w0, h1), tr.legend[lang], fill=(230, 230, 230), font=help_font, anchor='la') # x = 0.8, br = 230
-    draw.text((w2, h1), tr.note[lang], fill=(230, 230, 230), font=help_font, anchor='la')   # x = 0.8, br = 230
-    note_num = 0
-    for note, text in tr.notes.items(): # x = 0.6, br = 202
-        draw.text((w0 if note_num < 4 else w1, h2 + note_step*(note_num%4)), f'{note} {text[lang]}', fill=(202, 202, 202), font=note_font, anchor='la')
-        note_num += 1
+    draw = ImageDraw.Draw(img)
+    draw.multiline_text( # text brightness formula: br = 255 * (x^(1/2.2))
+        xy=(int(w/2), int(h0/2)), text=title, fill=(255, 255, 255),
+        font=name_font, anchor='mm', align='center', spacing=0
+    )
+    draw.text((w0, h1), tr.notes_label[lang], fill=(230, 230, 230), font=help_font, anchor='la') # x = 0.8, br = 230
+    draw.text((w1, h1), tr.info_label[lang], fill=(230, 230, 230), font=help_font, anchor='la')  # x = 0.8, br = 230
+    for note_num, note in enumerate(notes): # x = 0.6, br = 202
+        draw.text(
+            xy=(w0 + w_notes * (note_num // notes_per_column), h2 + note_step * (note_num % notes_per_column)),
+            text=notes_numbered[note_num], fill=(202, 202, 202), font=note_font, anchor='la'
+        )
     for info_num, info in enumerate([albedoFlag, srgb, gamma]): # x = 0.75, br = 224
-        draw.text((w2, h2 + note_step*info_num), f'{tr.info[lang][info_num]}: {info}', fill=(224, 224, 224), font=note_font, anchor='la')
-    draw.text((w2, h2 + note_step*(1+info_num)), tr.link, fill=(0, 200, 255), font=note_font, anchor='la')
+        draw.text(
+            xy=(w1, h2 + note_step * info_num), text=f'{tr.info_list[lang][info_num]}: {info}',
+            fill=(224, 224, 224), font=note_font, anchor='la'
+        )
+    draw.text((w1, h2 + note_step*(1+info_num)), tr.link, fill=(0, 200, 255), font=note_font, anchor='la')
     
     # Table generator
 
@@ -101,7 +115,7 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
         
         ref_len = 0 # to avoid intersections with indices in the left corner
         if '[' in name:
-            parts = name.split('[', -1)
+            parts = name.split('[', 1)
             name = parts[0].strip()
             ref = parts[1][:-1]
             if ',' in ref: # check for several references, no more than 3 supported
@@ -134,6 +148,12 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
             name = parts[1].strip()
             draw.text((center_x-ar, center_y-ar-workaround_shift), f'{parts[0]}/', fill=text_color, font=small_font)
         
+        if ':' in name:
+            parts = name.split(':', 1)
+            name = parts[0].strip()
+            note = parts[1].strip()
+            name += superscript(notes.index(note) + 1)
+
         splitted = line_splitter(name, object_font, ar+br)
         shift = object_size/2 if len(splitted) == 1 else object_size
         draw.multiline_text((center_x-ar, center_y-shift), '\n'.join(splitted), fill=text_color, font=object_font, spacing=0)
@@ -144,7 +164,9 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
     print(f'Color table saved as {file_name}\n')
 
 
-separators = (' ', ':', '+', '-')
+def superscript(number: int):
+    """ Converts a number to be a superscript string """
+    return ''.join(['⁰¹²³⁴⁵⁶⁷⁸⁹'[int(digit)] for digit in str(number)]) 
 
 def spacing_year(line: str):
     """ Adds space between author and year in a reference name """
@@ -162,6 +184,8 @@ def line_splitter(line: str, font: ImageFont.FreeTypeFont, maxW: int):
         return [line]
     else:
         return recursive_split(line.split(), font, maxW)
+
+separators = (' ', ':', '+', '-')
 
 def recursive_split(lst0: list, font: ImageFont.FreeTypeFont, maxW: int, hyphen=True):
     words_widths = [width(i, font) for i in lst0]

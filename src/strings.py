@@ -241,15 +241,10 @@ names = {
 }
 
 # Window
-ref = {
+gui_ref = {
     'en': 'References',
     'ru': 'Источники',
     'de': 'Quellen'
-}
-note = {
-    'en': 'Notes',
-    'ru': 'Примечания',
-    'de': 'Anmerkungen'
 }
 gui_info = {
     'en': 'Info',
@@ -283,9 +278,9 @@ gui_tabs = {
     'de': ['Datenbank-Viewer', 'Multiband-Verarbeitung', 'Schwarzkörper & Rotverschiebung']
 }
 gui_menu = {
-    'en': [['File', [ref['en'], note['en'], gui_info['en'], gui_exit['en']]], ['Language', lang_list['en']]],
-    'ru': [['Файл', [ref['ru'], note['ru'], gui_info['ru'], gui_exit['ru']]], ['Язык', lang_list['ru']]],
-    'de': [['Datei', [ref['de'], note['de'], gui_info['de'], gui_exit['de']]], ['Sprache', lang_list['de']]],
+    'en': [['File', [gui_ref['en'], gui_info['en'], gui_exit['en']]], ['Language', lang_list['en']]],
+    'ru': [['Файл', [gui_ref['ru'], gui_info['ru'], gui_exit['ru']]], ['Язык', lang_list['ru']]],
+    'de': [['Datei', [gui_ref['de'], gui_info['de'], gui_exit['de']]], ['Sprache', lang_list['de']]],
 }
 
 # Settings sidebar
@@ -411,6 +406,11 @@ legend = {
     'ru': 'Легенда',
     'de': 'Legende'
 }
+notes_label = {
+    'en': 'Notes',
+    'ru': 'Примечания',
+    'de': 'Anmerkungen'
+}
 notes = {
     'B:': {'en': 'bright regions', 'ru': 'яркие участки', 'de': 'helle Regionen'},
     'D:': {'en': 'dark regions', 'ru': 'тёмные участки', 'de': 'dunkle Regionen'},
@@ -421,7 +421,12 @@ notes = {
     'H:': {'en': 'hot, inner objects', 'ru': 'тёплые, внутренние объекты', 'de': 'heiße, innere Objekte'},
     'C:': {'en': 'cold, outer objects', 'ru': 'холодные, внешние объекты', 'de': 'kalte, äußere Objekte'}
 }
-info = {
+info_label = {
+    'en': 'Info',
+    'ru': 'Информация',
+    'de': 'Info'
+}
+info_list = {
     'en': ['Albedo mode', 'sRGB color space', 'Gamma correction'],
     'ru': ['Режим альбедо', 'Пространство sRGB', 'Гамма-коррекция'],
     'de': ['Albedo-Modus', 'sRGB-Farbraum', 'Gammakorrektur']

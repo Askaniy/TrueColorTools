@@ -1,3 +1,4 @@
+from typing import Iterable
 from pathlib import Path
 from traceback import format_exc
 from json5 import load as json5load
@@ -224,3 +225,15 @@ def tag_list(database: dict):
         if 'tags' in obj_data:
             tag_set.update(obj_data['tags'])
     return sorted(tag_set)
+
+def notes_list(names: Iterable):
+    """ Generates a list of notes found in the spectra database """
+    notes = []
+    for name in names:
+        if ':' in name:
+            if '[' in name:
+                name = name.split('[', -1)[0]
+            note = name.split(':')[1].strip()
+            if note not in notes:
+                notes.append(note)
+    return notes

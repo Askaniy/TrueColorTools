@@ -94,7 +94,7 @@ def launch_window(lang: str):
             window = gui.translate(window, T2_num, lang)
             window['T1_list'].update(values=tuple(di.obj_dict(objectsDB, values['T1_tags'], lang).keys()))
         
-        elif event == tr.ref[lang]:
+        elif event == tr.gui_ref[lang]:
             to_show = ''
             for key, value in refsDB.items():
                 to_show += f'"{key}": {value[0]}\n'
@@ -102,12 +102,6 @@ def launch_window(lang: str):
                     to_show += info + '\n'
                 to_show += '\n'
             sg.popup_scrolled(to_show, title=event, size=(150, 25))
-        
-        elif event == tr.note[lang]:
-            notes = []
-            for note, translation in tr.notes.items():
-                notes.append(f'{note} {translation[lang]}')
-            sg.popup('\n'.join(notes), title=event)
         
         elif event == tr.gui_info[lang]:
             sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event)

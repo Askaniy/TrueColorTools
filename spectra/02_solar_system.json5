@@ -76,7 +76,7 @@
         'A New Analysis of the Spectra Obtained by the Venera Missions in the Venusian Atmosphere. I. The Analysis of the Data Received from the Venera-11 Probe at Altitudes Below 37 km in the 0.44–0.66 µm Wavelength Range',
         'DOI: 10.1007/s11208-005-0042-1', 'https://link.springer.com/article/10.1007/s11208-005-0042-1'
     ],
-    'Venus:Surface|Maiorov2005': {
+    'Venus: Surface|Maiorov2005': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
         nm: [440, 450, 460, 470, 480, 490, 500, 505, 700],
         br: [0.089, 0.092, 0.095, 0.097, 0.098, 0.099, 0.1, 0.1, 0.1],
@@ -123,7 +123,7 @@
         br: [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31],
         scale: ['Generic_Bessell.V', 0.170]
     },
-    'Mars:B|USGSarchive': {
+    'Mars: Bright materials|USGSarchive': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'surface feature'],
         nm: [330, 342, 363, 381, 404, 440, 475, 504, 540, 566, 600, 633, 666, 700, 704.7, 716.4, 728.9, 739.8, 751.9, 763.6, 775.6, 786.3, 799, 811.7,
             822.4, 837.1, 849.8, 862.5],
@@ -131,7 +131,7 @@
             0.927670, 0.950918, 0.968006, 0.973932, 1.007903, 1.009743, 0.983539, 0.998712, 1.002135, 0.990941, 0.984577, 0.981692, 0.969340, 0.963597],
         scale: ['Generic_Bessell.V', 0.26], // https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2001JE001580
     },
-    'Mars:D|USGSarchive': {
+    'Mars: Dark materials|USGSarchive': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'surface feature'],
         nm: [330, 342, 363, 381, 404, 440, 475, 504, 540, 566, 600, 633, 644.1, 656, 667.9, 679.9, 691.7, 704.7, 716.4, 728.9, 739.8, 751.9, 763.6,
             775.6, 786.3, 799, 811.7, 822.4, 837.1, 849.8, 862.5],
@@ -189,7 +189,7 @@
         file: 'spectra/files/Karkoschka1994/jupiter.txtA',
         albedo: true
     },
-    '(J I) Io:T|USGSarchive': {
+    '(J I) Io: Trailing hemisphere|USGSarchive': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 739.8, 751.9, 763.6, 775.6, 786.3, 799, 811.7, 822.4, 837.1, 849.8, 862.5],
         br: [0.126856, 0.161157, 0.189998, 0.312668, 0.455349, 0.642046, 0.775382, 0.801427, 0.811630, 0.890139, 0.942953, 1.004252, 1.005697, 1.015561,
@@ -202,14 +202,14 @@
         br: [0.06645, 0.09565, 0.13699, 0.18699, 0.24564, 0.31289, 0.39051, 0.46464, 0.49727, 0.51954, 0.56077, 0.57946, 0.5982, 0.62042],
         albedo: true
     },
-    '(J II) Europa:T|USGSarchive': {
+    '(J II) Europa: Trailing hemisphere|USGSarchive': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
         br: [0.352826, 0.410782, 0.467415, 0.602579, 0.688769, 0.806425, 0.839300, 0.852109, 0.913667, 0.961235, 0.979446, 1.006591, 1.026941, 1.038414,
             1.067850, 1.062889, 1.063046],
         scale: ['Generic_Bessell.V', 0.6110393], // Madden2018
     },
-    '(J II) Europa:T|Madden2018': {
+    '(J II) Europa: Trailing hemisphere|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [340.98, 358.07, 375.17, 381.3, 391.27, 419.79, 441.32, 451.3, 459.94, 468.22, 476.49, 484.82, 492.05, 503.62, 518.47, 551.04, 598.92, 647.01,
             695.29, 743.72, 792.14, 840.63, 889.18, 931.13, 954.13, 995.11],
@@ -217,14 +217,14 @@
             0.62658, 0.63586, 0.63949, 0.639, 0.63841, 0.63616, 0.63216, 0.6371, 0.64146, 0.62304],
         albedo: true
     },
-    '(J III) Ganymede:L|USGSarchive': {
+    '(J III) Ganymede: Leading hemisphere|USGSarchive': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
         br: [0.488778, 0.590744, 0.632155, 0.752500, 0.783059, 0.869610, 0.918507, 0.955278, 0.973874, 1.010833, 1.021557, 1.046712, 1.040900, 1.035977,
             1.049606, 1.044146, 1.036557],
         scale: ['Generic_Bessell.V', 0.4636778], // Madden2018
     },
-    '(J III) Ganymede:L|Madden2018': {
+    '(J III) Ganymede: Leading hemisphere|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [320.0, 336.21, 352.99, 363.67, 377.95, 388.61, 404.13, 424.95, 446.14, 463.01, 478.07, 506.08, 548.23, 573.42, 625.63, 680.99, 715.56,
             779.75, 830.75, 876.4, 932.56, 968.8],
@@ -232,14 +232,14 @@
             0.49825, 0.48741, 0.48884, 0.49226, 0.49704, 0.49245],
         albedo: true
     },
-    '(J IV) Callisto:L|USGSarchive': {
+    '(J IV) Callisto: Leading hemisphere|USGSarchive': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 837.1, 849.8, 862.5],
         br: [0.406242, 0.456089, 0.518130, 0.652152, 0.691349, 0.777651, 0.840575, 0.881522, 0.918704, 0.941487, 0.969265, 0.990831, 0.997041, 0.993501,
             1.007422, 0.986979, 1.001239, 0.985442, 1.006188],
         scale: ['Generic_Bessell.V', 0.1688978], // Madden2018
     },
-    '(J IV) Callisto:L|Madden2018': {
+    '(J IV) Callisto: Leading hemisphere|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [353.4, 377.13, 402.86, 433.37, 496.32, 544.31, 592.48, 640.67, 666.97, 745.88, 794.39, 842.94, 891.47, 926.57],
         br: [0.0891, 0.10305, 0.12241, 0.1311, 0.15594, 0.16799, 0.17514, 0.18138, 0.18453, 0.19318, 0.19019, 0.18602, 0.18271, 0.18578],
@@ -333,7 +333,7 @@
         'The reflectivity spectrum and opposition effect of Titan’s surface observed by Huygens’ DISR spectrometers',
         'DOI: 10.1016/j.pss.2011.10.014', 'https://www.sciencedirect.com/science/article/pii/S0032063311003254'
     ],
-    '(S VI) Titan:Surface 0 deg|Karkoschka2012': {
+    '(S VI) Titan: Surface 0°|Karkoschka2012': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm_range: [300, 801, 10],
         br: [0.025, 0.035, 0.046, 0.059, 0.073, 0.089, 0.105, 0.122, 0.140, 0.158, 0.176, 0.194, 0.211, 0.229, 0.245, 0.261, 0.277, 0.292, 0.306, 0.319, 
@@ -345,7 +345,7 @@
         'Eight-color maps of Titan’s surface from spectroscopy with Huygens’ DISR',
         'DOI: 10.1016/j.icarus.2015.06.010', 'https://www.sciencedirect.com/science/article/pii/S0019103515002547'
     ],
-    '(S VI) Titan:Surface 45 deg|Karkoschka2016': {
+    '(S VI) Titan: Surface 45°|Karkoschka2016': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm: [520, 563, 595, 642, 685, 754, 823, 830, 935, 940, 1070, 1280, 1550, 1590],
         br: [0.093, 0.107, 0.116, 0.130, 0.139, 0.147, 0.151, 0.151, 0.151, 0.151, 0.145, 0.124, 0.070, 0.071],
@@ -442,7 +442,7 @@
         'Oberon: Color photometry from Voyager and its geological implications',
         'DOI: 10.1016/0019-1035(91)90065-2', 'https://www.sciencedirect.com/science/article/pii/0019103591900652'
     ],
-    '(U IV) Oberon|Helfenstein1991': { // Average cratered
+    '(U IV) Oberon|Helfenstein1991': { // average cratered
         tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
         system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Clear', 'Green'],
@@ -450,7 +450,7 @@
         sd: [0.04, 0.03, 0.04],
         albedo: true, // average normal albedo
     },
-    '(U IV) Oberon:B|Helfenstein1991': { // Bright crater rays
+    '(U IV) Oberon: Bright materials|Helfenstein1991': { // crater rays
         tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular', 'surface feature'],
         system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Clear', 'Green'],
@@ -458,7 +458,7 @@
         sd: [0.04, 0.03, 0.03],
         albedo: true, // average normal albedo
     },
-    '(U IV) Oberon:D|Helfenstein1991': { // Dark materials
+    '(U IV) Oberon: Dark materials|Helfenstein1991': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular', 'surface feature'],
         system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Clear', 'Green'],
