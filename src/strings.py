@@ -446,7 +446,7 @@ names = {
     'Callisto': {'ru': 'Каллисто', 'de': 'Kallisto'},
     'Saturnian irregulars': {'ru': 'Нерег. сп. Сатурна', 'de': 'irreguläre Saturnmonde'},
     'Saturn': {'ru': 'Сатурн', 'de': 'Saturn'},
-    'Rings': {'ru': 'Кольца', 'de': 'Ringe'},
+    'Rings of Saturn': {'ru': 'Кольца Сатурна', 'de': 'Ringe des Saturn'},
     'Enceladus': {'ru': 'Энцелад', 'de': 'Enceladus'},
     'Tethys': {'ru': 'Тефия', 'de': 'Tethys'},
     'Dione': {'ru': 'Диона', 'de': 'Dione'},

@@ -47,12 +47,15 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
     name_size *= len(title_lines)
 
     # Notes calculations
+    notes_per_column = 4 # number of info lines
     notes = di.notes_list(objects.keys()) # not in the main cycle because may influence on the template
-    notes_numbered = [f'{superscript(note_num+1)} {note}' for note_num, note in enumerate(notes)]
-    w_notes = w0 + max(width(note_text, note_font) for note_text in notes_numbered) # notes columns width
-    notes_columns_num = (w1 - w0) // w_notes # max possible number of columns
-    info_hight = 4
-    notes_per_column = info_hight if info_hight * notes_columns_num >= len(notes) else round(len(notes) // notes_columns_num + 1)
+    notes_flag = bool(notes)
+    if notes_flag:
+        notes_numbered = [f'{superscript(note_num+1)} {note}' for note_num, note in enumerate(notes)]
+        w_notes = w0 + max(width(note_text, note_font) for note_text in notes_numbered) # notes columns width
+        notes_columns_num = (w1 - w0) // w_notes # max possible number of columns
+        if notes_per_column * notes_columns_num < len(notes):
+            notes_per_column = round(len(notes) // notes_columns_num + 1)
 
     # Calculating grid hights
     h0 = h_border + name_size
@@ -67,13 +70,18 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
         xy=(int(w/2), int(h0/2)), text=title, fill=(255, 255, 255),
         font=name_font, anchor='mm', align='center', spacing=0
     )
-    draw.text((w0, h1), tr.notes_label[lang], fill=(230, 230, 230), font=help_font, anchor='la') # x = 0.8, br = 230
+
+    # Notes writing
+    if notes_flag:
+        draw.text((w0, h1), tr.notes_label[lang], fill=(230, 230, 230), font=help_font, anchor='la') # x = 0.8, br = 230
+        for note_num, note in enumerate(notes): # x = 0.6, br = 202
+            draw.text(
+                xy=(w0 + w_notes * (note_num // notes_per_column), h2 + note_step * (note_num % notes_per_column)),
+                text=notes_numbered[note_num], fill=(202, 202, 202), font=note_font, anchor='la'
+            )
+    
+    # Info writing
     draw.text((w1, h1), tr.info_label[lang], fill=(230, 230, 230), font=help_font, anchor='la')  # x = 0.8, br = 230
-    for note_num, note in enumerate(notes): # x = 0.6, br = 202
-        draw.text(
-            xy=(w0 + w_notes * (note_num // notes_per_column), h2 + note_step * (note_num % notes_per_column)),
-            text=notes_numbered[note_num], fill=(202, 202, 202), font=note_font, anchor='la'
-        )
     for info_num, info in enumerate([albedoFlag, srgb, gamma]): # x = 0.75, br = 224
         draw.text(
             xy=(w1, h2 + note_step * info_num), text=f'{tr.info_list[lang][info_num]}: {info}',
@@ -82,7 +90,6 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
     draw.text((w1, h2 + note_step*(1+info_num)), tr.link, fill=(0, 200, 255), font=note_font, anchor='la')
     
     # Table generator
-
     n = 0 # object counter
     for name, raw_name in objects.items():
         object_unit = objectsDB[raw_name]
@@ -148,7 +155,7 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
             name = parts[1].strip()
             draw.text((center_x-ar, center_y-ar-workaround_shift), f'{parts[0]}/', fill=text_color, font=small_font)
         
-        if ':' in name:
+        if notes_flag and ':' in name:
             parts = name.split(':', 1)
             name = parts[0].strip()
             note = parts[1].strip()

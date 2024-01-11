@@ -260,7 +260,7 @@
         file: 'spectra/files/Karkoschka1994/saturn.txtA',
         albedo: true
     },
-    'Rings|USGSarchive': {
+    'Rings of Saturn|USGSarchive': {
         tags: ['featured', 'Solar system', 'ring', 'Saturnian system'],
         nm: [326, 343, 360, 383, 403, 435, 469, 500, 534, 566, 599, 633, 644.1, 656, 667.9, 679.9, 691.7, 704.7, 716.4, 728.9, 739.8, 751.9, 763.6,
             775.6, 786.3, 799, 811.7, 822.4, 837.1, 849.8, 862.5],
