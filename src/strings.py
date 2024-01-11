@@ -55,9 +55,9 @@ gui_gamma = {
     'de': 'Gammakorrektur'
 }
 gui_br = {
-    'en': ['Brightness mode', 'albedo', 'chromaticity'],
-    'ru': ['Режим яркости', 'альбедо', 'цветность'],
-    'de': ['Helligkeitsmodus', 'Farbe mit Albedo', 'Farbton']
+    'en': ['Brightness mode', 'chromaticity', 'spherical albedo', 'geometric albedo', 'albedo'],
+    'ru': ['Режим яркости', 'цветность', 'сферическое альбедо', 'геометрическое альбедо', 'альбедо'],
+    'de': ['Helligkeitsmodus', 'Farbton', 'sphärische Albedo', 'geometrische Albedo', 'Albedo']
 }
 gui_interp = {
     'en': ['Interpolator/extrapolator', 'old', 'new'],

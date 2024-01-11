@@ -18,7 +18,7 @@ sg.LOOK_AND_FEEL_TABLE['MaterialDark'] = {
         'BORDER': 0, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0
     }
 
-def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tuple, filtersDB: tuple, albedoFlag: bool, bitness: int, rounding: int, T2_num: int, lang: str):
+def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tuple, filtersDB: tuple, bitness: int, rounding: int, T2_num: int, lang: str):
     title_font = ('arial', 12)
     tags_input_size = 20
     button_size = 24
@@ -32,8 +32,10 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         [sg.Checkbox('sRGB', enable_events=True, key='-srgb-')],
         [sg.T('')],
         [sg.Push(), sg.Text(tr.gui_br[lang][0], key='-brModeText-'), sg.Push()],
-        [sg.Radio(tr.gui_br[lang][1], 'brRadio', enable_events=True, default=albedoFlag, key='-brMode0-')],
-        [sg.Radio(tr.gui_br[lang][2], 'brRadio', enable_events=True, default=not albedoFlag, key='-brMode1-')],
+        [sg.Radio(tr.gui_br[lang][1], 'brRadio', enable_events=True, default=False, key='-brMode0-')],
+        [sg.Radio(tr.gui_br[lang][2], 'brRadio', enable_events=True, default=True, key='-brMode1-')],
+        [sg.Radio(tr.gui_br[lang][3], 'brRadio', enable_events=True, default=False, key='-brMode2-')],
+        [sg.Radio(tr.gui_br[lang][4], 'brRadio', enable_events=True, default=False, key='-brMode3-')],
         [sg.T('')],
         [sg.Push(), sg.Text(tr.gui_formatting[lang], key='-formattingText-'), sg.Push()],
         [
@@ -210,6 +212,8 @@ def translate(window: sg.Window, T2_num: int, lang: str):
     window['-brModeText-'].update(tr.gui_br[lang][0])
     window['-brMode0-'].update(text=tr.gui_br[lang][1])
     window['-brMode1-'].update(text=tr.gui_br[lang][2])
+    window['-brMode2-'].update(text=tr.gui_br[lang][3])
+    window['-brMode3-'].update(text=tr.gui_br[lang][4])
     window['-formattingText-'].update(tr.gui_formatting[lang])
     window['-bitnessText-'].update(tr.gui_bit[lang])
     window['-roundingText-'].update(tr.gui_rnd[lang])

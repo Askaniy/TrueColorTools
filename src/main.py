@@ -17,8 +17,7 @@ def launch_window(lang: str):
 
     # Processing configuration
     default_tag = 'featured'
-    albedoFlag = True # default brightness mode
-    #oldInterpFlag = True # default interpolation mode
+    brMode = True # default brightness mode
     bitness = 1
     rounding = 3
 
@@ -36,9 +35,9 @@ def launch_window(lang: str):
     window = sg.Window(
         'TrueColorTools', finalize=True, resizable=True, margins=(0, 0), size=(1000, 640),
         layout=gui.generate_layout(
-            (2*circle_r+1, 2*circle_r+1), img_preview_size, text_colors, filtersDB, albedoFlag, bitness, rounding, T2_num, lang
-            )
+            (2*circle_r+1, 2*circle_r+1), img_preview_size, text_colors, filtersDB, bitness, rounding, T2_num, lang
         )
+    )
 
     # Setting default color preview circle
     T1_preview = window['T1_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
@@ -49,7 +48,7 @@ def launch_window(lang: str):
     T2_first_time = True
     
     # List of settings events that cause color recalculation
-    triggers = ('-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-interpMode0-', '-interpMode1-', '-bitness-', '-rounding-')
+    triggers = ('-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-brMode2-', '-brMode3-', '-bitness-', '-rounding-')
 
     # Window events loop
     while True:
@@ -60,10 +59,8 @@ def launch_window(lang: str):
         if event == sg.WIN_CLOSED or event == tr.gui_exit[lang]:
             break
         # Radio selection
-        elif event in ('-brMode0-', '-brMode1-'):
-            albedoFlag = values['-brMode0-']
-        #elif event in ('-interpMode0-', '-interpMode1-'):
-        #    oldInterpFlag = values['-interpMode0-']
+        elif event.startswith('-brMode'):
+            brMode = get_flag_index((values['-brMode0-'], values['-brMode1-'], values['-brMode2-'], values['-brMode3-']))
         # Checks for empty input
         elif event == '-bitness-':
             try:
@@ -127,14 +124,14 @@ def launch_window(lang: str):
 
                 # Spectral data import and processing
                 T1_spectrum = core.from_database(T1_name, T1_object_unit).to_scope(core.visible_range)
-                if albedoFlag and 'scale' in T1_object_unit:
+                if brMode > 0 and 'scale' in T1_object_unit:
                     T1_spectrum = T1_spectrum.scaled(*T1_object_unit['scale'])
                 
                 # Color calculation
                 if values['-srgb-']:
-                    T1_color = core.Color.from_spectrum(T1_spectrum, albedoFlag and T1_albedo)
+                    T1_color = core.Color.from_spectrum(T1_spectrum, brMode and T1_albedo)
                 else:
-                    T1_color = core.Color.from_spectrum_legacy(T1_spectrum, albedoFlag and T1_albedo)
+                    T1_color = core.Color.from_spectrum_legacy(T1_spectrum, brMode and T1_albedo)
                 if values['-gamma-']:
                     T1_color = T1_color.gamma_corrected()
                 T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
@@ -153,7 +150,7 @@ def launch_window(lang: str):
                 plot_data.append(T1_spectrum)
             
             elif event == 'T1_plot':
-                pl.plot_spectra(plot_data, values['-gamma-'], values['-srgb-'], albedoFlag and T1_albedo, lang)
+                pl.plot_spectra(plot_data, values['-gamma-'], values['-srgb-'], brMode and T1_albedo, lang)
             
             elif event == 'T1_clear':
                 plot_data = []
@@ -167,14 +164,14 @@ def launch_window(lang: str):
 
                     # Spectral data import and processing
                     T1_spectrum = core.from_database(name, T1_object_unit).to_scope(core.visible_range)
-                    if albedoFlag and 'scale' in T1_object_unit:
+                    if brMode and 'scale' in T1_object_unit:
                         T1_spectrum = T1_spectrum.scaled(*T1_object_unit['scale'])
                     
                     # Color calculation
                     if values['-srgb-']:
-                        T1_color = core.Color.from_spectrum(T1_spectrum, albedoFlag and T1_albedo)
+                        T1_color = core.Color.from_spectrum(T1_spectrum, brMode and T1_albedo)
                     else:
-                        T1_color = core.Color.from_spectrum_legacy(T1_spectrum, albedoFlag and T1_albedo)
+                        T1_color = core.Color.from_spectrum_legacy(T1_spectrum, brMode and T1_albedo)
                     if values['-gamma-']:
                         T1_color = T1_color.gamma_corrected()
                     T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
@@ -185,7 +182,7 @@ def launch_window(lang: str):
                 sg.popup_scrolled(T1_export, title=tr.gui_results[lang], size=(72, 32), font=('Consolas', 10))
             
             elif event == 'T1_folder':
-                tg.generate_table(objectsDB, values['T1_tags'], albedoFlag, values['-srgb-'], values['-gamma-'], values['T1_folder'], 'png', lang)
+                tg.generate_table(objectsDB, values['T1_tags'], brMode, values['-srgb-'], values['-gamma-'], values['T1_folder'], 'png', lang)
         
         # ------------ Events in the tab "Multiband processing" ------------
         
@@ -255,7 +252,7 @@ def launch_window(lang: str):
                 plot_data.append(T3_spectrum)
             
             elif event == 'T3_plot':
-                pl.plot_spectra(plot_data, values['-gamma-'], values['-srgb-'], albedoFlag, lang)
+                pl.plot_spectra(plot_data, values['-gamma-'], values['-srgb-'], brMode, lang)
             
             elif event == 'T3_clear':
                 plot_data = []
