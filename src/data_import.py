@@ -214,17 +214,19 @@ def obj_dict(database: dict, tag: str, lang: str):
                     parts = new_name.split(':', 1)
                     note = parts[1].strip()
                     new_name = parts[0].strip()
-                    if note in tr.notes:
-                        note = tr.notes[note][lang]
-                    note = ': ' + note
-                for obj_name, translation in tr.names.items():
-                    if new_name.startswith(obj_name) or obj_name in new_name.split():
-                        new_name = new_name.replace(obj_name, translation[lang])
-                        break
-                new_name = index + new_name + note
+                    note = ': ' + translate(note, tr.notes, lang)
+                new_name = index + translate(new_name, tr.names, lang) + note
             new_name = new_name if source == '' else f'{new_name} [{source}]'
             names |= {new_name: raw_name}
     return names
+
+def translate(target: str, translations: dict, lang: str):
+    """ Searches part of the target string to be translated and replaces it with translation """
+    for original, translation in translations.items():
+        if target.startswith(original) or original in target.split():
+            target = target.replace(original, translation[lang])
+            break
+    return target
 
 def tag_list(database: dict):
     """ Generates a list of tags found in the spectra database """

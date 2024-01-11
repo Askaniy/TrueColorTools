@@ -318,7 +318,7 @@ yaxis_text = {
 # Objects localization
 # Order is important for nested words: longer ones must come first
 names = {
-    'Equal-energy spectrum': {'ru': 'Плоский спектр', 'de': 'Gleiches Energiespektrum'},
+    'Equal-energy spectrum': {'ru': 'Плоский спектр', 'de': 'Homogenes Energiespektrum'},
     'Proxima Centauri': {'ru': 'Проксима Центавра', 'de': 'Proxima Centauri'},
     'Andromedae': {'ru': 'Андромеды', 'de': 'Andromedae'},
     #'Antliae': {'ru': '', 'de': 'Antliae'},
@@ -445,8 +445,8 @@ names = {
     'Ganymede': {'ru': 'Ганимед', 'de': 'Ganymed'},
     'Callisto': {'ru': 'Каллисто', 'de': 'Kallisto'},
     'Saturnian irregulars': {'ru': 'Нерег. сп. Сатурна', 'de': 'irreguläre Saturnmonde'},
-    'Saturn': {'ru': 'Сатурн', 'de': 'Saturn'},
     'Rings of Saturn': {'ru': 'Кольца Сатурна', 'de': 'Ringe des Saturn'},
+    'Saturn': {'ru': 'Сатурн', 'de': 'Saturn'},
     'Enceladus': {'ru': 'Энцелад', 'de': 'Enceladus'},
     'Tethys': {'ru': 'Тефия', 'de': 'Tethys'},
     'Dione': {'ru': 'Диона', 'de': 'Dione'},
@@ -554,6 +554,7 @@ names = {
 
 # Notes localization
 notes = {
+    'Surface, phase angle': {'ru': 'Поверхность, фазовый угол', 'de': 'Oberfläche, Phasenwinkel'},
     'Surface': {'ru': 'Поверхность', 'de': 'Oberfläche'},
     'Bright areas': {'ru': 'Яркие участки', 'de': 'Helle Regionen'},
     'Dark areas': {'ru': 'Тёмные участки', 'de': 'Dunkle Regionen'},

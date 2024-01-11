@@ -34,7 +34,7 @@ def launch_window(lang: str):
     # Launching window
     sg.ChangeLookAndFeel('MaterialDark')
     window = sg.Window(
-        'TrueColorTools', finalize=True, resizable=True, margins=(0, 0), size=(900, 640),
+        'TrueColorTools', finalize=True, resizable=True, margins=(0, 0), size=(1000, 640),
         layout=gui.generate_layout(
             (2*circle_r+1, 2*circle_r+1), img_preview_size, text_colors, filtersDB, albedoFlag, bitness, rounding, T2_num, lang
             )

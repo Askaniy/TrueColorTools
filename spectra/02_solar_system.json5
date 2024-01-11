@@ -333,19 +333,19 @@
         'The reflectivity spectrum and opposition effect of Titan’s surface observed by Huygens’ DISR spectrometers',
         'DOI: 10.1016/j.pss.2011.10.014', 'https://www.sciencedirect.com/science/article/pii/S0032063311003254'
     ],
-    '(S VI) Titan: Surface 0°|Karkoschka2012': {
+    '(S VI) Titan: Surface, phase angle 0°|Karkoschka2012': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm_range: [300, 801, 10],
         br: [0.025, 0.035, 0.046, 0.059, 0.073, 0.089, 0.105, 0.122, 0.140, 0.158, 0.176, 0.194, 0.211, 0.229, 0.245, 0.261, 0.277, 0.292, 0.306, 0.319, 
             0.331, 0.343, 0.354, 0.364, 0.373, 0.382, 0.390, 0.398, 0.404, 0.411, 0.416, 0.421, 0.426, 0.430, 0.434, 0.437, 0.440, 0.442, 0.444, 0.446, 
             0.447, 0.448, 0.449, 0.449, 0.450, 0.450, 0.450, 0.449, 0.449, 0.448, 0.447],
-		albedo: true
+        albedo: true
     },
     'Karkoschka2016': [
         'Eight-color maps of Titan’s surface from spectroscopy with Huygens’ DISR',
         'DOI: 10.1016/j.icarus.2015.06.010', 'https://www.sciencedirect.com/science/article/pii/S0019103515002547'
     ],
-    '(S VI) Titan: Surface 45°|Karkoschka2016': {
+    '(S VI) Titan: Surface, phase angle 45°|Karkoschka2016': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm: [520, 563, 595, 642, 685, 754, 823, 830, 935, 940, 1070, 1280, 1550, 1590],
         br: [0.093, 0.107, 0.116, 0.130, 0.139, 0.147, 0.151, 0.151, 0.151, 0.151, 0.145, 0.124, 0.070, 0.071],

@@ -54,7 +54,7 @@
         file: 'spectra/files/SMASS/a000007.2.txtU',
         scale: ['Generic_Bessell.V', 0.279], // albedo from Vernazza et al. (2021)
     },
-	'(9) Metis|SMASS': {
+    '(9) Metis|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000009.sp75.txtU',
         scale: ['Generic_Bessell.V', 0.18], // albedo from Vernazza et al. (2021)
