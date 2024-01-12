@@ -32,47 +32,47 @@
     '(1) Ceres|SMASS': {
         tags: ['featured', 'SMASS', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000001.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.09], // geometric albedo
+        geometric_albedo: ['Generic_Bessell.V', 0.09], // geometric albedo
     },
     '(2) Pallas|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000002.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.155], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.155], // albedo from Vernazza et al. (2021)
     },
     '(3) Juno|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000003.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.202], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.202], // albedo from Vernazza et al. (2021)
     },
     '(4) Vesta|SMASS': {
         tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000004.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.423], // geometric albedo
+        geometric_albedo: ['Generic_Bessell.V', 0.423], // geometric albedo
     },
     '(7) Iris|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000007.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.279], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.279], // albedo from Vernazza et al. (2021)
     },
     '(9) Metis|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000009.sp75.txtU',
-        albedo: ['Generic_Bessell.V', 0.18], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.18], // albedo from Vernazza et al. (2021)
     },
     '(10) Hygiea|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000010.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.063], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.063], // albedo from Vernazza et al. (2021)
     },
     '(13) Egeria|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000013.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.087], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.087], // albedo from Vernazza et al. (2021)
     },
     '(15) Eunomia|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000015.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.187], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.187], // albedo from Vernazza et al. (2021)
     },
     '(16) Psyche|SMASS': {
         tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
@@ -92,52 +92,53 @@
     '(19) Fortuna|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000019.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.056], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.056], // albedo from Vernazza et al. (2021)
     },
     '(21) Lutetia|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000021.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.073], // spherical albedo from Sierks et al. (2011), https://dspace.mit.edu/bitstream/handle/1721.1/110553/Sierks_2011_open_access.pdf
+        geometric_albedo: ['Generic_Bessell.V', 0.19], // Sierks et al. (2011)
+        spherical_albedo: ['Generic_Bessell.V', 0.073], // spherical albedo from Sierks et al. (2011), https://dspace.mit.edu/bitstream/handle/1721.1/110553/Sierks_2011_open_access.pdf
     },
     '(22) Kalliope|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000022.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.198], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.198], // albedo from Vernazza et al. (2021)
     },
     '(24) Themis|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000024.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.06], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.06], // albedo from Vernazza et al. (2021)
     },
     '(29) Amphitrite|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000029.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.194], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.194], // albedo from Vernazza et al. (2021)
     },
     '(31) Euphrosyne|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000031.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.05], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.05], // albedo from Vernazza et al. (2021)
     },
     '(41) Daphne|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000041.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.052], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.052], // albedo from Vernazza et al. (2021)
     },
     '(45) Eugenia|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000045.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.065], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.065], // albedo from Vernazza et al. (2021)
     },
     '(48) Doris|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000048.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.066], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.066], // albedo from Vernazza et al. (2021)
     },
     '(52) Europa|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000052.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.052], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.052], // albedo from Vernazza et al. (2021)
     },
     '(65) Cybele|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
@@ -146,12 +147,12 @@
     '(87) Sylvia|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000087.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.04], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.04], // albedo from Vernazza et al. (2021)
     },
     '(88) Thisbe|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000088.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.057], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.057], // albedo from Vernazza et al. (2021)
     },
     '(90) Antiope|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
@@ -176,17 +177,18 @@
     '(130) Elektra|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000130.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.067], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.067], // albedo from Vernazza et al. (2021)
     },
     '(216) Kleopatra|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000216.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.152], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.152], // albedo from Vernazza et al. (2021)
     },
     '(243) Ida|SMASS': {
         tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000243.2.txtU',
-        albedo: ['Galileo_SSI.Green', 0.069], // spherical albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Table VIII
+        geometric_albedo: ['Galileo_SSI.Green', 0.206], // Helfenstein et al. (1996)
+        spherical_albedo: ['Galileo_SSI.Green', 0.069], // spherical albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Table VIII
     },
     'Veverka1996': [
         'Dactyl: Galileo Observations of Ida’s Satellite',
@@ -198,7 +200,7 @@
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.756, 0.892, 0.978, 1.000, 0.936, 0.917],
         sd: 0.018,
-        albedo: ['Galileo_SSI.Green', 0.217], // ±0.026, normal albedo of Terrain B from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
+        geometric_albedo: ['Galileo_SSI.Green', 0.217], // ±0.026, normal albedo of Terrain B from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
     },
     '(243) Ida: Dark areas|Veverka1996': {
         tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
@@ -206,7 +208,7 @@
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.690, 0.856, 0.956, 1.000, 0.979, 0.965],
         sd: 0.018,
-        albedo: ['Galileo_SSI.Green', 0.204], // ±0.016, normal albedo of Terrain A from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
+        geometric_albedo: ['Galileo_SSI.Green', 0.204], // ±0.016, normal albedo of Terrain A from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
     },
     '(243 I) Dactyl|Veverka1996': {
         tags: ['Solar system', 'moon', 'minor body', 'asteroid', 'main belt'],
@@ -214,25 +216,19 @@
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.700, 0.894, 0.992, 1.000, 0.909, 0.882],
         sd: 0.018,
-        albedo: ['Galileo_SSI.Clear', 0.197], // ±0.038, normal albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
-    },
-    '(243 I) Dactyl|Veverka1996': {
-        tags: ['Solar system', 'moon', 'minor body', 'asteroid', 'main belt'],
-        system: 'Galileo_SSI',
-        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
-        br: [0.700, 0.894, 0.992, 1.000, 0.909, 0.882],
-        sd: 0.018,
-        albedo: ['Galileo_SSI.Clear', 0.063], // spherical albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Table VIII
+        geometric_albedo: ['Galileo_SSI.Clear', 0.197], // ±0.038, normal albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Fig. 7
+        spherical_albedo: ['Galileo_SSI.Clear', 0.063], // spherical albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Table VIII
     },
     '(253) Mathilde|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000253.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.013], // spherical albedo from Clark et al. (1999), https://ui.adsabs.harvard.edu/abs/1999Icar..140...53C/abstract
+        geometric_albedo: ['Generic_Bessell.V', 0.047], // Clark et al. (1999)
+        spherical_albedo: ['Generic_Bessell.V', 0.013], // spherical albedo from Clark et al. (1999), https://ui.adsabs.harvard.edu/abs/1999Icar..140...53C/abstract
     },
     '(269) Justitia|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000269.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.061], // albedo from JPL Small-Body Database
+        geometric_albedo: ['Generic_Bessell.V', 0.061], // albedo from JPL Small-Body Database
     },
     'deLeon2010': [
         'Observations, compositional, and physical characterization of near-Earth and Mars-crosser asteroids from a spectroscopic survey',
@@ -247,22 +243,24 @@
             1.12816, 1.13752, 1.14195, 1.12574, 1.14946, 1.13265, 1.17224, 1.12637, 1.13412, 1.15489, 1.16516, 1.13524, 1.13512, 1.16729, 1.19448, 1.21084,
             1.15377, 1.12806, 1.17343, 1.21881, 1.14669, 1.14314, 1.14373, 1.16095, 1.09179, 1.0755, 1.13114, 1.16251, 1.21117, 1.13878, 1.20665, 1.0951, 1.047,
             1.00354, 0.9945, 1.01803, 1.14228, 1.05281, 1.18387, 1.09958, 1.16424, 0.91067],
-        albedo: ['Generic_Bessell.V', 0.093], // spherical albedo from Li et al. (2004), https://ui.adsabs.harvard.edu/abs/2004Icar..172..415L/abstract
+        geometric_albedo: ['Generic_Bessell.V', 0.23], // Li et al. (2004)
+        spherical_albedo: ['Generic_Bessell.V', 0.093], // spherical albedo from Li et al. (2004), https://ui.adsabs.harvard.edu/abs/2004Icar..172..415L/abstract
     },
     '(433) Eros|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Amor'],
         file: 'spectra/files/SMASS/a000433.8.txtU',
-        albedo: ['Generic_Bessell.V', 0.093], // spherical albedo from Li et al. (2004), https://ui.adsabs.harvard.edu/abs/2004Icar..172..415L/abstract
+        geometric_albedo: ['Generic_Bessell.V', 0.23], // Li et al. (2004)
+        spherical_albedo: ['Generic_Bessell.V', 0.093], // spherical albedo from Li et al. (2004), https://ui.adsabs.harvard.edu/abs/2004Icar..172..415L/abstract
     },
     '(511) Davida|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000511.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.063], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.063], // albedo from Vernazza et al. (2021)
     },
     '(704) Interamnia|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000704.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.067], // albedo from Vernazza et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.067], // albedo from Vernazza et al. (2021)
     },
     '(944) Hidalgo|MITHNEOS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
@@ -278,7 +276,7 @@
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.17, 0.23, 0.26, 0.27, 0.26, 0.26],
         sd: [0.05, 0.06, 0.07, 0.07, 0.07, 0.06],
-        albedo: true, // global mean normal albedo from the Table VI
+        geometric_albedo: true, // global mean normal albedo from the Table VI
     },
     '(951) Gaspra: Bright areas|Helfenstein1994': {
         tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
@@ -286,7 +284,7 @@
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.19, 0.25, 0.27, 0.28, 0.27, 0.26],
         sd: [0.03, 0.06, 0.06, 0.04, 0.05, 0.05],
-        albedo: true, // normal albedo of PC2-α material from the Table VI
+        geometric_albedo: true, // normal albedo of PC2-α material from the Table VI
     },
     '(951) Gaspra: Dark areas|Helfenstein1994': {
         tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
@@ -294,17 +292,18 @@
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.16, 0.22, 0.26, 0.27, 0.26, 0.26],
         sd: [0.04, 0.04, 0.05, 0.04, 0.03, 0.02],
-        albedo: true, // normal albedo of PC2-γ material from the Table VI
+        geometric_albedo: true, // normal albedo of PC2-γ material from the Table VI
     },
     '(951) Gaspra|SMASS': {
         tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000951.2.txtU',
-        albedo: ['Galileo_SSI.Green', 0.11], // spherical albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Table VIII
+        geometric_albedo: ['Generic_Bessell.V', 0.22], // Helfenstein et al. (1994)
+        spherical_albedo: ['Galileo_SSI.Green', 0.11], // spherical albedo from Helfenstein et al. (1996), https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract, Table VIII
     },
     '(1036) Ganymed|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Amor'],
         file: 'spectra/files/SMASS/a001036.8.txtU',
-        albedo: ['Generic_Bessell.V', 0.238], // albedo from Mainzer et al. (2016), https://ui.adsabs.harvard.edu/abs/2016PDSS..247.....M/abstract
+        geometric_albedo: ['Generic_Bessell.V', 0.238], // albedo from Mainzer et al. (2016), https://ui.adsabs.harvard.edu/abs/2016PDSS..247.....M/abstract
     },
     '(1172) Aneas|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
@@ -323,12 +322,12 @@
     '(1252) Celestia|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a001252.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.215], // albedo from Mainzer et al. (2016), https://ui.adsabs.harvard.edu/abs/2016PDSS..247.....M/abstract
+        geometric_albedo: ['Generic_Bessell.V', 0.215], // albedo from Mainzer et al. (2016), https://ui.adsabs.harvard.edu/abs/2016PDSS..247.....M/abstract
     },
     '(1620) Geographos|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         file: 'spectra/files/SMASS/a001620.8.txtU',
-        albedo: ['Generic_Bessell.V', 0.290], // albedo from Nugent et al. (2015), https://ui.adsabs.harvard.edu/abs/2015ApJ...814..117N/abstract
+        geometric_albedo: ['Generic_Bessell.V', 0.290], // albedo from Nugent et al. (2015), https://ui.adsabs.harvard.edu/abs/2015ApJ...814..117N/abstract
     },
     '(1871) Astyanax|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
@@ -343,17 +342,17 @@
         indices: {'B-V': 0.660, 'V-R': 0.359, 'R-I': 0.324},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.076], // albedo from Braga-Ribas et al. (2023)
+        geometric_albedo: ['Generic_Bessell.V', 0.076], // albedo from Braga-Ribas et al. (2023)
     },
     '(2060) Chiron|SMASS': {
         tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
         file: 'spectra/files/SMASS/a002060.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.076], // albedo from Braga-Ribas et al. (2023)
+        geometric_albedo: ['Generic_Bessell.V', 0.076], // albedo from Braga-Ribas et al. (2023)
     },
     '(2063) Bacchus|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         file: 'spectra/files/SMASS/a002063.7.txtU',
-        albedo: ['Generic_Bessell.V', 0.203], // albedo from JPL Small-Body Database
+        geometric_albedo: ['Generic_Bessell.V', 0.203], // albedo from JPL Small-Body Database
     },
     '(2223) Sarpedon|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
@@ -379,12 +378,13 @@
         indices: {'B-V': 0.798, 'V-R': 0.513, 'R-I': 0.440},
         calib: 'Vega',
         sun: true,
-        albedo: ['Rosetta_OSIRIS_WAC.OI', 0.24], // spherical albedo from Spjuth et al. (2012), https://ui.adsabs.harvard.edu/abs/2012Icar..221.1101S/abstract
+        geometric_albedo: ['Rosetta_OSIRIS_WAC.OI', 0.39], // Spjuth et al. (2012)
+        spherical_albedo: ['Rosetta_OSIRIS_WAC.OI', 0.24], // spherical albedo from Spjuth et al. (2012), https://ui.adsabs.harvard.edu/abs/2012Icar..221.1101S/abstract
     },
     '(3200) Phaethon|SMASS': {
         tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         file: 'spectra/files/SMASS/a003200.8.txtU',
-        albedo: ['Generic_Bessell.V', 0.1066], // albedo from JPL Small-Body Database
+        geometric_albedo: ['Generic_Bessell.V', 0.1066], // albedo from JPL Small-Body Database
     },
     '(3548) Eurybates|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
@@ -403,7 +403,7 @@
     '(4179) Toutatis|MITHNEOS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         file: 'spectra/files/SMASS/a004179.sp30.txtU',
-        albedo: ['Generic_Bessell.V', 0.185], // geometric albedo from Bach et al. (2019), https://ui.adsabs.harvard.edu/abs/2019JKAS...52...71B/abstract
+        geometric_albedo: ['Generic_Bessell.V', 0.185], // geometric albedo from Bach et al. (2019), https://ui.adsabs.harvard.edu/abs/2019JKAS...52...71B/abstract
     },
     '(4829) Sergestus|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
@@ -425,12 +425,12 @@
         indices: {'B-V': 1.261, 'V-R': 0.791, 'R-I': 0.818},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.155], // albedo from Duffard et al. (2014)
+        geometric_albedo: ['Generic_Bessell.V', 0.155], // albedo from Duffard et al. (2014)
     },
     '(5145) Pholus|SMASS': {
         tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
         file: 'spectra/files/SMASS/a005145.1.txtA',
-        albedo: ['Generic_Bessell.V', 0.155], // albedo from Duffard et al. (2014)
+        geometric_albedo: ['Generic_Bessell.V', 0.155], // albedo from Duffard et al. (2014)
     },
     '(5511) Cloanthus|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
@@ -442,7 +442,7 @@
     '(6489) Golevka|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         file: 'spectra/files/SMASS/a006489visir8.visir.txtU',
-        albedo: ['Generic_Bessell.V', 0.151], // albedo from JPL Small-Body Database
+        geometric_albedo: ['Generic_Bessell.V', 0.151], // albedo from JPL Small-Body Database
     },
     '(6545) 1986 TR6|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
@@ -503,7 +503,7 @@
     '(9969) Braille|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'Mars-crosser'],
         file: 'spectra/files/SMASS/a009969.4.txtU',
-        albedo: ['Generic_Bessell.V', 0.34], // geometric albedo from Buratti et al. (2004), https://www.lpl.arizona.edu/~yelle/eprints/Buratti04a.pdf
+        geometric_albedo: ['Generic_Bessell.V', 0.34], // geometric albedo from Buratti et al. (2004), https://www.lpl.arizona.edu/~yelle/eprints/Buratti04a.pdf
     },
     '(10199) Chariklo|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
@@ -511,12 +511,12 @@
         indices: {'B-V': 0.802, 'V-R': 0.491, 'R-I': 0.519},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.037], // albedo from Leiva et al. (2017)
+        geometric_albedo: ['Generic_Bessell.V', 0.037], // albedo from Leiva et al. (2017)
     },
     '(10199) Chariklo|SMASS': {
         tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
         file: 'spectra/files/SMASS/a010199.2.txtU',
-        albedo: ['Generic_Bessell.V', 0.037], // albedo from Leiva et al. (2017); ellipsoid model
+        geometric_albedo: ['Generic_Bessell.V', 0.037], // albedo from Leiva et al. (2017); ellipsoid model
     },
     '(10370) Hylonome|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
@@ -755,7 +755,7 @@
         indices: {'B-V': 0.906, 'V-R': 0.626, 'R-I': 0.628},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.172], // albedo from fyr02’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.172], // albedo from fyr02’s sheet
     },
     '(20108) 1995 QZ9|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
@@ -877,7 +877,8 @@
         nm_range: [325, 1000, 25],
         br: [0.388, 0.568, 0.676, 0.773, 0.824, 0.856, 0.888, 0.914, 0.964, 1.0, 1.036, 1.058, 1.076, 1.094, 1.122, 1.140, 1.147, 1.144, 1.129, 1.101,
             1.068, 1.029, 1.0, 0.978, 0.975, 0.946, 0.917, 0.935],
-        albedo: ['Generic_Bessell.V', 0.033], // spherical albedo from Tatsumi et al. (2018), https://kar.kent.ac.uk/66973/1/Lowry_Vis-NIR%20Disk-integrated%20Photometry.pdf
+        geometric_albedo: ['Generic_Bessell.V', 0.27], // Tatsumi et al. (2018)
+        spherical_albedo: ['Generic_Bessell.V', 0.033], // spherical albedo from Tatsumi et al. (2018), https://kar.kent.ac.uk/66973/1/Lowry_Vis-NIR%20Disk-integrated%20Photometry.pdf
     },
     '(25347) 1999 RQ116|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
@@ -920,7 +921,8 @@
         indices: {'B-V': 1.018, 'V-R': 0.605, 'R-I': 0.580},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.108], // albedo from Verbiscer et al. (2022)
+        geometric_albedo: ['Generic_Bessell.V', 0.108], // albedo from Verbiscer et al. (2022)
+        spherical_albedo: ['Generic_Bessell.V', 0.037], // albedo from Verbiscer et al. (2022)
     },
     '(29981) 1999 TD10|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
@@ -1047,7 +1049,7 @@
         indices: {'B-V': 0.963, 'V-R': 0.609, 'R-I': 0.593},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.079], // geometric albedo from Santos-Sanz et al. (2022)
+        geometric_albedo: ['Generic_Bessell.V', 0.079], // geometric albedo from Santos-Sanz et al. (2022)
     },
     '(39285) 2001 BP75|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
@@ -1139,7 +1141,8 @@
         indices: {'B-V': 0.958, 'V-R': 0.650, 'R-I': 0.610},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.124], // albedo from Pereira et al. 2023
+        geometric_albedo: ['Generic_Bessell.V', 0.124], // albedo from Pereira et al. 2023
+        spherical_albedo: ['Generic_Bessell.V', 0.057], // albedo from Verbiscer et al. (2022)
     },
     '(51359) 2000 SC17|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
@@ -1189,7 +1192,7 @@
         indices: {'B-V': 0.915, 'V-R': 0.589, 'R-I': 0.581},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.112], // albedo from Vilenius et al. (2014)
+        geometric_albedo: ['Generic_Bessell.V', 0.112], // albedo from Vilenius et al. (2014)
     },
     '(55576) Amycus|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
@@ -1211,7 +1214,7 @@
         indices: {'B-V': 0.979, 'V-R': 0.552},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.107], // albedo from Lellouch et al. (2013)
+        geometric_albedo: ['Generic_Bessell.V', 0.107], // albedo from Lellouch et al. (2013)
     },
     '(55638) 2002 VE95|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
@@ -1321,7 +1324,7 @@
     '(65803) Didymos|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         file: 'spectra/files/SMASS/au1996GT.7.txtU',
-        albedo: ['Generic_Bessell.V', 0.15], // geometric albedo from Daly et al. (2023), https://ui.adsabs.harvard.edu/abs/2023Natur.616..443D/abstract
+        geometric_albedo: ['Generic_Bessell.V', 0.15], // geometric albedo from Daly et al. (2023), https://ui.adsabs.harvard.edu/abs/2023Natur.616..443D/abstract
     },
     '(66452) 1999 OF4|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
@@ -1497,7 +1500,7 @@
         indices: {'B-V': 1.179, 'V-R': 0.739, 'R-I': 0.654},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.399], // albedo from fyr02’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.399], // albedo from fyr02’s sheet
     },
     'deBergh2005': [
         'The surface of the transneptunian object 90482 Orcus',
@@ -1513,7 +1516,7 @@
         indices: {'B-V': 0.68, 'V-R': 0.37, 'V-I': 0.74},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.23], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
+        geometric_albedo: ['Generic_Bessell.V', 0.23], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
     },
     '(90482) Orcus|Brown2010': {
         tags: ['Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
@@ -1522,7 +1525,7 @@
         sd: 0.05,
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.23], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
+        geometric_albedo: ['Generic_Bessell.V', 0.23], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
     },
     '(90482) Orcus|MBOSS': {
         tags: ['featured', 'MBOSS', 'Solar system', 'planet geophysical', 'dwarf planet', 'minor body', 'TNO', 'plutino'],
@@ -1530,7 +1533,7 @@
         indices: {'B-V': 0.670, 'V-R': 0.376, 'R-I': 0.372},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.23], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
+        geometric_albedo: ['Generic_Bessell.V', 0.23], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
     },
     '(90482 I) Vanth|Brown2010': {
         tags: ['featured', 'Solar system', 'moon', 'minor body', 'TNO', 'plutino'],
@@ -1539,19 +1542,15 @@
         sd: 0.05,
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.08], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
+        geometric_albedo: ['Generic_Bessell.V', 0.08], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
     },
-    'LeCorre2019': [
-        'Investigating Surface Color Variegation on Near-Earth Asteroid Bennu Using OSIRIS-REx Mapcam Data',
-        'https://ui.adsabs.harvard.edu/abs/2019LPI....50.2794L/abstract'
-    ],
     '(90568) 2004 GV9|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.895, 'V-R': 0.520},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.0770], // albedo from Vilenius et al. (2012)
+        geometric_albedo: ['Generic_Bessell.V', 0.0770], // albedo from Vilenius et al. (2012)
     },
     '(91133) 1998 HK151|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
@@ -1588,6 +1587,10 @@
         calib: 'Vega',
         sun: true
     },
+    'LeCorre2019': [
+        'Investigating Surface Color Variegation on Near-Earth Asteroid Bennu Using OSIRIS-REx Mapcam Data',
+        'https://ui.adsabs.harvard.edu/abs/2019LPI....50.2794L/abstract'
+    ],
     '(101955) Bennu|LeCorre2019': {
         tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         system: 'OSIRIS-REX_MapCam',
@@ -1706,7 +1709,7 @@
         indices: {'B-V': 0.664, 'V-R': 0.403, 'R-I': 0.433},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.042], // albedo from Brown and Butler (2017)
+        geometric_albedo: ['Generic_Bessell.V', 0.042], // albedo from Brown and Butler (2017)
     },
     'Stansberry2012': [
         'Physical properties of trans-neptunian binaries (120347) Salacia-Actaea and (42355) Typhon-Echidna',
@@ -1718,7 +1721,7 @@
         indices: {'V-I': 0.87},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.0357],
+        geometric_albedo: ['Generic_Bessell.V', 0.0357],
     },
     '(120347 I) Actaea|Stansberry2012': {
         tags: ['Solar system', 'moon', 'minor body', 'TNO', 'classical', 'classical-h'],
@@ -1726,7 +1729,7 @@
         indices: {'V-I': 0.89},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.0357],
+        geometric_albedo: ['Generic_Bessell.V', 0.0357],
     },
     '(120348) 2004 TY364|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
@@ -1780,7 +1783,7 @@
         indices: {'B-V': 0.84, 'V-R': 0.49},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.178], // mean diameter = 2.5 km, H = 15.5
+        geometric_albedo: ['Generic_Bessell.V', 0.178], // mean diameter = 2.5 km, H = 15.5
     },
     '(134340) Pluto|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
@@ -1818,7 +1821,8 @@
         indices: {'B-V': 0.7315, 'V-R': 0.4},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.41]
+        geometric_albedo: ['Generic_Bessell.V', 0.41],
+        spherical_albedo: ['Generic_Bessell.V', 0.25], // albedo from Verbiscer et al. (2022)
     },
     '(134860) 2000 OJ67|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
@@ -1840,7 +1844,7 @@
         indices: {'B-V': 0.633, 'V-R': 0.353, 'R-I': 0.330},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.66], // albedo from https://arxiv.org/abs/1904.00522
+        geometric_albedo: ['Generic_Bessell.V', 0.66], // albedo from https://arxiv.org/abs/1904.00522
     },
     '(136199) Eris|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'detached'],
@@ -1848,7 +1852,8 @@
         indices: {'B-V': 0.781, 'V-R': 0.393, 'R-I': 0.363},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.957], // albedo from fyr02’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.957], // albedo from fyr02’s sheet
+        spherical_albedo: ['Generic_Bessell.V', 0.99], // albedo from Verbiscer et al. (2022)
     },
     '(136199) Eris|Lorenzi2016': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'dwarf planet', 'minor body', 'TNO', 'detached'],
@@ -1856,7 +1861,8 @@
             712.43, 734.267, 740.426, 747.704, 750.504, 765.062, 779.059, 788.578, 793.617, 809.295, 813.774, 826.652, 841.209, 860.246],
         br: [0.995, 1.059, 1.084, 1.101, 1.08, 1.104, 1.111, 1.103, 1.121, 1.104, 1.11, 1.097, 1.117, 1.034, 1.121, 1.13, 1.11, 1.073, 1.11, 1.077, 
             1.132, 1.138, 1.087, 1.126, 1.018, 1.079, 0.881, 1.072, 1.13],
-        albedo: ['Generic_Bessell.V', 0.957], // albedo from zelario’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.957], // albedo from zelario’s sheet
+        spherical_albedo: ['Generic_Bessell.V', 0.99], // albedo from Verbiscer et al. (2022)
     },
     '(136204) 2003 WL7|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
@@ -1871,7 +1877,8 @@
         indices: {'B-V': 0.840, 'V-R': 0.480},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.83], // albedo from fyr02’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.83], // albedo from fyr02’s sheet
+        spherical_albedo: ['Generic_Bessell.V', 0.74], // albedo from Verbiscer et al. (2022)
     },
     '(136472) Makemake|Lorenzi2016': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'classical', 'classical-h'],
@@ -1879,7 +1886,8 @@
             723.628, 729.787, 740.426, 744.345, 751.064, 766.181, 782.419, 788.578, 794.737, 809.295, 813.774, 826.652, 841.209, 860.246],
         br: [0.89, 0.971, 1.106, 1.059, 1.127, 1.133, 1.125, 1.157, 1.137, 1.155, 1.116, 1.139, 1.03, 1.179, 1.182, 1.143, 1.163, 1.088, 1.16, 1.084,
             1.201, 1.201, 1.087, 1.159, 1.018, 1.079, 0.881, 1.072, 1.13],
-        albedo: ['Generic_Bessell.V', 0.83], // albedo from zelario’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.83], // albedo from zelario’s sheet
+        spherical_albedo: ['Generic_Bessell.V', 0.74], // albedo from Verbiscer et al. (2022)
     },
     '(137294) 1999 RE215|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
@@ -1929,7 +1937,7 @@
         indices: {'B-V': 0.940, 'V-R': 0.592, 'R-I': 0.486},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.107], // albedo from Vilenius et al. (2012)
+        geometric_albedo: ['Generic_Bessell.V', 0.107], // albedo from Vilenius et al. (2012)
     },
     '(145453) 2005 RR43|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
@@ -1976,7 +1984,7 @@
         indices: {'g-r': 0.67, 'r-i': 0.28, 'i-z': 0.11},
         calib: 'AB',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.27], // albedo from McFadden et al. (2023)
+        geometric_albedo: ['Generic_Bessell.V', 0.27], // albedo from McFadden et al. (2023)
     },
     '(160427) 2005 RL43|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
@@ -1995,7 +2003,7 @@
         filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
         br: [0.0438, 0.0408, 0.0406, 0.0408, 0.0405, 0.0411, 0.03987],
         sd: [0.0012, 0.0011, 0.0010, 0.0009, 0.0008, 0.0006, 0.00050],
-        albedo: true, // normal (=geometric) albedo spectrum from the Table 3
+        geometric_albedo: true, // normal (=geometric) albedo spectrum from the Table 3
     },
     '(162173) Ryugu: Bright areas|Yokota2021': {
         tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
@@ -2003,7 +2011,7 @@
         filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
         br: [0.0473, 0.0445, 0.0439, 0.0439, 0.0430, 0.0427, 0.0410],
         sd: [0.0018, 0.0017, 0.0016, 0.0015, 0.0011, 0.0009, 0.0008],
-        albedo: true, // normal (=geometric) albedo spectrum of N-pole bright area from the Table 6
+        geometric_albedo: true, // normal (=geometric) albedo spectrum of N-pole bright area from the Table 6
     },
     '(162173) Ryugu: Dark areas|Yokota2021': {
         tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
@@ -2011,12 +2019,13 @@
         filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
         br: [0.0427, 0.0398, 0.0398, 0.0400, 0.0399, 0.0407, 0.0396],
         sd: [0.0006, 0.0006, 0.0005, 0.0004, 0.0003, 0.0003, 0.0002],
-        albedo: true, // normal (=geometric) albedo spectrum of N-Plain area from the Table 6
+        geometric_albedo: true, // normal (=geometric) albedo spectrum of N-Plain area from the Table 6
     },
     '(162173) Ryugu|SMASS': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         file: 'spectra/files/SMASS/a162173.sp273.txtU',
-        albedo: ['Generic_Bessell.V', 0.0406], // global averaged normal albedo from Yokota et al. (2021)
+        geometric_albedo: ['Generic_Bessell.V', 0.0406], // global averaged normal albedo from Yokota et al. (2021)
+        spherical_albedo: ['Generic_Bessell.V', 0.014], // Tatsumi et al. (2020)
     },
     '(163135) 2002 CT22|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
@@ -2038,7 +2047,7 @@
         indices: {'B-V': 0.892, 'V-R': 0.556, 'R-I': 0.510},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.099], // albedo from Souami et al. (2020)
+        geometric_albedo: ['Generic_Bessell.V', 0.099], // albedo from Souami et al. (2020)
     },
     'Grundy2015': [
         'The mutual orbit, mass, and density of the large transneptunian binary system Varda and Ilmarë',
@@ -2050,7 +2059,7 @@
         indices: {'B-V': 0.892, 'V-I': 1.133},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.099], // albedo from Souami et al. (2020)
+        geometric_albedo: ['Generic_Bessell.V', 0.099], // albedo from Souami et al. (2020)
     },
     '(174567 I) Ilmarë|Grundy2015': {
         tags: ['Solar system', 'moon', 'minor body', 'TNO', 'classical', 'classical-h'],
@@ -2058,7 +2067,7 @@
         indices: {'B-V': 0.857, 'V-I': 1.266},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.085], // albedo from Souami et al. (2020)
+        geometric_albedo: ['Generic_Bessell.V', 0.085], // albedo from Souami et al. (2020)
     },
     '(181708) 1993 FW|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
@@ -2115,7 +2124,7 @@
         indices: {'B-V': 0.738, 'V-R': 0.430, 'R-I': 0.473},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.097], // albedo from Dias-Oliveira et al. (2017)
+        geometric_albedo: ['Generic_Bessell.V', 0.097], // albedo from Dias-Oliveira et al. (2017)
     },
     '(225088) Gonggong|Boehnhardt2014': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'detached'],
@@ -2123,7 +2132,7 @@
         indices: {'B-V': 1.38, 'V-R': 0.86, 'R-I': 0.79},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.14], // albedo from Kiss et al. 2019
+        geometric_albedo: ['Generic_Bessell.V', 0.14], // albedo from Kiss et al. 2019
     },
     'Kiss2019': [
         'The mass and density of the dwarf planet (225088) 2007 OR10',
@@ -2135,7 +2144,7 @@
         indices: {'V-I': 1.22},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.08], // albedo assuming radius of 100 km from Arakawa et al. (2021) https://ui.adsabs.harvard.edu/abs/2021AJ....162..226A/abstract
+        geometric_albedo: ['Generic_Bessell.V', 0.08], // albedo assuming radius of 100 km from Arakawa et al. (2021) https://ui.adsabs.harvard.edu/abs/2021AJ....162..226A/abstract
     },
     '(229762) Gǃkúnǁʼhòmdímà|MBOSS': {
         tags: ['featured', 'MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
@@ -2143,7 +2152,7 @@
         indices: {'V-R': 0.582, 'R-I': 0.470},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.142], // albedo from Ortiz et al. (2019)
+        geometric_albedo: ['Generic_Bessell.V', 0.142], // albedo from Ortiz et al. (2019)
     },
     'Grundy2018': [
         'The mutual orbit, mass, and density of transneptunian binary Gǃkúnǁʼhòmdímà (229762 2007 UK126)',
@@ -2155,7 +2164,7 @@
         indices: {'V-I': 1.028},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.142], // albedo from Ortiz et al. (2019)
+        geometric_albedo: ['Generic_Bessell.V', 0.142], // albedo from Ortiz et al. (2019)
     },
     '(229762 I) Gǃòʼé ǃHú|Grundy2018': {
         tags: ['Solar system', 'moon', 'minor body', 'TNO', 'detached'],
@@ -2212,7 +2221,8 @@
         indices: {'B-V': 0.690, 'V-R': 0.380},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.1], // albedo from Rommel et al. (2023)
+        geometric_albedo: ['Generic_Bessell.V', 0.1], // albedo from Rommel et al. (2023)
+        spherical_albedo: ['Generic_Bessell.V', 0.039], // albedo from Verbiscer et al. (2022)
     },
     '(307982) 2004 PG115|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
@@ -2718,7 +2728,7 @@
         indices: {'V-R': 0.56, 'R-I': 0.52},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.17]
+        geometric_albedo: ['Generic_Bessell.V', 0.17]
     },
     '(601411) 2013 CY197|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],

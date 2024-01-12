@@ -158,7 +158,7 @@
             992.0],
         br: [0.01305, 0.01312, 0.01484, 0.01489, 0.01699, 0.01766, 0.02037, 0.02137, 0.02177, 0.02641, 0.02769, 0.02743, 0.02732, 0.02835, 0.03083,
             0.03316, 0.03499, 0.03713, 0.03940, 0.04057, 0.03880],
-        albedo: ['Generic_Bessell.V', 0.071], // geometric albedo https://ssd.jpl.nasa.gov/?sat_phys_par
+        geometric_albedo: ['Generic_Bessell.V', 0.071], // geometric albedo https://ssd.jpl.nasa.gov/?sat_phys_par
     },
     'Fraeman2013': [
         'Spectral absorptions on Phobos and Deimos in the visible/near infrared wavelengths and their compositional constraints',
@@ -172,12 +172,13 @@
         tags: ['featured', 'Solar system', 'moon'],
         nm: [250, 300, 350, 400, 450, 500, 550, 600, 700, 750, 800],
         br: [0.04, 0.05, 0.051, 0.05, 0.049, 0.053, 0.055, 0.058, 0.062, 0.067, 0.069],
-        albedo: ['Generic_Bessell.V', 0.068], // geometric albedo https://ssd.jpl.nasa.gov/?sat_phys_par
+        geometric_albedo: ['Generic_Bessell.V', 0.068], // geometric albedo https://ssd.jpl.nasa.gov/?sat_phys_par
     },
     'Jupiter|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Jovian system'],
         nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.358, 0.443, 0.538, 0.513, 0.495, 0.389, 0.321]
+        br: [0.358, 0.443, 0.538, 0.513, 0.495, 0.389, 0.321],
+        albedo: true
     },
     'Jupiter|Crow2011': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Jovian system'],
@@ -248,7 +249,8 @@
     'Saturn|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
         nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.203, 0.339, 0.499, 0.646, 0.568, 0.543, 0.423]
+        br: [0.203, 0.339, 0.499, 0.646, 0.568, 0.543, 0.423],
+        albedo: true
     },
     'Saturn|Crow2011': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
@@ -339,7 +341,7 @@
         br: [0.025, 0.035, 0.046, 0.059, 0.073, 0.089, 0.105, 0.122, 0.140, 0.158, 0.176, 0.194, 0.211, 0.229, 0.245, 0.261, 0.277, 0.292, 0.306, 0.319, 
             0.331, 0.343, 0.354, 0.364, 0.373, 0.382, 0.390, 0.398, 0.404, 0.411, 0.416, 0.421, 0.426, 0.430, 0.434, 0.437, 0.440, 0.442, 0.444, 0.446, 
             0.447, 0.448, 0.449, 0.449, 0.450, 0.450, 0.450, 0.449, 0.449, 0.448, 0.447],
-        albedo: true
+        geometric_albedo: true
     },
     'Karkoschka2016': [
         'Eight-color maps of Titan’s surface from spectroscopy with Huygens’ DISR',
@@ -363,7 +365,7 @@
         sd: [0.0079, 0.0083, 0.0079, 0.0050],
         //br: [0.0855, 0.0857, 0.0843, 0.0839], // geometric albedo
         //sd: [0.0031, 0.0022, 0.0016, 0.0021],
-        albedo: true
+        spherical_albedo: true
     },
     '(S IX) Phoebe|Graykowski2018': {
         tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
@@ -371,7 +373,7 @@
         indices: {'B-V': 0.57, 'V-R': 0.34},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.03], // averaged spherical albedo from Miller2011
+        spherical_albedo: ['Generic_Bessell.V', 0.03], // averaged spherical albedo from Miller2011
     },
     '(S IX) Phoebe|Grav2003': {
         tags: ['featured', 'Solar system', 'moon', 'Saturnian system', 'irregular'],
@@ -379,7 +381,7 @@
         indices: {'B-V': 0.63, 'V-R': 0.35, 'V-I': 0.64},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.03], // averaged spherical albedo from Miller2011
+        spherical_albedo: ['Generic_Bessell.V', 0.03], // averaged spherical albedo from Miller2011
     },
     '(S IX) Phoebe|Pena2022': {
         tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
@@ -387,12 +389,13 @@
         indices: {'g-r': 0.27, 'r-i': 0.06},
         calib: 'AB',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.03], // averaged spherical albedo from Miller2011
+        spherical_albedo: ['Generic_Bessell.V', 0.03], // averaged spherical albedo from Miller2011
     },
     'Uranus|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Uranian system'],
         nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.502, 0.561, 0.488, 0.264, 0.202, 0.089, 0.079]
+        br: [0.502, 0.561, 0.488, 0.264, 0.202, 0.089, 0.079],
+        albedo: true
     },
     'Uranus|Crow2011': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Uranian system'],
@@ -412,31 +415,31 @@
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
         nm: [250, 410, 480, 560, 750, 910],
         br: [0.51, 0.49, 0.48, 0.47, 0.46, 0.45],
-        albedo: true, // spherical albedo is 0.34
+        geometric_albedo: true, // spherical albedo is 0.34
     },
     '(U I) Ariel|Avramchuk2007': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
         nm: [250, 410, 480, 560, 750, 910],
         br: [0.50, 0.51, 0.51, 0.51, 0.51, 0.52],
-        albedo: true, // spherical albedo is 0.37
+        geometric_albedo: true, // spherical albedo is 0.37
     },
     '(U II) Umbriel|Avramchuk2007': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
         nm: [250, 410, 480, 560, 750, 910],
         br: [0.25, 0.25, 0.25, 0.25, 0.26, 0.26],
-        albedo: true, // spherical albedo is 0.19
+        geometric_albedo: true, // spherical albedo is 0.19
     },
     '(U III) Titania|Avramchuk2007': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
         nm: [250, 410, 480, 560, 750, 910],
         br: [0.30, 0.32, 0.33, 0.34, 0.36, 0.37],
-        albedo: true, // spherical albedo is 0.27
+        geometric_albedo: true, // spherical albedo is 0.27
     },
     '(U IV) Oberon|Avramchuk2007': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
         nm: [250, 410, 480, 560, 750, 910],
         br: [0.27, 0.29, 0.30, 0.31, 0.33, 0.35],
-        albedo: true, // spherical albedo is 0.23
+        geometric_albedo: true, // spherical albedo is 0.23
     },
     'Helfenstein1991': [
         'Oberon: Color photometry from Voyager and its geological implications',
@@ -448,7 +451,7 @@
         filters: ['Violet', 'Clear', 'Green'],
         br: [0.30, 0.27, 0.33],
         sd: [0.04, 0.03, 0.04],
-        albedo: true, // average normal albedo
+        geometric_albedo: true, // average normal albedo
     },
     '(U IV) Oberon: Bright areas|Helfenstein1991': { // crater rays
         tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular', 'surface feature'],
@@ -456,7 +459,7 @@
         filters: ['Violet', 'Clear', 'Green'],
         br: [0.37, 0.34, 0.39],
         sd: [0.04, 0.03, 0.03],
-        albedo: true, // average normal albedo
+        geometric_albedo: true, // average normal albedo
     },
     '(U IV) Oberon: Dark areas|Helfenstein1991': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular', 'surface feature'],
@@ -464,12 +467,13 @@
         filters: ['Violet', 'Clear', 'Green'],
         br: [0.24, 0.21, 0.28],
         sd: [0.03, 0.02, 0.03],
-        albedo: true, // average normal albedo
+        geometric_albedo: true, // average normal albedo
     },
     'Neptune|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.578, 0.562, 0.442, 0.226, 0.181, 0.072, 0.067]
+        br: [0.578, 0.562, 0.442, 0.226, 0.181, 0.072, 0.067],
+        albedo: true
     },
     'Neptune|Crow2011': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
@@ -489,7 +493,7 @@
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Neptunian system', 'irregular'],
         nm_range: [300, 900, 100],
         br: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
-        albedo: true, // geometric albedo
+        geometric_albedo: true, // geometric albedo
     },
     '(N II) Nereid|Graykowski2018': {
         tags: ['Solar system', 'moon', 'Neptunian system', 'irregular'],
@@ -497,7 +501,7 @@
         indices: {'B-V': 0.67, 'V-R': 0.38},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.24], // albedo from https://arxiv.org/abs/1601.02395
+        geometric_albedo: ['Generic_Bessell.V', 0.24], // albedo from https://arxiv.org/abs/1601.02395
     },
     'Schaefer2000': [
         'Nereid Has Complex Large-Amplitude Photometric Variability (Due to Chaotic Rotation)',
@@ -508,6 +512,6 @@
         system: 'Generic_Bessell',
         filters: ['U', 'B', 'V', 'R', 'I'],
         br: [0.90, 0.93, 1, 1.13, 0.99],
-        albedo: ['Generic_Bessell.V', 0.24], // albedo from https://arxiv.org/abs/1601.02395
+        geometric_albedo: ['Generic_Bessell.V', 0.24], // albedo from https://arxiv.org/abs/1601.02395
     },
 }
