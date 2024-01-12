@@ -70,22 +70,4 @@
         br: [0.53, 0.67, 0.29],
         albedo: true
     },
-    'WASP-18 b': {
-        tags: ['extrasolar', 'exoplanet', 'planet', 'planet geophysical'],
-        nm: [440, 788, 900],
-        br: [0.075, 0.048, 0.05],
-        albedo: true
-    },
-    'WASP-12 b': {
-        tags: ['extrasolar', 'exoplanet', 'planet', 'planet geophysical'],
-        nm: [271, 430, 900],
-        br: [0.039, 0.032, 0.17],
-        albedo: true
-    },
-    'WASP-43 b': {
-        tags: ['extrasolar', 'exoplanet', 'planet', 'planet geophysical'],
-        nm: [398, 538, 788, 1400, 4050],
-        br: [0.28, 0.05, 0.12, 0.24, 0.09],
-        albedo: true
-    },
 }

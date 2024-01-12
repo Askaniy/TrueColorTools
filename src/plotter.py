@@ -39,9 +39,9 @@ def plot_spectra(objects: Iterable[core.Spectrum], gamma, srgb, albedo, lang: st
     # color calculating and plotting
     for spectrum in objects:
         if srgb:
-            color = core.Color.from_spectrum(spectrum, albedo)
+            color = core.Color.from_spectrum_CIE(spectrum, albedo)
         else:
-            color = core.Color.from_spectrum_legacy(spectrum, albedo)
+            color = core.Color.from_spectrum(spectrum, albedo)
         if gamma:
             color = color.gamma_corrected()
         ax.plot(spectrum.nm, spectrum.br, label=spectrum.name, color=color.to_html())
@@ -87,7 +87,7 @@ def plot_filters(filters: Iterable[core.Spectrum]):
             color = rgb_muted[i]
         else:
             br = spectrum.br
-            color = core.Color.from_spectrum_legacy(spectrum).gamma_corrected().to_html()
+            color = core.Color.from_spectrum(spectrum).gamma_corrected().to_html()
         ax.plot(spectrum.nm, br, label=spectrum.name, color=color)
     fig.tight_layout()
     return fig

@@ -55,7 +55,7 @@ Program interface is functionally divided into tabs: *Database viewer*, *Multiba
 
 ### Features
 - Tag system: Each spectrum in the database can be assigned an arbitrary set of tags. They form lists of categories for the *Database viewer* tab, which makes working with the database easier.
-- Reference system: Each object in the database can be easily linked to one or several data sources by its short name. You can see the list in `File`→`References`. Also, object name can contain abbreviations, the decoding of which is indicated in `File`→`Notes`.
+- Reference system: Each object in the database can be easily linked to one or several data sources by its short name. You can see the list in `File`→`References`.
 - Multilingual support: The language can be changed through the top menu in runtime. TCT supports English, German and Russian. If you want to add support for your language, you can do it by analogy in [`strings.py`](src/strings.py) and make a commit or contact me.
 
 
@@ -65,6 +65,8 @@ Program interface is functionally divided into tabs: *Database viewer*, *Multiba
 Data listed in a JSON5 file can be of two types: reference and photometry. There are no restrictions on their order and relative position at all (data block and its reference block can be in different files), but it is usually convenient to list the sources at the beginning of the file, then the spectra.
 
 The brightness scale is not strictly tied to physical quantities. Using the `albedo` key, you can indicate that the incoming spectrum is scaled and the brightness in the range 0 to 1 should be treated as reflectance. The scaling task can be left to the program by specifying a wavelength or filter for which the albedo is known. Optional internal standard is flux spectral density measured in W / (m² nm).
+
+For the visible range, there are two main types of albedo: geometric (or normal) and spherical one. The first albedo is for the observer between the light source and the object. It is usually brighter than the spherical, average albedo in all directions. If one of them was not specified in the database, TCT uses a theoretical model to convert one to the other for the appropriate brightness display mode. If no albedo is specified, the object will not be displayed in albedo modes (exception: if there is a tag `star`). The `albedo` parameter indicates both at once, but it is not recommended.
 
 It is assumed that all data is indicated in ascending wavelength order, and it is necessary to specify "white spectrum" for calibration if photometric system you use not determines it by equal-energy one by wavelengths ([this link](https://hst-docs.stsci.edu/acsdhb/chapter-5-acs-data-analysis/5-1-photometry#id-5.1Photometry-5.1.15.1.1PhotometricSystems,Units,andZeropoints) may help). Typically you need to specify `calib: 'AB'` when working with Sloan filters and `'Vega'` for all other cases.
 
@@ -79,8 +81,9 @@ Supported input keys of a database unit:
 - `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': *float*, ...}`
 - `system` (str): a way to bracket the name of the photometric system
 - `calib` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
-- `albedo` (bool): `true` if brightness in the [0, 1] range represents scaled (reflective) spectrum
-- `scale` (list): sets the (reflectivity) at the wavelength, formatted `[*nm or filter name*, *float*]`
+- `albedo` (bool/list): indicates data as albedo scaled or tells how to do it with `[filter/nm, br, (sd)]`
+- `geometric_albedo` (bool/list): indicator of geometric/normal albedo data or how to scale to it
+- `spherical_albedo` (bool/list): indicator of spherical albedo data or how to scale to it
 - `sun` (bool): `true` to remove Sun as emitter
 - `tags` (list): strings, categorizes a spectrum
 

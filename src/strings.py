@@ -55,9 +55,9 @@ gui_gamma = {
     'de': 'Gammakorrektur'
 }
 gui_br = {
-    'en': ['Brightness mode', 'chromaticity', 'spherical albedo', 'geometric albedo', 'albedo'],
-    'ru': ['Режим яркости', 'цветность', 'сферическое альбедо', 'геометрическое альбедо', 'альбедо'],
-    'de': ['Helligkeitsmodus', 'Farbton', 'sphärische Albedo', 'geometrische Albedo', 'Albedo']
+    'en': ['Brightness mode', 'chromaticity', 'geometric albedo', 'spherical albedo'],
+    'ru': ['Режим яркости', 'цветность', 'геометрическое альбедо', 'сферическое альбедо'],
+    'de': ['Helligkeitsmodus', 'Farbton', 'geometrische Albedo', 'sphärische Albedo']
 }
 gui_interp = {
     'en': ['Interpolator/extrapolator', 'old', 'new'],
@@ -176,10 +176,20 @@ info_label = {
     'ru': 'Информация',
     'de': 'Info'
 }
-info_list = {
-    'en': ['Albedo mode', 'sRGB color space', 'Gamma correction'],
-    'ru': ['Режим альбедо', 'Пространство sRGB', 'Гамма-коррекция'],
-    'de': ['Albedo-Modus', 'sRGB-Farbraum', 'Gammakorrektur']
+info_sRGB = {
+    'en': 'sRGB color space',
+    'ru': 'Пространство sRGB',
+    'de': 'sRGB-Farbraum'
+}
+info_gamma = {
+    'en': 'Gamma correction',
+    'ru': 'Гамма-коррекция',
+    'de': 'Gammakorrektur'
+}
+info_indicator = {
+    'en': ('off', 'on'),
+    'ru': ('выкл', 'вкл'),
+    'de': ('Inaktiv', 'Aktiv')
 }
 
 # Tab 2 - Multiband processing

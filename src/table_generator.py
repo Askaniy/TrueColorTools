@@ -5,7 +5,7 @@ import src.data_import as di
 import src.strings as tr
 
 
-def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamma: bool, folder: str, extension: str, lang: str):
+def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: bool, folder: str, extension: str, lang: str):
     """ Creates and saves a table of colored squares for each spectrum with the specified tag """
     objects = di.obj_dict(objectsDB, tag, lang)
     l = len(objects)
@@ -82,29 +82,42 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
     
     # Info writing
     draw.text((w1, h1), tr.info_label[lang], fill=(230, 230, 230), font=help_font, anchor='la')  # x = 0.8, br = 230
-    for info_num, info in enumerate([albedoFlag, srgb, gamma]): # x = 0.75, br = 224
-        draw.text(
-            xy=(w1, h2 + note_step * info_num), text=f'{tr.info_list[lang][info_num]}: {info}',
-            fill=(224, 224, 224), font=note_font, anchor='la'
-        )
-    draw.text((w1, h2 + note_step*(1+info_num)), tr.link, fill=(0, 200, 255), font=note_font, anchor='la')
+    draw.text(
+        xy=(w1, h2), text=f'{tr.info_gamma[lang]}: {tr.info_indicator[lang][gamma]}',
+        fill=(224, 224, 224), font=note_font, anchor='la' # x = 0.75, br = 224
+    )
+    draw.text(
+        xy=(w1, h2+note_step), text=f'{tr.info_sRGB[lang]}: {tr.info_indicator[lang][srgb]}',
+        fill=(224, 224, 224), font=note_font, anchor='la' # x = 0.75, br = 224
+    )
+    draw.text(
+        xy=(w1, h2+note_step*2), text=f'{tr.gui_br[lang][0]}: {tr.gui_br[lang][brMode+1]}',
+        fill=(224, 224, 224), font=note_font, anchor='la' # x = 0.75, br = 224
+    )
+    draw.text((w1, h2+note_step*3), tr.link, fill=(0, 200, 255), font=note_font, anchor='la')
     
     # Table generator
     n = 0 # object counter
     for name, raw_name in objects.items():
-        object_unit = objectsDB[raw_name]
-        albedo = ('albedo' in object_unit and object_unit['albedo']) or 'scale' in object_unit
 
         # Spectral data import and processing
-        spectrum = core.from_database(name, object_unit).to_scope(core.visible_range)
-        if albedoFlag and 'scale' in object_unit:
-            spectrum = spectrum.scaled(*object_unit['scale'])
+        body = core.database_parser(name, objectsDB[raw_name])
+        albedo = brMode and isinstance(body, core.ReflectiveBody)
+
+        # Setting brightness mode
+        match brMode:
+            case 0:
+                spectrum = body.get_spectrum('chromaticity')
+            case 1:
+                spectrum = body.get_spectrum('geometric')
+            case 2:
+                spectrum = body.get_spectrum('spherical')
         
         # Color calculation
         if srgb:
-            color = core.Color.from_spectrum(spectrum, albedoFlag and albedo)
+            color = core.Color.from_spectrum_CIE(spectrum, albedo)
         else:
-            color = core.Color.from_spectrum_legacy(spectrum, albedoFlag and albedo)
+            color = core.Color.from_spectrum(spectrum, albedo)
         if gamma:
             color = color.gamma_corrected()
         rgb = color.to_bit(8)
@@ -166,7 +179,7 @@ def generate_table(objectsDB: dict, tag: str, albedoFlag: bool, srgb: bool, gamm
         draw.multiline_text((center_x-ar, center_y-shift), '\n'.join(splitted), fill=text_color, font=object_font, spacing=0)
         n += 1
     
-    file_name = f'TCT_{lang}_{tag}{"_gamma-corrected" if gamma else ""}{"_srgb" if srgb else ""}{"_albedo" if albedoFlag else ""}.{extension}'
+    file_name = f'TCT_{lang}_{tag}_gamma{("OFF", "ON")[gamma]}_srgb{("OFF", "ON")[srgb]}_albedo{("OFF", "GEOM", "SPHER")[brMode]}.{extension}'
     img.save(f'{folder}/{file_name}')
     print(f'Color table saved as {file_name}\n')
 

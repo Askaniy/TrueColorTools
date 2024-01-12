@@ -149,13 +149,14 @@ def grid(start: int|float, end: int|float, res: int):
 
 
 class Spectrum:
+    """ Class to work with single, continuous spectrum, with strictly defined resolution step. """
+
     def __init__(self, name: str, nm: Iterable, br: Iterable, sd: Iterable = None, photometry=None):
         """
-        Constructor of the class to work with single, continuous spectrum, with strictly defined resolution step of 5 nm.
         It is assumed that the input grid can be trusted. If preprocessing is needed, see `Spectrum.from_array`.
 
         Args:
-        - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
+        - `name` (str): human-readable identification. May include source (separated by "|") and notes (separated by ":")
         - `nm` (Iterable): list of wavelengths in nanometers with resolution step of 5 nm
         - `br` (Iterable): same-size list of "brightness", flux in units of energy (not a photon counter)
         - `sd` (Iterable, optional): same-size list of standard deviations
@@ -181,7 +182,7 @@ class Spectrum:
         Creates a Spectrum object from wavelength array with a check for uniformity and possible extrapolation.
 
         Args:
-        - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
+        - `name` (str): human-readable identification. May include source (separated by "|") and notes (separated by ":")
         - `nm` (Iterable): list of wavelengths, any grid
         - `br` (Iterable): same-size list of "brightness", flux in units of energy (not a photon counter)
         - `sd` (Iterable): same-size list of standard deviations
@@ -301,7 +302,7 @@ class Spectrum:
                     photometry.sd *= scale_factor
             return Spectrum(self.name, self.nm, self.br*scale_factor, sd, photometry)
     
-    def scaled(self, where: str|int|float, how: int|float):
+    def scaled(self, where: str|int|float, how: int|float, sd: int|float = None):
         """ Returns a new Spectrum object to fit the request of wavelength zone and brightness there """
         if isinstance(where, str):
             return self.scaled_to_albedo(how, get_filter(where))
@@ -332,7 +333,7 @@ class Spectrum:
         end = min(self.nm[-1], other.nm[-1])
         if start >= end:
             print(f'# Note for spectral multiplication "{name}"')
-            print('- There is no intersection between the spectra, nothing changed.')
+            print('- There is no intersection between the spectra, nothing changed.') # TODO: extrapolate, if it ends not about zero
             the_first = self.name
             the_second = other.name
             if self.nm[0] > other.nm[0]:
@@ -392,12 +393,12 @@ del lambdas
 
 
 class Photometry:
+    """ Class to work with set of filters measurements. """
+
     def __init__(self, name: str, filters: Iterable[Spectrum], br: Iterable, sd: Iterable = None):
         """
-        Constructor of the class to work with set of filters measurements.
-
         Args:
-        - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
+        - `name` (str): human-readable identification. May include source (separated by "|") and notes (separated by ":")
         - `filters` (Iterable): list of energy response functions scaled to the unit area, storing as Spectrum objects
         - `br` (Iterable): same-size list of intensity
         - `sd` (Iterable): same-size list of standard deviations
@@ -420,7 +421,7 @@ class Photometry:
         Creates a Photometry object from a list of filter's names. Files with such names must be in the `filters` folder.
 
         Args:
-        - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
+        - `name` (str): human-readable identification. May include source (separated by "|") and notes (separated by ":")
         - `filters` (Iterable): list of file names in the `filters` folder
         - `br` (Iterable): same-size list of intensity
         - `sd` (Iterable): same-size list of standard deviations
@@ -465,149 +466,6 @@ class Photometry:
         filters = [(passband / other).scaled_by_area() for passband in self.filters]
         return Photometry(f'{self.name} / {other.name}', filters, self.br / (self ** other))
 
-
-
-def mag2flux(mag: int|float|np.ndarray, zero_point: float = 1.):
-    """ Converts magnitudes to flux (by default in Vega units) """
-    return zero_point * 10**(-0.4 * mag)
-
-def sd_mag2sd_flux(sd_mag: int|float|np.ndarray, irr: int|float|np.ndarray):
-    """ Converts standard deviation of magnitude to standard deviation of flux """
-    return sd_mag * irr * 0.4 * np.log(10)
-
-def sd_indices2sd_mag(sd_indices: Iterable):
-    """ Calculates standard deviations from color indices' deviations """
-    l = len(sd_indices)
-    sd_mag = np.zeros(l+1, dtype='float')
-    sd_mag[0:1] = sd_indices[0] / np.sqrt(2) # assuming the first two points to be with equal uncertainty
-    for i in range(2, sd_mag.size):
-        sd_mag[i] = np.sqrt(sd_indices[i-1]**2 - sd_mag[i-1]**2)
-    return sd_mag
-
-def color_index_splitter(index: str):
-    """
-    Dashes in filter names are allowed in the SVO Filter Profile Service.
-    This function should fix all or most of the problems caused.
-    """
-    try:
-        filter1, filter2 = index.split('-')
-    except ValueError:
-        dotpart1, dotpart2, dotpart3 = index.split('.') # one dot per full filter name
-        dashpart1, dashpart2 = dotpart2.split('-', 1)
-        filter1 = dotpart1 + '.' + dashpart1
-        filter2 = dashpart2 + '.' + dotpart3
-    return filter1, filter2
-
-def color_indices_parsing(indices: dict):
-    """
-    Converts color indices to linear brightness, assuming 1 Vega intensity in the first filter.
-    Filters should be specified in ascending order, with the second filter having faster iteration.
-    """
-    filters = {color_index_splitter(tuple(indices.keys())[0])[0]: 1} # assuming 1 Vega intensity in the first filter
-    for key, value in indices.items():
-        reference_filter, current_filter = color_index_splitter(key)
-        filters |= {current_filter: filters[reference_filter] - value}
-    return filters.keys(), mag2flux(np.array(tuple(filters.values())))
-
-def from_database(name: str, content: dict) -> Spectrum | Photometry:
-    """
-    Depending on the contents of the object read from the database, returns a class that has `to_scope()` method
-
-    Supported input keys of a database unit:
-    - `nm` (list): list of wavelengths in nanometers
-    - `br` (list): same-size list of "brightness", flux in units of energy (not a photon counter)
-    - `mag` (list): same-size list of magnitudes
-    - `sd` (list or number): same-size list of standard deviations or general value
-    - `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
-    - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
-    - `filters` (list): list of filter names that can be found in the `filters` folder
-    - `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': *float*, ...}`
-    - `system` (str): a way to bracket the name of the photometric system
-    - `calib` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
-    - `albedo` (bool): `true` if brightness in the [0, 1] range represents scaled (reflective) spectrum
-    - `scale` (list): sets the (reflectivity) at the wavelength, formatted `[*nm or filter name*, *float*]`
-    - `sun` (bool): `true` to remove Sun as emitter
-    - `tags` (list): strings, categorizes a spectrum
-    """
-    br = []
-    sd = None
-    nm = [] # Spectrum object indicator
-    filters = [] # Photometry object indicator
-    if 'file' in content:
-        try:
-            nm, br, sd = di.file_reader(content['file'])
-        except Exception:
-            nm, br, sd = nm_br_sd_stub
-            print(f'# Note for the Spectrum object "{name}"')
-            print(f'- Something unexpected happened during external file reading. The data was replaced by a stub.')
-            print(f'- More precisely, {format_exc(limit=0)}')
-    else:
-        # brightness reading
-        if 'br' in content:
-            br = content['br']
-        elif 'mag' in content:
-            br = mag2flux(np.array(content['mag']))
-        # spectrum reading
-        if 'nm' in content:
-            nm = content['nm']
-        elif 'nm_range' in content:
-            start, stop, step = content['nm_range']
-            nm = np.arange(start, stop+1, step)
-        # photometry reading
-        elif 'filters' in content:
-            filters = content['filters']
-        elif 'indices' in content:
-            filters, br = color_indices_parsing(content['indices'])
-        # standard deviation reading
-        if 'sd' in content:
-            if isinstance(content['sd'], (int, float)):
-                sd = np.full(len(br), content['sd']) # general standard deviation for all the points
-            else:
-                sd = np.array(content['sd'])
-            if 'indices' in content:
-                sd = sd_indices2sd_mag(sd)
-            if 'indices' in content or 'mag' in content:
-                sd = sd_mag2sd_flux(sd, br)
-    if (len_br := len(br)) == 0:
-        print(f'# Note for the database object "{name}"')
-        print(f'- No brightness data. Spectrum stub object was created.')
-        return Spectrum(name, *nm_br_sd_stub)
-    else:
-        if sd is not None and (len_sd := len(sd)) != len_br:
-            print(f'# Note for the database object "{name}"')
-            print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
-            sd = None
-        if (len_nm := len(nm)) > 0:
-            if len_nm != len_br:
-                print(f'# Note for the database object "{name}"')
-                print(f'- Arrays of wavelengths and brightness do not match ({len_nm} vs {len_br}). Spectrum stub object was created.')
-                result = Spectrum(name, *nm_br_sd_stub)
-            else:
-                result = Spectrum.from_array(name, nm, br, sd)
-        elif (len_filters := len(filters)) > 0:
-            if len_filters != len_br:
-                print(f'# Note for the database object "{name}"')
-                print(f'- Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br}). Spectrum stub object was created.')
-                result = Spectrum(name, *nm_br_sd_stub)
-            else:
-                if 'system' in content:
-                    filters = [content['system'] + '.' + short_name for short_name in filters]
-                result = Photometry.from_list(name, filters, br, sd)
-        else:
-            print(f'# Note for the database object "{name}"')
-            print(f'- No wavelength data. Spectrum stub object was created.')
-            return Spectrum(name, *nm_br_sd_stub)
-        if 'calib' in content:
-            match content['calib'].lower():
-                case 'vega':
-                    result *= vega_norm
-                case 'ab':
-                    result *= equal_frequency_density
-                case _:
-                    pass
-        if 'sun' in content and content['sun']:
-            result /= sun_norm
-        return result
 
 def xy2xyz(xy):
     return np.array((xy[0], xy[1], 1-xy[0]-xy[0])) # (x, y, 1-x-y)
@@ -660,14 +518,15 @@ z.br /= 355.5
 gamma_correction = np.vectorize(lambda p: p * 12.92 if p < 0.0031308 else 1.055 * p**(1.0/2.4) - 0.055)
 
 class Color:
+    """ Class to work with color represented by three float values in [0, 1] range. """
+
     def __init__(self, name: str, rgb: Iterable, albedo=False):
         """
-        Constructor of the class to work with color represented by three float values in [0, 1] range.
         The albedo flag on means that you have already normalized the brightness over the range.
         By default, initialization implies normalization and you get chromaticity.
 
         Args:
-        - `name` (str): human-readable identification. May include source (separated by "|") and info (separated by ":")
+        - `name` (str): human-readable identification. May include source (separated by "|") and notes (separated by ":")
         - `rgb` (Iterable): array of three values that are red, green and blue
         - `albedo` (bool): flag to disable normalization
         """
@@ -688,13 +547,13 @@ class Color:
         self.rgb = rgb
 
     @staticmethod
-    def from_spectrum_legacy(spectrum: Spectrum, albedo=False):
+    def from_spectrum(spectrum: Spectrum, albedo=False):
         """ A simple and concrete color processing method based on experimental eye sensitivity curves """
         rgb = [spectrum ** i for i in (r, g, b)]
         return Color(spectrum.name, rgb, albedo)
 
     @staticmethod
-    def from_spectrum(spectrum: Spectrum, albedo=False, color_system=srgb):
+    def from_spectrum_CIE(spectrum: Spectrum, albedo=False, color_system=srgb):
         """ Conventional color processing method: spectrum -> CIE XYZ -> sRGB with illuminant E """
         xyz = [spectrum ** i for i in (x, y, z)]
         rgb = color_system.T.dot(xyz)
@@ -724,3 +583,256 @@ class Color:
             html = '#FFFFFF'
             #print(f'- It has been replaced with {html}.')
         return html
+
+
+class NonReflectiveBody:
+    """ High-level processing class, specializing on photometry of a physical body with not specified reflectance. """
+
+    def __init__(self, name: str, tags: Iterable, spectrum: Spectrum):
+        """
+        Args:
+        - `name` (str): human-readable identification. May include source (separated by "|") and notes (separated by ":")
+        - `tags` (Iterable): list of categories that specify the physical body
+        - `spectrum` (Spectrum): not assumed to be scaled
+        """
+        self.name = name
+        self.tags = tags
+        self.spectrum = spectrum
+    
+    def get_spectrum(self, mode: str):
+        if mode == 'chromaticity' or 'star' in self.tags:
+            return self.spectrum # means it's an emitter and we need to render it
+        else:
+            return Spectrum(self.name, *nm_br_sd_stub).to_scope(visible_range) # means we don't need to render it
+
+
+class ReflectiveBody:
+    """
+    High-level processing class, specializing on reflectance photometry of a physical body.
+
+    Albedo formatting rules:
+    1. `geometric_albedo` and `spherical_albedo` can be a boolean type or in [filter/nm, br, sd] format
+    2. both values by default `false`
+    3. no albedo is specified → emitter
+    4. one is specified → another one is estimated with the phase integral model
+
+    Phase integral model by Shevchenko et al.: https://ui.adsabs.harvard.edu/abs/2019A%26A...626A..87S/abstract
+    q = 0.359 (± 0.005) + 0.47 (± 0.03) p, where `p` is geometric albedo.
+    By definition, spherical albedo A is p∙q.
+    """
+
+    def __init__(self, name: str, tags: Iterable, geometric: Spectrum = None, spherical: Spectrum = None):
+        """
+        Args:
+        - `name` (str): human-readable identification. May include source (separated by "|") and notes (separated by ":")
+        - `tags` (Iterable): list of categories that specify the physical body
+        - `geometric` (Spectrum): represents geometric albedo
+        - `spherical` (Spectrum): represents spherical albedo
+        """
+        self.name = name
+        self.tags = tags
+        self.spherical = spherical
+        self.geometric = geometric
+    
+    def get_spectrum(self, mode: str):
+        if mode == 'chromaticity': # chromaticity mode
+            if self.geometric:
+                return self.geometric # most likely it's original (unscaled) data, so it's a bit better
+            else:
+                return self.spherical
+        elif mode == 'geometric':
+            if self.geometric:
+                return self.geometric
+            else:
+                sphericalV = self.spherical ** bessell_V
+                geometricV = (np.sqrt(0.359**2 + 4 * 0.47 * sphericalV) - 0.359) / (2 * 0.47)
+                return self.spherical.scaled_to_albedo(geometricV, bessell_V)
+        else:
+            if self.spherical:
+                return self.spherical
+            else:
+                geometricV = self.geometric ** bessell_V
+                sphericalV = geometricV * (0.395 + 0.47 * geometricV)
+                return self.geometric.scaled_to_albedo(sphericalV, bessell_V)
+
+
+def mag2flux(mag: int|float|np.ndarray, zero_point: float = 1.):
+    """ Converts magnitudes to flux (by default in Vega units) """
+    return zero_point * 10**(-0.4 * mag)
+
+def sd_mag2sd_flux(sd_mag: int|float|np.ndarray, irr: int|float|np.ndarray):
+    """ Converts standard deviation of magnitude to standard deviation of flux """
+    return sd_mag * irr * 0.4 * np.log(10)
+
+def sd_indices2sd_mag(sd_indices: Iterable):
+    """ Calculates standard deviations from color indices' deviations """
+    l = len(sd_indices)
+    sd_mag = np.zeros(l+1, dtype='float')
+    sd_mag[0:1] = sd_indices[0] / np.sqrt(2) # assuming the first two points to be with equal uncertainty
+    for i in range(2, sd_mag.size):
+        sd_mag[i] = np.sqrt(sd_indices[i-1]**2 - sd_mag[i-1]**2)
+    return sd_mag
+
+def color_index_splitter(index: str):
+    """
+    Dashes in filter names are allowed in the SVO Filter Profile Service.
+    This function should fix all or most of the problems caused.
+    """
+    try:
+        filter1, filter2 = index.split('-')
+    except ValueError:
+        dotpart1, dotpart2, dotpart3 = index.split('.') # one dot per full filter name
+        dashpart1, dashpart2 = dotpart2.split('-', 1)
+        filter1 = dotpart1 + '.' + dashpart1
+        filter2 = dashpart2 + '.' + dotpart3
+    return filter1, filter2
+
+def color_indices_parser(indices: dict):
+    """
+    Converts color indices to linear brightness, assuming 1 Vega intensity in the first filter.
+    Filters should be specified in ascending order, with the second filter having faster iteration.
+    """
+    filters = {color_index_splitter(tuple(indices.keys())[0])[0]: 1} # assuming 1 Vega intensity in the first filter
+    for key, value in indices.items():
+        reference_filter, current_filter = color_index_splitter(key)
+        filters |= {current_filter: filters[reference_filter] - value}
+    return filters.keys(), mag2flux(np.array(tuple(filters.values())))
+
+def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveBody:
+    """
+    Depending on the contents of the object read from the database, returns a class that has `get_spectrum()` method
+
+    Supported input keys of a database unit:
+    - `nm` (list): list of wavelengths in nanometers
+    - `br` (list): same-size list of "brightness", flux in units of energy (not a photon counter)
+    - `mag` (list): same-size list of magnitudes
+    - `sd` (list or number): same-size list of standard deviations or general value
+    - `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
+    - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
+    - `filters` (list): list of filter names that can be found in the `filters` folder
+    - `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': *float*, ...}`
+    - `system` (str): a way to bracket the name of the photometric system
+    - `calib` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
+    - `albedo` (bool/list): indicates data as albedo scaled or tells how to do it with `[filter/nm, br, (sd)]`
+    - `geometric_albedo` (bool/list): indicator of geometric/normal albedo data or how to scale to it
+    - `spherical_albedo` (bool/list): indicator of spherical albedo data or how to scale to it
+    - `sun` (bool): `true` to remove Sun as emitter
+    - `tags` (list): strings, categorizes a spectrum
+    """
+    # Spectral parsing part
+    br = []
+    sd = None
+    nm = [] # Spectrum object indicator
+    filters = [] # Photometry object indicator
+    if 'file' in content:
+        try:
+            nm, br, sd = di.file_reader(content['file'])
+        except Exception:
+            nm, br, sd = nm_br_sd_stub
+            print(f'# Note for the Spectrum object "{name}"')
+            print(f'- Something unexpected happened during external file reading. The data was replaced by a stub.')
+            print(f'- More precisely, {format_exc(limit=0)}')
+    else:
+        # Brightness reading
+        if 'br' in content:
+            br = content['br']
+        elif 'mag' in content:
+            br = mag2flux(np.array(content['mag']))
+        # Spectrum reading
+        if 'nm' in content:
+            nm = content['nm']
+        elif 'nm_range' in content:
+            start, stop, step = content['nm_range']
+            nm = np.arange(start, stop+1, step)
+        # Photometry reading
+        elif 'filters' in content:
+            filters = content['filters']
+        elif 'indices' in content:
+            filters, br = color_indices_parser(content['indices'])
+        # Standard deviation reading
+        if 'sd' in content:
+            if isinstance(content['sd'], (int, float)):
+                sd = np.full(len(br), content['sd']) # general standard deviation for all the points
+            else:
+                sd = np.array(content['sd'])
+            if 'indices' in content:
+                sd = sd_indices2sd_mag(sd)
+            if 'indices' in content or 'mag' in content:
+                sd = sd_mag2sd_flux(sd, br)
+    if (len_br := len(br)) == 0:
+        print(f'# Note for the database object "{name}"')
+        print(f'- No brightness data. Spectrum stub object was created.')
+        spectral_data = Spectrum(name, *nm_br_sd_stub)
+    else:
+        if sd is not None and (len_sd := len(sd)) != len_br:
+            print(f'# Note for the database object "{name}"')
+            print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
+            sd = None
+        if (len_nm := len(nm)) > 0:
+            if len_nm != len_br:
+                print(f'# Note for the database object "{name}"')
+                print(f'- Arrays of wavelengths and brightness do not match ({len_nm} vs {len_br}). Spectrum stub object was created.')
+                spectral_data = Spectrum(name, *nm_br_sd_stub)
+            else:
+                spectral_data = Spectrum.from_array(name, nm, br, sd)
+        elif (len_filters := len(filters)) > 0:
+            if len_filters != len_br:
+                print(f'# Note for the database object "{name}"')
+                print(f'- Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br}). Spectrum stub object was created.')
+                spectral_data = Spectrum(name, *nm_br_sd_stub)
+            else:
+                if 'system' in content:
+                    filters = [content['system'] + '.' + short_name for short_name in filters]
+                spectral_data = Photometry.from_list(name, filters, br, sd)
+        else:
+            print(f'# Note for the database object "{name}"')
+            print(f'- No wavelength data. Spectrum stub object was created.')
+            return Spectrum(name, *nm_br_sd_stub)
+        if 'calib' in content:
+            match content['calib'].lower():
+                case 'vega':
+                    spectral_data *= vega_norm
+                case 'ab':
+                    spectral_data *= equal_frequency_density
+                case _:
+                    pass
+        if 'sun' in content and content['sun']:
+            spectral_data /= sun_norm
+    # Physical body parsing part
+    spectrum = spectral_data.to_scope(visible_range)
+    tags = []
+    geometric = None
+    spherical = None
+    if 'tags' in content:
+        tags = content['tags']
+    # Non-specific albedo parsing, for backward compatibility
+    if 'albedo' in content:
+        if isinstance(content['albedo'], bool):
+            geometric = spherical = spectrum
+        elif isinstance(content['albedo'], list):
+            geometric = spherical = spectrum.scaled(*content['albedo'])
+        else:
+            print(f'# Note for the database object "{name}"')
+            print(f'- Invalid albedo value: {content["albedo"]}. Must be boolean or [filter/nm, br, (sd)].')
+    # Geometric albedo parsing
+    if 'geometric_albedo' in content:
+        if isinstance(content['geometric_albedo'], bool):
+            geometric = spectrum
+        elif isinstance(content['geometric_albedo'], list):
+            geometric = spectrum.scaled(*content['geometric_albedo'])
+        else:
+            print(f'# Note for the database object "{name}"')
+            print(f'- Invalid geometric albedo value: {content["geometric_albedo"]}. Must be boolean or [filter/nm, br, (sd)].')
+    # Spherical albedo parsing
+    if 'spherical_albedo' in content:
+        if isinstance(content['spherical_albedo'], bool):
+            spherical = spectrum
+        elif isinstance(content['spherical_albedo'], list):
+            spherical = spectrum.scaled(*content['spherical_albedo'])
+        else:
+            print(f'# Note for the database object "{name}"')
+            print(f'- Invalid spherical albedo value: {content["spherical_albedo"]}. Must be boolean or [filter/nm, br, (sd)].')
+    if geometric or spherical:
+        return ReflectiveBody(name, tags, geometric, spherical)
+    else:
+        return NonReflectiveBody(name, tags, spectrum)

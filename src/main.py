@@ -48,7 +48,7 @@ def launch_window(lang: str):
     T2_first_time = True
     
     # List of settings events that cause color recalculation
-    triggers = ('-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-brMode2-', '-brMode3-', '-bitness-', '-rounding-')
+    triggers = ('-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-brMode2-', '-bitness-', '-rounding-')
 
     # Window events loop
     while True:
@@ -60,7 +60,7 @@ def launch_window(lang: str):
             break
         # Radio selection
         elif event.startswith('-brMode'):
-            brMode = get_flag_index((values['-brMode0-'], values['-brMode1-'], values['-brMode2-'], values['-brMode3-']))
+            brMode = get_flag_index((values['-brMode0-'], values['-brMode1-'], values['-brMode2-']))
         # Checks for empty input
         elif event == '-bitness-':
             try:
@@ -119,19 +119,25 @@ def launch_window(lang: str):
             if (event in triggers or event == 'T1_list' or event == 'T1_filter') and values['T1_list'] != []:
                 T1_name = values['T1_list'][0]
                 T1_raw_name = di.obj_dict(objectsDB, '_all_', lang)[T1_name]
-                T1_object_unit = objectsDB[T1_raw_name]
-                T1_albedo = ('albedo' in T1_object_unit and T1_object_unit['albedo']) or 'scale' in T1_object_unit
 
                 # Spectral data import and processing
-                T1_spectrum = core.from_database(T1_name, T1_object_unit).to_scope(core.visible_range)
-                if brMode > 0 and 'scale' in T1_object_unit:
-                    T1_spectrum = T1_spectrum.scaled(*T1_object_unit['scale'])
-                
+                T1_body = core.database_parser(T1_name, objectsDB[T1_raw_name])
+                T1_albedo = brMode and isinstance(T1_body, core.ReflectiveBody)
+
+                # Setting brightness mode
+                match brMode:
+                    case 0:
+                        T1_spectrum = T1_body.get_spectrum('chromaticity')
+                    case 1:
+                        T1_spectrum = T1_body.get_spectrum('geometric')
+                    case 2:
+                        T1_spectrum = T1_body.get_spectrum('spherical')
+
                 # Color calculation
                 if values['-srgb-']:
-                    T1_color = core.Color.from_spectrum(T1_spectrum, brMode and T1_albedo)
+                    T1_color = core.Color.from_spectrum_CIE(T1_spectrum, T1_albedo)
                 else:
-                    T1_color = core.Color.from_spectrum_legacy(T1_spectrum, brMode and T1_albedo)
+                    T1_color = core.Color.from_spectrum(T1_spectrum, T1_albedo)
                 if values['-gamma-']:
                     T1_color = T1_color.gamma_corrected()
                 T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
@@ -159,19 +165,23 @@ def launch_window(lang: str):
                 T1_export = '\n' + '\t'.join(tr.gui_col[lang]) + '\n' + '_' * 36
                 
                 for name, raw_name in di.obj_dict(objectsDB, values['T1_tags'], lang).items():
-                    T1_object_unit = objectsDB[raw_name]
-                    T1_albedo = ('albedo' in T1_object_unit and T1_object_unit['albedo']) or 'scale' in T1_object_unit
+                    T1_body = core.database_parser(name, objectsDB[raw_name])
+                    T1_albedo = brMode and isinstance(T1_body, core.ReflectiveBody)
+                
+                    # Setting brightness mode
+                    match brMode:
+                        case 0:
+                            T1_spectrum = T1_body.get_spectrum('chromaticity')
+                        case 1:
+                            T1_spectrum = T1_body.get_spectrum('geometric')
+                        case 2:
+                            T1_spectrum = T1_body.get_spectrum('spherical')
 
-                    # Spectral data import and processing
-                    T1_spectrum = core.from_database(name, T1_object_unit).to_scope(core.visible_range)
-                    if brMode and 'scale' in T1_object_unit:
-                        T1_spectrum = T1_spectrum.scaled(*T1_object_unit['scale'])
-                    
                     # Color calculation
                     if values['-srgb-']:
-                        T1_color = core.Color.from_spectrum(T1_spectrum, brMode and T1_albedo)
+                        T1_color = core.Color.from_spectrum_CIE(T1_spectrum, T1_albedo)
                     else:
-                        T1_color = core.Color.from_spectrum_legacy(T1_spectrum, brMode and T1_albedo)
+                        T1_color = core.Color.from_spectrum(T1_spectrum, T1_albedo)
                     if values['-gamma-']:
                         T1_color = T1_color.gamma_corrected()
                     T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
@@ -269,9 +279,9 @@ def launch_window(lang: str):
 
                 # Color calculation
                 if values['-srgb-']:
-                    T3_color = core.Color.from_spectrum(T3_spectrum, albedo=values['T3_overexposure'])
+                    T3_color = core.Color.from_spectrum_CIE(T3_spectrum, albedo=values['T3_overexposure'])
                 else:
-                    T3_color = core.Color.from_spectrum_legacy(T3_spectrum, albedo=values['T3_overexposure'])
+                    T3_color = core.Color.from_spectrum(T3_spectrum, albedo=values['T3_overexposure'])
                 if values['-gamma-']:
                     T3_color = T3_color.gamma_corrected()
                 T3_rgb = tuple(T3_color.to_bit(bitness).round(rounding))

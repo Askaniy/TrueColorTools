@@ -123,9 +123,9 @@ def image_processing(input_data: dict):
 
                 temp_time = monotonic_ns() # Color calculation
                 if input_data['srgb']:
-                    color = core.Color.from_spectrum(spectrum, albedo=True)
+                    color = core.Color.from_spectrum_CIE(spectrum, albedo=True)
                 else:
-                    color = core.Color.from_spectrum_legacy(spectrum, albedo=True)
+                    color = core.Color.from_spectrum(spectrum, albedo=True)
                 if input_data['gamma']:
                     color = color.gamma_corrected()
                 rgb = tuple(color.to_bit(8).round().astype(int))
