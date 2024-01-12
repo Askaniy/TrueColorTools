@@ -1708,6 +1708,26 @@
         sun: true,
         scale: ['Generic_Bessell.V', 0.042], // albedo from Brown and Butler (2017)
     },
+    'Stansberry2012': [
+        'Physical properties of trans-neptunian binaries (120347) Salacia-Actaea and (42355) Typhon-Echidna',
+        'DOI: 10.1016/j.icarus.2012.03.029', 'https://ui.adsabs.harvard.edu/abs/2012Icar..219..676S/abstract'
+    ],
+    '(120347) Salacia|Stansberry2012': {
+        tags: ['Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'V-I': 0.87},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.0357],
+    },
+    '(120347 I) Actaea|Stansberry2012': {
+        tags: ['Solar system', 'moon', 'minor body', 'TNO', 'classical', 'classical-h'],
+        system: 'Generic_Bessell',
+        indices: {'V-I': 0.89},
+        calib: 'Vega',
+        sun: true,
+        scale: ['Generic_Bessell.V', 0.0357],
+    },
     '(120348) 2004 TY364|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
         system: 'Generic_Bessell',
