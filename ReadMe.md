@@ -103,3 +103,13 @@ Brief help on the UBVRI photometric system implementations:
 - `Generic_Johnson` takes into account the sensitivity of photomultiplier tubes, mostly affected on R and I bands. Use **only** if the measurements were actually recorded on a PMT.
 - `Generic_Cousins` contains only R and I bands. Can be used with the U, B, V from Johnson system directly, but the error is expected to be large.
 - `Generic_Bessell` is actually Johnson—Cousins system for CCD receiver. Recommended by default.
+
+## Acknowledgements
+
+This research has made use of:
+- [Spanish Virtual Observatory](https://svo.cab.inta-csic.es) project funded by MCIN/AEI/10.13039/501100011033/ through grant PID2020-112949GB-I00
+    - [The SVO Filter Profile Service. Rodrigo, C., Solano, E., Bayo, A., 2012](https://ui.adsabs.harvard.edu/abs/2012ivoa.rept.1015R/abstract); 
+    - [The SVO Filter Profile Service. Rodrigo, C., Solano, E., 2020](https://ui.adsabs.harvard.edu/abs/2020sea..confE.182R/abstract); 
+- [Colour & Vision Research laboratory and database](http://www.cvrl.org/)
+    - [Stiles & Burch (1959) 10-deg individual colour matching functions](http://www.cvrl.org/database/text/sb_individual/sb10_individual.htm);
+    - [CIE (2012) 10-deg XYZ “physiologically-relevant” colour matching functions](http://www.cvrl.org/database/text/cienewxyz/cie2012xyz10.htm).
