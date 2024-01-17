@@ -251,9 +251,11 @@ class Spectrum:
         return Spectrum(f'BB with T={round(temperature)}', scope, br)
     
     def to_scope(self, scope: np.ndarray):
-        """ Guarantees spectrum continuity over the entire requested range """
-        self.nm, self.br = extrapolating(self.nm, self.br, scope, resolution)
-        return self
+        """ Returns a new Spectrum object with a guarantee of definition on the requested scope """
+        if self.photometry is None:
+            return Spectrum(self.name, *extrapolating(self.nm, self.br, scope, resolution))
+        else:
+            return self.photometry.to_scope(scope)
 
     def integrate(self) -> float:
         """ Calculates the area over the spectrum using the mean rectangle method, per nm """

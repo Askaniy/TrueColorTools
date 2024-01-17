@@ -148,7 +148,8 @@ def launch_window(lang: str):
                 window['T1_graph'].TKCanvas.itemconfig(T1_preview, fill=T1_rgb_show)
                 window['T1_rgb'].update(T1_rgb)
                 window['T1_hex'].update(T1_rgb_show)
-                window['T1_convolved'].update(sigfig_round(T1_spectrum**core.get_filter(values['T1_filter']), rounding, warn=False))
+                T1_filter = core.get_filter(values['T1_filter'])
+                window['T1_convolved'].update(sigfig_round(T1_spectrum.to_scope(T1_filter.nm)**T1_filter, rounding, warn=False))
             
             elif event == 'T1_tags':
                 window['T1_list'].update(tuple(di.obj_dict(objectsDB, values['T1_tags'], lang).keys()))
