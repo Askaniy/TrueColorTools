@@ -74,7 +74,7 @@ Supported input keys of a database unit:
 - `nm` (list): list of wavelengths in nanometers
 - `br` (list): same-size list of "brightness", flux in units of energy (not a photon counter)
 - `mag` (list): same-size list of magnitudes
-- `sd` (list or number): same-size list of standard deviations or general value
+- `sd` (list/number): same-size list of standard deviations or a general value
 - `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
 - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
 - `filters` (list): list of filter names that can be found in the `filters` folder
@@ -84,6 +84,8 @@ Supported input keys of a database unit:
 - `albedo` (bool/list): indicates data as albedo scaled or tells how to do it with `[filter/nm, br, (sd)]`
 - `geometric_albedo` (bool/list): indicator of geometric/normal albedo data or how to scale to it
 - `spherical_albedo` (bool/list): indicator of spherical albedo data or how to scale to it
+- `br_geometric`, `br_spherical` (list): specifying unique spectra for different albedos
+- `sd_geometric`, `sd_spherical` (list/number): corresponding standard deviations or a general value
 - `sun` (bool): `true` to remove Sun as emitter
 - `tags` (list): strings, categorizes a spectrum
 
@@ -103,6 +105,7 @@ Brief help on the UBVRI photometric system implementations:
 - `Generic_Johnson` takes into account the sensitivity of photomultiplier tubes, mostly affected on R and I bands. Use **only** if the measurements were actually recorded on a PMT.
 - `Generic_Cousins` contains only R and I bands. Can be used with the U, B, V from Johnson system directly, but the error is expected to be large.
 - `Generic_Bessell` is actually Johnson—Cousins system for CCD receiver. Recommended by default.
+
 
 ## Acknowledgements
 

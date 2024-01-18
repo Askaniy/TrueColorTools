@@ -19,7 +19,8 @@ resolution = 5 # nm
 visible_range = np.arange(390, 780, 5) # nm
 
 # Returned on problems with initialization
-nm_br_sd_stub = (np.array([555]), np.zeros(1), None)
+spectrum_stub = (np.array([555]), np.zeros(1), None)
+photometry_stub = (['Generic_Bessell.V'], [0], None)
 
 
 
@@ -187,6 +188,14 @@ class Spectrum:
         - `br` (Iterable): same-size list of "brightness", flux in units of energy (not a photon counter)
         - `sd` (Iterable): same-size list of standard deviations
         """
+        if (len_nm := len(nm)) != (len_br := len(br)):
+            print(f'# Note for the Spectrum object "{name}"')
+            print(f'- Arrays of wavelengths and brightness do not match ({len_nm} vs {len_br}). Spectrum stub object was created.')
+            return Spectrum(name, *spectrum_stub)
+        if sd is not None and (len_sd := len(sd)) != len_br:
+            print(f'# Note for the Spectrum object "{name}"')
+            print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
+            sd = None
         try:
             nm = np.array(nm) # numpy decides int or float
             br = np.array(br, dtype='float')
@@ -211,7 +220,7 @@ class Spectrum:
                 #print(f'# Note for the Spectrum object "{name}"')
                 #print(f'- Negative values detected while trying to create the object from array, they been replaced with zeros.')
         except Exception:
-            nm, br, sd = nm_br_sd_stub
+            nm, br, sd = spectrum_stub
             print(f'# Note for the Spectrum object "{name}"')
             print(f'- Something unexpected happened while trying to create the object from array. It was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0)}')
@@ -376,7 +385,7 @@ def get_filter(name: str): # TODO: cache them!
     except StopIteration:
         print(f'# Note for the Spectrum object "{name}"')
         print(f'- No filter with the same name in the "filters" folder. Spectrum stub object was created.')
-        return Spectrum(name, *nm_br_sd_stub)
+        return Spectrum(name, *spectrum_stub)
 
 
 bessell_V = get_filter('Generic_Bessell.V')
@@ -399,6 +408,8 @@ class Photometry:
 
     def __init__(self, name: str, filters: Iterable[Spectrum], br: Iterable, sd: Iterable = None):
         """
+        It is assumed that the input can be trusted. If preprocessing is needed, see `Photometry.from_list`.
+
         Args:
         - `name` (str): human-readable identification. May include source (separated by "|") and notes (separated by ":")
         - `filters` (Iterable): list of energy response functions scaled to the unit area, storing as Spectrum objects
@@ -428,6 +439,14 @@ class Photometry:
         - `br` (Iterable): same-size list of intensity
         - `sd` (Iterable): same-size list of standard deviations
         """
+        if (len_filters := len(filters)) != (len_br := len(br)):
+            print(f'# Note for the Photometry object "{name}"')
+            print(f'- Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br}). Photometry stub object was created.')
+            return Photometry(name, *photometry_stub)
+        if sd is not None and (len_sd := len(sd)) != len_br:
+            print(f'# Note for the Photometry object "{name}"')
+            print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
+            sd = None
         return Photometry(name, [get_filter(passband) for passband in filters], br, sd)
     
     def to_scope(self, scope: np.ndarray): # TODO: use optimization algorithm here!
@@ -442,7 +461,7 @@ class Photometry:
             print(f'# Note for the Photometry object "{self.name}"')
             print(f'- Something unexpected happened while trying to inter/extrapolate to Spectrum object. It was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0)}')
-            return Spectrum(self.name, *nm_br_sd_stub)
+            return Spectrum(self.name, *spectrum_stub)
     
     def mean_wavelengths(self):
         """ Returns an array of mean wavelengths for each filter """
@@ -605,7 +624,7 @@ class NonReflectiveBody:
         if mode == 'chromaticity' or 'star' in self.tags:
             return self.spectrum # means it's an emitter and we need to render it
         else:
-            return Spectrum(self.name, *nm_br_sd_stub).to_scope(visible_range) # means we don't need to render it
+            return Spectrum(self.name, *spectrum_stub).to_scope(visible_range) # means we don't need to render it
 
 
 class ReflectiveBody:
@@ -658,6 +677,13 @@ class ReflectiveBody:
                 return self.geometric.scaled_to_albedo(sphericalV, bessell_V)
 
 
+def number2array(target: int|float|Iterable, size: int):
+    """ Makes an array of specified size even if input is a number """
+    if isinstance(target, (int, float)):
+        return np.full(size, target)
+    else:
+        return np.array(target)
+
 def mag2flux(mag: int|float|np.ndarray, zero_point: float = 1.):
     """ Converts magnitudes to flux (by default in Vega units) """
     return zero_point * 10**(-0.4 * mag)
@@ -700,6 +726,33 @@ def color_indices_parser(indices: dict):
         filters |= {current_filter: filters[reference_filter] - value}
     return filters.keys(), mag2flux(np.array(tuple(filters.values())))
 
+def spectral_data2visible_spectrum(
+        name: str, nm: Iterable[int|float], filters: Iterable[str], br: Iterable,
+        sd: Iterable = None, calib: str = None, sun: bool = False
+        ):
+    """
+    Decides whether we are dealing with photometry or continuous spectrum
+    and guarantees the completeness of the spectrum in the visible range.
+    """
+    if len(nm) > 0:
+        spectral_data = Spectrum.from_array(name, nm, br, sd)
+    elif len(filters) > 0:
+        spectral_data = Photometry.from_list(name, filters, br, sd)
+    else:
+        print(f'# Note for the database object "{name}"')
+        print(f'- No wavelength data. Spectrum stub object was created.')
+        spectral_data = Spectrum(name, *spectrum_stub)
+    match calib:
+        case 'vega':
+            spectral_data *= vega_norm
+        case 'ab':
+            spectral_data *= equal_frequency_density
+        case _:
+            pass
+    if sun:
+        spectral_data /= sun_norm
+    return spectral_data.to_scope(visible_range)
+
 def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveBody:
     """
     Depending on the contents of the object read from the database, returns a class that has `get_spectrum()` method
@@ -708,7 +761,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
     - `nm` (list): list of wavelengths in nanometers
     - `br` (list): same-size list of "brightness", flux in units of energy (not a photon counter)
     - `mag` (list): same-size list of magnitudes
-    - `sd` (list or number): same-size list of standard deviations or general value
+    - `sd` (list/number): same-size list of standard deviations or a general value
     - `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
     - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
     - `filters` (list): list of filter names that can be found in the `filters` folder
@@ -718,10 +771,11 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
     - `albedo` (bool/list): indicates data as albedo scaled or tells how to do it with `[filter/nm, br, (sd)]`
     - `geometric_albedo` (bool/list): indicator of geometric/normal albedo data or how to scale to it
     - `spherical_albedo` (bool/list): indicator of spherical albedo data or how to scale to it
+    - `br_geometric`, `br_spherical` (list): specifying unique spectra for different albedos
+    - `sd_geometric`, `sd_spherical` (list/number): corresponding standard deviations or a general value
     - `sun` (bool): `true` to remove Sun as emitter
     - `tags` (list): strings, categorizes a spectrum
     """
-    # Spectral parsing part
     br = []
     sd = None
     nm = [] # Spectrum object indicator
@@ -730,7 +784,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
         try:
             nm, br, sd = di.file_reader(content['file'])
         except Exception:
-            nm, br, sd = nm_br_sd_stub
+            nm, br, sd = spectrum_stub
             print(f'# Note for the Spectrum object "{name}"')
             print(f'- Something unexpected happened during external file reading. The data was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0)}')
@@ -751,89 +805,65 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
             filters = content['filters']
         elif 'indices' in content:
             filters, br = color_indices_parser(content['indices'])
+        if 'system' in content:
+            filters = [f'{content["system"]}.{short_name}' for short_name in filters]
         # Standard deviation reading
         if 'sd' in content:
-            if isinstance(content['sd'], (int, float)):
-                sd = np.full(len(br), content['sd']) # general standard deviation for all the points
-            else:
-                sd = np.array(content['sd'])
+            sd = number2array(content['sd'], len(br))
             if 'indices' in content:
                 sd = sd_indices2sd_mag(sd)
             if 'indices' in content or 'mag' in content:
                 sd = sd_mag2sd_flux(sd, br)
-    if (len_br := len(br)) == 0:
-        print(f'# Note for the database object "{name}"')
-        print(f'- No brightness data. Spectrum stub object was created.')
-        spectral_data = Spectrum(name, *nm_br_sd_stub)
-    else:
-        if sd is not None and (len_sd := len(sd)) != len_br:
-            print(f'# Note for the database object "{name}"')
-            print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
-            sd = None
-        if (len_nm := len(nm)) > 0:
-            if len_nm != len_br:
-                print(f'# Note for the database object "{name}"')
-                print(f'- Arrays of wavelengths and brightness do not match ({len_nm} vs {len_br}). Spectrum stub object was created.')
-                spectral_data = Spectrum(name, *nm_br_sd_stub)
-            else:
-                spectral_data = Spectrum.from_array(name, nm, br, sd)
-        elif (len_filters := len(filters)) > 0:
-            if len_filters != len_br:
-                print(f'# Note for the database object "{name}"')
-                print(f'- Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br}). Spectrum stub object was created.')
-                spectral_data = Spectrum(name, *nm_br_sd_stub)
-            else:
-                if 'system' in content:
-                    filters = [content['system'] + '.' + short_name for short_name in filters]
-                spectral_data = Photometry.from_list(name, filters, br, sd)
-        else:
-            print(f'# Note for the database object "{name}"')
-            print(f'- No wavelength data. Spectrum stub object was created.')
-            return Spectrum(name, *nm_br_sd_stub)
-        if 'calib' in content:
-            match content['calib'].lower():
-                case 'vega':
-                    spectral_data *= vega_norm
-                case 'ab':
-                    spectral_data *= equal_frequency_density
-                case _:
-                    pass
-        if 'sun' in content and content['sun']:
-            spectral_data /= sun_norm
-    # Physical body parsing part
-    spectrum = spectral_data.to_scope(visible_range)
-    tags = []
     geometric = None
     spherical = None
+    calib = content['calib'].lower() if 'calib' in content else None
+    sun = 'sun' in content and content['sun']
+    if len(br) == 0:
+        if 'br_geometric' in content or 'br_spherical' in content:
+            if 'br_geometric' in content:
+                br = content['br_geometric']
+                sd = number2array(content['sd_geometric'], len(br)) if 'sd_geometric' in content else None
+                geometric = spectral_data2visible_spectrum(name, nm, filters, br, sd, calib, sun)
+            if 'br_spherical' in content:
+                br = content['br_spherical']
+                sd = number2array(content['sd_spherical'], len(br)) if 'sd_spherical' in content else None
+                spherical = spectral_data2visible_spectrum(name, nm, filters, br, sd, calib, sun)
+        else:
+            print(f'# Note for the database object "{name}"')
+            print(f'- No brightness data. Spectrum stub object was created.')
+            spectrum = Spectrum(name, *spectrum_stub).to_scope(visible_range)
+    else:
+        spectrum = spectral_data2visible_spectrum(name, nm, filters, br, sd, calib, sun)
+        # Non-specific albedo parsing
+        if 'albedo' in content:
+            if isinstance(content['albedo'], bool):
+                geometric = spherical = spectrum
+            elif isinstance(content['albedo'], list):
+                geometric = spherical = spectrum.scaled(*content['albedo'])
+            else:
+                print(f'# Note for the database object "{name}"')
+                print(f'- Invalid albedo value: {content["albedo"]}. Must be boolean or [filter/nm, br, (sd)].')
+        # Geometric albedo parsing
+        if 'geometric_albedo' in content:
+            if isinstance(content['geometric_albedo'], bool):
+                geometric = spectrum
+            elif isinstance(content['geometric_albedo'], list):
+                geometric = spectrum.scaled(*content['geometric_albedo'])
+            else:
+                print(f'# Note for the database object "{name}"')
+                print(f'- Invalid geometric albedo value: {content["geometric_albedo"]}. Must be boolean or [filter/nm, br, (sd)].')
+        # Spherical albedo parsing
+        if 'spherical_albedo' in content:
+            if isinstance(content['spherical_albedo'], bool):
+                spherical = spectrum
+            elif isinstance(content['spherical_albedo'], list):
+                spherical = spectrum.scaled(*content['spherical_albedo'])
+            else:
+                print(f'# Note for the database object "{name}"')
+                print(f'- Invalid spherical albedo value: {content["spherical_albedo"]}. Must be boolean or [filter/nm, br, (sd)].')
+    tags = []
     if 'tags' in content:
         tags = content['tags']
-    # Non-specific albedo parsing, for backward compatibility
-    if 'albedo' in content:
-        if isinstance(content['albedo'], bool):
-            geometric = spherical = spectrum
-        elif isinstance(content['albedo'], list):
-            geometric = spherical = spectrum.scaled(*content['albedo'])
-        else:
-            print(f'# Note for the database object "{name}"')
-            print(f'- Invalid albedo value: {content["albedo"]}. Must be boolean or [filter/nm, br, (sd)].')
-    # Geometric albedo parsing
-    if 'geometric_albedo' in content:
-        if isinstance(content['geometric_albedo'], bool):
-            geometric = spectrum
-        elif isinstance(content['geometric_albedo'], list):
-            geometric = spectrum.scaled(*content['geometric_albedo'])
-        else:
-            print(f'# Note for the database object "{name}"')
-            print(f'- Invalid geometric albedo value: {content["geometric_albedo"]}. Must be boolean or [filter/nm, br, (sd)].')
-    # Spherical albedo parsing
-    if 'spherical_albedo' in content:
-        if isinstance(content['spherical_albedo'], bool):
-            spherical = spectrum
-        elif isinstance(content['spherical_albedo'], list):
-            spherical = spectrum.scaled(*content['spherical_albedo'])
-        else:
-            print(f'# Note for the database object "{name}"')
-            print(f'- Invalid spherical albedo value: {content["spherical_albedo"]}. Must be boolean or [filter/nm, br, (sd)].')
     if geometric or spherical:
         return ReflectiveBody(name, tags, geometric, spherical)
     else:
