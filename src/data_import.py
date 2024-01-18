@@ -1,4 +1,4 @@
-from typing import Iterable
+from typing import Sequence
 from pathlib import Path
 from traceback import format_exc
 from json5 import load as json5load
@@ -25,9 +25,15 @@ def list_filters():
     files = sorted(Path('filters').glob('*.*'))
     return tuple(file.stem for file in files)
 
+class FilterNotFoundError(Exception):
+    pass
+
 def find_filter(name: str):
     """ Returns the qualified file name with the required filter profile """
-    return str(next(Path('filters').glob(f'{name}.*')))
+    try:
+        return str(next(Path('filters').glob(f'{name}.*')))
+    except StopIteration:
+        raise FilterNotFoundError
 
 
 supported_extensions = ('txt', 'dat', 'fits', 'fit')
@@ -236,7 +242,7 @@ def tag_list(database: dict):
             tag_set.update(obj_data['tags'])
     return sorted(tag_set)
 
-def notes_list(names: Iterable):
+def notes_list(names: Sequence):
     """ Generates a list of notes found in the spectra database """
     notes = []
     for name in names:

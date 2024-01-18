@@ -1,4 +1,4 @@
-from typing import TypeVar, Iterable, Tuple
+from typing import Sequence
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 import PySimpleGUI as sg
@@ -23,7 +23,7 @@ def draw_figure(canvas, figure):
     figure_canvas_agg.get_tk_widget().pack(side='top', fill='both', expand=1)
     return figure_canvas_agg
 
-def plot_spectra(objects: Iterable[core.Spectrum], gamma, srgb, albedo, lang: str):
+def plot_spectra(objects: Sequence[core.Spectrum], gamma, srgb, albedo, lang: str):
     """ Opens a separate window with plotted spectra from the input list """
     fig, ax = plt.subplots(1, 1, figsize=(9, 6), dpi=100)
     ax.set_xlabel(tr.xaxis_text[lang])
@@ -72,7 +72,7 @@ def plot_spectra(objects: Iterable[core.Spectrum], gamma, srgb, albedo, lang: st
             fig.savefig(path, dpi=133.4) # 1200x800
     window.close()
 
-def plot_filters(filters: Iterable[core.Spectrum]):
+def plot_filters(filters: Sequence[core.Spectrum]):
     """ Creates a figure with plotted sensitive curves and CMFs """
     fig, ax = plt.subplots(1, 1, figsize=(5, 1.5), dpi=90)
     # determining the scale for CMFs in the background

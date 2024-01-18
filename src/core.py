@@ -1,4 +1,4 @@
-from typing import TypeVar, Iterable, Tuple
+from typing import Sequence
 from copy import deepcopy
 from traceback import format_exc
 import numpy as np
@@ -41,7 +41,7 @@ def irradiance(nm: int|float|np.ndarray, T: int|float) -> float|np.ndarray:
 
 
 
-def is_smooth(br: Iterable):
+def is_smooth(br: Sequence):
     """ Boolean function, checks the second derivative for sign reversal, a simple criterion for smoothness """
     diff2 = np.diff(np.diff(br))
     return np.all(diff2 <= 0) | np.all(diff2 >= 0)
@@ -152,15 +152,15 @@ def grid(start: int|float, end: int|float, res: int):
 class Spectrum:
     """ Class to work with single, continuous spectrum, with strictly defined resolution step. """
 
-    def __init__(self, name: str, nm: Iterable, br: Iterable, sd: Iterable = None, photometry=None):
+    def __init__(self, name: str, nm: Sequence, br: Sequence, sd: Sequence = None, photometry=None):
         """
         It is assumed that the input grid can be trusted. If preprocessing is needed, see `Spectrum.from_array`.
 
         Args:
-        - `name` (str): human-readable identification. May include source (separated by "|") and notes (separated by ":")
-        - `nm` (Iterable): list of wavelengths in nanometers with resolution step of 5 nm
-        - `br` (Iterable): same-size list of "brightness", flux in units of energy (not a photon counter)
-        - `sd` (Iterable, optional): same-size list of standard deviations
+        - `name` (str): human-readable identification. May include reference (separated by "|") and notes (separated by ":")
+        - `nm` (Sequence): list of wavelengths in nanometers with resolution step of 5 nm
+        - `br` (Sequence): same-size list of "brightness", flux in units of energy (not a photon counter)
+        - `sd` (Sequence, optional): same-size list of standard deviations
         - `photometry` (Photometry, optional): way to store original information, for example, to plot it
         """
         self.name = name
@@ -178,15 +178,15 @@ class Spectrum:
         # There are no checks for negativity, since such spectra exist, for example, red CMF.
 
     @staticmethod
-    def from_array(name: str, nm: Iterable, br: Iterable, sd: Iterable = None):
+    def from_array(name: str, nm: Sequence, br: Sequence, sd: Sequence = None):
         """
         Creates a Spectrum object from wavelength array with a check for uniformity and possible extrapolation.
 
         Args:
-        - `name` (str): human-readable identification. May include source (separated by "|") and notes (separated by ":")
-        - `nm` (Iterable): list of wavelengths, any grid
-        - `br` (Iterable): same-size list of "brightness", flux in units of energy (not a photon counter)
-        - `sd` (Iterable): same-size list of standard deviations
+        - `name` (str): human-readable identification. May include reference (separated by "|") and notes (separated by ":")
+        - `nm` (Sequence): list of wavelengths, any grid
+        - `br` (Sequence): same-size list of "brightness", flux in units of energy (not a photon counter)
+        - `sd` (Sequence): same-size list of standard deviations
         """
         if (len_nm := len(nm)) != (len_br := len(br)):
             print(f'# Note for the Spectrum object "{name}"')
@@ -380,12 +380,7 @@ class Spectrum:
 
 def get_filter(name: str): # TODO: cache them!
     """ Creates a scaled to the unit area Spectrum object based on data file to be found in the `filters` folder """
-    try:
-        return Spectrum.from_file(name, di.find_filter(name)).scaled_by_area()
-    except StopIteration:
-        print(f'# Note for the Spectrum object "{name}"')
-        print(f'- No filter with the same name in the "filters" folder. Spectrum stub object was created.')
-        return Spectrum(name, *spectrum_stub)
+    return Spectrum.from_file(name, di.find_filter(name)).scaled_by_area()
 
 
 bessell_V = get_filter('Generic_Bessell.V')
@@ -406,15 +401,15 @@ del lambdas
 class Photometry:
     """ Class to work with set of filters measurements. """
 
-    def __init__(self, name: str, filters: Iterable[Spectrum], br: Iterable, sd: Iterable = None):
+    def __init__(self, name: str, filters: Sequence[Spectrum], br: Sequence, sd: Sequence = None):
         """
         It is assumed that the input can be trusted. If preprocessing is needed, see `Photometry.from_list`.
 
         Args:
-        - `name` (str): human-readable identification. May include source (separated by "|") and notes (separated by ":")
-        - `filters` (Iterable): list of energy response functions scaled to the unit area, storing as Spectrum objects
-        - `br` (Iterable): same-size list of intensity
-        - `sd` (Iterable): same-size list of standard deviations
+        - `name` (str): human-readable identification. May include reference (separated by "|") and notes (separated by ":")
+        - `filters` (Sequence): list of energy response functions scaled to the unit area, storing as Spectrum objects
+        - `br` (Sequence): same-size list of intensity
+        - `sd` (Sequence): same-size list of standard deviations
         """
         self.name = name
         self.filters = tuple(filters)
@@ -429,15 +424,15 @@ class Photometry:
             print(f'- NaN values detected during object initialization, they been replaced with zeros.')
     
     @staticmethod
-    def from_list(name: str, filters: Iterable[str], br: Iterable, sd: Iterable = None):
+    def from_list(name: str, filters: Sequence[str], br: Sequence, sd: Sequence = None):
         """
         Creates a Photometry object from a list of filter's names. Files with such names must be in the `filters` folder.
 
         Args:
-        - `name` (str): human-readable identification. May include source (separated by "|") and notes (separated by ":")
-        - `filters` (Iterable): list of file names in the `filters` folder
-        - `br` (Iterable): same-size list of intensity
-        - `sd` (Iterable): same-size list of standard deviations
+        - `name` (str): human-readable identification. May include reference (separated by "|") and notes (separated by ":")
+        - `filters` (Sequence): list of file names in the `filters` folder
+        - `br` (Sequence): same-size list of intensity
+        - `sd` (Sequence): same-size list of standard deviations
         """
         if (len_filters := len(filters)) != (len_br := len(br)):
             print(f'# Note for the Photometry object "{name}"')
@@ -447,7 +442,31 @@ class Photometry:
             print(f'# Note for the Photometry object "{name}"')
             print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
             sd = None
-        return Photometry(name, [get_filter(passband) for passband in filters], br, sd)
+        # Checking existing and ordering
+        filters = list(filters)
+        br = list(br)
+        if sd is not None:
+            sd = list(sd)
+        mean_wavelengths = []
+        for j, passband in enumerate(reversed(deepcopy(filters))):
+            i = len_filters-1-j
+            try:
+                filters[i] = get_filter(passband)
+                mean_wavelengths.append(filters[i].mean_wavelength())
+            except di.FilterNotFoundError:
+                print(f'# Note for the Photometry object "{name}"')
+                print(f'- Filter "{passband}" not found in the "filters" folder. The corresponding data will be erased.')
+                del filters[i], br[i]
+                if sd is not None:
+                    del sd[i]
+        nm = np.array(mean_wavelengths)
+        if np.any(nm[:-1] < nm[1:]): # fast decreasing check
+            order = np.argsort(nm[::-1])
+            filters = np.array(filters)[order]
+            br = np.array(br)[order]
+            if sd is not None:
+                sd = np.array(sd)[order]
+        return Photometry(name, filters, br, sd)
     
     def to_scope(self, scope: np.ndarray): # TODO: use optimization algorithm here!
         """ Creates a Spectrum object with inter- and extrapolated photometry data to fit the wavelength scope """
@@ -492,7 +511,7 @@ def xy2xyz(xy):
     return np.array((xy[0], xy[1], 1-xy[0]-xy[0])) # (x, y, 1-x-y)
 
 class ColorSystem:
-    def __init__(self, red: Iterable, green: Iterable, blue: Iterable, white: Iterable):
+    def __init__(self, red: Sequence, green: Sequence, blue: Sequence, white: Sequence):
         """
         Initialise the ColorSystem object.
         The implementation is based on https://scipython.com/blog/converting-a-spectrum-to-a-colour/
@@ -541,14 +560,14 @@ gamma_correction = np.vectorize(lambda p: p * 12.92 if p < 0.0031308 else 1.055 
 class Color:
     """ Class to work with color represented by three float values in [0, 1] range. """
 
-    def __init__(self, name: str, rgb: Iterable, albedo=False):
+    def __init__(self, name: str, rgb: Sequence, albedo=False):
         """
         The albedo flag on means that you have already normalized the brightness over the range.
         By default, initialization implies normalization and you get chromaticity.
 
         Args:
-        - `name` (str): human-readable identification. May include source (separated by "|") and notes (separated by ":")
-        - `rgb` (Iterable): array of three values that are red, green and blue
+        - `name` (str): human-readable identification. May include reference (separated by "|") and notes (separated by ":")
+        - `rgb` (Sequence): array of three values that are red, green and blue
         - `albedo` (bool): flag to disable normalization
         """
         self.name = name
@@ -609,11 +628,11 @@ class Color:
 class NonReflectiveBody:
     """ High-level processing class, specializing on photometry of a physical body with not specified reflectance. """
 
-    def __init__(self, name: str, tags: Iterable, spectrum: Spectrum):
+    def __init__(self, name: str, tags: Sequence, spectrum: Spectrum):
         """
         Args:
-        - `name` (str): human-readable identification. May include source (separated by "|") and notes (separated by ":")
-        - `tags` (Iterable): list of categories that specify the physical body
+        - `name` (str): human-readable identification. May include reference (separated by "|") and notes (separated by ":")
+        - `tags` (Sequence): list of categories that specify the physical body
         - `spectrum` (Spectrum): not assumed to be scaled
         """
         self.name = name
@@ -634,19 +653,19 @@ class ReflectiveBody:
     Albedo formatting rules:
     1. `geometric_albedo` and `spherical_albedo` can be a boolean type or in [filter/nm, br, sd] format
     2. both values by default `false`
-    3. no albedo is specified → emitter
-    4. one is specified → another one is estimated with the phase integral model
+    3. no albedo is specified and "star" in tags → emitter, else black output
+    4. one albedo is specified → another one is estimated with the phase integral model
 
     Phase integral model by Shevchenko et al.: https://ui.adsabs.harvard.edu/abs/2019A%26A...626A..87S/abstract
     q = 0.359 (± 0.005) + 0.47 (± 0.03) p, where `p` is geometric albedo.
     By definition, spherical albedo A is p∙q.
     """
 
-    def __init__(self, name: str, tags: Iterable, geometric: Spectrum = None, spherical: Spectrum = None):
+    def __init__(self, name: str, tags: Sequence, geometric: Spectrum = None, spherical: Spectrum = None):
         """
         Args:
-        - `name` (str): human-readable identification. May include source (separated by "|") and notes (separated by ":")
-        - `tags` (Iterable): list of categories that specify the physical body
+        - `name` (str): human-readable identification. May include reference (separated by "|") and notes (separated by ":")
+        - `tags` (Sequence): list of categories that specify the physical body
         - `geometric` (Spectrum): represents geometric albedo
         - `spherical` (Spectrum): represents spherical albedo
         """
@@ -677,7 +696,7 @@ class ReflectiveBody:
                 return self.geometric.scaled_to_albedo(sphericalV, bessell_V)
 
 
-def number2array(target: int|float|Iterable, size: int):
+def number2array(target: int|float|Sequence, size: int):
     """ Makes an array of specified size even if input is a number """
     if isinstance(target, (int, float)):
         return np.full(size, target)
@@ -688,18 +707,17 @@ def mag2flux(mag: int|float|np.ndarray, zero_point: float = 1.):
     """ Converts magnitudes to flux (by default in Vega units) """
     return zero_point * 10**(-0.4 * mag)
 
-def sd_mag2sd_flux(sd_mag: int|float|np.ndarray, irr: int|float|np.ndarray):
-    """ Converts standard deviation of magnitude to standard deviation of flux """
-    return sd_mag * irr * 0.4 * np.log(10)
+def sd_mag2sd_flux(sd_mag: int|float|np.ndarray, flux: int|float|np.ndarray):
+    """
+    Converts standard deviation of the magnitude to a flux standard deviation.
 
-def sd_indices2sd_mag(sd_indices: Iterable):
-    """ Calculates standard deviations from color indices' deviations """
-    l = len(sd_indices)
-    sd_mag = np.zeros(l+1, dtype='float')
-    sd_mag[0:1] = sd_indices[0] / np.sqrt(2) # assuming the first two points to be with equal uncertainty
-    for i in range(2, sd_mag.size):
-        sd_mag[i] = np.sqrt(sd_indices[i-1]**2 - sd_mag[i-1]**2)
-    return sd_mag
+    The formula is derived from the error propagation equation:
+    I(mag) = zero_point ∙ 10^(-0.4 mag)
+    sd_I² = (d I / d mag)² ∙ sd_mag²
+    I' = zero_point∙(10^(-0.4 mag))' = zero_point∙10^(-0.4 mag)∙ln(10^(-0.4)) = I∙(-0.4) ln(10)
+    sd_I = |I'| ∙ sd_mag = 0.4 ln(10) ∙ I ∙ sd_mag
+    """
+    return 0.4 * np.log(10) * flux * sd_mag
 
 def color_index_splitter(index: str):
     """
@@ -711,25 +729,55 @@ def color_index_splitter(index: str):
     except ValueError:
         dotpart1, dotpart2, dotpart3 = index.split('.') # one dot per full filter name
         dashpart1, dashpart2 = dotpart2.split('-', 1)
-        filter1 = dotpart1 + '.' + dashpart1
-        filter2 = dashpart2 + '.' + dotpart3
+        filter1 = f'{dotpart1}.{dashpart1}'
+        filter2 = f'{dashpart2}.{dotpart3}'
     return filter1, filter2
 
-def color_indices_parser(indices: dict):
+def color_indices_parser(indices: dict, sd: Sequence = None):
     """
-    Converts color indices to linear brightness, assuming 1 Vega intensity in the first filter.
-    Filters should be specified in ascending order, with the second filter having faster iteration.
+    Converts color indices to linear brightness, assuming mag=0 in the first filter.
+    Each new color index must refer to a previously specified one.
+    Note: The output order may sometimes not be in ascending wavelength order.
+    This can be corrected by knowing the filter profiles, which better to do outside the function.
+
+    For standard deviations the error propagation equation is used:
+    f(x, y) = x - y
+    sd_f² = (df/dx)² sd_x² + (df/dy)² sd_y² = sd_x² + sd_y²
+    where x, y are magnitudes and f is a color index.
+
+    If all the data points have the same uncertainty (x == y):
+    sd_y = sd_f / sqrt(2)
+
+    Else, we assume that the first two data points have equal uncertainty
+    to begin the iterative calculation of standard deviations:
+    sd_y = sqrt(sd_f² - sd_x²)
     """
-    filters = {color_index_splitter(tuple(indices.keys())[0])[0]: 1} # assuming 1 Vega intensity in the first filter
+    first_color_index = next(iter(indices))
+    filter0, filter1 = color_index_splitter(first_color_index)
+    # Working with stub if standard deviations are not known to simplify the code
+    sd_ = iter(sd if sd is not None else np.ones(len(indices)))
+    sd0 = next(sd_)/np.sqrt(2)
+    filters = {
+        filter0: (0, sd0), # assuming mag=0 for the first point
+        filter1: (-indices.pop(first_color_index), sd0) # and the same standard deviation for the first two points
+    }
     for key, value in indices.items():
-        reference_filter, current_filter = color_index_splitter(key)
-        filters |= {current_filter: filters[reference_filter] - value}
-    return filters.keys(), mag2flux(np.array(tuple(filters.values())))
+        bluer_filter, redder_filter = color_index_splitter(key)
+        if bluer_filter in filters:
+            current_sd = np.sqrt(next(sd_)**2 - filters[bluer_filter][1]**2)
+            filters |= {redder_filter: (filters[bluer_filter][0] - value, current_sd)}
+        else:
+            current_sd = np.sqrt(next(sd_)**2 - filters[redder_filter][1]**2)
+            filters |= {bluer_filter: (filters[redder_filter][0] + value, current_sd)}
+    flux, sd_flux = np.array(tuple(filters.values())).transpose()
+    flux = mag2flux(flux)
+    sd_flux = sd_mag2sd_flux(sd_flux, flux) if sd is not None else None
+    return filters.keys(), flux, sd_flux
 
 def spectral_data2visible_spectrum(
-        name: str, nm: Iterable[int|float], filters: Iterable[str], br: Iterable,
-        sd: Iterable = None, calib: str = None, sun: bool = False
-        ):
+        name: str, nm: Sequence[int|float], filters: Sequence[str], br: Sequence,
+        sd: Sequence = None, calib: str = None, sun: bool = False
+    ):
     """
     Decides whether we are dealing with photometry or continuous spectrum
     and guarantees the completeness of the spectrum in the visible range.
@@ -792,8 +840,13 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
         # Brightness reading
         if 'br' in content:
             br = content['br']
+            if 'sd' in content:
+                sd = number2array(content['sd'], len(br))
         elif 'mag' in content:
             br = mag2flux(np.array(content['mag']))
+            if 'sd' in content:
+                sd = number2array(content['sd'], len(br))
+                sd = sd_mag2sd_flux(sd, br)
         # Spectrum reading
         if 'nm' in content:
             nm = content['nm']
@@ -804,16 +857,11 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
         elif 'filters' in content:
             filters = content['filters']
         elif 'indices' in content:
-            filters, br = color_indices_parser(content['indices'])
+            if 'sd' in content:
+                sd = number2array(content['sd'], len(content['indices']))
+            filters, br, sd = color_indices_parser(content['indices'], sd)
         if 'system' in content:
             filters = [f'{content["system"]}.{short_name}' for short_name in filters]
-        # Standard deviation reading
-        if 'sd' in content:
-            sd = number2array(content['sd'], len(br))
-            if 'indices' in content:
-                sd = sd_indices2sd_mag(sd)
-            if 'indices' in content or 'mag' in content:
-                sd = sd_mag2sd_flux(sd, br)
     geometric = None
     spherical = None
     calib = content['calib'].lower() if 'calib' in content else None
