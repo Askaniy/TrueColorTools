@@ -361,35 +361,37 @@
         tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
         system: 'Generic_Bessell',
         filters: ['B', 'V', 'R', 'I'],
-        br: [0.0274, 0.0267, 0.0265, 0.0310], // spherical albedo
-        sd: [0.0079, 0.0083, 0.0079, 0.0050],
-        //br: [0.0855, 0.0857, 0.0843, 0.0839], // geometric albedo
-        //sd: [0.0031, 0.0022, 0.0016, 0.0021],
-        spherical_albedo: true
+        br_geometric: [0.0855, 0.0857, 0.0843, 0.0839],
+        sd_geometric: [0.0031, 0.0022, 0.0016, 0.0021],
+        br_spherical: [0.0274, 0.0267, 0.0265, 0.0310],
+        sd_spherical: [0.0079, 0.0083, 0.0079, 0.0050]
     },
-    '(S IX) Phoebe|Graykowski2018': {
+    '(S IX) Phoebe|Graykowski2018, Miller2011': {
         tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.57, 'V-R': 0.34},
         calib: 'Vega',
         sun: true,
-        spherical_albedo: ['Generic_Bessell.V', 0.03], // averaged spherical albedo from Miller2011
+        geometric_albedo: ['Generic_Bessell.V', 0.0857, 0.0022],
+        spherical_albedo: ['Generic_Bessell.V', 0.0267, 0.0083]
     },
-    '(S IX) Phoebe|Grav2003': {
+    '(S IX) Phoebe|Grav2003, Miller2011': {
         tags: ['featured', 'Solar system', 'moon', 'Saturnian system', 'irregular'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.63, 'V-R': 0.35, 'V-I': 0.64},
         calib: 'Vega',
         sun: true,
-        spherical_albedo: ['Generic_Bessell.V', 0.03], // averaged spherical albedo from Miller2011
+        geometric_albedo: ['Generic_Bessell.V', 0.0857, 0.0022],
+        spherical_albedo: ['Generic_Bessell.V', 0.0267, 0.0083]
     },
-    '(S IX) Phoebe|Pena2022': {
+    '(S IX) Phoebe|Pena2022, Miller2011': {
         tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
         system: 'CTIO_DECam',
         indices: {'g-r': 0.27, 'r-i': 0.06},
         calib: 'AB',
         sun: true,
-        spherical_albedo: ['Generic_Bessell.V', 0.03], // averaged spherical albedo from Miller2011
+        geometric_albedo: ['Generic_Bessell.V', 0.0857, 0.0022],
+        spherical_albedo: ['Generic_Bessell.V', 0.0267, 0.0083]
     },
     'Uranus|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Uranian system'],
@@ -407,39 +409,53 @@
         file: 'spectra/files/Karkoschka1994/uranus.txtA',
         albedo: true
     },
+    'Karkoschka2001': [
+        'Comprehensive Photometry of the Rings and 16 Satellites of Uranus with the Hubble Space Telescope',
+        'DOI: 10.1006/icar.2001.6596', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103501965960'
+    ],
     'Avramchuk2007': [
         'Photometric study of the major satellites of Uranus',
         'DOI: 10.1134/S0038094607030021', 'https://link.springer.com/article/10.1134%2FS0038094607030021'
     ],
-    '(U V) Miranda|Avramchuk2007': {
+    '(U V) Miranda|Avramchuk2007, Karkoschka2001': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
-        nm: [250, 410, 480, 560, 750, 910],
-        br: [0.51, 0.49, 0.48, 0.47, 0.46, 0.45],
-        geometric_albedo: true, // spherical albedo is 0.34
+        nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
+        br: [0.51, 0.49, 0.48, 0.47, 0.46, 0.45, 0.41, 0.40],
+        sd: [0.02, 0.01, 0.02, 0.02, 0.02, 0.01, 0.01, 0.01],
+        geometric_albedo: true,
+        spherical_albedo: ['Generic_Bessell.V', 0.200, 0.030]
     },
-    '(U I) Ariel|Avramchuk2007': {
+    '(U I) Ariel|Avramchuk2007, Karkoschka2001': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
-        nm: [250, 410, 480, 560, 750, 910],
-        br: [0.50, 0.51, 0.51, 0.51, 0.51, 0.52],
-        geometric_albedo: true, // spherical albedo is 0.37
+        nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
+        br: [0.50, 0.51, 0.51, 0.51, 0.51, 0.52, 0.53, 0.54],
+        sd: [0.03, 0.02, 0.02, 0.01, 0.02, 0.01, 0.01, 0.01],
+        geometric_albedo: true,
+        spherical_albedo: ['Generic_Bessell.V', 0.230, 0.025]
     },
-    '(U II) Umbriel|Avramchuk2007': {
+    '(U II) Umbriel|Avramchuk2007, Karkoschka2001': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
-        nm: [250, 410, 480, 560, 750, 910],
-        br: [0.25, 0.25, 0.25, 0.25, 0.26, 0.26],
-        geometric_albedo: true, // spherical albedo is 0.19
+        nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
+        br: [0.25, 0.25, 0.25, 0.25, 0.26, 0.26, 0.26, 0.26],
+        sd: [0.01, 0.02, 0.02, 0.01, 0.01, 0.01, 0.01, 0.01],
+        geometric_albedo: true,
+        spherical_albedo: ['Generic_Bessell.V', 0.100, 0.010]
     },
-    '(U III) Titania|Avramchuk2007': {
+    '(U III) Titania|Avramchuk2007, Karkoschka2001': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
-        nm: [250, 410, 480, 560, 750, 910],
-        br: [0.30, 0.32, 0.33, 0.34, 0.36, 0.37],
-        geometric_albedo: true, // spherical albedo is 0.27
+        nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
+        br: [0.30, 0.32, 0.33, 0.34, 0.36, 0.37, 0.41, 0.43],
+        sd: [0.02, 0.02, 0.02, 0.03, 0.02, 0.01, 0.01, 0.01],
+        geometric_albedo: true,
+        spherical_albedo: ['Generic_Bessell.V', 0.170, 0.015]
     },
-    '(U IV) Oberon|Avramchuk2007': {
+    '(U IV) Oberon|Avramchuk2007, Karkoschka2001': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
-        nm: [250, 410, 480, 560, 750, 910],
-        br: [0.27, 0.29, 0.30, 0.31, 0.33, 0.35],
-        geometric_albedo: true, // spherical albedo is 0.23
+        nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
+        br: [0.27, 0.29, 0.30, 0.31, 0.33, 0.35, 0.40, 0.43],
+        sd: [0.04, 0.01, 0.02, 0.02, 0.01, 0.01, 0.02, 0.02],
+        geometric_albedo: true,
+        spherical_albedo: ['Generic_Bessell.V', 0.140, 0.015]
     },
     'Helfenstein1991': [
         'Oberon: Color photometry from Voyager and its geological implications',
