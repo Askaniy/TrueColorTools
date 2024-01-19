@@ -1,6 +1,8 @@
-from typing import Sequence
-from copy import deepcopy
+from typing import Sequence, Callable
+from operator import mul, truediv
 from traceback import format_exc
+from functools import lru_cache
+from copy import deepcopy
 import numpy as np
 import src.data_import as di
 
@@ -17,10 +19,6 @@ resolution = 5 # nm
 # To calculate color, it is necessary to achieve a definition of the spectrum in the visible range.
 # Boundaries have been defined based on the CMF (color matching functions) used, but can be any.
 visible_range = np.arange(390, 780, 5) # nm
-
-# Returned on problems with initialization
-spectrum_stub = (np.array([555]), np.zeros(1), None)
-photometry_stub = (['Generic_Bessell.V'], [0], None)
 
 
 
@@ -152,12 +150,15 @@ def grid(start: int|float, end: int|float, res: int):
 class Spectrum:
     """ Class to work with single, continuous spectrum, with strictly defined resolution step. """
 
+    # Initializes an object in case of input data problems
+    stub = (np.array([555]), np.zeros(1), None)
+
     def __init__(self, name: str, nm: Sequence, br: Sequence, sd: Sequence = None, photometry=None):
         """
         It is assumed that the input grid can be trusted. If preprocessing is needed, see `Spectrum.from_array`.
 
         Args:
-        - `name` (str): human-readable identification. May include reference (separated by "|") and notes (separated by ":")
+        - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
         - `nm` (Sequence): list of wavelengths in nanometers with resolution step of 5 nm
         - `br` (Sequence): same-size list of "brightness", flux in units of energy (not a photon counter)
         - `sd` (Sequence, optional): same-size list of standard deviations
@@ -183,7 +184,7 @@ class Spectrum:
         Creates a Spectrum object from wavelength array with a check for uniformity and possible extrapolation.
 
         Args:
-        - `name` (str): human-readable identification. May include reference (separated by "|") and notes (separated by ":")
+        - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
         - `nm` (Sequence): list of wavelengths, any grid
         - `br` (Sequence): same-size list of "brightness", flux in units of energy (not a photon counter)
         - `sd` (Sequence): same-size list of standard deviations
@@ -191,7 +192,7 @@ class Spectrum:
         if (len_nm := len(nm)) != (len_br := len(br)):
             print(f'# Note for the Spectrum object "{name}"')
             print(f'- Arrays of wavelengths and brightness do not match ({len_nm} vs {len_br}). Spectrum stub object was created.')
-            return Spectrum(name, *spectrum_stub)
+            return Spectrum(name, *Spectrum.stub)
         if sd is not None and (len_sd := len(sd)) != len_br:
             print(f'# Note for the Spectrum object "{name}"')
             print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
@@ -220,10 +221,10 @@ class Spectrum:
                 #print(f'# Note for the Spectrum object "{name}"')
                 #print(f'- Negative values detected while trying to create the object from array, they been replaced with zeros.')
         except Exception:
-            nm, br, sd = spectrum_stub
+            nm, br, sd = Spectrum.stub
             print(f'# Note for the Spectrum object "{name}"')
             print(f'- Something unexpected happened while trying to create the object from array. It was replaced by a stub.')
-            print(f'- More precisely, {format_exc(limit=0)}')
+            print(f'- More precisely, {format_exc(limit=0).strip()}')
         return Spectrum(name, nm, br, sd)
     
     @staticmethod
@@ -273,52 +274,24 @@ class Spectrum:
     def scaled_by_area(self, factor: int|float = 1):
         """ Returns a new Spectrum object with brightness scaled to its area be equal the scale factor """
         return Spectrum(self.name, self.nm, self.br / self.integrate() * factor)
-
-    def scaled_on_wavelength(self, wavelength: int|float, request: int|float = 1):
-        """ Returns a new Spectrum object with brightness scaled to be equal the request at the specified wavelength """
-        if wavelength not in self.nm:
-            print(f'# Note for the Spectrum object "{self.name}"')
-            print(f'- Requested wavelength to normalize ({wavelength}) not in the spectrum range ({self.nm[0]} to {self.nm[-1]} by {resolution} nm).')
-            wavelength = self.nm[np.abs(self.nm - wavelength).argmin()]
-            print(f'- {wavelength} was chosen as the closest value.')
-        scale_factor = request / self.br[np.where(self.nm == wavelength)]
-        sd = None
-        if self.sd is not None:
-            sd = self.sd * scale_factor
-        photometry = None
-        if self.photometry is not None:
-            photometry = self.photometry
-            photometry.br *= scale_factor
-            if photometry.sd is not None:
-                photometry.sd *= scale_factor
-        return Spectrum(self.name, self.nm, self.br*scale_factor, sd, photometry)
-
-    def scaled_to_albedo(self, albedo: float, transmission):
-        """ Returns a new Spectrum object with brightness scaled to give the albedo after convolution with the filter """
-        current_albedo = self ** transmission
-        if current_albedo == 0:
-            print(f'# Note for the Spectrum object "{self.name}"')
-            print(f'- The spectrum cannot be scaled to an albedo of {albedo} because its current albedo is zero, nothing changed.')
-            return self
-        else:
-            scale_factor = albedo / current_albedo
-            sd = None
-            if self.sd is not None:
-                sd = self.sd * scale_factor
-            photometry = None
-            if self.photometry is not None:
-                photometry = self.photometry
-                photometry.br *= scale_factor
-                if photometry.sd is not None:
-                    photometry.sd *= scale_factor
-            return Spectrum(self.name, self.nm, self.br*scale_factor, sd, photometry)
     
-    def scaled(self, where: str|int|float, how: int|float, sd: int|float = None):
-        """ Returns a new Spectrum object to fit the request of wavelength zone and brightness there """
-        if isinstance(where, str):
-            return self.scaled_to_albedo(how, get_filter(where))
-        else: # assuming number
-            return self.scaled_on_wavelength(where, how)
+    def scaled_at(self, where: str|int|float, how: int|float = 1, sd: int|float = None):
+        """
+        Returns a new Spectrum object to fit the request brightness (1 by default)
+        at specified filter profile or wavelength. TODO: uncertainty processing.
+        """
+        if isinstance(where, str): # scaling at filter
+            transmission = get_filter(where)
+            current_br = self.to_scope(transmission.nm) @ transmission
+        else: # scaling at wavelength
+            if where in self.nm:
+                current_br = self.br[np.where(self.nm == where)]
+            else:
+                index = np.abs(self.nm - where).argmin() # closest wavelength
+                current_br = np.interp(where, self.nm[index-1:index+1], self.br[index-1:index+1])
+        if current_br == 0:
+            return deepcopy(self)
+        return self * (how / current_br)
 
     def mean_wavelength(self) -> float:
         """ Returns mean wavelength of the spectrum """
@@ -332,81 +305,114 @@ class Spectrum:
     def standard_deviation(self) -> float:
         """ Returns uncorrected standard deviation of the spectrum """
         return np.sqrt(np.average((self.nm - self.mean_wavelength())**2, weights=self.br))
+    
+    def apply_linear_operator(self, operator: Callable, operand: int|float):
+        """
+        Returns a new Spectrum object transformed according to the linear operator.
+        Linearity is needed because values and uncertainty are handled uniformly.
+        """
+        br = operator(self.br, operand)
+        sd = None
+        if self.sd is not None:
+            sd = operator(self.sd, operand)
+        photometry = None
+        if self.photometry is not None:
+            photometry: Photometry = deepcopy(self.photometry)
+            photometry.br = operator(photometry.br, operand)
+            if photometry.sd is not None:
+                photometry.sd = operator(photometry.sd, operand)
+        return Spectrum(self.name, self.nm, br, sd, photometry)
+    
+    def apply_elemental_operator(self, operator: Callable, other, operator_sign: str = ', '):
+        """
+        Returns a new Spectrum object formed from element-wise operator on two spectra,
+        such as multiplication or division.
 
-    def __pow__(self, other) -> float:
-        """ Implementation of convolution between emission spectrum and transmission spectrum """
-        return (self * other).integrate()
+        Works only at the intersection of spectra! If you need to extrapolate one spectrum
+        to the range of another, for example, use `spectrum.to_scope(filter.nm) @ filter`
 
-    def __mul__(self, other):
-        """ Returns a new Photometry object with the emitter added (untied from a white standard spectrum) """
-        name = f'{self.name} ∙ {other.name}'
+        Note: the Photometry data would be erased because consistency with the Spectrum object
+        cannot be maintained after conversion. TODO: uncertainty processing.
+        """
+        name = f'{self.name}{operator_sign}{other.name}'
         start = max(self.nm[0], other.nm[0])
         end = min(self.nm[-1], other.nm[-1])
-        if start >= end:
+        if start > end: # `>` is needed to process operations with stub objects with no extra logs
             print(f'# Note for spectral multiplication "{name}"')
-            print('- There is no intersection between the spectra, nothing changed.') # TODO: extrapolate, if it ends not about zero
-            the_first = self.name
-            the_second = other.name
-            if self.nm[0] > other.nm[0]:
-                the_first, the_second = the_second, the_first
-            print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
-            return self
-        else:
-            nm = np.arange(start, end+1, resolution, dtype='uint16')
-            br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
-            br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
-            return Spectrum(name, nm, br0 * br1)
-
-    def __truediv__(self, other):
-        """ Returns a new Spectrum object with the emitter removed (apply a white standard spectrum) """
-        name = f'{self.name} / {other.name}'
-        start = max(self.nm[0], other.nm[0])
-        end = min(self.nm[-1], other.nm[-1])
-        if start >= end:
-            print(f'# Note for spectral division "{name}"')
             print('- There is no intersection between the spectra, nothing changed.')
             the_first = self.name
             the_second = other.name
             if self.nm[0] > other.nm[0]:
                 the_first, the_second = the_second, the_first
             print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
-            return self
+            return deepcopy(self)
         else:
             nm = np.arange(start, end+1, resolution, dtype='uint16')
             br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
             br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
-            return Spectrum(name, nm, br0 / br1)
+            return Spectrum(name, nm, operator(br0, br1))
+
+    def __mul__(self, other):
+        """
+        Returns a new Spectrum object modified by the overloaded multiplication operator.
+        If the operand is a number, a scaled spectrum is returned.
+        If the operand is a Spectrum, an emitter spectrum is applied to the intersection.
+        """
+        if isinstance(other, (int, float)):
+            return self.apply_linear_operator(mul, other)
+        else:
+            return self.apply_elemental_operator(mul, other, ' ∙ ')
+    
+    def __rmul__(self, other):
+        return self.__mul__(other)
+
+    def __truediv__(self, other):
+        """
+        Returns a new Spectrum object modified by the overloaded multiplication operator.
+        If the operand is a number, a scaled spectrum is returned.
+        If the operand is a Spectrum, an emitter spectrum is removed from the intersection.
+        """
+        if isinstance(other, (int, float)):
+            return self.apply_linear_operator(truediv, other)
+        else:
+            return self.apply_elemental_operator(truediv, other, ' / ')
+    
+    def __matmul__(self, other) -> float:
+        """ Implementation of convolution between emission spectrum and transmission spectrum """
+        return (self * other).integrate()
 
 
-def get_filter(name: str): # TODO: cache them!
+@lru_cache(maxsize=32)
+def get_filter(name: str):
     """ Creates a scaled to the unit area Spectrum object based on data file to be found in the `filters` folder """
     return Spectrum.from_file(name, di.find_filter(name)).scaled_by_area()
 
 
-bessell_V = get_filter('Generic_Bessell.V')
-
 sun_SI = Spectrum.from_file('Sun', 'spectra/files/CALSPEC/sun_reference_stis_002.fits') # W / (m² nm)
-sun_in_V = sun_SI ** bessell_V
-sun_norm = sun_SI.scaled_to_albedo(1, bessell_V)
+sun_in_V = sun_SI @ get_filter('Generic_Bessell.V')
+sun_norm = sun_SI.scaled_at('Generic_Bessell.V')
 
 vega_SI = Spectrum.from_file('Vega', 'spectra/files/CALSPEC/alpha_lyr_stis_011.fits') # W / (m² nm)
-vega_in_V = vega_SI ** bessell_V
-vega_norm = vega_SI.scaled_to_albedo(1, bessell_V)
+vega_in_V = vega_SI @ get_filter('Generic_Bessell.V')
+vega_norm = vega_SI.scaled_at('Generic_Bessell.V')
 
 lambdas = np.arange(5, nm_red_limit+1, 5)
-equal_frequency_density = Spectrum('AB', lambdas, 1/lambdas**2).scaled_to_albedo(1, bessell_V) # f_lambda=f_nu*c/lambda^2
+equal_frequency_density = Spectrum('AB', lambdas, 1/lambdas**2).scaled_at('Generic_Bessell.V') # f_lambda=f_nu*c/lambda^2
 del lambdas
 
 
 class Photometry:
     """ Class to work with set of filters measurements. """
 
+    # Initializes an object in case of input data problems
+    stub = ([get_filter('Generic_Bessell.V')], np.zeros(1), None)
+
     def __init__(self, name: str, filters: Sequence[Spectrum], br: Sequence, sd: Sequence = None):
         """
         It is assumed that the input can be trusted. If preprocessing is needed, see `Photometry.from_list`.
 
         Args:
-        - `name` (str): human-readable identification. May include reference (separated by "|") and notes (separated by ":")
+        - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
         - `filters` (Sequence): list of energy response functions scaled to the unit area, storing as Spectrum objects
         - `br` (Sequence): same-size list of intensity
         - `sd` (Sequence): same-size list of standard deviations
@@ -429,7 +435,7 @@ class Photometry:
         Creates a Photometry object from a list of filter's names. Files with such names must be in the `filters` folder.
 
         Args:
-        - `name` (str): human-readable identification. May include reference (separated by "|") and notes (separated by ":")
+        - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
         - `filters` (Sequence): list of file names in the `filters` folder
         - `br` (Sequence): same-size list of intensity
         - `sd` (Sequence): same-size list of standard deviations
@@ -437,7 +443,7 @@ class Photometry:
         if (len_filters := len(filters)) != (len_br := len(br)):
             print(f'# Note for the Photometry object "{name}"')
             print(f'- Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br}). Photometry stub object was created.')
-            return Photometry(name, *photometry_stub)
+            return Photometry(name, *Photometry.stub)
         if sd is not None and (len_sd := len(sd)) != len_br:
             print(f'# Note for the Photometry object "{name}"')
             print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
@@ -459,28 +465,33 @@ class Photometry:
                 del filters[i], br[i]
                 if sd is not None:
                     del sd[i]
-        nm = np.array(mean_wavelengths)
-        if np.any(nm[:-1] < nm[1:]): # fast decreasing check
-            order = np.argsort(nm[::-1])
-            filters = np.array(filters)[order]
-            br = np.array(br)[order]
-            if sd is not None:
-                sd = np.array(sd)[order]
-        return Photometry(name, filters, br, sd)
+        if len(filters) == 0:
+            print(f'# Note for the Photometry object "{name}"')
+            print(f'- No declared filter profiles were found in the "filters" folder. Photometry stub object was created.')
+            return Photometry(name, *Photometry.stub)
+        else:
+            nm = np.array(mean_wavelengths)
+            if np.any(nm[:-1] < nm[1:]): # fast decreasing check
+                order = np.argsort(nm[::-1])
+                filters = np.array(filters)[order]
+                br = np.array(br)[order]
+                if sd is not None:
+                    sd = np.array(sd)[order]
+            return Photometry(name, filters, br, sd)
     
-    def to_scope(self, scope: np.ndarray): # TODO: use optimization algorithm here!
+    def to_scope(self, scope: np.ndarray): # TODO: use kriging here!
         """ Creates a Spectrum object with inter- and extrapolated photometry data to fit the wavelength scope """
         try:
             nm0 = self.mean_wavelengths()
             nm1 = grid(nm0[0], nm0[-1], resolution)
             br = interpolating(nm0, self.br, nm1, resolution)
             nm, br = extrapolating(nm1, br, scope, resolution)
-            return Spectrum(self.name, nm, br, photometry=self)
+            return Spectrum(self.name, nm, br, photometry=deepcopy(self))
         except Exception:
             print(f'# Note for the Photometry object "{self.name}"')
             print(f'- Something unexpected happened while trying to inter/extrapolate to Spectrum object. It was replaced by a stub.')
-            print(f'- More precisely, {format_exc(limit=0)}')
-            return Spectrum(self.name, *spectrum_stub)
+            print(f'- More precisely, {format_exc(limit=0).strip()}')
+            return Spectrum(self.name, *Spectrum.stub)
     
     def mean_wavelengths(self):
         """ Returns an array of mean wavelengths for each filter """
@@ -490,21 +501,24 @@ class Photometry:
         """ Returns an array of uncorrected standard deviations for each filter """
         return np.array([passband.standard_deviation() for passband in self.filters])
 
-    def __pow__(self, other: Spectrum) -> np.ndarray[float]:
-        """ Convolve all the filters with a spectrum """
-        return np.array([other ** passband for passband in self.filters])
-
     def __mul__(self, other: Spectrum):
         """ Returns a new Photometry object with the emitter added (untied from a white standard spectrum) """
         # Scaling brightness scales filters' profiles too!
         filters = [(passband * other).scaled_by_area() for passband in self.filters]
-        return Photometry(f'{self.name} ∙ {other.name}', filters, self.br * (self ** other))
+        return Photometry(f'{self.name} ∙ {other.name}', filters, self.br * (self @ other))
+    
+    def __rmul__(self, other):
+        return self.__mul__(other)
 
     def __truediv__(self, other: Spectrum):
         """ Returns a new Photometry object with the emitter removed (apply a white standard spectrum) """
         # Scaling brightness scales filters' profiles too!
         filters = [(passband / other).scaled_by_area() for passband in self.filters]
-        return Photometry(f'{self.name} / {other.name}', filters, self.br / (self ** other))
+        return Photometry(f'{self.name} / {other.name}', filters, self.br / (self @ other))
+
+    def __matmul__(self, other: Spectrum) -> np.ndarray[float]:
+        """ Convolve all the filters with a spectrum """
+        return np.array([other @ passband for passband in self.filters])
 
 
 def xy2xyz(xy):
@@ -566,7 +580,7 @@ class Color:
         By default, initialization implies normalization and you get chromaticity.
 
         Args:
-        - `name` (str): human-readable identification. May include reference (separated by "|") and notes (separated by ":")
+        - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
         - `rgb` (Sequence): array of three values that are red, green and blue
         - `albedo` (bool): flag to disable normalization
         """
@@ -589,13 +603,13 @@ class Color:
     @staticmethod
     def from_spectrum(spectrum: Spectrum, albedo=False):
         """ A simple and concrete color processing method based on experimental eye sensitivity curves """
-        rgb = [spectrum ** i for i in (r, g, b)]
+        rgb = [spectrum @ i for i in (r, g, b)]
         return Color(spectrum.name, rgb, albedo)
 
     @staticmethod
     def from_spectrum_CIE(spectrum: Spectrum, albedo=False, color_system=srgb):
         """ Conventional color processing method: spectrum -> CIE XYZ -> sRGB with illuminant E """
-        xyz = [spectrum ** i for i in (x, y, z)]
+        xyz = [spectrum @ i for i in (x, y, z)]
         rgb = color_system.T.dot(xyz)
         if np.any(rgb < 0):
             print(f'# Note for the Color object "{spectrum.name}"')
@@ -631,7 +645,7 @@ class NonReflectiveBody:
     def __init__(self, name: str, tags: Sequence, spectrum: Spectrum):
         """
         Args:
-        - `name` (str): human-readable identification. May include reference (separated by "|") and notes (separated by ":")
+        - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
         - `tags` (Sequence): list of categories that specify the physical body
         - `spectrum` (Spectrum): not assumed to be scaled
         """
@@ -643,7 +657,7 @@ class NonReflectiveBody:
         if mode == 'chromaticity' or 'star' in self.tags:
             return self.spectrum # means it's an emitter and we need to render it
         else:
-            return Spectrum(self.name, *spectrum_stub).to_scope(visible_range) # means we don't need to render it
+            return Spectrum(self.name, *Spectrum.stub).to_scope(visible_range) # means we don't need to render it
 
 
 class ReflectiveBody:
@@ -664,7 +678,7 @@ class ReflectiveBody:
     def __init__(self, name: str, tags: Sequence, geometric: Spectrum = None, spherical: Spectrum = None):
         """
         Args:
-        - `name` (str): human-readable identification. May include reference (separated by "|") and notes (separated by ":")
+        - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
         - `tags` (Sequence): list of categories that specify the physical body
         - `geometric` (Spectrum): represents geometric albedo
         - `spherical` (Spectrum): represents spherical albedo
@@ -684,16 +698,16 @@ class ReflectiveBody:
             if self.geometric:
                 return self.geometric
             else:
-                sphericalV = self.spherical ** bessell_V
+                sphericalV = self.spherical @ get_filter('Generic_Bessell.V')
                 geometricV = (np.sqrt(0.359**2 + 4 * 0.47 * sphericalV) - 0.359) / (2 * 0.47)
-                return self.spherical.scaled_to_albedo(geometricV, bessell_V)
+                return self.spherical.scaled_at('Generic_Bessell.V', geometricV)
         else:
             if self.spherical:
                 return self.spherical
             else:
-                geometricV = self.geometric ** bessell_V
+                geometricV = self.geometric @ get_filter('Generic_Bessell.V')
                 sphericalV = geometricV * (0.395 + 0.47 * geometricV)
-                return self.geometric.scaled_to_albedo(sphericalV, bessell_V)
+                return self.geometric.scaled_at('Generic_Bessell.V', sphericalV)
 
 
 def number2array(target: int|float|Sequence, size: int):
@@ -752,7 +766,8 @@ def color_indices_parser(indices: dict, sd: Sequence = None):
     to begin the iterative calculation of standard deviations:
     sd_y = sqrt(sd_f² - sd_x²)
     """
-    first_color_index = next(iter(indices))
+    indices = deepcopy(indices) # else it would pop one index per calling
+    first_color_index = tuple(indices.keys())[0]
     filter0, filter1 = color_index_splitter(first_color_index)
     # Working with stub if standard deviations are not known to simplify the code
     sd_ = iter(sd if sd is not None else np.ones(len(indices)))
@@ -777,7 +792,7 @@ def color_indices_parser(indices: dict, sd: Sequence = None):
 def spectral_data2visible_spectrum(
         name: str, nm: Sequence[int|float], filters: Sequence[str], br: Sequence,
         sd: Sequence = None, calib: str = None, sun: bool = False
-    ):
+    ) -> Spectrum:
     """
     Decides whether we are dealing with photometry or continuous spectrum
     and guarantees the completeness of the spectrum in the visible range.
@@ -789,7 +804,7 @@ def spectral_data2visible_spectrum(
     else:
         print(f'# Note for the database object "{name}"')
         print(f'- No wavelength data. Spectrum stub object was created.')
-        spectral_data = Spectrum(name, *spectrum_stub)
+        spectral_data = Spectrum(name, *Spectrum.stub)
     match calib:
         case 'vega':
             spectral_data *= vega_norm
@@ -832,10 +847,10 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
         try:
             nm, br, sd = di.file_reader(content['file'])
         except Exception:
-            nm, br, sd = spectrum_stub
+            nm, br, sd = Spectrum.stub
             print(f'# Note for the Spectrum object "{name}"')
             print(f'- Something unexpected happened during external file reading. The data was replaced by a stub.')
-            print(f'- More precisely, {format_exc(limit=0)}')
+            print(f'- More precisely, {format_exc(limit=0).strip()}')
     else:
         # Brightness reading
         if 'br' in content:
@@ -879,7 +894,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
         else:
             print(f'# Note for the database object "{name}"')
             print(f'- No brightness data. Spectrum stub object was created.')
-            spectrum = Spectrum(name, *spectrum_stub).to_scope(visible_range)
+            spectrum = Spectrum(name, *Spectrum.stub).to_scope(visible_range)
     else:
         spectrum = spectral_data2visible_spectrum(name, nm, filters, br, sd, calib, sun)
         # Non-specific albedo parsing
@@ -887,7 +902,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
             if isinstance(content['albedo'], bool):
                 geometric = spherical = spectrum
             elif isinstance(content['albedo'], list):
-                geometric = spherical = spectrum.scaled(*content['albedo'])
+                geometric = spherical = spectrum.scaled_at(*content['albedo'])
             else:
                 print(f'# Note for the database object "{name}"')
                 print(f'- Invalid albedo value: {content["albedo"]}. Must be boolean or [filter/nm, br, (sd)].')
@@ -896,7 +911,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
             if isinstance(content['geometric_albedo'], bool):
                 geometric = spectrum
             elif isinstance(content['geometric_albedo'], list):
-                geometric = spectrum.scaled(*content['geometric_albedo'])
+                geometric = spectrum.scaled_at(*content['geometric_albedo'])
             else:
                 print(f'# Note for the database object "{name}"')
                 print(f'- Invalid geometric albedo value: {content["geometric_albedo"]}. Must be boolean or [filter/nm, br, (sd)].')
@@ -905,7 +920,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
             if isinstance(content['spherical_albedo'], bool):
                 spherical = spectrum
             elif isinstance(content['spherical_albedo'], list):
-                spherical = spectrum.scaled(*content['spherical_albedo'])
+                spherical = spectrum.scaled_at(*content['spherical_albedo'])
             else:
                 print(f'# Note for the database object "{name}"')
                 print(f'- Invalid spherical albedo value: {content["spherical_albedo"]}. Must be boolean or [filter/nm, br, (sd)].')
