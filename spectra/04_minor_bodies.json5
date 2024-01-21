@@ -180,9 +180,15 @@
         file: 'spectra/files/SMASS/a000052.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.052],
     },
-    '(65) Cybele|SMASS': {
+    'Müller2004': [
+        '65 Cybele in the thermal infrared: Multiple observations and thermophysical analysis',
+        'DOI: 10.1051/0004-6361:20040025', 'https://www.aanda.org/articles/aa/abs/2004/16/aa4002/aa4002.html'
+    ],
+    '(65) Cybele|SMASS, Müller2004': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000065.2.txtU',
+        geometric_albedo: ['Generic_Bessell.V', 0.050],
+        spherical_albedo: ['Generic_Bessell.V', 0.017578], // from geometric albedo and G = 0.09
     },
     '(87) Sylvia|SMASS, Vernazza2021': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
