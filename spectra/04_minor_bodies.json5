@@ -32,6 +32,10 @@
         'NEOWISE Reactivation Mission Year One: Preliminary Asteroid Diameters and Albedos',
         'DOI: 10.1088/0004-637X/814/2/117', 'https://iopscience.iop.org/article/10.1088/0004-637X/814/2/117', 'https://ui.adsabs.harvard.edu/abs/2015ApJ...814..117N/abstract'
     ],
+    'Ortiz2019': [
+        'Stellar Occultations by Transneptunian objects: from Predictions to Observations and Prospects for the Future',
+        'DOI: 10.48550/arXiv.1905.04335', 'https://ui.adsabs.harvard.edu/abs/2019arXiv190504335O/abstract'
+    ],
     'Thirouin2019': [
         'Colors of Trans-Neptunian Contact Binaries',
         'DOI: 10.3847/1538-3881/ab27bc', 'https://iopscience.iop.org/article/10.3847/1538-3881/ab27bc'
@@ -2070,6 +2074,10 @@
         calib: 'Vega',
         sun: true
     },
+    'Tatsumi2020': [
+        'Global photometric properties of (162173) Ryugu',
+        'DOI: 10.1051/0004-6361/201937096', 'https://www.aanda.org/articles/aa/full_html/2020/07/aa37096-19/aa37096-19.html', 'https://ui.adsabs.harvard.edu/abs/2020A%26A...639A..83T/abstract'
+    ],
     'Yokota2021': [
         'Opposition Observations of 162173 Ryugu: Normal Albedo Map Highlights Variations in Regolith Characteristics',
         'DOI: 10.3847/PSJ/ac14ba', 'https://iopscience.iop.org/article/10.3847/PSJ/ac14ba'
@@ -2098,11 +2106,11 @@
         sd: [0.0006, 0.0006, 0.0005, 0.0004, 0.0003, 0.0003, 0.0002],
         geometric_albedo: true, // normal (=geometric) albedo spectrum of N-Plain area from the Table 6
     },
-    '(162173) Ryugu|SMASS': {
+    '(162173) Ryugu|SMASS, Yokota2021, Tatsumi2020': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         file: 'spectra/files/SMASS/a162173.sp273.txtU',
-        geometric_albedo: ['Generic_Bessell.V', 0.0406], // global averaged normal albedo from Yokota et al. (2021)
-        spherical_albedo: ['Generic_Bessell.V', 0.014], // Tatsumi et al. (2020)
+        geometric_albedo: ['Generic_Bessell.V', 0.0406],
+        spherical_albedo: ['Generic_Bessell.V', 0.014],
     },
     '(163135) 2002 CT22|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
@@ -2223,25 +2231,25 @@
         sun: true,
         geometric_albedo: ['Generic_Bessell.V', 0.08], // albedo assuming radius of 100 km from Arakawa et al. (2021) https://ui.adsabs.harvard.edu/abs/2021AJ....162..226A/abstract
     },
-    '(229762) Gǃkúnǁʼhòmdímà|MBOSS': {
+    '(229762) Gǃkúnǁʼhòmdímà|MBOSS, Ortiz2019': {
         tags: ['featured', 'MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
         system: 'Generic_Bessell',
         indices: {'V-R': 0.582, 'R-I': 0.470},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.142], // albedo from Ortiz et al. (2019)
+        geometric_albedo: ['Generic_Bessell.V', 0.142],
     },
     'Grundy2018': [
         'The mutual orbit, mass, and density of transneptunian binary Gǃkúnǁʼhòmdímà (229762 2007 UK126)',
         'DOI: 10.1016/j.icarus.2018.12.037', 'http://www2.lowell.edu/users/grundy/abstracts/2019.G-G.html'
     ],
-    '(229762) Gǃkúnǁʼhòmdímà|Grundy2018': {
+    '(229762) Gǃkúnǁʼhòmdímà|Grundy2018, Ortiz2019': {
         tags: ['Solar system', 'minor body', 'TNO', 'TNO-midsize', 'detached'],
         system: 'Generic_Bessell',
         indices: {'V-I': 1.028},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.142], // albedo from Ortiz et al. (2019)
+        geometric_albedo: ['Generic_Bessell.V', 0.142],
     },
     '(229762 I) Gǃòʼé ǃHú|Grundy2018': {
         tags: ['Solar system', 'moon', 'minor body', 'TNO', 'detached'],
@@ -2292,13 +2300,17 @@
         calib: 'Vega',
         sun: true
     },
-    '(307261) 2002 MS4|MBOSS, Verbiscer2022': {
+    'Rommel2023': [
+        'A large topographic feature on the surface of the trans-Neptunian object (307261) 2002 MS4 measured from stellar occultations',
+        'DOI: 10.1051/0004-6361/202346892', 'https://www.aanda.org/articles/aa/full_html/2023/10/aa46892-23/aa46892-23.html', 'https://ui.adsabs.harvard.edu/abs/2023A%26A...678A.167R/abstract'
+    ],
+    '(307261) 2002 MS4|MBOSS, Rommel2023, Verbiscer2022': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.690, 'V-R': 0.380},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.1], // albedo from Rommel et al. (2023)
+        geometric_albedo: ['Generic_Bessell.V', 0.1],
         spherical_albedo: ['Generic_Bessell.V', 0.039],
     },
     '(307982) 2004 PG115|MBOSS': {
