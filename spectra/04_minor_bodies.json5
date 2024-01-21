@@ -16,6 +16,10 @@
         'Photometry of Transneptunian Objects for the Herschel Key Program ‘TNOs are Cool’',
         'DOI: 10.1007/s11038-014-9450-x', 'https://link.springer.com/article/10.1007/s11038-014-9450-x'
     ],
+    'Lellouch2013': [
+        '"TNOs are Cool": A survey of the trans-Neptunian region. IX. Thermal properties of Kuiper belt objects and Centaurs from combined Herschel and Spitzer observations',
+        'DOI: 10.1051/0004-6361/201322047', 'https://www.aanda.org/articles/aa/full_html/2013/09/aa22047-13/aa22047-13.html', 'https://ui.adsabs.harvard.edu/abs/2013A%26A...557A..60L/abstract'
+    ],
     'Lorenzi2016': [
         'The Spectrum of Pluto, 0.40 - 0.93 um I. Secular and longitudinal distribution of ices and complex organics',
         'DOI: 10.1051/0004-6361/201527281', 'https://arxiv.org/abs/1509.00417'
@@ -47,6 +51,14 @@
     'Vernazza2021': [
         'VLT/SPHERE imaging survey of the largest main-belt asteroids: Final results and synthesis',
         'DOI: 10.1051/0004-6361/202141781', 'https://www.aanda.org/articles/aa/full_html/2021/10/aa41781-21/aa41781-21.html', 'https://ui.adsabs.harvard.edu/abs/2021A%26A...654A..56V/abstract'
+    ],
+    'Vilenius2012': [
+        '"TNOs are Cool": A survey of the trans-Neptunian region. VI. Herschel/PACS observations and thermal modeling of 19 classical Kuiper belt objects',
+        'DOI: 10.1051/0004-6361/201118743', 'https://www.aanda.org/articles/aa/full_html/2012/05/aa18743-11/aa18743-11.html', 'https://ui.adsabs.harvard.edu/abs/2012A%26A...541A..94V/abstract'
+    ],
+    'Vilenius2014': [
+        '"TNOs are Cool": A survey of the trans-Neptunian region. X. Analysis of classical Kuiper belt objects from Herschel and Spitzer observations',
+        'DOI: 10.1051/0004-6361/201322416', 'https://www.aanda.org/articles/aa/full_html/2014/04/aa22416-13/aa22416-13.html', 'https://ui.adsabs.harvard.edu/abs/2014A%26A...564A..35V/abstract'
     ],
     
     '(1) Ceres|SMASS': {
@@ -1266,13 +1278,13 @@
         calib: 'Vega',
         sun: true
     },
-    '(55565) 2002 AW197|MBOSS': {
+    '(55565) 2002 AW197|MBOSS, Vilenius2014': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.915, 'V-R': 0.589, 'R-I': 0.581},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.112], // albedo from Vilenius et al. (2014)
+        geometric_albedo: ['Generic_Bessell.V', 0.112],
     },
     '(55576) Amycus|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
@@ -1288,13 +1300,13 @@
         calib: 'Vega',
         sun: true
     },
-    '(55637) 2002 UX25|MBOSS': {
+    '(55637) 2002 UX25|MBOSS, Lellouch2013': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.979, 'V-R': 0.552},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.107], // albedo from Lellouch et al. (2013)
+        geometric_albedo: ['Generic_Bessell.V', 0.107],
     },
     '(55638) 2002 VE95|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
@@ -1401,10 +1413,14 @@
         calib: 'Vega',
         sun: true
     },
-    '(65803) Didymos|SMASS': {
+    'Daly2023': [
+        'Successful kinetic impact into an asteroid for planetary defence',
+        'DOI: 10.1038/s41586-023-05810-5', 'https://www.nature.com/articles/s41586-023-05810-5', 'https://ui.adsabs.harvard.edu/abs/2023Natur.616..443D/abstract'
+    ],
+    '(65803) Didymos|SMASS, Daly2023': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         file: 'spectra/files/SMASS/au1996GT.7.txtU',
-        geometric_albedo: ['Generic_Bessell.V', 0.15], // geometric albedo from Daly et al. (2023), https://ui.adsabs.harvard.edu/abs/2023Natur.616..443D/abstract
+        geometric_albedo: ['Generic_Bessell.V', 0.15],
     },
     '(66452) 1999 OF4|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
@@ -1582,55 +1598,59 @@
         sun: true,
         geometric_albedo: ['Generic_Bessell.V', 0.399], // albedo from fyr02’s sheet
     },
-    'deBergh2005': [
-        'The surface of the transneptunian object 90482 Orcus',
-        'https://ui.adsabs.harvard.edu/abs/2005A%26A...437.1115D/abstract'
-    ],
     'Brown2010': [
         'The Size, Density, and Formation of the Orcus-Vanth System in the Kuiper Belt',
         'DOI: 10.1088/0004-6256/139/6/2700', 'https://iopscience.iop.org/article/10.1088/0004-6256/139/6/2700'
     ],
-    '(90482) Orcus|deBergh2005': {
+    'Brown2018': [
+        'Medium-sized Satellites of Large Kuiper Belt Objects',
+        'DOI: 10.3847/1538-3881/aad9f2', 'https://iopscience.iop.org/article/10.3847/1538-3881/aad9f2', 'https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B/abstract'
+    ],
+    'deBergh2005': [
+        'The surface of the transneptunian object 90482 Orcus',
+        'https://ui.adsabs.harvard.edu/abs/2005A%26A...437.1115D/abstract'
+    ],
+    '(90482) Orcus|deBergh2005, Brown2018': {
         tags: ['Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.68, 'V-R': 0.37, 'V-I': 0.74},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.23], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
+        geometric_albedo: ['Generic_Bessell.V', 0.23],
     },
-    '(90482) Orcus|Brown2010': {
+    '(90482) Orcus|Brown2010, Brown2018': {
         tags: ['Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
         filters: ['Generic_Bessell.V', 'Generic_Bessell.I'],
         mag: [19.36, 18.63],
         sd: 0.05,
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.23], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
+        geometric_albedo: ['Generic_Bessell.V', 0.23],
     },
-    '(90482) Orcus|MBOSS': {
+    '(90482) Orcus|MBOSS, Brown2018': {
         tags: ['featured', 'MBOSS', 'Solar system', 'planet geophysical', 'dwarf planet', 'minor body', 'TNO', 'plutino'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.670, 'V-R': 0.376, 'R-I': 0.372},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.23], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
+        geometric_albedo: ['Generic_Bessell.V', 0.23],
     },
-    '(90482 I) Vanth|Brown2010': {
+    '(90482 I) Vanth|Brown2010, Brown2018': {
         tags: ['featured', 'Solar system', 'moon', 'minor body', 'TNO', 'plutino'],
         filters: ['Generic_Bessell.V', 'Generic_Bessell.I'],
         mag: [21.97, 20.94],
         sd: 0.05,
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.08], // albedo from Brown and Butler (2018), https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B
+        geometric_albedo: ['Generic_Bessell.V', 0.08],
     },
-    '(90568) 2004 GV9|MBOSS': {
+    '(90568) 2004 GV9|MBOSS, Vilenius2012': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.895, 'V-R': 0.520},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.0770], // albedo from Vilenius et al. (2012)
+        geometric_albedo: ['Generic_Bessell.V', 0.0770],
     },
     '(91133) 1998 HK151|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
@@ -1783,13 +1803,17 @@
         calib: 'Vega',
         sun: true
     },
-    '(120347) Salacia|MBOSS': {
+    'Brown2017': [
+        'The Density of Mid-sized Kuiper Belt Objects from ALMA Thermal Observations',
+        'DOI: 10.3847/1538-3881/aa6346', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa6346', 'https://ui.adsabs.harvard.edu/abs/2017AJ....154...19B/abstract'
+    ],
+    '(120347) Salacia|MBOSS, Brown2017': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.664, 'V-R': 0.403, 'R-I': 0.433},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.042], // albedo from Brown and Butler (2017)
+        geometric_albedo: ['Generic_Bessell.V', 0.042],
     },
     'Stansberry2012': [
         'Physical properties of trans-neptunian binaries (120347) Salacia-Actaea and (42355) Typhon-Echidna',
@@ -2012,13 +2036,13 @@
         calib: 'Vega',
         sun: true
     },
-    '(145452) 2005 RN43|MBOSS': {
+    '(145452) 2005 RN43|MBOSS, Vilenius2012': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.940, 'V-R': 0.592, 'R-I': 0.486},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.107], // albedo from Vilenius et al. (2012)
+        geometric_albedo: ['Generic_Bessell.V', 0.107],
     },
     '(145453) 2005 RR43|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
@@ -2059,13 +2083,17 @@
         'Keck and Gemini spectral characterization of Lucy mission fly-by target (152830) Dinkinesh',
         'https://ui.adsabs.harvard.edu/abs/2023Icar..40015562B/abstract'
     ],
-    '(152830) Dinkinesh|Bolin2023': {
+    'McFadden2023': [
+        'Size and Albedo Constraints for (152830) Dinkinesh Using WISE Data',
+        'DOI: 10.3847/2041-8213/acff61', 'https://iopscience.iop.org/article/10.3847/2041-8213/acff61', 'https://ui.adsabs.harvard.edu/abs/2023ApJ...957L...2M/abstract'
+    ],
+    '(152830) Dinkinesh|Bolin2023, McFadden2023': {
         tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         system: 'SLOAN_SDSS',
         indices: {'g-r': 0.67, 'r-i': 0.28, 'i-z': 0.11},
         calib: 'AB',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.27], // albedo from McFadden et al. (2023)
+        geometric_albedo: ['Generic_Bessell.V', 0.27],
     },
     '(160427) 2005 RL43|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
@@ -2126,33 +2154,37 @@
         calib: 'Vega',
         sun: true
     },
-    '(174567) Varda|MBOSS': {
+    'Souami2020': [
+        'A multi-chord stellar occultation by the large trans-Neptunian object (174567) Varda',
+        'DOI: 10.1051/0004-6361/202038526', 'https://www.aanda.org/articles/aa/full_html/2020/11/aa38526-20/aa38526-20.html', 'https://ui.adsabs.harvard.edu/abs/2020A%26A...643A.125S/abstract'
+    ],
+    '(174567) Varda|MBOSS, Souami2020': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.892, 'V-R': 0.556, 'R-I': 0.510},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.099], // albedo from Souami et al. (2020)
+        geometric_albedo: ['Generic_Bessell.V', 0.099],
     },
     'Grundy2015': [
         'The mutual orbit, mass, and density of the large transneptunian binary system Varda and Ilmarë',
         'DOI: 10.1016/j.icarus.2015.04.036', 'https://arxiv.org/abs/1505.00510'
     ],
-    '(174567) Varda|Grundy2015': {
+    '(174567) Varda|Grundy2015, Souami2020': {
         tags: ['featured', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.892, 'V-I': 1.133},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.099], // albedo from Souami et al. (2020)
+        geometric_albedo: ['Generic_Bessell.V', 0.099],
     },
-    '(174567 I) Ilmarë|Grundy2015': {
+    '(174567 I) Ilmarë|Grundy2015, Souami2020': {
         tags: ['Solar system', 'moon', 'minor body', 'TNO', 'classical', 'classical-h'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.857, 'V-I': 1.266},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.085], // albedo from Souami et al. (2020)
+        geometric_albedo: ['Generic_Bessell.V', 0.085],
     },
     '(181708) 1993 FW|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
@@ -2203,33 +2235,41 @@
         calib: 'Vega',
         sun: true
     },
-    '(208996) 2003 AZ84|MBOSS': {
+    'DiasOliveira2017': [
+        'Study of the Plutino Object (208996) 2003 AZ84 from Stellar Occultations: Size, Shape, and Topographic Features',
+        'DOI: 10.3847/1538-3881/aa74e9', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa74e9', 'https://ui.adsabs.harvard.edu/abs/2017AJ....154...22D/abstract'
+    ],
+    '(208996) 2003 AZ84|MBOSS, DiasOliveira2017': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'plutino'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.738, 'V-R': 0.430, 'R-I': 0.473},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.097], // albedo from Dias-Oliveira et al. (2017)
+        geometric_albedo: ['Generic_Bessell.V', 0.097],
     },
-    '(225088) Gonggong|Boehnhardt2014': {
+    'Kiss2019': [
+        'The mass and density of the dwarf planet (225088) 2007 OR10',
+        'DOI: 10.1016/j.icarus.2019.03.013', 'https://www.sciencedirect.com/science/article/pii/S0019103518304354', 'https://ui.adsabs.harvard.edu/abs/2019Icar..334....3K/abstract'
+    ],
+    '(225088) Gonggong|Boehnhardt2014, Kiss2019': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'detached'],
         system: 'Generic_Bessell',
         indices: {'B-V': 1.38, 'V-R': 0.86, 'R-I': 0.79},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.14], // albedo from Kiss et al. 2019
+        geometric_albedo: ['Generic_Bessell.V', 0.14],
     },
-    'Kiss2019': [
-        'The mass and density of the dwarf planet (225088) 2007 OR10',
-        'DOI: 10.1016/j.icarus.2019.03.013', 'https://arxiv.org/abs/1903.05439'
+    'Arakawa2021': [
+        'Tidal Evolution of the Eccentric Moon around Dwarf Planet (225088) Gonggong',
+        'DOI: 10.3847/1538-3881/ac1f91', 'https://iopscience.iop.org/article/10.3847/1538-3881/ac1f91', 'https://ui.adsabs.harvard.edu/abs/2021AJ....162..226A/abstract'
     ],
-    '(225088 I) Xiangliu|Kiss2019': {
+    '(225088 I) Xiangliu|Kiss2019, Arakawa2021': {
         tags: ['featured', 'Solar system', 'moon', 'minor body', 'TNO', 'detached'],
         system: 'Generic_Bessell',
         indices: {'V-I': 1.22},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.08], // albedo assuming radius of 100 km from Arakawa et al. (2021) https://ui.adsabs.harvard.edu/abs/2021AJ....162..226A/abstract
+        geometric_albedo: ['Generic_Bessell.V', 0.08], // assuming radius of 100 km
     },
     '(229762) Gǃkúnǁʼhòmdímà|MBOSS, Ortiz2019': {
         tags: ['featured', 'MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
