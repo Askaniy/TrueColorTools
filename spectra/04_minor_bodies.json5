@@ -68,8 +68,8 @@
     '(1) Ceres|SMASS, Li2019': {
         tags: ['featured', 'SMASS', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000001.2.txtU',
-        geometric_albedo: ['Dawn_FC.F2', 0.096], // ± 0.006
-        spherical_albedo: ['Dawn_FC.F2', 0.037], // ± 0.002
+        geometric_albedo: ['Dawn_FC.F2', 0.096, 0.006],
+        spherical_albedo: ['Dawn_FC.F2', 0.037, 0.002],
     },
     '(2) Pallas|SMASS, Vernazza2021': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
@@ -88,8 +88,8 @@
     '(4) Vesta|SMASS, Li2013': {
         tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000004.2.txtU',
-        geometric_albedo: ['Generic_Bessell.V', 0.38], // ± 0.04
-        spherical_albedo: ['Dawn_FC.F2', 0.20], // ± 0.02
+        geometric_albedo: ['Dawn_FC.F2', 0.38, 0.04],
+        spherical_albedo: ['Dawn_FC.F2', 0.20, 0.02],
     },
     '(7) Iris|SMASS, Vernazza2021': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
@@ -260,7 +260,7 @@
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.756, 0.892, 0.978, 1.000, 0.936, 0.917],
         sd: 0.018,
-        geometric_albedo: ['Galileo_SSI.Green', 0.217], // ±0.026, normal albedo of Terrain B, Fig. 7
+        geometric_albedo: ['Galileo_SSI.Green', 0.217, 0.026], // normal albedo of Terrain B, Fig. 7
     },
     '(243) Ida: Dark areas|Veverka1996, Helfenstein1996': {
         tags: ['Solar system', 'minor body', 'asteroid', 'main belt'],
@@ -268,7 +268,7 @@
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.690, 0.856, 0.956, 1.000, 0.979, 0.965],
         sd: 0.018,
-        geometric_albedo: ['Galileo_SSI.Green', 0.204], // ±0.016, normal albedo of Terrain A, Fig. 7
+        geometric_albedo: ['Galileo_SSI.Green', 0.204, 0.016], // normal albedo of Terrain A, Fig. 7
     },
     '(243 I) Dactyl|Veverka1996, Helfenstein1996': {
         tags: ['Solar system', 'moon', 'minor body', 'asteroid', 'main belt'],
@@ -276,7 +276,7 @@
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.700, 0.894, 0.992, 1.000, 0.909, 0.882],
         sd: 0.018,
-        geometric_albedo: ['Galileo_SSI.Clear', 0.197], // ±0.038, normal albedo, Fig. 7
+        geometric_albedo: ['Galileo_SSI.Clear', 0.197, 0.038], // normal albedo, Fig. 7
         spherical_albedo: ['Galileo_SSI.Clear', 0.063], // Table VIII
     },
     'Clark1999': [
