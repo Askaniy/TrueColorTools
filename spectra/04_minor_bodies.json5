@@ -40,6 +40,10 @@
         'Stellar Occultations by Transneptunian objects: from Predictions to Observations and Prospects for the Future',
         'DOI: 10.48550/arXiv.1905.04335', 'https://ui.adsabs.harvard.edu/abs/2019arXiv190504335O/abstract'
     ],
+    'Tedesco2004': [
+        'IRAS Minor Planet Survey. IRAS-A-FPA-3-RDR-IMPS-V6.0.',
+        'https://sbn.psi.edu/pds/resource/imps.html', 'https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=IRAS-A-FPA-3-RDR-IMPS-V6.0'
+    ],
     'Thirouin2019': [
         'Colors of Trans-Neptunian Contact Binaries',
         'DOI: 10.3847/1538-3881/ab27bc', 'https://iopscience.iop.org/article/10.3847/1538-3881/ab27bc'
@@ -61,10 +65,15 @@
         'DOI: 10.1051/0004-6361/201322416', 'https://www.aanda.org/articles/aa/full_html/2014/04/aa22416-13/aa22416-13.html', 'https://ui.adsabs.harvard.edu/abs/2014A%26A...564A..35V/abstract'
     ],
     
-    '(1) Ceres|SMASS': {
+    'Li2019': [
+        'Spectrophotometric modeling and mapping of Ceres',
+        'DOI: 10.1016/j.icarus.2018.12.038', 'https://www.sciencedirect.com/science/article/pii/S0019103518305426', 'https://ui.adsabs.harvard.edu/abs/2019Icar..322..144L/abstract'
+    ],
+    '(1) Ceres|SMASS, Li2019': {
         tags: ['featured', 'SMASS', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000001.2.txtU',
-        geometric_albedo: ['Generic_Bessell.V', 0.09], // geometric albedo
+        geometric_albedo: ['Dawn_FC.F2', 0.096], // ± 0.006
+        spherical_albedo: ['Dawn_FC.F2', 0.037], // ± 0.002
     },
     '(2) Pallas|SMASS, Vernazza2021': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
@@ -76,10 +85,15 @@
         file: 'spectra/files/SMASS/a000003.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.202],
     },
-    '(4) Vesta|SMASS': {
+    'Li2013': [
+        'Global photometric properties of Asteroid (4) Vesta observed with Dawn Framing Camera',
+        'DOI: 10.1016/j.icarus.2013.08.011', 'https://www.sciencedirect.com/science/article/pii/S0019103513003497', 'https://ui.adsabs.harvard.edu/abs/2013Icar..226.1252L/abstract'
+    ],
+    '(4) Vesta|SMASS, Tedesco2004, Li2013': {
         tags: ['featured', 'SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000004.2.txtU',
-        geometric_albedo: ['Generic_Bessell.V', 0.423], // geometric albedo
+        geometric_albedo: ['Generic_Bessell.V', 0.4228],
+        spherical_albedo: ['Dawn_FC.F2', 0.20], // ± 0.02
     },
     '(7) Iris|SMASS, Vernazza2021': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
