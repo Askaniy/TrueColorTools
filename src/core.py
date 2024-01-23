@@ -285,7 +285,7 @@ class Spectrum:
             current_br = self.to_scope(transmission.nm) @ transmission
         else: # scaling at wavelength
             if where in self.nm:
-                current_br = self.br[np.where(self.nm == where)]
+                current_br = self.br[np.where(self.nm == where)][0]
             else:
                 index = np.abs(self.nm - where).argmin() # closest wavelength
                 current_br = np.interp(where, self.nm[index-1:index+1], self.br[index-1:index+1])
@@ -825,7 +825,8 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
     - `br` (list): same-size list of "brightness", flux in units of energy (not a photon counter)
     - `mag` (list): same-size list of magnitudes
     - `sd` (list/number): same-size list of standard deviations or a general value
-    - `nm_range` (list): list of [`start`, `stop`, `step`] integer values with including endpoint
+    - `nm_range` (dict): `start`, `stop`, `step` keys defining a wavelength range
+    - `slope` (dict): `start`, `stop`, `power` keys defining a spectrum from spectrophotometric gradient
     - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
     - `filters` (list): list of filter names that can be found in the `filters` folder
     - `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': *float*, ...}`
@@ -866,8 +867,12 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
         if 'nm' in content:
             nm = content['nm']
         elif 'nm_range' in content:
-            start, stop, step = content['nm_range']
-            nm = np.arange(start, stop+1, step)
+            nm_range = content['nm_range']
+            nm = np.arange(nm_range['start'], nm_range['stop']+1, nm_range['step'])
+        elif 'slope' in content:
+            slope = content['slope']
+            nm = np.arange(slope['start'], slope['stop']+1, resolution)
+            br = (nm / nm[0])**slope['power']
         # Photometry reading
         elif 'filters' in content:
             filters = content['filters']
