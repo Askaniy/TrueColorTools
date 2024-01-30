@@ -17,11 +17,11 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     help_step = 5 + help_size
     note_size = 16
     note_step = 4 + note_size
-    name_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensedSemiBold.ttf', name_size)
-    object_font = ImageFont.truetype('src/fonts/NotoSans-DisplayExtraCondensed.ttf', object_size)
+    name_font = ImageFont.truetype('src/fonts/MPLUSRounded1c-Medium.ttf', name_size)
+    object_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensed.ttf', object_size)
     help_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensedSemiBold.ttf', help_size)
     note_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensed.ttf', note_size)
-    small_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensed.ttf', 12)
+    small_font = ImageFont.truetype('src/fonts/NotoSans-DisplayExtraCondensed.ttf', 12)
 
     # Layout
     half_square = 50 # half of square width
@@ -230,13 +230,14 @@ def recursive_split(lst0: list, font: ImageFont.FreeTypeFont, maxW: int, hyphen=
                 while width(lst[i], font)+hyphen_width > maxW:
                     lst[i+1] = lst[i][-1] + lst[i+1]
                     lst[i] = lst[i][:-1]
-                try:
+                if len(lst[i]) > 1:
                     if lst[i][-1] in separators:
                         recursive_split(lst0, font, maxW, hyphen=False)
                     else:
                         lst[i] += '-'
                         recursive_split(lst, font, maxW)
-                except IndexError:
-                    pass # no space on the first line, the text moves forward
+                else:
+                    lst[i+1] = lst[i] + lst[i+1]
+                    lst[i] = ''
                 break
     return lst
