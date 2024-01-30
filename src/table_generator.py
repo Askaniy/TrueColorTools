@@ -17,11 +17,11 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     help_step = 5 + help_size
     note_size = 16
     note_step = 4 + note_size
-    name_font = ImageFont.truetype('src/fonts/MPLUSRounded1c-Medium.ttf', name_size)
-    object_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensed.ttf', object_size)
-    help_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensedSemiBold.ttf', help_size)
-    note_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensed.ttf', note_size)
-    small_font = ImageFont.truetype('src/fonts/NotoSans-DisplayExtraCondensed.ttf', 12)
+    name_font = ImageFont.truetype('src/fonts/MPLUSRounded1c-Medium.ttf', name_size, layout_engine=ImageFont.Layout.BASIC)
+    object_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensed.ttf', object_size, layout_engine=ImageFont.Layout.BASIC)
+    help_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensedSemiBold.ttf', help_size, layout_engine=ImageFont.Layout.BASIC)
+    note_font = ImageFont.truetype('src/fonts/NotoSans-DisplayCondensed.ttf', note_size, layout_engine=ImageFont.Layout.BASIC)
+    small_font = ImageFont.truetype('src/fonts/NotoSans-DisplayExtraCondensed.ttf', 12, layout_engine=ImageFont.Layout.BASIC)
 
     # Layout
     half_square = 50 # half of square width
