@@ -303,7 +303,7 @@
         'DOI: 10.1016/j.icarus.2004.07.024', 'https://www.sciencedirect.com/science/article/pii/S0019103504002234', 'https://ui.adsabs.harvard.edu/abs/2004Icar..172..415L/abstract'
     ],
     '(433) Eros|deLeon2010, Li2004': { tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Amor'],
-        nm_range: [350, 890, 5],
+        nm_range: {start: 350, stop: 890, step: 5},
         br: [0.39114, 0.40755, 0.43474, 0.48806, 0.49886, 0.51646, 0.49042, 0.44175, 0.53512, 0.55996, 0.62863, 0.6198, 0.67636, 0.66499, 0.68589, 0.67764,
             0.68227, 0.73805, 0.7302, 0.76963, 0.7911, 0.8021, 0.8124, 0.81771, 0.82751, 0.8589, 0.87197, 0.89604, 0.89299, 0.90126, 0.91716, 0.91591, 0.91854,
             0.92926, 0.93106, 0.95902, 0.96679, 0.97107, 0.96876, 0.98038, 1.0, 0.9954, 0.98526, 1.00648, 0.98666, 1.01316, 1.01612, 1.02944, 1.02794, 1.05006,
@@ -973,8 +973,9 @@
         'Vis-NIR disk-integrated photometry of asteroid 25143 Itokawa around opposition by AMICA/Hayabusa',
         'DOI: 10.1016/j.icarus.2018.04.001', 'https://kar.kent.ac.uk/66973/1/Lowry_Vis-NIR%20Disk-integrated%20Photometry.pdf', 'https://ui.adsabs.harvard.edu/abs/2018Icar..311..175T/abstract'
     ],
-    '(25143) Itokawa|Lowry2005, Tatsumi2018': { tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
-        nm_range: [325, 1000, 25],
+    '(25143) Itokawa|Lowry2005, Tatsumi2018': {
+        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
+        nm_range: {start: 325, stop: 1000, step: 25},
         br: [0.388, 0.568, 0.676, 0.773, 0.824, 0.856, 0.888, 0.914, 0.964, 1.0, 1.036, 1.058, 1.076, 1.094, 1.122, 1.140, 1.147, 1.144, 1.129, 1.101,
             1.068, 1.029, 1.0, 0.978, 0.975, 0.946, 0.917, 0.935],
         geometric_albedo: ['Generic_Bessell.V', 0.27],

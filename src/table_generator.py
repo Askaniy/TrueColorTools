@@ -230,10 +230,13 @@ def recursive_split(lst0: list, font: ImageFont.FreeTypeFont, maxW: int, hyphen=
                 while width(lst[i], font)+hyphen_width > maxW:
                     lst[i+1] = lst[i][-1] + lst[i+1]
                     lst[i] = lst[i][:-1]
-                if lst[i][-1] in separators:
-                    recursive_split(lst0, font, maxW, hyphen=False)
-                else:
-                    lst[i] += '-'
-                    recursive_split(lst, font, maxW)
+                try:
+                    if lst[i][-1] in separators:
+                        recursive_split(lst0, font, maxW, hyphen=False)
+                    else:
+                        lst[i] += '-'
+                        recursive_split(lst, font, maxW)
+                except IndexError:
+                    pass # no space on the first line, the text moves forward
                 break
     return lst
