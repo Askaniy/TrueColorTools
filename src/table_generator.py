@@ -110,11 +110,11 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
         # Setting brightness mode
         match brMode:
             case 0:
-                spectrum = body.get_spectrum('chromaticity')
+                spectrum, estimated = body.get_spectrum('chromaticity')
             case 1:
-                spectrum = body.get_spectrum('geometric')
+                spectrum, estimated = body.get_spectrum('geometric')
             case 2:
-                spectrum = body.get_spectrum('spherical')
+                spectrum, estimated = body.get_spectrum('spherical')
         
         # Color calculation
         if srgb:
@@ -126,13 +126,16 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
         rgb = color.to_bit(8)
         rgb_show = color.to_html()
 
-        # Object drawing
+        text_color = (0, 0, 0) if rgb.mean() >= 127 else (255, 255, 255)
+
+        # Canvas drawing
         center_x = w_border + half_square + 2*half_square * (n%objects_per_raw)
         center_y = h0 + half_square + 2*half_square * int(n/objects_per_raw)
         #draw.rounded_rectangle((center_x-r, center_y-r, center_x+r, center_y+r), rounding_radius, rgb_show)
         draw_rounded_square((center_x, center_y), r, rounding_radius, rgb_show, img, 4)
-        
-        text_color = (0, 0, 0) if rgb.mean() >= 127 else (255, 255, 255)
+
+        if estimated:
+            draw.text((center_x+r_left, center_y+r_left), tr.table_estimated[lang], text_color, small_font, anchor='rs', align='right')
         
         # Name processing
         workaround_shift = 3 # it is not possible to use "lt" and "rt" anchors for multiline text https://pillow.readthedocs.io/en/stable/handbook/text-anchors.html

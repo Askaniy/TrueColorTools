@@ -132,11 +132,16 @@ def launch_window(lang: str):
                 # Setting brightness mode
                 match brMode:
                     case 0:
-                        T1_spectrum = T1_body.get_spectrum('chromaticity')
+                        T1_spectrum, T1_estimated = T1_body.get_spectrum('chromaticity')
                     case 1:
-                        T1_spectrum = T1_body.get_spectrum('geometric')
+                        T1_spectrum, T1_estimated = T1_body.get_spectrum('geometric')
                     case 2:
-                        T1_spectrum = T1_body.get_spectrum('spherical')
+                        T1_spectrum, T1_estimated = T1_body.get_spectrum('spherical')
+                
+                if T1_estimated:
+                    window['T1_estimated'].update(tr.gui_estimated[lang])
+                else:
+                    window['T1_estimated'].update('')
 
                 # Color calculation
                 if values['-srgb-']:
@@ -177,11 +182,11 @@ def launch_window(lang: str):
                     # Setting brightness mode
                     match brMode:
                         case 0:
-                            T1_spectrum = T1_body.get_spectrum('chromaticity')
+                            T1_spectrum, _ = T1_body.get_spectrum('chromaticity')
                         case 1:
-                            T1_spectrum = T1_body.get_spectrum('geometric')
+                            T1_spectrum, _ = T1_body.get_spectrum('geometric')
                         case 2:
-                            T1_spectrum = T1_body.get_spectrum('spherical')
+                            T1_spectrum, _ = T1_body.get_spectrum('spherical')
 
                     # Color calculation
                     if values['-srgb-']:

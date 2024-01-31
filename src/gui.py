@@ -61,7 +61,7 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
     T1_col2 = [
         [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T1_title2'), sg.Push()],
         [sg.Push(), sg.Graph(canvas_size=canvas_size, graph_bottom_left=(0, 0), graph_top_right=canvas_size, background_color=None, key='T1_graph'), sg.Push()],
-        [sg.T('')],
+        [sg.Push(), sg.T('', key='T1_estimated'), sg.Push()],
         [sg.Text(tr.gui_rgb[lang], key='T1_colorRGB'), sg.Input(size=1, key='T1_rgb', expand_x=True)],
         [sg.Text(tr.gui_hex[lang], key='T1_colorHEX'), sg.Input(size=1, key='T1_hex', expand_x=True)],
         [
@@ -217,6 +217,8 @@ def translate(window: sg.Window, T2_num: int, lang: str):
     window['-formattingText-'].update(tr.gui_formatting[lang])
     window['-bitnessText-'].update(tr.gui_bit[lang])
     window['-roundingText-'].update(tr.gui_rnd[lang])
+    if window['T1_estimated'].get() != '':
+        window['T1_estimated'].update(tr.gui_estimated[lang])
     window['T1_colorRGB'].update(tr.gui_rgb[lang])
     window['T1_colorHEX'].update(tr.gui_hex[lang])
     window['T1_in_filter'].update(tr.gui_in_filter[lang])

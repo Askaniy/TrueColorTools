@@ -106,6 +106,11 @@ gui_results = {
     'ru': 'Результат',
     'de': 'Ergebnisse'
 }
+gui_estimated = {
+    'en': 'Note: The albedo is estimated.',
+    'ru': 'Прим.: Данное альбедо — теор. оценка',
+    'de': 'Hinweis: Die Albedo ist eine Schätzung.'
+}
 gui_rgb = {
     'en': 'RGB color',
     'ru': 'Цвет RGB',
@@ -160,6 +165,11 @@ table_title = {
     'en': ['The “', '” category color table'],
     'ru': ['Таблица цветов для категории «', '»'],
     'de': ['Farbtafel der Kategory „', '“']
+}
+table_estimated = {
+    'en': 'estimated albedo',
+    'ru': 'оценка альбедо',
+    'de': 'geschätzte Albedo'
 }
 legend = {
     'en': 'Legend',
