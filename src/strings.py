@@ -1,4 +1,4 @@
-# Localization file, contains almost all the strings used
+""" Localization file, contains almost all the strings used """
 
 # Window
 gui_ref = {

@@ -1,3 +1,5 @@
+""" Responsible for the creation and translation of the graphical interface. """
+
 import PySimpleGUI as sg
 import src.strings as tr
 

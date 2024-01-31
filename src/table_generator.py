@@ -1,7 +1,10 @@
+""" Provides a table generation function, generate_table(). """
+
 from PIL import Image, ImageDraw, ImageFont
 from math import ceil, sqrt
-import src.core as core
 import src.data_import as di
+import src.data_processing as dp
+import src.color_processing as cp
 import src.strings as tr
 
 
@@ -101,8 +104,8 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     for name, raw_name in objects.items():
 
         # Spectral data import and processing
-        body = core.database_parser(name, objectsDB[raw_name])
-        albedo = brMode and isinstance(body, core.ReflectiveBody)
+        body = dp.database_parser(name, objectsDB[raw_name])
+        albedo = brMode and isinstance(body, dp.ReflectiveBody)
 
         # Setting brightness mode
         match brMode:
@@ -115,9 +118,9 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
         
         # Color calculation
         if srgb:
-            color = core.Color.from_spectrum_CIE(spectrum, albedo)
+            color = cp.Color.from_spectrum_CIE(spectrum, albedo)
         else:
-            color = core.Color.from_spectrum(spectrum, albedo)
+            color = cp.Color.from_spectrum(spectrum, albedo)
         if gamma:
             color = color.gamma_corrected()
         rgb = color.to_bit(8)

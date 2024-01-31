@@ -1,4 +1,24 @@
+""" Provides incomplete or unnecessary functionality. """
+
 import numpy as np
+
+
+h = 6.626e-34 # Planck constant
+c = 299792458 # Speed of light
+k = 1.381e-23 # Boltzmann constant
+const1 = 2 * np.pi * h * c * c
+const2 = h * c / k
+r = 6.957e8 # Solar radius, meters
+au = 149597870700 # astronomical unit, meters
+w = (1 - np.sqrt(1 - (r / au)**2)) / 2 # dilution to compare with Solar light on Earth
+temp_coef_to_make_it_work = 1.8 / 0.448 # 1.8 is expected of irradiance(500, 5770), 0.448 is actual. TODO
+
+# Now it does not work as intended: the spectrum should be comparable to the sun_SI
+def irradiance(nm: int|float|np.ndarray, T: int|float) -> float|np.ndarray:
+    m = nm / 1e9
+    return temp_coef_to_make_it_work * w * const1 / (m**5 * (np.exp(const2 / (m * T)) - 1)) / 1e9 # per m -> per nm
+
+
 
 # Phase curves processing functions
 def lambert(phase: float):

@@ -1,12 +1,16 @@
+""" Generates and launches a graphical interface that accesses other modules. """
+
 import PySimpleGUI as sg
 from sigfig import round as sigfig_round
-import src.core as core
 import src.gui as gui
+from src.core import Spectrum, get_filter
 import src.data_import as di
+import src.data_processing as dp
+import src.color_processing as cp
+from src.table_generator import generate_table
 import src.image as im
 import src.plotter as pl
 import src.strings as tr
-import src.table_generator as tg
 
 
 def launch_window(lang: str):
@@ -122,8 +126,8 @@ def launch_window(lang: str):
                 T1_raw_name = di.obj_dict(objectsDB, '_all_', lang)[T1_name]
 
                 # Spectral data import and processing
-                T1_body = core.database_parser(T1_name, objectsDB[T1_raw_name])
-                T1_albedo = brMode and isinstance(T1_body, core.ReflectiveBody)
+                T1_body = dp.database_parser(T1_name, objectsDB[T1_raw_name])
+                T1_albedo = brMode and isinstance(T1_body, dp.ReflectiveBody)
 
                 # Setting brightness mode
                 match brMode:
@@ -136,9 +140,9 @@ def launch_window(lang: str):
 
                 # Color calculation
                 if values['-srgb-']:
-                    T1_color = core.Color.from_spectrum_CIE(T1_spectrum, T1_albedo)
+                    T1_color = cp.Color.from_spectrum_CIE(T1_spectrum, T1_albedo)
                 else:
-                    T1_color = core.Color.from_spectrum(T1_spectrum, T1_albedo)
+                    T1_color = cp.Color.from_spectrum(T1_spectrum, T1_albedo)
                 if values['-gamma-']:
                     T1_color = T1_color.gamma_corrected()
                 T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
@@ -148,7 +152,7 @@ def launch_window(lang: str):
                 window['T1_graph'].TKCanvas.itemconfig(T1_preview, fill=T1_rgb_show)
                 window['T1_rgb'].update(T1_rgb)
                 window['T1_hex'].update(T1_rgb_show)
-                T1_filter = core.get_filter(values['T1_filter'])
+                T1_filter = get_filter(values['T1_filter'])
                 window['T1_convolved'].update(sigfig_round(T1_spectrum.to_scope(T1_filter.nm)@T1_filter, rounding, warn=False))
             
             elif event == 'T1_tags':
@@ -167,8 +171,8 @@ def launch_window(lang: str):
                 T1_export = '\n' + '\t'.join(tr.gui_col[lang]) + '\n' + '_' * 36
                 
                 for name, raw_name in di.obj_dict(objectsDB, values['T1_tags'], lang).items():
-                    T1_body = core.database_parser(name, objectsDB[raw_name])
-                    T1_albedo = brMode and isinstance(T1_body, core.ReflectiveBody)
+                    T1_body = dp.database_parser(name, objectsDB[raw_name])
+                    T1_albedo = brMode and isinstance(T1_body, dp.ReflectiveBody)
                 
                     # Setting brightness mode
                     match brMode:
@@ -181,9 +185,9 @@ def launch_window(lang: str):
 
                     # Color calculation
                     if values['-srgb-']:
-                        T1_color = core.Color.from_spectrum_CIE(T1_spectrum, T1_albedo)
+                        T1_color = cp.Color.from_spectrum_CIE(T1_spectrum, T1_albedo)
                     else:
-                        T1_color = core.Color.from_spectrum(T1_spectrum, T1_albedo)
+                        T1_color = cp.Color.from_spectrum(T1_spectrum, T1_albedo)
                     if values['-gamma-']:
                         T1_color = T1_color.gamma_corrected()
                     T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
@@ -194,16 +198,16 @@ def launch_window(lang: str):
                 sg.popup_scrolled(T1_export, title=tr.gui_results[lang], size=(72, 32), font=('Consolas', 10))
             
             elif event == 'T1_folder':
-                tg.generate_table(objectsDB, values['T1_tags'], brMode, values['-srgb-'], values['-gamma-'], values['T1_folder'], 'png', lang)
+                generate_table(objectsDB, values['T1_tags'], brMode, values['-srgb-'], values['-gamma-'], values['T1_folder'], 'png', lang)
         
         # ------------ Events in the tab "Multiband processing" ------------
         
         elif values['-currentTab-'] == 'tab2':
             if T2_first_time:
                 if values['-srgb-']:
-                    T2_plot_data = [core.x, core.y, core.z]
+                    T2_plot_data = [cp.x, cp.y, cp.z]
                 else:
-                    T2_plot_data = [core.r, core.g, core.b]
+                    T2_plot_data = [cp.r, cp.g, cp.b]
                 T2_fig = pl.plot_filters(T2_plot_data)
                 figure_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
                 T2_first_time = False
@@ -239,13 +243,13 @@ def launch_window(lang: str):
             
             if event.startswith('T2_filter') or event == '-srgb-':
                 if values['-srgb-']:
-                    T2_plot_data = [core.x, core.y, core.z]
+                    T2_plot_data = [cp.x, cp.y, cp.z]
                 else:
-                    T2_plot_data = [core.r, core.g, core.b]
+                    T2_plot_data = [cp.r, cp.g, cp.b]
                 for i in range(T2_num):
                     T2_filter_name = values['T2_filter'+str(i)]
                     if T2_filter_name != '':
-                        T2_filter = core.get_filter(T2_filter_name)
+                        T2_filter = get_filter(T2_filter_name)
                         T2_plot_data.append(T2_filter)
                 T2_fig.clf()
                 T2_fig = pl.plot_filters(T2_plot_data)
@@ -275,15 +279,15 @@ def launch_window(lang: str):
                     window['T3_slider4'].update(disabled=not values['T3_overexposure'])
                 
                 # Spectral data processing
-                T3_spectrum = core.Spectrum.from_blackbody_redshift(core.visible_range, values['T3_slider1'], values['T3_slider2'], values['T3_slider3'])
+                T3_spectrum = Spectrum.from_blackbody_redshift(dp.visible_range, values['T3_slider1'], values['T3_slider2'], values['T3_slider3'])
                 if values['T3_overexposure']:
-                    T3_spectrum.br /= core.mag2flux(values['T3_slider4'], core.vega_in_V) * core.sun_in_V
+                    T3_spectrum.br /= dp.mag2flux(values['T3_slider4'], dp.vega_in_V) * dp.sun_in_V
 
                 # Color calculation
                 if values['-srgb-']:
-                    T3_color = core.Color.from_spectrum_CIE(T3_spectrum, albedo=values['T3_overexposure'])
+                    T3_color = cp.Color.from_spectrum_CIE(T3_spectrum, albedo=values['T3_overexposure'])
                 else:
-                    T3_color = core.Color.from_spectrum(T3_spectrum, albedo=values['T3_overexposure'])
+                    T3_color = cp.Color.from_spectrum(T3_spectrum, albedo=values['T3_overexposure'])
                 if values['-gamma-']:
                     T3_color = T3_color.gamma_corrected()
                 T3_rgb = tuple(T3_color.to_bit(bitness).round(rounding))

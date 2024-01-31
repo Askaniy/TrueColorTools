@@ -1,3 +1,5 @@
+""" Provides plotting functions. """
+
 from typing import Sequence
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
