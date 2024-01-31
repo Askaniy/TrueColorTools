@@ -56,7 +56,7 @@ gui_gamma = {
 }
 gui_br = {
     'en': ['Brightness mode', 'chromaticity', 'geometric albedo', 'spherical albedo'],
-    'ru': ['Режим яркости', 'цветность', 'геометрическое альбедо', 'сферическое альбедо'],
+    'ru': ['Режим яркости', 'цветность', 'геом. альбедо', 'сфер. альбедо'],
     'de': ['Helligkeitsmodus', 'Farbton', 'geometrische Albedo', 'sphärische Albedo']
 }
 gui_interp = {
@@ -156,10 +156,10 @@ gui_col = {
     'ru': ['Красный', 'Зелёный', 'Синий', '| Объект'],
     'de': ['Rot', 'Grün', 'Blau', '| Objekt']
 }
-name_text = {
-    'en': ['Colors calculated from spectra for the "', '" category'],
-    'ru': ['Цвета, вычисленные по спектрам для категории «', '»'],
-    'de': ['Farben von Himmelskörpen aus Spektren der "', '" Kategorie']
+table_title = {
+    'en': ['The “', '” category color table'],
+    'ru': ['Таблица цветов для категории «', '»'],
+    'de': ['Farbtafel der Kategory „', '“']
 }
 legend = {
     'en': 'Legend',
