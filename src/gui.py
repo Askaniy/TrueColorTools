@@ -80,6 +80,7 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
             sg.FolderBrowse(button_text=tr.gui_export2table[lang], size=button_size, key='T1_export2table'), sg.Push()
         ]
     ]
+
     def frame(num: int, filtersDB: tuple, lang: str):
         n = str(num)
         try:
@@ -91,10 +92,7 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
                 sg.Text(tr.gui_filter[lang], key='T2_filterText'+n),
                 sg.InputCombo(filtersDB, enable_events=True, expand_x=True, key='T2_filter'+n)
             ],
-            [   # Every moment displays brightness input
-                sg.Text(tr.gui_brightness[lang], key='T2_brText'+n),
-                sg.Input(size=1, enable_events=True, key='T2_br'+n, expand_x=True),
-                # or image input
+            [
                 sg.Input(enable_events=True, size=1, key='T2_path'+n, expand_x=True, visible=False),
                 # size=1 is VERY important! Now column depends on max length of filter file names
                 sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, key='T2_pathText'+n, visible=False),
@@ -108,10 +106,9 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
     T2_col1 = [
         [sg.Push(), sg.Text(tr.gui_input[lang], font=title_font, key='T2_title1'), sg.Push()],
         [sg.Text(tr.gui_step1[lang], key='T2_step1')],
-        [sg.Radio(tr.gui_datatype[lang][0], 'DataTypeRadio', enable_events=True, key='-typeSpectrum-', default=True)],
-        [sg.Radio(tr.gui_datatype[lang][1], 'DataTypeRadio', enable_events=True, key='-typeImage-')],
-        [sg.Radio(tr.gui_datatype[lang][2], 'DataTypeRadio', enable_events=True, key='-typeImageRGB-')],
-        [sg.Radio(tr.gui_datatype[lang][3], 'DataTypeRadio', enable_events=True, key='-typeImageCube-')],
+        [sg.Radio(tr.gui_datatype[lang][0], 'DataTypeRadio', enable_events=True, key='-typeImage-', default=True)],
+        [sg.Radio(tr.gui_datatype[lang][1], 'DataTypeRadio', enable_events=True, key='-typeImageRGB-')],
+        [sg.Radio(tr.gui_datatype[lang][2], 'DataTypeRadio', enable_events=True, key='-typeImageCube-')],
         [
             sg.Text(tr.gui_step2[lang], key='T2_step2'),
             # or image input
@@ -199,7 +196,7 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
     ]
 
 
-def translate(window: sg.Window, T2_num: int, lang: str):
+def translate(window: sg.Window, T2_vis: int, lang: str):
     window['menu'].update(tr.gui_menu[lang])
     window['tab1'].update(title=tr.gui_tabs[lang][0])
     window['tab2'].update(title=tr.gui_tabs[lang][1])
@@ -230,19 +227,17 @@ def translate(window: sg.Window, T2_num: int, lang: str):
     window['T2_title1'].update(tr.gui_input[lang])
     window['T2_title2'].update(tr.gui_results[lang])
     window['T2_step1'].update(tr.gui_step1[lang])
-    window['-typeSpectrum-'].update(text=tr.gui_datatype[lang][0])
-    window['-typeImage-'].update(text=tr.gui_datatype[lang][1])
-    window['-typeImageRGB-'].update(text=tr.gui_datatype[lang][2])
-    window['-typeImageCube-'].update(text=tr.gui_datatype[lang][3])
+    window['-typeImage-'].update(text=tr.gui_datatype[lang][0])
+    window['-typeImageRGB-'].update(text=tr.gui_datatype[lang][1])
+    window['-typeImageCube-'].update(text=tr.gui_datatype[lang][2])
     window['T2_bgrText0'].update(tr.gui_BGRcolors[lang][0])
     window['T2_bgrText1'].update(tr.gui_BGRcolors[lang][1])
     window['T2_bgrText2'].update(tr.gui_BGRcolors[lang][2])
     window['T2_step2'].update(tr.gui_step2[lang])
     window['T2_pathText'].update(tr.gui_browse[lang])
-    for i in range(T2_num):
+    for i in range(T2_vis):
         window['T2_band'+str(i)].update(f'{tr.gui_band[lang]} {i+1}')
         window['T2_filterText'+str(i)].update(tr.gui_filter[lang])
-        window['T2_brText'+str(i)].update(tr.gui_brightness[lang])
         window['T2_pathText'+str(i)].update(tr.gui_browse[lang])
     window['T2_desun'].update(text=tr.gui_desun[lang])
     window['T2_devega'].update(text=tr.gui_devega[lang])

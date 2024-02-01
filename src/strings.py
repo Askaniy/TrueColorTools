@@ -33,9 +33,9 @@ lang_list = {
     'de': ['Englisch', 'Russisch']
 }
 gui_tabs = {
-    'en': ['Database viewer', 'Multiband processing', 'Blackbody & Redshifts'],
-    'ru': ['Просмотр базы спектров', 'Многоканальная обработка', 'АЧТ и красные смещения'],
-    'de': ['Datenbank-Viewer', 'Multiband-Verarbeitung', 'Schwarzkörper & Rotverschiebung']
+    'en': ['Database viewer', 'Image processing', 'Blackbody & Redshifts'],
+    'ru': ['Просмотр базы спектров', 'Обработка изображений', 'АЧТ и красные смещения'],
+    'de': ['Datenbank-Viewer', 'Bildverarbeitung', 'Schwarzkörper & Rotverschiebung']
 }
 gui_menu = {
     'en': [['File', [gui_ref['en'], gui_info['en'], gui_exit['en']]], ['Language', lang_list['en']]],
@@ -202,7 +202,7 @@ info_indicator = {
     'de': ('Inaktiv', 'Aktiv')
 }
 
-# Tab 2 - Multiband processing
+# Tab 2 - Image processing
 gui_input = {
     'en': 'Input data',
     'ru': 'Входные данные',
@@ -214,9 +214,9 @@ gui_step1 = {
     'de': '1. Eingabe-Datentyp auswählen'
 }
 gui_datatype = {
-    'en': ['Multiband spectrum', 'Multiband image', 'RGB image', 'Spectral cube'],
-    'ru': ['Многоканальный спектр', 'Многоканальное изображение', 'RGB изображение', 'Спектральный куб'],
-    'de': ['Multiband Spektrum', 'Multiband Aufnahme', 'RGB-Bild', 'Spektraler Würfel']
+    'en': ['Multiband image', 'RGB image', 'Spectral cube'],
+    'ru': ['Многоканальное изображение', 'RGB изображение', 'Спектральный куб'],
+    'de': ['Multiband Aufnahme', 'RGB-Bild', 'Spektraler Würfel']
 }
 gui_BGRcolors = {
     'en': ['(Blue channel)', '(Green channel)', '(Red channel)'],

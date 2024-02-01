@@ -7,8 +7,8 @@ from src.core import Spectrum, get_filter
 import src.data_import as di
 import src.data_processing as dp
 import src.color_processing as cp
+import src.image_processing as ip
 from src.table_generator import generate_table
-import src.image as im
 import src.plotter as pl
 import src.strings as tr
 
@@ -50,7 +50,6 @@ def launch_window(lang: str):
 
     # Setting plots templates
     plot_data = [] # of the tabs 1 and 3
-    T2_first_time = True
     
     # List of settings events that cause color recalculation
     triggers = ('-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-brMode2-', '-bitness-', '-rounding-')
@@ -93,7 +92,7 @@ def launch_window(lang: str):
                 if event in lst:
                     lang = lng
                     break
-            window = gui.translate(window, T2_num, lang)
+            window = gui.translate(window, T2_vis, lang)
             window['T1_list'].update(values=tuple(di.obj_dict(objectsDB, values['T1_tags'], lang).keys()))
         
         elif event == tr.gui_ref[lang]:
@@ -205,59 +204,53 @@ def launch_window(lang: str):
             elif event == 'T1_folder':
                 generate_table(objectsDB, values['T1_tags'], brMode, values['-srgb-'], values['-gamma-'], values['T1_folder'], 'png', lang)
         
-        # ------------ Events in the tab "Multiband processing" ------------
+        # ------------ Events in the tab "Image processing" ------------
         
         elif values['-currentTab-'] == 'tab2':
-            if T2_first_time:
-                if values['-srgb-']:
-                    T2_plot_data = [cp.x, cp.y, cp.z]
-                else:
-                    T2_plot_data = [cp.r, cp.g, cp.b]
-                T2_fig = pl.plot_filters(T2_plot_data)
-                figure_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
-                T2_first_time = False
 
             # Getting input data mode name
-            T2_mode = tr.gui_datatype['en'][get_flag_index(
-                (values['-typeSpectrum-'], values['-typeImage-'], values['-typeImageRGB-'], values['-typeImageCube-']))]
+            T2_mode = get_flag_index((values['-typeImage-'], values['-typeImageRGB-'], values['-typeImageCube-']))
 
-            # Setting template for the band list
-            # BUG in PySimpleGUI: after translating, bands where visible=False become visible.
-            for i in range(T2_num):
-                window['T2_band'+str(i)].update(visible=False)
-                window['T2_path'+str(i)].update(visible=values['-typeImage-'])
-                window['T2_pathText'+str(i)].update(visible=values['-typeImage-'])
-                window['T2_brText'+str(i)].update(visible=values['-typeSpectrum-'])
-                window['T2_br'+str(i)].update(visible=values['-typeSpectrum-'])
-                window['T2_bgrText'+str(i)].update(visible=values['-typeImageRGB-'])
-            match event:
-                case '-typeImageRGB-':
-                    T2_vis = 3
-                case '-typeImageCube-':
-                    T2_vis = 0
-                case _:
+            # Setting template for the bandpass frames list
+            match T2_mode:
+                case 0: # Multiband image
                     T2_vis = T2_num
-            for i in range(T2_vis):
-                window['T2_band'+str(i)].update(visible=True)
+                case 1: # RGB image
+                    T2_vis = 3
+                case 2: # Spectral cube
+                    T2_vis = 0
+            for i in range(T2_num):
+                if i < T2_vis:
+                    window[f'T2_band{i}'].update(visible=True)
+                    window[f'T2_path{i}'].update(visible=values['-typeImage-'])
+                    window[f'T2_pathText{i}'].update(visible=values['-typeImage-'])
+                    window[f'T2_bgrText{i}'].update(visible=values['-typeImageRGB-'])
+                else:
+                    window[f'T2_band{i}'].update(visible=False)
             
             # Setting single file choice
-            T2_single_file = values['-typeImageRGB-'] or values['-typeImageCube-']
-            window['T2_step2'].update(visible=not T2_single_file)
-            window['T2_path'].update(visible=T2_single_file)
-            window['T2_pathText'].update(visible=T2_single_file)
+            T2_single_file_flag = values['-typeImageRGB-'] or values['-typeImageCube-']
+            window['T2_step2'].update(visible=not T2_single_file_flag)
+            window['T2_path'].update(visible=T2_single_file_flag)
+            window['T2_pathText'].update(visible=T2_single_file_flag)
             
-            if event.startswith('T2_filter') or event == '-srgb-':
-                if values['-srgb-']:
-                    T2_plot_data = [cp.x, cp.y, cp.z]
-                else:
-                    T2_plot_data = [cp.r, cp.g, cp.b]
-                for i in range(T2_num):
-                    T2_filter_name = values['T2_filter'+str(i)]
-                    if T2_filter_name != '':
-                        T2_filter = get_filter(T2_filter_name)
-                        T2_plot_data.append(T2_filter)
+            # Updating filters profile plot
+            if values['-srgb-']:
+                T2_plot_data = [cp.x, cp.y, cp.z]
+            else:
+                T2_plot_data = [cp.r, cp.g, cp.b]
+            for i in range(T2_num):
+                T2_filter_name = values['T2_filter'+str(i)]
+                if T2_filter_name != '':
+                    T2_filter = get_filter(T2_filter_name)
+                    T2_plot_data.append(T2_filter)
+            try:
                 T2_fig.clf()
-                T2_fig = pl.plot_filters(T2_plot_data)
+                T2_fig = pl.plot_filters(T2_plot_data, lang)
+            except UnboundLocalError: # means it's the first tab loading
+                T2_fig = pl.plot_filters(T2_plot_data, lang)
+                figure_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
+            finally:
                 figure_canvas_agg.get_tk_widget().forget()
                 figure_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
 

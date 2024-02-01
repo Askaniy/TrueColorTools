@@ -45,11 +45,11 @@ The key processing method is converting a photometry data into a continuous spec
 ## How to use?
 GUI is the only way to interact with TrueColorTools. When running it from the command line, you can set the startup language <!--- and CLI verbosity level--> (run with `--help` for details). No internet connection is required, the databases are stored in the appropriate folders of the repository, and you can replenish them.
 
-Program interface is functionally divided into tabs: *Database viewer*, *Multiband processing* and *Blackbody & Redshifts*. Color output formatting, often common to tabs, is located in the sidebar settings.
+Program interface is functionally divided into tabs: *Database viewer*, *Image processing* and *Blackbody & Redshifts*. Color output formatting, often common to tabs, is located in the sidebar settings.
 
 **Database viewer** provides access to the spectra database and allows you to calculate a color with the selected settings just by clicking on an object. It is possible to plot one or several spectra from the database in a pop-up window. You can process the colors of an entire category at once, and get the output in the text form or a graphic table ([examples](tables/)).
 
-**Multiband processing** allows you to directly access photometry calculations. Single measurements or set of images in different filters, or spectral cubes are accepted as input. For each pixel of an image, its spectrum is restored and converted into color.
+**Image processing** accepts regular images, a series of black and white images, or a spectral cube as input. Using wavelength information, the image is restored in true colors. Internally, this works by reconstructing the spectrum for each pixel.
 
 **Blackbody & Redshifts tab** calculates the influence of physical phenomena on color. Based on the blackbody spectrum, the program displays the changes in color and brightness from Doppler and gravitational redshifts. You can lock the exposure on the apparent magnitude logarithmic scale, adjusting the overexposure limit for a tuned blackbody object if it was in the sky replacing the Sun (with the angular size).
 

@@ -4,7 +4,8 @@ from typing import Sequence
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 import PySimpleGUI as sg
-import src.core as core
+from src.core import Spectrum
+import src.color_processing as cp
 import src.strings as tr
 import src.gui as gui
 
@@ -25,7 +26,7 @@ def draw_figure(canvas, figure):
     figure_canvas_agg.get_tk_widget().pack(side='top', fill='both', expand=1)
     return figure_canvas_agg
 
-def plot_spectra(objects: Sequence[core.Spectrum], gamma, srgb, albedo, lang: str):
+def plot_spectra(objects: Sequence[Spectrum], gamma, srgb, albedo, lang: str):
     """ Opens a separate window with plotted spectra from the input list """
     fig, ax = plt.subplots(1, 1, figsize=(9, 6), dpi=100)
     ax.set_xlabel(tr.xaxis_text[lang])
@@ -33,7 +34,7 @@ def plot_spectra(objects: Sequence[core.Spectrum], gamma, srgb, albedo, lang: st
     max_y = []
     for spectrum in objects:
         max_y.append(spectrum.br.max())
-    rgb = (core.x, core.y, core.z) if srgb else (core.r, core.g, core.b)
+    rgb = (cp.x, cp.y, cp.z) if srgb else (cp.r, cp.g, cp.b)
     k = max(max_y) / rgb[2].br.max() if len(max_y) != 0 else 1
     # adding CMFs on the background
     for i, spectrum in enumerate(rgb):
@@ -41,9 +42,9 @@ def plot_spectra(objects: Sequence[core.Spectrum], gamma, srgb, albedo, lang: st
     # color calculating and plotting
     for spectrum in objects:
         if srgb:
-            color = core.Color.from_spectrum_CIE(spectrum, albedo)
+            color = cp.Color.from_spectrum_CIE(spectrum, albedo)
         else:
-            color = core.Color.from_spectrum(spectrum, albedo)
+            color = cp.Color.from_spectrum(spectrum, albedo)
         if gamma:
             color = color.gamma_corrected()
         ax.plot(spectrum.nm, spectrum.br, label=spectrum.name, color=color.to_html())
@@ -74,9 +75,10 @@ def plot_spectra(objects: Sequence[core.Spectrum], gamma, srgb, albedo, lang: st
             fig.savefig(path, dpi=133.4) # 1200x800
     window.close()
 
-def plot_filters(filters: Sequence[core.Spectrum]):
+def plot_filters(filters: Sequence[Spectrum], lang: str):
     """ Creates a figure with plotted sensitive curves and CMFs """
     fig, ax = plt.subplots(1, 1, figsize=(5, 1.5), dpi=90)
+    ax.set_xlabel(tr.xaxis_text[lang])
     # determining the scale for CMFs in the background
     max_y = []
     for spectrum in filters[3:]:
@@ -89,7 +91,7 @@ def plot_filters(filters: Sequence[core.Spectrum]):
             color = rgb_muted[i]
         else:
             br = spectrum.br
-            color = core.Color.from_spectrum(spectrum).gamma_corrected().to_html()
+            color = cp.Color.from_spectrum(spectrum).gamma_corrected().to_html()
         ax.plot(spectrum.nm, br, label=spectrum.name, color=color)
     fig.tight_layout()
     return fig

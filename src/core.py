@@ -328,14 +328,14 @@ class Spectrum:
         start = max(self.nm[0], other.nm[0])
         end = min(self.nm[-1], other.nm[-1])
         if start > end: # `>` is needed to process operations with stub objects with no extra logs
-            print(f'# Note for spectral multiplication "{name}"')
-            print('- There is no intersection between the spectra, nothing changed.')
             the_first = self.name
             the_second = other.name
             if self.nm[0] > other.nm[0]:
                 the_first, the_second = the_second, the_first
+            print(f'# Note for spectral element-wise operation "{name}"')
             print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
-            return deepcopy(self)
+            print('- There is no intersection between the spectra. Spectrum stub object was created.')
+            return Spectrum(name, *Spectrum.stub)
         else:
             nm = np.arange(start, end+1, resolution, dtype='uint16')
             br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
