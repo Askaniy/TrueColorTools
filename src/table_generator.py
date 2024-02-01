@@ -1,7 +1,7 @@
 """ Provides a table generation function, generate_table(). """
 
 from PIL import Image, ImageDraw, ImageFont
-from math import ceil, sqrt
+from math import floor, ceil, sqrt
 import src.data_import as di
 import src.data_processing as dp
 import src.color_processing as cp
@@ -36,10 +36,18 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     w_border = 8 # pixels of left and right spaces
     h_border = 16 # pixels of top and bottom spaces
 
+    # Selecting the number of columns so that the bottom row is as full as possible
+    col_num = sqrt(1.5*l) # strives for a 3:2 aspect ratio
+    col_num_option1 = floor(col_num)
+    fullness_option1 = l%col_num_option1 / col_num_option1
+    col_num_option2 = ceil(col_num)
+    fullness_option2 = l%col_num_option2 / col_num_option2
+    col_num = (col_num_option1, col_num_option2)[bool(fullness_option1 < fullness_option2)]
+
     # Calculating grid widths
     min_obj_to_scale = 6
-    objects_per_raw = min(max(l, min_obj_to_scale), ceil(sqrt(1.5*l))) # strives for a 3:2 aspect ratio
-    w_table = 2*half_square*objects_per_raw
+    objects_per_row = min(max(l, min_obj_to_scale), col_num) 
+    w_table = 2*half_square*objects_per_row
     w = 2*w_border + w_table # image width
     w0 = w_border + half_square - r # using shift width
     w1 = int(w * 0.618034) # golden ratio for the info column
@@ -62,7 +70,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
 
     # Calculating grid hights
     h0 = h_border + name_size
-    h1 = h0 + 2*half_square * int(ceil(l / objects_per_raw)) + note_step
+    h1 = h0 + 2*half_square * int(ceil(l / objects_per_row)) + note_step
     h2 = h1 + help_step
     h = h1 + help_step + notes_per_column*note_step + h_border # image hight
 
@@ -101,10 +109,10 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     
     # Table generator
     n = 0 # object counter
-    for name, raw_name in objects.items():
+    for name, row_name in objects.items():
 
         # Spectral data import and processing
-        body = dp.database_parser(name, objectsDB[raw_name])
+        body = dp.database_parser(name, objectsDB[row_name])
         albedo = brMode and isinstance(body, dp.ReflectiveBody)
 
         # Setting brightness mode
@@ -129,8 +137,8 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
         text_color = (0, 0, 0) if rgb.mean() >= 127 else (255, 255, 255)
 
         # Canvas drawing
-        center_x = w_border + half_square + 2*half_square * (n%objects_per_raw)
-        center_y = h0 + half_square + 2*half_square * int(n/objects_per_raw)
+        center_x = w_border + half_square + 2*half_square * (n%objects_per_row)
+        center_y = h0 + half_square + 2*half_square * int(n/objects_per_row)
         #draw.rounded_rectangle((center_x-r, center_y-r, center_x+r, center_y+r), rounding_radius, rgb_show)
         draw_rounded_square((center_x, center_y), r, rounding_radius, rgb_show, img, 4)
 
