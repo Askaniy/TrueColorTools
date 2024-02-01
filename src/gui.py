@@ -84,9 +84,9 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
     def frame(num: int, filtersDB: tuple, lang: str):
         n = str(num)
         try:
-            bgr_text = sg.Text(tr.gui_BGRcolors[lang][num], key='T2_bgrText'+n)
+            rgb_text = sg.Text(tr.gui_RGBcolors[lang][num], key='T2_rgbText'+n)
         except IndexError:
-            bgr_text = sg.Text('', key='T2_bgrText'+n)
+            rgb_text = sg.Text('', key='T2_rgbText'+n)
         l = [
             [
                 sg.Text(tr.gui_filter[lang], key='T2_filterText'+n),
@@ -97,7 +97,7 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
                 # size=1 is VERY important! Now column depends on max length of filter file names
                 sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, key='T2_pathText'+n, visible=False),
                 # or label of RGB image bands, depends on radio box
-                bgr_text
+                rgb_text
             ]
         ]
         return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, key='T2_band'+n)
@@ -115,7 +115,7 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
             sg.Input(enable_events=True, size=1, key='T2_path', expand_x=True, visible=False),
             sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, key='T2_pathText', visible=False),
         ],
-        [sg.Column(T2_frames, scrollable=True, vertical_scroll_only=True, key='T2_frames', expand_y=True)]
+        [sg.Column(T2_frames, scrollable=True, vertical_scroll_only=True, key='T2_frames', expand_x=True, expand_y=True)]
     ]
     T2_col2 = [
         [sg.Text('The tab is temporarily not working!', font=title_font, text_color='red')],
@@ -230,9 +230,9 @@ def translate(window: sg.Window, T2_vis: int, lang: str):
     window['-typeImage-'].update(text=tr.gui_datatype[lang][0])
     window['-typeImageRGB-'].update(text=tr.gui_datatype[lang][1])
     window['-typeImageCube-'].update(text=tr.gui_datatype[lang][2])
-    window['T2_bgrText0'].update(tr.gui_BGRcolors[lang][0])
-    window['T2_bgrText1'].update(tr.gui_BGRcolors[lang][1])
-    window['T2_bgrText2'].update(tr.gui_BGRcolors[lang][2])
+    window['T2_rgbText0'].update(tr.gui_RGBcolors[lang][0])
+    window['T2_rgbText1'].update(tr.gui_RGBcolors[lang][1])
+    window['T2_rgbText2'].update(tr.gui_RGBcolors[lang][2])
     window['T2_step2'].update(tr.gui_step2[lang])
     window['T2_pathText'].update(tr.gui_browse[lang])
     for i in range(T2_vis):

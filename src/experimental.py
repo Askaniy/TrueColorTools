@@ -43,7 +43,7 @@ def intensity2mag(e):
 
 
 
-# Legacy core.py multiresolution spectrum processing
+# Legacy data_core.py multiresolution spectrum processing
 # Code of summer 2023. Simplified in November 2023.
 
 resolutions = (5, 10, 20, 40, 80, 160) # nm

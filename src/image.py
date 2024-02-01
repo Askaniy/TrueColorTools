@@ -3,7 +3,9 @@ from time import monotonic, monotonic_ns, strftime
 from PIL import Image, ImageDraw
 import numpy as np
 import PySimpleGUI as sg
-import src.core as core
+import src.data_core as dc
+import src.data_processing as dp
+import src.color_processing as cp
 
 # This file needs revision
 
@@ -116,16 +118,16 @@ def image_processing(input_data: dict):
                 name = f'({x}; {y})'
 
                 temp_time = monotonic_ns() # Spectral data processing
-                spectrum = core.Spectrum(name, input_data['nm'], list(slice), scope=core.visible_range)
+                spectrum = dc.Spectrum(name, input_data['nm'], list(slice), scope=dp.visible_range)
                 if input_data['desun']:
-                    spectrum /= core.sun_norm
+                    spectrum /= dp.sun_norm
                 calc_spectrum_time += monotonic_ns() - temp_time
 
                 temp_time = monotonic_ns() # Color calculation
                 if input_data['srgb']:
-                    color = core.Color.from_spectrum_CIE(spectrum, albedo=True)
+                    color = cp.Color.from_spectrum_CIE(spectrum, albedo=True)
                 else:
-                    color = core.Color.from_spectrum(spectrum, albedo=True)
+                    color = cp.Color.from_spectrum(spectrum, albedo=True)
                 if input_data['gamma']:
                     color = color.gamma_corrected()
                 rgb = tuple(color.to_bit(8).round().astype(int))

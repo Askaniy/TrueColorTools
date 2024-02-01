@@ -3,7 +3,7 @@
 import PySimpleGUI as sg
 from sigfig import round as sigfig_round
 import src.gui as gui
-from src.core import Spectrum, get_filter
+from src.data_core import Spectrum, get_filter
 import src.data_import as di
 import src.data_processing as dp
 import src.color_processing as cp
@@ -181,11 +181,11 @@ def launch_window(lang: str):
                     # Setting brightness mode
                     match brMode:
                         case 0:
-                            T1_spectrum, _ = T1_body.get_spectrum('chromaticity')
+                            T1_spectrum, T1_estimated = T1_body.get_spectrum('chromaticity')
                         case 1:
-                            T1_spectrum, _ = T1_body.get_spectrum('geometric')
+                            T1_spectrum, T1_estimated = T1_body.get_spectrum('geometric')
                         case 2:
-                            T1_spectrum, _ = T1_body.get_spectrum('spherical')
+                            T1_spectrum, T1_estimated = T1_body.get_spectrum('spherical')
 
                     # Color calculation
                     if values['-srgb-']:
@@ -198,8 +198,10 @@ def launch_window(lang: str):
 
                     # Output
                     T1_export += f'\n{export_colors(T1_rgb)}\t{name}'
+                    if T1_estimated:
+                        T1_export += f'; {tr.gui_estimated[lang]}'
 
-                sg.popup_scrolled(T1_export, title=tr.gui_results[lang], size=(72, 32), font=('Consolas', 10))
+                sg.popup_scrolled(T1_export, title=tr.gui_results[lang], size=(120, 40), font=('Consolas', 10))
             
             elif event == 'T1_folder':
                 generate_table(objectsDB, values['T1_tags'], brMode, values['-srgb-'], values['-gamma-'], values['T1_folder'], 'png', lang)
@@ -212,24 +214,26 @@ def launch_window(lang: str):
             T2_mode = get_flag_index((values['-typeImage-'], values['-typeImageRGB-'], values['-typeImageCube-']))
 
             # Setting template for the bandpass frames list
-            match T2_mode:
-                case 0: # Multiband image
-                    T2_vis = T2_num
-                case 1: # RGB image
-                    T2_vis = 3
-                case 2: # Spectral cube
-                    T2_vis = 0
-            for i in range(T2_num):
-                if i < T2_vis:
-                    window[f'T2_band{i}'].update(visible=True)
-                    window[f'T2_path{i}'].update(visible=values['-typeImage-'])
-                    window[f'T2_pathText{i}'].update(visible=values['-typeImage-'])
-                    window[f'T2_bgrText{i}'].update(visible=values['-typeImageRGB-'])
-                else:
-                    window[f'T2_band{i}'].update(visible=False)
+            if T2_mode == 2: # Spectral cube
+                window['T2_frames'].update(visible=False)
+            else:
+                window['T2_frames'].update(visible=True)
+                match T2_mode:
+                    case 0: # Multiband image
+                        T2_vis = T2_num
+                    case 1: # RGB image
+                        T2_vis = 3
+                for i in range(T2_num):
+                    if i < T2_vis:
+                        window[f'T2_band{i}'].update(visible=True)
+                        window[f'T2_path{i}'].update(visible=values['-typeImage-'])
+                        window[f'T2_pathText{i}'].update(visible=values['-typeImage-'])
+                        window[f'T2_rgbText{i}'].update(visible=values['-typeImageRGB-'])
+                    else:
+                        window[f'T2_band{i}'].update(visible=False)
             
             # Setting single file choice
-            T2_single_file_flag = values['-typeImageRGB-'] or values['-typeImageCube-']
+            T2_single_file_flag = T2_mode > 0
             window['T2_step2'].update(visible=not T2_single_file_flag)
             window['T2_path'].update(visible=T2_single_file_flag)
             window['T2_pathText'].update(visible=T2_single_file_flag)
@@ -245,7 +249,7 @@ def launch_window(lang: str):
                     T2_filter = get_filter(T2_filter_name)
                     T2_plot_data.append(T2_filter)
             try:
-                T2_fig.clf()
+                pl.close_figure(T2_fig)
                 T2_fig = pl.plot_filters(T2_plot_data, lang)
             except UnboundLocalError: # means it's the first tab loading
                 T2_fig = pl.plot_filters(T2_plot_data, lang)

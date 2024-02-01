@@ -4,7 +4,7 @@ from typing import Sequence
 from traceback import format_exc
 from copy import deepcopy
 import numpy as np
-from src.core import Spectrum, Photometry, get_filter, nm_red_limit, resolution
+from src.data_core import Spectrum, Photometry, get_filter, nm_red_limit, resolution
 import src.data_import as di
 
 

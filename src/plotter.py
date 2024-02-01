@@ -2,9 +2,10 @@
 
 from typing import Sequence
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 import PySimpleGUI as sg
-from src.core import Spectrum
+from src.data_core import Spectrum
 import src.color_processing as cp
 import src.strings as tr
 import src.gui as gui
@@ -20,7 +21,12 @@ plt.rcParams |= {
 
 rgb_muted = ('#904040', '#3c783c', '#5050e0')
 
-def draw_figure(canvas, figure):
+def close_figure(figure: Figure):
+    """ Removes the figure from memory """
+    plt.close(figure)
+
+def draw_figure(canvas, figure: Figure):
+    """ Places the figure on the canvas that can be displayed """
     figure_canvas_agg = FigureCanvasTkAgg(figure, canvas)
     figure_canvas_agg.draw()
     figure_canvas_agg.get_tk_widget().pack(side='top', fill='both', expand=1)

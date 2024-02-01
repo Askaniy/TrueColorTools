@@ -6,7 +6,7 @@ Needs improvement, see https://github.com/Askaniy/TrueColorTools/issues/22
 from typing import Sequence
 from copy import deepcopy
 import numpy as np
-from src.core import Spectrum
+from src.data_core import Spectrum
 
 
 def xy2xyz(xy):

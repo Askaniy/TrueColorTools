@@ -1,3 +1,5 @@
+""" Responsible for converting measurement data into a working form. """
+
 from typing import Sequence
 from pathlib import Path
 from traceback import format_exc

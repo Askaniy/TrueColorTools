@@ -216,9 +216,9 @@ gui_step1 = {
 gui_datatype = {
     'en': ['Multiband image', 'RGB image', 'Spectral cube'],
     'ru': ['Многоканальное изображение', 'RGB изображение', 'Спектральный куб'],
-    'de': ['Multiband Aufnahme', 'RGB-Bild', 'Spektraler Würfel']
+    'de': ['Multiband Aufnahme', 'RGB-Bild', 'Spektralwürfel']
 }
-gui_BGRcolors = {
+gui_RGBcolors = {
     'en': ['(Blue channel)', '(Green channel)', '(Red channel)'],
     'ru': ['(Синий канал)', '(Зелёный канал)', '(Красный канал)'],
     'de': ['(Blauer Kanal)', '(Grüner Kanal)', '(Roter Kanal)'],
@@ -251,7 +251,7 @@ gui_brightness = {
 gui_desun = {
     'en': 'Remove Sun as emitter',
     'ru': 'Убрать отражённый спектр Солнца',
-    'de': 'Entfernen Sie die Sonne als Emitter'
+    'de': 'Sonne als Emitter entfernen'
 }
 gui_devega = {
     'en': 'Untie from the white standard according to Vega',
@@ -261,7 +261,7 @@ gui_devega = {
 gui_makebright = {
     'en': 'Maximize brightness',
     'ru': 'Максимизировать яркость',
-    'de': 'Maximieren Sie die Helligkeit'
+    'de': 'Helligkeit maximieren'
 }
 #gui_autoalign = {
 #    'en': 'Align image bands (β)',
@@ -276,7 +276,7 @@ gui_preview = {
 gui_process = {
     'en': 'Start processing',
     'ru': 'Обработать',
-    'de': 'Bild erzeugen'
+    'de': 'Bild generieren'
 }
 
 
