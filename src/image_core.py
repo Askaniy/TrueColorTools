@@ -10,6 +10,7 @@ from traceback import format_exc
 from itertools import product
 import numpy as np
 import src.data_core as dc
+import image_import as ii
 
 
 def interpolating(nm0: Sequence, br0: np.ndarray, nm1: Sequence, step: int|float):
@@ -38,7 +39,7 @@ class SpectralCube:
     def __init__(self, name: str, nm: Sequence, br: np.ndarray, sd: np.ndarray = None, photometry: dc.Photometry = None):
         """
         It is assumed that the input wavelength grid can be trusted. If preprocessing is needed, see `SpectralCube.from_array`.
-        `br` and `sd` have the following index order: [wavelength layer, X pixel coordinate, Y pixel coordinate]
+        `br` and `sd` have the following index order: [Spectral axis, X axis, Y axis]
 
         Args:
         - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
@@ -63,7 +64,7 @@ class SpectralCube:
     def from_array(name: str, nm: Sequence, br: np.ndarray, sd: np.ndarray = None):
         """
         Creates a SpectralCube object from a 3D array with a check for wavelength uniformity and possible extrapolation.
-        The 3D array has the following index order: [wavelength layer, X pixel coordinate, Y pixel coordinate]
+        The 3D array has the following index order: [Spectral axis, X axis, Y axis]
 
         Args:
         - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
@@ -108,3 +109,8 @@ class SpectralCube:
             print(f'- Something unexpected happened while trying to create the object from array. It was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0).strip()}')
         return SpectralCube(name, nm, br, sd)
+    
+    @staticmethod
+    def from_file(name: str, file: str):
+        """ Creates a SpectralCube object based on loaded data from the specified file """
+        return SpectralCube.from_array(name, *ii.cube_reader(file))

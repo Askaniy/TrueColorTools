@@ -10,6 +10,10 @@ import astropy.units as u
 import numpy as np
 import src.strings as tr
 
+# Disabling warnings about supplier non-compliance with FITS unit storage standards
+from warnings import filterwarnings
+filterwarnings(action='ignore', category=u.UnitsWarning, append=True)
+
 
 # Units of spectral flux density by wavelength and frequency
 flam = u.def_unit('FLAM', (u.erg / u.s) / (u.cm**2 * u.AA))
