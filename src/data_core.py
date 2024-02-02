@@ -34,7 +34,7 @@ def is_smooth(br: Sequence):
     diff2 = np.diff(np.diff(br))
     return np.all(diff2 <= 0) | np.all(diff2 >= 0)
 
-def averaging(x0: np.ndarray, y0: np.ndarray, x1: np.ndarray, step: int|float):
+def averaging(x0: Sequence, y0: np.ndarray, x1: Sequence, step: int|float):
     """ Returns spectrum brightness values with decreased resolution """
     semistep = step * 0.5
     y1 = [np.mean(y0[np.where(x0 < x1[0]+semistep)])]
@@ -65,7 +65,7 @@ def custom_interp(xy0: np.ndarray, k=16):
     xy1[1,1::2] += (delta_left - delta_right) / k
     return xy1
 
-def interpolating(x0: np.ndarray, y0: np.ndarray, x1: np.ndarray, step: int|float) -> np.ndarray:
+def interpolating(x0: Sequence, y0: np.ndarray, x1: Sequence, step: int|float) -> np.ndarray:
     """
     Returns interpolated brightness values on uniform grid.
     Combination of custom_interp (which returns an uneven mesh) and linear interpolation after it.
@@ -152,7 +152,7 @@ class Spectrum:
         - `nm` (Sequence): list of wavelengths in nanometers with resolution step of 5 nm
         - `br` (Sequence): same-size list of "brightness", flux in units of energy (not a photon counter)
         - `sd` (Sequence, optional): same-size list of standard deviations
-        - `photometry` (Photometry, optional): way to store original information, for example, to plot it
+        - `photometry` (Photometry, optional): way to store information about the passbands used, for example, to plot it
         """
         self.name = name
         self.nm = np.array(nm, dtype='uint16')
@@ -175,7 +175,7 @@ class Spectrum:
 
         Args:
         - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
-        - `nm` (Sequence): list of wavelengths, any grid
+        - `nm` (Sequence): list of wavelengths, arbitrary grid
         - `br` (Sequence): same-size list of "brightness", flux in units of energy (not a photon counter)
         - `sd` (Sequence): same-size list of standard deviations
         """
@@ -189,9 +189,9 @@ class Spectrum:
             sd = None
         try:
             nm = np.array(nm) # numpy decides int or float
-            br = np.array(br, dtype='float')
+            br = np.array(br, dtype='float64')
             if sd is not None:
-                sd = np.array(sd, dtype='float')
+                sd = np.array(sd, dtype='float64')
             if nm[-1] > nm_red_limit:
                 flag = np.where(nm < nm_red_limit + resolution) # with reserve to be averaged
                 nm = nm[flag]
