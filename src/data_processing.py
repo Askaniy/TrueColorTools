@@ -4,7 +4,8 @@ from typing import Sequence
 from traceback import format_exc
 from copy import deepcopy
 import numpy as np
-from src.data_core import Spectrum, Photometry, get_filter, nm_red_limit, resolution
+from src.data_core import Spectrum, Photometry, get_filter
+import src.auxiliary as aux
 import src.data_import as di
 
 
@@ -20,7 +21,7 @@ vega_SI = Spectrum.from_file('Vega', 'spectra/files/CALSPEC/alpha_lyr_stis_011.f
 vega_in_V = vega_SI @ get_filter('Generic_Bessell.V')
 vega_norm = vega_SI.scaled_at('Generic_Bessell.V')
 
-lambdas = np.arange(5, nm_red_limit+1, 5)
+lambdas = np.arange(5, aux.nm_red_limit+1, 5)
 equal_frequency_density = Spectrum('AB', lambdas, 1/lambdas**2).scaled_at('Generic_Bessell.V') # f_lambda=f_nu*c/lambda^2
 del lambdas
 
@@ -265,7 +266,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
             nm = np.arange(nm_range['start'], nm_range['stop']+1, nm_range['step'])
         elif 'slope' in content:
             slope = content['slope']
-            nm = np.arange(slope['start'], slope['stop']+1, resolution)
+            nm = np.arange(slope['start'], slope['stop']+1, aux.resolution)
             br = (nm / nm[0])**slope['power']
         # Photometry reading
         elif 'filters' in content:

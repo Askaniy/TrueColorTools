@@ -8,8 +8,10 @@ Describes the main image data storage classes and related functions.
 from typing import Sequence
 from traceback import format_exc
 from itertools import product
+from math import sqrt, ceil
 import numpy as np
-import src.data_core as dc
+from src.data_core import Photometry
+import src.auxiliary as aux
 import image_import as ii
 
 
@@ -18,7 +20,7 @@ def interpolating(nm0: Sequence, br0: np.ndarray, nm1: Sequence, step: int|float
     l, x, y = br0.shape
     br1 = np.zeros((len(nm1), x, y), br0.dtype)
     for i, j in product(range(x), range(y)):
-        br1[:, i, j] = dc.interpolating(nm0, br0[:, i, j], nm1, step)
+        br1[:, i, j] = aux.interpolating(nm0, br0[:, i, j], nm1, step)
     return br1
 
 def averaging(nm0: Sequence, br0: np.ndarray, nm1: Sequence, step: int|float):
@@ -26,7 +28,7 @@ def averaging(nm0: Sequence, br0: np.ndarray, nm1: Sequence, step: int|float):
     l, x, y = br0.shape
     br1 = np.zeros((len(nm1), x, y), br0.dtype)
     for i, j in product(range(x), range(y)):
-        br1[:, i, j] = dc.averaging(nm0, br0[:, i, j], nm1, step)
+        br1[:, i, j] = aux.averaging(nm0, br0[:, i, j], nm1, step)
     return br1
 
 
@@ -36,7 +38,7 @@ class SpectralCube:
     # Initializes an object in case of input data problems
     stub = (np.array([555]), np.zeros((1, 1, 1)), None)
 
-    def __init__(self, name: str, nm: Sequence, br: np.ndarray, sd: np.ndarray = None, photometry: dc.Photometry = None):
+    def __init__(self, name: str, nm: Sequence, br: np.ndarray, sd: np.ndarray = None, photometry: Photometry = None):
         """
         It is assumed that the input wavelength grid can be trusted. If preprocessing is needed, see `SpectralCube.from_array`.
         `br` and `sd` have the following index order: [Spectral axis, X axis, Y axis]
@@ -85,19 +87,19 @@ class SpectralCube:
             br = np.array(br, dtype='float64')
             if sd is not None:
                 sd = np.array(sd, dtype='float64')
-            if nm[-1] > dc.nm_red_limit:
-                flag = np.where(nm < dc.nm_red_limit + dc.resolution) # with reserve to be averaged
+            if nm[-1] > aux.nm_red_limit:
+                flag = np.where(nm < aux.nm_red_limit + aux.resolution) # with reserve to be averaged
                 nm = nm[flag]
                 br = br[flag,:,:]
                 if sd is not None:
                     sd = sd[flag,:,:]
-            if np.any((diff := np.diff(nm)) != dc.resolution): # if not uniform 5 nm grid
+            if np.any((diff := np.diff(nm)) != aux.resolution): # if not uniform 5 nm grid
                 sd = None # standard deviations is undefined then. TODO: process somehow
-                uniform_nm = dc.grid(nm[0], nm[-1], dc.resolution)
-                if diff.mean() >= dc.resolution: # interpolation, increasing resolution
-                    br = interpolating(nm, br, uniform_nm, dc.resolution)
+                uniform_nm = aux.grid(nm[0], nm[-1], aux.resolution)
+                if diff.mean() >= aux.resolution: # interpolation, increasing resolution
+                    br = interpolating(nm, br, uniform_nm, aux.resolution)
                 else: # decreasing resolution if step less than 5 nm
-                    br = averaging(nm, br, uniform_nm, dc.resolution)
+                    br = averaging(nm, br, uniform_nm, aux.resolution)
                 nm = uniform_nm
             if br.min() < 0:
                 br = np.clip(br, 0, None)
@@ -111,6 +113,17 @@ class SpectralCube:
         return SpectralCube(name, nm, br, sd)
     
     @staticmethod
-    def from_file(name: str, file: str):
+    def from_file(name: str, file: str, pixels_number: int = None):
         """ Creates a SpectralCube object based on loaded data from the specified file """
-        return SpectralCube.from_array(name, *ii.cube_reader(file))
+        return SpectralCube(name, *ii.cube_reader(file, pixels_number))
+    
+    def downscale(self, pixels_number: int):
+        """ Brings the spatial resolution of the cube to approximately match the number of pixels """
+        # TODO: averaging like in https://stackoverflow.com/questions/10685654/reduce-resolution-of-array-through-summation
+        l, x, y = self.br.shape
+        factor = ceil(sqrt(x * y / pixels_number))
+        br = self.br[:,::factor,::factor]
+        sd = None
+        if self.sd is not None:
+            sd = self.sd[:,::factor,::factor]
+        return SpectralCube(self.name, self.nm, br, sd)

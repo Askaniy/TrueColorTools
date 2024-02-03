@@ -2,18 +2,47 @@
 
 import numpy as np
 import astropy.units as u
+from astropy.convolution import Gaussian1DKernel
 from spectral_cube import SpectralCube
-from spectral_cube.utils import WCSWarning
+from spectral_cube.utils import WCSWarning, ExperimentalImplementationWarning
+import src.auxiliary as aux
 
-# Disabling warnings about supplier non-compliance with FITS unit storage standards
+# Disabling warnings about supplier non-compliance with FITS unit storage standards and spectral-cube warnings
 from warnings import filterwarnings
-filterwarnings(action='ignore', category=WCSWarning, append=True)
 filterwarnings(action='ignore', category=u.UnitsWarning, append=True)
+filterwarnings(action='ignore', category=ExperimentalImplementationWarning, append=True)
+filterwarnings(action='ignore', category=WCSWarning, append=True)
 
 
+# cache?
 def cube_reader(file: str) -> tuple[np.ndarray, np.ndarray]:
-    """ Imports spectral cube from a FITS file """
-    cube = SpectralCube.read(file, hdu=1)
-    nm = np.array(cube.spectral_axis.to(u.nm))
-    br = np.array(cube) # [s, y, x]?
-    return nm, br
+    """ Imports a spectral cube from the FITS file, down scaling the spectral and spatial resolutions to the specified ones. """
+    # See https://gist.github.com/keflavich/37a2705fb4add9a2491caf2dfa195efd
+
+    cube = SpectralCube.read(file, hdu=1).with_spectral_unit(u.nm)
+    print(cube) # general info
+
+    # Getting target wavelength range
+    nm = aux.grid(*cube.spectral_extrema.value, aux.resolution)
+    flag = np.where(nm < aux.nm_red_limit + aux.resolution) # with reserve to be averaged
+    nm = nm[flag]
+
+    # Spectral smoothing and down scaling
+    current_resolution = aux.get_resolution(cube.spectral_axis.value)
+    sd = aux.gaussian_width(current_resolution, aux.resolution)
+    print('Beginning spectral smoothing')
+    cube = cube.spectral_smooth(Gaussian1DKernel(sd)) # parallel execution doesn't work
+    print('Beginning spectral down scaling')
+    cube = cube.spectral_interpolate(nm * u.nm, suppress_smooth_warning=True)
+    print() # workaround "enter" for interpolation progress bar
+
+    # Spatial smoothing and down scaling
+    # Replaced by image_core.SpectralCube.downscale()
+    #if isinstance(pixels_number, int):
+    #    smooth_factor = int(cube.shape[1] * cube.shape[2] / pixels_number)
+    #    print('Beginning spatial smoothing')
+    #    cube = cube.spatial_smooth(Gaussian2DKernel(smooth_factor))
+    #    print('Beginning spatial down scaling')
+    #    cube = cube[:,::smooth_factor,::smooth_factor]
+    
+    return nm, np.array(cube).transpose((0, 2, 1))

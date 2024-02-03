@@ -2,7 +2,7 @@
 
 from PIL import Image, ImageDraw, ImageFont
 from math import floor, ceil, sqrt
-import src.data_import as di
+import src.auxiliary as aux
 import src.data_processing as dp
 import src.color_processing as cp
 import src.strings as tr
@@ -10,7 +10,7 @@ import src.strings as tr
 
 def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: bool, folder: str, extension: str, lang: str):
     """ Creates and saves a table of colored squares for each spectral data unit that has the specified tag """
-    objects = di.obj_dict(objectsDB, tag, lang)
+    objects = aux.obj_dict(objectsDB, tag, lang)
     l = len(objects)
 
     # Load fonts
@@ -59,7 +59,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
 
     # Notes calculations
     notes_per_column = 4 # number of info lines
-    notes = di.notes_list(objects.keys()) # not in the main cycle because may influence on the template
+    notes = aux.notes_list(objects.keys()) # not in the main cycle because may influence on the template
     notes_flag = bool(notes)
     if notes_flag:
         notes_numbered = [f'{superscript(note_num+1)} {note}' for note_num, note in enumerate(notes)]

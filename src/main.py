@@ -4,9 +4,11 @@ import PySimpleGUI as sg
 from sigfig import round as sigfig_round
 import src.gui as gui
 from src.data_core import Spectrum, get_filter
+import src.auxiliary as aux
 import src.data_import as di
 import src.data_processing as dp
 import src.color_processing as cp
+import src.image_core as ic
 import src.image_processing as ip
 from src.table_generator import generate_table
 import src.plotter as pl
@@ -65,7 +67,7 @@ def launch_window(lang: str):
             break
         # Radio selection
         elif event.startswith('-brMode'):
-            brMode = get_flag_index((values['-brMode0-'], values['-brMode1-'], values['-brMode2-']))
+            brMode = aux.get_flag_index((values['-brMode0-'], values['-brMode1-'], values['-brMode2-']))
         # Checks for empty input
         elif event == '-bitness-':
             try:
@@ -94,7 +96,7 @@ def launch_window(lang: str):
                     lang = lng
                     break
             window = gui.translate(window, T2_vis, lang)
-            window['T1_list'].update(values=tuple(di.obj_dict(objectsDB, values['T1_tags'], lang).keys()))
+            window['T1_list'].update(values=tuple(aux.obj_dict(objectsDB, values['T1_tags'], lang).keys()))
         
         elif event == tr.gui_ref[lang]:
             to_show = ''
@@ -110,10 +112,10 @@ def launch_window(lang: str):
         
         elif event == 'T1_database': # global loading of spectra database, was needed for separate Table tab
             objectsDB, refsDB = di.import_DBs(['spectra', 'spectra_extras'])
-            tagsDB = di.tag_list(objectsDB)
+            tagsDB = aux.tag_list(objectsDB)
             window['T1_tagsN'].update(visible=True)
             window['T1_tags'].update(default_tag, values=tagsDB, visible=True)
-            window['T1_list'].update(values=tuple(di.obj_dict(objectsDB, default_tag, lang).keys()), visible=True)
+            window['T1_list'].update(values=tuple(aux.obj_dict(objectsDB, default_tag, lang).keys()), visible=True)
             window['T1_database'].update(tr.gui_update[lang])
             window['T1_database'].metadata=True # switcher from "Load" to "Update"
 
@@ -123,7 +125,7 @@ def launch_window(lang: str):
 
             if (event in triggers or event == 'T1_list' or event == 'T1_filter') and values['T1_list'] != []:
                 T1_name = values['T1_list'][0]
-                T1_raw_name = di.obj_dict(objectsDB, '_all_', lang)[T1_name]
+                T1_raw_name = aux.obj_dict(objectsDB, '_all_', lang)[T1_name]
 
                 # Spectral data import and processing
                 T1_body = dp.database_parser(T1_name, objectsDB[T1_raw_name])
@@ -161,7 +163,7 @@ def launch_window(lang: str):
                 window['T1_convolved'].update(sigfig_round(T1_spectrum.to_scope(T1_filter.nm)@T1_filter, rounding, warn=False))
             
             elif event == 'T1_tags':
-                window['T1_list'].update(tuple(di.obj_dict(objectsDB, values['T1_tags'], lang).keys()))
+                window['T1_list'].update(tuple(aux.obj_dict(objectsDB, values['T1_tags'], lang).keys()))
             
             elif event == 'T1_add' and values['T1_list'] != []:
                 plot_data.append(T1_spectrum)
@@ -175,7 +177,7 @@ def launch_window(lang: str):
             elif event == 'T1_export2text':
                 T1_export = '\n' + '\t'.join(tr.gui_col[lang]) + '\n' + '_' * 36
                 
-                for name, raw_name in di.obj_dict(objectsDB, values['T1_tags'], lang).items():
+                for name, raw_name in aux.obj_dict(objectsDB, values['T1_tags'], lang).items():
                     T1_body = dp.database_parser(name, objectsDB[raw_name])
                     T1_albedo = brMode and isinstance(T1_body, dp.ReflectiveBody)
                 
@@ -198,7 +200,7 @@ def launch_window(lang: str):
                     T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
 
                     # Output
-                    T1_export += f'\n{export_colors(T1_rgb)}\t{name}'
+                    T1_export += f'\n{aux.export_colors(T1_rgb)}\t{name}'
                     if T1_estimated:
                         T1_export += f'; {tr.gui_estimated[lang]}'
 
@@ -212,7 +214,7 @@ def launch_window(lang: str):
         elif values['-currentTab-'] == 'tab2':
 
             # Getting input data mode name
-            T2_mode = get_flag_index((values['-typeImage-'], values['-typeImageRGB-'], values['-typeImageCube-']))
+            T2_mode = aux.get_flag_index((values['-typeImage-'], values['-typeImageRGB-'], values['-typeImageCube-']))
 
             # Setting template for the bandpass frames list
             if T2_mode == 2: # Spectral cube
@@ -270,11 +272,12 @@ def launch_window(lang: str):
                     pass
                 # Spectral cube
                 case (3, 'T2_preview'):
-                    T2_cube = ip.spectral_cube_processing(values['T2_path'], resize=img_preview_area)
+                    T2_cube = ic.SpectralCube.from_file(values['T2_path']).downscale(img_preview_area)
                     T2_img = ip.cube2img(T2_cube, values['T2_makebright'])
                     window['T2_image'].update(data=ip.convert_to_bytes(T2_img))
                 case (3, 'T2_process'):
-                    T2_cube = ip.spectral_cube_processing(values['T2_path'])
+                    T2_cube = ic.SpectralCube.from_file(values['T2_path'])
+                    T2_img = ip.cube2img(T2_cube, values['T2_makebright'])
                     ip.save(T2_img, values['T2_folder'])
 
         
@@ -320,22 +323,3 @@ def launch_window(lang: str):
                 window['T3_hex'].update(T3_rgb_show)
 
     window.close()
-
-
-def export_colors(rgb: tuple):
-    """ Generates formatted string of colors """
-    lst = []
-    mx = 0
-    for i in rgb:
-        lst.append(str(i))
-        l = len(lst[-1])
-        if l > mx:
-            mx = l
-    w = 8 if mx < 8 else mx+1
-    return ''.join([i.ljust(w) for i in lst])
-
-def get_flag_index(flags: tuple):
-    """ Returns index of active radio button """
-    for index, flag in enumerate(flags):
-        if flag:
-            return index
