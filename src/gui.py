@@ -90,7 +90,7 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         l = [
             [
                 sg.Text(tr.gui_filter[lang], key='T2_filterText'+n),
-                sg.InputCombo(filtersDB, enable_events=True, expand_x=True, key='T2_filter'+n)
+                sg.InputCombo(('', *filtersDB), enable_events=True, expand_x=True, key='T2_filter'+n)
             ],
             [
                 sg.Input(enable_events=True, size=1, key='T2_path'+n, expand_x=True, visible=False),
@@ -122,7 +122,7 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T2_title2'), sg.Push()],
         [sg.Canvas(key='T2_canvas')],
         [sg.Checkbox(tr.gui_desun[lang], key='T2_desun')],
-        [sg.Checkbox(tr.gui_devega[lang], key='T2_devega')],
+        [sg.Checkbox(tr.gui_devega[lang], key='T2_devega', visible=False)],
         [sg.Checkbox(tr.gui_makebright[lang], key='T2_makebright')],
         #[sg.Checkbox(tr.gui_autoalign[lang], key='T2_autoalign')],
         [sg.T('')],

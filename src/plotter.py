@@ -83,7 +83,7 @@ def plot_spectra(objects: Sequence[Spectrum], gamma, srgb, albedo, lang: str):
 
 def plot_filters(filters: Sequence[Spectrum], lang: str):
     """ Creates a figure with plotted sensitive curves and CMFs """
-    fig, ax = plt.subplots(1, 1, figsize=(5, 1.5), dpi=90)
+    fig, ax = plt.subplots(1, 1, figsize=(5.25, 1.75), dpi=90)
     ax.set_xlabel(tr.xaxis_text[lang])
     # determining the scale for CMFs in the background
     max_y = []

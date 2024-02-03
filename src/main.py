@@ -49,7 +49,8 @@ def launch_window(lang: str):
     T3_preview = window['T3_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
 
     # Setting plots templates
-    plot_data = [] # of the tabs 1 and 3
+    plot_data = [] # for tabs 1 and 3, both at once
+    background_plot = ((cp.r, cp.g, cp.b), (cp.x, cp.y, cp.z)) # for tab 2
     
     # List of settings events that cause color recalculation
     triggers = ('-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-brMode2-', '-bitness-', '-rounding-')
@@ -238,25 +239,43 @@ def launch_window(lang: str):
             window['T2_path'].update(visible=T2_single_file_flag)
             window['T2_pathText'].update(visible=T2_single_file_flag)
             
-            # Updating filters profile plot
-            if values['-srgb-']:
-                T2_plot_data = [cp.x, cp.y, cp.z]
-            else:
-                T2_plot_data = [cp.r, cp.g, cp.b]
-            for i in range(T2_num):
+            # Getting filters and updating filters profile plot
+            T2_filters = []
+            for i in range(T2_vis):
                 T2_filter_name = values['T2_filter'+str(i)]
                 if T2_filter_name != '':
                     T2_filter = get_filter(T2_filter_name)
-                    T2_plot_data.append(T2_filter)
+                    T2_filters.append(T2_filter)
             try:
                 pl.close_figure(T2_fig)
-                T2_fig = pl.plot_filters(T2_plot_data, lang)
-            except UnboundLocalError: # means it's the first tab loading
-                T2_fig = pl.plot_filters(T2_plot_data, lang)
+                T2_fig = pl.plot_filters([*background_plot[values['-srgb-']], *T2_filters], lang)
+            except UnboundLocalError: # means it's the first tab opening
+                T2_fig = pl.plot_filters(background_plot[values['-srgb-']], lang)
                 figure_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
             finally:
                 figure_canvas_agg.get_tk_widget().forget()
                 figure_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
+            
+            # Image processing
+            match (T2_mode, event):
+                # Multiband image
+                case (1, 'T2_preview'):
+                    pass
+                case (1, 'T2_process'):
+                    pass
+                # RGB image
+                case (2, 'T2_preview'):
+                    pass
+                case (2, 'T2_process'):
+                    pass
+                # Spectral cube
+                case (3, 'T2_preview'):
+                    T2_cube = ip.spectral_cube_processing(values['T2_path'], resize=img_preview_area)
+                    T2_img = ip.cube2img(T2_cube, values['T2_makebright'])
+                    window['T2_image'].update(data=ip.convert_to_bytes(T2_img))
+                case (3, 'T2_process'):
+                    T2_cube = ip.spectral_cube_processing(values['T2_path'])
+                    ip.save(T2_img, values['T2_folder'])
 
         
         # ------------ Events in the tab "Blackbody & Redshifts" ------------
