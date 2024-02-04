@@ -2511,7 +2511,7 @@
         sun: true
     },
     '(385571) Otrera|MBOSS': {
-        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'Neptune trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.740, 'V-R': 0.420, 'R-I': 0.460},
         calib: 'Vega',
