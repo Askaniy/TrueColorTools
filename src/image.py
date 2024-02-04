@@ -3,6 +3,7 @@ from time import monotonic, monotonic_ns, strftime
 from PIL import Image, ImageDraw
 import numpy as np
 import PySimpleGUI as sg
+import src.auxiliary as aux
 import src.data_core as dc
 import src.data_processing as dp
 import src.color_processing as cp
@@ -118,7 +119,7 @@ def image_processing(input_data: dict):
                 name = f'({x}; {y})'
 
                 temp_time = monotonic_ns() # Spectral data processing
-                spectrum = dc.Spectrum(name, input_data['nm'], list(slice), scope=dp.visible_range)
+                spectrum = dc.Spectrum(name, input_data['nm'], list(slice), scope=aux.visible_range)
                 if input_data['desun']:
                     spectrum /= dp.sun_norm
                 calc_spectrum_time += monotonic_ns() - temp_time

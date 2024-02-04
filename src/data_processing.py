@@ -9,10 +9,6 @@ import src.auxiliary as aux
 import src.data_import as di
 
 
-# To calculate color, it is necessary to achieve a definition of the spectrum in the visible range.
-# Boundaries have been defined based on the CMF (color matching functions) used, but can be any.
-visible_range = np.arange(390, 780, 5) # nm
-
 sun_SI = Spectrum.from_file('Sun', 'spectra/files/CALSPEC/sun_reference_stis_002.fits') # W / (m² nm)
 sun_in_V = sun_SI @ get_filter('Generic_Bessell.V')
 sun_norm = sun_SI.scaled_at('Generic_Bessell.V')
@@ -48,7 +44,7 @@ class NonReflectiveBody:
         if mode == 'chromaticity' or 'star' in self.tags:
             return self.spectrum, False # means it's an emitter and we need to render it
         else:
-            return Spectrum(self.name, *Spectrum.stub).to_scope(visible_range), False # means we don't need to render it
+            return Spectrum(self.name, *Spectrum.stub).to_scope(aux.visible_range), False # means we don't need to render it
 
 
 class ReflectiveBody:
@@ -209,7 +205,7 @@ def spectral_data2visible_spectrum(
             pass
     if sun:
         spectral_data /= sun_norm
-    return spectral_data.to_scope(visible_range)
+    return spectral_data.to_scope(aux.visible_range)
 
 def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveBody:
     """
@@ -294,7 +290,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
         else:
             print(f'# Note for the database object "{name}"')
             print(f'- No brightness data. Spectrum stub object was created.')
-            spectrum = Spectrum(name, *Spectrum.stub).to_scope(visible_range)
+            spectrum = Spectrum(name, *Spectrum.stub).to_scope(aux.visible_range)
     else:
         spectrum = spectral_data2visible_spectrum(name, nm, filters, br, sd, calib, sun)
         # Non-specific albedo parsing

@@ -273,6 +273,7 @@ def launch_window(lang: str):
                 # Spectral cube
                 case (3, 'T2_preview'):
                     T2_cube = ic.SpectralCube.from_file(values['T2_path']).downscale(img_preview_area)
+                    T2_cube = T2_cube.to_scope(aux.visible_range)
                     T2_img = ip.cube2img(T2_cube, values['T2_makebright'])
                     window['T2_image'].update(data=ip.convert_to_bytes(T2_img))
                 case (3, 'T2_process'):
@@ -303,7 +304,7 @@ def launch_window(lang: str):
                     window['T3_slider4'].update(disabled=not values['T3_overexposure'])
                 
                 # Spectral data processing
-                T3_spectrum = Spectrum.from_blackbody_redshift(dp.visible_range, values['T3_slider1'], values['T3_slider2'], values['T3_slider3'])
+                T3_spectrum = Spectrum.from_blackbody_redshift(aux.visible_range, values['T3_slider1'], values['T3_slider2'], values['T3_slider3'])
                 if values['T3_overexposure']:
                     T3_spectrum.br /= dp.mag2flux(values['T3_slider4'], dp.vega_in_V) * dp.sun_in_V
 

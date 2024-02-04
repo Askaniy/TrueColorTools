@@ -142,7 +142,7 @@ class Spectrum:
 
     def integrate(self) -> float:
         """ Calculates the area over the spectrum using the mean rectangle method, per nm """
-        return np.sum(aux.resolution * (self.br[:-1] + self.br[1:]) / 2)
+        return aux.integrate(self.br, aux.resolution)
 
     def scaled_by_area(self, factor: int|float = 1):
         """ Returns a new Spectrum object with brightness scaled to its area be equal the scale factor """
@@ -215,7 +215,7 @@ class Spectrum:
             the_second = other.name
             if self.nm[0] > other.nm[0]:
                 the_first, the_second = the_second, the_first
-            print(f'# Note for spectral element-wise operation "{name}"')
+            print(f'# Note for spectral element-wise operation "{name.strip()}"')
             print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
             print('- There is no intersection between the spectra. Spectrum stub object was created.')
             return Spectrum(name, *Spectrum.stub)
@@ -241,7 +241,7 @@ class Spectrum:
 
     def __truediv__(self, other):
         """
-        Returns a new Spectrum object modified by the overloaded multiplication operator.
+        Returns a new Spectrum object modified by the overloaded division operator.
         If the operand is a number, a scaled spectrum is returned.
         If the operand is a Spectrum, an emitter spectrum is removed from the intersection.
         """
