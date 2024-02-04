@@ -1130,7 +1130,7 @@
         calib: 'Vega',
         sun: true
     },
-    '(38083) Rhadamanth|MBOSS': {
+    '(38083) Rhadamanthus|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.650, 'V-R': 0.527, 'R-I': 0.412},
@@ -2440,7 +2440,7 @@
         calib: 'Vega',
         sun: true
     },
-    '(341520) Mors-Somn|MBOSS': {
+    '(341520) Mors-Somnus|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
         system: 'Generic_Bessell',
         indices: {'B-V': 1.290, 'V-R': 0.740, 'R-I': 0.630},
