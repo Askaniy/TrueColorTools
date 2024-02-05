@@ -12,6 +12,8 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     """ Creates and saves a table of colored squares for each spectral data unit that has the specified tag """
     objects = aux.obj_dict(objectsDB, tag, lang)
     l = len(objects)
+    notes = aux.notes_list(objects.keys())
+    notes_flag = bool(notes)
 
     # Load fonts
     name_size = 36
@@ -45,12 +47,23 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     col_num = (col_num_option1, col_num_option2)[bool(fullness_option1 < fullness_option2)]
 
     # Calculating grid widths
-    min_obj_to_scale = 6
-    objects_per_row = min(max(l, min_obj_to_scale), col_num) 
+    min_obj_to_scale = 3 + int(notes_flag) * 2
+    objects_per_row = max(min_obj_to_scale, col_num)
     w_table = 2*half_square*objects_per_row
     w = 2*w_border + w_table # image width
     w0 = w_border + half_square - r # using shift width
-    w1 = int(w * 0.618034) # golden ratio for the info column
+
+    # Placing info column
+    info_list = (
+        f'{tr.info_gamma[lang]}: {tr.info_indicator[lang][gamma]}',
+        f'{tr.info_sRGB[lang]}: {tr.info_indicator[lang][srgb]}',
+        f'{tr.gui_br[lang][0]}: {tr.gui_br[lang][brMode+1]}',
+    )
+    if notes_flag:
+        w1 = int(w * 0.618034) # golden ratio for the info column
+        w1 = min(w1, w-w0-max(width(info_text, note_font) for info_text in [*info_list, tr.link]))
+    else:
+        w1 = w0
 
     # Support for multiline title
     title_lines = line_splitter(tag.join(tr.table_title[lang]), name_font, w_table)
@@ -59,8 +72,6 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
 
     # Notes calculations
     notes_per_column = 4 # number of info lines
-    notes = aux.notes_list(objects.keys()) # not in the main cycle because may influence on the template
-    notes_flag = bool(notes)
     if notes_flag:
         notes_numbered = [f'{superscript(note_num+1)} {note}' for note_num, note in enumerate(notes)]
         w_notes = w0 + max(width(note_text, note_font) for note_text in notes_numbered) # notes columns width
@@ -85,26 +96,19 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     # Notes writing
     if notes_flag:
         draw.text((w0, h1), tr.notes_label[lang], fill=(230, 230, 230), font=help_font, anchor='la') # x = 0.8, br = 230
-        for note_num, note in enumerate(notes): # x = 0.5, br = 186
+        for note_num, note_text in enumerate(notes_numbered): # x = 0.5, br = 186
             draw.text(
                 xy=(w0 + w_notes * (note_num // notes_per_column), h2 + note_step * (note_num % notes_per_column)),
-                text=notes_numbered[note_num], fill=(186, 186, 186), font=note_font, anchor='la'
+                text=note_text, fill=(186, 186, 186), font=note_font, anchor='la'
             )
     
     # Info writing
     draw.text((w1, h1), tr.info_label[lang], fill=(230, 230, 230), font=help_font, anchor='la') # x = 0.8, br = 230
-    draw.text(
-        xy=(w1, h2), text=f'{tr.info_gamma[lang]}: {tr.info_indicator[lang][gamma]}',
-        fill=(224, 224, 224), font=note_font, anchor='la' # x = 0.75, br = 224
-    )
-    draw.text(
-        xy=(w1, h2+note_step), text=f'{tr.info_sRGB[lang]}: {tr.info_indicator[lang][srgb]}',
-        fill=(224, 224, 224), font=note_font, anchor='la' # x = 0.75, br = 224
-    )
-    draw.text(
-        xy=(w1, h2+note_step*2), text=f'{tr.gui_br[lang][0]}: {tr.gui_br[lang][brMode+1]}',
-        fill=(224, 224, 224), font=note_font, anchor='la' # x = 0.75, br = 224
-    )
+    for info_num, info_text in enumerate(info_list):
+        draw.text(
+            xy=(w1, h2+note_step*info_num), text=info_text,
+            fill=(224, 224, 224), font=note_font, anchor='la' # x = 0.75, br = 224
+        )
     draw.text((w1, h2+note_step*3), tr.link, fill=(0, 200, 255), font=note_font, anchor='la')
     
     # Table generator

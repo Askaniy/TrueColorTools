@@ -60,6 +60,10 @@
         '"TNOs are Cool": A survey of the trans-Neptunian region. X. Analysis of classical Kuiper belt objects from Herschel and Spitzer observations',
         'DOI: 10.1051/0004-6361/201322416', 'https://www.aanda.org/articles/aa/full_html/2014/04/aa22416-13/aa22416-13.html', 'https://ui.adsabs.harvard.edu/abs/2014A%26A...564A..35V/abstract'
     ],
+    'Mottola2023': [
+        'Shape Models of Lucy Targets (3548) Eurybates and (21900) Orus from Disk-integrated Photometry',
+        'DOI: 10.3847/PSJ/acaf79', 'https://ui.adsabs.harvard.edu/abs/2023PSJ.....4...18M/abstract'
+    ],
     
     'Li2019': [
         'Spectrophotometric modeling and mapping of Ceres',
@@ -325,6 +329,18 @@
         file: 'spectra/files/SMASS/a000511.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.063],
     },
+    'Chatelain2016': [
+        'Photometric colors of the brightest members of the Jupiter L5 Trojan cloud',
+        'DOI: 10.1016/j.icarus.2016.01.026', 'https://ui.adsabs.harvard.edu/abs/2016Icar..271..158C/abstract'
+    ],
+    '(617) Patroclus-Menoetius|Chatelain2016': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Jupiter trojan', 'Lucy target'],
+        system: 'Generic_Bessell',
+        indices: {'U-B': 0.215, 'B-V': 0.710, 'V-R': 0.420, 'V-I': 0.830},
+        calib: 'Vega',
+        sun: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.047],
+    },
     '(704) Interamnia|SMASS, Vernazza2021': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000704.2.txtU',
@@ -466,12 +482,23 @@
         file: 'spectra/files/SMASS/a003200.8.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.1066], // albedo from JPL Small-Body Database
     },
-    '(3548) Eurybates|MBOSS': {
-        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+    '(3548) Eurybates|MBOSS, Mottola2023': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan', 'Lucy target'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.677, 'V-R': 0.352, 'R-I': 0.339},
         calib: 'Vega',
-        sun: true
+        sun: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.044],
+        spherical_albedo: ['Generic_Bessell.V', 0.0148], // estimated from phase parameters
+    },
+    '(3548) Eurybates|Mottola2023': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Jupiter trojan', 'Lucy target'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.739, 'V-R': 0.384, 'R-I': 0.355},
+        calib: 'Vega',
+        sun: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.044],
+        spherical_albedo: ['Generic_Bessell.V', 0.0148], // estimated from phase parameters
     },
     '(4035) 1986 WD|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
@@ -628,12 +655,22 @@
         calib: 'Vega',
         sun: true
     },
-    '(11351) Leucus|MBOSS': {
-        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+    'Buie2021': [
+        'Size and Shape of (11351) Leucus from Five Occultations',
+        'DOI: 10.3847/PSJ/ac1f9b', 'https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..202B/abstract'
+    ],
+    'Mottola2020': [
+        'Convex Shape and Rotation Model of Lucy Target (11351) Leucus from Lightcurves and Occultations',
+        'DOI: 10.3847/PSJ/abb942', 'https://iopscience.iop.org/article/10.3847/PSJ/abb942'
+    ],
+    '(11351) Leucus|MBOSS, Buie2021, Mottola2020': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan', 'Lucy target'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.739, 'V-R': 0.498, 'R-I': 0.402},
         calib: 'Vega',
-        sun: true
+        sun: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.037],
+        spherical_albedo: ['Generic_Bessell.V', 0.0194], // estimated from Mottola2020 phase parameters
     },
     '(11488) 1988 RM11|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
@@ -677,12 +714,17 @@
         calib: 'Vega',
         sun: true
     },
-    '(15094) Polymele|MBOSS': {
-        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+    'Buie2018': [
+        'Light Curves of Lucy Targets: Leucus and Polymele',
+        'DOI: 10.3847/1538-3881/aabd81', 'https://ui.adsabs.harvard.edu/abs/2018AJ....155..245B/abstract'
+    ],
+    '(15094) Polymele|MBOSS, Buie2018': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan', 'Lucy target'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.652, 'V-R': 0.477, 'R-I': 0.322},
         calib: 'Vega',
-        sun: true
+        sun: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.073],
     },
     '(15502) 1999 NV27|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
@@ -866,6 +908,15 @@
         indices: {'B-V': 0.776, 'V-R': 0.472, 'R-I': 0.467},
         calib: 'Vega',
         sun: true
+    },
+    '(21900) Orus|Mottola2023': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Jupiter trojan', 'Lucy target'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.799, 'V-R': 0.454},
+        calib: 'Vega',
+        sun: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.040],
+        spherical_albedo: ['Generic_Bessell.V', 0.0178], // estimated from phase parameters
     },
     '(23549) Epicles|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
@@ -2105,7 +2156,7 @@
         'DOI: 10.3847/2041-8213/acff61', 'https://iopscience.iop.org/article/10.3847/2041-8213/acff61', 'https://ui.adsabs.harvard.edu/abs/2023ApJ...957L...2M/abstract'
     ],
     '(152830) Dinkinesh|Bolin2023, McFadden2023': {
-        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt'],
+        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'main belt', 'Lucy target'],
         system: 'SLOAN_SDSS',
         indices: {'g-r': 0.67, 'r-i': 0.28, 'i-z': 0.11},
         calib: 'AB',
