@@ -5,7 +5,6 @@ Describes the main image data storage classes and related functions.
 - To work with images made in several passbands, use the PhotometricCube class.
 """
 
-from multiprocessing import Process
 from typing import Sequence, Callable
 from operator import mul, truediv
 from traceback import format_exc
@@ -122,10 +121,6 @@ class SpectralCube:
     @staticmethod
     def from_file(file: str):
         """ Creates a SpectralCube object based on loaded data from the specified file """
-        #process = Process(target=ii.cube_reader, args=(file,))
-        #process.start()
-        #process.join()
-        #return SpectralCube(*process.result)
         return SpectralCube(*ii.cube_reader(file))
     
     def downscale(self, pixels_limit: int):

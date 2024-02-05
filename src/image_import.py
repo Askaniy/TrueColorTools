@@ -18,6 +18,13 @@ filterwarnings(action='ignore')
 #filterwarnings(action='ignore', category=WCSWarning, append=True)
 
 
+def do_nothing():
+    """
+    Workaround the spectral-cube library requirement for the progress bar update function.
+    Progress bar by default (provided by AstroPy) cannot work in a thread.
+    """
+    pass
+
 # cache?
 def cube_reader(file: str) -> tuple[str, np.ndarray, np.ndarray]:
     """ Imports a spectral cube from the FITS file and down scaling spatial resolutions to the specified one. """
@@ -37,8 +44,7 @@ def cube_reader(file: str) -> tuple[str, np.ndarray, np.ndarray]:
     print('Beginning spectral smoothing')
     cube = cube.spectral_smooth(Gaussian1DKernel(sd)) # parallel execution doesn't work
     print('Beginning spectral down scaling')
-    cube = cube.spectral_interpolate(nm * u.nm, suppress_smooth_warning=True)
-    print() # workaround "enter" for interpolation progress bar
+    cube = cube.spectral_interpolate(nm * u.nm, suppress_smooth_warning=True, update_function=do_nothing)
 
     # Spatial smoothing and down scaling
     # Replaced by image_core.SpectralCube.downscale()

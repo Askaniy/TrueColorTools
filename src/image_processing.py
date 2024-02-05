@@ -1,5 +1,6 @@
 """ Processes raw image input into a picture that can be shown and saved. """
 
+from traceback import format_exc
 from io import BytesIO
 from time import strftime
 from PIL import Image
@@ -19,6 +20,7 @@ def image_parser(
     ):
     """ Receives user input and performs processing in a parallel thread """
     preview_flag = save_folder == ''
+    log(window, 'Starting processing')
     try:
         match image_mode:
             # Multiband image
@@ -29,20 +31,22 @@ def image_parser(
                 pass
             # Spectral cube
             case 2:
-                log(window, 'Starting processing')
+                log(window, 'Importing file (it may take a few minutes)')
                 cube = ic.SpectralCube.from_file(single_file)
                 if preview_flag:
+                    log(window, 'Down scaling')
                     cube = cube.downscale(pixels_limit)
-                log(window, 'Starting extrapolation')
+                log(window, 'Extrapolating')
                 cube = cube.to_scope(aux.visible_range)
-                log(window, 'Starting color calculation')
+                log(window, 'Color calculating')
                 img = cube2img(cube, gamma_correction, srgb, makebright, desun)
         if preview_flag:
             window.write_event_value(('T2_thread', 'Sending the resulting preview to the main thread'), img)
         else:
             img.save(f'{save_folder}/TCT_{strftime("%Y-%m-%d_%H-%M")}.png')
-    except FileNotFoundError:
-        log(window, 'File(s) not found. Please recheck your input.')
+    except Exception:
+        log(window, f'Image processing failed with {format_exc(limit=0).strip()}')
+        print(format_exc())
 
 def cube2img(cube: ic.SpectralCube, gamma_correction: bool, srgb: bool, makebright: bool, desun: bool):
     """ Creates a Pillow image from the spectral cube """
