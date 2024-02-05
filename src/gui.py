@@ -121,9 +121,9 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         [sg.Text('The tab is temporarily not working!', font=title_font, text_color='red')],
         [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T2_title2'), sg.Push()],
         [sg.Canvas(key='T2_canvas')],
-        [sg.Checkbox(tr.gui_desun[lang], key='T2_desun')],
-        [sg.Checkbox(tr.gui_devega[lang], key='T2_devega', visible=False)],
         [sg.Checkbox(tr.gui_makebright[lang], key='T2_makebright')],
+        [sg.Checkbox(tr.gui_desun[lang], key='T2_desun')],
+        #[sg.Checkbox(tr.gui_devega[lang], key='T2_devega')],
         #[sg.Checkbox(tr.gui_autoalign[lang], key='T2_autoalign')],
         [sg.T('')],
         [sg.Push(), sg.Image(background_color='black', size=img_preview_size, key='T2_image'), sg.Push()],
@@ -239,9 +239,9 @@ def translate(window: sg.Window, T2_vis: int, lang: str):
         window['T2_band'+str(i)].update(f'{tr.gui_band[lang]} {i+1}')
         window['T2_filterText'+str(i)].update(tr.gui_filter[lang])
         window['T2_pathText'+str(i)].update(tr.gui_browse[lang])
-    window['T2_desun'].update(text=tr.gui_desun[lang])
-    window['T2_devega'].update(text=tr.gui_devega[lang])
     window['T2_makebright'].update(text=tr.gui_makebright[lang])
+    window['T2_desun'].update(text=tr.gui_desun[lang])
+    #window['T2_devega'].update(text=tr.gui_devega[lang])
     #window['T2_autoalign'].update(text=tr.gui_autoalign[lang])
     #window['T2_plotpixels'].update(text=tr.gui_plotpixels[lang])
     window['T2_preview'].update(tr.gui_preview[lang])

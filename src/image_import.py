@@ -1,22 +1,26 @@
 """ Responsible for converting image data into a working form. """
 
+from pathlib import Path
 import numpy as np
 import astropy.units as u
 from astropy.convolution import Gaussian1DKernel
 from spectral_cube import SpectralCube
-from spectral_cube.utils import WCSWarning, ExperimentalImplementationWarning
 import src.auxiliary as aux
 
-# Disabling warnings about supplier non-compliance with FITS unit storage standards and spectral-cube warnings
 from warnings import filterwarnings
-filterwarnings(action='ignore', category=u.UnitsWarning, append=True)
-filterwarnings(action='ignore', category=ExperimentalImplementationWarning, append=True)
-filterwarnings(action='ignore', category=WCSWarning, append=True)
+filterwarnings(action='ignore')
+
+# Disabling warnings about supplier non-compliance with FITS unit storage standards and spectral-cube warnings
+# Strange, but not work in the main program
+#from spectral_cube.utils import WCSWarning, ExperimentalImplementationWarning
+#filterwarnings(action='ignore', category=u.UnitsWarning, append=True)
+#filterwarnings(action='ignore', category=ExperimentalImplementationWarning, append=True)
+#filterwarnings(action='ignore', category=WCSWarning, append=True)
 
 
 # cache?
-def cube_reader(file: str) -> tuple[np.ndarray, np.ndarray]:
-    """ Imports a spectral cube from the FITS file, down scaling the spectral and spatial resolutions to the specified ones. """
+def cube_reader(file: str) -> tuple[str, np.ndarray, np.ndarray]:
+    """ Imports a spectral cube from the FITS file and down scaling spatial resolutions to the specified one. """
     # See https://gist.github.com/keflavich/37a2705fb4add9a2491caf2dfa195efd
 
     cube = SpectralCube.read(file, hdu=1).with_spectral_unit(u.nm)
@@ -45,4 +49,4 @@ def cube_reader(file: str) -> tuple[np.ndarray, np.ndarray]:
     #    print('Beginning spatial down scaling')
     #    cube = cube[:,::smooth_factor,::smooth_factor]
     
-    return nm, np.array(cube).transpose((0, 2, 1))
+    return Path(file).name, nm, np.array(cube).transpose((0, 2, 1))

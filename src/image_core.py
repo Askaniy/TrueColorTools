@@ -5,6 +5,7 @@ Describes the main image data storage classes and related functions.
 - To work with images made in several passbands, use the PhotometricCube class.
 """
 
+from multiprocessing import Process
 from typing import Sequence, Callable
 from operator import mul, truediv
 from traceback import format_exc
@@ -119,15 +120,19 @@ class SpectralCube:
         return SpectralCube(name, nm, br, sd)
     
     @staticmethod
-    def from_file(name: str, file: str, pixels_number: int = None):
+    def from_file(file: str):
         """ Creates a SpectralCube object based on loaded data from the specified file """
-        return SpectralCube(name, *ii.cube_reader(file, pixels_number))
+        #process = Process(target=ii.cube_reader, args=(file,))
+        #process.start()
+        #process.join()
+        #return SpectralCube(*process.result)
+        return SpectralCube(*ii.cube_reader(file))
     
-    def downscale(self, pixels_number: int):
+    def downscale(self, pixels_limit: int):
         """ Brings the spatial resolution of the cube to approximately match the number of pixels """
         # TODO: averaging like in https://stackoverflow.com/questions/10685654/reduce-resolution-of-array-through-summation
         l, x, y = self.br.shape
-        factor = ceil(sqrt(x * y / pixels_number))
+        factor = ceil(sqrt(x * y / pixels_limit))
         br = self.br[:,::factor,::factor]
         sd = None
         if self.sd is not None:

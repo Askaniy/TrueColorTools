@@ -8,7 +8,6 @@ import src.auxiliary as aux
 import src.data_import as di
 import src.data_processing as dp
 import src.color_processing as cp
-import src.image_core as ic
 import src.image_processing as ip
 from src.table_generator import generate_table
 import src.plotter as pl
@@ -66,7 +65,7 @@ def launch_window(lang: str):
         if event == sg.WIN_CLOSED or event == tr.gui_exit[lang]:
             break
         # Radio selection
-        elif event.startswith('-brMode'):
+        elif isinstance(event, str) and event.startswith('-brMode'):
             brMode = aux.get_flag_index((values['-brMode0-'], values['-brMode1-'], values['-brMode2-']))
         # Checks for empty input
         elif event == '-bitness-':
@@ -105,10 +104,10 @@ def launch_window(lang: str):
                 for info in value[1:]:
                     to_show += info + '\n'
                 to_show += '\n'
-            sg.popup_scrolled(to_show, title=event, size=(150, 25))
+            sg.popup_scrolled(to_show, title=event, size=(150, 25), non_blocking=True)
         
         elif event == tr.gui_info[lang]:
-            sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event)
+            sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event, non_blocking=True)
         
         elif event == 'T1_database': # global loading of spectra database, was needed for separate Table tab
             objectsDB, refsDB = di.import_DBs(['spectra', 'spectra_extras'])
@@ -169,7 +168,7 @@ def launch_window(lang: str):
                 plot_data.append(T1_spectrum)
             
             elif event == 'T1_plot':
-                pl.plot_spectra(plot_data, values['-gamma-'], values['-srgb-'], brMode and T1_albedo, lang)
+                pl.plot_spectra(plot_data, values['-gamma-'], values['-srgb-'], brMode, lang)
             
             elif event == 'T1_clear':
                 plot_data = []
@@ -204,7 +203,7 @@ def launch_window(lang: str):
                     if T1_estimated:
                         T1_export += f'; {tr.gui_estimated[lang]}'
 
-                sg.popup_scrolled(T1_export, title=tr.gui_results[lang], size=(120, 40), font=('Consolas', 10))
+                sg.popup_scrolled(T1_export, title=tr.gui_results[lang], size=(120, 40), font=('Consolas', 10), non_blocking=True)
             
             elif event == 'T1_folder':
                 generate_table(objectsDB, values['T1_tags'], brMode, values['-srgb-'], values['-gamma-'], values['T1_folder'], 'png', lang)
@@ -241,45 +240,45 @@ def launch_window(lang: str):
             window['T2_path'].update(visible=T2_single_file_flag)
             window['T2_pathText'].update(visible=T2_single_file_flag)
             
-            # Getting filters and updating filters profile plot
+            # Getting filters and image paths
             T2_filters = []
+            T2_files = []
             for i in range(T2_vis):
-                T2_filter_name = values['T2_filter'+str(i)]
+                T2_filter_name = values[f'T2_filter{i}']
                 if T2_filter_name != '':
                     T2_filter = get_filter(T2_filter_name)
                     T2_filters.append(T2_filter)
-            try:
-                pl.close_figure(T2_fig)
-                T2_fig = pl.plot_filters([*background_plot[values['-srgb-']], *T2_filters], lang)
-            except UnboundLocalError: # means it's the first tab opening
-                T2_fig = pl.plot_filters(background_plot[values['-srgb-']], lang)
-                figure_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
-            finally:
-                figure_canvas_agg.get_tk_widget().forget()
-                figure_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
+                    T2_files.append(values[f'T2_path{i}'])
+            
+            # Updating filters profile plot
+            if (isinstance(event, str) and event.startswith('T2_filter')) or event in ('-currentTab-', '-srgb-'):
+                try:
+                    pl.close_figure(T2_fig)
+                    T2_fig = pl.plot_filters([*background_plot[values['-srgb-']], *T2_filters], lang)
+                except UnboundLocalError: # means it's the first tab opening
+                    T2_fig = pl.plot_filters(background_plot[values['-srgb-']], lang)
+                    figure_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
+                finally:
+                    figure_canvas_agg.get_tk_widget().forget()
+                    figure_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
             
             # Image processing
-            match (T2_mode, event):
-                # Multiband image
-                case (1, 'T2_preview'):
-                    pass
-                case (1, 'T2_process'):
-                    pass
-                # RGB image
-                case (2, 'T2_preview'):
-                    pass
-                case (2, 'T2_process'):
-                    pass
-                # Spectral cube
-                case (3, 'T2_preview'):
-                    T2_cube = ic.SpectralCube.from_file(values['T2_path']).downscale(img_preview_area)
-                    T2_cube = T2_cube.to_scope(aux.visible_range)
-                    T2_img = ip.cube2img(T2_cube, values['T2_makebright'])
-                    window['T2_image'].update(data=ip.convert_to_bytes(T2_img))
-                case (3, 'T2_process'):
-                    T2_cube = ic.SpectralCube.from_file(values['T2_path'])
-                    T2_img = ip.cube2img(T2_cube, values['T2_makebright'])
-                    ip.save(T2_img, values['T2_folder'])
+            elif isinstance(event, str) and event in ('T2_preview', 'T2_process'):
+                window.start_thread(
+                    lambda: ip.image_parser(
+                        window, T2_mode, values['T2_folder'], img_preview_area, T2_filters, T2_files, values['T2_path'],
+                        values['-gamma-'], values['-srgb-'], values['T2_makebright'], values['T2_desun']
+                    ),
+                    ('T2_thread', 'End of the image processing thread.\n')
+                )
+                window['T2_folder'].update('') # preview mode is detected by this value
+            
+            # Getting messages from image processing thread
+            elif event[0] == 'T2_thread':
+                sg.Print(event[1]) # pop-up printing
+                if values[event] is not None:
+                    # Updating preview
+                    window['T2_image'].update(data=ip.convert_to_bytes(values[event]))
 
         
         # ------------ Events in the tab "Blackbody & Redshifts" ------------
