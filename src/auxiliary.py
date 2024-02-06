@@ -40,9 +40,9 @@ def grid(start: int|float, end: int|float, res: int):
         end += 1 # to include the last point
     return np.arange(start, end, res, dtype='uint16')
 
-def is_smooth(br: Sequence):
+def is_smooth(array: Sequence|np.ndarray):
     """ Boolean function, checks the second derivative for sign reversal, a simple criterion for smoothness """
-    diff2 = np.diff(np.diff(br))
+    diff2 = np.diff(np.diff(array, axis=0), axis=0)
     return np.all(diff2 <= 0) | np.all(diff2 >= 0)
 
 def integrate(array: Sequence|np.ndarray, step: int|float):
@@ -91,6 +91,10 @@ def interpolating(x0: Sequence, y0: np.ndarray, x1: Sequence, step: int|float) -
         xy0 = custom_interp(xy0, k=11+i)
     return np.interp(x1, xy0[0], xy0[1])
 
+def scope2cube(scope: Sequence, shape: tuple[int, int]):
+    """ Gets ta 1D array and expands its dimensions to a 3D array based on the 2D slice shape """
+    return np.repeat(np.repeat(np.expand_dims(scope, axis=(1, 2)), shape[0], axis=1), shape[1], axis=2)
+
 def custom_extrap(grid: Sequence, derivative: float|np.ndarray, corner_x: int|float, corner_y: float|np.ndarray) -> np.ndarray:
     """
     Returns an intuitive continuation of the function on the grid using information about the last point.
@@ -101,8 +105,7 @@ def custom_extrap(grid: Sequence, derivative: float|np.ndarray, corner_x: int|fl
         return np.repeat(np.expand_dims(corner_y, axis=0), grid.size, axis=0)
     else:
         if len(corner_y.shape) == 2: # spectral cube processing
-            x, y = corner_y.shape
-            grid = np.repeat(np.repeat(np.expand_dims(grid, axis=(1, 2)), x, axis=1), y, axis=2)
+            grid = scope2cube(grid, corner_y.shape)
         sign = np.sign(derivative)
         return np.exp((1 - (np.abs(derivative) * (grid - corner_x) / corner_y - sign)**2) / 2) * corner_y
 
@@ -118,7 +121,8 @@ def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int|flo
         x = np.arange(min(scope[0], x[0]), max(scope[-1], x[0])+1, step, dtype='uint16')
         y = np.repeat(np.expand_dims(y[0], axis=0), x.size, axis=0)
     else:
-        if x[0] > scope[0]: # extrapolation to blue
+        # Extrapolation to blue
+        if x[0] > scope[0]:
             x1 = np.arange(scope[0], x[0], step)
             y_scope = y[:avg_steps]
             if is_smooth(y_scope):
@@ -126,12 +130,15 @@ def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int|flo
                 corner_y = y[0]
             else:
                 avg_weights = np.abs(np.arange(-avg_steps, 0)[avg_steps-y_scope.shape[0]:]) # weights could be more complicated, but there is no need
-                diff = np.average(np.diff(y_scope), weights=avg_weights[:-1])
-                corner_y = np.average(y_scope, weights=avg_weights) - diff * avg_steps * weights_center_of_mass
+                if len(y.shape) == 3: # spectral cube processing
+                    avg_weights = scope2cube(avg_weights, y.shape[1:3])
+                diff = np.average(np.diff(y_scope, axis=0), weights=avg_weights[:-1], axis=0)
+                corner_y = np.average(y_scope, weights=avg_weights, axis=0) - diff * avg_steps * weights_center_of_mass
             y1 = custom_extrap(x1, diff/step, x[0], corner_y)
             x = np.append(x1, x)
             y = np.append(y1, y, axis=0)
-        if x[-1] < scope[-1]: # extrapolation to red
+        # Extrapolation to red
+        if x[-1] < scope[-1]:
             x1 = np.arange(x[-1], scope[-1], step) + step
             y_scope = y[-avg_steps:]
             if is_smooth(y_scope):
@@ -139,8 +146,10 @@ def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int|flo
                 corner_y = y[-1]
             else:
                 avg_weights = np.arange(avg_steps)[:y_scope.shape[0]] + 1
-                diff = np.average(np.diff(y_scope), weights=avg_weights[1:])
-                corner_y = np.average(y_scope, weights=avg_weights) + diff * avg_steps * weights_center_of_mass
+                if len(y.shape) == 3: # spectral cube processing
+                    avg_weights = scope2cube(avg_weights, y.shape[1:3])
+                diff = np.average(np.diff(y_scope, axis=0), weights=avg_weights[1:], axis=0)
+                corner_y = np.average(y_scope, weights=avg_weights, axis=0) + diff * avg_steps * weights_center_of_mass
             y1 = custom_extrap(x1, diff/step, x[-1], corner_y)
             x = np.append(x, x1)
             y = np.append(y, y1, axis=0)

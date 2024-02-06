@@ -20,7 +20,7 @@ def image_parser(
     ):
     """ Receives user input and performs processing in a parallel thread """
     preview_flag = save_folder == ''
-    log(window, 'Starting processing')
+    log(window, 'Starting the image processing thread')
     try:
         match image_mode:
             # Multiband image
@@ -31,7 +31,7 @@ def image_parser(
                 pass
             # Spectral cube
             case 2:
-                log(window, 'Importing file (it may take a few minutes)')
+                log(window, 'Importing spectral cube (it may take a few minutes)')
                 cube = ic.SpectralCube.from_file(single_file)
                 if preview_flag:
                     log(window, 'Down scaling')
@@ -52,15 +52,16 @@ def cube2img(cube: ic.SpectralCube, gamma_correction: bool, srgb: bool, makebrig
     """ Creates a Pillow image from the spectral cube """
     # TODO: add CIE white points support
     l, x, y = cube.br.shape
-    cube_rgb = np.empty((3, x, y))
-    cube_rgb[0,:,:] = cube @ cp.r
-    cube_rgb[1,:,:] = cube @ cp.g
-    cube_rgb[2,:,:] = cube @ cp.b
+    rgb = np.empty((3, x, y))
+    rgb[0,:,:] = cube @ cp.r
+    rgb[1,:,:] = cube @ cp.g
+    rgb[2,:,:] = cube @ cp.b
     if makebright:
-        cube_rgb /= cube_rgb.max()
+        rgb /= rgb.max()
     if gamma_correction:
-        cube_rgb = cp.gamma_correction(cube_rgb)
-    return Image.fromarray(cube_rgb.transpose())
+        rgb = cp.gamma_correction(rgb)
+    rgb = (255 * rgb).astype(np.uint8)
+    return Image.fromarray(rgb.transpose())
 
 def convert_to_bytes(img: Image.Image):
     """ Prepares PIL's image to be displayed in the window """

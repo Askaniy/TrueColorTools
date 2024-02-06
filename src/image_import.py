@@ -25,7 +25,6 @@ def do_nothing():
     """
     pass
 
-# cache?
 def cube_reader(file: str) -> tuple[str, np.ndarray, np.ndarray]:
     """ Imports a spectral cube from the FITS file and down scaling spatial resolutions to the specified one. """
     # See https://gist.github.com/keflavich/37a2705fb4add9a2491caf2dfa195efd

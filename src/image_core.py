@@ -6,9 +6,10 @@ Describes the main image data storage classes and related functions.
 """
 
 from typing import Sequence, Callable
+from itertools import product
 from operator import mul, truediv
 from traceback import format_exc
-from itertools import product
+from functools import lru_cache
 from math import sqrt, ceil
 import numpy as np
 from src.data_core import Spectrum
@@ -119,6 +120,7 @@ class SpectralCube:
         return SpectralCube(name, nm, br, sd)
     
     @staticmethod
+    @lru_cache(maxsize=1)
     def from_file(file: str):
         """ Creates a SpectralCube object based on loaded data from the specified file """
         return SpectralCube(*ii.cube_reader(file))
