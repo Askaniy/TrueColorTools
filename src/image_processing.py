@@ -16,7 +16,7 @@ def log(window, message: str):
 
 def image_parser(
         window, image_mode: int, save_folder: str, pixels_limit: int, filters: list, files: list, single_file: str,
-        gamma_correction: bool, srgb: bool, makebright: bool, desun: bool
+        gamma_correction: bool, srgb: bool, makebright: bool, desun: bool, exposure: float
     ):
     """ Receives user input and performs processing in a parallel thread """
     preview_flag = save_folder == ''
@@ -31,7 +31,7 @@ def image_parser(
                 pass
             # Spectral cube
             case 2:
-                log(window, 'Importing spectral cube (it may take a few minutes)')
+                log(window, 'Importing spectral cube (it may take a few minutes for the first time)')
                 cube = ic.SpectralCube.from_file(single_file)
                 if preview_flag:
                     log(window, 'Down scaling')
@@ -39,7 +39,7 @@ def image_parser(
                 log(window, 'Extrapolating')
                 cube = cube.to_scope(aux.visible_range)
                 log(window, 'Color calculating')
-                img = cube2img(cube, gamma_correction, srgb, makebright, desun)
+                img = cube2img(cube, gamma_correction, srgb, makebright, desun, exposure)
         if preview_flag:
             window.write_event_value(('T2_thread', 'Sending the resulting preview to the main thread'), img)
         else:
@@ -48,7 +48,7 @@ def image_parser(
         log(window, f'Image processing failed with {format_exc(limit=0).strip()}')
         print(format_exc())
 
-def cube2img(cube: ic.SpectralCube, gamma_correction: bool, srgb: bool, makebright: bool, desun: bool):
+def cube2img(cube: ic.SpectralCube, gamma_correction: bool, srgb: bool, makebright: bool, desun: bool, exposure: float):
     """ Creates a Pillow image from the spectral cube """
     # TODO: add CIE white points support
     l, x, y = cube.br.shape
@@ -60,6 +60,10 @@ def cube2img(cube: ic.SpectralCube, gamma_correction: bool, srgb: bool, makebrig
         rgb /= rgb.max()
     if gamma_correction:
         rgb = cp.gamma_correction(rgb)
+    rgb *= exposure
+    print('\nr', rgb[0].min(), rgb[0].mean(), rgb[0].max())
+    print('g', rgb[1].min(), rgb[1].mean(), rgb[1].max())
+    print('b', rgb[2].min(), rgb[2].mean(), rgb[2].max())
     rgb = (255 * rgb).astype(np.uint8)
     return Image.fromarray(rgb.transpose())
 

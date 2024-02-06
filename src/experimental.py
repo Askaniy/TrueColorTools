@@ -42,19 +42,68 @@ def intensity2mag(e):
     return -2.5 * np.log10(e / V)
 
 
+# Attempt to import spectral cubes with spectral-cube library, unsuccessful
+# 1. Can't read files of HST STIS due to WCS errors
+# 2. Requires scipy and a lot of other libraries
+# 3. Crooked code design
+
+# Disabling warnings about supplier non-compliance with FITS unit storage standards and spectral-cube warnings
+#from spectral_cube.utils import WCSWarning, ExperimentalImplementationWarning
+#filterwarnings(action='ignore', category=u.UnitsWarning, append=True)
+#filterwarnings(action='ignore', category=ExperimentalImplementationWarning, append=True)
+#filterwarnings(action='ignore', category=WCSWarning, append=True)
+
+#def do_nothing():
+#    """
+#    Workaround the spectral-cube library requirement for the progress bar update function.
+#    Progress bar by default (provided by AstroPy) cannot work in a thread.
+#    """
+#    pass
+
+#def cube_reader0(file: str) -> tuple[str, np.ndarray, np.ndarray]:
+#    """ Imports a spectral cube from the FITS file and down scaling spatial resolutions to the specified one. """
+#    # See https://gist.github.com/keflavich/37a2705fb4add9a2491caf2dfa195efd
+#
+#    cube = SpectralCube.read(file, hdu=1).with_spectral_unit(u.nm)
+#    print(cube) # general info
+#
+#    # Getting target wavelength range
+#    nm = aux.grid(*cube.spectral_extrema.value, aux.resolution)
+#    flag = np.where(nm < aux.nm_red_limit + aux.resolution) # with reserve to be averaged
+#    nm = nm[flag]
+#
+#    # Spectral smoothing and down scaling
+#    current_resolution = aux.get_resolution(cube.spectral_axis.value)
+#    sd = aux.gaussian_width(current_resolution, aux.resolution)
+#    print('Beginning spectral smoothing')
+#    cube = cube.spectral_smooth(Gaussian1DKernel(sd)) # parallel execution doesn't work
+#    print('Beginning spectral down scaling')
+#    cube = cube.spectral_interpolate(nm * u.nm, suppress_smooth_warning=True, update_function=do_nothing)
+#
+#    # Spatial smoothing and down scaling
+#    if isinstance(pixels_number, int):
+#        smooth_factor = int(cube.shape[1] * cube.shape[2] / pixels_number)
+#        print('Beginning spatial smoothing')
+#        cube = cube.spatial_smooth(Gaussian2DKernel(smooth_factor))
+#        print('Beginning spatial down scaling')
+#        cube = cube[:,::smooth_factor,::smooth_factor]
+#    
+#    return Path(file).name, nm, np.array(cube).transpose((0, 2, 1))
+
+
 
 # Legacy data_core.py multiresolution spectrum processing
 # Code of summer 2023. Simplified in November 2023.
 
-resolutions = (5, 10, 20, 40, 80, 160) # nm
-def standardize_resolution(input: int):
-    """ Redirects the step size to one of the valid values """
-    res = resolutions[-1] # max possible step
-    for i in range(1, len(resolutions)):
-        if input < resolutions[i]:
-            res = resolutions[i-1] # accuracy is always in reserve
-            break
-    return res
+#resolutions = (5, 10, 20, 40, 80, 160) # nm
+#def standardize_resolution(input: int):
+#    """ Redirects the step size to one of the valid values """
+#    res = resolutions[-1] # max possible step
+#    for i in range(1, len(resolutions)):
+#        if input < resolutions[i]:
+#            res = resolutions[i-1] # accuracy is always in reserve
+#            break
+#    return res
 
 #    def to_resolution(self, request: int):
 #        """ Returns a new Spectrum object with changed wavelength grid step size """

@@ -267,7 +267,7 @@ def launch_window(lang: str):
                 window.start_thread(
                     lambda: ip.image_parser(
                         window, T2_mode, values['T2_folder'], img_preview_area, T2_filters, T2_files, values['T2_path'],
-                        values['-gamma-'], values['-srgb-'], values['T2_makebright'], values['T2_desun']
+                        values['-gamma-'], values['-srgb-'], values['T2_makebright'], values['T2_desun'], float(values['T2_exposure'])
                     ),
                     ('T2_thread', 'End of the image processing thread.\n')
                 )

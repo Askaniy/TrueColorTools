@@ -104,7 +104,7 @@ def custom_extrap(grid: Sequence, derivative: float|np.ndarray, corner_x: int|fl
     if np.all(derivative) == 0: # extrapolation by constant
         return np.repeat(np.expand_dims(corner_y, axis=0), grid.size, axis=0)
     else:
-        if len(corner_y.shape) == 2: # spectral cube processing
+        if corner_y.ndim == 2: # spectral cube processing
             grid = scope2cube(grid, corner_y.shape)
         sign = np.sign(derivative)
         return np.exp((1 - (np.abs(derivative) * (grid - corner_x) / corner_y - sign)**2) / 2) * corner_y
@@ -130,7 +130,7 @@ def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int|flo
                 corner_y = y[0]
             else:
                 avg_weights = np.abs(np.arange(-avg_steps, 0)[avg_steps-y_scope.shape[0]:]) # weights could be more complicated, but there is no need
-                if len(y.shape) == 3: # spectral cube processing
+                if y.ndim == 3: # spectral cube processing
                     avg_weights = scope2cube(avg_weights, y.shape[1:3])
                 diff = np.average(np.diff(y_scope, axis=0), weights=avg_weights[:-1], axis=0)
                 corner_y = np.average(y_scope, weights=avg_weights, axis=0) - diff * avg_steps * weights_center_of_mass
@@ -146,7 +146,7 @@ def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int|flo
                 corner_y = y[-1]
             else:
                 avg_weights = np.arange(avg_steps)[:y_scope.shape[0]] + 1
-                if len(y.shape) == 3: # spectral cube processing
+                if y.ndim == 3: # spectral cube processing
                     avg_weights = scope2cube(avg_weights, y.shape[1:3])
                 diff = np.average(np.diff(y_scope, axis=0), weights=avg_weights[1:], axis=0)
                 corner_y = np.average(y_scope, weights=avg_weights, axis=0) + diff * avg_steps * weights_center_of_mass

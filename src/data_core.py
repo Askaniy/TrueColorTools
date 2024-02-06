@@ -215,7 +215,7 @@ class Spectrum:
             the_second = other.name
             if self.nm[0] > other.nm[0]:
                 the_first, the_second = the_second, the_first
-            print(f'# Note for spectral element-wise operation "{name.strip()}"')
+            print(f'# Note for spectral element-wise operation "{operator_sign.strip()}"')
             print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
             print('- There is no intersection between the spectra. Spectrum stub object was created.')
             return Spectrum(name, *Spectrum.stub)

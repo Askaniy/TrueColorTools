@@ -123,6 +123,7 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         [sg.Canvas(key='T2_canvas')],
         [sg.Checkbox(tr.gui_makebright[lang], key='T2_makebright')],
         [sg.Checkbox(tr.gui_desun[lang], key='T2_desun')],
+        [sg.Text('Exposure', key='T2_exposureText'), sg.Input('1', size=1, key='T2_exposure', expand_x=True)],
         #[sg.Checkbox(tr.gui_devega[lang], key='T2_devega')],
         #[sg.Checkbox(tr.gui_autoalign[lang], key='T2_autoalign')],
         [sg.T('')],
