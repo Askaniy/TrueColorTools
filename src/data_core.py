@@ -87,7 +87,7 @@ class Spectrum:
                 if diff.mean() >= aux.resolution: # interpolation, increasing resolution
                     br = aux.interpolating(nm, br, uniform_nm, aux.resolution)
                 else: # decreasing resolution if step less than 5 nm
-                    br = aux.averaging(nm, br, uniform_nm, aux.resolution)
+                    br = aux.spectral_downscaling(nm, br, uniform_nm, aux.resolution)
                 nm = uniform_nm
             if br.min() < 0:
                 br = np.clip(br, 0, None)

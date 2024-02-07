@@ -29,9 +29,6 @@ hanning_factor = 1129/977
 def get_resolution(array: Sequence):
     return np.mean(np.diff(array)) * hanning_factor
 
-def gaussian_width(current_resolution, target_resolution):
-    return ((target_resolution**2 - current_resolution**2)**0.5 / current_resolution / fwhm_factor)
-
 def grid(start: int|float, end: int|float, res: int):
     """ Returns uniform grid points for the non-integer range that are divisible by the selected step """
     if (shift := start % res) != 0:
@@ -49,19 +46,63 @@ def integrate(array: Sequence|np.ndarray, step: int|float):
     """ Riemann sum with midpoint rule for integrating both spectra and spectral cubes """
     return step * 0.5 * np.sum(array[:-1] + array[1:])
 
-def averaging(x0: Sequence, y0: np.ndarray, x1: Sequence, step: int|float):
-    """ Returns spectrum brightness values with decreased resolution """
-    semistep = step * 0.5
-    y1 = [np.mean(y0[np.where(x0 < x1[0]+semistep)])]
-    for x in x1[1:-1]:
-        flag = np.where((x-semistep < x0) & (x0 < x+semistep))
-        if flag[0].size == 0: # the spectrum is no longer dense enough to be averaged down to 5 nm
-            y = y1[-1] # lengthening the last recorded brightness is the simplest solution
-        else:
-            y = np.mean(y0[flag]) # average the brightness around X points
-        y1.append(y)
-    y1.append(np.mean(y0[np.where(x0 > x1[-1]-semistep)]))
-    return np.array(y1)
+def gaussian_width(current_resolution, target_resolution):
+    return np.sqrt(np.abs(target_resolution**2 - current_resolution**2)) / fwhm_factor
+
+def gaussian_convolution(nm0: Sequence, br0: Sequence, nm1: Sequence, step: int|float):
+    """
+    Applies Gaussian convolution to a non-uniform sparse mesh. Eliminates holes and noise from spectral axis.
+
+    Args
+    - nm0: original spectral axis
+    - br0: original spectrum
+    - nm1: required uniform grid
+    - step: standard deviation of the Gaussian
+    """
+    factor = -0.5 / step**2 # Gaussian exponent multiplier
+    br1 = np.empty_like(nm1, dtype='float64')
+    for i in range(len(nm1)):
+        br0_convolved = br0 * np.exp(factor*(nm0 - nm1[i])**2)
+        br1[i] = np.average(br0, weights=br0_convolved)
+    return br1
+
+def spectral_downscaling(nm0: Sequence, br0: np.ndarray, nm1: Sequence, step: int|float):
+    """
+    Returns spectrum brightness values with decreased resolution.
+    Incoming graphs or point clouds may have holes and areas of varying resolution.
+
+    Args
+    - nm0: original spectral axis
+    - br0: original spectrum or spectral cube
+    - nm1: required uniform grid
+    - step: resolution of the required uniform grid
+
+    It is known that the Gaussian standard deviation, without any assumptions, must correspond to the grid step.
+    Knowing the required "blur" and the local "blur", the missing degree of "blur" can be calculated from
+    the error propagation equation.
+
+    The idea is inspired by https://gist.github.com/keflavich/37a2705fb4add9a2491caf2dfa195efd
+    """
+    cube_flag = br0.ndim == 3 # spectral cube processing
+    # Obtaining a graph of standard deviations for a Gaussian
+    nm_diff = np.diff(nm0)
+    nm_mid = (nm0[1:] + nm0[:-1]) * 0.5
+    sd_local = gaussian_convolution(nm_mid, nm_diff, nm1, step*2)
+    # Convolution with Gaussian of variable standard deviation
+    br1 = np.empty_like(nm1, dtype='float64')
+    if cube_flag: 
+        br1 = scope2cube(br1, br0.shape[1:3])
+    for i in range(len(nm1)):
+        sd = gaussian_width(sd_local[i], step) # missing "blur" for required step
+        factor = -0.5 / sd**2 # Gaussian exponent multiplier
+        gaussian = np.exp(factor*(nm0 - nm1[i])**2)
+        if cube_flag:
+            gaussian = scope2cube(gaussian, br0.shape[1:3])
+        try:
+            br1[i] = np.average(br0, weights=br0*gaussian, axis=0)
+        except ZeroDivisionError:
+            br1[i] = np.average(br0, axis=0)
+    return br1
 
 def custom_interp(xy0: np.ndarray, k=16):
     """

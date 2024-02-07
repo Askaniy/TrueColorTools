@@ -25,14 +25,6 @@ def interpolating(nm0: Sequence, br0: np.ndarray, nm1: Sequence, step: int|float
         br1[:, i, j] = aux.interpolating(nm0, br0[:, i, j], nm1, step)
     return br1
 
-def averaging(nm0: Sequence, br0: np.ndarray, nm1: Sequence, step: int|float):
-    """ Wrapper around single-spectrum function """
-    _, x, y = br0.shape
-    br1 = np.zeros((len(nm1), x, y), br0.dtype)
-    for i, j in product(range(x), range(y)):
-        br1[:, i, j] = aux.averaging(nm0, br0[:, i, j], nm1, step)
-    return br1
-
 
 class SpectralCube:
     """ Class to work with an image of continuous spectra, with strictly defined wavelength resolution step """
@@ -103,7 +95,7 @@ class SpectralCube:
                 if diff.mean() >= aux.resolution: # interpolation, increasing resolution
                     br = interpolating(nm, br, uniform_nm, aux.resolution)
                 else: # decreasing resolution if step less than 5 nm
-                    br = averaging(nm, br, uniform_nm, aux.resolution)
+                    br = aux.spectral_downscaling(nm, br, uniform_nm, aux.resolution)
                 nm = uniform_nm
             if br.min() < 0:
                 br = np.clip(br, 0, None)

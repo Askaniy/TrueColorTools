@@ -21,25 +21,43 @@ def irradiance(nm: int|float|np.ndarray, T: int|float) -> float|np.ndarray:
 
 
 # Phase curves processing functions
-def lambert(phase: float):
-    phi = abs(np.deg2rad(phase))
-    return (np.sin(phi) + np.pi * np.cos(phi) - phi * np.cos(phi)) / np.pi # * 2/3 * albedo
+#def lambert(phase: float):
+#    phi = abs(np.deg2rad(phase))
+#    return (np.sin(phi) + np.pi * np.cos(phi) - phi * np.cos(phi)) / np.pi # * 2/3 * albedo
 
 
 # Linear extrapolation
-def line_generator(x1, y1, x2, y2):
-    return np.vectorize(lambda wl: y1 + (wl - x1) * (y2 - y1) / (x2 - x1))
+#def line_generator(x1, y1, x2, y2):
+#    return np.vectorize(lambda wl: y1 + (wl - x1) * (y2 - y1) / (x2 - x1))
+
 
 
 # Magnitudes processing functions
 
-V = 2.518021002e-8 # 1 Vega in W/m^2, https://arxiv.org/abs/1510.06262
+#V = 2.518021002e-8 # 1 Vega in W/m^2, https://arxiv.org/abs/1510.06262
 
-def mag2intensity(m: int|float|np.ndarray):
-    return V * 10**(-0.4 * m)
+#def mag2intensity(m: int|float|np.ndarray):
+#    return V * 10**(-0.4 * m)
 
-def intensity2mag(e):
-    return -2.5 * np.log10(e / V)
+#def intensity2mag(e):
+#    return -2.5 * np.log10(e / V)
+
+
+
+#def averaging(x0: Sequence, y0: np.ndarray, x1: Sequence, step: int|float):
+#    """ Returns spectrum brightness values with decreased resolution """
+#    semistep = step * 0.5
+#    y1 = [np.mean(y0[np.where(x0 < x1[0]+semistep)])]
+#    for x in x1[1:-1]:
+#        flag = np.where((x-semistep < x0) & (x0 < x+semistep))
+#        if flag[0].size == 0: # the spectrum is no longer dense enough to be averaged down to 5 nm
+#            y = y1[-1] # lengthening the last recorded brightness is the simplest solution
+#        else:
+#            y = np.mean(y0[flag]) # average the brightness around X points
+#        y1.append(y)
+#    y1.append(np.mean(y0[np.where(x0 > x1[-1]-semistep)]))
+#    return np.array(y1)
+
 
 
 # Attempt to import spectral cubes with spectral-cube library, unsuccessful
@@ -60,7 +78,7 @@ def intensity2mag(e):
 #    """
 #    pass
 
-#def cube_reader0(file: str) -> tuple[str, np.ndarray, np.ndarray]:
+#def cube_reader(file: str) -> tuple[str, np.ndarray, np.ndarray]:
 #    """ Imports a spectral cube from the FITS file and down scaling spatial resolutions to the specified one. """
 #    # See https://gist.github.com/keflavich/37a2705fb4add9a2491caf2dfa195efd
 #
@@ -74,7 +92,7 @@ def intensity2mag(e):
 #
 #    # Spectral smoothing and down scaling
 #    current_resolution = aux.get_resolution(cube.spectral_axis.value)
-#    sd = aux.gaussian_width(current_resolution, aux.resolution)
+#    sd = aux.gaussian_width(current_resolution, aux.resolution) / current_resolution
 #    print('Beginning spectral smoothing')
 #    cube = cube.spectral_smooth(Gaussian1DKernel(sd)) # parallel execution doesn't work
 #    print('Beginning spectral down scaling')
