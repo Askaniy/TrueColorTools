@@ -81,7 +81,6 @@ class SpectralCube:
         try:
             nm = np.array(nm) # numpy decides int or float
             br = np.array(br, dtype='float64')
-            br_upper_limit = br.max()
             if sd is not None:
                 sd = np.array(sd, dtype='float64')
             if nm[-1] > aux.nm_red_limit:
@@ -98,8 +97,8 @@ class SpectralCube:
                 else: # decreasing resolution if step less than 5 nm
                     br = aux.spectral_downscaling(nm, br, uniform_nm, aux.resolution)
                 nm = uniform_nm
-            if br.min() < 0 or br.max() > br_upper_limit:
-                br = np.clip(br, 0, br_upper_limit) # br_upper_limit is a bug workaround? I got max 1.0155->61400.1 after downscaling
+            if br.min() < 0:
+                br = np.clip(br, 0, None)
         except Exception:
             nm, br, sd = np.array([555]), np.zeros((1, x, y)), None
             print(f'# Note for the SpectralCube object')

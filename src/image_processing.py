@@ -35,7 +35,7 @@ def image_parser(
                 pass
             # Spectral cube
             case 2:
-                log('Importing spectral cube (may take a long time for the first time)')
+                log('Importing spectral cube (may take a long time for the first loading)')
                 cube = ic.SpectralCube.from_file(single_file)
                 if preview_flag:
                     log('Down scaling')

@@ -19,7 +19,6 @@ resolution = 5 # nm
 visible_range = np.arange(390, 780, 5) # nm
 
 # Constants needed for down scaling spectra and images
-# TODO: down scale spectra properly
 fwhm_factor = np.sqrt(8*np.log(2))
 hanning_factor = 1129/977
 
@@ -84,6 +83,8 @@ def spectral_downscaling(nm0: Sequence, br0: np.ndarray, nm1: Sequence, step: in
     The idea is inspired by https://gist.github.com/keflavich/37a2705fb4add9a2491caf2dfa195efd
     """
     cube_flag = br0.ndim == 3 # spectral cube processing
+    if br0.min() < 0:
+        br0 = np.clip(br0, 1e-10, None) # strange NumPy errors with weights without it
     # Obtaining a graph of standard deviations for a Gaussian
     nm_diff = np.diff(nm0)
     nm_mid = (nm0[1:] + nm0[:-1]) * 0.5

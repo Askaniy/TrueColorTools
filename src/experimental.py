@@ -60,6 +60,35 @@ def irradiance(nm: int|float|np.ndarray, T: int|float) -> float|np.ndarray:
 
 
 
+
+#def expand(array, axis, repeat):
+#    return np.repeat(np.expand_dims(array, axis=axis), repeat, axis=axis)
+
+#def spectral_downscaling(nm0: Sequence, br0: np.ndarray, nm1: Sequence, step: int|float):
+#    """
+#    Edition of spectral_downscaling that uses no loops, but up to 4D arrays.
+#    Requires >>15 Gb of RAM for images, just crashed.
+#    And slower for 1D spectra than the original
+#    """
+#    # Obtaining a graph of standard deviations for a Gaussian
+#    nm_diff = np.diff(nm0)
+#    nm_mid = (nm0[1:] + nm0[:-1]) * 0.5
+#    sd_local = gaussian_convolution(nm_mid, nm_diff, nm1, step*2) # 1D
+#    # Convolution with Gaussian of variable standard deviation
+#    nm0_plane = expand(nm0, 1, len(nm1)) # 2D
+#    nm1_plane = expand(nm1, 0, len(nm0)) # 2D
+#    sd = gaussian_width(sd_local, step) # 1D
+#    factor = expand(-0.5 / sd**2, 0, len(nm0)) # 2D
+#    gaussian = np.exp(factor*(nm0_plane - nm1_plane)**2) # 2D
+#    br0 = expand(br0, -1, len(nm1)) # 2D for spectra or 4D for cubes
+#    br1 = np.average(br0, weights=br0 * gaussian, axis=0) # 1D for spectra or 3D for cubes
+#    return br1
+#
+
+
+
+
+
 # Attempt to import spectral cubes with spectral-cube library, unsuccessful
 # 1. Can't read files of HST STIS due to WCS errors
 # 2. Requires scipy and a lot of other libraries
