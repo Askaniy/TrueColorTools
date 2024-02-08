@@ -263,7 +263,7 @@ def launch_window(lang: str):
                     figure_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
             
             # Image processing
-            elif isinstance(event, str) and event in ('T2_preview', 'T2_process'):
+            elif isinstance(event, str) and event in ('T2_preview', 'T2_folder'):
                 window.start_thread(
                     lambda: ip.image_parser(
                         window, T2_mode, values['T2_folder'], img_preview_area, T2_filters, T2_files, values['T2_path'],

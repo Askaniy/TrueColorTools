@@ -31,7 +31,7 @@ def image_parser(
                 pass
             # Spectral cube
             case 2:
-                log(window, 'Importing spectral cube (it may take a few minutes for the first time)')
+                log(window, 'Importing spectral cube (may take a long time for the first time)')
                 cube = ic.SpectralCube.from_file(single_file)
                 if preview_flag:
                     log(window, 'Down scaling')
@@ -61,9 +61,6 @@ def cube2img(cube: ic.SpectralCube, gamma_correction: bool, srgb: bool, makebrig
     if gamma_correction:
         rgb = cp.gamma_correction(rgb)
     rgb *= exposure
-    print('\nr', rgb[0].min(), rgb[0].mean(), rgb[0].max())
-    print('g', rgb[1].min(), rgb[1].mean(), rgb[1].max())
-    print('b', rgb[2].min(), rgb[2].mean(), rgb[2].max())
     rgb = (255 * rgb).astype(np.uint8)
     return Image.fromarray(rgb.transpose())
 

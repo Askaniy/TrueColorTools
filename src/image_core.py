@@ -81,6 +81,7 @@ class SpectralCube:
         try:
             nm = np.array(nm) # numpy decides int or float
             br = np.array(br, dtype='float64')
+            br_upper_limit = br.max()
             if sd is not None:
                 sd = np.array(sd, dtype='float64')
             if nm[-1] > aux.nm_red_limit:
@@ -97,10 +98,8 @@ class SpectralCube:
                 else: # decreasing resolution if step less than 5 nm
                     br = aux.spectral_downscaling(nm, br, uniform_nm, aux.resolution)
                 nm = uniform_nm
-            if br.min() < 0:
-                br = np.clip(br, 0, None)
-                #print(f'# Note for the SpectralCube object')
-                #print(f'- Negative values detected while trying to create the object from array, they been replaced with zeros.')
+            if br.min() < 0 or br.max() > br_upper_limit:
+                br = np.clip(br, 0, br_upper_limit) # br_upper_limit is a bug workaround? I got max 1.0155->61400.1 after downscaling
         except Exception:
             nm, br, sd = np.array([555]), np.zeros((1, x, y)), None
             print(f'# Note for the SpectralCube object')
@@ -164,10 +163,9 @@ class SpectralCube:
             return self.stub()
         else:
             nm = np.arange(start, end+1, aux.resolution, dtype='uint16')
-            br0 = self.br[np.where((self.nm >= start) & (self.nm <= end)), :, :]
-            br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
-            # transposition because numpy see the last axis to be iterable
-            return SpectralCube(nm, operator(br0.transpose(), br1).transpose())
+            br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
+            br1 = aux.scope2cube(other.br[np.where((other.nm >= start) & (other.nm <= end))], br0.shape[1:3])
+            return SpectralCube(nm, operator(br0, br1))
 
     def __mul__(self, other):
         """

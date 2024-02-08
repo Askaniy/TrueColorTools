@@ -44,7 +44,7 @@ def is_smooth(array: Sequence|np.ndarray):
 
 def integrate(array: Sequence|np.ndarray, step: int|float):
     """ Riemann sum with midpoint rule for integrating both spectra and spectral cubes """
-    return step * 0.5 * np.sum(array[:-1] + array[1:])
+    return step * 0.5 * np.sum(array[:-1] + array[1:], axis=0)
 
 def gaussian_width(current_resolution, target_resolution):
     return np.sqrt(np.abs(target_resolution**2 - current_resolution**2)) / fwhm_factor
