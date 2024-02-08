@@ -248,26 +248,31 @@ gui_brightness = {
     'ru': 'Яркость',
     'de': 'Helligkeit'
 }
-gui_desun = {
-    'en': 'Remove Sun as emitter',
-    'ru': 'Убрать отражённый спектр Солнца',
-    'de': 'Sonne als Emitter entfernen'
-}
-gui_devega = {
-    'en': 'Untie from the white standard according to Vega',
-    'ru': 'Отвязать от эталона белого по Веге',
-    'de': 'Vom Weißstandard nach Vega lösen'
-}
 gui_makebright = {
     'en': 'Maximize brightness',
     'ru': 'Максимизировать яркость',
     'de': 'Helligkeit maximieren'
 }
+gui_desun = {
+    'en': 'Remove Sun as emitter',
+    'ru': 'Убрать отражённый спектр Солнца',
+    'de': 'Sonne als Emitter entfernen'
+}
+#gui_devega = {
+#    'en': 'Untie from the white standard according to Vega',
+#    'ru': 'Отвязать от эталона белого по Веге',
+#    'de': 'Vom Weißstandard nach Vega lösen'
+#}
 #gui_autoalign = {
 #    'en': 'Align image bands (β)',
 #    'ru': 'Совместить изображения (β)',
 #    'de': 'Bildbänder ausrichten (β)'
 #}
+gui_exposure = {
+    'en': 'Exposure',
+    'ru': 'Экспозиция',
+    'de': 'Belichtung'
+}
 gui_preview = {
     'en': 'Show preview',
     'ru': 'Предпросмотр',

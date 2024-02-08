@@ -80,12 +80,17 @@ def launch_window(lang: str):
                 pass
         # (allows other tab checks to happen)
         elif event == '-currentTab-':
-            is_color_circle = int(values['-currentTab-'] in ('tab1', 'tab3'))
-            window['-formattingText-'].update(text_color=text_colors[is_color_circle])
-            window['-bitnessText-'].update(text_color=text_colors[is_color_circle])
-            window['-roundingText-'].update(text_color=text_colors[is_color_circle])
-            window['-bitness-'].update(disabled=not is_color_circle)
-            window['-rounding-'].update(disabled=not is_color_circle)
+            not_img_tab = int(not values['-currentTab-'] == 'tab2')
+            text_color = text_colors[not_img_tab]
+            window['-brModeText-'].update(text_color=text_color)
+            window['-brMode0-'].update(text_color=text_color)
+            window['-brMode1-'].update(text_color=text_color)
+            window['-brMode2-'].update(text_color=text_color)
+            window['-formattingText-'].update(text_color=text_color)
+            window['-bitnessText-'].update(text_color=text_color)
+            window['-roundingText-'].update(text_color=text_color)
+            window['-bitness-'].update(disabled=not not_img_tab, text_color=text_color)
+            window['-rounding-'].update(disabled=not not_img_tab, text_color=text_color)
 
         # Global window events
 

@@ -117,15 +117,23 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         ],
         [sg.Column(T2_frames, scrollable=True, vertical_scroll_only=True, key='T2_frames', expand_x=True, expand_y=True)]
     ]
+    T2_col2_1 = [
+        [sg.Checkbox(tr.gui_makebright[lang], key='T2_makebright')],
+        [sg.Checkbox(tr.gui_desun[lang], key='T2_desun')],
+        #[sg.Checkbox(tr.gui_devega[lang], key='T2_devega')],
+        #[sg.Checkbox(tr.gui_autoalign[lang], key='T2_autoalign')],
+    ]
+    T2_col2_2 = [
+        [sg.Text(tr.gui_exposure[lang], key='T2_exposureText'), sg.Input('1', size=1, key='T2_exposure', expand_x=True)]
+    ]
     T2_col2 = [
         [sg.Text('The tab is temporarily not working!', font=title_font, text_color='red')],
         [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T2_title2'), sg.Push()],
         [sg.Canvas(key='T2_canvas')],
-        [sg.Checkbox(tr.gui_makebright[lang], key='T2_makebright')],
-        [sg.Checkbox(tr.gui_desun[lang], key='T2_desun')],
-        [sg.Text('Exposure', key='T2_exposureText'), sg.Input('1', size=1, key='T2_exposure', expand_x=True)],
-        #[sg.Checkbox(tr.gui_devega[lang], key='T2_devega')],
-        #[sg.Checkbox(tr.gui_autoalign[lang], key='T2_autoalign')],
+        [
+            sg.Column(T2_col2_1, expand_x=True, expand_y=False), sg.VSeperator(),
+            sg.Column(T2_col2_2, expand_x=True, expand_y=False)
+        ],
         [sg.T('')],
         [sg.Push(), sg.Image(background_color='black', size=img_preview_size, key='T2_image'), sg.Push()],
         [sg.Push(), sg.Button(tr.gui_preview[lang], size=button_size, key='T2_preview'), sg.Push()],
@@ -245,6 +253,7 @@ def translate(window: sg.Window, T2_vis: int, lang: str):
     #window['T2_devega'].update(text=tr.gui_devega[lang])
     #window['T2_autoalign'].update(text=tr.gui_autoalign[lang])
     #window['T2_plotpixels'].update(text=tr.gui_plotpixels[lang])
+    window['T2_exposureText'].update(tr.gui_exposure[lang])
     window['T2_preview'].update(tr.gui_preview[lang])
     window['T2_process'].update(tr.gui_process[lang])
     window['T3_title1'].update(tr.gui_input[lang])

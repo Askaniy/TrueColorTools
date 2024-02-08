@@ -1,6 +1,5 @@
 """ Responsible for converting measurement data into a working form. """
 
-from typing import Sequence
 from pathlib import Path
 from traceback import format_exc
 from json5 import load as json5load
@@ -8,7 +7,6 @@ from astropy.io import fits
 from astropy.table import Table
 import astropy.units as u
 import numpy as np
-import src.strings as tr
 
 # Disabling warnings about supplier non-compliance with FITS unit storage standards
 from warnings import filterwarnings
