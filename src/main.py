@@ -274,7 +274,7 @@ def launch_window(lang: str):
                         window, T2_mode, values['T2_folder'], img_preview_area, T2_filters, T2_files, values['T2_path'],
                         values['-gamma-'], values['-srgb-'], values['T2_makebright'], values['T2_desun'], float(values['T2_exposure'])
                     ),
-                    ('T2_thread', 'End of the image processing thread.\n')
+                    ('T2_thread', 'End of the image processing thread\n')
                 )
                 window['T2_folder'].update('') # preview mode is detected by this value
             

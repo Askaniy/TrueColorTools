@@ -10,11 +10,9 @@ from itertools import product
 from operator import mul, truediv
 from traceback import format_exc
 from functools import lru_cache
-from math import sqrt, ceil
 import numpy as np
 from src.data_core import Spectrum, get_filter
 import src.auxiliary as aux
-import src.data_import as di
 import src.image_import as ii
 
 
