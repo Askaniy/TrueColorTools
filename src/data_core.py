@@ -39,9 +39,9 @@ class Spectrum:
         """
         self.name = name
         self.nm = np.array(nm, dtype='uint16')
-        self.br = np.array(br, dtype='float')
+        self.br = np.array(br, dtype='float64')
         if sd is not None:
-            self.sd = np.array(sd, dtype='float')
+            self.sd = np.array(sd, dtype='float64')
         else:
             self.sd = None
         self.photometry = photometry
@@ -279,9 +279,9 @@ class Photometry:
         """
         self.name = name
         self.filters = tuple(filters)
-        self.br = np.array(br, dtype='float')
+        self.br = np.array(br, dtype='float64')
         if sd is not None:
-            self.sd = np.array(sd, dtype='float')
+            self.sd = np.array(sd, dtype='float64')
         else:
             self.sd = None
         if np.any(np.isnan(self.br)):

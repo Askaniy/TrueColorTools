@@ -1,6 +1,7 @@
 """ File containing constant and functions required in various places, but without dependencies """
 
 import numpy as np
+from math import sqrt, ceil
 from typing import Sequence
 import src.strings as tr
 
@@ -104,6 +105,13 @@ def spectral_downscaling(nm0: Sequence, br0: np.ndarray, nm1: Sequence, step: in
         except ZeroDivisionError:
             br1[i] = np.average(br0, axis=0)
     return br1
+
+def spatial_downscaling(cube: np.ndarray, pixels_limit: int):
+    """ Brings the spatial resolution of the cube to approximately match the number of pixels """
+    # TODO: averaging like in https://stackoverflow.com/questions/10685654/reduce-resolution-of-array-through-summation
+    _, x, y = cube.shape
+    factor = ceil(sqrt(x * y / pixels_limit))
+    return cube[:,::factor,::factor]
 
 def custom_interp(xy0: np.ndarray, k=16):
     """

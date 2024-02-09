@@ -12,8 +12,9 @@ from traceback import format_exc
 from functools import lru_cache
 from math import sqrt, ceil
 import numpy as np
-from src.data_core import Spectrum
+from src.data_core import Spectrum, get_filter
 import src.auxiliary as aux
+import src.data_import as di
 import src.image_import as ii
 
 
@@ -29,12 +30,9 @@ def interpolating(nm0: Sequence, br0: np.ndarray, nm1: Sequence, step: int|float
 class SpectralCube:
     """ Class to work with an image of continuous spectra, with strictly defined wavelength resolution step """
 
-    def stub(self):
-        """
-        Initializes an object in case of input data problems.
-        Preserves the spatial dimension of the cube.
-        """
-        _, x, y = self.br.shape
+    @staticmethod
+    def stub(x, y):
+        """ Initializes an object in case of input data problems. """
         return SpectralCube(np.array([555]), np.zeros((1, x, y)), None)
 
     def __init__(self, nm: Sequence, br: np.ndarray, sd: np.ndarray = None):
@@ -44,8 +42,8 @@ class SpectralCube:
 
         Args:
         - `nm` (Sequence): list of wavelengths in nanometers with resolution step of 5 nm
-        - `br` (np.ndarray): same-size list of "brightness", flux in units of energy (not a photon counter)
-        - `sd` (np.ndarray, optional): same-size list of standard deviations
+        - `br` (np.ndarray): 3D array of "brightness", flux in units of energy (not a photon counter)
+        - `sd` (np.ndarray, optional): 3D array of standard deviations
         """
         self.nm = nm
         self.br = br
@@ -73,8 +71,8 @@ class SpectralCube:
         if (len_nm := len(nm)) != len_br:
             print(f'# Note for the SpectralCube object')
             print(f'- Arrays of wavelengths and brightness do not match ({len_nm} vs {len_br}). SpectralCube stub object was created.')
-            return SpectralCube(np.array([555]), np.zeros((1, x, y)))
-        if sd is not None and (len_sd := sd.shape[2]) != len_br:
+            return SpectralCube.stub(x, y)
+        if sd is not None and (len_sd := sd.shape[0]) != len_br:
             print(f'# Note for the SpectralCube object')
             print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
             sd = None
@@ -99,12 +97,12 @@ class SpectralCube:
                 nm = uniform_nm
             if br.min() < 0:
                 br = np.clip(br, 0, None)
+            return SpectralCube(nm, br, sd)
         except Exception:
-            nm, br, sd = np.array([555]), np.zeros((1, x, y)), None
             print(f'# Note for the SpectralCube object')
             print(f'- Something unexpected happened while trying to create the object from array. It was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0).strip()}')
-        return SpectralCube(nm, br, sd)
+            return SpectralCube.stub(x, y)
     
     @staticmethod
     @lru_cache(maxsize=1)
@@ -114,13 +112,10 @@ class SpectralCube:
     
     def downscale(self, pixels_limit: int):
         """ Brings the spatial resolution of the cube to approximately match the number of pixels """
-        # TODO: averaging like in https://stackoverflow.com/questions/10685654/reduce-resolution-of-array-through-summation
-        _, x, y = self.br.shape
-        factor = ceil(sqrt(x * y / pixels_limit))
-        br = self.br[:,::factor,::factor]
+        br = aux.spatial_downscaling(self.br, pixels_limit)
         sd = None
         if self.sd is not None:
-            sd = self.sd[:,::factor,::factor]
+            sd = aux.spatial_downscaling(self.sd, pixels_limit)
         return SpectralCube(self.nm, br, sd)
     
     def to_scope(self, scope: np.ndarray):
@@ -159,7 +154,8 @@ class SpectralCube:
             print(f'# Note for spectral element-wise operation "{operator_sign.strip()}"')
             print(f'- The first operand ends on {end} nm and the second starts on {start} nm.')
             print('- There is no intersection between the spectra. SpectralCube stub object was created.')
-            return self.stub()
+            _, x, y = self.br.shape
+            return SpectralCube.stub(x, y)
         else:
             nm = np.arange(start, end+1, aux.resolution, dtype='uint16')
             br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
@@ -194,3 +190,101 @@ class SpectralCube:
     def __matmul__(self, other) -> np.ndarray:
         """ Implementation of convolution between emission spectral cube and transmission spectrum """
         return (self * other).integrate()
+
+
+
+class PhotometricCube:
+    """ Class to work with set of filters measurements. """
+
+    @staticmethod
+    def stub(x, y):
+        """ Initializes an object in case of input data problems. """
+        return PhotometricCube([get_filter('Generic_Bessell.V')], np.zeros((1, x, y)), None)
+
+    def __init__(self, filters: Sequence[Spectrum], br: np.ndarray, sd: np.ndarray = None):
+        """
+        Args:
+        - `filters` (Sequence): list of energy response functions scaled to the unit area, storing as Spectrum objects
+        - `br` (np.ndarray): 3D array of intensity
+        - `sd` (np.ndarray): 3D array of standard deviations
+        """
+        self.filters = tuple(filters)
+        self.br = np.array(br, dtype='float64')
+        if sd is not None:
+            self.sd = np.array(sd, dtype='float64')
+        else:
+            self.sd = None
+        len_br, x, y = br.shape
+        if (len_filters := len(filters)) != len_br:
+            print(f'# Note for the PhotometricCube object')
+            print(f'- Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br}). PhotometricCube stub object was created.')
+            return PhotometricCube.stub(x, y)
+        if sd is not None and (len_sd := sd.shape[0]) != len_br:
+            print(f'# Note for the PhotometricCube object')
+            print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
+            sd = None
+        if np.any(np.isnan(self.br)):
+            self.br = np.nan_to_num(self.br)
+            print(f'# Note for the PhotometricCube object')
+            print(f'- NaN values detected during object initialization, they been replaced with zeros.')
+    
+    def downscale(self, pixels_limit: int):
+        """ Brings the spatial resolution of the cube to approximately match the number of pixels """
+        br = aux.spatial_downscaling(self.br, pixels_limit)
+        sd = None
+        if self.sd is not None:
+            sd = aux.spatial_downscaling(self.sd, pixels_limit)
+        return PhotometricCube(self.filters, br, sd)
+    
+    def to_scope(self, scope: np.ndarray): # TODO: use kriging here!
+        """ Creates a SpectralCube object with inter- and extrapolated PhotometricCube data to fit the wavelength scope """
+        try:
+            nm0 = self.mean_wavelengths()
+            nm1 = aux.grid(nm0[0], nm0[-1], aux.resolution)
+            br = interpolating(nm0, self.br, nm1, aux.resolution)
+            nm, br = aux.extrapolating(nm1, br, scope, aux.resolution)
+            return SpectralCube(nm, br)
+        except Exception:
+            print(f'# Note for the PhotometricCube object')
+            print(f'- Something unexpected happened while trying to inter/extrapolate to SpectralCube object. It was replaced by a stub.')
+            print(f'- More precisely, {format_exc(limit=0).strip()}')
+            _, x, y = self.br.shape
+            return SpectralCube.stub(x, y)
+    
+    def sorted(self):
+        """ Sorts the PhotometricCube by increasing wavelength """
+        nm = self.mean_wavelengths()
+        if np.any(nm[:-1] > nm[1:]): # fast increasing check
+            order = np.argsort(nm)
+            self.filters = tuple(np.array(self.filters)[order])
+            self.br = self.br[order]
+            if self.sd is not None:
+                self.sd = self.sd[order]
+        return self
+    
+    def mean_wavelengths(self):
+        """ Returns an array of mean wavelengths for each filter """
+        return np.array([passband.mean_wavelength() for passband in self.filters])
+    
+    def standard_deviations(self):
+        """ Returns an array of uncorrected standard deviations for each filter """
+        return np.array([passband.standard_deviation() for passband in self.filters])
+
+    def __mul__(self, other: Spectrum):
+        """ Returns a new PhotometricCube object with the emitter added (untied from a white standard spectrum) """
+        # Scaling brightness scales filters' profiles too!
+        filters = [(passband * other).scaled_by_area() for passband in self.filters]
+        return PhotometricCube(filters, self.br * (self @ other))
+    
+    def __rmul__(self, other):
+        return self.__mul__(other)
+
+    def __truediv__(self, other: Spectrum):
+        """ Returns a new PhotometricCube object with the emitter removed (apply a white standard spectrum) """
+        # Scaling brightness scales filters' profiles too!
+        filters = [(passband / other).scaled_by_area() for passband in self.filters]
+        return PhotometricCube(filters, self.br / (self @ other))
+
+    def __matmul__(self, other: Spectrum) -> np.ndarray[float]:
+        """ Convolve all the filters with a spectrum """
+        return np.array([other @ passband for passband in self.filters])
