@@ -127,7 +127,6 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         [sg.Text(tr.gui_exposure[lang], key='T2_exposureText'), sg.Input('1', size=1, key='T2_exposure', expand_x=True)]
     ]
     T2_col2 = [
-        [sg.Text('The tab is temporarily not working!', font=title_font, text_color='red')],
         [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T2_title2'), sg.Push()],
         [sg.Canvas(key='T2_canvas')],
         [

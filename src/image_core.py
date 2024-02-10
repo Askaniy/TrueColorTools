@@ -272,7 +272,7 @@ class PhotometricCube:
         """ Returns a new PhotometricCube object with the emitter added (untied from a white standard spectrum) """
         # Scaling brightness scales filters' profiles too!
         filters = [(passband * other).scaled_by_area() for passband in self.filters]
-        return PhotometricCube(filters, self.br * (self @ other))
+        return PhotometricCube(filters, (self.br.T * (self @ other)).T)
     
     def __rmul__(self, other):
         return self.__mul__(other)
@@ -281,7 +281,7 @@ class PhotometricCube:
         """ Returns a new PhotometricCube object with the emitter removed (apply a white standard spectrum) """
         # Scaling brightness scales filters' profiles too!
         filters = [(passband / other).scaled_by_area() for passband in self.filters]
-        return PhotometricCube(filters, self.br / (self @ other))
+        return PhotometricCube(filters, (self.br.T / (self @ other)).T)
 
     def __matmul__(self, other: Spectrum) -> np.ndarray[float]:
         """ Convolve all the filters with a spectrum """

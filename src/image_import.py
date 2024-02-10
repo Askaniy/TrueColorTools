@@ -1,5 +1,6 @@
 """ Responsible for converting image data into a working form. """
 
+from typing import Sequence
 from pathlib import Path
 import numpy as np
 from astropy.io import fits
@@ -34,7 +35,7 @@ def bw_reader(file: str) -> np.ndarray:
         br = br[np.argmax(br.sum(axis=(1,2)))]
     return br
 
-def bw_list_reader(files: list) -> np.ndarray:
+def bw_list_reader(files: Sequence) -> np.ndarray:
     """ Imports and combines the list of black and white images into one array """
     br = np.stack([bw_reader(file) for file in files])
     return br

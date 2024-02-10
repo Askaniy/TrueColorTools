@@ -10,6 +10,7 @@ import src.auxiliary as aux
 import src.image_core as ic
 import src.image_import as ii
 import src.color_processing as cp
+from src.data_processing import sun_norm
 
 
 def create_log(window) -> Callable:
@@ -31,11 +32,18 @@ def image_parser(
         match image_mode:
             # Multiband image
             case 0:
+                files = np.array(files)
+                not_empty_files = np.where(files != '')
+                files = files[not_empty_files]
+                filters = np.array(filters)[not_empty_files]
                 log(f'Importing the images')
                 cube = ic.PhotometricCube(filters, ii.bw_list_reader(files)).sorted()
                 if preview_flag:
                     log('Down scaling')
                     cube = cube.downscale(pixels_limit)
+                if desun:
+                    log('Removing Sun as emitter')
+                    cube /= sun_norm
                 log('Interpolating and extrapolating')
                 cube = cube.to_scope(aux.visible_range)
                 log('Color calculating')
@@ -47,6 +55,9 @@ def image_parser(
                 if preview_flag:
                     log('Down scaling')
                     cube = cube.downscale(pixels_limit)
+                if desun:
+                    log('Removing Sun as emitter')
+                    cube /= sun_norm
                 log('Interpolating and extrapolating')
                 cube = cube.to_scope(aux.visible_range)
                 log('Color calculating')
@@ -58,6 +69,9 @@ def image_parser(
                 if preview_flag:
                     log('Down scaling')
                     cube = cube.downscale(pixels_limit)
+                if desun:
+                    log('Removing Sun as emitter')
+                    cube /= sun_norm
                 log('Extrapolating')
                 cube = cube.to_scope(aux.visible_range)
                 log('Color calculating')
@@ -77,17 +91,17 @@ def image_parser(
 def cube2img(cube: ic.SpectralCube, gamma_correction: bool, srgb: bool, makebright: bool, exposure: float):
     """ Creates a Pillow image from the spectral cube """
     # TODO: add CIE white points support
-    l, x, y = cube.br.shape
+    _, x, y = cube.br.shape
     rgb = np.empty((3, x, y))
     rgb[0] = cube @ cp.r
     rgb[1] = cube @ cp.g
     rgb[2] = cube @ cp.b
     rgb = np.clip(rgb, 0, None)
+    rgb *= exposure
     if makebright:
         rgb /= rgb.max()
     if gamma_correction:
         rgb = cp.gamma_correction(rgb)
-    rgb *= exposure
     rgb = (255 * rgb).astype(np.uint8)
     return Image.fromarray(rgb.transpose())
 

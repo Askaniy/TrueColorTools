@@ -3,8 +3,6 @@ Astronomy-focused set of Python tools with GUI that use spectra construction and
 
 Input data is accepted in the form of filters measurements (like color indices) or continuous spectra, in units of flux or in magnitudes. Customizable output in floating point or hexadecimal formats. Multiband image processing and blackbody/redshifts colors calculating are also supported.
 
-**Note**: Image processing is temporarily unavailable. Go to commit [#13cd296](https://github.com/Askaniy/TrueColorTools/commit/13cd29639f2a7d8cc2055f8551d79720d5ee1a05) where it works (but slowly), or wait until a faster implementation is done.
-
 ![TCT screenshot](screenshot.png)
 
 

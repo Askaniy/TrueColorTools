@@ -82,6 +82,7 @@ def launch_window(lang: str):
         elif event == '-currentTab-':
             not_img_tab = int(not values['-currentTab-'] == 'tab2')
             text_color = text_colors[not_img_tab]
+            window['-srgb-'].update(text_color=text_color)
             window['-brModeText-'].update(text_color=text_color)
             window['-brMode0-'].update(text_color=text_color)
             window['-brMode1-'].update(text_color=text_color)
