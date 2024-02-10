@@ -113,22 +113,45 @@ def spatial_downscaling(cube: np.ndarray, pixels_limit: int):
     factor = ceil(sqrt(x * y / pixels_limit))
     return cube[:,::factor,::factor]
 
-def custom_interp(xy0: np.ndarray, k=16):
+def expand2x(array0: np.ndarray):
+    """ Expands the array along the first axis by half """
+    l = 2 * array0.shape[0] - 1
+    if array0.ndim == 3: # spectral cube processing
+        array1 = np.empty((l, array0.shape[1], array0.shape[2]), dtype=array0.dtype)
+    else:
+        array1 = np.empty(l, dtype=array0.dtype)
+    array1[0::2] = array0
+    array1[1::2] = (array0[:-1] + array0[1:]) * 0.5
+    return array1
+
+def linear_interp(x0: Sequence, y0: np.ndarray, x1: Sequence):
+    """ Equivalent to the `np.interp()`, but also works for cubes """
+    idx = np.searchsorted(x0, x1)
+    x_left = x0[idx-1]
+    x_right = x0[idx]
+    y_left = y0[idx-1]
+    y_right = y0[idx]
+    return y_left + ((x1 - x_left) / (x_right - x_left) * (y_right - y_left).T).T
+
+def custom_interp(array0: np.ndarray, k=16):
     """
-    Returns curve values with twice the resolution. Can be used in a loop.
+    Returns curve or cube values with twice the resolution. Can be used in a loop.
     Optimal in terms of speed to quality ratio: around 2 times faster than splines in scipy.
 
     Args:
-    - `xy0` (np.ndarray): values to be interpolated in shape (2, N)
+    - `array0` (np.ndarray): values to be interpolated in shape (2, N)
     - `k` (int): lower -> more chaotic, higher -> more linear, best results around 10-20
     """
-    xy1 = np.empty((2, xy0.shape[1]*2-1), dtype=xy0.dtype)
-    xy1[:,0::2] = xy0
-    xy1[:,1::2] = (xy0[:,:-1] + xy0[:,1:]) * 0.5
-    delta_left = np.append(0., xy0[1,1:-1] - xy0[1,:-2])
-    delta_right = np.append(xy0[1,2:] - xy0[1,1:-1], 0.)
-    xy1[1,1::2] += (delta_left - delta_right) / k
-    return xy1
+    array1 = expand2x(array0)
+    if array0.ndim == 3: # spectral cube processing
+        zero = np.zeros((1, array0.shape[1], array0.shape[2]))
+        delta_left = np.concatenate((zero, array0[1:-1] - array0[:-2]))
+        delta_right = np.concatenate((array0[2:] - array0[1:-1], zero))
+    else:
+        delta_left = np.append(0., array0[1:-1] - array0[:-2])
+        delta_right = np.append(array0[2:] - array0[1:-1], 0.)
+    array1[1::2] += (delta_left - delta_right) / k
+    return array1
 
 def interpolating(x0: Sequence, y0: np.ndarray, x1: Sequence, step: int|float) -> np.ndarray:
     """
@@ -136,10 +159,10 @@ def interpolating(x0: Sequence, y0: np.ndarray, x1: Sequence, step: int|float) -
     Combination of custom_interp (which returns an uneven mesh) and linear interpolation after it.
     The chaotic-linearity parameter increases with each iteration to reduce the disadvantages of custom_interp.
     """
-    xy0 = np.array([x0, y0])
     for i in range(int(np.log2(np.diff(x0).max() / step))):
-        xy0 = custom_interp(xy0, k=11+i)
-    return np.interp(x1, xy0[0], xy0[1])
+        x0 = expand2x(x0)
+        y0 = custom_interp(y0, k=11+i)
+    return linear_interp(x0, y0, x1)
 
 def scope2cube(scope: Sequence, shape: tuple[int, int]):
     """ Gets ta 1D array and expands its dimensions to a 3D array based on the 2D slice shape """

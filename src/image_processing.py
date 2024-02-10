@@ -79,7 +79,7 @@ def image_parser(
         end_time = monotonic()
         time = end_time-start_time
         speed = img.height * img.width / time
-        log(f'Processing took {time:.1f} seconds, average speed is {speed:.1f} px/sec.')
+        log(f'Processing took {time:.1f} seconds, average speed is {speed:.1f} px/sec')
         if preview_flag:
             window.write_event_value(('T2_thread', 'Sending the resulting preview to the main thread'), img)
         else:
