@@ -157,8 +157,8 @@ class SpectralCube:
         else:
             nm = np.arange(start, end+1, aux.resolution, dtype='uint16')
             br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
-            br1 = aux.scope2cube(other.br[np.where((other.nm >= start) & (other.nm <= end))], br0.shape[1:3])
-            return SpectralCube(nm, operator(br0, br1))
+            br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
+            return SpectralCube(nm, operator(br0.T, br1).T) # numpy iterates over the last axis
 
     def __mul__(self, other):
         """
@@ -225,7 +225,7 @@ class PhotometricCube:
             self.br = np.nan_to_num(self.br)
             print(f'# Note for the PhotometricCube object')
             print(f'- NaN values detected during object initialization, they been replaced with zeros.')
-    
+
     def downscale(self, pixels_limit: int):
         """ Brings the spatial resolution of the cube to approximately match the number of pixels """
         br = aux.spatial_downscaling(self.br, pixels_limit)

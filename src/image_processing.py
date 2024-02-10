@@ -31,7 +31,15 @@ def image_parser(
         match image_mode:
             # Multiband image
             case 0:
-                pass
+                log(f'Importing the images')
+                cube = ic.PhotometricCube(filters, ii.bw_list_reader(files)).sorted()
+                if preview_flag:
+                    log('Down scaling')
+                    cube = cube.downscale(pixels_limit)
+                log('Interpolating and extrapolating')
+                cube = cube.to_scope(aux.visible_range)
+                log('Color calculating')
+                img = cube2img(cube, gamma_correction, srgb, makebright, exposure)
             # RGB image
             case 1:
                 log(f'Importing the RGB image')
@@ -71,9 +79,9 @@ def cube2img(cube: ic.SpectralCube, gamma_correction: bool, srgb: bool, makebrig
     # TODO: add CIE white points support
     l, x, y = cube.br.shape
     rgb = np.empty((3, x, y))
-    rgb[0,:,:] = cube @ cp.r
-    rgb[1,:,:] = cube @ cp.g
-    rgb[2,:,:] = cube @ cp.b
+    rgb[0] = cube @ cp.r
+    rgb[1] = cube @ cp.g
+    rgb[2] = cube @ cp.b
     rgb = np.clip(rgb, 0, None)
     if makebright:
         rgb /= rgb.max()

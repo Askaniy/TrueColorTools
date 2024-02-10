@@ -1,8 +1,10 @@
 """ Responsible for converting image data into a working form. """
 
+from pathlib import Path
 import numpy as np
 from astropy.io import fits
 from PIL import Image
+
 
 def cube_reader(file: str) -> tuple[np.ndarray, np.ndarray]:
     """ Imports spectral data from a FITS file in standard of HST STIS """
@@ -19,6 +21,23 @@ def rgb_reader(file: str) -> np.ndarray:
     img = img.convert(to_supported_mode(img.mode))
     br = img2array(img).astype('float64') / color_depth(img.mode)
     return br.transpose()[::-1]
+
+def bw_reader(file: str) -> np.ndarray:
+    """ Imports spectral data from a black and white image """
+    img = Image.open(file)
+    img = img.convert(to_supported_mode(img.mode))
+    br = img2array(img).astype('float64') / color_depth(img.mode)
+    br = br.transpose()
+    if br.ndim == 3:
+        print(f'# Note for the image "{Path(file).name}"')
+        print(f'- This is a multi-channel image, but should be single-channel. The brightest channel is extracted.')
+        br = br[np.argmax(br.sum(axis=(1,2)))]
+    return br
+
+def bw_list_reader(files: list) -> np.ndarray:
+    """ Imports and combines the list of black and white images into one array """
+    br = np.stack([bw_reader(file) for file in files])
+    return br
 
 def to_supported_mode(mode: str):
     """ Corresponds the image mode of the Pillow library and supported one """

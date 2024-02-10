@@ -209,9 +209,9 @@ gui_input = {
     'de': 'Eingaben'
 }
 gui_step1 = {
-    'en': '1. Choose input data type',
-    'ru': '1. Выберите формат вводимых данных',
-    'de': '1. Eingabe-Datentyp auswählen'
+    'en': 'Choose input data type',
+    'ru': 'Выберите формат вводимых данных',
+    'de': 'Eingabe-Datentyp auswählen'
 }
 gui_datatype = {
     'en': ['Multiband image', 'RGB image', 'Spectral cube'],
@@ -224,9 +224,9 @@ gui_RGBcolors = {
     'de': ['(Blauer Kanal)', '(Grüner Kanal)', '(Roter Kanal)'],
 }
 gui_step2 = {
-    'en': '2. Match several filters with data',
-    'ru': '2. Соотнесите фильтры с данными',
-    'de': '2. Mehrere Filter an Daten anpassen'
+    'en': 'Match several filters with data',
+    'ru': 'Соотнесите фильтры с данными',
+    'de': 'Mehrere Filter an Daten anpassen'
 }
 gui_browse = {
     'en': 'Browse',
