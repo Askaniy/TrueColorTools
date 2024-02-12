@@ -89,15 +89,19 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
             rgb_text = sg.Text('', key='T2_rgbText'+n)
         l = [
             [
-                sg.Text(tr.gui_filter[lang], key='T2_filterText'+n),
-                sg.InputCombo(('', *filtersDB), enable_events=True, expand_x=True, key='T2_filter'+n)
-            ],
-            [
                 sg.Input(enable_events=True, size=1, key='T2_path'+n, expand_x=True, visible=False),
                 # size=1 is VERY important! Now column depends on max length of filter file names
                 sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, key='T2_pathText'+n, visible=False),
                 # or label of RGB image bands, depends on radio box
                 rgb_text
+            ],
+            [
+                sg.Text(tr.gui_filter[lang], key='T2_filterText'+n),
+                sg.InputCombo(('', *filtersDB), enable_events=True, expand_x=True, key='T2_filter'+n)
+            ],
+            [
+                sg.Text(tr.gui_factor[lang], key='T2_factorText'+n),
+                sg.Input('1', size=1, key='T2_factor'+n, expand_x=True)
             ]
         ]
         return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, key='T2_band'+n)
@@ -124,7 +128,7 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         #[sg.Checkbox(tr.gui_autoalign[lang], key='T2_autoalign')],
     ]
     T2_col2_2 = [
-        [sg.Text(tr.gui_exposure[lang], key='T2_exposureText'), sg.Input('1', size=1, key='T2_exposure', expand_x=True)]
+        [sg.Text(tr.gui_factor[lang], key='T2_factorText'), sg.Input('1', size=1, key='T2_factor', expand_x=True)]
     ]
     T2_col2 = [
         [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T2_title2'), sg.Push()],
@@ -247,12 +251,13 @@ def translate(window: sg.Window, T2_vis: int, lang: str):
         window['T2_band'+str(i)].update(f'{tr.gui_band[lang]} {i+1}')
         window['T2_filterText'+str(i)].update(tr.gui_filter[lang])
         window['T2_pathText'+str(i)].update(tr.gui_browse[lang])
+        window['T2_factorText'+str(i)].update(tr.gui_factor[lang])
     window['T2_makebright'].update(text=tr.gui_makebright[lang])
     window['T2_desun'].update(text=tr.gui_desun[lang])
     #window['T2_devega'].update(text=tr.gui_devega[lang])
     #window['T2_autoalign'].update(text=tr.gui_autoalign[lang])
     #window['T2_plotpixels'].update(text=tr.gui_plotpixels[lang])
-    window['T2_exposureText'].update(tr.gui_exposure[lang])
+    window['T2_factorText'].update(tr.gui_factor[lang])
     window['T2_preview'].update(tr.gui_preview[lang])
     window['T2_process'].update(tr.gui_process[lang])
     window['T3_title1'].update(tr.gui_input[lang])

@@ -20,8 +20,8 @@ def create_log(window) -> Callable:
     return log
 
 def image_parser(
-        window, image_mode: int, save_folder: str, pixels_limit: int, filters: list, files: list, single_file: str,
-        gamma_correction: bool, srgb: bool, makebright: bool, desun: bool, exposure: float
+        window, image_mode: int, save_folder: str, pixels_limit: int, single_file: str, files: list, filters: list, factors: list,
+        gamma_correction: bool, srgb: bool, makebright: bool, desun: bool, factor: float
     ):
     """ Receives user input and performs processing in a parallel thread """
     preview_flag = save_folder == ''
@@ -36,32 +36,36 @@ def image_parser(
                 not_empty_files = np.where(files != '')
                 files = files[not_empty_files]
                 filters = np.array(filters)[not_empty_files]
+                factors = np.array(factors, dtype='float64')[not_empty_files]
                 log(f'Importing the images')
                 cube = ic.PhotometricCube(filters, ii.bw_list_reader(files)).sorted()
                 if preview_flag:
                     log('Down scaling')
                     cube = cube.downscale(pixels_limit)
+                cube.br = (cube.br.T * factors).T
                 if desun:
                     log('Removing Sun as emitter')
                     cube /= sun_norm
                 log('Interpolating and extrapolating')
                 cube = cube.to_scope(aux.visible_range)
                 log('Color calculating')
-                img = cube2img(cube, gamma_correction, srgb, makebright, exposure)
+                img = cube2img(cube, gamma_correction, srgb, makebright, factor)
             # RGB image
             case 1:
+                factors = np.array(factors, dtype='float64')
                 log(f'Importing the RGB image')
                 cube = ic.PhotometricCube(filters, ii.rgb_reader(single_file)).sorted()
                 if preview_flag:
                     log('Down scaling')
                     cube = cube.downscale(pixels_limit)
+                cube.br = (cube.br.T * factors).T
                 if desun:
                     log('Removing Sun as emitter')
                     cube /= sun_norm
                 log('Interpolating and extrapolating')
                 cube = cube.to_scope(aux.visible_range)
                 log('Color calculating')
-                img = cube2img(cube, gamma_correction, srgb, makebright, exposure)
+                img = cube2img(cube, gamma_correction, srgb, makebright, factor)
             # Spectral cube
             case 2:
                 log('Importing the spectral cube (only the first loading is slow)')
@@ -75,7 +79,7 @@ def image_parser(
                 log('Extrapolating')
                 cube = cube.to_scope(aux.visible_range)
                 log('Color calculating')
-                img = cube2img(cube, gamma_correction, srgb, makebright, exposure)
+                img = cube2img(cube, gamma_correction, srgb, makebright, factor)
         end_time = monotonic()
         time = end_time-start_time
         speed = img.height * img.width / time
@@ -88,7 +92,7 @@ def image_parser(
         log(f'Image processing failed with {format_exc(limit=0).strip()}')
         print(format_exc())
 
-def cube2img(cube: ic.SpectralCube, gamma_correction: bool, srgb: bool, makebright: bool, exposure: float):
+def cube2img(cube: ic.SpectralCube, gamma_correction: bool, srgb: bool, makebright: bool, factor: float):
     """ Creates a Pillow image from the spectral cube """
     # TODO: add CIE white points support
     _, x, y = cube.br.shape
@@ -96,10 +100,10 @@ def cube2img(cube: ic.SpectralCube, gamma_correction: bool, srgb: bool, makebrig
     rgb[0] = cube @ cp.r
     rgb[1] = cube @ cp.g
     rgb[2] = cube @ cp.b
-    rgb = np.clip(rgb, 0, None)
-    rgb *= exposure
     if makebright:
         rgb /= rgb.max()
+    rgb *= factor
+    rgb = np.clip(rgb, 0, 1)
     if gamma_correction:
         rgb = cp.gamma_correction(rgb)
     rgb = (255 * rgb).astype(np.uint8)

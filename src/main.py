@@ -247,14 +247,16 @@ def launch_window(lang: str):
             window['T2_pathText'].update(visible=T2_single_file_flag)
             
             # Getting filters and image paths
-            T2_filters = []
             T2_files = []
+            T2_filters = []
+            T2_factors = []
             for i in range(T2_vis):
                 T2_filter_name = values[f'T2_filter{i}']
                 if T2_filter_name != '':
                     T2_filter = get_filter(T2_filter_name)
                     T2_filters.append(T2_filter)
                     T2_files.append(values[f'T2_path{i}'])
+                    T2_factors.append(values[f'T2_factor{i}'])
             
             # Updating filters profile plot
             if (isinstance(event, str) and event.startswith('T2_filter')) or event in ('-currentTab-', '-srgb-'):
@@ -272,8 +274,8 @@ def launch_window(lang: str):
             elif isinstance(event, str) and event in ('T2_preview', 'T2_folder'):
                 window.start_thread(
                     lambda: ip.image_parser(
-                        window, T2_mode, values['T2_folder'], img_preview_area, T2_filters, T2_files, values['T2_path'],
-                        values['-gamma-'], values['-srgb-'], values['T2_makebright'], values['T2_desun'], float(values['T2_exposure'])
+                        window, T2_mode, values['T2_folder'], img_preview_area, values['T2_path'], T2_files, T2_filters, T2_factors,
+                        values['-gamma-'], values['-srgb-'], values['T2_makebright'], values['T2_desun'], float(values['T2_factor'])
                     ),
                     ('T2_thread', 'End of the image processing thread\n')
                 )

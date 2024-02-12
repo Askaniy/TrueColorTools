@@ -219,9 +219,9 @@ gui_datatype = {
     'de': ['Multiband Aufnahme', 'RGB-Bild', 'Spektralwürfel']
 }
 gui_RGBcolors = {
-    'en': ['(Blue channel)', '(Green channel)', '(Red channel)'],
-    'ru': ['(Синий канал)', '(Зелёный канал)', '(Красный канал)'],
-    'de': ['(Blauer Kanal)', '(Grüner Kanal)', '(Roter Kanal)'],
+    'en': ['Blue channel', 'Green channel', 'Red channel'],
+    'ru': ['Синий канал', 'Зелёный канал', 'Красный канал'],
+    'de': ['Blauer Kanal', 'Grüner Kanal', 'Roter Kanal'],
 }
 gui_step2 = {
     'en': 'Match several filters with data',
@@ -268,10 +268,10 @@ gui_desun = {
 #    'ru': 'Совместить изображения (β)',
 #    'de': 'Bildbänder ausrichten (β)'
 #}
-gui_exposure = {
-    'en': 'Exposure',
-    'ru': 'Экспозиция',
-    'de': 'Belichtung'
+gui_factor = {
+    'en': 'Brightness factor',
+    'ru': 'Множитель яркости',
+    'de': 'Helligkeitsfaktor'
 }
 gui_preview = {
     'en': 'Show preview',
