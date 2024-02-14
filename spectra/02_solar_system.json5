@@ -204,7 +204,7 @@
         system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.38, 1, 0.863, 0.85], // traced from Fig. 6
-        sd: [0.08, 0, 0.173, 0.19], // traced from Fig. 6
+        sd: [0.08, 0, 0.173, 0.19], // traced from Fig. 6, relative to Green filter
         geometric_albedo: ['Galileo_SSI.Clear', 0.054, 0.003], // Table III, log-scaled
         spherical_albedo: ['Galileo_SSI.Clear', 0.027, 0.002], // Table III, log-scaled
     },
@@ -213,7 +213,7 @@
         system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '7560A'],
         br: [0.54, 1, 1.14], // traced from Fig. 6
-        sd: [0.05, 0, 0.075], // traced from Fig. 6
+        sd: [0.05, 0, 0.075], // traced from Fig. 6, relative to Green filter
         geometric_albedo: ['Galileo_SSI.Clear', 0.101, 0.007], // Table III, log-scaled
         spherical_albedo: ['Galileo_SSI.Clear', 0.036, 0.004], // Table III, log-scaled
     },
@@ -222,7 +222,7 @@
         system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.47, 1, 1.225, 1], // traced from Fig. 6
-        sd: [0.0625, 0, 0.137, 0.15], // traced from Fig. 6
+        sd: [0.0625, 0, 0.137, 0.15], // traced from Fig. 6, relative to Green filter
         geometric_albedo: ['Galileo_SSI.Clear', 0.080, 0.005], // Table III, log-scaled
         spherical_albedo: ['Galileo_SSI.Clear', 0.029, 0.003], // Table III, log-scaled
     },
@@ -231,7 +231,7 @@
         system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A'],
         br: [0.7125, 1, 1.137], // traced from Fig. 6
-        sd: [0.067, 0, 0.117], // traced from Fig. 6
+        sd: [0.067, 0, 0.117], // traced from Fig. 6, relative to Green filter
         geometric_albedo: ['Galileo_SSI.Clear', 0.053, 0.004], // Table III, log-scaled
         spherical_albedo: ['Galileo_SSI.Clear', 0.022, 0.002], // Table III, log-scaled
     },
@@ -240,7 +240,7 @@
         system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.6, 1, 1.137, 1.07], // traced from Fig. 6
-        sd: [0.05, 0, 0.117, 0.15], // traced from Fig. 6
+        sd: [0.05, 0, 0.117, 0.15], // traced from Fig. 6, relative to Green filter
         geometric_albedo: ['Galileo_SSI.Clear', 0.041, 0.003], // Table III, log-scaled
         spherical_albedo: ['Galileo_SSI.Clear', 0.017, 0.002], // Table III, log-scaled
     },

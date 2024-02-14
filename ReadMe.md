@@ -113,5 +113,5 @@ This research has made use of:
     - [The SVO Filter Profile Service. Rodrigo, C., Solano, E., Bayo, A., 2012](https://ui.adsabs.harvard.edu/abs/2012ivoa.rept.1015R/abstract); 
     - [The SVO Filter Profile Service. Rodrigo, C., Solano, E., 2020](https://ui.adsabs.harvard.edu/abs/2020sea..confE.182R/abstract); 
 - [Colour & Vision Research laboratory and database](http://www.cvrl.org/)
-    - [Stiles & Burch (1959) 10-deg individual colour matching functions](http://www.cvrl.org/database/text/sb_individual/sb10_individual.htm);
-    - [CIE (2012) 10-deg XYZ “physiologically-relevant” colour matching functions](http://www.cvrl.org/database/text/cienewxyz/cie2012xyz10.htm).
+    - [Stiles & Burch (1959) 2-deg individual colour matching functions](http://www.cvrl.org/database/text/sb_individual/sb2_individual.htm);
+    - [CIE (2012) 2-deg XYZ “physiologically-relevant” colour matching functions](http://www.cvrl.org/database/text/cienewxyz/cie2012xyz2.htm).

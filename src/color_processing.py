@@ -26,7 +26,7 @@ class ColorSystem:
         self.T = self.MI / self.wscale[:, np.newaxis]
 
 # Used white points
-illuminant_E = (0.33333, 0.33333)
+illuminant_E = (1/3, 1/3)
 #illuminant_D65 = (0.3127, 0.3291)
 
 # Used color systems
@@ -34,24 +34,24 @@ srgb = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_E)
 #hdtv = ColorSystem((0.67, 0.33), (0.21, 0.71), (0.15, 0.06), illuminant_D65)
 #smpte = ColorSystem((0.63, 0.34), (0.31, 0.595), (0.155, 0.070), illuminant_D65)
 
-# Stiles & Burch (1959) 10-deg color matching data, direct experimental data
-# http://www.cvrl.org/stilesburch10_ind.htm
-# Sensitivity modulo values less than 10^-4 were previously removed
-r = Spectrum('r CMF', *np.loadtxt('src/cmf/StilesBurch10deg.r.dat').transpose()).scaled_by_area()
-g = Spectrum('g CMF', *np.loadtxt('src/cmf/StilesBurch10deg.g.dat').transpose()).scaled_by_area()
-b = Spectrum('b CMF', *np.loadtxt('src/cmf/StilesBurch10deg.b.dat').transpose()).scaled_by_area()
+# Stiles & Burch (1959) 2-deg color matching data, direct experimental data
+# http://www.cvrl.org/stilesburch2_ind.htm
+# Edge sensitivity modulo values less than 10⁴ were previously removed
+r = Spectrum('r CMF', *np.loadtxt('src/cmf/StilesBurch2deg.r.dat').transpose()).scaled_by_area()
+g = Spectrum('g CMF', *np.loadtxt('src/cmf/StilesBurch2deg.g.dat').transpose()).scaled_by_area()
+b = Spectrum('b CMF', *np.loadtxt('src/cmf/StilesBurch2deg.b.dat').transpose()).scaled_by_area()
 
 # CIE XYZ functions transformed from the CIE (2006) LMS functions, 10-deg
 # http://www.cvrl.org/ciexyzpr.htm
-# Sensitivity modulo values less than 10^-4 were previously removed
-x = Spectrum('x CMF', *np.loadtxt('src/cmf/cie10deg.x.dat').transpose())
-y = Spectrum('y CMF', *np.loadtxt('src/cmf/cie10deg.y.dat').transpose())
-z = Spectrum('z CMF', *np.loadtxt('src/cmf/cie10deg.z.dat').transpose())
-# Normalization. TODO: find an official way to calibrate brightness for albedo!
-# 355.5 was guessed so that the brightness was approximately the same as that of the legacy version
-x.br /= 355.5
-y.br /= 355.5
-z.br /= 355.5
+# Edge sensitivity values less than 10⁴ were previously removed
+x = Spectrum('x CMF', *np.loadtxt('src/cmf/cie2deg.x.dat').transpose())
+y = Spectrum('y CMF', *np.loadtxt('src/cmf/cie2deg.y.dat').transpose())
+z = Spectrum('z CMF', *np.loadtxt('src/cmf/cie2deg.z.dat').transpose())
+# Normalization. TODO: find a correct way to calibrate brightness for albedo!
+# 339.12 was guessed so that the equal-energy spectrum of unit brightness has color (1, 1, 1)
+x.br /= 339.12
+y.br /= 339.12
+z.br /= 339.12
 
 
 
