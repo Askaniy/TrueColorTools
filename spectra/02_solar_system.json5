@@ -36,8 +36,8 @@
     'Mercury|Mallama2017': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
         nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.087, 0.105, 0.142, 0.158, 0.172, 0.180, 0.208],
-        albedo: true
+        br_geometric: [0.087, 0.105, 0.142, 0.158, 0.172, 0.180, 0.208],
+        geometric_albedo: true
     },
     'Mercury|Crow2011': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
@@ -57,8 +57,8 @@
     'Venus|Mallama2017': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
         nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.348, 0.658, 0.689, 0.658, 0.708, 0.640, 0.584],
-        albedo: true
+        br_geometric: [0.348, 0.658, 0.689, 0.658, 0.708, 0.640, 0.584],
+        geometric_albedo: true
     },
     'Venus|Crow2011': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
@@ -85,8 +85,8 @@
     'Earth|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.688, 0.512, 0.434, 0.392, 0.418, 0.396, 0.430],
-        albedo: true
+        br_geometric: [0.688, 0.512, 0.434, 0.392, 0.418, 0.396, 0.430],
+        geometric_albedo: true
     },
     'Earth|Crow2011': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
@@ -114,8 +114,8 @@
     'Mars|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.060, 0.088, 0.170, 0.250, 0.288, 0.285, 0.330],
-        albedo: true
+        br_geometric: [0.060, 0.088, 0.170, 0.250, 0.288, 0.285, 0.330],
+        geometric_albedo: true
     },
     'Mars|Crow2011': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
@@ -177,8 +177,8 @@
     'Jupiter|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Jovian system'],
         nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.358, 0.443, 0.538, 0.513, 0.495, 0.389, 0.321],
-        albedo: true
+        br_geometric: [0.358, 0.443, 0.538, 0.513, 0.495, 0.389, 0.321],
+        geometric_albedo: true
     },
     'Jupiter|Crow2011': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Jovian system'],
@@ -303,8 +303,8 @@
     'Saturn|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
         nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.203, 0.339, 0.499, 0.646, 0.568, 0.543, 0.423],
-        albedo: true
+        br_geometric: [0.203, 0.339, 0.499, 0.646, 0.568, 0.543, 0.423],
+        geometric_albedo: true
     },
     'Saturn|Crow2011': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
@@ -450,8 +450,8 @@
     'Uranus|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Uranian system'],
         nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.502, 0.561, 0.488, 0.264, 0.202, 0.089, 0.079],
-        albedo: true
+        br_geometric: [0.502, 0.561, 0.488, 0.264, 0.202, 0.089, 0.079],
+        geometric_albedo: true
     },
     'Uranus|Crow2011': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Uranian system'],
@@ -590,8 +590,8 @@
     'Neptune|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.578, 0.562, 0.442, 0.226, 0.181, 0.072, 0.067],
-        albedo: true
+        br_geometric: [0.578, 0.562, 0.442, 0.226, 0.181, 0.072, 0.067],
+        geometric_albedo: true
     },
     'Neptune|Crow2011': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
