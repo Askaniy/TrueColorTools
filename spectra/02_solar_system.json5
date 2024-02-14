@@ -39,13 +39,13 @@
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
         br_geometric: [0.087, 0.105, 0.142, 0.172, 0.208,
                        0.158, 0.180],
-        geometric_albedo: true
+        albedo: true
     },
-    'Mercury|Crow2011': {
+    'Mercury|Crow2011, Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         nm: [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5],
         br: [0.61, 0.56, 0.66, 0.71, 0.86, 1.00, 1.37, 1.50, 1.77, 2.01],
-        albedo: ['Generic_Bessell.V', 0.142]
+        geometric_albedo: ['Generic_Bessell.V', 0.142]
     },
     'Mercury|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
@@ -64,11 +64,11 @@
                        0.658, 0.640],
         albedo: true
     },
-    'Venus|Crow2011': {
+    'Venus|Crow2011, Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         nm: [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5],
         br: [0.59, 0.64, 0.72, 0.58, 0.95, 1.00, 1.16, 1.08, 1.16, 1.12],
-        albedo: ['Generic_Bessell.V', 0.689]
+        geometric_albedo: ['Generic_Bessell.V', 0.689]
     },
     'Venus|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
@@ -94,17 +94,17 @@
                        0.392, 0.396],
         albedo: true
     },
-    'Earth|Crow2011': {
+    'Earth|Crow2011, Mallama2017': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
         nm: [350, 450, 550, 650, 750, 850, 950],
         br: [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79],
-        albedo: ['Generic_Bessell.V', 0.434]
+        geometric_albedo: ['Generic_Bessell.V', 0.434]
     },
-    '(E I) Moon|Crow2011': {
+    '(E I) Moon|Crow2011, Madden2018': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon'],
         nm: [350, 450, 550, 650, 750, 850, 950],
         br: [13.83, 18.06, 22.54, 26.68, 30.74, 34.86, 34.14],
-        albedo: ['Generic_Bessell.V', 0.09948], // Madden2018
+        albedo: ['Generic_Bessell.V', 0.09948],
     },
     '(E I) Moon|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'moon'],
@@ -134,11 +134,11 @@
                        0.250, 0.285],
         albedo: true
     },
-    'Mars|Crow2011': {
+    'Mars|Crow2011, Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         nm: [350, 450, 550, 650, 750, 850, 950],
         br: [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31],
-        albedo: ['Generic_Bessell.V', 0.170]
+        geometric_albedo: ['Generic_Bessell.V', 0.170]
     },
     'Mars: Bright areas|USGSarchive': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'surface feature'],
@@ -199,10 +199,11 @@
                        0.513, 0.389],
         albedo: true
     },
-    'Jupiter|Crow2011': {
+    'Jupiter|Crow2011, Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Jovian system'],
         nm: [350, 450, 550, 650, 750, 850],
-        br: [0.604, 0.824, 1.000, 1.006, 0.832, 0.636]
+        br: [0.604, 0.824, 1.000, 1.006, 0.832, 0.636],
+        geometric_albedo: ['Generic_Bessell.V', 0.538],
     },
     'Jupiter|Karkoschka1994': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Jovian system'],
@@ -263,12 +264,12 @@
         geometric_albedo: ['Galileo_SSI.Clear', 0.041, 0.003], // Table III, log-scaled
         spherical_albedo: ['Galileo_SSI.Clear', 0.017, 0.002], // Table III, log-scaled
     },
-    '(J I) Io: Trailing hemisphere|USGSarchive': {
+    '(J I) Io: Trailing hemisphere|USGSarchive, Madden2018': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 739.8, 751.9, 763.6, 775.6, 786.3, 799, 811.7, 822.4, 837.1, 849.8, 862.5],
         br: [0.126856, 0.161157, 0.189998, 0.312668, 0.455349, 0.642046, 0.775382, 0.801427, 0.811630, 0.890139, 0.942953, 1.004252, 1.005697, 1.015561,
             1.031987, 1.019722, 1.008961, 1.000501, 1.015732, 1.006328, 1.003697, 0.986871, 0.973683, 0.987817],
-        albedo: ['Generic_Bessell.V', 0.5014384], // Madden2018
+        albedo: ['Generic_Bessell.V', 0.5014384],
     },
     '(J I) Io|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
@@ -276,12 +277,12 @@
         br: [0.06645, 0.09565, 0.13699, 0.18699, 0.24564, 0.31289, 0.39051, 0.46464, 0.49727, 0.51954, 0.56077, 0.57946, 0.5982, 0.62042],
         albedo: true
     },
-    '(J II) Europa: Trailing hemisphere|USGSarchive': {
+    '(J II) Europa: Trailing hemisphere|USGSarchive, Madden2018': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
         br: [0.352826, 0.410782, 0.467415, 0.602579, 0.688769, 0.806425, 0.839300, 0.852109, 0.913667, 0.961235, 0.979446, 1.006591, 1.026941, 1.038414,
             1.067850, 1.062889, 1.063046],
-        albedo: ['Generic_Bessell.V', 0.6110393], // Madden2018
+        albedo: ['Generic_Bessell.V', 0.6110393],
     },
     '(J II) Europa: Trailing hemisphere|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
@@ -291,12 +292,12 @@
             0.62658, 0.63586, 0.63949, 0.639, 0.63841, 0.63616, 0.63216, 0.6371, 0.64146, 0.62304],
         albedo: true
     },
-    '(J III) Ganymede: Leading hemisphere|USGSarchive': {
+    '(J III) Ganymede: Leading hemisphere|USGSarchive, Madden2018': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
         br: [0.488778, 0.590744, 0.632155, 0.752500, 0.783059, 0.869610, 0.918507, 0.955278, 0.973874, 1.010833, 1.021557, 1.046712, 1.040900, 1.035977,
             1.049606, 1.044146, 1.036557],
-        albedo: ['Generic_Bessell.V', 0.4636778], // Madden2018
+        albedo: ['Generic_Bessell.V', 0.4636778],
     },
     '(J III) Ganymede: Leading hemisphere|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
@@ -306,12 +307,12 @@
             0.49825, 0.48741, 0.48884, 0.49226, 0.49704, 0.49245],
         albedo: true
     },
-    '(J IV) Callisto: Leading hemisphere|USGSarchive': {
+    '(J IV) Callisto: Leading hemisphere|USGSarchive, Madden2018': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 837.1, 849.8, 862.5],
         br: [0.406242, 0.456089, 0.518130, 0.652152, 0.691349, 0.777651, 0.840575, 0.881522, 0.918704, 0.941487, 0.969265, 0.990831, 0.997041, 0.993501,
             1.007422, 0.986979, 1.001239, 0.985442, 1.006188],
-        albedo: ['Generic_Bessell.V', 0.1688978], // Madden2018
+        albedo: ['Generic_Bessell.V', 0.1688978],
     },
     '(J IV) Callisto: Leading hemisphere|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
@@ -327,10 +328,11 @@
                        0.646, 0.543],
         albedo: true
     },
-    'Saturn|Crow2011': {
+    'Saturn|Crow2011, Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
         nm: [350, 450, 550, 650, 750, 850],
-        br: [0.445, 0.684, 1.000, 1.144, 1.001, 0.776]
+        br: [0.445, 0.684, 1.000, 1.144, 1.001, 0.776],
+        geometric_albedo: ['Generic_Bessell.V', 0.499]
     },
     'Saturn|Karkoschka1994': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
@@ -476,10 +478,11 @@
                        0.264, 0.089],
         albedo: true
     },
-    'Uranus|Crow2011': {
+    'Uranus|Crow2011, Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Uranian system'],
         nm: [350, 450, 550, 650, 750, 850],
-        br: [0.984, 1.067, 1.000, 0.647, 0.292, 0.148]
+        br: [0.984, 1.067, 1.000, 0.647, 0.292, 0.148],
+        geometric_albedo: ['Generic_Bessell.V', 0.488]
     },
     'Uranus|Karkoschka1994': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Uranian system'],
@@ -618,10 +621,11 @@
                        0.226, 0.072],
         albedo: true
     },
-    'Neptune|Crow2011': {
+    'Neptune|Crow2011, Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         nm: [350, 450, 550, 650, 750, 850],
-        br: [1.252, 1.235, 1.000, 0.555, 0.237, 0.132]
+        br: [1.252, 1.235, 1.000, 0.555, 0.237, 0.132],
+        geometric_albedo: ['Generic_Bessell.V', 0.442]
     },
     'Neptune|Karkoschka1994': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Neptunian system'],
@@ -636,7 +640,7 @@
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Neptunian system', 'irregular'],
         nm_range: {start: 300, stop: 900, step: 100},
         br: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
-        geometric_albedo: true, // geometric albedo
+        geometric_albedo: true,
     },
     '(N II) Nereid|Graykowski2018': {
         tags: ['Solar system', 'moon', 'Neptunian system', 'irregular'],
