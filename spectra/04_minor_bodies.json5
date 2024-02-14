@@ -2888,7 +2888,7 @@
         sun: true
     },
     '(527604) 2007 VL305|MBOSS': {
-        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.830, 'V-R': 0.470, 'R-I': 0.480},
         calib: 'Vega',
@@ -2902,14 +2902,14 @@
         sun: true
     },
     '(530664) 2011 SO277|MBOSS': {
-        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'Neptune trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.690, 'V-R': 0.390},
         calib: 'Vega',
         sun: true
     },
     '(530930) 2011 WG157|MBOSS': {
-        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.720, 'V-R': 0.400},
         calib: 'Vega',
@@ -3060,7 +3060,7 @@
         calib: 'Vega',
         sun: true
     },
-    '1999 CX131|MBOSS': {
+    '(612086) 1999 CX131|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.918, 'V-R': 0.664, 'R-I': 0.434},
@@ -3074,21 +3074,21 @@
         calib: 'Vega',
         sun: true
     },
-    '1999 HV11|MBOSS': {
+    '(612092) 1999 HV11|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
         system: 'Generic_Bessell',
         indices: {'B-V': 1.110, 'V-R': 0.590},
         calib: 'Vega',
         sun: true
     },
-    '1999 LE31|MBOSS': {
+    '(612093) 1999 LE31|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.748, 'V-R': 0.467, 'R-I': 0.521},
         calib: 'Vega',
         sun: true
     },
-    '1999 OJ4|MBOSS': {
+    '(612095) 1999 OJ4|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
         system: 'Generic_Bessell',
         indices: {'B-V': 1.098, 'V-R': 0.668, 'R-I': 0.549},
@@ -3130,7 +3130,7 @@
         calib: 'Vega',
         sun: true
     },
-    '2000 KK4|MBOSS': {
+    '(612161) 2000 KK4|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.910, 'V-R': 0.580, 'R-I': 0.640},
@@ -3151,7 +3151,7 @@
         calib: 'Vega',
         sun: true
     },
-    '2001 KD77|MBOSS': {
+    '(612218) 2001 KD77|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
         system: 'Generic_Bessell',
         indices: {'B-V': 1.123, 'V-R': 0.624, 'R-I': 0.565},
@@ -3165,21 +3165,21 @@
         calib: 'Vega',
         sun: true
     },
-    '2001 QC298|MBOSS': {
+    '(612239) 2001 QC298|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.750, 'V-R': 0.490, 'R-I': 0.480},
         calib: 'Vega',
         sun: true
     },
-    '2001 QR322|MBOSS': {
-        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'resonant'],
+    '(612243) 2001 QR322|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'Neptune trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.800, 'V-R': 0.460, 'R-I': 0.360},
         calib: 'Vega',
         sun: true
     },
-    '2001 QX322|MBOSS': {
+    '(612245) 2001 QX322|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.914, 'V-R': 0.562},
@@ -3193,7 +3193,7 @@
         calib: 'Vega',
         sun: true
     },
-    '2002 GH32|MBOSS': {
+    '(612349) 2002 GH32|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.990, 'V-R': 0.570, 'R-I': 0.590},
@@ -3207,7 +3207,7 @@
         calib: 'Vega',
         sun: true
     },
-    '2002 XV93|MBOSS': {
+    '(612533) 2002 XV93|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'plutino'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.720, 'V-R': 0.375},
@@ -3221,21 +3221,21 @@
         calib: 'Vega',
         sun: true
     },
-    '2003 QA92|MBOSS': {
+    '(612580) 2003 QA92|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
         system: 'Generic_Bessell',
         indices: {'B-V': 1.040, 'V-R': 0.630},
         calib: 'Vega',
         sun: true
     },
-    '2003 QK91|MBOSS': {
+    '(612575) 2003 QK91|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.870, 'V-R': 0.500, 'R-I': 0.470},
         calib: 'Vega',
         sun: true
     },
-    '2003 QQ91|MBOSS': {
+    '(612577) 2003 QQ91|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.670, 'V-R': 0.510},
@@ -3270,7 +3270,7 @@
         calib: 'Vega',
         sun: true
     },
-    '2004 VC131|Thirouin2019': {
+    '(609221) 2004 VC131|Thirouin2019': {
         tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
         system: 'SLOAN_SDSS',
         indices: {'g-r': 0.89, 'g-i': 1.40},
@@ -3284,7 +3284,7 @@
         calib: 'AB',
         sun: true
     },
-    '2004 XR190|MBOSS': {
+    '(612911) 2004 XR190|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.790, 'V-R': 0.450, 'R-I': 0.520},
@@ -3292,20 +3292,20 @@
         sun: true
     },
     '2005 TN53|MBOSS': {
-        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'Neptune trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.820, 'V-R': 0.470, 'R-I': 0.470},
         calib: 'Vega',
         sun: true
     },
-    '2006 RJ103|MBOSS': {
-        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur', 'Neptune trojan'],
+    '(613490) 2006 RJ103|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.820, 'V-R': 0.470, 'R-I': 0.270},
         calib: 'Vega',
         sun: true
     },
-    '2006 RJ103|Markwardt2023': {
+    '(613490) 2006 RJ103|Markwardt2023': {
         tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
         system: 'SLOAN_SDSS',
         indices: {'g-r': 0.59, 'r-i': 0.16},
@@ -3319,7 +3319,7 @@
         calib: 'Vega',
         sun: true
     },
-    '2007 VL305|Markwardt2023': {
+    '(527604) 2007 VL305|Markwardt2023': {
         tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
         system: 'SLOAN_SDSS',
         indices: {'g-r': 0.60, 'r-i': 0.25},
@@ -3390,13 +3390,13 @@
         sun: true
     },
     '2011 HM102|MBOSS': {
-        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'Neptune trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.720, 'V-R': 0.410, 'R-I': 0.520},
         calib: 'Vega',
         sun: true
     },
-    '2011 SO277|Markwardt2023': {
+    '(530664) 2011 SO277|Markwardt2023': {
         tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
         system: 'SLOAN_SDSS',
         indices: {'g-r': 0.60, 'r-i': 0.57},
@@ -3410,7 +3410,7 @@
         calib: 'Vega',
         sun: true
     },
-    '2012 DX98|Thirouin2019': {
+    '(531074) 2012 DX98|Thirouin2019': {
         tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
         system: 'SLOAN_SDSS',
         indices: {'g-r': 0.85, 'g-i': 1.25},
@@ -3466,7 +3466,7 @@
         calib: 'Vega',
         sun: true
     },
-    '2013 FR28|Thirouin2019': {
+    '(532039) 2013 FR28|Thirouin2019': {
         tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
         system: 'SLOAN_SDSS',
         indices: {'g-r': 0.95, 'g-i': 1.36},
@@ -3536,7 +3536,7 @@
         calib: 'Vega',
         sun: true
     },
-    '2014 JL80|Thirouin2019': {
+    '(578992) 2014 JL80|Thirouin2019': {
         tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
         system: 'SLOAN_SDSS',
         indices: {'g-r': 0.74},
@@ -3550,7 +3550,7 @@
         calib: 'AB',
         sun: true
     },
-    '2014 JQ80|Thirouin2019': {
+    '(533562) 2014 JQ80|Thirouin2019': {
         tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
         system: 'SLOAN_SDSS',
         indices: {'g-r': 0.76, 'g-i': 1.05},
@@ -3558,7 +3558,7 @@
         sun: true
     },
     '2014 QO441|MBOSS': {
-        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.750, 'V-R': 0.470},
         calib: 'Vega',
