@@ -124,7 +124,7 @@
     "(E I) Moon: Chang'e-3 Landing Site|Wu2018": {
         tags: ['Solar system', 'planet geophysical', 'moon', 'surface feature'],
         file: 'spectra/files/CE-3_LS.txtN',
-        albedo: true, // phase angle of 95 degrees; See Section 3.2
+        albedo: true, // angle of incidence = 54 deg, angle of emergence = 44 deg, phase angle = 95 deg; See Section 3.2
     },
     'Mars|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
