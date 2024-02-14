@@ -500,7 +500,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.044],
         spherical_albedo: ['Generic_Bessell.V', 0.0148], // estimated from phase parameters
     },
-    '(4035) 1986 WD|MBOSS': {
+    '(4035) Thestor|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.752, 'V-R': 0.484, 'R-I': 0.451},
@@ -559,7 +559,7 @@
         file: 'spectra/files/SMASS/a006489visir8.visir.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.151], // albedo from JPL Small-Body Database
     },
-    '(6545) 1986 TR6|MBOSS': {
+    '(6545) Leitus|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.734, 'V-R': 0.499, 'R-I': 0.436},
@@ -580,7 +580,7 @@
         calib: 'Vega',
         sun: true
     },
-    '(7352) 1994 CO|MBOSS': {
+    '(7352) Hypsenor|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.713, 'V-R': 0.417, 'R-I': 0.397},
@@ -594,7 +594,7 @@
         calib: 'Vega',
         sun: true
     },
-    '(9030) 1989 UX5|MBOSS': {
+    '(9030) Othryoneus|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.887, 'V-R': 0.493, 'R-I': 0.480},
@@ -824,7 +824,7 @@
         calib: 'Vega',
         sun: true
     },
-    '(18060) 1999 XJ156|MBOSS': {
+    '(18060) Zarex|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.758, 'V-R': 0.412, 'R-I': 0.364},
@@ -946,7 +946,7 @@
         calib: 'Vega',
         sun: true
     },
-    '(24380) 2000 AA160|MBOSS': {
+    '(24380) Dorippe|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.734, 'V-R': 0.391, 'R-I': 0.336},
@@ -960,14 +960,14 @@
         calib: 'Vega',
         sun: true
     },
-    '(24420) 2000 BU22|MBOSS': {
+    '(24420) Thasos|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.937, 'V-R': 0.441, 'R-I': 0.304},
         calib: 'Vega',
         sun: true
     },
-    '(24426) 2000 CR12|MBOSS': {
+    '(24426) Belova|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.717, 'V-R': 0.414, 'R-I': 0.424},
@@ -1060,7 +1060,7 @@
         calib: 'Vega',
         sun: true
     },
-    '(28958) 2001 CQ42|MBOSS': {
+    '(28958) Binns|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.730, 'V-R': 0.364, 'R-I': 0.230},
@@ -1207,7 +1207,7 @@
         sun: true,
         geometric_albedo: ['Generic_Bessell.V', 0.079],
     },
-    '(39285) 2001 BP75|MBOSS': {
+    '(39285) Kipkeino|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.810, 'V-R': 0.381, 'R-I': 0.291},
@@ -2575,8 +2575,8 @@
         calib: 'Vega',
         sun: true
     },
-    '(385695) 2005 TO74|MBOSS': {
-        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+    '(385695) Clete|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'Neptune trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.850, 'V-R': 0.490, 'R-I': 0.420},
         calib: 'Vega',
@@ -2722,7 +2722,7 @@
         calib: 'Vega',
         sun: true
     },
-    '(474640) 2004 VN112|MBOSS': {
+    '(474640) Alicanto|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.900, 'V-R': 0.520, 'R-I': 0.450},
