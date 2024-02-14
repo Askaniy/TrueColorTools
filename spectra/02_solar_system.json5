@@ -1,42 +1,44 @@
 {
     // Common references, used in several places
-    'Mallama2017': [
-        'Comprehensive wide-band magnitudes and albedos for the planets, with applications to exo-planets and Planet Nine',
-        'DOI: 10.1016/j.icarus.2016.09.023', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103516301014'
-    ],
     'Crow2011': [
         'Views from EPOXI: colors in our Solar system as an analog for extrasolar planets',
         'DOI: 10.1088/0004-637X/729/2/130', 'https://iopscience.iop.org/article/10.1088/0004-637X/729/2/130'
-    ],
-    'USGSarchive': [ // not available anymore, even by Wayback Machine
-        'About the Spectra of the Planets and Satellites',
-        'https://archive.usgs.gov/archive/sites/speclab.cr.usgs.gov/planetary.spectra/planetary-sp.html'
-    ],
-    'Madden2018': [
-        'A Catalog of Spectra, Albedos, and Colors of Solar System Bodies for Exoplanet Comparison',
-        'DOI: 10.1089/ast.2017.1763', 'https://www.liebertpub.com/doi/10.1089/ast.2017.1763', 'https://zenodo.org/record/3930987'
-    ],
-    'Karkoschka1994': [
-        'Spectrophotometry of the Jovian Planets and Titan at 300- to 1000-nm Wavelength: The Methane Spectrum',
-        'DOI: 10.1006/icar.1994.1139', 'https://atmos.nmsu.edu/planetary_datasets/indexinfrared.html'
-    ],
-    'Graykowski2018': [
-        'Colors and Shapes of the Irregular Planetary Satellites',
-        'DOI: 10.3847/1538-3881/aab49b', 'https://iopscience.iop.org/article/10.3847/1538-3881/aab49b'
     ],
     'Grav2003': [
         'Photometric survey of the irregular satellites',
         'DOI: 10.1016/j.icarus.2003.07.005', 'https://arxiv.org/abs/astro-ph/0301016'
     ],
+    'Graykowski2018': [
+        'Colors and Shapes of the Irregular Planetary Satellites',
+        'DOI: 10.3847/1538-3881/aab49b', 'https://iopscience.iop.org/article/10.3847/1538-3881/aab49b'
+    ],
+    'Karkoschka1994': [
+        'Spectrophotometry of the Jovian Planets and Titan at 300- to 1000-nm Wavelength: The Methane Spectrum',
+        'DOI: 10.1006/icar.1994.1139', 'https://atmos.nmsu.edu/planetary_datasets/indexinfrared.html'
+    ],
+    'Madden2018': [
+        'A Catalog of Spectra, Albedos, and Colors of Solar System Bodies for Exoplanet Comparison',
+        'DOI: 10.1089/ast.2017.1763', 'https://www.liebertpub.com/doi/10.1089/ast.2017.1763', 'https://zenodo.org/record/3930987'
+    ],
+    'Mallama2017': [
+        'Comprehensive wide-band magnitudes and albedos for the planets, with applications to exo-planets and Planet Nine',
+        'DOI: 10.1016/j.icarus.2016.09.023', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103516301014'
+    ],
     'Pena2022': [
         'Colors of Irregular Satellites of Saturn with DECam',
         'DOI: 10.3847/1538-3881/ac6258', 'https://arxiv.org/abs/2204.08391'
     ],
+    'USGSarchive': [ // not available anymore, even by Wayback Machine
+        'About the Spectra of the Planets and Satellites',
+        'https://archive.usgs.gov/archive/sites/speclab.cr.usgs.gov/planetary.spectra/planetary-sp.html'
+    ],
 
     'Mercury|Mallama2017': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
-        nm: [360, 436, 549, 641, 700, 798, 900],
-        br_geometric: [0.087, 0.105, 0.142, 0.158, 0.172, 0.180, 0.208],
+        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
+                  'Generic_Cousins.R', 'Generic_Cousins.I'],
+        br_geometric: [0.087, 0.105, 0.142, 0.172, 0.208,
+                       0.158, 0.180],
         geometric_albedo: true
     },
     'Mercury|Crow2011': {
@@ -56,9 +58,11 @@
     },
     'Venus|Mallama2017': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
-        nm: [360, 436, 549, 641, 700, 798, 900],
-        br_geometric: [0.348, 0.658, 0.689, 0.658, 0.708, 0.640, 0.584],
-        geometric_albedo: true
+        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
+                  'Generic_Cousins.R', 'Generic_Cousins.I'],
+        br_geometric: [0.348, 0.658, 0.689, 0.708, 0.584,
+                       0.658, 0.640],
+        albedo: true
     },
     'Venus|Crow2011': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
@@ -84,9 +88,11 @@
     },
     'Earth|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
-        nm: [360, 436, 549, 641, 700, 798, 900],
-        br_geometric: [0.688, 0.512, 0.434, 0.392, 0.418, 0.396, 0.430],
-        geometric_albedo: true
+        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
+                  'Generic_Cousins.R', 'Generic_Cousins.I'],
+        br_geometric: [0.688, 0.512, 0.434, 0.418, 0.430,
+                       0.392, 0.396],
+        albedo: true
     },
     'Earth|Crow2011': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
@@ -111,11 +117,22 @@
             0.11203, 0.11971, 0.10748, 0.11364, 0.10462, 0.10882],
         albedo: true
     },
+    'Wu2018': [
+        'The Absolute Reflectance and New Calibration Site of the Moon',
+        'DOI: 10.3847/1538-3881/aabaf5', 'https://iopscience.iop.org/article/10.3847/1538-3881/aabaf5', 'https://ui.adsabs.harvard.edu/abs/2018AJ....155..213W/abstract'
+    ],
+    "(E I) Moon: Chang'e-3 Landing Site|Wu2018": {
+        tags: ['Solar system', 'planet geophysical', 'moon', 'surface feature'],
+        file: 'spectra/files/CE-3_LS.txtN',
+        albedo: true, // phase angle of 95 degrees; See Section 3.2
+    },
     'Mars|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
-        nm: [360, 436, 549, 641, 700, 798, 900],
-        br_geometric: [0.060, 0.088, 0.170, 0.250, 0.288, 0.285, 0.330],
-        geometric_albedo: true
+        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
+                  'Generic_Cousins.R', 'Generic_Cousins.I'],
+        br_geometric: [0.060, 0.088, 0.170, 0.288, 0.330,
+                       0.250, 0.285],
+        albedo: true
     },
     'Mars|Crow2011': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
@@ -176,9 +193,11 @@
     },
     'Jupiter|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Jovian system'],
-        nm: [360, 436, 549, 641, 700, 798, 900],
-        br_geometric: [0.358, 0.443, 0.538, 0.513, 0.495, 0.389, 0.321],
-        geometric_albedo: true
+        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
+                  'Generic_Cousins.R', 'Generic_Cousins.I'],
+        br_geometric: [0.358, 0.443, 0.538, 0.495, 0.321,
+                       0.513, 0.389],
+        albedo: true
     },
     'Jupiter|Crow2011': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Jovian system'],
@@ -302,9 +321,11 @@
     },
     'Saturn|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
-        nm: [360, 436, 549, 641, 700, 798, 900],
-        br_geometric: [0.203, 0.339, 0.499, 0.646, 0.568, 0.543, 0.423],
-        geometric_albedo: true
+        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
+                  'Generic_Cousins.R', 'Generic_Cousins.I'],
+        br_geometric: [0.203, 0.339, 0.499, 0.568, 0.423,
+                       0.646, 0.543],
+        albedo: true
     },
     'Saturn|Crow2011': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
@@ -449,9 +470,11 @@
     },
     'Uranus|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Uranian system'],
-        nm: [360, 436, 549, 641, 700, 798, 900],
-        br_geometric: [0.502, 0.561, 0.488, 0.264, 0.202, 0.089, 0.079],
-        geometric_albedo: true
+        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
+                  'Generic_Cousins.R', 'Generic_Cousins.I'],
+        br_geometric: [0.502, 0.561, 0.488, 0.202, 0.079,
+                       0.264, 0.089],
+        albedo: true
     },
     'Uranus|Crow2011': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Uranian system'],
@@ -589,9 +612,11 @@
     },
     'Neptune|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
-        nm: [360, 436, 549, 641, 700, 798, 900],
-        br_geometric: [0.578, 0.562, 0.442, 0.226, 0.181, 0.072, 0.067],
-        geometric_albedo: true
+        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
+                  'Generic_Cousins.R', 'Generic_Cousins.I'],
+        br_geometric: [0.578, 0.562, 0.442, 0.181, 0.067,
+                       0.226, 0.072],
+        albedo: true
     },
     'Neptune|Crow2011': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
