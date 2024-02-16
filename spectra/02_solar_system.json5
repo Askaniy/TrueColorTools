@@ -18,7 +18,7 @@
     ],
     'Madden2018': [
         'A Catalog of Spectra, Albedos, and Colors of Solar System Bodies for Exoplanet Comparison',
-        'DOI: 10.1089/ast.2017.1763', 'https://www.liebertpub.com/doi/10.1089/ast.2017.1763', 'https://zenodo.org/record/3930987'
+        'DOI: 10.1089/ast.2017.1763', 'https://www.liebertpub.com/doi/10.1089/ast.2017.1763', 'https://zenodo.org/record/3930987', 'https://ui.adsabs.harvard.edu/abs/2018AsBio..18.1559M/abstract'
     ],
     'Mallama2017': [
         'Comprehensive wide-band magnitudes and albedos for the planets, with applications to exo-planets and Planet Nine',
@@ -353,6 +353,7 @@
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm: [350, 440, 550, 700, 950],
         br: [0.75042, 0.77108, 0.79707, 0.76842, 0.74823],
+        sd: [0.00106, 0.00100, 0.00111, 0.00110, 0.00102],
         albedo: true
     },
     'Filacchione2017': [
@@ -363,6 +364,7 @@
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm: [350, 440, 550, 700, 950],
         br: [0.57582, 0.61407, 0.61977, 0.58411, 0.58268],
+        sd: [0.00034, 0.00040, 0.00047, 0.00051, 0.00046],
         albedo: true
     },
     '(S V) Rhea|USGSarchive, Madden2018': {
@@ -622,23 +624,27 @@
         nm_range: {start: 300, stop: 900, step: 100},
         br_geometric: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
     },
-    '(N II) Nereid|Graykowski2018': {
+    'Kiss2016': [
+        'Nereid from space: rotation, size and shape analysis from K2, Herschel and Spitzer observations',
+        'DOI: 10.1093/mnras/stw081', 'https://academic.oup.com/mnras/article/457/3/2908/2588900', 'https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.2908K/abstract'
+    ],
+    '(N II) Nereid|Graykowski2018, Kiss2016': {
         tags: ['Solar system', 'moon', 'Neptunian system', 'irregular'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.67, 'V-R': 0.38},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.24], // albedo from https://arxiv.org/abs/1601.02395
+        geometric_albedo: ['Generic_Bessell.V', 0.24, 0.02],
     },
     'Schaefer2000': [
         'Nereid Has Complex Large-Amplitude Photometric Variability (Due to Chaotic Rotation)',
         'DOI: 10.1006/icar.2000.6417', 'https://arxiv.org/abs/astro-ph/0005050v1'
     ],
-    '(N II) Nereid|Schaefer2000': {
+    '(N II) Nereid|Schaefer2000, Kiss2016': {
         tags: ['featured', 'Solar system', 'moon', 'Neptunian system', 'irregular'],
         system: 'Generic_Bessell',
         filters: ['U', 'B', 'V', 'R', 'I'],
         br: [0.90, 0.93, 1, 1.13, 0.99],
-        geometric_albedo: ['Generic_Bessell.V', 0.24], // albedo from https://arxiv.org/abs/1601.02395
+        geometric_albedo: ['Generic_Bessell.V', 0.24, 0.02],
     },
 }
