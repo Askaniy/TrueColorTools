@@ -1763,15 +1763,13 @@
         tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         system: 'OSIRIS-REX_MapCam',
         filters: ['Bf', 'Vf', 'Wf', 'Xf'],
-        br: [0.0175, 0.01736, 0.0174, 0.01727],
-        albedo: true
+        br_spherical: [0.0175, 0.01736, 0.0174, 0.01727],
     },
-    '(101955) Bennu: Dark areas|LeCorre2019': {
+    '(101955) Bennu: Dark boulder terrain|LeCorre2019': {
         tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
         system: 'OSIRIS-REX_MapCam',
         filters: ['Bf', 'Vf', 'Wf', 'Xf'],
-        br: [0.01604, 0.01573, 0.016, 0.01605],
-        albedo: true
+        br_spherical: [0.01604, 0.01573, 0.016, 0.01605],
     },
     '(105685) 2000 SC51|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
