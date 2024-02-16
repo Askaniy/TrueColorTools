@@ -140,18 +140,20 @@ class Spectrum:
         else:
             return self.photometry.to_scope(scope)
     
-    def zero_edges(self):
+    def edges_zeroed(self):
         """
         Returns a new Spectrum object with zero brightness to the edges added.
         This is necessary to mitigate the consequences of abruptly cutting off filter profiles.
         """
-        peak = self.br.max()
-        if self.br[0] * 10 > peak or self.br[-1] * 10 > peak:
-            nm = np.concatenate(((self.nm[0]-aux.resolution,), self.nm, (self.nm[-1]+aux.resolution,)))
-            br = np.concatenate(((0.,), self.br, (0.,)))
-            return Spectrum(self.name, nm, br)
-        else:
-            return self
+        profile = deepcopy(self)
+        limit = profile.br.max() * 0.1 # adding point if an edge brightness higher than 10% of the peak
+        if profile.br[0] >= limit:
+            profile.nm = np.append(profile.nm[0]-aux.resolution, profile.nm)
+            profile.br = np.append(0., profile.br)
+        if profile.br[-1] >= limit:
+            profile.nm = np.append(profile.nm, profile.nm[-1]+aux.resolution)
+            profile.br = np.append(profile.br, 0.)
+        return profile
 
     def integrate(self) -> float:
         """ Calculates the area over the spectrum using the mean rectangle method, per nm """
@@ -271,7 +273,7 @@ class Spectrum:
 @lru_cache(maxsize=32)
 def get_filter(name: str):
     """ Creates a scaled to the unit area Spectrum object based on data file to be found in the `filters` folder """
-    return Spectrum.from_file(name, di.find_filter(name)).zero_edges().scaled_by_area()
+    return Spectrum.from_file(name, di.find_filter(name)).edges_zeroed().scaled_by_area()
 
 
 class Photometry:
