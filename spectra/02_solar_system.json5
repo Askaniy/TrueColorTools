@@ -1,76 +1,76 @@
 {
     // Common references, used in several places
-    'Mallama2017': [
-        'Comprehensive wide-band magnitudes and albedos for the planets, with applications to exo-planets and Planet Nine',
-        'DOI: 10.1016/j.icarus.2016.09.023', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103516301014'
-    ],
     'Crow2011': [
         'Views from EPOXI: colors in our Solar system as an analog for extrasolar planets',
         'DOI: 10.1088/0004-637X/729/2/130', 'https://iopscience.iop.org/article/10.1088/0004-637X/729/2/130'
-    ],
-    'USGSarchive': [ // not available anymore, even by Wayback Machine
-        'About the Spectra of the Planets and Satellites',
-        'https://archive.usgs.gov/archive/sites/speclab.cr.usgs.gov/planetary.spectra/planetary-sp.html'
-    ],
-    'Madden2018': [
-        'A Catalog of Spectra, Albedos, and Colors of Solar System Bodies for Exoplanet Comparison',
-        'DOI: 10.1089/ast.2017.1763', 'https://www.liebertpub.com/doi/10.1089/ast.2017.1763', 'https://zenodo.org/record/3930987'
-    ],
-    'Karkoschka1994': [
-        'Spectrophotometry of the Jovian Planets and Titan at 300- to 1000-nm Wavelength: The Methane Spectrum',
-        'DOI: 10.1006/icar.1994.1139', 'https://atmos.nmsu.edu/planetary_datasets/indexinfrared.html'
-    ],
-    'Graykowski2018': [
-        'Colors and Shapes of the Irregular Planetary Satellites',
-        'DOI: 10.3847/1538-3881/aab49b', 'https://iopscience.iop.org/article/10.3847/1538-3881/aab49b'
     ],
     'Grav2003': [
         'Photometric survey of the irregular satellites',
         'DOI: 10.1016/j.icarus.2003.07.005', 'https://arxiv.org/abs/astro-ph/0301016'
     ],
+    'Graykowski2018': [
+        'Colors and Shapes of the Irregular Planetary Satellites',
+        'DOI: 10.3847/1538-3881/aab49b', 'https://iopscience.iop.org/article/10.3847/1538-3881/aab49b'
+    ],
+    'Karkoschka1994': [
+        'Spectrophotometry of the Jovian Planets and Titan at 300- to 1000-nm Wavelength: The Methane Spectrum',
+        'DOI: 10.1006/icar.1994.1139', 'https://atmos.nmsu.edu/planetary_datasets/indexinfrared.html'
+    ],
+    'Madden2018': [
+        'A Catalog of Spectra, Albedos, and Colors of Solar System Bodies for Exoplanet Comparison',
+        'DOI: 10.1089/ast.2017.1763', 'https://www.liebertpub.com/doi/10.1089/ast.2017.1763', 'https://zenodo.org/record/3930987', 'https://ui.adsabs.harvard.edu/abs/2018AsBio..18.1559M/abstract'
+    ],
+    'Mallama2017': [
+        'Comprehensive wide-band magnitudes and albedos for the planets, with applications to exo-planets and Planet Nine',
+        'DOI: 10.1016/j.icarus.2016.09.023', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103516301014'
+    ],
     'Pena2022': [
         'Colors of Irregular Satellites of Saturn with DECam',
         'DOI: 10.3847/1538-3881/ac6258', 'https://arxiv.org/abs/2204.08391'
     ],
+    'USGSarchive': [ // not available anymore, even by Wayback Machine
+        'About the Spectra of the Planets and Satellites',
+        'https://archive.usgs.gov/archive/sites/speclab.cr.usgs.gov/planetary.spectra/planetary-sp.html'
+    ],
 
     'Mercury|Mallama2017': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
-        nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.087, 0.105, 0.142, 0.158, 0.172, 0.180, 0.208],
-        albedo: true
+        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
+                  'Generic_Cousins.R', 'Generic_Cousins.I'],
+        br_geometric: [0.087, 0.105, 0.142, 0.172, 0.208,
+                       0.158, 0.180],
     },
-    'Mercury|Crow2011': {
+    'Mercury|Crow2011, Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         nm: [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5],
         br: [0.61, 0.56, 0.66, 0.71, 0.86, 1.00, 1.37, 1.50, 1.77, 2.01],
-        albedo: ['Generic_Bessell.V', 0.142]
+        geometric_albedo: ['Generic_Bessell.V', 0.142]
     },
     'Mercury|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         nm: [299.63, 315.33, 335.22, 348.71, 366.62, 385.46, 406.4, 429.43, 448.27, 467.11, 490.14, 513.17, 536.2, 559.23, 582.25, 605.28, 628.31,
             651.34, 674.37, 697.4, 720.43, 743.46, 766.49, 789.51, 812.54, 835.57, 858.6, 881.63, 904.66, 927.69, 950.72, 973.74, 996.77],
-        br: [0.00765, 0.00849, 0.00927, 0.01017, 0.01104, 0.01178, 0.01255, 0.01318, 0.01378, 0.01455, 0.01536, 0.01595, 0.01637, 0.01665, 0.01706,
+        br_geometric: [0.00765, 0.00849, 0.00927, 0.01017, 0.01104, 0.01178, 0.01255, 0.01318, 0.01378, 0.01455, 0.01536, 0.01595, 0.01637, 0.01665, 0.01706,
             0.01742, 0.01783, 0.01833, 0.01889, 0.01943, 0.0199, 0.02019, 0.02033, 0.0205, 0.02076, 0.02109, 0.02139, 0.02159, 0.0218, 0.02195,
             0.02221, 0.02258, 0.02302],
-        albedo: true
     },
     'Venus|Mallama2017': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
-        nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.348, 0.658, 0.689, 0.658, 0.708, 0.640, 0.584],
-        albedo: true
+        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
+                  'Generic_Cousins.R', 'Generic_Cousins.I'],
+        br_geometric: [0.348, 0.658, 0.689, 0.708, 0.584,
+                       0.658, 0.640],
     },
-    'Venus|Crow2011': {
+    'Venus|Crow2011, Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         nm: [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5],
         br: [0.59, 0.64, 0.72, 0.58, 0.95, 1.00, 1.16, 1.08, 1.16, 1.12],
-        albedo: ['Generic_Bessell.V', 0.689]
+        geometric_albedo: ['Generic_Bessell.V', 0.689]
     },
     'Venus|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         nm: [480.52, 600.74, 722.74, 807.16, 887.92, 966.48, 996.22],
-        br: [0.4762, 0.46407, 0.45882, 0.45564, 0.44893, 0.44337, 0.42979],
-        albedo: true
+        br_geometric: [0.4762, 0.46407, 0.45882, 0.45564, 0.44893, 0.44337, 0.42979],
     },
     'Maiorov2005': [
         'A New Analysis of the Spectra Obtained by the Venera Missions in the Venusian Atmosphere. I. The Analysis of the Data Received from the Venera-11 Probe at Altitudes Below 37 km in the 0.44–0.66 µm Wavelength Range',
@@ -84,44 +84,54 @@
     },
     'Earth|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
-        nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.688, 0.512, 0.434, 0.392, 0.418, 0.396, 0.430],
-        albedo: true
+        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
+                  'Generic_Cousins.R', 'Generic_Cousins.I'],
+        br_geometric: [0.688, 0.512, 0.434, 0.418, 0.430,
+                       0.392, 0.396],
     },
-    'Earth|Crow2011': {
+    'Earth|Crow2011, Mallama2017': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
         nm: [350, 450, 550, 650, 750, 850, 950],
         br: [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79],
-        albedo: ['Generic_Bessell.V', 0.434]
+        geometric_albedo: ['Generic_Bessell.V', 0.434]
     },
-    '(E I) Moon|Crow2011': {
+    '(E I) Moon|Crow2011, Madden2018': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon'],
         nm: [350, 450, 550, 650, 750, 850, 950],
         br: [13.83, 18.06, 22.54, 26.68, 30.74, 34.86, 34.14],
-        albedo: ['Generic_Bessell.V', 0.09948], // Madden2018
+        geometric_albedo: ['Generic_Bessell.V', 0.09948],
     },
     '(E I) Moon|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'moon'],
         nm_range: {start: 450, stop: 890, step: 5},
-        br: [0.12894, 0.12827, 0.12833, 0.12049, 0.12152, 0.11801, 0.11888, 0.10276, 0.10624, 0.10734, 0.10659, 0.10483, 0.10482, 0.10586, 0.10583, 0.10377, 
+        br_geometric: [0.12894, 0.12827, 0.12833, 0.12049, 0.12152, 0.11801, 0.11888, 0.10276, 0.10624, 0.10734, 0.10659, 0.10483, 0.10482, 0.10586, 0.10583, 0.10377, 
             0.10273, 0.10111, 0.10124, 0.09872, 0.09948, 0.09881, 0.09755, 0.09794, 0.09592, 0.09507, 0.09502, 0.0956, 0.09492, 0.09621, 0.09716, 0.0979, 0.09899,
             0.09928, 0.09909, 0.10045, 0.09787, 0.09963, 0.10245, 0.10236, 0.1, 0.10338, 0.10285, 0.10472, 0.10498, 0.10392, 0.10581, 0.11006, 0.09889, 0.10516,
             0.10514, 0.10603, 0.10771, 0.11032, 0.10183, 0.10256, 0.10296, 0.10698, 0.10898, 0.10813, 0.10928, 0.10899, 0.12524, 0.08838, 0.10821, 0.11089,
             0.1108, 0.10942, 0.10881, 0.11178, 0.11238, 0.11127, 0.11163, 0.10524, 0.10855, 0.11062, 0.1096, 0.11003, 0.11177, 0.11517, 0.11609, 0.11679, 0.10703,
             0.11203, 0.11971, 0.10748, 0.11364, 0.10462, 0.10882],
-        albedo: true
+    },
+    'Wu2018': [
+        'The Absolute Reflectance and New Calibration Site of the Moon',
+        'DOI: 10.3847/1538-3881/aabaf5', 'https://iopscience.iop.org/article/10.3847/1538-3881/aabaf5', 'https://ui.adsabs.harvard.edu/abs/2018AJ....155..213W/abstract'
+    ],
+    "(E I) Moon: Chang'e-3 Landing Site|Wu2018": {
+        tags: ['Solar system', 'planet geophysical', 'moon', 'surface feature'],
+        file: 'spectra/files/CE-3_LS.txtN',
+        albedo: true, // angle of incidence = 54 deg, angle of emergence = 44 deg, phase angle = 95 deg; See Section 3.2
     },
     'Mars|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
-        nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.060, 0.088, 0.170, 0.250, 0.288, 0.285, 0.330],
-        albedo: true
+        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
+                  'Generic_Cousins.R', 'Generic_Cousins.I'],
+        br_geometric: [0.060, 0.088, 0.170, 0.288, 0.330,
+                       0.250, 0.285],
     },
-    'Mars|Crow2011': {
+    'Mars|Crow2011, Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         nm: [350, 450, 550, 650, 750, 850, 950],
         br: [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31],
-        albedo: ['Generic_Bessell.V', 0.170]
+        geometric_albedo: ['Generic_Bessell.V', 0.170]
     },
     'Mars: Bright areas|USGSarchive': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'surface feature'],
@@ -144,9 +154,8 @@
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
         nm: [316.04, 360.96, 389.97, 435.05, 464.12, 502.86, 528.88, 567.92, 597.46, 626.82, 659.28, 697.97, 717.38, 762.51, 804.31, 846.12, 900.65,
             951.86, 993.64],
-        br: [0.04554, 0.04851, 0.05933, 0.07176, 0.0866, 0.10343, 0.12899, 0.16342, 0.20522, 0.23077, 0.24945, 0.25602, 0.26244, 0.26437, 0.2722, 0.28349,
+        br_geometric: [0.04554, 0.04851, 0.05933, 0.07176, 0.0866, 0.10343, 0.12899, 0.16342, 0.20522, 0.23077, 0.24945, 0.25602, 0.26244, 0.26437, 0.2722, 0.28349,
             0.26732, 0.24827, 0.25628],
-        albedo: true
     },
     'Pajola2013': [
         'Phobos as a D-type Captured Asteroid, Spectral Modeling from 0.25 to 4.0 μm',
@@ -176,14 +185,16 @@
     },
     'Jupiter|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Jovian system'],
-        nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.358, 0.443, 0.538, 0.513, 0.495, 0.389, 0.321],
-        albedo: true
+        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
+                  'Generic_Cousins.R', 'Generic_Cousins.I'],
+        br_geometric: [0.358, 0.443, 0.538, 0.495, 0.321,
+                       0.513, 0.389],
     },
-    'Jupiter|Crow2011': {
+    'Jupiter|Crow2011, Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Jovian system'],
         nm: [350, 450, 550, 650, 750, 850],
-        br: [0.604, 0.824, 1.000, 1.006, 0.832, 0.636]
+        br: [0.604, 0.824, 1.000, 1.006, 0.832, 0.636],
+        geometric_albedo: ['Generic_Bessell.V', 0.538],
     },
     'Jupiter|Karkoschka1994': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Jovian system'],
@@ -244,72 +255,70 @@
         geometric_albedo: ['Galileo_SSI.Clear', 0.041, 0.003], // Table III, log-scaled
         spherical_albedo: ['Galileo_SSI.Clear', 0.017, 0.002], // Table III, log-scaled
     },
-    '(J I) Io: Trailing hemisphere|USGSarchive': {
+    '(J I) Io: Trailing hemisphere|USGSarchive, Madden2018': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 739.8, 751.9, 763.6, 775.6, 786.3, 799, 811.7, 822.4, 837.1, 849.8, 862.5],
         br: [0.126856, 0.161157, 0.189998, 0.312668, 0.455349, 0.642046, 0.775382, 0.801427, 0.811630, 0.890139, 0.942953, 1.004252, 1.005697, 1.015561,
             1.031987, 1.019722, 1.008961, 1.000501, 1.015732, 1.006328, 1.003697, 0.986871, 0.973683, 0.987817],
-        albedo: ['Generic_Bessell.V', 0.5014384], // Madden2018
+        geometric_albedo: ['Generic_Bessell.V', 0.5014384],
     },
     '(J I) Io|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [295.98, 349.54, 376.84, 395.48, 405.46, 428.85, 443.62, 475.98, 538.43, 600.68, 672.13, 787.28, 880.37, 964.69],
-        br: [0.06645, 0.09565, 0.13699, 0.18699, 0.24564, 0.31289, 0.39051, 0.46464, 0.49727, 0.51954, 0.56077, 0.57946, 0.5982, 0.62042],
-        albedo: true
+        br_geometric: [0.06645, 0.09565, 0.13699, 0.18699, 0.24564, 0.31289, 0.39051, 0.46464, 0.49727, 0.51954, 0.56077, 0.57946, 0.5982, 0.62042],
     },
-    '(J II) Europa: Trailing hemisphere|USGSarchive': {
+    '(J II) Europa: Trailing hemisphere|USGSarchive, Madden2018': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
         br: [0.352826, 0.410782, 0.467415, 0.602579, 0.688769, 0.806425, 0.839300, 0.852109, 0.913667, 0.961235, 0.979446, 1.006591, 1.026941, 1.038414,
             1.067850, 1.062889, 1.063046],
-        albedo: ['Generic_Bessell.V', 0.6110393], // Madden2018
+        geometric_albedo: ['Generic_Bessell.V', 0.6110393],
     },
     '(J II) Europa: Trailing hemisphere|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [340.98, 358.07, 375.17, 381.3, 391.27, 419.79, 441.32, 451.3, 459.94, 468.22, 476.49, 484.82, 492.05, 503.62, 518.47, 551.04, 598.92, 647.01,
             695.29, 743.72, 792.14, 840.63, 889.18, 931.13, 954.13, 995.11],
-        br: [0.38563, 0.40049, 0.41506, 0.42872, 0.44588, 0.46115, 0.47493, 0.49191, 0.50931, 0.52444, 0.53987, 0.55339, 0.5672, 0.58258, 0.59866, 0.61138,
+        br_geometric: [0.38563, 0.40049, 0.41506, 0.42872, 0.44588, 0.46115, 0.47493, 0.49191, 0.50931, 0.52444, 0.53987, 0.55339, 0.5672, 0.58258, 0.59866, 0.61138,
             0.62658, 0.63586, 0.63949, 0.639, 0.63841, 0.63616, 0.63216, 0.6371, 0.64146, 0.62304],
-        albedo: true
     },
-    '(J III) Ganymede: Leading hemisphere|USGSarchive': {
+    '(J III) Ganymede: Leading hemisphere|USGSarchive, Madden2018': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
         br: [0.488778, 0.590744, 0.632155, 0.752500, 0.783059, 0.869610, 0.918507, 0.955278, 0.973874, 1.010833, 1.021557, 1.046712, 1.040900, 1.035977,
             1.049606, 1.044146, 1.036557],
-        albedo: ['Generic_Bessell.V', 0.4636778], // Madden2018
+        geometric_albedo: ['Generic_Bessell.V', 0.4636778],
     },
     '(J III) Ganymede: Leading hemisphere|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [320.0, 336.21, 352.99, 363.67, 377.95, 388.61, 404.13, 424.95, 446.14, 463.01, 478.07, 506.08, 548.23, 573.42, 625.63, 680.99, 715.56,
             779.75, 830.75, 876.4, 932.56, 968.8],
-        br: [0.24109, 0.26866, 0.29261, 0.30188, 0.32175, 0.34435, 0.36224, 0.37519, 0.39892, 0.42008, 0.4301, 0.44725, 0.463, 0.47268, 0.49018, 0.50107,
+        br_geometric: [0.24109, 0.26866, 0.29261, 0.30188, 0.32175, 0.34435, 0.36224, 0.37519, 0.39892, 0.42008, 0.4301, 0.44725, 0.463, 0.47268, 0.49018, 0.50107,
             0.49825, 0.48741, 0.48884, 0.49226, 0.49704, 0.49245],
-        albedo: true
     },
-    '(J IV) Callisto: Leading hemisphere|USGSarchive': {
+    '(J IV) Callisto: Leading hemisphere|USGSarchive, Madden2018': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 837.1, 849.8, 862.5],
         br: [0.406242, 0.456089, 0.518130, 0.652152, 0.691349, 0.777651, 0.840575, 0.881522, 0.918704, 0.941487, 0.969265, 0.990831, 0.997041, 0.993501,
             1.007422, 0.986979, 1.001239, 0.985442, 1.006188],
-        albedo: ['Generic_Bessell.V', 0.1688978], // Madden2018
+        geometric_albedo: ['Generic_Bessell.V', 0.1688978],
     },
     '(J IV) Callisto: Leading hemisphere|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         nm: [353.4, 377.13, 402.86, 433.37, 496.32, 544.31, 592.48, 640.67, 666.97, 745.88, 794.39, 842.94, 891.47, 926.57],
-        br: [0.0891, 0.10305, 0.12241, 0.1311, 0.15594, 0.16799, 0.17514, 0.18138, 0.18453, 0.19318, 0.19019, 0.18602, 0.18271, 0.18578],
-        albedo: true
+        br_geometric: [0.0891, 0.10305, 0.12241, 0.1311, 0.15594, 0.16799, 0.17514, 0.18138, 0.18453, 0.19318, 0.19019, 0.18602, 0.18271, 0.18578],
     },
     'Saturn|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
-        nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.203, 0.339, 0.499, 0.646, 0.568, 0.543, 0.423],
-        albedo: true
+        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
+                  'Generic_Cousins.R', 'Generic_Cousins.I'],
+        br_geometric: [0.203, 0.339, 0.499, 0.568, 0.423,
+                       0.646, 0.543],
     },
-    'Saturn|Crow2011': {
+    'Saturn|Crow2011, Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
         nm: [350, 450, 550, 650, 750, 850],
-        br: [0.445, 0.684, 1.000, 1.144, 1.001, 0.776]
+        br: [0.445, 0.684, 1.000, 1.144, 1.001, 0.776],
+        geometric_albedo: ['Generic_Bessell.V', 0.499]
     },
     'Saturn|Karkoschka1994': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
@@ -328,14 +337,13 @@
     '(S II) Enceladus|Madden2018': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm_range: {start: 350, stop: 885, step: 5},
-        br: [0.8816, 0.87372, 0.87059, 0.87494, 0.86546, 0.85415, 0.84686, 0.85811, 0.86617, 0.8733, 0.88373, 0.8831, 0.87806, 0.87006, 0.86713, 0.86532,
+        br_geometric: [0.8816, 0.87372, 0.87059, 0.87494, 0.86546, 0.85415, 0.84686, 0.85811, 0.86617, 0.8733, 0.88373, 0.8831, 0.87806, 0.87006, 0.86713, 0.86532,
             0.86426, 0.87688, 0.88714, 0.88488, 0.89243, 0.89924, 0.90296, 0.90052, 0.90437, 0.91443, 0.91511, 0.91539, 0.92768, 0.92002, 0.91779, 0.9203,
             0.92983, 0.92515, 0.91631, 0.90832, 0.90703, 0.90979, 0.91105, 0.90924, 0.90682, 0.90378, 0.89835, 0.8987, 0.90238, 0.8988, 0.89362, 0.88822,
             0.88804, 0.8853, 0.88142, 0.88293, 0.88704, 0.89007, 0.88439, 0.88528, 0.88548, 0.8797, 0.88141, 0.88532, 0.88866, 0.88715, 0.88978, 0.89855,
             0.89856, 0.8948, 0.88908, 0.88148, 0.87591, 0.87254, 0.87289, 0.87138, 0.86872, 0.86844, 0.86666, 0.86272, 0.85763, 0.85736, 0.85775, 0.8582,
             0.85978, 0.8618, 0.86378, 0.85962, 0.85873, 0.86179, 0.8675, 0.86622, 0.86095, 0.85417, 0.84934, 0.84628, 0.84573, 0.84331, 0.84024, 0.83994,
             0.84243, 0.84372, 0.84021, 0.84098, 0.84359, 0.84824, 0.84469, 0.84304, 0.8458, 0.84796, 0.85031, 0.85254],
-        albedo: true
     },
     'Filacchione2018': [
         'Photometric Modeling and VIS-IR Albedo Maps of Tethys From Cassini-VIMS',
@@ -345,6 +353,7 @@
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm: [350, 440, 550, 700, 950],
         br: [0.75042, 0.77108, 0.79707, 0.76842, 0.74823],
+        sd: [0.00106, 0.00100, 0.00111, 0.00110, 0.00102],
         albedo: true
     },
     'Filacchione2017': [
@@ -355,25 +364,25 @@
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm: [350, 440, 550, 700, 950],
         br: [0.57582, 0.61407, 0.61977, 0.58411, 0.58268],
+        sd: [0.00034, 0.00040, 0.00047, 0.00051, 0.00046],
         albedo: true
     },
-    '(S V) Rhea|USGSarchive': {
+    '(S V) Rhea|USGSarchive, Madden2018': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm: [325, 350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
         br: [0.734770, 0.732256, 0.745028, 0.844831, 0.859745, 0.910340, 0.925726, 0.991097, 0.992538, 1.016375, 1.006958, 1.049296, 1.060323, 1.034402,
             1.082394, 1.054788, 1.060017, 1.028328],
-        albedo: ['Generic_Bessell.V', 0.75691], // Madden2018
+        geometric_albedo: ['Generic_Bessell.V', 0.75691],
     },
     '(S V) Rhea|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm_range: {start: 450, stop: 890, step: 5},
-        br: [0.80064, 0.79731, 0.82162, 0.79365, 0.83878, 0.81235, 0.85642, 0.80113, 0.8009, 0.79458, 0.78575, 0.77766, 0.77484, 0.78457, 0.76513, 0.76585, 
+        br_geometric: [0.80064, 0.79731, 0.82162, 0.79365, 0.83878, 0.81235, 0.85642, 0.80113, 0.8009, 0.79458, 0.78575, 0.77766, 0.77484, 0.78457, 0.76513, 0.76585, 
             0.76538, 0.75955, 0.77142, 0.75809, 0.75691, 0.75356, 0.74991, 0.74386, 0.73731, 0.72666, 0.72249, 0.73429, 0.71973, 0.71943, 0.71654, 0.71214,
             0.70716, 0.70683, 0.68759, 0.70336, 0.68807, 0.69018, 0.70024, 0.69185, 0.69975, 0.76765, 0.70116, 0.6901, 0.68615, 0.69095, 0.68876, 0.70732,
             0.65758, 0.6722, 0.67635, 0.66554, 0.67627, 0.68552, 0.64517, 0.63229, 0.62892, 0.64067, 0.65898, 0.64172, 0.64099, 0.62554, 0.69564, 0.54588,
             0.60768, 0.6128, 0.6093, 0.59131, 0.58764, 0.5978, 0.5961, 0.58125, 0.57111, 0.56365, 0.56138, 0.57023, 0.55961, 0.54614, 0.54377, 0.57175,
             0.58168, 0.59506, 0.52898, 0.57511, 0.53865, 0.54182, 0.55485, 0.51589, 0.53527],
-        albedo: true
     },
     '(S VI) Titan|Crow2011': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
@@ -392,10 +401,9 @@
     '(S VI) Titan: Surface, phase angle 0°|Karkoschka2012': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm_range: {start: 300, stop: 800, step: 10},
-        br: [0.025, 0.035, 0.046, 0.059, 0.073, 0.089, 0.105, 0.122, 0.140, 0.158, 0.176, 0.194, 0.211, 0.229, 0.245, 0.261, 0.277, 0.292, 0.306, 0.319, 
+        br_geometric: [0.025, 0.035, 0.046, 0.059, 0.073, 0.089, 0.105, 0.122, 0.140, 0.158, 0.176, 0.194, 0.211, 0.229, 0.245, 0.261, 0.277, 0.292, 0.306, 0.319, 
             0.331, 0.343, 0.354, 0.364, 0.373, 0.382, 0.390, 0.398, 0.404, 0.411, 0.416, 0.421, 0.426, 0.430, 0.434, 0.437, 0.440, 0.442, 0.444, 0.446, 
             0.447, 0.448, 0.449, 0.449, 0.450, 0.450, 0.450, 0.449, 0.449, 0.448, 0.447],
-        geometric_albedo: true
     },
     'Karkoschka2016': [
         'Eight-color maps of Titan’s surface from spectroscopy with Huygens’ DISR',
@@ -449,14 +457,16 @@
     },
     'Uranus|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Uranian system'],
-        nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.502, 0.561, 0.488, 0.264, 0.202, 0.089, 0.079],
-        albedo: true
+        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
+                  'Generic_Cousins.R', 'Generic_Cousins.I'],
+        br_geometric: [0.502, 0.561, 0.488, 0.202, 0.079,
+                       0.264, 0.089],
     },
-    'Uranus|Crow2011': {
+    'Uranus|Crow2011, Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Uranian system'],
         nm: [350, 450, 550, 650, 750, 850],
-        br: [0.984, 1.067, 1.000, 0.647, 0.292, 0.148]
+        br: [0.984, 1.067, 1.000, 0.647, 0.292, 0.148],
+        geometric_albedo: ['Generic_Bessell.V', 0.488]
     },
     'Uranus|Karkoschka1994': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Uranian system'],
@@ -589,14 +599,16 @@
     },
     'Neptune|Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
-        nm: [360, 436, 549, 641, 700, 798, 900],
-        br: [0.578, 0.562, 0.442, 0.226, 0.181, 0.072, 0.067],
-        albedo: true
+        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
+                  'Generic_Cousins.R', 'Generic_Cousins.I'],
+        br_geometric: [0.578, 0.562, 0.442, 0.181, 0.067,
+                       0.226, 0.072],
     },
-    'Neptune|Crow2011': {
+    'Neptune|Crow2011, Mallama2017': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         nm: [350, 450, 550, 650, 750, 850],
-        br: [1.252, 1.235, 1.000, 0.555, 0.237, 0.132]
+        br: [1.252, 1.235, 1.000, 0.555, 0.237, 0.132],
+        geometric_albedo: ['Generic_Bessell.V', 0.442]
     },
     'Neptune|Karkoschka1994': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Neptunian system'],
@@ -610,26 +622,29 @@
     '(N I) Triton|Tryka1999': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Neptunian system', 'irregular'],
         nm_range: {start: 300, stop: 900, step: 100},
-        br: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
-        geometric_albedo: true, // geometric albedo
+        br_geometric: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
     },
-    '(N II) Nereid|Graykowski2018': {
+    'Kiss2016': [
+        'Nereid from space: rotation, size and shape analysis from K2, Herschel and Spitzer observations',
+        'DOI: 10.1093/mnras/stw081', 'https://academic.oup.com/mnras/article/457/3/2908/2588900', 'https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.2908K/abstract'
+    ],
+    '(N II) Nereid|Graykowski2018, Kiss2016': {
         tags: ['Solar system', 'moon', 'Neptunian system', 'irregular'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.67, 'V-R': 0.38},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.24], // albedo from https://arxiv.org/abs/1601.02395
+        geometric_albedo: ['Generic_Bessell.V', 0.24, 0.02],
     },
     'Schaefer2000': [
         'Nereid Has Complex Large-Amplitude Photometric Variability (Due to Chaotic Rotation)',
         'DOI: 10.1006/icar.2000.6417', 'https://arxiv.org/abs/astro-ph/0005050v1'
     ],
-    '(N II) Nereid|Schaefer2000': {
+    '(N II) Nereid|Schaefer2000, Kiss2016': {
         tags: ['featured', 'Solar system', 'moon', 'Neptunian system', 'irregular'],
         system: 'Generic_Bessell',
         filters: ['U', 'B', 'V', 'R', 'I'],
         br: [0.90, 0.93, 1, 1.13, 0.99],
-        geometric_albedo: ['Generic_Bessell.V', 0.24], // albedo from https://arxiv.org/abs/1601.02395
+        geometric_albedo: ['Generic_Bessell.V', 0.24, 0.02],
     },
 }
