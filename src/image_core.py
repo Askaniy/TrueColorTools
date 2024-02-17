@@ -11,6 +11,7 @@ from traceback import format_exc
 from functools import lru_cache
 import numpy as np
 from src.data_core import Spectrum, get_filter
+from src.data_processing import photon_spectral_density
 import src.auxiliary as aux
 import src.image_import as ii
 
@@ -109,6 +110,10 @@ class SpectralCube:
     def to_scope(self, scope: np.ndarray):
         """ Returns a new SpectralCube object with a guarantee of definition on the requested scope """
         return SpectralCube(*aux.extrapolating(self.nm, self.br, scope, aux.resolution))
+    
+    def photons2energy(self):
+        """ Returns a new SpectralCube object converted from photon spectral density to energy one """
+        return self * photon_spectral_density
 
     def integrate(self) -> np.ndarray:
         """ Collapses the SpectralCube along the spectral axis into a two-dimensional image """
@@ -238,6 +243,10 @@ class PhotometricCube:
             print(f'- More precisely, {format_exc(limit=0).strip()}')
             _, x, y = self.br.shape
             return SpectralCube.stub(x, y)
+    
+    def photons2energy(self):
+        """ Returns a new PhotometricCube object converted from photon spectral density to energy one """
+        return self * (self @ photon_spectral_density)
     
     def sorted(self):
         """ Sorts the PhotometricCube by increasing wavelength """

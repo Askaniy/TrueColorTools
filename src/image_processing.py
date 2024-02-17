@@ -10,7 +10,7 @@ import src.auxiliary as aux
 import src.image_core as ic
 import src.image_import as ii
 import src.color_processing as cp
-from src.data_processing import sun_norm, photon_spectral_density
+from src.data_processing import sun_norm
 
 
 def image_parser(
@@ -49,7 +49,7 @@ def image_parser(
                     cube = cube.downscale(pixels_limit)
                 if photons:
                     log('Converting photon spectral density to energy density')
-                    cube *= photon_spectral_density
+                    cube = cube.photons2energy()
                 if factors is not None:
                     cube *= factors
                 if desun:
@@ -69,7 +69,7 @@ def image_parser(
                     cube = cube.downscale(pixels_limit)
                 if photons:
                     log('Converting photon spectral density to energy density')
-                    cube *= photon_spectral_density
+                    cube = cube.photons2energy()
                 if factors is not None:
                     cube *= factors
                 if desun:
@@ -88,7 +88,7 @@ def image_parser(
                     cube = cube.downscale(pixels_limit)
                 if photons:
                     log('Converting photon spectral density to energy density')
-                    cube *= photon_spectral_density
+                    cube = cube.photons2energy()
                 if desun:
                     log('Removing Sun as emitter')
                     cube /= sun_norm
@@ -103,7 +103,7 @@ def image_parser(
         if preview_flag:
             log('Sending the resulting preview to the main thread', img)
         else:
-            img.save(f'{save_folder}/TCT_{strftime("%Y-%m-%d_%H-%M")}.png')
+            img.save(f'{save_folder}/TCT_{strftime("%Y-%m-%d_%H-%M-%S")}.png')
     except Exception:
         log(f'Image processing failed with {format_exc(limit=0).strip()}')
         print(format_exc())

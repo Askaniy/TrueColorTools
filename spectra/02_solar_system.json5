@@ -132,7 +132,7 @@
     ],
     "(E I) Moon: Chang'e-3 Landing Site|Wu2018": {
         tags: ['Solar system', 'planet geophysical', 'moon', 'surface feature'],
-        file: 'spectra/files/CE-3_LS.txtN',
+        file: 'spectra/files/Moon_CE-3_LS_Wu2018.txt',
         albedo: true, // angle of incidence 54°, angle of emergence 44°, phase angle 95°; See Section 3.2
     },
 
