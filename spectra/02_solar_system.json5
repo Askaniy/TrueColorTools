@@ -106,20 +106,29 @@
         br_geometric: [0.688, 0.512, 0.434, 0.418, 0.430,
                        0.392, 0.396],
     },
-    'Earth|Crow2011, Mallama2017a': {
+    'Earth|Crow2011, Mallama2017a': { // phase angle 75.1°
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
-        nm: [350, 450, 550, 650, 750, 850, 950],
+        system: 'DeepImpact_HRI-VIS',
+        filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79],
         geometric_albedo: ['Generic_Bessell.V', 0.434]
     },
-    '(E I) Moon|Crow2011': {
+    '(E I) Moon: Far side|Crow2011': { // phase angle 75.1°
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon'],
-        nm: [350, 450, 550, 650, 750, 850, 950],
+        system: 'DeepImpact_HRI-VIS',
+        filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [13.83, 18.06, 22.54, 26.68, 30.74, 34.86, 34.14],
+    },
+    '(E I) Moon: Near side|Crow2011': { // phase angle 97.6°
+        tags: ['Solar system', 'planet geophysical', 'moon'],
+        system: 'DeepImpact_HRI-VIS',
+        filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
+        br: [1894.24, 2387.17, 2832.17, 3269.35, 4091.49, 4787.91, 5506.36],
     },
     'Wu2018': [
         'The Absolute Reflectance and New Calibration Site of the Moon',
-        'DOI: 10.3847/1538-3881/aabaf5', 'https://iopscience.iop.org/article/10.3847/1538-3881/aabaf5', 'https://ui.adsabs.harvard.edu/abs/2018AJ....155..213W/abstract'
+        'DOI: 10.3847/1538-3881/aabaf5', 'https://iopscience.iop.org/article/10.3847/1538-3881/aabaf5',
+        'https://ui.adsabs.harvard.edu/abs/2018AJ....155..213W/abstract'
     ],
     "(E I) Moon: Chang'e-3 Landing Site|Wu2018": {
         tags: ['Solar system', 'planet geophysical', 'moon', 'surface feature'],
@@ -135,9 +144,10 @@
         br_geometric: [0.060, 0.088, 0.170, 0.288, 0.330,
                        0.250, 0.285],
     },
-    'Mars|Crow2011, Mallama2017a': {
+    'Mars|Crow2011, Mallama2017a': { // phase angle 37.0°
         tags: ['Solar system', 'planet geophysical', 'planet'],
-        nm: [350, 450, 550, 650, 750, 850, 950],
+        system: 'DeepImpact_HRI-VIS',
+        filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31],
         geometric_albedo: ['Generic_Bessell.V', 0.170]
     },
