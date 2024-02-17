@@ -14,20 +14,23 @@
     ],
     'Karkoschka1994': [
         'Spectrophotometry of the Jovian Planets and Titan at 300- to 1000-nm Wavelength: The Methane Spectrum',
-        'DOI: 10.1006/icar.1994.1139', 'https://atmos.nmsu.edu/planetary_datasets/indexinfrared.html'
+        'DOI: 10.1006/icar.1994.1139', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103584711390',
+        'https://atmos.nmsu.edu/planetary_datasets/indexinfrared.html'
+    ],
+    'Karkoschka1998': [
+        'Methane, Ammonia, and Temperature Measurements of the Jovian Planets and Titan from CCD–Spectrophotometry',
+        'DOI: 10.1006/icar.1998.5913', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103598959139',
+        'https://pds.nasa.gov/ds-view/pds/viewDataset.jsp?dsid=ESO-J%2FS%2FN%2FU-SPECTROPHOTOMETER-4-V2.0'
     ],
     'Madden2018': [
         'A Catalog of Spectra, Albedos, and Colors of Solar System Bodies for Exoplanet Comparison',
-        'DOI: 10.1089/ast.2017.1763', 'https://www.liebertpub.com/doi/10.1089/ast.2017.1763', 'https://zenodo.org/record/3930987', 'https://ui.adsabs.harvard.edu/abs/2018AsBio..18.1559M/abstract'
+        'DOI: 10.1089/ast.2017.1763', 'https://ui.adsabs.harvard.edu/abs/2018AsBio..18.1559M/abstract',
+        'https://www.liebertpub.com/doi/10.1089/ast.2017.1763', 'https://zenodo.org/record/3930987'
     ], // spectra files, provided by https://www.aanda.org/articles/aa/full_html/2009/45/aa12581-09/aa12581-09.html,
        // have very poor quality in the visible range and were excluded
     'Mallama2017a': [
         'Comprehensive wide-band magnitudes and albedos for the planets, with applications to exo-planets and Planet Nine',
         'DOI: 10.1016/j.icarus.2016.09.023', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103516301014'
-    ],
-    'Mallama2017b': [
-        'The Spherical Bolometric Albedo of Planet Mercury',
-        'DOI: 10.48550/arXiv.1703.02670', 'https://arxiv.org/abs/1703.02670'
     ],
     'Pena2022': [
         'Colors of Irregular Satellites of Saturn with DECam',
@@ -38,6 +41,7 @@
         'https://archive.usgs.gov/archive/sites/speclab.cr.usgs.gov/planetary.spectra/planetary-sp.html'
     ],
 
+    // Mercury
     'Mercury|Mallama2017a': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
@@ -46,6 +50,16 @@
                        0.158, 0.180],
         spherical_albedo: ['Generic_Bessell.V', 0.0166],
     },
+    'Mallama2017b': [
+        'The Spherical Bolometric Albedo of Planet Mercury',
+        'DOI: 10.48550/arXiv.1703.02670', 'https://arxiv.org/abs/1703.02670'
+    ],
+    'Mercury|Mallama2017b, Mallama2017a': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
+        file: 'spectra/files/Madden2018/Mercury_Mallama2017_Albedo.txtU',
+        geometric_albedo: ['Generic_Bessell.V', 0.142],
+        spherical_albedo: true,
+    },
     'Mercury|Crow2011, Mallama2017a, Mallama2017b': { // phase angle 77°
         tags: ['Solar system', 'planet geophysical', 'planet'],
         nm: [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5],
@@ -53,12 +67,8 @@
         geometric_albedo: ['Generic_Bessell.V', 0.142],
         spherical_albedo: ['Generic_Bessell.V', 0.0166],
     },
-    'Mercury|Mallama2017a, Mallama2017b': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
-        file: 'spectra/files/Madden2018/Mercury_Mallama2017_Albedo.txtU',
-        geometric_albedo: ['Generic_Bessell.V', 0.142],
-        spherical_albedo: true,
-    },
+
+    // Venus
     'Venus|Mallama2017a': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
@@ -87,6 +97,8 @@
         br: [0.089, 0.092, 0.095, 0.097, 0.098, 0.099, 0.1, 0.1, 0.1],
         albedo: true
     },
+
+    // Earth system
     'Earth|Mallama2017a': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
@@ -114,6 +126,8 @@
         file: 'spectra/files/CE-3_LS.txtN',
         albedo: true, // angle of incidence 54°, angle of emergence 44°, phase angle 95°; See Section 3.2
     },
+
+    // Martian system
     'Mars|Mallama2017a': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
@@ -175,6 +189,8 @@
         br: [0.04, 0.05, 0.051, 0.05, 0.049, 0.053, 0.055, 0.058, 0.062, 0.067, 0.069],
         geometric_albedo: ['Generic_Bessell.V', 0.068], // geometric albedo https://ssd.jpl.nasa.gov/?sat_phys_par
     },
+
+    // Jovian system
     'Jupiter|Mallama2017a': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Jovian system'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
@@ -183,9 +199,14 @@
                        0.513, 0.389],
     },
     'Jupiter|Karkoschka1994': { // phase angle 9.8°
+        tags: ['Solar system', 'planet geophysical', 'planet', 'Jovian system'],
+        file: 'spectra/files/Karkoschka/Jupiter1993.txt',
+        geometric_albedo: true
+    },
+    'Jupiter|Karkoschka1998': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Jovian system'],
-        file: 'spectra/files/Karkoschka1994/jupiter.txtA',
-        albedo: true
+        file: 'spectra/files/Karkoschka/Jupiter1995.txt',
+        geometric_albedo: true
     },
     // Jovian small regulars
         'Thomas1998': [
@@ -288,6 +309,8 @@
         file: 'spectra/files/Madden2018/Callisto_Spencer1999leading_Albedo.txtU',
         geometric_albedo: true
     },
+
+    // Saturnian system
     'Saturn|Mallama2017a': {
         tags: ['Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
@@ -296,9 +319,14 @@
                        0.646, 0.543],
     },
     'Saturn|Karkoschka1994': { // phase angle 2.7°
+        tags: ['Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
+        file: 'spectra/files/Karkoschka/Saturn1993.txt',
+        geometric_albedo: true
+    },
+    'Saturn|Karkoschka1998': { // without rings
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
-        file: 'spectra/files/Karkoschka1994/saturn.txtA',
-        albedo: true
+        file: 'spectra/files/Karkoschka/Saturn1995.txt',
+        geometric_albedo: true
     },
     'Rings of Saturn|USGSarchive': {
         tags: ['featured', 'Solar system', 'ring', 'Saturnian system'],
@@ -344,8 +372,13 @@
     },
     '(S VI) Titan|Karkoschka1994': { // phase angle 2.7°
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
-        file: 'spectra/files/Karkoschka1994/titan.txtA',
-        albedo: true
+        file: 'spectra/files/Karkoschka/Titan1993.txt',
+        geometric_albedo: true
+    },
+    '(S VI) Titan|Karkoschka1998': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        file: 'spectra/files/Karkoschka/Titan1995.txt',
+        geometric_albedo: true
     },
     'Karkoschka2012': [
         'The reflectivity spectrum and opposition effect of Titan’s surface observed by Huygens’ DISR spectrometers',
@@ -415,10 +448,17 @@
         br_geometric: [0.502, 0.561, 0.488, 0.202, 0.079,
                        0.264, 0.089],
     },
+
+    // Uranian system
     'Uranus|Karkoschka1994': { // phase angle 0.6°
+        tags: ['Solar system', 'planet geophysical', 'planet', 'Uranian system'],
+        file: 'spectra/files/Karkoschka/Uranus1993.txt',
+        geometric_albedo: true
+    },
+    'Uranus|Karkoschka1998': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Uranian system'],
-        file: 'spectra/files/Karkoschka1994/uranus.txtA',
-        albedo: true
+        file: 'spectra/files/Karkoschka/Uranus1995.txt',
+        geometric_albedo: true
     },
     'Karkoschka2001': [
         'Comprehensive Photometry of the Rings and 16 Satellites of Uranus with the Hubble Space Telescope',
@@ -544,6 +584,8 @@
         sd: [0.03, 0.02, 0.03],
         geometric_albedo: true, // average normal albedo
     },
+
+    // Neptunian system
     'Neptune|Mallama2017a': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
@@ -552,9 +594,14 @@
                        0.226, 0.072],
     },
     'Neptune|Karkoschka1994': { // phase angle 0.4°
+        tags: ['Solar system', 'planet geophysical', 'planet', 'Neptunian system'],
+        file: 'spectra/files/Karkoschka/Neptune1995.txt',
+        geometric_albedo: true
+    },
+    'Neptune|Karkoschka1998': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Neptunian system'],
-        file: 'spectra/files/Karkoschka1994/neptune.txtA',
-        albedo: true
+        file: 'spectra/files/Karkoschka/Neptune1995.txt',
+        geometric_albedo: true
     },
     'Tryka1999': [
         'A Visual Spectrum of Triton from the Hubble Space Telescope',
