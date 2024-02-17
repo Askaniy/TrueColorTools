@@ -344,34 +344,47 @@
     },
     'Filacchione2018': [
         'Photometric Modeling and VIS-IR Albedo Maps of Tethys From Cassini-VIMS',
-        'DOI: 10.1029/2018GL078602', 'https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2018GL078602'
+        'DOI: 10.1029/2018GL078602', 'https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2018GL078602',
+        'https://ui.adsabs.harvard.edu/abs/2018GeoRL..45.6400F/abstract'
     ],
     '(S III) Tethys|Filacchione2018': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
-        nm: [350, 440, 550, 700, 950],
-        br: [0.75042, 0.77108, 0.79707, 0.76842, 0.74823],
-        sd: [0.00106, 0.00100, 0.00111, 0.00110, 0.00102],
-        albedo: true
+        nm: [350, 440, 550, 700, 950, 1046, 1540, 1822, 2050, 2200],
+        br: [0.75042, 0.77108, 0.79707, 0.76842, 0.74823, 0.74563, 0.45171, 0.70383, 0.35282, 0.68231],
+        sd: [0.00106, 0.00100, 0.00111, 0.00110, 0.00102, 0.00174, 0.00090, 0.00160, 0.00059, 0.00127],
+        spherical_albedo: true, // equigonal albedo
     },
     'Filacchione2017': [
         'Photometric Modeling and VIS-IR Albedo Maps of Dione From Cassini-VIMS',
-        'DOI: 10.1002/2017GL076869', 'https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2017GL076869'
+        'DOI: 10.1002/2017GL076869', 'https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2017GL076869',
+        'https://ui.adsabs.harvard.edu/abs/2018GeoRL..45.2184F/abstract'
     ],
     '(S IV) Dione|Filacchione2017': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
-        nm: [350, 440, 550, 700, 950],
-        br: [0.57582, 0.61407, 0.61977, 0.58411, 0.58268],
-        sd: [0.00034, 0.00040, 0.00047, 0.00051, 0.00046],
-        albedo: true
+        nm: [350, 440, 550, 700, 950, 1046, 1540, 1822, 2050, 2200],
+        br: [0.57582, 0.61407, 0.61977, 0.58411, 0.58268, 0.55834, 0.40562, 0.55832, 0.24751, 0.51508],
+        sd: [0.00034, 0.00040, 0.00047, 0.00051, 0.00046, 0.00071, 0.00044, 0.00077, 0.00023, 0.00067],
+        spherical_albedo: true, // equigonal albedo
     },
-    '(S V) Rhea|USGSarchive': {
+    'Filacchione2020': [
+        'Photometric modelling and VIS-IR albedo maps of Rhea from Cassini-VIMS ',
+        'DOI: 10.1093/mnrasl/slaa162', 'https://academic.oup.com/mnrasl/article/499/1/L62/5905424',
+        'https://ui.adsabs.harvard.edu/abs/2020MNRAS.499L..62F/abstract'
+    ],
+    '(S V) Rhea|Filacchione2020': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        file: 'spectra/files/Rhea_Filacchione2020.txtU',
+        spherical_albedo: true, // equigonal albedo
+    },
+    '(S V) Rhea|USGSarchive, Filacchione2020': {
+        tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm: [325, 350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
         br: [0.734770, 0.732256, 0.745028, 0.844831, 0.859745, 0.910340, 0.925726, 0.991097, 0.992538, 1.016375, 1.006958, 1.049296, 1.060323, 1.034402,
-            1.082394, 1.054788, 1.060017, 1.028328]
+            1.082394, 1.054788, 1.060017, 1.028328],
+        spherical_albedo: ['Generic_Bessell.V', 0.608]
     },
     '(S VI) Titan|Karkoschka1994': { // phase angle 2.7°
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         file: 'spectra/files/Karkoschka/Titan1993.txt',
         geometric_albedo: true
     },

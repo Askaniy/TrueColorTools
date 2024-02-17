@@ -98,6 +98,6 @@
     },
     '(M5.5 Ve) Proxima Centauri|Ribas2017': {
         tags: ['V dwarf', 'extrasolar', 'star'],
-        file: 'spectra/files/ProximaCentauri.fit'
+        file: 'spectra/files/ProximaCentauri_Ribas2017.fit'
     }
 }
