@@ -274,8 +274,20 @@ def launch_window(lang: str):
             elif isinstance(event, str) and event in ('T2_preview', 'T2_folder'):
                 window.start_thread(
                     lambda: ip.image_parser(
-                        window, T2_mode, values['T2_folder'], img_preview_area, values['T2_path'], T2_files, T2_filters, T2_factors,
-                        values['-gamma-'], values['-srgb-'], values['T2_makebright'], values['T2_desun'], float(values['T2_factor'])
+                        image_mode=T2_mode,
+                        save_folder=values['T2_folder'],
+                        pixels_limit=img_preview_area,
+                        single_file=values['T2_path'],
+                        files=T2_files,
+                        filters=T2_filters,
+                        factors=T2_factors,
+                        gamma_correction=values['-gamma-'],
+                        srgb=values['-srgb-'],
+                        desun=values['T2_desun'],
+                        photons=values['T2_photons'],
+                        makebright=values['T2_makebright'],
+                        factor=float(values['T2_factor']),
+                        log=gui.create_logger(window, 'T2_thread')
                     ),
                     ('T2_thread', 'End of the image processing thread\n')
                 )

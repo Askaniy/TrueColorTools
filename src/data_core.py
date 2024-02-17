@@ -243,12 +243,12 @@ class Spectrum:
     def __mul__(self, other):
         """
         Returns a new Spectrum object modified by the overloaded multiplication operator.
-        If the operand is a number, a scaled spectrum is returned.
+        If the operand is a number (or an array of spectral axis size), a scaled spectrum is returned.
         If the operand is a Spectrum, an emitter spectrum is applied to the intersection.
         """
-        if isinstance(other, (int, float)):
+        if isinstance(other, (int, float, np.ndarray)):
             return self.apply_linear_operator(mul, other)
-        else:
+        elif isinstance(other, Spectrum):
             return self.apply_elemental_operator(mul, other, ' ∙ ')
     
     def __rmul__(self, other):
@@ -257,12 +257,12 @@ class Spectrum:
     def __truediv__(self, other):
         """
         Returns a new Spectrum object modified by the overloaded division operator.
-        If the operand is a number, a scaled spectrum is returned.
+        If the operand is a number (or an array of spectral axis size), a scaled spectrum is returned.
         If the operand is a Spectrum, an emitter spectrum is removed from the intersection.
         """
-        if isinstance(other, (int, float)):
+        if isinstance(other, (int, float, np.ndarray)):
             return self.apply_linear_operator(truediv, other)
-        else:
+        elif isinstance(other, Spectrum):
             return self.apply_elemental_operator(truediv, other, ' / ')
     
     def __matmul__(self, other) -> float:
@@ -376,21 +376,51 @@ class Photometry:
         """ Returns an array of uncorrected standard deviations for each filter """
         return np.array([passband.standard_deviation() for passband in self.filters])
 
-    def __mul__(self, other: Spectrum):
-        """ Returns a new Photometry object with the emitter added (untied from a white standard spectrum) """
-        # Scaling brightness scales filters' profiles too!
-        filters = [(passband * other).scaled_by_area() for passband in self.filters]
-        return Photometry(f'{self.name} ∙ {other.name}', filters, self.br * (self @ other))
+    def apply_linear_operator(self, operator: Callable, operand: int|float):
+        """
+        Returns a new Photometry object transformed according to the linear operator.
+        Linearity is needed because values and uncertainty are handled uniformly.
+        """
+        br = operator(self.br, operand)
+        sd = None
+        if self.sd is not None:
+            sd = operator(self.sd, operand)
+        return Photometry(self.name, self.filters, br, sd)
+    
+    def apply_elemental_operator(self, operator: Callable, other: Spectrum, operator_sign: str = ', '):
+        """
+        Returns a new Photometry object formed from element-wise multiplication or division by the Spectrum.
+        Note that this also distorts filter profiles.
+        """
+        name = f'{self.name}{operator_sign}{other.name}'
+        filters = [operator(passband, other).scaled_by_area() for passband in self.filters]
+        return operator(Photometry(name, filters, self.br, self.sd), self @ other) # linear
+    
+    def __mul__(self, other):
+        """
+        Returns a new Photometry object modified by the overloaded multiplication operator.
+        If the operand is a number (or an array of spectral axis size), a scaled photometry is returned.
+        If the operand is a Spectrum, an emitter spectrum is applied to the intersections with filters.
+        """
+        if isinstance(other, (int, float, np.ndarray)):
+            return self.apply_linear_operator(mul, other)
+        elif isinstance(other, Spectrum):
+            return self.apply_elemental_operator(mul, other, ' ∙ ')
     
     def __rmul__(self, other):
         return self.__mul__(other)
 
     def __truediv__(self, other: Spectrum):
-        """ Returns a new Photometry object with the emitter removed (apply a white standard spectrum) """
-        # Scaling brightness scales filters' profiles too!
-        filters = [(passband / other).scaled_by_area() for passband in self.filters]
-        return Photometry(f'{self.name} / {other.name}', filters, self.br / (self @ other))
+        """
+        Returns a new Photometry object modified by the overloaded division operator.
+        If the operand is a number (or an array of spectral axis size), a scaled photometry is returned.
+        If the operand is a Spectrum, an emitter spectrum is removed from the intersections with filters.
+        """
+        if isinstance(other, (int, float, np.ndarray)):
+            return self.apply_linear_operator(truediv, other)
+        elif isinstance(other, Spectrum):
+            return self.apply_elemental_operator(truediv, other, ' / ')
 
     def __matmul__(self, other: Spectrum) -> np.ndarray[float]:
-        """ Convolve all the filters with a spectrum """
+        """ Convolve all the filters with the spectrum """
         return np.array([other @ passband for passband in self.filters])

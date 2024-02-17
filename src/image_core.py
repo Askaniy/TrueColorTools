@@ -119,10 +119,10 @@ class SpectralCube:
         Returns a new SpectralCube object transformed according to the linear operator.
         Linearity is needed because values and uncertainty are handled uniformly.
         """
-        br = operator(self.br, operand)
+        br = operator(self.br.T, operand).T
         sd = None
         if self.sd is not None:
-            sd = operator(self.sd, operand)
+            sd = operator(self.sd.T, operand).T
         return SpectralCube(self.nm, br, sd)
     
     def apply_elemental_operator(self, operator: Callable, other: Spectrum, operator_sign: str = ', '):
@@ -153,12 +153,12 @@ class SpectralCube:
     def __mul__(self, other):
         """
         Returns a new SpectralCube object modified by the overloaded multiplication operator.
-        If the operand is a number, a scaled spectrum is returned.
+        If the operand is a number (or an array of spectral axis size), a scaled cube is returned.
         If the operand is a Spectrum, an emitter spectrum is applied to the intersection.
         """
-        if isinstance(other, (int, float)):
+        if isinstance(other, (int, float, np.ndarray)):
             return self.apply_linear_operator(mul, other)
-        else:
+        elif isinstance(other, Spectrum):
             return self.apply_elemental_operator(mul, other, ' ∙ ')
     
     def __rmul__(self, other):
@@ -167,12 +167,12 @@ class SpectralCube:
     def __truediv__(self, other):
         """
         Returns a new SpectralCube object modified by the overloaded division operator.
-        If the operand is a number, a scaled spectrum is returned.
+        If the operand is a number (or an array of spectral axis size), a scaled cube is returned.
         If the operand is a Spectrum, an emitter spectrum is removed from the intersection.
         """
-        if isinstance(other, (int, float)):
+        if isinstance(other, (int, float, np.ndarray)):
             return self.apply_linear_operator(truediv, other)
-        else:
+        elif isinstance(other, Spectrum):
             return self.apply_elemental_operator(truediv, other, ' / ')
     
     def __matmul__(self, other) -> np.ndarray:
@@ -258,21 +258,50 @@ class PhotometricCube:
         """ Returns an array of uncorrected standard deviations for each filter """
         return np.array([passband.standard_deviation() for passband in self.filters])
 
-    def __mul__(self, other: Spectrum):
-        """ Returns a new PhotometricCube object with the emitter added (untied from a white standard spectrum) """
-        # Scaling brightness scales filters' profiles too!
-        filters = [(passband * other).scaled_by_area() for passband in self.filters]
-        return PhotometricCube(filters, (self.br.T * (self @ other)).T)
+    def apply_linear_operator(self, operator: Callable, operand: int|float):
+        """
+        Returns a new PhotometricCube object transformed according to the linear operator.
+        Linearity is needed because values and uncertainty are handled uniformly.
+        """
+        br = operator(self.br.T, operand).T
+        sd = None
+        if self.sd is not None:
+            sd = operator(self.sd.T, operand).T
+        return PhotometricCube(self.filters, br, sd)
+    
+    def apply_elemental_operator(self, operator: Callable, other: Spectrum):
+        """
+        Returns a new PhotometricCube object formed from element-wise multiplication or division by the Spectrum.
+        Note that this also distorts filter profiles.
+        """
+        filters = [operator(passband, other).scaled_by_area() for passband in self.filters]
+        return operator(PhotometricCube(filters, self.br, self.sd), self @ other) # linear
+    
+    def __mul__(self, other):
+        """
+        Returns a new PhotometricCube object modified by the overloaded multiplication operator.
+        If the operand is a number (or an array of spectral axis size), a scaled photometric cube is returned.
+        If the operand is a Spectrum, an emitter spectrum is applied to the intersections with filters.
+        """
+        if isinstance(other, (int, float, np.ndarray)):
+            return self.apply_linear_operator(mul, other)
+        elif isinstance(other, Spectrum):
+            return self.apply_elemental_operator(mul, other)
     
     def __rmul__(self, other):
         return self.__mul__(other)
 
     def __truediv__(self, other: Spectrum):
-        """ Returns a new PhotometricCube object with the emitter removed (apply a white standard spectrum) """
-        # Scaling brightness scales filters' profiles too!
-        filters = [(passband / other).scaled_by_area() for passband in self.filters]
-        return PhotometricCube(filters, (self.br.T / (self @ other)).T)
+        """
+        Returns a new PhotometricCube object modified by the overloaded division operator.
+        If the operand is a number (or an array of spectral axis size), a scaled photometric cube is returned.
+        If the operand is a Spectrum, an emitter spectrum is removed from the intersections with filters.
+        """
+        if isinstance(other, (int, float, np.ndarray)):
+            return self.apply_linear_operator(truediv, other)
+        elif isinstance(other, Spectrum):
+            return self.apply_elemental_operator(truediv, other)
 
     def __matmul__(self, other: Spectrum) -> np.ndarray[float]:
-        """ Convolve all the filters with a spectrum """
+        """ Convolve all the filters with the spectrum """
         return np.array([other @ passband for passband in self.filters])

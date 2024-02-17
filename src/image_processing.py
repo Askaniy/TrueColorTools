@@ -10,22 +10,27 @@ import src.auxiliary as aux
 import src.image_core as ic
 import src.image_import as ii
 import src.color_processing as cp
-from src.data_processing import sun_norm
+from src.data_processing import sun_norm, photon_spectral_density
 
-
-def create_log(window) -> Callable:
-    """ Creates a function that sends messages to the window main thread """
-    def log(message: str):
-        window.write_event_value(('T2_thread', f'{strftime("%H:%M:%S")} {message}'), None)
-    return log
 
 def image_parser(
-        window, image_mode: int, save_folder: str, pixels_limit: int, single_file: str, files: list, filters: list, factors: list,
-        gamma_correction: bool, srgb: bool, makebright: bool, desun: bool, factor: float
+        image_mode: int,
+        save_folder: str = '',
+        pixels_limit: int = 256*128,
+        single_file: str = None,
+        files: list = None,
+        filters: list = None,
+        factors: list = None,
+        gamma_correction: bool = True,
+        srgb: bool = False,
+        desun: bool = False,
+        photons: bool = False,
+        makebright: bool = False,
+        factor: float = 1.,
+        log: Callable = print
     ):
     """ Receives user input and performs processing in a parallel thread """
     preview_flag = save_folder == ''
-    log = create_log(window)
     log('Starting the image processing thread')
     start_time = monotonic()
     try:
@@ -42,7 +47,11 @@ def image_parser(
                 if preview_flag:
                     log('Down scaling')
                     cube = cube.downscale(pixels_limit)
-                cube.br = (cube.br.T * factors).T
+                if photons:
+                    log('Converting photon spectral density to energy density')
+                    cube *= photon_spectral_density
+                if factors is not None:
+                    cube *= factors
                 if desun:
                     log('Removing Sun as emitter')
                     cube /= sun_norm
@@ -58,7 +67,11 @@ def image_parser(
                 if preview_flag:
                     log('Down scaling')
                     cube = cube.downscale(pixels_limit)
-                cube.br = (cube.br.T * factors).T
+                if photons:
+                    log('Converting photon spectral density to energy density')
+                    cube *= photon_spectral_density
+                if factors is not None:
+                    cube *= factors
                 if desun:
                     log('Removing Sun as emitter')
                     cube /= sun_norm
@@ -73,6 +86,9 @@ def image_parser(
                 if preview_flag:
                     log('Down scaling')
                     cube = cube.downscale(pixels_limit)
+                if photons:
+                    log('Converting photon spectral density to energy density')
+                    cube *= photon_spectral_density
                 if desun:
                     log('Removing Sun as emitter')
                     cube /= sun_norm
@@ -85,7 +101,7 @@ def image_parser(
         speed = img.height * img.width / time
         log(f'Processing took {time:.1f} seconds, average speed is {speed:.1f} px/sec')
         if preview_flag:
-            window.write_event_value(('T2_thread', 'Sending the resulting preview to the main thread'), img)
+            log('Sending the resulting preview to the main thread', img)
         else:
             img.save(f'{save_folder}/TCT_{strftime("%Y-%m-%d_%H-%M")}.png')
     except Exception:

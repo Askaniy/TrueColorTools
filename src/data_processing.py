@@ -17,8 +17,9 @@ vega_SI = Spectrum.from_file('Vega', 'spectra/files/CALSPEC/alpha_lyr_stis_011.f
 vega_in_V = vega_SI @ get_filter('Generic_Bessell.V')
 vega_norm = vega_SI.scaled_at('Generic_Bessell.V')
 
-lambdas = np.arange(5, aux.nm_red_limit+1, aux.resolution)
-equal_frequency_density = Spectrum('AB', lambdas, 1/lambdas**2).scaled_at('Generic_Bessell.V') # f_lambda=f_nu*c/lambda^2
+lambdas = np.arange(aux.resolution, aux.nm_red_limit+1, aux.resolution)
+photon_spectral_density = Spectrum('Photons of equal energy', lambdas, 1/lambdas).scaled_at('Generic_Bessell.V') # E=hc/λ
+equal_frequency_density = Spectrum('AB', lambdas, 1/lambdas**2).scaled_at('Generic_Bessell.V') # f_λ = f_ν * c / λ²
 del lambdas
 
 

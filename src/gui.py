@@ -1,5 +1,7 @@
 """ Responsible for the creation and translation of the graphical interface. """
 
+from typing import Callable
+from time import strftime
 import PySimpleGUI as sg
 import src.strings as tr
 
@@ -19,6 +21,12 @@ sg.LOOK_AND_FEEL_TABLE['MaterialDark'] = {
         'BUTTON': (text_color, main_color), 'PROGRESS': ('#000000', '#000000'),
         'BORDER': 0, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0
     }
+
+def create_logger(window: sg.Window, key: str) -> Callable:
+    """ Creates a function that sends messages to the window main thread """
+    def logger(message: str, data=None):
+        window.write_event_value((key, f'{strftime("%H:%M:%S")} {message}'), data)
+    return logger
 
 def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tuple, filtersDB: tuple, bitness: int, rounding: int, T2_num: int, lang: str):
     title_font = ('arial', 12)
@@ -122,12 +130,12 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         [sg.Column(T2_frames, scrollable=True, vertical_scroll_only=True, key='T2_frames', expand_x=True, expand_y=True)]
     ]
     T2_col2_1 = [
-        [sg.Checkbox(tr.gui_makebright[lang], key='T2_makebright')],
         [sg.Checkbox(tr.gui_desun[lang], key='T2_desun')],
-        #[sg.Checkbox(tr.gui_devega[lang], key='T2_devega')],
+        [sg.Checkbox(tr.gui_photons[lang], key='T2_photons')],
         #[sg.Checkbox(tr.gui_autoalign[lang], key='T2_autoalign')],
     ]
     T2_col2_2 = [
+        [sg.Checkbox(tr.gui_makebright[lang], key='T2_makebright')],
         [sg.Text(tr.gui_factor[lang], key='T2_factorText'), sg.Input('1', size=1, key='T2_factor', expand_x=True)]
     ]
     T2_col2 = [
@@ -252,11 +260,11 @@ def translate(window: sg.Window, T2_vis: int, lang: str):
         window['T2_filterText'+str(i)].update(tr.gui_filter[lang])
         window['T2_pathText'+str(i)].update(tr.gui_browse[lang])
         window['T2_factorText'+str(i)].update(tr.gui_factor[lang])
-    window['T2_makebright'].update(text=tr.gui_makebright[lang])
     window['T2_desun'].update(text=tr.gui_desun[lang])
-    #window['T2_devega'].update(text=tr.gui_devega[lang])
+    window['T2_photons'].update(text=tr.gui_photons[lang])
     #window['T2_autoalign'].update(text=tr.gui_autoalign[lang])
     #window['T2_plotpixels'].update(text=tr.gui_plotpixels[lang])
+    window['T2_makebright'].update(text=tr.gui_makebright[lang])
     window['T2_factorText'].update(tr.gui_factor[lang])
     window['T2_preview'].update(tr.gui_preview[lang])
     window['T2_process'].update(tr.gui_process[lang])
