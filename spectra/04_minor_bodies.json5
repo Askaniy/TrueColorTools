@@ -22,7 +22,7 @@
     ],
     'Lorenzi2016': [
         'The Spectrum of Pluto, 0.40 - 0.93 um I. Secular and longitudinal distribution of ices and complex organics',
-        'DOI: 10.1051/0004-6361/201527281', 'https://arxiv.org/abs/1509.00417'
+        'DOI: 10.1051/0004-6361/201527281', 'https://www.aanda.org/articles/aa/full_html/2016/01/aa27281-15/aa27281-15.html', 'https://ui.adsabs.harvard.edu/abs/2016A%26A...585A.131L/abstract'
     ],
     'Mainzer2016': [
         'NEOWISE Diameters and Albedos V1.0',
@@ -1955,31 +1955,18 @@
         sun: true,
         geometric_albedo: ['Generic_Bessell.V', 0.178], // mean diameter = 2.5 km, H = 15.5
     },
-    '(134340) Pluto|MBOSS': {
+    '(134340) Pluto|MBOSS, Madden2018': {
         tags: ['MBOSS', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.867, 'V-R': 0.515, 'R-I': 0.400},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.52]
-    },
-    '(134340) Pluto|Lorenzi2016': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
-        nm: [400.551, 423.678, 440.749, 458.37, 466.079, 493.062, 496.366, 499.119, 553.634, 555.837, 559.692, 582.819, 587.225, 630.727, 658.811, 
-            670.925, 680.286, 697.907, 729.846, 761.233, 762.885, 773.348, 784.912, 790.419, 795.925, 803.084, 807.489, 812.996, 816.85, 836.674],
-        br: [0.642, 0.695, 0.766, 0.799, 0.832, 0.887, 0.872, 0.902, 1.019, 1.012, 1.031, 1.056, 1.07, 1.121, 1.137, 0.735, 1.156, 1.169, 1.152, 
-            1.18, 1.157, 1.172, 1.099, 1.144, 1.118, 0.988, 1.072, 1.062, 1.135, 1.169],
-        albedo: ['Generic_Bessell.V', 0.52]
+        geometric_albedo: ['Generic_Bessell.V', 0.504]
     },
     '(134340) Pluto|Madden2018': {
-        tags: ['Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
-        nm: [410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540, 550, 560, 570, 580, 590, 600, 610, 620, 630, 640, 650, 660, 670,
-            680, 690, 700, 710, 720, 730, 740, 750, 760, 770, 780, 790, 800, 810, 820, 830, 840, 850, 860, 870, 880, 890, 900, 910, 920, 930, 992.71],
-        br: [0.31848, 0.33024, 0.34045, 0.36136, 0.38311, 0.39087, 0.40592, 0.42545, 0.43835, 0.44743, 0.4584, 0.46743, 0.48603, 0.49388, 0.50692,
-            0.51397, 0.52309, 0.53866, 0.54639, 0.55549, 0.5629, 0.56749, 0.57886, 0.58535, 0.59163, 0.59688, 0.6017, 0.60816, 0.61239, 0.61481, 0.61961,
-            0.6102, 0.60285, 0.63038, 0.63607, 0.6348, 0.63782, 0.63538, 0.63423, 0.63182, 0.63682, 0.64078, 0.64593, 0.63929, 0.63921, 0.62098, 0.54141,
-            0.60355, 0.48914, 0.56542, 0.62153, 0.62718, 0.62923, 0.53279],
-        albedo: true
+        tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
+        file: 'spectra/files/Madden2018/Pluto_LorenziProtopapa_Albedo.txtU',
+        geometric_albedo: true
     },
     '(P I) Charon|Verbiscer2022': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'minor body', 'TNO', 'plutino'],

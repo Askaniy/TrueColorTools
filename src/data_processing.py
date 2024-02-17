@@ -277,17 +277,16 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
     spherical = None
     calib = content['calib'].lower() if 'calib' in content else None
     sun = 'sun' in content and content['sun']
+    if 'br_geometric' in content:
+        br = content['br_geometric']
+        sd = number2array(content['sd_geometric'], len(br)) if 'sd_geometric' in content else None
+        geometric = spectral_data2visible_spectrum(name, nm, filters, br, sd, calib, sun)
+    if 'br_spherical' in content:
+        br = content['br_spherical']
+        sd = number2array(content['sd_spherical'], len(br)) if 'sd_spherical' in content else None
+        spherical = spectral_data2visible_spectrum(name, nm, filters, br, sd, calib, sun)
     if len(br) == 0:
-        if 'br_geometric' in content or 'br_spherical' in content:
-            if 'br_geometric' in content:
-                br = content['br_geometric']
-                sd = number2array(content['sd_geometric'], len(br)) if 'sd_geometric' in content else None
-                geometric = spectral_data2visible_spectrum(name, nm, filters, br, sd, calib, sun)
-            if 'br_spherical' in content:
-                br = content['br_spherical']
-                sd = number2array(content['sd_spherical'], len(br)) if 'sd_spherical' in content else None
-                spherical = spectral_data2visible_spectrum(name, nm, filters, br, sd, calib, sun)
-        else:
+        if geometric is None and spherical is None:
             print(f'# Note for the database object "{name}"')
             print(f'- No brightness data. Spectrum stub object was created.')
             spectrum = Spectrum(name, *Spectrum.stub).to_scope(aux.visible_range)
