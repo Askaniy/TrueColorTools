@@ -1759,17 +1759,23 @@
         'Investigating Surface Color Variegation on Near-Earth Asteroid Bennu Using OSIRIS-REx Mapcam Data',
         'https://ui.adsabs.harvard.edu/abs/2019LPI....50.2794L/abstract'
     ],
-    '(101955) Bennu|LeCorre2019': {
+    'Li2021': [
+        'Spectrophotometric Modeling and Mapping of (101955) Bennu',
+        'DOI: 10.3847/PSJ/abfd2d', 'https://iopscience.iop.org/article/10.3847/PSJ/abfd2d', 'https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..117L/abstract'
+    ],
+    '(101955) Bennu|LeCorre2019, Li2021': {
         tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         system: 'OSIRIS-REX_MapCam',
         filters: ['Bf', 'Vf', 'Wf', 'Xf'],
         br_spherical: [0.0175, 0.01736, 0.0174, 0.01727],
+        geometric_albedo: [550, 0.046, 0.007],
     },
     '(101955) Bennu: Dark boulder terrain|LeCorre2019': {
         tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
         system: 'OSIRIS-REX_MapCam',
         filters: ['Bf', 'Vf', 'Wf', 'Xf'],
         br_spherical: [0.01604, 0.01573, 0.016, 0.01605],
+        geometric_albedo: ['OSIRIS-REX_MapCam.Pan', 0.034],
     },
     '(105685) 2000 SC51|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
