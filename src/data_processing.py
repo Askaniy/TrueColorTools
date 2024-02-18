@@ -63,18 +63,24 @@ class ReflectiveBody:
     By definition, spherical albedo A is p∙q.
     """
 
-    def __init__(self, name: str, tags: Sequence, geometric: Spectrum = None, spherical: Spectrum = None):
+    def __init__(
+            self, name: str, tags: Sequence,
+            geometric: Spectrum = None, spherical: Spectrum = None,
+            phase_integral: tuple[float, float] = None
+        ):
         """
         Args:
         - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
         - `tags` (Sequence): list of categories that specify the physical body
         - `geometric` (Spectrum): represents geometric albedo
         - `spherical` (Spectrum): represents spherical albedo
+        - `phase_integral` (tuple[value, sd]): factor of transition from geometric albedo to spherical
         """
         self.name = name
         self.tags = tags
         self.spherical = spherical
         self.geometric = geometric
+        self.phase_integral = phase_integral
     
     def get_spectrum(self, mode: str):
         """
@@ -91,15 +97,27 @@ class ReflectiveBody:
                 return self.geometric, False
             else:
                 sphericalV = self.spherical @ get_filter('Generic_Bessell.V')
-                geometricV = (np.sqrt(0.359**2 + 4 * 0.47 * sphericalV) - 0.359) / (2 * 0.47)
-                return self.spherical.scaled_at('Generic_Bessell.V', geometricV), True
+                if self.phase_integral is not None:
+                    phase_integral = self.phase_integral[0]
+                    geometricV = sphericalV / phase_integral
+                    estimated = False
+                else:
+                    geometricV = (np.sqrt(0.359**2 + 4 * 0.47 * sphericalV) - 0.359) / (2 * 0.47)
+                    estimated = True
+                return self.spherical.scaled_at('Generic_Bessell.V', geometricV), estimated
         else:
             if self.spherical:
                 return self.spherical, False
             else:
                 geometricV = self.geometric @ get_filter('Generic_Bessell.V')
-                sphericalV = geometricV * (0.395 + 0.47 * geometricV)
-                return self.geometric.scaled_at('Generic_Bessell.V', sphericalV), True
+                if self.phase_integral is not None:
+                    phase_integral = self.phase_integral[0]
+                    estimated = False
+                else:
+                    phase_integral = 0.395 + 0.47 * geometricV
+                    estimated = True
+                sphericalV = geometricV * phase_integral
+                return self.geometric.scaled_at('Generic_Bessell.V', sphericalV), estimated
 
 
 def number2array(target: int|float|Sequence, size: int):
@@ -108,22 +126,6 @@ def number2array(target: int|float|Sequence, size: int):
         return np.full(size, target)
     else:
         return np.array(target)
-
-def albedo_multiply(albedo: Sequence, factor: float, factor_sd: float):
-    """ Multiplies albedo by a factor taking into account uncertainty """
-    br = albedo[1]
-    sd = albedo[2] if len(albedo) == 3 else None
-    if sd is not None and factor_sd is not None:
-        sd = np.sqrt(sd**2 * factor + factor_sd**2 * br)
-    return (albedo[0], br*factor, sd)
-
-def albedo_divide(albedo: Sequence, factor: float, factor_sd: float):
-    """ Divides albedo by a factor taking into account uncertainty """
-    br = albedo[1]
-    sd = albedo[2] if len(albedo) == 3 else None
-    if sd is not None and factor_sd is not None:
-        sd = np.sqrt(sd**2 / factor + factor_sd**2 * br / factor**2)
-    return (albedo[0], br/factor, sd)
 
 def mag2flux(mag: int|float|np.ndarray, zero_point: float = 1.):
     """ Converts magnitudes to flux (by default in Vega units) """
@@ -292,56 +294,6 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
             filters, br, sd = color_indices_parser(content['indices'], sd)
         if 'system' in content:
             filters = [f'{content["system"]}.{short_name}' for short_name in filters]
-    # Phase functions parsing
-    phase_integral = None
-    phase_integral_sd = None
-    if 'phase_integral' in content:
-        if isinstance(content['phase_integral'], Sequence) and len(content['phase_integral']) == 2:
-            phase_integral, phase_integral_sd = content['phase_integral']
-        elif isinstance(content['phase_integral'], (int, float)):
-            phase_integral = content['phase_integral']
-        else:
-            print(f'# Note for the database object "{name}"')
-            print(f'- Invalid phase integral value: {content["phase_integral"]}. Must be a number or a [br, sd] list.')
-    elif 'g' in content: # parameter of HG phase function, Bowell et al. 1989
-        if isinstance(content['g'], Sequence) and len(content['g']) == 2:
-            g, g_sd = content['g']
-        elif isinstance(content['g'], (int, float)):
-            g = content['g']
-            g_sd = None
-        else:
-            print(f'# Note for the database object "{name}"')
-            print(f'- Invalid G phase function parameter value: {content["g"]}. Must be a number or a [br, sd] list.')
-        phase_integral = 0.290 + 0.684 * g
-        if g_sd is not None:
-            phase_integral_sd = 0.827 * g_sd # sd factor 0.827 ≈ sqrt(0.684)
-    elif 'g1' in content and 'g2' in content: # parameter of HG1G2 phase function, Muinonen et al. 2010
-        if isinstance(content['g1'], Sequence) and len(content['g1']) == 2:
-            g1, g1_sd = content['g1']
-        elif isinstance(content['g1'], (int, float)):
-            g1 = content['g1']
-            g1_sd = None
-        else:
-            print(f'# Note for the database object "{name}"')
-            print(f'- Invalid G1 phase function parameter value: {content["g1"]}. Must be a number or a [br, sd] list.')
-        if isinstance(content['g2'], Sequence) and len(content['g2']) == 2:
-            g2, g2_sd = content['g2']
-        elif isinstance(content['g2'], (int, float)):
-            g2 = content['g2']
-            g2_sd = None
-        else:
-            print(f'# Note for the database object "{name}"')
-            print(f'- Invalid G2 phase function parameter value: {content["g2"]}. Must be a number or a [br, sd] list.')
-        phase_integral = 0.009082 + 0.4061 * g1 + 0.8092 * g2
-        if g1_sd is not None and g2_sd is not None:
-            phase_integral_sd = np.sqrt(0.4061 * g1_sd + 0.8092 * g2_sd)
-    geom_albedo = content['geometric_albedo'] if 'geometric_albedo' in content else None
-    sphe_albedo = content['spherical_albedo'] if 'spherical_albedo' in content else None
-    if phase_integral is not None and (geom_albedo, sphe_albedo).count(None) == 1:
-        if isinstance(geom_albedo, Sequence):
-            sphe_albedo = albedo_multiply(geom_albedo, phase_integral, phase_integral_sd)
-        elif isinstance(sphe_albedo, Sequence):
-            geom_albedo = albedo_divide(sphe_albedo, phase_integral, phase_integral_sd)
     calib = content['calib'].lower() if 'calib' in content else None
     sun = 'sun' in content and content['sun']
     geometric = None
@@ -351,14 +303,14 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
             br_geom = content['br_geometric']
             sd_geom = number2array(content['sd_geometric'], len(br_geom)) if 'sd_geometric' in content else None
             geometric = spectral_data2visible_spectrum(name, nm, filters, br_geom, sd_geom, calib, sun)
-            if sphe_albedo is not None:
-                spherical = geometric.scaled_at(*sphe_albedo)
+            if content['spherical_albedo'] is not None:
+                spherical = geometric.scaled_at(*content['spherical_albedo'])
         if 'br_spherical' in content:
             br_sphe = content['br_spherical']
             sd_sphe = number2array(content['sd_spherical'], len(br_sphe)) if 'sd_spherical' in content else None
             spherical = spectral_data2visible_spectrum(name, nm, filters, br_sphe, sd_sphe, calib, sun)
-            if geom_albedo is not None:
-                geometric = spherical.scaled_at(*geom_albedo)
+            if content['geometric_albedo'] is not None:
+                geometric = spherical.scaled_at(*content['geometric_albedo'])
         if geometric is None and spherical is None:
             print(f'# Note for the database object "{name}"')
             print(f'- No brightness data. Spectrum stub object was created.')
@@ -375,27 +327,72 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
                 print(f'# Note for the database object "{name}"')
                 print(f'- Invalid albedo value: {content["albedo"]}. Must be boolean or [filter/nm, br, (sd)].')
         # Geometric albedo parsing
-        if geom_albedo is not None:
-            if isinstance(geom_albedo, bool) and geom_albedo:
+        if 'geometric_albedo' in content:
+            if isinstance(content['geometric_albedo'], bool) and content['geometric_albedo']:
                 geometric = spectrum
-            elif isinstance(geom_albedo, Sequence):
-                geometric = spectrum.scaled_at(*geom_albedo)
+            elif isinstance(content['geometric_albedo'], Sequence):
+                geometric = spectrum.scaled_at(*content['geometric_albedo'])
             else:
                 print(f'# Note for the database object "{name}"')
-                print(f'- Invalid geometric albedo value: {geom_albedo}. Must be boolean or [filter/nm, br, (sd)].')
+                print(f'- Invalid geometric albedo value: {content["geometric_albedo"]}. Must be boolean or [filter/nm, br, (sd)].')
         # Spherical albedo parsing
-        if sphe_albedo is not None:
-            if isinstance(sphe_albedo, bool) and sphe_albedo:
+        if 'spherical_albedo' in content:
+            if isinstance(content['spherical_albedo'], bool) and content['spherical_albedo']:
                 spherical = spectrum
-            elif isinstance(sphe_albedo, Sequence):
-                spherical = spectrum.scaled_at(*sphe_albedo)
+            elif isinstance(content['spherical_albedo'], Sequence):
+                spherical = spectrum.scaled_at(*content['spherical_albedo'])
             else:
                 print(f'# Note for the database object "{name}"')
-                print(f'- Invalid spherical albedo value: {sphe_albedo}. Must be boolean or [filter/nm, br, (sd)].')
+                print(f'- Invalid spherical albedo value: {content["spherical_albedo"]}. Must be boolean or [filter/nm, br, (sd)].')
     tags = []
     if 'tags' in content:
         tags = content['tags']
     if geometric or spherical:
-        return ReflectiveBody(name, tags, geometric, spherical)
+        # Phase function parameters parsing
+        phase_integral = None
+        phase_integral_sd = None
+        if 'phase_integral' in content:
+            if isinstance(content['phase_integral'], Sequence) and len(content['phase_integral']) == 2:
+                phase_integral, phase_integral_sd = content['phase_integral']
+            elif isinstance(content['phase_integral'], (int, float)):
+                phase_integral = content['phase_integral']
+            else:
+                print(f'# Note for the database object "{name}"')
+                print(f'- Invalid phase integral value: {content["phase_integral"]}. Must be a number or a [br, sd] list.')
+        elif 'g' in content: # parameter of HG phase function, Bowell et al. 1989
+            if isinstance(content['g'], Sequence) and len(content['g']) == 2:
+                g, g_sd = content['g']
+            elif isinstance(content['g'], (int, float)):
+                g = content['g']
+                g_sd = None
+            else:
+                print(f'# Note for the database object "{name}"')
+                print(f'- Invalid G phase function parameter value: {content["g"]}. Must be a number or a [br, sd] list.')
+            phase_integral = 0.290 + 0.684 * g
+            if g_sd is not None:
+                phase_integral_sd = 0.827 * g_sd # sd factor 0.827 ≈ sqrt(0.684)
+        elif 'g1' in content and 'g2' in content: # parameter of HG1G2 phase function, Muinonen et al. 2010
+            if isinstance(content['g1'], Sequence) and len(content['g1']) == 2:
+                g1, g1_sd = content['g1']
+            elif isinstance(content['g1'], (int, float)):
+                g1 = content['g1']
+                g1_sd = None
+            else:
+                print(f'# Note for the database object "{name}"')
+                print(f'- Invalid G1 phase function parameter value: {content["g1"]}. Must be a number or a [br, sd] list.')
+            if isinstance(content['g2'], Sequence) and len(content['g2']) == 2:
+                g2, g2_sd = content['g2']
+            elif isinstance(content['g2'], (int, float)):
+                g2 = content['g2']
+                g2_sd = None
+            else:
+                print(f'# Note for the database object "{name}"')
+                print(f'- Invalid G2 phase function parameter value: {content["g2"]}. Must be a number or a [br, sd] list.')
+            phase_integral = 0.009082 + 0.4061 * g1 + 0.8092 * g2
+            if g1_sd is not None and g2_sd is not None:
+                phase_integral_sd = np.sqrt(0.4061 * g1_sd + 0.8092 * g2_sd)
+        if phase_integral is not None:
+            phase_integral = (phase_integral, phase_integral_sd)
+        return ReflectiveBody(name, tags, geometric, spherical, phase_integral)
     else:
         return NonReflectiveBody(name, tags, spectrum)
