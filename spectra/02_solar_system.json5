@@ -346,7 +346,7 @@
         br: [0.734770, 0.732256, 0.745028, 0.844831, 0.859745, 0.910340, 0.925726, 0.991097, 0.992538, 1.016375, 1.006958, 1.049296, 1.060323, 1.034402,
             1.082394, 1.054788, 1.060017, 1.028328],
         geometric_albedo: ['Generic_Bessell.V', 0.89, 0.01],
-        phase_integral: ['Generic_Bessell.V', 0.71, 0.01],
+        phase_integral: [0.71, 0.01],
     },
     '(S VI) Titan|Karkoschka1994': { // phase angle 2.7°
         tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
