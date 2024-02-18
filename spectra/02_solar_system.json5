@@ -293,9 +293,14 @@
             1.028878, 1.016596],
         albedo: ['Generic_Bessell.V', 0.5]
     },
-    '(S II) Enceladus|Madden2018': {
+    'Buratti2022': [
+        'Observations and Modeling of the Opposition Surges of the Icy Moons of Saturn Based on Cassini Visual Infrared Mapping Spectrometer Data',
+        'DOI: 10.3847/PSJ/ac867e', 'https://iopscience.iop.org/article/10.3847/PSJ/ac867e', 'https://ui.adsabs.harvard.edu/abs/2022PSJ.....3..200B/abstract'
+    ],
+    '(S II) Enceladus|Madden2018, Buratti2022': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         file: 'spectra/files/Madden2018/Enceladus_VIMS_Albedo.txtU',
+        geometric_albedo: ['Generic_Bessell.V', 1.24, 0.01],
         spherical_albedo: true,
     },
     'Filacchione2018': [
@@ -303,11 +308,12 @@
         'DOI: 10.1029/2018GL078602', 'https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2018GL078602',
         'https://ui.adsabs.harvard.edu/abs/2018GeoRL..45.6400F/abstract'
     ],
-    '(S III) Tethys|Filacchione2018': {
+    '(S III) Tethys|Filacchione2018, Buratti2022': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm: [350, 440, 550, 700, 950, 1046, 1540, 1822, 2050, 2200],
         br: [0.75042, 0.77108, 0.79707, 0.76842, 0.74823, 0.74563, 0.45171, 0.70383, 0.35282, 0.68231],
         sd: [0.00106, 0.00100, 0.00111, 0.00110, 0.00102, 0.00174, 0.00090, 0.00160, 0.00059, 0.00127],
+        geometric_albedo: ['Generic_Bessell.V', 0.93, 0.02],
         spherical_albedo: true, // equigonal albedo
     },
     'Filacchione2017': [
@@ -315,11 +321,12 @@
         'DOI: 10.1002/2017GL076869', 'https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2017GL076869',
         'https://ui.adsabs.harvard.edu/abs/2018GeoRL..45.2184F/abstract'
     ],
-    '(S IV) Dione|Filacchione2017': {
+    '(S IV) Dione|Filacchione2017, Buratti2022': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm: [350, 440, 550, 700, 950, 1046, 1540, 1822, 2050, 2200],
         br: [0.57582, 0.61407, 0.61977, 0.58411, 0.58268, 0.55834, 0.40562, 0.55832, 0.24751, 0.51508],
         sd: [0.00034, 0.00040, 0.00047, 0.00051, 0.00046, 0.00071, 0.00044, 0.00077, 0.00023, 0.00067],
+        geometric_albedo: ['Generic_Bessell.V', 0.75, 0.02],
         spherical_albedo: true, // equigonal albedo
     },
     'Filacchione2020': [
@@ -327,17 +334,19 @@
         'DOI: 10.1093/mnrasl/slaa162', 'https://academic.oup.com/mnrasl/article/499/1/L62/5905424',
         'https://ui.adsabs.harvard.edu/abs/2020MNRAS.499L..62F/abstract'
     ],
-    '(S V) Rhea|Filacchione2020': {
+    '(S V) Rhea|Filacchione2020, Buratti2022': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         file: 'spectra/files/Rhea_Filacchione2020.txtU',
+        geometric_albedo: ['Generic_Bessell.V', 0.89, 0.01],
         spherical_albedo: true, // equigonal albedo
     },
-    '(S V) Rhea|USGSarchive, Filacchione2020': {
+    '(S V) Rhea|USGSarchive, Buratti2022': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm: [325, 350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
         br: [0.734770, 0.732256, 0.745028, 0.844831, 0.859745, 0.910340, 0.925726, 0.991097, 0.992538, 1.016375, 1.006958, 1.049296, 1.060323, 1.034402,
             1.082394, 1.054788, 1.060017, 1.028328],
-        spherical_albedo: ['Generic_Bessell.V', 0.608]
+        geometric_albedo: ['Generic_Bessell.V', 0.89, 0.01],
+        phase_integral: ['Generic_Bessell.V', 0.71, 0.01],
     },
     '(S VI) Titan|Karkoschka1994': { // phase angle 2.7°
         tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
