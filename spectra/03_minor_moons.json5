@@ -1,4 +1,60 @@
 {
+    // Jovian small regulars
+    'Thomas1998': [
+        'The Small Inner Satellites of Jupiter',
+        'DOI: 10.1006/icar.1998.5976', 'https://www.sciencedirect.com/science/article/pii/S0019103598959760', 'https://ui.adsabs.harvard.edu/abs/1998Icar..135..360T/abstract'
+    ],
+    'Simonelli2000': [
+        'Leading/Trailing Albedo Asymmetries of Thebe, Amalthea, and Metis',
+        'DOI: 10.1006/icar.2000.6474', 'https://www.sciencedirect.com/science/article/pii/S0019103500964741', 'https://ui.adsabs.harvard.edu/abs/2000Icar..147..353S/abstract'
+    ],
+
+    '(J XVI) Metis: Trailing side|Thomas1998, Simonelli2000': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', '8890A', '9680A'],
+        br: [0.38, 1, 0.863, 0.85], // traced from Fig. 6
+        sd: [0.08, 0, 0.173, 0.19], // traced from Fig. 6, relative to Green filter
+        geometric_albedo: ['Galileo_SSI.Clear', 0.054, 0.003], // Table III, log-scaled
+        spherical_albedo: ['Galileo_SSI.Clear', 0.027, 0.002], // Table III, log-scaled
+    },
+    '(J V) Amalthea: Leading side|Thomas1998, Simonelli2000': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', '7560A'],
+        br: [0.54, 1, 1.14], // traced from Fig. 6
+        sd: [0.05, 0, 0.075], // traced from Fig. 6, relative to Green filter
+        geometric_albedo: ['Galileo_SSI.Clear', 0.101, 0.007], // Table III, log-scaled
+        spherical_albedo: ['Galileo_SSI.Clear', 0.036, 0.004], // Table III, log-scaled
+    },
+    '(J V) Amalthea: Trailing side|Thomas1998, Simonelli2000': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', '8890A', '9680A'],
+        br: [0.47, 1, 1.225, 1], // traced from Fig. 6
+        sd: [0.0625, 0, 0.137, 0.15], // traced from Fig. 6, relative to Green filter
+        geometric_albedo: ['Galileo_SSI.Clear', 0.080, 0.005], // Table III, log-scaled
+        spherical_albedo: ['Galileo_SSI.Clear', 0.029, 0.003], // Table III, log-scaled
+    },
+    '(J XIV) Thebe: Leading side|Thomas1998, Simonelli2000': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', '8890A'],
+        br: [0.7125, 1, 1.137], // traced from Fig. 6
+        sd: [0.067, 0, 0.117], // traced from Fig. 6, relative to Green filter
+        geometric_albedo: ['Galileo_SSI.Clear', 0.053, 0.004], // Table III, log-scaled
+        spherical_albedo: ['Galileo_SSI.Clear', 0.022, 0.002], // Table III, log-scaled
+    },
+    '(J XIV) Thebe: Trailing side|Thomas1998, Simonelli2000': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', '8890A', '9680A'],
+        br: [0.6, 1, 1.137, 1.07], // traced from Fig. 6
+        sd: [0.05, 0, 0.117, 0.15], // traced from Fig. 6, relative to Green filter
+        geometric_albedo: ['Galileo_SSI.Clear', 0.041, 0.003], // Table III, log-scaled
+        spherical_albedo: ['Galileo_SSI.Clear', 0.017, 0.002], // Table III, log-scaled
+    },
+
     // Jovian small irregulars
     'Grav2015': [
         'NEOWISE: Observations of the Irregular Satellites of Jupiter and Saturn',
@@ -674,6 +730,20 @@
         indices: {'B-R': 1.37},
         calib: 'Vega',
         sun: true
+    },
+
+    // Uranian small regulars
+    'Portia group|Karkoschka2001': {
+        tags: ['Solar system', 'moon', 'Uranian system', 'regular', 'class'],
+        slope: {start: 570, stop: 1500, power: 0.09},
+        geometric_albedo: [550, 0.080],
+        spherical_albedo: [550, 0.026, 0.050]
+    },
+    '(U XV) Puck|Karkoschka2001': {
+        tags: ['Solar system', 'moon', 'Uranian system', 'regular'],
+        slope: {start: 340, stop: 1500, power: 0.04},
+        geometric_albedo: [550, 0.104],
+        spherical_albedo: [550, 0.035, 0.060]
     },
 
     // Uranian small irregulars
