@@ -303,13 +303,13 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
             br_geom = content['br_geometric']
             sd_geom = number2array(content['sd_geometric'], len(br_geom)) if 'sd_geometric' in content else None
             geometric = spectral_data2visible_spectrum(name, nm, filters, br_geom, sd_geom, calib, sun)
-            if content['spherical_albedo'] is not None:
+            if 'spherical_albedo' in content:
                 spherical = geometric.scaled_at(*content['spherical_albedo'])
         if 'br_spherical' in content:
             br_sphe = content['br_spherical']
             sd_sphe = number2array(content['sd_spherical'], len(br_sphe)) if 'sd_spherical' in content else None
             spherical = spectral_data2visible_spectrum(name, nm, filters, br_sphe, sd_sphe, calib, sun)
-            if content['geometric_albedo'] is not None:
+            if 'geometric_albedo' in content:
                 geometric = spherical.scaled_at(*content['geometric_albedo'])
         if geometric is None and spherical is None:
             print(f'# Note for the database object "{name}"')
