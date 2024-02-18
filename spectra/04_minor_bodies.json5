@@ -2795,6 +2795,19 @@
         calib: 'Vega',
         sun: true
     },
+    'Precovery2014EZ51': [ // to be replaced with MPC later
+        'Asteroid Institute: Precovery of 2014 EZ51',
+        'https://b612.ai/platform/precovery/result/?run_id=4cde8b97-e7ab-4a73-9768-f357ba754f56'
+    ],
+    '(523692) 2014 EZ51|Precovery2014EZ51': {
+        tags: ['Solar system', 'minor body', 'TNO', 'TNO-midsize', 'scattered'],
+        system: 'SLOAN_SDSS',
+        filters: ['g', 'r', 'i', 'z'],
+        mag: [21.914, 21.303, 21.087, 20.981],
+        sd: [0.026, 0.039, 0.037, 0.054],
+        calib: 'AB',
+        sun: true
+    },
     '(523785) 2015 CM3|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
         system: 'Generic_Bessell',
