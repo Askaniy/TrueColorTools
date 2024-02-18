@@ -83,6 +83,8 @@ Supported input keys of a database unit:
 - `albedo` (bool/list): indicates data as albedo scaled or tells how to do it with `[filter/nm, br, (sd)]`
 - `geometric_albedo` (bool/list): indicator of geometric/normal albedo data or how to scale to it
 - `spherical_albedo` (bool/list): indicator of spherical albedo data or how to scale to it
+- `phase_integral` (number/list): factor of transition from geometric albedo to spherical (sd is optional)
+- `g` or `g1`, `g2` (number/list): phase function parameters to compute phase integral (sd is optional)
 - `br_geometric`, `br_spherical` (list): specifying unique spectra for different albedos
 - `sd_geometric`, `sd_spherical` (list/number): corresponding standard deviations or a general value
 - `sun` (bool): `true` to remove Sun as emitter
