@@ -2728,21 +2728,21 @@
         tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
         system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
-        br: [0.053, 0.079, 0.117],
+        br: [0.053, 0.079, 0.117], // phase angle = 11.68°
         albedo: true
     },
     '(486958) Arrokoth:Weeyo Lobus|Howett2019': {
         tags: ['featured', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
         system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
-        br: [0.058, 0.084, 0.122],
+        br: [0.058, 0.084, 0.122], // phase angle = 11.68°
         albedo: true
     },
     '(486958) Arrokoth:Akasa Linea|Howett2019': {
         tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h', 'surface feature'],
         system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
-        br: [0.066, 0.090, 0.125],
+        br: [0.066, 0.090, 0.125], // phase angle = 11.68°
         albedo: true
     },
     '(506479) 2003 HB57|MBOSS': {
@@ -3610,6 +3610,7 @@
         calib: 'AB',
         sun: true
     },
+    
     // Periodic comets
     '1P/Halley|MBOSS': {
         tags: ['featured', 'MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
@@ -3752,6 +3753,7 @@
         calib: 'Vega',
         sun: true
     },
+
     // Non-periodic comets
     'C/1995O1-HB|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-lp'],
@@ -3991,18 +3993,18 @@
         calib: 'Vega',
         sun: true
     },
+    
     // Interstellar objects
     'Jewitt2017': [
         'Interstellar Interloper 1I/2017 U1: Observations from the NOT and WIYN Telescopes',
         'DOI: 10.3847/2041-8213/aa9b2f', 'https://arxiv.org/abs/1711.05687'
     ],
     '1I/ʻOumuamua|Jewitt2017': {
-        tags: ['featured', 'Solar system', 'extrasolar', 'asteroid'],
+        tags: ['Solar system', 'extrasolar', 'asteroid'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.70, 'V-R': 0.45},
         calib: 'Vega',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.1]
     },
     'Bannister2017': [
         'Col-OSSOS: Colors of the Interstellar Planetesimal 1I/`Oumuamua',
@@ -4014,6 +4016,5 @@
         indices: {'g-r': 0.47, 'r-i': 0.36},
         calib: 'AB',
         sun: true,
-        albedo: ['Generic_Bessell.V', 0.07]
     },
 }
