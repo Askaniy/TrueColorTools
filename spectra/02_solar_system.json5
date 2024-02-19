@@ -36,10 +36,6 @@
         'Colors of Irregular Satellites of Saturn with DECam',
         'DOI: 10.3847/1538-3881/ac6258', 'https://arxiv.org/abs/2204.08391'
     ],
-    'USGSarchive': [ // not available anymore, even by Wayback Machine
-        'About the Spectra of the Planets and Satellites',
-        'https://archive.usgs.gov/archive/sites/speclab.cr.usgs.gov/planetary.spectra/planetary-sp.html'
-    ],
 
     // Mercury
     'Mercury|Mallama2017a': {
@@ -151,22 +147,20 @@
         br: [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31],
         geometric_albedo: ['Generic_Bessell.V', 0.170]
     },
-    'Mars: Bright areas|USGSarchive': {
+    'Singer1979': [
+        'Mars surface composition from reflectance spectroscopy: a summary',
+        'DOI: 10.1029/JB084iB14p08415', 'https://agupubs.onlinelibrary.wiley.com/doi/10.1029/JB084iB14p08415',
+        'https://ui.adsabs.harvard.edu/abs/1979JGR....84.8415S/abstract'
+    ],
+    'Mars: Bright areas|Singer1979': { // the average of a number of typical bright region spectra
         tags: ['Solar system', 'planet geophysical', 'planet', 'surface feature'],
-        nm: [330, 342, 363, 381, 404, 440, 475, 504, 540, 566, 600, 633, 666, 700, 704.7, 716.4, 728.9, 739.8, 751.9, 763.6, 775.6, 786.3, 799, 811.7,
-            822.4, 837.1, 849.8, 862.5],
-        br: [0.091700, 0.095981, 0.108666, 0.098961, 0.130791, 0.180553, 0.247580, 0.302547, 0.398298, 0.527668, 0.704229, 0.790133, 0.861244, 0.907984,
-            0.927670, 0.950918, 0.968006, 0.973932, 1.007903, 1.009743, 0.983539, 0.998712, 1.002135, 0.990941, 0.984577, 0.981692, 0.969340, 0.963597],
-        albedo: ['Generic_Bessell.V', 0.26], // https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2001JE001580
+        file: 'spectra/files/Singer1979/Mars_bright.txtU', // figure 3
+        geometric_albedo: [800, 0.40],
     },
-    'Mars: Dark areas|USGSarchive': {
+    'Mars: Dark areas|Singer1979': { // telescopic dark region Iapygia
         tags: ['Solar system', 'planet geophysical', 'planet', 'surface feature'],
-        nm: [330, 342, 363, 381, 404, 440, 475, 504, 540, 566, 600, 633, 644.1, 656, 667.9, 679.9, 691.7, 704.7, 716.4, 728.9, 739.8, 751.9, 763.6,
-            775.6, 786.3, 799, 811.7, 822.4, 837.1, 849.8, 862.5],
-        br: [0.214259, 0.225981, 0.208343, 0.207151, 0.242350, 0.304599, 0.368299, 0.435753, 0.552943, 0.686686, 0.832221, 0.931029, 1.086725, 1.096983, 
-            1.117898, 1.128430, 1.139110, 1.147979, 1.159085, 1.143423, 1.145229, 1.126660, 1.111953, 1.092715, 1.076242, 1.085038, 1.046774, 1.033783,
-            1.026548, 1.020545, 1.028644],
-        albedo: ['Generic_Bessell.V', 0.12], // https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2001JE001580
+        file: 'spectra/files/Singer1979/Mars_dark.txtU', // figure 3
+        geometric_albedo: [800, 0.21],
     },
     'Mars|Madden2018': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
@@ -218,50 +212,47 @@
         file: 'spectra/files/Karkoschka/Jupiter1995.txt',
         geometric_albedo: true
     },
-    '(J I) Io: Trailing hemisphere|USGSarchive': {
+    'Clark1980a': [
+        'The Galilean satellites: New near-infrared spectral reflectance measurements (0.65-2.5 μm) and a 0.325-5 μm summary',
+        'DOI: 10.1016/0019-1035(80)90217-1', 'https://www.sciencedirect.com/science/article/abs/pii/0019103580902171',
+        'https://ui.adsabs.harvard.edu/abs/1980Icar...41..323C/abstract'
+    ],
+    '(J I) Io: Trailing side|Clark1980a': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
-        nm: [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 739.8, 751.9, 763.6, 775.6, 786.3, 799, 811.7, 822.4, 837.1, 849.8, 862.5],
-        br: [0.126856, 0.161157, 0.189998, 0.312668, 0.455349, 0.642046, 0.775382, 0.801427, 0.811630, 0.890139, 0.942953, 1.004252, 1.005697, 1.015561,
-            1.031987, 1.019722, 1.008961, 1.000501, 1.015732, 1.006328, 1.003697, 0.986871, 0.973683, 0.987817],
+        file: 'spectra/files/Clark1980/Io.txtU', // figure 10
     },
     '(J I) Io|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         file: 'spectra/files/Madden2018/Io_Fanale1974_Albedo.txtU',
         geometric_albedo: true,
     },
-    '(J II) Europa: Trailing hemisphere|USGSarchive, Madden2018': {
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
-        nm: [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
-        br: [0.352826, 0.410782, 0.467415, 0.602579, 0.688769, 0.806425, 0.839300, 0.852109, 0.913667, 0.961235, 0.979446, 1.006591, 1.026941, 1.038414,
-            1.067850, 1.062889, 1.063046],
+    '(J II) Europa: Trailing side|Clark1980a, Madden2018': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
+        file: 'spectra/files/Clark1980/Europa.txtU', // figure 1
         geometric_albedo: ['Generic_Bessell.V', 0.611],
     },
-    '(J II) Europa: Trailing hemisphere|Madden2018': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
+    '(J II) Europa: Trailing side|Madden2018': {
+        tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         file: 'spectra/files/Madden2018/Europa_Spencer1999trailing_Albedo.txtU',
         geometric_albedo: true,
     },
-    '(J III) Ganymede: Leading hemisphere|USGSarchive, Madden2018': {
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
-        nm: [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
-        br: [0.488778, 0.590744, 0.632155, 0.752500, 0.783059, 0.869610, 0.918507, 0.955278, 0.973874, 1.010833, 1.021557, 1.046712, 1.040900, 1.035977,
-            1.049606, 1.044146, 1.036557],
+    '(J III) Ganymede: Leading side|Clark1980a, Madden2018': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
+        file: 'spectra/files/Clark1980/Ganymede.txtU', // figure 13
         geometric_albedo: ['Generic_Bessell.V', 0.464],
     },
-    '(J III) Ganymede: Leading hemisphere|Madden2018': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
+    '(J III) Ganymede: Leading side|Madden2018': {
+        tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         file: 'spectra/files/Madden2018/Ganymede_Spencer1999leading_Albedo.txtU',
         geometric_albedo: true,
     },
-    '(J IV) Callisto: Leading hemisphere|USGSarchive, Madden2018': {
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
-        nm: [350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 837.1, 849.8, 862.5],
-        br: [0.406242, 0.456089, 0.518130, 0.652152, 0.691349, 0.777651, 0.840575, 0.881522, 0.918704, 0.941487, 0.969265, 0.990831, 0.997041, 0.993501,
-            1.007422, 0.986979, 1.001239, 0.985442, 1.006188],
+    '(J IV) Callisto: Leading side|Clark1980a, Madden2018': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
+        file: 'spectra/files/Clark1980/Callisto.txtU', // figure 14
         geometric_albedo: ['Generic_Bessell.V', 0.1688978],
     },
-    '(J IV) Callisto: Leading hemisphere|Madden2018': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
+    '(J IV) Callisto: Leading side|Madden2018': {
+        tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         file: 'spectra/files/Madden2018/Callisto_Spencer1999leading_Albedo.txtU',
         geometric_albedo: true
     },
@@ -284,13 +275,13 @@
         file: 'spectra/files/Karkoschka/Saturn1995.txt',
         geometric_albedo: true
     },
-    'Rings of Saturn|USGSarchive': {
+    'Clark1980b': [
+        'The rings of Saturn: New near-infrared reflectance measurements and a 0.326–4.08 μm summary',
+        'DOI: 10.1016/0019-1035(80)90116-5', 'https://www.sciencedirect.com/science/article/abs/pii/0019103580901165'
+    ],
+    'Rings of Saturn|Clark1980b': {
         tags: ['featured', 'Solar system', 'ring', 'Saturnian system'],
-        nm: [326, 343, 360, 383, 403, 435, 469, 500, 534, 566, 599, 633, 644.1, 656, 667.9, 679.9, 691.7, 704.7, 716.4, 728.9, 739.8, 751.9, 763.6,
-            775.6, 786.3, 799, 811.7, 822.4, 837.1, 849.8, 862.5],
-        br: [0.3132, 0.3528, 0.3933, 0.4455, 0.5112, 0.5886, 0.6966, 0.7686, 0.8604, 0.9000, 0.9234, 0.9612, 1.081513, 1.065072, 1.088894, 1.094878,
-            1.092790, 1.097008, 1.098860, 1.088170, 1.079328, 1.086258, 1.092842, 1.072758, 1.064449, 1.052381, 1.049213, 1.039174, 1.038871,
-            1.028878, 1.016596],
+        file: 'spectra/files/Clark1980/Saturn_rings.txtU', // figure 6
         albedo: ['Generic_Bessell.V', 0.5]
     },
     'Filacchione2022': [
@@ -375,11 +366,14 @@
         geometric_albedo: ['Generic_Bessell.V', 0.89, 0.01],
         phase_integral: [0.71, 0.01],
     },
-    '(S V) Rhea|USGSarchive, Buratti2022': {
+    'Clark1984': [
+        'Saturn’s satellites: Near-infrared spectrophotometry (0.6-2.5 μm) of the leading and trailing sides and compositional implications',
+        'DOI: 10.1016/0019-1035(84)90043-5', 'https://www.sciencedirect.com/science/article/abs/pii/0019103584900435',
+        'https://ui.adsabs.harvard.edu/abs/1984Icar...58..265C/abstract'
+    ],
+    '(S V) Rhea: Leading side|Clark1984, Buratti2022': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
-        nm: [325, 350, 375, 400, 433, 466, 500, 533, 566, 600, 633, 666, 700, 733, 766, 800, 833, 866],
-        br: [0.734770, 0.732256, 0.745028, 0.844831, 0.859745, 0.910340, 0.925726, 0.991097, 0.992538, 1.016375, 1.006958, 1.049296, 1.060323, 1.034402,
-            1.082394, 1.054788, 1.060017, 1.028328],
+        file: 'spectra/files/Rhea_Clark1984.txtU', // figure 4
         geometric_albedo: ['Generic_Bessell.V', 0.89, 0.01],
         phase_integral: [0.71, 0.01],
     },
