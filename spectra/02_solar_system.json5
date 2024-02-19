@@ -195,19 +195,12 @@
     },
 
     // Jovian system
-    'Jupiter|Mallama2017a': {
-        tags: ['Solar system', 'planet geophysical', 'planet', 'Jovian system'],
-        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
-                  'Generic_Cousins.R', 'Generic_Cousins.I'],
-        br_geometric: [0.358, 0.443, 0.538, 0.495, 0.321,
-                       0.513, 0.389],
-    },
     'Jupiter|Karkoschka1994': { // phase angle 9.8°
         tags: ['Solar system', 'planet geophysical', 'planet', 'Jovian system'],
         file: 'spectra/files/Karkoschka/Jupiter1993.txt',
         geometric_albedo: true
     },
-    'Jupiter|Karkoschka1998': {
+    'Jupiter|Karkoschka1998': { // phase angle 6.8°
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Jovian system'],
         file: 'spectra/files/Karkoschka/Jupiter1995.txt',
         geometric_albedo: true
@@ -258,19 +251,12 @@
     },
 
     // Saturnian system
-    'Saturn|Mallama2017a': {
-        tags: ['Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
-        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
-                  'Generic_Cousins.R', 'Generic_Cousins.I'],
-        br_geometric: [0.203, 0.339, 0.499, 0.568, 0.423,
-                       0.646, 0.543],
-    },
     'Saturn|Karkoschka1994': { // phase angle 2.7°
         tags: ['Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
         file: 'spectra/files/Karkoschka/Saturn1993.txt',
         geometric_albedo: true
     },
-    'Saturn|Karkoschka1998': { // without rings
+    'Saturn|Karkoschka1998': { // phase angle 5.7°, without rings
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
         file: 'spectra/files/Karkoschka/Saturn1995.txt',
         geometric_albedo: true
@@ -450,13 +436,6 @@
     },
 
     // Uranian system
-    'Uranus|Mallama2017a': {
-        tags: ['Solar system', 'planet geophysical', 'planet', 'Uranian system'],
-        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
-                  'Generic_Cousins.R', 'Generic_Cousins.I'],
-        br_geometric: [0.502, 0.561, 0.488, 0.202, 0.079,
-                       0.264, 0.089],
-    },
     'Uranus|Karkoschka1994': { // phase angle 0.6°
         tags: ['Solar system', 'planet geophysical', 'planet', 'Uranian system'],
         file: 'spectra/files/Karkoschka/Uranus1993.txt',
@@ -581,13 +560,6 @@
     },
 
     // Neptunian system
-    'Neptune|Mallama2017a': {
-        tags: ['Solar system', 'planet geophysical', 'planet'],
-        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
-                  'Generic_Cousins.R', 'Generic_Cousins.I'],
-        br_geometric: [0.578, 0.562, 0.442, 0.181, 0.067,
-                       0.226, 0.072],
-    },
     'Neptune|Karkoschka1994': { // phase angle 0.4°
         tags: ['Solar system', 'planet geophysical', 'planet', 'Neptunian system'],
         file: 'spectra/files/Karkoschka/Neptune1995.txt',

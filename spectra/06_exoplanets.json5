@@ -40,7 +40,7 @@
         'https://arxiv.org/abs/1109.3116', 'https://ui.adsabs.harvard.edu/abs/2011arXiv1109.3116B/abstract'
     ],
     'HD 189733 b|Berdyugina2010, Berdyugina2011': {
-        tags: ['extrasolar', 'exoplanet', 'planet', 'planet geophysical'],
+        tags: ['featured', 'extrasolar', 'exoplanet', 'planet', 'planet geophysical'],
         system: 'Generic_Bessell',
         filters: ['U', 'B', 'V', 'I'],
         br_geometric: [0.62, 0.61, 0.28, 0],
@@ -67,7 +67,7 @@
         sd_geometric: [0.124, 0.079],
     },
     'υ Andromedae b|Berdyugina2011': {
-        tags: ['extrasolar', 'exoplanet', 'planet', 'planet geophysical'],
+        tags: ['featured', 'extrasolar', 'exoplanet', 'planet', 'planet geophysical'],
         system: 'Generic_Bessell',
         filters: ['U', 'B', 'V'],
         br_geometric: [0.53, 0.67, 0.29],

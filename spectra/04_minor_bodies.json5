@@ -2734,21 +2734,21 @@
         tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
         system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
-        br: [0.053, 0.079, 0.117], // phase angle = 11.68°
+        br: [0.053, 0.079, 0.117], // phase angle 11.68°
         albedo: true
     },
     '(486958) Arrokoth:Weeyo Lobus|Howett2019': {
         tags: ['featured', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
         system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
-        br: [0.058, 0.084, 0.122], // phase angle = 11.68°
+        br: [0.058, 0.084, 0.122], // phase angle 11.68°
         albedo: true
     },
     '(486958) Arrokoth:Akasa Linea|Howett2019': {
         tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h', 'surface feature'],
         system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
-        br: [0.066, 0.090, 0.125], // phase angle = 11.68°
+        br: [0.066, 0.090, 0.125], // phase angle 11.68°
         albedo: true
     },
     '(506479) 2003 HB57|MBOSS': {
