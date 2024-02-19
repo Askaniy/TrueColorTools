@@ -1768,7 +1768,7 @@
         system: 'OSIRIS-REX_MapCam',
         filters: ['Bf', 'Vf', 'Wf', 'Xf'],
         br_spherical: [0.0175, 0.01736, 0.0174, 0.01727],
-        geometric_albedo: [550, 0.046, 0.007],
+        geometric_albedo: ['OSIRIS-REX_MapCam.Vf', 0.046, 0.007],
     },
     '(101955) Bennu: Dark boulder terrain|LeCorre2019': {
         tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
