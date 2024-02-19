@@ -293,15 +293,32 @@
             1.028878, 1.016596],
         albedo: ['Generic_Bessell.V', 0.5]
     },
+    'Filacchione2022': [
+        'Saturn’s icy satellites investigated by Cassini - VIMS. V. Spectrophotometry',
+        'DOI: 10.1016/j.icarus.2021.114803', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103521004504',
+        'https://ui.adsabs.harvard.edu/abs/2022Icar..37514803F/abstract'
+    ],
     'Buratti2022': [
         'Observations and Modeling of the Opposition Surges of the Icy Moons of Saturn Based on Cassini Visual Infrared Mapping Spectrometer Data',
         'DOI: 10.3847/PSJ/ac867e', 'https://iopscience.iop.org/article/10.3847/PSJ/ac867e', 'https://ui.adsabs.harvard.edu/abs/2022PSJ.....3..200B/abstract'
     ],
+    '(S I) Mimas|Filacchione2022, Buratti2022': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        file: 'spectra/files/Filacchione2022/Mimas.txt', // equigonal albedo
+        geometric_albedo: ['Generic_Bessell.V', 0.81, 0.01],
+        phase_integral: [0.71, 0.01],
+    },
     '(S II) Enceladus|Madden2018, Buratti2022': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         file: 'spectra/files/Madden2018/Enceladus_VIMS_Albedo.txtU',
         geometric_albedo: ['Generic_Bessell.V', 1.24, 0.01],
-        spherical_albedo: true,
+        phase_integral: [0.79, 0.01],
+    },
+    '(S II) Enceladus|Filacchione2022, Buratti2022': {
+        tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        file: 'spectra/files/Filacchione2022/Enceladus.txt', // equigonal albedo
+        geometric_albedo: ['Generic_Bessell.V', 1.24, 0.01],
+        phase_integral: [0.79, 0.01],
     },
     'Filacchione2018': [
         'Photometric Modeling and VIS-IR Albedo Maps of Tethys From Cassini-VIMS',
@@ -309,12 +326,18 @@
         'https://ui.adsabs.harvard.edu/abs/2018GeoRL..45.6400F/abstract'
     ],
     '(S III) Tethys|Filacchione2018, Buratti2022': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm: [350, 440, 550, 700, 950, 1046, 1540, 1822, 2050, 2200],
-        br: [0.75042, 0.77108, 0.79707, 0.76842, 0.74823, 0.74563, 0.45171, 0.70383, 0.35282, 0.68231],
+        br: [0.75042, 0.77108, 0.79707, 0.76842, 0.74823, 0.74563, 0.45171, 0.70383, 0.35282, 0.68231], // equigonal albedo
         sd: [0.00106, 0.00100, 0.00111, 0.00110, 0.00102, 0.00174, 0.00090, 0.00160, 0.00059, 0.00127],
         geometric_albedo: ['Generic_Bessell.V', 0.93, 0.02],
-        spherical_albedo: true, // equigonal albedo
+        phase_integral: [0.79, 0.02],
+    },
+    '(S III) Tethys|Filacchione2022, Buratti2022': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        file: 'spectra/files/Filacchione2022/Tethys.txt', // equigonal albedo
+        geometric_albedo: ['Generic_Bessell.V', 0.93, 0.02],
+        phase_integral: [0.79, 0.02],
     },
     'Filacchione2017': [
         'Photometric Modeling and VIS-IR Albedo Maps of Dione From Cassini-VIMS',
@@ -322,12 +345,18 @@
         'https://ui.adsabs.harvard.edu/abs/2018GeoRL..45.2184F/abstract'
     ],
     '(S IV) Dione|Filacchione2017, Buratti2022': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         nm: [350, 440, 550, 700, 950, 1046, 1540, 1822, 2050, 2200],
-        br: [0.57582, 0.61407, 0.61977, 0.58411, 0.58268, 0.55834, 0.40562, 0.55832, 0.24751, 0.51508],
+        br: [0.57582, 0.61407, 0.61977, 0.58411, 0.58268, 0.55834, 0.40562, 0.55832, 0.24751, 0.51508], // equigonal albedo
         sd: [0.00034, 0.00040, 0.00047, 0.00051, 0.00046, 0.00071, 0.00044, 0.00077, 0.00023, 0.00067],
         geometric_albedo: ['Generic_Bessell.V', 0.75, 0.02],
-        spherical_albedo: true, // equigonal albedo
+        phase_integral: [0.80, 0.02],
+    },
+    '(S IV) Dione|Filacchione2022, Buratti2022': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        file: 'spectra/files/Filacchione2022/Dione.txt', // equigonal albedo
+        geometric_albedo: ['Generic_Bessell.V', 0.75, 0.02],
+        phase_integral: [0.80, 0.02],
     },
     'Filacchione2020': [
         'Photometric modelling and VIS-IR albedo maps of Rhea from Cassini-VIMS ',
@@ -335,10 +364,16 @@
         'https://ui.adsabs.harvard.edu/abs/2020MNRAS.499L..62F/abstract'
     ],
     '(S V) Rhea|Filacchione2020, Buratti2022': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
-        file: 'spectra/files/Rhea_Filacchione2020.txtU',
+        tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        file: 'spectra/files/Rhea_Filacchione2020.txtU', // equigonal albedo
         geometric_albedo: ['Generic_Bessell.V', 0.89, 0.01],
-        spherical_albedo: true, // equigonal albedo
+        phase_integral: [0.71, 0.01],
+    },
+    '(S V) Rhea|Filacchione2022, Buratti2022': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        file: 'spectra/files/Filacchione2022/Rhea.txt', // equigonal albedo
+        geometric_albedo: ['Generic_Bessell.V', 0.89, 0.01],
+        phase_integral: [0.71, 0.01],
     },
     '(S V) Rhea|USGSarchive, Buratti2022': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
