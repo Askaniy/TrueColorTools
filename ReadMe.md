@@ -64,7 +64,11 @@ Data listed in a JSON5 file can be of two types: reference and photometry. There
 
 The brightness scale is not strictly tied to physical quantities. Using the `albedo` key, you can indicate that the incoming spectrum is scaled and the brightness in the range 0 to 1 should be treated as reflectance. The scaling task can be left to the program by specifying a wavelength or filter for which the albedo is known. Optional internal standard is flux spectral density measured in W / (m² nm).
 
-For the visible range, there are two main types of albedo: geometric (or normal) and spherical one. The first albedo is for the observer between the light source and the object. It is usually brighter than the spherical, average albedo in all directions. If one of them was not specified in the database, TCT uses a theoretical model to convert one to the other for the appropriate brightness display mode. If no albedo is specified, the object will not be displayed in albedo modes (exception: if there is a tag `star`). The `albedo` parameter indicates both at once, but it is not recommended.
+For the visible range, there are two main types of albedo: geometric (or normal) and spherical. Geometric albedo is coefficient of reflected light at the zero phase angle. It is usually brighter than the spherical, the ratio of all incident light to all reflected light. If one of them was not specified in the database or can't be computed from phase function, TCT uses a theoretical model to convert one into the other for the appropriate brightness display mode. If no albedo is specified, the object will not be displayed in albedo modes (exception: if there is a tag `star`). The `albedo` parameter indicates both albedos at once, but it is not recommended.
+
+Phase functions are now used to calculate the phase integral, which is used to convert between spherical and geometric albedo. The name and function parameters are written in the database as `['name', {param1: value1, ...}]`, each value can be numeric or a list of `[value, sd]`. The following phase functions are supported:
+- `HG`: requires `G` parameter. [Description paper](https://ui.adsabs.harvard.edu/abs/1989aste.conf..524B/abstract).
+- `HG1G2`: requires `G_1` and `G_2`. [Description paper](https://ui.adsabs.harvard.edu/abs/2010Icar..209..542M/abstract).
 
 It is assumed that all data is indicated in ascending wavelength order, and it is necessary to specify "white spectrum" for calibration if photometric system you use not determines it by equal-energy one by wavelengths ([this link](https://hst-docs.stsci.edu/acsdhb/chapter-5-acs-data-analysis/5-1-photometry#id-5.1Photometry-5.1.15.1.1PhotometricSystems,Units,andZeropoints) may help). Typically you need to specify `calib: 'AB'` when working with Sloan filters and `'Vega'` for all other cases.
 
@@ -84,7 +88,7 @@ Supported input keys of a database unit:
 - `geometric_albedo` (bool/list): indicator of geometric/normal albedo data or how to scale to it
 - `spherical_albedo` (bool/list): indicator of spherical albedo data or how to scale to it
 - `phase_integral` (number/list): factor of transition from geometric albedo to spherical (sd is optional)
-- `g` or `g1`, `g2` (number/list): phase function parameters to compute phase integral (sd is optional)
+- `phase_function` (list): function name and its parameters to compute phase integral (sd is optional)
 - `br_geometric`, `br_spherical` (list): specifying unique spectra for different albedos
 - `sd_geometric`, `sd_spherical` (list/number): corresponding standard deviations or a general value
 - `sun` (bool): `true` to remove Sun as emitter
