@@ -1961,18 +1961,24 @@
         sun: true,
         geometric_albedo: ['Generic_Bessell.V', 0.178], // mean diameter = 2.5 km, H = 15.5
     },
-    '(134340) Pluto|MBOSS, Madden2018': {
+    'Buratti2015': [
+        'Photometry of Pluto 2008-2014: Evidence of Ongoing Seasonal Volatile Transport and Activity',
+        'DOI: 10.1088/2041-8205/804/1/L6', 'https://iopscience.iop.org/article/10.1088/2041-8205/804/1/L6', 'https://ui.adsabs.harvard.edu/abs/2015ApJ...804L...6B/abstract'
+    ],
+    '(134340) Pluto|MBOSS, Buratti2015, Verbiscer2022': {
         tags: ['MBOSS', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.867, 'V-R': 0.515, 'R-I': 0.400},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.504]
+        geometric_albedo: ['Generic_Bessell.V', 0.56, 0.03],
+        spherical_albedo: ['Generic_Bessell.V', 0.41, 0.06],
     },
-    '(134340) Pluto|Madden2018': {
+    '(134340) Pluto|Madden2018, Verbiscer2022': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
         file: 'spectra/files/Madden2018/Pluto_LorenziProtopapa_Albedo.txtU',
-        geometric_albedo: true
+        geometric_albedo: true,
+        spherical_albedo: ['Generic_Bessell.V', 0.41, 0.06],
     },
     '(P I) Charon|Verbiscer2022': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'minor body', 'TNO', 'plutino'],
