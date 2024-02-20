@@ -2059,6 +2059,11 @@
         geometric_albedo: ['Generic_Bessell.V', 0.83], // albedo from zelario’s sheet
         spherical_albedo: ['Generic_Bessell.V', 0.74],
     },
+    'AlvarezCandal2020': [
+        'The dwarf planet Makemake as seen by X-Shooter',
+        'DOI: 10.1093/mnras/staa2329', 'https://academic.oup.com/mnras/article/497/4/5473/5891238',
+        'https://ui.adsabs.harvard.edu/abs/2020MNRAS.497.5473A/abstract'
+    ],
     '(136472) Makemake|AlvarezCandal2020, Verbiscer2022': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'classical', 'classical-h'],
         file: 'spectra/files/Makemake_AlvarezCandal2020.txtN',
