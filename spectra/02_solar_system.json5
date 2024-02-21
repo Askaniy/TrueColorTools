@@ -36,6 +36,11 @@
         'Colors of Irregular Satellites of Saturn with DECam',
         'DOI: 10.3847/1538-3881/ac6258', 'https://arxiv.org/abs/2204.08391'
     ],
+    'Verbiscer2022': [
+        'The Diverse Shapes of Dwarf Planet and Large KBO Phase Curves Observed from New Horizons',
+        'DOI: 10.3847/PSJ/ac63a6', 'https://iopscience.iop.org/article/10.3847/PSJ/ac63a6',
+        'https://ui.adsabs.harvard.edu/abs/2022PSJ.....3...95V/abstract'
+    ],
 
     // Mercury
     'Mercury|Mallama2017a': {
@@ -574,10 +579,11 @@
         'A Visual Spectrum of Triton from the Hubble Space Telescope',
         'DOI: 10.1006/icar.1999.6224', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103599962243'
     ],
-    '(N I) Triton|Tryka1999': {
+    '(N I) Triton|Tryka1999, Verbiscer2022': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Neptunian system', 'irregular'],
         nm_range: {start: 300, stop: 900, step: 100},
         br_geometric: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
+        phase_integral: [0.94, 0.04]
     },
     'Kiss2016': [
         'Nereid from space: rotation, size and shape analysis from K2, Herschel and Spitzer observations',
