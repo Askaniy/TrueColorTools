@@ -1069,8 +1069,8 @@
         indices: {'B-V': 1.018, 'V-R': 0.605, 'R-I': 0.580},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.108],
-        spherical_albedo: ['Generic_Bessell.V', 0.037],
+        geometric_albedo: ['Generic_Bessell.V', 0.108, 0.002],
+        spherical_albedo: ['Generic_Bessell.V', 0.037, 0.007],
     },
     '(29981) 1999 TD10|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
@@ -1289,7 +1289,8 @@
     },
     'Pereira2023': [
         'The two rings of (50000) Quaoar',
-        'DOI: 10.1051/0004-6361/202346365', 'https://www.aanda.org/articles/aa/full_html/2023/05/aa46365-23/aa46365-23.html', 'https://ui.adsabs.harvard.edu/abs/2023A%26A...673L...4P/abstract'
+        'DOI: 10.1051/0004-6361/202346365', 'https://www.aanda.org/articles/aa/full_html/2023/05/aa46365-23/aa46365-23.html',
+        'https://ui.adsabs.harvard.edu/abs/2023A%26A...673L...4P/abstract'
     ],
     '(50000) Quaoar|MBOSS, Pereira2023, Verbiscer2022': {
         tags: ['featured', 'MBOSS', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'classical', 'classical-h'],
@@ -1297,8 +1298,8 @@
         indices: {'B-V': 0.958, 'V-R': 0.650, 'R-I': 0.610},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.124],
-        spherical_albedo: ['Generic_Bessell.V', 0.057],
+        geometric_albedo: ['Generic_Bessell.V', 0.124, 0.006],
+        phase_integral: [0.52, 0.01],
     },
     '(51359) 2000 SC17|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],
@@ -1955,7 +1956,7 @@
         indices: {'B-V': 0.84, 'V-R': 0.49},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.178], // mean diameter = 2.5 km, H = 15.5
+        geometric_albedo: ['Generic_Bessell.V', 0.18], // mean diameter = 2.5 km, H = 15.5
     },
     'Buratti2015': [
         'Photometry of Pluto 2008-2014: Evidence of Ongoing Seasonal Volatile Transport and Activity',
@@ -1974,7 +1975,7 @@
         tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'plutino'],
         file: 'spectra/files/Madden2018/Pluto_LorenziProtopapa_Albedo.txtU',
         geometric_albedo: true,
-        spherical_albedo: ['Generic_Bessell.V', 0.41, 0.06],
+        phase_integral: [0.80, 0.10],
     },
     '(P I) Charon|Verbiscer2022': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'minor body', 'TNO', 'plutino'],
@@ -1982,8 +1983,8 @@
         indices: {'B-V': 0.7315, 'V-R': 0.4},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.41],
-        spherical_albedo: ['Generic_Bessell.V', 0.25],
+        geometric_albedo: ['Generic_Bessell.V', 0.41, 0.01],
+        spherical_albedo: ['Generic_Bessell.V', 0.25, 0.04],
     },
     '(134860) 2000 OJ67|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
@@ -2001,7 +2002,8 @@
     },
     'Dunham2019': [
         'Haumea’s Shape, Composition, and Internal Structure',
-        'DOI: 10.3847/1538-4357/ab13b3', 'https://iopscience.iop.org/article/10.3847/1538-4357/ab13b3', 'https://ui.adsabs.harvard.edu/abs/2019ApJ...877...41D/abstract'
+        'DOI: 10.3847/1538-4357/ab13b3', 'https://iopscience.iop.org/article/10.3847/1538-4357/ab13b3',
+        'https://ui.adsabs.harvard.edu/abs/2019ApJ...877...41D/abstract'
     ],
     '(136108) Haumea|MBOSS, Dunham2019, Verbiscer2022': {
         tags: ['featured', 'MBOSS', 'Solar system', 'planet geophysical', 'dwarf planet', 'minor body', 'TNO', 'classical', 'classical-h'],
@@ -2009,8 +2011,8 @@
         indices: {'B-V': 0.633, 'V-R': 0.353, 'R-I': 0.330},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.66],
-        spherical_albedo: ['Generic_Bessell.V', 0.33], // SYSTEM albedo
+        geometric_albedo: ['Generic_Bessell.V', 0.66, 0.02],
+        spherical_albedo: ['Generic_Bessell.V', 0.33, 0.03], // SYSTEM albedo
     },
     '(136199) Eris|MBOSS, Verbiscer2022': {
         tags: ['MBOSS', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'detached'],
@@ -2019,7 +2021,7 @@
         calib: 'Vega',
         sun: true,
         geometric_albedo: ['Generic_Bessell.V', 0.957], // albedo from fyr02’s sheet
-        spherical_albedo: ['Generic_Bessell.V', 0.99],
+        spherical_albedo: ['Generic_Bessell.V', 0.99, 0.09],
     },
     '(136199) Eris|Lorenzi2016, Verbiscer2022': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'dwarf planet', 'minor body', 'TNO', 'detached'],
@@ -2028,7 +2030,7 @@
         br: [0.995, 1.059, 1.084, 1.101, 1.08, 1.104, 1.111, 1.103, 1.121, 1.104, 1.11, 1.097, 1.117, 1.034, 1.121, 1.13, 1.11, 1.073, 1.11, 1.077, 
             1.132, 1.138, 1.087, 1.126, 1.018, 1.079, 0.881, 1.072, 1.13],
         geometric_albedo: ['Generic_Bessell.V', 0.957], // albedo from zelario’s sheet
-        spherical_albedo: ['Generic_Bessell.V', 0.99],
+        spherical_albedo: ['Generic_Bessell.V', 0.99, 0.09],
     },
     '(136204) 2003 WL7|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
@@ -2044,7 +2046,7 @@
         calib: 'Vega',
         sun: true,
         geometric_albedo: ['Generic_Bessell.V', 0.83], // albedo from fyr02’s sheet
-        spherical_albedo: ['Generic_Bessell.V', 0.74],
+        spherical_albedo: ['Generic_Bessell.V', 0.74, 0.06],
     },
     '(136472) Makemake|Lorenzi2016, Verbiscer2022': {
         tags: ['Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'classical', 'classical-h'],
@@ -2053,7 +2055,7 @@
         br: [0.89, 0.971, 1.106, 1.059, 1.127, 1.133, 1.125, 1.157, 1.137, 1.155, 1.116, 1.139, 1.03, 1.179, 1.182, 1.143, 1.163, 1.088, 1.16, 1.084,
             1.201, 1.201, 1.087, 1.159, 1.018, 1.079, 0.881, 1.072, 1.13],
         geometric_albedo: ['Generic_Bessell.V', 0.83], // albedo from zelario’s sheet
-        spherical_albedo: ['Generic_Bessell.V', 0.74],
+        spherical_albedo: ['Generic_Bessell.V', 0.74, 0.06],
     },
     'AlvarezCandal2020': [
         'The dwarf planet Makemake as seen by X-Shooter',
@@ -2064,7 +2066,7 @@
         tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'classical', 'classical-h'],
         file: 'spectra/files/Makemake_AlvarezCandal2020.txtN',
         geometric_albedo: ['Generic_Bessell.V', 0.83], // albedo from zelario’s sheet
-        spherical_albedo: ['Generic_Bessell.V', 0.74],
+        spherical_albedo: ['Generic_Bessell.V', 0.74, 0.06],
     },
     '(137294) 1999 RE215|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-c'],
@@ -2414,7 +2416,8 @@
     },
     'Rommel2023': [
         'A large topographic feature on the surface of the trans-Neptunian object (307261) 2002 MS4 measured from stellar occultations',
-        'DOI: 10.1051/0004-6361/202346892', 'https://www.aanda.org/articles/aa/full_html/2023/10/aa46892-23/aa46892-23.html', 'https://ui.adsabs.harvard.edu/abs/2023A%26A...678A.167R/abstract'
+        'DOI: 10.1051/0004-6361/202346892', 'https://www.aanda.org/articles/aa/full_html/2023/10/aa46892-23/aa46892-23.html',
+        'https://ui.adsabs.harvard.edu/abs/2023A%26A...678A.167R/abstract'
     ],
     '(307261) 2002 MS4|MBOSS, Rommel2023, Verbiscer2022': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'TNO-midsize', 'classical', 'classical-h'],
@@ -2422,8 +2425,8 @@
         indices: {'B-V': 0.690, 'V-R': 0.380},
         calib: 'Vega',
         sun: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.1],
-        spherical_albedo: ['Generic_Bessell.V', 0.039],
+        geometric_albedo: ['Generic_Bessell.V', 0.1, 0.025],
+        phase_integral: [0.40, 0.03],
     },
     '(307982) 2004 PG115|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],

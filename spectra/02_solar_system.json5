@@ -583,7 +583,7 @@
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Neptunian system', 'irregular'],
         nm_range: {start: 300, stop: 900, step: 100},
         br_geometric: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
-        spherical_albedo: ['Generic_Bessell.V', 0.81, 0.04]
+        phase_integral: [0.94, 0.04]
     },
     'Kiss2016': [
         'Nereid from space: rotation, size and shape analysis from K2, Herschel and Spitzer observations',
