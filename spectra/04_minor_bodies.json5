@@ -2051,11 +2051,22 @@
         spherical_albedo: ['Generic_Bessell.V', 0.74],
     },
     '(136472) Makemake|Lorenzi2016, Verbiscer2022': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'classical', 'classical-h'],
+        tags: ['Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'classical', 'classical-h'],
         nm: [417.357, 466.069, 588.13, 601.568, 609.406, 631.243, 642.441, 649.72, 656.439, 664.278, 672.116, 679.955, 691.153, 706.271, 715.789,
             723.628, 729.787, 740.426, 744.345, 751.064, 766.181, 782.419, 788.578, 794.737, 809.295, 813.774, 826.652, 841.209, 860.246],
         br: [0.89, 0.971, 1.106, 1.059, 1.127, 1.133, 1.125, 1.157, 1.137, 1.155, 1.116, 1.139, 1.03, 1.179, 1.182, 1.143, 1.163, 1.088, 1.16, 1.084,
             1.201, 1.201, 1.087, 1.159, 1.018, 1.079, 0.881, 1.072, 1.13],
+        geometric_albedo: ['Generic_Bessell.V', 0.83], // albedo from zelario’s sheet
+        spherical_albedo: ['Generic_Bessell.V', 0.74],
+    },
+    'AlvarezCandal2020': [
+        'The dwarf planet Makemake as seen by X-Shooter',
+        'DOI: 10.1093/mnras/staa2329', 'https://academic.oup.com/mnras/article/497/4/5473/5891238',
+        'https://ui.adsabs.harvard.edu/abs/2020MNRAS.497.5473A/abstract'
+    ],
+    '(136472) Makemake|AlvarezCandal2020, Verbiscer2022': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'classical', 'classical-h'],
+        file: 'spectra/files/Makemake_AlvarezCandal2020.txtN',
         geometric_albedo: ['Generic_Bessell.V', 0.83], // albedo from zelario’s sheet
         spherical_albedo: ['Generic_Bessell.V', 0.74],
     },
