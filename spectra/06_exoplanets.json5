@@ -2,7 +2,8 @@
     // Sudarsky Gas Giant Classification System
     'Sudarsky2000': [
         'Albedo and Reflection Spectra of Extrasolar Giant Planets',
-        'DOI: 10.1086/309160', 'https://iopscience.iop.org/article/10.1086/309160/meta'
+        'DOI: 10.1086/309160', 'https://iopscience.iop.org/article/10.1086/309160/meta',
+        'https://ui.adsabs.harvard.edu/abs/2000ApJ...538..885S/abstract'
     ],
     'Class I|Sudarsky2000': {
         tags: ['featured', 'extrasolar', 'exoplanet', 'planet', 'class'],
@@ -31,19 +32,12 @@
     },
 
     // Real Exoplanet Colors
-    // Note 1: The color of HD 189733 A b found by Berdyugina2010 is found to be spurious by:
-    // https://ui.adsabs.harvard.edu/abs/2015ApJ...813...48W/abstract and https://ui.adsabs.harvard.edu/abs/2016MNRAS.459L.109B/abstract
-    'Berdyugina2011': [
-        'Upsilon Andromedae b in polarized light: New constraints on the planet size, density and albedo',
-        'https://arxiv.org/abs/1109.3116', 'https://ui.adsabs.harvard.edu/abs/2011arXiv1109.3116B/abstract'
-    ],
-    '(υ Andromedae b) Saffar|Berdyugina2011': {
-        tags: ['featured', 'extrasolar', 'exoplanet', 'planet', 'planet geophysical'],
-        system: 'Generic_Bessell',
-        filters: ['U', 'B', 'V'],
-        br_geometric: [0.53, 0.67, 0.29],
-        sd_geometric: [0.27, 0.24, 0.23],
-    },
+    // Note 1: The colors of HD 189733 A b and Saffar found by
+    //             https://ui.adsabs.harvard.edu/abs/2011ApJ...728L...6B/abstract 
+    //             https://ui.adsabs.harvard.edu/abs/2011arXiv1109.3116B/abstract
+    //         are found to be spurious by:
+    //             https://ui.adsabs.harvard.edu/abs/2015ApJ...813...48W/abstract (though itself erroneous according to Zel)
+    //             https://ui.adsabs.harvard.edu/abs/2016MNRAS.459L.109B/abstract
     'Evans2013': [
         'The Deep Blue Color of HD189733b: Albedo Measurements with Hubble Space Telescope/Space Telescope Imaging Spectrograph at Visible Wavelengths',
         'DOI: 10.1088/2041-8205/772/2/L16', 'https://iopscience.iop.org/article/10.1088/2041-8205/772/2/L16', 'https://ui.adsabs.harvard.edu/abs/2013ApJ...772L..16E/abstract'
