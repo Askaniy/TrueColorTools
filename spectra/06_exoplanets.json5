@@ -31,27 +31,25 @@
     },
 
     // Real Exoplanet Colors
-    'Berdyugina2010': [
-        'Polarized reflected light from the exoplanet HD189733b: First multicolor observations and confirmation of detection',
-        'DOI: 10.1088/2041-8205/728/1/L6/', 'https://iopscience.iop.org/article/10.1088/2041-8205/728/1/L6', 'https://ui.adsabs.harvard.edu/abs/2011ApJ...728L...6B/abstract'
-    ],
+    // Note 1: The color of HD 189733 A b found by Berdyugina2010 is found to be spurious by:
+    // https://ui.adsabs.harvard.edu/abs/2015ApJ...813...48W/abstract and https://ui.adsabs.harvard.edu/abs/2016MNRAS.459L.109B/abstract
     'Berdyugina2011': [
         'Upsilon Andromedae b in polarized light: New constraints on the planet size, density and albedo',
         'https://arxiv.org/abs/1109.3116', 'https://ui.adsabs.harvard.edu/abs/2011arXiv1109.3116B/abstract'
     ],
-    'HD 189733 b|Berdyugina2010, Berdyugina2011': {
+    '(υ Andromedae b) Saffar|Berdyugina2011': {
         tags: ['featured', 'extrasolar', 'exoplanet', 'planet', 'planet geophysical'],
         system: 'Generic_Bessell',
-        filters: ['U', 'B', 'V', 'I'],
-        br_geometric: [0.62, 0.61, 0.28, 0],
-        sd_geometric: [0.31, 0.13, 0.16, 0.09],
+        filters: ['U', 'B', 'V'],
+        br_geometric: [0.53, 0.67, 0.29],
+        sd_geometric: [0.27, 0.24, 0.23],
     },
     'Evans2013': [
         'The Deep Blue Color of HD189733b: Albedo Measurements with Hubble Space Telescope/Space Telescope Imaging Spectrograph at Visible Wavelengths',
         'DOI: 10.1088/2041-8205/772/2/L16', 'https://iopscience.iop.org/article/10.1088/2041-8205/772/2/L16', 'https://ui.adsabs.harvard.edu/abs/2013ApJ...772L..16E/abstract'
     ],
     'HD 189733 b|Evans2013': {
-        tags: ['extrasolar', 'exoplanet', 'planet', 'planet geophysical'],
+        tags: ['featured', 'extrasolar', 'exoplanet', 'planet', 'planet geophysical'],
         nm: [325, 368, 413, 416, 459, 510, 547],
         br_geometric: [0.45, 0.39, 0.40, 0.32, 0.17, 0.00, 0.02], // Table 1
         sd_geometric: [0.55, 0.27, 0.12, 0.15, 0.12, 0.12, 0.14],
@@ -65,12 +63,5 @@
         nm: [370, 510],
         br_geometric: [0.374, 0.043], // Table 4
         sd_geometric: [0.124, 0.079],
-    },
-    'υ Andromedae b|Berdyugina2011': {
-        tags: ['featured', 'extrasolar', 'exoplanet', 'planet', 'planet geophysical'],
-        system: 'Generic_Bessell',
-        filters: ['U', 'B', 'V'],
-        br_geometric: [0.53, 0.67, 0.29],
-        sd_geometric: [0.27, 0.24, 0.23],
     },
 }
