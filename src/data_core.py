@@ -2,10 +2,10 @@
 Describes the main spectral data storage classes and related functions.
 
 - To work with a continuous spectrum, use the Spectrum class.
-- To work with measurements in several passbands, use the Photometry class.
+- To work with measurements in several passbands, use the Photospectrum class.
 
-The classes are functionally strongly intertwined: Photometry relies on Spectrum,
-and Spectrum has the ability to contain and process the Photometry class from
+The classes are functionally strongly intertwined: Photospectrum relies on Spectrum,
+and Spectrum has the ability to contain and process the Photospectrum class from
 whose information it was inter-/extrapolated.
 """
 
@@ -26,7 +26,7 @@ class Spectrum:
     # Initializes an object in case of input data problems
     stub = (np.array([555]), np.zeros(1), None)
 
-    def __init__(self, name: str, nm: Sequence, br: Sequence, sd: Sequence = None, photometry=None):
+    def __init__(self, name: str, nm: Sequence, br: Sequence, sd: Sequence = None, photospectrum=None):
         """
         It is assumed that the input grid can be trusted. If preprocessing is needed, see `Spectrum.from_array`.
 
@@ -35,7 +35,7 @@ class Spectrum:
         - `nm` (Sequence): list of wavelengths in nanometers with resolution step of 5 nm
         - `br` (Sequence): same-size list of "brightness", flux in units of energy (not a photon counter)
         - `sd` (Sequence, optional): same-size list of standard deviations
-        - `photometry` (Photometry, optional): way to store information about the passbands used, for example, to plot it
+        - `photospectrum` (Photospectrum, optional): way to store information about the passbands used, for example, to plot it
         """
         self.name = name
         self.nm = np.array(nm, dtype='uint16')
@@ -44,7 +44,7 @@ class Spectrum:
             self.sd = np.array(sd, dtype='float64')
         else:
             self.sd = None
-        self.photometry = photometry
+        self.photospectrum = photospectrum
         if np.any(np.isnan(self.br)):
             self.br = np.nan_to_num(self.br)
             print(f'# Note for the Spectrum object "{self.name}"')
@@ -135,10 +135,10 @@ class Spectrum:
     
     def to_scope(self, scope: np.ndarray):
         """ Returns a new Spectrum object with a guarantee of definition on the requested scope """
-        if self.photometry is None:
+        if self.photospectrum is None:
             return Spectrum(self.name, *aux.extrapolating(self.nm, self.br, scope, aux.resolution))
         else:
-            return self.photometry.to_scope(scope)
+            return self.photospectrum.to_scope(scope)
     
     def edges_zeroed(self):
         """
@@ -203,13 +203,13 @@ class Spectrum:
         sd = None
         if self.sd is not None:
             sd = operator(self.sd, operand)
-        photometry = None
-        if self.photometry is not None:
-            photometry: Photometry = deepcopy(self.photometry)
-            photometry.br = operator(photometry.br, operand)
-            if photometry.sd is not None:
-                photometry.sd = operator(photometry.sd, operand)
-        return Spectrum(self.name, self.nm, br, sd, photometry)
+        photospectrum = None
+        if self.photospectrum is not None:
+            photospectrum: Photospectrum = deepcopy(self.photospectrum)
+            photospectrum.br = operator(photospectrum.br, operand)
+            if photospectrum.sd is not None:
+                photospectrum.sd = operator(photospectrum.sd, operand)
+        return Spectrum(self.name, self.nm, br, sd, photospectrum)
     
     def apply_elemental_operator(self, operator: Callable, other, operator_sign: str = ', '):
         """
@@ -219,7 +219,7 @@ class Spectrum:
         Works only at the intersection of spectra! If you need to extrapolate one spectrum
         to the range of another, for example, use `spectrum.to_scope(filter.nm) @ filter`
 
-        Note: the Photometry data would be erased because consistency with the Spectrum object
+        Note: the Photospectrum data would be erased because consistency with the Spectrum object
         cannot be maintained after conversion. TODO: uncertainty processing.
         """
         name = f'{self.name}{operator_sign}{other.name}'
@@ -276,7 +276,7 @@ def get_filter(name: str):
     return Spectrum.from_file(name, di.find_filter(name)).edges_zeroed().scaled_by_area()
 
 
-class Photometry:
+class Photospectrum:
     """ Class to work with set of filters measurements. """
 
     # Initializes an object in case of input data problems
@@ -284,7 +284,7 @@ class Photometry:
 
     def __init__(self, name: str, filters: Sequence[Spectrum], br: Sequence, sd: Sequence = None):
         """
-        It is assumed that the input can be trusted. If preprocessing is needed, see `Photometry.from_list`.
+        It is assumed that the input can be trusted. If preprocessing is needed, see `Photospectrum.from_list`.
 
         Args:
         - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
@@ -301,13 +301,13 @@ class Photometry:
             self.sd = None
         if np.any(np.isnan(self.br)):
             self.br = np.nan_to_num(self.br)
-            print(f'# Note for the Photometry object "{self.name}"')
+            print(f'# Note for the Photospectrum object "{self.name}"')
             print(f'- NaN values detected during object initialization, they been replaced with zeros.')
     
     @staticmethod
     def from_list(name: str, filters: Sequence[str], br: Sequence, sd: Sequence = None):
         """
-        Creates a Photometry object from a list of filter's names. Files with such names must be in the `filters` folder.
+        Creates a Photospectrum object from a list of filter's names. Files with such names must be in the `filters` folder.
 
         Args:
         - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
@@ -316,11 +316,11 @@ class Photometry:
         - `sd` (Sequence): same-size list of standard deviations
         """
         if (len_filters := len(filters)) != (len_br := len(br)):
-            print(f'# Note for the Photometry object "{name}"')
-            print(f'- Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br}). Photometry stub object was created.')
-            return Photometry(name, *Photometry.stub)
+            print(f'# Note for the Photospectrum object "{name}"')
+            print(f'- Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br}). Photospectrum stub object was created.')
+            return Photospectrum(name, *Photospectrum.stub)
         if sd is not None and (len_sd := len(sd)) != len_br:
-            print(f'# Note for the Photometry object "{name}"')
+            print(f'# Note for the Photospectrum object "{name}"')
             print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
             sd = None
         # Checking existing and ordering
@@ -335,15 +335,15 @@ class Photometry:
                 filters[i] = get_filter(passband)
                 mean_wavelengths.append(filters[i].mean_wavelength())
             except di.FilterNotFoundError:
-                print(f'# Note for the Photometry object "{name}"')
+                print(f'# Note for the Photospectrum object "{name}"')
                 print(f'- Filter "{passband}" not found in the "filters" folder. The corresponding data will be erased.')
                 del filters[i], br[i]
                 if sd is not None:
                     del sd[i]
         if len(filters) == 0:
-            print(f'# Note for the Photometry object "{name}"')
-            print(f'- No declared filter profiles were found in the "filters" folder. Photometry stub object was created.')
-            return Photometry(name, *Photometry.stub)
+            print(f'# Note for the Photospectrum object "{name}"')
+            print(f'- No declared filter profiles were found in the "filters" folder. Photospectrum stub object was created.')
+            return Photospectrum(name, *Photospectrum.stub)
         else:
             nm = np.array(mean_wavelengths)
             if np.any(nm[:-1] < nm[1:]): # fast decreasing check
@@ -352,18 +352,18 @@ class Photometry:
                 br = np.array(br)[order]
                 if sd is not None:
                     sd = np.array(sd)[order]
-            return Photometry(name, filters, br, sd)
+            return Photospectrum(name, filters, br, sd)
     
     def to_scope(self, scope: np.ndarray): # TODO: use kriging here!
-        """ Creates a Spectrum object with inter- and extrapolated photometry data to fit the wavelength scope """
+        """ Creates a Spectrum object with inter- and extrapolated photospectrum data to fit the wavelength scope """
         try:
             nm0 = self.mean_wavelengths()
             nm1 = aux.grid(nm0[0], nm0[-1], aux.resolution)
             br = aux.interpolating(nm0, self.br, nm1, aux.resolution)
             nm, br = aux.extrapolating(nm1, br, scope, aux.resolution)
-            return Spectrum(self.name, nm, br, photometry=deepcopy(self))
+            return Spectrum(self.name, nm, br, photospectrum=deepcopy(self))
         except Exception:
-            print(f'# Note for the Photometry object "{self.name}"')
+            print(f'# Note for the Photospectrum object "{self.name}"')
             print(f'- Something unexpected happened while trying to inter/extrapolate to Spectrum object. It was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0).strip()}')
             return Spectrum(self.name, *Spectrum.stub)
@@ -378,28 +378,28 @@ class Photometry:
 
     def apply_linear_operator(self, operator: Callable, operand: int|float):
         """
-        Returns a new Photometry object transformed according to the linear operator.
+        Returns a new Photospectrum object transformed according to the linear operator.
         Linearity is needed because values and uncertainty are handled uniformly.
         """
         br = operator(self.br, operand)
         sd = None
         if self.sd is not None:
             sd = operator(self.sd, operand)
-        return Photometry(self.name, self.filters, br, sd)
+        return Photospectrum(self.name, self.filters, br, sd)
     
     def apply_elemental_operator(self, operator: Callable, other: Spectrum, operator_sign: str = ', '):
         """
-        Returns a new Photometry object formed from element-wise multiplication or division by the Spectrum.
+        Returns a new Photospectrum object formed from element-wise multiplication or division by the Spectrum.
         Note that this also distorts filter profiles.
         """
         name = f'{self.name}{operator_sign}{other.name}'
         filters = [operator(passband, other).scaled_by_area() for passband in self.filters]
-        return operator(Photometry(name, filters, self.br, self.sd), self @ other) # linear
+        return operator(Photospectrum(name, filters, self.br, self.sd), self @ other) # linear
     
     def __mul__(self, other):
         """
-        Returns a new Photometry object modified by the overloaded multiplication operator.
-        If the operand is a number (or an array of spectral axis size), a scaled photometry is returned.
+        Returns a new Photospectrum object modified by the overloaded multiplication operator.
+        If the operand is a number (or an array of spectral axis size), a scaled photospectrum is returned.
         If the operand is a Spectrum, an emitter spectrum is applied to the intersections with filters.
         """
         if isinstance(other, (int, float, np.ndarray)):
@@ -412,8 +412,8 @@ class Photometry:
 
     def __truediv__(self, other: Spectrum):
         """
-        Returns a new Photometry object modified by the overloaded division operator.
-        If the operand is a number (or an array of spectral axis size), a scaled photometry is returned.
+        Returns a new Photospectrum object modified by the overloaded division operator.
+        If the operand is a number (or an array of spectral axis size), a scaled photospectrum is returned.
         If the operand is a Spectrum, an emitter spectrum is removed from the intersections with filters.
         """
         if isinstance(other, (int, float, np.ndarray)):

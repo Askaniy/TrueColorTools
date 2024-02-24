@@ -2,7 +2,7 @@
 Describes the main image data storage classes and related functions.
 
 - To work with an image of continuous spectra, use the SpectralCube class.
-- To work with images made in several passbands, use the PhotometricCube class.
+- To work with images made in several passbands, use the PhotospectralCube class.
 """
 
 from typing import Sequence, Callable
@@ -138,8 +138,7 @@ class SpectralCube:
         Works only at the intersection of spectra! If you need to extrapolate one spectrum
         to the range of another, for example, use `SpectralCube.to_scope(filter.nm) @ filter`
 
-        Note: the PhotometricCube data would be erased because consistency with the SpectralCube object
-        cannot be maintained after conversion. TODO: uncertainty processing.
+        TODO: uncertainty processing.
         """
         start = max(self.nm[0], other.nm[0])
         end = min(self.nm[-1], other.nm[-1])
@@ -186,13 +185,13 @@ class SpectralCube:
 
 
 
-class PhotometricCube:
+class PhotospectralCube:
     """ Class to work with set of filters measurements. """
 
     @staticmethod
     def stub(x, y):
         """ Initializes an object in case of input data problems. """
-        return PhotometricCube([get_filter('Generic_Bessell.V')], np.zeros((1, x, y)), None)
+        return PhotospectralCube([get_filter('Generic_Bessell.V')], np.zeros((1, x, y)), None)
 
     def __init__(self, filters: Sequence[Spectrum], br: np.ndarray, sd: np.ndarray = None):
         """
@@ -209,16 +208,16 @@ class PhotometricCube:
             self.sd = None
         len_br, x, y = br.shape
         if (len_filters := len(filters)) != len_br:
-            print(f'# Note for the PhotometricCube object')
-            print(f'- Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br}). PhotometricCube stub object was created.')
-            return PhotometricCube.stub(x, y)
+            print(f'# Note for the PhotospectralCube object')
+            print(f'- Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br}). PhotospectralCube stub object was created.')
+            return PhotospectralCube.stub(x, y)
         if sd is not None and (len_sd := sd.shape[0]) != len_br:
-            print(f'# Note for the PhotometricCube object')
+            print(f'# Note for the PhotospectralCube object')
             print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
             sd = None
         if np.any(np.isnan(self.br)):
             self.br = np.nan_to_num(self.br)
-            print(f'# Note for the PhotometricCube object')
+            print(f'# Note for the PhotospectralCube object')
             print(f'- NaN values detected during object initialization, they been replaced with zeros.')
 
     def downscale(self, pixels_limit: int):
@@ -227,10 +226,10 @@ class PhotometricCube:
         sd = None
         if self.sd is not None:
             sd = aux.spatial_downscaling(self.sd, pixels_limit)
-        return PhotometricCube(self.filters, br, sd)
+        return PhotospectralCube(self.filters, br, sd)
     
     def to_scope(self, scope: np.ndarray): # TODO: use kriging here!
-        """ Creates a SpectralCube object with inter- and extrapolated PhotometricCube data to fit the wavelength scope """
+        """ Creates a SpectralCube object with inter- and extrapolated PhotospectralCube data to fit the wavelength scope """
         try:
             nm0 = self.mean_wavelengths()
             nm1 = aux.grid(nm0[0], nm0[-1], aux.resolution)
@@ -238,18 +237,18 @@ class PhotometricCube:
             nm, br = aux.extrapolating(nm1, br, scope, aux.resolution)
             return SpectralCube(nm, br)
         except Exception:
-            print(f'# Note for the PhotometricCube object')
+            print(f'# Note for the PhotospectralCube object')
             print(f'- Something unexpected happened while trying to inter/extrapolate to SpectralCube object. It was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0).strip()}')
             _, x, y = self.br.shape
             return SpectralCube.stub(x, y)
     
     def photons2energy(self):
-        """ Returns a new PhotometricCube object converted from photon spectral density to energy one """
+        """ Returns a new PhotospectralCube object converted from photon spectral density to energy one """
         return self * (self @ photon_spectral_density)
     
     def sorted(self):
-        """ Sorts the PhotometricCube by increasing wavelength """
+        """ Sorts the PhotospectralCube by increasing wavelength """
         nm = self.mean_wavelengths()
         if np.any(nm[:-1] > nm[1:]): # fast increasing check
             order = np.argsort(nm)
@@ -269,26 +268,26 @@ class PhotometricCube:
 
     def apply_linear_operator(self, operator: Callable, operand: int|float):
         """
-        Returns a new PhotometricCube object transformed according to the linear operator.
+        Returns a new PhotospectralCube object transformed according to the linear operator.
         Linearity is needed because values and uncertainty are handled uniformly.
         """
         br = operator(self.br.T, operand).T
         sd = None
         if self.sd is not None:
             sd = operator(self.sd.T, operand).T
-        return PhotometricCube(self.filters, br, sd)
+        return PhotospectralCube(self.filters, br, sd)
     
     def apply_elemental_operator(self, operator: Callable, other: Spectrum):
         """
-        Returns a new PhotometricCube object formed from element-wise multiplication or division by the Spectrum.
+        Returns a new PhotospectralCube object formed from element-wise multiplication or division by the Spectrum.
         Note that this also distorts filter profiles.
         """
         filters = [operator(passband, other).scaled_by_area() for passband in self.filters]
-        return operator(PhotometricCube(filters, self.br, self.sd), self @ other) # linear
+        return operator(PhotospectralCube(filters, self.br, self.sd), self @ other) # linear
     
     def __mul__(self, other):
         """
-        Returns a new PhotometricCube object modified by the overloaded multiplication operator.
+        Returns a new PhotospectralCube object modified by the overloaded multiplication operator.
         If the operand is a number (or an array of spectral axis size), a scaled photometric cube is returned.
         If the operand is a Spectrum, an emitter spectrum is applied to the intersections with filters.
         """
@@ -302,7 +301,7 @@ class PhotometricCube:
 
     def __truediv__(self, other: Spectrum):
         """
-        Returns a new PhotometricCube object modified by the overloaded division operator.
+        Returns a new PhotospectralCube object modified by the overloaded division operator.
         If the operand is a number (or an array of spectral axis size), a scaled photometric cube is returned.
         If the operand is a Spectrum, an emitter spectrum is removed from the intersections with filters.
         """
