@@ -1,26 +1,27 @@
-# TrueColorTools
+![Header logo](logo_header.png)
+
 Astronomy-focused set of Python tools with GUI that use spectra construction and eye absorption to calculate realistic colors.
 
-Input data is accepted in the form of filters measurements (like color indices) or continuous spectra, in units of flux or in magnitudes. Customizable output in floating point or hexadecimal formats. Multiband image processing and blackbody/redshifts colors calculating are also supported.
+Input data is accepted in the form of filters measurements (like color indices) or continuous spectra, in units of flux or in magnitudes. Stores an extensive catalog of photometry in a proprietary format. Can process spectral cubes, multiband images from spacecraft and correct images in enhanced colors.
 
 ![TCT screenshot](screenshot.png)
 
 
 ## Installation
 
+TrueColorTools has been tested on Windows 10/11, macOS and Linux. It requires Python 3.10 or higher version, which do not support Windows 7. [This](https://github.com/adang1345/PythonWin7) launch tool can be used for the case. Depending on the system, you may need to clarify the executing program by replacing `python` with `python3` in the instructions below.
+
 ### Basic installation way
 
-TrueColorTools has been tested on Windows 10/11, macOS and Linux. It requires Python 3.10 or higher version, which do not support Windows 7. [This](https://github.com/adang1345/PythonWin7) launch tool can be used for the case.
-
 1. Clone the repository or download archive by the GitHub web interface (press the button `Code`, then choose `Download ZIP` and unpack the archive after downloading);
-2. Ensure that you have libraries listed in [requirements.txt](requirements.txt). You can install them all at once using the following command: `python3 -m pip install -r requirements.txt`;
-3. Execute `python3 -u runTCT.py`.
+2. Ensure that you have libraries listed in [requirements.txt](requirements.txt). You can install them all at once using the following command: `python -m pip install -r requirements.txt`;
+3. Execute `python -u runTCT.py`.
 
 ### In a virtual environment
 
-2. Open the folder in terminal and create a virtual environment with `python3 -m venv .venv`;
+2. Open the folder in terminal and create a virtual environment with `python -m venv .venv`;
 3. Install the libraries needed by `.venv/bin/pip install -r requirements.txt` (versions were frozen as of January 2024);
-4. Execute `.venv/bin/python3 -u runTCT.py`.
+4. Execute `.venv/bin/python -u runTCT.py`.
 
 ### Executable file
 
@@ -47,7 +48,7 @@ Program interface is functionally divided into tabs: *Database viewer*, *Image p
 
 **Database viewer** provides access to the spectra database and allows you to calculate a color with the selected settings just by clicking on an object. It is possible to plot one or several spectra from the database in a pop-up window. You can process the colors of an entire category at once, and get the output in the text form or a graphic table ([examples](tables/)).
 
-**Image processing** accepts regular images, a series of black and white images, or a spectral cube as input. Using wavelength information, the image is restored in true colors. Internally, this works by reconstructing the spectrum for each pixel.
+**Image processing** accepts regular images, a series of black and white images, or a spectral cube as input. Using wavelength information, the image is restored in true colors. The internal operations are similar to reconstructing the spectrum for each pixel.
 
 **Blackbody & Redshifts tab** calculates the influence of physical phenomena on color. Based on the blackbody spectrum, the program displays the changes in color and brightness from Doppler and gravitational redshifts. You can lock the exposure on the apparent magnitude logarithmic scale, adjusting the overexposure limit for a tuned blackbody object if it was in the sky replacing the Sun (with the angular size).
 
@@ -67,8 +68,8 @@ The brightness scale is not strictly tied to physical quantities. Using the `alb
 For the visible range, there are two main types of albedo: geometric (or normal) and spherical. Geometric albedo is coefficient of reflected light at the zero phase angle. It is usually brighter than the spherical, the ratio of all incident light to all reflected light. If one of them was not specified in the database or can't be computed from phase function, TCT uses a theoretical model to convert one into the other for the appropriate brightness display mode. If no albedo is specified, the object will not be displayed in albedo modes (exception: if there is a tag `star`). The `albedo` parameter indicates both albedos at once, but it is not recommended.
 
 Phase functions are now used to calculate the phase integral, which is used to convert between spherical and geometric albedo. The name and function parameters are written in the database as `['name', {param1: value1, ...}]`, each value can be numeric or a list of `[value, sd]`. The following phase functions are supported:
-- `HG`: requires `G` parameter. [Description paper](https://ui.adsabs.harvard.edu/abs/1989aste.conf..524B/abstract).
-- `HG1G2`: requires `G_1` and `G_2`. [Description paper](https://ui.adsabs.harvard.edu/abs/2010Icar..209..542M/abstract).
+- `HG`: requires `G` parameter, see [Bowell et al. 1989](https://ui.adsabs.harvard.edu/abs/1989aste.conf..524B/abstract).
+- `HG1G2`: requires `G_1` and `G_2`, see [Muinonen et al. 2010](https://ui.adsabs.harvard.edu/abs/2010Icar..209..542M/abstract).
 
 It is assumed that all data is indicated in ascending wavelength order, and it is necessary to specify "white spectrum" for calibration if photometric system you use not determines it by equal-energy one by wavelengths ([this link](https://hst-docs.stsci.edu/acsdhb/chapter-5-acs-data-analysis/5-1-photometry#id-5.1Photometry-5.1.15.1.1PhotometricSystems,Units,andZeropoints) may help). Typically you need to specify `calib: 'AB'` when working with Sloan filters and `'Vega'` for all other cases.
 
@@ -97,8 +98,8 @@ Supported input keys of a database unit:
 You can store the file with the spectrum outside of JSON5, and put a link in it. Text (\*.txt, \*.dat) and FITS (\*.fits, \*.fit) formats are supported for external files. A text file must at least contain wavelengths in the first column, flux in the second column, and optionally standard deviations in the third column. In FITS files data is assumed to be in the second HDU. If you have problems reading FITS, contact me, I'll improve the parsing on the provided example.
 
 As in JSON5, the default wavelengths for external files are in nanometers and the spectrum is in energy density. For FITS files, TCT will try to determine the wavelength unit from internal data. You can also forcefully specify the data type through letters in the file extension (`.txt` for example):
-- `.txtN` for nanometers, `.txtA` for ångströms, `.txtU` for micrometers;
-- `.txtE` for energy counters, `.txtP` for photon counters.
+- `.txtN` for nanometers (by default), `.txtA` for ångströms, `.txtU` for micrometers;
+- `.txtE` for energy counters (by default), `.txtP` for photon counters.
 
 ### Spectra database extension
 The data in the `/spectra` folder can be modified by user (except for the "vital" spectra of the [Sun](spectra/files/CALSPEC/sun_reference_stis_002.fits) and [Vega](spectra/files/CALSPEC/alpha_lyr_stis_011.fits)). The display order in the *Database viewer* is determined by the file names and the order within the file. When repeating the spectrum header in the database, the last spectrum replaces the previously specified one. Tags can be anything, nothing will break. Their list is formed after reading the files. `/spectra_extras` is recommended as a storage location for user files and add-ons; they will be shown last in the GUI. There's a [pinned issue](https://github.com/Askaniy/TrueColorTools/issues/26) for sharing "official" and users' add-ons. Pull requests are welcome too.
@@ -121,3 +122,5 @@ This research has made use of:
 - [Colour & Vision Research laboratory and database](http://www.cvrl.org/)
     - [Stiles & Burch (1959) 2-deg individual colour matching functions](http://www.cvrl.org/database/text/sb_individual/sb2_individual.htm);
     - [CIE (2012) 2-deg XYZ “physiologically-relevant” colour matching functions](http://www.cvrl.org/database/text/cienewxyz/cie2012xyz2.htm).
+
+I express my gratitude to *arbodox* for creating the project's logo.
