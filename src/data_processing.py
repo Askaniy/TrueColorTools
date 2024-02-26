@@ -114,7 +114,7 @@ class ReflectiveBody:
                     phase_integral = self.phase_integral[0]
                     estimated = False
                 else:
-                    phase_integral = 0.395 + 0.47 * geometricV
+                    phase_integral = 0.359 + 0.47 * geometricV
                     estimated = True
                 sphericalV = geometricV * phase_integral
                 return self.geometric.scaled_at('Generic_Bessell.V', sphericalV), estimated
@@ -213,6 +213,7 @@ def parse_value_sd(data: float|Sequence[float]):
 
 def phase_function2phase_integral(name: str, params: dict):
     """ Determines phase integral from the phase function """
+    phase_integral, phase_integral_sd = None, None
     match name:
         case 'HG':
             g, g_sd = parse_value_sd(params['G'])
@@ -227,7 +228,6 @@ def phase_function2phase_integral(name: str, params: dict):
                 phase_integral_sd = np.sqrt(0.4061 * g1_sd + 0.8092 * g2_sd)
         case _:
             print(f'Phase function with name {name} is not supported.')
-            phase_integral, phase_integral_sd = None, None
     return phase_integral, phase_integral_sd
 
 def spectral_data2visible_spectrum(
