@@ -34,7 +34,7 @@ def draw_figure(canvas, figure: Figure):
 
 def plot_spectra(objects: Sequence[Spectrum], gamma, srgb, albedo, lang: str):
     """ Opens a separate window with plotted spectra from the input list """
-    fig, ax = plt.subplots(1, 1, figsize=(9, 6), dpi=100)
+    fig, ax = plt.subplots(1, 1, figsize=(9, 6), dpi=100, tight_layout=True)
     ax.set_xlabel(tr.xaxis_text[lang])
     # determining the scale for CMFs in the background
     max_y = []
@@ -62,7 +62,6 @@ def plot_spectra(objects: Sequence[Spectrum], gamma, srgb, albedo, lang: str):
                 fmt=fmt, linestyle='none', color='#7F7F7F'
             )
     ax.legend()
-    fig.tight_layout()
     # creating and opening the window
     title = tr.spectral_plot[lang]
     layout = [
@@ -99,5 +98,5 @@ def plot_filters(filters: Sequence[Spectrum], lang: str):
             br = spectrum.br
             color = cp.Color.from_spectrum(spectrum).gamma_corrected().to_html()
         ax.plot(spectrum.nm, br, label=spectrum.name, color=color)
-    fig.tight_layout()
+    fig.tight_layout() # moving to subplots() causes UserWarning
     return fig

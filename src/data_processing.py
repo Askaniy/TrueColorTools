@@ -213,7 +213,7 @@ def parse_value_sd(data: float|Sequence[float]):
 
 def phase_function2phase_integral(name: str, params: dict):
     """ Determines phase integral from the phase function """
-    phase_integral, phase_integral_sd = None, None
+    phase_integral = phase_integral_sd = None
     match name:
         case 'HG':
             g, g_sd = parse_value_sd(params['G'])
@@ -327,8 +327,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
             filters = [f'{content["system"]}.{short_name}' for short_name in filters]
     calib = content['calib'].lower() if 'calib' in content else None
     sun = 'sun' in content and content['sun']
-    geometric = None
-    spherical = None
+    geometric = spherical = None
     if len(br) == 0:
         if 'br_geometric' in content:
             br_geom = content['br_geometric']
