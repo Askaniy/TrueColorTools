@@ -4,7 +4,7 @@ from typing import Sequence
 from traceback import format_exc
 from copy import deepcopy
 import numpy as np
-from src.data_core import Spectrum, Photometry, get_filter
+from src.data_core import Spectrum, Photospectrum, get_filter
 import src.auxiliary as aux
 import src.data_import as di
 
@@ -235,13 +235,13 @@ def spectral_data2visible_spectrum(
         sd: Sequence = None, calib: str = None, sun: bool = False
     ) -> Spectrum:
     """
-    Decides whether we are dealing with photometry or continuous spectrum
+    Decides whether we are dealing with photospectrum or continuous spectrum
     and guarantees the completeness of the spectrum in the visible range.
     """
     if len(nm) > 0:
         spectral_data = Spectrum.from_array(name, nm, br, sd)
     elif len(filters) > 0:
-        spectral_data = Photometry.from_list(name, filters, br, sd)
+        spectral_data = Photospectrum.from_list(name, filters, br, sd)
     else:
         print(f'# Note for the database object "{name}"')
         print(f'- No wavelength data. Spectrum stub object was created.')
@@ -286,7 +286,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
     br = []
     sd = None
     nm = [] # Spectrum object indicator
-    filters = [] # Photometry object indicator
+    filters = [] # Photospectrum object indicator
     if 'file' in content:
         try:
             nm, br, sd = di.file_reader(content['file'])
@@ -316,7 +316,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
             slope = content['slope']
             nm = np.arange(slope['start'], slope['stop']+1, aux.resolution)
             br = (nm / nm[0])**slope['power']
-        # Photometry reading
+        # Photospectrum reading
         elif 'filters' in content:
             filters = content['filters']
         elif 'indices' in content:
