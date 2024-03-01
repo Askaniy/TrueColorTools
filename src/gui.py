@@ -6,7 +6,8 @@ import PySimpleGUI as sg
 import src.strings as tr
 
 # TCT style colors
-main_color = '#108BB4'
+main_color = '#3884A9' # HSV 199.65° 66.86% 66.27%
+#main_color = '#5D9BBA' # HSV 200.00° 50.00% 72.94% (0.5^1/2.2 = 72.974%)
 text_color = '#FFFFFF'
 muted_color = '#A3A3A3'
 highlight_color = '#5A5A5A'
