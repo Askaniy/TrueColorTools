@@ -36,21 +36,21 @@
         tags: ['I supergiant', 'extrasolar', 'star'],
         file: 'spectra/files/Krisciunas2017/hr1713_final.txtA'
     },
-    '(A1 V) Alsephina|Krisciunas2017': {
-        tags: ['V dwarf', 'extrasolar', 'star'],
-        file: 'spectra/files/Krisciunas2017/hr3485_blue_fin.txtA'
-    },
     '(A0 V) Vega|CALSPEC': {
         tags: ['featured', 'V dwarf', 'extrasolar', 'star'],
         file: 'spectra/files/CALSPEC/alpha_lyr_stis_011.fits'
     },
-    '(A1 Vn) π² Orionis|Krisciunas2017': {
-        tags: ['V dwarf', 'extrasolar', 'star'],
-        file: 'spectra/files/Krisciunas2017/hr1544_final.txtA'
-    },
     '(A1 IV s+A9m) θ Virginis|Krisciunas2017': {
         tags: ['extrasolar', 'star'],
         file: 'spectra/files/Krisciunas2017/hr4963_blue_fin.txtA'
+    },
+    '(A1 V) Alsephina|Krisciunas2017': {
+        tags: ['V dwarf', 'extrasolar', 'star'],
+        file: 'spectra/files/Krisciunas2017/hr3485_blue_fin.txtA'
+    },
+    '(A1 Vn) π² Orionis|Krisciunas2017': {
+        tags: ['V dwarf', 'extrasolar', 'star'],
+        file: 'spectra/files/Krisciunas2017/hr1544_final.txtA'
     },
     '(A2 IV) Miaplacidus|Krisciunas2017': {
         tags: ['IV subgiant', 'extrasolar', 'star'],
@@ -75,6 +75,10 @@
     '(K0 III) Ankaa|Krisciunas2017': {
         tags: ['III giant', 'extrasolar', 'star'],
         file: 'spectra/files/Krisciunas2017/hr0099_blue_fin.txtA'
+    },
+    "(K2 V) Ran": {
+        tags: ['V dwarf', 'extrasolar', 'star'],
+        file: 'spectra/files/NGSLv2/h_stis_ngsl_hd022049_v2.txtA'
     },
     '(K3 II-III) Alphard|Krisciunas2017': {
         tags: ['II bright giant', 'III giant', 'extrasolar', 'star'],
