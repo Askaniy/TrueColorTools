@@ -3,6 +3,14 @@
         'CALSPEC catalog of stellar spectra (STScI)',
         'https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec'
     ],
+    'STIS_NGSLv2': [
+        'STIS Next Generation Spectral Library Version 2 based on AR 11755, GO 11652 March 2010',
+        'https://archive.stsci.edu/prepds/stisngsl/'
+    ],
+    'STIS_Pal2023': [
+        'HST/STIS Stellar Spectral Library',
+        'http://astro.wsu.edu/hststarlib/', 'https://ui.adsabs.harvard.edu/abs/2023ApJS..266...41P/abstract'
+    ],
     'Krisciunas2017': [
         'Spectrophotometry of Very Bright Stars in the Southern Sky',
         'https://iopscience.iop.org/article/10.1088/1538-3873/aa5f0e'
@@ -76,9 +84,9 @@
         tags: ['III giant', 'extrasolar', 'star'],
         file: 'spectra/files/Krisciunas2017/hr0099_blue_fin.txtA'
     },
-    "(K2 V) Ran": {
+    "(K2 V) Ran|STIS_NGSLv2": {
         tags: ['V dwarf', 'extrasolar', 'star'],
-        file: 'spectra/files/NGSLv2/h_stis_ngsl_hd022049_v2.txtA'
+        file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd022049_v2.txtA'
     },
     '(K3 II-III) Alphard|Krisciunas2017': {
         tags: ['II bright giant', 'III giant', 'extrasolar', 'star'],
