@@ -3,6 +3,14 @@
         'CALSPEC catalog of stellar spectra (STScI)',
         'https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec'
     ],
+    'STIS_NGSLv2': [
+        'STIS Next Generation Spectral Library Version 2 based on AR 11755, GO 11652 March 2010',
+        'https://archive.stsci.edu/prepds/stisngsl/'
+    ],
+    'STIS_Pal2023': [
+        'HST/STIS Stellar Spectral Library',
+        'http://astro.wsu.edu/hststarlib/', 'https://ui.adsabs.harvard.edu/abs/2023ApJS..266...41P/abstract'
+    ],
     'Krisciunas2017': [
         'Spectrophotometry of Very Bright Stars in the Southern Sky',
         'https://iopscience.iop.org/article/10.1088/1538-3873/aa5f0e'
@@ -36,21 +44,21 @@
         tags: ['I supergiant', 'extrasolar', 'star'],
         file: 'spectra/files/Krisciunas2017/hr1713_final.txtA'
     },
-    '(A1 V) Alsephina|Krisciunas2017': {
-        tags: ['V dwarf', 'extrasolar', 'star'],
-        file: 'spectra/files/Krisciunas2017/hr3485_blue_fin.txtA'
-    },
     '(A0 V) Vega|CALSPEC': {
         tags: ['featured', 'V dwarf', 'extrasolar', 'star'],
         file: 'spectra/files/CALSPEC/alpha_lyr_stis_011.fits'
     },
-    '(A1 Vn) π² Orionis|Krisciunas2017': {
-        tags: ['V dwarf', 'extrasolar', 'star'],
-        file: 'spectra/files/Krisciunas2017/hr1544_final.txtA'
-    },
     '(A1 IV s+A9m) θ Virginis|Krisciunas2017': {
         tags: ['extrasolar', 'star'],
         file: 'spectra/files/Krisciunas2017/hr4963_blue_fin.txtA'
+    },
+    '(A1 V) Alsephina|Krisciunas2017': {
+        tags: ['V dwarf', 'extrasolar', 'star'],
+        file: 'spectra/files/Krisciunas2017/hr3485_blue_fin.txtA'
+    },
+    '(A1 Vn) π² Orionis|Krisciunas2017': {
+        tags: ['V dwarf', 'extrasolar', 'star'],
+        file: 'spectra/files/Krisciunas2017/hr1544_final.txtA'
     },
     '(A2 IV) Miaplacidus|Krisciunas2017': {
         tags: ['IV subgiant', 'extrasolar', 'star'],
@@ -75,6 +83,10 @@
     '(K0 III) Ankaa|Krisciunas2017': {
         tags: ['III giant', 'extrasolar', 'star'],
         file: 'spectra/files/Krisciunas2017/hr0099_blue_fin.txtA'
+    },
+    "(K2 V) Ran|STIS_NGSLv2": {
+        tags: ['V dwarf', 'extrasolar', 'star'],
+        file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd022049_v2.txtA'
     },
     '(K3 II-III) Alphard|Krisciunas2017': {
         tags: ['II bright giant', 'III giant', 'extrasolar', 'star'],
