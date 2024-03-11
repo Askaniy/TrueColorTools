@@ -75,6 +75,12 @@ class Spectrum:
             br = np.array(br, dtype='float64')
             if sd is not None:
                 sd = np.array(sd, dtype='float64')
+            if np.any(nm[:-1] > nm[1:]): # fast increasing check
+                order = np.argsort(nm)
+                nm = nm[order]
+                br = br[order]
+                if sd is not None:
+                    sd = sd[order]
             if nm[-1] > aux.nm_red_limit:
                 flag = np.where(nm < aux.nm_red_limit + aux.resolution) # with reserve to be averaged
                 nm = nm[flag]

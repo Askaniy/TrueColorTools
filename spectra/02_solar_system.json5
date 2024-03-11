@@ -41,6 +41,10 @@
         'DOI: 10.3847/PSJ/ac63a6', 'https://iopscience.iop.org/article/10.3847/PSJ/ac63a6',
         'https://ui.adsabs.harvard.edu/abs/2022PSJ.....3...95V/abstract'
     ],
+    'VPL': [
+        'Virtual Planetary Laboratory Spectral Explorer',
+        'https://live-vpl-test.pantheonsite.io/models/vpl-spectral-explorer/'
+    ],
 
     // Mercury
     'Mercury|Mallama2017a': {
@@ -71,7 +75,7 @@
 
     // Venus
     'Venus|Mallama2017a': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
+        tags: ['Solar system', 'planet geophysical', 'planet'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
         br_geometric: [0.348, 0.658, 0.689, 0.708, 0.584,
@@ -87,6 +91,11 @@
         tags: ['Solar system', 'planet geophysical', 'planet'],
         file: 'spectra/files/Madden2018/Venus_MeadowsSpencer_Albedo.txtU',
         geometric_albedo: true,
+    },
+    'Venus|VPL, Mallama2017a': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
+        file: 'spectra/files/VPL/dayside_venus_toa.txtU',
+        geometric_albedo: ['Generic_Bessell.V', 0.689]
     },
     'Maiorov2005': [
         'A New Analysis of the Spectra Obtained by the Venera Missions in the Venusian Atmosphere. I. The Analysis of the Data Received from the Venera-11 Probe at Altitudes Below 37 km in the 0.44–0.66 µm Wavelength Range',
@@ -108,11 +117,16 @@
                        0.392, 0.396],
     },
     'Earth|Crow2011, Mallama2017a': { // phase angle 75.1°
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
+        tags: ['Solar system', 'planet geophysical', 'planet'],
         system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79],
         geometric_albedo: ['Generic_Bessell.V', 0.434]
+    },
+    'Earth|VPL': { // Robinson et al. 2011, "True disk-integrated Earth"
+        tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
+        file: 'spectra/files/VPL/earth_quadrature_radiance_refl.txtU',
+        spherical_albedo: [400, 0.2635], // at quadrature
     },
     '(E I) Moon: Far side|Crow2011': { // phase angle 75.1°
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon'],
@@ -168,8 +182,13 @@
         geometric_albedo: [800, 0.21],
     },
     'Mars|Madden2018': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
+        tags: ['Solar system', 'planet geophysical', 'planet'],
         file: 'spectra/files/Madden2018/Mars_McCord1971_Albedo.txtU',
+        geometric_albedo: true,
+    },
+    'Mars|VPL': { // Tyler Robinson, "Present-day Mars generated using SMART"
+        tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
+        file: 'spectra/files/VPL/mars_flx_refl.txtU',
         geometric_albedo: true,
     },
     'Pajola2013': [
