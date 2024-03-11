@@ -92,10 +92,11 @@
         file: 'spectra/files/Madden2018/Venus_MeadowsSpencer_Albedo.txtU',
         geometric_albedo: true,
     },
-    'Venus|VPL, Mallama2017a': {
+    'Venus|VPL, Mallama2017a': { // synthetic spectrum
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
         file: 'spectra/files/VPL/dayside_venus_toa.txtU',
-        geometric_albedo: ['Generic_Bessell.V', 0.689]
+        geometric_albedo: ['Generic_Bessell.V', 0.689],
+        spherical_albedo: true, // assumption, no clear data source
     },
     'Maiorov2005': [
         'A New Analysis of the Spectra Obtained by the Venera Missions in the Venusian Atmosphere. I. The Analysis of the Data Received from the Venera-11 Probe at Altitudes Below 37 km in the 0.44–0.66 µm Wavelength Range',
@@ -121,24 +122,36 @@
         system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79],
-        geometric_albedo: ['Generic_Bessell.V', 0.434]
+        geometric_albedo: ['Generic_Bessell.V', 0.434],
     },
     'Earth|VPL': { // Robinson et al. 2011, "True disk-integrated Earth"
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
         file: 'spectra/files/VPL/earth_quadrature_radiance_refl.txtU',
         spherical_albedo: [400, 0.2635], // at quadrature
     },
-    '(E I) Moon: Far side|Crow2011': { // phase angle 75.1°
+    'Lane1973': [
+        'Monochromatic phase curves and albedos for the lunar disk',
+        'DOI: 10.1086/111414', 'https://ui.adsabs.harvard.edu/abs/1973AJ.....78..267L/abstract'
+    ],
+    '(E I) Moon: Near side|Lane1973': {
+        tags: ['Solar system', 'planet geophysical', 'moon'],
+        nm: [359.0, 392.6, 415.5, 457.3, 501.2, 626.4, 729.7, 859.5, 1063.5],
+        br_geometric: [0.072, 0.085, 0.088, 0.098, 0.106, 0.162, 0.179, 0.179, 0.202], // excludes opposition effect
+        br_spherical: [0.039, 0.049, 0.048, 0.056, 0.062, 0.098, 0.113, 0.118, 0.136],
+    },
+    '(E I) Moon: Near side|Crow2011, Lane1973': { // phase angle 97.6°
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon'],
         system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
-        br: [13.83, 18.06, 22.54, 26.68, 30.74, 34.86, 34.14],
+        br: [1894.24, 2387.17, 2832.17, 3269.35, 4091.49, 4787.91, 5506.36],
+        geometric_albedo: ['Generic_Bessell.V', 0.113], // excludes opposition effect
+        spherical_albedo: ['Generic_Bessell.V', 0.069],
     },
-    '(E I) Moon: Near side|Crow2011': { // phase angle 97.6°
+    '(E I) Moon: Far side|Crow2011': { // phase angle 75.1°
         tags: ['Solar system', 'planet geophysical', 'moon'],
         system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
-        br: [1894.24, 2387.17, 2832.17, 3269.35, 4091.49, 4787.91, 5506.36],
+        br: [13.83, 18.06, 22.54, 26.68, 30.74, 34.86, 34.14],
     },
     'Wu2018': [
         'The Absolute Reflectance and New Calibration Site of the Moon',
