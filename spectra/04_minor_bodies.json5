@@ -2132,7 +2132,7 @@
         spherical_albedo: ['Generic_Bessell.V', 0.33, 0.03], // SYSTEM albedo
     },
     '(136199) Eris|MBOSS, Verbiscer2022': {
-        tags: ['MBOSS', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'detached'],
+        tags: ['MBOSS', 'Solar system', 'planet geophysical', 'minor body', 'dwarf planet', 'TNO', 'detached', 'traced spectrum'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.781, 'V-R': 0.393, 'R-I': 0.363},
         calib: 'Vega',

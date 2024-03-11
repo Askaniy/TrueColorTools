@@ -92,8 +92,8 @@
         file: 'spectra/files/Madden2018/Venus_MeadowsSpencer_Albedo.txtU',
         geometric_albedo: true,
     },
-    'Venus|VPL, Mallama2017a': { // synthetic spectrum
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
+    'Venus: Synthetic spectrum|VPL, Mallama2017a': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'synthetic spectrum'],
         file: 'spectra/files/VPL/dayside_venus_toa.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.689],
         spherical_albedo: true, // assumption, no clear data source
@@ -124,8 +124,8 @@
         br: [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79],
         geometric_albedo: ['Generic_Bessell.V', 0.434],
     },
-    'Earth|VPL': { // Robinson et al. 2011, "True disk-integrated Earth"
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
+    'Earth: Synthetic spectrum|VPL': { // Robinson et al. 2011, "True disk-integrated Earth"
+        tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'synthetic spectrum'],
         file: 'spectra/files/VPL/earth_quadrature_radiance_refl.txtU',
         spherical_albedo: [400, 0.2635], // at quadrature
     },
@@ -166,7 +166,7 @@
 
     // Martian system
     'Mars|Mallama2017a': {
-        tags: ['Solar system', 'planet geophysical', 'planet'],
+        tags: ['Solar system', 'planet geophysical', 'planet', 'synthetic spectrum'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
         br_geometric: [0.060, 0.088, 0.170, 0.288, 0.330,
@@ -199,7 +199,7 @@
         file: 'spectra/files/Madden2018/Mars_McCord1971_Albedo.txtU',
         geometric_albedo: true,
     },
-    'Mars|VPL': { // Tyler Robinson, "Present-day Mars generated using SMART"
+    'Mars: Synthetic spectrum|VPL': { // Tyler Robinson, "Present-day Mars generated using SMART"
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
         file: 'spectra/files/VPL/mars_flx_refl.txtU',
         geometric_albedo: true,
@@ -210,11 +210,15 @@
     ],
     '(M I) Phobos|Pajola2013': {
         tags: ['featured', 'Solar system', 'moon'],
-        nm: [245.5, 258.0, 263.5, 295.0, 308.5, 355.0, 360.0, 374.5, 387.0, 480.0, 535.0, 571.0, 589.5, 611.5, 650.5, 700.5, 742.5, 804.5, 882.5, 932.0,
-            992.0],
-        br: [0.01305, 0.01312, 0.01484, 0.01489, 0.01699, 0.01766, 0.02037, 0.02137, 0.02177, 0.02641, 0.02769, 0.02743, 0.02732, 0.02835, 0.03083,
-            0.03316, 0.03499, 0.03713, 0.03940, 0.04057, 0.03880],
-        geometric_albedo: ['Generic_Bessell.V', 0.071], // geometric albedo https://ssd.jpl.nasa.gov/?sat_phys_par
+        nm: [
+            245.5, 258.0, 263.5, 295.0, 308.5, 355.0, 360.0, 374.5, 387.0, 480.0, 535.0,
+            571.0, 589.5, 611.5, 650.5, 700.5, 742.5, 804.5, 882.5, 932.0, 992.0
+        ],
+        br: [
+            0.01305, 0.01312, 0.01484, 0.01489, 0.01699, 0.01766, 0.02037, 0.02137, 0.02177, 0.02641, 0.02769,
+            0.02743, 0.02732, 0.02835, 0.03083, 0.03316, 0.03499, 0.03713, 0.03940, 0.04057, 0.03880
+        ],
+        geometric_albedo: ['Generic_Bessell.V', 0.071], // https://ssd.jpl.nasa.gov/?sat_phys_par
     },
     'Fraeman2013': [
         'Spectral absorptions on Phobos and Deimos in the visible/near infrared wavelengths and their compositional constraints',
@@ -228,7 +232,7 @@
         tags: ['featured', 'Solar system', 'moon'],
         nm: [250, 300, 350, 400, 450, 500, 550, 600, 700, 750, 800],
         br: [0.04, 0.05, 0.051, 0.05, 0.049, 0.053, 0.055, 0.058, 0.062, 0.067, 0.069],
-        geometric_albedo: ['Generic_Bessell.V', 0.068], // geometric albedo https://ssd.jpl.nasa.gov/?sat_phys_par
+        geometric_albedo: ['Generic_Bessell.V', 0.068], // https://ssd.jpl.nasa.gov/?sat_phys_par
     },
 
     // Jovian system
@@ -242,13 +246,66 @@
         file: 'spectra/files/Karkoschka/Jupiter1995.txt',
         geometric_albedo: true
     },
+    'Thomas1998': [
+        'The Small Inner Satellites of Jupiter',
+        'DOI: 10.1006/icar.1998.5976', 'https://www.sciencedirect.com/science/article/pii/S0019103598959760', 'https://ui.adsabs.harvard.edu/abs/1998Icar..135..360T/abstract'
+    ],
+    'Simonelli2000': [
+        'Leading/Trailing Albedo Asymmetries of Thebe, Amalthea, and Metis',
+        'DOI: 10.1006/icar.2000.6474', 'https://www.sciencedirect.com/science/article/pii/S0019103500964741', 'https://ui.adsabs.harvard.edu/abs/2000Icar..147..353S/abstract'
+    ],
+    '(J XVI) Metis: Trailing side|Thomas1998, Simonelli2000': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', '8890A', '9680A'],
+        br: [0.38, 1, 0.863, 0.85], // traced from Fig. 6
+        sd: [0.08, 0, 0.173, 0.19], // traced from Fig. 6, relative to Green filter
+        geometric_albedo: ['Galileo_SSI.Clear', 0.054, 0.003], // Table III, log-scaled
+        spherical_albedo: ['Galileo_SSI.Clear', 0.027, 0.002], // Table III, log-scaled
+    },
+    '(J V) Amalthea: Leading side|Thomas1998, Simonelli2000': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', '7560A'],
+        br: [0.54, 1, 1.14], // traced from Fig. 6
+        sd: [0.05, 0, 0.075], // traced from Fig. 6, relative to Green filter
+        geometric_albedo: ['Galileo_SSI.Clear', 0.101, 0.007], // Table III, log-scaled
+        spherical_albedo: ['Galileo_SSI.Clear', 0.036, 0.004], // Table III, log-scaled
+    },
+    '(J V) Amalthea: Trailing side|Thomas1998, Simonelli2000': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', '8890A', '9680A'],
+        br: [0.47, 1, 1.225, 1], // traced from Fig. 6
+        sd: [0.0625, 0, 0.137, 0.15], // traced from Fig. 6, relative to Green filter
+        geometric_albedo: ['Galileo_SSI.Clear', 0.080, 0.005], // Table III, log-scaled
+        spherical_albedo: ['Galileo_SSI.Clear', 0.029, 0.003], // Table III, log-scaled
+    },
+    '(J XIV) Thebe: Leading side|Thomas1998, Simonelli2000': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', '8890A'],
+        br: [0.7125, 1, 1.137], // traced from Fig. 6
+        sd: [0.067, 0, 0.117], // traced from Fig. 6, relative to Green filter
+        geometric_albedo: ['Galileo_SSI.Clear', 0.053, 0.004], // Table III, log-scaled
+        spherical_albedo: ['Galileo_SSI.Clear', 0.022, 0.002], // Table III, log-scaled
+    },
+    '(J XIV) Thebe: Trailing side|Thomas1998, Simonelli2000': {
+        tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
+        system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', '8890A', '9680A'],
+        br: [0.6, 1, 1.137, 1.07], // traced from Fig. 6
+        sd: [0.05, 0, 0.117, 0.15], // traced from Fig. 6, relative to Green filter
+        geometric_albedo: ['Galileo_SSI.Clear', 0.041, 0.003], // Table III, log-scaled
+        spherical_albedo: ['Galileo_SSI.Clear', 0.017, 0.002], // Table III, log-scaled
+    },
     'Clark1980a': [
         'The Galilean satellites: New near-infrared spectral reflectance measurements (0.65-2.5 μm) and a 0.325-5 μm summary',
         'DOI: 10.1016/0019-1035(80)90217-1', 'https://www.sciencedirect.com/science/article/abs/pii/0019103580902171',
         'https://ui.adsabs.harvard.edu/abs/1980Icar...41..323C/abstract'
     ],
-    '(J I) Io: Trailing side|Clark1980a': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
+    '(J I) Io: Trailing hemisphere|Clark1980a': {
+        tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         file: 'spectra/files/Clark1980/Io.txtU', // figure 10
     },
     '(J I) Io|Madden2018': {
@@ -256,32 +313,49 @@
         file: 'spectra/files/Madden2018/Io_Fanale1974_Albedo.txtU',
         geometric_albedo: true,
     },
-    '(J II) Europa: Trailing side|Clark1980a, Madden2018': {
+    'Spencer1995': [
+        'Charge-coupled device spectra of the Galilean satellites: Molecular oxygen on Ganymede',
+        'DOI: 10.1029/95JE01503', 'https://agupubs.onlinelibrary.wiley.com/doi/10.1029/95JE01503'
+    ],
+    'Domingue1998': [
+        'Supplementary Analysis of Io’s Disk-Integrated Solar Phase Curve',
+        'DOI: 10.1006/icar.1998.5940', 'https://www.sciencedirect.com/science/article/pii/S0019103598959401'
+    ],
+    '(J I) Io|Spencer1995, Domingue1998': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular', 'traced spectrum'],
+        nm_range: {start: 320, stop: 780, step: 20},
+        br_geometric: [
+            0.11, 0.12, 0.14, 0.18, 0.26, 0.36, 0.47, 0.56, 0.64, 0.71, 0.73, 0.74,
+            0.75, 0.76, 0.78, 0.81, 0.83, 0.86, 0.88, 0.89, 0.89, 0.89, 0.89, 0.89
+        ], // traced from the Figure 2
+        phase_integral: 0.59, // for 550 nm, and 0.61 for 470 nm; all for the leading hemisphere
+    },
+    '(J II) Europa: Trailing hemisphere|Clark1980a, Madden2018': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         file: 'spectra/files/Clark1980/Europa.txtU', // figure 1
         geometric_albedo: ['Generic_Bessell.V', 0.611],
     },
-    '(J II) Europa: Trailing side|Madden2018': {
+    '(J II) Europa: Trailing hemisphere|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         file: 'spectra/files/Madden2018/Europa_Spencer1999trailing_Albedo.txtU',
         geometric_albedo: true,
     },
-    '(J III) Ganymede: Leading side|Clark1980a, Madden2018': {
+    '(J III) Ganymede: Leading hemisphere|Clark1980a, Madden2018': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         file: 'spectra/files/Clark1980/Ganymede.txtU', // figure 13
         geometric_albedo: ['Generic_Bessell.V', 0.464],
     },
-    '(J III) Ganymede: Leading side|Madden2018': {
+    '(J III) Ganymede: Leading hemisphere|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         file: 'spectra/files/Madden2018/Ganymede_Spencer1999leading_Albedo.txtU',
         geometric_albedo: true,
     },
-    '(J IV) Callisto: Leading side|Clark1980a, Madden2018': {
+    '(J IV) Callisto: Leading hemisphere|Clark1980a, Madden2018': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         file: 'spectra/files/Clark1980/Callisto.txtU', // figure 14
         geometric_albedo: ['Generic_Bessell.V', 0.1688978],
     },
-    '(J IV) Callisto: Leading side|Madden2018': {
+    '(J IV) Callisto: Leading hemisphere|Madden2018': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
         file: 'spectra/files/Madden2018/Callisto_Spencer1999leading_Albedo.txtU',
         geometric_albedo: true
@@ -394,7 +468,7 @@
         'DOI: 10.1016/0019-1035(84)90043-5', 'https://www.sciencedirect.com/science/article/abs/pii/0019103584900435',
         'https://ui.adsabs.harvard.edu/abs/1984Icar...58..265C/abstract'
     ],
-    '(S V) Rhea: Leading side|Clark1984, Buratti2022': {
+    '(S V) Rhea: Leading hemisphere|Clark1984, Buratti2022': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
         file: 'spectra/files/Rhea_Clark1984.txtU', // figure 4
         geometric_albedo: ['Generic_Bessell.V', 0.89, 0.01],
@@ -492,6 +566,18 @@
         slope: {start: 320, stop: 2050, power: 0.09},
         geometric_albedo: [550, 0.050],
         spherical_albedo: [550, 0.018, 0.030]
+    },
+    'Portia group|Karkoschka2001': {
+        tags: ['featured', 'Solar system', 'moon', 'Uranian system', 'regular', 'class'],
+        slope: {start: 570, stop: 1500, power: 0.09},
+        geometric_albedo: [550, 0.080],
+        spherical_albedo: [550, 0.026, 0.050]
+    },
+    '(U XV) Puck|Karkoschka2001': {
+        tags: ['featured', 'Solar system', 'moon', 'Uranian system', 'regular'],
+        slope: {start: 340, stop: 1500, power: 0.04},
+        geometric_albedo: [550, 0.104],
+        spherical_albedo: [550, 0.035, 0.060]
     },
     'Avramchuk2007': [
         'Photometric study of the major satellites of Uranus',

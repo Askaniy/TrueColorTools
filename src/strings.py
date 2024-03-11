@@ -587,17 +587,25 @@ names = {
 
 # Notes localization
 notes = {
+    'Synthetic spectrum': {'ru': 'Синтетический спектр', 'de': 'Synthetisches Sprektrum'},
     'Surface, phase angle': {'ru': 'Поверхность, фазовый угол', 'de': 'Oberfläche, Phasenwinkel'},
     'Surface': {'ru': 'Поверхность', 'de': 'Oberfläche'},
     'Bright areas': {'ru': 'Яркие участки', 'de': 'Helle Regionen'},
     'Dark areas': {'ru': 'Тёмные участки', 'de': 'Dunkle Regionen'},
+    'Dark boulder terrain': {'ru': 'Тёмные валуны', 'de': 'Terrain dunkler Felsbrocken'},
+    'Near side': {'ru': 'Видимая сторона', 'de': 'Erdzugewandte Seite'},
+    'Far side': {'ru': 'Обратная сторона', 'de': 'Erdabgewandte Seite'},
+    'Leading hemisphere': {'ru': 'Ведущее полушарие', 'de': 'Führende Hemisphäre'},
+    'Trailing hemisphere': {'ru': 'Ведомое полушарие', 'de': 'Folgende Hemisphäre'},
     'Leading side': {'ru': 'Ведущая сторона', 'de': 'Führende Seite'},
     'Trailing side': {'ru': 'Ведомая сторона', 'de': 'Folgende Seite'},
     'Long-period': {'ru': 'Долгопериодические', 'de': 'Langperiodisch'},
     'Short-period': {'ru': 'Короткопериодические', 'de': 'Kurzperiodisch'},
     'Hot, inner objects': {'ru': 'Тёплые, внутренние объекты', 'de': 'Heiße, innere Objekte'},
     'Cold, outer objects': {'ru': 'Холодные, внешние объекты', 'de': 'Kalte, äußere Objekte'},
+    'Weighted mean': {'ru': 'Взвешенное среднее', 'de': 'Gewichteter Durchschnitt'},
     'Wenu Lobus': {'ru': 'Доля Уэну', 'de': 'Wenu Lobus'},
     'Weeyo Lobus': {'ru': 'Доля Уээйо', 'de': 'Weeyo Lobus'},
     'Akasa Linea': {'ru': 'Линия Акаса', 'de': 'Akasa Linea'},
+    "Chang'e-3 Landing Site": {'ru': 'Место посадки Чанъэ-3', 'de': "Chang'e-3 Landestelle"},
 }
