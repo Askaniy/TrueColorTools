@@ -80,7 +80,7 @@
         tags: ['I supergiant', 'extrasolar', 'star'],
         file: 'spectra/files/Krisciunas2017/hr2693_blue_fin.txtA'
     },
-    "(G0 V) Beta Comae Berenices|STIS_NGSLv2": {
+    "(G0 V) β Comae Berenices|STIS_NGSLv2": {
         tags: ['V dwarf', 'extrasolar', 'star'],
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd114710_v2.txtA'
     },
@@ -88,7 +88,7 @@
         tags: ['featured', 'V dwarf', 'Solar system', 'star'],
         file: 'spectra/files/CALSPEC/sun_reference_stis_002.fits'
     },
-    "(G5 V) Kappa1 Ceti|STIS_Pal2023": {
+    "(G5 V) κ1 Ceti|STIS_Pal2023": {
         tags: ['V dwarf', 'extrasolar', 'star'],
         file: 'spectra/files/STIS_Pal2023/HD020630.txtA'
     },

@@ -271,7 +271,7 @@ def obj_dict(database: dict, tag: str, lang: str):
 def translate(target: str, translations: dict, lang: str):
     """ Searches part of the target string to be translated and replaces it with translation """
     for original, translation in translations.items():
-        if target.startswith(original) or original in target.split():
+        if target.startswith(original) or target.endswith(original) or original in target.split():
             target = target.replace(original, translation[lang])
             break
     return target

@@ -195,12 +195,12 @@
         geometric_albedo: [800, 0.21],
     },
     'Mars|Madden2018': {
-        tags: ['Solar system', 'planet geophysical', 'planet'],
+        tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
         file: 'spectra/files/Madden2018/Mars_McCord1971_Albedo.txtU',
         geometric_albedo: true,
     },
     'Mars: Synthetic spectrum|VPL': { // Tyler Robinson, "Present-day Mars generated using SMART"
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
+        tags: ['Solar system', 'planet geophysical', 'planet'],
         file: 'spectra/files/VPL/mars_flx_refl.txtU',
         geometric_albedo: true,
     },
