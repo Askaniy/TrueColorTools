@@ -41,9 +41,9 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     # Selecting the number of columns so that the bottom row is as full as possible
     col_num = sqrt(1.5*l) # strives for a 3:2 aspect ratio
     col_num_option1 = floor(col_num)
-    fullness_option1 = l%col_num_option1 / col_num_option1
+    fullness_option1 = fullness(col_num_option1, l)
     col_num_option2 = ceil(col_num)
-    fullness_option2 = l%col_num_option2 / col_num_option2
+    fullness_option2 = fullness(col_num_option2, l)
     col_num = (col_num_option1, col_num_option2)[bool(fullness_option1 < fullness_option2)]
 
     # Calculating grid widths
@@ -197,9 +197,14 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
         draw.multiline_text((center_x-r_left, center_y-shift), '\n'.join(splitted), fill=text_color, font=object_font, spacing=1)
         n += 1
     
-    file_name = f'TCT_{lang}_{tag}_gamma{("OFF", "ON")[gamma]}_srgb{("OFF", "ON")[srgb]}_albedo{("OFF", "GEOM", "SPHER")[brMode]}.{extension}'
+    file_name = f'TCT_{tag}_gamma{("OFF", "ON")[gamma]}_srgb{("OFF", "ON")[srgb]}_albedo{("OFF", "GEOM", "SPHER")[brMode]}_{lang}.{extension}'
     img.save(f'{folder}/{file_name}')
     print(f'Color table saved as {file_name}\n')
+
+def fullness(width: int, total_width: int):
+    """ Column determination criterion """
+    remainder = width % total_width
+    return remainder / total_width if remainder != 0 else 1
 
 def draw_rounded_square(xy: tuple[float, float], half_size: int, radius: float, fill: str, img: Image.Image, factor: int):
     """

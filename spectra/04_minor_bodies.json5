@@ -2307,7 +2307,7 @@
         'DOI: 10.3847/PSJ/ac14ba', 'https://iopscience.iop.org/article/10.3847/PSJ/ac14ba'
     ],
     '(162173) Ryugu|Yokota2021': {
-        tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
+        tags: ['featured', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         system: 'Hayabusa2_ONC-T',
         filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
         br: [0.0438, 0.0408, 0.0406, 0.0408, 0.0405, 0.0411, 0.03987],
