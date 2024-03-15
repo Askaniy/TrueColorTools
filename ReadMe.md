@@ -85,9 +85,10 @@ Supported input keys of a database unit:
 - `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': *float*, ...}`
 - `system` (str): a way to bracket the name of the photometric system
 - `calib` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
-- `albedo` (bool/list): indicates data as albedo scaled or tells how to do it with `[filter/nm, br, (sd)]`
+- `albedo` (bool/list): indicates data as albedo scaled or tells how to do it with `[filter/nm, [br, (sd)]]`
 - `geometric_albedo` (bool/list): indicator of geometric/normal albedo data or how to scale to it
 - `spherical_albedo` (bool/list): indicator of spherical albedo data or how to scale to it
+- `bond_albedo` (number): sets spherical albedo scale using known Solar spectrum
 - `phase_integral` (number/list): factor of transition from geometric albedo to spherical (sd is optional)
 - `phase_function` (list): function name and its parameters to compute phase integral (sd is optional)
 - `br_geometric`, `br_spherical` (list): specifying unique spectra for different albedos

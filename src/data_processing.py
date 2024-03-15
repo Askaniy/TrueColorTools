@@ -11,15 +11,16 @@ import src.data_import as di
 
 sun_SI = Spectrum.from_file('Sun', 'spectra/files/CALSPEC/sun_reference_stis_002.fits') # W / (m² nm)
 sun_in_V = sun_SI @ get_filter('Generic_Bessell.V')
-sun_norm = sun_SI.scaled_at('Generic_Bessell.V')
+sun_norm = sun_SI.scaled_at(get_filter('Generic_Bessell.V'))
+sun_filter = sun_SI.scaled_by_area()
 
 vega_SI = Spectrum.from_file('Vega', 'spectra/files/CALSPEC/alpha_lyr_stis_011.fits') # W / (m² nm)
 vega_in_V = vega_SI @ get_filter('Generic_Bessell.V')
-vega_norm = vega_SI.scaled_at('Generic_Bessell.V')
+vega_norm = vega_SI.scaled_at(get_filter('Generic_Bessell.V'))
 
 lambdas = np.arange(aux.resolution, aux.nm_red_limit+1, aux.resolution)
-photon_spectral_density = Spectrum('Photons of equal energy', lambdas, 1/lambdas).scaled_at('Generic_Bessell.V') # E=hc/λ
-equal_frequency_density = Spectrum('AB', lambdas, 1/lambdas**2).scaled_at('Generic_Bessell.V') # f_λ = f_ν * c / λ²
+photon_spectral_density = Spectrum('Photons of equal energy', lambdas, 1/lambdas).scaled_at(get_filter('Generic_Bessell.V')) # E=hc/λ
+equal_frequency_density = Spectrum('AB', lambdas, 1/lambdas**2).scaled_at(get_filter('Generic_Bessell.V')) # f_λ = f_ν * c / λ²
 del lambdas
 
 
@@ -104,7 +105,7 @@ class ReflectiveBody:
                 else:
                     geometricV = (np.sqrt(0.359**2 + 4 * 0.47 * sphericalV) - 0.359) / (2 * 0.47)
                     estimated = True
-                return self.spherical.scaled_at('Generic_Bessell.V', geometricV), estimated
+                return self.spherical.scaled_at(get_filter('Generic_Bessell.V'), geometricV), estimated
         else:
             if self.spherical:
                 return self.spherical, False
@@ -117,7 +118,7 @@ class ReflectiveBody:
                     phase_integral = 0.359 + 0.47 * geometricV
                     estimated = True
                 sphericalV = geometricV * phase_integral
-                return self.geometric.scaled_at('Generic_Bessell.V', sphericalV), estimated
+                return self.geometric.scaled_at(get_filter('Generic_Bessell.V'), sphericalV), estimated
 
 
 def number2array(target: int|float|Sequence, size: int):
@@ -273,9 +274,10 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
     - `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': *float*, ...}`
     - `system` (str): a way to bracket the name of the photometric system
     - `calib` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
-    - `albedo` (bool/list): indicates data as albedo scaled or tells how to do it with `[filter/nm, br, (sd)]`
+    - `albedo` (bool/list): indicates data as albedo scaled or tells how to do it with `[filter/nm, [br, (sd)]]`
     - `geometric_albedo` (bool/list): indicator of geometric/normal albedo data or how to scale to it
     - `spherical_albedo` (bool/list): indicator of spherical albedo data or how to scale to it
+    - `bond_albedo` (number): sets spherical albedo scale using known Solar spectrum
     - `phase_integral` (number/list): factor of transition from geometric albedo to spherical (sd is optional)
     - `phase_function` (list): function name and its parameters to compute phase integral (sd is optional)
     - `br_geometric`, `br_spherical` (list): specifying unique spectra for different albedos
@@ -334,13 +336,17 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
             sd_geom = number2array(content['sd_geometric'], len(br_geom)) if 'sd_geometric' in content else None
             geometric = spectral_data2visible_spectrum(name, nm, filters, br_geom, sd_geom, calib, sun)
             if 'spherical_albedo' in content:
-                spherical = geometric.scaled_at(*content['spherical_albedo'])
+                where, how = content['spherical_albedo']
+                spherical = geometric.scaled_at(get_filter(where), *parse_value_sd(how))
+            elif 'bond_albedo' in content:
+                spherical = geometric.scaled_at(sun_filter, *parse_value_sd(content['bond_albedo']))
         if 'br_spherical' in content:
             br_sphe = content['br_spherical']
             sd_sphe = number2array(content['sd_spherical'], len(br_sphe)) if 'sd_spherical' in content else None
             spherical = spectral_data2visible_spectrum(name, nm, filters, br_sphe, sd_sphe, calib, sun)
             if 'geometric_albedo' in content:
-                geometric = spherical.scaled_at(*content['geometric_albedo'])
+                where, how = content['geometric_albedo']
+                geometric = spherical.scaled_at(get_filter(where), *parse_value_sd(how))
         if geometric is None and spherical is None:
             print(f'# Note for the database object "{name}"')
             print(f'- No brightness data. Spectrum stub object was created.')
@@ -352,28 +358,33 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
             if isinstance(content['albedo'], bool) and content['albedo']:
                 geometric = spherical = spectrum
             elif isinstance(content['albedo'], Sequence):
-                geometric = spherical = spectrum.scaled_at(*content['albedo'])
+                where, how = content['albedo']
+                geometric = spherical = spectrum.scaled_at(get_filter(where), *parse_value_sd(how))
             else:
                 print(f'# Note for the database object "{name}"')
-                print(f'- Invalid albedo value: {content["albedo"]}. Must be boolean or [filter/nm, br, (sd)].')
+                print(f'- Invalid albedo value: {content["albedo"]}. Must be boolean or [filter/nm, [br, (sd)]].')
         # Geometric albedo parsing
         if 'geometric_albedo' in content:
             if isinstance(content['geometric_albedo'], bool) and content['geometric_albedo']:
                 geometric = spectrum
             elif isinstance(content['geometric_albedo'], Sequence):
-                geometric = spectrum.scaled_at(*content['geometric_albedo'])
+                where, how = content['geometric_albedo']
+                geometric = spectrum.scaled_at(get_filter(where), *parse_value_sd(how))
             else:
                 print(f'# Note for the database object "{name}"')
-                print(f'- Invalid geometric albedo value: {content["geometric_albedo"]}. Must be boolean or [filter/nm, br, (sd)].')
+                print(f'- Invalid geometric albedo value: {content["geometric_albedo"]}. Must be boolean or [filter/nm, [br, (sd)]].')
         # Spherical albedo parsing
         if 'spherical_albedo' in content:
             if isinstance(content['spherical_albedo'], bool) and content['spherical_albedo']:
                 spherical = spectrum
             elif isinstance(content['spherical_albedo'], Sequence):
-                spherical = spectrum.scaled_at(*content['spherical_albedo'])
+                where, how = content['spherical_albedo']
+                spherical = spectrum.scaled_at(get_filter(where), *parse_value_sd(how))
             else:
                 print(f'# Note for the database object "{name}"')
-                print(f'- Invalid spherical albedo value: {content["spherical_albedo"]}. Must be boolean or [filter/nm, br, (sd)].')
+                print(f'- Invalid spherical albedo value: {content["spherical_albedo"]}. Must be boolean or [filter/nm, [br, (sd)]].')
+        elif 'bond_albedo' in content:
+            spherical = spectrum.scaled_at(sun_filter, *parse_value_sd(content['bond_albedo']))
     tags = []
     if 'tags' in content:
         tags = content['tags']

@@ -169,14 +169,13 @@ class Spectrum:
         """ Returns a new Spectrum object with brightness scaled to its area be equal the scale factor """
         return Spectrum(self.name, self.nm, self.br / self.integrate() * factor)
     
-    def scaled_at(self, where: str|int|float, how: int|float = 1, sd: int|float = None):
+    def scaled_at(self, where, how: int|float = 1, sd: int|float = None):
         """
         Returns a new Spectrum object to fit the request brightness (1 by default)
         at specified filter profile or wavelength. TODO: uncertainty processing.
         """
-        if isinstance(where, str): # scaling at filter
-            transmission = get_filter(where)
-            current_br = self.to_scope(transmission.nm) @ transmission
+        if isinstance(where, Spectrum): # scaling at filter
+            current_br = self.to_scope(where.nm) @ where
         else: # scaling at wavelength
             if where in self.nm:
                 current_br = self.br[np.where(self.nm == where)][0]
