@@ -174,7 +174,9 @@ class Spectrum:
         Returns a new Spectrum object to fit the request brightness (1 by default)
         at specified filter profile or wavelength. TODO: uncertainty processing.
         """
-        if isinstance(where, Spectrum): # scaling at filter
+        if isinstance(where, str):
+            where = get_filter(where)
+        if isinstance(where, Spectrum):
             current_br = self.to_scope(where.nm) @ where
         else: # scaling at wavelength
             if where in self.nm:

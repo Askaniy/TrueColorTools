@@ -337,7 +337,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
             geometric = spectral_data2visible_spectrum(name, nm, filters, br_geom, sd_geom, calib, sun)
             if 'spherical_albedo' in content:
                 where, how = content['spherical_albedo']
-                spherical = geometric.scaled_at(get_filter(where), *parse_value_sd(how))
+                spherical = geometric.scaled_at(where, *parse_value_sd(how))
             elif 'bond_albedo' in content:
                 spherical = geometric.scaled_at(sun_filter, *parse_value_sd(content['bond_albedo']))
         if 'br_spherical' in content:
@@ -346,7 +346,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
             spherical = spectral_data2visible_spectrum(name, nm, filters, br_sphe, sd_sphe, calib, sun)
             if 'geometric_albedo' in content:
                 where, how = content['geometric_albedo']
-                geometric = spherical.scaled_at(get_filter(where), *parse_value_sd(how))
+                geometric = spherical.scaled_at(where, *parse_value_sd(how))
         if geometric is None and spherical is None:
             print(f'# Note for the database object "{name}"')
             print(f'- No brightness data. Spectrum stub object was created.')
@@ -359,7 +359,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
                 geometric = spherical = spectrum
             elif isinstance(content['albedo'], Sequence):
                 where, how = content['albedo']
-                geometric = spherical = spectrum.scaled_at(get_filter(where), *parse_value_sd(how))
+                geometric = spherical = spectrum.scaled_at(where, *parse_value_sd(how))
             else:
                 print(f'# Note for the database object "{name}"')
                 print(f'- Invalid albedo value: {content["albedo"]}. Must be boolean or [filter/nm, [br, (sd)]].')
@@ -369,7 +369,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
                 geometric = spectrum
             elif isinstance(content['geometric_albedo'], Sequence):
                 where, how = content['geometric_albedo']
-                geometric = spectrum.scaled_at(get_filter(where), *parse_value_sd(how))
+                geometric = spectrum.scaled_at(where, *parse_value_sd(how))
             else:
                 print(f'# Note for the database object "{name}"')
                 print(f'- Invalid geometric albedo value: {content["geometric_albedo"]}. Must be boolean or [filter/nm, [br, (sd)]].')
@@ -379,7 +379,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
                 spherical = spectrum
             elif isinstance(content['spherical_albedo'], Sequence):
                 where, how = content['spherical_albedo']
-                spherical = spectrum.scaled_at(get_filter(where), *parse_value_sd(how))
+                spherical = spectrum.scaled_at(where, *parse_value_sd(how))
             else:
                 print(f'# Note for the database object "{name}"')
                 print(f'- Invalid spherical albedo value: {content["spherical_albedo"]}. Must be boolean or [filter/nm, [br, (sd)]].')
