@@ -72,6 +72,18 @@
         geometric_albedo: ['Generic_Bessell.V', 0.142],
         spherical_albedo: ['Generic_Bessell.V', 0.0166],
     },
+    'Deborah2011': [
+        'Mercury’s spectrophotometric properties: Update from the Mercury Dual Imaging System observations during the third MESSENGER flyby',
+        'DOI: 10.1016/j.pss.2011.04.012', 'https://www.sciencedirect.com/science/article/abs/pii/S0032063311001528',
+        'https://ui.adsabs.harvard.edu/abs/2011P%26SS...59.1853D/abstract'
+    ],
+    'Mercury|Deborah2011': {
+        tags: ['Solar system', 'planet geophysical', 'planet'],
+        system: 'Messenger_MDIS_WAC',
+        filters: ['430BP40', '480BP10', '560BP5', '630BP5', '700BP5', '750BP5', '830BP5', '900BP5', '950BP7', '1000BP15'],
+        br_geometric: [0.119, 0.134, 0.152, 0.165, 0.180, 0.192, 0.214, 0.234, 0.247, 0.254],
+        br_spherical: [0.053, 0.061, 0.070, 0.077, 0.084, 0.089, 0.098, 0.105, 0.110, 0.113],
+    },
 
     // Venus
     'Venus|Mallama2017a': {
