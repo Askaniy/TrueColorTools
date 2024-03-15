@@ -2,7 +2,7 @@
 
 from typing import Sequence
 from traceback import format_exc
-from copy import deepcopy
+from itertools import islice
 import numpy as np
 from src.data_core import Spectrum, Photospectrum, get_filter
 import src.auxiliary as aux
@@ -121,6 +121,18 @@ class ReflectiveBody:
                 return self.geometric.scaled_at(get_filter('Generic_Bessell.V'), sphericalV), estimated
 
 
+def parse_value_sd(data: float|Sequence[float]):
+    """ Guarantees the output of the value and its sd for variable input """
+    if isinstance(data, Sequence) and len(data) == 2:
+        value, sd = data
+    elif isinstance(data, (int, float)):
+        value = data
+        sd = np.nan
+    else:
+        print(f'Invalid data input: {data}. Must be a numeric value or a [value, sd] list. Returning None.')
+        value = sd = np.nan
+    return value, sd
+
 def number2array(target: int|float|Sequence, size: int):
     """ Makes an array of specified size even if input is a number """
     if isinstance(target, (int, float)):
@@ -158,7 +170,7 @@ def color_index_splitter(index: str):
         filter2 = f'{dashpart2}.{dotpart3}'
     return filter1, filter2
 
-def color_indices_parser(indices: dict, sd: Sequence = None):
+def color_indices_parser(indices: dict):
     """
     Converts color indices to linear brightness, assuming mag=0 in the first filter.
     Each new color index must refer to a previously specified one.
@@ -177,40 +189,27 @@ def color_indices_parser(indices: dict, sd: Sequence = None):
     to begin the iterative calculation of standard deviations:
     sd_y = sqrt(sd_f² - sd_x²)
     """
-    indices = deepcopy(indices) # else it would pop one index per calling
     first_color_index = tuple(indices.keys())[0]
     filter0, filter1 = color_index_splitter(first_color_index)
-    # Working with stub if standard deviations are not known to simplify the code
-    sd_ = iter(sd if sd is not None else np.ones(len(indices)))
-    sd0 = next(sd_)/np.sqrt(2)
+    mag0, sd0 = parse_value_sd(indices[first_color_index])
+    sd0 *= 2**(-0.5)
     filters = {
         filter0: (0, sd0), # assuming mag=0 for the first point
-        filter1: (-indices.pop(first_color_index), sd0) # and the same standard deviation for the first two points
+        filter1: (-mag0, sd0) # and the same standard deviation for the first two points
     }
-    for key, value in indices.items():
+    for key, value in islice(indices.items(), 1, None):
         bluer_filter, redder_filter = color_index_splitter(key)
+        mag, sd = parse_value_sd(value)
         if bluer_filter in filters:
-            current_sd = np.sqrt(next(sd_)**2 - filters[bluer_filter][1]**2)
-            filters |= {redder_filter: (filters[bluer_filter][0] - value, current_sd)}
+            sd = np.sqrt(sd**2 - filters[bluer_filter][1]**2)
+            filters |= {redder_filter: (filters[bluer_filter][0] - mag, sd)}
         else:
-            current_sd = np.sqrt(next(sd_)**2 - filters[redder_filter][1]**2)
-            filters |= {bluer_filter: (filters[redder_filter][0] + value, current_sd)}
+            sd = np.sqrt(sd**2 - filters[redder_filter][1]**2)
+            filters |= {bluer_filter: (filters[redder_filter][0] + mag, sd)}
     flux, sd_flux = np.array(tuple(filters.values())).transpose()
     flux = mag2flux(flux)
-    sd_flux = sd_mag2sd_flux(sd_flux, flux) if sd is not None else None
+    sd_flux = sd_mag2sd_flux(sd_flux, flux)
     return filters.keys(), flux, sd_flux
-
-def parse_value_sd(data: float|Sequence[float]):
-    """ Guarantees the output of the value and its sd for variable input """
-    if isinstance(data, Sequence) and len(data) == 2:
-        value, sd = data
-    elif isinstance(data, (int, float)):
-        value = data
-        sd = None
-    else:
-        print(f'Invalid data input: {data}. Must be a numeric value or a [value, sd] list. Returning None.')
-        value = sd = None
-    return value, sd
 
 def phase_function2phase_integral(name: str, params: dict):
     """ Determines phase integral from the phase function """
@@ -271,7 +270,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
     - `slope` (dict): `start`, `stop`, `power` keys defining a spectrum from spectrophotometric gradient
     - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
     - `filters` (list): list of filter names that can be found in the `filters` folder
-    - `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': *float*, ...}`
+    - `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': [br, (sd)]], …}`
     - `system` (str): a way to bracket the name of the photometric system
     - `calib` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
     - `albedo` (bool/list): indicates data as albedo scaled or tells how to do it with `[filter/nm, [br, (sd)]]`
@@ -322,9 +321,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
         elif 'filters' in content:
             filters = content['filters']
         elif 'indices' in content:
-            if 'sd' in content:
-                sd = number2array(content['sd'], len(content['indices']))
-            filters, br, sd = color_indices_parser(content['indices'], sd)
+            filters, br, sd = color_indices_parser(content['indices'])
         if 'system' in content:
             filters = [f'{content["system"]}.{short_name}' for short_name in filters]
     calib = content['calib'].lower() if 'calib' in content else None

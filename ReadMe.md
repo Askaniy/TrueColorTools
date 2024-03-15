@@ -82,7 +82,7 @@ Supported input keys of a database unit:
 - `slope` (dict): `start`, `stop`, `power` keys defining a spectrum from spectrophotometric gradient
 - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
 - `filters` (list): list of filter names that can be found in the `filters` folder
-- `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': *float*, ...}`
+- `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': [br, (sd)]], …}`
 - `system` (str): a way to bracket the name of the photometric system
 - `calib` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
 - `albedo` (bool/list): indicates data as albedo scaled or tells how to do it with `[filter/nm, [br, (sd)]]`

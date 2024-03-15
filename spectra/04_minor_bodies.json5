@@ -1882,7 +1882,7 @@
         system: 'OSIRIS-REX_MapCam',
         filters: ['Bf', 'Vf', 'Wf', 'Xf'],
         br_spherical: [0.0175, 0.01736, 0.0174, 0.01727],
-        geometric_albedo: ['OSIRIS-REX_MapCam.Vf', 0.046, 0.007],
+        geometric_albedo: ['OSIRIS-REX_MapCam.Vf', [0.046, 0.007]],
     },
     '(101955) Bennu: Dark boulder terrain|LeCorre2019': {
         tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
@@ -2333,8 +2333,8 @@
     '(162173) Ryugu|SMASS, Tatsumi2020': {
         tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         file: 'spectra/files/SMASS/a162173.sp273.txtU',
-        geometric_albedo: ['Hayabusa2_ONC-T.v', 0.040, 0.005],
-        spherical_albedo: ['Hayabusa2_ONC-T.v', 0.014, 0.01],
+        geometric_albedo: ['Hayabusa2_ONC-T.v', [0.040, 0.005]],
+        spherical_albedo: ['Hayabusa2_ONC-T.v', [0.014, 0.01]],
     },
     '(163135) 2002 CT22|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Jupiter trojan'],

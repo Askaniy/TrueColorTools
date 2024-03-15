@@ -577,19 +577,19 @@
         tags: ['featured', 'Solar system', 'ring', 'Uranian system'],
         slope: {start: 320, stop: 2050, power: 0.09},
         geometric_albedo: [550, 0.050],
-        spherical_albedo: [550, 0.018, 0.030]
+        spherical_albedo: [550, [0.018, 0.030]]
     },
     'Portia group|Karkoschka2001': {
         tags: ['featured', 'Solar system', 'moon', 'Uranian system', 'regular', 'class'],
         slope: {start: 570, stop: 1500, power: 0.09},
         geometric_albedo: [550, 0.080],
-        spherical_albedo: [550, 0.026, 0.050]
+        spherical_albedo: [550, [0.026, 0.050]]
     },
     '(U XV) Puck|Karkoschka2001': {
         tags: ['featured', 'Solar system', 'moon', 'Uranian system', 'regular'],
         slope: {start: 340, stop: 1500, power: 0.04},
         geometric_albedo: [550, 0.104],
-        spherical_albedo: [550, 0.035, 0.060]
+        spherical_albedo: [550, [0.035, 0.060]]
     },
     'Avramchuk2007': [
         'Photometric study of the major satellites of Uranus',
@@ -599,7 +599,7 @@
         tags: ['Solar system', 'moon', 'Uranian system', 'regular'],
         slope: {start: 270, stop: 1000, power: -0.05},
         geometric_albedo: [550, 0.464],
-        spherical_albedo: [550, 0.200, 0.30]
+        spherical_albedo: [550, [0.200, 0.30]]
     },
     '(U V) Miranda|Avramchuk2007, Karkoschka2001': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
@@ -613,7 +613,7 @@
         tags: ['Solar system', 'moon', 'Uranian system', 'regular'],
         slope: {start: 270, stop: 1000, power: 0.07},
         geometric_albedo: [550, 0.533],
-        spherical_albedo: [550, 0.230, 0.025]
+        spherical_albedo: [550, [0.230, 0.025]]
     },
     '(U I) Ariel|Avramchuk2007, Karkoschka2001': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
@@ -627,7 +627,7 @@
         tags: ['Solar system', 'moon', 'Uranian system', 'regular'],
         slope: {start: 270, stop: 1000, power: 0.02},
         geometric_albedo: [550, 0.258],
-        spherical_albedo: [550, 0.100, 0.010]
+        spherical_albedo: [550, [0.100, 0.010]]
     },
     '(U II) Umbriel|Avramchuk2007, Karkoschka2001': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
@@ -641,7 +641,7 @@
         tags: ['Solar system', 'moon', 'Uranian system', 'regular'],
         slope: {start: 270, stop: 1000, power: 0.18},
         geometric_albedo: [550, 0.350],
-        spherical_albedo: [550, 0.170, 0.015]
+        spherical_albedo: [550, [0.170, 0.015]]
     },
     '(U III) Titania|Avramchuk2007, Karkoschka2001': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
@@ -655,7 +655,7 @@
         tags: ['Solar system', 'moon', 'Uranian system', 'regular'],
         slope: {start: 270, stop: 1000, power: 0.15},
         geometric_albedo: [550, 0.309],
-        spherical_albedo: [550, 0.140, 0.015]
+        spherical_albedo: [550, [0.140, 0.015]]
     },
     '(U IV) Oberon|Avramchuk2007, Karkoschka2001': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
