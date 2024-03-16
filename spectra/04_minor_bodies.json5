@@ -152,13 +152,13 @@
         phase_function: ['HG1G2', {H: [5.550, 0.022], G_1: [0.10, 0.04], G_2: [0.440, 0.020]}]
     },
     '(16) Psyche: Bright areas|SMASS, Shepard2021, Shevchenko2022': {
-        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt', 'surface feature'],
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000016.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.1888],
         phase_function: ['HG1G2', {H: [5.550, 0.022], G_1: [0.10, 0.04], G_2: [0.440, 0.020]}]
     },
     '(16) Psyche: Dark areas|SMASS, Shepard2021, Shevchenko2022': {
-        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt', 'surface feature'],
+        tags: ['SMASS', 'Solar system', 'minor body', 'asteroid', 'main belt'],
         file: 'spectra/files/SMASS/a000016.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.128],
         phase_function: ['HG1G2', {H: [5.550, 0.022], G_1: [0.10, 0.04], G_2: [0.440, 0.020]}]
@@ -1885,7 +1885,7 @@
         geometric_albedo: ['OSIRIS-REX_MapCam.Vf', [0.046, 0.007]],
     },
     '(101955) Bennu: Dark boulder terrain|LeCorre2019': {
-        tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
+        tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         system: 'OSIRIS-REX_MapCam',
         filters: ['Bf', 'Vf', 'Wf', 'Xf'],
         br_spherical: [0.01604, 0.01573, 0.016, 0.01605],
@@ -2315,7 +2315,7 @@
         geometric_albedo: true, // normal (=geometric) albedo spectrum from the Table 3
     },
     '(162173) Ryugu: Bright areas|Yokota2021': {
-        tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
+        tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         system: 'Hayabusa2_ONC-T',
         filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
         br: [0.0473, 0.0445, 0.0439, 0.0439, 0.0430, 0.0427, 0.0410],
@@ -2323,7 +2323,7 @@
         geometric_albedo: true, // normal (=geometric) albedo spectrum of N-pole bright area from the Table 6
     },
     '(162173) Ryugu: Dark areas|Yokota2021': {
-        tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo', 'surface feature'],
+        tags: ['Solar system', 'minor body', 'asteroid', 'NEO', 'NEO-Apollo'],
         system: 'Hayabusa2_ONC-T',
         filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
         br: [0.0427, 0.0398, 0.0398, 0.0400, 0.0399, 0.0407, 0.0396],
@@ -2877,7 +2877,7 @@
         albedo: true
     },
     '(486958) Arrokoth:Akasa Linea|Howett2019': {
-        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h', 'surface feature'],
+        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
         system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.066, 0.090, 0.125], // phase angle = 11.68°

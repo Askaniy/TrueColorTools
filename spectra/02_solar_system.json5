@@ -123,23 +123,44 @@
 
     // Earth system
     'Earth|Mallama2017a': {
-        tags: ['Solar system', 'planet geophysical', 'planet'],
+        tags: ['Solar system', 'planet geophysical', 'planet', 'Earth'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
         br_geometric: [0.688, 0.512, 0.434, 0.418, 0.430,
                        0.392, 0.396],
     },
     'Earth|Crow2011, Mallama2017a': { // phase angle 75.1°
-        tags: ['Solar system', 'planet geophysical', 'planet'],
+        tags: ['Solar system', 'planet geophysical', 'planet', 'Earth'],
         system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79],
         geometric_albedo: ['Generic_Bessell.V', 0.434],
     },
+    'Earth: Archean|VPL': { // Arney et al. 2017, "Hazy Archean Earth orbiting the Archean Sun", 1 bar, 1% CO2, 0.2% CH4
+        tags: ['Solar system', 'planet geophysical', 'planet', 'Earth', 'Earth history', 'synthetic spectrum'],
+        file: 'spectra/files/VPL/HAZE_archeansun.pt_toa.txtU',
+        spherical_albedo: true, // at quadrature?
+    },
+    'Earth: Proterozoic|VPL': { // Arney et al. 2016, 1 bar, 1% CO2, 0.03% CH4, 1% LAP O2
+        tags: ['Solar system', 'planet geophysical', 'planet', 'Earth', 'Earth history', 'synthetic spectrum'],
+        file: 'spectra/files/VPL/hi_o2_proterozoic_toa.txtU',
+        spherical_albedo: true, // at quadrature?
+    },
     'Earth: Synthetic spectrum|VPL': { // Robinson et al. 2011, "True disk-integrated Earth"
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'synthetic spectrum'],
+        tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Earth', 'Earth history', 'synthetic spectrum'],
         file: 'spectra/files/VPL/earth_quadrature_radiance_refl.txtU',
         spherical_albedo: [400, 0.2635], // at quadrature
+    },
+    'Gómez2014': [
+        'Spectral Reflectance Analysis of the Caribbean Sea',
+        'DOI: 10.1016/S0016-7169(14)70073-X', 'http://revistagi.geofisica.unam.mx/index.php/RGI/article/view/545',
+        'https://ui.adsabs.harvard.edu/abs/2014GeofI..53..385G/abstract'
+    ],
+    '(Earth) Caribbean Sea|Gómez2014': {
+        tags: ['Solar system', 'Earth', 'Earth surface feature', 'traced spectrum'],
+        nm: [380, 400, 425, 450, 475, 500, 520, 550, 600, 650, 700],
+        br: [0.048, 0.047, 0.043, 0.037, 0.032, 0.02, 0.01, 0.007, 0.004, 0.002, 0.001],
+        albedo: true
     },
     'Lane1973': [
         'Monochromatic phase curves and albedos for the lunar disk',
@@ -171,7 +192,7 @@
         'https://ui.adsabs.harvard.edu/abs/2018AJ....155..213W/abstract'
     ],
     "(E I) Moon: Chang'e-3 Landing Site|Wu2018": {
-        tags: ['Solar system', 'planet geophysical', 'moon', 'surface feature'],
+        tags: ['Solar system', 'planet geophysical', 'moon'],
         file: 'spectra/files/Moon_CE-3_LS_Wu2018.txt',
         albedo: true, // angle of incidence 54°, angle of emergence 44°, phase angle 95°; See Section 3.2
     },
@@ -197,12 +218,12 @@
         'https://ui.adsabs.harvard.edu/abs/1979JGR....84.8415S/abstract'
     ],
     'Mars: Bright areas|Singer1979': { // the average of a number of typical bright region spectra
-        tags: ['Solar system', 'planet geophysical', 'planet', 'surface feature'],
+        tags: ['Solar system', 'planet geophysical', 'planet'],
         file: 'spectra/files/Singer1979/Mars_bright.txtU', // figure 3
         geometric_albedo: [800, 0.40],
     },
     'Mars: Dark areas|Singer1979': { // telescopic dark region Iapygia
-        tags: ['Solar system', 'planet geophysical', 'planet', 'surface feature'],
+        tags: ['Solar system', 'planet geophysical', 'planet'],
         file: 'spectra/files/Singer1979/Mars_dark.txtU', // figure 3
         geometric_albedo: [800, 0.21],
     },
@@ -517,6 +538,16 @@
         br: [0.093, 0.107, 0.116, 0.130, 0.139, 0.147, 0.151, 0.151, 0.151, 0.151, 0.145, 0.124, 0.070, 0.071],
         albedo: true
     },
+    'Gudipati2003': [
+        'Luminescence from Vacuum-Ultraviolet-irradiated Cosmic Ice Analogs and Residues',
+        'DOI: 10.1086/345349', 'https://iopscience.iop.org/article/10.1086/345349'
+    ],
+    '(S VII) Iapetus:Leading hemisphere|Gudipati2003': {
+        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular', 'traced spectrum'],
+        nm: [330, 350, 380, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850],
+        br: [0.047, 0.051, 0.058, 0.063, 0.067, 0.071, 0.080, 0.087, 0.090, 0.093, 0.099, 0.102, 0.102],
+        albedo: true
+    },
     'Miller2011': [
         'Comparing Phoebe’s 2005 opposition surge in four visible light filters',
         'DOI: 10.1016/j.icarus.2010.12.024', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103510004926'
@@ -678,7 +709,7 @@
         geometric_albedo: true, // average normal albedo
     },
     '(U IV) Oberon: Bright areas|Helfenstein1991': { // crater rays
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular', 'surface feature'],
+        tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
         system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Clear', 'Green'],
         br: [0.37, 0.34, 0.39],
@@ -686,7 +717,7 @@
         geometric_albedo: true, // average normal albedo
     },
     '(U IV) Oberon: Dark areas|Helfenstein1991': {
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular', 'surface feature'],
+        tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
         system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Clear', 'Green'],
         br: [0.24, 0.21, 0.28],

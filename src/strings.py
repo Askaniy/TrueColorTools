@@ -463,6 +463,7 @@ names = {
     'Mercury': {'ru': 'Меркурий', 'de': 'Merkur'},
     'Venus': {'ru': 'Венера', 'de': 'Venus'},
     'Earth': {'ru': 'Земля', 'de': 'Erde'},
+    'Caribbean Sea': {'ru': 'Карибское море', 'de': 'Karibisches Meer'},
     'Moon': {'ru': 'Луна', 'de': 'Mond'},
     'Mars': {'ru': 'Марс', 'de': 'Mars'},
     'Phobos': {'ru': 'Фобос', 'de': 'Phobos'},
@@ -510,6 +511,7 @@ names = {
     'Rhea': {'ru': 'Рея', 'de': 'Rhea'},
     'Titania': {'ru': 'Титания', 'de': 'Titania'},
     'Titan': {'ru': 'Титан', 'de': 'Titan'},
+    'Iapetus': {'ru': 'Япет', 'de': 'Iapetus'},
     # Saturnian irregulars
     'Phoebe': {'ru': 'Феба', 'de': 'Phoebe'},
     'Ymir': {'ru': 'Имир', 'de': 'Ymir'},
@@ -680,10 +682,12 @@ notes = {
     'Hot, inner objects': {'ru': 'Тёплые, внутренние объекты', 'de': 'Heiße, innere Objekte'},
     'Cold, outer objects': {'ru': 'Холодные, внешние объекты', 'de': 'Kalte, äußere Objekte'},
     'Weighted mean': {'ru': 'Взвешенное среднее', 'de': 'Gewichteter Durchschnitt'},
+    'Archean': {'ru': 'Архей', 'de': 'Archaikum'},
+    'Proterozoic': {'ru': 'Протерозой', 'de': 'Proterozoikum'},
+    "Chang'e-3 Landing Site": {'ru': 'Место посадки Чанъэ-3', 'de': "Chang'e-3 Landestelle"},
     'Wenu Lobus': {'ru': 'Доля Уэну', 'de': 'Wenu Lobus'},
     'Weeyo Lobus': {'ru': 'Доля Уээйо', 'de': 'Weeyo Lobus'},
     'Akasa Linea': {'ru': 'Линия Акаса', 'de': 'Akasa Linea'},
-    "Chang'e-3 Landing Site": {'ru': 'Место посадки Чанъэ-3', 'de': "Chang'e-3 Landestelle"},
 }
 
 # Sort in key length descending order to prevent nested word errors
