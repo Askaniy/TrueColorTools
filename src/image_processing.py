@@ -4,6 +4,7 @@ from typing import Callable
 from traceback import format_exc
 from io import BytesIO
 from time import strftime, monotonic
+from math import ceil, sqrt
 from PIL import Image
 import numpy as np
 import src.auxiliary as aux
@@ -27,6 +28,7 @@ def image_parser(
         photons: bool = False,
         makebright: bool = False,
         factor: float = 1.,
+        enlarge: bool = True,
         log: Callable = print
     ):
     """ Receives user input and performs processing in a parallel thread """
@@ -98,8 +100,12 @@ def image_parser(
                 img = cube2img(cube, gamma_correction, srgb, makebright, factor)
         end_time = monotonic()
         time = end_time-start_time
-        speed = img.height * img.width / time
+        pixels_num = img.width * img.height
+        speed = pixels_num / time
         log(f'Processing took {time:.1f} seconds, average speed is {speed:.1f} px/sec')
+        if enlarge and pixels_num < pixels_limit:
+            factor = round(sqrt(pixels_limit / pixels_num))
+            img = img.resize((img.width * factor, img.height * factor))
         if preview_flag:
             log('Sending the resulting preview to the main thread', img)
         else:

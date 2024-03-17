@@ -286,6 +286,7 @@ def launch_window(lang: str):
                         desun=values['T2_desun'],
                         photons=values['T2_photons'],
                         makebright=values['T2_makebright'],
+                        enlarge=values['T2_enlarge'],
                         factor=float(values['T2_factor']),
                         log=gui.create_logger(window, 'T2_thread')
                     ),

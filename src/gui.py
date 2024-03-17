@@ -137,7 +137,8 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
     ]
     T2_col2_2 = [
         [sg.Checkbox(tr.gui_makebright[lang], key='T2_makebright')],
-        [sg.Text(tr.gui_factor[lang], key='T2_factorText'), sg.Input('1', size=1, key='T2_factor', expand_x=True)]
+        [sg.Text(tr.gui_factor[lang], key='T2_factorText'), sg.Input('1', size=1, key='T2_factor', expand_x=True)],
+        [sg.Checkbox(tr.gui_enlarge[lang], True, key='T2_enlarge')],
     ]
     T2_col2 = [
         [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T2_title2'), sg.Push()],
@@ -267,6 +268,7 @@ def translate(window: sg.Window, T2_vis: int, lang: str):
     #window['T2_plotpixels'].update(text=tr.gui_plotpixels[lang])
     window['T2_makebright'].update(text=tr.gui_makebright[lang])
     window['T2_factorText'].update(tr.gui_factor[lang])
+    window['T2_enlarge'].update(text=tr.gui_enlarge[lang])
     window['T2_preview'].update(tr.gui_preview[lang])
     window['T2_process'].update(tr.gui_process[lang])
     window['T3_title1'].update(tr.gui_input[lang])
