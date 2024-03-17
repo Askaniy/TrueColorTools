@@ -52,6 +52,7 @@ def launch_window(lang: str):
     # Setting plots templates
     plot_data = [] # for tabs 1 and 3, both at once
     background_plot = ((cp.r, cp.g, cp.b), (cp.x, cp.y, cp.z)) # for tab 2
+    mean_spectrum = [] # for tab 2
     
     # List of settings events that cause color recalculation
     triggers = ('-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-brMode2-', '-bitness-', '-rounding-')
@@ -258,20 +259,8 @@ def launch_window(lang: str):
                     T2_files.append(values[f'T2_path{i}'])
                     T2_factors.append(values[f'T2_factor{i}'])
             
-            # Updating filters profile plot
-            if (isinstance(event, str) and event.startswith('T2_filter')) or event in ('-currentTab-', '-srgb-'):
-                try:
-                    pl.close_figure(T2_fig)
-                    T2_fig = pl.plot_filters([*background_plot[values['-srgb-']], *T2_filters], lang)
-                except UnboundLocalError: # means it's the first tab opening
-                    T2_fig = pl.plot_filters(background_plot[values['-srgb-']], lang)
-                    figure_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
-                finally:
-                    figure_canvas_agg.get_tk_widget().forget()
-                    figure_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
-            
             # Image processing
-            elif isinstance(event, str) and event in ('T2_preview', 'T2_folder'):
+            if isinstance(event, str) and event in ('T2_preview', 'T2_folder'):
                 window.start_thread(
                     lambda: ip.image_parser(
                         image_mode=T2_mode,
@@ -286,8 +275,8 @@ def launch_window(lang: str):
                         desun=values['T2_desun'],
                         photons=values['T2_photons'],
                         makebright=values['T2_makebright'],
-                        enlarge=values['T2_enlarge'],
                         factor=float(values['T2_factor']),
+                        enlarge=values['T2_enlarge'],
                         log=gui.create_logger(window, 'T2_thread')
                     ),
                     ('T2_thread', 'End of the image processing thread\n')
@@ -298,8 +287,23 @@ def launch_window(lang: str):
             elif event[0] == 'T2_thread':
                 sg.Print(event[1]) # pop-up printing
                 if values[event] is not None:
-                    # Updating preview
-                    window['T2_image'].update(data=ip.convert_to_bytes(values[event]))
+                    # Updating preview image and adding mean spectrum to plot
+                    preview, mean_spectrum = values[event]
+                    window['T2_image'].update(data=ip.convert_to_bytes(preview))
+                    mean_spectrum = [mean_spectrum]
+            
+            # Updating filters profile plot
+            if (isinstance(event, str) and event.startswith('T2_filter')) or (event[0] == 'T2_thread' and values[event] is not None) or event in ('-currentTab-', '-srgb-'):
+                try:
+                    pl.close_figure(T2_fig)
+                    to_plot = [*background_plot[values['-srgb-']], *T2_filters, *mean_spectrum]
+                    T2_fig = pl.plot_filters(to_plot, lang)
+                except UnboundLocalError: # means it's the first tab opening
+                    T2_fig = pl.plot_filters(background_plot[values['-srgb-']], lang)
+                    figure_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
+                finally:
+                    figure_canvas_agg.get_tk_widget().forget()
+                    figure_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
 
         
         # ------------ Events in the tab "Blackbody & Redshifts" ------------

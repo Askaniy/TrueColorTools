@@ -4,13 +4,14 @@ from typing import Callable
 from traceback import format_exc
 from io import BytesIO
 from time import strftime, monotonic
-from math import ceil, sqrt
+from math import sqrt
 from PIL import Image
 import numpy as np
 import src.auxiliary as aux
 import src.image_core as ic
 import src.image_import as ii
 import src.color_processing as cp
+from src.data_core import Spectrum
 from src.data_processing import sun_norm
 
 
@@ -107,7 +108,7 @@ def image_parser(
             factor = round(sqrt(pixels_limit / pixels_num))
             img = img.resize((img.width * factor, img.height * factor))
         if preview_flag:
-            log('Sending the resulting preview to the main thread', img)
+            log('Sending the resulting preview to the main thread', (img, Spectrum('Mean spectrum', cube.nm, cube.br.mean(axis=(1, 2)))))
         else:
             img.save(f'{save_folder}/TCT_{strftime("%Y-%m-%d_%H-%M-%S")}.png')
     except Exception:
