@@ -543,7 +543,7 @@
         'DOI: 10.1086/345349', 'https://iopscience.iop.org/article/10.1086/345349'
     ],
     '(S VII) Iapetus:Leading hemisphere|Gudipati2003': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular', 'traced spectrum'],
+        tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular', 'traced spectrum'],
         nm: [330, 350, 380, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850],
         br: [0.047, 0.051, 0.058, 0.063, 0.067, 0.071, 0.080, 0.087, 0.090, 0.093, 0.099, 0.102, 0.102],
         albedo: true
