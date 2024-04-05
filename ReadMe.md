@@ -4,6 +4,8 @@ Astronomy-focused set of Python tools with GUI that use spectra construction and
 
 Input data is accepted in the form of filters measurements (like color indices) or continuous spectra, in units of flux or in magnitudes. Stores an extensive catalog of photometry in a proprietary format. Can process spectral cubes, multiband images from spacecraft and correct images in enhanced colors.
 
+Please note that this is a hobby project and no guarantees are provided for the results. Help is welcome!
+
 ![TCT screenshot](screenshot.png)
 
 

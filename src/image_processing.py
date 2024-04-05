@@ -106,7 +106,7 @@ def image_parser(
         log(f'Processing took {time:.1f} seconds, average speed is {speed:.1f} px/sec')
         if enlarge and pixels_num < pixels_limit:
             factor = round(sqrt(pixels_limit / pixels_num))
-            img = img.resize((img.width * factor, img.height * factor))
+            img = img.resize((img.width * factor, img.height * factor), Image.Resampling.NEAREST)
         if preview_flag:
             log('Sending the resulting preview to the main thread', (img, Spectrum('Mean spectrum', cube.nm, cube.br.mean(axis=(1, 2)))))
         else:
