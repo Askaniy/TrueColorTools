@@ -3870,14 +3870,22 @@
         calib: 'Vega',
         sun: true
     },
-    '166P/2001T4|MBOSS': {
+    'Jewitt2009': [
+        'The Active Centaurs',
+        'DOI: 10.1088/0004-6256/137/5/4296', 'https://ui.adsabs.harvard.edu/abs/2009AJ....137.4296J/abstract'
+    ],
+    '166P/NEAT|Jewitt2009': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.870, 'V-R': 0.695, 'R-I': 0.735},
         calib: 'Vega',
         sun: true
     },
-    '166P/NEAT|MBOSS': {
+    'Jewitt2015': [
+        'Color Systematics of Comets and Related Bodies',
+        'DOI: 10.1088/0004-6256/150/6/201', 'https://ui.adsabs.harvard.edu/abs/2015AJ....150..201J/abstract'
+    ],
+    '166P/NEAT|Jewitt2015': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.890, 'V-R': 0.560},
