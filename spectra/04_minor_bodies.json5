@@ -3279,6 +3279,41 @@
         calib: 'AB',
         sun: true
     },
+    '(661238) 2004 DA62|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.850, 'V-R': 0.520, 'R-I': 0.550},
+        calib: 'Vega',
+        sun: true
+    },
+    '(666182) 2009 YG19|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 1.000, 'V-R': 0.610},
+        calib: 'Vega',
+        sun: true
+    },
+    '(666739) 2010 TS191|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.760, 'V-R': 0.390},
+        calib: 'Vega',
+        sun: true
+    },
+    '(666739) 2010 TS191|Markwardt2023': {
+        tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
+        system: 'SLOAN_SDSS',
+        indices: {'g-r': 0.61, 'r-i': 0.30},
+        calib: 'AB',
+        sun: true
+    },
+    '(668643) 2012 DR30|MBOSS': {
+        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
+        system: 'Generic_Bessell',
+        indices: {'B-V': 0.647, 'V-R': 0.563, 'R-I': 0.422},
+        calib: 'Vega',
+        sun: true
+    },
     '1994 TA|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
         system: 'Generic_Bessell',
@@ -3468,13 +3503,6 @@
         calib: 'Vega',
         sun: true
     },
-    '2004 DA62|MBOSS': {
-        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
-        system: 'Generic_Bessell',
-        indices: {'B-V': 0.850, 'V-R': 0.520, 'R-I': 0.550},
-        calib: 'Vega',
-        sun: true
-    },
     '2004 OJ14|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'detached'],
         system: 'Generic_Bessell',
@@ -3500,13 +3528,6 @@
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.690, 'V-R': 0.491, 'R-I': 0.480},
-        calib: 'Vega',
-        sun: true
-    },
-    '2009 YG19|MBOSS': {
-        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
-        system: 'Generic_Bessell',
-        indices: {'B-V': 1.000, 'V-R': 0.610},
         calib: 'Vega',
         sun: true
     },
@@ -3538,20 +3559,6 @@
         calib: 'Vega',
         sun: true
     },
-    '2010 TS191|MBOSS': {
-        tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
-        system: 'Generic_Bessell',
-        indices: {'B-V': 0.760, 'V-R': 0.390},
-        calib: 'Vega',
-        sun: true
-    },
-    '2010 TS191|Markwardt2023': {
-        tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
-        system: 'SLOAN_SDSS',
-        indices: {'g-r': 0.61, 'r-i': 0.30},
-        calib: 'AB',
-        sun: true
-    },
     '2010 TT191|MBOSS': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
         system: 'Generic_Bessell',
@@ -3570,13 +3577,6 @@
         tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'Neptune trojan'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.720, 'V-R': 0.410, 'R-I': 0.520},
-        calib: 'Vega',
-        sun: true
-    },
-    '2012 DR30|MBOSS': {
-        tags: ['MBOSS', 'Solar system', 'minor body', 'TNO', 'scattered'],
-        system: 'Generic_Bessell',
-        indices: {'B-V': 0.647, 'V-R': 0.563, 'R-I': 0.422},
         calib: 'Vega',
         sun: true
     },
@@ -3870,14 +3870,22 @@
         calib: 'Vega',
         sun: true
     },
-    '166P/2001T4|MBOSS': {
+    'Jewitt2009': [
+        'The Active Centaurs',
+        'DOI: 10.1088/0004-6256/137/5/4296', 'https://ui.adsabs.harvard.edu/abs/2009AJ....137.4296J/abstract'
+    ],
+    '166P/NEAT|Jewitt2009': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'asteroid', 'centaur'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.870, 'V-R': 0.695, 'R-I': 0.735},
         calib: 'Vega',
         sun: true
     },
-    '166P/NEAT|MBOSS': {
+    'Jewitt2015': [
+        'Color Systematics of Comets and Related Bodies',
+        'DOI: 10.1088/0004-6256/150/6/201', 'https://ui.adsabs.harvard.edu/abs/2015AJ....150..201J/abstract'
+    ],
+    '166P/NEAT|Jewitt2015': {
         tags: ['MBOSS', 'Solar system', 'minor body', 'comet', 'comet-sp'],
         system: 'Generic_Bessell',
         indices: {'B-V': 0.890, 'V-R': 0.560},
