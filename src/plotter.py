@@ -4,7 +4,7 @@ from typing import Sequence
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 from src.data_core import Spectrum
 import src.color_processing as cp
 import src.strings as tr

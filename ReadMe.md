@@ -22,7 +22,7 @@ TrueColorTools has been tested on Windows 10/11, macOS and Linux. It requires Py
 ### In a virtual environment
 
 2. Open the folder in terminal and create a virtual environment with `python -m venv .venv`;
-3. Install the libraries needed by `.venv/bin/pip install -r requirements.txt` (versions were frozen as of January 2024);
+3. Install the libraries needed by `.venv/bin/pip install -r requirements.txt` (versions were frozen as of April 2024);
 4. Execute `.venv/bin/python -u runTCT.py`.
 
 ### Executable file

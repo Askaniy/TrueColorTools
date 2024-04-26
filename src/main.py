@@ -1,6 +1,6 @@
 """ Generates and launches a graphical interface that accesses other modules. """
 
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 from sigfig import round as sigfig_round
 import src.gui as gui
 from src.data_core import Spectrum, get_filter

@@ -2,7 +2,7 @@
 
 from typing import Callable
 from time import strftime
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 import src.strings as tr
 
 # TCT style colors
@@ -15,7 +15,7 @@ bg_color = '#333333'
 inputON_color = '#424242'
 inputOFF_color = '#3A3A3A'
 
-# PySimpleGUI custom theme
+# FreeSimpleGUI custom theme
 sg.LOOK_AND_FEEL_TABLE['MaterialDark'] = {
         'BACKGROUND': bg_color, 'TEXT': text_color,
         'INPUT': inputON_color, 'TEXT_INPUT': text_color, 'SCROLL': inputON_color,

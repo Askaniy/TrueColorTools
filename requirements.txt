@@ -1,8 +1,8 @@
-numpy==1.26.3
-astropy==5.3.4
-matplotlib==3.8.2
-Pillow==10.2.0
-pysimplegui==4.60.5
-json5==0.9.14
+numpy==1.26.4
+astropy==6.0.1
+matplotlib==3.8.4
+Pillow==10.3.0
+FreeSimpleGUI==5.0.0
+json5==0.9.25
 sigfig==1.3.3
 pyvims==1.0.4
