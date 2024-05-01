@@ -4,6 +4,11 @@
         'Views from EPOXI: colors in our Solar system as an analog for extrasolar planets',
         'DOI: 10.1088/0004-637X/729/2/130', 'https://iopscience.iop.org/article/10.1088/0004-637X/729/2/130'
     ],
+    'Dyudina2016': [
+        'Reflected Light Curves, Spherical and Bond Albedos of Jupiter- and Saturn-like Exoplanets',
+        'DOI: 10.3847/0004-637X/822/2/76', 'https://iopscience.iop.org/article/10.3847/0004-637X/822/2/76',
+        'https://ui.adsabs.harvard.edu/abs/2016ApJ...822...76D/abstract'
+    ],
     'Grav2003': [
         'Photometric survey of the irregular satellites',
         'DOI: 10.1016/j.icarus.2003.07.005', 'https://arxiv.org/abs/astro-ph/0301016'
@@ -269,15 +274,17 @@
     },
 
     // Jovian system
-    'Jupiter|Karkoschka1994': { // phase angle 9.8°
+    'Jupiter|Karkoschka1994, Dyudina2016': { // phase angle 9.8°
         tags: ['Solar system', 'planet geophysical', 'planet', 'Jovian system'],
         file: 'spectra/files/Karkoschka/Jupiter1993.txt',
-        geometric_albedo: true
+        geometric_albedo: true,
+        spherical_albedo: ['Cassini_ISS_WAC.CB3', 0.57], // Table 4
     },
-    'Jupiter|Karkoschka1998': { // phase angle 6.8°
+    'Jupiter|Karkoschka1998, Dyudina2016': { // phase angle 6.8°
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Jovian system'],
         file: 'spectra/files/Karkoschka/Jupiter1995.txt',
-        geometric_albedo: true
+        geometric_albedo: true,
+        spherical_albedo: ['Cassini_ISS_WAC.CB3', 0.57], // Table 4
     },
     'Thomas1998': [
         'The Small Inner Satellites of Jupiter',
@@ -395,15 +402,17 @@
     },
 
     // Saturnian system
-    'Saturn|Karkoschka1994': { // phase angle 2.7°
+    'Saturn|Karkoschka1994, Dyudina2016': { // phase angle 2.7°
         tags: ['Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
         file: 'spectra/files/Karkoschka/Saturn1993.txt',
-        geometric_albedo: true
+        geometric_albedo: true,
+        phase_integral: [1.4, 0.1], // Section 4
     },
-    'Saturn|Karkoschka1998': { // phase angle 5.7°, without rings
+    'Saturn|Karkoschka1998, Dyudina2016': { // phase angle 5.7°, without rings
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
         file: 'spectra/files/Karkoschka/Saturn1995.txt',
-        geometric_albedo: true
+        geometric_albedo: true,
+        phase_integral: [1.4, 0.1], // Section 4
     },
     'Clark1980b': [
         'The rings of Saturn: New near-infrared reflectance measurements and a 0.326–4.08 μm summary',
