@@ -214,7 +214,8 @@ def draw_rounded_square(xy: tuple[float, float], half_size: int, radius: float, 
     temp_size = half_size * factor
     temp_img = Image.new('RGB', (temp_size, temp_size), (0, 0, 0))
     temp_draw = ImageDraw.Draw(temp_img)
-    temp_draw.rounded_rectangle((0, 0, temp_size, temp_size), radius*factor/2, fill)
+    outline_color = '#FFFFFF' if fill == '#000000' else None
+    temp_draw.rounded_rectangle((0, 0, temp_size, temp_size), radius*factor/2, fill, outline=outline_color)
     size = half_size * 2
     temp_img = temp_img.resize((size+1, size+1))
     img.paste(temp_img, (xy[0]-half_size, xy[1]-half_size))
