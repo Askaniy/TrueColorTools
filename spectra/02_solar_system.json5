@@ -278,13 +278,13 @@
         tags: ['Solar system', 'planet geophysical', 'planet', 'Jovian system'],
         file: 'spectra/files/Karkoschka/Jupiter1993.txt',
         geometric_albedo: true,
-        spherical_albedo: ['Cassini_ISS_WAC.CB3', 0.57], // Table 4
+        spherical_albedo: ['Cassini_ISS_NAC.CB3', 0.57], // Table 4
     },
     'Jupiter|Karkoschka1998, Dyudina2016': { // phase angle 6.8°
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Jovian system'],
         file: 'spectra/files/Karkoschka/Jupiter1995.txt',
         geometric_albedo: true,
-        spherical_albedo: ['Cassini_ISS_WAC.CB3', 0.57], // Table 4
+        spherical_albedo: ['Cassini_ISS_NAC.CB3', 0.57], // Table 4
     },
     'Thomas1998': [
         'The Small Inner Satellites of Jupiter',
