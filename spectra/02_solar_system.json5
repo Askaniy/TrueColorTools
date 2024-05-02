@@ -91,23 +91,31 @@
     },
 
     // Venus
-    'Venus|Mallama2017a': {
+    'Mallama2006': [
+        'Venus phase function and forward scattering from H2SO4',
+        'DOI: 10.1016/j.icarus.2005.12.014', 'https://www.sciencedirect.com/science/article/pii/S0019103505005105',
+        'https://ui.adsabs.harvard.edu/abs/2006Icar..182...10M/abstract'
+    ],
+    'Venus|Mallama2017a, Mallama2006': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
         br_geometric: [0.348, 0.658, 0.689, 0.708, 0.584,
                        0.658, 0.640],
+        phase_integral: 1.35, // Table 6
     },
-    'Venus|Crow2011, Mallama2017a': { // phase angle 76°
+    'Venus|Crow2011, Mallama2017a, Mallama2006': { // phase angle 76°
         tags: ['Solar system', 'planet geophysical', 'planet'],
         nm: [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5],
         br: [0.59, 0.64, 0.72, 0.58, 0.95, 1.00, 1.16, 1.08, 1.16, 1.12],
-        geometric_albedo: ['Generic_Bessell.V', 0.689]
+        geometric_albedo: ['Generic_Bessell.V', 0.689],
+        phase_integral: 1.35, // Table 6
     },
-    'Venus|Madden2018': {
+    'Venus|Madden2018, Mallama2006': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
         file: 'spectra/files/Madden2018/Venus_MeadowsSpencer_Albedo.txtU',
         geometric_albedo: true,
+        phase_integral: 1.35, // Table 6
     },
     'Venus: Synthetic spectrum|VPL, Mallama2017a': {
         tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'synthetic spectrum'],
