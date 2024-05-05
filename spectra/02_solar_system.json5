@@ -123,6 +123,12 @@
         geometric_albedo: ['Generic_Bessell.V', 0.689],
         spherical_albedo: true, // assumption, no clear data source
     },
+   'Venus|Mallama2006': {
+        tags: ['Solar system', 'planet geophysical', 'planet'],
+        filters: ['Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I'],
+        br_geometric: [0.64, 0.67, 0.69, 0.57],
+        br_spherical: [0.81, 0.90, 0.89, 0.87],
+    },
     'Maiorov2005': [
         'A New Analysis of the Spectra Obtained by the Venera Missions in the Venusian Atmosphere. I. The Analysis of the Data Received from the Venera-11 Probe at Altitudes Below 37 km in the 0.44–0.66 µm Wavelength Range',
         'DOI: 10.1007/s11208-005-0042-1', 'https://link.springer.com/article/10.1007/s11208-005-0042-1'
