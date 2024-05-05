@@ -91,7 +91,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     centers_x = w_border + half_square + 2*half_square * (l_range%objects_per_row)
     centers_y = h0 + half_square + 2*half_square * (l_range/objects_per_row).astype(int)
 
-    # Create background of colored squircles
+    # Creating of background of colored squircles
     arr = np.zeros((h, w, 3))
     squircle = np.repeat(np.expand_dims(generate_squircle(r, rounding_radius), axis=2), repeats=3, axis=2)
     squircle_contour = np.repeat(np.expand_dims(generate_squircle_contour(r, rounding_radius, 1), axis=2), repeats=3, axis=2) * 0.25
@@ -131,8 +131,8 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
         center_y = centers_y[n]
         arr[center_y-r:center_y+r, center_x-r:center_x+r, :] = object_template
 
-    # Create image template
-    img = Image.fromarray(np.clip(arr*255, 0, 255).astype('int8'), 'RGB')
+    # Creating of image template
+    img = Image.fromarray(np.clip(np.round(arr*255), 0, 255).astype('int8'), 'RGB')
     draw = ImageDraw.Draw(img)
     draw.multiline_text( # text brightness formula: br = 255 * (x^(1/2.2))
         xy=(int(w/2), int(h0/2)), text=title, fill=(255, 255, 255),
