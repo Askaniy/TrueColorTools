@@ -123,3 +123,7 @@ class Color:
             html = '#FFFFFF'
             #print(f'- It has been replaced with {html}.')
         return html
+    
+    def grayscale(self):
+        """ Converts rgb values to grayscale using sRGB luminance of the CIE 1931 """
+        return np.dot(self.rgb, (0.2126, 0.7152, 0.0722))

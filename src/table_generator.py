@@ -2,6 +2,7 @@
 
 from PIL import Image, ImageDraw, ImageFont
 from math import floor, ceil, sqrt
+import numpy as np
 import src.auxiliary as aux
 import src.data_processing as dp
 import src.color_processing as cp
@@ -32,7 +33,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     # Layout
     half_square = 58 # half of the grid width
     r = 55 # half of the square width
-    rounding_radius = 8 # rounding radius
+    rounding_radius = 5 # rounding radius
     r_left= r-3 # active space
     r_right = r-3
     w_border = 8 # pixels of left and right spaces
@@ -85,8 +86,53 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     h2 = h1 + help_step
     h = h1 + help_step + notes_per_column*note_step + h_border # image hight
 
+    # Calculating squircles positions
+    l_range = np.arange(l)
+    centers_x = w_border + half_square + 2*half_square * (l_range%objects_per_row)
+    centers_y = h0 + half_square + 2*half_square * (l_range/objects_per_row).astype(int)
+
+    # Create background of colored squircles
+    arr = np.zeros((h, w, 3))
+    squircle = np.repeat(np.expand_dims(generate_squircle(r, rounding_radius), axis=2), repeats=3, axis=2)
+    squircle_contour = np.repeat(np.expand_dims(generate_squircle_contour(r, rounding_radius, 1), axis=2), repeats=3, axis=2) * 0.25
+    is_estimated = np.empty(l, dtype=bool)
+    is_white_text = np.empty(l, dtype=bool)
+
+    for n, (name, raw_name) in enumerate(objects.items()):
+
+        # Spectral data import and processing
+        body = dp.database_parser(name, objectsDB[raw_name])
+        albedo = brMode and isinstance(body, dp.ReflectiveBody)
+
+        # Setting brightness mode
+        match brMode:
+            case 0:
+                spectrum, estimated = body.get_spectrum('chromaticity')
+            case 1:
+                spectrum, estimated = body.get_spectrum('geometric')
+            case 2:
+                spectrum, estimated = body.get_spectrum('spherical')
+        is_estimated[n] = estimated
+        
+        # Color calculation
+        if srgb:
+            color = cp.Color.from_spectrum_CIE(spectrum, albedo)
+        else:
+            color = cp.Color.from_spectrum(spectrum, albedo)
+        if gamma:
+            color = color.gamma_corrected()
+        is_white_text[n] = color.grayscale() > 0.5
+
+        # Rounded square. For just square use `object_template = color.rgb`
+        object_template = color.rgb * squircle if np.any(color.rgb) else squircle_contour
+
+        # Placing object template into the image template
+        center_x = centers_x[n]
+        center_y = centers_y[n]
+        arr[center_y-r:center_y+r, center_x-r:center_x+r, :] = object_template
+
     # Create image template
-    img = Image.new('RGB', (w, h), (0, 0, 0))
+    img = Image.fromarray(np.clip(arr*255, 0, 255).astype('int8'), 'RGB')
     draw = ImageDraw.Draw(img)
     draw.multiline_text( # text brightness formula: br = 255 * (x^(1/2.2))
         xy=(int(w/2), int(h0/2)), text=title, fill=(255, 255, 255),
@@ -111,42 +157,14 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
         )
     draw.text((w1, h2+note_step*3), tr.link, fill=(0, 200, 255), font=note_font, anchor='la')
     
-    # Table generator
-    n = 0 # object counter
-    for name, row_name in objects.items():
+    # Labeling the template
+    for n, name in enumerate(objects.keys()):
+        center_x = centers_x[n]
+        center_y = centers_y[n]
 
-        # Spectral data import and processing
-        body = dp.database_parser(name, objectsDB[row_name])
-        albedo = brMode and isinstance(body, dp.ReflectiveBody)
+        text_color = (0, 0, 0) if is_white_text[n] else (255, 255, 255)
 
-        # Setting brightness mode
-        match brMode:
-            case 0:
-                spectrum, estimated = body.get_spectrum('chromaticity')
-            case 1:
-                spectrum, estimated = body.get_spectrum('geometric')
-            case 2:
-                spectrum, estimated = body.get_spectrum('spherical')
-        
-        # Color calculation
-        if srgb:
-            color = cp.Color.from_spectrum_CIE(spectrum, albedo)
-        else:
-            color = cp.Color.from_spectrum(spectrum, albedo)
-        if gamma:
-            color = color.gamma_corrected()
-        rgb = color.to_bit(8)
-        rgb_show = color.to_html()
-
-        text_color = (0, 0, 0) if rgb.mean() >= 127 else (255, 255, 255)
-
-        # Canvas drawing
-        center_x = w_border + half_square + 2*half_square * (n%objects_per_row)
-        center_y = h0 + half_square + 2*half_square * int(n/objects_per_row)
-        #draw.rounded_rectangle((center_x-r, center_y-r, center_x+r, center_y+r), rounding_radius, rgb_show)
-        draw_rounded_square((center_x, center_y), r, rounding_radius, rgb_show, img, 4)
-
-        if estimated:
+        if is_estimated[n]:
             draw.text((center_x+r_left, center_y+r_left), tr.table_estimated[lang], text_color, small_font, anchor='rs', align='right')
         
         # Name processing
@@ -195,7 +213,6 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
         splitted = line_splitter(name, object_font, r_left+r_right)
         shift = object_size/2 if len(splitted) == 1 else object_size
         draw.multiline_text((center_x-r_left, center_y-shift), '\n'.join(splitted), fill=text_color, font=object_font, spacing=1)
-        n += 1
     
     file_name = f'TCT_{tag}_gamma{("OFF", "ON")[gamma]}_srgb{("OFF", "ON")[srgb]}_albedo{("OFF", "GEOM", "SPHER")[brMode]}_{lang}.{extension}'
     img.save(f'{folder}/{file_name}')
@@ -206,19 +223,26 @@ def fullness(width: int, total_width: int):
     remainder = width % total_width
     return remainder / total_width if remainder != 0 else 1
 
-def draw_rounded_square(xy: tuple[float, float], half_size: int, radius: float, fill: str, img: Image.Image, factor: int):
+def generate_squircle(semiaxis: int, rounding_radius: float, factor: int = 10):
     """
-    Workaround for drawing rounded squares with anti-aliasing.
-    See https://github.com/python-pillow/Pillow/issues/5577
+    Generates antialiased squircle using the formula from
+    https://math.stackexchange.com/questions/1649714/whats-the-equation-for-a-rectircle-perfect-rounded-corner-rectangle-without-s
+    Antialiasing is achieved by scaling by the `factor` and then downsampling.
     """
-    temp_size = half_size * factor
-    temp_img = Image.new('RGB', (temp_size, temp_size), (0, 0, 0))
-    temp_draw = ImageDraw.Draw(temp_img)
-    outline_color = '#FFFFFF' if fill == '#000000' else None
-    temp_draw.rounded_rectangle((0, 0, temp_size, temp_size), radius*factor/2, fill, outline=outline_color)
-    size = half_size * 2
-    temp_img = temp_img.resize((size+1, size+1))
-    img.paste(temp_img, (xy[0]-half_size, xy[1]-half_size))
+    axis = 2 * semiaxis
+    semiaxis_ = semiaxis * factor
+    y, x = np.ogrid[-semiaxis_:semiaxis_, -semiaxis_:semiaxis_]
+    exponent = axis / rounding_radius
+    mask = np.abs(x+0.5)**exponent + np.abs(y+0.5)**exponent <= semiaxis_**exponent
+    return mask.astype('float').reshape(axis, factor, axis, factor).mean(axis=(1,3)) # downsampled
+
+def generate_squircle_contour(semiaxis: int, rounding_radius: float, width: int, factor: int = 10):
+    """ Generates antialiased squircle contour """
+    outer_squircle = generate_squircle(semiaxis, rounding_radius, factor)
+    inner_squircle = generate_squircle(semiaxis-width, rounding_radius / semiaxis * (semiaxis - width), factor)
+    reversed_width = 2 * semiaxis - width
+    outer_squircle[width:reversed_width, width:reversed_width] -= inner_squircle
+    return outer_squircle
 
 def superscript(number: int):
     """ Converts a number to be a superscript string """
