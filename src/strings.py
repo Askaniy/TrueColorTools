@@ -186,6 +186,11 @@ info_label = {
     'ru': 'Информация',
     'de': 'Info'
 }
+info_objects = {
+    'en': 'objects shown',
+    'ru': 'объектов показано',
+    'de': 'Objekte werden angezeigt'
+}
 info_sRGB = {
     'en': 'sRGB color space',
     'ru': 'Пространство sRGB',

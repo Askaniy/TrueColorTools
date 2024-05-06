@@ -310,12 +310,12 @@ def absolute_shifts(diffs):
 #        if request > other.res:
 #            while request != other.res: # remove all odd elements
 #                other.res *= 2
-#                other.nm = np.arange(other.nm[0], other.nm[-1]+1, other.res, dtype=int)
+#                other.nm = np.arange(other.nm[0], other.nm[-1]+1, other.res, dtype='int')
 #                other.br = other.br[::2]
 #        elif request < other.res:
 #            while request != other.res: # middle linear interpolation
 #                other.res = int(other.res / 2)
-#                other.nm = np.arange(other.nm[0], other.nm[-1]+1, other.res, dtype=int)
+#                other.nm = np.arange(other.nm[0], other.nm[-1]+1, other.res, dtype='int')
 #                other.br = custom_interp(other.br)
 #        else:
 #            print(f'# Note for the Spectrum object "{self.name}"')

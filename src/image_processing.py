@@ -129,7 +129,7 @@ def cube2img(cube: ic.SpectralCube, gamma_correction: bool, srgb: bool, makebrig
     rgb = np.clip(rgb, 0, 1)
     if gamma_correction:
         rgb = cp.gamma_correction(rgb)
-    rgb = (255 * rgb).astype(np.uint8)
+    rgb = (255 * rgb).astype('uint8')
     return Image.fromarray(rgb.transpose())
 
 def convert_to_bytes(img: Image.Image):

@@ -71,7 +71,7 @@ class Color:
         - `albedo` (bool): flag to disable normalization
         """
         self.name = name
-        rgb = np.array(rgb, dtype=float)
+        rgb = np.array(rgb, dtype='float')
         if rgb.min() < 0:
             #print(f'# Note for the Color object "{self.name}"')
             #print(f'- Negative values detected during object initialization: rgb={rgb}')
@@ -116,7 +116,7 @@ class Color:
 
     def to_html(self):
         """ Converts fractional rgb values to HTML-style hex string """
-        html = '#{:02x}{:02x}{:02x}'.format(*self.to_bit(8).round().astype(int))
+        html = '#{:02x}{:02x}{:02x}'.format(*self.to_bit(8).round().astype('int'))
         if len(html) != 7:
             #print(f'# Note for the Color object "{self.name}"')
             #print(f'- HTML-style color code feels wrong: {html}')

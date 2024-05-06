@@ -56,13 +56,22 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
 
     # Placing info column
     info_list = (
+        f'{l}/{len(objectsDB)} {tr.info_objects[lang]}',
         f'{tr.info_gamma[lang]}: {tr.info_indicator[lang][gamma]}',
         f'{tr.info_sRGB[lang]}: {tr.info_indicator[lang][srgb]}',
         f'{tr.gui_br[lang][0]}: {tr.gui_br[lang][brMode+1]}',
+        tr.link,
+    )
+    info_colors = (      # text brightness formula: br = 255 * (x^(1/2.2))
+        (224, 224, 224), # x = 0.75, br = 224
+        (224, 224, 224),
+        (224, 224, 224),
+        (224, 224, 224),
+        (0, 200, 255),
     )
     if notes_flag:
         w1 = int(w * 0.618034) # golden ratio for the info column
-        w1 = min(w1, w-w0-max(width(info_text, note_font) for info_text in [*info_list, tr.link]))
+        w1 = min(w1, w-w0-max(width(info_text, note_font) for info_text in info_list))
     else:
         w1 = w0
 
@@ -72,7 +81,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     name_size *= len(title_lines)
 
     # Notes calculations
-    notes_per_column = 4 # number of info lines
+    notes_per_column = len(info_list)
     if notes_flag:
         notes_numbered = [f'{superscript(note_num+1)} {note}' for note_num, note in enumerate(notes)]
         w_notes = w0 + max(width(note_text, note_font) for note_text in notes_numbered) # notes columns width
@@ -89,19 +98,19 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     # Calculating squircles positions
     l_range = np.arange(l)
     centers_x = w_border + half_square + 2*half_square * (l_range%objects_per_row)
-    centers_y = h0 + half_square + 2*half_square * (l_range/objects_per_row).astype(int)
+    centers_y = h0 + half_square + 2*half_square * (l_range/objects_per_row).astype('int')
 
     # Creating of background of colored squircles
     arr = np.zeros((h, w, 3))
     squircle = np.repeat(np.expand_dims(generate_squircle(r, rounding_radius), axis=2), repeats=3, axis=2)
     squircle_contour = np.repeat(np.expand_dims(generate_squircle_contour(r, rounding_radius, 1), axis=2), repeats=3, axis=2) * 0.25
-    is_estimated = np.empty(l, dtype=bool)
-    is_white_text = np.empty(l, dtype=bool)
+    is_estimated = np.empty(l, dtype='bool')
+    is_white_text = np.empty(l, dtype='bool')
 
-    for n, (name, raw_name) in enumerate(objects.items()):
+    for n, raw_name in enumerate(objects.values()):
 
         # Spectral data import and processing
-        body = dp.database_parser(name, objectsDB[raw_name])
+        body = dp.database_parser(raw_name, objectsDB[raw_name])
         albedo = brMode and isinstance(body, dp.ReflectiveBody)
 
         # Setting brightness mode
@@ -134,7 +143,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     # Creating of image template
     img = Image.fromarray(np.clip(np.round(arr*255), 0, 255).astype('int8'), 'RGB')
     draw = ImageDraw.Draw(img)
-    draw.multiline_text( # text brightness formula: br = 255 * (x^(1/2.2))
+    draw.multiline_text(
         xy=(int(w/2), int(h0/2)), text=title, fill=(255, 255, 255),
         font=name_font, anchor='mm', align='center', spacing=0
     )
@@ -150,12 +159,10 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     
     # Info writing
     draw.text((w1, h1), tr.info_label[lang], fill=(230, 230, 230), font=help_font, anchor='la') # x = 0.8, br = 230
-    for info_num, info_text in enumerate(info_list):
+    for info_num, (info_text, info_color) in enumerate(zip(info_list, info_colors)):
         draw.text(
-            xy=(w1, h2+note_step*info_num), text=info_text,
-            fill=(224, 224, 224), font=note_font, anchor='la' # x = 0.75, br = 224
+            xy=(w1, h2+note_step*info_num), text=info_text, fill=info_color, font=note_font, anchor='la'
         )
-    draw.text((w1, h2+note_step*3), tr.link, fill=(0, 200, 255), font=note_font, anchor='la')
     
     # Labeling the template
     for n, name in enumerate(objects.keys()):
