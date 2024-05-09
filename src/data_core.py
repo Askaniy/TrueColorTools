@@ -139,6 +139,25 @@ class Spectrum:
             br = np.zeros(scope.size)
         return Spectrum(f'BB with T={round(temperature)}', scope, br)
     
+    @staticmethod
+    def from_nm(nm_point: int|float):
+        """
+        Creates a point Spectrum object on the grid of allowed values.
+        Returns single point with brightness 1 for on-grid wavelength
+        and two points otherwise with a total brightness of 1.
+        """
+        nm_point_int = int(nm_point)
+        if nm_point_int % aux.resolution == 0 and nm_point == nm_point_int:
+            nm = (nm_point_int,)
+            br = ((1.,))
+        else:
+            nm_point_floor = nm_point // aux.resolution
+            nm0 = nm_point_floor * aux.resolution
+            nm0_proximity_factor = nm_point/aux.resolution - nm_point_floor
+            nm = (nm0, nm0+aux.resolution)
+            br = (1.-nm0_proximity_factor, nm0_proximity_factor)
+        return Spectrum(f'{nm_point} nm', nm, br)
+    
     def to_scope(self, scope: np.ndarray):
         """ Returns a new Spectrum object with a guarantee of definition on the requested scope """
         if self.photospectrum is None:
@@ -279,8 +298,16 @@ class Spectrum:
 
 @lru_cache(maxsize=32)
 def get_filter(name: str):
-    """ Creates a scaled to the unit area Spectrum object based on data file to be found in the `filters` folder """
-    return Spectrum.from_file(name, di.find_filter(name)).edges_zeroed().scaled_by_area()
+    """
+    Creates a scaled to the unit area Spectrum object.
+    Requires file name to be found in the `filters` folder to load profile
+    or wavelength in nanometers to generate single-point profile.
+    """
+    if not isinstance(name, str) or name.isnumeric():
+        profile = Spectrum.from_nm(float(name))
+    else:
+        profile = Spectrum.from_file(name, di.find_filter(name))
+    return profile.edges_zeroed().scaled_by_area()
 
 
 class Photospectrum:
@@ -364,10 +391,13 @@ class Photospectrum:
     def to_scope(self, scope: np.ndarray): # TODO: use kriging here!
         """ Creates a Spectrum object with inter- and extrapolated photospectrum data to fit the wavelength scope """
         try:
-            nm0 = self.mean_wavelengths()
-            nm1 = aux.grid(nm0[0], nm0[-1], aux.resolution)
-            br = aux.interpolating(nm0, self.br, nm1, aux.resolution)
-            nm, br = aux.extrapolating(nm1, br, scope, aux.resolution)
+            if len(self.filters) > 1:
+                nm0 = self.mean_wavelengths()
+                nm1 = aux.grid(nm0[0], nm0[-1], aux.resolution)
+                br = aux.interpolating(nm0, self.br, nm1, aux.resolution)
+                nm, br = aux.extrapolating(nm1, br, scope, aux.resolution)
+            else: # single-point photospectrum support
+                nm, br = aux.extrapolating((self.filters[0].mean_wavelength(),), (self.br[0],), scope, aux.resolution)
             return Spectrum(self.name, nm, br, photospectrum=deepcopy(self))
         except Exception:
             print(f'# Note for the Photospectrum object "{self.name}"')

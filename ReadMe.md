@@ -80,7 +80,7 @@ Supported input keys of a database unit:
 - `nm_range` (dict): `start`, `stop`, `step` keys defining a wavelength range
 - `slope` (dict): `start`, `stop`, `power` keys defining a spectrum from spectrophotometric gradient
 - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
-- `filters` (list): list of filter names that can be found in the `filters` folder
+- `filters` (list): list of filter names (see `filters` folder), can be mixed with nm values if needed
 - `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': [br, (sd)]], …}`
 - `system` (str): a way to bracket the name of the photometric system
 - `calib` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default

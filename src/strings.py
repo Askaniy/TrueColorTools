@@ -244,9 +244,9 @@ gui_band = {
     'de': 'Band'
 }
 gui_filter = {
-    'en': 'Filter',
-    'ru': 'Фильтр',
-    'de': 'Filter'
+    'en': 'Filter or nm',
+    'ru': 'Фильтр или нм',
+    'de': 'Filter oder nm'
 }
 gui_brightness = {
     'en': 'Brightness',

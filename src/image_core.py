@@ -231,10 +231,13 @@ class PhotospectralCube:
     def to_scope(self, scope: np.ndarray): # TODO: use kriging here!
         """ Creates a SpectralCube object with inter- and extrapolated PhotospectralCube data to fit the wavelength scope """
         try:
-            nm0 = self.mean_wavelengths()
-            nm1 = aux.grid(nm0[0], nm0[-1], aux.resolution)
-            br = aux.interpolating(nm0, self.br, nm1, aux.resolution)
-            nm, br = aux.extrapolating(nm1, br, scope, aux.resolution)
+            if len(self.filters) > 1:
+                nm0 = self.mean_wavelengths()
+                nm1 = aux.grid(nm0[0], nm0[-1], aux.resolution)
+                br = aux.interpolating(nm0, self.br, nm1, aux.resolution)
+                nm, br = aux.extrapolating(nm1, br, scope, aux.resolution)
+            else: # single-point photospectrum support
+                nm, br = aux.extrapolating((self.filters[0].mean_wavelength(),), (self.br[0],), scope, aux.resolution)
             return SpectralCube(nm, br)
         except Exception:
             print(f'# Note for the PhotospectralCube object')
