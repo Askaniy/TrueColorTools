@@ -297,7 +297,7 @@ class Spectrum:
 
 
 @lru_cache(maxsize=32)
-def get_filter(name: str):
+def get_filter(name: str|int|float):
     """
     Creates a scaled to the unit area Spectrum object.
     Requires file name to be found in the `filters` folder to load profile

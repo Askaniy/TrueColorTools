@@ -2858,26 +2858,48 @@
         calib: 'Vega',
         sun: true
     },
+    'Cruikshank2020': [
+        'Organic Components of Small Bodies in the Outer Solar System: Some Results of the New Horizons Mission',
+        'DOI: 10.3390/life10080126', 'https://www.mdpi.com/2075-1729/10/8/126'
+    ],
+    'Hofgartner2021': [
+        'Photometry of Kuiper Belt Object (486958) Arrokoth from New Horizons LORRI',
+        'DOI: 10.1016/j.icarus.2020.113723', 'https://ui.adsabs.harvard.edu/abs/2021Icar..35613723H/abstract'
+    ],
+    '(486958) Arrokoth|Cruikshank2020, Hofgartner2021': {
+        tags: ['featured', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h', 'Arrokoth'],
+        system: 'NewHorizons_MVIC',
+        filters: [
+            'Blue', 'Red', 'NIR',
+            1250, 1400, 1500, 1600, 1650, 1700, 1800, 1850, 1900, 2000, 2100, 2200, 2250, 2350, 2400, 2500
+        ],
+        br: [
+            0.050, 0.074, 0.111,
+            0.180, 0.190, 0.197, 0.193, 0.207, 0.200, 0.198, 0.191, 0.201, 0.198, 0.189, 0.194, 0.175, 0.190, 0.190, 0.175
+        ],
+        geometric_albedo: ['Generic_Bessell.V', [0.21, 0.05]],
+        spherical_albedo: ['NewHorizons_MVIC.Red', [0.063, 0.015]],
+    },
     'Howett2019': [
         'Colors of (486958) 2014 MU69 as Observed by New Horizons’ Multi-Spectral Visible Imaging Camera (MVIC)',
         'https://ui.adsabs.harvard.edu/abs/2019LPI....50.1982H/abstract'
     ],
     '(486958) Arrokoth:Wenu Lobus|Howett2019': {
-        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h', 'Arrokoth'],
         system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.053, 0.079, 0.117], // phase angle = 11.68°
         albedo: true
     },
     '(486958) Arrokoth:Weeyo Lobus|Howett2019': {
-        tags: ['featured', 'Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h', 'Arrokoth'],
         system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.058, 0.084, 0.122], // phase angle = 11.68°
         albedo: true
     },
     '(486958) Arrokoth:Akasa Linea|Howett2019': {
-        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h'],
+        tags: ['Solar system', 'minor body', 'TNO', 'classical', 'classical-h', 'Arrokoth'],
         system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.066, 0.090, 0.125], // phase angle = 11.68°

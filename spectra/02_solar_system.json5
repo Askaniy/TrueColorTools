@@ -785,11 +785,16 @@
         'Nereid Has Complex Large-Amplitude Photometric Variability (Due to Chaotic Rotation)',
         'DOI: 10.1006/icar.2000.6417', 'https://arxiv.org/abs/astro-ph/0005050v1'
     ],
-    '(N II) Nereid|Schaefer2000, Kiss2016': {
+    'Thomas1991': [
+        'Voyager observations of Nereid',
+        'DOI: 10.1029/91JA01735', 'https://agupubs.onlinelibrary.wiley.com/doi/10.1029/91JA01735', 'https://ui.adsabs.harvard.edu/abs/1991JGR....9619253T/abstract'
+    ],
+    '(N II) Nereid|Schaefer2000, Kiss2016, Thomas1991': {
         tags: ['featured', 'Solar system', 'moon', 'Neptunian system', 'irregular'],
         system: 'Generic_Bessell',
         filters: ['U', 'B', 'V', 'R', 'I'],
         br: [0.90, 0.93, 1, 1.13, 0.99],
         geometric_albedo: ['Generic_Bessell.V', [0.24, 0.02]],
+        phase_integral: 0.5,
     },
 }

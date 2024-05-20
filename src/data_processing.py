@@ -323,7 +323,8 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
         elif 'indices' in content:
             filters, br, sd = color_indices_parser(content['indices'])
         if 'system' in content:
-            filters = [f'{content["system"]}.{short_name}' for short_name in filters]
+            # regular filter if name is string, else "delta-filter" (wavelength)
+            filters = [f'{content["system"]}.{short_name}' if isinstance(short_name, str) else short_name for short_name in filters]
     calib = content['calib'].lower() if 'calib' in content else None
     sun = 'sun' in content and content['sun']
     geometric = spherical = None
