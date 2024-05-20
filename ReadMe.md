@@ -70,7 +70,7 @@ Phase functions are now used to calculate the phase integral, which is used to c
 - `HG`: requires `G` parameter, see [Bowell et al. 1989](https://ui.adsabs.harvard.edu/abs/1989aste.conf..524B/abstract).
 - `HG1G2`: requires `G_1` and `G_2`, see [Muinonen et al. 2010](https://ui.adsabs.harvard.edu/abs/2010Icar..209..542M/abstract).
 
-It is assumed that all data is given in ascending wavelength order, and it is necessary to specify "white spectrum" for calibration if the photometric system does not determine it by equal-energy flux density by wavelengths ([this link](https://hst-docs.stsci.edu/acsdhb/chapter-5-acs-data-analysis/5-1-photometry#id-5.1Photometry-5.1.15.1.1PhotometricSystems,Units,andZeropoints) may help). Typically you need to specify `calib: 'AB'` when working with Sloan filters and `calib: 'Vega'` for all other cases.
+It is assumed that all data is given in ascending wavelength order, and it is necessary to specify "white spectrum" for calibration if the photometric system does not determine it by equal-energy flux density by wavelengths ([this link](https://hst-docs.stsci.edu/acsdhb/chapter-5-acs-data-analysis/5-1-photometry#id-5.1Photometry-5.1.15.1.1PhotometricSystems,Units,andZeropoints) may help). Typically you need to specify `calibration_system: 'AB'` when working with Sloan filters and `calibration_system: 'Vega'` for all other cases.
 
 Supported input keys of a database unit:
 - `nm` (list): list of wavelengths in nanometers
@@ -81,19 +81,19 @@ Supported input keys of a database unit:
 - `slope` (dict): `start`, `stop`, `power` keys defining a spectrum from spectrophotometric gradient
 - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
 - `filters` (list): list of filter names (see `filters` folder), can be mixed with nm values if needed
-- `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': [br, (sd)]], …}`
-- `system` (str): a way to bracket the name of the photometric system
-- `calib` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
+- `color_indices` (list): dictionary of color indices, formatted `{'filter1-filter2': [br, (sd)]], …}`
+- `photometric_system` (str): a way to bracket the name of the photometric system
+- `calibration_system` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
 - `albedo` (bool/list): indicates data as albedo scaled or tells how to do it with `[filter/nm, [br, (sd)]]`
 - `geometric_albedo` (bool/list): indicator of geometric/normal albedo data or how to scale to it
 - `spherical_albedo` (bool/list): indicator of spherical albedo data or how to scale to it
-- `bond_albedo` (number): sets spherical albedo scale using known Solar spectrum
+- `bond_albedo` (number): sets spherical albedo scale using known solar spectrum
 - `phase_integral` (number/list): factor of transition from geometric albedo to spherical (sd is optional)
 - `phase_function` (list): function name and its parameters to compute phase integral (sd is optional)
 - `br_geometric`, `br_spherical` (list): specifying unique spectra for different albedos
 - `sd_geometric`, `sd_spherical` (list/number): corresponding standard deviations or a general value
-- `sun` (bool): `true` to remove Sun as emitter
-- `tags` (list): strings, categorizes a spectrum
+- `sun_is_emitter` (bool): `true` to remove the reflected solar spectrum
+- `tags` (list): strings categorizing the spectrum
 
 You can store the file with the spectrum outside of JSON5, and include a link in it. Text (`*.txt`, `*.dat`) and FITS (`*.fits`, `*.fit`) formats are supported for external files. A text file must contain at least wavelengths in the first column, flux in the second column, and optionally standard deviations in the third column. Data is assumed to be in the second HDU in FITS files. If you have problems reading FITS, contact me, I'll improve the parsing of the provided example.
 

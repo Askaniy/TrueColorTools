@@ -270,19 +270,19 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
     - `slope` (dict): `start`, `stop`, `power` keys defining a spectrum from spectrophotometric gradient
     - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
     - `filters` (list): list of filter names (see `filters` folder), can be mixed with nm values if needed
-    - `indices` (list): dictionary of color indices, formatted `{'filter1-filter2': [br, (sd)]], …}`
-    - `system` (str): a way to bracket the name of the photometric system
-    - `calib` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
+    - `color_indices` (list): dictionary of color indices, formatted `{'filter1-filter2': [br, (sd)]], …}`
+    - `photometric_system` (str): a way to bracket the name of the photometric system
+    - `calibration_system` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
     - `albedo` (bool/list): indicates data as albedo scaled or tells how to do it with `[filter/nm, [br, (sd)]]`
     - `geometric_albedo` (bool/list): indicator of geometric/normal albedo data or how to scale to it
     - `spherical_albedo` (bool/list): indicator of spherical albedo data or how to scale to it
-    - `bond_albedo` (number): sets spherical albedo scale using known Solar spectrum
+    - `bond_albedo` (number): sets spherical albedo scale using known solar spectrum
     - `phase_integral` (number/list): factor of transition from geometric albedo to spherical (sd is optional)
     - `phase_function` (list): function name and its parameters to compute phase integral (sd is optional)
     - `br_geometric`, `br_spherical` (list): specifying unique spectra for different albedos
     - `sd_geometric`, `sd_spherical` (list/number): corresponding standard deviations or a general value
-    - `sun` (bool): `true` to remove Sun as emitter
-    - `tags` (list): strings, categorizes a spectrum
+    - `sun_is_emitter` (bool): `true` to remove the reflected solar spectrum
+    - `tags` (list): strings categorizing the spectrum
     """
     br = []
     sd = None
@@ -320,13 +320,13 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
         # Photospectrum reading
         elif 'filters' in content:
             filters = content['filters']
-        elif 'indices' in content:
-            filters, br, sd = color_indices_parser(content['indices'])
-        if 'system' in content:
+        elif 'color_indices' in content:
+            filters, br, sd = color_indices_parser(content['color_indices'])
+        if 'photometric_system' in content:
             # regular filter if name is string, else "delta-filter" (wavelength)
-            filters = [f'{content["system"]}.{short_name}' if isinstance(short_name, str) else short_name for short_name in filters]
-    calib = content['calib'].lower() if 'calib' in content else None
-    sun = 'sun' in content and content['sun']
+            filters = [f'{content["photometric_system"]}.{short_name}' if isinstance(short_name, str) else short_name for short_name in filters]
+    calib = content['calibration_system'].lower() if 'calibration_system' in content else None
+    sun = 'sun_is_emitter' in content and content['sun_is_emitter']
     geometric = spherical = None
     if len(br) == 0:
         if 'br_geometric' in content:

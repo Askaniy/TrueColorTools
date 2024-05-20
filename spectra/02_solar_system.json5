@@ -84,7 +84,7 @@
     ],
     'Mercury|Deborah2011': {
         tags: ['Solar system', 'planet geophysical', 'planet'],
-        system: 'Messenger_MDIS_WAC',
+        photometric_system: 'Messenger_MDIS_WAC',
         filters: ['430BP40', '480BP10', '560BP5', '630BP5', '700BP5', '750BP5', '830BP5', '900BP5', '950BP7', '1000BP15'],
         br_geometric: [0.119, 0.134, 0.152, 0.165, 0.180, 0.192, 0.214, 0.234, 0.247, 0.254],
         br_spherical: [0.053, 0.061, 0.070, 0.077, 0.084, 0.089, 0.098, 0.105, 0.110, 0.113],
@@ -150,7 +150,7 @@
     },
     'Earth|Crow2011, Mallama2017a': { // phase angle 75.1°
         tags: ['Solar system', 'planet geophysical', 'planet', 'Earth'],
-        system: 'DeepImpact_HRI-VIS',
+        photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79],
         geometric_albedo: ['Generic_Bessell.V', 0.434],
@@ -193,7 +193,7 @@
     },
     '(E I) Moon: Near side|Crow2011, Lane1973': { // phase angle 97.6°
         tags: ['featured', 'Solar system', 'planet geophysical', 'moon'],
-        system: 'DeepImpact_HRI-VIS',
+        photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [1894.24, 2387.17, 2832.17, 3269.35, 4091.49, 4787.91, 5506.36],
         geometric_albedo: ['Generic_Bessell.V', 0.113], // excludes opposition effect
@@ -201,7 +201,7 @@
     },
     '(E I) Moon: Far side|Crow2011': { // phase angle 75.1°
         tags: ['Solar system', 'planet geophysical', 'moon'],
-        system: 'DeepImpact_HRI-VIS',
+        photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [13.83, 18.06, 22.54, 26.68, 30.74, 34.86, 34.14],
     },
@@ -226,7 +226,7 @@
     },
     'Mars|Crow2011, Mallama2017a': { // phase angle 37.0°
         tags: ['Solar system', 'planet geophysical', 'planet'],
-        system: 'DeepImpact_HRI-VIS',
+        photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31],
         geometric_albedo: ['Generic_Bessell.V', 0.170]
@@ -310,7 +310,7 @@
     ],
     '(J XVI) Metis: Trailing side|Thomas1998, Simonelli2000': {
         tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
-        system: 'Galileo_SSI',
+        photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.38, 1, 0.863, 0.85], // traced from Fig. 6
         sd: [0.08, 0, 0.173, 0.19], // traced from Fig. 6, relative to Green filter
@@ -319,7 +319,7 @@
     },
     '(J V) Amalthea: Leading side|Thomas1998, Simonelli2000': {
         tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
-        system: 'Galileo_SSI',
+        photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '7560A'],
         br: [0.54, 1, 1.14], // traced from Fig. 6
         sd: [0.05, 0, 0.075], // traced from Fig. 6, relative to Green filter
@@ -328,7 +328,7 @@
     },
     '(J V) Amalthea: Trailing side|Thomas1998, Simonelli2000': {
         tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
-        system: 'Galileo_SSI',
+        photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.47, 1, 1.225, 1], // traced from Fig. 6
         sd: [0.0625, 0, 0.137, 0.15], // traced from Fig. 6, relative to Green filter
@@ -337,7 +337,7 @@
     },
     '(J XIV) Thebe: Leading side|Thomas1998, Simonelli2000': {
         tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
-        system: 'Galileo_SSI',
+        photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A'],
         br: [0.7125, 1, 1.137], // traced from Fig. 6
         sd: [0.067, 0, 0.117], // traced from Fig. 6, relative to Green filter
@@ -346,7 +346,7 @@
     },
     '(J XIV) Thebe: Trailing side|Thomas1998, Simonelli2000': {
         tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
-        system: 'Galileo_SSI',
+        photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.6, 1, 1.137, 1.07], // traced from Fig. 6
         sd: [0.05, 0, 0.117, 0.15], // traced from Fig. 6, relative to Green filter
@@ -577,7 +577,7 @@
     ],
     '(S IX) Phoebe|Miller2011': { // variant with g=−0.35 as the most likely by Voyager data Simonelli et al. (1999)
         tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
-        system: 'Generic_Bessell',
+        photometric_system: 'Generic_Bessell',
         filters: ['B', 'V', 'R', 'I'],
         br_geometric: [0.0855, 0.0857, 0.0843, 0.0839],
         sd_geometric: [0.0031, 0.0022, 0.0016, 0.0021],
@@ -586,28 +586,28 @@
     },
     '(S IX) Phoebe|Graykowski2018, Miller2011': {
         tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
-        system: 'Generic_Bessell',
-        indices: {'B-V': 0.57, 'V-R': 0.34},
-        calib: 'Vega',
-        sun: true,
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': 0.57, 'V-R': 0.34},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.0857, 0.0022]],
         spherical_albedo: ['Generic_Bessell.V', [0.0267, 0.0083]]
     },
     '(S IX) Phoebe|Grav2003, Miller2011': {
         tags: ['featured', 'Solar system', 'moon', 'Saturnian system', 'irregular'],
-        system: 'Generic_Bessell',
-        indices: {'B-V': 0.63, 'V-R': 0.35, 'V-I': 0.64},
-        calib: 'Vega',
-        sun: true,
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': 0.63, 'V-R': 0.35, 'V-I': 0.64},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.0857, 0.0022]],
         spherical_albedo: ['Generic_Bessell.V', [0.0267, 0.0083]]
     },
     '(S IX) Phoebe|Pena2022, Miller2011': {
         tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
-        system: 'CTIO_DECam',
-        indices: {'g-r': 0.27, 'r-i': 0.06},
-        calib: 'AB',
-        sun: true,
+        photometric_system: 'CTIO_DECam',
+        color_indices: {'g-r': 0.27, 'r-i': 0.06},
+        calibration_system: 'AB',
+        sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.0857, 0.0022]],
         spherical_albedo: ['Generic_Bessell.V', [0.0267, 0.0083]]
     },
@@ -725,7 +725,7 @@
     ],
     '(U IV) Oberon|Helfenstein1991': { // average cratered
         tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
-        system: 'Voyager_ISS-NAC',
+        photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Clear', 'Green'],
         br: [0.30, 0.27, 0.33],
         sd: [0.04, 0.03, 0.04],
@@ -733,7 +733,7 @@
     },
     '(U IV) Oberon: Bright areas|Helfenstein1991': { // crater rays
         tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
-        system: 'Voyager_ISS-NAC',
+        photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Clear', 'Green'],
         br: [0.37, 0.34, 0.39],
         sd: [0.04, 0.03, 0.03],
@@ -741,7 +741,7 @@
     },
     '(U IV) Oberon: Dark areas|Helfenstein1991': {
         tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
-        system: 'Voyager_ISS-NAC',
+        photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Clear', 'Green'],
         br: [0.24, 0.21, 0.28],
         sd: [0.03, 0.02, 0.03],
@@ -775,10 +775,10 @@
     ],
     '(N II) Nereid|Graykowski2018, Kiss2016': {
         tags: ['Solar system', 'moon', 'Neptunian system', 'irregular'],
-        system: 'Generic_Bessell',
-        indices: {'B-V': 0.67, 'V-R': 0.38},
-        calib: 'Vega',
-        sun: true,
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': 0.67, 'V-R': 0.38},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.24, 0.02]],
     },
     'Schaefer2000': [
@@ -791,7 +791,7 @@
     ],
     '(N II) Nereid|Schaefer2000, Kiss2016, Thomas1991': {
         tags: ['featured', 'Solar system', 'moon', 'Neptunian system', 'irregular'],
-        system: 'Generic_Bessell',
+        photometric_system: 'Generic_Bessell',
         filters: ['U', 'B', 'V', 'R', 'I'],
         br: [0.90, 0.93, 1, 1.13, 0.99],
         geometric_albedo: ['Generic_Bessell.V', [0.24, 0.02]],
