@@ -4,35 +4,35 @@ from typing import Sequence
 from pathlib import Path
 import numpy as np
 from astropy.io import fits
-from pyvims import VIMS
 from PIL import Image
-import tempfile
-import shutil
+#from pyvims import VIMS
+#import tempfile
+#import shutil
 
 def cube_reader(file: str) -> tuple[np.ndarray, np.ndarray]:
     """ Imports spectral data from the spectral cube in FITS or QUB formats """
-    if file.isdigit(): # Cassini's VIMS format
-        cube = VIMS(f'{file}_1', root=tempfile.mkdtemp(), channel='vis') # downloading
-        print(f'Cube name: {cube}')
-        print(f'Filename: {cube.fname}')
-        print(f'Acquisition start time: {cube.start}')
-        print(f'Acquisition stop time: {cube.stop}')
-        print(f'Cube mid-time: {cube.time}')
-        print(f'Exposure duration: {cube.expo}')
-        print(f'Channel: {cube.channel}')
-        print(f'Cube data size: {cube.NB, cube.NL, cube.NS}')
-        print(f'Acquisition mode: {cube.mode}')
-        print(f'Main target name: {cube.target_name}')
-        print(f'Flyby id: {cube.flyby}')
-        nm = cube.wvlns * 1000 # µm to nm
-        br = cube.data
-        shutil.rmtree(cube.root)
-    else: # HST STIS standard of FITS
-        with fits.open(file) as hdul:
-            #hdul.info()
-            #print(repr(hdul[0].header))
-            br = np.array(hdul['sci'].data).transpose((0, 2, 1))
-            nm = np.array(hdul['wavelength'].data)
+#    if file.isdigit(): # Cassini's VIMS format
+#        cube = VIMS(f'{file}_1', root=tempfile.mkdtemp(), channel='vis') # downloading
+#        print(f'Cube name: {cube}')
+#        print(f'Filename: {cube.fname}')
+#        print(f'Acquisition start time: {cube.start}')
+#        print(f'Acquisition stop time: {cube.stop}')
+#        print(f'Cube mid-time: {cube.time}')
+#        print(f'Exposure duration: {cube.expo}')
+#        print(f'Channel: {cube.channel}')
+#        print(f'Cube data size: {cube.NB, cube.NL, cube.NS}')
+#        print(f'Acquisition mode: {cube.mode}')
+#        print(f'Main target name: {cube.target_name}')
+#        print(f'Flyby id: {cube.flyby}')
+#        nm = cube.wvlns * 1000 # µm to nm
+#        br = cube.data
+#        shutil.rmtree(cube.root)
+#    else: # HST STIS standard of FITS
+    with fits.open(file) as hdul:
+        #hdul.info()
+        #print(repr(hdul[0].header))
+        br = np.array(hdul['sci'].data).transpose((0, 2, 1))
+        nm = np.array(hdul['wavelength'].data)
     return nm, br
 
 def rgb_reader(file: str) -> np.ndarray:
