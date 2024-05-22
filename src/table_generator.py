@@ -182,18 +182,17 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
             parts = name.split('[', 1)
             name = parts[0].strip()
             ref = parts[1][:-1]
-            if ',' in ref: # check for several references, no more than 3 supported
+            if ',' in ref:
+                # checking multiple references, no more than 3 are supported!
                 refs = [i.strip() for i in ref.split(',', 2)]
                 ref = '\n'.join(refs) 
                 ref_len = width(refs[0], small_font)
-            elif ref[-4:].isnumeric() and (ref[-5].isalpha() or ref[-5] in separators): # check for the year in the reference name to print it on the second line
-                author = ref[:-4].strip()
-                year = ref[-4:]
-                if width(author, small_font) > width(year, small_font):
-                    ref = f'{author}\n{year}'
-                    ref_len = width(author, small_font)
-                else:
-                    ref_len = width(ref, small_font)
+            elif len(ref) > 4 and (year := ref[-4:]).isnumeric() and (ref[-5].isalpha() or ref[-5] in separators) and (author_len := width(author := ref[:-4].strip(), small_font)) > width(year, small_font):
+                # checking for a year in the reference name to print it on the second line
+                ref = f'{author}\n{year}'
+                ref_len = author_len
+            else:
+                ref_len = width(ref, small_font)
             draw.multiline_text((center_x+r_left, center_y-r_left-workaround_shift), ref, fill=text_color, font=small_font, anchor='ra', align='right', spacing=0)
         
         if name[0] == '(':

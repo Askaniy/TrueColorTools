@@ -2961,7 +2961,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'Precovery2014EZ51': [ // to be replaced with MPC later
+    'Precovery2014EZ51': [ // to be replaced with MPC later https://www.minorplanetcenter.net/db_search/show_object?utf8=%E2%9C%93&object_id=523692
         'Asteroid Institute: Precovery of 2014 EZ51',
         'https://b612.ai/platform/precovery/result/?run_id=4cde8b97-e7ab-4a73-9768-f357ba754f56'
     ],
