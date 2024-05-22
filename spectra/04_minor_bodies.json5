@@ -3742,6 +3742,18 @@
         calibration_system: 'AB',
         sun_is_emitter: true
     },
+    'Gerdes2017': [
+        'Discovery and Physical Characterization of a Large Scattered Disk Object at 92 au',
+        'DOI: 10.3847/2041-8213/aa64d8', 'https://iopscience.iop.org/article/10.3847/2041-8213/aa64d8', 'https://ui.adsabs.harvard.edu/abs/2017ApJ...839L..15G/abstract'
+    ],
+    '2014 UZ224|Gerdes2017': {
+        tags: ['Solar system', 'minor body', 'TNO', 'TNO-midsize', 'scattered'],
+        photometric_system: 'CTIO_DECam',
+        color_indices: {'g-r': 0.77, 'r-i': 0.39, 'i-z': 0.22},
+        calibration_system: 'AB',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.131, 0.039]],
+    },
     '2014 YB92|Markwardt2023': {
         tags: ['Solar system', 'minor body', 'asteroid', 'Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
