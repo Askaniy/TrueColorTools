@@ -22,7 +22,7 @@ def image_parser(
         single_file: str = None,
         files: list = None,
         filters: list = None,
-        factors: list = None,
+        formulas: list = None,
         gamma_correction: bool = True,
         srgb: bool = False,
         desun: bool = False,
@@ -44,17 +44,15 @@ def image_parser(
                 not_empty_files = np.where(files != '')
                 files = files[not_empty_files]
                 filters = np.array(filters)[not_empty_files]
-                factors = np.array(factors, dtype='float64')[not_empty_files]
+                formulas = np.array(formulas)[not_empty_files]
                 log(f'Importing the images')
-                cube = ic.PhotospectralCube(filters, ii.bw_list_reader(files)).sorted()
+                cube = ic.PhotospectralCube(filters, ii.bw_list_reader(files, formulas)).sorted()
                 if preview_flag:
                     log('Down scaling')
                     cube = cube.downscale(pixels_limit)
                 if photons:
                     log('Converting photon spectral density to energy density')
                     cube = cube.photons2energy()
-                if factors is not None:
-                    cube *= factors
                 if desun:
                     log('Removing Sun as emitter')
                     cube /= sun_norm
@@ -64,17 +62,14 @@ def image_parser(
                 img = cube2img(cube, gamma_correction, srgb, makebright, factor)
             # RGB image
             case 1:
-                factors = np.array(factors, dtype='float64')
                 log(f'Importing the RGB image')
-                cube = ic.PhotospectralCube(filters, ii.rgb_reader(single_file)).sorted()
+                cube = ic.PhotospectralCube(filters, ii.rgb_reader(single_file, formulas)).sorted()
                 if preview_flag:
                     log('Down scaling')
                     cube = cube.downscale(pixels_limit)
                 if photons:
                     log('Converting photon spectral density to energy density')
                     cube = cube.photons2energy()
-                if factors is not None:
-                    cube *= factors
                 if desun:
                     log('Removing Sun as emitter')
                     cube /= sun_norm

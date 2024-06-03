@@ -109,8 +109,8 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
                 sg.InputCombo(('', *filtersDB), enable_events=True, expand_x=True, key='T2_filter'+n)
             ],
             [
-                sg.Text(tr.gui_factor[lang], key='T2_factorText'+n),
-                sg.Input('1', size=1, key='T2_factor'+n, expand_x=True)
+                sg.Text(tr.gui_evaluate[lang], key='T2_evalText'+n),
+                sg.Input('x', size=1, key='T2_eval'+n, expand_x=True)
             ]
         ]
         return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, key='T2_band'+n)
@@ -261,7 +261,7 @@ def translate(window: sg.Window, T2_vis: int, lang: str):
         window['T2_band'+str(i)].update(f'{tr.gui_band[lang]} {i+1}')
         window['T2_filterText'+str(i)].update(tr.gui_filter[lang])
         window['T2_pathText'+str(i)].update(tr.gui_browse[lang])
-        window['T2_factorText'+str(i)].update(tr.gui_factor[lang])
+        window['T2_evalText'+str(i)].update(tr.gui_evaluate[lang])
     window['T2_desun'].update(text=tr.gui_desun[lang])
     window['T2_photons'].update(text=tr.gui_photons[lang])
     #window['T2_autoalign'].update(text=tr.gui_autoalign[lang])

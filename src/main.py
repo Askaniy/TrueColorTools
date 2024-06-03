@@ -250,14 +250,14 @@ def launch_window(lang: str):
             # Getting filters and image paths
             T2_files = []
             T2_filters = []
-            T2_factors = []
+            T2_formulas = []
             for i in range(T2_vis):
                 T2_filter_name = values[f'T2_filter{i}']
                 if T2_filter_name != '':
                     T2_filter = get_filter(T2_filter_name)
                     T2_filters.append(T2_filter)
                     T2_files.append(values[f'T2_path{i}'])
-                    T2_factors.append(values[f'T2_factor{i}'])
+                    T2_formulas.append(values[f'T2_eval{i}'])
             
             # Image processing
             if isinstance(event, str) and event in ('T2_preview', 'T2_folder'):
@@ -269,7 +269,7 @@ def launch_window(lang: str):
                         single_file=values['T2_path'],
                         files=T2_files,
                         filters=T2_filters,
-                        factors=T2_factors,
+                        formulas=T2_formulas,
                         gamma_correction=values['-gamma-'],
                         srgb=values['-srgb-'],
                         desun=values['T2_desun'],

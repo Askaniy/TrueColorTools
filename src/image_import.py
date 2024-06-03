@@ -35,12 +35,16 @@ def cube_reader(file: str) -> tuple[np.ndarray, np.ndarray]:
         nm = np.array(hdul['wavelength'].data)
     return nm, br
 
-def rgb_reader(file: str) -> np.ndarray:
+def rgb_reader(file: str, formulas: list) -> np.ndarray:
     """ Imports spectral data from a RGB image """
     img = Image.open(file)
     img = img.convert(to_supported_mode(img.mode))
-    br = img2array(img).astype('float64') / color_depth(img.mode)
-    return br.transpose()[::-1]
+    br = np.transpose(img2array(img).astype('float64') / color_depth(img.mode))[::-1]
+    if formulas is not None:
+        br[0] = eval(formulas[0], {'x': br[0]})
+        br[1] = eval(formulas[1], {'x': br[1]})
+        br[2] = eval(formulas[2], {'x': br[2]})
+    return br
 
 def bw_reader(file: str) -> np.ndarray:
     """ Imports spectral data from a black and white image """
@@ -54,9 +58,9 @@ def bw_reader(file: str) -> np.ndarray:
         br = br[np.argmax(br.sum(axis=(1,2)))]
     return br
 
-def bw_list_reader(files: Sequence) -> np.ndarray:
+def bw_list_reader(files: Sequence, formulas: list) -> np.ndarray:
     """ Imports and combines the list of black and white images into one array """
-    br = np.stack([bw_reader(file) for file in files])
+    br = np.stack([eval(formula, {'x': bw_reader(file)}) for file, formula in zip(files, formulas)])
     return br
 
 def to_supported_mode(mode: str):

@@ -248,11 +248,16 @@ gui_filter = {
     'ru': 'Фильтр или нм',
     'de': 'Filter oder nm'
 }
-gui_brightness = {
-    'en': 'Brightness',
-    'ru': 'Яркость',
-    'de': 'Helligkeit'
+gui_evaluate = {
+    'en': 'Evaluate',
+    'ru': 'Выполнить',
+    'de': 'Auswerten von'
 }
+#gui_brightness = {
+#    'en': 'Brightness',
+#    'ru': 'Яркость',
+#    'de': 'Helligkeit'
+#}
 gui_desun = {
     'en': 'Remove Sun as emitter',
     'ru': 'Убрать отражённый спектр Солнца',
