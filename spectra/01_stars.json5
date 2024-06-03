@@ -85,7 +85,7 @@
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd114710_v2.txtA'
     },
     '(G2 V) Sun|CALSPEC': {
-        tags: ['featured', 'Solar system', 'star', 'star/V dwarf'],
+        tags: ['featured', 'Solar System', 'star', 'star/V dwarf'],
         file: 'spectra/files/CALSPEC/sun_reference_stis_002.fits'
     },
     "(G5 V) κ1 Ceti|STIS_Pal2023": {
