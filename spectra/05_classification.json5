@@ -1,7 +1,7 @@
 {
     // Orbital classes
     'Jovian irregulars|Graykowski2018': {
-        tags: ['Solar System', 'class', 'orbit', 'moon', 'Jovian system', 'moon/irregular'],
+        tags: ['Solar System', 'class', 'orbit', 'moon', 'Solar System/Jovian system', 'moon/irregular'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.75, 'V-R': 0.44},
         calibration_system: 'Vega',
@@ -9,7 +9,7 @@
         albedo: ['Generic_Bessell.V', 0.04], // estimation
     },
     'Jovian irregulars i=28°|Grav2003': {
-        tags: ['Solar System', 'class', 'orbit', 'moon', 'Jovian system', 'moon/irregular'],
+        tags: ['Solar System', 'class', 'orbit', 'moon', 'Solar System/Jovian system', 'moon/irregular'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.66, 'V-R': 0.36},
         calibration_system: 'Vega',
@@ -17,7 +17,7 @@
         albedo: ['Generic_Bessell.V', 0.04], // estimation
     },
     'Jovian irregulars i=149°|Grav2003': {
-        tags: ['Solar System', 'class', 'orbit', 'moon', 'Jovian system', 'moon/irregular'],
+        tags: ['Solar System', 'class', 'orbit', 'moon', 'Solar System/Jovian system', 'moon/irregular'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.75, 'V-R': 0.41},
         calibration_system: 'Vega',
@@ -25,7 +25,7 @@
         albedo: ['Generic_Bessell.V', 0.04], // estimation
     },
     'Saturnian irregulars|Graykowski2018': {
-        tags: ['Solar System', 'class', 'moon', 'Saturnian system', 'moon/irregular'],
+        tags: ['Solar System', 'class', 'moon', 'Solar System/Saturnian system', 'moon/irregular'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.69, 'V-R': 0.44},
         calibration_system: 'Vega',
@@ -33,7 +33,7 @@
         albedo: ['Generic_Bessell.V', 0.04], // estimation
     },
     'Saturnian irregulars i=34°|Grav2003': {
-        tags: ['Solar System', 'class', 'moon', 'Saturnian system', 'moon/irregular'],
+        tags: ['Solar System', 'class', 'moon', 'Solar System/Saturnian system', 'moon/irregular'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.91, 'V-R': 0.48},
         calibration_system: 'Vega',
@@ -41,7 +41,7 @@
         albedo: ['Generic_Bessell.V', 0.04], // estimation
     },
     'Saturnian irregulars i=46°|Grav2003': {
-        tags: ['Solar System', 'class', 'moon', 'Saturnian system', 'moon/irregular'],
+        tags: ['Solar System', 'class', 'moon', 'Solar System/Saturnian system', 'moon/irregular'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.79, 'V-R': 0.51},
         calibration_system: 'Vega',
@@ -49,7 +49,7 @@
         albedo: ['Generic_Bessell.V', 0.04], // estimation
     },
     'Uranian irregulars|Graykowski2018': {
-        tags: ['Solar System', 'class', 'moon', 'Uranian system', 'moon/irregular'],
+        tags: ['Solar System', 'class', 'moon', 'Solar System/Uranian system', 'moon/irregular'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.84, 'V-R': 0.53},
         calibration_system: 'Vega',
@@ -57,7 +57,7 @@
         albedo: ['Generic_Bessell.V', 0.04], // estimation
     },
     'Neptunian irregulars|Graykowski2018': {
-        tags: ['Solar System', 'class', 'moon', 'Neptunian system', 'moon/irregular'],
+        tags: ['Solar System', 'class', 'moon', 'Solar System/Neptunian system', 'moon/irregular'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.77, 'V-R': 0.50},
         calibration_system: 'Vega',
