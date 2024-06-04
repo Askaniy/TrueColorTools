@@ -389,12 +389,12 @@
         'DOI: 10.1016/j.icarus.2009.07.043', 'https://arxiv.org/abs/0908.4198', 'https://ui.adsabs.harvard.edu/abs/2010Icar..205..505M/abstract'
     ],
     '(617) Patroclus-Menoetius|Humes2022, Mueller2010': {
-        tags: ['Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'Spacecraft target/Lucy'],
+        tags: ['Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'spacecraft target/Lucy'],
         file: 'spectra/files/Humes2022/617_Patroclus_albedo.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.045, 0.009]],
     },
     '(617) Patroclus-Menoetius|Chatelain2016, Mueller2010': {
-        tags: ['Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'Spacecraft target/Lucy'],
+        tags: ['Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'spacecraft target/Lucy'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'U-B': 0.215, 'B-V': 0.710, 'V-R': 0.420, 'V-I': 0.830},
         calibration_system: 'Vega',
@@ -566,13 +566,13 @@
         phase_function: ['HG', {H: [14.23, 0.02], G: [0.040, 0.008]}]
     },
     '(3548) Eurybates|Humes2022, Mottola2023a': {
-        tags: ['Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'Spacecraft target/Lucy'],
+        tags: ['Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'spacecraft target/Lucy'],
         file: 'spectra/files/Humes2022/3548_Eurybates_albedo.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.003]],
         phase_function: ['HG1G2', {H: [9.800, 0.007], G_1: [0.862, 0.019], G_2: [-0.028, 0.011]}]
     },
     '(3548) Eurybates|MBOSS, Mottola2023a': {
-        tags: ['MBOSS', 'Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'Spacecraft target/Lucy'],
+        tags: ['MBOSS', 'Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'spacecraft target/Lucy'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.677, 'V-R': 0.352, 'R-I': 0.339},
         calibration_system: 'Vega',
@@ -581,7 +581,7 @@
         phase_function: ['HG1G2', {H: [9.800, 0.007], G_1: [0.862, 0.019], G_2: [-0.028, 0.011]}]
     },
     '(3548) Eurybates|Mottola2023a': {
-        tags: ['Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'Spacecraft target/Lucy'],
+        tags: ['Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'spacecraft target/Lucy'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.739, 'V-R': 0.384, 'R-I': 0.355},
         calibration_system: 'Vega',
@@ -759,13 +759,13 @@
         'DOI: 10.3847/PSJ/abb942', 'https://iopscience.iop.org/article/10.3847/PSJ/abb942'
     ],
     '(11351) Leucus|Humes2022, Mottola2020': {
-        tags: ['MBOSS', 'Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'Spacecraft target/Lucy'],
+        tags: ['MBOSS', 'Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'spacecraft target/Lucy'],
         file: 'spectra/files/Humes2022/11351_Leucus_albedo.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.043, 0.002]],
         phase_function: ['HG1G2', {H: [10.95, 0.01], G_1: [0.63, 0.04], G_2: [0.23, 0.02]}]
     },
     '(11351) Leucus|MBOSS, Mottola2020': {
-        tags: ['MBOSS', 'Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'Spacecraft target/Lucy'],
+        tags: ['MBOSS', 'Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'spacecraft target/Lucy'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.739, 'V-R': 0.498, 'R-I': 0.402},
         calibration_system: 'Vega',
@@ -820,7 +820,7 @@
         'DOI: 10.3847/1538-3881/aabd81', 'https://ui.adsabs.harvard.edu/abs/2018AJ....155..245B/abstract'
     ],
     '(15094) Polymele|MBOSS, Buie2018': {
-        tags: ['MBOSS', 'Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'Spacecraft target/Lucy'],
+        tags: ['MBOSS', 'Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'spacecraft target/Lucy'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.652, 'V-R': 0.477, 'R-I': 0.322},
         calibration_system: 'Vega',
@@ -1012,13 +1012,13 @@
         sun_is_emitter: true
     },
     '(21900) Orus|Humes2022, Mottola2023a': {
-        tags: ['Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'Spacecraft target/Lucy'],
+        tags: ['Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'spacecraft target/Lucy'],
         file: 'spectra/files/Humes2022/21900_Orus_albedo.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.040, 0.002]],
         phase_function: ['HG1G2', {H: [10.204, 0.006], G_1: [0.689, 0.012], G_2: [0.193, 0.007]}]
     },
     '(21900) Orus|Mottola2023a': {
-        tags: ['Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'Spacecraft target/Lucy'],
+        tags: ['Solar System', 'minor body', 'asteroid', 'trojan/Jupiter', 'spacecraft target/Lucy'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.799, 'V-R': 0.454},
         calibration_system: 'Vega',
@@ -2283,7 +2283,7 @@
         'DOI: 10.1093/mnrasl/slad066', 'https://academic.oup.com/mnrasl/article/524/1/L1/7191263', 'https://ui.adsabs.harvard.edu/abs/2023MNRAS.524L...1M/abstract'
     ],
     '(152830) Dinkinesh|Bolin2023, McFadden2023, Mottola2023b': {
-        tags: ['featured', 'Solar System', 'minor body', 'asteroid', 'asteroid/main belt', 'Spacecraft target/Lucy'],
+        tags: ['featured', 'Solar System', 'minor body', 'asteroid', 'asteroid/main belt', 'spacecraft target/Lucy'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': 0.67, 'r-i': 0.28, 'i-z': 0.11},
         calibration_system: 'AB',
