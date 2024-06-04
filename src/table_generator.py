@@ -17,7 +17,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
 
     # Load fonts
     name_size = 36
-    object_size = 18
+    object_size = 20
     help_size = 18
     help_step = 5 + help_size
     note_size = 16
@@ -30,13 +30,12 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     small_font = ImageFont.truetype('src/fonts/FiraSansExtraCondensed-Light.ttf', 13, layout_engine=engine)
 
     # Layout
-    half_square = 60 # half of the grid width
-    r = 58 # half of the square width
-    rounding_radius = 6 # rounding radius
-    r_left= r-3 # active space
-    r_right = r-3
-    w_border = half_square - r # pixels of left and right spaces
-    h_border = 20 # pixels of top and bottom spaces
+    border_space = 20
+    tiny_space = 2
+    rounding_radius = 5
+    half_square = 61 # half of the grid width
+    r_square = half_square - tiny_space # half of the square width
+    r_active = r_square - tiny_space # half of area, available for text
 
     # Selecting the number of columns so that the bottom row is as full as possible
     col_num = sqrt(1.5*l) # strives for a 3:2 aspect ratio
@@ -50,8 +49,8 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     min_obj_to_scale = 3 + int(notes_flag) * 2
     objects_per_row = max(min_obj_to_scale, col_num)
     w_table = 2*half_square*objects_per_row
-    w = 2*w_border + w_table # image width
-    w0 = w_border + h_border
+    w = 2*tiny_space + w_table # total image width
+    w0 = tiny_space + border_space
 
     # Placing info column
     info_list = (
@@ -75,7 +74,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
         w1 = w0
 
     # Multiline title
-    title_lines = line_splitter(tag.join(tr.table_title[lang]), name_font, w_table-2*h_border)
+    title_lines = line_splitter(tag.join(tr.table_title[lang]), name_font, w_table-2*border_space)
     title = '\n'.join(title_lines)
     name_size *= len(title_lines)
 
@@ -89,20 +88,20 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
             notes_per_column = round(len(notes) // notes_columns_num + 1)
 
     # Calculating grid hights
-    h0 = h_border + name_size
-    h1 = h0 + 2*half_square * int(ceil(l / objects_per_row)) + note_step
+    h0 = border_space + name_size
+    h1 = h0 + 2*half_square * int(ceil(l / objects_per_row)) + border_space//2
     h2 = h1 + help_step
-    h = h1 + help_step + notes_per_column*note_step + h_border # image hight
+    h = h1 + help_step + notes_per_column*note_step + border_space//2 # total image hight
 
     # Calculating squircles positions
     l_range = np.arange(l)
-    centers_x = w_border + half_square + 2*half_square * (l_range%objects_per_row)
+    centers_x = tiny_space + half_square + 2*half_square * (l_range%objects_per_row)
     centers_y = h0 + half_square + 2*half_square * (l_range/objects_per_row).astype('int')
 
     # Creating of background of colored squircles
     arr = np.zeros((h, w, 3))
-    squircle = np.repeat(np.expand_dims(generate_squircle(r, rounding_radius), axis=2), repeats=3, axis=2)
-    squircle_contour = np.repeat(np.expand_dims(generate_squircle_contour(r, rounding_radius, 1), axis=2), repeats=3, axis=2) * 0.25
+    squircle = np.repeat(np.expand_dims(generate_squircle(r_square, rounding_radius), axis=2), repeats=3, axis=2)
+    squircle_contour = np.repeat(np.expand_dims(generate_squircle_contour(r_square, rounding_radius, 1), axis=2), repeats=3, axis=2) * 0.25
     is_estimated = np.empty(l, dtype='bool')
     is_white_text = np.empty(l, dtype='bool')
 
@@ -137,7 +136,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
         # Placing object template into the image template
         center_x = centers_x[n]
         center_y = centers_y[n]
-        arr[center_y-r:center_y+r, center_x-r:center_x+r, :] = object_template
+        arr[center_y-r_square:center_y+r_square, center_x-r_square:center_x+r_square, :] = object_template
 
     # Creating of image template
     img = Image.fromarray(np.clip(np.round(arr*255), 0, 255).astype('int8'), 'RGB')
@@ -171,7 +170,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
         text_color = (0, 0, 0) if is_white_text[n] else (255, 255, 255)
 
         if is_estimated[n]:
-            draw.text((center_x+r_left, center_y+r_left), tr.table_estimated[lang], text_color, small_font, anchor='rs', align='right')
+            draw.text((center_x+r_active, center_y+r_active), tr.table_estimated[lang], text_color, small_font, anchor='rs', align='right')
         
         # Name processing
         workaround_shift = 3 # it is not possible to use "lt" and "rt" anchors for multiline text https://pillow.readthedocs.io/en/stable/handbook/text-anchors.html
@@ -192,7 +191,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
                 ref_len = author_len
             else:
                 ref_len = width(ref, small_font)
-            draw.multiline_text((center_x+r_left, center_y-r_left-workaround_shift), ref, fill=text_color, font=small_font, anchor='ra', align='right', spacing=0)
+            draw.multiline_text((center_x+r_active, center_y-r_active-workaround_shift), ref, fill=text_color, font=small_font, anchor='ra', align='right', spacing=0)
         
         if name[0] == '(':
             parts = name.split(')', 1)
@@ -201,13 +200,13 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
             if '+' in index:
                 index = index.replace('+', '\n+')
             else:
-                free_space = r_left + r_right - ref_len - 2
+                free_space = 2*r_active - ref_len - tiny_space
                 index = '\n'.join(line_splitter(index, small_font, free_space))
-            draw.multiline_text((center_x-r_left, center_y-r_left-workaround_shift), f'{index}', fill=text_color, font=small_font, anchor='la', align='left', spacing=0)
+            draw.multiline_text((center_x-r_active, center_y-r_active-workaround_shift), f'{index}', fill=text_color, font=small_font, anchor='la', align='left', spacing=0)
         elif '/' in name:
             parts = name.split('/', 1)
             name = parts[1].strip()
-            draw.text((center_x-r_left, center_y-r_left-workaround_shift), f'{parts[0]}/', fill=text_color, font=small_font)
+            draw.text((center_x-r_active, center_y-r_active-workaround_shift), f'{parts[0]}/', fill=text_color, font=small_font)
         
         if notes_flag and ':' in name:
             parts = name.split(':', 1)
@@ -215,9 +214,9 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
             note = parts[1].strip()
             name += superscript(notes.index(note) + 1)
 
-        splitted = line_splitter(name, object_font, r_left+r_right)
+        splitted = line_splitter(name, object_font, 2*r_active)
         shift = object_size/2 if len(splitted) == 1 else object_size
-        draw.multiline_text((center_x-r_left, center_y-shift), '\n'.join(splitted), fill=text_color, font=object_font, spacing=1)
+        draw.multiline_text((center_x-r_active, center_y-shift), '\n'.join(splitted), fill=text_color, font=object_font, spacing=1)
     
     file_name = f'TCT_{tag.replace("/", "-")}_gamma{("OFF", "ON")[gamma]}_srgb{("OFF", "ON")[srgb]}_albedo{("OFF", "GEOM", "SPHER")[brMode]}_{lang}.{extension}'
     img.save(f'{folder}/{file_name}')
