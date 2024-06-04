@@ -1,5 +1,4 @@
 """ Provides a table generation function, generate_table(). """
-
 from PIL import Image, ImageDraw, ImageFont
 from math import floor, ceil, sqrt
 import numpy as np
@@ -31,13 +30,13 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     small_font = ImageFont.truetype('src/fonts/FiraSansExtraCondensed-Light.ttf', 13, layout_engine=engine)
 
     # Layout
-    half_square = 58 # half of the grid width
-    r = 55 # half of the square width
-    rounding_radius = 5 # rounding radius
+    half_square = 60 # half of the grid width
+    r = 58 # half of the square width
+    rounding_radius = 6 # rounding radius
     r_left= r-3 # active space
     r_right = r-3
-    w_border = 8 # pixels of left and right spaces
-    h_border = 16 # pixels of top and bottom spaces
+    w_border = half_square - r # pixels of left and right spaces
+    h_border = 20 # pixels of top and bottom spaces
 
     # Selecting the number of columns so that the bottom row is as full as possible
     col_num = sqrt(1.5*l) # strives for a 3:2 aspect ratio
@@ -52,7 +51,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     objects_per_row = max(min_obj_to_scale, col_num)
     w_table = 2*half_square*objects_per_row
     w = 2*w_border + w_table # image width
-    w0 = w_border + half_square - r # using shift width
+    w0 = w_border + h_border
 
     # Placing info column
     info_list = (
@@ -75,8 +74,8 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     else:
         w1 = w0
 
-    # Support for multiline title
-    title_lines = line_splitter(tag.join(tr.table_title[lang]), name_font, w_table)
+    # Multiline title
+    title_lines = line_splitter(tag.join(tr.table_title[lang]), name_font, w_table-2*h_border)
     title = '\n'.join(title_lines)
     name_size *= len(title_lines)
 
@@ -202,7 +201,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
             if '+' in index:
                 index = index.replace('+', '\n+')
             else:
-                free_space = r_left + r_right - ref_len - 3
+                free_space = r_left + r_right - ref_len - 2
                 index = '\n'.join(line_splitter(index, small_font, free_space))
             draw.multiline_text((center_x-r_left, center_y-r_left-workaround_shift), f'{index}', fill=text_color, font=small_font, anchor='la', align='left', spacing=0)
         elif '/' in name:
@@ -271,16 +270,24 @@ def line_splitter(line: str, font: ImageFont.FreeTypeFont, maxW: int) -> list[st
     else:
         return recursive_split(line.split(), font, maxW)
 
-separators = (' ', ':', '+', '-')
+separators = (' ', ':', '+', '-', '/')
 
-def recursive_split(lst0: list, font: ImageFont.FreeTypeFont, maxW: int, hyphen=True):
+def combine_words(word0: str, word1: str):
+    """ Joining or rejoining lines of text """
+    if (last_symbol := word0[-1]) == word1[0] and last_symbol in separators:
+        combination = f'{word0}{word1[1:]}'
+    else:
+        combination = f'{word0} {word1}'
+    return combination
+
+def recursive_split(lst0: list, font: ImageFont.FreeTypeFont, maxW: int):
     """ A function that recursively splits and joins the list of strings to match `maxW` """
     words_widths = [width(word, font) for word in lst0]
     lst = lst0
     if max(words_widths) < maxW:
         # Attempt to combine words
         for i in range(len(words_widths)-1):
-            combination = f'{lst[i]} {lst[i+1]}'
+            combination = combine_words(lst[i], lst[i+1])
             if width(combination, font) < maxW:
                 lst[i] = combination
                 lst.pop(i+1)
@@ -288,39 +295,33 @@ def recursive_split(lst0: list, font: ImageFont.FreeTypeFont, maxW: int, hyphen=
                 break
     else:
         # Attempt to hyphenate the word
-        hyphen_width = width('-', font) if hyphen else 0
         for i in range(len(lst)):
+            lst[i] = lst[i].strip()
             if width(lst[i], font) > maxW:
                 # Check for a separator not on the edge
                 for separator in separators:
                     if separator in lst[i][1:-2]:
                         part0, part1 = lst[i].split(separator, 1)
-                        lst[i] = f'{part0}-'
+                        lst[i] = f'{part0}{separator}'.strip()
+                        part1 = f'{separator}{part1}'.strip()
                         try:
-                            lst[i+1] = f'{separator}{part1} {lst[i+1]}'
+                            lst[i+1] = combine_words(part1, lst[i+1])
                         except IndexError:
-                            lst.append(f'{separator}{part1}')
+                            lst.append(part1)
                         recursive_split(lst, font, maxW)
                         break
                 else:
                     # Move one letter per iteration
-                    try:
-                        lst[i+1] = f'{lst[i][-1]} {lst[i+1]}'
-                    except IndexError:
-                        lst.append(lst[i][-1])
-                    finally:
-                        lst[i] = lst[i][:-1]
-                        while width(lst[i], font)+hyphen_width > maxW:
-                            lst[i+1] = lst[i][-1] + lst[i+1]
-                            lst[i] = lst[i][:-1]
-                    if len(lst[i]) > 1:
-                        if lst[i][-1] in separators:
-                            recursive_split(lst0, font, maxW, hyphen=False)
-                        else:
-                            lst[i] += '-'
-                            recursive_split(lst, font, maxW)
+                    if (last_symbol := lst[i][-1]) in separators:
+                        letter = lst[i][-2]
+                        lst[i] = lst[i][:-2] + last_symbol
                     else:
-                        lst[i+1] = lst[i] + lst[i+1]
-                        lst[i] = ''
-                    break
+                        letter = last_symbol + ' '
+                        lst[i] = lst[i][:-1] + '-'
+                    try:
+                        lst[i+1] = f'{letter}{lst[i+1]}'
+                    except IndexError:
+                        lst.append(letter)
+                    recursive_split(lst, font, maxW)
+                break
     return lst
