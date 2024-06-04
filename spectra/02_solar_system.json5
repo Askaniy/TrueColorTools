@@ -53,7 +53,7 @@
 
     // Mercury
     'Mercury|Mallama2017a': {
-        tags: ['Solar system', 'planet geophysical', 'planet'],
+        tags: ['Solar System', 'planetary body/planet'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
         br_geometric: [0.087, 0.105, 0.142, 0.172, 0.208,
@@ -65,13 +65,13 @@
         'DOI: 10.48550/arXiv.1703.02670', 'https://arxiv.org/abs/1703.02670'
     ],
     'Mercury|Mallama2017b, Mallama2017a': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
+        tags: ['featured', 'Solar System', 'planetary body/planet'],
         file: 'spectra/files/Madden2018/Mercury_Mallama2017_Albedo.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.142],
         bond_albedo: [0.088, 0.003],
     },
     'Mercury|Crow2011, Mallama2017a, Mallama2017b': { // phase angle 77°
-        tags: ['Solar system', 'planet geophysical', 'planet'],
+        tags: ['Solar System', 'planetary body/planet'],
         nm: [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5],
         br: [0.61, 0.56, 0.66, 0.71, 0.86, 1.00, 1.37, 1.50, 1.77, 2.01],
         geometric_albedo: ['Generic_Bessell.V', 0.142],
@@ -83,7 +83,7 @@
         'https://ui.adsabs.harvard.edu/abs/2011P%26SS...59.1853D/abstract'
     ],
     'Mercury|Deborah2011': {
-        tags: ['Solar system', 'planet geophysical', 'planet'],
+        tags: ['Solar System', 'planetary body/planet'],
         photometric_system: 'Messenger_MDIS_WAC',
         filters: ['430BP40', '480BP10', '560BP5', '630BP5', '700BP5', '750BP5', '830BP5', '900BP5', '950BP7', '1000BP15'],
         br_geometric: [0.119, 0.134, 0.152, 0.165, 0.180, 0.192, 0.214, 0.234, 0.247, 0.254],
@@ -97,7 +97,7 @@
         'https://ui.adsabs.harvard.edu/abs/2006Icar..182...10M/abstract'
     ],
     'Venus|Mallama2017a, Mallama2006': {
-        tags: ['Solar system', 'planet geophysical', 'planet'],
+        tags: ['Solar System', 'planetary body/planet'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
         br_geometric: [0.348, 0.658, 0.689, 0.708, 0.584,
@@ -105,26 +105,26 @@
         phase_integral: 1.35, // Table 6
     },
     'Venus|Crow2011, Mallama2017a, Mallama2006': { // phase angle 76°
-        tags: ['Solar system', 'planet geophysical', 'planet'],
+        tags: ['Solar System', 'planetary body/planet'],
         nm: [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5],
         br: [0.59, 0.64, 0.72, 0.58, 0.95, 1.00, 1.16, 1.08, 1.16, 1.12],
         geometric_albedo: ['Generic_Bessell.V', 0.689],
         phase_integral: 1.35, // Table 6
     },
     'Venus|Madden2018, Mallama2006': {
-        tags: ['Solar system', 'planet geophysical', 'planet'],
+        tags: ['Solar System', 'planetary body/planet'],
         file: 'spectra/files/Madden2018/Venus_MeadowsSpencer_Albedo.txtU',
         geometric_albedo: true,
         phase_integral: 1.35, // Table 6
     },
     'Venus: Synthetic spectrum|VPL, Mallama2017a': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'synthetic spectrum'],
+        tags: ['featured', 'Solar System', 'planetary body/planet', 'synthetic spectrum'],
         file: 'spectra/files/VPL/dayside_venus_toa.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.689],
         spherical_albedo: true, // assumption, no clear data source
     },
    'Venus|Mallama2006': {
-        tags: ['Solar system', 'planet geophysical', 'planet'],
+        tags: ['Solar System', 'planetary body/planet'],
         filters: ['Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I'],
         br_geometric: [0.64, 0.67, 0.69, 0.57],
         br_spherical: [0.81, 0.90, 0.89, 0.87],
@@ -134,7 +134,7 @@
         'DOI: 10.1007/s11208-005-0042-1', 'https://link.springer.com/article/10.1007/s11208-005-0042-1'
     ],
     'Venus: Surface|Maiorov2005': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
+        tags: ['featured', 'Solar System', 'planetary body/planet'],
         nm: [440, 450, 460, 470, 480, 490, 500, 505, 700],
         br: [0.089, 0.092, 0.095, 0.097, 0.098, 0.099, 0.1, 0.1, 0.1],
         albedo: true
@@ -142,31 +142,31 @@
 
     // Earth system
     'Earth|Mallama2017a': {
-        tags: ['Solar system', 'planet geophysical', 'planet', 'Earth'],
+        tags: ['Solar System', 'planetary body/planet', 'Earth'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
         br_geometric: [0.688, 0.512, 0.434, 0.418, 0.430,
                        0.392, 0.396],
     },
     'Earth|Crow2011, Mallama2017a': { // phase angle 75.1°
-        tags: ['Solar system', 'planet geophysical', 'planet', 'Earth'],
+        tags: ['Solar System', 'planetary body/planet', 'Earth'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79],
         geometric_albedo: ['Generic_Bessell.V', 0.434],
     },
     'Earth: Archean|VPL': { // Arney et al. 2017, "Hazy Archean Earth orbiting the Archean Sun", 1 bar, 1% CO2, 0.2% CH4
-        tags: ['Solar system', 'planet geophysical', 'planet', 'Earth', 'Earth history', 'synthetic spectrum'],
+        tags: ['Solar System', 'planetary body/planet', 'Earth/history', 'synthetic spectrum'],
         file: 'spectra/files/VPL/HAZE_archeansun.pt_toa.txtU',
         spherical_albedo: true, // at quadrature?
     },
     'Earth: Proterozoic|VPL': { // Arney et al. 2016, 1 bar, 1% CO2, 0.03% CH4, 1% LAP O2
-        tags: ['Solar system', 'planet geophysical', 'planet', 'Earth', 'Earth history', 'synthetic spectrum'],
+        tags: ['Solar System', 'planetary body/planet', 'Earth/history', 'synthetic spectrum'],
         file: 'spectra/files/VPL/hi_o2_proterozoic_toa.txtU',
         spherical_albedo: true, // at quadrature?
     },
     'Earth: Synthetic spectrum|VPL': { // Robinson et al. 2011, "True disk-integrated Earth"
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Earth', 'Earth history', 'synthetic spectrum'],
+        tags: ['featured', 'Solar System', 'planetary body/planet', 'Earth/history', 'synthetic spectrum'],
         file: 'spectra/files/VPL/earth_quadrature_radiance_refl.txtU',
         spherical_albedo: [400, 0.2635], // at quadrature
     },
@@ -176,7 +176,7 @@
         'https://ui.adsabs.harvard.edu/abs/2014GeofI..53..385G/abstract'
     ],
     '(Earth) Caribbean Sea|Gómez2014': {
-        tags: ['Solar system', 'Earth', 'Earth surface feature', 'traced spectrum'],
+        tags: ['Solar System', 'Earth/surface feature', 'traced spectrum'],
         nm: [380, 400, 425, 450, 475, 500, 520, 550, 600, 650, 700],
         br: [0.048, 0.047, 0.043, 0.037, 0.032, 0.02, 0.01, 0.007, 0.004, 0.002, 0.001],
         albedo: true
@@ -186,13 +186,13 @@
         'DOI: 10.1086/111414', 'https://ui.adsabs.harvard.edu/abs/1973AJ.....78..267L/abstract'
     ],
     '(E I) Moon: Near side|Lane1973': {
-        tags: ['Solar system', 'planet geophysical', 'moon'],
+        tags: ['Solar System', 'planetary body', 'moon'],
         nm: [359.0, 392.6, 415.5, 457.3, 501.2, 626.4, 729.7, 859.5, 1063.5],
         br_geometric: [0.072, 0.085, 0.088, 0.098, 0.106, 0.162, 0.179, 0.179, 0.202], // excludes opposition effect
         br_spherical: [0.039, 0.049, 0.048, 0.056, 0.062, 0.098, 0.113, 0.118, 0.136],
     },
     '(E I) Moon: Near side|Crow2011, Lane1973': { // phase angle 97.6°
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon'],
+        tags: ['featured', 'Solar System', 'planetary body', 'moon'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [1894.24, 2387.17, 2832.17, 3269.35, 4091.49, 4787.91, 5506.36],
@@ -200,7 +200,7 @@
         spherical_albedo: ['Generic_Bessell.V', 0.069],
     },
     '(E I) Moon: Far side|Crow2011': { // phase angle 75.1°
-        tags: ['Solar system', 'planet geophysical', 'moon'],
+        tags: ['Solar System', 'planetary body', 'moon'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [13.83, 18.06, 22.54, 26.68, 30.74, 34.86, 34.14],
@@ -211,21 +211,21 @@
         'https://ui.adsabs.harvard.edu/abs/2018AJ....155..213W/abstract'
     ],
     "(E I) Moon: Chang'e-3 Landing Site|Wu2018": {
-        tags: ['Solar system', 'planet geophysical', 'moon'],
+        tags: ['Solar System', 'planetary body', 'moon'],
         file: 'spectra/files/Moon_CE-3_LS_Wu2018.txt',
         albedo: true, // angle of incidence 54°, angle of emergence 44°, phase angle 95°; See Section 3.2
     },
 
     // Martian system
     'Mars|Mallama2017a': {
-        tags: ['Solar system', 'planet geophysical', 'planet', 'synthetic spectrum'],
+        tags: ['Solar System', 'planetary body/planet', 'synthetic spectrum'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
         br_geometric: [0.060, 0.088, 0.170, 0.288, 0.330,
                        0.250, 0.285],
     },
     'Mars|Crow2011, Mallama2017a': { // phase angle 37.0°
-        tags: ['Solar system', 'planet geophysical', 'planet'],
+        tags: ['Solar System', 'planetary body/planet'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31],
@@ -237,22 +237,22 @@
         'https://ui.adsabs.harvard.edu/abs/1979JGR....84.8415S/abstract'
     ],
     'Mars: Bright areas|Singer1979': { // the average of a number of typical bright region spectra
-        tags: ['Solar system', 'planet geophysical', 'planet'],
+        tags: ['Solar System', 'planetary body/planet'],
         file: 'spectra/files/Singer1979/Mars_bright.txtU', // figure 3
         geometric_albedo: [800, 0.40],
     },
     'Mars: Dark areas|Singer1979': { // telescopic dark region Iapygia
-        tags: ['Solar system', 'planet geophysical', 'planet'],
+        tags: ['Solar System', 'planetary body/planet'],
         file: 'spectra/files/Singer1979/Mars_dark.txtU', // figure 3
         geometric_albedo: [800, 0.21],
     },
     'Mars|Madden2018': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet'],
+        tags: ['featured', 'Solar System', 'planetary body/planet'],
         file: 'spectra/files/Madden2018/Mars_McCord1971_Albedo.txtU',
         geometric_albedo: true,
     },
     'Mars: Synthetic spectrum|VPL': { // Tyler Robinson, "Present-day Mars generated using SMART"
-        tags: ['Solar system', 'planet geophysical', 'planet'],
+        tags: ['Solar System', 'planetary body/planet'],
         file: 'spectra/files/VPL/mars_flx_refl.txtU',
         geometric_albedo: true,
     },
@@ -261,7 +261,7 @@
         'DOI: 10.1088/0004-637X/777/2/127', 'https://iopscience.iop.org/article/10.1088/0004-637X/777/2/127'
     ],
     '(M I) Phobos|Pajola2013': {
-        tags: ['featured', 'Solar system', 'moon'],
+        tags: ['featured', 'Solar System', 'moon'],
         nm: [
             245.5, 258.0, 263.5, 295.0, 308.5, 355.0, 360.0, 374.5, 387.0, 480.0, 535.0,
             571.0, 589.5, 611.5, 650.5, 700.5, 742.5, 804.5, 882.5, 932.0, 992.0
@@ -281,7 +281,7 @@
         'https://www.nature.com/articles/283277a0'
     ],
     '(M II) Deimos|Fraeman2013, Pang1980': {
-        tags: ['featured', 'Solar system', 'moon'],
+        tags: ['featured', 'Solar System', 'moon'],
         nm: [250, 300, 350, 400, 450, 500, 550, 600, 700, 750, 800],
         br: [0.04, 0.05, 0.051, 0.05, 0.049, 0.053, 0.055, 0.058, 0.062, 0.067, 0.069],
         geometric_albedo: ['Generic_Bessell.V', 0.068], // https://ssd.jpl.nasa.gov/?sat_phys_par
@@ -289,13 +289,13 @@
 
     // Jovian system
     'Jupiter|Karkoschka1994, Dyudina2016': { // phase angle 9.8°
-        tags: ['Solar system', 'planet geophysical', 'planet', 'Jovian system'],
+        tags: ['Solar System/Jovian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Jupiter1993.txt',
         geometric_albedo: true,
         spherical_albedo: ['Cassini_ISS_NAC.CB3', 0.57], // Table 4
     },
     'Jupiter|Karkoschka1998, Dyudina2016': { // phase angle 6.8°
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Jovian system'],
+        tags: ['featured', 'Solar System/Jovian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Jupiter1995.txt',
         geometric_albedo: true,
         spherical_albedo: ['Cassini_ISS_NAC.CB3', 0.57], // Table 4
@@ -309,7 +309,7 @@
         'DOI: 10.1006/icar.2000.6474', 'https://www.sciencedirect.com/science/article/pii/S0019103500964741', 'https://ui.adsabs.harvard.edu/abs/2000Icar..147..353S/abstract'
     ],
     '(J XVI) Metis: Trailing side|Thomas1998, Simonelli2000': {
-        tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
+        tags: ['Solar System/Jovian system', 'moon/regular'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.38, 1, 0.863, 0.85], // traced from Fig. 6
@@ -318,7 +318,7 @@
         spherical_albedo: ['Galileo_SSI.Clear', [0.027, 0.002]], // Table III, log-scaled
     },
     '(J V) Amalthea: Leading side|Thomas1998, Simonelli2000': {
-        tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
+        tags: ['Solar System/Jovian system', 'moon/regular'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '7560A'],
         br: [0.54, 1, 1.14], // traced from Fig. 6
@@ -327,7 +327,7 @@
         spherical_albedo: ['Galileo_SSI.Clear', [0.036, 0.004]], // Table III, log-scaled
     },
     '(J V) Amalthea: Trailing side|Thomas1998, Simonelli2000': {
-        tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
+        tags: ['Solar System/Jovian system', 'moon/regular'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.47, 1, 1.225, 1], // traced from Fig. 6
@@ -336,7 +336,7 @@
         spherical_albedo: ['Galileo_SSI.Clear', [0.029, 0.003]], // Table III, log-scaled
     },
     '(J XIV) Thebe: Leading side|Thomas1998, Simonelli2000': {
-        tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
+        tags: ['Solar System/Jovian system', 'moon/regular'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A'],
         br: [0.7125, 1, 1.137], // traced from Fig. 6
@@ -345,7 +345,7 @@
         spherical_albedo: ['Galileo_SSI.Clear', [0.022, 0.002]], // Table III, log-scaled
     },
     '(J XIV) Thebe: Trailing side|Thomas1998, Simonelli2000': {
-        tags: ['Solar system', 'moon', 'Jovian system', 'regular'],
+        tags: ['Solar System/Jovian system', 'moon/regular'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.6, 1, 1.137, 1.07], // traced from Fig. 6
@@ -359,11 +359,11 @@
         'https://ui.adsabs.harvard.edu/abs/1980Icar...41..323C/abstract'
     ],
     '(J I) Io: Trailing hemisphere|Clark1980a': {
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
+        tags: ['Solar System/Jovian system', 'planetary body', 'moon/regular'],
         file: 'spectra/files/Clark1980/Io.txtU', // figure 10
     },
     '(J I) Io|Madden2018': {
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
+        tags: ['Solar System/Jovian system', 'planetary body', 'moon/regular'],
         file: 'spectra/files/Madden2018/Io_Fanale1974_Albedo.txtU',
         geometric_albedo: true,
     },
@@ -376,7 +376,7 @@
         'DOI: 10.1006/icar.1998.5940', 'https://www.sciencedirect.com/science/article/pii/S0019103598959401'
     ],
     '(J I) Io|Spencer1995, Domingue1998': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular', 'traced spectrum'],
+        tags: ['featured', 'Solar System/Jovian system', 'planetary body', 'moon/regular', 'traced spectrum'],
         nm_range: {start: 320, stop: 780, step: 20},
         br_geometric: [
             0.11, 0.12, 0.14, 0.18, 0.26, 0.36, 0.47, 0.56, 0.64, 0.71, 0.73, 0.74,
@@ -385,45 +385,45 @@
         phase_integral: 0.59, // for 550 nm, and 0.61 for 470 nm; all for the leading hemisphere
     },
     '(J II) Europa: Trailing hemisphere|Clark1980a, Madden2018': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
+        tags: ['featured', 'Solar System/Jovian system', 'planetary body', 'moon/regular'],
         file: 'spectra/files/Clark1980/Europa.txtU', // figure 1
         geometric_albedo: ['Generic_Bessell.V', 0.611],
     },
     '(J II) Europa: Trailing hemisphere|Madden2018': {
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
+        tags: ['Solar System/Jovian system', 'planetary body', 'moon/regular'],
         file: 'spectra/files/Madden2018/Europa_Spencer1999trailing_Albedo.txtU',
         geometric_albedo: true,
     },
     '(J III) Ganymede: Leading hemisphere|Clark1980a, Madden2018': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
+        tags: ['featured', 'Solar System/Jovian system', 'planetary body', 'moon/regular'],
         file: 'spectra/files/Clark1980/Ganymede.txtU', // figure 13
         geometric_albedo: ['Generic_Bessell.V', 0.464],
     },
     '(J III) Ganymede: Leading hemisphere|Madden2018': {
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
+        tags: ['Solar System/Jovian system', 'planetary body', 'moon/regular'],
         file: 'spectra/files/Madden2018/Ganymede_Spencer1999leading_Albedo.txtU',
         geometric_albedo: true,
     },
     '(J IV) Callisto: Leading hemisphere|Clark1980a, Madden2018': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
+        tags: ['featured', 'Solar System/Jovian system', 'planetary body', 'moon/regular'],
         file: 'spectra/files/Clark1980/Callisto.txtU', // figure 14
         geometric_albedo: ['Generic_Bessell.V', 0.1688978],
     },
     '(J IV) Callisto: Leading hemisphere|Madden2018': {
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Jovian system', 'regular'],
+        tags: ['Solar System/Jovian system', 'planetary body', 'moon/regular'],
         file: 'spectra/files/Madden2018/Callisto_Spencer1999leading_Albedo.txtU',
         geometric_albedo: true
     },
 
     // Saturnian system
     'Saturn|Karkoschka1994, Dyudina2016': { // phase angle 2.7°
-        tags: ['Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
+        tags: ['Solar System/Saturnian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Saturn1993.txt',
         geometric_albedo: true,
         phase_integral: [1.4, 0.1], // Section 4
     },
     'Saturn|Karkoschka1998, Dyudina2016': { // phase angle 5.7°, without rings
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Saturnian system'],
+        tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Saturn1995.txt',
         geometric_albedo: true,
         phase_integral: [1.4, 0.1], // Section 4
@@ -433,7 +433,7 @@
         'DOI: 10.1016/0019-1035(80)90116-5', 'https://www.sciencedirect.com/science/article/abs/pii/0019103580901165'
     ],
     'Rings of Saturn|Clark1980b': {
-        tags: ['featured', 'Solar system', 'ring', 'Saturnian system'],
+        tags: ['featured', 'Solar System/Saturnian system', 'ring'],
         file: 'spectra/files/Clark1980/Saturn_rings.txtU', // figure 6
         albedo: ['Generic_Bessell.V', 0.5]
     },
@@ -447,19 +447,19 @@
         'DOI: 10.3847/PSJ/ac867e', 'https://iopscience.iop.org/article/10.3847/PSJ/ac867e', 'https://ui.adsabs.harvard.edu/abs/2022PSJ.....3..200B/abstract'
     ],
     '(S I) Mimas|Filacchione2022, Buratti2022': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        tags: ['featured', 'Solar System/Saturnian system', 'planetary body', 'moon/regular'],
         file: 'spectra/files/Filacchione2022/Mimas.txt', // equigonal albedo
         geometric_albedo: ['Generic_Bessell.V', [0.81, 0.01]],
         phase_integral: [0.71, 0.01],
     },
     '(S II) Enceladus|Madden2018, Buratti2022': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        tags: ['featured', 'Solar System/Saturnian system', 'planetary body', 'moon/regular'],
         file: 'spectra/files/Madden2018/Enceladus_VIMS_Albedo.txtU',
         geometric_albedo: ['Generic_Bessell.V', [1.24, 0.01]],
         phase_integral: [0.79, 0.01],
     },
     '(S II) Enceladus|Filacchione2022, Buratti2022': {
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        tags: ['Solar System/Saturnian system', 'planetary body', 'moon/regular'],
         file: 'spectra/files/Filacchione2022/Enceladus.txt', // equigonal albedo
         geometric_albedo: ['Generic_Bessell.V', [1.24, 0.01]],
         phase_integral: [0.79, 0.01],
@@ -470,7 +470,7 @@
         'https://ui.adsabs.harvard.edu/abs/2018GeoRL..45.6400F/abstract'
     ],
     '(S III) Tethys|Filacchione2018, Buratti2022': {
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        tags: ['Solar System/Saturnian system', 'planetary body', 'moon/regular'],
         nm: [350, 440, 550, 700, 950, 1046, 1540, 1822, 2050, 2200],
         br: [0.75042, 0.77108, 0.79707, 0.76842, 0.74823, 0.74563, 0.45171, 0.70383, 0.35282, 0.68231], // equigonal albedo
         sd: [0.00106, 0.00100, 0.00111, 0.00110, 0.00102, 0.00174, 0.00090, 0.00160, 0.00059, 0.00127],
@@ -478,7 +478,7 @@
         phase_integral: [0.79, 0.02],
     },
     '(S III) Tethys|Filacchione2022, Buratti2022': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        tags: ['featured', 'Solar System/Saturnian system', 'planetary body', 'moon/regular'],
         file: 'spectra/files/Filacchione2022/Tethys.txt', // equigonal albedo
         geometric_albedo: ['Generic_Bessell.V', [0.93, 0.02]],
         phase_integral: [0.79, 0.02],
@@ -489,7 +489,7 @@
         'https://ui.adsabs.harvard.edu/abs/2018GeoRL..45.2184F/abstract'
     ],
     '(S IV) Dione|Filacchione2017, Buratti2022': {
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        tags: ['Solar System/Saturnian system', 'planetary body', 'moon/regular'],
         nm: [350, 440, 550, 700, 950, 1046, 1540, 1822, 2050, 2200],
         br: [0.57582, 0.61407, 0.61977, 0.58411, 0.58268, 0.55834, 0.40562, 0.55832, 0.24751, 0.51508], // equigonal albedo
         sd: [0.00034, 0.00040, 0.00047, 0.00051, 0.00046, 0.00071, 0.00044, 0.00077, 0.00023, 0.00067],
@@ -497,7 +497,7 @@
         phase_integral: [0.80, 0.02],
     },
     '(S IV) Dione|Filacchione2022, Buratti2022': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        tags: ['featured', 'Solar System/Saturnian system', 'planetary body', 'moon/regular'],
         file: 'spectra/files/Filacchione2022/Dione.txt', // equigonal albedo
         geometric_albedo: ['Generic_Bessell.V', [0.75, 0.02]],
         phase_integral: [0.80, 0.02],
@@ -508,13 +508,13 @@
         'https://ui.adsabs.harvard.edu/abs/2020MNRAS.499L..62F/abstract'
     ],
     '(S V) Rhea|Filacchione2020, Buratti2022': {
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        tags: ['Solar System/Saturnian system', 'planetary body', 'moon/regular'],
         file: 'spectra/files/Rhea_Filacchione2020.txtU', // equigonal albedo
         geometric_albedo: ['Generic_Bessell.V', [0.89, 0.01]],
         phase_integral: [0.71, 0.01],
     },
     '(S V) Rhea|Filacchione2022, Buratti2022': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        tags: ['featured', 'Solar System/Saturnian system', 'planetary body', 'moon/regular'],
         file: 'spectra/files/Filacchione2022/Rhea.txt', // equigonal albedo
         geometric_albedo: ['Generic_Bessell.V', [0.89, 0.01]],
         phase_integral: [0.71, 0.01],
@@ -525,18 +525,18 @@
         'https://ui.adsabs.harvard.edu/abs/1984Icar...58..265C/abstract'
     ],
     '(S V) Rhea: Leading hemisphere|Clark1984, Buratti2022': {
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        tags: ['Solar System/Saturnian system', 'planetary body', 'moon/regular'],
         file: 'spectra/files/Rhea_Clark1984.txtU', // figure 4
         geometric_albedo: ['Generic_Bessell.V', [0.89, 0.01]],
         phase_integral: [0.71, 0.01],
     },
     '(S VI) Titan|Karkoschka1994': { // phase angle 2.7°
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        tags: ['Solar System/Saturnian system', 'planetary body', 'moon/regular'],
         file: 'spectra/files/Karkoschka/Titan1993.txt',
         geometric_albedo: true
     },
     '(S VI) Titan|Karkoschka1998': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        tags: ['featured', 'Solar System/Saturnian system', 'planetary body', 'moon/regular'],
         file: 'spectra/files/Karkoschka/Titan1995.txt',
         geometric_albedo: true
     },
@@ -545,7 +545,7 @@
         'DOI: 10.1016/j.pss.2011.10.014', 'https://www.sciencedirect.com/science/article/pii/S0032063311003254'
     ],
     '(S VI) Titan: Surface, phase angle 0°|Karkoschka2012': {
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        tags: ['Solar System/Saturnian system', 'planetary body', 'moon/regular'],
         nm_range: {start: 300, stop: 800, step: 10},
         br_geometric: [0.025, 0.035, 0.046, 0.059, 0.073, 0.089, 0.105, 0.122, 0.140, 0.158, 0.176, 0.194, 0.211, 0.229, 0.245, 0.261, 0.277, 0.292, 0.306, 0.319, 
             0.331, 0.343, 0.354, 0.364, 0.373, 0.382, 0.390, 0.398, 0.404, 0.411, 0.416, 0.421, 0.426, 0.430, 0.434, 0.437, 0.440, 0.442, 0.444, 0.446, 
@@ -556,7 +556,7 @@
         'DOI: 10.1016/j.icarus.2015.06.010', 'https://www.sciencedirect.com/science/article/pii/S0019103515002547'
     ],
     '(S VI) Titan: Surface, phase angle 45°|Karkoschka2016': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular'],
+        tags: ['featured', 'Solar System/Saturnian system', 'planetary body', 'moon/regular'],
         nm: [520, 563, 595, 642, 685, 754, 823, 830, 935, 940, 1070, 1280, 1550, 1590],
         br: [0.093, 0.107, 0.116, 0.130, 0.139, 0.147, 0.151, 0.151, 0.151, 0.151, 0.145, 0.124, 0.070, 0.071],
         albedo: true
@@ -566,7 +566,7 @@
         'DOI: 10.1086/345349', 'https://iopscience.iop.org/article/10.1086/345349'
     ],
     '(S VII) Iapetus:Leading hemisphere|Gudipati2003': {
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Saturnian system', 'regular', 'traced spectrum'],
+        tags: ['Solar System/Saturnian system', 'planetary body', 'moon/regular', 'traced spectrum'],
         nm: [330, 350, 380, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850],
         br: [0.047, 0.051, 0.058, 0.063, 0.067, 0.071, 0.080, 0.087, 0.090, 0.093, 0.099, 0.102, 0.102],
         albedo: true
@@ -576,7 +576,7 @@
         'DOI: 10.1016/j.icarus.2010.12.024', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103510004926'
     ],
     '(S IX) Phoebe|Miller2011': { // variant with g=−0.35 as the most likely by Voyager data Simonelli et al. (1999)
-        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        tags: ['Solar System/Saturnian system', 'moon/irregular'],
         photometric_system: 'Generic_Bessell',
         filters: ['B', 'V', 'R', 'I'],
         br_geometric: [0.0855, 0.0857, 0.0843, 0.0839],
@@ -585,7 +585,7 @@
         sd_spherical: [0.0079, 0.0083, 0.0079, 0.0050]
     },
     '(S IX) Phoebe|Graykowski2018, Miller2011': {
-        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        tags: ['Solar System/Saturnian system', 'moon/irregular'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.57, 'V-R': 0.34},
         calibration_system: 'Vega',
@@ -594,7 +594,7 @@
         spherical_albedo: ['Generic_Bessell.V', [0.0267, 0.0083]]
     },
     '(S IX) Phoebe|Grav2003, Miller2011': {
-        tags: ['featured', 'Solar system', 'moon', 'Saturnian system', 'irregular'],
+        tags: ['featured', 'Solar System/Saturnian system', 'moon/irregular'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.63, 'V-R': 0.35, 'V-I': 0.64},
         calibration_system: 'Vega',
@@ -603,7 +603,7 @@
         spherical_albedo: ['Generic_Bessell.V', [0.0267, 0.0083]]
     },
     '(S IX) Phoebe|Pena2022, Miller2011': {
-        tags: ['Solar system', 'moon', 'Saturnian system', 'irregular'],
+        tags: ['Solar System/Saturnian system', 'moon/irregular'],
         photometric_system: 'CTIO_DECam',
         color_indices: {'g-r': 0.27, 'r-i': 0.06},
         calibration_system: 'AB',
@@ -614,12 +614,12 @@
 
     // Uranian system
     'Uranus|Karkoschka1994': { // phase angle 0.6°
-        tags: ['Solar system', 'planet geophysical', 'planet', 'Uranian system'],
+        tags: ['Solar System/Uranian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Uranus1993.txt',
         geometric_albedo: true
     },
     'Uranus|Karkoschka1998': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Uranian system'],
+        tags: ['featured', 'Solar System/Uranian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Uranus1995.txt',
         geometric_albedo: true
     },
@@ -628,19 +628,19 @@
         'DOI: 10.1006/icar.2001.6596', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103501965960'
     ],
     'Rings of Uranus|Karkoschka2001': {
-        tags: ['featured', 'Solar system', 'ring', 'Uranian system'],
+        tags: ['featured', 'Solar System/Uranian system', 'ring'],
         slope: {start: 320, stop: 2050, power: 0.09},
         geometric_albedo: [550, 0.050],
         spherical_albedo: [550, [0.018, 0.030]]
     },
     'Portia group|Karkoschka2001': {
-        tags: ['featured', 'Solar system', 'moon', 'Uranian system', 'regular', 'class'],
+        tags: ['featured', 'Solar System/Uranian system', 'moon/regular', 'class'],
         slope: {start: 570, stop: 1500, power: 0.09},
         geometric_albedo: [550, 0.080],
         spherical_albedo: [550, [0.026, 0.050]]
     },
     '(U XV) Puck|Karkoschka2001': {
-        tags: ['featured', 'Solar system', 'moon', 'Uranian system', 'regular'],
+        tags: ['featured', 'Solar System/Uranian system', 'moon/regular'],
         slope: {start: 340, stop: 1500, power: 0.04},
         geometric_albedo: [550, 0.104],
         spherical_albedo: [550, [0.035, 0.060]]
@@ -650,13 +650,13 @@
         'DOI: 10.1134/S0038094607030021', 'https://link.springer.com/article/10.1134%2FS0038094607030021'
     ],
     '(U V) Miranda|Karkoschka2001': {
-        tags: ['Solar system', 'moon', 'Uranian system', 'regular'],
+        tags: ['Solar System/Uranian system', 'planetary body', 'moon/regular'],
         slope: {start: 270, stop: 1000, power: -0.05},
         geometric_albedo: [550, 0.464],
         spherical_albedo: [550, [0.200, 0.30]]
     },
     '(U V) Miranda|Avramchuk2007, Karkoschka2001': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
+        tags: ['featured', 'Solar System/Uranian system', 'planetary body', 'moon/regular'],
         nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         br: [0.51, 0.49, 0.48, 0.47, 0.46, 0.45, 0.41, 0.40],
         sd: [0.02, 0.01, 0.02, 0.02, 0.02, 0.01, 0.01, 0.01],
@@ -664,13 +664,13 @@
         spherical_albedo: ['Generic_Bessell.V', [0.200, 0.030]]
     },
     '(U I) Ariel|Karkoschka2001': {
-        tags: ['Solar system', 'moon', 'Uranian system', 'regular'],
+        tags: ['Solar System/Uranian system', 'planetary body', 'moon/regular'],
         slope: {start: 270, stop: 1000, power: 0.07},
         geometric_albedo: [550, 0.533],
         spherical_albedo: [550, [0.230, 0.025]]
     },
     '(U I) Ariel|Avramchuk2007, Karkoschka2001': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
+        tags: ['featured', 'Solar System/Uranian system', 'planetary body', 'moon/regular'],
         nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         br: [0.50, 0.51, 0.51, 0.51, 0.51, 0.52, 0.53, 0.54],
         sd: [0.03, 0.02, 0.02, 0.01, 0.02, 0.01, 0.01, 0.01],
@@ -678,13 +678,13 @@
         spherical_albedo: ['Generic_Bessell.V', [0.230, 0.025]]
     },
     '(U II) Umbriel|Karkoschka2001': {
-        tags: ['Solar system', 'moon', 'Uranian system', 'regular'],
+        tags: ['Solar System/Uranian system', 'planetary body', 'moon/regular'],
         slope: {start: 270, stop: 1000, power: 0.02},
         geometric_albedo: [550, 0.258],
         spherical_albedo: [550, [0.100, 0.010]]
     },
     '(U II) Umbriel|Avramchuk2007, Karkoschka2001': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
+        tags: ['featured', 'Solar System/Uranian system', 'planetary body', 'moon/regular'],
         nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         br: [0.25, 0.25, 0.25, 0.25, 0.26, 0.26, 0.26, 0.26],
         sd: [0.01, 0.02, 0.02, 0.01, 0.01, 0.01, 0.01, 0.01],
@@ -692,13 +692,13 @@
         spherical_albedo: ['Generic_Bessell.V', [0.100, 0.010]]
     },
     '(U III) Titania|Karkoschka2001': {
-        tags: ['Solar system', 'moon', 'Uranian system', 'regular'],
+        tags: ['Solar System/Uranian system', 'planetary body', 'moon/regular'],
         slope: {start: 270, stop: 1000, power: 0.18},
         geometric_albedo: [550, 0.350],
         spherical_albedo: [550, [0.170, 0.015]]
     },
     '(U III) Titania|Avramchuk2007, Karkoschka2001': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
+        tags: ['featured', 'Solar System/Uranian system', 'planetary body', 'moon/regular'],
         nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         br: [0.30, 0.32, 0.33, 0.34, 0.36, 0.37, 0.41, 0.43],
         sd: [0.02, 0.02, 0.02, 0.03, 0.02, 0.01, 0.01, 0.01],
@@ -706,13 +706,13 @@
         spherical_albedo: ['Generic_Bessell.V', [0.170, 0.015]]
     },
     '(U IV) Oberon|Karkoschka2001': {
-        tags: ['Solar system', 'moon', 'Uranian system', 'regular'],
+        tags: ['Solar System/Uranian system', 'planetary body', 'moon/regular'],
         slope: {start: 270, stop: 1000, power: 0.15},
         geometric_albedo: [550, 0.309],
         spherical_albedo: [550, [0.140, 0.015]]
     },
     '(U IV) Oberon|Avramchuk2007, Karkoschka2001': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
+        tags: ['featured', 'Solar System/Uranian system', 'planetary body', 'moon/regular'],
         nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         br: [0.27, 0.29, 0.30, 0.31, 0.33, 0.35, 0.40, 0.43],
         sd: [0.04, 0.01, 0.02, 0.02, 0.01, 0.01, 0.02, 0.02],
@@ -724,7 +724,7 @@
         'DOI: 10.1016/0019-1035(91)90065-2', 'https://www.sciencedirect.com/science/article/pii/0019103591900652'
     ],
     '(U IV) Oberon|Helfenstein1991': { // average cratered
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
+        tags: ['Solar System/Uranian system', 'planetary body', 'moon/regular'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Clear', 'Green'],
         br: [0.30, 0.27, 0.33],
@@ -732,7 +732,7 @@
         geometric_albedo: true, // average normal albedo
     },
     '(U IV) Oberon: Bright areas|Helfenstein1991': { // crater rays
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
+        tags: ['Solar System/Uranian system', 'planetary body', 'moon/regular'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Clear', 'Green'],
         br: [0.37, 0.34, 0.39],
@@ -740,7 +740,7 @@
         geometric_albedo: true, // average normal albedo
     },
     '(U IV) Oberon: Dark areas|Helfenstein1991': {
-        tags: ['Solar system', 'planet geophysical', 'moon', 'Uranian system', 'regular'],
+        tags: ['Solar System/Uranian system', 'planetary body', 'moon/regular'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Clear', 'Green'],
         br: [0.24, 0.21, 0.28],
@@ -750,12 +750,12 @@
 
     // Neptunian system
     'Neptune|Karkoschka1994': { // phase angle 0.4°
-        tags: ['Solar system', 'planet geophysical', 'planet', 'Neptunian system'],
+        tags: ['Solar System/Neptunian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Neptune1995.txt',
         geometric_albedo: true
     },
     'Neptune|Karkoschka1998': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'planet', 'Neptunian system'],
+        tags: ['featured', 'Solar System/Neptunian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Neptune1995.txt',
         geometric_albedo: true
     },
@@ -764,7 +764,7 @@
         'DOI: 10.1006/icar.1999.6224', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103599962243'
     ],
     '(N I) Triton|Tryka1999, Verbiscer2022': {
-        tags: ['featured', 'Solar system', 'planet geophysical', 'moon', 'Neptunian system', 'irregular'],
+        tags: ['featured', 'Solar System/Neptunian system', 'planetary body', 'moon/irregular'],
         nm_range: {start: 300, stop: 900, step: 100},
         br_geometric: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
         phase_integral: [0.94, 0.04]
@@ -774,7 +774,7 @@
         'DOI: 10.1093/mnras/stw081', 'https://academic.oup.com/mnras/article/457/3/2908/2588900', 'https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.2908K/abstract'
     ],
     '(N II) Nereid|Graykowski2018, Kiss2016': {
-        tags: ['Solar system', 'moon', 'Neptunian system', 'irregular'],
+        tags: ['Solar System/Neptunian system', 'moon/irregular'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.67, 'V-R': 0.38},
         calibration_system: 'Vega',
@@ -790,7 +790,7 @@
         'DOI: 10.1029/91JA01735', 'https://agupubs.onlinelibrary.wiley.com/doi/10.1029/91JA01735', 'https://ui.adsabs.harvard.edu/abs/1991JGR....9619253T/abstract'
     ],
     '(N II) Nereid|Schaefer2000, Kiss2016, Thomas1991': {
-        tags: ['featured', 'Solar system', 'moon', 'Neptunian system', 'irregular'],
+        tags: ['featured', 'Solar System/Neptunian system', 'moon/irregular'],
         photometric_system: 'Generic_Bessell',
         filters: ['U', 'B', 'V', 'R', 'I'],
         br: [0.90, 0.93, 1, 1.13, 0.99],
