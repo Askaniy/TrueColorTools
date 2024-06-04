@@ -231,18 +231,19 @@ def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int|flo
 
 # Front-end
 
+def is_tag_in_obj(tag: str, obj_tags: Sequence):
+    """ Search for a tag in a list that handles subcategories """
+    tag = set(tag.split('/'))
+    for obj_tag in obj_tags:
+        if tag.issubset(obj_tag.split('/')):
+            return True
+    return False
+
 def obj_dict(database: dict, tag: str, lang: str):
     """ Maps front-end spectrum names allowed by the tag to names in the database """
     names = {}
     for raw_name, obj_data in database.items():
-        if tag == '_all_':
-            flag = True
-        else:
-            try:
-                flag = tag in obj_data['tags']
-            except KeyError:
-                flag = False
-        if flag:
+        if tag == 'ALL' or is_tag_in_obj(tag, obj_data['tags']):
             if '|' in raw_name:
                 new_name, source = raw_name.split('|', 1)
             else:
@@ -277,11 +278,21 @@ def translate(target: str, translations: dict, lang: str):
     return target
 
 def tag_list(database: dict):
-    """ Generates a list of tags found in the spectra database """
-    tag_set = set(['_all_'])
+    """
+    Generates a list of tags found in the spectra database.
+    Tags can be written as `A/B/C`, which reads as {A, A/B, A/B/C}.
+    """
+    tag_set = set(['ALL'])
     for obj_data in database.values():
         if 'tags' in obj_data:
-            tag_set.update(obj_data['tags'])
+            for tag in obj_data['tags']:
+                tag_set.add(tag)
+                if '/' in tag:
+                    supertags = []
+                    while '/' in tag:
+                        supertag, tag = tag.split('/', 1)
+                        supertags.append(supertag)
+                        tag_set.add('/'.join(supertags))
     return sorted(tag_set)
 
 def notes_list(names: Sequence):

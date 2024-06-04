@@ -220,7 +220,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
         shift = object_size/2 if len(splitted) == 1 else object_size
         draw.multiline_text((center_x-r_left, center_y-shift), '\n'.join(splitted), fill=text_color, font=object_font, spacing=1)
     
-    file_name = f'TCT_{tag}_gamma{("OFF", "ON")[gamma]}_srgb{("OFF", "ON")[srgb]}_albedo{("OFF", "GEOM", "SPHER")[brMode]}_{lang}.{extension}'
+    file_name = f'TCT_{tag.replace("/", "-")}_gamma{("OFF", "ON")[gamma]}_srgb{("OFF", "ON")[srgb]}_albedo{("OFF", "GEOM", "SPHER")[brMode]}_{lang}.{extension}'
     img.save(f'{folder}/{file_name}')
     print(f'Color table saved as {file_name}\n')
 

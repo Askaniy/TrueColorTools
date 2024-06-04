@@ -131,7 +131,7 @@ def launch_window(lang: str):
 
             if (event in triggers or event == 'T1_list' or event == 'T1_filter') and values['T1_list'] != []:
                 T1_name = values['T1_list'][0]
-                T1_raw_name = aux.obj_dict(objectsDB, '_all_', lang)[T1_name]
+                T1_raw_name = aux.obj_dict(objectsDB, 'ALL', lang)[T1_name]
 
                 # Spectral data import and processing
                 T1_body = dp.database_parser(T1_name, objectsDB[T1_raw_name])

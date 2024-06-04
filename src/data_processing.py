@@ -383,9 +383,10 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
                 print(f'- Invalid spherical albedo value: {content["spherical_albedo"]}. Must be boolean or [filter/nm, [br, (sd)]].')
         elif 'bond_albedo' in content:
             spherical = spectrum.scaled_at(sun_filter, *parse_value_sd(content['bond_albedo']))
-    tags = []
+    tags = set()
     if 'tags' in content:
-        tags = content['tags']
+        for tag in content['tags']:
+            tags |= set(tag.split('/'))
     if geometric or spherical:
         phase_integral = phase_integral_sd = None
         if 'phase_integral' in content:
