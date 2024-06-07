@@ -45,6 +45,8 @@ def launch_window(lang: str):
         )
     )
 
+    T2_logger = gui.create_logger(window, 'T2_thread')
+
     # Setting default color preview circle
     T1_preview = window['T1_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
     T3_preview = window['T3_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
@@ -264,6 +266,7 @@ def launch_window(lang: str):
                 window.start_thread(
                     lambda: ip.image_parser(
                         image_mode=T2_mode,
+                        preview_flag=event=='T2_preview',
                         save_folder=values['T2_folder'],
                         pixels_limit=img_preview_area,
                         single_file=values['T2_path'],
@@ -277,11 +280,10 @@ def launch_window(lang: str):
                         makebright=values['T2_makebright'],
                         factor=float(values['T2_factor']),
                         enlarge=values['T2_enlarge'],
-                        log=gui.create_logger(window, 'T2_thread')
+                        log=T2_logger
                     ),
                     ('T2_thread', 'End of the image processing thread\n')
                 )
-                window['T2_folder'].update('') # preview mode is detected by this value
             
             # Getting messages from image processing thread
             elif event[0] == 'T2_thread':

@@ -100,7 +100,7 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
             [
                 sg.Input(enable_events=True, size=1, key='T2_path'+n, expand_x=True, visible=False),
                 # size=1 is VERY important! Now column depends on max length of filter file names
-                sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, key='T2_pathText'+n, visible=False),
+                sg.FileBrowse(button_text=tr.gui_browse[lang], size=browse_size, key='T2_pathText'+n, visible=False),
                 # or label of RGB image bands, depends on radio box
                 rgb_text
             ],
@@ -191,19 +191,22 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
 
     tab1 = [
         [
-            sg.Column(T1_col1, expand_x=True, expand_y=True), sg.VSeperator(),
+            sg.Column(T1_col1, expand_x=True, expand_y=True),
+            sg.VSeperator(),
             sg.Column(T1_col2, expand_x=True, expand_y=True)
         ]
     ]
     tab2 = [
         [
-            sg.Column(T2_col1, expand_x=True, expand_y=True), sg.VSeperator(),
+            sg.Column(T2_col1, expand_x=True, expand_y=True),
+            sg.VSeperator(),
             sg.Column(T2_col2, expand_x=True, expand_y=True)
         ]
     ]
     tab3 = [
         [
-            sg.Column(T3_col1, expand_x=True, expand_y=True), sg.VSeperator(),
+            sg.Column(T3_col1, expand_x=True, expand_y=True),
+            sg.VSeperator(),
             sg.Column(T3_col2, expand_x=True, expand_y=True)
         ]
     ]

@@ -55,7 +55,13 @@ z.br /= 339.12
 
 
 
-gamma_correction = np.vectorize(lambda p: p * 12.92 if p < 0.0031308 else 1.055 * p**(1.0/2.4) - 0.055)
+def gamma_correction(arr0: np.ndarray):
+    """ Applies gamma correction in CIE sRGB implementation to the array """
+    arr1 = np.copy(arr0)
+    mask = arr0 < 0.0031308
+    arr1[mask] *= 12.92
+    arr1[~mask] = 1.055 * np.power(arr1[~mask], 1./2.4) - 0.055
+    return arr1
 
 class Color:
     """ Class to work with color represented by three float values in [0, 1] range. """

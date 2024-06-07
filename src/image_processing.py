@@ -17,6 +17,7 @@ from src.data_processing import sun_norm
 
 def image_parser(
         image_mode: int,
+        preview_flag: bool = False,
         save_folder: str = '',
         pixels_limit: int = 256*128,
         single_file: str = None,
@@ -33,7 +34,6 @@ def image_parser(
         log: Callable = print
     ):
     """ Receives user input and performs processing in a parallel thread """
-    preview_flag = save_folder == ''
     log('Starting the image processing thread')
     start_time = monotonic()
     try:
@@ -94,8 +94,7 @@ def image_parser(
                 cube = cube.to_scope(aux.visible_range)
                 log('Color calculating')
                 img = cube2img(cube, gamma_correction, srgb, makebright, factor)
-        end_time = monotonic()
-        time = end_time-start_time
+        time = monotonic() - start_time
         pixels_num = img.width * img.height
         speed = pixels_num / time
         log(f'Processing took {time:.1f} seconds, average speed is {speed:.1f} px/sec')
