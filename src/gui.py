@@ -77,7 +77,7 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         [sg.Listbox(values=(), enable_events=True, key='T1_list', visible=False, expand_x=True, expand_y=True)]
     ]
     T1_col2 = [
-        [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T1_title2'), sg.Push()],
+        [sg.Push(), sg.Text(tr.gui_output[lang], font=title_font, key='T1_title2'), sg.Push()],
         [sg.Push(), sg.Graph(canvas_size=canvas_size, graph_bottom_left=(0, 0), graph_top_right=canvas_size, background_color=None, key='T1_graph'), sg.Push()],
         [sg.Push(), sg.T('', key='T1_estimated'), sg.Push()],
         [sg.Text(tr.gui_rgb[lang], key='T1_colorRGB'), sg.Input(size=1, key='T1_rgb', expand_x=True)],
@@ -150,7 +150,7 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         [sg.Checkbox(tr.gui_enlarge[lang], True, key='T2_enlarge')],
     ]
     T2_col2 = [
-        [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T2_title2'), sg.Push()],
+        [sg.Push(), sg.Text(tr.gui_output[lang], font=title_font, key='T2_title2'), sg.Push()],
         [sg.Canvas(key='T2_canvas')],
         [
             sg.Column(T2_col2_1, expand_x=True, expand_y=False), sg.VSeperator(),
@@ -186,7 +186,7 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         [sg.Text(tr.gui_explanation[lang], key='T3_explanation')]
     ]
     T3_col2 = [
-        [sg.Push(), sg.Text(tr.gui_results[lang], font=title_font, key='T3_title2'), sg.Push()],
+        [sg.Push(), sg.Text(tr.gui_output[lang], font=title_font, key='T3_title2'), sg.Push()],
         [sg.Push(), sg.Graph(canvas_size=canvas_size, graph_bottom_left=(0, 0), graph_top_right=canvas_size, background_color=None, key='T3_graph'), sg.Push()],
         [sg.T('')],
         [sg.Text(tr.gui_rgb[lang], key='T3_colorRGB'), sg.Input(size=1, key='T3_rgb', expand_x=True)],
@@ -237,7 +237,7 @@ def translate(window: sg.Window, T2_vis: int, lang: str):
     window['tab3'].update(title=tr.gui_tabs[lang][2])
     window['T1_title1'].update(tr.gui_database[lang])
     window['-settingsTitle-'].update(tr.gui_settings[lang])
-    window['T1_title2'].update(tr.gui_results[lang])
+    window['T1_title2'].update(tr.gui_output[lang])
     window['T1_database'].update(tr.gui_update[lang] if window['T1_database'].metadata else tr.gui_load[lang])
     window['T1_tagsN'].update(tr.gui_tags[lang])
     window['-gamma-'].update(text=tr.gui_gamma[lang])
@@ -259,7 +259,7 @@ def translate(window: sg.Window, T2_vis: int, lang: str):
     window['T1_export2text'].update(tr.gui_export2text[lang])
     window['T1_export2table'].update(tr.gui_export2table[lang])
     window['T2_title1'].update(tr.gui_input[lang])
-    window['T2_title2'].update(tr.gui_results[lang])
+    window['T2_title2'].update(tr.gui_output[lang])
     window['T2_step1'].update(tr.gui_step1[lang])
     window['-typeImage-'].update(text=tr.gui_datatype[lang][0])
     window['-typeImageRGB-'].update(text=tr.gui_datatype[lang][1])
@@ -284,7 +284,7 @@ def translate(window: sg.Window, T2_vis: int, lang: str):
     window['T2_preview'].update(tr.gui_preview[lang])
     window['T2_process'].update(tr.gui_process[lang])
     window['T3_title1'].update(tr.gui_input[lang])
-    window['T3_title2'].update(tr.gui_results[lang])
+    window['T3_title2'].update(tr.gui_output[lang])
     window['T3_temp'].update(tr.gui_temp[lang])
     window['T3_velocity'].update(tr.gui_velocity[lang])
     window['T3_vII'].update(tr.gui_vII[lang])

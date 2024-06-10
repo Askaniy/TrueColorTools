@@ -10,7 +10,7 @@ import src.strings as tr
 
 def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: bool, folder: str, extension: str, lang: str):
     """ Creates and saves a table of colored squares for each spectral data unit that has the specified tag """
-    objects = aux.obj_dict(objectsDB, tag, lang)
+    objects = aux.matched_names_dict(objectsDB, tag, lang)
     l = len(objects)
     notes = aux.notes_list(objects.keys())
     notes_flag = bool(notes)

@@ -42,6 +42,11 @@ gui_menu = {
     'ru': [['Файл', [gui_ref['ru'], gui_info['ru'], gui_exit['ru']]], ['Язык', lang_list['ru']]],
     'de': [['Datei', [gui_ref['de'], gui_info['de'], gui_exit['de']]], ['Sprache', lang_list['de']]],
 }
+gui_no_data_message = {
+    'en': 'You need to load the database to get this data.',
+    'ru': 'Вам нужно загрузить базу данных для получения этих данных.',
+    'de': 'Sie müssen die Datenbank laden, um diese Daten abzurufen.'
+}
 
 # Settings sidebar
 gui_settings = {
@@ -101,7 +106,7 @@ gui_tags = {
     'ru': 'Категория',
     'de': 'Kategorie'
 }
-gui_results = {
+gui_output = {
     'en': 'Output',
     'ru': 'Результат',
     'de': 'Ergebnisse'
