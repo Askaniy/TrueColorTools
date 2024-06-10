@@ -107,16 +107,19 @@ def launch_window(lang: str):
             window['T1_list'].update(values=tuple(aux.obj_dict(objectsDB, values['T1_tags'], lang).keys()))
         
         elif event == tr.gui_ref[lang]:
-            to_show = ''
-            for key, value in refsDB.items():
-                to_show += f'"{key}": {value[0]}\n'
-                for info in value[1:]:
-                    to_show += info + '\n'
-                to_show += '\n'
-            sg.popup_scrolled(to_show, title=event, size=(150, 25), non_blocking=True)
+            if len(refsDB) == 0:
+                to_show = 'You need to load the database to view the references.'
+            else:
+                to_show = ''
+                for key, value in refsDB.items():
+                    to_show += f'"{key}": {value[0]}\n'
+                    for info in value[1:]:
+                        to_show += info + '\n'
+                    to_show += '\n'
+            sg.popup_scrolled(to_show, title=event, size=(150, 25), icon=gui.icon, non_blocking=True)
         
         elif event == tr.gui_info[lang]:
-            sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event, non_blocking=True)
+            sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event, icon=gui.icon, non_blocking=True)
         
         elif event == 'T1_database': # global loading of spectra database, was needed for separate Table tab
             objectsDB, refsDB = di.import_DBs(['spectra', 'spectra_extras'])
@@ -212,7 +215,7 @@ def launch_window(lang: str):
                     if T1_estimated:
                         T1_export += f'; {tr.gui_estimated[lang]}'
 
-                sg.popup_scrolled(T1_export, title=tr.gui_results[lang], size=(120, 40), font=('Consolas', 10), non_blocking=True)
+                sg.popup_scrolled(T1_export, title=tr.gui_results[lang], size=(120, 40), font=('Consolas', 10), icon=gui.icon, non_blocking=True)
             
             elif event == 'T1_folder':
                 generate_table(objectsDB, values['T1_tags'], brMode, values['-srgb-'], values['-gamma-'], values['T1_folder'], 'png', lang)

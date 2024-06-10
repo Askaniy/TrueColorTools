@@ -23,6 +23,15 @@ sg.LOOK_AND_FEEL_TABLE['MaterialDark'] = {
         'BORDER': 0, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0
     }
 
+def generate_plot_layout(lang: str):
+    return [
+        [
+            sg.Text(tr.spectral_plot[lang], font=('arial', 16)), sg.Push(), sg.InputText(visible=False, enable_events=True, key='-path-'),
+            sg.FileSaveAs(tr.gui_save[lang], file_types=('PNG {png}', 'PDF {pdf}', 'SVG {svg}'), default_extension='.png')
+        ],
+        [sg.Canvas(key='-canvas-')]
+    ]
+
 def create_logger(window: sg.Window, key: str) -> Callable:
     """ Creates a function that sends messages to the window main thread """
     def logger(message: str, data=None):

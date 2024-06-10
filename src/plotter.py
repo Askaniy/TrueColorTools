@@ -64,13 +64,10 @@ def plot_spectra(objects: Sequence[Spectrum], gamma, srgb, albedo, lang: str):
     ax.legend()
     fig.tight_layout() # moving to subplots() causes UserWarning
     # creating and opening the window
-    title = tr.spectral_plot[lang]
-    layout = [
-        [sg.Text(title, font=('arial', 16)), sg.Push(), sg.InputText(visible=False, enable_events=True, key='-path-'),
-         sg.FileSaveAs(tr.gui_save[lang], file_types=('PNG {png}', 'PDF {pdf}', 'SVG {svg}'), default_extension='.png')],
-        [sg.Canvas(key='-canvas-')]
-    ]
-    window = sg.Window(title, layout, finalize=True, element_justification='center')
+    window = sg.Window(
+        tr.spectral_plot[lang], gui.generate_plot_layout(lang), icon=gui.icon,
+        finalize=True, element_justification='center'
+    )
     draw_figure(window['-canvas-'].TKCanvas, fig)
     while True:
         event, values = window.read()

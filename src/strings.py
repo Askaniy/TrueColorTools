@@ -334,19 +334,14 @@ gui_explanation = {
 
 # Plots
 spectral_plot = {
-    'en': 'Spectral plot',
-    'ru': 'Спектральная диаграмма',
-    'de': 'Spektraldiagramm'
+    'en': 'Spectral energy density plot',
+    'ru': 'График спектральной плотности энергии',
+    'de': 'Spektralenergiedichte'
 }
-#map_title_text = {
-#    'en': 'Spectrum and color of some pixels of the map',
-#    'ru': 'Спектр и цвет некоторых пикселей карты',
-#    'de': 'Spektren und Farben einiger Pixel der Karte'
-#}
 xaxis_text = {
-    'en': 'Wavelength [nm]',
-    'ru': 'Длина волны [нм]',
-    'de': 'Wellenlänge [nm]'
+    'en': 'Wavelength, nm',
+    'ru': 'Длина волны, нм',
+    'de': 'Wellenlänge, nm'
 }
 yaxis_text = {
     'en': 'Reflectivity',
