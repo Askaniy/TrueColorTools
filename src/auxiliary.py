@@ -239,7 +239,7 @@ def is_tag_in_obj(tag: str, obj_tags: Sequence):
             return True
     return False
 
-def matched_names_dict(database: dict, tag: str, lang: str):
+def obj_names_dict(database: dict, tag: str, lang: str):
     """ Matches the front-end names with the database names for the selected tag """
     names = {}
     for raw_name, obj_data in database.items():

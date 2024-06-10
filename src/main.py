@@ -54,7 +54,7 @@ def launch_window(lang: str):
     T3_preview = window0['T3_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
 
     # Setting plots templates
-    plot_data = [] # for tabs 1 and 3, both at once
+    plot_data = {} # for tabs 1 and 3, both at once
     background_plot = ((cp.r, cp.g, cp.b), (cp.x, cp.y, cp.z)) # for tab 2
     mean_spectrum = [] # for tab 2
     
@@ -68,18 +68,90 @@ def launch_window(lang: str):
         # Closing one of the windows
         if event == sg.WIN_CLOSED or event == tr.gui_exit[lang]:
             window.close() # for pop-up windows, they're suddenly processed here too
-            if window == window0:
+            if window is window0:
                 break # closing the main window = exit program
-            elif window == window1:
+            elif window is window1:
                 window1 = None # marking the plot window as closed
         
-        else:
+        # Events with the plot window
+        elif event.endswith(('plot', 'pin')):
+            if not window1:
+                window1 = sg.Window(
+                    tr.spectral_plot[lang], gui.generate_plot_layout(lang), icon=gui.icon,
+                    finalize=True, element_justification='center'
+                )
+            else:
+                pl.close_figure(T1_T3_fig)
+                T1_T3_fig_canvas_agg.get_tk_widget().forget()
+            try:
+                to_plot = plot_data | {T1_raw_name: T1_spectrum}
+            except UnboundLocalError:
+                to_plot = plot_data
+            T1_T3_fig = pl.plot_spectra(to_plot, values['-gamma-'], values['-srgb-'], brMode, lang)
+            T1_T3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, T1_T3_fig)
+        elif event == 'W1_path':
+            T1_T3_fig.savefig(values['W1_path'], dpi=133.4) # 1200x800
+        elif event == 'W1_theme':
+            pass
 
-            # ------------ Independent window events ------------
+        # Run-time translation
+        elif event in tr.lang_list[lang]:
+            for lng, lst in tr.langs.items(): # determine the language
+                if event in lst:
+                    lang = lng
+                    break
+            window0 = gui.translate_win0(window0, T2_vis, lang)
+            if window1:
+                window1 = gui.translate_win1(window1, lang)
+                pl.close_figure(T1_T3_fig)
+                T1_T3_fig_canvas_agg.get_tk_widget().forget()
+                try:
+                    to_plot = plot_data | {T1_raw_name: T1_spectrum}
+                except UnboundLocalError:
+                    to_plot = plot_data
+                T1_T3_fig = pl.plot_spectra(to_plot, values['-gamma-'], values['-srgb-'], brMode, lang)
+                T1_T3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, T1_T3_fig)
+            window['T1_list'].update(values=tuple(aux.obj_names_dict(objectsDB, values['T1_tags'], lang).keys()))
+        
+        # Only the main window events
+        if window is window0:
+
+            # ------------ Global window events ------------
+            
+            if event == tr.gui_ref[lang]:
+                if len(refsDB) == 0:
+                    sg.popup(tr.gui_no_data_message[lang], title=event, icon=gui.icon, non_blocking=True)
+                else:
+                    to_show = ''
+                    for key, value in refsDB.items():
+                        to_show += f'"{key}": {value[0]}\n'
+                        for info in value[1:]:
+                            to_show += info + '\n'
+                        to_show += '\n'
+                    sg.popup_scrolled(to_show, title=event, size=(150, 25), icon=gui.icon, non_blocking=True)
+            
+            elif event == tr.gui_info[lang]:
+                sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event, icon=gui.icon, non_blocking=True)
+            
+            # Global loading of spectra database, was needed for separate Table tab
+            elif event == 'T1_database':
+                objectsDB, refsDB = di.import_DBs(['spectra', 'spectra_extras'])
+                tagsDB = aux.tag_list(objectsDB)
+                namesDB = { # optimize!
+                    'en': aux.obj_names_dict(objectsDB, 'ALL', 'en'),
+                    'ru': aux.obj_names_dict(objectsDB, 'ALL', 'ru'),
+                    'de': aux.obj_names_dict(objectsDB, 'ALL', 'de')
+                }
+                window['T1_tagsN'].update(visible=True)
+                window['T1_tags'].update(default_tag, values=tagsDB, visible=True)
+                window['T1_list'].update(values=tuple(aux.obj_names_dict(objectsDB, default_tag, lang).keys()), visible=True)
+                window['T1_database'].update(tr.gui_update[lang])
+                window['T1_database'].metadata=True # switcher from "Load" to "Update"
 
             # Brightness mode radio selection
-            if isinstance(event, str) and event.startswith('-brMode'):
+            elif isinstance(event, str) and event.startswith('-brMode'):
                 brMode = aux.get_flag_index((values['-brMode0-'], values['-brMode1-'], values['-brMode2-']))
+            
             # Checks for empty input
             elif event == '-bitness-':
                 try:
@@ -91,6 +163,7 @@ def launch_window(lang: str):
                     rounding = int(values['-rounding-'])
                 except ValueError:
                     pass
+            
             # Checking enabled and disables settings for the new selected tab
             elif event == '-currentTab-':
                 not_img_tab = int(not values['-currentTab-'] == 'tab2')
@@ -106,47 +179,13 @@ def launch_window(lang: str):
                 window['-bitness-'].update(disabled=not not_img_tab, text_color=text_color)
                 window['-rounding-'].update(disabled=not not_img_tab, text_color=text_color)
 
-            # ------------ Global window events ------------
-
-            if event in tr.lang_list[lang]:
-                for lng, lst in tr.langs.items(): # determine language to translate
-                    if event in lst:
-                        lang = lng
-                        break
-                window = gui.translate(window, T2_vis, lang)
-                window['T1_list'].update(values=tuple(aux.matched_names_dict(objectsDB, values['T1_tags'], lang).keys()))
-            
-            elif event == tr.gui_ref[lang]:
-                if len(refsDB) == 0:
-                    sg.popup(tr.gui_no_data_message[lang], title=event, icon=gui.icon, non_blocking=True)
-                else:
-                    to_show = ''
-                    for key, value in refsDB.items():
-                        to_show += f'"{key}": {value[0]}\n'
-                        for info in value[1:]:
-                            to_show += info + '\n'
-                        to_show += '\n'
-                    sg.popup_scrolled(to_show, title=event, size=(150, 25), icon=gui.icon, non_blocking=True)
-            
-            elif event == tr.gui_info[lang]:
-                sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event, icon=gui.icon, non_blocking=True)
-            
-            elif event == 'T1_database': # global loading of spectra database, was needed for separate Table tab
-                objectsDB, refsDB = di.import_DBs(['spectra', 'spectra_extras'])
-                tagsDB = aux.tag_list(objectsDB)
-                window['T1_tagsN'].update(visible=True)
-                window['T1_tags'].update(default_tag, values=tagsDB, visible=True)
-                window['T1_list'].update(values=tuple(aux.matched_names_dict(objectsDB, default_tag, lang).keys()), visible=True)
-                window['T1_database'].update(tr.gui_update[lang])
-                window['T1_database'].metadata=True # switcher from "Load" to "Update"
-
             # ------------ Events in the tab "Database viewer" ------------
 
             if values['-currentTab-'] == 'tab1':
 
                 if (event in triggers or event == 'T1_list' or event == 'T1_filter') and values['T1_list'] != []:
                     T1_name = values['T1_list'][0]
-                    T1_raw_name = aux.matched_names_dict(objectsDB, 'ALL', lang)[T1_name]
+                    T1_raw_name = namesDB[lang][T1_name]
 
                     # Spectral data import and processing
                     T1_body = dp.database_parser(T1_name, objectsDB[T1_raw_name])
@@ -182,25 +221,29 @@ def launch_window(lang: str):
                     window['T1_hex'].update(T1_rgb_show)
                     T1_filter = get_filter(values['T1_filter'])
                     window['T1_convolved'].update(sigfig_round(T1_spectrum.to_scope(T1_filter.nm)@T1_filter, rounding, warn=False))
+
+                    # Plotting
+                    if window1:
+                        pl.close_figure(T1_T3_fig)
+                        T1_T3_fig_canvas_agg.get_tk_widget().forget()
+                        T1_T3_fig = pl.plot_spectra(plot_data | {T1_raw_name: T1_spectrum}, values['-gamma-'], values['-srgb-'], brMode, lang)
+                        T1_T3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, T1_T3_fig)
                 
                 elif event == 'T1_tags':
-                    window['T1_list'].update(tuple(aux.matched_names_dict(objectsDB, values['T1_tags'], lang).keys()))
+                    window['T1_list'].update(tuple(aux.obj_names_dict(objectsDB, values['T1_tags'], lang).keys()))
                 
-                elif event == 'T1_add' and values['T1_list'] != []:
-                    plot_data.append(T1_spectrum)
+                elif event == 'T1_pin' and values['T1_list'] != []:
+                    plot_data |= {T1_raw_name: T1_spectrum}
                 
-                elif event == 'T1_plot':
-                    pl.plot_spectra(plot_data, values['-gamma-'], values['-srgb-'], brMode, lang)
-                
-                elif event == 'T1_clear':
-                    plot_data = []
+                elif event == 'T1_unpin':
+                    plot_data.pop(T1_raw_name)
                 
                 elif event == 'T1_export2text':
                     if len(objectsDB) == 0:
                         sg.popup(tr.gui_no_data_message[lang], title=tr.gui_output[lang], icon=gui.icon, non_blocking=True)
                     else:
                         T1_export = '\n' + '\t'.join(tr.gui_col[lang]) + '\n' + '_' * 36
-                        for name, raw_name in aux.matched_names_dict(objectsDB, values['T1_tags'], lang).items():
+                        for name, raw_name in aux.obj_names_dict(objectsDB, values['T1_tags'], lang).items():
                             T1_body = dp.database_parser(name, objectsDB[raw_name])
                             T1_albedo = brMode and isinstance(T1_body, dp.ReflectiveBody)
                         
@@ -323,10 +366,10 @@ def launch_window(lang: str):
                         T2_fig = pl.plot_filters(to_plot, lang)
                     except UnboundLocalError: # means it's the first tab opening
                         T2_fig = pl.plot_filters(background_plot[values['-srgb-']], lang)
-                        figure_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
+                        T2_fig_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
                     finally:
-                        figure_canvas_agg.get_tk_widget().forget()
-                        figure_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
+                        T2_fig_canvas_agg.get_tk_widget().forget()
+                        T2_fig_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
 
             
             # ------------ Events in the tab "Blackbody & Redshifts" ------------

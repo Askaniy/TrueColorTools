@@ -32,13 +32,13 @@ def draw_figure(canvas, figure: Figure):
     figure_canvas_agg.get_tk_widget().pack(side='top', fill='both', expand=1)
     return figure_canvas_agg
 
-def plot_spectra(objects: Sequence[Spectrum], gamma, srgb, albedo, lang: str):
-    """ Opens a separate window with plotted spectra from the input list """
+def plot_spectra(objects: dict[Spectrum], gamma: bool, srgb: bool, albedo: bool, lang: str):
+    """ Creates a figure with plotted spectra from the input list """
     fig, ax = plt.subplots(1, 1, figsize=(9, 6), dpi=100)
     ax.set_xlabel(tr.xaxis_text[lang])
     # determining the scale for CMFs in the background
     max_y = []
-    for spectrum in objects:
+    for spectrum in objects.values():
         max_y.append(spectrum.br.max())
     rgb = (cp.x, cp.y, cp.z) if srgb else (cp.r, cp.g, cp.b)
     k = max(max_y) / rgb[2].br.max() if len(max_y) != 0 else 1
@@ -46,7 +46,7 @@ def plot_spectra(objects: Sequence[Spectrum], gamma, srgb, albedo, lang: str):
     for i, spectrum in enumerate(rgb):
         ax.plot(spectrum.nm, spectrum.br*k, label=spectrum.name, color=rgb_muted[i])
     # color calculating and plotting
-    for spectrum in objects:
+    for spectrum in objects.values():
         if srgb:
             color = cp.Color.from_spectrum_CIE(spectrum, albedo)
         else:
@@ -63,20 +63,7 @@ def plot_spectra(objects: Sequence[Spectrum], gamma, srgb, albedo, lang: str):
             )
     ax.legend()
     fig.tight_layout() # moving to subplots() causes UserWarning
-    # creating and opening the window
-    window = sg.Window(
-        tr.spectral_plot[lang], gui.generate_plot_layout(lang), icon=gui.icon,
-        finalize=True, element_justification='center'
-    )
-    draw_figure(window['-canvas-'].TKCanvas, fig)
-    while True:
-        event, values = window.read()
-        if event == sg.WIN_CLOSED:
-            break
-        elif event == '-path-':
-            path = values['-path-']
-            fig.savefig(path, dpi=133.4) # 1200x800
-    window.close()
+    return fig
 
 def plot_filters(filters: Sequence[Spectrum], lang: str):
     """ Creates a figure with plotted sensitive curves and CMFs """

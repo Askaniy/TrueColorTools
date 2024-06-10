@@ -131,20 +131,20 @@ gui_in_filter = {
     'ru': 'в фильтре',
     'de': 'im Filter'
 }
-gui_add = {
-    'en': 'Add spectrum to plot',
-    'ru': 'Добавить спектр к графику',
-    'de': 'Spektrum hinzufügen'
-}
 gui_plot = {
-    'en': 'Plot spectra',
-    'ru': 'Построить график спектров',
-    'de': 'Spektren plotten'
+    'en': 'Show the plot',
+    'ru': 'Показать график',
+    'de': 'Zeigen Sie das Diagramm'
 }
-gui_clear = {
-    'en': 'Clear plot',
-    'ru': 'Очистить график',
-    'de': 'Plot löschen'
+gui_pin = {
+    'en': 'Pin the spectrum plot',
+    'ru': 'Закрепить график спектра',
+    'de': 'Fixierung des Spektrumsgraphen'
+}
+gui_unpin = {
+    'en': 'Unpin the spectrum plot',
+    'ru': 'Открепить график спектра',
+    'de': 'Freigabe des Spektrumsdiagramms'
 }
 gui_export2text = {
     'en': 'Export category to text',
