@@ -2,6 +2,7 @@
 
 import FreeSimpleGUI as sg
 from sigfig import round as sigfig_round
+from copy import deepcopy
 import src.gui as gui
 from src.data_core import Spectrum, get_filter
 import src.auxiliary as aux
@@ -23,7 +24,7 @@ def launch_window(lang: str):
 
     # Processing configuration
     default_tag = 'featured'
-    brMode = True # default brightness mode
+    brMode = 1 # default brightness mode
     bitness = 1
     rounding = 3
 
@@ -41,7 +42,7 @@ def launch_window(lang: str):
     window0 = sg.Window(
         'TrueColorTools', icon=gui.icon, finalize=True, resizable=True, margins=(0, 0), size=(1000, 640),
         layout=gui.generate_layout(
-            (2*circle_r+1, 2*circle_r+1), img_preview_size, text_colors, filtersDB, bitness, rounding, T2_num, lang
+            (2*circle_r+1, 2*circle_r+1), img_preview_size, text_colors, filtersDB, brMode, bitness, rounding, T2_num, lang
         )
     )
     # Creating the plot window stub
@@ -54,9 +55,24 @@ def launch_window(lang: str):
     T3_preview = window0['T3_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
 
     # Setting plots templates
+    light_theme = False
     plot_data = {} # for tabs 1 and 3, both at once
     background_plot = ((cp.r, cp.g, cp.b), (cp.x, cp.y, cp.z)) # for tab 2
     mean_spectrum = [] # for tab 2
+
+    T1_raw_name = T1_spectrum = T3_raw_name = T3_spectrum = None
+
+    def T1_T3_update_plot(fig, fig_canvas_agg, gamma: bool, srgb: bool, albedo: bool, light_theme: bool, lang: str):
+        pl.close_figure(fig)
+        fig_canvas_agg.get_tk_widget().forget()
+        to_plot = deepcopy(plot_data)
+        if T1_raw_name:
+            to_plot |= {T1_raw_name: T1_spectrum}
+        if T3_raw_name:
+            to_plot |= {T3_raw_name: T3_spectrum}
+        fig = pl.plot_spectra(to_plot, gamma, srgb, albedo, light_theme, lang)
+        fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, fig)
+        return fig, fig_canvas_agg
     
     # List of settings events that cause color recalculation
     triggers = ('-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-brMode2-', '-bitness-', '-rounding-')
@@ -74,25 +90,30 @@ def launch_window(lang: str):
                 window1 = None # marking the plot window as closed
         
         # Events with the plot window
-        elif event.endswith(('plot', 'pin')):
+        elif event.endswith('plot'):
             if not window1:
                 window1 = sg.Window(
-                    tr.spectral_plot[lang], gui.generate_plot_layout(lang), icon=gui.icon,
+                    tr.spectral_plot[lang], gui.generate_plot_layout(lang, light_theme), icon=gui.icon,
                     finalize=True, element_justification='center'
                 )
             else:
                 pl.close_figure(T1_T3_fig)
                 T1_T3_fig_canvas_agg.get_tk_widget().forget()
-            try:
-                to_plot = plot_data | {T1_raw_name: T1_spectrum}
-            except UnboundLocalError:
-                to_plot = plot_data
-            T1_T3_fig = pl.plot_spectra(to_plot, values['-gamma-'], values['-srgb-'], brMode, lang)
+            to_plot = deepcopy(plot_data)
+            if T1_raw_name:
+                to_plot |= {T1_raw_name: T1_spectrum}
+            if T3_raw_name:
+                to_plot |= {T3_raw_name: T3_spectrum}
+            T1_T3_fig = pl.plot_spectra(to_plot, values['-gamma-'], values['-srgb-'], brMode, light_theme, lang)
             T1_T3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, T1_T3_fig)
         elif event == 'W1_path':
             T1_T3_fig.savefig(values['W1_path'], dpi=133.4) # 1200x800
-        elif event == 'W1_theme':
-            pass
+        elif event == 'W1_light_theme':
+            light_theme = values['W1_light_theme']
+            T1_T3_fig, T1_T3_fig_canvas_agg = T1_T3_update_plot(
+                T1_T3_fig, T1_T3_fig_canvas_agg, window0.ReturnValuesDictionary['-gamma-'],
+                window0.ReturnValuesDictionary['-srgb-'], brMode, light_theme, lang
+            )
 
         # Run-time translation
         elif event in tr.lang_list[lang]:
@@ -103,14 +124,10 @@ def launch_window(lang: str):
             window0 = gui.translate_win0(window0, T2_vis, lang)
             if window1:
                 window1 = gui.translate_win1(window1, lang)
-                pl.close_figure(T1_T3_fig)
-                T1_T3_fig_canvas_agg.get_tk_widget().forget()
-                try:
-                    to_plot = plot_data | {T1_raw_name: T1_spectrum}
-                except UnboundLocalError:
-                    to_plot = plot_data
-                T1_T3_fig = pl.plot_spectra(to_plot, values['-gamma-'], values['-srgb-'], brMode, lang)
-                T1_T3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, T1_T3_fig)
+                T1_T3_fig, T1_T3_fig_canvas_agg = T1_T3_update_plot(
+                    T1_T3_fig, T1_T3_fig_canvas_agg, window0.ReturnValuesDictionary['-gamma-'],
+                    window0.ReturnValuesDictionary['-srgb-'], brMode, light_theme, lang
+                )
             window['T1_list'].update(values=tuple(aux.obj_names_dict(objectsDB, values['T1_tags'], lang).keys()))
         
         # Only the main window events
@@ -166,18 +183,19 @@ def launch_window(lang: str):
             
             # Checking enabled and disables settings for the new selected tab
             elif event == '-currentTab-':
-                not_img_tab = int(not values['-currentTab-'] == 'tab2')
-                text_color = text_colors[not_img_tab]
-                window['-srgb-'].update(text_color=text_color)
-                window['-brModeText-'].update(text_color=text_color)
-                window['-brMode0-'].update(text_color=text_color)
-                window['-brMode1-'].update(text_color=text_color)
-                window['-brMode2-'].update(text_color=text_color)
-                window['-formattingText-'].update(text_color=text_color)
-                window['-bitnessText-'].update(text_color=text_color)
-                window['-roundingText-'].update(text_color=text_color)
-                window['-bitness-'].update(disabled=not not_img_tab, text_color=text_color)
-                window['-rounding-'].update(disabled=not not_img_tab, text_color=text_color)
+                is_img_tab = values['-currentTab-'] == 'tab2'
+                text_color_is1tab = text_colors[int(values['-currentTab-'] == 'tab1')]
+                text_color_not2tab = text_colors[int(not is_img_tab)]
+                window['-srgb-'].update(text_color=text_color_not2tab)
+                window['-brModeText-'].update(text_color=text_color_is1tab)
+                window['-brMode0-'].update(text_color=text_color_is1tab)
+                window['-brMode1-'].update(text_color=text_color_is1tab)
+                window['-brMode2-'].update(text_color=text_color_is1tab)
+                window['-formattingText-'].update(text_color=text_color_not2tab)
+                window['-bitnessText-'].update(text_color=text_color_not2tab)
+                window['-roundingText-'].update(text_color=text_color_not2tab)
+                window['-bitness-'].update(disabled=is_img_tab, text_color=text_color_not2tab)
+                window['-rounding-'].update(disabled=is_img_tab, text_color=text_color_not2tab)
 
             # ------------ Events in the tab "Database viewer" ------------
 
@@ -222,12 +240,12 @@ def launch_window(lang: str):
                     T1_filter = get_filter(values['T1_filter'])
                     window['T1_convolved'].update(sigfig_round(T1_spectrum.to_scope(T1_filter.nm)@T1_filter, rounding, warn=False))
 
-                    # Plotting
+                    # Dynamical plotting
                     if window1:
-                        pl.close_figure(T1_T3_fig)
-                        T1_T3_fig_canvas_agg.get_tk_widget().forget()
-                        T1_T3_fig = pl.plot_spectra(plot_data | {T1_raw_name: T1_spectrum}, values['-gamma-'], values['-srgb-'], brMode, lang)
-                        T1_T3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, T1_T3_fig)
+                        T1_T3_fig, T1_T3_fig_canvas_agg = T1_T3_update_plot(
+                            T1_T3_fig, T1_T3_fig_canvas_agg, window0.ReturnValuesDictionary['-gamma-'],
+                            window0.ReturnValuesDictionary['-srgb-'], brMode, light_theme, lang
+                        )
                 
                 elif event == 'T1_tags':
                     window['T1_list'].update(tuple(aux.obj_names_dict(objectsDB, values['T1_tags'], lang).keys()))
@@ -378,15 +396,12 @@ def launch_window(lang: str):
                 
                 if event == 'T3_maxtemp_num':
                     window['T3_slider1'].update(range=(0, int(values['T3_maxtemp_num'])))
-
-                elif event == 'T3_add':
-                    plot_data.append(T3_spectrum)
                 
-                elif event == 'T3_plot':
-                    pl.plot_spectra(plot_data, values['-gamma-'], values['-srgb-'], brMode, lang)
+                elif event == 'T3_pin':
+                    plot_data |= {T3_raw_name: T3_spectrum}
                 
-                elif event == 'T3_clear':
-                    plot_data = []
+                elif event == 'T3_unpin':
+                    plot_data.pop(T3_raw_name)
                 
                 else:
                     if event == 'T3_overexposure':
@@ -395,6 +410,7 @@ def launch_window(lang: str):
                     
                     # Spectral data processing
                     T3_spectrum = Spectrum.from_blackbody_redshift(aux.visible_range, values['T3_slider1'], values['T3_slider2'], values['T3_slider3'])
+                    T3_raw_name = T3_spectrum.name
                     if values['T3_overexposure']:
                         T3_spectrum.br /= dp.mag2flux(values['T3_slider4'], dp.vega_in_V) * dp.sun_in_V
 
@@ -412,3 +428,10 @@ def launch_window(lang: str):
                     window['T3_graph'].TKCanvas.itemconfig(T3_preview, fill=T3_rgb_show)
                     window['T3_rgb'].update(T3_rgb)
                     window['T3_hex'].update(T3_rgb_show)
+
+                    # Dynamical plotting
+                    if window1:
+                        T1_T3_fig, T1_T3_fig_canvas_agg = T1_T3_update_plot(
+                            T1_T3_fig, T1_T3_fig_canvas_agg, window0.ReturnValuesDictionary['-gamma-'],
+                            window0.ReturnValuesDictionary['-srgb-'], brMode, light_theme, lang
+                        )

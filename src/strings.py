@@ -343,15 +343,20 @@ spectral_plot = {
     'ru': 'График спектральной плотности энергии',
     'de': 'Spektralenergiedichte'
 }
+light_theme = {
+    'en': 'Light theme',
+    'ru': 'Светлая тема',
+    'de': 'Thema Licht'
+}
 xaxis_text = {
     'en': 'Wavelength, nm',
     'ru': 'Длина волны, нм',
     'de': 'Wellenlänge, nm'
 }
 yaxis_text = {
-    'en': 'Reflectivity',
-    'ru': 'Отражательная способность',
-    'de': 'Reflektivität'
+    'en': 'Spectral energy density',
+    'ru': 'Спектральная плотность энергии',
+    'de': 'Spektralenergiedichte'
 }
 
 

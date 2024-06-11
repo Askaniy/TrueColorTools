@@ -29,12 +29,12 @@ def create_logger(window: sg.Window, key: str) -> Callable:
         window.write_event_value((key, f'{strftime("%H:%M:%S")} {message}'), data)
     return logger
 
-def generate_plot_layout(lang: str):
+def generate_plot_layout(lang: str, light_theme: bool):
     return [
         [
             sg.Text(tr.spectral_plot[lang], font=('arial', 16), key='W1_title'),
             sg.Push(),
-            #sg.InputCombo(('light theme',), key='W1_theme'),
+            sg.Checkbox(tr.light_theme[lang], default=light_theme, enable_events=True, key='W1_light_theme'),
             sg.Push(),
             sg.InputText(visible=False, enable_events=True, key='W1_path'),
             sg.FileSaveAs(tr.gui_save[lang], file_types=('PNG {png}', 'PDF {pdf}', 'SVG {svg}'), default_extension='.png', key='W1_save')
@@ -42,7 +42,16 @@ def generate_plot_layout(lang: str):
         [sg.Canvas(key='W1_canvas')],
     ]
 
-def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tuple, filtersDB: tuple, bitness: int, rounding: int, T2_num: int, lang: str):
+def generate_layout(
+        canvas_size: tuple,
+        img_preview_size: tuple,
+        text_colors: tuple,
+        filtersDB: tuple,
+        brMode: int,
+        bitness: int,
+        rounding: int,
+        T2_num: int,
+        lang: str):
     title_font = ('arial', 12)
     tags_input_size = 20
     button_size = 30
@@ -56,9 +65,9 @@ def generate_layout(canvas_size: tuple, img_preview_size: tuple, text_colors: tu
         [sg.Checkbox('sRGB', enable_events=True, key='-srgb-')],
         [sg.T('')],
         [sg.Push(), sg.Text(tr.gui_br[lang][0], key='-brModeText-'), sg.Push()],
-        [sg.Radio(tr.gui_br[lang][1], 'brRadio', enable_events=True, default=False, key='-brMode0-')],
-        [sg.Radio(tr.gui_br[lang][2], 'brRadio', enable_events=True, default=True, key='-brMode1-')],
-        [sg.Radio(tr.gui_br[lang][3], 'brRadio', enable_events=True, default=False, key='-brMode2-')],
+        [sg.Radio(tr.gui_br[lang][1], 'brRadio', enable_events=True, default=brMode==0, key='-brMode0-')],
+        [sg.Radio(tr.gui_br[lang][2], 'brRadio', enable_events=True, default=brMode==1, key='-brMode1-')],
+        [sg.Radio(tr.gui_br[lang][3], 'brRadio', enable_events=True, default=brMode==2, key='-brMode2-')],
         [sg.T('')],
         [sg.Push(), sg.Text(tr.gui_formatting[lang], key='-formattingText-'), sg.Push()],
         [
@@ -309,6 +318,7 @@ def translate_win0(window: sg.Window, T2_vis: int, lang: str):
 
 def translate_win1(window: sg.Window, lang: str):
     window['W1_title'].update(tr.spectral_plot[lang])
+    window['W1_light_theme'].update(text=tr.light_theme[lang])
     window['W1_save'].update(tr.gui_save[lang])
     return window
 
