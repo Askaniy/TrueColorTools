@@ -239,8 +239,8 @@ def is_tag_in_obj(tag: str, obj_tags: Sequence):
             return True
     return False
 
-def obj_dict(database: dict, tag: str, lang: str):
-    """ Maps front-end spectrum names allowed by the tag to names in the database """
+def obj_names_dict(database: dict, tag: str, lang: str):
+    """ Matches the front-end names with the database names for the selected tag """
     names = {}
     for raw_name, obj_data in database.items():
         if tag == 'ALL' or is_tag_in_obj(tag, obj_data['tags']):

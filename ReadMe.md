@@ -1,4 +1,4 @@
-![Header logo](logo_header.png)
+![Header logo](logo_header.webp)
 
 Astronomy-focused set of Python tools with a GUI that uses spectrum construction and eye absorption to compute realistic colors.
 
@@ -6,7 +6,7 @@ Input data is accepted in the form of filters measurements (such as color indice
 
 Please note that this is a hobby project and no guarantees are provided for the results. Help is welcome!
 
-![TCT screenshot](screenshot.png)
+![TCT screenshot](screenshot.webp)
 
 
 ## Installation

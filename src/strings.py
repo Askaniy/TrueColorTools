@@ -42,6 +42,11 @@ gui_menu = {
     'ru': [['Файл', [gui_ref['ru'], gui_info['ru'], gui_exit['ru']]], ['Язык', lang_list['ru']]],
     'de': [['Datei', [gui_ref['de'], gui_info['de'], gui_exit['de']]], ['Sprache', lang_list['de']]],
 }
+gui_no_data_message = {
+    'en': 'You need to load the database to get this data.',
+    'ru': 'Вам нужно загрузить базу данных для получения этих данных.',
+    'de': 'Sie müssen die Datenbank laden, um diese Daten abzurufen.'
+}
 
 # Settings sidebar
 gui_settings = {
@@ -101,7 +106,7 @@ gui_tags = {
     'ru': 'Категория',
     'de': 'Kategorie'
 }
-gui_results = {
+gui_output = {
     'en': 'Output',
     'ru': 'Результат',
     'de': 'Ergebnisse'
@@ -126,20 +131,20 @@ gui_in_filter = {
     'ru': 'в фильтре',
     'de': 'im Filter'
 }
-gui_add = {
-    'en': 'Add spectrum to plot',
-    'ru': 'Добавить спектр к графику',
-    'de': 'Spektrum hinzufügen'
-}
 gui_plot = {
-    'en': 'Plot spectra',
-    'ru': 'Построить график спектров',
-    'de': 'Spektren plotten'
+    'en': 'Show the plot',
+    'ru': 'Показать график',
+    'de': 'Zeigen Sie das Diagramm'
 }
-gui_clear = {
-    'en': 'Clear plot',
-    'ru': 'Очистить график',
-    'de': 'Plot löschen'
+gui_pin = {
+    'en': 'Pin the spectrum plot',
+    'ru': 'Закрепить график спектра',
+    'de': 'Fixierung des Spektrumsgraphen'
+}
+gui_unpin = {
+    'en': 'Unpin the spectrum plot',
+    'ru': 'Открепить график спектра',
+    'de': 'Freigabe des Spektrumsdiagramms'
 }
 gui_export2text = {
     'en': 'Export category to text',
@@ -334,24 +339,24 @@ gui_explanation = {
 
 # Plots
 spectral_plot = {
-    'en': 'Spectral plot',
-    'ru': 'Спектральная диаграмма',
-    'de': 'Spektraldiagramm'
+    'en': 'Spectral energy density plot',
+    'ru': 'График спектральной плотности энергии',
+    'de': 'Spektralenergiedichte'
 }
-#map_title_text = {
-#    'en': 'Spectrum and color of some pixels of the map',
-#    'ru': 'Спектр и цвет некоторых пикселей карты',
-#    'de': 'Spektren und Farben einiger Pixel der Karte'
-#}
+light_theme = {
+    'en': 'Light theme',
+    'ru': 'Светлая тема',
+    'de': 'Thema Licht'
+}
 xaxis_text = {
-    'en': 'Wavelength [nm]',
-    'ru': 'Длина волны [нм]',
-    'de': 'Wellenlänge [nm]'
+    'en': 'Wavelength, nm',
+    'ru': 'Длина волны, нм',
+    'de': 'Wellenlänge, nm'
 }
 yaxis_text = {
-    'en': 'Reflectivity',
-    'ru': 'Отражательная способность',
-    'de': 'Reflektivität'
+    'en': 'Spectral energy density',
+    'ru': 'Спектральная плотность энергии',
+    'de': 'Spektralenergiedichte'
 }
 
 
