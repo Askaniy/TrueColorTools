@@ -870,12 +870,18 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '(15810) Arawn|MBOSS': {
+    'Porter2016': [
+        'The First High-phase Observations of a KBO: New Horizons Imaging of (15810) 1994 JR1 from the Kuiper Belt',
+        'DOI: 10.3847/2041-8205/828/2/L15', 'https://iopscience.iop.org/article/10.3847/2041-8205/828/2/L15',
+        'https://ui.adsabs.harvard.edu/abs/2016ApJ...828L..15P/abstract'
+    ],
+    '(15810) Arawn|MBOSS, Porter2016': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant/plutino'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 1.010, 'V-R': 0.632, 'R-I': 0.538},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        phase_integral: 0.22,
     },
     '(15820) 1994 TB|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant/plutino'],
