@@ -32,6 +32,11 @@
         'NEOWISE Diameters and Albedos V2.0',
         'DOI: 10.26033/18S3-2Z54', 'https://ui.adsabs.harvard.edu/abs/2019PDSS..251.....M/abstract'
     ],
+    'Marchi2003': [
+        'Visible spectroscopy of the two largest known trans-Neptunian objects: Ixion and Quaoar',
+        'DOI: 10.1051/0004-6361:20031142', 'https://www.aanda.org/articles/aa/abs/2003/36/aaff101/aaff101.html',
+        'https://ui.adsabs.harvard.edu/abs/2003A%26A...408L..17M/abstract'
+    ],
     'Marchis2012': [
         'Multiple asteroid systems: Dimensions and thermal properties from Spitzer Space Telescope and ground-based observations',
         'DOI: 10.1016/j.icarus.2012.09.013', 'https://arxiv.org/abs/1604.05384', 'https://ui.adsabs.harvard.edu/abs/2012Icar..221.1130M/abstract'
@@ -1181,6 +1186,12 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    '(28978) Ixion|Marchi2003, Verbiscer2022': {
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/plutino', 'minor body/TNO/midsize', 'traced spectrum'],
+        file: 'spectra/files/Marchi2003/Ixion.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.108, 0.002]],
+        spherical_albedo: ['Generic_Bessell.V', [0.037, 0.007]],
+    },
     '(28978) Ixion|MBOSS, Verbiscer2022': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/plutino', 'minor body/TNO/midsize'],
         photometric_system: 'Generic_Bessell',
@@ -1404,6 +1415,12 @@
         color_indices: {'B-V': 0.746, 'V-R': 0.556, 'R-I': 0.368},
         calibration_system: 'Vega',
         sun_is_emitter: true
+    },
+    '(50000) Quaoar|Marchi2003, Pereira2023, Verbiscer2022': {
+        tags: ['featured', 'MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical/hot', 'traced spectrum'],
+        file: 'spectra/files/Marchi2003/Quaoar.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.124, 0.006]],
+        phase_integral: [0.52, 0.01],
     },
     'Pereira2023': [
         'The two rings of (50000) Quaoar',
