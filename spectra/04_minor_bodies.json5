@@ -1416,19 +1416,19 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    'Pereira2023': [
+        'The two rings of (50000) Quaoar',
+        'DOI: 10.1051/0004-6361/202346365', 'https://www.aanda.org/articles/aa/full_html/2023/05/aa46365-23/aa46365-23.html',
+        'https://ui.adsabs.harvard.edu/abs/2023A%26A...673L...4P/abstract'
+    ],
     '(50000) Quaoar|Marchi2003, Pereira2023, Verbiscer2022': {
         tags: ['featured', 'MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical/hot', 'traced spectrum'],
         file: 'spectra/files/Marchi2003/Quaoar.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.124, 0.006]],
         phase_integral: [0.52, 0.01],
     },
-    'Pereira2023': [
-        'The two rings of (50000) Quaoar',
-        'DOI: 10.1051/0004-6361/202346365', 'https://www.aanda.org/articles/aa/full_html/2023/05/aa46365-23/aa46365-23.html',
-        'https://ui.adsabs.harvard.edu/abs/2023A%26A...673L...4P/abstract'
-    ],
     '(50000) Quaoar|MBOSS, Pereira2023, Verbiscer2022': {
-        tags: ['featured', 'MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical/hot'],
+        tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical/hot'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.958, 'V-R': 0.650, 'R-I': 0.610},
         calibration_system: 'Vega',
