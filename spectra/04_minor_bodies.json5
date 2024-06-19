@@ -2124,7 +2124,7 @@
         phase_integral: [0.80, 0.10],
     },
     '(P I) Charon|Verbiscer2022': {
-        tags: ['featured', 'Solar System', 'planetary body', 'moon', 'minor body/TNO/resonant/plutino'],
+        tags: ['featured', 'Solar System', 'planetary body/satellite planet', 'moon', 'minor body/TNO/resonant/plutino'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.7315, 'V-R': 0.4},
         calibration_system: 'Vega',
