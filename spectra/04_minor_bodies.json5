@@ -1187,7 +1187,7 @@
         sun_is_emitter: true
     },
     '(28978) Ixion|Marchi2003, Verbiscer2022': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/plutino', 'minor body/TNO/midsize', 'traced spectrum'],
+        tags: ['Solar System', 'minor body/TNO/plutino', 'minor body/TNO/midsize', 'traced spectrum'],
         file: 'spectra/files/Marchi2003/Ixion.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.108, 0.002]],
         spherical_albedo: ['Generic_Bessell.V', [0.037, 0.007]],
@@ -1422,7 +1422,7 @@
         'https://ui.adsabs.harvard.edu/abs/2023A%26A...673L...4P/abstract'
     ],
     '(50000) Quaoar|Marchi2003, Pereira2023, Verbiscer2022': {
-        tags: ['featured', 'MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical/hot', 'traced spectrum'],
+        tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical/hot', 'traced spectrum'],
         file: 'spectra/files/Marchi2003/Quaoar.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.124, 0.006]],
         phase_integral: [0.52, 0.01],
@@ -1813,8 +1813,22 @@
     ],
     'deBergh2005': [
         'The surface of the transneptunian object 90482 Orcus',
+        'DOI: 10.1051/0004-6361:20042533', 'https://www.aanda.org/articles/aa/abs/2005/27/aa2533-04/aa2533-04.html',
         'https://ui.adsabs.harvard.edu/abs/2005A%26A...437.1115D/abstract'
     ],
+    '(90482) Orcus|DeBergh2005, Brown2018': {
+        tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant/plutino', 'traced spectrum'],
+        file: 'spectra/files/Orcus_deBergh2005.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
+    },
+    '(90482) Orcus|MBOSS, Brown2018': {
+        tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant/plutino'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': 0.670, 'V-R': 0.376, 'R-I': 0.372},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
+    },
     '(90482) Orcus|deBergh2005, Brown2018': {
         tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant/plutino'],
         photometric_system: 'Generic_Bessell',
@@ -1828,14 +1842,6 @@
         filters: ['Generic_Bessell.V', 'Generic_Bessell.I'],
         mag: [19.36, 18.63],
         sd: 0.05,
-        calibration_system: 'Vega',
-        sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
-    },
-    '(90482) Orcus|MBOSS, Brown2018': {
-        tags: ['featured', 'MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant/plutino'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.670, 'V-R': 0.376, 'R-I': 0.372},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
@@ -2098,6 +2104,12 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', 0.18], // mean diameter = 2.5 km, H = 15.5
     },
+    '(134340) Pluto|Madden2018, Verbiscer2022': {
+        tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant/plutino'],
+        file: 'spectra/files/Madden2018/Pluto_LorenziProtopapa_Albedo.txtU',
+        geometric_albedo: true,
+        phase_integral: [0.80, 0.10],
+    },
     'Buratti2015': [
         'Photometry of Pluto 2008-2014: Evidence of Ongoing Seasonal Volatile Transport and Activity',
         'DOI: 10.1088/2041-8205/804/1/L6', 'https://iopscience.iop.org/article/10.1088/2041-8205/804/1/L6', 'https://ui.adsabs.harvard.edu/abs/2015ApJ...804L...6B/abstract'
@@ -2109,16 +2121,10 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.56, 0.03]],
-        spherical_albedo: ['Generic_Bessell.V', [0.41, 0.06]],
-    },
-    '(134340) Pluto|Madden2018, Verbiscer2022': {
-        tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant/plutino'],
-        file: 'spectra/files/Madden2018/Pluto_LorenziProtopapa_Albedo.txtU',
-        geometric_albedo: true,
         phase_integral: [0.80, 0.10],
     },
     '(P I) Charon|Verbiscer2022': {
-        tags: ['featured', 'Solar System', 'planetary body', 'moon', 'minor body/TNO/resonant/plutino'],
+        tags: ['featured', 'Solar System', 'planetary body/satellite planet', 'moon', 'minor body/TNO/resonant/plutino'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.7315, 'V-R': 0.4},
         calibration_system: 'Vega',
@@ -2154,15 +2160,6 @@
         geometric_albedo: ['Generic_Bessell.V', [0.66, 0.02]],
         spherical_albedo: ['Generic_Bessell.V', [0.33, 0.03]], // SYSTEM albedo
     },
-    '(136199) Eris|MBOSS, Verbiscer2022': {
-        tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached', 'traced spectrum'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.781, 'V-R': 0.393, 'R-I': 0.363},
-        calibration_system: 'Vega',
-        sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.957], // albedo from fyr02’s sheet
-        spherical_albedo: ['Generic_Bessell.V', [0.99, 0.09]],
-    },
     '(136199) Eris|Lorenzi2016, Verbiscer2022': {
         tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached'],
         nm: [417.357, 479.507, 532.699, 585.89, 601.008, 604.367, 622.844, 637.962, 653.08, 656.439, 659.239, 673.236, 679.955, 692.273, 702.912, 
@@ -2172,6 +2169,15 @@
         geometric_albedo: ['Generic_Bessell.V', 0.957], // albedo from zelario’s sheet
         spherical_albedo: ['Generic_Bessell.V', [0.99, 0.09]],
     },
+    '(136199) Eris|MBOSS, Verbiscer2022': {
+        tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached', 'traced spectrum'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': 0.781, 'V-R': 0.393, 'R-I': 0.363},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.957], // albedo from fyr02’s sheet
+        spherical_albedo: ['Generic_Bessell.V', [0.99, 0.09]],
+    },
     '(136204) 2003 WL7|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
@@ -2179,13 +2185,15 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '(136472) Makemake|MBOSS, Verbiscer2022': {
-        tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical/hot'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.840, 'V-R': 0.480},
-        calibration_system: 'Vega',
-        sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.83], // albedo from fyr02’s sheet
+    'AlvarezCandal2020': [
+        'The dwarf planet Makemake as seen by X-Shooter',
+        'DOI: 10.1093/mnras/staa2329', 'https://academic.oup.com/mnras/article/497/4/5473/5891238',
+        'https://ui.adsabs.harvard.edu/abs/2020MNRAS.497.5473A/abstract'
+    ],
+    '(136472) Makemake|AlvarezCandal2020, Verbiscer2022': {
+        tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical/hot'],
+        file: 'spectra/files/Makemake_AlvarezCandal2020.txtN',
+        geometric_albedo: ['Generic_Bessell.V', 0.83], // albedo from zelario’s sheet
         spherical_albedo: ['Generic_Bessell.V', [0.74, 0.06]],
     },
     '(136472) Makemake|Lorenzi2016, Verbiscer2022': {
@@ -2197,15 +2205,13 @@
         geometric_albedo: ['Generic_Bessell.V', 0.83], // albedo from zelario’s sheet
         spherical_albedo: ['Generic_Bessell.V', [0.74, 0.06]],
     },
-    'AlvarezCandal2020': [
-        'The dwarf planet Makemake as seen by X-Shooter',
-        'DOI: 10.1093/mnras/staa2329', 'https://academic.oup.com/mnras/article/497/4/5473/5891238',
-        'https://ui.adsabs.harvard.edu/abs/2020MNRAS.497.5473A/abstract'
-    ],
-    '(136472) Makemake|AlvarezCandal2020, Verbiscer2022': {
-        tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical/hot'],
-        file: 'spectra/files/Makemake_AlvarezCandal2020.txtN',
-        geometric_albedo: ['Generic_Bessell.V', 0.83], // albedo from zelario’s sheet
+    '(136472) Makemake|MBOSS, Verbiscer2022': {
+        tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical/hot'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': 0.840, 'V-R': 0.480},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.83], // albedo from fyr02’s sheet
         spherical_albedo: ['Generic_Bessell.V', [0.74, 0.06]],
     },
     '(137294) 1999 RE215|MBOSS': {
@@ -2377,14 +2383,6 @@
         'A multi-chord stellar occultation by the large trans-Neptunian object (174567) Varda',
         'DOI: 10.1051/0004-6361/202038526', 'https://www.aanda.org/articles/aa/full_html/2020/11/aa38526-20/aa38526-20.html', 'https://ui.adsabs.harvard.edu/abs/2020A%26A...643A.125S/abstract'
     ],
-    '(174567) Varda|MBOSS, Souami2020': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical/hot', 'minor body/TNO/midsize'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.892, 'V-R': 0.556, 'R-I': 0.510},
-        calibration_system: 'Vega',
-        sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.099, 0.002]],
-    },
     'Grundy2015': [
         'The mutual orbit, mass, and density of the large transneptunian binary system Varda and Ilmarë',
         'DOI: 10.1016/j.icarus.2015.04.036', 'https://arxiv.org/abs/1505.00510'
@@ -2393,6 +2391,14 @@
         tags: ['featured', 'Solar System', 'minor body/TNO/classical/hot', 'minor body/TNO/midsize'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.892, 'V-I': 1.133},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.099, 0.002]],
+    },
+    '(174567) Varda|MBOSS, Souami2020': {
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical/hot', 'minor body/TNO/midsize'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': 0.892, 'V-R': 0.556, 'R-I': 0.510},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.099, 0.002]],
