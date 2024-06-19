@@ -90,7 +90,7 @@ def launch_window(lang: str):
                 window1 = None # marking the plot window as closed
         
         # Events with the plot window
-        elif event.endswith('plot'):
+        elif isinstance(event, str) and event.endswith('plot'):
             if not window1:
                 window1 = sg.Window(
                     tr.spectral_plot[lang], gui.generate_plot_layout(lang, light_theme), icon=gui.icon,
