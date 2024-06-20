@@ -993,12 +993,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '(19521) Chaos|MBOSS': {
+    '(19521) Chaos|MBOSS, Vilenius2012': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical/hot'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.932, 'V-R': 0.608, 'R-I': 0.571},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.050, 0.030]], // may not be accurate
     },
     '(20000) Varuna|MBOSS': {
         tags: ['featured', 'MBOSS', 'Solar System', 'minor body/TNO/classical/hot', 'minor body/TNO/midsize'],
@@ -1367,12 +1368,18 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '(47171) Lempo|MBOSS': {
+    'Mommert2012': [
+        'TNOs are cool: A survey of the trans-Neptunian region. V. Physical characterization of 18 Plutinos using Herschel-PACS observations',
+        'DOI: 10.1051/0004-6361/201118562', 'https://www.aanda.org/articles/aa/full_html/2012/05/aa18562-11/aa18562-11.html',
+        'https://ui.adsabs.harvard.edu/abs/2012A%26A...541A..93M/abstract'
+    ],
+    '(47171) Lempo|MBOSS, Mommert2012': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant/plutino'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 1.029, 'V-R': 0.693, 'R-I': 0.619},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.079, 0.013]], // may not be accurate
     },
     '(47932) 2000 GN171|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant/plutino'],
