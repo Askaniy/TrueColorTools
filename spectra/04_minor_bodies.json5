@@ -85,6 +85,18 @@
         'Shape Models of Lucy Targets (3548) Eurybates and (21900) Orus from Disk-integrated Photometry',
         'DOI: 10.3847/PSJ/acaf79', 'https://ui.adsabs.harvard.edu/abs/2023PSJ.....4...18M/abstract'
     ],
+    'Lamy2006': [
+        'Hubble Space Telescope observations of the nucleus and inner coma of comet 67P/Churyumov-Gerasimenko',
+        'DOI: 10.1051/0004-6361:20065253', 'https://www.aanda.org/articles/aa/full/2006/41/aa5253-06/aa5253-06.html', 'https://ui.adsabs.harvard.edu/abs/2006A%26A...458..669L/abstract'
+    ],
+    'Lowry2006': [
+        'Aphelion Observations of the Nucleus of Comet 67P/Churyumov-Gerasimenko: Target of ESA's Rosetta Comet Orbiter Mission',
+        'https://ui.adsabs.harvard.edu/abs/2006DPS....38.0801L/abstract'
+    ],
+    'Tubiana2008': [
+        'Characterization of physical parameters of the ROSETTA target comet 67P/Churyumov-Gerasimenko',
+        'https://ui.adsabs.harvard.edu/abs/2008PhDT.......188T/abstract'
+    ],
     
     'Li2019': [
         'Spectrophotometric modeling and mapping of Ceres',
@@ -3902,6 +3914,48 @@
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.750, 'V-R': 0.510, 'R-I': 0.420},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    '67P/CG|Lamy2006': {
+        tags: ['67P/CG'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'V-R': 0.52},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    '67P/CG|Lowry2006': {
+        tags: ['67P/CG'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'V-R': 0.41},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    '67P/CG: April 2004|Tubiana2008': {
+        tags: ['67P/CG'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'V-R': 0.53, 'R-I': 0.49},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    '67P/CG: June 2004|Tubiana2008': {
+        tags: ['67P/CG'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'V-R': 0.38, 'R-I': 0.44},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    '67P/CG: May 2006|Tubiana2008': {
+        tags: ['67P/CG'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'V-R': 0.54, 'R-I': 0.47},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    '67P/CG: July 2007|Tubiana2008': {
+        tags: ['featured', 'Solar System', 'minor body/comet/short period', '67P/CG'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': 0.83, 'V-R': 0.54, 'R-I': 0.46},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
