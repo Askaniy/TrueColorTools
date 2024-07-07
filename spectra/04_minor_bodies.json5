@@ -3905,6 +3905,14 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    'Ciarniello2015': [
+        'Photometric properties of comet 67P/Churyumov-Gerasimenko from VIRTIS-M onboard Rosetta',
+        'DOI: 10.1051/0004-6361/201526307', 'https://www.aanda.org/articles/aa/full_html/2015/11/aa26307-15/aa26307-15.html', 'https://ui.adsabs.harvard.edu/abs/2015A&A...583A..31C/abstract'
+    ],
+    'Fornasier2015': [
+        'Spectrophotometric properties of the nucleus of comet 67P/Churyumov-Gerasimenko from the OSIRIS instrument onboard the ROSETTA spacecraft',
+        'DOI: 10.1051/0004-6361/201525901', 'https://www.aanda.org/articles/aa/full_html/2015/11/aa25901-15/aa25901-15.html', 'https://ui.adsabs.harvard.edu/abs/2015A%26A...583A..30F/abstract'
+    ],
     'Lamy2006': [
         'Hubble Space Telescope observations of the nucleus and inner coma of comet 67P/Churyumov-Gerasimenko',
         'DOI: 10.1051/0004-6361:20065253', 'https://www.aanda.org/articles/aa/full/2006/41/aa5253-06/aa5253-06.html', 'https://ui.adsabs.harvard.edu/abs/2006A%26A...458..669L/abstract'
@@ -3917,35 +3925,6 @@
         'Characterization of physical parameters of the ROSETTA target comet 67P/Churyumov-Gerasimenko',
         'https://ui.adsabs.harvard.edu/abs/2008PhDT.......188T/abstract'
     ],
-    'Fornasier2015': [
-        'Spectrophotometric properties of the nucleus of comet 67P/Churyumov-Gerasimenko from the OSIRIS instrument onboard the ROSETTA spacecraft',
-        'DOI: 10.1051/0004-6361/201525901', 'https://www.aanda.org/articles/aa/full_html/2015/11/aa25901-15/aa25901-15.html', 'https://ui.adsabs.harvard.edu/abs/2015A%26A...583A..30F/abstract'
-    ],
-    'Ciarniello2015': [
-        'Photometric properties of comet 67P/Churyumov-Gerasimenko from VIRTIS-M onboard Rosetta',
-        'DOI: 10.1051/0004-6361/201526307', 'https://www.aanda.org/articles/aa/full_html/2015/11/aa26307-15/aa26307-15.html', 'https://ui.adsabs.harvard.edu/abs/2015A&A...583A..31C/abstract'
-    ],
-    '67P/CG|Lamy2006': {
-        tags: ['Solar System', 'minor body/comet/short period', '67P/Churyumov-Gerasimenko'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'V-R': [0.52, 0.05]},
-        calibration_system: 'Vega',
-        sun_is_emitter: true
-    },
-    '67P/CG|Lowry2006': {
-        tags: ['Solar System', 'minor body/comet/short period', '67P/Churyumov-Gerasimenko'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'V-R': [0.41, 0.04]},
-        calibration_system: 'Vega',
-        sun_is_emitter: true
-    },
-    '67P/CG|Tubiana2008': {
-        tags: ['Solar System', 'minor body/comet/short period', '67P/Churyumov-Gerasimenko'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': [0.83, 0.08], 'V-R': [0.54, 0.05], 'R-I': [0.46, 0.04]},
-        calibration_system: 'Vega',
-        sun_is_emitter: true
-    },
     '67P/CG|Fornasier2015': {
         tags: ['featured', 'Solar System', 'minor body/comet/short period', '67P/Churyumov-Gerasimenko'],
         filters: [325, 480, 535, 649, 700, 743, 882, 989],
@@ -3961,6 +3940,27 @@
         sd: [0.002, 0.002, 0.002, 0.002, 0.003],
         geometric_albedo: true, // normal (=geometric) albedo spectrum from Table 1
         phase_function: ['HG', {H: [15.74, 0.02], G: [-0.13, 0.01]}]
+    },
+    '67P/CG|Tubiana2008': {
+        tags: ['Solar System', 'minor body/comet/short period', '67P/Churyumov-Gerasimenko'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.83, 0.08], 'V-R': [0.54, 0.05], 'R-I': [0.46, 0.04]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    '67P/CG|Lamy2006': {
+        tags: ['Solar System', 'minor body/comet/short period', '67P/Churyumov-Gerasimenko'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'V-R': [0.52, 0.05]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    '67P/CG|Lowry2006': {
+        tags: ['Solar System', 'minor body/comet/short period', '67P/Churyumov-Gerasimenko'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'V-R': [0.41, 0.04]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
     },
     '86P/Wild3|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period'],
