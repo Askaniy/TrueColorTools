@@ -262,7 +262,12 @@
         'Phobos as a D-type Captured Asteroid, Spectral Modeling from 0.25 to 4.0 μm',
         'DOI: 10.1088/0004-637X/777/2/127', 'https://iopscience.iop.org/article/10.1088/0004-637X/777/2/127'
     ],
-    '(M I) Phobos|Pajola2013': {
+    'Fornasier2024': [
+        'Phobos photometric properties from Mars Express HRSC observations',
+        'DOI: 10.1051/0004-6361/202449220', 'https://www.aanda.org/articles/aa/full_html/2024/06/aa49220-24/aa49220-24.html',
+        'https://ui.adsabs.harvard.edu/abs/2024A%26A...686A.203F/abstract'
+    ],
+    '(M I) Phobos|Pajola2013, Fornasier2024': {
         tags: ['featured', 'Solar System', 'moon'],
         nm: [
             245.5, 258.0, 263.5, 295.0, 308.5, 355.0, 360.0, 374.5, 387.0, 480.0, 535.0,
@@ -272,7 +277,8 @@
             0.01305, 0.01312, 0.01484, 0.01489, 0.01699, 0.01766, 0.02037, 0.02137, 0.02177, 0.02641, 0.02769,
             0.02743, 0.02732, 0.02835, 0.03083, 0.03316, 0.03499, 0.03713, 0.03940, 0.04057, 0.03880
         ],
-        geometric_albedo: ['Generic_Bessell.V', 0.071], // https://ssd.jpl.nasa.gov/?sat_phys_par
+        geometric_albedo: ['MEX_HRSC.Green', 0.0683], // disk-resolved (Table 3)
+        spherical_albedo: ['MEX_HRSC.Green', 0.0157], // disk-resolved (Table 3)
     },
     // Deimos
     'Fraeman2013': [
@@ -283,11 +289,17 @@
         'Spectral evidence for a carbonaceous chondrite surface composition on Deimos',
         'https://www.nature.com/articles/283277a0'
     ],
-    '(M II) Deimos|Fraeman2013, Pang1980': {
+    'Thomas1996': [
+        'The Surface of Deimos: Contribution of Materials and Processes to Its Unique Appearance',
+        'DOI: 10.1006/icar.1996.0177', 'https://www.sciencedirect.com/science/article/pii/S0019103596901773',
+        'https://ui.adsabs.harvard.edu/abs/1996Icar..123..536T/abstract'
+    ],
+    '(M II) Deimos|Fraeman2013, Pang1980, Thomas1996': {
         tags: ['featured', 'Solar System', 'moon'],
         nm: [250, 300, 350, 400, 450, 500, 550, 600, 700, 750, 800],
         br: [0.04, 0.05, 0.051, 0.05, 0.049, 0.053, 0.055, 0.058, 0.062, 0.067, 0.069],
-        geometric_albedo: ['Generic_Bessell.V', 0.068], // https://ssd.jpl.nasa.gov/?sat_phys_par
+        geometric_albedo: [540, [0.068, 0.007]],
+        phase_integral: [0.39, 0.02],
     },
 
     // Jovian system
