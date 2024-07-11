@@ -269,7 +269,7 @@ def line_splitter(line: str, font: ImageFont.FreeTypeFont, maxW: int) -> list[st
     else:
         return recursive_split(line.split(), font, maxW)
 
-separators = (' ', ':', '+', '-', '/')
+separators = (' ', ':', '+', '-', '–', '—', '/')
 
 def combine_words(word0: str, word1: str):
     """ Joining or rejoining lines of text """
