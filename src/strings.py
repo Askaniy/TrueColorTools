@@ -663,6 +663,7 @@ names = {
     'Halley': {'ru': 'Галлея', 'de': 'Halley'},
     'Churyumov–Gerasimenko': {'ru': 'Чурюмова — Герасименко', 'de': 'Churyumov-Gerasimenko'},
     'Hartley': {'ru': 'Хартли', 'de': 'Hartley'},
+    'Hale–Bopp': {'ru': 'Хейла — Боппа', 'de': 'Hale–Bopp'},
     'ʻOumuamua': {'ru': 'Оумуамуа', 'de': 'ʻOumuamua'},
     # Classes
     'Class': {'ru': 'Класс', 'de': 'Spektraltyp'},

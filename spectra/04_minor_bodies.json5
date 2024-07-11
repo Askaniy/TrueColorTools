@@ -4079,11 +4079,16 @@
     },
 
     // Non-periodic comets
-    'C/1995O1-HB|MBOSS': {
+    'Szabó2012': [
+        'Evidence for Fresh Frost Layer on the Bare Nucleus of Comet Hale-Bopp at 32 AU Distance',
+        'DOI: 10.1088/0004-637X/761/1/8', 'https://ui.adsabs.harvard.edu/abs/2012ApJ...761....8S/abstract'
+    ],
+    '(C/1995O1) Hale–Bopp|MBOSS, Szabó2012': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.810, 'V-R': 0.390},
         calibration_system: 'Vega',
+        geometric_albedo: ['Generic_Bessell.V', [0.081, 0.009]], // pre-perihelion one was 0.036±0.010
         sun_is_emitter: true
     },
     'C/1999J2|MBOSS': {
@@ -4107,126 +4112,126 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2002CE10-LINEA|MBOSS': {
+    '(C/2002CE10) LINEAR|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.770, 'V-R': 0.542, 'R-I': 0.504},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2002VQ94-LINEA|MBOSS': {
+    '(C/2002VQ94) LINEAR|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.850, 'V-R': 0.500, 'R-I': 0.480},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2003A2-Gleason|MBOSS': {
+    '(C/2003A2) Gleason|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.610, 'V-R': 0.470, 'R-I': 0.460},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2004D1-NEAT|MBOSS': {
+    '(C/2004D1) NEAT|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.820, 'V-R': 0.430, 'R-I': 0.510},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2006S3-Loneos|MBOSS': {
+    '(C/2006S3) Loneos|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.740, 'V-R': 0.580},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2007D1-LINEAR|MBOSS': {
+    '(C/2007D1) LINEAR|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.750, 'V-R': 0.440, 'R-I': 0.410},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2008S3-Boattin|MBOSS': {
+    '(C/2008S3) Boattini|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.769, 'V-R': 0.448, 'R-I': 0.364},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2009T1-McNaugh|MBOSS': {
+    '(C/2009T1) McNaught|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.640, 'V-R': 0.530, 'R-I': 0.450},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2010D4-WISE|MBOSS': {
+    '(C/2010D4) WISE|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.740, 'V-R': 0.460},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2010DG56-WISE|MBOSS': {
+    '(C/2010DG56) WISE|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.770, 'V-R': 0.370},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2010L3-Catalin|MBOSS': {
+    '(C/2010L3) Catalina|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.750, 'V-R': 0.420, 'R-I': 0.410},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2010U3-Boattin|MBOSS': {
+    '(C/2010U3) Boattini|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.778, 'V-R': 0.520, 'R-I': 0.320},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2011P2-PANSTAR|MBOSS': {
+    '(C/2011P2) PanSTARRS|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.919, 'V-R': 0.323},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2011Q1-PANSTAR|MBOSS': {
+    '(C/2011Q1) PanSTARRS|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.819, 'V-R': 0.489},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2012A1-PANSTAR|MBOSS': {
+    '(C/2012A1) PanSTARRS|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.740, 'V-R': 0.450},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2012E1-Hill|MBOSS': {
+    '(C/2012E1) Hill|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.790, 'V-R': 0.400},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2012LP26-Palom|MBOSS': {
+    '(C/2012LP26) Palomar|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.854, 'V-R': 0.516},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2012Q1-Kowalsk|MBOSS': {
+    '(C/2012Q1) Kowalski|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.907, 'V-R': 0.537},
@@ -4240,21 +4245,21 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2013E1-McNaugh|MBOSS': {
+    '(C/2013E1) McNaught|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.750, 'V-R': 0.480},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2013H2-Boattin|MBOSS': {
+    '(C/2013H2) Boattini|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.770, 'V-R': 0.490},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2013P3-Palomar|MBOSS': {
+    '(C/2013P3) Palomar|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.920, 'V-R': 0.450},
@@ -4268,49 +4273,49 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2014AA52-CATAL|MBOSS': {
+    '(C/2014AA52) Catalina|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.770, 'V-R': 0.410},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2014B1-Schwarz|MBOSS': {
+    '(C/2014B1) Schwartz|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.850, 'V-R': 0.580},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2014R1-Borisov|MBOSS': {
+    '(C/2014R1) Borisov|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.810, 'V-R': 0.460},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2014W6-Catalin|MBOSS': {
+    '(C/2014W6) Catalina|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.810, 'V-R': 0.450},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2014XB8-PANSTA|MBOSS': {
+    '(C/2014XB8) PanSTARRS|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.790, 'V-R': 0.440},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'C/2015B1-PANSTAR|MBOSS': {
+    '(C/2015B1) PanSTARRS|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.780, 'V-R': 0.450},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'P/2011S1-Gibbs|MBOSS': {
+    '(P/2011S1) Gibbs|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.960, 'V-R': 0.590},
