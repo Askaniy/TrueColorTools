@@ -18,15 +18,18 @@
     ],
     'Humes2022': [
         'Ultraviolet Spectroscopy of Lucy Mission Targets with the Hubble Space Telescope',
-        'DOI: 10.3847/PSJ/ac8059', 'https://iopscience.iop.org/article/10.3847/PSJ/ac8059', 'https://ui.adsabs.harvard.edu/abs/2022PSJ.....3..190H/abstract'
+        'DOI: 10.3847/PSJ/ac8059', 'https://iopscience.iop.org/article/10.3847/PSJ/ac8059',
+        'https://ui.adsabs.harvard.edu/abs/2022PSJ.....3..190H/abstract'
     ],
     'Lellouch2013': [
         '"TNOs are Cool": A survey of the trans-Neptunian region. IX. Thermal properties of Kuiper belt objects and Centaurs from combined Herschel and Spitzer observations',
-        'DOI: 10.1051/0004-6361/201322047', 'https://www.aanda.org/articles/aa/full_html/2013/09/aa22047-13/aa22047-13.html', 'https://ui.adsabs.harvard.edu/abs/2013A%26A...557A..60L/abstract'
+        'DOI: 10.1051/0004-6361/201322047', 'https://www.aanda.org/articles/aa/full_html/2013/09/aa22047-13/aa22047-13.html',
+        'https://ui.adsabs.harvard.edu/abs/2013A%26A...557A..60L/abstract'
     ],
     'Lorenzi2016': [
         'The Spectrum of Pluto, 0.40 - 0.93 um I. Secular and longitudinal distribution of ices and complex organics',
-        'DOI: 10.1051/0004-6361/201527281', 'https://www.aanda.org/articles/aa/full_html/2016/01/aa27281-15/aa27281-15.html', 'https://ui.adsabs.harvard.edu/abs/2016A%26A...585A.131L/abstract'
+        'DOI: 10.1051/0004-6361/201527281', 'https://www.aanda.org/articles/aa/full_html/2016/01/aa27281-15/aa27281-15.html',
+        'https://ui.adsabs.harvard.edu/abs/2016A%26A...585A.131L/abstract'
     ],
     'Mainzer2019': [
         'NEOWISE Diameters and Albedos V2.0',
@@ -39,7 +42,8 @@
     ],
     'Marchis2012': [
         'Multiple asteroid systems: Dimensions and thermal properties from Spitzer Space Telescope and ground-based observations',
-        'DOI: 10.1016/j.icarus.2012.09.013', 'https://arxiv.org/abs/1604.05384', 'https://ui.adsabs.harvard.edu/abs/2012Icar..221.1130M/abstract'
+        'DOI: 10.1016/j.icarus.2012.09.013', 'https://arxiv.org/abs/1604.05384',
+        'https://ui.adsabs.harvard.edu/abs/2012Icar..221.1130M/abstract'
     ],
     'Markwardt2023': [
         'Photometric Survey of neptune trojan Asteroids. I. The Color Distribution',
@@ -51,11 +55,13 @@
     ],
     'Pravec2012': [
         'Absolute magnitudes of asteroids and a revision of asteroid albedo estimates from WISE thermal observations',
-        'DOI: 10.1016/j.icarus.2012.07.026', 'https://www.asu.cas.cz/~ppravec/pravecetal2012b.pdf', 'https://ui.adsabs.harvard.edu/abs/2012Icar..221..365P/abstract'
+        'DOI: 10.1016/j.icarus.2012.07.026', 'https://www.asu.cas.cz/~ppravec/pravecetal2012b.pdf',
+        'https://ui.adsabs.harvard.edu/abs/2012Icar..221..365P/abstract'
     ],
     'Shevchenko2022': [
         'Kharkiv database of asteroid absolute magnitudes: Comparative analysis with other datasets',
-        'DOI: 10.26093/cds/vizier.36660190', 'https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/666/A190', 'https://ui.adsabs.harvard.edu/abs/2022A%26A...666A.190S/abstract'
+        'DOI: 10.26093/cds/vizier.36660190', 'https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/666/A190',
+        'https://ui.adsabs.harvard.edu/abs/2022A%26A...666A.190S/abstract'
     ],
     'Thirouin2019': [
         'Colors of Trans-Neptunian Contact Binaries',
@@ -67,19 +73,23 @@
     ],
     'Verbiscer2022': [
         'The Diverse Shapes of Dwarf Planet and Large KBO Phase Curves Observed from New Horizons',
-        'DOI: 10.3847/PSJ/ac63a6', 'https://iopscience.iop.org/article/10.3847/PSJ/ac63a6', 'https://ui.adsabs.harvard.edu/abs/2022PSJ.....3...95V/abstract'
+        'DOI: 10.3847/PSJ/ac63a6', 'https://iopscience.iop.org/article/10.3847/PSJ/ac63a6',
+        'https://ui.adsabs.harvard.edu/abs/2022PSJ.....3...95V/abstract'
     ],
     'Vernazza2021': [
         'VLT/SPHERE imaging survey of the largest main-belt asteroids: Final results and synthesis',
-        'DOI: 10.1051/0004-6361/202141781', 'https://www.aanda.org/articles/aa/full_html/2021/10/aa41781-21/aa41781-21.html', 'https://ui.adsabs.harvard.edu/abs/2021A%26A...654A..56V/abstract'
+        'DOI: 10.1051/0004-6361/202141781', 'https://www.aanda.org/articles/aa/full_html/2021/10/aa41781-21/aa41781-21.html',
+        'https://ui.adsabs.harvard.edu/abs/2021A%26A...654A..56V/abstract'
     ],
     'Vilenius2012': [
         '"TNOs are Cool": A survey of the trans-Neptunian region. VI. Herschel/PACS observations and thermal modeling of 19 classical Kuiper belt objects',
-        'DOI: 10.1051/0004-6361/201118743', 'https://www.aanda.org/articles/aa/full_html/2012/05/aa18743-11/aa18743-11.html', 'https://ui.adsabs.harvard.edu/abs/2012A%26A...541A..94V/abstract'
+        'DOI: 10.1051/0004-6361/201118743', 'https://www.aanda.org/articles/aa/full_html/2012/05/aa18743-11/aa18743-11.html',
+        'https://ui.adsabs.harvard.edu/abs/2012A%26A...541A..94V/abstract'
     ],
     'Vilenius2014': [
         '"TNOs are Cool": A survey of the trans-Neptunian region. X. Analysis of classical Kuiper belt objects from Herschel and Spitzer observations',
-        'DOI: 10.1051/0004-6361/201322416', 'https://www.aanda.org/articles/aa/full_html/2014/04/aa22416-13/aa22416-13.html', 'https://ui.adsabs.harvard.edu/abs/2014A%26A...564A..35V/abstract'
+        'DOI: 10.1051/0004-6361/201322416', 'https://www.aanda.org/articles/aa/full_html/2014/04/aa22416-13/aa22416-13.html',
+        'https://ui.adsabs.harvard.edu/abs/2014A%26A...564A..35V/abstract'
     ],
     'Mottola2023a': [
         'Shape Models of Lucy Targets (3548) Eurybates and (21900) Orus from Disk-integrated Photometry',
@@ -88,7 +98,8 @@
     
     'Li2019': [
         'Spectrophotometric modeling and mapping of Ceres',
-        'DOI: 10.1016/j.icarus.2018.12.038', 'https://www.sciencedirect.com/science/article/pii/S0019103518305426', 'https://ui.adsabs.harvard.edu/abs/2019Icar..322..144L/abstract'
+        'DOI: 10.1016/j.icarus.2018.12.038', 'https://www.sciencedirect.com/science/article/pii/S0019103518305426',
+        'https://ui.adsabs.harvard.edu/abs/2019Icar..322..144L/abstract'
     ],
     '(1) Ceres|SMASS, Li2019': {
         tags: ['featured', 'SMASS', 'Solar System', 'planetary body/dwarf planet', 'minor body/asteroid/main belt'],
@@ -108,11 +119,12 @@
         geometric_albedo: ['Generic_Bessell.V', 0.202],
         phase_function: ['HG', {H: [5.280, 0.050], G: [0.320, 0.040]}]
     },
-    'Li2013': [
+    'Li2013a': [
         'Global photometric properties of Asteroid (4) Vesta observed with Dawn Framing Camera',
-        'DOI: 10.1016/j.icarus.2013.08.011', 'https://www.sciencedirect.com/science/article/pii/S0019103513003497', 'https://ui.adsabs.harvard.edu/abs/2013Icar..226.1252L/abstract'
+        'DOI: 10.1016/j.icarus.2013.08.011', 'https://www.sciencedirect.com/science/article/pii/S0019103513003497',
+        'https://ui.adsabs.harvard.edu/abs/2013Icar..226.1252L/abstract'
     ],
-    '(4) Vesta|SMASS, Li2013': {
+    '(4) Vesta|SMASS, Li2013a': {
         tags: ['featured', 'SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000004.2.txtU',
         geometric_albedo: ['Dawn_FC.F2', [0.38, 0.04]],
@@ -148,7 +160,8 @@
     },
     'Shepard2021': [
         'Asteroid 16 Psyche: Shape, Features, and Global Map',
-        'DOI: 10.3847/PSJ/abfdba', 'https://iopscience.iop.org/article/10.3847/PSJ/abfdba', 'https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..125S/abstract'
+        'DOI: 10.3847/PSJ/abfdba', 'https://iopscience.iop.org/article/10.3847/PSJ/abfdba',
+        'https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..125S/abstract'
     ],
     '(16) Psyche|SMASS, Shepard2021, Shevchenko2022': {
         tags: ['featured', 'SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -176,7 +189,8 @@
     },
     'Sierks2011': [
         'Images of Asteroid 21 Lutetia: A Remnant Planetesimal from the Early Solar System',
-        'DOI: 10.1126/science.1207325', 'https://dspace.mit.edu/bitstream/handle/1721.1/110553/Sierks_2011_open_access.pdf', 'https://ui.adsabs.harvard.edu/abs/2011Sci...334..487S/abstract'
+        'DOI: 10.1126/science.1207325', 'https://dspace.mit.edu/bitstream/handle/1721.1/110553/Sierks_2011_open_access.pdf',
+        'https://ui.adsabs.harvard.edu/abs/2011Sci...334..487S/abstract'
     ],
     '(21) Lutetia|SMASS, Sierks2011': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -258,7 +272,8 @@
     },
     'Marchis2013': [
         'Characteristics and large bulk density of the C-type main-belt triple asteroid (93) Minerva',
-        'DOI: 10.1016/j.icarus.2013.02.018', 'https://arxiv.org/abs/1310.3209', 'https://ui.adsabs.harvard.edu/abs/2013Icar..224..178M/abstract'
+        'DOI: 10.1016/j.icarus.2013.02.018', 'https://arxiv.org/abs/1310.3209',
+        'https://ui.adsabs.harvard.edu/abs/2013Icar..224..178M/abstract'
     ],
     '(93) Minerva|SMASS, Marchis2013, Pravec2012': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -279,7 +294,8 @@
     },
     'Descamps2009': [
         'New insights on the binary Asteroid 121 Hermione',
-        'DOI: 10.1016/j.icarus.2009.04.032', 'https://arxiv.org/abs/0904.2033', 'https://ui.adsabs.harvard.edu/abs/2009Icar..203...88D/abstract'
+        'DOI: 10.1016/j.icarus.2009.04.032', 'https://arxiv.org/abs/0904.2033',
+        'https://ui.adsabs.harvard.edu/abs/2009Icar..203...88D/abstract'
     ],
     '(121) Hermione|SMASS, Descamps2009': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -301,7 +317,8 @@
     },
     'Helfenstein1996': [
         'Galileo Photometry of Asteroid 243 Ida',
-        'DOI: 10.1006/icar.1996.0036', 'https://www.sciencedirect.com/science/article/pii/S0019103596900366', 'https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract'
+        'DOI: 10.1006/icar.1996.0036', 'https://www.sciencedirect.com/science/article/pii/S0019103596900366',
+        'https://ui.adsabs.harvard.edu/abs/1996Icar..120...48H/abstract'
     ],
     '(243) Ida|SMASS, Helfenstein1996': {
         tags: ['featured', 'SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -340,7 +357,8 @@
     },
     'Clark1999': [
         'NEAR Photometry of Asteroid 253 Mathilde',
-        'DOI: 10.1006/icar.1999.6124', 'https://www.sciencedirect.com/science/article/pii/S0019103599961249', 'https://ui.adsabs.harvard.edu/abs/1999Icar..140...53C/abstract'
+        'DOI: 10.1006/icar.1999.6124', 'https://www.sciencedirect.com/science/article/pii/S0019103599961249',
+        'https://ui.adsabs.harvard.edu/abs/1999Icar..140...53C/abstract'
     ],
     '(253) Mathilde|SMASS, Clark1999': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -359,7 +377,8 @@
     ],
     'Li2004': [
         'Photometric analysis of Eros from NEAR data',
-        'DOI: 10.1016/j.icarus.2004.07.024', 'https://www.sciencedirect.com/science/article/pii/S0019103504002234', 'https://ui.adsabs.harvard.edu/abs/2004Icar..172..415L/abstract'
+        'DOI: 10.1016/j.icarus.2004.07.024', 'https://www.sciencedirect.com/science/article/pii/S0019103504002234',
+        'https://ui.adsabs.harvard.edu/abs/2004Icar..172..415L/abstract'
     ],
     '(433) Eros|deLeon2010, Li2004': { tags: ['featured', 'Solar System', 'minor body/asteroid/NEO/Amor'],
         nm_range: {start: 350, stop: 890, step: 5},
@@ -391,7 +410,8 @@
     ],
     'Mueller2010': [
         'Eclipsing binary Trojan asteroid Patroclus: Thermal inertia from Spitzer observations',
-        'DOI: 10.1016/j.icarus.2009.07.043', 'https://arxiv.org/abs/0908.4198', 'https://ui.adsabs.harvard.edu/abs/2010Icar..205..505M/abstract'
+        'DOI: 10.1016/j.icarus.2009.07.043', 'https://arxiv.org/abs/0908.4198',
+        'https://ui.adsabs.harvard.edu/abs/2010Icar..205..505M/abstract'
     ],
     '(617) Patroclus-Menoetius|Humes2022, Mueller2010': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/trojan/Jupiter', 'spacecraft target/Lucy'],
@@ -414,7 +434,8 @@
     },
     'Licandro2016': [
         'Size and albedo distributions of asteroids in cometary orbits using WISE data',
-        'DOI: 10.1051/0004-6361/201526866', 'https://www.aanda.org/articles/aa/full_html/2016/01/aa26866-15/aa26866-15.html', 'https://ui.adsabs.harvard.edu/abs/2016A%26A...585A...9L/abstract'
+        'DOI: 10.1051/0004-6361/201526866', 'https://www.aanda.org/articles/aa/full_html/2016/01/aa26866-15/aa26866-15.html',
+        'https://ui.adsabs.harvard.edu/abs/2016A%26A...585A...9L/abstract'
     ],
     '(944) Hidalgo|MITHNEOS, Licandro2016, Pravec2012': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt', 'minor body/centaur'],
@@ -424,7 +445,8 @@
     },
     'Helfenstein1994': [
         'Galileo Photometry of Asteroid 951 Gaspra',
-        'DOI: 10.1006/icar.1994.1005', 'https://www.sciencedirect.com/science/article/pii/S0019103584710050', 'https://ui.adsabs.harvard.edu/abs/1994Icar..107...37H/abstract'
+        'DOI: 10.1006/icar.1994.1005', 'https://www.sciencedirect.com/science/article/pii/S0019103584710050',
+        'https://ui.adsabs.harvard.edu/abs/1994Icar..107...37H/abstract'
     ],
     '(951) Gaspra|Helfenstein1994': {
         tags: ['Solar System', 'minor body/asteroid/main belt'],
@@ -483,7 +505,8 @@
     },
     'Rozitis2014': [
         'Physical characterisation of near-Earth asteroid (1620) Geographos. Reconciling radar and thermal-infrared observations',
-        'DOI: 10.1051/0004-6361/201323090', 'https://www.aanda.org/articles/aa/full_html/2014/08/aa23090-13/aa23090-13.html', 'https://ui.adsabs.harvard.edu/abs/2014A%26A...568A..43R/abstract'
+        'DOI: 10.1051/0004-6361/201323090', 'https://www.aanda.org/articles/aa/full_html/2014/08/aa23090-13/aa23090-13.html',
+        'https://ui.adsabs.harvard.edu/abs/2014A%26A...568A..43R/abstract'
     ],
     '(1620) Geographos|SMASS, Rozitis2014': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/NEO/Apollo'],
@@ -500,7 +523,8 @@
     },
     'BragaRibas2023': [
         "Constraints on (2060) Chiron's size, shape, and surrounding material from the November 2018 and September 2019 stellar occultations",
-        'DOI: 10.1051/0004-6361/202346749', 'https://www.aanda.org/articles/aa/full_html/2023/08/aa46749-23/aa46749-23.html', 'https://ui.adsabs.harvard.edu/abs/2023A%26A...676A..72B/abstract'
+        'DOI: 10.1051/0004-6361/202346749', 'https://www.aanda.org/articles/aa/full_html/2023/08/aa46749-23/aa46749-23.html',
+        'https://ui.adsabs.harvard.edu/abs/2023A%26A...676A..72B/abstract'
     ],
     '(2060) Chiron|MBOSS, BragaRibas2023': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -517,7 +541,8 @@
     },
     'Benner1999': [
         'Radar Observations of Asteroid 2063 Bacchus',
-        'DOI: 10.1006/icar.1999.6094', 'https://echo.jpl.nasa.gov/asteroids/benner.etal.1999.bacchus.pdf', 'https://ui.adsabs.harvard.edu/abs/1999Icar..139..309B/abstract'
+        'DOI: 10.1006/icar.1999.6094', 'https://echo.jpl.nasa.gov/asteroids/benner.etal.1999.bacchus.pdf',
+        'https://ui.adsabs.harvard.edu/abs/1999Icar..139..309B/abstract'
     ],
     '(2063) Bacchus|SMASS, Benner1999, Pravec2012': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/NEO/Apollo'],
@@ -545,7 +570,8 @@
     ],
     'Spjuth2012': [
         'Disk-resolved photometry of Asteroid (2867) Steins',
-        'DOI: 10.1016/j.icarus.2012.06.021', 'https://www.sciencedirect.com/science/article/pii/S0019103512002503', 'https://ui.adsabs.harvard.edu/abs/2012Icar..221.1101S/abstract'
+        'DOI: 10.1016/j.icarus.2012.06.021', 'https://www.sciencedirect.com/science/article/pii/S0019103512002503',
+        'https://ui.adsabs.harvard.edu/abs/2012Icar..221.1101S/abstract'
     ],
     '(2867) Šteins|Hicks2004, Spjuth2012': {
         tags: ['featured', 'Solar System', 'minor body/asteroid/main belt'],
@@ -558,11 +584,13 @@
     },
     'Geem2022': [
         '(3200) Phaethon polarimetry in the negative branch: new evidence for the anhydrous nature of the DESTINY+ target asteroid',
-        'DOI: 10.1093/mnrasl/slac072', 'https://academic.oup.com/mnrasl/article/516/1/L53/6639881', 'https://ui.adsabs.harvard.edu/abs/2022MNRAS.516L..53G/abstract'
+        'DOI: 10.1093/mnrasl/slac072', 'https://academic.oup.com/mnrasl/article/516/1/L53/6639881',
+        'https://ui.adsabs.harvard.edu/abs/2022MNRAS.516L..53G/abstract'
     ],
     'Beniyama2023': [
         'Simultaneous multicolor photometry of the DESTINY+ target asteroid (3200) Phaethon',
-        'DOI: 10.1093/pasj/psac109', 'https://academic.oup.com/pasj/article/75/2/297/7008668', 'https://ui.adsabs.harvard.edu/abs/2023PASJ...75..297B/abstract'
+        'DOI: 10.1093/pasj/psac109', 'https://academic.oup.com/pasj/article/75/2/297/7008668',
+        'https://ui.adsabs.harvard.edu/abs/2023PASJ...75..297B/abstract'
     ],
     '(3200) Phaethon|SMASS, Geem2022, Beniyama2023': {
         tags: ['featured', 'SMASS', 'Solar System', 'minor body/asteroid/NEO/Apollo'],
@@ -627,7 +655,8 @@
     },
     'Duffard2014': [
         '"TNOs are Cool": A survey of the trans-Neptunian region. XI. A Herschel-PACS view of 16 Centaurs',
-        'DOI: 10.1051/0004-6361/201322377', 'https://www.aanda.org/articles/aa/full_html/2014/04/aa22377-13/aa22377-13.html', 'https://ui.adsabs.harvard.edu/abs/2014A%26A...564A..92D/abstract'
+        'DOI: 10.1051/0004-6361/201322377', 'https://www.aanda.org/articles/aa/full_html/2014/04/aa22377-13/aa22377-13.html',
+        'https://ui.adsabs.harvard.edu/abs/2014A%26A...564A..92D/abstract'
     ],
     '(5145) Pholus|MBOSS, Duffard2014': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -651,7 +680,8 @@
     },
     'Hudson2000': [
         'Radar Observations and Physical Model of Asteroid 6489 Golevka',
-        'DOI: 10.1006/icar.2000.6483', 'https://echo.jpl.nasa.gov/asteroids/6489_Golevka/hudson.etal.2000.golevka.pdf', 'https://ui.adsabs.harvard.edu/abs/2000Icar..148...37H/abstract'
+        'DOI: 10.1006/icar.2000.6483', 'https://echo.jpl.nasa.gov/asteroids/6489_Golevka/hudson.etal.2000.golevka.pdf',
+        'https://ui.adsabs.harvard.edu/abs/2000Icar..148...37H/abstract'
     ],
     'Mottola1997': [
         'Physical model of near-earth asteroid 6489 golevka (1991 JX) from optical and infrared observations.',
@@ -721,7 +751,8 @@
     },
     'Buratti2004': [
         '9969 Braille: Deep Space 1 infrared spectroscopy, geometric albedo, and classification',
-        'DOI: 10.1016/j.icarus.2003.06.002', 'https://www.lpl.arizona.edu/~yelle/eprints/Buratti04a.pdf', 'https://ui.adsabs.harvard.edu/abs/2004Icar..167..129B/abstract'
+        'DOI: 10.1016/j.icarus.2003.06.002', 'https://www.lpl.arizona.edu/~yelle/eprints/Buratti04a.pdf',
+        'https://ui.adsabs.harvard.edu/abs/2004Icar..167..129B/abstract'
     ],
     '(9969) Braille|SMASS, Buratti2004': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/Mars-crosser'],
@@ -730,7 +761,8 @@
     },
     'Leiva2017': [
         'Size and Shape of Chariklo from Multi-epoch Stellar Occultations',
-        'DOI: 10.3847/1538-3881/aa8956', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa8956', 'https://ui.adsabs.harvard.edu/abs/2017AJ....154..159L/abstract'
+        'DOI: 10.3847/1538-3881/aa8956', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa8956',
+        'https://ui.adsabs.harvard.edu/abs/2017AJ....154..159L/abstract'
     ],
     '(10199) Chariklo|MBOSS, Leiva2017': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -1142,7 +1174,8 @@
     ],
     'Tatsumi2018': [
         'Vis-NIR disk-integrated photometry of asteroid 25143 Itokawa around opposition by AMICA/Hayabusa',
-        'DOI: 10.1016/j.icarus.2018.04.001', 'https://kar.kent.ac.uk/66973/1/Lowry_Vis-NIR%20Disk-integrated%20Photometry.pdf', 'https://ui.adsabs.harvard.edu/abs/2018Icar..311..175T/abstract'
+        'DOI: 10.1016/j.icarus.2018.04.001', 'https://kar.kent.ac.uk/66973/1/Lowry_Vis-NIR%20Disk-integrated%20Photometry.pdf',
+        'https://ui.adsabs.harvard.edu/abs/2018Icar..311..175T/abstract'
     ],
     '(25143) Itokawa|Lowry2005, Tatsumi2018': {
         tags: ['featured', 'Solar System', 'minor body/asteroid/NEO/Apollo'],
@@ -1323,7 +1356,8 @@
     },
     'SantosSanz2022': [
         'Physical properties of the trans-Neptunian object (38628) Huya from a multi-chord stellar occultation',
-        'DOI: 10.1051/0004-6361/202141546', 'https://www.aanda.org/articles/aa/full_html/2022/08/aa41546-21/aa41546-21.html', 'https://ui.adsabs.harvard.edu/abs/2022A%26A...664A.130S/abstract'
+        'DOI: 10.1051/0004-6361/202141546', 'https://www.aanda.org/articles/aa/full_html/2022/08/aa41546-21/aa41546-21.html',
+        'https://ui.adsabs.harvard.edu/abs/2022A%26A...664A.130S/abstract'
     ],
     '(38628) Huya|MBOSS, SantosSanz2022': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant/plutino'],
@@ -1622,7 +1656,8 @@
     },
     'Daly2023': [
         'Successful kinetic impact into an asteroid for planetary defence',
-        'DOI: 10.1038/s41586-023-05810-5', 'https://www.nature.com/articles/s41586-023-05810-5', 'https://ui.adsabs.harvard.edu/abs/2023Natur.616..443D/abstract'
+        'DOI: 10.1038/s41586-023-05810-5', 'https://www.nature.com/articles/s41586-023-05810-5',
+        'https://ui.adsabs.harvard.edu/abs/2023Natur.616..443D/abstract'
     ],
     'Hasselmann2023': [
         'Albedo properties of Didymos and Dimorphos surface and ejecta plume through DART and LICIACube imaging',
@@ -1816,14 +1851,15 @@
     ],
     'Brown2018': [
         'Medium-sized Satellites of Large Kuiper Belt Objects',
-        'DOI: 10.3847/1538-3881/aad9f2', 'https://iopscience.iop.org/article/10.3847/1538-3881/aad9f2', 'https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B/abstract'
+        'DOI: 10.3847/1538-3881/aad9f2', 'https://iopscience.iop.org/article/10.3847/1538-3881/aad9f2',
+        'https://ui.adsabs.harvard.edu/abs/2018AJ....156..164B/abstract'
     ],
     'deBergh2005': [
         'The surface of the transneptunian object 90482 Orcus',
         'DOI: 10.1051/0004-6361:20042533', 'https://www.aanda.org/articles/aa/abs/2005/27/aa2533-04/aa2533-04.html',
         'https://ui.adsabs.harvard.edu/abs/2005A%26A...437.1115D/abstract'
     ],
-    '(90482) Orcus|DeBergh2005, Brown2018': {
+    '(90482) Orcus|deBergh2005, Brown2018': {
         tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant/plutino', 'traced spectrum'],
         file: 'spectra/files/Orcus_deBergh2005.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
@@ -1832,14 +1868,6 @@
         tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant/plutino'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.670, 'V-R': 0.376, 'R-I': 0.372},
-        calibration_system: 'Vega',
-        sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
-    },
-    '(90482) Orcus|deBergh2005, Brown2018': {
-        tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant/plutino'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.68, 'V-R': 0.37, 'V-I': 0.74},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
@@ -3910,7 +3938,7 @@
         'DOI: 10.1051/0004-6361/201525901', 'https://www.aanda.org/articles/aa/full_html/2015/11/aa25901-15/aa25901-15.html',
         'https://ui.adsabs.harvard.edu/abs/2015A%26A...583A..30F/abstract'
     ],
-    '67P/Churyumov-Gerasimenko|Fornasier2015': {
+    '67P/Churyumov–Gerasimenko|Fornasier2015': {
         tags: ['featured', 'Solar System', 'minor body/comet/short period', 'Churyumov-Gerasimenko'],
         filters: [ // the WAC filter didn't allow the use of `photometric_system` syntax
             'Rosetta_OSIRIS_WAC.F71', 'Rosetta_OSIRIS_NAC.Blue',
@@ -3934,14 +3962,14 @@
         filters: ['Blue', 'Green', 'Orange', 'Hydra', 'Red'],
         br: [0.054, 0.059, 0.074, 0.077, 0.080],
         sd: [0.002, 0.002, 0.002, 0.002, 0.003],
+        phase_function: ['HG', {H: [15.74, 0.02], G: [-0.13, 0.01]}],
         geometric_albedo: true, // Table 1
-        phase_function: ['HG', {H: [15.74, 0.02], G: [-0.13, 0.01]}]
     },
     'Tubiana2008': [
         'Characterization of physical parameters of the ROSETTA target comet 67P/Churyumov-Gerasimenko',
         'https://ui.adsabs.harvard.edu/abs/2008PhDT.......188T/abstract'
     ],
-    '67P/Churyumov-Gerasimenko|Tubiana2008': {
+    '67P/Churyumov–Gerasimenko|Tubiana2008': {
         tags: ['Solar System', 'minor body/comet/short period', 'Churyumov-Gerasimenko'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.83, 0.08], 'V-R': [0.54, 0.05], 'R-I': [0.46, 0.04]},
@@ -3953,7 +3981,7 @@
         'DOI: 10.1051/0004-6361:20065253', 'https://www.aanda.org/articles/aa/full/2006/41/aa5253-06/aa5253-06.html',
         'https://ui.adsabs.harvard.edu/abs/2006A%26A...458..669L/abstract'
     ],
-    '67P/Churyumov-Gerasimenko|Lamy2006': {
+    '67P/Churyumov–Gerasimenko|Lamy2006': {
         tags: ['Solar System', 'minor body/comet/short period', 'Churyumov-Gerasimenko'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-R': [0.52, 0.05]},
@@ -3964,7 +3992,7 @@
         'Aphelion Observations of the Nucleus of Comet 67P/Churyumov-Gerasimenko: Target of ESA’s Rosetta Comet Orbiter Mission',
         'https://ui.adsabs.harvard.edu/abs/2006DPS....38.0801L/abstract'
     ],
-    '67P/Churyumov-Gerasimenko|Lowry2006': {
+    '67P/Churyumov–Gerasimenko|Lowry2006': {
         tags: ['Solar System', 'minor body/comet/short period', 'Churyumov-Gerasimenko'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-R': [0.41, 0.04]},
@@ -3976,6 +4004,20 @@
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 1.580, 'V-R': 0.555},
         calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    'Li2013b': [
+        'Photometric properties of the nucleus of Comet 103P/Hartley 2',
+        'DOI: 10.1016/j.icarus.2012.11.001', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103512004460',
+        'https://ui.adsabs.harvard.edu/abs/2013Icar..222..559L/abstract'
+    ],
+    '103P/Hartley 2|Li2013b': {
+        tags: ['Solar System', 'minor body/comet/short period'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'U-B': [0.27, 0.04], 'B-V': [0.75, 0.05], 'V-R': [0.43, 0.04], 'R-I': [0.39, 0.05]},
+        calibration_system: 'Vega',
+        geometric_albedo: ['Generic_Bessell.V', [0.045, 0.009]],
+        spherical_albedo: ['Generic_Bessell.V', [0.013, 0.002]],
         sun_is_emitter: true
     },
     '106P/Schuster|MBOSS': {

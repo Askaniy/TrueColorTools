@@ -661,7 +661,8 @@ names = {
     'Gǃòʼé ǃHú': {'ru': 'Гкъо’э Къху', 'de': 'Gǃòʼé ǃHú'},
     'Arrokoth': {'ru': 'Аррокот', 'de': 'Arrokoth'},
     'Halley': {'ru': 'Галлея', 'de': 'Halley'},
-    'Churyumov-Gerasimenko': {'ru': 'Чурюмова — Герасименко', 'de': 'Churyumov-Gerasimenko'},
+    'Churyumov–Gerasimenko': {'ru': 'Чурюмова — Герасименко', 'de': 'Churyumov-Gerasimenko'},
+    'Hartley': {'ru': 'Хартли', 'de': 'Hartley'},
     'ʻOumuamua': {'ru': 'Оумуамуа', 'de': 'ʻOumuamua'},
     # Classes
     'Class': {'ru': 'Класс', 'de': 'Spektraltyp'},
