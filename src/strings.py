@@ -85,31 +85,37 @@ gui_rnd = {
     'de': 'Dezimalstellen'
 }
 
+#gui_input = {
+#    'en': 'Input data',
+#    'ru': 'Входные данные',
+#    'de': 'Eingaben'
+#}
+#gui_output = {
+#    'en': 'Output',
+#    'ru': 'Результат',
+#    'de': 'Ergebnisse'
+#}
+
 # Tab 1 - Database viewer
-gui_database = {
-    'en': 'Database',
-    'ru': 'База данных',
-    'de': 'Datenbank'
-}
+#gui_database = {
+#    'en': 'Database',
+#    'ru': 'База данных',
+#    'de': 'Datenbank'
+#}
 gui_load = {
-    'en': 'Load database',
+    'en': 'Load the database',
     'ru': 'Загрузить базу данных',
     'de': 'Datenbank laden'
 }
-gui_update = {
-    'en': 'Update database',
-    'ru': 'Обновить базу данных',
+gui_reload = {
+    'en': 'Reload the database',
+    'ru': 'Перезагрузить базу данных',
     'de': 'Aktualisieren'
 }
 gui_tags = {
     'en': 'Category',
     'ru': 'Категория',
     'de': 'Kategorie'
-}
-gui_output = {
-    'en': 'Output',
-    'ru': 'Результат',
-    'de': 'Ergebnisse'
 }
 gui_estimated = {
     'en': 'Note: The albedo is estimated.',
@@ -213,13 +219,8 @@ info_indicator = {
 }
 
 # Tab 2 - Image processing
-gui_input = {
-    'en': 'Input data',
-    'ru': 'Входные данные',
-    'de': 'Eingaben'
-}
 gui_step1 = {
-    'en': 'Choose input data type',
+    'en': 'Choose the input data type',
     'ru': 'Выберите формат вводимых данных',
     'de': 'Eingabe-Datentyp auswählen'
 }

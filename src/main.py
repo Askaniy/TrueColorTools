@@ -149,21 +149,6 @@ def launch_window(lang: str):
             
             elif event == tr.gui_info[lang]:
                 sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event, icon=gui.icon, non_blocking=True)
-            
-            # Global loading of spectra database, was needed for separate Table tab
-            elif event == 'T1_database':
-                objectsDB, refsDB = di.import_DBs(['spectra', 'spectra_extras'])
-                tagsDB = aux.tag_list(objectsDB)
-                namesDB = { # optimize!
-                    'en': aux.obj_names_dict(objectsDB, 'ALL', 'en'),
-                    'ru': aux.obj_names_dict(objectsDB, 'ALL', 'ru'),
-                    'de': aux.obj_names_dict(objectsDB, 'ALL', 'de')
-                }
-                window['T1_tagsN'].update(visible=True)
-                window['T1_tags'].update(default_tag, values=tagsDB, visible=True)
-                window['T1_list'].update(values=tuple(aux.obj_names_dict(objectsDB, default_tag, lang).keys()), visible=True)
-                window['T1_database'].update(tr.gui_update[lang])
-                window['T1_database'].metadata=True # switcher from "Load" to "Update"
 
             # Brightness mode radio selection
             elif isinstance(event, str) and event.startswith('-brMode'):
@@ -200,8 +185,24 @@ def launch_window(lang: str):
             # ------------ Events in the tab "Database viewer" ------------
 
             if values['-currentTab-'] == 'tab1':
+            
+                if event == 'T1_load':
+                    # Loading of the spectra database
+                    objectsDB, refsDB = di.import_DBs(['spectra', 'spectra_extras'])
+                    tagsDB = aux.tag_list(objectsDB)
+                    namesDB = { # optimize!
+                        'en': aux.obj_names_dict(objectsDB, 'ALL', 'en'),
+                        'ru': aux.obj_names_dict(objectsDB, 'ALL', 'ru'),
+                        'de': aux.obj_names_dict(objectsDB, 'ALL', 'de')
+                    }
+                    window['T1_header_space'].update(visible=False)
+                    window['T1_load'].update(tr.gui_load[lang], visible=False)
+                    window['T1_tagsN'].update(visible=True)
+                    window['T1_tags'].update(default_tag, values=tagsDB, visible=True)
+                    window['T1_list'].update(values=tuple(aux.obj_names_dict(objectsDB, default_tag, lang).keys()), visible=True)
+                    window['T1_reload'].update(tr.gui_reload[lang], visible=True)
 
-                if (event in triggers or event == 'T1_list' or event == 'T1_filter') and values['T1_list'] != []:
+                elif (event in triggers or event == 'T1_list' or event == 'T1_filter') and values['T1_list'] != []:
                     T1_name = values['T1_list'][0]
                     T1_raw_name = namesDB[lang][T1_name]
 

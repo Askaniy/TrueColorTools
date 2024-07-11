@@ -59,40 +59,44 @@ def generate_layout(
     slider_size = (1, 15)
 
     settings_column = sg.Column([
+        [sg.T()],
         [sg.Push(), sg.Text(tr.gui_settings[lang], font=title_font, key='-settingsTitle-'), sg.Push()],
-        [sg.T('')],
+        [sg.T()],
         [sg.Checkbox(tr.gui_gamma[lang], enable_events=True, default=True, key='-gamma-')],
         [sg.Checkbox('sRGB', enable_events=True, key='-srgb-')],
-        [sg.T('')],
+        [sg.T()],
         [sg.Push(), sg.Text(tr.gui_br[lang][0], key='-brModeText-'), sg.Push()],
         [sg.Radio(tr.gui_br[lang][1], 'brRadio', enable_events=True, default=brMode==0, key='-brMode0-')],
         [sg.Radio(tr.gui_br[lang][2], 'brRadio', enable_events=True, default=brMode==1, key='-brMode1-')],
         [sg.Radio(tr.gui_br[lang][3], 'brRadio', enable_events=True, default=brMode==2, key='-brMode2-')],
-        [sg.T('')],
+        [sg.T()],
         [sg.Push(), sg.Text(tr.gui_formatting[lang], key='-formattingText-'), sg.Push()],
         [
             sg.Text(tr.gui_bit[lang], key='-bitnessText-'),
-            sg.InputText(bitness, size=1, disabled_readonly_background_color=inputOFF_color, expand_x=True, enable_events=True, key='-bitness-')
+            sg.InputText(bitness, size=1, disabled_readonly_background_color=inputOFF_color, expand_x=True, enable_events=True, key='-bitness-'),
         ],
         [
             sg.Text(tr.gui_rnd[lang], key='-roundingText-'),
-            sg.InputText(rounding, size=1, disabled_readonly_background_color=inputOFF_color, expand_x=True, enable_events=True, key='-rounding-')
-        ]
+            sg.InputText(rounding, size=1, disabled_readonly_background_color=inputOFF_color, expand_x=True, enable_events=True, key='-rounding-'),
+        ],
     ])
 
     T1_col1 = [
-        [sg.Push(), sg.Text(tr.gui_database[lang], font=title_font, key='T1_title1'), sg.Push()],
-        [sg.Push(), sg.Button(button_text=tr.gui_load[lang], size=button_size, key='T1_database', metadata=False), sg.Push()],
+        #[sg.Push(), sg.Text(tr.gui_database[lang], font=title_font, key='T1_title1'), sg.Push()],
+        [sg.Push(),sg.Text(key='T1_header_space'), sg.Push()], # Push is workaround to make visible=False work
+        [sg.Push(), sg.Button(button_text=tr.gui_load[lang], size=button_size, key='T1_load'), sg.Push()],
         [
             sg.Push(), sg.Text(tr.gui_tags[lang], key='T1_tagsN', visible=False),
-            sg.InputCombo([], default_value='', size=tags_input_size, enable_events=True, key='T1_tags', visible=False)
+            sg.InputCombo([], default_value='', size=tags_input_size, enable_events=True, key='T1_tags', visible=False),
         ],
-        [sg.Listbox(values=(), enable_events=True, key='T1_list', visible=False, expand_x=True, expand_y=True)]
+        [sg.Listbox(values=(), enable_events=True, key='T1_list', visible=False, expand_x=True, expand_y=True)],
+        [sg.Button(button_text=tr.gui_reload[lang], size=button_size, key='T1_reload', visible=False)],
     ]
     T1_col2 = [
-        [sg.Push(), sg.Text(tr.gui_output[lang], font=title_font, key='T1_title2'), sg.Push()],
-        [sg.Push(), sg.Graph(canvas_size=canvas_size, graph_bottom_left=(0, 0), graph_top_right=canvas_size, background_color=None, key='T1_graph'), sg.Push()],
-        [sg.Push(), sg.T('', key='T1_estimated'), sg.Push()],
+        #[sg.Text(tr.gui_output[lang], font=title_font, key='T1_title2')],
+        [sg.T()],
+        [sg.Graph(canvas_size=canvas_size, graph_bottom_left=(0, 0), graph_top_right=canvas_size, background_color=None, key='T1_graph')],
+        [sg.T(key='T1_estimated')],
         [sg.Text(tr.gui_rgb[lang], key='T1_colorRGB'), sg.Input(size=1, key='T1_rgb', expand_x=True)],
         [sg.Text(tr.gui_hex[lang], key='T1_colorHEX'), sg.Input(size=1, key='T1_hex', expand_x=True)],
         [
@@ -100,16 +104,16 @@ def generate_layout(
             sg.Text(tr.gui_in_filter[lang], key='T1_in_filter'),
             sg.InputCombo(filtersDB, 'Generic_Bessell.V', enable_events=True, key='T1_filter')
         ],
-        [sg.T('')],
-        [sg.Push(), sg.Button(button_text=tr.gui_plot[lang], size=button_size, key='T1_plot'), sg.Push()],
-        [sg.Push(), sg.Button(button_text=tr.gui_pin[lang], size=button_size, key='T1_pin'), sg.Push()],
-        [sg.Push(), sg.Button(button_text=tr.gui_unpin[lang], size=button_size, key='T1_unpin'), sg.Push()],
-        [sg.T('')],
-        [sg.Push(), sg.Button(button_text=tr.gui_export2text[lang], size=button_size, key='T1_export2text'), sg.Push()],
+        [sg.T()],
+        [sg.Button(button_text=tr.gui_plot[lang], size=button_size, key='T1_plot')],
+        [sg.Button(button_text=tr.gui_pin[lang], size=button_size, key='T1_pin')],
+        [sg.Button(button_text=tr.gui_unpin[lang], size=button_size, key='T1_unpin')],
+        [sg.T()],
+        [sg.Button(button_text=tr.gui_export2text[lang], size=button_size, key='T1_export2text')],
         [
-            sg.Push(), sg.Input(enable_events=True, key='T1_folder', visible=False),
-            sg.FolderBrowse(button_text=tr.gui_export2table[lang], size=button_size, key='T1_export2table'), sg.Push()
-        ]
+            sg.Input(enable_events=True, key='T1_folder', visible=False),
+            sg.FolderBrowse(button_text=tr.gui_export2table[lang], size=button_size, key='T1_export2table'),
+        ],
     ]
 
     def frame(num: int, filtersDB: tuple, lang: str):
@@ -117,14 +121,14 @@ def generate_layout(
         try:
             rgb_text = sg.Text(tr.gui_RGBcolors[lang][num], key='T2_rgbText'+n)
         except IndexError:
-            rgb_text = sg.Text('', key='T2_rgbText'+n)
+            rgb_text = sg.Text(key='T2_rgbText'+n)
         l = [
             [
                 sg.Input(enable_events=True, size=1, key='T2_path'+n, expand_x=True, visible=False),
                 # size=1 is VERY important! Now column depends on max length of filter file names
                 sg.FileBrowse(button_text=tr.gui_browse[lang], size=browse_size, key='T2_pathText'+n, visible=False),
                 # or label of RGB image bands, depends on radio box
-                rgb_text
+                rgb_text,
             ],
             [
                 sg.Text(tr.gui_filter[lang], key='T2_filterText'+n),
@@ -133,13 +137,13 @@ def generate_layout(
             [
                 sg.Text(tr.gui_evaluate[lang], key='T2_evalText'+n),
                 sg.Input('x', size=1, key='T2_eval'+n, expand_x=True)
-            ]
+            ],
         ]
         return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, key='T2_band'+n)
     
     T2_frames = [[frame(i, filtersDB, lang)] for i in range(T2_num)]
     T2_col1 = [
-        [sg.Push(), sg.Text(tr.gui_input[lang], font=title_font, key='T2_title1'), sg.Push()],
+        #[sg.Push(), sg.Text(tr.gui_input[lang], font=title_font, key='T2_title1'), sg.Push()],
         [sg.Text(tr.gui_step1[lang], key='T2_step1')],
         [sg.Radio(tr.gui_datatype[lang][0], 'DataTypeRadio', enable_events=True, key='-typeImage-', default=True)],
         [sg.Radio(tr.gui_datatype[lang][1], 'DataTypeRadio', enable_events=True, key='-typeImageRGB-')],
@@ -150,7 +154,7 @@ def generate_layout(
             sg.Input(enable_events=True, size=1, key='T2_path', expand_x=True, visible=False),
             sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, key='T2_pathText', visible=False),
         ],
-        [sg.Column(T2_frames, scrollable=True, vertical_scroll_only=True, key='T2_frames', expand_x=True, expand_y=True)]
+        [sg.Column(T2_frames, scrollable=True, vertical_scroll_only=True, key='T2_frames', expand_x=True, expand_y=True)],
     ]
     T2_col2_1 = [
         [sg.Checkbox(tr.gui_desun[lang], key='T2_desun')],
@@ -163,13 +167,13 @@ def generate_layout(
         [sg.Checkbox(tr.gui_enlarge[lang], True, key='T2_enlarge')],
     ]
     T2_col2 = [
-        [sg.Push(), sg.Text(tr.gui_output[lang], font=title_font, key='T2_title2'), sg.Push()],
+        #[sg.Push(), sg.Text(tr.gui_output[lang], font=title_font, key='T2_title2'), sg.Push()],
         [sg.Canvas(key='T2_canvas')],
         [
             sg.Column(T2_col2_1, expand_x=True, expand_y=False), sg.VSeperator(),
             sg.Column(T2_col2_2, expand_x=True, expand_y=False)
         ],
-        [sg.T('')],
+        [sg.T()],
         [sg.Push(), sg.Image(background_color='black', size=img_preview_size, key='T2_image'), sg.Push()],
         [sg.Push(), sg.Button(tr.gui_preview[lang], size=button_size, key='T2_preview'), sg.Push()],
         [
@@ -181,7 +185,7 @@ def generate_layout(
     ]
 
     T3_col1 = [
-        [sg.Push(), sg.Text(tr.gui_input[lang], font=title_font, key='T3_title1'), sg.Push()],
+        #[sg.Push(), sg.Text(tr.gui_input[lang], font=title_font, key='T3_title1'), sg.Push()],
         [sg.Push(), sg.Text('max ='), sg.InputText('20000', size=8, enable_events=True, key='T3_maxtemp_num'), sg.Text('K')],
         [
             sg.Text(tr.gui_temp[lang], justification='right', size=18, key='T3_temp'),
@@ -195,7 +199,7 @@ def generate_layout(
             sg.Text(tr.gui_vII[lang], size=18, justification='right', key='T3_vII'),
             sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation='h', size=slider_size, enable_events=True, key='T3_slider3', expand_x=True)
         ],
-        [sg.T('')],
+        [sg.T()],
         [sg.Checkbox(tr.gui_overexposure[lang], enable_events=True, default=False, key='T3_overexposure')],
         [
             sg.Text(tr.gui_mag[lang], size=18, text_color=text_colors[0], justification='right', key='T3_mag'),
@@ -204,37 +208,38 @@ def generate_layout(
         [sg.Text(tr.gui_explanation[lang], key='T3_explanation')],
     ]
     T3_col2 = [
-        [sg.Push(), sg.Text(tr.gui_output[lang], font=title_font, key='T3_title2'), sg.Push()],
-        [sg.Push(), sg.Graph(canvas_size=canvas_size, graph_bottom_left=(0, 0), graph_top_right=canvas_size, background_color=None, key='T3_graph'), sg.Push()],
-        [sg.T('')],
+        #[sg.Text(tr.gui_output[lang], font=title_font, key='T3_title2')],
+        [sg.T()],
+        [sg.Graph(canvas_size=canvas_size, graph_bottom_left=(0, 0), graph_top_right=canvas_size, background_color=None, key='T3_graph')],
+        [sg.T()],
         [sg.Text(tr.gui_rgb[lang], key='T3_colorRGB'), sg.Input(size=1, key='T3_rgb', expand_x=True)],
         [sg.Text(tr.gui_hex[lang], key='T3_colorHEX'), sg.Input(size=1, key='T3_hex', expand_x=True)],
-        [sg.T('')],
-        [sg.Push(), sg.Button(button_text=tr.gui_plot[lang], size=button_size, key='T3_plot'), sg.Push()],
-        [sg.Push(), sg.Button(button_text=tr.gui_pin[lang], size=button_size, key='T3_pin'), sg.Push()],
-        [sg.Push(), sg.Button(button_text=tr.gui_unpin[lang], size=button_size, key='T3_unpin'), sg.Push()],
+        [sg.T()],
+        [sg.Button(button_text=tr.gui_plot[lang], size=button_size, key='T3_plot')],
+        [sg.Button(button_text=tr.gui_pin[lang], size=button_size, key='T3_pin')],
+        [sg.Button(button_text=tr.gui_unpin[lang], size=button_size, key='T3_unpin')],
     ]
 
 
     tab1 = [
         [
-            sg.Column(T1_col1, expand_x=True, expand_y=True),
+            sg.Column(T1_col1, expand_x=True, expand_y=True, element_justification='center'),
             sg.VSeperator(),
-            sg.Column(T1_col2, expand_x=True, expand_y=True)
+            sg.Column(T1_col2, expand_x=True, expand_y=True, element_justification='center'),
         ]
     ]
     tab2 = [
         [
             sg.Column(T2_col1, expand_x=True, expand_y=True),
             sg.VSeperator(),
-            sg.Column(T2_col2, expand_x=True, expand_y=True)
+            sg.Column(T2_col2, expand_x=True, expand_y=True),
         ]
     ]
     tab3 = [
         [
             sg.Column(T3_col1, expand_x=True, expand_y=True),
             sg.VSeperator(),
-            sg.Column(T3_col2, expand_x=True, expand_y=True)
+            sg.Column(T3_col2, expand_x=True, expand_y=True, element_justification='center'),
         ]
     ]
     tabs = sg.TabGroup([[
@@ -253,11 +258,7 @@ def translate_win0(window: sg.Window, T2_vis: int, lang: str):
     window['tab1'].update(title=tr.gui_tabs[lang][0])
     window['tab2'].update(title=tr.gui_tabs[lang][1])
     window['tab3'].update(title=tr.gui_tabs[lang][2])
-    window['T1_title1'].update(tr.gui_database[lang])
     window['-settingsTitle-'].update(tr.gui_settings[lang])
-    window['T1_title2'].update(tr.gui_output[lang])
-    window['T1_database'].update(tr.gui_update[lang] if window['T1_database'].metadata else tr.gui_load[lang])
-    window['T1_tagsN'].update(tr.gui_tags[lang])
     window['-gamma-'].update(text=tr.gui_gamma[lang])
     window['-brModeText-'].update(tr.gui_br[lang][0])
     window['-brMode0-'].update(text=tr.gui_br[lang][1])
@@ -266,6 +267,11 @@ def translate_win0(window: sg.Window, T2_vis: int, lang: str):
     window['-formattingText-'].update(tr.gui_formatting[lang])
     window['-bitnessText-'].update(tr.gui_bit[lang])
     window['-roundingText-'].update(tr.gui_rnd[lang])
+    #window['T1_title1'].update(tr.gui_database[lang])
+    #window['T1_title2'].update(tr.gui_output[lang])
+    window['T1_load'].update(tr.gui_load[lang])
+    window['T1_reload'].update(tr.gui_reload[lang])
+    window['T1_tagsN'].update(tr.gui_tags[lang])
     if window['T1_estimated'].get() != '':
         window['T1_estimated'].update(tr.gui_estimated[lang])
     window['T1_colorRGB'].update(tr.gui_rgb[lang])
@@ -276,8 +282,8 @@ def translate_win0(window: sg.Window, T2_vis: int, lang: str):
     window['T1_unpin'].update(tr.gui_unpin[lang])
     window['T1_export2text'].update(tr.gui_export2text[lang])
     window['T1_export2table'].update(tr.gui_export2table[lang])
-    window['T2_title1'].update(tr.gui_input[lang])
-    window['T2_title2'].update(tr.gui_output[lang])
+    #window['T2_title1'].update(tr.gui_input[lang])
+    #window['T2_title2'].update(tr.gui_output[lang])
     window['T2_step1'].update(tr.gui_step1[lang])
     window['-typeImage-'].update(text=tr.gui_datatype[lang][0])
     window['-typeImageRGB-'].update(text=tr.gui_datatype[lang][1])
@@ -301,8 +307,8 @@ def translate_win0(window: sg.Window, T2_vis: int, lang: str):
     window['T2_enlarge'].update(text=tr.gui_enlarge[lang])
     window['T2_preview'].update(tr.gui_preview[lang])
     window['T2_process'].update(tr.gui_process[lang])
-    window['T3_title1'].update(tr.gui_input[lang])
-    window['T3_title2'].update(tr.gui_output[lang])
+    #window['T3_title1'].update(tr.gui_input[lang])
+    #window['T3_title2'].update(tr.gui_output[lang])
     window['T3_temp'].update(tr.gui_temp[lang])
     window['T3_velocity'].update(tr.gui_velocity[lang])
     window['T3_vII'].update(tr.gui_vII[lang])
