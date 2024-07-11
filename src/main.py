@@ -186,8 +186,9 @@ def launch_window(lang: str):
 
             if values['-currentTab-'] == 'tab1':
             
-                if event == 'T1_load':
+                if event in ('T1_load', 'T1_reload'):
                     # Loading of the spectra database
+
                     objectsDB, refsDB = di.import_DBs(['spectra', 'spectra_extras'])
                     tagsDB = aux.tag_list(objectsDB)
                     namesDB = { # optimize!
@@ -195,12 +196,15 @@ def launch_window(lang: str):
                         'ru': aux.obj_names_dict(objectsDB, 'ALL', 'ru'),
                         'de': aux.obj_names_dict(objectsDB, 'ALL', 'de')
                     }
-                    window['T1_header_space'].update(visible=False)
-                    window['T1_load'].update(tr.gui_load[lang], visible=False)
-                    window['T1_tagsN'].update(visible=True)
-                    window['T1_tags'].update(default_tag, values=tagsDB, visible=True)
-                    window['T1_list'].update(values=tuple(aux.obj_names_dict(objectsDB, default_tag, lang).keys()), visible=True)
-                    window['T1_reload'].update(tr.gui_reload[lang], visible=True)
+
+                    if event == 'T1_load':
+                        # Turning on the database view elements
+                        window['T1_header_space'].update(visible=False)
+                        window['T1_load'].update(tr.gui_load[lang], visible=False)
+                        window['T1_tagsN'].update(visible=True)
+                        window['T1_tags'].update(default_tag, values=tagsDB, visible=True)
+                        window['T1_list'].update(values=tuple(aux.obj_names_dict(objectsDB, default_tag, lang).keys()), visible=True)
+                        window['T1_reload'].update(tr.gui_reload[lang], visible=True)
 
                 elif (event in triggers or event == 'T1_list' or event == 'T1_filter') and values['T1_list'] != []:
                     T1_name = values['T1_list'][0]
