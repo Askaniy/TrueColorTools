@@ -361,7 +361,7 @@
         'https://ui.adsabs.harvard.edu/abs/1999Icar..140...53C/abstract'
     ],
     '(253) Mathilde|SMASS, Clark1999': {
-        tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
+        tags: ['featured', 'SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000253.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.047, 0.005]],
         spherical_albedo: ['Generic_Bessell.V', [0.013, 0.003]],
@@ -449,7 +449,7 @@
         'https://ui.adsabs.harvard.edu/abs/1994Icar..107...37H/abstract'
     ],
     '(951) Gaspra|Helfenstein1994': {
-        tags: ['Solar System', 'minor body/asteroid/main belt'],
+        tags: ['featured', 'Solar System', 'minor body/asteroid/main belt'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.17, 0.23, 0.26, 0.27, 0.26, 0.26],
@@ -526,17 +526,17 @@
         'DOI: 10.1051/0004-6361/202346749', 'https://www.aanda.org/articles/aa/full_html/2023/08/aa46749-23/aa46749-23.html',
         'https://ui.adsabs.harvard.edu/abs/2023A%26A...676A..72B/abstract'
     ],
+    '(2060) Chiron|SMASS, BragaRibas2023': {
+        tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur'],
+        file: 'spectra/files/SMASS/a002060.2.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.076, 0.026]],
+    },
     '(2060) Chiron|MBOSS, BragaRibas2023': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.660, 'V-R': 0.359, 'R-I': 0.324},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.076, 0.026]],
-    },
-    '(2060) Chiron|SMASS, BragaRibas2023': {
-        tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur'],
-        file: 'spectra/files/SMASS/a002060.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.076, 0.026]],
     },
     'Benner1999': [
@@ -658,17 +658,17 @@
         'DOI: 10.1051/0004-6361/201322377', 'https://www.aanda.org/articles/aa/full_html/2014/04/aa22377-13/aa22377-13.html',
         'https://ui.adsabs.harvard.edu/abs/2014A%26A...564A..92D/abstract'
     ],
+    '(5145) Pholus|SMASS, Duffard2014': {
+        tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur'],
+        file: 'spectra/files/SMASS/a005145.1.txtA',
+        geometric_albedo: ['Generic_Bessell.V', [0.155, 0.0625]],
+    },
     '(5145) Pholus|MBOSS, Duffard2014': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 1.261, 'V-R': 0.791, 'R-I': 0.818},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.155, 0.0625]],
-    },
-    '(5145) Pholus|SMASS, Duffard2014': {
-        tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur'],
-        file: 'spectra/files/SMASS/a005145.1.txtA',
         geometric_albedo: ['Generic_Bessell.V', [0.155, 0.0625]],
     },
     '(5511) Cloanthus|MBOSS': {
@@ -764,17 +764,17 @@
         'DOI: 10.3847/1538-3881/aa8956', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa8956',
         'https://ui.adsabs.harvard.edu/abs/2017AJ....154..159L/abstract'
     ],
+    '(10199) Chariklo|SMASS, Leiva2017': {
+        tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur'],
+        file: 'spectra/files/SMASS/a010199.2.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.037, 0.001]], // ellipsoid model
+    },
     '(10199) Chariklo|MBOSS, Leiva2017': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.802, 'V-R': 0.491, 'R-I': 0.519},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.037, 0.001]], // ellipsoid model
-    },
-    '(10199) Chariklo|SMASS, Leiva2017': {
-        tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur'],
-        file: 'spectra/files/SMASS/a010199.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.037, 0.001]], // ellipsoid model
     },
     '(10370) Hylonome|MBOSS': {
@@ -1180,8 +1180,10 @@
     '(25143) Itokawa|Lowry2005, Tatsumi2018': {
         tags: ['featured', 'Solar System', 'minor body/asteroid/NEO/Apollo'],
         nm_range: {start: 325, stop: 1000, step: 25},
-        br: [0.388, 0.568, 0.676, 0.773, 0.824, 0.856, 0.888, 0.914, 0.964, 1.0, 1.036, 1.058, 1.076, 1.094, 1.122, 1.140, 1.147, 1.144, 1.129, 1.101,
-            1.068, 1.029, 1.0, 0.978, 0.975, 0.946, 0.917, 0.935],
+        br: [
+            0.388, 0.568, 0.676, 0.773, 0.824, 0.856, 0.888, 0.914, 0.964, 1.0, 1.036, 1.058, 1.076, 1.094,
+            1.122, 1.140, 1.147, 1.144, 1.129, 1.101, 1.068, 1.029, 1.0, 0.978, 0.975, 0.946, 0.917, 0.935
+        ],
         geometric_albedo: ['Generic_Bessell.V', [0.27, 0.02]],
         spherical_albedo: ['Generic_Bessell.V', [0.033, 0.02]],
     },
@@ -1221,7 +1223,7 @@
         sun_is_emitter: true
     },
     '(28978) Ixion|Marchi2003, Verbiscer2022': {
-        tags: ['Solar System', 'minor body/TNO/plutino', 'minor body/TNO/midsize', 'traced spectrum'],
+        tags: ['featured', 'Solar System', 'minor body/TNO/plutino', 'minor body/TNO/midsize', 'traced spectrum'],
         file: 'spectra/files/Marchi2003/Ixion.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.108, 0.002]],
         spherical_albedo: ['Generic_Bessell.V', [0.037, 0.007]],
@@ -1408,7 +1410,7 @@
         'https://ui.adsabs.harvard.edu/abs/2012A%26A...541A..93M/abstract'
     ],
     '(47171) Lempo|MBOSS, Mommert2012': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant/plutino'],
+        tags: ['featured', 'MBOSS', 'Solar System', 'minor body/TNO/resonant/plutino'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 1.029, 'V-R': 0.693, 'R-I': 0.619},
         calibration_system: 'Vega',
@@ -1664,7 +1666,7 @@
         'https://www.hou.usra.edu/meetings/acm2023/pdf/2172.pdf'
     ],
     '(65803) Didymos|SMASS, Daly2023, Hasselmann2023': {
-        tags: ['SMASS', 'Solar System', 'minor body/asteroid/NEO/Apollo'],
+        tags: ['featured', 'SMASS', 'Solar System', 'minor body/asteroid/NEO/Apollo'],
         file: 'spectra/files/SMASS/au1996GT.7.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.15, 0.02]],
         phase_function: ['HG1G2', {G_1: 0.84, G_2: 0.05}]
@@ -2058,7 +2060,7 @@
         'DOI: 10.3847/1538-3881/aa6346', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa6346', 'https://ui.adsabs.harvard.edu/abs/2017AJ....154...19B/abstract'
     ],
     '(120347) Salacia|MBOSS, Brown2017': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical/hot', 'minor body/TNO/midsize'],
+        tags: ['featured', 'MBOSS', 'Solar System', 'minor body/TNO/classical/hot', 'minor body/TNO/midsize'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.664, 'V-R': 0.403, 'R-I': 0.433},
         calibration_system: 'Vega',
@@ -2197,10 +2199,16 @@
     },
     '(136199) Eris|Lorenzi2016, Verbiscer2022': {
         tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached'],
-        nm: [417.357, 479.507, 532.699, 585.89, 601.008, 604.367, 622.844, 637.962, 653.08, 656.439, 659.239, 673.236, 679.955, 692.273, 702.912, 
-            712.43, 734.267, 740.426, 747.704, 750.504, 765.062, 779.059, 788.578, 793.617, 809.295, 813.774, 826.652, 841.209, 860.246],
-        br: [0.995, 1.059, 1.084, 1.101, 1.08, 1.104, 1.111, 1.103, 1.121, 1.104, 1.11, 1.097, 1.117, 1.034, 1.121, 1.13, 1.11, 1.073, 1.11, 1.077, 
-            1.132, 1.138, 1.087, 1.126, 1.018, 1.079, 0.881, 1.072, 1.13],
+        nm: [
+            417.357, 479.507, 532.699, 585.89, 601.008, 604.367, 622.844, 637.962, 653.08, 656.439,
+            659.239, 673.236, 679.955, 692.273, 702.912, 712.43, 734.267, 740.426, 747.704, 750.504,
+            765.062, 779.059, 788.578, 793.617, 809.295, 813.774, 826.652, 841.209, 860.246
+        ],
+        br: [
+            0.995, 1.059, 1.084, 1.101, 1.08, 1.104, 1.111, 1.103, 1.121, 1.104, 1.11, 1.097, 1.117,
+            1.034, 1.121, 1.13, 1.11, 1.073, 1.11, 1.077, 1.132, 1.138, 1.087, 1.126, 1.018, 1.079,
+            0.881, 1.072, 1.13
+        ],
         geometric_albedo: ['Generic_Bessell.V', 0.957], // albedo from zelario’s sheet
         spherical_albedo: ['Generic_Bessell.V', [0.99, 0.09]],
     },
@@ -2233,10 +2241,16 @@
     },
     '(136472) Makemake|Lorenzi2016, Verbiscer2022': {
         tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical/hot'],
-        nm: [417.357, 466.069, 588.13, 601.568, 609.406, 631.243, 642.441, 649.72, 656.439, 664.278, 672.116, 679.955, 691.153, 706.271, 715.789,
-            723.628, 729.787, 740.426, 744.345, 751.064, 766.181, 782.419, 788.578, 794.737, 809.295, 813.774, 826.652, 841.209, 860.246],
-        br: [0.89, 0.971, 1.106, 1.059, 1.127, 1.133, 1.125, 1.157, 1.137, 1.155, 1.116, 1.139, 1.03, 1.179, 1.182, 1.143, 1.163, 1.088, 1.16, 1.084,
-            1.201, 1.201, 1.087, 1.159, 1.018, 1.079, 0.881, 1.072, 1.13],
+        nm: [
+            417.357, 466.069, 588.13, 601.568, 609.406, 631.243, 642.441, 649.72, 656.439, 664.278,
+            672.116, 679.955, 691.153, 706.271, 715.789, 723.628, 729.787, 740.426, 744.345, 751.064,
+            766.181, 782.419, 788.578, 794.737, 809.295, 813.774, 826.652, 841.209, 860.246
+        ],
+        br: [
+            0.89, 0.971, 1.106, 1.059, 1.127, 1.133, 1.125, 1.157, 1.137, 1.155, 1.116, 1.139, 1.03,
+            1.179, 1.182, 1.143, 1.163, 1.088, 1.16, 1.084, 1.201, 1.201, 1.087, 1.159, 1.018, 1.079,
+            0.881, 1.072, 1.13
+        ],
         geometric_albedo: ['Generic_Bessell.V', 0.83], // albedo from zelario’s sheet
         spherical_albedo: ['Generic_Bessell.V', [0.74, 0.06]],
     },
@@ -3877,14 +3891,14 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '10P/Tempel2|MBOSS': {
+    '10P/Tempel 2|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.800, 'V-R': 0.521, 'R-I': 0.520},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '21P/GZ|MBOSS': {
+    '21P/Giacobini–Zinner|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.800, 'V-R': 0.500},
@@ -3905,28 +3919,28 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '45P/HMP|MBOSS': {
+    '45P/Honda–Mrkos–Pajdušáková|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 1.080, 'V-R': 0.440, 'R-I': 0.210},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '47P/AJ|MBOSS': {
+    '47P/Ashbrook–Jackson|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.780, 'V-R': 0.400},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '49P/AR|MBOSS': {
+    '49P/Arend–Rigaux|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.770, 'V-R': 0.471, 'R-I': 0.444},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '55P/TT|MBOSS': {
+    '55P/Tempel–Tuttle|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.750, 'V-R': 0.510, 'R-I': 0.420},
@@ -3999,7 +4013,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '86P/Wild3|MBOSS': {
+    '86P/Wild 3|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 1.580, 'V-R': 0.555},
@@ -4027,21 +4041,21 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '107P/WH|MBOSS': {
+    '107P/Wilson–Harrington|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.674, 'V-R': 0.361},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '114P/WS|MBOSS': {
+    '114P/Wiseman–Skiff|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.850, 'V-R': 0.460, 'R-I': 0.540},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '143P/KM|MBOSS': {
+    '143P/Kowal–Mrkos|MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.820, 'V-R': 0.580, 'R-I': 0.560},
@@ -4084,7 +4098,7 @@
         'DOI: 10.1088/0004-637X/761/1/8', 'https://ui.adsabs.harvard.edu/abs/2012ApJ...761....8S/abstract'
     ],
     '(C/1995O1) Hale–Bopp|MBOSS, Szabó2012': {
-        tags: ['MBOSS', 'Solar System', 'minor body/comet/long period'],
+        tags: ['featured', 'MBOSS', 'Solar System', 'minor body/comet/long period'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.810, 'V-R': 0.390},
         calibration_system: 'Vega',

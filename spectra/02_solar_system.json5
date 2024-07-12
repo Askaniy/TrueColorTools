@@ -325,11 +325,11 @@
         'DOI: 10.1006/icar.2000.6474', 'https://www.sciencedirect.com/science/article/pii/S0019103500964741', 'https://ui.adsabs.harvard.edu/abs/2000Icar..147..353S/abstract'
     ],
     '(J XVI) Metis: Trailing side|Thomas1998, Simonelli2000': {
-        tags: ['Solar System/Jovian system', 'moon/regular', 'traced spectrum'],
+        tags: ['featured', 'Solar System/Jovian system', 'moon/regular', 'traced spectrum'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.38, 1, 0.863, 0.85], // traced from Fig. 6
-        sd: [0.08, 0, 0.173, 0.19], // traced from Fig. 6, relative to Green filter
+        sd: [0.08, 0, 0.173, 0.19], // traced from Fig. 6, relative to the Green filter
         geometric_albedo: ['Galileo_SSI.Clear', [0.054, 0.003]], // Table III, log-scaled
         spherical_albedo: ['Galileo_SSI.Clear', [0.027, 0.002]], // Table III, log-scaled
     },
@@ -338,16 +338,16 @@
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '7560A'],
         br: [0.54, 1, 1.14], // traced from Fig. 6
-        sd: [0.05, 0, 0.075], // traced from Fig. 6, relative to Green filter
+        sd: [0.05, 0, 0.075], // traced from Fig. 6, relative to the Green filter
         geometric_albedo: ['Galileo_SSI.Clear', [0.101, 0.007]], // Table III, log-scaled
         spherical_albedo: ['Galileo_SSI.Clear', [0.036, 0.004]], // Table III, log-scaled
     },
     '(J V) Amalthea: Trailing side|Thomas1998, Simonelli2000': {
-        tags: ['Solar System/Jovian system', 'moon/regular', 'traced spectrum'],
+        tags: ['featured', 'Solar System/Jovian system', 'moon/regular', 'traced spectrum'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.47, 1, 1.225, 1], // traced from Fig. 6
-        sd: [0.0625, 0, 0.137, 0.15], // traced from Fig. 6, relative to Green filter
+        sd: [0.0625, 0, 0.137, 0.15], // traced from Fig. 6, relative to the Green filter
         geometric_albedo: ['Galileo_SSI.Clear', [0.080, 0.005]], // Table III, log-scaled
         spherical_albedo: ['Galileo_SSI.Clear', [0.029, 0.003]], // Table III, log-scaled
     },
@@ -356,16 +356,16 @@
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A'],
         br: [0.7125, 1, 1.137], // traced from Fig. 6
-        sd: [0.067, 0, 0.117], // traced from Fig. 6, relative to Green filter
+        sd: [0.067, 0, 0.117], // traced from Fig. 6, relative to the Green filter
         geometric_albedo: ['Galileo_SSI.Clear', [0.053, 0.004]], // Table III, log-scaled
         spherical_albedo: ['Galileo_SSI.Clear', [0.022, 0.002]], // Table III, log-scaled
     },
     '(J XIV) Thebe: Trailing side|Thomas1998, Simonelli2000': {
-        tags: ['Solar System/Jovian system', 'moon/regular', 'traced spectrum'],
+        tags: ['featured', 'Solar System/Jovian system', 'moon/regular', 'traced spectrum'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.6, 1, 1.137, 1.07], // traced from Fig. 6
-        sd: [0.05, 0, 0.117, 0.15], // traced from Fig. 6, relative to Green filter
+        sd: [0.05, 0, 0.117, 0.15], // traced from Fig. 6, relative to the Green filter
         geometric_albedo: ['Galileo_SSI.Clear', [0.041, 0.003]], // Table III, log-scaled
         spherical_albedo: ['Galileo_SSI.Clear', [0.017, 0.002]], // Table III, log-scaled
     },
@@ -585,9 +585,12 @@
     '(S VI) Titan: Surface, phase angle 0°|Karkoschka2012': {
         tags: ['Solar System/Saturnian system', 'planetary body/satellite planet', 'moon/regular'],
         nm_range: {start: 300, stop: 800, step: 10},
-        br_geometric: [0.025, 0.035, 0.046, 0.059, 0.073, 0.089, 0.105, 0.122, 0.140, 0.158, 0.176, 0.194, 0.211, 0.229, 0.245, 0.261, 0.277, 0.292, 0.306, 0.319, 
-            0.331, 0.343, 0.354, 0.364, 0.373, 0.382, 0.390, 0.398, 0.404, 0.411, 0.416, 0.421, 0.426, 0.430, 0.434, 0.437, 0.440, 0.442, 0.444, 0.446, 
-            0.447, 0.448, 0.449, 0.449, 0.450, 0.450, 0.450, 0.449, 0.449, 0.448, 0.447],
+        br_geometric: [
+            0.025, 0.035, 0.046, 0.059, 0.073, 0.089, 0.105, 0.122, 0.140, 0.158, 0.176, 0.194, 0.211,
+            0.229, 0.245, 0.261, 0.277, 0.292, 0.306, 0.319, 0.331, 0.343, 0.354, 0.364, 0.373, 0.382,
+            0.390, 0.398, 0.404, 0.411, 0.416, 0.421, 0.426, 0.430, 0.434, 0.437, 0.440, 0.442, 0.444,
+            0.446, 0.447, 0.448, 0.449, 0.449, 0.450, 0.450, 0.450, 0.449, 0.449, 0.448, 0.447
+        ],
     },
     // Iapetus
     'Gudipati2003': [
@@ -595,7 +598,7 @@
         'DOI: 10.1086/345349', 'https://iopscience.iop.org/article/10.1086/345349'
     ],
     '(S VII) Iapetus:Leading hemisphere|Gudipati2003': {
-        tags: ['Solar System/Saturnian system', 'planetary body/satellite planet', 'moon/regular', 'traced spectrum'],
+        tags: ['featured', 'Solar System/Saturnian system', 'planetary body/satellite planet', 'moon/regular', 'traced spectrum'],
         nm: [330, 350, 380, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850],
         br: [0.047, 0.051, 0.058, 0.063, 0.067, 0.071, 0.080, 0.087, 0.090, 0.093, 0.099, 0.102, 0.102],
         albedo: true
@@ -612,7 +615,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.0857, 0.0022]],
-        spherical_albedo: ['Generic_Bessell.V', [0.0267, 0.0083]]
+        spherical_albedo: ['Generic_Bessell.V', [0.0267, 0.0083]],
     },
     '(S IX) Phoebe|Miller2011': { // variant with g=−0.35 as the most likely by Voyager data Simonelli et al. (1999)
         tags: ['Solar System/Saturnian system', 'moon/irregular'],
@@ -621,7 +624,7 @@
         br_geometric: [0.0855, 0.0857, 0.0843, 0.0839],
         sd_geometric: [0.0031, 0.0022, 0.0016, 0.0021],
         br_spherical: [0.0274, 0.0267, 0.0265, 0.0310],
-        sd_spherical: [0.0079, 0.0083, 0.0079, 0.0050]
+        sd_spherical: [0.0079, 0.0083, 0.0079, 0.0050],
     },
     '(S IX) Phoebe|Pena2022, Miller2011': {
         tags: ['Solar System/Saturnian system', 'moon/irregular'],
@@ -630,7 +633,7 @@
         calibration_system: 'AB',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.0857, 0.0022]],
-        spherical_albedo: ['Generic_Bessell.V', [0.0267, 0.0083]]
+        spherical_albedo: ['Generic_Bessell.V', [0.0267, 0.0083]],
     },
     '(S IX) Phoebe|Graykowski2018, Miller2011': {
         tags: ['Solar System/Saturnian system', 'moon/irregular'],
@@ -639,7 +642,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.0857, 0.0022]],
-        spherical_albedo: ['Generic_Bessell.V', [0.0267, 0.0083]]
+        spherical_albedo: ['Generic_Bessell.V', [0.0267, 0.0083]],
     },
 
     // Uranian system
@@ -662,20 +665,20 @@
         tags: ['featured', 'Solar System/Uranian system', 'ring'],
         slope: {start: 320, stop: 2050, power: 0.09},
         geometric_albedo: [550, 0.050],
-        spherical_albedo: [550, [0.018, 0.030]]
+        spherical_albedo: [550, [0.018, 0.030]],
     },
     // Uranian small inner satellites
     'Portia group|Karkoschka2001': {
         tags: ['featured', 'Solar System/Uranian system', 'moon/regular', 'class'],
         slope: {start: 570, stop: 1500, power: 0.09},
         geometric_albedo: [550, 0.080],
-        spherical_albedo: [550, [0.026, 0.050]]
+        spherical_albedo: [550, [0.026, 0.050]],
     },
     '(U XV) Puck|Karkoschka2001': {
         tags: ['featured', 'Solar System/Uranian system', 'moon/regular'],
         slope: {start: 340, stop: 1500, power: 0.04},
         geometric_albedo: [550, 0.104],
-        spherical_albedo: [550, [0.035, 0.060]]
+        spherical_albedo: [550, [0.035, 0.060]],
     },
     // Uranian major moons
     'Avramchuk2007': [
@@ -689,13 +692,13 @@
         br: [0.51, 0.49, 0.48, 0.47, 0.46, 0.45, 0.41, 0.40],
         sd: [0.02, 0.01, 0.02, 0.02, 0.02, 0.01, 0.01, 0.01],
         geometric_albedo: true,
-        spherical_albedo: ['Generic_Bessell.V', [0.200, 0.030]]
+        spherical_albedo: ['Generic_Bessell.V', [0.200, 0.030]],
     },
     '(U V) Miranda|Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'planetary body/satellite planet', 'moon/regular'],
         slope: {start: 270, stop: 1000, power: -0.05},
         geometric_albedo: [550, 0.464],
-        spherical_albedo: [550, [0.200, 0.30]]
+        spherical_albedo: [550, [0.200, 0.30]],
     },
     // Ariel
     '(U I) Ariel|Avramchuk2007, Karkoschka2001': {
@@ -704,13 +707,13 @@
         br: [0.50, 0.51, 0.51, 0.51, 0.51, 0.52, 0.53, 0.54],
         sd: [0.03, 0.02, 0.02, 0.01, 0.02, 0.01, 0.01, 0.01],
         geometric_albedo: true,
-        spherical_albedo: ['Generic_Bessell.V', [0.230, 0.025]]
+        spherical_albedo: ['Generic_Bessell.V', [0.230, 0.025]],
     },
     '(U I) Ariel|Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'planetary body/satellite planet', 'moon/regular'],
         slope: {start: 270, stop: 1000, power: 0.07},
         geometric_albedo: [550, 0.533],
-        spherical_albedo: [550, [0.230, 0.025]]
+        spherical_albedo: [550, [0.230, 0.025]],
     },
     // Umbriel
     '(U II) Umbriel|Avramchuk2007, Karkoschka2001': {
@@ -719,13 +722,13 @@
         br: [0.25, 0.25, 0.25, 0.25, 0.26, 0.26, 0.26, 0.26],
         sd: [0.01, 0.02, 0.02, 0.01, 0.01, 0.01, 0.01, 0.01],
         geometric_albedo: true,
-        spherical_albedo: ['Generic_Bessell.V', [0.100, 0.010]]
+        spherical_albedo: ['Generic_Bessell.V', [0.100, 0.010]],
     },
     '(U II) Umbriel|Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'planetary body/satellite planet', 'moon/regular'],
         slope: {start: 270, stop: 1000, power: 0.02},
         geometric_albedo: [550, 0.258],
-        spherical_albedo: [550, [0.100, 0.010]]
+        spherical_albedo: [550, [0.100, 0.010]],
     },
     // Titania
     '(U III) Titania|Avramchuk2007, Karkoschka2001': {
@@ -734,13 +737,13 @@
         br: [0.30, 0.32, 0.33, 0.34, 0.36, 0.37, 0.41, 0.43],
         sd: [0.02, 0.02, 0.02, 0.03, 0.02, 0.01, 0.01, 0.01],
         geometric_albedo: true,
-        spherical_albedo: ['Generic_Bessell.V', [0.170, 0.015]]
+        spherical_albedo: ['Generic_Bessell.V', [0.170, 0.015]],
     },
     '(U III) Titania|Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'planetary body/satellite planet', 'moon/regular'],
         slope: {start: 270, stop: 1000, power: 0.18},
         geometric_albedo: [550, 0.350],
-        spherical_albedo: [550, [0.170, 0.015]]
+        spherical_albedo: [550, [0.170, 0.015]],
     },
     // Oberon
     'Helfenstein1991': [
@@ -753,13 +756,13 @@
         br: [0.27, 0.29, 0.30, 0.31, 0.33, 0.35, 0.40, 0.43],
         sd: [0.04, 0.01, 0.02, 0.02, 0.01, 0.01, 0.02, 0.02],
         geometric_albedo: true,
-        spherical_albedo: ['Generic_Bessell.V', [0.140, 0.015]]
+        spherical_albedo: ['Generic_Bessell.V', [0.140, 0.015]],
     },
     '(U IV) Oberon|Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'planetary body/satellite planet', 'moon/regular'],
         slope: {start: 270, stop: 1000, power: 0.15},
         geometric_albedo: [550, 0.309],
-        spherical_albedo: [550, [0.140, 0.015]]
+        spherical_albedo: [550, [0.140, 0.015]],
     },
     '(U IV) Oberon|Helfenstein1991': { // average cratered
         tags: ['Solar System/Uranian system', 'planetary body/satellite planet', 'moon/regular'],
@@ -790,12 +793,12 @@
     'Neptune|Karkoschka1998': {
         tags: ['featured', 'Solar System/Neptunian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Neptune1995.txt',
-        geometric_albedo: true
+        geometric_albedo: true,
     },
     'Neptune|Karkoschka1994': { // phase angle 0.4°
         tags: ['Solar System/Neptunian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Neptune1995.txt',
-        geometric_albedo: true
+        geometric_albedo: true,
     },
     // Triton
     'Tryka1999': [
@@ -806,7 +809,7 @@
         tags: ['featured', 'Solar System/Neptunian system', 'planetary body/satellite planet', 'moon/irregular'],
         nm_range: {start: 300, stop: 900, step: 100},
         br_geometric: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
-        phase_integral: [0.94, 0.04]
+        phase_integral: [0.94, 0.04],
     },
     // Nereid
     'Kiss2016': [
