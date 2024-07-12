@@ -2,7 +2,7 @@
 
 from typing import Sequence
 from traceback import format_exc
-from itertools import islice
+from math import sqrt
 import numpy as np
 from src.data_core import Spectrum, Photospectrum, get_filter
 import src.auxiliary as aux
@@ -127,10 +127,10 @@ def parse_value_sd(data: float|Sequence[float]):
         value, sd = data
     elif isinstance(data, (int, float)):
         value = data
-        sd = np.nan
+        sd = None
     else:
         print(f'Invalid data input: {data}. Must be a numeric value or a [value, sd] list. Returning None.')
-        value = sd = np.nan
+        value = sd = None
     return value, sd
 
 def number2array(target: int|float|Sequence, size: int):
@@ -140,13 +140,13 @@ def number2array(target: int|float|Sequence, size: int):
     else:
         return np.array(target)
 
-def mag2flux(mag: int|float|np.ndarray, zero_point: float = 1.):
-    """ Converts magnitudes to flux (by default in Vega units) """
+def mag2irradiance(mag: int|float|np.ndarray, zero_point: float = 1.):
+    """ Converts magnitudes to irradiance (by default in Vega units) """
     return zero_point * 10**(-0.4 * mag)
 
-def sd_mag2sd_flux(sd_mag: int|float|np.ndarray, flux: int|float|np.ndarray):
+def sd_mag2sd_irradiance(sd_mag: int|float|np.ndarray, irradiance: int|float|np.ndarray):
     """
-    Converts standard deviation of the magnitude to a flux standard deviation.
+    Converts standard deviation of the magnitude to a irradiance standard deviation.
 
     The formula is derived from the error propagation equation:
     I(mag) = zero_point ∙ 10^(-0.4 mag)
@@ -154,7 +154,7 @@ def sd_mag2sd_flux(sd_mag: int|float|np.ndarray, flux: int|float|np.ndarray):
     I' = zero_point∙(10^(-0.4 mag))' = zero_point∙10^(-0.4 mag)∙ln(10^(-0.4)) = I∙(-0.4) ln(10)
     sd_I = |I'| ∙ sd_mag = 0.4 ln(10) ∙ I ∙ sd_mag
     """
-    return 0.4 * np.log(10) * flux * sd_mag
+    return 0.4 * np.log(10) * irradiance * sd_mag
 
 def color_index_splitter(index: str):
     """
@@ -182,34 +182,88 @@ def color_indices_parser(indices: dict):
     sd_f² = (df/dx)² sd_x² + (df/dy)² sd_y² = sd_x² + sd_y²
     where x, y are magnitudes and f is a color index.
 
-    If all the data points have the same uncertainty (x == y):
-    sd_y = sd_f / sqrt(2)
+    Finding standard deviations of a photospectrum built from color indices is an ill-posed problem:
+    it's just like with integrating, we loose constant after differentiation (color indices is
+    a discrete differential form of a photospectrum).
+    For the photospectrum itself, it's not a problem: the solutions dimension is just scaling
+    the spectrum on a constant (it's pretty obvious that color indices always lost brightness
+    information).
+    But the solutions space for their standard deviations is more complex, I found its geometric
+    interpretation: since the standard deviations subtracting rule is, in fact, the Pythagorean theorem,
+    the solutions space is the same as if you try to build a line of right triangles, for each one
+    the next cathetus is linked to a previous cathetus by their square.
+    N hypotenuses are standard deviations of color indices, and N+1 different cathetes are the sought
+    standard deviations of the photospectrum.
+    The whole triangle line possible positions can be described by just one parameter (1D parametric
+    space of solutions).
+    For simplicity, I will choose the first cathetus (the first sought standard deviation) as
+    a variable of this space.
+    Such triangles can "collapse" if the previous cathetus is greater than the next hypotenuse!
+    I tried to find an analytical solution, but the requirement for the optimal solution I derived
+    suggested that about a half of the triangles should be collapsed.
 
-    Else, we assume that the first two data points have equal uncertainty
-    to begin the iterative calculation of standard deviations:
-    sd_y = sqrt(sd_f² - sd_x²)
+    In the numerical approach I use, some solutions are collapsed (the `try-except` code block),
+    but there are a some range of possible solutions too, which one to choose?
+    I decided to choose the solution with minimal standard deviation of standard deviations it gives.
+    To tighten the solution selection criteria, it can be assumed that the size of the standard deviation
+    is inversely proportional to the root of the irradiance (in the Poisson noise approximation).
+    So it's better to minimize the differences not between the stds of magnitudes, but between
+    the stds of scaled irradiances.
     """
     first_color_index = tuple(indices.keys())[0]
-    filter0, filter1 = color_index_splitter(first_color_index)
-    mag0, sd0 = parse_value_sd(indices[first_color_index])
-    sd0 *= 2**(-0.5)
-    filters = {
-        filter0: (0, sd0), # assuming mag=0 for the first point
-        filter1: (-mag0, sd0) # and the same standard deviation for the first two points
-    }
-    for key, value in islice(indices.items(), 1, None):
+    filter0, _ = color_index_splitter(first_color_index)
+    _, sd0 = parse_value_sd(indices[first_color_index])
+    # Just photospectrum calculation
+    uncertainty_flag = False
+    filters = {filter0: 0} # mag=0 for the first point (arbitrarily)
+    for key, value in indices.items():
         bluer_filter, redder_filter = color_index_splitter(key)
         mag, sd = parse_value_sd(value)
+        if sd is not None:
+            uncertainty_flag = True
         if bluer_filter in filters:
-            sd = np.sqrt(sd**2 - filters[bluer_filter][1]**2)
-            filters |= {redder_filter: (filters[bluer_filter][0] - mag, sd)}
+            filters |= {redder_filter: filters[bluer_filter] - mag}
         else:
-            sd = np.sqrt(sd**2 - filters[redder_filter][1]**2)
-            filters |= {bluer_filter: (filters[redder_filter][0] + mag, sd)}
-    flux, sd_flux = np.array(tuple(filters.values())).transpose()
-    flux = mag2flux(flux)
-    sd_flux = sd_mag2sd_flux(sd_flux, flux)
-    return filters.keys(), flux, sd_flux
+            filters |= {bluer_filter: filters[redder_filter] + mag}
+    irradiance = mag2irradiance(np.array(tuple(filters.values())))
+    sd = np.zeros_like(irradiance)
+    # Uncertainty calculation
+    if uncertainty_flag:
+        shot_noise_factor = 1 / np.sqrt(irradiance) # common Poisson noise factor
+        old_sd_of_sd = np.inf
+        for sd_assumed in np.linspace(0, sd0, 1001):
+            impossible_assumption = False
+            # Numerically select the best value of the standard deviation of the first point,
+            # on which all other standard deviations clearly depend
+            filters = {filter0: sd_assumed}
+            for key, value in indices.items():
+                bluer_filter, redder_filter = color_index_splitter(key)
+                _, sd = parse_value_sd(value)
+                try:
+                    if bluer_filter in filters:
+                        filters |= {redder_filter: sqrt(sd**2 - filters[bluer_filter]**2)}
+                    else:
+                        filters |= {bluer_filter: sqrt(sd**2 - filters[redder_filter]**2)}
+                except ValueError:
+                    # This means that the difference under the root is negative
+                    # and the initial standard deviation assumption is not possible
+                    impossible_assumption = True
+                    break
+            if not impossible_assumption:
+                new_sd = sd_mag2sd_irradiance(np.array(tuple(filters.values())), irradiance)
+                # Finding the minimum deviation between sd as solution quality criterion
+                # The standard deviations are scaled by the Poisson noise factor
+                new_sd_of_sd = np.std(new_sd * shot_noise_factor)
+                if new_sd_of_sd < old_sd_of_sd:
+                    old_sd = new_sd
+                    old_sd_of_sd = new_sd_of_sd
+                    continue
+                else:
+                    # Means that the best values of standard deviations were found
+                    # in the last iteration and they started to diverge
+                    sd = old_sd
+                    break
+    return filters.keys(), irradiance, sd
 
 def phase_function2phase_integral(name: str, params: dict):
     """ Determines phase integral from the phase function """
@@ -263,7 +317,7 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
 
     Supported input keys of a database unit:
     - `nm` (list): list of wavelengths in nanometers
-    - `br` (list): same-size list of "brightness", flux in units of energy (not a photon counter)
+    - `br` (list): same-size list of "brightness" in energy density units (not a photon counter)
     - `mag` (list): same-size list of magnitudes
     - `sd` (list/number): same-size list of standard deviations or a general value
     - `nm_range` (dict): `start`, `stop`, `step` keys defining a wavelength range
@@ -303,10 +357,10 @@ def database_parser(name: str, content: dict) -> NonReflectiveBody | ReflectiveB
             if 'sd' in content:
                 sd = number2array(content['sd'], len(br))
         elif 'mag' in content:
-            br = mag2flux(np.array(content['mag']))
+            br = mag2irradiance(np.array(content['mag']))
             if 'sd' in content:
                 sd = number2array(content['sd'], len(br))
-                sd = sd_mag2sd_flux(sd, br)
+                sd = sd_mag2sd_irradiance(sd, br)
         # Spectrum reading
         if 'nm' in content:
             nm = content['nm']

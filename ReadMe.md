@@ -2,7 +2,7 @@
 
 Astronomy-focused set of Python tools with a GUI that uses spectrum construction and eye absorption to compute realistic colors.
 
-Input data is accepted in the form of filters measurements (such as color indices) or continuous spectra, in flux units or in magnitudes. Stores a comprehensive catalog of photometry in a proprietary format. Can process spectral cubes, multiband spacecraft images and correct images in enhanced colors.
+Input data is accepted in the form of filters measurements (such as color indices) or continuous spectra, in irradiance units or in magnitudes. Stores a comprehensive catalog of photometry in a proprietary format. Can process spectral cubes, multiband spacecraft images and correct images in enhanced colors.
 
 Please note that this is a hobby project and no guarantees are provided for the results. Help is welcome!
 
@@ -62,7 +62,7 @@ The **Blackbody & Redshifts** tab calculates the influence of physical phenomena
 ### Spectra database structure
 Data listed in JSON5 files can be of two types: reference and photometric. There are no restrictions on their order and relative position at all (data block and its reference block can be in different files), but it is usually convenient to list the sources at the beginning of the file, then the spectra.
 
-The brightness scale is not strictly tied to physical quantities. Using the `albedo` key, you can indicate that the appropriate spectrum is scaled and the brightness in the range 0 to 1 should be treated as reflectance. The scaling task can be left to the program by specifying a wavelength or filter for which the albedo is known. Optional internal standard is flux spectral density measured in W / (m² nm).
+The brightness scale is not strictly tied to physical quantities. Using the `albedo` key, you can indicate that the appropriate spectrum is scaled and the brightness in the range 0 to 1 should be treated as reflectance. The scaling task can be left to the program by specifying a wavelength or filter for which the albedo is known. Optional internal standard is irradiance spectral density measured in W / (m² nm).
 
 For the visible range, there are two main types of albedo: geometric and spherical. Geometric albedo is coefficient of reflected light at the zero phase angle (for simplicity, normal albedo is now not distinguished from geometric albedo). It is usually brighter than the spherical albedo, the ratio of all incident light to all reflected light. If one is not specified in the database or can't be calculated from the phase function, TCT uses a theoretical model to convert one to the other for the appropriate brightness display mode. If no albedo is specified, the object will not be displayed in albedo modes (exception for the `star` tag). The `albedo` parameter indicates both albedos at once, but it is not recommended.
 
@@ -70,11 +70,11 @@ Phase functions are now used to calculate the phase integral, which is used to c
 - `HG`: requires `G` parameter, see [Bowell et al. 1989](https://ui.adsabs.harvard.edu/abs/1989aste.conf..524B/abstract).
 - `HG1G2`: requires `G_1` and `G_2`, see [Muinonen et al. 2010](https://ui.adsabs.harvard.edu/abs/2010Icar..209..542M/abstract).
 
-It is assumed that all data is given in ascending wavelength order, and it is necessary to specify "white spectrum" for calibration if the photometric system does not determine it by equal-energy flux density by wavelengths ([this link](https://hst-docs.stsci.edu/acsdhb/chapter-5-acs-data-analysis/5-1-photometry#id-5.1Photometry-5.1.15.1.1PhotometricSystems,Units,andZeropoints) may help). Typically you need to specify `calibration_system: 'AB'` when working with Sloan filters and `calibration_system: 'Vega'` for all other cases.
+It is assumed that all data is given in ascending wavelength order, and it is necessary to specify "white spectrum" for calibration if the photometric system does not determine it by equal-energy irradiance density by wavelengths ([this link](https://hst-docs.stsci.edu/acsdhb/chapter-5-acs-data-analysis/5-1-photometry#id-5.1Photometry-5.1.15.1.1PhotometricSystems,Units,andZeropoints) may help). Typically you need to specify `calibration_system: 'AB'` when working with Sloan filters and `calibration_system: 'Vega'` for all other cases.
 
 Supported input keys of a database unit:
 - `nm` (list): list of wavelengths in nanometers
-- `br` (list): same-size list of "brightness", flux in units of energy (not a photon counter)
+- `br` (list): same-size list of "brightness" in energy density units (not a photon counter)
 - `mag` (list): same-size list of magnitudes
 - `sd` (list/number): same-size list of standard deviations or a general value
 - `nm_range` (dict): `start`, `stop`, `step` keys defining a wavelength range
@@ -95,7 +95,7 @@ Supported input keys of a database unit:
 - `sun_is_emitter` (bool): `true` to remove the reflected solar spectrum
 - `tags` (list): strings categorizing the spectrum
 
-You can store the file with the spectrum outside of JSON5, and include a link in it. Text (`*.txt`, `*.dat`) and FITS (`*.fits`, `*.fit`) formats are supported for external files. A text file must contain at least wavelengths in the first column, flux in the second column, and optionally standard deviations in the third column. Data is assumed to be in the second HDU in FITS files. If you have problems reading FITS, contact me, I'll improve the parsing of the provided example.
+You can store the file with the spectrum outside of JSON5, and include a link in it. Text (`*.txt`, `*.dat`) and FITS (`*.fits`, `*.fit`) formats are supported for external files. A text file must contain at least wavelengths in the first column, irradiance in the second column, and optionally standard deviations in the third column. Data is assumed to be in the second HDU in FITS files. If you have problems reading FITS, contact me, I'll improve the parsing of the provided example.
 
 As in JSON5, the default wavelengths for external files are in nanometers and the spectrum is in energy density. For FITS files, TCT attempt to determine the wavelength unit from internal data. You can also force the data type by using letters in the file extension (`.txt` for example):
 - `.txtN` for nanometers (by default), `.txtA` for ångströms, `.txtU` for micrometers;

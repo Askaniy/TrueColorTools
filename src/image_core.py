@@ -31,7 +31,7 @@ class SpectralCube:
 
         Args:
         - `nm` (Sequence): list of wavelengths in nanometers with resolution step of 5 nm
-        - `br` (np.ndarray): 3D array of "brightness", flux in units of energy (not a photon counter)
+        - `br` (np.ndarray): 3D array of "brightness" in energy density units (not a photon counter)
         - `sd` (np.ndarray, optional): 3D array of standard deviations
         """
         self.nm = nm
@@ -53,7 +53,7 @@ class SpectralCube:
 
         Args:
         - `nm` (Sequence): list of wavelengths, arbitrary grid
-        - `br` (np.ndarray): 3D array of "brightness", flux in units of energy (not a photon counter)
+        - `br` (np.ndarray): 3D array of "brightness" in energy density units (not a photon counter)
         - `sd` (np.ndarray): 3D array of standard deviations
         """
         len_br, x, y = br.shape

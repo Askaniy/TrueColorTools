@@ -33,7 +33,7 @@ class Spectrum:
         Args:
         - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
         - `nm` (Sequence): list of wavelengths in nanometers with resolution step of 5 nm
-        - `br` (Sequence): same-size list of "brightness", flux in units of energy (not a photon counter)
+        - `br` (Sequence): same-size list of "brightness" in energy density units (not a photon counter)
         - `sd` (Sequence, optional): same-size list of standard deviations
         - `photospectrum` (Photospectrum, optional): way to store information about the passbands used, for example, to plot it
         """
@@ -59,7 +59,7 @@ class Spectrum:
         Args:
         - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
         - `nm` (Sequence): list of wavelengths, arbitrary grid
-        - `br` (Sequence): same-size list of "brightness", flux in units of energy (not a photon counter)
+        - `br` (Sequence): same-size list of "brightness" in energy density units (not a photon counter)
         - `sd` (Sequence): same-size list of standard deviations
         """
         if (len_nm := len(nm)) != (len_br := len(br)):
