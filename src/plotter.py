@@ -12,23 +12,26 @@ import src.gui as gui
 
 # MatPlotLib custom theme
 # https://matplotlib.org/stable/tutorials/introductory/customizing.html
+errorbar_capsize = 5 # points
 dark_theme = {
     'text.color': gui.text_color, 'axes.labelcolor': gui.text_color,
     'axes.edgecolor': gui.muted_color, 'xtick.color': gui.muted_color, 'ytick.color': gui.muted_color,
     'figure.facecolor': gui.bg_color, 'axes.facecolor': gui.inputON_color,
-    'axes.grid': True, 'grid.color': gui.highlight_color
+    'axes.grid': True, 'grid.color': gui.highlight_color, 'errorbar.capsize': errorbar_capsize,
 }
 light_theme = {
     'text.color': '#000000', 'axes.labelcolor': '#000000',
     'axes.edgecolor': '#5C5C5C', 'xtick.color': '#5C5C5C', 'ytick.color': '#5C5C5C',
     'figure.facecolor': '#FFFFFF', 'axes.facecolor': '#FFFFFF',
-    'axes.grid': True, 'grid.color': '#A5A5A5'
+    'axes.grid': True, 'grid.color': '#A5A5A5', 'errorbar.capsize': errorbar_capsize,
 }
 themes = (dark_theme, light_theme)
 plt.rcParams |= dark_theme
 
 
 rgb_muted = ('#904040', '#3c783c', '#5050e0')
+background_CMFs = ((cp.r, cp.g, cp.b), (cp.x, cp.y, cp.z))
+
 
 def close_figure(figure: Figure):
     """ Removes the figure from memory """
@@ -42,30 +45,30 @@ def draw_figure(canvas, figure: Figure):
     return figure_canvas_agg
 
 
-def plot_spectra(objects: dict[Spectrum], gamma: bool, srgb: bool, albedo: bool, light_theme: bool, lang: str):
-    """ Creates a figure with plotted spectra from the input list """
+def plot_spectra(spectra: Sequence[Spectrum], gamma: bool, srgb: bool, albedo: bool, light_theme: bool, lang: str):
+    """ Creates a figure with plotted spectra from the input list and the CMFs used """
     with rc_context(themes[int(light_theme)]):
         fig, ax = plt.subplots(1, 1, figsize=(9, 6), dpi=100)
         ax.set_xlabel(tr.xaxis_text[lang])
         ax.set_ylabel(tr.yaxis_text[lang])
-        # determining the scale for CMFs in the background
+        # Determining the scale for CMFs in the background
         max_y = []
-        for spectrum in objects.values():
+        for spectrum in spectra:
             max_y.append(spectrum.br.max())
-        rgb = (cp.x, cp.y, cp.z) if srgb else (cp.r, cp.g, cp.b)
+        rgb = background_CMFs[srgb]
         k = max(max_y) / rgb[2].br.max() if len(max_y) != 0 else 1
-        # adding CMFs on the background
-        for i, spectrum in enumerate(rgb):
-            ax.plot(spectrum.nm, spectrum.br*k, label=spectrum.name, color=rgb_muted[i])
-        # color calculating and plotting
-        for spectrum in objects.values():
+        # Plotting the CMFs
+        for i, cmf in enumerate(rgb):
+            ax.plot(cmf.nm, cmf.br * k, label=cmf.name(lang), color=rgb_muted[i])
+        # Color calculating and plotting
+        for spectrum in spectra:
             if srgb:
                 color = cp.Color.from_spectrum_CIE(spectrum, albedo)
             else:
                 color = cp.Color.from_spectrum(spectrum, albedo)
             if gamma:
                 color = color.gamma_corrected()
-            ax.plot(spectrum.nm, spectrum.br, label=spectrum.name, color=color.to_html())
+            ax.plot(spectrum.nm, spectrum.br, label=spectrum.name(lang), color=color.to_html())
             if spectrum.photospectrum is not None:
                 fmt = 'o' if spectrum.photospectrum.sd is None else ''
                 ax.errorbar(
@@ -77,23 +80,22 @@ def plot_spectra(objects: dict[Spectrum], gamma: bool, srgb: bool, albedo: bool,
         fig.tight_layout() # moving to subplots() causes UserWarning
         return fig
 
-def plot_filters(filters: Sequence[Spectrum], lang: str):
-    """ Creates a figure with plotted sensitive curves and CMFs """
+def plot_filters(filters: Sequence[Spectrum], srgb: bool, lang: str):
+    """ Creates a figure with plotted sensitive curves and the CMFs used """
     fig, ax = plt.subplots(1, 1, figsize=(5.25, 1.75), dpi=90)
     ax.set_xlabel(tr.xaxis_text[lang])
-    # determining the scale for CMFs in the background
+    # Determining the scale for CMFs in the background
     max_y = []
-    for spectrum in filters[3:]:
+    for spectrum in filters:
         max_y.append(spectrum.br.max())
-    k = max(max_y) / filters[2].br.max() if len(max_y) != 0 else 1
-    # color calculating and plotting
+    rgb = background_CMFs[srgb]
+    k = max(max_y) / rgb[2].br.max() if len(max_y) != 0 else 1
+    # Plotting the CMFs
+    for i, cmf in enumerate(rgb):
+        ax.plot(cmf.nm, cmf.br * k, label=cmf.name(lang), color=rgb_muted[i])
+    # Color calculating and plotting
     for i, spectrum in enumerate(filters):
-        if i < 3: # the first three spectra are scaled sensitivity curves
-            br = spectrum.br*k
-            color = rgb_muted[i]
-        else:
-            br = spectrum.br
-            color = cp.Color.from_spectrum(spectrum).gamma_corrected().to_html()
-        ax.plot(spectrum.nm, br, label=spectrum.name, color=color)
+        color = cp.Color.from_spectrum(spectrum).gamma_corrected().to_html()
+        ax.plot(spectrum.nm, spectrum.br, label=spectrum.name(lang), color=color)
     fig.tight_layout() # moving to subplots() causes UserWarning
     return fig

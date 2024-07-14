@@ -1,8 +1,6 @@
 """ Responsible for converting measurement data into a working form. """
 
 from pathlib import Path
-from traceback import format_exc
-from json5 import load as json5load
 from astropy.io import fits
 from astropy.table import Table
 import astropy.units as u
@@ -19,25 +17,6 @@ fnu = u.def_unit('FNU', (u.erg / u.s) / (u.cm**2 * u.Hz))
 u.add_enabled_units((flam, fnu))
 u.add_enabled_aliases({'ANGSTROMS': u.Angstrom})
 flux_density_SI = u.W / u.m**2 / u.nm
-
-
-# Support of filters database provided by Filter Profile Service
-# http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php
-
-def list_filters():
-    """ Returns list of file names were found in the filters folder """
-    files = sorted(Path('filters').glob('*.*'))
-    return tuple(file.stem for file in files)
-
-class FilterNotFoundError(Exception):
-    pass
-
-def find_filter(name: str):
-    """ Returns the qualified file name with the required filter profile """
-    try:
-        return str(next(Path('filters').glob(f'{name}.*')))
-    except StopIteration:
-        raise FilterNotFoundError
 
 
 supported_extensions = ('txt', 'dat', 'fits', 'fit')
@@ -157,35 +136,3 @@ def search_column(names: list[str], target: str):
                 return 1 # the second is flux
             case 'sd':
                 return 2 # the third is standard deviation
-
-
-# Support of database extension via JSON5 files
-
-def import_DBs(folders: list):
-    """ Returns databases of objects and references were found in the given folders """
-    objectsDB = {}
-    refsDB = {}
-    for folder in folders:
-        additional_data = import_folder(folder)
-        objectsDB |= additional_data[0]
-        refsDB |= additional_data[1]
-    return objectsDB, refsDB
-
-def import_folder(folder: str):
-    """ Returns objects and references were found in the given folder """
-    objects = {}
-    refs = {}
-    files = sorted(Path(folder).glob('**/*.json5'))
-    for file in files:
-        with open(file, 'rt', encoding='UTF-8') as f:
-            try:
-                content = json5load(f)
-                for key, value in content.items():
-                    if type(value) == list:
-                        refs |= {key: value}
-                    else:
-                        objects |= {key: value}
-            except ValueError:
-                print(f'Error in JSON5 syntax of file "{file.name}", its upload was cancelled.')
-                print(f'More precisely, {format_exc(limit=0)}')
-    return objects, refs

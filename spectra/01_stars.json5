@@ -20,131 +20,131 @@
         'https://www.aanda.org/articles/aa/full_html/2017/07/aa30582-17/aa30582-17.html'
     ],
 
-    '(O9.7b+O9 III+B0 II-IV) ξ Orionis|Krisciunas2017': {
+    'ξ Orionis (O9.7b+O9 III+B0 II-IV) | Krisciunas2017': {
         tags: ['extrasolar', 'star'],
         file: 'spectra/files/Krisciunas2017/hr1948_final.txtA'
     },
-    '(B0.5 III) Mimosa|Krisciunas2017': {
+    'Mimosa (B0.5 III) | Krisciunas2017': {
         tags: ['extrasolar', 'star/III giant'],
         file: 'spectra/files/Krisciunas2017/hr4853_blue_fin.txtA'
     },
-    '(B1 II-III) Mirzam|Krisciunas2017': {
+    'Mirzam (B1 II-III) | Krisciunas2017': {
         tags: ['extrasolar', 'star/II bright giant', 'star/III giant'],
         file: 'spectra/files/Krisciunas2017/hr2294_final.txtA'
     },
-    '(B2 II) Adhara|Krisciunas2017': {
+    'Adhara (B2 II) | Krisciunas2017': {
         tags: ['extrasolar', 'star/II bright giant'],
         file: 'spectra/files/Krisciunas2017/hr2618_blue_fin.txtA'
     },
-    '(B2 III) Bellatrix|Krisciunas2017': {
+    'Bellatrix (B2 III) | Krisciunas2017': {
         tags: ['extrasolar', 'star/III giant'],
         file: 'spectra/files/Krisciunas2017/hr1790_final.txtA'
     },
-    '(B8 Ia) Rigel|Krisciunas2017': {
+    'Rigel (B8 Ia) | Krisciunas2017': {
         tags: ['extrasolar', 'star/I supergiant'],
         file: 'spectra/files/Krisciunas2017/hr1713_final.txtA'
     },
-    '(A0 V) Vega|CALSPEC': {
+    'Vega (A0 V) | CALSPEC': {
         tags: ['featured', 'extrasolar', 'star/V dwarf'],
         file: 'spectra/files/CALSPEC/alpha_lyr_stis_011.fits'
     },
-    '(A1 IV s+A9m) θ Virginis|Krisciunas2017': {
+    'θ Virginis (A1 IV s+A9m) | Krisciunas2017': {
         tags: ['extrasolar', 'star'],
         file: 'spectra/files/Krisciunas2017/hr4963_blue_fin.txtA'
     },
-    '(A1 V) Alsephina|Krisciunas2017': {
+    'Alsephina (A1 V) | Krisciunas2017': {
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/Krisciunas2017/hr3485_blue_fin.txtA'
     },
-    '(A1 Vn) π² Orionis|Krisciunas2017': {
+    'π² Orionis (A1 Vn) | Krisciunas2017': {
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/Krisciunas2017/hr1544_final.txtA'
     },
-    '(A2 IV) Miaplacidus|Krisciunas2017': {
+    'Miaplacidus (A2 IV) | Krisciunas2017': {
         tags: ['extrasolar', 'star/IV subgiant'],
         file: 'spectra/files/Krisciunas2017/hr3685_final.txtA'
     },
-    '(A9 II) Canopus|Krisciunas2017': {
+    'Canopus (A9 II) | Krisciunas2017': {
         tags: ['extrasolar', 'star/II bright giant'],
         file: 'spectra/files/Krisciunas2017/hr2326_final.txtA'
     },
-    "(F1 V) Alchiba|STIS_NGSLv2": {
+    'Alchiba (F1 V) | STIS_NGSLv2': {
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd105452_v2.txtA'
     },
-    '(F5 IV-V) Procyon|Krisciunas2017': {
+    'Procyon (F5 IV-V) | Krisciunas2017': {
         tags: ['extrasolar', 'star/IV subgiant', 'star/V dwarf'],
         file: 'spectra/files/Krisciunas2017/hr2943_final.txtA'
     },
-    '(F8 Ia) Wezen|Krisciunas2017': {
+    'Wezen (F8 Ia) | Krisciunas2017': {
         tags: ['extrasolar', 'star/I supergiant'],
         file: 'spectra/files/Krisciunas2017/hr2693_blue_fin.txtA'
     },
-    "(G0 V) β Comae Berenices|STIS_NGSLv2": {
+    'β Comae Berenices (G0 V) | STIS_NGSLv2': {
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd114710_v2.txtA'
     },
-    '(G2 V) Sun|CALSPEC': {
+    'Sun (G2 V) | CALSPEC': {
         tags: ['featured', 'Solar System', 'star/V dwarf'],
         file: 'spectra/files/CALSPEC/sun_reference_stis_002.fits'
     },
-    "(G5 V) κ1 Ceti|STIS_Pal2023": {
+    'κ1 Ceti (G5 V) | STIS_Pal2023': {
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_Pal2023/HD020630.txtA'
     },
-    "(G7 V) 61 Virginis|STIS_NGSLv2": {
+    '61 Virginis (G7 V) | STIS_NGSLv2': {
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd115617_v2.txtA'
     },
-    '(K0 III) Ankaa|Krisciunas2017': {
+    'Ankaa (K0 III) | Krisciunas2017': {
         tags: ['extrasolar', 'star/III giant'],
         file: 'spectra/files/Krisciunas2017/hr0099_blue_fin.txtA'
     },
-    "(K0 V) Alsafi|STIS_NGSLv2": {
+    'Alsafi (K0 V) | STIS_NGSLv2': {
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd185144_v2.txtA'
     },
-    "(K2 V) Ran|STIS_NGSLv2": {
+    'Ran (K2 V) | STIS_NGSLv2': {
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd022049_v2.txtA'
     },
-    '(K3 II-III) Alphard|Krisciunas2017': {
+    'Alphard (K3 II-III) | Krisciunas2017': {
         tags: ['extrasolar', 'star/II bright giant', 'star/III giant'],
         file: 'spectra/files/Krisciunas2017/hr3748_blue_fin.txtA'
     },
-    '(K3 III+B2 Vp) Avior|Krisciunas2017': {
+    'Avior (K3 III+B2 Vp) | Krisciunas2017': {
         tags: ['extrasolar', 'star'],
         file: 'spectra/files/Krisciunas2017/hr3307_final.txtA'
     },
-    '(K4.5 Ib-II) Suhail|Krisciunas2017': {
+    'Suhail (K4.5 Ib-II) | Krisciunas2017': {
         tags: ['extrasolar', 'star/I supergiant', 'star/II bright giant'],
         file: 'spectra/files/Krisciunas2017/hr3634_blue_fin.txtA'
     },
-    "(K5 V) 61 Cygni A|STIS_NGSLv2": {
+    '61 Cygni A (K5 V) | STIS_NGSLv2': {
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd201091_v2.txtA'
     },
-    "(K7 V) 61 Cygni B|STIS_Pal2023": {
+    '61 Cygni B (K7 V) | STIS_Pal2023': {
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_Pal2023/HR8086.txtA'
     },
-    '(M1-2 Ia-Iab) Betelgeuse|Krisciunas2017': {
+    'Betelgeuse (M1-2 Ia-Iab) | Krisciunas2017': {
         tags: ['extrasolar', 'star/I supergiant'],
         file: 'spectra/files/Krisciunas2017/hr2061_final.txtA'
     },
-    "(M2 V) Gliese 411|STIS_NGSLv2": {
+    'Gliese 411 (M2 V) | STIS_NGSLv2': {
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd095735_v2.txtA'
     },
-    '(M3.5 III) Gacrux|Krisciunas2017': {
+    'Gacrux (M3.5 III) | Krisciunas2017': {
         tags: ['extrasolar', 'star/III giant'],
         file: 'spectra/files/Krisciunas2017/hr4763_blue_fin.txtA'
     },
-    '(M5.5 Ve) Proxima Centauri|Ribas2017': {
+    'Proxima Centauri (M5.5 Ve) | Ribas2017': {
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/ProximaCentauri_Ribas2017.fit'
     },
-    "(M6 V) UV Ceti|STIS_NGSLv2": {
+    'UV Ceti (M6 V) | STIS_NGSLv2': {
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_lhs10_v2.txtA'
     },

@@ -2,7 +2,7 @@
 from PIL import Image, ImageDraw, ImageFont
 from math import floor, ceil, sqrt
 import numpy as np
-import src.auxiliary as aux
+import src.database as db
 import src.data_processing as dp
 import src.color_processing as cp
 import src.strings as tr
@@ -10,9 +10,9 @@ import src.strings as tr
 
 def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: bool, folder: str, extension: str, lang: str):
     """ Creates and saves a table of colored squares for each spectral data unit that has the specified tag """
-    objects = aux.obj_names_dict(objectsDB, tag, lang)
-    l = len(objects)
-    notes = aux.notes_list(objects.keys())
+    displayed_namesDB = db.obj_names_list(objectsDB, tag)
+    l = len(displayed_namesDB)
+    notes = db.notes_list(displayed_namesDB, lang)
     notes_flag = bool(notes)
 
     # Load fonts
@@ -105,10 +105,10 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     is_estimated = np.empty(l, dtype='bool')
     is_white_text = np.empty(l, dtype='bool')
 
-    for n, raw_name in enumerate(objects.values()):
+    for n, obj_name in enumerate(displayed_namesDB):
 
         # Spectral data import and processing
-        body = dp.database_parser(raw_name, objectsDB[raw_name])
+        body = dp.database_parser(obj_name, objectsDB[obj_name])
         albedo = brMode and isinstance(body, dp.ReflectiveBody)
 
         # Setting brightness mode
@@ -130,7 +130,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
             color = color.gamma_corrected()
         is_white_text[n] = color.grayscale() > 0.5
 
-        # Rounded square. For just square use `object_template = color.rgb`
+        # Rounded square. For just a square, use `object_template = color.rgb`
         object_template = color.rgb * squircle if np.any(color.rgb) else squircle_contour
 
         # Placing object template into the image template
@@ -163,7 +163,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
         )
     
     # Labeling the template
-    for n, name in enumerate(objects.keys()):
+    for n, obj_name in enumerate(displayed_namesDB):
         center_x = centers_x[n]
         center_y = centers_y[n]
 
@@ -172,14 +172,15 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
         if is_estimated[n]:
             draw.text((center_x+r_active, center_y+r_active), tr.table_estimated[lang], text_color, small_font, anchor='rs', align='right')
         
-        # Name processing
-        workaround_shift = 3 # it is not possible to use "lt" and "rt" anchors for multiline text https://pillow.readthedocs.io/en/stable/handbook/text-anchors.html
-        
+        name = obj_name.name(lang)
+
+        workaround_shift = 3
+        # (it is not possible to use "lt" and "rt" anchors for multiline text
+        # https://pillow.readthedocs.io/en/stable/handbook/text-anchors.html)
+
         ref_len = 0 # to avoid intersections with indices in the left corner
-        if '[' in name:
-            parts = name.split('[', 1)
-            name = parts[0].strip()
-            ref = parts[1][:-1]
+        if obj_name.reference:
+            ref = obj_name.reference
             if ',' in ref:
                 # checking multiple references, no more than 3 are supported!
                 refs = [i.strip() for i in ref.split(',', 2)]
@@ -193,25 +194,16 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
                 ref_len = width(ref, small_font)
             draw.multiline_text((center_x+r_active, center_y-r_active-workaround_shift), ref, fill=text_color, font=small_font, anchor='ra', align='right', spacing=0)
         
-        if name[0] == '(':
-            parts = name.split(')', 1)
-            name = parts[1].strip()
-            index = parts[0][1:].strip()
+        if obj_name.index or obj_name.info:
+            index = '\n'.join(filter(None, (obj_name.index, obj_name.info)))
             if '+' in index:
                 index = index.replace('+', '\n+')
             else:
                 free_space = 2*r_active - ref_len - tiny_space
                 index = '\n'.join(line_splitter(index, small_font, free_space))
             draw.multiline_text((center_x-r_active, center_y-r_active-workaround_shift), f'{index}', fill=text_color, font=small_font, anchor='la', align='left', spacing=0)
-        elif '/' in name:
-            parts = name.split('/', 1)
-            name = parts[1].strip()
-            draw.text((center_x-r_active, center_y-r_active-workaround_shift), f'{parts[0]}/', fill=text_color, font=small_font)
         
-        if notes_flag and ':' in name:
-            parts = name.split(':', 1)
-            name = parts[0].strip()
-            note = parts[1].strip()
+        if notes_flag and (note := obj_name.note(lang)):
             name += superscript(notes.index(note) + 1)
 
         splitted = line_splitter(name, object_font, 2*r_active)
@@ -281,27 +273,19 @@ def combine_words(word0: str, word1: str):
 
 def recursive_split(lst0: list, font: ImageFont.FreeTypeFont, maxW: int):
     """ A function that recursively splits and joins the list of strings to match `maxW` """
-    words_widths = [width(word, font) for word in lst0]
+    words_widths = tuple(width(word, font) for word in lst0)
     lst = lst0
-    if max(words_widths) < maxW:
-        # Attempt to combine words
-        for i in range(len(words_widths)-1):
-            combination = combine_words(lst[i], lst[i+1])
-            if width(combination, font) < maxW:
-                lst[i] = combination
-                lst.pop(i+1)
-                recursive_split(lst, font, maxW)
-                break
-    else:
+    if max(words_widths) > maxW:
         # Attempt to hyphenate the word
         for i in range(len(lst)):
             lst[i] = lst[i].strip()
             if width(lst[i], font) > maxW:
                 # Check for a separator not on the edge
                 for separator in separators:
-                    if separator in lst[i][1:-2]:
-                        part0, part1 = lst[i].split(separator, 1)
-                        lst[i] = f'{part0}{separator}'.strip()
+                    if separator in (inner := lst[i][1:-1]):
+                        part0, part1 = inner.split(separator, 1)
+                        part1 += lst[i][-1]
+                        lst[i] = f'{lst[i][0]}{part0}{separator}'.strip()
                         part1 = f'{separator}{part1}'.strip()
                         try:
                             lst[i+1] = combine_words(part1, lst[i+1])
@@ -322,5 +306,14 @@ def recursive_split(lst0: list, font: ImageFont.FreeTypeFont, maxW: int):
                     except IndexError:
                         lst.append(letter)
                     recursive_split(lst, font, maxW)
+                break
+    else:
+        # Attempt to combine words
+        for i in range(len(words_widths)-1):
+            combination = combine_words(lst[i], lst[i+1])
+            if width(combination, font) < maxW:
+                lst[i] = combination
+                lst.pop(i+1)
+                recursive_split(lst, font, maxW)
                 break
     return lst

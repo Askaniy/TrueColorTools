@@ -6,7 +6,7 @@ from copy import deepcopy
 import src.gui as gui
 from src.data_core import Spectrum, get_filter
 import src.auxiliary as aux
-import src.data_import as di
+import src.database as db
 import src.data_processing as dp
 import src.color_processing as cp
 import src.image_processing as ip
@@ -17,10 +17,11 @@ import src.strings as tr
 
 def launch_window(lang: str):
 
-    # Databases declaration, to be filled by the json5 database later
+    # Databases declaration
+    database_folders = ('spectra', 'spectra_extras')
     objectsDB, refsDB = {}, {}
     tagsDB = []
-    filtersDB = di.list_filters()
+    filtersDB = db.list_filters()
 
     # Processing configuration
     default_tag = 'featured'
@@ -56,20 +57,19 @@ def launch_window(lang: str):
 
     # Setting plots templates
     light_theme = False
-    plot_data = {} # for tabs 1 and 3, both at once
-    background_plot = ((cp.r, cp.g, cp.b), (cp.x, cp.y, cp.z)) # for tab 2
+    plot_data = [] # for tabs 1 and 3, both at once
     mean_spectrum = [] # for tab 2
 
-    T1_raw_name = T1_spectrum = T3_raw_name = T3_spectrum = None
+    T1_obj_name = T1_spectrum = T3_obj_name = T3_spectrum = None
 
-    def T1_T3_update_plot(fig, fig_canvas_agg, gamma: bool, srgb: bool, albedo: bool, light_theme: bool, lang: str):
+    def T1_T3_update_plot(fig, fig_canvas_agg, current_tab, gamma: bool, srgb: bool, albedo: bool, light_theme: bool, lang: str):
         pl.close_figure(fig)
         fig_canvas_agg.get_tk_widget().forget()
         to_plot = deepcopy(plot_data)
-        if T1_raw_name:
-            to_plot |= {T1_raw_name: T1_spectrum}
-        if T3_raw_name:
-            to_plot |= {T3_raw_name: T3_spectrum}
+        if current_tab == 'tab1' and T1_obj_name:
+            to_plot.append(T1_spectrum)
+        if current_tab == 'tab3' and T3_obj_name:
+            to_plot.append(T3_spectrum)
         fig = pl.plot_spectra(to_plot, gamma, srgb, albedo, light_theme, lang)
         fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, fig)
         return fig, fig_canvas_agg
@@ -100,10 +100,10 @@ def launch_window(lang: str):
                 pl.close_figure(T1_T3_fig)
                 T1_T3_fig_canvas_agg.get_tk_widget().forget()
             to_plot = deepcopy(plot_data)
-            if T1_raw_name:
-                to_plot |= {T1_raw_name: T1_spectrum}
-            if T3_raw_name:
-                to_plot |= {T3_raw_name: T3_spectrum}
+            if T1_obj_name:
+                to_plot.append(T1_spectrum)
+            if T3_obj_name:
+                to_plot.append(T3_spectrum)
             T1_T3_fig = pl.plot_spectra(to_plot, values['-gamma-'], values['-srgb-'], brMode, light_theme, lang)
             T1_T3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, T1_T3_fig)
         elif event == 'W1_path':
@@ -111,8 +111,11 @@ def launch_window(lang: str):
         elif event == 'W1_light_theme':
             light_theme = values['W1_light_theme']
             T1_T3_fig, T1_T3_fig_canvas_agg = T1_T3_update_plot(
-                T1_T3_fig, T1_T3_fig_canvas_agg, window0.ReturnValuesDictionary['-gamma-'],
-                window0.ReturnValuesDictionary['-srgb-'], brMode, light_theme, lang
+                T1_T3_fig, T1_T3_fig_canvas_agg,
+                window0.ReturnValuesDictionary['-currentTab-'],
+                window0.ReturnValuesDictionary['-gamma-'],
+                window0.ReturnValuesDictionary['-srgb-'],
+                brMode, light_theme, lang
             )
 
         # Run-time translation
@@ -122,13 +125,27 @@ def launch_window(lang: str):
                     lang = lng
                     break
             window0 = gui.translate_win0(window0, T2_vis, lang)
+            if values['-currentTab-'] == 'tab1':
+                if T1_obj_name:
+                    window['T1_title2'].update(T1_obj_name.indexed_name(lang))
+                T1_displayed_namesDB = db.obj_names_dict(objectsDB, values['T1_tags'], lang)
+                if T1_obj_name:
+                    T1_index = tuple(T1_displayed_namesDB.keys()).index(T1_obj_name(lang))
+                    window['T1_list'].update(tuple(T1_displayed_namesDB.keys()), set_to_index=T1_index, scroll_to_index=T1_index)
+                else:
+                    window['T1_list'].update(tuple(T1_displayed_namesDB.keys()))
+            if values['-currentTab-'] == 'tab3':
+                if T3_obj_name:
+                    window['T3_title2'].update(T3_obj_name.indexed_name(lang))
             if window1:
                 window1 = gui.translate_win1(window1, lang)
                 T1_T3_fig, T1_T3_fig_canvas_agg = T1_T3_update_plot(
-                    T1_T3_fig, T1_T3_fig_canvas_agg, window0.ReturnValuesDictionary['-gamma-'],
-                    window0.ReturnValuesDictionary['-srgb-'], brMode, light_theme, lang
+                    T1_T3_fig, T1_T3_fig_canvas_agg,
+                    window0.ReturnValuesDictionary['-currentTab-'],
+                    window0.ReturnValuesDictionary['-gamma-'],
+                    window0.ReturnValuesDictionary['-srgb-'],
+                    brMode, light_theme, lang
                 )
-            window['T1_list'].update(values=tuple(aux.obj_names_dict(objectsDB, values['T1_tags'], lang).keys()))
         
         # Only the main window events
         if window is window0:
@@ -189,12 +206,12 @@ def launch_window(lang: str):
                 if event in ('T1_load', 'T1_reload'):
                     # Loading of the spectra database
 
-                    objectsDB, refsDB = di.import_DBs(['spectra', 'spectra_extras'])
-                    tagsDB = aux.tag_list(objectsDB)
-                    namesDB = { # optimize!
-                        'en': aux.obj_names_dict(objectsDB, 'ALL', 'en'),
-                        'ru': aux.obj_names_dict(objectsDB, 'ALL', 'ru'),
-                        'de': aux.obj_names_dict(objectsDB, 'ALL', 'de')
+                    objectsDB, refsDB = db.import_DBs(database_folders)
+                    tagsDB = db.tag_list(objectsDB)
+                    namesDB = { # generalize!
+                        'en': db.obj_names_dict(objectsDB, 'ALL', 'en'),
+                        'ru': db.obj_names_dict(objectsDB, 'ALL', 'ru'),
+                        'de': db.obj_names_dict(objectsDB, 'ALL', 'de')
                     }
 
                     if event == 'T1_load':
@@ -203,15 +220,16 @@ def launch_window(lang: str):
                         window['T1_load'].update(tr.gui_load[lang], visible=False)
                         window['T1_tagsN'].update(visible=True)
                         window['T1_tags'].update(default_tag, values=tagsDB, visible=True)
-                        window['T1_list'].update(values=tuple(aux.obj_names_dict(objectsDB, default_tag, lang).keys()), visible=True)
+                        T1_displayed_namesDB = db.obj_names_dict(objectsDB, default_tag, lang)
+                        window['T1_list'].update(values=tuple(T1_displayed_namesDB.keys()), visible=True)
                         window['T1_reload'].update(tr.gui_reload[lang], visible=True)
 
                 elif (event in triggers or event == 'T1_list' or event == 'T1_filter') and values['T1_list'] != []:
-                    T1_name = values['T1_list'][0]
-                    T1_raw_name = namesDB[lang][T1_name]
+                    T1_obj_name = namesDB[lang][values['T1_list'][0]]
+                    window['T1_title2'].update(T1_obj_name.indexed_name(lang))
 
                     # Spectral data import and processing
-                    T1_body = dp.database_parser(T1_name, objectsDB[T1_raw_name])
+                    T1_body = dp.database_parser(T1_obj_name, objectsDB[T1_obj_name])
                     T1_albedo = brMode and isinstance(T1_body, dp.ReflectiveBody)
 
                     # Setting brightness mode
@@ -248,26 +266,38 @@ def launch_window(lang: str):
                     # Dynamical plotting
                     if window1:
                         T1_T3_fig, T1_T3_fig_canvas_agg = T1_T3_update_plot(
-                            T1_T3_fig, T1_T3_fig_canvas_agg, window0.ReturnValuesDictionary['-gamma-'],
-                            window0.ReturnValuesDictionary['-srgb-'], brMode, light_theme, lang
+                            T1_T3_fig, T1_T3_fig_canvas_agg,
+                            window0.ReturnValuesDictionary['-currentTab-'],
+                            window0.ReturnValuesDictionary['-gamma-'],
+                            window0.ReturnValuesDictionary['-srgb-'],
+                            brMode, light_theme, lang
                         )
                 
                 elif event == 'T1_tags':
-                    window['T1_list'].update(tuple(aux.obj_names_dict(objectsDB, values['T1_tags'], lang).keys()))
+                    T1_displayed_namesDB = db.obj_names_dict(objectsDB, values['T1_tags'], lang)
+                    window['T1_list'].update(tuple(T1_displayed_namesDB.keys()))
                 
                 elif event == 'T1_pin' and values['T1_list'] != []:
-                    plot_data |= {T1_raw_name: T1_spectrum}
+                    plot_data.append(T1_spectrum)
                 
-                elif event == 'T1_unpin':
-                    plot_data.pop(T1_raw_name)
+                elif event == 'T1_clear':
+                    plot_data = []
+                    if window1:
+                        T1_T3_fig, T1_T3_fig_canvas_agg = T1_T3_update_plot(
+                            T1_T3_fig, T1_T3_fig_canvas_agg,
+                            window0.ReturnValuesDictionary['-currentTab-'],
+                            window0.ReturnValuesDictionary['-gamma-'],
+                            window0.ReturnValuesDictionary['-srgb-'],
+                            brMode, light_theme, lang
+                        )
                 
                 elif event == 'T1_export2text':
                     if len(objectsDB) == 0:
                         sg.popup(tr.gui_no_data_message[lang], title=tr.gui_output[lang], icon=gui.icon, non_blocking=True)
                     else:
                         T1_export = '\n' + '\t'.join(tr.gui_col[lang]) + '\n' + '_' * 36
-                        for name, raw_name in aux.obj_names_dict(objectsDB, values['T1_tags'], lang).items():
-                            T1_body = dp.database_parser(name, objectsDB[raw_name])
+                        for obj_name in T1_displayed_namesDB.values():
+                            T1_body = dp.database_parser(obj_name, objectsDB[obj_name])
                             T1_albedo = brMode and isinstance(T1_body, dp.ReflectiveBody)
                         
                             # Setting brightness mode
@@ -289,7 +319,7 @@ def launch_window(lang: str):
                             T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
 
                             # Output
-                            T1_export += f'\n{aux.export_colors(T1_rgb)}\t{name}'
+                            T1_export += f'\n{aux.export_colors(T1_rgb)}\t{obj_name(lang)}'
                             if T1_estimated:
                                 T1_export += f'; {tr.gui_estimated[lang]}'
 
@@ -385,10 +415,10 @@ def launch_window(lang: str):
                 if (isinstance(event, str) and event.startswith('T2_filter')) or (event[0] == 'T2_thread' and values[event] is not None) or event in ('-currentTab-', '-srgb-'):
                     try:
                         pl.close_figure(T2_fig)
-                        to_plot = [*background_plot[values['-srgb-']], *T2_filters, *mean_spectrum]
-                        T2_fig = pl.plot_filters(to_plot, lang)
+                        T2_to_plot = [*T2_filters, *mean_spectrum]
+                        T2_fig = pl.plot_filters(T2_to_plot, values['-srgb-'], lang)
                     except UnboundLocalError: # means it's the first tab opening
-                        T2_fig = pl.plot_filters(background_plot[values['-srgb-']], lang)
+                        T2_fig = pl.plot_filters([], values['-srgb-'], lang)
                         T2_fig_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
                     finally:
                         T2_fig_canvas_agg.get_tk_widget().forget()
@@ -403,10 +433,18 @@ def launch_window(lang: str):
                     window['T3_slider1'].update(range=(0, int(values['T3_maxtemp_num'])))
                 
                 elif event == 'T3_pin':
-                    plot_data |= {T3_raw_name: T3_spectrum}
+                    plot_data.append(T3_spectrum)
                 
-                elif event == 'T3_unpin':
-                    plot_data.pop(T3_raw_name)
+                elif event == 'T3_clear':
+                    plot_data = []
+                    if window1:
+                        T1_T3_fig, T1_T3_fig_canvas_agg = T1_T3_update_plot(
+                            T1_T3_fig, T1_T3_fig_canvas_agg,
+                            window0.ReturnValuesDictionary['-currentTab-'],
+                            window0.ReturnValuesDictionary['-gamma-'],
+                            window0.ReturnValuesDictionary['-srgb-'],
+                            brMode, light_theme, lang
+                        )
                 
                 else:
                     if event == 'T3_overexposure':
@@ -415,7 +453,9 @@ def launch_window(lang: str):
                     
                     # Spectral data processing
                     T3_spectrum = Spectrum.from_blackbody_redshift(aux.visible_range, values['T3_slider1'], values['T3_slider2'], values['T3_slider3'])
-                    T3_raw_name = T3_spectrum.name
+                    T3_obj_name = T3_spectrum.name
+                    window['T3_title2'].update(T3_obj_name.indexed_name(lang))
+
                     if values['T3_overexposure']:
                         T3_spectrum.br /= dp.mag2irradiance(values['T3_slider4'], dp.vega_in_V) * dp.sun_in_V
 
@@ -437,6 +477,9 @@ def launch_window(lang: str):
                     # Dynamical plotting
                     if window1:
                         T1_T3_fig, T1_T3_fig_canvas_agg = T1_T3_update_plot(
-                            T1_T3_fig, T1_T3_fig_canvas_agg, window0.ReturnValuesDictionary['-gamma-'],
-                            window0.ReturnValuesDictionary['-srgb-'], brMode, light_theme, lang
+                            T1_T3_fig, T1_T3_fig_canvas_agg,
+                            window0.ReturnValuesDictionary['-currentTab-'],
+                            window0.ReturnValuesDictionary['-gamma-'],
+                            window0.ReturnValuesDictionary['-srgb-'],
+                            brMode, light_theme, lang
                         )

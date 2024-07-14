@@ -90,11 +90,11 @@ gui_rnd = {
 #    'ru': 'Входные данные',
 #    'de': 'Eingaben'
 #}
-#gui_output = {
-#    'en': 'Output',
-#    'ru': 'Результат',
-#    'de': 'Ergebnisse'
-#}
+gui_output = {
+    'en': 'Output',
+    'ru': 'Результат',
+    'de': 'Ergebnisse'
+}
 
 # Tab 1 - Database viewer
 #gui_database = {
@@ -143,14 +143,19 @@ gui_plot = {
     'de': 'Zeigen Sie das Diagramm'
 }
 gui_pin = {
-    'en': 'Pin the spectrum plot',
-    'ru': 'Закрепить график спектра',
-    'de': 'Fixierung des Spektrumsgraphen'
+    'en': 'Pin the spectrum',
+    'ru': 'Закрепить спектр',
+    'de': 'Das Spektrum festhalten'
 }
-gui_unpin = {
-    'en': 'Unpin the spectrum plot',
-    'ru': 'Открепить график спектра',
-    'de': 'Freigabe des Spektrumsdiagramms'
+#gui_unpin = {
+#    'en': 'Unpin the spectrum plot',
+#    'ru': 'Открепить график спектра',
+#    'de': 'Freigabe des Spektrumsdiagramms'
+#}
+gui_clear = {
+    'en': 'Clear the plot',
+    'ru': 'Очистить график',
+    'de': 'Plot löschen'
 }
 gui_export2text = {
     'en': 'Export category to text',
@@ -198,7 +203,7 @@ info_label = {
     'de': 'Info'
 }
 info_objects = {
-    'en': 'objects shown',
+    'en': 'objects displayed',
     'ru': 'объектов показано',
     'de': 'Objekte werden angezeigt'
 }
@@ -363,6 +368,10 @@ yaxis_text = {
 
 # Objects localization
 names = {
+    # Component of a generic Black Body spectrum name
+    'BB with': {'ru': 'АЧТ с', 'de': 'SK mit'},
+    # Component of a generic single-point spectrum name
+    'nm': {'ru': 'нм', 'de': 'nm'},
     # Constellations
     'Andromedae': {'ru': 'Андромеды', 'de': 'Andromedae'},
     #'Antliae': {'ru': '', 'de': 'Antliae'},
@@ -500,7 +509,7 @@ names = {
     # Jovian irregulars
     'Himalia': {'ru': 'Гималия', 'de': 'Himalia'},
     'Elara': {'ru': 'Элара', 'de': 'Elara'},
-    'Pasithee': {'ru': 'Пазифее', 'de': 'Pasithee'},
+    'Pasiphae': {'ru': 'Пасифе', 'de': 'Pasiphae'},
     'Sinope': {'ru': 'Синопе', 'de': 'Sinope'},
     'Lysithea': {'ru': 'Лиситея', 'de': 'Lysithea'},
     'Carme': {'ru': 'Карме', 'de': 'Carme'},
@@ -639,6 +648,7 @@ names = {
     'Itokawa': {'ru': 'Итокава', 'de': 'Itokawa'},
     'Ixion': {'ru': 'Иксион', 'de': 'Ixion'},
     'Huya': {'ru': 'Гуйя', 'de': 'Huya'},
+    'Lempo': {'ru': 'Лемпо', 'de': 'Lempo'},
     'Quaoar': {'ru': 'Квавар', 'de': 'Quaoar'},
     'Didymos': {'ru': 'Дидим', 'de': 'Didymos'},
     'Sedna': {'ru': 'Седна', 'de': 'Sedna'},

@@ -93,8 +93,7 @@ def generate_layout(
         [sg.Button(button_text=tr.gui_reload[lang], size=button_size, key='T1_reload', visible=False)],
     ]
     T1_col2 = [
-        #[sg.Text(tr.gui_output[lang], font=title_font, key='T1_title2')],
-        [sg.T()],
+        [sg.Text(font=title_font, key='T1_title2')],
         [sg.Graph(canvas_size=canvas_size, graph_bottom_left=(0, 0), graph_top_right=canvas_size, background_color=None, key='T1_graph')],
         [sg.T(key='T1_estimated')],
         [sg.Text(tr.gui_rgb[lang], key='T1_colorRGB'), sg.Input(size=1, key='T1_rgb', expand_x=True)],
@@ -107,7 +106,7 @@ def generate_layout(
         [sg.T()],
         [sg.Button(button_text=tr.gui_plot[lang], size=button_size, key='T1_plot')],
         [sg.Button(button_text=tr.gui_pin[lang], size=button_size, key='T1_pin')],
-        [sg.Button(button_text=tr.gui_unpin[lang], size=button_size, key='T1_unpin')],
+        [sg.Button(button_text=tr.gui_clear[lang], size=button_size, key='T1_clear')],
         [sg.T()],
         [sg.Button(button_text=tr.gui_export2text[lang], size=button_size, key='T1_export2text')],
         [
@@ -208,8 +207,7 @@ def generate_layout(
         [sg.Text(tr.gui_explanation[lang], key='T3_explanation')],
     ]
     T3_col2 = [
-        #[sg.Text(tr.gui_output[lang], font=title_font, key='T3_title2')],
-        [sg.T()],
+        [sg.Text(font=title_font, key='T3_title2')],
         [sg.Graph(canvas_size=canvas_size, graph_bottom_left=(0, 0), graph_top_right=canvas_size, background_color=None, key='T3_graph')],
         [sg.T()],
         [sg.Text(tr.gui_rgb[lang], key='T3_colorRGB'), sg.Input(size=1, key='T3_rgb', expand_x=True)],
@@ -217,7 +215,7 @@ def generate_layout(
         [sg.T()],
         [sg.Button(button_text=tr.gui_plot[lang], size=button_size, key='T3_plot')],
         [sg.Button(button_text=tr.gui_pin[lang], size=button_size, key='T3_pin')],
-        [sg.Button(button_text=tr.gui_unpin[lang], size=button_size, key='T3_unpin')],
+        [sg.Button(button_text=tr.gui_clear[lang], size=button_size, key='T3_clear')],
     ]
 
 
@@ -279,7 +277,7 @@ def translate_win0(window: sg.Window, T2_vis: int, lang: str):
     window['T1_in_filter'].update(tr.gui_in_filter[lang])
     window['T1_plot'].update(tr.gui_plot[lang])
     window['T1_pin'].update(tr.gui_pin[lang])
-    window['T1_unpin'].update(tr.gui_unpin[lang])
+    window['T1_clear'].update(tr.gui_clear[lang])
     window['T1_export2text'].update(tr.gui_export2text[lang])
     window['T1_export2table'].update(tr.gui_export2table[lang])
     #window['T2_title1'].update(tr.gui_input[lang])
@@ -319,7 +317,7 @@ def translate_win0(window: sg.Window, T2_vis: int, lang: str):
     window['T3_colorHEX'].update(tr.gui_hex[lang])
     window['T3_plot'].update(tr.gui_plot[lang])
     window['T3_pin'].update(tr.gui_pin[lang])
-    window['T3_unpin'].update(tr.gui_unpin[lang])
+    window['T3_clear'].update(tr.gui_clear[lang])
     return window
 
 def translate_win1(window: sg.Window, lang: str):

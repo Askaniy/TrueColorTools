@@ -3,7 +3,6 @@
 import numpy as np
 from math import sqrt, ceil
 from typing import Sequence
-import src.strings as tr
 
 
 # TCT was written in an effort to work not only with the optical range, but with any, depending on the data.
@@ -228,84 +227,6 @@ def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int|flo
             y = np.append(y, y1, axis=0)
     return x, y
 
-
-# Front-end
-
-def is_tag_in_obj(tag: str, obj_tags: Sequence):
-    """ Search for a tag in a list that handles subcategories """
-    tag = set(tag.split('/'))
-    for obj_tag in obj_tags:
-        if tag.issubset(obj_tag.split('/')):
-            return True
-    return False
-
-def obj_names_dict(database: dict, tag: str, lang: str):
-    """ Matches the front-end names with the database names for the selected tag """
-    names = {}
-    for raw_name, obj_data in database.items():
-        if tag == 'ALL' or is_tag_in_obj(tag, obj_data['tags']):
-            if '|' in raw_name:
-                new_name, source = raw_name.split('|', 1)
-            else:
-                new_name, source = raw_name, ''
-            if lang != 'en': # parsing and translating
-                index = ''
-                if new_name[0] == '(': # minor body index or stellar spectral type parsing
-                    parts = new_name.split(')', 1)
-                    index = parts[0] + ') '
-                    new_name = parts[1].strip()
-                elif '/' in new_name: # comet name parsing
-                    parts = new_name.split('/', 1)
-                    index = parts[0] + '/'
-                    new_name = parts[1].strip()
-                note = ''
-                if ':' in new_name:
-                    parts = new_name.split(':', 1)
-                    note = parts[1].strip()
-                    new_name = parts[0].strip()
-                    note = ': ' + translate(note, tr.notes, lang)
-                new_name = index + translate(new_name, tr.names, lang) + note
-            new_name = new_name if source == '' else f'{new_name} [{source}]'
-            names |= {new_name: raw_name}
-    return names
-
-def translate(target: str, translations: dict, lang: str):
-    """ Searches part of the target string to be translated and replaces it with translation """
-    for original, translation in translations.items():
-        if target.startswith(original) or target.endswith(original) or original in target.split():
-            target = target.replace(original, translation[lang])
-            break
-    return target
-
-def tag_list(database: dict):
-    """
-    Generates a list of tags found in the spectra database.
-    Tags can be written as `A/B/C`, which reads as {A, A/B, A/B/C}.
-    """
-    tag_set = set(['ALL'])
-    for obj_data in database.values():
-        if 'tags' in obj_data:
-            for tag in obj_data['tags']:
-                tag_set.add(tag)
-                if '/' in tag:
-                    supertags = []
-                    while '/' in tag:
-                        supertag, tag = tag.split('/', 1)
-                        supertags.append(supertag)
-                        tag_set.add('/'.join(supertags))
-    return sorted(tag_set)
-
-def notes_list(names: Sequence):
-    """ Generates a list of notes found in the spectra database """
-    notes = []
-    for name in names:
-        if ':' in name:
-            if '[' in name:
-                name = name.split('[', -1)[0]
-            note = name.split(':')[1].strip()
-            if note not in notes:
-                notes.append(note)
-    return notes
 
 def export_colors(rgb: tuple):
     """ Generates formatted string of colors """

@@ -17,6 +17,7 @@ from copy import deepcopy
 import numpy as np
 import src.auxiliary as aux
 import src.data_import as di
+from src.database import ObjectName, find_filter
 from src.experimental import irradiance
 
 
@@ -26,18 +27,18 @@ class Spectrum:
     # Initializes an object in case of input data problems
     stub = (np.array([555]), np.zeros(1), None)
 
-    def __init__(self, name: str, nm: Sequence, br: Sequence, sd: Sequence = None, photospectrum=None):
+    def __init__(self, name: str|ObjectName, nm: Sequence, br: Sequence, sd: Sequence = None, photospectrum=None):
         """
         It is assumed that the input grid can be trusted. If preprocessing is needed, see `Spectrum.from_array`.
 
         Args:
-        - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
+        - `name` (str or ObjectName): name as a string or an instance of a class that stores its components
         - `nm` (Sequence): list of wavelengths in nanometers with resolution step of 5 nm
         - `br` (Sequence): same-size list of "brightness" in energy density units (not a photon counter)
         - `sd` (Sequence, optional): same-size list of standard deviations
         - `photospectrum` (Photospectrum, optional): way to store information about the passbands used, for example, to plot it
         """
-        self.name = name
+        self.name = ObjectName.convert_if_needed(name)
         self.nm = np.array(nm, dtype='uint16')
         self.br = np.array(br, dtype='float64')
         if sd is not None:
@@ -47,27 +48,28 @@ class Spectrum:
         self.photospectrum = photospectrum
         if np.any(np.isnan(self.br)):
             self.br = np.nan_to_num(self.br)
-            print(f'# Note for the Spectrum object "{self.name}"')
+            print(f'# Note for the Spectrum object "{self.name.raw_name}"')
             print(f'- NaN values detected during object initialization, they been replaced with zeros.')
         # There are no checks for negativity, since such spectra exist, for example, red CMF.
 
     @staticmethod
-    def from_array(name: str, nm: Sequence, br: Sequence, sd: Sequence = None):
+    def from_array(name: str|ObjectName, nm: Sequence, br: Sequence, sd: Sequence = None):
         """
         Creates a Spectrum object from wavelength array with a check for uniformity and possible extrapolation.
 
         Args:
-        - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
+        - `name` (str or ObjectName): name as a string or an instance of a class that stores its components
         - `nm` (Sequence): list of wavelengths, arbitrary grid
         - `br` (Sequence): same-size list of "brightness" in energy density units (not a photon counter)
         - `sd` (Sequence): same-size list of standard deviations
         """
+        name = ObjectName.convert_if_needed(name)
         if (len_nm := len(nm)) != (len_br := len(br)):
-            print(f'# Note for the Spectrum object "{name}"')
+            print(f'# Note for the Spectrum object "{name.raw_name}"')
             print(f'- Arrays of wavelengths and brightness do not match ({len_nm} vs {len_br}). Spectrum stub object was created.')
             return Spectrum(name, *Spectrum.stub)
         if sd is not None and (len_sd := len(sd)) != len_br:
-            print(f'# Note for the Spectrum object "{name}"')
+            print(f'# Note for the Spectrum object "{name.raw_name}"')
             print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
             sd = None
         try:
@@ -97,17 +99,17 @@ class Spectrum:
                 nm = uniform_nm
             if br.min() < 0:
                 br = np.clip(br, 0, None)
-                #print(f'# Note for the Spectrum object "{name}"')
+                #print(f'# Note for the Spectrum object "{name.raw_name}"')
                 #print(f'- Negative values detected while trying to create the object from array, they been replaced with zeros.')
         except Exception:
             nm, br, sd = Spectrum.stub
-            print(f'# Note for the Spectrum object "{name}"')
+            print(f'# Note for the Spectrum object "{name.raw_name}"')
             print(f'- Something unexpected happened while trying to create the object from array. It was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0).strip()}')
         return Spectrum(name, nm, br, sd)
     
     @staticmethod
-    def from_file(name: str, file: str):
+    def from_file(name: str|ObjectName, file: str):
         """ Creates a Spectrum object based on loaded data from the specified file """
         nm, br, sd = di.file_reader(file)
         return Spectrum.from_array(name, nm, br, sd)
@@ -137,7 +139,7 @@ class Spectrum:
             br = irradiance(scope*doppler*grav, temperature)
         else:
             br = np.zeros(scope.size)
-        return Spectrum(f'BB with T={round(temperature)}', scope, br)
+        return Spectrum(f'BB with T={round(temperature)} K', scope, br)
     
     @staticmethod
     def from_nm(nm_point: int|float):
@@ -212,7 +214,7 @@ class Spectrum:
         try:
             return np.average(self.nm, weights=self.br)
         except ZeroDivisionError:
-            print(f'# Note for the Spectrum object "{self.name}"')
+            print(f'# Note for the Spectrum object "{self.name.raw_name}"')
             print(f'- Bolometric brightness is zero, the mean wavelength cannot be calculated. Returns 0 nm.')
             return 0.
 
@@ -248,7 +250,8 @@ class Spectrum:
         Note: the Photospectrum data would be erased because consistency with the Spectrum object
         cannot be maintained after conversion. TODO: uncertainty processing.
         """
-        name = f'{self.name}{operator_sign}{other.name}'
+        #name = f'{self.name}{operator_sign}{other.name}'
+        name = self.name
         start = max(self.nm[0], other.nm[0])
         end = min(self.nm[-1], other.nm[-1])
         if start > end: # `>` is needed to process operations with stub objects with no extra logs
@@ -306,7 +309,7 @@ def get_filter(name: str|int|float):
     if not isinstance(name, str) or name.isnumeric():
         profile = Spectrum.from_nm(float(name))
     else:
-        profile = Spectrum.from_file(name, di.find_filter(name))
+        profile = Spectrum.from_file(ObjectName(name), find_filter(name))
     return profile.edges_zeroed().scaled_by_area()
 
 
@@ -316,17 +319,17 @@ class Photospectrum:
     # Initializes an object in case of input data problems
     stub = ([get_filter('Generic_Bessell.V')], np.zeros(1), None)
 
-    def __init__(self, name: str, filters: Sequence[Spectrum], br: Sequence, sd: Sequence = None):
+    def __init__(self, name: str|ObjectName, filters: Sequence[Spectrum], br: Sequence, sd: Sequence = None):
         """
         It is assumed that the input can be trusted. If preprocessing is needed, see `Photospectrum.from_list`.
 
         Args:
-        - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
+        - `name` (str or ObjectName): name as a string or an instance of a class that stores its components
         - `filters` (Sequence): list of energy response functions scaled to the unit area, storing as Spectrum objects
         - `br` (Sequence): same-size list of intensity
         - `sd` (Sequence): same-size list of standard deviations
         """
-        self.name = name
+        self.name = ObjectName.convert_if_needed(name)
         self.filters = tuple(filters)
         self.br = np.array(br, dtype='float64')
         if sd is not None:
@@ -335,26 +338,27 @@ class Photospectrum:
             self.sd = None
         if np.any(np.isnan(self.br)):
             self.br = np.nan_to_num(self.br)
-            print(f'# Note for the Photospectrum object "{self.name}"')
+            print(f'# Note for the Photospectrum object "{self.name.raw_name}"')
             print(f'- NaN values detected during object initialization, they been replaced with zeros.')
     
     @staticmethod
-    def from_list(name: str, filters: Sequence[str], br: Sequence, sd: Sequence = None):
+    def from_list(name: str|ObjectName, filters: Sequence[str], br: Sequence, sd: Sequence = None):
         """
         Creates a Photospectrum object from a list of filter's names. Files with such names must be in the `filters` folder.
 
         Args:
-        - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
+        - `name` (str or ObjectName): name as a string or an instance of a class that stores its components
         - `filters` (Sequence): list of file names in the `filters` folder
         - `br` (Sequence): same-size list of intensity
         - `sd` (Sequence): same-size list of standard deviations
         """
+        name = ObjectName.convert_if_needed(name)
         if (len_filters := len(filters)) != (len_br := len(br)):
-            print(f'# Note for the Photospectrum object "{name}"')
+            print(f'# Note for the Photospectrum object "{name.raw_name}"')
             print(f'- Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br}). Photospectrum stub object was created.')
             return Photospectrum(name, *Photospectrum.stub)
         if sd is not None and (len_sd := len(sd)) != len_br:
-            print(f'# Note for the Photospectrum object "{name}"')
+            print(f'# Note for the Photospectrum object "{name.raw_name}"')
             print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
             sd = None
         # Checking existing and ordering
@@ -369,13 +373,13 @@ class Photospectrum:
                 filters[i] = get_filter(passband)
                 mean_wavelengths.append(filters[i].mean_wavelength())
             except di.FilterNotFoundError:
-                print(f'# Note for the Photospectrum object "{name}"')
+                print(f'# Note for the Photospectrum object "{name.raw_name}"')
                 print(f'- Filter "{passband}" not found in the "filters" folder. The corresponding data will be erased.')
                 del filters[i], br[i]
                 if sd is not None:
                     del sd[i]
         if len(filters) == 0:
-            print(f'# Note for the Photospectrum object "{name}"')
+            print(f'# Note for the Photospectrum object "{name.raw_name}"')
             print(f'- No declared filter profiles were found in the "filters" folder. Photospectrum stub object was created.')
             return Photospectrum(name, *Photospectrum.stub)
         else:
@@ -400,7 +404,7 @@ class Photospectrum:
                 nm, br = aux.extrapolating((self.filters[0].mean_wavelength(),), (self.br[0],), scope, aux.resolution)
             return Spectrum(self.name, nm, br, photospectrum=deepcopy(self))
         except Exception:
-            print(f'# Note for the Photospectrum object "{self.name}"')
+            print(f'# Note for the Photospectrum object "{self.name.raw_name}"')
             print(f'- Something unexpected happened while trying to inter/extrapolate to Spectrum object. It was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0).strip()}')
             return Spectrum(self.name, *Spectrum.stub)
@@ -429,7 +433,8 @@ class Photospectrum:
         Returns a new Photospectrum object formed from element-wise multiplication or division by the Spectrum.
         Note that this also distorts filter profiles.
         """
-        name = f'{self.name}{operator_sign}{other.name}'
+        #name = f'{self.name}{operator_sign}{other.name}'
+        name = self.name
         filters = [operator(passband, other).scaled_by_area() for passband in self.filters]
         return operator(Photospectrum(name, filters, self.br, self.sd), self @ other) # linear
     
