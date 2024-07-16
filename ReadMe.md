@@ -23,7 +23,7 @@ TrueColorTools has been tested on Windows 10/11, macOS and Linux ([this](https:/
 
 ### Executable file
 
-[SevenSpheres](https://github.com/SevenSpheres) compiles stable versions of CTC for Windows 8/10/11. Thus, Python is not required in this installation way.
+[SevenSpheres](https://github.com/SevenSpheres) compiles stable versions of TCT for Windows 8/10/11. Thus, Python is not required in this installation way.
 1. Go to [the latest release page](https://github.com/Askaniy/TrueColorTools/releases/latest);
 2. Download and unpack the first archive;
 3. Launch the `runTCT.exe`.
