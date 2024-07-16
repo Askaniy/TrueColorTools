@@ -132,12 +132,10 @@ def generate_layout(
         l = [
             [
                 sg.Input(enable_events=True, size=1, key='T2_path'+n, expand_x=True, visible=False),
-                # size=1 is VERY important! Now column depends on max length of filter file names
-                sg.FileBrowse(
-                    button_text=tr.gui_browse[lang], size=browse_size,
-                    initial_folder='..', key='T2_pathText'+n, visible=False
-                ),
-                # or label of RGB image bands, depends on radio box
+                # size=1 is VERY important to make column be depended on the max length of filter file names
+                # Depending on the radio box, FileBrowse or label is displayed below
+                sg.FileBrowse(button_text=tr.gui_browse[lang], size=browse_size, key='T2_pathText'+n, visible=False),
+                # No need of initial_folder='..' in the FileBrowse to make the path dynamical between the frames
                 rgb_text,
             ],
             [
