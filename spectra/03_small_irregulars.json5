@@ -10,7 +10,7 @@
     ],
 
     'Himalia (J VI) | Rettig2001, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.632, 'V-R': 0.375},
         calibration_system: 'Vega',
@@ -18,7 +18,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.057],
     },
     'Elara (J VII) | Rettig2001, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.66, 'V-R': 0.357},
         calibration_system: 'Vega',
@@ -26,7 +26,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.046],
     },
     'Pasiphae (J VIII) | Grav2003, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.74, 'V-R': 0.38, 'V-I': 0.74},
         calibration_system: 'Vega',
@@ -34,7 +34,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.044],
     },
     'Pasiphae: Weighted mean (J VIII) | Grav2003, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.71, 'V-R': 0.39, 'V-I': 0.75},
         calibration_system: 'Vega',
@@ -42,7 +42,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.044],
     },
     'Pasiphae (J VIII) | Rettig2001, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.68, 'V-R': 0.41},
         calibration_system: 'Vega',
@@ -50,7 +50,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.044],
     },
     'Sinope (J IX) | Graykowski2018, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.77, 'V-R': 0.48},
         calibration_system: 'Vega',
@@ -58,7 +58,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.042],
     },
     'Sinope (J IX) | Grav2003, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.84, 'V-R': 0.46, 'V-I': 0.93},
         calibration_system: 'Vega',
@@ -66,7 +66,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.042],
     },
     'Sinope (J IX) | Rettig2001, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.749, 'V-R': 0.481},
         calibration_system: 'Vega',
@@ -74,7 +74,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.042],
     },
     'Lysithea (J X) | Graykowski2018, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.72, 'V-R': 0.41},
         calibration_system: 'Vega',
@@ -82,7 +82,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.036],
     },
     'Lysithea (J X) | Grav2003, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.72, 'V-R': 0.36, 'V-I': 0.74},
         calibration_system: 'Vega',
@@ -90,7 +90,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.036],
     },
     'Lysithea (J X) | Rettig2001, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.671, 'V-R': 0.378},
         calibration_system: 'Vega',
@@ -98,7 +98,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.036],
     },
     'Carme (J XI) | Graykowski2018, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.76, 'V-R': 0.48},
         calibration_system: 'Vega',
@@ -106,7 +106,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.035],
     },
     'Carme (J XI) | Grav2003, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.76, 'V-R': 0.47, 'V-I': 0.97},
         calibration_system: 'Vega',
@@ -114,7 +114,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.035],
     },
     'Carme (J XI) | Rettig2001, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.72, 'V-R': 0.445},
         calibration_system: 'Vega',
@@ -122,7 +122,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.035],
     },
     'Ananke (J XII) | Grav2003, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.90, 'V-R': 0.38, 'V-I': 0.86},
         calibration_system: 'Vega',
@@ -130,7 +130,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.038],
     },
     'Ananke: Weighted mean (J XII) | Grav2003, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.77, 'V-R': 0.42, 'V-I': 0.83},
         calibration_system: 'Vega',
@@ -138,7 +138,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.038],
     },
     'Ananke (J XII) | Rettig2001, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.758, 'V-R': 0.428},
         calibration_system: 'Vega',
@@ -146,7 +146,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.038],
     },
     'Leda (J XIII) | Graykowski2018, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.66, 'V-R': 0.43},
         calibration_system: 'Vega',
@@ -154,7 +154,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.034],
     },
     'Leda (J XIII) | Rettig2001, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.644, 'V-R': 0.348},
         calibration_system: 'Vega',
@@ -162,7 +162,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.034],
     },
     'Callirrhoe (J XVII) | Grav2003, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.72, 'V-R': 0.50, 'V-I': 1.02},
         calibration_system: 'Vega',
@@ -170,7 +170,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.052],
     },
     'Callirrhoe (J XVII) | Graykowski2018, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.81, 'V-R': 0.23},
         calibration_system: 'Vega',
@@ -178,63 +178,63 @@
         geometric_albedo: ['Generic_Bessell.V', 0.052],
     },
     'Themisto (J XVIII) | Graykowski2018': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.80, 'V-R': 0.48},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Themisto (J XVIII) | Grav2003': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.83, 'V-R': 0.46, 'V-I': 0.94},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Megaclite (J XIX) | Graykowski2018': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.82, 'V-R': 0.44},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Megaclite (J XIX) | Grav2003': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.94, 'V-R': 0.41, 'V-I': 1.05},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Taygete (J XX) | Graykowski2018': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.84, 'V-R': 0.47},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Taygete (J XX) | Grav2003': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.56, 'V-R': 0.52, 'V-I': 0.96},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Chaldene (J XXI) | Graykowski2018': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.82, 'V-R': 0.50},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Harpalyke (J XXII) | Graykowski2018': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.70, 'V-R': 0.42},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Kalyke (J XXIII) | Graykowski2018, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.69, 'V-R': 0.46},
         calibration_system: 'Vega',
@@ -242,7 +242,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.029],
     },
     'Kalyke (J XXIII) | Grav2003, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.94, 'V-R': 0.705, 'V-I': 0.890},
         calibration_system: 'Vega',
@@ -250,35 +250,35 @@
         geometric_albedo: ['Generic_Bessell.V', 0.029],
     },
     'Iocaste (J XXIV) | Graykowski2018': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.86, 'V-R': 0.38},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Iocaste (J XXIV) | Grav2003': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.63, 'V-R': 0.36, 'V-I': 0.62},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Erinome (J XXV) | Graykowski2018': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.72, 'V-R': 0.42},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Isonoe (J XXVI) | Graykowski2018': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.78, 'V-R': 0.53},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Praxidike (J XXVII) | Graykowski2018, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.71, 'V-R': 0.32},
         calibration_system: 'Vega',
@@ -286,7 +286,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.029],
     },
     'Praxidike (J XXVII) | Grav2003, Grav2015': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.77, 'V-R': 0.34, 'V-I': 0.74},
         calibration_system: 'Vega',
@@ -294,35 +294,35 @@
         geometric_albedo: ['Generic_Bessell.V', 0.029],
     },
     'Autonoe (J XXVIII) | Graykowski2018': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.72, 'V-R': 0.51},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Thyone (J XXIX) | Graykowski2018': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.71, 'V-R': 0.45},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Hermippe (J XXX) | Graykowski2018': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.73, 'V-R': 0.49},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Eukelade (J XLVII) | Graykowski2018': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.79, 'V-R': 0.50},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Cyllene (J XLVIII) | Graykowski2018': {
-        tags: ['Solar System/Jovian system', 'moon/irregular'],
+        tags: ['Solar System/Jovian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.73, 'V-R': 0.46},
         calibration_system: 'Vega',
@@ -340,140 +340,140 @@
     ],
 
     'Ymir (S XIX) | Grav2007': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.789, 'V-R': 0.438, 'V-I': 0.884},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Ymir (S XIX) | Grav2003': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.56, 'V-R': 0.52, 'V-I': 0.96},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Ymir (S XIX) | Pena2022': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'CTIO_DECam',
         color_indices: {'g-r': 0.50, 'r-i': 0.25},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
     'Paaliaq (S XX) | Grav2007': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.86, 'V-R': 0.40, 'V-I': 0.92},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Paaliaq (S XX) | Grav2003': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.77, 'V-R': 0.48, 'V-I': 0.94},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Tarvos (S XXI) | Graykowski2018': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.71, 'V-R': 0.42},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
     'Tarvos (S XXI) | Grav2007': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.78, 'V-R': 0.43, 'V-I': 0.82},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Tarvos (S XXI) | Grav2003': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.77, 'V-R': 0.57, 'V-I': 0.88},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Tarvos (S XXI) | Pena2022': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'CTIO_DECam',
         color_indices: {'g-r': 0.52, 'r-i': 0.30},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
     'Ijiraq (S XXII) | Graykowski2018': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': 1.40},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Ijiraq (S XXII) | Grav2007': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 1.05, 'V-R': 0.58, 'V-I': 1.09},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Ijiraq (S XXII) | Pena2022': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'CTIO_DECam',
         color_indices: {'g-r': 0.70, 'r-i': 0.20},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
     'Suttungr (S XXIII) | Grav2007': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.47, 'V-R': 0.65, 'V-I': 0.78},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Suttungr (S XXIII) | Pena2022': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'CTIO_DECam',
         color_indices: {'g-r': 0.40, 'r-i': 0.17},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
     'Kiviuq (S XXIV) | Grav2007': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.872, 'V-R': 0.482, 'V-I': 0.98},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Kiviuq (S XXIV) | Grav2003': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.87, 'V-R': 0.66, 'V-I': 0.97},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Kiviuq (S XXIV) | Pena2022': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'CTIO_DECam',
         color_indices: {'g-r': 0.51, 'r-i': 0.28},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
     'Mundilfari (S XXV) | Grav2007': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.58, 'V-R': 0.41, 'V-I': 0.52},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Mundilfari (S XXV) | Pena2022': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'CTIO_DECam',
         color_indices: {'g-r': 0.38, 'r-i': 0.03},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
     'Albiorix (S XXVI) | Graykowski2018, Grav2015': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.80, 'V-R': 0.50},
         calibration_system: 'Vega',
@@ -481,7 +481,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.062],
     },
     'Albiorix (S XXVI) | Grav2007, Grav2015': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.879, 'V-R': 0.510, 'V-I': 0.902},
         calibration_system: 'Vega',
@@ -489,7 +489,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.062],
     },
     'Albiorix (S XXVI) | Grav2003, Grav2015': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.935, 'V-R': 0.482, 'V-I': 0.916},
         calibration_system: 'Vega',
@@ -497,7 +497,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.062],
     },
     'Albiorix (S XXVI) | Pena2022, Grav2015': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'CTIO_DECam',
         color_indices: {'g-r': 0.46, 'r-i': 0.31},
         calibration_system: 'AB',
@@ -505,49 +505,49 @@
         geometric_albedo: ['Generic_Bessell.V', 0.062],
     },
     'Skathi (S XXVII) | Grav2007': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.72, 'V-R': 0.37, 'V-I': 0.88},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Skathi (S XXVII) | Pena2022': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'CTIO_DECam',
         color_indices: {'g-r': 0.24, 'r-i': -0.005},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
     'Erriapus (S XXVIII) | Graykowski2018': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.78, 'V-R': 0.41},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Erriapus (S XXVIII) | Grav2007': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.71, 'V-R': 0.40, 'V-I': 0.86},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Erriapus (S XXVIII) | Grav2003': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.83, 'V-R': 0.49, 'V-I': 0.61},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Erriapus (S XXVIII) | Pena2022': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'CTIO_DECam',
         color_indices: {'g-r': 0.20, 'r-i': 0.42},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
     'Siarnaq (S XXIX) | Grav2007, Grav2015': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.875, 'V-R': 0.485, 'V-I': 1.025},
         calibration_system: 'Vega',
@@ -555,7 +555,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.050],
     },
     'Siarnaq (S XXIX) | Grav2003, Grav2015': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.80, 'V-R': 0.52, 'V-I': 0.96},
         calibration_system: 'Vega',
@@ -563,7 +563,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.050],
     },
     'Siarnaq (S XXIX) | Pena2022, Grav2015': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'CTIO_DECam',
         color_indices: {'g-r': 0.53, 'r-i': 0.24},
         calibration_system: 'AB',
@@ -571,105 +571,105 @@
         geometric_albedo: ['Generic_Bessell.V', 0.050],
     },
     'Thrymr (S XXX) | Grav2007': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.41, 'V-R': 0.59, 'V-I': 0.86},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Thrymr (S XXX) | Pena2022': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'CTIO_DECam',
         color_indices: {'g-r': 0.40, 'r-i': 0.15},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
     'Narvi (S XXXI) | Graykowski2018': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': 1.29},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Narvi (S XXXI) | Pena2022': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'CTIO_DECam',
         color_indices: {'g-r': 0.24, 'r-i': 0.42},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
     'Aegir (S XXXVI) | Graykowski2018': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': 1.30},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Bebhionn (S XXXVII) | Graykowski2018': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.61, 'V-R': 0.51},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Bergelmir (S XXXVIII) | Graykowski2018': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': 1.10},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Bestla (S XXXIX) | Graykowski2018': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': 1.32},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Bestla (S XXXIX) | Pena2022': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'CTIO_DECam',
         color_indices: {'g-r': 0.72, 'r-i': 0.38},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
     'Fornjot (S XLII) | Graykowski2018': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': 1.40},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Hyrrokkin (S XLIV) | Graykowski2018': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': 1.23},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Hyrrokkin (S XLIV) | Pena2022': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'CTIO_DECam',
         color_indices: {'g-r': 0.50, 'r-i': 0.34},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
     'Kari (S XLV) | Pena2022': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'CTIO_DECam',
         color_indices: {'g-r': 0.31, 'r-i': 0.53},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
     'Tarqeq (S LII) | Graykowski2018': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': 1.37},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     '(S/2007) S 2 | Graykowski2018': {
-        tags: ['Solar System/Saturnian system', 'moon/irregular'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': 1.37},
         calibration_system: 'Vega',
@@ -678,35 +678,35 @@
 
     // Uranian small irregulars
     'Caliban (U XVI) | Graykowski2018': {
-        tags: ['Solar System/Uranian system', 'moon/irregular'],
+        tags: ['Solar System/Uranian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.81, 'V-R': 0.47},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Sycorax (U XVII) | Graykowski2018': {
-        tags: ['Solar System/Uranian system', 'moon/irregular'],
+        tags: ['Solar System/Uranian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.81, 'V-R': 0.54},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Prospero (U XVIII) | Graykowski2018': {
-        tags: ['Solar System/Uranian system', 'moon/irregular'],
+        tags: ['Solar System/Uranian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.81, 'V-R': 0.51},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Setebos (U XIX) | Graykowski2018': {
-        tags: ['Solar System/Uranian system', 'moon/irregular'],
+        tags: ['Solar System/Uranian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.78, 'V-R': 0.49},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     'Stephano (U XX) | Graykowski2018': {
-        tags: ['Solar System/Uranian system', 'moon/irregular'],
+        tags: ['Solar System/Uranian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.97, 'V-R': 0.66},
         calibration_system: 'Vega',
@@ -715,7 +715,7 @@
 
     // Neptunian small irregulars
     'Halimede (N IX) | Graykowski2018': {
-        tags: ['Solar System/Neptunian system', 'moon/irregular'],
+        tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.89, 'V-R': 0.56},
         calibration_system: 'Vega',
@@ -726,7 +726,7 @@
         'DOI: 10.3847/2515-5172/aab7fc', 'https://ui.adsabs.harvard.edu/abs/2018RNAAS...2...42M/abstract'
     ],
     'Neso (N XIII) | Maris2018': {
-        tags: ['Solar System/Neptunian system', 'moon/irregular'],
+        tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-I': 1.0, 'V-R': 0.3},
         calibration_system: 'Vega',

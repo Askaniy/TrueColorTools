@@ -676,7 +676,7 @@ names = {
     'Hale–Bopp': {'ru': 'Хейла — Боппа', 'de': 'Hale–Bopp'},
     'ʻOumuamua': {'ru': 'Оумуамуа', 'de': 'ʻOumuamua'},
     # Classes
-    'Class': {'ru': 'Класс', 'de': 'Spektraltyp'},
+    'Spectral type': {'ru': 'Спектральный класс', 'de': 'Spektraltyp'},
     'Jovian irregulars': {'ru': 'Нерегулярные спутники Юпитера', 'de': 'irreguläre Jupitermonde'},
     'Saturnian irregulars': {'ru': 'Нерегулярные спутники Сатурна', 'de': 'irreguläre Saturnmonde'},
     'Uranian irregulars': {'ru': 'Нерегулярные спутники Урана', 'de': 'irreguläre Uranusmonde'},
@@ -722,6 +722,7 @@ notes = {
     'Wenu Lobus': {'ru': 'Доля Уэну', 'de': 'Wenu Lobus'},
     'Weeyo Lobus': {'ru': 'Доля Уээйо', 'de': 'Weeyo Lobus'},
     'Akasa Linea': {'ru': 'Линия Акаса', 'de': 'Akasa Linea'},
+    'Near the aphelion': {'ru': 'Вблизи афелия', 'de': 'In der Nähe des Aphels'},
 }
 
 # Sort in key length descending order to prevent nested word errors

@@ -245,3 +245,36 @@ def get_flag_index(flags: tuple):
     for index, flag in enumerate(flags):
         if flag:
             return index
+
+illegal_chars = (
+    '#',  # pound
+    '%',  # percent
+    '&',  # ampersand
+    '{',  # left curly bracket
+    '}',  # right curly bracket
+    '\\', # back slash
+    '<',  # left angle bracket
+    '>',  # right angle bracket
+    '*',  # asterisk
+    '?',  # question mark
+    '/',  # forward slash
+    ' ',  # blank spaces
+    '$',  # dollar sign
+    '!',  # exclamation point
+    "'",  # single quotes
+    '"',  # double quotes
+    ':',  # colon
+    '@',  # at sign
+    '+',  # plus sign
+    '`',  # backtick
+    '|',  # pipe
+    '=',  # equal sign
+)
+
+def normalize_string(string: str):
+    """ Removes characters invalid for file names """
+    result = ''
+    for char in string:
+        if char not in illegal_chars:
+            result += char
+    return result

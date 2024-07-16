@@ -2,6 +2,7 @@
 from PIL import Image, ImageDraw, ImageFont
 from math import floor, ceil, sqrt
 import numpy as np
+from src.auxiliary import normalize_string
 import src.database as db
 import src.data_processing as dp
 import src.color_processing as cp
@@ -14,6 +15,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     l = len(displayed_namesDB)
     notes = db.notes_list(displayed_namesDB, lang)
     notes_flag = bool(notes)
+    tag = tag.split('/')[-1] # then only the last category is used
 
     # Load fonts
     name_size = 36
@@ -210,9 +212,9 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
         shift = object_size/2 if len(splitted) == 1 else object_size
         draw.multiline_text((center_x-r_active, center_y-shift), '\n'.join(splitted), fill=text_color, font=object_font, spacing=1)
     
-    file_name = f'TCT_{tag.replace("/", "-")}_gamma{("OFF", "ON")[gamma]}_srgb{("OFF", "ON")[srgb]}_albedo{("OFF", "GEOM", "SPHER")[brMode]}_{lang}.{extension}'
+    file_name = f'TCT_{normalize_string(tag)}_gamma{("OFF", "ON")[gamma]}_srgb{("OFF", "ON")[srgb]}_albedo{("OFF", "GEOM", "SPHER")[brMode]}_{lang}.{extension}'
     img.save(f'{folder}/{file_name}')
-    print(f'Color table saved as {file_name}\n')
+    print(f'Color table saved as {file_name}')
 
 def fullness(width: int, total_width: int):
     """ Column determination criterion """

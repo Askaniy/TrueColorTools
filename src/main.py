@@ -208,7 +208,7 @@ def launch_window(lang: str):
 
                     objectsDB, refsDB = db.import_DBs(database_folders)
                     tagsDB = db.tag_list(objectsDB)
-                    namesDB = { # generalize!
+                    namesDB = { # TODO: generalize!
                         'en': db.obj_names_dict(objectsDB, 'ALL', 'en'),
                         'ru': db.obj_names_dict(objectsDB, 'ALL', 'ru'),
                         'de': db.obj_names_dict(objectsDB, 'ALL', 'de')
