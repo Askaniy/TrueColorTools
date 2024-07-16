@@ -30,6 +30,7 @@ def create_logger(window: sg.Window, key: str) -> Callable:
     return logger
 
 def generate_plot_layout(lang: str, light_theme: bool):
+    """ Window 1 layout generator, the window of plot """
     return [
         [
             sg.Text(tr.spectral_plot[lang], font=('arial', 16), key='W1_title'),
@@ -37,7 +38,10 @@ def generate_plot_layout(lang: str, light_theme: bool):
             sg.Checkbox(tr.light_theme[lang], default=light_theme, enable_events=True, key='W1_light_theme'),
             sg.Push(),
             sg.InputText(visible=False, enable_events=True, key='W1_path'),
-            sg.FileSaveAs(tr.gui_save[lang], file_types=('PNG {png}', 'PDF {pdf}', 'SVG {svg}'), default_extension='.png', key='W1_save')
+            sg.FileSaveAs(
+                tr.gui_save[lang], initial_folder='..',
+                file_types=('PNG {png}', 'PDF {pdf}', 'SVG {svg}'), default_extension='.png', key='W1_save'
+            )
         ],
         [sg.Canvas(key='W1_canvas')],
     ]
@@ -52,6 +56,7 @@ def generate_layout(
         rounding: int,
         T2_num: int,
         lang: str):
+    """ Window 0 layout generator, the main window with tabs """
     title_font = ('arial', 12)
     tags_input_size = 20
     button_size = 30
@@ -83,7 +88,7 @@ def generate_layout(
 
     T1_col1 = [
         #[sg.Push(), sg.Text(tr.gui_database[lang], font=title_font, key='T1_title1'), sg.Push()],
-        [sg.Push(),sg.Text(key='T1_header_space'), sg.Push()], # Push is workaround to make visible=False work
+        [sg.Push(),sg.Text(key='T1_header_space'), sg.Push()], # Push() is a workaround to make visible=False action work
         [sg.Push(), sg.Button(button_text=tr.gui_load[lang], size=button_size, key='T1_load'), sg.Push()],
         [
             sg.Push(), sg.Text(tr.gui_tags[lang], key='T1_tagsN', visible=False),
@@ -111,7 +116,10 @@ def generate_layout(
         [sg.Button(button_text=tr.gui_export2text[lang], size=button_size, key='T1_export2text')],
         [
             sg.Input(enable_events=True, key='T1_folder', visible=False),
-            sg.FolderBrowse(button_text=tr.gui_export2table[lang], size=button_size, key='T1_export2table'),
+            sg.FolderBrowse(
+                button_text=tr.gui_export2table[lang], size=button_size,
+                initial_folder='..', key='T1_export2table'
+            ),
         ],
     ]
 
@@ -125,7 +133,10 @@ def generate_layout(
             [
                 sg.Input(enable_events=True, size=1, key='T2_path'+n, expand_x=True, visible=False),
                 # size=1 is VERY important! Now column depends on max length of filter file names
-                sg.FileBrowse(button_text=tr.gui_browse[lang], size=browse_size, key='T2_pathText'+n, visible=False),
+                sg.FileBrowse(
+                    button_text=tr.gui_browse[lang], size=browse_size,
+                    initial_folder='..', key='T2_pathText'+n, visible=False
+                ),
                 # or label of RGB image bands, depends on radio box
                 rgb_text,
             ],
@@ -151,7 +162,10 @@ def generate_layout(
             sg.Text(tr.gui_step2[lang], key='T2_step2'),
             # or image input
             sg.Input(enable_events=True, size=1, key='T2_path', expand_x=True, visible=False),
-            sg.FileBrowse(button_text=tr.gui_browse[lang], size=10, key='T2_pathText', visible=False),
+            sg.FileBrowse(
+                button_text=tr.gui_browse[lang], size=browse_size,
+                initial_folder='..', key='T2_pathText', visible=False
+            ),
         ],
         [sg.Column(T2_frames, scrollable=True, vertical_scroll_only=True, key='T2_frames', expand_x=True, expand_y=True)],
     ]
@@ -178,7 +192,10 @@ def generate_layout(
         [
             sg.Push(),
             sg.Input(enable_events=True, key='T2_folder', visible=False),
-            sg.FolderBrowse(tr.gui_process[lang], size=button_size, key='T2_process'),
+            sg.FolderBrowse(
+                button_text=tr.gui_process[lang], size=button_size,
+                initial_folder='..', key='T2_process'
+            ),
             sg.Push(),
         ],
     ]

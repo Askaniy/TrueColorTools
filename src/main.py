@@ -49,6 +49,7 @@ def launch_window(lang: str):
     # Creating the plot window stub
     window1 = None
 
+    # Connection to the parallel thread of image processing
     T2_logger = gui.create_logger(window0, 'T2_thread')
 
     # Setting default color preview circle
@@ -60,6 +61,7 @@ def launch_window(lang: str):
     plot_data = [] # for tabs 1 and 3, both at once
     mean_spectrum = [] # for tab 2
 
+    # Default values to avoid errors
     T1_obj_name = T1_spectrum = T3_obj_name = T3_spectrum = None
 
     def T1_T3_update_plot(fig, fig_canvas_agg, current_tab, gamma: bool, srgb: bool, albedo: bool, light_theme: bool, lang: str):
@@ -106,6 +108,8 @@ def launch_window(lang: str):
                 to_plot.append(T3_spectrum)
             T1_T3_fig = pl.plot_spectra(to_plot, values['-gamma-'], values['-srgb-'], brMode, light_theme, lang)
             T1_T3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, T1_T3_fig)
+        elif event == 'W1_save':
+            print('hi')
         elif event == 'W1_path':
             T1_T3_fig.savefig(values['W1_path'], dpi=133.4) # 1200x800
         elif event == 'W1_light_theme':

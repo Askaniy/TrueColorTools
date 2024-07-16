@@ -318,11 +318,13 @@
     // Jovian small inner satellites
     'Thomas1998': [
         'The Small Inner Satellites of Jupiter',
-        'DOI: 10.1006/icar.1998.5976', 'https://www.sciencedirect.com/science/article/pii/S0019103598959760', 'https://ui.adsabs.harvard.edu/abs/1998Icar..135..360T/abstract'
+        'DOI: 10.1006/icar.1998.5976', 'https://www.sciencedirect.com/science/article/pii/S0019103598959760',
+        'https://ui.adsabs.harvard.edu/abs/1998Icar..135..360T/abstract'
     ],
     'Simonelli2000': [
         'Leading/Trailing Albedo Asymmetries of Thebe, Amalthea, and Metis',
-        'DOI: 10.1006/icar.2000.6474', 'https://www.sciencedirect.com/science/article/pii/S0019103500964741', 'https://ui.adsabs.harvard.edu/abs/2000Icar..147..353S/abstract'
+        'DOI: 10.1006/icar.2000.6474', 'https://www.sciencedirect.com/science/article/pii/S0019103500964741',
+        'https://ui.adsabs.harvard.edu/abs/2000Icar..147..353S/abstract'
     ],
     'Metis: Trailing side (J XVI) | Thomas1998, Simonelli2000': {
         tags: ['featured', 'Solar System/Jovian system', 'natural satellite/regular moon', 'traced spectrum'],
@@ -462,7 +464,8 @@
     // Mimas
     'Buratti2022': [
         'Observations and Modeling of the Opposition Surges of the Icy Moons of Saturn Based on Cassini Visual Infrared Mapping Spectrometer Data',
-        'DOI: 10.3847/PSJ/ac867e', 'https://iopscience.iop.org/article/10.3847/PSJ/ac867e', 'https://ui.adsabs.harvard.edu/abs/2022PSJ.....3..200B/abstract'
+        'DOI: 10.3847/PSJ/ac867e', 'https://iopscience.iop.org/article/10.3847/PSJ/ac867e',
+        'https://ui.adsabs.harvard.edu/abs/2022PSJ.....3..200B/abstract'
     ],
     'Filacchione2022': [
         'Saturn’s icy satellites investigated by Cassini - VIMS. V. Spectrophotometry',
@@ -814,7 +817,8 @@
     // Nereid
     'Kiss2016': [
         'Nereid from space: rotation, size and shape analysis from K2, Herschel and Spitzer observations',
-        'DOI: 10.1093/mnras/stw081', 'https://academic.oup.com/mnras/article/457/3/2908/2588900', 'https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.2908K/abstract'
+        'DOI: 10.1093/mnras/stw081', 'https://academic.oup.com/mnras/article/457/3/2908/2588900',
+        'https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.2908K/abstract'
     ],
     'Schaefer2000': [
         'Nereid Has Complex Large-Amplitude Photometric Variability (Due to Chaotic Rotation)',
@@ -822,7 +826,8 @@
     ],
     'Thomas1991': [
         'Voyager observations of Nereid',
-        'DOI: 10.1029/91JA01735', 'https://agupubs.onlinelibrary.wiley.com/doi/10.1029/91JA01735', 'https://ui.adsabs.harvard.edu/abs/1991JGR....9619253T/abstract'
+        'DOI: 10.1029/91JA01735', 'https://agupubs.onlinelibrary.wiley.com/doi/10.1029/91JA01735',
+        'https://ui.adsabs.harvard.edu/abs/1991JGR....9619253T/abstract'
     ],
     'Nereid (N II) | Schaefer2000, Kiss2016, Thomas1991': {
         tags: ['featured', 'Solar System/Neptunian system', 'natural satellite/irregular moon'],

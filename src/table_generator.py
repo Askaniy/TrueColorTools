@@ -1,5 +1,6 @@
 """ Provides a table generation function, generate_table(). """
 from PIL import Image, ImageDraw, ImageFont
+from time import strftime
 from math import floor, ceil, sqrt
 import numpy as np
 from src.auxiliary import normalize_string
@@ -212,7 +213,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
         shift = object_size/2 if len(splitted) == 1 else object_size
         draw.multiline_text((center_x-r_active, center_y-shift), '\n'.join(splitted), fill=text_color, font=object_font, spacing=1)
     
-    file_name = f'TCT_{normalize_string(tag)}_gamma{("OFF", "ON")[gamma]}_srgb{("OFF", "ON")[srgb]}_albedo{("OFF", "GEOM", "SPHER")[brMode]}_{lang}.{extension}'
+    file_name = f'TCT_{strftime("%Y-%m-%d_%H-%M-%S")}_{normalize_string(tag)}.{extension}'
     img.save(f'{folder}/{file_name}')
     print(f'Color table saved as {file_name}')
 
