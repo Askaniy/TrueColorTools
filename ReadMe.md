@@ -4,6 +4,8 @@ Astronomy-focused set of Python tools with a GUI that uses spectrum construction
 
 Input data is accepted in the form of filters measurements (such as color indices) or continuous spectra, in irradiance units or in magnitudes. Stores a comprehensive catalog of photometry in a proprietary format. Can process spectral cubes, multiband spacecraft images and correct images in enhanced colors.
 
+To calibrate the color of maps based on TCT data, I recommend using [Cylindrical Texture Calibrator](https://github.com/Askaniy/CylindricalTextureCalibrator).
+
 Please note that this is a hobby project and no guarantees are provided for the results. Help is welcome!
 
 ![TCT screenshot](screenshot.webp)
@@ -11,24 +13,20 @@ Please note that this is a hobby project and no guarantees are provided for the 
 
 ## Installation
 
-TrueColorTools has been tested on Windows 10/11, macOS and Linux. It requires Python 3.10 or higher, which does not have support for Windows 7. [This](https://github.com/adang1345/PythonWin7) startup tool can be used in this case. Depending on the system, you may need to clarify the executing program by replacing `python` with `python3` in the instructions below. Versions of libraries listed in [requirements.txt](requirements.txt) are frozen as of May 2024.
+TrueColorTools has been tested on Windows 10/11, macOS and Linux ([this](https://github.com/adang1345/PythonWin7) can be used to run on Windows 7). Python version 3.10 or higher is required. Depending on the system, you may need to replace the `python` command with `python3`.
 
-**Step Zero**: Clone the repository or download the archive using the GitHub web interface. In the console, go to the project root folder.
-
-### Simple installation
-1. Install the dependencies with `pip install -r requirements.txt`;
-2. Execute `python -u runTCT.py`.
-
-### In virtual environment
-1. Create a virtual environment with `python -m venv .venv`;
-2. Install the dependencies with `.venv/bin/pip install -r requirements.txt`;
-3. Execute `.venv/bin/python -u runTCT.py`.
+1. Clone the repository or download the archive using the GitHub web interface;
+2. Open the console in the project root folder;
+3. Create a virtual environment with `python -m venv .venv`;
+4. Install the dependencies with `.venv/bin/pip install -r requirements.txt`;
+5. Execute `.venv/bin/python -u runTCT.py`.
 
 ### Executable file
-[SevenSpheres](https://github.com/SevenSpheres) compiles stable versions of TrueColorTools for Windows 8/10/11. Thus, Python is not required in this installation way.
-1. Go to [releases of SevenSpheres' fork](https://github.com/SevenSpheres/TrueColorTools/releases);
-2. Select, download and unpack the desired archive from the assets;
-3. Run `TCT.exe`.
+
+[SevenSpheres](https://github.com/SevenSpheres) compiles stable versions of CTC for Windows 8/10/11. Thus, Python is not required in this installation way.
+1. Go to [the latest release page](https://github.com/Askaniy/TrueColorTools/releases/latest);
+2. Download and unpack the first archive;
+3. Launch the `runTCT.exe`.
 
 
 ## How it works?
