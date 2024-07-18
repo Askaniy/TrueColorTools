@@ -255,8 +255,8 @@ class Spectrum:
         start = max(self.nm[0], other.nm[0])
         end = min(self.nm[-1], other.nm[-1])
         if start > end: # `>` is needed to process operations with stub objects with no extra logs
-            the_first = self.name
-            the_second = other.name
+            the_first = self.name.raw_name
+            the_second = other.name.raw_name
             if self.nm[0] > other.nm[0]:
                 the_first, the_second = the_second, the_first
             print(f'# Note for spectral element-wise operation "{operator_sign.strip()}"')
@@ -309,7 +309,7 @@ def get_filter(name: str|int|float):
     if not isinstance(name, str) or name.isnumeric():
         profile = Spectrum.from_nm(float(name))
     else:
-        profile = Spectrum.from_file(ObjectName(name), find_filter(name))
+        profile = Spectrum.from_file(name, find_filter(name))
     return profile.edges_zeroed().scaled_by_area()
 
 
