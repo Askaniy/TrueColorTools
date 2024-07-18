@@ -163,6 +163,10 @@ def interpolating(x0: Sequence, y0: np.ndarray, x1: Sequence, step: int|float) -
         y0 = custom_interp(y0, k=11+i)
     return linear_interp(x0, y0, x1)
 
+def scope2matrix(scope: Sequence, times: int, axis=1):
+    """ Gets ta 1D array and expands its dimensions to a 2D array based on the 1D slice shape """
+    return np.repeat(np.expand_dims(scope, axis=axis), times, axis=axis)
+
 def scope2cube(scope: Sequence, shape: tuple[int, int]):
     """ Gets ta 1D array and expands its dimensions to a 3D array based on the 2D slice shape """
     return np.repeat(np.repeat(np.expand_dims(scope, axis=(1, 2)), shape[0], axis=1), shape[1], axis=2)

@@ -1,12 +1,13 @@
 """
 Describes the main spectral data storage classes and related functions.
 
-- To work with a continuous spectrum, use the Spectrum class.
-- To work with measurements in several passbands, use the Photospectrum class.
+- To work with a continuous spectrum, use Spectrum class.
+- To work with a set of transmission spectra, use FilterSystem class.
+- To work with spectrum measurements in several filters, use Photospectrum class.
 
-The classes are functionally strongly intertwined: Photospectrum relies on Spectrum,
-and Spectrum has the ability to contain and process the Photospectrum class from
-whose information it was inter-/extrapolated.
+The classes are functionally strongly intertwined: FilterSystem relies on Spectrum,
+Photospectrum relies on them both. Also, Spectrum has the ability to contain and
+process the Photospectrum class from whose information it was inter-/extrapolated.
 """
 
 from typing import Sequence, Callable
@@ -311,6 +312,63 @@ def get_filter(name: str|int|float):
     else:
         profile = Spectrum.from_file(name, find_filter(name))
     return profile.edges_zeroed().scaled_by_area()
+
+
+class FilterSystem:
+    """
+    Class to work with set of filters profiles.
+
+    Attributes:
+    - `names` (tuple[ObjectName]): storage of the original filter names
+    - `nm` (np.ndarray): total wavelength range of the filter profiles
+    - `br` (np.ndarray): matrix of the profiles with shape [len(filters), len(nm)]
+    """
+
+    def __init__(self, filters: Sequence[Spectrum]):
+        # Getting the wavelength info
+        mean_arr = []
+        min_arr = []
+        max_arr = []
+        for spectrum in filters:
+            mean_arr.append(spectrum.mean_wavelength())
+            min_arr.append(spectrum.nm[0])
+            max_arr.append(spectrum.nm[-1])
+        mean_arr = np.array(mean_arr)
+        min_arr = np.array(min_arr)
+        max_arr = np.array(max_arr)
+        # Sorting if necessary
+        if np.any(mean_arr[:-1] > mean_arr[1:]): # fast increasing check
+            order = np.argsort(mean_arr)
+            filters = np.array(filters)[order]
+            mean_arr = mean_arr[order]
+            min_arr = min_arr[order]
+            max_arr = max_arr[order]
+        # Matrix packing
+        self.nm = aux.grid(min_arr.min(), max_arr.max(), aux.resolution)
+        self.br = np.zeros((len(filters), self.nm.size))
+        names = []
+        for i, spectrum in enumerate(filters):
+            names.append(spectrum.name)
+            self.br[i, np.where((self.nm >= min_arr[i]) & (self.nm <= max_arr[i]))] = spectrum.br
+        self.names = tuple(names)
+    
+    @staticmethod
+    def from_list(filter_names: Sequence[str]):
+        """
+        Creates a FilterSystem object from a list of filter's names. Files with such names must be in the `filters` folder.
+
+        Args:
+        - `filter_names` (Sequence[str]): list of file names in the `filters` folder
+        """
+        return FilterSystem([get_filter(name) for name in filter_names])
+    
+    def mean_wavelengths(self):
+        """ Returns an array of mean wavelengths for each filter """
+        return np.average(aux.scope2matrix(self.nm, self.br.shape[0], axis=0), weights=self.br, axis=1)
+
+#test = FilterSystem.from_list(['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V'])
+#print(test.mean_wavelengths())
+#exit()
 
 
 class Photospectrum:
