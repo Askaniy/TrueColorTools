@@ -231,6 +231,13 @@ def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int|flo
             y = np.append(y, y1, axis=0)
     return x, y
 
+def gamma_correction(arr0: np.ndarray):
+    """ Applies gamma correction in CIE sRGB implementation to the array """
+    arr1 = np.copy(arr0)
+    mask = arr0 < 0.0031308
+    arr1[mask] *= 12.92
+    arr1[~mask] = 1.055 * np.power(arr1[~mask], 1./2.4) - 0.055
+    return arr1
 
 def export_colors(rgb: tuple):
     """ Generates formatted string of colors """

@@ -10,7 +10,7 @@ from operator import mul, truediv
 from traceback import format_exc
 from functools import lru_cache
 import numpy as np
-from src.data_core import Spectrum, get_filter
+from src.data_core import Spectrum, FilterSystem, get_filter
 from src.data_processing import photon_spectral_density
 import src.auxiliary as aux
 import src.image_import as ii
@@ -73,9 +73,9 @@ class SpectralCube:
             if nm[-1] > aux.nm_red_limit:
                 flag = np.where(nm < aux.nm_red_limit + aux.resolution) # with reserve to be averaged
                 nm = nm[flag]
-                br = br[flag,:,:]
+                br = br[flag, ...]
                 if sd is not None:
-                    sd = sd[flag,:,:]
+                    sd = sd[flag, ...]
             if np.any((diff := np.diff(nm)) != aux.resolution): # if not uniform 5 nm grid
                 sd = None # standard deviations is undefined then. TODO: process somehow
                 uniform_nm = aux.grid(nm[0], nm[-1], aux.resolution)
@@ -118,6 +118,13 @@ class SpectralCube:
     def integrate(self) -> np.ndarray:
         """ Collapses the SpectralCube along the spectral axis into a two-dimensional image """
         return aux.integrate(self.br, aux.resolution)
+    
+    def get_br_in_range(self, start: int, end: int) -> np.ndarray:
+        """
+        Returns brightness values over a range of wavelengths (ends included!)
+        TODO: round up to a multiple of 5
+        """
+        return self.br[np.where((self.nm >= start) & (self.nm <= end))]
     
     def apply_linear_operator(self, operator: Callable, operand: int|float):
         """
@@ -181,7 +188,19 @@ class SpectralCube:
     
     def __matmul__(self, other) -> np.ndarray:
         """ Implementation of convolution between emission spectral cube and transmission spectrum """
-        return (self * other).integrate()
+        if isinstance(other, Spectrum):
+            return (self * other).integrate()
+        elif isinstance(other, FilterSystem):
+            # TODO: uncertainty processing
+            extrapolated = self.to_scope(other.nm) # to at least cover the filters range
+            start = max(extrapolated.nm[0], other.nm[0])
+            end = min(extrapolated.nm[-1], other.nm[-1])
+            br0 = extrapolated.get_br_in_range(start, end)
+            # The loop below can be replaced with 4D array processing, but not enough RAM for large cubes
+            photospectral_cube = np.empty((other.br.size[0], br0.size[1], br0.size[2]))
+            for i, band in enumerate(other.br):
+                photospectral_cube[i] = aux.integrate((br0.T * band).T, aux.resolution)
+            return photospectral_cube
 
 
 

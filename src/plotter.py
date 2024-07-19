@@ -62,10 +62,7 @@ def plot_spectra(spectra: Sequence[Spectrum], gamma: bool, srgb: bool, albedo: b
             ax.plot(cmf.nm, cmf.br * k, label=cmf.name(lang), color=rgb_muted[i])
         # Color calculating and plotting
         for spectrum in spectra:
-            if srgb:
-                color = cp.Color.from_spectrum_CIE(spectrum, albedo)
-            else:
-                color = cp.Color.from_spectrum(spectrum, albedo)
+            color = cp.ColorPoint.from_spectral_data(spectrum, albedo, srgb)
             if gamma:
                 color = color.gamma_corrected()
             ax.plot(spectrum.nm, spectrum.br, label=spectrum.name(lang), color=color.to_html())
@@ -95,7 +92,7 @@ def plot_filters(filters: Sequence[Spectrum], srgb: bool, lang: str):
         ax.plot(cmf.nm, cmf.br * k, label=cmf.name(lang), color=rgb_muted[i])
     # Color calculating and plotting
     for i, spectrum in enumerate(filters):
-        color = cp.Color.from_spectrum(spectrum).gamma_corrected().to_html()
+        color = cp.ColorPoint.from_spectral_data(spectrum, srgb=srgb).gamma_corrected().to_html()
         ax.plot(spectrum.nm, spectrum.br, label=spectrum.name(lang), color=color)
     fig.tight_layout() # moving to subplots() causes UserWarning
     return fig

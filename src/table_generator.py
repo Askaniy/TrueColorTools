@@ -10,7 +10,7 @@ import src.color_processing as cp
 import src.strings as tr
 
 
-def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: bool, folder: str, extension: str, lang: str):
+def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: bool, gamma: bool, folder: str, extension: str, lang: str):
     """ Creates and saves a table of colored squares for each spectral data unit that has the specified tag """
     displayed_namesDB = db.obj_names_list(objectsDB, tag)
     l = len(displayed_namesDB)
@@ -60,7 +60,7 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
         f'{l}/{len(objectsDB)} {tr.info_objects[lang]}',
         f'{tr.info_gamma[lang]}: {tr.info_indicator[lang][gamma]}',
         f'{tr.info_sRGB[lang]}: {tr.info_indicator[lang][srgb]}',
-        f'{tr.gui_br[lang][0]}: {tr.gui_br[lang][brMode+1]}',
+        f'{tr.gui_brMode[lang]}: {tr.gui_br[lang][(1-brMax)*(2-brGeom)]}',
         tr.link,
     )
     info_colors = (      # text brightness formula: br = 255 * (x^(1/2.2))
@@ -112,23 +112,14 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
 
         # Spectral data import and processing
         body = dp.database_parser(obj_name, objectsDB[obj_name])
-        albedo = brMode and isinstance(body, dp.ReflectiveBody)
+        maximize_br = brMax or isinstance(body, dp.NonReflectiveBody)
 
         # Setting brightness mode
-        match brMode:
-            case 0:
-                spectrum, estimated = body.get_spectrum('chromaticity')
-            case 1:
-                spectrum, estimated = body.get_spectrum('geometric')
-            case 2:
-                spectrum, estimated = body.get_spectrum('spherical')
+        spectrum, estimated = body.get_spectrum('geometric' if brGeom else 'spherical')
         is_estimated[n] = estimated
         
         # Color calculation
-        if srgb:
-            color = cp.Color.from_spectrum_CIE(spectrum, albedo)
-        else:
-            color = cp.Color.from_spectrum(spectrum, albedo)
+        color = cp.ColorPoint.from_spectral_data(spectrum, maximize_br, srgb)
         if gamma:
             color = color.gamma_corrected()
         is_white_text[n] = color.grayscale() > 0.5

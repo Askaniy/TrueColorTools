@@ -6,7 +6,10 @@ Needs improvement, see https://github.com/Askaniy/TrueColorTools/issues/22
 from typing import Sequence
 from copy import deepcopy
 import numpy as np
+from src.auxiliary import gamma_correction
+from src.database import ObjectName
 from src.data_core import Spectrum, FilterSystem
+from src.image_core import SpectralCube
 
 
 def xy2xyz(xy):
@@ -30,9 +33,9 @@ illuminant_E = (1/3, 1/3)
 #illuminant_D65 = (0.3127, 0.3291)
 
 # Used color systems
-srgb = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_E)
-#hdtv = ColorSystem((0.67, 0.33), (0.21, 0.71), (0.15, 0.06), illuminant_D65)
-#smpte = ColorSystem((0.63, 0.34), (0.31, 0.595), (0.155, 0.070), illuminant_D65)
+srgb_system = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_E)
+#hdtv_system = ColorSystem((0.67, 0.33), (0.21, 0.71), (0.15, 0.06), illuminant_D65)
+#smpte_system = ColorSystem((0.63, 0.34), (0.31, 0.595), (0.155, 0.070), illuminant_D65)
 
 # Stiles & Burch (1959) 2-deg color matching data, direct experimental data
 # http://www.cvrl.org/stilesburch2_ind.htm
@@ -40,7 +43,7 @@ srgb = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_E)
 r = Spectrum('R CMF (2°) | StilesBurch1959', *np.loadtxt('src/cmf/StilesBurch2deg.r.dat').transpose()).scaled_by_area()
 g = Spectrum('G CMF (2°) | StilesBurch1959', *np.loadtxt('src/cmf/StilesBurch2deg.g.dat').transpose()).scaled_by_area()
 b = Spectrum('B CMF (2°) | StilesBurch1959', *np.loadtxt('src/cmf/StilesBurch2deg.b.dat').transpose()).scaled_by_area()
-#rgb = FilterSystem((r, g, b))
+rgb_cmf = FilterSystem((r, g, b))
 
 # CIE XYZ functions transformed from the CIE (2006) LMS functions, 2-deg
 # http://www.cvrl.org/ciexyzpr.htm
@@ -53,69 +56,66 @@ z = Spectrum('Z CMF (2°) | CIE2006', *np.loadtxt('src/cmf/cie2deg.z.dat').trans
 x.br /= 339.12
 y.br /= 339.12
 z.br /= 339.12
-#xyz = FilterSystem((x, y, z))
+xyz_cmf = FilterSystem((x, y, z))
 
 
-def gamma_correction(arr0: np.ndarray):
-    """ Applies gamma correction in CIE sRGB implementation to the array """
-    arr1 = np.copy(arr0)
-    mask = arr0 < 0.0031308
-    arr1[mask] *= 12.92
-    arr1[~mask] = 1.055 * np.power(arr1[~mask], 1./2.4) - 0.055
-    return arr1
+class ColorImage:
+    """
+    A class for working with three-channel images.
+    Internal representation as a numpy array of the shape (3, hight, width) with values between 0 and 1.
+    (Note that the PhotospectralCube class has a transposed order of the axes.)
+    """
 
-class Color:
-    """ Class to work with color represented by three float values in [0, 1] range. """
-
-    def __init__(self, name: str, rgb: Sequence, albedo=False):
+    def __init__(self, rgb: Sequence, maximize_brightness=True):
         """
         The albedo flag on means that you have already normalized the brightness over the range.
         By default, initialization implies normalization and you get chromaticity.
 
         Args:
-        - `name` (str): human-readable identification. May include references (separated by "|") and a note (separated by ":")
         - `rgb` (Sequence): array of three values that are red, green and blue
-        - `albedo` (bool): flag to disable normalization
+        - `maximize_brightness` (bool): to find the maximum value of the array and divide by it
         """
-        self.name = name
-        rgb = np.array(rgb, dtype='float')
-        if rgb.min() < 0:
-            #print(f'# Note for the Color object "{self.name}"')
-            #print(f'- Negative values detected during object initialization: rgb={rgb}')
-            rgb = np.clip(rgb, 0, None)
-            #print('- These values have been replaced with zeros.')
-        if rgb.max() != 0 and not albedo: # normalization
-            rgb /= rgb.max()
-        if np.any(np.isnan(rgb)):
-            print(f'# Note for the Color object "{self.name}"')
-            print(f'- NaN values detected during object initialization: rgb={rgb}')
-            rgb = np.array([0., 0., 0.])
-            print(f'- It has been replaced with {rgb}.')
-        self.rgb = rgb
+        self.rgb = np.clip(np.flip(np.nan_to_num(rgb)), 0, None, dtype='float')
+        if maximize_brightness and rgb.max() != 0:
+            self.rgb /= self.rgb.max()
 
     @staticmethod
-    def from_spectrum(spectrum: Spectrum, albedo=False):
-        """ A simple and concrete color processing method based on experimental eye sensitivity curves """
-        rgb = [spectrum @ i for i in (r, g, b)]
-        return Color(spectrum.name, rgb, albedo)
-
-    @staticmethod
-    def from_spectrum_CIE(spectrum: Spectrum, albedo=False, color_system=srgb):
-        """ Conventional color processing method: spectrum -> CIE XYZ -> sRGB with illuminant E """
-        xyz = [spectrum @ i for i in (x, y, z)]
-        rgb = color_system.T.dot(xyz)
-        if np.any(rgb < 0):
-            print(f'# Note for the Color object "{spectrum.name}"')
-            print(f'- RGB derived from XYZ turned out to be outside the color space: rgb={rgb}')
-            rgb -= rgb.min()
-            print(f'- Approximating by desaturating: rgb={rgb}')
-        return Color(spectrum.name, rgb, albedo)
+    def from_spectral_data(spectral_cube: SpectralCube, maximize_brightness=True, srgb=False):
+        """ Convolves the spectral cube with one of the available CMF systems """
+        # TODO: add sRGB support for images!
+        return ColorImage(spectral_cube @ rgb_cmf, maximize_brightness)
 
     def gamma_corrected(self):
         """ Creates a new Color object with applied gamma correction """
         other = deepcopy(self)
         other.rgb = gamma_correction(other.rgb)
         return other
+    
+    def grayscale(self):
+        """ Converts rgb values to grayscale using sRGB luminance of the CIE 1931 """
+        return np.dot(self.rgb, (0.2126, 0.7152, 0.0722))
+
+
+class ColorPoint(ColorImage):
+    """
+    A class for working with three-channel point.
+    Internal representation as a numpy array of the shape (3) with values between 0 and 1.
+    """
+
+    @staticmethod
+    def from_spectral_data(spectrum: Spectrum, maximize_brightness=True, srgb=False):
+        """ Convolves the spectrum with one of the available CMF systems """
+        if srgb:
+            xyz = spectrum @ xyz_cmf
+            rgb = srgb_system.T.dot(xyz)
+            if np.any(rgb < 0):
+                print(f'# Note for the Color object "{spectrum.name.raw_name}"')
+                print(f'- RGB derived from XYZ turned out to be outside the color space: rgb={rgb}')
+                rgb -= rgb.min()
+                print(f'- Approximating by desaturating: rgb={rgb}')
+        else:
+            rgb = spectrum @ rgb_cmf
+        return ColorPoint(rgb, maximize_brightness)
 
     def to_bit(self, bit: int) -> np.ndarray:
         """ Returns rounded color array, scaled to the appropriate power of two """
@@ -130,7 +130,3 @@ class Color:
             html = '#FFFFFF'
             #print(f'- It has been replaced with {html}.')
         return html
-    
-    def grayscale(self):
-        """ Converts rgb values to grayscale using sRGB luminance of the CIE 1931 """
-        return np.dot(self.rgb, (0.2126, 0.7152, 0.0722))

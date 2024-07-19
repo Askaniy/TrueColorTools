@@ -59,10 +59,20 @@ gui_gamma = {
     'ru': 'гамма-коррекция',
     'de': 'Gammakorrektur'
 }
+gui_brMode = {
+    'en': 'Brightness mode',
+    'ru': 'Режим яркости',
+    'de': 'Helligkeitsmodus'
+}
+gui_brMax = {
+    'en': 'maximize',
+    'ru': 'максимизировать',
+    'de': 'maximieren'
+}
 gui_br = {
-    'en': ['Brightness mode', 'chromaticity', 'geometric albedo', 'spherical albedo'],
-    'ru': ['Режим яркости', 'цветность', 'геом. альбедо', 'сфер. альбедо'],
-    'de': ['Helligkeitsmodus', 'Farbton', 'geometrische Albedo', 'sphärische Albedo']
+    'en': ['chromaticity', 'geometric albedo', 'spherical albedo'],
+    'ru': ['цветность', 'геом. альбедо', 'сфер. альбедо'],
+    'de': ['Farbton', 'geometrische Albedo', 'sphärische Albedo']
 }
 gui_interp = {
     'en': ['Interpolator/extrapolator', 'old', 'new'],
@@ -284,11 +294,6 @@ gui_photons = {
 #    'ru': 'Совместить изображения (β)',
 #    'de': 'Bildbänder ausrichten (β)'
 #}
-gui_makebright = {
-    'en': 'Maximize brightness',
-    'ru': 'Максимизировать яркость',
-    'de': 'Helligkeit maximieren'
-}
 gui_factor = {
     'en': 'Brightness factor',
     'ru': 'Множитель яркости',

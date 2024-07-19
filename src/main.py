@@ -77,7 +77,7 @@ def launch_window(lang: str):
         return fig, fig_canvas_agg
     
     # List of settings events that cause color recalculation
-    triggers = ('-gamma-', '-srgb-', '-brMode0-', '-brMode1-', '-brMode2-', '-bitness-', '-rounding-')
+    triggers = ('-gamma-', '-srgb-', '-brMax-', '-brMode1-', '-brMode2-', '-bitness-', '-rounding-')
 
     # Window events loop
     while True:
@@ -170,10 +170,6 @@ def launch_window(lang: str):
             
             elif event == tr.gui_info[lang]:
                 sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event, icon=gui.icon, non_blocking=True)
-
-            # Brightness mode radio selection
-            elif isinstance(event, str) and event.startswith('-brMode'):
-                brMode = aux.get_flag_index((values['-brMode0-'], values['-brMode1-'], values['-brMode2-']))
             
             # Checks for empty input
             elif event == '-bitness-':
@@ -189,19 +185,15 @@ def launch_window(lang: str):
             
             # Checking enabled and disables settings for the new selected tab
             elif event == '-currentTab-':
-                is_img_tab = values['-currentTab-'] == 'tab2'
-                text_color_is1tab = text_colors[int(values['-currentTab-'] == 'tab1')]
-                text_color_not2tab = text_colors[int(not is_img_tab)]
-                window['-srgb-'].update(text_color=text_color_not2tab)
-                window['-brModeText-'].update(text_color=text_color_is1tab)
-                window['-brMode0-'].update(text_color=text_color_is1tab)
-                window['-brMode1-'].update(text_color=text_color_is1tab)
-                window['-brMode2-'].update(text_color=text_color_is1tab)
-                window['-formattingText-'].update(text_color=text_color_not2tab)
-                window['-bitnessText-'].update(text_color=text_color_not2tab)
-                window['-roundingText-'].update(text_color=text_color_not2tab)
-                window['-bitness-'].update(disabled=is_img_tab, text_color=text_color_not2tab)
-                window['-rounding-'].update(disabled=is_img_tab, text_color=text_color_not2tab)
+                is1tab = values['-currentTab-'] == 'tab1'
+                not2tab = values['-currentTab-'] != 'tab2'
+                window['-brMode1-'].update(visible=is1tab)
+                window['-brMode2-'].update(visible=is1tab)
+                window['-formattingText-'].update(visible=not2tab)
+                window['-bitnessText-'].update(visible=not2tab)
+                window['-roundingText-'].update(visible=not2tab)
+                window['-bitness-'].update(visible=not2tab)
+                window['-rounding-'].update(visible=not2tab)
 
             # ------------ Events in the tab "Database viewer" ------------
 
@@ -234,27 +226,17 @@ def launch_window(lang: str):
 
                     # Spectral data import and processing
                     T1_body = dp.database_parser(T1_obj_name, objectsDB[T1_obj_name])
-                    T1_albedo = brMode and isinstance(T1_body, dp.ReflectiveBody)
+                    T1_maximize_br = values['-brMax-'] or isinstance(T1_body, dp.NonReflectiveBody)
 
                     # Setting brightness mode
-                    match brMode:
-                        case 0:
-                            T1_spectrum, T1_estimated = T1_body.get_spectrum('chromaticity')
-                        case 1:
-                            T1_spectrum, T1_estimated = T1_body.get_spectrum('geometric')
-                        case 2:
-                            T1_spectrum, T1_estimated = T1_body.get_spectrum('spherical')
-                    
+                    T1_spectrum, T1_estimated = T1_body.get_spectrum('geometric' if values['-brMode1-'] else 'spherical')
                     if T1_estimated:
-                        window['T1_estimated'].update(tr.gui_estimated[lang])
+                        window['T1_albedo_note'].update(tr.gui_estimated[lang])
                     else:
-                        window['T1_estimated'].update('')
+                        window['T1_albedo_note'].update('')
 
                     # Color calculation
-                    if values['-srgb-']:
-                        T1_color = cp.Color.from_spectrum_CIE(T1_spectrum, T1_albedo)
-                    else:
-                        T1_color = cp.Color.from_spectrum(T1_spectrum, T1_albedo)
+                    T1_color = cp.ColorPoint.from_spectral_data(T1_spectrum, T1_maximize_br, values['-srgb-'])
                     if values['-gamma-']:
                         T1_color = T1_color.gamma_corrected()
                     T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
@@ -302,22 +284,13 @@ def launch_window(lang: str):
                         T1_export = '\n' + '\t'.join(tr.gui_col[lang]) + '\n' + '_' * 36
                         for obj_name in T1_displayed_namesDB.values():
                             T1_body = dp.database_parser(obj_name, objectsDB[obj_name])
-                            T1_albedo = brMode and isinstance(T1_body, dp.ReflectiveBody)
+                            T1_maximize_br = values['-brMax-'] or isinstance(T1_body, dp.NonReflectiveBody)
                         
                             # Setting brightness mode
-                            match brMode:
-                                case 0:
-                                    T1_spectrum, T1_estimated = T1_body.get_spectrum('chromaticity')
-                                case 1:
-                                    T1_spectrum, T1_estimated = T1_body.get_spectrum('geometric')
-                                case 2:
-                                    T1_spectrum, T1_estimated = T1_body.get_spectrum('spherical')
+                            T1_spectrum, T1_estimated = T1_body.get_spectrum('geometric' if values['-brMode1-'] else 'spherical')
 
                             # Color calculation
-                            if values['-srgb-']:
-                                T1_color = cp.Color.from_spectrum_CIE(T1_spectrum, T1_albedo)
-                            else:
-                                T1_color = cp.Color.from_spectrum(T1_spectrum, T1_albedo)
+                            T1_color = cp.ColorPoint.from_spectral_data(T1_spectrum, T1_maximize_br, values['-srgb-'])
                             if values['-gamma-']:
                                 T1_color = T1_color.gamma_corrected()
                             T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
@@ -336,7 +309,10 @@ def launch_window(lang: str):
                     if len(objectsDB) == 0:
                         sg.popup(tr.gui_no_data_message[lang], title=tr.gui_output[lang], icon=gui.icon, non_blocking=True)
                     else:
-                        generate_table(objectsDB, values['T1_tags'], brMode, values['-srgb-'], values['-gamma-'], values['T1_folder'], 'png', lang)
+                        generate_table(
+                            objectsDB, values['T1_tags'], values['-brMax-'], values['-brMode1-'],
+                            values['-srgb-'], values['-gamma-'], values['T1_folder'], 'png', lang
+                        )
             
             # ------------ Events in the tab "Image processing" ------------
             
@@ -464,10 +440,7 @@ def launch_window(lang: str):
                         T3_spectrum.br /= dp.mag2irradiance(values['T3_slider4'], dp.vega_in_V) * dp.sun_in_V
 
                     # Color calculation
-                    if values['-srgb-']:
-                        T3_color = cp.Color.from_spectrum_CIE(T3_spectrum, albedo=values['T3_overexposure'])
-                    else:
-                        T3_color = cp.Color.from_spectrum(T3_spectrum, albedo=values['T3_overexposure'])
+                    T3_color = cp.ColorPoint.from_spectral_data(T3_spectrum, not values['T3_overexposure'], values['-srgb-'])
                     if values['-gamma-']:
                         T3_color = T3_color.gamma_corrected()
                     T3_rgb = tuple(T3_color.to_bit(bitness).round(rounding))

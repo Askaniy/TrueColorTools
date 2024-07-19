@@ -70,12 +70,12 @@ def generate_layout(
         [sg.Checkbox(tr.gui_gamma[lang], enable_events=True, default=True, key='-gamma-')],
         [sg.Checkbox('sRGB', enable_events=True, key='-srgb-')],
         [sg.T()],
-        [sg.Push(), sg.Text(tr.gui_br[lang][0], key='-brModeText-'), sg.Push()],
-        [sg.Radio(tr.gui_br[lang][1], 'brRadio', enable_events=True, default=brMode==0, key='-brMode0-')],
-        [sg.Radio(tr.gui_br[lang][2], 'brRadio', enable_events=True, default=brMode==1, key='-brMode1-')],
-        [sg.Radio(tr.gui_br[lang][3], 'brRadio', enable_events=True, default=brMode==2, key='-brMode2-')],
+        [sg.Text(tr.gui_brMode[lang], key='-brModeText-')],
+        [sg.Checkbox(tr.gui_brMax[lang], enable_events=True, key='-brMax-')],
+        [sg.Radio(tr.gui_br[lang][1], 'brRadio', enable_events=True, default=brMode==1, key='-brMode1-')],
+        [sg.Radio(tr.gui_br[lang][2], 'brRadio', enable_events=True, default=brMode==2, key='-brMode2-')],
         [sg.T()],
-        [sg.Push(), sg.Text(tr.gui_formatting[lang], key='-formattingText-'), sg.Push()],
+        [sg.Text(tr.gui_formatting[lang], key='-formattingText-')],
         [
             sg.Text(tr.gui_bit[lang], key='-bitnessText-'),
             sg.InputText(bitness, size=1, disabled_readonly_background_color=inputOFF_color, expand_x=True, enable_events=True, key='-bitness-'),
@@ -100,7 +100,7 @@ def generate_layout(
     T1_col2 = [
         [sg.Text(font=title_font, key='T1_title2')],
         [sg.Graph(canvas_size=canvas_size, graph_bottom_left=(0, 0), graph_top_right=canvas_size, background_color=None, key='T1_graph')],
-        [sg.T(key='T1_estimated')],
+        [sg.T(key='T1_albedo_note')],
         [sg.Text(tr.gui_rgb[lang], key='T1_colorRGB'), sg.Input(size=1, key='T1_rgb', expand_x=True)],
         [sg.Text(tr.gui_hex[lang], key='T1_colorHEX'), sg.Input(size=1, key='T1_hex', expand_x=True)],
         [
@@ -173,7 +173,6 @@ def generate_layout(
         #[sg.Checkbox(tr.gui_autoalign[lang], key='T2_autoalign')],
     ]
     T2_col2_2 = [
-        [sg.Checkbox(tr.gui_makebright[lang], key='T2_makebright')],
         [sg.Text(tr.gui_factor[lang], key='T2_factorText'), sg.Input('1', size=1, key='T2_factor', expand_x=True)],
         [sg.Checkbox(tr.gui_enlarge[lang], True, key='T2_enlarge')],
     ]
@@ -273,10 +272,10 @@ def translate_win0(window: sg.Window, T2_vis: int, lang: str):
     window['tab3'].update(title=tr.gui_tabs[lang][2])
     window['-settingsTitle-'].update(tr.gui_settings[lang])
     window['-gamma-'].update(text=tr.gui_gamma[lang])
-    window['-brModeText-'].update(tr.gui_br[lang][0])
-    window['-brMode0-'].update(text=tr.gui_br[lang][1])
-    window['-brMode1-'].update(text=tr.gui_br[lang][2])
-    window['-brMode2-'].update(text=tr.gui_br[lang][3])
+    window['-brModeText-'].update(tr.gui_brMode[lang])
+    window['-brMax-'].update(text=tr.gui_brMax[lang])
+    window['-brMode1-'].update(text=tr.gui_br[lang][1])
+    window['-brMode2-'].update(text=tr.gui_br[lang][2])
     window['-formattingText-'].update(tr.gui_formatting[lang])
     window['-bitnessText-'].update(tr.gui_bit[lang])
     window['-roundingText-'].update(tr.gui_rnd[lang])
@@ -285,8 +284,8 @@ def translate_win0(window: sg.Window, T2_vis: int, lang: str):
     window['T1_load'].update(tr.gui_load[lang])
     window['T1_reload'].update(tr.gui_reload[lang])
     window['T1_tagsN'].update(tr.gui_tags[lang])
-    if window['T1_estimated'].get() != '':
-        window['T1_estimated'].update(tr.gui_estimated[lang])
+    if window['T1_albedo_note'].get() != '':
+        window['T1_albedo_note'].update(tr.gui_estimated[lang])
     window['T1_colorRGB'].update(tr.gui_rgb[lang])
     window['T1_colorHEX'].update(tr.gui_hex[lang])
     window['T1_in_filter'].update(tr.gui_in_filter[lang])
@@ -315,7 +314,6 @@ def translate_win0(window: sg.Window, T2_vis: int, lang: str):
     window['T2_photons'].update(text=tr.gui_photons[lang])
     #window['T2_autoalign'].update(text=tr.gui_autoalign[lang])
     #window['T2_plotpixels'].update(text=tr.gui_plotpixels[lang])
-    window['T2_makebright'].update(text=tr.gui_makebright[lang])
     window['T2_factorText'].update(tr.gui_factor[lang])
     window['T2_enlarge'].update(text=tr.gui_enlarge[lang])
     window['T2_preview'].update(tr.gui_preview[lang])

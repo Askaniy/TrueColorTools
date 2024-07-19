@@ -44,7 +44,7 @@ class NonReflectiveBody:
         Returns the spectrum as the first argument, and the `estimated=False` bool status as the second one.
         Albedo not determined for NonReflectiveBody, so it can't be "estimated", but we need output compatibility with ReflectiveBody.
         """
-        if mode == 'chromaticity' or 'star' in self.tags:
+        if 'star' in self.tags:
             return self.spectrum, False # means it's an emitter and we need to render it
         else:
             return Spectrum(self.name, *Spectrum.stub).to_scope(aux.visible_range), False # means we don't need to render it
@@ -89,37 +89,33 @@ class ReflectiveBody:
         Returns the albedo-scaled spectrum as the first argument, and the `estimated` bool status as the second one.
         `estimated = True` if the albedo was not known and estimated using a theoretical model.
         """
-        if mode == 'chromaticity': # chromaticity mode
-            if self.geometric:
-                return self.geometric, False # most likely it's original (unscaled) data, so it's a bit better
-            else:
-                return self.spherical, False
-        elif mode == 'geometric':
-            if self.geometric:
-                return self.geometric, False
-            else:
-                sphericalV = self.spherical @ get_filter('Generic_Bessell.V')
-                if self.phase_integral is not None:
-                    phase_integral = self.phase_integral[0]
-                    geometricV = sphericalV / phase_integral
-                    estimated = False
+        match mode:
+            case 'geometric':
+                if self.geometric:
+                    return self.geometric, False
                 else:
-                    geometricV = (np.sqrt(0.359**2 + 4 * 0.47 * sphericalV) - 0.359) / (2 * 0.47)
-                    estimated = True
-                return self.spherical.scaled_at(get_filter('Generic_Bessell.V'), geometricV), estimated
-        else:
-            if self.spherical:
-                return self.spherical, False
-            else:
-                geometricV = self.geometric @ get_filter('Generic_Bessell.V')
-                if self.phase_integral is not None:
-                    phase_integral = self.phase_integral[0]
-                    estimated = False
+                    sphericalV = self.spherical @ get_filter('Generic_Bessell.V')
+                    if self.phase_integral is not None:
+                        phase_integral = self.phase_integral[0]
+                        geometricV = sphericalV / phase_integral
+                        estimated = False
+                    else:
+                        geometricV = (np.sqrt(0.359**2 + 4 * 0.47 * sphericalV) - 0.359) / (2 * 0.47)
+                        estimated = True
+                    return self.spherical.scaled_at(get_filter('Generic_Bessell.V'), geometricV), estimated
+            case 'spherical':
+                if self.spherical:
+                    return self.spherical, False
                 else:
-                    phase_integral = 0.359 + 0.47 * geometricV
-                    estimated = True
-                sphericalV = geometricV * phase_integral
-                return self.geometric.scaled_at(get_filter('Generic_Bessell.V'), sphericalV), estimated
+                    geometricV = self.geometric @ get_filter('Generic_Bessell.V')
+                    if self.phase_integral is not None:
+                        phase_integral = self.phase_integral[0]
+                        estimated = False
+                    else:
+                        phase_integral = 0.359 + 0.47 * geometricV
+                        estimated = True
+                    sphericalV = geometricV * phase_integral
+                    return self.geometric.scaled_at(get_filter('Generic_Bessell.V'), sphericalV), estimated
 
 
 def parse_value_sd(data: float|Sequence[float]):
