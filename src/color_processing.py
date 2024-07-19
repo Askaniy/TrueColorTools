@@ -6,7 +6,7 @@ Needs improvement, see https://github.com/Askaniy/TrueColorTools/issues/22
 from typing import Sequence
 from copy import deepcopy
 import numpy as np
-from src.data_core import Spectrum
+from src.data_core import Spectrum, FilterSystem
 
 
 def xy2xyz(xy):
@@ -40,6 +40,7 @@ srgb = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_E)
 r = Spectrum('R CMF (2°) | StilesBurch1959', *np.loadtxt('src/cmf/StilesBurch2deg.r.dat').transpose()).scaled_by_area()
 g = Spectrum('G CMF (2°) | StilesBurch1959', *np.loadtxt('src/cmf/StilesBurch2deg.g.dat').transpose()).scaled_by_area()
 b = Spectrum('B CMF (2°) | StilesBurch1959', *np.loadtxt('src/cmf/StilesBurch2deg.b.dat').transpose()).scaled_by_area()
+#rgb = FilterSystem((r, g, b))
 
 # CIE XYZ functions transformed from the CIE (2006) LMS functions, 2-deg
 # http://www.cvrl.org/ciexyzpr.htm
@@ -52,7 +53,7 @@ z = Spectrum('Z CMF (2°) | CIE2006', *np.loadtxt('src/cmf/cie2deg.z.dat').trans
 x.br /= 339.12
 y.br /= 339.12
 z.br /= 339.12
-
+#xyz = FilterSystem((x, y, z))
 
 
 def gamma_correction(arr0: np.ndarray):

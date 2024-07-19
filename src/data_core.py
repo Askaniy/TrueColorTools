@@ -223,6 +223,13 @@ class Spectrum:
         """ Returns uncorrected standard deviation of the spectrum """
         return np.sqrt(np.average((self.nm - self.mean_wavelength())**2, weights=self.br))
     
+    def get_br_in_range(self, start: int, end: int) -> np.ndarray:
+        """
+        Returns brightness values over a range of wavelengths (ends included!)
+        TODO: round up to a multiple of 5
+        """
+        return self.br[np.where((self.nm >= start) & (self.nm <= end))]
+    
     def apply_linear_operator(self, operator: Callable, operand: int|float):
         """
         Returns a new Spectrum object transformed according to the linear operator.
@@ -266,8 +273,8 @@ class Spectrum:
             return Spectrum(name, *Spectrum.stub)
         else:
             nm = np.arange(start, end+1, aux.resolution, dtype='uint16')
-            br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
-            br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
+            br0 = self.get_br_in_range(start, end)
+            br1 = other.get_br_in_range(start, end)
             return Spectrum(name, nm, operator(br0, br1))
 
     def __mul__(self, other):
@@ -295,9 +302,17 @@ class Spectrum:
         elif isinstance(other, Spectrum):
             return self.apply_elemental_operator(truediv, other, ' / ')
     
-    def __matmul__(self, other) -> float:
+    def __matmul__(self, other) -> float | np.ndarray[float]:
         """ Implementation of convolution between emission spectrum and transmission spectrum """
-        return (self * other).integrate()
+        if isinstance(other, Spectrum):
+            return (self * other).integrate()
+        elif isinstance(other, FilterSystem):
+            # TODO: uncertainty processing
+            extrapolated = self.to_scope(other.nm) # to at least cover the filters range
+            start = max(extrapolated.nm[0], other.nm[0])
+            end = min(extrapolated.nm[-1], other.nm[-1])
+            br0 = extrapolated.get_br_in_range(start, end)
+            return aux.integrate((br0 * other.br).T, aux.resolution)
 
 
 @lru_cache(maxsize=32)
@@ -366,8 +381,9 @@ class FilterSystem:
         """ Returns an array of mean wavelengths for each filter """
         return np.average(aux.scope2matrix(self.nm, self.br.shape[0], axis=0), weights=self.br, axis=1)
 
+#sun_SI = Spectrum.from_file('Sun', 'spectra/files/CALSPEC/sun_reference_stis_002.fits') # W / (m² nm)
 #test = FilterSystem.from_list(['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V'])
-#print(test.mean_wavelengths())
+#print(sun_SI @ test)
 #exit()
 
 
@@ -398,6 +414,18 @@ class Photospectrum:
             self.br = np.nan_to_num(self.br)
             print(f'# Note for the Photospectrum object "{self.name.raw_name}"')
             print(f'- NaN values detected during object initialization, they been replaced with zeros.')
+    
+    @staticmethod
+    def from_spectrum(spectrum: Spectrum, filter_system: FilterSystem):
+        """
+        TODO: it's a stub!
+        Creates a Photospectrum object from a spectrum and a filter system.
+
+        Args:
+        - `spectrum` (Spectrum): spectrum to convolve with filters
+        - `filter_system` (FilterSystem): filters to convolve with spectrum
+        """
+        pass # Photospectrum(spectrum.name, filter_system, spectrum @ filter_system)
     
     @staticmethod
     def from_list(name: str|ObjectName, filters: Sequence[str], br: Sequence, sd: Sequence = None):
