@@ -3418,6 +3418,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    '(709487) 2013 BL76 | MBOSS': {
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': 0.920, 'V-R': 0.450},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
     '1994 TA | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
@@ -3709,13 +3716,6 @@
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.820, 'V-R': 0.540},
-        calibration_system: 'Vega',
-        sun_is_emitter: true
-    },
-    '2013 BL76 | MBOSS': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.920, 'V-R': 0.450},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
