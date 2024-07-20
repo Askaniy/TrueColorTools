@@ -10,23 +10,20 @@ Photospectrum relies on them both. Also, Spectrum has the ability to contain and
 process the Photospectrum class from whose information it was inter-/extrapolated.
 """
 
-from typing import Sequence, Callable
+from typing import Sequence, Callable, Self
 from operator import mul, truediv
 from traceback import format_exc
 from functools import lru_cache
 from copy import deepcopy
 import numpy as np
 import src.auxiliary as aux
-import src.data_import as di
-from src.database import ObjectName, find_filter
+from src.database import ObjectName, find_filter, FilterNotFoundError
+from src.data_import import file_reader
 from src.experimental import irradiance
 
 
 class Spectrum:
     """ Class to work with single, continuous spectrum, with strictly defined resolution step. """
-
-    # Initializes an object in case of input data problems
-    stub = (np.array([555]), np.zeros(1), None)
 
     def __init__(self, name: str|ObjectName, nm: Sequence, br: Sequence, sd: Sequence = None, photospectrum=None):
         """
@@ -37,7 +34,7 @@ class Spectrum:
         - `nm` (Sequence): list of wavelengths in nanometers with resolution step of 5 nm
         - `br` (Sequence): same-size list of "brightness" in energy density units (not a photon counter)
         - `sd` (Sequence, optional): same-size list of standard deviations
-        - `photospectrum` (Photospectrum, optional): way to store information about the passbands used, for example, to plot it
+        - `photospectrum` (Photospectrum, optional): way to store information about the profiles used, for example, to plot it
         """
         self.name = ObjectName.convert_if_needed(name)
         self.nm = np.array(nm, dtype='uint16')
@@ -54,7 +51,12 @@ class Spectrum:
         # There are no checks for negativity, since such spectra exist, for example, red CMF.
 
     @staticmethod
-    def from_array(name: str|ObjectName, nm: Sequence, br: Sequence, sd: Sequence = None):
+    def stub(name: str|ObjectName) -> Self:
+        """ Initializes an object in case of input data problems """
+        return Spectrum(name, np.array([555]), np.zeros(1), None)
+
+    @staticmethod
+    def from_array(name: str|ObjectName, nm: Sequence, br: Sequence, sd: Sequence = None) -> Self:
         """
         Creates a Spectrum object from wavelength array with a check for uniformity and possible extrapolation.
 
@@ -68,7 +70,7 @@ class Spectrum:
         if (len_nm := len(nm)) != (len_br := len(br)):
             print(f'# Note for the Spectrum object "{name.raw_name}"')
             print(f'- Arrays of wavelengths and brightness do not match ({len_nm} vs {len_br}). Spectrum stub object was created.')
-            return Spectrum(name, *Spectrum.stub)
+            return Spectrum.stub(name)
         if sd is not None and (len_sd := len(sd)) != len_br:
             print(f'# Note for the Spectrum object "{name.raw_name}"')
             print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
@@ -102,21 +104,21 @@ class Spectrum:
                 br = np.clip(br, 0, None)
                 #print(f'# Note for the Spectrum object "{name.raw_name}"')
                 #print(f'- Negative values detected while trying to create the object from array, they been replaced with zeros.')
+            return Spectrum(name, nm, br, sd)
         except Exception:
-            nm, br, sd = Spectrum.stub
             print(f'# Note for the Spectrum object "{name.raw_name}"')
             print(f'- Something unexpected happened while trying to create the object from array. It was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0).strip()}')
-        return Spectrum(name, nm, br, sd)
+            return Spectrum.stub(name)
     
     @staticmethod
-    def from_file(name: str|ObjectName, file: str):
+    def from_file(name: str|ObjectName, file: str) -> Self:
         """ Creates a Spectrum object based on loaded data from the specified file """
-        nm, br, sd = di.file_reader(file)
+        nm, br, sd = file_reader(file)
         return Spectrum.from_array(name, nm, br, sd)
 
     @staticmethod
-    def from_blackbody_redshift(scope: np.ndarray, temperature: int|float, velocity=0., vII=0.):
+    def from_blackbody_redshift(scope: np.ndarray, temperature: int|float, velocity=0., vII=0.) -> Self:
         """ Creates a Spectrum object based on Planck's law and redshift formulas """
         if temperature == 0:
             physics = False
@@ -143,7 +145,7 @@ class Spectrum:
         return Spectrum(f'BB with T={round(temperature)} K', scope, br)
     
     @staticmethod
-    def from_nm(nm_point: int|float):
+    def from_nm(nm_point: int|float) -> Self:
         """
         Creates a point Spectrum object on the grid of allowed values.
         Returns single point with brightness 1 for on-grid wavelength
@@ -161,14 +163,24 @@ class Spectrum:
             br = (1.-nm0_proximity_factor, nm0_proximity_factor)
         return Spectrum(f'{nm_point} nm', nm, br)
     
-    def to_scope(self, scope: np.ndarray):
+    def get_br_in_range(self, start: int, end: int) -> np.ndarray[np.floating]:
+        """ Returns brightness values over a range of wavelengths (ends included!) """
+        # TODO: round up to a multiple of 5
+        return self.br[np.where((self.nm >= start) & (self.nm <= end))]
+    
+    def to_scope(self, scope: np.ndarray, crop: bool = False) -> Self:
         """ Returns a new Spectrum object with a guarantee of definition on the requested scope """
         if self.photospectrum is None:
-            return Spectrum(self.name, *aux.extrapolating(self.nm, self.br, scope, aux.resolution))
+            extrapolated = Spectrum(self.name, *aux.extrapolating(self.nm, self.br, scope, aux.resolution))
         else:
-            return self.photospectrum.to_scope(scope)
+            extrapolated = self.photospectrum.to_scope(scope)
+        if crop:
+            start = max(extrapolated.nm[0], scope[0])
+            end = min(extrapolated.nm[-1], scope[-1])
+            extrapolated.br = extrapolated.get_br_in_range(start, end)
+        return extrapolated
     
-    def edges_zeroed(self):
+    def edges_zeroed(self) -> Self:
         """
         Returns a new Spectrum object with zero brightness to the edges added.
         This is necessary to mitigate the consequences of abruptly cutting off filter profiles.
@@ -187,19 +199,20 @@ class Spectrum:
         """ Calculates the area over the spectrum using the mean rectangle method, per nm """
         return aux.integrate(self.br, aux.resolution)
 
-    def scaled_by_area(self, factor: int|float = 1):
+    def scaled_by_area(self, factor: int|float = 1) -> Self:
         """ Returns a new Spectrum object with brightness scaled to its area be equal the scale factor """
         return Spectrum(self.name, self.nm, self.br / self.integrate() * factor)
     
-    def scaled_at(self, where, how: int|float = 1, sd: int|float = None):
+    def scaled_at(self, where, how: int|float = 1, sd: int|float = None) -> Self:
         """
         Returns a new Spectrum object to fit the request brightness (1 by default)
-        at specified filter profile or wavelength. TODO: uncertainty processing.
+        at specified filter profile or wavelength.
         """
+        # TODO: uncertainty processing
         if isinstance(where, str):
             where = get_filter(where)
         if isinstance(where, Spectrum):
-            current_br = self.to_scope(where.nm) @ where
+            current_br = self @ where
         else: # scaling at wavelength
             if where in self.nm:
                 current_br = self.br[np.where(self.nm == where)][0]
@@ -223,14 +236,7 @@ class Spectrum:
         """ Returns uncorrected standard deviation of the spectrum """
         return np.sqrt(np.average((self.nm - self.mean_wavelength())**2, weights=self.br))
     
-    def get_br_in_range(self, start: int, end: int) -> np.ndarray:
-        """
-        Returns brightness values over a range of wavelengths (ends included!)
-        TODO: round up to a multiple of 5
-        """
-        return self.br[np.where((self.nm >= start) & (self.nm <= end))]
-    
-    def apply_linear_operator(self, operator: Callable, operand: int|float):
+    def apply_linear_operator(self, operator: Callable, operand: int|float|np.ndarray) -> Self:
         """
         Returns a new Spectrum object transformed according to the linear operator.
         Linearity is needed because values and uncertainty are handled uniformly.
@@ -247,17 +253,18 @@ class Spectrum:
                 photospectrum.sd = operator(photospectrum.sd, operand)
         return Spectrum(self.name, self.nm, br, sd, photospectrum)
     
-    def apply_elemental_operator(self, operator: Callable, other, operator_sign: str = ', '):
+    def apply_elemental_operator(self, operator: Callable, other: Self, operator_sign: str = ', ') -> Self:
         """
         Returns a new Spectrum object formed from element-wise operator on two spectra,
         such as multiplication or division.
 
         Works only at the intersection of spectra! If you need to extrapolate one spectrum
-        to the range of another, for example, use `spectrum.to_scope(filter.nm) @ filter`
+        to the range of another, use `spectrum.to_scope()`
 
         Note: the Photospectrum data would be erased because consistency with the Spectrum object
-        cannot be maintained after conversion. TODO: uncertainty processing.
+        cannot be maintained after conversion.
         """
+        # TODO: uncertainty processing
         #name = f'{self.name}{operator_sign}{other.name}'
         name = self.name
         start = max(self.nm[0], other.nm[0])
@@ -270,14 +277,14 @@ class Spectrum:
             print(f'# Note for spectral element-wise operation "{operator_sign.strip()}"')
             print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
             print('- There is no intersection between the spectra. Spectrum stub object was created.')
-            return Spectrum(name, *Spectrum.stub)
+            return Spectrum.stub(name)
         else:
             nm = np.arange(start, end+1, aux.resolution, dtype='uint16')
             br0 = self.get_br_in_range(start, end)
             br1 = other.get_br_in_range(start, end)
             return Spectrum(name, nm, operator(br0, br1))
 
-    def __mul__(self, other):
+    def __mul__(self, other: Self|int|float|np.ndarray) -> Self:
         """
         Returns a new Spectrum object modified by the overloaded multiplication operator.
         If the operand is a number (or an array of spectral axis size), a scaled spectrum is returned.
@@ -288,10 +295,10 @@ class Spectrum:
         elif isinstance(other, Spectrum):
             return self.apply_elemental_operator(mul, other, ' ∙ ')
     
-    def __rmul__(self, other):
+    def __rmul__(self, other: Self|int|float|np.ndarray) -> Self:
         return self.__mul__(other)
 
-    def __truediv__(self, other):
+    def __truediv__(self, other: Self|int|float|np.ndarray) -> Self:
         """
         Returns a new Spectrum object modified by the overloaded division operator.
         If the operand is a number (or an array of spectral axis size), a scaled spectrum is returned.
@@ -302,21 +309,22 @@ class Spectrum:
         elif isinstance(other, Spectrum):
             return self.apply_elemental_operator(truediv, other, ' / ')
     
-    def __matmul__(self, other) -> float | np.ndarray[float]:
-        """ Implementation of convolution between emission spectrum and transmission spectrum """
+    def __matmul__(self, other: Self) -> float | np.ndarray[float]:
+        """
+        Implementation of convolution between emission spectrum and transmission spectrum.
+        If necessary, extrapolates over the wavelength interval of the second operand.
+        """
+        # TODO: uncertainty processing
+        extrapolated = self.to_scope(other.nm, crop=True)
         if isinstance(other, Spectrum):
-            return (self * other).integrate()
+            #return (extrapolated * other).integrate()
+            return aux.integrate(extrapolated.br * other.br, aux.resolution) # optimized
         elif isinstance(other, FilterSystem):
-            # TODO: uncertainty processing
-            extrapolated = self.to_scope(other.nm) # to at least cover the filters range
-            start = max(extrapolated.nm[0], other.nm[0])
-            end = min(extrapolated.nm[-1], other.nm[-1])
-            br0 = extrapolated.get_br_in_range(start, end)
-            return aux.integrate((br0 * other.br).T, aux.resolution)
+            return aux.integrate((extrapolated.br * other.br).T, aux.resolution)
 
 
 @lru_cache(maxsize=32)
-def get_filter(name: str|int|float):
+def get_filter(name: str|int|float) -> Spectrum:
     """
     Creates a scaled to the unit area Spectrum object.
     Requires file name to be found in the `filters` folder to load profile
@@ -368,7 +376,7 @@ class FilterSystem:
         self.names = tuple(names)
     
     @staticmethod
-    def from_list(filter_names: Sequence[str]):
+    def from_list(filter_names: Sequence[str]) -> Self:
         """
         Creates a FilterSystem object from a list of filter's names. Files with such names must be in the `filters` folder.
 
@@ -377,7 +385,7 @@ class FilterSystem:
         """
         return FilterSystem([get_filter(name) for name in filter_names])
     
-    def mean_wavelengths(self):
+    def mean_wavelengths(self) -> np.ndarray[np.floating]:
         """ Returns an array of mean wavelengths for each filter """
         return np.average(aux.scope2matrix(self.nm, self.br.shape[0], axis=0), weights=self.br, axis=1)
 
@@ -389,9 +397,6 @@ class FilterSystem:
 
 class Photospectrum:
     """ Class to work with set of filters measurements. """
-
-    # Initializes an object in case of input data problems
-    stub = ([get_filter('Generic_Bessell.V')], np.zeros(1), None)
 
     def __init__(self, name: str|ObjectName, filters: Sequence[Spectrum], br: Sequence, sd: Sequence = None):
         """
@@ -414,9 +419,14 @@ class Photospectrum:
             self.br = np.nan_to_num(self.br)
             print(f'# Note for the Photospectrum object "{self.name.raw_name}"')
             print(f'- NaN values detected during object initialization, they been replaced with zeros.')
+
+    @staticmethod
+    def stub(name: str|ObjectName) -> Self:
+        """ Initializes an object in case of input data problems """
+        return Photospectrum(name, [get_filter('Generic_Bessell.V')], np.zeros(1), None)
     
     @staticmethod
-    def from_spectrum(spectrum: Spectrum, filter_system: FilterSystem):
+    def from_spectrum(spectrum: Spectrum, filter_system: FilterSystem) -> Self:
         """
         TODO: it's a stub!
         Creates a Photospectrum object from a spectrum and a filter system.
@@ -428,7 +438,7 @@ class Photospectrum:
         pass # Photospectrum(spectrum.name, filter_system, spectrum @ filter_system)
     
     @staticmethod
-    def from_list(name: str|ObjectName, filters: Sequence[str], br: Sequence, sd: Sequence = None):
+    def from_list(name: str|ObjectName, filters: Sequence[str], br: Sequence, sd: Sequence = None) -> Self:
         """
         Creates a Photospectrum object from a list of filter's names. Files with such names must be in the `filters` folder.
 
@@ -442,7 +452,7 @@ class Photospectrum:
         if (len_filters := len(filters)) != (len_br := len(br)):
             print(f'# Note for the Photospectrum object "{name.raw_name}"')
             print(f'- Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br}). Photospectrum stub object was created.')
-            return Photospectrum(name, *Photospectrum.stub)
+            return Photospectrum.stub(name)
         if sd is not None and (len_sd := len(sd)) != len_br:
             print(f'# Note for the Photospectrum object "{name.raw_name}"')
             print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
@@ -453,21 +463,21 @@ class Photospectrum:
         if sd is not None:
             sd = list(sd)
         mean_wavelengths = []
-        for j, passband in enumerate(reversed(deepcopy(filters))):
+        for j, profile in enumerate(reversed(deepcopy(filters))):
             i = len_filters-1-j
             try:
-                filters[i] = get_filter(passband)
+                filters[i] = get_filter(profile)
                 mean_wavelengths.append(filters[i].mean_wavelength())
-            except di.FilterNotFoundError:
+            except FilterNotFoundError:
                 print(f'# Note for the Photospectrum object "{name.raw_name}"')
-                print(f'- Filter "{passband}" not found in the "filters" folder. The corresponding data will be erased.')
+                print(f'- Filter "{profile}" not found in the "filters" folder. The corresponding data will be erased.')
                 del filters[i], br[i]
                 if sd is not None:
                     del sd[i]
         if len(filters) == 0:
             print(f'# Note for the Photospectrum object "{name.raw_name}"')
             print(f'- No declared filter profiles were found in the "filters" folder. Photospectrum stub object was created.')
-            return Photospectrum(name, *Photospectrum.stub)
+            return Photospectrum.stub(name)
         else:
             nm = np.array(mean_wavelengths)
             if np.any(nm[:-1] < nm[1:]): # fast decreasing check
@@ -478,7 +488,7 @@ class Photospectrum:
                     sd = np.array(sd)[order]
             return Photospectrum(name, filters, br, sd)
     
-    def to_scope(self, scope: np.ndarray): # TODO: use kriging here!
+    def to_scope(self, scope: np.ndarray) -> Spectrum: # TODO: use kriging here!
         """ Creates a Spectrum object with inter- and extrapolated photospectrum data to fit the wavelength scope """
         try:
             if len(self.filters) > 1:
@@ -493,17 +503,17 @@ class Photospectrum:
             print(f'# Note for the Photospectrum object "{self.name.raw_name}"')
             print(f'- Something unexpected happened while trying to inter/extrapolate to Spectrum object. It was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0).strip()}')
-            return Spectrum(self.name, *Spectrum.stub)
+            return Spectrum.stub(self.name)
     
-    def mean_wavelengths(self):
+    def mean_wavelengths(self) -> np.ndarray[np.floating]:
         """ Returns an array of mean wavelengths for each filter """
-        return np.array([passband.mean_wavelength() for passband in self.filters])
+        return np.array([profile.mean_wavelength() for profile in self.filters])
     
-    def standard_deviations(self):
+    def standard_deviations(self) -> np.ndarray[np.floating]:
         """ Returns an array of uncorrected standard deviations for each filter """
-        return np.array([passband.standard_deviation() for passband in self.filters])
+        return np.array([profile.standard_deviation() for profile in self.filters])
 
-    def apply_linear_operator(self, operator: Callable, operand: int|float):
+    def apply_linear_operator(self, operator: Callable, operand: int|float|np.ndarray) -> Self:
         """
         Returns a new Photospectrum object transformed according to the linear operator.
         Linearity is needed because values and uncertainty are handled uniformly.
@@ -514,17 +524,17 @@ class Photospectrum:
             sd = operator(self.sd, operand)
         return Photospectrum(self.name, self.filters, br, sd)
     
-    def apply_elemental_operator(self, operator: Callable, other: Spectrum, operator_sign: str = ', '):
+    def apply_elemental_operator(self, operator: Callable, other: Spectrum, operator_sign: str = ', ') -> Self:
         """
         Returns a new Photospectrum object formed from element-wise multiplication or division by the Spectrum.
         Note that this also distorts filter profiles.
         """
         #name = f'{self.name}{operator_sign}{other.name}'
         name = self.name
-        filters = [operator(passband, other).scaled_by_area() for passband in self.filters]
+        filters = [operator(profile, other).scaled_by_area() for profile in self.filters]
         return operator(Photospectrum(name, filters, self.br, self.sd), self @ other) # linear
     
-    def __mul__(self, other):
+    def __mul__(self, other: Spectrum|int|float|np.ndarray) -> Self:
         """
         Returns a new Photospectrum object modified by the overloaded multiplication operator.
         If the operand is a number (or an array of spectral axis size), a scaled photospectrum is returned.
@@ -535,10 +545,10 @@ class Photospectrum:
         elif isinstance(other, Spectrum):
             return self.apply_elemental_operator(mul, other, ' ∙ ')
     
-    def __rmul__(self, other):
+    def __rmul__(self, other: Spectrum|int|float|np.ndarray) -> Self:
         return self.__mul__(other)
 
-    def __truediv__(self, other: Spectrum):
+    def __truediv__(self, other: Spectrum) -> Self:
         """
         Returns a new Photospectrum object modified by the overloaded division operator.
         If the operand is a number (or an array of spectral axis size), a scaled photospectrum is returned.
@@ -549,6 +559,6 @@ class Photospectrum:
         elif isinstance(other, Spectrum):
             return self.apply_elemental_operator(truediv, other, ' / ')
 
-    def __matmul__(self, other: Spectrum) -> np.ndarray[float]:
+    def __matmul__(self, other: Spectrum) -> np.ndarray[np.floating]:
         """ Convolve all the filters with the spectrum """
-        return np.array([other @ passband for passband in self.filters])
+        return np.array([other @ profile for profile in self.filters])

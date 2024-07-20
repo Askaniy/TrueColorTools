@@ -1,6 +1,5 @@
 """ Responsible for converting measurement data into a working form. """
 
-from pathlib import Path
 from astropy.io import fits
 from astropy.table import Table
 import astropy.units as u

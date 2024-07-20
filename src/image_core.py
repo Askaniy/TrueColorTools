@@ -5,7 +5,7 @@ Describes the main image data storage classes and related functions.
 - To work with images made in several passbands, use the PhotospectralCube class.
 """
 
-from typing import Sequence, Callable
+from typing import Sequence, Callable, Self
 from operator import mul, truediv
 from traceback import format_exc
 from functools import lru_cache
@@ -18,11 +18,6 @@ import src.image_import as ii
 
 class SpectralCube:
     """ Class to work with an image of continuous spectra, with strictly defined wavelength resolution step """
-
-    @staticmethod
-    def stub(x, y):
-        """ Initializes an object in case of input data problems. """
-        return SpectralCube(np.array([555]), np.zeros((1, x, y)), None)
 
     def __init__(self, nm: Sequence, br: np.ndarray, sd: np.ndarray = None):
         """
@@ -44,9 +39,14 @@ class SpectralCube:
             self.br = np.nan_to_num(self.br)
             print(f'# Note for the SpectralCube object')
             print(f'- NaN values detected during object initialization, they been replaced with zeros.')
+
+    @staticmethod
+    def stub(x, y) -> Self:
+        """ Initializes an object in case of input data problems """
+        return SpectralCube(np.array([555]), np.zeros((1, x, y)), None)
     
     @staticmethod
-    def from_array(nm: Sequence, br: np.ndarray, sd: np.ndarray = None):
+    def from_array(nm: Sequence, br: np.ndarray, sd: np.ndarray = None) -> Self:
         """
         Creates a SpectralCube object from a 3D array with a check for wavelength uniformity and possible extrapolation.
         The 3D array has the following index order: [Spectral axis, X axis, Y axis]
@@ -95,11 +95,11 @@ class SpectralCube:
     
     @staticmethod
     @lru_cache(maxsize=1)
-    def from_file(file: str):
+    def from_file(file: str) -> Self:
         """ Creates a SpectralCube object based on loaded data from the specified file """
         return SpectralCube.from_array(*ii.cube_reader(file))
     
-    def downscale(self, pixels_limit: int):
+    def downscale(self, pixels_limit: int) -> Self:
         """ Brings the spatial resolution of the cube to approximately match the number of pixels """
         br = aux.spatial_downscaling(self.br, pixels_limit)
         sd = None
@@ -107,24 +107,27 @@ class SpectralCube:
             sd = aux.spatial_downscaling(self.sd, pixels_limit)
         return SpectralCube(self.nm, br, sd)
     
-    def to_scope(self, scope: np.ndarray):
-        """ Returns a new SpectralCube object with a guarantee of definition on the requested scope """
-        return SpectralCube(*aux.extrapolating(self.nm, self.br, scope, aux.resolution))
+    def get_br_in_range(self, start: int, end: int) -> np.ndarray:
+        """ Returns brightness values over a range of wavelengths (ends included!) """
+        # TODO: round up to a multiple of 5
+        return self.br[np.where((self.nm >= start) & (self.nm <= end))]
     
-    def photons2energy(self):
+    def to_scope(self, scope: np.ndarray, crop: bool = False) -> Self:
+        """ Returns a new SpectralCube object with a guarantee of definition on the requested scope """
+        extrapolated = SpectralCube(*aux.extrapolating(self.nm, self.br, scope, aux.resolution))
+        if crop:
+            start = max(extrapolated.nm[0], scope[0])
+            end = min(extrapolated.nm[-1], scope[-1])
+            extrapolated.br = extrapolated.get_br_in_range(start, end)
+        return extrapolated
+    
+    def photons2energy(self) -> Self:
         """ Returns a new SpectralCube object converted from photon spectral density to energy one """
         return self * photon_spectral_density
 
     def integrate(self) -> np.ndarray:
         """ Collapses the SpectralCube along the spectral axis into a two-dimensional image """
         return aux.integrate(self.br, aux.resolution)
-    
-    def get_br_in_range(self, start: int, end: int) -> np.ndarray:
-        """
-        Returns brightness values over a range of wavelengths (ends included!)
-        TODO: round up to a multiple of 5
-        """
-        return self.br[np.where((self.nm >= start) & (self.nm <= end))]
     
     def apply_linear_operator(self, operator: Callable, operand: int|float):
         """
@@ -143,10 +146,9 @@ class SpectralCube:
         such as multiplication or division.
 
         Works only at the intersection of spectra! If you need to extrapolate one spectrum
-        to the range of another, for example, use `SpectralCube.to_scope(filter.nm) @ filter`
-
-        TODO: uncertainty processing.
+        to the range of another, use `spectrum.to_scope()`
         """
+        # TODO: uncertainty processing
         start = max(self.nm[0], other.nm[0])
         end = min(self.nm[-1], other.nm[-1])
         if start > end: # `>` is needed to process operations with stub objects with no extra logs
@@ -157,11 +159,11 @@ class SpectralCube:
             return SpectralCube.stub(x, y)
         else:
             nm = np.arange(start, end+1, aux.resolution, dtype='uint16')
-            br0 = self.br[np.where((self.nm >= start) & (self.nm <= end))]
-            br1 = other.br[np.where((other.nm >= start) & (other.nm <= end))]
+            br0 = self.get_br_in_range(start, end)
+            br1 = other.get_br_in_range(start, end)
             return SpectralCube(nm, operator(br0.T, br1).T) # numpy iterates over the last axis
 
-    def __mul__(self, other):
+    def __mul__(self, other: Spectrum|int|float|np.ndarray):
         """
         Returns a new SpectralCube object modified by the overloaded multiplication operator.
         If the operand is a number (or an array of spectral axis size), a scaled cube is returned.
@@ -172,10 +174,10 @@ class SpectralCube:
         elif isinstance(other, Spectrum):
             return self.apply_elemental_operator(mul, other, ' ∙ ')
     
-    def __rmul__(self, other):
+    def __rmul__(self, other: Spectrum|int|float|np.ndarray):
         return self.__mul__(other)
 
-    def __truediv__(self, other):
+    def __truediv__(self, other: Spectrum|int|float|np.ndarray):
         """
         Returns a new SpectralCube object modified by the overloaded division operator.
         If the operand is a number (or an array of spectral axis size), a scaled cube is returned.
@@ -186,31 +188,27 @@ class SpectralCube:
         elif isinstance(other, Spectrum):
             return self.apply_elemental_operator(truediv, other, ' / ')
     
-    def __matmul__(self, other) -> np.ndarray:
-        """ Implementation of convolution between emission spectral cube and transmission spectrum """
+    def __matmul__(self, other: Spectrum|FilterSystem) -> np.ndarray:
+        """
+        Implementation of convolution between emission spectrum and transmission spectrum.
+        If necessary, extrapolates over the wavelength interval of the second operand.
+        """
+        # TODO: uncertainty processing
+        extrapolated = self.to_scope(other.nm, crop=True)
         if isinstance(other, Spectrum):
-            return (self * other).integrate()
+            #return (extrapolated * other).integrate()
+            return aux.integrate((extrapolated.br.T * other.br).T, aux.resolution) # optimized
         elif isinstance(other, FilterSystem):
-            # TODO: uncertainty processing
-            extrapolated = self.to_scope(other.nm) # to at least cover the filters range
-            start = max(extrapolated.nm[0], other.nm[0])
-            end = min(extrapolated.nm[-1], other.nm[-1])
-            br0 = extrapolated.get_br_in_range(start, end)
             # The loop below can be replaced with 4D array processing, but not enough RAM for large cubes
-            photospectral_cube = np.empty((other.br.size[0], br0.size[1], br0.size[2]))
-            for i, band in enumerate(other.br):
-                photospectral_cube[i] = aux.integrate((br0.T * band).T, aux.resolution)
+            photospectral_cube = np.empty((other.br.size[0], extrapolated.br.size[1], extrapolated.br.size[2]))
+            for i, profile in enumerate(other.br):
+                photospectral_cube[i] = aux.integrate((extrapolated.br.T * profile).T, aux.resolution)
             return photospectral_cube
 
 
 
 class PhotospectralCube:
     """ Class to work with set of filters measurements. """
-
-    @staticmethod
-    def stub(x, y):
-        """ Initializes an object in case of input data problems. """
-        return PhotospectralCube([get_filter('Generic_Bessell.V')], np.zeros((1, x, y)), None)
 
     def __init__(self, filters: Sequence[Spectrum], br: np.ndarray, sd: np.ndarray = None):
         """
@@ -239,7 +237,12 @@ class PhotospectralCube:
             print(f'# Note for the PhotospectralCube object')
             print(f'- NaN values detected during object initialization, they been replaced with zeros.')
 
-    def downscale(self, pixels_limit: int):
+    @staticmethod
+    def stub(x, y) -> Self:
+        """ Initializes an object in case of input data problems. """
+        return PhotospectralCube([get_filter('Generic_Bessell.V')], np.zeros((1, x, y)), None)
+
+    def downscale(self, pixels_limit: int) -> Self:
         """ Brings the spatial resolution of the cube to approximately match the number of pixels """
         br = aux.spatial_downscaling(self.br, pixels_limit)
         sd = None
@@ -247,7 +250,7 @@ class PhotospectralCube:
             sd = aux.spatial_downscaling(self.sd, pixels_limit)
         return PhotospectralCube(self.filters, br, sd)
     
-    def to_scope(self, scope: np.ndarray): # TODO: use kriging here!
+    def to_scope(self, scope: np.ndarray) -> Self: # TODO: use kriging here!
         """ Creates a SpectralCube object with inter- and extrapolated PhotospectralCube data to fit the wavelength scope """
         try:
             if len(self.filters) > 1:
@@ -265,11 +268,11 @@ class PhotospectralCube:
             _, x, y = self.br.shape
             return SpectralCube.stub(x, y)
     
-    def photons2energy(self):
+    def photons2energy(self) -> Self:
         """ Returns a new PhotospectralCube object converted from photon spectral density to energy one """
         return self * (self @ photon_spectral_density)
     
-    def sorted(self):
+    def sorted(self) -> Self:
         """ Sorts the PhotospectralCube by increasing wavelength """
         nm = self.mean_wavelengths()
         if np.any(nm[:-1] > nm[1:]): # fast increasing check
@@ -280,15 +283,15 @@ class PhotospectralCube:
                 self.sd = self.sd[order]
         return self
     
-    def mean_wavelengths(self):
+    def mean_wavelengths(self) -> np.ndarray[np.floating]:
         """ Returns an array of mean wavelengths for each filter """
-        return np.array([passband.mean_wavelength() for passband in self.filters])
+        return np.array([profile.mean_wavelength() for profile in self.filters])
     
-    def standard_deviations(self):
+    def standard_deviations(self) -> np.ndarray[np.floating]:
         """ Returns an array of uncorrected standard deviations for each filter """
-        return np.array([passband.standard_deviation() for passband in self.filters])
+        return np.array([profile.standard_deviation() for profile in self.filters])
 
-    def apply_linear_operator(self, operator: Callable, operand: int|float):
+    def apply_linear_operator(self, operator: Callable, operand: int|float|np.ndarray) -> Self:
         """
         Returns a new PhotospectralCube object transformed according to the linear operator.
         Linearity is needed because values and uncertainty are handled uniformly.
@@ -299,15 +302,15 @@ class PhotospectralCube:
             sd = operator(self.sd.T, operand).T
         return PhotospectralCube(self.filters, br, sd)
     
-    def apply_elemental_operator(self, operator: Callable, other: Spectrum):
+    def apply_elemental_operator(self, operator: Callable, other: Spectrum) -> Self:
         """
         Returns a new PhotospectralCube object formed from element-wise multiplication or division by the Spectrum.
         Note that this also distorts filter profiles.
         """
-        filters = [operator(passband, other).scaled_by_area() for passband in self.filters]
+        filters = [operator(profile, other).scaled_by_area() for profile in self.filters]
         return operator(PhotospectralCube(filters, self.br, self.sd), self @ other) # linear
     
-    def __mul__(self, other):
+    def __mul__(self, other: Spectrum|int|float|np.ndarray) -> Self:
         """
         Returns a new PhotospectralCube object modified by the overloaded multiplication operator.
         If the operand is a number (or an array of spectral axis size), a scaled photometric cube is returned.
@@ -318,10 +321,10 @@ class PhotospectralCube:
         elif isinstance(other, Spectrum):
             return self.apply_elemental_operator(mul, other)
     
-    def __rmul__(self, other):
+    def __rmul__(self, other: Spectrum|int|float|np.ndarray) -> Self:
         return self.__mul__(other)
 
-    def __truediv__(self, other: Spectrum):
+    def __truediv__(self, other: Spectrum|int|float|np.ndarray) -> Self:
         """
         Returns a new PhotospectralCube object modified by the overloaded division operator.
         If the operand is a number (or an array of spectral axis size), a scaled photometric cube is returned.
@@ -332,6 +335,6 @@ class PhotospectralCube:
         elif isinstance(other, Spectrum):
             return self.apply_elemental_operator(truediv, other)
 
-    def __matmul__(self, other: Spectrum) -> np.ndarray[float]:
+    def __matmul__(self, other: Spectrum) -> np.ndarray[np.floating]:
         """ Convolve all the filters with the spectrum """
-        return np.array([other @ passband for passband in self.filters])
+        return np.array([other @ profile for profile in self.filters])

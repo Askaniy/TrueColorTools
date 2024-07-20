@@ -13,7 +13,7 @@ Please note that this is a hobby project and no guarantees are provided for the 
 
 ## Installation
 
-TrueColorTools has been tested on Windows 10/11, macOS and Linux ([this](https://github.com/adang1345/PythonWin7) can be used to run on Windows 7). Python version 3.10 or higher is required. Depending on the system, you may need to replace the `python` command with `python3`.
+TrueColorTools has been tested on Windows 10/11, macOS and Linux ([this](https://github.com/adang1345/PythonWin7) can be used to run on Windows 7). Python version 3.11 or higher is required. Depending on the system, you may need to replace the `python` command with `python3`.
 
 1. Clone the repository or download the archive using the GitHub web interface;
 2. Open the console in the project root folder;
