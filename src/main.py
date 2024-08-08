@@ -3,8 +3,8 @@
 import FreeSimpleGUI as sg
 from sigfig import round as sigfig_round
 from copy import deepcopy
+from src.core import *
 import src.gui as gui
-from src.data_core import Spectrum, get_filter
 import src.auxiliary as aux
 import src.database as db
 import src.data_processing as dp
@@ -432,7 +432,7 @@ def launch_window(lang: str):
                         window['T3_slider4'].update(disabled=not values['T3_overexposure'])
                     
                     # Spectral data processing
-                    T3_spectrum = Spectrum.from_blackbody_redshift(aux.visible_range, values['T3_slider1'], values['T3_slider2'], values['T3_slider3'])
+                    T3_spectrum = Spectrum.from_blackbody_redshift(visible_range, values['T3_slider1'], values['T3_slider2'], values['T3_slider3'])
                     T3_obj_name = T3_spectrum.name
                     window['T3_title2'].update(T3_obj_name.indexed_name(lang))
 

@@ -7,11 +7,9 @@ from time import strftime, monotonic
 from math import sqrt
 from PIL import Image
 import numpy as np
-import src.auxiliary as aux
-import src.image_core as ic
+from src.core import *
 import src.image_import as ii
 import src.color_processing as cp
-from src.data_core import Spectrum
 from src.data_processing import sun_norm
 
 
@@ -46,7 +44,7 @@ def image_parser(
                 filters = np.array(filters)[not_empty_files]
                 formulas = np.array(formulas)[not_empty_files]
                 log(f'Importing the images')
-                cube = ic.PhotospectralCube(filters, ii.bw_list_reader(files, formulas)).sorted()
+                cube = PhotospectralCube(filters, ii.bw_list_reader(files, formulas)).sorted()
                 if preview_flag:
                     log('Down scaling')
                     cube = cube.downscale(pixels_limit)
@@ -57,13 +55,13 @@ def image_parser(
                     log('Removing Sun as emitter')
                     cube /= sun_norm
                 log('Interpolating and extrapolating')
-                cube = cube.to_scope(aux.visible_range)
+                cube = cube.to_scope(visible_range)
                 log('Color calculating')
                 img = cube2img(cube, gamma_correction, srgb, makebright, factor)
             # RGB image
             case 1:
                 log(f'Importing the RGB image')
-                cube = ic.PhotospectralCube(filters, ii.rgb_reader(single_file, formulas)).sorted()
+                cube = PhotospectralCube(filters, ii.rgb_reader(single_file, formulas)).sorted()
                 if preview_flag:
                     log('Down scaling')
                     cube = cube.downscale(pixels_limit)
@@ -74,13 +72,13 @@ def image_parser(
                     log('Removing Sun as emitter')
                     cube /= sun_norm
                 log('Interpolating and extrapolating')
-                cube = cube.to_scope(aux.visible_range)
+                cube = cube.to_scope(visible_range)
                 log('Color calculating')
                 img = cube2img(cube, gamma_correction, srgb, makebright, factor)
             # Spectral cube
             case 2:
                 log('Importing the spectral cube (only the first loading is slow)')
-                cube = ic.SpectralCube.from_file(single_file)
+                cube = SpectralCube.from_file(single_file)
                 if preview_flag:
                     log('Down scaling')
                     cube = cube.downscale(pixels_limit)
@@ -91,7 +89,7 @@ def image_parser(
                     log('Removing Sun as emitter')
                     cube /= sun_norm
                 log('Extrapolating')
-                cube = cube.to_scope(aux.visible_range)
+                cube = cube.to_scope(visible_range)
                 log('Color calculating')
                 img = cube2img(cube, gamma_correction, srgb, makebright, factor)
         time = monotonic() - start_time
@@ -109,7 +107,7 @@ def image_parser(
         log(f'Image processing failed with {format_exc(limit=0).strip()}')
         print(format_exc())
 
-def cube2img(cube: ic.SpectralCube, gamma_correction: bool, srgb: bool, makebright: bool, factor: float):
+def cube2img(cube: SpectralCube, gamma_correction: bool, srgb: bool, makebright: bool, factor: float):
     """ Creates a Pillow image from the spectral cube """
     # TODO: add CIE white points support
     _, x, y = cube.br.shape

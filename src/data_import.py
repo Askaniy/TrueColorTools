@@ -79,13 +79,16 @@ def fits_reader(file: str, type_info: str) -> tuple[np.ndarray, None]:
             # Getting wavelength data
             wl_id = search_column(columns.names, 'wl')
             wl = tbl[columns[wl_id].name]
-            if len(wl.shape) > 1:
+            if wl.ndim > 1:
                 wl = wl[0]
             # Getting flux data
             br_id = search_column(columns.names, 'br')
             br = tbl[columns[br_id].name]
-            if len(br.shape) > 1:
-                br = br[0]
+            match br.ndim:
+                case 2:
+                    br = br[0]
+                case 3:
+                    br = br.transpose((0, 2, 1)) # like spectral cube?!
             # Standard deviation getting attempt
             if len(columns) > 2:
                 sd_id = search_column(columns.names, 'sd')
@@ -122,7 +125,7 @@ def search_column(names: list[str], target: str):
         case 'wl':
             candidates = names_set & {'wavelength', 'wave', 'lambda'}
         case 'br':
-            candidates = names_set & {'flux'}
+            candidates = names_set & {'flux', 'sci'}
         case 'sd':
             candidates = names_set & {'syserror'}
     try:

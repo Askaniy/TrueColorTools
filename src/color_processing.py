@@ -7,9 +7,7 @@ from typing import Sequence
 from copy import deepcopy
 import numpy as np
 from src.auxiliary import gamma_correction
-from src.database import ObjectName
-from src.data_core import Spectrum, FilterSystem
-from src.image_core import SpectralCube
+from src.core import *
 
 
 def xy2xyz(xy):
@@ -40,17 +38,17 @@ srgb_system = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_E
 # Stiles & Burch (1959) 2-deg color matching data, direct experimental data
 # http://www.cvrl.org/stilesburch2_ind.htm
 # Edge sensitivity modulo values less than 10⁴ were previously removed
-r = Spectrum('R CMF (2°) | StilesBurch1959', *np.loadtxt('src/cmf/StilesBurch2deg.r.dat').transpose()).scaled_by_area()
-g = Spectrum('G CMF (2°) | StilesBurch1959', *np.loadtxt('src/cmf/StilesBurch2deg.g.dat').transpose()).scaled_by_area()
-b = Spectrum('B CMF (2°) | StilesBurch1959', *np.loadtxt('src/cmf/StilesBurch2deg.b.dat').transpose()).scaled_by_area()
+r = Spectrum(*np.loadtxt('src/cmf/StilesBurch2deg.r.dat').transpose(), name='R CMF (2°) | StilesBurch1959').normalize()
+g = Spectrum(*np.loadtxt('src/cmf/StilesBurch2deg.g.dat').transpose(), name='G CMF (2°) | StilesBurch1959').normalize()
+b = Spectrum(*np.loadtxt('src/cmf/StilesBurch2deg.b.dat').transpose(), name='B CMF (2°) | StilesBurch1959').normalize()
 rgb_cmf = FilterSystem((r, g, b))
 
 # CIE XYZ functions transformed from the CIE (2006) LMS functions, 2-deg
 # http://www.cvrl.org/ciexyzpr.htm
 # Edge sensitivity values less than 10⁴ were previously removed
-x = Spectrum('X CMF (2°) | CIE2006', *np.loadtxt('src/cmf/cie2deg.x.dat').transpose())
-y = Spectrum('Y CMF (2°) | CIE2006', *np.loadtxt('src/cmf/cie2deg.y.dat').transpose())
-z = Spectrum('Z CMF (2°) | CIE2006', *np.loadtxt('src/cmf/cie2deg.z.dat').transpose())
+x = Spectrum(*np.loadtxt('src/cmf/cie2deg.x.dat').transpose(), name='X CMF (2°) | CIE2006')
+y = Spectrum(*np.loadtxt('src/cmf/cie2deg.y.dat').transpose(), name='Y CMF (2°) | CIE2006')
+z = Spectrum(*np.loadtxt('src/cmf/cie2deg.z.dat').transpose(), name='Z CMF (2°) | CIE2006')
 # Normalization. TODO: find a correct way to calibrate brightness for albedo!
 # 339.12 was guessed so that the equal-energy spectrum of unit brightness has color (1, 1, 1)
 x.br /= 339.12

@@ -5,7 +5,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from matplotlib import rc_context
 import matplotlib.pyplot as plt
-from src.data_core import Spectrum
+from src.core import *
 import src.color_processing as cp
 import src.strings as tr
 import src.gui as gui

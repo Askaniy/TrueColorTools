@@ -5,19 +5,6 @@ from math import sqrt, ceil
 from typing import Sequence
 
 
-# TCT was written in an effort to work not only with the optical range, but with any, depending on the data.
-# But too long and heterogeneous FITS files demanded to set the upper limit of the range to mid-wavelength infrared (3 μm).
-nm_red_limit = 3000 # nm
-# Actually, dtype=uint16 is used to store wavelength. It's possible to set the limit to 65535 nm with no compression,
-# and to 327 675 nm with 5 nm compression.
-
-# For the sake of simplifying work with the spectrum, its discretization step in only 5 nm.
-resolution = 5 # nm
-
-# To calculate color, it is necessary to achieve a definition of the spectrum in the visible range.
-# Boundaries have been defined based on the CMF (color matching functions) used, but can be any.
-visible_range = np.arange(390, 780, 5) # nm
-
 # Constants needed for down scaling spectra and images
 fwhm_factor = np.sqrt(8*np.log(2))
 hanning_factor = 1129/977
@@ -163,7 +150,7 @@ def interpolating(x0: Sequence, y0: np.ndarray, x1: Sequence, step: int|float) -
         y0 = custom_interp(y0, k=11+i)
     return linear_interp(x0, y0, x1)
 
-def scope2matrix(scope: Sequence, times: int, axis=1):
+def scope2matrix(scope: Sequence, times: int, axis: int = 1):
     """ Gets ta 1D array and expands its dimensions to a 2D array based on the 1D slice shape """
     return np.repeat(np.expand_dims(scope, axis=axis), times, axis=axis)
 
@@ -194,8 +181,8 @@ def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int|flo
     Averaging weights on this range grow linearly closer to the edge (from 0 to 1).
     """
     if len(x) == 1: # filling with equal-energy spectrum
-        x = np.arange(min(scope[0], x[0]), max(scope[-1], x[0])+1, step, dtype='uint16')
-        y = np.repeat(np.expand_dims(y[0], axis=0), x.size, axis=0)
+        x = grid(min(scope[0], x[0]), max(scope[-1], x[0]))
+        y = scope2matrix(y[0], x.size, axis=0)
     else:
         # Extrapolation to blue
         if x[0] > scope[0]:
@@ -289,3 +276,22 @@ def normalize_string(string: str):
         if char not in illegal_chars:
             result += char
     return result
+
+
+
+# Blackbody spectra
+
+h = 6.626e-34 # Planck constant
+c = 299792458 # Speed of light
+k = 1.381e-23 # Boltzmann constant
+const1 = 2 * np.pi * h * c * c
+const2 = h * c / k
+r = 6.957e8 # Solar radius, meters
+au = 149597870700 # astronomical unit, meters
+w = (1 - np.sqrt(1 - (r / au)**2)) / 2 # dilution to compare with Solar light on Earth
+temp_coef_to_make_it_work = 1.8 / 0.448 # 1.8 is expected of irradiance(500, 5770), 0.448 is actual. TODO
+
+# Now it does not work as intended: the spectrum should be comparable to the sun_SI
+def irradiance(nm: int|float|np.ndarray, T: int|float) -> float|np.ndarray:
+    m = nm / 1e9
+    return temp_coef_to_make_it_work * w * const1 / (m**5 * (np.exp(const2 / (m * T)) - 1)) / 1e9 # per m -> per nm

@@ -4,25 +4,19 @@ from typing import Sequence
 from traceback import format_exc
 from math import sqrt
 import numpy as np
-from src.database import ObjectName
-from src.data_core import Spectrum, Photospectrum, get_filter
+from src.core import *
 import src.auxiliary as aux
 import src.data_import as di
 
 
-sun_SI = Spectrum.from_file('Sun', 'spectra/files/CALSPEC/sun_reference_stis_002.fits') # W / (m² nm)
+sun_SI = Spectrum.from_file('spectra/files/CALSPEC/sun_reference_stis_002.fits', name='Sun') # W / (m² nm)
 sun_in_V = sun_SI @ get_filter('Generic_Bessell.V')
 sun_norm = sun_SI.scaled_at(get_filter('Generic_Bessell.V'))
-sun_filter = sun_SI.scaled_by_area()
+sun_filter = sun_SI.normalize()
 
-vega_SI = Spectrum.from_file('Vega', 'spectra/files/CALSPEC/alpha_lyr_stis_011.fits') # W / (m² nm)
+vega_SI = Spectrum.from_file('spectra/files/CALSPEC/alpha_lyr_stis_011.fits', name='Vega') # W / (m² nm)
 vega_in_V = vega_SI @ get_filter('Generic_Bessell.V')
 vega_norm = vega_SI.scaled_at(get_filter('Generic_Bessell.V'))
-
-lambdas = np.arange(aux.resolution, aux.nm_red_limit+1, aux.resolution)
-photon_spectral_density = Spectrum('Photons of equal energy', lambdas, 1/lambdas).scaled_at(get_filter('Generic_Bessell.V')) # E=hc/λ
-equal_frequency_density = Spectrum('AB', lambdas, 1/lambdas**2).scaled_at(get_filter('Generic_Bessell.V')) # f_λ = f_ν * c / λ²
-del lambdas
 
 
 class NonReflectiveBody:
@@ -47,7 +41,7 @@ class NonReflectiveBody:
         if 'star' in self.tags:
             return self.spectrum, False # means it's an emitter and we need to render it
         else:
-            return Spectrum(self.name, *Spectrum.stub).to_scope(aux.visible_range), False # means we don't need to render it
+            return Spectrum(self.name, *Spectrum.stub).to_scope(visible_range), False # means we don't need to render it
 
 
 class ReflectiveBody:
@@ -290,9 +284,9 @@ def spectral_data2visible_spectrum(
     and guarantees the completeness of the spectrum in the visible range.
     """
     if len(nm) > 0:
-        spectral_data = Spectrum.from_array(name, nm, br, sd)
+        spectral_data = Spectrum.from_array(nm, br, sd, name=name)
     elif len(filters) > 0:
-        spectral_data = Photospectrum.from_list(name, filters, br, sd)
+        spectral_data = Photospectrum(FilterSystem.from_list(filters), br, sd, name=name)
     else:
         print(f'# Note for the database object "{name.raw_name}"')
         print(f'- No wavelength data. Spectrum stub object was created.')
@@ -301,12 +295,12 @@ def spectral_data2visible_spectrum(
         case 'vega':
             spectral_data *= vega_norm
         case 'ab':
-            spectral_data *= equal_frequency_density
+            spectral_data = spectral_data.convert_from_frequency_spectral_density()
         case _:
             pass
     if sun:
         spectral_data /= sun_norm
-    return spectral_data.to_scope(aux.visible_range)
+    return spectral_data.to_scope(visible_range)
 
 def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | ReflectiveBody:
     """
@@ -399,7 +393,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
         if geometric is None and spherical is None:
             print(f'# Note for the database object "{name.raw_name}"')
             print(f'- No brightness data. Spectrum stub object was created.')
-            spectrum = Spectrum(name, *Spectrum.stub).to_scope(aux.visible_range)
+            spectrum = Spectrum(name, *Spectrum.stub).to_scope(visible_range)
     else:
         spectrum = spectral_data2visible_spectrum(name, nm, filters, br, sd, calib, sun)
         # Non-specific albedo parsing
