@@ -41,7 +41,7 @@ srgb_system = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_E
 r = Spectrum(*np.loadtxt('src/cmf/StilesBurch2deg.r.dat').transpose(), name='R CMF (2°) | StilesBurch1959').normalize()
 g = Spectrum(*np.loadtxt('src/cmf/StilesBurch2deg.g.dat').transpose(), name='G CMF (2°) | StilesBurch1959').normalize()
 b = Spectrum(*np.loadtxt('src/cmf/StilesBurch2deg.b.dat').transpose(), name='B CMF (2°) | StilesBurch1959').normalize()
-rgb_cmf = FilterSystem((r, g, b))
+rgb_cmf = FilterSystem.from_list((r, g, b))
 
 # CIE XYZ functions transformed from the CIE (2006) LMS functions, 2-deg
 # http://www.cvrl.org/ciexyzpr.htm
@@ -54,7 +54,7 @@ z = Spectrum(*np.loadtxt('src/cmf/cie2deg.z.dat').transpose(), name='Z CMF (2°)
 x.br /= 339.12
 y.br /= 339.12
 z.br /= 339.12
-xyz_cmf = FilterSystem((x, y, z))
+xyz_cmf = FilterSystem.from_list((x, y, z))
 
 
 class ColorImage:
@@ -81,7 +81,7 @@ class ColorImage:
     def from_spectral_data(spectral_cube: SpectralCube, maximize_brightness=True, srgb=False):
         """ Convolves the spectral cube with one of the available CMF systems """
         # TODO: add sRGB support for images!
-        return ColorImage(spectral_cube @ rgb_cmf, maximize_brightness)
+        return ColorImage((spectral_cube @ rgb_cmf).br, maximize_brightness)
 
     def gamma_corrected(self):
         """ Creates a new Color object with applied gamma correction """
@@ -104,15 +104,15 @@ class ColorPoint(ColorImage):
     def from_spectral_data(spectrum: Spectrum, maximize_brightness=True, srgb=False):
         """ Convolves the spectrum with one of the available CMF systems """
         if srgb:
-            xyz = spectrum @ xyz_cmf
+            xyz = (spectrum @ xyz_cmf).br
             rgb = srgb_system.T.dot(xyz)
             if np.any(rgb < 0):
-                print(f'# Note for the Color object "{spectrum.name.raw_name}"')
+                print(f'# Note for the Color object "{spectrum.name}"')
                 print(f'- RGB derived from XYZ turned out to be outside the color space: rgb={rgb}')
                 rgb -= rgb.min()
                 print(f'- Approximating by desaturating: rgb={rgb}')
         else:
-            rgb = spectrum @ rgb_cmf
+            rgb = (spectrum @ rgb_cmf).br
         return ColorPoint(rgb, maximize_brightness)
 
     def to_bit(self, bit: int) -> np.ndarray:

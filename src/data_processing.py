@@ -41,7 +41,7 @@ class NonReflectiveBody:
         if 'star' in self.tags:
             return self.spectrum, False # means it's an emitter and we need to render it
         else:
-            return Spectrum(self.name, *Spectrum.stub).to_scope(visible_range), False # means we don't need to render it
+            return Spectrum.stub(name=self.name).to_scope(visible_range), False # means we don't need to render it
 
 
 class ReflectiveBody:
@@ -288,9 +288,9 @@ def spectral_data2visible_spectrum(
     elif len(filters) > 0:
         spectral_data = Photospectrum(FilterSystem.from_list(filters), br, sd, name=name)
     else:
-        print(f'# Note for the database object "{name.raw_name}"')
+        print(f'# Note for the database object "{name}"')
         print(f'- No wavelength data. Spectrum stub object was created.')
-        spectral_data = Spectrum(name, *Spectrum.stub)
+        spectral_data = Spectrum.stub(name=name)
     match calib:
         case 'vega':
             spectral_data *= vega_norm
@@ -338,7 +338,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
             nm, br, sd = di.file_reader(content['file'])
         except Exception:
             nm, br, sd = Spectrum.stub
-            print(f'# Note for the Spectrum object "{name.raw_name}"')
+            print(f'# Note for the Spectrum object "{name}"')
             print(f'- Something unexpected happened during external file reading. The data was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0).strip()}')
     else:
@@ -358,9 +358,10 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
         elif 'nm_range' in content:
             nm_range = content['nm_range']
             nm = np.arange(nm_range['start'], nm_range['stop']+1, nm_range['step'])
+            # important not to use aux.grid() here
         elif 'slope' in content:
             slope = content['slope']
-            nm = np.arange(slope['start'], slope['stop']+1, aux.resolution)
+            nm = aux.grid(slope['start'], slope['stop'], nm_step)
             br = (nm / nm[0])**slope['power']
         # Photospectrum reading
         elif 'filters' in content:
@@ -391,9 +392,9 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
                 where, how = content['geometric_albedo']
                 geometric = spherical.scaled_at(where, *parse_value_sd(how))
         if geometric is None and spherical is None:
-            print(f'# Note for the database object "{name.raw_name}"')
+            print(f'# Note for the database object "{name}"')
             print(f'- No brightness data. Spectrum stub object was created.')
-            spectrum = Spectrum(name, *Spectrum.stub).to_scope(visible_range)
+            spectrum = Spectrum.stub(name=name).to_scope(visible_range)
     else:
         spectrum = spectral_data2visible_spectrum(name, nm, filters, br, sd, calib, sun)
         # Non-specific albedo parsing
@@ -404,7 +405,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
                 where, how = content['albedo']
                 geometric = spherical = spectrum.scaled_at(where, *parse_value_sd(how))
             else:
-                print(f'# Note for the database object "{name.raw_name}"')
+                print(f'# Note for the database object "{name}"')
                 print(f'- Invalid albedo value: {content["albedo"]}. Must be boolean or [filter/nm, [br, (sd)]].')
         # Geometric albedo parsing
         if 'geometric_albedo' in content:
@@ -414,7 +415,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
                 where, how = content['geometric_albedo']
                 geometric = spectrum.scaled_at(where, *parse_value_sd(how))
             else:
-                print(f'# Note for the database object "{name.raw_name}"')
+                print(f'# Note for the database object "{name}"')
                 print(f'- Invalid geometric albedo value: {content["geometric_albedo"]}. Must be boolean or [filter/nm, [br, (sd)]].')
         # Spherical albedo parsing
         if 'spherical_albedo' in content:
@@ -424,7 +425,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
                 where, how = content['spherical_albedo']
                 spherical = spectrum.scaled_at(where, *parse_value_sd(how))
             else:
-                print(f'# Note for the database object "{name.raw_name}"')
+                print(f'# Note for the database object "{name}"')
                 print(f'- Invalid spherical albedo value: {content["spherical_albedo"]}. Must be boolean or [filter/nm, [br, (sd)]].')
         elif 'bond_albedo' in content:
             spherical = spectrum.scaled_at(sun_filter, *parse_value_sd(content['bond_albedo']))
@@ -442,7 +443,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
                 phase_func, params = content['phase_function']
                 phase_integral, phase_integral_sd = phase_function2phase_integral(phase_func, params)
             else:
-                print(f'# Note for the database object "{name.raw_name}"')
+                print(f'# Note for the database object "{name}"')
                 print(f'- Invalid phase function value: {content["phase_function"]}. Must be in the form ["name", {{param1: value1, ...}}]')
         if phase_integral is not None:
             phase_integral = (phase_integral, phase_integral_sd)

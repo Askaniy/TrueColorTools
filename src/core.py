@@ -2,17 +2,20 @@
 """
 Describes the main spectral data storage classes and related functions.
 
-The hierarchy of classes in a project:
-
-- ObjectName
+The hierarchy of core classes in a project:
 - TrueColorToolsObject
 - - SpectralObject
-- - - Spectrum
-- - - FilterSystem
-- - - SpectralCube
+- - - 1D: Spectrum
+- - - 2D: FilterSystem
+- - - 3D: SpectralCube
 - - PhotospectralObject
-- - - Photospectrum
-- - - PhotospectralCube
+- - - 1D: Photospectrum
+- - - 3D: PhotospectralCube
+
+(Self-complete classes system would include a 2D `PhotospectrumSet` and
+`SpectrumSet` instead of `FilterSystem`, with convolution operation defined.
+But this is not required by the current functionality of the TCT.
+This could be useful to process an entire spectral database without loops.)
 """
 
 from copy import deepcopy
@@ -120,16 +123,16 @@ class ObjectName:
                 target = target.replace(original, translation[lang])
                 break
         return target
-
+    
     @staticmethod
     def as_ObjectName(input) -> Self:
         """ Guaranteed to return an object of the given class, even if the input may have already been one """
         return input if isinstance(input, ObjectName) else ObjectName(input)
-
+    
     def __hash__(self) -> int:
         """ Returns the hash value of the object """
         return hash(self.raw_name)
-
+    
     def __eq__(self, other) -> bool:
         """ Checks equality with another ObjectName instance """
         if isinstance(other, ObjectName):
@@ -137,7 +140,7 @@ class ObjectName:
         return False
     
     def __str__(self) -> str:
-        return str(self.raw_name)
+        return self()
 
 
 
@@ -193,7 +196,7 @@ class _TrueColorToolsObject:
     
     def __rmul__(self, other: int|float|np.ndarray) -> Self:
         return self.__mul__(other)
-
+    
     def __truediv__(self, other: int|float|np.ndarray) -> Self:
         if isinstance(other, (int, float, np.ndarray)):
             return self.apply_linear_operator(other, truediv)
@@ -212,7 +215,7 @@ class _SpectralObject(_TrueColorToolsObject):
     - `name` (ObjectName): name as an instance of a class that stores its components
     - `photometry` (PhotospectralObject): optional, way to store the pre-reconstructed data
     """
-
+    
     def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None, name: str|ObjectName = None, photometry=None) -> None:
         """
         It is assumed that the input wavelength grid can be trusted. If preprocessing is needed, see `SpectralObject.from_array`.
@@ -234,12 +237,7 @@ class _SpectralObject(_TrueColorToolsObject):
             self.br = np.nan_to_num(self.br)
             print(f'# Note for the SpectralObject "{self.name}"')
             print(f'- NaN values detected during object initialization, they been replaced with zeros.')
-
-    def stub(self, shape=None, name=None) -> Self:
-        """ Initializes an object in case of the data problems """
-        shape = (1, *shape) if shape else 1
-        return self(np.array([555]), np.zeros(shape), name=ObjectName.as_ObjectName(name))
-
+    
     @staticmethod
     def from_array(nm: np.ndarray, br: np.ndarray, sd: np.ndarray = None, name: str|ObjectName = None) -> Self:
         """
@@ -332,11 +330,11 @@ class _SpectralObject(_TrueColorToolsObject):
         if current_br == 0:
             return deepcopy(self)
         return self * (how / current_br)
-
+    
     def integrate(self) -> np.ndarray:
         """ Collapses the SpectralObject along the spectral axis into a two-dimensional image """
         return aux.integrate(self.br, nm_step)
-
+    
     def normalize(self) -> Self:
         """ Returns a new SpectralObject with each spectrum divided by its area """
         return self / self.integrate()
@@ -369,7 +367,7 @@ class _SpectralObject(_TrueColorToolsObject):
             print(f'# Note for the SpectralObject "{self.name}"')
             print(f'- Bolometric brightness is zero, the mean wavelength cannot be calculated. Returns 0 nm.')
             return 0.
-
+    
     def standard_deviation(self) -> np.ndarray[np.floating]:
         """ Returns uncorrected standard deviation or an array of uncorrected standard deviations """
         match self.ndim:
@@ -411,7 +409,7 @@ class _SpectralObject(_TrueColorToolsObject):
             photometry = operator(deepcopy(self.photometry), operand)
         return self.__class__(self.nm, br, sd, name=self.name, photometry=photometry)
     
-    def __matmul__(self, other) -> float|np.ndarray[np.floating]:
+    def __matmul__(self, other):
         """
         Implementation of convolution (in the meaning of synthetic photometry).
         If necessary, extrapolates over the wavelength interval of the second operand.
@@ -427,29 +425,29 @@ class _SpectralObject(_TrueColorToolsObject):
         - PhotospectralCube @ FilterSystem -> PhotospectralCube
         """
         # TODO: uncertainty processing
-        target_class_name = other.__class__.__name__
-        target_obj = other.to_scope(self.nm) # reconstructs PhotospectralObj to SpectralObj
-        spectrum_or_system = self.to_scope(other.nm)
-        match target_obj.ndim:
+        operand1_class_name = self.__class__.__name__
+        operand1 = self.to_scope(other.nm)
+        operand2 = other.to_scope(self.nm) # also reconstructs PhotospectralObj to SpectralObj
+        match operand1.ndim:
             case 1: # Spectrum or Photospectrum
-                match spectrum_or_system.ndim:
+                match operand2.ndim:
                     case 1: # Spectrum
-                        return aux.integrate(spectrum_or_system.br * target_obj.br, nm_step)
+                        return aux.integrate(operand2.br * operand1.br, nm_step)
                     case 2: # FilterSystem
-                        br = aux.integrate((spectrum_or_system.br * target_obj.br).T, nm_step)
-                        return Photospectrum(target_obj.filter_system, br, name=self.name)
+                        br = aux.integrate((operand2.br.T * operand1.br).T, nm_step)
+                        return Photospectrum(operand2, br, name=operand1.name)
             case 2: # FilterSystem
-                print(f'# Note for the {target_class_name} "{target_obj.name}"')
+                print(f'# Note for the {operand1_class_name} "{operand1.name}"')
                 print(f'- Convolution of a filter system makes no physical sense.')
             case 3: # SpectralCube or PhotospectralCube
-                match spectrum_or_system.ndim:
+                match operand2.ndim:
                     case 1: # Spectrum
-                        return aux.integrate((spectrum_or_system.br.T * target_obj.br).T, nm_step)
+                        return aux.integrate((operand2.br.T * operand1.br).T, nm_step)
                     case 2: # FilterSystem
-                        br = np.empty((len(target_obj), *self.shape))
-                        for i, profile in enumerate(target_obj.br):
-                            br[i] = aux.integrate((spectrum_or_system.br.T * profile).T, nm_step)
-                        return PhotospectralCube(target_obj.filter_system, br, name=self.name)
+                        br = np.empty((len(operand1), *other.shape))
+                        for i, profile in enumerate(operand1.br):
+                            br[i] = aux.integrate((operand2.br.T * profile).T, nm_step)
+                        return PhotospectralCube(operand2, br, name=operand1.name)
         return NotImplemented
 
 
@@ -463,6 +461,11 @@ class Spectrum(_SpectralObject):
     - `sd` (np.ndarray): optional array of standard deviations
     - `name` (ObjectName): name as an instance of a class that stores its components
     """
+    
+    @staticmethod
+    def stub(name=None) -> Self:
+        """ Initializes an object in case of the data problems """
+        return Spectrum((555,), np.zeros(1), name=name)
     
     @staticmethod
     def from_file(file: str, name: str|ObjectName = None) -> Self:
@@ -529,7 +532,7 @@ class Spectrum(_SpectralObject):
             profile.nm = np.append(profile.nm, profile.nm[-1]+nm_step)
             profile.br = np.append(profile.br, 0.)
         return profile
-
+    
     def apply_spectral_element_wise_operation(self, other: _SpectralObject, operator: Callable) -> _SpectralObject:
         """
         Returns a new SpectralObject formed from element-wise operation with the Spectrum,
@@ -557,8 +560,8 @@ class Spectrum(_SpectralObject):
             nm = np.arange(start, end+1, nm_step, dtype='uint16')
             br0 = self.get_br_in_range(start, end)
             br1 = other.get_br_in_range(start, end)
-            return other.__class__(nm, operator(br0.T, br1).T, name=other.name)
-
+            return other.__class__(nm, operator(br0, br1.T).T, name=other.name)
+    
     def apply_photospectral_element_wise_operation(self, photospectrum_or_system, operator: Callable, inverse_operator: Callable):
         """
         Returns a new PhotospectralObject formed from element-wise operation with the Spectrum,
@@ -576,16 +579,16 @@ class Spectrum(_SpectralObject):
         return output
     
     def __mul__(self, other):
-        return self.__rmul__(other)
-    
-    def __rmul__(self, other):
         if isinstance(other, _SpectralObject):
             return self.apply_spectral_element_wise_operation(other, mul)
         elif isinstance(other, _PhotospectralObject):
             return self.apply_photospectral_element_wise_operation(other, mul, truediv)
         else:
             return super().__mul__(other)
-
+    
+    def __rmul__(self, other):
+        return self.__mul__(other)
+    
     def __truediv__(self, other):
         if isinstance(other, _SpectralObject):
             return self.apply_spectral_element_wise_operation(other, truediv)
@@ -621,39 +624,42 @@ class FilterSystem(_SpectralObject):
 
     Attributes:
     - `nm` (np.ndarray): total wavelength range of the filter profiles
-    - `br` (np.ndarray): matrix of the profiles with shape [len(filters), len(nm)]
+    - `br` (np.ndarray): matrix of the profiles with shape [len(nm), len(filters)]
     - `name` (ObjectName): name as an instance of a class that stores its components
-    - `names` (tuple[ObjectName]): storage of the original filter names
     - `number` (int): number of filters in the system
     """
+    # TODO: original filter names are lost!
+    
+    @staticmethod
+    def stub(name=None) -> Self:
+        """ Initializes an object in case of the data problems """
+        return FilterSystem((555,), np.zeros((1, 1)), name=name)
+    
+    @staticmethod
+    def from_list(filters: Sequence[str|Spectrum], name: str|ObjectName = None):
+        """
+        Creates a FilterSystem object from a list of names or profiles.
 
-    def __init__(self, filters: Sequence[Spectrum]):
-        """ Creates a FilterSystem object from a list of spectra """
+        Args:
+        - `filters` (Sequence[str|Spectrum]): list of names or profiles (can be mixed)
+        - `name` (str|ObjectName): name as a string or an instance of a class that stores its components
+        """
         # Getting the wavelength info and filter names
         min_arr = []
         max_arr = []
-        names = []
-        for profile in filters:
+        filters = list(filters)
+        for i, profile in enumerate(filters):
+            if isinstance(profile, str):
+                profile = get_filter(profile)
+                filters[i] = profile
             min_arr.append(profile.nm[0])
             max_arr.append(profile.nm[-1])
-            names.append(profile.name)
-        self.names = tuple(names)
         # Matrix packing
-        self.nm = aux.grid(min(min_arr), max(max_arr), nm_step)
-        self.br = np.zeros((len(filters), len(self.nm)))
+        nm = aux.grid(min(min_arr), max(max_arr), nm_step)
+        br = np.zeros((len(nm), len(filters)))
         for i, profile in enumerate(filters):
-            self.br[i, np.where((self.nm >= min_arr[i]) & (self.nm <= max_arr[i]))] = profile.br
-        self.photometry = None
-    
-    @staticmethod
-    def from_list(filter_names: Sequence[str]) -> Self:
-        """
-        Creates a FilterSystem object from a list of filter's names. Files with such names must be in the `filters` folder.
-
-        Args:
-        - `filter_names` (Sequence[str]): list of file names in the `filters` folder
-        """
-        return FilterSystem((get_filter(name) for name in filter_names))
+            br[np.where((nm >= min_arr[i]) & (nm <= max_arr[i])), i] = profile.br
+        return FilterSystem(nm, br, name=name)
     
     @property
     def number(self) -> int:
@@ -673,7 +679,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
     - `sd` (np.ndarray): optional array of standard deviations
     - `name` (ObjectName): name as an instance of a class that stores its components
     """
-
+    
     def __init__(self, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str|ObjectName = None) -> None:
         """
         Args:
@@ -698,11 +704,11 @@ class _PhotospectralObject(_TrueColorToolsObject):
             self.br = np.nan_to_num(self.br)
             print(f'# Note for the PhotospectralObject object "{self.name}"')
             print(f'- NaN values detected during object initialization, they been replaced with zeros.')
-
-    def stub(self, shape=None, name=None) -> Self:
-        """ Initializes an object in case of the data problems """
-        shape = (1, *shape) if shape else 1
-        return self(FilterSystem(('Generic_Bessell.V',)), np.zeros(shape), name=ObjectName.as_ObjectName(name))
+    
+    @property
+    def nm(self) -> np.ndarray[np.integer]:
+        """ Returns the definition range of the filter system """
+        return self.filter_system.nm
     
     def convert_from_photon_spectral_density(self) -> Self:
         """
@@ -751,7 +757,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
             print(f'# Note for the PhotospectralObject "{self.name}"')
             print(f'- Something unexpected happened while trying to inter/extrapolate to a {target_class.__name__}. It was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0).strip()}')
-            return target_class.stub(self.shape, self.name)
+            return target_class.stub(self.name)
 
 
 class Photospectrum(_PhotospectralObject):
@@ -765,6 +771,11 @@ class Photospectrum(_PhotospectralObject):
     - `sd` (np.ndarray): optional array of standard deviations
     - `name` (ObjectName): name as an instance of a class that stores its components
     """
+    
+    @staticmethod
+    def stub(name=None) -> Self:
+        """ Initializes an object in case of the data problems """
+        return Photospectrum(FilterSystem.from_list(('Generic_Bessell.V',)), np.zeros(1), name=name)
 
 
 
@@ -805,6 +816,11 @@ class SpectralCube(_SpectralObject, _Cube):
     """
     
     @staticmethod
+    def stub(name=None) -> Self:
+        """ Initializes an object in case of the data problems """
+        return SpectralCube((555,), np.zeros((1, 1, 1)), name=name)
+    
+    @staticmethod
     @lru_cache(maxsize=1)
     def from_file(file: str) -> Self:
         """ Creates a SpectralCube object based on loaded data from the specified file """
@@ -824,10 +840,26 @@ class PhotospectralCube(_PhotospectralObject, _Cube):
     - `width` (int): horizontal spatial axis length
     - `hight` (int): vertical spatial axis length
     """
+    
+    @staticmethod
+    def stub(name=None) -> Self:
+        """ Initializes an object in case of the data problems """
+        return PhotospectralCube(FilterSystem.from_list(('Generic_Bessell.V',)), np.zeros(1, 1, 1), name=name)
 
 
-#sun_SI = Spectrum.from_file('Sun', 'spectra/files/CALSPEC/sun_reference_stis_002.fits') # W / (m² nm)
-#test = FilterSystem.from_list(['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V'])
-#print(sun_SI @ test)
-#print(test.standard_deviations())
+#sun = Spectrum.from_file('spectra/files/CALSPEC/sun_reference_stis_002.fits') # W / (m² nm)
+#test = FilterSystem.from_list(('Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V'), name='test')
+#v = get_filter('Generic_Bessell.V').to_scope(sun.nm)
+
+#import matplotlib.pyplot as plt
+#plt.plot(v.nm, v.br)
+#plt.show()
+
+#print((sun * v).nm)
+
+#photospectrum = sun @ test
+#print(photospectrum.br)
+#print(v @ photospectrum)
+
 #exit()
+#print(test.standard_deviation())

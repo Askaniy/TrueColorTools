@@ -15,13 +15,13 @@ hanning_factor = 1129/977
 def get_resolution(array: Sequence):
     return np.mean(np.diff(array)) * hanning_factor
 
-def grid(start: int|float, end: int|float, res: int):
+def grid(start: int|float, end: int|float, step: int):
     """ Returns uniform grid points for the non-integer range that are divisible by the selected step """
-    if (shift := start % res) != 0:
-        start += res - shift
-    if end % res == 0:
+    if (shift := start % step) != 0:
+        start += step - shift
+    if end % step == 0:
         end += 1 # to include the last point
-    return np.arange(start, end, res, dtype='uint16')
+    return np.arange(start, end, step, dtype='uint16')
 
 def is_smooth(array: Sequence|np.ndarray):
     """ Boolean function, checks the second derivative for sign reversal, a simple criterion for smoothness """
@@ -176,44 +176,61 @@ weights_center_of_mass = 1 - 1 / np.sqrt(2)
 
 def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int|float, avg_steps=20):
     """
-    Defines a curve or a cube with an intuitive continuation on the scope, if needed.
+    Defines a (multi-dimensional) curve an intuitive continuation on the scope, if needed.
+    In TCT works for spectra, filter systems and spectral cubes.
     `avg_steps` is a number of corner curve points to be averaged if the curve is not smooth.
     Averaging weights on this range grow linearly closer to the edge (from 0 to 1).
     """
+    obj_shape = y.shape[1:] # (,) for 1D; (n,) for 2D; (w, h) for 3D
     if len(x) == 1: # filling with equal-energy spectrum
-        x = grid(min(scope[0], x[0]), max(scope[-1], x[0]))
+        x = grid(min(scope[0], x[0]), max(scope[-1], x[0]), step)
         y = scope2matrix(y[0], x.size, axis=0)
     else:
-        # Extrapolation to blue
         if x[0] > scope[0]:
+            # Extrapolation to blue
             x1 = np.arange(scope[0], x[0], step)
-            y_scope = y[:avg_steps]
-            if is_smooth(y_scope):
-                diff = y[1]-y[0]
-                corner_y = y[0]
+            if np.all(y[0]) == 0:
+                # Corner point is zero -> no extrapolation needed: most likely it's a filter profile
+                y1 = np.zeros((x1.size, *obj_shape))
             else:
-                avg_weights = np.abs(np.arange(-avg_steps, 0)[avg_steps-y_scope.shape[0]:]) # weights could be more complicated, but there is no need
-                if y.ndim == 3: # spectral cube processing
-                    avg_weights = scope2cube(avg_weights, y.shape[1:3])
-                diff = np.average(np.diff(y_scope, axis=0), weights=avg_weights[:-1], axis=0)
-                corner_y = np.average(y_scope, weights=avg_weights, axis=0) - diff * avg_steps * weights_center_of_mass
-            y1 = custom_extrap(x1, diff/step, x[0], corner_y)
+                y_scope = y[:avg_steps]
+                if is_smooth(y_scope):
+                    diff = y[1]-y[0]
+                    corner_y = y[0]
+                else:
+                    # Linear weights. Could be more complicated, but there is no need
+                    avg_weights = np.abs(np.arange(-avg_steps, 0)[avg_steps-y_scope.shape[0]:])
+                    match y.ndim:
+                        case 2: # filter system processing
+                            avg_weights = scope2matrix(avg_weights, obj_shape)
+                        case 3: # spectral cube processing
+                            avg_weights = scope2cube(avg_weights, obj_shape)
+                    diff = np.average(np.diff(y_scope, axis=0), weights=avg_weights[:-1], axis=0)
+                    corner_y = np.average(y_scope, weights=avg_weights, axis=0) - diff * avg_steps * weights_center_of_mass
+                y1 = custom_extrap(x1, diff/step, x[0], corner_y)
             x = np.append(x1, x)
             y = np.append(y1, y, axis=0)
-        # Extrapolation to red
         if x[-1] < scope[-1]:
+            # Extrapolation to red
             x1 = np.arange(x[-1], scope[-1], step) + step
-            y_scope = y[-avg_steps:]
-            if is_smooth(y_scope):
-                diff = y[-1]-y[-2]
-                corner_y = y[-1]
+            if np.all(y[0]) == 0:
+                # Corner point is zero -> no extrapolation needed: most likely it's a filter profile
+                y1 = np.zeros((x1.size, *obj_shape))
             else:
-                avg_weights = np.arange(avg_steps)[:y_scope.shape[0]] + 1
-                if y.ndim == 3: # spectral cube processing
-                    avg_weights = scope2cube(avg_weights, y.shape[1:3])
-                diff = np.average(np.diff(y_scope, axis=0), weights=avg_weights[1:], axis=0)
-                corner_y = np.average(y_scope, weights=avg_weights, axis=0) + diff * avg_steps * weights_center_of_mass
-            y1 = custom_extrap(x1, diff/step, x[-1], corner_y)
+                y_scope = y[-avg_steps:]
+                if is_smooth(y_scope):
+                    diff = y[-1]-y[-2]
+                    corner_y = y[-1]
+                else:
+                    avg_weights = np.arange(avg_steps)[:y_scope.shape[0]] + 1
+                    match y.ndim:
+                        case 2: # filter system processing
+                            avg_weights = scope2matrix(avg_weights, obj_shape)
+                        case 3: # spectral cube processing
+                            avg_weights = scope2cube(avg_weights, obj_shape)
+                    diff = np.average(np.diff(y_scope, axis=0), weights=avg_weights[1:], axis=0)
+                    corner_y = np.average(y_scope, weights=avg_weights, axis=0) + diff * avg_steps * weights_center_of_mass
+                y1 = custom_extrap(x1, diff/step, x[-1], corner_y)
             x = np.append(x, x1)
             y = np.append(y, y1, axis=0)
     return x, y

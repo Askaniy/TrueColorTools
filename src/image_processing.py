@@ -100,7 +100,7 @@ def image_parser(
             factor = round(sqrt(pixels_limit / pixels_num))
             img = img.resize((img.width * factor, img.height * factor), Image.Resampling.NEAREST)
         if preview_flag:
-            log('Sending the resulting preview to the main thread', (img, Spectrum('Mean spectrum', cube.nm, cube.br.mean(axis=(1, 2)))))
+            log('Sending the resulting preview to the main thread', (img, Spectrum(cube.nm, cube.br.mean(axis=(1, 2)), name='Mean spectrum')))
         else:
             img.save(f'{save_folder}/TCT_{strftime("%Y-%m-%d_%H-%M-%S")}.png')
     except Exception:

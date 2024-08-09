@@ -285,13 +285,13 @@ def absolute_shifts(diffs):
 #    print(cube) # general info
 #
 #    # Getting target wavelength range
-#    nm = aux.grid(*cube.spectral_extrema.value, aux.resolution)
-#    flag = np.where(nm < aux.nm_red_limit + aux.resolution) # with reserve to be averaged
+#    nm = aux.grid(*cube.spectral_extrema.value, nm_step)
+#    flag = np.where(nm < nm_red_limit + nm_step) # with reserve to be averaged
 #    nm = nm[flag]
 #
 #    # Spectral smoothing and down scaling
 #    current_resolution = aux.get_resolution(cube.spectral_axis.value)
-#    sd = aux.gaussian_width(current_resolution, aux.resolution) / current_resolution
+#    sd = aux.gaussian_width(current_resolution, nm_step) / current_resolution
 #    print('Beginning spectral smoothing')
 #    cube = cube.spectral_smooth(Gaussian1DKernel(sd)) # parallel execution doesn't work
 #    print('Beginning spectral down scaling')
