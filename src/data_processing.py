@@ -41,7 +41,7 @@ class NonReflectiveBody:
         if 'star' in self.tags:
             return self.spectrum, False # means it's an emitter and we need to render it
         else:
-            return Spectrum.stub(name=self.name).to_scope(visible_range), False # means we don't need to render it
+            return Spectrum.stub(self.name).to_scope(visible_range), False # means we don't need to render it
 
 
 class ReflectiveBody:
@@ -290,7 +290,7 @@ def spectral_data2visible_spectrum(
     else:
         print(f'# Note for the database object "{name}"')
         print(f'- No wavelength data. Spectrum stub object was created.')
-        spectral_data = Spectrum.stub(name=name)
+        spectral_data = Spectrum.stub(name)
     match calib:
         case 'vega':
             spectral_data *= vega_norm
@@ -337,7 +337,9 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
         try:
             nm, br, sd = di.file_reader(content['file'])
         except Exception:
-            nm, br, sd = Spectrum.stub
+            stub = Spectrum.stub()
+            nm = stub.nm
+            br = stub.br
             print(f'# Note for the Spectrum object "{name}"')
             print(f'- Something unexpected happened during external file reading. The data was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0).strip()}')
@@ -394,7 +396,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
         if geometric is None and spherical is None:
             print(f'# Note for the database object "{name}"')
             print(f'- No brightness data. Spectrum stub object was created.')
-            spectrum = Spectrum.stub(name=name).to_scope(visible_range)
+            spectrum = Spectrum.stub(name).to_scope(visible_range)
     else:
         spectrum = spectral_data2visible_spectrum(name, nm, filters, br, sd, calib, sun)
         # Non-specific albedo parsing

@@ -37,7 +37,7 @@ def cube_reader(file: str) -> tuple[np.ndarray, np.ndarray]:
     
 #def sorted(self) -> Self:
 #    """ Sorts the PhotospectralCube by increasing wavelength """
-#    nm = self.mean_wavelengths()
+#    nm = self.mean_nm()
 #    if np.any(nm[:-1] > nm[1:]): # fast increasing check
 #        order = np.argsort(nm)
 #        self.filters = tuple(np.array(self.filters)[order])

@@ -69,8 +69,8 @@ def plot_spectra(spectra: Sequence[Spectrum], gamma: bool, srgb: bool, albedo: b
             if spectrum.photospectrum is not None:
                 fmt = 'o' if spectrum.photospectrum.sd is None else ''
                 ax.errorbar(
-                    x=spectrum.photospectrum.mean_wavelengths(), y=spectrum.photospectrum.br,
-                    xerr=spectrum.photospectrum.standard_deviations(), yerr=spectrum.photospectrum.sd,
+                    x=spectrum.photospectrum.mean_nm(), y=spectrum.photospectrum.br,
+                    xerr=spectrum.photospectrum.sd_of_nm(), yerr=spectrum.photospectrum.sd,
                     fmt=fmt, linestyle='none', color='#7F7F7F'
                 )
         ax.legend()

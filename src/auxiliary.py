@@ -150,13 +150,24 @@ def interpolating(x0: Sequence, y0: np.ndarray, x1: Sequence, step: int|float) -
         y0 = custom_interp(y0, k=11+i)
     return linear_interp(x0, y0, x1)
 
-def scope2matrix(scope: Sequence, times: int, axis: int = 1):
-    """ Gets ta 1D array and expands its dimensions to a 2D array based on the 1D slice shape """
+def higher_dim(scope: Sequence, times: int, axis: int = 1):
+    """ Gets the array and repeats it along a new dimension """
     return np.repeat(np.expand_dims(scope, axis=axis), times, axis=axis)
 
 def scope2cube(scope: Sequence, shape: tuple[int, int]):
-    """ Gets ta 1D array and expands its dimensions to a 3D array based on the 2D slice shape """
+    """ Gets the 1D array and expands its dimensions to a 3D array based on the 2D slice shape """
     return np.repeat(np.repeat(np.expand_dims(scope, axis=(1, 2)), shape[0], axis=1), shape[1], axis=2)
+
+def expand_1D_array(arr: np.ndarray, shape: int|tuple):
+    """ Gets the 1D array and expands its dimensions to a 2D or 3D array based on the slice shape """
+    match len(shape):
+        case 0:
+            return arr
+        case 1:
+            return higher_dim(arr, shape)
+        case 2:
+            return scope2cube(arr, shape)
+
 
 def custom_extrap(grid: Sequence, derivative: float|np.ndarray, corner_x: int|float, corner_y: float|np.ndarray) -> np.ndarray:
     """
@@ -165,10 +176,9 @@ def custom_extrap(grid: Sequence, derivative: float|np.ndarray, corner_x: int|fl
     Therefore, it scales to complement the spectrum more easily than similar functions.
     """
     if np.all(derivative) == 0: # extrapolation by constant
-        return np.repeat(np.expand_dims(corner_y, axis=0), grid.size, axis=0)
+        return higher_dim(corner_y, grid.size, axis=0)
     else:
-        if corner_y.ndim == 2: # spectral cube processing
-            grid = scope2cube(grid, corner_y.shape)
+        grid = expand_1D_array(grid, corner_y.shape)
         sign = np.sign(derivative)
         return np.exp((1 - (np.abs(derivative) * (grid - corner_x) / corner_y - sign)**2) / 2) * corner_y
 
@@ -184,7 +194,7 @@ def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int|flo
     obj_shape = y.shape[1:] # (,) for 1D; (n,) for 2D; (w, h) for 3D
     if len(x) == 1: # filling with equal-energy spectrum
         x = grid(min(scope[0], x[0]), max(scope[-1], x[0]), step)
-        y = scope2matrix(y[0], x.size, axis=0)
+        y = higher_dim(y[0], x.size, axis=0)
     else:
         if x[0] > scope[0]:
             # Extrapolation to blue
@@ -199,12 +209,7 @@ def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int|flo
                     corner_y = y[0]
                 else:
                     # Linear weights. Could be more complicated, but there is no need
-                    avg_weights = np.abs(np.arange(-avg_steps, 0)[avg_steps-y_scope.shape[0]:])
-                    match y.ndim:
-                        case 2: # filter system processing
-                            avg_weights = scope2matrix(avg_weights, obj_shape)
-                        case 3: # spectral cube processing
-                            avg_weights = scope2cube(avg_weights, obj_shape)
+                    avg_weights = expand_1D_array(np.arange(-avg_steps, 0)[avg_steps-y_scope.shape[0]:], obj_shape)
                     diff = np.average(np.diff(y_scope, axis=0), weights=avg_weights[:-1], axis=0)
                     corner_y = np.average(y_scope, weights=avg_weights, axis=0) - diff * avg_steps * weights_center_of_mass
                 y1 = custom_extrap(x1, diff/step, x[0], corner_y)
@@ -222,12 +227,7 @@ def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int|flo
                     diff = y[-1]-y[-2]
                     corner_y = y[-1]
                 else:
-                    avg_weights = np.arange(avg_steps)[:y_scope.shape[0]] + 1
-                    match y.ndim:
-                        case 2: # filter system processing
-                            avg_weights = scope2matrix(avg_weights, obj_shape)
-                        case 3: # spectral cube processing
-                            avg_weights = scope2cube(avg_weights, obj_shape)
+                    avg_weights = expand_1D_array(np.arange(avg_steps)[:y_scope.shape[0]] + 1, obj_shape)
                     diff = np.average(np.diff(y_scope, axis=0), weights=avg_weights[1:], axis=0)
                     corner_y = np.average(y_scope, weights=avg_weights, axis=0) + diff * avg_steps * weights_center_of_mass
                 y1 = custom_extrap(x1, diff/step, x[-1], corner_y)

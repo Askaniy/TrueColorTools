@@ -3,7 +3,7 @@ from PIL import Image, ImageDraw, ImageFont
 from time import strftime
 from math import floor, ceil, sqrt
 import numpy as np
-from src.auxiliary import normalize_string
+from src.auxiliary import higher_dim, normalize_string
 import src.database as db
 import src.data_processing as dp
 import src.color_processing as cp
@@ -103,8 +103,8 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
 
     # Creating of background of colored squircles
     arr = np.zeros((h, w, 3))
-    squircle = np.repeat(np.expand_dims(generate_squircle(r_square, rounding_radius), axis=2), repeats=3, axis=2)
-    squircle_contour = np.repeat(np.expand_dims(generate_squircle_contour(r_square, rounding_radius, 1), axis=2), repeats=3, axis=2) * 0.25
+    squircle = higher_dim(generate_squircle(r_square, rounding_radius), times=3, axis=2)
+    squircle_contour = higher_dim(generate_squircle_contour(r_square, rounding_radius, 1), times=3, axis=2) * 0.25
     is_estimated = np.empty(l, dtype='bool')
     is_white_text = np.empty(l, dtype='bool')
 
