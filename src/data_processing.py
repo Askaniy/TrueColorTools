@@ -275,32 +275,32 @@ def phase_function2phase_integral(name: str, params: dict):
             print(f'Phase function with name {name} is not supported.')
     return phase_integral, phase_integral_sd
 
-def spectral_data2visible_spectrum(
+def create_TCT_object(
         name: ObjectName, nm: Sequence[int|float], filters: Sequence[str], br: Sequence,
         sd: Sequence = None, calib: str = None, sun: bool = False
-    ) -> Spectrum:
+    ):
     """
     Decides whether we are dealing with photospectrum or continuous spectrum
-    and guarantees the completeness of the spectrum in the visible range.
+    and calibrates the spectral object.
     """
     if len(nm) > 0:
-        spectral_data = Spectrum.from_array(nm, br, sd, name=name)
+        TCT_obj = Spectrum.from_array(nm, br, sd, name=name)
     elif len(filters) > 0:
-        spectral_data = Photospectrum(FilterSystem.from_list(filters), br, sd, name=name)
+        TCT_obj = Photospectrum(FilterSystem.from_list(filters), br, sd, name=name)
     else:
         print(f'# Note for the database object "{name}"')
         print(f'- No wavelength data. Spectrum stub object was created.')
-        spectral_data = Spectrum.stub(name)
+        TCT_obj = Spectrum.stub(name)
     match calib:
         case 'vega':
-            spectral_data *= vega_norm
+            TCT_obj *= vega_norm
         case 'ab':
-            spectral_data = spectral_data.convert_from_frequency_spectral_density()
+            TCT_obj = TCT_obj.convert_from_frequency_spectral_density()
         case _:
             pass
     if sun:
-        spectral_data /= sun_norm
-    return spectral_data.to_scope(visible_range)
+        TCT_obj /= sun_norm
+    return TCT_obj
 
 def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | ReflectiveBody:
     """
@@ -380,7 +380,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
         if 'br_geometric' in content:
             br_geom = content['br_geometric']
             sd_geom = number2array(content['sd_geometric'], len(br_geom)) if 'sd_geometric' in content else None
-            geometric = spectral_data2visible_spectrum(name, nm, filters, br_geom, sd_geom, calib, sun)
+            geometric = create_TCT_object(name, nm, filters, br_geom, sd_geom, calib, sun)
             if 'spherical_albedo' in content:
                 where, how = content['spherical_albedo']
                 spherical = geometric.scaled_at(where, *parse_value_sd(how))
@@ -389,48 +389,48 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
         if 'br_spherical' in content:
             br_sphe = content['br_spherical']
             sd_sphe = number2array(content['sd_spherical'], len(br_sphe)) if 'sd_spherical' in content else None
-            spherical = spectral_data2visible_spectrum(name, nm, filters, br_sphe, sd_sphe, calib, sun)
+            spherical = create_TCT_object(name, nm, filters, br_sphe, sd_sphe, calib, sun)
             if 'geometric_albedo' in content:
                 where, how = content['geometric_albedo']
                 geometric = spherical.scaled_at(where, *parse_value_sd(how))
         if geometric is None and spherical is None:
             print(f'# Note for the database object "{name}"')
             print(f'- No brightness data. Spectrum stub object was created.')
-            spectrum = Spectrum.stub(name).to_scope(visible_range)
+            TCT_obj = Spectrum.stub(name).to_scope(visible_range)
     else:
-        spectrum = spectral_data2visible_spectrum(name, nm, filters, br, sd, calib, sun)
+        TCT_obj = create_TCT_object(name, nm, filters, br, sd, calib, sun)
         # Non-specific albedo parsing
         if 'albedo' in content:
             if isinstance(content['albedo'], bool) and content['albedo']:
-                geometric = spherical = spectrum
+                geometric = spherical = TCT_obj
             elif isinstance(content['albedo'], Sequence):
                 where, how = content['albedo']
-                geometric = spherical = spectrum.scaled_at(where, *parse_value_sd(how))
+                geometric = spherical = TCT_obj.scaled_at(where, *parse_value_sd(how))
             else:
                 print(f'# Note for the database object "{name}"')
                 print(f'- Invalid albedo value: {content["albedo"]}. Must be boolean or [filter/nm, [br, (sd)]].')
         # Geometric albedo parsing
         if 'geometric_albedo' in content:
             if isinstance(content['geometric_albedo'], bool) and content['geometric_albedo']:
-                geometric = spectrum
+                geometric = TCT_obj
             elif isinstance(content['geometric_albedo'], Sequence):
                 where, how = content['geometric_albedo']
-                geometric = spectrum.scaled_at(where, *parse_value_sd(how))
+                geometric = TCT_obj.scaled_at(where, *parse_value_sd(how))
             else:
                 print(f'# Note for the database object "{name}"')
                 print(f'- Invalid geometric albedo value: {content["geometric_albedo"]}. Must be boolean or [filter/nm, [br, (sd)]].')
         # Spherical albedo parsing
         if 'spherical_albedo' in content:
             if isinstance(content['spherical_albedo'], bool) and content['spherical_albedo']:
-                spherical = spectrum
+                spherical = TCT_obj
             elif isinstance(content['spherical_albedo'], Sequence):
                 where, how = content['spherical_albedo']
-                spherical = spectrum.scaled_at(where, *parse_value_sd(how))
+                spherical = TCT_obj.scaled_at(where, *parse_value_sd(how))
             else:
                 print(f'# Note for the database object "{name}"')
                 print(f'- Invalid spherical albedo value: {content["spherical_albedo"]}. Must be boolean or [filter/nm, [br, (sd)]].')
         elif 'bond_albedo' in content:
-            spherical = spectrum.scaled_at(sun_filter, *parse_value_sd(content['bond_albedo']))
+            spherical = TCT_obj.scaled_at(sun_filter, *parse_value_sd(content['bond_albedo']))
     tags = set()
     if 'tags' in content:
         for tag in content['tags']:
@@ -451,4 +451,4 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
             phase_integral = (phase_integral, phase_integral_sd)
         return ReflectiveBody(name, tags, geometric, spherical, phase_integral)
     else:
-        return NonReflectiveBody(name, tags, spectrum)
+        return NonReflectiveBody(name, tags, TCT_obj)
