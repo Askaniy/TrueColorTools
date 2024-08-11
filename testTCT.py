@@ -12,6 +12,8 @@ class TestTCT(unittest.TestCase):
         self.vega = Spectrum.from_file('spectra/files/CALSPEC/alpha_lyr_stis_011.fits', name='Vega') # W / (m² nm)
         self.v = get_filter('Generic_Bessell.V')
         self.ubv = FilterSystem.from_list(('Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V'), name='UBV')
+        self.r = get_filter('StilesBurch2deg.r')
+        self.rgb = FilterSystem.from_list(('StilesBurch2deg.r', 'StilesBurch2deg.g', 'StilesBurch2deg.b'), name='RGB')
     
     def test_mean_nm(self):
         assert_allclose(self.sun.mean_nm(), 857.052056, rtol=0.01)
@@ -57,12 +59,28 @@ class TestTCT(unittest.TestCase):
         assert_allclose(self.vega @ (self.v * 2).normalize(), self.vega @ self.v, rtol=0.01)
         assert_allclose((self.vega @ (self.ubv * 2).normalize()).br, (self.vega @ self.ubv).br, rtol=0.01)
     
+    def test_spectrum_from_nm(self):
+        spectrum = Spectrum.from_nm(555.5)
+        assert_allclose(spectrum.integrate(), 1.0, rtol=1e-10)
+        assert_allclose(spectrum.mean_nm(), 555.5, rtol=1e-10)
+        spectrum = Spectrum.from_nm(555)
+        assert_allclose(spectrum.integrate(), 1.0, rtol=1e-10)
+        assert_allclose(spectrum.mean_nm(), 555, rtol=1e-10)
+    
     def test_filter_edges(self):
         self.assertEqual(self.v.br[0], 0.)
         self.assertEqual(self.v.br[-1], 0.)
         extrapolated_v = self.v.to_scope(visible_range)
         self.assertEqual(extrapolated_v.br[0], 0.)
         self.assertEqual(extrapolated_v.br[-1], 0.)
+    
+    def test_getting_profile_from_filter_system(self):
+        v_there_and_back = FilterSystem.from_list([self.v])[0]
+        assert_allclose(v_there_and_back.nm, self.v.nm)
+        assert_allclose(v_there_and_back.br, self.v.br)
+    
+    def test_filter_system_getitem(self):
+        assert_equal(self.rgb[0].mean_nm(), self.r.mean_nm())
     
     def test_extrapolation_flat_spectrum(self):
         nm = np.arange(500, 701, 5)

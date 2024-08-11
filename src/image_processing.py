@@ -44,13 +44,13 @@ def image_parser(
                 filters = np.array(filters)[not_empty_files]
                 formulas = np.array(formulas)[not_empty_files]
                 log(f'Importing the images')
-                cube = PhotospectralCube(filters, ii.bw_list_reader(files, formulas)).sorted()
+                cube = PhotospectralCube(filters, ii.bw_list_reader(files, formulas))
                 if preview_flag:
                     log('Down scaling')
                     cube = cube.downscale(pixels_limit)
                 if photons:
                     log('Converting photon spectral density to energy density')
-                    cube = cube.photons2energy()
+                    cube = cube.convert_from_photon_spectral_density()
                 if desun:
                     log('Removing Sun as emitter')
                     cube /= sun_norm
@@ -61,13 +61,13 @@ def image_parser(
             # RGB image
             case 1:
                 log(f'Importing the RGB image')
-                cube = PhotospectralCube(filters, ii.rgb_reader(single_file, formulas)).sorted()
+                cube = PhotospectralCube(filters, ii.rgb_reader(single_file, formulas))
                 if preview_flag:
                     log('Down scaling')
                     cube = cube.downscale(pixels_limit)
                 if photons:
                     log('Converting photon spectral density to energy density')
-                    cube = cube.photons2energy()
+                    cube = cube.convert_from_photon_spectral_density()
                 if desun:
                     log('Removing Sun as emitter')
                     cube /= sun_norm
@@ -84,7 +84,7 @@ def image_parser(
                     cube = cube.downscale(pixels_limit)
                 if photons:
                     log('Converting photon spectral density to energy density')
-                    cube = cube.photons2energy()
+                    cube = cube.convert_from_photon_spectral_density()
                 if desun:
                     log('Removing Sun as emitter')
                     cube /= sun_norm
@@ -100,7 +100,7 @@ def image_parser(
             factor = round(sqrt(pixels_limit / pixels_num))
             img = img.resize((img.width * factor, img.height * factor), Image.Resampling.NEAREST)
         if preview_flag:
-            log('Sending the resulting preview to the main thread', (img, Spectrum(cube.nm, cube.br.mean(axis=(1, 2)), name='Mean spectrum')))
+            log('Sending the resulting preview to the main thread', (img, cube.median_spectrum()))
         else:
             img.save(f'{save_folder}/TCT_{strftime("%Y-%m-%d_%H-%M-%S")}.png')
     except Exception:

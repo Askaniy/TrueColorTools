@@ -28,9 +28,20 @@ def is_smooth(array: Sequence|np.ndarray):
     diff2 = np.diff(np.diff(array, axis=0), axis=0)
     return np.all(diff2 <= 0) | np.all(diff2 >= 0)
 
-def integrate(array: Sequence|np.ndarray, step: int|float):
-    """ Riemann sum with midpoint rule for integrating both spectra and spectral cubes """
-    return step * 0.5 * np.sum(array[:-1] + array[1:], axis=0)
+def integrate(array: Sequence|np.ndarray, step: int|float, precisely=False):
+    """
+    Integration along the spectral axis.
+    Uses the rectangle method by default and Riemann sum with midpoint in the "precise" mode.
+
+    It is the inaccurate method that is most often used. Not because of speed, but because
+    it is equivalent to matrix multiplication, which is used in spectrum reconstruction.
+    In practice, the difference between the methods gives an accuracy gain of less than
+    one hundredth of a factor.
+    """
+    if precisely:
+        return step * 0.5 * np.sum(array[:-1] + array[1:], axis=0) # Riemann sum
+    else:
+        return step * np.sum(array, axis=0) # rectangle method
 
 def gaussian_width(current_resolution, target_resolution):
     return np.sqrt(np.abs(target_resolution**2 - current_resolution**2)) / fwhm_factor

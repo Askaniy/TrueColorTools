@@ -30,7 +30,7 @@ plt.rcParams |= dark_theme
 
 
 rgb_muted = ('#904040', '#3c783c', '#5050e0')
-background_CMFs = ((cp.r, cp.g, cp.b), (cp.x, cp.y, cp.z))
+background_CMFs = (cp.rgb_cmf, cp.xyz_cmf)
 
 
 def close_figure(figure: Figure):

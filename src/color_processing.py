@@ -38,23 +38,14 @@ srgb_system = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_E
 # Stiles & Burch (1959) 2-deg color matching data, direct experimental data
 # http://www.cvrl.org/stilesburch2_ind.htm
 # Edge sensitivity modulo values less than 10⁴ were previously removed
-r = Spectrum(*np.loadtxt('src/cmf/StilesBurch2deg.r.dat').transpose(), name='R CMF (2°) | StilesBurch1959').normalize()
-g = Spectrum(*np.loadtxt('src/cmf/StilesBurch2deg.g.dat').transpose(), name='G CMF (2°) | StilesBurch1959').normalize()
-b = Spectrum(*np.loadtxt('src/cmf/StilesBurch2deg.b.dat').transpose(), name='B CMF (2°) | StilesBurch1959').normalize()
-rgb_cmf = FilterSystem.from_list((r, g, b))
+rgb_cmf = FilterSystem.from_list(('StilesBurch2deg.r', 'StilesBurch2deg.g', 'StilesBurch2deg.b'))
 
 # CIE XYZ functions transformed from the CIE (2006) LMS functions, 2-deg
 # http://www.cvrl.org/ciexyzpr.htm
 # Edge sensitivity values less than 10⁴ were previously removed
-x = Spectrum(*np.loadtxt('src/cmf/cie2deg.x.dat').transpose(), name='X CMF (2°) | CIE2006')
-y = Spectrum(*np.loadtxt('src/cmf/cie2deg.y.dat').transpose(), name='Y CMF (2°) | CIE2006')
-z = Spectrum(*np.loadtxt('src/cmf/cie2deg.z.dat').transpose(), name='Z CMF (2°) | CIE2006')
-# Normalization. TODO: find a correct way to calibrate brightness for albedo!
+xyz_cmf = FilterSystem.from_list(('cie2deg.x', 'cie2deg.y', 'cie2deg.z')) / 339.12
+# TODO: find a correct way to calibrate brightness for albedo!
 # 339.12 was guessed so that the equal-energy spectrum of unit brightness has color (1, 1, 1)
-x.br /= 339.12
-y.br /= 339.12
-z.br /= 339.12
-xyz_cmf = FilterSystem.from_list((x, y, z))
 
 
 class ColorImage:
