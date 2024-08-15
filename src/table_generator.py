@@ -3,10 +3,10 @@ from PIL import Image, ImageDraw, ImageFont
 from time import strftime
 from math import floor, ceil, sqrt
 import numpy as np
+
+from src.core import *
 from src.auxiliary import higher_dim, normalize_string
 import src.database as db
-import src.data_processing as dp
-import src.color_processing as cp
 import src.strings as tr
 
 
@@ -111,21 +111,21 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
     for n, obj_name in enumerate(displayed_namesDB):
 
         # Spectral data import and processing
-        body = dp.database_parser(obj_name, objectsDB[obj_name])
-        maximize_br = brMax or isinstance(body, dp.NonReflectiveBody)
+        body = database_parser(obj_name, objectsDB[obj_name])
+        maximize_br = brMax or isinstance(body, NonReflectiveBody)
 
         # Setting brightness mode
         spectrum, estimated = body.get_spectrum('geometric' if brGeom else 'spherical')
         is_estimated[n] = estimated
         
         # Color calculation
-        color = cp.ColorPoint.from_spectral_data(spectrum, maximize_br, srgb)
+        color = ColorPoint.from_spectral_data(spectrum, maximize_br, srgb)
         if gamma:
             color = color.gamma_corrected()
         is_white_text[n] = color.grayscale() > 0.5
 
-        # Rounded square. For just a square, use `object_template = color.rgb`
-        object_template = color.rgb * squircle if np.any(color.rgb) else squircle_contour
+        # Rounded square. For just a square, use `object_template = color.br`
+        object_template = color.br * squircle if np.any(color.br) else squircle_contour
 
         # Placing object template into the image template
         center_x = centers_x[n]

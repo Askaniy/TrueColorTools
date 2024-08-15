@@ -5,8 +5,8 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from matplotlib import rc_context
 import matplotlib.pyplot as plt
+
 from src.core import *
-import src.color_processing as cp
 import src.strings as tr
 import src.gui as gui
 
@@ -30,7 +30,6 @@ plt.rcParams |= dark_theme
 
 
 rgb_muted = ('#904040', '#3c783c', '#5050e0')
-background_CMFs = (cp.rgb_cmf, cp.xyz_cmf)
 
 
 def close_figure(figure: Figure):
@@ -55,14 +54,14 @@ def plot_spectra(spectra: Sequence[Spectrum], gamma: bool, srgb: bool, albedo: b
         max_y = []
         for spectrum in spectra:
             max_y.append(spectrum.br.max())
-        rgb = background_CMFs[srgb]
+        rgb = cmfs[srgb]
         k = max(max_y) / rgb[2].br.max() if len(max_y) != 0 else 1
         # Plotting the CMFs
         for i, cmf in enumerate(rgb):
             ax.plot(cmf.nm, cmf.br * k, label=cmf.name(lang), color=rgb_muted[i])
         # Color calculating and plotting
         for spectrum in spectra:
-            color = cp.ColorPoint.from_spectral_data(spectrum, albedo, srgb)
+            color = ColorPoint.from_spectral_data(spectrum, albedo, srgb)
             if gamma:
                 color = color.gamma_corrected()
             ax.plot(spectrum.nm, spectrum.br, label=spectrum.name(lang), color=color.to_html())
@@ -85,14 +84,14 @@ def plot_filters(filters: Sequence[Spectrum], srgb: bool, lang: str):
     max_y = []
     for spectrum in filters:
         max_y.append(spectrum.br.max())
-    rgb = background_CMFs[srgb]
+    rgb = cmfs[srgb]
     k = max(max_y) / rgb[2].br.max() if len(max_y) != 0 else 1
     # Plotting the CMFs
     for i, cmf in enumerate(rgb):
         ax.plot(cmf.nm, cmf.br * k, label=cmf.name(lang), color=rgb_muted[i])
     # Color calculating and plotting
     for i, spectrum in enumerate(filters):
-        color = cp.ColorPoint.from_spectral_data(spectrum, srgb=srgb).gamma_corrected().to_html()
+        color = ColorPoint.from_spectral_data(spectrum, srgb=srgb).gamma_corrected().to_html()
         ax.plot(spectrum.nm, spectrum.br, label=spectrum.name(lang), color=color)
     fig.tight_layout() # moving to subplots() causes UserWarning
     return fig

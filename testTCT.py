@@ -2,7 +2,6 @@ import unittest
 from numpy.testing import assert_equal, assert_allclose
 
 from src.core import *
-from src.data_processing import database_parser
 
 
 class TestTCT(unittest.TestCase):

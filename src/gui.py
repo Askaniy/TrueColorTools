@@ -3,7 +3,9 @@
 from typing import Callable
 from time import strftime
 import FreeSimpleGUI as sg
+
 import src.strings as tr
+
 
 # TCT style colors
 main_color = '#3884A9' # HSV 199.65° 66.86% 66.27%

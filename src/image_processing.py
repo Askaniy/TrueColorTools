@@ -7,10 +7,9 @@ from time import strftime, monotonic
 from math import sqrt
 from PIL import Image
 import numpy as np
+
 from src.core import *
 import src.image_import as ii
-import src.color_processing as cp
-from src.data_processing import sun_norm
 
 
 def image_parser(
@@ -111,18 +110,11 @@ def cube2img(cube: SpectralCube, gamma_correction: bool, srgb: bool, makebright:
     """ Creates a Pillow image from the spectral cube """
     # TODO: add CIE white points support
     _, x, y = cube.br.shape
-    rgb = np.empty((3, x, y))
-    rgb[0] = cube @ cp.r
-    rgb[1] = cube @ cp.g
-    rgb[2] = cube @ cp.b
-    if makebright:
-        rgb /= rgb.max()
-    rgb *= factor
-    rgb = np.clip(rgb, 0, 1)
+    img = ColorImage(cube.br, makebright)
+    img.br = np.clip(img.br * factor, 0, 1)
     if gamma_correction:
-        rgb = cp.gamma_correction(rgb)
-    rgb = (255 * rgb).astype('uint8')
-    return Image.fromarray(rgb.transpose())
+        img = img.gamma_corrected()
+    return Image.fromarray((255 * img.br).astype('uint8').transpose())
 
 def convert_to_bytes(img: Image.Image):
     """ Prepares PIL's image to be displayed in the window """

@@ -3,12 +3,11 @@
 import FreeSimpleGUI as sg
 from sigfig import round as sigfig_round
 from copy import deepcopy
+
 from src.core import *
 import src.gui as gui
 import src.auxiliary as aux
 import src.database as db
-import src.data_processing as dp
-import src.color_processing as cp
 import src.image_processing as ip
 from src.table_generator import generate_table
 import src.plotter as pl
@@ -225,8 +224,8 @@ def launch_window(lang: str):
                     window['T1_title2'].update(T1_obj_name.indexed_name(lang))
 
                     # Spectral data import and processing
-                    T1_body = dp.database_parser(T1_obj_name, objectsDB[T1_obj_name])
-                    T1_maximize_br = values['-brMax-'] or isinstance(T1_body, dp.NonReflectiveBody)
+                    T1_body = database_parser(T1_obj_name, objectsDB[T1_obj_name])
+                    T1_maximize_br = values['-brMax-'] or isinstance(T1_body, NonReflectiveBody)
 
                     # Setting brightness mode
                     T1_spectrum, T1_estimated = T1_body.get_spectrum('geometric' if values['-brMode1-'] else 'spherical')
@@ -236,7 +235,7 @@ def launch_window(lang: str):
                         window['T1_albedo_note'].update('')
 
                     # Color calculation
-                    T1_color = cp.ColorPoint.from_spectral_data(T1_spectrum, T1_maximize_br, values['-srgb-'])
+                    T1_color = ColorPoint.from_spectral_data(T1_spectrum, T1_maximize_br, values['-srgb-'])
                     if values['-gamma-']:
                         T1_color = T1_color.gamma_corrected()
                     T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
@@ -283,14 +282,14 @@ def launch_window(lang: str):
                     else:
                         T1_export = '\n' + '\t'.join(tr.gui_col[lang]) + '\n' + '_' * 36
                         for obj_name in T1_displayed_namesDB.values():
-                            T1_body = dp.database_parser(obj_name, objectsDB[obj_name])
-                            T1_maximize_br = values['-brMax-'] or isinstance(T1_body, dp.NonReflectiveBody)
+                            T1_body = database_parser(obj_name, objectsDB[obj_name])
+                            T1_maximize_br = values['-brMax-'] or isinstance(T1_body, NonReflectiveBody)
                         
                             # Setting brightness mode
                             T1_spectrum, T1_estimated = T1_body.get_spectrum('geometric' if values['-brMode1-'] else 'spherical')
 
                             # Color calculation
-                            T1_color = cp.ColorPoint.from_spectral_data(T1_spectrum, T1_maximize_br, values['-srgb-'])
+                            T1_color = ColorPoint.from_spectral_data(T1_spectrum, T1_maximize_br, values['-srgb-'])
                             if values['-gamma-']:
                                 T1_color = T1_color.gamma_corrected()
                             T1_rgb = tuple(T1_color.to_bit(bitness).round(rounding))
@@ -437,10 +436,10 @@ def launch_window(lang: str):
                     window['T3_title2'].update(T3_obj_name.indexed_name(lang))
 
                     if values['T3_overexposure']:
-                        T3_spectrum.br /= dp.mag2irradiance(values['T3_slider4'], dp.vega_in_V) * dp.sun_in_V
+                        T3_spectrum.br /= aux.mag2irradiance(values['T3_slider4'], vega_in_V) * sun_in_V
 
                     # Color calculation
-                    T3_color = cp.ColorPoint.from_spectral_data(T3_spectrum, not values['T3_overexposure'], values['-srgb-'])
+                    T3_color = ColorPoint.from_spectral_data(T3_spectrum, not values['T3_overexposure'], values['-srgb-'])
                     if values['-gamma-']:
                         T3_color = T3_color.gamma_corrected()
                     T3_rgb = tuple(T3_color.to_bit(bitness).round(rounding))
