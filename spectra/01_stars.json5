@@ -15,6 +15,11 @@
         'Spectrophotometry of Very Bright Stars in the Southern Sky',
         'https://iopscience.iop.org/article/10.1088/1538-3873/aa5f0e'
     ],
+    'Reid2000': [
+        'Four Nearby L Dwarfs',
+        'DOI: 10.1086/301177', 'https://iopscience.iop.org/article/10.1086/301177',
+        'https://ui.adsabs.harvard.edu/abs/2000AJ....119..369R/abstract'
+    ],
     'Ribas2017': [
         'The full spectral radiative properties of Proxima Centauri',
         'https://www.aanda.org/articles/aa/full_html/2017/07/aa30582-17/aa30582-17.html'
@@ -148,4 +153,20 @@
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_lhs10_v2.txtA'
     },
+    "(M9.5) BRI0021-0214|Reid2000": {
+        tags: ['extrasolar', 'star/ultra-cool dwarf'],
+        file: 'spectra/files/Reid2000/BRI0021.txt'
+    },
+    "(L0.5) 2MASSW J0746425+200032|Reid2000": {
+        tags: ['extrasolar', 'star/ultra-cool dwarf'],
+        file: 'spectra/files/Reid2000/2M0746.txt'
+    },
+    "(L3.5) 2MASSW J0036159+182110|Reid2000": {
+        tags: ['extrasolar', 'star/ultra-cool dwarf'],
+        file: 'spectra/files/Reid2000/2M0036.txt'
+    },
+    "(L5) 2MASSW J1507476-162738|Reid2000": {
+        tags: ['extrasolar', 'star/ultra-cool dwarf'],
+        file: 'spectra/files/Reid2000/2M1507.txt'
+    }
 }
