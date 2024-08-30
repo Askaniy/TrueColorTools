@@ -133,6 +133,10 @@
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_Pal2023/HR8086.txtA'
     },
+    'LHS 489 (esdM0) | Reid2000': {
+        tags: ['extrasolar', 'star/subdwarf'],
+        file: 'spectra/files/Reid2000/LHS489.txt'
+    },
     'Betelgeuse (M1-2 Ia-Iab) | Krisciunas2017': {
         tags: ['extrasolar', 'star/I supergiant'],
         file: 'spectra/files/Krisciunas2017/hr2061_final.txtA'
@@ -145,6 +149,14 @@
         tags: ['extrasolar', 'star/III giant'],
         file: 'spectra/files/Krisciunas2017/hr4763_blue_fin.txtA'
     },
+    'LHS 453 (esdM3.5) | Reid2000': {
+        tags: ['extrasolar', 'star/subdwarf'],
+        file: 'spectra/files/Reid2000/LHS453.txt'
+    },
+    'LHS 375 (esdM5) | Reid2000': {
+        tags: ['extrasolar', 'star/subdwarf'],
+        file: 'spectra/files/Reid2000/LHS375.txt'
+    },
     'Proxima Centauri (M5.5 Ve) | Ribas2017': {
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/ProximaCentauri_Ribas2017.fit'
@@ -153,19 +165,19 @@
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_lhs10_v2.txtA'
     },
-    "(M9.5) BRI0021-0214|Reid2000": {
+    "BRI0021-0214 (M9.5) | Reid2000": {
         tags: ['extrasolar', 'star/ultra-cool dwarf'],
         file: 'spectra/files/Reid2000/BRI0021.txt'
     },
-    "(L0.5) 2MASSW J0746425+200032|Reid2000": {
+    "2MASSW J0746425+200032 (L0.5) | Reid2000": {
         tags: ['extrasolar', 'star/ultra-cool dwarf'],
         file: 'spectra/files/Reid2000/2M0746.txt'
     },
-    "(L3.5) 2MASSW J0036159+182110|Reid2000": {
+    "2MASSW J0036159+182110 (L3.5) | Reid2000": {
         tags: ['extrasolar', 'star/ultra-cool dwarf'],
         file: 'spectra/files/Reid2000/2M0036.txt'
     },
-    "(L5) 2MASSW J1507476-162738|Reid2000": {
+    "2MASSW J1507476-162738 (L5) | Reid2000": {
         tags: ['extrasolar', 'star/ultra-cool dwarf'],
         file: 'spectra/files/Reid2000/2M1507.txt'
     }
