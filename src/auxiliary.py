@@ -10,10 +10,6 @@ from typing import Sequence
 
 # Constants needed for down scaling spectra and images
 fwhm_factor = np.sqrt(8*np.log(2))
-hanning_factor = 1129/977
-
-def get_resolution(array: Sequence):
-    return np.mean(np.diff(array)) * hanning_factor
 
 def grid(start: int|float, end: int|float, step: int):
     """ Returns uniform grid points for the non-integer range that are divisible by the selected step """
@@ -86,17 +82,16 @@ def spectral_downscaling(nm0: Sequence, br0: np.ndarray, nm1: Sequence, step: in
     # Obtaining a graph of standard deviations for a Gaussian
     nm_diff = np.diff(nm0)
     nm_mid = (nm0[1:] + nm0[:-1]) * 0.5
-    sd_local = gaussian_convolution(nm_mid, nm_diff, nm1, step*2)
+    sd_local = gaussian_width(gaussian_convolution(nm_mid, nm_diff, nm1, step*2), step) # missing "blur"
+    factors = -0.5 / sd_local**2 # Gaussian exponent multipliers
     # Convolution with Gaussian of variable standard deviation
     br1 = np.empty_like(nm1, dtype='float64')
     if cube_flag: 
-        br1 = scope2cube(br1, br0.shape[1:3])
+        br1 = array2cube(br1, br0.shape[1:3])
     for i in range(len(nm1)):
-        sd = gaussian_width(sd_local[i], step) # missing "blur" for required step
-        factor = -0.5 / sd**2 # Gaussian exponent multiplier
-        gaussian = np.exp(factor*(nm0 - nm1[i])**2)
+        gaussian = np.exp(factors[i]*(nm0 - nm1[i])**2)
         if cube_flag:
-            gaussian = scope2cube(gaussian, br0.shape[1:3])
+            gaussian = array2cube(gaussian, br0.shape[1:3])
         try:
             br1[i] = np.average(br0, weights=br0*gaussian, axis=0)
         except ZeroDivisionError:
@@ -165,19 +160,22 @@ def higher_dim(arr: Sequence|int|float, times: int, axis: int = 1):
     """ Gets the array and repeats it along a new dimension """
     return np.repeat(np.expand_dims(arr, axis=axis), times, axis=axis)
 
-def scope2cube(arr: Sequence, shape: tuple[int, int]):
+def array2cube(arr: Sequence, shape: tuple[int, int]):
     """ Gets the 1D array and expands its dimensions to a 3D array based on the 2D slice shape """
     return np.repeat(np.repeat(np.expand_dims(arr, axis=(1, 2)), shape[0], axis=1), shape[1], axis=2)
 
 def expand_1D_array(arr: np.ndarray, shape: int|tuple):
-    """ Gets the 1D array and expands its dimensions to a 2D or 3D array based on the slice shape """
+    """
+    Gets the 1D array and expands its dimensions to a 2D or 3D array based on the slice shape.
+    Сan be rewritten with numpy.tile()?
+    """
     match len(shape):
         case 0:
             return arr
         case 1:
             return higher_dim(arr, shape)
         case 2:
-            return scope2cube(arr, shape)
+            return array2cube(arr, shape)
 
 
 def custom_extrap(grid: Sequence, derivative: float|np.ndarray, corner_x: int|float, corner_y: float|np.ndarray) -> np.ndarray:
@@ -195,52 +193,52 @@ def custom_extrap(grid: Sequence, derivative: float|np.ndarray, corner_x: int|fl
 
 weights_center_of_mass = 1 - 1 / np.sqrt(2)
 
-def extrapolating(x: np.ndarray, y: np.ndarray, scope: np.ndarray, step: int|float, avg_steps=20):
+def extrapolating(x: np.ndarray, y: np.ndarray, x_arr: np.ndarray, step: int|float, avg_steps=20):
     """
-    Defines a (multi-dimensional) curve an intuitive continuation on the scope, if needed.
+    Defines a (multi-dimensional) curve an intuitive continuation on the x_arr, if needed.
     In TCT works for spectra, filter systems and spectral cubes.
     `avg_steps` is a number of corner curve points to be averaged if the curve is not smooth.
     Averaging weights on this range grow linearly closer to the edge (from 0 to 1).
     """
     obj_shape = y.shape[1:] # (,) for 1D; (n,) for 2D; (w, h) for 3D
     if len(x) == 1: # filling with equal-energy spectrum
-        x = grid(min(scope[0], x[0]), max(scope[-1], x[0]), step)
+        x = grid(min(x_arr[0], x[0]), max(x_arr[-1], x[0]), step)
         y = higher_dim(y[0], x.size, axis=0)
     else:
-        if x[0] > scope[0]:
+        if x[0] > x_arr[0]:
             # Extrapolation to blue
-            x1 = np.arange(scope[0], x[0], step)
+            x1 = np.arange(x_arr[0], x[0], step)
             if np.all(y[0]) == 0:
                 # Corner point is zero -> no extrapolation needed: most likely it's a filter profile
                 y1 = np.zeros((x1.size, *obj_shape))
             else:
-                y_scope = y[:avg_steps]
-                if is_smooth(y_scope):
+                y_arr = y[:avg_steps]
+                if is_smooth(y_arr):
                     diff = y[1]-y[0]
                     corner_y = y[0]
                 else:
                     # Linear weights. Could be more complicated, but there is no need
-                    avg_weights = expand_1D_array(np.arange(-avg_steps, 0)[avg_steps-y_scope.shape[0]:], obj_shape)
-                    diff = np.average(np.diff(y_scope, axis=0), weights=avg_weights[:-1], axis=0)
-                    corner_y = np.average(y_scope, weights=avg_weights, axis=0) - diff * avg_steps * weights_center_of_mass
+                    avg_weights = expand_1D_array(np.arange(-avg_steps, 0)[avg_steps-y_arr.shape[0]:], obj_shape)
+                    diff = np.average(np.diff(y_arr, axis=0), weights=avg_weights[:-1], axis=0)
+                    corner_y = np.average(y_arr, weights=avg_weights, axis=0) - diff * avg_steps * weights_center_of_mass
                 y1 = custom_extrap(x1, diff/step, x[0], corner_y)
             x = np.append(x1, x)
             y = np.append(y1, y, axis=0)
-        if x[-1] < scope[-1]:
+        if x[-1] < x_arr[-1]:
             # Extrapolation to red
-            x1 = np.arange(x[-1], scope[-1], step) + step
+            x1 = np.arange(x[-1], x_arr[-1], step) + step
             if np.all(y[0]) == 0:
                 # Corner point is zero -> no extrapolation needed: most likely it's a filter profile
                 y1 = np.zeros((x1.size, *obj_shape))
             else:
-                y_scope = y[-avg_steps:]
-                if is_smooth(y_scope):
+                y_arr = y[-avg_steps:]
+                if is_smooth(y_arr):
                     diff = y[-1]-y[-2]
                     corner_y = y[-1]
                 else:
-                    avg_weights = expand_1D_array(np.arange(avg_steps)[:y_scope.shape[0]] + 1, obj_shape)
-                    diff = np.average(np.diff(y_scope, axis=0), weights=avg_weights[1:], axis=0)
-                    corner_y = np.average(y_scope, weights=avg_weights, axis=0) + diff * avg_steps * weights_center_of_mass
+                    avg_weights = expand_1D_array(np.arange(avg_steps)[:y_arr.shape[0]] + 1, obj_shape)
+                    diff = np.average(np.diff(y_arr, axis=0), weights=avg_weights[1:], axis=0)
+                    corner_y = np.average(y_arr, weights=avg_weights, axis=0) + diff * avg_steps * weights_center_of_mass
                 y1 = custom_extrap(x1, diff/step, x[-1], corner_y)
             x = np.append(x, x1)
             y = np.append(y, y1, axis=0)

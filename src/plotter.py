@@ -44,10 +44,10 @@ def draw_figure(canvas, figure: Figure):
     return figure_canvas_agg
 
 
-def plot_spectra(spectra: Sequence[Spectrum], gamma: bool, srgb: bool, albedo: bool, light_theme: bool, lang: str):
+def plot_spectra(spectra: Sequence, gamma: bool, srgb: bool, albedo: bool, light_theme: bool, lang: str):
     """ Creates a figure with plotted spectra from the input list and the CMFs used """
     with rc_context(themes[int(light_theme)]):
-        fig, ax = plt.subplots(1, 1, figsize=(9, 6), dpi=100)
+        fig, ax = plt.subplots(1, 1, figsize=(8, 4), dpi=100)
         ax.set_xlabel(tr.xaxis_text[lang])
         ax.set_ylabel(tr.yaxis_text[lang])
         # Determining the scale for CMFs in the background
@@ -60,10 +60,11 @@ def plot_spectra(spectra: Sequence[Spectrum], gamma: bool, srgb: bool, albedo: b
         for i, cmf in enumerate(rgb):
             ax.plot(cmf.nm, cmf.br * k, label=cmf.name(lang), color=rgb_muted[i])
         # Color calculating and plotting
-        for spectrum in spectra:
+        for spectral_data in spectra:
             color = ColorPoint.from_spectral_data(spectrum, albedo, srgb)
             if gamma:
                 color = color.gamma_corrected()
+            spectrum = spectral_data.define_on_range(visible_range)
             ax.plot(spectrum.nm, spectrum.br, label=spectrum.name(lang), color=color.to_html())
             if spectrum.photospectrum is not None:
                 fmt = 'o' if spectrum.photospectrum.sd is None else ''

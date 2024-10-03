@@ -54,7 +54,7 @@ def image_parser(
                     log('Removing Sun as emitter')
                     cube /= sun_norm
                 log('Interpolating and extrapolating')
-                cube = cube.to_scope(visible_range)
+                cube = cube.define_on_range(visible_range)
                 log('Color calculating')
                 img = cube2img(cube, gamma_correction, srgb, makebright, factor)
             # RGB image
@@ -71,7 +71,7 @@ def image_parser(
                     log('Removing Sun as emitter')
                     cube /= sun_norm
                 log('Interpolating and extrapolating')
-                cube = cube.to_scope(visible_range)
+                cube = cube.define_on_range(visible_range)
                 log('Color calculating')
                 img = cube2img(cube, gamma_correction, srgb, makebright, factor)
             # Spectral cube
@@ -88,7 +88,7 @@ def image_parser(
                     log('Removing Sun as emitter')
                     cube /= sun_norm
                 log('Extrapolating')
-                cube = cube.to_scope(visible_range)
+                cube = cube.define_on_range(visible_range)
                 log('Color calculating')
                 img = cube2img(cube, gamma_correction, srgb, makebright, factor)
         time = monotonic() - start_time

@@ -24,7 +24,8 @@ def launch_window(lang: str):
 
     # Processing configuration
     default_tag = 'featured'
-    brMode = 1 # default brightness mode
+    brMax = False # albedo/chromaticity mode switcher
+    brMode = 1 # default albedo type (1==geometrical, 2==spherical)
     bitness = 1
     rounding = 3
 
@@ -42,7 +43,7 @@ def launch_window(lang: str):
     window0 = sg.Window(
         'TrueColorTools', icon=gui.icon, finalize=True, resizable=True, margins=(0, 0), size=(1000, 640),
         layout=gui.generate_layout(
-            (2*circle_r+1, 2*circle_r+1), img_preview_size, text_colors, filtersDB, brMode, bitness, rounding, T2_num, lang
+            (2*circle_r+1, 2*circle_r+1), img_preview_size, text_colors, filtersDB, brMax, brMode, bitness, rounding, T2_num, lang
         )
     )
     # Creating the plot window stub
@@ -105,10 +106,8 @@ def launch_window(lang: str):
                 to_plot.append(T1_spectrum)
             if T3_obj_name:
                 to_plot.append(T3_spectrum)
-            T1_T3_fig = pl.plot_spectra(to_plot, values['-gamma-'], values['-srgb-'], brMode, light_theme, lang)
+            T1_T3_fig = pl.plot_spectra(to_plot, values['-gamma-'], values['-srgb-'], values['-brMax-'], light_theme, lang)
             T1_T3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, T1_T3_fig)
-        elif event == 'W1_save':
-            print('hi')
         elif event == 'W1_path':
             T1_T3_fig.savefig(values['W1_path'], dpi=133.4) # 1200x800
         elif event == 'W1_light_theme':
@@ -118,7 +117,7 @@ def launch_window(lang: str):
                 window0.ReturnValuesDictionary['-currentTab-'],
                 window0.ReturnValuesDictionary['-gamma-'],
                 window0.ReturnValuesDictionary['-srgb-'],
-                brMode, light_theme, lang
+                window0.ReturnValuesDictionary['-brMax-'], light_theme, lang
             )
 
         # Run-time translation
@@ -147,7 +146,7 @@ def launch_window(lang: str):
                     window0.ReturnValuesDictionary['-currentTab-'],
                     window0.ReturnValuesDictionary['-gamma-'],
                     window0.ReturnValuesDictionary['-srgb-'],
-                    brMode, light_theme, lang
+                    window0.ReturnValuesDictionary['-brMax-'], light_theme, lang
                 )
         
         # Only the main window events
@@ -246,7 +245,7 @@ def launch_window(lang: str):
                     window['T1_rgb'].update(T1_rgb)
                     window['T1_hex'].update(T1_rgb_show)
                     T1_filter = get_filter(values['T1_filter'])
-                    window['T1_convolved'].update(sigfig_round(T1_spectrum.to_scope(T1_filter.nm)@T1_filter, rounding, warn=False))
+                    window['T1_convolved'].update(sigfig_round(T1_spectrum.define_on_range(T1_filter.nm)@T1_filter, rounding, warn=False))
 
                     # Dynamical plotting
                     if window1:
@@ -255,7 +254,7 @@ def launch_window(lang: str):
                             window0.ReturnValuesDictionary['-currentTab-'],
                             window0.ReturnValuesDictionary['-gamma-'],
                             window0.ReturnValuesDictionary['-srgb-'],
-                            brMode, light_theme, lang
+                            values['-brMax-'], light_theme, lang
                         )
                 
                 elif event == 'T1_tags':
@@ -273,7 +272,7 @@ def launch_window(lang: str):
                             window0.ReturnValuesDictionary['-currentTab-'],
                             window0.ReturnValuesDictionary['-gamma-'],
                             window0.ReturnValuesDictionary['-srgb-'],
-                            brMode, light_theme, lang
+                            values['-brMax-'], light_theme, lang
                         )
                 
                 elif event == 'T1_export2text':
@@ -422,7 +421,7 @@ def launch_window(lang: str):
                             window0.ReturnValuesDictionary['-currentTab-'],
                             window0.ReturnValuesDictionary['-gamma-'],
                             window0.ReturnValuesDictionary['-srgb-'],
-                            brMode, light_theme, lang
+                            values['-brMax-'], light_theme, lang
                         )
                 
                 else:
@@ -457,5 +456,5 @@ def launch_window(lang: str):
                             window0.ReturnValuesDictionary['-currentTab-'],
                             window0.ReturnValuesDictionary['-gamma-'],
                             window0.ReturnValuesDictionary['-srgb-'],
-                            brMode, light_theme, lang
+                            values['-brMax-'], light_theme, lang
                         )

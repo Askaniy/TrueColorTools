@@ -1944,7 +1944,8 @@
     ],
     'Li2021': [
         'Spectrophotometric Modeling and Mapping of (101955) Bennu',
-        'DOI: 10.3847/PSJ/abfd2d', 'https://iopscience.iop.org/article/10.3847/PSJ/abfd2d', 'https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..117L/abstract'
+        'DOI: 10.3847/PSJ/abfd2d', 'https://iopscience.iop.org/article/10.3847/PSJ/abfd2d',
+        'https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..117L/abstract'
     ],
     '(101955) Bennu | LeCorre2019, Li2021': {
         tags: ['featured', 'Solar System', 'minor body/asteroid/NEO/Apollo'],
@@ -2060,7 +2061,8 @@
     },
     'Brown2017': [
         'The Density of Mid-sized Kuiper Belt Objects from ALMA Thermal Observations',
-        'DOI: 10.3847/1538-3881/aa6346', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa6346', 'https://ui.adsabs.harvard.edu/abs/2017AJ....154...19B/abstract'
+        'DOI: 10.3847/1538-3881/aa6346', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa6346',
+        'https://ui.adsabs.harvard.edu/abs/2017AJ....154...19B/abstract'
     ],
     '(120347) Salacia | MBOSS, Brown2017': {
         tags: ['featured', 'MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
@@ -2072,7 +2074,8 @@
     },
     'Stansberry2012': [
         'Physical properties of trans-neptunian binaries (120347) Salacia-Actaea and (42355) Typhon-Echidna',
-        'DOI: 10.1016/j.icarus.2012.03.029', 'https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=930b84b086f6470df40a606e9385d9f165e5fd4d', 'https://ui.adsabs.harvard.edu/abs/2012Icar..219..676S/abstract'
+        'DOI: 10.1016/j.icarus.2012.03.029', 'https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=930b84b086f6470df40a606e9385d9f165e5fd4d',
+        'https://ui.adsabs.harvard.edu/abs/2012Icar..219..676S/abstract'
     ],
     '(120347) Salacia | Stansberry2012': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
@@ -2358,11 +2361,13 @@
     ],
     'McFadden2023': [
         'Size and Albedo Constraints for (152830) Dinkinesh Using WISE Data',
-        'DOI: 10.3847/2041-8213/acff61', 'https://iopscience.iop.org/article/10.3847/2041-8213/acff61', 'https://ui.adsabs.harvard.edu/abs/2023ApJ...957L...2M/abstract'
+        'DOI: 10.3847/2041-8213/acff61', 'https://iopscience.iop.org/article/10.3847/2041-8213/acff61',
+        'https://ui.adsabs.harvard.edu/abs/2023ApJ...957L...2M/abstract'
     ],
     'Mottola2023b': [
         'Characterizing asteroid (152830) Dinkinesh in preparation for the encounter with the NASA Lucy mission: a photometric study',
-        'DOI: 10.1093/mnrasl/slad066', 'https://academic.oup.com/mnrasl/article/524/1/L1/7191263', 'https://ui.adsabs.harvard.edu/abs/2023MNRAS.524L...1M/abstract'
+        'DOI: 10.1093/mnrasl/slad066', 'https://academic.oup.com/mnrasl/article/524/1/L1/7191263',
+        'https://ui.adsabs.harvard.edu/abs/2023MNRAS.524L...1M/abstract'
     ],
     '(152830) Dinkinesh | Bolin2023, McFadden2023, Mottola2023b': {
         tags: ['featured', 'Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Lucy target'],
@@ -2382,7 +2387,8 @@
     },
     'Tatsumi2020': [
         'Global photometric properties of (162173) Ryugu',
-        'DOI: 10.1051/0004-6361/201937096', 'https://www.aanda.org/articles/aa/full_html/2020/07/aa37096-19/aa37096-19.html', 'https://ui.adsabs.harvard.edu/abs/2020A%26A...639A..83T/abstract'
+        'DOI: 10.1051/0004-6361/201937096', 'https://www.aanda.org/articles/aa/full_html/2020/07/aa37096-19/aa37096-19.html',
+        'https://ui.adsabs.harvard.edu/abs/2020A%26A...639A..83T/abstract'
     ],
     'Yokota2021': [
         'Opposition Observations of 162173 Ryugu: Normal Albedo Map Highlights Variations in Regolith Characteristics',
@@ -2434,7 +2440,8 @@
     },
     'Souami2020': [
         'A multi-chord stellar occultation by the large trans-Neptunian object (174567) Varda',
-        'DOI: 10.1051/0004-6361/202038526', 'https://www.aanda.org/articles/aa/full_html/2020/11/aa38526-20/aa38526-20.html', 'https://ui.adsabs.harvard.edu/abs/2020A%26A...643A.125S/abstract'
+        'DOI: 10.1051/0004-6361/202038526', 'https://www.aanda.org/articles/aa/full_html/2020/11/aa38526-20/aa38526-20.html',
+        'https://ui.adsabs.harvard.edu/abs/2020A%26A...643A.125S/abstract'
     ],
     'Grundy2015': [
         'The mutual orbit, mass, and density of the large transneptunian binary system Varda and Ilmarë',
@@ -2515,7 +2522,8 @@
     },
     'DiasOliveira2017': [
         'Study of the Plutino Object (208996) 2003 AZ84 from Stellar Occultations: Size, Shape, and Topographic Features',
-        'DOI: 10.3847/1538-3881/aa74e9', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa74e9', 'https://ui.adsabs.harvard.edu/abs/2017AJ....154...22D/abstract'
+        'DOI: 10.3847/1538-3881/aa74e9', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa74e9',
+        'https://ui.adsabs.harvard.edu/abs/2017AJ....154...22D/abstract'
     ],
     '(208996) 2003 AZ84 | MBOSS, DiasOliveira2017': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/plutino', 'minor body/TNO/midsize TNO'],
@@ -2527,7 +2535,8 @@
     },
     'Kiss2019': [
         'The mass and density of the dwarf planet (225088) 2007 OR10',
-        'DOI: 10.1016/j.icarus.2019.03.013', 'https://arxiv.org/abs/1903.05439', 'https://ui.adsabs.harvard.edu/abs/2019Icar..334....3K/abstract'
+        'DOI: 10.1016/j.icarus.2019.03.013', 'https://arxiv.org/abs/1903.05439',
+        'https://ui.adsabs.harvard.edu/abs/2019Icar..334....3K/abstract'
     ],
     '(225088) Gonggong | Boehnhardt2014, Kiss2019': {
         tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO', 'minor body/TNO/detached TNO'],
@@ -2539,7 +2548,8 @@
     },
     'Arakawa2021': [
         'Tidal Evolution of the Eccentric Moon around Dwarf Planet (225088) Gonggong',
-        'DOI: 10.3847/1538-3881/ac1f91', 'https://iopscience.iop.org/article/10.3847/1538-3881/ac1f91', 'https://ui.adsabs.harvard.edu/abs/2021AJ....162..226A/abstract'
+        'DOI: 10.3847/1538-3881/ac1f91', 'https://iopscience.iop.org/article/10.3847/1538-3881/ac1f91',
+        'https://ui.adsabs.harvard.edu/abs/2021AJ....162..226A/abstract'
     ],
     '(225088 I) Xiangliu | Kiss2019, Arakawa2021': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO', 'minor body/TNO/detached TNO', 'moon'],
@@ -2966,21 +2976,21 @@
         'Colors of (486958) 2014 MU69 as Observed by New Horizons’ Multi-Spectral Visible Imaging Camera (MVIC)',
         'https://ui.adsabs.harvard.edu/abs/2019LPI....50.1982H/abstract'
     ],
-    '(486958) Arrokoth:Wenu Lobus | Howett2019': {
+    '(486958) Arrokoth: Wenu Lobus | Howett2019': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'Arrokoth', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.053, 0.079, 0.117], // phase angle = 11.68°
         albedo: true
     },
-    '(486958) Arrokoth:Weeyo Lobus | Howett2019': {
+    '(486958) Arrokoth: Weeyo Lobus | Howett2019': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'Arrokoth', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.058, 0.084, 0.122], // phase angle = 11.68°
         albedo: true
     },
-    '(486958) Arrokoth:Akasa Linea | Howett2019': {
+    '(486958) Arrokoth: Akasa Linea | Howett2019': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'Arrokoth', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
@@ -3826,7 +3836,8 @@
     },
     'Gerdes2017': [
         'Discovery and Physical Characterization of a Large Scattered Disk Object at 92 au',
-        'DOI: 10.3847/2041-8213/aa64d8', 'https://iopscience.iop.org/article/10.3847/2041-8213/aa64d8', 'https://ui.adsabs.harvard.edu/abs/2017ApJ...839L..15G/abstract'
+        'DOI: 10.3847/2041-8213/aa64d8', 'https://iopscience.iop.org/article/10.3847/2041-8213/aa64d8',
+        'https://ui.adsabs.harvard.edu/abs/2017ApJ...839L..15G/abstract'
     ],
     '2014 UZ224 | Gerdes2017': {
         tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/TNO/midsize TNO'],

@@ -1,4 +1,3 @@
-
 """
 Describes the main data storage classes and related functions.
 
@@ -25,7 +24,7 @@ Color:
 - - ColorPoint
 
 
-(Self-complete classes system would include a 2D `PhotospectrumSet` and
+(Self-complete data classes system would include a 2D `PhotospectrumSet` and
 `SpectrumSet` instead of `FilterSystem`, with convolution operation defined.
 But this is not required by the current functionality of the TCT.
 This could be useful to process an entire spectral database without loops.)
@@ -404,12 +403,12 @@ class _SpectralObject(_TrueColorToolsObject):
         # TODO: round up to a multiple of 5
         return self.br[np.where((self.nm >= start) & (self.nm <= end))]
     
-    def to_scope(self, scope: np.ndarray, crop: bool = False):
-        """ Returns a new SpectralObject with a guarantee of definition on the requested scope """
-        extrapolated = self.__class__(*aux.extrapolating(self.nm, self.br, scope, nm_step), name=self.name)
+    def define_on_range(self, nm_arr: np.ndarray, crop: bool = False):
+        """ Returns a new SpectralObject with a guarantee of definition on the requested nm_arr """
+        extrapolated = self.__class__(*aux.extrapolating(self.nm, self.br, nm_arr, nm_step), name=self.name)
         if crop:
-            start = max(extrapolated.nm[0], scope[0])
-            end = min(extrapolated.nm[-1], scope[-1])
+            start = max(extrapolated.nm[0], nm_arr[0])
+            end = min(extrapolated.nm[-1], nm_arr[-1])
             extrapolated.br = extrapolated.get_br_in_range(start, end)
         return extrapolated
     
@@ -438,14 +437,14 @@ class _SpectralObject(_TrueColorToolsObject):
         # TODO: uncertainty processing
         if self.is_edges_zeroed():
             # No filter extrapolation required
-            operand1 = other.to_scope(self.nm, crop=True)
+            operand1 = other.define_on_range(self.nm, crop=True)
             operand2 = self
         else:
             # Why Spectrum/FilterSystem needs extrapolation?
             # For the cases of bolometric albedo operations such as `Sun @ Mercury`.
-            operand1 = other.to_scope(self.nm, crop=False)
-            operand2 = self.to_scope(other.nm, crop=False)
-        # other.to_scope() reconstructed PhotospectralObj to SpectralObj, so 4 options left:
+            operand1 = other.define_on_range(self.nm, crop=False)
+            operand2 = self.define_on_range(other.nm, crop=False)
+        # other.define_on_range() reconstructed PhotospectralObj to SpectralObj, so 4 options left:
         if isinstance(operand1, Spectrum):
             # Spectrum @ Spectrum
             if isinstance(operand2, Spectrum):
@@ -529,7 +528,7 @@ class Spectrum(_SpectralObject):
         return Spectrum(nm, np.array(br)/nm_step, name=f'{nm_point} nm')
     
     @staticmethod
-    def from_blackbody_redshift(scope: np.ndarray, temperature: int|float, velocity=0., vII=0.):
+    def from_blackbody_redshift(nm_arr: np.ndarray, temperature: int|float, velocity=0., vII=0.):
         """ Creates a Spectrum object based on Planck's law and redshift formulas """
         if temperature == 0:
             physics = False
@@ -550,10 +549,10 @@ class Spectrum(_SpectralObject):
                 else:
                     physics = False
         if physics:
-            br = aux.irradiance(scope*doppler*grav, temperature)
+            br = aux.irradiance(nm_arr*doppler*grav, temperature)
         else:
-            br = np.zeros(scope.size)
-        return Spectrum(scope, br, name=f'BB with T={round(temperature)} K')
+            br = np.zeros(nm_arr.size)
+        return Spectrum(nm_arr, br, name=f'BB with T={round(temperature)} K')
     
     def edges_zeroed(self):
         """
@@ -571,12 +570,13 @@ class Spectrum(_SpectralObject):
             profile.br = np.append(profile.br, 0.)
         return profile
     
-    def to_scope(self, scope: np.ndarray, crop: bool = False):
-        """ Returns a new Spectrum with a guarantee of definition on the requested scope """
+    def define_on_range(self, nm_arr: np.ndarray, crop: bool = False):
+        """ Returns a new Spectrum with a guarantee of definition on the requested wavelength array """
         if self.photospectrum is None:
-            extrapolated = super().to_scope(scope, crop)
+            extrapolated = super().define_on_range(nm_arr, crop)
         else:
-            extrapolated = self.photospectrum.to_scope(scope, crop) # repeat reconstruction on a new scope
+            # repeating the spectral reconstruction on the new wavelength range
+            extrapolated = self.photospectrum.define_on_range(nm_arr, crop)
         return extrapolated
     
     def apply_linear_operator(self, operator: Callable, operand: int|float|np.ndarray):
@@ -599,7 +599,7 @@ class Spectrum(_SpectralObject):
         which most computers do not have enough memory for.
 
         Works only at the intersection of the spectral axes! If you need to extrapolate one axis
-        to the range of another, use `SpectralObject.to_scope()`.
+        to the range of another, use `SpectralObject.define_on_range()`.
         """
         # TODO: uncertainty processing
         operand1, operand2 = (self, other) if self.ndim >= other.ndim else (other, self) # order is important for division
@@ -619,7 +619,7 @@ class Spectrum(_SpectralObject):
             br2 = operand2.get_br_in_range(start, end)
             return operand1.__class__(aux.grid(start, end, nm_step), operator(br1.T, br2).T, name=operand1.name)
     
-    def apply_photospectral_element_wise_operation(self, operator: Callable, photospectrum_or_system):
+    def apply_photospectral_element_wise_operation(self, operator: Callable, photospectral_obj):
         """
         Returns a new PhotospectralObject formed from element-wise operation with the Spectrum,
         such as multiplication or division.
@@ -630,9 +630,9 @@ class Spectrum(_SpectralObject):
         which most computers do not have enough memory for.
         """
         # TODO: uncertainty processing
-        self_photospectrum = self @ photospectrum_or_system.filter_system
-        output = operator(photospectrum_or_system, self_photospectrum.br)
-        #distorted_profiles = operator(photospectrum_or_system.filter_system, self)
+        self_photospectrum = self @ photospectral_obj.filter_system
+        output = operator(photospectral_obj, self_photospectrum.br)
+        #distorted_profiles = operator(photospectral_obj.filter_system, self)
         #output.filter_system = distorted_profiles.normalize()
         return output
     
@@ -819,8 +819,8 @@ class _PhotospectralObject(_TrueColorToolsObject):
         """ Returns an array of mean wavelengths for each filter """
         return self.filter_system.mean_nm()
     
-    def to_scope(self, scope: np.ndarray, crop: bool = False) -> _SpectralObject: # TODO: use kriging here!
-        """ Reconstructs a SpectralObject with inter- and extrapolated photospectrum data to fit the wavelength scope """
+    def define_on_range(self, nm_arr: np.ndarray, crop: bool = False) -> _SpectralObject: # TODO: use kriging here!
+        """ Reconstructs a SpectralObject with inter- and extrapolated photospectrum data to fit the wavelength array """
         match self.ndim:
             case 1:
                 target_class = Spectrum
@@ -830,7 +830,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
             nm0 = self.mean_nm()
             br0 = self.br
             if len(self.filter_system) == 1: # single-point PhotospectralObject support
-                nm1, br1 = aux.extrapolating((nm0[0],), (br0[0],), scope, nm_step)
+                nm1, br1 = aux.extrapolating((nm0[0],), (br0[0],), nm_arr, nm_step)
             else:
                 if np.any(nm0[:-1] > nm0[1:]): # fast increasing check
                     order = np.argsort(nm0)
@@ -838,10 +838,10 @@ class _PhotospectralObject(_TrueColorToolsObject):
                     br0 = br0[order]
                 nm1 = aux.grid(nm0[0], nm0[-1], nm_step)
                 br1 = aux.interpolating(nm0, br0, nm1, nm_step)
-                nm1, br1 = aux.extrapolating(nm1, br1, scope, nm_step)
+                nm1, br1 = aux.extrapolating(nm1, br1, nm_arr, nm_step)
             if crop:
-                start = max(nm1[0], scope[0])
-                end = min(nm1[-1], scope[-1])
+                start = max(nm1[0], nm_arr[0])
+                end = min(nm1[-1], nm_arr[-1])
                 br1 = br1[np.where((nm1 >= start) & (nm1 <= end))]
             if isinstance(target_class, Spectrum):
                 return target_class(nm1, br1, name=self.name, photometry=deepcopy(self))
@@ -1062,13 +1062,14 @@ def _create_TCT_object(
         print(f'# Note for the database object "{name}"')
         print(f'- No wavelength data. Spectrum stub object was created.')
         TCT_obj = Spectrum.stub(name)
-    match calib:
-        case 'vega':
-            TCT_obj *= vega_norm
-        case 'ab':
-            TCT_obj = TCT_obj.convert_from_frequency_spectral_density()
-        case _:
-            pass
+    if calib is not None:
+        match calib.lower():
+            case 'vega':
+                TCT_obj *= vega_norm
+            case 'ab':
+                TCT_obj = TCT_obj.convert_from_frequency_spectral_density()
+            case _:
+                pass
     if sun:
         TCT_obj /= sun_norm
     return TCT_obj
@@ -1144,7 +1145,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
         if 'photometric_system' in content:
             # regular filter if name is string, else "delta-filter" (wavelength)
             filters = [f'{content["photometric_system"]}.{short_name}' if isinstance(short_name, str) else short_name for short_name in filters]
-    calib = content['calibration_system'].lower() if 'calibration_system' in content else None
+    calib = content['calibration_system'] if 'calibration_system' in content else None
     sun = 'sun_is_emitter' in content and content['sun_is_emitter']
     geometric = spherical = None
     if len(br) == 0:

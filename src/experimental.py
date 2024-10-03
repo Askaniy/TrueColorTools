@@ -2,6 +2,15 @@
 
 import numpy as np
 from astropy.io import fits
+from typing import Sequence
+
+
+
+hanning_factor = 1129/977
+
+def get_resolution(array: Sequence):
+    return np.mean(np.diff(array)) * hanning_factor
+
 
 
 #from pyvims import VIMS

@@ -69,7 +69,7 @@ class TestTCT(unittest.TestCase):
     def test_filter_edges(self):
         self.assertEqual(self.v.br[0], 0.)
         self.assertEqual(self.v.br[-1], 0.)
-        extrapolated_v = self.v.to_scope(visible_range)
+        extrapolated_v = self.v.define_on_range(visible_range)
         self.assertEqual(extrapolated_v.br[0], 0.)
         self.assertEqual(extrapolated_v.br[-1], 0.)
     
@@ -84,11 +84,11 @@ class TestTCT(unittest.TestCase):
     def test_extrapolation_flat_spectrum(self):
         nm = np.arange(500, 701, 5)
         spectrum = Spectrum(nm, np.ones_like(nm))
-        assert_equal(spectrum.to_scope(visible_range, crop=True).br, np.ones(visible_range.size))
+        assert_equal(spectrum.define_on_range(visible_range, crop=True).br, np.ones(visible_range.size))
     
     def test_extrapolation_flat_photospectrum(self):
         photospectrum = Photospectrum(self.ubv, (1, 1, 1), name='test photospectrum')
-        assert_equal(photospectrum.to_scope(visible_range, crop=True).br, np.ones(visible_range.size))
+        assert_equal(photospectrum.define_on_range(visible_range, crop=True).br, np.ones(visible_range.size))
     
     def test_db(self):
         db = {
