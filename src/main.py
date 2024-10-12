@@ -55,6 +55,7 @@ def launch_window(lang: str):
     # Setting default color preview circle
     T1_preview = window0['T1_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
     T3_preview = window0['T3_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
+    dinkinesh_counter = 0 # for green Dinkinesh Easter egg
 
     # Setting plots templates
     light_theme = False
@@ -246,6 +247,14 @@ def launch_window(lang: str):
                     window['T1_hex'].update(T1_rgb_show)
                     T1_filter = get_filter(values['T1_filter'])
                     window['T1_convolved'].update(sigfig_round(T1_spectrum.define_on_range(T1_filter.nm)@T1_filter, rounding, warn=False))
+
+                    # Green Dinkinesh Easter egg (added by request)
+                    # There was a bug caused by upper limit of uint16 when squaring nm for AB calibration
+                    if T1_spectrum.name.name() == 'Dinkinesh':
+                        dinkinesh_counter += 1
+                        if dinkinesh_counter >= 2:
+                            window['T1_graph'].TKCanvas.itemconfig(T1_preview, fill='#7f9000')
+                            window['T1_albedo_note'].update('Easter egg! Values below are correct.')
 
                     # Dynamical plotting
                     if window1:
