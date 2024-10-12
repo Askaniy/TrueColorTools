@@ -166,9 +166,9 @@ class ObjectName:
 # But too long and heterogeneous FITS files demanded to set the upper limit of the range to mid-wavelength infrared (3 μm).
 nm_red_limit = 3000 # nm
 # Actually, dtype=uint16 is used to store wavelength. It's possible to set the limit to 65535 nm with no compression,
-# and to 327 675 nm with 5 nm compression.
+# (and up to 327 675 nm with compression by 5 nm step, but it was not implemented).
 
-# For the sake of simplifying work with the spectrum, its discretization step in only 5 nm.
+# For the sake of simplifying work with the spectrum, its discretization step is fixed.
 nm_step = 5 # nm
 
 # To calculate color, it is necessary to achieve a definition of the spectrum in the visible range.
@@ -823,7 +823,8 @@ class _PhotospectralObject(_TrueColorToolsObject):
         to energy spectral density, using the fact that f_λ = f_ν c / λ².
         """
         profiles = self.filter_system.normalize()
-        scale_factors = (profiles / profiles.nm**2).integrate()
+        nm = profiles.nm.astype('uint32') # works up to 46.34 micrometers, can be replaced with 'float' if needed
+        scale_factors = (profiles / (nm*nm)).integrate()
         return self * scale_factors
     
     def mean_nm(self) -> np.ndarray[np.floating]:
@@ -1059,7 +1060,7 @@ class ReflectiveBody:
 
 def _create_TCT_object(
         name: ObjectName, nm: Sequence[int|float], filters: Sequence[str], br: Sequence,
-        sd: Sequence = None, calib: str = None, sun: bool = False
+        sd: Sequence = None, filter_system: str = None, calib: str = None, sun: bool = False
     ):
     """
     Decides whether we are dealing with photospectrum or continuous spectrum
@@ -1068,7 +1069,7 @@ def _create_TCT_object(
     if len(nm) > 0:
         TCT_obj = Spectrum.from_array(nm, br, sd, name=name)
     elif len(filters) > 0:
-        TCT_obj = Photospectrum(FilterSystem.from_list(filters), br, sd, name=name)
+        TCT_obj = Photospectrum(FilterSystem.from_list(filters, name=filter_system), br, sd, name=name)
     else:
         print(f'# Note for the database object "{name}"')
         print(f'- No wavelength data. Spectrum stub object was created.')
@@ -1116,6 +1117,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
     sd = None
     nm = [] # Spectrum object indicator
     filters = [] # Photospectrum object indicator
+    filter_system = None
     if 'file' in content:
         try:
             nm, br, sd = di.file_reader(content['file'])
@@ -1155,7 +1157,8 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
             filters, br, sd = aux.color_indices_parser(content['color_indices'])
         if 'photometric_system' in content:
             # regular filter if name is string, else "delta-filter" (wavelength)
-            filters = [f'{content["photometric_system"]}.{short_name}' if isinstance(short_name, str) else short_name for short_name in filters]
+            filter_system = content['photometric_system']
+            filters = [f'{filter_system}.{short_name}' if isinstance(short_name, str) else short_name for short_name in filters]
     calib = content['calibration_system'] if 'calibration_system' in content else None
     sun = 'sun_is_emitter' in content and content['sun_is_emitter']
     geometric = spherical = None
@@ -1163,7 +1166,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
         if 'br_geometric' in content:
             br_geom = content['br_geometric']
             sd_geom = aux.higher_dim(content['sd_geometric'], len(br_geom), axis=0) if 'sd_geometric' in content else None
-            geometric = _create_TCT_object(name, nm, filters, br_geom, sd_geom, calib, sun)
+            geometric = _create_TCT_object(name, nm, filters, br_geom, sd_geom, filter_system, calib, sun)
             if 'spherical_albedo' in content:
                 where, how = content['spherical_albedo']
                 spherical = geometric.scaled_at(where, *aux.parse_value_sd(how))
@@ -1172,7 +1175,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
         if 'br_spherical' in content:
             br_sphe = content['br_spherical']
             sd_sphe = aux.higher_dim(content['sd_spherical'], len(br_sphe), axis=0) if 'sd_spherical' in content else None
-            spherical = _create_TCT_object(name, nm, filters, br_sphe, sd_sphe, calib, sun)
+            spherical = _create_TCT_object(name, nm, filters, br_sphe, sd_sphe, filter_system, calib, sun)
             if 'geometric_albedo' in content:
                 where, how = content['geometric_albedo']
                 geometric = spherical.scaled_at(where, *aux.parse_value_sd(how))
@@ -1181,7 +1184,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
             print(f'- No brightness data. Spectrum stub object was created.')
             TCT_obj = Spectrum.stub(name)
     else:
-        TCT_obj = _create_TCT_object(name, nm, filters, br, sd, calib, sun)
+        TCT_obj = _create_TCT_object(name, nm, filters, br, sd, filter_system, calib, sun)
         # Non-specific albedo parsing
         if 'albedo' in content:
             if isinstance(content['albedo'], bool) and content['albedo']:
