@@ -47,7 +47,7 @@ def draw_figure(canvas, figure: Figure):
 def plot_spectra(spectra: Sequence, gamma: bool, srgb: bool, albedo: bool, light_theme: bool, lang: str):
     """ Creates a figure with plotted spectra from the input list and the CMFs used """
     with rc_context(themes[int(light_theme)]):
-        fig, ax = plt.subplots(1, 1, figsize=(8, 4), dpi=100)
+        fig, ax = plt.subplots(1, 1, figsize=(9, 5), dpi=90)
         ax.set_xlabel(tr.xaxis_text[lang])
         ax.set_ylabel(tr.yaxis_text[lang])
         # Determining the scale for CMFs in the background
@@ -61,7 +61,7 @@ def plot_spectra(spectra: Sequence, gamma: bool, srgb: bool, albedo: bool, light
             ax.plot(cmf.nm, cmf.br * k, label=cmf.name(lang), color=rgb_muted[i])
         # Color calculating and plotting
         for spectral_data in spectra:
-            color = ColorPoint.from_spectral_data(spectrum, albedo, srgb)
+            color = ColorPoint.from_spectral_data(spectral_data, albedo, srgb)
             if gamma:
                 color = color.gamma_corrected()
             spectrum = spectral_data.define_on_range(visible_range)

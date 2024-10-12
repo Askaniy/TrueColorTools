@@ -595,6 +595,39 @@
             0.446, 0.447, 0.448, 0.449, 0.449, 0.450, 0.450, 0.450, 0.449, 0.449, 0.448, 0.447
         ],
     },
+    // Hyperion
+    'Thomas1985': [
+        'Hyperion: Analysis of Voyager observations',
+        'DOI: 10.1016/0019-1035(85)90065-X', 'https://www.sciencedirect.com/science/article/abs/pii/001910358590065X',
+        'https://ui.adsabs.harvard.edu/abs/1985Icar...64..414T/abstract'
+    ],
+    'Klavetter1989': [
+        'Rotation of Hyperion. I. Observations',
+        'DOI: 10.1086/115006', 'https://ui.adsabs.harvard.edu/abs/1989AJ.....97..570K/abstract'
+    ],
+    'Hyperion (S VII) | Thomas1985, Klavetter1989': {
+        tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
+        photometric_system: 'Voyager_ISS-NAC',
+        filters: ['UV', 'Violet', 'Clear', 'Blue', 'Green', 'Orange'],
+        br: [0.54, 0.65, 0.82, 0.85, 1.00, 1.04],
+        sd: [0.02, 0.04, 0.01, 0.03, 0, 0.03],
+        geometric_albedo: ['Voyager_ISS-NAC.Clear', [0.214, 0.006]], // normal reflectance
+        phase_function: ['HG', {H: [13.81, 0.05], G: [0.56, 0.14]}]
+    },
+    'Hicks2008': [
+        'BVR photometry of Hyperion near the time of the 2005 Cassini encounter',
+        'DOI: 10.1016/j.icarus.2007.06.021', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103507002990',
+        'https://ui.adsabs.harvard.edu/abs/2008Icar..193..352H/abstract'
+    ],
+    'Hyperion (S VII) | Hicks2008, Thomas1985, Klavetter1989': {
+        tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.798, 0.030], 'V-R': [0.438, 0.031]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Voyager_ISS-NAC.Clear', [0.214, 0.006]], // normal reflectance
+        phase_function: ['HG', {H: [13.81, 0.05], G: [0.56, 0.14]}]
+    },
     // Iapetus
     'Gudipati2003': [
         'Luminescence from Vacuum-Ultraviolet-irradiated Cosmic Ice Analogs and Residues',

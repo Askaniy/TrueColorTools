@@ -68,9 +68,9 @@ def launch_window(lang: str):
         pl.close_figure(fig)
         fig_canvas_agg.get_tk_widget().forget()
         to_plot = deepcopy(plot_data)
-        if current_tab == 'tab1' and T1_obj_name:
+        if current_tab == 'tab1' and T1_obj_name and T1_spectrum not in to_plot:
             to_plot.append(T1_spectrum)
-        if current_tab == 'tab3' and T3_obj_name:
+        if current_tab == 'tab3' and T3_obj_name and T3_spectrum not in to_plot:
             to_plot.append(T3_spectrum)
         fig = pl.plot_spectra(to_plot, gamma, srgb, albedo, light_theme, lang)
         fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, fig)
@@ -102,9 +102,9 @@ def launch_window(lang: str):
                 pl.close_figure(T1_T3_fig)
                 T1_T3_fig_canvas_agg.get_tk_widget().forget()
             to_plot = deepcopy(plot_data)
-            if T1_obj_name:
+            if T1_obj_name and T1_spectrum not in to_plot:
                 to_plot.append(T1_spectrum)
-            if T3_obj_name:
+            if T3_obj_name and T3_spectrum not in to_plot:
                 to_plot.append(T3_spectrum)
             T1_T3_fig = pl.plot_spectra(to_plot, values['-gamma-'], values['-srgb-'], values['-brMax-'], light_theme, lang)
             T1_T3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, T1_T3_fig)
@@ -262,7 +262,8 @@ def launch_window(lang: str):
                     window['T1_list'].update(tuple(T1_displayed_namesDB.keys()))
                 
                 elif event == 'T1_pin' and values['T1_list'] != []:
-                    plot_data.append(T1_spectrum)
+                    if T1_spectrum not in plot_data:
+                        plot_data.append(T1_spectrum)
                 
                 elif event == 'T1_clear':
                     plot_data = []
@@ -411,7 +412,8 @@ def launch_window(lang: str):
                     window['T3_slider1'].update(range=(0, int(values['T3_maxtemp_num'])))
                 
                 elif event == 'T3_pin':
-                    plot_data.append(T3_spectrum)
+                    if T3_spectrum not in plot_data:
+                        plot_data.append(T3_spectrum)
                 
                 elif event == 'T3_clear':
                     plot_data = []

@@ -146,7 +146,7 @@ class ObjectName:
         return input if isinstance(input, ObjectName) else ObjectName(input)
     
     def __hash__(self) -> int:
-        """ Returns the hash value of the object """
+        """ Returns the hash value based on the object's raw name """
         return hash(self.raw_name)
     
     def __eq__(self, other) -> bool:
@@ -178,6 +178,7 @@ visible_range = np.arange(390, 780, nm_step) # nm
 
 class _TrueColorToolsObject:
     """ Internal class for inheriting spectral data properties """
+    name = ''
     br = np.empty(0)
     sd = None
     
@@ -242,6 +243,16 @@ class _TrueColorToolsObject:
         if isinstance(other, int|float|np.ndarray):
             return self.apply_linear_operator(truediv, other)
         return NotImplemented
+    
+    def __hash__(self) -> int:
+        """ Returns the hash value based on the object's name """
+        return hash(self.name)
+    
+    def __eq__(self, other) -> bool:
+        """ Checks equality with another TrueColorToolsObject instance """
+        if isinstance(other, _TrueColorToolsObject):
+            return self.name == other.name
+        return False
 
 
 class _SpectralObject(_TrueColorToolsObject):
