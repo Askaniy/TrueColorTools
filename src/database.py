@@ -45,19 +45,20 @@ def import_folder(folder: str):
 
 # Imported database iterators
 
-def is_tag_in_obj(tag: str, obj_tags: Sequence[str]) -> bool:
+def is_tag_in_obj(tag: str, obj_data: dict[str]) -> bool:
     """ Search for a tag in a list that handles subcategories """
-    tag = set(tag.split('/'))
-    for obj_tag in obj_tags:
-        if tag.issubset(obj_tag.split('/')):
-            return True
+    if 'tags' in obj_data:
+        tag = set(tag.split('/'))
+        for obj_tag in obj_data['tags']:
+            if tag.issubset(obj_tag.split('/')):
+                return True
     return False
 
 def obj_names_dict(database: dict[ObjectName, dict[str]], tag: str, lang: str) -> dict[str, ObjectName]:
     """ Matches the front-end names with the ObjectName for the selected tag """
     names = {}
     for obj_name, obj_data in database.items():
-        if tag == 'ALL' or is_tag_in_obj(tag, obj_data['tags']):
+        if tag == 'ALL' or is_tag_in_obj(tag, obj_data):
             names |= {obj_name(lang): obj_name}
     return names
 
@@ -65,7 +66,7 @@ def obj_names_list(database: dict[ObjectName, dict[str]], tag: str) -> list[Obje
     """ Lists the names of eligible objects """
     names = []
     for obj_name, obj_data in database.items():
-        if tag == 'ALL' or is_tag_in_obj(tag, obj_data['tags']):
+        if tag == 'ALL' or is_tag_in_obj(tag, obj_data):
             names.append(obj_name)
     return names
 

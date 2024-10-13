@@ -34,7 +34,7 @@
         file: 'spectra/files/Krisciunas2017/hr4853_blue_fin.txtA'
     },
     'Mirzam (B1 II-III) | Krisciunas2017': {
-        tags: ['extrasolar', 'star/II bright giant', 'star/III giant'],
+        tags: ['featured', 'extrasolar', 'star/II bright giant', 'star/III giant'],
         file: 'spectra/files/Krisciunas2017/hr2294_final.txtA'
     },
     'Adhara (B2 II) | Krisciunas2017': {
@@ -70,7 +70,7 @@
         file: 'spectra/files/Krisciunas2017/hr3685_final.txtA'
     },
     'Canopus (A9 II) | Krisciunas2017': {
-        tags: ['extrasolar', 'star/II bright giant'],
+        tags: ['featured', 'extrasolar', 'star/II bright giant'],
         file: 'spectra/files/Krisciunas2017/hr2326_final.txtA'
     },
     'Alchiba (F1 V) | STIS_NGSLv2': {
@@ -78,7 +78,7 @@
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd105452_v2.txtA'
     },
     'Procyon (F5 IV-V) | Krisciunas2017': {
-        tags: ['extrasolar', 'star/IV subgiant', 'star/V dwarf'],
+        tags: ['featured', 'extrasolar', 'star/IV subgiant', 'star/V dwarf'],
         file: 'spectra/files/Krisciunas2017/hr2943_final.txtA'
     },
     'Wezen (F8 Ia) | Krisciunas2017': {
@@ -110,7 +110,7 @@
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd185144_v2.txtA'
     },
     'Ran (K2 V) | STIS_NGSLv2': {
-        tags: ['extrasolar', 'star/V dwarf'],
+        tags: ['featured', 'extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd022049_v2.txtA'
     },
     'Alphard (K3 II-III) | Krisciunas2017': {
@@ -126,11 +126,11 @@
         file: 'spectra/files/Krisciunas2017/hr3634_blue_fin.txtA'
     },
     '61 Cygni A (K5 V) | STIS_NGSLv2': {
-        tags: ['extrasolar', 'star/V dwarf'],
+        tags: ['featured', 'extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd201091_v2.txtA'
     },
     '61 Cygni B (K7 V) | STIS_Pal2023': {
-        tags: ['extrasolar', 'star/V dwarf'],
+        tags: ['featured', 'extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_Pal2023/HR8086.txtA'
     },
     'LHS 489 (esdM0) | Reid2000': {
@@ -142,7 +142,7 @@
         file: 'spectra/files/Krisciunas2017/hr2061_final.txtA'
     },
     'Gliese 411 (M2 V) | STIS_NGSLv2': {
-        tags: ['extrasolar', 'star/V dwarf'],
+        tags: ['featured', 'extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd095735_v2.txtA'
     },
     'Gacrux (M3.5 III) | Krisciunas2017': {
@@ -158,27 +158,27 @@
         file: 'spectra/files/Reid2000/LHS375.txt'
     },
     'Proxima Centauri (M5.5 Ve) | Ribas2017': {
-        tags: ['extrasolar', 'star/V dwarf'],
+        tags: ['featured', 'extrasolar', 'star/V dwarf'],
         file: 'spectra/files/ProximaCentauri_Ribas2017.fit'
     },
     'UV Ceti (M6 V) | STIS_NGSLv2': {
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_lhs10_v2.txtA'
     },
-    "BRI0021-0214 (M9.5) | Reid2000": {
+    'BRI0021-0214 (M9.5) | Reid2000': {
         tags: ['extrasolar', 'star/ultra-cool dwarf'],
         file: 'spectra/files/Reid2000/BRI0021.txt'
     },
-    "2MASSW J0746425+200032 (L0.5) | Reid2000": {
-        tags: ['extrasolar', 'star/ultra-cool dwarf'],
+    '2MASSW J0746425+200032 (L0.5) | Reid2000': {
+        tags: ['featured', 'extrasolar', 'star/ultra-cool dwarf'],
         file: 'spectra/files/Reid2000/2M0746.txt'
     },
-    "2MASSW J0036159+182110 (L3.5) | Reid2000": {
-        tags: ['extrasolar', 'star/ultra-cool dwarf'],
+    '2MASSW J0036159+182110 (L3.5) | Reid2000': {
+        tags: ['featured', 'extrasolar', 'star/ultra-cool dwarf'],
         file: 'spectra/files/Reid2000/2M0036.txt'
     },
-    "2MASSW J1507476-162738 (L5) | Reid2000": {
-        tags: ['extrasolar', 'star/ultra-cool dwarf'],
+    '2MASSW J1507476-162738 (L5) | Reid2000': {
+        tags: ['featured', 'extrasolar', 'star/ultra-cool dwarf'],
         file: 'spectra/files/Reid2000/2M1507.txt'
     }
 }

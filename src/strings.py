@@ -539,8 +539,8 @@ names = {
     'Tethys': {'ru': 'Тефия', 'de': 'Tethys'},
     'Dione': {'ru': 'Диона', 'de': 'Dione'},
     'Rhea': {'ru': 'Рея', 'de': 'Rhea'},
-    'Titania': {'ru': 'Титания', 'de': 'Titania'},
     'Titan': {'ru': 'Титан', 'de': 'Titan'},
+    'Hyperion': {'ru': 'Гиперион', 'de': 'Hyperion'},
     'Iapetus': {'ru': 'Япет', 'de': 'Iapetus'},
     # Saturnian irregulars
     'Phoebe': {'ru': 'Феба', 'de': 'Phoebe'},
@@ -573,6 +573,7 @@ names = {
     'Miranda': {'ru': 'Миранда', 'de': 'Miranda'},
     'Ariel': {'ru': 'Ариэль', 'de': 'Ariel'},
     'Umbriel': {'ru': 'Умбриэль', 'de': 'Umbriel'},
+    'Titania': {'ru': 'Титания', 'de': 'Titania'},
     'Oberon': {'ru': 'Оберон', 'de': 'Oberon'},
     # Uranian irregulars
     'Caliban': {'ru': 'Калибан', 'de': 'Caliban'},
@@ -676,6 +677,7 @@ names = {
     'Hale–Bopp': {'ru': 'Хейла — Боппа', 'de': 'Hale–Bopp'},
     'ʻOumuamua': {'ru': 'Оумуамуа', 'de': 'ʻOumuamua'},
     # Classes
+    'Class': {'ru': 'Класс', 'de': 'Klasse'},
     'Spectral type': {'ru': 'Спектральный класс', 'de': 'Spektraltyp'},
     'Jovian irregulars': {'ru': 'Нерегулярные спутники Юпитера', 'de': 'irreguläre Jupitermonde'},
     'Saturnian irregulars': {'ru': 'Нерегулярные спутники Сатурна', 'de': 'irreguläre Saturnmonde'},
