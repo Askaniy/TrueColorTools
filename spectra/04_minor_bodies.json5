@@ -1226,8 +1226,8 @@
         sun_is_emitter: true
     },
     '(28978) Ixion | Marchi2003, Verbiscer2022': {
-        tags: ['featured', 'Solar System', 'minor body/TNO/plutino', 'minor body/TNO/midsize TNO', 'traced spectrum'],
-        file: 'spectra/files/Marchi2003/Ixion.txtU',
+        tags: ['featured', 'Solar System', 'minor body/TNO/plutino', 'minor body/TNO/midsize TNO'],
+        file: 'spectra/files/Marchi2003/Ixion.txt',
         geometric_albedo: ['Generic_Bessell.V', [0.108, 0.002]],
         spherical_albedo: ['Generic_Bessell.V', [0.037, 0.007]],
     },
@@ -1468,8 +1468,8 @@
         'https://ui.adsabs.harvard.edu/abs/2023A%26A...673L...4P/abstract'
     ],
     '(50000) Quaoar | Marchi2003, Pereira2023, Verbiscer2022': {
-        tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO', 'traced spectrum'],
-        file: 'spectra/files/Marchi2003/Quaoar.txtU',
+        tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
+        file: 'spectra/files/Marchi2003/Quaoar.txt',
         geometric_albedo: ['Generic_Bessell.V', [0.124, 0.006]],
         phase_integral: [0.52, 0.01],
     },
@@ -1865,8 +1865,8 @@
         'https://ui.adsabs.harvard.edu/abs/2005A%26A...437.1115D/abstract'
     ],
     '(90482) Orcus | deBergh2005, Brown2018': {
-        tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'traced spectrum'],
-        file: 'spectra/files/Orcus_deBergh2005.txtU',
+        tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino'],
+        file: 'spectra/files/Orcus_deBergh2005.txt',
         geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
     },
     '(90482) Orcus | MBOSS, Brown2018': {
