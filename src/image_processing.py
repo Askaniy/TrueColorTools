@@ -23,9 +23,9 @@ def image_parser(
         formulas: list = None,
         gamma_correction: bool = True,
         srgb: bool = False,
+        maximize_brightness: bool = False,
         desun: bool = False,
         photons: bool = False,
-        makebright: bool = False,
         factor: float = 1.,
         enlarge: bool = True,
         log: Callable = print
@@ -35,62 +35,35 @@ def image_parser(
     start_time = monotonic()
     try:
         match image_mode:
-            # Multiband image
-            case 0:
+            case 0: # Multiband image
                 files = np.array(files)
                 not_empty_files = np.where(files != '')
                 files = files[not_empty_files]
                 filters = np.array(filters)[not_empty_files]
                 formulas = np.array(formulas)[not_empty_files]
-                log(f'Importing the images')
+                log('Importing the images')
                 cube = PhotospectralCube(filters, ii.bw_list_reader(files, formulas))
-                if preview_flag:
-                    log('Down scaling')
-                    cube = cube.downscale(pixels_limit)
-                if photons:
-                    log('Converting photon spectral density to energy density')
-                    cube = cube.convert_from_photon_spectral_density()
-                if desun:
-                    log('Removing Sun as emitter')
-                    cube /= sun_norm
-                log('Interpolating and extrapolating')
-                cube = cube.define_on_range(visible_range)
-                log('Color calculating')
-                img = cube2img(cube, gamma_correction, srgb, makebright, factor)
-            # RGB image
-            case 1:
-                log(f'Importing the RGB image')
+            case 1: # RGB image
+                log('Importing the RGB image')
                 cube = PhotospectralCube(filters, ii.rgb_reader(single_file, formulas))
-                if preview_flag:
-                    log('Down scaling')
-                    cube = cube.downscale(pixels_limit)
-                if photons:
-                    log('Converting photon spectral density to energy density')
-                    cube = cube.convert_from_photon_spectral_density()
-                if desun:
-                    log('Removing Sun as emitter')
-                    cube /= sun_norm
-                log('Interpolating and extrapolating')
-                cube = cube.define_on_range(visible_range)
-                log('Color calculating')
-                img = cube2img(cube, gamma_correction, srgb, makebright, factor)
-            # Spectral cube
-            case 2:
+            case 2: # Spectral cube
                 log('Importing the spectral cube (only the first loading is slow)')
                 cube = SpectralCube.from_file(single_file)
-                if preview_flag:
-                    log('Down scaling')
-                    cube = cube.downscale(pixels_limit)
-                if photons:
-                    log('Converting photon spectral density to energy density')
-                    cube = cube.convert_from_photon_spectral_density()
-                if desun:
-                    log('Removing Sun as emitter')
-                    cube /= sun_norm
-                log('Extrapolating')
-                cube = cube.define_on_range(visible_range)
-                log('Color calculating')
-                img = cube2img(cube, gamma_correction, srgb, makebright, factor)
+        if preview_flag:
+            log('Down scaling')
+            cube = cube.downscale(pixels_limit)
+        if photons:
+            log('Converting photon spectral density to energy density')
+            cube = cube.convert_from_photon_spectral_density()
+        if desun:
+            log('Removing Sun as emitter')
+            cube /= sun_norm
+        log('Color calculating')
+        img = ColorImage.from_spectral_data(cube, maximize_brightness, srgb) # sRGB is not supported!
+        img.br = np.clip(img.br * factor, 0, 1)
+        if gamma_correction:
+            img = img.gamma_corrected()
+        img = Image.fromarray((255 * img.br).astype('uint8').transpose())
         time = monotonic() - start_time
         pixels_num = img.width * img.height
         speed = pixels_num / time
@@ -105,16 +78,6 @@ def image_parser(
     except Exception:
         log(f'Image processing failed with {format_exc(limit=0).strip()}')
         print(format_exc())
-
-def cube2img(cube: SpectralCube, gamma_correction: bool, srgb: bool, makebright: bool, factor: float):
-    """ Creates a Pillow image from the spectral cube """
-    # TODO: add CIE white points support
-    _, x, y = cube.br.shape
-    img = ColorImage(cube.br, makebright)
-    img.br = np.clip(img.br * factor, 0, 1)
-    if gamma_correction:
-        img = img.gamma_corrected()
-    return Image.fromarray((255 * img.br).astype('uint8').transpose())
 
 def convert_to_bytes(img: Image.Image):
     """ Prepares PIL's image to be displayed in the window """

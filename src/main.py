@@ -100,7 +100,7 @@ def launch_window(lang: str):
         elif isinstance(event, str) and event.endswith('plot'):
             if not window1:
                 window1 = sg.Window(
-                    tr.spectral_plot[lang], gui.generate_plot_layout(lang, light_theme), icon=gui.icon,
+                    tr.spectral_plot[lang], gui.generate_plot_layout(lang, light_theme), icon=icon,
                     finalize=True, element_justification='center'
                 )
             else:
@@ -163,7 +163,7 @@ def launch_window(lang: str):
             
             if event == tr.gui_ref[lang]:
                 if len(refsDB) == 0:
-                    sg.popup(tr.gui_no_data_message[lang], title=event, icon=gui.icon, non_blocking=True)
+                    sg.popup(tr.gui_no_data_message[lang], title=event, icon=icon, non_blocking=True)
                 else:
                     to_show = ''
                     for key, value in refsDB.items():
@@ -171,10 +171,10 @@ def launch_window(lang: str):
                         for info in value[1:]:
                             to_show += info + '\n'
                         to_show += '\n'
-                    sg.popup_scrolled(to_show, title=event, size=(150, 25), icon=gui.icon, non_blocking=True)
+                    sg.popup_scrolled(to_show, title=event, size=(150, 25), icon=icon, non_blocking=True)
             
             elif event == tr.gui_info[lang]:
-                sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event, icon=gui.icon, non_blocking=True)
+                sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event, icon=icon, non_blocking=True)
             
             # Checks for empty input
             elif event == '-bitness-':
@@ -297,7 +297,7 @@ def launch_window(lang: str):
                 
                 elif event == 'T1_export2text':
                     if len(objectsDB) == 0:
-                        sg.popup(tr.gui_no_data_message[lang], title=tr.gui_output[lang], icon=gui.icon, non_blocking=True)
+                        sg.popup(tr.gui_no_data_message[lang], title=tr.gui_output[lang], icon=icon, non_blocking=True)
                     else:
                         T1_export = '\n' + '\t'.join(tr.gui_col[lang]) + '\n' + '_' * 36
                         for obj_name in T1_displayed_namesDB.values():
@@ -320,12 +320,12 @@ def launch_window(lang: str):
 
                         sg.popup_scrolled(
                             T1_export, title=tr.gui_output[lang], size=(100, max(10, min(30, 3+len(objectsDB)))),
-                            font=('Consolas', 10), icon=gui.icon, non_blocking=True
+                            font=('Consolas', 10), icon=icon, non_blocking=True
                         )
                 
                 elif event == 'T1_folder':
                     if len(objectsDB) == 0:
-                        sg.popup(tr.gui_no_data_message[lang], title=tr.gui_output[lang], icon=gui.icon, non_blocking=True)
+                        sg.popup(tr.gui_no_data_message[lang], title=tr.gui_output[lang], icon=icon, non_blocking=True)
                     else:
                         generate_table(
                             objectsDB, values['T1_tags'], values['-brMax-'], values['-brMode1-'],
@@ -339,16 +339,15 @@ def launch_window(lang: str):
                 # Getting input data mode name
                 T2_mode = aux.get_flag_index((values['-typeImage-'], values['-typeImageRGB-'], values['-typeImageCube-']))
 
-                # Setting template for the bandpass frames list
-                if T2_mode == 2: # Spectral cube
+                if T2_mode == 2:
+                    # No visible frames in spectral cube mode
                     window['T2_frames'].update(visible=False)
                 else:
+                    # The number of visible frames for RGB image (T2_mode==1) is 3,
+                    # otherwise all possible frames are displayed
                     window['T2_frames'].update(visible=True)
-                    match T2_mode:
-                        case 0: # Multiband image
-                            T2_vis = T2_num
-                        case 1: # RGB image
-                            T2_vis = 3
+                    T2_vis = 3 if T2_mode else T2_num
+                    # Setting the visibility and elements
                     for i in range(T2_num):
                         if i < T2_vis:
                             window[f'T2_band{i}'].update(visible=True)
@@ -390,9 +389,9 @@ def launch_window(lang: str):
                             formulas=T2_formulas,
                             gamma_correction=values['-gamma-'],
                             srgb=values['-srgb-'],
+                            maximize_brightness=values['-brMax-'],
                             desun=values['T2_desun'],
                             photons=values['T2_photons'],
-                            makebright=values['T2_makebright'],
                             factor=float(values['T2_factor']),
                             enlarge=values['T2_enlarge'],
                             log=T2_logger

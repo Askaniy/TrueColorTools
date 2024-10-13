@@ -371,7 +371,7 @@ class _SpectralObject(_TrueColorToolsObject):
         Returns a new SpectralObject converted from frequency spectral density
         to energy spectral density, using the fact that f_λ = f_ν c / λ².
         """
-        return (self / self.nm**2).normalize()
+        return (self / self.nm / self.nm).normalize() # squaring nm will overflow uint16
     
     def mean_spectrum(self):
         """ Returns the mean spectrum along the spatial axes """
@@ -815,7 +815,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
         """
         profiles = self.filter_system.normalize()
         scale_factors = (profiles / profiles.nm).integrate()
-        return self * scale_factors
+        return self * (scale_factors / scale_factors.mean())
     
     def convert_from_frequency_spectral_density(self):
         """
@@ -823,9 +823,8 @@ class _PhotospectralObject(_TrueColorToolsObject):
         to energy spectral density, using the fact that f_λ = f_ν c / λ².
         """
         profiles = self.filter_system.normalize()
-        nm = profiles.nm.astype('uint32') # works up to 46.34 micrometers, can be replaced with 'float' if needed
-        scale_factors = (profiles / (nm*nm)).integrate()
-        return self * scale_factors
+        scale_factors = (profiles / profiles.nm / profiles.nm).integrate() # squaring nm will overflow uint16
+        return self * (scale_factors / scale_factors.mean())
     
     def mean_nm(self) -> np.ndarray[np.floating]:
         """ Returns an array of mean wavelengths for each filter """
@@ -1308,10 +1307,10 @@ class ColorImage:
             self.br /= self.br.max()
 
     @staticmethod
-    def from_spectral_data(spectral_cube: SpectralCube, maximize_brightness=True, srgb=False):
-        """ Convolves the spectral cube with one of the available CMF systems """
-        # TODO: add sRGB support for images!
-        return ColorImage((spectral_cube @ rgb_cmf).br, maximize_brightness)
+    def from_spectral_data(cube: SpectralCube|PhotospectralCube, maximize_brightness=True, srgb=False):
+        """ Convolves the (photo)spectral cube with one of the available CMF systems """
+        # TODO: add sRGB support for images! Like in ColorPoint
+        return ColorImage((cube @ rgb_cmf).br, maximize_brightness)
 
     def gamma_corrected(self):
         """ Creates a new Color object with applied gamma correction """
@@ -1331,18 +1330,18 @@ class ColorPoint(ColorImage):
     """
 
     @staticmethod
-    def from_spectral_data(spectrum: Spectrum, maximize_brightness=True, srgb=False):
-        """ Convolves the spectrum with one of the available CMF systems """
+    def from_spectral_data(data: Spectrum|Photospectrum, maximize_brightness=True, srgb=False):
+        """ Convolves the (photo)spectrum with one of the available CMF systems """
         if srgb:
-            xyz = (spectrum @ xyz_cmf).br
+            xyz = (data @ xyz_cmf).br
             rgb = srgb_system.T.dot(xyz)
             if np.any(rgb < 0):
-                print(f'# Note for the Color object "{spectrum.name}"')
+                print(f'# Note for the Color object "{data.name}"')
                 print(f'- RGB derived from XYZ turned out to be outside the color space: rgb={rgb}')
                 rgb -= rgb.min()
                 print(f'- Approximating by desaturating: rgb={rgb}')
         else:
-            rgb = (spectrum @ rgb_cmf).br
+            rgb = (data @ rgb_cmf).br
         return ColorPoint(rgb, maximize_brightness)
 
     def to_bit(self, bit: int) -> np.ndarray:
