@@ -216,7 +216,6 @@ def generate_layout(
             sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation='h', size=slider_size, enable_events=True, key='T3_slider3', expand_x=True)
         ],
         [sg.T()],
-        [sg.Checkbox(tr.gui_overexposure[lang], enable_events=True, default=False, key='T3_overexposure')],
         [
             sg.Text(tr.gui_mag[lang], size=18, text_color=text_colors[0], justification='right', key='T3_mag'),
             sg.Slider(range=(-50, 0), default_value=-26.7, resolution=0.1, orientation='h', size=slider_size, enable_events=True, disabled=True, key='T3_slider4', expand_x=True)
@@ -327,7 +326,6 @@ def translate_win0(window: sg.Window, T2_vis: int, lang: str):
     window['T3_velocity'].update(tr.gui_velocity[lang])
     window['T3_vII'].update(tr.gui_vII[lang])
     window['T3_mag'].update(tr.gui_mag[lang])
-    window['T3_overexposure'].update(text=tr.gui_overexposure[lang])
     window['T3_explanation'].update(tr.gui_explanation[lang])
     window['T3_colorRGB'].update(tr.gui_rgb[lang])
     window['T3_colorHEX'].update(tr.gui_hex[lang])

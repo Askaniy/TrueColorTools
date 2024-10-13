@@ -55,7 +55,6 @@ def launch_window(lang: str):
     # Setting default color preview circle
     T1_preview = window0['T1_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
     T3_preview = window0['T3_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
-    dinkinesh_counter = 0 # for green Dinkinesh Easter egg
 
     # Setting plots templates
     light_theme = False
@@ -77,8 +76,9 @@ def launch_window(lang: str):
         fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, fig)
         return fig, fig_canvas_agg
     
-    # List of settings events that cause color recalculation
-    triggers = ('-gamma-', '-srgb-', '-brMax-', '-brMode1-', '-brMode2-', '-bitness-', '-rounding-')
+    # List of events that cause color recalculation
+    T1_triggers = ('-gamma-', '-srgb-', '-brMax-', '-brMode1-', '-brMode2-', '-bitness-', '-rounding-', 'T1_list', 'T1_filter')
+    T3_triggers = ('-gamma-', '-srgb-', '-brMax-', '-bitness-', '-rounding-', 'T3_slider1', 'T3_slider2', 'T3_slider3', 'T3_slider4')
 
     # Window events loop
     while True:
@@ -118,7 +118,8 @@ def launch_window(lang: str):
                 window0.ReturnValuesDictionary['-currentTab-'],
                 window0.ReturnValuesDictionary['-gamma-'],
                 window0.ReturnValuesDictionary['-srgb-'],
-                window0.ReturnValuesDictionary['-brMax-'], light_theme, lang
+                window0.ReturnValuesDictionary['-brMax-'],
+                light_theme, lang
             )
 
         # Run-time translation
@@ -147,7 +148,8 @@ def launch_window(lang: str):
                     window0.ReturnValuesDictionary['-currentTab-'],
                     window0.ReturnValuesDictionary['-gamma-'],
                     window0.ReturnValuesDictionary['-srgb-'],
-                    window0.ReturnValuesDictionary['-brMax-'], light_theme, lang
+                    window0.ReturnValuesDictionary['-brMax-'],
+                    light_theme, lang
                 )
         
         # Only the main window events
@@ -197,7 +199,7 @@ def launch_window(lang: str):
             # ------------ Events in the tab "Database viewer" ------------
 
             if values['-currentTab-'] == 'tab1':
-            
+                
                 if event in ('T1_load', 'T1_reload'):
                     # Loading of the spectra database
 
@@ -219,7 +221,11 @@ def launch_window(lang: str):
                         window['T1_list'].update(values=tuple(T1_displayed_namesDB.keys()), visible=True)
                         window['T1_reload'].update(tr.gui_reload[lang], visible=True)
 
-                elif (event in triggers or event == 'T1_list' or event == 'T1_filter') and values['T1_list'] != []:
+                elif event in T1_triggers and values['T1_list'] != []:
+
+                    # for green Dinkinesh Easter egg
+                    last_click_was_Dinkinesh = event == 'T1_list' and T1_spectrum is not None and T1_spectrum.name.name() == 'Dinkinesh'
+
                     T1_obj_name = namesDB[lang][values['T1_list'][0]]
                     window['T1_title2'].update(T1_obj_name.indexed_name(lang))
 
@@ -249,12 +255,10 @@ def launch_window(lang: str):
                     window['T1_convolved'].update(sigfig_round(T1_spectrum.define_on_range(T1_filter.nm)@T1_filter, rounding, warn=False))
 
                     # Green Dinkinesh Easter egg (added by request)
-                    # There was a bug caused by upper limit of uint16 when squaring nm for AB calibration
-                    if T1_spectrum.name.name() == 'Dinkinesh':
-                        dinkinesh_counter += 1
-                        if dinkinesh_counter >= 2:
-                            window['T1_graph'].TKCanvas.itemconfig(T1_preview, fill='#7f9000')
-                            window['T1_albedo_note'].update('Easter egg! Values below are correct.')
+                    # There was a bug in TCT v3.3 caused by upper limit of uint16 when squaring nm for AB calibration
+                    if last_click_was_Dinkinesh and T1_spectrum.name.name() == 'Dinkinesh':
+                        window['T1_graph'].TKCanvas.itemconfig(T1_preview, fill='#7f9000')
+                        window['T1_albedo_note'].update('Easter egg! Values below are correct.')
 
                     # Dynamical plotting
                     if window1:
@@ -263,7 +267,8 @@ def launch_window(lang: str):
                             window0.ReturnValuesDictionary['-currentTab-'],
                             window0.ReturnValuesDictionary['-gamma-'],
                             window0.ReturnValuesDictionary['-srgb-'],
-                            values['-brMax-'], light_theme, lang
+                            window0.ReturnValuesDictionary['-brMax-'],
+                            light_theme, lang
                         )
                 
                 elif event == 'T1_tags':
@@ -282,7 +287,8 @@ def launch_window(lang: str):
                             window0.ReturnValuesDictionary['-currentTab-'],
                             window0.ReturnValuesDictionary['-gamma-'],
                             window0.ReturnValuesDictionary['-srgb-'],
-                            values['-brMax-'], light_theme, lang
+                            window0.ReturnValuesDictionary['-brMax-'],
+                            light_theme, lang
                         )
                 
                 elif event == 'T1_export2text':
@@ -417,39 +423,22 @@ def launch_window(lang: str):
             
             elif values['-currentTab-'] == 'tab3':
                 
-                if event == 'T3_maxtemp_num':
-                    window['T3_slider1'].update(range=(0, int(values['T3_maxtemp_num'])))
-                
-                elif event == 'T3_pin':
-                    if T3_spectrum not in plot_data:
-                        plot_data.append(T3_spectrum)
-                
-                elif event == 'T3_clear':
-                    plot_data = []
-                    if window1:
-                        T1_T3_fig, T1_T3_fig_canvas_agg = T1_T3_update_plot(
-                            T1_T3_fig, T1_T3_fig_canvas_agg,
-                            window0.ReturnValuesDictionary['-currentTab-'],
-                            window0.ReturnValuesDictionary['-gamma-'],
-                            window0.ReturnValuesDictionary['-srgb-'],
-                            values['-brMax-'], light_theme, lang
-                        )
-                
-                else:
-                    if event == 'T3_overexposure':
-                        window['T3_mag'].update(text_color=text_colors[values['T3_overexposure']])
-                        window['T3_slider4'].update(disabled=not values['T3_overexposure'])
+                if event in T3_triggers:
+                    if event == '-brMax-':
+                        window['T3_mag'].update(text_color=text_colors[not values['-brMax-']])
+                        window['T3_slider4'].update(disabled=values['-brMax-'])
                     
                     # Spectral data processing
                     T3_spectrum = Spectrum.from_blackbody_redshift(visible_range, values['T3_slider1'], values['T3_slider2'], values['T3_slider3'])
                     T3_obj_name = T3_spectrum.name
                     window['T3_title2'].update(T3_obj_name.indexed_name(lang))
 
-                    if values['T3_overexposure']:
+                    # Mode with "exposure"
+                    if not values['-brMax-']:
                         T3_spectrum.br /= aux.mag2irradiance(values['T3_slider4'], vega_in_V) * sun_in_V
 
                     # Color calculation
-                    T3_color = ColorPoint.from_spectral_data(T3_spectrum, not values['T3_overexposure'], values['-srgb-'])
+                    T3_color = ColorPoint.from_spectral_data(T3_spectrum, values['-brMax-'], values['-srgb-'])
                     if values['-gamma-']:
                         T3_color = T3_color.gamma_corrected()
                     T3_rgb = tuple(T3_color.to_bit(bitness).round(rounding))
@@ -467,5 +456,25 @@ def launch_window(lang: str):
                             window0.ReturnValuesDictionary['-currentTab-'],
                             window0.ReturnValuesDictionary['-gamma-'],
                             window0.ReturnValuesDictionary['-srgb-'],
-                            values['-brMax-'], light_theme, lang
+                            window0.ReturnValuesDictionary['-brMax-'],
+                            light_theme, lang
+                        )
+                
+                elif event == 'T3_maxtemp_num':
+                    window['T3_slider1'].update(range=(0, int(values['T3_maxtemp_num'])))
+                
+                elif event == 'T3_pin':
+                    if T3_spectrum not in plot_data:
+                        plot_data.append(T3_spectrum)
+                
+                elif event == 'T3_clear':
+                    plot_data = []
+                    if window1:
+                        T1_T3_fig, T1_T3_fig_canvas_agg = T1_T3_update_plot(
+                            T1_T3_fig, T1_T3_fig_canvas_agg,
+                            window0.ReturnValuesDictionary['-currentTab-'],
+                            window0.ReturnValuesDictionary['-gamma-'],
+                            window0.ReturnValuesDictionary['-srgb-'],
+                            window0.ReturnValuesDictionary['-brMax-'],
+                            light_theme, lang
                         )

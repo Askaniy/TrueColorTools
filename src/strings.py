@@ -332,11 +332,6 @@ gui_vII = {
     'ru': 'II косм. ск. [c]',
     'de': 'Fluchtgeschw. [c]'
 }
-gui_overexposure = {
-    'en': 'Adjust overexposure limit',
-    'ru': 'Регулировать предел переэкспонирования',
-    'de': 'Überbelichtungslimit anpassen'
-}
 gui_mag = {
     'en': 'App. magnitude*',
     'ru': 'Вид. зв. величина*',
