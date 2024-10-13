@@ -38,10 +38,14 @@ def launch_window(lang: str):
     img_preview_area = img_preview_size[0]*img_preview_size[1]
     text_colors = (gui.muted_color, gui.text_color)
 
+    # Loading the icon
+    with open('src/images/icon', 'rb') as file:
+        icon = file.read()
+
     # Launching the main window
     sg.ChangeLookAndFeel('MaterialDark')
     window0 = sg.Window(
-        'TrueColorTools', icon=gui.icon, finalize=True, resizable=True, margins=(0, 0), size=(1000, 640),
+        'TrueColorTools', icon=icon, finalize=True, resizable=True, margins=(0, 0), size=(1000, 640),
         layout=gui.generate_layout(
             (2*circle_r+1, 2*circle_r+1), img_preview_size, text_colors, filtersDB, brMax, brMode, bitness, rounding, T2_num, lang
         )
