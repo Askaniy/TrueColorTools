@@ -447,7 +447,7 @@ class _SpectralObject(_TrueColorToolsObject):
             operand1 = other.define_on_range(self.nm, crop=True)
             operand2 = self
         else:
-            # Why Spectrum/FilterSystem needs extrapolation?
+            # Why Spectrum/FilterSystem needs extrapolation too?
             # For the cases of bolometric albedo operations such as `Sun @ Mercury`.
             operand1 = other.define_on_range(self.nm, crop=False)
             operand2 = self.define_on_range(other.nm, crop=False)
@@ -1302,7 +1302,8 @@ class _ColorObject:
         """ Convolves the (photo)spectral object with one of the available CMF systems """
         if srgb:
             xyz = (data @ xyz_cmf).br / 3 # why? don't know, it works
-            rgb = srgb_system.T.dot(xyz)
+            #rgb = srgb_system.T.dot(xyz)
+            rgb = np.tensordot(srgb_system.T, xyz, axes=(1, 0))
             if np.any(rgb < 0):
                 print(f'# Note for the Color object "{data.name}"')
                 print(f'- RGB derived from XYZ turned out to be outside the color space: rgb={rgb}')
@@ -1323,7 +1324,7 @@ class _ColorObject:
         # inaccurate CIE standard usage (TODO)
         return np.dot(self.br, (0.2126, 0.7152, 0.0722))
     
-    def __matmul__(self, other):
+    def __mul__(self, other):
         """ Creates a new ColorObject with adjusted brightness """
         if isinstance(other, int|float):
             output = deepcopy(self)

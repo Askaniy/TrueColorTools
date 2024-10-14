@@ -208,7 +208,7 @@ def extrapolating(x: np.ndarray, y: np.ndarray, x_arr: np.ndarray, step: int|flo
         if x[0] > x_arr[0]:
             # Extrapolation to blue
             x1 = np.arange(x_arr[0], x[0], step)
-            if np.all(y[0]) == 0:
+            if np.all(y[0] == 0):
                 # Corner point is zero -> no extrapolation needed: most likely it's a filter profile
                 y1 = np.zeros((x1.size, *obj_shape))
             else:
@@ -227,7 +227,7 @@ def extrapolating(x: np.ndarray, y: np.ndarray, x_arr: np.ndarray, step: int|flo
         if x[-1] < x_arr[-1]:
             # Extrapolation to red
             x1 = np.arange(x[-1], x_arr[-1], step) + step
-            if np.all(y[0]) == 0:
+            if np.all(y[0] == 0):
                 # Corner point is zero -> no extrapolation needed: most likely it's a filter profile
                 y1 = np.zeros((x1.size, *obj_shape))
             else:
