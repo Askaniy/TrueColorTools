@@ -299,8 +299,8 @@ gui_factor = {
     'ru': 'Множитель яркости',
     'de': 'Helligkeitsfaktor'
 }
-gui_enlarge = {
-    'en': 'Enlarge small images',
+gui_upscale = {
+    'en': 'Upscale small images',
     'ru': 'Увеличить небольшие изображения',
     'de': 'Kleine Bilder vergrößern'
 }

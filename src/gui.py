@@ -177,7 +177,7 @@ def generate_layout(
     ]
     T2_col2_2 = [
         [sg.Text(tr.gui_factor[lang], key='T2_factorText'), sg.Input('1', size=1, key='T2_factor', expand_x=True)],
-        [sg.Checkbox(tr.gui_enlarge[lang], True, key='T2_enlarge')],
+        [sg.Checkbox(tr.gui_upscale[lang], default=False, key='T2_upscale')],
     ]
     T2_col2 = [
         #[sg.Push(), sg.Text(tr.gui_output[lang], font=title_font, key='T2_title2'), sg.Push()],
@@ -317,7 +317,7 @@ def translate_win0(window: sg.Window, T2_vis: int, lang: str):
     #window['T2_autoalign'].update(text=tr.gui_autoalign[lang])
     #window['T2_plotpixels'].update(text=tr.gui_plotpixels[lang])
     window['T2_factorText'].update(tr.gui_factor[lang])
-    window['T2_enlarge'].update(text=tr.gui_enlarge[lang])
+    window['T2_upscale'].update(text=tr.gui_upscale[lang])
     window['T2_preview'].update(tr.gui_preview[lang])
     window['T2_process'].update(tr.gui_process[lang])
     #window['T3_title1'].update(tr.gui_input[lang])

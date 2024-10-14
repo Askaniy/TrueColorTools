@@ -393,7 +393,7 @@ def launch_window(lang: str):
                             desun=values['T2_desun'],
                             photons=values['T2_photons'],
                             factor=float(values['T2_factor']),
-                            enlarge=values['T2_enlarge'],
+                            upscale=values['T2_upscale'],
                             log=T2_logger
                         ),
                         ('T2_thread', 'End of the image processing thread\n')
@@ -403,10 +403,8 @@ def launch_window(lang: str):
                 elif event[0] == 'T2_thread':
                     sg.Print(event[1]) # pop-up printing
                     if values[event] is not None:
-                        # Updating preview image and adding mean spectrum to plot
-                        preview, mean_spectrum = values[event]
-                        window['T2_image'].update(data=ip.convert_to_bytes(preview))
-                        mean_spectrum = [mean_spectrum]
+                        # Updating preview image
+                        window['T2_image'].update(data=ip.convert_to_bytes(values[event]))
                 
                 # Updating filters profile plot
                 if (isinstance(event, str) and event.startswith('T2_filter')) or (event[0] == 'T2_thread' and values[event] is not None) or event in ('-currentTab-', '-srgb-'):

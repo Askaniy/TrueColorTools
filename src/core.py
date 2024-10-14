@@ -196,7 +196,7 @@ class _TrueColorToolsObject:
     
     @property
     def shape(self):
-        """ Returns the spatial axes shape: number of filters or (width, hight) """
+        """ Returns the spatial axes shape: number of filters or (width, height) """
         return self.br.shape[1:]
     
     def scaled_at(self, where, how: int|float = 1, sd: int|float = None):
@@ -780,14 +780,14 @@ class _PhotospectralObject(_TrueColorToolsObject):
         - `sd` (Sequence): optional array of standard deviations
         - `name` (str|ObjectName): name as a string or an instance of a class that stores its components
         """
+        if not isinstance(filter_system, FilterSystem):
+            raise ValueError('`filter_system` argument is not a FilterSystem instance')
         self.filter_system = filter_system
         self.br = np.asarray(br, dtype='float64')
         self.sd = None if sd is None else np.asarray(sd, dtype='float64')
         self.name = ObjectName.as_ObjectName(name)
         if (len_filters := len(filter_system)) != (len_br := self.br.shape[0]):
-            print(f'# Note for the PhotospectralObject "{name}"')
-            print(f'- Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br}). PhotospectralCube stub object was created.')
-            return self.stub(name)
+            raise ValueError(f'Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br})')
         if self.sd is not None and (len_sd := self.sd.shape[0]) != len_br:
             print(f'# Note for the PhotospectralObject "{name}"')
             print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
@@ -895,12 +895,12 @@ class _Cube(_TrueColorToolsObject):
     @property
     def width(self):
         """ Returns horizontal spatial axis length """
-        return self.shape[1]
+        return self.shape[0]
     
     @property
-    def hight(self):
+    def height(self):
         """ Returns vertical spatial axis length """
-        return self.shape[2]
+        return self.shape[1]
 
 
 class SpectralCube(_SpectralObject, _Cube):
@@ -913,7 +913,7 @@ class SpectralCube(_SpectralObject, _Cube):
     - `sd` (np.ndarray): optional array of standard deviations
     - `name` (ObjectName): name as an instance of a class that stores its components
     - `width` (int): horizontal spatial axis length
-    - `hight` (int): vertical spatial axis length
+    - `height` (int): vertical spatial axis length
     """
     
     @staticmethod
@@ -939,7 +939,7 @@ class PhotospectralCube(_PhotospectralObject, _Cube):
     - `sd` (np.ndarray): optional array of standard deviations
     - `name` (ObjectName): name as an instance of a class that stores its components
     - `width` (int): horizontal spatial axis length
-    - `hight` (int): vertical spatial axis length
+    - `height` (int): vertical spatial axis length
     """
     
     @staticmethod
@@ -1293,7 +1293,7 @@ class _ColorObject:
         - `br` (Sequence): array, the first axis of which is spectral (red, green, blue)
         - `maximize_brightness` (bool): normalization by the maximum value found
         """
-        self.br = np.clip(np.nan_to_num(br), 0, None, dtype='float')
+        self.br: np.ndarray = np.clip(np.nan_to_num(br), 0, None, dtype='float')
         if maximize_brightness and self.br.max() != 0:
             self.br /= self.br.max()
 
@@ -1357,7 +1357,7 @@ class ColorPoint(_ColorObject):
 class ColorImage(_ColorObject):
     """
     Class to work with an image of red, green and blue channels.
-    Stores brightness values in the range 0 to 1 in the `br` attribute, numpy array of shape (3, Y, X).
+    Stores brightness values in the range 0 to 1 in the `br` attribute, numpy array of shape (3, X, Y).
     To avoid data loss, brightness above 1 is not clipped before export.
     """
 
@@ -1366,11 +1366,23 @@ class ColorImage(_ColorObject):
         self.br = np.atleast_3d(self.br) # interprets color points and lines as images
     
     def upscale(self, times: int):
-        """ Increases the size by an integer number of times """
-        return np.repeat(np.repeat(self.br, times, axis=0), times, axis=1) 
+        """ Creates a new ColorImage with increased size by an integer number of times """
+        output = deepcopy(self)
+        output.br = np.repeat(np.repeat(output.br, times, axis=0), times, axis=1) 
+        return output
 
     def to_pillow_image(self):
         """ Converts ColorImage to the Image object of the Pillow library """
         # TODO: support export to 16 bit and other Pillow modes
         arr = np.clip(self.br, 0, 1) * 255 # 8 bit
-        return Image.fromarray(np.around(arr, dtype='uint8').transpose())
+        return Image.fromarray(np.around(arr).astype('uint8').transpose())
+    
+    @property
+    def width(self):
+        """ Returns horizontal spatial axis length """
+        return self.br.shape[1]
+    
+    @property
+    def height(self):
+        """ Returns vertical spatial axis length """
+        return self.br.shape[2]

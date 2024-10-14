@@ -90,11 +90,11 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
         if notes_per_column * notes_columns_num < len(notes):
             notes_per_column = round(len(notes) // notes_columns_num + 1)
 
-    # Calculating grid hights
+    # Calculating grid heights
     h0 = border_space + name_size
     h1 = h0 + 2*half_square * int(ceil(l / objects_per_row)) + border_space//2
     h2 = h1 + help_step
-    h = h1 + help_step + notes_per_column*note_step + border_space//2 # total image hight
+    h = h1 + help_step + notes_per_column*note_step + border_space//2 # total image height
 
     # Calculating squircles positions
     l_range = np.arange(l)

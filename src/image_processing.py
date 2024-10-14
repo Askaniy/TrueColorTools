@@ -27,7 +27,7 @@ def image_parser(
         desun: bool = False,
         photons: bool = False,
         factor: float = 1.,
-        enlarge: bool = True,
+        upscale: bool = True,
         log: Callable = print
     ):
     """ Receives user input and performs processing in a parallel thread """
@@ -41,16 +41,18 @@ def image_parser(
                 files = files[not_empty_files]
                 filters = np.array(filters)[not_empty_files]
                 formulas = np.array(formulas)[not_empty_files]
+                filter_system = FilterSystem.from_list(filters)
                 log('Importing the images')
-                cube = PhotospectralCube(filters, ii.bw_list_reader(files, formulas))
+                cube = PhotospectralCube(filter_system, ii.bw_list_reader(files, formulas))
             case 1: # RGB image
+                filter_system = FilterSystem.from_list(filters)
                 log('Importing the RGB image')
-                cube = PhotospectralCube(filters, ii.rgb_reader(single_file, formulas))
+                cube = PhotospectralCube(filter_system, ii.rgb_reader(single_file, formulas))
             case 2: # Spectral cube
                 log('Importing the spectral cube (only the first loading is slow)')
                 cube = SpectralCube.from_file(single_file)
         if preview_flag:
-            log('Down scaling')
+            log('Downscaling')
             cube = cube.downscale(pixels_limit)
         if photons:
             log('Converting photon spectral density to energy density')
@@ -61,19 +63,22 @@ def image_parser(
         log('Color calculating')
         img = ColorImage.from_spectral_data(cube, maximize_brightness, srgb)
         if factor != 1:
+            log('Scaling brightness')
             img *= factor
         if gamma_correction:
+            log('Gamma correcting')
             img = img.gamma_corrected()
-        if enlarge and pixels_num < pixels_limit:
-            img = img.upscale(round(sqrt(pixels_limit / pixels_num)))
+        pixels_num = img.width * img.height
+        if upscale and pixels_num < pixels_limit and (times := round(sqrt(pixels_limit / pixels_num))) != 1:
+            log('Upscaling')
+            img = img.upscale(times)
         img = img.to_pillow_image()
         # End of processing, summarizing
         time = monotonic() - start_time
-        pixels_num = img.width * img.height
         speed = pixels_num / time
         log(f'Processing took {time:.1f} seconds, average speed is {speed:.1f} px/sec')
         if preview_flag:
-            log('Sending the resulting preview to the main thread', (img, cube.median_spectrum()))
+            log('Sending the resulting preview to the main thread', img)
         else:
             img.save(f'{save_folder}/TCT_{strftime("%Y-%m-%d_%H-%M-%S")}.png')
     except Exception:
