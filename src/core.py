@@ -20,8 +20,9 @@ Database:
 
 Color:
 - ColorSystem
-- ColorImage
+- ColorObject
 - - ColorPoint
+- - ColorImage
 
 
 (Self-complete data classes system would include a 2D `PhotospectrumSet` and
@@ -36,6 +37,7 @@ from pathlib import Path
 from operator import mul, truediv
 from functools import lru_cache
 from traceback import format_exc
+from PIL import Image
 import numpy as np
 
 from src.data_import import file_reader
@@ -287,8 +289,8 @@ class _SpectralObject(_TrueColorToolsObject):
             print(f'# Note for the SpectralObject "{self.name}"')
             print(f'- NaN values detected during object initialization, they been replaced with zeros.')
     
-    @staticmethod
-    def from_array(nm: np.ndarray, br: np.ndarray, sd: np.ndarray = None, name: str|ObjectName = None):
+    @classmethod
+    def from_array(cls, nm: np.ndarray, br: np.ndarray, sd: np.ndarray = None, name: str|ObjectName = None):
         """
         Creates a SpectralObject from wavelength array with a check for uniformity and possible extrapolation.
 
@@ -303,19 +305,12 @@ class _SpectralObject(_TrueColorToolsObject):
         if sd is not None:
             sd = np.asarray(sd, dtype='float64')
         name = ObjectName.as_ObjectName(name)
-        match br.ndim:
-            case 1:
-                target_class = Spectrum
-            case 2:
-                target_class = FilterSystem
-            case 3:
-                target_class = SpectralCube
-        target_class_name = target_class.__name__
+        target_class_name = cls.__name__
         try:
             if (len_nm := nm.size) != (len_br := br.shape[0]):
                 print(f'# Note for the {target_class_name} "{name}"')
                 print(f'- Arrays of wavelengths and brightness do not match ({len_nm} vs {len_br}). {target_class_name} stub object was created.')
-                return target_class.stub(name)
+                return cls.stub(name)
             if sd is not None and (len_sd := sd.shape[0]) != len_br:
                 print(f'# Note for the {target_class_name} "{name}"')
                 print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
@@ -344,12 +339,12 @@ class _SpectralObject(_TrueColorToolsObject):
             #    br = np.clip(br, 0, None)
             #    print(f'# Note for the {target_class_name} "{name}"')
             #    print(f'- Negative values detected while trying to create the object from array, they been replaced with zeros.')
-            return target_class(nm, br, sd, name=name)
+            return cls(nm, br, sd, name=name)
         except Exception:
             print(f'# Note for the {target_class_name} "{name}"')
             print(f'- Something unexpected happened while trying to create an object from the array. It was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0).strip()}')
-            return target_class.stub(name)
+            return cls.stub(name)
     
     def integrate(self) -> np.ndarray:
         """ Collapses the SpectralObject along the spectral axis into a two-dimensional image """
@@ -371,7 +366,8 @@ class _SpectralObject(_TrueColorToolsObject):
         Returns a new SpectralObject converted from frequency spectral density
         to energy spectral density, using the fact that f_λ = f_ν c / λ².
         """
-        return (self / self.nm / self.nm).normalize() # squaring nm will overflow uint16
+        scale_factors = 1 / self.nm / self.nm # squaring nm will overflow uint16
+        return (self / scale_factors).normalize()
     
     def mean_spectrum(self):
         """ Returns the mean spectrum along the spatial axes """
@@ -1278,62 +1274,34 @@ rgb_cmf = FilterSystem.from_list(('StilesBurch2deg.r', 'StilesBurch2deg.g', 'Sti
 # CIE XYZ functions transformed from the CIE (2006) LMS functions, 2-deg
 # http://www.cvrl.org/ciexyzpr.htm
 # Edge sensitivity values less than 10⁴ were previously removed
-xyz_cmf = FilterSystem.from_list(('cie2deg.x', 'cie2deg.y', 'cie2deg.z')) / 339.12
-# TODO: find a correct way to calibrate brightness for albedo!
-# 339.12 was guessed so that the equal-energy spectrum of unit brightness has color (1, 1, 1)
+xyz_cmf = FilterSystem.from_list(('cie2deg.x', 'cie2deg.y', 'cie2deg.z'))
 
 # to be chosen depending on the bool flag (`cie`)
 cmfs = (rgb_cmf, xyz_cmf)
 
 
-class ColorImage:
+class _ColorObject:
     """
-    A class for working with three-channel images.
-    Internal representation as a numpy array of the shape (3, hight, width) with values between 0 and 1.
-    (Note that the PhotospectralCube class has a transposed order of the axes.)
+    Internal class for inheriting color attributes and methods.
+    Stores brightness values in the range 0 to 1 in the `br` attribute.
+    To avoid data loss, brightness above 1 is not clipped before export.
     """
 
-    def __init__(self, br: Sequence, maximize_brightness=True):
+    def __init__(self, br: Sequence, maximize_brightness=False):
         """
-        The albedo flag on means that you have already normalized the brightness over the range.
-        By default, initialization implies normalization and you get chromaticity.
-
         Args:
-        - `rgb` (Sequence): array of three values that are red, green and blue
-        - `maximize_brightness` (bool): to find the maximum value of the array and divide by it
+        - `br` (Sequence): array, the first axis of which is spectral (red, green, blue)
+        - `maximize_brightness` (bool): normalization by the maximum value found
         """
         self.br = np.clip(np.nan_to_num(br), 0, None, dtype='float')
-        if maximize_brightness and br.max() != 0:
+        if maximize_brightness and self.br.max() != 0:
             self.br /= self.br.max()
 
-    @staticmethod
-    def from_spectral_data(cube: SpectralCube|PhotospectralCube, maximize_brightness=True, srgb=False):
-        """ Convolves the (photo)spectral cube with one of the available CMF systems """
-        # TODO: add sRGB support for images! Like in ColorPoint
-        return ColorImage((cube @ rgb_cmf).br, maximize_brightness)
-
-    def gamma_corrected(self):
-        """ Creates a new Color object with applied gamma correction """
-        other = deepcopy(self)
-        other.br = aux.gamma_correction(other.br)
-        return other
-    
-    def grayscale(self):
-        """ Converts rgb values to grayscale using sRGB luminance of the CIE 1931 """
-        return np.dot(self.br, (0.2126, 0.7152, 0.0722))
-
-
-class ColorPoint(ColorImage):
-    """
-    A class for working with three-channel point.
-    Internal representation as a numpy array of the shape (3) with values between 0 and 1.
-    """
-
-    @staticmethod
-    def from_spectral_data(data: Spectrum|Photospectrum, maximize_brightness=True, srgb=False):
-        """ Convolves the (photo)spectrum with one of the available CMF systems """
+    @classmethod
+    def from_spectral_data(cls, data: _TrueColorToolsObject, maximize_brightness=False, srgb=False):
+        """ Convolves the (photo)spectral object with one of the available CMF systems """
         if srgb:
-            xyz = (data @ xyz_cmf).br
+            xyz = (data @ xyz_cmf).br / 3 # why? don't know, it works
             rgb = srgb_system.T.dot(xyz)
             if np.any(rgb < 0):
                 print(f'# Note for the Color object "{data.name}"')
@@ -1342,14 +1310,41 @@ class ColorPoint(ColorImage):
                 print(f'- Approximating by desaturating: rgb={rgb}')
         else:
             rgb = (data @ rgb_cmf).br
-        return ColorPoint(rgb, maximize_brightness)
+        return cls(rgb, maximize_brightness)
+ 
+    def gamma_corrected(self):
+        """ Creates a new ColorObject with applied gamma correction """
+        output = deepcopy(self)
+        output.br = aux.gamma_correction(output.br)
+        return output
+    
+    def grayscale(self):
+        """ Converts color to grayscale using sRGB luminance of the CIE 1931 """
+        # inaccurate CIE standard usage (TODO)
+        return np.dot(self.br, (0.2126, 0.7152, 0.0722))
+    
+    def __matmul__(self, other):
+        """ Creates a new ColorObject with adjusted brightness """
+        if isinstance(other, int|float):
+            output = deepcopy(self)
+            output.br = output.br * other
+            return output
+        return NotImplemented
+
+
+class ColorPoint(_ColorObject):
+    """
+    Class to work with an array of red, green and blue values.
+    Stores brightness values in the range 0 to 1 in the `br` attribute, numpy array of shape (3).
+    To avoid data loss, brightness above 1 is not clipped before export.
+    """
 
     def to_bit(self, bit: int) -> np.ndarray:
-        """ Returns rounded color array, scaled to the appropriate power of two """
+        """ Returns color array, scaled to the appropriate power of two (not rounded) """
         return self.br * (2**bit - 1)
 
     def to_html(self):
-        """ Converts fractional rgb values to HTML-style hex string """
+        """ Converts fractional rgb values to HTML-styled hexadecimal string """
         html = '#{:02x}{:02x}{:02x}'.format(*self.to_bit(8).round().astype('int'))
         if len(html) != 7:
             #print(f'# Note for the Color object "{self.name}"')
@@ -1357,3 +1352,25 @@ class ColorPoint(ColorImage):
             html = '#FFFFFF'
             #print(f'- It has been replaced with {html}.')
         return html
+
+
+class ColorImage(_ColorObject):
+    """
+    Class to work with an image of red, green and blue channels.
+    Stores brightness values in the range 0 to 1 in the `br` attribute, numpy array of shape (3, Y, X).
+    To avoid data loss, brightness above 1 is not clipped before export.
+    """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.br = np.atleast_3d(self.br) # interprets color points and lines as images
+    
+    def upscale(self, times: int):
+        """ Increases the size by an integer number of times """
+        return np.repeat(np.repeat(self.br, times, axis=0), times, axis=1) 
+
+    def to_pillow_image(self):
+        """ Converts ColorImage to the Image object of the Pillow library """
+        # TODO: support export to 16 bit and other Pillow modes
+        arr = np.clip(self.br, 0, 1) * 255 # 8 bit
+        return Image.fromarray(np.around(arr, dtype='uint8').transpose())

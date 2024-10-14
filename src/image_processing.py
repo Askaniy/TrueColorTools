@@ -59,18 +59,19 @@ def image_parser(
             log('Removing Sun as emitter')
             cube /= sun_norm
         log('Color calculating')
-        img = ColorImage.from_spectral_data(cube, maximize_brightness, srgb) # sRGB is not supported!
-        img.br = np.clip(img.br * factor, 0, 1)
+        img = ColorImage.from_spectral_data(cube, maximize_brightness, srgb)
+        if factor != 1:
+            img *= factor
         if gamma_correction:
             img = img.gamma_corrected()
-        img = Image.fromarray((255 * img.br).astype('uint8').transpose())
+        if enlarge and pixels_num < pixels_limit:
+            img = img.upscale(round(sqrt(pixels_limit / pixels_num)))
+        img = img.to_pillow_image()
+        # End of processing, summarizing
         time = monotonic() - start_time
         pixels_num = img.width * img.height
         speed = pixels_num / time
         log(f'Processing took {time:.1f} seconds, average speed is {speed:.1f} px/sec')
-        if enlarge and pixels_num < pixels_limit:
-            factor = round(sqrt(pixels_limit / pixels_num))
-            img = img.resize((img.width * factor, img.height * factor), Image.Resampling.NEAREST)
         if preview_flag:
             log('Sending the resulting preview to the main thread', (img, cube.median_spectrum()))
         else:
