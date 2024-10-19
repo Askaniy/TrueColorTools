@@ -1302,13 +1302,13 @@ class _ColorObject:
         """ Convolves the (photo)spectral object with one of the available CMF systems """
         if srgb:
             xyz = (data @ xyz_cmf).br / 3 # why? don't know, it works
-            #rgb = srgb_system.T.dot(xyz)
-            rgb = np.tensordot(srgb_system.T, xyz, axes=(1, 0))
+            # single vector code: rgb = srgb_system.T.dot(xyz)
+            rgb: np.ndarray = np.tensordot(srgb_system.T, xyz, axes=(1, 0))
             if np.any(rgb < 0):
-                print(f'# Note for the Color object "{data.name}"')
-                print(f'- RGB derived from XYZ turned out to be outside the color space: rgb={rgb}')
-                rgb -= rgb.min()
-                print(f'- Approximating by desaturating: rgb={rgb}')
+                # RGB derived from XYZ turned out to be outside the color space, approximating by desaturating
+                negative_mask = np.any(rgb < 0, axis=0)
+                # single vector code: rgb -= rgb.min()
+                rgb[:, negative_mask] -= rgb.min(axis=0)[negative_mask]
         else:
             rgb = (data @ rgb_cmf).br
         return cls(rgb, maximize_brightness)

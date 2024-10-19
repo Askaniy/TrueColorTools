@@ -15,7 +15,7 @@ def cube_reader(file: str) -> tuple[np.ndarray, np.ndarray]:
         nm = np.array(hdul['wavelength'].data)
     return nm, br
 
-def rgb_reader(file: str, formulas: list) -> np.ndarray:
+def rgb_reader(file: str, formulas: list = None) -> np.ndarray:
     """ Imports spectral data from a RGB image """
     img = Image.open(file)
     img = img.convert(to_supported_mode(img.mode))
