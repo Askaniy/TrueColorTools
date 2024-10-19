@@ -154,7 +154,7 @@
                        0.392, 0.396],
     },
     'Earth | Crow2011, Mallama2017a': { // phase angle 75.1°
-        tags: ['Solar System', 'planetary body/planet', 'Earth'],
+        tags: ['featured', 'Solar System', 'planetary body/planet', 'Earth'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79],
@@ -171,7 +171,7 @@
         spherical_albedo: true, // at quadrature?
     },
     'Earth: Synthetic spectrum | VPL': { // Robinson et al. 2011, "True disk-integrated Earth"
-        tags: ['featured', 'Solar System', 'planetary body/planet', 'Earth/history', 'synthetic spectrum'],
+        tags: ['Solar System', 'planetary body/planet', 'Earth/history', 'synthetic spectrum'],
         file: 'spectra/files/VPL/earth_quadrature_radiance_refl.txtU',
         spherical_albedo: [400, 0.2635], // at quadrature
     },
