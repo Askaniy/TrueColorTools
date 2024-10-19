@@ -1323,14 +1323,6 @@ class _ColorObject:
         """ Converts color to grayscale using sRGB luminance of the CIE 1931 """
         # inaccurate CIE standard usage (TODO)
         return np.dot(self.br, (0.2126, 0.7152, 0.0722))
-    
-    def __mul__(self, other):
-        """ Creates a new ColorObject with adjusted brightness """
-        if isinstance(other, int|float):
-            output = deepcopy(self)
-            output.br = output.br * other
-            return output
-        return NotImplemented
 
 
 class ColorPoint(_ColorObject):

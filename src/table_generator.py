@@ -56,11 +56,12 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
     w0 = tiny_space + border_space
 
     # Placing info column
+    brMode = tr.gui_chromaticity[lang] if brMax else (tr.gui_geom[lang] if brGeom else tr.gui_sphe[lang])
     info_list = (
         f'{l}/{len(objectsDB)} {tr.info_objects[lang]}',
         f'{tr.info_gamma[lang]}: {tr.info_indicator[lang][gamma]}',
         f'{tr.info_srgb[lang]}: {tr.info_indicator[lang][srgb]}',
-        f'{tr.gui_brMode[lang]}: {tr.gui_br[lang][(1-brMax)*(2-brGeom)]}',
+        f'{tr.gui_brMode[lang]}: {brMode}',
         tr.link,
     )
     info_colors = (      # text brightness formula: br = 255 * (x^(1/2.2))

@@ -75,6 +75,11 @@ gui_brMax = {
     'ru': 'максимизировать',
     'de': 'maximieren'
 }
+gui_chromaticity = {
+    'en': 'chromaticity',
+    'ru': 'цветность',
+    'de': 'Farbton'
+}
 gui_geom = {
     'en': 'geometric albedo',
     'ru': 'геом. альбедо',

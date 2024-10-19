@@ -25,7 +25,7 @@ def launch_window(lang: str):
     # Processing configuration
     default_tag = 'featured'
     brMax = False # albedo/chromaticity mode switcher
-    brMode = 1 # default albedo type (1==geometrical, 2==spherical)
+    brGeom = True # default albedo type (True==geometrical, False==spherical)
     bitness = 1
     rounding = 3
 
@@ -47,7 +47,7 @@ def launch_window(lang: str):
     window0 = sg.Window(
         'TrueColorTools', icon=icon, finalize=True, resizable=True, margins=(0, 0), size=(1000, 640),
         layout=gui.generate_layout(
-            (2*circle_r+1, 2*circle_r+1), img_preview_size, text_colors, filtersDB, brMax, brMode, bitness, rounding, T2_num, lang
+            (2*circle_r+1, 2*circle_r+1), img_preview_size, text_colors, filtersDB, brMax, brGeom, bitness, rounding, T2_num, lang
         )
     )
     # Creating the plot window stub
@@ -252,8 +252,7 @@ def launch_window(lang: str):
                     window['T1_graph'].TKCanvas.itemconfig(T1_preview, fill=T1_rgb_show)
                     window['T1_rgb'].update(T1_rgb)
                     window['T1_hex'].update(T1_rgb_show)
-                    T1_filter = get_filter(values['T1_filter'])
-                    window['T1_convolved'].update(sigfig_round(T1_spectrum.define_on_range(T1_filter.nm)@T1_filter, rounding, warn=False))
+                    window['T1_convolved'].update(sigfig_round(T1_spectrum@get_filter(values['T1_filter']), rounding, warn=False))
 
                     # Green Dinkinesh Easter egg (added by request)
                     # There was a bug in TCT v3.3 caused by upper limit of uint16 when squaring nm for AB calibration

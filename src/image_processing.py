@@ -60,11 +60,11 @@ def image_parser(
         if desun:
             log('Removing Sun as emitter')
             cube /= sun_norm
-        log('Color calculating')
-        img = ColorImage.from_spectral_data(cube, maximize_brightness, srgb)
         if factor != 1:
             log('Scaling brightness')
-            img *= factor
+            cube *= factor
+        log('Color calculating')
+        img = ColorImage.from_spectral_data(cube, maximize_brightness, srgb)
         if gamma_correction:
             log('Gamma correcting')
             img = img.gamma_corrected()
