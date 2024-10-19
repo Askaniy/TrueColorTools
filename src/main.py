@@ -397,7 +397,7 @@ def launch_window(lang: str):
                 
                 # Getting messages from image processing thread
                 elif event[0] == 'T2_thread':
-                    sg.Print(event[1]) # pop-up printing
+                    sg.easy_print(event[1]) # pop-up printing
                     if values[event] is not None:
                         # Updating preview image
                         window['T2_image'].update(data=ip.convert_to_bytes(values[event]))
