@@ -513,7 +513,10 @@ class Spectrum(_SpectralObject):
     @lru_cache(maxsize=32)
     def from_file(file: str, name: str|ObjectName = None):
         """ Creates a Spectrum object based on loaded data from the specified file """
-        return Spectrum.from_array(*file_reader(file), name=name)
+        spectrum = Spectrum.from_array(*file_reader(file), name=name)
+        if 'p' in Path(file).suffix.lower():
+            spectrum = spectrum.convert_from_photon_spectral_density()
+        return spectrum
     
     @staticmethod
     def from_nm(nm_point: int|float):

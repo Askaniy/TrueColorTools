@@ -95,7 +95,7 @@ Supported input keys of a database unit:
 - `sun_is_emitter` (bool): `true` to remove the reflected solar spectrum
 - `tags` (list): strings categorizing the spectrum
 
-You can store the file with the spectrum outside of JSON5, and include a link in it. Text (`*.txt`, `*.dat`) and FITS (`*.fits`, `*.fit`) formats are supported for external files. A text file must contain at least wavelengths in the first column, irradiance in the second column, and optionally standard deviations in the third column. Data is assumed to be in the second HDU in FITS files. If you have problems reading FITS, contact me, I'll improve the parsing of the provided example.
+You can store the file with the spectrum outside of JSON5, and include a link in it. Text (`*.txt`, `*.dat`) and FITS (`*.fits`, `*.fit`) formats are supported for external files. A text file must contain at least wavelengths in the first column, irradiance in the second column, and optionally standard deviations in the third column and a mask in the fourth column ("good" rows in SMASS data marked with "1"). Data is assumed to be in the second HDU in FITS files. If you have problems reading FITS, contact me, I'll improve the parsing of the provided example.
 
 As in JSON5, the default wavelengths for external files are in nanometers and the spectrum is in energy density. For FITS files, TCT attempt to determine the wavelength unit from internal data. You can also force the data type by using letters in the file extension (`.txt` for example):
 - `.txtN` for nanometers (by default), `.txtA` for ångströms, `.txtU` for micrometers;

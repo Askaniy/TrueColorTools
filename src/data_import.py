@@ -37,8 +37,6 @@ def file_reader(file: str) -> tuple[np.ndarray, None]:
         nm, br, sd = fits_reader(file, type_info)
     else:
         nm, br, sd = txt_reader(file, type_info)
-    if 'p' in type_info:
-        br /= nm # multiplying by scaled photon energy E=hc/λ
     return nm, br, sd
 
 def txt_reader(file: str, type_info: str) -> tuple[np.ndarray, None]:
@@ -53,10 +51,13 @@ def txt_reader(file: str, type_info: str) -> tuple[np.ndarray, None]:
         data = np.loadtxt(f).transpose()
         nm = data[0]
         br = data[1]
-        try:
-            sd = data[2]
-        except IndexError:
-            sd = None
+        sd = data[2] if data.shape[0] >= 3 else None
+        if data.shape[0] >= 4 and 1 in data[3]:
+            # SMASS error indication in the 4th column
+            mask = data[3] == 1
+            nm = nm[mask]
+            br = br[mask]
+            sd = sd[mask]
     return nm*to_nm_factor, br, sd
 
 def fits_reader(file: str, type_info: str) -> tuple[np.ndarray, None]:
