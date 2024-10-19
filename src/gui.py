@@ -23,7 +23,7 @@ sg.LOOK_AND_FEEL_TABLE['MaterialDark'] = {
         'INPUT': inputON_color, 'TEXT_INPUT': text_color, 'SCROLL': inputON_color,
         'BUTTON': (text_color, main_color), 'PROGRESS': ('#000000', '#000000'),
         'BORDER': 0, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0
-    }
+}
 
 def create_logger(window: sg.Window, key: str) -> Callable:
     """ Creates a function that sends messages to the window main thread """
@@ -48,6 +48,13 @@ def generate_plot_layout(lang: str, light_theme: bool):
         [sg.Canvas(key='W1_canvas')],
     ]
 
+def generate_menu_bar(lang: str):
+    """ Window 0 menu bar generator """
+    return [
+        [tr.gui_menu[lang], [tr.gui_ref[lang], tr.gui_info[lang], tr.gui_exit[lang]]],
+        [tr.gui_language[lang], tuple(tr.langs.keys())],
+    ]
+
 def generate_layout(
         canvas_size: tuple,
         img_preview_size: tuple,
@@ -70,13 +77,13 @@ def generate_layout(
         [sg.T()],
         [sg.Push(), sg.Text(tr.gui_settings[lang], font=title_font, key='-settingsTitle-'), sg.Push()],
         [sg.T()],
-        [sg.Checkbox(tr.gui_gamma[lang], enable_events=True, default=True, key='-gamma-')],
-        [sg.Checkbox('sRGB', enable_events=True, key='-srgb-')],
+        [sg.Checkbox(tr.gui_gamma[lang], enable_events=True, default=True, key='-gamma-', tooltip=tr.gui_gamma_note[lang])],
+        [sg.Checkbox('sRGB', enable_events=True, key='-srgb-', tooltip=tr.gui_srgb_note[lang])],
         [sg.T()],
         [sg.Text(tr.gui_brMode[lang], key='-brModeText-')],
         [sg.Checkbox(tr.gui_brMax[lang], enable_events=True, default=brMax, key='-brMax-')],
-        [sg.Radio(tr.gui_br[lang][1], 'brRadio', enable_events=True, default=brMode==1, key='-brMode1-')],
-        [sg.Radio(tr.gui_br[lang][2], 'brRadio', enable_events=True, default=brMode==2, key='-brMode2-')],
+        [sg.Radio(tr.gui_geom[lang], 'brRadio', enable_events=True, default=brMode==1, key='-brMode1-', tooltip=tr.gui_geom_note[lang])],
+        [sg.Radio(tr.gui_sphe[lang], 'brRadio', enable_events=True, default=brMode==2, key='-brMode2-', tooltip=tr.gui_sphe_note[lang])],
         [sg.T()],
         [sg.Text(tr.gui_formatting[lang], key='-formattingText-')],
         [
@@ -171,13 +178,13 @@ def generate_layout(
         [sg.Column(T2_frames, scrollable=True, vertical_scroll_only=True, key='T2_frames', expand_x=True, expand_y=True)],
     ]
     T2_col2_1 = [
-        [sg.Checkbox(tr.gui_desun[lang], key='T2_desun')],
-        [sg.Checkbox(tr.gui_photons[lang], key='T2_photons')],
+        [sg.Checkbox(tr.gui_desun[lang], key='T2_desun', tooltip=tr.gui_desun_note[lang])],
+        [sg.Checkbox(tr.gui_photons[lang], key='T2_photons', tooltip=tr.gui_photons_note[lang])],
         #[sg.Checkbox(tr.gui_autoalign[lang], key='T2_autoalign')],
     ]
     T2_col2_2 = [
-        [sg.Text(tr.gui_factor[lang], key='T2_factorText'), sg.Input('1', size=1, key='T2_factor', expand_x=True)],
-        [sg.Checkbox(tr.gui_upscale[lang], default=False, key='T2_upscale')],
+        [sg.Text(tr.gui_factor[lang], key='T2_factorText', tooltip=tr.gui_factor_note[lang]), sg.Input('1', size=1, key='T2_factor', expand_x=True)],
+        [sg.Checkbox(tr.gui_upscale[lang], default=False, key='T2_upscale', tooltip=tr.gui_upscale_note[lang])],
     ]
     T2_col2 = [
         #[sg.Push(), sg.Text(tr.gui_output[lang], font=title_font, key='T2_title2'), sg.Push()],
@@ -220,7 +227,7 @@ def generate_layout(
             sg.Text(tr.gui_mag[lang], size=18, text_color=text_colors[0], justification='right', key='T3_mag'),
             sg.Slider(range=(-50, 0), default_value=-26.7, resolution=0.1, orientation='h', size=slider_size, enable_events=True, disabled=True, key='T3_slider4', expand_x=True)
         ],
-        [sg.Text(tr.gui_explanation[lang], key='T3_explanation')],
+        [sg.Text(tr.gui_mag_note[lang], key='T3_mag_note')],
     ]
     T3_col2 = [
         [sg.Text(font=title_font, key='T3_title2')],
@@ -262,13 +269,13 @@ def generate_layout(
             sg.Tab(tr.gui_tabs[lang][2], tab3, key='tab3')
     ]], expand_x=True, expand_y=True, enable_events=True, key='-currentTab-')
     return [
-        [sg.Menu(tr.gui_menu[lang], key='menu')],
+        [sg.Menu(generate_menu_bar(lang), key='menu')],
         [sg.vtop(settings_column), tabs]
     ]
 
 
 def translate_win0(window: sg.Window, T2_vis: int, lang: str):
-    window['menu'].update(tr.gui_menu[lang])
+    window['menu'].update(generate_menu_bar(lang))
     window['tab1'].update(title=tr.gui_tabs[lang][0])
     window['tab2'].update(title=tr.gui_tabs[lang][1])
     window['tab3'].update(title=tr.gui_tabs[lang][2])
@@ -276,8 +283,8 @@ def translate_win0(window: sg.Window, T2_vis: int, lang: str):
     window['-gamma-'].update(text=tr.gui_gamma[lang])
     window['-brModeText-'].update(tr.gui_brMode[lang])
     window['-brMax-'].update(text=tr.gui_brMax[lang])
-    window['-brMode1-'].update(text=tr.gui_br[lang][1])
-    window['-brMode2-'].update(text=tr.gui_br[lang][2])
+    window['-brMode1-'].update(text=tr.gui_geom[lang])
+    window['-brMode2-'].update(text=tr.gui_sphe[lang])
     window['-formattingText-'].update(tr.gui_formatting[lang])
     window['-bitnessText-'].update(tr.gui_bit[lang])
     window['-roundingText-'].update(tr.gui_rnd[lang])
@@ -313,7 +320,7 @@ def translate_win0(window: sg.Window, T2_vis: int, lang: str):
         window['T2_pathText'+str(i)].update(tr.gui_browse[lang])
         window['T2_evalText'+str(i)].update(tr.gui_evaluate[lang])
     window['T2_desun'].update(text=tr.gui_desun[lang])
-    window['T2_photons'].update(text=tr.gui_photons[lang])
+    window['T2_photons'].update(text=tr.gui_photons[lang]) #, tooltip=tr.gui_photons_note[lang]) # doesn't work
     #window['T2_autoalign'].update(text=tr.gui_autoalign[lang])
     #window['T2_plotpixels'].update(text=tr.gui_plotpixels[lang])
     window['T2_factorText'].update(tr.gui_factor[lang])
@@ -326,7 +333,7 @@ def translate_win0(window: sg.Window, T2_vis: int, lang: str):
     window['T3_velocity'].update(tr.gui_velocity[lang])
     window['T3_vII'].update(tr.gui_vII[lang])
     window['T3_mag'].update(tr.gui_mag[lang])
-    window['T3_explanation'].update(tr.gui_explanation[lang])
+    window['T3_mag_note'].update(tr.gui_mag_note[lang])
     window['T3_colorRGB'].update(tr.gui_rgb[lang])
     window['T3_colorHEX'].update(tr.gui_hex[lang])
     window['T3_plot'].update(tr.gui_plot[lang])

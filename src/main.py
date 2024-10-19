@@ -127,11 +127,8 @@ def launch_window(lang: str):
             )
 
         # Run-time translation
-        elif event in tr.lang_list[lang]:
-            for lng, lst in tr.langs.items(): # determine the language
-                if event in lst:
-                    lang = lng
-                    break
+        elif event in tr.langs.keys():
+            lang = tr.langs[event]
             window0 = gui.translate_win0(window0, T2_vis, lang)
             if values['-currentTab-'] == 'tab1':
                 if T1_obj_name:

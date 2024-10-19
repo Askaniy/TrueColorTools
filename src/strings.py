@@ -1,6 +1,12 @@
 """ Localization file, contains almost all the strings used """
 
-# Window
+
+# Menu bar
+gui_menu = {
+    'en': 'Menu',
+    'ru': 'Меню',
+    'de': 'Menü'
+}
 gui_ref = {
     'en': 'References',
     'ru': 'Источники',
@@ -22,25 +28,15 @@ gui_exit = {
     'ru': 'Выход',
     'de': 'Schließen'
 }
+gui_language = {
+    'en': 'Language',
+    'ru': 'Язык',
+    'de': 'Sprache'
+}
 langs = {
-    'en': ['English', 'Английский', 'Englisch'],
-    'ru': ['Russian', 'Русский', 'Russisch'],
-    'de': ['German', 'Немецкий', 'Deutsch']
-}
-lang_list = {
-    'en': ['Russian', 'German'],
-    'ru': ['Английский', 'Немецкий'],
-    'de': ['Englisch', 'Russisch']
-}
-gui_tabs = {
-    'en': ['Database viewer', 'Image processing', 'Blackbody & Redshifts'],
-    'ru': ['Просмотр базы спектров', 'Обработка изображений', 'АЧТ и красные смещения'],
-    'de': ['Datenbank-Viewer', 'Bildverarbeitung', 'Schwarzkörper & Rotverschiebung']
-}
-gui_menu = {
-    'en': [['File', [gui_ref['en'], gui_info['en'], gui_exit['en']]], ['Language', lang_list['en']]],
-    'ru': [['Файл', [gui_ref['ru'], gui_info['ru'], gui_exit['ru']]], ['Язык', lang_list['ru']]],
-    'de': [['Datei', [gui_ref['de'], gui_info['de'], gui_exit['de']]], ['Sprache', lang_list['de']]],
+    'English': 'en',
+    'Русский': 'ru',
+    'Deutsch': 'de'
 }
 gui_no_data_message = {
     'en': 'You need to load the database to get this data.',
@@ -59,6 +55,16 @@ gui_gamma = {
     'ru': 'гамма-коррекция',
     'de': 'Gammakorrektur'
 }
+gui_gamma_note = {
+    'en': 'Takes into account the non-linearity of brightness perception of the human eye',
+    'ru': 'Учитывает нелинейность восприятия яркости человеческого глаза',
+    'de': 'Berücksichtigt die Nichtlinearität der Helligkeitswahrnehmung des menschlichen Auges'
+}
+gui_srgb_note = {
+    'en': 'CIE sRGB color space with Illuminant E',
+    'ru': 'Цветовое пространство CIE sRGB с осветителем E',
+    'de': 'CIE sRGB-Farbraum mit Normlicht E'
+}
 gui_brMode = {
     'en': 'Brightness mode',
     'ru': 'Режим яркости',
@@ -69,16 +75,31 @@ gui_brMax = {
     'ru': 'максимизировать',
     'de': 'maximieren'
 }
-gui_br = {
-    'en': ['chromaticity', 'geometric albedo', 'spherical albedo'],
-    'ru': ['цветность', 'геом. альбедо', 'сфер. альбедо'],
-    'de': ['Farbton', 'geometrische Albedo', 'sphärische Albedo']
+gui_geom = {
+    'en': 'geometric albedo',
+    'ru': 'геом. альбедо',
+    'de': 'geometrische Albedo'
 }
-gui_interp = {
-    'en': ['Interpolator/extrapolator', 'old', 'new'],
-    'ru': ['Интер/экстраполятор', 'старый', 'новый'],
-    'de': ['Interpolation/Extrapolation', 'alt', 'neu']
+gui_geom_note = {
+    'en': 'Flux ratio to the Lambertian disk flux with the same cross-sectional area at a phase angle of 0°',
+    'ru': 'Отношение потока к потоку ламбертового диска с той же площадью сечения при фазовом угле 0°',
+    'de': 'Flussverhältnis zum Lambertschen Strahler mit gleicher Querschnittsfläche bei einem Phasenwinkel von 0°'
 }
+gui_sphe = {
+    'en': 'spherical albedo',
+    'ru': 'сфер. альбедо',
+    'de': 'sphärische Albedo'
+}
+gui_sphe_note = {
+    'en': 'Ratio of scattered light to incident light in all directions',
+    'ru': 'Отношение рассеянного света к падающему по всем направлением',
+    'de': 'Verhältnis von gestreutem zu einfallendem Licht über alle Richtungen'
+}
+#gui_interp = {
+#    'en': ['Interpolator/extrapolator', 'old', 'new'],
+#    'ru': ['Интер/экстраполятор', 'старый', 'новый'],
+#    'de': ['Interpolation/Extrapolation', 'alt', 'neu']
+#}
 gui_formatting = {
     'en': 'Output formatting',
     'ru': 'Форматирование',
@@ -100,10 +121,15 @@ gui_rnd = {
 #    'ru': 'Входные данные',
 #    'de': 'Eingaben'
 #}
-gui_output = {
-    'en': 'Output',
-    'ru': 'Результат',
-    'de': 'Ergebnisse'
+#gui_output = {
+#    'en': 'Output',
+#    'ru': 'Результат',
+#    'de': 'Ergebnisse'
+#}
+gui_tabs = {
+    'en': ['Database viewer', 'Image processing', 'Blackbody & Redshifts'],
+    'ru': ['Просмотр базы спектров', 'Обработка изображений', 'АЧТ и красные смещения'],
+    'de': ['Datenbank-Viewer', 'Bildverarbeitung', 'Schwarzkörper & Rotverschiebung']
 }
 
 # Tab 1 - Database viewer
@@ -150,12 +176,12 @@ gui_in_filter = {
 gui_plot = {
     'en': 'Show the plot',
     'ru': 'Показать график',
-    'de': 'Zeigen Sie das Diagramm'
+    'de': 'Diagramm anzeigen'
 }
 gui_pin = {
     'en': 'Pin the spectrum',
     'ru': 'Закрепить спектр',
-    'de': 'Das Spektrum festhalten'
+    'de': 'Aktuelles Spektrum beibehalten'
 }
 #gui_unpin = {
 #    'en': 'Unpin the spectrum plot',
@@ -170,12 +196,12 @@ gui_clear = {
 gui_export2text = {
     'en': 'Export category to text',
     'ru': 'Экспортировать в текст',
-    'de': 'Kategorie in Text exportieren'
+    'de': 'Kategorie als Text exportieren'
 }
 gui_export2table = {
     'en': 'Export category to table',
     'ru': 'Экспортировать в таблицу',
-    'de': 'Kategorie in Tabelle exportieren'
+    'de': 'Kategorie als Tabelle exportieren'
 }
 gui_save = {
     'en': 'Save',
@@ -190,7 +216,7 @@ gui_col = {
 table_title = {
     'en': ['The “', '” category color table'],
     'ru': ['Таблица цветов для категории «', '»'],
-    'de': ['Farbtafel der Kategory „', '“']
+    'de': ['Farbtabelle der Kategory „', '“']
 }
 table_estimated = {
     'en': 'estimated albedo',
@@ -217,7 +243,7 @@ info_objects = {
     'ru': 'объектов показано',
     'de': 'Objekte werden angezeigt'
 }
-info_sRGB = {
+info_srgb = {
     'en': 'sRGB color space',
     'ru': 'Пространство sRGB',
     'de': 'sRGB-Farbraum'
@@ -280,14 +306,24 @@ gui_evaluate = {
 #    'de': 'Helligkeit'
 #}
 gui_desun = {
-    'en': 'Remove Sun as emitter',
-    'ru': 'Убрать отражённый спектр Солнца',
-    'de': 'Sonne als Emitter entfernen'
+    'en': 'Divide by Solar spectrum',
+    'ru': 'Делить на спектр Солнца',
+    'de': 'Division durch Sonnenspektrum'
+}
+gui_desun_note = {
+    'en': 'Removes the reflected color of the Sun, leaves the radiance factor (I/F)',
+    'ru': 'Убирает отражённый цвет Солнца, оставляет отражательную способность (I/F)',
+    'de': 'Entfernt die reflektierte Farbe der Sonne und belässt den Strahlungsfaktor (I/F)'
 }
 gui_photons = {
-    'en': 'Photon spectral density',
-    'ru': 'Спектральная плотность фотонов',
-    'de': 'Photonensprektraldichte'
+    'en': 'Photon counter',
+    'ru': 'Счётчик фотонов',
+    'de': 'Photonenzähler'
+}
+gui_photons_note = {
+    'en': 'Converts the photon spectral density of the input data into the desired energy density',
+    'ru': 'Переводит спектральную плотность фотонов входных данных в требуемую энергетическую',
+    'de': 'Wandelt die Photonenspektraldichte der Eingangsdaten in die gewünschte Energiedichte um'
 }
 #gui_autoalign = {
 #    'en': 'Align image bands (β)',
@@ -299,10 +335,20 @@ gui_factor = {
     'ru': 'Множитель яркости',
     'de': 'Helligkeitsfaktor'
 }
+gui_factor_note = {
+    'en': 'Multiplies the values of the (reconstructed) spectral cube by a constant',
+    'ru': 'Умножает значения (реконструированного) спектрального куба на константу',
+    'de': 'Multipliziert die Werte des (rekonstruierten) Spektralwürfels mit einer Konstante'
+}
 gui_upscale = {
     'en': 'Upscale small images',
     'ru': 'Увеличить небольшие изображения',
     'de': 'Kleine Bilder vergrößern'
+}
+gui_upscale_note = {
+    'en': 'Multiplies width and height by integer times to the preview size (no interpolation)',
+    'ru': 'Умножает ширину и высоту в целое число раз до размера превью (без интерполяции)',
+    'de': 'Multipliziert Breite und Höhe mit ganzzahligen Werten auf die Vorschaugröße (keine Interpolation)'
 }
 gui_preview = {
     'en': 'Show preview',
@@ -337,7 +383,7 @@ gui_mag = {
     'ru': 'Вид. зв. величина*',
     'de': 'scheinb. Helligkeit*'
 }
-gui_explanation = {
+gui_mag_note = {
     'en': '* if the Solar disk in the sky is replaced by this blackbody sphere',
     'ru': '* если диск Солнца на небе заменить данной чёрнотельной сферой',
     'de': '* wenn die Sonne am Taghimmel durch einen Schwarzkörper ersetzt würde'
@@ -345,14 +391,14 @@ gui_explanation = {
 
 # Plots
 spectral_plot = {
-    'en': 'Spectral energy density plot',
-    'ru': 'График спектральной плотности энергии',
-    'de': 'Spektralenergiedichte'
+    'en': 'Energy spectral density or albedo',
+    'ru': 'Спектральная плотность энергии или альбедо',
+    'de': 'Spektrale Energiedichte bzw. Albedo'
 }
 light_theme = {
     'en': 'Light theme',
     'ru': 'Светлая тема',
-    'de': 'Thema Licht'
+    'de': 'Heller Modus'
 }
 xaxis_text = {
     'en': 'Wavelength, nm',
@@ -360,9 +406,9 @@ xaxis_text = {
     'de': 'Wellenlänge, nm'
 }
 yaxis_text = {
-    'en': 'Spectral energy density',
-    'ru': 'Спектральная плотность энергии',
-    'de': 'Spektralenergiedichte'
+    'en': 'Spectral density',
+    'ru': 'Спектральная плотность',
+    'de': 'Spektraldichte'
 }
 
 
@@ -533,7 +579,7 @@ names = {
     'Cyllene': {'ru': 'Киллене', 'de': 'Cyllene'},
     # Saturnian system
     'Saturn': {'ru': 'Сатурн', 'de': 'Saturn'},
-    'Rings of Saturn': {'ru': 'Кольца Сатурна', 'de': 'Ringe des Saturn'},
+    'Rings of Saturn': {'ru': 'Кольца Сатурна', 'de': 'Saturnringe'},
     'Mimas': {'ru': 'Мимас', 'de': 'Mimas'},
     'Enceladus': {'ru': 'Энцелад', 'de': 'Enceladus'},
     'Tethys': {'ru': 'Тефия', 'de': 'Tethys'},
@@ -567,7 +613,7 @@ names = {
     'Tarqeq': {'ru': 'Таркек', 'de': 'Tarqeq'},
     # Uranian system
     'Uranus': {'ru': 'Уран', 'de': 'Uranus'},
-    'Rings of Uranus': {'ru': 'Кольца Урана', 'de': 'Ringe des Uranus'},
+    'Rings of Uranus': {'ru': 'Кольца Урана', 'de': 'Uranusringe'},
     'Portia group': {'ru': 'Группа Порции', 'de': 'Portia-Gruppe'},
     'Puck': {'ru': 'Пак', 'de': 'Puck'},
     'Miranda': {'ru': 'Миранда', 'de': 'Miranda'},
@@ -672,7 +718,7 @@ names = {
     'Gǃòʼé ǃHú': {'ru': 'Гкъо’э Къху', 'de': 'Gǃòʼé ǃHú'},
     'Arrokoth': {'ru': 'Аррокот', 'de': 'Arrokoth'},
     'Halley': {'ru': 'Галлея', 'de': 'Halley'},
-    'Churyumov–Gerasimenko': {'ru': 'Чурюмова — Герасименко', 'de': 'Churyumov-Gerasimenko'},
+    'Churyumov–Gerasimenko': {'ru': 'Чурюмова — Герасименко', 'de': 'Tschurjumow-Gerassimenko'},
     'Hartley': {'ru': 'Хартли', 'de': 'Hartley'},
     'Hale–Bopp': {'ru': 'Хейла — Боппа', 'de': 'Hale–Bopp'},
     'ʻOumuamua': {'ru': 'Оумуамуа', 'de': 'ʻOumuamua'},

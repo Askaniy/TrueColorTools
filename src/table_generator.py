@@ -59,7 +59,7 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
     info_list = (
         f'{l}/{len(objectsDB)} {tr.info_objects[lang]}',
         f'{tr.info_gamma[lang]}: {tr.info_indicator[lang][gamma]}',
-        f'{tr.info_sRGB[lang]}: {tr.info_indicator[lang][srgb]}',
+        f'{tr.info_srgb[lang]}: {tr.info_indicator[lang][srgb]}',
         f'{tr.gui_brMode[lang]}: {tr.gui_br[lang][(1-brMax)*(2-brGeom)]}',
         tr.link,
     )
