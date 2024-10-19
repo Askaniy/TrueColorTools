@@ -158,9 +158,14 @@ gui_tags = {
     'ru': 'Категория',
     'de': 'Kategorie'
 }
+gui_no_albedo = {
+    'en': 'Note: No albedo data.',
+    'ru': 'Прим.: Нет данных об альбедо.',
+    'de': 'Hinweis: Keine Albedodaten.'
+}
 gui_estimated = {
     'en': 'Note: The albedo is estimated.',
-    'ru': 'Прим.: Данное альбедо — теор. оценка',
+    'ru': 'Прим.: Данное альбедо — теор. оценка.',
     'de': 'Hinweis: Die Albedo ist eine Schätzung.'
 }
 gui_rgb = {

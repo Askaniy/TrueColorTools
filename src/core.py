@@ -507,7 +507,7 @@ class Spectrum(_SpectralObject):
     @staticmethod
     def stub(name=None):
         """ Initializes an object in case of the data problems """
-        return Spectrum((555,), np.ones(1), name=name)
+        return Spectrum((555,), np.zeros(1), name=name)
     
     @staticmethod
     @lru_cache(maxsize=32)
@@ -713,7 +713,7 @@ class FilterSystem(_SpectralObject):
     @staticmethod
     def stub(name=None):
         """ Initializes an object in case of the data problems """
-        return FilterSystem((555,), np.ones((1, 1)), name=name, names=(None))
+        return FilterSystem((555,), np.zeros((1, 1)), name=name, names=(None))
     
     @staticmethod
     def from_list(filters: Sequence[str|Spectrum], name: str|ObjectName = None):
@@ -879,7 +879,7 @@ class Photospectrum(_PhotospectralObject):
     @staticmethod
     def stub(name=None):
         """ Initializes an object in case of the data problems """
-        return Photospectrum(FilterSystem.from_list(('Generic_Bessell.B', 'Generic_Bessell.V')), np.ones(2), name=name)
+        return Photospectrum(FilterSystem.from_list(('Generic_Bessell.B', 'Generic_Bessell.V')), np.zeros(2), name=name)
 
 
 
@@ -948,7 +948,7 @@ class PhotospectralCube(_PhotospectralObject, _Cube):
     @staticmethod
     def stub(name=None):
         """ Initializes an object in case of the data problems """
-        return PhotospectralCube(FilterSystem.from_list(('Generic_Bessell.B', 'Generic_Bessell.V')), np.ones((2, 1, 1)), name=name)
+        return PhotospectralCube(FilterSystem.from_list(('Generic_Bessell.B', 'Generic_Bessell.V')), np.zeros((2, 1, 1)), name=name)
 
 
 
@@ -978,15 +978,9 @@ class NonReflectiveBody:
         self.tags = tags
         self.spectrum = spectrum
     
-    def get_spectrum(self, mode: str):
-        """
-        Returns the spectrum as the first argument, and the `estimated=False` bool status as the second one.
-        Albedo not determined for NonReflectiveBody, so it can't be "estimated", but we need output compatibility with ReflectiveBody.
-        """
-        if 'star' in self.tags:
-            return self.spectrum, False # means it's an emitter and we need to render it
-        else:
-            return Spectrum.stub(self.name), False # means we don't need to render it
+    def get_spectrum(self, *args, **kwargs):
+        """ Returns the spectrum as the first argument, and the `estimated=False` bool status as the second one """
+        return self.spectrum, False
 
 
 class ReflectiveBody:

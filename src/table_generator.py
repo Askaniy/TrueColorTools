@@ -115,8 +115,13 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
         body = database_parser(obj_name, objectsDB[obj_name])
         maximize_br = brMax or isinstance(body, NonReflectiveBody)
 
-        # Setting brightness mode
-        spectrum, estimated = body.get_spectrum('geometric' if brGeom else 'spherical')
+        if not brMax and isinstance(body, NonReflectiveBody) and 'star' not in body.tags:
+            # Black square is shown for objects with no albedo data in the albedo mode
+            spectrum = Spectrum.stub()
+            estimated = False
+        else:
+            # Setting brightness mode
+            spectrum, estimated = body.get_spectrum('geometric' if brGeom else 'spherical')
         is_estimated[n] = estimated
         
         # Color calculation

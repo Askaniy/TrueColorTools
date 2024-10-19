@@ -233,13 +233,18 @@ def launch_window(lang: str):
                     # Spectral data import and processing
                     T1_body = database_parser(T1_obj_name, objectsDB[T1_obj_name])
                     T1_maximize_br = values['-brMax-'] or isinstance(T1_body, NonReflectiveBody)
-
-                    # Setting brightness mode
-                    T1_spectrum, T1_estimated = T1_body.get_spectrum('geometric' if values['-brMode1-'] else 'spherical')
-                    if T1_estimated:
-                        window['T1_albedo_note'].update(tr.gui_estimated[lang])
+                    
+                    if not values['-brMax-'] and isinstance(T1_body, NonReflectiveBody) and 'star' not in T1_body.tags:
+                        # Black circle is shown for objects with no albedo data in the albedo mode
+                        T1_spectrum = Spectrum.stub()
+                        window['T1_albedo_note'].update(tr.gui_no_albedo[lang])
                     else:
-                        window['T1_albedo_note'].update('')
+                        # Setting brightness mode
+                        T1_spectrum, T1_estimated = T1_body.get_spectrum('geometric' if values['-brMode1-'] else 'spherical')
+                        if T1_estimated:
+                            window['T1_albedo_note'].update(tr.gui_estimated[lang])
+                        else:
+                            window['T1_albedo_note'].update('')
 
                     # Color calculation
                     T1_color = ColorPoint.from_spectral_data(T1_spectrum, T1_maximize_br, values['-srgb-'])
