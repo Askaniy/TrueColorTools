@@ -310,6 +310,11 @@ gui_evaluate = {
     'ru': 'Выполнить',
     'de': 'Auswerten von'
 }
+gui_evaluate_note = {
+    'en': 'Apply a function to the brightness values (x), written in Python syntax',
+    'ru': 'Применить функцию к значениям яркости (x), используется синтаксис Python',
+    'de': 'Wende Funktion auf Helligkeitswerte (x) an, in Python Syntax geschrieben'
+}
 #gui_brightness = {
 #    'en': 'Brightness',
 #    'ru': 'Яркость',

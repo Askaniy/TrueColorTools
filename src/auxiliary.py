@@ -329,6 +329,8 @@ def color_indices_parser(indices: dict):
     interpretation: since the standard deviations subtracting rule is, in fact, the Pythagorean theorem,
     the solutions space is the same as if you try to build a line of right triangles, for each one
     the next cathetus is linked to a previous cathetus by their square.
+    (To draw on the plane you have to use rhombuses of the same area and the same equal sides
+    instead of squares.)
     N hypotenuses are standard deviations of color indices, and N+1 different cathetes are the sought
     standard deviations of the photospectrum.
     The whole triangle line possible positions can be described by just one parameter (1D parametric

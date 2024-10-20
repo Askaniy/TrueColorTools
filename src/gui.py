@@ -153,7 +153,7 @@ def generate_layout(
                 sg.InputCombo(('', *filtersDB), enable_events=True, expand_x=True, key='T2_filter'+n)
             ],
             [
-                sg.Text(tr.gui_evaluate[lang], key='T2_evalText'+n),
+                sg.Text(tr.gui_evaluate[lang], key='T2_evalText'+n, tooltip=tr.gui_evaluate_note[lang]),
                 sg.Input('x', size=1, key='T2_eval'+n, expand_x=True)
             ],
         ]
