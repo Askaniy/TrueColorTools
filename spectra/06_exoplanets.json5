@@ -40,7 +40,8 @@
     //             https://ui.adsabs.harvard.edu/abs/2016MNRAS.459L.109B/abstract
     'Evans2013': [
         'The Deep Blue Color of HD189733b: Albedo Measurements with Hubble Space Telescope/Space Telescope Imaging Spectrograph at Visible Wavelengths',
-        'DOI: 10.1088/2041-8205/772/2/L16', 'https://iopscience.iop.org/article/10.1088/2041-8205/772/2/L16', 'https://ui.adsabs.harvard.edu/abs/2013ApJ...772L..16E/abstract'
+        'DOI: 10.1088/2041-8205/772/2/L16', 'https://iopscience.iop.org/article/10.1088/2041-8205/772/2/L16',
+        'https://ui.adsabs.harvard.edu/abs/2013ApJ...772L..16E/abstract'
     ],
     'HD 189733 b | Evans2013': {
         tags: ['extrasolar/exoplanet', 'planetary body/planet'],
@@ -50,7 +51,8 @@
     },
     'Schwartz2015': [
         'Balancing the energy budget of short-period giant planets: evidence for reflective clouds and optical absorbers',
-        'DOI: 10.1093/mnras/stv470', 'https://academic.oup.com/mnras/article/449/4/4192/1172734', 'https://ui.adsabs.harvard.edu/abs/2015MNRAS.449.4192S/abstract'
+        'DOI: 10.1093/mnras/stv470', 'https://academic.oup.com/mnras/article/449/4/4192/1172734',
+        'https://ui.adsabs.harvard.edu/abs/2015MNRAS.449.4192S/abstract'
     ],
     'HD 189733 b | Schwartz2015': {
         tags: ['extrasolar/exoplanet', 'planetary body/planet'],

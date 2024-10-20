@@ -1,6 +1,6 @@
 {
     'Equal-energy spectrum (CIE Illuminant E)': {
-        tags: ['featured'],
+        //tags: ['featured'],
         nm: [555],
         br: [1],
         albedo: true,

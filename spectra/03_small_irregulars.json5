@@ -2,7 +2,8 @@
     // Jovian small irregulars
     'Grav2015': [
         'NEOWISE: Observations of the Irregular Satellites of Jupiter and Saturn',
-        'DOI: 10.1088/0004-637X/809/1/3', 'https://iopscience.iop.org/article/10.1088/0004-637X/809/1/3', 'https://ui.adsabs.harvard.edu/abs/2015ApJ...809....3G/abstract'
+        'DOI: 10.1088/0004-637X/809/1/3', 'https://iopscience.iop.org/article/10.1088/0004-637X/809/1/3',
+        'https://ui.adsabs.harvard.edu/abs/2015ApJ...809....3G/abstract'
     ],
     'Rettig2001': [
         'Implied Evolutionary Differences of the Jovian Irregular Satellites from a BVR Color Survey',

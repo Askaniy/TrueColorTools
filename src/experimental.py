@@ -1,27 +1,59 @@
 """ Provides incomplete or unnecessary functionality. """
 
 import numpy as np
+from astropy.io import fits
+from typing import Sequence
 
 
 
-# Blackbody spectra
+hanning_factor = 1129/977
 
-h = 6.626e-34 # Planck constant
-c = 299792458 # Speed of light
-k = 1.381e-23 # Boltzmann constant
-const1 = 2 * np.pi * h * c * c
-const2 = h * c / k
-r = 6.957e8 # Solar radius, meters
-au = 149597870700 # astronomical unit, meters
-w = (1 - np.sqrt(1 - (r / au)**2)) / 2 # dilution to compare with Solar light on Earth
-temp_coef_to_make_it_work = 1.8 / 0.448 # 1.8 is expected of irradiance(500, 5770), 0.448 is actual. TODO
-
-# Now it does not work as intended: the spectrum should be comparable to the sun_SI
-def irradiance(nm: int|float|np.ndarray, T: int|float) -> float|np.ndarray:
-    m = nm / 1e9
-    return temp_coef_to_make_it_work * w * const1 / (m**5 * (np.exp(const2 / (m * T)) - 1)) / 1e9 # per m -> per nm
+def get_resolution(array: Sequence):
+    return np.mean(np.diff(array)) * hanning_factor
 
 
+
+#from pyvims import VIMS
+#import tempfile
+#import shutil
+
+def cube_reader(file: str) -> tuple[np.ndarray, np.ndarray]:
+    """ Imports spectral data from the spectral cube in FITS or QUB formats """
+#    if file.isdigit(): # Cassini's VIMS format
+#        cube = VIMS(f'{file}_1', root=tempfile.mkdtemp(), channel='vis') # downloading
+#        print(f'Cube name: {cube}')
+#        print(f'Filename: {cube.fname}')
+#        print(f'Acquisition start time: {cube.start}')
+#        print(f'Acquisition stop time: {cube.stop}')
+#        print(f'Cube mid-time: {cube.time}')
+#        print(f'Exposure duration: {cube.expo}')
+#        print(f'Channel: {cube.channel}')
+#        print(f'Cube data size: {cube.NB, cube.NL, cube.NS}')
+#        print(f'Acquisition mode: {cube.mode}')
+#        print(f'Main target name: {cube.target_name}')
+#        print(f'Flyby id: {cube.flyby}')
+#        nm = cube.wvlns * 1000 # µm to nm
+#        br = cube.data
+#        shutil.rmtree(cube.root)
+#    else: # HST STIS standard of FITS
+    with fits.open(file) as hdul:
+        #hdul.info()
+        #print(repr(hdul[0].header))
+        br = np.array(hdul['sci'].data).transpose((0, 2, 1))
+        nm = np.array(hdul['wavelength'].data)
+    return nm, br
+
+    
+#def sorted(self) -> Self:
+#    """ Sorts the PhotospectralCube by increasing wavelength """
+#    nm = self.mean_nm()
+#    if np.any(nm[:-1] > nm[1:]): # fast increasing check
+#        order = np.argsort(nm)
+#        self.filters = tuple(np.array(self.filters)[order])
+#        self.br = self.br[order]
+#        if self.sd is not None:
+#            self.sd = self.sd[order]
+#    return self
 
 # Align multiband image
 
@@ -262,13 +294,13 @@ def absolute_shifts(diffs):
 #    print(cube) # general info
 #
 #    # Getting target wavelength range
-#    nm = aux.grid(*cube.spectral_extrema.value, aux.resolution)
-#    flag = np.where(nm < aux.nm_red_limit + aux.resolution) # with reserve to be averaged
+#    nm = aux.grid(*cube.spectral_extrema.value, nm_step)
+#    flag = np.where(nm < nm_red_limit + nm_step) # with reserve to be averaged
 #    nm = nm[flag]
 #
 #    # Spectral smoothing and down scaling
 #    current_resolution = aux.get_resolution(cube.spectral_axis.value)
-#    sd = aux.gaussian_width(current_resolution, aux.resolution) / current_resolution
+#    sd = aux.gaussian_width(current_resolution, nm_step) / current_resolution
 #    print('Beginning spectral smoothing')
 #    cube = cube.spectral_smooth(Gaussian1DKernel(sd)) # parallel execution doesn't work
 #    print('Beginning spectral down scaling')
@@ -286,7 +318,7 @@ def absolute_shifts(diffs):
 
 
 
-# Legacy data_core.py multiresolution spectrum processing
+# Legacy py multiresolution spectrum processing
 # Code of summer 2023. Simplified in November 2023.
 
 #resolutions = (5, 10, 20, 40, 80, 160) # nm

@@ -3,14 +3,14 @@ from PIL import Image, ImageDraw, ImageFont
 from time import strftime
 from math import floor, ceil, sqrt
 import numpy as np
-from src.auxiliary import normalize_string
+
+from src.core import *
+from src.auxiliary import higher_dim, normalize_string
 import src.database as db
-import src.data_processing as dp
-import src.color_processing as cp
 import src.strings as tr
 
 
-def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: bool, folder: str, extension: str, lang: str):
+def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: bool, gamma: bool, folder: str, extension: str, lang: str):
     """ Creates and saves a table of colored squares for each spectral data unit that has the specified tag """
     displayed_namesDB = db.obj_names_list(objectsDB, tag)
     l = len(displayed_namesDB)
@@ -56,11 +56,12 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
     w0 = tiny_space + border_space
 
     # Placing info column
+    brMode = tr.gui_chromaticity[lang] if brMax else (tr.gui_geom[lang] if brGeom else tr.gui_sphe[lang])
     info_list = (
         f'{l}/{len(objectsDB)} {tr.info_objects[lang]}',
         f'{tr.info_gamma[lang]}: {tr.info_indicator[lang][gamma]}',
-        f'{tr.info_sRGB[lang]}: {tr.info_indicator[lang][srgb]}',
-        f'{tr.gui_br[lang][0]}: {tr.gui_br[lang][brMode+1]}',
+        f'{tr.info_srgb[lang]}: {tr.info_indicator[lang][srgb]}',
+        f'{tr.gui_brMode[lang]}: {brMode}',
         tr.link,
     )
     info_colors = (      # text brightness formula: br = 255 * (x^(1/2.2))
@@ -90,11 +91,11 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
         if notes_per_column * notes_columns_num < len(notes):
             notes_per_column = round(len(notes) // notes_columns_num + 1)
 
-    # Calculating grid hights
+    # Calculating grid heights
     h0 = border_space + name_size
     h1 = h0 + 2*half_square * int(ceil(l / objects_per_row)) + border_space//2
     h2 = h1 + help_step
-    h = h1 + help_step + notes_per_column*note_step + border_space//2 # total image hight
+    h = h1 + help_step + notes_per_column*note_step + border_space//2 # total image height
 
     # Calculating squircles positions
     l_range = np.arange(l)
@@ -103,38 +104,34 @@ def generate_table(objectsDB: dict, tag: str, brMode: bool, srgb: bool, gamma: b
 
     # Creating of background of colored squircles
     arr = np.zeros((h, w, 3))
-    squircle = np.repeat(np.expand_dims(generate_squircle(r_square, rounding_radius), axis=2), repeats=3, axis=2)
-    squircle_contour = np.repeat(np.expand_dims(generate_squircle_contour(r_square, rounding_radius, 1), axis=2), repeats=3, axis=2) * 0.25
+    squircle = higher_dim(generate_squircle(r_square, rounding_radius), times=3, axis=2)
+    squircle_contour = higher_dim(generate_squircle_contour(r_square, rounding_radius, 1), times=3, axis=2) * 0.25
     is_estimated = np.empty(l, dtype='bool')
     is_white_text = np.empty(l, dtype='bool')
 
     for n, obj_name in enumerate(displayed_namesDB):
 
         # Spectral data import and processing
-        body = dp.database_parser(obj_name, objectsDB[obj_name])
-        albedo = brMode and isinstance(body, dp.ReflectiveBody)
+        body = database_parser(obj_name, objectsDB[obj_name])
+        maximize_br = brMax or isinstance(body, NonReflectiveBody)
 
-        # Setting brightness mode
-        match brMode:
-            case 0:
-                spectrum, estimated = body.get_spectrum('chromaticity')
-            case 1:
-                spectrum, estimated = body.get_spectrum('geometric')
-            case 2:
-                spectrum, estimated = body.get_spectrum('spherical')
+        if not brMax and isinstance(body, NonReflectiveBody) and 'star' not in body.tags:
+            # Black square is shown for objects with no albedo data in the albedo mode
+            spectrum = Spectrum.stub()
+            estimated = False
+        else:
+            # Setting brightness mode
+            spectrum, estimated = body.get_spectrum('geometric' if brGeom else 'spherical')
         is_estimated[n] = estimated
         
         # Color calculation
-        if srgb:
-            color = cp.Color.from_spectrum_CIE(spectrum, albedo)
-        else:
-            color = cp.Color.from_spectrum(spectrum, albedo)
+        color = ColorPoint.from_spectral_data(spectrum, maximize_br, srgb)
         if gamma:
             color = color.gamma_corrected()
         is_white_text[n] = color.grayscale() > 0.5
 
-        # Rounded square. For just a square, use `object_template = color.rgb`
-        object_template = color.rgb * squircle if np.any(color.rgb) else squircle_contour
+        # Rounded square. For just a square, use `object_template = color.br`
+        object_template = color.br * squircle if np.any(color.br) else squircle_contour
 
         # Placing object template into the image template
         center_x = centers_x[n]

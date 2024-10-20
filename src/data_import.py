@@ -1,6 +1,5 @@
 """ Responsible for converting measurement data into a working form. """
 
-from pathlib import Path
 from astropy.io import fits
 from astropy.table import Table
 import astropy.units as u
@@ -38,8 +37,6 @@ def file_reader(file: str) -> tuple[np.ndarray, None]:
         nm, br, sd = fits_reader(file, type_info)
     else:
         nm, br, sd = txt_reader(file, type_info)
-    if 'p' in type_info:
-        br /= nm # multiplying by scaled photon energy E=hc/λ
     return nm, br, sd
 
 def txt_reader(file: str, type_info: str) -> tuple[np.ndarray, None]:
@@ -54,10 +51,13 @@ def txt_reader(file: str, type_info: str) -> tuple[np.ndarray, None]:
         data = np.loadtxt(f).transpose()
         nm = data[0]
         br = data[1]
-        try:
-            sd = data[2]
-        except IndexError:
-            sd = None
+        sd = data[2] if data.shape[0] >= 3 else None
+        if data.shape[0] >= 4 and 1 in data[3]:
+            # SMASS error indication in the 4th column
+            mask = data[3] == 1
+            nm = nm[mask]
+            br = br[mask]
+            sd = sd[mask]
     return nm*to_nm_factor, br, sd
 
 def fits_reader(file: str, type_info: str) -> tuple[np.ndarray, None]:
@@ -80,13 +80,16 @@ def fits_reader(file: str, type_info: str) -> tuple[np.ndarray, None]:
             # Getting wavelength data
             wl_id = search_column(columns.names, 'wl')
             wl = tbl[columns[wl_id].name]
-            if len(wl.shape) > 1:
+            if wl.ndim > 1:
                 wl = wl[0]
             # Getting flux data
             br_id = search_column(columns.names, 'br')
             br = tbl[columns[br_id].name]
-            if len(br.shape) > 1:
-                br = br[0]
+            match br.ndim:
+                case 2:
+                    br = br[0]
+                case 3:
+                    br = br.transpose((0, 2, 1)) # like spectral cube?!
             # Standard deviation getting attempt
             if len(columns) > 2:
                 sd_id = search_column(columns.names, 'sd')
@@ -123,7 +126,7 @@ def search_column(names: list[str], target: str):
         case 'wl':
             candidates = names_set & {'wavelength', 'wave', 'lambda'}
         case 'br':
-            candidates = names_set & {'flux'}
+            candidates = names_set & {'flux', 'sci'}
         case 'sd':
             candidates = names_set & {'syserror'}
     try:

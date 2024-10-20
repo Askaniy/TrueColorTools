@@ -5,29 +5,9 @@ from pathlib import Path
 import numpy as np
 from astropy.io import fits
 from PIL import Image
-#from pyvims import VIMS
-#import tempfile
-#import shutil
 
 def cube_reader(file: str) -> tuple[np.ndarray, np.ndarray]:
-    """ Imports spectral data from the spectral cube in FITS or QUB formats """
-#    if file.isdigit(): # Cassini's VIMS format
-#        cube = VIMS(f'{file}_1', root=tempfile.mkdtemp(), channel='vis') # downloading
-#        print(f'Cube name: {cube}')
-#        print(f'Filename: {cube.fname}')
-#        print(f'Acquisition start time: {cube.start}')
-#        print(f'Acquisition stop time: {cube.stop}')
-#        print(f'Cube mid-time: {cube.time}')
-#        print(f'Exposure duration: {cube.expo}')
-#        print(f'Channel: {cube.channel}')
-#        print(f'Cube data size: {cube.NB, cube.NL, cube.NS}')
-#        print(f'Acquisition mode: {cube.mode}')
-#        print(f'Main target name: {cube.target_name}')
-#        print(f'Flyby id: {cube.flyby}')
-#        nm = cube.wvlns * 1000 # µm to nm
-#        br = cube.data
-#        shutil.rmtree(cube.root)
-#    else: # HST STIS standard of FITS
+    """ Imports spectral data from the spectral cube in FITS format """
     with fits.open(file) as hdul:
         #hdul.info()
         #print(repr(hdul[0].header))
@@ -35,7 +15,7 @@ def cube_reader(file: str) -> tuple[np.ndarray, np.ndarray]:
         nm = np.array(hdul['wavelength'].data)
     return nm, br
 
-def rgb_reader(file: str, formulas: list) -> np.ndarray:
+def rgb_reader(file: str, formulas: list = None) -> np.ndarray:
     """ Imports spectral data from a RGB image """
     img = Image.open(file)
     img = img.convert(to_supported_mode(img.mode))
