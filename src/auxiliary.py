@@ -267,15 +267,42 @@ def irradiance(nm: int|float|np.ndarray, T: int|float) -> float|np.ndarray:
 
 def parse_value_sd(data: float|Sequence[float]):
     """ Guarantees the output of the value and its sd for variable input """
-    if isinstance(data, Sequence) and len(data) == 2:
+    if isinstance(data, Sequence|np.ndarray) and len(data) == 2:
         value, sd = data
-    elif isinstance(data, (int, float)):
+    elif isinstance(data, int|float):
         value = data
         sd = None
     else:
         print(f'Invalid data input: {data}. Must be a numeric value or a [value, sd] list. Returning None.')
         value = sd = None
     return value, sd
+
+def parse_value_sd_list(arr: Sequence):
+    """ Splits the values and standard deviations into two arrays """
+    try:
+        # no sd case
+        arr = np.array(arr, dtype='float') # ValueError here means inhomogeneous shape
+        if arr.ndim != 1:
+            raise ValueError # means sd is there
+        return arr, None # result with no sd
+    except ValueError:
+        # sd case
+        values = []
+        sds = []
+        for data in arr:
+            value, sd = parse_value_sd(data)
+            values.append(value)
+            sds.append(sd)
+        return np.array(values, dtype='float'), np.array(sds, dtype='float')
+
+def repeat_if_value(data: int|float|Sequence, arr_len: int):
+    """ If the input consists of a single number, stretches to 1D array """
+    arr = np.array(data)
+    if arr.ndim == 0:
+        # a single number
+        return np.repeat(arr, arr_len)
+    else:
+        return arr
 
 def mag2irradiance(mag: int|float|np.ndarray, zero_point: float = 1.):
     """ Converts magnitudes to irradiance (by default in Vega units) """

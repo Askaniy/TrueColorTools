@@ -633,7 +633,7 @@
         'Luminescence from Vacuum-Ultraviolet-irradiated Cosmic Ice Analogs and Residues',
         'DOI: 10.1086/345349', 'https://iopscience.iop.org/article/10.1086/345349'
     ],
-    'Iapetus:Leading hemisphere (S VII) | Gudipati2003': {
+    'Iapetus: Leading hemisphere (S VII) | Gudipati2003': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'traced spectrum'],
         nm: [330, 350, 380, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850],
         br: [0.047, 0.051, 0.058, 0.063, 0.067, 0.071, 0.080, 0.087, 0.090, 0.093, 0.099, 0.102, 0.102],
@@ -836,6 +836,38 @@
         file: 'spectra/files/Karkoschka/Neptune1995.txt',
         geometric_albedo: true,
     },
+    // Proteus
+    'Pascu2006': [
+        'HST BVI photometry of Triton and Proteus',
+        'DOI: 10.1016/j.icarus.2006.07.020', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103506002648'
+    ],
+    'Proteus: −33° East (N III) | Pascu2006': { // visit 1, leading side
+        tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
+        photometric_system: 'HST_WFPC2-PC',
+        filters: ['F439W', 'F555W', 'F791W'],
+        mag: [[5.81, 0.02], [5.09, 0.01], [4.36, 0.05]],
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['HST_WFPC2-PC.F555W', [0.093, 0.001]],
+    },
+    'Proteus: +54° East (N III) | Pascu2006': { // visit 2, leading side
+        tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
+        photometric_system: 'HST_WFPC2-PC',
+        filters: ['F439W', 'F555W', 'F791W'],
+        mag: [[5.80, 0.02], [5.09, 0.02], [4.35, 0.03]],
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['HST_WFPC2-PC.F555W', [0.093, 0.001]],
+    },
+    'Proteus: +59° West (N III) | Pascu2006': { // visit 3, trailing side
+        tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
+        photometric_system: 'HST_WFPC2-PC',
+        filters: ['F439W', 'F555W', 'F791W'],
+        mag: [[5.90, 0.02], [5.19, 0.02], [4.45, 0.05]],
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['HST_WFPC2-PC.F555W', [0.084, 0.001]],
+    },
     // Triton
     'Tryka1999': [
         'A Visual Spectrum of Triton from the Hubble Space Telescope',
@@ -845,6 +877,36 @@
         tags: ['featured', 'Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon'],
         nm_range: {start: 300, stop: 900, step: 100},
         br_geometric: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
+        phase_integral: [0.94, 0.04],
+    },
+    'Triton: −19° West (N I) | Pascu2006, Verbiscer2022': { // visit 1, leading side
+        tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
+        photometric_system: 'HST_WFPC2-PC',
+        filters: ['F439W', 'F555W', 'F791W'],
+        mag: [[-0.646, 0.009], [-1.343, 0.002], [-2.119, 0.006]],
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['HST_WFPC2-PC.F555W', [0.84, 0.01]],
+        phase_integral: [0.94, 0.04],
+    },
+    'Triton: −3° West (N I) | Pascu2006, Verbiscer2022': { // visit 2, leading side
+        tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
+        photometric_system: 'HST_WFPC2-PC',
+        filters: ['F439W', 'F555W', 'F791W'],
+        mag: [[-0.637, 0.014], [-1.332, 0.001], [-2.088, 0.004]],
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['HST_WFPC2-PC.F555W', [0.83, 0.01]],
+        phase_integral: [0.94, 0.04],
+    },
+    'Triton: −10° East (N I) | Pascu2006, Verbiscer2022': { // visit 3, trailing side
+        tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
+        photometric_system: 'HST_WFPC2-PC',
+        filters: ['F439W', 'F555W', 'F791W'],
+        mag: [[-0.556, 0.005], [-1.255, 0.004], [-2.031, 0.006]],
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['HST_WFPC2-PC.F555W', [0.78, 0.01]],
         phase_integral: [0.94, 0.04],
     },
     // Nereid

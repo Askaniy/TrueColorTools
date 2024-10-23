@@ -63,7 +63,7 @@ class ObjectName:
 
     unnamed_count = 0 # class attribute to track the number of unnamed objects
 
-    def __init__(self, name: str = None) -> None:
+    def __init__(self, name: str = None):
         """
         Initializes the ObjectName with name parsing.
         The template is `(index) name: note (info) | reference`.
@@ -269,7 +269,7 @@ class _SpectralObject(_TrueColorToolsObject):
     - `name` (ObjectName): name as an instance of a class that stores its components
     """
     
-    def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None, name: str|ObjectName = None) -> None:
+    def __init__(self, ndim: int, nm: Sequence, br: Sequence, sd: Sequence = None, name: str|ObjectName = None):
         """
         It is assumed that the input wavelength grid can be trusted. If preprocessing is needed, see `SpectralObject.from_array`.
         There are no checks for negativity, since such spectra exist, for example, red CMF.
@@ -282,6 +282,8 @@ class _SpectralObject(_TrueColorToolsObject):
         """
         self.nm = np.asarray(nm, dtype='int16')
         self.br = np.asarray(br, dtype='float64')
+        if ndim != self.br.ndim:
+            raise ValueError(f'Expected brightness array of dimension {ndim}, not {self.br.ndim}')
         self.sd = None if sd is None else np.asarray(sd, dtype='float64')
         self.name = ObjectName.as_ObjectName(name)
         if np.any(np.isnan(self.br)):
@@ -501,7 +503,7 @@ class Spectrum(_SpectralObject):
         - `name` (str|ObjectName): name as a string or an instance of a class that stores its components
         - `photospectrum` (Photospectrum): optional, way to store the pre-reconstructed data
         """
-        super().__init__(nm, br, sd, name)
+        super().__init__(1, nm, br, sd, name)
         self.photospectrum = photospectrum
     
     @staticmethod
@@ -707,7 +709,7 @@ class FilterSystem(_SpectralObject):
     
     def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None,
                  name: str|ObjectName = None, names: tuple[ObjectName] = ()):
-        super().__init__(nm, br, sd, name)
+        super().__init__(2, nm, br, sd, name)
         self.names = names
     
     @staticmethod
@@ -775,7 +777,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
     - `name` (ObjectName): name as an instance of a class that stores its components
     """
     
-    def __init__(self, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str|ObjectName = None) -> None:
+    def __init__(self, ndim: int, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str|ObjectName = None):
         """
         Args:
         - `filter_system` (FilterSystem): instance of the class storing filter profiles
@@ -783,10 +785,12 @@ class _PhotospectralObject(_TrueColorToolsObject):
         - `sd` (Sequence): optional array of standard deviations
         - `name` (str|ObjectName): name as a string or an instance of a class that stores its components
         """
+        self.br = np.asarray(br, dtype='float64')
+        if ndim != self.br.ndim:
+            raise ValueError(f'Expected brightness array of dimension {ndim}, not {self.br.ndim}')
         if not isinstance(filter_system, FilterSystem):
             raise ValueError('`filter_system` argument is not a FilterSystem instance')
         self.filter_system = filter_system
-        self.br = np.asarray(br, dtype='float64')
         self.sd = None if sd is None else np.asarray(sd, dtype='float64')
         self.name = ObjectName.as_ObjectName(name)
         if (len_filters := len(filter_system)) != (len_br := self.br.shape[0]):
@@ -875,6 +879,9 @@ class Photospectrum(_PhotospectralObject):
     - `sd` (np.ndarray): optional array of standard deviations
     - `name` (ObjectName): name as an instance of a class that stores its components
     """
+
+    def __init__(self, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
+        super().__init__(1, filter_system, br, sd, name)
     
     @staticmethod
     def stub(name=None):
@@ -918,6 +925,9 @@ class SpectralCube(_SpectralObject, _Cube):
     - `width` (int): horizontal spatial axis length
     - `height` (int): vertical spatial axis length
     """
+
+    def __init__(self, ndim: int, nm: Sequence, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
+        super().__init__(3, ndim, nm, br, sd, name)
     
     @staticmethod
     def stub(name=None):
@@ -944,6 +954,9 @@ class PhotospectralCube(_PhotospectralObject, _Cube):
     - `width` (int): horizontal spatial axis length
     - `height` (int): vertical spatial axis length
     """
+
+    def __init__(self, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
+        super().__init__(3, filter_system, br, sd, name)
     
     @staticmethod
     def stub(name=None):
@@ -1085,8 +1098,8 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
     Supported input keys of a database unit:
     - `nm` (list): list of wavelengths in nanometers
     - `br` (list): same-size list of "brightness" in energy density units (not a photon counter)
-    - `mag` (list): same-size list of magnitudes
-    - `sd` (list/number): same-size list of standard deviations or a general value
+    - `mag` (list): same-size list of magnitudes. Like `br`, item(s) can be in form of [value, sd]
+    - `sd` (list/number): same-size list of standard deviations or a common value
     - `nm_range` (dict): `start`, `stop`, `step` keys defining a wavelength range
     - `slope` (dict): `start`, `stop`, `power` keys defining a spectrum from spectrophotometric gradient
     - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
@@ -1101,7 +1114,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
     - `phase_integral` (number/list): factor of transition from geometric albedo to spherical (sd is optional)
     - `phase_function` (list): function name and its parameters to compute phase integral (sd is optional)
     - `br_geometric`, `br_spherical` (list): specifying unique spectra for different albedos
-    - `sd_geometric`, `sd_spherical` (list/number): corresponding standard deviations or a general value
+    - `sd_geometric`, `sd_spherical` (list/number): corresponding standard deviations or a common value
     - `sun_is_emitter` (bool): `true` to remove the reflected solar spectrum
     - `tags` (list): strings categorizing the spectrum
     """
@@ -1123,13 +1136,15 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
     else:
         # Brightness reading
         if 'br' in content:
-            br = content['br']
+            br, sd = aux.parse_value_sd_list(content['br'])
             if 'sd' in content:
-                sd = aux.higher_dim(content['sd'], len(br), axis=0)
+                sd = aux.repeat_if_value(content['sd'], len(br))
         elif 'mag' in content:
-            br = aux.mag2irradiance(np.array(content['mag']))
+            mag, sd = aux.parse_value_sd_list(content['mag'])
+            br = aux.mag2irradiance(mag)
             if 'sd' in content:
-                sd = aux.higher_dim(content['sd'], len(br), axis=0)
+                sd = aux.repeat_if_value(content['sd'], len(br))
+            if sd is not None:
                 sd = aux.sd_mag2sd_irradiance(sd, br)
         # Spectrum reading
         if 'nm' in content:
@@ -1157,7 +1172,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
     if len(br) == 0:
         if 'br_geometric' in content:
             br_geom = content['br_geometric']
-            sd_geom = aux.higher_dim(content['sd_geometric'], len(br_geom), axis=0) if 'sd_geometric' in content else None
+            sd_geom = aux.repeat_if_value(content['sd_geometric'], len(br_geom)) if 'sd_geometric' in content else None
             geometric = _create_TCT_object(name, nm, filters, br_geom, sd_geom, filter_system, calib, sun)
             if 'spherical_albedo' in content:
                 where, how = content['spherical_albedo']
@@ -1166,7 +1181,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
                 spherical = geometric.scaled_at(sun_filter, *aux.parse_value_sd(content['bond_albedo']))
         if 'br_spherical' in content:
             br_sphe = content['br_spherical']
-            sd_sphe = aux.higher_dim(content['sd_spherical'], len(br_sphe), axis=0) if 'sd_spherical' in content else None
+            sd_sphe = aux.repeat_if_value(content['sd_spherical'], len(br_sphe)) if 'sd_spherical' in content else None
             spherical = _create_TCT_object(name, nm, filters, br_sphe, sd_sphe, filter_system, calib, sun)
             if 'geometric_albedo' in content:
                 where, how = content['geometric_albedo']

@@ -75,8 +75,8 @@ It is assumed that all data is given in ascending wavelength order, and it is ne
 Supported input keys of a database unit:
 - `nm` (list): list of wavelengths in nanometers
 - `br` (list): same-size list of "brightness" in energy density units (not a photon counter)
-- `mag` (list): same-size list of magnitudes
-- `sd` (list/number): same-size list of standard deviations or a general value
+- `mag` (list): same-size list of magnitudes. Like `br`, item(s) can be in form of [value, sd]
+- `sd` (list/number): same-size list of standard deviations or a common value
 - `nm_range` (dict): `start`, `stop`, `step` keys defining a wavelength range
 - `slope` (dict): `start`, `stop`, `power` keys defining a spectrum from spectrophotometric gradient
 - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
@@ -91,7 +91,7 @@ Supported input keys of a database unit:
 - `phase_integral` (number/list): factor of transition from geometric albedo to spherical (sd is optional)
 - `phase_function` (list): function name and its parameters to compute phase integral (sd is optional)
 - `br_geometric`, `br_spherical` (list): specifying unique spectra for different albedos
-- `sd_geometric`, `sd_spherical` (list/number): corresponding standard deviations or a general value
+- `sd_geometric`, `sd_spherical` (list/number): corresponding standard deviations or a common value
 - `sun_is_emitter` (bool): `true` to remove the reflected solar spectrum
 - `tags` (list): strings categorizing the spectrum
 
