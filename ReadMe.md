@@ -51,7 +51,7 @@ The **Blackbody & Redshifts** tab calculates the influence of physical phenomena
 
 ### Features
 - Tag system: Any spectrum in the database can be assigned any set of tags. They form lists of categories for the *Database viewer* tab, which makes working with the database easier.
-- Reference system: Each object in the database can be easily linked to one or more data sources by its short name. You can see the list in `File`→`References`.
+- Reference system: Each object in the database can be easily linked to one or more data sources by its short name. You can see the list in `Menu`→`References`.
 - Multilingual support: The language can be changed from the top menu at runtime. TCT supports English, German and Russian. If you want to add support for your language, you can do it similar to [`strings.py`](src/strings.py) and make a commit or contact me.
 
 

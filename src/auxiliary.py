@@ -282,9 +282,11 @@ def parse_value_sd_list(arr: Sequence):
     try:
         # no sd case
         arr = np.array(arr, dtype='float') # ValueError here means inhomogeneous shape
-        if arr.ndim != 1:
+        if arr.ndim == 0:
+            arr = np.atleast_1d(arr)
+        elif arr.ndim > 1:
             raise ValueError # means sd is there
-        return arr, None # result with no sd
+        return arr, None
     except ValueError:
         # sd case
         values = []

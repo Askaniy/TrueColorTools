@@ -844,7 +844,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
             nm0 = self.mean_nm()
             br0 = self.br
             if len(self.filter_system) == 1: # single-point PhotospectralObject support
-                nm1, br1 = aux.extrapolating((nm0[0],), (br0[0],), nm_arr, nm_step)
+                nm1, br1 = aux.extrapolating(nm0, br0, nm_arr, nm_step)
             else:
                 if np.any(nm0[:-1] > nm0[1:]): # fast increasing check
                     order = np.argsort(nm0)
