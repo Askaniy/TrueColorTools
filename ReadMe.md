@@ -77,8 +77,8 @@ Supported input keys of a database unit:
 - `br` (list): same-size list of "brightness" in energy density units (not a photon counter)
 - `mag` (list): same-size list of magnitudes. Like `br`, item(s) can be in form of [value, sd]
 - `sd` (list/number): same-size list of standard deviations or a common value
-- `nm_range` (dict): `start`, `stop`, `step` keys defining a wavelength range
-- `slope` (dict): `start`, `stop`, `power` keys defining a spectrum from spectrophotometric gradient
+- `nm_range` (dict): `start`, `stop`, `step` keys define a wavelength range
+- `slope` (dict): `start`, `stop`, `power`/`percent_per_100nm` define a spectrum from a gradient
 - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
 - `filters` (list): list of filter names (see `filters` folder), can be mixed with nm values if needed
 - `color_indices` (list): dictionary of color indices, formatted `{'filter1-filter2': [br, (sd)]], …}`

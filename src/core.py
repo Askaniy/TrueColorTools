@@ -1100,8 +1100,8 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
     - `br` (list): same-size list of "brightness" in energy density units (not a photon counter)
     - `mag` (list): same-size list of magnitudes. Like `br`, item(s) can be in form of [value, sd]
     - `sd` (list/number): same-size list of standard deviations or a common value
-    - `nm_range` (dict): `start`, `stop`, `step` keys defining a wavelength range
-    - `slope` (dict): `start`, `stop`, `power` keys defining a spectrum from spectrophotometric gradient
+    - `nm_range` (dict): `start`, `stop`, `step` keys define a wavelength range
+    - `slope` (dict): `start`, `stop`, `power`/`percent_per_100nm` define a spectrum from a gradient
     - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
     - `filters` (list): list of filter names (see `filters` folder), can be mixed with nm values if needed
     - `color_indices` (list): dictionary of color indices, formatted `{'filter1-filter2': [br, (sd)]], …}`
@@ -1156,7 +1156,14 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
         elif 'slope' in content:
             slope = content['slope']
             nm = aux.grid(slope['start'], slope['stop'], nm_step)
-            br = (nm / nm[0])**slope['power']
+            if 'power' in slope:
+                # spectral gradient with γ (power law like in Karkoschka (2001) doi:10.1006/icar.2001.6596)
+                power, _ = aux.parse_value_sd(slope['power'])
+                br = (nm / nm[0])**power
+            elif 'percent_per_100nm' in slope:
+                # spectral gradient with S' (like in Jewitt (2002) doi:10.1086/338692)
+                percent_per_100nm, _ = aux.parse_value_sd(slope['percent_per_100nm'])
+                br = (1 + 0.01 * percent_per_100nm)**(0.01 * nm)
         # Photospectrum reading
         elif 'filters' in content:
             filters = content['filters']

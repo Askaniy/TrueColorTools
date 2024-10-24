@@ -95,6 +95,10 @@
         'Shape Models of Lucy Targets (3548) Eurybates and (21900) Orus from Disk-integrated Photometry',
         'DOI: 10.3847/PSJ/acaf79', 'https://ui.adsabs.harvard.edu/abs/2023PSJ.....4...18M/abstract'
     ],
+    'PinillaAlonso2008': [
+        'Visible spectroscopy in the neighborhood of 2003 EL61',
+        'DOI: 10.1051/0004-6361:200810226', 'https://ui.adsabs.harvard.edu/abs/2008A%26A...489..455P/abstract'
+    ],
     
     'Li2019': [
         'Spectrophotometric modeling and mapping of Ceres',
@@ -1157,6 +1161,10 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    '(24835) 1995 SM55 | PinillaAlonso2008': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        slope: {start: 520, stop: 860, percent_per_100nm: [-0.9, 2.0]},
+    },
     '(24952) 1997 QJ4 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
         photometric_system: 'Generic_Bessell',
@@ -2045,6 +2053,10 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    '(120178) 2003 OP32 | PinillaAlonso2008': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        slope: {start: 520, stop: 860, percent_per_100nm: [1.7, 2.0]},
+    },
     '(120181) 2003 UR292 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
@@ -2070,6 +2082,11 @@
         color_indices: {'B-V': 0.664, 'V-R': 0.403, 'R-I': 0.433},
         calibration_system: 'Vega',
         sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.042, 0.004]],
+    },
+    '(120347) Salacia | PinillaAlonso2008, Brown2017': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        slope: {start: 520, stop: 860, percent_per_100nm: [12.6, 2.0]},
         geometric_albedo: ['Generic_Bessell.V', [0.042, 0.004]],
     },
     'Stansberry2012': [
@@ -2520,6 +2537,11 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    '(202421) 2005 UQ513 | PinillaAlonso2008, Vilenius2014': {
+        tags: ['featured', 'Solar System', 'minor body/TNO/classical TNO'],
+        slope: {start: 520, stop: 860, percent_per_100nm: [18.1, 2.0]},
+        geometric_albedo: ['Generic_Bessell.V', 0.202]
+    },
     'DiasOliveira2017': [
         'Study of the Plutino Object (208996) 2003 AZ84 from Stellar Occultations: Size, Shape, and Topographic Features',
         'DOI: 10.3847/1538-3881/aa74e9', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa74e9',
@@ -2809,6 +2831,10 @@
         color_indices: {'B-V': 0.663, 'V-R': 0.354, 'R-I': 0.335},
         calibration_system: 'Vega',
         sun_is_emitter: true
+    },
+    '(416400) 2003 UZ117 | PinillaAlonso2008': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        slope: {start: 520, stop: 860, percent_per_100nm: [-2.1, 2.0]},
     },
     '(418993) 2009 MS9 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
