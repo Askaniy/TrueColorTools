@@ -2,6 +2,7 @@ import unittest
 from numpy.testing import assert_equal, assert_allclose
 
 from src.core import *
+from src.auxiliary import parse_value_sd
 
 
 class TestTCT(unittest.TestCase):
@@ -89,6 +90,12 @@ class TestTCT(unittest.TestCase):
     def test_extrapolation_flat_photospectrum(self):
         photospectrum = Photospectrum(self.ubv, (1, 1, 1), name='test photospectrum')
         assert_equal(photospectrum.define_on_range(visible_range, crop=True).br, np.ones(visible_range.size))
+    
+    def test_sd_parsing(self):
+        assert_equal(parse_value_sd(0.202), (0.202, None))
+        assert_equal(parse_value_sd([0.202, 0.0665]), (0.202, 0.0665))
+        assert_equal(parse_value_sd([0.202, 0.084, 0.049]), (0.202, 0.0665))
+        assert_equal(parse_value_sd([0.202, +0.084, -0.049]), (0.202, 0.0665))
     
     def test_db(self):
         db = {

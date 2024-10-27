@@ -2540,7 +2540,7 @@
     '(202421) 2005 UQ513 | PinillaAlonso2008, Vilenius2014': {
         tags: ['featured', 'Solar System', 'minor body/TNO/classical TNO'],
         slope: {start: 520, stop: 860, percent_per_100nm: [18.1, 2.0]},
-        geometric_albedo: ['Generic_Bessell.V', 0.202]
+        geometric_albedo: ['Generic_Bessell.V', [0.202, +0.084, -0.049]],
     },
     'DiasOliveira2017': [
         'Study of the Plutino Object (208996) 2003 AZ84 from Stellar Occultations: Size, Shape, and Topographic Features',

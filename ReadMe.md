@@ -74,26 +74,28 @@ It is assumed that all data is given in ascending wavelength order, and it is ne
 
 Supported input keys of a database unit:
 - `nm` (list): list of wavelengths in nanometers
-- `br` (list): same-size list of "brightness" in energy density units (not a photon counter)
-- `mag` (list): same-size list of magnitudes. Like `br`, item(s) can be in form of [value, sd]
-- `sd` (list/number): same-size list of standard deviations or a common value
-- `nm_range` (dict): `start`, `stop`, `step` keys define a wavelength range
-- `slope` (dict): `start`, `stop`, `power`/`percent_per_100nm` define a spectrum from a gradient
+- `br` (list): same-size list of "brightness" in energy spectral density units
+- `mag` (list): same-size list of magnitudes
+- `sd` (list/number): same-size list of standard deviations (or a common value)
+- `nm_range` (dict): wavelength range definition in the format `{start: …, stop: …, step: …}`
+- `slope` (dict): spectrum definition in the format `{start: …, stop: …, power/percent_per_100nm: …}`
 - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
-- `filters` (list): list of filter names (see `filters` folder), can be mixed with nm values if needed
-- `color_indices` (list): dictionary of color indices, formatted `{'filter1-filter2': [br, (sd)]], …}`
-- `photometric_system` (str): a way to bracket the name of the photometric system
+- `filters` (list): list of filter names present in the `filters` folder (can be mixed with nm values)
+- `color_indices` (list): dictionary of color indices, formatted `{'filter1-filter2': …, …}`
+- `photometric_system` (str): a way to parenthesize the photometric system name (separator is a dot)
 - `calibration_system` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
-- `albedo` (bool/list): indicates data as albedo scaled or tells how to do it with `[filter/nm, [br, (sd)]]`
-- `geometric_albedo` (bool/list): indicator of geometric/normal albedo data or how to scale to it
-- `spherical_albedo` (bool/list): indicator of spherical albedo data or how to scale to it
-- `bond_albedo` (number): sets spherical albedo scale using known solar spectrum
-- `phase_integral` (number/list): factor of transition from geometric albedo to spherical (sd is optional)
-- `phase_function` (list): function name and its parameters to compute phase integral (sd is optional)
+- `albedo` (bool/list): marks data as albedo scaled (if bool) or tells how to scale (if `[filter/nm, …]`) 
+- `geometric_albedo` (bool/list): indicates geometric/normal albedo data or how to scale to it
+- `spherical_albedo` (bool/list): indicates spherical albedo data or how to scale to it
+- `bond_albedo` (number): sets spherical albedo scale using known Solar spectrum
+- `phase_integral` (number/list): factor of transition from geometric albedo to spherical
+- `phase_function` (list): function name and its parameters to compute phase integral
 - `br_geometric`, `br_spherical` (list): specifying unique spectra for different albedos
 - `sd_geometric`, `sd_spherical` (list/number): corresponding standard deviations or a common value
-- `sun_is_emitter` (bool): `true` to remove the reflected solar spectrum
-- `tags` (list): strings categorizing the spectrum
+- `sun_is_emitter` (bool): `true` to remove the reflected Solar spectrum
+- `tags` (list): strings categorizing the spectral data
+
+Standard deviations are syntactically supported (but not always processed). Any brightness value in any of the data types can be replaced by a corresponding list of `[value, sd]` (or `[value, +sd, -sd]` for asymmetric standard deviation).
 
 You can store the file with the spectrum outside of JSON5, and include a link in it. Text (`*.txt`, `*.dat`) and FITS (`*.fits`, `*.fit`) formats are supported for external files. A text file must contain at least wavelengths in the first column, irradiance in the second column, and optionally standard deviations in the third column and a mask in the fourth column ("good" rows in SMASS data marked with "1"). Data is assumed to be in the second HDU in FITS files. If you have problems reading FITS, contact me, I'll improve the parsing of the provided example.
 

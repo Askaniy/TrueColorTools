@@ -265,22 +265,35 @@ def irradiance(nm: int|float|np.ndarray, T: int|float) -> float|np.ndarray:
 
 # ------------ Database Processing Section ------------
 
-def parse_value_sd(data: float|Sequence[float]):
-    """ Guarantees the output of the value and its sd for variable input """
-    if isinstance(data, Sequence|np.ndarray) and len(data) == 2:
-        value, sd = data
-    elif isinstance(data, int|float):
-        value = data
-        sd = None
-    else:
-        print(f'Invalid data input: {data}. Must be a numeric value or a [value, sd] list. Returning None.')
-        value = sd = None
-    return value, sd
+def parse_value_sd(data: float|Sequence[float]) -> tuple[float, float|None]:
+    """
+    Guarantees the output of the value and its standard deviation.
+    
+    Supported input types:
+    - value
+    - [value, sd]
+    - [value, +sd, -sd]
+    """
+    if isinstance(data, int|float):
+        # no standard deviation
+        return data, None
+    elif isinstance(data, Sequence|np.ndarray):
+        match len(data):
+            case 2:
+                # regular standard deviation
+                return tuple(data)
+            case 3:
+                # asymmetric standard deviation
+                value, sd1, sd2 = data
+                sd = 0.5 * (abs(sd1) + abs(sd2)) # reduced to regular
+                return value, sd
+    print(f'Invalid data input: {data}. Must be a numeric value or a [value, sd] list. Returning None.')
+    return None, None
 
 def parse_value_sd_list(arr: Sequence):
     """ Splits the values and standard deviations into two arrays """
     try:
-        # no sd case
+        # no standard deviation
         arr = np.array(arr, dtype='float') # ValueError here means inhomogeneous shape
         if arr.ndim == 0:
             arr = np.atleast_1d(arr)
@@ -288,7 +301,7 @@ def parse_value_sd_list(arr: Sequence):
             raise ValueError # means sd is there
         return arr, None
     except ValueError:
-        # sd case
+        # standard deviation case
         values = []
         sds = []
         for data in arr:

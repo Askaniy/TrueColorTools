@@ -926,8 +926,8 @@ class SpectralCube(_SpectralObject, _Cube):
     - `height` (int): vertical spatial axis length
     """
 
-    def __init__(self, ndim: int, nm: Sequence, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
-        super().__init__(3, ndim, nm, br, sd, name)
+    def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
+        super().__init__(3, nm, br, sd, name)
     
     @staticmethod
     def stub(name=None):
@@ -1093,30 +1093,30 @@ def _create_TCT_object(
 
 def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | ReflectiveBody:
     """
-    Depending on the contents of the object read from the database, returns a class that has `get_spectrum()` method
+    Depending on the contents of the object read from the database, returns a class that has `get_spectrum()` method.
 
     Supported input keys of a database unit:
     - `nm` (list): list of wavelengths in nanometers
-    - `br` (list): same-size list of "brightness" in energy density units (not a photon counter)
-    - `mag` (list): same-size list of magnitudes. Like `br`, item(s) can be in form of [value, sd]
-    - `sd` (list/number): same-size list of standard deviations or a common value
-    - `nm_range` (dict): `start`, `stop`, `step` keys define a wavelength range
-    - `slope` (dict): `start`, `stop`, `power`/`percent_per_100nm` define a spectrum from a gradient
+    - `br` (list): same-size list of "brightness" in energy spectral density units
+    - `mag` (list): same-size list of magnitudes
+    - `sd` (list/number): same-size list of standard deviations (or a common value)
+    - `nm_range` (dict): wavelength range definition in the format `{start: …, stop: …, step: …}`
+    - `slope` (dict): spectrum definition in the format `{start: …, stop: …, power/percent_per_100nm: …}`
     - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
-    - `filters` (list): list of filter names (see `filters` folder), can be mixed with nm values if needed
-    - `color_indices` (list): dictionary of color indices, formatted `{'filter1-filter2': [br, (sd)]], …}`
-    - `photometric_system` (str): a way to bracket the name of the photometric system
+    - `filters` (list): list of filter names present in the `filters` folder (can be mixed with nm values)
+    - `color_indices` (list): dictionary of color indices, formatted `{'filter1-filter2': …, …}`
+    - `photometric_system` (str): a way to parenthesize the photometric system name (separator is a dot)
     - `calibration_system` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
-    - `albedo` (bool/list): indicates data as albedo scaled or tells how to do it with `[filter/nm, [br, (sd)]]`
-    - `geometric_albedo` (bool/list): indicator of geometric/normal albedo data or how to scale to it
-    - `spherical_albedo` (bool/list): indicator of spherical albedo data or how to scale to it
-    - `bond_albedo` (number): sets spherical albedo scale using known solar spectrum
-    - `phase_integral` (number/list): factor of transition from geometric albedo to spherical (sd is optional)
-    - `phase_function` (list): function name and its parameters to compute phase integral (sd is optional)
+    - `albedo` (bool/list): marks data as albedo scaled (if bool) or tells how to scale (if `[filter/nm, …]`) 
+    - `geometric_albedo` (bool/list): indicates geometric/normal albedo data or how to scale to it
+    - `spherical_albedo` (bool/list): indicates spherical albedo data or how to scale to it
+    - `bond_albedo` (number): sets spherical albedo scale using known Solar spectrum
+    - `phase_integral` (number/list): factor of transition from geometric albedo to spherical
+    - `phase_function` (list): function name and its parameters to compute phase integral
     - `br_geometric`, `br_spherical` (list): specifying unique spectra for different albedos
     - `sd_geometric`, `sd_spherical` (list/number): corresponding standard deviations or a common value
-    - `sun_is_emitter` (bool): `true` to remove the reflected solar spectrum
-    - `tags` (list): strings categorizing the spectrum
+    - `sun_is_emitter` (bool): `true` to remove the reflected Solar spectrum
+    - `tags` (list): strings categorizing the spectral data
     """
     br = []
     sd = None
