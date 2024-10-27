@@ -99,6 +99,11 @@
         'Visible spectroscopy in the neighborhood of 2003 EL61',
         'DOI: 10.1051/0004-6361:200810226', 'https://ui.adsabs.harvard.edu/abs/2008A%26A...489..455P/abstract'
     ],
+    'SsODNet': [
+        'SsODNet: Solar system Open Database Network',
+        'DOI: 10.1051/0004-6361/202244878 ', 'https://www.aanda.org/articles/aa/full_html/2023/03/aa44878-22/aa44878-22.html',
+        'https://ssp.imcce.fr/forms/ssocard', 'https://ui.adsabs.harvard.edu/abs/2023LPICo2851.2215C/abstract'
+    ],
     
     'Li2019': [
         'Spectrophotometric modeling and mapping of Ceres',
@@ -830,6 +835,15 @@
         color_indices: {'B-V': 0.837, 'V-R': 0.409, 'R-I': 0.463},
         calibration_system: 'Vega',
         sun_is_emitter: true
+    },
+    '(12649) Ascanios | SsODNet': {
+        tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
+        photometric_system: 'NOT_ALFOSC',
+        color_indices: {'Bes_B-Bes_V': [0.765, 0.011], 'Bes_V-Bes_R': [0.486, 0.01], 'Bes_R-Bes_I': [0.498, 0.014]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.0528, 0.0099]],
+        phase_function: ['HG1G2', {H: [11.540497, +0.120558, -0.134698], G_1: [0.400906, +0.584725, -0.691005], G_2: [0.241104, +0.49603, -0.421077]}]
     },
     '(12917) 1998 TG16 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -2885,6 +2899,15 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    'Fornasier2009': [
+        'Visible spectroscopy of the new ESO large programme on trans-Neptunian objects and Centaurs: final results',
+        'DOI: 10.1051/0004-6361/200912582', 'https://www.aanda.org/component/article?access=bibcode&bibcode=&bibcode=2009A%2526A...508..457FFUL',
+        'https://ui.adsabs.harvard.edu/abs/2009A%26A...508..457F/abstract'
+    ],
+    '(455502) 2003 UZ413 | Fornasier2009': {
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
+        slope: {start: 440, stop: 930, percent_per_100nm: [5.4, 0.7]}, // mean
+    },
     '(459865) 2013 XZ8 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
@@ -2961,6 +2984,14 @@
         color_indices: {'B-V': 0.940, 'V-R': 0.530, 'R-I': 0.590},
         calibration_system: 'Vega',
         sun_is_emitter: true
+    },
+    '(471143) Dziewanna | SsODNet': {
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
+        photometric_system: 'SkyMapper_SkyMapper',
+        color_indices: {'g-r': [0.4635, 0.0232]},
+        calibration_system: 'AB',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.1918, +0.0454, -0.0363]],
     },
     '(471339) 2011 ON45 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -3089,6 +3120,13 @@
         filters: ['g', 'r', 'i', 'z'],
         mag: [21.914, 21.303, 21.087, 20.981],
         sd: [0.026, 0.039, 0.037, 0.054],
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
+    '(523727) 2014 NW65 | SsODNet': {
+        tags: ['Solar System', 'minor body/centaur'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.4323, 0.1601], 'r-i': [0.2985, 0.1549]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },

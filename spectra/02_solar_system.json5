@@ -117,7 +117,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.689],
         phase_integral: 1.35, // Table 6
     },
-   'Venus | Mallama2006': {
+    'Venus | Mallama2006': {
         tags: ['Solar System', 'planetary body/planet'],
         filters: ['Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I'],
         br_geometric: [0.64, 0.67, 0.69, 0.57],
@@ -932,7 +932,7 @@
         'HST BVI photometry of Triton and Proteus',
         'DOI: 10.1016/j.icarus.2006.07.020', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103506002648'
     ],
-    'Proteus: −33° East (N III) | Pascu2006': { // visit 1, leading side
+    'Proteus: −33° East (N VIII) | Pascu2006': { // visit 1, leading side
         tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
@@ -941,7 +941,7 @@
         sun_is_emitter: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.093, 0.001]],
     },
-    'Proteus: +54° East (N III) | Pascu2006': { // visit 2, leading side
+    'Proteus: +54° East (N VIII) | Pascu2006': { // visit 2, leading side
         tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
@@ -950,7 +950,7 @@
         sun_is_emitter: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.093, 0.001]],
     },
-    'Proteus: +59° West (N III) | Pascu2006': { // visit 3, trailing side
+    'Proteus: +59° West (N VIII) | Pascu2006': { // visit 3, trailing side
         tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
