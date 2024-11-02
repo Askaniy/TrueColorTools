@@ -28,14 +28,18 @@ class TestTCT(unittest.TestCase):
         assert_allclose(self.ubv.sd_of_nm(), [21.932217, 35.816641, 36.354015], rtol=0.01)
     
     def test_stub_and_convolution_possibility(self):
-        Spectrum.stub() @ Spectrum.stub()
-        Spectrum.stub() @ FilterSystem.stub()
-        SpectralCube.stub() @ Spectrum.stub()
-        SpectralCube.stub() @ FilterSystem.stub()
-        Photospectrum.stub() @ Spectrum.stub()
-        Photospectrum.stub() @ FilterSystem.stub()
-        PhotospectralCube.stub() @ Spectrum.stub()
-        PhotospectralCube.stub() @ FilterSystem.stub()
+        self.assertIsInstance(Spectrum.stub() @ Spectrum.stub(), float)
+        self.assertIsInstance(Spectrum.stub() @ FilterSystem.stub(), Photospectrum)
+        self.assertIsInstance(SpectralSquare.stub() @ Spectrum.stub(), np.ndarray)
+        self.assertIsInstance(SpectralSquare.stub() @ FilterSystem.stub(), PhotospectralLine)
+        self.assertIsInstance(SpectralCube.stub() @ Spectrum.stub(), np.ndarray)
+        self.assertIsInstance(SpectralCube.stub() @ FilterSystem.stub(), PhotospectralCube)
+        self.assertIsInstance(Photospectrum.stub() @ Spectrum.stub(), float)
+        self.assertIsInstance(Photospectrum.stub() @ FilterSystem.stub(), Photospectrum)
+        self.assertIsInstance(PhotospectralLine.stub() @ Spectrum.stub(), np.ndarray)
+        self.assertIsInstance(PhotospectralLine.stub() @ FilterSystem.stub(), PhotospectralLine)
+        self.assertIsInstance(PhotospectralCube.stub() @ Spectrum.stub(), np.ndarray)
+        self.assertIsInstance(PhotospectralCube.stub() @ FilterSystem.stub(), PhotospectralCube)
 
     def test_convolution(self):
         assert_allclose(self.vega @ self.v, 3.626192e-11, rtol=0.01)

@@ -16,7 +16,7 @@ def image_parser(
         image_mode: int,
         preview_flag: bool = False,
         save_folder: str = '',
-        pixels_limit: int = 256*128,
+        pixel_limit: int = 256*128,
         single_file: str = None,
         files: list = None,
         filters: list = None,
@@ -53,7 +53,7 @@ def image_parser(
                 cube = SpectralCube.from_file(single_file)
         if preview_flag:
             log('Downscaling')
-            cube = cube.downscale(pixels_limit)
+            cube = cube.downscale(pixel_limit)
         if photons:
             log('Converting photon spectral density to energy density')
             cube = cube.convert_from_photon_spectral_density()
@@ -63,19 +63,23 @@ def image_parser(
         if factor != 1:
             log('Scaling brightness')
             cube *= factor
-        log('Color calculating')
-        img = ColorImage.from_spectral_data(cube, maximize_brightness, srgb)
+        pixel_num = img.size
+        if True: # WIP! if preview_flag or pixel_num < 1024*512:
+            log('Color calculating')
+            img = ColorImage.from_spectral_data(cube, maximize_brightness, srgb)
+        else:
+            log('Image slicing')
+            slices = []
         if gamma_correction:
             log('Gamma correcting')
             img = img.gamma_corrected()
-        pixels_num = img.width * img.height
-        if upscale and pixels_num < pixels_limit and (times := round(sqrt(pixels_limit / pixels_num))) != 1:
+        if upscale and pixel_num < pixel_limit and (times := round(sqrt(pixel_limit / pixel_num))) != 1:
             log('Upscaling')
             img = img.upscale(times)
         img = img.to_pillow_image()
         # End of processing, summarizing
         time = monotonic() - start_time
-        speed = pixels_num / time
+        speed = pixel_num / time
         log(f'Processing took {time:.1f} seconds, average speed is {speed:.1f} px/sec')
         if preview_flag:
             log('Sending the resulting preview to the main thread', img)

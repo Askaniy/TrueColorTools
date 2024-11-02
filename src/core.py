@@ -7,12 +7,14 @@ Naming:
 Data:
 - TrueColorToolsObject
 - - SpectralObject
-- - - 1D: Spectrum
-- - - 2D: FilterSystem
-- - - 3D: SpectralCube
+- - - Spectrum (1D)
+- - - SpectralSquare (2D)
+- - - - FilterSystem
+- - - SpectralCube (3D)
 - - PhotospectralObject
-- - - 1D: Photospectrum
-- - - 3D: PhotospectralCube
+- - - Photospectrum (1D)
+- - - PhotospectralLine (2D)
+- - - PhotospectralCube (3D)
 
 Database:
 - NonReflectiveBody
@@ -23,12 +25,6 @@ Color:
 - ColorObject
 - - ColorPoint
 - - ColorImage
-
-
-(Self-complete data classes system would include a 2D `PhotospectrumSet` and
-`SpectrumSet` instead of `FilterSystem`, with convolution operation defined.
-But this is not required by the current functionality of the TCT.
-This could be useful to process an entire spectral database without loops.)
 """
 
 from copy import deepcopy
@@ -436,10 +432,14 @@ class _SpectralObject(_TrueColorToolsObject):
         Only 8 convolution options make physical sense:
         - Spectrum @ Spectrum              -> float
         - Spectrum @ FilterSystem          -> Photospectrum
+        - SpectralSquare @ Spectrum          -> linear array
+        - SpectralSquare @ FilterSystem      -> PhotospectralLine
         - SpectralCube @ Spectrum          -> image array
         - SpectralCube @ FilterSystem      -> PhotospectralCube
         - Photospectrum @ Spectrum         -> float
         - Photospectrum @ FilterSystem     -> Photospectrum
+        - PhotospectralLine @ Spectrum     -> linear array
+        - PhotospectralLine @ FilterSystem -> PhotospectralLine
         - PhotospectralCube @ Spectrum     -> image array
         - PhotospectralCube @ FilterSystem -> PhotospectralCube
         """
@@ -462,6 +462,14 @@ class _SpectralObject(_TrueColorToolsObject):
             elif isinstance(operand2, FilterSystem):
                 br = aux.integrate((operand2.br.T * operand1.br).T, nm_step)
                 return Photospectrum(operand2, br, name=operand1.name)
+        elif isinstance(operand1, SpectralSquare):
+            # SpectralSquare @ Spectrum
+            if isinstance(operand2, Spectrum):
+                return aux.integrate((operand1.br.T * operand2.br).T, nm_step)
+            # SpectralSquare @ FilterSystem
+            elif isinstance(operand2, FilterSystem):
+                br = aux.integrate(operand1.br[:, :, np.newaxis] * operand2.br[:, np.newaxis, :], nm_step)
+                return PhotospectralLine(operand2, br, name=operand1.name)
         elif isinstance(operand1, SpectralCube):
             # SpectralCube @ Spectrum
             if isinstance(operand2, Spectrum):
@@ -471,6 +479,7 @@ class _SpectralObject(_TrueColorToolsObject):
             # which most computers do not have enough memory for.
             elif isinstance(operand2, FilterSystem):
                 br = np.empty((len(operand2), *operand1.shape))
+                #for i, profile in enumerate(operand2):
                 for i in range(len(operand2)):
                     profile = operand2.br[:,i]
                     br[i] = aux.integrate((operand1.br.T * profile).T, nm_step)
@@ -692,7 +701,41 @@ def get_filter(name: str|int|float) -> Spectrum:
         return profile.edges_zeroed().normalize()
 
 
-class FilterSystem(_SpectralObject):
+class _Line(_TrueColorToolsObject):
+    """ Internal class for inheriting spatial data properties """
+    
+    @property
+    def size(self):
+        """ Returns the spatial axis length """
+        return self.shape[0]
+    
+    def __len__(self) -> int:
+        """ Returns the spatial axis length """
+        return self.size
+
+
+class SpectralSquare(_SpectralObject, _Line):
+    """
+    Class to work with a line of continuous spectra (2D SpectralObject).
+
+    Attributes:
+    - `nm` (np.ndarray): spectral axis, list of wavelengths in nanometers on a uniform grid
+    - `br` (np.ndarray): array of "brightness" in energy density units (not a photon counter)
+    - `sd` (np.ndarray): optional array of standard deviations
+    - `name` (ObjectName): name as an instance of a class that stores its components
+    - `size` (int): spatial axis length
+    """
+
+    def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
+        super().__init__(2, nm, br, sd, name)
+    
+    @staticmethod
+    def stub(name=None):
+        """ Initializes an object in case of the data problems """
+        return SpectralSquare((555,), np.zeros((1, 1)), name=name)
+
+
+class FilterSystem(SpectralSquare):
     """
     Class to work with a set of filters profiles.
     It supports len() to get the number of filters and getitem() to get a profile.
@@ -705,17 +748,18 @@ class FilterSystem(_SpectralObject):
     - `br` (np.ndarray): matrix of the profiles with shape [len(nm), len(filters)]
     - `name` (ObjectName): name as an instance of a class that stores its components
     - `names` (tuple[ObjectName]): storage of the original filter names
+    - `size` (int): spatial axis length
     """
     
     def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None,
                  name: str|ObjectName = None, names: tuple[ObjectName] = ()):
-        super().__init__(2, nm, br, sd, name)
+        super().__init__(nm, br, sd, name)
         self.names = names
     
     @staticmethod
     def stub(name=None):
         """ Initializes an object in case of the data problems """
-        return FilterSystem((555,), np.zeros((1, 1)), name=name, names=(None))
+        return FilterSystem((555,), np.zeros((1, 1)), name=name, names=(None,))
     
     @staticmethod
     def from_list(filters: Sequence[str|Spectrum], name: str|ObjectName = None):
@@ -758,11 +802,63 @@ class FilterSystem(_SpectralObject):
         start = non_zero_indices[0] - 1
         end = non_zero_indices[-1] + 2
         return Spectrum(self.nm[start:end], profile[start:end], name=self.names[index])
-    
-    def __len__(self) -> int:
-        """ Returns the number of filters in the system """
-        return self.shape[0]
 
+
+class _Cube(_TrueColorToolsObject):
+    """ Internal class for inheriting spatial data properties """
+    
+    def downscale(self, pixels_limit: int):
+        """ Brings the spatial resolution of the cube to approximately match the number of pixels """
+        output = deepcopy(self)
+        output.br = aux.spatial_downscaling(self.br, pixels_limit)
+        output.sd = None
+        if self.sd is not None:
+            output.sd = aux.spatial_downscaling(self.sd, pixels_limit)
+        return output
+    
+    @property
+    def width(self):
+        """ Returns horizontal spatial axis length """
+        return self.shape[0]
+    
+    @property
+    def height(self):
+        """ Returns vertical spatial axis length """
+        return self.shape[1]
+    
+    @property
+    def size(self):
+        """ Returns the number of pixels """
+        return self.width * self.height
+
+
+class SpectralCube(_SpectralObject, _Cube):
+    """
+    Class to work with an image of continuous spectra (3D SpectralObject).
+
+    Attributes:
+    - `nm` (np.ndarray): spectral axis, list of wavelengths in nanometers on a uniform grid
+    - `br` (np.ndarray): array of "brightness" in energy density units (not a photon counter)
+    - `sd` (np.ndarray): optional array of standard deviations
+    - `name` (ObjectName): name as an instance of a class that stores its components
+    - `width` (int): horizontal spatial axis length
+    - `height` (int): vertical spatial axis length
+    - `size` (int): number of pixels
+    """
+
+    def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
+        super().__init__(3, nm, br, sd, name)
+    
+    @staticmethod
+    def stub(name=None):
+        """ Initializes an object in case of the data problems """
+        return SpectralCube((555,), np.zeros((1, 1, 1)), name=name)
+    
+    @staticmethod
+    @lru_cache(maxsize=1)
+    def from_file(file: str):
+        """ Creates a SpectralCube object based on loaded data from the specified file """
+        return SpectralCube.from_array(*ii.cube_reader(file))
 
 
 class _PhotospectralObject(_TrueColorToolsObject):
@@ -838,6 +934,8 @@ class _PhotospectralObject(_TrueColorToolsObject):
         match self.ndim:
             case 1:
                 target_class = Spectrum
+            case 2:
+                target_class = SpectralSquare
             case 3:
                 target_class = SpectralCube
         try:
@@ -868,6 +966,8 @@ class _PhotospectralObject(_TrueColorToolsObject):
             return target_class.stub(self.name)
 
 
+stub_filter_system = FilterSystem.from_list(('Generic_Bessell.B', 'Generic_Bessell.V'))
+
 class Photospectrum(_PhotospectralObject):
     """
     Class to work with set of filters measurements (1D PhotospectralObject).
@@ -886,59 +986,29 @@ class Photospectrum(_PhotospectralObject):
     @staticmethod
     def stub(name=None):
         """ Initializes an object in case of the data problems """
-        return Photospectrum(FilterSystem.from_list(('Generic_Bessell.B', 'Generic_Bessell.V')), np.zeros(2), name=name)
+        return Photospectrum(stub_filter_system, np.zeros(2), name=name)
 
 
-
-class _Cube(_TrueColorToolsObject):
-    """ Internal class for inheriting spatial data properties """
-    
-    def downscale(self, pixels_limit: int):
-        """ Brings the spatial resolution of the cube to approximately match the number of pixels """
-        output = deepcopy(self)
-        output.br = aux.spatial_downscaling(self.br, pixels_limit)
-        output.sd = None
-        if self.sd is not None:
-            output.sd = aux.spatial_downscaling(self.sd, pixels_limit)
-        return output
-    
-    @property
-    def width(self):
-        """ Returns horizontal spatial axis length """
-        return self.shape[0]
-    
-    @property
-    def height(self):
-        """ Returns vertical spatial axis length """
-        return self.shape[1]
-
-
-class SpectralCube(_SpectralObject, _Cube):
+class PhotospectralLine(_PhotospectralObject, _Line):
     """
-    Class to work with an image of continuous spectra (3D SpectralObject).
+    Class to work with set of filters measurements (2D PhotospectralObject).
 
     Attributes:
-    - `nm` (np.ndarray): spectral axis, list of wavelengths in nanometers on a uniform grid
+    - `filter_system` (FilterSystem): instance of the class storing filter profiles
+    - `nm` (np.ndarray): shortcut for filter_system.nm, the definition range
     - `br` (np.ndarray): array of "brightness" in energy density units (not a photon counter)
     - `sd` (np.ndarray): optional array of standard deviations
     - `name` (ObjectName): name as an instance of a class that stores its components
-    - `width` (int): horizontal spatial axis length
-    - `height` (int): vertical spatial axis length
+    - `size` (int): spatial axis length
     """
 
-    def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
-        super().__init__(3, nm, br, sd, name)
+    def __init__(self, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
+        super().__init__(2, filter_system, br, sd, name)
     
     @staticmethod
     def stub(name=None):
         """ Initializes an object in case of the data problems """
-        return SpectralCube((555,), np.zeros((1, 1, 1)), name=name)
-    
-    @staticmethod
-    @lru_cache(maxsize=1)
-    def from_file(file: str):
-        """ Creates a SpectralCube object based on loaded data from the specified file """
-        return SpectralCube.from_array(*ii.cube_reader(file))
+        return PhotospectralLine(stub_filter_system, np.zeros((2, 1)), name=name)
 
 
 class PhotospectralCube(_PhotospectralObject, _Cube):
@@ -953,6 +1023,7 @@ class PhotospectralCube(_PhotospectralObject, _Cube):
     - `name` (ObjectName): name as an instance of a class that stores its components
     - `width` (int): horizontal spatial axis length
     - `height` (int): vertical spatial axis length
+    - `size` (int): number of pixels
     """
 
     def __init__(self, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
@@ -961,7 +1032,7 @@ class PhotospectralCube(_PhotospectralObject, _Cube):
     @staticmethod
     def stub(name=None):
         """ Initializes an object in case of the data problems """
-        return PhotospectralCube(FilterSystem.from_list(('Generic_Bessell.B', 'Generic_Bessell.V')), np.zeros((2, 1, 1)), name=name)
+        return PhotospectralCube(stub_filter_system, np.zeros((2, 1, 1)), name=name)
 
 
 
