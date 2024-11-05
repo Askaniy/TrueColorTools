@@ -108,10 +108,13 @@ def spatial_downscaling(cube: np.ndarray, pixels_limit: int):
 def expand2x(array0: np.ndarray):
     """ Expands the array along the first axis by half """
     l = 2 * array0.shape[0] - 1
-    if array0.ndim == 3: # spectral cube processing
-        array1 = np.empty((l, array0.shape[1], array0.shape[2]), dtype=array0.dtype)
-    else:
-        array1 = np.empty(l, dtype=array0.dtype)
+    match array0.ndim:
+        case 1:
+            array1 = np.empty(l, dtype=array0.dtype)
+        case 2: # spectral square processing
+            array1 = np.empty((l, array0.shape[1]), dtype=array0.dtype)
+        case 3: # spectral cube processing
+            array1 = np.empty((l, array0.shape[1], array0.shape[2]), dtype=array0.dtype)
     array1[0::2] = array0
     array1[1::2] = (array0[:-1] + array0[1:]) * 0.5
     return array1
@@ -135,13 +138,15 @@ def custom_interp(array0: np.ndarray, k=16):
     - `k` (int): lower -> more chaotic, higher -> more linear, best results around 10-20
     """
     array1 = expand2x(array0)
-    if array0.ndim == 3: # spectral cube processing
-        zero = np.zeros((1, array0.shape[1], array0.shape[2]))
-        delta_left = np.concatenate((zero, array0[1:-1] - array0[:-2]))
-        delta_right = np.concatenate((array0[2:] - array0[1:-1], zero))
-    else:
-        delta_left = np.append(0., array0[1:-1] - array0[:-2])
-        delta_right = np.append(array0[2:] - array0[1:-1], 0.)
+    match array0.ndim:
+        case 1:
+            zero = np.zeros((1,))
+        case 2: # spectral square processing
+            zero = np.zeros((1, array0.shape[1]))
+        case 3: # spectral cube processing
+            zero = np.zeros((1, array0.shape[1], array0.shape[2]))
+    delta_left = np.concatenate((zero, array0[1:-1] - array0[:-2]))
+    delta_right = np.concatenate((array0[2:] - array0[1:-1], zero))
     array1[1::2] += (delta_left - delta_right) / k
     return array1
 

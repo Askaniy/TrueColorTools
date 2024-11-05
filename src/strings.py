@@ -126,11 +126,11 @@ gui_rnd = {
 #    'ru': 'Входные данные',
 #    'de': 'Eingaben'
 #}
-#gui_output = {
-#    'en': 'Output',
-#    'ru': 'Результат',
-#    'de': 'Ergebnisse'
-#}
+gui_output = {
+    'en': 'Output',
+    'ru': 'Результат',
+    'de': 'Ergebnisse'
+}
 gui_tabs = {
     'en': ['Database viewer', 'Image processing', 'Blackbody & Redshifts'],
     'ru': ['Просмотр базы спектров', 'Обработка изображений', 'АЧТ и красные смещения'],
@@ -364,6 +364,16 @@ gui_upscale_note = {
     'en': 'Multiplies width and height by integer times to the preview size (no interpolation)',
     'ru': 'Умножает ширину и высоту в целое число раз до размера превью (без интерполяции)',
     'de': 'Multipliziert Breite und Höhe mit ganzzahligen Werten auf die Vorschaugröße (keine Interpolation)'
+}
+gui_chunks = {
+    'en': 'Maximum chunk size (in megapixels)',
+    'ru': 'Макс. размер фрагмента (в мегапикселях)',
+    'de': 'Maximale Chunkgröße (in Megapixeln)'
+}
+gui_chunks_note = {
+    'en': 'Prevents RAM overflow; value to optimize based on Task Manager readings',
+    'ru': 'Предотвращает переполнение ОЗУ; число оптимизировать по показаниям Диспетчера задач',
+    'de': 'Verhindert RAM-Überlauf; optimiert den Wert anhand der Messwerte des Task-Managers'
 }
 gui_preview = {
     'en': 'Show preview',

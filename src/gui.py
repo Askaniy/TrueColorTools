@@ -193,6 +193,10 @@ def generate_layout(
             sg.Column(T2_col2_1, expand_x=True, expand_y=False), sg.VSeperator(),
             sg.Column(T2_col2_2, expand_x=True, expand_y=False)
         ],
+        [
+            sg.Text(tr.gui_chunks[lang], key='T2_chunksText', tooltip=tr.gui_chunks_note[lang]),
+            sg.Input('1', size=1, key='T2_chunks', expand_x=True),
+        ],
         [sg.T()],
         [sg.Push(), sg.Image(background_color='black', size=img_preview_size, key='T2_image'), sg.Push()],
         [sg.Push(), sg.Button(tr.gui_preview[lang], size=button_size, key='T2_preview'), sg.Push()],
@@ -325,6 +329,7 @@ def translate_win0(window: sg.Window, T2_vis: int, lang: str):
     #window['T2_plotpixels'].update(text=tr.gui_plotpixels[lang])
     window['T2_factorText'].update(tr.gui_factor[lang])
     window['T2_upscale'].update(text=tr.gui_upscale[lang])
+    window['T2_chunksText'].update(tr.gui_chunks[lang])
     window['T2_preview'].update(tr.gui_preview[lang])
     window['T2_process'].update(tr.gui_process[lang])
     #window['T3_title1'].update(tr.gui_input[lang])

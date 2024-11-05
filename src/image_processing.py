@@ -4,7 +4,7 @@ from typing import Callable
 from traceback import format_exc
 from io import BytesIO
 from time import strftime, monotonic
-from math import sqrt
+from math import sqrt, ceil
 from PIL import Image
 import numpy as np
 
@@ -16,7 +16,8 @@ def image_parser(
         image_mode: int,
         preview_flag: bool = False,
         save_folder: str = '',
-        pixel_limit: int = 256*128,
+        px_lower_limit: int = 256*128,
+        px_upper_limit: int = 1_000_000,
         single_file: str = None,
         files: list = None,
         filters: list = None,
@@ -49,11 +50,11 @@ def image_parser(
                 log('Importing the RGB image')
                 cube = PhotospectralCube(filter_system, ii.rgb_reader(single_file, formulas))
             case 2: # Spectral cube
-                log('Importing the spectral cube (only the first loading is slow)')
+                log('Importing the spectral cube')
                 cube = SpectralCube.from_file(single_file)
         if preview_flag:
             log('Downscaling')
-            cube = cube.downscale(pixel_limit)
+            cube = cube.downscale(px_lower_limit)
         if photons:
             log('Converting photon spectral density to energy density')
             cube = cube.convert_from_photon_spectral_density()
@@ -63,23 +64,34 @@ def image_parser(
         if factor != 1:
             log('Scaling brightness')
             cube *= factor
-        pixel_num = img.size
-        if True: # WIP! if preview_flag or pixel_num < 1024*512:
+        px_num = cube.size
+        if preview_flag or px_num < px_upper_limit:
             log('Color calculating')
             img = ColorImage.from_spectral_data(cube, maximize_brightness, srgb)
         else:
-            log('Image slicing')
-            slices = []
+            square = cube.flatten()
+            chunk_num = ceil(px_num / px_upper_limit)
+            img_array = np.empty((3, px_num))
+            for i in range(chunk_num):
+                j = i+1
+                try:
+                    chunk = square[i*px_upper_limit:j*px_upper_limit]
+                except IndexError:
+                    chunk = square[i*px_upper_limit:]
+                img_chunk = ColorLine.from_spectral_data(chunk, maximize_brightness, srgb)
+                img_array[:,i*px_upper_limit:j*px_upper_limit] = img_chunk.br
+                log(f'Color calculated for {j} chunks out of {chunk_num}')
+            img = ColorImage(img_array.reshape((3, cube.width, cube.height)))
         if gamma_correction:
             log('Gamma correcting')
             img = img.gamma_corrected()
-        if upscale and pixel_num < pixel_limit and (times := round(sqrt(pixel_limit / pixel_num))) != 1:
+        if upscale and px_num < px_lower_limit and (times := round(sqrt(px_lower_limit / px_num))) != 1:
             log('Upscaling')
             img = img.upscale(times)
         img = img.to_pillow_image()
         # End of processing, summarizing
         time = monotonic() - start_time
-        speed = pixel_num / time
+        speed = px_num / time
         log(f'Processing took {time:.1f} seconds, average speed is {speed:.1f} px/sec')
         if preview_flag:
             log('Sending the resulting preview to the main thread', img)

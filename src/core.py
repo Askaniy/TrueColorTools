@@ -13,7 +13,7 @@ Data:
 - - - SpectralCube (3D)
 - - PhotospectralObject
 - - - Photospectrum (1D)
-- - - PhotospectralLine (2D)
+- - - PhotospectralSquare (2D)
 - - - PhotospectralCube (3D)
 
 Database:
@@ -23,8 +23,9 @@ Database:
 Color:
 - ColorSystem
 - ColorObject
-- - ColorPoint
-- - ColorImage
+- - ColorPoint (1D)
+- - ColorLine (2D)
+- - ColorImage (3D)
 """
 
 from copy import deepcopy
@@ -430,18 +431,18 @@ class _SpectralObject(_TrueColorToolsObject):
         If necessary, extrapolates over the wavelength interval of the second operand.
 
         Only 8 convolution options make physical sense:
-        - Spectrum @ Spectrum              -> float
-        - Spectrum @ FilterSystem          -> Photospectrum
+        - Spectrum @ Spectrum                -> float
+        - Spectrum @ FilterSystem            -> Photospectrum
         - SpectralSquare @ Spectrum          -> linear array
-        - SpectralSquare @ FilterSystem      -> PhotospectralLine
-        - SpectralCube @ Spectrum          -> image array
-        - SpectralCube @ FilterSystem      -> PhotospectralCube
-        - Photospectrum @ Spectrum         -> float
-        - Photospectrum @ FilterSystem     -> Photospectrum
-        - PhotospectralLine @ Spectrum     -> linear array
-        - PhotospectralLine @ FilterSystem -> PhotospectralLine
-        - PhotospectralCube @ Spectrum     -> image array
-        - PhotospectralCube @ FilterSystem -> PhotospectralCube
+        - SpectralSquare @ FilterSystem      -> PhotospectralSquare
+        - SpectralCube @ Spectrum            -> image array
+        - SpectralCube @ FilterSystem        -> PhotospectralCube
+        - Photospectrum @ Spectrum           -> float
+        - Photospectrum @ FilterSystem       -> Photospectrum
+        - PhotospectralSquare @ Spectrum     -> linear array
+        - PhotospectralSquare @ FilterSystem -> PhotospectralSquare
+        - PhotospectralCube @ Spectrum       -> image array
+        - PhotospectralCube @ FilterSystem   -> PhotospectralCube
         """
         # TODO: uncertainty processing
         if self.is_edges_zeroed():
@@ -468,8 +469,8 @@ class _SpectralObject(_TrueColorToolsObject):
                 return aux.integrate((operand1.br.T * operand2.br).T, nm_step)
             # SpectralSquare @ FilterSystem
             elif isinstance(operand2, FilterSystem):
-                br = aux.integrate(operand1.br[:, :, np.newaxis] * operand2.br[:, np.newaxis, :], nm_step)
-                return PhotospectralLine(operand2, br, name=operand1.name)
+                br = aux.integrate(operand1.br[:, :, np.newaxis] * operand2.br[:, np.newaxis, :], nm_step).T
+                return PhotospectralSquare(operand2, br, name=operand1.name)
         elif isinstance(operand1, SpectralCube):
             # SpectralCube @ Spectrum
             if isinstance(operand2, Spectrum):
@@ -701,7 +702,7 @@ def get_filter(name: str|int|float) -> Spectrum:
         return profile.edges_zeroed().normalize()
 
 
-class _Line(_TrueColorToolsObject):
+class _Square(_TrueColorToolsObject):
     """ Internal class for inheriting spatial data properties """
     
     @property
@@ -712,9 +713,17 @@ class _Line(_TrueColorToolsObject):
     def __len__(self) -> int:
         """ Returns the spatial axis length """
         return self.size
+    
+    def __getitem__(self, item: slice):
+        """ Returns the spatial axis slice """
+        if isinstance(item, slice):
+            output = deepcopy(self)
+            output.br = output.br[:,item]
+            output.sd = None if output.sd is None else output.sd[:,item]
+            return output
 
 
-class SpectralSquare(_SpectralObject, _Line):
+class SpectralSquare(_SpectralObject, _Square):
     """
     Class to work with a line of continuous spectra (2D SpectralObject).
 
@@ -797,11 +806,12 @@ class FilterSystem(SpectralSquare):
     @lru_cache(maxsize=32)
     def __getitem__(self, index: int) -> Spectrum:
         """ Returns the filter profile with extra zeros trimmed off """
-        profile = self.br[:, index]
-        non_zero_indices = np.nonzero(profile)[0]
-        start = non_zero_indices[0] - 1
-        end = non_zero_indices[-1] + 2
-        return Spectrum(self.nm[start:end], profile[start:end], name=self.names[index])
+        if isinstance(index, int):
+            profile = self.br[:, index]
+            non_zero_indices = np.nonzero(profile)[0]
+            start = non_zero_indices[0] - 1
+            end = non_zero_indices[-1] + 2
+            return Spectrum(self.nm[start:end], profile[start:end], name=self.names[index])
 
 
 class _Cube(_TrueColorToolsObject):
@@ -815,6 +825,15 @@ class _Cube(_TrueColorToolsObject):
         if self.sd is not None:
             output.sd = aux.spatial_downscaling(self.sd, pixels_limit)
         return output
+    
+    def flatten(self):
+        """ Returns a (photo)spectral square with linearized spatial axis """
+        br = self.br.reshape(self.nm_len, self.size)
+        sd = None if self.sd is None else self.br.reshape(self.nm_len, self.size)
+        if isinstance(self, _SpectralObject):
+            return SpectralSquare(self.nm, br, sd, self.name)
+        elif isinstance(self, _PhotospectralObject):
+            return PhotospectralSquare(self.filter_system, br, sd, self.name)
     
     @property
     def width(self):
@@ -855,7 +874,6 @@ class SpectralCube(_SpectralObject, _Cube):
         return SpectralCube((555,), np.zeros((1, 1, 1)), name=name)
     
     @staticmethod
-    @lru_cache(maxsize=1)
     def from_file(file: str):
         """ Creates a SpectralCube object based on loaded data from the specified file """
         return SpectralCube.from_array(*ii.cube_reader(file))
@@ -989,7 +1007,7 @@ class Photospectrum(_PhotospectralObject):
         return Photospectrum(stub_filter_system, np.zeros(2), name=name)
 
 
-class PhotospectralLine(_PhotospectralObject, _Line):
+class PhotospectralSquare(_PhotospectralObject, _Square):
     """
     Class to work with set of filters measurements (2D PhotospectralObject).
 
@@ -1008,7 +1026,7 @@ class PhotospectralLine(_PhotospectralObject, _Line):
     @staticmethod
     def stub(name=None):
         """ Initializes an object in case of the data problems """
-        return PhotospectralLine(stub_filter_system, np.zeros((2, 1)), name=name)
+        return PhotospectralSquare(stub_filter_system, np.zeros((2, 1)), name=name)
 
 
 class PhotospectralCube(_PhotospectralObject, _Cube):
@@ -1435,6 +1453,23 @@ class ColorPoint(_ColorObject):
             html = '#FFFFFF'
             #print(f'- It has been replaced with {html}.')
         return html
+
+
+class ColorLine(_ColorObject):
+    """
+    Class to work with a line of red, green and blue channels.
+    Stores brightness values in the range 0 to 1 in the `br` attribute, numpy array of shape (3, X).
+    To avoid data loss, brightness above 1 is not clipped before export.
+    """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.br = np.atleast_2d(self.br) # interprets color points as lines
+    
+    @property
+    def size(self):
+        """ Returns spatial axis length """
+        return self.br.shape[1]
 
 
 class ColorImage(_ColorObject):

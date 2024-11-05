@@ -383,7 +383,8 @@ def launch_window(lang: str):
                             image_mode=T2_mode,
                             preview_flag=event=='T2_preview',
                             save_folder=values['T2_folder'],
-                            pixels_limit=img_preview_area,
+                            px_lower_limit=img_preview_area,
+                            px_upper_limit=int(float(values['T2_chunks']) * 1e6), # megapixels to pixels
                             single_file=values['T2_path'],
                             files=T2_files,
                             filters=T2_filters,
