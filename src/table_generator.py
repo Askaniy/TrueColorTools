@@ -200,7 +200,11 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
                 index = index.replace('+', '\n+')
             else:
                 free_space = 2*r_active - ref_len - tiny_space
-                index = '\n'.join(line_splitter(index, small_font, free_space))
+                try:
+                    index = '\n'.join(line_splitter(index, small_font, free_space))
+                except RecursionError:
+                    # the case of wide reference name (on the first line)
+                    index = '\n' + '\n'.join(line_splitter(index, small_font, r_active))
             draw.multiline_text((center_x-r_active, center_y-r_active-workaround_shift), f'{index}', fill=text_color, font=small_font, anchor='la', align='left', spacing=0)
         
         if notes_flag and (note := obj_name.note(lang)):
@@ -271,10 +275,23 @@ def combine_words(word0: str, word1: str):
         combination = f'{word0} {word1}'
     return combination
 
-def recursive_split(lst0: list, font: ImageFont.FreeTypeFont, maxW: int):
+def get_numeric_end(word: str):
+    """ Returns the number contained at the end of the string """
+    number = ''
+    for i in range(len(word), 0, -1):
+        word_end = word[i-1:]
+        if word_end.isnumeric():
+            number = word_end
+        else:
+            break
+    return number
+
+def recursive_split(lst: list, font: ImageFont.FreeTypeFont, maxW: int):
     """ A function that recursively splits and joins the list of strings to match `maxW` """
-    words_widths = tuple(width(word, font) for word in lst0)
-    lst = lst0
+    words_widths = tuple(width(word, font) for word in lst)
+    if len(lst) > 10:
+        # Prevent recursion infinite loop, there can be no more than a few lines
+        raise RecursionError(f'{lst} is unexpectedly long')
     if max(words_widths) > maxW:
         # Attempt to hyphenate the word
         for i in range(len(lst)):
@@ -294,17 +311,26 @@ def recursive_split(lst0: list, font: ImageFont.FreeTypeFont, maxW: int):
                         recursive_split(lst, font, maxW)
                         break
                 else:
-                    # Move one letter per iteration
-                    if (last_symbol := lst[i][-1]) in separators:
-                        letter = lst[i][-2]
-                        lst[i] = lst[i][:-2] + last_symbol
+                    if (numeric_end := get_numeric_end(lst[i])) != '' and numeric_end != lst[i]:
+                        # it's not good to split numbers, so the first attempt is to get it all
+                        to_move = numeric_end
+                        lst[i] = lst[i][:-len(numeric_end)]
                     else:
-                        letter = last_symbol + ' '
-                        lst[i] = lst[i][:-1] + '-'
+                        # Move one letter per iteration
+                        if (last_symbol := lst[i][-1]) in separators:
+                            # don't hyphenate if already hyphenated
+                            to_move = lst[i][-2]
+                            lst[i] = lst[i][:-2] + last_symbol
+                        else:
+                            # hyphenate the current line
+                            to_move = last_symbol + ' '
+                            lst[i] = lst[i][:-1] + '-'
                     try:
-                        lst[i+1] = f'{letter}{lst[i+1]}'
+                        # adding to the next line
+                        lst[i+1] = f'{to_move}{lst[i+1]}'
                     except IndexError:
-                        lst.append(letter)
+                        # creating a new line
+                        lst.append(to_move.strip())
                     recursive_split(lst, font, maxW)
                 break
     else:

@@ -744,6 +744,7 @@ names = {
     'Gǃkúnǁʼhòmdímà': {'ru': 'Гкъкунлъ’хомдима', 'de': 'Gǃkúnǁʼhòmdímà'},
     'Gǃòʼé ǃHú': {'ru': 'Гкъо’э Къху', 'de': 'Gǃòʼé ǃHú'},
     'Arrokoth': {'ru': 'Аррокот', 'de': 'Arrokoth'},
+    'Dziewanna': {'ru': 'Девана', 'de': 'Dziewanna'},
     'Halley': {'ru': 'Галлея', 'de': 'Halley'},
     'Churyumov–Gerasimenko': {'ru': 'Чурюмова — Герасименко', 'de': 'Tschurjumow-Gerassimenko'},
     'Hartley': {'ru': 'Хартли', 'de': 'Hartley'},

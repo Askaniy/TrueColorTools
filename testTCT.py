@@ -3,6 +3,7 @@ from numpy.testing import assert_equal, assert_allclose
 
 from src.core import *
 from src.auxiliary import parse_value_sd
+from src.table_generator import ImageFont, line_splitter
 
 
 class TestTCT(unittest.TestCase):
@@ -123,6 +124,16 @@ class TestTCT(unittest.TestCase):
         }
         for key, value in db.items():
             body = database_parser(key, value)
-
+    
+    def test_line_splitter(self):
+        object_font = ImageFont.truetype('src/fonts/FiraSansExtraCondensed-Regular.ttf', 20, layout_engine=ImageFont.Layout.BASIC)
+        self.assertEqual(line_splitter('Sun', object_font, 114), ['Sun'])
+        self.assertEqual(line_splitter('2MASSW J0746425+200032', object_font, 114), ['2MASSW', 'J0746425+', '+200032'])
+        self.assertEqual(line_splitter('Rings of Uranus', object_font, 114), ['Rings of', 'Uranus'])
+        self.assertEqual(line_splitter('Gǃkúnǁʼhòmdímà', object_font, 114), ['Gǃkúnǁʼhòmdí-', 'mà'])
+        self.assertEqual(line_splitter('Honda–Mrkos–Pajdušáková', object_font, 114), ['Honda–', '–Mrkos–', '–Pajdušáková'])
+        self.assertEqual(line_splitter('Churyumov–Gerasimenko', object_font, 114), ['Churyumov–', '–Gerasimenko'])
+        self.assertEqual(line_splitter('Чурюмова — Герасименко³⁰', object_font, 114), ['Чурюмова —', 'Герасименко', '³⁰'])
+        self.assertEqual(line_splitter('136472', object_font, 32), ['136-', '472'])
 
 unittest.main()
