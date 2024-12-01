@@ -214,7 +214,7 @@ def launch_window(lang: str):
                     }
 
                     if event == 'T1_load':
-                        # Turning on the database view elements
+                        # Enable database view elements
                         window['T1_header_space'].update(visible=False)
                         window['T1_load'].update(tr.gui_load[lang], visible=False)
                         window['T1_tagsN'].update(visible=True)
@@ -222,6 +222,14 @@ def launch_window(lang: str):
                         T1_displayed_namesDB = db.obj_names_dict(objectsDB, default_tag, lang)
                         window['T1_list'].update(values=tuple(T1_displayed_namesDB.keys()), visible=True)
                         window['T1_reload'].update(tr.gui_reload[lang], visible=True)
+                    else:
+                        # Updating tags on reload
+                        if values['T1_tags'] in tagsDB:
+                            window['T1_tags'].update(values['T1_tags'], values=tagsDB)
+                        else:
+                            window['T1_tags'].update(default_tag, values=tagsDB)
+                            T1_displayed_namesDB = db.obj_names_dict(objectsDB, default_tag, lang)
+                            window['T1_list'].update(values=tuple(T1_displayed_namesDB.keys()))
 
                 elif event in T1_triggers and values['T1_list'] != []:
 
