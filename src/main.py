@@ -24,6 +24,7 @@ def launch_window(lang: str):
 
     # Processing configuration
     default_tag = 'featured'
+    srgb = True   # default color space
     brMax = False # albedo/chromaticity mode switcher
     brGeom = True # default albedo type (True==geometrical, False==spherical)
     bitness = 1
@@ -43,11 +44,11 @@ def launch_window(lang: str):
         icon = file.read()
 
     # Launching the main window
-    sg.ChangeLookAndFeel('MaterialDark')
+    sg.theme('MaterialDark')
     window0 = sg.Window(
         'TrueColorTools', icon=icon, finalize=True, resizable=True, margins=(0, 0), size=(1000, 640),
         layout=gui.generate_layout(
-            (2*circle_r+1, 2*circle_r+1), img_preview_size, text_colors, filtersDB, brMax, brGeom, bitness, rounding, T2_num, lang
+            (2*circle_r+1, 2*circle_r+1), img_preview_size, text_colors, filtersDB, srgb, brMax, brGeom, bitness, rounding, T2_num, lang
         )
     )
     # Creating the plot window stub

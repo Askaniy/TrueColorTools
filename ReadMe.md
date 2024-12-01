@@ -33,9 +33,9 @@ TrueColorTools has been tested on Windows 10/11, macOS and Linux ([this](https:/
 
 The key processing method is to convert a photometric data into a continuous spectrum and convolve it with color matching functions of an eye. Summary of the standard steps:
 
-1. Data reading and conversion into the form of "wavelength: spectral energy density". Built-in filter information is used to work with color indices and spacecraft images.
-2. The resulting values are interpolated (and extrapolated if necessary). The program uses its own functions, which are faster and more reliable than SciPy's. The plan is to replace the interpolation with an algorithm that takes into account the profile of the filters.
-3. By default, the spectrum is convolved with RGB sensitivity curves. When sRGB mode is enabled, the spectrum is first convolved into XYZ space and then RGB is calculated with assuming of the illuminant E (the equal energy white point is much better than standard D65 for our purposes).
+1. Data reading and conversion into the form of "wavelength: energy spectral density". Filter profiles are stored for working with photometry and images from spacecraft/telescopes.
+2. The resulting values are interpolated (and extrapolated if necessary).
+3. In the default sRGB mode, the spectrum is first convolved in XYZ space and then RGB is calculated for sRGB color space and illuminant E (the equal energy white point is much better than the standard D65 for our purposes).
 
 
 ## How to use?
@@ -45,7 +45,7 @@ Program interface is functionally divided into tabs: *Database viewer*, *Image p
 
 The **Database viewer** tab provides access to the spectra database and allows you to calculate a color with the selected settings by simply clicking on an object. It is possible to plot one or more spectra from the database in a pop-up window. You can process the colors of an entire category at once and get the output in text form or as a graphical table ([examples](tables/)).
 
-The **Image processing** tab accepts regular images, a series of black and white images, or a spectral cube as input. Using the wavelength information, the image is restored in true color. The internal operations are similar to reconstructing the spectrum for each pixel.
+The **Image processing** tab accepts regular images, a series of black and white images, or a spectral cube as input. Using the wavelength information, the image is "reshot" in true color. The internal operations are similar to reconstructing the spectrum for each pixel, but use efficient operations on arrays.
 
 The **Blackbody & Redshifts** tab calculates the influence of physical phenomena on color. Based on the blackbody spectrum, the program displays the color and brightness changes due to Doppler and gravitational redshifts. You can lock the exposure on the logarithmic scale of apparent magnitude, setting the overexposure limit for a tuned blackbody object if it was in the sky replacing the Sun (at the same angular size).
 
