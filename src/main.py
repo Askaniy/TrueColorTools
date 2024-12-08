@@ -241,21 +241,19 @@ def launch_window(lang: str):
 
                     # Spectral data import and processing
                     T1_body = database_parser(T1_obj_name, objectsDB[T1_obj_name])
-                    T1_maximize_br = values['-brMax-'] or isinstance(T1_body, NonReflectiveBody)
+                    T1_spectrum, T1_estimated = T1_body.get_spectrum('geometric' if values['-brMode1-'] else 'spherical')
                     
-                    if not values['-brMax-'] and isinstance(T1_body, NonReflectiveBody) and 'star' not in T1_body.tags:
-                        # Black circle is shown for objects with no albedo data in the albedo mode
-                        T1_spectrum = Spectrum.stub()
+                    # Setting of notes
+                    if not values['-brMax-'] and isinstance(T1_body, NonReflectiveBody):
                         window['T1_albedo_note'].update(tr.gui_no_albedo[lang])
                     else:
-                        # Setting brightness mode
-                        T1_spectrum, T1_estimated = T1_body.get_spectrum('geometric' if values['-brMode1-'] else 'spherical')
                         if T1_estimated:
                             window['T1_albedo_note'].update(tr.gui_estimated[lang])
                         else:
                             window['T1_albedo_note'].update('')
 
                     # Color calculation
+                    T1_maximize_br = values['-brMax-'] or isinstance(T1_body, NonReflectiveBody)
                     T1_color = ColorPoint.from_spectral_data(T1_spectrum, T1_maximize_br, values['-srgb-'])
                     if values['-gamma-']:
                         T1_color = T1_color.gamma_corrected()
@@ -312,12 +310,12 @@ def launch_window(lang: str):
                         T1_export = '\n' + '\t'.join(tr.gui_col[lang]) + '\n' + '_' * 36
                         for obj_name in T1_displayed_namesDB.values():
                             T1_body = database_parser(obj_name, objectsDB[obj_name])
-                            T1_maximize_br = values['-brMax-'] or isinstance(T1_body, NonReflectiveBody)
                         
                             # Setting brightness mode
                             T1_spectrum, T1_estimated = T1_body.get_spectrum('geometric' if values['-brMode1-'] else 'spherical')
 
                             # Color calculation
+                            T1_maximize_br = values['-brMax-'] or isinstance(T1_body, NonReflectiveBody)
                             T1_color = ColorPoint.from_spectral_data(T1_spectrum, T1_maximize_br, values['-srgb-'])
                             if values['-gamma-']:
                                 T1_color = T1_color.gamma_corrected()

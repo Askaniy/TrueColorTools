@@ -228,6 +228,11 @@ table_title = {
     'ru': ['Таблица цветов для категории «', '»'],
     'de': ['Farbtabelle der Kategory „', '“']
 }
+table_no_albedo = {
+    'en': 'no albedo',
+    'ru': 'нет альбедо',
+    'de': 'keine Albedo'
+}
 table_estimated = {
     'en': 'estimated albedo',
     'ru': 'оценка альбедо',

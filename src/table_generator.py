@@ -106,25 +106,26 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
     arr = np.zeros((h, w, 3))
     squircle = higher_dim(generate_squircle(r_square, rounding_radius), times=3, axis=2)
     squircle_contour = higher_dim(generate_squircle_contour(r_square, rounding_radius, 1), times=3, axis=2) * 0.25
-    is_estimated = np.empty(l, dtype='bool')
     is_white_text = np.empty(l, dtype='bool')
+    object_notes = []
 
     for n, obj_name in enumerate(displayed_namesDB):
 
         # Spectral data import and processing
         body = database_parser(obj_name, objectsDB[obj_name])
-        maximize_br = brMax or isinstance(body, NonReflectiveBody)
+        spectrum, estimated = body.get_spectrum('geometric' if brGeom else 'spherical')
 
-        if not brMax and isinstance(body, NonReflectiveBody) and 'star' not in body.tags:
-            # Black square is shown for objects with no albedo data in the albedo mode
-            spectrum = Spectrum.stub()
-            estimated = False
+        # Setting of notes
+        if not brMax and isinstance(body, NonReflectiveBody):
+            object_notes.append(tr.table_no_albedo[lang])
         else:
-            # Setting brightness mode
-            spectrum, estimated = body.get_spectrum('geometric' if brGeom else 'spherical')
-        is_estimated[n] = estimated
+            if estimated:
+                object_notes.append(tr.table_estimated[lang])
+            else:
+                object_notes.append(None)
         
         # Color calculation
+        maximize_br = brMax or isinstance(body, NonReflectiveBody)
         color = ColorPoint.from_spectral_data(spectrum, maximize_br, srgb)
         if gamma:
             color = color.gamma_corrected()
@@ -169,8 +170,8 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
 
         text_color = (0, 0, 0) if is_white_text[n] else (255, 255, 255)
 
-        if is_estimated[n]:
-            draw.text((center_x+r_active, center_y+r_active), tr.table_estimated[lang], text_color, small_font, anchor='rs', align='right')
+        if (object_note := object_notes[n]) is not None:
+            draw.text((center_x+r_active, center_y+r_active), object_note, text_color, small_font, anchor='rs', align='right')
         
         name = obj_name.name(lang)
 
@@ -279,9 +280,8 @@ def get_numeric_end(word: str):
     """ Returns the number contained at the end of the string """
     number = ''
     for i in range(len(word), 0, -1):
-        word_end = word[i-1:]
-        if word_end.isnumeric():
-            number = word_end
+        if word[i-1].isnumeric():
+            number = word[i-1]
         else:
             break
     return number
