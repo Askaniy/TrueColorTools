@@ -180,5 +180,17 @@
     '2MASSW J1507476-162738 (L5) | Reid2000': {
         tags: ['featured', 'extrasolar', 'star/ultra-cool dwarf'],
         file: 'spectra/files/Reid2000/2M1507.txt'
-    }
+    },
+
+    'Mignani2001': [
+        'Multicolor Photometry of the Vela Pulsar',
+        'DOI: 10.1051/0004-6361:20010951', 'https://www.aanda.org/articles/aa/abs/2001/34/aa1221/aa1221.htmlc'
+    ],
+    'Vela pulsar | Mignani2001': {
+        tags: ['extrasolar', 'star/neutron star'],
+        filters: ['LaSilla_EMMI.Bessel_U', 'LaSilla_EMMI.Bessel_B', 'HST_WFPC2-PC.F555W', 'LaSilla_EMMI.V', 'HST_WFPC2-PC.F675W', 'LaSilla_EMMI.R', 'HST_WFPC2-PC.F814W'],
+        // note: LaSilla_EMMI filters are transparency only, without detector sensitivity
+        mag: [[23.38, 0.15], [23.89, 0.15], [23.64, 0.05], [23.65, 0.1], [24.30, 0.1], [23.93, 0.2], [24.40, 0.1]],
+        calibration_system: 'Vega',
+    },
 }

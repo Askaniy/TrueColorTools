@@ -555,6 +555,7 @@ names = {
     'Betelgeuse': {'ru': 'Бетельгейзе', 'de': 'Beteigeuze'},
     'Gacrux': {'ru': 'Гакрукс', 'de': 'Gacrux'},
     'Proxima Centauri': {'ru': 'Проксима Центавра', 'de': 'Proxima Centauri'},
+    'Vela pulsar': {'ru': 'Пульсар в Парусах', 'de': 'Vela-Pulsar'},
     # Stars from the CALSPEC add-on
     'Alkaid': {'ru': 'Алькаид', 'de': 'Alkaid'},
     'Yildun': {'ru': 'Йильдун', 'de': 'Yildun'},
