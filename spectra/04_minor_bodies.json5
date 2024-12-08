@@ -4420,26 +4420,39 @@
     },
     
     // Interstellar objects
+    'Bolin2018': [
+        'APO Time-resolved Color Photometry of Highly Elongated Interstellar Object 1I/ʻOumuamua',
+        'DOI: 10.3847/2041-8213/aaa0c9', 'https://iopscience.iop.org/article/10.3847/2041-8213/aaa0c9'
+    ],
+    '1I/ʻOumuamua | Bolin2018': {
+        tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
+        photometric_system: 'SLOAN_SDSS',
+        filters: ['g', 'r', 'i'],
+        mag: [23.51, 23.10, 22.87],
+        sd: [0.22, 0.09, 0.23],
+        calibration_system: 'AB',
+        sun_is_emitter: true,
+    },
     'Jewitt2017': [
         'Interstellar Interloper 1I/2017 U1: Observations from the NOT and WIYN Telescopes',
         'DOI: 10.3847/2041-8213/aa9b2f', 'https://arxiv.org/abs/1711.05687'
     ],
     '1I/ʻOumuamua | Jewitt2017': {
-        tags: ['Solar System', 'extrasolar', 'minor body/asteroid'],
+        tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.70, 'V-R': 0.45},
         calibration_system: 'Vega',
+        color_indices: {'B-V': 0.70, 'V-R': 0.45},
         sun_is_emitter: true,
     },
     'Bannister2017': [
-        'Col-OSSOS: Colors of the Interstellar Planetesimal 1I/`Oumuamua',
+        'Col-OSSOS: Colors of the Interstellar Planetesimal 1I/ʻOumuamua',
         'DOI: 10.3847/2041-8213/aaa07c', 'https://arxiv.org/abs/1711.06214'
     ],
     '1I/ʻOumuamua | Bannister2017': {
-        tags: ['Solar System', 'extrasolar', 'minor body/asteroid'],
+        tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.47, 'r-i': 0.36},
         calibration_system: 'AB',
+        color_indices: {'g-r': 0.47, 'r-i': 0.36},
         sun_is_emitter: true,
     },
 }
