@@ -421,8 +421,8 @@ gui_mag_note = {
 
 # Plots
 spectral_plot = {
-    'en': 'Energy spectral density or albedo',
-    'ru': 'Спектральная плотность энергии или альбедо',
+    'en': 'Energy spectral density or albedo, resp.',
+    'ru': 'Спектральная плотность энергии или альбедо, соотв.',
     'de': 'Spektrale Energiedichte bzw. Albedo'
 }
 light_theme = {
