@@ -104,8 +104,14 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
 
     # Creating of background of colored squircles
     arr = np.zeros((h, w, 3))
-    squircle = higher_dim(generate_squircle(r_square, rounding_radius), times=3, axis=2)
-    squircle_contour = higher_dim(generate_squircle_contour(r_square, rounding_radius, 1), times=3, axis=2) * 0.25
+    shapes = (
+        higher_dim(generate_squircle_contour(r_square+1, rounding_radius, 2), times=3, axis=2),
+        higher_dim(generate_squircle(r_square, rounding_radius), times=3, axis=2)
+    )
+    text_colors = (
+        (0, 0, 0),
+        (255, 255, 255) 
+    )
     is_white_text = np.empty(l, dtype='bool')
     object_notes = []
 
@@ -114,30 +120,46 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
         # Spectral data import and processing
         body = database_parser(obj_name, objectsDB[obj_name])
         spectrum, estimated = body.get_spectrum('geometric' if brGeom else 'spherical')
-
-        # Setting of notes
-        if not brMax and isinstance(body, NonReflectiveBody):
-            object_notes.append(tr.table_no_albedo[lang])
-        else:
-            if estimated:
-                object_notes.append(tr.table_estimated[lang])
-            else:
-                object_notes.append(None)
         
         # Color calculation
         maximize_br = brMax or isinstance(body, NonReflectiveBody)
         color = ColorPoint.from_spectral_data(spectrum, maximize_br, srgb)
         if gamma:
             color = color.gamma_corrected()
-        is_white_text[n] = color.grayscale() > 0.5
 
-        # Rounded square. For just a square, use `object_template = color.br`
-        object_template = color.br * squircle if np.any(color.br) else squircle_contour
+        # Setting of notes and shape
+        if not brMax and isinstance(body, NonReflectiveBody):
+            if 'star' in body.tags:
+                is_filled = True
+                object_notes.append(None)
+            else:
+                is_filled = False
+                object_notes.append(tr.table_no_albedo[lang])
+        else:
+            is_filled = True
+            if estimated:
+                object_notes.append(tr.table_estimated[lang])
+            else:
+                object_notes.append(None)
+
+        # Setting object and text colors
+        if np.any(color.br):
+            if is_filled:
+                object_color = color.br
+                is_white_text[n] = color.grayscale() < 0.5
+            else:
+                object_color = color.br / color.grayscale() / 3
+                is_white_text[n] = True
+        else:
+            # error handling
+            object_color = 1/3
+            is_white_text[n] = True
 
         # Placing object template into the image template
         center_x = centers_x[n]
         center_y = centers_y[n]
-        arr[center_y-r_square:center_y+r_square, center_x-r_square:center_x+r_square, :] = object_template
+        r_sq = r_square if is_filled else r_square+1
+        arr[center_y-r_sq:center_y+r_sq, center_x-r_sq:center_x+r_sq, :] = shapes[is_filled] * object_color
 
     # Creating of image template
     img = Image.fromarray(np.clip(np.round(arr*255), 0, 255).astype('int8'), 'RGB')
@@ -168,7 +190,7 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
         center_x = centers_x[n]
         center_y = centers_y[n]
 
-        text_color = (0, 0, 0) if is_white_text[n] else (255, 255, 255)
+        text_color = text_colors[is_white_text[n]]
 
         if (object_note := object_notes[n]) is not None:
             draw.text((center_x+r_active, center_y+r_active), object_note, text_color, small_font, anchor='rs', align='right')
