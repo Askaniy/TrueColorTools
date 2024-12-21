@@ -738,6 +738,8 @@ names = {
     'Actaea': {'ru': 'Актея', 'de': 'Actaea'},
     'Pluto': {'ru': 'Плутон', 'de': 'Pluto'},
     'Charon': {'ru': 'Харон', 'de': 'Charon'},
+    'Nix': {'ru': 'Никта', 'de': 'Nix'},
+    'Hydra': {'ru': 'Гидра', 'de': 'Hydra'},
     'Haumea': {'ru': 'Хаумеа', 'de': 'Haumea'},
     'Eris': {'ru': 'Эрида', 'de': 'Eris'},
     'Makemake': {'ru': 'Макемаке', 'de': 'Makemake'},
