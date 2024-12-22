@@ -78,7 +78,7 @@ def spectral_downscaling(nm0: Sequence, br0: np.ndarray, nm1: Sequence, step: in
     """
     cube_flag = br0.ndim == 3 # spectral cube processing
     if br0.min() < 0:
-        br0 = np.clip(br0, 1e-10, None) # strange NumPy errors with weights without it
+        br0 = np.clip(br0, np.nextafter(0, 1), None) # strange NumPy errors with weights without it
     # Obtaining a graph of standard deviations for a Gaussian
     nm_diff = np.diff(nm0)
     nm_mid = (nm0[1:] + nm0[:-1]) * 0.5
@@ -86,7 +86,7 @@ def spectral_downscaling(nm0: Sequence, br0: np.ndarray, nm1: Sequence, step: in
     factors = -0.5 / sd_local**2 # Gaussian exponent multipliers
     # Convolution with Gaussian of variable standard deviation
     br1 = np.empty_like(nm1, dtype='float64')
-    if cube_flag: 
+    if cube_flag:
         br1 = array2cube(br1, br0.shape[1:3])
     for i in range(len(nm1)):
         gaussian = np.exp(factors[i]*(nm0 - nm1[i])**2)
@@ -277,7 +277,8 @@ def parse_value_sd(data: float|Sequence[float]) -> tuple[float, float|None]:
     Supported input types:
     - value
     - [value, sd]
-    - [value, +sd, -sd]
+    - [value, +sd1, -sd2]
+    - [value, -sd1, +sd2]
     """
     if isinstance(data, int|float):
         # no standard deviation
