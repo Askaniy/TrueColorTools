@@ -102,6 +102,14 @@ class TestTCT(unittest.TestCase):
         assert_equal(parse_value_sd([0.202, 0.084, 0.049]), (0.202, 0.0665))
         assert_equal(parse_value_sd([0.202, +0.084, -0.049]), (0.202, 0.0665))
     
+    def test_name_parsing(self):
+        obj_name = ObjectName('HZ43(8) (DA) | CALSPEC')
+        assert_equal(obj_name.name(), 'HZ43(8)')
+        assert_equal(obj_name.info, 'DA')
+        obj_name = ObjectName('HD 101452 (A2/3) | CALSPEC')
+        assert_equal(obj_name.name(), 'HD 101452')
+        assert_equal(obj_name.info, 'A2/3')
+    
     def test_db(self):
         db = {
             'Phoebe (S IX) | Grav2003, Miller2011': {

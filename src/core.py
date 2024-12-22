@@ -79,15 +79,17 @@ class ObjectName:
             if name[0] == '(': # minor body index or something else
                 index, name = name.split(')', 1)
                 self.index = index[1:].strip()
-            elif '/' in name: # comet name
-                index, name = name.split('/', 1)
-                self.index = index.strip() + '/'
             if '(' in name: # stellar spectral type or something else
-                name, info = name.split('(', 1)
-                self.info = info.split(')', 1)[0].strip()
-            if ':' in name:
+                info, name = name[::-1].split('(', 1) # getting the last bracket
+                name = name[::-1] # reversing back
+                self.info = info[::-1].split(')', 1)[0].strip()
+            if ':' in name: # note
                 name, note = name.split(':', 1)
                 self._note_en = note.strip()
+            if '/' in name: # comet name
+                # the last "if" because "/" may encountered in info or notes
+                index, name = name.split('/', 1)
+                self.index = index.strip() + '/'
             self._name_en = name.strip()
     
     def name(self, lang: str = 'en') -> str:

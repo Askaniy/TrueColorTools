@@ -303,7 +303,7 @@ def get_numeric_end(word: str):
     number = ''
     for i in range(len(word), 0, -1):
         if word[i-1].isnumeric():
-            number = word[i-1]
+            number = word[i-1:]
         else:
             break
     return number
