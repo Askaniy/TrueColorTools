@@ -16,6 +16,11 @@
         'Photometry of Transneptunian Objects for the Herschel Key Program ‘TNOs are Cool’',
         'DOI: 10.1007/s11038-014-9450-x', 'https://link.springer.com/article/10.1007/s11038-014-9450-x'
     ],
+    'GaiaDR3': [
+        'Gaia DR3 Part 5. Solar System',
+        'DOI: 10.26093/cds/vizier.1359', 'https://cdsarc.cds.unistra.fr/viz-bin/cat/I/359',
+        'https://ui.adsabs.harvard.edu/abs/2022yCat.1359....0G/abstract'
+    ],
     'Humes2022': [
         'Ultraviolet Spectroscopy of Lucy Mission Targets with the Hubble Space Telescope',
         'DOI: 10.3847/PSJ/ac8059', 'https://iopscience.iop.org/article/10.3847/PSJ/ac8059',
@@ -414,6 +419,22 @@
         geometric_albedo: ['Generic_Bessell.V', 0.063],
         phase_function: ['HG', {H: 6.22, G: 0.16}]
     },
+    '(588) Achilles | GaiaDR3, SsODNet, Shevchenko2022': {
+        tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
+        nm: [374, 418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
+        br: [
+            8.628803e-01, 8.313630e-01, 9.105544e-01, 9.387156e-01, 1.000000e+00, 1.010539e+00,
+            1.025850e+00, 1.094536e+00, 1.129263e+00, 1.157449e+00, 1.221273e+00, 1.255083e+00,
+            1.314281e+00, 1.385913e+00, 1.406973e+00, 1.467296e+00
+        ],
+        sd: [
+            2.698069e-02, 1.027654e-02, 8.172306e-03, 7.420461e-03, 7.948638e-03, 7.760149e-03,
+            8.599193e-03, 8.059071e-03, 8.518910e-03, 8.732826e-03, 9.277143e-03, 9.609589e-03,
+            1.045705e-02, 1.100233e-02, 1.340484e-02, 2.089048e-02
+        ],
+        geometric_albedo: ['Generic_Bessell.V', [0.0581, +0.0125, -0.0128]],
+        phase_function: ['HG1G2', {H: [8.393, 0.005], G_1: [0.87, 0.04], G_2: [0.080, 0.030]}]
+    },
     'Chatelain2016': [
         'Photometric colors of the brightest members of the Jupiter L5 Trojan cloud',
         'DOI: 10.1016/j.icarus.2016.01.026', 'https://ui.adsabs.harvard.edu/abs/2016Icar..271..158C/abstract'
@@ -436,11 +457,47 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.045, 0.009]],
     },
+    '(624) Hektor | GaiaDR3, SsODNet': {
+        tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
+        nm: [374, 418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
+        br: [
+            8.161768e-01, 8.381884e-01, 9.073412e-01, 9.535180e-01, 1.000000e+00, 1.031746e+00,
+            1.075038e+00, 1.132591e+00, 1.191990e+00, 1.236406e+00, 1.285124e+00, 1.339667e+00,
+            1.372807e+00, 1.445096e+00, 1.494113e+00, 1.579852e+00
+        ],
+        sd: [
+            5.647785e-03, 2.730782e-03, 2.341937e-03, 2.364197e-03, 2.381620e-03, 2.562413e-03,
+            2.686922e-03, 2.447661e-03, 2.667990e-03, 2.805160e-03, 2.903609e-03, 2.994654e-03,
+            3.081398e-03, 3.324679e-03, 3.750030e-03, 5.073070e-03
+        ],
+        geometric_albedo: ['Generic_Bessell.V', [0.0313, 0.0087]],
+        phase_function: ['HG1G2', {H: [7.254351, +0.122498, -0.142641], G_1: [0.250555, +0.342459, -0.405349], G_2: [0.434629, +0.245534, -0.220201]}]
+    },
     '(704) Interamnia | SMASS, Vernazza2021, Tholen2020': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000704.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.067],
         phase_function: ['HG', {H: 5.94, G: -0.02}]
+    },
+    'Shevchenko2014': [
+        'Revised albedos of Trojan asteroids (911) Agamemnon and (4709) Ennomos',
+        'DOI: 10.1111/maps.12234', 'https://onlinelibrary.wiley.com/doi/10.1111/maps.12234',
+        'https://ui.adsabs.harvard.edu/abs/2014M%26PS...49..103S/abstract'
+    ],
+    '(911) Agamemnon | GaiaDR3, Shevchenko2014': {
+        tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
+        nm: [374, 418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
+        br: [
+            8.773519e-01, 8.659844e-01, 9.019542e-01, 9.436970e-01, 1.000000e+00, 1.034753e+00,
+            1.063721e+00, 1.102767e+00, 1.148163e+00, 1.206349e+00, 1.245204e+00, 1.294332e+00,
+            1.343991e+00, 1.407892e+00, 1.475912e+00, 1.638448e+00
+        ],
+        sd: [
+            1.354648e-02, 5.725508e-03, 4.364018e-03, 4.175547e-03, 4.175260e-03, 4.535955e-03,
+            4.758894e-03, 4.451864e-03, 4.656452e-03, 4.906095e-03, 4.928027e-03, 5.093985e-03,
+            5.382436e-03, 5.742557e-03, 7.222007e-03, 1.083169e-02
+        ],
+        geometric_albedo: ['Generic_Bessell.V', [0.042, 0.005]]
     },
     'Licandro2016': [
         'Size and albedo distributions of asteroids in cometary orbits using WISE data',
