@@ -461,6 +461,49 @@
         file: 'spectra/files/Clark1980/Saturn_rings.txtU', // figure 6
         albedo: ['Generic_Bessell.V', 0.5]
     },
+    // Saturnian ring moons
+    'Ciarniello2024': [
+        'The Origin and Composition of Saturn’s Ring Moons',
+        'DOI: 10.1007/s11214-024-01103-z', 'https://link.springer.com/article/10.1007/s11214-024-01103-z',
+        'https://ui.adsabs.harvard.edu/abs/2024SSRv..220...72C/abstract'
+    ],
+    'Verbiscer2007': [
+        'Enceladus: Cosmic Graffiti Artist Caught in the Act',
+        'DOI: 10.1126/science.1134681', 'https://www.science.org/doi/10.1126/science.1134681',
+        'https://ui.adsabs.harvard.edu/abs/2007Sci...315..815V/abstract'
+    ],
+    'Pan (S XVIII) | Ciarniello2024': {
+        tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
+        file: 'spectra/files/Ciarniello2024/Pan.txt', // phase angle 50°
+        albedo: [610, [0.52, 0.04]] // phase angle 10°
+    },
+    'Atlas (S XV) | Ciarniello2024': {
+        tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
+        file: 'spectra/files/Ciarniello2024/Atlas.txt', // phase angle 50°
+        albedo: [610, [0.49, 0.08]] // phase angle 10°
+    },
+    'Prometheus (S XVI) | Ciarniello2024': {
+        tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
+        file: 'spectra/files/Ciarniello2024/Prometheus.txt', // phase angle 50°
+        albedo: [610, [0.67, 0.07]] // phase angle 10°
+    },
+    'Pandora (S XVII) | Ciarniello2024': {
+        tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
+        file: 'spectra/files/Ciarniello2024/Pandora.txt', // phase angle 50°
+        albedo: [610, [0.62, 0.08]] // phase angle 10°
+    },
+    'Janus (S X) | Ciarniello2024, Verbiscer2007': {
+        tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
+        file: 'spectra/files/Ciarniello2024/Janus.txt', // phase angle 50°
+        geometric_albedo: ['HST_WFPC2-PC.F555W', [0.71, 0.02]],
+        albedo: [610, [0.37, 0.03]] // phase angle 10°
+    },
+    'Epimetheus (S XI) | Ciarniello2024, Verbiscer2007': {
+        tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
+        file: 'spectra/files/Ciarniello2024/Epimetheus.txt', // phase angle 50°
+        geometric_albedo: ['HST_WFPC2-PC.F555W', [0.73, 0.03]],
+        albedo: [610, [0.41, 0.04]] // phase angle 10°
+    },
     // Mimas
     'Buratti2022': [
         'Observations and Modeling of the Opposition Surges of the Icy Moons of Saturn Based on Cassini Visual Infrared Mapping Spectrometer Data',
@@ -477,6 +520,13 @@
         file: 'spectra/files/Filacchione2022/Mimas.txt', // equigonal albedo
         geometric_albedo: ['Generic_Bessell.V', [0.81, 0.01]],
         phase_integral: [0.71, 0.01],
+    },
+    // Alkyonides
+    'Methone (S XXXII) | Ciarniello2024': {
+        tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
+        nm: [342.7, 452.7, 567.2, 647.4, 748.4, 859.2, 926.0, 998.4],
+        br: [0.878, 1.000, 1.000, 1.015, 1.032, 1.031, 1.011, 0.927], // phase angle 50°
+        albedo: [610, [0.42, 0.05]] // phase angle 10°
     },
     // Enceladus
     'Enceladus (S II) | Madden2018, Buratti2022': {
