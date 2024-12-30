@@ -482,6 +482,11 @@
         'DOI: 10.1016/j.icarus.2021.114803', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103521004504',
         'https://ui.adsabs.harvard.edu/abs/2022Icar..37514803F/abstract'
     ],
+    'Thomas2013': [
+        'The inner small satellites of Saturn: A variety of worlds',
+        'DOI: 10.1016/j.icarus.2013.07.022', 'https://ciclops.org/media/sp/2014/7895_18810_0.pdf',
+        'https://ui.adsabs.harvard.edu/abs/2013Icar..226..999T/abstract'
+    ],
     'Thomas2018': [
         'The Inner Small Satellites of Saturn, and Hyperion',
         'DOI: 10.2458/azu_uapress_9780816537075-ch019', 'https://www.google.com/books/edition/Enceladus_and_the_Icy_Moons_of_Saturn/7cFwDwAAQBAJ?gbpv=1&pg=PA387&printsec=frontcover',
@@ -493,37 +498,55 @@
         'https://ui.adsabs.harvard.edu/abs/2007Sci...315..815V/abstract'
     ],
     // Saturnian ring moons
-    'Pan (S XVIII) | Ciarniello2024': {
+    'Pan (S XVIII) | Ciarniello2024, Thomas2018': { // phase angle 50°
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
-        file: 'spectra/files/Ciarniello2024/Pan.txt', // phase angle 50°
+        file: 'spectra/files/Ciarniello2024/Pan.txt',
         albedo: [610, [0.52, 0.04]] // phase angle 10°
     },
-    'Atlas (S XV) | Ciarniello2024': {
+    'Daphnis (S XXXV) | Thomas2018': {
+        tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
+        filters: ['Cassini_ISS_NAC.UV3', 'Cassini_ISS_NAC.IR3'],
+        br: [1, 2.30], // IR3/UV3 ratio: 2.30 ± 0.25
+        sd: [0, 0.25],
+        albedo: [610, [0.56, 0.04]] // phase angle 10°
+    },
+    'Atlas (S XV) | Ciarniello2024, Thomas2018': { // phase angle 50°
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
-        file: 'spectra/files/Ciarniello2024/Atlas.txt', // phase angle 50°
+        file: 'spectra/files/Ciarniello2024/Atlas.txt',
         albedo: [610, [0.49, 0.08]] // phase angle 10°
     },
-    'Prometheus (S XVI) | Ciarniello2024': {
+    'Prometheus (S XVI) | Ciarniello2024, Thomas2018': { // phase angle 50°
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
-        file: 'spectra/files/Ciarniello2024/Prometheus.txt', // phase angle 50°
+        file: 'spectra/files/Ciarniello2024/Prometheus.txt',
         albedo: [610, [0.67, 0.07]] // phase angle 10°
     },
-    'Pandora (S XVII) | Ciarniello2024': {
+    'Pandora (S XVII) | Ciarniello2024, Thomas2018': { // phase angle 50°
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
-        file: 'spectra/files/Ciarniello2024/Pandora.txt', // phase angle 50°
+        file: 'spectra/files/Ciarniello2024/Pandora.txt',
         albedo: [610, [0.62, 0.08]] // phase angle 10°
     },
-    'Janus (S X) | Ciarniello2024, Verbiscer2007': {
+    'Janus (S X) | Ciarniello2024, Verbiscer2007, Thomas2018': { // phase angle 50°
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
-        file: 'spectra/files/Ciarniello2024/Janus.txt', // phase angle 50°
+        file: 'spectra/files/Ciarniello2024/Janus.txt',
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.71, 0.02]],
         albedo: [610, [0.37, 0.03]] // phase angle 10°
     },
-    'Epimetheus (S XI) | Ciarniello2024, Verbiscer2007': {
+    'Epimetheus (S XI) | Ciarniello2024, Verbiscer2007, Thomas2018': { // phase angle 50°
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
-        file: 'spectra/files/Ciarniello2024/Epimetheus.txt', // phase angle 50°
+        file: 'spectra/files/Ciarniello2024/Epimetheus.txt',
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.73, 0.03]],
         albedo: [610, [0.41, 0.04]] // phase angle 10°
+    },
+    'Hedman2020': [
+        'Photometric Analyses of Saturn’s Small Moons: Aegaeon, Methone, and Pallene Are Dark; Helene and Calypso Are Bright',
+        'DOI: 10.3847/1538-3881/ab659d', 'https://iopscience.iop.org/article/10.3847/1538-3881/ab659d',
+        'https://ui.adsabs.harvard.edu/abs/2020AJ....159..129H/abstract'
+    ],
+    'Aegaeon (S LIII) | Hedman2020, Thomas2013': { // phase angle 48.2°
+        tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
+        nm: [343, 455, 569, 649, 928],
+        br: [0.0865, 0.1181, 0.1342, 0.1406, 0.1551],
+        geometric_albedo: [611, [0.25, 0.23]]
     },
     // Mimas
     'Mimas (S I) | Filacchione2022, Buratti2022': {
@@ -533,11 +556,20 @@
         phase_integral: [0.71, 0.01],
     },
     // Alkyonides
-    'Methone (S XXXII) | Ciarniello2024': {
+    'Methone (S XXXII) | Ciarniello2024, Thomas2013, Thomas2018': { // phase angle 50°
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
         nm: [342.7, 452.7, 567.2, 647.4, 748.4, 859.2, 926.0, 998.4],
-        br: [0.878, 1.000, 1.000, 1.015, 1.032, 1.031, 1.011, 0.927], // phase angle 50°
+        br: [0.878, 1.000, 1.000, 1.015, 1.032, 1.031, 1.011, 0.927],
+        geometric_albedo: [611, [0.57, 0.05]],
         albedo: [610, [0.42, 0.05]] // phase angle 10°
+    },
+    'Pallene (S XXXIII) | Thomas2018, Thomas2013': {
+        tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
+        filters: ['Cassini_ISS_NAC.UV3', 'Cassini_ISS_NAC.IR3'],
+        br: [1, 1.17], // IR3/UV3 ratio: 1.17 ± 0.02
+        sd: [0, 0.02],
+        geometric_albedo: [611, [0.47, 0.11]],
+        albedo: [610, [0.29, 0.11]] // phase angle 10°
     },
     // Enceladus
     'Enceladus (S II) | Madden2018, Buratti2022': {
@@ -615,6 +647,13 @@
         file: 'spectra_extras/Filacchione2012/files/Helene.txt',
         geometric_albedo: ['HST_WFPC2-PC.F555W', [1.67, 0.20]],
         bond_albedo: [0.43, 0.12]
+    },
+    'Polydeuces (S XXXIV) | Thomas2018': {
+        tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
+        filters: ['Cassini_ISS_NAC.UV3', 'Cassini_ISS_NAC.IR3'],
+        br: [1, 1.17], // IR3/UV3 ratio: 1.17 ± 0.07
+        sd: [0, 0.07],
+        albedo: [610, [0.86, 0.06]] // phase angle 10°
     },
     // Rhea
     'Clark1984': [
