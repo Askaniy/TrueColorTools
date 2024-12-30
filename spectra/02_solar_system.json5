@@ -607,12 +607,12 @@
     // Tethys trojans
     'Telesto (S XIII) | Filacchione2012, Thomas2018': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
-        file: 'spectra_extras/Filacchione2012/files/Telesto.txt',
+        file: 'spectra/files/Filacchione2012/Telesto.txt',
         albedo: [610, [0.61, 0.04]] // phase angle 10°
     },
     'Calypso (S XIV) | Filacchione2012, Verbiscer2007, Thomas2018': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
-        file: 'spectra_extras/Filacchione2012/files/Calypso.txt',
+        file: 'spectra/files/Filacchione2012/Calypso.txt',
         geometric_albedo: ['HST_WFPC2-PC.F555W', [1.34, 0.10]],
         albedo: [610, [0.69, 0.14]] // phase angle 10°
     },
@@ -644,7 +644,7 @@
     ],
     'Helene (S XII) | Filacchione2012, Verbiscer2007, Howett2021': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
-        file: 'spectra_extras/Filacchione2012/files/Helene.txt',
+        file: 'spectra/files/Filacchione2012/Helene.txt',
         geometric_albedo: ['HST_WFPC2-PC.F555W', [1.67, 0.20]],
         bond_albedo: [0.43, 0.12]
     },
@@ -731,7 +731,7 @@
     ],
     'Hyperion (S VII) | Filacchione2012, Thomas1985, Klavetter1989': {
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
-        file: 'spectra_extras/Filacchione2012/files/Hyperion.txt',
+        file: 'spectra/files/Filacchione2012/Hyperion.txt',
         geometric_albedo: ['Voyager_ISS-NAC.Clear', [0.214, 0.006]], // normal reflectance
         phase_function: ['HG', {H: [13.81, 0.05], G: [0.56, 0.14]}]
     },
@@ -776,7 +776,7 @@
     ],
     'Phoebe (S IX) | Filacchione2012, Miller2011': {
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/irregular moon'],
-        file: 'spectra_extras/Filacchione2012/files/Phoebe.txt',
+        file: 'spectra/files/Filacchione2012/Phoebe.txt',
         geometric_albedo: ['Generic_Bessell.V', [0.0857, 0.0022]],
         spherical_albedo: ['Generic_Bessell.V', [0.0267, 0.0083]],
     },
