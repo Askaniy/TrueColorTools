@@ -678,14 +678,28 @@
     },
 
     // Uranian small irregulars
+    'Grav2004': [
+        'Photometry of Irregular Satellites of Uranus and Neptune',
+        'DOI: 10.1086/424997', 'https://iopscience.iop.org/article/10.1086/424997/meta',
+        'https://ui.adsabs.harvard.edu/abs/2004ApJ...613L..77G/abstract'
+    ],
     'FarkasTakacs2017': [
         'Properties of the Irregular Satellite System around Uranus Inferred from K2, Herschel, and Spitzer Observations',
         'DOI: 10.3847/1538-3881/aa8365', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa8365'
     ],
+
     'Caliban (U XVI) | Graykowski2018, FarkasTakacs2017': {
         tags: ['Solar System/Uranian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.81, 'V-R': 0.47},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.220, +0.200, -0.120]],
+    },
+     'Caliban (U XVI) | Grav2004, FarkasTakacs2017': {
+        tags: ['Solar System/Uranian system', 'natural satellite/irregular moon'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.84, 0.03], 'V-R': [0.57, 0.03]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.220, +0.200, -0.120]],
@@ -698,10 +712,25 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.065, +0.015, -0.011]],
     },
+    'Sycorax (U XVII) | Grav2004, FarkasTakacs2017': {
+        tags: ['Solar System/Uranian system', 'natural satellite/irregular moon'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.78, 0.02], 'V-R': [0.62, 0.01]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.065, +0.015, -0.011]],
+    },
     'Prospero (U XVIII) | Graykowski2018': {
         tags: ['Solar System/Uranian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.81, 'V-R': 0.51},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    'Prospero (U XVIII) | Grav2004': {
+        tags: ['Solar System/Uranian system', 'natural satellite/irregular moon'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.80, 0.06], 'V-R': [0.39, 0.04]},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
@@ -712,10 +741,31 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    'Setebos (U XIX) | Grav2004': {
+        tags: ['Solar System/Uranian system', 'natural satellite/irregular moon'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.77, 0.06], 'V-R': [0.35, 0.03]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
     'Stephano (U XX) | Graykowski2018': {
         tags: ['Solar System/Uranian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.97, 'V-R': 0.66},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    'Stephano (U XX) | Grav2004': {
+        tags: ['Solar System/Uranian system', 'natural satellite/irregular moon'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.27, 0.24], 'V-R': [0.67, 0.22]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    'Trinculo (U XXI) | Grav2004': {
+        tags: ['Solar System/Uranian system', 'natural satellite/irregular moon'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [1.09, 0.40], 'V-R': [0.35, 0.19]},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
@@ -725,6 +775,13 @@
         tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.89, 'V-R': 0.56},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    'Halimede (N IX) | Grav2004': {
+        tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.73, 0.13], 'V-R': [0.35, 0.07]},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
