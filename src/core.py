@@ -798,7 +798,7 @@ class FilterSystem(SpectralSquare):
         br = np.zeros((len(nm), len(filters)))
         for i, profile in enumerate(filters):
             br[np.where((nm >= min_arr[i]) & (nm <= max_arr[i])), i] = profile.br
-        return FilterSystem(nm, br, name=ObjectName.as_ObjectName(name), names=tuple(names))
+        return FilterSystem(nm, br, name=name, names=tuple(names))
     
     def __iter__(self):
         """ Creates an iterator over the filters in the system """

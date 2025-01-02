@@ -361,7 +361,7 @@
         geometric_albedo: ['Galileo_SSI.Green', [0.204, 0.016]], // normal albedo of Terrain A, Fig. 7
     },
     '(243 I) Dactyl | Veverka1996, Helfenstein1996': {
-        tags: ['Solar System', 'moon', 'minor body/asteroid/main belt', 'spacecraft target/Galileo target'],
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'natural satellite', 'spacecraft target/Galileo target'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.700, 0.894, 0.992, 1.000, 0.909, 0.882],
@@ -1966,7 +1966,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
     },
     '(90482 I) Vanth | Brown2010, Brown2018': {
-        tags: ['featured', 'Solar System', 'moon', 'minor body/TNO/resonant TNO/plutino'],
+        tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'natural satellite'],
         filters: ['Generic_Bessell.V', 'Generic_Bessell.I'],
         mag: [21.97, 20.94],
         sd: 0.05,
@@ -2174,7 +2174,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.0357, 0.00875]],
     },
     '(120347 I) Actaea | Stansberry2012': {
-        tags: ['Solar System', 'moon', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-I': 0.89},
         calibration_system: 'Vega',
@@ -2256,7 +2256,7 @@
         phase_integral: [0.80, 0.10],
     },
     '(134340 I) Charon | Verbiscer2022': {
-        tags: ['featured', 'Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'moon', 'minor body/TNO/resonant TNO/plutino', 'spacecraft target/New Horizons target'],
+        tags: ['featured', 'Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'spacecraft target/New Horizons target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.7315, 'V-R': 0.4},
         calibration_system: 'Vega',
@@ -2274,7 +2274,7 @@
         'https://ui.adsabs.harvard.edu/abs/2016Sci...351.0030W'
     ],
     '(134340 II) Nix | Stern2009, Weaver2016': {
-        tags: ['featured', 'Solar System/Plutonian system', 'moon', 'minor body/TNO/resonant TNO/plutino', 'spacecraft target/New Horizons target'],
+        tags: ['featured', 'Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'spacecraft target/New Horizons target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.653, 0.026]},
         calibration_system: 'Vega',
@@ -2282,7 +2282,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.560, 0.050]],
     },
     '(134340 III) Hydra | Stern2009, Weaver2016': {
-        tags: ['featured', 'Solar System/Plutonian system', 'moon', 'minor body/TNO/resonant TNO/plutino', 'spacecraft target/New Horizons target'],
+        tags: ['featured', 'Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'spacecraft target/New Horizons target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.654, 0.065]},
         calibration_system: 'Vega',
@@ -2577,7 +2577,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.099, 0.002]],
     },
     '(174567 I) Ilmarë | Grundy2015, Souami2020': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO', 'moon'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.857, 'V-I': 1.266},
         calibration_system: 'Vega',
@@ -2670,7 +2670,7 @@
         'https://ui.adsabs.harvard.edu/abs/2021AJ....162..226A/abstract'
     ],
     '(225088 I) Xiangliu | Kiss2019, Arakawa2021': {
-        tags: ['Solar System', 'minor body/TNO/resonant TNO', 'minor body/TNO/detached TNO', 'moon'],
+        tags: ['Solar System', 'minor body/TNO/resonant TNO', 'minor body/TNO/detached TNO', 'natural satellite'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-I': 1.22},
         calibration_system: 'Vega',
@@ -2698,7 +2698,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.142, 0.015]],
     },
     '(229762 I) Gǃòʼé ǃHú | Grundy2018': {
-        tags: ['Solar System', 'minor body/TNO/detached TNO', 'moon'],
+        tags: ['Solar System', 'minor body/TNO/detached TNO', 'natural satellite'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-I': 1.803},
         calibration_system: 'Vega',
