@@ -1069,7 +1069,7 @@
         'DOI: 10.1016/j.icarus.2006.07.020', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103506002648'
     ],
     'Proteus: −33° East (N VIII) | Pascu2006': { // visit 1, leading side
-        tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
+        tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[5.81, 0.02], [5.09, 0.01], [4.36, 0.05]],
@@ -1078,7 +1078,7 @@
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.093, 0.001]],
     },
     'Proteus: +54° East (N VIII) | Pascu2006': { // visit 2, leading side
-        tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
+        tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[5.80, 0.02], [5.09, 0.02], [4.35, 0.03]],
@@ -1087,7 +1087,7 @@
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.093, 0.001]],
     },
     'Proteus: +59° West (N VIII) | Pascu2006': { // visit 3, trailing side
-        tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
+        tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[5.90, 0.02], [5.19, 0.02], [4.45, 0.05]],
@@ -1107,7 +1107,7 @@
         phase_integral: [0.94, 0.04],
     },
     'Triton: −19° West (N I) | Pascu2006, Verbiscer2022': { // visit 1, leading side
-        tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
+        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[-0.646, 0.009], [-1.343, 0.002], [-2.119, 0.006]],
@@ -1117,7 +1117,7 @@
         phase_integral: [0.94, 0.04],
     },
     'Triton: −3° West (N I) | Pascu2006, Verbiscer2022': { // visit 2, leading side
-        tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
+        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[-0.637, 0.014], [-1.332, 0.001], [-2.088, 0.004]],
@@ -1127,7 +1127,7 @@
         phase_integral: [0.94, 0.04],
     },
     'Triton: −10° East (N I) | Pascu2006, Verbiscer2022': { // visit 3, trailing side
-        tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
+        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[-0.556, 0.005], [-1.255, 0.004], [-2.031, 0.006]],
@@ -1163,6 +1163,14 @@
         tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.67, 'V-R': 0.38},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.24, 0.02]],
+    },
+    'Nereid (N II) | Grav2004, Kiss2016': {
+        tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.66, 0.01], 'V-R': [0.39, 0.01]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.24, 0.02]],
