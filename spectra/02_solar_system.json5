@@ -489,53 +489,54 @@
     ],
     'Thomas2018': [
         'The Inner Small Satellites of Saturn, and Hyperion',
-        'DOI: 10.2458/azu_uapress_9780816537075-ch019', 'https://www.google.com/books/edition/Enceladus_and_the_Icy_Moons_of_Saturn/7cFwDwAAQBAJ?gbpv=1&pg=PA387&printsec=frontcover',
-        'https://ui.adsabs.harvard.edu/abs/2018eims.book..387T/abstract'
+        'DOI: 10.2458/azu_uapress_9780816537075-ch019', 'https://ui.adsabs.harvard.edu/abs/2018eims.book..387T/abstract'
     ],
     'Verbiscer2007': [
         'Enceladus: Cosmic Graffiti Artist Caught in the Act',
         'DOI: 10.1126/science.1134681', 'https://www.science.org/doi/10.1126/science.1134681',
         'https://ui.adsabs.harvard.edu/abs/2007Sci...315..815V/abstract'
     ],
+    'Verbiscer2018': [
+        'Surface Properties of Saturn’s Icy Moons from Optical Remote Sensing',
+        'DOI: 10.2458/azu_uapress_9780816537075-ch016', 'https://ui.adsabs.harvard.edu/abs/2018eims.book..323V/abstract'
+    ],
     // Saturnian ring moons
-    'Pan (S XVIII) | Ciarniello2024, Thomas2018': { // phase angle 50°
+    'Pan (S XVIII) | Ciarniello2024, Verbiscer2018': { // phase angle 50°
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
         file: 'spectra/files/Ciarniello2024/Pan.txt',
-        albedo: [610, [0.52, 0.04]], // phase angle 10°
+        geometric_albedo: ['Generic_Bessell.V', [0.86, 0.07]], // Table 2, p. 325 (Verbiscer2018)
     },
-    'Daphnis (S XXXV) | Thomas2018': {
+    'Daphnis (S XXXV) | Thomas2018, Verbiscer2018': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         filters: ['Cassini_ISS_NAC.UV3', 'Cassini_ISS_NAC.IR3'],
         br: [1, 2.30], // IR3/UV3 ratio: 2.30 ± 0.25
         sd: [0, 0.25],
-        albedo: [610, [0.56, 0.04]], // phase angle 10°
+        geometric_albedo: ['Generic_Bessell.V', [0.91, 0.07]], // Table 2, p. 325 (Verbiscer2018)
     },
-    'Atlas (S XV) | Ciarniello2024, Thomas2018': { // phase angle 50°
+    'Atlas (S XV) | Ciarniello2024, Verbiscer2018': { // phase angle 50°
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
         file: 'spectra/files/Ciarniello2024/Atlas.txt',
-        albedo: [610, [0.49, 0.08]], // phase angle 10°
+        geometric_albedo: ['Generic_Bessell.V', [0.82, 0.13]], // Table 2, p. 325 (Verbiscer2018)
     },
-    'Prometheus (S XVI) | Ciarniello2024, Thomas2018': { // phase angle 50°
+    'Prometheus (S XVI) | Ciarniello2024, Verbiscer2018': { // phase angle 50°
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
         file: 'spectra/files/Ciarniello2024/Prometheus.txt',
-        albedo: [610, [0.67, 0.07]], // phase angle 10°
+        geometric_albedo: ['Generic_Bessell.V', [1.05, 0.11]], // Table 2, p. 325 (Verbiscer2018)
     },
-    'Pandora (S XVII) | Ciarniello2024, Thomas2018': { // phase angle 50°
+    'Pandora (S XVII) | Ciarniello2024, Verbiscer2018': { // phase angle 50°
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
         file: 'spectra/files/Ciarniello2024/Pandora.txt',
-        albedo: [610, [0.62, 0.08]], // phase angle 10°
+        geometric_albedo: ['Generic_Bessell.V', [0.99, 0.13]], // Table 2, p. 325 (Verbiscer2018)
     },
-    'Janus (S X) | Ciarniello2024, Verbiscer2007, Thomas2018': { // phase angle 50°
+    'Janus (S X) | Ciarniello2024, Verbiscer2007': { // phase angle 50°
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
         file: 'spectra/files/Ciarniello2024/Janus.txt',
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.71, 0.02]],
-        albedo: [610, [0.37, 0.03]], // phase angle 10°
     },
-    'Epimetheus (S XI) | Ciarniello2024, Verbiscer2007, Thomas2018': { // phase angle 50°
+    'Epimetheus (S XI) | Ciarniello2024, Verbiscer2007': { // phase angle 50°
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
         file: 'spectra/files/Ciarniello2024/Epimetheus.txt',
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.73, 0.03]],
-        albedo: [610, [0.41, 0.04]], // phase angle 10°
     },
     'Hedman2020': [
         'Photometric Analyses of Saturn’s Small Moons: Aegaeon, Methone, and Pallene Are Dark; Helene and Calypso Are Bright',
@@ -556,12 +557,11 @@
         phase_integral: [0.71, 0.01],
     },
     // Alkyonides
-    'Methone (S XXXII) | Ciarniello2024, Thomas2013, Thomas2018': { // phase angle 50°
+    'Methone (S XXXII) | Ciarniello2024, Thomas2013': { // phase angle 50°
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
         nm: [342.7, 452.7, 567.2, 647.4, 748.4, 859.2, 926.0, 998.4],
         br: [0.878, 1.000, 1.000, 1.015, 1.032, 1.031, 1.011, 0.927],
         geometric_albedo: [611, [0.57, 0.05]],
-        albedo: [610, [0.42, 0.05]], // phase angle 10°
     },
     'Pallene (S XXXIII) | Thomas2018, Thomas2013': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
@@ -569,7 +569,6 @@
         br: [1, 1.17], // IR3/UV3 ratio: 1.17 ± 0.02
         sd: [0, 0.02],
         geometric_albedo: [611, [0.47, 0.11]],
-        albedo: [610, [0.29, 0.11]], // phase angle 10°
     },
     // Enceladus
     'Enceladus (S II) | Madden2018, Buratti2022': {
@@ -605,16 +604,15 @@
         phase_integral: [0.79, 0.02],
     },
     // Tethys trojans
-    'Telesto (S XIII) | Filacchione2012, Thomas2018': {
+    'Telesto (S XIII) | Filacchione2012, Verbiscer2018': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         file: 'spectra/files/Filacchione2012/Telesto.txt',
-        albedo: [610, [0.61, 0.04]], // phase angle 10°
+        geometric_albedo: ['Generic_Bessell.V', [0.97, 0.04]], // Table 2, p. 325 (Verbiscer2018)
     },
-    'Calypso (S XIV) | Filacchione2012, Verbiscer2007, Thomas2018': {
+    'Calypso (S XIV) | Filacchione2012, Verbiscer2007': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         file: 'spectra/files/Filacchione2012/Calypso.txt',
         geometric_albedo: ['HST_WFPC2-PC.F555W', [1.34, 0.10]],
-        albedo: [610, [0.69, 0.14]], // phase angle 10°
     },
     // Dione
     'Filacchione2017': [
@@ -648,12 +646,12 @@
         geometric_albedo: ['HST_WFPC2-PC.F555W', [1.67, 0.20]],
         bond_albedo: [0.43, 0.12]
     },
-    'Polydeuces (S XXXIV) | Thomas2018': {
+    'Polydeuces (S XXXIV) | Thomas2018, Verbiscer2018': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         filters: ['Cassini_ISS_NAC.UV3', 'Cassini_ISS_NAC.IR3'],
         br: [1, 1.17], // IR3/UV3 ratio: 1.17 ± 0.07
         sd: [0, 0.07],
-        albedo: [610, [0.86, 0.06]], // phase angle 10°
+        geometric_albedo: ['Generic_Bessell.V', [1.24, 0.09]], // Table 2, p. 325 (Verbiscer2018)
     },
     // Rhea
     'Clark1984': [
@@ -720,21 +718,21 @@
         ],
     },
     // Hyperion
+    'Klavetter1989': [
+        'Rotation of Hyperion. I. Observations',
+        'DOI: 10.1086/115006', 'https://ui.adsabs.harvard.edu/abs/1989AJ.....97..570K/abstract'
+    ],
+    'Hyperion (S VII) | Filacchione2012, Verbiscer2018, Klavetter1989': {
+        tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
+        file: 'spectra/files/Filacchione2012/Hyperion.txt',
+        geometric_albedo: ['Generic_Bessell.V', [0.44, 0.13]], // Table 2, p. 325 (Verbiscer2018)
+        phase_function: ['HG', {H: [13.81, 0.05], G: [0.56, 0.14]}]
+    },
     'Thomas1985': [
         'Hyperion: Analysis of Voyager observations',
         'DOI: 10.1016/0019-1035(85)90065-X', 'https://www.sciencedirect.com/science/article/abs/pii/001910358590065X',
         'https://ui.adsabs.harvard.edu/abs/1985Icar...64..414T/abstract'
     ],
-    'Klavetter1989': [
-        'Rotation of Hyperion. I. Observations',
-        'DOI: 10.1086/115006', 'https://ui.adsabs.harvard.edu/abs/1989AJ.....97..570K/abstract'
-    ],
-    'Hyperion (S VII) | Filacchione2012, Thomas1985, Klavetter1989': {
-        tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
-        file: 'spectra/files/Filacchione2012/Hyperion.txt',
-        geometric_albedo: ['Voyager_ISS-NAC.Clear', [0.214, 0.006]], // normal reflectance
-        phase_function: ['HG', {H: [13.81, 0.05], G: [0.56, 0.14]}]
-    },
     'Hyperion (S VII) | Thomas1985, Klavetter1989': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
@@ -749,13 +747,13 @@
         'DOI: 10.1016/j.icarus.2007.06.021', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103507002990',
         'https://ui.adsabs.harvard.edu/abs/2008Icar..193..352H/abstract'
     ],
-    'Hyperion (S VII) | Hicks2008, Thomas1985, Klavetter1989': {
+    'Hyperion (S VII) | Hicks2008, Verbiscer2018, Klavetter1989': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.798, 0.030], 'V-R': [0.438, 0.031]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Voyager_ISS-NAC.Clear', [0.214, 0.006]], // normal reflectance
+        geometric_albedo: ['Generic_Bessell.V', [0.44, 0.13]], // Table 2, p. 325 (Verbiscer2018)
         phase_function: ['HG', {H: [13.81, 0.05], G: [0.56, 0.14]}]
     },
     // Iapetus
