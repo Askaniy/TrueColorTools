@@ -3388,12 +3388,18 @@
         'DOI: 10.3847/2041-8213/aaadb3', 'https://iopscience.iop.org/article/10.3847/2041-8213/aaadb3',
         'https://ui.adsabs.harvard.edu/abs/2018ApJ...855L...6H/abstract'
     ],
-    '(574372) 2010 JO179 | Holman2018': {
+    'Kilic2022': [
+        'Occultation Portal: a web-based platform for data collection and analysis of stellar occultations',
+        'DOI: 10.1093/mnras/stac1595', 'https://insu.hal.science/insu-03713297/preview/stac1595.pdf',
+        'https://ui.adsabs.harvard.edu/abs/2022MNRAS.515.1346K/abstract'
+    ],
+    '(574372) 2010 JO179 | Holman2018, Kilic2022': {
         tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/TNO/resonant TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.88, 0.21], 'r-i': [0.34, 0.26], 'r-z': [0.13, 0.22]},
         calibration_system: 'AB',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.178], // calculated by Zel using occultation results
     },
     '(578992) 2014 JL80 | Thirouin2019': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
