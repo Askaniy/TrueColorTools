@@ -604,10 +604,16 @@
         phase_integral: [0.79, 0.02],
     },
     // Tethys trojans
-    'Telesto (S XIII) | Filacchione2012, Verbiscer2018': {
+    'Buratti2010': [
+        'Cassini spectra and photometry 0.25-5.1 μm of the small inner satellites of Saturn',
+        'DOI: 10.1016/j.icarus.2009.08.015', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103509003625',
+        'https://ui.adsabs.harvard.edu/abs/2010Icar..206..524B/abstract'
+    ],
+    'Telesto (S XIII) | Filacchione2012, Verbiscer2018, Buratti2010': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         file: 'spectra/files/Filacchione2012/Telesto.txt',
         geometric_albedo: ['Generic_Bessell.V', [0.97, 0.04]], // Table 2, p. 325 (Verbiscer2018)
+        phase_integral: 0.5,
     },
     'Calypso (S XIV) | Filacchione2012, Verbiscer2007': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
