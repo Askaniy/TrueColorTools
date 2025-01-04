@@ -109,7 +109,12 @@
         'DOI: 10.1051/0004-6361/202244878 ', 'https://www.aanda.org/articles/aa/full_html/2023/03/aa44878-22/aa44878-22.html',
         'https://ssp.imcce.fr/forms/ssocard', 'https://ui.adsabs.harvard.edu/abs/2023LPICo2851.2215C/abstract'
     ],
-    
+    'Müller2020': [
+        'Trans-Neptunian objects and Centaurs at thermal wavelengths',
+        'DOI: 10.1016/B978-0-12-816490-7.00007-2', 'https://www.sciencedirect.com/science/article/pii/B9780128164907000072',
+        'https://ui.adsabs.harvard.edu/abs/2020tnss.book..153M/abstract'
+    ],
+
     'Li2019': [
         'Spectrophotometric modeling and mapping of Ceres',
         'DOI: 10.1016/j.icarus.2018.12.038', 'https://www.sciencedirect.com/science/article/pii/S0019103518305426',
@@ -776,12 +781,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '(7066) Nessus | MBOSS': {
+    '(7066) Nessus | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 1.090, 'V-R': 0.763, 'R-I': 0.689},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.086, +0.075, -0.034]],
     },
     '(7352) Hypsenor | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -790,12 +796,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '(8405) Asbolus | MBOSS': {
+    '(8405) Asbolus | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.738, 'V-R': 0.508, 'R-I': 0.505},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.056, +0.019, -0.015]],
     },
     '(9030) Othryoneus | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -846,13 +853,14 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.037, 0.001]], // ellipsoid model
     },
-    '(10370) Hylonome | MBOSS': {
+    '(10370) Hylonome | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.690, 'V-R': 0.469, 'R-I': 0.496},
         calibration_system: 'Vega',
-        sun_is_emitter: true
-    },
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.051, +0.030, -0.017]],
+},
     '(11089) 1994 CS8 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
