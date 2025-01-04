@@ -35,6 +35,8 @@ from operator import mul, truediv
 from functools import lru_cache
 from traceback import format_exc
 from PIL import Image
+from scipy.optimize import minimize
+from scipy.linalg import solve
 import numpy as np
 
 from src.data_import import file_reader
@@ -949,8 +951,13 @@ class _PhotospectralObject(_TrueColorToolsObject):
         """ Returns an array of mean wavelengths for each filter """
         return self.filter_system.mean_nm()
     
-    def define_on_range(self, nm_arr: np.ndarray, crop: bool = False) -> _SpectralObject: # TODO: use kriging here!
-        """ Reconstructs a SpectralObject with inter- and extrapolated photospectrum data to fit the wavelength array """
+    def define_on_range(self, nm_arr: np.ndarray, crop: bool = False) -> _SpectralObject:
+        """
+        Reconstructs a SpectralObject from photospectral data to fit the wavelength array.
+        The Tikhonov regularization method with a first order differential operator is used.
+        That is, it solves the inverse ill-posed problem with the condition to minimize
+        the brightness changes by wavelength.
+        """
         match self.ndim:
             case 1:
                 target_class = Spectrum
@@ -961,27 +968,54 @@ class _PhotospectralObject(_TrueColorToolsObject):
         try:
             nm0 = self.mean_nm()
             br0 = self.br
+            sd1 = None
             if len(self.filter_system) == 1: # single-point PhotospectralObject support
                 nm1, br1 = aux.extrapolating(nm0, br0, nm_arr, nm_step)
             else:
-                if np.any(nm0[:-1] > nm0[1:]): # fast increasing check
-                    order = np.argsort(nm0)
-                    nm0 = nm0[order]
-                    br0 = br0[order]
-                nm1 = aux.grid(nm0[0], nm0[-1], nm_step)
-                br1 = aux.interpolating(nm0, br0, nm1, nm_step)
-                nm1, br1 = aux.extrapolating(nm1, br1, nm_arr, nm_step)
+                filter_system = self.filter_system.define_on_range(nm_arr)
+                nm1 = filter_system.nm
+                T = filter_system.br.T * nm_step
+                L = aux.smoothness_matrix(T.shape[1], order=2)
+                A = T.T @ T + 0.05 * L.T @ L
+                b = T.T @ br0
+                br1 = solve(A, b) # x1.5 faster than np.linalg.inv(A) @ b
+                if br1.min() < 0:
+                    # To avoid negative spectra, a lower bound is set and iterative
+                    # optimization is performed using quadratic programming methods
+                    def objective(Y):
+                        # Tikhonov-regularized quadratic objective: 0.5 * Y^T A Y - b^T Y
+                        return 0.5 * Y @ A @ Y - b @ Y
+                    def gradient(Y):
+                        # Gradient of the objective
+                        return A @ Y - b
+                    bounds = ((0, None) for _ in range(A.shape[1]))
+                    result = minimize(
+                        fun=objective,
+                        x0=np.maximum(br1, 0),
+                        jac=gradient,
+                        bounds=bounds,
+                        method='L-BFGS-B',
+                    )
+                    if not result.success:
+                        raise ValueError(f'Optimization failed: {result.message}')
+                    br1 = result.x
+                if self.sd is not None:
+                    # Measurement confidence band calculation
+                    A_inv = np.linalg.inv(A)
+                    sd1 = np.sqrt(np.diag(A_inv @ T.T @ np.diag(self.sd**2) @ T @ A_inv))
+                    # sd1 = np.sqrt(sd1**2 + np.diag(A_inv))
+                    # sqrt(diag(A_inv)) gives sensitivity sd, which was 1000 times higher than measurement sd in tests
             if crop:
                 start = max(nm1[0], nm_arr[0])
                 end = min(nm1[-1], nm_arr[-1])
                 br1 = br1[np.where((nm1 >= start) & (nm1 <= end))]
             if isinstance(target_class, Spectrum):
-                return target_class(nm1, br1, name=self.name, photometry=deepcopy(self))
+                return target_class(nm1, br1, sd1, name=self.name, photometry=deepcopy(self))
             else:
-                return target_class(nm1, br1, name=self.name)
+                return target_class(nm1, br1, sd1, name=self.name)
         except Exception:
             print(f'# Note for the PhotospectralObject "{self.name}"')
-            print(f'- Something unexpected happened while trying to inter/extrapolate to a {target_class.__name__}. It was replaced by a stub.')
+            print(f'- Something unexpected happened in spectral reconstruction to {target_class.__name__}. It was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0).strip()}')
             return target_class.stub(self.name)
 

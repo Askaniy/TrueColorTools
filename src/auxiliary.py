@@ -105,6 +105,41 @@ def spatial_downscaling(cube: np.ndarray, pixels_limit: int):
     factor = ceil(sqrt(x * y / pixels_limit))
     return cube[:,::factor,::factor]
 
+
+def smoothness_matrix(n: int, order: int = 1):
+    """
+    Generates a smoothness operator matrix of the specified size n.
+    Supported options:
+    - identity matrix (n x n), for hight restriction
+    - first-order difference operator (n-1 x n), for height change restriction
+    - second-order difference operator (n-2 x n), for curvature restriction
+    """
+    if order == 0:
+        # Hight restriction
+        return np.eye(n, dtype='unit8')
+    else:
+        m = n - order
+        L = np.zeros((m, n), dtype='int8')
+        # Note: int8 makes it ~2 times faster
+        match order:
+            # Note: numpy doesn't make it faster
+            # tested: diag = np.eye(m, dtype='int8'); L[:,:-1] = diag; L[:,1:] -= diag
+            case 1:
+                # Height change restriction
+                for i in range(m):
+                    L[i, i] = 1
+                    L[i, i+1] = -1
+            case 2:
+                # Curvature restriction
+                for i in range(m):
+                    L[i, i] = 1
+                    L[i, i+1] = -2
+                    L[i, i+2] = 1
+            case _:
+                raise ValueError(f'Order {order} of smoothness matrix is not supported.')
+    return L
+
+
 def expand2x(array0: np.ndarray):
     """ Expands the array along the first axis by half """
     l = 2 * array0.shape[0] - 1
