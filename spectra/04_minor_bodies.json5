@@ -995,12 +995,18 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '(15789) 1993 SC | MBOSS': {
+    'Grundy2005': [
+        'Diverse albedos of small trans-neptunian objects',
+        'DOI: 10.1016/j.icarus.2005.01.007', 'https://arxiv.org/abs/astro-ph/0502229',
+        'https://ui.adsabs.harvard.edu/abs/2005Icar..176..184G/abstract'
+    ],
+    '(15789) 1993 SC | MBOSS, Grundy2005': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 1.045, 'V-R': 0.688, 'R-I': 0.697},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.R', [0.035, +0.016, -0.013]],
     },
     'Porter2016': [
         'The First High-phase Observations of a KBO: New Horizons Imaging of (15810) 1994 JR1 from the Kuiper Belt',
@@ -3743,7 +3749,7 @@
         sun_is_emitter: true
     },
     'Rommel2024': [
-        'Physical constraints of (612911) 2004 XR190 from a stellar occultation and photometric observations,
+        'Physical constraints of (612911) 2004 XR190 from a stellar occultation and photometric observations',
         'https://www.youtube.com/watch?v=kBkryw8jfFI', 'https://tno2024.org/relation/abstract/88'
     ],
     '(612911) 2004 XR190 | MBOSS, Rommel2024': {
