@@ -31,15 +31,22 @@ TrueColorTools has been tested on Windows 10/11, macOS and Linux ([this](https:/
 
 ## How it works?
 
-The key processing method is to convert a photometric data into a continuous spectrum and convolve it with color matching functions of an eye. Summary of the standard steps:
+TCT converts photometric measurements into a continuous spectrum (if it isn't already a spectrum) and convolves it with eye color matching functions (CMFs). A set of photographs (e.g. taken by a spacecraft) is counted and processed in the same way as photometry.
 
-1. Data reading and conversion into the form of "wavelength: energy spectral density". Filter profiles are stored for working with photometry and images from spacecraft/telescopes.
-2. The resulting values are interpolated (and extrapolated if necessary).
-3. In the default sRGB mode, the spectrum is first convolved in XYZ space and then RGB is calculated for sRGB color space and illuminant E (the equal energy white point is much better than the standard D65 for our purposes).
+In the default sRGB mode, the spectrum is first convolved in XYZ space and then RGB is calculated for sRGB color space and illuminant E (the equal energy white point is much better than the standard D65 for our purposes).
+
+The photometric measurements are calibrated at runtime using the filter profiles and the specified calibration system. Zero points are not required.
+
+Interpolation is not used to recover the spectrum from the photometry because it is not a solution to the inverse problem (i.e., looking at the spectrum through the filters does not exactly get the original photometry). Therefore, the Tikhonov regularization method is applied, which (almost) guarantees the solution of the ill-posed problem. The first-order differential operator is chosen for the Tikhonov matrix (tries to minimize height variations in the spectrum) with a restriction to negative values.
+
+Extrapolation of spectra without photometry is done with an appropriate piece of Gaussian to avoid infinitely large and negative values.
 
 
 ## How to use?
-GUI is the only way to interact with TrueColorTools. If you run it from the command line, you can set the startup language <!--- and CLI verbosity level--> (run with `--help` for details). No Internet connection is required, the databases are stored in the appropriate repository folders, and you can replenish them.
+
+Interaction with TrueColorTools is implied through the GUI. However, if you are an advanced Python user, you can import the core (`from src.core import *`) and use it as a spectral processing library.
+
+If you are running the GUI from the command line, you can set the startup language <!--- and CLI verbosity level--> (run with `--help` for details). No Internet connection is required, the databases are stored in the appropriate repository folders, and you can replenish them.
 
 Program interface is functionally divided into tabs: *Database viewer*, *Image processing* and *Blackbody & Redshifts*. Color output formatting, often common to tabs, is located in the sidebar settings.
 

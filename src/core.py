@@ -885,7 +885,7 @@ class SpectralCube(_SpectralObject, _Cube):
 
 class _PhotospectralObject(_TrueColorToolsObject):
     """
-    Internal parent class for Photospectrum (1D) and PhotospectralCube (3D).
+    Internal parent class for Photospectrum (1D), PhotospectralSquare (2D) and PhotospectralCube (3D).
 
     Attributes:
     - `filter_system` (FilterSystem): instance of the class storing filter profiles
@@ -925,9 +925,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
     @property
     def nm(self) -> np.ndarray[np.integer]:
         """ Returns the definition range of the filter system """
-        nm0 = self.mean_nm()
-        return aux.grid(nm0[0], nm0[-1], nm_step) 
-        #return self.filter_system.nm    # TODO: use this line after new reconstruction algorithm!
+        return self.filter_system.nm
     
     def convert_from_photon_spectral_density(self):
         """
@@ -957,6 +955,8 @@ class _PhotospectralObject(_TrueColorToolsObject):
         The Tikhonov regularization method with a first order differential operator is used.
         That is, it solves the inverse ill-posed problem with the condition to minimize
         the brightness changes by wavelength.
+        Confidence bands for spectral squares and cubes are not computed,
+        even if possible, to save computational resources.
         """
         match self.ndim:
             case 1:
@@ -999,10 +999,12 @@ class _PhotospectralObject(_TrueColorToolsObject):
                     if not result.success:
                         raise ValueError(f'Optimization failed: {result.message}')
                     br1 = result.x
-                if self.sd is not None:
+                if self.ndim == 1 and self.sd is not None:
                     # Measurement confidence band calculation
+                    # Confidence bands for spectral squares and cubes are not computed to save computational resources
                     A_inv = np.linalg.inv(A)
                     sd1 = np.sqrt(np.diag(A_inv @ T.T @ np.diag(self.sd**2) @ T @ A_inv))
+                    # An attempt to account for the sensitivity confidence band of the method:
                     # sd1 = np.sqrt(sd1**2 + np.diag(A_inv))
                     # sqrt(diag(A_inv)) gives sensitivity sd, which was 1000 times higher than measurement sd in tests
             if crop:
