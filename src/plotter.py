@@ -14,21 +14,23 @@ import src.gui as gui
 # MatPlotLib custom theme
 # https://matplotlib.org/stable/tutorials/introductory/customizing.html
 errorbar_capsize = 3 # points
+errorbar_color = '#7F7F7F' # exactly gray
 dark_theme = {
     'text.color': gui.text_color, 'axes.labelcolor': gui.text_color,
-    'axes.edgecolor': gui.muted_color, 'xtick.color': gui.muted_color, 'ytick.color': gui.muted_color,
+    'axes.edgecolor': gui.muted_color, 'axes.grid': True, 'grid.color': gui.highlight_color,
+    'xtick.color': gui.muted_color, 'ytick.color': gui.muted_color,
     'figure.facecolor': gui.bg_color, 'axes.facecolor': gui.inputON_color,
-    'axes.grid': True, 'grid.color': gui.highlight_color, 'errorbar.capsize': errorbar_capsize,
+    'errorbar.capsize': errorbar_capsize
 }
 light_theme = {
     'text.color': '#000000', 'axes.labelcolor': '#000000',
-    'axes.edgecolor': '#5C5C5C', 'xtick.color': '#5C5C5C', 'ytick.color': '#5C5C5C',
+    'axes.edgecolor': '#5C5C5C', 'axes.grid': True, 'grid.color': '#A5A5A5',
+    'xtick.color': '#5C5C5C', 'ytick.color': '#5C5C5C',
     'figure.facecolor': '#FFFFFF', 'axes.facecolor': '#FFFFFF',
-    'axes.grid': True, 'grid.color': '#A5A5A5', 'errorbar.capsize': errorbar_capsize,
+    'errorbar.capsize': errorbar_capsize
 }
 themes = (dark_theme, light_theme)
 plt.rcParams |= dark_theme
-
 
 rgb_muted = ('#904040', '#3c783c', '#5050e0')
 
@@ -61,22 +63,24 @@ def plot_spectra(spectra: Sequence[_TrueColorToolsObject], gamma: bool, srgb: bo
         for i, cmf in enumerate(rgb):
             ax.plot(cmf.nm, cmf.br * k, label=cmf.name(lang), color=rgb_muted[i])
         # Color calculating and plotting
-        for spectral_data in spectra:
-            color = ColorPoint.from_spectral_data(spectral_data, albedo, srgb)
+        for photospectrum_or_spectrum in spectra:
+            color = ColorPoint.from_spectral_data(photospectrum_or_spectrum, albedo, srgb)
             if gamma:
                 color = color.gamma_corrected()
-            spectrum: Spectrum = spectral_data.define_on_range(visible_range)
+            spectrum: Spectrum = photospectrum_or_spectrum.define_on_range(visible_range)
             ax.plot(spectrum.nm, spectrum.br, label=spectrum.name(lang), color=color.to_html())
             if spectrum.photospectrum is not None:
-                fmt = 'o' if spectrum.photospectrum.sd is None else ''
                 ax.errorbar(
-                    x=spectrum.photospectrum.mean_nm(), y=spectrum.photospectrum.br,
-                    xerr=spectrum.photospectrum.sd_of_nm(), yerr=spectrum.photospectrum.sd,
-                    fmt=fmt, linestyle='none', color='#7F7F7F'
+                    x=spectrum.photospectrum.filter_system.mean_nm(), y=spectrum.photospectrum.br,
+                    xerr=spectrum.photospectrum.filter_system.sd_of_nm(), yerr=spectrum.photospectrum.sd,
+                    fmt='o', color=errorbar_color
                 )
             if spectrum.sd is not None:
                 # 1σ confidence band
-                ax.fill_between(spectrum.nm, spectrum.br-spectrum.sd, spectrum.br+spectrum.sd, color='gray', alpha=0.25)
+                ax.fill_between(
+                    spectrum.nm, spectrum.br-spectrum.sd, spectrum.br+spectrum.sd,
+                    color=errorbar_color, alpha=0.25
+                )
         ax.legend()
         fig.tight_layout() # moving to subplots() causes UserWarning
         return fig
