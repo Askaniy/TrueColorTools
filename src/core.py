@@ -215,10 +215,6 @@ class _TrueColorToolsObject:
         """
         raise NotImplementedError('Common method of SpectralObject and PhotospectralObject')
     
-    def mean_nm(self):
-        """ Returns the weighted average wavelength or an array of wavelengths """
-        raise NotImplementedError('Common method of SpectralObject and PhotospectralObject')
-    
     def define_on_range(self, nm_arr: np.ndarray, crop: bool = False):
         """ Returns a new SpectralObject with a guarantee of definition on the requested wavelength array """
         raise NotImplementedError('Common method of SpectralObject and PhotospectralObject')
@@ -541,7 +537,7 @@ class Spectrum(_SpectralObject):
         - `photospectrum` (Photospectrum): optional, way to store the pre-reconstructed data
         """
         super().__init__(1, nm, br, sd, name)
-        self.photospectrum = photospectrum
+        self.photospectrum: Photospectrum = photospectrum
     
     @staticmethod
     def stub(name=None):
@@ -624,7 +620,7 @@ class Spectrum(_SpectralObject):
         if self.photospectrum is None:
             extrapolated = super().define_on_range(nm_arr, crop)
         else:
-            # repeating the spectral reconstruction on the new wavelength range
+            # Repeating the spectral reconstruction on the new wavelength range
             extrapolated = self.photospectrum.define_on_range(nm_arr, crop)
         return extrapolated
     
@@ -968,10 +964,6 @@ class _PhotospectralObject(_TrueColorToolsObject):
         scale_factors = (profiles / profiles.nm / profiles.nm).integrate() # squaring nm will overflow uint16
         return self * (scale_factors / scale_factors.mean())
     
-    def mean_nm(self) -> np.ndarray[np.floating]:
-        """ Returns an array of weighted average wavelengths for each filter """
-        return self.filter_system.mean_nm()
-    
     def define_on_range(self, nm_arr: np.ndarray, crop: bool = False) -> _SpectralObject:
         """
         Reconstructs a SpectralObject from photospectral data to fit the wavelength array.
@@ -989,7 +981,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
             case 3:
                 target_class = SpectralCube
         try:
-            nm0 = self.mean_nm()
+            nm0 = self.filter_system.mean_nm()
             br0 = self.br
             sd1 = None
             if len(self.filter_system) == 1: # single-point PhotospectralObject support
@@ -1034,8 +1026,8 @@ class _PhotospectralObject(_TrueColorToolsObject):
                 start = max(nm1[0], nm_arr[0])
                 end = min(nm1[-1], nm_arr[-1])
                 br1 = br1[np.where((nm1 >= start) & (nm1 <= end))]
-            if isinstance(target_class, Spectrum):
-                return target_class(nm1, br1, sd1, name=self.name, photometry=deepcopy(self))
+            if self.ndim == 1:
+                return Spectrum(nm1, br1, sd1, name=self.name, photospectrum=deepcopy(self))
             else:
                 return target_class(nm1, br1, sd1, name=self.name)
         except Exception:
