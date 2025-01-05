@@ -7,12 +7,13 @@ from matplotlib import rc_context
 import matplotlib.pyplot as plt
 
 from src.core import *
+from src.core import _TrueColorToolsObject
 import src.strings as tr
 import src.gui as gui
 
 # MatPlotLib custom theme
 # https://matplotlib.org/stable/tutorials/introductory/customizing.html
-errorbar_capsize = 5 # points
+errorbar_capsize = 3 # points
 dark_theme = {
     'text.color': gui.text_color, 'axes.labelcolor': gui.text_color,
     'axes.edgecolor': gui.muted_color, 'xtick.color': gui.muted_color, 'ytick.color': gui.muted_color,
@@ -44,7 +45,7 @@ def draw_figure(canvas, figure: Figure):
     return figure_canvas_agg
 
 
-def plot_spectra(spectra: Sequence, gamma: bool, srgb: bool, albedo: bool, light_theme: bool, lang: str):
+def plot_spectra(spectra: Sequence[_TrueColorToolsObject], gamma: bool, srgb: bool, albedo: bool, light_theme: bool, lang: str):
     """ Creates a figure with plotted spectra from the input list and the CMFs used """
     with rc_context(themes[int(light_theme)]):
         fig, ax = plt.subplots(1, 1, figsize=(9, 5), dpi=90)
@@ -64,7 +65,7 @@ def plot_spectra(spectra: Sequence, gamma: bool, srgb: bool, albedo: bool, light
             color = ColorPoint.from_spectral_data(spectral_data, albedo, srgb)
             if gamma:
                 color = color.gamma_corrected()
-            spectrum = spectral_data.define_on_range(visible_range)
+            spectrum: Spectrum = spectral_data.define_on_range(visible_range)
             ax.plot(spectrum.nm, spectrum.br, label=spectrum.name(lang), color=color.to_html())
             if spectrum.photospectrum is not None:
                 fmt = 'o' if spectrum.photospectrum.sd is None else ''
@@ -73,6 +74,9 @@ def plot_spectra(spectra: Sequence, gamma: bool, srgb: bool, albedo: bool, light
                     xerr=spectrum.photospectrum.sd_of_nm(), yerr=spectrum.photospectrum.sd,
                     fmt=fmt, linestyle='none', color='#7F7F7F'
                 )
+            if spectrum.sd is not None:
+                # 1σ confidence band
+                ax.fill_between(spectrum.nm, spectrum.br-spectrum.sd, spectrum.br+spectrum.sd, color='gray', alpha=0.25)
         ax.legend()
         fig.tight_layout() # moving to subplots() causes UserWarning
         return fig
