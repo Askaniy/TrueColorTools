@@ -182,6 +182,7 @@ visible_range = np.arange(390, 780, nm_step) # nm
 class _TrueColorToolsObject:
     """ Internal class for inheriting spectral data properties """
     name = ''
+    nm = np.empty(0)
     br = np.empty(0)
     sd = None
     
@@ -200,13 +201,35 @@ class _TrueColorToolsObject:
         """ Returns the spatial axes shape: number of filters or (width, height) """
         return self.br.shape[1:]
     
+    def convert_from_photon_spectral_density(self):
+        """
+        Returns a new TrueColorToolsObject converted from photon spectral density
+        to energy spectral density, using the fact that E = h c / λ.
+        """
+        raise NotImplementedError('Common method of SpectralObject and PhotospectralObject')
+    
+    def convert_from_frequency_spectral_density(self):
+        """
+        Returns a new TrueColorToolsObject converted from frequency spectral density
+        to energy spectral density, using the fact that f_λ = f_ν c / λ².
+        """
+        raise NotImplementedError('Common method of SpectralObject and PhotospectralObject')
+    
+    def mean_nm(self):
+        """ Returns the weighted average wavelength or an array of wavelengths """
+        raise NotImplementedError('Common method of SpectralObject and PhotospectralObject')
+    
+    def define_on_range(self, nm_arr: np.ndarray, crop: bool = False):
+        """ Returns a new SpectralObject with a guarantee of definition on the requested wavelength array """
+        raise NotImplementedError('Common method of SpectralObject and PhotospectralObject')
+    
     def scaled_at(self, where, how: int|float = 1, sd: int|float = None):
         """
-        Returns a new object to fit the request brightness (1 by default)
-        at specified filter profile or wavelength.
+        Returns a new object that matches the query brightness (1 by default)
+        at the specified filter profile or wavelength.
         """
         # TODO: uncertainty processing
-        # TODO: problems with cubes?
+        # TODO: problems with (photo)spectral squares and cubes?
         output = deepcopy(self)
         if isinstance(where, str|int|float):
             where = get_filter(where)
@@ -260,7 +283,7 @@ class _TrueColorToolsObject:
 
 class _SpectralObject(_TrueColorToolsObject):
     """
-    Internal parent class for Spectrum (1D), FilterSystem (2D) and SpectralCube (3D).
+    Internal parent class for Spectrum (1D), SpectralSquare (2D) and SpectralCube (3D).
     The first index of the "brightness" array iterates over the spectral axis.
 
     Attributes:
@@ -396,7 +419,7 @@ class _SpectralObject(_TrueColorToolsObject):
         return Spectrum(self.nm, br, name=self.name)
 
     def mean_nm(self) -> float|np.ndarray[np.floating]:
-        """ Returns mean wavelength or array of mean wavelengths """
+        """ Returns the weighted average wavelength or an array of wavelengths """
         try:
             return np.average(aux.expand_1D_array(self.nm, self.shape), weights=self.br, axis=0)
         except ZeroDivisionError:
@@ -414,7 +437,7 @@ class _SpectralObject(_TrueColorToolsObject):
         return self.br[np.where((self.nm >= start) & (self.nm <= end))]
     
     def define_on_range(self, nm_arr: np.ndarray, crop: bool = False):
-        """ Returns a new SpectralObject with a guarantee of definition on the requested nm_arr """
+        """ Returns a new SpectralObject with a guarantee of definition on the requested wavelength array """
         extrapolated = self.__class__(*aux.extrapolating(self.nm, self.br, nm_arr, nm_step), name=self.name)
         if crop:
             start = max(extrapolated.nm[0], nm_arr[0])
@@ -946,7 +969,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
         return self * (scale_factors / scale_factors.mean())
     
     def mean_nm(self) -> np.ndarray[np.floating]:
-        """ Returns an array of mean wavelengths for each filter """
+        """ Returns an array of weighted average wavelengths for each filter """
         return self.filter_system.mean_nm()
     
     def define_on_range(self, nm_arr: np.ndarray, crop: bool = False) -> _SpectralObject:
