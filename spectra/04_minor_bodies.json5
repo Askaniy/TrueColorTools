@@ -4642,7 +4642,7 @@
         'DOI: 1051/0004-6361/202039668', 'https://www.aanda.org/articles/aa/full_html/2021/07/aa39668-20/aa39668-20.html',
         'https://ui.adsabs.harvard.edu/abs/2021A%26A...651A..29I/abstract'
     ],
-    '(C/2011 KP36) Spacewatch| Ivanova2021, Müller2020': {
+    '(C/2011 KP36) Spacewatch | Ivanova2021, Müller2020': {
         tags: ['Solar System', 'minor body/comet/long period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': [1.9, 0.3]},

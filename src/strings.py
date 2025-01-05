@@ -685,6 +685,7 @@ names = {
     'Daphne': {'ru': 'Дафна', 'de': 'Daphne'},
     'Eugenia': {'ru': 'Евгения', 'de': 'Eugenia'},
     'Doris': {'ru': 'Дорида', 'de': 'Doris'},
+    # 50
     'Europa': {'ru': 'Европа', 'de': 'Europa'},
     'Cybele': {'ru': 'Кибела', 'de': 'Cybele'},
     'Sylvia': {'ru': 'Сильвия', 'de': 'Sylvia'},
@@ -692,6 +693,7 @@ names = {
     'Antiope': {'ru': 'Антиопа', 'de': 'Antiope'},
     'Minerva': {'ru': 'Минерва', 'de': 'Minerva'},
     'Aurora': {'ru': 'Аврора', 'de': 'Aurora'},
+    # 100
     'Camilla': {'ru': 'Камилла', 'de': 'Camilla'},
     'Hermione': {'ru': 'Гермиона', 'de': 'Hermione'},
     'Elektra': {'ru': 'Электра', 'de': 'Elektra'},
@@ -701,11 +703,13 @@ names = {
     'Mathilde': {'ru': 'Матильда', 'de': 'Mathilde'},
     'Justitia': {'ru': 'Юстиция', 'de': 'Justitia'},
     'Eros': {'ru': 'Эрос', 'de': 'Eros'},
+    # 500
     'Davida': {'ru': 'Давида', 'de': 'Davida'},
     'Patroclus-Menoetius': {'ru': 'Патрокл-Менетий', 'de': 'Patroclus-Menoetius'},
     'Interamnia': {'ru': 'Интерамния', 'de': 'Interamnia'},
     'Hidalgo': {'ru': 'Идальго', 'de': 'Hidalgo'},
     'Gaspra': {'ru': 'Гаспра', 'de': 'Gaspra'},
+    # 1000
     'Ganymed': {'ru': 'Ганимед', 'de': 'Ganymed'},
     'Celestia': {'ru': 'Селестия', 'de': 'Celestia'},
     'Geographos': {'ru': 'Географ', 'de': 'Geographos'},
@@ -715,10 +719,15 @@ names = {
     'Phaethon': {'ru': 'Фаэтон', 'de': 'Phaethon'},
     'Eurybates': {'ru': 'Эврибат', 'de': 'Eurybates'},
     'Toutatis': {'ru': 'Таутатис', 'de': 'Toutatis'},
+    # 5000
     'Pholus': {'ru': 'Фол', 'de': 'Pholus'},
     'Golevka': {'ru': 'Голевка', 'de': 'Golevka'},
+    'Nessus': {'ru': 'Несс', 'de': 'Nessus'},
+    'Asbolus': {'ru': 'Асбол', 'de': 'Asbolus'},
     'Braille': {'ru': 'Брайль', 'de': 'Braille'},
+    # 10 000
     'Chariklo': {'ru': 'Харикло', 'de': 'Chariklo'},
+    'Hylonome': {'ru': 'Хилонома', 'de': 'Hylonome'},
     'Leucus': {'ru': 'Левк', 'de': 'Leucus'},
     'Polymele': {'ru': 'Полимела', 'de': 'Polymele'},
     'Chaos': {'ru': 'Хаос', 'de': 'Chaos'},
@@ -726,13 +735,27 @@ names = {
     'Orus': {'ru': 'Орус', 'de': 'Orus'},
     'Itokawa': {'ru': 'Итокава', 'de': 'Itokawa'},
     'Ixion': {'ru': 'Иксион', 'de': 'Ixion'},
+    'Elatus': {'ru': 'Элат', 'de': 'Elatus'},
+    'Thereus': {'ru': 'Терей', 'de': 'Thereus'},
     'Huya': {'ru': 'Гуйя', 'de': 'Huya'},
+    'Typhon': {'ru': 'Тифон', 'de': 'Typhon'},
     'Lempo': {'ru': 'Лемпо', 'de': 'Lempo'},
+    # 50 000
     'Quaoar': {'ru': 'Квавар', 'de': 'Quaoar'},
+    'Okyrhoe': {'ru': 'Окироя', 'de': 'Okyrhoe'},
+    'Cyllarus': {'ru': 'Киллар', 'de': 'Cyllarus'},
+    'Bienor': {'ru': 'Биенор', 'de': 'Bienor'},
+    'Amycus': {'ru': 'Амик', 'de': 'Amycus'},
+    'Echeclus': {'ru': 'Эхекл', 'de': 'Echeclus'},
+    'Ceto': {'ru': 'Кето', 'de': 'Ceto'},
     'Didymos': {'ru': 'Дидим', 'de': 'Didymos'},
+    'Borasisi': {'ru': 'Борасизи', 'de': 'Borasisi'},
+    'Sila-Nunam': {'ru': 'Сила-Нунам', 'de': 'Sila-Nunam'},
+    'Crantor': {'ru': 'Крантор', 'de': 'Crantor'},
     'Sedna': {'ru': 'Седна', 'de': 'Sedna'},
     'Orcus': {'ru': 'Орк', 'de': 'Orcus'},
     'Vanth': {'ru': 'Вант', 'de': 'Vanth'},
+    # 100 000
     'Bennu': {'ru': 'Бенну', 'de': 'Bennu'},
     'Salacia': {'ru': 'Салация', 'de': 'Salacia'},
     'Actaea': {'ru': 'Актея', 'de': 'Actaea'},
@@ -751,6 +774,8 @@ names = {
     'Xiangliu': {'ru': 'Сянлю', 'de': 'Xiangliu'},
     'Gǃkúnǁʼhòmdímà': {'ru': 'Гкъкунлъ’хомдима', 'de': 'Gǃkúnǁʼhòmdímà'},
     'Gǃòʼé ǃHú': {'ru': 'Гкъо’э Къху', 'de': 'Gǃòʼé ǃHú'},
+    'Rhiphonos': {'ru': 'Рифон', 'de': 'Rhiphonos'}, # no official ru translation
+    # 500 000
     'Arrokoth': {'ru': 'Аррокот', 'de': 'Arrokoth'},
     'Dziewanna': {'ru': 'Девана', 'de': 'Dziewanna'},
     'Halley': {'ru': 'Галлея', 'de': 'Halley'},
