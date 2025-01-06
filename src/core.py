@@ -967,9 +967,14 @@ class _PhotospectralObject(_TrueColorToolsObject):
     def define_on_range(self, nm_arr: np.ndarray, crop: bool = False) -> _SpectralObject:
         """
         Reconstructs a SpectralObject from photospectral data to fit the wavelength array.
-        The Tikhonov regularization method with a first order differential operator is used.
-        That is, it solves the inverse ill-posed problem with the condition to minimize
-        the brightness changes by wavelength.
+
+        Interpolation is not used because it is not a solution to the inverse ill-posed problem
+        (i.e., looking at the spectrum through the filters does not give exactly the original photometry).
+
+        The function uses the Tikhonov regularization method, with a combination of first-order
+        and second-order differential operators for the Tikhonov matrix.
+        That is, it tries to minimize height variations and curvature in the spectrum.
+        
         Confidence bands for spectral squares and cubes are not computed,
         even if possible, to save computational resources.
         """
@@ -990,8 +995,12 @@ class _PhotospectralObject(_TrueColorToolsObject):
                 filter_system = self.filter_system.define_on_range(nm_arr)
                 nm1 = filter_system.nm
                 T = filter_system.br.T * nm_step
-                L = aux.smoothness_matrix(T.shape[1], order=2)
-                A = T.T @ T + 0.05 * L.T @ L
+                #L = aux.smoothness_matrix(T.shape[1], order=2)
+                #A = T.T @ T + 0.05 * L.T @ L
+                L1 = aux.smoothness_matrix(T.shape[1], order=1)
+                L2 = aux.smoothness_matrix(T.shape[1], order=2)
+                # TODO: research on some known spectra to find which ratios (0.005, 1) fit best
+                A = aux.covar_matrix(T) + 0.005 * aux.covar_matrix(L1) + 1 * aux.covar_matrix(L2)
                 b = T.T @ br0
                 br1 = solve(A, b) # x1.5 faster than np.linalg.inv(A) @ b
                 if br1.min() < 0:
@@ -1020,15 +1029,17 @@ class _PhotospectralObject(_TrueColorToolsObject):
                     A_inv = np.linalg.inv(A)
                     sd1 = np.sqrt(np.diag(A_inv @ T.T @ np.diag(self.sd**2) @ T @ A_inv))
                     # An attempt to account for the sensitivity confidence band of the method:
-                    # sd1 = np.sqrt(sd1**2 + np.diag(A_inv))
-                    # sqrt(diag(A_inv)) gives sensitivity sd, which was 1000 times higher than measurement sd in tests
+                    # sd1 = np.sqrt(sd1**2 + np.diag(A_inv) * 0.00001)
+                    # sqrt(diag(A_inv)) gives sensitivity sd, which was 10⁵ times higher than measurement sd in tests
             if crop:
                 start = max(nm1[0], nm_arr[0])
                 end = min(nm1[-1], nm_arr[-1])
                 br1 = br1[np.where((nm1 >= start) & (nm1 <= end))]
             if self.ndim == 1:
+                # Retain the photometric data for the resulting spectral object.
                 return Spectrum(nm1, br1, sd1, name=self.name, photospectrum=deepcopy(self))
             else:
+                # It may be too costly to retain photometry for spectral squares and cubes.
                 return target_class(nm1, br1, sd1, name=self.name)
         except Exception:
             print(f'# Note for the PhotospectralObject "{self.name}"')
