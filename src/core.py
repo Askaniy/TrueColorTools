@@ -1001,11 +1001,20 @@ class _PhotospectralObject(_TrueColorToolsObject):
                 L2 = aux.smoothness_matrix(T.shape[1], order=2)
                 # TODO: research on some known spectra to find which ratios (0.005, 1) fit best
                 A = aux.covar_matrix(T) + 0.005 * aux.covar_matrix(L1) + 1 * aux.covar_matrix(L2)
+                if self.ndim == 3:
+                    # scipy supports batch mode for 2d arrays, but not for 3D arrays
+                    br0 = br0.reshape(T.shape[0], -1)
                 b = T.T @ br0
                 br1 = solve(A, b) # x1.5 faster than np.linalg.inv(A) @ b
-                if br1.min() < 0:
+                if self.ndim == 3:
+                    # Reshape spectral cube back from square
+                    br1 = br1.reshape(-1, *self.br.shape[1:])
+                if self.ndim == 1 and br1.min() < 0:
                     # To avoid negative spectra, a lower bound is set and iterative
-                    # optimization is performed using quadratic programming methods
+                    # optimization is performed using quadratic programming methods.
+                    # The processing speed drops by a factor of about five,
+                    # so the use is blocked for spectral squares and cubes:
+                    # background noise near zero can be most of the pixels.
                     def objective(Y):
                         # Tikhonov-regularized quadratic objective: 0.5 * Y^T A Y - b^T Y
                         return 0.5 * Y @ A @ Y - b @ Y
