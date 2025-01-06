@@ -81,7 +81,7 @@ def image_parser(
                 img_chunk = ColorLine.from_spectral_data(chunk, maximize_brightness, srgb)
                 img_array[:,i*px_upper_limit:j*px_upper_limit] = img_chunk.br
                 log(f'Color calculated for {j} chunks out of {chunk_num}')
-            img = ColorImage(img_array.reshape((3, cube.width, cube.height)))
+            img = ColorImage(img_array.reshape(3, cube.width, cube.height))
         if gamma_correction:
             log('Gamma correcting')
             img = img.gamma_corrected()
