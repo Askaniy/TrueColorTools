@@ -37,7 +37,7 @@ In the default sRGB mode, the spectrum is first convolved in XYZ space and then 
 
 The photometric measurements are calibrated at runtime using the filter profiles and the specified calibration system. Zero points are not required.
 
-Interpolation is not used to recover the spectrum from the photometry because it is not a solution to the inverse problem (i.e., looking at the spectrum through the filters does not exactly get the original photometry). Therefore, the Tikhonov regularization method is applied, which (almost) guarantees the solution of the ill-posed problem. The first-order differential operator is chosen for the Tikhonov matrix (tries to minimize height variations in the spectrum) with a restriction to negative values.
+Interpolation is not used to reconstruct the spectrum from the photometry because it is not a solution to the inverse problem (i.e., looking at the spectrum through the filters does not give exactly the original photometry). Therefore, the Tikhonov regularization method is applied, which (almost) guarantees the solution of the ill-posed problem. A combination of first-order and second-order differential operators is chosen for the Tikhonov matrix (tries to minimize height variations and curvature in the spectrum) with a restriction to negative values.
 
 Extrapolation of spectra without photometry is done with an appropriate piece of Gaussian to avoid infinitely large and negative values.
 

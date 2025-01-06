@@ -139,6 +139,13 @@ def smoothness_matrix(n: int, order: int = 1):
                 raise ValueError(f'Order {order} of smoothness matrix is not supported.')
     return L
 
+def covar_matrix(M: np.ndarray):
+    """
+    Returns matrix multiplication of the transposed matrix by the original matrix.
+    (A covariance matrix if the rows represent different observations and
+    the columns represent different variables.)
+    """
+    return M.T @ M
 
 def expand2x(array0: np.ndarray):
     """ Expands the array along the first axis by half """
