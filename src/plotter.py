@@ -77,10 +77,12 @@ def plot_spectra(spectra: Sequence[_TrueColorToolsObject], gamma: bool, srgb: bo
                 )
             if spectrum.sd is not None:
                 # 1σ confidence band
+                y_lim = ax.get_ylim()
                 ax.fill_between(
                     spectrum.nm, spectrum.br-spectrum.sd, spectrum.br+spectrum.sd,
                     color=errorbar_color, alpha=0.25
                 )
+                ax.set_ylim(y_lim)
         ax.legend()
         fig.tight_layout() # moving to subplots() causes UserWarning
         return fig
