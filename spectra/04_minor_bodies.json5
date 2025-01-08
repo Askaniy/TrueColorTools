@@ -3698,12 +3698,13 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.061, +0.027, -0.017]], // system albedo
     },
-    '(612243) 2001 QR322 | MBOSS': {
+    '(612243) 2001 QR322 | MBOSS, FarkasTakacs2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.800, 'V-R': 0.460, 'R-I': 0.360},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.033, +0.021, -0.015]],
     },
     '(612245) 2001 QX322 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/detached TNO'],
