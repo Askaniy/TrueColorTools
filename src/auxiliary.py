@@ -238,26 +238,41 @@ def custom_extrap(grid: Sequence, derivative: float|np.ndarray, corner_x: int|fl
         sign = np.sign(derivative)
         return np.exp((1 - (np.abs(derivative) * (grid - corner_x) / corner_y - sign)**2) / 2) * corner_y
 
+def extrap_sd(corner_y: float|np.ndarray, x_arr: np.ndarray):
+    """ The exponential growth of uncertainty is completely arbitrary and needs to be investigated """
+    return corner_y * 0.05 * (1.01**x_arr - 1)
+
+
 weights_center_of_mass = 1 - 1 / np.sqrt(2)
 
-def extrapolating(x: np.ndarray, y: np.ndarray, x_arr: np.ndarray, step: int|float, avg_steps=20):
+def extrapolating(x: np.ndarray, y: np.ndarray, sd: np.ndarray, x_arr: np.ndarray, step: int, avg_steps=20):
     """
     Defines a (multi-dimensional) curve an intuitive continuation on the x_arr, if needed.
     In TCT works for spectra, filter systems and spectral cubes.
     `avg_steps` is a number of corner curve points to be averaged if the curve is not smooth.
     Averaging weights on this range grow linearly closer to the edge (from 0 to 1).
+    The exponential growth of uncertainty is completely arbitrary and needs to be investigated.
     """
     obj_shape = y.shape[1:] # (,) for 1D; (n,) for 2D; (w, h) for 3D
+    if sd is None:
+        sd = np.zeros_like(y)
+        sd_left = sd_right = 0.
+    else:
+        sd_left = sd[0]
+        sd_right = sd[-1]
     if len(x) == 1: # filling with equal-energy spectrum
-        x = grid(min(x_arr[0], x[0]), max(x_arr[-1], x[0]), step)
-        y = higher_dim(y[0], x.size, axis=0)
+        x1 = grid(min(x_arr[0], x[0]), max(x_arr[-1], x[0]), step)
+        y1 = higher_dim(y[0], x1.size, axis=0)
+        sd = extrap_sd(y[0], np.abs(x1 - x[0]))
+        x = x1
+        y = y1
     else:
         if x[0] > x_arr[0]:
             # Extrapolation to blue
             x1 = np.arange(x_arr[0], x[0], step)
             if np.all(y[0] == 0):
                 # Corner point is zero -> no extrapolation needed: most likely it's a filter profile
-                y1 = np.zeros((x1.size, *obj_shape))
+                y1 = sd1 = np.zeros((x1.size, *obj_shape))
             else:
                 y_arr = y[:avg_steps]
                 if is_smooth(y_arr):
@@ -269,14 +284,16 @@ def extrapolating(x: np.ndarray, y: np.ndarray, x_arr: np.ndarray, step: int|flo
                     diff = np.average(np.diff(y_arr, axis=0), weights=avg_weights[:-1], axis=0)
                     corner_y = np.average(y_arr, weights=avg_weights, axis=0) - diff * avg_steps * weights_center_of_mass
                 y1 = custom_extrap(x1, diff/step, x[0], corner_y)
+                sd1 = sd_left + expand_1D_array(extrap_sd(corner_y, np.arange(x[0]-x_arr[0], 0, -step) - step), obj_shape)
             x = np.append(x1, x)
             y = np.append(y1, y, axis=0)
+            sd = np.append(sd1, sd, axis=0)
         if x[-1] < x_arr[-1]:
             # Extrapolation to red
             x1 = np.arange(x[-1], x_arr[-1], step) + step
             if np.all(y[0] == 0):
                 # Corner point is zero -> no extrapolation needed: most likely it's a filter profile
-                y1 = np.zeros((x1.size, *obj_shape))
+                y1 = sd1 = np.zeros((x1.size, *obj_shape))
             else:
                 y_arr = y[-avg_steps:]
                 if is_smooth(y_arr):
@@ -287,9 +304,72 @@ def extrapolating(x: np.ndarray, y: np.ndarray, x_arr: np.ndarray, step: int|flo
                     diff = np.average(np.diff(y_arr, axis=0), weights=avg_weights[1:], axis=0)
                     corner_y = np.average(y_arr, weights=avg_weights, axis=0) + diff * avg_steps * weights_center_of_mass
                 y1 = custom_extrap(x1, diff/step, x[-1], corner_y)
+                sd1 = sd_right + expand_1D_array(extrap_sd(corner_y, np.arange(0, x_arr[-1]-x[-1], step)), obj_shape)
             x = np.append(x, x1)
             y = np.append(y, y1, axis=0)
-    return x, y
+            sd = np.append(sd, sd1, axis=0)
+    return x, y, sd
+
+
+def linear_sd_handling(br1, sd1, br2, sd2):
+    """
+    Calculates the standard deviation of the sum or difference.
+    The input can be a numeric or a (multidimensional) numpy array.
+    """
+    if sd1 is None:
+        return sd2
+    elif sd2 is None:
+        return sd1
+    else:
+        if isinstance(sd1, np.ndarray) and isinstance(sd2, np.ndarray) and (ndim_delta := sd2.ndim - sd1.ndim) != 0:
+            if ndim_delta > 0:
+                sd1 = sd1.reshape(sd1.shape + (1,)*ndim_delta)
+            else:
+                sd2 = sd2.reshape(sd2.shape + (1,)*(-ndim_delta))
+        return np.sqrt(sd1**2 + sd2**2)
+
+def mul_sd_handling(br1, sd1, br2, sd2):
+    """
+    Calculates the standard deviation of the product.
+    The input can be a numeric or a (multidimensional) numpy array.
+    """
+    if sd1 is None and sd2 is None:
+        return None
+    else:
+        if sd1 is None:
+            sd1 = np.zeros_like(br1)
+        if sd2 is None:
+            sd2 = np.zeros_like(br2)
+        try:
+            # Numeric and same-ndim numpy arrays cases
+            return np.sqrt((br1 * sd2)**2 + (sd1 * br2)**2 + (sd1 * sd2)**2)
+        except ValueError:
+            # Different ndim case
+            if isinstance(br1, np.ndarray) and isinstance(br2, np.ndarray) and br2.ndim > br1.ndim:
+                br1, sd1, br2, sd2 = br2, sd2, br1, sd1
+            return np.sqrt((br1.T * sd2).T**2 + (sd1.T * br2).T**2 + (sd1.T * sd2).T**2)
+
+def div_sd_handling(br1, sd1, br2, sd2):
+    """
+    Calculates the standard deviation of the private.
+    The input can be a numeric or a (multidimensional) numpy array.
+    """
+    if sd1 is None and sd2 is None:
+        return None
+    else:
+        if sd1 is None:
+            sd1 = np.zeros_like(br1)
+        if sd2 is None:
+            sd2 = np.zeros_like(br2)
+        try:
+            # Numeric and same-ndim numpy arrays cases
+            return np.sqrt((br1 * sd2)**2 + (sd1 * br2)**2 + (sd1 * sd2)**2) / br2**2
+        except ValueError:
+            # Different ndim case
+            if isinstance(br1, np.ndarray) and isinstance(br2, np.ndarray) and br2.ndim > br1.ndim:
+                br1, sd1, br2, sd2 = br2, sd2, br1, sd1
+            return (np.sqrt((br1.T * sd2).T**2 + (sd1.T * br2).T**2 + (sd1.T * sd2).T**2).T / br2**2).T
+
 
 # Blackbody spectra
 
@@ -455,7 +535,7 @@ def color_indices_parser(indices: dict):
         else:
             filters |= {bluer_filter: filters[redder_filter] + mag}
     irradiance = mag2irradiance(np.array(tuple(filters.values())))
-    sd = np.zeros_like(irradiance)
+    sd = None
     # Uncertainty calculation
     if uncertainty_flag:
         shot_noise_factor = np.sqrt(irradiance) # common Poisson noise factor

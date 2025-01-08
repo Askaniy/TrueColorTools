@@ -2,7 +2,6 @@ import unittest
 from numpy.testing import assert_equal, assert_allclose
 
 from src.core import *
-from src.auxiliary import parse_value_sd
 from src.table_generator import ImageFont, line_splitter
 
 
@@ -29,29 +28,29 @@ class TestTCT(unittest.TestCase):
         assert_allclose(self.ubv.sd_of_nm(), [21.932217, 35.816641, 36.354015], rtol=0.01)
     
     def test_stub_and_convolution_possibility(self):
-        self.assertIsInstance(Spectrum.stub() @ Spectrum.stub(), float)
+        self.assertIsInstance(Spectrum.stub() @ Spectrum.stub(), tuple)
         self.assertIsInstance(Spectrum.stub() @ FilterSystem.stub(), Photospectrum)
-        self.assertIsInstance(SpectralSquare.stub() @ Spectrum.stub(), np.ndarray)
+        self.assertIsInstance(SpectralSquare.stub() @ Spectrum.stub(), tuple)
         self.assertIsInstance(SpectralSquare.stub() @ FilterSystem.stub(), PhotospectralSquare)
-        self.assertIsInstance(SpectralCube.stub() @ Spectrum.stub(), np.ndarray)
+        self.assertIsInstance(SpectralCube.stub() @ Spectrum.stub(), tuple)
         self.assertIsInstance(SpectralCube.stub() @ FilterSystem.stub(), PhotospectralCube)
-        self.assertIsInstance(Photospectrum.stub() @ Spectrum.stub(), float)
+        self.assertIsInstance(Photospectrum.stub() @ Spectrum.stub(), tuple)
         self.assertIsInstance(Photospectrum.stub() @ FilterSystem.stub(), Photospectrum)
-        self.assertIsInstance(PhotospectralSquare.stub() @ Spectrum.stub(), np.ndarray)
+        self.assertIsInstance(PhotospectralSquare.stub() @ Spectrum.stub(), tuple)
         self.assertIsInstance(PhotospectralSquare.stub() @ FilterSystem.stub(), PhotospectralSquare)
-        self.assertIsInstance(PhotospectralCube.stub() @ Spectrum.stub(), np.ndarray)
+        self.assertIsInstance(PhotospectralCube.stub() @ Spectrum.stub(), tuple)
         self.assertIsInstance(PhotospectralCube.stub() @ FilterSystem.stub(), PhotospectralCube)
 
     def test_convolution(self):
-        assert_allclose(self.vega @ self.v, 3.626192e-11, rtol=0.01)
+        assert_allclose((self.vega @ self.v)[0], 3.626192e-11, rtol=0.01)
         assert_allclose((self.vega @ self.ubv).br, [4.192070e-11, 6.478653e-11, 3.626192e-11], rtol=0.01)
-        assert_allclose(self.vega @ self.v, (self.vega * self.v).integrate(), rtol=0.01)
+        assert_allclose((self.vega @ self.v)[0], (self.vega * self.v).integrate(), rtol=0.01)
         assert_allclose((self.vega @ self.ubv).br, (self.vega * self.ubv).integrate(), rtol=0.01)
     
     def test_multiplication(self):
         assert_allclose((self.v * self.vega).mean_nm(), 544.601418, rtol=0.01) # 544.543 in SVO filter service
         assert_allclose((self.ubv * self.vega).mean_nm(), [366.764603, 435.741381, 544.601418], rtol=0.01)
-        assert_allclose(self.vega * 2 @ self.v, self.vega @ self.v * 2, rtol=0.01)
+        assert_allclose((self.vega * 2 @ self.v)[0], (self.vega @ self.v)[0] * 2, rtol=0.01)
         assert_allclose((self.vega * 2 @ self.ubv).br, (self.vega @ self.ubv * 2).br, rtol=0.01)
     
     def test_division(self):
@@ -61,7 +60,7 @@ class TestTCT(unittest.TestCase):
         assert_allclose((self.ubv / self.ubv.nm).mean_nm(), [359.158258, 438.480057, 548.890305], rtol=0.01)
     
     def test_normalization(self):
-        assert_allclose(self.vega @ (self.v * 2).normalize(), self.vega @ self.v, rtol=0.01)
+        assert_allclose((self.vega @ (self.v * 2).normalize())[0], (self.vega @ self.v)[0], rtol=0.01)
         assert_allclose((self.vega @ (self.ubv * 2).normalize()).br, (self.vega @ self.ubv).br, rtol=0.01)
     
     def test_spectrum_from_nm(self):
@@ -97,10 +96,10 @@ class TestTCT(unittest.TestCase):
         assert_allclose(photospectrum.define_on_range(visible_range, crop=True).br, np.ones(visible_range.size))
     
     def test_sd_parsing(self):
-        assert_equal(parse_value_sd(0.202), (0.202, None))
-        assert_equal(parse_value_sd([0.202, 0.0665]), (0.202, 0.0665))
-        assert_equal(parse_value_sd([0.202, 0.084, 0.049]), (0.202, 0.0665))
-        assert_equal(parse_value_sd([0.202, +0.084, -0.049]), (0.202, 0.0665))
+        assert_equal(aux.parse_value_sd(0.202), (0.202, None))
+        assert_equal(aux.parse_value_sd([0.202, 0.0665]), (0.202, 0.0665))
+        assert_equal(aux.parse_value_sd([0.202, 0.084, 0.049]), (0.202, 0.0665))
+        assert_equal(aux.parse_value_sd([0.202, +0.084, -0.049]), (0.202, 0.0665))
     
     def test_name_parsing(self):
         obj_name = ObjectName('HZ43(8) (DA) | CALSPEC')

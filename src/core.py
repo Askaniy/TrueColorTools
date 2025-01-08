@@ -29,7 +29,7 @@ Color:
 """
 
 from copy import deepcopy
-from typing import Sequence, Callable
+from typing import Sequence, Callable, Self
 from pathlib import Path
 from operator import mul, truediv
 from functools import lru_cache
@@ -229,7 +229,7 @@ class _TrueColorToolsObject:
         output = deepcopy(self)
         if isinstance(where, str|int|float):
             where = get_filter(where)
-        current_br = self @ where
+        current_br, sd = self @ where
         if current_br == 0:
             return output
         return output * (how / current_br)
@@ -253,27 +253,120 @@ class _TrueColorToolsObject:
                 output.sd = operator(output.sd, operand)
         return output
     
-    def __mul__(self, other: int|float|np.ndarray):
-        if isinstance(other, int|float|np.ndarray):
-            return self.apply_linear_operator(mul, other)
-        return NotImplemented
+    def apply_element_wise_operation(self, operator: Callable, operand: Self, sd_handling: Callable = None) -> Self:
+        """ Returns a new object formed from element-wise operation """
+        raise NotImplementedError('Common method of SpectralObject and PhotospectralObject')
     
-    def __rmul__(self, other: int|float|np.ndarray):
-        return self.__mul__(other)
+    def __mul__(self, other):
+        match other:
+            case int() | float() | np.ndarray():
+                return self.apply_linear_operator(mul, other)
+            case _SpectralObject() | _PhotospectralObject():
+                return self.apply_element_wise_operation(mul, other, aux.mul_sd_handling)
+            case _:
+                return NotImplemented
     
-    def __truediv__(self, other: int|float|np.ndarray):
-        if isinstance(other, int|float|np.ndarray):
-            return self.apply_linear_operator(truediv, other)
+    def __truediv__(self, other):
+        match other:
+            case int() | float() | np.ndarray():
+                return self.apply_linear_operator(truediv, other)
+            case _SpectralObject() | _PhotospectralObject():
+                return self.apply_element_wise_operation(truediv, other, aux.div_sd_handling)
+            case _:
+                return NotImplemented
+    
+    def __matmul__(self, other: Self):
+        """
+        Implementation of convolution (in the meaning of synthetic photometry).
+        If necessary, extrapolates over the wavelength interval of the second operand.
+
+        Only 8 convolution options make physical sense:
+        - Spectrum @ Spectrum                -> value, std
+        - Spectrum @ FilterSystem            -> Photospectrum
+        - SpectralSquare @ Spectrum          -> value array, std array
+        - SpectralSquare @ FilterSystem      -> PhotospectralSquare
+        - SpectralCube @ Spectrum            -> value image, std image
+        - SpectralCube @ FilterSystem        -> PhotospectralCube
+        - Photospectrum @ Spectrum           -> value, std
+        - Photospectrum @ FilterSystem       -> Photospectrum
+        - PhotospectralSquare @ Spectrum     -> value array, std array
+        - PhotospectralSquare @ FilterSystem -> PhotospectralSquare
+        - PhotospectralCube @ Spectrum       -> value image, std image
+        - PhotospectralCube @ FilterSystem   -> PhotospectralCube
+        """
+        if isinstance(other, _SpectralObject) and other.is_edges_zeroed():
+            # No extrapolation is required for a filter-like object
+            operand1 = self.define_on_range(other.nm, crop=True)
+            operand2 = other.define_on_range(other.nm, crop=True)
+        elif isinstance(self, _SpectralObject) and self.is_edges_zeroed():
+            # No extrapolation is required for a filter-like object
+            operand1 = other.define_on_range(self.nm, crop=True)
+            operand2 = self.define_on_range(self.nm, crop=True)
+        else:
+            # For the cases of bolometric albedo operations such as `Sun @ Mercury`.
+            operand1 = other.define_on_range(self.nm, crop=False)
+            operand2 = self.define_on_range(other.nm, crop=False)
+        # other.define_on_range() reconstructed the PhotospectralObj to a some SpectralObj, so 4 options left:
+        if isinstance(operand1, Spectrum):
+            # Spectrum @ Spectrum
+            if isinstance(operand2, Spectrum):
+                br = aux.integrate(operand1.br * operand2.br, nm_step)
+                sd = aux.mul_sd_handling(operand1.br, operand1.sd, operand2.br, operand2.sd)
+                if sd is not None:
+                    sd = aux.integrate(sd, nm_step)
+                return br, sd
+            # Spectrum @ FilterSystem
+            elif isinstance(operand2, FilterSystem):
+                br = aux.integrate((operand2.br.T * operand1.br).T, nm_step)
+                try:
+                    sd = aux.mul_sd_handling(operand1.br, operand1.sd, operand2.br, operand2.sd)
+                except ValueError:
+                    raise ValueError
+                if sd is not None:
+                    sd = aux.integrate(sd, nm_step)
+                return Photospectrum(operand2, br, sd, name=operand1.name)
+        elif isinstance(operand1, SpectralSquare):
+            # SpectralSquare @ Spectrum
+            if isinstance(operand2, Spectrum):
+                br = aux.integrate((operand1.br.T * operand2.br).T, nm_step)
+                sd = aux.mul_sd_handling(operand1.br, operand1.sd, operand2.br, operand2.sd)
+                if sd is not None:
+                    sd = aux.integrate(sd, nm_step)
+                return br, sd
+            # SpectralSquare @ FilterSystem
+            elif isinstance(operand2, FilterSystem):
+                br = aux.integrate(operand1.br[:, :, np.newaxis] * operand2.br[:, np.newaxis, :], nm_step).T
+                # TODO: uncertainty processing
+                return PhotospectralSquare(operand2, br, name=operand1.name)
+        elif isinstance(operand1, SpectralCube):
+            # SpectralCube @ Spectrum
+            if isinstance(operand2, Spectrum):
+                br = aux.integrate((operand1.br.T * operand2.br).T, nm_step)
+                sd = aux.mul_sd_handling(operand1.br, operand1.sd, operand2.br, operand2.sd)
+                if sd is not None:
+                    sd = aux.integrate(sd, nm_step)
+                return br, sd
+            # SpectralCube @ FilterSystem
+            # A loop-less implementation would require a 4D array,
+            # which most computers do not have enough memory for.
+            elif isinstance(operand2, FilterSystem):
+                br = np.empty((len(operand2), *operand1.shape))
+                #for i, profile in enumerate(operand2):
+                for i in range(len(operand2)):
+                    profile = operand2.br[:,i]
+                    br[i] = aux.integrate((operand1.br.T * profile).T, nm_step)
+                # TODO: uncertainty processing
+                return PhotospectralCube(operand2, br, name=operand1.name)
         return NotImplemented
     
     def __hash__(self) -> int:
         """ Returns the hash value based on the object's name """
         return hash(self.name)
     
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: Self) -> bool:
         """ Checks equality with another TrueColorToolsObject instance """
         if isinstance(other, _TrueColorToolsObject):
-            return self.name == other.name
+            return self.nm == other.nm and self.br == other.br
         return False
 
 
@@ -428,87 +521,61 @@ class _SpectralObject(_TrueColorToolsObject):
         return np.sqrt(np.average((aux.expand_1D_array(self.nm, self.shape) - self.mean_nm())**2, weights=self.br, axis=0))
     
     def get_br_in_range(self, start: int, end: int) -> np.ndarray[np.floating]:
-        """ Returns brightness values over a range of wavelengths (ends included!) """
-        # TODO: round up to a multiple of 5
-        return self.br[np.where((self.nm >= start) & (self.nm <= end))]
+        """ Returns standard deviation values over a range of wavelengths (ends included!) """
+        # TODO: round the input up to a multiple of 5
+        return self.br[(self.nm >= start) & (self.nm <= end)]
+    
+    def get_sd_in_range(self, start: int, end: int) -> np.ndarray[np.floating]:
+        """ Returns standard deviation values over a range of wavelengths (ends included!) """
+        if self.sd is None:
+            return None
+        else:
+            # TODO: round the input up to a multiple of 5
+            return self.sd[(self.nm >= start) & (self.nm <= end)]
     
     def define_on_range(self, nm_arr: np.ndarray, crop: bool = False):
         """ Returns a new SpectralObject with a guarantee of definition on the requested wavelength array """
-        extrapolated = self.__class__(*aux.extrapolating(self.nm, self.br, nm_arr, nm_step), name=self.name)
+        extrapolated = self.__class__(*aux.extrapolating(self.nm, self.br, self.sd, nm_arr, nm_step), name=self.name)
         if crop:
             start = max(extrapolated.nm[0], nm_arr[0])
             end = min(extrapolated.nm[-1], nm_arr[-1])
             extrapolated.br = extrapolated.get_br_in_range(start, end)
+            extrapolated.sd = extrapolated.get_sd_in_range(start, end)
         return extrapolated
     
     def is_edges_zeroed(self) -> bool:
         """ Checks that the first and last brightness entries on the spectral axis are zero """
         return np.all(self.br[0] == 0) and np.all(self.br[-1] == 0)
     
-    def __matmul__(self, other):
-        return other.__rmatmul__(self)
-    
-    def __rmatmul__(self, other):
+    def apply_element_wise_operation(self, operator: Callable, other: Self, sd_handling: Callable = None) -> Self:
         """
-        Implementation of convolution (in the meaning of synthetic photometry).
-        If necessary, extrapolates over the wavelength interval of the second operand.
+        Returns a new SpectralObject formed from element-wise operation between SpectralObjects
+        of the same nature or with a Spectrum.
 
-        Only 8 convolution options make physical sense:
-        - Spectrum @ Spectrum                -> float
-        - Spectrum @ FilterSystem            -> Photospectrum
-        - SpectralSquare @ Spectrum          -> linear array
-        - SpectralSquare @ FilterSystem      -> PhotospectralSquare
-        - SpectralCube @ Spectrum            -> image array
-        - SpectralCube @ FilterSystem        -> PhotospectralCube
-        - Photospectrum @ Spectrum           -> float
-        - Photospectrum @ FilterSystem       -> Photospectrum
-        - PhotospectralSquare @ Spectrum     -> linear array
-        - PhotospectralSquare @ FilterSystem -> PhotospectralSquare
-        - PhotospectralCube @ Spectrum       -> image array
-        - PhotospectralCube @ FilterSystem   -> PhotospectralCube
+        Only works at the intersection of the spectral axes! If you need to extrapolate one axis
+        to the range of another, use the `define_on_range()` method.
         """
-        # TODO: uncertainty processing
-        if self.is_edges_zeroed():
-            # No filter extrapolation required
-            operand1 = other.define_on_range(self.nm, crop=True)
-            operand2 = self
+        if isinstance(other, _SpectralObject):
+            operand1, operand2 = (self, other) if self.ndim >= other.ndim else (other, self) # order is important
+            start = max(operand1.nm[0], operand2.nm[0])
+            end = min(operand1.nm[-1], operand2.nm[-1])
+            if start > end: # `>` is needed to process operations with stub objects with no extra logs
+                the_first = operand2.name
+                the_second = operand2.name
+                if operand1.nm[0] > operand2.nm[0]:
+                    the_first, the_second = the_second, the_first
+                print(f'# Note for SpectralObject element-wise operation "{operator.__name__}"')
+                print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
+                print('- There is no intersection between the spectra. SpectralObject stub object was created.')
+                return operand1.__class__.stub(operand1.name)
+            else:
+                br1 = operand1.get_br_in_range(start, end)
+                br2 = operand2.get_br_in_range(start, end)
+                br = operator(br1, br2) if operand1.ndim == operand2.ndim else operator(br1.T, br2).T
+                sd = sd_handling(br1, operand1.get_sd_in_range(start, end), br2, operand2.get_sd_in_range(start, end))
+                return operand1.__class__(aux.grid(start, end, nm_step), br, sd, name=operand1.name)
         else:
-            # Why Spectrum/FilterSystem needs extrapolation too?
-            # For the cases of bolometric albedo operations such as `Sun @ Mercury`.
-            operand1 = other.define_on_range(self.nm, crop=False)
-            operand2 = self.define_on_range(other.nm, crop=False)
-        # other.define_on_range() reconstructed PhotospectralObj to SpectralObj, so 4 options left:
-        if isinstance(operand1, Spectrum):
-            # Spectrum @ Spectrum
-            if isinstance(operand2, Spectrum):
-                return aux.integrate(operand1.br * operand2.br, nm_step)
-            # Spectrum @ FilterSystem
-            elif isinstance(operand2, FilterSystem):
-                br = aux.integrate((operand2.br.T * operand1.br).T, nm_step)
-                return Photospectrum(operand2, br, name=operand1.name)
-        elif isinstance(operand1, SpectralSquare):
-            # SpectralSquare @ Spectrum
-            if isinstance(operand2, Spectrum):
-                return aux.integrate((operand1.br.T * operand2.br).T, nm_step)
-            # SpectralSquare @ FilterSystem
-            elif isinstance(operand2, FilterSystem):
-                br = aux.integrate(operand1.br[:, :, np.newaxis] * operand2.br[:, np.newaxis, :], nm_step).T
-                return PhotospectralSquare(operand2, br, name=operand1.name)
-        elif isinstance(operand1, SpectralCube):
-            # SpectralCube @ Spectrum
-            if isinstance(operand2, Spectrum):
-                return aux.integrate((operand1.br.T * operand2.br).T, nm_step)
-            # SpectralCube @ FilterSystem
-            # A loop-less implementation would require a 4D array,
-            # which most computers do not have enough memory for.
-            elif isinstance(operand2, FilterSystem):
-                br = np.empty((len(operand2), *operand1.shape))
-                #for i, profile in enumerate(operand2):
-                for i in range(len(operand2)):
-                    profile = operand2.br[:,i]
-                    br[i] = aux.integrate((operand1.br.T * profile).T, nm_step)
-                return PhotospectralCube(operand2, br, name=operand1.name)
-        return NotImplemented
+            return NotImplemented
 
 
 class Spectrum(_SpectralObject):
@@ -634,74 +701,6 @@ class Spectrum(_SpectralObject):
         if output.photospectrum is not None:
             output.photospectrum = operator(output.photospectrum, operand)
         return output
-    
-    def apply_spectral_element_wise_operation(self, operator: Callable, other: _SpectralObject) -> _SpectralObject:
-        """
-        Returns a new SpectralObject formed from element-wise operation with the Spectrum,
-        such as multiplication or division.
-        
-        Element-wise are only possible with 1D SpectralObjects: other would produce 4D+ arrays,
-        which most computers do not have enough memory for.
-
-        Works only at the intersection of the spectral axes! If you need to extrapolate one axis
-        to the range of another, use `SpectralObject.define_on_range()`.
-        """
-        # TODO: uncertainty processing
-        operand1, operand2 = (self, other) if self.ndim >= other.ndim else (other, self) # order is important for division
-        start = max(operand1.nm[0], operand2.nm[0])
-        end = min(operand1.nm[-1], operand2.nm[-1])
-        if start > end: # `>` is needed to process operations with stub objects with no extra logs
-            the_first = operand1.name
-            the_second = operand2.name
-            if operand1.nm[0] > operand2.nm[0]:
-                the_first, the_second = the_second, the_first
-            print(f'# Note for SpectralObject element-wise operation "{operator.__name__}"')
-            print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
-            print('- There is no intersection between the spectra. SpectralObject stub object was created.')
-            return operand1.__class__.stub(operand1.name)
-        else:
-            br1 = operand1.get_br_in_range(start, end)
-            br2 = operand2.get_br_in_range(start, end)
-            return operand1.__class__(aux.grid(start, end, nm_step), operator(br1.T, br2).T, name=operand1.name)
-    
-    def apply_photospectral_element_wise_operation(self, operator: Callable, photospectral_obj):
-        """
-        Returns a new PhotospectralObject formed from element-wise operation with the Spectrum,
-        such as multiplication or division.
-        Note that element-wise also distort the effective filter profiles, but since we assume
-        the filter system to be already in regular energy density units, they would not change.
-        
-        Element-wise are only possible with 1D SpectralObjects: other would produce 4D+ arrays,
-        which most computers do not have enough memory for.
-        """
-        # TODO: uncertainty processing
-        self_photospectrum = self @ photospectral_obj.filter_system
-        output = operator(photospectral_obj, self_photospectrum.br)
-        #distorted_profiles = operator(photospectral_obj.filter_system, self)
-        #output.filter_system = distorted_profiles.normalize()
-        return output
-    
-    def __mul__(self, other):
-        if isinstance(other, _SpectralObject):
-            return self.apply_spectral_element_wise_operation(mul, other)
-        elif isinstance(other, _PhotospectralObject):
-            return self.apply_photospectral_element_wise_operation(mul, other)
-        else:
-            return super().__mul__(other)
-    
-    def __rmul__(self, other):
-        return self.__mul__(other)
-    
-    def __truediv__(self, other):
-        if isinstance(other, _SpectralObject):
-            return self.apply_spectral_element_wise_operation(truediv, other)
-        elif isinstance(other, _PhotospectralObject):
-            return self.apply_photospectral_element_wise_operation(truediv, other)
-        else:
-            return super().__truediv__(other)
-    
-    def __rtruediv__(self, other):
-        return self.__truediv__(other)
 
 
 @lru_cache(maxsize=32)
@@ -988,9 +987,10 @@ class _PhotospectralObject(_TrueColorToolsObject):
         try:
             nm0 = self.filter_system.mean_nm()
             br0 = self.br
+            sd0 = self.sd
             sd1 = None
             if len(self.filter_system) == 1: # single-point PhotospectralObject support
-                nm1, br1 = aux.extrapolating(nm0, br0, nm_arr, nm_step)
+                nm1, br1 = aux.extrapolating(nm0, br0, sd0, nm_arr, nm_step)
             else:
                 filter_system = self.filter_system.define_on_range(nm_arr)
                 nm1 = filter_system.nm
@@ -1032,29 +1032,52 @@ class _PhotospectralObject(_TrueColorToolsObject):
                     if not result.success:
                         raise ValueError(f'Optimization failed: {result.message}')
                     br1 = result.x
-                if self.ndim == 1 and self.sd is not None:
+                if self.ndim == 1 and sd0 is not None:
                     # Measurement confidence band calculation
                     # Confidence bands for spectral squares and cubes are not computed to save computational resources
                     A_inv = np.linalg.inv(A)
-                    sd1 = np.sqrt(np.diag(A_inv @ T.T @ np.diag(self.sd**2) @ T @ A_inv))
+                    sd1 = np.sqrt(np.diag(A_inv @ T.T @ np.diag(sd0**2) @ T @ A_inv))
                     # An attempt to account for the sensitivity confidence band of the method:
                     # sd1 = np.sqrt(sd1**2 + np.diag(A_inv) * 0.00001)
                     # sqrt(diag(A_inv)) gives sensitivity sd, which was 10⁵ times higher than measurement sd in tests
+            if self.ndim == 1:
+                # Retain the photometric data for the resulting spectral object.
+                spectral_obj = Spectrum(nm1, br1, sd1, name=self.name, photospectrum=deepcopy(self))
+            else:
+                # It may be too costly to retain photometry for spectral squares and cubes.
+                spectral_obj = target_class(nm1, br1, sd1, name=self.name)
             if crop:
                 start = max(nm1[0], nm_arr[0])
                 end = min(nm1[-1], nm_arr[-1])
-                br1 = br1[np.where((nm1 >= start) & (nm1 <= end))]
-            if self.ndim == 1:
-                # Retain the photometric data for the resulting spectral object.
-                return Spectrum(nm1, br1, sd1, name=self.name, photospectrum=deepcopy(self))
-            else:
-                # It may be too costly to retain photometry for spectral squares and cubes.
-                return target_class(nm1, br1, sd1, name=self.name)
-        except Exception:
+                spectral_obj.br = spectral_obj.get_br_in_range(start, end)
+                spectral_obj.sd = spectral_obj.get_sd_in_range(start, end)
+            return spectral_obj
+        except ZeroDivisionError:
             print(f'# Note for the PhotospectralObject "{self.name}"')
             print(f'- Something unexpected happened in spectral reconstruction to {target_class.__name__}. It was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0).strip()}')
             return target_class.stub(self.name)
+
+    def apply_element_wise_operation(self, operator: Callable, other: _TrueColorToolsObject, sd_handling: Callable = None) -> Self:
+        """
+        Returns a new PhotospectralObject formed from element-wise operation with
+        a SpectralObject or another PhotospectralObject. Operations between objects
+        of the same dimensionality and all (photo)spectrum operations are supported.
+
+        The filter system of the second object, if it does not match, is converted
+        to the filter system of the first object!
+        """
+        if isinstance(other, _SpectralObject | _PhotospectralObject):
+            filter_system = self.filter_system
+            if isinstance(other, _SpectralObject) or (isinstance(other, _PhotospectralObject) and other.filter_system != filter_system):
+                # Converting to a PhotospectralObject of the same filter system
+                other = other @ filter_system
+            operand1, operand2 = (self, other) if self.ndim >= other.ndim else (other, self) # order is important
+            br = operator(operand1.br, other.br) if operand1.ndim == operand2.ndim else operator(operand1.br.T, operand2.br).T
+            sd = sd_handling(operand1.br, operand1.sd, operand2.br, operand2.sd)
+            return operand1.__class__(filter_system, br, sd, name=operand1.name)
+        else:
+            return NotImplemented
 
 
 stub_filter_system = FilterSystem.from_list(('Generic_Bessell.B', 'Generic_Bessell.V'))
@@ -1130,12 +1153,12 @@ class PhotospectralCube(_PhotospectralObject, _Cube):
 # ------------ Database Processing Section ------------
 
 sun_SI = Spectrum.from_file('spectra/files/CALSPEC/sun_reference_stis_002.fits', name='Sun') # W / (m² nm)
-sun_in_V = sun_SI @ get_filter('Generic_Bessell.V')
+sun_in_V, _ = sun_SI @ get_filter('Generic_Bessell.V')
 sun_norm = sun_SI.scaled_at(get_filter('Generic_Bessell.V'))
 sun_filter = sun_SI.normalize()
 
 vega_SI = Spectrum.from_file('spectra/files/CALSPEC/alpha_lyr_stis_011.fits', name='Vega') # W / (m² nm)
-vega_in_V = vega_SI @ get_filter('Generic_Bessell.V')
+vega_in_V, _ = vega_SI @ get_filter('Generic_Bessell.V')
 vega_norm = vega_SI.scaled_at(get_filter('Generic_Bessell.V'))
 
 
@@ -1202,7 +1225,7 @@ class ReflectiveBody:
                 if self.geometric:
                     return self.geometric, False
                 else:
-                    sphericalV = self.spherical @ get_filter('Generic_Bessell.V')
+                    sphericalV, sd = self.spherical @ get_filter('Generic_Bessell.V')
                     if self.phase_integral is not None:
                         phase_integral = self.phase_integral[0]
                         geometricV = sphericalV / phase_integral
@@ -1215,7 +1238,7 @@ class ReflectiveBody:
                 if self.spherical:
                     return self.spherical, False
                 else:
-                    geometricV = self.geometric @ get_filter('Generic_Bessell.V')
+                    geometricV, sd = self.geometric @ get_filter('Generic_Bessell.V')
                     if self.phase_integral is not None:
                         phase_integral = self.phase_integral[0]
                         estimated = False

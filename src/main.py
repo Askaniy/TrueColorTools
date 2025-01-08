@@ -264,7 +264,7 @@ def launch_window(lang: str):
                     window['T1_graph'].TKCanvas.itemconfig(T1_preview, fill=T1_rgb_show)
                     window['T1_rgb'].update(T1_rgb)
                     window['T1_hex'].update(T1_rgb_show)
-                    window['T1_convolved'].update(sigfig_round(T1_spectrum@get_filter(values['T1_filter']), rounding, warn=False))
+                    window['T1_convolved'].update(sigfig_round((T1_spectrum@get_filter(values['T1_filter']))[0], rounding, warn=False))
 
                     # Green Dinkinesh Easter egg (added by request)
                     # There was a bug in TCT v3.3 caused by upper limit of uint16 when squaring nm for AB calibration
