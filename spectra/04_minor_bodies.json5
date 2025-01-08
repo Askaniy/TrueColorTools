@@ -123,6 +123,11 @@
         'DOI: 10.1051/0004-6361/201936183', 'https://www.aanda.org/articles/aa/full_html/2020/06/aa36183-19/aa36183-19.html',
         'https://ui.adsabs.harvard.edu/abs/2020A%26A...638A..23F/abstract'
     ],
+    'Bolin2023': [
+        'Keck, Gemini, and Palomar 200-inch visible photometry of red and very-red Neptunian Trojans',
+        'DOI: 10.1093/mnrsdl/slad018', 'https://academic.oup.com/mnrasl/article/521/1/L29/7036802',
+        'https://ui.adsabs.harvard.edu/abs/2023MNRAS.521L..29B/abstract'
+    ],
 
     'Li2019': [
         'Spectrophotometric modeling and mapping of Ceres',
@@ -4043,6 +4048,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    '2008 LC18 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.67, 0.08], 'g-i': [0.88, 0.08], 'r-i': [0.21, 0.07]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
     '2010 BK118 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
         photometric_system: 'Generic_Bessell',
@@ -4097,6 +4109,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    '2011 HM102 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.67, 0.08], 'g-i': [0.88, 0.08], 'r-i': [0.21, 0.07]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
     '2012 UD185 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
@@ -4104,10 +4123,24 @@
         calibration_system: 'AB',
         sun_is_emitter: true
     },
+    '2012 UD185 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.60, 0.11], 'g-i': [0.77, 0.09], 'r-i': [0.17, 0.06]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
     '2012 UV177 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': 0.71, 'r-i': 0.23},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
+    '2012 UV177 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.74, 0.07], 'g-i': [1.06, 0.08], 'r-i': [0.32, 0.07]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4161,10 +4194,24 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    '2013 RC158 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.32, 0.09], 'g-i': [0.59, 0.08], 'r-i': [0.27, 0.08]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
     '2013 RL124 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': 0.38, 'r-i': 0.54},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
+    '2013 RL124 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.44, 0.12], 'g-i': [0.78, 0.14], 'r-i': [0.34, 0.14]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4177,6 +4224,13 @@
         tags: ['Solar System', 'minor body/TNO/detached'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.64, 0.06], 'r-i': [0.46, 0.10]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
+    '2013 TK227 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.63, 0.08], 'g-i': [1.01, 0.12], 'r-i': [0.38, 0.12]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4194,10 +4248,24 @@
         calibration_system: 'AB',
         sun_is_emitter: true
     },
+    '2013 TZ187 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.81, 0.09], 'g-i': [1.19, 0.08], 'r-i': [0.38, 0.05]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
     '2013 VX30 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': 1.01, 'r-i': 0.44},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
+    '2013 VX30 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.83, 0.19], 'g-i': [1.15, 0.17], 'r-i': [0.32, 0.11]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4229,6 +4297,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    '2014 QO441 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.51, 0.08], 'g-i': [0.84, 0.08], 'r-i': [0.33, 0.06]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
     '2014 RO74 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
@@ -4236,10 +4311,31 @@
         calibration_system: 'AB',
         sun_is_emitter: true
     },
+    '2014 RO74 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.38, 0.13], 'g-i': [0.64, 0.10], 'r-i': [0.26, 0.15]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
     '2014 SC374 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': 0.43, 'r-i': 0.12},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
+    '2014 SC374 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.44, 0.09], 'g-i': [0.73, 0.10], 'r-i': [0.29, 0.11]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
+    '2014 UU240 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.45, 0.07], 'g-i': [0.52, 0.07], 'r-i': [0.07, 0.06]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4263,10 +4359,24 @@
         calibration_system: 'AB',
         sun_is_emitter: true
     },
+    '2014 YB92 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.42, 0.08], 'g-i': [0.57, 0.09], 'r-i': [0.15, 0.09]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
     '2015 VU207 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': 0.31, 'r-i': 0.24},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
+    '2015 VU207 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.58, 0.07], 'g-i': [0.67, 0.07], 'r-i': [0.09, 0.05]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4277,10 +4387,31 @@
         calibration_system: 'AB',
         sun_is_emitter: true
     },
+    '2015 VV165 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.93, 0.11], 'g-i': [1.39, 0.12], 'r-i': [0.46, 0.11]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
     '2015 VW165 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': 0.45, 'r-i': 0.36},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
+    '2015 VW165 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.38, 0.07], 'g-i': [0.59, 0.06], 'r-i': [0.21, 0.05]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
+    '2015 VX165 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.42, 0.15], 'g-i': [0.64, 0.12], 'r-i': [0.22, 0.11]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
