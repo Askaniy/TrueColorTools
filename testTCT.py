@@ -47,6 +47,9 @@ class TestTCT(unittest.TestCase):
         assert_allclose((self.vega @ self.v)[0], (self.vega * self.v).integrate(), rtol=0.01)
         assert_allclose((self.vega @ self.ubv).br, (self.vega * self.ubv).integrate(), rtol=0.01)
     
+    def test_addition(self):
+        assert_allclose((self.vega + self.vega).br, (self.vega * 2).br, rtol=0.01)
+    
     def test_multiplication(self):
         assert_allclose((self.v * self.vega).mean_nm(), 544.601418, rtol=0.01) # 544.543 in SVO filter service
         assert_allclose((self.ubv * self.vega).mean_nm(), [366.764603, 435.741381, 544.601418], rtol=0.01)

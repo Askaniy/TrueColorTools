@@ -31,7 +31,6 @@ Color:
 from copy import deepcopy
 from typing import Sequence, Callable, Self
 from pathlib import Path
-from operator import mul, truediv
 from functools import lru_cache
 from traceback import format_exc
 from PIL import Image
@@ -206,26 +205,24 @@ class _TrueColorToolsObject:
         Returns a new TrueColorToolsObject converted from photon spectral density
         to energy spectral density, using the fact that E = h c / λ.
         """
-        raise NotImplementedError('Common method of SpectralObject and PhotospectralObject')
+        raise NotImplementedError('Implemented in classes SpectralObject and PhotospectralObject, use them instead.')
     
     def convert_from_frequency_spectral_density(self):
         """
         Returns a new TrueColorToolsObject converted from frequency spectral density
         to energy spectral density, using the fact that f_λ = f_ν c / λ².
         """
-        raise NotImplementedError('Common method of SpectralObject and PhotospectralObject')
+        raise NotImplementedError('Implemented in classes SpectralObject and PhotospectralObject, use them instead.')
     
     def define_on_range(self, nm_arr: np.ndarray, crop: bool = False):
         """ Returns a new SpectralObject with a guarantee of definition on the requested wavelength array """
-        raise NotImplementedError('Common method of SpectralObject and PhotospectralObject')
+        raise NotImplementedError('Implemented in classes SpectralObject and PhotospectralObject, use them instead.')
     
     def scaled_at(self, where, how: int|float = 1, sd: int|float = None):
         """
         Returns a new object that matches the query brightness (1 by default)
         at the specified filter profile or wavelength.
         """
-        # TODO: uncertainty processing
-        # TODO: problems with (photo)spectral squares and cubes?
         output = deepcopy(self)
         if isinstance(where, str|int|float):
             where = get_filter(where)
@@ -234,46 +231,43 @@ class _TrueColorToolsObject:
             return output
         return output * (how / current_br)
     
-    def apply_linear_operator(self, operator: Callable, operand: int|float|np.ndarray):
+    def apply_element_wise_operation(self, operand: Self, br_handling: Callable, sd_handling: Callable) -> Self:
+        """ Returns a new object formed from element-wise operation """
+        raise NotImplementedError('Implemented in classes SpectralObject and PhotospectralObject, use them instead.')
+    
+    def apply_scalar_operation(self, operand, br_handling: Callable, sd_handling: Callable) -> Self:
         """
-        Returns a new object of the same class transformed according to the linear operator.
+        Returns a new object of the same class transformed according to the operator.
         Operand is assumed to be a number or an array along the spectral axis.
-        Linearity is needed because values and uncertainty are handled uniformly.
         """
         output = deepcopy(self)
-        if isinstance(operand, np.ndarray) and self.nm_len == operand.size:
-            # operand is an array with spectral axis size
-            output.br = operator(output.br.T, operand).T
-            if self.sd is not None:
-                output.sd = operator(output.sd.T, operand).T
-        else:
-            # operand is a number or an array with spatial axis size
-            output.br = operator(output.br, operand)
-            if self.sd is not None:
-                output.sd = operator(output.sd, operand)
+        output.br = br_handling(self.br, operand)
+        output.sd = sd_handling(self.br, self.sd, operand, None)
         return output
     
-    def apply_element_wise_operation(self, operator: Callable, operand: Self, sd_handling: Callable = None) -> Self:
-        """ Returns a new object formed from element-wise operation """
-        raise NotImplementedError('Common method of SpectralObject and PhotospectralObject')
+    def __add__(self, other) -> Self:
+        if isinstance(other, _TrueColorToolsObject):
+            return self.apply_element_wise_operation(other, aux.add_br, aux.add_sd)
+        else:
+            return self.apply_scalar_operation(other, aux.add_br, aux.add_sd)
     
-    def __mul__(self, other):
-        match other:
-            case int() | float() | np.ndarray():
-                return self.apply_linear_operator(mul, other)
-            case _SpectralObject() | _PhotospectralObject():
-                return self.apply_element_wise_operation(mul, other, aux.mul_sd_handling)
-            case _:
-                return NotImplemented
+    def __sub__(self, other) -> Self:
+        if isinstance(other, _TrueColorToolsObject):
+            return self.apply_element_wise_operation(other, aux.sub_br, aux.sub_sd)
+        else:
+            return self.apply_scalar_operation(other, aux.sub_br, aux.sub_sd)
     
-    def __truediv__(self, other):
-        match other:
-            case int() | float() | np.ndarray():
-                return self.apply_linear_operator(truediv, other)
-            case _SpectralObject() | _PhotospectralObject():
-                return self.apply_element_wise_operation(truediv, other, aux.div_sd_handling)
-            case _:
-                return NotImplemented
+    def __mul__(self, other) -> Self:
+        if isinstance(other, _TrueColorToolsObject):
+            return self.apply_element_wise_operation(other, aux.mul_br, aux.mul_sd)
+        else:
+            return self.apply_scalar_operation(other, aux.mul_br, aux.mul_sd)
+    
+    def __truediv__(self, other) -> Self:
+        if isinstance(other, _TrueColorToolsObject):
+            return self.apply_element_wise_operation(other, aux.div_br, aux.div_sd)
+        else:
+            return self.apply_scalar_operation(other, aux.div_br, aux.div_sd)
     
     def __matmul__(self, other: Self):
         """
@@ -307,49 +301,26 @@ class _TrueColorToolsObject:
             operand1 = other.define_on_range(self.nm, crop=False)
             operand2 = self.define_on_range(other.nm, crop=False)
         # other.define_on_range() reconstructed the PhotospectralObj to a some SpectralObj, so 4 options left:
-        if isinstance(operand1, Spectrum):
-            # Spectrum @ Spectrum
-            if isinstance(operand2, Spectrum):
-                br = aux.integrate(operand1.br * operand2.br, nm_step)
-                sd = aux.mul_sd_handling(operand1.br, operand1.sd, operand2.br, operand2.sd)
+        match (operand1, operand2):
+            case (_, Spectrum()):
+                br = aux.integrate(aux.mul_br(operand1.br, operand2.br), nm_step)
+                sd = aux.mul_sd(operand1.br, operand1.sd, operand2.br, operand2.sd)
                 if sd is not None:
                     sd = aux.integrate(sd, nm_step)
                 return br, sd
-            # Spectrum @ FilterSystem
-            elif isinstance(operand2, FilterSystem):
-                br = aux.integrate((operand2.br.T * operand1.br).T, nm_step)
-                try:
-                    sd = aux.mul_sd_handling(operand1.br, operand1.sd, operand2.br, operand2.sd)
-                except ValueError:
-                    raise ValueError
+            case (Spectrum(), FilterSystem()):
+                br = aux.integrate(aux.mul_br(operand1.br, operand2.br), nm_step)
+                sd = aux.mul_sd(operand1.br, operand1.sd, operand2.br, operand2.sd)
                 if sd is not None:
                     sd = aux.integrate(sd, nm_step)
                 return Photospectrum(operand2, br, sd, name=operand1.name)
-        elif isinstance(operand1, SpectralSquare):
-            # SpectralSquare @ Spectrum
-            if isinstance(operand2, Spectrum):
-                br = aux.integrate((operand1.br.T * operand2.br).T, nm_step)
-                sd = aux.mul_sd_handling(operand1.br, operand1.sd, operand2.br, operand2.sd)
-                if sd is not None:
-                    sd = aux.integrate(sd, nm_step)
-                return br, sd
-            # SpectralSquare @ FilterSystem
-            elif isinstance(operand2, FilterSystem):
+            case (SpectralSquare(), FilterSystem()):
                 br = aux.integrate(operand1.br[:, :, np.newaxis] * operand2.br[:, np.newaxis, :], nm_step).T
                 # TODO: uncertainty processing
                 return PhotospectralSquare(operand2, br, name=operand1.name)
-        elif isinstance(operand1, SpectralCube):
-            # SpectralCube @ Spectrum
-            if isinstance(operand2, Spectrum):
-                br = aux.integrate((operand1.br.T * operand2.br).T, nm_step)
-                sd = aux.mul_sd_handling(operand1.br, operand1.sd, operand2.br, operand2.sd)
-                if sd is not None:
-                    sd = aux.integrate(sd, nm_step)
-                return br, sd
-            # SpectralCube @ FilterSystem
-            # A loop-less implementation would require a 4D array,
-            # which most computers do not have enough memory for.
-            elif isinstance(operand2, FilterSystem):
+            case (SpectralCube(), FilterSystem()):
+                # A loop-less implementation would require a 4D array,
+                # which most computers do not have enough memory for.
                 br = np.empty((len(operand2), *operand1.shape))
                 #for i, profile in enumerate(operand2):
                 for i in range(len(operand2)):
@@ -357,7 +328,8 @@ class _TrueColorToolsObject:
                     br[i] = aux.integrate((operand1.br.T * profile).T, nm_step)
                 # TODO: uncertainty processing
                 return PhotospectralCube(operand2, br, name=operand1.name)
-        return NotImplemented
+            case _:
+                return NotImplemented
     
     def __hash__(self) -> int:
         """ Returns the hash value based on the object's name """
@@ -547,7 +519,7 @@ class _SpectralObject(_TrueColorToolsObject):
         """ Checks that the first and last brightness entries on the spectral axis are zero """
         return np.all(self.br[0] == 0) and np.all(self.br[-1] == 0)
     
-    def apply_element_wise_operation(self, operator: Callable, other: Self, sd_handling: Callable = None) -> Self:
+    def apply_element_wise_operation(self, other: _TrueColorToolsObject, br_handling: Callable, sd_handling: Callable) -> Self:
         """
         Returns a new SpectralObject formed from element-wise operation between SpectralObjects
         of the same nature or with a Spectrum.
@@ -556,24 +528,24 @@ class _SpectralObject(_TrueColorToolsObject):
         to the range of another, use the `define_on_range()` method.
         """
         if isinstance(other, _SpectralObject):
-            operand1, operand2 = (self, other) if self.ndim >= other.ndim else (other, self) # order is important
-            start = max(operand1.nm[0], operand2.nm[0])
-            end = min(operand1.nm[-1], operand2.nm[-1])
+            higher_dim = (self, other)[self.ndim < other.ndim]
+            start = max(self.nm[0], other.nm[0])
+            end = min(self.nm[-1], other.nm[-1])
             if start > end: # `>` is needed to process operations with stub objects with no extra logs
-                the_first = operand2.name
-                the_second = operand2.name
-                if operand1.nm[0] > operand2.nm[0]:
+                the_first = other.name
+                the_second = other.name
+                if self.nm[0] > other.nm[0]:
                     the_first, the_second = the_second, the_first
-                print(f'# Note for SpectralObject element-wise operation "{operator.__name__}"')
+                print(f'# Note for SpectralObject element-wise operation "{br_handling.__name__}"')
                 print(f'- "{the_first}" ends on {end} nm and "{the_second}" starts on {start} nm.')
                 print('- There is no intersection between the spectra. SpectralObject stub object was created.')
-                return operand1.__class__.stub(operand1.name)
+                return higher_dim.__class__.stub(self.name)
             else:
-                br1 = operand1.get_br_in_range(start, end)
-                br2 = operand2.get_br_in_range(start, end)
-                br = operator(br1, br2) if operand1.ndim == operand2.ndim else operator(br1.T, br2).T
-                sd = sd_handling(br1, operand1.get_sd_in_range(start, end), br2, operand2.get_sd_in_range(start, end))
-                return operand1.__class__(aux.grid(start, end, nm_step), br, sd, name=operand1.name)
+                br1 = self.get_br_in_range(start, end)
+                br2 = other.get_br_in_range(start, end)
+                br = br_handling(br1, br2)
+                sd = sd_handling(br1, self.get_sd_in_range(start, end), br2, other.get_sd_in_range(start, end))
+                return higher_dim.__class__(aux.grid(start, end, nm_step), br, sd, name=higher_dim.name)
         else:
             return NotImplemented
 
@@ -691,15 +663,15 @@ class Spectrum(_SpectralObject):
             extrapolated = self.photospectrum.define_on_range(nm_arr, crop)
         return extrapolated
     
-    def apply_linear_operator(self, operator: Callable, operand: int|float|np.ndarray):
+    def apply_scalar_operation(self, operand, br_handling: Callable, sd_handling: Callable):
         """
         Returns a new object of the same class transformed according to the linear operator.
         Operand is assumed to be a number or an array along the spectral axis.
         Linearity is needed because values and uncertainty are handled uniformly.
         """
-        output = super().apply_linear_operator(operator, operand)
+        output = super().apply_scalar_operation(operand, br_handling, sd_handling)
         if output.photospectrum is not None:
-            output.photospectrum = operator(output.photospectrum, operand)
+            output.photospectrum = output.photospectrum.apply_scalar_operation(operand, br_handling, sd_handling)
         return output
 
 
@@ -1058,7 +1030,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
             print(f'- More precisely, {format_exc(limit=0).strip()}')
             return target_class.stub(self.name)
 
-    def apply_element_wise_operation(self, operator: Callable, other: _TrueColorToolsObject, sd_handling: Callable = None) -> Self:
+    def apply_element_wise_operation(self, other: _TrueColorToolsObject, br_handling: Callable, sd_handling: Callable) -> Self:
         """
         Returns a new PhotospectralObject formed from element-wise operation with
         a SpectralObject or another PhotospectralObject. Operations between objects
@@ -1067,17 +1039,14 @@ class _PhotospectralObject(_TrueColorToolsObject):
         The filter system of the second object, if it does not match, is converted
         to the filter system of the first object!
         """
-        if isinstance(other, _SpectralObject | _PhotospectralObject):
-            filter_system = self.filter_system
-            if isinstance(other, _SpectralObject) or (isinstance(other, _PhotospectralObject) and other.filter_system != filter_system):
-                # Converting to a PhotospectralObject of the same filter system
-                other = other @ filter_system
-            operand1, operand2 = (self, other) if self.ndim >= other.ndim else (other, self) # order is important
-            br = operator(operand1.br, other.br) if operand1.ndim == operand2.ndim else operator(operand1.br.T, operand2.br).T
-            sd = sd_handling(operand1.br, operand1.sd, operand2.br, operand2.sd)
-            return operand1.__class__(filter_system, br, sd, name=operand1.name)
-        else:
-            return NotImplemented
+        filter_system = self.filter_system
+        if isinstance(other, _SpectralObject) or (isinstance(other, _PhotospectralObject) and other.filter_system != filter_system):
+            # Converting to a PhotospectralObject of the same filter system
+            other = other @ filter_system
+        br = br_handling(self.br, other.br)
+        sd = sd_handling(self.br, self.sd, other.br, other.sd)
+        higher_dim = (self, other)[self.ndim < other.ndim]
+        return higher_dim.__class__(filter_system, br, sd, name=higher_dim.name)
 
 
 stub_filter_system = FilterSystem.from_list(('Generic_Bessell.B', 'Generic_Bessell.V'))

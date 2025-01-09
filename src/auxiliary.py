@@ -308,12 +308,32 @@ def extrapolating(x: np.ndarray, y: np.ndarray, sd: np.ndarray, x_arr: np.ndarra
             x = np.append(x, x1)
             y = np.append(y, y1, axis=0)
             sd = np.append(sd, sd1, axis=0)
+    if sd.sum() == 0:
+        sd = None
     return x, y, sd
 
 
-def linear_sd_handling(br1, sd1, br2, sd2):
+def make_same_ndim(arr1: np.ndarray, arr2: np.ndarray):
+    """ Equalizes the arrays dimensions along spatial axes to make it possible to broadcast """
+    if (ndim_delta := arr2.ndim - arr1.ndim) != 0:
+        if ndim_delta > 0:
+            arr1 = arr1.reshape(arr1.shape + (1,)*ndim_delta)
+        else:
+            arr2 = arr2.reshape(arr2.shape + (1,)*(-ndim_delta))
+    return arr1, arr2
+
+def add_br(br1, br2):
     """
-    Calculates the standard deviation of the sum or difference.
+    Calculates the value of the sum.
+    The input can be a numeric or a (multidimensional) numpy array.
+    """
+    if isinstance(br1, np.ndarray) and isinstance(br2, np.ndarray):
+        br1, br2 = make_same_ndim(br1, br2)
+    return br1 + br2
+
+def add_sd(br1, sd1, br2, sd2):
+    """
+    Calculates the standard deviation of the sum.
     The input can be a numeric or a (multidimensional) numpy array.
     """
     if sd1 is None:
@@ -321,14 +341,41 @@ def linear_sd_handling(br1, sd1, br2, sd2):
     elif sd2 is None:
         return sd1
     else:
-        if isinstance(sd1, np.ndarray) and isinstance(sd2, np.ndarray) and (ndim_delta := sd2.ndim - sd1.ndim) != 0:
-            if ndim_delta > 0:
-                sd1 = sd1.reshape(sd1.shape + (1,)*ndim_delta)
-            else:
-                sd2 = sd2.reshape(sd2.shape + (1,)*(-ndim_delta))
+        if isinstance(sd1, np.ndarray) and isinstance(sd2, np.ndarray):
+            sd1, sd2 = make_same_ndim(sd1, sd2)
         return np.sqrt(sd1**2 + sd2**2)
 
-def mul_sd_handling(br1, sd1, br2, sd2):
+def sub_br(br1, br2):
+    """
+    Calculates the value of the difference.
+    The input can be a numeric or a (multidimensional) numpy array.
+    """
+    if isinstance(br1, np.ndarray) and isinstance(br2, np.ndarray):
+        br1, br2 = make_same_ndim(br1, br2)
+    return br1 + br2
+
+def sub_sd(br1, sd1, br2, sd2):
+    """
+    Calculates the standard deviation of the difference.
+    The input can be a numeric or a (multidimensional) numpy array.
+    """
+    return add_sd(br1, sd1, br2, sd2)
+
+def mul_br(br1, br2):
+    """
+    Calculates the value of the product.
+    The input can be a numeric or a (multidimensional) numpy array.
+    """
+    try:
+        # Numeric and same-ndim numpy arrays cases
+        return br1 * br2
+    except ValueError:
+        # Different ndim case
+        if isinstance(br1, np.ndarray) and isinstance(br2, np.ndarray) and br2.ndim > br1.ndim:
+            br1, br2 = br2, br1
+        return (br1.T * br2).T
+
+def mul_sd(br1, sd1, br2, sd2):
     """
     Calculates the standard deviation of the product.
     The input can be a numeric or a (multidimensional) numpy array.
@@ -340,16 +387,23 @@ def mul_sd_handling(br1, sd1, br2, sd2):
             sd1 = np.zeros_like(br1)
         if sd2 is None:
             sd2 = np.zeros_like(br2)
-        try:
-            # Numeric and same-ndim numpy arrays cases
-            return np.sqrt((br1 * sd2)**2 + (sd1 * br2)**2 + (sd1 * sd2)**2)
-        except ValueError:
-            # Different ndim case
-            if isinstance(br1, np.ndarray) and isinstance(br2, np.ndarray) and br2.ndim > br1.ndim:
-                br1, sd1, br2, sd2 = br2, sd2, br1, sd1
-            return np.sqrt((br1.T * sd2).T**2 + (sd1.T * br2).T**2 + (sd1.T * sd2).T**2)
+        return np.sqrt(mul_br(br1, sd2)**2 + mul_br(br2, sd1)**2 + mul_br(sd1, sd2)**2)
 
-def div_sd_handling(br1, sd1, br2, sd2):
+def div_br(br1, br2):
+    """
+    Calculates the value of the private.
+    The input can be a numeric or a (multidimensional) numpy array.
+    """
+    try:
+        # Numeric and same-ndim numpy arrays cases
+        return br1 / br2
+    except ValueError:
+        # Different ndim case
+        if isinstance(br1, np.ndarray) and isinstance(br2, np.ndarray) and br2.ndim > br1.ndim:
+            br1, br2 = br2, br1
+        return (br1.T / br2).T
+
+def div_sd(br1, sd1, br2, sd2):
     """
     Calculates the standard deviation of the private.
     The input can be a numeric or a (multidimensional) numpy array.
@@ -361,14 +415,7 @@ def div_sd_handling(br1, sd1, br2, sd2):
             sd1 = np.zeros_like(br1)
         if sd2 is None:
             sd2 = np.zeros_like(br2)
-        try:
-            # Numeric and same-ndim numpy arrays cases
-            return np.sqrt((br1 * sd2)**2 + (sd1 * br2)**2 + (sd1 * sd2)**2) / br2**2
-        except ValueError:
-            # Different ndim case
-            if isinstance(br1, np.ndarray) and isinstance(br2, np.ndarray) and br2.ndim > br1.ndim:
-                br1, sd1, br2, sd2 = br2, sd2, br1, sd1
-            return (np.sqrt((br1.T * sd2).T**2 + (sd1.T * br2).T**2 + (sd1.T * sd2).T**2).T / br2**2).T
+        return div_br(mul_sd(br1, sd1, br2, sd2), br2**2)
 
 
 # Blackbody spectra
