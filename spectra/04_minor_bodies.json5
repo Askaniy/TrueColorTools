@@ -3365,7 +3365,7 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.079, +0.266, -0.040]], // fixed η
     },
-    '(469705) Kagara | Boehnhardt2014, Müller2020': {
+    '(469705) ǂKá̦gára | Boehnhardt2014, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.44, 0.04], 'V-R': [0.57, 0.04], 'R-I': [0.70, 0.03]},
