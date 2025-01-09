@@ -46,7 +46,7 @@ def launch_window(lang: str):
     # Launching the main window
     sg.theme('MaterialDark')
     window0 = sg.Window(
-        'TrueColorTools', icon=icon, finalize=True, resizable=True, margins=(0, 0), size=(1000, 640),
+        'TrueColorTools', icon=icon, finalize=True, resizable=True, margins=(0, 0), size=(1120, 640),
         layout=gui.generate_layout(
             (2*circle_r+1, 2*circle_r+1), img_preview_size, text_colors, filtersDB, srgb, brMax, brGeom, bitness, rounding, T2_num, lang
         )
@@ -264,7 +264,12 @@ def launch_window(lang: str):
                     window['T1_graph'].TKCanvas.itemconfig(T1_preview, fill=T1_rgb_show)
                     window['T1_rgb'].update(T1_rgb)
                     window['T1_hex'].update(T1_rgb_show)
-                    window['T1_convolved'].update(sigfig_round((T1_spectrum@get_filter(values['T1_filter']))[0], rounding, warn=False))
+                    T1_value, T1_sd = T1_spectrum @ get_filter(values['T1_filter'])
+                    if T1_sd is None:
+                        window['T1_convolved'].update(sigfig_round(T1_value, rounding, warn=False))
+                    else:
+                        window['T1_convolved'].update(sigfig_round(T1_value, uncertainty=T1_sd, warn=False))
+
 
                     # Green Dinkinesh Easter egg (added by request)
                     # There was a bug in TCT v3.3 caused by upper limit of uint16 when squaring nm for AB calibration
