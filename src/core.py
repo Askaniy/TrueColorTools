@@ -513,6 +513,7 @@ class _SpectralObject(_TrueColorToolsObject):
             end = min(extrapolated.nm[-1], nm_arr[-1])
             extrapolated.br = extrapolated.get_br_in_range(start, end)
             extrapolated.sd = extrapolated.get_sd_in_range(start, end)
+            extrapolated.nm = aux.grid(start, end, nm_step)
         return extrapolated
     
     def is_edges_zeroed(self) -> bool:
@@ -1023,6 +1024,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
                 end = min(nm1[-1], nm_arr[-1])
                 spectral_obj.br = spectral_obj.get_br_in_range(start, end)
                 spectral_obj.sd = spectral_obj.get_sd_in_range(start, end)
+                spectral_obj.nm = aux.grid(start, end, nm_step)
             return spectral_obj
         except ZeroDivisionError:
             print(f'# Note for the PhotospectralObject "{self.name}"')

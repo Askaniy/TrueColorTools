@@ -229,8 +229,8 @@ def generate_layout(
         ],
         [sg.T()],
         [
-            sg.Text(tr.gui_mag[lang], size=18, text_color=text_colors[0], justification='right', key='T3_mag'),
-            sg.Slider(range=(-50, 0), default_value=-26.7, resolution=0.1, orientation='h', size=slider_size, enable_events=True, disabled=True, key='T3_slider4', expand_x=True)
+            sg.Text(tr.gui_mag[lang], size=18, text_color=text_colors[not brMax], justification='right', key='T3_mag'),
+            sg.Slider(range=(-50, 0), default_value=-26.7, resolution=0.1, orientation='h', size=slider_size, enable_events=True, disabled=brMax, key='T3_slider4', expand_x=True)
         ],
         [sg.Text(tr.gui_mag_note[lang], key='T3_mag_note')],
     ]
