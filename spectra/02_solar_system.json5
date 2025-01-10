@@ -271,8 +271,12 @@
     'Phobos (M I) | Pajola2013, Fornasier2024': {
         tags: ['featured', 'Solar System', 'natural satellite/regular moon'],
         filters: [
-            245.5, 258.0, 263.5, 295.0, 308.5, 355.0, 360.0, 374.5, 387.0, 480.0, 535.0,
-            571.0, 589.5, 611.5, 650.5, 700.5, 742.5, 804.5, 882.5, 932.0, 992.0
+            'Rosetta_OSIRIS_WAC.UV245', 'Rosetta_OSIRIS_WAC.CS', 'Rosetta_OSIRIS_NAC.Far_UV', 'Rosetta_OSIRIS_WAC.UV295',
+            'Rosetta_OSIRIS_WAC.OH', 'Rosetta_OSIRIS_WAC.NH', 'Rosetta_OSIRIS_NAC.Near_UV', 'Rosetta_OSIRIS_WAC.UV375',
+            'Rosetta_OSIRIS_WAC.CN', 'Rosetta_OSIRIS_NAC.Blue', 'Rosetta_OSIRIS_NAC.Green', 'Rosetta_OSIRIS_WAC.NH2',
+            'Rosetta_OSIRIS_WAC.NA', 'Rosetta_OSIRIS_WAC.VIS610', 'Rosetta_OSIRIS_NAC.Orange', 'Rosetta_OSIRIS_NAC.Hydra',
+            'Rosetta_OSIRIS_NAC.Red', 'Rosetta_OSIRIS_NAC.Ortho', 'Rosetta_OSIRIS_NAC.Near_IR', 'Rosetta_OSIRIS_NAC.Fe2O3',
+            'Rosetta_OSIRIS_NAC.IR'
         ],
         br: [
             0.01305, 0.01312, 0.01484, 0.01489, 0.01699, 0.01766, 0.02037, 0.02137, 0.02177, 0.02641, 0.02769,
@@ -550,7 +554,8 @@
     ],
     'Aegaeon (S LIII) | Hedman2020, Thomas2013': { // phase angle 48.2°
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
-        nm: [343, 455, 569, 649, 928],
+        photometric_system: 'Cassini_ISS_NAC',
+        filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR3'],
         br: [0.0865, 0.1181, 0.1342, 0.1406, 0.1551],
         geometric_albedo: [611, [0.25, 0.23]]
     },
@@ -564,7 +569,8 @@
     // Alkyonides
     'Methone (S XXXII) | Ciarniello2024, Thomas2013': { // phase angle 50°
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
-        nm: [342.7, 452.7, 567.2, 647.4, 748.4, 859.2, 926.0, 998.4],
+        photometric_system: 'Cassini_ISS_NAC',
+        filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR2', 'IR3', 'IR4'],
         br: [0.878, 1.000, 1.000, 1.015, 1.032, 1.031, 1.011, 0.927],
         geometric_albedo: [611, [0.57, 0.05]],
     },
