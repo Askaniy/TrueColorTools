@@ -200,23 +200,28 @@ class _TrueColorToolsObject:
         """ Returns the spatial axes shape: number of filters or (width, height) """
         return self.br.shape[1:]
     
+    @staticmethod
+    def stub(name=None):
+        """ Initializes an object in case of the data problems """
+        raise NotImplementedError('Implemented in the inherited classes of SpectralObject and PhotospectralObject.')
+    
     def convert_from_photon_spectral_density(self):
         """
         Returns a new TrueColorToolsObject converted from photon spectral density
         to energy spectral density, using the fact that E = h c / λ.
         """
-        raise NotImplementedError('Implemented in classes SpectralObject and PhotospectralObject, use them instead.')
+        raise NotImplementedError('Implemented in the classes SpectralObject and PhotospectralObject.')
     
     def convert_from_frequency_spectral_density(self):
         """
         Returns a new TrueColorToolsObject converted from frequency spectral density
         to energy spectral density, using the fact that f_λ = f_ν c / λ².
         """
-        raise NotImplementedError('Implemented in classes SpectralObject and PhotospectralObject, use them instead.')
+        raise NotImplementedError('Implemented in classes SpectralObject and PhotospectralObject.')
     
     def define_on_range(self, nm_arr: np.ndarray, crop: bool = False):
         """ Returns a new SpectralObject with a guarantee of definition on the requested wavelength array """
-        raise NotImplementedError('Implemented in classes SpectralObject and PhotospectralObject, use them instead.')
+        raise NotImplementedError('Implemented in classes SpectralObject and PhotospectralObject.')
     
     def scaled_at(self, where, how: int|float = 1, sd: int|float = None):
         """
@@ -1010,9 +1015,9 @@ class _PhotospectralObject(_TrueColorToolsObject):
                     # Confidence bands for spectral squares and cubes are not computed to save computational resources
                     A_inv = np.linalg.inv(A)
                     sd1 = np.sqrt(np.diag(A_inv @ T.T @ np.diag(sd0**2) @ T @ A_inv))
-                    # An attempt to account for the sensitivity confidence band of the method:
-                    # sd1 = np.sqrt(sd1**2 + np.diag(A_inv) * 0.00001)
-                    # sqrt(diag(A_inv)) gives sensitivity sd, which was 10⁵ times higher than measurement sd in tests
+                    # An attempt to account for the sensitivity confidence band of the method
+                    sd1 = np.sqrt(sd1**2 + (0.01 * np.median(br1))**2 * np.diag(A_inv))
+                    # TODO: needs research, `0.01 * np.median(br1)` sd scale factor selected manually
             if self.ndim == 1:
                 # Retain the photometric data for the resulting spectral object.
                 spectral_obj = Spectrum(nm1, br1, sd1, name=self.name, photospectrum=deepcopy(self))
