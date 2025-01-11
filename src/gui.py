@@ -19,10 +19,10 @@ inputOFF_color = '#3A3A3A'
 
 # FreeSimpleGUI custom theme
 sg.LOOK_AND_FEEL_TABLE['MaterialDark'] = {
-        'BACKGROUND': bg_color, 'TEXT': text_color,
-        'INPUT': inputON_color, 'TEXT_INPUT': text_color, 'SCROLL': inputON_color,
-        'BUTTON': (text_color, main_color), 'PROGRESS': ('#000000', '#000000'),
-        'BORDER': 0, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0
+    'BACKGROUND': bg_color, 'TEXT': text_color,
+    'INPUT': inputON_color, 'TEXT_INPUT': text_color, 'SCROLL': inputON_color,
+    'BUTTON': (text_color, main_color), 'PROGRESS': ('#000000', '#000000'),
+    'BORDER': 0, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0
 }
 
 def create_logger(window: sg.Window, key: str) -> Callable:

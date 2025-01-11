@@ -582,9 +582,11 @@ def color_indices_parser(indices: dict):
         else:
             filters |= {bluer_filter: filters[redder_filter] + mag}
     irradiance = mag2irradiance(np.array(tuple(filters.values())))
+    filter_names = filters.keys() # name setting before using the variable for sd processing
     sd = None
     # Uncertainty calculation
     if uncertainty_flag:
+        success = False
         shot_noise_factor = np.sqrt(irradiance) # common Poisson noise factor
         old_sd_of_sd = np.inf
         for sd_assumed in np.linspace(0, sd0, 1001):
@@ -606,6 +608,7 @@ def color_indices_parser(indices: dict):
                     impossible_assumption = True
                     break
             if not impossible_assumption:
+                success = True
                 new_sd = sd_mag2sd_irradiance(np.array(tuple(filters.values())), irradiance)
                 # Finding the minimum deviation between sd as solution quality criterion
                 # The standard deviations are scaled by the Poisson noise factor
@@ -619,7 +622,9 @@ def color_indices_parser(indices: dict):
                     # in the last iteration and they started to diverge
                     sd = old_sd
                     break
-    return filters.keys(), irradiance, sd
+        if not success:
+            sd = None
+    return filter_names, irradiance, sd
 
 def phase_function2phase_integral(name: str, params: dict):
     """ Determines phase integral from the phase function """
