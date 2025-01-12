@@ -128,6 +128,21 @@
         'DOI: 10.1093/mnrsdl/slad018', 'https://academic.oup.com/mnrasl/article/521/1/L29/7036802',
         'https://ui.adsabs.harvard.edu/abs/2023MNRAS.521L..29B/abstract'
     ],
+    'Masiero2011': [
+        'Main Belt Asteroids with WISE/NEOWISE. I. Preliminary Albedos and Diameters',
+        'DOI: 10.1088/0004-637X/741/2/68', 'https://iopscience.iop.org/article/10.1088/0004-637X/741/2/68',
+        'https://ui.adsabs.harvard.edu/abs/2011ApJ...741...68M/abstract'
+    ],
+    'Bauer2012': [
+        'WISE/NEOWISE Observations of Active Bodies in the Main Belt',
+        'DOI: 10.1088/0004-637X/747/1/49', 'https://iopscience.iop.org/article/10.1088/0004-637X/747/1/49',
+        'https://ui.adsabs.harvard.edu/abs/2012ApJ...747...49B'
+    ],
+    'Ieva2020': [
+        'Extended photometric survey of near-Earth objects',
+        'DOI: 10.1051/0004-6361/202038968', 'https://www.aanda.org/articles/aa/full_html/2020/12/aa38968-20/aa38968-20.html',
+        'https://ui.adsabs.harvard.edu/abs/2020A%26A...644A..23I/abstract'
+    ],
 
     'Li2019': [
         'Spectrophotometric modeling and mapping of Ceres',
@@ -612,13 +627,13 @@
         'DOI: 10.1051/0004-6361/202346749', 'https://www.aanda.org/articles/aa/full_html/2023/08/aa46749-23/aa46749-23.html',
         'https://ui.adsabs.harvard.edu/abs/2023A%26A...676A..72B/abstract'
     ],
-    '(2060) Chiron | SMASS, BragaRibas2023': {
-        tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur'],
+    '(2060) Chiron | SMASS, BragaRibas2023': { // 95P/Chiron
+        tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
         file: 'spectra/files/SMASS/a002060.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.076, 0.026]],
     },
-    '(2060) Chiron | MBOSS, BragaRibas2023': {
-        tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
+    '(2060) Chiron | MBOSS, BragaRibas2023': { // 95P/Chiron
+        tags: ['MBOSS', 'Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.660, 'V-R': 0.359, 'R-I': 0.324},
         calibration_system: 'Vega',
@@ -680,7 +695,7 @@
         'https://ui.adsabs.harvard.edu/abs/2023PASJ...75..297B/abstract'
     ],
     '(3200) Phaethon | SMASS, Geem2022, Beniyama2023': {
-        tags: ['featured', 'SMASS', 'Solar System', 'minor body/asteroid/NEO/Apollo'],
+        tags: ['featured', 'SMASS', 'Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/asteroid/active asteroid'],
         file: 'spectra/files/SMASS/a003200.8.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.10], // "Note added in proof" section
         phase_function: ['HG', {H: [14.23, 0.02], G: [0.040, 0.008]}]
@@ -708,6 +723,15 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.003]],
         phase_function: ['HG1G2', {H: [9.800, 0.007], G_1: [0.862, 0.019], G_2: [-0.028, 0.011]}]
+    },
+    '(4015) Wilson-Harrington | MBOSS, SsODNet': { // 107P/Wilson-Harrington
+        tags: ['MBOSS', 'Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/asteroid/active asteroid', 'minor body/comet/short period comet'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': 0.674, 'V-R': 0.361},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.0357, 0.0087]],
+        phase_function: ['HG1G2', {H: [15.743640, +0.172932, -0.200737], G_1: [0.639157, +0.245119, -0.324135], G_2: [0.101285, +0.094526, -0.077950]}]
     },
     '(4035) Thestor | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -809,6 +833,20 @@
         color_indices: {'B-V': 0.713, 'V-R': 0.417, 'R-I': 0.397},
         calibration_system: 'Vega',
         sun_is_emitter: true
+    },
+    'Hsieh2010': [
+        'The return of activity in main-belt comet 133P/Elst-Pizarro',
+        'DOI: 10.1111/j.1365-2966.2009.16120.x', 'https://academic.oup.com/mnras/article/403/1/363/1018871',
+        'https://ui.adsabs.harvard.edu/abs/2010MNRAS.403..363H/abstract'
+    ],
+    '(7968) Elst-Pizarro | Hsieh2010, Bauer2012': { // 133P/Elst-Pizarro
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'minor body/asteroid/active asteroid', 'minor body/comet/short period comet'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.65, 0.03], 'V-R': [0.36, 0.01], 'R-I': [0.32, 0.01]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.060, 0.020]],
+        phase_function: ['HG', {H: [15.49, 0.05], G: [0.04, 0.05]}]
     },
     '(8405) Asbolus | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -1766,8 +1804,8 @@
         'DOI: 10.1093/mnras/stad3318', 'https://academic.oup.com/mnras/article/527/2/3624/7332922',
         'https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.3624P/abstract'
     ],
-    '(60558) Echeclus | MBOSS, Pereira2024': {
-        tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
+    '(60558) Echeclus | MBOSS, Pereira2024': { // 174P/Echeclus
+        tags: ['MBOSS', 'Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.841, 'V-R': 0.502, 'R-I': 0.486},
         calibration_system: 'Vega',
@@ -1795,6 +1833,20 @@
         color_indices: {'B-V': 0.750, 'V-R': 0.480, 'R-I': 0.500},
         calibration_system: 'Vega',
         sun_is_emitter: true
+    },
+    'Sheppard2015': [
+        'DISCOVERY AND CHARACTERISTICS OF THE RAPIDLY ROTATING ACTIVE ASTEROID (62412) 2000 SY178 IN THE MAIN BELT',
+        'DOI: 10.1088/0004-6256/149/2/44', 'https://iopscience.iop.org/article/10.1088/0004-6256/149/2/44/meta',
+        'https://ui.adsabs.harvard.edu/abs/2015AJ....149...44S/abstract'
+    ],
+    '(62412) 2000 SY178 | Sheppard2015, Masiero2011, SsODNet': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'minor body/asteroid/active asteroid'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.43, 0.02], 'r-i': [0.14, 0.02], 'i-z': [-0.01, 0.02]},
+        calibration_system: 'AB',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.0653, 0.0097]],
+        phase_function: ['HG1G2', {H: [13.568758, +0.198775, -0.257261], G_1: [0.775677, +0.393410, -0.581384], G_2: [0.007084, +0.254510, -0.188063]}]
     },
     '(63252) 2001 BL41 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -1905,6 +1957,15 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.049, 0.006]],
+    },
+    '(76146) 2000 EU16 | SsODNet': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'minor body/quasi satellite'],
+        photometric_system: 'SkyMapper_SkyMapper',
+        color_indices: {'g-r': [0.3893, 0.0064], 'r-i': [0.2386, 0.0059], 'i-z': [0.0276, 0.0162]},
+        calibration_system: 'AB',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.2447, 0.1658]],
+        phase_function: ['HG1G2', {H: [14.128028, +0.148529, -0.171874], G_1: [0.333182, +0.245500, -0.312091], G_2: [0.335628, +0.139951, -0.127784]}]
     },
     '(76804) 2000 QE | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -2172,14 +2233,14 @@
         'https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..117L/abstract'
     ],
     '(101955) Bennu | LeCorre2019, Li2021': {
-        tags: ['featured', 'Solar System', 'minor body/asteroid/NEO/Apollo'],
+        tags: ['featured', 'Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/asteroid/active asteroid'],
         photometric_system: 'OSIRIS-REX_MapCam',
         filters: ['Bf', 'Vf', 'Wf', 'Xf'],
         br_spherical: [0.0175, 0.01736, 0.0174, 0.01727],
         geometric_albedo: ['OSIRIS-REX_MapCam.Vf', [0.046, 0.007]],
     },
     '(101955) Bennu: Dark boulder terrain | LeCorre2019': {
-        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo'],
+        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/asteroid/active asteroid'],
         photometric_system: 'OSIRIS-REX_MapCam',
         filters: ['Bf', 'Vf', 'Wf', 'Xf'],
         br_spherical: [0.01604, 0.01573, 0.016, 0.01605],
@@ -2212,6 +2273,20 @@
         color_indices: {'B-V': 0.894, 'V-R': 0.490, 'R-I': 0.343},
         calibration_system: 'Vega',
         sun_is_emitter: true
+    },
+    'Hsieh2011': [
+        'PHYSICAL PROPERTIES OF MAIN-BELT COMET 176P/LINEAR',
+        'DOI: 10.1088/0004-6256/142/1/29', 'https://iopscience.iop.org/article/10.1088/0004-6256/142/1/29',
+        'https://ui.adsabs.harvard.edu/abs/2011AJ....142...29H/abstract'
+    ],
+    '(118401) LINEAR | Hsieh2011, Bauer2012': { // 176P/LINEAR
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'minor body/asteroid/active asteroid', 'minor body/comet/short period comet'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.63, 0.02], 'V-R': [0.35, 0.02], 'R-I': [0.31, 0.04]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.070, 0.030]],
+        phase_function: ['HG', {H: [15.10, 0.05], G: [0.15, 0.10]}]
     },
     '(118702) 2000 OM67 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/detached TNO'],
@@ -2764,6 +2839,14 @@
         color_indices: {'B-V': 0.690, 'V-R': 0.382, 'R-I': 0.360},
         calibration_system: 'Vega',
         sun_is_emitter: true
+    },
+    '(164207) 2004 GU9 | Ieva2020, SsODNet': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/quasi satellite'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.87, 0.10], 'V-I': [0.71, 0.12]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.2242, 0.0468]],
     },
     '(168703) 2000 GP183 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
@@ -3321,6 +3404,15 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    'Sharkey2021': [
+        'Lunar-like silicate material forms the Earth quasi-satellite (469219) 2016 HO3 Kamo‘oalewa',
+        'DOI: 10.1038/s43247-021-00303-7', 'https://www.nature.com/articles/s43247-021-00303-7',
+        'https://ui.adsabs.harvard.edu/abs/2021ComEE...2..231S/abstract'
+    ],
+    '(469219) Kamo‘oalewa | Sharkey2021': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/quasi satellite'],
+        file: 'spectra/files/quasi_lbt_vis_spectrum.txtU'
+    },
     '(469306) 1999 CD158 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO'],
         photometric_system: 'Generic_Bessell',
@@ -3645,6 +3737,17 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.191, +0.066, -0.045]],
+    },
+    'Hicks2010': [
+        'Broadband photometry of 2002 VE68, a quasi-moon of Venus.',
+        'https://www.astronomerstelegram.org/?read=3073', 'https://ui.adsabs.harvard.edu/abs/2010ATel.3073....1H/abstract'
+    ],
+    '(524522) Zoozve | Hicks2010': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Aten', 'minor body/quasi satellite'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-R': [1.106, 0.019], 'V-R': [0.419, 0.021], 'R-I': [0.348, 0.014]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
     },
     '(524834) 2003 YL179 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
@@ -4786,14 +4889,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '107P/Wilson–Harrington | MBOSS': {
-        tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.674, 'V-R': 0.361},
-        calibration_system: 'Vega',
-        sun_is_emitter: true
-    },
-    '114P/Wiseman–Skiff | MBOSS': {
+   '114P/Wiseman–Skiff | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.850, 'V-R': 0.460, 'R-I': 0.540},
@@ -4807,12 +4903,26 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    'Donaldson2023': [
+        'Characterizing the nucleus of comet 162P/Siding-Spring using ground-based photometry',
+        'DOI: 10.1093/mnras/stad616', 'https://academic.oup.com/mnras/article/521/1/1518/7059218',
+        'https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.1518D/abstract'
+    ],
+    '162P/Siding-Spring | Donaldson2023': {
+        tags: ['Solar System', 'minor body/comet/short period comet'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.48, 0.04]},
+        calibration_system: 'AB',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.021, 0.002]],
+        phase_function: ['HG', {H: [13.694, 0.022], G: [0.094, 0.025]}]
+    },
     'Jewitt2009': [
         'The Active Centaurs',
         'DOI: 10.1088/0004-6256/137/5/4296', 'https://ui.adsabs.harvard.edu/abs/2009AJ....137.4296J/abstract'
     ],
     '166P/NEAT | Jewitt2009': {
-        tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
+        tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet', 'minor body/centaur/active centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.870, 'V-R': 0.695, 'R-I': 0.735},
         calibration_system: 'Vega',
@@ -4823,19 +4933,44 @@
         'DOI: 10.1088/0004-6256/150/6/201', 'https://ui.adsabs.harvard.edu/abs/2015AJ....150..201J/abstract'
     ],
     '166P/NEAT | Jewitt2015': {
-        tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet'],
+        tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet', 'minor body/centaur/active centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.890, 'V-R': 0.560},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     '167P/CINEOS | MBOSS, Müller2020': {
-        tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet'],
+        tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet', 'minor body/centaur/active centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': 0.758, 'V-R': 0.516, 'R-I': 0.504},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.053, 0.019]],
+    },
+    'Hsieh2009': [
+        'Physical Properties of Main-Belt Comet P/2005 U1 (Read)',
+        'DOI: 10.1088/0004-6256/137/1/157', 'https://iopscience.iop.org/article/10.1088/0004-6256/137/1/157',
+        'https://ui.adsabs.harvard.edu/abs/2009AJ....137..157H/abstract'
+    ],
+    '238P/Read: Coma particle dominated | Hsieh2009': {
+        tags: ['Solar System', 'minor body/comet/short period comet', 'minor body/asteroid/active asteroid'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.63, 0.05], 'V-R': [0.37, 0.04], 'R-I': [0.39, 0.04]}, // approximately solar but is likely dominated by coma particles
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    'Hainaut2014': [
+        'Continued activity in P/2013 P5 PANSTARRS. Unexpected comet, rotational break-up, or rubbing binary asteroid?',
+        'DOI: 10.1051/0004-6361/201322864', 'https://www.aanda.org/articles/aa/full_html/2014/03/aa22864-13/aa22864-13.html',
+        'https://ui.adsabs.harvard.edu/abs/2014A%26A...563A..75H/abstract'
+    ],
+    '311P/PanSTARRS: Upper limit albedo | Hainaut2014': {
+        tags: ['Solar System', 'minor body/comet/short period comet', 'minor body/asteroid/main belt', 'minor body/asteroid/active asteroid'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.58, 0.05], 'r-i': [0.23, 0.06]},
+        calibration_system: 'AB',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.25, 0.01]], // upper limit, contaminated by coma
     },
 
     // Non-periodic comets
@@ -5130,6 +5265,18 @@
         photometric_system: 'SLOAN_SDSS',
         calibration_system: 'AB',
         color_indices: {'g-r': 0.47, 'r-i': 0.36},
+        sun_is_emitter: true,
+    },
+    'Hui2020': [
+        'Physical Characterisation of Interstellar Comet 2I/2019 Q4 (Borisov)',
+        'DOI: 10.48550/arXiv.2003.14064', 'https://arxiv.org/abs/2003.14064',
+        'https://ui.adsabs.harvard.edu/abs/2020arXiv200314064H/abstract'
+    ],
+    '2I/Borisov | Hui2020': {
+        tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.68, 0.04], 'r-i': [0.23, 0.03]},
+        calibration_system: 'AB',
         sun_is_emitter: true,
     },
 }
