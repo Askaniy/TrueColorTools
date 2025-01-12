@@ -1835,7 +1835,7 @@
         sun_is_emitter: true
     },
     'Sheppard2015': [
-        'DISCOVERY AND CHARACTERISTICS OF THE RAPIDLY ROTATING ACTIVE ASTEROID (62412) 2000 SY178 IN THE MAIN BELT',
+        'Discovery and Characteristics of the Rapidly Rotating Active Asteroid (62412) 2000 SY178 in the Main Belt',
         'DOI: 10.1088/0004-6256/149/2/44', 'https://iopscience.iop.org/article/10.1088/0004-6256/149/2/44/meta',
         'https://ui.adsabs.harvard.edu/abs/2015AJ....149...44S/abstract'
     ],
@@ -1959,7 +1959,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.049, 0.006]],
     },
     '(76146) 2000 EU16 | SsODNet': {
-        tags: ['Solar System', 'minor body/asteroid/main belt', 'minor body/quasi satellite'],
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'minor body/quasi-satellite'],
         photometric_system: 'SkyMapper_SkyMapper',
         color_indices: {'g-r': [0.3893, 0.0064], 'r-i': [0.2386, 0.0059], 'i-z': [0.0276, 0.0162]},
         calibration_system: 'AB',
@@ -2275,7 +2275,7 @@
         sun_is_emitter: true
     },
     'Hsieh2011': [
-        'PHYSICAL PROPERTIES OF MAIN-BELT COMET 176P/LINEAR',
+        'Physical Properties of Main-belt Comet 176P/LINEAR',
         'DOI: 10.1088/0004-6256/142/1/29', 'https://iopscience.iop.org/article/10.1088/0004-6256/142/1/29',
         'https://ui.adsabs.harvard.edu/abs/2011AJ....142...29H/abstract'
     ],
@@ -2841,7 +2841,7 @@
         sun_is_emitter: true
     },
     '(164207) 2004 GU9 | Ieva2020, SsODNet': {
-        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/quasi satellite'],
+        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/quasi-satellite'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.87, 0.10], 'V-I': [0.71, 0.12]},
         calibration_system: 'Vega',
@@ -3118,7 +3118,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.139, 0.058]],
     },
     '(309239) 2007 RW10 | Boehnhardt2014, Müller2020': {
-        tags: ['Solar System', 'minor body/TNO/resonant TNO', 'minor body/quasi satellite'],
+        tags: ['Solar System', 'minor body/TNO/resonant TNO', 'minor body/quasi-satellite'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.73, 0.07], 'V-R': [0.42, 0.07], 'R-I': [0.45, 0.04]},
         calibration_system: 'Vega',
@@ -3410,8 +3410,8 @@
         'https://ui.adsabs.harvard.edu/abs/2021ComEE...2..231S/abstract'
     ],
     '(469219) Kamo‘oalewa | Sharkey2021': {
-        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/quasi satellite'],
-        file: 'spectra/files/quasi_lbt_vis_spectrum.txtU'
+        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/quasi-satellite'],
+        file: 'spectra/files/Kamooalewa_Sharkey2021.txtU'
     },
     '(469306) 1999 CD158 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO'],
@@ -3743,7 +3743,7 @@
         'https://www.astronomerstelegram.org/?read=3073', 'https://ui.adsabs.harvard.edu/abs/2010ATel.3073....1H/abstract'
     ],
     '(524522) Zoozve | Hicks2010': {
-        tags: ['Solar System', 'minor body/asteroid/NEO/Aten', 'minor body/quasi satellite'],
+        tags: ['Solar System', 'minor body/asteroid/NEO/Aten', 'minor body/quasi-satellite'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': [1.106, 0.019], 'V-R': [0.419, 0.021], 'R-I': [0.348, 0.014]},
         calibration_system: 'Vega',
@@ -4952,7 +4952,7 @@
         'DOI: 10.1088/0004-6256/137/1/157', 'https://iopscience.iop.org/article/10.1088/0004-6256/137/1/157',
         'https://ui.adsabs.harvard.edu/abs/2009AJ....137..157H/abstract'
     ],
-    '238P/Read: Coma particle dominated | Hsieh2009': {
+    '238P/Read: Coma particles dominated | Hsieh2009': {
         tags: ['Solar System', 'minor body/comet/short period comet', 'minor body/asteroid/active asteroid'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.63, 0.05], 'V-R': [0.37, 0.04], 'R-I': [0.39, 0.04]}, // approximately solar but is likely dominated by coma particles
