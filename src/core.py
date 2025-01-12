@@ -159,7 +159,20 @@ class ObjectName:
     
     def __str__(self) -> str:
         return self()
-
+    
+    def __repr__(self) -> str:
+        output = 'ObjectName('
+        if self.index:
+            output += f'index={self.index}, '
+        if self._name_en:
+            output += f'name={self._name_en}, '
+        if self._note_en:
+            output += f'note={self._note_en}, '
+        if self.info:
+            output += f'info={self.info}, '
+        if self.reference:
+            output += f'reference={self.reference}, '
+        return output[:-2] + ')'
 
 
 # ------------ Data Section ------------
