@@ -67,82 +67,82 @@
     'Comets: Short-period | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/comet/short period comet', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.87, 'V-R': 0.50, 'R-I': 0.45},
+        color_indices: {'B-V': [0.868, 0.167], 'V-R': [0.497, 0.104], 'R-I': [0.446, 0.099]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.04]
+        geometric_albedo: ['Generic_Bessell.V', 0.04] // estimation
     },
     'Comets: Long-period | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/comet/long period comet', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.79, 'V-R': 0.46, 'R-I': 0.44},
+        color_indices: {'B-V': [0.786, 0.070], 'V-R': [0.461, 0.060], 'R-I': [0.445, 0.071]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.04]
+        geometric_albedo: ['Generic_Bessell.V', 0.101]
     },
     'Jupiter trojans | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/Jupiter trojan', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'U-B': 0.1, 'B-V': 0.78, 'V-R': 0.45, 'R-I': 0.42},
+        color_indices: {'U-B': [0.100, 0.000], 'B-V': [0.782, 0.096], 'V-R': [0.446, 0.056], 'R-I': [0.420, 0.061]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.05]
+        geometric_albedo: ['Generic_Bessell.V', [0.052, 0.023]]
     },
     'Centaurs | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/centaur', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.87, 'V-R': 0.55, 'R-I': 0.50},
+        color_indices: {'B-V': [0.868, 0.167], 'V-R': [0.550, 0.109], 'R-I': [0.500, 0.129]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.078]
+        geometric_albedo: ['Generic_Bessell.V', [0.078, 0.045]]
     },
     'Plutinos | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.88, 'V-R': 0.55, 'R-I': 0.53},
+        color_indices: {'B-V': [0.884, 0.168], 'V-R': [0.550, 0.111], 'R-I': [0.532, 0.136]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.114], // albedo from Zelario’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.114], // albedo from Zelario’s sheet
     },
     'Other resonances | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'U-B': 0.27, 'B-V': 0.95, 'V-R': 0.59, 'R-I': 0.54},
+        color_indices: {'U-B': [0.273, 0.090], 'B-V': [0.950, 0.126], 'V-R': [0.589, 0.105], 'R-I': [0.545, 0.093]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.148], // albedo from Zelario’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.148], // albedo from Zelario’s sheet
     },
     'Cubewano: Hot, inner objects | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/classical TNO', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'U-B': 0.27, 'B-V': 0.88, 'V-R': 0.54, 'R-I': 0.53},
+        color_indices: {'U-B': [0.274, 0.168], 'B-V': [0.877, 0.174], 'V-R': [0.538, 0.108], 'R-I': [0.531, 0.151]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.102], // albedo from Zelario’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.102], // albedo from Zelario’s sheet
     },
     'Cubewano: Cold, outer objects | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/classical TNO', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'U-B': 0.59, 'B-V': 1.00, 'V-R': 0.63, 'R-I': 0.59},
+        color_indices: {'U-B': [0.593, 0.123], 'B-V': [1.005, 0.135], 'V-R': [0.630, 0.089], 'R-I': [0.594, 0.104]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.132], // albedo from Zelario’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.132], // albedo from Zelario’s sheet
     },
     'SDO | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/scattered', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'U-B': 0.33, 'B-V': 0.85, 'V-R': 0.52, 'R-I': 0.51},
+        color_indices: {'U-B': [0.334, 0.144], 'B-V': [0.846, 0.133], 'V-R': [0.515, 0.090], 'R-I': [0.515, 0.102]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.075], // albedo from Zelario’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.075], // albedo from Zelario’s sheet
     },
     'Detached objects | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/detached TNO', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'U-B': 0.18, 'B-V': 0.88, 'V-R': 0.54, 'R-I': 0.51},
+        color_indices: {'U-B': [0.180, 0.156], 'B-V': [0.882, 0.118], 'V-R': [0.537, 0.092], 'R-I': [0.514, 0.098]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.108], // albedo from Zelario’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.108], // albedo from Zelario’s sheet
     },
     
     // Asteroid spectral types
