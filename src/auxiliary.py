@@ -586,9 +586,8 @@ def color_indices_parser(indices: dict):
     sd = None
     # Uncertainty calculation
     if uncertainty_flag:
-        success = False
         shot_noise_factor = np.sqrt(irradiance) # common Poisson noise factor
-        old_sd_of_sd = np.inf
+        sd_of_sd = np.inf
         for sd_assumed in np.linspace(0, sd0, 1001):
             impossible_assumption = False
             # Numerically select the best value of the standard deviation of the first point,
@@ -596,34 +595,30 @@ def color_indices_parser(indices: dict):
             filters = {filter0: sd_assumed}
             for key, value in indices.items():
                 bluer_filter, redder_filter = color_index_splitter(key)
-                _, sd = parse_value_sd(value)
+                _, index_sd = parse_value_sd(value)
                 try:
                     if bluer_filter in filters:
-                        filters |= {redder_filter: sqrt(sd**2 - filters[bluer_filter]**2)}
+                        filters |= {redder_filter: sqrt(index_sd**2 - filters[bluer_filter]**2)}
                     else:
-                        filters |= {bluer_filter: sqrt(sd**2 - filters[redder_filter]**2)}
+                        filters |= {bluer_filter: sqrt(index_sd**2 - filters[redder_filter]**2)}
                 except ValueError:
                     # This means that the difference under the root is negative
                     # and the initial standard deviation assumption is not possible
                     impossible_assumption = True
                     break
             if not impossible_assumption:
-                success = True
                 new_sd = sd_mag2sd_irradiance(np.array(tuple(filters.values())), irradiance)
                 # Finding the minimum deviation between sd as solution quality criterion
                 # The standard deviations are scaled by the Poisson noise factor
                 new_sd_of_sd = np.std(new_sd * shot_noise_factor)
-                if new_sd_of_sd < old_sd_of_sd:
-                    old_sd = new_sd
-                    old_sd_of_sd = new_sd_of_sd
+                if new_sd_of_sd < sd_of_sd:
+                    sd = new_sd
+                    sd_of_sd = new_sd_of_sd
                     continue
                 else:
                     # Means that the best values of standard deviations were found
                     # in the last iteration and they started to diverge
-                    sd = old_sd
                     break
-        if not success:
-            sd = None
     return filter_names, irradiance, sd
 
 def phase_function2phase_integral(name: str, params: dict):
