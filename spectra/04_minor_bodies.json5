@@ -356,15 +356,15 @@
     '(243) Ida | SMASS, Helfenstein1996': {
         tags: ['featured', 'SMASS', 'Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Galileo target'],
         file: 'spectra/files/SMASS/a000243.2.txtU',
-        geometric_albedo: ['Galileo_SSI.Green', [0.206, 0.0225]],
-        spherical_albedo: ['Galileo_SSI.Green', [0.069, 0.0095]], // Table VIII
+        geometric_albedo: ['Galileo_SSI.Green', [0.206, +0.032, -0.013]],
+        spherical_albedo: ['Galileo_SSI.Green', [0.069, +0.013, -0.006]], // Table VIII
     },
     'Veverka1996': [
         'Dactyl: Galileo Observations of Ida’s Satellite',
         'DOI: 10.1006/icar.1996.0045', 'https://www.sciencedirect.com/science/article/pii/S0019103596900457'
     ],
     '(243) Ida: Bright areas | Veverka1996, Helfenstein1996': {
-        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Galileo target'],
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Galileo target', 'traced spectrum'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.756, 0.892, 0.978, 1.000, 0.936, 0.917],
@@ -372,7 +372,7 @@
         geometric_albedo: ['Galileo_SSI.Green', [0.217, 0.026]], // normal albedo of Terrain B, Fig. 7
     },
     '(243) Ida: Dark areas | Veverka1996, Helfenstein1996': {
-        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Galileo target'],
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Galileo target', 'traced spectrum'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.690, 0.856, 0.956, 1.000, 0.979, 0.965],
@@ -380,13 +380,13 @@
         geometric_albedo: ['Galileo_SSI.Green', [0.204, 0.016]], // normal albedo of Terrain A, Fig. 7
     },
     '(243 I) Dactyl | Veverka1996, Helfenstein1996': {
-        tags: ['Solar System', 'minor body/asteroid/main belt', 'natural satellite', 'spacecraft target/Galileo target'],
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'natural satellite', 'spacecraft target/Galileo target', 'traced spectrum'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.700, 0.894, 0.992, 1.000, 0.909, 0.882],
         sd: 0.018,
-        geometric_albedo: ['Galileo_SSI.Clear', [0.197, 0.038]], // normal albedo, Fig. 7
-        spherical_albedo: ['Galileo_SSI.Clear', [0.063, 0.015]], // Table VIII
+        geometric_albedo: ['Galileo_SSI.Green', [0.198, +0.050, -0.032]], // Table VIII
+        spherical_albedo: ['Galileo_SSI.Green', [0.063, +0.018, -0.012]], // Table VIII
     },
     'Clark1999': [
         'NEAR Photometry of Asteroid 253 Mathilde',
@@ -396,8 +396,8 @@
     '(253) Mathilde | SMASS, Clark1999': {
         tags: ['featured', 'SMASS', 'Solar System', 'minor body/asteroid/main belt', 'spacecraft target/NEAR target'],
         file: 'spectra/files/SMASS/a000253.2.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.047, 0.005]],
-        spherical_albedo: ['Generic_Bessell.V', [0.013, 0.003]],
+        geometric_albedo: ['NEAR_MSI.550nm', [0.047, 0.005]],
+        spherical_albedo: ['NEAR_MSI.550nm', [0.013, 0.003]],
     },
     '(269) Justitia | SMASS': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -423,14 +423,14 @@
             1.12816, 1.13752, 1.14195, 1.12574, 1.14946, 1.13265, 1.17224, 1.12637, 1.13412, 1.15489, 1.16516, 1.13524, 1.13512, 1.16729, 1.19448, 1.21084,
             1.15377, 1.12806, 1.17343, 1.21881, 1.14669, 1.14314, 1.14373, 1.16095, 1.09179, 1.0755, 1.13114, 1.16251, 1.21117, 1.13878, 1.20665, 1.0951, 1.047,
             1.00354, 0.9945, 1.01803, 1.14228, 1.05281, 1.18387, 1.09958, 1.16424, 0.91067],
-        geometric_albedo: ['Generic_Bessell.V', 0.23],
-        spherical_albedo: ['Generic_Bessell.V', 0.093],
+        geometric_albedo: ['NEAR_MSI.550nm', 0.23],
+        spherical_albedo: ['NEAR_MSI.550nm', 0.093],
     },
     '(433) Eros | SMASS, Li2004': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/NEO/Amor', 'spacecraft target/NEAR target'],
         file: 'spectra/files/SMASS/a000433.8.txtU',
-        geometric_albedo: ['Generic_Bessell.V', 0.23],
-        spherical_albedo: ['Generic_Bessell.V', 0.093],
+        geometric_albedo: ['NEAR_MSI.550nm', 0.23],
+        spherical_albedo: ['NEAR_MSI.550nm', 0.093],
     },
     '(511) Davida | SMASS, Vernazza2021, Tholen2020': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -471,7 +471,7 @@
     '(617) Patroclus-Menoetius | Chatelain2016, Mueller2010': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan', 'spacecraft target/Lucy target'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'U-B': 0.215, 'B-V': 0.710, 'V-R': 0.420, 'V-I': 0.830},
+        color_indices: {'B-V': [0.710, 0.050], 'V-R': [0.420, 0.030], 'V-I': [0.830, 0.020]}, // as reported in LCDB
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.045, 0.009]],
@@ -633,7 +633,7 @@
     '(2063) Bacchus | SMASS, Benner1999, Pravec2012': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/NEO/Apollo'],
         file: 'spectra/files/SMASS/a002063.7.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.56, 0.15]],
+        geometric_albedo: ['Generic_Bessell.V', [0.56, +0.12, -0.18]],
         phase_function: ['HG', {H: [17.250, 0.202], G: [0.230, 0.100]}]
     },
     '(2223) Sarpedon | MBOSS': {
@@ -663,7 +663,7 @@
     '(2867) Šteins | Hicks2004, Spjuth2012': {
         tags: ['featured', 'Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Rosetta target'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.798, 'V-R': 0.513, 'R-I': 0.440},
+        color_indices: {'B-R': [1.311, 0.026], 'V-R': [0.513, 0.029], 'R-I': [0.440, 0.030]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Rosetta_OSIRIS_WAC.OI', [0.39, 0.02]],
@@ -703,7 +703,7 @@
     '(3548) Eurybates | Mottola2023a': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan', 'spacecraft target/Lucy target'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.739, 'V-R': 0.384, 'R-I': 0.355},
+        color_indices: {'B-V': [0.739, 0.026], 'V-R': [0.384, 0.021], 'R-I': [0.355, 0.015]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.003]],
@@ -723,7 +723,7 @@
     '(4179) Toutatis | MITHNEOS, Bach2019, Tholen2020': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/NEO/Apollo', "spacecraft target/Chang'e-2 target"],
         file: 'spectra/files/SMASS/a004179.sp30.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.185, 0.042]],
+        geometric_albedo: ['Generic_Bessell.V', [0.185, +0.045, -0.039]],
         phase_function: ['HG', {H: 15.30, G: 0.10}]
     },
     '(4829) Sergestus | MBOSS': {
@@ -748,7 +748,7 @@
     '(5145) Pholus | SMASS, Duffard2014': {
         tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur'],
         file: 'spectra/files/SMASS/a005145.1.txtA',
-        geometric_albedo: ['Generic_Bessell.V', [0.155, 0.0625]],
+        geometric_albedo: ['Generic_Bessell.V', [0.155, +0.076, -0.049]],
     },
     '(5145) Pholus | MBOSS, Duffard2014': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -756,7 +756,7 @@
         color_indices: {'B-V': [1.261, 0.121], 'V-R': [0.791, 0.037], 'R-I': [0.818, 0.060]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.155, 0.0625]],
+        geometric_albedo: ['Generic_Bessell.V', [0.155, +0.076, -0.049]],
     },
     '(5511) Cloanthus | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -1140,7 +1140,7 @@
         color_indices: {'B-V': [0.932, 0.054], 'V-R': [0.608, 0.041], 'R-I': [0.571, 0.087]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.050, 0.030]], // may not be accurate
+        geometric_albedo: ['Generic_Bessell.V', [0.050, +0.030, -0.016]], // may not be accurate
     },
     '(20000) Varuna | MBOSS': {
         tags: ['featured', 'MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
@@ -1173,7 +1173,7 @@
     '(21900) Orus | Mottola2023a': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan', 'spacecraft target/Lucy target'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.799, 'V-R': 0.454},
+        color_indices: {'B-V': [0.799, 0.031], 'V-R': [0.454, 0.021]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.040, 0.002]],
@@ -1339,13 +1339,13 @@
         sun_is_emitter: true
     },
     '(28978) Ixion | Marchi2003, Verbiscer2022': {
-        tags: ['featured', 'Solar System', 'minor body/TNO/plutino', 'minor body/TNO/midsize TNO'],
+        tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
         file: 'spectra/files/Marchi2003/Ixion.txt',
         geometric_albedo: ['Generic_Bessell.V', [0.108, 0.002]],
         spherical_albedo: ['Generic_Bessell.V', [0.037, 0.007]],
     },
     '(28978) Ixion | MBOSS, Verbiscer2022': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/plutino', 'minor body/TNO/midsize TNO'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.018, 0.041], 'V-R': [0.605, 0.030], 'R-I': [0.580, 0.040]},
         calibration_system: 'Vega',
@@ -1692,7 +1692,7 @@
         color_indices: {'B-V': [0.915, 0.035], 'V-R': [0.589, 0.030], 'R-I': [0.581, 0.037]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.112, 0.0115]],
+        geometric_albedo: ['Generic_Bessell.V', [0.112, +0.012, -0.011]],
     },
     '(55576) Amycus | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -1716,7 +1716,7 @@
         color_indices: {'B-V': [0.979, 0.038], 'V-R': [0.552, 0.026]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.107, 0.0065]],
+        geometric_albedo: ['Generic_Bessell.V', [0.107, +0.005, -0.008]],
     },
     '(55638) 2002 VE95 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -2111,7 +2111,7 @@
         color_indices: {'B-V': [0.895, 0.061], 'V-R': [0.520, 0.020]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.0770, 0.00805]],
+        geometric_albedo: ['Generic_Bessell.V', [0.0770, +0.0084, -0.0077]],
     },
     '(90568) 2004 GV9 | Boehnhardt2014, Vilenius2012': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
@@ -2119,7 +2119,7 @@
         color_indices: {'B-V': [0.73, 0.01], 'V-R': [0.63, 0.01], 'R-I': [0.88, 0.01]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.0770, 0.00805]],
+        geometric_albedo: ['Generic_Bessell.V', [0.0770, +0.0084, -0.0077]],
     },
     '(91133) 1998 HK151 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -2346,18 +2346,18 @@
     '(120347) Salacia | Stansberry2012': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'V-I': 0.87},
+        color_indices: {'V-I': [0.87, 0.01]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.0357, 0.00875]],
+        geometric_albedo: ['Generic_Bessell.V', [0.0357, +0.0103, -0.0072]],
     },
     '(120347 I) Actaea | Stansberry2012': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'V-I': 0.89},
+        color_indices: {'V-I': [0.89, 0.02]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.0357, 0.00875]],
+        geometric_albedo: ['Generic_Bessell.V', [0.0357, +0.0103, -0.0072]],
     },
     '(120348) 2004 TY364 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -2410,7 +2410,7 @@
     '(132524) APL | Bernardi2006': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/New Horizons target'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.84, 'V-R': 0.49},
+        color_indices: {'B-V': [0.84, 0.06], 'V-R': [0.49, 0.05]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', 0.18], // mean diameter = 2.5 km, H = 15.5
@@ -2438,7 +2438,7 @@
     '(134340 I) Charon | Verbiscer2022': {
         tags: ['featured', 'Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'spacecraft target/New Horizons target'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.7315, 'V-R': 0.4},
+        color_indices: {'B-V': [0.7315, 0.0013], 'V-R': [0.4, 0]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.41, 0.01]],
@@ -2507,7 +2507,7 @@
         spherical_albedo: ['Generic_Bessell.V', [0.33, 0.03]], // SYSTEM albedo
     },
     '(136199) Eris | Lorenzi2016, Verbiscer2022': {
-        tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO'],
+        tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO', 'traced spectrum'],
         nm: [
             417.357, 479.507, 532.699, 585.89, 601.008, 604.367, 622.844, 637.962, 653.08, 656.439,
             659.239, 673.236, 679.955, 692.273, 702.912, 712.43, 734.267, 740.426, 747.704, 750.504,
@@ -2519,16 +2519,16 @@
             0.881, 1.072, 1.13
         ],
         geometric_albedo: ['Generic_Bessell.V', 0.957], // albedo from zelario’s sheet
-        spherical_albedo: ['Generic_Bessell.V', [0.99, 0.09]],
+        spherical_albedo: ['Generic_Bessell.V', [0.99, +0.01, -0.09]],
     },
     '(136199) Eris | MBOSS, Verbiscer2022': {
-        tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO', 'traced spectrum'],
+        tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.781, 0.032], 'V-R': [0.393, 0.047], 'R-I': [0.363, 0.061]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', 0.957], // albedo from fyr02’s sheet
-        spherical_albedo: ['Generic_Bessell.V', [0.99, 0.09]],
+        spherical_albedo: ['Generic_Bessell.V', [0.99, +0.01, -0.09]],
     },
     '(136204) 2003 WL7 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -2550,7 +2550,7 @@
         spherical_albedo: ['Generic_Bessell.V', [0.74, 0.06]],
     },
     '(136472) Makemake | Lorenzi2016, Verbiscer2022': {
-        tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO', 'traced spectrum'],
         nm: [
             417.357, 466.069, 588.13, 601.568, 609.406, 631.243, 642.441, 649.72, 656.439, 664.278,
             672.116, 679.955, 691.153, 706.271, 715.789, 723.628, 729.787, 740.426, 744.345, 751.064,
@@ -2640,7 +2640,7 @@
         color_indices: {'B-V': [0.940, 0.047], 'V-R': [0.592, 0.043], 'R-I': [0.486, 0.064]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.107, 0.0235]],
+        geometric_albedo: ['Generic_Bessell.V', [0.107, +0.029, -0.018]],
     },
     '(145453) 2005 RR43 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
@@ -2706,10 +2706,10 @@
     '(152830) Dinkinesh | Bolin2023, McFadden2023, Mottola2023b': {
         tags: ['featured', 'Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Lucy target'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.67, 'r-i': 0.28, 'i-z': 0.11},
+        color_indices: {'g-r': [0.67, 0.03], 'r-i': [0.28, 0.03], 'i-z': [0.11, 0.02]},
         calibration_system: 'AB',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.27, 0.155]],
+        geometric_albedo: ['Generic_Bessell.V', [0.27, +0.25, -0.06]],
         phase_function: ['HG', {H: [17.62, 0.04], G: [0.378, 0.035]}]
     },
     '(160427) 2005 RL43 | MBOSS': {
@@ -2784,7 +2784,7 @@
     '(174567) Varda | Grundy2015, Souami2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.892, 'V-I': 1.133},
+        color_indices: {'B-V': [0.892, 0.028], 'V-I': [1.133, 0.034]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.099, 0.002]],
@@ -2800,7 +2800,7 @@
     '(174567 I) Ilmarë | Grundy2015, Souami2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.857, 'V-I': 1.266},
+        color_indices: {'B-V': [0.857, 0.061], 'V-I': [1.266, 0.052]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', 0.085],
@@ -2866,7 +2866,7 @@
         'https://ui.adsabs.harvard.edu/abs/2017AJ....154...22D/abstract'
     ],
     '(208996) 2003 AZ84 | MBOSS, DiasOliveira2017': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/plutino', 'minor body/TNO/midsize TNO'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.738, 0.090], 'V-R': [0.430, 0.062], 'R-I': [0.473, 0.105]},
         calibration_system: 'Vega',
@@ -2881,7 +2881,7 @@
     '(225088) Gonggong | Boehnhardt2014, Kiss2019': {
         tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO', 'minor body/TNO/detached TNO'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 1.38, 'V-R': 0.86, 'R-I': 0.79},
+        color_indices: {'B-V': [1.38, 0.03], 'V-R': [0.86, 0.02], 'R-I': [0.79, 0.02]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.14, 0.01]],
@@ -2894,7 +2894,7 @@
     '(225088 I) Xiangliu | Kiss2019, Arakawa2021': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO', 'minor body/TNO/detached TNO', 'natural satellite'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'V-I': 1.22},
+        color_indices: {'V-I': [1.22, 0.17]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', 0.08], // assuming radius of 100 km
@@ -2914,7 +2914,7 @@
     '(229762) Gǃkúnǁʼhòmdímà | Grundy2018, Ortiz2019': {
         tags: ['Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'V-I': 1.028},
+        color_indices: {'V-I': [1.028, 0.027]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.142, 0.015]],
@@ -2922,14 +2922,14 @@
     '(229762 I) Gǃòʼé ǃHú | Grundy2018': {
         tags: ['Solar System', 'minor body/TNO/detached TNO', 'natural satellite'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'V-I': 1.803},
+        color_indices: {'V-I': [1.803, 0.084]},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
     '(230965) 2004 XA192 | SsODNet, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': [0.7870, 0.0601], 'r-i': [0.3388, 0.0571], 'i-z': [0.2440, 0.0889]}, 
+        color_indices: {'g-r': [0.7870, 0.0601], 'r-i': [0.3388, 0.0571], 'i-z': [0.2440, 0.0889]},
         calibration_system: 'AB',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.260, +0.340, -0.150]],
@@ -3204,7 +3204,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.290, +0.160, -0.110]],
-},
+    },
     '(416400) 2003 UZ117 | Boehnhardt2014, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
@@ -3421,7 +3421,7 @@
     '(472271) 2014 UM33 | SsODNet': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'r-i': [0.3789, 0.2086]}, 
+        color_indices: {'r-i': [0.3789, 0.2086]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -3451,8 +3451,8 @@
             0.050, 0.074, 0.111,
             0.180, 0.190, 0.197, 0.193, 0.207, 0.200, 0.198, 0.191, 0.201, 0.198, 0.189, 0.194, 0.175, 0.190, 0.190, 0.175
         ],
-        geometric_albedo: ['Generic_Bessell.V', [0.21, 0.05]],
-        spherical_albedo: ['NewHorizons_MVIC.Red', [0.063, 0.015]],
+        geometric_albedo: ['Generic_Bessell.V', [0.21, +0.05, -0.04]],
+        spherical_albedo: ['NewHorizons_LORRI.Pan', [0.062, 0.015]],
     },
     'Howett2019': [
         'Colors of (486958) 2014 MU69 as Observed by New Horizons’ Multi-Spectral Visible Imaging Camera (MVIC)',
@@ -3463,6 +3463,7 @@
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.053, 0.079, 0.117], // phase angle = 11.68°
+        sd: [0.005, 0.005, 0.006],
         albedo: true
     },
     '(486958) Arrokoth: Weeyo Lobus | Howett2019': {
@@ -3470,6 +3471,7 @@
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.058, 0.084, 0.122], // phase angle = 11.68°
+        sd: [0.005, 0.004, 0.006],
         albedo: true
     },
     '(486958) Arrokoth: Akasa Linea | Howett2019': {
@@ -3477,6 +3479,7 @@
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.066, 0.090, 0.125], // phase angle = 11.68°
+        sd: [0.004, 0.003, 0.001],
         albedo: true
     },
     '(506479) 2003 HB57 | MBOSS': {
@@ -3574,7 +3577,7 @@
     '(523757) 2014 WH509 | SsODNet': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': [0.8649, 0.1125], 'r-i': [0.3654, 0.0932], 'i-z': [0.2788, 0.1868]}, 
+        color_indices: {'g-r': [0.8649, 0.1125], 'r-i': [0.3654, 0.0932], 'i-z': [0.2788, 0.1868]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -3586,7 +3589,7 @@
     '(523764) 2014 WC510 | SsODNet, Leiva2020': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': [0.6035, 0.2316], 'r-i': [0.2504, 0.2297]}, 
+        color_indices: {'g-r': [0.6035, 0.2316], 'r-i': [0.2504, 0.2297]},
         calibration_system: 'AB',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.051, 0.017]],
@@ -3691,7 +3694,7 @@
     '(527604) 2007 VL305 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.60, 'r-i': 0.25},
+        color_indices: {'g-r': [0.60, 0.054], 'r-i': [0.25, 0.038]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -3712,7 +3715,7 @@
     '(530664) 2011 SO277 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.60, 'r-i': 0.57},
+        color_indices: {'g-r': [0.60, 0.067], 'r-i': [0.57, 0.050]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -3725,8 +3728,8 @@
     },
     '(531074) 2012 DX98 | Thirouin2019': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
-        photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.85, 'g-i': 1.25},
+        photometric_system: 'LCO_IMACS',
+        color_indices: {'sloan_g-sloan_r': [0.85, 0.06], 'sloan_g-sloan_i': [1.25, 0.06]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -3736,23 +3739,23 @@
     ],
     '(532037) 2013 FY27 | Sheppard2018': {
         tags: ['Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/midsize TNO'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'V-R': 0.56, 'R-I': 0.52},
-        calibration_system: 'Vega',
+        photometric_system: 'LCO_IMACS',
+        color_indices: {'sloan_g-sloan_r': [0.76, 0.02], 'sloan_r-sloan_i': [0.31, 0.03]},
+        calibration_system: 'AB',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.17, 0.0375]]
+        geometric_albedo: ['Generic_Bessell.V', [0.17, +0.045, -0.030]]
     },
     '(532039) 2013 FR28 | Thirouin2019': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
-        photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.95, 'g-i': 1.36},
+        photometric_system: 'LCO_IMACS',
+        color_indices: {'sloan_g-sloan_r': [0.95, 0.05], 'sloan_g-sloan_i': [1.36, 0.05]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
     '(533562) 2014 JQ80 | Thirouin2019': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
-        photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.76, 'g-i': 1.05},
+        photometric_system: 'LCO_IMACS',
+        color_indices: {'sloan_g-sloan_r': [0.76, 0.05], 'sloan_g-sloan_i': [1.05, 0.05]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -3776,8 +3779,8 @@
     },
     '(578992) 2014 JL80 | Thirouin2019': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
-        photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.74},
+        photometric_system: 'LCO_IMACS',
+        color_indices: {'sloan_g-sloan_r': [0.74, 0.05]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -3790,8 +3793,8 @@
     },
     '(609221) 2004 VC131 | Thirouin2019': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
-        photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.89, 'g-i': 1.40},
+        photometric_system: 'LCO_IMACS',
+        color_indices: {'sloan_g-sloan_r': [0.89, 0.06], 'sloan_g-sloan_i': [1.40, 0.05]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -3963,7 +3966,7 @@
     '(613490) 2006 RJ103 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.59, 'r-i': 0.16},
+        color_indices: {'g-r': [0.59, 0.045], 'r-i': [0.16, 0.035]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -3991,7 +3994,7 @@
     '(666739) 2010 TS191 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.61, 'r-i': 0.30},
+        color_indices: {'g-r': [0.61, 0.029], 'r-i': [0.30, 0.029]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4216,8 +4219,8 @@
     },
     '2004 VU75 | Thirouin2019': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
-        photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.96, 'g-i': 1.42},
+        photometric_system: 'LCO_IMACS',
+        color_indices: {'sloan_g-sloan_r': [0.96, 0.06], 'sloan_g-sloan_i': [1.42, 0.05]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4306,7 +4309,7 @@
     '2012 UD185 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.61, 'r-i': 0.37},
+        color_indices: {'g-r': [0.61, 0.033], 'r-i': [0.37, 0.045]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4320,7 +4323,7 @@
     '2012 UV177 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.71, 'r-i': 0.23},
+        color_indices: {'g-r': [0.71, 0.058], 'r-i': [0.23, 0.051]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4391,7 +4394,7 @@
     '2013 RL124 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.38, 'r-i': 0.54},
+        color_indices: {'g-r': [0.38, 0.075], 'r-i': [0.54, 0.086]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4404,11 +4407,11 @@
     },
     'Bannister2017': [
         'OSSOS. V. Diffusion in the Orbit of a High-perihelion Distant Solar System Object',
-        'DOI: 10.3847/1538-3881/aa6db5', 'https://iopscience.iop.org/10.3847/1538-3881/aa6db5',
+        'DOI: 10.3847/1538-3881/aa6db5', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa6db5',
         'https://ui.adsabs.harvard.edu/abs/2017AJ....153..262B/abstract'
     ],
     '2013 SY99 | Bannister2017': {
-        tags: ['Solar System', 'minor body/TNO/detached'],
+        tags: ['Solar System', 'minor body/TNO/detached TNO'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.64, 0.06], 'r-i': [0.46, 0.10]},
         calibration_system: 'AB',
@@ -4431,7 +4434,7 @@
     '2013 TZ187 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.90, 'r-i': 0.30},
+        color_indices: {'g-r': [0.90, 0.053], 'r-i': [0.30, 0.057]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4445,7 +4448,7 @@
     '2013 VX30 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 1.01, 'r-i': 0.44},
+        color_indices: {'g-r': [0.965, 0.040], 'r-i': [0.453, 0.032]}, // weighted mean
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4472,8 +4475,8 @@
     },
     '2014 JO80 | Thirouin2019': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
-        photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.67, 'g-i': 0.91},
+        photometric_system: 'LCO_IMACS',
+        color_indices: {'sloan_g-sloan_r': [0.67, 0.03], 'sloan_g-sloan_i': [0.91, 0.03]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4494,7 +4497,7 @@
     '2014 RO74 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.65, 'r-i': 0.42},
+        color_indices: {'g-r': [0.65, 0.052], 'r-i': [0.42, 0.064]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4508,7 +4511,7 @@
     '2014 SC374 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.43, 'r-i': 0.12},
+        color_indices: {'g-r': [0.43, 0.066], 'r-i': [0.12, 0.081]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4534,7 +4537,7 @@
     '2014 UZ224 | Gerdes2017': {
         tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/TNO/midsize TNO'],
         photometric_system: 'CTIO_DECam',
-        color_indices: {'g-r': 0.77, 'r-i': 0.39, 'i-z': 0.22},
+        color_indices: {'g-r': [0.77, 0.11], 'r-i': [0.39, 0.07], 'i-z': [0.22, 0.16]},
         calibration_system: 'AB',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.131, 0.039]],
@@ -4542,7 +4545,7 @@
     '2014 YB92 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.46, 'r-i': 0.07},
+        color_indices: {'g-r': [0.46, 0.187], 'r-i': [0.07, 0.100]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4556,7 +4559,7 @@
     '2015 VU207 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.31, 'r-i': 0.24},
+        color_indices: {'g-r': [0.358, 0.028], 'r-i': [0.214, 0.028]}, // weighted mean
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4570,7 +4573,7 @@
     '2015 VV165 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.87, 'r-i': 0.32},
+        color_indices: {'g-r': [0.87, 0.049], 'r-i': [0.32, 0.055]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4584,7 +4587,7 @@
     '2015 VW165 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': 0.45, 'r-i': 0.36},
+        color_indices: {'g-r': [0.45, 0.032], 'r-i': [0.36, 0.048]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -5116,9 +5119,9 @@
     ],
     '1I/ʻOumuamua | Jewitt2017': {
         tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
-        photometric_system: 'Generic_Bessell',
+        photometric_system: 'NOT_ALFOSC',
         calibration_system: 'Vega',
-        color_indices: {'B-V': 0.70, 'V-R': 0.45},
+        color_indices: {'Bes_B-Bes_V': [0.70, 0.06], 'Bes_V-Bes_R': [0.45, 0.05]},
         sun_is_emitter: true,
     },
     'Bannister2017': [
@@ -5129,7 +5132,7 @@
         tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
         photometric_system: 'SLOAN_SDSS',
         calibration_system: 'AB',
-        color_indices: {'g-r': 0.47, 'r-i': 0.36},
+        color_indices: {'g-r': [0.47, 0.04], 'r-i': [0.36, 0.16]},
         sun_is_emitter: true,
     },
 }
