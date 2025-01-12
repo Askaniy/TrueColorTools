@@ -35,7 +35,8 @@
        // have very poor quality in the visible range and were excluded
     'Mallama2017a': [
         'Comprehensive wide-band magnitudes and albedos for the planets, with applications to exo-planets and Planet Nine',
-        'DOI: 10.1016/j.icarus.2016.09.023', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103516301014'
+        'DOI: 10.1016/j.icarus.2016.09.023', 'https://arxiv.org/abs/1609.05048',
+        'https://ui.adsabs.harvard.edu/abs/2017Icar..282...19M/abstract'
     ],
     'Pena2022': [
         'Colors of Irregular Satellites of Saturn with DECam',
@@ -52,7 +53,7 @@
     ],
 
     // Mercury
-    'Deborah2011': [
+    'Domingue2011': [
         'Mercury’s spectrophotometric properties: Update from the Mercury Dual Imaging System observations during the third MESSENGER flyby',
         'DOI: 10.1016/j.pss.2011.04.012', 'https://www.sciencedirect.com/science/article/abs/pii/S0032063311001528',
         'https://ui.adsabs.harvard.edu/abs/2011P%26SS...59.1853D/abstract'
@@ -75,7 +76,7 @@
                        0.158, 0.180],
         spherical_albedo: ['Generic_Bessell.V', 0.0166],
     },
-    'Mercury | Deborah2011': {
+    'Mercury | Domingue2011': {
         tags: ['Solar System', 'planetary body/planet'],
         photometric_system: 'Messenger_MDIS_WAC',
         filters: ['430BP40', '480BP10', '560BP5', '630BP5', '700BP5', '750BP5', '830BP5', '900BP5', '950BP7', '1000BP15'],
@@ -269,13 +270,21 @@
     ],
     'Phobos (M I) | Pajola2013, Fornasier2024': {
         tags: ['featured', 'Solar System', 'natural satellite/regular moon'],
-        nm: [
-            245.5, 258.0, 263.5, 295.0, 308.5, 355.0, 360.0, 374.5, 387.0, 480.0, 535.0,
-            571.0, 589.5, 611.5, 650.5, 700.5, 742.5, 804.5, 882.5, 932.0, 992.0
+        filters: [
+            'Rosetta_OSIRIS_WAC.UV245', 'Rosetta_OSIRIS_WAC.CS', 'Rosetta_OSIRIS_NAC.Far_UV', 'Rosetta_OSIRIS_WAC.UV295',
+            'Rosetta_OSIRIS_WAC.OH', 'Rosetta_OSIRIS_WAC.NH', 'Rosetta_OSIRIS_NAC.Near_UV', 'Rosetta_OSIRIS_WAC.UV375',
+            'Rosetta_OSIRIS_WAC.CN', 'Rosetta_OSIRIS_NAC.Blue', 'Rosetta_OSIRIS_NAC.Green', 'Rosetta_OSIRIS_WAC.NH2',
+            'Rosetta_OSIRIS_WAC.NA', 'Rosetta_OSIRIS_WAC.VIS610', 'Rosetta_OSIRIS_NAC.Orange', 'Rosetta_OSIRIS_NAC.Hydra',
+            'Rosetta_OSIRIS_NAC.Red', 'Rosetta_OSIRIS_NAC.Ortho', 'Rosetta_OSIRIS_NAC.Near_IR', 'Rosetta_OSIRIS_NAC.Fe2O3',
+            'Rosetta_OSIRIS_NAC.IR'
         ],
         br: [
             0.01305, 0.01312, 0.01484, 0.01489, 0.01699, 0.01766, 0.02037, 0.02137, 0.02177, 0.02641, 0.02769,
             0.02743, 0.02732, 0.02835, 0.03083, 0.03316, 0.03499, 0.03713, 0.03940, 0.04057, 0.03880
+        ],
+        sd: [ // originally given as %
+            0.00450, 0.00299, 0.00402, 0.00348, 0.00314, 0.00272, 0.00257, 0.00199, 0.00059, 0.00071, 0.00078,
+            0.00093, 0.00049, 0.00060, 0.00089, 0.00096, 0.00129, 0.00104, 0.00122, 0.00110, 0.00151
         ],
         geometric_albedo: ['MEX_HRSC.Green', 0.0683], // disk-resolved (Table 3)
         spherical_albedo: ['MEX_HRSC.Green', 0.0157], // disk-resolved (Table 3)
@@ -295,7 +304,7 @@
         'https://ui.adsabs.harvard.edu/abs/1996Icar..123..536T/abstract'
     ],
     'Deimos (M II) | Fraeman2013, Pang1980, Thomas1996': {
-        tags: ['featured', 'Solar System', 'natural satellite/regular moon'],
+        tags: ['featured', 'Solar System', 'natural satellite/regular moon', 'traced spectrum'],
         nm: [250, 300, 350, 400, 450, 500, 550, 600, 700, 750, 800],
         br: [0.04, 0.05, 0.051, 0.05, 0.049, 0.053, 0.055, 0.058, 0.062, 0.067, 0.069],
         geometric_albedo: [540, [0.068, 0.007]],
@@ -545,7 +554,8 @@
     ],
     'Aegaeon (S LIII) | Hedman2020, Thomas2013': { // phase angle 48.2°
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
-        nm: [343, 455, 569, 649, 928],
+        photometric_system: 'Cassini_ISS_NAC',
+        filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR3'],
         br: [0.0865, 0.1181, 0.1342, 0.1406, 0.1551],
         geometric_albedo: [611, [0.25, 0.23]]
     },
@@ -553,13 +563,14 @@
     'Mimas (S I) | Filacchione2022, Buratti2022': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Filacchione2022/Mimas.txt', // equigonal albedo
-        geometric_albedo: ['Generic_Bessell.V', [0.81, 0.01]],
+        geometric_albedo: [550, [0.81, 0.01]],
         phase_integral: [0.71, 0.01],
     },
     // Alkyonides
     'Methone (S XXXII) | Ciarniello2024, Thomas2013': { // phase angle 50°
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
-        nm: [342.7, 452.7, 567.2, 647.4, 748.4, 859.2, 926.0, 998.4],
+        photometric_system: 'Cassini_ISS_NAC',
+        filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR2', 'IR3', 'IR4'],
         br: [0.878, 1.000, 1.000, 1.015, 1.032, 1.031, 1.011, 0.927],
         geometric_albedo: [611, [0.57, 0.05]],
     },
@@ -574,13 +585,13 @@
     'Enceladus (S II) | Madden2018, Buratti2022': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Madden2018/Enceladus_VIMS_Albedo.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [1.24, 0.01]],
+        geometric_albedo: [550, [1.24, 0.01]],
         phase_integral: [0.79, 0.01],
     },
     'Enceladus (S II) | Filacchione2022, Buratti2022': {
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Filacchione2022/Enceladus.txt', // equigonal albedo
-        geometric_albedo: ['Generic_Bessell.V', [1.24, 0.01]],
+        geometric_albedo: [550, [1.24, 0.01]],
         phase_integral: [0.79, 0.01],
     },
     // Tethys
@@ -592,7 +603,7 @@
     'Tethys (S III) | Filacchione2022, Buratti2022': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Filacchione2022/Tethys.txt', // equigonal albedo
-        geometric_albedo: ['Generic_Bessell.V', [0.93, 0.02]],
+        geometric_albedo: [550, [0.93, 0.02]],
         phase_integral: [0.79, 0.02],
     },
     'Tethys (S III) | Filacchione2018, Buratti2022': {
@@ -600,7 +611,7 @@
         nm: [350, 440, 550, 700, 950, 1046, 1540, 1822, 2050, 2200],
         br: [0.75042, 0.77108, 0.79707, 0.76842, 0.74823, 0.74563, 0.45171, 0.70383, 0.35282, 0.68231], // equigonal albedo
         sd: [0.00106, 0.00100, 0.00111, 0.00110, 0.00102, 0.00174, 0.00090, 0.00160, 0.00059, 0.00127],
-        geometric_albedo: ['Generic_Bessell.V', [0.93, 0.02]],
+        geometric_albedo: [550, [0.93, 0.02]],
         phase_integral: [0.79, 0.02],
     },
     // Tethys trojans
@@ -629,7 +640,7 @@
     'Dione (S IV) | Filacchione2022, Buratti2022': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Filacchione2022/Dione.txt', // equigonal albedo
-        geometric_albedo: ['Generic_Bessell.V', [0.75, 0.02]],
+        geometric_albedo: [550, [0.75, 0.02]],
         phase_integral: [0.80, 0.02],
     },
     'Dione (S IV) | Filacchione2017, Buratti2022': {
@@ -637,7 +648,7 @@
         nm: [350, 440, 550, 700, 950, 1046, 1540, 1822, 2050, 2200],
         br: [0.57582, 0.61407, 0.61977, 0.58411, 0.58268, 0.55834, 0.40562, 0.55832, 0.24751, 0.51508], // equigonal albedo
         sd: [0.00034, 0.00040, 0.00047, 0.00051, 0.00046, 0.00071, 0.00044, 0.00077, 0.00023, 0.00067],
-        geometric_albedo: ['Generic_Bessell.V', [0.75, 0.02]],
+        geometric_albedo: [550, [0.75, 0.02]],
         phase_integral: [0.80, 0.02],
     },
     // Dione trojans
@@ -673,19 +684,19 @@
     'Rhea (S V) | Filacchione2022, Buratti2022': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Filacchione2022/Rhea.txt', // equigonal albedo
-        geometric_albedo: ['Generic_Bessell.V', [0.89, 0.01]],
+        geometric_albedo: [550, [0.89, 0.01]],
         phase_integral: [0.71, 0.01],
     },
     'Rhea (S V) | Filacchione2020, Buratti2022': {
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Rhea_Filacchione2020.txtU', // equigonal albedo
-        geometric_albedo: ['Generic_Bessell.V', [0.89, 0.01]],
+        geometric_albedo: [550, [0.89, 0.01]],
         phase_integral: [0.71, 0.01],
     },
     'Rhea: Leading hemisphere (S V) | Clark1984, Buratti2022': {
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Rhea_Clark1984.txtU', // figure 4
-        geometric_albedo: ['Generic_Bessell.V', [0.89, 0.01]],
+        geometric_albedo: [550, [0.89, 0.01]],
         phase_integral: [0.71, 0.01],
     },
     // Titan
@@ -787,7 +798,7 @@
     'Phoebe (S IX) | Grav2003, Miller2011': {
         tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.63, 'V-R': 0.35, 'V-I': 0.64},
+        color_indices: {'B-V': [0.63, 0.01], 'V-R': [0.35, 0.01], 'V-I': [0.64, 0.01]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.0857, 0.0022]],
@@ -805,7 +816,7 @@
     'Phoebe (S IX) | Pena2022, Miller2011': {
         tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'CTIO_DECam',
-        color_indices: {'g-r': 0.27, 'r-i': 0.06},
+        color_indices: {'g-r': [0.27, 0.07], 'r-i': [0.06, 0.08]},
         calibration_system: 'AB',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.0857, 0.0022]],
@@ -814,7 +825,7 @@
     'Phoebe (S IX) | Graykowski2018, Miller2011': {
         tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.57, 'V-R': 0.34},
+        color_indices: {'B-V': [0.57, 0.01], 'V-R': [0.34, 0.01]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.0857, 0.0022]],
@@ -846,7 +857,7 @@
         tags: ['featured', 'Solar System/Uranian system', 'ring'],
         slope: {start: 320, stop: 2050, power: 0.09},
         geometric_albedo: [550, 0.050],
-        spherical_albedo: [550, [0.018, 0.030]],
+        spherical_albedo: [550, [0.018, 0.003]],
     },
     'Rings of Uranus: α, β | Karkoschka1997': {
         tags: ['Solar System/Uranian system', 'ring'],
@@ -885,13 +896,13 @@
         tags: ['featured', 'Solar System/Uranian system', 'natural satellite/regular moon', 'class'],
         slope: {start: 570, stop: 1500, power: 0.09},
         geometric_albedo: [550, 0.080],
-        spherical_albedo: [550, [0.026, 0.050]],
+        spherical_albedo: [550, [0.026, 0.005]],
     },
     'Puck (U XV) | Karkoschka2001': {
         tags: ['featured', 'Solar System/Uranian system', 'natural satellite/regular moon'],
         slope: {start: 340, stop: 1500, power: 0.04},
         geometric_albedo: [550, 0.104],
-        spherical_albedo: [550, [0.035, 0.060]],
+        spherical_albedo: [550, [0.035, 0.006]],
     },
     'Puck (U XV) | Karkoschka1997, Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'natural satellite/regular moon'],
@@ -900,7 +911,7 @@
         br: [0.095, 0.091, 0.097, 0.101],
         sd: 0.010,
         geometric_albedo: true, // at 1° phase angle
-        spherical_albedo: [550, [0.035, 0.060]], // Karkoschka2001
+        spherical_albedo: [550, [0.035, 0.006]], // Karkoschka2001
     },
     // Uranian major moons
     'Avramchuk2007': [
@@ -920,7 +931,7 @@
         tags: ['Solar System/Uranian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         slope: {start: 270, stop: 1000, power: -0.05},
         geometric_albedo: [550, 0.464],
-        spherical_albedo: [550, [0.200, 0.30]],
+        spherical_albedo: [550, [0.200, 0.030]],
     },
     'Miranda (U V) | Karkoschka1997, Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
@@ -929,7 +940,7 @@
         br: [0.320, 0.315, 0.310, 0.298, 0.294, 0.301],
         sd: 0.012,
         geometric_albedo: true, // at 1° phase angle
-        spherical_albedo: [550, [0.200, 0.30]], // Karkoschka2001
+        spherical_albedo: [550, [0.200, 0.030]], // Karkoschka2001
     },
     // Ariel
     'Ariel (U I) | Avramchuk2007, Karkoschka2001': {
@@ -1105,7 +1116,7 @@
         'DOI: 10.1006/icar.1999.6224', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103599962243'
     ],
     'Triton (N I) | Tryka1999, Verbiscer2022': {
-        tags: ['featured', 'Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon'],
+        tags: ['featured', 'Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'traced spectrum'],
         nm_range: {start: 300, stop: 900, step: 100},
         br_geometric: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
         phase_integral: [0.94, 0.04],
@@ -1163,20 +1174,22 @@
         geometric_albedo: ['Generic_Bessell.V', [0.24, 0.02]],
         phase_integral: 0.5,
     },
-    'Nereid (N II) | Graykowski2018, Kiss2016': {
+    'Nereid (N II) | Graykowski2018, Kiss2016, Thomas1991': {
         tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.67, 'V-R': 0.38},
+        color_indices: {'B-V': [0.67, 0.02], 'V-R': [0.38, 0.01]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.24, 0.02]],
+        phase_integral: 0.5,
     },
-    'Nereid (N II) | Grav2004, Kiss2016': {
+    'Nereid (N II) | Grav2004, Kiss2016, Thomas1991': {
         tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.66, 0.01], 'V-R': [0.39, 0.01]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.24, 0.02]],
+        phase_integral: 0.5,
     },
 }
