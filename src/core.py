@@ -356,7 +356,7 @@ class _TrueColorToolsObject:
     def __eq__(self, other: Self) -> bool:
         """ Checks equality with another TrueColorToolsObject instance """
         if isinstance(other, _TrueColorToolsObject):
-            return self.nm == other.nm and self.br == other.br
+            return np.array_equal(self.nm, other.nm) and np.array_equal(self.br, other.br)
         return False
 
 
