@@ -563,7 +563,7 @@
     'Mimas (S I) | Filacchione2022, Buratti2022': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Filacchione2022/Mimas.txt', // equigonal albedo
-        geometric_albedo: ['Generic_Bessell.V', [0.81, 0.01]],
+        geometric_albedo: [550, [0.81, 0.01]],
         phase_integral: [0.71, 0.01],
     },
     // Alkyonides
@@ -585,13 +585,13 @@
     'Enceladus (S II) | Madden2018, Buratti2022': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Madden2018/Enceladus_VIMS_Albedo.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [1.24, 0.01]],
+        geometric_albedo: [550, [1.24, 0.01]],
         phase_integral: [0.79, 0.01],
     },
     'Enceladus (S II) | Filacchione2022, Buratti2022': {
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Filacchione2022/Enceladus.txt', // equigonal albedo
-        geometric_albedo: ['Generic_Bessell.V', [1.24, 0.01]],
+        geometric_albedo: [550, [1.24, 0.01]],
         phase_integral: [0.79, 0.01],
     },
     // Tethys
@@ -603,7 +603,7 @@
     'Tethys (S III) | Filacchione2022, Buratti2022': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Filacchione2022/Tethys.txt', // equigonal albedo
-        geometric_albedo: ['Generic_Bessell.V', [0.93, 0.02]],
+        geometric_albedo: [550, [0.93, 0.02]],
         phase_integral: [0.79, 0.02],
     },
     'Tethys (S III) | Filacchione2018, Buratti2022': {
@@ -611,7 +611,7 @@
         nm: [350, 440, 550, 700, 950, 1046, 1540, 1822, 2050, 2200],
         br: [0.75042, 0.77108, 0.79707, 0.76842, 0.74823, 0.74563, 0.45171, 0.70383, 0.35282, 0.68231], // equigonal albedo
         sd: [0.00106, 0.00100, 0.00111, 0.00110, 0.00102, 0.00174, 0.00090, 0.00160, 0.00059, 0.00127],
-        geometric_albedo: ['Generic_Bessell.V', [0.93, 0.02]],
+        geometric_albedo: [550, [0.93, 0.02]],
         phase_integral: [0.79, 0.02],
     },
     // Tethys trojans
@@ -640,7 +640,7 @@
     'Dione (S IV) | Filacchione2022, Buratti2022': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Filacchione2022/Dione.txt', // equigonal albedo
-        geometric_albedo: ['Generic_Bessell.V', [0.75, 0.02]],
+        geometric_albedo: [550, [0.75, 0.02]],
         phase_integral: [0.80, 0.02],
     },
     'Dione (S IV) | Filacchione2017, Buratti2022': {
@@ -648,7 +648,7 @@
         nm: [350, 440, 550, 700, 950, 1046, 1540, 1822, 2050, 2200],
         br: [0.57582, 0.61407, 0.61977, 0.58411, 0.58268, 0.55834, 0.40562, 0.55832, 0.24751, 0.51508], // equigonal albedo
         sd: [0.00034, 0.00040, 0.00047, 0.00051, 0.00046, 0.00071, 0.00044, 0.00077, 0.00023, 0.00067],
-        geometric_albedo: ['Generic_Bessell.V', [0.75, 0.02]],
+        geometric_albedo: [550, [0.75, 0.02]],
         phase_integral: [0.80, 0.02],
     },
     // Dione trojans
@@ -684,19 +684,19 @@
     'Rhea (S V) | Filacchione2022, Buratti2022': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Filacchione2022/Rhea.txt', // equigonal albedo
-        geometric_albedo: ['Generic_Bessell.V', [0.89, 0.01]],
+        geometric_albedo: [550, [0.89, 0.01]],
         phase_integral: [0.71, 0.01],
     },
     'Rhea (S V) | Filacchione2020, Buratti2022': {
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Rhea_Filacchione2020.txtU', // equigonal albedo
-        geometric_albedo: ['Generic_Bessell.V', [0.89, 0.01]],
+        geometric_albedo: [550, [0.89, 0.01]],
         phase_integral: [0.71, 0.01],
     },
     'Rhea: Leading hemisphere (S V) | Clark1984, Buratti2022': {
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Rhea_Clark1984.txtU', // figure 4
-        geometric_albedo: ['Generic_Bessell.V', [0.89, 0.01]],
+        geometric_albedo: [550, [0.89, 0.01]],
         phase_integral: [0.71, 0.01],
     },
     // Titan

@@ -696,7 +696,7 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.220, +0.200, -0.120]],
     },
-     'Caliban (U XVI) | Grav2004, FarkasTakacs2017': {
+    'Caliban (U XVI) | Grav2004, FarkasTakacs2017': {
         tags: ['Solar System/Uranian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.84, 0.03], 'V-R': [0.57, 0.03]},
@@ -791,8 +791,9 @@
     ],
     'Neso (N XIII) | Maris2018': {
         tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'V-I': [1.0, 0.4], 'V-R': [0.3, 0.4]},
+        photometric_system: 'Paranal_FORS2',
+        //               V-R                            R-I
+        color_indices: {'ESO1075-ESO1076': [0.3, 0.4], 'ESO1076-ESO1077': [0.7, 0.4]},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
