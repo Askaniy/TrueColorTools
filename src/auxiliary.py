@@ -469,8 +469,16 @@ def parse_value_sd(data: float|Sequence[float]) -> tuple[float, float|None]:
 def parse_value_sd_list(arr: Sequence):
     """ Splits the values and standard deviations into two arrays """
     try:
-        # no standard deviation
         arr = np.array(arr, dtype='float') # ValueError here means inhomogeneous shape
+    except ValueError:
+        # inhomogeneous standard deviation input
+        values = []
+        for data in arr:
+            value, _ = parse_value_sd(data)
+            values.append(value)
+        return np.array(values, dtype='float'), None
+    try:
+        # no standard deviation
         if arr.ndim == 0:
             arr = np.atleast_1d(arr)
         elif arr.ndim > 1:
@@ -571,13 +579,13 @@ def color_indices_parser(indices: dict):
     filter0, _ = color_index_splitter(first_color_index)
     _, sd0 = parse_value_sd(indices[first_color_index])
     # Just photospectrum calculation
-    uncertainty_flag = False
+    uncertainty_flag = True
     filters = {filter0: 0} # mag=0 for the first point (arbitrarily)
     for key, value in indices.items():
         bluer_filter, redder_filter = color_index_splitter(key)
         mag, sd = parse_value_sd(value)
-        if sd is not None:
-            uncertainty_flag = True
+        if sd is None:
+            uncertainty_flag = False
         if bluer_filter in filters:
             filters |= {redder_filter: filters[bluer_filter] - mag}
         else:
