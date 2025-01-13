@@ -88,14 +88,15 @@ def spectral_downscaling(nm0: Sequence, br0: np.ndarray, nm1: Sequence, step: in
     br1 = np.empty_like(nm1, dtype='float64')
     if cube_flag:
         br1 = array2cube(br1, br0.shape[1:3])
+    br0_notnan = ~np.isnan(br0)
     for i in range(len(nm1)):
-        gaussian = np.exp(factors[i]*(nm0 - nm1[i])**2)
+        gaussian = np.exp(factors[i]*(nm0[br0_notnan] - nm1[i])**2)
         if cube_flag:
             gaussian = array2cube(gaussian, br0.shape[1:3])
         try:
-            br1[i] = np.average(br0, weights=br0*gaussian, axis=0)
+            br1[i] = np.average(br0[br0_notnan], weights=br0[br0_notnan]*gaussian, axis=0)
         except ZeroDivisionError:
-            br1[i] = np.average(br0, axis=0)
+            br1[i] = np.average(br0[br0_notnan], axis=0)
     return br1
 
 def spatial_downscaling(cube: np.ndarray, pixels_limit: int):
