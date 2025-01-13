@@ -1688,7 +1688,7 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.056, +0.012, -0.010]],
     },
-    '(52872) Okyrrhoe | Boehnhardt2014, Müller2020': {
+    '(52872) Okyrhoe | Boehnhardt2014, Müller2020': {
         tags: ['Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.74, 0.02], 'V-R': [0.53, 0.01], 'R-I': [0.53, 0.02]},
@@ -4907,11 +4907,11 @@
         sun_is_emitter: true
     },
     'Donaldson2023': [
-        'Characterizing the nucleus of comet 162P/Siding-Spring using ground-based photometry',
+        'Characterizing the nucleus of comet 162P/Siding Spring using ground-based photometry',
         'DOI: 10.1093/mnras/stad616', 'https://academic.oup.com/mnras/article/521/1/1518/7059218',
         'https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.1518D/abstract'
     ],
-    '162P/Siding-Spring | Donaldson2023': {
+    '162P/Siding Spring | Donaldson2023': {
         tags: ['Solar System', 'minor body/comet/short period comet'],
         photometric_system: 'PAN-STARRS_PS1',
         color_indices: {'g-r': [0.48, 0.04]},
