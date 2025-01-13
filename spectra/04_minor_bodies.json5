@@ -2513,7 +2513,7 @@
     '(134340 I) Charon | Verbiscer2022': {
         tags: ['featured', 'Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'spacecraft target/New Horizons target'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': [0.7315, 0.0013], 'V-R': [0.4, 0]},
+        color_indices: {'B-V': [0.7315, 0.0013], 'V-R': 0.4},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.41, 0.01]],

@@ -88,14 +88,15 @@ def spectral_downscaling(nm0: Sequence, br0: np.ndarray, nm1: Sequence, step: in
     br1 = np.empty_like(nm1, dtype='float64')
     if cube_flag:
         br1 = array2cube(br1, br0.shape[1:3])
+    br0_notnan = ~np.isnan(br0)
     for i in range(len(nm1)):
-        gaussian = np.exp(factors[i]*(nm0 - nm1[i])**2)
+        gaussian = np.exp(factors[i]*(nm0[br0_notnan] - nm1[i])**2)
         if cube_flag:
             gaussian = array2cube(gaussian, br0.shape[1:3])
         try:
-            br1[i] = np.average(br0, weights=br0*gaussian, axis=0)
+            br1[i] = np.average(br0[br0_notnan], weights=br0[br0_notnan]*gaussian, axis=0)
         except ZeroDivisionError:
-            br1[i] = np.average(br0, axis=0)
+            br1[i] = np.average(br0[br0_notnan], axis=0)
     return br1
 
 def spatial_downscaling(cube: np.ndarray, pixels_limit: int):
@@ -468,8 +469,16 @@ def parse_value_sd(data: float|Sequence[float]) -> tuple[float, float|None]:
 def parse_value_sd_list(arr: Sequence):
     """ Splits the values and standard deviations into two arrays """
     try:
-        # no standard deviation
         arr = np.array(arr, dtype='float') # ValueError here means inhomogeneous shape
+    except ValueError:
+        # inhomogeneous standard deviation input
+        values = []
+        for data in arr:
+            value, _ = parse_value_sd(data)
+            values.append(value)
+        return np.array(values, dtype='float'), None
+    try:
+        # no standard deviation
         if arr.ndim == 0:
             arr = np.atleast_1d(arr)
         elif arr.ndim > 1:
@@ -570,13 +579,13 @@ def color_indices_parser(indices: dict):
     filter0, _ = color_index_splitter(first_color_index)
     _, sd0 = parse_value_sd(indices[first_color_index])
     # Just photospectrum calculation
-    uncertainty_flag = False
+    uncertainty_flag = True
     filters = {filter0: 0} # mag=0 for the first point (arbitrarily)
     for key, value in indices.items():
         bluer_filter, redder_filter = color_index_splitter(key)
         mag, sd = parse_value_sd(value)
-        if sd is not None:
-            uncertainty_flag = True
+        if sd is None:
+            uncertainty_flag = False
         if bluer_filter in filters:
             filters |= {redder_filter: filters[bluer_filter] - mag}
         else:
@@ -586,9 +595,8 @@ def color_indices_parser(indices: dict):
     sd = None
     # Uncertainty calculation
     if uncertainty_flag:
-        success = False
         shot_noise_factor = np.sqrt(irradiance) # common Poisson noise factor
-        old_sd_of_sd = np.inf
+        sd_of_sd = np.inf
         for sd_assumed in np.linspace(0, sd0, 1001):
             impossible_assumption = False
             # Numerically select the best value of the standard deviation of the first point,
@@ -596,34 +604,30 @@ def color_indices_parser(indices: dict):
             filters = {filter0: sd_assumed}
             for key, value in indices.items():
                 bluer_filter, redder_filter = color_index_splitter(key)
-                _, sd = parse_value_sd(value)
+                _, index_sd = parse_value_sd(value)
                 try:
                     if bluer_filter in filters:
-                        filters |= {redder_filter: sqrt(sd**2 - filters[bluer_filter]**2)}
+                        filters |= {redder_filter: sqrt(index_sd**2 - filters[bluer_filter]**2)}
                     else:
-                        filters |= {bluer_filter: sqrt(sd**2 - filters[redder_filter]**2)}
+                        filters |= {bluer_filter: sqrt(index_sd**2 - filters[redder_filter]**2)}
                 except ValueError:
                     # This means that the difference under the root is negative
                     # and the initial standard deviation assumption is not possible
                     impossible_assumption = True
                     break
             if not impossible_assumption:
-                success = True
                 new_sd = sd_mag2sd_irradiance(np.array(tuple(filters.values())), irradiance)
                 # Finding the minimum deviation between sd as solution quality criterion
                 # The standard deviations are scaled by the Poisson noise factor
                 new_sd_of_sd = np.std(new_sd * shot_noise_factor)
-                if new_sd_of_sd < old_sd_of_sd:
-                    old_sd = new_sd
-                    old_sd_of_sd = new_sd_of_sd
+                if new_sd_of_sd < sd_of_sd:
+                    sd = new_sd
+                    sd_of_sd = new_sd_of_sd
                     continue
                 else:
                     # Means that the best values of standard deviations were found
                     # in the last iteration and they started to diverge
-                    sd = old_sd
                     break
-        if not success:
-            sd = None
     return filter_names, irradiance, sd
 
 def phase_function2phase_integral(name: str, params: dict):
