@@ -3,7 +3,7 @@
     'Jovian irregulars | Graykowski2018': {
         tags: ['Solar System/Jovian system', 'natural satellite/irregular moon', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.75, 'V-R': 0.44},
+        color_indices: {'B-V': [0.75, 0.01], 'V-R': [0.44, 0.02]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         albedo: ['Generic_Bessell.V', 0.04], // estimation
@@ -11,7 +11,7 @@
     'Jovian irregulars i=28° | Grav2003': {
         tags: ['Solar System/Jovian system', 'natural satellite/irregular moon', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.66, 'V-R': 0.36},
+        color_indices: {'B-V': [0.66, 0.02], 'V-R': [0.36, 0.01]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         albedo: ['Generic_Bessell.V', 0.04], // estimation
@@ -19,7 +19,7 @@
     'Jovian irregulars i=149° | Grav2003': {
         tags: ['Solar System/Jovian system', 'natural satellite/irregular moon', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.75, 'V-R': 0.41},
+        color_indices: {'B-V': [0.75, 0.04], 'V-R': [0.41, 0.08]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         albedo: ['Generic_Bessell.V', 0.04], // estimation
@@ -27,7 +27,7 @@
     'Saturnian irregulars | Graykowski2018': {
         tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.69, 'V-R': 0.44},
+        color_indices: {'B-V': [0.69, 0.04], 'V-R': [0.44, 0.03]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         albedo: ['Generic_Bessell.V', 0.04], // estimation
@@ -35,7 +35,7 @@
     'Saturnian irregulars i=34° | Grav2003': {
         tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.91, 'V-R': 0.48},
+        color_indices: {'B-V': [0.91, 0.05], 'V-R': [0.48, 0.01]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         albedo: ['Generic_Bessell.V', 0.04], // estimation
@@ -43,7 +43,7 @@
     'Saturnian irregulars i=46° | Grav2003': {
         tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.79, 'V-R': 0.51},
+        color_indices: {'B-V': [0.79, 0.01], 'V-R': [0.51, 0.02]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         albedo: ['Generic_Bessell.V', 0.04], // estimation
@@ -51,7 +51,7 @@
     'Uranian irregulars | Graykowski2018': {
         tags: ['Solar System/Uranian system', 'natural satellite/irregular moon', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.84, 'V-R': 0.53},
+        color_indices: {'B-V': [0.84, 0.03], 'V-R': [0.53, 0.03]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         albedo: ['Generic_Bessell.V', 0.04], // estimation
@@ -59,7 +59,7 @@
     'Neptunian irregulars | Graykowski2018': {
         tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.77, 'V-R': 0.50},
+        color_indices: {'B-V': [0.77, 0.11], 'V-R': [0.50, 0.09]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         albedo: ['Generic_Bessell.V', 0.04], // estimation
@@ -67,82 +67,82 @@
     'Comets: Short-period | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/comet/short period comet', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.87, 'V-R': 0.50, 'R-I': 0.45},
+        color_indices: {'B-V': [0.868, 0.167], 'V-R': [0.497, 0.104], 'R-I': [0.446, 0.099]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.04]
+        geometric_albedo: ['Generic_Bessell.V', 0.04] // estimation
     },
     'Comets: Long-period | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/comet/long period comet', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.79, 'V-R': 0.46, 'R-I': 0.44},
+        color_indices: {'B-V': [0.786, 0.070], 'V-R': [0.461, 0.060], 'R-I': [0.445, 0.071]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.04]
+        geometric_albedo: ['Generic_Bessell.V', 0.101]
     },
     'Jupiter trojans | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/Jupiter trojan', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'U-B': 0.1, 'B-V': 0.78, 'V-R': 0.45, 'R-I': 0.42},
+        color_indices: {'U-B': [0.100, 0.000], 'B-V': [0.782, 0.096], 'V-R': [0.446, 0.056], 'R-I': [0.420, 0.061]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.05]
+        geometric_albedo: ['Generic_Bessell.V', [0.052, 0.023]]
     },
     'Centaurs | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/centaur', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.87, 'V-R': 0.55, 'R-I': 0.50},
+        color_indices: {'B-V': [0.868, 0.167], 'V-R': [0.550, 0.109], 'R-I': [0.500, 0.129]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.078]
+        geometric_albedo: ['Generic_Bessell.V', [0.078, 0.045]]
     },
     'Plutinos | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': 0.88, 'V-R': 0.55, 'R-I': 0.53},
+        color_indices: {'B-V': [0.884, 0.168], 'V-R': [0.550, 0.111], 'R-I': [0.532, 0.136]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.114], // albedo from Zelario’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.114], // albedo from Zelario’s sheet
     },
     'Other resonances | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'U-B': 0.27, 'B-V': 0.95, 'V-R': 0.59, 'R-I': 0.54},
+        color_indices: {'U-B': [0.273, 0.090], 'B-V': [0.950, 0.126], 'V-R': [0.589, 0.105], 'R-I': [0.545, 0.093]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.148], // albedo from Zelario’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.148], // albedo from Zelario’s sheet
     },
     'Cubewano: Hot, inner objects | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/classical TNO', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'U-B': 0.27, 'B-V': 0.88, 'V-R': 0.54, 'R-I': 0.53},
+        color_indices: {'U-B': [0.274, 0.168], 'B-V': [0.877, 0.174], 'V-R': [0.538, 0.108], 'R-I': [0.531, 0.151]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.102], // albedo from Zelario’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.102], // albedo from Zelario’s sheet
     },
     'Cubewano: Cold, outer objects | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/classical TNO', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'U-B': 0.59, 'B-V': 1.00, 'V-R': 0.63, 'R-I': 0.59},
+        color_indices: {'U-B': [0.593, 0.123], 'B-V': [1.005, 0.135], 'V-R': [0.630, 0.089], 'R-I': [0.594, 0.104]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.132], // albedo from Zelario’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.132], // albedo from Zelario’s sheet
     },
     'SDO | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/scattered', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'U-B': 0.33, 'B-V': 0.85, 'V-R': 0.52, 'R-I': 0.51},
+        color_indices: {'U-B': [0.334, 0.144], 'B-V': [0.846, 0.133], 'V-R': [0.515, 0.090], 'R-I': [0.515, 0.102]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.075], // albedo from Zelario’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.075], // albedo from Zelario’s sheet
     },
     'Detached objects | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/detached TNO', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'U-B': 0.18, 'B-V': 0.88, 'V-R': 0.54, 'R-I': 0.51},
+        color_indices: {'U-B': [0.180, 0.156], 'B-V': [0.882, 0.118], 'V-R': [0.537, 0.092], 'R-I': [0.514, 0.098]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.108], // albedo from Zelario’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.108], // albedo from Zelario’s sheet
     },
     
     // Asteroid spectral types
@@ -159,148 +159,174 @@
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.708, 0.868, 1.109, 1.214, 1.298, 1.311, 1.250, 1.187, 1.143],
-        albedo: ['Generic_Bessell.V', 0.274],
+        sd: [0.026, 0.014, 0.013, 0.026, 0.038, 0.045, 0.059, 0.066, 0.063],
+        geometric_albedo: ['Generic_Bessell.V', [0.274, 0.093]],
     },
     'Spectral type B | Bus2002, DeMeo2013': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [1.008, 1.004, 0.989, 0.985, 0.978, 0.975, 0.969, 0.961, 0.938],
-        albedo: ['Generic_Bessell.V', 0.071],
+        sd: [0.022, 0.008, 0.007, 0.011, 0.015, 0.019, 0.023, 0.026, 0.039],
+        geometric_albedo: ['Generic_Bessell.V', [0.071, 0.033]],
     },
     'Spectral type C | Bus2002, DeMeo2013': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.936, 0.979, 1.007, 1.013, 1.014, 1.016, 1.014, 1.008, 0.993],
-        albedo: ['Generic_Bessell.V', 0.083],
+        sd: [0.025, 0.009, 0.009, 0.011, 0.013, 0.015, 0.017, 0.022, 0.034],
+        geometric_albedo: ['Generic_Bessell.V', [0.083, 0.076]],
     },
     'Spectral type Cb | Bus2002, DeMeo2013': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.981, 0.995, 0.999, 1.002, 1.002, 1.005, 1.003, 0.994, 0.979],
-        albedo: ['Generic_Bessell.V', 0.083],
+        sd: [0.018, 0.007, 0.005, 0.008, 0.010, 0.012, 0.015, 0.020, 0.031],
+        geometric_albedo: ['Generic_Bessell.V', [0.083, 0.076]],
     },
     'Spectral type Cg | Bus2002, DeMeo2013': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.852, 0.945, 1.018, 1.028, 1.027, 1.025, 1.026, 1.022, 1.007],
-        albedo: ['Generic_Bessell.V', 0.083],
+        sd: [0.013, 0.013, 0.012, 0.020, 0.020, 0.023, 0.027, 0.036, 0.044],
+        geometric_albedo: ['Generic_Bessell.V', [0.083, 0.076]],
     },
     'Spectral type Cgh | Bus2002, DeMeo2013': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.870, 0.962, 0.997, 0.985, 0.972, 0.973, 0.987, 0.991, 0.980],
-        albedo: ['Generic_Bessell.V', 0.083],
+        sd: [0.025, 0.014, 0.016, 0.027, 0.035, 0.038, 0.042, 0.047, 0.059],
+        geometric_albedo: ['Generic_Bessell.V', [0.083, 0.076]],
     },
     'Spectral type Ch | Bus2002, DeMeo2013': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.941, 0.986, 0.991, 0.983, 0.977, 0.982, 0.991, 0.996, 0.993],
-        albedo: ['Generic_Bessell.V', 0.083],
+        sd: [0.030, 0.010, 0.008, 0.013, 0.018, 0.021, 0.024, 0.028, 0.037],
+        geometric_albedo: ['Generic_Bessell.V', [0.083, 0.076]],
     },
     'Spectral type D | Bus2002, DeMeo2013': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.882, 0.951, 1.046, 1.098, 1.150, 1.199, 1.222, 1.247, 1.287],
-        albedo: ['Generic_Bessell.V', 0.098],
+        sd: [0.029, 0.012, 0.005, 0.006, 0.010, 0.015, 0.018, 0.026, 0.067],
+        geometric_albedo: ['Generic_Bessell.V', [0.098, 0.061]],
     },
     'Spectral type K | Bus2002, DeMeo2013': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.863, 0.943, 1.043, 1.087, 1.121, 1.138, 1.125, 1.110, 1.085],
-        albedo: ['Generic_Bessell.V', 0.178],
+        sd: [0.024, 0.010, 0.010, 0.016, 0.019, 0.018, 0.020, 0.023, 0.038],
+        geometric_albedo: ['Generic_Bessell.V', [0.178, 0.099]],
     },
     'Spectral type L | Bus2002, DeMeo2013': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.818, 0.922, 1.066, 1.130, 1.179, 1.207, 1.201, 1.193, 1.188],
-        albedo: ['Generic_Bessell.V', 0.183],
+        sd: [0.031, 0.013, 0.012, 0.020, 0.025, 0.024, 0.021, 0.020, 0.042],
+        geometric_albedo: ['Generic_Bessell.V', [0.183, 0.089]],
     },
     'Spectral type Ld | Bus2002, DeMeo2013': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.799, 0.913, 1.080, 1.163, 1.228, 1.270, 1.280, 1.282, 1.288],
-        albedo: ['Generic_Bessell.V', 0.183],
+        sd: [0.042, 0.021, 0.018, 0.027, 0.029, 0.034, 0.038, 0.041, 0.067],
+        geometric_albedo: ['Generic_Bessell.V', [0.183, 0.089]],
     },
     'Spectral type O | Bus2002': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.878, 0.952, 1.022, 1.042, 1.057, 1.036, 0.958, 0.870, 0.798],
+        sd: [0.026, 0.007, 0.006, 0.009, 0.012, 0.011, 0.015, 0.033, 0.048],
     },
     'Spectral type Q | Bus2002': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.830, 0.930, 1.047, 1.087, 1.118, 1.107, 1.041, 0.952, 0.873],
+        sd: [0.044, 0.018, 0.018, 0.027, 0.032, 0.031, 0.023, 0.019, 0.032],
     },
     'Spectral type R | Bus2002': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.792, 0.907, 1.073, 1.145, 1.209, 1.224, 1.110, 0.971, 0.889],
+        sd: [0.016, 0.006, 0.005, 0.006, 0.010, 0.010, 0.014, 0.015, 0.033],
     },
     'Spectral type S | Bus2002, DeMeo2013': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.813, 0.920, 1.060, 1.121, 1.170, 1.188, 1.145, 1.084, 1.034],
-        albedo: ['Generic_Bessell.V', 0.258],
+        sd: [0.028, 0.011, 0.012, 0.018, 0.023, 0.024, 0.024, 0.028, 0.040],
+        geometric_albedo: ['Generic_Bessell.V', [0.258, 0.087]],
     },
     'Spectral type Sa | Bus2002, DeMeo2013': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.748, 0.892, 1.094, 1.178, 1.243, 1.260, 1.216, 1.150, 1.091],
-        albedo: ['Generic_Bessell.V', 0.258],
+        sd: [0.029, 0.011, 0.010, 0.014, 0.014, 0.019, 0.025, 0.036, 0.059],
+        geometric_albedo: ['Generic_Bessell.V', [0.258, 0.087]],
     },
     'Spectral type Sk | Bus2002, DeMeo2013': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.859, 0.939, 1.039, 1.082, 1.115, 1.130, 1.092, 1.039, 1.001],
-        albedo: ['Generic_Bessell.V', 0.258],
+        sd: [0.029, 0.011, 0.008, 0.010, 0.012, 0.013, 0.009, 0.011, 0.022],
+        geometric_albedo: ['Generic_Bessell.V', [0.258, 0.087]],
     },
     'Spectral type Sl | Bus2002, DeMeo2013': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.790, 0.909, 1.076, 1.149, 1.209, 1.237, 1.205, 1.158, 1.131],
-        albedo: ['Generic_Bessell.V', 0.258],
+        sd: [0.025, 0.009, 0.009, 0.013, 0.015, 0.017, 0.019, 0.026, 0.042],
+        geometric_albedo: ['Generic_Bessell.V', [0.258, 0.087]],
     },
     'Spectral type Sq | Bus2002, DeMeo2013': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.851, 0.938, 1.039, 1.082, 1.115, 1.120, 1.069, 1.000, 0.936],
-        albedo: ['Generic_Bessell.V', 0.258],
+        sd: [0.031, 0.011, 0.009, 0.017, 0.022, 0.028, 0.028, 0.028, 0.034],
+        geometric_albedo: ['Generic_Bessell.V', [0.258, 0.087]],
     },
     'Spectral type Sr | Bus2002, DeMeo2013': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.777, 0.904, 1.069, 1.137, 1.188, 1.193, 1.123, 1.030, 0.936],
-        albedo: ['Generic_Bessell.V', 0.258],
+        sd: [0.046, 0.023, 0.016, 0.024, 0.028, 0.031, 0.032, 0.028, 0.038],
+        geometric_albedo: ['Generic_Bessell.V', [0.258, 0.087]],
     },
     'Spectral type T | Bus2002': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.896, 0.956, 1.041, 1.083, 1.119, 1.149, 1.163, 1.174, 1.184],
+        sd: [0.027, 0.008, 0.011, 0.016, 0.019, 0.015, 0.015, 0.021, 0.037],
     },
     'Spectral type V | Bus2002, DeMeo2013': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.808, 0.916, 1.063, 1.124, 1.176, 1.183, 1.048, 0.879, 0.745],
-        albedo: ['Generic_Bessell.V', 0.352],
+        sd: [0.052, 0.024, 0.019, 0.036, 0.049, 0.049, 0.039, 0.046, 0.056],
+        geometric_albedo: ['Generic_Bessell.V', [0.352, 0.107]],
     },
     'Spectral type X | Bus2002': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.940, 0.977, 1.013, 1.030, 1.045, 1.057, 1.062, 1.060, 1.058],
+        sd: [0.023, 0.008, 0.008, 0.012, 0.016, 0.019, 0.021, 0.026, 0.038],
     },
     'Spectral type Xc | Bus2002': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.920, 0.969, 1.019, 1.038, 1.049, 1.054, 1.047, 1.037, 1.020],
+        sd: [0.030, 0.012, 0.008, 0.010, 0.011, 0.012, 0.015, 0.020, 0.033],
     },
     'Spectral type Xe | Bus2002': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.921, 0.948, 1.032, 1.060, 1.082, 1.094, 1.093, 1.088, 1.078],
+        sd: [0.039, 0.023, 0.019, 0.033, 0.041, 0.039, 0.039, 0.041, 0.050],
     },
     'Spectral type Xk | Bus2002': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.900, 0.959, 1.033, 1.061, 1.084, 1.097, 1.098, 1.098, 1.098],
+        sd: [0.037, 0.012, 0.010, 0.013, 0.014, 0.018, 0.020, 0.023, 0.034],
     },
 }
