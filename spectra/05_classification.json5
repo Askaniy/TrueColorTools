@@ -83,7 +83,7 @@
     'Jupiter trojans | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/Jupiter trojan', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'U-B': [0.100, 0.000], 'B-V': [0.782, 0.096], 'V-R': [0.446, 0.056], 'R-I': [0.420, 0.061]},
+        color_indices: {'U-B': 0.100, 'B-V': [0.782, 0.096], 'V-R': [0.446, 0.056], 'R-I': [0.420, 0.061]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.052, 0.023]]
