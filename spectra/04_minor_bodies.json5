@@ -138,10 +138,20 @@
         'DOI: 10.1088/0004-637X/747/1/49', 'https://iopscience.iop.org/article/10.1088/0004-637X/747/1/49',
         'https://ui.adsabs.harvard.edu/abs/2012ApJ...747...49B'
     ],
+    'Lin2018': [
+        'Photometric survey and taxonomic identifications of 92 near-Earth asteroids',
+        'DOI: 10.1016/j.pss.2017.12.019', 'https://www.sciencedirect.com/science/article/pii/S0032063317301617',
+        'https://ui.adsabs.harvard.edu/abs/2018P%26SS..152..116L/abstract'
+    ],
     'Ieva2020': [
         'Extended photometric survey of near-Earth objects',
         'DOI: 10.1051/0004-6361/202038968', 'https://www.aanda.org/articles/aa/full_html/2020/12/aa38968-20/aa38968-20.html',
         'https://ui.adsabs.harvard.edu/abs/2020A%26A...644A..23I/abstract'
+    ],
+    'Hromakina2021': [
+        'Photometric survey of 55 near-earth asteroids',
+        'DOI: 10.1051/0004-6361/202141600', 'https://www.aanda.org/articles/aa/full_html/2021/12/aa41600-21/aa41600-21.html',
+        'https://ui.adsabs.harvard.edu/abs/2021A&A...656A..89H/abstract'
     ],
 
     'Li2019': [
@@ -2377,6 +2387,41 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+   'Brozovic2018': [
+        'Goldstone and Arecibo radar observations of (99942) Apophis in 2012-2013',
+        'DOI: 10.1016/j.icarus.2017.08.032', 'https://www.sciencedirect.com/science/article/pii/S0019103517302865',
+        'https://ui.adsabs.harvard.edu/abs/2018Icar..300..115B/abstract'
+    ],
+    '(99942) Apophis | Lin2018, Brozovic2018': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Aten', 'spacecraft target/OSIRIS-REx target/OSIRIS-APEX target'],
+        photometric_system: 'Generic_Bessell',
+        filters: ['B', 'V', 'R', 'I'],
+        mag: [[16.477, 0.019], [15.631, 0.010], [15.180, 0.011], [14.818, 0.012]],
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.35, 0.10]],
+    },
+    'Yoshida2021': [
+        'Photometric observations of the potentially hazardous asteroid (99942) Apophis from Kawabe Cosmic Park',
+        'DOI: 10.1093/pasj/psab072', 'https://academic.oup.com/pasj/article/73/4/L13/6327221',
+        'https://ui.adsabs.harvard.edu/abs/2021PASJ...73L..13Y/abstract'
+    ],
+    '(99942) Apophis | Yoshida2021, Brozovic2018': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Aten', 'spacecraft target/OSIRIS-REx target/OSIRIS-APEX target'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.618, 0.021], 'r-i': [0.180, 0.021]},
+        calibration_system: 'AB',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.35, 0.10]],
+    },
+    '(99942) Apophis | Hromakina2021, Brozovic2018': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Aten', 'spacecraft target/OSIRIS-REx target/OSIRIS-APEX target'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.88, 0.02], 'V-R': [0.45, 0.02], 'V-I': [0.86, 0.03]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.35, 0.10]],
+    },
     'LeCorre2019': [
         'Investigating Surface Color Variegation on Near-Earth Asteroid Bennu Using OSIRIS-REx Mapcam Data',
         'https://ui.adsabs.harvard.edu/abs/2019LPI....50.2794L/abstract'
@@ -2387,14 +2432,14 @@
         'https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..117L/abstract'
     ],
     '(101955) Bennu | LeCorre2019, Li2021': {
-        tags: ['featured', 'Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/asteroid/active asteroid'],
+        tags: ['featured', 'Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/asteroid/active asteroid', 'spacecraft target/OSIRIS-REx target'],
         photometric_system: 'OSIRIS-REX_MapCam',
         filters: ['Bf', 'Vf', 'Wf', 'Xf'],
         br_spherical: [0.0175, 0.01736, 0.0174, 0.01727],
         geometric_albedo: ['OSIRIS-REX_MapCam.Vf', [0.046, 0.007]],
     },
     '(101955) Bennu: Dark boulder terrain | LeCorre2019': {
-        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/asteroid/active asteroid'],
+        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/asteroid/active asteroid', 'spacecraft target/OSIRIS-REx target'],
         photometric_system: 'OSIRIS-REX_MapCam',
         filters: ['Bf', 'Vf', 'Wf', 'Xf'],
         br_spherical: [0.01604, 0.01573, 0.016, 0.01605],
@@ -3594,7 +3639,7 @@
         'https://ui.adsabs.harvard.edu/abs/2021ComEE...2..231S/abstract'
     ],
     '(469219) Kamo‘oalewa | Sharkey2021': {
-        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/quasi-satellite'],
+        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/quasi-satellite', 'spacecraft target/Tianwen-2 target'],
         file: 'spectra/files/Kamooalewa_Sharkey2021.txtU'
     },
     '(469306) 1999 CD158 | MBOSS': {
@@ -5170,12 +5215,32 @@
         'https://ui.adsabs.harvard.edu/abs/2014A%26A...563A..75H/abstract'
     ],
     '311P/PanSTARRS: Upper limit albedo | Hainaut2014': {
-        tags: ['Solar System', 'minor body/comet/short period comet', 'minor body/asteroid/main belt', 'minor body/asteroid/active asteroid'],
+        tags: ['Solar System', 'minor body/comet/short period comet', 'minor body/asteroid/main belt', 'minor body/asteroid/active asteroid', 'spacecraft target/Tianwen-2 target'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.58, 0.05], 'r-i': [0.23, 0.06]},
         calibration_system: 'AB',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.25, 0.01]], // upper limit, contaminated by coma
+    },
+    '(P/2011 S1) Gibbs | MBOSS': {
+        tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet', 'minor body/centaur/active centaur'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.960, 0.110], 'V-R': [0.590, 0.030]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    'Lin2014': [
+        'Pan-STARRS 1 Observations of the Unusual Active Centaur P/2011 S1(Gibbs)',
+        'DOI: 10.1088/0004-6256/147/5/114', 'https://iopscience.iop.org/article/10.1088/0004-6256/147/5/114',
+        'https://ui.adsabs.harvard.edu/abs/2014AJ....147..114L/abstract'
+    ],
+    '(P/2011 S1) Gibbs | Lin2014': {
+        tags: ['Solar System', 'minor body/comet/short period comet', 'minor body/centaur/active centaur'],
+        photometric_system: 'PAN-STARRS_PS1',
+        filters: ['g', 'r', 'i', 'z'],
+        mag: [[22.51, 0.04], [21.99, 0.05], [21.87, 0.02], [21.42, 0.05]],
+        calibration_system: 'AB',
+        sun_is_emitter: true
     },
 
     // Non-periodic comets
@@ -5425,13 +5490,6 @@
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.780, 0.010], 'V-R': [0.450, 0.010]},
-        calibration_system: 'Vega',
-        sun_is_emitter: true
-    },
-    '(P/2011 S1) Gibbs | MBOSS': {
-        tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': [0.960, 0.110], 'V-R': [0.590, 0.030]},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
