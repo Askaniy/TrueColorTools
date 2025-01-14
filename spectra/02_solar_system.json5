@@ -263,12 +263,12 @@
         'Phobos as a D-type Captured Asteroid, Spectral Modeling from 0.25 to 4.0 μm',
         'DOI: 10.1088/0004-637X/777/2/127', 'https://iopscience.iop.org/article/10.1088/0004-637X/777/2/127'
     ],
-    'Fornasier2024': [
+    'Fornasier2024a': [
         'Phobos photometric properties from Mars Express HRSC observations',
         'DOI: 10.1051/0004-6361/202449220', 'https://www.aanda.org/articles/aa/full_html/2024/06/aa49220-24/aa49220-24.html',
         'https://ui.adsabs.harvard.edu/abs/2024A%26A...686A.203F/abstract'
     ],
-    'Phobos (M I) | Pajola2013, Fornasier2024': {
+    'Phobos (M I) | Pajola2013, Fornasier2024a': {
         tags: ['featured', 'Solar System', 'natural satellite/regular moon'],
         filters: [
             'Rosetta_OSIRIS_WAC.UV245', 'Rosetta_OSIRIS_WAC.CS', 'Rosetta_OSIRIS_NAC.Far_UV', 'Rosetta_OSIRIS_WAC.UV295',
