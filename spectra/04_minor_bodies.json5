@@ -4928,7 +4928,17 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    // To add: 9P/Tempel 1, target Deep Impact target and Stardust
+    'Li2007': [
+        'Deep Impact photometry of Comet 9P/Tempel 1',
+        'DOI: 10.1016/j.icarus.2006.09.018', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103506003447',
+        'https://ui.adsabs.harvard.edu/abs/2007Icar..187...41L/abstract'
+    ],
+    '9P/Tempel 1 | Li2007': {
+        tags: ['featured', 'Solar System', 'minor body/comet/short period comet', 'spacecraft target/Deep Impact target', 'spacecraft target/Stardust target'],
+        slope: {start: 309, stop: 950, percent_per_100nm: [12.5, 1]}, // phase angle 63°
+        geometric_albedo: [550, [0.056, 0.007]],
+        spherical_albedo: [550, [0.013, 0.002]],
+    },
     '10P/Tempel 2 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet'],
         photometric_system: 'Generic_Bessell',
@@ -5067,12 +5077,9 @@
     ],
     '103P/Hartley 2 | Li2013b': {
         tags: ['featured', 'Solar System', 'minor body/comet/short period comet', 'spacecraft target/Deep Impact target'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'U-B': [0.27, 0.04], 'B-V': [0.75, 0.05], 'V-R': [0.43, 0.04], 'R-I': [0.39, 0.05]},
-        calibration_system: 'Vega',
-        geometric_albedo: ['Generic_Bessell.V', [0.045, 0.009]],
-        spherical_albedo: ['Generic_Bessell.V', [0.013, 0.002]],
-        sun_is_emitter: true
+        slope: {start: 400, stop: 850, percent_per_100nm: [7.6, 3.6]}, // inbound, phase angle 85°
+        geometric_albedo: [550, [0.045, 0.009]],
+        spherical_albedo: [550, [0.012, 0.002]],
     },
     '106P/Schuster | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet'],
