@@ -2491,7 +2491,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.18], // mean diameter = 2.5 km, H = 15.5
     },
     '(134340) Pluto | Madden2018, Verbiscer2022': {
-        tags: ['featured', 'Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'spacecraft target/New Horizons target'],
+        tags: ['featured', 'Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
         file: 'spectra/files/Madden2018/Pluto_LorenziProtopapa_Albedo.txtU',
         geometric_albedo: true,
         phase_integral: [0.80, 0.10],
@@ -2502,7 +2502,7 @@
         'https://ui.adsabs.harvard.edu/abs/2015ApJ...804L...6B/abstract'
     ],
     '(134340) Pluto | MBOSS, Buratti2015, Verbiscer2022': {
-        tags: ['MBOSS', 'Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'spacecraft target/New Horizons target'],
+        tags: ['MBOSS', 'Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.867, 0.016], 'V-R': [0.515, 0.035], 'R-I': [0.400, 0.010]},
         calibration_system: 'Vega',
@@ -2510,14 +2510,44 @@
         geometric_albedo: ['Generic_Bessell.V', [0.56, 0.03]],
         phase_integral: [0.80, 0.10],
     },
+    'Protopapa2020': [
+        'Disk-resolved Photometric Properties of Pluto and the Coloring Materials across its Surface',
+        'DOI: 10.3847/1538-3881/ab5e82', 'https://iopscience.iop.org/article/10.3847/1538-3881/ab5e82',
+        'https://ui.adsabs.harvard.edu/abs/2020AJ....159...74P/abstract'
+    ],
+    '(134340) Pluto: Belton Regio | Protopapa2020': {
+        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
+        photometric_system: 'NewHorizons_MVIC',
+        filters: ['Blue', 'Red', 'NIR', 'CH4'],
+        br: [0.0585206947096734, 0.0996813841082071, 0.1730562863722947, 0.1840942372929328],
+        sd: [0.0097710790150524, 0.0115207188360174, 0.0148026051295749, 0.0150387477568582],
+        albedo: true, // radiance factor (RADF)
+    },
+    '(134340) Pluto: Lowell Regio | Protopapa2020': {
+        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
+        photometric_system: 'NewHorizons_MVIC',
+        filters: ['Blue', 'Red', 'NIR', 'CH4'],
+        br: [0.5333532883601964, 0.6891250091800001, 0.6730569209356718, 0.6399055600979812],
+        sd: [0.0510219278077558, 0.0590445911622765, 0.0536593855929842, 0.0479830122025796],
+        albedo: true, // radiance factor (RADF)
+    },
+    '(134340 I) Charon | Protopapa2020, Verbiscer2022': {
+        tags: ['featured', 'Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'spacecraft target/New Horizons target', 'traced spectrum'],
+        photometric_system: 'NewHorizons_MVIC',
+        filters: ['Blue', 'Red', 'NIR', 'CH4'],
+        br: [0.292, 0.288, 0.288, 0.290], // traced from Fig. 11
+        sd: [0.030, 0.027, 0.025, 0.026], // traced from Fig. 11
+        geometric_albedo: ['NewHorizons_LORRI.Pan', [0.41, 0.01]],
+        spherical_albedo: ['NewHorizons_LORRI.Pan', [0.25, 0.04]],
+    },
     '(134340 I) Charon | Verbiscer2022': {
-        tags: ['featured', 'Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'spacecraft target/New Horizons target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.7315, 0.0013], 'V-R': 0.4},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.41, 0.01]],
-        spherical_albedo: ['Generic_Bessell.V', [0.25, 0.04]],
+        geometric_albedo: ['NewHorizons_LORRI.Pan', [0.41, 0.01]],
+        spherical_albedo: ['NewHorizons_LORRI.Pan', [0.25, 0.04]],
     },
     'Stern2009': [
         'Ejecta exchange and satellite color evolution in the Pluto system, with implications for KBOs and asteroids with satellites',
