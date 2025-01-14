@@ -414,10 +414,11 @@
         geometric_albedo: ['NEAR_MSI.550nm', [0.047, 0.005]],
         spherical_albedo: ['NEAR_MSI.550nm', [0.013, 0.003]],
     },
-    '(269) Justitia | SMASS': {
-        tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
+    '(269) Justitia | SMASS, SsODNet': {
+        tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
         file: 'spectra/files/SMASS/a000269.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.066], // Buie et al., AGU23 poster
+        phase_function: ['HG1G2', {H: [9.654725, +0.102008, -0.112125], G_1: [0.159771, +0.138945, -0.159532], G_2: [0.495732, +0.067168, -0.064874]}]
     },
     'deLeon2010': [
         'Observations, compositional, and physical characterization of near-Earth and Mars-crosser asteroids from a spectroscopic survey',
@@ -490,6 +491,22 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.045, 0.009]],
+    },
+    '(623) Chimaera | GaiaDR3, SsODNet': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
+        nm: [374, 418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
+        br: [
+            7.685826e-01, 8.583114e-01, 9.319733e-01, 9.800844e-01, 1.000000e+00, 1.002062e+00,
+            1.028834e+00, 1.025593e+00, 1.045870e+00, 1.064329e+00, 1.082985e+00, 1.100841e+00,
+            1.113934e+00, 1.128405e+00, 1.140737e+00, 1.179379e+00
+        ],
+        sd: [
+            5.061042e-03, 2.382602e-03, 2.008669e-03, 1.945844e-03, 1.975309e-03, 2.053912e-03,
+            2.071514e-03, 1.945770e-03, 2.008729e-03, 2.044305e-03, 2.108037e-03, 2.157879e-03,
+            2.174494e-03, 2.307703e-03, 2.581060e-03, 3.737699e-03
+        ],
+        geometric_albedo: ['Generic_Bessell.V', [0.053, 0.0105]],
+        phase_function: ['HG1G2', {H: [10.004629, +0.385774, -0.601341], G_1: [0.061868, +0.237863, -0.544161], G_2: [0.22148, +0.140916, -0.072153]}]
     },
     '(624) Hektor | GaiaDR3, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -956,6 +973,15 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.037, 0.001]], // ellipsoid model
     },
+    '(10253) Westerwald | SsODNet': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'u-g': [1.8065, 0.0613], 'g-r': [0.7074, 0.034], 'r-i': [0.2228, 0.0273], 'i-z': [-0.0529, 0.047]},
+        calibration_system: 'AB',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.2712, 0.073]],
+        phase_function: ['HG1G2', {H: [15.023914, +0.107685, -0.12172], G_1: [0.536426, +0.198095, -0.238198], G_2: [0.207543, +0.095334, -0.085078]}]
+    },
     '(10370) Hylonome | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
@@ -1026,6 +1052,22 @@
         color_indices: {'B-V': [0.673, 0.040], 'V-R': [0.403, 0.047], 'R-I': [0.380, 0.068]},
         calibration_system: 'Vega',
         sun_is_emitter: true
+    },
+    '(13294) Rockox | GaiaDR3, SsODNet': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
+        nm: [374, 418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
+        br: [
+            1.170744e+00, 8.837109e-01, 9.633635e-01, 9.484308e-01, 1.000000e+00, 9.719770e-01,
+            9.475574e-01, 9.559998e-01, 9.717301e-01, 9.965193e-01, 9.958198e-01, 1.040413e+00,
+            9.421372e-01, 1.048762e+00, 1.116237e+00, 1.312982e+00
+        ],
+        sd: [
+            1.709926e-01, 4.295485e-02, 2.893583e-02, 2.336168e-02, 2.432462e-02, 2.248825e-02,
+            2.463936e-02, 2.324755e-02, 2.482959e-02, 2.572201e-02, 2.732877e-02, 2.834329e-02,
+            2.696698e-02, 3.319068e-02, 4.586819e-02, 8.981603e-02
+        ],
+        geometric_albedo: ['Generic_Bessell.V', [0.113, 0.0209]],
+        phase_function: ['HG1G2', {H: [14.078838, +0.192652, -0.235609], G_1: [0.392066, +0.236526, -0.334636], G_2: [0.268238, +0.108478, -0.095037]}]
     },
     '(13463) Antiphos | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -1281,6 +1323,22 @@
         color_indices: {'B-V': [0.723, 0.035], 'V-R': [0.474, 0.029], 'R-I': [0.418, 0.041]},
         calibration_system: 'Vega',
         sun_is_emitter: true
+    },
+    '(23871) 1998 RC76 | GaiaDR3, SsODNet': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
+        nm: [418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990],
+        br: [
+            1.169836e+00, 9.734289e-01, 1.020999e+00, 1.000000e+00, 9.607990e-01, 8.466883e-01,
+            1.041513e+00, 1.033285e+00, 1.116874e+00, 1.093232e+00, 9.587399e-01, 1.217547e+00,
+            1.039413e+00, 1.333119e+00
+        ],
+        sd: [
+            1.326054e-01, 7.349496e-02, 6.324432e-02, 5.764853e-02, 5.885974e-02, 6.365982e-02,
+            6.794762e-02, 6.923109e-02, 7.724921e-02, 7.345232e-02, 7.583167e-02, 8.726881e-02,
+            1.180805e-01, 1.539106e-01
+        ],
+        geometric_albedo: ['Generic_Bessell.V', [0.0543, 0.0306]],
+        phase_function: ['HG1G2', {H: [14.719804, +0.200922, -0.248872], G_1: [0.766349, +0.344896, -0.510463], G_2: [0.095253, +0.190407, -0.147288]}]
     },
     '(24233) 1999 XD94 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -1847,6 +1905,22 @@
         color_indices: {'B-V': [0.800, 0.060], 'V-R': [0.390, 0.040], 'R-I': [0.470, 0.060]},
         calibration_system: 'Vega',
         sun_is_emitter: true
+    },
+    '(59980) 1999 SG6 | GaiaDR3, SsODNet': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
+        nm: [418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
+        br: [
+            9.012610e-01, 8.432570e-01, 8.990282e-01, 1.000000e+00, 1.012015e+00, 1.002383e+00,
+            1.070805e+00, 1.090945e+00, 1.078412e+00, 1.128532e+00, 1.124714e+00, 1.177929e+00,
+            1.209035e+00, 1.160600e+00, 1.598629e+00
+        ],
+        sd: [
+            4.572164e-02, 2.788956e-02, 2.470873e-02, 2.495641e-02, 2.540741e-02, 2.856116e-02,
+            2.757330e-02, 2.735725e-02, 2.872656e-02, 2.946765e-02, 2.926992e-02, 3.250777e-02,
+            3.723569e-02, 5.029930e-02, 1.350532e-01
+        ],
+        geometric_albedo: ['Generic_Bessell.V', [0.1331, 0.0265]],
+        phase_function: ['HG1G2', {H: [13.009767, +0.104947, -0.116899], G_1: [0.545874, +0.204576, -0.234137], G_2: [0.191298, +0.118304, -0.112887]}]
     },
     '(60454) 2000 CH105 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
