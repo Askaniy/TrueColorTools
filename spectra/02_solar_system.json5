@@ -735,6 +735,16 @@
         ],
     },
     // Hyperion
+    'Hicks2008': [
+        'BVR photometry of Hyperion near the time of the 2005 Cassini encounter',
+        'DOI: 10.1016/j.icarus.2007.06.021', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103507002990',
+        'https://ui.adsabs.harvard.edu/abs/2008Icar..193..352H/abstract'
+    ],
+    'Thomas1985': [
+        'Hyperion: Analysis of Voyager observations',
+        'DOI: 10.1016/0019-1035(85)90065-X', 'https://www.sciencedirect.com/science/article/abs/pii/001910358590065X',
+        'https://ui.adsabs.harvard.edu/abs/1985Icar...64..414T/abstract'
+    ],
     'Klavetter1989': [
         'Rotation of Hyperion. I. Observations',
         'DOI: 10.1086/115006', 'https://ui.adsabs.harvard.edu/abs/1989AJ.....97..570K/abstract'
@@ -745,25 +755,6 @@
         geometric_albedo: ['Generic_Bessell.V', [0.44, 0.13]], // Table 2, p. 325 (Verbiscer2018)
         phase_function: ['HG', {H: [13.81, 0.05], G: [0.56, 0.14]}]
     },
-    'Thomas1985': [
-        'Hyperion: Analysis of Voyager observations',
-        'DOI: 10.1016/0019-1035(85)90065-X', 'https://www.sciencedirect.com/science/article/abs/pii/001910358590065X',
-        'https://ui.adsabs.harvard.edu/abs/1985Icar...64..414T/abstract'
-    ],
-    'Hyperion (S VII) | Thomas1985, Klavetter1989': {
-        tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
-        photometric_system: 'Voyager_ISS-NAC',
-        filters: ['UV', 'Violet', 'Clear', 'Blue', 'Green', 'Orange'],
-        br: [0.54, 0.65, 0.82, 0.85, 1.00, 1.04],
-        sd: [0.02, 0.04, 0.01, 0.03, 0, 0.03],
-        geometric_albedo: ['Voyager_ISS-NAC.Clear', [0.214, 0.006]], // normal reflectance
-        phase_function: ['HG', {H: [13.81, 0.05], G: [0.56, 0.14]}]
-    },
-    'Hicks2008': [
-        'BVR photometry of Hyperion near the time of the 2005 Cassini encounter',
-        'DOI: 10.1016/j.icarus.2007.06.021', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103507002990',
-        'https://ui.adsabs.harvard.edu/abs/2008Icar..193..352H/abstract'
-    ],
     'Hyperion (S VII) | Hicks2008, Verbiscer2018, Klavetter1989': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         photometric_system: 'Generic_Bessell',
@@ -773,16 +764,42 @@
         geometric_albedo: ['Generic_Bessell.V', [0.44, 0.13]], // Table 2, p. 325 (Verbiscer2018)
         phase_function: ['HG', {H: [13.81, 0.05], G: [0.56, 0.14]}]
     },
+    'Hyperion (S VII) | Thomas1985, Klavetter1989': {
+        tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
+        photometric_system: 'Voyager_ISS-NAC',
+        filters: ['UV', 'Violet', 'Clear', 'Blue', 'Green', 'Orange'],
+        br: [0.54, 0.65, 0.82, 0.85, 1.00, 1.04],
+        sd: [0.02, 0.04, 0.01, 0.03, 0, 0.03],
+        geometric_albedo: ['Voyager_ISS-NAC.Clear', [0.214, 0.006]], // normal reflectance
+        phase_function: ['HG', {H: [13.81, 0.05], G: [0.56, 0.14]}]
+    },
     // Iapetus
+    'Blackburn2010': [
+        'Solar phase curves and phase integrals for the leading and trailing hemispheres of Iapetus from the Cassini Visual Infrared Mapping Spectrometer',
+        'DOI: 10.1016/j.icarus.2010.04.011', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103510001594',
+        'https://ui.adsabs.harvard.edu/abs/2010Icar..209..738B/abstract'
+    ],
     'Gudipati2003': [
         'Luminescence from Vacuum-Ultraviolet-irradiated Cosmic Ice Analogs and Residues',
         'DOI: 10.1086/345349', 'https://iopscience.iop.org/article/10.1086/345349'
     ],
-    'Iapetus: Leading hemisphere (S VIII) | Gudipati2003': {
+    'Iapetus: Leading hemisphere (S VIII) | Blackburn2010': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'traced spectrum'],
+        nm: [350, 400, 510, 600, 700, 810, 900, 1000, 1520, 1800, 2020, 2230, 3600],
+        br_geometric: [0.031, 0.031, 0.032, 0.051, 0.056, 0.065, 0.059, 0.058, 0.106, 0.131, 0.104, 0.148, 0.055], // traced from Fig. 4
+        br_spherical: [0.005, 0.005, 0.008, 0.009, 0.012, 0.023, 0.015, 0.015, 0.033, 0.039, 0.038, 0.047, 0.019], // calculated from phase integrals in Table 2
+    },
+    'Iapetus: Leading hemisphere (S VIII) | Gudipati2003': {
+        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'traced spectrum'],
         nm: [330, 350, 380, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850],
         br: [0.047, 0.051, 0.058, 0.063, 0.067, 0.071, 0.080, 0.087, 0.090, 0.093, 0.099, 0.102, 0.102],
         albedo: true
+    },
+    'Iapetus: Trailing hemisphere (S VIII) | Blackburn2010': {
+        tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'traced spectrum'],
+        nm: [350, 400, 510, 600, 700, 810, 900, 1000, 1520, 1800, 2020, 2230, 3600],
+        br_geometric: [0.42, 0.44, 0.46, 0.44, 0.42, 0.42, 0.44, 0.45, 0.25, 0.45, 0.14, 0.43, 0.08], // traced from Fig. 5
+        br_spherical: [0.21, 0.23, 0.28, 0.28, 0.27, 0.28, 0.29, 0.30, 0.12, 0.28, 0.07, 0.25, 0.02], // calculated from phase integrals in Table 2
     },
     // Phoebe
     'Miller2011': [
