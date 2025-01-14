@@ -470,6 +470,12 @@
         geometric_albedo: ['Generic_Bessell.V', [0.0581, +0.0125, -0.0128]],
         phase_function: ['HG1G2', {H: [8.393, 0.005], G_1: [0.87, 0.04], G_2: [0.080, 0.030]}]
     },
+    '(596) Scheila | SMASS, SsODNet, Shevchenko2022': {
+        tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt', 'minor body/asteroid/active asteroid'],
+        file: 'spectra/files/SMASS/a000596.2.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.0457, +0.0089, -0.0087]],
+        phase_function: ['HG1G2', {H: [9.079, 0.016], G_1: [0.96, 0.01], G_2: [0.000, 0.050]}]
+    },
     'Chatelain2016': [
         'Photometric colors of the brightest members of the Jupiter L5 Trojan cloud',
         'DOI: 10.1016/j.icarus.2016.01.026', 'https://ui.adsabs.harvard.edu/abs/2016Icar..271..158C/abstract'
