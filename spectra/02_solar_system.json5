@@ -1095,6 +1095,23 @@
         file: 'spectra/files/Karkoschka/Neptune1995.txt',
         geometric_albedo: true,
     },
+    // Neptunian small inner satellites
+    'Lane1989': [
+        'Photometry from Voyager 2: Initial Results from the Neptunian Atmosphere, Satellites, and Rings',
+        'DOI: 10.1126/science.246.4936.1450', 'https://www.science.org/doi/10.1126/science.246.4936.1450',
+        'https://ui.adsabs.harvard.edu/abs/1989Sci...246.1450L/abstract'
+    ],
+    'Karkoschka2003': [
+        'Sizes, shapes, and albedos of the inner satellites of Neptune',
+        'DOI: 10.1016/S0019-1035(03)00002-2', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103503000022',
+        'https://ui.adsabs.harvard.edu/abs/2003Icar..162..400K/abstract'
+    ],
+    'Larissa (N VII) | Lane1989, Karkoschka2003': {
+        tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
+        nm: [260, 750],
+        br: [[0.06, 0.02], [0.07, 0.01]],
+        geometric_albedo: [550, 0.091],
+    },
     // Proteus
     'Pascu2006': [
         'HST BVI photometry of Triton and Proteus',
