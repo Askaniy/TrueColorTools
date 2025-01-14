@@ -1724,6 +1724,18 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    'SouzaFeliciano2020': [
+        'Analysis in the visible range of NASA Lucy mission targets: Eurybates, Polymele, Orus and Donaldjohanson.',
+        'DOI: 10.1016/j.icarus.2019.113463', 'https://arxiv.org/abs/1907.11451',
+        'https://ui.adsabs.harvard.edu/abs/2020Icar..33813463S/abstract'
+    ],
+    '(52246) Donaldjohanson | SouzaFeliciano2020, SsODNet': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Lucy target', 'traced spectrum'],
+        nm_range: {start: 500, stop: 900, step: 50},
+        br: [0.922, 1.000, 1.027, 1.044, 1.029, 1.030, 1.023, 1.001, 0.985], // traced from Fig. 2 (fit)
+        geometric_albedo: ['Generic_Bessell.V', [0.0622, 0.0115]],
+        phase_function: ['HG1G2', {H: [15.6692, +0.0621, -0.0787], G_1: [0.0182, +0.0345, -0.0182], G_2: [0.9325, +0.0641, -0.075]}] // Misc/Atlas.orange
+    },
     '(52747) 1998 HM151 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
