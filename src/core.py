@@ -358,6 +358,18 @@ class _TrueColorToolsObject:
         if isinstance(other, _TrueColorToolsObject):
             return np.array_equal(self.nm, other.nm) and np.array_equal(self.br, other.br)
         return False
+    
+    #def __repr__(self) -> str:
+    #    output = f'{self.__class__.__name__}('
+    #    if len(self.nm > 3):
+    #        output += f'nm=[{self.nm[1]}, {self.nm[2]}, ..., {self.nm[-1]}], '
+    #    else:
+    #        output += f'nm=[{self.nm}], '
+    #    if len(self.br > 3):
+    #        output += f'br=[{self.br[1]:.3f}, {self.br[2]:.3f}, ..., {self.br[-1]:.3f}], '
+    #    else:
+    #        output += f'br=[{self.br}], '
+    #    return output[:-2] + ')'
 
 
 class _SpectralObject(_TrueColorToolsObject):
@@ -629,6 +641,31 @@ class Spectrum(_SpectralObject):
             nm = (nm0-nm_step, nm0, nm0+nm_step, nm0+nm_step*2)
             br = (0., 1.-proximity_factor, proximity_factor, 0.)
         return Spectrum(nm, np.array(br)/nm_step, name=f'{nm_point} nm')
+    
+    @staticmethod
+    def from_spectral_lines(nm: Sequence, br: Sequence, sd: Sequence = None, name: str|ObjectName = None):
+        """
+        Creates an emission spectrum from the spectral lines wavelength and brightness lists.
+
+        Args:
+        - `nm` (Sequence): list of wavelengths in nanometers
+        - `br` (Sequence): array of "brightness" in energy density units (not a photon counter)
+        - `sd` (Sequence): optional array of standard deviations
+        - `name` (str|ObjectName): name as a string or an instance of a class that stores its components
+        """
+        nm = np.array(nm) # numpy decides int or float
+        order = np.argsort(nm)
+        nm = nm[order]
+        br = np.array(br, dtype='float64')[order]
+        if sd is not None:
+            sd = np.array(sd, dtype='float64')[order]
+        spectral_lines = tuple(Spectrum.from_nm(a) * b for a, b in zip(nm, br))
+        nm = aux.grid(spectral_lines[0].nm[0], spectral_lines[-1].nm[-1], nm_step)
+        output: Spectrum = spectral_lines[0].define_on_range(nm)
+        for line in spectral_lines[1:]:
+            output += line.define_on_range(nm)
+        output.name = ObjectName.as_ObjectName(name)
+        return output
     
     @staticmethod
     def from_blackbody_redshift(nm_arr: np.ndarray, temperature: int|float, velocity=0., vII=0.):
@@ -1239,14 +1276,18 @@ class ReflectiveBody:
 
 def _create_TCT_object(
         name: ObjectName, nm: Sequence[int|float], filters: Sequence[str], br: Sequence,
-        sd: Sequence = None, filter_system: str = None, calib: str = None, sun: bool = False
+        sd: Sequence = None, filter_system: str = None, calib: str = None,
+        sun_is_emitter: bool = False, is_emission_spectrum: bool = False
     ):
     """
     Decides whether we are dealing with photospectrum or continuous spectrum
     and calibrates the spectral object.
     """
     if len(nm) > 0:
-        TCT_obj = Spectrum.from_array(nm, br, sd, name=name)
+        if is_emission_spectrum:
+            TCT_obj = Spectrum.from_spectral_lines(nm, br, sd, name=name)
+        else:
+            TCT_obj = Spectrum.from_array(nm, br, sd, name=name)
     elif len(filters) > 0:
         TCT_obj = Photospectrum(FilterSystem.from_list(filters, name=filter_system), br, sd, name=name)
     else:
@@ -1261,7 +1302,7 @@ def _create_TCT_object(
                 TCT_obj = TCT_obj.convert_from_frequency_spectral_density()
             case _:
                 pass
-    if sun:
+    if sun_is_emitter:
         TCT_obj /= sun_norm
     return TCT_obj
 
@@ -1349,12 +1390,13 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
             filters = [f'{filter_system}.{short_name}' if isinstance(short_name, str) else short_name for short_name in filters]
     calib = content['calibration_system'] if 'calibration_system' in content else None
     sun = 'sun_is_emitter' in content and content['sun_is_emitter']
+    is_emission = 'is_emission_spectrum' in content and content['is_emission_spectrum']
     geometric = spherical = None
     if len(br) == 0:
         if 'br_geometric' in content:
             br_geom = content['br_geometric']
             sd_geom = aux.repeat_if_value(content['sd_geometric'], len(br_geom)) if 'sd_geometric' in content else None
-            geometric = _create_TCT_object(name, nm, filters, br_geom, sd_geom, filter_system, calib, sun)
+            geometric = _create_TCT_object(name, nm, filters, br_geom, sd_geom, filter_system, calib, sun, is_emission)
             if 'spherical_albedo' in content:
                 where, how = content['spherical_albedo']
                 spherical = geometric.scaled_at(where, *aux.parse_value_sd(how))
@@ -1363,7 +1405,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
         if 'br_spherical' in content:
             br_sphe = content['br_spherical']
             sd_sphe = aux.repeat_if_value(content['sd_spherical'], len(br_sphe)) if 'sd_spherical' in content else None
-            spherical = _create_TCT_object(name, nm, filters, br_sphe, sd_sphe, filter_system, calib, sun)
+            spherical = _create_TCT_object(name, nm, filters, br_sphe, sd_sphe, filter_system, calib, sun, is_emission)
             if 'geometric_albedo' in content:
                 where, how = content['geometric_albedo']
                 geometric = spherical.scaled_at(where, *aux.parse_value_sd(how))
@@ -1372,7 +1414,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
             print(f'- No brightness data. Spectrum stub object was created.')
             TCT_obj = Spectrum.stub(name)
     else:
-        TCT_obj = _create_TCT_object(name, nm, filters, br, sd, filter_system, calib, sun)
+        TCT_obj = _create_TCT_object(name, nm, filters, br, sd, filter_system, calib, sun, is_emission)
         # Non-specific albedo parsing
         if 'albedo' in content:
             if isinstance(content['albedo'], bool) and content['albedo']:
