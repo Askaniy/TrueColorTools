@@ -2850,7 +2850,29 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.66, 0.02]],
-        spherical_albedo: ['Generic_Bessell.V', [0.33, 0.03]], // SYSTEM albedo
+        spherical_albedo: ['Generic_Bessell.V', [0.33, 0.03]], // system albedo
+    },
+    'FernandezValenzuela2024': [
+        'Deciphering satellite formation in the trans-Neptunian region: the case of Weywot',
+        'https://www.youtube.com/watch?v=n5FFLJi2I8U', 'https://tno2024.org/relation/abstract/90'
+    ],
+    '(136108 I) Hi‘iaka | Brown2010, FernandezValenzuela2024, Verbiscer2022': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite', 'traced spectrum'],
+        photometric_system: 'HST_WFPC2-PC',
+        color_indices: {'F606W-F814W': [0.45, 0.14]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.76, 0.15]],
+        spherical_albedo: ['Generic_Bessell.V', [0.33, 0.03]], // system albedo
+    },
+    '(136108 II) Namaka | Brown2010, Verbiscer2022': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite', 'traced spectrum'],
+        photometric_system: 'HST_WFPC2-PC',
+        color_indices: {'F606W-F814W': [0.43, 0.47]}, // uncertainty may be incorrect
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.75, 0.02]], // system albedo
+        spherical_albedo: ['Generic_Bessell.V', [0.33, 0.03]], // system albedo
     },
     '(136199) Eris | Lorenzi2016, Verbiscer2022': {
         tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO', 'traced spectrum'],
@@ -3365,6 +3387,18 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.101, +0.534, -0.005]],
     },
+    'Snodgrass2009': [
+        'Characterisation of candidate members of (136108) Haumea's family',
+        'DOI: 10.1051/0004-6361/200913031', 'https://www.aanda.org/articles/aa/full_html/2010/03/aa13031-09/aa13031-09.html',
+        'https://ui.adsabs.harvard.edu/abs/2010A&A...511A..72S'
+    ],
+    '(308193) 2005 CB79 | Snodgrass2009': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Generic_Bessell',
+        filters: ['B', 'V', 'R', 'I'],
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
     '(308379) 2005 RS43 | Boehnhardt2014, FarkasTakacs2020': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
         photometric_system: 'Generic_Bessell',
@@ -3548,6 +3582,18 @@
         tags: ['MBOSS', 'Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.850, 0.060], 'V-R': [0.490, 0.050], 'R-I': [0.420, 0.060]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    'Trujillo2011': [
+        'A Photometric System for Detection of Water and Methane Ices on Kuiper Belt Objects',
+        'DOI: 10.1088/0004-637X/730/2/105', 'https://iopscience.iop.org/article/10.1088/0004-637X/730/2/105',
+        'https://ui.adsabs.harvard.edu/abs/2011ApJ...730..105T/abstract'
+    ],
+    '(386723) 2009 YE7 | Trujillo2011': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-R': [1.03, 0.04], 'V-R': [0.38, 0.04], 'R-I': [0.51, 0.05]},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
