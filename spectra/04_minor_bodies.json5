@@ -1841,6 +1841,18 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.139, +0.157, -0.064]],
     },
+    'Trujillo2002': [
+        'A Correlation between Inclination and Color in the Classical Kuiper Belt',
+        'DOI: 10.1086/339437', 'https://iopscience.iop.org/article/10.1086/339437',
+        'https://ui.adsabs.harvard.edu/abs/2002ApJ...566L.125T'
+    ],
+    '(53311) Deucallion | Trujillo2002': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [1.36, 0.16], 'B-R': [2.03, 0.16]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
     '(53469) 2000 AX8 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
@@ -2281,6 +2293,29 @@
         color_indices: {'B-V': [1.080, 0.040], 'V-R': [0.730, 0.010]},
         calibration_system: 'Vega',
         sun_is_emitter: true
+    },
+    'Osip2003': [
+        'Physical Characterization of the Binary EdgeworthKuiper Belt Object 2001 QT297',
+        'DOI: 10.1023/B:MOON.0000031955.57130.91', 'https://link.springer.com/article/10.1023/B:MOON.0000031955.57130.91',
+        'https://ui.adsabs.harvard.edu/abs/2003EM&P...92..409O/abstract'
+    ],
+    '(88611) Teharonhiawako | Osip2003, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        filters: ['g', 'r', 'i'],
+        mag: [[23.79, 0.03], [22.94, 0.02], [22.55, 0.01]],
+        calibration_system: 'AB',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.145, +0.086, -0.045]], // system albedo
+    },
+    '(88611 I) Sawiskera | Osip2003, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite'],
+        photometric_system: 'SLOAN_SDSS',
+        filters: ['g', 'r', 'i'],
+        mag: [[24.41, 0.07], [23.55, 0.05], [23.26, 0.05]],
+        calibration_system: 'AB',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.145, +0.086, -0.045]], // system albedo
     },
     '(90377) Sedna | MBOSS': {
         tags: ['featured', 'MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO'],
@@ -2784,7 +2819,6 @@
         br: [0.96, 1, 0.98], // Blue/Red ratio: ~0.96, Red/NIR ratio: ~1.02
         geometric_albedo: ['Generic_Bessell.V', [0.560, 0.050]],
         spherical_albedo: ['Generic_Bessell.V', [0.24, 0.07]],  // Table 3, p. 426 (Howett2021)
-        phase_integral: [0.42, 0.08],  // Table 3, p. 426 (Howett2021)
     },
     '(134340 II) Nix | Stern2009, Weaver2016, Howett2021': {
         tags: ['Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'spacecraft target/New Horizons target'],
@@ -2794,7 +2828,6 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.560, 0.050]],
         spherical_albedo: ['Generic_Bessell.V', [0.24, 0.07]],  // Table 3, p. 426 (Howett2021)
-        phase_integral: [0.42, 0.08],  // Table 3, p. 426 (Howett2021)
     },
     '(134340 III) Hydra | Weaver2016, Howett2021': {
         tags: ['featured', 'Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'spacecraft target/New Horizons target'],
@@ -2803,7 +2836,6 @@
         br: [1.00, 1, 0.90], // Blue/Red ratio: ~1.00, Red/NIR ratio: ~1.11
         geometric_albedo: ['Generic_Bessell.V', [0.830, 0.080]],
         spherical_albedo: ['Generic_Bessell.V', [0.32, 0.11]], // Table 3, p. 426 (Howett2021)
-        phase_integral: [0.39, 0.10],  // Table 3, p. 426 (Howett2021)
     },
     '(134340 III) Hydra | Stern2009, Weaver2016, Howett2021': {
         tags: ['Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'spacecraft target/New Horizons target'],
@@ -2813,7 +2845,6 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.830, 0.080]],
         spherical_albedo: ['Generic_Bessell.V', [0.32, 0.11]], // Table 3, p. 426 (Howett2021)
-        phase_integral: [0.39, 0.10],  // Table 3, p. 426 (Howett2021)
     },
     '(134860) 2000 OJ67 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
@@ -2850,7 +2881,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.66, 0.02]],
-        spherical_albedo: ['Generic_Bessell.V', [0.33, 0.03]], // system albedo
+        phase_integral: [0.44, 0.03], // system
     },
     'FernandezValenzuela2024': [
         'Deciphering satellite formation in the trans-Neptunian region: the case of Weywot',
@@ -3388,7 +3419,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.101, +0.534, -0.005]],
     },
     'Snodgrass2009': [
-        'Characterisation of candidate members of (136108) Haumea's family',
+        'Characterisation of candidate members of (136108) Haumea’s family',
         'DOI: 10.1051/0004-6361/200913031', 'https://www.aanda.org/articles/aa/full_html/2010/03/aa13031-09/aa13031-09.html',
         'https://ui.adsabs.harvard.edu/abs/2010A&A...511A..72S'
     ],
