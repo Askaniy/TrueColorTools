@@ -3426,7 +3426,7 @@
     '(308193) 2005 CB79 | Snodgrass2009': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
-        filters: ['B', 'V', 'R', 'I'],
+        color_indices: {'B-V': [0.73, 0.04], 'V-R': [0.37, 0.05], 'R-I': [0.36, 0.05]},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
