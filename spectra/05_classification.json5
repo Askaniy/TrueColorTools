@@ -96,6 +96,50 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.078, 0.045]]
     },
+    'Centaurs: Active | Jewitt2015, Jewitt2009': {
+        tags: ['Solar System', 'minor body/centaur/active centaur', 'class/orbital class'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.80, 0.03], 'V-R': [0.50, 0.03], 'R-I': [0.57, 0.03]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.R', 0.10] // assumed by Jewitt2009
+    },
+    'Centaurs: Inactive | Jewitt2015': {
+        tags: ['Solar System', 'minor body/centaur', 'class/orbital class'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.93, 0.04], 'V-R': [0.55, 0.03], 'R-I': [0.45, 0.02]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    'Tegler2016': [
+        'Two Color Populations of Kuiper Belt and Centaur Objects and the Smaller Orbital Inclinations of Red Centaur Objects',
+        'DOI: 10.3847/0004-6256/152/6/210', 'https://iopscience.iop.org/article/10.3847/0004-6256/152/6/210',
+        'https://ui.adsabs.harvard.edu/abs/2016AJ....152..210T/abstract'
+    ],
+    'Centaurs: Gray | Tegler2016': {
+        tags: ['Solar System', 'minor body/centaur', 'class/orbital class'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-R': [1.22, 0.07]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.059, 0.012]]
+    },
+    'Centaurs: Red | Tegler2016': {
+        tags: ['Solar System', 'minor body/centaur', 'class/orbital class'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-R': [1.71, 0.14]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.12, 0.054]]
+    },
+    'Damocloids | Jewitt2015, Licandro2016': {
+        tags: ['Solar System', 'minor body/centaur/Damocloid', 'class/orbital class'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.80, 0.02], 'V-R': [0.51, 0.02], 'R-I': [0.47, 0.02]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.051, 0.023]]
+    },
     'Plutinos | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
