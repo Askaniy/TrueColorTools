@@ -143,6 +143,21 @@
         'DOI: 10.1088/0004-637X/747/1/49', 'https://iopscience.iop.org/article/10.1088/0004-637X/747/1/49',
         'https://ui.adsabs.harvard.edu/abs/2012ApJ...747...49B'
     ],
+    'Grav2012': [
+        'WISE/NEOWISE Observations of the Jovian Trojan Population: Taxonomy',
+        'DOI: 10.1088/0004-637X/759/1/49', 'https://iopscience.iop.org/article/10.1088/0004-637X/759/1/49',
+        'https://ui.adsabs.harvard.edu/abs/2012ApJ...759...49G/abstract'
+    ],
+    'Simpson2022': [
+        'An ALMA Search for High-albedo Objects Among the Midsized Jupiter Trojan Population',
+        'DOI: 10.3847/1538-3881/ac559e', 'https://iopscience.iop.org/article/10.3847/1538-3881/ac559e/meta',
+        'https://ui.adsabs.harvard.edu/abs/2022AJ....164...23S'
+    ],
+    'Martin2023': [
+        'MIR Spectra and Analysis of Jovian Trojan Asteroids',
+        'DOI: 10.3847/PSJ/aced0c', 'https://iopscience.iop.org/article/10.3847/PSJ/aced0c/meta',
+        'https://ui.adsabs.harvard.edu/abs/2023PSJ.....4..153M/abstract'
+    ],
     'Lin2018': [
         'Photometric survey and taxonomic identifications of 92 near-Earth asteroids',
         'DOI: 10.1016/j.pss.2017.12.019', 'https://www.sciencedirect.com/science/article/pii/S0032063317301617',
@@ -500,18 +515,20 @@
         'DOI: 10.1016/j.icarus.2009.07.043', 'https://arxiv.org/abs/0908.4198',
         'https://ui.adsabs.harvard.edu/abs/2010Icar..205..505M/abstract'
     ],
-    '(617) Patroclus-Menoetius | Humes2022, Mueller2010': {
+    '(617) Patroclus-Menoetius | Humes2022, Mueller2010, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan', 'spacecraft target/Lucy target'],
         file: 'spectra/files/Humes2022/617_Patroclus_albedo.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.045, 0.009]],
+        phase_function: ['HG1G2', {H: [7.957342, +0.142561, -0.166447], G_1: [0.645036, +0.340379, -0.434002], G_2: [0.089212, +0.227991, -0.190795]}]
     },
-    '(617) Patroclus-Menoetius | Chatelain2016, Mueller2010': {
+    '(617) Patroclus-Menoetius | Chatelain2016, Mueller2010, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan', 'spacecraft target/Lucy target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.710, 0.050], 'V-R': [0.420, 0.030], 'V-I': [0.830, 0.020]}, // as reported in LCDB
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.045, 0.009]],
+        phase_function: ['HG1G2', {H: [7.957342, +0.142561, -0.166447], G_1: [0.645036, +0.340379, -0.434002], G_2: [0.089212, +0.227991, -0.190795]}]
     },
     '(623) Chimaera | GaiaDR3, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
@@ -623,19 +640,28 @@
         geometric_albedo: ['Generic_Bessell.V', [0.218, 0.048]],
         phase_function: ['HG', {H: 9.45, G: 0.30}]
     },
-    '(1172) Äneas | MBOSS': {
+    '(1172) Äneas | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.727, 0.030], 'V-R': [0.510, 0.022], 'R-I': [0.400, 0.030]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.059, 0.006]],
+        phase_function: ['HG1G2', {H: [9.133, 0.256], G_1: [0.656, 0.437], G_2: [0.183, 0.157]}] // Palomar/ZTF.g
     },
-    '(1173) Anchises | MBOSS': {
+    'Horner2012': [
+        '(1173) Anchises - thermophysical and dynamical studies of a dynamically unstable Jovian Trojan',
+        'DOI: 10.1111/j.1365-2966.2012.21067.x', 'https://academic.oup.com/mnras/article/423/3/2587/2460661',
+        'https://ui.adsabs.harvard.edu/abs/2012MNRAS.423.2587H/abstract'
+    ],
+    '(1173) Anchises | MBOSS, Horner2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.811, 0.034], 'V-R': [0.402, 0.035], 'R-I': [0.403, 0.052]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.027, +0.006, -0.007]],
+        phase_function: ['HG1G2', {H: [8.720226, +0.206699, -0.251362], G_1: [0.807530, +0.671453, -0.977344], G_2: [0.062753, +0.543229, -0.395444]}]
     },
     '(1252) Celestia | SMASS, Mainzer2019': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -653,12 +679,14 @@
         geometric_albedo: ['Generic_Bessell.V', [0.168, 0.017]], // light-curve, fixed diameter model
         phase_function: ['HG', {H: [15.6, 0.1], G: 0.15}]
     },
-    '(1871) Astyanax | MBOSS': {
+    '(1871) Astyanax | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.716, 0.071], 'V-R': [0.456, 0.053], 'R-I': [0.424, 0.089]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.076, 0.014]],
+        phase_function: ['HG1G2', {H: [11.794, 0.043], G_1: [0.572, 0.137], G_2: [0.204, 0.082]}] // Palomar/ZTF.g
     },
     'BragaRibas2023': [
         "Constraints on (2060) Chiron's size, shape, and surrounding material from the November 2018 and September 2019 stellar occultations",
@@ -689,19 +717,23 @@
         geometric_albedo: ['Generic_Bessell.V', [0.56, +0.12, -0.18]],
         phase_function: ['HG', {H: [17.250, 0.202], G: [0.230, 0.100]}]
     },
-    '(2223) Sarpedon | MBOSS': {
+    '(2223) Sarpedon | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.753, 0.032], 'V-R': [0.465, 0.025], 'R-I': [0.440, 0.041]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.076, 0.014]],
+        phase_function: ['HG1G2', {H: [9.006543, +0.221414, -0.280213], G_1: [0.488732, +0.561266, -0.817016], G_2: [0.293343, +0.443383, -0.326224]}]
     },
-    '(2357) Phereclos | MBOSS': {
+    '(2357) Phereclos | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.718, 0.059], 'V-R': [0.427, 0.045], 'R-I': [0.463, 0.068]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.052, 0.007]],
+        phase_function: ['HG1G2', {H: [8.905987, +0.111426, -0.119042], G_1: [0.692598, +0.417235, -0.494774], G_2: [0.159417, +0.302197, 0.266043]}]
     },
     '(2685) Masursky | GaiaDR3, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/main belt'],
@@ -802,12 +834,14 @@
         geometric_albedo: ['Generic_Bessell.V', [0.0357, 0.0087]],
         phase_function: ['HG1G2', {H: [15.743640, +0.172932, -0.200737], G_1: [0.639157, +0.245119, -0.324135], G_2: [0.101285, +0.094526, -0.077950]}]
     },
-    '(4035) Thestor | MBOSS': {
+    '(4035) Thestor | MBOSS, Martin2023, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.752, 0.040], 'V-R': [0.484, 0.043], 'R-I': [0.451, 0.069]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.049, +0.006, -0.007]],
+        phase_function: ['HG1G2', {H: [9.369398, +0.131678, -0.150180], G_1: [0.573178, +0.424778, -0.510439], G_2: [0.202344, +0.314942, -0.281430]}]
     },
     'Bach2019': [
         'The Geometric Albedo of (4179) Toutatis Estimated from KMTNet DEEP-South Observations',
@@ -819,19 +853,23 @@
         geometric_albedo: ['Generic_Bessell.V', [0.185, +0.045, -0.039]],
         phase_function: ['HG', {H: 15.30, G: 0.10}]
     },
-    '(4829) Sergestus | MBOSS': {
+    '(4829) Sergestus | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.851, 0.050], 'V-R': [0.420, 0.039], 'R-I': [0.372, 0.065]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.068, 0.008]],
+        phase_function: ['HG1G2', {H: [11.806, 0.087], G_1: [0.727, 0.212], G_2: [0.084, 0.106]}] // Palomar/ZTF.g
     },
-    '(5130) Ilioneus | MBOSS': {
+    '(5130) Ilioneus | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.763, 0.034], 'V-R': [0.481, 0.026], 'R-I': [0.424, 0.046]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.069, 0.013]],
+        phase_function: ['HG1G2', {H: [9.846731, +0.195035, -0.235687], G_1: [0.898014, +0.583266, -0.815470], G_2: [0.057243, +0.433971, -0.330668]}]
     },
     'Duffard2014': [
         '"TNOs are Cool": A survey of the trans-Neptunian region. XI. A Herschel-PACS view of 16 Centaurs',
@@ -851,12 +889,13 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.155, +0.076, -0.049]],
     },
-    '(5511) Cloanthus | MBOSS': {
+    '(5511) Cloanthus | MBOSS, Grav2012': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.906, 0.027], 'V-R': [0.442, 0.027], 'R-I': [0.526, 0.042]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.093, 0.013]],
     },
     'Hillier2011': [
         'Photometric modeling of Asteroid 5535 Annefrank from Stardust observations',
@@ -907,19 +946,23 @@
         geometric_albedo: ['Generic_Bessell.V', [0.151, 0.023]],
         phase_function: ['HG', {H: [19.074, 0.029], G: [0.138, 0.013]}]
     },
-    '(6545) Leitus | MBOSS': {
+    '(6545) Leitus | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.734, 0.041], 'V-R': [0.499, 0.042], 'R-I': [0.436, 0.069]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.068, 0.009]],
+        phase_function: ['HG1G2', {H: [9.981978, +0.147896, -0.172901], G_1: [0.261540, +0.391209, -0.484931], G_2: [0.356343, +0.295840, -0.251665]}]
     },
-    '(6998) Tithonus | MBOSS': {
+    '(6998) Tithonus | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.787, 0.040], 'V-R': [0.455, 0.032], 'R-I': [0.438, 0.046]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.049, 0.008]],
+        phase_function: ['HG1G2', {H: [11.346963, +0.105185, -0.114837], G_1: [0.750675, +0.578552, -0.682130], G_2: [0.028528, +0.482404, -0.418299]}]
     },
     '(7066) Nessus | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -929,12 +972,14 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.086, +0.075, -0.034]],
     },
-    '(7352) Hypsenor | MBOSS': {
+    '(7352) Hypsenor | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.713, 0.036], 'V-R': [0.417, 0.034], 'R-I': [0.397, 0.056]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.093, 0.023]],
+        phase_function: ['HG1G2', {H: [10.527, 0.079], G_1: [0.794, 0.213], G_2: [0.041, 0.112]}] // Palomar/ZTF.g
     },
     'Hsieh2010': [
         'The return of activity in main-belt comet 133P/Elst-Pizarro',
@@ -958,26 +1003,32 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.056, +0.019, -0.015]],
     },
-    '(9030) Othryoneus | MBOSS': {
+    '(9030) Othryoneus | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.887, 0.024], 'V-R': [0.493, 0.027], 'R-I': [0.480, 0.039]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.062, 0.007]],
+        phase_function: ['HG1G2', {H: [11.870, 0.147], G_1: [0.523, 0.454], G_2: [0.257, 0.276]}] // Palomar/ZTF.g
     },
-    '(9430) Erichthonio | MBOSS': {
+    '(9430) Erichthonios | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.742, 0.079], 'V-R': [0.488, 0.060], 'R-I': [0.456, 0.109]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.077, 0.010]],
+        phase_function: ['HG1G2', {H: [11.215843, +0.074972, -0.079854], G_1: [0.772554, +0.512811, -0.551055], G_2: [0.045197, +0.417052, -0.393247]}]
     },
-    '(9818) Eurymachos | MBOSS': {
+    '(9818) Eurymachos | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.673, 0.052], 'V-R': [0.339, 0.046], 'R-I': [0.355, 0.067]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.089, 0.021]],
+        phase_function: ['HG1G2', {H: [11.468, 0.049], G_1: [0.706, 0.165], G_2: [0.056, 0.099]}] // Palomar/ZTF.g
     },
     'Buratti2004': [
         '9969 Braille: Deep Space 1 infrared spectroscopy, geometric albedo, and classification',
@@ -1024,12 +1075,14 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.051, +0.030, -0.017]],
     },
-    '(11089) 1994 CS8 | MBOSS': {
+    '(11089) 1994 CS8 | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.689, 0.073], 'V-R': [0.423, 0.056], 'R-I': [0.384, 0.094]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.074, 0.014]],
+        phase_function: ['HG1G2', {H: [11.128, 0.094], G_1: [0.495, 0.305], G_2: [0.213, 0.185]}] // Palomar/ZTF.g
     },
     'Mottola2020': [
         'Convex Shape and Rotation Model of Lucy Target (11351) Leucus from Lightcurves and Occultations',
@@ -1050,19 +1103,23 @@
         geometric_albedo: ['Generic_Bessell.V', [0.043, 0.002]],
         phase_function: ['HG1G2', {H: [10.95, 0.01], G_1: [0.63, 0.04], G_2: [0.23, 0.02]}]
     },
-    '(11488) 1988 RM11 | MBOSS': {
+    '(11488) 1988 RM11 | MBOSS, Simpson2022, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.777, 0.110], 'V-R': [0.436, 0.062], 'R-I': [0.420, 0.103]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.091, +0.012, -0.010]],
+        phase_function: ['HG1G2', {H: [11.200617, +0.127407, -0.145943], G_1: [0.661960, +0.516799, -0.627415], G_2: [0.038577, +0.426652, -0.353956]}]
     },
-    '(11663) 1997 GO24 | MBOSS': {
+    '(11663) 1997 GO24 | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.837, 0.030], 'V-R': [0.409, 0.030], 'R-I': [0.463, 0.049]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.086, 0.063]],
+        phase_function: ['HG1G2', {H: [10.799544, +0.165001, -0.194586], G_1: [0.723675, +0.479789, -0.635083], G_2: [0.074770, +0.356336, -0.294977]}]
     },
     '(12649) Ascanios | SsODNet': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -1073,19 +1130,23 @@
         geometric_albedo: ['Generic_Bessell.V', [0.0528, 0.0099]],
         phase_function: ['HG1G2', {H: [11.540497, +0.120558, -0.134698], G_1: [0.400906, +0.584725, -0.691005], G_2: [0.241104, +0.49603, -0.421077]}]
     },
-    '(12917) 1998 TG16 | MBOSS': {
+    '(12917) 1998 TG16 | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.724, 0.042], 'V-R': [0.537, 0.042], 'R-I': [0.410, 0.069]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.089, 0.027]],
+        phase_function: ['HG1G2', {H: [11.206150, +0.156531, -0.182817], G_1: [0.453292, +0.501588, -0.646139], G_2: [0.247082, +0.393965, -0.322062]}]
     },
-    '(12921) 1998 WZ5 | MBOSS': {
+    '(12921) 1998 WZ5 | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.673, 0.040], 'V-R': [0.403, 0.047], 'R-I': [0.380, 0.068]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.074, 0.006]],
+        phase_function: ['HG1G2', {H: [10.892119, +0.180562, -0.215830], G_1: [0.657746, +0.504328, -0.670967], G_2: [0.068832, +0.396052, -0.308696]}]
     },
     '(13294) Rockox | GaiaDR3, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
@@ -1103,19 +1164,23 @@
         geometric_albedo: ['Generic_Bessell.V', [0.113, 0.0209]],
         phase_function: ['HG1G2', {H: [14.078838, +0.192652, -0.235609], G_1: [0.392066, +0.236526, -0.334636], G_2: [0.268238, +0.108478, -0.095037]}]
     },
-    '(13463) Antiphos | MBOSS': {
+    '(13463) Antiphos | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.692, 0.045], 'V-R': [0.449, 0.034], 'R-I': [0.412, 0.066]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.100, 0.018]],
+        phase_function: ['HG1G2', {H: [10.980485, +0.166401, -0.197149], G_1: [0.434049, +0.594046, -0.766401], G_2: [0.191415, +0.507438, -0.398170]}]
     },
-    '(14707) 2000 CC20 | MBOSS': {
+    '(14707) 2000 CC20 | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.752, 0.041], 'V-R': [0.412, 0.035], 'R-I': [0.385, 0.067]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.087, 0.024]],
+        phase_function: ['HG1G2', {H: [11.213167, +0.173735, -0.206208], G_1: [0.293598, +0.605205, -0.800217], G_2: [0.394823, +0.522960, -0.422362]}]
     },
     'Buie2018': [
         'Light Curves of Lucy Targets: Leucus and Polymele',
@@ -1130,12 +1195,13 @@
         geometric_albedo: ['Generic_Bessell.V', 0.073],
         phase_function: ['HG', {H: [11.691, 0.002], G: [0.22, 0.02]}], // r-band
     },
-    '(15502) 1999 NV27 | MBOSS': {
+    '(15502) 1999 NV27 | MBOSS, Grav2012': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.766, 0.047], 'V-R': [0.445, 0.036], 'R-I': [0.430, 0.060]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.087, 0.024]],
     },
     '(15504) 1999 RG33 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur/Damocloid'],
@@ -1144,12 +1210,14 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '(15535) 2000 AT177 | MBOSS': {
+    '(15535) 2000 AT177 | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.739, 0.043], 'V-R': [0.470, 0.049], 'R-I': [0.461, 0.082]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.070, 0.019]],
+        phase_function: ['HG1G2', {H: [10.342245, +0.132067, -0.156439], G_1: [0.367382, +0.368518, -0.464002], G_2: [0.270831, +0.268260, -0.231029]}]
     },
     '(15760) Albion | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
@@ -1207,7 +1275,7 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.110, +0.021, -0.015]],
     },
-    '(15875) 1996 TP66 | MBOSS': {
+    '(15875) 1996 TP66 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.031, 0.112], 'V-R': [0.655, 0.076], 'R-I': [0.673, 0.086]},
@@ -1222,12 +1290,14 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '(15977) 1998 MA11 | MBOSS': {
+    '(15977) 1998 MA11 | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.748, 0.033], 'V-R': [0.465, 0.025], 'R-I': [0.441, 0.036]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.071, 0.008]],
+        phase_function: ['HG1G2', {H: [10.293525, +0.160763, -0.184900], G_1: [0.578817, +0.472260, -0.617322], G_2: [0.174599, +0.355892, -0.290739]}]
     },
     '(16684) 1994 JQ1 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
@@ -1236,47 +1306,59 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '(17416) 1988 RR10 | MBOSS': {
+    '(17416) 1988 RR10 | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.742, 0.071], 'V-R': [0.488, 0.055], 'R-I': [0.498, 0.097]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.063, 0.012]],
+        phase_function: ['HG1G2', {H: [11.981783, +0.330589, -0.471714], G_1: [0.340725, +0.684020, -1.309083], G_2: [0.305351, +0.669163, -0.414266]}]
     },
-    '(18060) Zarex | MBOSS': {
+    '(18060) Zarex | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.758, 0.056], 'V-R': [0.412, 0.043], 'R-I': [0.364, 0.063]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.053, 0.009]],
+        phase_function: ['HG1G2', {H: [11.440, 0.124], G_1: [0.398, 0.288], G_2: [0.214, 0.157]}] // Palomar/ZTF.g
     },
-    '(18137) 2000 OU30 | MBOSS': {
+    '(18137) 2000 OU30 | MBOSS, Simpson2022, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.733, 0.039], 'V-R': [0.496, 0.031], 'R-I': [0.409, 0.044]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.050, +0.009, -0.007]],
+        phase_function: ['HG1G2', {H: [11.533, 0.060], G_1: [0.584, 0.172], G_2: [0.192, 0.098]}] // Palomar/ZTF.g
     },
-    '(18268) Dardanos | MBOSS': {
+    '(18268) Dardanos | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.795, 0.042], 'V-R': [0.529, 0.040], 'R-I': [0.451, 0.056]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.074, 0.014]],
+        phase_function: ['HG1G2', {H: [11.703844, +0.239416, -0.308982], G_1: [0.205742, +0.806481, -1.219909], G_2: [0.363420, +0.793137, -0.565840]}]
     },
-    '(18493) Demoleon | MBOSS': {
+    '(18493) Demoleon | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.703, 0.073], 'V-R': [0.395, 0.047], 'R-I': [0.380, 0.087]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.083, 0.013]],
+        phase_function: ['HG1G2', {H: [10.570350, +0.186600, -0.221431], G_1: [0.531884, +0.646194, -0.874883], G_2: [0.219495, +0.557081, -0.425725]}]
     },
-    '(18940) 2000 QV49 | MBOSS': {
+    '(18940) 2000 QV49 | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.709, 0.072], 'V-R': [0.465, 0.055], 'R-I': [0.429, 0.093]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.106, 0.009]],
+        phase_function: ['HG1G2', {H: [11.558062, +0.100554, -0.112038], G_1: [0.434722, +0.549122, -0.633291], G_2: [0.329113, +0.454230, -0.633291]}]
     },
     '(19255) 1994 VK8 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
@@ -1313,7 +1395,7 @@
         color_indices: {'B-V': [0.906, 0.052], 'V-R': [0.626, 0.035], 'R-I': [0.628, 0.040]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.172], // albedo from fyr02’s sheet
+        geometric_albedo: ['Generic_Bessell.V', 0.099], // albedo from fyr02’s sheet
     },
     '(20108) 1995 QZ9 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -1357,19 +1439,22 @@
         geometric_albedo: ['Generic_Bessell.V', [0.040, 0.002]],
         phase_function: ['HG1G2', {H: [10.204, 0.006], G_1: [0.689, 0.012], G_2: [0.193, 0.007]}]
     },
-    '(23549) Epicles | MBOSS': {
+    '(23549) Epicles | MBOSS, Grav2012': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.800, 0.071], 'V-R': [0.485, 0.068], 'R-I': [0.387, 0.101]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.132, 0.023]],
     },
-    '(23694) 1997 KZ3 | MBOSS': {
+    '(23694) 1997 KZ3 | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.723, 0.035], 'V-R': [0.474, 0.029], 'R-I': [0.418, 0.041]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.051, 0.017]],
+        phase_function: ['HG1G2', {H: [11.246117, +0.185833, -0.224584], G_1: [0.645234, +0.621722, -0.860871], G_2: [0.125981, +0.527312, -0.398559]}]
     },
     '(23871) 1998 RC76 | GaiaDR3, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
@@ -1387,33 +1472,40 @@
         geometric_albedo: ['Generic_Bessell.V', [0.0543, 0.0306]],
         phase_function: ['HG1G2', {H: [14.719804, +0.200922, -0.248872], G_1: [0.766349, +0.344896, -0.510463], G_2: [0.095253, +0.190407, -0.147288]}]
     },
-    '(24233) 1999 XD94 | MBOSS': {
+    '(24233) 1999 XD94 | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.704, 0.051], 'V-R': [0.481, 0.037], 'R-I': [0.418, 0.069]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.114, 0.015]],
+        phase_function: ['HG1G2', {H: [11.190429, +0.240401, -0.303924], G_1: [0.098614, +0.514100, -0.790107], G_2: [0.504542, +0.422122, -0.314159]}]
     },
-    '(24341) 2000 AJ87 | MBOSS': {
+    '(24341) 2000 AJ87 | MBOSS, Grav2012': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.713, 0.043], 'V-R': [0.369, 0.035], 'R-I': [0.390, 0.067]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.150, 0.032]],
     },
-    '(24380) Dorippe | MBOSS': {
+    '(24380) Dorippe | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.734, 0.055], 'V-R': [0.391, 0.048], 'R-I': [0.336, 0.068]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
-    },
-    '(24390) 2000 AD177 | MBOSS': {
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.064, 0.009]],
+        phase_function: ['HG1G2', {H: [11.744, 0.067], G_1: [0.717, 0.171], G_2: [0.069, 0.087]}] // Palomar/ZTF.g
+},
+    '(24390) 2000 AD177 | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.700, 0.042], 'V-R': [0.513, 0.034], 'R-I': [0.462, 0.066]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.069, 0.006]],
+        phase_function: ['HG1G2', {H: [12.332, 0.111], G_1: [0.052, 0.224], G_2: [0.625, 0.119]}] // Palomar/ZTF.g
     },
     '(24420) Thasos | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -1436,12 +1528,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '(24452) 2000 QU167 | MBOSS': {
+    '(24452) 2000 QU167 | MBOSS, Simpson2022': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.872, 0.056], 'V-R': [0.441, 0.056], 'R-I': [0.406, 0.087]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.06, 0.01]],
     },
     '(24467) 2000 SS165 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -4460,6 +4553,13 @@
         calibration_system: 'AB',
         sun_is_emitter: true
     },
+    '(636872) 2014 YX49 | SsODNet': {
+        tags: ['Solar System', 'minor body/Uranus trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.7668, 0.0725], 'r-i': [0.3322, 0.0622], 'i-z': [0.2100, 0.1183]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
     '(661238) 2004 DA62 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur/Damocloid'],
         photometric_system: 'Generic_Bessell',
@@ -5109,6 +5209,18 @@
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.42, 0.15], 'r-i': [0.22, 0.11]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
+    'Hui2024': [
+        '2019 UO14: A Transient Trojan of Saturn',
+        'DOI: 10.3847/2041-8213/ad84ef', 'https://iopscience.iop.org/article/10.3847/2041-8213/ad84ef',
+        'https://ui.adsabs.harvard.edu/abs/2024ApJ...975L...3H/abstract'
+    ],
+    '2019 UO14 | Hui2024': {
+        tags: ['Solar System', 'minor body/Saturn trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.51, 0.09], 'r-i': [0.30, 0.13], 'i-z': [0.19, 0.14]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
