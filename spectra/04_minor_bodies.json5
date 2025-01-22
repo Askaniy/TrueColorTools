@@ -749,7 +749,7 @@
         phase_function: ['HG1G2', {H: [9.300267, +0.253240, -0.325995], G_1: [0.666884, +0.588009, -0.908138], G_2: [0.222062, +0.447373, -0.315891]}]
     },
     'Dutra2024': [
-        'Physical Characteristics of Jupiter's Trojan (1437) Diomedes from a Tri-chord Stellar Occultation in 2020 and Dimensionless 3D Model',
+        'Physical Characteristics of Jupiter’s Trojan (1437) Diomedes from a Tri-chord Stellar Occultation in 2020 and Dimensionless 3D Model',
         'DOI: 10.48550/arXiv.2412.01568', 'https://arxiv.org/abs/2412.01568',
         'https://ui.adsabs.harvard.edu/abs/2024arXiv241201568D/abstract'
     ],
