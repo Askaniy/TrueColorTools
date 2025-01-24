@@ -3380,7 +3380,7 @@
         color_indices: {'B-V': [0.781, 0.032], 'V-R': [0.393, 0.047], 'R-I': [0.363, 0.061]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.957], // albedo from fyr02’s sheet
+        geometric_albedo: ['Generic_Bessell.V', [0.96, +0.09, -0.04]],
         spherical_albedo: ['Generic_Bessell.V', [0.99, +0.01, -0.09]],
     },
     '(136204) 2003 WL7 | MBOSS, Müller2020': {
