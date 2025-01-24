@@ -1675,13 +1675,13 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.050, +0.030, -0.016]], // may not be accurate
     },
-    '(20000) Varuna | MBOSS': {
+    '(20000) Varuna | MBOSS, Müller2020': {
         tags: ['featured', 'MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.906, 0.052], 'V-R': [0.626, 0.035], 'R-I': [0.628, 0.040]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.099], // albedo from fyr02’s sheet
+        geometric_albedo: ['Generic_Bessell.V', [0.127, +0.040, -0.042]],
     },
     '(20108) 1995 QZ9 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -2760,13 +2760,13 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.145, +0.086, -0.045]], // system albedo
     },
-    '(90377) Sedna | MBOSS': {
+    '(90377) Sedna | MBOSS, Müller2020': {
         tags: ['featured', 'MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.179, 0.069], 'V-R': [0.739, 0.047], 'R-I': [0.654, 0.068]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.399], // albedo from fyr02’s sheet
+        geometric_albedo: ['Generic_Bessell.V', [0.410, +0.390, -0.190]],
     },
     'Brown2010': [
         'The Size, Density, and Formation of the Orcus-Vanth System in the Kuiper Belt',
@@ -3354,7 +3354,12 @@
         geometric_albedo: ['Generic_Bessell.V', [0.75, 0.02]], // system albedo
         spherical_albedo: ['Generic_Bessell.V', [0.33, 0.03]], // system albedo
     },
-    '(136199) Eris | Lorenzi2016, Verbiscer2022': {
+    'Sicardy2011': [
+        'A Pluto-like radius and a high albedo for the dwarf planet Eris from an occultation',
+        'DOI: 10.1038/nature10550', 'https://www.nature.com/articles/nature10550',
+        'https://ui.adsabs.harvard.edu/abs/2011Natur.478..493S/abstract'
+    ],
+    '(136199) Eris | Lorenzi2016, Sicardy2011, Verbiscer2022': {
         tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO', 'traced spectrum'],
         nm: [
             417.357, 479.507, 532.699, 585.89, 601.008, 604.367, 622.844, 637.962, 653.08, 656.439,
@@ -3366,10 +3371,10 @@
             1.034, 1.121, 1.13, 1.11, 1.073, 1.11, 1.077, 1.132, 1.138, 1.087, 1.126, 1.018, 1.079,
             0.881, 1.072, 1.13
         ],
-        geometric_albedo: ['Generic_Bessell.V', 0.957], // albedo from zelario’s sheet
+        geometric_albedo: ['Generic_Bessell.V', [0.96, +0.09, -0.04]],
         spherical_albedo: ['Generic_Bessell.V', [0.99, +0.01, -0.09]],
     },
-    '(136199) Eris | MBOSS, Verbiscer2022': {
+    '(136199) Eris | MBOSS, Sicardy2011, Verbiscer2022': {
         tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.781, 0.032], 'V-R': [0.393, 0.047], 'R-I': [0.363, 0.061]},
@@ -3391,13 +3396,18 @@
         'DOI: 10.1093/mnras/staa2329', 'https://academic.oup.com/mnras/article/497/4/5473/5891238',
         'https://ui.adsabs.harvard.edu/abs/2020MNRAS.497.5473A/abstract'
     ],
-    '(136472) Makemake | AlvarezCandal2020, Verbiscer2022': {
+    'Hromakina2019': [
+        'Long-term photometric monitoring of the dwarf planet (136472) Makemake',
+        'DOI: 10.1051/0004-6361/201935274', 'https://www.aanda.org/articles/aa/full_html/2019/05/aa35274-19/aa35274-19.html',
+        'https://ui.adsabs.harvard.edu/abs/2019A%26A...625A..46H/abstract'
+    ],
+    '(136472) Makemake | AlvarezCandal2020, Hromakina2019, Verbiscer2022': {
         tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         file: 'spectra/files/Makemake_AlvarezCandal2020.txtN',
-        geometric_albedo: ['Generic_Bessell.V', 0.83], // albedo from zelario’s sheet
+        geometric_albedo: ['Generic_Bessell.V', [0.82, 0.02]],
         spherical_albedo: ['Generic_Bessell.V', [0.74, 0.06]],
     },
-    '(136472) Makemake | Lorenzi2016, Verbiscer2022': {
+    '(136472) Makemake | Lorenzi2016, Hromakina2019, Verbiscer2022': {
         tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO', 'traced spectrum'],
         nm: [
             417.357, 466.069, 588.13, 601.568, 609.406, 631.243, 642.441, 649.72, 656.439, 664.278,
@@ -3409,16 +3419,16 @@
             1.179, 1.182, 1.143, 1.163, 1.088, 1.16, 1.084, 1.201, 1.201, 1.087, 1.159, 1.018, 1.079,
             0.881, 1.072, 1.13
         ],
-        geometric_albedo: ['Generic_Bessell.V', 0.83], // albedo from zelario’s sheet
+        geometric_albedo: ['Generic_Bessell.V', [0.82, 0.02]],
         spherical_albedo: ['Generic_Bessell.V', [0.74, 0.06]],
     },
-    '(136472) Makemake | MBOSS, Verbiscer2022': {
+    '(136472) Makemake | MBOSS, Hromakina2019, Verbiscer2022': {
         tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.840, 0.024], 'V-R': [0.480, 0.020]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.83], // albedo from fyr02’s sheet
+        geometric_albedo: ['Generic_Bessell.V', [0.82, 0.02]],
         spherical_albedo: ['Generic_Bessell.V', [0.74, 0.06]],
     },
     '(137294) 1999 RE215 | MBOSS': {
