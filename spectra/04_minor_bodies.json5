@@ -4455,7 +4455,7 @@
         sun_is_emitter: true
     },
     '(523676) 2013 UL10 | MBOSS': {
-        tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
+        tags: ['MBOSS', 'Solar System', 'minor body/centaur/active centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.970, 0.020], 'V-R': [0.670, 0.020]},
         calibration_system: 'Vega',
@@ -5870,6 +5870,18 @@
         photometric_system: 'PAN-STARRS_PS1',
         filters: ['g', 'r', 'i', 'z'],
         mag: [[22.51, 0.04], [21.99, 0.05], [21.87, 0.02], [21.42, 0.05]],
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
+    'de la Fuente Marcos2021': [
+        'The active centaur 2020 MK4',
+        'DOI: 10.1088/0004-6256/147/5/114', 'https://www.aanda.org/articles/aa/full_html/2021/05/aa39117-20/aa39117-20.html',
+        'https://ui.adsabs.harvard.edu/abs/2021A&A...649A..85D/abstract'
+    ],
+    '(P/2020 MK4) PanSTARRS | Marcos2021': {
+        tags: ['Solar System', 'minor body/comet/short period comet', 'minor body/centaur/active centaur'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.42, 0.04], 'r-i': [0.17, 0.04]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
