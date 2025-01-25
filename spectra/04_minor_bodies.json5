@@ -5632,7 +5632,7 @@
         sun_is_emitter: true
     },
     '39P/Oterma | MBOSS': {
-        tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet'],
+        tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet', 'minor body/centaur/active centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.890, 0.070], 'V-R': [0.386, 0.063], 'R-I': [0.412, 0.114]},
         calibration_system: 'Vega',
