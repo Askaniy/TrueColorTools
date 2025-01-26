@@ -173,6 +173,56 @@
         'DOI: 10.1051/0004-6361/202141600', 'https://www.aanda.org/articles/aa/full_html/2021/12/aa41600-21/aa41600-21.html',
         'https://ui.adsabs.harvard.edu/abs/2021A&A...656A..89H/abstract'
     ],
+    'Sheppard2002': [
+        'Time-resolved Photometry of Kuiper Belt Objects: Rotations, Shapes, and Phase Functions',
+        'DOI: 10.1086/341954', 'https://iopscience.iop.org/article/10.1086/341954',
+        'https://ui.adsabs.harvard.edu/abs/2002AJ....124.1757S/abstract'
+    ],
+    'Bauer2003': [
+        'Physical survey of 24 Centaurs with visible photometry',
+        'DOI: 10.1016/j.icarus.2003.07.004', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103503002173',
+        'https://ui.adsabs.harvard.edu/abs/2003Icar..166..195B'
+    ],
+    'Sheppard2003': [
+        'Hawaii Kuiper Belt Variability Project: An Update',
+        'DOI: 10.1023/B:MOON.0000031943.12968.46', 'https://link.springer.com/article/10.1023/B:MOON.0000031943.12968.46',
+        'https://ui.adsabs.harvard.edu/abs/2003EM%26P...92..207S/abstract'
+    ],
+    'Lamy2004': [
+        'The Sizes, Shapes, Albedos, and Colors of Cometary Nuclei',
+        'https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=753360bc3977a259d7dfc3362bb7a6354b1988ff', 
+        'https://ui.adsabs.harvard.edu/abs/2004come.book..223L/abstract'
+    ],
+    'Rousselot2005a': [
+        'Photometric study of Centaur (60558) 2000 EC98 and trans-neptunian object (55637) 2002 UX25 at different phase angles',
+        'DOI: 10.1016/j.icarus.2005.03.001', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103505000874',
+        'https://ui.adsabs.harvard.edu/abs/2005Icar..176..478R'
+    ],
+    'Snodgrass2005': [
+        'The nuclei of comets 7P/Pons-Winnecke, 14P/Wolf and 92P/Sanguin',
+        'DOI: 10.1051/0004-6361:20053237', 'https://www.aanda.org/articles/aa/full/2005/46/aa3237-05/aa3237-05.html',
+        'https://ui.adsabs.harvard.edu/abs/2005A&A...444..287S'
+    ],
+    'Ferrín2007': [
+        'Secular light curve of Comet 28P/Neujmin 1 and of spacecraft target Comets 1P/Halley, 9P/Tempel 1, 19P/Borrelly, 21P/Giacobinni Zinner, 26P/Grigg Skjellerup, 67P/Churyumov Gerasimenko, and 81P/Wild 2',
+        'DOI: 10.1016/j.icarus.2005.05.023', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103507003910',
+        'https://ui.adsabs.harvard.edu/abs/2007Icar..191S..22F/abstract'
+    ],
+    'Lamy2009': [
+        'The colors of cometary nuclei-Comparison with other primitive bodies of the Solar System and implications for their origin',
+        'DOI: 10.1016/j.icarus.2009.01.030', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103509000657',
+        'https://ui.adsabs.harvard.edu/abs/2009Icar..201..674L/abstract'
+    ],
+    'Dobson2023': [
+        'Phase Curves of Kuiper Belt Objects, Centaurs, and Jupiter-family Comets from the ATLAS Survey',
+        'DOI: 10.3847/PSJ/acc463', 'https://iopscience.iop.org/article/10.3847/PSJ/acc463',
+        'https://ui.adsabs.harvard.edu/abs/2023PSJ.....4...75D/abstract'
+    ],
+    'Knight2023': [
+        'Physical and Surface Properties of Comet Nuclei from Remote Observations',
+        'DOI: 10.48550/arXiv.2304.09309', 'https://arxiv.org/abs/2304.09309',
+        'https://ui.adsabs.harvard.edu/abs/2023arXiv230409309K/abstract'
+    ],
 
     'Li2019': [
         'Spectrophotometric modeling and mapping of Ceres',
@@ -585,6 +635,22 @@
         geometric_albedo: ['Generic_Bessell.V', 0.067],
         phase_function: ['HG', {H: 5.94, G: -0.02}]
     },
+    '(791) Ani | GaiaDR3, SsODNet': {
+        tags: ['Solar System', 'minor body/asteroid/main belt'],
+        nm: [374, 418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
+        br: [
+            8.365875e-01, 8.881516e-01, 9.452138e-01, 9.677563e-01, 1.000000e+00, 1.020104e+00,
+            1.020959e+00, 1.034676e+00, 1.047463e+00, 1.058783e+00, 1.073622e+00, 1.083511e+00,
+            1.090540e+00, 1.100464e+00, 1.120553e+00, 1.143777e+00
+        ],
+        sd: [
+            2.668028e-03, 1.428997e-03, 1.196515e-03, 1.178561e-03, 1.175952e-03, 1.270339e-03,
+            1.305311e-03, 1.170762e-03, 1.212433e-03, 1.295871e-03, 1.292290e-03, 1.281974e-03,
+            1.239847e-03, 1.330842e-03, 1.482579e-03, 2.025007e-03
+        ],
+        geometric_albedo: ['Generic_Bessell.V', [0.0442, 0.0082]],
+        phase_function: ['HG1G2', {H: [9.246136, +0.116375, -0.131999], G_1: [0.786410, +0.220971, -0.267113], G_2: [0.146241, +0.105911, -0.095148]}]
+    },
     '(884) Priamus | GaiaDR3, Grav2012, Shevchenko2022': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         nm: [374, 418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
@@ -906,18 +972,20 @@
         'DOI: 10.1051/0004-6361/202346749', 'https://www.aanda.org/articles/aa/full_html/2023/08/aa46749-23/aa46749-23.html',
         'https://ui.adsabs.harvard.edu/abs/2023A%26A...676A..72B/abstract'
     ],
-    '(2060) Chiron | SMASS, BragaRibas2023': { // 95P/Chiron
+    '(2060) Chiron | SMASS, BragaRibas2023, Dobson2023': { // 95P/Chiron
         tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
         file: 'spectra/files/SMASS/a002060.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.076, 0.026]],
+        phase_coefficient: [0.093, 0.011],
     },
-    '(2060) Chiron | MBOSS, BragaRibas2023': { // 95P/Chiron
+    '(2060) Chiron | MBOSS, BragaRibas2023, Dobson2023': { // 95P/Chiron
         tags: ['MBOSS', 'Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.660, 0.055], 'V-R': [0.359, 0.018], 'R-I': [0.324, 0.024]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.076, 0.026]],
+        phase_coefficient: [0.093, 0.011],
     },
     'Benner1999': [
         'Radar Observations of Asteroid 2063 Bacchus',
@@ -1070,7 +1138,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.003]],
         phase_function: ['HG1G2', {H: [9.800, 0.007], G_1: [0.862, 0.019], G_2: [-0.028, 0.011]}]
     },
-    '(4015) Wilson-Harrington | MBOSS, SsODNet': { // 107P/Wilson-Harrington
+    '(4015) Wilson–Harrington | MBOSS, SsODNet': { // 107P/Wilson–Harrington
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/asteroid/active asteroid', 'minor body/comet/short period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.674, 0.089], 'V-R': [0.361, 0.048]},
@@ -1146,18 +1214,20 @@
         'DOI: 10.1051/0004-6361/201322377', 'https://www.aanda.org/articles/aa/full_html/2014/04/aa22377-13/aa22377-13.html',
         'https://ui.adsabs.harvard.edu/abs/2014A%26A...564A..92D/abstract'
     ],
-    '(5145) Pholus | SMASS, Duffard2014': {
+    '(5145) Pholus | SMASS, Duffard2014, Bauer2003': {
         tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur'],
         file: 'spectra/files/SMASS/a005145.1.txtA',
         geometric_albedo: ['Generic_Bessell.V', [0.155, +0.076, -0.049]],
+        phase_function: ['HG', {H: 7.30, G: [0.16, 0.02]}]
     },
-    '(5145) Pholus | MBOSS, Duffard2014': {
+    '(5145) Pholus | MBOSS, Duffard2014, Bauer2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.261, 0.121], 'V-R': [0.791, 0.037], 'R-I': [0.818, 0.060]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.155, +0.076, -0.049]],
+        phase_function: ['HG', {H: 7.30, G: [0.16, 0.02]}]
     },
     '(5511) Cloanthus | MBOSS, Grav2012': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -1252,11 +1322,11 @@
         phase_function: ['HG1G2', {H: [10.527, 0.079], G_1: [0.794, 0.213], G_2: [0.041, 0.112]}] // Palomar/ZTF.g
     },
     'Hsieh2010': [
-        'The return of activity in main-belt comet 133P/Elst-Pizarro',
+        'The return of activity in main-belt comet 133P/Elst–Pizarro',
         'DOI: 10.1111/j.1365-2966.2009.16120.x', 'https://academic.oup.com/mnras/article/403/1/363/1018871',
         'https://ui.adsabs.harvard.edu/abs/2010MNRAS.403..363H/abstract'
     ],
-    '(7968) Elst-Pizarro | Hsieh2010, Bauer2012': { // 133P/Elst-Pizarro
+    '(7968) Elst–Pizarro | Hsieh2010, Bauer2012': { // 133P/Elst–Pizarro
         tags: ['Solar System', 'minor body/asteroid/main belt', 'minor body/asteroid/active asteroid', 'minor body/comet/short period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.65, 0.03], 'V-R': [0.36, 0.01], 'R-I': [0.32, 0.01]},
@@ -1315,18 +1385,20 @@
         'DOI: 10.3847/1538-3881/aa8956', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa8956',
         'https://ui.adsabs.harvard.edu/abs/2017AJ....154..159L/abstract'
     ],
-    '(10199) Chariklo | SMASS, Leiva2017': {
+    '(10199) Chariklo | SMASS, Leiva2017, Bauer2003': {
         tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur'],
         file: 'spectra/files/SMASS/a010199.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.037, 0.001]], // ellipsoid model
+        phase_function: ['HG', {H: 6.50, G: [0.08, 0.05]}]
     },
-    '(10199) Chariklo | MBOSS, Leiva2017': {
+    '(10199) Chariklo | MBOSS, Leiva2017, Bauer2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.802, 0.049], 'V-R': [0.491, 0.016], 'R-I': [0.519, 0.015]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.037, 0.001]], // ellipsoid model
+        phase_function: ['HG', {H: 6.50, G: [0.08, 0.05]}]
     },
     '(10253) Westerwald | SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
@@ -1337,13 +1409,14 @@
         geometric_albedo: ['Generic_Bessell.V', [0.2712, 0.073]],
         phase_function: ['HG1G2', {H: [15.023914, +0.107685, -0.12172], G_1: [0.536426, +0.198095, -0.238198], G_2: [0.207543, +0.095334, -0.085078]}]
     },
-    '(10370) Hylonome | MBOSS, Müller2020': {
+    '(10370) Hylonome | MBOSS, Müller2020, Bauer2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.690, 0.110], 'V-R': [0.469, 0.154], 'R-I': [0.496, 0.189]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.051, +0.030, -0.017]],
+        phase_function: ['HG', {H: 9.10, G: [0.18, 0.10]}]
     },
     '(11089) 1994 CS8 | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -1675,13 +1748,19 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.050, +0.030, -0.016]], // may not be accurate
     },
-    '(20000) Varuna | MBOSS, Müller2020': {
+    'Hicks2005': [
+        'Photometric behavior of 20000 Varuna at very small solar phase angles',
+        'DOI: 10.1016/j.icarus.2005.01.013', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103505000333',
+        'https://ui.adsabs.harvard.edu/abs/2005Icar..176..492H/abstract'
+    ],
+    '(20000) Varuna | MBOSS, Müller2020, Hicks2005': {
         tags: ['featured', 'MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.906, 0.052], 'V-R': [0.626, 0.035], 'R-I': [0.628, 0.040]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.127, +0.040, -0.042]],
+        phase_function: ['HG', {H: [3.192, 0.025], G: [-0.354, 0.121]}] // R-band value
     },
     '(20108) 1995 QZ9 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -1888,13 +1967,14 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.054, 0.011]],
     },
-    '(26181) 1996 GQ21 | MBOSS, FarkasTakacs2020': {
+    '(26181) 1996 GQ21 | MBOSS, FarkasTakacs2020, Sheppard2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.999, 0.059], 'V-R': [0.697, 0.050], 'R-I': [0.694, 0.056]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.098, +0.046, -0.030]], // fixed η
+        phase_function: ['HG', {H: [4.47, 0.01], G: [0.12, 0.03]}]
     },
     '(26308) 1998 SM165 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO'],
@@ -1904,13 +1984,14 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.083, +0.018, -0.013]], // system albedo
     },
-    '(26375) 1999 DE9 | MBOSS, Müller2020': {
+    '(26375) 1999 DE9 | MBOSS, Müller2020, Sheppard2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.967, 0.043], 'V-R': [0.579, 0.036], 'R-I': [0.568, 0.043]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.163, +0.041, -0.026]],
+        phase_function: ['HG', {H: [4.45, 0.02], G: [-0.34, 0.05]}]
     },
     '(28958) Binns | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -1936,13 +2017,19 @@
         geometric_albedo: ['Generic_Bessell.V', [0.108, 0.002]],
         spherical_albedo: ['Generic_Bessell.V', [0.037, 0.007]],
     },
-    '(29981) 1999 TD10 | MBOSS, Müller2020': {
+    'Rousselot2005b': [
+        'Polarimetric and Photometric Phase Effects Observed on Transneptunian Object (29981) 1999 TD10',
+        'DOI: 10.1007/s11038-006-9079-5', 'https://link.springer.com/article/10.1007/s11038-006-9079-5',
+        'https://ui.adsabs.harvard.edu/abs/2005EM%26P...97..353R/abstract'
+    ],
+    '(29981) 1999 TD10 | MBOSS, Müller2020, Rousselot2005b': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.808, 0.095], 'V-R': [0.502, 0.032], 'R-I': [0.511, 0.051]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.044, +0.014, -0.010]],
+        phase_function: ['HG', {H: [8.350, 0.020], G: [-0.250, 0.022]}] // R-band value
     },
     '(30698) Hippokoon | MBOSS, Grav2012': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -1970,13 +2057,14 @@
         geometric_albedo: ['Generic_Bessell.V', [0.078, 0.007]],
         phase_function: ['HG1G2', {H: [11.765549, +0.177497, -0.212764], G_1: [0.335089, +0.879730, -1.115918], G_2: [0.405548, +0.793865, -0.642610]}]
     },
-    '(31824) Elatus | MBOSS, Müller2020': {
+    '(31824) Elatus | MBOSS, Müller2020, Bauer2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.020, 0.060], 'V-R': [0.620, 0.048], 'R-I': [0.630, 0.038]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.049, +0.028, -0.016]],
+        phase_function: ['HG', {H: 10.30, G: [-0.13, 0.02]}]
     },
     '(32430) 2000 RQ83 | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -2079,13 +2167,14 @@
         'DOI: 10.1051/0004-6361/202141546', 'https://www.aanda.org/articles/aa/full_html/2022/08/aa41546-21/aa41546-21.html',
         'https://ui.adsabs.harvard.edu/abs/2022A%26A...664A.130S/abstract'
     ],
-    '(38628) Huya | MBOSS, SantosSanz2022': {
+    '(38628) Huya | MBOSS, SantosSanz2022, Sheppard2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.963, 0.042], 'V-R': [0.609, 0.090], 'R-I': [0.593, 0.055]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.079, 0.004]],
+        phase_function: ['HG', {H: [4.45, 0.01], G: [0.10, 0.03]}]
     },
     '(39285) Kipkeino | MBOSS, Grav2012': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -2095,21 +2184,23 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.063, 0.008]],
     },
-    '(40314) 1999 KR16 | MBOSS, FarkasTakacs2020': {
+    '(40314) 1999 KR16 | MBOSS, FarkasTakacs2020, Sheppard2002': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.123, 0.083], 'V-R': [0.738, 0.057], 'R-I': [0.750, 0.040]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.177, +0.076, -0.048]], // fixed η
+        phase_function: ['HG', {H: [5.37, 0.02], G: [-0.08, 0.05]}]
     },
-    '(42301) 2001 UR163 | MBOSS, FarkasTakacs2020': {
+    '(42301) 2001 UR163 | MBOSS, FarkasTakacs2020, Sheppard2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.290, 0.109], 'V-R': [0.839, 0.044], 'R-I': [0.673, 0.121]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.220, +0.832, -0.090]], // fixed η
+        // phase_function: ['HG', {H: [3.75, 0.05], G: [-1.00, 0.30]}] // results in negative phase integral
     },
     '(42355) Typhon | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
@@ -2161,13 +2252,14 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [+0.079, 0.013, 0.011]], // system albedo
     },
-    '(47932) 2000 GN171 | MBOSS, Müller2020': {
+    '(47932) 2000 GN171 | MBOSS, Müller2020, Sheppard2002': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.960, 0.063], 'V-R': [0.607, 0.042], 'R-I': [0.617, 0.054]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.215, +0.093, -0.070]],
+        phase_function: ['HG', {H: [5.98, 0.02], G: [-0.12, 0.05]}]
     },
     '(47967) 2000 SL298 | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -2202,12 +2294,13 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.231, +0.189, -0.102]], // system albedo
     },
-    '(49036) Pelion | MBOSS': {
+    '(49036) Pelion | MBOSS, Bauer2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.746, 0.080], 'V-R': [0.556, 0.078], 'R-I': [0.368, 0.102]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        phase_function: ['HG', {H: 10.10, G: [-0.11, 0.08]}]
     },
     'Pereira2023': [
         'The two rings of (50000) Quaoar',
@@ -2257,21 +2350,23 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '(52872) Okyrhoe | MBOSS, Müller2020': {
+    '(52872) Okyrhoe | MBOSS, Müller2020, Bauer2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.743, 0.065], 'V-R': [0.495, 0.042], 'R-I': [0.480, 0.061]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.056, +0.012, -0.010]],
+        phase_function: ['HG', {H: 10.50, G: [0.12, 0.07]}]
     },
-    '(52872) Okyrhoe | Boehnhardt2014, Müller2020': {
+    '(52872) Okyrhoe | Boehnhardt2014, Müller2020, Bauer2003': {
         tags: ['Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.74, 0.02], 'V-R': [0.53, 0.01], 'R-I': [0.53, 0.02]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.056, +0.012, -0.010]],
+        phase_function: ['HG', {H: 10.50, G: [0.12, 0.07]}]
     },
     '(52975) Cyllarus | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -2307,13 +2402,14 @@
         'DOI: 10.1051/0004-6361/202450833', 'https://www.aanda.org/articles/aa/abs/2024/09/aa50833-24/aa50833-24.html',
         'https://ui.adsabs.harvard.edu/abs/2024EPSC...17..530R/abstract'
     ],
-    '(54598) Bienor | MBOSS, Rizos2024': {
+    '(54598) Bienor | MBOSS, Rizos2024, Dobson2023': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.711, 0.059], 'V-R': [0.476, 0.046], 'R-I': [0.400, 0.079]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.065, 0.005]],
+        phase_coefficient: [0.058, 0.025],
     },
     '(55565) 2002 AW197 | MBOSS, Vilenius2014': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
@@ -2339,13 +2435,14 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.760, +0.180, -0.450]],
     },
-    '(55637) 2002 UX25 | MBOSS, Lellouch2013': {
+    '(55637) 2002 UX25 | MBOSS, Lellouch2013, Rousselot2005a': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.979, 0.038], 'V-R': [0.552, 0.026]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.107, +0.005, -0.008]],
+        phase_function: ['HG', {H: [3.32, 0.01], G: [0.16, 0.18]}] // R-band value
     },
     '(55638) 2002 VE95 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -2412,13 +2509,14 @@
         'DOI: 10.1093/mnras/stad3318', 'https://academic.oup.com/mnras/article/527/2/3624/7332922',
         'https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.3624P/abstract'
     ],
-    '(60558) Echeclus | MBOSS, Pereira2024': { // 174P/Echeclus
+    '(60558) Echeclus | MBOSS, Pereira2024, Rousselot2005a': { // 174P/Echeclus
         tags: ['MBOSS', 'Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.841, 0.072], 'V-R': [0.502, 0.065], 'R-I': [0.486, 0.095]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.050, 0.003]],
+        phase_function: ['HG', {H: [9.03, 0.01], G: [-0.39, 0.08]}] // R-band value, V-band value results in negative phase integral
     },
     '(60608) 2000 EE173 | MBOSS, Mommert2013': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
@@ -2456,13 +2554,14 @@
         geometric_albedo: ['Generic_Bessell.V', [0.0653, 0.0097]],
         phase_function: ['HG1G2', {H: [13.568758, +0.198775, -0.257261], G_1: [0.775677, +0.393410, -0.581384], G_2: [0.007084, +0.254510, -0.188063]}]
     },
-    '(63252) 2001 BL41 | MBOSS, Müller2020': {
+    '(63252) 2001 BL41 | MBOSS, Müller2020, Bauer2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.718, 0.049], 'V-R': [0.509, 0.044], 'R-I': [0.381, 0.160]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.043, +0.028, -0.014]],
+        phase_function: ['HG', {H: 10.10, G: [0.17, 0.06]}]
     },
     '(65150) 2002 CA126 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -2597,13 +2696,14 @@
         geometric_albedo: ['Generic_Bessell.V', [0.122, 0.018]],
         phase_function: ['HG1G2', {H: [12.523, 0.102], G_1: [0.747, 0.297], G_2: [0.031, 0.169]}] // Palomar/ZTF.g
     },
-    '(79360) Sila-Nunam | MBOSS, Müller2020': {
+    '(79360) Sila-Nunam | MBOSS, Müller2020, Sheppard2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.055, 0.079], 'V-R': [0.666, 0.054], 'R-I': [0.609, 0.057]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.090, +0.027, -0.017]], // system albedo
+        // phase_function: ['HG', {H: [4.78, 0.10], G: [-1.42, 0.30]}] // results in negative phase integral
     },
     '(79978) 1999 CC158 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO'],
@@ -2619,29 +2719,32 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '(82075) 2000 YW134 | MBOSS, FarkasTakacs2020': {
+    '(82075) 2000 YW134 | MBOSS, FarkasTakacs2020, Sheppard2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.922, 0.053], 'V-R': [0.503, 0.052], 'R-I': [0.581, 0.059]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.133, +0.173, -0.051]],
+        phase_function: ['HG', {H: [4.29, 0.20], G: [0.57, 0.50]}]
     },
-    '(82155) 2001 FZ173 | MBOSS, FarkasTakacs2020': {
+    '(82155) 2001 FZ173 | MBOSS, FarkasTakacs2020, Sheppard2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.864, 0.023], 'V-R': [0.546, 0.026], 'R-I': [0.508, 0.036]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.121, +0.065, -0.082]],
+        // phase_function: ['HG', {H: [5.63 0.03], G: [-0.77, 0.08]}] // results in negative phase integral
     },
-    '(82158) 2001 FP185 | MBOSS, Müller2020': {
+    '(82158) 2001 FP185 | MBOSS, Müller2020, Sheppard2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.820, 0.048], 'V-R': [0.572, 0.038], 'R-I': [0.458, 0.078]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.046, 0.007]],
+        // phase_function: ['HG', {H: [5.79 0.05], G: [-1.13, 0.20]}] // results in negative phase integral
     },
     '(83982) Crantor | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -2782,20 +2885,22 @@
         'DOI: 10.1051/0004-6361:20042533', 'https://www.aanda.org/articles/aa/abs/2005/27/aa2533-04/aa2533-04.html',
         'https://ui.adsabs.harvard.edu/abs/2005A%26A...437.1115D/abstract'
     ],
-    '(90482) Orcus | deBergh2005, Brown2018': {
+    '(90482) Orcus | deBergh2005, Brown2018, Dobson2023': {
         tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino'],
         file: 'spectra/files/Orcus_deBergh2005.txt',
         geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
+        phase_coefficient: [0.180, 0.065],
     },
-    '(90482) Orcus | MBOSS, Brown2018': {
+    '(90482) Orcus | MBOSS, Brown2018, Dobson2023': {
         tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.670, 0.034], 'V-R': [0.376, 0.027], 'R-I': [0.372, 0.038]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
+        phase_coefficient: [0.180, 0.065],
     },
-    '(90482) Orcus | Brown2010, Brown2018': {
+    '(90482) Orcus | Brown2010, Brown2018, Dobson2023': {
         tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F606W', 'F814W'],
@@ -2803,6 +2908,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
+        phase_coefficient: [0.180, 0.065],
     },
     '(90482 I) Vanth | Brown2010, Brown2018': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'natural satellite'],
@@ -4010,12 +4116,13 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.062, 0.049]],
     },
-    '(349933) 2009 YF7 | MBOSS': {
+    '(349933) 2009 YF7 | MBOSS, Dobson2023': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.720, 0.020], 'V-R': [0.460, 0.020]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        phase_coefficient: [0.032, 0.018],
     },
     '(382004) 2010 RM64 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -4198,12 +4305,13 @@
         slope: {start: 440, stop: 930, percent_per_100nm: [5.4, 0.7]}, // mean
         geometric_albedo: ['Generic_Bessell.V', [0.075, +0.076, -0.006]], // fixed η
     },
-    '(459865) 2013 XZ8 | MBOSS': {
+    '(459865) 2013 XZ8 | MBOSS, Dobson2023': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.720, 0.020], 'V-R': [0.450, 0.020]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        phase_coefficient: [0.026, 0.017],
     },
     '(459971) 2014 ON6 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -4256,13 +4364,14 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '(469372) 2001 QF298 | MBOSS, Müller2020': {
+    '(469372) 2001 QF298 | MBOSS, Müller2020, Sheppard2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.695, 0.067], 'V-R': [0.388, 0.058], 'R-I': [0.360, 0.085]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.071, +0.020, -0.014]],
+        phase_function: ['HG', {H: [4.95, 0.10], G: [-0.19, 0.10]}]
     },
     '(469438) 2002 GV31 | Boehnhardt2014': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
@@ -5569,20 +5678,22 @@
     },
     
     // Periodic comets
-    '1P/Halley | MBOSS': {
+    '1P/Halley | MBOSS, Lamy2004': {
         tags: ['featured', 'MBOSS', 'Solar System', 'minor body/comet/short period comet', 'spacecraft target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.720, 0.040], 'V-R': [0.410, 0.030], 'R-I': [0.390, 0.060]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        albedo: ['Generic_Bessell.V', 0.04]
+        geometric_albedo: ['Generic_Bessell.V', [0.040, +0.020, -0.010]],
     },
-    '2P/Encke | MBOSS': {
+    '2P/Encke | MBOSS, Lamy2004, Knight2023': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.780, 0.020], 'V-R': [0.424, 0.053], 'R-I': [0.408, 0.060]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.046, 0.023]],
+        phase_coefficient: [0.053, 0.003],
     },
     '6P/dArrest | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet'],
@@ -5591,12 +5702,20 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '8P/Tuttle | MBOSS': {
+    '7P/Pons–Winnecke | Snodgrass2005': {
+        tags: ['Solar System', 'minor body/comet/short period comet'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'V-R': [0.40, 0.05], 'R-I': [0.41, 0.06]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    '8P/Tuttle | MBOSS, Knight2023': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.890, 0.040], 'V-R': [0.530, 0.040], 'R-I': [0.530, 0.060]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.040, 0.010]],
     },
     'Li2007': [
         'Deep Impact photometry of Comet 9P/Tempel 1',
@@ -5609,12 +5728,23 @@
         geometric_albedo: [550, [0.056, 0.007]],
         spherical_albedo: [550, [0.013, 0.002]],
     },
-    '10P/Tempel 2 | MBOSS': {
+    '10P/Tempel 2 | MBOSS, Lamy2004, Ferrín2007': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.800, 0.020], 'V-R': [0.521, 0.037], 'R-I': [0.520, 0.030]},
         calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: [484.5, [0.022, +0.004, -0.006]], // 4845 Å
+        phase_coefficient: [0.037, 0.004],
+    },
+    '14P/Wolf | Snodgrass2005, Knight2023': {
+        tags: ['Solar System', 'minor body/comet/short period comet'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'V-R': [0.57, 0.07], 'R-I': [0.51, 0.06]},
+        calibration_system: 'Vega',
         sun_is_emitter: true
+        geometric_albedo: ['Generic_Bessell.V', [0.046, 0.007]],
+        phase_coefficient: [0.060, 0.005],
     },
     // To add: 19P/Borrelly, the Deep Space 1 target
     '21P/Giacobini–Zinner | MBOSS': {
@@ -5624,10 +5754,18 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '22P/Kopff | MBOSS': {
+    '22P/Kopff | MBOSS, Lamy2004': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.795, 0.056], 'V-R': [0.519, 0.046], 'R-I': [0.450, 0.055]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.042, 0.006]],
+    },
+    '37P/Forbes | Lamy2009': {
+        tags: ['Solar System', 'minor body/comet/short period comet'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'V-R': [0.29, 0.03], 'R-I': [0.66, 0.06]},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
@@ -5645,24 +5783,49 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '47P/Ashbrook–Jackson | MBOSS': {
+    '47P/Ashbrook–Jackson | MBOSS, Knight2023': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.780, 0.080], 'V-R': [0.400, 0.080]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.054, 0.008]],
     },
-    '49P/Arend–Rigaux | MBOSS': {
+    '49P/Arend–Rigaux | MBOSS, Lamy2004': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.770, 0.030], 'V-R': [0.471, 0.032], 'R-I': [0.444, 0.064]},
         calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.040, 0.010]],
+    },
+    '50P/Arend | Lamy2009': {
+        tags: ['Solar System', 'minor body/comet/short period comet'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'V-R': [0.81, 0.10], 'R-I': [0.26, 0.09]},
+        calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '55P/Tempel–Tuttle | MBOSS': {
+    '55P/Tempel–Tuttle | MBOSS, Lamy2004, Ferrín2007': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.750, 0.050], 'V-R': [0.510, 0.050], 'R-I': [0.420, 0.050]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.R', [0.060, 0.025]],
+        phase_coefficient: [0.041, 0.010],
+    },
+    '59P/Kearns–Kwee | Lamy2009': {
+        tags: ['Solar System', 'minor body/comet/short period comet'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'V-R': [0.62, 0.07], 'R-I': [0.27, 0.08]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    '63P/Wild 1 | Lamy2009': {
+        tags: ['Solar System', 'minor body/comet/short period comet'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'V-R': [0.50, 0.05], 'R-I': [0.42, 0.04]},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
@@ -5740,6 +5903,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    '92P/Sanguin | Snodgrass2005': {
+        tags: ['Solar System', 'minor body/comet/short period comet'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'V-R': [0.54, 0.04], 'R-I': [0.54, 0.04]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
     'Li2013b': [
         'Photometric properties of the nucleus of Comet 103P/Hartley 2',
         'DOI: 10.1016/j.icarus.2012.11.001', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103512004460',
@@ -5765,12 +5935,14 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '143P/Kowal–Mrkos | MBOSS': {
+    '143P/Kowal–Mrkos | MBOSS, Knight2023': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.820, 0.023], 'V-R': [0.580, 0.020], 'R-I': [0.560, 0.021]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.008]],
+        phase_coefficient: [0.041, 0.013],
     },
     'Donaldson2023': [
         'Characterizing the nucleus of comet 162P/Siding Spring using ground-based photometry',
@@ -5852,6 +6024,20 @@
         color_indices: {'g-r': [0.52, 0.05], 'r-i': [0.22, 0.07]},
         calibration_system: 'AB',
         sun_is_emitter: true
+    },
+    'Abell2005': [
+        'Physical characteristics of Comet Nucleus C/2001 OG108 (LONEOS)',
+        'DOI: 10.1016/j.icarus.2005.06.012', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103505002332',
+        'https://ui.adsabs.harvard.edu/abs/2005Icar..179..174A'
+    ],
+    '(C/2001 OG108) LONEOS | Abell2005': {
+        tags: ['Solar System', 'minor body/comet/short period comet'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.76, 0.03], 'V-R': [0.46, 0.02], 'V-I': [0.90, 0.02]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.040, 0.010]],
+        phase_function: ['HG', {H: [13.05, 0.10], G: [-0.01, 0.10]}]
     },
     '(P/2011 S1) Gibbs | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet', 'minor body/centaur/active centaur'],
