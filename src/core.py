@@ -1326,11 +1326,13 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
     - `geometric_albedo` (bool/list): indicates geometric/normal albedo data or how to scale to it
     - `spherical_albedo` (bool/list): indicates spherical albedo data or how to scale to it
     - `bond_albedo` (number): sets spherical albedo scale using known Solar spectrum
-    - `phase_integral` (number/list): factor of transition from geometric albedo to spherical
-    - `phase_function` (list): function name and its parameters to compute phase integral
+    - `phase_integral` (number/list): transition factor from geometric albedo to spherical albedo
+    - `phase_coefficient` (number): slope coefficient of the logarithmic line to compute phase integral
+    - `phase_function` (list): phase function name and its parameters to compute phase integral
     - `br_geometric`, `br_spherical` (list): specifying unique spectra for different albedos
     - `sd_geometric`, `sd_spherical` (list/number): corresponding standard deviations or a common value
     - `sun_is_emitter` (bool): `true` to remove the reflected Solar spectrum
+    - `is_emission_spectrum` (bool): `true` to count the data points as spectral lines
     - `tags` (list): strings categorizing the spectral data
     """
     br = []
@@ -1455,8 +1457,11 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
         phase_integral = phase_integral_sd = None
         if 'phase_integral' in content:
             phase_integral, phase_integral_sd = aux.parse_value_sd(content['phase_integral'])
+        elif 'phase_coefficient' in content:
+            phase_integral, phase_integral_sd = aux.phase_coefficient2phase_integral(*aux.parse_value_sd(content['phase_coefficient']))
         elif 'phase_function' in content:
             phase_func = content['phase_function']
+            # Formatting check
             if isinstance(phase_func, Sequence) and len(phase_func) == 2 and isinstance(phase_func[0], str) and isinstance(phase_func[1], dict):
                 phase_func, params = content['phase_function']
                 phase_integral, phase_integral_sd = aux.phase_function2phase_integral(phase_func, params)

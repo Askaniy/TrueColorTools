@@ -95,11 +95,13 @@ Supported input keys of a database unit:
 - `geometric_albedo` (bool/list): indicates geometric/normal albedo data or how to scale to it
 - `spherical_albedo` (bool/list): indicates spherical albedo data or how to scale to it
 - `bond_albedo` (number): sets spherical albedo scale using known Solar spectrum
-- `phase_integral` (number/list): factor of transition from geometric albedo to spherical
-- `phase_function` (list): function name and its parameters to compute phase integral
+- `phase_integral` (number/list): transition factor from geometric albedo to spherical albedo
+- `phase_coefficient` (number): slope coefficient of the logarithmic line to compute phase integral
+- `phase_function` (list): phase function name and its parameters to compute phase integral
 - `br_geometric`, `br_spherical` (list): specifying unique spectra for different albedos
 - `sd_geometric`, `sd_spherical` (list/number): corresponding standard deviations or a common value
 - `sun_is_emitter` (bool): `true` to remove the reflected Solar spectrum
+- `is_emission_spectrum` (bool): `true` to count the data points as spectral lines
 - `tags` (list): strings categorizing the spectral data
 
 Standard deviations are syntactically supported (but not always processed). Any brightness value in any of the data types can be replaced by a corresponding list of `[value, sd]` (or `[value, +sd, -sd]` for asymmetric standard deviation).
