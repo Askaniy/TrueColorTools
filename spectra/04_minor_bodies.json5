@@ -5747,7 +5747,7 @@
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-R': [0.57, 0.07], 'R-I': [0.51, 0.06]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.046, 0.007]],
         phase_coefficient: [0.060, 0.005],
     },
