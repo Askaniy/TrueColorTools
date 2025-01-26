@@ -72,13 +72,14 @@
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.010]], // mean including Sycorax
         phase_function: ['HG', {G: [0.10, 0.15]}]
     },
-    'Comets: Short-period | MBOSS': {
+    'Comets: Short-period | MBOSS, Ferrín2007': {
         tags: ['featured', 'Solar System', 'minor body/comet/short period comet', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.868, 0.167], 'V-R': [0.497, 0.104], 'R-I': [0.446, 0.099]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', 0.04] // estimation
+        phase_coefficient: [0.046, 0.013],
     },
     'Comets: Long-period | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/comet/long period comet', 'class/orbital class'],
