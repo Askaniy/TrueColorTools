@@ -972,20 +972,25 @@
         'DOI: 10.1051/0004-6361/202346749', 'https://www.aanda.org/articles/aa/full_html/2023/08/aa46749-23/aa46749-23.html',
         'https://ui.adsabs.harvard.edu/abs/2023A%26A...676A..72B/abstract'
     ],
-    '(2060) Chiron | SMASS, BragaRibas2023, Dobson2023': { // 95P/Chiron
+    'Betzler2022': [
+        'A photometric study of centaurs 29P/Schwassmann-Wachmann and (2060) Chiron',
+        'DOI: 10.1093/mnras/stad1616, 'https://academic.oup.com/mnras/article/523/3/3678/7187501',
+        'https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3678B/abstract'
+    ],
+    '(2060) Chiron | SMASS, BragaRibas2023, Betzler2022': { // 95P/Chiron
         tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
         file: 'spectra/files/SMASS/a002060.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.076, 0.026]],
-        phase_coefficient: [0.093, 0.011],
+        phase_function: ['HG1G2', {H: [5.04, 0.04], G_1: 0, G_2: [0.66, 0.03]}] // 2022
     },
-    '(2060) Chiron | MBOSS, BragaRibas2023, Dobson2023': { // 95P/Chiron
+    '(2060) Chiron | MBOSS, BragaRibas2023, Betzler2022': { // 95P/Chiron
         tags: ['MBOSS', 'Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.660, 0.055], 'V-R': [0.359, 0.018], 'R-I': [0.324, 0.024]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.076, 0.026]],
-        phase_coefficient: [0.093, 0.011],
+        phase_function: ['HG1G2', {H: [5.04, 0.04], G_1: 0, G_2: [0.66, 0.03]}] // 2022
     },
     'Benner1999': [
         'Radar Observations of Asteroid 2063 Bacchus',
