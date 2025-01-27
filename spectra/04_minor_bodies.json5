@@ -981,7 +981,7 @@
         tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
         file: 'spectra/files/SMASS/a002060.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.076, 0.026]],
-        phase_function: ['HG1G2', {H: [5.04, 0.04], G_1: 0, G_2: [0.66, 0.03]}] // 2022
+        phase_function: ['HG1G2', {H: [5.35, 0.03], G_1: 0, G_2: [0.626, 0.007]}] // 2017-2020 weighted mean
     },
     '(2060) Chiron | MBOSS, BragaRibas2023, Betzler2022': { // 95P/Chiron
         tags: ['MBOSS', 'Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
@@ -990,7 +990,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.076, 0.026]],
-        phase_function: ['HG1G2', {H: [5.04, 0.04], G_1: 0, G_2: [0.66, 0.03]}] // 2022
+        phase_function: ['HG1G2', {H: [5.35, 0.03], G_1: 0, G_2: [0.626, 0.007]}] // 2017-2020 weighted mean
     },
     'Benner1999': [
         'Radar Observations of Asteroid 2063 Bacchus',
@@ -2394,7 +2394,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.065, 0.005]],
-        phase_coefficient: [0.058, 0.025],
+        phase_coefficient: [0.062, 0.014], // o filter
     },
     '(55565) 2002 AW197 | MBOSS, Vilenius2014': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
@@ -2874,7 +2874,7 @@
         tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino'],
         file: 'spectra/files/Orcus_deBergh2005.txt',
         geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
-        // phase_coefficient: [0.180, 0.065],
+        // phase_coefficient: [0.07, 0.04], // o filter
     },
     '(90482) Orcus | MBOSS, Brown2018, Dobson2023': {
         tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino'],
@@ -2883,7 +2883,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
-        // phase_coefficient: [0.180, 0.065],
+        // phase_coefficient: [0.07, 0.04], // o filter
     },
     '(90482) Orcus | Brown2010, Brown2018, Dobson2023': {
         tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino'],
@@ -2893,7 +2893,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
-        // phase_coefficient: [0.180, 0.065],
+        // phase_coefficient: [0.07, 0.04], // o filter
     },
     '(90482 I) Vanth | Brown2010, Brown2018': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'natural satellite'],
@@ -2941,12 +2941,12 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    'SantoSanz2020': [
+    'SantosSanz2020': [
         'The 2017 May 20 stellar occultation by the elongated centaur (95626) 2002 GZ32',
         'DOI: 10.1093/mnras/staa3881', 'https://academic.oup.com/mnras/article/501/4/6062/6056489',
         'https://ui.adsabs.harvard.edu/abs/2021MNRAS.501.6062S/abstract'
     ],
-    '(95626) 2002 GZ32 | MBOSS, SantoSanz2020': {
+    '(95626) 2002 GZ32 | MBOSS, SantosSanz2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.674, 0.043], 'V-R': [0.576, 0.054], 'R-I': [0.538, 0.067]},
@@ -4107,7 +4107,7 @@
         color_indices: {'B-V': [0.720, 0.020], 'V-R': [0.460, 0.020]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        phase_coefficient: [0.032, 0.018],
+        phase_coefficient: [0.036, 0.01], // o filter
     },
     '(382004) 2010 RM64 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -4296,7 +4296,7 @@
         color_indices: {'B-V': [0.720, 0.020], 'V-R': [0.450, 0.020]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        phase_coefficient: [0.026, 0.017],
+        phase_coefficient: [0.036, 0.011], // o filter
     },
     '(459971) 2014 ON6 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -5275,12 +5275,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '2007 VH305 | MBOSS': { // misprint?
+    '2007 VH305 | MBOSS, Mainzer2019': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.690, 0.030], 'V-R': [0.491, 0.027], 'R-I': [0.480, 0.064]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.070, 0.036]],
     },
     '2008 LC18 | Bolin2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
@@ -5421,12 +5422,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '2013 NS11 | MBOSS': {
+    '2013 NS11 | MBOSS, Mainzer2019': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur/Damocloid'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.740, 0.020], 'V-R': [0.560, 0.040]},
         calibration_system: 'Vega',
-        sun_is_emitter: true
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.028, 0.064]],
     },
     '2013 RC158 | Bolin2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
