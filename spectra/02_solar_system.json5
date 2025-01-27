@@ -652,12 +652,12 @@
         phase_integral: [0.80, 0.02],
     },
     // Dione trojans
-    'Howett2021': [
+    'Howett2021a': [
         'Constraining the surface properties of Helene',
         'DOI: 10.1016/j.icarus.2021.114366', 'https://arxiv.org/abs/2102.02130',
         'https://ui.adsabs.harvard.edu/abs/2021Icar..36014366H/abstract'
     ],
-    'Helene (S XII) | Filacchione2012, Verbiscer2007, Howett2021': {
+    'Helene (S XII) | Filacchione2012, Verbiscer2007, Howett2021a': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         file: 'spectra/files/Filacchione2012/Helene.txt',
         geometric_albedo: ['HST_WFPC2-PC.F555W', [1.67, 0.20]],
