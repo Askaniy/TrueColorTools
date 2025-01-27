@@ -692,11 +692,11 @@
         'DOI: 10.1051/0004-6361/201526866', 'https://www.aanda.org/articles/aa/full_html/2016/01/aa26866-15/aa26866-15.html',
         'https://ui.adsabs.harvard.edu/abs/2016A%26A...585A...9L/abstract'
     ],
-    '(944) Hidalgo | MITHNEOS, Licandro2016, Pravec2012': {
+    '(944) Hidalgo | MITHNEOS, Licandro2016, Dobson2023': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt', 'minor body/centaur'],
         file: 'spectra/files/SMASS/a000944.sp31.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.028, 0.006]],
-        phase_function: ['HG', {H: [10.480, 0.058], G: [-0.060, 0.100]}]
+        phase_function: ['HG1G2', {H: [10.193, 0.026], G_1: [0.355, 0.024], G_2: [0.214, 0.006]}] // o filter
     },
     'Helfenstein1994': [
         'Galileo Photometry of Asteroid 951 Gaspra',
