@@ -78,7 +78,7 @@
         color_indices: {'B-V': [0.868, 0.167], 'V-R': [0.497, 0.104], 'R-I': [0.446, 0.099]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.04] // estimation
+        geometric_albedo: ['Generic_Bessell.V', 0.04], // estimation
         phase_coefficient: [0.046, 0.013],
     },
     'Comets: Long-period | MBOSS': {
