@@ -6079,7 +6079,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '(C/2001 G1) Loneos | MBOSS': {
+    '(C/2001 G1) LONEOS | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.752, 0.012], 'V-R': [0.430, 0.030], 'R-I': [0.433, 0.011]},
@@ -6122,7 +6122,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '(C/2006 S3) Loneos | MBOSS': {
+    '(C/2006 S3) LONEOS | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.740, 0.010], 'V-R': [0.580, 0.010]},
