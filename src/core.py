@@ -138,7 +138,8 @@ class ObjectName:
         """ Searches part of the target string to be translated and replaces it with translation """
         for original, translation in translations.items():
             if target.startswith(original) or target.endswith(original) or original in target.split():
-                target = target.replace(original, translation[lang])
+                if lang in translation:
+                    target = target.replace(original, translation[lang])
                 break
         return target
     

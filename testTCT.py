@@ -112,6 +112,10 @@ class TestTCT(unittest.TestCase):
         assert_equal(obj_name.name(), 'HD 101452')
         assert_equal(obj_name.info, 'A2/3')
     
+    def test_name_translation(self):
+        assert_equal(ObjectName('Iocaste').name('ru'), 'Иокасте') # not "Иоcaste"
+        assert_equal(ObjectName('PanSTARRS').name('ru'), 'PanSTARRS') # not "ПанSTARRS"
+
     def test_db(self):
         db = {
             'Phoebe (S IX) | Grav2003, Miller2011': {
