@@ -145,9 +145,11 @@ class TestTCT(unittest.TestCase):
         self.assertEqual(line_splitter('2MASSW J0746425+200032', object_font, 114), ['2MASSW', 'J0746425+', '+200032'])
         self.assertEqual(line_splitter('Rings of Uranus', object_font, 114), ['Rings of', 'Uranus'])
         self.assertEqual(line_splitter('Gǃkúnǁʼhòmdímà', object_font, 114), ['Gǃkúnǁʼhòmdí-', 'mà'])
-        self.assertEqual(line_splitter('Honda–Mrkos–Pajdušáková', object_font, 114), ['Honda–', '–Mrkos–', '–Pajdušáková'])
+        self.assertEqual(line_splitter('Honda–Mrkos–Pajdušáková', object_font, 114), ['Honda–Mrkos–', '–Pajdušáková'])
         self.assertEqual(line_splitter('Churyumov–Gerasimenko', object_font, 114), ['Churyumov–', '–Gerasimenko'])
+        self.assertEqual(line_splitter('Churyumov–Gerasimenko³⁰', object_font, 114), ['Churyumov–', '–Gerasimenko', '³⁰'])
         self.assertEqual(line_splitter('Чурюмова — Герасименко³⁰', object_font, 114), ['Чурюмова —', 'Герасименко', '³⁰'])
+        self.assertEqual(line_splitter('Tschurjumow-Gerassimenko³⁰', object_font, 114), ['Tschurjumow-', '-Gerassimenk-', 'o³⁰'])
         self.assertEqual(line_splitter('136472', object_font, 32), ['136-', '472'])
 
 unittest.main()

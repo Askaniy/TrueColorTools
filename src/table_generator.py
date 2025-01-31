@@ -267,9 +267,12 @@ def generate_squircle_contour(semiaxis: int, rounding_radius: float, width: int,
     outer_squircle[width:reversed_width, width:reversed_width] -= inner_squircle
     return outer_squircle
 
+separators = (' ', ':', '+', '-', '–', '—', '/')
+superscript_digits = '⁰¹²³⁴⁵⁶⁷⁸⁹'
+
 def superscript(number: int):
     """ Converts a number to be a superscript string """
-    return ''.join(['⁰¹²³⁴⁵⁶⁷⁸⁹'[int(digit)] for digit in str(number)]) 
+    return ''.join([superscript_digits[int(digit)] for digit in str(number)]) 
 
 #def spacing_year(line: str):
 #    """ Adds space between author and year in a reference name """
@@ -279,6 +282,9 @@ def superscript(number: int):
 
 def width(line: str, font: ImageFont.FreeTypeFont):
     """ Alias for measuring line width in pixels """
+    if line[-1] in separators:
+        # workaround to make postprocessing work better
+        line = line[:-1].strip()
     return font.getlength(line)
 
 def line_splitter(line: str, font: ImageFont.FreeTypeFont, maxW: int) -> list[str]:
@@ -286,9 +292,7 @@ def line_splitter(line: str, font: ImageFont.FreeTypeFont, maxW: int) -> list[st
     if width(line, font) < maxW:
         return [line]
     else:
-        return recursive_split(line.split(), font, maxW)
-
-separators = (' ', ':', '+', '-', '–', '—', '/')
+        return splitter_postprocessing(recursive_split(line.split(), font, maxW))
 
 def combine_words(word0: str, word1: str):
     """ Joining or rejoining lines of text """
@@ -333,27 +337,26 @@ def recursive_split(lst: list, font: ImageFont.FreeTypeFont, maxW: int):
                         recursive_split(lst, font, maxW)
                         break
                 else:
-                    if (numeric_end := get_numeric_end(lst[i])) != '' and numeric_end != lst[i]:
-                        # it's not good to split numbers, so the first attempt is to get it all
+                    # Moving a letter or a number per iteration
+                    if (last_symbol := lst[i][-1]) in separators:
+                        # don't hyphenate if already hyphenated
+                        to_move = lst[i][-2]
+                        lst[i] = lst[i][:-2] + last_symbol
+                    elif (numeric_end := get_numeric_end(lst[i])) != '' and numeric_end != lst[i]:
+                        # it's not good to split numbers, so attempt to get it all
                         to_move = numeric_end
-                        lst[i] = lst[i][:-len(numeric_end)]
+                        lst[i] = lst[i][:-len(numeric_end)] + '-'
                     else:
-                        # Move one letter per iteration
-                        if (last_symbol := lst[i][-1]) in separators:
-                            # don't hyphenate if already hyphenated
-                            to_move = lst[i][-2]
-                            lst[i] = lst[i][:-2] + last_symbol
-                        else:
-                            # hyphenate the current line
-                            to_move = last_symbol + ' '
-                            lst[i] = lst[i][:-1] + '-'
+                        # hyphenate the current line
+                        to_move = last_symbol + ' '
+                        lst[i] = lst[i][:-1] + '-'
                     try:
                         # adding to the next line
                         lst[i+1] = f'{to_move}{lst[i+1]}'
                     except IndexError:
                         # creating a new line
                         lst.append(to_move.strip())
-                    recursive_split(lst, font, maxW)
+                    lst = recursive_split(lst, font, maxW)
                 break
     else:
         # Attempt to combine words
@@ -362,6 +365,13 @@ def recursive_split(lst: list, font: ImageFont.FreeTypeFont, maxW: int):
             if width(combination, font) < maxW:
                 lst[i] = combination
                 lst.pop(i+1)
-                recursive_split(lst, font, maxW)
+                lst = recursive_split(lst, font, maxW)
                 break
+    return lst
+
+def splitter_postprocessing(lst: list):
+    """ Removes hyphenation marks before footnotes """
+    for i in range(1, len(lst)):
+        if lst[i-1][-1] in separators and lst[i][0] in superscript_digits:
+            lst[i-1] = lst[i-1][:-1].strip()
     return lst
