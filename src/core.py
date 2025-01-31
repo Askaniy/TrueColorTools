@@ -191,6 +191,10 @@ nm_step = 5 # nm
 # Boundaries have been defined based on the CMF (color matching functions) used, but can be any.
 visible_range = np.arange(390, 780, nm_step) # nm
 
+# When processing images through spectral cubes, performance is prioritized, and uncertainty is not saved (yet).
+# Therefore it is disabled by default.
+ignore_sd_for_cubes = True
+
 
 class _TrueColorToolsObject:
     """ Internal class for inheriting spectral data properties """
@@ -400,7 +404,10 @@ class _SpectralObject(_TrueColorToolsObject):
         self.br = np.asarray(br, dtype='float64')
         if ndim != self.br.ndim:
             raise ValueError(f'Expected brightness array of dimension {ndim}, not {self.br.ndim}')
-        self.sd = None if sd is None else np.asarray(sd, dtype='float64')
+        if sd is None or (ignore_sd_for_cubes and ndim == 3):
+            self.sd = None
+        else:
+            self.sd = np.asarray(sd, dtype='float64')
         self.name = ObjectName.as_ObjectName(name)
         if np.any(np.isnan(self.br)):
             self.br = np.nan_to_num(self.br)
@@ -420,6 +427,8 @@ class _SpectralObject(_TrueColorToolsObject):
         """
         nm = np.asarray(nm) # numpy decides int or float
         br = np.asarray(br, dtype='float64')
+        if ignore_sd_for_cubes and isinstance(cls, _Cube):
+            sd = None
         if sd is not None:
             sd = np.asarray(sd, dtype='float64')
         name = ObjectName.as_ObjectName(name)
@@ -440,19 +449,20 @@ class _SpectralObject(_TrueColorToolsObject):
                 if sd is not None:
                     sd = sd[order]
             if nm[-1] > nm_red_limit:
-                flag = np.where(nm < nm_red_limit + nm_step) # with reserve to be averaged
-                nm = nm[flag]
-                br = br[flag]
+                mask = np.where(nm < nm_red_limit + nm_step) # with reserve to be averaged
+                nm = nm[mask]
+                br = br[mask]
                 if sd is not None:
-                    sd = sd[flag]
-            if np.any((diff := np.diff(nm)) != nm_step): # if not uniform 5 nm grid
-                sd = None # standard deviations is undefined then. TODO: process somehow
-                uniform_nm = aux.grid(nm[0], nm[-1], nm_step)
+                    sd = sd[mask]
+            if np.any((diff := np.diff(nm)) != nm_step): # if not an uniform 5 nm grid
+                nm_uniform = aux.grid(nm[0], nm[-1], nm_step)
                 if diff.mean() >= nm_step: # interpolation, increasing resolution
-                    br = aux.interpolating(nm, br, uniform_nm, nm_step)
+                    br = aux.interpolating(nm, br, nm_uniform, nm_step)
+                    if sd is not None:
+                        sd = aux.interpolating(nm, sd, nm_uniform, nm_step)
                 else: # decreasing resolution if step less than 5 nm
-                    br = aux.spectral_downscaling(nm, br, uniform_nm, nm_step)
-                nm = uniform_nm
+                    br, sd = aux.spectral_downscaling(nm, br, sd, nm_uniform, nm_step)
+                nm = nm_uniform
             #if br.min() < 0:
             #    br = np.clip(br, 0, None)
             #    print(f'# Note for the {target_class_name} "{name}"')
@@ -956,7 +966,10 @@ class _PhotospectralObject(_TrueColorToolsObject):
         if not isinstance(filter_system, FilterSystem):
             raise ValueError('`filter_system` argument is not a FilterSystem instance')
         self.filter_system = filter_system
-        self.sd = None if sd is None else np.asarray(sd, dtype='float64')
+        if sd is None or (ignore_sd_for_cubes and ndim == 3):
+            self.sd = None
+        else:
+            self.sd = np.asarray(sd, dtype='float64')
         self.name = ObjectName.as_ObjectName(name)
         if (len_filters := len(filter_system)) != (len_br := self.br.shape[0]):
             raise ValueError(f'Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br})')
@@ -1016,7 +1029,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
         try:
             nm0 = self.filter_system.mean_nm()
             br0 = self.br
-            sd0 = self.sd
+            sd0 = None if ignore_sd_for_cubes and self.ndim == 3 else self.sd
             sd1 = None
             if len(self.filter_system) == 1: # single-point PhotospectralObject support
                 nm1, br1 = aux.extrapolating(nm0, br0, sd0, nm_arr, nm_step)
@@ -1180,11 +1193,13 @@ class PhotospectralCube(_PhotospectralObject, _Cube):
 # ------------ Database Processing Section ------------
 
 sun_SI = Spectrum.from_file('spectra/files/CALSPEC/sun_reference_stis_002.fits', name='Sun') # W / (m² nm)
+sun_SI.sd = None # removing uncertainty to facilitate calculations and simplify spectrum plots
 sun_in_V, _ = sun_SI @ get_filter('Generic_Bessell.V')
 sun_norm = sun_SI.scaled_at(get_filter('Generic_Bessell.V'))
 sun_filter = sun_SI.normalize()
 
 vega_SI = Spectrum.from_file('spectra/files/CALSPEC/alpha_lyr_stis_011.fits', name='Vega') # W / (m² nm)
+vega_SI.sd = None # removing uncertainty to facilitate calculations and simplify spectrum plots
 vega_in_V, _ = vega_SI @ get_filter('Generic_Bessell.V')
 vega_norm = vega_SI.scaled_at(get_filter('Generic_Bessell.V'))
 
@@ -1360,6 +1375,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
         elif 'mag' in content:
             mag, sd = aux.parse_value_sd_list(content['mag'])
             br = aux.mag2irradiance(mag)
+            br /= br.mean() # simple calibration for data not scaled by albedo
             if 'sd' in content:
                 sd = aux.repeat_if_value(content['sd'], len(br))
             if sd is not None:

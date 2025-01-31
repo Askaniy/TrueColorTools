@@ -39,6 +39,7 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
     half_square = 61 # half of the grid width
     r_square = half_square - tiny_space # half of the square width
     r_active = r_square - tiny_space # half of area, available for text
+    ref_maxW = 1.5 * r_active # the limit reference width is 3/4 of the active space
 
     # Selecting the number of columns so that the bottom row is as full as possible
     col_num = sqrt(1.5*l) # strives for a 3:2 aspect ratio
@@ -190,7 +191,7 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
         center_x = centers_x[n]
         center_y = centers_y[n]
 
-        text_color = text_colors[is_white_text[n]]
+        text_color = text_colors[int(is_white_text[n])]
 
         if (object_note := object_notes[n]) is not None:
             draw.text((center_x+r_active, center_y+r_active), object_note, text_color, small_font, anchor='rs', align='right')
@@ -206,15 +207,15 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
             ref = obj_name.reference
             if ',' in ref:
                 # checking multiple references, no more than 3 are supported!
-                refs = [check_ref(i, small_font, 1.5*r_active) for i in ref.split(',', 2)]
+                refs = [check_ref(i, small_font, ref_maxW) for i in ref.split(',', 2)]
                 ref = '\n'.join(refs) 
                 ref_len = width(refs[0], small_font)
-            elif len(ref) > 4 and (year := ref[-4:]).isnumeric() and (ref[-5].isalpha() or ref[-5] in separators) and (author_len := width(author := check_ref(ref[:-4]), small_font)) > width(year, small_font):
+            elif len(ref) > 4 and (year := ref[-4:]).isnumeric() and (ref[-5].isalpha() or ref[-5] in separators) and (author_len := width(author := check_ref(ref[:-4], small_font, ref_maxW), small_font)) > width(year, small_font):
                 # checking for a year in the reference name to print it on the second line
                 ref = f'{author}\n{year}'
                 ref_len = author_len
             else:
-                ref = check_ref(ref, small_font, 1.5*r_active)
+                ref = check_ref(ref, small_font, ref_maxW)
                 ref_len = width(ref, small_font)
             draw.multiline_text((center_x+r_active, center_y-r_active-workaround_shift), ref, fill=text_color, font=small_font, anchor='ra', align='right', spacing=0)
         

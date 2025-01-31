@@ -59,7 +59,7 @@ def gaussian_convolution(nm0: Sequence, br0: Sequence, nm1: Sequence, step: int|
         br1[i] = np.average(br0, weights=br0_convolved)
     return br1
 
-def spectral_downscaling(nm0: Sequence, br0: np.ndarray, nm1: Sequence, step: int|float):
+def spectral_downscaling(nm0: Sequence, br0: np.ndarray, sd0: np.ndarray, nm1: Sequence, step: int|float):
     """
     Returns spectrum brightness values with decreased resolution.
     Incoming graphs or point clouds may have holes and areas of varying resolution.
@@ -79,25 +79,42 @@ def spectral_downscaling(nm0: Sequence, br0: np.ndarray, nm1: Sequence, step: in
     cube_flag = br0.ndim == 3 # spectral cube processing
     if br0.min() < 0:
         br0 = np.clip(br0, np.nextafter(0, 1), None) # strange NumPy errors with weights without it
+    notnan = ~np.isnan(br0)
+    nm0 = nm0[notnan]
+    br0 = br0[notnan]
+    if sd0 is not None:
+        sd0 = sd0[notnan]
     # Obtaining a graph of standard deviations for a Gaussian
     nm_diff = np.diff(nm0)
     nm_mid = (nm0[1:] + nm0[:-1]) * 0.5
+    # Calculates the continuous (smoothed by gaussian) density of the original spectral grid
     sd_local = gaussian_width(gaussian_convolution(nm_mid, nm_diff, nm1, step*2), step) # missing "blur"
     factors = -0.5 / sd_local**2 # Gaussian exponent multipliers
     # Convolution with Gaussian of variable standard deviation
     br1 = np.empty_like(nm1, dtype='float64')
     if cube_flag:
         br1 = array2cube(br1, br0.shape[1:3])
-    br0_notnan = ~np.isnan(br0)
+    if sd0 is None:
+        sd1 = None
+        uncertainty_weights = np.ones_like(nm0)
+    else:
+        sd1 = np.empty_like(br1)
+        uncertainty_weights = sd0**(-2)
     for i in range(len(nm1)):
-        gaussian = np.exp(factors[i]*(nm0[br0_notnan] - nm1[i])**2)
+        # Variable convolution kernel
+        gaussian_weights = np.exp(factors[i]*(nm0 - nm1[i])**2)
+        weights = uncertainty_weights * gaussian_weights
         if cube_flag:
-            gaussian = array2cube(gaussian, br0.shape[1:3])
+            weights = array2cube(weights, br0.shape[1:3])
         try:
-            br1[i] = np.average(br0[br0_notnan], weights=br0[br0_notnan]*gaussian, axis=0)
+            br1[i] = np.average(br0, weights=weights, axis=0)
+            if sd0 is not None:
+                sd1[i] = np.average(uncertainty_weights, weights=gaussian_weights, axis=0)**(-0.5)
         except ZeroDivisionError:
-            br1[i] = np.average(br0[br0_notnan], axis=0)
-    return br1
+            br1[i] = np.average(br0, axis=0)
+            if sd0 is not None:
+                sd1[i] = np.average(uncertainty_weights, axis=0) * len(nm0)**(-0.5) # σ1 = σ0 / sqrt(N)
+    return br1, sd1
 
 def spatial_downscaling(cube: np.ndarray, pixels_limit: int):
     """ Brings the spatial resolution of the cube to approximately match the number of pixels """
