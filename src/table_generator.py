@@ -206,14 +206,15 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
             ref = obj_name.reference
             if ',' in ref:
                 # checking multiple references, no more than 3 are supported!
-                refs = [i.strip() for i in ref.split(',', 2)]
+                refs = [check_ref(i, small_font, 1.5*r_active) for i in ref.split(',', 2)]
                 ref = '\n'.join(refs) 
                 ref_len = width(refs[0], small_font)
-            elif len(ref) > 4 and (year := ref[-4:]).isnumeric() and (ref[-5].isalpha() or ref[-5] in separators) and (author_len := width(author := ref[:-4].strip(), small_font)) > width(year, small_font):
+            elif len(ref) > 4 and (year := ref[-4:]).isnumeric() and (ref[-5].isalpha() or ref[-5] in separators) and (author_len := width(author := check_ref(ref[:-4]), small_font)) > width(year, small_font):
                 # checking for a year in the reference name to print it on the second line
                 ref = f'{author}\n{year}'
                 ref_len = author_len
             else:
+                ref = check_ref(ref, small_font, 1.5*r_active)
                 ref_len = width(ref, small_font)
             draw.multiline_text((center_x+r_active, center_y-r_active-workaround_shift), ref, fill=text_color, font=small_font, anchor='ra', align='right', spacing=0)
         
@@ -272,13 +273,7 @@ superscript_digits = '⁰¹²³⁴⁵⁶⁷⁸⁹'
 
 def superscript(number: int):
     """ Converts a number to be a superscript string """
-    return ''.join([superscript_digits[int(digit)] for digit in str(number)]) 
-
-#def spacing_year(line: str):
-#    """ Adds space between author and year in a reference name """
-#    if line[-4:].isnumeric() and line[-5].isalpha():
-#        line = f'{line[:-4]} {line[-4:]}'
-#    return line
+    return ''.join([superscript_digits[int(digit)] for digit in str(number)])
 
 def width(line: str, font: ImageFont.FreeTypeFont):
     """ Alias for measuring line width in pixels """
@@ -286,6 +281,20 @@ def width(line: str, font: ImageFont.FreeTypeFont):
         # workaround to make postprocessing work better
         line = line[:-1].strip()
     return font.getlength(line)
+
+def check_ref(ref: str, font: ImageFont.FreeTypeFont, maxW: int):
+    """ Shortens the reference name if it exceeds the maximum width """
+    ref = ref.strip()
+    if len(ref) > 4 and (year := ref[-4:]).isnumeric() and (ref[-5].isalpha() or ref[-5] in separators):
+        ref = ref[:-4].strip()
+        maxW -= width(year, font)
+    else:
+        year = ''
+    if width(ref, font) > maxW:
+        while width(ref+'…', font) > maxW:
+            ref = ref[:-1]
+        ref = ref + '…'
+    return ref + year
 
 def line_splitter(line: str, font: ImageFont.FreeTypeFont, maxW: int) -> list[str]:
     """ Performs an adaptive line break at the specified width in pixels """
