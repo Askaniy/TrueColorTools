@@ -1589,19 +1589,17 @@ class ColorPoint(_ColorObject):
     To avoid data loss, brightness above 1 is not clipped before export.
     """
 
-    def to_bit(self, bit: int) -> np.ndarray:
+    def to_bit(self, bit: int, clip: bool = False) -> np.ndarray:
         """ Returns color array, scaled to the appropriate power of two (not rounded) """
-        return self.br * (2**bit - 1)
+        factor = 2**bit - 1
+        if clip:
+            return np.clip(self.br, 0, 1) * factor
+        else:
+            return self.br * factor
 
     def to_html(self):
         """ Converts fractional rgb values to HTML-styled hexadecimal string """
-        html = '#{:02x}{:02x}{:02x}'.format(*self.to_bit(8).round().astype('int'))
-        if len(html) != 7:
-            #print(f'# Note for the Color object "{self.name}"')
-            #print(f'- HTML-style color code feels wrong: {html}')
-            html = '#FFFFFF'
-            #print(f'- It has been replaced with {html}.')
-        return html
+        return '#{:02x}{:02x}{:02x}'.format(*self.to_bit(8, clip=True).round().astype('int'))
 
 
 class ColorLine(_ColorObject):

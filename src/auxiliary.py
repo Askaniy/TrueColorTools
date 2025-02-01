@@ -109,11 +109,17 @@ def spectral_downscaling(nm0: Sequence, br0: np.ndarray, sd0: np.ndarray, nm1: S
         try:
             br1[i] = np.average(br0, weights=weights, axis=0)
             if sd0 is not None:
-                sd1[i] = np.average(uncertainty_weights, weights=gaussian_weights, axis=0)**(-0.5)
+                # Assumed formula, not proved
+                sd1[i] = np.sum(weights, axis=0)**(-0.5)
+                # If we had normal binning (on a limited interval), the formula would be
+                # np.sum(uncertainty_weights[i])**(-0.5),
+                # and at the limit, it would give σ1 = σ0 / sqrt(N)
+                # Taking advantage of the fact that gaussian_weights take values from 1
+                # at the center to 0 at infinity, I use them for summation of uncertainty_weights
         except ZeroDivisionError:
             br1[i] = np.average(br0, axis=0)
             if sd0 is not None:
-                sd1[i] = np.average(uncertainty_weights, axis=0) * len(nm0)**(-0.5) # σ1 = σ0 / sqrt(N)
+                sd1[i] = 0
     return br1, sd1
 
 def spatial_downscaling(cube: np.ndarray, pixels_limit: int):
