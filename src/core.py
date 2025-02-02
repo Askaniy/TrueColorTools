@@ -16,6 +16,12 @@ Data:
 - - - PhotospectralSquare (2D)
 - - - PhotospectralCube (3D)
 
+Phase photometry:
+- PhotometricModel
+- - HG
+- - HG1G2
+- - Hapke
+
 Database:
 - NonReflectiveBody
 - ReflectiveBody
@@ -1190,18 +1196,135 @@ class PhotospectralCube(_PhotospectralObject, _Cube):
 
 
 
-# ------------ Database Processing Section ------------
+# ------------ Phase Photometry Section ------------
 
-sun_SI = Spectrum.from_file('spectra/files/CALSPEC/sun_reference_stis_002.fits', name='Sun') # W / (m² nm)
-sun_SI.sd = None # removing uncertainty to facilitate calculations and simplify spectrum plots
-sun_in_V, _ = sun_SI @ get_filter('Generic_Bessell.V')
-sun_norm = sun_SI.scaled_at(get_filter('Generic_Bessell.V'))
-sun_filter = sun_SI.normalize()
+class _PhotometricModel:
+    """
+    Internal base class to store a photometric model parameters,
+    calculate their phase functions and albedo.
+    """
+    params: dict = {}
+    geometric_albedo: [float, float] = None
+    phase_integral: [float, float] = None
+    phase_function: Callable = None # input in radians!
 
-vega_SI = Spectrum.from_file('spectra/files/CALSPEC/alpha_lyr_stis_011.fits', name='Vega') # W / (m² nm)
-vega_SI.sd = None # removing uncertainty to facilitate calculations and simplify spectrum plots
-vega_in_V, _ = vega_SI @ get_filter('Generic_Bessell.V')
-vega_norm = vega_SI.scaled_at(get_filter('Generic_Bessell.V'))
+    def __init__(self, params: dict) -> None:
+        self.params = params
+        self._integrate()
+
+    def _integrate(self) -> None:
+        raise NotImplementedError
+    
+    @property
+    def spherical_albedo(self):
+        a = aux.mul_br(self.geometric_albedo[0], self.phase_integral[0])
+        a_sd = aux.mul_sd(self.geometric_albedo[1], self.phase_integral[1])
+        return a, a_sd
+
+
+class HG(_PhotometricModel):
+    """
+    Two-parameter magnitude system model:
+    - H: “reduced magnitude” at zero phase angle
+    - G: “slope parameter” that describes the shape of the phase curve
+
+    See Bowell et al (1989). Application of photometric models to asteroids.
+    https://ui.adsabs.harvard.edu/abs/1989aste.conf..524B/abstract
+    """
+
+    def _integrate(self) -> None:
+        g, g_sd = aux.parse_value_sd(self.params['G'])
+        q = 0.290 + 0.684 * g
+        q_sd = None if g_sd is None else 0.684 * g_sd
+        self.phase_integral = (q, q_sd)
+    
+    @property
+    def phase_function(self, alpha):
+        g, _ = aux.parse_value_sd(self.params['G'])
+        alpha2 = 0.5 * alpha
+        sin_alpha = np.sin(alpha)
+        tan_alpha2 = np.tan(alpha2)
+        sin_fraction = sin_alpha / (0.119 + 1.341 * sin_alpha - 0.754 * sin_alpha**2)
+        phi1s = 1 - 0.986 * sin_fraction
+        phi1l = np.exp(-3.332 * tan_alpha2**0.631)
+        phi2s = 1 - 0.238 * sin_fraction
+        phi2l = np.exp(-1.862 * tan_alpha2**1.218)
+        w = np.exp(-90.56 * tan_alpha2**2)
+        v = 1 - w
+        phi1 = w * phi1s + v * phi1l
+        phi2 = w * phi2s + v * phi2l
+        return (1 - g) * phi1 + g * phi2
+        # Approximation:
+        # (1 - g) * np.exp(-3.33 * tan_alpha2**0.63) + g * np.exp(-1.87 * tan_alpha2**1.22)
+
+
+class HG1G2(_PhotometricModel):
+    """
+    Three-parameter magnitude system model:
+    - H: “reduced magnitude” at zero phase angle
+    - G1: the first “slope parameter”
+    - G2: the second “slope parameter”
+
+    See Muinonen et al (2010). A three-parameter magnitude phase function for asteroids.
+    https://www.sciencedirect.com/science/article/abs/pii/S001910351000151X
+    """
+
+    def _integrate(self) -> None:
+        g1, g1_sd = aux.parse_value_sd(self.params['G_1'])
+        g2, g2_sd = aux.parse_value_sd(self.params['G_2'])
+        q = 0.009082 + 0.4061 * g1 + 0.8092 * g2
+        if g1_sd is None and g2_sd is None:
+            q_sd = None
+        else:
+            if g1_sd is None:
+                g1_sd = 0
+            if g2_sd is None:
+                g2_sd = 0
+            q_sd = 0.4061 * g1_sd + 0.8092 * g2_sd
+        self.phase_integral = (q, q_sd)
+    
+    @property
+    def phase_function(self, alpha):
+        g1, _ = aux.parse_value_sd(self.params['G_1'])
+        g2, _ = aux.parse_value_sd(self.params['G_2'])
+        return g1 * aux.hg1g2_phi1(alpha) + g2 * aux.hg1g2_phi2(alpha) + (1 - g1 - g2) * aux.hg1g2_phi3(alpha)
+
+
+class Hapke(_PhotometricModel):
+    """
+    Hapke photometric model. A common, partially empirical model.
+
+    See Hapke, B. (1984). Bidirectional reflectance spectroscopy.
+    Icarus, 59(1), 41–59. doi:10.1016/0019-1035(84)90054-x
+    https://www.sciencedirect.com/science/article/abs/pii/001910358490054X
+    """
+
+    def _integrate(self):
+        w, _ = aux.parse_value_sd(self.params['w']) # single particle scattering albedo
+        bo, _ = aux.parse_value_sd(self.params['bo']) # amplitude of opposition surge
+        h, _ = aux.parse_value_sd(self.params['h']) # width of opposition surge
+        b, _ = aux.parse_value_sd(self.params['b']) # Henyey-Greenstein single particle scattering function parameter
+        c, _ = aux.parse_value_sd(self.params['c']) # Henyey-Greenstein single particle scattering function parameter
+        theta, _ = aux.parse_value_sd(self.params['theta']) # macroscopic roughness angle
+        theta *= np.pi / 180 # degrees to radians
+        gamma = np.sqrt(1 - w)
+        r0 = (1 - gamma) / (1 + gamma) # bihemispherical  reflectance
+        # geometric albedo:
+        C = 1 - r0 * (0.048 * theta + 0.0041 * theta**2) - r0**2 * (0.33 * theta + 0.0049 * theta**2)
+        self.geometric_albedo = w / 8 * ((1 + bo) * aux.henyey_greenstein(0, b, c) - 1) + C * 0.5 * r0 * (1 + r0 / 3)
+        # phase function:
+        def phase_function(alpha):
+            alpha2 = alpha * 0.5
+            B = bo / (1 + np.tan(alpha2) / h)
+            phi = w / 8 * ((1 + B) * aux.henyey_greenstein(alpha, b, c) - 1) + 0.5 * r0 * (1 - r0)
+            phi *= 1 + np.sin(alpha2) * np.tan(alpha2) * np.log(np.tan(0.5 * alpha2))
+            phi += 2/3 * r0**2 * (np.sin(alpha) + (np.pi - alpha) * np.cos(alpha)) / np.pi
+            return aux.hapke_k(alpha, theta) * phi / self.geometric_albedo
+        self.phase_function = phase_function
+        # phase integral:
+        step = 0.01
+        a = np.arange(step, np.pi, step) # 0°-180° phase angle array (radians)
+        self.phase_integral = 2 * aux.integrate(phase_function(a) * np.sin(a), precisely=True)
 
 
 class NonReflectiveBody:
@@ -1289,6 +1412,22 @@ class ReflectiveBody:
                         estimated = True
                     sphericalV = geometricV * phase_integral
                     return self.geometric.scaled_at(get_filter('Generic_Bessell.V'), sphericalV), estimated
+
+
+
+# ------------ Database Processing Section ------------
+
+sun_SI = Spectrum.from_file('spectra/files/CALSPEC/sun_reference_stis_002.fits', name='Sun') # W / (m² nm)
+sun_SI.sd = None # removing uncertainty to facilitate calculations and simplify spectrum plots
+sun_in_V, _ = sun_SI @ get_filter('Generic_Bessell.V')
+sun_norm = sun_SI.scaled_at(get_filter('Generic_Bessell.V'))
+sun_filter = sun_SI.normalize()
+
+vega_SI = Spectrum.from_file('spectra/files/CALSPEC/alpha_lyr_stis_011.fits', name='Vega') # W / (m² nm)
+vega_SI.sd = None # removing uncertainty to facilitate calculations and simplify spectrum plots
+vega_in_V, _ = vega_SI @ get_filter('Generic_Bessell.V')
+vega_norm = vega_SI.scaled_at(get_filter('Generic_Bessell.V'))
+
 
 def _create_TCT_object(
         name: ObjectName, nm: Sequence[int|float], filters: Sequence[str], br: Sequence,
@@ -1407,6 +1546,35 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
             # regular filter if name is string, else "delta-filter" (wavelength)
             filter_system = content['photometric_system']
             filters = [f'{filter_system}.{short_name}' if isinstance(short_name, str) else short_name for short_name in filters]
+    # Phase photometry
+    geom_albedo = None if 'geometric_albedo' not in content else content['geometric_albedo'] # could be a bool flag or (br, sd)
+    sphe_albedo = None if 'spherical_albedo' not in content else content['spherical_albedo']
+    phase_integ = None if 'phase_integral' not in content else aux.parse_value_sd(content['phase_integral'])
+    if 'phase_coefficient' in content:
+        phase_integ = aux.phase_coefficient2phase_integral(*aux.parse_value_sd(content['phase_coefficient']))
+    elif 'phase_function' in content:
+        phase_func = content['phase_function']
+        match len(phase_func):
+            case 2:
+                where = 'Generic_Bessell.V'
+                model_name, params = phase_func
+            case 3:
+                where, model_name, params = phase_func
+        # Formatting check
+        if isinstance(model_name, str) and isinstance(params, dict):
+            match model_name:
+                case 'HG':
+                    phase_integ = HG(params).phase_integral
+                case 'HG1G2':
+                    phase_integ = HG1G2(params).phase_integral
+                case 'Hapke':
+                    photometric_model = Hapke(params)
+                    phase_integ = photometric_model.phase_integral
+                    geom_albedo = (where, photometric_model.geometric_albedo)
+        else:
+            print(f'# Note for the database object "{name}"')
+            print(f'- Invalid phase function value: {phase_func}. Must be [model_name, params_dict] or [filter/nm, model_name, params_dict]')
+    # Main part
     calib = content['calibration_system'] if 'calibration_system' in content else None
     sun = 'sun_is_emitter' in content and content['sun_is_emitter']
     is_emission = 'is_emission_spectrum' in content and content['is_emission_spectrum']
@@ -1416,8 +1584,9 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
             br_geom = content['br_geometric']
             sd_geom = aux.repeat_if_value(content['sd_geometric'], len(br_geom)) if 'sd_geometric' in content else None
             geometric = _create_TCT_object(name, nm, filters, br_geom, sd_geom, filter_system, calib, sun, is_emission)
-            if 'spherical_albedo' in content:
-                where, how = content['spherical_albedo']
+            if sphe_albedo is not None:
+                # assuming it can't be a flag here
+                where, how = sphe_albedo
                 spherical = geometric.scaled_at(where, *aux.parse_value_sd(how))
             elif 'bond_albedo' in content:
                 spherical = geometric.scaled_at(sun_filter, *aux.parse_value_sd(content['bond_albedo']))
@@ -1425,8 +1594,9 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
             br_sphe = content['br_spherical']
             sd_sphe = aux.repeat_if_value(content['sd_spherical'], len(br_sphe)) if 'sd_spherical' in content else None
             spherical = _create_TCT_object(name, nm, filters, br_sphe, sd_sphe, filter_system, calib, sun, is_emission)
-            if 'geometric_albedo' in content:
-                where, how = content['geometric_albedo']
+            if geom_albedo is not None:
+                # assuming it can't be a flag here
+                where, how = geom_albedo
                 geometric = spherical.scaled_at(where, *aux.parse_value_sd(how))
         if geometric is None and spherical is None:
             print(f'# Note for the database object "{name}"')
@@ -1445,21 +1615,21 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
                 print(f'# Note for the database object "{name}"')
                 print(f'- Invalid albedo value: {content["albedo"]}. Must be boolean or [filter/nm, [br, (sd)]].')
         # Geometric albedo parsing
-        if 'geometric_albedo' in content:
-            if isinstance(content['geometric_albedo'], bool) and content['geometric_albedo']:
+        if geom_albedo is not None:
+            if isinstance(geom_albedo, bool) and geom_albedo:
                 geometric = TCT_obj
-            elif isinstance(content['geometric_albedo'], Sequence):
-                where, how = content['geometric_albedo']
+            elif isinstance(geom_albedo, Sequence):
+                where, how = geom_albedo
                 geometric = TCT_obj.scaled_at(where, *aux.parse_value_sd(how))
             else:
                 print(f'# Note for the database object "{name}"')
                 print(f'- Invalid geometric albedo value: {content["geometric_albedo"]}. Must be boolean or [filter/nm, [br, (sd)]].')
         # Spherical albedo parsing
-        if 'spherical_albedo' in content:
-            if isinstance(content['spherical_albedo'], bool) and content['spherical_albedo']:
+        if sphe_albedo is not None:
+            if isinstance(sphe_albedo, bool) and sphe_albedo:
                 spherical = TCT_obj
-            elif isinstance(content['spherical_albedo'], Sequence):
-                where, how = content['spherical_albedo']
+            elif isinstance(sphe_albedo, Sequence):
+                where, how = sphe_albedo
                 spherical = TCT_obj.scaled_at(where, *aux.parse_value_sd(how))
             else:
                 print(f'# Note for the database object "{name}"')
@@ -1471,23 +1641,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
         for tag in content['tags']:
             tags |= set(tag.split('/'))
     if geometric or spherical:
-        phase_integral = phase_integral_sd = None
-        if 'phase_integral' in content:
-            phase_integral, phase_integral_sd = aux.parse_value_sd(content['phase_integral'])
-        elif 'phase_coefficient' in content:
-            phase_integral, phase_integral_sd = aux.phase_coefficient2phase_integral(*aux.parse_value_sd(content['phase_coefficient']))
-        elif 'phase_function' in content:
-            phase_func = content['phase_function']
-            # Formatting check
-            if isinstance(phase_func, Sequence) and len(phase_func) == 2 and isinstance(phase_func[0], str) and isinstance(phase_func[1], dict):
-                phase_func, params = content['phase_function']
-                phase_integral, phase_integral_sd = aux.phase_function2phase_integral(phase_func, params)
-            else:
-                print(f'# Note for the database object "{name}"')
-                print(f'- Invalid phase function value: {content["phase_function"]}. Must be in the form ["name", {{param1: value1, ...}}]')
-        if phase_integral is not None:
-            phase_integral = (phase_integral, phase_integral_sd)
-        return ReflectiveBody(name, tags, geometric, spherical, phase_integral)
+        return ReflectiveBody(name, tags, geometric, spherical, phase_integ)
     else:
         return NonReflectiveBody(name, tags, TCT_obj)
 
