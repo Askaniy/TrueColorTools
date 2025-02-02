@@ -5871,7 +5871,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '21P/Giacobini-Zinner | Luu1993': {
+    '21P/Giacobini–Zinner | Luu1993': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
         slope: {start: 380, stop: 630, percent_per_100nm: [12.8, 2.7]},
     },
@@ -5945,7 +5945,7 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.040, 0.010]],
     },
-    '49P/Arend-Rigaux | Luu1993, Lamy2004': {
+    '49P/Arend–Rigaux | Luu1993, Lamy2004': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
         slope: {start: 380, stop: 630, percent_per_100nm: [10.4, 0.95]}, // mean
         geometric_albedo: ['Generic_Bessell.V', [0.040, 0.010]],
@@ -6046,7 +6046,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '73P/Schwassmann-Wachmann 3: Fragment 73P-C | Lamy2009': {
+    '73P/Schwassmann–Wachmann 3: Fragment 73P-C | Lamy2009': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.16, 0.20], 'V-R': [0.45, 0.20]},
@@ -6113,14 +6113,14 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '121P/Shoemaker-Holt 2 | Lamy2009': {
+    '121P/Shoemaker–Holt 2 | Lamy2009': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-R': [0.53, 0.03], 'R-I': [0.44, 0.03]},
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '137P/Shoemaker-Levy 2 | Lamy2009, Knight2023': {
+    '137P/Shoemaker–Levy 2 | Lamy2009, Knight2023': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-R': [0.71, 0.18], 'R-I': [0.54, 0.15]},
