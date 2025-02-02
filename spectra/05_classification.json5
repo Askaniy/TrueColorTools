@@ -81,6 +81,24 @@
         geometric_albedo: ['Generic_Bessell.V', 0.04], // estimation
         phase_coefficient: [0.046, 0.013],
     },
+    'Comets: Jupiter Family | Jewitt2015, Snodgrass2011': {
+        tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'class/orbital class'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.87, 0.05], 'V-R': [0.50, 0.03], 'R-I': [0.46, 0.03]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.013]],
+        phase_coefficient: [0.053, 0.016],
+    },
+    'Comets: Jupiter Family, Active | Jewitt2015, Snodgrass2011': {
+        tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'class/orbital class'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.75, 0.02], 'V-R': [0.47, 0.02], 'R-I': [0.43, 0.02]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.013]],
+        phase_coefficient: [0.053, 0.016],
+    },
     'Comets: Long-period | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/comet/long period comet', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
@@ -88,6 +106,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', 0.101]
+    },
+    'Comets: Long-period, Active | Jewitt2015': {
+        tags: ['Solar System', 'minor body/comet/long period comet', 'class/orbital class'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.77, 0.02], 'V-R': [0.44, 0.02], 'R-I': [0.44, 0.02]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
     },
     'Jupiter trojans | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/Jupiter trojan', 'class/orbital class'],
@@ -148,6 +173,19 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.051, 0.023]]
+    },
+    'Jewitt2018': [
+        'The Trojan Color Conundrum',
+        'DOI: 10.3847/1538-3881/aaa1a4', 'https://iopscience.iop.org/article/10.3847/1538-3881/aaa1a4',
+        'https://ui.adsabs.harvard.edu/abs/2018AJ....155...56J/abstract'
+    ],
+    'Neptune trojans | Jewitt2018': {
+        tags: ['Solar System', 'minor body/Neptune trojan', 'class/orbital class'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.77, 0.01], 'V-R': [0.44, 0.01]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.033], // assumed albedo from 2001 QR322
     },
     'Plutinos | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'class/orbital class'],
