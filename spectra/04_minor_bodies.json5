@@ -2447,7 +2447,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.065, 0.005]],
-        phase_coefficient: [0.062, 0.014], // o filter
+        phase_function: ['Misc_Atlas.orange', 'phase coefficient', {beta: [0.062, 0.014]}],
     },
     '(55565) 2002 AW197 | MBOSS, Vilenius2014': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
@@ -2927,7 +2927,7 @@
         tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino'],
         file: 'spectra/files/Orcus_deBergh2005.txt',
         geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
-        // phase_coefficient: [0.07, 0.04], // o filter
+        // phase_function: ['Misc_Atlas.orange', 'phase coefficient', {beta: [0.07, 0.04]}],
     },
     '(90482) Orcus | MBOSS, Brown2018, Dobson2023': {
         tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino'],
@@ -2936,7 +2936,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
-        // phase_coefficient: [0.07, 0.04], // o filter
+        // phase_function: ['Misc_Atlas.orange', 'phase coefficient', {beta: [0.07, 0.04]}],
     },
     '(90482) Orcus | Brown2010, Brown2018, Dobson2023': {
         tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino'],
@@ -2946,7 +2946,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
-        // phase_coefficient: [0.07, 0.04], // o filter
+        // phase_function: ['Misc_Atlas.orange', 'phase coefficient', {beta: [0.07, 0.04]}],
     },
     '(90482 I) Vanth | Brown2010, Brown2018': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'natural satellite'],
@@ -4193,7 +4193,7 @@
         color_indices: {'B-V': [0.720, 0.020], 'V-R': [0.460, 0.020]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        phase_coefficient: [0.036, 0.01], // o filter
+        phase_function: ['Misc_Atlas.orange', 'phase coefficient', {beta: [0.036, 0.01]}],
     },
     '(382004) 2010 RM64 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -4382,7 +4382,7 @@
         color_indices: {'B-V': [0.720, 0.020], 'V-R': [0.450, 0.020]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        phase_coefficient: [0.036, 0.011], // o filter
+        phase_function: ['Misc_Atlas.orange', 'phase coefficient', {beta: [0.036, 0.011]}],
     },
     '(459971) 2014 ON6 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -5802,13 +5802,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.R', [0.046, 0.023]],
-        phase_coefficient: [0.053, 0.003],
+        phase_function: ['phase coefficient', {beta: [0.053, 0.003]}],
     },
     '2P/Encke | Luu1993, Lamy2004, Knight2023': {
         tags: ['Solar System', 'minor body/comet/short period comet/Encke-type comet'],
         slope: {start: 440, stop: 720, percent_per_100nm: [11, 2]},
         geometric_albedo: ['Generic_Bessell.V', [0.046, 0.023]],
-        phase_coefficient: [0.053, 0.003],
+        phase_function: ['phase coefficient', {beta: [0.053, 0.003]}],
     },
     '6P/d’Arrest | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
@@ -5850,13 +5850,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: [484.5, [0.022, +0.004, -0.006]], // 4845 Å
-        phase_coefficient: [0.037, 0.004],
+        phase_function: ['phase coefficient', {beta: [0.037, 0.004]}],
     },
     '10P/Tempel 2 | Luu1993, Lamy2004, Ferrín2007': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
         slope: {start: 440, stop: 720, percent_per_100nm: [20, 3]},
         geometric_albedo: [484.5, [0.022, +0.004, -0.006]], // 4845 Å
-        phase_coefficient: [0.037, 0.004],
+        phase_function: ['phase coefficient', {beta: [0.037, 0.004]}],
     },
     '14P/Wolf | Snodgrass2005, Knight2023': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
@@ -5865,7 +5865,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['PAN-STARRS_PS1.r', [0.046, 0.007]],
-        phase_coefficient: [0.060, 0.005],
+        phase_function: ['phase coefficient', {beta: [0.060, 0.005]}],
     },
     '17P/Holmes | Lamy2009': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
@@ -5903,7 +5903,7 @@
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
         slope: {start: 520, stop: 950, percent_per_100nm: [13.3, 2.0]}, // November 2003
         geometric_albedo: ['Generic_Bessell.R', [0.03, 0.01]],
-        phase_coefficient: [0.025, 0.006],
+        phase_function: ['phase coefficient', {beta: [0.025, 0.006]}],
     },
     '36P/Whipple | Lamy2009, Knight2023': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
@@ -5911,7 +5911,7 @@
         color_indices: {'V-R': [0.47, 0.02], 'R-I': [0.60, 0.02]},
         calibration_system: 'Vega',
         sun_is_emitter: true,
-        phase_coefficient: [0.060, 0.019],
+        phase_function: ['phase coefficient', {beta: [0.060, 0.019]}],
     },
     '37P/Forbes | Lamy2009': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
@@ -5946,7 +5946,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['PAN-STARRS_PS1.r', [0.054, 0.008]],
-        phase_coefficient: [0.083, 0.006],
+        phase_function: ['phase coefficient', {beta: [0.083, 0.006]}],
     },
     '49P/Arend–Rigaux | MBOSS, Lamy2004': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
@@ -5975,7 +5975,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.R', [0.060, 0.025]],
-        phase_coefficient: [0.041, 0.010],
+        phase_function: ['phase coefficient', {beta: [0.041, 0.010]}],
     },
     '59P/Kearns–Kwee | Lamy2009': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
@@ -6086,7 +6086,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['PAN-STARRS_PS1.r', [0.043, 0.007]],
-        phase_coefficient: [0.039, 0.002],
+        phase_function: ['phase coefficient', {beta: [0.039, 0.002]}],
     },
     'Eisner2019': [
         'Properties of the Bare Nucleus of Comet 96P/Machholz 1',
@@ -6138,7 +6138,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['PAN-STARRS_PS1.r', [0.030, 0.005]],
-        phase_coefficient: [0.035, 0.004],
+        phase_function: ['phase coefficient', {beta: [0.035, 0.004]}],
     },
     '143P/Kowal–Mrkos | MBOSS, Knight2023': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
@@ -6147,7 +6147,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['PAN-STARRS_PS1.r', [0.044, 0.008]],
-        phase_coefficient: [0.041, 0.013],
+        phase_function: ['phase coefficient', {beta: [0.041, 0.013]}],
     },
     'Campins2006': [
         'Nuclear Spectra of Comet 162P/Siding Spring (2004 TU12)',
@@ -6256,7 +6256,7 @@
         color_indices: {'g-r': [0.52, 0.04], 'r-i': [0.03, 0.06]},
         calibration_system: 'AB',
         sun_is_emitter: true,
-        phase_coefficient: [0.031, 0.004],
+        phase_function: ['phase coefficient', {beta: [0.031, 0.004]}],
     },
     'Hui2022': [
         'The Lingering Death of Periodic Near-Sun Comet 323P/SOHO',
@@ -6269,7 +6269,7 @@
         color_indices: {'g-r': [0.68, 0.05], 'r-i': [-0.16, 0.05]}, // 2021 March 3
         calibration_system: 'AB',
         sun_is_emitter: true,
-        phase_coefficient: [0.0326, 0.0004],
+        phase_function: ['phase coefficient', {beta: [0.0326, 0.0004]}],
     },
     'Hsieh2014': [
         'Observational and Dynamical Characterization of Main-belt Comet P/2010 R2 (La Sagra)',

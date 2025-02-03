@@ -79,7 +79,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', 0.04], // estimation
-        phase_coefficient: [0.046, 0.013],
+        phase_function: ['phase coefficient', {beta: [0.046, 0.013]}],
     },
     'Comets: Jupiter Family | Jewitt2015, Snodgrass2011': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'class/orbital class'],
@@ -88,7 +88,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.013]],
-        phase_coefficient: [0.053, 0.016],
+        phase_function: ['phase coefficient', {beta: [0.053, 0.016]}],
     },
     'Comets: Jupiter Family, Active | Jewitt2015, Snodgrass2011': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'class/orbital class'],
@@ -97,7 +97,7 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.013]],
-        phase_coefficient: [0.053, 0.016],
+        phase_function: ['phase coefficient', {beta: [0.053, 0.016]}],
     },
     'Comets: Long-period | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/comet/long period comet', 'class/orbital class'],

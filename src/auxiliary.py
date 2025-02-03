@@ -655,28 +655,8 @@ def color_indices_parser(indices: dict):
     return filter_names, irradiance, sd
 
 
+
 # ------------ Phase Photometry Section ------------
-
-_phase_coeff_k = 180 / np.pi * 0.4 * np.log(10) # ≈ 52.77
-
-def phase_coefficient2phase_integral(beta: float, beta_sd: float = None):
-    """
-    Determines phase integral from the phase coefficient β (in mag/deg).
-
-    The formula used was derived in M. Noland, J. Veverka, 1976:
-    https://www.sciencedirect.com/science/article/abs/pii/0019103576901548
-
-    The error propagation formula was used to handle the uncertainty.
-    """
-    _beta = beta * _phase_coeff_k
-    _exp = np.exp(-np.pi * _beta)
-    _denominator = 1 + _beta * _beta
-    phase_integral = 2 * (1 + _exp) / _denominator
-    if beta_sd is not None:
-        phase_integral_sd = beta_sd * 2 * _phase_coeff_k * (np.pi * _exp + _beta * phase_integral) / _denominator
-    else:
-        phase_integral_sd = None
-    return phase_integral, phase_integral_sd
 
 
 # Macroscopic roughness angle of Hapke 1984 model

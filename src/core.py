@@ -258,6 +258,8 @@ class _TrueColorToolsObject:
         current_br, sd = self @ where
         if current_br == 0:
             return output
+        if isinstance(how, Sequence):
+            how = how[0] # likely a [value, std]
         return output * (how / current_br)
     
     def apply_element_wise_operation(self, operand: Self, br_handling: Callable, sd_handling: Callable) -> Self:
@@ -1203,23 +1205,96 @@ class _PhotometricModel:
     Internal base class to store a photometric model parameters,
     calculate their phase functions and albedo.
     """
-    params: dict = {}
+    params: dict = None
+    filter_or_nm: str|int|float = None
     geometric_albedo: [float, float] = None
     phase_integral: [float, float] = None
     phase_function: Callable = None # input in radians!
 
-    def __init__(self, params: dict) -> None:
+    def __init__(self, params: dict = None, filter_or_nm: str|int|float = None) -> None:
         self.params = params
+        self.filter_or_nm = filter_or_nm
         self._integrate()
 
     def _integrate(self) -> None:
-        raise NotImplementedError
+        """ Analytically or numerically computes usable values from a model parameters """
+        raise NotImplementedError('Must be implemented in the inherited classes.')
     
     @property
     def spherical_albedo(self):
-        a = aux.mul_br(self.geometric_albedo[0], self.phase_integral[0])
-        a_sd = aux.mul_sd(self.geometric_albedo[1], self.phase_integral[1])
-        return a, a_sd
+        if self.geometric_albedo is not None and self.phase_integral is not None:
+            a = aux.mul_br(self.geometric_albedo[0], self.phase_integral[0])
+            a_sd = aux.mul_sd(self.geometric_albedo[1], self.phase_integral[1])
+            return a, a_sd
+        else:
+            return None
+    
+    def estimate_geometric_albedo(self, spherical_in_V: [float, float]):
+        """
+        Returns exact or estimated value of geometric albedo with the flag showing the case.
+
+        For phase integral estimation, model by Shevchenko et al. (2019) is used.
+        https://ui.adsabs.harvard.edu/abs/2019A%26A...626A..87S/abstract
+        q = 0.359 (± 0.005) + 0.47 (± 0.03) p, where `p` is geometric albedo.
+        """
+        if spherical_in_V is not None and self.phase_integral is not None:
+            geometric_in_V = spherical_in_V[0] / self.phase_integral[0]
+            return geometric_in_V, False
+        else:
+            geometric_in_V = (np.sqrt(0.359**2 + 4 * 0.47 * spherical_in_V[0]) - 0.359) / (2 * 0.47)
+            return geometric_in_V, True
+
+    def estimate_spherical_albedo(self, geometric_in_V: [float, float]):
+        """
+        Returns exact or estimated value of spherical albedo with the flag showing the case.
+
+        For phase integral estimation, model by Shevchenko et al. (2019) is used.
+        https://ui.adsabs.harvard.edu/abs/2019A%26A...626A..87S/abstract
+        q = 0.359 (± 0.005) + 0.47 (± 0.03) p, where `p` is geometric albedo.
+        """
+        if geometric_in_V is not None and self.phase_integral is not None:
+            spherical_in_V = geometric_in_V[0] * self.phase_integral[0]
+            return spherical_in_V, False
+        else:
+            spherical_in_V = geometric_in_V[0] * (0.359 + 0.47 * geometric_in_V[0])
+            return spherical_in_V, True
+
+
+class DefaultModel(_PhotometricModel):
+    """ Class for objects with unknown phase function """
+
+    def _integrate(self) -> None:
+        pass
+
+
+class PhaseCoefficient(_PhotometricModel):
+    """
+    One-parameter model with phase coefficient β (in mag/deg).
+
+    The integration formula used was derived in M. Noland, J. Veverka, 1976:
+    https://www.sciencedirect.com/science/article/abs/pii/0019103576901548
+
+    The error propagation formula was used to handle the uncertainty.
+    """
+
+    _k = 180 / np.pi * 0.4 * np.log(10) # ≈ 52.77
+
+    def _integrate(self) -> None:
+        beta, beta_sd = aux.parse_value_sd(self.params['beta'])
+        beta *= self._k
+        _exp = np.exp(-np.pi * beta)
+        denominator = 1 + beta * beta
+        phase_integral = 2 * (1 + _exp) / denominator
+        if beta_sd is not None:
+            phase_integral_sd = beta_sd * 2 * self._k * (np.pi * _exp + beta * phase_integral) / denominator
+        else:
+            phase_integral_sd = None
+        self.phase_integral = (phase_integral, phase_integral_sd)
+    
+    @property
+    def phase_function(self, alpha):
+        beta, _ = aux.parse_value_sd(self.params['beta'])
+        return 10**(-0.4 * beta * alpha)
 
 
 class HG(_PhotometricModel):
@@ -1321,7 +1396,7 @@ class Hapke(_PhotometricModel):
             phi += 2/3 * r0**2 * (np.sin(alpha) + (np.pi - alpha) * np.cos(alpha)) / np.pi
             return aux.hapke_k(alpha, theta) * phi / self.geometric_albedo
         self.phase_function = phase_function
-        # phase integral:
+        # Numerical calculation of spherical albedo
         step = 0.01
         a = np.arange(step, np.pi, step) # 0°-180° phase angle array (radians)
         self.phase_integral = 2 * aux.integrate(phase_function(a) * np.sin(a), precisely=True)
@@ -1346,25 +1421,16 @@ class NonReflectiveBody:
         return self.spectrum, False
 
 
+
+# ------------ Database Processing Section ------------
+
 class ReflectiveBody:
-    """
-    High-level processing class, specializing on reflectance photometry of a physical body.
-
-    Albedo formatting rules:
-    1. `geometric_albedo` and `spherical_albedo` can be a boolean type or in [filter/nm, br, sd] format
-    2. both values by default `false`
-    3. no albedo is specified and "star" in tags → emitter, else black output
-    4. one albedo is specified → another one is estimated with the phase integral model
-
-    Phase integral model by Shevchenko et al.: https://ui.adsabs.harvard.edu/abs/2019A%26A...626A..87S/abstract
-    q = 0.359 (± 0.005) + 0.47 (± 0.03) p, where `p` is geometric albedo.
-    By definition, spherical albedo A is p∙q.
-    """
+    """ High-level processing class, specializing on reflectance photometry of a physical body """
 
     def __init__(
             self, name: ObjectName, tags: Sequence,
             geometric: Spectrum = None, spherical: Spectrum = None,
-            phase_integral: tuple[float, float] = None
+            photometric_model: _PhotometricModel = None
         ):
         """
         Args:
@@ -1372,13 +1438,13 @@ class ReflectiveBody:
         - `tags` (Sequence): list of categories that specify the physical body
         - `geometric` (Spectrum): represents geometric albedo
         - `spherical` (Spectrum): represents spherical albedo
-        - `phase_integral` (tuple[value, sd]): factor of transition from geometric albedo to spherical
+        - `photometric_model` (PhotometricModel): describes the albedo behavior with phase angle
         """
         self.name = name
         self.tags = tags
         self.spherical = spherical
         self.geometric = geometric
-        self.phase_integral = phase_integral
+        self.photometric_model = photometric_model
     
     def get_spectrum(self, mode: str):
         """
@@ -1387,35 +1453,20 @@ class ReflectiveBody:
         """
         match mode:
             case 'geometric':
-                if self.geometric:
+                if self.geometric is not None:
                     return self.geometric, False
                 else:
-                    sphericalV, sd = self.spherical @ get_filter('Generic_Bessell.V')
-                    if self.phase_integral is not None:
-                        phase_integral = self.phase_integral[0]
-                        geometricV = sphericalV / phase_integral
-                        estimated = False
-                    else:
-                        geometricV = (np.sqrt(0.359**2 + 4 * 0.47 * sphericalV) - 0.359) / (2 * 0.47)
-                        estimated = True
-                    return self.spherical.scaled_at(get_filter('Generic_Bessell.V'), geometricV), estimated
+                    spherical_in_V = self.spherical @ get_filter('Generic_Bessell.V')
+                    geometric_in_V, estimated = self.photometric_model.estimate_geometric_albedo(spherical_in_V)
+                    return self.spherical.scaled_at(get_filter('Generic_Bessell.V'), geometric_in_V), estimated
             case 'spherical':
-                if self.spherical:
+                if self.spherical is not None:
                     return self.spherical, False
                 else:
-                    geometricV, sd = self.geometric @ get_filter('Generic_Bessell.V')
-                    if self.phase_integral is not None:
-                        phase_integral = self.phase_integral[0]
-                        estimated = False
-                    else:
-                        phase_integral = 0.359 + 0.47 * geometricV
-                        estimated = True
-                    sphericalV = geometricV * phase_integral
-                    return self.geometric.scaled_at(get_filter('Generic_Bessell.V'), sphericalV), estimated
+                    geometric_in_V = self.geometric @ get_filter('Generic_Bessell.V')
+                    spherical_in_V, estimated = self.photometric_model.estimate_spherical_albedo(geometric_in_V)
+                    return self.geometric.scaled_at(get_filter('Generic_Bessell.V'), spherical_in_V), estimated
 
-
-
-# ------------ Database Processing Section ------------
 
 sun_SI = Spectrum.from_file('spectra/files/CALSPEC/sun_reference_stis_002.fits', name='Sun') # W / (m² nm)
 sun_SI.sd = None # removing uncertainty to facilitate calculations and simplify spectrum plots
@@ -1482,7 +1533,6 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
     - `spherical_albedo` (bool/list): indicates spherical albedo data or how to scale to it
     - `bond_albedo` (number): sets spherical albedo scale using known Solar spectrum
     - `phase_integral` (number/list): transition factor from geometric albedo to spherical albedo
-    - `phase_coefficient` (number): slope coefficient of the logarithmic line to compute phase integral
     - `phase_function` (list): phase function name and its parameters to compute phase integral
     - `br_geometric`, `br_spherical` (list): specifying unique spectra for different albedos
     - `sd_geometric`, `sd_spherical` (list/number): corresponding standard deviations or a common value
@@ -1546,94 +1596,105 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
             # regular filter if name is string, else "delta-filter" (wavelength)
             filter_system = content['photometric_system']
             filters = [f'{filter_system}.{short_name}' if isinstance(short_name, str) else short_name for short_name in filters]
-    # Phase photometry
-    geom_albedo = None if 'geometric_albedo' not in content else content['geometric_albedo'] # could be a bool flag or (br, sd)
-    sphe_albedo = None if 'spherical_albedo' not in content else content['spherical_albedo']
-    phase_integ = None if 'phase_integral' not in content else aux.parse_value_sd(content['phase_integral'])
-    if 'phase_coefficient' in content:
-        phase_integ = aux.phase_coefficient2phase_integral(*aux.parse_value_sd(content['phase_coefficient']))
-    elif 'phase_function' in content:
+    # Phase function reading
+    if 'phase_function' in content:
         phase_func = content['phase_function']
         match len(phase_func):
             case 2:
-                where = 'Generic_Bessell.V'
+                filter_or_nm = None
                 model_name, params = phase_func
             case 3:
-                where, model_name, params = phase_func
-        # Formatting check
-        if isinstance(model_name, str) and isinstance(params, dict):
-            match model_name:
-                case 'HG':
-                    phase_integ = HG(params).phase_integral
-                case 'HG1G2':
-                    phase_integ = HG1G2(params).phase_integral
-                case 'Hapke':
-                    photometric_model = Hapke(params)
-                    phase_integ = photometric_model.phase_integral
-                    geom_albedo = (where, photometric_model.geometric_albedo)
+                filter_or_nm, model_name, params = phase_func
+        match model_name:
+            case 'phase coefficient':
+                photometric_model = PhaseCoefficient(params, filter_or_nm)
+            case 'HG':
+                photometric_model = HG(params, filter_or_nm)
+            case 'HG1G2':
+                photometric_model = HG1G2(params, filter_or_nm)
+            case 'Hapke':
+                photometric_model = Hapke(params, filter_or_nm)
+            case _:
+                print(f'# Note for the database object "{name}"')
+                print(f'- Phase function model "{model_name}" is not supported.')
+                photometric_model = DefaultModel()
+    else:
+        photometric_model = DefaultModel()
+    if 'phase_integral' in content:
+        photometric_model.phase_integral = aux.parse_value_sd(content['phase_integral'])
+    # Albedo reading
+    # 1. `geometric_albedo` and `spherical_albedo` can be a boolean type or in [filter/nm, [br, (sd)]] format
+    # 2. both albedo values by default `false`
+    # 3. no albedo is specified and "star" in tags means the object is emitter
+    # 4. one albedo is specified → another one is estimated
+    # 5. some phase functions can specify albedo
+    geom_where = geom_how = sphe_where = sphe_how = None
+    if photometric_model.geometric_albedo is not None:
+        geom_where = photometric_model.filter_or_nm
+        geom_how = photometric_model.geometric_albedo
+    if photometric_model.spherical_albedo is not None:
+        sphe_where = photometric_model.filter_or_nm
+        sphe_how = photometric_model.spherical_albedo
+    # `geometric_albedo` parsing
+    is_geom_albedo = False
+    if 'geometric_albedo' in content:
+        if isinstance(content['geometric_albedo'], bool):
+            is_geom_albedo = content['geometric_albedo']
         else:
-            print(f'# Note for the database object "{name}"')
-            print(f'- Invalid phase function value: {phase_func}. Must be [model_name, params_dict] or [filter/nm, model_name, params_dict]')
+            geom_where, geom_how = content['geometric_albedo']
+            geom_how = aux.parse_value_sd(geom_how)
+    # `spherical_albedo` parsing
+    is_sphe_albedo = False
+    if 'spherical_albedo' in content:
+        if isinstance(content['spherical_albedo'], bool):
+            is_sphe_albedo = content['spherical_albedo']
+        else:
+            sphe_where, sphe_how = content['spherical_albedo']
+            sphe_how = aux.parse_value_sd(sphe_how)
+    # `albedo` parsing
+    if 'albedo' in content:
+        if isinstance(content['albedo'], bool):
+            is_geom_albedo = is_sphe_albedo = content['albedo']
+        else:
+            where, how = content['albedo']
+            geom_where = sphe_where = where
+            how = aux.parse_value_sd(how)
+            geom_how = sphe_how = how
     # Main part
     calib = content['calibration_system'] if 'calibration_system' in content else None
-    sun = 'sun_is_emitter' in content and content['sun_is_emitter']
+    is_sun = 'sun_is_emitter' in content and content['sun_is_emitter']
     is_emission = 'is_emission_spectrum' in content and content['is_emission_spectrum']
+    # Goal is to create geometric and spherical albedo (photo)spectral objects
     geometric = spherical = None
     if len(br) == 0:
         if 'br_geometric' in content:
             br_geom = content['br_geometric']
             sd_geom = aux.repeat_if_value(content['sd_geometric'], len(br_geom)) if 'sd_geometric' in content else None
-            geometric = _create_TCT_object(name, nm, filters, br_geom, sd_geom, filter_system, calib, sun, is_emission)
-            if sphe_albedo is not None:
-                # assuming it can't be a flag here
-                where, how = sphe_albedo
-                spherical = geometric.scaled_at(where, *aux.parse_value_sd(how))
+            geometric = _create_TCT_object(name, nm, filters, br_geom, sd_geom, filter_system, calib, is_sun, is_emission)
+            if sphe_how is not None:
+                spherical = geometric.scaled_at(sphe_where, sphe_how)
             elif 'bond_albedo' in content:
                 spherical = geometric.scaled_at(sun_filter, *aux.parse_value_sd(content['bond_albedo']))
         if 'br_spherical' in content:
             br_sphe = content['br_spherical']
             sd_sphe = aux.repeat_if_value(content['sd_spherical'], len(br_sphe)) if 'sd_spherical' in content else None
-            spherical = _create_TCT_object(name, nm, filters, br_sphe, sd_sphe, filter_system, calib, sun, is_emission)
-            if geom_albedo is not None:
-                # assuming it can't be a flag here
-                where, how = geom_albedo
-                geometric = spherical.scaled_at(where, *aux.parse_value_sd(how))
+            spherical = _create_TCT_object(name, nm, filters, br_sphe, sd_sphe, filter_system, calib, is_sun, is_emission)
+            if geom_how is not None:
+                geometric = spherical.scaled_at(geom_where, geom_how)
         if geometric is None and spherical is None:
             print(f'# Note for the database object "{name}"')
             print(f'- No brightness data. Spectrum stub object was created.')
             TCT_obj = Spectrum.stub(name)
     else:
-        TCT_obj = _create_TCT_object(name, nm, filters, br, sd, filter_system, calib, sun, is_emission)
-        # Non-specific albedo parsing
-        if 'albedo' in content:
-            if isinstance(content['albedo'], bool) and content['albedo']:
-                geometric = spherical = TCT_obj
-            elif isinstance(content['albedo'], Sequence):
-                where, how = content['albedo']
-                geometric = spherical = TCT_obj.scaled_at(where, *aux.parse_value_sd(how))
-            else:
-                print(f'# Note for the database object "{name}"')
-                print(f'- Invalid albedo value: {content["albedo"]}. Must be boolean or [filter/nm, [br, (sd)]].')
-        # Geometric albedo parsing
-        if geom_albedo is not None:
-            if isinstance(geom_albedo, bool) and geom_albedo:
-                geometric = TCT_obj
-            elif isinstance(geom_albedo, Sequence):
-                where, how = geom_albedo
-                geometric = TCT_obj.scaled_at(where, *aux.parse_value_sd(how))
-            else:
-                print(f'# Note for the database object "{name}"')
-                print(f'- Invalid geometric albedo value: {content["geometric_albedo"]}. Must be boolean or [filter/nm, [br, (sd)]].')
-        # Spherical albedo parsing
-        if sphe_albedo is not None:
-            if isinstance(sphe_albedo, bool) and sphe_albedo:
-                spherical = TCT_obj
-            elif isinstance(sphe_albedo, Sequence):
-                where, how = sphe_albedo
-                spherical = TCT_obj.scaled_at(where, *aux.parse_value_sd(how))
-            else:
-                print(f'# Note for the database object "{name}"')
-                print(f'- Invalid spherical albedo value: {content["spherical_albedo"]}. Must be boolean or [filter/nm, [br, (sd)]].')
+        TCT_obj = _create_TCT_object(name, nm, filters, br, sd, filter_system, calib, is_sun, is_emission)
+        if is_geom_albedo:
+            geometric = TCT_obj
+        elif geom_how is not None:
+            geometric = TCT_obj.scaled_at(geom_where, geom_how)
+        if is_sphe_albedo:
+            spherical = TCT_obj
+        elif sphe_how is not None:
+            spherical = TCT_obj.scaled_at(sphe_where, sphe_how)
         elif 'bond_albedo' in content:
             spherical = TCT_obj.scaled_at(sun_filter, *aux.parse_value_sd(content['bond_albedo']))
     tags = set()
@@ -1641,7 +1702,7 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
         for tag in content['tags']:
             tags |= set(tag.split('/'))
     if geometric or spherical:
-        return ReflectiveBody(name, tags, geometric, spherical, phase_integ)
+        return ReflectiveBody(name, tags, geometric, spherical, photometric_model)
     else:
         return NonReflectiveBody(name, tags, TCT_obj)
 
