@@ -178,7 +178,12 @@
         'DOI: 10.1051/0004-6361/202038968', 'https://www.aanda.org/articles/aa/full_html/2020/12/aa38968-20/aa38968-20.html',
         'https://ui.adsabs.harvard.edu/abs/2020A%26A...644A..23I/abstract'
     ],
-    'Hromakina2021': [
+    'Hromakina2021a': [
+        'Small Solar System objects on highly inclined orbits. Surface colours and lifetimes',
+        'DOI: 10.1051/0004-6361/202039737', 'https://www.aanda.org/articles/aa/full_html/2021/03/aa39737-20/aa39737-20.html',
+        'https://ui.adsabs.harvard.edu/abs/2021A%26A...647A..71H/abstract'
+    ],
+    'Hromakina2021b': [
         'Photometric survey of 55 near-earth asteroids',
         'DOI: 10.1051/0004-6361/202141600', 'https://www.aanda.org/articles/aa/full_html/2021/12/aa41600-21/aa41600-21.html',
         'https://ui.adsabs.harvard.edu/abs/2021A&A...656A..89H/abstract'
@@ -3054,7 +3059,7 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.35, 0.10]],
     },
-    '(99942) Apophis | Hromakina2021, Brozovic2018': {
+    '(99942) Apophis | Hromakina2021b, Brozovic2018': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Aten', 'spacecraft target/OSIRIS-REx target/OSIRIS-APEX target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.88, 0.02], 'V-R': [0.45, 0.02], 'V-I': [0.86, 0.03]},
@@ -4321,6 +4326,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    '(434620) 2005 VD | Hromakina2021a': {
+        tags: ['Solar System', 'minor body/centaur/Damocloid'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.60, 0.17], 'V-R': [0.45, 0.11]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
     '(444030) 2004 NT33 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
@@ -4402,6 +4414,13 @@
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.670, 0.050], 'V-R': [0.490, 0.020]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    '(468861) 2013 LU28 | Hromakina2021a': {
+        tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/centaur/Damocloid'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.835, 0.055], 'V-R': [0.595, 0.065], 'R-I': [0.550, 0.070]}, // mean
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
@@ -4587,6 +4606,13 @@
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.030, 0.280], 'V-R': [0.600, 0.230], 'R-I': [0.510, 0.280]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    '(517717) 2015 KZ120 | Hromakina2021a': {
+        tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/centaur/Damocloid'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.855, 0.050], 'V-R': [0.460, 0.040], 'R-I': [0.575, 0.065]}, // mean
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
@@ -5785,6 +5811,13 @@
         calibration_system: 'AB',
         sun_is_emitter: true
     },
+    '2020 EP | Hromakina2021a': {
+        tags: ['Solar System', 'minor body/centaur/Damocloid'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.83, 0.09], 'V-R': [0.51, 0.06], 'R-I': [0.42, 0.10]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
     
     // Periodic comets
     '1P/Halley | MBOSS, Lamy2004': {
@@ -6626,6 +6659,13 @@
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.780, 0.010], 'V-R': [0.450, 0.010]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    '(C/2019 U5) PanSTARRS | Hromakina2021a': { // A/2019 U5
+        tags: ['Solar System', 'minor body/comet/long period comet'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.715, 0.045], 'V-R': [0.420, 0.045], 'R-I': [0.525, 0.050]}, // mean
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
