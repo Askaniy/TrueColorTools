@@ -949,7 +949,7 @@ names = {
     'Neptunian irregulars': {'ru': 'Нерегулярные спутники Нептуна', 'de': 'irreguläre Neptunmonde'},
     'Neptune trojans': {'ru': 'Троянцы Нептуна', 'de': 'Neptun-Trojaner'},
     'Comets': {'ru': 'Кометы', 'de': 'Kometen'},
-    'Damocloids': {'ru': 'Дамоклоиды', 'de': 'Damocloids'},
+    'Damocloids': {'ru': 'Дамоклоиды', 'de': 'Damocloiden'},
     'Centaurs': {'ru': 'Кентавры', 'de': 'Zentauren'},
     'Plutinos': {'ru': 'Плутино', 'de': 'Plutinos'},
     'Other resonances': {'ru': 'Другие резонансы', 'de': 'Andere Resonanzen'},

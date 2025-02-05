@@ -18,6 +18,7 @@ Data:
 
 Phase photometry:
 - PhotometricModel
+- - PhaseCoefficient
 - - HG
 - - HG1G2
 - - Hapke
@@ -1581,12 +1582,22 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
             nm = aux.grid(slope['start'], slope['stop'], nm_step)
             if 'power' in slope:
                 # spectral gradient with γ (power law like in Karkoschka (2001) doi:10.1006/icar.2001.6596)
-                power, _ = aux.parse_value_sd(slope['power'])
-                br = (nm / nm[0])**power
+                power, power_sd = aux.parse_value_sd(slope['power'])
+                mid_nm = 0.5 * (slope['stop'] + slope['start'])
+                br = (nm / mid_nm)**power # br=1 at nm midpoint
+                if power_sd is not None:
+                    sd = br * np.abs((nm / mid_nm)**power_sd - 1)
             elif 'percent_per_100nm' in slope:
                 # spectral gradient with S' (like in Jewitt (2002) doi:10.1086/338692)
-                percent_per_100nm, _ = aux.parse_value_sd(slope['percent_per_100nm'])
-                br = (1 + 0.01 * percent_per_100nm)**(0.01 * nm)
+                pp100nm, pp100nm_sd = aux.parse_value_sd(slope['percent_per_100nm'])
+                # The exact exponential formula, but astronomers don't use it:
+                # br = (1 + 0.01 * percent_per_100nm)**(0.01 * nm)
+                # They use just a line:
+                nm_delta = slope['stop'] - slope['start']
+                nm_scaled = (nm - slope['start']) / nm_delta - 0.5
+                br = nm_delta * (0.5 + 0.01 * pp100nm * nm_scaled) # br=1 at nm midpoint
+                if pp100nm_sd is not None:
+                    sd = nm_delta * np.abs(0.01 * pp100nm_sd * nm_scaled)
         # Photospectrum reading
         elif 'filters' in content:
             filters = content['filters']
