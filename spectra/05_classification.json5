@@ -237,6 +237,9 @@
     },
     
     // Asteroid spectral types
+    // (Bus2002 was disabled since DeMeo2009 is its IR extension)
+    // Complexes sorting by albedo from Mahlke et al. 2020:
+    // P, D, Ch, B, C, T, M, K, L, O, S, A, Q, V, E, (X)
     'Bus2002': [
         'Phase II of the Small Main-Belt Asteroid Spectroscopic Survey: A Feature-Based Taxonomy',
         'DOI: 10.1006/icar.2002.6856', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103502968569'
@@ -259,8 +262,7 @@
         'Spectroscopic survey of X-type asteroids',
         'DOI: 10.1016/j.icarus.2011.04.022', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103511001576'
     ],
-    // Complexes sorting by albedo from Mahlke et al. 2020
-    // P, D, Ch, B, C, T, M, K, L, O, S, A, Q, V, E, (X)
+
     // P complex (P, PC, PD)
     'Spectral type P | Fornasier2011, Mahlke2020': {
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
@@ -268,123 +270,129 @@
         geometric_albedo: ['Generic_Bessell.V', [0.05, 0.02]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.80, G_2: 0.05}],
     },
+
     // D complex (D, DP)
     'Spectral type D | DeMeo2009, Mahlke2020': {
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/8_D.txtU',
+        file: 'spectra/files/DeMeo2009/D.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.06, 0.02]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
     },
-    'Spectral type D | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.882, 0.951, 1.046, 1.098, 1.150, 1.199, 1.222, 1.247, 1.287],
-        sd: [0.029, 0.012, 0.005, 0.006, 0.010, 0.015, 0.018, 0.026, 0.067],
-        geometric_albedo: ['Generic_Bessell.V', [0.06, 0.02]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
-    },
+    //'Spectral type D | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.882, 0.951, 1.046, 1.098, 1.150, 1.199, 1.222, 1.247, 1.287],
+    //    sd: [0.029, 0.012, 0.005, 0.006, 0.010, 0.015, 0.018, 0.026, 0.067],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.06, 0.02]],
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
+    //},
+
     // Ch complex (Cgh, Ch)
     'Spectral type Cgh | DeMeo2009, Mahlke2020': {
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/6_Cgh.txtU',
+        file: 'spectra/files/DeMeo2009/Cgh.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.06, 0.06]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.05}],
     },
-    'Spectral type Cgh | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.870, 0.962, 0.997, 0.985, 0.972, 0.973, 0.987, 0.991, 0.980],
-        sd: [0.025, 0.014, 0.016, 0.027, 0.035, 0.038, 0.042, 0.047, 0.059],
-        geometric_albedo: ['Generic_Bessell.V', [0.06, 0.06]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.05}],
-    },
+    //'Spectral type Cgh | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.870, 0.962, 0.997, 0.985, 0.972, 0.973, 0.987, 0.991, 0.980],
+    //    sd: [0.025, 0.014, 0.016, 0.027, 0.035, 0.038, 0.042, 0.047, 0.059],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.06, 0.06]],
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.05}],
+    //},
     'Spectral type Ch | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/7_Ch.txtU',
+        file: 'spectra/files/DeMeo2009/Ch.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.06, 0.06]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.05}],
     },
-    'Spectral type Ch | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.941, 0.986, 0.991, 0.983, 0.977, 0.982, 0.991, 0.996, 0.993],
-        sd: [0.030, 0.010, 0.008, 0.013, 0.018, 0.021, 0.024, 0.028, 0.037],
-        geometric_albedo: ['Generic_Bessell.V', [0.06, 0.06]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.05}],
-    },
+    //'Spectral type Ch | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.941, 0.986, 0.991, 0.983, 0.977, 0.982, 0.991, 0.996, 0.993],
+    //    sd: [0.030, 0.010, 0.008, 0.013, 0.018, 0.021, 0.024, 0.028, 0.037],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.06, 0.06]],
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.05}],
+    //},
+
     // B complex (B, F, FC)
     'Spectral type B | DeMeo2009, Mahlke2020': {
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/2_B.txtU',
+        file: 'spectra/files/DeMeo2009/B.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.08, 0.06]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
     },
-    'Spectral type B | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [1.008, 1.004, 0.989, 0.985, 0.978, 0.975, 0.969, 0.961, 0.938],
-        sd: [0.022, 0.008, 0.007, 0.011, 0.015, 0.019, 0.023, 0.026, 0.039],
-        geometric_albedo: ['Generic_Bessell.V', [0.08, 0.06]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
-    },
+    //'Spectral type B | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [1.008, 1.004, 0.989, 0.985, 0.978, 0.975, 0.969, 0.961, 0.938],
+    //    sd: [0.022, 0.008, 0.007, 0.011, 0.015, 0.019, 0.023, 0.026, 0.039],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.08, 0.06]],
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
+    //},
+
     // C complex (C, CB, CD, CF, CG, CL, CO, Cb, Cg, Cgx, Co)
     'Spectral type C | DeMeo2009, Mahlke2020': {
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/3_C.txtU',
+        file: 'spectra/files/DeMeo2009/C.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.09, 0.09]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
     },
-    'Spectral type C | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.936, 0.979, 1.007, 1.013, 1.014, 1.016, 1.014, 1.008, 0.993],
-        sd: [0.025, 0.009, 0.009, 0.011, 0.013, 0.015, 0.017, 0.022, 0.034],
-        geometric_albedo: ['Generic_Bessell.V', [0.09, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
-    },
+    //'Spectral type C | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.936, 0.979, 1.007, 1.013, 1.014, 1.016, 1.014, 1.008, 0.993],
+    //    sd: [0.025, 0.009, 0.009, 0.011, 0.013, 0.015, 0.017, 0.022, 0.034],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.09, 0.09]],
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
+    //},
     'Spectral type Cb | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/4_Cb.txtU',
+        file: 'spectra/files/DeMeo2009/Cb.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.09, 0.09]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
     },
-    'Spectral type Cb | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.981, 0.995, 0.999, 1.002, 1.002, 1.005, 1.003, 0.994, 0.979],
-        sd: [0.018, 0.007, 0.005, 0.008, 0.010, 0.012, 0.015, 0.020, 0.031],
-        geometric_albedo: ['Generic_Bessell.V', [0.09, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
-    },
+    //'Spectral type Cb | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.981, 0.995, 0.999, 1.002, 1.002, 1.005, 1.003, 0.994, 0.979],
+    //    sd: [0.018, 0.007, 0.005, 0.008, 0.010, 0.012, 0.015, 0.020, 0.031],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.09, 0.09]],
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
+    //},
     'Spectral type Cg | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/5_Cg.txtU',
+        file: 'spectra/files/DeMeo2009/Cg.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.09, 0.09]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
     },
-    'Spectral type Cg | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.852, 0.945, 1.018, 1.028, 1.027, 1.025, 1.026, 1.022, 1.007],
-        sd: [0.013, 0.013, 0.012, 0.020, 0.020, 0.023, 0.027, 0.036, 0.044],
-        geometric_albedo: ['Generic_Bessell.V', [0.09, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
-    },
+    //'Spectral type Cg | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.852, 0.945, 1.018, 1.028, 1.027, 1.025, 1.026, 1.022, 1.007],
+    //    sd: [0.013, 0.013, 0.012, 0.020, 0.020, 0.023, 0.027, 0.036, 0.044],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.09, 0.09]],
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
+    //},
+
     // T complex
     'Spectral type T | DeMeo2009, Mahlke2020': {
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/19_T.txtU',
+        file: 'spectra/files/DeMeo2009/T.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.12, 0.06]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.65, G_2: 0.19}],
     },
-    'Spectral type T | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.896, 0.956, 1.041, 1.083, 1.119, 1.149, 1.163, 1.174, 1.184],
-        sd: [0.027, 0.008, 0.011, 0.016, 0.019, 0.015, 0.015, 0.021, 0.037],
-        geometric_albedo: ['Generic_Bessell.V', [0.12, 0.06]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.65, G_2: 0.19}],
-    },
+    //'Spectral type T | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.896, 0.956, 1.041, 1.083, 1.119, 1.149, 1.163, 1.174, 1.184],
+    //    sd: [0.027, 0.008, 0.011, 0.016, 0.019, 0.015, 0.015, 0.021, 0.037],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.12, 0.06]],
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.65, G_2: 0.19}],
+    //},
+
     // M complex
     'Spectral type M | Fornasier2011, Mahlke2020': {
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
@@ -393,36 +401,38 @@
         geometric_albedo: ['Generic_Bessell.V', [0.15, 0.05]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.19, G_2: 0.34}],
     },
+
     // K complex
     'Spectral type K | DeMeo2009, Mahlke2020': {
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/9_K.txtU',
+        file: 'spectra/files/DeMeo2009/K.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.18, 0.09]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.18, G_2: 0.40}],
     },
-    'Spectral type K | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.863, 0.943, 1.043, 1.087, 1.121, 1.138, 1.125, 1.110, 1.085],
-        sd: [0.024, 0.010, 0.010, 0.016, 0.019, 0.018, 0.020, 0.023, 0.038],
-        geometric_albedo: ['Generic_Bessell.V', [0.18, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.18, G_2: 0.40}],
-    },
+    //'Spectral type K | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.863, 0.943, 1.043, 1.087, 1.121, 1.138, 1.125, 1.110, 1.085],
+    //    sd: [0.024, 0.010, 0.010, 0.016, 0.019, 0.018, 0.020, 0.023, 0.038],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.18, 0.09]],
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.18, G_2: 0.40}],
+    //},
+
     // L complex (L, LQ, Ld)
     'Spectral type L | DeMeo2009, Mahlke2020': {
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/10_L.txtU',
+        file: 'spectra/files/DeMeo2009/L.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.19, 0.09]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.16, G_2: 0.37}],
     },
-    'Spectral type L | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.818, 0.922, 1.066, 1.130, 1.179, 1.207, 1.201, 1.193, 1.188],
-        sd: [0.031, 0.013, 0.012, 0.020, 0.025, 0.024, 0.021, 0.020, 0.042],
-        geometric_albedo: ['Generic_Bessell.V', [0.19, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.16, G_2: 0.37}],
-    },
+    //'Spectral type L | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.818, 0.922, 1.066, 1.130, 1.179, 1.207, 1.201, 1.193, 1.188],
+    //    sd: [0.031, 0.013, 0.012, 0.020, 0.025, 0.024, 0.021, 0.020, 0.042],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.19, 0.09]],
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.16, G_2: 0.37}],
+    //},
     'Spectral type Ld | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
@@ -431,50 +441,52 @@
         geometric_albedo: ['Generic_Bessell.V', [0.19, 0.09]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.16, G_2: 0.37}],
     },
+
     // O complex
     // No phase function in Mahlke2020:
     // "Due to the low number of O-type asteroids, we exclude the complex from the analysis"
     'Spectral type O | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/11_O.txtU',
+        file: 'spectra/files/DeMeo2009/O.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.21, 0.10]],
     },
-    'Spectral type O | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.878, 0.952, 1.022, 1.042, 1.057, 1.036, 0.958, 0.870, 0.798],
-        sd: [0.026, 0.007, 0.006, 0.009, 0.012, 0.011, 0.015, 0.033, 0.048],
-        geometric_albedo: ['Generic_Bessell.V', [0.21, 0.10]],
-    },
+    //'Spectral type O | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.878, 0.952, 1.022, 1.042, 1.057, 1.036, 0.958, 0.870, 0.798],
+    //    sd: [0.026, 0.007, 0.006, 0.009, 0.012, 0.011, 0.015, 0.033, 0.048],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.21, 0.10]],
+    //},
+
     // S complex (S, SQ, SV, Sa, Sk, Sl, Sp, Sq, Sqw, Sr, Srw, Sv, Sw, R?)
     'Spectral type S | DeMeo2009, Mahlke2020': {
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/14_S.txtU',
+        file: 'spectra/files/DeMeo2009/S.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
-    'Spectral type S | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.813, 0.920, 1.060, 1.121, 1.170, 1.188, 1.145, 1.084, 1.034],
-        sd: [0.028, 0.011, 0.012, 0.018, 0.023, 0.024, 0.024, 0.028, 0.040],
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
-    },
+    //'Spectral type S | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.813, 0.920, 1.060, 1.121, 1.170, 1.188, 1.145, 1.084, 1.034],
+    //    sd: [0.028, 0.011, 0.012, 0.018, 0.023, 0.024, 0.024, 0.028, 0.040],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+    //},
     'Spectral type Sa | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/15_Sa.txtU',
+        file: 'spectra/files/DeMeo2009/Sa.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
-    'Spectral type Sa | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.748, 0.892, 1.094, 1.178, 1.243, 1.260, 1.216, 1.150, 1.091],
-        sd: [0.029, 0.011, 0.010, 0.014, 0.014, 0.019, 0.025, 0.036, 0.059],
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
-    },
+    //'Spectral type Sa | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.748, 0.892, 1.094, 1.178, 1.243, 1.260, 1.216, 1.150, 1.091],
+    //    sd: [0.029, 0.011, 0.010, 0.014, 0.014, 0.019, 0.025, 0.036, 0.059],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+    //},
     'Spectral type Sk | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
@@ -493,35 +505,35 @@
     },
     'Spectral type Sq | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/16_Sq.txtU',
+        file: 'spectra/files/DeMeo2009/Sq.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
-    'Spectral type Sq | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.851, 0.938, 1.039, 1.082, 1.115, 1.120, 1.069, 1.000, 0.936],
-        sd: [0.031, 0.011, 0.009, 0.017, 0.022, 0.028, 0.028, 0.028, 0.034],
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
-    },
+    //'Spectral type Sq | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.851, 0.938, 1.039, 1.082, 1.115, 1.120, 1.069, 1.000, 0.936],
+    //    sd: [0.031, 0.011, 0.009, 0.017, 0.022, 0.028, 0.028, 0.028, 0.034],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+    //},
     'Spectral type Sr | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/17_Sr.txtU',
+        file: 'spectra/files/DeMeo2009/Sr.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
-    'Spectral type Sr | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.777, 0.904, 1.069, 1.137, 1.188, 1.193, 1.123, 1.030, 0.936],
-        sd: [0.046, 0.023, 0.016, 0.024, 0.028, 0.031, 0.032, 0.028, 0.038],
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
-    },
+    //'Spectral type Sr | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.777, 0.904, 1.069, 1.137, 1.188, 1.193, 1.123, 1.030, 0.936],
+    //    sd: [0.046, 0.023, 0.016, 0.024, 0.028, 0.031, 0.032, 0.028, 0.038],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+    //},
     'Spectral type Sv | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/18_Sv.txtU',
+        file: 'spectra/files/DeMeo2009/Sv.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
@@ -529,63 +541,67 @@
     // (it's in between of V and A and close to Sr according to Bus2002 fig 15)
     'Spectral type R | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/13_R.txtU',
+        file: 'spectra/files/DeMeo2009/R.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.26, 0.11]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
-    'Spectral type R | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.792, 0.907, 1.073, 1.145, 1.209, 1.224, 1.110, 0.971, 0.889],
-        sd: [0.016, 0.006, 0.005, 0.006, 0.010, 0.010, 0.014, 0.015, 0.033],
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.11]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
-    },
+    //'Spectral type R | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.792, 0.907, 1.073, 1.145, 1.209, 1.224, 1.110, 0.971, 0.889],
+    //    sd: [0.016, 0.006, 0.005, 0.006, 0.010, 0.010, 0.014, 0.015, 0.033],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.26, 0.11]],
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+    //},
+
     // A complex (A, AQ)
     'Spectral type A | DeMeo2009, Mahlke2020': {
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/1_A.txtU',
+        file: 'spectra/files/DeMeo2009/A.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.28, 0.09]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.30, G_2: 0.39}],
     },
-    'Spectral type A | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.708, 0.868, 1.109, 1.214, 1.298, 1.311, 1.250, 1.187, 1.143],
-        sd: [0.026, 0.014, 0.013, 0.026, 0.038, 0.045, 0.059, 0.066, 0.063],
-        geometric_albedo: ['Generic_Bessell.V', [0.28, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.30, G_2: 0.39}],
-    },
+    //'Spectral type A | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.708, 0.868, 1.109, 1.214, 1.298, 1.311, 1.250, 1.187, 1.143],
+    //    sd: [0.026, 0.014, 0.013, 0.026, 0.038, 0.045, 0.059, 0.066, 0.063],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.28, 0.09]],
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.30, G_2: 0.39}],
+    //},
+
     // Q complex (Q, QO, QV)
     'Spectral type Q | DeMeo2009, Mahlke2020': {
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/12_Q.txtU',
+        file: 'spectra/files/DeMeo2009/Q.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.28, 0.11]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.36, G_2: 0.44}],
     },
-    'Spectral type Q | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.830, 0.930, 1.047, 1.087, 1.118, 1.107, 1.041, 0.952, 0.873],
-        sd: [0.044, 0.018, 0.018, 0.027, 0.032, 0.031, 0.023, 0.019, 0.032],
-        geometric_albedo: ['Generic_Bessell.V', [0.28, 0.11]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.36, G_2: 0.44}],
-    },
+    //'Spectral type Q | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.830, 0.930, 1.047, 1.087, 1.118, 1.107, 1.041, 0.952, 0.873],
+    //    sd: [0.044, 0.018, 0.018, 0.027, 0.032, 0.031, 0.023, 0.019, 0.032],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.28, 0.11]],
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.36, G_2: 0.44}],
+    //},
+
     // V complex (V, Vw)
     'Spectral type V | DeMeo2009, Mahlke2020': {
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/20_V.txtU',
+        file: 'spectra/files/DeMeo2009/V.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.36, 0.11]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.10, G_2: 0.56}],
     },
-    'Spectral type V | Bus2002, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.808, 0.916, 1.063, 1.124, 1.176, 1.183, 1.048, 0.879, 0.745],
-        sd: [0.052, 0.024, 0.019, 0.036, 0.049, 0.049, 0.039, 0.046, 0.056],
-        geometric_albedo: ['Generic_Bessell.V', [0.36, 0.11]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.10, G_2: 0.56}],
-    },
+    //'Spectral type V | Bus2002, Mahlke2020': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.808, 0.916, 1.063, 1.124, 1.176, 1.183, 1.048, 0.879, 0.745],
+    //    sd: [0.052, 0.024, 0.019, 0.036, 0.049, 0.049, 0.039, 0.046, 0.056],
+    //    geometric_albedo: ['Generic_Bessell.V', [0.36, 0.11]],
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.10, G_2: 0.56}],
+    //},
+
     // E complex
     'Spectral type E | Fornasier2011, Mahlke2020': {
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
@@ -617,66 +633,67 @@
         // rounded mean albedo of 6 candidates (Fornasier2011) with SsoCard data as of February 2025
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.33, G_2: 0.45}],
     },
+    
     // X complex (X, XD, XL, Xe, Xk, Xt)
     'Spectral type X | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/21_X.txtU',
+        file: 'spectra/files/DeMeo2009/X.txtU',
         // no albedo by definition
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
     },
-    'Spectral type X | Bus2002': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.940, 0.977, 1.013, 1.030, 1.045, 1.057, 1.062, 1.060, 1.058],
-        sd: [0.023, 0.008, 0.008, 0.012, 0.016, 0.019, 0.021, 0.026, 0.038],
-        // no albedo by definition
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
-    },
+    //'Spectral type X | Bus2002': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.940, 0.977, 1.013, 1.030, 1.045, 1.057, 1.062, 1.060, 1.058],
+    //    sd: [0.023, 0.008, 0.008, 0.012, 0.016, 0.019, 0.021, 0.026, 0.038],
+    //    // no albedo by definition
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
+    //},
     'Spectral type Xc | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/22_Xc.txtU',
+        file: 'spectra/files/DeMeo2009/Xc.txtU',
         // no albedo by definition
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
     },
-    'Spectral type Xc | Bus2002': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.920, 0.969, 1.019, 1.038, 1.049, 1.054, 1.047, 1.037, 1.020],
-        sd: [0.030, 0.012, 0.008, 0.010, 0.011, 0.012, 0.015, 0.020, 0.033],
-        // no albedo by definition
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
-    },
+    //'Spectral type Xc | Bus2002': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.920, 0.969, 1.019, 1.038, 1.049, 1.054, 1.047, 1.037, 1.020],
+    //    sd: [0.030, 0.012, 0.008, 0.010, 0.011, 0.012, 0.015, 0.020, 0.033],
+    //    // no albedo by definition
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
+    //},
     'Spectral type Xe | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/23_Xe.txtU',
+        file: 'spectra/files/DeMeo2009/Xe.txtU',
         // no albedo by definition
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
     },
-    'Spectral type Xe | Bus2002': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.921, 0.948, 1.032, 1.060, 1.082, 1.094, 1.093, 1.088, 1.078],
-        sd: [0.039, 0.023, 0.019, 0.033, 0.041, 0.039, 0.039, 0.041, 0.050],
-        // no albedo by definition
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
-    },
+    //'Spectral type Xe | Bus2002': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.921, 0.948, 1.032, 1.060, 1.082, 1.094, 1.093, 1.088, 1.078],
+    //    sd: [0.039, 0.023, 0.019, 0.033, 0.041, 0.039, 0.039, 0.041, 0.050],
+    //    // no albedo by definition
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
+    //},
     'Spectral type Xk | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/24_Xk.txtU',
+        file: 'spectra/files/DeMeo2009/Xk.txtU',
         // no albedo by definition
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
     },
-    'Spectral type Xk | Bus2002': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
-        br: [0.900, 0.959, 1.033, 1.061, 1.084, 1.097, 1.098, 1.098, 1.098],
-        sd: [0.037, 0.012, 0.010, 0.013, 0.014, 0.018, 0.020, 0.023, 0.034],
-        // no albedo by definition
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
-    },
+    //'Spectral type Xk | Bus2002': {
+    //    tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+    //    nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
+    //    br: [0.900, 0.959, 1.033, 1.061, 1.084, 1.097, 1.098, 1.098, 1.098],
+    //    sd: [0.037, 0.012, 0.010, 0.013, 0.014, 0.018, 0.020, 0.023, 0.034],
+    //    // no albedo by definition
+    //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
+    //},
     'Spectral type Xn | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        file: 'spectra/files/DeMeo2009/25_Xn.txtU',
+        file: 'spectra/files/DeMeo2009/Xn.txtU',
         // no albedo by definition
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
     },
