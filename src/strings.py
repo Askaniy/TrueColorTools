@@ -997,6 +997,8 @@ notes = {
     'Near the aphelion': {'ru': 'Вблизи афелия', 'de': 'In der Nähe des Aphels'},
     'Archean': {'ru': 'Архей', 'de': 'Archaikum'},
     'Proterozoic': {'ru': 'Протерозой', 'de': 'Proterozoikum'},
+    'Highland': {'ru': 'Материки', 'de': 'Hochländer'},
+    'Mare': {'ru': 'Моря', 'de': 'Mare'},
     "Chang'e-3 Landing Site": {'ru': 'Место посадки Чанъэ-3', 'de': "Chang'e-3 Landestelle"},
     'Fragment 73P-C': {'ru': 'Фрагмент 73P-C', 'de': 'Fragment 73P-C'},
     'Belton Regio': {'ru': 'Область Белтона', 'de': 'Belton Regio'},

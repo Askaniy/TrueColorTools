@@ -77,6 +77,7 @@ Phase functions are used to calculate phase integral, which is used to convert b
 
 The following phase functions are supported:
 - `phase coefficient`: requires `beta`, the logarithmic slope parameter;
+- `exponentials`: requires `A_1`, `mu_1`, …, `A_n`, `mu_n`, see [Velikodsky et al. 2011](https://www.sciencedirect.com/science/article/abs/pii/S0019103511001564);
 - `HG`: requires `G` parameter (`H` is optional), see [Bowell et al. 1989](https://ui.adsabs.harvard.edu/abs/1989aste.conf..524B/abstract);
 - `HG1G2`: requires `G_1` and `G_2` (`H` is optional), see [Muinonen et al. 2010](https://ui.adsabs.harvard.edu/abs/2010Icar..209..542M/abstract);
 - `Hapke`: requires `w`, `bo`, `h`, `b`, `c` and `theta`, see [Hapke, B. 1984](https://www.sciencedirect.com/science/article/abs/pii/001910358490054X).

@@ -19,6 +19,7 @@ Data:
 Phase photometry:
 - PhotometricModel
 - - PhaseCoefficient
+- - Exponentials
 - - HG
 - - HG1G2
 - - Hapke
@@ -1225,7 +1226,7 @@ class _PhotometricModel:
     def spherical_albedo(self):
         if self.geometric_albedo is not None and self.phase_integral is not None:
             a = aux.mul_br(self.geometric_albedo[0], self.phase_integral[0])
-            a_sd = aux.mul_sd(self.geometric_albedo[1], self.phase_integral[1])
+            a_sd = aux.mul_sd(self.geometric_albedo[0], self.geometric_albedo[1], self.phase_integral[0], self.phase_integral[1])
             return a, a_sd
         else:
             return None
@@ -1296,6 +1297,34 @@ class PhaseCoefficient(_PhotometricModel):
     def phase_function(self, alpha):
         beta, _ = aux.parse_value_sd(self.params['beta'])
         return 10**(-0.4 * beta * alpha)
+
+
+class Exponentials(_PhotometricModel):
+    """
+    Describes phase function with a sum of exponentials.
+    Usually one (like phase coefficient), two (Akimov, 1988) or three (Velikodsky, 2011) are used.
+    """
+
+    _k = 180 / np.pi * 0.4 * np.log(10) # ≈ 52.77
+
+    def _integrate(self) -> None:
+        n_exponentials = len(self.params) // 2
+        self._A =  np.empty(n_exponentials)
+        self._mu = np.empty(n_exponentials)
+        for i in range(n_exponentials):
+            self._A[i] = aux.parse_value_sd(self.params[f'A_{i+1}'])[0]
+            self._mu[i] = aux.parse_value_sd(self.params[f'mu_{i+1}'])[0]
+        if (zero_phase_angle := self._A.sum()) != 1:
+            # if function was not normalized, it shows geometric albedo at 0 phase angle
+            self.geometric_albedo = zero_phase_angle, None
+        self.phase_integral = np.sum(self._A * (1 + np.exp(-self._mu * np.pi)) / (1 + self._mu**2)) / zero_phase_angle, None
+    
+    @property
+    def phase_function(self, alpha):
+        q = np.dot(self._A, np.exp(-self._mu * alpha))
+        if self.geometric_albedo is not None:
+            q /= self.geometric_albedo[0]
+        return q
 
 
 class HG(_PhotometricModel):
@@ -1619,6 +1648,8 @@ def database_parser(name: ObjectName, content: dict) -> NonReflectiveBody | Refl
         match model_name:
             case 'phase coefficient':
                 photometric_model = PhaseCoefficient(params, filter_or_nm)
+            case 'exponentials':
+                photometric_model = Exponentials(params, filter_or_nm)
             case 'HG':
                 photometric_model = HG(params, filter_or_nm)
             case 'HG1G2':

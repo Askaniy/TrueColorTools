@@ -183,17 +183,34 @@
         albedo: true
     },
     // Moon
+    'Velikodsky2011': [
+        'New Earth-based absolute photometry of the Moon',
+        'DOI: 10.1016/j.icarus.2011.04.021', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103511001564'
+    ],
+    'Moon: Near side (E I) | Velikodsky2011': { // linear combination of highland and mare spectra with the weights 0.57 and 0.43, respectively
+        tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
+        file: 'spectra/files/Velikodsky2011/moon_average.txt',
+        phase_function: ['Cameras_Canon.300D_R', 'exponentials', {A_1: 0.0539, mu_1: 50, A_2: 0.0465, mu_2: 5.615, A_3: 0.1145, mu_3: 0.6135}],
+        // linear combination of the mean highland and mare locations, Table 3
+    },
+    'Moon: Highland (E I) | Velikodsky2011': {
+        tags: ['featured', 'Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
+        file: 'spectra/files/Velikodsky2011/moon_highland.txt',
+        phase_function: ['Cameras_Canon.300D_R', 'exponentials', {A_1: 0.0715, mu_1: 50, A_2: 0.0525, mu_2: 5.325, A_3: 0.1457, mu_3: 0.5875}],
+        // mean of 4 locations, Table 3
+    },
+    'Moon: Mare (E I) | Velikodsky2011': {
+        tags: ['featured', 'Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
+        file: 'spectra/files/Velikodsky2011/moon_mare.txt',
+        phase_function: ['Cameras_Canon.300D_R', 'exponentials', {A_1: 0.0306, mu_1: 50, A_2: 0.0386, mu_2: 6.0, A_3: 0.073, mu_3: 0.6480}],
+        // mean of 5 locations, Table 3
+    },
     'Lane1973': [
         'Monochromatic phase curves and albedos for the lunar disk',
         'DOI: 10.1086/111414', 'https://ui.adsabs.harvard.edu/abs/1973AJ.....78..267L/abstract'
     ],
-    'Wu2018': [
-        'The Absolute Reflectance and New Calibration Site of the Moon',
-        'DOI: 10.3847/1538-3881/aabaf5', 'https://iopscience.iop.org/article/10.3847/1538-3881/aabaf5',
-        'https://ui.adsabs.harvard.edu/abs/2018AJ....155..213W/abstract'
-    ],
     'Moon: Near side (E I) | Crow2011, Lane1973': { // phase angle 97.6°
-        tags: ['featured', 'Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
+        tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [1894.24, 2387.17, 2832.17, 3269.35, 4091.49, 4787.91, 5506.36],
@@ -212,6 +229,11 @@
         br_geometric: [0.072, 0.085, 0.088, 0.098, 0.106, 0.162, 0.179, 0.179, 0.202], // excludes opposition effect
         br_spherical: [0.039, 0.049, 0.048, 0.056, 0.062, 0.098, 0.113, 0.118, 0.136],
     },
+    'Wu2018': [
+        'The Absolute Reflectance and New Calibration Site of the Moon',
+        'DOI: 10.3847/1538-3881/aabaf5', 'https://iopscience.iop.org/article/10.3847/1538-3881/aabaf5',
+        'https://ui.adsabs.harvard.edu/abs/2018AJ....155..213W/abstract'
+    ],
     "Moon: Chang'e-3 Landing Site (E I) | Wu2018": {
         tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
         file: 'spectra/files/Moon_CE-3_LS_Wu2018.txt',
@@ -225,7 +247,7 @@
         'https://ui.adsabs.harvard.edu/abs/1979JGR....84.8415S/abstract'
     ],
     'Mars | Madden2018': {
-        tags: ['featured', 'Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet'],
         file: 'spectra/files/Madden2018/Mars_McCord1971_Albedo.txtU',
         geometric_albedo: true,
     },
@@ -244,12 +266,12 @@
         geometric_albedo: ['Generic_Bessell.V', 0.170]
     },
     'Mars: Bright areas | Singer1979': { // the average of a number of typical bright region spectra
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['featured', 'Solar System', 'planetary body/planet'],
         file: 'spectra/files/Singer1979/Mars_bright.txtU', // figure 3
         geometric_albedo: [800, 0.40],
     },
     'Mars: Dark areas | Singer1979': { // telescopic dark region Iapygia
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['featured', 'Solar System', 'planetary body/planet'],
         file: 'spectra/files/Singer1979/Mars_dark.txtU', // figure 3
         geometric_albedo: [800, 0.21],
     },
