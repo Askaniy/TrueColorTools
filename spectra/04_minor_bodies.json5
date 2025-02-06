@@ -5188,6 +5188,14 @@
         calibration_system: 'AB',
         sun_is_emitter: true
     },
+    '(762135) 2010 WG9 | MBOSS, Müller2020': {
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.781, 0.044], 'V-R': [0.492, 0.047], 'R-I': [0.458, 0.091]},
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.074, 0.080]],
+    },
     '1994 TA | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
@@ -5476,14 +5484,6 @@
         color_indices: {'B-V': [0.750, 0.030], 'V-R': [0.470, 0.040]},
         calibration_system: 'Vega',
         sun_is_emitter: true
-    },
-    '2010 WG9 | MBOSS, Müller2020': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': [0.781, 0.044], 'V-R': [0.492, 0.047], 'R-I': [0.458, 0.091]},
-        calibration_system: 'Vega',
-        sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.074, 0.080]],
     },
     '2011 HM102 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/Neptune trojan'],
@@ -6657,7 +6657,7 @@
         'DOI: 10.1051/0004-6361/202243090', 'https://www.aanda.org/articles/aa/full_html/2022/03/aa43090-22/aa43090-22.html',
         'https://ui.adsabs.harvard.edu/abs/2022A&A...659L...1L'
     ],
-    '(C/2014 UN271) Bernardinelli-Berstein | Bernardinelli2021, Lellouch2022': {
+    '(C/2014 UN271) Bernardinelli-Bernstein | Bernardinelli2021, Lellouch2022': {
         tags: ['Solar System', 'minor body/comet/long period comet'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.49, 0.01], 'r-i': [0.22, 0.02], 'i-z': [0.32, 0.09]},
