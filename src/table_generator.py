@@ -123,25 +123,24 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
         spectrum, estimated = body.get_spectrum('geometric' if brGeom else 'spherical')
         
         # Color calculation
-        maximize_br = brMax or isinstance(body, NonReflectiveBody)
+        maximize_br = brMax or estimated is None
         color = ColorPoint.from_spectral_data(spectrum, maximize_br, srgb)
         if gamma:
             color = color.gamma_corrected()
 
         # Setting of notes and shape
-        if not brMax and isinstance(body, NonReflectiveBody):
-            if 'star' in body.tags:
-                is_filled = True
-                object_notes.append(None)
-            else:
-                is_filled = False
-                object_notes.append(tr.table_no_albedo[lang])
+        is_filled = True
+        if brMax or isinstance(body, EmittingBody):
+            object_notes.append(None)
         else:
-            is_filled = True
-            if estimated:
-                object_notes.append(tr.table_estimated[lang])
-            else:
-                object_notes.append(None)
+            match estimated:
+                case True:
+                    object_notes.append(tr.table_estimated[lang])
+                case False:
+                    object_notes.append(None)
+                case None:
+                    is_filled = False
+                    object_notes.append(tr.table_no_albedo[lang])
 
         # Setting object and text colors
         if np.any(color.br):

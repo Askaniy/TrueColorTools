@@ -85,6 +85,7 @@ The following phase functions are supported:
 For photometry, it is necessary to specify calibration spectrum if it's not an equal-energy irradiance density by wavelengths ([this link](https://hst-docs.stsci.edu/acsdhb/chapter-5-acs-data-analysis/5-1-photometry#id-5.1Photometry-5.1.15.1.1PhotometricSystems,Units,andZeropoints) may help). Typically you need to specify `calibration_system: 'AB'` when working with Sloan filters and `calibration_system: 'Vega'` for all other cases.
 
 Supported input keys of a database unit:
+- `tags` (list): strings categorizing the spectral data, optional
 - `nm` (list): list of wavelengths in nanometers
 - `br` (list): same-size list of "brightness" in energy spectral density units
 - `mag` (list): same-size list of magnitudes
@@ -96,17 +97,20 @@ Supported input keys of a database unit:
 - `color_indices` (list): dictionary of color indices, formatted `{'filter1-filter2': …, …}`
 - `photometric_system` (str): a way to parenthesize the photometric system name (separator is a dot)
 - `calibration_system` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
-- `albedo` (bool/list): marks data as albedo scaled (if bool) or tells how to scale (if `[filter/nm, …]`) 
-- `geometric_albedo` (bool/list): indicates geometric/normal albedo data or how to scale to it
-- `spherical_albedo` (bool/list): indicates spherical albedo data or how to scale to it
-- `bond_albedo` (number): sets spherical albedo scale using known Solar spectrum
+- `geometric_albedo` (list): scales the data to geometric albedo spectrum, syntax is `[filter/nm, value]`
+- `spherical_albedo` (list): scales the data to spherical albedo spectrum, syntax is `[filter/nm, value]`
+- `albedo` (list): scales the data to both geom. and sphe. albedo spectra, syntax is `[filter/nm, value]`
+- `bond_albedo` (number): scales the data to spherical albedo spectrum using known Solar spectrum
 - `phase_integral` (number/list): transition factor from geometric albedo to spherical albedo
 - `phase_function` (list): phase function name and its parameters to compute phase integral
 - `br_geometric`, `br_spherical` (list): specifying unique spectra for different albedos
 - `sd_geometric`, `sd_spherical` (list/number): corresponding standard deviations or a common value
-- `sun_is_emitter` (bool): `true` to remove the reflected Solar spectrum
-- `is_emission_spectrum` (bool): `true` to count the data points as spectral lines
-- `tags` (list): strings categorizing the spectral data
+- `is_geometric_albedo` (bool): `true` to interpret the data as a geometric albedo spectrum
+- `is_spherical_albedo` (bool): `true` to interpret the data as a spherical albedo spectrum
+- `is_albedo` (bool): `true` to interpret the data as a both geom. and sphe. albedo spectra
+- `is_reflecting_sunlight` (bool): `true` to divide the data by the reflected Solar spectrum
+- `is_emission_spectrum` (bool): `true` to interpret the data points as spectral lines
+- `is_emissive` (bool): `true` not expect albedo data and always render in the chromaticity mode
 
 Standard deviations are syntactically supported (but not always processed). Any brightness value in any of the data types can be replaced by a corresponding list of `[value, sd]` (or `[value, +sd, -sd]` for asymmetric standard deviation).
 

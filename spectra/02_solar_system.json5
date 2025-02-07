@@ -100,7 +100,7 @@
     'Venus | Madden2018, Mallama2006': {
         tags: ['Solar System', 'planetary body/planet'],
         file: 'spectra/files/Madden2018/Venus_MeadowsSpencer_Albedo.txtU',
-        geometric_albedo: true,
+        is_geometric_albedo: true,
         phase_integral: 1.35, // Table 6
     },
     'Venus | Mallama2017a, Mallama2006': {
@@ -128,7 +128,7 @@
         tags: ['featured', 'Solar System', 'planetary body/planet', 'synthetic spectrum'],
         file: 'spectra/files/VPL/dayside_venus_toa.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.689],
-        spherical_albedo: true, // assumption, no clear data source
+        is_spherical_albedo: true, // assumption, no clear data source
     },
     'Maiorov2005': [
         'A New Analysis of the Spectra Obtained by the Venera Missions in the Venusian Atmosphere. I. The Analysis of the Data Received from the Venera-11 Probe at Altitudes Below 37 km in the 0.44–0.66 µm Wavelength Range',
@@ -138,7 +138,7 @@
         tags: ['featured', 'Solar System', 'planetary body/planet'],
         nm: [440, 450, 460, 470, 480, 490, 500, 505, 700],
         br: [0.089, 0.092, 0.095, 0.097, 0.098, 0.099, 0.1, 0.1, 0.1],
-        albedo: true
+        is_albedo: true,
     },
 
     // Terran system
@@ -164,12 +164,12 @@
     'Earth: Archean | VPL': { // Arney et al. 2017, "Hazy Archean Earth orbiting the Archean Sun", 1 bar, 1% CO2, 0.2% CH4
         tags: ['Solar System', 'planetary body/planet', 'Earth/history', 'synthetic spectrum'],
         file: 'spectra/files/VPL/HAZE_archeansun.pt_toa.txtU',
-        spherical_albedo: true, // at quadrature?
+        is_spherical_albedo: true, // at quadrature?
     },
     'Earth: Proterozoic | VPL': { // Arney et al. 2016, 1 bar, 1% CO2, 0.03% CH4, 1% LAP O2
         tags: ['Solar System', 'planetary body/planet', 'Earth/history', 'synthetic spectrum'],
         file: 'spectra/files/VPL/hi_o2_proterozoic_toa.txtU',
-        spherical_albedo: true, // at quadrature?
+        is_spherical_albedo: true, // at quadrature?
     },
     'Earth: Synthetic spectrum | VPL': { // Robinson et al. 2011, "True disk-integrated Earth"
         tags: ['Solar System', 'planetary body/planet', 'Earth/history', 'synthetic spectrum'],
@@ -180,7 +180,7 @@
         tags: ['Solar System', 'Earth/surface feature', 'traced spectrum'],
         nm: [380, 400, 425, 450, 475, 500, 520, 550, 600, 650, 700],
         br: [0.048, 0.047, 0.043, 0.037, 0.032, 0.02, 0.01, 0.007, 0.004, 0.002, 0.001],
-        albedo: true
+        is_albedo: true,
     },
     // Moon
     'Velikodsky2011': [
@@ -237,7 +237,7 @@
     "Moon: Chang'e-3 Landing Site (E I) | Wu2018": {
         tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
         file: 'spectra/files/Moon_CE-3_LS_Wu2018.txt',
-        albedo: true, // angle of incidence 54°, angle of emergence 44°, phase angle 95°; See Section 3.2
+        is_albedo: true, // angle of incidence 54°, angle of emergence 44°, phase angle 95°; See Section 3.2
     },
 
     // Martian system
@@ -249,7 +249,7 @@
     'Mars | Madden2018': {
         tags: ['Solar System', 'planetary body/planet'],
         file: 'spectra/files/Madden2018/Mars_McCord1971_Albedo.txtU',
-        geometric_albedo: true,
+        is_geometric_albedo: true,
     },
     'Mars | Mallama2017a': {
         tags: ['Solar System', 'planetary body/planet', 'synthetic spectrum'],
@@ -263,7 +263,7 @@
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31],
-        geometric_albedo: ['Generic_Bessell.V', 0.170]
+        geometric_albedo: ['Generic_Bessell.V', 0.170],
     },
     'Mars: Bright areas | Singer1979': { // the average of a number of typical bright region spectra
         tags: ['featured', 'Solar System', 'planetary body/planet'],
@@ -278,7 +278,7 @@
     'Mars: Synthetic spectrum | VPL': { // Tyler Robinson, "Present-day Mars generated using SMART"
         tags: ['Solar System', 'planetary body/planet'],
         file: 'spectra/files/VPL/mars_flx_refl.txtU',
-        geometric_albedo: true,
+        is_geometric_albedo: true,
     },
     // Phobos
     'Pajola2013': [
@@ -337,13 +337,13 @@
     'Jupiter | Karkoschka1998, Dyudina2016': { // phase angle 6.8°
         tags: ['featured', 'Solar System/Jovian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Jupiter1995.txt',
-        geometric_albedo: true,
+        is_geometric_albedo: true,
         spherical_albedo: ['Cassini_ISS_NAC.CB3', 0.57], // Table 4
     },
     'Jupiter | Karkoschka1994, Dyudina2016': { // phase angle 9.8°
         tags: ['Solar System/Jovian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Jupiter1993.txt',
-        geometric_albedo: true,
+        is_geometric_albedo: true,
         spherical_albedo: ['Cassini_ISS_NAC.CB3', 0.57], // Table 4
     },
     // Jovian rings
@@ -442,7 +442,7 @@
     'Io (J I) | Madden2018': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Madden2018/Io_Fanale1974_Albedo.txtU',
-        geometric_albedo: true,
+        is_geometric_albedo: true,
     },
     'Io: Trailing hemisphere (J I) | Clark1980a': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
@@ -457,7 +457,7 @@
     'Europa: Trailing hemisphere (J II) | Madden2018': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Madden2018/Europa_Spencer1999trailing_Albedo.txtU',
-        geometric_albedo: true,
+        is_geometric_albedo: true,
     },
     // Ganymede
     'Ganymede: Leading hemisphere (J III) | Clark1980a, Madden2018': {
@@ -468,7 +468,7 @@
     'Ganymede: Leading hemisphere (J III) | Madden2018': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Madden2018/Ganymede_Spencer1999leading_Albedo.txtU',
-        geometric_albedo: true,
+        is_geometric_albedo: true,
     },
     // Callisto
     'Callisto: Leading hemisphere (J IV) | Clark1980a, Madden2018': {
@@ -479,20 +479,20 @@
     'Callisto: Leading hemisphere (J IV) | Madden2018': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Madden2018/Callisto_Spencer1999leading_Albedo.txtU',
-        geometric_albedo: true
+        is_geometric_albedo: true
     },
 
     // Saturnian system
     'Saturn | Karkoschka1998, Dyudina2016': { // phase angle 5.7°, without rings
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Saturn1995.txt',
-        geometric_albedo: true,
+        is_geometric_albedo: true,
         phase_integral: [1.4, 0.1], // Section 4
     },
     'Saturn | Karkoschka1994, Dyudina2016': { // phase angle 2.7°
         tags: ['Solar System/Saturnian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Saturn1993.txt',
-        geometric_albedo: true,
+        is_geometric_albedo: true,
         phase_integral: [1.4, 0.1], // Section 4
     },
     // Saturnian rings
@@ -503,7 +503,7 @@
     'Rings of Saturn | Clark1980b': {
         tags: ['featured', 'Solar System/Saturnian system', 'ring'],
         file: 'spectra/files/Clark1980/Saturn_rings.txtU', // figure 6
-        albedo: ['Generic_Bessell.V', 0.5]
+        albedo: ['Generic_Bessell.V', 0.5],
     },
     'Porco2005': [
         'Cassini Imaging Science: Initial Results on Saturn’s Rings and Small Satellites',
@@ -515,84 +515,84 @@
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.2024, 0.2677, 0.3056, 0.3524, 0.3674], // extracted from Fig. 3
-        spherical_albedo: true,
+        is_spherical_albedo: true,
     },
     'Rings of Saturn: C (91000 km) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.2562, 0.4766, 0.5952, 0.6735, 0.6884], // extracted from Fig. 3
-        spherical_albedo: true,
+        is_spherical_albedo: true,
     },
     'Rings of Saturn: B (96000 km) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.2473, 0.4816, 0.6057, 0.6770, 0.6929], // extracted from Fig. 3
-        spherical_albedo: true,
+        is_spherical_albedo: true,
     },
     'Rings of Saturn: B (100000 km) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.3335, 0.6147, 0.7503, 0.8180, 0.8240], // extracted from Fig. 3
-        spherical_albedo: true,
+        is_spherical_albedo: true,
     },
     'Rings of Saturn: B (103000 km) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.3659, 0.6486, 0.7792, 0.8465, 0.8629], // extracted from Fig. 3
-        spherical_albedo: true,
+        is_spherical_albedo: true,
     },
     'Rings of Saturn: B (105000 km) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.3370, 0.6356, 0.7852, 0.8564, 0.8684], // extracted from Fig. 3
-        spherical_albedo: true,
+        is_spherical_albedo: true,
     },
     'Rings of Saturn: B (109000 km) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.3769, 0.6830, 0.8146, 0.8834, 0.8868], // extracted from Fig. 3
-        spherical_albedo: true,
+        is_spherical_albedo: true,
     },
     'Rings of Saturn: B (113000 km) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.3450, 0.6261, 0.7657, 0.8325, 0.8455], // extracted from Fig. 3
-        spherical_albedo: true,
+        is_spherical_albedo: true,
     },
     'Rings of Saturn: Cassini Division (119000 km) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.2767, 0.4158, 0.4721, 0.5389, 0.5708], // extracted from Fig. 3
-        spherical_albedo: true,
+        is_spherical_albedo: true,
     },
     'Rings of Saturn: A (123000 km) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.2797, 0.4826, 0.5793, 0.6356, 0.6550], // extracted from Fig. 3
-        spherical_albedo: true,
+        is_spherical_albedo: true,
     },
     'Rings of Saturn: A (128000 km) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.2114, 0.4033, 0.5130, 0.5763, 0.5962], // extracted from Fig. 3
-        spherical_albedo: true,
+        is_spherical_albedo: true,
     },
     'Rings of Saturn: A (135000 km) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.2647, 0.4880, 0.5967, 0.6560, 0.6770], // extracted from Fig. 3
-        spherical_albedo: true,
+        is_spherical_albedo: true,
     },
     'dePater2006': [
         'New Dust Belts of Uranus: One Ring, Two Ring, Red Ring, Blue Ring',
@@ -700,7 +700,7 @@
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR3'],
         br: [0.0865, 0.1181, 0.1342, 0.1406, 0.1551],
-        geometric_albedo: [611, [0.25, 0.23]]
+        geometric_albedo: [611, [0.25, 0.23]],
     },
     // Mimas
     'Mimas (S I) | Filacchione2022, Buratti2022': {
@@ -804,7 +804,7 @@
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         file: 'spectra/files/Filacchione2012/Helene.txt',
         geometric_albedo: ['HST_WFPC2-PC.F555W', [1.67, 0.20]],
-        bond_albedo: [0.43, 0.12]
+        bond_albedo: [0.43, 0.12],
     },
     'Polydeuces (S XXXIV) | Thomas2018, Verbiscer2018': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
@@ -854,18 +854,18 @@
     'Titan (S VI) | Karkoschka1998': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Karkoschka/Titan1995.txt',
-        geometric_albedo: true
+        is_geometric_albedo: true,
     },
     'Titan (S VI) | Karkoschka1994': { // phase angle 2.7°
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Karkoschka/Titan1993.txt',
-        geometric_albedo: true
+        is_geometric_albedo: true,
     },
     'Titan: Surface, phase angle 45° (S VI) | Karkoschka2016': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         nm: [520, 563, 595, 642, 685, 754, 823, 830, 935, 940, 1070, 1280, 1550, 1590],
         br: [0.093, 0.107, 0.116, 0.130, 0.139, 0.147, 0.151, 0.151, 0.151, 0.151, 0.145, 0.124, 0.070, 0.071],
-        albedo: true
+        is_albedo: true,
     },
     'Titan: Surface, phase angle 0° (S VI) | Karkoschka2012': {
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
@@ -896,16 +896,16 @@
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
         file: 'spectra/files/Filacchione2012/Hyperion.txt',
         geometric_albedo: ['Generic_Bessell.V', [0.44, 0.13]], // Table 2, p. 325 (Verbiscer2018)
-        phase_function: ['HG', {H: [13.81, 0.05], G: [0.56, 0.14]}]
+        phase_function: ['HG', {H: [13.81, 0.05], G: [0.56, 0.14]}],
     },
     'Hyperion (S VII) | Hicks2008, Verbiscer2018, Klavetter1989': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.798, 0.030], 'V-R': [0.438, 0.031]},
         calibration_system: 'Vega',
-        sun_is_emitter: true,
+        is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.44, 0.13]], // Table 2, p. 325 (Verbiscer2018)
-        phase_function: ['HG', {H: [13.81, 0.05], G: [0.56, 0.14]}]
+        phase_function: ['HG', {H: [13.81, 0.05], G: [0.56, 0.14]}],
     },
     'Hyperion (S VII) | Thomas1985, Klavetter1989': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
@@ -914,7 +914,7 @@
         br: [0.54, 0.65, 0.82, 0.85, 1.00, 1.04],
         sd: [0.02, 0.04, 0.01, 0.03, 0, 0.03],
         geometric_albedo: ['Voyager_ISS-NAC.Clear', [0.214, 0.006]], // normal reflectance
-        phase_function: ['HG', {H: [13.81, 0.05], G: [0.56, 0.14]}]
+        phase_function: ['HG', {H: [13.81, 0.05], G: [0.56, 0.14]}],
     },
     // Iapetus
     'Blackburn2010': [
@@ -936,7 +936,7 @@
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'traced spectrum'],
         nm: [330, 350, 380, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850],
         br: [0.047, 0.051, 0.058, 0.063, 0.067, 0.071, 0.080, 0.087, 0.090, 0.093, 0.099, 0.102, 0.102],
-        albedo: true
+        is_albedo: true,
     },
     'Iapetus: Trailing hemisphere (S VIII) | Blackburn2010': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'traced spectrum'],
@@ -960,7 +960,7 @@
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.63, 0.01], 'V-R': [0.35, 0.01], 'V-I': [0.64, 0.01]},
         calibration_system: 'Vega',
-        sun_is_emitter: true,
+        is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.0857, 0.0022]],
         spherical_albedo: ['Generic_Bessell.V', [0.0267, 0.0083]],
     },
@@ -978,7 +978,7 @@
         photometric_system: 'CTIO_DECam',
         color_indices: {'g-r': [0.27, 0.07], 'r-i': [0.06, 0.08]},
         calibration_system: 'AB',
-        sun_is_emitter: true,
+        is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.0857, 0.0022]],
         spherical_albedo: ['Generic_Bessell.V', [0.0267, 0.0083]],
     },
@@ -987,7 +987,7 @@
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.57, 0.01], 'V-R': [0.34, 0.01]},
         calibration_system: 'Vega',
-        sun_is_emitter: true,
+        is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.0857, 0.0022]],
         spherical_albedo: ['Generic_Bessell.V', [0.0267, 0.0083]],
     },
@@ -996,12 +996,12 @@
     'Uranus | Karkoschka1998': {
         tags: ['featured', 'Solar System/Uranian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Uranus1995.txt',
-        geometric_albedo: true
+        is_geometric_albedo: true
     },
     'Uranus | Karkoschka1994': { // phase angle 0.6°
         tags: ['Solar System/Uranian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Uranus1993.txt',
-        geometric_albedo: true
+        is_geometric_albedo: true
     },
     // Uranian rings
     'Karkoschka1997': [
@@ -1025,7 +1025,7 @@
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F850LP'],
         br: [0.056, 0.056],
         sd: 0.007,
-        geometric_albedo: true, // at 1° phase angle
+        is_geometric_albedo: true, // at 1° phase angle
     },
     'Rings of Uranus: η, γ, δ | Karkoschka1997': {
         tags: ['Solar System/Uranian system', 'ring'],
@@ -1033,7 +1033,7 @@
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F850LP'],
         br: [0.063, 0.064],
         sd: 0.007,
-        geometric_albedo: true, // at 1° phase angle
+        is_geometric_albedo: true, // at 1° phase angle
     },
     'Rings of Uranus: ε | Karkoschka1997': {
         tags: ['Solar System/Uranian system', 'ring'],
@@ -1041,7 +1041,7 @@
         filters: ['HST_WFPC2-PC.F336W', 'HST_WFPC2-WF.F467M', 'HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-WF.FQCH4N_B', 'HST_WFPC2-PC.F850LP'],
         br: [0.044, 0.052, 0.055, 0.054, 0.058, 0.058],
         sd: 0.004,
-        geometric_albedo: true, // at 1° phase angle
+        is_geometric_albedo: true, // at 1° phase angle
     },
     // Uranian small inner satellites
     'Portia (U XII) | Karkoschka1997': {
@@ -1050,7 +1050,7 @@
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-WF.FQCH4N_B', 'HST_WFPC2-PC.F850LP'],
         br: [0.107, 0.104, 0.105, 0.123],
         sd: 0.010,
-        geometric_albedo: true, // at 1° phase angle
+        is_geometric_albedo: true, // at 1° phase angle
     },
     'Portia group | Karkoschka2001': {
         tags: ['featured', 'Solar System/Uranian system', 'natural satellite/regular moon', 'class'],
@@ -1070,7 +1070,7 @@
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-WF.FQCH4N_B', 'HST_WFPC2-PC.F850LP'],
         br: [0.095, 0.091, 0.097, 0.101],
         sd: 0.010,
-        geometric_albedo: true, // at 1° phase angle
+        is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.035, 0.006]], // Karkoschka2001
     },
     // Uranian major moons
@@ -1084,7 +1084,7 @@
         nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         br: [0.51, 0.49, 0.48, 0.47, 0.46, 0.45, 0.41, 0.40],
         sd: [0.02, 0.01, 0.02, 0.02, 0.02, 0.01, 0.01, 0.01],
-        geometric_albedo: true,
+        is_geometric_albedo: true,
         spherical_albedo: [550, [0.200, 0.030]], // Karkoschka2001
     },
     'Miranda (U V) | Karkoschka2001': {
@@ -1099,7 +1099,7 @@
         filters: ['HST_WFPC2-PC.F336W', 'HST_WFPC2-WF.F467M', 'HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-WF.FQCH4N_B', 'HST_WFPC2-PC.F850LP'],
         br: [0.320, 0.315, 0.310, 0.298, 0.294, 0.301],
         sd: 0.012,
-        geometric_albedo: true, // at 1° phase angle
+        is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.200, 0.030]], // Karkoschka2001
     },
     // Ariel
@@ -1108,7 +1108,7 @@
         nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         br: [0.50, 0.51, 0.51, 0.51, 0.51, 0.52, 0.53, 0.54],
         sd: [0.03, 0.02, 0.02, 0.01, 0.02, 0.01, 0.01, 0.01],
-        geometric_albedo: true,
+        is_geometric_albedo: true,
         spherical_albedo: [550, [0.230, 0.025]], // Karkoschka2001
     },
     'Ariel (U I) | Karkoschka2001': {
@@ -1123,7 +1123,7 @@
         filters: ['HST_WFPC2-PC.F336W', 'HST_WFPC2-WF.F467M', 'HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-WF.FQCH4N_B', 'HST_WFPC2-PC.F850LP'],
         br: [0.342, 0.350, 0.374, 0.343, 0.354, 0.371],
         sd: 0.014,
-        geometric_albedo: true, // at 1° phase angle
+        is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.230, 0.025]], // Karkoschka2001
     },
     // Umbriel
@@ -1132,7 +1132,7 @@
         nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         br: [0.25, 0.25, 0.25, 0.25, 0.26, 0.26, 0.26, 0.26],
         sd: [0.01, 0.02, 0.02, 0.01, 0.01, 0.01, 0.01, 0.01],
-        geometric_albedo: true,
+        is_geometric_albedo: true,
         spherical_albedo: [550, [0.100, 0.010]], // Karkoschka2001
     },
     'Umbriel (U II) | Karkoschka2001': {
@@ -1147,7 +1147,7 @@
         filters: ['HST_WFPC2-PC.F336W', 'HST_WFPC2-WF.F467M', 'HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-WF.FQCH4N_B', 'HST_WFPC2-PC.F850LP'],
         br: [0.196, 0.185, 0.185, 0.190, 0.196, 0.203],
         sd: 0.008,
-        geometric_albedo: true, // at 1° phase angle
+        is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.100, 0.010]], // Karkoschka2001
     },
     // Titania
@@ -1156,7 +1156,7 @@
         nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         br: [0.30, 0.32, 0.33, 0.34, 0.36, 0.37, 0.41, 0.43],
         sd: [0.02, 0.02, 0.02, 0.03, 0.02, 0.01, 0.01, 0.01],
-        geometric_albedo: true,
+        is_geometric_albedo: true,
         spherical_albedo: [550, [0.170, 0.015]], // Karkoschka2001
     },
     'Titania (U III) | Karkoschka2001': {
@@ -1171,7 +1171,7 @@
         filters: ['HST_WFPC2-PC.F336W', 'HST_WFPC2-WF.F467M', 'HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-PC.F850LP'],
         br: [0.219, 0.239, 0.234, 0.235, 0.265],
         sd: 0.010,
-        geometric_albedo: true, // at 1° phase angle
+        is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.170, 0.015]], // Karkoschka2001
     },
     // Oberon
@@ -1184,7 +1184,7 @@
         nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         br: [0.27, 0.29, 0.30, 0.31, 0.33, 0.35, 0.40, 0.43],
         sd: [0.04, 0.01, 0.02, 0.02, 0.01, 0.01, 0.02, 0.02],
-        geometric_albedo: true,
+        is_geometric_albedo: true,
         spherical_albedo: [550, [0.140, 0.015]], // Karkoschka2001
     },
     'Oberon (U IV) | Karkoschka2001': {
@@ -1199,7 +1199,7 @@
         filters: ['HST_WFPC2-WF.F467M', 'HST_WFPC2-PC.F850LP'],
         br: [0.201, 0.218],
         sd: 0.009,
-        geometric_albedo: true, // at 1° phase angle
+        is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.140, 0.015]], // Karkoschka2001
     },
     // the Clear filter was removed, reconstructed spectrum should be pink to fit it
@@ -1208,33 +1208,33 @@
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
         br: [[0.30, 0.04], [0.33, 0.04]], // Clear: [0.27, 0.03]
-        geometric_albedo: true, // average normal albedo
+        is_geometric_albedo: true, // average normal albedo
     },
     'Oberon: Bright areas (U IV) | Helfenstein1991': { // crater rays
         tags: ['Solar System/Uranian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
         br: [[0.37, 0.04], [0.39, 0.03]], // Clear: [0.34, 0.03]
-        geometric_albedo: true, // average normal albedo
+        is_geometric_albedo: true, // average normal albedo
     },
     'Oberon: Dark areas (U IV) | Helfenstein1991': {
         tags: ['Solar System/Uranian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
         br: [[0.24, 0.03], [0.28, 0.03]], // Clear: [0.21, 0.02]
-        geometric_albedo: true, // average normal albedo
+        is_geometric_albedo: true, // average normal albedo
     },
 
     // Neptunian system
     'Neptune | Karkoschka1998': {
         tags: ['featured', 'Solar System/Neptunian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Neptune1995.txt',
-        geometric_albedo: true,
+        is_geometric_albedo: true,
     },
     'Neptune | Karkoschka1994': { // phase angle 0.4°
         tags: ['Solar System/Neptunian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Neptune1995.txt',
-        geometric_albedo: true,
+        is_geometric_albedo: true,
     },
     // Neptunian small inner satellites
     'Lane1989': [
@@ -1264,7 +1264,7 @@
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[5.81, 0.02], [5.09, 0.01], [4.36, 0.05]],
         calibration_system: 'Vega',
-        sun_is_emitter: true,
+        is_reflecting_sunlight: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.093, 0.001]],
     },
     'Proteus: +54° East (N VIII) | Pascu2006': { // visit 2, leading side
@@ -1273,7 +1273,7 @@
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[5.80, 0.02], [5.09, 0.02], [4.35, 0.03]],
         calibration_system: 'Vega',
-        sun_is_emitter: true,
+        is_reflecting_sunlight: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.093, 0.001]],
     },
     'Proteus: +59° West (N VIII) | Pascu2006': { // visit 3, trailing side
@@ -1282,7 +1282,7 @@
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[5.90, 0.02], [5.19, 0.02], [4.45, 0.05]],
         calibration_system: 'Vega',
-        sun_is_emitter: true,
+        is_reflecting_sunlight: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.084, 0.001]],
     },
     // Triton
@@ -1302,7 +1302,7 @@
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[-0.646, 0.009], [-1.343, 0.002], [-2.119, 0.006]],
         calibration_system: 'Vega',
-        sun_is_emitter: true,
+        is_reflecting_sunlight: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.84, 0.01]],
         phase_integral: [0.94, 0.04],
     },
@@ -1312,7 +1312,7 @@
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[-0.637, 0.014], [-1.332, 0.001], [-2.088, 0.004]],
         calibration_system: 'Vega',
-        sun_is_emitter: true,
+        is_reflecting_sunlight: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.83, 0.01]],
         phase_integral: [0.94, 0.04],
     },
@@ -1322,7 +1322,7 @@
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[-0.556, 0.005], [-1.255, 0.004], [-2.031, 0.006]],
         calibration_system: 'Vega',
-        sun_is_emitter: true,
+        is_reflecting_sunlight: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.78, 0.01]],
         phase_integral: [0.94, 0.04],
     },
@@ -1354,7 +1354,7 @@
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.67, 0.02], 'V-R': [0.38, 0.01]},
         calibration_system: 'Vega',
-        sun_is_emitter: true,
+        is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.24, 0.02]],
         phase_integral: 0.5,
     },
@@ -1363,7 +1363,7 @@
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.66, 0.01], 'V-R': [0.39, 0.01]},
         calibration_system: 'Vega',
-        sun_is_emitter: true,
+        is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.24, 0.02]],
         phase_integral: 0.5,
     },
