@@ -1297,7 +1297,8 @@ class PhaseCoefficient(_PhotometricModel):
     
     def phase_function(self, alpha):
         beta, _ = aux.parse_value_sd(self.params['beta'])
-        return 10**(-0.4 * beta * alpha)
+        return np.exp(-self._k * beta * np.array(alpha))
+        # equivalent to 10**(-0.4 * beta * alpha / np.pi * 180)
 
 
 class Exponentials(_PhotometricModel):
@@ -1316,11 +1317,12 @@ class Exponentials(_PhotometricModel):
         if (zero_phase_angle := self._A.sum()) != 1:
             # if function was not normalized, it shows geometric albedo at 0 phase angle
             self.geometric_albedo = zero_phase_angle, None
-        self.phase_integral = np.sum(self._A * (1 + np.exp(-self._mu * np.pi)) / (1 + self._mu**2)) / zero_phase_angle, None
-        # phase integral must be multiplied by 2, but it give too bright spherical albedo
+        self.phase_integral = 2 * np.sum(self._A * (1 + np.exp(-self._mu * np.pi)) / (1 + self._mu**2)) / zero_phase_angle, None
     
     def phase_function(self, alpha):
-        phi = np.dot(self._A, np.exp(-self._mu * alpha))
+        phi = np.sum(self._A[:, np.newaxis] * np.exp(-self._mu[:, np.newaxis] * alpha), axis=0)
+        if phi.size == 1:
+            phi = phi[0]
         if self.geometric_albedo is not None:
            phi /= self.geometric_albedo[0]
         return phi
@@ -1344,6 +1346,7 @@ class HG(_PhotometricModel):
     
     def phase_function(self, alpha):
         g, _ = aux.parse_value_sd(self.params['G'])
+        alpha = np.array(alpha)
         alpha2 = 0.5 * alpha
         sin_alpha = np.sin(alpha)
         tan_alpha2 = np.tan(alpha2)
@@ -1407,8 +1410,7 @@ class Hapke(_PhotometricModel):
         h, _ = aux.parse_value_sd(self.params['h']) # width of opposition surge
         b, _ = aux.parse_value_sd(self.params['b']) # Henyey-Greenstein single particle scattering function parameter
         c, _ = aux.parse_value_sd(self.params['c']) # Henyey-Greenstein single particle scattering function parameter
-        theta, _ = aux.parse_value_sd(self.params['theta']) # macroscopic roughness angle
-        theta *= np.pi / 180 # degrees to radians
+        theta = np.radians(aux.parse_value_sd(self.params['theta'])[0]) # macroscopic roughness angle
         gamma = np.sqrt(1 - w)
         r0 = (1 - gamma) / (1 + gamma) # bihemispherical  reflectance
         # geometric albedo:
@@ -1420,7 +1422,7 @@ class Hapke(_PhotometricModel):
             alpha = np.array(alpha, dtype='float')
             mask = alpha == 0
             phi = np.empty_like(alpha)
-            phi[mask] = self.geometric_albedo
+            phi[mask] = 1.
             alpha = alpha[~mask]
             alpha2 = alpha * 0.5
             B = bo / (1 + np.tan(alpha2) / h)
@@ -1433,7 +1435,7 @@ class Hapke(_PhotometricModel):
         # Numerical calculation of spherical albedo
         step = 0.01
         a = np.arange(0, np.pi, step) # 0°-180° phase angle array (radians)
-        self.phase_integral = 2 * aux.integrate(phase_function(a) * np.sin(a), step=step, precisely=True)
+        self.phase_integral = 2 * aux.integrate(phase_function(a) * np.sin(a), step=step, precisely=True), None
 
 
 class NonReflectiveBody:
