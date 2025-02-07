@@ -1211,7 +1211,6 @@ class _PhotometricModel:
     filter_or_nm: str|int|float = None
     geometric_albedo: [float, float] = None
     phase_integral: [float, float] = None
-    phase_function: Callable = None # input in radians!
 
     def __init__(self, params: dict = None, filter_or_nm: str|int|float = None) -> None:
         self.params = params
@@ -1221,6 +1220,9 @@ class _PhotometricModel:
     def _integrate(self) -> None:
         """ Analytically or numerically computes usable values from a model parameters """
         raise NotImplementedError('Must be implemented in the inherited classes.')
+    
+    def phase_function(self, alpha): # input in radians!
+        return NotImplementedError('Must be implemented in the inherited classes.')
     
     @property
     def spherical_albedo(self):
@@ -1293,7 +1295,6 @@ class PhaseCoefficient(_PhotometricModel):
             phase_integral_sd = None
         self.phase_integral = (phase_integral, phase_integral_sd)
     
-    @property
     def phase_function(self, alpha):
         beta, _ = aux.parse_value_sd(self.params['beta'])
         return 10**(-0.4 * beta * alpha)
@@ -1304,8 +1305,6 @@ class Exponentials(_PhotometricModel):
     Describes phase function with a sum of exponentials.
     Usually one (like phase coefficient), two (Akimov, 1988) or three (Velikodsky, 2011) are used.
     """
-
-    _k = 180 / np.pi * 0.4 * np.log(10) # ≈ 52.77
 
     def _integrate(self) -> None:
         n_exponentials = len(self.params) // 2
@@ -1318,13 +1317,13 @@ class Exponentials(_PhotometricModel):
             # if function was not normalized, it shows geometric albedo at 0 phase angle
             self.geometric_albedo = zero_phase_angle, None
         self.phase_integral = np.sum(self._A * (1 + np.exp(-self._mu * np.pi)) / (1 + self._mu**2)) / zero_phase_angle, None
+        # phase integral must be multiplied by 2, but it give too bright spherical albedo
     
-    @property
     def phase_function(self, alpha):
-        q = np.dot(self._A, np.exp(-self._mu * alpha))
+        phi = np.dot(self._A, np.exp(-self._mu * alpha))
         if self.geometric_albedo is not None:
-            q /= self.geometric_albedo[0]
-        return q
+           phi /= self.geometric_albedo[0]
+        return phi
 
 
 class HG(_PhotometricModel):
@@ -1343,7 +1342,6 @@ class HG(_PhotometricModel):
         q_sd = None if g_sd is None else 0.684 * g_sd
         self.phase_integral = (q, q_sd)
     
-    @property
     def phase_function(self, alpha):
         g, _ = aux.parse_value_sd(self.params['G'])
         alpha2 = 0.5 * alpha
@@ -1388,7 +1386,6 @@ class HG1G2(_PhotometricModel):
             q_sd = 0.4061 * g1_sd + 0.8092 * g2_sd
         self.phase_integral = (q, q_sd)
     
-    @property
     def phase_function(self, alpha):
         g1, _ = aux.parse_value_sd(self.params['G_1'])
         g2, _ = aux.parse_value_sd(self.params['G_2'])
@@ -1419,17 +1416,24 @@ class Hapke(_PhotometricModel):
         self.geometric_albedo = w / 8 * ((1 + bo) * aux.henyey_greenstein(0, b, c) - 1) + C * 0.5 * r0 * (1 + r0 / 3)
         # phase function:
         def phase_function(alpha):
+            # without this check the output would be nan
+            alpha = np.array(alpha, dtype='float')
+            mask = alpha == 0
+            phi = np.empty_like(alpha)
+            phi[mask] = self.geometric_albedo
+            alpha = alpha[~mask]
             alpha2 = alpha * 0.5
             B = bo / (1 + np.tan(alpha2) / h)
-            phi = w / 8 * ((1 + B) * aux.henyey_greenstein(alpha, b, c) - 1) + 0.5 * r0 * (1 - r0)
-            phi *= 1 + np.sin(alpha2) * np.tan(alpha2) * np.log(np.tan(0.5 * alpha2))
-            phi += 2/3 * r0**2 * (np.sin(alpha) + (np.pi - alpha) * np.cos(alpha)) / np.pi
-            return aux.hapke_k(alpha, theta) * phi / self.geometric_albedo
+            phi[~mask] = w / 8 * ((1 + B) * aux.henyey_greenstein(alpha, b, c) - 1) + 0.5 * r0 * (1 - r0)
+            phi[~mask] *= 1 + np.sin(alpha2) * np.tan(alpha2) * np.log(np.tan(0.5 * alpha2))
+            phi[~mask] += 2/3 * r0**2 * (np.sin(alpha) + (np.pi - alpha) * np.cos(alpha)) / np.pi
+            phi[~mask] *= aux.hapke_k(alpha, theta) * phi[~mask] / self.geometric_albedo
+            return phi
         self.phase_function = phase_function
         # Numerical calculation of spherical albedo
         step = 0.01
-        a = np.arange(step, np.pi, step) # 0°-180° phase angle array (radians)
-        self.phase_integral = 2 * aux.integrate(phase_function(a) * np.sin(a), precisely=True)
+        a = np.arange(0, np.pi, step) # 0°-180° phase angle array (radians)
+        self.phase_integral = 2 * aux.integrate(phase_function(a) * np.sin(a), step=step, precisely=True)
 
 
 class NonReflectiveBody:

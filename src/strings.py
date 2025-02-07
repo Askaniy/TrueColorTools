@@ -898,7 +898,7 @@ names = {
     'Arend–Rigaux': {'ru': 'Арена — Риго'},
     'd’Arrest': {'ru': 'д’Арре'},
     'Ashbrook–Jackson': {'ru': 'Ашбрука — Джексона'},
-    'Bernardinelli-Berstein': {'ru': 'Бернардинелли — Бернштейна'},
+    'Bernardinelli–Bernstein': {'ru': 'Бернардинелли — Бернштейна'},
     'Boattini': {'ru': 'Боаттини'},
     'Borisov': {'ru': 'Борисова'},
     'Churyumov–Gerasimenko': {'ru': 'Чурюмова — Герасименко', 'de': 'Tschurjumow-Gerassimenko'},

@@ -6682,7 +6682,7 @@
         'DOI: 10.1051/0004-6361/202243090', 'https://www.aanda.org/articles/aa/full_html/2022/03/aa43090-22/aa43090-22.html',
         'https://ui.adsabs.harvard.edu/abs/2022A&A...659L...1L'
     ],
-    '(C/2014 UN271) Bernardinelli-Bernstein | Bernardinelli2021, Lellouch2022': {
+    '(C/2014 UN271) Bernardinelli–Bernstein | Bernardinelli2021, Lellouch2022': {
         tags: ['Solar System', 'minor body/comet/long period comet'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.49, 0.01], 'r-i': [0.22, 0.02], 'i-z': [0.32, 0.09]},
