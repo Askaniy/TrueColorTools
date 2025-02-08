@@ -2788,11 +2788,11 @@
         calibration_system: 'AB',
         sun_is_emitter: true
     },
-    '(79978) 1999 CC158 | MBOSS': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': [0.996, 0.066], 'V-R': [0.611, 0.052], 'R-I': [0.619, 0.075]},
-        calibration_system: 'Vega',
+    '(79978) 1999 CC158 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.89, 0.03], 'r-i': [0.36, 0.03]},
+        calibration_system: 'AB',
         sun_is_emitter: true
     },
     '(79983) 1999 DF9 | MBOSS': {
@@ -3163,11 +3163,11 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
-    '(118378) 1999 HT11 | Trujillo2002': {
+    '(118378) 1999 HT11 | Sheppard2012': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': [1.14, 0.14], 'B-R': [1.83, 0.10]},
-        calibration_system: 'Vega',
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.94, 0.04], 'r-i': [0.45, 0.03]},
+        calibration_system: 'AB',
         sun_is_emitter: true
     },
     '(118379) 1999 HC12 | MBOSS': {
@@ -3227,6 +3227,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    '(119878) 2002 CY224 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.96, 0.03], 'r-i': [0.44, 0.03]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
     '(119951) 2002 KX14 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
@@ -3234,6 +3241,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.097, +0.014, -0.013]],
+    },
+    '(119956) 2002 PA149 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.92, 0.02], 'r-i': [0.35, 0.02]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
     },
     '(119979) 2002 WC19 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO'],
@@ -3389,6 +3403,13 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.143, +0.144, -0.094]],
     },
+    '(126619) 2002 CX154 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.79, 0.05], 'r-i': [0.41, 0.05]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
     '(127546) 2002 XU93 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered', 'minor body/centaur/Damocloid'],
         photometric_system: 'Generic_Bessell',
@@ -3409,6 +3430,20 @@
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.920, 0.120], 'V-R': [0.530, 0.100], 'R-I': [0.800, 0.070]},
         calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    '(130391) 2000 JG81 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.58, 0.04], 'r-i': [0.32, 0.04]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
+    '(131696) 2001 XT254 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.64, 0.04], 'r-i': [0.19, 0.05]},
+        calibration_system: 'AB',
         sun_is_emitter: true
     },
     '(131697) 2001 XH255 | Sheppard2012': {
@@ -3567,6 +3602,13 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.085, +0.424, -0.052]],
     },
+    '(135571) 2002 GG32 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [1.01, 0.03], 'r-i': [0.48, 0.04]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
     'Dunham2019': [
         'Haumea’s Shape, Composition, and Internal Structure',
         'DOI: 10.3847/1538-4357/ab13b3', 'https://iopscience.iop.org/article/10.3847/1538-4357/ab13b3',
@@ -3602,6 +3644,13 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.75, 0.02]], // system albedo
         spherical_albedo: ['Generic_Bessell.V', [0.33, 0.03]], // system albedo
+    },
+    '(136120) 2003 LG7 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.55, 0.06], 'r-i': [0.32, 0.05]},
+        calibration_system: 'AB', 
+        sun_is_emitter: true
     },
     'Sicardy2011': [
         'A Pluto-like radius and a high albedo for the dwarf planet Eris from an occultation',
@@ -4381,18 +4430,33 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.150, +0.182, -0.031]],
     },
+    'Grundy2014': [
+        'The orbit of transneptunian binary Manwë and Thorondor and their upcoming mutual events',
+        'DOI: 10.1016/j.icarus.2014.04.021', 'https://www.sciencedirect.com/science/article/pii/S0019103514002139',
+        'https://ui.adsabs.harvard.edu/abs/2014Icar..237....1G'
+    ],
     'Rabinowitz2019': [
         'The Complex Rotational Light Curve of (385446) Manwë-Thorondor, a Multi-Component Eclipsing System in the Kuiper Belt',
         'DOI: 10.48550/arXiv.1911.08546', 'https://arxiv.org/abs/1911.08546',
         'https://ui.adsabs.harvard.edu/abs/2019arXiv191108546R/abstract'
     ],
-    '(385446) Manwë-Thorondor | Sheppard2012, Rabinowitz2019': {
+    '(385446) Manwë | Grundy2014, Rabinowitz2019': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
-        photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': [0.85, 0.06], 'r-i': [0.40, 0.04]},
-        calibration_system: 'AB',
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [1.056, 0.079], 'V-I': [1.211, 0.043]}, // 2013/11/20 + weighted mean of 2008 observations
+        calibration_system: 'Vega',
         sun_is_emitter: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.06], // Manwë only
+        geometric_albedo: ['Generic_Bessell.V', 0.06], // Table 6 multi-component fit
+        // phase_function: ['phase coefficient', {beta: [0, 0.01]}],
+    },
+    '(385446 I) Thorondor | Grundy2014, Rabinowitz2019': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO', 'natural satellite'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.925, 0.059], 'V-I': [1.208, 0.095]}, // 2013/11/20 + weighted mean of 2008 observations
+        calibration_system: 'Vega',
+        sun_is_emitter: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.09], // Table 6 multi-component fit
+        // phase_function: ['phase coefficient', {beta: [0, 0.01]}],
     },
     '(385571) Otrera | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/Neptune trojan'],
@@ -4479,6 +4543,13 @@
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [1.00, 0.03], 'r-i': [0.48, 0.02]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
+    '(437915) 2002 GD32 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.91, 0.04], 'r-i': [0.48, 0.04]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -4663,6 +4734,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.281, +0.259, -0.152]],
+    },
+    '(470083) 2006 SG369 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.91, 0.04], 'r-i': [0.40, 0.04]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
     },
     '(470316) 2007 OC10 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/detached TNO'],
@@ -4931,6 +5009,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    '(524179) 2001 FQ185 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.96, 0.04], 'r-i': [0.52, 0.04]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
     '(524217) 2001 RZ143 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
@@ -4938,6 +5023,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.191, +0.066, -0.045]],
+    },
+    '(524365) 2001 XQ254 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.56, 0.03], 'r-i': [0.34, 0.03]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
     },
     '(524460) 2002 GF32 | 2MS': {
         tags: ['2MS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -4969,6 +5061,13 @@
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.970, 0.028], 'V-R': [0.560, 0.020], 'R-I': [0.530, 0.020]},
         calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    '(525816) 2005 SF278 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [1.05, 0.04], 'r-i': [0.43, 0.04]},
+        calibration_system: 'AB',
         sun_is_emitter: true
     },
     '(527328) 2007 TK422 | MBOSS': {
@@ -5220,6 +5319,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    '(612176) 2000 QL251 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.65, 0.03], 'r-i': [0.27, 0.03]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
     '(612218) 2001 KD77 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
         photometric_system: 'Generic_Bessell',
@@ -5235,6 +5341,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', [0.061, +0.027, -0.017]], // system albedo
+    },
+    '(612240) 2001 QE298 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.98, 0.07], 'r-i': [0.41, 0.06]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
     },
     '(612243) 2001 QR322 | MBOSS, FarkasTakacs2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/Neptune trojan'],
@@ -5322,6 +5435,27 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    '(612793)  2004 PW107 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.93, 0.12], 'r-i': [0.32, 0.13]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
+    '(612891) 2004 TT357 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.74, 0.03], 'r-i': [0.27, 0.04]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
+    '(612892) 2004 TV357 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.47, 0.02], 'r-i': [0.13, 0.02]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
     'Rommel2024': [
         'Physical constraints of (612911) 2004 XR190 from a stellar occultation and photometric observations',
         'https://www.youtube.com/watch?v=kBkryw8jfFI', 'https://tno2024.org/relation/abstract/88'
@@ -5333,6 +5467,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.V', 0.098], // calculated by Zel using occultation results
+    },
+    '(612931) 2005 CA79 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.90, 0.03], 'r-i': [0.32, 0.03]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
     },
     '(612953) 2005 ER318 | Sheppard2012': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
@@ -5346,6 +5487,13 @@
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.94, 0.04], 'r-i': [0.49, 0.04]},
         calibration_system: 'AB',
+        sun_is_emitter: true
+    },
+    '(613469) 2006 QJ181 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.73, 0.06], 'r-i': [0.27, 0.04]},
+        calibration_system: 'AB', 
         sun_is_emitter: true
     },
     '(613490) 2006 RJ103 | MBOSS': {
@@ -5682,6 +5830,13 @@
         calibration_system: 'Vega',
         sun_is_emitter: true
     },
+    '2001 UP18 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.73, 0.04], 'r-i': [0.32, 0.05]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
     '2001 XZ255 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
@@ -5732,10 +5887,24 @@
         sun_is_emitter: true,
         geometric_albedo: ['Generic_Bessell.R', [0.050, 0.021]],
     },
+    '2004 EG96 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.67, 0.05], 'r-i': [0.26, 0.03]},
+        calibration_system: 'AB', 
+        sun_is_emitter: true
+    },
     '2004 HM79 | Sheppard2012': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.61, 0.06], 'r-i': [0.29, 0.06]},
+        calibration_system: 'AB',
+        sun_is_emitter: true
+    },
+    '2004 HO79 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.75, 0.07], 'r-i': [0.47, 0.08]},
         calibration_system: 'AB',
         sun_is_emitter: true
     },
@@ -5744,6 +5913,13 @@
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.900, 0.042], 'V-R': [0.520, 0.030], 'R-I': [0.540, 0.030]},
         calibration_system: 'Vega',
+        sun_is_emitter: true
+    },
+    '2004 OQ15 | Sheppard2012': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.65, 0.05], 'r-i': [0.20, 0.05]},
+        calibration_system: 'AB',
         sun_is_emitter: true
     },
     '2004 TX357 | Sheppard2012': {
