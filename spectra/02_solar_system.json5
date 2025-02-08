@@ -187,41 +187,37 @@
         'New Earth-based absolute photometry of the Moon',
         'DOI: 10.1016/j.icarus.2011.04.021', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103511001564'
     ],
-    'Moon: Near side (E I) | Velikodsky2011': { // linear combination of highland and mare spectra with the weights 0.57 and 0.43, respectively
-        tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
-        file: 'spectra/files/Velikodsky2011/moon_average.txt',
-        phase_function: ['Cameras_Canon.300D_R', 'exponentials', {A_1: 0.0539, mu_1: 50, A_2: 0.0465, mu_2: 5.615, A_3: 0.1145, mu_3: 0.6135}],
-        // linear combination of the mean highland and mare locations, Table 3
-    },
-    'Moon: Highland (E I) | Velikodsky2011': {
-        tags: ['featured', 'Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
-        file: 'spectra/files/Velikodsky2011/moon_highland.txt',
-        phase_function: ['Cameras_Canon.300D_R', 'exponentials', {A_1: 0.0715, mu_1: 50, A_2: 0.0525, mu_2: 5.325, A_3: 0.1457, mu_3: 0.5875}],
-        // mean of 4 locations, Table 3
-    },
-    'Moon: Mare (E I) | Velikodsky2011': {
-        tags: ['featured', 'Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
-        file: 'spectra/files/Velikodsky2011/moon_mare.txt',
-        phase_function: ['Cameras_Canon.300D_R', 'exponentials', {A_1: 0.0306, mu_1: 50, A_2: 0.0386, mu_2: 6.0, A_3: 0.073, mu_3: 0.6480}],
-        // mean of 5 locations, Table 3
-    },
+    'Hillier1999': [
+        'Multispectral Photometry of the Moon and Absolute Calibration of the Clementine UV/Vis Camera',
+        'DOI: 10.1006/icar.1999.6184', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103599961845'
+    ],
     'Lane1973': [
         'Monochromatic phase curves and albedos for the lunar disk',
         'DOI: 10.1086/111414', 'https://ui.adsabs.harvard.edu/abs/1973AJ.....78..267L/abstract'
     ],
     'Moon: Near side (E I) | Crow2011, Lane1973': { // phase angle 97.6°
-        tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
+        tags: ['featured', 'Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [1894.24, 2387.17, 2832.17, 3269.35, 4091.49, 4787.91, 5506.36],
         geometric_albedo: ['Generic_Bessell.V', 0.113], // excludes opposition effect
         spherical_albedo: ['Generic_Bessell.V', 0.069],
     },
-    'Moon: Far side (E I) | Crow2011': { // phase angle 75.1°
+    'Moon: Near side (E I) | Velikodsky2011': { // linear combination of highland and mare spectra with the weights 0.57 and 0.43, respectively
         tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
-        photometric_system: 'DeepImpact_HRI-VIS',
-        filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
-        br: [13.83, 18.06, 22.54, 26.68, 30.74, 34.86, 34.14],
+        file: 'spectra/files/Velikodsky2011/moon_average.txt',
+        // linear combination of the mean highland and mare locations, Table 3:
+        phase_function: ['Cameras_Canon.300D_R', 'exponentials', {A_1: 0.0539, mu_1: 50, A_2: 0.0465, mu_2: 5.615, A_3: 0.1145, mu_3: 0.6135}],
+        // spherical albedo derived from the phase function is twice as high because the function doesn't go to 0 at 180°
+    },
+    'Moon: Near side (E I) | Hillier1999': { // 32% Maria and 68% highlands
+        tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
+        photometric_system: 'Clementine_UVVIS',
+        filters: ['415nm', '750nm', '900nm', '950nm', '1000nm'],
+        br_geometric: [0.176, 0.246, 0.252, 0.246, 0.231],
+        sd_geometric: [0.009, 0.010, 0.010, 0.014, 0.010],
+        br_spherical: [0.066, 0.109, 0.119, 0.122, 0.122],
+        sd_spherical: [0.001, 0.002, 0.002, 0.003, 0.002],
     },
     'Moon: Near side (E I) | Lane1973': {
         tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
@@ -229,12 +225,50 @@
         br_geometric: [0.072, 0.085, 0.088, 0.098, 0.106, 0.162, 0.179, 0.179, 0.202], // excludes opposition effect
         br_spherical: [0.039, 0.049, 0.048, 0.056, 0.062, 0.098, 0.113, 0.118, 0.136],
     },
+    'Moon: Far side (E I) | Crow2011': { // phase angle 75.1°
+        tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
+        photometric_system: 'DeepImpact_HRI-VIS',
+        filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
+        br: [13.83, 18.06, 22.54, 26.68, 30.74, 34.86, 34.14],
+    },
+    'Moon: Highlands (E I) | Velikodsky2011': {
+        tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
+        file: 'spectra/files/Velikodsky2011/moon_highland.txt',
+        // mean of 4 locations, Table 3:
+        phase_function: ['Cameras_Canon.300D_R', 'exponentials', {A_1: 0.0715, mu_1: 50, A_2: 0.0525, mu_2: 5.325, A_3: 0.1457, mu_3: 0.5875}],
+        // spherical albedo derived from the phase function is twice as high because the function doesn't go to 0 at 180°
+    },
+    'Moon: Highlands (E I) | Hillier1999': {
+        tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
+        photometric_system: 'Clementine_UVVIS',
+        filters: ['415nm', '750nm', '900nm', '950nm', '1000nm'],
+        br_geometric: [0.20, 0.28, 0.29, 0.28, 0.29],
+        sd_geometric: [0.01, 0.01, 0.01, 0.02, 0.01],
+        br_spherical: [0.078, 0.127, 0.140, 0.144, 0.146],
+        sd_spherical: [0.002, 0.002, 0.003, 0.004, 0.003],
+    },
+    'Moon: Maria (E I) | Velikodsky2011': {
+        tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
+        file: 'spectra/files/Velikodsky2011/moon_mare.txt',
+        // mean of 5 locations, Table 3:
+        phase_function: ['Cameras_Canon.300D_R', 'exponentials', {A_1: 0.0306, mu_1: 50, A_2: 0.0386, mu_2: 6.0, A_3: 0.073, mu_3: 0.6480}],
+        // spherical albedo derived from the phase function is twice as high because the function doesn't go to 0 at 180°
+    },
+    'Moon: Maria (E I) | Hillier1999': {
+        tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
+        photometric_system: 'Clementine_UVVIS',
+        filters: ['415nm', '750nm', '900nm', '950nm', '1000nm'],
+        br_geometric: [0.13, 0.17, 0.18, 0.17, 0.16],
+        sd_geometric: [0.01, 0.02, 0.02, 0.02, 0.01],
+        br_spherical: [0.042, 0.074, 0.076, 0.076, 0.074],
+        sd_spherical: [0.001, 0.002, 0.002, 0.002, 0.002],
+    },
     'Wu2018': [
         'The Absolute Reflectance and New Calibration Site of the Moon',
         'DOI: 10.3847/1538-3881/aabaf5', 'https://iopscience.iop.org/article/10.3847/1538-3881/aabaf5',
         'https://ui.adsabs.harvard.edu/abs/2018AJ....155..213W/abstract'
     ],
-    "Moon: Chang'e-3 Landing Site (E I) | Wu2018": {
+    "Moon: Chang'e-3 Landing Site (E I) | Wu2018": { // 
         tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
         file: 'spectra/files/Moon_CE-3_LS_Wu2018.txt',
         is_albedo: true, // angle of incidence 54°, angle of emergence 44°, phase angle 95°; See Section 3.2
@@ -247,7 +281,7 @@
         'https://ui.adsabs.harvard.edu/abs/1979JGR....84.8415S/abstract'
     ],
     'Mars | Madden2018': {
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['featured', 'Solar System', 'planetary body/planet'],
         file: 'spectra/files/Madden2018/Mars_McCord1971_Albedo.txtU',
         is_geometric_albedo: true,
     },
@@ -266,12 +300,12 @@
         geometric_albedo: ['Generic_Bessell.V', 0.170],
     },
     'Mars: Bright areas | Singer1979': { // the average of a number of typical bright region spectra
-        tags: ['featured', 'Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet'],
         file: 'spectra/files/Singer1979/Mars_bright.txtU', // figure 3
         geometric_albedo: [800, 0.40],
     },
     'Mars: Dark areas | Singer1979': { // telescopic dark region Iapygia
-        tags: ['featured', 'Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet'],
         file: 'spectra/files/Singer1979/Mars_dark.txtU', // figure 3
         geometric_albedo: [800, 0.21],
     },
