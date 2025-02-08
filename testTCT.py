@@ -175,7 +175,7 @@ class TestTCT(unittest.TestCase):
                 'photometric_system': 'Generic_Bessell',
                 'color_indices': {'B-V': 0.63, 'V-R': 0.35, 'V-I': 0.64},
                 'calibration_system': 'Vega',
-                'sun_is_emitter': True,
+                'is_reflecting_sunlight': True,
                 'geometric_albedo': ['Generic_Bessell.V', [0.0857, 0.0022]],
                 'spherical_albedo': ['Generic_Bessell.V', [0.0267, 0.0083]],
             },

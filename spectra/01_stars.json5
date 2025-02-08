@@ -27,159 +27,198 @@
 
     'ξ Orionis (O9.7b+O9 III+B0 II-IV) | Krisciunas2017': {
         tags: ['extrasolar', 'star'],
-        file: 'spectra/files/Krisciunas2017/hr1948_final.txtA'
+        file: 'spectra/files/Krisciunas2017/hr1948_final.txtA',
+        is_emissive: true,
     },
     'Mimosa (B0.5 III) | Krisciunas2017': {
         tags: ['extrasolar', 'star/III giant'],
-        file: 'spectra/files/Krisciunas2017/hr4853_blue_fin.txtA'
+        file: 'spectra/files/Krisciunas2017/hr4853_blue_fin.txtA',
+        is_emissive: true,
     },
     'Mirzam (B1 II-III) | Krisciunas2017': {
         tags: ['featured', 'extrasolar', 'star/II bright giant', 'star/III giant'],
-        file: 'spectra/files/Krisciunas2017/hr2294_final.txtA'
+        file: 'spectra/files/Krisciunas2017/hr2294_final.txtA',
+        is_emissive: true,
     },
     'Adhara (B2 II) | Krisciunas2017': {
         tags: ['extrasolar', 'star/II bright giant'],
-        file: 'spectra/files/Krisciunas2017/hr2618_blue_fin.txtA'
+        file: 'spectra/files/Krisciunas2017/hr2618_blue_fin.txtA',
+        is_emissive: true,
     },
     'Bellatrix (B2 III) | Krisciunas2017': {
         tags: ['extrasolar', 'star/III giant'],
-        file: 'spectra/files/Krisciunas2017/hr1790_final.txtA'
+        file: 'spectra/files/Krisciunas2017/hr1790_final.txtA',
+        is_emissive: true,
     },
     'Rigel (B8 Ia) | Krisciunas2017': {
         tags: ['extrasolar', 'star/I supergiant'],
-        file: 'spectra/files/Krisciunas2017/hr1713_final.txtA'
+        file: 'spectra/files/Krisciunas2017/hr1713_final.txtA',
+        is_emissive: true,
     },
     'Vega (A0 V) | CALSPEC': {
         tags: ['featured', 'extrasolar', 'star/V dwarf'],
-        file: 'spectra/files/CALSPEC/alpha_lyr_stis_011.fits'
+        file: 'spectra/files/CALSPEC/alpha_lyr_stis_011.fits',
+        is_emissive: true,
     },
     'θ Virginis (A1 IV s+A9m) | Krisciunas2017': {
         tags: ['extrasolar', 'star'],
-        file: 'spectra/files/Krisciunas2017/hr4963_blue_fin.txtA'
+        file: 'spectra/files/Krisciunas2017/hr4963_blue_fin.txtA',
+        is_emissive: true,
     },
     'Alsephina (A1 V) | Krisciunas2017': {
         tags: ['extrasolar', 'star/V dwarf'],
-        file: 'spectra/files/Krisciunas2017/hr3485_blue_fin.txtA'
+        file: 'spectra/files/Krisciunas2017/hr3485_blue_fin.txtA',
+        is_emissive: true,
     },
     'π² Orionis (A1 Vn) | Krisciunas2017': {
         tags: ['extrasolar', 'star/V dwarf'],
-        file: 'spectra/files/Krisciunas2017/hr1544_final.txtA'
+        file: 'spectra/files/Krisciunas2017/hr1544_final.txtA',
+        is_emissive: true,
     },
     'Miaplacidus (A2 IV) | Krisciunas2017': {
         tags: ['extrasolar', 'star/IV subgiant'],
-        file: 'spectra/files/Krisciunas2017/hr3685_final.txtA'
+        file: 'spectra/files/Krisciunas2017/hr3685_final.txtA',
+        is_emissive: true,
     },
     'Canopus (A9 II) | Krisciunas2017': {
         tags: ['featured', 'extrasolar', 'star/II bright giant'],
-        file: 'spectra/files/Krisciunas2017/hr2326_final.txtA'
+        file: 'spectra/files/Krisciunas2017/hr2326_final.txtA',
+        is_emissive: true,
     },
     'Alchiba (F1 V) | STIS_NGSLv2': {
         tags: ['extrasolar', 'star/V dwarf'],
-        file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd105452_v2.txtA'
+        file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd105452_v2.txtA',
+        is_emissive: true,
     },
     'Procyon (F5 IV-V) | Krisciunas2017': {
         tags: ['featured', 'extrasolar', 'star/IV subgiant', 'star/V dwarf'],
-        file: 'spectra/files/Krisciunas2017/hr2943_final.txtA'
+        file: 'spectra/files/Krisciunas2017/hr2943_final.txtA',
+        is_emissive: true,
     },
     'Wezen (F8 Ia) | Krisciunas2017': {
         tags: ['extrasolar', 'star/I supergiant'],
-        file: 'spectra/files/Krisciunas2017/hr2693_blue_fin.txtA'
+        file: 'spectra/files/Krisciunas2017/hr2693_blue_fin.txtA',
+        is_emissive: true,
     },
     'β Comae Berenices (G0 V) | STIS_NGSLv2': {
         tags: ['extrasolar', 'star/V dwarf'],
-        file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd114710_v2.txtA'
+        file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd114710_v2.txtA',
+        is_emissive: true,
     },
     'Sun (G2 V) | CALSPEC': {
         tags: ['featured', 'Solar System', 'star/V dwarf'],
-        file: 'spectra/files/CALSPEC/sun_reference_stis_002.fits'
+        file: 'spectra/files/CALSPEC/sun_reference_stis_002.fits',
+        is_emissive: true,
     },
     'κ1 Ceti (G5 V) | STIS_Pal2023': {
         tags: ['extrasolar', 'star/V dwarf'],
-        file: 'spectra/files/STIS_Pal2023/HD020630.txtA'
+        file: 'spectra/files/STIS_Pal2023/HD020630.txtA',
+        is_emissive: true,
     },
     '61 Virginis (G7 V) | STIS_NGSLv2': {
         tags: ['extrasolar', 'star/V dwarf'],
-        file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd115617_v2.txtA'
+        file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd115617_v2.txtA',
+        is_emissive: true,
     },
     'Ankaa (K0 III) | Krisciunas2017': {
         tags: ['extrasolar', 'star/III giant'],
-        file: 'spectra/files/Krisciunas2017/hr0099_blue_fin.txtA'
+        file: 'spectra/files/Krisciunas2017/hr0099_blue_fin.txtA',
+        is_emissive: true,
     },
     'Alsafi (K0 V) | STIS_NGSLv2': {
         tags: ['extrasolar', 'star/V dwarf'],
-        file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd185144_v2.txtA'
+        file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd185144_v2.txtA',
+        is_emissive: true,
     },
     'Ran (K2 V) | STIS_NGSLv2': {
         tags: ['featured', 'extrasolar', 'star/V dwarf'],
-        file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd022049_v2.txtA'
+        file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd022049_v2.txtA',
+        is_emissive: true,
     },
     'Alphard (K3 II-III) | Krisciunas2017': {
         tags: ['extrasolar', 'star/II bright giant', 'star/III giant'],
-        file: 'spectra/files/Krisciunas2017/hr3748_blue_fin.txtA'
+        file: 'spectra/files/Krisciunas2017/hr3748_blue_fin.txtA',
+        is_emissive: true,
     },
     'Avior (K3 III+B2 Vp) | Krisciunas2017': {
         tags: ['extrasolar', 'star'],
-        file: 'spectra/files/Krisciunas2017/hr3307_final.txtA'
+        file: 'spectra/files/Krisciunas2017/hr3307_final.txtA',
+        is_emissive: true,
     },
     'Suhail (K4.5 Ib-II) | Krisciunas2017': {
         tags: ['extrasolar', 'star/I supergiant', 'star/II bright giant'],
-        file: 'spectra/files/Krisciunas2017/hr3634_blue_fin.txtA'
+        file: 'spectra/files/Krisciunas2017/hr3634_blue_fin.txtA',
+        is_emissive: true,
     },
     '61 Cygni A (K5 V) | STIS_NGSLv2': {
         tags: ['featured', 'extrasolar', 'star/V dwarf'],
-        file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd201091_v2.txtA'
+        file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd201091_v2.txtA',
+        is_emissive: true,
     },
     '61 Cygni B (K7 V) | STIS_Pal2023': {
         tags: ['featured', 'extrasolar', 'star/V dwarf'],
-        file: 'spectra/files/STIS_Pal2023/HR8086.txtA'
+        file: 'spectra/files/STIS_Pal2023/HR8086.txtA',
+        is_emissive: true,
     },
     'LHS 489 (esdM0) | Reid2000': {
         tags: ['extrasolar', 'star/subdwarf'],
-        file: 'spectra/files/Reid2000/LHS489.txt'
+        file: 'spectra/files/Reid2000/LHS489.txt',
+        is_emissive: true,
     },
     'Betelgeuse (M1-2 Ia-Iab) | Krisciunas2017': {
         tags: ['extrasolar', 'star/I supergiant'],
-        file: 'spectra/files/Krisciunas2017/hr2061_final.txtA'
+        file: 'spectra/files/Krisciunas2017/hr2061_final.txtA',
+        is_emissive: true,
     },
     'Gliese 411 (M2 V) | STIS_NGSLv2': {
         tags: ['featured', 'extrasolar', 'star/V dwarf'],
-        file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd095735_v2.txtA'
+        file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd095735_v2.txtA',
+        is_emissive: true,
     },
     'Gacrux (M3.5 III) | Krisciunas2017': {
         tags: ['extrasolar', 'star/III giant'],
-        file: 'spectra/files/Krisciunas2017/hr4763_blue_fin.txtA'
+        file: 'spectra/files/Krisciunas2017/hr4763_blue_fin.txtA',
+        is_emissive: true,
     },
     'LHS 453 (esdM3.5) | Reid2000': {
         tags: ['extrasolar', 'star/subdwarf'],
-        file: 'spectra/files/Reid2000/LHS453.txt'
+        file: 'spectra/files/Reid2000/LHS453.txt',
+        is_emissive: true,
     },
     'LHS 375 (esdM5) | Reid2000': {
         tags: ['extrasolar', 'star/subdwarf'],
-        file: 'spectra/files/Reid2000/LHS375.txt'
+        file: 'spectra/files/Reid2000/LHS375.txt',
+        is_emissive: true,
     },
     'Proxima Centauri (M5.5 Ve) | Ribas2017': {
         tags: ['featured', 'extrasolar', 'star/V dwarf'],
-        file: 'spectra/files/ProximaCentauri_Ribas2017.fit'
+        file: 'spectra/files/ProximaCentauri_Ribas2017.fit',
+        is_emissive: true,
     },
     'UV Ceti (M6 V) | STIS_NGSLv2': {
         tags: ['extrasolar', 'star/V dwarf'],
-        file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_lhs10_v2.txtA'
+        file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_lhs10_v2.txtA',
+        is_emissive: true,
     },
     'BRI0021-0214 (M9.5) | Reid2000': {
         tags: ['extrasolar', 'star/ultra-cool dwarf'],
-        file: 'spectra/files/Reid2000/BRI0021.txt'
+        file: 'spectra/files/Reid2000/BRI0021.txt',
+        is_emissive: true,
     },
     '2MASSW J0746425+200032 (L0.5) | Reid2000': {
         tags: ['featured', 'extrasolar', 'star/ultra-cool dwarf'],
-        file: 'spectra/files/Reid2000/2M0746.txt'
+        file: 'spectra/files/Reid2000/2M0746.txt',
+        is_emissive: true,
     },
     '2MASSW J0036159+182110 (L3.5) | Reid2000': {
         tags: ['featured', 'extrasolar', 'star/ultra-cool dwarf'],
-        file: 'spectra/files/Reid2000/2M0036.txt'
+        file: 'spectra/files/Reid2000/2M0036.txt',
+        is_emissive: true,
     },
     '2MASSW J1507476-162738 (L5) | Reid2000': {
         tags: ['featured', 'extrasolar', 'star/ultra-cool dwarf'],
-        file: 'spectra/files/Reid2000/2M1507.txt'
+        file: 'spectra/files/Reid2000/2M1507.txt',
+        is_emissive: true,
     },
 
     'Mignani2001': [
@@ -192,6 +231,7 @@
         // note: LaSilla_EMMI filters are transparency only, without detector sensitivity
         mag: [[23.38, 0.15], [23.89, 0.15], [23.64, 0.05], [23.65, 0.1], [24.30, 0.1], [23.93, 0.2], [24.40, 0.1]],
         calibration_system: 'Vega',
+        is_emissive: true,
     },
     'Mignani2010': [
         'HST/WFPC2 observations of the LMC pulsar PSR B0540–69',
@@ -203,5 +243,6 @@
         filters: ['F336W', 'F450W', 'F555W', 'F675W', 'F814W'],
         mag: [[21.77, 0.17], [22.09, 0.05], [22.07, 0.05], [22.18, 0.04], [22.35, 0.03]],
         calibration_system: 'Vega',
+        is_emissive: true,
     },
 }

@@ -3,6 +3,6 @@
         //tags: ['featured'],
         nm: [555],
         br: [1],
-        albedo: true,
+        is_albedo: true,
     },
 }
