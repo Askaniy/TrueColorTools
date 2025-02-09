@@ -158,6 +158,11 @@ gui_tags = {
     'ru': 'Категория',
     'de': 'Kategorie'
 }
+gui_blank_note = {
+    'en': '',
+    'ru': '',
+    'de': ''
+}
 gui_no_albedo = {
     'en': 'Note: No albedo data.',
     'ru': 'Прим.: Нет данных об альбедо.',

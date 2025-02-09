@@ -68,6 +68,7 @@ def launch_window(lang: str):
 
     # Default values to avoid errors
     T1_obj_name = T1_spectrum = T3_obj_name = T3_spectrum = None
+    T1_albedo_note = tr.gui_blank_note
 
     def T1_T3_update_plot(fig, fig_canvas_agg, current_tab, gamma: bool, srgb: bool, albedo: bool, light_theme: bool, lang: str):
         pl.close_figure(fig)
@@ -130,19 +131,20 @@ def launch_window(lang: str):
         # Run-time translation
         elif event in tr.langs.keys():
             lang = tr.langs[event]
-            window0 = gui.translate_win0(window0, T2_vis, lang)
-            if values['-currentTab-'] == 'tab1':
-                if T1_obj_name:
-                    window['T1_title2'].update(T1_obj_name.indexed_name(lang))
-                T1_displayed_namesDB = db.obj_names_dict(objectsDB, values['T1_tags'], lang)
-                if T1_obj_name:
-                    T1_index = tuple(T1_displayed_namesDB.keys()).index(T1_obj_name(lang))
-                    window['T1_list'].update(tuple(T1_displayed_namesDB.keys()), set_to_index=T1_index, scroll_to_index=T1_index)
-                else:
-                    window['T1_list'].update(tuple(T1_displayed_namesDB.keys()))
-            if values['-currentTab-'] == 'tab3':
-                if T3_obj_name:
-                    window['T3_title2'].update(T3_obj_name.indexed_name(lang))
+            window0 = gui.translate_win0(window0, T1_albedo_note, T2_vis, lang)
+            match values['-currentTab-']:
+                case 'tab1':
+                    if T1_obj_name:
+                        window['T1_title2'].update(T1_obj_name.indexed_name(lang))
+                    T1_displayed_namesDB = db.obj_names_dict(objectsDB, values['T1_tags'], lang)
+                    if T1_obj_name:
+                        T1_index = tuple(T1_displayed_namesDB.keys()).index(T1_obj_name(lang))
+                        window['T1_list'].update(tuple(T1_displayed_namesDB.keys()), set_to_index=T1_index, scroll_to_index=T1_index)
+                    else:
+                        window['T1_list'].update(tuple(T1_displayed_namesDB.keys()))
+                case 'tab3':
+                    if T3_obj_name:
+                        window['T3_title2'].update(T3_obj_name.indexed_name(lang))
             if window1:
                 window1 = gui.translate_win1(window1, lang)
                 T1_T3_fig, T1_T3_fig_canvas_agg = T1_T3_update_plot(
@@ -244,13 +246,15 @@ def launch_window(lang: str):
                     T1_spectrum, T1_estimated = T1_body.get_spectrum('geometric' if values['-brMode1-'] else 'spherical')
                     
                     # Setting of notes
-                    if not values['-brMax-'] and isinstance(T1_body, ReflectingBody) and T1_estimated is None:
-                        window['T1_albedo_note'].update(tr.gui_no_albedo[lang])
-                    else:
-                        if T1_estimated:
-                            window['T1_albedo_note'].update(tr.gui_estimated[lang])
-                        else:
-                            window['T1_albedo_note'].update('')
+                    T1_albedo_note = tr.gui_blank_note
+                    if not values['-brMax-']:
+                        match T1_estimated:
+                            case None:
+                                if isinstance(T1_body, ReflectingBody):
+                                    T1_albedo_note = tr.gui_no_albedo
+                            case True:
+                                T1_albedo_note = tr.gui_estimated
+                    window['T1_albedo_note'].update(T1_albedo_note[lang])
 
                     # Color calculation
                     T1_maximize_br = values['-brMax-'] or T1_estimated is None

@@ -279,7 +279,7 @@ def generate_layout(
     ]
 
 
-def translate_win0(window: sg.Window, T2_vis: int, lang: str):
+def translate_win0(window: sg.Window, T1_albedo_note: dict, T2_vis: int, lang: str):
     window['menu'].update(generate_menu_bar(lang))
     window['tab1'].update(title=tr.gui_tabs[lang][0])
     window['tab2'].update(title=tr.gui_tabs[lang][1])
@@ -298,8 +298,8 @@ def translate_win0(window: sg.Window, T2_vis: int, lang: str):
     window['T1_load'].update(tr.gui_load[lang])
     window['T1_reload'].update(tr.gui_reload[lang])
     window['T1_tagsN'].update(tr.gui_tags[lang])
-    if window['T1_albedo_note'].get() != '':
-        window['T1_albedo_note'].update(tr.gui_estimated[lang])
+    window['T1_tagsN'].update(tr.gui_tags[lang])
+    window['T1_albedo_note'].update(T1_albedo_note[lang])
     window['T1_colorRGB'].update(tr.gui_rgb[lang])
     window['T1_colorHEX'].update(tr.gui_hex[lang])
     window['T1_in_filter'].update(tr.gui_in_filter[lang])
