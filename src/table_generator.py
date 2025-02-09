@@ -277,9 +277,6 @@ def superscript(number: int):
 
 def width(line: str, font: ImageFont.FreeTypeFont):
     """ Alias for measuring line width in pixels """
-    if line[-1] in separators:
-        # workaround to make postprocessing work better
-        line = line[:-1].strip()
     return font.getlength(line)
 
 def check_ref(ref: str, font: ImageFont.FreeTypeFont, maxW: int):
