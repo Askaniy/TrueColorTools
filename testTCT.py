@@ -15,11 +15,11 @@ class TestTCT(unittest.TestCase):
         self.r = get_filter('StilesBurch2deg.r')
         self.rgb = FilterSystem.from_list(('StilesBurch2deg.r', 'StilesBurch2deg.g', 'StilesBurch2deg.b'), name='RGB')
     
-    #def test_mean_nm(self):
-    #    assert_allclose(self.sun.mean_nm(), 857.052056, rtol=0.01)
-    #    assert_allclose(self.vega.mean_nm(), 504.347403, rtol=0.01)
-    #    assert_allclose(self.v.mean_nm(), 551.204273, rtol=0.01) # 551.210 in SVO filter service
-    #    assert_allclose(self.ubv.mean_nm(), [360.507105, 441.301389, 551.204273], rtol=0.01)
+    def test_mean_nm(self):
+        assert_allclose(self.sun.mean_nm(), 857.052056, rtol=0.01)
+        assert_allclose(self.vega.mean_nm(), 510.428463, rtol=0.01)
+        assert_allclose(self.v.mean_nm(), 551.204273, rtol=0.01) # 551.210 in SVO Filter Profile Service
+        assert_allclose(self.ubv.mean_nm(), [360.507105, 441.301389, 551.204273], rtol=0.01)
 
     def test_sd_of_nm(self):
         assert_allclose(self.sun.sd_of_nm(), 468.978657, rtol=0.01)
@@ -41,17 +41,21 @@ class TestTCT(unittest.TestCase):
         self.assertIsInstance(PhotospectralCube.stub() @ Spectrum.stub(), tuple)
         self.assertIsInstance(PhotospectralCube.stub() @ FilterSystem.stub(), PhotospectralCube)
 
-    #def test_convolution(self):
-    #    assert_allclose((self.vega @ self.v)[0], 3.626192e-11, rtol=0.01)
-    #    assert_allclose((self.vega @ self.ubv).br, [4.192070e-11, 6.478653e-11, 3.626192e-11], rtol=0.01)
-    #    assert_allclose((self.vega @ self.v)[0], (self.vega * self.v).integrate(), rtol=0.01)
-    #    assert_allclose((self.vega @ self.ubv).br, (self.vega * self.ubv).integrate(), rtol=0.01)
+    def test_convolution(self):
+        assert_allclose((self.vega @ self.v)[0], (self.vega * self.v).integrate(), rtol=0.01)
+        assert_allclose((self.vega @ self.ubv).br, (self.vega * self.ubv).integrate(), rtol=0.01)
+
+    def test_vega_system_zero_points(self):
+        # 0.25% agreement with SVO Filter Profile Service calculations:
+        assert_allclose((self.vega @ self.v)[0], 3.62708e-11, rtol=0.0025)
+        # 3.5% agreement with SVO Filter Profile Service calculations:
+        assert_allclose((self.vega @ self.ubv).br, [3.96526e-11, 6.13268e-11, 3.62708e-11], rtol=0.035)
     
     def test_addition(self):
         assert_allclose((self.vega + self.vega).br, (self.vega * 2).br, rtol=0.01)
     
     def test_multiplication(self):
-        assert_allclose((self.v * self.vega).mean_nm(), 544.601418, rtol=0.01) # 544.543 in SVO filter service
+        assert_allclose((self.v * self.vega).mean_nm(), 544.601418, rtol=0.01) # 544.543 in SVO Filter Profile Service
         assert_allclose((self.ubv * self.vega).mean_nm(), [366.764603, 435.741381, 544.601418], rtol=0.01)
         assert_allclose((self.vega * 2 @ self.v)[0], (self.vega @ self.v)[0] * 2, rtol=0.01)
         assert_allclose((self.vega * 2 @ self.ubv).br, (self.vega @ self.ubv * 2).br, rtol=0.01)
