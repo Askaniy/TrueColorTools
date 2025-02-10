@@ -353,7 +353,7 @@
         'https://ui.adsabs.harvard.edu/abs/2011Sci...334..487S/abstract'
     ],
     '(21) Lutetia | SMASS, Sierks2011': {
-        tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Rosetta target'],
+        tags: ['featured', 'SMASS', 'Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Rosetta target'],
         file: 'spectra/files/SMASS/a000021.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.19, 0.01]],
         spherical_albedo: ['Generic_Bessell.V', [0.073, 0.002]],
@@ -1822,7 +1822,7 @@
         'https://ui.adsabs.harvard.edu/abs/2005Icar..176..492H/abstract'
     ],
     '(20000) Varuna | MBOSS, Müller2020, Hicks2005': {
-        tags: ['featured', 'MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.906, 0.052], 'V-R': [0.626, 0.035], 'R-I': [0.628, 0.040]},
         calibration_system: 'Vega',
@@ -2480,7 +2480,7 @@
         phase_function: ['Misc_Atlas.orange', 'phase coefficient', {beta: [0.062, 0.014]}],
     },
     '(55565) 2002 AW197 | MBOSS, Vilenius2014': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
+        tags: ['featured', 'MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.915, 0.035], 'V-R': [0.589, 0.030], 'R-I': [0.581, 0.037]},
         calibration_system: 'Vega',
@@ -3977,7 +3977,7 @@
         'DOI: 10.1016/j.icarus.2015.04.036', 'https://arxiv.org/abs/1505.00510'
     ],
     '(174567) Varda | Grundy2015, Souami2020': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
+        tags: ['featured', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.892, 0.028], 'V-I': [1.133, 0.034]},
         calibration_system: 'Vega',
@@ -4084,7 +4084,7 @@
         'https://ui.adsabs.harvard.edu/abs/2017AJ....154...22D/abstract'
     ],
     '(208996) 2003 AZ84 | MBOSS, DiasOliveira2017': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
+        tags: ['featured', 'MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.738, 0.090], 'V-R': [0.430, 0.062], 'R-I': [0.473, 0.105]},
         calibration_system: 'Vega',
@@ -4118,7 +4118,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.08], // assuming radius of 100 km
     },
     '(229762) Gǃkúnǁʼhòmdímà | MBOSS, Ortiz2019': {
-        tags: ['featured', 'MBOSS', 'Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/midsize TNO'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-R': [0.582, 0.035], 'R-I': [0.470, 0.057]},
         calibration_system: 'Vega',
@@ -4226,7 +4226,7 @@
         'https://ui.adsabs.harvard.edu/abs/2023A%26A...678A.167R/abstract'
     ],
     '(307261) 2002 MS4 | MBOSS, Rommel2023, Verbiscer2022': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
+        tags: ['featured', 'MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.690, 0.020], 'V-R': [0.380, 0.020]},
         calibration_system: 'Vega',
@@ -5152,7 +5152,7 @@
         'DOI: 10.3847/1538-3881/aae92a', 'https://iopscience.iop.org/article/10.3847/1538-3881/aae92a'
     ],
     '(532037) 2013 FY27 | Sheppard2018': {
-        tags: ['Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/midsize TNO'],
+        tags: ['featured', 'Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'LCO_IMACS',
         color_indices: {'sloan_g-sloan_r': [0.76, 0.02], 'sloan_r-sloan_i': [0.31, 0.03]},
         calibration_system: 'AB',

@@ -125,7 +125,7 @@
         br_spherical: [0.81, 0.90, 0.89, 0.87],
     },
     'Venus: Synthetic spectrum | VPL, Mallama2017a': {
-        tags: ['featured', 'Solar System', 'planetary body/planet', 'synthetic spectrum'],
+        tags: ['featured', 'Solar System', 'planetary body/planet'],
         file: 'spectra/files/VPL/dayside_venus_toa.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.689],
         is_spherical_albedo: true, // assumption, no clear data source
@@ -162,18 +162,18 @@
         geometric_albedo: ['Generic_Bessell.V', 0.434],
     },
     'Earth: Archean | VPL': { // Arney et al. 2017, "Hazy Archean Earth orbiting the Archean Sun", 1 bar, 1% CO2, 0.2% CH4
-        tags: ['Solar System', 'planetary body/planet', 'Earth/history', 'synthetic spectrum'],
-        file: 'spectra/files/VPL/HAZE_archeansun.pt_toa.txtU',
+        tags: ['Solar System', 'planetary body/planet', 'Earth/history'],
+        file: 'spectra/files/VPL/HAZE_archeansun.pt_toa.txtU', // synthetic spectrum
         is_spherical_albedo: true, // at quadrature?
     },
     'Earth: Proterozoic | VPL': { // Arney et al. 2016, 1 bar, 1% CO2, 0.03% CH4, 1% LAP O2
-        tags: ['Solar System', 'planetary body/planet', 'Earth/history', 'synthetic spectrum'],
-        file: 'spectra/files/VPL/hi_o2_proterozoic_toa.txtU',
+        tags: ['Solar System', 'planetary body/planet', 'Earth/history'],
+        file: 'spectra/files/VPL/hi_o2_proterozoic_toa.txtU', // synthetic spectrum
         is_spherical_albedo: true, // at quadrature?
     },
     'Earth: Synthetic spectrum | VPL': { // Robinson et al. 2011, "True disk-integrated Earth"
-        tags: ['Solar System', 'planetary body/planet', 'Earth/history', 'synthetic spectrum'],
-        file: 'spectra/files/VPL/earth_quadrature_radiance_refl.txtU',
+        tags: ['Solar System', 'planetary body/planet', 'Earth/history'],
+        file: 'spectra/files/VPL/earth_quadrature_radiance_refl.txtU', // synthetic spectrum
         spherical_albedo: [400, 0.2635], // at quadrature
     },
     'Caribbean Sea (Earth) | Gómez2014': {
@@ -285,8 +285,8 @@
         file: 'spectra/files/Madden2018/Mars_McCord1971_Albedo.txtU',
         is_geometric_albedo: true,
     },
-    'Mars | Mallama2017a': {
-        tags: ['Solar System', 'planetary body/planet', 'synthetic spectrum'],
+    'Mars | Mallama2017a': { // synthetic photospectrum
+        tags: ['Solar System', 'planetary body/planet'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
         br_geometric: [0.060, 0.088, 0.170, 0.288, 0.330,
@@ -405,7 +405,7 @@
         'https://ui.adsabs.harvard.edu/abs/2000Icar..147..353S/abstract'
     ],
     'Metis: Trailing side (J XVI) | Thomas1998, Simonelli2000': {
-        tags: ['featured', 'Solar System/Jovian system', 'natural satellite/regular moon', 'traced spectrum'],
+        tags: ['Solar System/Jovian system', 'natural satellite/regular moon', 'traced spectrum'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.38, 1, 0.863, 0.85], // traced from Fig. 6
@@ -441,7 +441,7 @@
         spherical_albedo: ['Galileo_SSI.Clear', [0.022, 0.002]], // Table III, log-scaled
     },
     'Thebe: Trailing side (J XIV) | Thomas1998, Simonelli2000': {
-        tags: ['featured', 'Solar System/Jovian system', 'natural satellite/regular moon', 'traced spectrum'],
+        tags: ['Solar System/Jovian system', 'natural satellite/regular moon', 'traced spectrum'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.6, 1, 1.137, 1.07], // traced from Fig. 6
@@ -700,17 +700,17 @@
         geometric_albedo: ['Generic_Bessell.V', [0.91, 0.07]], // Table 2, p. 325 (Verbiscer2018)
     },
     'Atlas (S XV) | Ciarniello2024, Verbiscer2018': { // phase angle 50°
-        tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         file: 'spectra/files/Ciarniello2024/Atlas.txt',
         geometric_albedo: ['Generic_Bessell.V', [0.82, 0.13]], // Table 2, p. 325 (Verbiscer2018)
     },
     'Prometheus (S XVI) | Ciarniello2024, Verbiscer2018': { // phase angle 50°
-        tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         file: 'spectra/files/Ciarniello2024/Prometheus.txt',
         geometric_albedo: ['Generic_Bessell.V', [1.05, 0.11]], // Table 2, p. 325 (Verbiscer2018)
     },
     'Pandora (S XVII) | Ciarniello2024, Verbiscer2018': { // phase angle 50°
-        tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         file: 'spectra/files/Ciarniello2024/Pandora.txt',
         geometric_albedo: ['Generic_Bessell.V', [0.99, 0.13]], // Table 2, p. 325 (Verbiscer2018)
     },
@@ -720,7 +720,7 @@
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.71, 0.02]],
     },
     'Epimetheus (S XI) | Ciarniello2024, Verbiscer2007': { // phase angle 50°
-        tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         file: 'spectra/files/Ciarniello2024/Epimetheus.txt',
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.73, 0.03]],
     },
@@ -961,7 +961,7 @@
         'DOI: 10.1086/345349', 'https://iopscience.iop.org/article/10.1086/345349'
     ],
     'Iapetus: Leading hemisphere (S VIII) | Blackburn2010': {
-        tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'traced spectrum'],
+        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'traced spectrum'],
         nm: [350, 400, 510, 600, 700, 810, 900, 1000, 1520, 1800, 2020, 2230, 3600],
         br_geometric: [0.031, 0.031, 0.032, 0.051, 0.056, 0.065, 0.059, 0.058, 0.106, 0.131, 0.104, 0.148, 0.055], // traced from Fig. 4
         br_spherical: [0.005, 0.005, 0.008, 0.009, 0.012, 0.023, 0.015, 0.015, 0.033, 0.039, 0.038, 0.047, 0.019], // calculated from phase integrals in Table 2
@@ -973,7 +973,7 @@
         is_albedo: true,
     },
     'Iapetus: Trailing hemisphere (S VIII) | Blackburn2010': {
-        tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'traced spectrum'],
+        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'traced spectrum'],
         nm: [350, 400, 510, 600, 700, 810, 900, 1000, 1520, 1800, 2020, 2230, 3600],
         br_geometric: [0.42, 0.44, 0.46, 0.44, 0.42, 0.42, 0.44, 0.45, 0.25, 0.45, 0.14, 0.43, 0.08], // traced from Fig. 5
         br_spherical: [0.21, 0.23, 0.28, 0.28, 0.27, 0.28, 0.29, 0.30, 0.12, 0.28, 0.07, 0.25, 0.02], // calculated from phase integrals in Table 2
@@ -1087,7 +1087,7 @@
         is_geometric_albedo: true, // at 1° phase angle
     },
     'Portia group | Karkoschka2001': {
-        tags: ['featured', 'Solar System/Uranian system', 'natural satellite/regular moon', 'class'],
+        tags: ['Solar System/Uranian system', 'natural satellite/regular moon', 'class'],
         slope: {start: 570, stop: 1500, power: 0.09},
         geometric_albedo: [550, 0.080],
         spherical_albedo: [550, [0.026, 0.005]],
@@ -1293,7 +1293,7 @@
         'DOI: 10.1016/j.icarus.2006.07.020', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103506002648'
     ],
     'Proteus: −33° East (N VIII) | Pascu2006': { // visit 1, leading side
-        tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
+        tags: ['featured', 'Solar System/Neptunian system', 'natural satellite/regular moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[5.81, 0.02], [5.09, 0.01], [4.36, 0.05]],

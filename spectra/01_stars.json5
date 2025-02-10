@@ -238,7 +238,7 @@
         'DOI: 10.1051/0004-6361/200913870', 'https://www.aanda.org/articles/aa/abs/2010/07/aa13870-09/aa13870-09.html'
     ],
     'PSR B0540–69 | Mignani2010': { // 2007-06-21
-        tags: ['extrasolar', 'star/neutron star'],
+        tags: ['featured', 'extrasolar', 'star/neutron star'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F336W', 'F450W', 'F555W', 'F675W', 'F814W'],
         mag: [[21.77, 0.17], [22.09, 0.05], [22.07, 0.05], [22.18, 0.04], [22.35, 0.03]],
