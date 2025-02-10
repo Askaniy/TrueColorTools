@@ -60,7 +60,7 @@ class ObjectName:
     """
     Class to work with a (celestial object) name.
     It parses the original string (raw_name) and stores the components:
-    - index
+    - index(lang)
     - name(lang)
     - note(lang)
     - info
@@ -75,7 +75,7 @@ class ObjectName:
         The template is `(index) name: note (info) | reference`.
         If no name is specified, a numbered unnamed object will be created.
         """
-        self.index = self._note_en = self.info = self.reference = None
+        self._index_en = self._note_en = self.info = self.reference = None
         if name is None:
             ObjectName.unnamed_count += 1
             self.raw_name = ObjectName.unnamed_count
@@ -87,7 +87,7 @@ class ObjectName:
                 self.reference = reference.strip()
             if name[0] == '(': # minor body index or something else
                 index, name = name.split(')', 1)
-                self.index = index[1:].strip()
+                self._index_en = self.formatting_provisional_designation(index[1:].strip())
             if '(' in name: # stellar spectral type or something else
                 info, name = name[::-1].split('(', 1) # getting the last bracket
                 name = name[::-1] # reversing back
@@ -98,8 +98,15 @@ class ObjectName:
             if '/' in name: # comet name
                 # the last "if" because "/" may encountered in info or notes
                 index, name = name.split('/', 1)
-                self.index = index.strip() + '/'
-            self._name_en = name.strip()
+                self._index_en = index.strip() + '/'
+            self._name_en = self.formatting_provisional_designation(name.strip())
+    
+    def index(self, lang: str = 'en') -> str:
+        """ Returns the index in the specified language """
+        if self._index_en:
+            return self._index_en if lang == 'en' else self.translate(self._index_en, tr.names, lang)
+        else:
+            return None
     
     def name(self, lang: str = 'en') -> str:
         """ Returns the name in the specified language """
@@ -115,18 +122,19 @@ class ObjectName:
     def indexed_name(self, lang: str = 'en') -> str:
         """ Returns the name with the index in the specified language """
         name = self.name(lang)
-        if self.index:
-            if self.index[-1] == '/':
+        index = self.index(lang)
+        if index:
+            if index[-1] == '/':
                 # a comet with a number prefix
-                name = f'{self.index}{name}'
-            elif '/' in self.index:
+                name = f'{index}{name}'
+            elif '/' in index:
                 # a comet without a number prefix
-                name = f'{self.index} ({name})'
+                name = f'{index} ({name})'
             elif name[:4].isnumeric():
                 # index of an unnamed asteroid
-                name = f'({self.index}) {name}'
+                name = f'({index}) {name}'
             else:
-                name = f'{self.index} {name}'
+                name = f'{index} {name}'
         return name
 
     @lru_cache(maxsize=None)
@@ -140,6 +148,23 @@ class ObjectName:
         if self.reference:
             name = f'{name} [{self.reference}]'
         return name
+    
+    @staticmethod
+    def formatting_provisional_designation(string: str):
+        """
+        Checks if the string contains a provisional designation and subscripts the last number
+        (of previous letter alphabetic cycles).
+
+        See https://www.minorplanetcenter.net/iau/info/DesDoc.html
+        """
+        words = string.split()
+        if len(words) > 1:
+            for i, word in enumerate(words):
+                if i+1 != len(words) and word[-4:].isnumeric() and word[-4:-2] in ('19', '20'):
+                    letters = words[i+1]
+                    if 2 < len(letters) < 7 and letters[:2].isalpha() and letters[2:].isnumeric():
+                        words[i+1] = letters[:2] + aux.subscript(letters[2:])
+        return ' '.join(words)
     
     @staticmethod
     def translate(target: str, translations: dict[str, dict[str, str]], lang: str) -> str:

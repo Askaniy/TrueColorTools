@@ -821,3 +821,15 @@ def normalize_string(string: str):
         if char not in illegal_chars:
             result += char
     return result
+
+superscript_digits = '⁰¹²³⁴⁵⁶⁷⁸⁹'
+
+def superscript(number: int):
+    """ Converts a number to be a superscript string """
+    return ''.join([superscript_digits[int(digit)] for digit in str(number)])
+
+subscript_digits = '₀₁₂₃₄₅₆₇₈₉'
+
+def subscript(number: int):
+    """ Converts a number to be a subscript string """
+    return ''.join([subscript_digits[int(digit)] for digit in str(number)])

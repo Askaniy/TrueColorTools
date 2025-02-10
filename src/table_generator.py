@@ -5,7 +5,6 @@ from math import floor, ceil, sqrt
 import numpy as np
 
 from src.core import *
-from src.auxiliary import higher_dim, normalize_string
 import src.database as db
 import src.strings as tr
 
@@ -86,7 +85,7 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
     # Notes calculations
     notes_per_column = len(info_list)
     if notes_flag:
-        notes_numbered = [f'{superscript(note_num+1)} {note}' for note_num, note in enumerate(notes)]
+        notes_numbered = [f'{aux.superscript(note_num+1)} {note}' for note_num, note in enumerate(notes)]
         w_notes = w0 + max(width(note_text, note_font) for note_text in notes_numbered) # notes columns width
         notes_columns_num = (w1 - w0) // w_notes # max possible number of columns
         if notes_per_column * notes_columns_num < len(notes):
@@ -106,8 +105,8 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
     # Creating of background of colored squircles
     arr = np.zeros((h, w, 3))
     shapes = (
-        higher_dim(generate_squircle_contour(r_square+1, rounding_radius, 2), times=3, axis=2),
-        higher_dim(generate_squircle(r_square, rounding_radius), times=3, axis=2)
+        aux.higher_dim(generate_squircle_contour(r_square+1, rounding_radius, 2), times=3, axis=2),
+        aux.higher_dim(generate_squircle(r_square, rounding_radius), times=3, axis=2)
     )
     text_colors = (
         (0, 0, 0),
@@ -218,8 +217,8 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
                 ref_len = width(ref, small_font)
             draw.multiline_text((center_x+r_active, center_y-r_active-workaround_shift), ref, fill=text_color, font=small_font, anchor='ra', align='right', spacing=0)
         
-        if obj_name.index or obj_name.info:
-            index = '\n'.join(filter(None, (obj_name.index, obj_name.info)))
+        if (index := obj_name.index(lang)) or obj_name.info:
+            index = '\n'.join(filter(None, (index, obj_name.info)))
             if '+' in index:
                 index = index.replace('+', '\n+')
             else:
@@ -232,13 +231,13 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
             draw.multiline_text((center_x-r_active, center_y-r_active-workaround_shift), f'{index}', fill=text_color, font=small_font, anchor='la', align='left', spacing=0)
         
         if notes_flag and (note := obj_name.note(lang)):
-            name += superscript(notes.index(note) + 1)
+            name += aux.superscript(notes.index(note) + 1)
 
         splitted = line_splitter(name, object_font, 2*r_active)
         shift = object_size/2 if len(splitted) == 1 else object_size
         draw.multiline_text((center_x-r_active, center_y-shift), '\n'.join(splitted), fill=text_color, font=object_font, spacing=1)
     
-    file_name = f'TCT_{strftime("%Y-%m-%d_%H-%M-%S")}_{normalize_string(tag)}.{extension}'
+    file_name = f'TCT_{strftime("%Y-%m-%d_%H-%M-%S")}_{aux.normalize_string(tag)}.{extension}'
     img.save(f'{folder}/{file_name}')
     print(f'Color table saved as {file_name}')
 
@@ -269,11 +268,6 @@ def generate_squircle_contour(semiaxis: int, rounding_radius: float, width: int,
     return outer_squircle
 
 separators = (' ', ':', '+', '-', '–', '—', '/')
-superscript_digits = '⁰¹²³⁴⁵⁶⁷⁸⁹'
-
-def superscript(number: int):
-    """ Converts a number to be a superscript string """
-    return ''.join([superscript_digits[int(digit)] for digit in str(number)])
 
 def width(line: str, font: ImageFont.FreeTypeFont):
     """ Alias for measuring line width in pixels """
@@ -378,6 +372,6 @@ def recursive_split(lst: list, font: ImageFont.FreeTypeFont, maxW: int):
 def splitter_postprocessing(lst: list):
     """ Removes hyphenation marks before footnotes """
     for i in range(1, len(lst)):
-        if lst[i-1][-1] in separators and lst[i][0] in superscript_digits:
+        if lst[i-1][-1] in separators and lst[i][0] in aux.superscript_digits:
             lst[i-1] = lst[i-1][:-1].strip()
     return lst
