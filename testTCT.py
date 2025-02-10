@@ -163,10 +163,12 @@ class TestTCT(unittest.TestCase):
     def test_name_parsing(self):
         obj_name = ObjectName('HZ43(8) (DA) | CALSPEC')
         assert_equal(obj_name.name(), 'HZ43(8)')
-        assert_equal(obj_name.info, 'DA')
+        assert_equal(obj_name.info(), 'DA')
         obj_name = ObjectName('HD 101452 (A2/3) | CALSPEC')
         assert_equal(obj_name.name(), 'HD 101452')
-        assert_equal(obj_name.info, 'A2/3')
+        assert_equal(obj_name.info(), 'A2/3')
+        obj_name = ObjectName('(C/1900 AA1) 2099 AA9999')
+        assert_equal(obj_name(), 'C/1900 AA₁ (2099 AA₉₉₉₉)')
     
     def test_name_translation(self):
         assert_equal(ObjectName('Iocaste').name('ru'), 'Иокасте') # not "Иоcaste"

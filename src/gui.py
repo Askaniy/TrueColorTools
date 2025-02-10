@@ -298,7 +298,6 @@ def translate_win0(window: sg.Window, T1_albedo_note: dict, T2_vis: int, lang: s
     window['T1_load'].update(tr.gui_load[lang])
     window['T1_reload'].update(tr.gui_reload[lang])
     window['T1_tagsN'].update(tr.gui_tags[lang])
-    window['T1_tagsN'].update(tr.gui_tags[lang])
     window['T1_albedo_note'].update(T1_albedo_note[lang])
     window['T1_colorRGB'].update(tr.gui_rgb[lang])
     window['T1_colorHEX'].update(tr.gui_hex[lang])

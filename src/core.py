@@ -60,10 +60,10 @@ class ObjectName:
     """
     Class to work with a (celestial object) name.
     It parses the original string (raw_name) and stores the components:
-    - index(lang)
+    - index
     - name(lang)
     - note(lang)
-    - info
+    - info(lang)
     - reference
     """
 
@@ -75,7 +75,7 @@ class ObjectName:
         The template is `(index) name: note (info) | reference`.
         If no name is specified, a numbered unnamed object will be created.
         """
-        self._index_en = self._note_en = self.info = self.reference = None
+        self.index = self._note_en = self._info_en = self.reference = None
         if name is None:
             ObjectName.unnamed_count += 1
             self.raw_name = ObjectName.unnamed_count
@@ -87,26 +87,19 @@ class ObjectName:
                 self.reference = reference.strip()
             if name[0] == '(': # minor body index or something else
                 index, name = name.split(')', 1)
-                self._index_en = self.formatting_provisional_designation(index[1:].strip())
+                self.index = self.formatting_provisional_designation(index[1:].strip())
             if '(' in name: # stellar spectral type or something else
                 info, name = name[::-1].split('(', 1) # getting the last bracket
                 name = name[::-1] # reversing back
-                self.info = info[::-1].split(')', 1)[0].strip()
+                self._info_en = self.formatting_provisional_designation(info[::-1].split(')', 1)[0].strip())
             if ':' in name: # note
                 name, note = name.split(':', 1)
-                self._note_en = note.strip()
+                self._note_en = self.formatting_provisional_designation(note.strip())
             if '/' in name: # comet name
                 # the last "if" because "/" may encountered in info or notes
                 index, name = name.split('/', 1)
-                self._index_en = index.strip() + '/'
+                self.index = index.strip() + '/'
             self._name_en = self.formatting_provisional_designation(name.strip())
-    
-    def index(self, lang: str = 'en') -> str:
-        """ Returns the index in the specified language """
-        if self._index_en:
-            return self._index_en if lang == 'en' else self.translate(self._index_en, tr.names, lang)
-        else:
-            return None
     
     def name(self, lang: str = 'en') -> str:
         """ Returns the name in the specified language """
@@ -119,22 +112,28 @@ class ObjectName:
         else:
             return None
     
+    def info(self, lang: str = 'en') -> str:
+        """ Returns the info in the specified language """
+        if self._info_en:
+            return self._info_en if lang == 'en' else self.translate(self._info_en, tr.names, lang)
+        else:
+            return None
+    
     def indexed_name(self, lang: str = 'en') -> str:
         """ Returns the name with the index in the specified language """
         name = self.name(lang)
-        index = self.index(lang)
-        if index:
-            if index[-1] == '/':
+        if self.index:
+            if self.index[-1] == '/':
                 # a comet with a number prefix
-                name = f'{index}{name}'
-            elif '/' in index:
+                name = f'{self.index}{name}'
+            elif '/' in self.index:
                 # a comet without a number prefix
-                name = f'{index} ({name})'
+                name = f'{self.index} ({name})'
             elif name[:4].isnumeric():
                 # index of an unnamed asteroid
-                name = f'({index}) {name}'
+                name = f'({self.index}) {name}'
             else:
-                name = f'{index} {name}'
+                name = f'{self.index} {name}'
         return name
 
     @lru_cache(maxsize=None)
@@ -143,8 +142,8 @@ class ObjectName:
         name = self.indexed_name(lang)
         if self._note_en:
             name = f'{name}: {self.note(lang)}'
-        if self.info:
-            name = f'{name} ({self.info})'
+        if self._info_en:
+            name = f'{name} ({self.info(lang)})'
         if self.reference:
             name = f'{name} [{self.reference}]'
         return name
@@ -202,8 +201,8 @@ class ObjectName:
             output += f'name={self._name_en}, '
         if self._note_en:
             output += f'note={self._note_en}, '
-        if self.info:
-            output += f'info={self.info}, '
+        if self._info_en:
+            output += f'info={self._info_en}, '
         if self.reference:
             output += f'reference={self.reference}, '
         return output[:-2] + ')'

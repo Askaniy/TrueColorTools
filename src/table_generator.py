@@ -217,8 +217,8 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
                 ref_len = width(ref, small_font)
             draw.multiline_text((center_x+r_active, center_y-r_active-workaround_shift), ref, fill=text_color, font=small_font, anchor='ra', align='right', spacing=0)
         
-        if (index := obj_name.index(lang)) or obj_name.info:
-            index = '\n'.join(filter(None, (index, obj_name.info)))
+        if obj_name.index or obj_name.info:
+            index = '\n'.join(filter(None, (obj_name.index, obj_name.info(lang))))
             if '+' in index:
                 index = index.replace('+', '\n+')
             else:
