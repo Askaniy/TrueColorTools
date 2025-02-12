@@ -2,6 +2,7 @@
 
 from typing import Callable
 from time import strftime
+import platform
 import FreeSimpleGUI as sg
 
 import src.strings as tr
@@ -24,6 +25,11 @@ sg.LOOK_AND_FEEL_TABLE['MaterialDark'] = {
     'BUTTON': (text_color, main_color), 'PROGRESS': ('#000000', '#000000'),
     'BORDER': 0, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0
 }
+
+if platform.system() == 'Windows':
+    # to display subscript numbers correctly
+    sg.set_options(font=('Segoe UI', 10))
+
 
 def create_logger(window: sg.Window, key: str) -> Callable:
     """ Creates a function that sends messages to the window main thread """
