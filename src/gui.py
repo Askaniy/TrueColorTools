@@ -74,7 +74,7 @@ def generate_layout(
         T2_num: int,
         lang: str):
     """ Window 0 layout generator, the main window with tabs """
-    title_font = ('arial', 12)
+    title_font = (sg.DEFAULT_FONT[0], 12)
     tags_input_size = 20
     button_size = 30
     browse_size = 10
