@@ -2317,7 +2317,7 @@
         'DOI: 10.1051/0004-6361/201118562', 'https://www.aanda.org/articles/aa/full_html/2012/05/aa18562-11/aa18562-11.html',
         'https://ui.adsabs.harvard.edu/abs/2012A%26A...541A..93M/abstract'
     ],
-    '(47171) Lempo | MBOSS, Mommert2012': {
+    '(47171) Lempo-Hiisi | MBOSS, Mommert2012': {
         tags: ['featured', 'MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.029, 0.047], 'V-R': [0.693, 0.032], 'R-I': [0.619, 0.049]},
@@ -4610,7 +4610,7 @@
         'DOI: 10.1051/0004-6361/200912582', 'https://www.aanda.org/component/article?access=bibcode&bibcode=&bibcode=2009A%2526A...508..457FFUL',
         'https://ui.adsabs.harvard.edu/abs/2009A%26A...508..457F/abstract'
     ],
-    '(455502) 2003 UZ413 | Fornasier2009, Müller2020': {
+    '(455502) 2003 UZ413 | Fornasier2009, FarkasTakacs2020': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
         slope: {start: 440, stop: 930, percent_per_100nm: [5.4, 0.7]}, // mean
         geometric_albedo: ['Generic_Bessell.V', [0.075, +0.076, -0.006]], // fixed η
