@@ -4793,6 +4793,15 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
+    'deLeón2017': [
+        'Visible spectra of (474640) 2004 VN112-2013 RF98 with OSIRIS at the 10.4 m GTC: evidence for binary dissociation near aphelion among the extreme trans-Neptunian objects',
+        'DOI: 10.1093/mnrasl/slx003', 'https://academic.oup.com/mnrasl/article/467/1/L66/2870017',
+        'https://ui.adsabs.harvard.edu/abs/2017MNRAS.467L..66D'
+    ],
+    '(474640) Alicanto | deLeón2017': {
+        tags: ['Solar System', 'minor body/TNO/detached TNO'],
+        slope: {start: 500, stop: 900, percent_per_100nm: [12, 2]}, // mean
+    },
     'Cruikshank2020': [
         'Organic Components of Small Bodies in the Outer Solar System: Some Results of the New Horizons Mission',
         'DOI: 10.3390/life10080126', 'https://www.mdpi.com/2075-1729/10/8/126'
@@ -6115,6 +6124,10 @@
         color_indices: {'g-r': [0.32, 0.09], 'r-i': [0.27, 0.08]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
+    },
+    '2013 RF98 | deLeón2017': {
+        tags: ['Solar System', 'minor body/TNO/detached TNO'],
+        slope: {start: 500, stop: 900, percent_per_100nm: [15, 2]}, // mean
     },
     '2013 RL124 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
