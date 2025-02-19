@@ -3066,7 +3066,7 @@
         'https://ui.adsabs.harvard.edu/abs/2024A%26A...688L...7F/abstract'
     ],
     '(98943) Torifune | SMASS, Fornasier2024b': {
-        tags: ['SMASS', 'Solar System', 'minor body/asteroid/NEO/Apollo', 'spacecraft target/Hayabusa2 target/Hayabusa2# target'],
+        tags: ['SMASS', 'Solar System', 'minor body/asteroid/NEO/Apollo', 'spacecraft target/Hayabusa2 target/Hayabusa2♯ target'],
         file: 'spectra/files/SMASS/au2001CC21.7.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.216, 0.016]],
         phase_function: ['HG1G2', {H: [18.92, 0.20], G_1: 0.2588, G_2: 0.3721}],
@@ -5654,7 +5654,7 @@
         'DOI: 10.21203/rs.3.rs-5821856/v1', 'https://www.researchsquare.com/article/rs-5821856/v1'
     ],
     '1998 KY26 | Ostro1999, SantanaRos2025': {
-        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'spacecraft target/Hayabusa2 target/Hayabusa2# target'],
+        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'spacecraft target/Hayabusa2 target/Hayabusa2♯ target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': [0.083, 0.070], 'V-R': [0.058, 0.055], 'R-I': [0.088, 0.053]}, // solar colors subtracted
         geometric_albedo: ['Generic_Bessell.V', [0.52, 0.08]], // nominal size = 11 m, H = 26.13 ±0.16
@@ -5665,7 +5665,7 @@
         'DOI: 10.48550/arXiv.2501.1715', 'https://arxiv.org/abs/2501.17156v1'
     ],
     '1998 KY26 | Bolin2025, SantanaRos2025': {
-        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'spacecraft target/Hayabusa2 target/Hayabusa2# target'],
+        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'spacecraft target/Hayabusa2 target/Hayabusa2♯ target'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.63, 0.03], 'r-i': [0.15, 0.03], 'i-z': [0.05, 0.04]},
         calibration_system: 'AB',
