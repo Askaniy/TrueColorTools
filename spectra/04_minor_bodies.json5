@@ -2673,6 +2673,29 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.056, 0.006]], // system albedo
     },
+    'Grundy2007': [
+        'The orbit, mass, size, albedo, and density of (65489) Ceto/Phorcys: A tidally-evolved binary Centaur',
+        'DOI: 10.1016/j.icarus.2007.04.004', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103507001546',
+        'https://ui.adsabs.harvard.edu/abs/2007Icar..191..286G/abstract'
+    ],
+    '(65489) Ceto | Grundy2007, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        photometric_system: 'HST_WFPC2-PC',
+        filters: ['F606W', 'F814W'],
+        mag: [[21.44, 0.04], [20.58, 0.04]], // mean, uncertainty from note
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.056, 0.006]], // system albedo
+    },
+    '(65489 I) Phorcys | Grundy2007, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/scattered', 'natural satellite'],
+        photometric_system: 'HST_WFPC2-PC',
+        filters: ['F606W', 'F814W'],
+        mag: [[22.01, 0.04], [21.18, 0.04]], // mean, uncertainty from note
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.056, 0.006]], // system albedo
+    },
     'Daly2023': [
         'Successful kinetic impact into an asteroid for planetary defence',
         'DOI: 10.1038/s41586-023-05810-5', 'https://www.nature.com/articles/s41586-023-05810-5',
