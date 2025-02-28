@@ -4563,6 +4563,13 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
+    '(433873) 2015 BQ311 | Jewitt2015': {
+        tags: ['Solar System', 'minor body/centaur'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.85, 0.03], 'V-R': [0.40, 0.03]},
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
     '(434620) 2005 VD | Hromakina2021a': {
         tags: ['Solar System', 'minor body/centaur/Damocloid'],
         photometric_system: 'Generic_Bessell',
@@ -5556,6 +5563,19 @@
         color_indices: {'g-r': [0.7668, 0.0725], 'r-i': [0.3322, 0.0622], 'i-z': [0.2100, 0.1183]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
+    },
+    'Strauss2021': [
+        'The Sizes and Albedos of Centaurs 2014 YY49 and 2013 NL24 from Stellar Occultation Measurements by RECON',
+        'DOI: 10.3847/PSJ/abd62a', 'https://iopscience.iop.org/article/10.3847/PSJ/abd62a',
+        'https://ui.adsabs.harvard.edu/abs/2021PSJ.....2...22S/abstract'
+    ],
+    '(654190) 2014 YY49 | SsODNet, Strauss2021': {
+        tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/centaur'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.4642, 0.2003], 'r-i': [0.2532, 0.2189]},
+        calibration_system: 'AB', 
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.130, +0.015, -0.024]],
     },
     '(661238) 2004 DA62 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur/Damocloid'],
