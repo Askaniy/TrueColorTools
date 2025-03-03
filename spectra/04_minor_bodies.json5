@@ -3373,21 +3373,21 @@
         'DOI: 10.1016/j.icarus.2012.03.029', 'https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=930b84b086f6470df40a606e9385d9f165e5fd4d',
         'https://ui.adsabs.harvard.edu/abs/2012Icar..219..676S/abstract'
     ],
-    '(120347) Salacia | Stansberry2012': {
+    '(120347) Salacia | Stansberry2012, Brown2017': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-I': [0.87, 0.01]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.0357, +0.0103, -0.0072]],
+        geometric_albedo: ['Generic_Bessell.V', [0.042, 0.004]],
     },
-    '(120347 I) Actaea | Stansberry2012': {
+    '(120347 I) Actaea | Stansberry2012, Brown2017': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-I': [0.89, 0.02]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.0357, +0.0103, -0.0072]],
+        geometric_albedo: ['Generic_Bessell.V', [0.042, 0.004]],
     },
     '(120348) 2004 TY364 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
