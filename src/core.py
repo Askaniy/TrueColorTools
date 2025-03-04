@@ -1439,7 +1439,7 @@ class Hapke(_PhotometricModel):
         r0 = (1 - gamma) / (1 + gamma) # bihemispherical  reflectance
         # geometric albedo:
         C = 1 - r0 * (0.048 * theta + 0.0041 * theta**2) - r0**2 * (0.33 * theta + 0.0049 * theta**2)
-        self.geometric_albedo = w / 8 * ((1 + bo) * aux.henyey_greenstein(0, b, c) - 1) + C * 0.5 * r0 * (1 + r0 / 3)
+        self.geometric_albedo = w / 8 * ((1 + bo) * aux.henyey_greenstein(0, b, c) - 1) + C * 0.5 * r0 * (1 + r0 / 3), None
         # phase function:
         def phase_function(alpha):
             # without this check the output would be nan
@@ -1453,7 +1453,7 @@ class Hapke(_PhotometricModel):
             phi[~mask] = w / 8 * ((1 + B) * aux.henyey_greenstein(alpha, b, c) - 1) + 0.5 * r0 * (1 - r0)
             phi[~mask] *= 1 + np.sin(alpha2) * np.tan(alpha2) * np.log(np.tan(0.5 * alpha2))
             phi[~mask] += 2/3 * r0**2 * (np.sin(alpha) + (np.pi - alpha) * np.cos(alpha)) / np.pi
-            phi[~mask] *= aux.hapke_k(alpha, theta) * phi[~mask] / self.geometric_albedo
+            phi[~mask] *= aux.hapke_k(alpha, theta) * phi[~mask] / self.geometric_albedo[0]
             return phi
         self.phase_function = phase_function
         # Numerical calculation of spherical albedo
