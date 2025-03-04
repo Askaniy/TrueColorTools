@@ -1087,7 +1087,7 @@
         br: [0.107, 0.104, 0.105, 0.123],
         sd: 0.010,
         is_geometric_albedo: true, // at 1° phase angle
-        spherical_albedo: [550, [0.026, 0.005]],  // Portia group
+        spherical_albedo: [550, [0.026, 0.005]], // Portia group
     },
     'Portia group | Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'natural satellite/regular moon', 'class'],
