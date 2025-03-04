@@ -481,7 +481,7 @@
     'Io: Trailing hemisphere (J I) | Clark1980a, Domingue1998': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Clark1980/Io.txtU', // figure 10
-        geometric_albedo: [Generic_Bessel.V, [0.817, 4.57]], // 0.55 µm, V and Stromgren y filter data were combined
+        geometric_albedo: ['Generic_Bessel.V', [0.817, 4.57]], // 0.55 µm, V and Stromgren y filter data were combined
         phase_integral: 0.77, // 0.55 µm, "must be taken cautiously since there are no large phase angle observations to adequately constrain the Hapke model on which theis value is based"
     },
     // Europa
