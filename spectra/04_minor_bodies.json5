@@ -3353,12 +3353,12 @@
         color_indices: {'B-V': [0.664, 0.098], 'V-R': [0.403, 0.061], 'R-I': [0.433, 0.118]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.042, 0.004]],
+        geometric_albedo: ['Generic_Bessell.V', [0.042, 0.004]], // system albedo
     },
     '(120347) Salacia | PinillaAlonso2008, Brown2017': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         slope: {start: 520, stop: 860, percent_per_100nm: [12.6, 2.0]},
-        geometric_albedo: ['Generic_Bessell.V', [0.042, 0.004]],
+        geometric_albedo: ['Generic_Bessell.V', [0.042, 0.004]], // system albedo
     },
     '(120347) Salacia | Boehnhardt2014, Brown2017': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
@@ -3366,28 +3366,28 @@
         color_indices: {'B-V': [0.82, 0.02], 'V-R': [0.47, 0.02], 'R-I': [0.39, 0.02]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.042, 0.004]],
+        geometric_albedo: ['Generic_Bessell.V', [0.042, 0.004]], // system albedo
     },
     'Stansberry2012': [
         'Physical properties of trans-neptunian binaries (120347) Salacia-Actaea and (42355) Typhon-Echidna',
         'DOI: 10.1016/j.icarus.2012.03.029', 'https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=930b84b086f6470df40a606e9385d9f165e5fd4d',
         'https://ui.adsabs.harvard.edu/abs/2012Icar..219..676S/abstract'
     ],
-    '(120347) Salacia | Stansberry2012': {
+    '(120347) Salacia | Stansberry2012, Brown2017': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-I': [0.87, 0.01]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.0357, +0.0103, -0.0072]],
+        geometric_albedo: ['Generic_Bessell.V', [0.042, 0.004]], // system albedo
     },
-    '(120347 I) Actaea | Stansberry2012': {
+    '(120347 I) Actaea | Stansberry2012, Brown2017': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-I': [0.89, 0.02]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.0357, +0.0103, -0.0072]],
+        geometric_albedo: ['Generic_Bessell.V', [0.042, 0.004]], // system albedo
     },
     '(120348) 2004 TY364 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -5021,7 +5021,7 @@
         color_indices: {'g-r': [0.6035, 0.2316], 'r-i': [0.2504, 0.2297]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.051, 0.017]],
+        geometric_albedo: ['Generic_Bessell.V', [0.051, 0.017]], // system albedo
     },
     '(523785) 2015 CM3 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],

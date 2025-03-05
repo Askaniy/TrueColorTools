@@ -478,9 +478,11 @@
         file: 'spectra/files/Madden2018/Io_Fanale1974_Albedo.txtU',
         is_geometric_albedo: true,
     },
-    'Io: Trailing hemisphere (J I) | Clark1980a': {
+    'Io: Trailing hemisphere (J I) | Clark1980a, Domingue1998': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Clark1980/Io.txtU', // figure 10
+        geometric_albedo: ['Generic_Bessel.V', [0.817, 4.57]], // 0.55 µm, V and Stromgren y filter data were combined
+        phase_integral: 0.77, // 0.55 µm, "must be taken cautiously since there are no large phase angle observations to adequately constrain the Hapke model on which theis value is based"
     },
     // Europa
     'Europa: Trailing hemisphere (J II) | Clark1980a, Madden2018': {
@@ -1078,13 +1080,14 @@
         is_geometric_albedo: true, // at 1° phase angle
     },
     // Uranian small inner satellites
-    'Portia (U XII) | Karkoschka1997': {
+    'Portia (U XII) | Karkoschka1997, Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'natural satellite/regular moon'],
         //         620 nm                   670 nm                730 nm                   910 nm
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-WF.FQCH4N_B', 'HST_WFPC2-PC.F850LP'],
         br: [0.107, 0.104, 0.105, 0.123],
         sd: 0.010,
         is_geometric_albedo: true, // at 1° phase angle
+        spherical_albedo: [550, [0.026, 0.005]], // Portia group
     },
     'Portia group | Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'natural satellite/regular moon', 'class'],
