@@ -3675,6 +3675,15 @@
         geometric_albedo: ['Generic_Bessell.V', [0.66, 0.02]],
         phase_integral: [0.44, 0.03], // system
     },
+   '(136108) Haumea | Brown2010, Dunham2019, Verbiscer2022': {
+        tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO', 'traced spectrum'],
+        photometric_system: 'HST_WFPC2-PC',
+        color_indices: {'F606W-F814W': [0.55, 0.04]},
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.66, 0.02]],
+        phase_integral: [0.44, 0.03], // system
+    },
     'FernandezValenzuela2024': [
         'Deciphering satellite formation in the trans-Neptunian region: the case of Weywot',
         'https://www.youtube.com/watch?v=n5FFLJi2I8U', 'https://tno2024.org/relation/abstract/90'
