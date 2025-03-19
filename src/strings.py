@@ -564,6 +564,7 @@ names = {
     'Suhail': {'ru': 'Сухайль'},
     'Betelgeuse': {'ru': 'Бетельгейзе', 'de': 'Beteigeuze'},
     'Gacrux': {'ru': 'Гакрукс'},
+    'Mira': {'ru': 'Мира'},
     'Proxima Centauri': {'ru': 'Проксима Центавра'},
     'Vela pulsar': {'ru': 'Пульсар в Парусах', 'de': 'Vela-Pulsar'},
     # Stars from the CALSPEC add-on

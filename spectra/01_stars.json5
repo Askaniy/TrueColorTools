@@ -24,6 +24,11 @@
         'The full spectral radiative properties of Proxima Centauri',
         'https://www.aanda.org/articles/aa/full_html/2017/07/aa30582-17/aa30582-17.html'
     ],
+    'Boyd2018': [
+        'Spectra of Mira at maximum and minimum',
+        'https://britastro.org/vss/vsscads/VSSC175.pdf#page=15',
+        'https://ui.adsabs.harvard.edu/abs/2018BAAVC.175...16B/abstract'
+    ],
 
     'ξ Orionis (O9.7b+O9 III+B0 II-IV) | Krisciunas2017': {
         tags: ['extrasolar', 'star'],
@@ -188,6 +193,16 @@
     'LHS 375 (esdM5) | Reid2000': {
         tags: ['extrasolar', 'star/subdwarf'],
         file: 'spectra/files/Reid2000/LHS375.txt',
+        is_emissive: true,
+    },
+    'Mira: Maximum (M5e) | Boyd2018': {
+        tags: ['extrasolar', 'star'],
+        file: 'spectra/files/Boyd2018/mira_maximum.txtA',
+        is_emissive: true,
+    },
+    'Mira: Minimum (M5e) | Boyd2018': {
+        tags: ['extrasolar', 'star'],
+        file: 'spectra/files/Boyd2018/mira_minimum.txtA',
         is_emissive: true,
     },
     'Proxima Centauri (M5.5 Ve) | Ribas2017': {
