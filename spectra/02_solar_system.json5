@@ -177,7 +177,7 @@
         spherical_albedo: [400, 0.2635], // at quadrature
     },
     'Caribbean Sea (Earth) | Gómez2014': {
-        tags: ['Solar System', 'Earth/surface feature', 'traced spectrum'],
+        tags: ['Solar System', 'Earth/surface feature',],
         nm: [380, 400, 425, 450, 475, 500, 520, 550, 600, 650, 700],
         br: [0.048, 0.047, 0.043, 0.037, 0.032, 0.02, 0.01, 0.007, 0.004, 0.002, 0.001],
         is_albedo: true,
@@ -360,7 +360,7 @@
         'https://ui.adsabs.harvard.edu/abs/1996Icar..123..536T/abstract'
     ],
     'Deimos (M II) | Fraeman2013, Pang1980, Thomas1996': {
-        tags: ['featured', 'Solar System', 'natural satellite/regular moon', 'traced spectrum'],
+        tags: ['featured', 'Solar System', 'natural satellite/regular moon',],
         nm: [250, 300, 350, 400, 450, 500, 550, 600, 700, 750, 800],
         br: [0.04, 0.05, 0.051, 0.05, 0.049, 0.053, 0.055, 0.058, 0.062, 0.067, 0.069],
         geometric_albedo: [540, [0.068, 0.007]],
@@ -387,7 +387,7 @@
         'https://ui.adsabs.harvard.edu/abs/1987Icar...69..458S/abstract'
     ],
     'Rings of Jupiter: Main ring | Showalter1987': {
-        tags: ['Solar System/Jovian system', 'ring', 'traced spectrum'],
+        tags: ['Solar System/Jovian system', 'ring',],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Clear', 'Green', 'Orange'],
         br: [0.86, 1.00, 1.53, 1.67], // traced from Fig. 4.11
@@ -405,7 +405,7 @@
         'https://ui.adsabs.harvard.edu/abs/2000Icar..147..353S/abstract'
     ],
     'Metis: Trailing side (J XVI) | Thomas1998, Simonelli2000': {
-        tags: ['Solar System/Jovian system', 'natural satellite/regular moon', 'traced spectrum'],
+        tags: ['Solar System/Jovian system', 'natural satellite/regular moon',],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.38, 1, 0.863, 0.85], // traced from Fig. 6
@@ -414,7 +414,7 @@
         spherical_albedo: ['Galileo_SSI.Clear', [0.027, 0.002]], // Table III, log-scaled
     },
     'Amalthea: Leading side (J V) | Thomas1998, Simonelli2000': {
-        tags: ['Solar System/Jovian system', 'natural satellite/regular moon', 'traced spectrum'],
+        tags: ['Solar System/Jovian system', 'natural satellite/regular moon',],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '7560A'],
         br: [0.54, 1, 1.14], // traced from Fig. 6
@@ -423,7 +423,7 @@
         spherical_albedo: ['Galileo_SSI.Clear', [0.036, 0.004]], // Table III, log-scaled
     },
     'Amalthea: Trailing side (J V) | Thomas1998, Simonelli2000': {
-        tags: ['featured', 'Solar System/Jovian system', 'natural satellite/regular moon', 'traced spectrum'],
+        tags: ['featured', 'Solar System/Jovian system', 'natural satellite/regular moon',],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.47, 1, 1.225, 1], // traced from Fig. 6
@@ -432,7 +432,7 @@
         spherical_albedo: ['Galileo_SSI.Clear', [0.029, 0.003]], // Table III, log-scaled
     },
     'Thebe: Leading side (J XIV) | Thomas1998, Simonelli2000': {
-        tags: ['Solar System/Jovian system', 'natural satellite/regular moon', 'traced spectrum'],
+        tags: ['Solar System/Jovian system', 'natural satellite/regular moon',],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A'],
         br: [0.7125, 1, 1.137], // traced from Fig. 6
@@ -441,7 +441,7 @@
         spherical_albedo: ['Galileo_SSI.Clear', [0.022, 0.002]], // Table III, log-scaled
     },
     'Thebe: Trailing side (J XIV) | Thomas1998, Simonelli2000': {
-        tags: ['Solar System/Jovian system', 'natural satellite/regular moon', 'traced spectrum'],
+        tags: ['Solar System/Jovian system', 'natural satellite/regular moon',],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.6, 1, 1.137, 1.07], // traced from Fig. 6
@@ -465,7 +465,7 @@
         'DOI: 10.1006/icar.1998.5940', 'https://www.sciencedirect.com/science/article/pii/S0019103598959401'
     ],
     'Io (J I) | Spencer1995, Domingue1998': {
-        tags: ['featured', 'Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'traced spectrum'],
+        tags: ['featured', 'Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon',],
         nm_range: {start: 320, stop: 780, step: 20},
         br_geometric: [
             0.11, 0.12, 0.14, 0.18, 0.26, 0.36, 0.47, 0.56, 0.64, 0.71, 0.73, 0.74,
@@ -963,19 +963,19 @@
         'DOI: 10.1086/345349', 'https://iopscience.iop.org/article/10.1086/345349'
     ],
     'Iapetus: Leading hemisphere (S VIII) | Blackburn2010': {
-        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'traced spectrum'],
+        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon',],
         nm: [350, 400, 510, 600, 700, 810, 900, 1000, 1520, 1800, 2020, 2230, 3600],
         br_geometric: [0.031, 0.031, 0.032, 0.051, 0.056, 0.065, 0.059, 0.058, 0.106, 0.131, 0.104, 0.148, 0.055], // traced from Fig. 4
         br_spherical: [0.005, 0.005, 0.008, 0.009, 0.012, 0.023, 0.015, 0.015, 0.033, 0.039, 0.038, 0.047, 0.019], // calculated from phase integrals in Table 2
     },
     'Iapetus: Leading hemisphere (S VIII) | Gudipati2003': {
-        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'traced spectrum'],
+        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon',],
         nm: [330, 350, 380, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850],
         br: [0.047, 0.051, 0.058, 0.063, 0.067, 0.071, 0.080, 0.087, 0.090, 0.093, 0.099, 0.102, 0.102],
         is_albedo: true,
     },
     'Iapetus: Trailing hemisphere (S VIII) | Blackburn2010': {
-        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'traced spectrum'],
+        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon',],
         nm: [350, 400, 510, 600, 700, 810, 900, 1000, 1520, 1800, 2020, 2230, 3600],
         br_geometric: [0.42, 0.44, 0.46, 0.44, 0.42, 0.42, 0.44, 0.45, 0.25, 0.45, 0.14, 0.43, 0.08], // traced from Fig. 5
         br_spherical: [0.21, 0.23, 0.28, 0.28, 0.27, 0.28, 0.29, 0.30, 0.12, 0.28, 0.07, 0.25, 0.02], // calculated from phase integrals in Table 2
@@ -1328,7 +1328,7 @@
         'DOI: 10.1006/icar.1999.6224', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103599962243'
     ],
     'Triton (N I) | Tryka1999, Verbiscer2022': {
-        tags: ['featured', 'Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'traced spectrum'],
+        tags: ['featured', 'Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon',],
         nm_range: {start: 300, stop: 900, step: 100},
         br_geometric: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
         phase_integral: [0.94, 0.04],
