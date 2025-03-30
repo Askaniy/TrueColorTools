@@ -496,7 +496,7 @@
         'DOI: 10.1006/icar.1996.0045', 'https://www.sciencedirect.com/science/article/pii/S0019103596900457'
     ],
     '(243) Ida: Bright areas | Veverka1996, Helfenstein1996': {
-        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Galileo target',],
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Galileo target'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.756, 0.892, 0.978, 1.000, 0.936, 0.917],
@@ -504,7 +504,7 @@
         geometric_albedo: ['Galileo_SSI.Green', [0.217, 0.026]], // normal albedo of Terrain B, Fig. 7
     },
     '(243) Ida: Dark areas | Veverka1996, Helfenstein1996': {
-        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Galileo target',],
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Galileo target'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.690, 0.856, 0.956, 1.000, 0.979, 0.965],
@@ -512,7 +512,7 @@
         geometric_albedo: ['Galileo_SSI.Green', [0.204, 0.016]], // normal albedo of Terrain A, Fig. 7
     },
     '(243 I) Dactyl | Veverka1996, Helfenstein1996': {
-        tags: ['Solar System', 'minor body/asteroid/main belt', 'natural satellite', 'spacecraft target/Galileo target',],
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'natural satellite', 'spacecraft target/Galileo target'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.700, 0.894, 0.992, 1.000, 0.909, 0.882],
@@ -2414,7 +2414,7 @@
         'https://ui.adsabs.harvard.edu/abs/2020Icar..33813463S/abstract'
     ],
     '(52246) Donaldjohanson | SouzaFeliciano2020, SsODNet': {
-        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Lucy target',],
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Lucy target'],
         nm_range: {start: 500, stop: 900, step: 50},
         br: [0.922, 1.000, 1.027, 1.044, 1.029, 1.030, 1.023, 1.001, 0.985], // traced from Fig. 2 (fit)
         geometric_albedo: ['Generic_Bessell.V', [0.0622, 0.0115]],
@@ -3573,7 +3573,7 @@
         is_spherical_albedo: true,
     },
     '(134340 I) Charon | Protopapa2020, Verbiscer2022': {
-        tags: ['featured', 'Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'Charon', 'spacecraft target/New Horizons target',],
+        tags: ['featured', 'Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'Charon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR', 'CH4'],
         br: [0.292, 0.288, 0.288, 0.290], // traced from Fig. 11
@@ -3601,7 +3601,7 @@
         'https://ui.adsabs.harvard.edu/abs/2017Icar..287..207B/abstract'
     ],
     '(134340 I) Charon: 50° − 60° N | Grundy2016, Buratti2017': {
-        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'Charon', 'spacecraft target/New Horizons target',],
+        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'Charon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.799, 0.853, 0.920],
@@ -3610,7 +3610,7 @@
         spherical_albedo: ['NewHorizons_LORRI.Pan', 0.27], // derived from Fig. 6
     },
     '(134340 I) Charon: 70° − 80° N | Grundy2016, Buratti2017': {
-        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'Charon', 'spacecraft target/New Horizons target',],
+        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'Charon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.426, 0.539, 0.720],
@@ -3717,9 +3717,9 @@
         phase_integral: [0.44, 0.03], // system
     },
    '(136108) Haumea | Brown2010, Dunham2019, Verbiscer2022': {
-        tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO',],
+        tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         photometric_system: 'HST_WFPC2-PC',
-        color_indices: {'F606W-F814W': [0.55, 0.04]},
+        color_indices: {'F606W-F814W': [0.55, 0.04]}, // Extracted from Fig. 2
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.66, 0.02]],
@@ -3730,18 +3730,18 @@
         'https://www.youtube.com/watch?v=n5FFLJi2I8U', 'https://tno2024.org/relation/abstract/90'
     ],
     '(136108 I) Hi‘iaka | Brown2010, FernandezValenzuela2024, Verbiscer2022': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite',],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite'],
         photometric_system: 'HST_WFPC2-PC',
-        color_indices: {'F606W-F814W': [0.45, 0.14]},
+        color_indices: {'F606W-F814W': [0.45, 0.14]}, // Extracted from Fig. 2
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.76, 0.15]],
         spherical_albedo: ['Generic_Bessell.V', [0.33, 0.03]], // system albedo
     },
     '(136108 II) Namaka | Brown2010, Verbiscer2022': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite',],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite'],
         photometric_system: 'HST_WFPC2-PC',
-        color_indices: {'F606W-F814W': [0.43, 0.47]}, // uncertainty may be incorrect
+        color_indices: {'F606W-F814W': [0.43, 0.47]}, // Extracted from Fig. 2, uncertainty may be incorrect
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.75, 0.02]], // system albedo
@@ -3760,7 +3760,7 @@
         'https://ui.adsabs.harvard.edu/abs/2011Natur.478..493S/abstract'
     ],
     '(136199) Eris | Lorenzi2016, Sicardy2011, Verbiscer2022': {
-        tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO',],
+        tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO'],
         nm: [
             417.357, 479.507, 532.699, 585.89, 601.008, 604.367, 622.844, 637.962, 653.08, 656.439,
             659.239, 673.236, 679.955, 692.273, 702.912, 712.43, 734.267, 740.426, 747.704, 750.504,
@@ -3808,7 +3808,7 @@
         spherical_albedo: ['Generic_Bessell.V', [0.74, 0.06]],
     },
     '(136472) Makemake | Lorenzi2016, Hromakina2019, Verbiscer2022': {
-        tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO',],
+        tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         nm: [
             417.357, 466.069, 588.13, 601.568, 609.406, 631.243, 642.441, 649.72, 656.439, 664.278,
             672.116, 679.955, 691.153, 706.271, 715.789, 723.628, 729.787, 740.426, 744.345, 751.064,
