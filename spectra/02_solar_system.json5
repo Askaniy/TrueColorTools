@@ -1383,7 +1383,7 @@
         'DOI: 10.1006/icar.1999.6224', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103599962243'
     ],
     'Triton (N I) | Tryka1999, Verbiscer2022': {
-        tags: ['featured', 'Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon',],
+        tags: ['featured', 'Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
         nm_range: {start: 300, stop: 900, step: 100},
         br_geometric: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
         phase_integral: [0.94, 0.04],
@@ -1439,7 +1439,7 @@
         phase_integral: [1.429, 0.001], // Green filter
     },
     'Triton: −19° West (N I) | Pascu2006, Verbiscer2022': { // visit 1, leading side
-        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon'],
+        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[-0.646, 0.009], [-1.343, 0.002], [-2.119, 0.006]],
@@ -1449,7 +1449,7 @@
         phase_integral: [0.94, 0.04],
     },
     'Triton: −3° West (N I) | Pascu2006, Verbiscer2022': { // visit 2, leading side
-        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon'],
+        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[-0.637, 0.014], [-1.332, 0.001], [-2.088, 0.004]],
@@ -1459,7 +1459,7 @@
         phase_integral: [0.94, 0.04],
     },
     'Triton: −10° East (N I) | Pascu2006, Verbiscer2022': { // visit 3, trailing side
-        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon'],
+        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[-0.556, 0.005], [-1.255, 0.004], [-2.031, 0.006]],
