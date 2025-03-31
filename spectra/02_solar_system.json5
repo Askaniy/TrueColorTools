@@ -4,7 +4,7 @@
         'Views from EPOXI: colors in our Solar system as an analog for extrasolar planets',
         'DOI: 10.1088/0004-637X/729/2/130', 'https://iopscience.iop.org/article/10.1088/0004-637X/729/2/130'
     ],
-    'Dyudina2016': [
+    'Dyudina2016b': [
         'Reflected Light Curves, Spherical and Bond Albedos of Jupiter- and Saturn-like Exoplanets',
         'DOI: 10.3847/0004-637X/822/2/76', 'https://iopscience.iop.org/article/10.3847/0004-637X/822/2/76',
         'https://ui.adsabs.harvard.edu/abs/2016ApJ...822...76D/abstract'
@@ -177,7 +177,7 @@
         spherical_albedo: [400, 0.2635], // at quadrature
     },
     'Caribbean Sea (Earth) | Gómez2014': {
-        tags: ['Solar System', 'Earth/surface feature',],
+        tags: ['Solar System', 'Earth/surface feature'],
         nm: [380, 400, 425, 450, 475, 500, 520, 550, 600, 650, 700],
         br: [0.048, 0.047, 0.043, 0.037, 0.032, 0.02, 0.01, 0.007, 0.004, 0.002, 0.001],
         is_albedo: true,
@@ -360,7 +360,7 @@
         'https://ui.adsabs.harvard.edu/abs/1996Icar..123..536T/abstract'
     ],
     'Deimos (M II) | Fraeman2013, Pang1980, Thomas1996': {
-        tags: ['featured', 'Solar System', 'natural satellite/regular moon',],
+        tags: ['featured', 'Solar System', 'natural satellite/regular moon'],
         nm: [250, 300, 350, 400, 450, 500, 550, 600, 700, 750, 800],
         br: [0.04, 0.05, 0.051, 0.05, 0.049, 0.053, 0.055, 0.058, 0.062, 0.067, 0.069],
         geometric_albedo: [540, [0.068, 0.007]],
@@ -368,17 +368,30 @@
     },
 
     // Jovian system
-    'Jupiter | Karkoschka1998, Dyudina2016': { // phase angle 6.8°
+    'Jupiter | Karkoschka1998, Dyudina2016b': { // phase angle 6.8°
         tags: ['featured', 'Solar System/Jovian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Jupiter1995.txt',
         is_geometric_albedo: true,
         spherical_albedo: ['Cassini_ISS_NAC.CB3', 0.57], // Table 4
     },
-    'Jupiter | Karkoschka1994, Dyudina2016': { // phase angle 9.8°
+    'Jupiter | Karkoschka1994, Dyudina2016b': { // phase angle 9.8°
         tags: ['Solar System/Jovian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Jupiter1993.txt',
         is_geometric_albedo: true,
         spherical_albedo: ['Cassini_ISS_NAC.CB3', 0.57], // Table 4
+    },
+    'Simon2018': [
+        'Historical and Contemporary Trends in the Size, Drift, and Color of Jupiter’s Great Red Spot',
+        'DOI: 10.3847/1538-3881/aaae01', 'https://iopscience.iop.org/article/10.3847/1538-3881/aaae01',
+        'https://ui.adsabs.harvard.edu/abs/2018AJ....155..151S/abstract'
+    ],
+    'Jupiter: Great Red Spot | Simon2018': {
+        tags: ['Solar System/Jovian system', 'planetary body/planet'],
+        photometric_system: 'HST_WFC3_UVIS1',
+        filters: ['F275W', 'F343N', 'F395N', 'F467M', 'F502N', 'F547M', 'F631N', 'F658N', 'FQ889N'],
+        br: [0.190, 0.120, 0.157, 0.321, 0.398, 0.515, 0.721, 0.752, 0.168], // Apr. 17, uncertainties are smaller than the symbol size
+        is_reflecting_sunlight: false,
+        is_albedo: true, // I/F
     },
     // Jovian rings
     'Showalter1987': [
@@ -387,7 +400,7 @@
         'https://ui.adsabs.harvard.edu/abs/1987Icar...69..458S/abstract'
     ],
     'Rings of Jupiter: Main ring | Showalter1987': {
-        tags: ['Solar System/Jovian system', 'ring',],
+        tags: ['Solar System/Jovian system', 'ring'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Clear', 'Green', 'Orange'],
         br: [0.86, 1.00, 1.53, 1.67], // traced from Fig. 4.11
@@ -405,7 +418,7 @@
         'https://ui.adsabs.harvard.edu/abs/2000Icar..147..353S/abstract'
     ],
     'Metis: Trailing side (J XVI) | Thomas1998, Simonelli2000': {
-        tags: ['Solar System/Jovian system', 'natural satellite/regular moon',],
+        tags: ['Solar System/Jovian system', 'natural satellite/regular moon'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.38, 1, 0.863, 0.85], // traced from Fig. 6
@@ -414,7 +427,7 @@
         spherical_albedo: ['Galileo_SSI.Clear', [0.027, 0.002]], // Table III, log-scaled
     },
     'Amalthea: Leading side (J V) | Thomas1998, Simonelli2000': {
-        tags: ['Solar System/Jovian system', 'natural satellite/regular moon',],
+        tags: ['Solar System/Jovian system', 'natural satellite/regular moon'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '7560A'],
         br: [0.54, 1, 1.14], // traced from Fig. 6
@@ -423,7 +436,7 @@
         spherical_albedo: ['Galileo_SSI.Clear', [0.036, 0.004]], // Table III, log-scaled
     },
     'Amalthea: Trailing side (J V) | Thomas1998, Simonelli2000': {
-        tags: ['featured', 'Solar System/Jovian system', 'natural satellite/regular moon',],
+        tags: ['featured', 'Solar System/Jovian system', 'natural satellite/regular moon'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.47, 1, 1.225, 1], // traced from Fig. 6
@@ -432,7 +445,7 @@
         spherical_albedo: ['Galileo_SSI.Clear', [0.029, 0.003]], // Table III, log-scaled
     },
     'Thebe: Leading side (J XIV) | Thomas1998, Simonelli2000': {
-        tags: ['Solar System/Jovian system', 'natural satellite/regular moon',],
+        tags: ['Solar System/Jovian system', 'natural satellite/regular moon'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A'],
         br: [0.7125, 1, 1.137], // traced from Fig. 6
@@ -441,7 +454,7 @@
         spherical_albedo: ['Galileo_SSI.Clear', [0.022, 0.002]], // Table III, log-scaled
     },
     'Thebe: Trailing side (J XIV) | Thomas1998, Simonelli2000': {
-        tags: ['Solar System/Jovian system', 'natural satellite/regular moon',],
+        tags: ['Solar System/Jovian system', 'natural satellite/regular moon'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         br: [0.6, 1, 1.137, 1.07], // traced from Fig. 6
@@ -465,7 +478,7 @@
         'DOI: 10.1006/icar.1998.5940', 'https://www.sciencedirect.com/science/article/pii/S0019103598959401'
     ],
     'Io (J I) | Spencer1995, Domingue1998': {
-        tags: ['featured', 'Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon',],
+        tags: ['featured', 'Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         nm_range: {start: 320, stop: 780, step: 20},
         br_geometric: [
             0.11, 0.12, 0.14, 0.18, 0.26, 0.36, 0.47, 0.56, 0.64, 0.71, 0.73, 0.74,
@@ -519,17 +532,47 @@
     },
 
     // Saturnian system
-    'Saturn | Karkoschka1998, Dyudina2016': { // phase angle 5.7°, without rings
+    'Saturn | Karkoschka1998, Dyudina2016b': { // phase angle 5.7°, without rings
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Saturn1995.txt',
         is_geometric_albedo: true,
         phase_integral: [1.4, 0.1], // Section 4
     },
-    'Saturn | Karkoschka1994, Dyudina2016': { // phase angle 2.7°
+    'Saturn | Karkoschka1994, Dyudina2016b': { // phase angle 2.7°
         tags: ['Solar System/Saturnian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Saturn1993.txt',
         is_geometric_albedo: true,
         phase_integral: [1.4, 0.1], // Section 4
+    },
+    // Saturnian aurorae
+    'Dyudina2016a': [
+        'Saturn’s aurora observed by the Cassini camera at visible wavelengths',
+        'DOI: 10.1016/j.icarus.2015.05.022', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103515002328',
+        'https://ui.adsabs.harvard.edu/abs/2016Icar..263...32D/abstract'
+    ],
+    'Saturnian aurorae: High aurora | Dyudina2016a': {
+        tags: ['Solar System/Saturnian system', 'aurora'],
+        photometric_system: 'Cassini_ISS_NAC',
+        filters: ['UV1', 'UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR3',],
+        br: [0.627, 0.680, 1.113, 0.419, 0.957, 0.761, 1.259], // extracted from Fig. 8
+        sd: [0.405, 0.116, 0.247, 0.148, 0.235, 0.195, 0.122], // extracted from Fig. 8
+        is_emissive: true,
+    },
+    'Saturnian aurorae: Brightest aurora | Dyudina2016a': {
+        tags: ['Solar System/Saturnian system', 'aurora'],
+        photometric_system: 'Cassini_ISS_NAC',
+        filters: ['UV1', 'UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR3',],
+        br: [0.792, 0.372, 0.546, 0.484, 1.020, 1.050, 1.821], // extracted from Fig. 8
+        sd: [0.104, 0.060, 0.056, 0.097, 0.143, 0.229, 0.468], // extracted from Fig. 8
+        is_emissive: true,
+    },
+    'Saturnian aurorae: Deep aurora | Dyudina2016a': {
+        tags: ['Solar System/Saturnian system', 'aurora'],
+        photometric_system: 'Cassini_ISS_NAC',
+        filters: ['UV1', 'UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR3',],
+        br: [0.406, 0.200, 0.421, 0.412, 1.056, 0.759, 0.970], // extracted from Fig. 8
+        sd: [0.029, 0, 0, 0.126, 0, 0.217, 0.223], // extracted from Fig. 8
+        is_emissive: true,
     },
     // Saturnian rings
     'Clark1980b': [
@@ -963,19 +1006,19 @@
         'DOI: 10.1086/345349', 'https://iopscience.iop.org/article/10.1086/345349'
     ],
     'Iapetus: Leading hemisphere (S VIII) | Blackburn2010': {
-        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon',],
+        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         nm: [350, 400, 510, 600, 700, 810, 900, 1000, 1520, 1800, 2020, 2230, 3600],
         br_geometric: [0.031, 0.031, 0.032, 0.051, 0.056, 0.065, 0.059, 0.058, 0.106, 0.131, 0.104, 0.148, 0.055], // traced from Fig. 4
         br_spherical: [0.005, 0.005, 0.008, 0.009, 0.012, 0.023, 0.015, 0.015, 0.033, 0.039, 0.038, 0.047, 0.019], // calculated from phase integrals in Table 2
     },
     'Iapetus: Leading hemisphere (S VIII) | Gudipati2003': {
-        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon',],
+        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         nm: [330, 350, 380, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850],
         br: [0.047, 0.051, 0.058, 0.063, 0.067, 0.071, 0.080, 0.087, 0.090, 0.093, 0.099, 0.102, 0.102],
         is_albedo: true,
     },
     'Iapetus: Trailing hemisphere (S VIII) | Blackburn2010': {
-        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon',],
+        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         nm: [350, 400, 510, 600, 700, 810, 900, 1000, 1520, 1800, 2020, 2230, 3600],
         br_geometric: [0.42, 0.44, 0.46, 0.44, 0.42, 0.42, 0.44, 0.45, 0.25, 0.45, 0.14, 0.43, 0.08], // traced from Fig. 5
         br_spherical: [0.21, 0.23, 0.28, 0.28, 0.27, 0.28, 0.29, 0.30, 0.12, 0.28, 0.07, 0.25, 0.02], // calculated from phase integrals in Table 2
@@ -1279,24 +1322,36 @@
         'DOI: 10.1126/science.246.4936.1450', 'https://www.science.org/doi/10.1126/science.246.4936.1450',
         'https://ui.adsabs.harvard.edu/abs/1989Sci...246.1450L/abstract'
     ],
+    'Thomas1991': [
+        'Neptune’s Small Inner Satellites',
+        'DOI: 10.1029/91JA01461', 'https://agupubs.onlinelibrary.wiley.com/doi/10.1029/91JA01461',
+        'https://ui.adsabs.harvard.edu/abs/1991JGR....9619261T/abstract'
+    ],
     'Karkoschka2003': [
         'Sizes, shapes, and albedos of the inner satellites of Neptune',
         'DOI: 10.1016/S0019-1035(03)00002-2', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103503000022',
         'https://ui.adsabs.harvard.edu/abs/2003Icar..162..400K/abstract'
     ],
-    'Larissa (N VII) | Lane1989, Karkoschka2003': {
+    'Larissa (N VII) | Lane1989, Karkoschka2003, Thomas1991': {
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         nm: [260, 750],
         br: [[0.06, 0.02], [0.07, 0.01]],
         geometric_albedo: [550, 0.091],
+        phase_function: ['phase coefficient', {beta: 0.031}],
     },
-    // Proteus
+    'Proteus (N VIII) | Thomas1991, Karkoschka2003': {
+        tags: ['featured', 'Solar System/Neptunian system', 'natural satellite/regular moon'],
+        nm: [410, 471, 540],
+        br: [[0.055, 0.004], [0.060, 0.004], [0.062, 0.004]], // relative uncertainty
+        geometric_albedo: [550, 0.096],
+        phase_function: ['phase coefficient', {beta: 0.039}],
+    },
     'Pascu2006': [
         'HST BVI photometry of Triton and Proteus',
         'DOI: 10.1016/j.icarus.2006.07.020', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103506002648'
     ],
     'Proteus: −33° East (N VIII) | Pascu2006': { // visit 1, leading side
-        tags: ['featured', 'Solar System/Neptunian system', 'natural satellite/regular moon'],
+        tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[5.81, 0.02], [5.09, 0.01], [4.36, 0.05]],
@@ -1328,13 +1383,63 @@
         'DOI: 10.1006/icar.1999.6224', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103599962243'
     ],
     'Triton (N I) | Tryka1999, Verbiscer2022': {
-        tags: ['featured', 'Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon',],
+        tags: ['featured', 'Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
         nm_range: {start: 300, stop: 900, step: 100},
         br_geometric: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
         phase_integral: [0.94, 0.04],
     },
+    'Hillier1994': [
+        'Photometric Diversity of Terrains on Triton',
+        'DOI: 10.1006/icar.1994.1095', 'https://www.sciencedirect.com/science/article/pii/S0019103584710955',
+        'https://ui.adsabs.harvard.edu/abs/1994Icar..109..296H/abstract'
+    ],
+    'Triton (N I) | Hillier1994, Verbiscer2022': { // Global
+        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
+        photometric_system: 'Voyager_ISS-NAC',
+        filters: ['Violet', 'Blue', 'Green'],
+        br: [0.903, 0.961, 0.970],
+        sd: [0.037, 0.023, 0.151],
+        geometric_albedo: ['Generic_Bessell.V', [0.86, 0.004]],
+        phase_integral: [0.94, 0.04],
+    },
+    'Triton: Bright Polar Cap (N I) | Hillier1994': {
+        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
+        photometric_system: 'Voyager_ISS-NAC',
+        filters: ['Violet', 'Green'],
+        br: [1.052, 1.040],
+        sd: [0.014, 0.009],
+        geometric_albedo: ['Voyager_ISS-NAC.Green', [0.784, 0.007]],
+        phase_integral: [1.113, 0.008], // Green filter
+    },
+    'Triton: Dark Polar Cap (N I) | Hillier1994': {
+        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
+        photometric_system: 'Voyager_ISS-NAC',
+        filters: ['Violet', 'Green'],
+        br: [1.029, 1.021],
+        sd: [0.024, 0.030],
+        geometric_albedo: ['Voyager_ISS-NAC.Green', [0.792, 0.024]],
+        phase_integral: [1.058, 0.025], // Green filter
+    },
+    'Triton: Frost Band (N I) | Hillier1994': {
+        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
+        photometric_system: 'Voyager_ISS-NAC',
+        filters: ['Violet', 'Green'],
+        br: [0.997, 0.953],
+        sd: [0.034, 0.006],
+        geometric_albedo: ['Voyager_ISS-NAC.Green', [0.693, 0.004]],
+        phase_integral: [1.249, 0.006], // Green filter
+    },
+    'Triton: Anomalous Scattering Region (N I) | Hillier1994': {  // ASR* used, error margins slightly lower than ASR
+        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
+        photometric_system: 'Voyager_ISS-NAC',
+        filters: ['Violet', 'Green'],
+        br: [0.627, 0.719],
+        sd: [0.011, 0.008],
+        geometric_albedo: ['Voyager_ISS-NAC.Green', [0.524, 0.007]],
+        phase_integral: [1.429, 0.001], // Green filter
+    },
     'Triton: −19° West (N I) | Pascu2006, Verbiscer2022': { // visit 1, leading side
-        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon'],
+        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[-0.646, 0.009], [-1.343, 0.002], [-2.119, 0.006]],
@@ -1344,7 +1449,7 @@
         phase_integral: [0.94, 0.04],
     },
     'Triton: −3° West (N I) | Pascu2006, Verbiscer2022': { // visit 2, leading side
-        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon'],
+        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[-0.637, 0.014], [-1.332, 0.001], [-2.088, 0.004]],
@@ -1354,7 +1459,7 @@
         phase_integral: [0.94, 0.04],
     },
     'Triton: −10° East (N I) | Pascu2006, Verbiscer2022': { // visit 3, trailing side
-        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon'],
+        tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
         mag: [[-0.556, 0.005], [-1.255, 0.004], [-2.031, 0.006]],

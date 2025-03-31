@@ -6,27 +6,27 @@
         'https://ui.adsabs.harvard.edu/abs/2000ApJ...538..885S/abstract'
     ],
     'Class I | Sudarsky2000': {
-        tags: ['featured', 'extrasolar/exoplanet', 'planetary body/planet', 'class',],
+        tags: ['featured', 'extrasolar/exoplanet', 'planetary body/planet', 'class'],
         nm: [300, 350, 400, 450, 500, 550, 600, 650, 700, 800, 900, 1000],
         br_spherical: [0.88, 0.85, 0.78, 0.69, 0.67, 0.69, 0.67, 0.64, 0.58, 0.6, 0.45, 0.5],
     },
     'Class II | Sudarsky2000': {
-        tags: ['featured', 'extrasolar/exoplanet', 'planetary body/planet', 'class',],
+        tags: ['featured', 'extrasolar/exoplanet', 'planetary body/planet', 'class'],
         nm: [300, 350, 400, 450, 500, 550, 600, 650, 700, 800, 900, 1000],
         br_spherical: [0.99, 0.99, 0.99, 0.99, 0.98, 0.97, 0.94, 0.95, 0.9, 0.85, 0.75, 0.75],
     },
     'Class III | Sudarsky2000': {
-        tags: ['featured', 'extrasolar/exoplanet', 'planetary body/planet', 'class',],
+        tags: ['featured', 'extrasolar/exoplanet', 'planetary body/planet', 'class'],
         nm: [300, 350, 400, 450, 500, 550, 600, 650, 700, 800, 900, 1000],
         br_spherical: [0.67, 0.52, 0.42, 0.3, 0.2, 0.13, 0.07, 0.06, 0.04, 0.02, 0, 0],
     },
     'Class IV | Sudarsky2000': {
-        tags: ['featured', 'extrasolar/exoplanet', 'planetary body/planet', 'class',],
+        tags: ['featured', 'extrasolar/exoplanet', 'planetary body/planet', 'class'],
         nm: [300, 350, 400, 450, 500, 550, 600, 650, 700, 800, 900, 1000],
         br_spherical: [0.2, 0.15, 0.1, 0.06, 0.03, 0.01, 0, 0.01, 0, 0, 0, 0],
     },
     'Class V | Sudarsky2000': {
-        tags: ['featured', 'extrasolar/exoplanet', 'planetary body/planet', 'class',],
+        tags: ['featured', 'extrasolar/exoplanet', 'planetary body/planet', 'class'],
         nm: [300, 350, 400, 450, 500, 550, 585, 620, 650, 700, 800, 900, 1000],
         br_spherical: [0.4, 0.57, 0.65, 0.66, 0.66, 0.55, 0, 0.5, 0.62, 0.65, 0.5, 0.65, 0.64],
     },
