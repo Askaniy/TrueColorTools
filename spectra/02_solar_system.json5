@@ -1322,7 +1322,7 @@
         'DOI: 10.1126/science.246.4936.1450', 'https://www.science.org/doi/10.1126/science.246.4936.1450',
         'https://ui.adsabs.harvard.edu/abs/1989Sci...246.1450L/abstract'
     ],
-    'Thomas1991': [
+    'Thomas1991a': [
         'Neptune’s Small Inner Satellites',
         'DOI: 10.1029/91JA01461', 'https://agupubs.onlinelibrary.wiley.com/doi/10.1029/91JA01461',
         'https://ui.adsabs.harvard.edu/abs/1991JGR....9619261T/abstract'
@@ -1332,14 +1332,14 @@
         'DOI: 10.1016/S0019-1035(03)00002-2', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103503000022',
         'https://ui.adsabs.harvard.edu/abs/2003Icar..162..400K/abstract'
     ],
-    'Larissa (N VII) | Lane1989, Karkoschka2003, Thomas1991': {
+    'Larissa (N VII) | Lane1989, Karkoschka2003, Thomas1991a': {
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         nm: [260, 750],
         br: [[0.06, 0.02], [0.07, 0.01]],
         geometric_albedo: [550, 0.091],
         phase_function: ['phase coefficient', {beta: 0.031}],
     },
-    'Proteus (N VIII) | Thomas1991, Karkoschka2003': {
+    'Proteus (N VIII) | Thomas1991a, Karkoschka2003': {
         tags: ['featured', 'Solar System/Neptunian system', 'natural satellite/regular moon'],
         nm: [410, 471, 540],
         br: [[0.055, 0.004], [0.060, 0.004], [0.062, 0.004]], // relative uncertainty
@@ -1478,12 +1478,12 @@
         'Nereid Has Complex Large-Amplitude Photometric Variability (Due to Chaotic Rotation)',
         'DOI: 10.1006/icar.2000.6417', 'https://arxiv.org/abs/astro-ph/0005050v1'
     ],
-    'Thomas1991': [
+    'Thomas1991b': [
         'Voyager observations of Nereid',
         'DOI: 10.1029/91JA01735', 'https://agupubs.onlinelibrary.wiley.com/doi/10.1029/91JA01735',
         'https://ui.adsabs.harvard.edu/abs/1991JGR....9619253T/abstract'
     ],
-    'Nereid (N II) | Schaefer2000, Kiss2016, Thomas1991': {
+    'Nereid (N II) | Schaefer2000, Kiss2016, Thomas1991b': {
         tags: ['featured', 'Solar System/Neptunian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         filters: ['U', 'B', 'V', 'R', 'I'],
@@ -1491,7 +1491,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.24, 0.02]],
         phase_integral: 0.5,
     },
-    'Nereid (N II) | Graykowski2018, Kiss2016, Thomas1991': {
+    'Nereid (N II) | Graykowski2018, Kiss2016, Thomas1991b': {
         tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.67, 0.02], 'V-R': [0.38, 0.01]},
@@ -1500,7 +1500,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.24, 0.02]],
         phase_integral: 0.5,
     },
-    'Nereid (N II) | Grav2004, Kiss2016, Thomas1991': {
+    'Nereid (N II) | Grav2004, Kiss2016, Thomas1991b': {
         tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.66, 0.01], 'V-R': [0.39, 0.01]},
