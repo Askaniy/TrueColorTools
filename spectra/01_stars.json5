@@ -200,7 +200,7 @@
         file: 'spectra/files/Boyd2018/mira_maximum.txtA',
         is_emissive: true,
     },
-    'Mira: Minimum (M5e) | Boyd2018': {
+    'Mira: Minimum (M9e) | Boyd2018': {
         tags: ['extrasolar', 'star'],
         file: 'spectra/files/Boyd2018/mira_minimum.txtA',
         is_emissive: true,

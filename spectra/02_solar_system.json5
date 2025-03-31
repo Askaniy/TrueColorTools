@@ -385,11 +385,11 @@
         'DOI: 10.3847/1538-3881/aaae01', 'https://iopscience.iop.org/article/10.3847/1538-3881/aaae01',
         'https://ui.adsabs.harvard.edu/abs/2018AJ....155..151S/abstract'
     ],
-    'Jupiter: Great Red Spot | Simon2018': {
+    'Great Red Spot (Jupiter) | Simon2018': { // Apr. 17
         tags: ['Solar System/Jovian system', 'planetary body/planet'],
         photometric_system: 'HST_WFC3_UVIS1',
         filters: ['F275W', 'F343N', 'F395N', 'F467M', 'F502N', 'F547M', 'F631N', 'F658N', 'FQ889N'],
-        br: [0.190, 0.120, 0.157, 0.321, 0.398, 0.515, 0.721, 0.752, 0.168], // Apr. 17, uncertainties are smaller than the symbol size
+        br: [0.190, 0.120, 0.157, 0.321, 0.398, 0.515, 0.721, 0.752, 0.168], // uncertainties are smaller than the symbol size
         is_reflecting_sunlight: false,
         is_albedo: true, // I/F
     },
@@ -553,7 +553,7 @@
     'Saturnian aurorae: High aurora | Dyudina2016a': {
         tags: ['Solar System/Saturnian system', 'aurora'],
         photometric_system: 'Cassini_ISS_NAC',
-        filters: ['UV1', 'UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR3',],
+        filters: ['UV1', 'UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR3'],
         br: [0.627, 0.680, 1.113, 0.419, 0.957, 0.761, 1.259], // extracted from Fig. 8
         sd: [0.405, 0.116, 0.247, 0.148, 0.235, 0.195, 0.122], // extracted from Fig. 8
         is_emissive: true,
@@ -561,7 +561,7 @@
     'Saturnian aurorae: Brightest aurora | Dyudina2016a': {
         tags: ['Solar System/Saturnian system', 'aurora'],
         photometric_system: 'Cassini_ISS_NAC',
-        filters: ['UV1', 'UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR3',],
+        filters: ['UV1', 'UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR3'],
         br: [0.792, 0.372, 0.546, 0.484, 1.020, 1.050, 1.821], // extracted from Fig. 8
         sd: [0.104, 0.060, 0.056, 0.097, 0.143, 0.229, 0.468], // extracted from Fig. 8
         is_emissive: true,
@@ -569,7 +569,7 @@
     'Saturnian aurorae: Deep aurora | Dyudina2016a': {
         tags: ['Solar System/Saturnian system', 'aurora'],
         photometric_system: 'Cassini_ISS_NAC',
-        filters: ['UV1', 'UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR3',],
+        filters: ['UV1', 'UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR3'],
         br: [0.406, 0.200, 0.421, 0.412, 1.056, 0.759, 0.970], // extracted from Fig. 8
         sd: [0.029, 0, 0, 0.126, 0, 0.217, 0.223], // extracted from Fig. 8
         is_emissive: true,
