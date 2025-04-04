@@ -6564,13 +6564,19 @@
     },
 
     // Periodic comets
-    '1P/Halley | MBOSS, Lamy2004': {
+    'Schleicher1998': [
+        'Narrowband Photometry of Comet P/Halley: Variation with Heliocentric Distance, Season, and Solar Phase Angle',
+        'DOI: 10.1006/icar.1997.5902', 'https://www.sciencedirect.com/science/article/pii/S0019103597959029',
+        'https://ui.adsabs.harvard.edu/abs/1998Icar..132..397S/abstract'
+    ],
+    '1P/Halley | MBOSS, Lamy2004, Schleicher1998': {
         tags: ['featured', 'MBOSS', 'Solar System', 'minor body/comet/short period comet/Halley-type comet', 'spacecraft target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.720, 0.040], 'V-R': [0.410, 0.030], 'R-I': [0.390, 0.060]},
         calibration_system: 'Vega',
-        is_reflecting_sunlight: true,
+        is_reflecting_sunli
         geometric_albedo: ['Generic_Bessell.V', [0.040, +0.020, -0.010]],
+        phase_function: ['phase coefficient', {beta: 0.041}], // Section III. RESULTS
     },
     '2P/Encke | MBOSS, Lamy2004, Knight2023': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet/Encke-type comet'],

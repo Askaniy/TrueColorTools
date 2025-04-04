@@ -468,7 +468,17 @@
         'DOI: 10.1016/0019-1035(80)90217-1', 'https://www.sciencedirect.com/science/article/abs/pii/0019103580902171',
         'https://ui.adsabs.harvard.edu/abs/1980Icar...41..323C/abstract'
     ],
+    'Buratti1991': [
+        'Ganymede and Callisto: Surface Textural Dichotomies Photometric Analysis',
+        'DOI: 10.1016/0019-1035(91)90054-W', 'https://www.sciencedirect.com/science/article/pii/001910359190054W',
+        'https://ui.adsabs.harvard.edu/abs/1991Icar...92..312B/abstract'
+    ],
     // Io
+    'Simonelli1984': [
+        'Voyager Disk-Integrated Photometry of Io',
+        'DOI: 10.1016/0019-1035(84)90110-6', 'https://www.sciencedirect.com/science/article/abs/pii/0019103584901106',
+        'https://ui.adsabs.harvard.edu/abs/1984Icar...59..406S/abstract'
+    ],
     'Spencer1995': [
         'Charge-coupled device spectra of the Galilean satellites: Molecular oxygen on Ganymede',
         'DOI: 10.1029/95JE01503', 'https://agupubs.onlinelibrary.wiley.com/doi/10.1029/95JE01503'
@@ -486,10 +496,20 @@
         ], // traced from the Figure 2
         phase_integral: 0.59, // for 550 nm, and 0.61 for 470 nm; all for the leading hemisphere
     },
-    'Io (J I) | Madden2018': {
+    'Io (J I) | Simonelli1984': {
+        tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        photometric_system: 'Voyager_ISS-NAC',
+        filters: ['UV', 'Violet', 'Clear', 'Blue', 'Green', 'Orange'],
+        br: [0.083, 0.242, 0.415, 0.483, 0.628, 0.633],
+        sd: [0.01, 0.01, 0.02, 0.02, 0.02, 0.03],
+        is_geometric_albedo: true,
+        phase_integral: [0.78, 0.02],
+    },
+    'Io (J I) | Madden2018, Simonelli1984': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Madden2018/Io_Fanale1974_Albedo.txtU',
         is_geometric_albedo: true,
+        phase_integral: [0.78, 0.02],
     },
     'Io: Trailing hemisphere (J I) | Clark1980a, Domingue1998': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
@@ -498,37 +518,66 @@
         phase_integral: 0.77, // 0.55 µm, "must be taken cautiously since there are no large phase angle observations to adequately constrain the Hapke model on which theis value is based"
     },
     // Europa
-    'Europa: Trailing hemisphere (J II) | Clark1980a, Madden2018': {
+    'Buratti1983': [
+        'Voyager photometry of Europa',
+        'DOI: 10.1016/0019-1035(83)90053-2', 'https://www.sciencedirect.com/science/article/pii/0019103583900532',
+        'https://ui.adsabs.harvard.edu/abs/1983Icar...55...93B/abstract'
+    ],
+    'Europa: Leading hemisphere (J II) | Buratti1983': {
+        tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        photometric_system: 'Voyager_ISS-NAC',
+        filters: ['UV', 'Violet', 'Clear', 'Blue', 'Green', 'Orange'],
+        br: [0.354, 0.469, 0.578, 0.606, 0.727, 0.725], 
+        sd: 0.049, // typical absolute error
+        is_geometric_albedo: true,
+        phase_integral: [1.09, 0.11],
+    },
+    'Europa: Trailing hemisphere (J II) | Clark1980a, Madden2018, Buratti1983': {
         tags: ['featured', 'Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Clark1980/Europa.txtU', // figure 1
         geometric_albedo: ['Generic_Bessell.V', 0.611],
+        phase_integral: [1.09, 0.11],
     },
-    'Europa: Trailing hemisphere (J II) | Madden2018': {
+    'Europa: Trailing hemisphere (J II) | Buratti1983': {
+        tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        photometric_system: 'Voyager_ISS-NAC',
+        filters: ['UV', 'Violet', 'Clear', 'Blue', 'Green', 'Orange'],
+        br: [0.172, 0.356, 0.457, 0.504, 0.593, 0.591],
+        sd: 0.049, // typical absolute error
+        is_geometric_albedo: true,
+        phase_integral: [1.09, 0.11],
+    },
+    'Europa: Trailing hemisphere (J II) | Madden2018, Buratti1983': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Madden2018/Europa_Spencer1999trailing_Albedo.txtU',
         is_geometric_albedo: true,
+        phase_integral: [1.09, 0.11],
     },
     // Ganymede
-    'Ganymede: Leading hemisphere (J III) | Clark1980a, Madden2018': {
+    'Ganymede: Leading hemisphere (J III) | Clark1980a, Madden2018, Buratti1991': {
         tags: ['featured', 'Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Clark1980/Ganymede.txtU', // figure 13
         geometric_albedo: ['Generic_Bessell.V', 0.464],
+        phase_integral: [0.78, 0.06],
     },
-    'Ganymede: Leading hemisphere (J III) | Madden2018': {
+    'Ganymede: Leading hemisphere (J III) | Madden2018, Buratti1991': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Madden2018/Ganymede_Spencer1999leading_Albedo.txtU',
         is_geometric_albedo: true,
+        phase_integral: [0.78, 0.06],
     },
     // Callisto
-    'Callisto: Leading hemisphere (J IV) | Clark1980a, Madden2018': {
+    'Callisto: Leading hemisphere (J IV) | Clark1980a, Madden2018, Buratti1991': {
         tags: ['featured', 'Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Clark1980/Callisto.txtU', // figure 14
         geometric_albedo: ['Generic_Bessell.V', 0.1688978],
+        phase_integral: [0.46, 0.06], // for leading hemisphere
     },
-    'Callisto: Leading hemisphere (J IV) | Madden2018': {
+    'Callisto: Leading hemisphere (J IV) | Madden2018, Buratti1991': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Madden2018/Callisto_Spencer1999leading_Albedo.txtU',
-        is_geometric_albedo: true
+        is_geometric_albedo: true,
+        phase_integral: [0.46, 0.06], // for leading hemisphere
     },
 
     // Saturnian system
