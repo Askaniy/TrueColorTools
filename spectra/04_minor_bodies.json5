@@ -1601,7 +1601,7 @@
         geometric_albedo: ['Generic_Bessell.V', 0.073],
         phase_function: ['HG', {H: [11.691, 0.002], G: [0.22, 0.02]}], // r-band
     },
-    '(15502) 1999 NV27 | MBOSS, Grav2012, SsODNet': {
+    '(15502) Hypeirochus | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.766, 0.047], 'V-R': [0.445, 0.036], 'R-I': [0.430, 0.060]},
@@ -1702,7 +1702,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
-    '(15977) 1998 MA11 | MBOSS, Grav2012, SsODNet': {
+    '(15977) Pyraechmes | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.748, 0.033], 'V-R': [0.465, 0.025], 'R-I': [0.441, 0.036]},
@@ -5759,6 +5759,20 @@
         geometric_albedo: ['Generic_Bessell.V', [0.074, 0.080]],
         phase_function: ['phase coefficient', {beta: [0.049, 0.019]}],
     },
+    '(780605) 2012 UD185 | Markwardt2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.61, 0.033], 'r-i': [0.37, 0.045]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
+    '(780605) 2012 UD185 | Bolin2023': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.60, 0.11],  'r-i': [0.17, 0.06]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
     '1994 ES2 | Trujillo2002': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
@@ -6210,20 +6224,6 @@
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.67, 0.08], 'r-i': [0.21, 0.07]},
-        calibration_system: 'AB',
-        is_reflecting_sunlight: true,
-    },
-    '2012 UD185 | Markwardt2023': {
-        tags: ['Solar System', 'minor body/Neptune trojan'],
-        photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': [0.61, 0.033], 'r-i': [0.37, 0.045]},
-        calibration_system: 'AB',
-        is_reflecting_sunlight: true,
-    },
-    '2012 UD185 | Bolin2023': {
-        tags: ['Solar System', 'minor body/Neptune trojan'],
-        photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': [0.60, 0.11],  'r-i': [0.17, 0.06]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
