@@ -1031,13 +1031,13 @@
         'https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3678B/abstract'
     ],
     '(2060) Chiron | SMASS, BragaRibas2023, Betzler2022': { // 95P/Chiron
-        tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
+        tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet/Chiron-type comet'],
         file: 'spectra/files/SMASS/a002060.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.076, 0.026]],
         phase_function: ['HG1G2', {H: [5.35, 0.03], G_1: 0, G_2: [0.626, 0.007]}], // 2017-2020 weighted mean
     },
     '(2060) Chiron | MBOSS, BragaRibas2023, Betzler2022': { // 95P/Chiron
-        tags: ['MBOSS', 'Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
+        tags: ['MBOSS', 'Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet/Chiron-type comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.660, 0.055], 'V-R': [0.359, 0.018], 'R-I': [0.324, 0.024]},
         calibration_system: 'Vega',
@@ -2596,6 +2596,22 @@
         'DOI: 10.1093/mnras/stad3318', 'https://academic.oup.com/mnras/article/527/2/3624/7332922',
         'https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.3624P/abstract'
     ],
+    '(60558) Echeclus | GaiaDR3, Pereira2024, Rousselot2005a': { // 174P/Echeclus
+        tags: ['Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
+        nm: [374, 418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
+        br: [
+            8.088540e-01, 8.903210e-01, 8.976490e-01, 9.282746e-01, 1.000000e+00, 1.115618e+00,
+            1.089970e+00, 1.201444e+00, 1.278553e+00, 1.331537e+00, 1.423402e+00, 1.432682e+00,
+            1.513525e+00, 1.615072e+00, 1.639843e+00, 1.980019e+00
+        ],
+        sd: [
+            1.958681e-01, 2.856866e-02, 1.841532e-02, 1.563740e-02, 1.590164e-02, 1.730563e-02,
+            1.817028e-02, 1.830908e-02, 1.908911e-02, 2.022449e-02, 2.125614e-02, 2.168432e-02,
+            2.362207e-02, 2.686082e-02, 3.449029e-02, 6.535799e-02
+        ],
+        geometric_albedo: ['Generic_Bessell.V', [0.050, 0.003]],
+        phase_function: ['Generic_Bessell.R', 'HG', {H: [9.03, 0.01], G: [-0.39, 0.08]}], // V-band value results in negative phase integral
+    },
     '(60558) Echeclus | MBOSS, Pereira2024, Rousselot2005a': { // 174P/Echeclus
         tags: ['MBOSS', 'Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
         photometric_system: 'Generic_Bessell',
