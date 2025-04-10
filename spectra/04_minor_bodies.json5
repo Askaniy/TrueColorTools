@@ -376,11 +376,10 @@
         geometric_albedo: ['Generic_Bessell.V', 0.194],
         phase_function: ['HG1G2', {H: [5.742, 0.016], G_1: [0.31, 0.04], G_2: [0.320, 0.020]}],
     },
-    '(31) Euphrosyne | SMASS, Vernazza2021, Pravec2012': {
+    '(31) Euphrosyne | SMASS, Vernazza2021': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000031.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.05],
-        phase_function: ['HG', {H: [6.700, 0.050], G: [0.090, 0.090]}],
     },
     '(41) Daphne | SMASS, Vernazza2021, Tholen2020': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
