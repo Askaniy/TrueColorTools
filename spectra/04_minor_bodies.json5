@@ -461,11 +461,11 @@
         'DOI: 10.1016/j.icarus.2009.04.032', 'https://arxiv.org/abs/0904.2033',
         'https://ui.adsabs.harvard.edu/abs/2009Icar..203...88D/abstract'
     ],
-    '(121) Hermione | SMASS, Descamps2009': {
+    '(121) Hermione | SMASS, Descamps2009, SsODNet': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000121.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.0495, 0.01]],
-        phase_function: ['HG', {H: [7.51, 0.2], G: 0.09}], // G is assumed
+        phase_function: ['HG1G2', {H: [7.117586, +0.141969, -0.163505], G_1: [0.351391, +0.210504, -0.268748], G_2: [0.266079, +0.111130, -0.095476]}],
     },
     '(130) Elektra | SMASS, Vernazza2021, Shevchenko2022': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -530,10 +530,15 @@
         geometric_albedo: ['NEAR_MSI.550nm', [0.047, 0.005]],
         spherical_albedo: ['NEAR_MSI.550nm', [0.013, 0.003]],
     },
-    '(269) Justitia | SMASS, SsODNet': {
+    'Buie2025': [
+        'Occultation-based Size and Shape of (269) Justitia',
+        'DOI: 10.3847/PSJ/adb28c', 'https://iopscience.iop.org/article/10.3847/PSJ/adb28c',
+        'https://ui.adsabs.harvard.edu/abs/2025PSJ.....6...61B/abstract'
+    ],
+    '(269) Justitia | SMASS, Buie2025, SsODNet': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
         file: 'spectra/files/SMASS/a000269.2.txtU',
-        geometric_albedo: ['Generic_Bessell.V', 0.066], // Buie et al., AGU23 poster
+        geometric_albedo: ['Generic_Bessell.V', [0.072, 0.007]],
         phase_function: ['HG1G2', {H: [9.654725, +0.102008, -0.112125], G_1: [0.159771, +0.138945, -0.159532], G_2: [0.495732, +0.067168, -0.064874]}],
     },
     'deLeon2010': [
@@ -5369,6 +5374,15 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
+    'Popescu2020': [
+        'Physical characterization of 2020 AV2, the first known asteroid orbiting inside Venus orbit',
+        'DOI: 10.1093/mnras/staa1728', 'https://academic.oup.com/mnras/article/496/3/3572/5859506',
+        'https://ui.adsabs.harvard.edu/abs/2020MNRAS.496.3572P/abstract'
+    ],
+    '(594913) ’Ayló’chaxnim | Popescu2020': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Atira'],
+        slope: {start: 500, stop: 700, percent_per_100nm: [17.7, 0.8]},
+    },
     '(601411) 2013 CY197 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
@@ -5857,11 +5871,11 @@
         geometric_albedo: ['Generic_Bessell.V', [0.52, 0.08]], // nominal size = 11 m, H = 26.13 ±0.16
         phase_function: ['HG1G2', {H: [26.13, 0.16], G_1: -0.15, G_2: 1.0}]
     },
-    'Bolin2025': [
+    'Bolin2025a': [
         'Keck and Gemini characterization of Hayabusa2# rendezvous target 1998 KY26',
         'DOI: 10.48550/arXiv.2501.1715', 'https://arxiv.org/abs/2501.17156v1'
     ],
-    '1998 KY26 | Bolin2025, SantanaRos2025': {
+    '1998 KY26 | Bolin2025a, SantanaRos2025': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'spacecraft target/Hayabusa2 target/Hayabusa2# target'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.63, 0.03], 'r-i': [0.15, 0.03], 'i-z': [0.05, 0.04]},
@@ -6586,6 +6600,23 @@
         color_indices: {'g-r': [0.58, 0.04], 'r-i': [0.29, 0.04], 'i-z': [-0.27, 0.06]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
+    },
+    'Bolin2025b': [
+        'The discovery and characterization of Earth-crossing asteroid 2024 YR4',
+        'DOI: 10.48550/arXiv.2503.05694', 'https://arxiv.org/abs/2503.05694',
+        'https://ui.adsabs.harvard.edu/abs/2025arXiv250305694B/abstract'
+    ],
+    'Rivkin2025': [ // Diameter source
+        'JWST Observations of Potential Impactor 2024 YR4',
+        'https://iawn.net/obscamp/2024YR4/gallery/YR4_memo_final_27mar25.pdf'
+    ],
+    '2024 YR4 | Bolin2025b, Rivkin2025': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.70, 0.10], 'r-i': [0.25, 0.06], 'i-z': [-0.27, 0.10]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.118], // Calculated using D = 60 ±7 m and Hv = 24.05 ±0.15
     },
 
     // Periodic comets
