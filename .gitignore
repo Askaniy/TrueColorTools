@@ -1,5 +1,6 @@
 spectra_extras/
 .venv/
 .vscode/
+.idea/
 **/__pycache__/
 **/tempCodeRunnerFile.py
