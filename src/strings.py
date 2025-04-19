@@ -578,11 +578,13 @@ names = {
     'Earth': {'ru': 'Земля', 'de': 'Erde'},
     'Caribbean Sea': {'ru': 'Карибское море', 'de': 'Karibisches Meer'},
     'Moon': {'ru': 'Луна', 'de': 'Mond'},
+    'Guang Han Gong': {'ru': 'Гуанханьгун'},
     'Mars': {'ru': 'Марс'},
     'Phobos': {'ru': 'Фобос'},
     'Deimos': {'ru': 'Деймос'},
     # Jovian system
     'Jupiter': {'ru': 'Юпитер'},
+    'Great Red Spot': {'ru': 'Большое красное пятно', 'de': 'Großer Roter Fleck'},
     'Rings of Jupiter': {'ru': 'Кольца Юпитера', 'de': 'Jupiterringe'},
     'Amalthea': {'ru': 'Амальтея'},
     'Thebe': {'ru': 'Фива'},

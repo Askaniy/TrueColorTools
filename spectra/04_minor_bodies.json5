@@ -7615,8 +7615,8 @@
     '1I/ʻOumuamua | Jewitt2017': {
         tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
         photometric_system: 'NOT_ALFOSC',
-        calibration_system: 'Vega',
         color_indices: {'Bes_B-Bes_V': [0.70, 0.06], 'Bes_V-Bes_R': [0.45, 0.05]},
+        calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
     'Bannister2017b': [
@@ -7627,8 +7627,8 @@
     '1I/ʻOumuamua | Bannister2017b': {
         tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
         photometric_system: 'SLOAN_SDSS',
-        calibration_system: 'AB',
         color_indices: {'g-r': [0.47, 0.04], 'r-i': [0.36, 0.16]},
+        calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
     'Hui2020': [
