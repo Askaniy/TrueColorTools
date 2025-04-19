@@ -268,7 +268,7 @@
         'DOI: 10.3847/1538-3881/aabaf5', 'https://iopscience.iop.org/article/10.3847/1538-3881/aabaf5',
         'https://ui.adsabs.harvard.edu/abs/2018AJ....155..213W/abstract'
     ],
-    "Moon: Chang'e-3 Landing Site (E I) | Wu2018": { // Guang Han Gong
+    "Guang Han Gong: Chang'e-3 Landing Site (Moon) | Wu2018": {
         tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
         file: 'spectra/files/Moon_CE-3_LS_Wu2018.txt',
         is_albedo: true, // angle of incidence 54°, angle of emergence 44°, phase angle 95°; See Section 3.2
@@ -1451,7 +1451,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.86, 0.004]],
         phase_integral: [0.94, 0.04],
     },
-    'Triton: Bright Polar Cap (N I) | Hillier1994': {
+    'Triton: Bright polar cap (N I) | Hillier1994': {
         tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
@@ -1460,7 +1460,7 @@
         geometric_albedo: ['Voyager_ISS-NAC.Green', [0.784, 0.007]],
         phase_integral: [1.113, 0.008], // Green filter
     },
-    'Triton: Dark Polar Cap (N I) | Hillier1994': {
+    'Triton: Dark polar cap (N I) | Hillier1994': {
         tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
@@ -1469,7 +1469,7 @@
         geometric_albedo: ['Voyager_ISS-NAC.Green', [0.792, 0.024]],
         phase_integral: [1.058, 0.025], // Green filter
     },
-    'Triton: Frost Band (N I) | Hillier1994': {
+    'Triton: Frost band (N I) | Hillier1994': {
         tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
@@ -1478,7 +1478,7 @@
         geometric_albedo: ['Voyager_ISS-NAC.Green', [0.693, 0.004]],
         phase_integral: [1.249, 0.006], // Green filter
     },
-    'Triton: Anomalous Scattering Region (N I) | Hillier1994': {  // ASR* used, error margins slightly lower than ASR
+    'Triton: Anomalous scattering region (N I) | Hillier1994': {  // ASR* used, error margins slightly lower than ASR
         tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
