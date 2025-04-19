@@ -1,6 +1,5 @@
 """ Provides plotting functions. """
 
-from typing import Sequence
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from matplotlib import rc_context
@@ -47,10 +46,13 @@ def draw_figure(canvas, figure: Figure):
     return figure_canvas_agg
 
 
-def plot_spectra(spectra: Sequence[_TrueColorToolsObject], gamma: bool, srgb: bool, albedo: bool, light_theme: bool, lang: str):
+def plot_spectra(
+        spectra: Sequence[_TrueColorToolsObject], gamma: bool, srgb: bool, albedo: bool,
+        light_theme: bool, lang: str, figsize: tuple, dpi: int
+    ):
     """ Creates a figure with plotted spectra from the input list and the CMFs used """
     with rc_context(themes[int(light_theme)]):
-        fig, ax = plt.subplots(1, 1, figsize=(9, 5), dpi=90)
+        fig, ax = plt.subplots(1, 1, figsize=figsize, dpi=dpi)
         ax.set_xlabel(tr.xaxis_text[lang])
         ax.set_ylabel(tr.yaxis_text[lang])
         # Determining the scale for CMFs in the background
@@ -87,9 +89,9 @@ def plot_spectra(spectra: Sequence[_TrueColorToolsObject], gamma: bool, srgb: bo
         fig.tight_layout() # moving to subplots() causes UserWarning
         return fig
 
-def plot_filters(filters: Sequence[Spectrum], srgb: bool, lang: str):
+def plot_filters(filters: Sequence[Spectrum], srgb: bool, lang: str, figsize: tuple, dpi: int):
     """ Creates a figure with plotted sensitive curves and the CMFs used """
-    fig, ax = plt.subplots(1, 1, figsize=(5.25, 1.75), dpi=90)
+    fig, ax = plt.subplots(1, 1, figsize=figsize, dpi=dpi)
     ax.set_xlabel(tr.xaxis_text[lang])
     # Determining the scale for CMFs in the background
     max_y = []

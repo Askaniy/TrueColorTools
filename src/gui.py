@@ -37,7 +37,7 @@ def create_logger(window: sg.Window, key: str) -> Callable:
         window.write_event_value((key, f'{strftime("%H:%M:%S")} {message}'), data)
     return logger
 
-def generate_plot_layout(lang: str, light_theme: bool):
+def generate_plot_layout(lang: str, plot_size: tuple, light_theme: bool):
     """ Window 1 layout generator, the window of plot """
     return [
         [
@@ -51,7 +51,7 @@ def generate_plot_layout(lang: str, light_theme: bool):
                 file_types=('PNG {png}', 'PDF {pdf}', 'SVG {svg}'), default_extension='.png', key='W1_save'
             )
         ],
-        [sg.Canvas(key='W1_canvas')],
+        [sg.Canvas(size=plot_size, key='W1_canvas')],
     ]
 
 def generate_menu_bar(lang: str):
@@ -62,7 +62,8 @@ def generate_menu_bar(lang: str):
     ]
 
 def generate_layout(
-        canvas_size: tuple,
+        circle_size: tuple,
+        filters_plot_size: tuple,
         img_preview_size: tuple,
         text_colors: tuple,
         filtersDB: tuple,
@@ -116,7 +117,7 @@ def generate_layout(
     ]
     T1_col2 = [
         [sg.Text(font=title_font, key='T1_title2')],
-        [sg.Graph(canvas_size=canvas_size, graph_bottom_left=(0, 0), graph_top_right=canvas_size, background_color=None, key='T1_graph')],
+        [sg.Graph(canvas_size=circle_size, graph_bottom_left=(0, 0), graph_top_right=circle_size, background_color=None, key='T1_graph')],
         [sg.T(key='T1_albedo_note')],
         [sg.Text(tr.gui_rgb[lang], key='T1_colorRGB'), sg.Input(size=1, key='T1_rgb', expand_x=True)],
         [sg.Text(tr.gui_hex[lang], key='T1_colorHEX'), sg.Input(size=1, key='T1_hex', expand_x=True)],
@@ -195,7 +196,7 @@ def generate_layout(
     ]
     T2_col2 = [
         #[sg.Push(), sg.Text(tr.gui_output[lang], font=title_font, key='T2_title2'), sg.Push()],
-        [sg.Canvas(key='T2_canvas')],
+        [sg.Canvas(size=filters_plot_size, key='T2_canvas')],
         [
             sg.Column(T2_col2_1, expand_x=True, expand_y=False), sg.VSeperator(),
             sg.Column(T2_col2_2, expand_x=True, expand_y=False)
@@ -242,7 +243,7 @@ def generate_layout(
     ]
     T3_col2 = [
         [sg.Text(font=title_font, key='T3_title2')],
-        [sg.Graph(canvas_size=canvas_size, graph_bottom_left=(0, 0), graph_top_right=canvas_size, background_color=None, key='T3_graph')],
+        [sg.Graph(canvas_size=circle_size, graph_bottom_left=(0, 0), graph_top_right=circle_size, background_color=None, key='T3_graph')],
         [sg.T()],
         [sg.Text(tr.gui_rgb[lang], key='T3_colorRGB'), sg.Input(size=1, key='T3_rgb', expand_x=True)],
         [sg.Text(tr.gui_hex[lang], key='T3_colorHEX'), sg.Input(size=1, key='T3_hex', expand_x=True)],

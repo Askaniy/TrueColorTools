@@ -35,9 +35,19 @@ def launch_window(lang: str):
     T2_vis = T2_num # current number of visible image bands
     circle_r = 100 # radius in pixels of color preview circle
     circle_coord = (circle_r, circle_r+1)
+    circle_size = (2*circle_r+1, 2*circle_r+1)
     img_preview_size = (256, 128)
-    img_preview_area = img_preview_size[0]*img_preview_size[1]
+    img_preview_area = img_preview_size[0] * img_preview_size[1]
     text_colors = (gui.muted_color, gui.text_color)
+    window0_size = (1120, 640)
+
+    # Plots configuration
+    spectra_dpi = 100
+    spectra_plot_size = (1000, 500)
+    spectra_figsize = (spectra_plot_size[0] / spectra_dpi, spectra_plot_size[1] / spectra_dpi)
+    filters_dpi = 90
+    filters_plot_size = (500, 200)
+    filters_figsize = (filters_plot_size[0] / filters_dpi, filters_plot_size[1] / filters_dpi)
 
     # Loading the icon
     with open('src/images/icon', 'rb') as file:
@@ -46,9 +56,9 @@ def launch_window(lang: str):
     # Launching the main window
     sg.theme('MaterialDark')
     window0 = sg.Window(
-        'TrueColorTools', icon=icon, finalize=True, resizable=True, margins=(0, 0), size=(1120, 640),
+        'TrueColorTools', icon=icon, finalize=True, resizable=True, margins=(0, 0), size=window0_size,
         layout=gui.generate_layout(
-            (2*circle_r+1, 2*circle_r+1), img_preview_size, text_colors, filtersDB, srgb, brMax, brGeom, bitness, rounding, T2_num, lang
+            circle_size, filters_plot_size, img_preview_size, text_colors, filtersDB, srgb, brMax, brGeom, bitness, rounding, T2_num, lang
         )
     )
     # Creating the plot window stub
@@ -78,7 +88,7 @@ def launch_window(lang: str):
             to_plot.append(T1_spectrum)
         if current_tab == 'tab3' and T3_obj_name and T3_spectrum not in to_plot:
             to_plot.append(T3_spectrum)
-        fig = pl.plot_spectra(to_plot, gamma, srgb, albedo, light_theme, lang)
+        fig = pl.plot_spectra(to_plot, gamma, srgb, albedo, light_theme, lang, spectra_figsize, spectra_dpi)
         fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, fig)
         return fig, fig_canvas_agg
     
@@ -102,7 +112,7 @@ def launch_window(lang: str):
         elif isinstance(event, str) and event.endswith('plot'):
             if not window1:
                 window1 = sg.Window(
-                    tr.spectral_plot[lang], gui.generate_plot_layout(lang, light_theme), icon=icon,
+                    tr.spectral_plot[lang], gui.generate_plot_layout(lang, spectra_plot_size, light_theme), icon=icon,
                     finalize=True, element_justification='center'
                 )
             else:
@@ -113,7 +123,8 @@ def launch_window(lang: str):
                 to_plot.append(T1_spectrum)
             if T3_obj_name and T3_spectrum not in to_plot:
                 to_plot.append(T3_spectrum)
-            T1_T3_fig = pl.plot_spectra(to_plot, values['-gamma-'], values['-srgb-'], values['-brMax-'], light_theme, lang)
+            T1_T3_fig = pl.plot_spectra(to_plot, values['-gamma-'], values['-srgb-'], values['-brMax-'],
+                                        light_theme, lang, spectra_figsize, spectra_dpi)
             T1_T3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, T1_T3_fig)
         elif event == 'W1_path':
             T1_T3_fig.savefig(values['W1_path'], dpi=133.4) # 1200x800
@@ -429,12 +440,11 @@ def launch_window(lang: str):
                     try:
                         pl.close_figure(T2_fig)
                         T2_to_plot = [*T2_filters, *mean_spectrum]
-                        T2_fig = pl.plot_filters(T2_to_plot, values['-srgb-'], lang)
-                    except UnboundLocalError: # means it's the first tab opening
-                        T2_fig = pl.plot_filters([], values['-srgb-'], lang)
-                        T2_fig_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
-                    finally:
+                        T2_fig = pl.plot_filters(T2_to_plot, values['-srgb-'], lang, filters_figsize, filters_dpi)
                         T2_fig_canvas_agg.get_tk_widget().forget()
+                        T2_fig_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
+                    except UnboundLocalError: # means it's the first tab opening
+                        T2_fig = pl.plot_filters((), values['-srgb-'], lang, filters_figsize, filters_dpi)
                         T2_fig_canvas_agg = pl.draw_figure(window['T2_canvas'].TKCanvas, T2_fig)
 
             
