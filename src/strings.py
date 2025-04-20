@@ -1043,6 +1043,18 @@ notes = {
     'Deep aurora': {'ru': 'Глубокие сияния', 'de': 'Tiefe Aurora'},
     'Main ring': {'ru': 'Главное кольцо', 'de': 'Hauptring'},
     'Cassini Division': {'ru': 'Деление Кассини', 'de': 'Cassinische Teilung'},
+    'January': {'ru': 'Январь', 'de': 'Januar'},
+    'February': {'ru': 'Февраль', 'de': 'Februar'},
+    'March': {'ru': 'Март', 'de': 'März'},
+    'April': {'ru': 'Апрель', 'de': 'April'},
+    'May': {'ru': 'Май', 'de': 'Mai'},
+    'June': {'ru': 'Июнь', 'de': 'Juni'},
+    'July': {'ru': 'Июль', 'de': 'Juli'},
+    'August': {'ru': 'Август', 'de': 'August'},
+    'September': {'ru': 'Сентябрь', 'de': 'September'},
+    'October': {'ru': 'Октябрь', 'de': 'Oktober'},
+    'November': {'ru': 'Ноябрь', 'de': 'November'},
+    'December': {'ru': 'Декабрь', 'de': 'Dezember'},
 }
 
 # Sort in key length descending order to prevent nested word errors

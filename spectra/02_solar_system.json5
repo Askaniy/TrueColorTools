@@ -145,7 +145,7 @@
         'DOI: 10.1007/s11208-005-0042-1', 'https://link.springer.com/article/10.1007/s11208-005-0042-1'
     ],
     'Venus: Surface | Maiorov2005': {
-        tags: ['featured', 'Solar System', 'planetary body/planet'],
+        tags: ['featured', 'Solar System', 'planetary body/planet', 'Venus'],
         nm: [440, 450, 460, 470, 480, 490, 500, 505, 700],
         br: [0.089, 0.092, 0.095, 0.097, 0.098, 0.099, 0.1, 0.1, 0.1],
         is_albedo: true,
@@ -395,11 +395,79 @@
         'DOI: 10.3847/1538-3881/aaae01', 'https://iopscience.iop.org/article/10.3847/1538-3881/aaae01',
         'https://ui.adsabs.harvard.edu/abs/2018AJ....155..151S/abstract'
     ],
-    'Great Red Spot (Jupiter) | Simon2018': { // Apr. 17
-        tags: ['Solar System/Jovian system', 'planetary body/planet'],
+    'Great Red Spot: February 1995 (Jupiter) | Simon2018': {
+        tags: ['Solar System/Jovian system', 'planetary body/planet', 'GRS'],
+        photometric_system: 'HST_WFPC2-PC',
+        filters: ['F336W', 'F410M', 'F555W', 'F673N', 'F953N'],
+        br: [0.257, 0.390, 0.638, 0.799, 0.697],
+        sd: [0.011, 0.013, 0.026, 0.039, 0.030],
+        is_reflecting_sunlight: false,
+        is_albedo: true, // I/F
+    },
+    'Great Red Spot: October 1996 (Jupiter) | Simon2018': {
+        tags: ['Solar System/Jovian system', 'planetary body/planet', 'GRS'],
+        photometric_system: 'HST_WFPC2-PC',
+        filters: ['F410M', 'F555W', 'F673N', 'F953N'],
+        br: [0.334, 0.661, 0.818, 0.704],
+        sd: [0.016, 0.031, 0.030, 0.030],
+        is_reflecting_sunlight: false,
+        is_albedo: true, // I/F
+    },
+    'Great Red Spot: February 2007 (Jupiter) | Simon2018': {
+        tags: ['Solar System/Jovian system', 'planetary body/planet', 'GRS'],
+        photometric_system: 'HST_WFPC2-PC',
+        filters: ['F255W', 'F343N', 'F410M', 'F673N', 'F953N'],
+        br: [0.255, 0.252, 0.395, 0.790, 0.682],
+        sd: [0.011, 0.012, 0.011, 0.012, 0.030],
+        is_reflecting_sunlight: false,
+        is_albedo: true, // I/F
+    },
+    'Great Red Spot: June 2008 (Jupiter) | Simon2018': {
+        tags: ['Solar System/Jovian system', 'planetary body/planet', 'GRS'],
+        photometric_system: 'HST_WFPC2-PC',
+        filters: ['F255W', 'F343N', 'F375N', 'F390N', 'F410M', 'F437N', 'F469N', 'F502N', 'F673N'],
+        br: [0.283, 0.290, 0.327, 0.348, 0.416, 0.465, 0.542, 0.633, 0.820],
+        sd: [0.013, 0.011, 0.014, 0.017, 0.019, 0.021, 0.026, 0.030, 0.030],
+        is_reflecting_sunlight: false,
+        is_albedo: true, // I/F
+    },
+    'Great Red Spot: November 2009 (Jupiter) | Simon2018': {
+        tags: ['Solar System/Jovian system', 'planetary body/planet', 'GRS'],
         photometric_system: 'HST_WFC3_UVIS1',
-        filters: ['F275W', 'F343N', 'F395N', 'F467M', 'F502N', 'F547M', 'F631N', 'F658N', 'FQ889N'],
-        br: [0.190, 0.120, 0.157, 0.321, 0.398, 0.515, 0.721, 0.752, 0.168], // uncertainties are smaller than the symbol size
+        filters: ['F275W', 'FQ378N', 'FQ437N', 'FQ508N', 'FQ634N', 'FQ906N'],
+        br: [0.304, 0.312, 0.476, 0.678, 0.794, 0.448], // uncertainties are smaller than the symbol size
+        is_reflecting_sunlight: false,
+        is_albedo: true, // I/F
+    },
+    'Great Red Spot: April 2014 (Jupiter) | Simon2018': {
+        tags: ['Solar System/Jovian system', 'planetary body/planet', 'GRS'],
+        photometric_system: 'HST_WFC3_UVIS1',
+        filters: ['F395N', 'F467M', 'F487N', 'F502N', 'F631N'],
+        br: [0.220, 0.406, 0.450, 0.489, 0.748], // uncertainties are smaller than the symbol size
+        is_reflecting_sunlight: false,
+        is_albedo: true, // I/F
+    },
+    'Great Red Spot: January 2015 (Jupiter) | Simon2018': {
+        tags: ['Solar System/Jovian system', 'planetary body/planet', 'GRS'],
+        photometric_system: 'HST_WFC3_UVIS1',
+        filters: ['F275W', 'F343N', 'F395N', 'F467M', 'F502N', 'F547M', 'F631N', 'F658N'],
+        br: [0.200, 0.156, 0.204, 0.365, 0.516, 0.569, 0.700, 0.718], // uncertainties are smaller than the symbol size
+        is_reflecting_sunlight: false,
+        is_albedo: true, // I/F
+    },
+    'Great Red Spot: February 2016 (Jupiter) | Simon2018': {
+        tags: ['Solar System/Jovian system', 'planetary body/planet', 'GRS'],
+        photometric_system: 'HST_WFC3_UVIS1',
+        filters: ['F275W', 'F343N', 'F395N', 'F467M', 'F502N', 'F547M', 'F631N', 'F658N'],
+        br: [0.195, 0.128, 0.167, 0.328, 0.424, 0.518, 0.697, 0.732], // uncertainties are smaller than the symbol size
+        is_reflecting_sunlight: false,
+        is_albedo: true, // I/F
+    },
+    'Great Red Spot: April 2017 (Jupiter) | Simon2018': {
+        tags: ['Solar System/Jovian system', 'planetary body/planet', 'GRS'],
+        photometric_system: 'HST_WFC3_UVIS1',
+        filters: ['F275W', 'F343N', 'F395N', 'F467M', 'F502N', 'F547M', 'F631N', 'F658N'],
+        br: [0.190, 0.120, 0.157, 0.321, 0.398, 0.515, 0.721, 0.752], // uncertainties are smaller than the symbol size
         is_reflecting_sunlight: false,
         is_albedo: true, // I/F
     },
