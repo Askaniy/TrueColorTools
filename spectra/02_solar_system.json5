@@ -101,6 +101,7 @@
         file: 'spectra/files/BAA/_venus_20170109_725_TRO.fit',
         geometric_albedo: ['Generic_Bessell.V', 0.689],
         phase_integral: 1.35, // Table 6
+        is_reflecting_sunlight: true,
     },
     'Mallama2006': [
         'Venus phase function and forward scattering from H2SO4',
@@ -551,6 +552,11 @@
         'DOI: 10.1016/0019-1035(91)90054-W', 'https://www.sciencedirect.com/science/article/pii/001910359190054W',
         'https://ui.adsabs.harvard.edu/abs/1991Icar...92..312B/abstract'
     ],
+    'Allen2022': [
+        'Spectra of Io and Europa by H. Allen uploaded to British Astronomical Association',
+        'https://britastro.org/specdb/data_graph.php?obs_id=12734',
+        'https://britastro.org/specdb/data_graph.php?obs_id=12735'
+    ],
     // Io
     'Simonelli1984': [
         'Voyager Disk-Integrated Photometry of Io',
@@ -595,6 +601,11 @@
         geometric_albedo: ['Generic_Bessell.V', [0.817, 4.57]], // 0.55 µm, V and Stromgren y filter data were combined
         phase_integral: 0.77, // 0.55 µm, "must be taken cautiously since there are no large phase angle observations to adequately constrain the Hapke model on which theis value is based"
     },
+    'Io: Leading hemisphere (J I) | Allen2022': { // Mid Julian Date 2459867.4028
+        tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        file: 'spectra/files/BAA/Io_20221014_HughAllen.FIT',
+        is_reflecting_sunlight: true,
+    },
     // Europa
     'Buratti1983': [
         'Voyager photometry of Europa',
@@ -630,6 +641,11 @@
         file: 'spectra/files/Madden2018/Europa_Spencer1999trailing_Albedo.txtU',
         is_geometric_albedo: true,
         phase_integral: [1.09, 0.11],
+    },
+    'Europa: Leading hemisphere (J II) | Allen2022': { // Mid Julian Date 2459867.3924
+        tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        file: 'spectra/files/BAA/Europa_20221014_HughAllen.FIT',
+        is_reflecting_sunlight: true,
     },
     // Ganymede
     'Ganymede: Leading hemisphere (J III) | Clark1980a, Madden2018, Buratti1991': {
