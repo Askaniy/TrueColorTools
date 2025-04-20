@@ -20,7 +20,7 @@ flux_density_SI = u.W / u.m**2 / u.nm
 
 supported_extensions = ('txt', 'dat', 'fits', 'fit')
 
-def file_reader(file: str) -> tuple[np.ndarray, None]:
+def file_reader(file: str) -> tuple[np.ndarray]:
     """
     Gets the file path within the TCT main folder (text or FITS) and returns the spectrum points (nm, br, sd).
     The internal measurement standards are nanometers and energy spectral density ("energy counter").
@@ -39,7 +39,7 @@ def file_reader(file: str) -> tuple[np.ndarray, None]:
         nm, br, sd = txt_reader(file, type_info)
     return nm, br, sd
 
-def txt_reader(file: str, type_info: str) -> tuple[np.ndarray, None]:
+def txt_reader(file: str, type_info: str) -> tuple[np.ndarray]:
     """ Imports spectral data from a text file """
     if 'a' in type_info:
         to_nm_factor = 0.1
@@ -60,7 +60,7 @@ def txt_reader(file: str, type_info: str) -> tuple[np.ndarray, None]:
             sd = sd[mask]
     return nm*to_nm_factor, br, sd
 
-def fits_reader(file: str, type_info: str) -> tuple[np.ndarray, None]:
+def fits_reader(file: str, type_info: str) -> tuple[np.ndarray]:
     """ Imports spectral data from a FITS file in standards of CALSPEC, VizeR, UVES, BAAVSS, etc """
     if 'n' in type_info:
         wl_unit = u.nm
@@ -70,6 +70,7 @@ def fits_reader(file: str, type_info: str) -> tuple[np.ndarray, None]:
         wl_unit = u.micron
     else:
         wl_unit = None
+    sd = None
     with fits.open(file) as hdul:
         #hdul.info()
         #print(repr(hdul[0].header))
@@ -96,8 +97,6 @@ def fits_reader(file: str, type_info: str) -> tuple[np.ndarray, None]:
                 sd = tbl[columns[sd_id].name]
                 if len(sd.shape) > 1:
                     sd = sd[0]
-            else:
-                sd = None
             # Standardization of units of measurement
             if wl_unit is None:
                 wl_unit = u.Unit(columns[wl_id].unit)

@@ -92,19 +92,29 @@
     },
 
     // Venus
+    'Rodda2017': [
+        'Venus spectrum by T. Rodda uploaded to British Astronomical Association',
+        'https://britastro.org/specdb/data_graph.php?obs_id=1280'
+    ],
+    'Venus | Rodda2017, Mallama2017a, Mallama2006': {
+        tags: ['featured', 'Solar System', 'planetary body/planet', 'Venus'],
+        file: 'spectra/files/BAA/_venus_20170109_725_TRO.fit',
+        geometric_albedo: ['Generic_Bessell.V', 0.689],
+        phase_integral: 1.35, // Table 6
+    },
     'Mallama2006': [
         'Venus phase function and forward scattering from H2SO4',
         'DOI: 10.1016/j.icarus.2005.12.014', 'https://www.sciencedirect.com/science/article/pii/S0019103505005105',
         'https://ui.adsabs.harvard.edu/abs/2006Icar..182...10M/abstract'
     ],
     'Venus | Madden2018, Mallama2006': {
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Venus'],
         file: 'spectra/files/Madden2018/Venus_MeadowsSpencer_Albedo.txtU',
         is_geometric_albedo: true,
         phase_integral: 1.35, // Table 6
     },
     'Venus | Mallama2017a, Mallama2006': {
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Venus'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
         br_geometric: [0.348, 0.658, 0.689, 0.708, 0.584,
@@ -112,20 +122,20 @@
         phase_integral: 1.35, // Table 6
     },
     'Venus | Crow2011, Mallama2017a, Mallama2006': { // phase angle 76°
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Venus'],
         nm: [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5],
         br: [0.59, 0.64, 0.72, 0.58, 0.95, 1.00, 1.16, 1.08, 1.16, 1.12],
         geometric_albedo: ['Generic_Bessell.V', 0.689],
         phase_integral: 1.35, // Table 6
     },
     'Venus | Mallama2006': {
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Venus'],
         filters: ['Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I'],
         br_geometric: [0.64, 0.67, 0.69, 0.57],
         br_spherical: [0.81, 0.90, 0.89, 0.87],
     },
     'Venus: Synthetic spectrum | VPL, Mallama2017a': {
-        tags: ['featured', 'Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Venus'],
         file: 'spectra/files/VPL/dayside_venus_toa.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.689],
         is_spherical_albedo: true, // assumption, no clear data source
