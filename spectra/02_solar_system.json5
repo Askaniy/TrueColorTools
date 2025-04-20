@@ -595,16 +595,16 @@
         is_geometric_albedo: true,
         phase_integral: [0.78, 0.02],
     },
+    'Io: Leading hemisphere (J I) | Allen2022': { // Mid Julian Date 2459867.4028
+        tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        file: 'spectra/files/BAA/Io_20221014_HughAllen.FIT',
+        is_reflecting_sunlight: true,
+    },
     'Io: Trailing hemisphere (J I) | Clark1980a, Domingue1998': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Clark1980/Io.txtU', // figure 10
         geometric_albedo: ['Generic_Bessell.V', [0.817, 4.57]], // 0.55 µm, V and Stromgren y filter data were combined
         phase_integral: 0.77, // 0.55 µm, "must be taken cautiously since there are no large phase angle observations to adequately constrain the Hapke model on which theis value is based"
-    },
-    'Io: Leading hemisphere (J I) | Allen2022': { // Mid Julian Date 2459867.4028
-        tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
-        file: 'spectra/files/BAA/Io_20221014_HughAllen.FIT',
-        is_reflecting_sunlight: true,
     },
     // Europa
     'Buratti1983': [
@@ -620,6 +620,11 @@
         sd: 0.049, // typical absolute error
         is_geometric_albedo: true,
         phase_integral: [1.09, 0.11],
+    },
+    'Europa: Leading hemisphere (J II) | Allen2022': { // Mid Julian Date 2459867.3924
+        tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        file: 'spectra/files/BAA/Europa_20221014_HughAllen.FIT',
+        is_reflecting_sunlight: true,
     },
     'Europa: Trailing hemisphere (J II) | Clark1980a, Madden2018, Buratti1983': {
         tags: ['featured', 'Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
@@ -641,11 +646,6 @@
         file: 'spectra/files/Madden2018/Europa_Spencer1999trailing_Albedo.txtU',
         is_geometric_albedo: true,
         phase_integral: [1.09, 0.11],
-    },
-    'Europa: Leading hemisphere (J II) | Allen2022': { // Mid Julian Date 2459867.3924
-        tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
-        file: 'spectra/files/BAA/Europa_20221014_HughAllen.FIT',
-        is_reflecting_sunlight: true,
     },
     // Ganymede
     'Ganymede: Leading hemisphere (J III) | Clark1980a, Madden2018, Buratti1991': {
