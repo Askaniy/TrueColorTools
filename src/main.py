@@ -50,13 +50,17 @@ def launch_window(lang: str):
     filters_figsize = (filters_plot_size[0] / filters_dpi, filters_plot_size[1] / filters_dpi)
 
     # Loading the icon
-    with open('src/images/icon', 'rb') as file:
+    with open('src/window/icon', 'rb') as file:
         icon = file.read()
+
+    # Loading the window 0 title
+    with open('src/window/title.txt', 'rb') as file:
+        window0_title = file.readline().decode().strip()
 
     # Launching the main window
     sg.theme('MaterialDark')
     window0 = sg.Window(
-        'TrueColorTools', icon=icon, finalize=True, resizable=True, margins=(0, 0), size=window0_size,
+        title=window0_title, size=window0_size, icon=icon, finalize=True, resizable=True, margins=(0, 0),
         layout=gui.generate_layout(
             circle_size, filters_plot_size, img_preview_size, text_colors, filtersDB, srgb, brMax, brGeom, bitness, rounding, T2_num, lang
         )
