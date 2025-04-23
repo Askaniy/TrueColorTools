@@ -1285,7 +1285,7 @@
         geometric_albedo: [550, 0.050],
         spherical_albedo: [550, [0.018, 0.003]],
     },
-    'α, β Rings (Uranus) | Karkoschka1997': {
+    'α and β Rings (Uranus) | Karkoschka1997': {
         tags: ['Solar System/Uranian system', 'ring'],
         //         620 nm                   910 nm
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F850LP'],
@@ -1293,7 +1293,7 @@
         sd: 0.007,
         is_geometric_albedo: true, // at 1° phase angle
     },
-    'η, γ, δ Rings (Uranus) | Karkoschka1997': {
+    'η, γ, and δ Rings (Uranus) | Karkoschka1997': {
         tags: ['Solar System/Uranian system', 'ring'],
         //         620 nm                   910 nm
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F850LP'],
