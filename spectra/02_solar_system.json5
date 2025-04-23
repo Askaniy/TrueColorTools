@@ -578,7 +578,7 @@
             0.11, 0.12, 0.14, 0.18, 0.26, 0.36, 0.47, 0.56, 0.64, 0.71, 0.73, 0.74,
             0.75, 0.76, 0.78, 0.81, 0.83, 0.86, 0.88, 0.89, 0.89, 0.89, 0.89, 0.89
         ], // traced from the Figure 2
-        phase_integral: 0.59, // for 0.55 µm, and 0.61 for 0.47 µm; all for the leading hemisphere
+        phase_integral: 0.59, // for 550 nm, and 0.61 for 470 nm; all for the leading hemisphere
     },
     'Io (J I) | Simonelli1984': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
@@ -599,14 +599,14 @@
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/BAA/Io_20221014_HughAllen.FIT',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.851, 0.25]], // 0.55 µm, V and Stromgren y filter data were combined
-        phase_integral: 0.59, // for 0.55 µm, and 0.61 for 0.47 µm
+        geometric_albedo: ['Generic_Bessell.V', [0.851, 0.25]], // 550 nm, V and Stromgren y filter data were combined
+        phase_integral: 0.59, // for 550 nm, and 0.61 for 470 nm
     },
     'Io: Trailing hemisphere (J I) | Clark1980a, Domingue1998': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Clark1980/Io.txtU', // figure 10
-        geometric_albedo: ['Generic_Bessell.V', [0.817, 4.57]], // 0.55 µm, V and Stromgren y filter data were combined
-        phase_integral: 0.77, // 0.55 µm, "must be taken cautiously since there are no large phase angle observations to adequately constrain the Hapke model on which theis value is based"
+        geometric_albedo: ['Generic_Bessell.V', [0.817, 4.57]], // 550 nm, V and Stromgren y filter data were combined
+        phase_integral: 0.77, // 550 nm, "must be taken cautiously since there are no large phase angle observations to adequately constrain the Hapke model on which theis value is based"
     },
     // Europa
     'Buratti1983': [
@@ -649,6 +649,34 @@
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Madden2018/Europa_Spencer1999trailing_Albedo.txtU',
         is_geometric_albedo: true,
+        phase_integral: [1.09, 0.11],
+    },
+    'Clark1998': [
+        'Multispectral Terrain Analysis of Europa from Galileo Images',
+        'DOI: 10.1006/icar.1998.5968', 'https://www.sciencedirect.com/science/article/pii/S0019103598959681',
+        'https://ui.adsabs.harvard.edu/abs/1986JGR....91.8077M/abstract'
+    ],
+    'McEwen1986': [
+        'Exogenic and Endogenic Albedo and Color Patterns on Europa.',
+        'DOI: 10.1029/JB091iB08p08077', 'https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/JB091iB08p08077',
+        'https://ui.adsabs.harvard.edu/abs/1986JGR....91.8077M/abstract'
+    ],
+    'Europa: Bright Plains (J II) | Clark1998, McEwen1986, Buratti1983': {
+        tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        photometric_system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
+        br: [1.112, 1.364, 1.450, 1.443, 1.454, 1.296], // extracted from Fig. 5
+        sd: [0.047, 0.030, 0.032, 0.029, 0.060, 0.064], // extracted from Fig. 5
+        geometric_albedo: ['Voyager_ISS-NAC.Blue', 0.8], // highest albedo in blue filter; Fig. 12
+        phase_integral: [1.09, 0.11],
+    },
+    'Europa: Dark Plains (J II) | Clark1998, McEwen1986, Buratti1983': {
+        tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        photometric_system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
+        br: [1.214, 1.405, 1.461, 1.424, 1.375, 1.203], // extracted from Fig. 5
+        sd: [0.030, 0.023, 0.028, 0.015, 0.025, 0.019], // extracted from Fig. 5
+        geometric_albedo: ['Voyager_ISS-NAC.Blue', 0.4], // lowest albedo in blue filter; Fig. 12
         phase_integral: [1.09, 0.11],
     },
     // Ganymede
@@ -736,103 +764,115 @@
         'DOI: 10.1126/science.1108056', 'https://ciclops.org/sci/docs/RingsSatsPaper.pdf',
         'https://ui.adsabs.harvard.edu/abs/2005Sci...307.1226P/abstract'
     ],
-    'Rings of Saturn: C (81000 km) | Porco2005': {
+    'C Ring: 81000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.2024, 0.2677, 0.3056, 0.3524, 0.3674], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
-    'Rings of Saturn: C (91000 km) | Porco2005': {
+    'C Ring: 91000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.2562, 0.4766, 0.5952, 0.6735, 0.6884], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
-    'Rings of Saturn: B (96000 km) | Porco2005': {
+    'B Ring: 96000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.2473, 0.4816, 0.6057, 0.6770, 0.6929], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
-    'Rings of Saturn: B (100000 km) | Porco2005': {
+    'B Ring: 100000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.3335, 0.6147, 0.7503, 0.8180, 0.8240], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
-    'Rings of Saturn: B (103000 km) | Porco2005': {
+    'B Ring: 103000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.3659, 0.6486, 0.7792, 0.8465, 0.8629], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
-    'Rings of Saturn: B (105000 km) | Porco2005': {
+    'B Ring: 105000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.3370, 0.6356, 0.7852, 0.8564, 0.8684], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
-    'Rings of Saturn: B (109000 km) | Porco2005': {
+    'B Ring: 109000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.3769, 0.6830, 0.8146, 0.8834, 0.8868], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
-    'Rings of Saturn: B (113000 km) | Porco2005': {
+    'B Ring: 113000 km | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.3450, 0.6261, 0.7657, 0.8325, 0.8455], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
-    'Rings of Saturn: Cassini Division (119000 km) | Porco2005': {
+    'Cassini Division: 119000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.2767, 0.4158, 0.4721, 0.5389, 0.5708], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
-    'Rings of Saturn: A (123000 km) | Porco2005': {
+    'A Ring: 123000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.2797, 0.4826, 0.5793, 0.6356, 0.6550], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
-    'Rings of Saturn: A (128000 km) | Porco2005': {
+    'A Ring: 128000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.2114, 0.4033, 0.5130, 0.5763, 0.5962], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
-    'Rings of Saturn: A (135000 km) | Porco2005': {
+    'A Ring: 135000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
         br: [0.2647, 0.4880, 0.5967, 0.6560, 0.6770], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
+    'Poulet1999': [
+        'Spectrophotometry of Saturn’s small satellites and rings from Hubble Space Telescope images',
+        'DOI: 10.1029/1998JE000621', 'https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/1998JE000621',
+        'https://ui.adsabs.harvard.edu/abs/1999JGR...10424095P/abstract'
+    ],
+    'F Ring (Saturn) | Poulet1999': {
+        tags: ['Solar System/Saturnian system', 'ring'],
+        photometric_system: 'HST_WFPC2-WF',
+        filters: ['F336W', 'F410M', 'F467M', 'F588N', 'FQCH4N_B', 'F673N'],
+        br: [0.993, 1.107, 0.879, 0.950, 1.143, 0.864], // extracted from Fig. 5
+        sd: [0.329, 0.157, 0.186, 0.171, 0.079, 0.165], // extracted from Fig. 5
+    },
     'dePater2006': [
         'New Dust Belts of Uranus: One Ring, Two Ring, Red Ring, Blue Ring',
         'DOI: 10.1126/science.1125110', 'https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=9f02ffd26be4f3966ddcf41f0ca29e1f8a1d1b0d',
         'https://ui.adsabs.harvard.edu/abs/2006Sci...312...92D/abstract'
     ],
-    'Rings of Saturn: G | dePater2006': {
+    'G Ring (Saturn) | dePater2006': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'HST_WFPC2-WF',
         filters: ['F300W', 'F450W', 'F555W', 'F675W', 'FQCH4N_C'],
         br: [0.626, 0.650, 0.743, 0.738, 1.100], // extracted from Fig. 3
         sd: [0.120, 0.170, 0.170, 0.110, 0.600], // extracted from Fig. 3
     },
-    'Rings of Saturn: E | dePater2006': {
+    'E Ring (Saturn) | dePater2006': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'HST_WFPC2-WF',
         filters: ['F300W', 'F450W', 'F555W', 'F675W', 'FQCH4N_C'],
@@ -1245,7 +1285,7 @@
         geometric_albedo: [550, 0.050],
         spherical_albedo: [550, [0.018, 0.003]],
     },
-    'Rings of Uranus: α, β | Karkoschka1997': {
+    'α, β Rings (Uranus) | Karkoschka1997': {
         tags: ['Solar System/Uranian system', 'ring'],
         //         620 nm                   910 nm
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F850LP'],
@@ -1253,7 +1293,7 @@
         sd: 0.007,
         is_geometric_albedo: true, // at 1° phase angle
     },
-    'Rings of Uranus: η, γ, δ | Karkoschka1997': {
+    'η, γ, δ Rings (Uranus) | Karkoschka1997': {
         tags: ['Solar System/Uranian system', 'ring'],
         //         620 nm                   910 nm
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F850LP'],
@@ -1261,7 +1301,7 @@
         sd: 0.007,
         is_geometric_albedo: true, // at 1° phase angle
     },
-    'Rings of Uranus: ε | Karkoschka1997': {
+    'ε Ring (Uranus) | Karkoschka1997': {
         tags: ['Solar System/Uranian system', 'ring'],
         //         340 nm                470 nm                620 nm                   670 nm                730 nm                   910 nm
         filters: ['HST_WFPC2-PC.F336W', 'HST_WFPC2-WF.F467M', 'HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-WF.FQCH4N_B', 'HST_WFPC2-PC.F850LP'],
