@@ -484,6 +484,7 @@
         filters: ['Violet', 'Clear', 'Green', 'Orange'],
         br: [0.86, 1.00, 1.53, 1.67], // traced from Fig. 4.11
         sd: [0.10, 0, 0.15, 0.16],
+        phase_function: ['phase coefficient', {beta: [0.042, 0.008]}],
     },
     // Jovian small inner satellites
     'Thomas1998': [
