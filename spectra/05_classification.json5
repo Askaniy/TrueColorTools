@@ -27,13 +27,45 @@
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.010]], // mean including Sycorax
         phase_function: ['HG', {G: [0.10, 0.15]}],
     },
-    'Jupiter trojans | MBOSS': {
+    'Schemel2021': [
+        'Zwicky Transient Facility Observations of Trojan Asteroids: A Thousand Colors, Rotation Amplitudes, and Phase Functions',
+        'DOI: 10.3847/PSJ/abc752', 'https://iopscience.iop.org/article/10.3847/PSJ/abc752',
+        'https://ui.adsabs.harvard.edu/abs/2021PSJ.....2...40S/abstract'
+    ],
+    'Jupiter trojans | MBOSS, Schemel2021': {
         tags: ['featured', 'Solar System', 'minor body/Jupiter trojan', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'U-B': 0.100, 'B-V': [0.782, 0.096], 'V-R': [0.446, 0.056], 'R-I': [0.420, 0.061]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.052, 0.023]],
+        phase_function: ['Palomar_ZTF.r', 'HG', {G: [0.24, 0.16]}], // Table 2
+    },
+    'Wong2017': [
+        '0.72.5μm Spectra of Hilda Asteroids',
+        'DOI: 10.3847/1538-3881/aa8406', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa8406',
+        'https://ui.adsabs.harvard.edu/abs/2017AJ....154..104W/abstract'
+    ],
+    'Emery2011': [
+        'Near-infrared Spectroscopy of Trojan Asteroids: Evidence for Two Compositional Groups',
+        'DOI: 10.1088/0004-6256/141/1/25', 'https://iopscience.iop.org/article/10.1088/0004-6256/141/1/25',
+        'https://ui.adsabs.harvard.edu/abs/2011AJ....141...25E/abstract'
+    ],
+    'Jupiter trojans: Less-red | Wong2017, Emery2011, Schemel2021': {
+        tags: ['Solar System', 'minor body/Jupiter trojan', 'class/orbital class'],
+        filters: [353, 476, 623, 761, 912], // broader 353 to 912 nm points only
+        br: [0.032, 0.036, 0.039, 0.043, 0.043], // extracted from Fig. 2
+        sd: 0.001, // extracted from Fig. 2
+        geometric_albedo: ['Generic_Bessell.V', [0.051, 0.016]],
+        phase_function: ['Palomar_ZTF.r', 'HG', {G: [0.14, 0.05]}],
+    },
+    'Jupiter trojans: Red | Wong2017, Emery2011, Schemel2021': {
+        tags: ['Solar System', 'minor body/Jupiter trojan', 'class/orbital class'],
+        filters: [353, 476, 623, 761, 912], // broader 353 to 912 nm points only
+        br: [0.034, 0.037, 0.044, 0.050, 0.056], // extracted from Fig. 2
+        sd: 0.001, // extracted from Fig. 2
+        geometric_albedo: ['Generic_Bessell.V', [0.055, 0.016]],
+        phase_function: ['Palomar_ZTF.r', 'HG', {G: [0.22, 0.07]}],
     },
     'Saturnian irregulars | Graykowski2018, Grav2015': {
         tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon', 'class/orbital class'],
@@ -237,6 +269,8 @@
     },
     
     // Asteroid spectral types
+
+    // Bus-DeMeo classification
     // (Bus2002 was disabled since DeMeo2009 is its IR extension)
     // Complexes sorting by albedo from Mahlke et al. 2020:
     // P, D, Ch, B, C, T, M, K, L, O, S, A, Q, V, E, (X)
@@ -696,5 +730,153 @@
         file: 'spectra/files/DeMeo2009/Xn.txtU',
         // no albedo by definition
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
+    },
+
+    // Mahlke2022 classification
+    // Sorted by albedo:
+    'Mahlke2022': [
+        'Asteroid taxonomy from cluster analysis of spectrometry and albedo',
+        'DOI: 10.1051/0004-6361/202243587', 'https://www.aanda.org/articles/aa/full_html/2022/09/aa43587-22/aa43587-22.html',
+        'https://ui.adsabs.harvard.edu/abs/2022A%26A...665A..26M/abstract'
+    ],
+    'Spectral type E | Mahlke2022, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        file: 'spectra/files/Mahlke2022/E.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.57, +0.15, -0.12]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.33, G_2: 0.45}],
+    },
+    'Spectral type R | Mahlke2022, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        file: 'spectra/files/Mahlke2022/R.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.30, +0.05, -0.04]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+    },
+    'Spectral type V | Mahlke2022, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        file: 'spectra/files/Mahlke2022/V.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.29, +0.11, -0.08]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.10, G_2: 0.56}],
+    },
+    'Spectral type O | Mahlke2022': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        file: 'spectra/files/Mahlke2022/O.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.02]],
+    },
+    'Spectral type A | Mahlke2022, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        file: 'spectra/files/Mahlke2022/A.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.25, +0.09, -0.07]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.30, G_2: 0.39}],
+    },
+    'Spectral type S | Mahlke2022, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        file: 'spectra/files/Mahlke2022/S.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.24, +0.10, -0.07]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+    },
+    'Spectral type Q | Mahlke2022, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        file: 'spectra/files/Mahlke2022/Q.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.24, +0.12, -0.08]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.36, G_2: 0.44}],
+    },
+    'Spectral type L | Mahlke2022, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        file: 'spectra/files/Mahlke2022/L.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.18, +0.07, -0.05]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.16, G_2: 0.37}],
+    },
+    'Spectral type M | Mahlke2022, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        file: 'spectra/files/Mahlke2022/M.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.14, +0.05, -0.04]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.19, G_2: 0.34}],
+    },
+    'Spectral type K | Mahlke2022, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        file: 'spectra/files/Mahlke2022/K.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.13, +0.04, -0.03]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.18, G_2: 0.40}],
+    },
+    'Spectral type Z | Mahlke2022, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        file: 'spectra/files/Mahlke2022/Z.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.07, +0.04, -0.03]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
+    },
+    'Spectral type D | Mahlke2022, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        file: 'spectra/files/Mahlke2022/D.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.06, +0.03, -0.02]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
+    },
+    'Spectral type B | Mahlke2022, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        file: 'spectra/files/Mahlke2022/B.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.06, +0.05, -0.03]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
+    },
+    'Spectral type C | Mahlke2022, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        file: 'spectra/files/Mahlke2022/C.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.05, +0.02, -0.01]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
+    },
+    'Spectral type Ch | Mahlke2022, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        file: 'spectra/files/Mahlke2022/Ch.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.05, +0.02, -0.01]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.05}],
+    },
+    'Spectral type P | Mahlke2022, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        file: 'spectra/files/Mahlke2022/P.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.05, +0.02, -0.01]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.80, G_2: 0.05}],
+    },
+    'Spectral type X | Mahlke2022, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        file: 'spectra/files/Mahlke2022/X.txtU',
+        // no albedo by definition
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
+    },
+
+    // Distant object taxonomic classes
+    'Belskaya2015': [
+        'Updated taxonomy of trans-neptunian objects and centaurs: Influence of albedo',
+        'DOI: 10.1016/j.icarus.2014.12.004', 'https://www.sciencedirect.com/science/article/pii/S0019103514006848',
+        'https://ui.adsabs.harvard.edu/abs/2015Icar..250..482B/abstract'
+    ],
+    'Class BB | Belskaya2015': { // Blue/Neutral
+        tags: ['Solar System', 'minor body/centaur', 'minor body/TNO', 'class/distant object taxonomic class'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.69, 0.05], 'V-R': [0.38, 0.03], 'V-I': [0.75, 0.04]},
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.112], // mean; dark
+    },
+    'Class BR | Belskaya2015': { // Intermediate Blue-Red
+        tags: ['Solar System', 'minor body/centaur', 'minor body/TNO', 'class/distant object taxonomic class'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.74, 0.05], 'V-R': [0.48, 0.03], 'V-I': [0.96, 0.05]},
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.051], // mean
+    },
+    'Class IR | Belskaya2015': { // Moderately Red
+        tags: ['Solar System', 'minor body/centaur', 'minor body/TNO', 'class/distant object taxonomic class'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.93, 0.06], 'V-R': [0.58, 0.04], 'V-I': [1.14, 0.07]},
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.110], // mean
+    },
+    'Class RR | Belskaya2015': { // Very Red
+        tags: ['Solar System', 'minor body/centaur', 'minor body/TNO', 'class/distant object taxonomic class'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [1.07, 0.06], 'V-R': [0.69, 0.04], 'V-I': [1.34, 0.09]},
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.131], // mean
     },
 }
