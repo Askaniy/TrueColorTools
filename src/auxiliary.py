@@ -795,7 +795,7 @@ illegal_chars = (
     '&',  # ampersand
     '{',  # left curly bracket
     '}',  # right curly bracket
-    '\\', # back slash
+    '\\', # backslash
     '<',  # left angle bracket
     '>',  # right angle bracket
     '*',  # asterisk
@@ -830,6 +830,6 @@ def superscript(number: int):
 
 subscript_digits = '₀₁₂₃₄₅₆₇₈₉'
 
-def subscript(number: int):
+def subscript(number: int | str):
     """ Converts a number to be a subscript string """
     return ''.join([subscript_digits[int(digit)] for digit in str(number)])

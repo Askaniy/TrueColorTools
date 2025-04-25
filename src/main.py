@@ -2,7 +2,6 @@
 
 import FreeSimpleGUI as sg
 from sigfig import round as sigfig_round
-from copy import deepcopy
 
 from src.core import *
 import src.gui as gui

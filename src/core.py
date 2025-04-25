@@ -82,6 +82,9 @@ class ObjectName:
             self._name_en = f'Unnamed object {ObjectName.unnamed_count}'
         else:
             self.raw_name = name
+            name = name.replace('~', ' ')
+            # A tilde, as in LaTeX, denotes a (narrow) non-breaking space.
+            # It is recommended to use it as a number group separator instead of a period or comma.
             if '|' in name:
                 name, reference = name.split('|')
                 self.reference = reference.strip()
@@ -96,7 +99,7 @@ class ObjectName:
                 name, note = name.split(':', 1)
                 self._note_en = self.formatting_provisional_designation(note.strip())
             if '/' in name: # comet name
-                # the last "if" because "/" may encountered in info or notes
+                # the last "if" because "/" may encounter in info or notes
                 index, name = name.split('/', 1)
                 self.index = index.strip() + '/'
             self._name_en = self.formatting_provisional_designation(name.strip())
@@ -105,14 +108,14 @@ class ObjectName:
         """ Returns the name in the specified language """
         return self._name_en if lang == 'en' else self.translate(self._name_en, tr.names, lang)
     
-    def note(self, lang: str = 'en') -> str:
+    def note(self, lang: str = 'en') -> str | None:
         """ Returns the note in the specified language """
         if self._note_en:
             return self._note_en if lang == 'en' else self.translate(self._note_en, tr.notes, lang)
         else:
             return None
     
-    def info(self, lang: str = 'en') -> str:
+    def info(self, lang: str = 'en') -> str | None:
         """ Returns the info in the specified language """
         if self._info_en:
             return self._info_en if lang == 'en' else self.translate(self._info_en, tr.names, lang)
