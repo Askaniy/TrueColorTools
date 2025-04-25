@@ -437,14 +437,14 @@ class _SpectralObject(_TrueColorToolsObject):
         - `sd` (Sequence): optional array of standard deviations
         - `name` (str|ObjectName): name as a string or an instance of a class that stores its components
         """
-        self.nm = np.asarray(nm, dtype='int16')
-        self.br = np.asarray(br, dtype='float64')
+        self.nm = np.array(nm, dtype='int16')
+        self.br = np.array(br, dtype='float64')
         if ndim != self.br.ndim:
             raise ValueError(f'Expected brightness array of dimension {ndim}, not {self.br.ndim}')
         if sd is None or (ignore_sd_for_cubes and ndim == 3):
             self.sd = None
         else:
-            self.sd = np.asarray(sd, dtype='float64')
+            self.sd = np.array(sd, dtype='float64')
         self.name = ObjectName.as_ObjectName(name)
         if np.any(np.isnan(self.br)):
             self.br = np.nan_to_num(self.br)
@@ -462,12 +462,12 @@ class _SpectralObject(_TrueColorToolsObject):
         - `sd` (Sequence): optional array of standard deviations
         - `name` (str|ObjectName): name as a string or an instance of a class that stores its components
         """
-        nm = np.asarray(nm) # numpy decides int or float
-        br = np.asarray(br, dtype='float64')
+        nm = np.array(nm) # numpy decides int or float
+        br = np.array(br, dtype='float64')
         if ignore_sd_for_cubes and isinstance(cls, _Cube):
             sd = None
         if sd is not None:
-            sd = np.asarray(sd, dtype='float64')
+            sd = np.array(sd, dtype='float64')
         name = ObjectName.as_ObjectName(name)
         target_class_name = cls.__name__
         try:
@@ -491,7 +491,7 @@ class _SpectralObject(_TrueColorToolsObject):
                 br = br[mask]
                 if sd is not None:
                     sd = sd[mask]
-            if np.any((diff := np.diff(nm)) != nm_step): # if not an uniform 5 nm grid
+            if np.any((diff := np.diff(nm)) != nm_step): # if not a uniform 5 nm grid
                 nm_uniform = aux.grid(nm[0], nm[-1], nm_step)
                 if diff.mean() >= nm_step: # interpolation, increasing resolution
                     br = aux.interpolating(nm, br, nm_uniform, nm_step)
@@ -537,6 +537,7 @@ class _SpectralObject(_TrueColorToolsObject):
     def mean_spectrum(self):
         """ Returns the mean spectrum along the spatial axes """
         # TODO: add std
+        br = None
         match self.ndim:
             case 1:
                 br = self.br
@@ -548,6 +549,7 @@ class _SpectralObject(_TrueColorToolsObject):
     
     def median_spectrum(self):
         """ Returns the median spectrum along the spatial axes """
+        br = None
         match self.ndim:
             case 1:
                 br = self.br
@@ -702,14 +704,21 @@ class Spectrum(_SpectralObject):
         - `name` (str|ObjectName): name as a string or an instance of a class that stores its components
         """
         nm = np.array(nm) # numpy decides int or float
-        order = np.argsort(nm)
-        nm = nm[order]
-        br = np.array(br, dtype='float64')[order]
-        if sd is not None:
-            sd = np.array(sd, dtype='float64')[order]
-        spectral_lines = tuple(Spectrum.from_nm(a) * b for a, b in zip(nm, br))
-        nm = aux.grid(spectral_lines[0].nm[0], spectral_lines[-1].nm[-1], nm_step)
-        output: Spectrum = spectral_lines[0].define_on_range(nm)
+        spectral_lines = []
+        nm_min = np.inf
+        nm_max = 0
+        for i in range(nm.size):
+            spectral_line = Spectrum.from_nm(nm[i])
+            if sd is not None:
+                spectral_line.sd = spectral_line.br * sd[i]
+            spectral_line.br *= br[i]
+            spectral_lines.append(spectral_line)
+            if spectral_line.nm[0] < nm_min:
+                nm_min = spectral_line.nm[0]
+            if spectral_line.nm[-1] > nm_max:
+                nm_max = spectral_line.nm[-1]
+        nm = aux.grid(nm_min, nm_max, nm_step)
+        output = spectral_lines[0].define_on_range(nm)
         for line in spectral_lines[1:]:
             output += line.define_on_range(nm)
         output.name = ObjectName.as_ObjectName(name)
@@ -997,7 +1006,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
         - `sd` (Sequence): optional array of standard deviations
         - `name` (str|ObjectName): name as a string or an instance of a class that stores its components
         """
-        self.br = np.asarray(br, dtype='float64')
+        self.br = np.array(br, dtype='float64')
         if ndim != self.br.ndim:
             raise ValueError(f'Expected brightness array of dimension {ndim}, not {self.br.ndim}')
         if not isinstance(filter_system, FilterSystem):
@@ -1006,7 +1015,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
         if sd is None or (ignore_sd_for_cubes and ndim == 3):
             self.sd = None
         else:
-            self.sd = np.asarray(sd, dtype='float64')
+            self.sd = np.array(sd, dtype='float64')
         self.name = ObjectName.as_ObjectName(name)
         if (len_filters := len(filter_system)) != (len_br := self.br.shape[0]):
             raise ValueError(f'Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br})')
