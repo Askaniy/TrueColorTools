@@ -911,7 +911,7 @@ class FilterSystem(SpectralSquare):
             yield self[i]
     
     @lru_cache(maxsize=32)
-    def __getitem__(self, index: int) -> Spectrum:
+    def __getitem__(self, index: int) -> Spectrum | None:
         """ Returns the filter profile with extra zeros trimmed off """
         if isinstance(index, int):
             profile = self.br[:, index]
@@ -1370,7 +1370,7 @@ class HG(_PhotometricModel):
     - H: “reduced magnitude” at zero phase angle
     - G: “slope parameter” that describes the shape of the phase curve
 
-    See Bowell et al (1989). Application of photometric models to asteroids.
+    See Bowell et al. (1989). Application of photometric models to asteroids.
     https://ui.adsabs.harvard.edu/abs/1989aste.conf..524B/abstract
     """
 
@@ -1407,7 +1407,7 @@ class HG1G2(_PhotometricModel):
     - G1: the first “slope parameter”
     - G2: the second “slope parameter”
 
-    See Muinonen et al (2010). A three-parameter magnitude phase function for asteroids.
+    See Muinonen et al. (2010). A three-parameter magnitude phase function for asteroids.
     https://www.sciencedirect.com/science/article/abs/pii/S001910351000151X
     """
 
@@ -1695,12 +1695,15 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
     # Phase function reading
     if 'phase_function' in content:
         phase_func = content['phase_function']
+        filter_or_nm = model_name = params = None
         match len(phase_func):
             case 2:
-                filter_or_nm = None
                 model_name, params = phase_func
             case 3:
                 filter_or_nm, model_name, params = phase_func
+            case _:
+                print(f'# Note for the Spectrum object "{name}"')
+                print(f'- `phase_function` key has invalid number of arguments: {len(phase_func)} (should be 2 or 3)')
         match model_name:
             case 'phase coefficient':
                 photometric_model = PhaseCoefficient(params, filter_or_nm)
@@ -1758,7 +1761,7 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
             br_geom = content['br_geometric']
             sd_geom = aux.repeat_if_value(content['sd_geometric'], len(br_geom)) if 'sd_geometric' in content else None
             geometric = _create_TCT_object(name, nm, filters, br_geom, sd_geom, filter_system, calib, is_sun, is_emission)
-            if sphe_how is not None:
+            if sphe_where is not None and sphe_how is not None:
                 spherical = geometric.scaled_at(sphe_where, sphe_how)
             elif 'bond_albedo' in content:
                 spherical = geometric.scaled_at(sun_filter, *aux.parse_value_sd(content['bond_albedo']))
@@ -1766,7 +1769,7 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
             br_sphe = content['br_spherical']
             sd_sphe = aux.repeat_if_value(content['sd_spherical'], len(br_sphe)) if 'sd_spherical' in content else None
             spherical = _create_TCT_object(name, nm, filters, br_sphe, sd_sphe, filter_system, calib, is_sun, is_emission)
-            if geom_how is not None:
+            if geom_where is not None and geom_how is not None:
                 geometric = spherical.scaled_at(geom_where, geom_how)
         if geometric is None and spherical is None:
             print(f'# Note for the database object "{name}"')
@@ -1776,11 +1779,11 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
         TCT_obj = _create_TCT_object(name, nm, filters, br, sd, filter_system, calib, is_sun, is_emission)
         if is_geom_albedo:
             geometric = TCT_obj
-        elif geom_how is not None:
+        elif geom_where is not None and geom_how is not None:
             geometric = TCT_obj.scaled_at(geom_where, geom_how)
         if is_sphe_albedo:
             spherical = TCT_obj
-        elif sphe_how is not None:
+        elif sphe_where is not None and sphe_how is not None:
             spherical = TCT_obj.scaled_at(sphe_where, sphe_how)
         elif 'bond_albedo' in content:
             spherical = TCT_obj.scaled_at(sun_filter, *aux.parse_value_sd(content['bond_albedo']))
@@ -1788,7 +1791,7 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
     #if 'tags' in content:
     #    for tag in content['tags']:
     #        tags |= set(tag.split('/'))
-    if 'is_emissive' in content and content['is_emissive']:
+    if ('is_emissive' in content and content['is_emissive']) or is_emission:
         return EmittingBody(name, TCT_obj)
     else:
         return ReflectingBody(name, TCT_obj, geometric, spherical, photometric_model)
