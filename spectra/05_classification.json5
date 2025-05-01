@@ -53,17 +53,13 @@
     ],
     'Jupiter trojans: Less-red | Wong2017, Emery2011, Schemel2021': {
         tags: ['Solar System', 'minor body/Jupiter trojan', 'class/orbital class'],
-        filters: [353, 476, 623, 761, 912], // broader 353 to 912 nm points only
-        br: [0.032, 0.036, 0.039, 0.043, 0.043], // extracted from Fig. 2
-        sd: 0.001, // extracted from Fig. 2
+        file: 'spectra/files/Wong2017/LessRedTrojans_Wong2017.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.051, 0.016]],
         phase_function: ['Palomar_ZTF.r', 'HG', {G: [0.14, 0.05]}],
     },
     'Jupiter trojans: Red | Wong2017, Emery2011, Schemel2021': {
         tags: ['Solar System', 'minor body/Jupiter trojan', 'class/orbital class'],
-        filters: [353, 476, 623, 761, 912], // broader 353 to 912 nm points only
-        br: [0.034, 0.037, 0.044, 0.050, 0.056], // extracted from Fig. 2
-        sd: 0.001, // extracted from Fig. 2
+        file: 'spectra/files/Wong2017/RedTrojans_Wong2017.txttU',
         geometric_albedo: ['Generic_Bessell.V', [0.055, 0.016]],
         phase_function: ['Palomar_ZTF.r', 'HG', {G: [0.22, 0.07]}],
     },
