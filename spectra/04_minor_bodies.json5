@@ -6831,7 +6831,14 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
-    // To add: 19P/Borrelly, the Deep Space 1 target
+    '19P/Borelly | Lamy2009, Knight2023': {
+        tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'spacecraft target/Deep Space 1 target'],
+        nm: [550, 646, 813],
+        br: [16.768, 16.674, 16.487], // extracted from Fig. 2a
+        sd: [0, 1.686, 0.875], // extracted from Fig. 2a
+        geometric_albedo: ['Generic_Bessell.R', [0.06, 0.02]],
+        phase_function: ['phase coefficient', {beta: [0.043, 0.009]}],
+    },
     '21P/Giacobini–Zinner | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
         photometric_system: 'Generic_Bessell',
