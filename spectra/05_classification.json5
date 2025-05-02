@@ -59,7 +59,7 @@
     },
     'Jupiter trojans: Red | Wong2017, Emery2011, Schemel2021': {
         tags: ['Solar System', 'minor body/Jupiter trojan', 'class/orbital class'],
-        file: 'spectra/files/Wong2017/RedTrojans_Wong2017.txttU',
+        file: 'spectra/files/Wong2017/RedTrojans_Wong2017.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.055, 0.016]],
         phase_function: ['Palomar_ZTF.r', 'HG', {G: [0.22, 0.07]}],
     },
