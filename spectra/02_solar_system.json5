@@ -292,38 +292,55 @@
         'https://ui.adsabs.harvard.edu/abs/1979JGR....84.8415S/abstract'
     ],
     'Mars | Madden2018': {
-        tags: ['featured', 'Solar System', 'planetary body/planet'],
+        tags: ['featured', 'Solar System', 'planetary body/planet', 'Mars'],
         file: 'spectra/files/Madden2018/Mars_McCord1971_Albedo.txtU',
         is_geometric_albedo: true,
     },
     'Mars | Mallama2017a': { // synthetic photospectrum
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Mars'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
         br_geometric: [0.060, 0.088, 0.170, 0.288, 0.330,
                        0.250, 0.285],
     },
     'Mars | Crow2011, Mallama2017a': { // phase angle 37.0°
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Mars'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31],
         geometric_albedo: ['Generic_Bessell.V', 0.170],
     },
     'Mars: Bright areas | Singer1979': { // the average of a number of typical bright region spectra
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Mars'],
         file: 'spectra/files/Singer1979/Mars_bright.txtU', // figure 3
         geometric_albedo: [800, 0.40],
     },
     'Mars: Dark areas | Singer1979': { // telescopic dark region Iapygia
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Mars'],
         file: 'spectra/files/Singer1979/Mars_dark.txtU', // figure 3
         geometric_albedo: [800, 0.21],
     },
     'Mars: Synthetic spectrum | VPL': { // Tyler Robinson, "Present-day Mars generated using SMART"
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Mars'],
         file: 'spectra/files/VPL/mars_flx_refl.txtU',
         is_geometric_albedo: true,
+    },
+    'Bell2007': [
+        'High spectral resolution UV to near-IR observations of Mars using HST/STIS',
+        'DOI: 10.1016/j.icarus.2007.05.019', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103507002692',
+        'https://ui.adsabs.harvard.edu/abs/2007Icar..191..581B/abstract'
+    ],
+    'Olympus Mons (Mars) | Bell2007': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars'],
+        file: 'spectra/files/Bell2007/Olympus_Mons_Bell2007.txt', // Fig 3. (2003: Clear)
+        is_reflecting_sunlight: false,
+        is_albedo: true, // I/F
+    },
+    'Valles Marineris: Eastern part (Mars) | Bell2007': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars'],
+        file: 'spectra/files/Bell2007/Valles_Marineris_Bell2007.txt', // Fig 3. (2003: Clear)
+        is_reflecting_sunlight: false,
+        is_albedo: true, // I/F
     },
     // Phobos
     'Pajola2013': [
