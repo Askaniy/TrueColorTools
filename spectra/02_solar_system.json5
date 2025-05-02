@@ -1201,7 +1201,7 @@
     ],
     'Iapetus: Leading hemisphere (S VIII) | Filacchione2007, Blackburn2010': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
-        file: 'spectra/files/Filacchione2007/Iapetus_Dark_Filacchione2007.txtA', // Fig. 19 (Filacchione2007)
+        file: 'spectra/files/Filacchione2007/Iapetus_Dark_Filacchione2007.txt', // Fig. 19 (Filacchione2007)
         geometric_albedo: [510, 0.032], // traced from Fig. 4 (Blackburn2010)
         phase_integral: [0.26, 0.05], // 510 nm
     },
@@ -1223,7 +1223,7 @@
     },
     'Iapetus: Trailing hemisphere (S VIII) | Filacchione2007, Blackburn2010': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
-        file: 'spectra/files/Filacchione2007/Iapetus_Bright_Filacchione2007.txtA', // Fig. 19 (Filacchione2007)
+        file: 'spectra/files/Filacchione2007/Iapetus_Bright_Filacchione2007.txt', // Fig. 19 (Filacchione2007)
         geometric_albedo: [510, 0.46], // traced from Fig. 4 (Blackburn2010)
         phase_integral: [0.61, 0.10], // 510 nm
     },
