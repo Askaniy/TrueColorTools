@@ -549,7 +549,7 @@
     ],
     '(203) Pompeja | Hasegawa2021, Masiero2012, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/main belt'],
-        file: 'spectra/files/Pompeja_Hasegawa2021.txtU'
+        file: 'spectra/files/Pompeja_Hasegawa2021.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.036, 0.006]],
         phase_function: ['HG1G2', {H: [8.692150, +0.199680, -0.246761], G_1: [0.369195, +0.222125, -0.321659], G_2: [0.315078, +0.080031, -0.065065]}],
     },
