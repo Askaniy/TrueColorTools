@@ -292,38 +292,55 @@
         'https://ui.adsabs.harvard.edu/abs/1979JGR....84.8415S/abstract'
     ],
     'Mars | Madden2018': {
-        tags: ['featured', 'Solar System', 'planetary body/planet'],
+        tags: ['featured', 'Solar System', 'planetary body/planet', 'Mars'],
         file: 'spectra/files/Madden2018/Mars_McCord1971_Albedo.txtU',
         is_geometric_albedo: true,
     },
     'Mars | Mallama2017a': { // synthetic photospectrum
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Mars'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
         br_geometric: [0.060, 0.088, 0.170, 0.288, 0.330,
                        0.250, 0.285],
     },
     'Mars | Crow2011, Mallama2017a': { // phase angle 37.0°
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Mars'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31],
         geometric_albedo: ['Generic_Bessell.V', 0.170],
     },
     'Mars: Bright areas | Singer1979': { // the average of a number of typical bright region spectra
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Mars'],
         file: 'spectra/files/Singer1979/Mars_bright.txtU', // figure 3
         geometric_albedo: [800, 0.40],
     },
     'Mars: Dark areas | Singer1979': { // telescopic dark region Iapygia
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Mars'],
         file: 'spectra/files/Singer1979/Mars_dark.txtU', // figure 3
         geometric_albedo: [800, 0.21],
     },
     'Mars: Synthetic spectrum | VPL': { // Tyler Robinson, "Present-day Mars generated using SMART"
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Mars'],
         file: 'spectra/files/VPL/mars_flx_refl.txtU',
         is_geometric_albedo: true,
+    },
+    'Bell2007': [
+        'High spectral resolution UV to near-IR observations of Mars using HST/STIS',
+        'DOI: 10.1016/j.icarus.2007.05.019', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103507002692',
+        'https://ui.adsabs.harvard.edu/abs/2007Icar..191..581B/abstract'
+    ],
+    'Olympus Mons (Mars) | Bell2007': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars'],
+        file: 'spectra/files/Bell2007/Olympus_Mons_Bell2007.txt', // Fig 3. (2003: Clear)
+        is_reflecting_sunlight: false,
+        is_albedo: true, // I/F
+    },
+    'Valles Marineris: Eastern part (Mars) | Bell2007': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars'],
+        file: 'spectra/files/Bell2007/Valles_Marineris_Bell2007.txt', // Fig 3. (2003: Clear)
+        is_reflecting_sunlight: false,
+        is_albedo: true, // I/F
     },
     // Phobos
     'Pajola2013': [
@@ -1086,6 +1103,11 @@
         'DOI: 10.1016/0019-1035(84)90043-5', 'https://www.sciencedirect.com/science/article/abs/pii/0019103584900435',
         'https://ui.adsabs.harvard.edu/abs/1984Icar...58..265C/abstract'
     ],
+    'Pitman2010': [
+        'Disk-integrated bolometric Bond albedos and rotational light curves of saturnian satellites from Cassini Visual and Infrared Mapping Spectrometer',
+        'DOI: 10.1016/j.icarus.2009.12.001', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103509004801',
+        'https://ui.adsabs.harvard.edu/abs/2010Icar..206..537P/abstract'
+    ],
     'Filacchione2020': [
         'Photometric modelling and VIS-IR albedo maps of Rhea from Cassini-VIMS ',
         'DOI: 10.1093/mnrasl/slaa162', 'https://academic.oup.com/mnrasl/article/499/1/L62/5905424',
@@ -1103,11 +1125,11 @@
         geometric_albedo: [550, [0.89, 0.01]],
         phase_integral: [0.71, 0.01],
     },
-    'Rhea: Leading hemisphere (S V) | Clark1984, Buratti2022': {
+    'Rhea: Leading hemisphere (S V) | Clark1984, Buratti2022, Pitman2010': {
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Rhea_Clark1984.txtU', // figure 4
         geometric_albedo: [550, [0.89, 0.01]],
-        phase_integral: [0.71, 0.01],
+        phase_integral: [0.65, 0.06], // 510 nm
     },
     // Titan
     'Karkoschka2012': [
@@ -1184,26 +1206,43 @@
         phase_function: ['HG', {H: [13.81, 0.05], G: [0.56, 0.14]}],
     },
     // Iapetus
+    'Filacchione2007': [
+        'Saturn’s icy satellites investigated by Cassini-VIMS. I. Full-disk properties: 350 5100 nm reflectance spectra and phase curves',
+        'DOI: 10.1016/j.icarus.2006.08.001', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103506002715',
+        'https://ui.adsabs.harvard.edu/abs/2007Icar..186..259F/abstract'
+    ],
     'Blackburn2010': [
         'Solar phase curves and phase integrals for the leading and trailing hemispheres of Iapetus from the Cassini Visual Infrared Mapping Spectrometer',
         'DOI: 10.1016/j.icarus.2010.04.011', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103510001594',
         'https://ui.adsabs.harvard.edu/abs/2010Icar..209..738B/abstract'
     ],
+    'Iapetus: Leading hemisphere (S VIII) | Filacchione2007, Blackburn2010': {
+        tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        file: 'spectra/files/Filacchione2007/Iapetus_Dark_Filacchione2007.txt', // Fig. 19 (Filacchione2007)
+        geometric_albedo: [510, 0.032], // traced from Fig. 4 (Blackburn2010)
+        phase_integral: [0.26, 0.05], // 510 nm
+    },
     'Gudipati2003': [
         'Luminescence from Vacuum-Ultraviolet-irradiated Cosmic Ice Analogs and Residues',
         'DOI: 10.1086/345349', 'https://iopscience.iop.org/article/10.1086/345349'
     ],
+    'Iapetus: Leading hemisphere (S VIII) | Gudipati2003': {
+        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        nm: [330, 350, 380, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850],
+        br: [0.047, 0.051, 0.058, 0.063, 0.067, 0.071, 0.080, 0.087, 0.090, 0.093, 0.099, 0.102, 0.102],
+        is_albedo: true,
+    },
     'Iapetus: Leading hemisphere (S VIII) | Blackburn2010': {
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         nm: [350, 400, 510, 600, 700, 810, 900, 1000, 1520, 1800, 2020, 2230, 3600],
         br_geometric: [0.031, 0.031, 0.032, 0.051, 0.056, 0.065, 0.059, 0.058, 0.106, 0.131, 0.104, 0.148, 0.055], // traced from Fig. 4
         br_spherical: [0.005, 0.005, 0.008, 0.009, 0.012, 0.023, 0.015, 0.015, 0.033, 0.039, 0.038, 0.047, 0.019], // calculated from phase integrals in Table 2
     },
-    'Iapetus: Leading hemisphere (S VIII) | Gudipati2003': {
-        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
-        nm: [330, 350, 380, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850],
-        br: [0.047, 0.051, 0.058, 0.063, 0.067, 0.071, 0.080, 0.087, 0.090, 0.093, 0.099, 0.102, 0.102],
-        is_albedo: true,
+    'Iapetus: Trailing hemisphere (S VIII) | Filacchione2007, Blackburn2010': {
+        tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        file: 'spectra/files/Filacchione2007/Iapetus_Bright_Filacchione2007.txt', // Fig. 19 (Filacchione2007)
+        geometric_albedo: [510, 0.46], // traced from Fig. 4 (Blackburn2010)
+        phase_integral: [0.61, 0.10], // 510 nm
     },
     'Iapetus: Trailing hemisphere (S VIII) | Blackburn2010': {
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
