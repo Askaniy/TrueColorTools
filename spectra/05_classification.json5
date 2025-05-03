@@ -322,7 +322,7 @@
 
     // Ch complex (Cgh, Ch)
     'Cgh-type | DeMeo2009, Mahlke2020': {
-        tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/Cgh.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.06, 0.06]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.05}],

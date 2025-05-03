@@ -2523,7 +2523,7 @@
         'https://ui.adsabs.harvard.edu/abs/2020Icar..33813463S/abstract'
     ],
     '(52246) Donaldjohanson | SouzaFeliciano2020, SsODNet': {
-        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Lucy target'],
+        tags: ['featured', 'Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Lucy target'],
         nm_range: {start: 500, stop: 900, step: 50},
         br: [0.922, 1.000, 1.027, 1.044, 1.029, 1.030, 1.023, 1.001, 0.985], // traced from Fig. 2 (fit)
         geometric_albedo: ['Generic_Bessell.V', [0.0622, 0.0115]],
@@ -2598,7 +2598,7 @@
         'https://ui.adsabs.harvard.edu/abs/2020tnss.book..109B/abstract'
     ],
     '(55565) 2002 AW197 | Barucci2020, Vilenius2014': {
-        tags: ['featured', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         file: 'spectra/files/2002AW197_Barucci2020.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.112, +0.012, -0.011]],
     },
@@ -5492,7 +5492,7 @@
         'DOI: 10.3847/1538-3881/aae92a', 'https://iopscience.iop.org/article/10.3847/1538-3881/aae92a'
     ],
     '(532037) 2013 FY27 | Sheppard2018': {
-        tags: ['featured', 'Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/midsize TNO'],
+        tags: ['Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'LCO_IMACS',
         color_indices: {'sloan_g-sloan_r': [0.76, 0.02], 'sloan_r-sloan_i': [0.31, 0.03]},
         calibration_system: 'AB',
