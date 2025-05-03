@@ -145,7 +145,7 @@
         'A New Analysis of the Spectra Obtained by the Venera Missions in the Venusian Atmosphere. I. The Analysis of the Data Received from the Venera-11 Probe at Altitudes Below 37 km in the 0.44–0.66 µm Wavelength Range',
         'DOI: 10.1007/s11208-005-0042-1', 'https://link.springer.com/article/10.1007/s11208-005-0042-1'
     ],
-    'Venus: Surface | Maiorov2005': {
+    'Surface of Venus | Maiorov2005': {
         tags: ['featured', 'Solar System', 'planetary body/planet', 'Venus'],
         nm: [440, 450, 460, 470, 480, 490, 500, 505, 700],
         br: [0.089, 0.092, 0.095, 0.097, 0.098, 0.099, 0.1, 0.1, 0.1],
@@ -679,7 +679,7 @@
         'DOI: 10.1029/JB091iB08p08077', 'https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/JB091iB08p08077',
         'https://ui.adsabs.harvard.edu/abs/1986JGR....91.8077M/abstract'
     ],
-    'Europa: Bright Plains (J II) | Clark1998, McEwen1986, Buratti1983': {
+    'Europa: Bright areas (J II) | Clark1998, McEwen1986, Buratti1983': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
@@ -688,7 +688,7 @@
         geometric_albedo: ['Voyager_ISS-NAC.Blue', 0.8], // highest albedo in blue filter; Fig. 12
         phase_integral: [1.09, 0.11],
     },
-    'Europa: Dark Plains (J II) | Clark1998, McEwen1986, Buratti1983': {
+    'Europa: Dark areas (J II) | Clark1998, McEwen1986, Buratti1983': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
@@ -1150,13 +1150,13 @@
         file: 'spectra/files/Karkoschka/Titan1993.txt',
         is_geometric_albedo: true,
     },
-    'Titan: Surface, phase angle 45° (S VI) | Karkoschka2016': {
+    'Surface of Titan: Phase angle 45° (S VI) | Karkoschka2016': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         nm: [520, 563, 595, 642, 685, 754, 823, 830, 935, 940, 1070, 1280, 1550, 1590],
         br: [0.093, 0.107, 0.116, 0.130, 0.139, 0.147, 0.151, 0.151, 0.151, 0.151, 0.145, 0.124, 0.070, 0.071],
         is_albedo: true,
     },
-    'Titan: Surface, phase angle 0° (S VI) | Karkoschka2012': {
+    'Surface of Titan: Phase angle 0° (S VI) | Karkoschka2012': {
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         nm_range: {start: 300, stop: 800, step: 10},
         br_geometric: [
