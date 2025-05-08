@@ -9,22 +9,22 @@
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.010]], // mean including Sycorax
         phase_function: ['HG', {G: [0.10, 0.15]}],
     },
-    'Jovian irregulars i=28° | Grav2003, Grav2015': {
+    'Jovian irregulars i=28° | Grav2003, Grav2015': { // Himalia group
         tags: ['Solar System/Jovian system', 'natural satellite/irregular moon', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.66, 0.02], 'V-R': [0.36, 0.01]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.010]], // mean including Sycorax
+        geometric_albedo: ['Generic_Bessell.V', [0.043, 0.007]], // Average of members with measured albedos
         phase_function: ['HG', {G: [0.10, 0.15]}],
     },
-    'Jovian irregulars i=149° | Grav2003, Grav2015': {
+    'Jovian irregulars i=149° | Grav2003, Grav2015': { // Pasiphae and Ananke groups
         tags: ['Solar System/Jovian system', 'natural satellite/irregular moon', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.75, 0.04], 'V-R': [0.41, 0.08]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.010]], // mean including Sycorax
+        geometric_albedo: ['Generic_Bessell.V', [0.041, 0.008]], // Average of members with measured albedos
         phase_function: ['HG', {G: [0.10, 0.15]}],
     },
     'Schemel2021': [
@@ -38,6 +38,23 @@
         color_indices: {'U-B': 0.100, 'B-V': [0.782, 0.096], 'V-R': [0.446, 0.056], 'R-I': [0.420, 0.061]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.052, 0.023]],
+        phase_function: ['Palomar_ZTF.r', 'HG', {G: [0.24, 0.16]}], // Table 2
+    },
+    'Fornasier2007': [
+        'Visible spectroscopic and photometric survey of Jupiter Trojans: Final results on dynamical families',
+        'DOI: 10.1016/j.icarus.2007.03.033', 'https://www.sciencedirect.com/science/article/pii/S0019103507001431',
+        'https://ui.adsabs.harvard.edu/abs/2007Icar..190..622F/abstract'
+    ],
+    'Jupiter trojans: Greek camp (L4) | Fornasier2007, Schemel2021': { // Leading cloud
+        tags: ['Solar System', 'minor body/Jupiter trojan', 'class/orbital class'],
+        slope: {start: 550, stop: 800, percent_per_100nm: [7.33, 4.24]}, // Section 4.3; without Eurybates family
+        geometric_albedo: ['Generic_Bessell.V', [0.052, 0.023]],
+        phase_function: ['Palomar_ZTF.r', 'HG', {G: [0.24, 0.16]}], // Table 2
+    },
+    'Jupiter trojans: Trojan camp (L5) | Fornasier2007, Schemel2021': { // Trailing cloud
+        tags: ['Solar System', 'minor body/Jupiter trojan', 'class/orbital class'],
+        slope: {start: 550, stop: 800, percent_per_100nm: [9.15, 4.19]}, // Section 4.3
         geometric_albedo: ['Generic_Bessell.V', [0.052, 0.023]],
         phase_function: ['Palomar_ZTF.r', 'HG', {G: [0.24, 0.16]}], // Table 2
     },
@@ -72,24 +89,24 @@
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.010]], // mean including Sycorax
         phase_function: ['HG', {G: [0.10, 0.15]}],
     },
-    'Saturnian irregulars i=34° | Grav2003, Grav2015': {
+    'Saturnian irregulars i=34° | Grav2003, Grav2007': { // Gallic group
         tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.91, 0.05], 'V-R': [0.48, 0.01]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.010]], // mean including Sycorax
-        phase_function: ['HG', {G: [0.10, 0.15]}],
+        phase_function: ['HG', {G: [0.393, 0.183]}], // Average of members with measured phase functions
     },
-    'Saturnian irregulars i=46° | Grav2003, Grav2015': {
+    'Saturnian irregulars i=46° | Grav2003, Grav2007': { // Inuit group
         tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.79, 0.01], 'V-R': [0.51, 0.02]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.010]], // mean including Sycorax
-        phase_function: ['HG', {G: [0.10, 0.15]}],
-    },
+       phase_function: ['HG', {G: [0.090, 0.175]}], // Average of members with measured phase functions
+     },
     'Uranian irregulars | Graykowski2018, Grav2015': {
         tags: ['Solar System/Uranian system', 'natural satellite/irregular moon', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
@@ -225,6 +242,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.114], // albedo from Zelario’s sheet
+        phase_function: ['HG', {G: [-0.07, 0.06]}], // average of Sheppard2002 + Sheppard2003 phase functions (plutinos)
     },
     'Other resonances | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO', 'class/orbital class'],
@@ -233,6 +251,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.148], // albedo from Zelario’s sheet
+        phase_function: ['HG', {G: [0.12, 0.19]}], // average of Sheppard2003 phase functions (resonant TNOs)
     },
     'Cubewano: Hot, inner objects | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/classical TNO', 'class/orbital class'],
@@ -241,6 +260,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.102], // albedo from Zelario’s sheet
+        phase_function: ['HG', {G: [-0.10, 0.15]}], // average of Hicks2005 + Rousselot2005b phase functions (hot classical TNOs)
     },
     'Cubewano: Cold, outer objects | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/classical TNO', 'class/orbital class'],
@@ -257,6 +277,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.075], // albedo from Zelario’s sheet
+        phase_function: ['HG', {G: [-0.07, 0.03]}], // average of Sheppard2002 + Sheppard2003 + Rousselot2005b phase functions (SDOs)
     },
     'Detached objects | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/detached TNO', 'class/orbital class'],
@@ -295,11 +316,21 @@
         'Spectroscopic survey of X-type asteroids',
         'DOI: 10.1016/j.icarus.2011.04.022', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103511001576'
     ],
+    'Dahlgren1995': [
+        'A study of Hilda asteroids. I. CCD spectroscopy of Hilda asteroids.',
+        'https://ui.adsabs.harvard.edu/abs/1995A%26A...302..907D/abstract'
+    ],
 
     // P complex (P, PC, PD)
     'P-type | Fornasier2011, Mahlke2020': {
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         slope: {start: 550, stop: 800, percent_per_100nm: [3.34, 1.69]},
+        geometric_albedo: ['Generic_Bessell.V', [0.05, 0.02]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.80, G_2: 0.05}],
+    },
+    'PD-type | Dahlgren1995, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        slope: {start: 400, stop: 910, percent_per_100nm: 5.5}, // 5.0 ≤ S’ < 6.0
         geometric_albedo: ['Generic_Bessell.V', [0.05, 0.02]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.80, G_2: 0.05}],
     },
@@ -319,6 +350,12 @@
     //    geometric_albedo: ['Generic_Bessell.V', [0.06, 0.02]],
     //    phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
     //},
+    'DP-type | Dahlgren1995, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        slope: {start: 400, stop: 910, percent_per_100nm: 6.5}, // 6.0 ≤ S’ < 7.0
+        geometric_albedo: ['Generic_Bessell.V', [0.06, 0.02]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
+    },
 
     // Ch complex (Cgh, Ch)
     'Cgh-type | DeMeo2009, Mahlke2020': {
@@ -567,6 +604,12 @@
     'Sv-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/Sv.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+    },
+    'Sw-type | DeMeo2009, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
+        file: 'spectra/files/DeMeo2009/Sw.txtU', // Fig. 8, wasn’t available on SMASS
         geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
@@ -854,12 +897,22 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.112], // mean; dark
     },
+    'Class BB | Merlin2017, Belskaya2015': { // Blue/Neutral
+        tags: ['Solar System', 'minor body/centaur', 'minor body/TNO', 'class/distant object taxonomic class'],
+        file: 'spectra/files/Merlin2017/BB.txtU',
+        geometric_albedo: ['Generic_Bessell.V', 0.112], // mean; dark
+    },
     'Class BR | Belskaya2015': { // Intermediate Blue-Red
         tags: ['Solar System', 'minor body/centaur', 'minor body/TNO', 'class/distant object taxonomic class'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.74, 0.05], 'V-R': [0.48, 0.03], 'V-I': [0.96, 0.05]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.051], // mean
+    },
+    'Class BR | Merlin2017, Belskaya2015': { // Intermediate Blue-Red
+        tags: ['Solar System', 'minor body/centaur', 'minor body/TNO', 'class/distant object taxonomic class'],
+        file: 'spectra/files/Merlin2017/BR.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.051], // mean
     },
     'Class IR | Belskaya2015': { // Moderately Red
@@ -870,12 +923,22 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.110], // mean
     },
+    'Class IR | Merlin2017, Belskaya2015': { // Moderately Red
+        tags: ['Solar System', 'minor body/centaur', 'minor body/TNO', 'class/distant object taxonomic class'],
+        file: 'spectra/files/Merlin2017/IR.txtU',
+        geometric_albedo: ['Generic_Bessell.V', 0.110], // mean
+    },
     'Class RR | Belskaya2015': { // Very Red
         tags: ['Solar System', 'minor body/centaur', 'minor body/TNO', 'class/distant object taxonomic class'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.07, 0.06], 'V-R': [0.69, 0.04], 'V-I': [1.34, 0.09]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.131], // mean
+    },
+    'Class RR | Merlin2017, Belskaya2015': { // Very Red
+        tags: ['Solar System', 'minor body/centaur', 'minor body/TNO', 'class/distant object taxonomic class'],
+        file: 'spectra/files/Merlin2017/RR.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.131], // mean
     },
 }
