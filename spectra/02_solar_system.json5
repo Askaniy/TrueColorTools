@@ -648,8 +648,19 @@
         geometric_albedo: ['Generic_Bessell.V', 0.611],
         phase_integral: [1.09, 0.11],
     },
-    'Europa: Trailing hemisphere (J II) | Clark1980a, Madden2018, Buratti1983': {
+    'Trumbo2020': [
+        'Endogenic and Exogenic Contributions to Visible-wavelength Spectra of Europa’s Trailing Hemisphere',
+        'DOI: 10.3847/1538-3881/abc34c', 'https://iopscience.iop.org/article/10.3847/1538-3881/abc34c',
+        'https://ui.adsabs.harvard.edu/abs/2020AJ....160..282T/abstract'
+    ],
+    'Europa: Trailing hemisphere (J II) | Trumbo2020, Madden2018, Buratti1983': {
         tags: ['featured', 'Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        file: 'spectra/files/Europa_Trumbo2020.txt',
+        geometric_albedo: ['Generic_Bessell.V', 0.611],
+        phase_integral: [1.09, 0.11]
+    },
+    'Europa: Trailing hemisphere (J II) | Clark1980a, Madden2018, Buratti1983': {
+        tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Clark1980/Europa.txtU', // figure 1
         geometric_albedo: ['Generic_Bessell.V', 0.611],
         phase_integral: [1.09, 0.11],
