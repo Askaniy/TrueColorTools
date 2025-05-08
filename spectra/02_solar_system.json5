@@ -158,19 +158,19 @@
         'DOI: 10.1016/S0016-7169(14)70073-X', 'http://revistagi.geofisica.unam.mx/index.php/RGI/article/view/545',
         'https://ui.adsabs.harvard.edu/abs/2014GeofI..53..385G/abstract'
     ],
-    'Earth | Mallama2017a': {
-        tags: ['Solar System', 'planetary body/planet', 'Earth'],
-        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
-                  'Generic_Cousins.R', 'Generic_Cousins.I'],
-        br_geometric: [0.688, 0.512, 0.434, 0.418, 0.430,
-                       0.392, 0.396],
-    },
     'Earth | Crow2011, Mallama2017a': { // phase angle 75.1°
         tags: ['featured', 'Solar System', 'planetary body/planet', 'Earth'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79],
         geometric_albedo: ['Generic_Bessell.V', 0.434],
+    },
+    'Earth | Mallama2017a': {
+        tags: ['Solar System', 'planetary body/planet', 'Earth'],
+        filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
+                  'Generic_Cousins.R', 'Generic_Cousins.I'],
+        br_geometric: [0.688, 0.512, 0.434, 0.418, 0.430,
+                       0.392, 0.396],
     },
     'Earth: Archean | VPL': { // Arney et al. 2017, "Hazy Archean Earth orbiting the Archean Sun", 1 bar, 1% CO2, 0.2% CH4
         tags: ['Solar System', 'planetary body/planet', 'Earth/history'],
@@ -1120,7 +1120,7 @@
         'https://ui.adsabs.harvard.edu/abs/2010Icar..206..537P/abstract'
     ],
     'Filacchione2020': [
-        'Photometric modelling and VIS-IR albedo maps of Rhea from Cassini-VIMS ',
+        'Photometric modelling and VIS-IR albedo maps of Rhea from Cassini-VIMS',
         'DOI: 10.1093/mnrasl/slaa162', 'https://academic.oup.com/mnrasl/article/499/1/L62/5905424',
         'https://ui.adsabs.harvard.edu/abs/2020MNRAS.499L..62F/abstract'
     ],
@@ -1143,6 +1143,11 @@
         phase_integral: [0.65, 0.06], // 510 nm
     },
     // Titan
+    'Tomasko1982': [
+        'Photometry and polarimetry of Titan: Pioneer 11 observations and their implications for aerosol properties',
+        'DOI: 10.1016/0019-1035(82)90030-6', 'https://www.sciencedirect.com/science/article/pii/0019103582900306',
+        'https://ui.adsabs.harvard.edu/abs/1982Icar...51...65T/abstract'
+    ],
     'Karkoschka2012': [
         'The reflectivity spectrum and opposition effect of Titan’s surface observed by Huygens’ DISR spectrometers',
         'DOI: 10.1016/j.pss.2011.10.014', 'https://www.sciencedirect.com/science/article/pii/S0032063311003254'
@@ -1151,15 +1156,17 @@
         'Eight-color maps of Titan’s surface from spectroscopy with Huygens’ DISR',
         'DOI: 10.1016/j.icarus.2015.06.010', 'https://www.sciencedirect.com/science/article/pii/S0019103515002547'
     ],
-    'Titan (S VI) | Karkoschka1998': {
+    'Titan (S VI) | Karkoschka1998, Tomasko1982': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Karkoschka/Titan1995.txt',
         is_geometric_albedo: true,
+        phase_integral: [1.66, 0.10], // in both red and blue filters
     },
-    'Titan (S VI) | Karkoschka1994': { // phase angle 2.7°
+    'Titan (S VI) | Karkoschka1994, Tomasko1982': { // phase angle 2.7°
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Karkoschka/Titan1993.txt',
         is_geometric_albedo: true,
+        phase_integral: [1.66, 0.10], // in both red and blue filters
     },
     'Surface of Titan: Phase angle 45° (S VI) | Karkoschka2016': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
@@ -1553,6 +1560,17 @@
         tags: ['Solar System/Neptunian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Neptune1995.txt',
         is_geometric_albedo: true,
+    },
+    'Irwin2023': [
+        'Spectral determination of the colour and vertical structure of dark spots in Neptune’s atmosphere.',
+        'DOI: 10.1038/s41550-023-02047-0', 'https://www.nature.com/articles/s41550-023-02047-0',
+        'https://ui.adsabs.harvard.edu/abs/2023NatAs...7.1198I/abstract'
+    ],
+    'Northern Dark Spot 2018 (Neptune) | Irwin2023': { // NDS-2018
+        tags: ['Solar System/Neptunian system', 'planetary body/planet'],
+        file: 'spectra/files/NDS2018_Irwin2023.txt', // Fig. 4
+        is_reflecting_sunlight: false,
+        is_albedo: true, // I/F
     },
     // Neptunian small inner satellites
     'Lane1989': [
