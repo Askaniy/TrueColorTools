@@ -4,9 +4,9 @@
         'DOI: 10.1051/0004-6361/201424208', 'https://www.aanda.org/articles/aa/full_html/2024/09/aa48938-23/aa48938-23.html',
         'https://ui.adsabs.harvard.edu/abs/2024A%26A...689A.109T/abstract'
     ],
-    'Quasar: Composite spectrum | Trefoloni2024': {
+    'Quasars: Composite spectrum | Trefoloni2024': {
         tags: ['featured', 'DSO'],
-        file: 'spectra/files/quasar_Trefoloni2024.txtA',
+        file: 'spectra/files/Quasars_Trefoloni2024.txtA',
         is_emissive: true
     },
 }
