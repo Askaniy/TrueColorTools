@@ -198,10 +198,25 @@
         'DOI: 10.1086/341954', 'https://iopscience.iop.org/article/10.1086/341954',
         'https://ui.adsabs.harvard.edu/abs/2002AJ....124.1757S/abstract'
     ],
+    'Trujillo2002': [
+        'A Correlation between Inclination and Color in the Classical Kuiper Belt',
+        'DOI: 10.1086/339437', 'https://iopscience.iop.org/article/10.1086/339437',
+        'https://ui.adsabs.harvard.edu/abs/2002ApJ...566L.125T'
+    ],
     'Bauer2003': [
         'Physical survey of 24 Centaurs with visible photometry',
         'DOI: 10.1016/j.icarus.2003.07.004', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103503002173',
         'https://ui.adsabs.harvard.edu/abs/2003Icar..166..195B'
+    ],
+    'Doressoundiram2003': [
+        'ESO Large Programme on Trans-Neptunian Objects and Centaurs: Spectroscopic Investigation of Centaur 2001 BL41 and TNOs (26181) 1996 GQ21 and (26375) 1999 DE9',
+        'DOI: 10.1086/374632', 'https://iopscience.iop.org/article/10.1086/374632',
+        'https://ui.adsabs.harvard.edu/abs/2003AJ....125.2721D/abstract'
+    ],
+    'Dotto2003': [
+        'Colours and Composition of the Centaurs',
+        'DOI: 10.1023/B:MOON.0000031934.89097.88', 'https://link.springer.com/article/10.1023/B:MOON.0000031934.89097.88',
+        'https://ui.adsabs.harvard.edu/abs/2003EM%26P...92..157D/abstract'
     ],
     'Sheppard2003': [
         'Hawaii Kuiper Belt Variability Project: An Update',
@@ -212,6 +227,11 @@
         'The Sizes, Shapes, Albedos, and Colors of Cometary Nuclei',
         'https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=753360bc3977a259d7dfc3362bb7a6354b1988ff', 
         'https://ui.adsabs.harvard.edu/abs/2004come.book..223L/abstract'
+    ],
+    'Doressoundiram2005': [
+        'Spectral characteristics and modeling of the trans-neptunian object (55565) 2002 AW 197 and the Centaurs (55576) 2002 GB 10 and (83982) 2002 GO 9: ESO Large Program on TNOs and Centaurs',
+        'DOI: 10.1016/j.pss.2004.11.007', 'https://www.sciencedirect.com/science/article/abs/pii/S0032063305001789',
+        'https://ui.adsabs.harvard.edu/abs/2005P%26SS...53.1501D/abstract'
     ],
     'Rousselot2005a': [
         'Photometric study of Centaur (60558) 2000 EC98 and trans-neptunian object (55637) 2002 UX25 at different phase angles',
@@ -233,6 +253,21 @@
         'DOI: 10.1016/j.icarus.2009.01.030', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103509000657',
         'https://ui.adsabs.harvard.edu/abs/2009Icar..201..674L/abstract'
     ],
+    'Sheppard2012': [
+        'The Color Differences of Kuiper Belt Objects in Resonance with Neptune',
+        'DOI: 10.1088/0004-6256/144/6/169', 'https://iopscience.iop.org/article/10.1088/0004-6256/144/6/169',
+        'https://ui.adsabs.harvard.edu/abs/2012AJ....144..169S'
+    ],
+    'Merlin2017': [
+        'Taxonomy of trans-Neptunian objects and Centaurs as seen from spectroscopy',
+        'DOI: 10.1051/0004-6361/201730933', 'https://www.aanda.org/articles/aa/full_html/2017/08/aa30933-17/aa30933-17.html',
+        'https://ui.adsabs.harvard.edu/abs/2017A&A...604A..86M/abstract'
+    ],
+    'Seccull2018': [
+        '2004 EW95: A Phyllosilicate-bearing Carbonaceous Asteroid in the Kuiper Belt',
+        'DOI: 10.3847/2041-8213/aab3dc', 'https://iopscience.iop.org/article/10.3847/2041-8213/aab3dc',
+        'https://ui.adsabs.harvard.edu/abs/2018ApJ...855L..26S/abstract'
+    ],
     'Dobson2023': [
         'Phase Curves of Kuiper Belt Objects, Centaurs, and Jupiter-family Comets from the ATLAS Survey',
         'DOI: 10.3847/PSJ/acc463', 'https://iopscience.iop.org/article/10.3847/PSJ/acc463',
@@ -243,15 +278,9 @@
         'DOI: 10.48550/arXiv.2304.09309', 'https://arxiv.org/abs/2304.09309',
         'https://ui.adsabs.harvard.edu/abs/2023arXiv230409309K/abstract'
     ],
-    'Trujillo2002': [
-        'A Correlation between Inclination and Color in the Classical Kuiper Belt',
-        'DOI: 10.1086/339437', 'https://iopscience.iop.org/article/10.1086/339437',
-        'https://ui.adsabs.harvard.edu/abs/2002ApJ...566L.125T'
-    ],
-    'Sheppard2012': [
-        'The Color Differences of Kuiper Belt Objects in Resonance with Neptune',
-        'DOI: 10.1088/0004-6256/144/6/169', 'https://iopscience.iop.org/article/10.1088/0004-6256/144/6/169',
-        'https://ui.adsabs.harvard.edu/abs/2012AJ....144..169S'
+    'Williams2025': [
+        'Visible spectroscopy of 3 KBOs and 1 Centaur',
+        'DOI: 10.1016/j.icarus.2025.116554', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103525001010'
     ],
 
     'Li2019': [
@@ -1190,6 +1219,11 @@
         '(2867) Steins',
         'https://ui.adsabs.harvard.edu/abs/2004IAUC.8315....3H/abstract'
     ],
+    'Keller2010': [
+        'E-Type Asteroid (2867) Steins as Imaged by OSIRIS on Board Rosetta',
+        'DOI: 10.1126/science.1179559', 'https://www.science.org/doi/abs/10.1126/science.1179559',
+        'https://ui.adsabs.harvard.edu/abs/2010Sci...327..190K/abstract'
+    ],
     'Spjuth2012': [
         'Disk-resolved photometry of Asteroid (2867) Steins',
         'DOI: 10.1016/j.icarus.2012.06.021', 'https://www.sciencedirect.com/science/article/pii/S0019103512002503',
@@ -1218,6 +1252,25 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Rosetta_OSIRIS_WAC.OI', [0.39, 0.02]],
+        spherical_albedo: ['Rosetta_OSIRIS_WAC.OI', [0.24, 0.01]],
+    },
+    '(2867) Šteins | Keller2010, Spjuth2012': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Rosetta target'],
+        filters: [
+            'Rosetta_OSIRIS_WAC.UV245', 'Rosetta_OSIRIS_WAC.CS', 'Rosetta_OSIRIS_NAC.Far_UV', 'Rosetta_OSIRIS_WAC.UV295',
+            'Rosetta_OSIRIS_WAC.OH', 'Rosetta_OSIRIS_WAC.UV325', 'Rosetta_OSIRIS_WAC.NH', 'Rosetta_OSIRIS_NAC.Near_UV',
+            'Rosetta_OSIRIS_WAC.UV375', 'Rosetta_OSIRIS_WAC.CN', 'Rosetta_OSIRIS_NAC.Blue', 'Rosetta_OSIRIS_NAC.Green',
+            'Rosetta_OSIRIS_WAC.NH2', 'Rosetta_OSIRIS_WAC.NA', 'Rosetta_OSIRIS_WAC.OI', 'Rosetta_OSIRIS_NAC.Hydra',
+            'Rosetta_OSIRIS_NAC.Red', 'Rosetta_OSIRIS_NAC.Ortho', 'Rosetta_OSIRIS_NAC.Near_IR', 'Rosetta_OSIRIS_NAC.Fe2O3',
+        ],
+        br_geometric: [
+            0.184, 0.158, 0.152, 0.175, 0.220, 0.200, 0.235, 0.268, 0.278, 0.325,
+            0.294, 0.372, 0.381, 0.382, 0.401, 0.417, 0.431, 0.447, 0.463, 0.431
+        ],
+        sd_geometric: [
+            0.013, 0.010, 0.008, 0.009, 0.011, 0.008, 0.012, 0.010, 0.011, 0.014,
+            0.009, 0.009, 0.008, 0.008, 0.009, 0.007, 0.010, 0.011, 0.013, 0.013
+        ],
         spherical_albedo: ['Rosetta_OSIRIS_WAC.OI', [0.24, 0.01]],
     },
     'Geem2022': [
@@ -1498,6 +1551,11 @@
         geometric_albedo: ['Generic_Bessell.V', [0.060, 0.020]],
         phase_function: ['Generic_Bessell.R', 'HG', {H: [15.71, 0.04], G: [0.09, 0.05]}],
     },
+    '(8405) Asbolus | Dotto2003, Müller2020': {
+        tags: ['Solar System', 'minor body/centaur'],
+        file: 'spectra/files/Dotto2003/Asbolus_Dotto2003.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.056, +0.019, -0.015]],
+    },
     '(8405) Asbolus | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
@@ -1562,6 +1620,22 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.037, 0.001]], // ellipsoid model
         phase_function: ['HG', {H: 6.50, G: [0.08, 0.05]}],
+    },
+    'Duffard2014b': [
+        'Photometric and spectroscopic evidence for a dense ring system around Centaur Chariklo',
+        'DOI: 10.1051/0004-6361/201424208', 'https://www.aanda.org/articles/aa/full_html/2014/08/aa24208-14/aa24208-14.html',
+        'https://ui.adsabs.harvard.edu/abs/2014A%26A...568A..79D/abstract'
+    ],
+    '(10199) Chariklo: Synthetic spectrum | Duffard2014b, Bauer2003': { // Modeled based off characteristics in Table 3
+        tags: ['Solar System', 'minor body/centaur'],
+        file: 'spectra/files/Duffard2014b/Chariklo_continuum_model.txtU', // Fig. 4a
+        geometric_albedo: [550, [0.036, 0.010]],
+        phase_function: ['HG', {H: 6.50, G: [0.08, 0.05]}],
+    },
+    'Rings of Chariklo: Synthetic spectrum | Duffard2014b': { // Modeled based off characteristics in Table 4
+        tags: ['Solar System', 'minor body/centaur', 'ring'],
+        file: 'spectra/files/Duffard2014b/Chariklo_rings_model.txtU', // Fig. 4b
+        geometric_albedo: [550, [0.070, 0.010]],
     },
     '(10253) Westerwald | SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
@@ -2142,6 +2216,12 @@
         geometric_albedo: ['Generic_Bessell.V', [0.054, 0.011]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {H: [11.5857, +0.4221, -0.4863], G_1: [0.3537, +0.4361, -0.3532], G_2: [0.4116, +0.4139, -0.4098]}],
     },
+    '(26181) 1996 GQ21 | Doressoundiram2003, FarkasTakacs2020, Sheppard2003': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        file: 'spectra/files/Doressoundiram2003/1996GQ21_Doressoundiram2003.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.098, +0.046, -0.030]], // fixed η
+        phase_function: ['HG', {H: [4.47, 0.01], G: [0.12, 0.03]}],
+    },
     '(26181) 1996 GQ21 | MBOSS, FarkasTakacs2020, Sheppard2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO'],
         photometric_system: 'Generic_Bessell',
@@ -2158,6 +2238,12 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.083, +0.018, -0.013]], // system albedo
+    },
+    '(26375) 1999 DE9 | Doressoundiram2003, Müller2020, Sheppard2003': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        file: 'spectra/files/Doressoundiram2003/1999DE9_Doressoundiram2003.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.163, +0.041, -0.026]],
+        phase_function: ['HG', {H: [4.45, 0.02], G: [-0.34, 0.05]}],
     },
     '(26375) 1999 DE9 | MBOSS, Müller2020, Sheppard2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO'],
@@ -2352,6 +2438,12 @@
         'DOI: 10.1051/0004-6361/202141546', 'https://www.aanda.org/articles/aa/full_html/2022/08/aa41546-21/aa41546-21.html',
         'https://ui.adsabs.harvard.edu/abs/2022A%26A...664A.130S/abstract'
     ],
+    '(38628) Huya | Merlin2017, SantosSanz2022, Sheppard2003': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
+        file: 'spectra/files/Merlin2017/Huya_Merlin2017.txtU', // mean spectrum
+        geometric_albedo: ['Generic_Bessell.V', [0.079, 0.004]],
+        phase_function: ['HG', {H: [4.45, 0.01], G: [0.10, 0.03]}],
+    },
     '(38628) Huya | MBOSS, SantosSanz2022, Sheppard2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
         photometric_system: 'Generic_Bessell',
@@ -2416,6 +2508,11 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.003]], // system albedo
+    },
+    '(44594) 1999 OX3 | Seccull2018, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        file: 'spectra/files/Seccull2018/1999OX3_Seccull2018.txt', // Fig. 3
+        geometric_albedo: ['Generic_Bessell.V', [0.081, +0.018, -0.015]],
     },
     '(44594) 1999 OX3 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
@@ -2536,6 +2633,12 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
+    '(52872) Okyrhoe | Dotto2003, Müller2020, Bauer2003': {
+        tags: ['Solar System', 'minor body/centaur'],
+        file: 'spectra/files/Dotto2003/Okyrhoe_Dotto2003.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.056, +0.012, -0.010]],
+        phase_function: ['HG', {H: 10.50, G: [0.12, 0.07]}],
+    },
     '(52872) Okyrhoe | MBOSS, Müller2020, Bauer2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
@@ -2583,6 +2686,12 @@
         'DOI: 10.1051/0004-6361/202450833', 'https://www.aanda.org/articles/aa/abs/2024/09/aa50833-24/aa50833-24.html',
         'https://ui.adsabs.harvard.edu/abs/2024EPSC...17..530R/abstract'
     ],
+    '(54598) Bienor | Dotto2003, Rizos2024, Dobson2023': {
+        tags: ['Solar System', 'minor body/centaur'],
+        file: 'spectra/files/Dotto2003/Bienor_Dotto2003.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.065, 0.005]],
+        phase_function: ['Misc_Atlas.orange', 'phase coefficient', {beta: [0.062, 0.014]}],
+    },
     '(54598) Bienor | MBOSS, Rizos2024, Dobson2023': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
@@ -2610,6 +2719,11 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.112, +0.012, -0.011]],
     },
+    '(55576) Amycus | Doressoundiram2005, Müller2020': {
+        tags: ['Solar System', 'minor body/centaur'],
+        file: 'spectra/files/Doressoundiram2005/Amycus_Doressoundiram2005.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.083, +0.016, -0.015]],
+    },
     '(55576) Amycus | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
@@ -2634,6 +2748,21 @@
     '(55636) 2002 TX300 | Licandro2006, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         slope: {start: 530, stop: 1200, percent_per_100nm: -1},
+        geometric_albedo: ['Generic_Bessell.V', [0.760, +0.180, -0.450]],
+    },
+    '(55636) 2002 TX300 | GaiaDR3, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        nm: [418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990],
+        br: [
+            9.890256e-01, 1.102694e+00, 1.009958e+00, 1.000000e+00, 1.025782e+00, 9.879041e-01,
+            1.237357e+00, 1.103371e+00, 1.127149e+00, 1.108475e+00, 1.136647e+00, 1.119926e+00, 
+            1.230715e+00, 1.545572e+00
+        ],
+        sd: [
+            1.524662e-01, 7.597827e-02, 5.861332e-02, 5.401912e-02, 5.537284e-02, 6.211829e-02,
+            6.940003e-02, 6.797095e-02, 6.859302e-02, 7.037257e-02, 7.300120e-02, 7.832822e-02, 
+            1.031774e-01, 1.695214e-01
+        ],
         geometric_albedo: ['Generic_Bessell.V', [0.760, +0.180, -0.450]],
     },
     'Lellouch2017': [
@@ -2776,6 +2905,12 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.0653, 0.0097]],
         phase_function: ['HG1G2', {H: [13.568758, +0.198775, -0.257261], G_1: [0.775677, +0.393410, -0.581384], G_2: [0.007084, +0.254510, -0.188063]}],
+    },
+    '(63252) 2001 BL41 | Dotto2003, Müller2020, Bauer2003': {
+        tags: ['Solar System', 'minor body/centaur'],
+        file: 'spectra/files/Dotto2003/2001BL41_Dotto2003.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.043, +0.028, -0.014]],
+        phase_function: ['HG', {H: 10.10, G: [0.17, 0.06]}],
     },
     '(63252) 2001 BL41 | MBOSS, Müller2020, Bauer2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -3015,6 +3150,11 @@
         geometric_albedo: ['Generic_Bessell.V', [0.046, 0.007]],
         // phase_function: ['HG', {H: [5.79 0.05], G: [-1.13, 0.20]}] // results in negative phase integral
     },
+    '(83982) Crantor | Doressoundiram2005, Müller2020': {
+        tags: ['Solar System', 'minor body/centaur'],
+        file: 'spectra/files/Doressoundiram2005/Crantor_Doressoundiram2005.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.121, +0.064, -0.038]],
+    },
     '(83982) Crantor | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
@@ -3064,6 +3204,11 @@
         color_indices: {'B-V': [0.930, 0.020], 'V-R': [0.590, 0.020]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.134, 0.010]],
+    },
+    '(84922) 2003 VS2 | Williams2025, VaraLubiano2022': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
+        slope: {start: 400, stop: 900, percent_per_100nm: [18.43, 0.12]},
         geometric_albedo: ['Generic_Bessell.V', [0.134, 0.010]],
     },
     '(85633) 1998 KR65 | MBOSS': {
@@ -4436,6 +4581,11 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.260, +0.340, -0.150]],
     },
+    '(230965) 2004 XA192 | Williams2025, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        slope: {start: 400, stop: 900, percent_per_100nm: [13.27, 0.54]}, // mean
+        geometric_albedo: ['Generic_Bessell.V', [0.260, +0.340, -0.150]],
+    },
     '(248835) 2006 SX368 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
@@ -4949,6 +5099,13 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
+    '(468861) 2013 LU28 | Hromakina2021a': {
+        tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/centaur/Damocloid'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.835, 0.055], 'V-R': [0.595, 0.065], 'R-I': [0.550, 0.070]}, // mean
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
     'Lorenzi2023': [
         'Visible and NIR Spectroscopy of (468861) 2013 LU28 with TNG',
         'https://www.hou.usra.edu/meetings/acm2023/pdf/2379.pdf', 'https://ui.adsabs.harvard.edu/abs/2023LPICo2851.2379L/abstract'
@@ -4957,12 +5114,10 @@
         tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/centaur/Damocloid'],
         slope: {start: 530, stop: 920, percent_per_100nm: [15.34, 2]}, // mean
     },
-    '(468861) 2013 LU28 | Hromakina2021a': {
+    '(468861) 2013 LU28 | Williams2025': {
         tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/centaur/Damocloid'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': [0.835, 0.055], 'V-R': [0.595, 0.065], 'R-I': [0.550, 0.070]}, // mean
-        calibration_system: 'Vega',
-        is_reflecting_sunlight: true,
+        slope: {start: 400, stop: 900, percent_per_100nm: [12.88, 0.34]}, // mean
+        geometric_albedo: ['Generic_Bessell.V', 0.071], // calculated using occultation results
     },
     'Sharkey2021': [
         'Lunar-like silicate material forms the Earth quasi-satellite (469219) 2016 HO3 Kamo‘oalewa',
@@ -5513,6 +5668,10 @@
         color_indices: {'sloan_g-sloan_r': [0.76, 0.05], 'sloan_g-sloan_i': [1.05, 0.05]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
+    },
+    '(562274) 2015 XW379 | Williams2025': {
+        tags: ['Solar System', 'minor body/centaur'],
+        slope: {start: 400, stop: 900, percent_per_100nm: [15.75, 0.45]},
     },
     'Holman2018': [
         'A Dwarf Planet Class Object in the 21:5 Resonance with Neptune',
@@ -6352,6 +6511,11 @@
         color_indices: {'B-V': [0.820, 0.080], 'V-R': [0.470, 0.070], 'R-I': [0.470, 0.090]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
+    },
+    '2007 VH305 | Merlin2017, Mainzer2019': {
+        tags: ['Solar System', 'minor body/centaur'],
+        file: 'spectra/files/Merlin2017/2007VH305_Merlin2017.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.070, 0.036]],
     },
     '2007 VH305 | MBOSS, Mainzer2019': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
