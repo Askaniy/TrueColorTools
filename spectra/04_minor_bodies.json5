@@ -3415,7 +3415,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.115, 0.013]],
         phase_function: ['HG1G2', {H: [12.114225, +0.209773, -0.257911], G_1: [0.050836, +0.707783, -0.941345], G_2: [0.577683, +0.635871, -0.529319]}],
     },
-   'Brozovic2018': [
+    'Brozovic2018': [
         'Goldstone and Arecibo radar observations of (99942) Apophis in 2012-2013',
         'DOI: 10.1016/j.icarus.2017.08.032', 'https://www.sciencedirect.com/science/article/pii/S0019103517302865',
         'https://ui.adsabs.harvard.edu/abs/2018Icar..300..115B/abstract'
@@ -3914,7 +3914,8 @@
     },
     'Stern2009': [
         'Ejecta exchange and satellite color evolution in the Pluto system, with implications for KBOs and asteroids with satellites',
-        'DOI: 10.48550/arXiv.0805.3482', 'https://arxiv.org/abs/0805.3482'
+        'DOI: 10.1016/j.icarus.2008.10.006', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103508003618',
+        'https://ui.adsabs.harvard.edu/abs/2009Icar..199..571S/abstract'
     ],
     'Weaver2016': [
         'The small satellites of Pluto as observed by New Horizons',
@@ -3930,7 +3931,7 @@
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.96, 1, 0.98], // Blue/Red ratio: ~0.96, Red/NIR ratio: ~1.02
-        geometric_albedo: ['Generic_Bessell.V', [0.560, 0.050]],
+        geometric_albedo: ['Generic_Bessell.V', [0.56, 0.05]],
         spherical_albedo: ['Generic_Bessell.V', [0.24, 0.07]],  // Table 3, p. 426 (Howett2021)
     },
     '(134340 II) Nix | Stern2009, Weaver2016, Howett2021b': {
@@ -3939,7 +3940,7 @@
         color_indices: {'B-V': [0.653, 0.026]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.560, 0.050]],
+        geometric_albedo: ['Generic_Bessell.V', [0.56, 0.05]],
         spherical_albedo: ['Generic_Bessell.V', [0.24, 0.07]],  // Table 3, p. 426 (Howett2021)
     },
     '(134340 III) Hydra | Weaver2016, Howett2021b': {
@@ -3947,7 +3948,7 @@
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [1.00, 1, 0.90], // Blue/Red ratio: ~1.00, Red/NIR ratio: ~1.11
-        geometric_albedo: ['Generic_Bessell.V', [0.830, 0.080]],
+        geometric_albedo: ['Generic_Bessell.V', [0.83, 0.08]],
         spherical_albedo: ['Generic_Bessell.V', [0.32, 0.11]], // Table 3, p. 426 (Howett2021)
     },
     '(134340 III) Hydra | Stern2009, Weaver2016, Howett2021b': {
@@ -3956,7 +3957,7 @@
         color_indices: {'B-V': [0.654, 0.065]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.830, 0.080]],
+        geometric_albedo: ['Generic_Bessell.V', [0.83, 0.08]],
         spherical_albedo: ['Generic_Bessell.V', [0.32, 0.11]], // Table 3, p. 426 (Howett2021)
     },
     '(134860) 2000 OJ67 | MBOSS': {
@@ -4006,13 +4007,13 @@
         'DOI: 10.3847/1538-4357/ab13b3', 'https://iopscience.iop.org/article/10.3847/1538-4357/ab13b3',
         'https://ui.adsabs.harvard.edu/abs/2019ApJ...877...41D/abstract'
     ],
-   '(136108) Haumea | PinillaAlonso2009, Dunham2019, Verbiscer2022': {
+    '(136108) Haumea | PinillaAlonso2009, Dunham2019, Verbiscer2022': {
         tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         file: 'spectra/files/Haumea_PinillaAlonso2009.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.66, 0.02]],
         phase_integral: [0.44, 0.03], // system
     },
-   '(136108) Haumea | GaiaDR3, Dunham2019, Verbiscer2022': {
+    '(136108) Haumea | GaiaDR3, Dunham2019, Verbiscer2022': {
         tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         nm: [374, 418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
         br: [
@@ -4037,7 +4038,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.66, 0.02]],
         phase_integral: [0.44, 0.03], // system
     },
-   '(136108) Haumea | Brown2010, Dunham2019, Verbiscer2022': {
+    '(136108) Haumea | Brown2010, Dunham2019, Verbiscer2022': {
         tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         photometric_system: 'HST_WFPC2-PC',
         color_indices: {'F606W-F814W': [0.55, 0.04]}, // extracted from Fig. 2
@@ -7828,7 +7829,7 @@
     },
     'Jewitt2017': [
         'Interstellar Interloper 1I/2017 U1: Observations from the NOT and WIYN Telescopes',
-        'DOI: 10.3847/2041-8213/aa9b2f', 'https://arxiv.org/abs/1711.05687'
+        'DOI: 10.3847/2041-8213/aa9b2f', 'https://iopscience.iop.org/article/10.3847/2041-8213/aa9b2f'
     ],
     '1I/ʻOumuamua | Jewitt2017': {
         tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],

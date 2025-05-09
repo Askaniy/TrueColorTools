@@ -105,12 +105,18 @@ def fits_reader(file: str, type_info: str) -> tuple[np.ndarray]:
             if sd is not None:
                 sd = (sd * u.Unit(columns[sd_id].unit)).to(flux_density_SI)
         else:
-            header = hdul[0].header # but sometimes they are in the primary HDU, like in BAAVSS
-            wl = header['CRVAL1'] + header['CDELT1']*(np.arange(header['NAXIS1'])-1)
-            if wl_unit is None:
-                wl_unit = u.Unit(header['CUNIT1'])
-            nm = (wl * wl_unit).to(u.nm)
-            br = list(Table(hdul[0].data)[0])
+            try:
+                # BAAVSS store wavelength info only in primary HDU
+                header = hdul[0].header
+                wl = header['CRVAL1'] + header['CDELT1']*(np.arange(header['NAXIS1'])-1)
+                if wl_unit is None:
+                    wl_unit = u.Unit(header['CUNIT1'])
+                nm = (wl * wl_unit).to(u.nm)
+                br = list(Table(hdul[0].data)[0])
+            except KeyError:
+                # IRAF-formatted "multispec" is not supported, there were attempts
+                nm = hdul[0].data[0] * 0.1
+                br = hdul[0].data[1]
     nm = np.array(nm)
     br = np.array(br)
     if sd is not None:
