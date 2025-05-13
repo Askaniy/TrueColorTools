@@ -7483,6 +7483,15 @@
         geometric_albedo: ['Generic_Bessell.V', [0.01, 0.01]],
         phase_function: ['Generic_Bessell.R', 'HG', {H: [18.38, +0.19, -0.17], G: [0.03, +0.19, -0.14]}],
     },
+    'Kulyk2016': [
+        'P/2008 CL94 (Lemmon) and P/2011 S1 (Gibbs): comet-like activity at large heliocentric distances',
+        'DOI: 10.1016/j.icarus.2016.01.037', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103516000865',
+        'https://ui.adsabs.harvard.edu/abs/2016Icar..271..314K/abstract'
+    ],
+    '423P/Lemmon | Kulyk2016': {
+        tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'minor body/centaur/active centaur'],
+        slope: {start: 400, stop: 680, percent_per_100nm: [2.0, 0.4]},
+    },
     'Hui2017': [
         'Split Active Asteroid P/2016 J1 (PANSTARRS)',
         'DOI: 10.3847/1538-3881/aa6039', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa6039',
