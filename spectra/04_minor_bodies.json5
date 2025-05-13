@@ -610,6 +610,7 @@
         br: [0.756, 0.892, 0.978, 1.000, 0.936, 0.917],
         sd: 0.018,
         geometric_albedo: ['Galileo_SSI.Green', [0.217, 0.026]], // normal albedo of Terrain B, Fig. 7
+        phase_integral: [0.34, 0.02], // Table VIII
     },
     '(243) Ida: Dark areas | Veverka1996, Helfenstein1996': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Galileo target'],
@@ -618,6 +619,7 @@
         br: [0.690, 0.856, 0.956, 1.000, 0.979, 0.965],
         sd: 0.018,
         geometric_albedo: ['Galileo_SSI.Green', [0.204, 0.016]], // normal albedo of Terrain A, Fig. 7
+        phase_integral: [0.34, 0.02], // Table VIII
     },
     '(243 I) Dactyl | Veverka1996, Helfenstein1996': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'natural satellite', 'spacecraft target/Galileo target'],
@@ -875,29 +877,32 @@
         geometric_albedo: ['Galileo_SSI.Green', [0.23, 0.06]],
         spherical_albedo: ['Galileo_SSI.Green', [0.11, 0.03]], // Table VIII
     },
-    '(951) Gaspra | Helfenstein1994': {
+    '(951) Gaspra | Helfenstein1994, Helfenstein1996': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Galileo target'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.17, 0.23, 0.26, 0.27, 0.26, 0.26],
         sd: [0.05, 0.06, 0.07, 0.07, 0.07, 0.06],
         is_geometric_albedo: true, // global mean normal albedo from the Table VI
+        spherical_albedo: ['Galileo_SSI.Green', [0.11, 0.03]], // Table VIII
     },
-    '(951) Gaspra: Bright areas | Helfenstein1994': {
+    '(951) Gaspra: Bright areas | Helfenstein1994, Helfenstein1996': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Galileo target'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.19, 0.25, 0.27, 0.28, 0.27, 0.26],
         sd: [0.03, 0.06, 0.06, 0.04, 0.05, 0.05],
         is_geometric_albedo: true, // normal albedo of PC2-α material from the Table VI
+        phase_integral: [0.47, 0.04], // Table VIII
     },
-    '(951) Gaspra: Dark areas | Helfenstein1994': {
+    '(951) Gaspra: Dark areas | Helfenstein1994, Helfenstein1996': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Galileo target'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.16, 0.22, 0.26, 0.27, 0.26, 0.26],
         sd: [0.04, 0.04, 0.05, 0.04, 0.03, 0.02],
         is_geometric_albedo: true, // normal albedo of PC2-γ material from the Table VI
+        phase_integral: [0.47, 0.04], // Table VIII
     },
     '(1036) Ganymed | SMASS, Mainzer2019, Tholen2020': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/NEO/Amor'],
@@ -6526,6 +6531,23 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.070, 0.036]],
     },
+    '2008 HY21 | SsODNet, Müller2020': {
+        tags: ['Solar System', 'minor body/centaur'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.7899, 0.1381], 'r-i': [0.3133, 0.1239], 'i-z': [0.1633, 0.2418]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.010]],
+        phase_function: ['HG1G2', {H: [11.831220, +0.239170, -0.312353], G_1: [0.022626, +0.670644, -1.008542], G_2: [0.546429, +0.621133, -0.441728]}],
+    },
+    '2008 JS14 | SsODNet, Müller2020': {
+        tags: ['Solar System', 'minor body/centaur'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.5407, 0.0351], 'r-i': [0.2151, 0.0343], 'i-z': [0.1915, 0.0476]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.019]],
+    },
     '2008 LC18 | Bolin2023a': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
@@ -7043,7 +7065,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
-    '19P/Borelly | Lamy2009, Knight2023': {
+    '19P/Borrelly | Lamy2009, Knight2023': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'spacecraft target/Deep Space 1 target'],
         nm: [550, 646, 813],
         br: [16.768, 16.674, 16.487], // extracted from Fig. 2a
@@ -7704,7 +7726,7 @@
         is_reflecting_sunlight: true,
     },
     '(C/2012 Q1) Kowalski | MBOSS': {
-        tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
+        tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'minor body/centaur/active centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.907, 0.032], 'V-R': [0.537, 0.024]},
         calibration_system: 'Vega',
