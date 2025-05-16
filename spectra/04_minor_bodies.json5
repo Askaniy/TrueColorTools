@@ -4063,7 +4063,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.76, 0.15]],
-        spherical_albedo: ['Generic_Bessell.V', [0.33, 0.03]], // system albedo
+        phase_integral: [0.44, 0.03], // system
     },
     '(136108 II) Namaka | Brown2010, Verbiscer2022': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite'],
