@@ -1819,7 +1819,7 @@
         'DOI: 10.1016/S0019-1035(03)00002-2', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103503000022',
         'https://ui.adsabs.harvard.edu/abs/2003Icar..162..400K/abstract'
     ],
-    'Helfenbein2024': [
+    'Helfenbein2024': [ // Source for IR points of Naiad, Despina, and Galatea
         'Near-Infrared photometry of Neptune’s small regular satellites with Keck',
         'DOI: 10.1016/j.icarus.2024.116004', 'https://www.sciencedirect.com/science/article/pii/S0019103524000629',
         'https://ui.adsabs.harvard.edu/abs/2024Icar..41316004H/abstract'
@@ -1834,21 +1834,21 @@
     'Thalassa (N IV) | Karkoschka2003': {
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         filters: ['Voyager_ISS-NAC.Clear', 550],
-        br: [[0.0892, 0.0127], 0.091], // 480 nm value calculated from I/F at a 15° phase angle and phase coefficient
+        br: [[0.0892, 0.0127], 0.091], // clear filter value calculated from I/F at a 15° phase angle and phase coefficient
         is_geometric_albedo: true,
         phase_function: ['phase coefficient', {beta: 0.037}], // average value
     },
     'Despina (N V) | Helfenbein2024, Karkoschka2003, Thomas1991a': {
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         filters: ['Voyager_ISS-NAC.Clear', 550, 'Keck_NIRC2.H', 'HST_NICMOS2.F187W'],
-        br: [[0.0887, 0.0071], [0.090, 0.0072], [0.13, 0.013], [0.08, 0.05]], // 480 nm value calculated from I/F at a 15° phase angle and phase coefficient (Karkoschka2003)
+        br: [[0.0887, 0.0071], [0.090, 0.0072], [0.13, 0.013], [0.08, 0.05]], // clear filter value calculated from I/F at a 15° phase angle and phase coefficient (Karkoschka2003)
         is_geometric_albedo: true,
         phase_function: ['phase coefficient', {beta: 0.037}],
     },
     'Galatea (N VI) | Helfenbein2024, Karkoschka2003, Thomas1991a': {
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         filters: ['Voyager_ISS-NAC.Clear', 550, 'Keck_NIRC2.H', 'HST_NICMOS2.F187W', 'Keck_NIRC2.Kp'],
-        br: [[0.0775, 0.0071], [0.079, 0.0072], [0.13, 0.012], [0.12, 0.08], [0.12, 0.014]], // 480 nm value calculated from I/F at a 15° phase angle and phase coefficient (Karkoschka2003)
+        br: [[0.0775, 0.0071], [0.079, 0.0072], [0.13, 0.012], [0.12, 0.08], [0.12, 0.014]], // clear filter value calculated from I/F at a 15° phase angle and phase coefficient (Karkoschka2003)
         is_geometric_albedo: true,
         phase_function: ['phase coefficient', {beta: 0.034}],
     },
