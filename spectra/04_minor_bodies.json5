@@ -367,19 +367,21 @@
         'DOI: 10.1126/science.1219088', 'https://www.science.org/doi/10.1126/science.1219088',
         'https://ui.adsabs.harvard.edu/abs/2012Sci...336..700R/abstract'
     ],
-    '(4) Vesta: Bright areas | Reddy2012': {
+    '(4) Vesta: Bright areas | Reddy2012, Howett2021b': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Dawn target'],
         photometric_system: 'Dawn_FC',
         filters: ['F8', 'F2', 'F7', 'F3', 'F6', 'F4', 'F5'],
         br: [0.761, 0.882, 1.020, 0.991, 0.765, 0.603, 0.603],
         geometric_albedo: ['Dawn_FC.F1', 0.67], // brightest point in clear filter
+        phase_integral: [0.53, 0.10], // Table 3, p. 426 (Howett2021b)
     },
-    '(4) Vesta: Dark areas | Reddy2012': {
+    '(4) Vesta: Dark areas | Reddy2012, Howett2021b': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Dawn target'],
         photometric_system: 'Dawn_FC',
         filters: ['F8', 'F2', 'F7', 'F3', 'F6', 'F4', 'F5'],
         br: [0.757, 0.853, 1.020, 0.999, 0.948, 0.810, 0.827],
         geometric_albedo: ['Dawn_FC.F1', 0.10], // darkest area in clear filter
+        phase_integral: [0.53, 0.10], // Table 3, p. 426 (Howett2021b)
     },
     '(7) Iris | SMASS, Vernazza2021, SsODNet': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
