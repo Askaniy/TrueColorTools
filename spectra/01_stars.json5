@@ -312,11 +312,11 @@
         calibration_system: 'Vega',
         is_emissive: true,
     },
-    'Mignani2010': [
+    'Mignani2010a': [
         'HST/WFPC2 observations of the LMC pulsar PSR B0540–69',
         'DOI: 10.1051/0004-6361/200913870', 'https://www.aanda.org/articles/aa/abs/2010/07/aa13870-09/aa13870-09.html'
     ],
-    'PSR B0540–69 | Mignani2010': { // 2007-06-21
+    'PSR B0540–69 | Mignani2010a': { // 2007-06-21
         tags: ['featured', 'extrasolar', 'star/neutron star'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F336W', 'F450W', 'F555W', 'F675W', 'F814W'],
