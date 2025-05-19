@@ -1633,13 +1633,13 @@
         'DOI: 10.1051/0004-6361/201424208', 'https://www.aanda.org/articles/aa/full_html/2014/08/aa24208-14/aa24208-14.html',
         'https://ui.adsabs.harvard.edu/abs/2014A%26A...568A..79D/abstract'
     ],
-    '(10199) Chariklo: Synthetic spectrum | Duffard2014b, Bauer2003': { // Modeled based off characteristics in Table 3
+    '(10199) Chariklo: Synthetic spectrum | Duffard2014b, Bauer2003': { // Modeled based on the characteristics in Table 3
         tags: ['Solar System', 'minor body/centaur'],
         file: 'spectra/files/Duffard2014b/Chariklo_continuum_model.txtU', // Fig. 4a
         geometric_albedo: [550, [0.036, 0.010]],
         phase_function: ['HG', {H: 6.50, G: [0.08, 0.05]}],
     },
-    'Rings of Chariklo: Synthetic spectrum | Duffard2014b': { // Modeled based off characteristics in Table 4
+    'Rings of Chariklo: Synthetic spectrum | Duffard2014b': { // Modeled based on the characteristics in Table 4
         tags: ['Solar System', 'minor body/centaur', 'ring'],
         file: 'spectra/files/Duffard2014b/Chariklo_rings_model.txtU', // Fig. 4b
         geometric_albedo: [550, [0.070, 0.010]],
@@ -4054,6 +4054,36 @@
         geometric_albedo: ['Generic_Bessell.V', [0.66, 0.02]],
         phase_integral: [0.44, 0.03], // system
     },
+    'Ortiz2017': [
+        'The size, shape, density and ring of the dwarf planet Haumea from a stellar occultation',
+        'DOI: 10.1038/nature24051', 'https://www.nature.com/articles/nature24051',
+        'https://ui.adsabs.harvard.edu/abs/2017Natur.550..219O/abstract'
+    ],
+    'Kalup2024': [
+        'Radiative Transfer Modeling of Haumea’s Dust Ring',
+        'DOI: 10.1088/1538-3873/ad94a3', 'https://iopscience.iop.org/article/10.1088/1538-3873/ad94a3',
+        'https://ui.adsabs.harvard.edu/abs/2024PASP..136l4401K/abstract'
+    ],
+    // these three models have the closest contribution percentage (1.6%) to Haumea’s total
+    // brightness to the best-fit contribution (2.5%) of Ortiz et al. (2017)
+    'Rings of Haumea: Amorphous water ice, 100 nm particles | Kalup2024, Ortiz2017': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'ring'],
+        file: 'spectra/files/Kalup2024/Haumea_rings_amorphous_water_ice.txtU', // Fig. 4 (Kalup2024)
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.09], // best-guess I/F for a 70 km wide ring (Ortiz2017)
+    },
+    'Rings of Haumea: Crystallized water ice, 100 nm particles | Kalup2024, Ortiz2017': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'ring'],
+        file: 'spectra/files/Kalup2024/Haumea_rings_crystallized_water_ice.txtU', // Fig. 4 (Kalup2024)
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.09], // best-guess I/F for a 70 km wide ring (Ortiz2017)
+    },
+    'Rings of Haumea: Pyroxene, 100 nm particles | Kalup2024, Ortiz2017': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'ring'],
+        file: 'spectra/files/Kalup2024/Haumea_rings_pyroxene.txtU', // Fig. 4 (Kalup2024)
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.09], // best-guess I/F for a 70 km wide ring (Ortiz2017)
+    },
     'FernandezValenzuela2024': [
         'Deciphering satellite formation in the trans-Neptunian region: the case of Weywot',
         'https://www.youtube.com/watch?v=n5FFLJi2I8U', 'https://tno2024.org/relation/abstract/90'
@@ -4777,6 +4807,13 @@
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.740, 0.020], 'V-R': [0.460, 0.020]},
         calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
+    '(316179) 2010 EN65 | SsODNet': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SkyMapper_SkyMapper',
+        color_indices: {'g-r': [0.5681, 0.0494]},
+        calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
     '(316431) 2010 TH167 | MBOSS': {
@@ -6105,6 +6142,14 @@
         color_indices: {'g-r': [0.7958, 0.1633], 'r-i': [0.0045, 0.1650]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
+    },
+    '(728840) 2010 TH | Tegler2016, Müller2020': {
+        tags: ['Solar System', 'minor body/centaur'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.72, 0.02], 'V-R': [0.46, 0.02]},
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.078, 0.033]],
     },
     'Rabinowitz2013': [
         'The Peculiar Photometric Properties of 2010 WG9: A Slowly Rotating Trans-Neptunian Object from the Oort Cloud',
