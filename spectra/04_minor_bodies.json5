@@ -248,6 +248,11 @@
         'DOI: 10.1016/j.icarus.2005.05.023', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103507003910',
         'https://ui.adsabs.harvard.edu/abs/2007Icar..191S..22F/abstract'
     ],
+    'PinillaAlonso2007': [
+        'The water ice rich surface of (145453) 2005 RR43: a case for a carbon-depleted population of TNOs?',
+        'DOI: 10.1051/0004-6361:20077294', 'https://www.aanda.org/component/article?access=bibcode&bibcode=&bibcode=2007A%2526A...468L..25PFUL',
+        'https://ui.adsabs.harvard.edu/abs/2007A&A...468L..25P/abstract'
+    ],
     'Lamy2009': [
         'The colors of cometary nuclei-Comparison with other primitive bodies of the Solar System and implications for their origin',
         'DOI: 10.1016/j.icarus.2009.01.030', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103509000657',
@@ -367,19 +372,21 @@
         'DOI: 10.1126/science.1219088', 'https://www.science.org/doi/10.1126/science.1219088',
         'https://ui.adsabs.harvard.edu/abs/2012Sci...336..700R/abstract'
     ],
-    '(4) Vesta: Bright areas | Reddy2012': {
+    '(4) Vesta: Bright areas | Reddy2012, Howett2021b': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Dawn target'],
         photometric_system: 'Dawn_FC',
         filters: ['F8', 'F2', 'F7', 'F3', 'F6', 'F4', 'F5'],
         br: [0.761, 0.882, 1.020, 0.991, 0.765, 0.603, 0.603],
         geometric_albedo: ['Dawn_FC.F1', 0.67], // brightest point in clear filter
+        phase_integral: [0.53, 0.10], // Table 3, p. 426 (Howett2021b)
     },
-    '(4) Vesta: Dark areas | Reddy2012': {
+    '(4) Vesta: Dark areas | Reddy2012, Howett2021b': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Dawn target'],
         photometric_system: 'Dawn_FC',
         filters: ['F8', 'F2', 'F7', 'F3', 'F6', 'F4', 'F5'],
         br: [0.757, 0.853, 1.020, 0.999, 0.948, 0.810, 0.827],
         geometric_albedo: ['Dawn_FC.F1', 0.10], // darkest area in clear filter
+        phase_integral: [0.53, 0.10], // Table 3, p. 426 (Howett2021b)
     },
     '(7) Iris | SMASS, Vernazza2021, SsODNet': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -1631,13 +1638,13 @@
         'DOI: 10.1051/0004-6361/201424208', 'https://www.aanda.org/articles/aa/full_html/2014/08/aa24208-14/aa24208-14.html',
         'https://ui.adsabs.harvard.edu/abs/2014A%26A...568A..79D/abstract'
     ],
-    '(10199) Chariklo: Synthetic spectrum | Duffard2014b, Bauer2003': { // Modeled based off characteristics in Table 3
+    '(10199) Chariklo: Synthetic spectrum | Duffard2014b, Bauer2003': { // Modeled based on the characteristics in Table 3
         tags: ['Solar System', 'minor body/centaur'],
         file: 'spectra/files/Duffard2014b/Chariklo_continuum_model.txtU', // Fig. 4a
         geometric_albedo: [550, [0.036, 0.010]],
         phase_function: ['HG', {H: 6.50, G: [0.08, 0.05]}],
     },
-    'Rings of Chariklo: Synthetic spectrum | Duffard2014b': { // Modeled based off characteristics in Table 4
+    'Rings of Chariklo: Synthetic spectrum | Duffard2014b': { // Modeled based on the characteristics in Table 4
         tags: ['Solar System', 'minor body/centaur', 'ring'],
         file: 'spectra/files/Duffard2014b/Chariklo_rings_model.txtU', // Fig. 4b
         geometric_albedo: [550, [0.070, 0.010]],
@@ -2737,6 +2744,11 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.083, +0.016, -0.015]],
     },
+    '(55636) 2002 TX300 | PinillaAlonso2007, Müller2020': { // IR extension of Licandro2006
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        file: 'spectra/files/PinillaAlonso2007/2002TX300_PinillaAlonso2007.txtU', // Fig. 1
+        geometric_albedo: ['Generic_Bessell.V', [0.760, +0.180, -0.450]],
+    },
     '(55636) 2002 TX300 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
@@ -2801,12 +2813,18 @@
         geometric_albedo: ['Generic_Bessell.V', [0.066, 0.006]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {H: [12.0339, +0.0373, -0.0473], G_1: [0.0187, +0.0371, -0.0187], G_2: [0.9600, +0.0398, -0.0495]}],
     },
-    '(58534) Logos | MBOSS': {
+    'Thirouin2025': [
+        'Logos-Zoe: A contact binary triple system in the trans-neptunian belt',
+        'DOI: 10.48550/arXiv.2504.15363', 'https://arxiv.org/abs/2504.15363',
+        'https://ui.adsabs.harvard.edu/abs/2025arXiv250415363T/abstract'
+    ],
+    '(58534) Logos | MBOSS, Thirouin2025': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.990, 0.127], 'V-R': [0.729, 0.120], 'R-I': [0.602, 0.119]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.15, 0.05]], // best fit to light curve
     },
     '(59358) 1999 CL158 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
@@ -2966,12 +2984,12 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.056, 0.006]], // system albedo
     },
-    'Grundy2007': [
+    'Grundy2007b': [
         'The orbit, mass, size, albedo, and density of (65489) Ceto/Phorcys: A tidally-evolved binary Centaur',
         'DOI: 10.1016/j.icarus.2007.04.004', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103507001546',
         'https://ui.adsabs.harvard.edu/abs/2007Icar..191..286G/abstract'
     ],
-    '(65489) Ceto | Grundy2007, Müller2020': {
+    '(65489) Ceto | Grundy2007b, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/scattered'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F606W', 'F814W'],
@@ -2981,7 +2999,7 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.056, 0.006]], // system albedo
     },
-    '(65489 I) Phorcys | Grundy2007, Müller2020': {
+    '(65489 I) Phorcys | Grundy2007b, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/scattered', 'natural satellite'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F606W', 'F814W'],
@@ -3871,8 +3889,14 @@
         br: [0.78, 0.71], // MVIC NIR and CH4 filters not used
         is_spherical_albedo: true,
     },
-    '(134340 I) Charon | Protopapa2020, Verbiscer2022': {
+    '(134340 I) Charon | PinillaAlonso2007, Verbiscer2022': {
         tags: ['featured', 'Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'Charon', 'spacecraft target/New Horizons target'],
+        file: 'spectra/files/PinillaAlonso2007/Charon_PinillaAlonso2007.txtU', // Fig. 1
+        geometric_albedo: ['NewHorizons_LORRI.Pan', [0.41, 0.01]],
+        spherical_albedo: ['NewHorizons_LORRI.Pan', [0.25, 0.04]],
+    },
+    '(134340 I) Charon | Protopapa2020, Verbiscer2022': {
+        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'Charon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR', 'CH4'],
         br: [0.292, 0.288, 0.288, 0.290], // traced from Fig. 11
@@ -4052,6 +4076,36 @@
         geometric_albedo: ['Generic_Bessell.V', [0.66, 0.02]],
         phase_integral: [0.44, 0.03], // system
     },
+    'Ortiz2017': [
+        'The size, shape, density and ring of the dwarf planet Haumea from a stellar occultation',
+        'DOI: 10.1038/nature24051', 'https://www.nature.com/articles/nature24051',
+        'https://ui.adsabs.harvard.edu/abs/2017Natur.550..219O/abstract'
+    ],
+    'Kalup2024': [
+        'Radiative Transfer Modeling of Haumea’s Dust Ring',
+        'DOI: 10.1088/1538-3873/ad94a3', 'https://iopscience.iop.org/article/10.1088/1538-3873/ad94a3',
+        'https://ui.adsabs.harvard.edu/abs/2024PASP..136l4401K/abstract'
+    ],
+    // these three models have the closest contribution percentage (1.6%) to Haumea’s total
+    // brightness to the best-fit contribution (2.5%) of Ortiz et al. (2017)
+    'Rings of Haumea: Amorphous water ice, 100 nm particles | Kalup2024, Ortiz2017': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'ring'],
+        file: 'spectra/files/Kalup2024/Haumea_rings_amorphous_water_ice.txtU', // Fig. 4 (Kalup2024)
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.09], // best-guess I/F for a 70 km wide ring (Ortiz2017)
+    },
+    'Rings of Haumea: Crystallized water ice, 100 nm particles | Kalup2024, Ortiz2017': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'ring'],
+        file: 'spectra/files/Kalup2024/Haumea_rings_crystallized_water_ice.txtU', // Fig. 4 (Kalup2024)
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.09], // best-guess I/F for a 70 km wide ring (Ortiz2017)
+    },
+    'Rings of Haumea: Pyroxene, 100 nm particles | Kalup2024, Ortiz2017': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'ring'],
+        file: 'spectra/files/Kalup2024/Haumea_rings_pyroxene.txtU', // Fig. 4 (Kalup2024)
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.09], // best-guess I/F for a 70 km wide ring (Ortiz2017)
+    },
     'FernandezValenzuela2024': [
         'Deciphering satellite formation in the trans-Neptunian region: the case of Weywot',
         'https://www.youtube.com/watch?v=n5FFLJi2I8U', 'https://tno2024.org/relation/abstract/90'
@@ -4063,7 +4117,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.76, 0.15]],
-        spherical_albedo: ['Generic_Bessell.V', [0.33, 0.03]], // system albedo
+        phase_integral: [0.44, 0.03], // system
     },
     '(136108 II) Namaka | Brown2010, Verbiscer2022': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite'],
@@ -4238,6 +4292,11 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.107, +0.029, -0.018]],
+    },
+    '(145453) 2005 RR43 | PinillaAlonso2007, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        file: 'spectra/files/PinillaAlonso2007/2005RR43_PinillaAlonso2007.txtU', // Fig. 1
+        geometric_albedo: ['Generic_Bessell.V', [0.440, +0.120, -0.100]],
     },
     '(145453) 2005 RR43 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
@@ -4775,6 +4834,13 @@
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.740, 0.020], 'V-R': [0.460, 0.020]},
         calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
+    '(316179) 2010 EN65 | SsODNet': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        photometric_system: 'SkyMapper_SkyMapper',
+        color_indices: {'g-r': [0.5681, 0.0494]},
+        calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
     '(316431) 2010 TH167 | MBOSS': {
@@ -6104,6 +6170,14 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
+    '(728840) 2010 TH | Tegler2016, Müller2020': {
+        tags: ['Solar System', 'minor body/centaur'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.72, 0.02], 'V-R': [0.46, 0.02]},
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.078, 0.033]],
+    },
     'Rabinowitz2013': [
         'The Peculiar Photometric Properties of 2010 WG9: A Slowly Rotating Trans-Neptunian Object from the Oort Cloud',
         'DOI: 10.1088/0004-6256/146/1/17', 'https://iopscience.iop.org/article/10.1088/0004-6256/146/1/17/meta',
@@ -6907,6 +6981,18 @@
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.42, 0.15], 'r-i': [0.22, 0.11]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
+    'Cheng2025': [
+        'Discovery of a dwarf planet candidate in an extremely wide orbit: 2017 OF201',
+        'DOI: 10.48550/arXiv.2505.15806', 'https://arxiv.org/abs/2505.15806',
+        'https://ui.adsabs.harvard.edu/abs/2025arXiv250515806C/abstract'
+    ],
+    '2017 OF201 | Cheng2025': {
+        tags: ['Solar System', 'minor body/TNO/detached TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.77, 0.11], 'r-z': [0.80, 0.07]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
