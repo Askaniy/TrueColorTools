@@ -1589,7 +1589,7 @@
         'DOI: 10.1126/science.1122882', 'https://www.science.org/doi/abs/10.1126/science.1122882',
         'https://ui.adsabs.harvard.edu/abs/2006Sci...311..973S/abstract'
     ],
-    'Portia (U XII) | Karkoschka1997, Karkoschka2001': { // phase angle 1°
+    'Portia (U XII) | Karkoschka1997, Showalter2006, Karkoschka2001': { // phase angle 1°
         tags: ['Solar System/Uranian system', 'natural satellite/regular moon'],
         //         620 nm                   670 nm                730 nm                   910 nm
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-WF.FQCH4N_B', 'HST_WFPC2-PC.F850LP'],
@@ -1598,10 +1598,10 @@
         geometric_albedo: [500, [0.069, 0.008]],
         spherical_albedo: [550, [0.026, 0.005]], // Portia group
     },
-    'Portia group | Karkoschka2001': {
+    'Portia group | Karkoschka2001, Showalter2006': {
         tags: ['Solar System/Uranian system', 'natural satellite/regular moon', 'class'],
         slope: {start: 570, stop: 1500, power: 0.09},
-        geometric_albedo: [550, 0.080],
+        geometric_albedo: [500, [0.070, 0.006]], // Showalter2006
         spherical_albedo: [550, [0.026, 0.005]],
     },
     'Puck (U XV) | Karkoschka2001': {
@@ -1827,28 +1827,28 @@
     'Naiad (N III) | Helfenbein2024, Karkoschka2003': {
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         filters: ['Voyager_ISS-NAC.Clear', 550, 'Keck_NIRC2.H'],
-        br: [[0.0707, 0.0127], [0.072, 0.013], [0.071, 0.0083]], // clear filter value calculated from I/F at a 15° phase angle and phase function (Karkoschka2003)
+        br: [[0.0707, 0.0127], [0.072, 0.013], [0.071, 0.0083]], // clear filter value phase-corrected with I/F at a 15° phase angle and phase function (Karkoschka2003)
         is_geometric_albedo: true,
-        phase_function: ['phase coefficient', {beta: 0.037}], // average value
+        phase_function: ['phase coefficient', {beta: [0.037, 0.003]}], // average value
     },
     'Thalassa (N IV) | Karkoschka2003': {
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         filters: ['Voyager_ISS-NAC.Clear', 550],
-        br: [[0.0892, 0.0127], 0.091], // clear filter value calculated from I/F at a 15° phase angle and phase function
+        br: [[0.0892, 0.0127], 0.091], // clear filter value phase-corrected with I/F at a 15° phase angle and phase function
         is_geometric_albedo: true,
-        phase_function: ['phase coefficient', {beta: 0.037}], // average value
+        phase_function: ['phase coefficient', {beta: [0.037, 0.003]}], // average value
     },
     'Despina (N V) | Helfenbein2024, Karkoschka2003, Thomas1991a': {
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         filters: ['Voyager_ISS-NAC.Clear', 550, 'Keck_NIRC2.H', 'HST_NICMOS2.F187W'],
-        br: [[0.0887, 0.0071], [0.090, 0.0072], [0.13, 0.013], [0.08, 0.05]], // clear filter value calculated from I/F at a 15° phase angle and phase function (Karkoschka2003)
+        br: [[0.0887, 0.0071], [0.090, 0.0072], [0.13, 0.013], [0.08, 0.05]], // clear filter value phase-corrected with I/F at a 15° phase angle and phase function (Karkoschka2003)
         is_geometric_albedo: true,
         phase_function: ['phase coefficient', {beta: 0.037}],
     },
     'Galatea (N VI) | Helfenbein2024, Karkoschka2003, Thomas1991a': {
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         filters: ['Voyager_ISS-NAC.Clear', 550, 'Keck_NIRC2.H', 'HST_NICMOS2.F187W', 'Keck_NIRC2.Kp'],
-        br: [[0.0775, 0.0071], [0.079, 0.0072], [0.13, 0.012], [0.12, 0.08], [0.12, 0.014]], // clear filter value calculated from I/F at a 15° phase angle and phase function (Karkoschka2003)
+        br: [[0.0775, 0.0071], [0.079, 0.0072], [0.13, 0.012], [0.12, 0.08], [0.12, 0.014]], // clear filter value phase-corrected with I/F at a 15° phase angle and phase function (Karkoschka2003)
         is_geometric_albedo: true,
         phase_function: ['phase coefficient', {beta: 0.034}],
     },
@@ -1905,7 +1905,7 @@
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon', 'class'],
         slope: {start: 480, stop: 1870, power: [0.13, 0.07]}, // wavelength range of Dumas et al. (2002)
         geometric_albedo: [550, 0.085], // albedos range from 0.07 to 0.10
-        phase_function: ['phase coefficient', {beta: 0.037}],
+        phase_function: ['phase coefficient', {beta: [0.037, 0.003]}],
     },
     // Triton
     'Tryka1999': [
