@@ -262,24 +262,25 @@
         'DOI: 10.1051/0004-6361:20054178', 'https://www.aanda.org/articles/aa/abs/2006/10/aa4178-05/aa4178-05.html',
         'https://ui.adsabs.harvard.edu/abs/2006A%26A...448..313S/abstract'
     ],
+    // the 25MAMA_G140L filter was removed, reconstructed spectrum should be yellow to fit it
     'Geminga: observed | Shibanov2006': {
         tags: ['extrasolar', 'star/neutron star'],
         filters: [
-            'HST_STIS_FUV.25MAMA_G140L', 'HST_STIS_NUV.F25SRF2', 'HST_FOC_F96.F342W', 'HST_FOC_F96.F430W',
+            'HST_STIS_NUV.F25SRF2', 'HST_FOC_F96.F342W', 'HST_FOC_F96.F430W',
             'HST_WFPC2-PC.F555W', 'Subaru_Suprime.Rc_filter', 'Subaru_Suprime.Ic_filter',
             'HST_NICMOS2.F110W', 'HST_NICMOS2.F160W'
         ],
-        br: [6.69E-18, 1.49E-18, 5.18E-19, 2.83E-19, 1.43E-19, 1.19E-19, 8.93E-20, 4.12E-20, 2.70E-20],
+        br: [1.49E-18, 5.18E-19, 2.83E-19, 1.43E-19, 1.19E-19, 8.93E-20, 4.12E-20, 2.70E-20],
         is_emissive: true,
     },
     'Geminga: dereddened | Shibanov2006': {
         tags: ['extrasolar', 'star/neutron star'],
         filters: [
-            'HST_STIS_FUV.25MAMA_G140L', 'HST_STIS_NUV.F25SRF2', 'HST_FOC_F96.F342W', 'HST_FOC_F96.F430W',
+            'HST_STIS_NUV.F25SRF2', 'HST_FOC_F96.F342W', 'HST_FOC_F96.F430W',
             'HST_WFPC2-PC.F555W', 'Subaru_Suprime.Rc_filter', 'Subaru_Suprime.Ic_filter',
             'HST_NICMOS2.F110W', 'HST_NICMOS2.F160W'
         ],
-        br: [8.02E-18, 1.79E-18, 5.77E-19, 3.10E-19, 1.53E-19, 1.25E-19, 9.30E-20, 4.22E-20, 2.73E-20],
+        br: [1.79E-18, 5.77E-19, 3.10E-19, 1.53E-19, 1.25E-19, 9.30E-20, 4.22E-20, 2.73E-20],
         is_emissive: true,
     },
     'Kargaltsev2005': [
