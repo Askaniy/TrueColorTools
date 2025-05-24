@@ -248,6 +248,11 @@
         'DOI: 10.1016/j.icarus.2005.05.023', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103507003910',
         'https://ui.adsabs.harvard.edu/abs/2007Icar..191S..22F/abstract'
     ],
+    'PinillaAlonso2007': [
+        'The water ice rich surface of (145453) 2005 RR43: a case for a carbon-depleted population of TNOs?',
+        'DOI: 10.1051/0004-6361:20077294', 'https://www.aanda.org/component/article?access=bibcode&bibcode=&bibcode=2007A%2526A...468L..25PFUL',
+        'https://ui.adsabs.harvard.edu/abs/2007A&A...468L..25P/abstract'
+    ],
     'Lamy2009': [
         'The colors of cometary nuclei-Comparison with other primitive bodies of the Solar System and implications for their origin',
         'DOI: 10.1016/j.icarus.2009.01.030', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103509000657',
@@ -2739,6 +2744,11 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.083, +0.016, -0.015]],
     },
+    '(55636) 2002 TX300 | PinillaAlonso2007, Müller2020': { // IR extension of Licandro2006
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        file: 'spectra/files/PinillaAlonso2007/2002TX300_PinillaAlonso2007.txtU', // Fig. 1
+        geometric_albedo: ['Generic_Bessell.V', [0.760, +0.180, -0.450]],
+    },
     '(55636) 2002 TX300 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
@@ -2803,12 +2813,18 @@
         geometric_albedo: ['Generic_Bessell.V', [0.066, 0.006]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {H: [12.0339, +0.0373, -0.0473], G_1: [0.0187, +0.0371, -0.0187], G_2: [0.9600, +0.0398, -0.0495]}],
     },
-    '(58534) Logos | MBOSS': {
+    'Thirouin2025': [
+        'Logos-Zoe: A contact binary triple system in the trans-neptunian belt',
+        'DOI: 10.48550/arXiv.2504.15363', 'https://arxiv.org/abs/2504.15363',
+        'https://ui.adsabs.harvard.edu/abs/2025arXiv250415363T/abstract'
+    ],
+    '(58534) Logos | MBOSS, Thirouin2025': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.990, 0.127], 'V-R': [0.729, 0.120], 'R-I': [0.602, 0.119]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.15, 0.05]], // best fit to light curve
     },
     '(59358) 1999 CL158 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
@@ -3873,8 +3889,14 @@
         br: [0.78, 0.71], // MVIC NIR and CH4 filters not used
         is_spherical_albedo: true,
     },
-    '(134340 I) Charon | Protopapa2020, Verbiscer2022': {
+    '(134340 I) Charon | PinillaAlonso2007, Verbiscer2022': {
         tags: ['featured', 'Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'Charon', 'spacecraft target/New Horizons target'],
+        file: 'spectra/files/PinillaAlonso2007/Charon_PinillaAlonso2007.txtU', // Fig. 1
+        geometric_albedo: ['NewHorizons_LORRI.Pan', [0.41, 0.01]],
+        spherical_albedo: ['NewHorizons_LORRI.Pan', [0.25, 0.04]],
+    },
+    '(134340 I) Charon | Protopapa2020, Verbiscer2022': {
+        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'Charon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR', 'CH4'],
         br: [0.292, 0.288, 0.288, 0.290], // traced from Fig. 11
@@ -4270,6 +4292,11 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.107, +0.029, -0.018]],
+    },
+    '(145453) 2005 RR43 | PinillaAlonso2007, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        file: 'spectra/files/PinillaAlonso2007/2005RR43_PinillaAlonso2007.txtU', // Fig. 1
+        geometric_albedo: ['Generic_Bessell.V', [0.440, +0.120, -0.100]],
     },
     '(145453) 2005 RR43 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
@@ -6954,6 +6981,18 @@
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.42, 0.15], 'r-i': [0.22, 0.11]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
+    'Cheng2025': [
+        'Discovery of a dwarf planet candidate in an extremely wide orbit: 2017 OF201',
+        'DOI: 10.48550/arXiv.2505.15806', 'https://arxiv.org/abs/2505.15806',
+        'https://ui.adsabs.harvard.edu/abs/2025arXiv250515806C/abstract'
+    ],
+    '2017 OF201 | Cheng2025': {
+        tags: ['Solar System', 'minor body/TNO/detached TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.77, 0.11], 'r-z': [0.80, 0.07]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
