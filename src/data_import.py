@@ -27,7 +27,7 @@ def file_reader(file: str) -> tuple[np.ndarray]:
     For FITS files, it will try to determine the wavelength unit from internal data.
     You can also forcefully specify the data type through letters in the file extension (.txt for example):
     - .txtN for nanometers, .txtA for angstroms, .txtU for micrometers;
-    - .txtE for energy counters, .txtP for photon counters.
+    - .txtE for energy counters per wavelength, .txtJ for energy counters per frequency, .txtP for photon counters.
     """
     extension = file.split('.')[-1].lower()
     type_info = extension

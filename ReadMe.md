@@ -87,7 +87,7 @@ For photometry, it is necessary to specify calibration spectrum if it's not an e
 Supported input keys of a database unit:
 - `tags` (list): strings categorizing the spectral data, optional
 - `nm` (list): list of wavelengths in nanometers
-- `br` (list): same-size list of "brightness" in energy spectral density units
+- `br` (list): same-size list of "brightness" in energy spectral density per wavelength units
 - `mag` (list): same-size list of magnitudes
 - `sd` (list/number): same-size list of standard deviations (or a common value)
 - `nm_range` (dict): wavelength range definition in the format `{start: …, stop: …, step: …}`
@@ -118,7 +118,7 @@ You can store the file with the spectrum outside of JSON5, and include a link in
 
 As in JSON5, the default wavelengths for external files are in nanometers and the spectrum is in energy density. For FITS files, TCT attempt to determine the wavelength unit from internal data. You can also force the data type by using letters in the file extension (`.txt` for example):
 - `.txtN` for nanometers (by default), `.txtA` for ångströms, `.txtU` for micrometers;
-- `.txtE` for energy counters (by default), `.txtP` for photon counters.
+- `.txtE` for energy counters per wavelength (by default), `.txtJ` for energy counters per frequency (like jansky), `.txtP` for photon counters.
 
 ### Spectra database extension
 The data in the `/spectra` folder can be modified by the user (except for the "vital" spectra of the [Sun](spectra/files/CALSPEC/sun_reference_stis_002.fits) and [Vega](spectra/files/CALSPEC/alpha_lyr_stis_011.fits)). The display order in the *Database viewer* is determined by the file names and the order within the file. If the spectrum header is repeated in the database, the last spectrum will replace the previous one. The tag list is created and completed while reading files. `/spectra_extras` is recommended as the storage location for user files and add-ons; they will be shown last in the GUI. There is a [pinned issue](https://github.com/Askaniy/TrueColorTools/issues/26) for sharing "official" and user add-ons. Pull requests are welcome too.

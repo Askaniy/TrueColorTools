@@ -265,7 +265,7 @@ class _TrueColorToolsObject:
         """
         raise NotImplementedError('Implemented in the classes SpectralObject and PhotospectralObject.')
     
-    def convert_from_frequency_spectral_density(self):
+    def convert_from_energy_spectral_density_per_frequency(self):
         """
         Returns a new TrueColorToolsObject converted from frequency spectral density
         to energy spectral density, using the fact that f_λ = f_ν c / λ².
@@ -526,10 +526,10 @@ class _SpectralObject(_TrueColorToolsObject):
         """
         return (self / self.nm).normalize()
     
-    def convert_from_frequency_spectral_density(self):
+    def convert_from_energy_spectral_density_per_frequency(self):
         """
-        Returns a new SpectralObject converted from frequency spectral density
-        to energy spectral density, using the fact that f_λ = f_ν c / λ².
+        Returns a new SpectralObject converted from energy spectral density per frequency
+        to energy spectral density per wavelength, using the fact that f_λ = f_ν c / λ².
         """
         scale_factors = 1 / self.nm / self.nm # squaring nm will overflow uint16
         return (self / scale_factors).normalize()
@@ -669,7 +669,10 @@ class Spectrum(_SpectralObject):
     def from_file(file: str, name: str|ObjectName = None):
         """ Creates a Spectrum object based on loaded data from the specified file """
         spectrum = Spectrum.from_array(*file_reader(file), name=name)
-        if 'p' in Path(file).suffix.lower():
+        extension = file.split('.')[-1].upper()
+        if 'J' in extension:
+            spectrum = spectrum.convert_from_energy_spectral_density_per_frequency()
+        elif 'P' in extension:
             spectrum = spectrum.convert_from_photon_spectral_density()
         return spectrum
     
@@ -1042,7 +1045,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
         scale_factors = (profiles / profiles.nm).integrate()
         return self * (scale_factors / scale_factors.mean())
     
-    def convert_from_frequency_spectral_density(self):
+    def convert_from_energy_spectral_density_per_frequency(self):
         """
         Returns a new PhotospectralObject converted from frequency spectral density
         to energy spectral density, using the fact that f_λ = f_ν c / λ².
@@ -1587,7 +1590,7 @@ def _create_TCT_object(
             case 'vega':
                 TCT_obj *= vega_norm
             case 'ab':
-                TCT_obj = TCT_obj.convert_from_frequency_spectral_density()
+                TCT_obj = TCT_obj.convert_from_energy_spectral_density_per_frequency()
             case _:
                 pass
     if is_sun:
@@ -1601,7 +1604,7 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
     Supported input keys of a database unit:
     - `tags` (list): strings categorizing the spectral data, optional
     - `nm` (list): list of wavelengths in nanometers
-    - `br` (list): same-size list of "brightness" in energy spectral density units
+    - `br` (list): same-size list of "brightness" in energy spectral density per wavelength units
     - `mag` (list): same-size list of magnitudes
     - `sd` (list/number): same-size list of standard deviations (or a common value)
     - `nm_range` (dict): wavelength range definition in the format `{start: …, stop: …, step: …}`
