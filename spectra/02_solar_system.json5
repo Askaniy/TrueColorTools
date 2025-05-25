@@ -1600,7 +1600,7 @@
     },
     'Portia group | Karkoschka2001, Showalter2006': {
         tags: ['Solar System/Uranian system', 'natural satellite/regular moon', 'class'],
-        slope: {start: 570, stop: 1500, power: 0.09},
+        slope: {start: 570, stop: 1500, power: [0.09, 0.09]}, // error margin from Karkoschka2003
         geometric_albedo: [500, [0.070, 0.006]], // Showalter2006
         spherical_albedo: [550, [0.026, 0.005]],
     },
