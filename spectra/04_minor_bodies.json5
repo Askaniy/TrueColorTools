@@ -4088,19 +4088,20 @@
     ],
     // these three models have the closest contribution percentage (1.6%) to Haumea’s total
     // brightness to the best-fit contribution (2.5%) of Ortiz et al. (2017)
-    'Rings of Haumea: Amorphous water ice, 100 nm particles | Kalup2024, Ortiz2017': {
+    // 100 nm particles
+    'Rings of Haumea: Amorphous water ice | Kalup2024, Ortiz2017': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'ring'],
         file: 'spectra/files/Kalup2024/Haumea_rings_amorphous_water_ice.txtU', // Fig. 4 (Kalup2024)
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.09], // best-guess I/F for a 70 km wide ring (Ortiz2017)
     },
-    'Rings of Haumea: Crystallized water ice, 100 nm particles | Kalup2024, Ortiz2017': {
+    'Rings of Haumea: Crystallized water ice | Kalup2024, Ortiz2017': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'ring'],
         file: 'spectra/files/Kalup2024/Haumea_rings_crystallized_water_ice.txtU', // Fig. 4 (Kalup2024)
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.09], // best-guess I/F for a 70 km wide ring (Ortiz2017)
     },
-    'Rings of Haumea: Pyroxene, 100 nm particles | Kalup2024, Ortiz2017': {
+    'Rings of Haumea: Pyroxene | Kalup2024, Ortiz2017': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'ring'],
         file: 'spectra/files/Kalup2024/Haumea_rings_pyroxene.txtU', // Fig. 4 (Kalup2024)
         is_reflecting_sunlight: true,

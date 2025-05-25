@@ -169,7 +169,7 @@
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79],
         geometric_albedo: ['Generic_Bessell.V', 0.434],
-        bond_albedo: [0.295, 0.002], // Section 5.1
+        bond_albedo: [0.295, 0.002], // Section 5.1
     },
     'Earth | Mallama2017a, Pallé2003': {
         tags: ['Solar System', 'planetary body/planet', 'Earth'],
@@ -177,7 +177,7 @@
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
         br_geometric: [0.688, 0.512, 0.434, 0.418, 0.430,
                        0.392, 0.396],
-        bond_albedo: [0.295, 0.002], // Section 5.1
+        bond_albedo: [0.295, 0.002], // Section 5.1
     },
     'Earth: Archean | VPL': { // Arney et al. 2017, "Hazy Archean Earth orbiting the Archean Sun", 1 bar, 1% CO2, 0.2% CH4
         tags: ['Solar System', 'planetary body/planet', 'Earth/history'],
@@ -307,7 +307,7 @@
         tags: ['featured', 'Solar System', 'planetary body/planet', 'Mars'],
         file: 'spectra/files/Madden2018/Mars_McCord1971_Albedo.txtU',
         is_geometric_albedo: true,
-        phase_integral: 1.01, // extracted from Fig. 7 for 550 nm (q2)
+        phase_integral: 1.01, // extracted from Fig. 7 for 550 nm (q2)
     },
     'Mars | Mallama2017a, Pleskot1977': { // synthetic photospectrum
         tags: ['Solar System', 'planetary body/planet', 'Mars'],
@@ -315,7 +315,7 @@
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
         br_geometric: [0.060, 0.088, 0.170, 0.288, 0.330,
                        0.250, 0.285],
-        phase_integral: 1.01, // extracted from Fig. 7 for 550 nm (q2)
+        phase_integral: 1.01, // extracted from Fig. 7 for 550 nm (q2)
     },
     'Mars | Crow2011, Mallama2017a, Pleskot1977': { // phase angle 37.0°
         tags: ['Solar System', 'planetary body/planet', 'Mars'],
@@ -323,19 +323,19 @@
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31],
         geometric_albedo: ['Generic_Bessell.V', 0.170],
-        phase_integral: 1.01, // extracted from Fig. 7 for 550 nm (q2)
+        phase_integral: 1.01, // extracted from Fig. 7 for 550 nm (q2)
     },
     'Mars: Bright areas | Singer1979, Pleskot1977': { // the average of a number of typical bright region spectra
         tags: ['Solar System', 'planetary body/planet', 'Mars'],
         file: 'spectra/files/Singer1979/Mars_bright.txtU', // figure 3
         geometric_albedo: [800, 0.40],
-        phase_integral: 1.01, // extracted from Fig. 7 for 550 nm (q2)
+        phase_integral: 1.01, // extracted from Fig. 7 for 550 nm (q2)
     },
     'Mars: Dark areas | Singer1979, Pleskot1977': { // telescopic dark region Iapygia
         tags: ['Solar System', 'planetary body/planet', 'Mars'],
         file: 'spectra/files/Singer1979/Mars_dark.txtU', // figure 3
         geometric_albedo: [800, 0.21],
-        phase_integral: 1.01, // extracted from Fig. 7 for 550 nm (q2)
+        phase_integral: 1.01, // extracted from Fig. 7 for 550 nm (q2)
     },
     'Mars: Synthetic spectrum | VPL': { // Tyler Robinson, "Present-day Mars generated using SMART"
         tags: ['Solar System', 'planetary body/planet', 'Mars'],
@@ -512,7 +512,7 @@
         'DOI: 10.1016/0019-1035(87)90018-2', 'https://www.sciencedirect.com/science/article/pii/0019103587900182',
         'https://ui.adsabs.harvard.edu/abs/1987Icar...69..458S/abstract'
     ],
-    'Main ring (Jupiter) | Showalter1987': {
+    'Main ring (Jupiter) | Showalter1987': { // 122 500 — 129 000 km
         tags: ['Solar System/Jovian system', 'ring'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Clear', 'Green', 'Orange'],
@@ -972,7 +972,7 @@
         filters: ['F336W', 'F410M', 'F467M', 'F588N', 'FQCH4N_B', 'F673N'],
         br: [0.993, 1.107, 0.879, 0.950, 1.143, 0.864], // extracted from Fig. 5
         sd: [0.329, 0.157, 0.186, 0.171, 0.079, 0.165], // extracted from Fig. 5
-        spherical_albedo: [550, 0.062], // phase angle 19°; Fig. 13 (Clark2014)
+        spherical_albedo: [550, 0.062], // phase angle 19°; Fig. 13 (Clark2014)
     },
     'F ring: 140~200 km (Saturn) | Clark2014': { // phase angle 19°
         tags: ['Solar System/Saturnian system', 'ring'],
@@ -1472,13 +1472,13 @@
         tags: ['featured', 'Solar System/Uranian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Uranus1995.txt',
         is_geometric_albedo: true,
-        phase_integral: 1.35, // extracted from Fig. 2 for 550 nm
+        phase_integral: 1.35, // extracted from Fig. 2 for 550 nm
     },
     'Uranus | Karkoschka1994, Irwin2025': { // phase angle 0.6°
         tags: ['Solar System/Uranian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Uranus1993.txt',
         is_geometric_albedo: true,
-        phase_integral: 1.35, // extracted from Fig. 2 for 550 nm
+        phase_integral: 1.35, // extracted from Fig. 2 for 550 nm
     },
     // Uranian rings
     'Porco1987': [ // the Clear filter was removed, reconstructed spectrum should be cyan to fit it
@@ -1501,7 +1501,7 @@
         geometric_albedo: [550, 0.050],
         spherical_albedo: [550, [0.018, 0.003]],
     },
-    'α and β rings (Uranus) | Karkoschka1997, Karkoschka2001': { // 44 718–45 661 km
+    'α and β rings (Uranus) | Karkoschka1997, Karkoschka2001': { // 44 718–45 661 km
         tags: ['Solar System/Uranian system', 'ring'],
         //         620 nm                   910 nm
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F850LP'],
@@ -1526,7 +1526,7 @@
         geometric_albedo: ['HST_WFPC2-WF.FQCH4N33', [0.056, 0.007]], // at 1° phase angle
         spherical_albedo: [550, [0.018, 0.003]], // average for rings
     },
-    'η, γ, and δ rings (Uranus) | Karkoschka1997, Karkoschka2001': { // 47 175–48 300 km
+    'η, γ, and δ rings (Uranus) | Karkoschka1997, Karkoschka2001': { // 47 175–48 300 km
         tags: ['Solar System/Uranian system', 'ring'],
         //         620 nm                   910 nm
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F850LP'],
@@ -1559,7 +1559,7 @@
         geometric_albedo: ['HST_WFPC2-WF.FQCH4N33', [0.063, 0.007]], // at 1° phase angle
         spherical_albedo: [550, [0.018, 0.003]], // average for rings
     },
-    'ε ring (Uranus) | Karkoschka1997, Karkoschka2001': { // 51 149 km; phase angle 1°
+    'ε ring (Uranus) | Karkoschka1997, Karkoschka2001': { // 51 149 km; phase angle 1°
         tags: ['Solar System/Uranian system', 'ring'],
         //         340 nm                470 nm                620 nm                   670 nm                730 nm                   910 nm
         filters: ['HST_WFPC2-PC.F336W', 'HST_WFPC2-WF.F467M', 'HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-WF.FQCH4N_B', 'HST_WFPC2-PC.F850LP'],
@@ -1589,13 +1589,13 @@
         'DOI: 10.1126/science.1122882', 'https://www.science.org/doi/abs/10.1126/science.1122882',
         'https://ui.adsabs.harvard.edu/abs/2006Sci...311..973S/abstract'
     ],
-    'Portia (U XII) | Karkoschka1997, Showalter2006, Karkoschka2001': { // phase angle 1°
+    'Portia (U XII) | Karkoschka1997, Showalter2006, Karkoschka2001': { // phase angle 1°
         tags: ['Solar System/Uranian system', 'natural satellite/regular moon'],
         //         620 nm                   670 nm                730 nm                   910 nm
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-WF.FQCH4N_B', 'HST_WFPC2-PC.F850LP'],
         br: [0.107, 0.104, 0.105, 0.123],
         sd: 0.010,
-        geometric_albedo: [500, [0.069, 0.008]],
+        geometric_albedo: [500, [0.069, 0.008]],
         spherical_albedo: [550, [0.026, 0.005]], // Portia group
     },
     'Portia group | Karkoschka2001, Showalter2006': {
@@ -1784,13 +1784,13 @@
         tags: ['featured', 'Solar System/Neptunian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Neptune1995.txt',
         is_geometric_albedo: true,
-        phase_integral: 1.2, // adopted phase integral for both Uranus and Neptune
+        phase_integral: 1.2, // adopted phase integral for both Uranus and Neptune
     },
     'Neptune | Karkoschka1994, Neff1985': { // phase angle 0.4°
         tags: ['Solar System/Neptunian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Neptune1995.txt',
         is_geometric_albedo: true,
-        phase_integral: 1.2, // adopted phase integral for both Uranus and Neptune
+        phase_integral: 1.2, // adopted phase integral for both Uranus and Neptune
     },
     'Irwin2023': [
         'Spectral determination of the colour and vertical structure of dark spots in Neptune’s atmosphere.',
@@ -1863,7 +1863,7 @@
         tags: ['featured', 'Solar System/Neptunian system', 'natural satellite/regular moon'],
         nm: [410, 471, 540],
         br: [0.055, 0.060, 0.062],
-        sd: 0.004, // relative uncertainty
+        sd: 0.004, // relative uncertainty
         geometric_albedo: [550, [0.096, 0.0062]], // error margin from Helfenbein2024
         phase_function: ['phase coefficient', {beta: 0.039}],
     },

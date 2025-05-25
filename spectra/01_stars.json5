@@ -250,7 +250,7 @@
         is_emissive: true,
     },
     'Crab Pulsar: Knot | Sandberg2009': {
-        tags: ['extrasolar', 'star/neutron star'],
+        tags: ['extrasolar'], // not a neutron star, but a structure near it
         photometric_system: 'Generic_Bessell',
         filters: ['U', 'B', 'V', 'R', 'I'],
         mag: [[21.57, 0.13], [21.91, 0.08], [20.72, 0.07], [20.02, 0.07], [19.26, 0.08]], // Table 2
@@ -262,18 +262,8 @@
         'DOI: 10.1051/0004-6361:20054178', 'https://www.aanda.org/articles/aa/abs/2006/10/aa4178-05/aa4178-05.html',
         'https://ui.adsabs.harvard.edu/abs/2006A%26A...448..313S/abstract'
     ],
-    // the 25MAMA_G140L filter was removed, reconstructed spectrum should be yellow to fit it
-    'Geminga: observed | Shibanov2006': {
-        tags: ['extrasolar', 'star/neutron star'],
-        filters: [
-            'HST_STIS_NUV.F25SRF2', 'HST_FOC_F96.F342W', 'HST_FOC_F96.F430W',
-            'HST_WFPC2-PC.F555W', 'Subaru_Suprime.Rc_filter', 'Subaru_Suprime.Ic_filter',
-            'HST_NICMOS2.F110W', 'HST_NICMOS2.F160W'
-        ],
-        br: [1.49E-18, 5.18E-19, 2.83E-19, 1.43E-19, 1.19E-19, 8.93E-20, 4.12E-20, 2.70E-20],
-        is_emissive: true,
-    },
-    'Geminga: dereddened | Shibanov2006': {
+    // measurement in filter 25MAMA G140L was removed due to spectral reconstruction algorithm artifact
+    'Geminga | Shibanov2006': {
         tags: ['extrasolar', 'star/neutron star'],
         filters: [
             'HST_STIS_NUV.F25SRF2', 'HST_FOC_F96.F342W', 'HST_FOC_F96.F430W',
@@ -281,6 +271,16 @@
             'HST_NICMOS2.F110W', 'HST_NICMOS2.F160W'
         ],
         br: [1.79E-18, 5.77E-19, 3.10E-19, 1.53E-19, 1.25E-19, 9.30E-20, 4.22E-20, 2.73E-20],
+        is_emissive: true,
+    },
+    'Geminga: With interstellar dust extinction | Shibanov2006': {
+        tags: ['extrasolar', 'star/neutron star'],
+        filters: [
+            'HST_STIS_NUV.F25SRF2', 'HST_FOC_F96.F342W', 'HST_FOC_F96.F430W',
+            'HST_WFPC2-PC.F555W', 'Subaru_Suprime.Rc_filter', 'Subaru_Suprime.Ic_filter',
+            'HST_NICMOS2.F110W', 'HST_NICMOS2.F160W'
+        ],
+        br: [1.49E-18, 5.18E-19, 2.83E-19, 1.43E-19, 1.19E-19, 8.93E-20, 4.12E-20, 2.70E-20],
         is_emissive: true,
     },
     'Kargaltsev2005': [
@@ -325,7 +325,7 @@
         calibration_system: 'Vega',
         is_emissive: true,
     },
-   'Kurt1998': [
+    'Kurt1998': [
         'BVRI observations of PSR B0656+14 with the 6-meter telescope',
         'DOI: 10.48550/arXiv.astro-ph/9706076', 'https://arxiv.org/abs/astro-ph/9706076',
         'https://ui.adsabs.harvard.edu/abs/1998A&A...333..547K'
@@ -342,12 +342,12 @@
         'DOI: 10.1088/0004-637X/720/2/1635', 'https://iopscience.iop.org/article/10.1088/0004-637X/720/2/1635',
         'https://ui.adsabs.harvard.edu/abs/2010ApJ...720.1635M/abstract'
     ],
-    // the F140LP filter was removed, reconstructed spectrum should be green to fit it
+    // measurement in filter SBC F140LP (22.64 mag) was removed due to spectral reconstruction algorithm artifact
     'PSR B1055−52 | Mignani2010b': {
         tags: ['extrasolar', 'star/neutron star'],
         filters: ['HST_FOC_F96.F342W', 'HST_WFPC2-PC.F555W', 'HST_WFPC2-PC.F702W'],
         mag: [25.00, 25.43, 26.08], // Table 1 (observed magnitude)
-        // magnitude lower limit in WFPC2 F450W: >24.97 mag
+        // magnitude limit in WFPC2 F450W: >24.97 mag
         calibration_system: 'Vega',
         is_emissive: true,
     },
