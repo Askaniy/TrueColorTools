@@ -1856,7 +1856,7 @@
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         nm: [260, 750],
         br: [[0.06, 0.02], [0.07, 0.01]],
-        geometric_albedo: [550, 0.091],
+        geometric_albedo: [550, [0.091, 0.0056]], // error margin from Helfenbein2024
         phase_function: ['phase coefficient', {beta: 0.031}],
     },
     'Proteus (N VIII) | Thomas1991a, Karkoschka2003': {
@@ -1864,7 +1864,7 @@
         nm: [410, 471, 540],
         br: [0.055, 0.060, 0.062],
         sd: 0.004, // relative uncertainty
-        geometric_albedo: [550, 0.096],
+        geometric_albedo: [550, [0.096, 0.0062]], // error margin from Helfenbein2024
         phase_function: ['phase coefficient', {beta: 0.039}],
     },
     'Pascu2006': [
