@@ -257,6 +257,7 @@
         calibration_system: 'Vega',
         is_emissive: true,
     },
+
     'Shibanov2006': [
         'Subaru optical observations of the two middle-aged pulsars PSR B0656+14 and Geminga',
         'DOI: 10.1051/0004-6361:20054178', 'https://www.aanda.org/articles/aa/abs/2006/10/aa4178-05/aa4178-05.html',
@@ -301,6 +302,7 @@
         ],
         is_emissive: true,
     },
+
     'Mignani2001': [
         'Multicolor Photometry of the Vela Pulsar',
         'DOI: 10.1051/0004-6361:20010951', 'https://www.aanda.org/articles/aa/abs/2001/34/aa1221/aa1221.htmlc'
@@ -313,8 +315,9 @@
         calibration_system: 'Vega',
         is_emissive: true,
     },
+
     'Mignani2010a': [
-        'HST/WFPC2 observations of the LMC pulsar PSR B0540–69',
+        'HST/WFPC2 observations of the LMC pulsar PSR B0540–69',
         'DOI: 10.1051/0004-6361/200913870', 'https://www.aanda.org/articles/aa/abs/2010/07/aa13870-09/aa13870-09.html'
     ],
     'PSR B0540–69 | Mignani2010a': { // 2007-06-21
@@ -325,6 +328,7 @@
         calibration_system: 'Vega',
         is_emissive: true,
     },
+
     'Kurt1998': [
         'BVRI observations of PSR B0656+14 with the 6-meter telescope',
         'DOI: 10.48550/arXiv.astro-ph/9706076', 'https://arxiv.org/abs/astro-ph/9706076',
@@ -337,6 +341,7 @@
         calibration_system: 'Vega',
         is_emissive: true,
     },
+
     'Mignani2010b': [
         'Optical-Ultraviolet Spectrum and Proper Motion of the Middle-aged Pulsar B1055-52',
         'DOI: 10.1088/0004-637X/720/2/1635', 'https://iopscience.iop.org/article/10.1088/0004-637X/720/2/1635',
@@ -351,4 +356,29 @@
         calibration_system: 'Vega',
         is_emissive: true,
     },
+
+    'Stringer2021': [
+        'Optical photometry of two transitional millisecond pulsars in the radio pulsar state',
+        'DOI: 10.1093/mnras/stab2167', 'https://academic.oup.com/mnras/article/507/2/2174/6329690',
+        'https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2174S/abstract'
+    ],
+    // ULTRACAM_SuperSDSS system is filter bandpass alone, i.e. they do not include
+    // the effects of atmosphere, New Technology Telescope (NTT) optics, its CCD QE.
+    // from https://vikdhillon.staff.shef.ac.uk/ultracam/
+    'PSR J1227-4853: With companion | Stringer2021': {
+        tags: ['extrasolar', 'star/neutron star'],
+        photometric_system: 'ULTRACAM_SuperSDSS',
+        filters: ['u_s', 'g_s', 'i_s'],
+        mag: [20.4, 18.7, 18.0], // modulation amplitudes of 1.4 mag, 0.8 mag, and 0.6 mag
+        calibration_system: 'AB',
+        is_emissive: true,
+    },
+    'PSR J1023+0038: With companion | Stringer2021': {
+        tags: ['extrasolar', 'star/neutron star'],
+        photometric_system: 'ULTRACAM_SuperSDSS',
+        filters: ['u_s', 'g_s', 'i_s'],
+        mag: [19.4, 17.9, 17.3], // modulation amplitudes of 0.7 mag, 0.4 mag, and 0.3 mag
+        calibration_system: 'AB',
+        is_emissive: true,
+    }
 }

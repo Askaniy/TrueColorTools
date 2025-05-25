@@ -1070,6 +1070,7 @@ notes = {
     'km': {'ru': 'км'},
     'Synthetic spectrum': {'ru': 'Синтетический спектр', 'de': 'Synthetisches Sprektrum'},
     'Composite spectrum': {'ru': 'Композитный спектр', 'de': 'Zusammengesetztes Spektrum'},
+    'With companion': {'ru': 'С компаньоном', 'de': 'Mit Begleiter'},
     'With interstellar dust extinction': {'ru': 'С межзвёздным поглощением пылью', 'de': 'Mit Extinktion durch interstellaren Staub'},
     'Surface': {'ru': 'Поверхность', 'de': 'Oberfläche'},
     'Phase angle': {'ru': 'Фазовый угол', 'de': 'Phasenwinkel'},
