@@ -320,7 +320,7 @@
         'HST/WFPC2 observations of the LMC pulsar PSR B0540–69',
         'DOI: 10.1051/0004-6361/200913870', 'https://www.aanda.org/articles/aa/abs/2010/07/aa13870-09/aa13870-09.html'
     ],
-    'PSR B0540–69 | Mignani2010a': { // 2007-06-21
+    'PSR B0540-69 | Mignani2010a': { // 2007-06-21
         tags: ['featured', 'extrasolar', 'star/neutron star'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F336W', 'F450W', 'F555W', 'F675W', 'F814W'],
@@ -348,7 +348,7 @@
         'https://ui.adsabs.harvard.edu/abs/2010ApJ...720.1635M/abstract'
     ],
     // measurement in filter SBC F140LP (22.64 mag) was removed due to spectral reconstruction algorithm artifact
-    'PSR B1055−52 | Mignani2010b': {
+    'PSR B1055-52 | Mignani2010b': {
         tags: ['extrasolar', 'star/neutron star'],
         filters: ['HST_FOC_F96.F342W', 'HST_WFPC2-PC.F555W', 'HST_WFPC2-PC.F702W'],
         mag: [25.00, 25.43, 26.08], // Table 1 (observed magnitude)
