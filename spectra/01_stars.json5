@@ -175,6 +175,36 @@
         file: 'spectra/files/Krisciunas2017/hr2061_final.txtA',
         is_emissive: true,
     },
+    'Krist2005': [
+        'Hubble Space Telescope Advanced Camera for Surveys Coronagraphic Imaging of the AU Microscopii Debris Disk',
+        'DOI: 10.1086/426755', 'https://iopscience.iop.org/article/10.1086/426755',
+        'https://ui.adsabs.harvard.edu/abs/2005AJ....129.1008K'
+    ],
+    'AU Microscopii (M1 Ve) | Krist2005': { // 2004 Jul 24
+        tags: ['extrasolar', 'star/V dwarf'],
+        filters: ['Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Cousins.I'],
+        mag: [[9.96, 0.05], [8.64, 0.03], [6.60, 0.03]], // Table 2
+        calibration_system: 'Vega',
+        is_emissive: true,
+    },
+    'Debris disk of AU Microscopii | Krist2005': {
+        tags: ['extrasolar', 'debris disk'],
+        photometric_system: 'HST_ACS_HRC',
+        filters: ['F435W', 'F606W', 'F814W'],
+        br: [1.02, 1, 0.936], // Total flux (illuminated by the host star)
+    },
+    'Debris disk of AU Microscopii: Northwest midplane | Krist2005': {
+        tags: ['extrasolar', 'debris disk'],
+        photometric_system: 'HST_ACS_HRC',
+        filters: ['F435W', 'F606W', 'F814W'],
+        br: [1.13, 1, 0.837], // Flux relative to the star
+    },
+    'Debris disk of AU Microscopii: Southeast midplane | Krist2005': {
+        tags: ['extrasolar', 'debris disk'],
+        photometric_system: 'HST_ACS_HRC',
+        filters: ['F435W', 'F606W', 'F814W'],
+        br: [1.15, 1, 0.799], // Flux relative to the star
+    },
     'Gliese 411 (M2 V) | STIS_NGSLv2': {
         tags: ['featured', 'extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd095735_v2.txtA',
