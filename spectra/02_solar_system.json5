@@ -512,7 +512,7 @@
         'DOI: 10.1016/0019-1035(87)90018-2', 'https://www.sciencedirect.com/science/article/pii/0019103587900182',
         'https://ui.adsabs.harvard.edu/abs/1987Icar...69..458S/abstract'
     ],
-    'Main ring (Jupiter) | Showalter1987': { // 122 500 — 129 000 km
+    'Main ring (Jupiter) | Showalter1987': { // 122 500—129 000 km
         tags: ['Solar System/Jovian system', 'ring'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Clear', 'Green', 'Orange'],
@@ -826,19 +826,19 @@
         'DOI: 10.1016/j.icarus.2006.11.017', 'https://www.sciencedirect.com/science/article/pii/S0019103506004350',
         'https://ui.adsabs.harvard.edu/abs/2007Icar..188...89H/abstract'
     ],
-    'D72 ringlet: 71~000–71~700 km (Saturn) | Hedman2007': { // phase angle 167°
+    'D72 ringlet: 71~000—71~700 km (Saturn) | Hedman2007': { // phase angle 167°
         tags: ['Solar System/Saturnian system', 'ring'],
         file: 'spectra/files/Hedman2007/D72_Hedman2007.txtU', // rough tracing of Fig. 6
     },
-    'D ring: 72~300–72~800 km (Saturn) | Hedman2007': { // Sheet interior to D73; phase angle 167°
+    'D ring: 72~300—72~800 km (Saturn) | Hedman2007': { // Sheet interior to D73; phase angle 167°
         tags: ['Solar System/Saturnian system', 'ring'],
         file: 'spectra/files/Hedman2007/D73_sheet_Hedman2007.txtU', // rough tracing of Fig. 6
     },
-    'D73 ringlet: 73~000–73~600 km (Saturn) | Hedman2007': { // phase angle 167°
+    'D73 ringlet: 73~000—73~600 km (Saturn) | Hedman2007': { // phase angle 167°
         tags: ['Solar System/Saturnian system', 'ring'],
         file: 'spectra/files/Hedman2007/D73_Hedman2007.txtU', // rough tracing of Fig. 6
     },
-    'D ring: 74~000–74~250 km (Saturn) | Hedman2007': { // Outermost D ringlet; phase angle 167°
+    'D ring: 74~000—74~250 km (Saturn) | Hedman2007': { // Outermost D ringlet; phase angle 167°
         tags: ['Solar System/Saturnian system', 'ring'],
         file: 'spectra/files/Hedman2007/D_outermost_Hedman2007.txtU', // rough tracing of Fig. 6
     },
@@ -852,7 +852,7 @@
         'DOI: 10.2138/rmg.2014.78.10', 'https://clarkvision.com/rnc/published/clark_etal_2014_spectroscopy.from.space_Ch10_Rev.Mineralogy.Geochemistry.v78p399.published.pdf',
         'https://ui.adsabs.harvard.edu/abs/2014RMGeo..78..399C/abstract'
     ],
-    'C ring: 75~000–87~000 km (Saturn) | Clark2014': { // phase angle 19°
+    'C ring: 75~000—87~000 km (Saturn) | Clark2014': { // phase angle 19°
         tags: ['Solar System/Saturnian system', 'ring'],
         file: 'spectra/files/Clark2014/C_ring_Clark2014.txtU', // Fig. 13
         is_spherical_albedo: true,
@@ -913,12 +913,12 @@
         br: [0.3450, 0.6261, 0.7657, 0.8325, 0.8455], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
-    'B ring: 103~000–117~000 km (Saturn) | Clark2014': { // Outer; phase angle 19°
+    'B ring: 103~000—117~000 km (Saturn) | Clark2014': { // Outer; phase angle 19°
         tags: ['Solar System/Saturnian system', 'ring'],
         file: 'spectra/files/Clark2014/B_ring_outer_Clark2014.txtU', // Fig. 13
         is_spherical_albedo: true,
     },
-    'Cassini Division: 118~000–125~700 km (Saturn) | Clark2014': { // phase angle 19°
+    'Cassini Division: 118~000—125~700 km (Saturn) | Clark2014': { // phase angle 19°
         tags: ['Solar System/Saturnian system', 'ring'],
         file: 'spectra/files/Clark2014/Cassini_Division_Clark2014.txtU', // Fig. 13
         is_spherical_albedo: true,
@@ -937,7 +937,7 @@
         br: [0.2797, 0.4826, 0.5793, 0.6356, 0.6550], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
-    'A ring: 123~700–125~700 km (Saturn) | Clark2014': { // Inner; phase angle 19°
+    'A ring: 123~700—125~700 km (Saturn) | Clark2014': { // Inner; phase angle 19°
         tags: ['Solar System/Saturnian system', 'ring'],
         file: 'spectra/files/Clark2014/A_ring_inner_Clark2014.txtU', // Fig. 13
         is_spherical_albedo: true,
@@ -956,7 +956,7 @@
         br: [0.2647, 0.4880, 0.5967, 0.6560, 0.6770], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
-    'A ring: 134~000–136~700 (Saturn) | Clark2014': { // Outer; phase angle 19°
+    'A ring: 134~000—136~700 (Saturn) | Clark2014': { // Outer; phase angle 19°
         tags: ['Solar System/Saturnian system', 'ring'],
         file: 'spectra/files/Clark2014/A_ring_outer_Clark2014.txtU', // Fig. 13
         is_spherical_albedo: true,
@@ -1501,7 +1501,7 @@
         geometric_albedo: [550, 0.050],
         spherical_albedo: [550, [0.018, 0.003]],
     },
-    'α and β rings (Uranus) | Karkoschka1997, Karkoschka2001': { // 44 718–45 661 km
+    'α and β rings (Uranus) | Karkoschka1997, Karkoschka2001': { // 44 718—45 661 km
         tags: ['Solar System/Uranian system', 'ring'],
         //         620 nm                   910 nm
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F850LP'],
@@ -1526,7 +1526,7 @@
         geometric_albedo: ['HST_WFPC2-WF.FQCH4N33', [0.056, 0.007]], // at 1° phase angle
         spherical_albedo: [550, [0.018, 0.003]], // average for rings
     },
-    'η, γ, and δ rings (Uranus) | Karkoschka1997, Karkoschka2001': { // 47 175–48 300 km
+    'η, γ, and δ rings (Uranus) | Karkoschka1997, Karkoschka2001': { // 47 175—48 300 km
         tags: ['Solar System/Uranian system', 'ring'],
         //         620 nm                   910 nm
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F850LP'],
@@ -1819,7 +1819,7 @@
         'DOI: 10.1016/S0019-1035(03)00002-2', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103503000022',
         'https://ui.adsabs.harvard.edu/abs/2003Icar..162..400K/abstract'
     ],
-    'Helfenbein2024': [ // source for infrared extension of Naiad, Despina, and Galatea
+    'Helfenbein2024': [ // source for infrared extensions of Naiad, Despina, and Galatea
         'Near-Infrared photometry of Neptune’s small regular satellites with Keck',
         'DOI: 10.1016/j.icarus.2024.116004', 'https://www.sciencedirect.com/science/article/pii/S0019103524000629',
         'https://ui.adsabs.harvard.edu/abs/2024Icar..41316004H/abstract'
