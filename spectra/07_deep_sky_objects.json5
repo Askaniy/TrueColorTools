@@ -9,4 +9,43 @@
         file: 'spectra/files/Quasars_Trefoloni2024.txtA',
         is_emissive: true
     },
+
+    'Zhao2024': [
+        'Galactic Cirri at High Galactic Latitudes. I. Investigating Scatter in Slopes between Optical and Far-infrared Intensities',
+        'DOI: 10.3847/1538-3881/ad58d5', 'https://iopscience.iop.org/article/10.3847/1538-3881/ad58d5',
+        'https://ui.adsabs.harvard.edu/abs/2024AJ....168...88Z/abstract'
+    ],
+    'Galactic Cirri | Zhao2024': {
+        tags: ['DSO/interstellar dust'],
+        photometric_system: 'BOK_BASS',
+        filters: ['g', 'r'],
+        br: [[0.41, +0.17, -0.18], [0.51, +0.16, -0.20]], // Figure 9
+        is_albedo: true
+    },
+
+    'Mauron2003': [
+        'The envelope of IRC +10216 reflecting the galactic light. UBV surface brightness photometry and interpretation',
+        'DOI: 10.1051/0004-6361:20030127', 'https://www.aanda.org/component/article?access=bibcode&bibcode=&bibcode=2003A%2526A...401..985MFUL',
+        'https://ui.adsabs.harvard.edu/abs/2003A%26A...401..985M/abstract'
+    ],
+    'Nebula of IRC +10216 | Mauron2003': {
+        tags: ['DSO/interstellar dust'],
+        photometric_system: 'Generic_Bessell',
+        filters: ['U', 'B', 'V'],
+        mag: [[25.85, 0.15], [25.70, 0.10], [25.20, 0.10]], // mag/arcsec²
+        calibration_system: 'Vega',
+        is_emissive: true, // scattered light
+    },
+
+    'Mattila2023': [
+        'Light and colour of cirrus, translucent and opaque dust in the high-latitude area of LDN 1642',
+        'DOI: 10.1093/mnras/stad1940', 'https://academic.oup.com/mnras/article/524/2/2797/7209170'
+    ],
+    'LDN 1642 | Mattila2023': {
+        tags: ['DSO/interstellar dust'],
+        photometric_system: 'Generic_Stromgren',
+        filters: ['u', 384, 416, 'b', 'y'],
+        br: [1., 1.38, 1.739, 1.443, 1.198], // Table 1
+        is_emissive: true, // scattered light
+    }
 }
