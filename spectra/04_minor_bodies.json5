@@ -8207,15 +8207,6 @@
         file: 'spectra/files/BAA/_c2022e3ztf_tail_3arcmin_20230120_047_leadbeater.fit',
         is_reflecting_sunlight: true,
     },
-    'Boyd2024': [
-        'C/2023 A3 spectrum by D. Boyd uploaded to British Astronomical Association',
-        'https://britastro.org/specdb/data_graph.php?obs_id=17175'
-    ],
-    '(C/2023 A3) Tsuchinshan–ATLAS: Coma, Oct. 17 2024 | Boyd2024': {
-        tags: ['Solar System', 'minor body/comet/long period comet'],
-        file: 'spectra/files/BAA/_c2023a3_20241017_780_d_boyd.fit',
-        is_reflecting_sunlight: true,
-    },
     'Foster2024': [
         'C/2023 A3 spectrum by J. Foster uploaded to British Astronomical Association',
         'https://britastro.org/specdb/data_graph.php?obs_id=17983'
