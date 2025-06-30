@@ -2722,12 +2722,12 @@
         'DOI: 10.1016/B978-0-12-816490-7.00005-9', 'https://www.sciencedirect.com/science/article/abs/pii/B9780128164907000059',
         'https://ui.adsabs.harvard.edu/abs/2020tnss.book..109B/abstract'
     ],
-    '(55565) 2002 AW197 | Barucci2020, Vilenius2014': {
+    '(55565) Aya | Barucci2020, Vilenius2014': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         file: 'spectra/files/2002AW197_Barucci2020.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.112, +0.012, -0.011]],
     },
-    '(55565) 2002 AW197 | MBOSS, Vilenius2014': {
+    '(55565) Aya | MBOSS, Vilenius2014': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.915, 0.035], 'V-R': [0.589, 0.030], 'R-I': [0.581, 0.037]},
@@ -4628,7 +4628,7 @@
         'DOI: 10.3847/1538-3881/aa74e9', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa74e9',
         'https://ui.adsabs.harvard.edu/abs/2017AJ....154...22D/abstract'
     ],
-    '(208996) 2003 AZ84 | MBOSS, DiasOliveira2017': {
+    '(208996) Achlys | MBOSS, DiasOliveira2017': {
         tags: ['featured', 'MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.738, 0.090], 'V-R': [0.430, 0.062], 'R-I': [0.473, 0.105]},
