@@ -8289,4 +8289,15 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
+    'Seligman2025': [
+        'Discovery and Preliminary Characterization of a Third Interstellar Object: 3I/ATLAS',
+        'DOI: 10.48550/arXiv.2507.02757', 'https://arxiv.org/abs/2507.02757'
+    ],
+    '3I/ATLAS | Seligman2025': {
+        tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
+        photometric_system: 'LDT_LMI', // filter profiles: http://www2.lowell.edu/users/massey/LMIdoc.pdf
+        filters: ['g', 'r', 'i', 'z'],
+        br: [0.816, 1.198, 1.368, 1.596],
+        sd: [0.018, 0.011, 0.029, 0.081],
+    },
 }
