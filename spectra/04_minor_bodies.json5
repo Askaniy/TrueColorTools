@@ -8300,4 +8300,19 @@
         br: [0.816, 1.198, 1.368, 1.596],
         sd: [0.018, 0.011, 0.029, 0.081],
     },
+    'Opitom2025': [
+        'Initial VLT/MUSE spectroscopy of the interstellar object 3I/ATLAS',
+        'DOI: 10.48550/arXiv.2507.05226', 'https://arxiv.org/abs/2507.05226'
+    ],
+    '3I/ATLAS: Spectrum | Opitom2025': {
+        tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
+        file: 'spectra/files/3I_ATLAS_Opitom2025.txt',
+    },
+    '3I/ATLAS: Photometry | Opitom2025': {
+        tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [1.01, 0.04], 'V-R': [0.48, 0.03], 'V-I': [0.98, 0.04]},
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
 }
