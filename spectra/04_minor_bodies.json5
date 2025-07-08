@@ -8289,17 +8289,6 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
-    'Seligman2025': [
-        'Discovery and Preliminary Characterization of a Third Interstellar Object: 3I/ATLAS',
-        'DOI: 10.48550/arXiv.2507.02757', 'https://arxiv.org/abs/2507.02757'
-    ],
-    '3I/ATLAS | Seligman2025': {
-        tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
-        photometric_system: 'SLOAN_SDSS',
-        filters: ['gprime_filter', 'rprime_filter', 'iprime_filter', 'z'], // TODO: replace with FTN/MuSCAT3 filters g', r', u', z_s
-        br: [0.816, 1.198, 1.368, 1.596],
-        sd: [0.018, 0.011, 0.029, 0.081],
-    },
     'Opitom2025': [
         'Initial VLT/MUSE spectroscopy of the interstellar object 3I/ATLAS',
         'DOI: 10.48550/arXiv.2507.05226', 'https://arxiv.org/abs/2507.05226'
@@ -8313,6 +8302,28 @@
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.01, 0.04], 'V-R': [0.48, 0.03], 'V-I': [0.98, 0.04]},
         calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
+    'Seligman2025': [
+        'Discovery and Preliminary Characterization of a Third Interstellar Object: 3I/ATLAS',
+        'DOI: 10.48550/arXiv.2507.02757', 'https://arxiv.org/abs/2507.02757'
+    ],
+    '3I/ATLAS | Seligman2025': {
+        tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
+        photometric_system: 'SLOAN_SDSS',
+        filters: ['gprime_filter', 'rprime_filter', 'iprime_filter', 'z'], // TODO: replace with FTN/MuSCAT3 filters g', r', u', z_s
+        br: [0.816, 1.198, 1.368, 1.596],
+        sd: [0.018, 0.011, 0.029, 0.081],
+    },
+    'Bolin2025c': [
+        'Interstellar comet 3I/ATLAS: discovery and physical description',
+        'DOI: 10.48550/arXiv.2507.05252', 'https://arxiv.org/abs/2507.05252'
+    ],
+    '3I/ATLAS | Bolin2025c': {
+        tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
+        photometric_system: 'SLOAN_SDSS', // TODO: replace with Palomar/P200/NGPS filters
+        color_indices: {'g-r': [0.43, 0.02], 'r-i': [0.16, 0.02]},
+        calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
 }
