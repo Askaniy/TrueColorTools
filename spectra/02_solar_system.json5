@@ -1404,8 +1404,7 @@
         'https://ui.adsabs.harvard.edu/abs/2011Icar..212..329B/abstract'
     ],
     'Iapetus: Polar region (S VIII) | Clark2008, Blackburn2011': { // roughly 60° − 80° N, 200° − 350° W
-        tags: [
-'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Clark2008/Iapetus_Polar_Clark2008.txtU', // Fig. 8 (Clark2008)
         geometric_albedo: [530, 0.17], // average of 60° − 80° N on leading hemisphere in Fig. 3a (Blackburn2011)
         is_spherical_albedo: true,

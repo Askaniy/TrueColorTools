@@ -8295,8 +8295,8 @@
     ],
     '3I/ATLAS | Seligman2025': {
         tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
-        photometric_system: 'LDT_LMI', // filter profiles: http://www2.lowell.edu/users/massey/LMIdoc.pdf
-        filters: ['g', 'r', 'i', 'z'],
+        photometric_system: 'SLOAN_SDSS',
+        filters: ['gprime_filter', 'rprime_filter', 'iprime_filter', 'z'], // TODO: replace with FTN/MuSCAT3 filters g', r', u', z_s
         br: [0.816, 1.198, 1.368, 1.596],
         sd: [0.018, 0.011, 0.029, 0.081],
     },
