@@ -1,11 +1,84 @@
 {
+
+    'Kinney1996': [
+        'Template Ultraviolet to Near-Infrared Spectra of Star-forming Galaxies and Their Application to K-Corrections',
+        'DOI: 10.1086/177583', 'https://ui.adsabs.harvard.edu/abs/1996ApJ...467...38K/abstract',
+        'https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/the-kinney-calzetti-spetral-atlas'
+    ],
+    'Galaxy bulges | Kinney1996': {
+        tags: ['DSO/galaxy'],
+        file: 'spectra/files/Kinney1996/bulge_template.fits',
+        is_emissive: true
+    },
+    'Elliptical galaxies | Kinney1996': {
+        tags: ['featured', 'DSO/galaxy/galaxy type'],
+        file: 'spectra/files/Kinney1996/elliptical_template.fits',
+        is_emissive: true
+    },
+    'Spiral galaxies S0 | Kinney1996': {
+        tags: ['DSO/galaxy/galaxy type'],
+        file: 'spectra/files/Kinney1996/s0_template.fits',
+        is_emissive: true
+    },
+    'Spiral galaxies Sa | Kinney1996': {
+        tags: ['DSO/galaxy/galaxy type'],
+        file: 'spectra/files/Kinney1996/sa_template.fits',
+        is_emissive: true
+    },
+    'Spiral galaxies Sb | Kinney1996': {
+        tags: ['DSO/galaxy/galaxy type'],
+        file: 'spectra/files/Kinney1996/sb_template.fits',
+        is_emissive: true
+    },
+    'Spiral galaxies Sc | Kinney1996': {
+        tags: ['featured', 'DSO/galaxy/galaxy type'],
+        file: 'spectra/files/Kinney1996/sc_template.fits',
+        is_emissive: true
+    },
+
+    'Calzetti1994': [
+        'Dust Extinction of the Stellar Continua in Starburst Galaxies: The Ultraviolet and Optical Extinction Law ',
+        'DOI: 10.1086/174346', 'https://ui.adsabs.harvard.edu/abs/1994ApJ...429..582C/abstract',
+        'https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/the-kinney-calzetti-spetral-atlas'
+    ],
+    'Starburst galaxies with E(B-V) < 0.1 | Calzetti1994': {
+        tags: ['DSO/galaxy/galaxy type'],
+        file: 'spectra/files/Calzetti1994/starb1_template.fits',
+        is_emissive: true
+    },
+    'Starburst galaxies with 0.11 < E(B-V) < 0.21 | Calzetti1994': {
+        tags: ['DSO/galaxy/galaxy type'],
+        file: 'spectra/files/Calzetti1994/starb2_template.fits',
+        is_emissive: true
+    },
+    'Starburst galaxies with 0.25 < E(B-V) < 0.35 | Calzetti1994': {
+        tags: ['DSO/galaxy/galaxy type'],
+        file: 'spectra/files/Calzetti1994/starb3_template.fits',
+        is_emissive: true
+    },
+    'Starburst galaxies with 0.39 < E(B-V) < 0.50 | Calzetti1994': {
+        tags: ['DSO/galaxy/galaxy type'],
+        file: 'spectra/files/Calzetti1994/starb4_template.fits',
+        is_emissive: true
+    },
+    'Starburst galaxies with 0.51 < E(B-V) < 0.60 | Calzetti1994': {
+        tags: ['DSO/galaxy/galaxy type'],
+        file: 'spectra/files/Calzetti1994/starb5_template.fits',
+        is_emissive: true
+    },
+    'Starburst galaxies with 0.61 < E(B-V) < 0.70 | Calzetti1994': {
+        tags: ['DSO/galaxy/galaxy type'],
+        file: 'spectra/files/Calzetti1994/starb6_template.fits',
+        is_emissive: true
+    },
+
     'Trefoloni2024': [
         'Quasars as standard candles: VI. Spectroscopic validation of the cosmological sample',
         'DOI: 10.1051/0004-6361/201424208', 'https://www.aanda.org/articles/aa/full_html/2024/09/aa48938-23/aa48938-23.html',
         'https://ui.adsabs.harvard.edu/abs/2024A%26A...689A.109T/abstract'
     ],
-    'Quasars: Composite spectrum | Trefoloni2024': {
-        tags: ['featured', 'DSO'],
+    'Quasars | Trefoloni2024': {
+        tags: ['featured', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Quasars_Trefoloni2024.txtA',
         is_emissive: true
     },
@@ -47,5 +120,5 @@
         filters: ['u', 384, 416, 'b', 'y'],
         br: [1., 1.38, 1.739, 1.443, 1.198], // Table 1
         is_emissive: true, // scattered light
-    }
+    },
 }

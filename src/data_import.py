@@ -14,7 +14,9 @@ filterwarnings(action='ignore', category=u.UnitsWarning, append=True)
 flam = u.def_unit('FLAM', (u.erg / u.s) / (u.cm**2 * u.AA))
 fnu = u.def_unit('FNU', (u.erg / u.s) / (u.cm**2 * u.Hz))
 u.add_enabled_units((flam, fnu))
+u.add_enabled_aliases({'flam': flam})
 u.add_enabled_aliases({'ANGSTROMS': u.Angstrom})
+u.add_enabled_aliases({'angstroms': u.Angstrom})
 flux_density_SI = u.W / u.m**2 / u.nm
 
 

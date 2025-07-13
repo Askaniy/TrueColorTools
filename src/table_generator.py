@@ -234,7 +234,13 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
             name += aux.superscript(notes.index(note) + 1)
 
         splitted = line_splitter(name, object_font, 2*r_active)
-        shift = object_size/2 if len(splitted) == 1 else object_size
+        match len(splitted):
+            case 1:
+                shift = 0.5 * object_size
+            case 4:
+                shift = object_size + workaround_shift # not related, just works to move up the line a bit
+            case _:
+                shift = object_size
         draw.multiline_text((center_x-r_active, center_y-shift), '\n'.join(splitted), fill=text_color, font=object_font, spacing=1)
     
     file_name = f'TCT_{strftime("%Y-%m-%d_%H-%M-%S")}_{aux.normalize_string(tag)}.{extension}'

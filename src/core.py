@@ -87,11 +87,12 @@ class ObjectName:
             # It is recommended to use it as a number group separator instead of a period or comma.
             if '|' in name:
                 name, reference = name.split('|')
+                name = name.strip()
                 self.reference = reference.strip()
             if name[0] == '(': # minor body index or something else
                 index, name = name.split(')', 1)
                 self.index = self.formatting_provisional_designation(index[1:].strip())
-            if '(' in name: # stellar spectral type or something else
+            if name[-1] == ')': # stellar spectral type or something else
                 info, name = name[::-1].split('(', 1) # getting the last bracket
                 name = name[::-1] # reversing back
                 self._info_en = self.formatting_provisional_designation(info[::-1].split(')', 1)[0].strip())
