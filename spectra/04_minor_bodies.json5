@@ -4336,7 +4336,7 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.102, +0.057, -0.029]],
     },
-    '(145452) 2005 RN43 | MBOSS, Vilenius2012': {
+    '(145452) Ritona | MBOSS, Vilenius2012': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.940, 0.047], 'V-R': [0.592, 0.043], 'R-I': [0.486, 0.064]},
