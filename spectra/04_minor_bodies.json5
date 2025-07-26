@@ -7097,12 +7097,28 @@
         'DOI: 10.48550/arXiv.2411.08029', 'https://arxiv.org/abs/2411.08029',
         'https://ui.adsabs.harvard.edu/abs/2024arXiv241108029B/abstract'
     ],
-    '2024 PT5 | Bolin2024': {
+    '2024 PT5 | Bolin2024, Beniyama2025': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Apollo'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.58, 0.04], 'r-i': [0.29, 0.04], 'i-z': [-0.27, 0.06]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.07]], // Derived from slope of phase curve
+        phase_function: ['HG', {H: [27.72, 0.09], G: [0.223, 0.073]}],
+    },
+    'Beniyama2025': [
+        'Multi-epoch spectro-photometric characterization of the minimoon 2024 PT5 in the visible and near-infrared',
+        'DOI: 10.48550/arXiv.2507.10527', 'https://arxiv.org/abs/2507.10527',
+        'https://ui.adsabs.harvard.edu/abs/2025arXiv250710527B/abstract'
+    ],
+    '2024 PT5 | Beniyama2025': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo'],
+        photometric_system: 'PAN-STARRS_PS1',
+        color_indices: {'g-r': [0.567, 0.044], 'r-i': [0.155, 0.009], 'r-z': [0.147, 0.066]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.07]], // Derived from slope of phase curve
+        phase_function: ['HG', {H: [27.72, 0.09], G: [0.223, 0.073]}],
     },
     'Bolin2025b': [
         'The discovery and characterization of Earth-crossing asteroid 2024 YR4',
