@@ -225,7 +225,7 @@
     ],
     'Lamy2004': [
         'The Sizes, Shapes, Albedos, and Colors of Cometary Nuclei',
-        'https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=753360bc3977a259d7dfc3362bb7a6354b1988ff', 
+        'https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=753360bc3977a259d7dfc3362bb7a6354b1988ff',
         'https://ui.adsabs.harvard.edu/abs/2004come.book..223L/abstract'
     ],
     'Doressoundiram2005': [
@@ -975,7 +975,7 @@
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a001252.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.215, 0.022]],
-        phase_function: ['Misc_Atlas.orange', 'HG1G2', {H: [10.9277, +0.0428, -0.0599], G_1: [0.4628, +0.0755, -0.0884], G_2: [0.4984, +0.0477, -0.0505]}], 
+        phase_function: ['Misc_Atlas.orange', 'HG1G2', {H: [10.9277, +0.0428, -0.0599], G_1: [0.4628, +0.0755, -0.0884], G_2: [0.4984, +0.0477, -0.0505]}],
     },
     '(1404) Ajax | GaiaDR3, Grav2012, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -2776,12 +2776,12 @@
         nm: [418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990],
         br: [
             9.890256e-01, 1.102694e+00, 1.009958e+00, 1.000000e+00, 1.025782e+00, 9.879041e-01,
-            1.237357e+00, 1.103371e+00, 1.127149e+00, 1.108475e+00, 1.136647e+00, 1.119926e+00, 
+            1.237357e+00, 1.103371e+00, 1.127149e+00, 1.108475e+00, 1.136647e+00, 1.119926e+00,
             1.230715e+00, 1.545572e+00
         ],
         sd: [
             1.524662e-01, 7.597827e-02, 5.861332e-02, 5.401912e-02, 5.537284e-02, 6.211829e-02,
-            6.940003e-02, 6.797095e-02, 6.859302e-02, 7.037257e-02, 7.300120e-02, 7.832822e-02, 
+            6.940003e-02, 6.797095e-02, 6.859302e-02, 7.037257e-02, 7.300120e-02, 7.832822e-02,
             1.031774e-01, 1.695214e-01
         ],
         geometric_albedo: ['Generic_Bessell.V', [0.760, +0.180, -0.450]],
@@ -4099,7 +4099,7 @@
         'The Dark Red Spot on KBO Haumea',
         'DOI: 10.48550/arXiv.0911.0009', 'https://arxiv.org/abs/0911.0009',
         'https://ui.adsabs.harvard.edu/abs/2009epsc.conf..561L/abstract'
-    ], 
+    ],
     '(136108) Haumea: Dark red spot, S=0.06 | Lacerda2009': {
         tags: ['Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         filters: ['Generic_Bessell.B', 'Generic_Bessell.R', 'Generic_Bessell_JHKLM.J', 'Generic_Bessell_JHKLM.H'],
@@ -4183,7 +4183,7 @@
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.55, 0.06], 'r-i': [0.32, 0.05]},
-        calibration_system: 'AB', 
+        calibration_system: 'AB',
         is_reflecting_sunlight: true
     },
     'Sicardy2011': [
@@ -6148,7 +6148,7 @@
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.73, 0.06], 'r-i': [0.27, 0.04]},
-        calibration_system: 'AB', 
+        calibration_system: 'AB',
         is_reflecting_sunlight: true
     },
     '(613490) 2006 RJ103 | MBOSS': {
@@ -6181,7 +6181,7 @@
         tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/centaur'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.4642, 0.2003], 'r-i': [0.2532, 0.2189]},
-        calibration_system: 'AB', 
+        calibration_system: 'AB',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.130, +0.015, -0.024]],
     },
@@ -6605,7 +6605,7 @@
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.67, 0.05], 'r-i': [0.26, 0.03]},
-        calibration_system: 'AB', 
+        calibration_system: 'AB',
         is_reflecting_sunlight: true
     },
     '2004 HM79 | Sheppard2012': {
@@ -8255,7 +8255,7 @@
         file: 'spectra/files/BAA/_c2023h2lemmon_20231111_733_Leadbeater.fit',
         is_reflecting_sunlight: true,
     },
-    
+
     // Interstellar objects
     'Bolin2018': [
         'APO Time-resolved Color Photometry of Highly Elongated Interstellar Object 1I/ʻOumuamua',
@@ -8305,6 +8305,23 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
+    'Seligman2025': [
+        'Discovery and Preliminary Characterization of a Third Interstellar Object: 3I/ATLAS',
+        'DOI: 10.48550/arXiv.2507.02757', 'https://arxiv.org/abs/2507.02757'
+    ],
+    '3I/ATLAS: Spectrum | Seligman2025': {
+        tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
+        file: 'spectra/files/3I_ATLAS_Seligman2025.txtU',
+        // https://3i-atlas.github.io/data.html
+        // https://github.com/3I-ATLAS/discovery-paper/blob/main/src/data/3I-Reflectivity_JN_edit.csv
+    },
+    '3I/ATLAS: Photometry | Seligman2025': {
+        tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
+        photometric_system: 'SLOAN_SDSS',
+        filters: ['gprime_filter', 'rprime_filter', 'iprime_filter', 'z'], // TODO: replace with FTN/MuSCAT3 filters g', r', u', z_s
+        br: [0.816, 1.198, 1.368, 1.596],
+        sd: [0.018, 0.011, 0.029, 0.081],
+    },
     'Opitom2025': [
         'Initial VLT/MUSE spectroscopy of the interstellar object 3I/ATLAS',
         'DOI: 10.48550/arXiv.2507.05226', 'https://arxiv.org/abs/2507.05226'
@@ -8319,17 +8336,6 @@
         color_indices: {'B-V': [1.01, 0.04], 'V-R': [0.48, 0.03], 'V-I': [0.98, 0.04]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-    },
-    'Seligman2025': [
-        'Discovery and Preliminary Characterization of a Third Interstellar Object: 3I/ATLAS',
-        'DOI: 10.48550/arXiv.2507.02757', 'https://arxiv.org/abs/2507.02757'
-    ],
-    '3I/ATLAS | Seligman2025': {
-        tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
-        photometric_system: 'SLOAN_SDSS',
-        filters: ['gprime_filter', 'rprime_filter', 'iprime_filter', 'z'], // TODO: replace with FTN/MuSCAT3 filters g', r', u', z_s
-        br: [0.816, 1.198, 1.368, 1.596],
-        sd: [0.018, 0.011, 0.029, 0.081],
     },
     'Bolin2025c': [
         'Interstellar comet 3I/ATLAS: discovery and physical description',
