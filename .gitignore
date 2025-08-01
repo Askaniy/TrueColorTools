@@ -2,5 +2,6 @@ spectra_extras/
 .venv/
 .vscode/
 .idea/
+.ropeproject/
 **/__pycache__/
 **/tempCodeRunnerFile.py
