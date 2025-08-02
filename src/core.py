@@ -104,25 +104,25 @@ class ObjectName:
                 index, name = name.split('/', 1)
                 self.index = index.strip() + '/'
             self._name_en = self.formatting_provisional_designation(name.strip())
-    
+
     def name(self, lang: str = 'en') -> str:
         """ Returns the name in the specified language """
         return self._name_en if lang == 'en' else self.translate(self._name_en, tr.names, lang)
-    
+
     def note(self, lang: str = 'en') -> str | None:
         """ Returns the note in the specified language """
         if self._note_en:
             return self._note_en if lang == 'en' else self.translate(self._note_en, tr.notes, lang)
         else:
             return None
-    
+
     def info(self, lang: str = 'en') -> str | None:
         """ Returns the info in the specified language """
         if self._info_en:
             return self._info_en if lang == 'en' else self.translate(self._info_en, tr.names, lang)
         else:
             return None
-    
+
     def indexed_name(self, lang: str = 'en') -> str:
         """ Returns the name with the index in the specified language """
         name = self.name(lang)
@@ -151,7 +151,7 @@ class ObjectName:
         if self.reference:
             name = f'{name} [{self.reference}]'
         return name
-    
+
     @staticmethod
     def formatting_provisional_designation(string: str):
         """
@@ -168,7 +168,7 @@ class ObjectName:
                     if 2 < len(letters) < 7 and letters[:2].isalpha() and letters[2:].isnumeric():
                         words[i+1] = letters[:2] + aux.subscript(letters[2:])
         return ' '.join(words)
-    
+
     @staticmethod
     def translate(target: str, translations: dict[str, dict[str, str]], lang: str) -> str:
         """ Searches part of the target string to be translated and replaces it with translation """
@@ -178,25 +178,25 @@ class ObjectName:
                     target = target.replace(original, translation[lang])
                 break
         return target
-    
+
     @staticmethod
     def as_ObjectName(input):
         """ Guaranteed to return an object of the given class, even if the input may have already been one """
         return input if isinstance(input, ObjectName) else ObjectName(input)
-    
+
     def __hash__(self) -> int:
         """ Returns the hash value based on the object's raw name """
         return hash(self.raw_name)
-    
+
     def __eq__(self, other) -> bool:
         """ Checks equality with another ObjectName instance """
         if isinstance(other, ObjectName):
             return self.raw_name == other.raw_name
         return False
-    
+
     def __str__(self) -> str:
         return self()
-    
+
     def __repr__(self) -> str:
         output = 'ObjectName('
         if self.index:
@@ -238,45 +238,45 @@ class _TrueColorToolsObject:
     nm = np.empty(0)
     br = np.empty(0)
     sd = None
-    
+
     @property
     def ndim(self):
         """ Shortcut to get the number of dimensions """
         return self.br.ndim
-    
+
     @property
     def nm_len(self):
         """ Returns the spectral axis length """
         return self.br.shape[0]
-    
+
     @property
     def shape(self):
         """ Returns the spatial axes shape: number of filters or (width, height) """
         return self.br.shape[1:]
-    
+
     @staticmethod
     def stub(name=None):
         """ Initializes an object in case of the data problems """
         raise NotImplementedError('Implemented in the inherited classes of SpectralObject and PhotospectralObject.')
-    
+
     def convert_from_photon_spectral_density(self):
         """
         Returns a new TrueColorToolsObject converted from photon spectral density
         to energy spectral density, using the fact that E = h c / λ.
         """
         raise NotImplementedError('Implemented in the classes SpectralObject and PhotospectralObject.')
-    
+
     def convert_from_energy_spectral_density_per_frequency(self):
         """
         Returns a new TrueColorToolsObject converted from frequency spectral density
         to energy spectral density, using the fact that f_λ = f_ν c / λ².
         """
         raise NotImplementedError('Implemented in classes SpectralObject and PhotospectralObject.')
-    
+
     def define_on_range(self, nm_arr: np.ndarray, crop: bool = False):
         """ Returns a new SpectralObject with a guarantee of definition on the requested wavelength array """
         raise NotImplementedError('Implemented in classes SpectralObject and PhotospectralObject.')
-    
+
     def scaled_at(self, where, how: int|float = 1, sd: int|float = None):
         """
         Returns a new object that matches the query brightness (1 by default)
@@ -291,11 +291,11 @@ class _TrueColorToolsObject:
         if isinstance(how, Sequence):
             how = how[0] # likely a [value, std]
         return output * (how / current_br)
-    
+
     def apply_element_wise_operation(self, operand: Self, br_handling: Callable, sd_handling: Callable) -> Self:
         """ Returns a new object formed from element-wise operation """
         raise NotImplementedError('Implemented in classes SpectralObject and PhotospectralObject, use them instead.')
-    
+
     def apply_scalar_operation(self, operand, br_handling: Callable, sd_handling: Callable) -> Self:
         """
         Returns a new object of the same class transformed according to the operator.
@@ -305,31 +305,31 @@ class _TrueColorToolsObject:
         output.br = br_handling(self.br, operand)
         output.sd = sd_handling(self.br, self.sd, operand, None)
         return output
-    
+
     def __add__(self, other) -> Self:
         if isinstance(other, _TrueColorToolsObject):
             return self.apply_element_wise_operation(other, aux.add_br, aux.add_sd)
         else:
             return self.apply_scalar_operation(other, aux.add_br, aux.add_sd)
-    
+
     def __sub__(self, other) -> Self:
         if isinstance(other, _TrueColorToolsObject):
             return self.apply_element_wise_operation(other, aux.sub_br, aux.sub_sd)
         else:
             return self.apply_scalar_operation(other, aux.sub_br, aux.sub_sd)
-    
+
     def __mul__(self, other) -> Self:
         if isinstance(other, _TrueColorToolsObject):
             return self.apply_element_wise_operation(other, aux.mul_br, aux.mul_sd)
         else:
             return self.apply_scalar_operation(other, aux.mul_br, aux.mul_sd)
-    
+
     def __truediv__(self, other) -> Self:
         if isinstance(other, _TrueColorToolsObject):
             return self.apply_element_wise_operation(other, aux.div_br, aux.div_sd)
         else:
             return self.apply_scalar_operation(other, aux.div_br, aux.div_sd)
-    
+
     def __matmul__(self, other: Self):
         """
         Implementation of convolution (in the meaning of synthetic photometry).
@@ -391,17 +391,17 @@ class _TrueColorToolsObject:
                 return PhotospectralCube(operand2, br, name=operand1.name)
             case _:
                 return NotImplemented
-    
+
     def __hash__(self) -> int:
         """ Returns the hash value based on the object's name """
         return hash(self.name)
-    
+
     def __eq__(self, other: Self) -> bool:
         """ Checks equality with another TrueColorToolsObject instance """
         if isinstance(other, _TrueColorToolsObject):
             return np.array_equal(self.nm, other.nm) and np.array_equal(self.br, other.br)
         return False
-    
+
     #def __repr__(self) -> str:
     #    output = f'{self.__class__.__name__}('
     #    if len(self.nm > 3):
@@ -426,7 +426,7 @@ class _SpectralObject(_TrueColorToolsObject):
     - `sd` (np.ndarray): optional array of standard deviations
     - `name` (ObjectName): name as an instance of a class that stores its components
     """
-    
+
     def __init__(self, ndim: int, nm: Sequence, br: Sequence, sd: Sequence = None, name: str|ObjectName = None):
         """
         It is assumed that the input wavelength grid can be trusted. If preprocessing is needed, see `SpectralObject.from_array`.
@@ -451,7 +451,7 @@ class _SpectralObject(_TrueColorToolsObject):
             self.br = np.nan_to_num(self.br)
             print(f'# Note for the SpectralObject "{self.name}"')
             print(f'- NaN values detected during object initialization, they been replaced with zeros.')
-    
+
     @classmethod
     def from_array(cls, nm: np.ndarray, br: np.ndarray, sd: np.ndarray = None, name: str|ObjectName = None):
         """
@@ -511,22 +511,22 @@ class _SpectralObject(_TrueColorToolsObject):
             print(f'- Something unexpected happened while trying to create an object from the array. It was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0).strip()}')
             return cls.stub(name)
-    
+
     def integrate(self) -> np.ndarray:
         """ Collapses the SpectralObject along the spectral axis into a two-dimensional image """
         return aux.integrate(self.br, nm_step)
-    
+
     def normalize(self):
         """ Returns a new SpectralObject with each spectrum divided by its area """
         return self / self.integrate()
-    
+
     def convert_from_photon_spectral_density(self):
         """
         Returns a new SpectralObject converted from photon spectral density
         to energy spectral density, using the fact that E = h c / λ.
         """
         return (self / self.nm).normalize()
-    
+
     def convert_from_energy_spectral_density_per_frequency(self):
         """
         Returns a new SpectralObject converted from energy spectral density per frequency
@@ -534,7 +534,7 @@ class _SpectralObject(_TrueColorToolsObject):
         """
         scale_factors = 1 / self.nm / self.nm # squaring nm will overflow uint16
         return (self / scale_factors).normalize()
-    
+
     def mean_spectrum(self):
         """ Returns the mean spectrum along the spatial axes """
         # TODO: add std
@@ -547,7 +547,7 @@ class _SpectralObject(_TrueColorToolsObject):
             case 3:
                 br = np.mean(self.br, axis=(1, 2))
         return Spectrum(self.nm, br, name=self.name)
-    
+
     def median_spectrum(self):
         """ Returns the median spectrum along the spatial axes """
         br = None
@@ -568,16 +568,16 @@ class _SpectralObject(_TrueColorToolsObject):
             print(f'# Note for the SpectralObject "{self.name}"')
             print(f'- Bolometric brightness is zero, the mean wavelength cannot be calculated. Returns 0 nm.')
             return 0.
-    
+
     def sd_of_nm(self) -> np.ndarray[np.floating]:
         """ Returns uncorrected standard deviation or an array of uncorrected standard deviations """
         return np.sqrt(np.average((aux.expand_1D_array(self.nm, self.shape) - self.mean_nm())**2, weights=self.br, axis=0))
-    
+
     def get_br_in_range(self, start: int, end: int) -> np.ndarray[np.floating]:
         """ Returns standard deviation values over a range of wavelengths (ends included!) """
         # TODO: round the input up to a multiple of 5
         return self.br[(self.nm >= start) & (self.nm <= end)]
-    
+
     def get_sd_in_range(self, start: int, end: int) -> np.ndarray[np.floating]:
         """ Returns standard deviation values over a range of wavelengths (ends included!) """
         if self.sd is None:
@@ -585,7 +585,7 @@ class _SpectralObject(_TrueColorToolsObject):
         else:
             # TODO: round the input up to a multiple of 5
             return self.sd[(self.nm >= start) & (self.nm <= end)]
-    
+
     def define_on_range(self, nm_arr: np.ndarray, crop: bool = False):
         """ Returns a new SpectralObject with a guarantee of definition on the requested wavelength array """
         extrapolated = self.__class__(*aux.extrapolating(self.nm, self.br, self.sd, nm_arr, nm_step), name=self.name)
@@ -596,11 +596,11 @@ class _SpectralObject(_TrueColorToolsObject):
             extrapolated.sd = extrapolated.get_sd_in_range(start, end)
             extrapolated.nm = aux.grid(start, end, nm_step)
         return extrapolated
-    
+
     def is_edges_zeroed(self) -> bool:
         """ Checks that the first and last brightness entries on the spectral axis are zero """
         return np.all(self.br[0] == 0) and np.all(self.br[-1] == 0)
-    
+
     def apply_element_wise_operation(self, other: _TrueColorToolsObject, br_handling: Callable, sd_handling: Callable) -> Self:
         """
         Returns a new SpectralObject formed from element-wise operation between SpectralObjects
@@ -643,7 +643,7 @@ class Spectrum(_SpectralObject):
     - `name` (ObjectName): name as an instance of a class that stores its components
     - `photospectrum` (Photospectrum): optional, way to store the pre-reconstructed data
     """
-    
+
     def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None,
                  name: str|ObjectName = None, photospectrum=None):
         """
@@ -659,12 +659,12 @@ class Spectrum(_SpectralObject):
         """
         super().__init__(1, nm, br, sd, name)
         self.photospectrum: Photospectrum = photospectrum
-    
+
     @staticmethod
     def stub(name=None):
         """ Initializes an object in case of the data problems """
         return Spectrum((555,), np.zeros(1), name=name)
-    
+
     @staticmethod
     @lru_cache(maxsize=32)
     def from_file(file: str, name: str|ObjectName = None):
@@ -676,7 +676,7 @@ class Spectrum(_SpectralObject):
         elif 'P' in extension:
             spectrum = spectrum.convert_from_photon_spectral_density()
         return spectrum
-    
+
     @staticmethod
     def from_nm(nm_point: int|float):
         """
@@ -695,7 +695,7 @@ class Spectrum(_SpectralObject):
             nm = (nm0-nm_step, nm0, nm0+nm_step, nm0+nm_step*2)
             br = (0., 1.-proximity_factor, proximity_factor, 0.)
         return Spectrum(nm, np.array(br)/nm_step, name=f'{nm_point} nm')
-    
+
     @staticmethod
     def from_spectral_lines(nm: Sequence, br: Sequence, sd: Sequence = None, name: str|ObjectName = None):
         """
@@ -727,7 +727,7 @@ class Spectrum(_SpectralObject):
             output += line.define_on_range(nm)
         output.name = ObjectName.as_ObjectName(name)
         return output
-    
+
     @staticmethod
     def from_blackbody_redshift(nm_arr: np.ndarray, temperature: int|float, velocity=0., vII=0.):
         """ Creates a Spectrum object based on Planck's law and redshift formulas """
@@ -754,7 +754,7 @@ class Spectrum(_SpectralObject):
         else:
             br = np.zeros(nm_arr.size)
         return Spectrum(nm_arr, br, name=f'BB with T={round(temperature)} K')
-    
+
     def edges_zeroed(self):
         """
         Returns a new Spectrum object with zero brightness to the edges added.
@@ -770,7 +770,7 @@ class Spectrum(_SpectralObject):
             profile.nm = np.append(profile.nm, profile.nm[-1]+nm_step)
             profile.br = np.append(profile.br, 0.)
         return profile
-    
+
     def define_on_range(self, nm_arr: np.ndarray, crop: bool = False):
         """ Returns a new Spectrum with a guarantee of definition on the requested wavelength array """
         if self.photospectrum is None:
@@ -779,7 +779,7 @@ class Spectrum(_SpectralObject):
             # Repeating the spectral reconstruction on the new wavelength range
             extrapolated = self.photospectrum.define_on_range(nm_arr, crop)
         return extrapolated
-    
+
     def apply_scalar_operation(self, operand, br_handling: Callable, sd_handling: Callable):
         """
         Returns a new object of the same class transformed according to the linear operator.
@@ -815,16 +815,16 @@ def get_filter(name: str|int|float) -> Spectrum:
 
 class _Square(_TrueColorToolsObject):
     """ Internal class for inheriting spatial data properties """
-    
+
     @property
     def size(self):
         """ Returns the spatial axis length """
         return self.shape[0]
-    
+
     def __len__(self) -> int:
         """ Returns the spatial axis length """
         return self.size
-    
+
     def __getitem__(self, item: slice):
         """ Returns the spatial axis slice """
         if isinstance(item, slice):
@@ -848,7 +848,7 @@ class SpectralSquare(_SpectralObject, _Square):
 
     def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
         super().__init__(2, nm, br, sd, name)
-    
+
     @staticmethod
     def stub(name=None):
         """ Initializes an object in case of the data problems """
@@ -870,17 +870,17 @@ class FilterSystem(SpectralSquare):
     - `names` (tuple[ObjectName]): storage of the original filter names
     - `size` (int): spatial axis length
     """
-    
+
     def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None,
                  name: str|ObjectName = None, names: tuple[ObjectName] = ()):
         super().__init__(nm, br, sd, name)
         self.names = names
-    
+
     @staticmethod
     def stub(name=None):
         """ Initializes an object in case of the data problems """
         return FilterSystem((555,), np.zeros((1, 1)), name=name, names=(None,))
-    
+
     @staticmethod
     def from_list(filters: Sequence[str|Spectrum], name: str|ObjectName = None):
         """
@@ -908,12 +908,12 @@ class FilterSystem(SpectralSquare):
         for i, profile in enumerate(filters):
             br[np.where((nm >= min_arr[i]) & (nm <= max_arr[i])), i] = profile.br
         return FilterSystem(nm, br, name=name, names=tuple(names))
-    
+
     def __iter__(self):
         """ Creates an iterator over the filters in the system """
         for i in range(len(self)):
             yield self[i]
-    
+
     @lru_cache(maxsize=32)
     def __getitem__(self, index: int) -> Spectrum | None:
         """ Returns the filter profile with extra zeros trimmed off """
@@ -927,7 +927,7 @@ class FilterSystem(SpectralSquare):
 
 class _Cube(_TrueColorToolsObject):
     """ Internal class for inheriting spatial data properties """
-    
+
     def downscale(self, pixels_limit: int):
         """ Brings the spatial resolution of the cube to approximately match the number of pixels """
         output = deepcopy(self)
@@ -936,7 +936,7 @@ class _Cube(_TrueColorToolsObject):
         if self.sd is not None:
             output.sd = aux.spatial_downscaling(self.sd, pixels_limit)
         return output
-    
+
     def flatten(self):
         """ Returns a (photo)spectral square with linearized spatial axis """
         br = self.br.reshape(self.nm_len, self.size)
@@ -945,17 +945,17 @@ class _Cube(_TrueColorToolsObject):
             return SpectralSquare(self.nm, br, sd, self.name)
         elif isinstance(self, _PhotospectralObject):
             return PhotospectralSquare(self.filter_system, br, sd, self.name)
-    
+
     @property
     def width(self):
         """ Returns horizontal spatial axis length """
         return self.shape[0]
-    
+
     @property
     def height(self):
         """ Returns vertical spatial axis length """
         return self.shape[1]
-    
+
     @property
     def size(self):
         """ Returns the number of pixels """
@@ -978,12 +978,12 @@ class SpectralCube(_SpectralObject, _Cube):
 
     def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
         super().__init__(3, nm, br, sd, name)
-    
+
     @staticmethod
     def stub(name=None):
         """ Initializes an object in case of the data problems """
         return SpectralCube((555,), np.zeros((1, 1, 1)), name=name)
-    
+
     @staticmethod
     def from_file(file: str):
         """ Creates a SpectralCube object based on loaded data from the specified file """
@@ -1001,7 +1001,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
     - `sd` (np.ndarray): optional array of standard deviations
     - `name` (ObjectName): name as an instance of a class that stores its components
     """
-    
+
     def __init__(self, ndim: int, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str|ObjectName = None):
         """
         Args:
@@ -1031,12 +1031,12 @@ class _PhotospectralObject(_TrueColorToolsObject):
             self.br = np.nan_to_num(self.br)
             print(f'# Note for the PhotospectralObject object "{self.name}"')
             print(f'- NaN values detected during object initialization, they been replaced with zeros.')
-    
+
     @property
     def nm(self) -> np.ndarray[np.integer]:
         """ Returns the definition range of the filter system """
         return self.filter_system.nm
-    
+
     def convert_from_photon_spectral_density(self):
         """
         Returns a new PhotospectralObject converted from photon spectral density
@@ -1045,7 +1045,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
         profiles = self.filter_system.normalize()
         scale_factors = (profiles / profiles.nm).integrate()
         return self * (scale_factors / scale_factors.mean())
-    
+
     def convert_from_energy_spectral_density_per_frequency(self):
         """
         Returns a new PhotospectralObject converted from frequency spectral density
@@ -1054,7 +1054,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
         profiles = self.filter_system.normalize()
         scale_factors = (profiles / profiles.nm / profiles.nm).integrate() # squaring nm will overflow uint16
         return self * (scale_factors / scale_factors.mean())
-    
+
     def define_on_range(self, nm_arr: np.ndarray, crop: bool = False) -> _SpectralObject:
         """
         Reconstructs a SpectralObject from photospectral data to fit the wavelength array.
@@ -1065,7 +1065,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
         The function uses the Tikhonov regularization method, with a combination of first-order
         and second-order differential operators for the Tikhonov matrix.
         That is, it tries to minimize height variations and curvature in the spectrum.
-        
+
         Confidence bands for spectral squares and cubes are not computed,
         even if possible, to save computational resources.
         """
@@ -1186,7 +1186,7 @@ class Photospectrum(_PhotospectralObject):
 
     def __init__(self, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
         super().__init__(1, filter_system, br, sd, name)
-    
+
     @staticmethod
     def stub(name=None):
         """ Initializes an object in case of the data problems """
@@ -1208,7 +1208,7 @@ class PhotospectralSquare(_PhotospectralObject, _Square):
 
     def __init__(self, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
         super().__init__(2, filter_system, br, sd, name)
-    
+
     @staticmethod
     def stub(name=None):
         """ Initializes an object in case of the data problems """
@@ -1232,7 +1232,7 @@ class PhotospectralCube(_PhotospectralObject, _Cube):
 
     def __init__(self, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
         super().__init__(3, filter_system, br, sd, name)
-    
+
     @staticmethod
     def stub(name=None):
         """ Initializes an object in case of the data problems """
@@ -1260,10 +1260,10 @@ class _PhotometricModel:
     def _integrate(self) -> None:
         """ Analytically or numerically computes usable values from a model parameters """
         raise NotImplementedError('Must be implemented in the inherited classes.')
-    
+
     def phase_function(self, alpha): # input in radians!
         return NotImplementedError('Must be implemented in the inherited classes.')
-    
+
     @property
     def spherical_albedo(self):
         if self.geometric_albedo is not None and self.phase_integral is not None:
@@ -1272,7 +1272,7 @@ class _PhotometricModel:
             return a, a_sd
         else:
             return None
-    
+
     def estimate_geometric_albedo(self, spherical_in_V: [float, float]):
         """
         Returns exact or estimated value of geometric albedo with the flag showing the case.
@@ -1334,7 +1334,7 @@ class PhaseCoefficient(_PhotometricModel):
         else:
             phase_integral_sd = None
         self.phase_integral = (phase_integral, phase_integral_sd)
-    
+
     def phase_function(self, alpha):
         beta, _ = aux.parse_value_sd(self.params['beta'])
         return np.exp(-self._k * beta * np.array(alpha))
@@ -1358,7 +1358,7 @@ class Exponentials(_PhotometricModel):
             # if function was not normalized, it shows geometric albedo at 0 phase angle
             self.geometric_albedo = zero_phase_angle, None
         self.phase_integral = 2 * np.sum(self._A * (1 + np.exp(-self._mu * np.pi)) / (1 + self._mu**2)) / zero_phase_angle, None
-    
+
     def phase_function(self, alpha):
         phi = np.sum(self._A[:, np.newaxis] * np.exp(-self._mu[:, np.newaxis] * alpha), axis=0)
         if phi.size == 1:
@@ -1383,7 +1383,7 @@ class HG(_PhotometricModel):
         q = 0.290 + 0.684 * g
         q_sd = None if g_sd is None else 0.684 * g_sd
         self.phase_integral = (q, q_sd)
-    
+
     def phase_function(self, alpha):
         g, _ = aux.parse_value_sd(self.params['G'])
         alpha = np.array(alpha)
@@ -1428,7 +1428,7 @@ class HG1G2(_PhotometricModel):
                 g2_sd = 0
             q_sd = 0.4061 * g1_sd + 0.8092 * g2_sd
         self.phase_integral = (q, q_sd)
-    
+
     def phase_function(self, alpha):
         g1, _ = aux.parse_value_sd(self.params['G_1'])
         g2, _ = aux.parse_value_sd(self.params['G_2'])
@@ -1495,7 +1495,7 @@ class EmittingBody:
         """
         self.name = name
         self.spectrum = spectrum
-    
+
     def get_spectrum(self, *args, **kwargs):
         """
         Returns the spectrum as the first argument, and the `None` status (of albedo estimating)
@@ -1513,7 +1513,7 @@ class ReflectingBody:
         ):
         """
         Args:
-        - `name` (ObjectName): name as an instance of a class that stores its components 
+        - `name` (ObjectName): name as an instance of a class that stores its components
         - `geometric` (Spectrum): geometric albedo (photo)spectrum
         - `spherical` (Spectrum): spherical albedo (photo)spectrum
         - `photometric_model` (PhotometricModel): describes the albedo behavior with phase angle
@@ -1523,7 +1523,7 @@ class ReflectingBody:
         self.geometric = geometric
         self.spherical = spherical
         self.photometric_model = photometric_model
-    
+
     def get_spectrum(self, mode: str):
         """
         Returns the albedo-scaled spectrum as the first argument, and the status as the second one.
@@ -1762,16 +1762,18 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
     TCT_obj = geometric = spherical = None
     if len(br) == 0:
         if 'br_geometric' in content:
-            br_geom = content['br_geometric']
-            sd_geom = aux.repeat_if_value(content['sd_geometric'], len(br_geom)) if 'sd_geometric' in content else None
+            br_geom, sd_geom = aux.parse_value_sd_list(content['br_geometric'])
+            if 'sd_geometric' in content:
+                sd_geom = aux.repeat_if_value(content['sd_geometric'], len(br_geom))
             geometric = _create_TCT_object(name, nm, filters, br_geom, sd_geom, filter_system, calib, is_sun, is_emission)
             if sphe_where is not None and sphe_how is not None:
                 spherical = geometric.scaled_at(sphe_where, sphe_how)
             elif 'bond_albedo' in content:
                 spherical = geometric.scaled_at(sun_filter, *aux.parse_value_sd(content['bond_albedo']))
         if 'br_spherical' in content:
-            br_sphe = content['br_spherical']
-            sd_sphe = aux.repeat_if_value(content['sd_spherical'], len(br_sphe)) if 'sd_spherical' in content else None
+            br_sphe, sd_sphe = aux.parse_value_sd_list(content['br_spherical'])
+            if 'sd_spherical' in content:
+                sd_sphe = aux.repeat_if_value(content['sd_spherical'], len(br_sphe))
             spherical = _create_TCT_object(name, nm, filters, br_sphe, sd_sphe, filter_system, calib, is_sun, is_emission)
             if geom_where is not None and geom_how is not None:
                 geometric = spherical.scaled_at(geom_where, geom_how)
@@ -1818,7 +1820,7 @@ class ColorSystem:
         self.MI = np.linalg.inv(self.M) # white scaling array
         self.wscale = self.MI.dot(self.white) # xyz -> rgb transformation matrix
         self.T = self.MI / self.wscale[:, np.newaxis]
-    
+
     @staticmethod
     def xy2xyz(xy):
         return np.array((xy[0], xy[1], 1-xy[0]-xy[0])) # (x, y, 1-x-y)
@@ -1878,13 +1880,13 @@ class _ColorObject:
         else:
             rgb = (data @ rgb_cmf).br
         return cls(rgb, maximize_brightness)
- 
+
     def gamma_corrected(self):
         """ Creates a new ColorObject with applied gamma correction """
         output = deepcopy(self)
         output.br = aux.gamma_correction(output.br)
         return output
-    
+
     def grayscale(self):
         """ Converts color to grayscale using sRGB luminance of the CIE 1931 """
         # inaccurate CIE standard usage (TODO)
@@ -1921,7 +1923,7 @@ class ColorLine(_ColorObject):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.br = np.atleast_2d(self.br) # interprets color points as lines
-    
+
     @property
     def size(self):
         """ Returns spatial axis length """
@@ -1938,11 +1940,11 @@ class ColorImage(_ColorObject):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.br = np.atleast_3d(self.br) # interprets color points and lines as images
-    
+
     def upscale(self, times: int):
         """ Creates a new ColorImage with increased size by an integer number of times """
         output = deepcopy(self)
-        output.br = np.repeat(np.repeat(output.br, times, axis=0), times, axis=1) 
+        output.br = np.repeat(np.repeat(output.br, times, axis=0), times, axis=1)
         return output
 
     def to_pillow_image(self):
@@ -1950,12 +1952,12 @@ class ColorImage(_ColorObject):
         # TODO: support export to 16 bit and other Pillow modes
         arr = np.clip(self.br, 0, 1) * 255 # 8 bit
         return Image.fromarray(np.around(arr).astype('uint8').transpose())
-    
+
     @property
     def width(self):
         """ Returns horizontal spatial axis length """
         return self.br.shape[1]
-    
+
     @property
     def height(self):
         """ Returns vertical spatial axis length """
