@@ -153,18 +153,24 @@
     },
 
     // Terran system
+    'Robinson2025': [
+        'Inferring and Interpreting the Visual Geometric Albedo and Phase Function of Earth',
+        'DOI: 10.48550/arXiv.2507.22258', 'https://arxiv.org/abs/2507.22258'
+    ],
+    'Earth | Robinson2025': {
+        tags: ['featured', 'Solar System', 'planetary body/planet', 'Earth'],
+        photometric_system: 'Generic_Bessell',
+        filters: ['B', 'V', 'R'],
+        br_geometric: [[0.277, +0.005, -0.004], [0.226, 0.004], [0.221, 0.004]],
+        spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
+    },
     'Pallé2003': [
         'Earthshine and the Earth’s albedo: 2. Observations and simulations over 3 years',
         'DOI: 10.1029/2003JD003611', 'https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2003JD003611',
         'https://ui.adsabs.harvard.edu/abs/2003JGRD..108.4710P/abstract'
     ],
-    'Gómez2014': [
-        'Spectral Reflectance Analysis of the Caribbean Sea',
-        'DOI: 10.1016/S0016-7169(14)70073-X', 'http://revistagi.geofisica.unam.mx/index.php/RGI/article/view/545',
-        'https://ui.adsabs.harvard.edu/abs/2014GeofI..53..385G/abstract'
-    ],
     'Earth | Crow2011, Mallama2017a, Pallé2003': { // phase angle 75.1°
-        tags: ['featured', 'Solar System', 'planetary body/planet', 'Earth'],
+        tags: ['Solar System', 'planetary body/planet', 'Earth'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79],
@@ -194,6 +200,11 @@
         file: 'spectra/files/VPL/earth_quadrature_radiance_refl.txtU', // synthetic spectrum
         spherical_albedo: [400, 0.2635], // at quadrature
     },
+    'Gómez2014': [
+        'Spectral Reflectance Analysis of the Caribbean Sea',
+        'DOI: 10.1016/S0016-7169(14)70073-X', 'http://revistagi.geofisica.unam.mx/index.php/RGI/article/view/545',
+        'https://ui.adsabs.harvard.edu/abs/2014GeofI..53..385G/abstract'
+    ],
     'Caribbean Sea (Earth) | Gómez2014': {
         tags: ['Solar System', 'Earth/surface feature'],
         nm: [380, 400, 425, 450, 475, 500, 520, 550, 600, 650, 700],
@@ -671,7 +682,7 @@
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['UV', 'Violet', 'Clear', 'Blue', 'Green', 'Orange'],
-        br: [0.354, 0.469, 0.578, 0.606, 0.727, 0.725], 
+        br: [0.354, 0.469, 0.578, 0.606, 0.727, 0.725],
         sd: 0.049, // typical absolute error
         is_geometric_albedo: true,
         phase_integral: [1.01, 0.04],
