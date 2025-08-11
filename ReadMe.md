@@ -13,17 +13,18 @@ Please note that this is a hobby project and no guarantees are provided for the 
 
 ## Installation
 
-TrueColorTools has been tested on Windows 10/11, macOS and Linux ([this](https://github.com/adang1345/PythonWin7) can be used to run on Windows 7). Python version 3.11 or higher is required. Depending on the system, you may need to replace the `python` command with `python3`.
+TrueColorTools works on Windows, macOS and Linux. Python version 3.11 or higher is required.
 
 1. Clone the repository or download the archive using the GitHub web interface;
 2. Open the console in the project root folder;
-3. Create a virtual environment with `python -m venv .venv`;
+3. Create a virtual environment with `python3 -m venv .venv`;
 4. Install the dependencies with `.venv/bin/pip install -r requirements.txt`;
-5. Execute `.venv/bin/python -u runTCT.py`.
+5. Execute `.venv/bin/python runTCT.py`.
 
 ### Executable file
 
-[SevenSpheres](https://github.com/SevenSpheres) compiles stable versions of TCT for Windows 8/10/11. Thus, Python is not required in this installation way.
+An alternative way for Windows 8/10/11. Stable versions are compiled into an executable file, Python installation is not required.
+
 1. Go to [the latest release page](https://github.com/Askaniy/TrueColorTools/releases/latest);
 2. Download and unpack the first archive;
 3. Launch the `runTCT.exe`.
@@ -136,8 +137,8 @@ Short help on the UBVRI photometric system implementations:
 
 This research has made use of:
 - [Spanish Virtual Observatory](https://svo.cab.inta-csic.es) project funded by MCIN/AEI/10.13039/501100011033/ through grant PID2020-112949GB-I00
-    - [The SVO Filter Profile Service. Rodrigo, C., Solano, E., Bayo, A., 2012](https://ui.adsabs.harvard.edu/abs/2012ivoa.rept.1015R/abstract); 
-    - [The SVO Filter Profile Service. Rodrigo, C., Solano, E., 2020](https://ui.adsabs.harvard.edu/abs/2020sea..confE.182R/abstract); 
+    - [The SVO Filter Profile Service. Rodrigo, C., Solano, E., Bayo, A., 2012](https://ui.adsabs.harvard.edu/abs/2012ivoa.rept.1015R/abstract);
+    - [The SVO Filter Profile Service. Rodrigo, C., Solano, E., 2020](https://ui.adsabs.harvard.edu/abs/2020sea..confE.182R/abstract);
 - [Colour & Vision Research laboratory and database](http://www.cvrl.org/)
     - [Stiles & Burch (1959) 2-deg individual colour matching functions](http://www.cvrl.org/database/text/sb_individual/sb2_individual.htm);
     - [CIE (2012) 2-deg XYZ “physiologically-relevant” colour matching functions](http://www.cvrl.org/database/text/cienewxyz/cie2012xyz2.htm).
