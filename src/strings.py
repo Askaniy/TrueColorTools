@@ -153,10 +153,15 @@ gui_reload = {
     'ru': 'Перезагрузить базу данных',
     'de': 'Aktualisieren'
 }
-gui_tags = {
-    'en': 'Category',
-    'ru': 'Категория',
-    'de': 'Kategorie'
+gui_tag_filter = {
+    'en': 'Filter by category',
+    'ru': 'Фильтр по категории',
+    'de': 'Nach Kategorie filtern'
+}
+gui_search = {
+    'en': 'Global search',
+    'ru': 'Глобальный поиск',
+    'de': 'Globale Suche'
 }
 gui_blank_note = {
     'en': '',
@@ -310,7 +315,7 @@ gui_band = {
     'ru': 'Канал',
     'de': 'Band'
 }
-gui_filter = {
+gui_filter_or_nm = {
     'en': 'Filter or nm',
     'ru': 'Фильтр или нм',
     'de': 'Filter oder nm'
