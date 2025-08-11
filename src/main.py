@@ -19,6 +19,7 @@ def launch_window(lang: str):
     # Databases declaration
     database_folders = ('spectra', 'spectra_extras')
     objectsDB, refsDB = {}, {}
+    namesDB = {}
     tagsDB = []
     filtersDB = db.list_filters()
     tab1_loaded = False
@@ -225,29 +226,23 @@ def launch_window(lang: str):
 
                     objectsDB, refsDB = db.import_DBs(database_folders)
                     tagsDB = db.tag_list(objectsDB)
-                    namesDB = { # TODO: generalize!
-                        'en': db.obj_names_dict(objectsDB, 'ALL', 'en'),
-                        'ru': db.obj_names_dict(objectsDB, 'ALL', 'ru'),
-                        'de': db.obj_names_dict(objectsDB, 'ALL', 'de')
-                    }
+                    for l in tr.langs.values():
+                        namesDB |= {l: db.obj_names_dict(objectsDB, 'ALL', l)}
 
-                    # Enable database view elements
-                    window['tab1_tag_filterN'].update(visible=True)
-                    window['tab1_tag_filter'].update(default_tag, values=tagsDB, visible=True)
-                    tab1_displayed_namesDB = db.obj_names_dict(objectsDB, default_tag, lang)
-                    window['tab1_list'].update(values=tuple(tab1_displayed_namesDB.keys()), visible=True)
-                    window['tab1_(re)load'].update(tr.gui_reload[lang], visible=True)
+                    if not tab1_loaded:
+                        # Setting the default tag on the first loading
+                        tab1_loaded = True
+                        tab1_tag = default_tag
+                        window['tab1_(re)load'].update(tr.gui_reload[lang])
+                    else:
+                        tab1_tag = values['tab1_tag_filter']
+                        # Handle tha case of a non-existing tag after reloading
+                        if tab1_tag not in tagsDB:
+                            tab1_tag = default_tag
 
-                    # Updating tags on reload
-                    if tab1_loaded:
-                        if values['tab1_tag_filter'] in tagsDB:
-                            window['tab1_tag_filter'].update(values['tab1_tag_filter'], values=tagsDB)
-                        else:
-                            window['tab1_tag_filter'].update(default_tag, values=tagsDB)
-                            tab1_displayed_namesDB = db.obj_names_dict(objectsDB, default_tag, lang)
-                            window['tab1_list'].update(values=tuple(tab1_displayed_namesDB.keys()))
-
-                    tab1_loaded = True
+                    window['tab1_tag_filter'].update(tab1_tag, values=tagsDB)
+                    tab1_displayed_namesDB = db.obj_names_dict(objectsDB, tab1_tag, lang)
+                    window['tab1_list'].update(values=tuple(tab1_displayed_namesDB.keys()))
 
                 elif event in tab1_triggers and values['tab1_list'] != []:
 
