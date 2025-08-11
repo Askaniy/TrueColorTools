@@ -112,7 +112,7 @@ def generate_layout(
         ],
         [
             sg.Text(tr.gui_search[lang], key='tab1_searchN'),
-            sg.InputText('', size=1, disabled_readonly_background_color=inputOFF_color, expand_x=True, enable_events=True, key='tab1_searchInput'),
+            sg.InputText('', size=1, disabled_readonly_background_color=inputOFF_color, expand_x=True, enable_events=True, key='tab1_searched'),
         ],
         [sg.Listbox(values=(), enable_events=True, key='tab1_list', expand_x=True, expand_y=True)],
         [sg.Button(button_text=tr.gui_load[lang], size=button_size, key='tab1_(re)load')],

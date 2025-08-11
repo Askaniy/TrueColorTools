@@ -8,7 +8,7 @@ from json5 import load as json5load
 from pathlib import Path
 from traceback import format_exc
 
-from src.core import *
+from src.core import ObjectName
 
 
 # Importing files
@@ -45,32 +45,39 @@ def import_folder(folder: str):
 
 # Imported database iterators
 
-def is_tag_in_obj(tag: str, obj_data: dict[str]) -> bool:
+def is_tag_in_obj(tag: str, obj_data: dict) -> bool:
     """ Search for a tag in a list that handles subcategories """
     if 'tags' in obj_data:
-        tag = set(tag.split('/'))
+        tag_set = set(tag.split('/'))
         for obj_tag in obj_data['tags']:
-            if tag.issubset(obj_tag.split('/')):
+            if tag_set.issubset(obj_tag.split('/')):
                 return True
     return False
 
-def obj_names_dict(database: dict[ObjectName, dict[str]], tag: str, lang: str) -> dict[str, ObjectName]:
+def obj_names_dict(database: dict[ObjectName, dict], tag: str, searched: str, lang: str) -> dict[str, ObjectName]:
     """ Matches the front-end names with the ObjectName for the selected tag """
     names = {}
-    for obj_name, obj_data in database.items():
-        if tag == 'ALL' or is_tag_in_obj(tag, obj_data):
-            names |= {obj_name(lang): obj_name}
+    if searched == '':
+        for obj_name, obj_data in database.items():
+            if tag == 'ALL' or is_tag_in_obj(tag, obj_data):
+                names |= {obj_name(lang): obj_name}
+    else:
+        searched = searched.lower()
+        for obj_name in database.keys():
+            if searched in obj_name.indexed_name(lang).lower() or searched in obj_name.info(lang).lower():
+                names |= {obj_name(lang): obj_name}
     return names
 
-def obj_names_list(database: dict[ObjectName, dict[str]], tag: str) -> list[ObjectName]:
-    """ Lists the names of eligible objects """
+# TODO: delete this funtion, and give `tab1_displayed_namesDB` to `generate_table()` instead of tag
+def obj_names_list(database: dict[ObjectName, dict], tag: str) -> list[ObjectName]:
+    """ Lists the names of eligible objects for color table """
     names = []
     for obj_name, obj_data in database.items():
         if tag == 'ALL' or is_tag_in_obj(tag, obj_data):
             names.append(obj_name)
     return names
 
-def tag_list(database: dict[ObjectName, dict[str]]) -> list[str]:
+def tag_list(database: dict[ObjectName, dict]) -> list[str]:
     """
     Generates a list of tags found in the spectra database.
     Tags can be written as `A/B/C`, which reads as {A, A/B, A/B/C}.

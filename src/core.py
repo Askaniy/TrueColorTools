@@ -69,14 +69,14 @@ class ObjectName:
 
     unnamed_count = 0 # class attribute to track the number of unnamed objects
 
-    def __init__(self, name: str = None):
+    def __init__(self, name: str = ''):
         """
         Initializes the ObjectName with name parsing.
         The template is `(index) name: note (info) | reference`.
         If no name is specified, a numbered unnamed object will be created.
         """
-        self.index = self._note_en = self._info_en = self.reference = None
-        if name is None:
+        self.index = self._note_en = self._info_en = self.reference = ''
+        if name == '':
             ObjectName.unnamed_count += 1
             self.raw_name = ObjectName.unnamed_count
             self._name_en = f'Unnamed object {ObjectName.unnamed_count}'
@@ -109,19 +109,19 @@ class ObjectName:
         """ Returns the name in the specified language """
         return self._name_en if lang == 'en' else self.translate(self._name_en, tr.names, lang)
 
-    def note(self, lang: str = 'en') -> str | None:
+    def note(self, lang: str = 'en') -> str:
         """ Returns the note in the specified language """
         if self._note_en:
             return self._note_en if lang == 'en' else self.translate(self._note_en, tr.notes, lang)
         else:
-            return None
+            return ''
 
-    def info(self, lang: str = 'en') -> str | None:
+    def info(self, lang: str = 'en') -> str:
         """ Returns the info in the specified language """
         if self._info_en:
             return self._info_en if lang == 'en' else self.translate(self._info_en, tr.names, lang)
         else:
-            return None
+            return ''
 
     def indexed_name(self, lang: str = 'en') -> str:
         """ Returns the name with the index in the specified language """
@@ -180,9 +180,14 @@ class ObjectName:
         return target
 
     @staticmethod
-    def as_ObjectName(input):
+    def as_ObjectName(name):
         """ Guaranteed to return an object of the given class, even if the input may have already been one """
-        return input if isinstance(input, ObjectName) else ObjectName(input)
+        if isinstance(name, ObjectName):
+            return name
+        elif name is None:
+            return ObjectName('')
+        else:
+            return ObjectName(name)
 
     def __hash__(self) -> int:
         """ Returns the hash value based on the object's raw name """

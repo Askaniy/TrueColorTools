@@ -153,8 +153,9 @@ def launch_window(lang: str):
                 case 'tab1':
                     if tab1_obj_name:
                         window['tab1_title2'].update(tab1_obj_name.indexed_name(lang))
-                    tab1_displayed_namesDB = db.obj_names_dict(objectsDB, values['tab1_tag_filter'], lang)
-                    if tab1_obj_name:
+                    tab1_displayed_namesDB = db.obj_names_dict(objectsDB, values['tab1_tag_filter'], values['tab1_searched'], lang)
+                    if tab1_obj_name and values['tab1_searched'] == '':
+                        # object name could be not on the list during global search (ValueError) or if no object selected (TypeError)
                         tab1_index = tuple(tab1_displayed_namesDB.keys()).index(tab1_obj_name(lang))
                         window['tab1_list'].update(tuple(tab1_displayed_namesDB.keys()), set_to_index=tab1_index, scroll_to_index=tab1_index)
                     else:
@@ -227,7 +228,7 @@ def launch_window(lang: str):
                     objectsDB, refsDB = db.import_DBs(database_folders)
                     tagsDB = db.tag_list(objectsDB)
                     for l in tr.langs.values():
-                        namesDB |= {l: db.obj_names_dict(objectsDB, 'ALL', l)}
+                        namesDB |= {l: db.obj_names_dict(objectsDB, tag='ALL', searched='', lang=l)}
 
                     if not tab1_loaded:
                         # Setting the default tag on the first loading
@@ -241,7 +242,7 @@ def launch_window(lang: str):
                             tab1_tag = default_tag
 
                     window['tab1_tag_filter'].update(tab1_tag, values=tagsDB)
-                    tab1_displayed_namesDB = db.obj_names_dict(objectsDB, tab1_tag, lang)
+                    tab1_displayed_namesDB = db.obj_names_dict(objectsDB, tab1_tag, values['tab1_searched'], lang)
                     window['tab1_list'].update(values=tuple(tab1_displayed_namesDB.keys()))
 
                 elif event in tab1_triggers and values['tab1_list'] != []:
@@ -303,8 +304,8 @@ def launch_window(lang: str):
                             light_theme, lang
                         )
 
-                elif event == 'tab1_tag_filter':
-                    tab1_displayed_namesDB = db.obj_names_dict(objectsDB, values['tab1_tag_filter'], lang)
+                elif event in ('tab1_tag_filter', 'tab1_searched'):
+                    tab1_displayed_namesDB = db.obj_names_dict(objectsDB, values['tab1_tag_filter'], values['tab1_searched'], lang)
                     window['tab1_list'].update(tuple(tab1_displayed_namesDB.keys()))
 
                 elif event == 'tab1_pin' and values['tab1_list'] != []:
