@@ -5783,7 +5783,7 @@
         'The Albedos, Sizes, Colors, and Satellites of Dwarf Planets Compared with Newly Measured Dwarf Planet 2013 FY27',
         'DOI: 10.3847/1538-3881/aae92a', 'https://iopscience.iop.org/article/10.3847/1538-3881/aae92a'
     ],
-    '(532037) 2013 FY27 | Sheppard2018': {
+    '(532037) Chiminigagua | Sheppard2018': {
         tags: ['Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'LCO_IMACS',
         color_indices: {'sloan_g-sloan_r': [0.76, 0.02], 'sloan_r-sloan_i': [0.31, 0.03]},
