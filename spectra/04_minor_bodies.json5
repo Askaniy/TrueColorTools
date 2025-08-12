@@ -138,6 +138,10 @@
         'DOI: 10.1093/mnrsdl/slad018', 'https://academic.oup.com/mnrasl/article/521/1/L29/7036802',
         'https://ui.adsabs.harvard.edu/abs/2023MNRAS.521L..29B/abstract'
     ],
+    'Kiss2025': [
+        'ALMA sub-mm measurements of the trans-Neptunian binary system satellites Ilmarë, Actaea, Hi’iaka and Namaka',
+        'DOI: 10.5194/epsc_dps2025-905', 'https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-905.html'
+    ],
     'Masiero2011': [
         'Main Belt Asteroids with WISE/NEOWISE. I. Preliminary Albedos and Diameters',
         'DOI: 10.1088/0004-637X/741/2/68', 'https://iopscience.iop.org/article/10.1088/0004-637X/741/2/68',
@@ -3685,52 +3689,47 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.044, +0.021, -0.015]],
     },
-    'Brown2017': [
-        'The Density of Mid-sized Kuiper Belt Objects from ALMA Thermal Observations',
-        'DOI: 10.3847/1538-3881/aa6346', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa6346',
-        'https://ui.adsabs.harvard.edu/abs/2017AJ....154...19B/abstract'
-    ],
-    '(120347) Salacia | MBOSS, Brown2017': {
+    '(120347) Salacia | MBOSS, Kiss2025': {
         tags: ['featured', 'MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.664, 0.098], 'V-R': [0.403, 0.061], 'R-I': [0.433, 0.118]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.042, 0.004]], // system albedo
+        geometric_albedo: ['Generic_Bessell.V', [0.041, 0.004]],
     },
-    '(120347) Salacia | PinillaAlonso2008, Brown2017': {
+    '(120347) Salacia | PinillaAlonso2008, Kiss2025': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         slope: {start: 520, stop: 860, percent_per_100nm: [12.6, 2.0]},
-        geometric_albedo: ['Generic_Bessell.V', [0.042, 0.004]], // system albedo
+        geometric_albedo: ['Generic_Bessell.V', [0.041, 0.004]],
     },
-    '(120347) Salacia | Boehnhardt2014, Brown2017': {
+    '(120347) Salacia | Boehnhardt2014, Kiss2025': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.82, 0.02], 'V-R': [0.47, 0.02], 'R-I': [0.39, 0.02]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.042, 0.004]], // system albedo
+        geometric_albedo: ['Generic_Bessell.V', [0.041, 0.004]],
     },
     'Stansberry2012': [
         'Physical properties of trans-neptunian binaries (120347) Salacia-Actaea and (42355) Typhon-Echidna',
         'DOI: 10.1016/j.icarus.2012.03.029', 'https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=930b84b086f6470df40a606e9385d9f165e5fd4d',
         'https://ui.adsabs.harvard.edu/abs/2012Icar..219..676S/abstract'
     ],
-    '(120347) Salacia | Stansberry2012, Brown2017': {
+    '(120347) Salacia | Stansberry2012, Kiss2025': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-I': [0.87, 0.01]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.042, 0.004]], // system albedo
+        geometric_albedo: ['Generic_Bessell.V', [0.041, 0.004]],
     },
-    '(120347 I) Actaea | Stansberry2012, Brown2017': {
+    '(120347 I) Actaea | Stansberry2012, Kiss2025': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-I': [0.89, 0.02]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.042, 0.004]], // system albedo
+        geometric_albedo: ['Generic_Bessell.V', [0.021, 0.004]],
     },
     '(120348) 2004 TY364 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -4537,13 +4536,13 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.099, 0.002]],
     },
-    '(174567 I) Ilmarë | Grundy2015, Souami2020': {
+    '(174567 I) Ilmarë | Grundy2015, Kiss2025': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.857, 0.061], 'V-I': [1.266, 0.052]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.085],
+        geometric_albedo: ['Generic_Bessell.V', [0.068, 0.011]],
     },
     '(181708) 1993 FW | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
