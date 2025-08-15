@@ -7306,7 +7306,7 @@
         'DOI: 10.1093/mnras/stu607', 'https://academic.oup.com/mnras/article-abstract/441/1/739/982847',
         'https://ui.adsabs.harvard.edu/abs/2014MNRAS.441..739S/abstract'
     ],
-    '29P/Schwassmann–Wachmann 1: Coma, Apr. 5 2011 | Shi2014, Müller2020': {
+    '29P/Schwassmann–Wachmann 1: Coma, 2011-04-05 | Shi2014, Müller2020': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'minor body/centaur/active centaur', 'Schwassmann-Wachmann 1'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.89, 0.01], 'V-R': [0.48, 0.01]},
@@ -7314,7 +7314,7 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.033, 0.015]], // albedo of nucleus
     },
-    '29P/Schwassmann–Wachmann 1: Coma, Apr. 6 2011 | Shi2014, Müller2020': {
+    '29P/Schwassmann–Wachmann 1: Coma, 2011-04-06 | Shi2014, Müller2020': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'minor body/centaur/active centaur', 'Schwassmann-Wachmann 1'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.78, 0.01], 'V-R': [0.48, 0.01]},
@@ -7326,7 +7326,7 @@
         '29P/Schwassmann–Wachmann 1 spectrum by R. Leadbeater uploaded to British Astronomical Association',
         'https://britastro.org/specdb/data_graph.php?obs_id=10751'
     ],
-    '29P/Schwassmann–Wachmann 1: Coma, Oct. 15 2021 | Leadbeater2021b, Müller2020': { // coma is visible in associated image
+    '29P/Schwassmann–Wachmann 1: Coma, 2021-10-15 | Leadbeater2021b, Müller2020': { // coma is visible in associated image
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'minor body/centaur/active centaur', 'Schwassmann-Wachmann 1'],
         file: 'spectra/files/BAA/_29p_20211015_112_Leadbeater.fit',
         is_reflecting_sunlight: true,
@@ -7649,14 +7649,14 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.053, 0.019]],
     },
-    '228P/LINEAR: Coma, Apr. 5 2011 | Shi2014': {
+    '228P/LINEAR: Coma, 2011-04-05 | Shi2014': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.84, 0.04], 'V-R': [0.32, 0.02]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
-    '228P/LINEAR: Coma, Apr. 6 2011 | Shi2014': {
+    '228P/LINEAR: Coma, 2011-04-06 | Shi2014': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.78, 0.07], 'V-R': [0.83, 0.04]},
@@ -8240,7 +8240,7 @@
         'C/2023 A3 spectrum by J. Foster uploaded to British Astronomical Association',
         'https://britastro.org/specdb/data_graph.php?obs_id=17983'
     ],
-    '(C/2023 A3) Tsuchinshan–ATLAS: Coma, Oct. 21 2024 | Foster2024': {
+    '(C/2023 A3) Tsuchinshan–ATLAS: Coma, 2024-10-21 | Foster2024': {
         tags: ['Solar System', 'minor body/comet/long period comet'],
         file: 'spectra/files/BAA/_CometC2023A3Tsuchinshan-ATLAS_20241021_094a.fit',
         is_reflecting_sunlight: true,

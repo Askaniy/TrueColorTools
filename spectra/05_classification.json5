@@ -137,10 +137,6 @@
         'Spectroscopic survey of X-type asteroids',
         'DOI: 10.1016/j.icarus.2011.04.022', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103511001576'
     ],
-    'Dahlgren1995': [
-        'A study of Hilda asteroids. I. CCD spectroscopy of Hilda asteroids.',
-        'https://ui.adsabs.harvard.edu/abs/1995A%26A...302..907D/abstract'
-    ],
 
     // P complex (P, PC, PD)
     'P-type | Fornasier2011, Mahlke2020': {
@@ -149,11 +145,23 @@
         geometric_albedo: ['Generic_Bessell.V', [0.05, 0.02]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.80, G_2: 0.05}],
     },
+
+    // Intermediate types of P and D complexes
+    'Dahlgren1995': [
+        'A study of Hilda asteroids. I. CCD spectroscopy of Hilda asteroids.',
+        'https://ui.adsabs.harvard.edu/abs/1995A%26A...302..907D/abstract'
+    ],
     'PD-type | Dahlgren1995, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         slope: {start: 400, stop: 910, percent_per_100nm: 5.5}, // 5.0 ≤ S’ < 6.0
         geometric_albedo: ['Generic_Bessell.V', [0.05, 0.02]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.80, G_2: 0.05}],
+    },
+    'DP-type | Dahlgren1995, Mahlke2020': {
+        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
+        slope: {start: 400, stop: 910, percent_per_100nm: 6.5}, // 6.0 ≤ S’ < 7.0
+        geometric_albedo: ['Generic_Bessell.V', [0.06, 0.02]],
+        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
     },
 
     // D complex (D, DP)
@@ -168,12 +176,6 @@
         nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         br: [0.882, 0.951, 1.046, 1.098, 1.150, 1.199, 1.222, 1.247, 1.287],
         sd: [0.029, 0.012, 0.005, 0.006, 0.010, 0.015, 0.018, 0.026, 0.067],
-        geometric_albedo: ['Generic_Bessell.V', [0.06, 0.02]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
-    },
-    'DP-type | Dahlgren1995, Mahlke2020': {
-        tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
-        slope: {start: 400, stop: 910, percent_per_100nm: 6.5}, // 6.0 ≤ S’ < 7.0
         geometric_albedo: ['Generic_Bessell.V', [0.06, 0.02]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
     },
