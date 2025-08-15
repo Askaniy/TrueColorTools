@@ -4169,17 +4169,17 @@
         geometric_albedo: ['Generic_Bessell.V', 0.09], // best-guess I/F for a 70 km wide ring (Ortiz2017)
         phase_integral: 0.26, // for low I/F of 0.09 (Kalup2023)
     },
-    'VaraLubiano2023': [
-        'Propiedades físicas de objetos trans-neptunianos y centauros combinando técnicas fotométricas, astrométricas, radiométricas y de ocultación estelar',
-        'https://digibug.ugr.es/handle/10481/89038'
+    'FernandezValenzuela2024': [
+        'Deciphering satellite formation in the trans-Neptunian region: the case of Weywot',
+        'https://www.youtube.com/watch?v=n5FFLJi2I8U', 'https://tno2024.org/relation/abstract/90'
     ],
-    '(136108 I) Hi‘iaka | Brown2010, VaraLubiano2023, Verbiscer2022': {
+    '(136108 I) Hiʻiaka | Brown2010, FernandezValenzuela2024, Verbiscer2022': {
         tags: ['Solar System/Haumean system', 'minor body/TNO/classical TNO', 'natural satellite'],
         photometric_system: 'HST_WFPC2-PC',
         color_indices: {'F606W-F814W': [0.45, 0.14]}, // extracted from Fig. 2
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.68, 0.05]],
+        geometric_albedo: ['Generic_Bessell.V', [0.76, 0.15]],
         phase_integral: [0.44, 0.03], // system
     },
     '(136108 II) Namaka | Brown2010, Verbiscer2022': {
