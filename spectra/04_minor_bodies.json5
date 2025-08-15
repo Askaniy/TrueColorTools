@@ -2752,30 +2752,30 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.083, +0.016, -0.015]],
     },
-    '(55636) 2002 TX300 | PinillaAlonso2007, Müller2020': { // IR extension of Licandro2006
+    '(55636) 2002 TX300 | PinillaAlonso2007, Ortiz2019': { // IR extension of Licandro2006
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         file: 'spectra/files/PinillaAlonso2007/2002TX300_PinillaAlonso2007.txtU', // Fig. 1
-        geometric_albedo: ['Generic_Bessell.V', [0.760, +0.180, -0.450]],
+        geometric_albedo: ['Generic_Bessell.V', [0.65, 0.15]],
     },
-    '(55636) 2002 TX300 | MBOSS, Müller2020': {
+    '(55636) 2002 TX300 | MBOSS, Ortiz2019': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.679, 0.038], 'V-R': [0.359, 0.024], 'R-I': [0.323, 0.041]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.760, +0.180, -0.450]],
+        geometric_albedo: ['Generic_Bessell.V', [0.65, 0.15]],
     },
     'Licandro2006': [
         'Trans-neptunian object (55636) 2002 TX300, a fresh icy surface in the outer solar system',
         'DOI: 10.1051/0004-6361:20064906', 'https://www.aanda.org/articles/aa/full/2006/37/aa4906-06/aa4906-06.html',
         'https://ui.adsabs.harvard.edu/abs/2006A%26A...457..329L/abstract'
     ],
-    '(55636) 2002 TX300 | Licandro2006, Müller2020': {
+    '(55636) 2002 TX300 | Licandro2006, Ortiz2019': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         slope: {start: 530, stop: 1200, percent_per_100nm: -1},
-        geometric_albedo: ['Generic_Bessell.V', [0.760, +0.180, -0.450]],
+        geometric_albedo: ['Generic_Bessell.V', [0.65, 0.15]],
     },
-    '(55636) 2002 TX300 | GaiaDR3, Müller2020': {
+    '(55636) 2002 TX300 | GaiaDR3, Ortiz2019': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         nm: [418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990],
         br: [
@@ -2788,7 +2788,7 @@
             6.940003e-02, 6.797095e-02, 6.859302e-02, 7.037257e-02, 7.300120e-02, 7.832822e-02,
             1.031774e-01, 1.695214e-01
         ],
-        geometric_albedo: ['Generic_Bessell.V', [0.760, +0.180, -0.450]],
+        geometric_albedo: ['Generic_Bessell.V', [0.65, 0.15]],
     },
     'Lellouch2017': [
         'The thermal emission of Centaurs and trans-Neptunian objects at millimeter wavelengths from ALMA observations',
