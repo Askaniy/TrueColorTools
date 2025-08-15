@@ -88,7 +88,7 @@
         'DOI: 10.3847/1538-3881/ad58d5', 'https://iopscience.iop.org/article/10.3847/1538-3881/ad58d5',
         'https://ui.adsabs.harvard.edu/abs/2024AJ....168...88Z/abstract'
     ],
-    'Galactic Cirri | Zhao2024': {
+    'Galactic cirri | Zhao2024': {
         tags: ['DSO/interstellar dust'],
         photometric_system: 'BOK_BASS',
         filters: ['g', 'r'],
