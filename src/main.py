@@ -99,7 +99,7 @@ def launch_window(lang: str):
         return fig, fig_canvas_agg
 
     # List of events that cause color recalculation
-    tab1_triggers = ('-gamma-', '-srgb-', '-brMax-', '-brMode1-', '-brMode2-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_tag_filter')
+    tab1_triggers = ('-gamma-', '-srgb-', '-brMax-', '-brMode1-', '-brMode2-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load')
     tab3_triggers = ('-gamma-', '-srgb-', '-brMax-', '-bitness-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3', 'tab3_slider4')
 
     # Window events loop
@@ -154,12 +154,13 @@ def launch_window(lang: str):
                     if tab1_obj_name:
                         window['tab1_title2'].update(tab1_obj_name.indexed_name(lang))
                     tab1_displayed_namesDB = db.obj_names_dict(objectsDB, values['tab1_tag_filter'], values['tab1_searched'], lang)
+                    tab1_displayed_names_tuple = tuple(tab1_displayed_namesDB.keys())
                     if tab1_obj_name and values['tab1_searched'] == '':
                         # object name could be not on the list during global search (ValueError) or if no object selected (TypeError)
-                        tab1_index = tuple(tab1_displayed_namesDB.keys()).index(tab1_obj_name(lang))
-                        window['tab1_list'].update(tuple(tab1_displayed_namesDB.keys()), set_to_index=tab1_index, scroll_to_index=tab1_index)
+                        tab1_index = tab1_displayed_names_tuple.index(tab1_obj_name(lang))
+                        window['tab1_list'].update(tab1_displayed_names_tuple, set_to_index=tab1_index, scroll_to_index=tab1_index)
                     else:
-                        window['tab1_list'].update(tuple(tab1_displayed_namesDB.keys()))
+                        window['tab1_list'].update(tab1_displayed_names_tuple)
                 case 'tab3':
                     if tab3_obj_name:
                         window['tab3_title2'].update(tab3_obj_name.indexed_name(lang))
@@ -223,8 +224,8 @@ def launch_window(lang: str):
             if values['-currentTab-'] == 'tab1':
 
                 if event == 'tab1_(re)load':
-                    # Loading of the spectra database
 
+                    # Loading of the spectra database
                     objectsDB, refsDB = db.import_DBs(database_folders)
                     tagsDB = db.tag_list(objectsDB)
                     for l in tr.langs.values():
@@ -232,25 +233,34 @@ def launch_window(lang: str):
 
                     if not tab1_loaded:
                         # Setting the default tag on the first loading
-                        tab1_loaded = True
                         tab1_tag = default_tag
                         window['tab1_(re)load'].update(tr.gui_reload[lang])
                     else:
-                        tab1_tag = values['tab1_tag_filter']
                         # Handle tha case of a non-existing tag after reloading
+                        tab1_tag = values['tab1_tag_filter']
                         if tab1_tag not in tagsDB:
                             tab1_tag = default_tag
 
                     window['tab1_tag_filter'].update(tab1_tag, values=tagsDB)
                     tab1_displayed_namesDB = db.obj_names_dict(objectsDB, tab1_tag, values['tab1_searched'], lang)
-                    window['tab1_list'].update(values=tuple(tab1_displayed_namesDB.keys()))
+                    tab1_displayed_names_tuple = tuple(tab1_displayed_namesDB.keys())
+                    if tab1_loaded and tab1_obj_name and tab1_obj_name(lang) in tab1_displayed_names_tuple:
+                        tab1_index = tab1_displayed_names_tuple.index(tab1_obj_name(lang))
+                        window['tab1_list'].update(values=tab1_displayed_names_tuple, set_to_index=tab1_index, scroll_to_index=tab1_index)
+                    else:
+                        window['tab1_list'].update(values=tab1_displayed_names_tuple)
 
-                elif event in tab1_triggers and values['tab1_list'] != []:
+                    tab1_loaded = True
+
+                if event in tab1_triggers and values['tab1_list'] != []:
 
                     # for green Dinkinesh Easter egg
                     last_click_was_Dinkinesh = event == 'tab1_list' and tab1_spectrum is not None and tab1_spectrum.name.name() == 'Dinkinesh'
 
-                    tab1_obj_name = namesDB[lang][values['tab1_list'][0]]
+                    try:
+                        tab1_obj_name = namesDB[lang][values['tab1_list'][0]]
+                    except KeyError:
+                        continue
                     window['tab1_title2'].update(tab1_obj_name.indexed_name(lang))
 
                     # Spectral data import and processing
@@ -285,7 +295,6 @@ def launch_window(lang: str):
                         window['tab1_convolved'].update(sigfig_round(tab1_value, rounding, warn=False))
                     else:
                         window['tab1_convolved'].update(sigfig_round(tab1_value, uncertainty=tab1_sd, warn=False))
-
 
                     # Green Dinkinesh Easter egg (added by request)
                     # There was a bug in TCT v3.3 caused by upper limit of uint16 when squaring nm for AB calibration

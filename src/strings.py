@@ -1087,7 +1087,7 @@ names = {
     'Spiral galaxies': {'ru': 'Спиральные галактики', 'de': 'Spiralgalaxien'},
     'Starburst galaxies with': {'ru': 'Галактики со вспышкой зв. образ.', 'de': 'Sternburstgalaxien mit'}, # "with 0.39 < E(B-V) < 0.50" for example
     'Quasars': {'ru': 'Квазары', 'de': 'Quasare'},
-    'Galactic Cirri': {'ru': 'Галактические циррусы', 'de': 'Galaktische Cirri'},
+    'Galactic cirri': {'ru': 'Галактические циррусы', 'de': 'Galaktische Cirri'},
     'Nebula of IRC +10216': {'ru': 'Небула IRC +10216', 'de': 'Nebel von IRC +10216'},
     # Others
     'Equal-energy spectrum': {'ru': 'Плоский спектр', 'de': 'Homogenes Energiespektrum'}
