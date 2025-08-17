@@ -227,6 +227,11 @@
         'DOI: 10.1023/B:MOON.0000031943.12968.46', 'https://link.springer.com/article/10.1023/B:MOON.0000031943.12968.46',
         'https://ui.adsabs.harvard.edu/abs/2003EM%26P...92..207S/abstract'
     ],
+    'Tegler2003': [
+        'Color Patterns in the Kuiper Belt: A Possible Primordial Origin',
+        'DOI: 10.1086/381076', 'https://iopscience.iop.org/article/10.1086/381076',
+        'https://ui.adsabs.harvard.edu/abs/2003ApJ...599L..49T'
+    ],
     'Lamy2004': [
         'The Sizes, Shapes, Albedos, and Colors of Cometary Nuclei',
         'https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=753360bc3977a259d7dfc3362bb7a6354b1988ff',
@@ -2011,13 +2016,12 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
-    '(19308) 1996 TO66 | MBOSS, SsODNet': {
+    '(19308) 1996 TO66 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.671, 0.057], 'V-R': [0.389, 0.043], 'R-I': [0.356, 0.053]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.4771, +0.2019, -0.2951]],
     },
     '(19521) Chaos | MBOSS, Vilenius2012': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
@@ -2196,18 +2200,22 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.082, 0.010]],
     },
-    '(24835) 1995 SM55 | MBOSS, SsODNet': {
+    'Ortiz2025': [
+        'Geometric Albedo, Size and Projected Shape of the Haumea Cluster Member (24835) 1995 SM55 from a Stellar Occultation and Photometric Observations',
+        'https://spainportugal-eps.org/images/cpess-8/20250310194059_cpess-8-ortiz.pdf', 'https://ui.adsabs.harvard.edu/abs/2025psss.confE..88O/abstract'
+    ],
+    '(24835) 1995 SM55 | MBOSS, Ortiz2025': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.652, 0.032], 'V-R': [0.357, 0.043], 'R-I': [0.356, 0.052]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.4396, +0.1863, -0.2714]],
+        geometric_albedo: ['Generic_Bessell.V', [0.67, 0.12]],
     },
-    '(24835) 1995 SM55 | PinillaAlonso2008, SsODNet': {
+    '(24835) 1995 SM55 | PinillaAlonso2008, Ortiz2025': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         slope: {start: 520, stop: 860, percent_per_100nm: [-0.9, 2.0]},
-        geometric_albedo: ['Generic_Bessell.V', [0.4396, +0.1863, -0.2714]],
+        geometric_albedo: ['Generic_Bessell.V', [0.67, 0.12]],
     },
     '(24952) 1997 QJ4 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -3262,13 +3270,12 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
-    '(86047) 1999 OY3 | MBOSS, SsODNet': {
+    '(86047) 1999 OY3 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.726, 0.037], 'V-R': [0.345, 0.046], 'R-I': [0.277, 0.076]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.6738, +0.3457, -0.5273]],
     },
     '(86177) 1999 RY215 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
@@ -4182,14 +4189,19 @@
         geometric_albedo: ['Generic_Bessell.V', [0.76, 0.15]],
         phase_integral: [0.44, 0.03], // system
     },
-    '(136108 II) Namaka | Brown2010, Verbiscer2022': {
+    'Müller2019': [
+        'Haumea’s thermal emission revisited in the light of the occultation results',
+        'DOI: 10.1016/j.icarus.2018.11.011', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103518304159',
+        'https://ui.adsabs.harvard.edu/abs/2019Icar..334...39M/abstract'
+    ],
+    '(136108 II) Namaka | Brown2010, Müller2019, Verbiscer2022': {
         tags: ['Solar System/Haumean system', 'minor body/TNO/classical TNO', 'natural satellite'],
         photometric_system: 'HST_WFPC2-PC',
         color_indices: {'F606W-F814W': [0.43, 0.47]}, // extracted from Fig. 2, uncertainty may be incorrect
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.75, 0.02]], // system albedo
-        spherical_albedo: ['Generic_Bessell.V', [0.33, 0.03]], // system albedo
+        geometric_albedo: ['Generic_Bessell.V', 0.72], // for D = 150 ±50 km and Hv = ~5.1
+        phase_integral: [0.44, 0.03], // system
     },
     '(136120) 2003 LG7 | Sheppard2012': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
@@ -5091,13 +5103,12 @@
         'DOI: 10.1088/0004-637X/730/2/105', 'https://iopscience.iop.org/article/10.1088/0004-637X/730/2/105',
         'https://ui.adsabs.harvard.edu/abs/2011ApJ...730..105T/abstract'
     ],
-    '(386723) 2009 YE7 | Trujillo2011, SsODNet': {
+    '(386723) 2009 YE7 | Trujillo2011': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': [1.03, 0.04], 'V-R': [0.38, 0.04], 'R-I': [0.51, 0.05]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.5045, +0.2013, -0.2418]],
     },
     '(416400) 2003 UZ117 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
@@ -5403,13 +5414,13 @@
         is_reflecting_sunlight: true,
         // phase_function: ['phase coefficient', {beta: [0.30, 0.12]}],
     },
-    '(471143) Dziewanna | SsODNet': {
+    '(471143) Dziewanna | SsODNet, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/TNO/resonant TNO'],
         photometric_system: 'SkyMapper_SkyMapper',
         color_indices: {'g-r': [0.4635, 0.0232]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.1918, +0.0454, -0.0363]],
+        geometric_albedo: ['Generic_Bessell.V', [0.297, +0.113, -0.078]],
     },
     '(471339) 2011 ON45 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -5960,6 +5971,20 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true
     },
+    '(612147) 2000 CF105 | Tegler2003': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-R': [1.75, 0.08]}, // mean
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
+    'Satellite of 2000 CF105 | Tegler2003': { // undesignated
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-R': [1.76, 0.15]}, // mean
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
     '(612148) 2000 CG105 | Trujillo2002': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
@@ -6097,13 +6122,12 @@
         'DOI: 10.1093/mnras/stt2180', 'https://academic.oup.com/mnras/article/437/4/3824/1010540',
         'https://ui.adsabs.harvard.edu/abs/2014MNRAS.437.3824L/abstract'
     ],
-    '(612620) 2003 SQ317 | Lacerda2014, SsODNet': {
+    '(612620) 2003 SQ317 | Lacerda2014': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': [1.05, 0.18]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.3914, +0.1753, -0.2048]],
         // phase_function: ['phase coefficient', {beta: [0.95, 0.41]}],
     },
     '(612793)  2004 PW107 | Sheppard2012': {
@@ -6513,6 +6537,13 @@
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.060, 0.040], 'V-R': [0.710, 0.020]},
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
+    '2000 FZ53 | Tegler2003': {
+        tags: ['Solar System', 'minor body/centaur'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.61, 0.03], 'V-R': [0.56, 0.04]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
