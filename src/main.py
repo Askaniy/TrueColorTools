@@ -28,6 +28,7 @@ def launch_window(lang: str):
     default_tag = 'featured'
     default_color_space = 'sRGB'
     default_white_point = 'Illuminant E'
+    color_system = ColorSystem(default_color_space, default_white_point)
     default_gamma_correction = True
     brMax = False # albedo/chromaticity mode switcher
     brGeom = True # default albedo type (True==geometrical, False==spherical)
@@ -90,7 +91,7 @@ def launch_window(lang: str):
     tab1_obj_name = tab1_spectrum = tab3_obj_name = tab3_spectrum = None
     tab1_albedo_note = tr.gui_blank_note
 
-    def tab1_tab3_update_plot(fig, fig_canvas_agg, current_tab, gamma: bool, srgb: bool, albedo: bool, light_theme: bool, lang: str):
+    def tab1_tab3_update_plot(fig, fig_canvas_agg, current_tab, color_system: ColorSystem, gamma: bool, albedo: bool, light_theme: bool, lang: str):
         pl.close_figure(fig)
         fig_canvas_agg.get_tk_widget().forget()
         to_plot = deepcopy(plot_data)
@@ -103,8 +104,8 @@ def launch_window(lang: str):
         return fig, fig_canvas_agg
 
     # List of events that cause color recalculation
-    tab1_triggers = ('-gamma-', '-srgb-', '-brMax-', '-brMode1-', '-brMode2-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load')
-    tab3_triggers = ('-gamma-', '-srgb-', '-brMax-', '-bitness-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3', 'tab3_slider4')
+    tab1_triggers = ('-gamma-', '-ColorSpace-', '-WhitePoint-', '-brMax-', '-brMode1-', '-brMode2-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load')
+    tab3_triggers = ('-gamma-', '-ColorSpace-', '-WhitePoint-', '-bitness-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3', 'tab3_slider4')
 
     # Window events loop
     while True:
@@ -133,7 +134,7 @@ def launch_window(lang: str):
                 to_plot.append(tab1_spectrum)
             if tab3_obj_name and tab3_spectrum not in to_plot:
                 to_plot.append(tab3_spectrum)
-            tab1_tab3_fig = pl.plot_spectra(to_plot, values['-gamma-'], values['-srgb-'], values['-brMax-'],
+            tab1_tab3_fig = pl.plot_spectra(to_plot, color_system, values['-gamma-'], values['-brMax-'],
                                         light_theme, lang, spectra_figsize, spectra_dpi)
             tab1_tab3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, tab1_tab3_fig)
         elif event == 'W1_path':
@@ -143,8 +144,8 @@ def launch_window(lang: str):
             tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                 tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                 window0.ReturnValuesDictionary['-currentTab-'],
+                color_system,
                 window0.ReturnValuesDictionary['-gamma-'],
-                window0.ReturnValuesDictionary['-srgb-'],
                 window0.ReturnValuesDictionary['-brMax-'],
                 light_theme, lang
             )
@@ -173,8 +174,8 @@ def launch_window(lang: str):
                 tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                     tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                     window0.ReturnValuesDictionary['-currentTab-'],
+                    color_system,
                     window0.ReturnValuesDictionary['-gamma-'],
-                    window0.ReturnValuesDictionary['-srgb-'],
                     window0.ReturnValuesDictionary['-brMax-'],
                     light_theme, lang
                 )
@@ -311,8 +312,8 @@ def launch_window(lang: str):
                         tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                             window0.ReturnValuesDictionary['-currentTab-'],
+                            color_system,
                             window0.ReturnValuesDictionary['-gamma-'],
-                            window0.ReturnValuesDictionary['-srgb-'],
                             window0.ReturnValuesDictionary['-brMax-'],
                             light_theme, lang
                         )
@@ -331,8 +332,8 @@ def launch_window(lang: str):
                         tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                             window0.ReturnValuesDictionary['-currentTab-'],
+                            color_system,
                             window0.ReturnValuesDictionary['-gamma-'],
-                            window0.ReturnValuesDictionary['-srgb-'],
                             window0.ReturnValuesDictionary['-brMax-'],
                             light_theme, lang
                         )
@@ -370,8 +371,8 @@ def launch_window(lang: str):
                         sg.popup(tr.gui_no_data_message[lang], title=tr.gui_output[lang], icon=icon, non_blocking=True)
                     else:
                         generate_table(
-                            objectsDB, values['tab1_tag_filter'], values['-brMax-'], values['-brMode1-'],
-                            values['-srgb-'], values['-gamma-'], values['tab1_folder'], 'png', lang
+                            objectsDB, values['tab1_tag_filter'], color_system, values['-gamma-'],
+                            values['-brMax-'], values['-brMode1-'], values['tab1_folder'], 'png', lang
                         )
 
             # ------------ Events in the tab "Image processing" ------------
@@ -430,8 +431,8 @@ def launch_window(lang: str):
                             files=tab2_files,
                             filters=tab2_filters,
                             formulas=tab2_formulas,
+                            color_system=color_system,
                             gamma_correction=values['-gamma-'],
-                            srgb=values['-srgb-'],
                             maximize_brightness=values['-brMax-'],
                             desun=values['tab2_desun'],
                             photons=values['tab2_photons'],
@@ -450,15 +451,15 @@ def launch_window(lang: str):
                         window['tab2_image'].update(data=ip.convert_to_bytes(values[event]))
 
                 # Updating filters profile plot
-                if (isinstance(event, str) and event.startswith('tab2_filter')) or (event[0] == 'tab2_thread' and values[event] is not None) or event in ('-currentTab-', '-srgb-'):
+                if (isinstance(event, str) and event.startswith('tab2_filter')) or (event[0] == 'tab2_thread' and values[event] is not None) or event in ('-currentTab-', '-ColorSpace-', '-WhitePoint-'):
                     try:
                         pl.close_figure(tab2_fig)
                         tab2_to_plot = [*tab2_filters, *mean_spectrum]
-                        tab2_fig = pl.plot_filters(tab2_to_plot, values['-srgb-'], lang, filters_figsize, filters_dpi)
+                        tab2_fig = pl.plot_filters(tab2_to_plot, color_system, lang, filters_figsize, filters_dpi)
                         tab2_fig_canvas_agg.get_tk_widget().forget()
                         tab2_fig_canvas_agg = pl.draw_figure(window['tab2_canvas'].TKCanvas, tab2_fig)
                     except UnboundLocalError: # means it's the first tab opening
-                        tab2_fig = pl.plot_filters((), values['-srgb-'], lang, filters_figsize, filters_dpi)
+                        tab2_fig = pl.plot_filters((), color_system, lang, filters_figsize, filters_dpi)
                         tab2_fig_canvas_agg = pl.draw_figure(window['tab2_canvas'].TKCanvas, tab2_fig)
 
 
@@ -497,8 +498,8 @@ def launch_window(lang: str):
                         tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                             window0.ReturnValuesDictionary['-currentTab-'],
+                            color_system,
                             window0.ReturnValuesDictionary['-gamma-'],
-                            window0.ReturnValuesDictionary['-srgb-'],
                             window0.ReturnValuesDictionary['-brMax-'],
                             light_theme, lang
                         )
@@ -516,8 +517,8 @@ def launch_window(lang: str):
                         tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                             window0.ReturnValuesDictionary['-currentTab-'],
+                            color_system,
                             window0.ReturnValuesDictionary['-gamma-'],
-                            window0.ReturnValuesDictionary['-srgb-'],
                             window0.ReturnValuesDictionary['-brMax-'],
                             light_theme, lang
                         )

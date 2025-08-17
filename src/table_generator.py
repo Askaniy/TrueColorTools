@@ -9,7 +9,7 @@ import src.database as db
 import src.strings as tr
 
 
-def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: bool, gamma: bool, folder: str, extension: str, lang: str):
+def generate_table(objectsDB: dict, tag: str, color_system: ColorSystem, gamma: bool, brMax: bool, brGeom: bool, folder: str, extension: str, lang: str):
     """ Creates and saves a table of colored squares for each spectral data unit that has the specified tag """
     displayed_namesDB = db.obj_names_list(objectsDB, tag)
     l = len(displayed_namesDB)
@@ -110,7 +110,7 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
     )
     text_colors = (
         (0, 0, 0),
-        (255, 255, 255) 
+        (255, 255, 255)
     )
     is_white_text = np.empty(l, dtype='bool')
     object_notes = []
@@ -120,7 +120,7 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
         # Spectral data import and processing
         body = database_parser(obj_name, objectsDB[obj_name])
         spectrum, estimated = body.get_spectrum('geometric' if brGeom else 'spherical')
-        
+
         # Color calculation
         maximize_br = brMax or estimated is None
         color = ColorPoint.from_spectral_data(spectrum, maximize_br, srgb)
@@ -176,14 +176,14 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
                 xy=(w0 + w_notes * (note_num // notes_per_column), h2 + note_step * (note_num % notes_per_column)),
                 text=note_text, fill=(186, 186, 186), font=note_font, anchor='la'
             )
-    
+
     # Info writing
     draw.text((w1, h1), tr.info_label[lang], fill=(230, 230, 230), font=help_font, anchor='la') # x = 0.8, br = 230
     for info_num, (info_text, info_color) in enumerate(zip(info_list, info_colors)):
         draw.text(
             xy=(w1, h2+note_step*info_num), text=info_text, fill=info_color, font=note_font, anchor='la'
         )
-    
+
     # Labeling the template
     for n, obj_name in enumerate(displayed_namesDB):
         center_x = centers_x[n]
@@ -193,7 +193,7 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
 
         if (object_note := object_notes[n]) is not None:
             draw.text((center_x+r_active, center_y+r_active), object_note, text_color, small_font, anchor='rs', align='right')
-        
+
         name = obj_name.name(lang)
 
         workaround_shift = 3
@@ -206,7 +206,7 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
             if ',' in ref:
                 # checking multiple references, no more than 3 are supported!
                 refs = [check_ref(i, small_font, ref_maxW) for i in ref.split(',', 2)]
-                ref = '\n'.join(refs) 
+                ref = '\n'.join(refs)
                 ref_len = width(refs[0], small_font)
             elif len(ref) > 4 and (year := ref[-4:]).isnumeric() and (ref[-5].isalpha() or ref[-5] in separators) and (author_len := width(author := check_ref(ref[:-4], small_font, ref_maxW), small_font)) > width(year, small_font):
                 # checking for a year in the reference name to print it on the second line
@@ -216,7 +216,7 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
                 ref = check_ref(ref, small_font, ref_maxW)
                 ref_len = width(ref, small_font)
             draw.multiline_text((center_x+r_active, center_y-r_active-workaround_shift), ref, fill=text_color, font=small_font, anchor='ra', align='right', spacing=0)
-        
+
         if obj_name.index or obj_name.info:
             index = '\n'.join(filter(None, (obj_name.index, obj_name.info(lang))))
             if '+' in index:
@@ -229,7 +229,7 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
                     # the case of wide reference name (on the first line)
                     index = '\n' + '\n'.join(line_splitter(index, small_font, r_active))
             draw.multiline_text((center_x-r_active, center_y-r_active-workaround_shift), f'{index}', fill=text_color, font=small_font, anchor='la', align='left', spacing=0)
-        
+
         if notes_flag and (note := obj_name.note(lang)):
             name += aux.superscript(notes.index(note) + 1)
 
@@ -242,7 +242,7 @@ def generate_table(objectsDB: dict, tag: str, brMax: bool, brGeom: bool, srgb: b
             case _:
                 shift = object_size
         draw.multiline_text((center_x-r_active, center_y-shift), '\n'.join(splitted), fill=text_color, font=object_font, spacing=1)
-    
+
     file_name = f'TCT_{strftime("%Y-%m-%d_%H-%M-%S")}_{aux.normalize_string(tag)}.{extension}'
     img.save(f'{folder}/{file_name}')
     print(f'Color table saved as {file_name}')

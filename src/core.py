@@ -1814,8 +1814,13 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
 # Values are Color Primaries: (red, green, blue)
 # See https://en.wikipedia.org/wiki/RGB_color_spaces
 supported_color_spaces = {
-    'sRGB': ((0.64, 0.33), (0.30, 0.60), (0.15, 0.06)),
+    'CIE XYZ': ((1, 0), (0, 1), (0, 0)),
     'CIE RGB': ((0.73474284, 0.26525716), (0.27377903, 0.7174777), (0.16655563, 0.00891073)),
+    'sRGB': ((0.64, 0.33), (0.30, 0.60), (0.15, 0.06)),
+    'Display P3': ((0.68, 0.32), (0.265, 0.69), (0.15, 0.06)),
+    'Adobe RGB': ((0.64, 0.33), (0.21, 0.71), (0.15, 0.06)),
+    'HDTV': ((0.67, 0.33), (0.21, 0.71), (0.15, 0.06)),
+    'UHDTV': ((0.708, 0.292), (0.170, 0.797), (0.13, 0.046)),
 }
 
 # Values are (x, y) coordinates
@@ -1834,31 +1839,31 @@ supported_white_points = {
 
 
 class ColorSystem:
+    """
+    Class for storing parameters of color space with white point
+    and building the CIE XYZ to RGB transformation matrix.
+    """
 
-    def __init__(self, red: Sequence, green: Sequence, blue: Sequence, white: Sequence):
+    def __init__(self, color_space: str, white_point: str):
         """
         Initialise the ColorSystem object.
-        The implementation is based on https://scipython.com/blog/converting-a-spectrum-to-a-colour/
-        Defining the color system requires four 2d vectors (primary illuminants and the "white point")
+        The color space and white point must be among the supported options.
+        The implementation is a revised version of
+        https://scipython.com/blog/converting-a-spectrum-to-a-colour/
         """
-        self.red, self.green, self.blue, self.white = map(self.xy2xyz, [red, green, blue, white]) # chromaticities
-        self.M = np.vstack((self.red, self.green, self.blue)).T # the chromaticity matrix (rgb -> xyz) and its inverse
-        self.MI = np.linalg.inv(self.M) # white scaling array
-        self.wscale = self.MI.dot(self.white) # xyz -> rgb transformation matrix
-        self.T = self.MI / self.wscale[:, np.newaxis]
+        # Reading color space coordinates
+        self.color_space = np.array(supported_color_spaces[color_space]).T
+        # Converting reduced (x, y) coordinates back to (x, y, z=1-x-y)
+        self.color_space =  np.vstack((self.color_space, 1 - self.color_space.sum(axis=0)))
+        # Calculate the inverse chromaticity matrix
+        inv_matrix = np.linalg.inv(self.color_space)
+        # White scaling array
+        self.white_point = supported_white_points[white_point]
+        self.white_point = np.array((*self.white_point, 1 - np.sum(self.white_point)))
+        white_scale = inv_matrix.dot(self.white_point)
+        # XYZ -> RGB transformation matrix
+        self.matrix = inv_matrix / white_scale[:, np.newaxis]
 
-    @staticmethod
-    def xy2xyz(xy):
-        return np.array((xy[0], xy[1], 1-xy[0]-xy[0])) # (x, y, 1-x-y)
-
-# Used white points
-illuminant_E = (1/3, 1/3)
-#illuminant_D65 = (0.3127, 0.3291)
-
-# Used color systems
-srgb_system = ColorSystem((0.64, 0.33), (0.30, 0.60), (0.15, 0.06), illuminant_E)
-#hdtv_system = ColorSystem((0.67, 0.33), (0.21, 0.71), (0.15, 0.06), illuminant_D65)
-#smpte_system = ColorSystem((0.63, 0.34), (0.31, 0.595), (0.155, 0.070), illuminant_D65)
 
 # Stiles & Burch (1959) 2-deg color matching data, direct experimental data
 # http://www.cvrl.org/stilesburch2_ind.htm

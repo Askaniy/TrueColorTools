@@ -6,7 +6,7 @@ from matplotlib import rc_context
 import matplotlib.pyplot as plt
 
 from src.core import *
-from src.core import _TrueColorToolsObject
+from src.core import _TrueColorToolsObject, ColorSystem
 import src.strings as tr
 import src.gui as gui
 
@@ -47,7 +47,7 @@ def draw_figure(canvas, figure: Figure):
 
 
 def plot_spectra(
-        spectra: Sequence[_TrueColorToolsObject], gamma: bool, srgb: bool, albedo: bool,
+        spectra: Sequence[_TrueColorToolsObject], color_system: ColorSystem, gamma: bool, albedo: bool,
         light_theme: bool, lang: str, figsize: tuple, dpi: int
     ):
     """ Creates a figure with plotted spectra from the input list and the CMFs used """
@@ -89,7 +89,7 @@ def plot_spectra(
         fig.tight_layout() # moving to subplots() causes UserWarning
         return fig
 
-def plot_filters(filters: Sequence[Spectrum], srgb: bool, lang: str, figsize: tuple, dpi: int):
+def plot_filters(filters: Sequence[Spectrum], color_system: ColorSystem, lang: str, figsize: tuple, dpi: int):
     """ Creates a figure with plotted sensitive curves and the CMFs used """
     fig, ax = plt.subplots(1, 1, figsize=figsize, dpi=dpi)
     ax.set_xlabel(tr.xaxis_text[lang])
