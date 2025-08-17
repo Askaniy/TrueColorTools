@@ -1810,7 +1810,28 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
 
 
 # ------------ Color Processing Section ------------
-# Needs improvement, see https://github.com/Askaniy/TrueColorTools/issues/22
+
+# Values are Color Primaries: (red, green, blue)
+# See https://en.wikipedia.org/wiki/RGB_color_spaces
+supported_color_spaces = {
+    'sRGB': ((0.64, 0.33), (0.30, 0.60), (0.15, 0.06)),
+    'CIE RGB': ((0.73474284, 0.26525716), (0.27377903, 0.7174777), (0.16655563, 0.00891073)),
+}
+
+# Values are (x, y) coordinates
+# https://en.wikipedia.org/wiki/Standard_illuminant#White_points_of_standard_illuminants
+supported_white_points = {
+    'Illuminant A': (0.44758, 0.40745),
+    'Illuminant B': (0.34842, 0.35161),
+    'Illuminant C': (0.31006, 0.31616),
+    'Illuminant D50': (0.34567, 0.35850),
+    'Illuminant D55': (0.33242, 0.34743),
+    'Illuminant D65': (0.31272, 0.32903),
+    'Illuminant D75': (0.29902, 0.31485),
+    'Illuminant D93': (0.28315, 0.29711),
+    'Illuminant E': (1/3, 1/3),
+}
+
 
 class ColorSystem:
 

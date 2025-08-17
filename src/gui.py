@@ -6,6 +6,7 @@ import platform
 import FreeSimpleGUI as sg
 
 import src.strings as tr
+from src.core import supported_color_spaces, supported_white_points
 
 
 # TCT style colors
@@ -67,7 +68,9 @@ def generate_layout(
         img_preview_size: tuple,
         text_colors: tuple,
         filtersDB: tuple,
-        srgb: bool,
+        color_space: str,
+        white_point: str,
+        gamma: bool,
         brMax: bool,
         brGeom: bool,
         bitness: int,
@@ -85,22 +88,42 @@ def generate_layout(
         [sg.T()],
         [sg.Push(), sg.Text(tr.gui_settings[lang], font=title_font, key='-settingsTitle-'), sg.Push()],
         [sg.T()],
-        [sg.Checkbox(tr.gui_gamma[lang], enable_events=True, default=True, key='-gamma-', tooltip=tr.gui_gamma_note[lang])],
-        [sg.Checkbox('sRGB', enable_events=True, default=srgb, key='-srgb-', tooltip=tr.gui_srgb_note[lang])],
+        [sg.Text('Color space', key='-ColorSpaceText-', tooltip=tr.gui_color_space_tooltip[lang])],
+        [
+            sg.Combo(
+                tuple(supported_color_spaces.keys()), default_value=color_space, readonly=True,
+                expand_x=True, enable_events=True, key='-ColorSpace-', tooltip=tr.gui_color_space_tooltip[lang]
+            )
+        ],
+        [sg.Text('White point', key='-WhitePointText-', tooltip=tr.gui_white_point_tooltip[lang])],
+        [
+            sg.Combo(
+                tuple(supported_white_points.keys()), default_value=white_point, readonly=True,
+                expand_x=True, enable_events=True, key='-WhitePoint-', tooltip=tr.gui_white_point_tooltip[lang]
+            )
+        ],
+        [sg.T()],
+        [sg.Checkbox(tr.gui_gamma[lang], default=gamma, enable_events=True, key='-gamma-', tooltip=tr.gui_gamma_tooltip[lang])],
         [sg.T()],
         [sg.Text(tr.gui_brMode[lang], key='-brModeText-')],
         [sg.Checkbox(tr.gui_brMax[lang], enable_events=True, default=brMax, key='-brMax-')],
-        [sg.Radio(tr.gui_geom[lang], 'brRadio', enable_events=True, default=brGeom, key='-brMode1-', tooltip=tr.gui_geom_note[lang])],
-        [sg.Radio(tr.gui_sphe[lang], 'brRadio', enable_events=True, default=not brGeom, key='-brMode2-', tooltip=tr.gui_sphe_note[lang])],
+        [sg.Radio(tr.gui_geom[lang], 'brRadio', enable_events=True, default=brGeom, key='-brMode1-', tooltip=tr.gui_geom_tooltip[lang])],
+        [sg.Radio(tr.gui_sphe[lang], 'brRadio', enable_events=True, default=not brGeom, key='-brMode2-', tooltip=tr.gui_sphe_tooltip[lang])],
         [sg.T()],
         [sg.Text(tr.gui_formatting[lang], key='-formattingText-')],
         [
             sg.Text(tr.gui_bit[lang], key='-bitnessText-'),
-            sg.InputText(bitness, size=1, disabled_readonly_background_color=inputOFF_color, expand_x=True, enable_events=True, key='-bitness-'),
+            sg.InputText(
+                str(bitness), size=1, disabled_readonly_background_color=inputOFF_color,
+                expand_x=True, enable_events=True, key='-bitness-'
+            ),
         ],
         [
             sg.Text(tr.gui_rnd[lang], key='-roundingText-'),
-            sg.InputText(rounding, size=1, disabled_readonly_background_color=inputOFF_color, expand_x=True, enable_events=True, key='-rounding-'),
+            sg.InputText(
+                str(rounding), size=1, disabled_readonly_background_color=inputOFF_color,
+                expand_x=True, enable_events=True, key='-rounding-'
+            ),
         ],
     ])
 
@@ -108,7 +131,7 @@ def generate_layout(
         #[sg.Push(), sg.Text(tr.gui_database[lang], font=title_font, key='tab1_title1'), sg.Push()],,
         [
             sg.Text(tr.gui_tag_filter[lang], key='tab1_tag_filterN'),
-            sg.InputCombo([], default_value='', size=tags_input_size, expand_x=True, enable_events=True, key='tab1_tag_filter'),
+            sg.Combo([], default_value='', size=tags_input_size, readonly=True, expand_x=True, enable_events=True, key='tab1_tag_filter'),
         ],
         [
             sg.Text(tr.gui_search[lang], key='tab1_searchN'),
@@ -163,7 +186,7 @@ def generate_layout(
                 sg.InputCombo(('', *filtersDB), enable_events=True, expand_x=True, key='tab2_filter'+n)
             ],
             [
-                sg.Text(tr.gui_evaluate[lang], key='tab2_evalText'+n, tooltip=tr.gui_evaluate_note[lang]),
+                sg.Text(tr.gui_evaluate[lang], key='tab2_evalText'+n, tooltip=tr.gui_evaluate_tooltip[lang]),
                 sg.Input('x', size=1, key='tab2_eval'+n, expand_x=True)
             ],
         ]
@@ -188,13 +211,13 @@ def generate_layout(
         [sg.Column(tab2_frames, scrollable=True, vertical_scroll_only=True, key='tab2_frames', expand_x=True, expand_y=True)],
     ]
     tab2_col2_1 = [
-        [sg.Checkbox(tr.gui_desun[lang], key='tab2_desun', tooltip=tr.gui_desun_note[lang])],
-        [sg.Checkbox(tr.gui_photons[lang], key='tab2_photons', tooltip=tr.gui_photons_note[lang])],
+        [sg.Checkbox(tr.gui_desun[lang], key='tab2_desun', tooltip=tr.gui_desun_tooltip[lang])],
+        [sg.Checkbox(tr.gui_photons[lang], key='tab2_photons', tooltip=tr.gui_photons_tooltip[lang])],
         #[sg.Checkbox(tr.gui_autoalign[lang], key='tab2_autoalign')],
     ]
     tab2_col2_2 = [
-        [sg.Text(tr.gui_factor[lang], key='tab2_factorText', tooltip=tr.gui_factor_note[lang]), sg.Input('1', size=1, key='tab2_factor', expand_x=True)],
-        [sg.Checkbox(tr.gui_upscale[lang], default=False, key='tab2_upscale', tooltip=tr.gui_upscale_note[lang])],
+        [sg.Text(tr.gui_factor[lang], key='tab2_factorText', tooltip=tr.gui_factor_tooltip[lang]), sg.Input('1', size=1, key='tab2_factor', expand_x=True)],
+        [sg.Checkbox(tr.gui_upscale[lang], default=False, key='tab2_upscale', tooltip=tr.gui_upscale_tooltip[lang])],
     ]
     tab2_col2 = [
         #[sg.Push(), sg.Text(tr.gui_output[lang], font=title_font, key='tab2_title2'), sg.Push()],
@@ -204,7 +227,7 @@ def generate_layout(
             sg.Column(tab2_col2_2, expand_x=True, expand_y=False)
         ],
         [
-            sg.Text(tr.gui_chunks[lang], key='tab2_chunksText', tooltip=tr.gui_chunks_note[lang]),
+            sg.Text(tr.gui_chunks[lang], key='tab2_chunksText', tooltip=tr.gui_chunks_tooltip[lang]),
             sg.Input('1', size=1, key='tab2_chunks', expand_x=True),
         ],
         [sg.T()],
@@ -333,7 +356,7 @@ def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict,
         window['tab2_pathText'+str(i)].update(tr.gui_browse[lang])
         window['tab2_evalText'+str(i)].update(tr.gui_evaluate[lang])
     window['tab2_desun'].update(text=tr.gui_desun[lang])
-    window['tab2_photons'].update(text=tr.gui_photons[lang]) #, tooltip=tr.gui_photons_note[lang]) # doesn't work
+    window['tab2_photons'].update(text=tr.gui_photons[lang]) #, tooltip=tr.gui_photons_tooltip[lang]) # doesn't work
     #window['tab2_autoalign'].update(text=tr.gui_autoalign[lang])
     #window['tab2_plotpixels'].update(text=tr.gui_plotpixels[lang])
     window['tab2_factorText'].update(tr.gui_factor[lang])

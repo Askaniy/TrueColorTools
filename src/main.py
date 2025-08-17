@@ -26,7 +26,9 @@ def launch_window(lang: str):
 
     # Processing configuration
     default_tag = 'featured'
-    srgb = True   # default color space
+    default_color_space = 'sRGB'
+    default_white_point = 'Illuminant E'
+    default_gamma_correction = True
     brMax = False # albedo/chromaticity mode switcher
     brGeom = True # default albedo type (True==geometrical, False==spherical)
     bitness = 1
@@ -64,7 +66,9 @@ def launch_window(lang: str):
     window0 = sg.Window(
         title=window0_title, size=window0_size, icon=icon, finalize=True, resizable=True, margins=(0, 0),
         layout=gui.generate_layout(
-            circle_size, filters_plot_size, img_preview_size, text_colors, filtersDB, srgb, brMax, brGeom, bitness, rounding, tab2_num, lang
+            circle_size, filters_plot_size, img_preview_size, text_colors, filtersDB,
+            default_color_space, default_white_point, default_gamma_correction,
+            brMax, brGeom, bitness, rounding, tab2_num, lang
         )
     )
     # Creating the plot window stub

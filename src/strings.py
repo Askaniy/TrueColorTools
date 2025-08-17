@@ -50,20 +50,35 @@ gui_settings = {
     'ru': 'Параметры',
     'de': 'Einstellungen'
 }
+gui_color_space = {
+    'en': 'Color space',
+    'ru': 'Цветовое пространство',
+    'de': 'Farbraum'
+}
+gui_color_space_tooltip = {
+    'en': 'Color space defines color range, encodes the technical capabilities of the display',
+    'ru': 'Цветовое пространство определяет диапазон цветов, кодирует технические возможности дисплея',
+    'de': 'Der Farbraum definiert den Farbbereich und kodiert die technischen Möglichkeiten des Bildschirms'
+}
+gui_white_point = {
+    'en': 'White point',
+    'ru': 'Точка белого',
+    'de': 'Weißpunkt'
+}
+gui_white_point_tooltip = {
+    'en': 'White point is a reference white, influencing color balance',
+    'ru': 'Точка белого — эталонный белый цвет, влияющий на цветовой баланс',
+    'de': 'Der Weißpunkt ist das Referenzweiß und beeinflusst den Farbabgleich'
+}
 gui_gamma = {
-    'en': 'gamma correction',
-    'ru': 'гамма-коррекция',
+    'en': 'Gamma correction',
+    'ru': 'Гамма-коррекция',
     'de': 'Gammakorrektur'
 }
-gui_gamma_note = {
-    'en': 'Takes into account the non-linearity of brightness perception of the human eye',
-    'ru': 'Учитывает нелинейность восприятия яркости человеческого глаза',
-    'de': 'Berücksichtigt die Nichtlinearität der Helligkeitswahrnehmung des menschlichen Auges'
-}
-gui_srgb_note = {
-    'en': 'CIE sRGB color space with Illuminant E',
-    'ru': 'Цветовое пространство CIE sRGB с осветителем E',
-    'de': 'CIE sRGB-Farbraum mit Normlicht E'
+gui_gamma_tooltip = {
+    'en': 'Gamma correction models the nonlinearity of the human eye’s perception of luminance',
+    'ru': 'Гамма-коррекция моделирует нелинейность восприятия яркости человеческим глазом',
+    'de': 'Die Gammakorrektur modelliert die Nichtlinearität der Helligkeitswahrnehmung durch das menschliche Auge'
 }
 gui_brMode = {
     'en': 'Brightness mode',
@@ -85,7 +100,7 @@ gui_geom = {
     'ru': 'геом. альбедо',
     'de': 'geometrische Albedo'
 }
-gui_geom_note = {
+gui_geom_tooltip = {
     'en': 'Flux ratio to the Lambertian disk flux with the same cross-sectional area at a phase angle of 0°',
     'ru': 'Отношение потока к потоку ламбертового диска с той же площадью сечения при фазовом угле 0°',
     'de': 'Flussverhältnis zum Lambertschen Strahler mit gleicher Querschnittsfläche bei einem Phasenwinkel von 0°'
@@ -95,7 +110,7 @@ gui_sphe = {
     'ru': 'сфер. альбедо',
     'de': 'sphärische Albedo'
 }
-gui_sphe_note = {
+gui_sphe_tooltip = {
     'en': 'Ratio of scattered light to incident light in all directions',
     'ru': 'Отношение рассеянного света к падающему по всем направлением',
     'de': 'Verhältnis von gestreutem zu einfallendem Licht über alle Richtungen'
@@ -325,7 +340,7 @@ gui_evaluate = {
     'ru': 'Выполнить',
     'de': 'Auswerten von'
 }
-gui_evaluate_note = {
+gui_evaluate_tooltip = {
     'en': 'Apply a function to the brightness values (x), written in Python syntax',
     'ru': 'Применить функцию к значениям яркости (x), используется синтаксис Python',
     'de': 'Wende Funktion auf Helligkeitswerte (x) an, in Python Syntax geschrieben'
@@ -340,7 +355,7 @@ gui_desun = {
     'ru': 'Делить на спектр Солнца',
     'de': 'Division durch Sonnenspektrum'
 }
-gui_desun_note = {
+gui_desun_tooltip = {
     'en': 'Removes the reflected color of the Sun, leaves the radiance factor (I/F)',
     'ru': 'Убирает отражённый цвет Солнца, оставляет отражательную способность (I/F)',
     'de': 'Entfernt die reflektierte Farbe der Sonne und belässt den Strahlungsfaktor (I/F)'
@@ -350,7 +365,7 @@ gui_photons = {
     'ru': 'Счётчик фотонов',
     'de': 'Photonenzähler'
 }
-gui_photons_note = {
+gui_photons_tooltip = {
     'en': 'Converts the photon spectral density of the input data into the desired energy density',
     'ru': 'Переводит спектральную плотность фотонов входных данных в требуемую энергетическую',
     'de': 'Wandelt die Photonenspektraldichte der Eingangsdaten in die gewünschte Energiedichte um'
@@ -365,7 +380,7 @@ gui_factor = {
     'ru': 'Множитель яркости',
     'de': 'Helligkeitsfaktor'
 }
-gui_factor_note = {
+gui_factor_tooltip = {
     'en': 'Multiplies the values of the (reconstructed) spectral cube by a constant',
     'ru': 'Умножает значения (реконструированного) спектрального куба на константу',
     'de': 'Multipliziert die Werte des (rekonstruierten) Spektralwürfels mit einer Konstante'
@@ -375,7 +390,7 @@ gui_upscale = {
     'ru': 'Увеличить небольшие изображения',
     'de': 'Kleine Bilder vergrößern'
 }
-gui_upscale_note = {
+gui_upscale_tooltip = {
     'en': 'Multiplies width and height by integer times to the preview size (no interpolation)',
     'ru': 'Умножает ширину и высоту в целое число раз до размера превью (без интерполяции)',
     'de': 'Multipliziert Breite und Höhe mit ganzzahligen Werten auf die Vorschaugröße (keine Interpolation)'
@@ -385,7 +400,7 @@ gui_chunks = {
     'ru': 'Макс. размер фрагмента (в мегапикселях)',
     'de': 'Maximale Chunkgröße (in Megapixeln)'
 }
-gui_chunks_note = {
+gui_chunks_tooltip = {
     'en': 'Prevents RAM overflow; value to optimize based on Task Manager readings',
     'ru': 'Предотвращает переполнение ОЗУ; число оптимизировать по показаниям Диспетчера задач',
     'de': 'Verhindert RAM-Überlauf; optimiert den Wert anhand der Messwerte des Task-Managers'
