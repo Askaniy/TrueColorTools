@@ -97,10 +97,9 @@ def plot_filters(filters: Sequence[Spectrum], color_system: ColorSystem, lang: s
     max_y = []
     for spectrum in filters:
         max_y.append(spectrum.br.max())
-    rgb = cmfs[srgb]
-    k = max(max_y) / rgb[2].br.max() if len(max_y) != 0 else 1
+    k = max(max_y) / cmfs[2].br.max() if len(max_y) != 0 else 1
     # Plotting the CMFs
-    for i, cmf in enumerate(rgb):
+    for i, cmf in enumerate(cmfs):
         ax.plot(cmf.nm, cmf.br * k, label=cmf.name(lang), color=rgb_muted[i])
     # Color calculating and plotting
     for i, spectrum in enumerate(filters):

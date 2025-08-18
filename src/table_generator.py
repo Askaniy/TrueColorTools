@@ -61,7 +61,7 @@ def generate_table(objectsDB: dict, tag: str, color_system: ColorSystem, gamma: 
         f'{l}/{len(objectsDB)} {tr.info_objects[lang]}',
         f'{tr.info_gamma[lang]}: {tr.info_indicator[lang][gamma]}',
         f'{tr.info_srgb[lang]}: {tr.info_indicator[lang][srgb]}',
-        f'{tr.gui_brMode[lang]}: {brMode}',
+        f'{tr.gui_brightness[lang]}: {brMode}',
         tr.link,
     )
     info_colors = (      # text brightness formula: br = 255 * (x^(1/2.2))

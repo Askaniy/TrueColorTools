@@ -110,19 +110,21 @@ def launch_window(lang: str):
         fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, fig)
         return fig, fig_canvas_agg
 
-    # List of events that cause tab1_body recalculation
+    # List of events that cause tab1_body / tab3_spectrum recalculation
     tab1_recalc_body_events = ('tab1_list', 'tab1_(re)load')
+    tab3_recalc_spectrum_events = ('tab3_slider1', 'tab3_slider2', 'tab3_slider3')
 
-    # List of events that cause tab1_color recalculation
-    tab1_recalc_color_events = ('-ColorSpace-', '-WhitePoint-', '-brMode1-', '-brMode2-', 'tab1_list', 'tab1_(re)load')
+    # List of events that cause color recalculation
+    tab1_recalc_color_events = ('-ColorSpace-', '-WhitePoint-', '-AlbedoMode1-', '-AlbedoMode2-', 'tab1_list', 'tab1_(re)load')
+    tab3_recalc_color_events = ('-ColorSpace-', '-WhitePoint-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3')
 
     # List of events that cause GUI output update
     tab1_update_gui_events = (
-        '-ColorSpace-', '-WhitePoint-', '-gamma-', '-brMax-', '-brMode1-', '-brMode2-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load'
+        '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-AlbedoMode1-', '-AlbedoMode2-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load'
     )
-
-    # List of events that cause tab3_color recalculation
-    tab3_triggers = ('-ColorSpace-', '-WhitePoint-', '-bitness-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3', 'tab3_slider4')
+    tab3_update_gui_events = (
+        '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-','-bitness-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3'
+    )
 
     # Window events loop
     while True:
@@ -152,7 +154,7 @@ def launch_window(lang: str):
             if tab3_obj_name and tab3_spectrum not in to_plot:
                 to_plot.append(tab3_spectrum)
             tab1_tab3_fig = pl.plot_spectra(
-                to_plot, color_system, values['-gamma-'], values['-brMax-'] or tab1_estimated is None,
+                to_plot, color_system, values['-GammaCorrection-'], values['-MaximizeBrightness-'] or tab1_estimated is None,
                 light_theme, lang, spectra_figsize, spectra_dpi
             )
             tab1_tab3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, tab1_tab3_fig)
@@ -164,8 +166,8 @@ def launch_window(lang: str):
                 tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                 window0.ReturnValuesDictionary['-currentTab-'],
                 color_system,
-                window0.ReturnValuesDictionary['-gamma-'],
-                window0.ReturnValuesDictionary['-brMax-'] or tab1_estimated is None, # TODO ?!
+                window0.ReturnValuesDictionary['-GammaCorrection-'],
+                window0.ReturnValuesDictionary['-MaximizeBrightness-'] or tab1_estimated is None, # TODO ?!
                 light_theme, lang
             )
 
@@ -194,8 +196,8 @@ def launch_window(lang: str):
                     tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                     window0.ReturnValuesDictionary['-currentTab-'],
                     color_system,
-                    window0.ReturnValuesDictionary['-gamma-'],
-                    window0.ReturnValuesDictionary['-brMax-'] or tab1_estimated is None,
+                    window0.ReturnValuesDictionary['-GammaCorrection-'],
+                    window0.ReturnValuesDictionary['-MaximizeBrightness-'] or tab1_estimated is None,
                     light_theme, lang
                 )
 
@@ -235,8 +237,9 @@ def launch_window(lang: str):
             elif event == '-currentTab-':
                 is1tab = values['-currentTab-'] == 'tab1'
                 not2tab = values['-currentTab-'] != 'tab2'
-                window['-brMode1-'].update(visible=is1tab)
-                window['-brMode2-'].update(visible=is1tab)
+                window['-AlbedoModeText-'].update(visible=is1tab)
+                window['-AlbedoMode1-'].update(visible=is1tab)
+                window['-AlbedoMode2-'].update(visible=is1tab)
                 window['-formattingText-'].update(visible=not2tab)
                 window['-bitnessText-'].update(visible=not2tab)
                 window['-roundingText-'].update(visible=not2tab)
@@ -280,10 +283,10 @@ def launch_window(lang: str):
                     # Update color system
                     color_system = ColorSystem(values['-ColorSpace-'], values['-WhitePoint-'])
 
-                if event == '-gamma-' or event == '-brMax-':
+                if event == '-GammaCorrection-' or event == '-MaximizeBrightness-':
                     # Changing postprocessing flags in the ColorPoint object
-                    tab1_color.gamma_correction = values['-gamma-']
-                    tab1_color.maximize_brightness = values['-brMax-'] or tab1_estimated is None
+                    tab1_color.gamma_correction = values['-GammaCorrection-']
+                    tab1_color.maximize_brightness = values['-MaximizeBrightness-'] or tab1_estimated is None
 
                 if values['tab1_list'] != []:
                     # (Check for the availability of the selected object)
@@ -304,7 +307,7 @@ def launch_window(lang: str):
                     if event in tab1_recalc_color_events:
 
                         # Apply albedo mode to calculated spectrum
-                        tab1_spectrum, tab1_estimated = tab1_body.get_spectrum('geometric' if values['-brMode1-'] else 'spherical')
+                        tab1_spectrum, tab1_estimated = tab1_body.get_spectrum('geometric' if values['-AlbedoMode1-'] else 'spherical')
 
                         # Color calculation
                         tab1_color = ColorPoint.from_spectral_data(tab1_spectrum, color_system)
@@ -312,8 +315,8 @@ def launch_window(lang: str):
                     if event in tab1_update_gui_events:
 
                         # Color postprocessing
-                        tab1_color.gamma_correction = values['-gamma-']
-                        tab1_color.maximize_brightness = values['-brMax-'] or tab1_estimated is None
+                        tab1_color.gamma_correction = values['-GammaCorrection-']
+                        tab1_color.maximize_brightness = values['-MaximizeBrightness-'] or tab1_estimated is None
                         tab1_html = tab1_color.to_html()
 
                         # Output
@@ -328,7 +331,7 @@ def launch_window(lang: str):
 
                         # Setting of notes
                         tab1_albedo_note = tr.gui_blank_note
-                        if not values['-brMax-']:
+                        if not values['-MaximizeBrightness-']:
                             match tab1_estimated:
                                 case None:
                                     if isinstance(tab1_body, ReflectingBody):
@@ -343,8 +346,8 @@ def launch_window(lang: str):
                                 tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                                 window0.ReturnValuesDictionary['-currentTab-'],
                                 color_system,
-                                window0.ReturnValuesDictionary['-gamma-'],
-                                window0.ReturnValuesDictionary['-brMax-'],
+                                window0.ReturnValuesDictionary['-GammaCorrection-'],
+                                window0.ReturnValuesDictionary['-MaximizeBrightness-'],
                                 light_theme, lang
                             )
 
@@ -363,8 +366,8 @@ def launch_window(lang: str):
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                             window0.ReturnValuesDictionary['-currentTab-'],
                             color_system,
-                            window0.ReturnValuesDictionary['-gamma-'],
-                            window0.ReturnValuesDictionary['-brMax-'],
+                            window0.ReturnValuesDictionary['-GammaCorrection-'],
+                            window0.ReturnValuesDictionary['-MaximizeBrightness-'],
                             light_theme, lang
                         )
 
@@ -377,12 +380,12 @@ def launch_window(lang: str):
                             tab1_body = database_parser(obj_name, objectsDB[obj_name])
 
                             # Setting brightness mode
-                            tab1_spectrum, tab1_estimated = tab1_body.get_spectrum('geometric' if values['-brMode1-'] else 'spherical')
+                            tab1_spectrum, tab1_estimated = tab1_body.get_spectrum('geometric' if values['-AlbedoMode1-'] else 'spherical')
 
                             # Color calculation
-                            tab1_maximize_br = values['-brMax-'] or tab1_estimated is None
+                            tab1_maximize_br = values['-MaximizeBrightness-'] or tab1_estimated is None
                             tab1_color = ColorPoint.from_spectral_data(tab1_spectrum, tab1_maximize_br, values['-srgb-'])
-                            if values['-gamma-']:
+                            if values['-GammaCorrection-']:
                                 tab1_color = tab1_color.gamma_corrected()
                             tab1_rgb = tuple(tab1_color.to_bit(bitness).round(rounding))
 
@@ -401,8 +404,8 @@ def launch_window(lang: str):
                         sg.popup(tr.gui_no_data_message[lang], title=tr.gui_output[lang], icon=icon, non_blocking=True)
                     else:
                         generate_table(
-                            objectsDB, values['tab1_tag_filter'], color_system, values['-gamma-'],
-                            values['-brMax-'], values['-brMode1-'], values['tab1_folder'], 'png', lang
+                            objectsDB, values['tab1_tag_filter'], color_system, values['-GammaCorrection-'],
+                            values['-MaximizeBrightness-'], values['-AlbedoMode1-'], values['tab1_folder'], 'png', lang
                         )
 
             # ------------ Events in the tab "Image processing" ------------
@@ -462,8 +465,8 @@ def launch_window(lang: str):
                             filters=tab2_filters,
                             formulas=tab2_formulas,
                             color_system=color_system,
-                            gamma_correction=values['-gamma-'],
-                            maximize_brightness=values['-brMax-'],
+                            gamma_correction=values['-GammaCorrection-'],
+                            maximize_brightness=values['-MaximizeBrightness-'],
                             desun=values['tab2_desun'],
                             photons=values['tab2_photons'],
                             factor=float(values['tab2_factor']),
@@ -497,23 +500,36 @@ def launch_window(lang: str):
 
             elif values['-currentTab-'] == 'tab3':
 
-                if event in tab3_triggers:
-                    if event == '-brMax-':
-                        window['tab3_mag'].update(text_color=text_colors[not values['-brMax-']])
-                        window['tab3_slider4'].update(disabled=values['-brMax-'])
+                if event == '-MaximizeBrightness-':
+                    window['tab3_mag'].update(text_color=text_colors[not values['-MaximizeBrightness-']])
+                    window['tab3_slider4'].update(disabled=values['-MaximizeBrightness-'])
 
-                    # Spectral data processing
+                if event in tab3_recalc_spectrum_events:
+
+                    # Spectral data processing and updating title
                     tab3_spectrum = Spectrum.from_blackbody_redshift(visible_range, values['tab3_slider1'], values['tab3_slider2'], values['tab3_slider3'])
                     tab3_obj_name = tab3_spectrum.name
                     window['tab3_title2'].update(tab3_obj_name.indexed_name(lang))
 
-                    # Mode with "exposure"
-                    if not values['-brMax-']:
-                        tab3_spectrum.br /= aux.mag2irradiance(values['tab3_slider4'], vega_in_V) * sun_in_V
+                if event in tab3_recalc_color_events:
 
                     # Color calculation
-                    tab3_color = ColorPoint.from_spectral_data(tab3_spectrum, values['-brMax-'], values['-srgb-'])
-                    if values['-gamma-']:
+                    tab3_color = ColorPoint.from_spectral_data(tab3_spectrum, color_system)
+
+                if event in tab3_update_gui_events:
+
+                    # Mode with "exposure"
+                    if not values['-MaximizeBrightness-']:
+                        tab3_spectrum.br /= aux.mag2irradiance(values['tab3_slider4'], vega_in_V) * sun_in_V
+
+                    # Color postprocessing
+                    tab3_color.gamma_correction = values['-GammaCorrection-']
+                    tab3_color.maximize_brightness = values['-MaximizeBrightness-'] or tab1_estimated is None
+                    tab3_html = tab1_color.to_html()
+
+                    # Color calculation
+                    tab3_color = ColorPoint.from_spectral_data(tab3_spectrum, values['-MaximizeBrightness-'], values['-srgb-'])
+                    if values['-GammaCorrection-']:
                         tab3_color = tab3_color.gamma_corrected()
                     tab3_rgb = tuple(tab3_color.to_bit(bitness).round(rounding))
                     tab3_rgb_show = tab3_color.to_html()
@@ -529,8 +545,8 @@ def launch_window(lang: str):
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                             window0.ReturnValuesDictionary['-currentTab-'],
                             color_system,
-                            window0.ReturnValuesDictionary['-gamma-'],
-                            window0.ReturnValuesDictionary['-brMax-'],
+                            window0.ReturnValuesDictionary['-GammaCorrection-'],
+                            window0.ReturnValuesDictionary['-MaximizeBrightness-'],
                             light_theme, lang
                         )
 
@@ -548,7 +564,7 @@ def launch_window(lang: str):
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                             window0.ReturnValuesDictionary['-currentTab-'],
                             color_system,
-                            window0.ReturnValuesDictionary['-gamma-'],
-                            window0.ReturnValuesDictionary['-brMax-'],
+                            window0.ReturnValuesDictionary['-GammaCorrection-'],
+                            window0.ReturnValuesDictionary['-MaximizeBrightness-'],
                             light_theme, lang
                         )

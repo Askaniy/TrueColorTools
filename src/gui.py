@@ -103,12 +103,16 @@ def generate_layout(
             )
         ],
         [sg.T()],
-        [sg.Checkbox(tr.gui_gamma[lang], default=gamma, enable_events=True, key='-gamma-', tooltip=tr.gui_gamma_tooltip[lang])],
+        [sg.Checkbox(tr.gui_gamma[lang], default=gamma, enable_events=True, key='-GammaCorrection-', tooltip=tr.gui_gamma_tooltip[lang])],
+        [sg.Checkbox(tr.gui_maximize[lang], enable_events=True, default=brMax, key='-MaximizeBrightness-')],
+        [
+            sg.Text(tr.gui_scale_factor[lang], enable_events=True, key='-ScaleFactorText-', tooltip=tr.gui_scale_factor_tooltip[lang]),
+            sg.InputText('1', size=1, expand_x=True, enable_events=True, key='-ScaleFactor-', tooltip=tr.gui_scale_factor_tooltip[lang])
+        ],
         [sg.T()],
-        [sg.Text(tr.gui_brMode[lang], key='-brModeText-')],
-        [sg.Checkbox(tr.gui_brMax[lang], enable_events=True, default=brMax, key='-brMax-')],
-        [sg.Radio(tr.gui_geom[lang], 'brRadio', enable_events=True, default=brGeom, key='-brMode1-', tooltip=tr.gui_geom_tooltip[lang])],
-        [sg.Radio(tr.gui_sphe[lang], 'brRadio', enable_events=True, default=not brGeom, key='-brMode2-', tooltip=tr.gui_sphe_tooltip[lang])],
+        [sg.Text(tr.gui_albedo_mode[lang], key='-AlbedoModeText-')],
+        [sg.Radio(tr.gui_geom[lang], 'brRadio', enable_events=True, default=brGeom, key='-AlbedoMode1-', tooltip=tr.gui_geom_tooltip[lang])],
+        [sg.Radio(tr.gui_sphe[lang], 'brRadio', enable_events=True, default=not brGeom, key='-AlbedoMode2-', tooltip=tr.gui_sphe_tooltip[lang])],
         [sg.T()],
         [sg.Text(tr.gui_formatting[lang], key='-formattingText-')],
         [
@@ -216,8 +220,11 @@ def generate_layout(
         #[sg.Checkbox(tr.gui_autoalign[lang], key='tab2_autoalign')],
     ]
     tab2_col2_2 = [
-        [sg.Text(tr.gui_factor[lang], key='tab2_factorText', tooltip=tr.gui_factor_tooltip[lang]), sg.Input('1', size=1, key='tab2_factor', expand_x=True)],
         [sg.Checkbox(tr.gui_upscale[lang], default=False, key='tab2_upscale', tooltip=tr.gui_upscale_tooltip[lang])],
+        [
+            sg.Text(tr.gui_chunks[lang], key='tab2_chunksText', tooltip=tr.gui_chunks_tooltip[lang]),
+            sg.Input('1', size=1, key='tab2_chunks', expand_x=True),
+        ],
     ]
     tab2_col2 = [
         #[sg.Push(), sg.Text(tr.gui_output[lang], font=title_font, key='tab2_title2'), sg.Push()],
@@ -225,10 +232,6 @@ def generate_layout(
         [
             sg.Column(tab2_col2_1, expand_x=True, expand_y=False), sg.VSeperator(),
             sg.Column(tab2_col2_2, expand_x=True, expand_y=False)
-        ],
-        [
-            sg.Text(tr.gui_chunks[lang], key='tab2_chunksText', tooltip=tr.gui_chunks_tooltip[lang]),
-            sg.Input('1', size=1, key='tab2_chunks', expand_x=True),
         ],
         [sg.T()],
         [sg.Push(), sg.Image(background_color='black', size=img_preview_size, key='tab2_image'), sg.Push()],
@@ -259,12 +262,12 @@ def generate_layout(
             sg.Text(tr.gui_vII[lang], size=18, justification='right', key='tab3_vII'),
             sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation='h', size=slider_size, enable_events=True, key='tab3_slider3', expand_x=True)
         ],
-        [sg.T()],
-        [
-            sg.Text(tr.gui_mag[lang], size=18, text_color=text_colors[not brMax], justification='right', key='tab3_mag'),
-            sg.Slider(range=(-50, 0), default_value=-26.7, resolution=0.1, orientation='h', size=slider_size, enable_events=True, disabled=brMax, key='tab3_slider4', expand_x=True)
-        ],
-        [sg.Text(tr.gui_mag_note[lang], key='tab3_mag_note')],
+        #[sg.T()],
+        #[
+        #    sg.Text(tr.gui_mag[lang], size=18, text_color=text_colors[not brMax], justification='right', key='tab3_mag'),
+        #    sg.Slider(range=(-50, 0), default_value=-26.7, resolution=0.1, orientation='h', size=slider_size, enable_events=True, disabled=brMax, key='tab3_slider4', expand_x=True)
+        #],
+        #[sg.Text(tr.gui_mag_note[lang], key='tab3_mag_note')],
     ]
     tab3_col2 = [
         [sg.Text(font=title_font, key='tab3_title2')],
@@ -317,11 +320,12 @@ def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict,
     window['tab2'].update(title=tr.gui_tabs[lang][1])
     window['tab3'].update(title=tr.gui_tabs[lang][2])
     window['-settingsTitle-'].update(tr.gui_settings[lang])
-    window['-gamma-'].update(text=tr.gui_gamma[lang])
-    window['-brModeText-'].update(tr.gui_brMode[lang])
-    window['-brMax-'].update(text=tr.gui_brMax[lang])
-    window['-brMode1-'].update(text=tr.gui_geom[lang])
-    window['-brMode2-'].update(text=tr.gui_sphe[lang])
+    window['-GammaCorrection-'].update(text=tr.gui_gamma[lang])
+    window['-MaximizeBrightness-'].update(text=tr.gui_maximize[lang])
+    window['-ScaleFactorText-'].update(tr.gui_scale_factor[lang])
+    window['-AlbedoModeText-'].update(tr.gui_albedo_mode[lang])
+    window['-AlbedoMode1-'].update(text=tr.gui_geom[lang])
+    window['-AlbedoMode2-'].update(text=tr.gui_sphe[lang])
     window['-formattingText-'].update(tr.gui_formatting[lang])
     window['-bitnessText-'].update(tr.gui_bit[lang])
     window['-roundingText-'].update(tr.gui_rnd[lang])
@@ -359,7 +363,6 @@ def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict,
     window['tab2_photons'].update(text=tr.gui_photons[lang]) #, tooltip=tr.gui_photons_tooltip[lang]) # doesn't work
     #window['tab2_autoalign'].update(text=tr.gui_autoalign[lang])
     #window['tab2_plotpixels'].update(text=tr.gui_plotpixels[lang])
-    window['tab2_factorText'].update(tr.gui_factor[lang])
     window['tab2_upscale'].update(text=tr.gui_upscale[lang])
     window['tab2_chunksText'].update(tr.gui_chunks[lang])
     window['tab2_preview'].update(tr.gui_preview[lang])
@@ -369,8 +372,8 @@ def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict,
     window['tab3_temp'].update(tr.gui_temp[lang])
     window['tab3_velocity'].update(tr.gui_velocity[lang])
     window['tab3_vII'].update(tr.gui_vII[lang])
-    window['tab3_mag'].update(tr.gui_mag[lang])
-    window['tab3_mag_note'].update(tr.gui_mag_note[lang])
+    #window['tab3_mag'].update(tr.gui_mag[lang])
+    #window['tab3_mag_note'].update(tr.gui_mag_note[lang])
     window['tab3_colorRGB'].update(tr.gui_rgb[lang])
     window['tab3_colorHEX'].update(tr.gui_hex[lang])
     window['tab3_plot'].update(tr.gui_plot[lang])

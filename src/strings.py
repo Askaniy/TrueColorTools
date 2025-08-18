@@ -80,21 +80,36 @@ gui_gamma_tooltip = {
     'ru': 'Гамма-коррекция моделирует нелинейность восприятия яркости человеческим глазом',
     'de': 'Die Gammakorrektur modelliert die Nichtlinearität der Helligkeitswahrnehmung durch das menschliche Auge'
 }
-gui_brMode = {
-    'en': 'Brightness mode',
-    'ru': 'Режим яркости',
-    'de': 'Helligkeitsmodus'
+#gui_brightness = {
+#    'en': 'Brightness',
+#    'ru': 'Яркость',
+#    'de': 'Helligkeit'
+#}
+gui_maximize = {
+    'en': 'Maximize brightness',
+    'ru': 'Максимизировать яркость',
+    'de': 'Helligkeit maximieren'
 }
-gui_brMax = {
-    'en': 'maximize',
-    'ru': 'максимизировать',
-    'de': 'maximieren'
+gui_scale_factor = {
+    'en': 'Scale factor',
+    'ru': 'Умножить на',
+    'de': 'Helligkeitsfaktor'
 }
-gui_chromaticity = {
-    'en': 'chromaticity',
-    'ru': 'цветность',
-    'de': 'Farbton'
+gui_scale_factor_tooltip = {
+    'en': 'Multiplies the values of the output by a constant',
+    'ru': 'Умножает значения вывода на константу',
+    'de': 'Multipliziert die Werte der Ausgabe mit einer Konstante'
 }
+gui_albedo_mode = {
+    'en': 'Albedo mode',
+    'ru': 'Режим альбедо',
+    'de': 'Albedo-Modus'
+}
+#gui_chromaticity = {
+#    'en': 'chromaticity',
+#    'ru': 'цветность',
+#    'de': 'Farbton'
+#}
 gui_geom = {
     'en': 'geometric albedo',
     'ru': 'геом. альбедо',
@@ -345,11 +360,6 @@ gui_evaluate_tooltip = {
     'ru': 'Применить функцию к значениям яркости (x), используется синтаксис Python',
     'de': 'Wende Funktion auf Helligkeitswerte (x) an, in Python Syntax geschrieben'
 }
-#gui_brightness = {
-#    'en': 'Brightness',
-#    'ru': 'Яркость',
-#    'de': 'Helligkeit'
-#}
 gui_desun = {
     'en': 'Divide by Solar spectrum',
     'ru': 'Делить на спектр Солнца',
@@ -375,16 +385,6 @@ gui_photons_tooltip = {
 #    'ru': 'Совместить изображения (β)',
 #    'de': 'Bildbänder ausrichten (β)'
 #}
-gui_factor = {
-    'en': 'Brightness factor',
-    'ru': 'Множитель яркости',
-    'de': 'Helligkeitsfaktor'
-}
-gui_factor_tooltip = {
-    'en': 'Multiplies the values of the (reconstructed) spectral cube by a constant',
-    'ru': 'Умножает значения (реконструированного) спектрального куба на константу',
-    'de': 'Multipliziert die Werte des (rekonstruierten) Spektralwürfels mit einer Konstante'
-}
 gui_upscale = {
     'en': 'Upscale small images',
     'ru': 'Увеличить небольшие изображения',
@@ -433,16 +433,16 @@ gui_vII = {
     'ru': 'II косм. ск. [c]',
     'de': 'Fluchtgeschw. [c]'
 }
-gui_mag = {
-    'en': 'App. magnitude*',
-    'ru': 'Вид. зв. величина*',
-    'de': 'scheinb. Helligkeit*'
-}
-gui_mag_note = {
-    'en': '* if the Solar disk in the sky is replaced by this blackbody sphere',
-    'ru': '* если диск Солнца на небе заменить данной чёрнотельной сферой',
-    'de': '* wenn die Sonne am Taghimmel durch einen Schwarzkörper ersetzt würde'
-}
+#gui_mag = {
+#    'en': 'App. magnitude*',
+#    'ru': 'Вид. зв. величина*',
+#    'de': 'scheinb. Helligkeit*'
+#}
+#gui_mag_note = {
+#    'en': '* if the Solar disk in the sky is replaced by this blackbody sphere',
+#    'ru': '* если диск Солнца на небе заменить данной чёрнотельной сферой',
+#    'de': '* wenn die Sonne am Taghimmel durch einen Schwarzkörper ersetzt würde'
+#}
 
 # Plots
 spectral_plot = {
