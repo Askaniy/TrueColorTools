@@ -1857,6 +1857,9 @@ class ColorSystem:
         Initialize the ColorSystem object.
         The color space and white point must be among the supported options.
         """
+        # Save input names
+        self.color_space_name = color_space
+        self.white_point_name = white_point
         # Reading color space coordinates
         self.color_space = np.array(supported_color_spaces[color_space]).T
         # Converting reduced (x, y) coordinates back to (x, y, z=1-x-y)
@@ -1972,8 +1975,9 @@ class ColorRGB:
             #print('Scale factor of ColorRGB object must be a number.')
 
     @staticmethod
-    def apply_gamma_correction(arr: np.ndarray):
+    def apply_gamma_correction(arr0: float|np.ndarray):
         """ Applies sRGB gamma correction to the array """
+        arr = np.asarray(arr0) # to allow float input use mask
         mask = arr < 0.0031308
         arr[mask] *= 12.92
         arr[~mask] = 1.055 * np.power(arr[~mask], 1./2.4) - 0.055

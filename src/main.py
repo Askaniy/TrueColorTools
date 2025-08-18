@@ -115,8 +115,8 @@ def launch_window(lang: str):
     tab3_recalc_spectrum_events = ('tab3_slider1', 'tab3_slider2', 'tab3_slider3')
 
     # List of events that cause color recalculation
-    tab1_recalc_color_events = ('-ColorSpace-', '-WhitePoint-', '-ScaleFactor-', '-AlbedoMode1-', '-AlbedoMode2-', 'tab1_list', 'tab1_(re)load')
-    tab3_recalc_color_events = ('-ColorSpace-', '-WhitePoint-', '-ScaleFactor-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3')
+    tab1_recalc_color_events = ('-ColorSpace-', '-WhitePoint-', '-AlbedoMode1-', '-AlbedoMode2-', 'tab1_list', 'tab1_(re)load')
+    tab3_recalc_color_events = ('-ColorSpace-', '-WhitePoint-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3')
 
     # List of events that cause GUI output update
     tab1_update_gui_events = (
@@ -402,8 +402,8 @@ def launch_window(lang: str):
                         sg.popup(tr.gui_no_data_message[lang], title=tr.gui_output[lang], icon=icon, non_blocking=True)
                     else:
                         generate_table(
-                            objectsDB, values['tab1_tag_filter'], color_system, values['-GammaCorrection-'],
-                            values['-MaximizeBrightness-'], values['-AlbedoMode1-'], values['tab1_folder'], 'png', lang
+                            objectsDB, values['tab1_tag_filter'], color_system, values['-GammaCorrection-'], values['-MaximizeBrightness-'],
+                            values['-ScaleFactor-'], values['-AlbedoMode1-'], values['tab1_folder'], 'png', lang
                         )
 
             # ------------ Events in the tab "Image processing" ------------

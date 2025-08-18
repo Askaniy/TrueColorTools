@@ -103,7 +103,7 @@ def generate_layout(
             )
         ],
         [sg.T()],
-        [sg.Checkbox(tr.gui_gamma[lang], default=gamma, enable_events=True, key='-GammaCorrection-', tooltip=tr.gui_gamma_tooltip[lang])],
+        [sg.Checkbox(tr.gui_gamma_correction[lang], default=gamma, enable_events=True, key='-GammaCorrection-', tooltip=tr.gui_gamma_correction_tooltip[lang])],
         [sg.Checkbox(tr.gui_maximize[lang], enable_events=True, default=brMax, key='-MaximizeBrightness-')],
         [
             sg.Text(tr.gui_scale_factor[lang], enable_events=True, key='-ScaleFactorText-', tooltip=tr.gui_scale_factor_tooltip[lang]),
@@ -320,7 +320,7 @@ def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict,
     window['tab2'].update(title=tr.gui_tabs[lang][1])
     window['tab3'].update(title=tr.gui_tabs[lang][2])
     window['-settingsTitle-'].update(tr.gui_settings[lang])
-    window['-GammaCorrection-'].update(text=tr.gui_gamma[lang])
+    window['-GammaCorrection-'].update(text=tr.gui_gamma_correction[lang])
     window['-MaximizeBrightness-'].update(text=tr.gui_maximize[lang])
     window['-ScaleFactorText-'].update(tr.gui_scale_factor[lang])
     window['-AlbedoModeText-'].update(tr.gui_albedo_mode[lang])

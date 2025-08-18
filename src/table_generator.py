@@ -9,13 +9,20 @@ import src.database as db
 import src.strings as tr
 
 
-def generate_table(objectsDB: dict, tag: str, color_system: ColorSystem, gamma: bool, brMax: bool, brGeom: bool, folder: str, extension: str, lang: str):
+def generate_table(
+        objectsDB: dict, tag: str, color_system: ColorSystem, gamma_correction: bool, maximize_brightness: bool,
+        scale_factor: float, geom_albedo: bool, folder: str, extension: str, lang: str
+    ):
     """ Creates and saves a table of colored squares for each spectral data unit that has the specified tag """
     displayed_namesDB = db.obj_names_list(objectsDB, tag)
     l = len(displayed_namesDB)
     notes = db.notes_list(displayed_namesDB, lang)
     notes_flag = bool(notes)
     tag = tag.split('/')[-1] # then only the last category is used
+    try:
+        scale_factor = np.clip(float(scale_factor), 0, None)
+    except ValueError:
+        scale_factor = 1
 
     # Load fonts
     name_size = 36
@@ -55,22 +62,24 @@ def generate_table(objectsDB: dict, tag: str, color_system: ColorSystem, gamma: 
     w = 2*tiny_space + w_table # total image width
     w0 = tiny_space + border_space
 
-    # Placing info column
-    brMode = tr.gui_chromaticity[lang] if brMax else (tr.gui_geom[lang] if brGeom else tr.gui_sphe[lang])
-    info_list = (
-        f'{l}/{len(objectsDB)} {tr.info_objects[lang]}',
-        f'{tr.info_gamma[lang]}: {tr.info_indicator[lang][gamma]}',
-        f'{tr.info_srgb[lang]}: {tr.info_indicator[lang][srgb]}',
-        f'{tr.gui_brightness[lang]}: {brMode}',
-        tr.link,
-    )
-    info_colors = (      # text brightness formula: br = 255 * (x^(1/2.2))
-        (224, 224, 224), # x = 0.75, br = 224
-        (224, 224, 224),
-        (224, 224, 224),
-        (224, 224, 224),
-        (0, 200, 255),
-    )
+    # Constructing and placing info column
+    brMode = tr.table_chromaticity if maximize_brightness else (tr.gui_geom if geom_albedo else tr.gui_sphe)
+    info_list = [
+        f'{l}/{len(objectsDB)} {tr.table_objects_number[lang]}',
+        f'{tr.gui_color_space[lang]}: {color_system.color_space_name}',
+        f'{tr.gui_white_point[lang]}: {color_system.white_point_name}',
+        f'{tr.gui_gamma_correction[lang]}: {tr.table_bool_indicator[lang][gamma_correction]}',
+        f'{tr.table_brightness_mode[lang]}: {brMode[lang]}'
+    ]
+    if scale_factor != 1:
+        info_list.append(f'{tr.table_scale_factor[lang]}: {scale_factor}')
+    info_list.append(tr.link)
+    notes_per_column = len(info_list)
+
+    # text brightness formula: br = 255 * (x^(1/2.2))
+    # here x = 0.75, br = 224
+    info_colors = [(224, 224, 224)] * notes_per_column
+    info_colors[-1] = (0, 200, 255) # the link
     if notes_flag:
         w1 = int(w * 0.618034) # golden ratio for the info column
         w1 = min(w1, w-w0-max(width(info_text, note_font) for info_text in info_list))
@@ -83,7 +92,6 @@ def generate_table(objectsDB: dict, tag: str, color_system: ColorSystem, gamma: 
     name_size *= len(title_lines)
 
     # Notes calculations
-    notes_per_column = len(info_list)
     if notes_flag:
         notes_numbered = [f'{aux.superscript(note_num+1)} {note}' for note_num, note in enumerate(notes)]
         w_notes = w0 + max(width(note_text, note_font) for note_text in notes_numbered) # notes columns width
@@ -119,17 +127,18 @@ def generate_table(objectsDB: dict, tag: str, color_system: ColorSystem, gamma: 
 
         # Spectral data import and processing
         body = database_parser(obj_name, objectsDB[obj_name])
-        spectrum, estimated = body.get_spectrum('geometric' if brGeom else 'spherical')
+        spectrum, estimated = body.get_spectrum('geometric' if geom_albedo else 'spherical')
 
         # Color calculation
-        maximize_br = brMax or estimated is None
-        color = ColorPoint.from_spectral_data(spectrum, maximize_br, srgb)
-        if gamma:
-            color = color.gamma_corrected()
+        color = ColorPoint.from_spectral_data(spectrum, color_system)
+        color.gamma_correction = gamma_correction
+        color.maximize_brightness = maximize_brightness or estimated is None
+        color.scale_factor = scale_factor
+        color_array = color.to_array()
 
         # Setting of notes and shape
         is_filled = True
-        if brMax or isinstance(body, EmittingBody):
+        if maximize_brightness or isinstance(body, EmittingBody):
             object_notes.append(None)
         else:
             match estimated:
@@ -142,12 +151,14 @@ def generate_table(objectsDB: dict, tag: str, color_system: ColorSystem, gamma: 
                     object_notes.append(tr.table_no_albedo[lang])
 
         # Setting object and text colors
-        if np.any(color.br):
+        if np.any(color_array):
+            grayscale = color_array.mean()
+            # color.grayscale(color_system) not work well for red and blue objects
             if is_filled:
-                object_color = color.br
-                is_white_text[n] = color.grayscale() < 0.5
+                object_color = color_array
+                is_white_text[n] = grayscale < 0.5
             else:
-                object_color = color.br / color.grayscale() / 3
+                object_color = color_array / grayscale / 3
                 is_white_text[n] = True
         else:
             # error handling
@@ -170,7 +181,7 @@ def generate_table(objectsDB: dict, tag: str, color_system: ColorSystem, gamma: 
 
     # Notes writing
     if notes_flag:
-        draw.text((w0, h1), tr.notes_label[lang], fill=(230, 230, 230), font=help_font, anchor='la') # x = 0.8, br = 230
+        draw.text((w0, h1), tr.table_notes[lang], fill=(230, 230, 230), font=help_font, anchor='la') # x = 0.8, br = 230
         for note_num, note_text in enumerate(notes_numbered): # x = 0.5, br = 186
             draw.text(
                 xy=(w0 + w_notes * (note_num // notes_per_column), h2 + note_step * (note_num % notes_per_column)),
@@ -178,7 +189,7 @@ def generate_table(objectsDB: dict, tag: str, color_system: ColorSystem, gamma: 
             )
 
     # Info writing
-    draw.text((w1, h1), tr.info_label[lang], fill=(230, 230, 230), font=help_font, anchor='la') # x = 0.8, br = 230
+    draw.text((w1, h1), tr.table_info[lang], fill=(230, 230, 230), font=help_font, anchor='la') # x = 0.8, br = 230
     for info_num, (info_text, info_color) in enumerate(zip(info_list, info_colors)):
         draw.text(
             xy=(w1, h2+note_step*info_num), text=info_text, fill=info_color, font=note_font, anchor='la'

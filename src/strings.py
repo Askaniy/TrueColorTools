@@ -70,12 +70,12 @@ gui_white_point_tooltip = {
     'ru': 'Точка белого — эталонный белый цвет, влияющий на цветовой баланс',
     'de': 'Der Weißpunkt ist das Referenzweiß und beeinflusst den Farbabgleich'
 }
-gui_gamma = {
+gui_gamma_correction = {
     'en': 'Gamma correction',
     'ru': 'Гамма-коррекция',
     'de': 'Gammakorrektur'
 }
-gui_gamma_tooltip = {
+gui_gamma_correction_tooltip = {
     'en': 'Gamma correction models the nonlinearity of the human eye’s perception of luminance',
     'ru': 'Гамма-коррекция моделирует нелинейность восприятия яркости человеческим глазом',
     'de': 'Die Gammakorrektur modelliert die Nichtlinearität der Helligkeitswahrnehmung durch das menschliche Auge'
@@ -105,11 +105,6 @@ gui_albedo_mode = {
     'ru': 'Режим альбедо',
     'de': 'Albedo-Modus'
 }
-#gui_chromaticity = {
-#    'en': 'chromaticity',
-#    'ru': 'цветность',
-#    'de': 'Farbton'
-#}
 gui_geom = {
     'en': 'geometric albedo',
     'ru': 'геом. альбедо',
@@ -263,6 +258,8 @@ gui_col = {
     'ru': ['Красный', 'Зелёный', 'Синий', '| Объект'],
     'de': ['Rot', 'Grün', 'Blau', '| Objekt']
 }
+
+# Color table
 table_title = {
     'en': ['The “', '” category color table'],
     'ru': ['Таблица цветов для категории «', '»'],
@@ -278,37 +275,37 @@ table_estimated = {
     'ru': 'оценка альбедо',
     'de': 'geschätzte Albedo'
 }
-legend = {
-    'en': 'Legend',
-    'ru': 'Легенда',
-    'de': 'Legende'
+table_brightness_mode = {
+    'en': 'Brightness mode',
+    'ru': 'Режим яркости',
+    'de': 'Helligkeitsmodus'
 }
-notes_label = {
+table_chromaticity = {
+    'en': 'chromaticity',
+    'ru': 'цветность',
+    'de': 'Farbton'
+}
+table_scale_factor = {
+    'en': 'Brightness scale factor',
+    'ru': 'Множитель яркости',
+    'de': 'Helligkeitsfaktor'
+}
+table_notes = {
     'en': 'Notes',
     'ru': 'Примечания',
     'de': 'Anmerkungen'
 }
-info_label = {
+table_info = {
     'en': 'Info',
     'ru': 'Информация',
     'de': 'Info'
 }
-info_objects = {
+table_objects_number = {
     'en': 'objects displayed',
     'ru': 'объектов показано',
     'de': 'Objekte werden angezeigt'
 }
-info_srgb = {
-    'en': 'sRGB color space',
-    'ru': 'Пространство sRGB',
-    'de': 'sRGB-Farbraum'
-}
-info_gamma = {
-    'en': 'Gamma correction',
-    'ru': 'Гамма-коррекция',
-    'de': 'Gammakorrektur'
-}
-info_indicator = {
+table_bool_indicator = {
     'en': ('off', 'on'),
     'ru': ('выкл', 'вкл'),
     'de': ('Inaktiv', 'Aktiv')
