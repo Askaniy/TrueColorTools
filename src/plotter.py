@@ -6,7 +6,7 @@ from matplotlib import rc_context
 import matplotlib.pyplot as plt
 
 from src.core import *
-from src.core import _TrueColorToolsObject, ColorSystem
+from src.core import _TrueColorToolsObject, FilterSystem, ColorSystem
 import src.strings as tr
 import src.gui as gui
 
@@ -32,7 +32,7 @@ themes = (dark_theme, light_theme)
 plt.rcParams |= dark_theme
 
 rgb_muted = ('#904040', '#3c783c', '#5050e0')
-
+cmfs = FilterSystem.from_list(('StilesBurch2deg.r', 'StilesBurch2deg.g', 'StilesBurch2deg.b'), name='RGB')
 
 def close_figure(figure: Figure):
     """ Removes the figure from memory """
@@ -47,7 +47,8 @@ def draw_figure(canvas, figure: Figure):
 
 
 def plot_spectra(
-        spectra: Sequence[_TrueColorToolsObject], color_system: ColorSystem, gamma: bool, albedo: bool,
+        spectra: Sequence[_TrueColorToolsObject], color_system: ColorSystem,
+        gamma_correction: bool, maximize_brightness: bool,
         light_theme: bool, lang: str, figsize: tuple, dpi: int
     ):
     """ Creates a figure with plotted spectra from the input list and the CMFs used """
@@ -59,16 +60,15 @@ def plot_spectra(
         max_y = []
         for spectrum in spectra:
             max_y.append(spectrum.br.max())
-        rgb = cmfs[srgb]
-        k = max(max_y) / rgb[2].br.max() if len(max_y) != 0 else 1
+        k = max(max_y) / cmfs[2].br.max() if len(max_y) != 0 else 1
         # Plotting the CMFs
-        for i, cmf in enumerate(rgb):
+        for i, cmf in enumerate(cmfs):
             ax.plot(cmf.nm, cmf.br * k, label=cmf.name(lang), color=rgb_muted[i])
         # Color calculating and plotting
         for photospectrum_or_spectrum in spectra:
-            color = ColorPoint.from_spectral_data(photospectrum_or_spectrum, albedo, srgb)
-            if gamma:
-                color = color.gamma_corrected()
+            color = ColorPoint.from_spectral_data(photospectrum_or_spectrum, color_system)
+            color.gamma_correction = gamma_correction
+            color.maximize_brightness = maximize_brightness
             spectrum: Spectrum = photospectrum_or_spectrum.define_on_range(visible_range)
             ax.plot(spectrum.nm, spectrum.br, label=spectrum.name(lang), color=color.to_html())
             if spectrum.photospectrum is not None:

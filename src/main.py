@@ -88,10 +88,14 @@ def launch_window(lang: str):
     mean_spectrum = [] # for tab 2
 
     # Default values to avoid errors
-    tab1_obj_name = tab1_spectrum = tab3_obj_name = tab3_spectrum = None
+    tab1_obj_name = tab1_color = tab1_spectrum = tab3_obj_name = tab3_color = tab3_spectrum = None
     tab1_albedo_note = tr.gui_blank_note
 
-    def tab1_tab3_update_plot(fig, fig_canvas_agg, current_tab, color_system: ColorSystem, gamma: bool, albedo: bool, light_theme: bool, lang: str):
+    def tab1_tab3_update_plot(
+            fig, fig_canvas_agg, current_tab, color_system: ColorSystem,
+            gamma_correction: bool, maximize_brightness: bool,
+            light_theme: bool, lang: str
+        ):
         pl.close_figure(fig)
         fig_canvas_agg.get_tk_widget().forget()
         to_plot = deepcopy(plot_data)
@@ -99,13 +103,26 @@ def launch_window(lang: str):
             to_plot.append(tab1_spectrum)
         if current_tab == 'tab3' and tab3_obj_name and tab3_spectrum not in to_plot:
             to_plot.append(tab3_spectrum)
-        fig = pl.plot_spectra(to_plot, gamma, srgb, albedo, light_theme, lang, spectra_figsize, spectra_dpi)
+        fig = pl.plot_spectra(
+            to_plot, color_system, gamma_correction, maximize_brightness,
+            light_theme, lang, spectra_figsize, spectra_dpi
+        )
         fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, fig)
         return fig, fig_canvas_agg
 
-    # List of events that cause color recalculation
-    tab1_triggers = ('-gamma-', '-ColorSpace-', '-WhitePoint-', '-brMax-', '-brMode1-', '-brMode2-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load')
-    tab3_triggers = ('-gamma-', '-ColorSpace-', '-WhitePoint-', '-bitness-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3', 'tab3_slider4')
+    # List of events that cause tab1_body recalculation
+    tab1_recalc_body_events = ('tab1_list', 'tab1_(re)load')
+
+    # List of events that cause tab1_color recalculation
+    tab1_recalc_color_events = ('-ColorSpace-', '-WhitePoint-', '-brMode1-', '-brMode2-', 'tab1_list', 'tab1_(re)load')
+
+    # List of events that cause GUI output update
+    tab1_update_gui_events = (
+        '-ColorSpace-', '-WhitePoint-', '-gamma-', '-brMax-', '-brMode1-', '-brMode2-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load'
+    )
+
+    # List of events that cause tab3_color recalculation
+    tab3_triggers = ('-ColorSpace-', '-WhitePoint-', '-bitness-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3', 'tab3_slider4')
 
     # Window events loop
     while True:
@@ -134,8 +151,10 @@ def launch_window(lang: str):
                 to_plot.append(tab1_spectrum)
             if tab3_obj_name and tab3_spectrum not in to_plot:
                 to_plot.append(tab3_spectrum)
-            tab1_tab3_fig = pl.plot_spectra(to_plot, color_system, values['-gamma-'], values['-brMax-'],
-                                        light_theme, lang, spectra_figsize, spectra_dpi)
+            tab1_tab3_fig = pl.plot_spectra(
+                to_plot, color_system, values['-gamma-'], values['-brMax-'] or tab1_estimated is None,
+                light_theme, lang, spectra_figsize, spectra_dpi
+            )
             tab1_tab3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, tab1_tab3_fig)
         elif event == 'W1_path':
             tab1_tab3_fig.savefig(values['W1_path'], dpi=133.4) # 1200x800
@@ -146,7 +165,7 @@ def launch_window(lang: str):
                 window0.ReturnValuesDictionary['-currentTab-'],
                 color_system,
                 window0.ReturnValuesDictionary['-gamma-'],
-                window0.ReturnValuesDictionary['-brMax-'],
+                window0.ReturnValuesDictionary['-brMax-'] or tab1_estimated is None, # TODO ?!
                 light_theme, lang
             )
 
@@ -176,7 +195,7 @@ def launch_window(lang: str):
                     window0.ReturnValuesDictionary['-currentTab-'],
                     color_system,
                     window0.ReturnValuesDictionary['-gamma-'],
-                    window0.ReturnValuesDictionary['-brMax-'],
+                    window0.ReturnValuesDictionary['-brMax-'] or tab1_estimated is None,
                     light_theme, lang
                 )
 
@@ -257,68 +276,79 @@ def launch_window(lang: str):
 
                     tab1_loaded = True
 
-                if event in tab1_triggers and values['tab1_list'] != []:
+                if event == '-ColorSpace-' or event == '-WhitePoint-':
+                    # Update color system
+                    color_system = ColorSystem(values['-ColorSpace-'], values['-WhitePoint-'])
 
-                    # for green Dinkinesh Easter egg
-                    last_click_was_Dinkinesh = event == 'tab1_list' and tab1_spectrum is not None and tab1_spectrum.name.name() == 'Dinkinesh'
+                if event == '-gamma-' or event == '-brMax-':
+                    # Changing postprocessing flags in the ColorPoint object
+                    tab1_color.gamma_correction = values['-gamma-']
+                    tab1_color.maximize_brightness = values['-brMax-'] or tab1_estimated is None
 
-                    try:
-                        tab1_obj_name = namesDB[lang][values['tab1_list'][0]]
-                    except KeyError:
-                        continue
-                    window['tab1_title2'].update(tab1_obj_name.indexed_name(lang))
+                if values['tab1_list'] != []:
+                    # (Check for the availability of the selected object)
+                    # For optimization purposes, the cases when some calculations are not required are separated
 
-                    # Spectral data import and processing
-                    tab1_body = database_parser(tab1_obj_name, objectsDB[tab1_obj_name])
-                    tab1_spectrum, tab1_estimated = tab1_body.get_spectrum('geometric' if values['-brMode1-'] else 'spherical')
+                    if event in tab1_recalc_body_events:
 
-                    # Setting of notes
-                    tab1_albedo_note = tr.gui_blank_note
-                    if not values['-brMax-']:
-                        match tab1_estimated:
-                            case None:
-                                if isinstance(tab1_body, ReflectingBody):
-                                    tab1_albedo_note = tr.gui_no_albedo
-                            case True:
-                                tab1_albedo_note = tr.gui_estimated
-                    window['tab1_albedo_note'].update(tab1_albedo_note[lang])
+                        # Getting ObjectName and updating title
+                        try:
+                            tab1_obj_name = namesDB[lang][values['tab1_list'][0]]
+                        except KeyError:
+                            continue
+                        window['tab1_title2'].update(tab1_obj_name.indexed_name(lang))
 
-                    # Color calculation
-                    tab1_maximize_br = values['-brMax-'] or tab1_estimated is None
-                    tab1_color = ColorPoint.from_spectral_data(tab1_spectrum, tab1_maximize_br, values['-srgb-'])
-                    if values['-gamma-']:
-                        tab1_color = tab1_color.gamma_corrected()
-                    tab1_rgb = tuple(tab1_color.to_bit(bitness).round(rounding))
-                    tab1_rgb_show = tab1_color.to_html()
+                        # Spectral data import and processing
+                        tab1_body = database_parser(tab1_obj_name, objectsDB[tab1_obj_name])
 
-                    # Output
-                    window['tab1_graph'].TKCanvas.itemconfig(tab1_preview, fill=tab1_rgb_show)
-                    window['tab1_rgb'].update(tab1_rgb)
-                    window['tab1_hex'].update(tab1_rgb_show)
-                    tab1_value, tab1_sd = tab1_spectrum @ get_filter(values['tab1_in_filter'])
-                    if tab1_sd is None:
-                        window['tab1_convolved'].update(sigfig_round(tab1_value, rounding, warn=False))
-                    else:
-                        window['tab1_convolved'].update(sigfig_round(tab1_value, uncertainty=tab1_sd, warn=False))
+                    if event in tab1_recalc_color_events:
 
-                    # Green Dinkinesh Easter egg (added by request)
-                    # There was a bug in TCT v3.3 caused by upper limit of uint16 when squaring nm for AB calibration
-                    if last_click_was_Dinkinesh and tab1_spectrum.name.name() == 'Dinkinesh':
-                        window['tab1_graph'].TKCanvas.itemconfig(tab1_preview, fill='#7f9000')
-                        window['tab1_albedo_note'].update('Easter egg! Values below are correct.')
+                        # Apply albedo mode to calculated spectrum
+                        tab1_spectrum, tab1_estimated = tab1_body.get_spectrum('geometric' if values['-brMode1-'] else 'spherical')
 
-                    # Dynamical plotting
-                    if window1:
-                        tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
-                            tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
-                            window0.ReturnValuesDictionary['-currentTab-'],
-                            color_system,
-                            window0.ReturnValuesDictionary['-gamma-'],
-                            window0.ReturnValuesDictionary['-brMax-'],
-                            light_theme, lang
-                        )
+                        # Color calculation
+                        tab1_color = ColorPoint.from_spectral_data(tab1_spectrum, color_system)
 
-                elif event in ('tab1_tag_filter', 'tab1_searched'):
+                    if event in tab1_update_gui_events:
+
+                        # Color postprocessing
+                        tab1_color.gamma_correction = values['-gamma-']
+                        tab1_color.maximize_brightness = values['-brMax-'] or tab1_estimated is None
+                        tab1_html = tab1_color.to_html()
+
+                        # Output
+                        window['tab1_graph'].TKCanvas.itemconfig(tab1_preview, fill=tab1_html)
+                        window['tab1_rgb'].update(tuple(tab1_color.to_bit(bitness).round(rounding)))
+                        window['tab1_hex'].update(tab1_html)
+                        tab1_value, tab1_sd = tab1_spectrum @ get_filter(values['tab1_in_filter'])
+                        if tab1_sd is None:
+                            window['tab1_convolved'].update(sigfig_round(tab1_value, rounding, warn=False))
+                        else:
+                            window['tab1_convolved'].update(sigfig_round(tab1_value, uncertainty=tab1_sd, warn=False))
+
+                        # Setting of notes
+                        tab1_albedo_note = tr.gui_blank_note
+                        if not values['-brMax-']:
+                            match tab1_estimated:
+                                case None:
+                                    if isinstance(tab1_body, ReflectingBody):
+                                        tab1_albedo_note = tr.gui_no_albedo
+                                case True:
+                                    tab1_albedo_note = tr.gui_estimated
+                        window['tab1_albedo_note'].update(tab1_albedo_note[lang])
+
+                        # Dynamical plotting
+                        if window1:
+                            tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
+                                tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
+                                window0.ReturnValuesDictionary['-currentTab-'],
+                                color_system,
+                                window0.ReturnValuesDictionary['-gamma-'],
+                                window0.ReturnValuesDictionary['-brMax-'],
+                                light_theme, lang
+                            )
+
+                if event in ('tab1_tag_filter', 'tab1_searched'):
                     tab1_displayed_namesDB = db.obj_names_dict(objectsDB, values['tab1_tag_filter'], values['tab1_searched'], lang)
                     window['tab1_list'].update(tuple(tab1_displayed_namesDB.keys()))
 

@@ -1868,7 +1868,7 @@ class ColorSystem:
         self.white_point = np.array((*self.white_point, 1 - np.sum(self.white_point)))
         white_scale = inv_matrix.dot(self.white_point)
         # XYZ -> RGB transformation matrix
-        self.matrix = inv_matrix / white_scale[:, np.newaxis]
+        self.matrix = inv_matrix / white_scale[:, np.newaxis] / 3 # Why divide by 3? It just works
 
     def xyz_to_rgb(self, arr: np.ndarray) -> np.ndarray:
         """ Converts XYZ color array into a RGB color space array """
@@ -1895,8 +1895,7 @@ class ColorXYZ:
     @staticmethod
     def from_spectral_data(data: _TrueColorToolsObject) -> 'ColorXYZ':
         """ Convolves the (photo)spectral object with CIE XYZ CMF """
-        # Why divide by 3? It just works
-        return ColorXYZ((data @ xyz_cmf).br / 3)
+        return ColorXYZ((data @ xyz_cmf).br)
 
     @staticmethod
     def from_rgb(rgb: 'ColorRGB', color_system: ColorSystem) -> 'ColorXYZ':
@@ -1906,7 +1905,16 @@ class ColorXYZ:
 
 
 class ColorRGB:
-    """ This class stores a color brightness array (`self.br`) and provides conversion methods. """
+    """
+    This class stores a color brightness array (`self.br`) and provides conversion methods.
+
+    Postprocessing flags:
+    - `gamma_correction` makes the output to model the nonlinearity of the human eye’s perception of luminance
+    - `maximize_brightness` normalize the output to the brightest RGB channel value
+    """
+
+    gamma_correction = False
+    maximize_brightness = False
 
     def __init__(self, br: np.ndarray):
         """ Initialized by an array of length 3 on the first axis """
@@ -1931,21 +1939,24 @@ class ColorRGB:
             br[:, negative_mask] -= br.min(axis=0)[negative_mask]
         return cls(br)
 
-    def to_array(self, gamma_correction=False, maximize_brightness=False) -> np.ndarray:
+    def to_array(self) -> np.ndarray:
         """ Implies post-processing functions: gamma correction and brightness maximizing """
         arr = np.nan_to_num(self.br, copy=True)
-        if maximize_brightness and arr.max() != 0:
+        if self.maximize_brightness and arr.max() != 0:
             arr /= arr.max()
-        if gamma_correction:
-            arr = self.gamma_correction(arr)
+        if self.gamma_correction:
+            arr = self.apply_gamma_correction(arr)
         return arr
 
     def grayscale(self, color_system: ColorSystem) -> np.ndarray|np.float64:
         """ Converts color to grayscale using CIE 1931 luminance (Y in XYZ color space) """
-        return ColorXYZ.from_rgb(self, color_system).br[1]
+        y = ColorXYZ.from_rgb(self, color_system).br[1]
+        if self.gamma_correction:
+            y = self.apply_gamma_correction(y)
+        return y
 
     @staticmethod
-    def gamma_correction(arr: np.ndarray):
+    def apply_gamma_correction(arr: np.ndarray):
         """ Applies sRGB gamma correction to the array """
         mask = arr < 0.0031308
         arr[mask] *= 12.92
@@ -1963,10 +1974,10 @@ class ColorPoint(ColorRGB):
     def to_bit(self, bit: int, clip: bool = False) -> np.ndarray:
         """ Returns color array, scaled to the appropriate power of two (not rounded) """
         factor = 2**bit - 1
+        arr = self.to_array()
         if clip:
-            return np.clip(self.br, 0, 1) * factor
-        else:
-            return self.br * factor
+            arr = np.clip(arr, 0, 1)
+        return arr * factor
 
     def to_html(self) -> str:
         """ Converts fractional rgb values to HTML-styled hexadecimal string """
