@@ -1854,7 +1854,7 @@ class ColorSystem:
 
     def __init__(self, color_space: str, white_point: str):
         """
-        Initialise the ColorSystem object.
+        Initialize the ColorSystem object.
         The color space and white point must be among the supported options.
         """
         # Reading color space coordinates
@@ -1908,13 +1908,15 @@ class ColorRGB:
     """
     This class stores a color brightness array (`self.br`) and provides conversion methods.
 
-    Postprocessing flags:
+    Postprocessing attributes:
     - `gamma_correction` makes the output to model the nonlinearity of the human eye’s perception of luminance
     - `maximize_brightness` normalize the output to the brightest RGB channel value
+    - `scale_factor` multiplies the values of the output by a constant (implemented as property)
     """
 
     gamma_correction = False
     maximize_brightness = False
+    _scale_factor = 1.
 
     def __init__(self, br: np.ndarray):
         """ Initialized by an array of length 3 on the first axis """
@@ -1944,6 +1946,8 @@ class ColorRGB:
         arr = np.nan_to_num(self.br, copy=True)
         if self.maximize_brightness and arr.max() != 0:
             arr /= arr.max()
+        if self.scale_factor != 1:
+            arr *= self.scale_factor
         if self.gamma_correction:
             arr = self.apply_gamma_correction(arr)
         return arr
@@ -1954,6 +1958,18 @@ class ColorRGB:
         if self.gamma_correction:
             y = self.apply_gamma_correction(y)
         return y
+
+    @property
+    def scale_factor(self):
+        return self._scale_factor
+
+    @scale_factor.setter
+    def scale_factor(self, value):
+        try:
+            self._scale_factor = max(0, float(value))
+        except ValueError:
+            pass
+            #print('Scale factor of ColorRGB object must be a number.')
 
     @staticmethod
     def apply_gamma_correction(arr: np.ndarray):

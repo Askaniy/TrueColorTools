@@ -115,15 +115,17 @@ def launch_window(lang: str):
     tab3_recalc_spectrum_events = ('tab3_slider1', 'tab3_slider2', 'tab3_slider3')
 
     # List of events that cause color recalculation
-    tab1_recalc_color_events = ('-ColorSpace-', '-WhitePoint-', '-AlbedoMode1-', '-AlbedoMode2-', 'tab1_list', 'tab1_(re)load')
-    tab3_recalc_color_events = ('-ColorSpace-', '-WhitePoint-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3')
+    tab1_recalc_color_events = ('-ColorSpace-', '-WhitePoint-', '-ScaleFactor-', '-AlbedoMode1-', '-AlbedoMode2-', 'tab1_list', 'tab1_(re)load')
+    tab3_recalc_color_events = ('-ColorSpace-', '-WhitePoint-', '-ScaleFactor-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3')
 
     # List of events that cause GUI output update
     tab1_update_gui_events = (
-        '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-AlbedoMode1-', '-AlbedoMode2-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load'
+        '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-',
+        '-AlbedoMode1-', '-AlbedoMode2-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load'
     )
     tab3_update_gui_events = (
-        '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-','-bitness-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3'
+        '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-',
+        '-bitness-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3'
     )
 
     # Window events loop
@@ -221,6 +223,10 @@ def launch_window(lang: str):
             elif event == tr.gui_info[lang]:
                 sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event, icon=icon, non_blocking=True)
 
+            elif event == '-ColorSpace-' or event == '-WhitePoint-':
+                # Update color system
+                color_system = ColorSystem(values['-ColorSpace-'], values['-WhitePoint-'])
+
             # Checks for empty input
             elif event == '-bitness-':
                 try:
@@ -279,15 +285,6 @@ def launch_window(lang: str):
 
                     tab1_loaded = True
 
-                if event == '-ColorSpace-' or event == '-WhitePoint-':
-                    # Update color system
-                    color_system = ColorSystem(values['-ColorSpace-'], values['-WhitePoint-'])
-
-                if event == '-GammaCorrection-' or event == '-MaximizeBrightness-':
-                    # Changing postprocessing flags in the ColorPoint object
-                    tab1_color.gamma_correction = values['-GammaCorrection-']
-                    tab1_color.maximize_brightness = values['-MaximizeBrightness-'] or tab1_estimated is None
-
                 if values['tab1_list'] != []:
                     # (Check for the availability of the selected object)
                     # For optimization purposes, the cases when some calculations are not required are separated
@@ -317,6 +314,7 @@ def launch_window(lang: str):
                         # Color postprocessing
                         tab1_color.gamma_correction = values['-GammaCorrection-']
                         tab1_color.maximize_brightness = values['-MaximizeBrightness-'] or tab1_estimated is None
+                        tab1_color.scale_factor = values['-ScaleFactor-']
                         tab1_html = tab1_color.to_html()
 
                         # Output
@@ -500,14 +498,11 @@ def launch_window(lang: str):
 
             elif values['-currentTab-'] == 'tab3':
 
-                if event == '-MaximizeBrightness-':
-                    window['tab3_mag'].update(text_color=text_colors[not values['-MaximizeBrightness-']])
-                    window['tab3_slider4'].update(disabled=values['-MaximizeBrightness-'])
-
                 if event in tab3_recalc_spectrum_events:
 
                     # Spectral data processing and updating title
                     tab3_spectrum = Spectrum.from_blackbody_redshift(visible_range, values['tab3_slider1'], values['tab3_slider2'], values['tab3_slider3'])
+                    tab3_spectrum /= sun_in_V
                     tab3_obj_name = tab3_spectrum.name
                     window['tab3_title2'].update(tab3_obj_name.indexed_name(lang))
 
@@ -518,26 +513,16 @@ def launch_window(lang: str):
 
                 if event in tab3_update_gui_events:
 
-                    # Mode with "exposure"
-                    if not values['-MaximizeBrightness-']:
-                        tab3_spectrum.br /= aux.mag2irradiance(values['tab3_slider4'], vega_in_V) * sun_in_V
-
                     # Color postprocessing
                     tab3_color.gamma_correction = values['-GammaCorrection-']
-                    tab3_color.maximize_brightness = values['-MaximizeBrightness-'] or tab1_estimated is None
-                    tab3_html = tab1_color.to_html()
-
-                    # Color calculation
-                    tab3_color = ColorPoint.from_spectral_data(tab3_spectrum, values['-MaximizeBrightness-'], values['-srgb-'])
-                    if values['-GammaCorrection-']:
-                        tab3_color = tab3_color.gamma_corrected()
-                    tab3_rgb = tuple(tab3_color.to_bit(bitness).round(rounding))
-                    tab3_rgb_show = tab3_color.to_html()
+                    tab3_color.maximize_brightness = values['-MaximizeBrightness-']
+                    tab3_color.scale_factor = values['-ScaleFactor-']
+                    tab3_html = tab3_color.to_html()
 
                     # Output
-                    window['tab3_graph'].TKCanvas.itemconfig(tab3_preview, fill=tab3_rgb_show)
-                    window['tab3_rgb'].update(tab3_rgb)
-                    window['tab3_hex'].update(tab3_rgb_show)
+                    window['tab3_graph'].TKCanvas.itemconfig(tab3_preview, fill=tab3_html)
+                    window['tab3_rgb'].update(tuple(tab3_color.to_bit(bitness).round(rounding)))
+                    window['tab3_hex'].update(tab3_html)
 
                     # Dynamical plotting
                     if window1:
