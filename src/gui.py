@@ -234,14 +234,14 @@ def generate_layout(
             sg.Column(tab2_col2_2, expand_x=True, expand_y=False)
         ],
         [sg.T()],
-        [sg.Push(), sg.Image(background_color='black', size=img_preview_size, key='tab2_image'), sg.Push()],
-        [sg.Push(), sg.Button(tr.gui_preview[lang], size=button_size, key='tab2_preview'), sg.Push()],
+        [sg.Push(), sg.Image(background_color='black', size=img_preview_size, key='tab2_preview'), sg.Push()],
+        [sg.Push(), sg.Button(tr.gui_preview[lang], size=button_size, key='tab2_preview_button'), sg.Push()],
         [
             sg.Push(),
             sg.Input(enable_events=True, key='tab2_folder', visible=False),
             sg.FolderBrowse(
                 button_text=tr.gui_process[lang], size=button_size,
-                initial_folder='..', key='tab2_process'
+                initial_folder='..', key='tab2_process_button'
             ),
             sg.Push(),
         ],
@@ -365,8 +365,8 @@ def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict,
     #window['tab2_plotpixels'].update(text=tr.gui_plotpixels[lang])
     window['tab2_upscale'].update(text=tr.gui_upscale[lang])
     window['tab2_chunksText'].update(tr.gui_chunks[lang])
-    window['tab2_preview'].update(tr.gui_preview[lang])
-    window['tab2_process'].update(tr.gui_process[lang])
+    window['tab2_preview_button'].update(tr.gui_preview[lang])
+    window['tab2_process_button'].update(tr.gui_process[lang])
     #window['tab3_title1'].update(tr.gui_input[lang])
     #window['tab3_title2'].update(tr.gui_output[lang])
     window['tab3_temp'].update(tr.gui_temp[lang])

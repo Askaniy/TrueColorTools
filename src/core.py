@@ -37,6 +37,7 @@ Color:
 - - ColorImage (3D)
 """
 
+from io import BytesIO
 from copy import deepcopy
 from typing import Sequence, Callable, Self
 from pathlib import Path
@@ -2038,11 +2039,26 @@ class ColorImage(ColorRGB):
         output.br = np.repeat(np.repeat(output.br, times, axis=0), times, axis=1)
         return output
 
+    def downscale(self, pixels_limit: int):
+        """ Brings the resolution of the image to approximately match the number of pixels """
+        output = deepcopy(self)
+        output.br = aux.spatial_downscaling(self.br, pixels_limit)
+        #output.sd = None
+        #if self.sd is not None:
+        #    output.sd = aux.spatial_downscaling(self.sd, pixels_limit)
+        return output
+
     def to_pillow_image(self):
         """ Converts ColorImage to the Image object of the Pillow library """
         # TODO: support export to 16 bit and other Pillow modes
         arr = np.clip(self.to_array(), 0, 1) * 255 # 8 bit
         return Image.fromarray(np.around(arr).astype('uint8').transpose())
+
+    def to_bytes(self):
+        """ Converts ColorImage to bytes """
+        bio = BytesIO()
+        self.to_pillow_image().save(bio, format='png')
+        return bio.getvalue()
 
     @property
     def width(self) -> int:
@@ -2053,3 +2069,8 @@ class ColorImage(ColorRGB):
     def height(self) -> int:
         """ Returns vertical spatial axis length """
         return self.br.shape[2]
+
+    @property
+    def size(self):
+        """ Returns the number of pixels """
+        return self.width * self.height

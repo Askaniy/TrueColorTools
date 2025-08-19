@@ -3,6 +3,7 @@
 import FreeSimpleGUI as sg
 from sigfig import round as sigfig_round
 from copy import deepcopy
+from time import strftime
 
 from src.core import *
 import src.gui as gui
@@ -88,8 +89,10 @@ def launch_window(lang: str):
     mean_spectrum = [] # for tab 2
 
     # Default values to avoid errors
-    tab1_obj_name = tab1_color = tab1_spectrum = tab3_obj_name = tab3_color = tab3_spectrum = None
+    tab1_obj_name = tab1_color = tab1_spectrum = None
     tab1_albedo_note = tr.gui_blank_note
+    tab2_preview = None
+    tab3_obj_name = tab3_color = tab3_spectrum = None
 
     def tab1_tab3_update_plot(
             fig, fig_canvas_agg, current_tab, color_system: ColorSystem,
@@ -123,6 +126,7 @@ def launch_window(lang: str):
         '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-',
         '-AlbedoMode1-', '-AlbedoMode2-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load'
     )
+    tab2_update_gui_events = ('-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-')
     tab3_update_gui_events = (
         '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-',
         '-bitness-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3'
@@ -410,76 +414,92 @@ def launch_window(lang: str):
 
             elif values['-currentTab-'] == 'tab2':
 
-                # Getting input data mode name
-                tab2_mode = aux.get_flag_index((values['-typeImage-'], values['-typeImageRGB-'], values['-typeImageCube-']))
+                if isinstance(event, str):
 
-                if tab2_mode == 2:
-                    # No visible frames in spectral cube mode
-                    window['tab2_frames'].update(visible=False)
-                else:
-                    # The number of visible frames for RGB image (tab2_mode==1) is 3,
-                    # otherwise all possible frames are displayed
-                    window['tab2_frames'].update(visible=True)
-                    tab2_vis = 3 if tab2_mode else tab2_num
-                    # Setting the visibility and elements
-                    for i in range(tab2_num):
-                        if i < tab2_vis:
-                            window[f'tab2_band{i}'].update(visible=True)
-                            window[f'tab2_path{i}'].update(visible=values['-typeImage-'])
-                            window[f'tab2_pathText{i}'].update(visible=values['-typeImage-'])
-                            window[f'tab2_rgbText{i}'].update(visible=values['-typeImageRGB-'])
+                    if event in ('-typeImage-', '-typeImageRGB-', '-typeImageCube-'):
+
+                        # Getting input data mode name
+                        tab2_mode = aux.get_flag_index((values['-typeImage-'], values['-typeImageRGB-'], values['-typeImageCube-']))
+
+                        # Setting the visibility and elements
+                        if tab2_mode == 2:
+                            # No visible frames in spectral cube mode
+                            window['tab2_frames'].update(visible=False)
                         else:
-                            window[f'tab2_band{i}'].update(visible=False)
+                            # The number of visible frames for RGB image (tab2_mode==1) is 3,
+                            # otherwise all possible frames are displayed
+                            window['tab2_frames'].update(visible=True)
+                            tab2_vis = 3 if tab2_mode else tab2_num
+                            for i in range(tab2_num):
+                                if i < tab2_vis:
+                                    window[f'tab2_band{i}'].update(visible=True)
+                                    window[f'tab2_path{i}'].update(visible=values['-typeImage-'])
+                                    window[f'tab2_pathText{i}'].update(visible=values['-typeImage-'])
+                                    window[f'tab2_rgbText{i}'].update(visible=values['-typeImageRGB-'])
+                                else:
+                                    window[f'tab2_band{i}'].update(visible=False)
 
-                # Setting single file choice
-                tab2_single_file_flag = tab2_mode > 0
-                window['tab2_step2'].update(visible=not tab2_single_file_flag)
-                window['tab2_path'].update(visible=tab2_single_file_flag)
-                window['tab2_pathText'].update(visible=tab2_single_file_flag)
+                        # Setting single file choice
+                        tab2_single_file_flag = tab2_mode > 0
+                        window['tab2_step2'].update(visible=not tab2_single_file_flag)
+                        window['tab2_path'].update(visible=tab2_single_file_flag)
+                        window['tab2_pathText'].update(visible=tab2_single_file_flag)
 
-                # Getting filters and image paths
-                tab2_files = []
-                tab2_filters = []
-                tab2_formulas = []
-                for i in range(tab2_vis):
-                    tab2_filter_name = values[f'tab2_filter{i}']
-                    if tab2_filter_name != '':
-                        tab2_filter = get_filter(tab2_filter_name)
-                        tab2_filters.append(tab2_filter)
-                        tab2_files.append(values[f'tab2_path{i}'])
-                        tab2_formulas.append(values[f'tab2_eval{i}'])
+                    elif event.startswith('tab2_filter') or event.startswith('tab2_path') or event.startswith('tab2_eval'):
+                        # Getting filters and image paths
+                        tab2_files = []
+                        tab2_filters = []
+                        tab2_formulas = []
+                        for i in range(tab2_vis):
+                            tab2_filter_name = values[f'tab2_filter{i}']
+                            if tab2_filter_name != '':
+                                tab2_filter = get_filter(tab2_filter_name)
+                                tab2_filters.append(tab2_filter)
+                                tab2_files.append(values[f'tab2_path{i}'])
+                                tab2_formulas.append(values[f'tab2_eval{i}'])
 
-                # Image processing
-                if isinstance(event, str) and event in ('tab2_preview', 'tab2_folder'):
-                    window.start_thread(
-                        lambda: ip.image_parser(
-                            image_mode=tab2_mode,
-                            preview_flag=event=='tab2_preview',
-                            save_folder=values['tab2_folder'],
-                            px_lower_limit=img_preview_area,
-                            px_upper_limit=int(float(values['tab2_chunks']) * 1e6), # megapixels to pixels
-                            single_file=values['tab2_path'],
-                            files=tab2_files,
-                            filters=tab2_filters,
-                            formulas=tab2_formulas,
-                            color_system=color_system,
-                            gamma_correction=values['-GammaCorrection-'],
-                            maximize_brightness=values['-MaximizeBrightness-'],
-                            scale_factor=values['-ScaleFactor-'],
-                            desun=values['tab2_desun'],
-                            photons=values['tab2_photons'],
-                            upscale=values['tab2_upscale'],
-                            log=tab2_logger
-                        ),
-                        ('tab2_thread', 'End of the image processing thread\n')
-                    )
+                    # Image processing
+                    elif event in ('tab2_preview_button', 'tab2_folder'):
+                        window.start_thread(
+                            lambda: ip.image_parser(
+                                image_mode=tab2_mode,
+                                preview_flag=event=='tab2_preview_button',
+                                px_lower_limit=img_preview_area,
+                                px_upper_limit=int(float(values['tab2_chunks']) * 1e6), # megapixels to pixels
+                                single_file=values['tab2_path'],
+                                files=tab2_files,
+                                filters=tab2_filters,
+                                formulas=tab2_formulas,
+                                color_system=color_system,
+                                desun=values['tab2_desun'],
+                                photons=values['tab2_photons'],
+                                upscale=values['tab2_upscale'],
+                                log=tab2_logger
+                            ),
+                            ('tab2_thread', 'End of the image processing thread\n')
+                        )
 
-                # Getting messages from image processing thread
+                    # Updating preview image
+                    elif tab2_preview is not None and event in tab2_update_gui_events:
+                        tab2_preview.gamma_correction = values['-GammaCorrection-']
+                        tab2_preview.maximize_brightness = values['-MaximizeBrightness-']
+                        tab2_preview.scale_factor = values['-ScaleFactor-']
+                        window['tab2_preview'].update(data=tab2_preview.to_bytes())
+
+                # Getting messages from the image processing thread
                 elif event[0] == 'tab2_thread':
                     sg.easy_print(event[1]) # pop-up printing
                     if values[event] is not None:
-                        # Updating preview image
-                        window['tab2_image'].update(data=ip.convert_to_bytes(values[event]))
+                        tab2_img = values[event]
+                        tab2_img.gamma_correction = values['-GammaCorrection-']
+                        tab2_img.maximize_brightness = values['-MaximizeBrightness-']
+                        tab2_img.scale_factor = values['-ScaleFactor-']
+                        if event[1].endswith('Sending the preview to the main thread'):
+                            tab2_preview = tab2_img
+                        else:
+                            tab2_preview = tab2_img.downscale(img_preview_area)
+                            tab2_img.to_pillow_image().save(f'{values["tab2_folder"]}/TCT_{strftime("%Y-%m-%d_%H-%M-%S")}.png')
+                        window['tab2_preview'].update(data=tab2_preview.to_bytes())
 
                 # Updating filters profile plot
                 if (isinstance(event, str) and event.startswith('tab2_filter')) or (event[0] == 'tab2_thread' and values[event] is not None) or event in ('-currentTab-', '-ColorSpace-', '-WhitePoint-'):

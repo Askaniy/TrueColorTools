@@ -2,34 +2,18 @@
 
 from typing import Callable
 from traceback import format_exc
-from io import BytesIO
-from time import strftime, monotonic
+from time import monotonic
 from math import sqrt, ceil
-from PIL import Image
 import numpy as np
 
-from src.core import FilterSystem, SpectralCube, PhotospectralCube, ColorSystem, ColorLine, ColorImage
+from src.core import FilterSystem, SpectralCube, PhotospectralCube, ColorSystem, ColorXYZ, ColorImage, sun_norm
 import src.image_import as ii
 
 
 def image_parser(
-        image_mode: int,
-        preview_flag: bool = False,
-        save_folder: str = '',
-        px_lower_limit: int = 256*128,
-        px_upper_limit: int = 1_000_000,
-        single_file: str = None,
-        files: list = None,
-        filters: list = None,
-        formulas: list = None,
-        color_system: ColorSystem = None,
-        gamma_correction: bool = True,
-        maximize_brightness: bool = False,
-        scale_factor: str = '1',
-        desun: bool = False,
-        photons: bool = False,
-        upscale: bool = True,
-        log: Callable = print
+        image_mode: int, preview_flag: bool, px_lower_limit: int, px_upper_limit: int,
+        single_file: str, files: list, filters: list, formulas: list, color_system: ColorSystem,
+        desun: bool, photons: bool, upscale: bool, log: Callable
     ):
     """ Receives user input and performs processing in a parallel thread """
     log('Starting the image processing thread')
@@ -64,7 +48,7 @@ def image_parser(
         px_num = cube.size
         if preview_flag or px_num < px_upper_limit:
             log('Color calculating')
-            img = ColorImage.from_spectral_data(cube, color_system)
+            img = ColorXYZ.from_spectral_data(cube)
         else:
             square = cube.flatten()
             chunk_num = ceil(px_num / px_upper_limit)
@@ -75,32 +59,22 @@ def image_parser(
                     chunk = square[i*px_upper_limit:j*px_upper_limit]
                 except IndexError:
                     chunk = square[i*px_upper_limit:]
-                img_chunk = ColorLine.from_spectral_data(chunk, color_system)
+                img_chunk = ColorXYZ.from_spectral_data(chunk)
                 img_array[:,i*px_upper_limit:j*px_upper_limit] = img_chunk.br
                 log(f'Color calculated for {j} chunks out of {chunk_num}')
-            img = ColorImage(img_array.reshape(3, cube.width, cube.height))
-        img.gamma_correction = gamma_correction
-        img.maximize_brightness = maximize_brightness
-        img.scale_factor = scale_factor
+            img = ColorXYZ(img_array.reshape(3, cube.width, cube.height))
+        img = ColorImage.from_xyz(img, color_system)
         if upscale and px_num < px_lower_limit and (times := round(sqrt(px_lower_limit / px_num))) != 1:
             log('Upscaling')
             img = img.upscale(times)
-        img = img.to_pillow_image()
         # End of processing, summarizing
         time = monotonic() - start_time
         speed = px_num / time
         log(f'Processing took {time:.1f} seconds, average speed is {speed:.1f} px/sec')
         if preview_flag:
-            log('Sending the resulting preview to the main thread', img)
+            log('Sending the preview to the main thread', img)
         else:
-            img.save(f'{save_folder}/TCT_{strftime("%Y-%m-%d_%H-%M-%S")}.png')
+            log('Sending the image to the main thread', img)
     except Exception:
         log(f'Image processing failed with {format_exc(limit=0).strip()}')
         print(format_exc())
-
-def convert_to_bytes(img: Image.Image):
-    """ Prepares PIL's image to be displayed in the window """
-    bio = BytesIO()
-    img.save(bio, format='png')
-    del img
-    return bio.getvalue()
