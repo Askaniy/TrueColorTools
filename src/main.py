@@ -465,9 +465,9 @@ def launch_window(lang: str):
                             color_system=color_system,
                             gamma_correction=values['-GammaCorrection-'],
                             maximize_brightness=values['-MaximizeBrightness-'],
+                            scale_factor=values['-ScaleFactor-'],
                             desun=values['tab2_desun'],
                             photons=values['tab2_photons'],
-                            factor=float(values['tab2_factor']),
                             upscale=values['tab2_upscale'],
                             log=tab2_logger
                         ),

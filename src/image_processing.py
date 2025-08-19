@@ -8,7 +8,7 @@ from math import sqrt, ceil
 from PIL import Image
 import numpy as np
 
-from src.core import *
+from src.core import FilterSystem, SpectralCube, PhotospectralCube, ColorSystem, ColorLine, ColorImage
 import src.image_import as ii
 
 
@@ -25,9 +25,9 @@ def image_parser(
         color_system: ColorSystem = None,
         gamma_correction: bool = True,
         maximize_brightness: bool = False,
+        scale_factor: str = '1',
         desun: bool = False,
         photons: bool = False,
-        factor: float = 1.,
         upscale: bool = True,
         log: Callable = print
     ):
@@ -61,13 +61,10 @@ def image_parser(
         if desun:
             log('Removing Sun as emitter')
             cube /= sun_norm
-        if factor != 1:
-            log('Scaling brightness')
-            cube *= factor
         px_num = cube.size
         if preview_flag or px_num < px_upper_limit:
             log('Color calculating')
-            img = ColorImage.from_spectral_data(cube, maximize_brightness, srgb)
+            img = ColorImage.from_spectral_data(cube, color_system)
         else:
             square = cube.flatten()
             chunk_num = ceil(px_num / px_upper_limit)
@@ -78,13 +75,13 @@ def image_parser(
                     chunk = square[i*px_upper_limit:j*px_upper_limit]
                 except IndexError:
                     chunk = square[i*px_upper_limit:]
-                img_chunk = ColorLine.from_spectral_data(chunk, maximize_brightness, srgb)
+                img_chunk = ColorLine.from_spectral_data(chunk, color_system)
                 img_array[:,i*px_upper_limit:j*px_upper_limit] = img_chunk.br
                 log(f'Color calculated for {j} chunks out of {chunk_num}')
             img = ColorImage(img_array.reshape(3, cube.width, cube.height))
-        if gamma_correction:
-            log('Gamma correcting')
-            img = img.gamma_corrected()
+        img.gamma_correction = gamma_correction
+        img.maximize_brightness = maximize_brightness
+        img.scale_factor = scale_factor
         if upscale and px_num < px_lower_limit and (times := round(sqrt(px_lower_limit / px_num))) != 1:
             log('Upscaling')
             img = img.upscale(times)

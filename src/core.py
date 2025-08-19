@@ -2041,7 +2041,7 @@ class ColorImage(ColorRGB):
     def to_pillow_image(self):
         """ Converts ColorImage to the Image object of the Pillow library """
         # TODO: support export to 16 bit and other Pillow modes
-        arr = np.clip(self.br, 0, 1) * 255 # 8 bit
+        arr = np.clip(self.to_array(), 0, 1) * 255 # 8 bit
         return Image.fromarray(np.around(arr).astype('uint8').transpose())
 
     @property
