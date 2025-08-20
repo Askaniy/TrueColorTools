@@ -100,7 +100,7 @@ class ObjectName:
             if ':' in name: # note
                 name, note = name.split(':', 1)
                 self._note_en = self.formatting_provisional_designation(note.strip())
-            if '/' in name: # comet name
+            if '/' in name and name[0] in ('P', 'C', 'I'): # comet name
                 # the last "if" because "/" may encounter in info or notes
                 index, name = name.split('/', 1)
                 self.index = index.strip() + '/'
@@ -1820,6 +1820,8 @@ supported_color_spaces = {
     'sRGB': ((0.64, 0.33), (0.30, 0.60), (0.15, 0.06)),
     'Display P3': ((0.68, 0.32), (0.265, 0.69), (0.15, 0.06)),
     'Adobe RGB': ((0.64, 0.33), (0.21, 0.71), (0.15, 0.06)),
+    'Wide Gamut': ((0.7347, 0.2653), (0.1152, 0.8264), (0.1566, 0.0177)),
+    'ProPhoto RGB': ((0.734699, 0.265301), (0.159597, 0.840403), (0.036598, 0.000105)),
     'HDTV': ((0.67, 0.33), (0.21, 0.71), (0.15, 0.06)),
     'UHDTV': ((0.708, 0.292), (0.170, 0.797), (0.13, 0.046)),
 }
