@@ -20,7 +20,7 @@ def generate_table(
     notes_flag = bool(notes)
     tag = tag.split('/')[-1] # then only the last category is used
     try:
-        scale_factor = np.clip(float(scale_factor), 0, None)
+        scale_factor = max(0, float(scale_factor))
     except ValueError:
         scale_factor = 1
 
@@ -130,7 +130,7 @@ def generate_table(
         spectrum, estimated = body.get_spectrum('geometric' if geom_albedo else 'spherical')
 
         # Color calculation
-        color = ColorPoint.from_spectral_data(spectrum, color_system)
+        color = ColorPoint.from_spectral_data(spectrum).to_color_system(color_system)
         color.gamma_correction = gamma_correction
         color.maximize_brightness = maximize_brightness or estimated is None
         color.scale_factor = scale_factor
@@ -153,7 +153,7 @@ def generate_table(
         # Setting object and text colors
         if np.any(color_array):
             grayscale = color_array.mean()
-            # color.grayscale(color_system) not work well for red and blue objects
+            # color.grayscale() luminance doesn't work well for red and blue objects
             if is_filled:
                 object_color = color_array
                 is_white_text[n] = grayscale < 0.5

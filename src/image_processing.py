@@ -6,13 +6,13 @@ from time import monotonic
 from math import sqrt, ceil
 import numpy as np
 
-from src.core import FilterSystem, SpectralCube, PhotospectralCube, ColorSystem, ColorXYZ, ColorImage, sun_norm
+from src.core import FilterSystem, SpectralCube, PhotospectralCube, ColorSystem, ColorLine, ColorImage, sun_norm
 import src.image_import as ii
 
 
 def image_parser(
         image_mode: int, preview_flag: bool, px_lower_limit: int, px_upper_limit: int,
-        single_file: str, files: list, filters: list, formulas: list, color_system: ColorSystem,
+        single_file: str, files: list, filters: list, formulas: list,
         desun: bool, photons: bool, upscale: bool, log: Callable
     ):
     """ Receives user input and performs processing in a parallel thread """
@@ -48,7 +48,7 @@ def image_parser(
         px_num = cube.size
         if preview_flag or px_num < px_upper_limit:
             log('Color calculating')
-            img = ColorXYZ.from_spectral_data(cube)
+            img = ColorImage.from_spectral_data(cube)
         else:
             square = cube.flatten()
             chunk_num = ceil(px_num / px_upper_limit)
@@ -59,11 +59,10 @@ def image_parser(
                     chunk = square[i*px_upper_limit:j*px_upper_limit]
                 except IndexError:
                     chunk = square[i*px_upper_limit:]
-                img_chunk = ColorXYZ.from_spectral_data(chunk)
+                img_chunk = ColorLine.from_spectral_data(chunk)
                 img_array[:,i*px_upper_limit:j*px_upper_limit] = img_chunk.br
                 log(f'Color calculated for {j} chunks out of {chunk_num}')
-            img = ColorXYZ(img_array.reshape(3, cube.width, cube.height))
-        img = ColorImage.from_xyz(img, color_system)
+            img = ColorImage(img_array.reshape(3, cube.width, cube.height))
         if upscale and px_num < px_lower_limit and (times := round(sqrt(px_lower_limit / px_num))) != 1:
             log('Upscaling')
             img = img.upscale(times)

@@ -89,10 +89,10 @@ def launch_window(lang: str):
     mean_spectrum = [] # for tab 2
 
     # Default values to avoid errors
-    tab1_obj_name = tab1_color = tab1_spectrum = None
+    tab1_obj_name = tab1_color_xyz = tab1_spectrum = None
     tab1_albedo_note = tr.gui_blank_note
     tab2_preview = None
-    tab3_obj_name = tab3_color = tab3_spectrum = None
+    tab3_obj_name = tab3_color_xyz = tab3_spectrum = None
 
     def tab1_tab3_update_plot(
             fig, fig_canvas_agg, current_tab, color_system: ColorSystem,
@@ -118,15 +118,17 @@ def launch_window(lang: str):
     tab3_recalc_spectrum_events = ('tab3_slider1', 'tab3_slider2', 'tab3_slider3')
 
     # List of events that cause color recalculation
-    tab1_recalc_color_events = ('-ColorSpace-', '-WhitePoint-', '-AlbedoMode1-', '-AlbedoMode2-', 'tab1_list', 'tab1_(re)load')
-    tab3_recalc_color_events = ('-ColorSpace-', '-WhitePoint-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3')
+    tab1_recalc_color_events = ('-AlbedoMode1-', '-AlbedoMode2-', 'tab1_list', 'tab1_(re)load')
+    tab3_recalc_color_events = ('tab3_slider1', 'tab3_slider2', 'tab3_slider3')
 
     # List of events that cause GUI output update
     tab1_update_gui_events = (
         '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-',
         '-AlbedoMode1-', '-AlbedoMode2-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load'
     )
-    tab2_update_gui_events = ('-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-')
+    tab2_update_gui_events = (
+        '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-'
+    )
     tab3_update_gui_events = (
         '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-',
         '-bitness-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3'
@@ -311,19 +313,20 @@ def launch_window(lang: str):
                         tab1_spectrum, tab1_estimated = tab1_body.get_spectrum('geometric' if values['-AlbedoMode1-'] else 'spherical')
 
                         # Color calculation
-                        tab1_color = ColorPoint.from_spectral_data(tab1_spectrum, color_system)
+                        tab1_color_xyz = ColorPoint.from_spectral_data(tab1_spectrum)
 
                     if event in tab1_update_gui_events:
 
                         # Color postprocessing
-                        tab1_color.gamma_correction = values['-GammaCorrection-']
-                        tab1_color.maximize_brightness = values['-MaximizeBrightness-'] or tab1_estimated is None
-                        tab1_color.scale_factor = values['-ScaleFactor-']
-                        tab1_html = tab1_color.to_html()
+                        tab1_color_rgb = tab1_color_xyz.to_color_system(color_system)
+                        tab1_color_rgb.gamma_correction = values['-GammaCorrection-']
+                        tab1_color_rgb.maximize_brightness = values['-MaximizeBrightness-'] or tab1_estimated is None
+                        tab1_color_rgb.scale_factor = values['-ScaleFactor-']
+                        tab1_html = tab1_color_rgb.to_html()
 
                         # Output
                         window['tab1_graph'].TKCanvas.itemconfig(tab1_preview, fill=tab1_html)
-                        window['tab1_rgb'].update(tuple(tab1_color.to_bit(bitness).round(rounding)))
+                        window['tab1_rgb'].update(tuple(tab1_color_rgb.to_bit(bitness).round(rounding)))
                         window['tab1_hex'].update(tab1_html)
                         tab1_value, tab1_sd = tab1_spectrum @ get_filter(values['tab1_in_filter'])
                         if tab1_sd is None:
@@ -470,7 +473,6 @@ def launch_window(lang: str):
                                 files=tab2_files,
                                 filters=tab2_filters,
                                 formulas=tab2_formulas,
-                                color_system=color_system,
                                 desun=values['tab2_desun'],
                                 photons=values['tab2_photons'],
                                 upscale=values['tab2_upscale'],
@@ -481,10 +483,11 @@ def launch_window(lang: str):
 
                     # Updating preview image
                     elif tab2_preview is not None and event in tab2_update_gui_events:
-                        tab2_preview.gamma_correction = values['-GammaCorrection-']
-                        tab2_preview.maximize_brightness = values['-MaximizeBrightness-']
-                        tab2_preview.scale_factor = values['-ScaleFactor-']
-                        window['tab2_preview'].update(data=tab2_preview.to_bytes())
+                        tab2_preview_rgb = tab2_preview.to_color_system(color_system)
+                        tab2_preview_rgb.gamma_correction = values['-GammaCorrection-']
+                        tab2_preview_rgb.maximize_brightness = values['-MaximizeBrightness-']
+                        tab2_preview_rgb.scale_factor = values['-ScaleFactor-']
+                        window['tab2_preview'].update(data=tab2_preview_rgb.to_bytes())
 
                 # Getting messages from the image processing thread
                 elif event[0] == 'tab2_thread':
@@ -498,8 +501,9 @@ def launch_window(lang: str):
                             tab2_preview = tab2_img
                         else:
                             tab2_preview = tab2_img.downscale(img_preview_area)
-                            tab2_img.to_pillow_image().save(f'{values["tab2_folder"]}/TCT_{strftime("%Y-%m-%d_%H-%M-%S")}.png')
-                        window['tab2_preview'].update(data=tab2_preview.to_bytes())
+                            tab2_img.to_color_system(color_system).to_pillow_image().save(f'{values["tab2_folder"]}/TCT_{strftime("%Y-%m-%d_%H-%M-%S")}.png')
+                        tab2_preview_rgb = tab2_preview.to_color_system(color_system)
+                        window['tab2_preview'].update(data=tab2_preview_rgb.to_bytes())
 
                 # Updating filters profile plot
                 if (isinstance(event, str) and event.startswith('tab2_filter')) or (event[0] == 'tab2_thread' and values[event] is not None) or event in ('-currentTab-', '-ColorSpace-', '-WhitePoint-'):
@@ -529,19 +533,20 @@ def launch_window(lang: str):
                 if event in tab3_recalc_color_events:
 
                     # Color calculation
-                    tab3_color = ColorPoint.from_spectral_data(tab3_spectrum, color_system)
+                    tab3_color_xyz = ColorPoint.from_spectral_data(tab3_spectrum)
 
                 if event in tab3_update_gui_events:
 
                     # Color postprocessing
-                    tab3_color.gamma_correction = values['-GammaCorrection-']
-                    tab3_color.maximize_brightness = values['-MaximizeBrightness-']
-                    tab3_color.scale_factor = values['-ScaleFactor-']
-                    tab3_html = tab3_color.to_html()
+                    tab3_color_rgb = tab3_color_xyz.to_color_system(color_system)
+                    tab3_color_rgb.gamma_correction = values['-GammaCorrection-']
+                    tab3_color_rgb.maximize_brightness = values['-MaximizeBrightness-']
+                    tab3_color_rgb.scale_factor = values['-ScaleFactor-']
+                    tab3_html = tab3_color_rgb.to_html()
 
                     # Output
                     window['tab3_graph'].TKCanvas.itemconfig(tab3_preview, fill=tab3_html)
-                    window['tab3_rgb'].update(tuple(tab3_color.to_bit(bitness).round(rounding)))
+                    window['tab3_rgb'].update(tuple(tab3_color_rgb.to_bit(bitness).round(rounding)))
                     window['tab3_hex'].update(tab3_html)
 
                     # Dynamical plotting

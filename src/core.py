@@ -30,8 +30,7 @@ Database:
 
 Color:
 - ColorSystem
-- ColorXYZ
-- ColorRGB
+- ColorObject
 - - ColorPoint (1D)
 - - ColorLine (2D)
 - - ColorImage (3D)
@@ -1839,11 +1838,6 @@ supported_white_points = {
     'Illuminant E': (1/3, 1/3),
 }
 
-# CIE XYZ functions transformed from the CIE (2006) LMS functions, 2-deg
-# http://www.cvrl.org/ciexyzpr.htm
-# Edge sensitivity values less than 10⁴ were previously removed
-xyz_cmf = FilterSystem.from_list(('cie2deg.x', 'cie2deg.y', 'cie2deg.z'))
-
 
 class ColorSystem:
     """
@@ -1873,6 +1867,7 @@ class ColorSystem:
         white_scale = inv_matrix.dot(self.white_point)
         # XYZ -> RGB transformation matrix
         self.matrix = inv_matrix / white_scale[:, np.newaxis] / 3 # Why divide by 3? It just works
+        self.inv_matrix = np.linalg.inv(self.matrix)
 
     def xyz_to_rgb(self, arr: np.ndarray) -> np.ndarray:
         """ Converts XYZ color array into a RGB color space array """
@@ -1881,69 +1876,57 @@ class ColorSystem:
 
     def rgb_to_xyz(self, arr: np.ndarray) -> np.ndarray:
         """ Converts RGB color array into the XYZ color space array """
-        inv_matrix = np.linalg.inv(self.matrix)
         # 1D implementation: rgb = self.inv_matrix.T.dot(xyz)
-        return np.tensordot(inv_matrix, arr, axes=(1, 0))
+        return np.tensordot(self.inv_matrix, arr, axes=(1, 0))
 
 
-class ColorXYZ:
+# CIE XYZ functions transformed from the CIE (2006) LMS functions, 2-deg
+# http://www.cvrl.org/ciexyzpr.htm
+# Edge sensitivity values less than 10⁴ were previously removed
+xyz_cmf = FilterSystem.from_list(('cie2deg.x', 'cie2deg.y', 'cie2deg.z'))
+xyz_color_system = ColorSystem('CIE XYZ', 'Illuminant E')
+
+
+class ColorObject:
     """
-    This class stores a color brightness array in the CIE XYZ color space (`self.br`)
-    and provides conversion methods.
-    """
-
-    def __init__(self, br: np.ndarray):
-        """ Initialized by an array of length 3 on the first axis """
-        self.br = br
-
-    @staticmethod
-    def from_spectral_data(data: _TrueColorToolsObject) -> 'ColorXYZ':
-        """ Convolves the (photo)spectral object with CIE XYZ CMF """
-        return ColorXYZ((data @ xyz_cmf).br)
-
-    @staticmethod
-    def from_rgb(rgb: 'ColorRGB', color_system: ColorSystem) -> 'ColorXYZ':
-        """ Converts RGB colors to CIE XYZ colors, returns ColorXYZ object """
-        br = color_system.rgb_to_xyz(rgb.br)
-        return ColorXYZ(br)
-
-
-class ColorRGB:
-    """
-    This class stores a color brightness array (`self.br`) and provides conversion methods.
+    This class stores a color brightness array (`self.br`) with values in the 0-1 range,
+    the color system used (`self.color_system`) and provides conversion methods.
 
     Postprocessing attributes:
     - `gamma_correction` makes the output to model the nonlinearity of the human eye’s perception of luminance
     - `maximize_brightness` normalize the output to the brightest RGB channel value
-    - `scale_factor` multiplies the values of the output by a constant (implemented as property)
+    - `scale_factor` multiplies the values of the output by a constant (implemented as property to check the input)
     """
 
     gamma_correction = False
     maximize_brightness = False
     _scale_factor = 1.
 
-    def __init__(self, br: np.ndarray):
+    def __init__(self, br: np.ndarray, color_system: ColorSystem):
         """ Initialized by an array of length 3 on the first axis """
         self.br = br
+        self.color_system = color_system
 
     @classmethod
-    def from_spectral_data(cls, data: _TrueColorToolsObject, color_system: ColorSystem) -> 'ColorRGB':
-        """ Shortcut for `ColorRGB.from_xyz(ColorXYZ.from_spectral_data())` """
-        return cls.from_xyz(ColorXYZ.from_spectral_data(data), color_system)
+    def from_spectral_data(cls, data: _TrueColorToolsObject) -> 'ColorObject':
+        """ Convolves (photo)spectrum with CIE XYZ color matching functions """
+        return cls((data @ xyz_cmf).br, xyz_color_system)
 
-    @classmethod
-    def from_xyz(cls, xyz: ColorXYZ, color_system: ColorSystem) -> 'ColorRGB':
+    def to_color_system(self, new_color_system: ColorSystem):
         """
-        Converts CIE XYZ colors to RGB colors, returns ColorRGB object.
-        Attention! For saturated colors, this operation is not always reversible!
+        Return a new ColorObject with changed color system.
+        Attention! For saturated colors, color system conversion is not always reversible!
         """
-        br = color_system.xyz_to_rgb(xyz.br)
-        if np.any(br < 0):
+        output = deepcopy(self)
+        xyz = self.color_system.rgb_to_xyz(self.br)
+        output.br = new_color_system.xyz_to_rgb(xyz)
+        if np.any(output.br < 0):
             # We're not in the color system gamut: approximate by desaturating
             # 1D implementation: rgb -= np.min(rgb)
-            negative_mask = np.any(br < 0, axis=0)
-            br[:, negative_mask] -= br.min(axis=0)[negative_mask]
-        return cls(br)
+            negative_mask = np.any(output.br < 0, axis=0)
+            output.br[:, negative_mask] -= output.br.min(axis=0)[negative_mask]
+        output.color_system = new_color_system
+        return output
 
     def to_array(self) -> np.ndarray:
         """ Implies post-processing functions: gamma correction and brightness maximizing """
@@ -1956,9 +1939,9 @@ class ColorRGB:
             arr = self.apply_gamma_correction(arr)
         return arr
 
-    def grayscale(self, color_system: ColorSystem) -> np.ndarray|np.float64:
+    def grayscale(self) -> np.ndarray|np.float64:
         """ Converts color to grayscale using CIE 1931 luminance (Y in XYZ color space) """
-        y = ColorXYZ.from_rgb(self, color_system).br[1]
+        y = self.to_color_system(xyz_color_system).br[1]
         if self.gamma_correction:
             y = self.apply_gamma_correction(y)
         return y
@@ -1969,11 +1952,12 @@ class ColorRGB:
 
     @scale_factor.setter
     def scale_factor(self, value):
+        """ Checks the scale factor input """
         try:
             self._scale_factor = max(0, float(value))
         except ValueError:
             pass
-            #print('Scale factor of ColorRGB object must be a number.')
+            #print('Scale factor of ColorObject object must be a number.')
 
     @staticmethod
     def apply_gamma_correction(arr0: float|np.ndarray):
@@ -1985,7 +1969,7 @@ class ColorRGB:
         return arr
 
 
-class ColorPoint(ColorRGB):
+class ColorPoint(ColorObject):
     """
     Class to work with an array of red, green and blue values.
     Stores brightness values in the range 0 to 1 in the `br` attribute, numpy array of shape (3).
@@ -2005,7 +1989,7 @@ class ColorPoint(ColorRGB):
         return '#{:02x}{:02x}{:02x}'.format(*self.to_bit(8, clip=True).round().astype('int'))
 
 
-class ColorLine(ColorRGB):
+class ColorLine(ColorObject):
     """
     Class to work with a line of red, green and blue channels.
     Stores brightness values in the range 0 to 1 in the `br` attribute, numpy array of shape (3, X).
@@ -2022,7 +2006,7 @@ class ColorLine(ColorRGB):
         return self.br.shape[1]
 
 
-class ColorImage(ColorRGB):
+class ColorImage(ColorObject):
     """
     Class to work with an image of red, green and blue channels.
     Stores brightness values in the range 0 to 1 in the `br` attribute, numpy array of shape (3, X, Y).

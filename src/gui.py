@@ -148,7 +148,7 @@ def generate_layout(
         [sg.Text(font=title_font, key='tab1_title2')],
         [sg.Graph(canvas_size=circle_size, graph_bottom_left=(0, 0), graph_top_right=circle_size, background_color=None, key='tab1_graph')],
         [sg.T(key='tab1_albedo_note')],
-        [sg.Text(tr.gui_rgb[lang], key='tab1_colorRGB'), sg.Input(size=1, key='tab1_rgb', expand_x=True)],
+        [sg.Text(tr.gui_rgb[lang], key='tab1_ColorObject'), sg.Input(size=1, key='tab1_rgb', expand_x=True)],
         [sg.Text(tr.gui_hex[lang], key='tab1_colorHEX'), sg.Input(size=1, key='tab1_hex', expand_x=True)],
         [
             sg.Input(size=1, key='tab1_convolved', expand_x=True),
@@ -273,7 +273,7 @@ def generate_layout(
         [sg.Text(font=title_font, key='tab3_title2')],
         [sg.Graph(canvas_size=circle_size, graph_bottom_left=(0, 0), graph_top_right=circle_size, background_color=None, key='tab3_graph')],
         [sg.T()],
-        [sg.Text(tr.gui_rgb[lang], key='tab3_colorRGB'), sg.Input(size=1, key='tab3_rgb', expand_x=True)],
+        [sg.Text(tr.gui_rgb[lang], key='tab3_ColorObject'), sg.Input(size=1, key='tab3_rgb', expand_x=True)],
         [sg.Text(tr.gui_hex[lang], key='tab3_colorHEX'), sg.Input(size=1, key='tab3_hex', expand_x=True)],
         [sg.T()],
         [sg.Button(button_text=tr.gui_plot[lang], size=button_size, key='tab3_plot')],
@@ -335,7 +335,7 @@ def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict,
     window['tab1_searchN'].update(tr.gui_search[lang])
     window['tab1_(re)load'].update(tr.gui_reload[lang] if tab1_loaded else tr.gui_load[lang])
     window['tab1_albedo_note'].update(tab1_albedo_note[lang])
-    window['tab1_colorRGB'].update(tr.gui_rgb[lang])
+    window['tab1_ColorObject'].update(tr.gui_rgb[lang])
     window['tab1_colorHEX'].update(tr.gui_hex[lang])
     window['tab1_in_filterN'].update(tr.gui_in_filter[lang])
     window['tab1_plot'].update(tr.gui_plot[lang])
@@ -374,7 +374,7 @@ def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict,
     window['tab3_vII'].update(tr.gui_vII[lang])
     #window['tab3_mag'].update(tr.gui_mag[lang])
     #window['tab3_mag_note'].update(tr.gui_mag_note[lang])
-    window['tab3_colorRGB'].update(tr.gui_rgb[lang])
+    window['tab3_ColorObject'].update(tr.gui_rgb[lang])
     window['tab3_colorHEX'].update(tr.gui_hex[lang])
     window['tab3_plot'].update(tr.gui_plot[lang])
     window['tab3_pin'].update(tr.gui_pin[lang])

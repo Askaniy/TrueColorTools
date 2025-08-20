@@ -66,7 +66,7 @@ def plot_spectra(
             ax.plot(cmf.nm, cmf.br * k, label=cmf.name(lang), color=rgb_muted[i])
         # Color calculating and plotting
         for photospectrum_or_spectrum in spectra:
-            color = ColorPoint.from_spectral_data(photospectrum_or_spectrum, color_system)
+            color = ColorPoint.from_spectral_data(photospectrum_or_spectrum).to_color_system(color_system)
             color.gamma_correction = gamma_correction
             color.maximize_brightness = maximize_brightness
             spectrum: Spectrum = photospectrum_or_spectrum.define_on_range(visible_range)
@@ -103,7 +103,7 @@ def plot_filters(filters: Sequence[Spectrum], color_system: ColorSystem, lang: s
         ax.plot(cmf.nm, cmf.br * k, label=cmf.name(lang), color=rgb_muted[i])
     # Color calculating and plotting
     for i, spectrum in enumerate(filters):
-        color = ColorPoint.from_spectral_data(spectrum, color_system)
+        color = ColorPoint.from_spectral_data(spectrum).to_color_system(color_system)
         color.gamma_correction = True
         color.maximize_brightness = True
         ax.plot(spectrum.nm, spectrum.br, label=spectrum.name(lang), color=color.to_html())
