@@ -4,9 +4,9 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from matplotlib import rc_context
 import matplotlib.pyplot as plt
+from typing import Sequence
 
-from src.core import *
-from src.core import _TrueColorToolsObject, FilterSystem, ColorSystem
+from src.core import Spectrum, FilterSystem, ColorSystem, ColorPoint, visible_range
 import src.strings as tr
 import src.gui as gui
 
@@ -46,31 +46,24 @@ def draw_figure(canvas, figure: Figure):
     return figure_canvas_agg
 
 
-def plot_spectra(
-        spectra: Sequence[_TrueColorToolsObject], color_system: ColorSystem,
-        gamma_correction: bool, maximize_brightness: bool,
-        light_theme: bool, lang: str, figsize: tuple, dpi: int
-    ):
-    """ Creates a figure with plotted spectra from the input list and the CMFs used """
+def plot_spectra(list_to_plot: Sequence, light_theme: bool, lang: str, figsize: tuple, dpi: int):
+    """ Creates a figure with plotted spectra from the input list """
     with rc_context(themes[int(light_theme)]):
         fig, ax = plt.subplots(1, 1, figsize=figsize, dpi=dpi)
         ax.set_xlabel(tr.xaxis_text[lang])
         ax.set_ylabel(tr.yaxis_text[lang])
         # Determining the scale for CMFs in the background
         max_y = []
-        for spectrum in spectra:
+        for spectrum, color in list_to_plot:
             max_y.append(spectrum.br.max())
         k = max(max_y) / cmfs[2].br.max() if len(max_y) != 0 else 1
         # Plotting the CMFs
         for i, cmf in enumerate(cmfs):
-            ax.plot(cmf.nm, cmf.br * k, label=cmf.name(lang), color=rgb_muted[i])
-        # Color calculating and plotting
-        for photospectrum_or_spectrum in spectra:
-            color = ColorPoint.from_spectral_data(photospectrum_or_spectrum).to_color_system(color_system)
-            color.gamma_correction = gamma_correction
-            color.maximize_brightness = maximize_brightness
-            spectrum: Spectrum = photospectrum_or_spectrum.define_on_range(visible_range)
-            ax.plot(spectrum.nm, spectrum.br, label=spectrum.name(lang), color=color.to_html())
+            ax.plot(cmf.nm, cmf.br * k, color=rgb_muted[i])
+        # Plotting the spectra
+        for spectrum, color in list_to_plot:
+            spectrum = spectrum.define_on_range(visible_range)
+            ax.plot(spectrum.nm, spectrum.br, label=spectrum.name(lang), color=color)
             if spectrum.photospectrum is not None:
                 ax.errorbar(
                     x=spectrum.photospectrum.filter_system.mean_nm(), y=spectrum.photospectrum.br,

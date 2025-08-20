@@ -5,7 +5,8 @@ from sigfig import round as sigfig_round
 from copy import deepcopy
 from time import strftime
 
-from src.core import *
+from src.core import Spectrum, ReflectingBody, ColorSystem, ColorPoint, \
+    visible_range, sun_in_V, get_filter, database_parser
 import src.gui as gui
 import src.auxiliary as aux
 import src.database as db
@@ -88,28 +89,21 @@ def launch_window(lang: str):
     mean_spectrum = [] # for tab 2
 
     # Default values to avoid errors
-    tab1_obj_name = tab1_color_xyz = tab1_spectrum = None
+    tab1_obj_name = tab1_html = tab1_spectrum = None
     tab1_albedo_note = tr.gui_blank_note
     tab2_preview = None
     tab2_filters = []
-    tab3_obj_name = tab3_color_xyz = tab3_spectrum = None
+    tab3_obj_name = tab3_html = tab3_spectrum = None
 
-    def tab1_tab3_update_plot(
-            fig, fig_canvas_agg, current_tab, color_system: ColorSystem,
-            gamma_correction: bool, maximize_brightness: bool,
-            light_theme: bool, lang: str
-        ):
+    def tab1_tab3_update_plot(fig, fig_canvas_agg, current_tab, light_theme: bool, lang: str):
         pl.close_figure(fig)
         fig_canvas_agg.get_tk_widget().forget()
-        to_plot = deepcopy(plot_data)
-        if current_tab == 'tab1' and tab1_obj_name and tab1_spectrum not in to_plot:
-            to_plot.append(tab1_spectrum)
-        if current_tab == 'tab3' and tab3_obj_name and tab3_spectrum not in to_plot:
-            to_plot.append(tab3_spectrum)
-        fig = pl.plot_spectra(
-            to_plot, color_system, gamma_correction, maximize_brightness,
-            light_theme, lang, spectra_figsize, spectra_dpi
-        )
+        list_to_plot = deepcopy(plot_data)
+        if current_tab == 'tab1' and tab1_obj_name and tab1_spectrum not in list_to_plot:
+            list_to_plot.append((tab1_spectrum, tab1_html))
+        if current_tab == 'tab3' and tab3_obj_name and tab3_spectrum not in list_to_plot:
+            list_to_plot.append((tab3_spectrum, tab3_html))
+        fig = pl.plot_spectra(list_to_plot, light_theme, lang, spectra_figsize, spectra_dpi)
         fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, fig)
         return fig, fig_canvas_agg
 
@@ -160,15 +154,12 @@ def launch_window(lang: str):
             else:
                 pl.close_figure(tab1_tab3_fig)
                 tab1_tab3_fig_canvas_agg.get_tk_widget().forget()
-            to_plot = deepcopy(plot_data)
-            if tab1_obj_name and tab1_spectrum not in to_plot:
-                to_plot.append(tab1_spectrum)
-            if tab3_obj_name and tab3_spectrum not in to_plot:
-                to_plot.append(tab3_spectrum)
-            tab1_tab3_fig = pl.plot_spectra(
-                to_plot, color_system, values['-GammaCorrection-'], values['-MaximizeBrightness-'] or tab1_estimated is None,
-                light_theme, lang, spectra_figsize, spectra_dpi
-            )
+            list_to_plot = deepcopy(plot_data)
+            if tab1_obj_name and tab1_spectrum not in list_to_plot:
+                list_to_plot.append((tab1_spectrum, tab1_html))
+            if tab3_obj_name and tab3_spectrum not in list_to_plot:
+                list_to_plot.append((tab3_spectrum, tab3_html))
+            tab1_tab3_fig = pl.plot_spectra(list_to_plot, light_theme, lang, spectra_figsize, spectra_dpi)
             tab1_tab3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, tab1_tab3_fig)
         elif event == 'W1_path':
             tab1_tab3_fig.savefig(values['W1_path'], dpi=133.4) # 1200x800
@@ -177,9 +168,6 @@ def launch_window(lang: str):
             tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                 tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                 window0.ReturnValuesDictionary['-currentTab-'],
-                color_system,
-                window0.ReturnValuesDictionary['-GammaCorrection-'],
-                window0.ReturnValuesDictionary['-MaximizeBrightness-'] or tab1_estimated is None, # TODO ?!
                 light_theme, lang
             )
 
@@ -207,9 +195,6 @@ def launch_window(lang: str):
                 tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                     tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                     window0.ReturnValuesDictionary['-currentTab-'],
-                    color_system,
-                    window0.ReturnValuesDictionary['-GammaCorrection-'],
-                    window0.ReturnValuesDictionary['-MaximizeBrightness-'] or tab1_estimated is None,
                     light_theme, lang
                 )
 
@@ -279,7 +264,7 @@ def launch_window(lang: str):
                         tab1_tag = default_tag
                         window['tab1_(re)load'].update(tr.gui_reload[lang])
                     else:
-                        # Handle tha case of a non-existing tag after reloading
+                        # Handle the case of a non-existing tag after reloading
                         tab1_tag = values['tab1_tag_filter']
                         if tab1_tag not in tagsDB:
                             tab1_tag = default_tag
@@ -354,9 +339,6 @@ def launch_window(lang: str):
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                                 tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                                 window0.ReturnValuesDictionary['-currentTab-'],
-                                color_system,
-                                window0.ReturnValuesDictionary['-GammaCorrection-'],
-                                window0.ReturnValuesDictionary['-MaximizeBrightness-'],
                                 light_theme, lang
                             )
 
@@ -366,7 +348,7 @@ def launch_window(lang: str):
 
                 elif event == 'tab1_pin' and values['tab1_list'] != []:
                     if tab1_spectrum not in plot_data:
-                        plot_data.append(tab1_spectrum)
+                        plot_data.append((tab1_spectrum, tab1_html))
 
                 elif event == 'tab1_clear':
                     plot_data = []
@@ -374,9 +356,6 @@ def launch_window(lang: str):
                         tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                             window0.ReturnValuesDictionary['-currentTab-'],
-                            color_system,
-                            window0.ReturnValuesDictionary['-GammaCorrection-'],
-                            window0.ReturnValuesDictionary['-MaximizeBrightness-'],
                             light_theme, lang
                         )
 
@@ -517,8 +496,8 @@ def launch_window(lang: str):
                         tab2_opened = True
                     else:
                         pl.close_figure(tab2_fig)
-                        tab2_to_plot = [*tab2_filters, *mean_spectrum]
-                        tab2_fig = pl.plot_filters(tab2_to_plot, color_system, lang, filters_figsize, filters_dpi)
+                        tab2_list_to_plot = [*tab2_filters, *mean_spectrum]
+                        tab2_fig = pl.plot_filters(tab2_list_to_plot, color_system, lang, filters_figsize, filters_dpi)
                         tab2_fig_canvas_agg.get_tk_widget().forget()
                     tab2_fig_canvas_agg = pl.draw_figure(window['tab2_canvas'].TKCanvas, tab2_fig)
 
@@ -559,9 +538,6 @@ def launch_window(lang: str):
                         tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                             window0.ReturnValuesDictionary['-currentTab-'],
-                            color_system,
-                            window0.ReturnValuesDictionary['-GammaCorrection-'],
-                            window0.ReturnValuesDictionary['-MaximizeBrightness-'],
                             light_theme, lang
                         )
 
@@ -570,7 +546,7 @@ def launch_window(lang: str):
 
                 elif event == 'tab3_pin':
                     if tab3_spectrum not in plot_data:
-                        plot_data.append(tab3_spectrum)
+                        plot_data.append((tab3_spectrum, tab3_html))
 
                 elif event == 'tab3_clear':
                     plot_data = []
@@ -578,8 +554,5 @@ def launch_window(lang: str):
                         tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                             window0.ReturnValuesDictionary['-currentTab-'],
-                            color_system,
-                            window0.ReturnValuesDictionary['-GammaCorrection-'],
-                            window0.ReturnValuesDictionary['-MaximizeBrightness-'],
                             light_theme, lang
                         )

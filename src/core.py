@@ -1906,17 +1906,17 @@ class ColorObject:
     maximize_brightness = False
     _scale_factor = 1.
 
-    def __init__(self, br: np.ndarray, color_system: ColorSystem) -> 'ColorObject':
+    def __init__(self, br: np.ndarray, color_system: ColorSystem):
         """ ColorObject requires a brightness array and corresponding color system """
         self.br = br
         self._color_system = color_system
 
     @classmethod
-    def from_spectral_data(cls, data: _TrueColorToolsObject) -> 'ColorObject':
+    def from_spectral_data(cls, data: _TrueColorToolsObject) -> Self:
         """ Convolves (photo)spectrum with CIE XYZ color matching functions """
         return cls((data @ xyz_cmf).br, xyz_color_system)
 
-    def to_color_system(self, new_color_system: ColorSystem):
+    def to_color_system(self, new_color_system: ColorSystem) -> Self:
         """
         Return a new ColorObject with changed color system.
         Attention! For saturated colors, color system conversion is not always reversible!
