@@ -1890,9 +1890,13 @@ xyz_color_system = ColorSystem('CIE XYZ', 'Illuminant E')
 class ColorObject:
     """
     This class stores a color brightness array (`self.br`) with values in the 0-1 range,
-    the color system used (`self.color_system`) and provides conversion methods.
+    postprocessing attributes, color system, and provides conversion methods.
 
-    Postprocessing attributes:
+    The brightness array is required to be of length 3 along the first axis.
+    The indices correspond to the red, green and blue channel respectively.
+
+    Attributes:
+    - `color_system` is a frozen attribute, change by creating a new object with `to_color_system()`
     - `gamma_correction` makes the output to model the nonlinearity of the human eye’s perception of luminance
     - `maximize_brightness` normalize the output to the brightest RGB channel value
     - `scale_factor` multiplies the values of the output by a constant (implemented as property to check the input)
@@ -1902,10 +1906,10 @@ class ColorObject:
     maximize_brightness = False
     _scale_factor = 1.
 
-    def __init__(self, br: np.ndarray, color_system: ColorSystem):
-        """ Initialized by an array of length 3 on the first axis """
+    def __init__(self, br: np.ndarray, color_system: ColorSystem) -> 'ColorObject':
+        """ ColorObject requires a brightness array and corresponding color system """
         self.br = br
-        self.color_system = color_system
+        self._color_system = color_system
 
     @classmethod
     def from_spectral_data(cls, data: _TrueColorToolsObject) -> 'ColorObject':
@@ -1918,14 +1922,14 @@ class ColorObject:
         Attention! For saturated colors, color system conversion is not always reversible!
         """
         output = deepcopy(self)
-        xyz = self.color_system.rgb_to_xyz(self.br)
+        xyz = self._color_system.rgb_to_xyz(self.br)
         output.br = new_color_system.xyz_to_rgb(xyz)
         if np.any(output.br < 0):
             # We're not in the color system gamut: approximate by desaturating
             # 1D implementation: rgb -= np.min(rgb)
             negative_mask = np.any(output.br < 0, axis=0)
             output.br[:, negative_mask] -= output.br.min(axis=0)[negative_mask]
-        output.color_system = new_color_system
+        output._color_system = new_color_system
         return output
 
     def to_array(self) -> np.ndarray:
@@ -1947,7 +1951,15 @@ class ColorObject:
         return y
 
     @property
-    def scale_factor(self):
+    def color_system(self) -> ColorSystem:
+        """
+        Color system cannot be set directly for safety reasons.
+        Use to_color_system() to perform data conversion together with the color system.
+        """
+        return self._color_system
+
+    @property
+    def scale_factor(self) -> float:
         return self._scale_factor
 
     @scale_factor.setter
@@ -1960,7 +1972,7 @@ class ColorObject:
             #print('Scale factor of ColorObject object must be a number.')
 
     @staticmethod
-    def apply_gamma_correction(arr0: float|np.ndarray):
+    def apply_gamma_correction(arr0: float|np.ndarray) -> float|np.ndarray:
         """ Applies sRGB gamma correction to the array """
         arr = np.asarray(arr0) # to allow float input use mask
         mask = arr < 0.0031308
@@ -1973,7 +1985,6 @@ class ColorPoint(ColorObject):
     """
     Class to work with an array of red, green and blue values.
     Stores brightness values in the range 0 to 1 in the `br` attribute, numpy array of shape (3).
-    To avoid data loss, brightness above 1 is not clipped before export.
     """
 
     def to_bit(self, bit: int, clip: bool = False) -> np.ndarray:
@@ -1993,7 +2004,6 @@ class ColorLine(ColorObject):
     """
     Class to work with a line of red, green and blue channels.
     Stores brightness values in the range 0 to 1 in the `br` attribute, numpy array of shape (3, X).
-    To avoid data loss, brightness above 1 is not clipped before export.
     """
 
     def __init__(self, *args, **kwargs):
@@ -2010,7 +2020,6 @@ class ColorImage(ColorObject):
     """
     Class to work with an image of red, green and blue channels.
     Stores brightness values in the range 0 to 1 in the `br` attribute, numpy array of shape (3, X, Y).
-    To avoid data loss, brightness above 1 is not clipped before export.
     """
 
     def __init__(self, *args, **kwargs):
