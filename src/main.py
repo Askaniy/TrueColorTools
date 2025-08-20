@@ -117,14 +117,14 @@ def launch_window(lang: str):
     # List of events that cause GUI output update
     tab1_update_gui_events = (
         '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-',
-        '-AlbedoMode1-', '-AlbedoMode2-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load'
+        '-AlbedoMode1-', '-AlbedoMode2-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load', '-currentTab-'
     )
     tab2_update_gui_events = (
-        '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-'
+        '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-', '-currentTab-'
     )
     tab3_update_gui_events = (
         '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-',
-        '-bitness-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3'
+        '-bitness-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3', '-currentTab-'
     )
 
     # GUI first loading flags
@@ -517,7 +517,7 @@ def launch_window(lang: str):
                     # Color calculation
                     tab3_color_xyz = ColorPoint.from_spectral_data(tab3_spectrum)
 
-                if event in tab3_update_gui_events:
+                if event in tab3_update_gui_events and tab3_obj_name is not None:
 
                     # Color postprocessing
                     tab3_color_rgb = tab3_color_xyz.to_color_system(color_system)
