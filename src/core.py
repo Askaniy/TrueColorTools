@@ -100,8 +100,8 @@ class ObjectName:
             if ':' in name: # note
                 name, note = name.split(':', 1)
                 self._note_en = self.formatting_provisional_designation(note.strip())
-            if '/' in name and name[0] in ('P', 'C', 'I'): # comet name
-                # the last "if" because "/" may encounter in info or notes
+            # the last check because "/" may encounter in info or notes:
+            if '/' in name and name[name.index('/') - 1] in ('P', 'C', 'I'): # comet name
                 index, name = name.split('/', 1)
                 self.index = index.strip() + '/'
             self._name_en = self.formatting_provisional_designation(name.strip())
@@ -1882,11 +1882,15 @@ class ColorSystem:
         return np.tensordot(self.inv_matrix, arr, axes=(1, 0))
 
 
-# CIE XYZ functions transformed from the CIE (2006) LMS functions, 2-deg
-# http://www.cvrl.org/ciexyzpr.htm
-# Edge sensitivity values less than 10⁴ were previously removed
-xyz_cmf = FilterSystem.from_list(('cie2deg.x', 'cie2deg.y', 'cie2deg.z'))
+# CIE XYZ (1931) color matching functions, 2-deg
+# https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer
+xyz_cmf = FilterSystem.from_list(('cie1931_2deg.x', 'cie1931_2deg.y', 'cie1931_2deg.z'))
 xyz_color_system = ColorSystem('CIE XYZ', 'Illuminant E')
+
+# There are CMFs transformed from the CIE (2006) LMS functions, 2-deg
+# (https://cie.co.at/datatable/cie-2006-lms-cone-fundamentals-2-field-size-terms-energy)
+# here: http://www.cvrl.org/ciexyzpr.htm
+# However, the CIE XYZ (1931) standard is still used. CIE never published "CIE XYZ (2006)".
 
 
 class ColorObject:
