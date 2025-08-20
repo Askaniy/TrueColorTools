@@ -44,7 +44,6 @@ def launch_window(lang: str):
     circle_size = (2*circle_r+1, 2*circle_r+1)
     img_preview_size = (256, 128)
     img_preview_area = img_preview_size[0] * img_preview_size[1]
-    text_colors = (gui.muted_color, gui.text_color)
     window0_size = (1120, 640)
 
     # Plots configuration
@@ -68,7 +67,7 @@ def launch_window(lang: str):
     window0 = sg.Window(
         title=window0_title, size=window0_size, icon=icon, finalize=True, resizable=True, margins=(0, 0),
         layout=gui.generate_layout(
-            circle_size, filters_plot_size, img_preview_size, text_colors, filtersDB,
+            circle_size, filters_plot_size, img_preview_size, filtersDB,
             default_color_space, default_white_point, default_gamma_correction,
             brMax, brGeom, bitness, rounding, tab2_num, lang
         )
@@ -365,21 +364,20 @@ def launch_window(lang: str):
                     else:
                         tab1_export = '\n' + '\t'.join(tr.gui_col[lang]) + '\n' + '_' * 36
                         for obj_name in tab1_displayed_namesDB.values():
-                            tab1_body = database_parser(obj_name, objectsDB[obj_name])
+                            body = database_parser(obj_name, objectsDB[obj_name])
 
                             # Setting brightness mode
-                            tab1_spectrum, tab1_estimated = tab1_body.get_spectrum('geometric' if values['-AlbedoMode1-'] else 'spherical')
+                            spectrum, estimated = body.get_spectrum('geometric' if values['-AlbedoMode1-'] else 'spherical')
 
                             # Color calculation
-                            tab1_maximize_br = values['-MaximizeBrightness-'] or tab1_estimated is None
-                            tab1_color = ColorPoint.from_spectral_data(tab1_spectrum, tab1_maximize_br, values['-srgb-'])
-                            if values['-GammaCorrection-']:
-                                tab1_color = tab1_color.gamma_corrected()
-                            tab1_rgb = tuple(tab1_color.to_bit(bitness).round(rounding))
+                            color = ColorPoint.from_spectral_data(spectrum).to_color_system(color_system)
+                            color.maximize_brightness = values['-MaximizeBrightness-'] or estimated is None
+                            color.gamma_correction = values['-GammaCorrection-']
+                            rgb = tuple(color.to_bit(bitness).round(rounding))
 
                             # Output
-                            tab1_export += f'\n{aux.export_colors(tab1_rgb)}\t{obj_name(lang)}'
-                            if tab1_estimated:
+                            tab1_export += f'\n{aux.export_colors(rgb)}\t{obj_name(lang)}'
+                            if estimated:
                                 tab1_export += f'; {tr.gui_estimated[lang]}'
 
                         sg.popup_scrolled(

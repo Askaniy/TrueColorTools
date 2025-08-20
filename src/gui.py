@@ -66,7 +66,6 @@ def generate_layout(
         circle_size: tuple,
         filters_plot_size: tuple,
         img_preview_size: tuple,
-        text_colors: tuple,
         filtersDB: tuple,
         color_space: str,
         white_point: str,
@@ -88,14 +87,14 @@ def generate_layout(
         [sg.T()],
         [sg.Push(), sg.Text(tr.gui_settings[lang], font=title_font, key='-settingsTitle-'), sg.Push()],
         [sg.T()],
-        [sg.Text('Color space', key='-ColorSpaceText-', tooltip=tr.gui_color_space_tooltip[lang])],
+        [sg.Text(tr.gui_color_space[lang], key='-ColorSpaceText-', tooltip=tr.gui_color_space_tooltip[lang])],
         [
             sg.Combo(
                 tuple(supported_color_spaces.keys()), default_value=color_space, readonly=True,
                 expand_x=True, enable_events=True, key='-ColorSpace-', tooltip=tr.gui_color_space_tooltip[lang]
             )
         ],
-        [sg.Text('White point', key='-WhitePointText-', tooltip=tr.gui_white_point_tooltip[lang])],
+        [sg.Text(tr.gui_white_point[lang], key='-WhitePointText-', tooltip=tr.gui_white_point_tooltip[lang])],
         [
             sg.Combo(
                 tuple(supported_white_points.keys()), default_value=white_point, readonly=True,
@@ -320,6 +319,8 @@ def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict,
     window['tab2'].update(title=tr.gui_tabs[lang][1])
     window['tab3'].update(title=tr.gui_tabs[lang][2])
     window['-settingsTitle-'].update(tr.gui_settings[lang])
+    window['-ColorSpaceText-'].update(tr.gui_color_space[lang])
+    window['-WhitePointText-'].update(tr.gui_white_point[lang])
     window['-GammaCorrection-'].update(text=tr.gui_gamma_correction[lang])
     window['-MaximizeBrightness-'].update(text=tr.gui_maximize[lang])
     window['-ScaleFactorText-'].update(tr.gui_scale_factor[lang])
