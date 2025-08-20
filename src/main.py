@@ -23,7 +23,6 @@ def launch_window(lang: str):
     namesDB = {}
     tagsDB = []
     filtersDB = db.list_filters()
-    tab1_loaded = False
 
     # Processing configuration
     default_tag = 'featured'
@@ -92,6 +91,7 @@ def launch_window(lang: str):
     tab1_obj_name = tab1_color_xyz = tab1_spectrum = None
     tab1_albedo_note = tr.gui_blank_note
     tab2_preview = None
+    tab2_filters = []
     tab3_obj_name = tab3_color_xyz = tab3_spectrum = None
 
     def tab1_tab3_update_plot(
@@ -133,6 +133,10 @@ def launch_window(lang: str):
         '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-',
         '-bitness-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3'
     )
+
+    # GUI first loading flags
+    tab1_loaded = False
+    tab2_opened = False
 
     # Window events loop
     while True:
@@ -506,16 +510,17 @@ def launch_window(lang: str):
                         window['tab2_preview'].update(data=tab2_preview_rgb.to_bytes())
 
                 # Updating filters profile plot
-                if (isinstance(event, str) and event.startswith('tab2_filter')) or (event[0] == 'tab2_thread' and values[event] is not None) or event in ('-currentTab-', '-ColorSpace-', '-WhitePoint-'):
-                    try:
+                if (isinstance(event, str) and event.startswith('tab2_filter')) or event in ('-currentTab-', '-ColorSpace-', '-WhitePoint-'):
+                    if not tab2_opened:
+                        # The first tab opening
+                        tab2_fig = pl.plot_filters((), color_system, lang, filters_figsize, filters_dpi)
+                        tab2_opened = True
+                    else:
                         pl.close_figure(tab2_fig)
                         tab2_to_plot = [*tab2_filters, *mean_spectrum]
                         tab2_fig = pl.plot_filters(tab2_to_plot, color_system, lang, filters_figsize, filters_dpi)
                         tab2_fig_canvas_agg.get_tk_widget().forget()
-                        tab2_fig_canvas_agg = pl.draw_figure(window['tab2_canvas'].TKCanvas, tab2_fig)
-                    except UnboundLocalError: # means it's the first tab opening
-                        tab2_fig = pl.plot_filters((), color_system, lang, filters_figsize, filters_dpi)
-                        tab2_fig_canvas_agg = pl.draw_figure(window['tab2_canvas'].TKCanvas, tab2_fig)
+                    tab2_fig_canvas_agg = pl.draw_figure(window['tab2_canvas'].TKCanvas, tab2_fig)
 
 
             # ------------ Events in the tab "Blackbody & Redshifts" ------------
