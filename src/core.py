@@ -1884,13 +1884,14 @@ class ColorSystem:
 
 # CIE XYZ (1931) color matching functions, 2-deg
 # https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer
-xyz_cmf = FilterSystem.from_list(('cie1931_2deg.x', 'cie1931_2deg.y', 'cie1931_2deg.z'))
+# http://www.cvrl.org/cie.htm
+xyz_cmf = FilterSystem.from_list(('CIE_1931_2deg.x', 'CIE_1931_2deg.y', 'CIE_1931_2deg.z'))
 xyz_color_system = ColorSystem('CIE XYZ', 'Illuminant E')
 
 # There are CMFs transformed from the CIE (2006) LMS functions, 2-deg
 # (https://cie.co.at/datatable/cie-2006-lms-cone-fundamentals-2-field-size-terms-energy)
-# here: http://www.cvrl.org/ciexyzpr.htm
-# However, the CIE XYZ (1931) standard is still used. CIE never published "CIE XYZ (2006)".
+# here: http://www.cvrl.org/database/text/cienewxyz/cie2012xyz2.htm, http://www.cvrl.org/ciexyzpr.htm
+# However, the CIE XYZ (1931) standard is still widely used.
 
 
 class ColorObject:

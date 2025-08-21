@@ -1101,7 +1101,8 @@ names = {
     'Quasars': {'ru': 'Квазары', 'de': 'Quasare'},
     'Galactic cirri': {'ru': 'Галактические циррусы', 'de': 'Galaktische Cirri'},
     'Nebula of IRC +10216': {'ru': 'Небула IRC +10216', 'de': 'Nebel von IRC +10216'},
-    # Others
+    # Other
+    'Satellite of': {'ru': 'Спутник', 'de': 'Satellit von'},
     'Equal-energy spectrum': {'ru': 'Плоский спектр', 'de': 'Homogenes Energiespektrum'}
 }
 
