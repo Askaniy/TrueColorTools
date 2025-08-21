@@ -6,7 +6,6 @@ Input data is accepted in the form of filters measurements (such as color indice
 
 To calibrate the color of maps based on TCT data, I recommend using [Cylindrical Texture Calibrator](https://github.com/Askaniy/CylindricalTextureCalibrator).
 
-Please note that this is a hobby project and no guarantees are provided for the results. Help is welcome!
 
 ![TCT screenshot](screenshot.webp)
 
@@ -34,13 +33,12 @@ An alternative way for Windows 8/10/11. Stable versions are compiled into an exe
 
 TCT converts photometric measurements into a continuous spectrum (if it isn't already a spectrum) and convolves it with eye color matching functions (CMFs). A set of photographs (e.g. taken by a spacecraft) is counted and processed in the same way as photometry.
 
-In the default sRGB mode, the spectrum is first convolved in XYZ space and then RGB is calculated for sRGB color space and illuminant E (the equal energy white point is much better than the standard D65 for our purposes).
+According to a common color processing procedure, after convolution from CMF to CIE XYZ color space, the color is converted by a 3×3 matrix to the selected color system.
+The matrix is formed from the specified color space and white point. The default is the most common color space (sRGB) with a natural-looking white point, equal-energy spectrum (illiminant E). It's important to note that sRGB is commonly used with D65 instead.
 
-The photometric measurements are calibrated at runtime using the filter profiles and the specified calibration system. Zero points are not required.
+The photometric measurements read from the database are calibrated at runtime using the specified calibration system and filter profiles. Zero points are not required. Spectra and filter profiles are stored on a grid with a 5-nm step in energy spectral density units (e.g., W/(m² nm)).
 
 Interpolation is not used to reconstruct the spectrum from the photometry because it is not a solution to the inverse problem (i.e., looking at the spectrum through the filters does not give exactly the original photometry). Therefore, the Tikhonov regularization method is applied, which (almost) guarantees the solution of the ill-posed problem. A combination of first-order and second-order differential operators is chosen for the Tikhonov matrix (tries to minimize height variations and curvature in the spectrum) with a restriction to negative values.
-
-Extrapolation of spectra without photometry is done with an appropriate piece of Gaussian to avoid infinitely large and negative values.
 
 
 ## How to use?
@@ -55,7 +53,7 @@ The **Database viewer** tab provides access to the spectra database and allows y
 
 The **Image processing** tab accepts regular images, a series of black and white images, or a spectral cube as input. Using the wavelength information, the image is "reshot" in true color. The internal operations are similar to reconstructing the spectrum for each pixel, but use efficient operations on arrays.
 
-The **Blackbody & Redshifts** tab calculates the influence of physical phenomena on color. Based on the blackbody spectrum, the program displays the color and brightness changes due to Doppler and gravitational redshifts. You can lock the exposure on the logarithmic scale of apparent magnitude, setting the overexposure limit for a tuned blackbody object if it was in the sky replacing the Sun (at the same angular size).
+The **Blackbody & Redshifts** tab calculates the influence of physical phenomena on color. Based on the blackbody spectrum, the program displays the color and brightness changes due to Doppler and gravitational redshifts. Brightness is normalized to the solar spectrum. Adjust the overexposure limit by changing the "Scale Factor" in the settings sidebar.
 
 ### Features
 - Tag system: Any spectrum in the database can be assigned any set of tags. They form lists of categories for the *Database viewer* tab, which makes working with the database easier.
@@ -66,13 +64,13 @@ The **Blackbody & Redshifts** tab calculates the influence of physical phenomena
 ## Databases
 
 ### Spectra database structure
-Data listed in JSON5 files can be of two types: reference and photometric. There are no restrictions on their order and relative position at all (data block and its reference block can be in different files), but it is usually convenient to list the sources at the beginning of the file, then the spectra.
+The JSON5-formatted database stores two types of data: references and (photo)spectral objects. There are no restrictions on their order and relative position (data block and its reference block can be in different files), it is usually more convenient to list the sources at the beginning of the file or right before the spectra they describe.
 
-The object name may contain indicators for the GUI and the color table, the template is `(index) name: note (info) | reference`. The contents of the brackets are placed in the upper left corner; colon followed by a note; what appears after a vertical bar is reference(s) and is placed in the upper right corner. The naming conventions in the GUI may vary and try to follow naming standards in astronomy.
+The object name may contain formatting indicators for the GUI and the color table, the template is `(index) name: note (info) | reference`. The contents of the brackets are placed in the upper left corner; colon followed by a note; what appears after a vertical bar is reference(s) and is placed in the upper right corner. The naming conventions in the GUI may vary and try to follow naming standards in astronomy.
 
-The brightness scale is not strictly tied to physical quantities. Using the `albedo` key, you can indicate that the appropriate spectrum is scaled and the brightness in the range 0 to 1 should be treated as reflectance. The scaling task can be left to the program by specifying a wavelength or filter for which the albedo is known. Optional internal standard is irradiance spectral density measured in W / (m² nm).
+The brightness scale is not strictly tied to physical quantities. Using one of the logical albedo keys (`is_geometric_albedo`, `is_spherical_albedo`, `is_albedo`), you can indicate that the appropriate spectrum is scaled and the brightness should be treated as reflectance factor. You can also tell the program to scale the spectrum by albedo in a band through the following keys: `geometric_albedo`, `spherical_albedo`, `albedo`.
 
-For the visible range, there are two main types of albedo: geometric and spherical. Geometric albedo is a reflection coefficient at the zero phase angle (normal albedo is now not distinguished from geometric albedo). It is usually brighter than the spherical albedo, the ratio of all incident light to all reflected light. If one is not specified in the database or can't be calculated from the phase function, TCT uses a [theoretical model](https://ui.adsabs.harvard.edu/abs/2019A%26A...626A..87S/abstract) to convert one to the other for the appropriate brightness display mode. If no albedo is specified, the object will not be displayed in albedo modes (exception for the `star` tag). The `albedo` key indicates both albedos at once, but it is not recommended.
+Geometric albedo is a reflection coefficient at the zero phase angle (normal albedo is now not distinguished from geometric albedo). It is usually brighter than the spherical albedo, the ratio of all incident light to all reflected light. If one is not specified in the database or can't be calculated from the phase function, TCT uses a [theoretical model](https://ui.adsabs.harvard.edu/abs/2019A%26A...626A..87S/abstract) to convert one to the other for the appropriate brightness display mode. If no albedo is specified, the object will not be displayed in albedo modes (exception for the `star` tag). The `albedo` key indicates both albedos at once, but it is not recommended.
 
 Phase functions are used to calculate phase integral, which is used to convert between spherical and geometric albedo. The name and function parameters are stored as `[name, {param1: value1, ...}]`, each value can go with uncertainty. `Hapke` model also calculates albedo, therefore `[filter/nm, name, params]` format is supported to indicate reference spectral range (it will have no effect for other models).
 
@@ -122,10 +120,10 @@ As in JSON5, the default wavelengths for external files are in nanometers and th
 - `.txtE` for energy counters per wavelength (by default), `.txtJ` for energy counters per frequency (like jansky), `.txtP` for photon counters.
 
 ### Spectra database extension
-The data in the `/spectra` folder can be modified by the user (except for the "vital" spectra of the [Sun](spectra/files/CALSPEC/sun_reference_stis_002.fits) and [Vega](spectra/files/CALSPEC/alpha_lyr_stis_011.fits)). The display order in the *Database viewer* is determined by the file names and the order within the file. If the spectrum header is repeated in the database, the last spectrum will replace the previous one. The tag list is created and completed while reading files. `/spectra_extras` is recommended as the storage location for user files and add-ons; they will be shown last in the GUI. There is a [pinned issue](https://github.com/Askaniy/TrueColorTools/issues/26) for sharing "official" and user add-ons. Pull requests are welcome too.
+The data in the `/spectra` folder can be modified by the user (except for [Sun](spectra/files/CALSPEC/sun_reference_stis_002.fits) and [Vega](spectra/files/CALSPEC/alpha_lyr_stis_011.fits), which are used for calibration). The display order in the *Database viewer* is determined by the file names and the order within the file. If the spectrum header is repeated in the database, the last spectrum will replace the previous one. The tag list is created and completed while reading files. `/spectra_extras` is recommended as the storage location for user files and add-ons; they will be shown last in the GUI. There is a [pinned issue](https://github.com/Askaniy/TrueColorTools/issues/26) for sharing "official" and user add-ons. Pull requests are welcome too.
 
 ### Filters database extension
-TCT uses filter sensitivity profiles for accurate spectrum restoration. They are provided by the [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php) and stored [here](/filters). To replenish the database, select a filter on the site, select the "ascii" data file and place it in the folder. You need also specify the wavelength unit (usually ångströms, so you get the `.datA` extension). If you see "Detector Type: **P**hoton counter" in the filter description there (instead of "Energy counter", which we need) you need to add `P` to the extension. Also note that [V band filter](filters/Generic_Bessell.V.dat) in the `/filters` folder is "vital".
+TCT uses filter sensitivity profiles for accurate spectrum restoration. They are provided by the [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php) and stored [here](/filters). To replenish the database, select a filter on the site, select the "ascii" data file and place it in the folder. You need also specify the wavelength unit (usually ångströms, so you get the `.datA` extension). If you see "Detector Type: **P**hoton counter" in the filter description there (instead of "Energy counter", which we need) you need to add `P` to the extension. (Do not edit the [V band filter](filters/Generic_Bessell.V.dat), it is needed for the program to work.)
 
 Short help on the UBVRI photometric system implementations:
 - `Generic_Johnson` takes into account the sensitivity of photomultiplier tubes, mostly affected on R and I bands. Use **only** if the measurements were actually taken on a PMT.
@@ -135,12 +133,12 @@ Short help on the UBVRI photometric system implementations:
 
 ## Acknowledgements
 
+My thanks to *arbodox* for the creation of the project logo.
+
 This research has made use of:
 - [Spanish Virtual Observatory](https://svo.cab.inta-csic.es) project funded by MCIN/AEI/10.13039/501100011033/ through grant PID2020-112949GB-I00
     - [The SVO Filter Profile Service. Rodrigo, C., Solano, E., Bayo, A., 2012](https://ui.adsabs.harvard.edu/abs/2012ivoa.rept.1015R/abstract);
     - [The SVO Filter Profile Service. Rodrigo, C., Solano, E., 2020](https://ui.adsabs.harvard.edu/abs/2020sea..confE.182R/abstract);
 - [Colour & Vision Research laboratory and database](http://www.cvrl.org/)
-    - [Stiles & Burch (1959) 2-deg individual colour matching functions](http://www.cvrl.org/database/text/sb_individual/sb2_individual.htm);
-    - [CIE (2012) 2-deg XYZ “physiologically-relevant” colour matching functions](http://www.cvrl.org/database/text/cienewxyz/cie2012xyz2.htm).
-
-My thanks to *arbodox* for the creation of the project logo.
+    - [CIE 1931 2-deg, XYZ colour matching functions](http://www.cvrl.org/cie.htm);
+    - [Stiles & Burch (1955) 2-deg colour matching functions](http://www.cvrl.org/stilesburch2_ind.htm).

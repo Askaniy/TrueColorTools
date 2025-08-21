@@ -32,6 +32,8 @@ themes = (dark_theme, light_theme)
 plt.rcParams |= dark_theme
 
 rgb_muted = ('#904040', '#3c783c', '#5050e0')
+
+# http://www.cvrl.org/stilesburch2_ind.htm
 cmfs = FilterSystem.from_list(('StilesBurch2deg.r', 'StilesBurch2deg.g', 'StilesBurch2deg.b'), name='RGB')
 
 def close_figure(figure: Figure):
