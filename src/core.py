@@ -309,7 +309,12 @@ class _TrueColorToolsObject:
         """
         output = deepcopy(self)
         output.br = br_handling(self.br, operand)
-        output.sd = sd_handling(self.br, self.sd, operand, None)
+        try:
+            output.sd = sd_handling(self.br, self.sd, operand, None)
+        except AttributeError:
+            # TODO: standard deviations were replaced with a covariance matrix
+            # let's hope this workaround works
+            output.covariance_matrix = sd_handling(self.br, self.covariance_matrix, operand, None)
         return output
 
     def __add__(self, other) -> Self:
@@ -377,10 +382,16 @@ class _TrueColorToolsObject:
                 return br, sd
             case (Spectrum(), FilterSystem()):
                 br = aux.integrate(aux.mul_br(operand1.br, operand2.br), nm_step)
-                sd = aux.mul_sd(operand1.br, operand1.sd, operand2.br, operand2.sd)
-                if sd is not None:
-                    sd = aux.integrate(sd, nm_step)
-                return Photospectrum(operand2, br, sd, name=operand1.name)
+                # Old code:
+                #sd = aux.mul_sd(operand1.br, operand1.sd, operand2.br, operand2.sd)
+                #if sd is not None:
+                #    sd = aux.integrate(sd, nm_step)
+                covariance_matrix = None
+                if operand1.sd is not None:
+                    covariance_matrix = np.diag(operand1.sd**2) # covariance matrix of the spectrum
+                    filter_matrix = operand2.matrix
+                    covariance_matrix = filter_matrix @ covariance_matrix @ filter_matrix.T
+                return Photospectrum(operand2, br, covariance_matrix, name=operand1.name)
             case (SpectralSquare(), FilterSystem()):
                 br = aux.integrate(operand1.br[:, :, np.newaxis] * operand2.br[:, np.newaxis, :], nm_step).T
                 # TODO: uncertainty processing
@@ -872,6 +883,7 @@ class FilterSystem(SpectralSquare):
     Attributes:
     - `nm` (np.ndarray): total wavelength range of the filter profiles
     - `br` (np.ndarray): matrix of the profiles with shape [len(nm), len(filters)]
+    - `matrix` (np.ndarray): transforms `br` into matrix for calculations
     - `name` (ObjectName): name as an instance of a class that stores its components
     - `names` (tuple[ObjectName]): storage of the original filter names
     - `size` (int): spatial axis length
@@ -930,6 +942,11 @@ class FilterSystem(SpectralSquare):
             end = non_zero_indices[-1] + 2
             return Spectrum(self.nm[start:end], profile[start:end], name=self.names[index])
 
+    @property
+    def matrix(self):
+        """ Transforms `br` into matrix for calculations """
+        return self.br.T * nm_step
+
 
 class _Cube(_TrueColorToolsObject):
     """ Internal class for inheriting spatial data properties """
@@ -950,7 +967,8 @@ class _Cube(_TrueColorToolsObject):
         if isinstance(self, _SpectralObject):
             return SpectralSquare(self.nm, br, sd, self.name)
         elif isinstance(self, _PhotospectralObject):
-            return PhotospectralSquare(self.filter_system, br, sd, self.name)
+            # TODO: covariance matrix input
+            return PhotospectralSquare(self.filter_system, br, self.name)
 
     @property
     def width(self):
@@ -1004,16 +1022,17 @@ class _PhotospectralObject(_TrueColorToolsObject):
     - `filter_system` (FilterSystem): instance of the class storing filter profiles
     - `nm` (np.ndarray): shortcut for filter_system.nm, the definition range
     - `br` (np.ndarray): array of "brightness" in energy density units (not a photon counter)
-    - `sd` (np.ndarray): optional array of standard deviations
+    - `covariance_matrix`: (np.ndarray): optional matrix that stores uncertainty and its correlations
+    - `sd` (np.ndarray): calculates an array of standard deviations from the covariance matrix
     - `name` (ObjectName): name as an instance of a class that stores its components
     """
 
-    def __init__(self, ndim: int, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str|ObjectName = None):
+    def __init__(self, ndim: int, filter_system: FilterSystem, br: Sequence, covariance_matrix: np.ndarray = None, name: str|ObjectName = None):
         """
         Args:
         - `filter_system` (FilterSystem): instance of the class storing filter profiles
         - `br` (Sequence): array of "brightness" in energy density units (not a photon counter)
-        - `sd` (Sequence): optional array of standard deviations
+        - `covariance_matrix`: (np.ndarray): optional matrix that stores uncertainty and its correlations
         - `name` (str|ObjectName): name as a string or an instance of a class that stores its components
         """
         self.br = np.array(br, dtype='float64')
@@ -1022,21 +1041,32 @@ class _PhotospectralObject(_TrueColorToolsObject):
         if not isinstance(filter_system, FilterSystem):
             raise ValueError('`filter_system` argument is not a FilterSystem instance')
         self.filter_system = filter_system
-        if sd is None or (ignore_sd_for_cubes and ndim == 3):
-            self.sd = None
+        if covariance_matrix is None or (ignore_sd_for_cubes and ndim == 3):
+            self.covariance_matrix = None
         else:
-            self.sd = np.array(sd, dtype='float64')
+            self.covariance_matrix = np.array(covariance_matrix, dtype='float64')
         self.name = ObjectName.as_ObjectName(name)
         if (len_filters := len(filter_system)) != (len_br := self.br.shape[0]):
             raise ValueError(f'Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br})')
-        if self.sd is not None and (len_sd := self.sd.shape[0]) != len_br:
-            print(f'# Note for the PhotospectralObject "{name}"')
-            print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
-            self.sd = None
+        if self.covariance_matrix is not None:
+            if self.covariance_matrix.ndim == 2:
+                len_x, len_y = self.covariance_matrix.shape
+                if len_x != len_y:
+                    self.covariance_matrix = None
+                    print(f'# Note for the PhotospectralObject "{name}"')
+                    print('- The covariance matrix is not square. Uncertainty was erased.')
+                elif len_x != len_br:
+                    self.covariance_matrix = None
+                    print(f'# Note for the PhotospectralObject "{name}"')
+                    print(f'- The covariance matrix size do not match brightness array ({len_x} vs {len_br}). Uncertainty was erased.')
+            else:
+                self.covariance_matrix = None
+                print(f'# Note for the PhotospectralObject "{name}"')
+                print('- The covariance matrix is not 2D. Uncertainty was erased.')
         if np.any(np.isnan(self.br)):
             self.br = np.nan_to_num(self.br)
             print(f'# Note for the PhotospectralObject object "{self.name}"')
-            print(f'- NaN values detected during object initialization, they been replaced with zeros.')
+            print('- NaN values detected during object initialization, they been replaced with zeros.')
 
     @property
     def nm(self) -> np.ndarray[np.integer]:
@@ -1087,23 +1117,27 @@ class _PhotospectralObject(_TrueColorToolsObject):
             br0 = self.br
             sd0 = None if ignore_sd_for_cubes and self.ndim == 3 else self.sd
             sd1 = None
-            if len(self.filter_system) == 1: # single-point PhotospectralObject support
+            if len(self.filter_system) == 1:
+                # single-point PhotospectralObject support
                 nm1, br1 = aux.extrapolating(nm0, br0, sd0, nm_arr, nm_step)
             else:
                 filter_system = self.filter_system.define_on_range(nm_arr)
                 nm1 = filter_system.nm
-                T = filter_system.br.T * nm_step
+                filter_matrix = filter_system.matrix
                 #L = aux.smoothness_matrix(T.shape[1], order=2)
-                #A = T.T @ T + 0.05 * L.T @ L
-                L1 = aux.smoothness_matrix(T.shape[1], order=1)
-                L2 = aux.smoothness_matrix(T.shape[1], order=2)
+                #A = filter_matrix.T @ filter_matrix + 0.05 * L.T @ L
+                order1_matrix = aux.smoothness_matrix(filter_matrix.shape[1], order=1)
+                order2_matrix = aux.smoothness_matrix(filter_matrix.shape[1], order=2)
                 # TODO: research on some known spectra to find which ratios (0.005, 1) fit best
-                A = aux.covar_matrix(T) + 0.005 * aux.covar_matrix(L1) + 1 * aux.covar_matrix(L2)
+                alpha = 0.005
+                beta = 1
+                tikhonov_matrix_covar = alpha * aux.covar_matrix(order1_matrix) + beta * aux.covar_matrix(order2_matrix)
+                right_matrix = aux.covar_matrix(filter_matrix) + tikhonov_matrix_covar
                 if self.ndim == 3:
                     # scipy supports batch mode for 2d arrays, but not for 3D arrays
-                    br0 = br0.reshape(T.shape[0], -1)
-                b = T.T @ br0
-                br1 = solve(A, b) # x1.5 faster than np.linalg.inv(A) @ b
+                    br0 = br0.reshape(filter_matrix.shape[0], -1)
+                left_vector = filter_matrix.T @ br0
+                br1 = solve(right_matrix, left_vector) # x1.5 faster than np.linalg.inv(A) @ b
                 if self.ndim == 3:
                     # Reshape spectral cube back from square
                     br1 = br1.reshape(-1, *self.br.shape[1:])
@@ -1113,13 +1147,14 @@ class _PhotospectralObject(_TrueColorToolsObject):
                     # The processing speed drops by a factor of about five,
                     # so the use is blocked for spectral squares and cubes:
                     # background noise near zero can be most of the pixels.
-                    def objective(Y):
+                    # TODO: RECHECK! MAY CONTAIN ERRORS!
+                    def objective(vector):
                         # Tikhonov-regularized quadratic objective: 0.5 * Y^T A Y - b^T Y
-                        return 0.5 * Y @ A @ Y - b @ Y
-                    def gradient(Y):
+                        return 0.5 * vector @ right_matrix @ vector - left_vector @ vector
+                    def gradient(vector):
                         # Gradient of the objective
-                        return A @ Y - b
-                    bounds = ((0, None) for _ in range(A.shape[1]))
+                        return right_matrix @ vector - left_vector
+                    bounds = ((0, None) for _ in range(right_matrix.shape[1]))
                     result = minimize(
                         fun=objective,
                         x0=np.maximum(br1, 0),
@@ -1133,11 +1168,17 @@ class _PhotospectralObject(_TrueColorToolsObject):
                 if self.ndim == 1 and sd0 is not None:
                     # Measurement confidence band calculation
                     # Confidence bands for spectral squares and cubes are not computed to save computational resources
-                    A_inv = np.linalg.inv(A)
-                    sd1 = np.sqrt(np.diag(A_inv @ T.T @ np.diag(sd0**2) @ T @ A_inv))
+                    right_matrix_inv = np.linalg.inv(right_matrix)
+                    covar_matrix = right_matrix_inv @ filter_matrix.T @ np.diag(sd0**2) @ filter_matrix @ right_matrix_inv
+                    # TODO: write the result covariance matrix to the class instance! Uncertainty of spectrum is self-correlated
+                    # I mean, it's obvious that e.g. 555 nm and 560 nm data points depend on each other:
+                    # if a spectrum is smooth, their values can't be too different, even if their std allows one to go up and the other to go down
+                    # that means uncertainty of a spectrum of N data points should be described by NxN covariance matrix
+                    # instead of N length std array (which is just a root of diagonal of that matrix)
+                    sd1 = np.sqrt(np.diag(covar_matrix))
                     # An attempt to account for the sensitivity confidence band of the method
-                    sd1 = np.sqrt(sd1**2 + (0.01 * np.median(br1))**2 * np.diag(A_inv))
-                    # TODO: needs research, `0.01 * np.median(br1)` sd scale factor selected manually
+                    sd1 = np.sqrt(sd1**2 + (0.01 * np.median(br1))**2 * np.diag(right_matrix_inv))
+                    # TODO: needs research, the reconstructed std scale `0.01` is arbitrary!
             if self.ndim == 1:
                 # Retain the photometric data for the resulting spectral object.
                 spectral_obj = Spectrum(nm1, br1, sd1, name=self.name, photospectrum=deepcopy(self))
@@ -1174,6 +1215,14 @@ class _PhotospectralObject(_TrueColorToolsObject):
         sd = sd_handling(self.br, self.sd, other.br, other.sd)
         higher_dim = (self, other)[self.ndim < other.ndim]
         return higher_dim.__class__(filter_system, br, sd, name=higher_dim.name)
+
+    @property
+    def sd(self):
+        """ Calculates an array of standard deviations from the covariance matrix """
+        if self.covariance_matrix is None:
+            return None
+        else:
+            return np.sqrt(np.diag(self.covariance_matrix))
 
 
 stub_filter_system = FilterSystem.from_list(('Generic_Bessell.B', 'Generic_Bessell.V'))
@@ -1871,16 +1920,6 @@ class ColorSystem:
         self.matrix = inv_matrix / white_scale[:, np.newaxis] / 3 # Why divide by 3? It just works
         self.inv_matrix = np.linalg.inv(self.matrix)
 
-    def xyz_to_rgb(self, arr: np.ndarray) -> np.ndarray:
-        """ Converts XYZ color array into a RGB color space array """
-        # 1D implementation: rgb = self.matrix.T.dot(xyz)
-        return np.tensordot(self.matrix, arr, axes=(1, 0))
-
-    def rgb_to_xyz(self, arr: np.ndarray) -> np.ndarray:
-        """ Converts RGB color array into the XYZ color space array """
-        # 1D implementation: rgb = self.inv_matrix.T.dot(xyz)
-        return np.tensordot(self.inv_matrix, arr, axes=(1, 0))
-
 
 # CIE XYZ (1931) color matching functions, 2-deg
 # https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer
@@ -1897,6 +1936,7 @@ xyz_color_system = ColorSystem('CIE XYZ', 'Illuminant E')
 class ColorObject:
     """
     This class stores a color brightness array (`self.br`) with values in the 0-1 range,
+    covariance matrix to calculate standard deviations (`self.covar`),
     postprocessing attributes, color system, and provides conversion methods.
 
     The brightness array is required to be of length 3 along the first axis.
@@ -1913,15 +1953,20 @@ class ColorObject:
     maximize_brightness = False
     _scale_factor = 1.
 
-    def __init__(self, br: np.ndarray, color_system: ColorSystem):
-        """ ColorObject requires a brightness array and corresponding color system """
+    def __init__(self, br: np.ndarray, covariance_matrix: np.ndarray|None = None, color_system: ColorSystem = xyz_color_system):
+        """
+        ColorObject requires a brightness array and corresponding color system.
+        Default color space is CIE XYZ (1931). Covariance matrix is optional.
+        """
         self.br = br
+        self.covariance_matrix = covariance_matrix
         self._color_system = color_system
 
     @classmethod
     def from_spectral_data(cls, data: _TrueColorToolsObject) -> Self:
-        """ Convolves (photo)spectrum with CIE XYZ color matching functions """
-        return cls((data @ xyz_cmf).br, xyz_color_system)
+        """ Convolves (photo)spectrum with CIE XYZ (1931) color matching functions """
+        photospectrum = data @ xyz_cmf
+        return cls(photospectrum.br, photospectrum.covariance_matrix, xyz_color_system)
 
     def to_color_system(self, new_color_system: ColorSystem) -> Self:
         """
@@ -1929,13 +1974,17 @@ class ColorObject:
         Attention! For saturated colors, color system conversion is not always reversible!
         """
         output = deepcopy(self)
-        xyz = self._color_system.rgb_to_xyz(self.br)
-        output.br = new_color_system.xyz_to_rgb(xyz)
+        # old RGB -> XYZ -> new RGB transformation matrix
+        matrix = self._color_system.inv_matrix @ new_color_system.matrix
+        # 1D implementation: output.br = matrix.T.dot(self.br)
+        output.br = np.tensordot(matrix, self.br, axes=(1, 0))
         if np.any(output.br < 0):
             # We're not in the color system gamut: approximate by desaturating
             # 1D implementation: rgb -= np.min(rgb)
             negative_mask = np.any(output.br < 0, axis=0)
             output.br[:, negative_mask] -= output.br.min(axis=0)[negative_mask]
+        if self.covariance_matrix is not None:
+            output.covariance_matrix = matrix @ self.covariance_matrix @ matrix.T
         output._color_system = new_color_system
         return output
 
