@@ -340,6 +340,8 @@ def extrapolating(x: np.ndarray, y: np.ndarray, sd: np.ndarray, x_arr: np.ndarra
 
 def make_same_ndim(arr1: np.ndarray, arr2: np.ndarray):
     """ Equalizes the arrays dimensions along spatial axes to make it possible to broadcast """
+    arr1 = np.asarray(arr1)
+    arr2 = np.asarray(arr2)
     if (ndim_delta := arr2.ndim - arr1.ndim) != 0:
         if ndim_delta > 0:
             arr1 = arr1.reshape(arr1.shape + (1,)*ndim_delta)
@@ -352,39 +354,29 @@ def add_br(br1, br2):
     Calculates the value of the sum.
     The input can be a numeric or a (multidimensional) numpy array.
     """
-    if isinstance(br1, np.ndarray) and isinstance(br2, np.ndarray):
-        br1, br2 = make_same_ndim(br1, br2)
+    br1, br2 = make_same_ndim(br1, br2)
     return br1 + br2
-
-def add_sd(br1, sd1, br2, sd2):
-    """
-    Calculates the standard deviation of the sum.
-    The input can be a numeric or a (multidimensional) numpy array.
-    """
-    if sd1 is None:
-        return sd2
-    elif sd2 is None:
-        return sd1
-    else:
-        if isinstance(sd1, np.ndarray) and isinstance(sd2, np.ndarray):
-            sd1, sd2 = make_same_ndim(sd1, sd2)
-        return np.sqrt(sd1**2 + sd2**2)
 
 def sub_br(br1, br2):
     """
     Calculates the value of the difference.
     The input can be a numeric or a (multidimensional) numpy array.
     """
-    if isinstance(br1, np.ndarray) and isinstance(br2, np.ndarray):
-        br1, br2 = make_same_ndim(br1, br2)
-    return br1 + br2
+    br1, br2 = make_same_ndim(br1, br2)
+    return br1 - br2
 
-def sub_sd(br1, sd1, br2, sd2):
+def add_sub_covariance_matrices(br1, cm1, br2, cm2):
     """
-    Calculates the standard deviation of the difference.
+    Calculates the covariance matrix of the sum and the difference.
     The input can be a numeric or a (multidimensional) numpy array.
     """
-    return add_sd(br1, sd1, br2, sd2)
+    if cm1 is None:
+        return cm2
+    elif cm2 is None:
+        return cm1
+    else:
+        cm1, cm2 = make_same_ndim(cm1, cm2)
+        return cm1 + cm2
 
 def mul_br(br1, br2):
     """
@@ -396,23 +388,11 @@ def mul_br(br1, br2):
         return br1 * br2
     except ValueError:
         # Different ndim case
-        if isinstance(br1, np.ndarray) and isinstance(br2, np.ndarray) and br2.ndim > br1.ndim:
+        br1 = np.asarray(br1)
+        br2 = np.asarray(br2)
+        if br2.ndim > br1.ndim:
             br1, br2 = br2, br1
         return (br1.T * br2).T
-
-def mul_sd(br1, sd1, br2, sd2):
-    """
-    Calculates the standard deviation of the product.
-    The input can be a numeric or a (multidimensional) numpy array.
-    """
-    if sd1 is None and sd2 is None:
-        return None
-    else:
-        if sd1 is None:
-            sd1 = np.zeros_like(br1)
-        if sd2 is None:
-            sd2 = np.zeros_like(br2)
-        return np.sqrt(mul_br(br1, sd2)**2 + mul_br(br2, sd1)**2 + mul_br(sd1, sd2)**2)
 
 def div_br(br1, br2):
     """
@@ -424,23 +404,42 @@ def div_br(br1, br2):
         return br1 / br2
     except ValueError:
         # Different ndim case
-        if isinstance(br1, np.ndarray) and isinstance(br2, np.ndarray) and br2.ndim > br1.ndim:
+        br1 = np.asarray(br1)
+        br2 = np.asarray(br2)
+        if br2.ndim > br1.ndim:
             br1, br2 = br2, br1
         return (br1.T / br2).T
 
-def div_sd(br1, sd1, br2, sd2):
+def mul_div_covariance_matrices(br1, cm1, br2, cm2, br1br2):
     """
-    Calculates the standard deviation of the private.
+    Calculates the covariance matrix of the product or the private (`br1br2` is the applied operator).
     The input can be a numeric or a (multidimensional) numpy array.
+    Based on https://stats.stackexchange.com/questions/501522/covariance-matrix-of-element-wise-quotient-of-two-sets-of-measurements-with-know
+    Σ = D ( D1_inv * Σ1 * D1_inv + D2_inv * Σ2 * D2_inv ) D
     """
-    if sd1 is None and sd2 is None:
+    if cm1 is None and cm2 is None:
         return None
     else:
-        if sd1 is None:
-            sd1 = np.zeros_like(br1)
-        if sd2 is None:
-            sd2 = np.zeros_like(br2)
-        return div_br(mul_sd(br1, sd1, br2, sd2), br2**2)
+        br1 = np.asarray(br1)
+        br2 = np.asarray(br2)
+        if br1.ndim > 1 or br2.ndim > 1:
+            raise NotImplementedError('No support for uncertainty multiplication for spectral object higher than 1D (TODO)')
+        br1_diag_inv = np.diag(1 / br1)
+        br2_diag_inv = np.diag(1 / br2)
+        br1br2_diag_inv = np.diag(1 / br1br2)
+        if cm1 is None:
+            cm1 = np.zeros((br1.size, br1.size))
+        if cm2 is None:
+            cm2 = np.zeros((br2.size, br2.size))
+        return br1br2_diag_inv @ (br1_diag_inv @ cm1 @ br1_diag_inv + br2_diag_inv @ cm2 @ br2_diag_inv) @ br1br2_diag_inv
+
+def mul_covariance_matrices(br1, cm1, br2, cm2):
+    br1br2 = mul_br(br1, br2)
+    return mul_div_covariance_matrices(br1, cm1, br2, cm2, br1br2)
+
+def div_covariance_matrices(br1, cm1, br2, cm2):
+    br1br2 = div_br(br1, br2)
+    return mul_div_covariance_matrices(br1, cm1, br2, cm2, br1br2)
 
 
 # Blackbody spectra

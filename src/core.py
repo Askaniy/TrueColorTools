@@ -243,7 +243,7 @@ class _TrueColorToolsObject:
     name = ''
     nm = np.empty(0)
     br = np.empty(0)
-    sd = None
+    covariance_matrix = None
 
     @property
     def ndim(self):
@@ -283,7 +283,7 @@ class _TrueColorToolsObject:
         """ Returns a new SpectralObject with a guarantee of definition on the requested wavelength array """
         raise NotImplementedError('Implemented in classes SpectralObject and PhotospectralObject.')
 
-    def scaled_at(self, where, how: int|float = 1, sd: int|float = None):
+    def scaled_at(self, where, how: int|float = 1): # TODO: uncertainty support
         """
         Returns a new object that matches the query brightness (1 by default)
         at the specified filter profile or wavelength.
@@ -291,55 +291,50 @@ class _TrueColorToolsObject:
         output = deepcopy(self)
         if isinstance(where, str|int|float):
             where = get_filter(where)
-        current_br, sd = self @ where
+        current_br, _ = self @ where
         if current_br == 0:
             return output
         if isinstance(how, Sequence):
             how = how[0] # likely a [value, std]
         return output * (how / current_br)
 
-    def apply_element_wise_operation(self, operand: Self, br_handling: Callable, sd_handling: Callable) -> Self:
+    def apply_element_wise_operation(self, operand: Self, br_handling: Callable, cm_handling: Callable) -> Self:
         """ Returns a new object formed from element-wise operation """
         raise NotImplementedError('Implemented in classes SpectralObject and PhotospectralObject, use them instead.')
 
-    def apply_scalar_operation(self, operand, br_handling: Callable, sd_handling: Callable) -> Self:
+    def apply_scalar_operation(self, operand, br_handling: Callable, cm_handling: Callable) -> Self:
         """
         Returns a new object of the same class transformed according to the operator.
         Operand is assumed to be a number or an array along the spectral axis.
         """
         output = deepcopy(self)
         output.br = br_handling(self.br, operand)
-        try:
-            output.sd = sd_handling(self.br, self.sd, operand, None)
-        except AttributeError:
-            # TODO: standard deviations were replaced with a covariance matrix
-            # let's hope this workaround works
-            output.covariance_matrix = sd_handling(self.br, self.covariance_matrix, operand, None)
+        output.covariance_matrix = cm_handling(self.br, self.covariance_matrix, operand, None)
         return output
 
     def __add__(self, other) -> Self:
         if isinstance(other, _TrueColorToolsObject):
-            return self.apply_element_wise_operation(other, aux.add_br, aux.add_sd)
+            return self.apply_element_wise_operation(other, aux.add_br, aux.add_sub_covariance_matrices)
         else:
-            return self.apply_scalar_operation(other, aux.add_br, aux.add_sd)
+            return self.apply_scalar_operation(other, aux.add_br, aux.add_sub_covariance_matrices)
 
     def __sub__(self, other) -> Self:
         if isinstance(other, _TrueColorToolsObject):
-            return self.apply_element_wise_operation(other, aux.sub_br, aux.sub_sd)
+            return self.apply_element_wise_operation(other, aux.sub_br, aux.add_sub_covariance_matrices)
         else:
-            return self.apply_scalar_operation(other, aux.sub_br, aux.sub_sd)
+            return self.apply_scalar_operation(other, aux.sub_br, aux.add_sub_covariance_matrices)
 
     def __mul__(self, other) -> Self:
         if isinstance(other, _TrueColorToolsObject):
-            return self.apply_element_wise_operation(other, aux.mul_br, aux.mul_sd)
+            return self.apply_element_wise_operation(other, aux.mul_br, aux.mul_div_covariance_matrices)
         else:
-            return self.apply_scalar_operation(other, aux.mul_br, aux.mul_sd)
+            return self.apply_scalar_operation(other, aux.mul_br, aux.mul_div_covariance_matrices)
 
     def __truediv__(self, other) -> Self:
         if isinstance(other, _TrueColorToolsObject):
-            return self.apply_element_wise_operation(other, aux.div_br, aux.div_sd)
+            return self.apply_element_wise_operation(other, aux.div_br, aux.mul_div_covariance_matrices)
         else:
-            return self.apply_scalar_operation(other, aux.div_br, aux.div_sd)
+            return self.apply_scalar_operation(other, aux.div_br, aux.mul_div_covariance_matrices)
 
     def __matmul__(self, other: Self):
         """
@@ -376,7 +371,7 @@ class _TrueColorToolsObject:
         match (operand1, operand2):
             case (_, Spectrum()):
                 br = aux.integrate(aux.mul_br(operand1.br, operand2.br), nm_step)
-                sd = aux.mul_sd(operand1.br, operand1.sd, operand2.br, operand2.sd)
+                sd = aux.mul_div_covariance_matrices(operand1.br, operand1.sd, operand2.br, operand2.sd)
                 if sd is not None:
                     sd = aux.integrate(sd, nm_step)
                 return br, sd
@@ -618,7 +613,7 @@ class _SpectralObject(_TrueColorToolsObject):
         """ Checks that the first and last brightness entries on the spectral axis are zero """
         return np.all(self.br[0] == 0) and np.all(self.br[-1] == 0)
 
-    def apply_element_wise_operation(self, other: _TrueColorToolsObject, br_handling: Callable, sd_handling: Callable) -> Self:
+    def apply_element_wise_operation(self, other: _TrueColorToolsObject, br_handling: Callable, cm_handling: Callable) -> Self:
         """
         Returns a new SpectralObject formed from element-wise operation between SpectralObjects
         of the same nature or with a Spectrum.
@@ -643,7 +638,7 @@ class _SpectralObject(_TrueColorToolsObject):
                 br1 = self.get_br_in_range(start, end)
                 br2 = other.get_br_in_range(start, end)
                 br = br_handling(br1, br2)
-                sd = sd_handling(br1, self.get_sd_in_range(start, end), br2, other.get_sd_in_range(start, end))
+                sd = cm_handling(br1, self.get_sd_in_range(start, end), br2, other.get_sd_in_range(start, end))
                 return higher_dim.__class__(aux.grid(start, end, nm_step), br, sd, name=higher_dim.name)
         else:
             return NotImplemented
@@ -797,15 +792,15 @@ class Spectrum(_SpectralObject):
             extrapolated = self.photospectrum.define_on_range(nm_arr, crop)
         return extrapolated
 
-    def apply_scalar_operation(self, operand, br_handling: Callable, sd_handling: Callable):
+    def apply_scalar_operation(self, operand, br_handling: Callable, cm_handling: Callable):
         """
         Returns a new object of the same class transformed according to the linear operator.
         Operand is assumed to be a number or an array along the spectral axis.
         Linearity is needed because values and uncertainty are handled uniformly.
         """
-        output = super().apply_scalar_operation(operand, br_handling, sd_handling)
+        output = super().apply_scalar_operation(operand, br_handling, cm_handling)
         if output.photospectrum is not None:
-            output.photospectrum = output.photospectrum.apply_scalar_operation(operand, br_handling, sd_handling)
+            output.photospectrum = output.photospectrum.apply_scalar_operation(operand, br_handling, cm_handling)
         return output
 
 
@@ -1198,7 +1193,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
             print(f'- More precisely, {format_exc(limit=0).strip()}')
             return target_class.stub(self.name)
 
-    def apply_element_wise_operation(self, other: _TrueColorToolsObject, br_handling: Callable, sd_handling: Callable) -> Self:
+    def apply_element_wise_operation(self, other: _TrueColorToolsObject, br_handling: Callable, cm_handling: Callable) -> Self:
         """
         Returns a new PhotospectralObject formed from element-wise operation with
         a SpectralObject or another PhotospectralObject. Operations between objects
@@ -1212,7 +1207,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
             # Converting to a PhotospectralObject of the same filter system
             other = other @ filter_system
         br = br_handling(self.br, other.br)
-        sd = sd_handling(self.br, self.sd, other.br, other.sd)
+        sd = cm_handling(self.br, self.sd, other.br, other.sd)
         higher_dim = (self, other)[self.ndim < other.ndim]
         return higher_dim.__class__(filter_system, br, sd, name=higher_dim.name)
 
