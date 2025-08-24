@@ -6,7 +6,7 @@ from time import monotonic
 from math import sqrt, ceil
 import numpy as np
 
-from src.core import FilterSystem, SpectralCube, PhotospectralCube, ColorSystem, ColorLine, ColorImage, sun_norm
+from src.core import FilterSystem, SpectralCube, PhotospectralCube, ColorLine, ColorImage, sun_norm
 import src.image_import as ii
 
 

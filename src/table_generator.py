@@ -172,7 +172,7 @@ def generate_table(
         arr[center_y-r_sq:center_y+r_sq, center_x-r_sq:center_x+r_sq, :] = shapes[is_filled] * object_color
 
     # Creating of image template
-    img = Image.fromarray(np.clip(np.round(arr*255), 0, 255).astype('int8'), 'RGB')
+    img = Image.fromarray(np.clip(np.round(arr*255), 0, 255).astype('uint8'))
     draw = ImageDraw.Draw(img)
     draw.multiline_text(
         xy=(int(w/2), int(h0/2)), text=title, fill=(255, 255, 255),
