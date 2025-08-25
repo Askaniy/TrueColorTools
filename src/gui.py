@@ -180,35 +180,37 @@ def generate_layout(
                 sg.Input(enable_events=True, size=1, key='tab2_path'+n, expand_x=True, visible=False),
                 # size=1 is VERY important to make column be depended on the max length of filter file names
                 # Depending on the radio box, FileBrowse or label is displayed below
-                sg.FileBrowse(button_text=tr.gui_browse[lang], size=browse_size, key='tab2_pathText'+n, visible=False),
-                # No need of initial_folder='..' in the FileBrowse to make the path dynamical between the frames
+                sg.FileBrowse(
+                    button_text=tr.gui_browse[lang], size=browse_size,
+                    initial_folder='..', key='tab2_pathText'+n, visible=False
+                ),
                 rgb_text,
             ],
             [
-                sg.Text(tr.gui_tag_filter[lang], key='tab2_filterText'+n),
-                sg.InputCombo(('', *filtersDB), enable_events=True, expand_x=True, key='tab2_filter'+n)
+                sg.Text(tr.gui_filter_or_nm[lang], key='tab2_filterText'+n),
+                sg.Combo(('', *filtersDB), enable_events=True, enable_per_char_events=True, expand_x=True, key='tab2_filter'+n)
             ],
             [
                 sg.Text(tr.gui_evaluate[lang], key='tab2_evalText'+n, tooltip=tr.gui_evaluate_tooltip[lang]),
                 sg.Input('x', size=1, key='tab2_eval'+n, expand_x=True)
             ],
         ]
-        return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, key='tab2_band'+n)
+        return sg.Frame(f'{tr.gui_band[lang]} {num+1}', l, key='tab2_band'+n, visible=num<3)
 
     tab2_frames = [[frame(i, filtersDB, lang)] for i in range(tab2_num)]
     tab2_col1 = [
         #[sg.Push(), sg.Text(tr.gui_input[lang], font=title_font, key='tab2_title1'), sg.Push()],
         [sg.Text(tr.gui_step1[lang], key='tab2_step1')],
-        [sg.Radio(tr.gui_datatype[lang][0], 'DataTypeRadio', enable_events=True, key='-typeImage-', default=True)],
-        [sg.Radio(tr.gui_datatype[lang][1], 'DataTypeRadio', enable_events=True, key='-typeImageRGB-')],
+        [sg.Radio(tr.gui_datatype[lang][0], 'DataTypeRadio', enable_events=True, key='-typeImage-')],
+        [sg.Radio(tr.gui_datatype[lang][1], 'DataTypeRadio', enable_events=True, key='-typeImageRGB-', default=True)],
         [sg.Radio(tr.gui_datatype[lang][2], 'DataTypeRadio', enable_events=True, key='-typeImageCube-')],
         [
-            sg.Text(tr.gui_step2[lang], key='tab2_step2'),
+            sg.Text(tr.gui_step2[lang], key='tab2_step2', visible=False),
             # or image input
-            sg.Input(enable_events=True, size=1, key='tab2_path', expand_x=True, visible=False),
+            sg.Input(enable_events=True, size=1, key='tab2_path', expand_x=True),
             sg.FileBrowse(
                 button_text=tr.gui_browse[lang], size=browse_size,
-                initial_folder='..', key='tab2_pathText', visible=False
+                initial_folder='..', key='tab2_pathText'
             ),
         ],
         [sg.Column(tab2_frames, scrollable=True, vertical_scroll_only=True, key='tab2_frames', expand_x=True, expand_y=True)],
