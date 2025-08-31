@@ -180,10 +180,8 @@ def generate_layout(
                 sg.Input(enable_events=True, size=1, key='tab2_path'+n, expand_x=True, visible=False),
                 # size=1 is VERY important to make column be depended on the max length of filter file names
                 # Depending on the radio box, FileBrowse or label is displayed below
-                sg.FileBrowse(
-                    button_text=tr.gui_browse[lang], size=browse_size,
-                    initial_folder='..', key='tab2_pathText'+n, visible=False
-                ),
+                sg.FileBrowse(button_text=tr.gui_browse[lang], size=browse_size, key='tab2_pathText'+n, visible=False),
+                # No need to use initial_folder='..' in the FileBrowse to make the path dynamic between the frames
                 rgb_text,
             ],
             [

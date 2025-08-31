@@ -1812,6 +1812,22 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
 
 # ------------ Color Processing Section ------------
 
+# CIE XYZ (1931) color matching functions, 2-deg
+# https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer
+# http://www.cvrl.org/cie.htm
+xyz_cmf = FilterSystem.from_list(('CIE_1931_2deg.x', 'CIE_1931_2deg.y', 'CIE_1931_2deg.z'))
+
+# There are CMFs transformed from the CIE (2006) LMS functions, 2-deg
+# (https://cie.co.at/datatable/cie-2006-lms-cone-fundamentals-2-field-size-terms-energy)
+# here: http://www.cvrl.org/database/text/cienewxyz/cie2012xyz2.htm, http://www.cvrl.org/ciexyzpr.htm
+# However, the CIE XYZ (1931) standard is still widely used.
+
+def spectrum_to_white_point(spectrum: Spectrum):
+    """ Returns (x, y) coordinates of the spectrum on the chromaticity diagram """
+    xyz = (spectrum @ xyz_cmf).br
+    return xyz[:2] / xyz.sum()
+
+
 # Values are Color Primaries: (red, green, blue)
 # See https://en.wikipedia.org/wiki/RGB_color_spaces
 supported_color_spaces = {
@@ -1838,6 +1854,8 @@ supported_white_points = {
     'Illuminant D75': (0.29902, 0.31485),
     'Illuminant D93': (0.28315, 0.29711),
     'Illuminant E': (1/3, 1/3),
+    'Vega': spectrum_to_white_point(vega_SI),
+    'Sun': spectrum_to_white_point(sun_SI),
 }
 
 
@@ -1882,16 +1900,7 @@ class ColorSystem:
         return np.tensordot(self.inv_matrix, arr, axes=(1, 0))
 
 
-# CIE XYZ (1931) color matching functions, 2-deg
-# https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer
-# http://www.cvrl.org/cie.htm
-xyz_cmf = FilterSystem.from_list(('CIE_1931_2deg.x', 'CIE_1931_2deg.y', 'CIE_1931_2deg.z'))
 xyz_color_system = ColorSystem('CIE XYZ', 'Illuminant E')
-
-# There are CMFs transformed from the CIE (2006) LMS functions, 2-deg
-# (https://cie.co.at/datatable/cie-2006-lms-cone-fundamentals-2-field-size-terms-energy)
-# here: http://www.cvrl.org/database/text/cienewxyz/cie2012xyz2.htm, http://www.cvrl.org/ciexyzpr.htm
-# However, the CIE XYZ (1931) standard is still widely used.
 
 
 class ColorObject:
