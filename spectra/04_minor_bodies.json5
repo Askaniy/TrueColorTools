@@ -2818,7 +2818,7 @@
         'DOI: 10.1051/0004-6361/201731676', 'https://www.aanda.org/articles/aa/full_html/2017/12/aa31676-17/aa31676-17.html',
         'https://ui.adsabs.harvard.edu/abs/2017A%26A...608A..45L/abstract'
     ],
-    '(55637) 2002 UX25 | MBOSS, Lellouch2017, Rousselot2005a': {
+    '(55637) Uni | MBOSS, Lellouch2017, Rousselot2005a': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.979, 0.038], 'V-R': [0.552, 0.026]},
@@ -3396,7 +3396,7 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.08, 0.02]],
     },
-    '(90568) 2004 GV9 | MBOSS, Vilenius2012': {
+    '(90568) Goibniu | MBOSS, Vilenius2012': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.895, 0.061], 'V-R': [0.520, 0.020]},
@@ -3404,7 +3404,7 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.0770, +0.0084, -0.0077]],
     },
-    '(90568) 2004 GV9 | Boehnhardt2014, Vilenius2012': {
+    '(90568) Goibniu | Boehnhardt2014, Vilenius2012': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.73, 0.01], 'V-R': [0.63, 0.01], 'R-I': [0.88, 0.01]},
@@ -4344,7 +4344,7 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.141, +0.044, -0.031]],
     },
-    '(145451) 2005 RM43 | MBOSS, FarkasTakacs2020': {
+    '(145451) Rumina | MBOSS, FarkasTakacs2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.590, 0.038], 'V-R': [0.390, 0.036]},
@@ -4352,7 +4352,7 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.102, +0.057, -0.029]],
     },
-    '(145451) 2005 RM43 | Boehnhardt2014, FarkasTakacs2020': {
+    '(145451) Rumina | Boehnhardt2014, FarkasTakacs2020': {
         tags: ['Solar System', 'minor body/TNO/scattered'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.69, 0.02], 'V-R': [0.33, 0.02], 'R-I': [0.41, 0.02]},
@@ -6311,6 +6311,13 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
+    '(799081) 2013 CX217 | MBOSS': {
+        tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.850, 0.100], 'V-R': [0.280, 0.040]},
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
     '1994 ES2 | Trujillo2002': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
@@ -6839,13 +6846,6 @@
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.140, 0.080], 'V-R': [0.650, 0.030]},
-        calibration_system: 'Vega',
-        is_reflecting_sunlight: true,
-    },
-    '2013 CX217 | MBOSS': {
-        tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': [0.850, 0.100], 'V-R': [0.280, 0.040]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
