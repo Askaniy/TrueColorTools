@@ -1005,7 +1005,7 @@
     'Dutra2024': [
         'Physical Characteristics of Jupiter’s Trojan (1437) Diomedes from a Tri-chord Stellar Occultation in 2020 and Dimensionless 3D Model',
         'DOI: 10.48550/arXiv.2412.01568', 'https://arxiv.org/abs/2412.01568',
-        'https://ui.adsabs.harvard.edu/abs/2024arXiv241201568D/abstract'
+        'https://ui.adsabs.harvard.edu/abs/2025RSPTA.38340187D/abstract'
     ],
     '(1437) Diomedes | GaiaDR3, Dutra2024, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -2846,8 +2846,8 @@
     },
     'Thirouin2025': [
         'Logos-Zoe: A contact binary triple system in the trans-neptunian belt',
-        'DOI: 10.48550/arXiv.2504.15363', 'https://arxiv.org/abs/2504.15363',
-        'https://ui.adsabs.harvard.edu/abs/2025arXiv250415363T/abstract'
+        'DOI: 10.3847/1538-3881/adcf24', 'https://arxiv.org/abs/2504.15363',
+        'https://ui.adsabs.harvard.edu/abs/2025AJ....169..316T/abstract'
     ],
     '(58534) Logos | MBOSS, Thirouin2025': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
@@ -3622,8 +3622,8 @@
     },
     'Rizos2025': [
         'The Trans-Neptunian Object (119951) 2002 KX14 as revealed by multiple stellar occultations',
-        'DOI: 10.48550/arXiv.2503.19179', 'https://arxiv.org/abs/2503.19179v1',
-        'https://ui.adsabs.harvard.edu/abs/2025arXiv250319179R/abstract'
+        'DOI: 10.1051/0004-6361/202554154', 'https://arxiv.org/abs/2503.19179',
+        'https://ui.adsabs.harvard.edu/abs/2025A%26A...697A..62R/abstract'
     ],
     '(119951) 2002 KX14 | MBOSS, Rizos2025': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
@@ -5391,8 +5391,8 @@
     },
     'GomezLimon2025': [
         'Size and shape of the trans-Neptunian object (470316) 2007 OC10: Comparison with thermal data',
-        'DOI: 10.48550/arXiv.2504.02457', 'https://arxiv.org/abs/2504.02457',
-        'https://ui.adsabs.harvard.edu/abs/2025arXiv250402457G/abstract'
+        'DOI: 10.1051/0004-6361/202453540', 'https://arxiv.org/abs/2504.02457',
+        'https://ui.adsabs.harvard.edu/abs/2025A%26A...697A.157G/abstract'
     ],
     '(470316) 2007 OC10 | MBOSS, GomezLimon2025': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/detached TNO'],
@@ -7141,8 +7141,8 @@
     },
     'Bolin2024': [
         'The discovery and characterization of minimoon 2024 PT5',
-        'DOI: 10.48550/arXiv.2411.08029', 'https://arxiv.org/abs/2411.08029',
-        'https://ui.adsabs.harvard.edu/abs/2024arXiv241108029B/abstract'
+        'DOI: 10.3847/2041-8213/ada1d0', 'https://arxiv.org/abs/2411.08029',
+        'https://ui.adsabs.harvard.edu/abs/2025ApJ...978L..37B/abstract'
     ],
     '2024 PT5 | Bolin2024, Beniyama2025': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Apollo'],
@@ -7155,8 +7155,8 @@
     },
     'Beniyama2025': [
         'Multi-epoch spectro-photometric characterization of the minimoon 2024 PT5 in the visible and near-infrared',
-        'DOI: 10.48550/arXiv.2507.10527', 'https://arxiv.org/abs/2507.10527',
-        'https://ui.adsabs.harvard.edu/abs/2025arXiv250710527B/abstract'
+        'DOI: 10.1051/0004-6361/202555633', 'https://arxiv.org/abs/2507.10527',
+        'https://ui.adsabs.harvard.edu/abs/2025A%26A...700A.183B/abstract'
     ],
     '2024 PT5 | Beniyama2025': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Apollo'],
@@ -7169,8 +7169,8 @@
     },
     'Bolin2025b': [
         'The discovery and characterization of Earth-crossing asteroid 2024 YR4',
-        'DOI: 10.48550/arXiv.2503.05694', 'https://arxiv.org/abs/2503.05694',
-        'https://ui.adsabs.harvard.edu/abs/2025arXiv250305694B/abstract'
+        'DOI: 10.3847/2041-8213/adc910', 'https://arxiv.org/abs/2503.05694',
+        'https://ui.adsabs.harvard.edu/abs/2025ApJ...984L..25B/abstract'
     ],
     'Rivkin2025': [ // Diameter source
         'JWST Observations of Potential Impactor 2024 YR4',
@@ -8342,8 +8342,8 @@
     },
     'Hui2020': [
         'Physical Characterisation of Interstellar Comet 2I/2019 Q4 (Borisov)',
-        'DOI: 10.48550/arXiv.2003.14064', 'https://arxiv.org/abs/2003.14064',
-        'https://ui.adsabs.harvard.edu/abs/2020arXiv200314064H/abstract'
+        'DOI: 10.3847/1538-3881/ab9df8', 'https://arxiv.org/abs/2003.14064',
+        'https://ui.adsabs.harvard.edu/abs/2020AJ....160...92H/abstract'
     ],
     '2I/Borisov | Hui2020': {
         tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
