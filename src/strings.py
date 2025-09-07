@@ -904,6 +904,7 @@ names = {
     'Bienor': {'ru': 'Биенор'},
     'Aya': {'ru': 'Айа'},
     'Amycus': {'ru': 'Амик'},
+    'Uni': {'ru': 'Уни'}, # has moon Tinia (Тиния)
     'Logos': {'ru': 'Логос'},
     'Echeclus': {'ru': 'Эхекл'},
     'Ceto': {'ru': 'Кето'},
@@ -917,9 +918,10 @@ names = {
     'Sawiskera': {'ru': 'Тавискарон'},
     'Sedna': {'ru': 'Седна'},
     'Orcus': {'ru': 'Орк'},
+    'Vanth': {'ru': 'Вант'},
+    'Goibniu': {'ru': 'Гоибниу'},
     'Torifune': {'ru': 'Торифуне'},
     'Apophis': {'ru': 'Апофис'},
-    'Vanth': {'ru': 'Вант'},
     # 100 000
     'Bennu': {'ru': 'Бенну'},
     'Salacia': {'ru': 'Салация'},
@@ -938,6 +940,7 @@ names = {
     'Namaka': {'ru': 'Намака'},
     'Eris': {'ru': 'Эрида'},
     'Makemake': {'ru': 'Макемаке'},
+    'Rumina': {'ru': 'Румина'},
     'Ritona': {'ru': 'Ритона'},
     'Altjira': {'ru': 'Алтьира'},
     'Dinkinesh': {'ru': 'Динкинеш'},
