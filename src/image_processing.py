@@ -6,7 +6,7 @@ from time import monotonic
 from math import sqrt, ceil
 import numpy as np
 
-from src.core import FilterSystem, SpectralCube, PhotospectralCube, ColorLine, ColorImage, sun_norm
+from src.core import FilterSystem, SpectralCube, PhotospectralCube, ColorLine, ColorImage, sun_norm, xyz_color_system
 import src.image_import as ii
 
 
@@ -62,7 +62,7 @@ def image_parser(
                 img_chunk = ColorLine.from_spectral_data(chunk)
                 img_array[:,i*px_upper_limit:j*px_upper_limit] = img_chunk.br
                 log(f'Color calculated for {j} chunks out of {chunk_num}')
-            img = ColorImage(img_array.reshape(3, cube.width, cube.height))
+            img = ColorImage(img_array.reshape(3, cube.width, cube.height), xyz_color_system)
         if upscale and px_num < px_lower_limit and (times := round(sqrt(px_lower_limit / px_num))) != 1:
             log('Upscaling')
             img = img.upscale(times)
