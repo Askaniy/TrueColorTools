@@ -42,10 +42,10 @@
         'Colors of Irregular Satellites of Saturn with DECam',
         'DOI: 10.3847/1538-3881/ac6258', 'https://arxiv.org/abs/2204.08391'
     ],
-    'Verbiscer2022': [
-        'The Diverse Shapes of Dwarf Planet and Large KBO Phase Curves Observed from New Horizons',
-        'DOI: 10.3847/PSJ/ac63a6', 'https://iopscience.iop.org/article/10.3847/PSJ/ac63a6',
-        'https://ui.adsabs.harvard.edu/abs/2022PSJ.....3...95V/abstract'
+    'Helfenstein2025': [
+        'On Error Estimates for Hapke Photometric Model Parameters from Disk-integrated Phase Curves of Airless Planetary Bodies',
+        'DOI: 10.3847/PSJ/adcd5d', 'https://iopscience.iop.org/article/10.3847/PSJ/adcd5d',
+        'https://ui.adsabs.harvard.edu/abs/2025PSJ.....6..144H/abstract'
     ],
     'VPL': [
         'Virtual Planetary Laboratory Spectral Explorer',
@@ -1935,25 +1935,25 @@
         'A Visual Spectrum of Triton from the Hubble Space Telescope',
         'DOI: 10.1006/icar.1999.6224', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103599962243'
     ],
-    'Triton (N I) | Tryka1999, Verbiscer2022': {
+    'Triton (N I) | Tryka1999, Helfenstein2025': {
         tags: ['featured', 'Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
         nm_range: {start: 300, stop: 900, step: 100},
         br_geometric: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
-        phase_integral: [0.94, 0.04],
+        phase_integral: [0.934, +0.100, -0.016],
     },
     'Hillier1994': [
         'Photometric Diversity of Terrains on Triton',
         'DOI: 10.1006/icar.1994.1095', 'https://www.sciencedirect.com/science/article/pii/S0019103584710955',
         'https://ui.adsabs.harvard.edu/abs/1994Icar..109..296H/abstract'
     ],
-    'Triton (N I) | Hillier1994, Verbiscer2022': { // Global
+    'Triton (N I) | Hillier1994, Helfenstein2025': { // Global
         tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Blue', 'Green'],
         br: [0.903, 0.961, 0.970],
         sd: [0.037, 0.023, 0.151],
-        geometric_albedo: ['Generic_Bessell.V', [0.86, 0.004]],
-        phase_integral: [0.94, 0.04],
+        geometric_albedo: ['Generic_Bessell.V', [0.865, +0.079, -0.099]],
+        spherical_albedo: ['Generic_Bessell.V', [0.808, +0.125, -0.060]],
     },
     'Triton: Bright polar cap (N I) | Hillier1994': {
         tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
@@ -1991,7 +1991,7 @@
         geometric_albedo: ['Voyager_ISS-NAC.Green', [0.524, 0.007]],
         phase_integral: [1.429, 0.001], // Green filter
     },
-    'Triton: −19° West (N I) | Pascu2006, Verbiscer2022': { // visit 1, leading side
+    'Triton: −19° West (N I) | Pascu2006, Helfenstein2025': { // visit 1, leading side
         tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
@@ -1999,9 +1999,9 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.84, 0.01]],
-        phase_integral: [0.94, 0.04],
+        phase_integral: [0.934, +0.100, -0.016],
     },
-    'Triton: −3° West (N I) | Pascu2006, Verbiscer2022': { // visit 2, leading side
+    'Triton: −3° West (N I) | Pascu2006, Helfenstein2025': { // visit 2, leading side
         tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
@@ -2009,9 +2009,9 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.83, 0.01]],
-        phase_integral: [0.94, 0.04],
+        phase_integral: [0.934, +0.100, -0.016],
     },
-    'Triton: −10° East (N I) | Pascu2006, Verbiscer2022': { // visit 3, trailing side
+    'Triton: −10° East (N I) | Pascu2006, Helfenstein2025': { // visit 3, trailing side
         tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
@@ -2019,7 +2019,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.78, 0.01]],
-        phase_integral: [0.94, 0.04],
+        phase_integral: [0.934, +0.100, -0.016],
     },
     // Nereid
     'Kiss2016': [
