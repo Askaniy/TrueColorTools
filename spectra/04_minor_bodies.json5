@@ -21,6 +21,11 @@
         'Photometry of Transneptunian Objects for the Herschel Key Program ‘TNOs are Cool’',
         'DOI: 10.1007/s11038-014-9450-x', 'https://link.springer.com/article/10.1007/s11038-014-9450-x'
     ],
+    'Collyer2025a': [
+        'The Surfaces of Small to Midsize Plutinos: Evidence of an Association between Inclination and Surface Type',
+        'DOI: 10.3847/PSJ/adef36', 'https://iopscience.iop.org/article/10.3847/PSJ/adef36',
+        'https://ui.adsabs.harvard.edu/abs/2025arXiv250710766C/abstract'
+    ],
     'Fernandez2005': [
         'Albedos of Asteroids in Comet-Like Orbits',
         'DOI: 10.1086/430802', 'https://iopscience.iop.org/article/10.1086/430802',
@@ -35,6 +40,14 @@
         'Ultraviolet Spectroscopy of Lucy Mission Targets with the Hubble Space Telescope',
         'DOI: 10.3847/PSJ/ac8059', 'https://iopscience.iop.org/article/10.3847/PSJ/ac8059',
         'https://ui.adsabs.harvard.edu/abs/2022PSJ.....3..190H/abstract'
+    ],
+    'Lagerkvist1990': [
+        'Analysis of asteroid lightcurves. II - Phase curves in a generalized HG-system',
+        'https://ui.adsabs.harvard.edu/abs/1990A%26AS...86..119L/abstract'
+    ],
+    'Lagerkvist1992': [
+        'Physical studies of asteroids. XXIV - Phase relations for 48 asteroids obtained with the Carlsberg Meridian Circle',
+        'https://ui.adsabs.harvard.edu/abs/1992A%26AS...94...43L/abstract'
     ],
     'Lellouch2013': [
         '"TNOs are Cool": A survey of the trans-Neptunian region. IX. Thermal properties of Kuiper belt objects and Centaurs from combined Herschel and Spitzer observations',
@@ -296,6 +309,15 @@
         'Visible spectroscopy of 3 KBOs and 1 Centaur',
         'DOI: 10.1016/j.icarus.2025.116554', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103525001010'
     ],
+    'Benecchi2013': [
+        'Light Curves of 32 Large Transneptunian Objects',
+        'DOI: 10.1088/0004-6256/145/5/124', 'https://iopscience.iop.org/article/10.1088/0004-6256/145/5/124',
+        'https://ui.adsabs.harvard.edu/abs/2013AJ....145..124B/abstract'
+    ],
+    'Storrs2025': [
+        'Asteroid Companions in the Visible: WFPC 2 Images',
+        'DOI: 10.3847/PSJ/adef30', 'https://iopscience.iop.org/article/10.3847/PSJ/adef30/meta'
+    ],
 
     'Li2019': [
         'Spectrophotometric modeling and mapping of Ceres',
@@ -359,11 +381,11 @@
         geometric_albedo: ['Generic_Bessell.V', 0.155],
         phase_function: ['HG1G2', {H: [4.048, 0.028], G_1: [0.36, 0.06], G_2: [0.250, 0.040]}],
     },
-    '(3) Juno | SMASS, Vernazza2021, Pravec2012': {
+    '(3) Juno | SMASS, Vernazza2021, Lagerkvist1992': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000003.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.202],
-        phase_function: ['HG', {H: [5.280, 0.050], G: [0.320, 0.040]}],
+        phase_function: ['HG', {H: [5.23, 0.06], G: [0.17, 0.03]}], // average H
     },
     'Li2013a': [
         'Global photometric properties of Asteroid (4) Vesta observed with Dawn Framing Camera',
@@ -397,17 +419,17 @@
         geometric_albedo: ['Dawn_FC.F1', 0.10], // darkest area in clear filter
         phase_integral: [0.53, 0.10], // Table 3, p. 426 (Howett2021b)
     },
-    '(7) Iris | SMASS, Vernazza2021, SsODNet': {
+    '(7) Iris | SMASS, Vernazza2021, Lagerkvist1992': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000007.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.279],
-        phase_function: ['HG1G2', {H: [5.452787, +0.163291, -0.189902], G_1: [0.358278, +0.209620, -0.277301], G_2: [0.304418, +0.092342, -0.0810672]}],
+        phase_function: ['HG', {H: [5.66, 0.12], G: [0.21, 0.02]}], // average H
     },
-    '(9) Metis | MITHNEOS, Vernazza2021, Tholen2020': {
+    '(9) Metis | MITHNEOS, Vernazza2021, Lagerkvist1992': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000009.sp75.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.18],
-        phase_function: ['HG', {H: 6.28, G: 0.17}],
+        phase_function: ['HG', {H: [6.28, 0.12], G: [0.18, 0.02]}], // average H
     },
     '(10) Hygiea | SMASS, Vernazza2021, Shevchenko2022': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -415,17 +437,17 @@
         geometric_albedo: ['Generic_Bessell.V', 0.063],
         phase_function: ['HG1G2', {H: [5.500, 0.020], G_1: [0.76, 0.06], G_2: [0.030, 0.030]}],
     },
-    '(13) Egeria | SMASS, Vernazza2021, SsODNet': {
+    '(13) Egeria | SMASS, Vernazza2021, Lagerkvist1992': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000013.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.087],
-        phase_function: ['HG1G2', {H: [6.461077, +0.210178, -0.261249], G_1: [0.395783, +0.219634, -0.321570], G_2: [0.152957, +0.097293, -0.071371]}],
+        phase_function: ['HG', {H: [6.61, 0.07], G: [0.06, 0.03]}], // average H
     },
-    '(15) Eunomia | SMASS, Vernazza2021, Tholen2020': {
+    '(15) Eunomia | SMASS, Vernazza2021, Lagerkvist1992': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000015.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.187],
-        phase_function: ['HG', {H: 5.28, G: 0.23}],
+        phase_function: ['HG', {H: [5.30, 0.03], G: [0.23, 0.03]}], // average H
     },
     'Shepard2021': [
         'Asteroid 16 Psyche: Shape, Features, and Global Map',
@@ -485,16 +507,21 @@
         geometric_albedo: ['Generic_Bessell.V', 0.194],
         phase_function: ['HG1G2', {H: [5.742, 0.016], G_1: [0.31, 0.04], G_2: [0.320, 0.020]}],
     },
-    '(31) Euphrosyne | SMASS, Vernazza2021': {
+    'Lagerkvist1988': [
+        'Physical studies of asteriods. XVIII - Phase relations and composite lightcurves obtained with the Carlsberg Meridian Circle',
+        'https://ui.adsabs.harvard.edu/abs/1988A&AS...73..395L/abstract'
+    ],
+    '(31) Euphrosyne | SMASS, Vernazza2021, Lagerkvist1988': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000031.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.05],
+        phase_function: ['HG', {H: [6.540, 0.011], G: [-0.068, 0.014]}],
     },
-    '(41) Daphne | SMASS, Vernazza2021, Tholen2020': {
+    '(41) Daphne | SMASS, Vernazza2021, Lagerkvist1992': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000041.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.052],
-        phase_function: ['HG', {H: 7.12, G: 0.10}],
+        phase_function: ['HG', {H: [7.13, 0.10], G: [-0.01, 0.05]}], // average H
     },
     '(45) Eugenia | SMASS, Vernazza2021, Pravec2012': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -502,39 +529,82 @@
         geometric_albedo: ['Generic_Bessell.V', 0.065],
         phase_function: ['HG', {H: [7.422, 0.030], G: [0.130, 0.006]}],
     },
+    '(45 I) Petit-Prince | Storrs2025, Vernazza2021, Pravec2012': { // mean of two epochs
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'natural satellite/minor planet moon'],
+        photometric_system: 'HST_WFPC2-PC',
+        filters: ['F439W', 'F673N', 'F791W', 'F1042M'], // F953N excluded
+        mag: [19.079, 17.884, 17.465, 17.678],
+        sd: [0.06, 0.07, 0.11, 0.99],
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.065], // from Eugenia
+        phase_function: ['HG', {H: [7.422, 0.030], G: [0.130, 0.006]}], // from Eugenia
+    },
     '(48) Doris | SMASS, Vernazza2021, SsODNet': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000048.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.066],
         phase_function: ['HG1G2', {H: [6.676406, +0.126392, -0.143325], G_1: [0.230800, +0.149966, -0.183389], G_2: [0.251445, +0.067412, -0.058680]}],
     },
-    '(52) Europa | SMASS, Vernazza2021, Tholen2020': {
+    '(52) Europa | SMASS, Vernazza2021, Lagerkvist1992': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000052.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.052],
-        phase_function: ['HG', {H: 6.31, G: 0.18}],
+        phase_function: ['HG', {H: [6.32, 0.13], G: [0.13, 0.03]}], // average H
     },
     'Müller2004': [
         '65 Cybele in the thermal infrared: Multiple observations and thermophysical analysis',
         'DOI: 10.1051/0004-6361:20040025', 'https://www.aanda.org/articles/aa/abs/2004/16/aa4002/aa4002.html'
     ],
-    '(65) Cybele | SMASS, Müller2004': {
+    '(65) Cybele | SMASS, Müller2004, Lagerkvist1990': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000065.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.050, 0.005]],
         phase_function: ['HG', {H: [6.70, 0.15], G: [0.09, 0.05]}],
     },
-    '(87) Sylvia | SMASS, Vernazza2021, SsODNet': {
+    '(87) Sylvia | SMASS, Vernazza2021, Lagerkvist1990': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000087.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.04],
-        phase_function: ['HG1G2', {H: [6.729582, +0.171084, -0.204950], G_1: [0.251955, +0.218091, -0.301402], G_2: [0.344251, +0.105180, -0.088477]}],
+        phase_function: ['HG', {H: [6.86, 0.07], G: [0.10, 0.08]}], // average H
     },
-    '(88) Thisbe | SMASS, Vernazza2021, Tholen2020': {
+    'Berthier2014': [
+        'Physical and dynamical properties of the main belt triple Asteroid (87) Sylvia',
+        'DOI: 10.1016/j.icarus.2014.05.046', 'https://www.sciencedirect.com/science/article/pii/S001910351400308X',
+        'https://ui.adsabs.harvard.edu/abs/2014Icar..239..118B/abstract'
+    ],
+    '(87 I) Romulus | Storrs2025, Berthier2014, Lagerkvist1990': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'natural satellite/minor planet moon'],
+        photometric_system: 'HST_WFPC2-PC',
+        filters: ['F439W', 'F673N', 'F791W', 'F1042M'], // F953N excluded
+        mag: [18.512, 17.277, 16.935, 17.020],
+        sd: [0.04, 0.07, 0.07, 0.67],
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['HST_WFPC2-PC.F439W', 0.018], // calculated using occultation results with H(F439W) ≈ 13.16 from magnitude differences
+        phase_function: ['HG', {H: [6.86, 0.07], G: [0.10, 0.08]}], // from Sylvia
+    },
+    'Herald2020': [
+        'Precise astrometry and diameters of asteroids from occultations - a data set of observations and their interpretation',
+        'DOI: 10.1093/mnras/staa3077', 'https://www.sciencedirect.com/science/article/pii/S001910351400308X',
+        'https://ui.adsabs.harvard.edu/abs/2020MNRAS.499.4570H/abstract'
+    ],
+    '(87 II) Remus | Storrs2025, Herald2020, Lagerkvist1990': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'natural satellite/minor planet moon'],
+        photometric_system: 'HST_WFPC2-PC',
+        filters: ['F439W', 'F673N', 'F791W', 'F1042M'], // F953N excluded
+        mag: [19.515, 18.840, 18.034, 17.034],
+        sd: [0.07, 0.24, 0.15, 0.67],
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['HST_WFPC2-PC.F439W', 0.035], // calculated using occultation results with H(F439W) ≈ 14.16 from magnitude differences
+        phase_function: ['HG', {H: [6.86, 0.07], G: [0.10, 0.08]}], // from Sylvia
+    },
+    '(88) Thisbe | SMASS, Vernazza2021, Lagerkvist1990': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000088.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.057],
-        phase_function: ['HG', {H: 7.04, G: 0.14}],
+        phase_function: ['HG', {H: [7.11, 0.02], G: [0.13, 0.03]}], // average H
     },
     '(90) Antiope | SMASS, Mainzer2019, SsODNet': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -542,16 +612,22 @@
         geometric_albedo: ['Generic_Bessell.V', [0.058, 0.004]],
         phase_function: ['HG1G2', {H: [8.288783, +0.097143, -0.105477], G_1: [0.676356, +0.188490, -0.221078], G_2: [0.114536, +0.094715, -0.083994]}],
     },
-    'Marchis2013': [
-        'Characteristics and large bulk density of the C-type main-belt triple asteroid (93) Minerva',
-        'DOI: 10.1016/j.icarus.2013.02.018', 'https://arxiv.org/abs/1310.3209',
-        'https://ui.adsabs.harvard.edu/abs/2013Icar..224..178M/abstract'
-    ],
-    '(93) Minerva | SMASS, Marchis2013, Pravec2012': {
+    '(93) Minerva | SMASS, Storrs2025, Pravec2012': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000093.2.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.062, 0.013]],
+        geometric_albedo: ['HST_WFPC2-PC.F439W', [0.044, 0.007]], // Table 2
         phase_function: ['HG', {H: [7.504, 0.042], G: [-0.006, 0.030]}],
+    },
+    '(93 I) Aegis | Storrs2025, Pravec2012': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'natural satellite/minor planet moon'],
+        photometric_system: 'HST_WFPC2-PC',
+        filters: ['F439W', 'F673N', 'F791W', 'F1042M'], // F953N excluded
+        mag: [19.935, 18.444, 18.329, 16.781],
+        sd: [0.11, 0.12, 0.25, 0.08],
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['HST_WFPC2-PC.F439W', [0.044, 0.007]], // from Minerva
+        phase_function: ['HG', {H: [7.504, 0.042], G: [-0.006, 0.030]}], // from Minerva
     },
     '(94) Aurora | SMASS, Mainzer2019, SsODNet': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -559,22 +635,44 @@
         geometric_albedo: ['Generic_Bessell.V', [0.054, 0.009]],
         phase_function: ['HG1G2', {H: [7.601686, +0.167465, -0.196477], G_1: [0.761876, +0.275899, -0.376293], G_2: [0.105605, +0.127751, -0.098773]}],
     },
-    '(107) Camilla | SMASS, Marchis2012, Tholen2020': {
+    'Wang2016': [
+        'Study of photometric phase curve with new brightness model: refining phase function system parameters of asteroid (107) Camilla',
+        'DOI: 10.1088/1674-4527/16/9/147', 'https://iopscience.iop.org/article/10.1088/1674-4527/16/9/147',
+        'https://ui.adsabs.harvard.edu/abs/2016RAA....16..147W/abstract'
+    ],
+    '(107) Camilla | SMASS, Storrs2025, Wang2016': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000107.2.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.043, 0.009]],
-        phase_function: ['HG', {H: 7.08, G: 0.08}],
+        geometric_albedo: ['HST_WFPC2-PC.F439W', [0.041, 0.006]], // Table 2
+        phase_function: ['HG1G2', {H: [7.026, +0.052, -0.054], G_1: [0.489, +0.043, -0.044], G_2: [0.259, 0.023]}],
     },
-    'Descamps2009': [
-        'New insights on the binary Asteroid 121 Hermione',
-        'DOI: 10.1016/j.icarus.2009.04.032', 'https://arxiv.org/abs/0904.2033',
-        'https://ui.adsabs.harvard.edu/abs/2009Icar..203...88D/abstract'
-    ],
-    '(121) Hermione | SMASS, Descamps2009, SsODNet': {
+    'S/2001 (107) 1 | Storrs2025, Wang2016': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'natural satellite/minor planet moon'],
+        photometric_system: 'HST_WFPC2-PC',
+        filters: ['F439W', 'F673N', 'F791W', 'F1042M'], // F953N excluded
+        mag: [18.628, 17.186, 17.126, 17.077],
+        sd: [0.06, 0.07, 0.11, 0.60],
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['HST_WFPC2-PC.F439W', [0.041, 0.006]], // from Camilla
+        phase_function: ['HG1G2', {H: [7.026, +0.052, -0.054], G_1: [0.489, +0.043, -0.044], G_2: [0.259, 0.023]}], // from Camilla
+    },
+    '(121) Hermione | SMASS, Storrs2025, SsODNet': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000121.2.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.0495, 0.01]],
+        geometric_albedo: ['HST_WFPC2-PC.F439W', [0.029, 0.009]], // Table 2
         phase_function: ['HG1G2', {H: [7.117586, +0.141969, -0.163505], G_1: [0.351391, +0.210504, -0.268748], G_2: [0.266079, +0.111130, -0.095476]}],
+    },
+    'S/2002 (121) 1 | Storrs2025, SsODNet': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'natural satellite/minor planet moon'],
+        photometric_system: 'HST_WFPC2-PC',
+        filters: ['F439W', 'F673N', 'F791W', 'F1042M'],
+        mag: [18.450, 17.245, 17.245, 16.289],
+        sd: [0.05, 0.07, 0.12, 0.32],
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['HST_WFPC2-PC.F439W', [0.029, 0.009]], // from Hermione
+        phase_function: ['HG1G2', {H: [7.117586, +0.141969, -0.163505], G_1: [0.351391, +0.210504, -0.268748], G_2: [0.266079, +0.111130, -0.095476]}], // from Hermione
     },
     '(130) Elektra | SMASS, Vernazza2021, Shevchenko2022': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -598,11 +696,11 @@
         geometric_albedo: ['Generic_Bessell.V', [0.036, 0.006]],
         phase_function: ['HG1G2', {H: [8.692150, +0.199680, -0.246761], G_1: [0.369195, +0.222125, -0.321659], G_2: [0.315078, +0.080031, -0.065065]}],
     },
-    '(216) Kleopatra | SMASS, Vernazza2021, Pravec2012': {
+    '(216) Kleopatra | SMASS, Vernazza2021, Lagerkvist1990': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000216.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.152],
-        phase_function: ['HG', {H: [7.350, 0.036], G: [0.280, 0.030]}],
+        phase_function: ['HG', {H: [7.08, 0.22], G: [0.26, 0.07]}], // average H
     },
     'Helfenstein1996': [
         'Galileo Photometry of Asteroid 243 Ida',
@@ -638,7 +736,7 @@
         phase_integral: [0.34, 0.02], // Table VIII
     },
     '(243 I) Dactyl | Veverka1996, Helfenstein1996': {
-        tags: ['Solar System', 'minor body/asteroid/main belt', 'natural satellite', 'spacecraft target/Galileo target'],
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'natural satellite/minor planet moon', 'spacecraft target/Galileo target'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         br: [0.700, 0.894, 0.992, 1.000, 0.909, 0.882],
@@ -696,6 +794,22 @@
         geometric_albedo: ['NEAR_MSI.550nm', 0.23],
         spherical_albedo: ['NEAR_MSI.550nm', 0.093],
     },
+    '(451) Patientia | GaiaDR3, Masiero2012, Lagerkvist1990': {
+        tags: ['Solar System', 'minor body/asteroid/main belt'],
+        nm: [374, 418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
+        br: [
+            8.743547e-01, 9.476374e-01, 9.827088e-01, 9.917782e-01, 1.000000e+00, 9.998880e-01,
+            9.555181e-01, 9.513133e-01, 9.621309e-01, 9.615998e-01, 9.649159e-01, 9.586472e-01,
+            9.537609e-01, 9.704162e-01, 1.002010e+00, 1.039104e+00
+        ],
+        sd: [
+            1.281077e-03, 8.367703e-04, 8.124417e-04, 8.216822e-04, 8.437843e-04, 9.166687e-04,
+            8.636664e-04, 7.487576e-04, 7.651465e-04, 7.878566e-04, 7.850427e-04, 7.699932e-04,
+            7.798685e-04, 7.922384e-04, 8.732584e-04, 1.089767e-03
+        ],
+        geometric_albedo: ['Generic_Bessell.V', [0.085, 0.006]],
+        phase_function: ['HG', {H: [6.57, 0.07], G: [0.06, 0.09]}], // average H
+    },
     '(493) Griseldis | GaiaDR3, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'minor body/asteroid/active asteroid'],
         nm: [374, 418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
@@ -712,11 +826,11 @@
         geometric_albedo: ['Generic_Bessell.V', [0.0417, 0.0077]],
         phase_function: ['HG1G2', {H: [10.418850, +0.212929, -0.268971], G_1: [0.112995, +0.199898, -0.298528], G_2: [0.330788, +0.094507, -0.078863]}],
     },
-    '(511) Davida | SMASS, Vernazza2021, Tholen2020': {
+    '(511) Davida | SMASS, Vernazza2021, Lagerkvist1990': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000511.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.063],
-        phase_function: ['HG', {H: 6.22, G: 0.16}],
+        phase_function: ['HG', {H: [6.17, 0.09], G: [0.07, 0.03]}], // average H
     },
     '(588) Achilles | GaiaDR3, SsODNet, Shevchenko2022': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -749,20 +863,20 @@
         'DOI: 10.1016/j.icarus.2009.07.043', 'https://arxiv.org/abs/0908.4198',
         'https://ui.adsabs.harvard.edu/abs/2010Icar..205..505M/abstract'
     ],
-    '(617) Patroclus-Menoetius | Humes2022, Mueller2010, SsODNet': {
+    '(617) Patroclus-Menoetius | Humes2022, Mueller2010, Schemel2021': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan', 'spacecraft target/Lucy target'],
         file: 'spectra/files/Humes2022/617_Patroclus_albedo.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.045, 0.009]],
-        phase_function: ['HG1G2', {H: [7.957342, +0.142561, -0.166447], G_1: [0.645036, +0.340379, -0.434002], G_2: [0.089212, +0.227991, -0.190795]}],
+        phase_function: ['Palomar_ZTF.r', 'HG', {H: [8.04, 0.02], G: [0.20, 0.03]}],
     },
-    '(617) Patroclus-Menoetius | Chatelain2016, Mueller2010, SsODNet': {
+    '(617) Patroclus-Menoetius | Chatelain2016, Mueller2010, Schemel2021': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan', 'spacecraft target/Lucy target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.710, 0.050], 'V-R': [0.420, 0.030], 'V-I': [0.830, 0.020]}, // as reported in LCDB
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.045, 0.009]],
-        phase_function: ['HG1G2', {H: [7.957342, +0.142561, -0.166447], G_1: [0.645036, +0.340379, -0.434002], G_2: [0.089212, +0.227991, -0.190795]}],
+        phase_function: ['Palomar_ZTF.r', 'HG', {H: [8.04, 0.02], G: [0.20, 0.03]}],
     },
     '(623) Chimaera | GaiaDR3, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
@@ -812,11 +926,11 @@
         geometric_albedo: ['Generic_Bessell.V', [0.031, +0.003, -0.007]],
         phase_function: ['HG1G2', {H: [8.553180, +0.104966, -0.118135], G_1: [0.618866, +0.376955, -0.434515], G_2: [0.189732, +0.264355, -0.235227]}],
     },
-    '(704) Interamnia | SMASS, Vernazza2021, Tholen2020': {
+    '(704) Interamnia | SMASS, Vernazza2021, Lagerkvist1990': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000704.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.067],
-        phase_function: ['HG', {H: 5.94, G: -0.02}],
+        phase_function: ['HG', {H: [5.94, 0.05], G: [-0.03, 0.03]}],
     },
     '(791) Ani | GaiaDR3, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/main belt'],
@@ -1191,6 +1305,20 @@
         geometric_albedo: ['Generic_Bessell.V', [0.56, +0.12, -0.18]],
         phase_function: ['HG', {H: [17.250, 0.202], G: [0.230, 0.100]}],
     },
+    'Ferreira2025': [
+        'Size and Shape of Jupiter Trojan (2207) Antenor from Stellar Occultations',
+        'DOI: 10.3847/1538-3881/adefdc', 'https://iopscience.iop.org/article/10.3847/1538-3881/adefdc',
+        'https://ui.adsabs.harvard.edu/abs/2025AJ....170..160F/abstract'
+    ],
+    '(2207) Antenor | Chatelain2016, Ferreira2025, SsODNet': {
+        tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.770, 0.050], 'V-R': [0.450, 0.030], 'V-I': [0.920, 0.023]}, // as reported in LCDB
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['PAN-STARRS_PS1', [0.046, +0.008, -0.007]],
+        phase_function: ['HG1G2', {H: [8.928759, +0.113335, -0.130712], G_1: [0.532648, +0.392839, -0.457939], G_2: [0.177517, +0.286677, -0.258727]}],
+    },
     'Mainzer2011': [
         'NEOWISE Observations of Near-Earth Objects: Preliminary Results',
         'DOI: 10.1088/0004-637X/743/2/156', 'https://iopscience.iop.org/article/10.1088/0004-637X/743/2/156',
@@ -1379,11 +1507,16 @@
         'The Geometric Albedo of (4179) Toutatis Estimated from KMTNet DEEP-South Observations',
         'DOI: 10.5303/JKAS.2019.52.3.71', 'https://ui.adsabs.harvard.edu/abs/2019JKAS...52...71B/abstract'
     ],
-    '(4179) Toutatis | MITHNEOS, Bach2019, Tholen2020': {
+    'Spencer1995': [
+        'The lightcurve of 4179 Toutatis: Evidence for complex rotation.',
+        'DOI: 10.1006/icar.1995.1143', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103585711438',
+        'https://ui.adsabs.harvard.edu/abs/1995Icar..117...71S/abstract'
+    ],
+    '(4179) Toutatis | MITHNEOS, Bach2019, Spencer1995': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/NEO/Apollo', "spacecraft target/Chang'e-2 target"],
         file: 'spectra/files/SMASS/a004179.sp30.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.185, +0.045, -0.039]],
-        phase_function: ['HG', {H: 15.30, G: 0.10}],
+        phase_function: ['HG', {H: 15.30, G: [0.10, 0.10]}],
     },
     '(4709) Ennomos | GaiaDR3, Shevchenko2014, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -2017,7 +2150,7 @@
         is_reflecting_sunlight: true,
     },
     '(19308) 1996 TO66 | MBOSS': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.671, 0.057], 'V-R': [0.389, 0.043], 'R-I': [0.356, 0.053]},
         calibration_system: 'Vega',
@@ -2205,7 +2338,7 @@
         'https://spainportugal-eps.org/images/cpess-8/20250310194059_cpess-8-ortiz.pdf', 'https://ui.adsabs.harvard.edu/abs/2025psss.confE..88O/abstract'
     ],
     '(24835) 1995 SM55 | MBOSS, Ortiz2025': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.652, 0.032], 'V-R': [0.357, 0.043], 'R-I': [0.356, 0.052]},
         calibration_system: 'Vega',
@@ -2213,7 +2346,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.67, 0.12]],
     },
     '(24835) 1995 SM55 | PinillaAlonso2008, Ortiz2025': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         slope: {start: 520, stop: 860, percent_per_100nm: [-0.9, 2.0]},
         geometric_albedo: ['Generic_Bessell.V', [0.67, 0.12]],
     },
@@ -2306,20 +2439,20 @@
         geometric_albedo: ['Generic_Bessell.V', [0.066, 0.005]],
         phase_function: ['Palomar_ZTF.g', 'HG1G2', {H: [12.788, 0.274], G_1: [0.756, 0.784], G_2: [0.172, 0.422]}],
     },
-    '(28978) Ixion | Marchi2003, Verbiscer2022': {
+    '(28978) Ixion | Marchi2003, Helfenstein2025': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
         file: 'spectra/files/Marchi2003/Ixion.txt',
-        geometric_albedo: ['Generic_Bessell.V', [0.108, 0.002]],
-        spherical_albedo: ['Generic_Bessell.V', [0.037, 0.007]],
+        geometric_albedo: ['Generic_Bessell.V', [0.101, 0.010]],
+        spherical_albedo: ['Generic_Bessell.V', [0.032, +0.003, -0.002]],
     },
-    '(28978) Ixion | MBOSS, Verbiscer2022': {
+    '(28978) Ixion | MBOSS, Helfenstein2025': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.018, 0.041], 'V-R': [0.605, 0.030], 'R-I': [0.580, 0.040]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.108, 0.002]],
-        spherical_albedo: ['Generic_Bessell.V', [0.037, 0.007]],
+        geometric_albedo: ['Generic_Bessell.V', [0.101, 0.010]],
+        spherical_albedo: ['Generic_Bessell.V', [0.032, +0.003, -0.002]],
     },
     'Rousselot2005b': [
         'Polarimetric and Photometric Phase Effects Observed on Transneptunian Object (29981) 1999 TD10',
@@ -2545,7 +2678,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.003]], // system albedo
     },
     '(42355 I) Echidna | Grundy2008, Müller2020': {
-        tags: ['Solar System', 'minor body/TNO/scattered', 'natural satellite'],
+        tags: ['Solar System', 'minor body/TNO/scattered', 'natural satellite/minor planet moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-I': [0.95, 0.04]},
         calibration_system: 'Vega',
@@ -2776,12 +2909,12 @@
         geometric_albedo: ['Generic_Bessell.V', [0.083, +0.016, -0.015]],
     },
     '(55636) 2002 TX300 | PinillaAlonso2007, Ortiz2019': { // IR extension of Licandro2006
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         file: 'spectra/files/PinillaAlonso2007/2002TX300_PinillaAlonso2007.txtU', // Fig. 1
         geometric_albedo: ['Generic_Bessell.V', [0.65, 0.15]],
     },
     '(55636) 2002 TX300 | MBOSS, Ortiz2019': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.679, 0.038], 'V-R': [0.359, 0.024], 'R-I': [0.323, 0.041]},
         calibration_system: 'Vega',
@@ -2794,12 +2927,12 @@
         'https://ui.adsabs.harvard.edu/abs/2006A%26A...457..329L/abstract'
     ],
     '(55636) 2002 TX300 | Licandro2006, Ortiz2019': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         slope: {start: 530, stop: 1200, percent_per_100nm: -1},
         geometric_albedo: ['Generic_Bessell.V', [0.65, 0.15]],
     },
     '(55636) 2002 TX300 | GaiaDR3, Ortiz2019': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         nm: [418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990],
         br: [
             9.890256e-01, 1.102694e+00, 1.009958e+00, 1.000000e+00, 1.025782e+00, 9.879041e-01,
@@ -3031,7 +3164,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.056, 0.006]], // system albedo
     },
     '(65489 I) Phorcys | Grundy2007b, Müller2020': {
-        tags: ['Solar System', 'minor body/TNO/scattered', 'natural satellite'],
+        tags: ['Solar System', 'minor body/TNO/scattered', 'natural satellite/minor planet moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F606W', 'F814W'],
         mag: [22.01, 21.18], // mean
@@ -3271,7 +3404,7 @@
         is_reflecting_sunlight: true,
     },
     '(86047) 1999 OY3 | MBOSS': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.726, 0.037], 'V-R': [0.345, 0.046], 'R-I': [0.277, 0.076]},
         calibration_system: 'Vega',
@@ -3322,7 +3455,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.145, +0.086, -0.045]], // system albedo
     },
     '(88611 I) Sawiskera | Osip2003, Müller2020': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite/minor planet moon'],
         photometric_system: 'SLOAN_SDSS',
         filters: ['g', 'r', 'i'],
         mag: [[24.41, 0.07], [23.55, 0.05], [23.26, 0.05]],
@@ -3336,12 +3469,12 @@
         'https://ui.adsabs.harvard.edu/abs/2005A&A...439L...1B/abstract'
     ],
     '(90377) Sedna | Barucci2005, Lellouch2013': {
-        tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO'],
+        tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO', 'minor body/TNO/extreme TNO'],
         file: 'spectra/files/Sedna_Barucci2005.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.410, +0.393, -0.189]],
     },
     '(90377) Sedna | MBOSS, Lellouch2013': {
-        tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO'],
+        tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO', 'minor body/TNO/extreme TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.179, 0.069], 'V-R': [0.739, 0.047], 'R-I': [0.654, 0.068]},
         calibration_system: 'Vega',
@@ -3388,7 +3521,7 @@
         // phase_function: ['Misc_Atlas.orange', 'phase coefficient', {beta: [0.07, 0.04]}],
     },
     '(90482 I) Vanth | Brown2010, Brown2018': {
-        tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'natural satellite'],
+        tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F606W', 'F814W'],
         mag: [[21.73, 0.01], [20.90, 0.02]],
@@ -3620,18 +3753,14 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true
     },
-    'Rizos2025': [
-        'The Trans-Neptunian Object (119951) 2002 KX14 as revealed by multiple stellar occultations',
-        'DOI: 10.1051/0004-6361/202554154', 'https://arxiv.org/abs/2503.19179',
-        'https://ui.adsabs.harvard.edu/abs/2025A%26A...697A..62R/abstract'
-    ],
-    '(119951) 2002 KX14 | MBOSS, Rizos2025': {
+    '(119951) 2002 KX14 | MBOSS, Helfenstein2025': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.050, 0.038], 'V-R': [0.607, 0.020]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.119, 0.007]],
+        geometric_albedo: ['Generic_Bessell.V', [0.179, +0.027, -0.047]],
+        spherical_albedo: ['Generic_Bessell.V', [0.077, +0.012, -0.011]],
     },
     '(119956) 2002 PA149 | Sheppard2012': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
@@ -3665,7 +3794,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.079, 0.010]],
     },
     '(120178) 2003 OP32 | MBOSS, Müller2020': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.662, 0.057], 'V-R': [0.375, 0.044], 'R-I': [0.305, 0.078]},
         calibration_system: 'Vega',
@@ -3673,7 +3802,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.540, +0.110, -0.150]],
     },
     '(120178) 2003 OP32 | PinillaAlonso2008, Müller2020': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         slope: {start: 520, stop: 860, percent_per_100nm: [1.7, 2.0]},
         geometric_albedo: ['Generic_Bessell.V', [0.540, +0.110, -0.150]],
     },
@@ -3744,12 +3873,25 @@
         geometric_albedo: ['Generic_Bessell.V', [0.041, 0.004]],
     },
     '(120347 I) Actaea | Stansberry2012, Kiss2025': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite/minor planet moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-I': [0.89, 0.02]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.021, 0.004]],
+    },
+    'Collyer2025b': [
+        'Synchronous Rotation in the (120347) Salacia-Actaea System',
+        'DOI: 10.48550/arXiv.2509.02734', 'https://arxiv.org/abs/2509.02734',
+        'https://ui.adsabs.harvard.edu/abs/2025arXiv250902734C/abstract'
+    ],
+    '(120347 I) Actaea: Bright areas | Stansberry2012, Collyer2025b': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO/hot classical TNO', 'natural satellite/minor planet moon'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'V-I': [0.89, 0.02]},
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.14], // for minimum albedo of ~0.04
     },
     '(120348) 2004 TY364 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -3852,25 +3994,28 @@
         geometric_albedo: ['Generic_Bessell.V', 0.18], // mean diameter = 2.5 km, H = 15.5
         phase_function: ['HG1G2', {H: [15.269937, +0.154798, -0.178274], G_1: [0.843039, +0.387120, -0.500877], G_2: [0.018170, +0.245583, -0.201242]}],
     },
-    '(134340) Pluto | Madden2018, Verbiscer2022': {
+    '(133067) 2003 FB128 | Boehnhardt2014, FarkasTakacs2020': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.62, 0.06], 'V-R': [0.50, 0.06], 'R-I': [0.50, 0.04]},
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.047, +0.144, -0.025]],
+    },
+    '(134340) Pluto | Madden2018, Helfenstein2025': {
         tags: ['featured', 'Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
         file: 'spectra/files/Madden2018/Pluto_LorenziProtopapa_Albedo.txtU',
         is_geometric_albedo: true,
-        phase_integral: [0.80, 0.10],
+        phase_integral: [0.795, +0.094, -0.180],
     },
-    'Buratti2015': [
-        'Photometry of Pluto 2008-2014: Evidence of Ongoing Seasonal Volatile Transport and Activity',
-        'DOI: 10.1088/2041-8205/804/1/L6', 'https://iopscience.iop.org/article/10.1088/2041-8205/804/1/L6',
-        'https://ui.adsabs.harvard.edu/abs/2015ApJ...804L...6B/abstract'
-    ],
-    '(134340) Pluto | MBOSS, Buratti2015, Verbiscer2022': {
+    '(134340) Pluto | MBOSS, Helfenstein2025': {
         tags: ['MBOSS', 'Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.867, 0.016], 'V-R': [0.515, 0.035], 'R-I': [0.400, 0.010]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.56, 0.03]],
-        phase_integral: [0.80, 0.10],
+        geometric_albedo: ['Generic_Bessell.V', [0.506, +0.008, -0.012]],
+        spherical_albedo: ['Generic_Bessell.V', [0.402, +0.055, -0.096]],
     },
     'Protopapa2020': [
         'Disk-resolved Photometric Properties of Pluto and the Coloring Materials across its Surface',
@@ -3912,29 +4057,34 @@
         br: [0.78, 0.71], // MVIC NIR and CH4 filters not used
         is_spherical_albedo: true,
     },
-    '(134340 I) Charon | PinillaAlonso2007, Verbiscer2022': {
-        tags: ['featured', 'Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'Charon', 'spacecraft target/New Horizons target'],
+    '(134340 I) Charon | PinillaAlonso2007, Helfenstein2025': {
+        tags: ['featured', 'Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'Charon', 'spacecraft target/New Horizons target'],
         file: 'spectra/files/PinillaAlonso2007/Charon_PinillaAlonso2007.txtU', // Fig. 1
-        geometric_albedo: ['NewHorizons_LORRI.Pan', [0.41, 0.01]],
-        spherical_albedo: ['NewHorizons_LORRI.Pan', [0.25, 0.04]],
+        geometric_albedo: ['Generic_Bessell.V', [0.408, +0.004, -0.005]],
+        spherical_albedo: ['Generic_Bessell.V', [0.228, +0.006, -0.039]],
     },
-    '(134340 I) Charon | Protopapa2020, Verbiscer2022': {
-        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'Charon', 'spacecraft target/New Horizons target'],
+    '(134340 I) Charon | Protopapa2020, Helfenstein2025': {
+        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'Charon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR', 'CH4'],
         br: [0.292, 0.288, 0.288, 0.290], // traced from Fig. 11
         sd: [0.030, 0.027, 0.025, 0.026], // traced from Fig. 11
-        geometric_albedo: ['NewHorizons_LORRI.Pan', [0.41, 0.01]],
-        spherical_albedo: ['NewHorizons_LORRI.Pan', [0.25, 0.04]],
+        geometric_albedo: ['Generic_Bessell.V', [0.408, +0.004, -0.005]],
+        spherical_albedo: ['Generic_Bessell.V', [0.228, +0.006, -0.039]],
     },
-    '(134340 I) Charon | Verbiscer2022': {
-        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'Charon', 'spacecraft target/New Horizons target'],
+    'Verbiscer2022': [
+        'The Diverse Shapes of Dwarf Planet and Large KBO Phase Curves Observed from New Horizons',
+        'DOI: 10.3847/PSJ/ac63a6', 'https://iopscience.iop.org/article/10.3847/PSJ/ac63a6',
+        'https://ui.adsabs.harvard.edu/abs/2022PSJ.....3...95V/abstract'
+    ],
+    '(134340 I) Charon | Verbiscer2022, Helfenstein2025': {
+        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'Charon', 'spacecraft target/New Horizons target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.7315, 0.0013], 'V-R': 0.4},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['NewHorizons_LORRI.Pan', [0.41, 0.01]],
-        spherical_albedo: ['NewHorizons_LORRI.Pan', [0.25, 0.04]],
+        geometric_albedo: ['Generic_Bessell.V', [0.408, +0.004, -0.005]],
+        spherical_albedo: ['Generic_Bessell.V', [0.228, +0.006, -0.039]],
     },
     'Grundy2016': [
         'The formation of Charon’s red poles from seasonally cold-trapped volatiles',
@@ -3947,7 +4097,7 @@
         'https://ui.adsabs.harvard.edu/abs/2017Icar..287..207B/abstract'
     ],
     '(134340 I) Charon: 50°—60° N | Grundy2016, Buratti2017': {
-        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'Charon', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'Charon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.799, 0.853, 0.920],
@@ -3956,7 +4106,7 @@
         spherical_albedo: ['NewHorizons_LORRI.Pan', 0.27], // derived from Fig. 6
     },
     '(134340 I) Charon: 70°—80° N | Grundy2016, Buratti2017': {
-        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'Charon', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'Charon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.426, 0.539, 0.720],
@@ -3979,7 +4129,7 @@
         'DOI: 10.2548/azu_uapress_9780816540945-ch018', 'https://ui.adsabs.harvard.edu/abs/2021psnh.book..413H/abstract'
     ],
     '(134340 II) Nix | Weaver2016, Howett2021b': {
-        tags: ['featured', 'Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'spacecraft target/New Horizons target'],
+        tags: ['featured', 'Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.96, 1, 0.98], // Blue/Red ratio: ~0.96, Red/NIR ratio: ~1.02
@@ -3987,7 +4137,7 @@
         spherical_albedo: ['Generic_Bessell.V', [0.24, 0.07]],  // Table 3, p. 426 (Howett2021)
     },
     '(134340 II) Nix | Stern2009, Weaver2016, Howett2021b': {
-        tags: ['Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.653, 0.026]},
         calibration_system: 'Vega',
@@ -4001,7 +4151,7 @@
         'https://ui.adsabs.harvard.edu/abs/2006AJ....132..290B'
     ],
     '(134340 II) Nix: Red impact crater | Buie2006, Buratti2017, Howett2021b': {
-        tags: ['Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.91, 0.15]},
         // color is significantly redder than other HST indices (Stern2009), and may be attributed to the red crater on Nix as observed by NH
@@ -4011,7 +4161,7 @@
         phase_integral: [0.42, 0.08], // Table 3, p. 426 (Howett2021b)
     },
     '(134340 III) Hydra | Weaver2016, Howett2021b': {
-        tags: ['featured', 'Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'spacecraft target/New Horizons target'],
+        tags: ['featured', 'Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [1.00, 1, 0.90], // Blue/Red ratio: ~1.00, Red/NIR ratio: ~1.11
@@ -4019,7 +4169,7 @@
         spherical_albedo: ['Generic_Bessell.V', [0.32, 0.11]], // Table 3, p. 426 (Howett2021)
     },
     '(134340 III) Hydra | Stern2009, Weaver2016, Howett2021b': {
-        tags: ['Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.654, 0.065]},
         calibration_system: 'Vega',
@@ -4074,14 +4224,14 @@
         'DOI: 10.3847/1538-4357/ab13b3', 'https://iopscience.iop.org/article/10.3847/1538-4357/ab13b3',
         'https://ui.adsabs.harvard.edu/abs/2019ApJ...877...41D/abstract'
     ],
-    '(136108) Haumea | PinillaAlonso2009, Dunham2019, Verbiscer2022': {
-        tags: ['featured', 'Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
+    '(136108) Haumea | PinillaAlonso2009, Dunham2019, Helfenstein2025': {
+        tags: ['featured', 'Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         file: 'spectra/files/Haumea_PinillaAlonso2009.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.66, 0.02]],
-        phase_integral: [0.44, 0.03], // system
+        phase_integral: [0.454, +0.034, -0.047], // system
     },
-    '(136108) Haumea | GaiaDR3, Dunham2019, Verbiscer2022': {
-        tags: ['Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
+    '(136108) Haumea | GaiaDR3, Dunham2019, Helfenstein2025': {
+        tags: ['Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         nm: [374, 418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
         br: [
             1.323241e+00, 9.822552e-01, 9.832631e-01, 9.894317e-01, 1.000000e+00, 1.009211e+00,
@@ -4094,48 +4244,41 @@
             1.721705e-02, 1.928095e-02, 2.508214e-02, 4.842987e-02
         ],
         geometric_albedo: ['Generic_Bessell.V', [0.66, 0.02]],
-        phase_integral: [0.44, 0.03], // system
+        phase_integral: [0.454, +0.034, -0.047], // system
     },
-    '(136108) Haumea | MBOSS, Dunham2019, Verbiscer2022': {
-        tags: ['MBOSS', 'Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
+    '(136108) Haumea | MBOSS, Dunham2019, Helfenstein2025': {
+        tags: ['MBOSS', 'Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.633, 0.045], 'V-R': [0.353, 0.048], 'R-I': [0.330, 0.044]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.66, 0.02]],
-        phase_integral: [0.44, 0.03], // system
+        phase_integral: [0.454, +0.034, -0.047], // system
     },
-    '(136108) Haumea | Brown2010, Dunham2019, Verbiscer2022': {
-        tags: ['Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
+    '(136108) Haumea | Brown2010, Dunham2019, Helfenstein2025': {
+        tags: ['Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'HST_WFPC2-PC',
         color_indices: {'F606W-F814W': [0.55, 0.04]}, // extracted from Fig. 2
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.66, 0.02]],
-        phase_integral: [0.44, 0.03], // system
+        phase_integral: [0.454, +0.034, -0.047], // system
     },
     'Lacerda2009': [
         'The Dark Red Spot on KBO Haumea',
         'DOI: 10.48550/arXiv.0911.0009', 'https://arxiv.org/abs/0911.0009',
         'https://ui.adsabs.harvard.edu/abs/2009epsc.conf..561L/abstract'
     ],
-    '(136108) Haumea: Dark red spot, S=0.06 | Lacerda2009': {
-        tags: ['Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
+    'SantosSanz2017': [
+        '"TNOs are Cool": A survey of the trans-Neptunian region. XII. Thermal light curves of Haumea, 2003 VS2 and 2003 AZ84 with Herschel/PACS',
+        'DOI: 10.1051/0004-6361/201630354', 'https://www.aanda.org/articles/aa/full_html/2017/08/aa30354-16/aa30354-16.html',
+        'https://ui.adsabs.harvard.edu/abs/2017A%26A...604A..95S/abstract'
+    ],
+    '(136108) Haumea: Dark red spot | Lacerda2009, SantosSanz2017': {
+        tags: ['Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         filters: ['Generic_Bessell.B', 'Generic_Bessell.R', 'Generic_Bessell_JHKLM.J', 'Generic_Bessell_JHKLM.H'],
-        br: [0.983, 1, 1.015, 1.040], // average of rotational phases 0.70 to 0.90 in Fig. 2b
-        geometric_albedo: ['Generic_Bessell.V', 0.20], // calculated from Dunham2019 albedo with albedo ratio = 30% (S=0.06)
-    },
-    '(136108) Haumea: Dark red spot, S=0.60 | Lacerda2009': {
-        tags: ['Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
-        filters: ['Generic_Bessell.B', 'Generic_Bessell.R', 'Generic_Bessell_JHKLM.J', 'Generic_Bessell_JHKLM.H'],
-        br: [0.983, 1, 1.015, 1.040], // average of rotational phases 0.70 to 0.90 in Fig. 2b
-        geometric_albedo: ['Generic_Bessell.V', 0.59], // calculated from Dunham2019 albedo with albedo ratio = 90% (S=0.60)
-    },
-    '(136108) Haumea: Dark red spot, S=1.00 | Lacerda2009': {
-        tags: ['Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
-        filters: ['Generic_Bessell.B', 'Generic_Bessell.R', 'Generic_Bessell_JHKLM.J', 'Generic_Bessell_JHKLM.H'],
-        br: [0.983, 1, 1.015, 1.040], // average of rotational phases 0.70 to 0.90 in Fig. 2b
-        geometric_albedo: ['Generic_Bessell.V', 0.63], // calculated from Dunham2019 albedo with albedo ratio = 95% (S=1.00)
+        br: [0.983, 1, 1.015, 1.040], // average of rotational phases 0.70 to 0.90 in Fig. 2b (DRS regions)
+        geometric_albedo: ['Generic_Bessell.V', 0.53], // calculated from Dunham2019 albedo with albedo constrast of ~80%
     },
     'Ortiz2017': [
         'The size, shape, density and ring of the dwarf planet Haumea from a stellar occultation',
@@ -4156,21 +4299,21 @@
     // brightness to the best-fit contribution (2.5%) of Ortiz et al. (2017)
     // 100 nm particles
     'Rings of Haumea: Amorphous water ice | Kalup2024, Ortiz2017, Kalup2023': {
-        tags: ['Solar System/Haumean system', 'minor body/TNO/classical TNO', 'ring'],
+        tags: ['Solar System/Haumean system', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family', 'ring'],
         file: 'spectra/files/Kalup2024/Haumea_rings_amorphous_water_ice.txtU', // Fig. 4 (Kalup2024)
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.09], // best-guess I/F for a 70 km wide ring (Ortiz2017)
         phase_integral: 0.26, // for low I/F of 0.09 (Kalup2023)
     },
     'Rings of Haumea: Crystallized water ice | Kalup2024, Ortiz2017, Kalup2023': {
-        tags: ['Solar System/Haumean system', 'minor body/TNO/classical TNO', 'ring'],
+        tags: ['Solar System/Haumean system', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family', 'ring'],
         file: 'spectra/files/Kalup2024/Haumea_rings_crystallized_water_ice.txtU', // Fig. 4 (Kalup2024)
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.09], // best-guess I/F for a 70 km wide ring (Ortiz2017)
         phase_integral: 0.26, // for low I/F of 0.09 (Kalup2023)
     },
     'Rings of Haumea: Pyroxene | Kalup2024, Ortiz2017, Kalup2023': {
-        tags: ['Solar System/Haumean system', 'minor body/TNO/classical TNO', 'ring'],
+        tags: ['Solar System/Haumean system', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family', 'ring'],
         file: 'spectra/files/Kalup2024/Haumea_rings_pyroxene.txtU', // Fig. 4 (Kalup2024)
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.09], // best-guess I/F for a 70 km wide ring (Ortiz2017)
@@ -4180,28 +4323,28 @@
         'Deciphering satellite formation in the trans-Neptunian region: the case of Weywot',
         'https://www.youtube.com/watch?v=n5FFLJi2I8U', 'https://tno2024.org/relation/abstract/90'
     ],
-    '(136108 I) Hiʻiaka | Brown2010, FernandezValenzuela2024, Verbiscer2022': {
-        tags: ['Solar System/Haumean system', 'minor body/TNO/classical TNO', 'natural satellite'],
+    '(136108 I) Hiʻiaka | Brown2010, FernandezValenzuela2024, Helfenstein2025': {
+        tags: ['Solar System/Haumean system', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family', 'natural satellite/minor planet moon'],
         photometric_system: 'HST_WFPC2-PC',
         color_indices: {'F606W-F814W': [0.45, 0.14]}, // extracted from Fig. 2
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.76, 0.15]],
-        phase_integral: [0.44, 0.03], // system
+        phase_integral: [0.454, +0.034, -0.047], // system
     },
     'Müller2019': [
         'Haumea’s thermal emission revisited in the light of the occultation results',
         'DOI: 10.1016/j.icarus.2018.11.011', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103518304159',
         'https://ui.adsabs.harvard.edu/abs/2019Icar..334...39M/abstract'
     ],
-    '(136108 II) Namaka | Brown2010, Müller2019, Verbiscer2022': {
-        tags: ['Solar System/Haumean system', 'minor body/TNO/classical TNO', 'natural satellite'],
+    '(136108 II) Namaka | Brown2010, Müller2019, Helfenstein2025': {
+        tags: ['Solar System/Haumean system', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family', 'natural satellite/minor planet moon'],
         photometric_system: 'HST_WFPC2-PC',
         color_indices: {'F606W-F814W': [0.43, 0.47]}, // extracted from Fig. 2, uncertainty may be incorrect
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.72], // for D = 150 ±50 km and Hv = ~5.1
-        phase_integral: [0.44, 0.03], // system
+        phase_integral: [0.454, +0.034, -0.047], // system
     },
     '(136120) 2003 LG7 | Sheppard2012': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
@@ -4210,12 +4353,7 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true
     },
-    'Sicardy2011': [
-        'A Pluto-like radius and a high albedo for the dwarf planet Eris from an occultation',
-        'DOI: 10.1038/nature10550', 'https://www.nature.com/articles/nature10550',
-        'https://ui.adsabs.harvard.edu/abs/2011Natur.478..493S/abstract'
-    ],
-    '(136199) Eris | Lorenzi2016, Sicardy2011, Verbiscer2022': {
+    '(136199) Eris | Lorenzi2016, Helfenstein2025': {
         tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO'],
         nm: [
             417.357, 479.507, 532.699, 585.89, 601.008, 604.367, 622.844, 637.962, 653.08, 656.439,
@@ -4227,17 +4365,17 @@
             1.034, 1.121, 1.13, 1.11, 1.073, 1.11, 1.077, 1.132, 1.138, 1.087, 1.126, 1.018, 1.079,
             0.881, 1.072, 1.13
         ],
-        geometric_albedo: ['Generic_Bessell.V', [0.96, +0.09, -0.04]],
-        spherical_albedo: ['Generic_Bessell.V', [0.99, +0.01, -0.09]],
+        geometric_albedo: ['Generic_Bessell.V', [0.94, +0.16, -0.10]],
+        spherical_albedo: ['Generic_Bessell.V', [0.931, +0.067, -0.049]],
     },
-    '(136199) Eris | MBOSS, Sicardy2011, Verbiscer2022': {
+    '(136199) Eris | MBOSS, Helfenstein2025': {
         tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.781, 0.032], 'V-R': [0.393, 0.047], 'R-I': [0.363, 0.061]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.96, +0.09, -0.04]],
-        spherical_albedo: ['Generic_Bessell.V', [0.99, +0.01, -0.09]],
+        geometric_albedo: ['Generic_Bessell.V', [0.94, +0.16, -0.10]],
+        spherical_albedo: ['Generic_Bessell.V', [0.931, +0.067, -0.049]],
     },
     '(136204) 2003 WL7 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -4252,18 +4390,13 @@
         'DOI: 10.1093/mnras/staa2329', 'https://academic.oup.com/mnras/article/497/4/5473/5891238',
         'https://ui.adsabs.harvard.edu/abs/2020MNRAS.497.5473A/abstract'
     ],
-    'Hromakina2019': [
-        'Long-term photometric monitoring of the dwarf planet (136472) Makemake',
-        'DOI: 10.1051/0004-6361/201935274', 'https://www.aanda.org/articles/aa/full_html/2019/05/aa35274-19/aa35274-19.html',
-        'https://ui.adsabs.harvard.edu/abs/2019A%26A...625A..46H/abstract'
-    ],
-    '(136472) Makemake | AlvarezCandal2020, Hromakina2019, Verbiscer2022': {
+    '(136472) Makemake | AlvarezCandal2020, Helfenstein2025': {
         tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         file: 'spectra/files/Makemake_AlvarezCandal2020.txtN',
-        geometric_albedo: ['Generic_Bessell.V', [0.82, 0.02]],
-        spherical_albedo: ['Generic_Bessell.V', [0.74, 0.06]],
+        geometric_albedo: ['Generic_Bessell.V', [0.82, +0.11, -0.12]],
+        spherical_albedo: ['Generic_Bessell.V', [0.62, +0.15, -0.09]],
     },
-    '(136472) Makemake | Lorenzi2016, Hromakina2019, Verbiscer2022': {
+    '(136472) Makemake | Lorenzi2016, Helfenstein2025': {
         tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         nm: [
             417.357, 466.069, 588.13, 601.568, 609.406, 631.243, 642.441, 649.72, 656.439, 664.278,
@@ -4275,17 +4408,17 @@
             1.179, 1.182, 1.143, 1.163, 1.088, 1.16, 1.084, 1.201, 1.201, 1.087, 1.159, 1.018, 1.079,
             0.881, 1.072, 1.13
         ],
-        geometric_albedo: ['Generic_Bessell.V', [0.82, 0.02]],
-        spherical_albedo: ['Generic_Bessell.V', [0.74, 0.06]],
+        geometric_albedo: ['Generic_Bessell.V', [0.82, +0.11, -0.12]],
+        spherical_albedo: ['Generic_Bessell.V', [0.62, +0.15, -0.09]],
     },
-    '(136472) Makemake | MBOSS, Hromakina2019, Verbiscer2022': {
+    '(136472) Makemake | MBOSS, Helfenstein2025': {
         tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.840, 0.024], 'V-R': [0.480, 0.020]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.82, 0.02]],
-        spherical_albedo: ['Generic_Bessell.V', [0.74, 0.06]],
+        geometric_albedo: ['Generic_Bessell.V', [0.82, +0.11, -0.12]],
+        spherical_albedo: ['Generic_Bessell.V', [0.62, +0.15, -0.09]],
     },
     '(137294) 1999 RE215 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
@@ -4369,12 +4502,12 @@
         geometric_albedo: ['Generic_Bessell.V', [0.107, +0.029, -0.018]],
     },
     '(145453) 2005 RR43 | PinillaAlonso2007, Müller2020': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         file: 'spectra/files/PinillaAlonso2007/2005RR43_PinillaAlonso2007.txtU', // Fig. 1
         geometric_albedo: ['Generic_Bessell.V', [0.440, +0.120, -0.100]],
     },
     '(145453) 2005 RR43 | MBOSS, Müller2020': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.790, 0.076], 'V-R': [0.389, 0.036]},
         calibration_system: 'Vega',
@@ -4571,7 +4704,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.099, 0.002]],
     },
     '(174567 I) Ilmarë | Grundy2015, Kiss2025': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite/minor planet moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.857, 0.061], 'V-I': [1.266, 0.052]},
         calibration_system: 'Vega',
@@ -4683,7 +4816,7 @@
         'https://ui.adsabs.harvard.edu/abs/2021AJ....162..226A/abstract'
     ],
     '(225088 I) Xiangliu | Kiss2019, Arakawa2021': {
-        tags: ['Solar System', 'minor body/TNO/resonant TNO', 'minor body/TNO/detached TNO', 'natural satellite'],
+        tags: ['Solar System', 'minor body/TNO/resonant TNO', 'minor body/TNO/detached TNO', 'natural satellite/minor planet moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-I': [1.22, 0.17]},
         calibration_system: 'Vega',
@@ -4711,7 +4844,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.142, 0.015]],
     },
     '(229762 I) Gǃòʼé ǃHú | Grundy2018': {
-        tags: ['Solar System', 'minor body/TNO/detached TNO', 'natural satellite'],
+        tags: ['Solar System', 'minor body/TNO/detached TNO', 'natural satellite/minor planet moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-I': [1.803, 0.084]},
         calibration_system: 'Vega',
@@ -4727,7 +4860,7 @@
     },
     '(230965) 2004 XA192 | Williams2025, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
-        slope: {start: 400, stop: 900, percent_per_100nm: [13.27, 0.54]}, // mean
+        slope: {start: 400, stop: 900, percent_per_100nm: [13.27, 4.84]}, // mean
         geometric_albedo: ['Generic_Bessell.V', [0.260, +0.340, -0.150]],
     },
     'Hsieh2021': [
@@ -4812,6 +4945,13 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.129, +0.115, -0.046]],
     },
+    '(305543) 2008 QY40 | Benecchi2013': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.59, 0.03], 'r-i': [0.39, 0.04]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
     'Perna2013': [
         'Photometry and taxonomy of trans-Neptunian objects and Centaurs in support of a Herschel key program',
         'DOI: 10.1051/0004-6361/201219859', 'https://www.aanda.org/articles/aa/full_html/2013/06/aa19859-12/aa19859-12.html',
@@ -4820,24 +4960,19 @@
     '(307251) 2002 KW14 | Perna2013, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'V-R': [0.69, 0.055], 'V-I': [1.73, 0.07]}, // mean V-R
+        color_indices: {'V-R': [0.69, 0.05], 'V-I': [1.73, 0.07]}, // mean V-R
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.310, +0.281, -0.094]],
     },
-    'Rommel2023': [
-        'A large topographic feature on the surface of the trans-Neptunian object (307261) 2002 MS4 measured from stellar occultations',
-        'DOI: 10.1051/0004-6361/202346892', 'https://www.aanda.org/articles/aa/full_html/2023/10/aa46892-23/aa46892-23.html',
-        'https://ui.adsabs.harvard.edu/abs/2023A%26A...678A.167R/abstract'
-    ],
-    '(307261) Máni | MBOSS, Rommel2023, Verbiscer2022': {
+    '(307261) Máni | MBOSS, Helfenstein2025': {
         tags: ['featured', 'MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.690, 0.020], 'V-R': [0.380, 0.020]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.1, 0.025]],
-        phase_integral: [0.40, 0.03],
+        geometric_albedo: ['Generic_Bessell.V', [0.105, 0.015]],
+        spherical_albedo: ['Generic_Bessell.V', [0.039, +0.005, -0.003]],
     },
     'AlvarezCandal2008': [
         'Visible spectroscopy of the new ESO large program on trans-Neptunian objects and Centaurs. Part 1',
@@ -4863,7 +4998,7 @@
         'https://ui.adsabs.harvard.edu/abs/2010A&A...511A..72S'
     ],
     '(308193) 2005 CB79 | Snodgrass2009': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.73, 0.04], 'V-R': [0.37, 0.05], 'R-I': [0.36, 0.05]},
         calibration_system: 'Vega',
@@ -4922,6 +5057,13 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
+    '(312645) 2010 EP65 | Benecchi2013': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.86, 0.06], 'r-i': [0.59, 0.03]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
     '(315898) 2008 QD4 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
@@ -4971,6 +5113,20 @@
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.290, 0.014], 'V-R': [0.740, 0.010], 'R-I': [0.630, 0.010]},
         calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
+    '(341520) Mors | Collyer2025a': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.915, 0.042], 'r-z': [0.544, 0.047]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
+    '(341520 I) Somnus | Collyer2025a': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.910, 0.049], 'r-z': [0.638, 0.063]},
+        calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
     '(342842) 2008 YB3 | MBOSS, Müller2020': {
@@ -5033,6 +5189,14 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
+    '(385266) 2001 QB298 | Collyer2025a, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [1.085, 0.085], 'r-z': [0.542, 0.051]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.167, +0.162, -0.082]],
+    },
     '(385437) 2003 GH55 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
@@ -5069,7 +5233,7 @@
         // phase_function: ['phase coefficient', {beta: [0, 0.01]}],
     },
     '(385446 I) Thorondor | Grundy2014, Rabinowitz2019': {
-        tags: ['Solar System', 'minor body/TNO/resonant TNO', 'natural satellite'],
+        tags: ['Solar System', 'minor body/TNO/resonant TNO', 'natural satellite/minor planet moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.925, 0.059], 'V-I': [1.208, 0.095]}, // 2013/11/20 + weighted mean of 2008 observations
         calibration_system: 'Vega',
@@ -5104,14 +5268,14 @@
         'https://ui.adsabs.harvard.edu/abs/2011ApJ...730..105T/abstract'
     ],
     '(386723) 2009 YE7 | Trujillo2011': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': [1.03, 0.04], 'V-R': [0.38, 0.04], 'R-I': [0.51, 0.05]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
     '(416400) 2003 UZ117 | MBOSS, Müller2020': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.663, 0.032], 'V-R': [0.354, 0.030], 'R-I': [0.335, 0.041]},
         calibration_system: 'Vega',
@@ -5119,7 +5283,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.290, +0.160, -0.110]],
     },
     '(416400) 2003 UZ117 | Boehnhardt2014, Müller2020': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.67, 0.03], 'V-R': [0.42, 0.03], 'R-I': [0.33, 0.03]},
         calibration_system: 'Vega',
@@ -5127,7 +5291,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.290, +0.160, -0.110]],
     },
     '(416400) 2003 UZ117 | PinillaAlonso2008, Müller2020': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         slope: {start: 520, stop: 860, percent_per_100nm: [-2.1, 2.0]},
         geometric_albedo: ['Generic_Bessell.V', [0.290, +0.160, -0.110]],
     },
@@ -5186,6 +5350,13 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.125, +0.069, -0.039]],
+    },
+    '(444745) 2007 JF43 | Benecchi2013': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.96, 0.03], 'r-i': [0.50, 0.03]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
     },
     '(445473) 2010 VZ98 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/detached TNO'],
@@ -5266,7 +5437,7 @@
     '(468861) 2013 LU28 | Hromakina2021a': {
         tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/centaur/Damocloid'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': [0.835, 0.055], 'V-R': [0.595, 0.065], 'R-I': [0.550, 0.070]}, // mean
+        color_indices: {'B-V': [0.83, 0.04], 'V-R': [0.57, 0.04], 'R-I': [0.68, 0.05]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
@@ -5276,12 +5447,11 @@
     ],
     '(468861) 2013 LU28 | Lorenzi2023': {
         tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/centaur/Damocloid'],
-        slope: {start: 530, stop: 920, percent_per_100nm: [15.34, 2]}, // mean
+        slope: {start: 530, stop: 920, percent_per_100nm: [15.34, 0.89]}, // mean
     },
     '(468861) 2013 LU28 | Williams2025': {
         tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/centaur/Damocloid'],
-        slope: {start: 400, stop: 900, percent_per_100nm: [12.88, 0.34]}, // mean
-        geometric_albedo: ['Generic_Bessell.V', 0.071], // calculated using occultation results
+        slope: {start: 400, stop: 900, percent_per_100nm: [12.88, 0.43]}, // mean
     },
     'Sharkey2021': [
         'Lunar-like silicate material forms the Earth quasi-satellite (469219) 2016 HO3 Kamo‘oalewa',
@@ -5374,11 +5544,11 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
-    '(469987) 2006 HJ123 | Boehnhardt2014, Müller2020': {
+    '(469987) 2006 HJ123 | Benecchi2013, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': [1.85, 0.03], 'V-R': [0.68, 0.02], 'R-I': [0.69, 0.02]},
-        calibration_system: 'Vega',
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.82, 0.08], 'r-i': [0.59, 0.03]},
+        calibration_system: 'AB',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.281, +0.259, -0.152]],
     },
@@ -5388,6 +5558,13 @@
         color_indices: {'g-r': [0.91, 0.04], 'r-i': [0.40, 0.04]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true
+    },
+    '(470308) 2007 JH43 | Benecchi2013': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.68, 0.04], 'r-i': [0.41, 0.03]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
     },
     'GomezLimon2025': [
         'Size and shape of the trans-Neptunian object (470316) 2007 OC10: Comparison with thermal data',
@@ -5404,7 +5581,8 @@
     },
     'FernandezValenzuela2016': [
         '2008 OG19: a highly elongated Trans-Neptunian object',
-        'DOI: 10.1093/mnras/stv2739', 'https://academic.oup.com/mnras/article/456/3/2354/1086985'
+        'DOI: 10.1093/mnras/stv2739', 'https://academic.oup.com/mnras/article/456/3/2354/1086985',
+        'https://ui.adsabs.harvard.edu/abs/2016MNRAS.456.2354F/abstract'
     ],
     '(470599) 2008 OG19 | MBOSS, FernandezValenzuela2016': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/detached TNO'],
@@ -5414,6 +5592,21 @@
         is_reflecting_sunlight: true,
         // phase_function: ['phase coefficient', {beta: [0.30, 0.12]}],
     },
+    '(471137) 2010 ET65 | Benecchi2013': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.48, 0.04], 'r-i': [0.66, 0.03]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
+    '(471143) Dziewanna | Benecchi2013, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/TNO/resonant TNO', 'minor body/TNO/midsize TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.80, 0.02], 'r-i': [0.33, 0.02]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.297, +0.113, -0.078]],
+    },
     '(471143) Dziewanna | SsODNet, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/TNO/resonant TNO'],
         photometric_system: 'SkyMapper_SkyMapper',
@@ -5421,6 +5614,13 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.297, +0.113, -0.078]],
+    },
+    '(471165) 2010 HE79 | Benecchi2013': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.84, 0.02], 'r-i': [0.34, 0.01]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
     },
     '(471339) 2011 ON45 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -5437,7 +5637,7 @@
         is_reflecting_sunlight: true,
     },
     '(474640) Alicanto | MBOSS': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/detached TNO'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/extreme TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.900, 0.085], 'V-R': [0.520, 0.060], 'R-I': [0.450, 0.060]},
         calibration_system: 'Vega',
@@ -5449,7 +5649,7 @@
         'https://ui.adsabs.harvard.edu/abs/2017MNRAS.467L..66D'
     ],
     '(474640) Alicanto | deLeón2017': {
-        tags: ['Solar System', 'minor body/TNO/detached TNO'],
+        tags: ['Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/extreme TNO'],
         slope: {start: 500, stop: 900, percent_per_100nm: [12, 2]}, // mean
     },
     'Cruikshank2020': [
@@ -5519,7 +5719,7 @@
     '(517717) 2015 KZ120 | Hromakina2021a': {
         tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/centaur/Damocloid'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': [0.855, 0.050], 'V-R': [0.460, 0.040], 'R-I': [0.575, 0.065]}, // mean
+        color_indices: {'B-V': [0.78, 0.05], 'V-R': [0.49, 0.03], 'R-I': [0.61, 0.06]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
@@ -5554,16 +5754,30 @@
         is_reflecting_sunlight: true,
     },
     '(523622) 2007 TG422 | MBOSS': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered', 'minor body/TNO/extreme TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.880, 0.057], 'V-R': [0.510, 0.040], 'R-I': [0.510, 0.040]},
         calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
+    '(523643) 2010 TY53 | Benecchi2013': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.60, 0.02], 'r-i': [0.17, 0.03]},
+        calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
     '(523643) 2010 TY53 | SsODNet': {
         tags: ['Solar System', 'minor body/TNO/scattered'],
         photometric_system: 'SkyMapper_SkyMapper',
         color_indices: {'g-r': [0.3575, 0.0235]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
+    '(523645) 2010 VK201 | Benecchi2013': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.49, 0.13], 'r-i': [0.22, 0.13]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
@@ -5626,6 +5840,13 @@
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.210, 0.060], 'V-R': [0.570, 0.050]},
         calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
+    '(523789) 2015 FN345 | SsODNet': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.3829, 0.1607], 'r-i': [0.0472, 0.1543]},
+        calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
     'Bannister2016': [
@@ -5833,6 +6054,20 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
+    '(543454) 2014 HZ199 | SsODNet': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.5258, 0.0881], 'r-i': [0.0799, 0.0913], 'i-z': [0.1996, 0.1805]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
+    '(552555) 2010 ER65 | Benecchi2013': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.73, 0.12], 'r-i': [0.38, 0.12]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
     '(562274) 2015 XW379 | Williams2025': {
         tags: ['Solar System', 'minor body/centaur'],
         slope: {start: 400, stop: 900, percent_per_100nm: [15.75, 0.45]},
@@ -5853,12 +6088,19 @@
         color_indices: {'g-r': [0.88, 0.21], 'r-i': [0.34, 0.26], 'r-z': [0.13, 0.22]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.178], // calculated by Zel using occultation results
+        geometric_albedo: ['Generic_Bessell.V', 0.125], // calculated by Zel using occultation results
     },
     '(578992) 2014 JL80 | Thirouin2019': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
         photometric_system: 'LCO_IMACS',
         color_indices: {'sloan_g-sloan_r': [0.74, 0.05]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
+    '(589683) 2010 RF43 | Benecchi2013': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.80, 0.03], 'r-i': [0.41, 0.03]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
@@ -5979,7 +6221,7 @@
         is_reflecting_sunlight: true,
     },
     'Satellite of 2000 CF105 | Tegler2003': { // undesignated
-        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite/minor planet moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': [1.76, 0.15]}, // mean
         calibration_system: 'Vega',
@@ -6123,7 +6365,7 @@
         'https://ui.adsabs.harvard.edu/abs/2014MNRAS.437.3824L/abstract'
     ],
     '(612620) 2003 SQ317 | Lacerda2014': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': [1.05, 0.18]},
         calibration_system: 'Vega',
@@ -6212,6 +6454,13 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
+    '(653589) 2014 QW441 | SsODNet': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.4106, 0.1196], 'r-i': [0.0437, 0.1442]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
     'Strauss2021': [
         'The Sizes and Albedos of Centaurs 2014 YY49 and 2013 NL24 from Stellar Occultation Measurements by RECON',
         'DOI: 10.3847/PSJ/abd62a', 'https://iopscience.iop.org/article/10.3847/PSJ/abd62a',
@@ -6296,6 +6545,18 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.074, 0.080]],
         phase_function: ['phase coefficient', {beta: [0.049, 0.019]}],
+    },
+    'Becker2018': [
+        'Discovery and Dynamical Analysis of an Extreme Trans-Neptunian Object with a High Orbital Inclination',
+        'DOI: 10.3847/1538-3881/aad042', 'https://iopscience.iop.org/article/10.3847/1538-3881/aad042',
+        'https://ui.adsabs.harvard.edu/abs/2018AJ....156...81B/abstract'
+    ],
+    '(768325) 2015 BP519 | Becker2018': {
+        tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/TNO/extreme TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.79, 0.17], 'r-i': [0.19, 0.12], 'i-z': [0.23, 0.15]}, 
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
     },
     '(780605) 2012 UD185 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
@@ -6711,6 +6972,19 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
+    'Rommel2020': [
+        'Stellar occultations enable milliarcsecond astrometry for Trans-Neptunian objects and Centaurs',
+        'DOI: 10.1051/0004-6361/202039054', 'https://www.aanda.org/articles/aa/full_html/2020/12/aa39054-20/aa39054-20.html',
+        'https://ui.adsabs.harvard.edu/abs/2020A&A...644A..40R/abstract'
+    ],
+    '2005 TV189 | Collyer2025a, Rommel2020': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.704, 0.075], 'r-z': [0.245, 0.075]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.317], // system albedo calculated using occultation results
+    },
     '2007 VH305 | Merlin2017, Mainzer2019': {
         tags: ['Solar System', 'minor body/centaur'],
         file: 'spectra/files/Merlin2017/2007VH305_Merlin2017.txtU',
@@ -6764,6 +7038,20 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.114, 0.052]],
     },
+    '2010 EL139 | Benecchi2013': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.75, 0.11], 'r-i': [0.42, 0.05]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
+    '2010 FX86 | Benecchi2013': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO/hot classical TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.83, 0.05], 'r-i': [0.32, 0.03]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
     '2010 OM101 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur/Damocloid'],
         photometric_system: 'Generic_Bessell',
@@ -6816,7 +7104,7 @@
         is_reflecting_sunlight: true,
     },
     '2012 VP113 | MBOSS': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/detached TNO'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/extreme TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.920, 0.064], 'V-R': [0.520, 0.040], 'R-I': [0.530, 0.040]},
         calibration_system: 'Vega',
@@ -6879,7 +7167,7 @@
         is_reflecting_sunlight: true,
     },
     '2013 RF98 | deLeón2017': {
-        tags: ['Solar System', 'minor body/TNO/detached TNO'],
+        tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/TNO/extreme TNO'],
         slope: {start: 500, stop: 900, percent_per_100nm: [15, 2]}, // mean
     },
     '2013 RL124 | Markwardt2023': {
@@ -6902,7 +7190,7 @@
         'https://ui.adsabs.harvard.edu/abs/2017AJ....153..262B/abstract'
     ],
     '2013 SY99 | Bannister2017a': {
-        tags: ['Solar System', 'minor body/TNO/detached TNO'],
+        tags: ['Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/extreme TNO'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.64, 0.06], 'r-i': [0.46, 0.10]},
         calibration_system: 'AB',
@@ -7096,17 +7384,42 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
+    'Chen2022': [
+        'A Low-inclination Neutral Trans-Neptunian Object in an Extreme Orbit',
+        'DOI: 10.3847/2041-8213/ac90b9', 'https://iopscience.iop.org/article/10.3847/2041-8213/ac90b9',
+        'https://ui.adsabs.harvard.edu/abs/2022ApJ...937L..22C/abstract'
+    ],
+    '2016 SD106 | Chen2022': {
+        tags: ['Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/extreme TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.45, 0.05], 'g-i': [0.72, 0.06]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
     'Cheng2025': [
         'Discovery of a dwarf planet candidate in an extremely wide orbit: 2017 OF201',
         'DOI: 10.48550/arXiv.2505.15806', 'https://arxiv.org/abs/2505.15806',
         'https://ui.adsabs.harvard.edu/abs/2025arXiv250515806C/abstract'
     ],
     '2017 OF201 | Cheng2025': {
-        tags: ['Solar System', 'minor body/TNO/detached TNO'],
+        tags: ['Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/extreme TNO'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.77, 0.11], 'r-z': [0.80, 0.07]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
+    },
+    'Brozovic2024': [
+        'Radar and Optical Observations and Physical Modeling of Binary Near-Earth Asteroid 2018 EB',
+        'DOI: 10.3847/PSJ/ad4342', 'https://iopscience.iop.org/article/10.3847/PSJ/ad4342',
+        'https://ui.adsabs.harvard.edu/abs/2024PSJ.....5..123B/abstract'
+    ],
+    '2018 EB | Brozovic2024': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-i': [0.72, 0.05], 'i-z': [0.04, 0.10]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.028, 0.016]],
     },
     'Hui2024': [
         '2019 UO14: A Transient Trojan of Saturn',
@@ -7137,6 +7450,28 @@
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.83, 0.09], 'V-R': [0.51, 0.06], 'R-I': [0.42, 0.10]},
         calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
+    'Koleńczuk2025': [
+        'Physical Properties of the Very Small Near-Earth Asteroid 2020 WG',
+        'DOI: 10.5194/epsc-dps2025-1716', 'https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-1716.html'
+    ],
+    '2020 WG | Koleńczuk2025': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.569, 0.005], 'g-i': [0.715, 0.007], 'g-z': [0.707, 0.007]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
+    'Chen2025': [
+        'Formation of the Outer Solar System: An Icy Legacy (FOSSIL II) – Phase II Status and Updated Characterization of the Sedna-like Object 2023 KQ14',
+        'DOI: 10.5194/epsc-dps2025-1230', 'https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-1230.html'
+    ],
+    '2023 KQ14 | Chen2025': {
+        tags: ['Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/extreme TNO'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.87, 0.18], 'r-i': [0.36, 0.18]},
+        calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
     'Bolin2024': [
@@ -8199,10 +8534,24 @@
         file: 'spectra/files/BAA/_c2017t2panstarrs_outer_coma_20200118_855_leadbeater.fit',
         is_reflecting_sunlight: true,
     },
+    '(C/2018 DO4) Lemmon | Hromakina2021a': {
+        tags: ['Solar System', 'minor body/comet/short period comet/Halley-type comet'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.90, 0.03], 'V-R': [0.44, 0.02], 'V-I': [1.18, 0.06]}, // mean (Table 2)
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
+    '(C/2019 O3) Palomar | Hromakina2021a': {
+        tags: ['Solar System', 'minor body/comet/long period comet'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.75, 0.03], 'V-R': [0.47, 0.03], 'V-I': [0.94, 0.09]},
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
     '(C/2019 U5) PanSTARRS | Hromakina2021a': { // A/2019 U5
         tags: ['Solar System', 'minor body/comet/long period comet'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': [0.715, 0.045], 'V-R': [0.420, 0.045], 'R-I': [0.525, 0.050]}, // mean
+        color_indices: {'B-V': [0.73, 0.06], 'V-R': [0.42, 0.06], 'R-I': [0.55, 0.06]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
