@@ -6547,7 +6547,7 @@
     '(768325) 2015 BP519 | Becker2018': {
         tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/TNO/extreme TNO'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': [0.79, 0.17], 'r-i': [0.19, 0.12], 'i-z': [0.23, 0.15]}, 
+        color_indices: {'g-r': [0.79, 0.17], 'r-i': [0.19, 0.12], 'i-z': [0.23, 0.15]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
