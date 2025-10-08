@@ -4,7 +4,8 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from matplotlib import rc_context
 import matplotlib.pyplot as plt
-from typing import Sequence
+from cycler import cycler
+from collections.abc import Sequence
 
 from src.core import Spectrum, FilterSystem, ColorSystem, ColorPoint, visible_range
 import src.strings as tr
@@ -14,24 +15,25 @@ import src.gui as gui
 # https://matplotlib.org/stable/tutorials/introductory/customizing.html
 errorbar_capsize = 3 # points
 errorbar_color = '#7F7F7F' # exactly gray
+rgb_muted = ('#904040', '#3c783c', '#5050e0')
+rgb_cycler = cycler(color=rgb_muted)
 dark_theme = {
     'text.color': gui.text_color, 'axes.labelcolor': gui.text_color,
     'axes.edgecolor': gui.muted_color, 'axes.grid': True, 'grid.color': gui.highlight_color,
     'xtick.color': gui.muted_color, 'ytick.color': gui.muted_color,
     'figure.facecolor': gui.bg_color, 'axes.facecolor': gui.inputON_color,
-    'errorbar.capsize': errorbar_capsize
+    'errorbar.capsize': errorbar_capsize, 'axes.prop_cycle': rgb_cycler
 }
 light_theme = {
     'text.color': '#000000', 'axes.labelcolor': '#000000',
     'axes.edgecolor': '#5C5C5C', 'axes.grid': True, 'grid.color': '#A5A5A5',
     'xtick.color': '#5C5C5C', 'ytick.color': '#5C5C5C',
     'figure.facecolor': '#FFFFFF', 'axes.facecolor': '#FFFFFF',
-    'errorbar.capsize': errorbar_capsize
+    'errorbar.capsize': errorbar_capsize, 'axes.prop_cycle': rgb_cycler
 }
 themes = (dark_theme, light_theme)
 plt.rcParams |= dark_theme
 
-rgb_muted = ('#904040', '#3c783c', '#5050e0')
 
 # http://www.cvrl.org/stilesburch2_ind.htm
 cmfs = FilterSystem.from_list(('StilesBurch2deg.r', 'StilesBurch2deg.g', 'StilesBurch2deg.b'), name='RGB')
@@ -85,22 +87,21 @@ def plot_spectra(list_to_plot: Sequence, light_theme: bool, lang: str, figsize: 
         return fig
 
 def plot_filters(filters: Sequence[Spectrum], color_system: ColorSystem, lang: str, figsize: tuple, dpi: int):
-    """ Creates a figure with plotted sensitive curves and the CMFs used """
+    """
+    Creates a figure with plotted filter profiles and the color matching functions.
+    The curves are normalized by their maximum value.
+    CMFs used are transformed from the CIE (2006) LMS functions, 2-deg
+    (http://www.cvrl.org/ciexyzpr.htm)
+    """
     fig, ax = plt.subplots(1, 1, figsize=figsize, dpi=dpi)
     ax.set_xlabel(tr.xaxis_text[lang])
-    # Determining the scale for CMFs in the background
-    max_y = []
-    for spectrum in filters:
-        max_y.append(spectrum.br.max())
-    k = max(max_y) / cmfs[2].br.max() if len(max_y) != 0 else 1
     # Plotting the CMFs
-    for i, cmf in enumerate(cmfs):
-        ax.plot(cmf.nm, cmf.br * k, label=cmf.name(lang), color=rgb_muted[i])
+    ax.plot(cmfs.nm, cmfs.br / cmfs.br.max(axis=0))
     # Color calculating and plotting
-    for i, spectrum in enumerate(filters):
-        color = ColorPoint.from_spectral_data(spectrum).to_color_system(color_system)
+    for profile in filters:
+        color = ColorPoint.from_spectral_data(profile).to_color_system(color_system)
         color.gamma_correction = True
         color.maximize_brightness = True
-        ax.plot(spectrum.nm, spectrum.br, label=spectrum.name(lang), color=color.to_html())
+        ax.plot(profile.nm, profile.br / profile.br.max(), label=profile.name(lang), color=color.to_html())
     fig.tight_layout() # moving to subplots() causes UserWarning
     return fig
