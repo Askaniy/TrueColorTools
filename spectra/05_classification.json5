@@ -665,7 +665,7 @@
         color_indices: {'B-V': [0.75, 0.01], 'V-R': [0.44, 0.02]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
+        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
         phase_function: ['HG', {G: [0.10, 0.15]}],
     },
     'Jovian irregulars i=28° | Grav2003, Grav2015': { // Himalia group
@@ -674,7 +674,7 @@
         color_indices: {'B-V': [0.66, 0.02], 'V-R': [0.36, 0.01]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.043, 0.011]], // Average of members with measured albedos
+        geometric_albedo: ['Generic_Bessell.V', [0.043, 0.011]], // Average of members with measured albedos
         phase_function: ['HG', {G: [0.10, 0.15]}],
     },
     'Jovian irregulars i=149° | Grav2003, Grav2015': { // Pasiphae and Ananke groups
@@ -683,7 +683,7 @@
         color_indices: {'B-V': [0.75, 0.04], 'V-R': [0.41, 0.08]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.041, 0.008]], // Average of members with measured albedos
+        geometric_albedo: ['Generic_Bessell.V', [0.041, 0.008]], // Average of members with measured albedos
         phase_function: ['HG', {G: [0.10, 0.15]}],
     },
     'Schemel2021': [
@@ -745,7 +745,7 @@
         color_indices: {'B-V': [0.69, 0.04], 'V-R': [0.44, 0.03]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
+        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
         phase_function: ['HG', {G: [0.10, 0.15]}],
     },
     'Saturnian irregulars i=34° | Grav2003, Grav2007': { // Gallic group
@@ -754,8 +754,8 @@
         color_indices: {'B-V': [0.91, 0.05], 'V-R': [0.48, 0.01]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
-        phase_function: ['HG', {G: [0.39, 0.19]}], // Average of members with measured phase functions
+        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
+        phase_function: ['HG', {G: [0.39, 0.19]}], // Average of members with measured phase functions
     },
     'Saturnian irregulars i=46° | Grav2003, Grav2007': { // Inuit group
         tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon', 'class/orbital class'],
@@ -763,7 +763,7 @@
         color_indices: {'B-V': [0.79, 0.01], 'V-R': [0.51, 0.02]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
+        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
        phase_function: ['HG', {G: [0.09, 0.21]}], // Average of members with measured phase functions
      },
     'Uranian irregulars | Graykowski2018, Grav2015': {
@@ -772,7 +772,7 @@
         color_indices: {'B-V': [0.84, 0.03], 'V-R': [0.53, 0.03]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
+        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
         phase_function: ['HG', {G: [0.10, 0.15]}],
     },
     'Neptunian irregulars | Graykowski2018, Grav2015': {
@@ -781,7 +781,7 @@
         color_indices: {'B-V': [0.77, 0.11], 'V-R': [0.50, 0.09]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
+        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
         phase_function: ['HG', {G: [0.10, 0.15]}],
     },
     'Jewitt2018': [
@@ -883,7 +883,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.059, 0.012]],
-        phase_function: ['HG', {G: [0.09, 0.12]}], // average of Bauer2003 phase functions (gray centaurs)
+        phase_function: ['HG', {G: [0.09, 0.12]}], // average of Bauer2003 phase functions (gray centaurs)
     },
     'Centaurs: Red | Tegler2016, Bauer2003': {
         tags: ['Solar System', 'minor body/centaur', 'class/orbital class'],
@@ -892,7 +892,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.12, 0.054]],
-        phase_function: ['HG', {G: [0.02, 0.21]}], // average of Bauer2003 phase functions (red centaurs)
+        phase_function: ['HG', {G: [0.02, 0.21]}], // average of Bauer2003 phase functions (red centaurs)
     },
     'Plutinos | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'class/orbital class'],
@@ -901,7 +901,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.114], // albedo from Zelario’s sheet
-        phase_function: ['HG', {G: [-0.07, 0.15]}], // average of Sheppard2002 + Sheppard2003 phase functions (plutinos)
+        phase_function: ['HG', {G: [-0.07, 0.15]}], // average of Sheppard2002 + Sheppard2003 phase functions (plutinos)
     },
     'Other resonances | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO', 'class/orbital class'],
@@ -910,7 +910,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.148], // albedo from Zelario’s sheet
-        phase_function: ['HG', {G: [0.12, 0.46]}], // average of Sheppard2003 phase functions (other resonant TNOs)
+        phase_function: ['HG', {G: [0.12, 0.46]}], // average of Sheppard2003 phase functions (other resonant TNOs)
     },
     'Cubewano: Hot, inner objects | MBOSS': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'class/orbital class'],
@@ -919,7 +919,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.102], // albedo from Zelario’s sheet
-        phase_function: ['HG', {G: [-0.10, 0.36]}], // average of Hicks2005 + Rousselot2005b phase functions (hot classical TNOs)
+        phase_function: ['HG', {G: [-0.10, 0.36]}], // average of Hicks2005 + Rousselot2005b phase functions (hot classical TNOs)
     },
     'Cubewano: Cold, outer objects | MBOSS': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'class/orbital class'],
@@ -936,7 +936,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.075], // albedo from Zelario’s sheet
-        phase_function: ['HG', {G: [-0.13, 0.20]}], // average of Sheppard2002 + Sheppard2003 + Rousselot2005b phase functions (SDOs)
+        phase_function: ['HG', {G: [-0.13, 0.20]}], // average of Sheppard2002 + Sheppard2003 + Rousselot2005b phase functions (SDOs)
     },
     'Detached objects | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/detached TNO', 'class/orbital class'],

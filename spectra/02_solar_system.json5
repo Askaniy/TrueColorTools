@@ -1939,7 +1939,7 @@
         tags: ['featured', 'Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
         nm_range: {start: 300, stop: 900, step: 100},
         br_geometric: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
-        phase_integral: [0.934, +0.100, -0.016],
+        phase_integral: [0.934, +0.100, -0.016],
     },
     'Hillier1994': [
         'Photometric Diversity of Terrains on Triton',
@@ -1952,8 +1952,8 @@
         filters: ['Violet', 'Blue', 'Green'],
         br: [0.903, 0.961, 0.970],
         sd: [0.037, 0.023, 0.151],
-        geometric_albedo: ['Generic_Bessell.V', [0.865, +0.079, -0.099]],
-        spherical_albedo: ['Generic_Bessell.V', [0.808, +0.125, -0.060]],
+        geometric_albedo: ['Generic_Bessell.V', [0.865, +0.079, -0.099]],
+        spherical_albedo: ['Generic_Bessell.V', [0.808, +0.125, -0.060]],
     },
     'Triton: Bright polar cap (N I) | Hillier1994': {
         tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
@@ -1999,7 +1999,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.84, 0.01]],
-        phase_integral: [0.934, +0.100, -0.016],
+        phase_integral: [0.934, +0.100, -0.016],
     },
     'Triton: −3° West (N I) | Pascu2006, Helfenstein2025': { // visit 2, leading side
         tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
@@ -2009,7 +2009,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.83, 0.01]],
-        phase_integral: [0.934, +0.100, -0.016],
+        phase_integral: [0.934, +0.100, -0.016],
     },
     'Triton: −10° East (N I) | Pascu2006, Helfenstein2025': { // visit 3, trailing side
         tags: ['Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
@@ -2019,7 +2019,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.78, 0.01]],
-        phase_integral: [0.934, +0.100, -0.016],
+        phase_integral: [0.934, +0.100, -0.016],
     },
     // Nereid
     'Kiss2016': [

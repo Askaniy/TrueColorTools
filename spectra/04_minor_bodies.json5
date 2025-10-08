@@ -380,7 +380,7 @@
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000003.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.202],
-        phase_function: ['HG', {H: [5.23, 0.06], G: [0.17, 0.03]}], // average H
+        phase_function: ['HG', {H: [5.23, 0.06], G: [0.17, 0.03]}], // average H
     },
     'Li2013a': [
         'Global photometric properties of Asteroid (4) Vesta observed with Dawn Framing Camera',
@@ -418,13 +418,13 @@
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000007.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.279],
-        phase_function: ['HG', {H: [5.66, 0.12], G: [0.21, 0.02]}], // average H
+        phase_function: ['HG', {H: [5.66, 0.12], G: [0.21, 0.02]}], // average H
     },
     '(9) Metis | MITHNEOS, Vernazza2021, Lagerkvist1992': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000009.sp75.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.18],
-        phase_function: ['HG', {H: [6.28, 0.12], G: [0.18, 0.02]}], // average H
+        phase_function: ['HG', {H: [6.28, 0.12], G: [0.18, 0.02]}], // average H
     },
     '(10) Hygiea | SMASS, Vernazza2021, Shevchenko2022': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -510,13 +510,13 @@
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000031.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.05],
-        phase_function: ['HG', {H: [6.540, 0.011], G: [-0.068, 0.014]}],
+        phase_function: ['HG', {H: [6.540, 0.011], G: [-0.068, 0.014]}],
     },
     '(41) Daphne | SMASS, Vernazza2021, Lagerkvist1992': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000041.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.052],
-        phase_function: ['HG', {H: [7.13, 0.10], G: [-0.01, 0.05]}], // average H
+        phase_function: ['HG', {H: [7.13, 0.10], G: [-0.01, 0.05]}], // average H
     },
     '(45) Eugenia | SMASS, Vernazza2021, Pravec2012': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -545,7 +545,7 @@
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000052.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.052],
-        phase_function: ['HG', {H: [6.32, 0.13], G: [0.13, 0.03]}], // average H
+        phase_function: ['HG', {H: [6.32, 0.13], G: [0.13, 0.03]}], // average H
     },
     'Müller2004': [
         '65 Cybele in the thermal infrared: Multiple observations and thermophysical analysis',
@@ -561,7 +561,7 @@
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000087.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.04],
-        phase_function: ['HG', {H: [6.86, 0.07], G: [0.10, 0.08]}], // average H
+        phase_function: ['HG', {H: [6.86, 0.07], G: [0.10, 0.08]}], // average H
     },
     'Berthier2014': [
         'Physical and dynamical properties of the main belt triple Asteroid (87) Sylvia',
@@ -599,7 +599,7 @@
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000088.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.057],
-        phase_function: ['HG', {H: [7.11, 0.02], G: [0.13, 0.03]}], // average H
+        phase_function: ['HG', {H: [7.11, 0.02], G: [0.13, 0.03]}], // average H
     },
     '(90) Antiope | SMASS, Mainzer2019, SsODNet': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -610,7 +610,7 @@
     '(93) Minerva | SMASS, Storrs2025, Pravec2012': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000093.2.txtU',
-        geometric_albedo: ['HST_WFPC2-PC.F439W', [0.044, 0.007]], // Table 2
+        geometric_albedo: ['HST_WFPC2-PC.F439W', [0.044, 0.007]], // Table 2
         phase_function: ['HG', {H: [7.504, 0.042], G: [-0.006, 0.030]}],
     },
     '(93 I) Aegis | Storrs2025, Pravec2012': {
@@ -655,7 +655,7 @@
     '(121) Hermione | SMASS, Storrs2025, SsODNet': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000121.2.txtU',
-        geometric_albedo: ['HST_WFPC2-PC.F439W', [0.029, 0.009]], // Table 2
+        geometric_albedo: ['HST_WFPC2-PC.F439W', [0.029, 0.009]], // Table 2
         phase_function: ['HG1G2', {H: [7.117586, +0.141969, -0.163505], G_1: [0.351391, +0.210504, -0.268748], G_2: [0.266079, +0.111130, -0.095476]}],
     },
     'S/2002 (121) 1 | Storrs2025, SsODNet': {
@@ -695,7 +695,7 @@
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000216.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.152],
-        phase_function: ['HG', {H: [7.08, 0.22], G: [0.26, 0.07]}], // average H
+        phase_function: ['HG', {H: [7.08, 0.22], G: [0.26, 0.07]}], // average H
     },
     'Helfenstein1996': [
         'Galileo Photometry of Asteroid 243 Ida',
@@ -825,7 +825,7 @@
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000511.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.063],
-        phase_function: ['HG', {H: [6.17, 0.09], G: [0.07, 0.03]}], // average H
+        phase_function: ['HG', {H: [6.17, 0.09], G: [0.07, 0.03]}], // average H
     },
     '(588) Achilles | GaiaDR3, SsODNet, Shevchenko2022': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -862,7 +862,7 @@
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan', 'spacecraft target/Lucy target'],
         file: 'spectra/files/Humes2022/617_Patroclus_albedo.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.045, 0.009]],
-        phase_function: ['Palomar_ZTF.r', 'HG', {H: [8.04, 0.02], G: [0.20, 0.03]}],
+        phase_function: ['Palomar_ZTF.r', 'HG', {H: [8.04, 0.02], G: [0.20, 0.03]}],
     },
     '(617) Patroclus-Menoetius | Chatelain2016, Mueller2010, Schemel2021': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan', 'spacecraft target/Lucy target'],
@@ -871,7 +871,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.045, 0.009]],
-        phase_function: ['Palomar_ZTF.r', 'HG', {H: [8.04, 0.02], G: [0.20, 0.03]}],
+        phase_function: ['Palomar_ZTF.r', 'HG', {H: [8.04, 0.02], G: [0.20, 0.03]}],
     },
     '(623) Chimaera | GaiaDR3, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
@@ -925,7 +925,7 @@
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000704.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.067],
-        phase_function: ['HG', {H: [5.94, 0.05], G: [-0.03, 0.03]}],
+        phase_function: ['HG', {H: [5.94, 0.05], G: [-0.03, 0.03]}],
     },
     '(791) Ani | GaiaDR3, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/main belt'],
@@ -1511,7 +1511,7 @@
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/NEO/Apollo', "spacecraft target/Chang'e-2 target"],
         file: 'spectra/files/SMASS/a004179.sp30.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.185, +0.045, -0.039]],
-        phase_function: ['HG', {H: 15.30, G: [0.10, 0.10]}],
+        phase_function: ['HG', {H: 15.30, G: [0.10, 0.10]}],
     },
     '(4709) Ennomos | GaiaDR3, Shevchenko2014, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -4853,7 +4853,7 @@
     },
     '(230965) 2004 XA192 | Williams2025, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
-        slope: {start: 400, stop: 900, percent_per_100nm: [13.27, 4.84]}, // mean
+        slope: {start: 400, stop: 900, percent_per_100nm: [13.27, 4.84]}, // mean
         geometric_albedo: ['Generic_Bessell.V', [0.260, +0.340, -0.150]],
     },
     'Hsieh2021': [
@@ -4953,7 +4953,7 @@
     '(307251) 2002 KW14 | Perna2013, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'V-R': [0.69, 0.05], 'V-I': [1.73, 0.07]}, // mean V-R
+        color_indices: {'V-R': [0.69, 0.05], 'V-I': [1.73, 0.07]}, // mean V-R
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.310, +0.281, -0.094]],
@@ -6081,7 +6081,7 @@
         color_indices: {'g-r': [0.88, 0.21], 'r-i': [0.34, 0.26], 'r-z': [0.13, 0.22]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.125], // calculated by Zel using occultation results
+        geometric_albedo: ['Generic_Bessell.V', 0.125], // calculated by Zel using occultation results
     },
     '(578992) 2014 JL80 | Thirouin2019': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
