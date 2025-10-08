@@ -3,7 +3,7 @@ Support of the database of JSON5 files and filters profiles.
 Describes the object name data storage class.
 """
 
-from typing import Sequence
+from collections.abc import Sequence
 from json5 import load as json5load
 from pathlib import Path
 from traceback import format_exc

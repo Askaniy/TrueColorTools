@@ -3,14 +3,14 @@
 import numpy as np
 from scipy.interpolate import PchipInterpolator, CloughTocher2DInterpolator
 from math import sqrt, ceil
-from typing import Sequence
+from collections.abc import Sequence
 
 
 
 # ------------ Core Section ------------
 
 # Constants needed for down scaling spectra and images
-fwhm_factor = np.sqrt(8*np.log(2))
+fwhm_factor = np.sqrt(8 * np.log(2))
 
 def grid(start: int|float, end: int|float, step: int):
     """ Returns uniform grid points for the non-integer range that are divisible by the selected step """

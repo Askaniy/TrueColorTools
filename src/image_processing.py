@@ -1,6 +1,6 @@
 """ Processes raw image input into a picture that can be shown and saved. """
 
-from typing import Callable
+from collections.abc import Callable
 from traceback import format_exc
 from time import monotonic
 from math import sqrt, ceil

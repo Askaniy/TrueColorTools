@@ -38,7 +38,8 @@ Color:
 
 from io import BytesIO
 from copy import deepcopy
-from typing import Sequence, Callable, Self
+from collections.abc import Sequence, Callable
+from typing import Self
 from pathlib import Path
 from functools import lru_cache
 from traceback import format_exc

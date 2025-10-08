@@ -1,6 +1,6 @@
 """ Responsible for converting image data into a working form. """
 
-from typing import Sequence
+from collections.abc import Sequence
 from pathlib import Path
 from functools import lru_cache
 import numpy as np

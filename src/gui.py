@@ -1,6 +1,6 @@
 """ Responsible for the creation and translation of the graphical interface. """
 
-from typing import Callable
+from collections.abc import Callable
 from time import strftime
 import platform
 import FreeSimpleGUI as sg

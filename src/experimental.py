@@ -2,7 +2,7 @@
 
 import numpy as np
 from astropy.io import fits
-from typing import Sequence
+from collections.abc import Sequence
 
 
 
@@ -43,7 +43,7 @@ def cube_reader(file: str) -> tuple[np.ndarray, np.ndarray]:
         nm = np.array(hdul['wavelength'].data)
     return nm, br
 
-    
+
 #def sorted(self) -> Self:
 #    """ Sorts the PhotospectralCube by increasing wavelength """
 #    nm = self.mean_nm()
@@ -68,7 +68,7 @@ def experimental_autoalign(data: np.ndarray, debug: bool):
     shifts0_y = relative_shifts(square(sums_y))
     if debug:
         print('\nBase', shifts0_x, shifts0_y)
-    
+
     shiftsR_x = []
     shiftsR_y = []
     for i in range(l-1):
@@ -77,7 +77,7 @@ def experimental_autoalign(data: np.ndarray, debug: bool):
         shiftsR_y.append(shift_y)
     if debug:
         print('\nRecursion', shiftsR_x, shiftsR_y)
-    
+
     #corrections_x = []
     #corrections_y = []
     #for l in range(l-1):
@@ -100,7 +100,7 @@ def experimental_autoalign(data: np.ndarray, debug: bool):
     #shiftsC_y = np.array(shifts0_y) + np.array(corrections_y)
     #if debug:
     #   print('\nCorrected', shiftsC_x, shiftsC_y)
-    
+
     shifts_x = absolute_shifts(shiftsR_x)
     shifts_y = absolute_shifts(shiftsR_y)
     w = w + shifts_x.min()
@@ -313,7 +313,7 @@ def absolute_shifts(diffs):
 #        cube = cube.spatial_smooth(Gaussian2DKernel(smooth_factor))
 #        print('Beginning spatial down scaling')
 #        cube = cube[:,::smooth_factor,::smooth_factor]
-#    
+#
 #    return Path(file).name, nm, np.array(cube).transpose((0, 2, 1))
 
 
@@ -353,4 +353,3 @@ def absolute_shifts(diffs):
 #            print(f'# Note for the Spectrum object "{self.name}"')
 #            print(f'- Current and requested resolutions are the same ({request} nm), nothing changed.')
 #        return other
-
