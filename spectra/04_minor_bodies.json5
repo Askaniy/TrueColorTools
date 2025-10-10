@@ -150,6 +150,11 @@
         'ALMA sub-mm measurements of the trans-Neptunian binary system satellites Ilmarë, Actaea, Hi’iaka and Namaka',
         'DOI: 10.5194/epsc_dps2025-905', 'https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-905.html'
     ],
+    'Vernazza2025': [
+        'JWST mid-infrared spectroscopy of centaurs and small trans-Neptunian objects: Linking the inner and outer Solar System',
+        'DOI: 10.1051/0004-6361/202555084', 'https://www.aanda.org/articles/aa/abs/2025/07/aa55084-25/aa55084-25.html',
+        'https://ui.adsabs.harvard.edu/abs/2025A%26A...699A.167V/abstract'
+    ],
     'Masiero2011': [
         'Main Belt Asteroids with WISE/NEOWISE. I. Preliminary Albedos and Diameters',
         'DOI: 10.1088/0004-637X/741/2/68', 'https://iopscience.iop.org/article/10.1088/0004-637X/741/2/68',
@@ -290,10 +295,25 @@
         'DOI: 10.3847/2041-8213/aab3dc', 'https://iopscience.iop.org/article/10.3847/2041-8213/aab3dc',
         'https://ui.adsabs.harvard.edu/abs/2018ApJ...855L..26S/abstract'
     ],
+    'Benecchi2019': [
+        'The color and binarity of (486958) 2014 MU69 and other long-range New Horizons Kuiper Belt targets',
+        'DOI: 10.1016/j.icarus.2019.01.025', 'https://www.sciencedirect.com/science/article/pii/S0019103518305797',
+        'https://ui.adsabs.harvard.edu/abs/2019Icar..334...22B/abstract'
+    ],
+    'Verbiscer2019': [
+        'Phase Curves from the Kuiper Belt: Photometric Properties of Distant Kuiper Belt Objects Observed by New Horizons',
+        'DOI: 10.3847/1538-3881/ab3211', 'https://iopscience.iop.org/article/10.3847/1538-3881/ab3211',
+        'http://ui.adsabs.harvard.edu/abs/2019AJ....158..123V/abstract'
+    ],
     'Dobson2023': [
         'Phase Curves of Kuiper Belt Objects, Centaurs, and Jupiter-family Comets from the ATLAS Survey',
         'DOI: 10.3847/PSJ/acc463', 'https://iopscience.iop.org/article/10.3847/PSJ/acc463',
         'https://ui.adsabs.harvard.edu/abs/2023PSJ.....4...75D/abstract'
+    ],
+    'Fraser2023': [
+        'Col-OSSOS: The Two Types of Kuiper Belt Surfaces',
+        'DOI: 10.3847/PSJ/acc844', 'https://iopscience.iop.org/article/10.3847/PSJ/acc844',
+        'https://ui.adsabs.harvard.edu/abs/2023PSJ.....4...80F/abstract'
     ],
     'Knight2023': [
         'Physical and Surface Properties of Comet Nuclei from Remote Observations',
@@ -1805,6 +1825,26 @@
         file: 'spectra/files/Duffard2014b/Chariklo_rings_model.txtU', // Fig. 4b
         geometric_albedo: [550, [0.070, 0.010]],
     },
+    'SantosSanz2025': [
+        'JWST occultation reveals unforeseen complexity in Chariklo’s ring system',
+        'DOI: 10.48550/arXiv.2510.06366', 'https://arxiv.org/abs/2510.06366',
+        'https://ui.adsabs.harvard.edu/abs/2025arXiv251006366S/abstract'
+    ],
+    'C1R (Chariklo) | SantosSanz2025, Duffard2014b': {
+        tags: ['Solar System', 'minor body/centaur', 'ring'],
+        filters: ['Danish.Visual', 'Raptor.Empty', 'Danish.Red', 'LaSilla_DFOSC.Gunn_z_filter', 'JWST_NIRCam2025.F150W2', 'Paranal_HAWKI.Ks', 'JWST_NIRCam2025.F322W2'],
+        br: [[0.664, 0.026], [0.679, +0.030, -0.021], [0.717, 0.015], [0.716, 0.002], [0.579, 0.016], [0.688, 0.027], [0.559, 0.022]],
+        // Intensities derived from Table 2 and 1-pN
+        geometric_albedo: [550, [0.070, 0.010]],
+    },
+    'C2R (Chariklo) | SantosSanz2025, Duffard2014b': {
+        tags: ['Solar System', 'minor body/centaur', 'ring'],
+        filters: ['Danish.Visual', 'Raptor.Empty', 'Danish.Red', 'LaSilla_DFOSC.Gunn_z_filter', 'JWST_NIRCam2025.F150W2', 'Paranal_HAWKI.Ks'],
+        br: [[0.662, 0.030], [0.734, 0.314], [0.722, 0.040], [0.939, 0.009], [0.936, 0.053], [0.958, 0.010]],
+        // Intensities derived from Table 4 and 1-pN
+        // Average of First and Second contact, Raptor.Empty measurement from Second contact is excluded from average due to a discrepancy in opacity
+        geometric_albedo: [550, [0.070, 0.010]],
+    },
     '(10253) Westerwald | SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
         photometric_system: 'SLOAN_SDSS',
@@ -1995,23 +2035,18 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.R', [0.035, +0.016, -0.013]],
     },
-    'Porter2016': [
-        'The First High-phase Observations of a KBO: New Horizons Imaging of (15810) 1994 JR1 from the Kuiper Belt',
-        'DOI: 10.3847/2041-8205/828/2/L15', 'https://iopscience.iop.org/article/10.3847/2041-8205/828/2/L15',
-        'https://ui.adsabs.harvard.edu/abs/2016ApJ...828L..15P/abstract'
-    ],
     'Verbiscer2024': [
         'Observations of TransNeptunian Objects From NASA’s New Horizons Mission',
         'https://www.youtube.com/watch?v=nlWq8CCNmoM', 'https://tno2024.org/devel/relation/abstract/94'
     ],
-    '(15810) Arawn | MBOSS, Verbiscer2024, Porter2016': {
+    '(15810) Arawn | MBOSS, Verbiscer2024, Verbiscer2019': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.010, 0.180], 'V-R': [0.632, 0.110], 'R-I': [0.538, 0.098]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.05],
-        phase_integral: 0.22,
+        phase_integral: 0.262,
     },
     '(15820) 1994 TB | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -2683,18 +2718,18 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.003]], // system albedo
     },
-    '(44594) 1999 OX3 | Seccull2018, Müller2020': {
+    '(44594) 1999 OX3 | Seccull2018, Vernazza2025': {
         tags: ['Solar System', 'minor body/TNO/scattered'],
         file: 'spectra/files/Seccull2018/1999OX3_Seccull2018.txt', // Fig. 3
-        geometric_albedo: ['Generic_Bessell.V', [0.081, +0.018, -0.015]],
+        geometric_albedo: ['Generic_Bessell.V', [0.220, 0.040]],
     },
-    '(44594) 1999 OX3 | MBOSS, Müller2020': {
+    '(44594) 1999 OX3 | MBOSS, Vernazza2025': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.138, 0.067], 'V-R': [0.708, 0.052], 'R-I': [0.640, 0.067]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.081, +0.018, -0.015]],
+        geometric_albedo: ['Generic_Bessell.V', [0.220, 0.040]],
     },
     'Mommert2012': [
         'TNOs are cool: A survey of the trans-Neptunian region. V. Physical characterization of 18 Plutinos using Herschel-PACS observations',
@@ -5398,12 +5433,13 @@
         slope: {start: 440, stop: 930, percent_per_100nm: [5.4, 0.7]}, // mean
         geometric_albedo: ['Generic_Bessell.V', [0.075, +0.076, -0.006]], // fixed η
     },
-    '(459865) 2013 XZ8 | MBOSS, Dobson2023': {
+    '(459865) 2013 XZ8 | MBOSS, Vernazza2025, Dobson2023': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.720, 0.020], 'V-R': [0.450, 0.020]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.053, 0.010]],
         phase_function: ['Misc_Atlas.orange', 'phase coefficient', {beta: [0.036, 0.011]}],
     },
     '(459971) 2014 ON6 | MBOSS': {
@@ -5427,24 +5463,27 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
-    '(468861) 2013 LU28 | Hromakina2021a': {
+    '(468861) 2013 LU28 | Hromakina2021a, Vernazza2025': {
         tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/centaur/Damocloid'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.83, 0.04], 'V-R': [0.57, 0.04], 'R-I': [0.68, 0.05]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.079, 0.014]],
     },
     'Lorenzi2023': [
         'Visible and NIR Spectroscopy of (468861) 2013 LU28 with TNG',
         'https://www.hou.usra.edu/meetings/acm2023/pdf/2379.pdf', 'https://ui.adsabs.harvard.edu/abs/2023LPICo2851.2379L/abstract'
     ],
-    '(468861) 2013 LU28 | Lorenzi2023': {
+    '(468861) 2013 LU28 | Lorenzi2023, Vernazza2025': {
         tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/centaur/Damocloid'],
         slope: {start: 530, stop: 920, percent_per_100nm: [15.34, 0.89]}, // mean
+        geometric_albedo: ['Generic_Bessell.V', [0.079, 0.014]],
     },
-    '(468861) 2013 LU28 | Williams2025': {
+    '(468861) 2013 LU28 | Williams2025, Vernazza2025': {
         tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/centaur/Damocloid'],
         slope: {start: 400, stop: 900, percent_per_100nm: [12.88, 0.43]}, // mean
+        geometric_albedo: ['Generic_Bessell.V', [0.079, 0.014]],
     },
     'Sharkey2021': [
         'Lunar-like silicate material forms the Earth quasi-satellite (469219) 2016 HO3 Kamo‘oalewa',
@@ -5498,6 +5537,14 @@
         color_indices: {'B-V': [0.55, 0.03], 'V-R': [0.50, 0.05], 'R-I': [0.33, 0.05]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
+    },
+    '(469442) 2002 GG166 | Fraser2023, Vernazza2025': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'u-g': [1.732, 0.047], 'g-r': [0.591, 0.013]}, // SDSS indices used
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.08, 0.03]], // fixed η
     },
     '(469505) 2003 FE128 | Boehnhardt2014, FarkasTakacs2020': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
@@ -7068,6 +7115,23 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
+    '2011 HF103 | Benecchi2019': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'HST_WFC3_UVIS1',
+        filters: ['F606W', 'F814W'],
+        mag: [[24.01, 0.03], [23.02, 0.02]], // Table 3
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
+    '2011 HK103 | Benecchi2019, Verbiscer2019': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        photometric_system: 'HST_WFC3_UVIS1',
+        filters: ['F606W', 'F814W'],
+        mag: [[23.67, 0.12], [22.77, 0.06]], // Table 3
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        phase_integral: 0.248,
+    },
     '2011 HM102 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'Generic_Bessell',
@@ -7081,6 +7145,40 @@
         color_indices: {'g-r': [0.67, 0.08], 'r-i': [0.21, 0.07]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
+    },
+    '2011 HZ102 | Benecchi2019': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'HST_WFC3_UVIS1',
+        filters: ['F606W', 'F814W'],
+        mag: [[25.70, 0.02], [24.66, 0.07]], // Table 3
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
+    '2011 JW31 | Benecchi2019': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'HST_WFC3_UVIS1',
+        filters: ['F606W', 'F814W'],
+        mag: [[24.03, 0.06], [22.96, 0.05]], // Table 3
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
+    '2011 JY31 | Benecchi2019, Verbiscer2019': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'HST_WFC3_UVIS1',
+        filters: ['F606W', 'F814W'],
+        mag: [[24.65, 0.03], [23.69, 0.16]], // Table 3
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        phase_integral: 0.302,
+    },
+    '2012 HE85 | Benecchi2019, Verbiscer2019': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'HST_WFC3_UVIS1',
+        filters: ['F606W', 'F814W'],
+        mag: [[24.50, 0.05], [23.43, 0.04]], // Table 3
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        phase_integral: 0.237,
     },
     '2012 UV177 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
@@ -7141,6 +7239,14 @@
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered', 'minor body/centaur/Damocloid'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.860, 0.050], 'V-R': [0.440, 0.030]},
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
+    '2013 LU35 | Benecchi2019': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'HST_WFC3_UVIS1',
+        filters: ['F606W', 'F814W'],
+        mag: [[26.34, 0.09], [25.23, 0.02]], // Table 3
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
@@ -7250,6 +7356,22 @@
         photometric_system: 'LCO_IMACS',
         color_indices: {'sloan_g-sloan_r': [0.67, 0.03], 'sloan_g-sloan_i': [0.91, 0.03]},
         calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
+    '2014 OS393 | Benecchi2019': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'HST_WFC3_UVIS1',
+        filters: ['F606W', 'F814W'],
+        mag: [[25.52, 0.04], [24.58, 0.10]], // Table 3
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
+    '2014 PN70 | Benecchi2019': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'HST_WFC3_UVIS1',
+        filters: ['F606W', 'F814W'],
+        mag: [[25.79, 0.13], [24.78, 0.11]], // Table 3
+        calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
     '2014 QO441 | MBOSS': {
