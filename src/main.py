@@ -5,7 +5,7 @@ from sigfig import round as sigfig_round
 from copy import deepcopy
 from time import strftime
 
-from src.core import Spectrum, ReflectingBody, ColorSystem, ColorPoint, \
+from src.core import Spectrum, ReflectingBody, ColorSystem, ColorPoint, FilterNotFoundError, \
     visible_range, sun_in_V, get_filter, database_parser
 import src.gui as gui
 import src.auxiliary as aux
@@ -439,8 +439,11 @@ def launch_window(lang: str):
                         for i in range(tab2_vis):
                             tab2_filter_name = values[f'tab2_filter{i}']
                             if tab2_filter_name != '':
-                                tab2_filter = get_filter(tab2_filter_name)
-                                tab2_filters.append(tab2_filter)
+                                try:
+                                    tab2_filter = get_filter(tab2_filter_name)
+                                    tab2_filters.append(tab2_filter)
+                                except FilterNotFoundError:
+                                    pass
                                 tab2_files.append(values[f'tab2_path{i}'])
                                 tab2_formulas.append(values[f'tab2_eval{i}'])
 

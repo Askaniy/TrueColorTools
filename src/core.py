@@ -819,6 +819,10 @@ class Spectrum(_SpectralObject):
         return output
 
 
+class FilterNotFoundError(Exception):
+    def __init__(self, filter_name: str):
+        super().__init__(f'Filter "{filter_name}" not found in the "filters" folder.')
+
 @lru_cache(maxsize=32)
 def get_filter(name: str|int|float) -> Spectrum:
     """
@@ -826,18 +830,17 @@ def get_filter(name: str|int|float) -> Spectrum:
     Requires file name to be found in the `filters` folder to load profile
     or wavelength in nanometers to generate single-point profile.
     """
-    if not isinstance(name, str) or name.isnumeric():
-        # no need to normalize if integration by the rectangle method
+    try:
         return Spectrum.from_nm(float(name))
-    else:
+        # "float(name)" checks float input better than
+        # "name.isnumeric() or not isinstance(name, str)"
+    except ValueError:
         try:
             file = str(next(Path('filters').glob(f'{name}.*')))
             profile = Spectrum.from_file(file, name)
         except StopIteration:
-            print(f'# Note for the Spectrum object {name}')
-            print(f'- Filter "{name}" not found in the "filters" folder. It was replaced by a stub.')
-            profile = Spectrum.stub(name)
-        return profile.edges_zeroed().normalize()
+            raise FilterNotFoundError(name)
+    return profile.edges_zeroed().normalize()
 
 
 class _Square(_TrueColorToolsObject):
