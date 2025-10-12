@@ -80,9 +80,23 @@
         file: 'spectra/files/Krisciunas2017/hr1544_final.txtA',
         is_emissive: true,
     },
+    'Sirius (A1 V) | CALSPEC': {
+        tags: ['extrasolar', 'star/V dwarf'],
+        file: 'spectra/files/CALSPEC/sirius_stis_005.fits',
+        is_emissive: true,
+    },
     'Miaplacidus (A2 IV) | Krisciunas2017': {
         tags: ['extrasolar', 'star/IV subgiant'],
         file: 'spectra/files/Krisciunas2017/hr3685_final.txtA',
+        is_emissive: true,
+    },
+    'GuarroFló2016': [
+        'Spectra of Altair by J. Guarro Fló uploaded to British Astronomical Association',
+        'https://britastro.org/specdb/data_graph.php?obs_id=391'
+    ],
+    'Altair (A7 Vn) | GuarroFló2016': {
+        tags: ['extrasolar', 'star/V dwarf'],
+        file: 'spectra/files/BAA/_altair_20161003_821_J.Guarro.fit',
         is_emissive: true,
     },
     'Canopus (A9 II) | Krisciunas2017': {
@@ -103,6 +117,15 @@
     'Wezen (F8 Ia) | Krisciunas2017': {
         tags: ['extrasolar', 'star/I supergiant'],
         file: 'spectra/files/Krisciunas2017/hr2693_blue_fin.txtA',
+        is_emissive: true,
+    },
+    'Foster2017': [
+        'ups And spectrum by J. Foster uploaded to British Astronomical Association',
+        'https://britastro.org/specdb/data_graph.php?obs_id=1554'
+    ],
+    'Titawin (F9 V) | Foster2017': {
+        tags: ['extrasolar', 'star/V dwarf'],
+        file: 'spectra/files/BAA/_hd9826_20170822_505.fit',
         is_emissive: true,
     },
     'β Comae Berenices (G0 V) | STIS_NGSLv2': {
@@ -133,6 +156,36 @@
     'Alsafi (K0 V) | STIS_NGSLv2': {
         tags: ['extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd185144_v2.txtA',
+        is_emissive: true,
+    },
+    'Ramirez2011': [
+        'Fundamental Parameters and Chemical Composition of Arcturus',
+        'DOI: 10.1088/0004-637X/743/2/135', 'https://iopscience.iop.org/article/10.1088/0004-637X/743/2/135',
+        'https://ui.adsabs.harvard.edu/abs/2011ApJ...743..135R/abstract'
+    ],
+    'Arcturus: 1976 (K1.5 III) | Ramirez2011': {
+        tags: ['extrasolar', 'star/III giant'],
+        file: 'spectra/files/Ramirez2011/Arcturus_1976.txtA',
+        is_emissive: true,
+    },
+    'Arcturus: 1987 (K1.5 III) | Ramirez2011': {
+        tags: ['extrasolar', 'star/III giant'],
+        file: 'spectra/files/Ramirez2011/Arcturus_1987.txtA',
+        is_emissive: true,
+    },
+    'Arcturus: 1996 (K1.5 III) | Ramirez2011': {
+        tags: ['extrasolar', 'star/III giant'],
+        file: 'spectra/files/Ramirez2011/Arcturus_1996.txtA',
+        is_emissive: true,
+    },
+    'Boyajian2015': [
+        'Stellar diameters and temperatures – VI. High angular resolution measurements of the transiting exoplanet host stars HD 189733 and HD 209458 and implications for models of cool dwarfs',
+        'DOI: 10.1093/mnras/stu2502', 'https://academic.oup.com/mnras/article-abstract/447/1/846/1753469',
+        'https://ui.adsabs.harvard.edu/abs/2015MNRAS.447..846B/abstract'
+    ],
+    'HD 189733 A (K2 V) | Boyajian2015': {
+        tags: ['extrasolar', 'star/V dwarf'],
+        file: 'spectra/files/HD189733_Boyajian2015.txtU',
         is_emissive: true,
     },
     'Ran (K2 V) | STIS_NGSLv2': {
@@ -245,6 +298,26 @@
         file: 'spectra/files/Reid2000/LHS453.txt',
         is_emissive: true,
     },
+    'Dawson2004': [
+        'Barnard’s Star and the M Dwarf Temperature Scale',
+        'DOI: 10.1086/383289', 'https://iopscience.iop.org/article/10.1086/383289',
+        'http://ui.adsabs.harvard.edu/abs/2004AJ....127.2909D/abstract'
+    ],
+    'Barnard’s Star (M4 V) | Dawson2004': {
+        tags: ['extrasolar', 'star/V dwarf'],
+        file: 'spectra/files/BarnardsStar_Dawson2004.txtU',
+        is_emissive: true,
+    },
+    'Lowrance2002': [
+        'A Distant Stellar Companion in the υ Andromedae System',
+        'DOI: 10.1086/341554', 'https://iopscience.iop.org/article/10.1086/341554',
+        'https://ui.adsabs.harvard.edu/abs/2002ApJ...572L..79L/abstract'
+    ],
+    'υ Andromedae B (M4.5 V) | Lowrance2002': {
+        tags: ['extrasolar', 'star/V dwarf'],
+        file: 'spectra/files/υAndB_Lowrance2002.txtA',
+        is_emissive: true,
+    },
     'LHS 375 (esdM5) | Reid2000': {
         tags: ['extrasolar', 'star/subdwarf'],
         file: 'spectra/files/Reid2000/LHS375.txt',
@@ -270,6 +343,16 @@
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_lhs10_v2.txtA',
         is_emissive: true,
     },
+    'Davoudi2024': [
+        'Updated Spectral Characteristics for the Ultracool Dwarf TRAPPIST-1',
+        'DOI: 10.3847/2041-8213/ad5c6c', 'https://iopscience.iop.org/article/10.3847/2041-8213/ad5c6c',
+        'https://ui.adsabs.harvard.edu/abs/2024ApJ...970L...4D/abstract'
+    ],
+    'TRAPPIST-1 (M8 V) | Davoudi2024': {
+        tags: ['extrasolar', 'star/V dwarf', 'star/ultra-cool dwarf'],
+        file: 'spectra/files/TRAPPIST1_Davoudi2024.txtU',
+        is_emissive: true,
+    },
     'BRI0021-0214 (M9.5) | Reid2000': {
         tags: ['extrasolar', 'star/ultra-cool dwarf'],
         file: 'spectra/files/Reid2000/BRI0021.txt',
@@ -291,6 +374,38 @@
         is_emissive: true,
     },
 
+    // White dwarfs
+    'Barstow2005': [
+        'Hubble Space Telescope spectroscopy of the Balmer lines in Sirius B*',
+        'DOI: 10.1111/j.1365-2966.2005.09359.x', 'https://academic.oup.com/mnras/article/362/4/1134/988524',
+        'https://ui.adsabs.harvard.edu/abs/2005MNRAS.362.1134B/abstract'
+    ],
+    'Sirius B (DA2) | Barstow2005': {
+        tags: ['extrasolar', 'star/white dwarf'],
+        file: 'spectra/files/SiriusB_Barstow2005.txtA',
+        is_emissive: true,
+    },
+    'Provencal2002': [
+        'Procyon B: Outside the Iron Box',
+        'DOI: 10.1086/338769', 'https://iopscience.iop.org/article/10.1086/338769',
+        'https://ui.adsabs.harvard.edu/abs/2002ApJ...568..324P/abstract'
+    ],
+    'Procyon B (DQZ) | Provencal2002': {
+        tags: ['extrasolar', 'star/white dwarf'],
+        file: 'spectra/files/ProcyonB_Provencal2002.txtA',
+        is_emissive: true,
+    },
+    'Leadbeater2021e': [
+        'Wolf 28 spectrum by R. Leadbeater uploaded to British Astronomical Association',
+        'https://britastro.org/specdb/data_graph.php?obs_id=10393'
+    ],
+    'van Maanen 2 (DZ8) | Leadbeater2021e': {
+        tags: ['extrasolar', 'star/white dwarf'],
+        file: 'spectra/files/BAA/_wolf28_20210824_047_Leadbeater.fit',
+        is_emissive: true,
+    },
+
+    // Neutron stars
     'Sandberg2009': [
         'Optical and infrared observations of the Crab Pulsar and its nearby knot',
         'DOI: 10.1051/0004-6361/200912334', 'https://www.aanda.org/component/article?access=bibcode&bibcode=&bibcode=2009A%2526A...504..525SFUL',
