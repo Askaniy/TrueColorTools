@@ -284,7 +284,7 @@ class _TrueColorToolsObject:
         """ Returns a new SpectralObject with a guarantee of definition on the requested wavelength array """
         raise NotImplementedError('Implemented in classes SpectralObject and PhotospectralObject.')
 
-    def scaled_at(self, where, how: int|float = 1, sd: int|float = None):
+    def scaled_at(self, where, how: int|float = 1, sd: int|float = None) -> Self:
         """
         Returns a new object that matches the query brightness (1 by default)
         at the specified filter profile or wavelength.

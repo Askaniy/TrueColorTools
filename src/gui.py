@@ -38,11 +38,13 @@ def create_logger(window: sg.Window, key: str) -> Callable:
         window.write_event_value((key, f'{strftime("%H:%M:%S")} {message}'), data)
     return logger
 
-def generate_plot_layout(lang: str, plot_size: tuple, light_theme: bool):
+def generate_plot_layout(lang: str, plot_size: tuple, normalize_at_550nm: bool, light_theme: bool):
     """ Window 1 layout generator, the window of plot """
     return [
         [
             sg.Text(tr.spectral_plot[lang], font=('arial', 16), key='W1_title'),
+            sg.Push(),
+            sg.Checkbox(tr.normalize[lang], default=normalize_at_550nm, enable_events=True, key='W1_normalize'),
             sg.Push(),
             sg.Checkbox(tr.light_theme[lang], default=light_theme, enable_events=True, key='W1_light_theme'),
             sg.Push(),
@@ -384,6 +386,7 @@ def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict,
 
 def translate_win1(window: sg.Window, lang: str):
     window['W1_title'].update(tr.spectral_plot[lang])
+    window['W1_normalize'].update(text=tr.normalize[lang])
     window['W1_light_theme'].update(text=tr.light_theme[lang])
     window['W1_save'].update(tr.gui_save[lang])
     return window

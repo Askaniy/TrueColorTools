@@ -83,6 +83,7 @@ def launch_window(lang: str):
     tab3_preview = window0['tab3_graph'].DrawCircle(circle_coord, circle_r, fill_color='black', line_color=None)
 
     # Setting plots templates
+    normalize_at_550nm = False
     light_theme = False
     pinned_spectra_and_colors = {} # for tabs 1 and 3, both at once
     mean_spectrum = [] # for tab 2
@@ -94,7 +95,7 @@ def launch_window(lang: str):
     tab2_filters = []
     tab3_obj_name = tab3_html = tab3_spectrum = None
 
-    def tab1_tab3_update_plot(fig, fig_canvas_agg, current_tab, light_theme: bool, lang: str):
+    def tab1_tab3_update_plot(fig, fig_canvas_agg, current_tab, normalize_at_550nm, light_theme: bool, lang: str):
         pl.close_figure(fig)
         fig_canvas_agg.get_tk_widget().forget()
         dict_to_plot = deepcopy(pinned_spectra_and_colors)
@@ -102,7 +103,7 @@ def launch_window(lang: str):
             dict_to_plot |= {tab1_spectrum: tab1_html}
         if current_tab == 'tab3' and tab3_obj_name and tab3_spectrum not in dict_to_plot:
             dict_to_plot |= {tab3_spectrum: tab3_html}
-        fig = pl.plot_spectra(dict_to_plot, light_theme, lang, spectra_figsize, spectra_dpi)
+        fig = pl.plot_spectra(dict_to_plot, normalize_at_550nm, light_theme, lang, spectra_figsize, spectra_dpi)
         fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, fig)
         return fig, fig_canvas_agg
 
@@ -147,7 +148,7 @@ def launch_window(lang: str):
         elif isinstance(event, str) and event.endswith('plot'):
             if not window1:
                 window1 = sg.Window(
-                    tr.spectral_plot[lang], gui.generate_plot_layout(lang, spectra_plot_size, light_theme), icon=icon,
+                    tr.spectral_plot[lang], gui.generate_plot_layout(lang, spectra_plot_size, normalize_at_550nm, light_theme), icon=icon,
                     finalize=True, element_justification='center'
                 )
             else:
@@ -158,16 +159,17 @@ def launch_window(lang: str):
                 dict_to_plot |= {tab1_spectrum: tab1_html}
             if tab3_obj_name and tab3_spectrum not in dict_to_plot.keys():
                 dict_to_plot |= {tab3_spectrum: tab3_html}
-            tab1_tab3_fig = pl.plot_spectra(dict_to_plot, light_theme, lang, spectra_figsize, spectra_dpi)
+            tab1_tab3_fig = pl.plot_spectra(dict_to_plot, normalize_at_550nm, light_theme, lang, spectra_figsize, spectra_dpi)
             tab1_tab3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, tab1_tab3_fig)
         elif event == 'W1_path':
             tab1_tab3_fig.savefig(values['W1_path'], dpi=133.4) # 1200x800
-        elif event == 'W1_light_theme':
+        elif event in ('W1_normalize', 'W1_light_theme'):
+            normalize_at_550nm = values['W1_normalize']
             light_theme = values['W1_light_theme']
             tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                 tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                 window0.ReturnValuesDictionary['-currentTab-'],
-                light_theme, lang
+                normalize_at_550nm, light_theme, lang
             )
 
         # Run-time translation
@@ -194,7 +196,7 @@ def launch_window(lang: str):
                 tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                     tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                     window0.ReturnValuesDictionary['-currentTab-'],
-                    light_theme, lang
+                    normalize_at_550nm, light_theme, lang
                 )
 
         # Only the main window events
@@ -338,7 +340,7 @@ def launch_window(lang: str):
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                                 tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                                 window0.ReturnValuesDictionary['-currentTab-'],
-                                light_theme, lang
+                                normalize_at_550nm, light_theme, lang
                             )
 
                 if event in ('tab1_tag_filter', 'tab1_searched'):
@@ -355,7 +357,7 @@ def launch_window(lang: str):
                         tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                             window0.ReturnValuesDictionary['-currentTab-'],
-                            light_theme, lang
+                            normalize_at_550nm, light_theme, lang
                         )
 
                 elif event == 'tab1_export2text':
@@ -536,7 +538,7 @@ def launch_window(lang: str):
                         tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                             window0.ReturnValuesDictionary['-currentTab-'],
-                            light_theme, lang
+                            normalize_at_550nm, light_theme, lang
                         )
 
                 elif event == 'tab3_maxtemp_num':
@@ -552,5 +554,5 @@ def launch_window(lang: str):
                         tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                             window0.ReturnValuesDictionary['-currentTab-'],
-                            light_theme, lang
+                            normalize_at_550nm, light_theme, lang
                         )

@@ -443,9 +443,14 @@ gui_vII = {
 
 # Plots
 spectral_plot = {
-    'en': 'Energy spectral density or albedo, resp.',
-    'ru': 'Спектральная плотность энергии или альбедо, соотв.',
-    'de': 'Spektrale Energiedichte bzw. Albedo'
+    'en': 'Energy spectral density / albedo',
+    'ru': 'Спектральная плотность энергии / альбедо',
+    'de': 'Spektrale Energiedichte / Albedo'
+}
+normalize = {
+    'en': 'Normalize at 550 nm',
+    'ru': 'Нормализовать по 550 нм',
+    'de': 'Normalisieren bei 550 nm'
 }
 light_theme = {
     'en': 'Light theme',

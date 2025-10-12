@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from cycler import cycler
 from collections.abc import Sequence
 
-from src.core import Spectrum, FilterSystem, ColorSystem, ColorPoint, visible_range
+from src.core import Spectrum, FilterSystem, ColorSystem, ColorPoint, get_filter, visible_range
 import src.strings as tr
 import src.gui as gui
 
@@ -50,23 +50,34 @@ def draw_figure(canvas, figure: Figure):
     return figure_canvas_agg
 
 
-def plot_spectra(dict_to_plot: dict[Spectrum, str], light_theme: bool, lang: str, figsize: tuple[float], dpi: int):
+def plot_spectra(
+        dict_to_plot: dict[Spectrum, str],
+        normalize_at_550nm: bool,
+        light_theme: bool,
+        lang: str,
+        figsize: tuple[float],
+        dpi: int
+    ):
     """ Creates a figure with plotted spectra from the input list """
     with rc_context(themes[int(light_theme)]):
         fig, ax = plt.subplots(1, 1, figsize=figsize, dpi=dpi)
         ax.set_xlabel(tr.xaxis_text[lang])
         ax.set_ylabel(tr.yaxis_text[lang])
         # Determining the scale for CMFs in the background
+        spectra = []
         max_y = []
         for spectrum in dict_to_plot.keys():
+            spectrum = spectrum.define_on_range(visible_range)
+            if normalize_at_550nm:
+                spectrum = spectrum.scaled_at(550)
+            spectra.append(spectrum)
             max_y.append(spectrum.br.max())
         k = max(max_y) / cmfs[2].br.max() if len(max_y) != 0 else 1
         # Plotting the CMFs
         for i, cmf in enumerate(cmfs):
             ax.plot(cmf.nm, cmf.br * k, color=rgb_muted[i])
         # Plotting the spectra
-        for spectrum, color in dict_to_plot.items():
-            spectrum = spectrum.define_on_range(visible_range)
+        for spectrum, color in zip(spectra, dict_to_plot.values()):
             ax.plot(spectrum.nm, spectrum.br, label=spectrum.name(lang), color=color)
             if spectrum.photospectrum is not None:
                 ax.errorbar(
