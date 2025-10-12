@@ -6,7 +6,7 @@ import platform
 import FreeSimpleGUI as sg
 
 import src.strings as tr
-from src.core import supported_color_spaces, supported_white_points
+from src.core import ColorSystem
 
 
 # TCT style colors
@@ -90,14 +90,14 @@ def generate_layout(
         [sg.Text(tr.gui_color_space[lang], key='-ColorSpaceText-', tooltip=tr.gui_color_space_tooltip[lang])],
         [
             sg.Combo(
-                tuple(supported_color_spaces.keys()), default_value=color_space, readonly=True,
+                tuple(ColorSystem.supported_color_spaces.keys()), default_value=color_space, readonly=True,
                 expand_x=True, enable_events=True, key='-ColorSpace-', tooltip=tr.gui_color_space_tooltip[lang]
             )
         ],
         [sg.Text(tr.gui_white_point[lang], key='-WhitePointText-', tooltip=tr.gui_white_point_tooltip[lang])],
         [
             sg.Combo(
-                tuple(supported_white_points.keys()), default_value=white_point, readonly=True,
+                tuple(ColorSystem.supported_white_points.keys()), default_value=white_point, readonly=True,
                 expand_x=True, enable_events=True, key='-WhitePoint-', tooltip=tr.gui_white_point_tooltip[lang]
             )
         ],

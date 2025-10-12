@@ -1843,42 +1843,6 @@ xyz_cmf = FilterSystem.from_list(('CIE_1931_2deg.x', 'CIE_1931_2deg.y', 'CIE_193
 # here: http://www.cvrl.org/database/text/cienewxyz/cie2012xyz2.htm, http://www.cvrl.org/ciexyzpr.htm
 # However, the CIE XYZ (1931) standard is still widely used.
 
-def spectrum_to_white_point(spectrum: Spectrum):
-    """ Returns (x, y) coordinates of the spectrum on the chromaticity diagram """
-    xyz = (spectrum @ xyz_cmf).br
-    return xyz[:2] / xyz.sum()
-
-
-# Values are Color Primaries: (red, green, blue)
-# See https://en.wikipedia.org/wiki/RGB_color_spaces
-supported_color_spaces = {
-    'CIE XYZ': ((1, 0), (0, 1), (0, 0)),
-    'CIE RGB': ((0.73474284, 0.26525716), (0.27377903, 0.7174777), (0.16655563, 0.00891073)),
-    'sRGB': ((0.64, 0.33), (0.30, 0.60), (0.15, 0.06)),
-    'Display P3': ((0.68, 0.32), (0.265, 0.69), (0.15, 0.06)),
-    'Adobe RGB': ((0.64, 0.33), (0.21, 0.71), (0.15, 0.06)),
-    'Wide Gamut': ((0.7347, 0.2653), (0.1152, 0.8264), (0.1566, 0.0177)),
-    'ProPhoto RGB': ((0.734699, 0.265301), (0.159597, 0.840403), (0.036598, 0.000105)),
-    'HDTV': ((0.67, 0.33), (0.21, 0.71), (0.15, 0.06)),
-    'UHDTV': ((0.708, 0.292), (0.170, 0.797), (0.13, 0.046)),
-}
-
-# Values are (x, y) coordinates
-# https://en.wikipedia.org/wiki/Standard_illuminant#White_points_of_standard_illuminants
-supported_white_points = {
-    'Illuminant A': (0.44758, 0.40745),
-    'Illuminant B': (0.34842, 0.35161),
-    'Illuminant C': (0.31006, 0.31616),
-    'Illuminant D50': (0.34567, 0.35850),
-    'Illuminant D55': (0.33242, 0.34743),
-    'Illuminant D65': (0.31272, 0.32903),
-    'Illuminant D75': (0.29902, 0.31485),
-    'Illuminant D93': (0.28315, 0.29711),
-    'Illuminant E': (1/3, 1/3),
-    'Vega': spectrum_to_white_point(vega_SI),
-    'Sun': spectrum_to_white_point(sun_SI),
-}
-
 
 class ColorSystem:
     """
@@ -1897,13 +1861,13 @@ class ColorSystem:
         self.color_space_name = color_space
         self.white_point_name = white_point
         # Reading color space coordinates
-        self.color_space = np.array(supported_color_spaces[color_space]).T
+        self.color_space = np.array(self.supported_color_spaces[color_space]).T
         # Converting reduced (x, y) coordinates back to (x, y, z=1-x-y)
         self.color_space =  np.vstack((self.color_space, 1 - self.color_space.sum(axis=0)))
         # Calculate the inverse chromaticity matrix
         inv_matrix = np.linalg.inv(self.color_space)
         # White scaling array
-        self.white_point = supported_white_points[white_point]
+        self.white_point = self.supported_white_points[white_point]
         self.white_point = np.array((*self.white_point, 1 - np.sum(self.white_point)))
         white_scale = inv_matrix.dot(self.white_point)
         # XYZ -> RGB transformation matrix
@@ -1919,6 +1883,42 @@ class ColorSystem:
         """ Converts RGB color array into the XYZ color space array """
         # 1D implementation: rgb = self.inv_matrix.T.dot(xyz)
         return np.tensordot(self.inv_matrix, arr, axes=(1, 0))
+
+    @staticmethod
+    def spectrum_to_white_point(spectrum: Spectrum) -> np.ndarray:
+        """ Returns (x, y) coordinates of the spectrum on the chromaticity diagram """
+        xyz = (spectrum @ xyz_cmf).br
+        return xyz[:2] / xyz.sum()
+
+    # Values are Color Primaries: (red, green, blue)
+    # See https://en.wikipedia.org/wiki/RGB_color_spaces
+    supported_color_spaces = {
+        'CIE XYZ': ((1, 0), (0, 1), (0, 0)),
+        'CIE RGB': ((0.73474284, 0.26525716), (0.27377903, 0.7174777), (0.16655563, 0.00891073)),
+        'sRGB': ((0.64, 0.33), (0.30, 0.60), (0.15, 0.06)),
+        'Display P3': ((0.68, 0.32), (0.265, 0.69), (0.15, 0.06)),
+        'Adobe RGB': ((0.64, 0.33), (0.21, 0.71), (0.15, 0.06)),
+        'Wide Gamut': ((0.7347, 0.2653), (0.1152, 0.8264), (0.1566, 0.0177)),
+        'ProPhoto RGB': ((0.734699, 0.265301), (0.159597, 0.840403), (0.036598, 0.000105)),
+        'HDTV': ((0.67, 0.33), (0.21, 0.71), (0.15, 0.06)),
+        'UHDTV': ((0.708, 0.292), (0.170, 0.797), (0.13, 0.046)),
+    }
+
+    # Values are (x, y) coordinates
+    # https://en.wikipedia.org/wiki/Standard_illuminant#White_points_of_standard_illuminants
+    supported_white_points = {
+        'Illuminant A': (0.44758, 0.40745),
+        'Illuminant B': (0.34842, 0.35161),
+        'Illuminant C': (0.31006, 0.31616),
+        'Illuminant D50': (0.34567, 0.35850),
+        'Illuminant D55': (0.33242, 0.34743),
+        'Illuminant D65': (0.31272, 0.32903),
+        'Illuminant D75': (0.29902, 0.31485),
+        'Illuminant D93': (0.28315, 0.29711),
+        'Illuminant E': (1/3, 1/3),
+        'Vega': spectrum_to_white_point(vega_SI),
+        'Sun': spectrum_to_white_point(sun_SI),
+    }
 
 
 xyz_color_system = ColorSystem('CIE XYZ', 'Illuminant E')
