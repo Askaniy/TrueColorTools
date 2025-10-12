@@ -84,7 +84,7 @@ def launch_window(lang: str):
 
     # Setting plots templates
     light_theme = False
-    plot_data = [] # for tabs 1 and 3, both at once
+    pinned_spectra_and_colors = {} # for tabs 1 and 3, both at once
     mean_spectrum = [] # for tab 2
 
     # Default values to avoid errors
@@ -97,12 +97,12 @@ def launch_window(lang: str):
     def tab1_tab3_update_plot(fig, fig_canvas_agg, current_tab, light_theme: bool, lang: str):
         pl.close_figure(fig)
         fig_canvas_agg.get_tk_widget().forget()
-        list_to_plot = deepcopy(plot_data)
-        if current_tab == 'tab1' and tab1_obj_name and tab1_spectrum not in list_to_plot:
-            list_to_plot.append((tab1_spectrum, tab1_html))
-        if current_tab == 'tab3' and tab3_obj_name and tab3_spectrum not in list_to_plot:
-            list_to_plot.append((tab3_spectrum, tab3_html))
-        fig = pl.plot_spectra(list_to_plot, light_theme, lang, spectra_figsize, spectra_dpi)
+        dict_to_plot = deepcopy(pinned_spectra_and_colors)
+        if current_tab == 'tab1' and tab1_obj_name and tab1_spectrum not in dict_to_plot:
+            dict_to_plot |= {tab1_spectrum: tab1_html}
+        if current_tab == 'tab3' and tab3_obj_name and tab3_spectrum not in dict_to_plot:
+            dict_to_plot |= {tab3_spectrum: tab3_html}
+        fig = pl.plot_spectra(dict_to_plot, light_theme, lang, spectra_figsize, spectra_dpi)
         fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, fig)
         return fig, fig_canvas_agg
 
@@ -153,12 +153,12 @@ def launch_window(lang: str):
             else:
                 pl.close_figure(tab1_tab3_fig)
                 tab1_tab3_fig_canvas_agg.get_tk_widget().forget()
-            list_to_plot = deepcopy(plot_data)
-            if tab1_obj_name and tab1_spectrum not in list_to_plot:
-                list_to_plot.append((tab1_spectrum, tab1_html))
-            if tab3_obj_name and tab3_spectrum not in list_to_plot:
-                list_to_plot.append((tab3_spectrum, tab3_html))
-            tab1_tab3_fig = pl.plot_spectra(list_to_plot, light_theme, lang, spectra_figsize, spectra_dpi)
+            dict_to_plot = deepcopy(pinned_spectra_and_colors)
+            if tab1_obj_name and tab1_spectrum not in dict_to_plot.keys():
+                dict_to_plot |= {tab1_spectrum: tab1_html}
+            if tab3_obj_name and tab3_spectrum not in dict_to_plot.keys():
+                dict_to_plot |= {tab3_spectrum: tab3_html}
+            tab1_tab3_fig = pl.plot_spectra(dict_to_plot, light_theme, lang, spectra_figsize, spectra_dpi)
             tab1_tab3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, tab1_tab3_fig)
         elif event == 'W1_path':
             tab1_tab3_fig.savefig(values['W1_path'], dpi=133.4) # 1200x800
@@ -346,11 +346,11 @@ def launch_window(lang: str):
                     window['tab1_list'].update(tuple(tab1_displayed_namesDB.keys()))
 
                 elif event == 'tab1_pin' and values['tab1_list'] != []:
-                    if tab1_spectrum not in plot_data:
-                        plot_data.append((tab1_spectrum, tab1_html))
+                    if tab1_spectrum not in pinned_spectra_and_colors.keys():
+                        pinned_spectra_and_colors |= {tab1_spectrum: tab1_html}
 
                 elif event == 'tab1_clear':
-                    plot_data = []
+                    pinned_spectra_and_colors = {}
                     if window1:
                         tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
@@ -494,8 +494,8 @@ def launch_window(lang: str):
                         tab2_opened = True
                     else:
                         pl.close_figure(tab2_fig)
-                        tab2_list_to_plot = [*tab2_filters, *mean_spectrum]
-                        tab2_fig = pl.plot_filters(tab2_list_to_plot, color_system, lang, filters_figsize, filters_dpi)
+                        tab2_dict_to_plot = [*tab2_filters, *mean_spectrum]
+                        tab2_fig = pl.plot_filters(tab2_dict_to_plot, color_system, lang, filters_figsize, filters_dpi)
                         tab2_fig_canvas_agg.get_tk_widget().forget()
                     tab2_fig_canvas_agg = pl.draw_figure(window['tab2_canvas'].TKCanvas, tab2_fig)
 
@@ -543,11 +543,11 @@ def launch_window(lang: str):
                     window['tab3_slider1'].update(range=(0, int(values['tab3_maxtemp_num'])))
 
                 elif event == 'tab3_pin':
-                    if tab3_spectrum not in plot_data:
-                        plot_data.append((tab3_spectrum, tab3_html))
+                    if tab3_spectrum not in pinned_spectra_and_colors.keys():
+                        pinned_spectra_and_colors |= {tab3_spectrum: tab3_html}
 
                 elif event == 'tab3_clear':
-                    plot_data = []
+                    pinned_spectra_and_colors = {}
                     if window1:
                         tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg,

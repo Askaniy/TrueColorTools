@@ -50,7 +50,7 @@ def draw_figure(canvas, figure: Figure):
     return figure_canvas_agg
 
 
-def plot_spectra(list_to_plot: Sequence, light_theme: bool, lang: str, figsize: tuple, dpi: int):
+def plot_spectra(dict_to_plot: dict[Spectrum, str], light_theme: bool, lang: str, figsize: tuple[float], dpi: int):
     """ Creates a figure with plotted spectra from the input list """
     with rc_context(themes[int(light_theme)]):
         fig, ax = plt.subplots(1, 1, figsize=figsize, dpi=dpi)
@@ -58,14 +58,14 @@ def plot_spectra(list_to_plot: Sequence, light_theme: bool, lang: str, figsize: 
         ax.set_ylabel(tr.yaxis_text[lang])
         # Determining the scale for CMFs in the background
         max_y = []
-        for spectrum, color in list_to_plot:
+        for spectrum in dict_to_plot.keys():
             max_y.append(spectrum.br.max())
         k = max(max_y) / cmfs[2].br.max() if len(max_y) != 0 else 1
         # Plotting the CMFs
         for i, cmf in enumerate(cmfs):
             ax.plot(cmf.nm, cmf.br * k, color=rgb_muted[i])
         # Plotting the spectra
-        for spectrum, color in list_to_plot:
+        for spectrum, color in dict_to_plot.items():
             spectrum = spectrum.define_on_range(visible_range)
             ax.plot(spectrum.nm, spectrum.br, label=spectrum.name(lang), color=color)
             if spectrum.photospectrum is not None:
