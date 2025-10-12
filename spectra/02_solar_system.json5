@@ -423,17 +423,17 @@
         'Spectral evidence for a carbonaceous chondrite surface composition on Deimos',
         'https://www.nature.com/articles/283277a0'
     ],
-    'Thomas1996': [
-        'The Surface of Deimos: Contribution of Materials and Processes to Its Unique Appearance',
-        'DOI: 10.1006/icar.1996.0177', 'https://www.sciencedirect.com/science/article/pii/S0019103596901773',
-        'https://ui.adsabs.harvard.edu/abs/1996Icar..123..536T/abstract'
+    'Wargnier2025': [
+        'Deimos photometric properties: analysis of 20 years of observations (2004-2024) by the Mars Express HRSC camera',
+        'DOI: 10.48550/arXiv.2509', 'https://arxiv.org/abs/2509.12804',
+        'https://ui.adsabs.harvard.edu/abs/2025arXiv250912804W/abstract'
     ],
-    'Deimos (M II) | Fraeman2013, Pang1980, Thomas1996': {
+    'Deimos (M II) | Fraeman2013, Pang1980, Wargnier2025': {
         tags: ['featured', 'Solar System', 'natural satellite/regular moon'],
         nm: [250, 300, 350, 400, 450, 500, 550, 600, 700, 750, 800],
         br: [0.04, 0.05, 0.051, 0.05, 0.049, 0.053, 0.055, 0.058, 0.062, 0.067, 0.069],
-        geometric_albedo: [540, [0.068, 0.007]],
-        phase_integral: [0.39, 0.02],
+        geometric_albedo: ['MEX_SRC.Pan', [0.080, 0.001]], // Table 4
+        spherical_albedo: ['MEX_SRC.Pan', [0.018, 0.001]], // Table 4
     },
 
     // Jovian system
