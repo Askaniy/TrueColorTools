@@ -766,16 +766,36 @@ class Spectrum(_SpectralObject):
         """
         Returns a new Spectrum object with zero brightness to the edges added.
         This is necessary to mitigate the consequences of abruptly cutting off filter profiles.
+        The function also removes extra zeros on the edges, if there are any.
+        Changes here affect extrapolation and the filter system since zero edges are checked.
         """
         profile = deepcopy(self)
-        #limit = profile.br.max() * 0.1 # adding point if an edge brightness higher than 10% of the peak
-        # Now always adding zeroes because it affects on extrapolation and filter system
         if profile.br[0] != 0:
+            # Case of no zero on the left edge, adding
             profile.nm = np.append(profile.nm[0]-nm_step, profile.nm)
             profile.br = np.append(0., profile.br)
+        elif profile.br[1] == 0:
+            # Case two or more zeroes on the left edge, clipping
+            index = 2
+            for i in range(2, profile.nm_len):
+                if profile.br[i] != 0:
+                    index = i - 1
+                    break
+            profile.nm = profile.nm[index:]
+            profile.br = profile.br[index:]
         if profile.br[-1] != 0:
+            # Case of no zero on the right edge, adding
             profile.nm = np.append(profile.nm, profile.nm[-1]+nm_step)
             profile.br = np.append(profile.br, 0.)
+        elif profile.br[-2] == 0:
+            # Case two or more zeroes on the right edge, clipping
+            index = -3
+            for i in range(-3, -profile.nm_len, -1):
+                if profile.br[i] != 0:
+                    index = i + 2
+                    break
+            profile.nm = profile.nm[:index]
+            profile.br = profile.br[:index]
         return profile
 
     def define_on_range(self, nm_arr: np.ndarray, crop: bool = False):
