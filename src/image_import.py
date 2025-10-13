@@ -46,7 +46,7 @@ def bw_reader(file: str) -> np.ndarray:
         br = br[np.argmax(br.sum(axis=(1,2)))]
     return br
 
-def bw_list_reader(files: Sequence, formulas: list) -> np.ndarray:
+def bw_list_reader(files: Sequence[str], formulas: list[str]) -> np.ndarray:
     """ Imports and combines the list of black and white images into one array """
     br = np.stack([eval(formula, {'x': bw_reader(file)}) for file, formula in zip(files, formulas)])
     return br
@@ -55,13 +55,23 @@ def to_supported_mode(mode: str):
     """ Corresponds the image mode of the Pillow library and supported one """
     # https://pillow.readthedocs.io/en/latest/handbook/concepts.html#concept-modes
     match mode:
-        case 'P' | 'PA' | 'RGB' | 'RGBA' | 'RGBX' | 'RGBa' | 'CMYK' | 'YCbCr' | 'LAB' | 'HSV': # 8-bit indexed color palette, alpha channels, color spaces
+        case 'P' | 'RGB' | 'RGBX' | 'CMYK' | 'YCbCr' | 'LAB' | 'HSV':
+            # 8-bit int color
             return 'RGB'
-        case 'L' | 'La' | 'LA': # 8-bit int grayscale
+        case 'PA' | 'RGBA' | 'RGBa':
+            # 8-bit int color with alpha channel
+            return 'RGB' # return 'RGBA' for alpha channel support
+        case 'L':
+            # 8-bit int grayscale
             return 'L'
-        case 'I' | 'I;16' | 'I;16L' | 'I;16B' | 'I;16N' | 'BGR;15' | 'BGR;16' | 'BGR;24': # 32-bit grayscale
+        case 'La' | 'LA':
+            # 8-bit int grayscale with alpha channel
+            return 'L' # return 'LA' for alpha channel support
+        case 'I' | 'I;16' | 'I;16L' | 'I;16B' | 'I;16N':
+            # 32-bit int grayscale
             return 'I'
-        case 'F': # 32-bit float grayscale
+        case 'F':
+            # 32-bit float grayscale
             return 'F'
         case _:
             print(f'Mode {mode} is not recognized. Would be processed as RGB image.')
@@ -70,11 +80,14 @@ def to_supported_mode(mode: str):
 def color_depth(mode: str):
     """ Corresponds the image mode of the Pillow library and its bitness """
     match mode:
-        case 'RGB' | 'L': # 8-bit int
+        case 'RGB' | 'L':
+            # 8-bit int
             return 255
-        case 'I': # 32-bit int
+        case 'I':
+            # 32-bit int
             return 65535
-        case 'F': # 32-bit float
+        case 'F':
+            # 32-bit float
             return 1
         case _:
             print(f'Mode {mode} is not supported. Would be processed as 8-bit image.')
