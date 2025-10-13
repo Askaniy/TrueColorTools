@@ -57,11 +57,11 @@ def to_supported_mode(mode: str):
     match mode:
         case 'P' | 'PA' | 'RGB' | 'RGBA' | 'RGBX' | 'RGBa' | 'CMYK' | 'YCbCr' | 'LAB' | 'HSV': # 8-bit indexed color palette, alpha channels, color spaces
             return 'RGB'
-        case 'L' | 'La' | 'LA': # 8-bit grayscale
+        case 'L' | 'La' | 'LA': # 8-bit int grayscale
             return 'L'
         case 'I' | 'I;16' | 'I;16L' | 'I;16B' | 'I;16N' | 'BGR;15' | 'BGR;16' | 'BGR;24': # 32-bit grayscale
             return 'I'
-        case 'F': # 32-bit floating point grayscale
+        case 'F': # 32-bit float grayscale
             return 'F'
         case _:
             print(f'Mode {mode} is not recognized. Would be processed as RGB image.')
@@ -70,10 +70,12 @@ def to_supported_mode(mode: str):
 def color_depth(mode: str):
     """ Corresponds the image mode of the Pillow library and its bitness """
     match mode:
-        case 'RGB' | 'L': # 8 bit
+        case 'RGB' | 'L': # 8-bit int
             return 255
-        case 'I' | 'F': # 32 bit
+        case 'I': # 32-bit int
             return 65535
+        case 'F': # 32-bit float
+            return 1
         case _:
             print(f'Mode {mode} is not supported. Would be processed as 8-bit image.')
             return 255
