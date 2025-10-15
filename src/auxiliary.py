@@ -279,16 +279,22 @@ def extrapolating(x: np.ndarray, y: np.ndarray, sd: np.ndarray, x_arr: np.ndarra
     The exponential growth of uncertainty is completely arbitrary and needs to be investigated.
     """
     obj_shape = y.shape[1:] # (,) for 1D; (n,) for 2D; (w, h) for 3D
-    if sd is None:
-        sd = np.zeros_like(y)
-        sd_left = sd_right = 0.
+    if len(obj_shape) == 2:
+        # currently broken for spectral cubes
+        is_cube = True
     else:
-        sd_left = sd[0]
-        sd_right = sd[-1]
+        is_cube = False
+        if sd is None:
+            sd = np.zeros_like(y)
+            sd_left = sd_right = 0.
+        else:
+            sd_left = sd[0]
+            sd_right = sd[-1]
     if len(x) == 1: # filling with equal-energy spectrum
         x1 = grid(min(x_arr[0], x[0]), max(x_arr[-1], x[0]), step)
         y1 = higher_dim(y[0], x1.size, axis=0)
-        sd = extrap_sd(y[0], np.abs(x1 - x[0]))
+        if not is_cube:
+            sd = extrap_sd(y[0], np.abs(x1 - x[0]))
         x = x1
         y = y1
     else:
@@ -309,10 +315,12 @@ def extrapolating(x: np.ndarray, y: np.ndarray, sd: np.ndarray, x_arr: np.ndarra
                     diff = np.average(np.diff(y_arr, axis=0), weights=avg_weights[:-1], axis=0)
                     corner_y = np.average(y_arr, weights=avg_weights, axis=0) - diff * avg_steps * weights_center_of_mass
                 y1 = custom_extrap(x1, diff/step, x[0], corner_y)
-                sd1 = sd_left + expand_1D_array(extrap_sd(corner_y, np.arange(x[0]-x_arr[0], 0, -step) - step), obj_shape)
+                if not is_cube:
+                    sd1 = sd_left + expand_1D_array(extrap_sd(corner_y, np.arange(x[0]-x_arr[0], 0, -step) - step), obj_shape)
             x = np.append(x1, x)
             y = np.append(y1, y, axis=0)
-            sd = np.append(sd1, sd, axis=0)
+            if not is_cube:
+                sd = np.append(sd1, sd, axis=0)
         if x[-1] < x_arr[-1]:
             # Extrapolation to red
             x1 = np.arange(x[-1], x_arr[-1], step) + step
@@ -329,12 +337,17 @@ def extrapolating(x: np.ndarray, y: np.ndarray, sd: np.ndarray, x_arr: np.ndarra
                     diff = np.average(np.diff(y_arr, axis=0), weights=avg_weights[1:], axis=0)
                     corner_y = np.average(y_arr, weights=avg_weights, axis=0) + diff * avg_steps * weights_center_of_mass
                 y1 = custom_extrap(x1, diff/step, x[-1], corner_y)
-                sd1 = sd_right + expand_1D_array(extrap_sd(corner_y, np.arange(0, x_arr[-1]-x[-1], step)), obj_shape)
+                if not is_cube:
+                    sd1 = sd_right + expand_1D_array(extrap_sd(corner_y, np.arange(0, x_arr[-1]-x[-1], step)), obj_shape)
             x = np.append(x, x1)
             y = np.append(y, y1, axis=0)
-            sd = np.append(sd, sd1, axis=0)
-    if sd.sum() == 0:
+            if not is_cube:
+                sd = np.append(sd, sd1, axis=0)
+    if is_cube:
         sd = None
+    else:
+        if sd.sum() == 0:
+            sd = None
     return x, y, sd
 
 
