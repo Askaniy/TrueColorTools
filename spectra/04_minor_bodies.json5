@@ -19,7 +19,8 @@
     ],
     'Boehnhardt2014': [
         'Photometry of Transneptunian Objects for the Herschel Key Program ‘TNOs are Cool’',
-        'DOI: 10.1007/s11038-014-9450-x', 'https://link.springer.com/article/10.1007/s11038-014-9450-x'
+        'DOI: 10.1007/s11038-014-9450-x', 'https://link.springer.com/article/10.1007/s11038-014-9450-x',
+        'https://ui.adsabs.harvard.edu/abs/2014EM&P..114...35B/abstract'
     ],
     'Collyer2025a': [
         'The Surfaces of Small to Midsize Plutinos: Evidence of an Association between Inclination and Surface Type',
@@ -75,11 +76,13 @@
     ],
     'Markwardt2023': [
         'Photometric Survey of neptune trojan Asteroids. I. The Color Distribution',
-        'DOI: 10.3847/PSJ/ace528', 'https://iopscience.iop.org/article/10.3847/PSJ/ace528'
+        'DOI: 10.3847/PSJ/ace528', 'https://iopscience.iop.org/article/10.3847/PSJ/ace528',
+        'https://ui.adsabs.harvard.edu/abs/2023PSJ.....4..135M/abstract'
     ],
     'Ortiz2019': [
         'Stellar Occultations by Transneptunian objects: from Predictions to Observations and Prospects for the Future',
-        'DOI: 10.48550/arXiv.1905.04335', 'https://ui.adsabs.harvard.edu/abs/2019arXiv190504335O/abstract'
+        'DOI: 10.48550/arXiv.1905.04335', 'https://arxiv.org/abs/1905.04335',
+        'https://ui.adsabs.harvard.edu/abs/2019arXiv190504335O/abstract'
     ],
     'Pravec2012': [
         'Absolute magnitudes of asteroids and a revision of asteroid albedo estimates from WISE thermal observations',
@@ -93,7 +96,8 @@
     ],
     'Thirouin2019': [
         'Colors of Trans-Neptunian Contact Binaries',
-        'DOI: 10.3847/1538-3881/ab27bc', 'https://iopscience.iop.org/article/10.3847/1538-3881/ab27bc'
+        'DOI: 10.3847/1538-3881/ab27bc', 'https://iopscience.iop.org/article/10.3847/1538-3881/ab27bc',
+        'https://ui.adsabs.harvard.edu/abs/2019AJ....158...53T/abstract'
     ],
     'Tholen2020': [
         'Asteroid Absolute Magnitudes and Slopes',
@@ -116,11 +120,13 @@
     ],
     'Mottola2023a': [
         'Shape Models of Lucy Targets (3548) Eurybates and (21900) Orus from Disk-integrated Photometry',
-        'DOI: 10.3847/PSJ/acaf79', 'https://ui.adsabs.harvard.edu/abs/2023PSJ.....4...18M/abstract'
+        'DOI: 10.3847/PSJ/acaf79', 'https://iopscience.iop.org/article/10.3847/PSJ/acaf79/meta',
+        'https://ui.adsabs.harvard.edu/abs/2023PSJ.....4...18M/abstract'
     ],
     'PinillaAlonso2008': [
         'Visible spectroscopy in the neighborhood of 2003 EL61',
-        'DOI: 10.1051/0004-6361:200810226', 'https://ui.adsabs.harvard.edu/abs/2008A%26A...489..455P/abstract'
+        'DOI: 10.1051/0004-6361:200810226', 'https://www.aanda.org/articles/aa/full/2008/37/aa10226-08/aa10226-08.html',
+        'https://ui.adsabs.harvard.edu/abs/2008A%26A...489..455P/abstract'
     ],
     'SsODNet': [
         'SsODNet: Solar system Open Database Network',
@@ -322,7 +328,8 @@
     ],
     'Williams2025': [
         'Visible spectroscopy of 3 KBOs and 1 Centaur',
-        'DOI: 10.1016/j.icarus.2025.116554', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103525001010'
+        'DOI: 10.1016/j.icarus.2025.116554', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103525001010',
+        'https://ui.adsabs.harvard.edu/abs/2025Icar..43416554W/abstract'
     ],
     'Benecchi2013': [
         'Light Curves of 32 Large Transneptunian Objects',
@@ -331,7 +338,8 @@
     ],
     'Storrs2025': [
         'Asteroid Companions in the Visible: WFPC 2 Images',
-        'DOI: 10.3847/PSJ/adef30', 'https://iopscience.iop.org/article/10.3847/PSJ/adef30/meta'
+        'DOI: 10.3847/PSJ/adef30', 'https://iopscience.iop.org/article/10.3847/PSJ/adef30/meta',
+        'https://ui.adsabs.harvard.edu/abs/2025PSJ.....6..201S/abstract'
     ],
 
     'Li2019': [
@@ -569,7 +577,8 @@
     },
     'Müller2004': [
         '65 Cybele in the thermal infrared: Multiple observations and thermophysical analysis',
-        'DOI: 10.1051/0004-6361:20040025', 'https://www.aanda.org/articles/aa/abs/2004/16/aa4002/aa4002.html'
+        'DOI: 10.1051/0004-6361:20040025', 'https://www.aanda.org/articles/aa/abs/2004/16/aa4002/aa4002.html',
+        'https://ui.adsabs.harvard.edu/abs/2004A&A...418..347M/abstract'
     ],
     '(65) Cybele | SMASS, Müller2004, Lagerkvist1990': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -730,7 +739,8 @@
     },
     'Veverka1996': [
         'Dactyl: Galileo Observations of Ida’s Satellite',
-        'DOI: 10.1006/icar.1996.0045', 'https://www.sciencedirect.com/science/article/pii/S0019103596900457'
+        'DOI: 10.1006/icar.1996.0045', 'https://www.sciencedirect.com/science/article/pii/S0019103596900457',
+        'https://ui.adsabs.harvard.edu/abs/1996Icar..120..200V/abstract'
     ],
     '(243) Ida: Bright areas | Veverka1996, Helfenstein1996': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Galileo target'],
@@ -871,7 +881,8 @@
     },
     'Chatelain2016': [
         'Photometric colors of the brightest members of the Jupiter L5 Trojan cloud',
-        'DOI: 10.1016/j.icarus.2016.01.026', 'https://ui.adsabs.harvard.edu/abs/2016Icar..271..158C/abstract'
+        'DOI: 10.1016/j.icarus.2016.01.026', 'https://www.sciencedirect.com/science/article/pii/S0019103516000397',
+        'https://ui.adsabs.harvard.edu/abs/2016Icar..271..158C/abstract'
     ],
     'Mueller2010': [
         'Eclipsing binary Trojan asteroid Patroclus: Thermal inertia from Spitzer observations',
@@ -1133,7 +1144,7 @@
     },
     'Dutra2024': [
         'Physical Characteristics of Jupiter’s Trojan (1437) Diomedes from a Tri-chord Stellar Occultation in 2020 and Dimensionless 3D Model',
-        'DOI: 10.48550/arXiv.2412.01568', 'https://arxiv.org/abs/2412.01568',
+        'DOI: 10.1098/rsta.2024.0187', 'https://arxiv.org/abs/2412.01568',
         'https://ui.adsabs.harvard.edu/abs/2025RSPTA.38340187D/abstract'
     ],
     '(1437) Diomedes | GaiaDR3, Dutra2024, SsODNet': {
@@ -1520,7 +1531,8 @@
     },
     'Bach2019': [
         'The Geometric Albedo of (4179) Toutatis Estimated from KMTNet DEEP-South Observations',
-        'DOI: 10.5303/JKAS.2019.52.3.71', 'https://ui.adsabs.harvard.edu/abs/2019JKAS...52...71B/abstract'
+        'DOI: 10.5303/JKAS.2019.52.3.71', 'https://arxiv.org/abs/1905.08576',
+        'https://ui.adsabs.harvard.edu/abs/2019JKAS...52...71B/abstract'
     ],
     'Spencer1995': [
         'The lightcurve of 4179 Toutatis: Evidence for complex rotation.',
@@ -1874,7 +1886,8 @@
     },
     'Mottola2020': [
         'Convex Shape and Rotation Model of Lucy Target (11351) Leucus from Lightcurves and Occultations',
-        'DOI: 10.3847/PSJ/abb942', 'https://iopscience.iop.org/article/10.3847/PSJ/abb942'
+        'DOI: 10.3847/PSJ/abb942', 'https://iopscience.iop.org/article/10.3847/PSJ/abb942',
+        'https://ui.adsabs.harvard.edu/abs/2020PSJ.....1...73M/abstract'
     ],
     '(11351) Leucus | Humes2022, Mottola2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan', 'spacecraft target/Lucy target'],
@@ -1972,7 +1985,8 @@
     },
     'Buie2018': [
         'Light Curves of Lucy Targets: Leucus and Polymele',
-        'DOI: 10.3847/1538-3881/aabd81', 'https://ui.adsabs.harvard.edu/abs/2018AJ....155..245B/abstract'
+        'DOI: 10.3847/1538-3881/aabd81', 'https://iopscience.iop.org/article/10.3847/1538-3881/aabd81/meta',
+        'https://ui.adsabs.harvard.edu/abs/2018AJ....155..245B/abstract'
     ],
     '(15094) Polymele | MBOSS, Buie2018': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan', 'spacecraft target/Lucy target'],
@@ -1981,7 +1995,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.073],
-        phase_function: ['HG', {H: [11.691, 0.002], G: [0.22, 0.02]}], // r-band
+        phase_function: ['SLOAN_SDSS.r', 'HG', {H: [11.691, 0.002], G: [0.22, 0.02]}],
     },
     '(15502) Hypeirochus | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -2399,7 +2413,8 @@
     },
     'Lowry2005': [
         'Physical properties of Asteroid (25143) Itokawa — Target of the Hayabusa sample return mission',
-        'DOI: 10.1016/j.icarus.2005.02.002', 'https://ui.adsabs.harvard.edu/abs/2005Icar..176..408L/abstract'
+        'DOI: 10.1016/j.icarus.2005.02.002', 'https://www.sciencedirect.com/science/article/pii/S0019103505000412',
+        'https://ui.adsabs.harvard.edu/abs/2005Icar..176..408L/abstract'
     ],
     'Tatsumi2018': [
         'Vis-NIR disk-integrated photometry of asteroid 25143 Itokawa around opposition by AMICA/Hayabusa',
@@ -3012,7 +3027,7 @@
     },
     'Thirouin2025': [
         'Logos-Zoe: A contact binary triple system in the trans-neptunian belt',
-        'DOI: 10.3847/1538-3881/adcf24', 'https://arxiv.org/abs/2504.15363',
+        'DOI: 10.3847/1538-3881/adcf24', 'https://iopscience.iop.org/article/10.3847/1538-3881/adcf24',
         'https://ui.adsabs.harvard.edu/abs/2025AJ....169..316T/abstract'
     ],
     '(58534) Logos | MBOSS, Thirouin2025': {
@@ -3248,6 +3263,27 @@
         color_indices: {'B-V': [0.820, 0.170], 'V-R': [0.646, 0.058], 'R-I': [0.647, 0.062]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.236, +0.438, -0.077]], // system albedo
+    },
+    'Noll2004': [
+        'The orbit, mass, and albedo of transneptunian binary (66652) 1999 RZ253',
+        'DOI: 10.1016/j.icarus.2004.06.009', 'https://www.sciencedirect.com/science/article/pii/S0019103504002040',
+        'https://ui.adsabs.harvard.edu/abs/2004Icar..172..402N/abstract'
+    ],
+    '(66652) Borasisi | Noll2004, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO/cold classical TNO'],
+        photometric_system: 'HST_ACS_HRC',
+        filters: ['F475W', 'F775W', 1129, 1607],
+        br: [0.115, 0.214, 0.441, 0.463], // extracted from Fig. 4
+        sd: [0.012, 0.009, 0.019, 0.017], // extracted from Fig. 4
+        geometric_albedo: ['Generic_Bessell.V', [0.236, +0.438, -0.077]], // system albedo
+    },
+    '(66652 I) Pabu | Noll2004, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO/cold classical TNO', 'natural satellite/minor planet moon'],
+        photometric_system: 'HST_ACS_HRC',
+        filters: ['F475W', 'F775W', 1129, 1607],
+        br: [0.116, 0.234, 0.414, 0.457], // extracted from Fig. 4
+        sd: [0.011, 0.008, 0.016, 0.013], // extracted from Fig. 4
         geometric_albedo: ['Generic_Bessell.V', [0.236, +0.438, -0.077]], // system albedo
     },
     '(69986) 1998 WW24 | MBOSS': {
@@ -3516,7 +3552,8 @@
     },
     'Brown2010': [
         'The Size, Density, and Formation of the Orcus-Vanth System in the Kuiper Belt',
-        'DOI: 10.1088/0004-6256/139/6/2700', 'https://iopscience.iop.org/article/10.1088/0004-6256/139/6/2700'
+        'DOI: 10.1088/0004-6256/139/6/2700', 'https://iopscience.iop.org/article/10.1088/0004-6256/139/6/2700',
+        'https://ui.adsabs.harvard.edu/abs/2010AJ....139.2700B/abstract'
     ],
     'Brown2018': [
         'Medium-sized Satellites of Large Kuiper Belt Objects',
@@ -4650,7 +4687,8 @@
     ],
     'Yokota2021': [
         'Opposition Observations of 162173 Ryugu: Normal Albedo Map Highlights Variations in Regolith Characteristics',
-        'DOI: 10.3847/PSJ/ac14ba', 'https://iopscience.iop.org/article/10.3847/PSJ/ac14ba'
+        'DOI: 10.3847/PSJ/ac14ba', 'https://iopscience.iop.org/article/10.3847/PSJ/ac14ba',
+        'https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..177Y/abstract'
     ],
     '(162173) Ryugu | Yokota2021': {
         tags: ['featured', 'Solar System', 'minor body/asteroid/NEO/Apollo', 'spacecraft target/Hayabusa2 target'],
@@ -4713,7 +4751,8 @@
     ],
     'Grundy2015': [
         'The mutual orbit, mass, and density of the large transneptunian binary system Varda and Ilmarë',
-        'DOI: 10.1016/j.icarus.2015.04.036', 'https://arxiv.org/abs/1505.00510'
+        'DOI: 10.1016/j.icarus.2015.04.036', 'https://arxiv.org/abs/1505.00510',
+        'https://ui.adsabs.harvard.edu/abs/2015Icar..257..130G/abstract'
     ],
     '(174567) Varda | Grundy2015, Souami2020': {
         tags: ['featured', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
@@ -4861,7 +4900,8 @@
     },
     'Grundy2018': [
         'The mutual orbit, mass, and density of transneptunian binary Gǃkúnǁʼhòmdímà (229762 2007 UK126)',
-        'DOI: 10.1016/j.icarus.2018.12.037', 'http://www2.lowell.edu/users/grundy/abstracts/2019.G-G.html'
+        'DOI: 10.1016/j.icarus.2018.12.037', 'http://www2.lowell.edu/users/grundy/abstracts/2019.G-G.html',
+        'https://ui.adsabs.harvard.edu/abs/2019Icar..334...30G/abstract'
     ],
     '(229762) Gǃkúnǁʼhòmdímà | Grundy2018, Ortiz2019': {
         tags: ['Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/midsize TNO'],
@@ -5608,7 +5648,7 @@
     },
     'GomezLimon2025': [
         'Size and shape of the trans-Neptunian object (470316) 2007 OC10: Comparison with thermal data',
-        'DOI: 10.1051/0004-6361/202453540', 'https://arxiv.org/abs/2504.02457',
+        'DOI: 10.1051/0004-6361/202453540', 'https://www.aanda.org/articles/aa/full_html/2025/05/aa53540-24/aa53540-24.html',
         'https://ui.adsabs.harvard.edu/abs/2025A%26A...697A.157G/abstract'
     ],
     '(470316) 2007 OC10 | MBOSS, GomezLimon2025': {
@@ -5694,11 +5734,13 @@
     },
     'Cruikshank2020': [
         'Organic Components of Small Bodies in the Outer Solar System: Some Results of the New Horizons Mission',
-        'DOI: 10.3390/life10080126', 'https://www.mdpi.com/2075-1729/10/8/126'
+        'DOI: 10.3390/life10080126', 'https://www.mdpi.com/2075-1729/10/8/126',
+        'https://ui.adsabs.harvard.edu/abs/2020Life...10..126C/abstract'
     ],
     'Hofgartner2021': [
         'Photometry of Kuiper Belt Object (486958) Arrokoth from New Horizons LORRI',
-        'DOI: 10.1016/j.icarus.2020.113723', 'https://ui.adsabs.harvard.edu/abs/2021Icar..35613723H/abstract'
+        'DOI: 10.1016/j.icarus.2020.113723', 'https://www.sciencedirect.com/science/article/pii/S0019103520301147',
+        'https://ui.adsabs.harvard.edu/abs/2021Icar..35613723H/abstract'
     ],
     '(486958) Arrokoth | Cruikshank2020, Hofgartner2021': {
         tags: ['featured', 'Solar System', 'minor body/TNO/classical TNO', 'Arrokoth', 'spacecraft target/New Horizons target'],
@@ -5890,7 +5932,7 @@
         is_reflecting_sunlight: true,
     },
     'Bannister2016': [
-        'OSSOS. IV. DISCOVERY OF A DWARF PLANET CANDIDATE IN THE 9:2 RESONANCE WITH NEPTUNE',
+        'OSSOS. IV. Discovery of a Dwarf Planet Candidate in the 9:2 Resonance with Neptune',
         'DOI: 10.3847/0004-6256/152/6/212', 'https://iopscience.iop.org/article/10.3847/0004-6256/152/6/212',
         'https://ui.adsabs.harvard.edu/abs/2016AJ....152..212B/abstract'
     ],
@@ -6069,7 +6111,8 @@
     },
     'Sheppard2018': [
         'The Albedos, Sizes, Colors, and Satellites of Dwarf Planets Compared with Newly Measured Dwarf Planet 2013 FY27',
-        'DOI: 10.3847/1538-3881/aae92a', 'https://iopscience.iop.org/article/10.3847/1538-3881/aae92a'
+        'DOI: 10.3847/1538-3881/aae92a', 'https://iopscience.iop.org/article/10.3847/1538-3881/aae92a',
+        'https://ui.adsabs.harvard.edu/abs/2018AJ....156..270S/abstract'
     ],
     '(532037) Chiminigagua | Sheppard2018': {
         tags: ['Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/midsize TNO'],
@@ -6412,7 +6455,7 @@
         is_reflecting_sunlight: true,
         // phase_function: ['phase coefficient', {beta: [0.95, 0.41]}],
     },
-    '(612793)  2004 PW107 | Sheppard2012': {
+    '(612793) 2004 PW107 | Sheppard2012': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.93, 0.12], 'r-i': [0.32, 0.13]},
@@ -6433,17 +6476,18 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true
     },
-    'Rommel2024': [
-        'Physical constraints of (612911) 2004 XR190 from a stellar occultation and photometric observations',
-        'https://www.youtube.com/watch?v=kBkryw8jfFI', 'https://tno2024.org/relation/abstract/88'
+    'Rommel2022': [
+        'DETERMINATION OF PHYSICAL PROPERTIES AND TOPOGRAPHY OF TNOS FROM STELLAR OCCULTATIONS AND ROTATIONAL LIGHT CURVES: THE CASE OF 2002 MS4 OBJECT',
+        'http://sistede.on.br:8080/handle/tede/149'
     ],
-    '(612911) 2004 XR190 | MBOSS, Rommel2024': {
+    '(612911) 2004 XR190 | MBOSS, Rommel2022': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/detached TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.790, 0.057], 'V-R': [0.450, 0.040], 'R-I': [0.520, 0.040]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.098], // calculated by Zel using occultation results
+        geometric_albedo: ['Generic_Bessell.R', [0.095, 0.23]], // Section 4.2
+        // phase_function: ['Generic_Bessell.R', 'phase coefficient', {beta: [0.252, 0.058]}], // Table 4.8
     },
     '(612931) 2005 CA79 | Sheppard2012': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
@@ -6678,8 +6722,9 @@
         'https://ui.adsabs.harvard.edu/abs/1999Sci...285..557O/abstract'
     ],
     'SantanaRos2025': [
-        'Hayabusa2# mission target 1998 KY26 preview: a small optically bright rapid rotator',
-        'DOI: 10.21203/rs.3.rs-5821856/v1', 'https://www.researchsquare.com/article/rs-5821856/v1'
+        'Hayabusa2 extended mission target asteroid 1998 KY26 is smaller and rotating faster than previously known',
+        'DOI: 10.1038/s41467-025-63697-4', 'https://www.nature.com/articles/s41467-025-63697-4',
+        'https://ui.adsabs.harvard.edu/abs/2025NatCo..16.8275S/abstract'
     ],
     '1998 KY26 | Ostro1999, SantanaRos2025': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'spacecraft target/Hayabusa2 target/Hayabusa2# target'],
@@ -6690,7 +6735,8 @@
     },
     'Bolin2025a': [
         'Keck and Gemini characterization of Hayabusa2# rendezvous target 1998 KY26',
-        'DOI: 10.48550/arXiv.2501.1715', 'https://arxiv.org/abs/2501.17156v1'
+        'DOI: 10.3847/1538-3881/adccbe', 'https://iopscience.iop.org/article/10.3847/1538-3881/adccbe',
+        'https://ui.adsabs.harvard.edu/abs/2025AJ....169..303B/abstract'
     ],
     '1998 KY26 | Bolin2025a, SantanaRos2025': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'spacecraft target/Hayabusa2 target/Hayabusa2# target'],
@@ -7589,23 +7635,9 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
-    'Bolin2024': [
-        'The discovery and characterization of minimoon 2024 PT5',
-        'DOI: 10.3847/2041-8213/ada1d0', 'https://arxiv.org/abs/2411.08029',
-        'https://ui.adsabs.harvard.edu/abs/2025ApJ...978L..37B/abstract'
-    ],
-    '2024 PT5 | Bolin2024, Beniyama2025': {
-        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo'],
-        photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': [0.58, 0.04], 'r-i': [0.29, 0.04], 'i-z': [-0.27, 0.06]},
-        calibration_system: 'AB',
-        is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.07]], // Derived from slope of phase curve
-        phase_function: ['HG', {H: [27.72, 0.09], G: [0.223, 0.073]}],
-    },
     'Beniyama2025': [
         'Multi-epoch spectro-photometric characterization of the minimoon 2024 PT5 in the visible and near-infrared',
-        'DOI: 10.1051/0004-6361/202555633', 'https://arxiv.org/abs/2507.10527',
+        'DOI: 10.1051/0004-6361/202555633', 'https://www.aanda.org/articles/aa/full_html/2025/08/aa55633-25/aa55633-25.html',
         'https://ui.adsabs.harvard.edu/abs/2025A%26A...700A.183B/abstract'
     ],
     '2024 PT5 | Beniyama2025': {
@@ -7617,9 +7649,23 @@
         geometric_albedo: ['Generic_Bessell.V', [0.26, 0.07]], // Derived from slope of phase curve
         phase_function: ['HG', {H: [27.72, 0.09], G: [0.223, 0.073]}],
     },
+    'Bolin2024': [
+        'The discovery and characterization of minimoon 2024 PT5',
+        'DOI: 10.3847/2041-8213/ada1d0', 'https://iopscience.iop.org/article/10.3847/2041-8213/ada1d0',
+        'https://ui.adsabs.harvard.edu/abs/2025ApJ...978L..37B/abstract'
+    ],
+    '2024 PT5 | Bolin2024, Beniyama2025': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.58, 0.04], 'r-i': [0.29, 0.04], 'i-z': [-0.27, 0.06]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.07]], // Derived from slope of phase curve
+        phase_function: ['HG', {H: [27.72, 0.09], G: [0.223, 0.073]}],
+    },
     'Bolin2025b': [
         'The discovery and characterization of Earth-crossing asteroid 2024 YR4',
-        'DOI: 10.3847/2041-8213/adc910', 'https://arxiv.org/abs/2503.05694',
+        'DOI: 10.3847/2041-8213/adc910', 'https://iopscience.iop.org/article/10.3847/2041-8213/adc910',
         'https://ui.adsabs.harvard.edu/abs/2025ApJ...984L..25B/abstract'
     ],
     'Rivkin2025': [ // Diameter source
@@ -8030,7 +8076,7 @@
     '96P/Machholz 1 | Eisner2019': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': [0.485, 0.020], 'r-i': [0.170, 0.025], 'i-z': [0.065, 0.035]}, // mean
+        color_indices: {'g-r': [0.50, 0.04], 'r-i': [0.17, 0.03], 'i-z': [0.06, 0.04]},
         calibration_system: 'AB',
     },
     'Li2013b': [
@@ -8117,11 +8163,12 @@
         geometric_albedo: ['Generic_Bessell.V', [0.021, 0.002]],
         phase_function: ['HG', {H: [13.694, 0.022], G: [0.094, 0.025]}],
     },
-    'Jewitt2009': [
+    'Jewitt2009a': [
         'The Active Centaurs',
-        'DOI: 10.1088/0004-6256/137/5/4296', 'https://ui.adsabs.harvard.edu/abs/2009AJ....137.4296J/abstract'
+        'DOI: 10.1088/0004-6256/137/5/4296', 'http://iopscience.iop.org/article/10.1088/0004-6256/137/5/4296',
+        'https://ui.adsabs.harvard.edu/abs/2009AJ....137.4296J/abstract'
     ],
-    '166P/NEAT | MBOSS, Jewitt2009': {
+    '166P/NEAT | MBOSS, Jewitt2009a': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet/Chiron-type comet', 'minor body/centaur/active centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.870, 0.040], 'V-R': [0.695, 0.030], 'R-I': [0.735, 0.060]},
@@ -8130,7 +8177,8 @@
     },
     'Jewitt2015': [
         'Color Systematics of Comets and Related Bodies',
-        'DOI: 10.1088/0004-6256/150/6/201', 'https://ui.adsabs.harvard.edu/abs/2015AJ....150..201J/abstract'
+        'DOI: 10.1088/0004-6256/150/6/201', 'https://iopscience.iop.org/article/10.1088/0004-6256/150/6/201',
+        'https://ui.adsabs.harvard.edu/abs/2015AJ....150..201J/abstract'
     ],
     '166P/NEAT | MBOSS, Jewitt2015': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet/Chiron-type comet', 'minor body/centaur/active centaur'],
@@ -8238,15 +8286,39 @@
         'DOI: 10.3847/1538-3881/ac6dcb', 'https://iopscience.iop.org/article/10.3847/1538-3881/ac6dcb',
         'https://ui.adsabs.harvard.edu/abs/2022AJ....164....1H/abstract'
     ],
-    '323P/SOHO 2 | Hui2022, Knight2023': {
+    '323P/SOHO 2: Nucleus, Feb 13 2021 | Hui2022': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
         photometric_system: 'SLOAN_SDSS',
-        color_indices: {'g-r': [0.68, 0.05], 'r-i': [-0.16, 0.05]}, // 2021 March 3
+        color_indices: {'g-r': [0.44, 0.06], 'r-i': [-0.08, 0.09]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
-        phase_function: ['phase coefficient', {beta: [0.0326, 0.0004]}],
+        phase_function: ['HG', {H: [21.33, 0.08], G: [0.17, 0.04]}], // Table 3
     },
-    'Hsieh2014': [
+    '323P/SOHO 2: Nucleus, Mar 3 2021 | Hui2022': {
+        tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.68, 0.05], 'r-i': [-0.16, 0.05]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+        phase_function: ['HG', {H: [21.33, 0.08], G: [0.17, 0.04]}], // Table 3
+    },
+    '323P/SOHO 2: Dust ejecta, Feb 13 2021 | Hui2022': {
+        tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.85, 0.07], 'r-i': [-0.07, 0.11]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+        phase_function: ['HG', {H: [21.33, 0.08], G: [0.17, 0.04]}], // Table 3
+    },
+    '323P/SOHO 2: Dust ejecta, Mar 3 2021 | Hui2022': {
+        tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
+        photometric_system: 'SLOAN_SDSS',
+        color_indices: {'g-r': [0.37, 0.05], 'r-i': [-0.11, 0.07]}, // Average
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+        phase_function: ['HG', {H: [21.33, 0.08], G: [0.17, 0.04]}], // Table 3
+    },
+    'Hsieh2012': [
         'Observational and Dynamical Characterization of Main-belt Comet P/2010 R2 (La Sagra)',
         'DOI: 10.1088/0004-6256/143/5/104', 'https://iopscience.iop.org/article/10.1088/0004-6256/143/5/104',
         'https://ui.adsabs.harvard.edu/abs/2012AJ....143..104H/abstract'
@@ -8257,7 +8329,7 @@
         color_indices: {'B-R': [0.90, 0.10]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.01, 0.01]],
+        geometric_albedo: ['Generic_Bessell.V', [0.03, 0.02]], // fixed η
         phase_function: ['Generic_Bessell.R', 'HG', {H: [18.38, +0.19, -0.17], G: [0.03, +0.19, -0.14]}],
     },
     'Kulyk2016': [
@@ -8333,15 +8405,16 @@
     // Non-periodic comets
     'Szabó2012': [
         'Evidence for Fresh Frost Layer on the Bare Nucleus of Comet Hale-Bopp at 32 AU Distance',
-        'DOI: 10.1088/0004-637X/761/1/8', 'https://ui.adsabs.harvard.edu/abs/2012ApJ...761....8S/abstract'
+        'DOI: 10.1088/0004-637X/761/1/8', 'https://iopscience.iop.org/article/10.1088/0004-637X/761/1/8/meta',
+        'https://ui.adsabs.harvard.edu/abs/2012ApJ...761....8S/abstract'
     ],
     '(C/1995 O1) Hale–Bopp | MBOSS, Szabó2012': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period comet'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.810, 0.050], 'V-R': [0.390, 0.050]},
         calibration_system: 'Vega',
-        geometric_albedo: ['Generic_Bessell.V', [0.081, 0.009]], // pre-perihelion one was 0.036±0.010
         is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.081, 0.009]], // pre-perihelion one was 0.036±0.010
     },
     '(C/1999 J2) Skiff | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/long period comet'],
@@ -8768,9 +8841,19 @@
     },
 
     // Interstellar objects
+    'Fitzsimmons2018': [
+        'Spectroscopy and thermal modelling of the first interstellar object 1I/2017 U1 ʻOumuamua',
+        'DOI: 10.1038/s41550-017-0361-4', 'https://www.nature.com/articles/s41550-017-0361-4',
+        'https://ui.adsabs.harvard.edu/abs/2018NatAs...2..133F/abstract'
+    ],
+    '1I/ʻOumuamua | Fitzsimmons2018': {
+        tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
+        file: 'spectra/files/Oumuamua_Fitzsimmons2018.txtU',
+    },
     'Bolin2018': [
         'APO Time-resolved Color Photometry of Highly Elongated Interstellar Object 1I/ʻOumuamua',
-        'DOI: 10.3847/2041-8213/aaa0c9', 'https://iopscience.iop.org/article/10.3847/2041-8213/aaa0c9'
+        'DOI: 10.3847/2041-8213/aaa0c9', 'https://iopscience.iop.org/article/10.3847/2041-8213/aaa0c9',
+        'https://ui.adsabs.harvard.edu/abs/2018ApJ...852L...2B/abstract'
     ],
     '1I/ʻOumuamua | Bolin2018': {
         tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
@@ -8783,7 +8866,8 @@
     },
     'Jewitt2017': [
         'Interstellar Interloper 1I/2017 U1: Observations from the NOT and WIYN Telescopes',
-        'DOI: 10.3847/2041-8213/aa9b2f', 'https://iopscience.iop.org/article/10.3847/2041-8213/aa9b2f'
+        'DOI: 10.3847/2041-8213/aa9b2f', 'https://iopscience.iop.org/article/10.3847/2041-8213/aa9b2f',
+        'https://ui.adsabs.harvard.edu/abs/2017ApJ...850L..36J/abstract'
     ],
     '1I/ʻOumuamua | Jewitt2017': {
         tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
@@ -8818,7 +8902,8 @@
     },
     'Seligman2025': [
         'Discovery and Preliminary Characterization of a Third Interstellar Object: 3I/ATLAS',
-        'DOI: 10.48550/arXiv.2507.02757', 'https://arxiv.org/abs/2507.02757'
+        'DOI: 10.3847/2041-8213/adf49a', 'https://iopscience.iop.org/article/10.3847/2041-8213/adf49a',
+        'https://ui.adsabs.harvard.edu/abs/2025ApJ...989L..36S/abstract'
     ],
     '3I/ATLAS: Spectrum | Seligman2025': {
         tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
@@ -8834,8 +8919,9 @@
         sd: [0.018, 0.011, 0.029, 0.081],
     },
     'Opitom2025': [
-        'Initial VLT/MUSE spectroscopy of the interstellar object 3I/ATLAS',
-        'DOI: 10.48550/arXiv.2507.05226', 'https://arxiv.org/abs/2507.05226'
+        'Snapshot of a new interstellar comet: 3I/ATLAS has a red and featureless spectrum',
+        'DOI: 10.1093/mnrasl/slaf095', 'https://academic.oup.com/mnrasl/article/544/1/L31/8247984',
+        'https://ui.adsabs.harvard.edu/abs/2025MNRAS.544L..31O/abstract'
     ],
     '3I/ATLAS: Spectrum | Opitom2025': {
         tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
@@ -8844,18 +8930,19 @@
     '3I/ATLAS: Photometry | Opitom2025': {
         tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
         photometric_system: 'Generic_Bessell',
-        color_indices: {'B-V': [1.01, 0.04], 'V-R': [0.48, 0.03], 'V-I': [0.98, 0.04]},
+        color_indices: {'B-V': [1.12, 0.14], 'V-R': [0.57, 0.09], 'V-I': [1.10, 0.15]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
     'Bolin2025c': [
         'Interstellar comet 3I/ATLAS: discovery and physical description',
-        'DOI: 10.48550/arXiv.2507.05252', 'https://arxiv.org/abs/2507.05252'
+        'DOI: 10.1093/mnrasl/slaf078', 'https://academic.oup.com/mnrasl/article/542/1/L139/8206197',
+        'https://ui.adsabs.harvard.edu/abs/2025MNRAS.542L.139B/abstract'
     ],
     '3I/ATLAS | Bolin2025c': {
         tags: ['Solar System', 'extrasolar', 'minor body/interstellar'],
         photometric_system: 'SLOAN_SDSS', // TODO: replace with Palomar/P200/NGPS filters
-        color_indices: {'g-r': [0.43, 0.02], 'r-i': [0.16, 0.02]},
+        color_indices: {'g-r': [0.84, 0.05], 'r-i': [0.16, 0.03], 'r-i': [-0.02, 0.07]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
