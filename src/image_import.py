@@ -20,7 +20,15 @@ def cube_reader(file: str) -> tuple[np.ndarray, np.ndarray]:
 @lru_cache(maxsize=8)
 def cached_open(file: str):
     """ Increases the speed of image reloading """
-    return Image.open(file)
+    if file.split('.')[-1].lower() in ('fts', 'fit', 'fits'):
+        # FITS is tested only with OPAL formatting
+        with fits.open(file) as hdul:
+            #hdul.info()
+            #print(repr(hdul[0].header))
+            array = hdul[0].data
+        return Image.fromarray(array)
+    else:
+        return Image.open(file)
 
 def rgb_reader(file: str, formulas: list = None) -> np.ndarray:
     """ Imports spectral data from a RGB image """
