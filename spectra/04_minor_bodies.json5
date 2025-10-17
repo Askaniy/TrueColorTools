@@ -17,6 +17,11 @@
         'DOI: 10.1016/j.icarus.2004.09.009', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103504003173',
         'https://ui.adsabs.harvard.edu/abs/2005Icar..174...90D/abstract'
     ],
+    'AlvarezCandal2008': [
+        'Visible spectroscopy of the new ESO large program on trans-Neptunian objects and Centaurs. Part 1',
+        'DOI: 10.1051/0004-6361:200809705', 'https://www.aanda.org/component/article?access=bibcode&bibcode=&bibcode=2008A%2526A...487..741AFUL',
+        'https://ui.adsabs.harvard.edu/abs/2008A&A...487..741A'
+    ],
     'Boehnhardt2014': [
         'Photometry of Transneptunian Objects for the Herschel Key Program ‘TNOs are Cool’',
         'DOI: 10.1007/s11038-014-9450-x', 'https://link.springer.com/article/10.1007/s11038-014-9450-x'
@@ -30,6 +35,16 @@
         'Albedos of Asteroids in Comet-Like Orbits',
         'DOI: 10.1086/430802', 'https://iopscience.iop.org/article/10.1086/430802',
         'https://ui.adsabs.harvard.edu/abs/2005AJ....130..308F'
+    ],
+    'Fornasier2004': [
+        'ESO Large Program on physical studies of Trans-Neptunian objects and Centaurs: Final results of the visible spectrophotometric observations',
+        'DOI: 10.1051/0004-6361:20041221', 'https://www.aanda.org/articles/aa/abs/2004/25/aa0260-04/aa0260-04.html',
+        'https://ui.adsabs.harvard.edu/abs/2004A%26A...421..353F/abstract'
+    ],
+    'Fornasier2009': [
+        'Visible spectroscopy of the new ESO large programme on trans-Neptunian objects and Centaurs: final results',
+        'DOI: 10.1051/0004-6361/200912582', 'https://www.aanda.org/component/article?access=bibcode&bibcode=&bibcode=2009A%2526A...508..457FFUL',
+        'https://ui.adsabs.harvard.edu/abs/2009A%26A...508..457F/abstract'
     ],
     'GaiaDR3': [
         'Gaia DR3 Part 5. Solar System',
@@ -48,6 +63,11 @@
     'Lagerkvist1992': [
         'Physical studies of asteroids. XXIV - Phase relations for 48 asteroids obtained with the Carlsberg Meridian Circle',
         'https://ui.adsabs.harvard.edu/abs/1992A%26AS...94...43L/abstract'
+    ],
+    'Lazzarin2003': [
+        'ESO Large Programme on Physical Studies of Trans-Neptunian Objects and Centaurs: Visible Spectroscopy',
+        'DOI: 10.1086/367771', 'https://iopscience.iop.org/article/10.1086/367771',
+        'https://ui.adsabs.harvard.edu/abs/2003AJ....125.1554L/abstract'
     ],
     'Lellouch2013': [
         '"TNOs are Cool": A survey of the trans-Neptunian region. IX. Thermal properties of Kuiper belt objects and Centaurs from combined Herschel and Spitzer observations',
@@ -225,11 +245,6 @@
         'DOI: 10.1016/j.icarus.2003.07.004', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103503002173',
         'https://ui.adsabs.harvard.edu/abs/2003Icar..166..195B'
     ],
-    'Doressoundiram2003': [
-        'ESO Large Programme on Trans-Neptunian Objects and Centaurs: Spectroscopic Investigation of Centaur 2001 BL41 and TNOs (26181) 1996 GQ21 and (26375) 1999 DE9',
-        'DOI: 10.1086/374632', 'https://iopscience.iop.org/article/10.1086/374632',
-        'https://ui.adsabs.harvard.edu/abs/2003AJ....125.2721D/abstract'
-    ],
     'Dotto2003': [
         'Colours and Composition of the Centaurs',
         'DOI: 10.1023/B:MOON.0000031934.89097.88', 'https://link.springer.com/article/10.1023/B:MOON.0000031934.89097.88',
@@ -249,11 +264,6 @@
         'The Sizes, Shapes, Albedos, and Colors of Cometary Nuclei',
         'https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=753360bc3977a259d7dfc3362bb7a6354b1988ff',
         'https://ui.adsabs.harvard.edu/abs/2004come.book..223L/abstract'
-    ],
-    'Doressoundiram2005': [
-        'Spectral characteristics and modeling of the trans-neptunian object (55565) 2002 AW 197 and the Centaurs (55576) 2002 GB 10 and (83982) 2002 GO 9: ESO Large Program on TNOs and Centaurs',
-        'DOI: 10.1016/j.pss.2004.11.007', 'https://www.sciencedirect.com/science/article/abs/pii/S0032063305001789',
-        'https://ui.adsabs.harvard.edu/abs/2005P%26SS...53.1501D/abstract'
     ],
     'Rousselot2005a': [
         'Photometric study of Centaur (60558) 2000 EC98 and trans-neptunian object (55637) 2002 UX25 at different phase angles',
@@ -1612,6 +1622,12 @@
         'DOI: 10.1051/0004-6361/201322377', 'https://www.aanda.org/articles/aa/full_html/2014/04/aa22377-13/aa22377-13.html',
         'https://ui.adsabs.harvard.edu/abs/2014A%26A...564A..92D/abstract'
     ],
+    '(5145) Pholus | Fornasier2009, Duffard2014, Bauer2003': {
+        tags: ['featured', 'Solar System', 'minor body/centaur'],
+        file: 'spectra/files/Fornasier2009/Pholus.txtU', // Fig. 2
+        geometric_albedo: ['Generic_Bessell.V', [0.155, +0.076, -0.049]],
+        phase_function: ['HG', {H: 7.30, G: [0.16, 0.02]}],
+    },
     '(5145) Pholus | SMASS, Duffard2014, Bauer2003': {
         tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur'],
         file: 'spectra/files/SMASS/a005145.1.txtA',
@@ -1741,7 +1757,7 @@
     },
     '(8405) Asbolus | Dotto2003, Müller2020': {
         tags: ['Solar System', 'minor body/centaur'],
-        file: 'spectra/files/Dotto2003/Asbolus_Dotto2003.txtU',
+        file: 'spectra/files/Asbolus_Dotto2003.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.056, +0.019, -0.015]],
     },
     '(8405) Asbolus | MBOSS, Müller2020': {
@@ -2199,6 +2215,12 @@
         'DOI: 10.1016/j.icarus.2005.01.013', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103505000333',
         'https://ui.adsabs.harvard.edu/abs/2005Icar..176..492H/abstract'
     ],
+    '(20000) Varuna | Fornasier2009, Müller2020, Hicks2005': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
+        file: 'spectra/files/Fornasier2009/Varuna.txtU', // Fig. 3
+        geometric_albedo: ['Generic_Bessell.V', [0.127, +0.040, -0.042]],
+        phase_function: ['Generic_Bessell.R', 'HG', {H: [3.192, 0.025], G: [-0.354, 0.121]}],
+    },
     '(20000) Varuna | MBOSS, Müller2020, Hicks2005': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
@@ -2425,9 +2447,9 @@
         geometric_albedo: ['Generic_Bessell.V', [0.054, 0.011]],
         phase_function: ['Misc_Atlas.cyan', 'HG1G2', {H: [11.5857, +0.4221, -0.4863], G_1: [0.3537, +0.4361, -0.3532], G_2: [0.4116, +0.4139, -0.4098]}],
     },
-    '(26181) 1996 GQ21 | Doressoundiram2003, FarkasTakacs2020, Sheppard2003': {
+    '(26181) 1996 GQ21 | Lazzarin2003, FarkasTakacs2020, Sheppard2003': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
-        file: 'spectra/files/Doressoundiram2003/1996GQ21_Doressoundiram2003.txtU',
+        file: 'spectra/files/Lazzarin2003/1996GQ21.txtA', // Fig. 1
         geometric_albedo: ['Generic_Bessell.V', [0.098, +0.046, -0.030]], // fixed η
         phase_function: ['HG', {H: [4.47, 0.01], G: [0.12, 0.03]}],
     },
@@ -2448,9 +2470,9 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.083, +0.018, -0.013]], // system albedo
     },
-    '(26375) 1999 DE9 | Doressoundiram2003, Müller2020, Sheppard2003': {
+    '(26375) 1999 DE9 | Lazzarin2003, Müller2020, Sheppard2003': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
-        file: 'spectra/files/Doressoundiram2003/1999DE9_Doressoundiram2003.txtU',
+        file: 'spectra/files/Lazzarin2003/1999DE9.txtA', // Fig. 1
         geometric_albedo: ['Generic_Bessell.V', [0.163, +0.041, -0.026]],
         phase_function: ['HG', {H: [4.45, 0.02], G: [-0.34, 0.05]}],
     },
@@ -2545,6 +2567,11 @@
         geometric_albedo: ['Generic_Bessell.V', [0.157, 0.007]],
         phase_function: ['Palomar_ZTF.g', 'HG1G2', {H: [12.993, 0.062], G_1: [0.662, 0.274], G_2: [0.160, 0.186]}],
     },
+    '(32532) Thereus | AlvarezCandal2008, Müller2020': {
+        tags: ['Solar System', 'minor body/centaur'],
+        file: 'spectra/files/AlvarezCandal2008/Thereus.txtU', // Fig. 2
+        geometric_albedo: ['Generic_Bessell.V', [0.083, +0.016, -0.013]],
+    },
     '(32532) Thereus | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
@@ -2620,6 +2647,11 @@
         geometric_albedo: ['Generic_Bessell.V', [0.058, 0.002]],
         phase_function: ['HG1G2', {H: [11.519234, +0.234496, -0.300985], G_1: [0.593842, +0.783627, -1.165941], G_2: [0.331836, +0.674279, -0.500645]}],
     },
+    '(35671) 1998 SN165 | Fornasier2004, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        file: 'spectra/files/Fornasier2004/1998SN165.txtA', // Fig. 4
+        geometric_albedo: ['Generic_Bessell.V', [0.060, +0.019, -0.013]],
+    },
     '(35671) 1998 SN165 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
@@ -2671,6 +2703,12 @@
         geometric_albedo: ['Generic_Bessell.V', [0.063, 0.008]],
         phase_function: ['Palomar_ZTF.r', 'HG1G2', {H: [12.435, 0.164], G_1: [0.063, 0.397], G_2: [0.458, 0.242]}],
     },
+    '(40314) 1999 KR16 | Lazzarin2003, FarkasTakacs2020, Sheppard2002': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        file: 'spectra/files/Lazzarin2003/1999KR16.txtA', // Fig. 1
+        geometric_albedo: ['Generic_Bessell.V', [0.177, +0.076, -0.048]], // fixed η
+        phase_function: ['HG', {H: [5.37, 0.02], G: [-0.08, 0.05]}],
+    },
     '(40314) 1999 KR16 | MBOSS, FarkasTakacs2020, Sheppard2002': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
         photometric_system: 'Generic_Bessell',
@@ -2679,6 +2717,12 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.177, +0.076, -0.048]], // fixed η
         phase_function: ['HG', {H: [5.37, 0.02], G: [-0.08, 0.05]}],
+    },
+    '(42301) 2001 UR163 | Fornasier2009, FarkasTakacs2020, Sheppard2003': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        file: 'spectra/files/Fornasier2009/2001UR163.txtU', // Fig. 4
+        geometric_albedo: ['Generic_Bessell.V', [0.220, +0.832, -0.090]], // fixed η
+        // phase_function: ['HG', {H: [3.75, 0.05], G: [-1.00, 0.30]}] // results in negative phase integral
     },
     '(42301) 2001 UR163 | MBOSS, FarkasTakacs2020, Sheppard2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO'],
@@ -2718,6 +2762,11 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.003]], // system albedo
     },
+    '(44594) 1999 OX3 | Fornasier2009, Vernazza2025': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        file: 'spectra/files/Fornasier2009/1999OX3.txtU', // Fig. 3
+        geometric_albedo: ['Generic_Bessell.V', [0.220, 0.040]],
+    },
     '(44594) 1999 OX3 | Seccull2018, Vernazza2025': {
         tags: ['Solar System', 'minor body/TNO/scattered'],
         file: 'spectra/files/Seccull2018/1999OX3_Seccull2018.txt', // Fig. 3
@@ -2736,13 +2785,24 @@
         'DOI: 10.1051/0004-6361/201118562', 'https://www.aanda.org/articles/aa/full_html/2012/05/aa18562-11/aa18562-11.html',
         'https://ui.adsabs.harvard.edu/abs/2012A%26A...541A..93M/abstract'
     ],
+    '(47171) Lempo–Hiisi | Lazzarin2003, Mommert2012': {
+        tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
+        file: 'spectra/files/Lazzarin2003/1999TC36.txtA', // Fig. 1
+        geometric_albedo: ['Generic_Bessell.V', [+0.079, 0.013, 0.011]], // system albedo
+    },
     '(47171) Lempo–Hiisi | MBOSS, Mommert2012': {
-        tags: ['featured', 'MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.029, 0.047], 'V-R': [0.693, 0.032], 'R-I': [0.619, 0.049]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [+0.079, 0.013, 0.011]], // system albedo
+    },
+    '(47932) 2000 GN171 | Fornasier2004, Müller2020, Sheppard2002': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
+        file: 'spectra/files/Fornasier2004/2000GN171.txtA', // Fig. 4
+        geometric_albedo: ['Generic_Bessell.V', [0.215, +0.093, -0.070]],
+        phase_function: ['HG', {H: [5.98, 0.02], G: [-0.12, 0.05]}],
     },
     '(47932) 2000 GN171 | MBOSS, Müller2020, Sheppard2002': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -2842,9 +2902,9 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
-    '(52872) Okyrhoe | Dotto2003, Müller2020, Bauer2003': {
+    '(52872) Okyrhoe | Lazzarin2003, Müller2020, Bauer2003': {
         tags: ['Solar System', 'minor body/centaur'],
-        file: 'spectra/files/Dotto2003/Okyrhoe_Dotto2003.txtU',
+        file: 'spectra/files/Lazzarin2003/1998SG35.txtA', // Fig. 2
         geometric_albedo: ['Generic_Bessell.V', [0.056, +0.012, -0.010]],
         phase_function: ['HG', {H: 10.50, G: [0.12, 0.07]}],
     },
@@ -2895,9 +2955,9 @@
         'DOI: 10.1051/0004-6361/202450833', 'https://www.aanda.org/articles/aa/abs/2024/09/aa50833-24/aa50833-24.html',
         'https://ui.adsabs.harvard.edu/abs/2024EPSC...17..530R/abstract'
     ],
-    '(54598) Bienor | Dotto2003, Rizos2024, Dobson2023': {
+    '(54598) Bienor | Lazzarin2003, Rizos2024, Dobson2023': {
         tags: ['Solar System', 'minor body/centaur'],
-        file: 'spectra/files/Dotto2003/Bienor_Dotto2003.txtU',
+        file: 'spectra/files/Lazzarin2003/2000QC243.txtA', // Fig. 2
         geometric_albedo: ['Generic_Bessell.V', [0.065, 0.005]],
         phase_function: ['Misc_Atlas.orange', 'phase coefficient', {beta: [0.062, 0.014]}],
     },
@@ -2909,6 +2969,11 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.065, 0.005]],
         phase_function: ['Misc_Atlas.orange', 'phase coefficient', {beta: [0.062, 0.014]}],
+    },
+    '(55565) Aya | Fornasier2004, Vilenius2014': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
+        file: 'spectra/files/Fornasier2004/2002AW197.txtA', // Fig. 4
+        geometric_albedo: ['Generic_Bessell.V', [0.112, +0.012, -0.011]],
     },
     'Barucci2020': [
         'Surface composition of Trans-Neptunian objects',
@@ -2928,9 +2993,9 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.112, +0.012, -0.011]],
     },
-    '(55576) Amycus | Doressoundiram2005, Müller2020': {
+    '(55576) Amycus | Fornasier2004, Müller2020': {
         tags: ['Solar System', 'minor body/centaur'],
-        file: 'spectra/files/Doressoundiram2005/Amycus_Doressoundiram2005.txtU',
+        file: 'spectra/files/Fornasier2004/2002GB10.txtA', // Fig. 3
         geometric_albedo: ['Generic_Bessell.V', [0.083, +0.016, -0.015]],
     },
     '(55576) Amycus | MBOSS, Müller2020': {
@@ -2984,6 +3049,12 @@
         'DOI: 10.1051/0004-6361/201731676', 'https://www.aanda.org/articles/aa/full_html/2017/12/aa31676-17/aa31676-17.html',
         'https://ui.adsabs.harvard.edu/abs/2017A%26A...608A..45L/abstract'
     ],
+    '(55637) Uni | AlvarezCandal2008, Lellouch2017, Rousselot2005a': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
+        file: 'spectra/files/AlvarezCandal2008/2002UX25.txtU', // Fig. 2
+        geometric_albedo: ['Generic_Bessell.V', [0.104, +0.011, -0.010]],
+        phase_function: ['Generic_Bessell.R', 'HG', {H: [3.32, 0.01], G: [0.16, 0.18]}],
+    },
     '(55637) Uni | MBOSS, Lellouch2017, Rousselot2005a': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
@@ -2992,6 +3063,11 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.104, +0.011, -0.010]],
         phase_function: ['Generic_Bessell.R', 'HG', {H: [3.32, 0.01], G: [0.16, 0.18]}],
+    },
+    '(55638) 2002 VE95 | Fornasier2009, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
+        file: 'spectra/files/Fornasier2009/2002VE95.txtU', // Fig. 4
+        geometric_albedo: ['Generic_Bessell.V', [0.149, +0.019, -0.016]],
     },
     '(55638) 2002 VE95 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -3065,19 +3141,9 @@
         'DOI: 10.1093/mnras/stad3318', 'https://academic.oup.com/mnras/article/527/2/3624/7332922',
         'https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.3624P/abstract'
     ],
-    '(60558) Echeclus | GaiaDR3, Pereira2024, Rousselot2005a': { // 174P/Echeclus
+    '(60558) Echeclus | AlvarezCandal2008, Pereira2024, Rousselot2005a': { // 174P/Echeclus
         tags: ['Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
-        nm: [374, 418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
-        br: [
-            8.088540e-01, 8.903210e-01, 8.976490e-01, 9.282746e-01, 1.000000e+00, 1.115618e+00,
-            1.089970e+00, 1.201444e+00, 1.278553e+00, 1.331537e+00, 1.423402e+00, 1.432682e+00,
-            1.513525e+00, 1.615072e+00, 1.639843e+00, 1.980019e+00
-        ],
-        sd: [
-            1.958681e-01, 2.856866e-02, 1.841532e-02, 1.563740e-02, 1.590164e-02, 1.730563e-02,
-            1.817028e-02, 1.830908e-02, 1.908911e-02, 2.022449e-02, 2.125614e-02, 2.168432e-02,
-            2.362207e-02, 2.686082e-02, 3.449029e-02, 6.535799e-02
-        ],
+        file: 'spectra/files/AlvarezCandal2008/Echeclus.txtU', // Fig. 2
         geometric_albedo: ['Generic_Bessell.V', [0.050, 0.003]],
         phase_function: ['Generic_Bessell.R', 'HG', {H: [9.03, 0.01], G: [-0.39, 0.08]}], // V-band value results in negative phase integral
     },
@@ -3126,9 +3192,9 @@
         geometric_albedo: ['Generic_Bessell.V', [0.0653, 0.0097]],
         phase_function: ['HG1G2', {H: [13.568758, +0.198775, -0.257261], G_1: [0.775677, +0.393410, -0.581384], G_2: [0.007084, +0.254510, -0.188063]}],
     },
-    '(63252) 2001 BL41 | Dotto2003, Müller2020, Bauer2003': {
+    '(63252) 2001 BL41 | Lazzarin2003, Müller2020, Bauer2003': {
         tags: ['Solar System', 'minor body/centaur'],
-        file: 'spectra/files/Dotto2003/2001BL41_Dotto2003.txtU',
+        file: 'spectra/files/Lazzarin2003/2001BL41.txtA', // Fig. 2
         geometric_albedo: ['Generic_Bessell.V', [0.043, +0.028, -0.014]],
         phase_function: ['HG', {H: 10.10, G: [0.17, 0.06]}],
     },
@@ -3271,6 +3337,11 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
+    '(73480) 2002 PN34 | Fornasier2009, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        file: 'spectra/files/Fornasier2009/2002PN34.txtU', // Fig. 5
+        geometric_albedo: ['Generic_Bessell.V', [0.049, 0.006]],
+    },
     '(73480) 2002 PN34 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
         photometric_system: 'Generic_Bessell',
@@ -3368,9 +3439,9 @@
         geometric_albedo: ['Generic_Bessell.V', [0.046, 0.007]],
         // phase_function: ['HG', {H: [5.79 0.05], G: [-1.13, 0.20]}] // results in negative phase integral
     },
-    '(83982) Crantor | Doressoundiram2005, Müller2020': {
+    '(83982) Crantor | Fornasier2004, Müller2020': {
         tags: ['Solar System', 'minor body/centaur'],
-        file: 'spectra/files/Doressoundiram2005/Crantor_Doressoundiram2005.txtU',
+        file: 'spectra/files/Fornasier2004/2002GO9.txtA', // Fig. 3
         geometric_albedo: ['Generic_Bessell.V', [0.121, +0.064, -0.038]],
     },
     '(83982) Crantor | MBOSS, Müller2020': {
@@ -3506,6 +3577,11 @@
         file: 'spectra/files/Sedna_Barucci2005.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.410, +0.393, -0.189]],
     },
+    '(90377) Sedna | Fornasier2009, Lellouch2013': {
+        tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO', 'minor body/TNO/extreme TNO'],
+        file: 'spectra/files/Fornasier2009/Sedna.txtU', // Fig. 5
+        geometric_albedo: ['Generic_Bessell.V', [0.410, +0.393, -0.189]],
+    },
     '(90377) Sedna | MBOSS, Lellouch2013': {
         tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO', 'minor body/TNO/extreme TNO'],
         photometric_system: 'Generic_Bessell',
@@ -3531,6 +3607,12 @@
     '(90482) Orcus | deBergh2005, Brown2018, Dobson2023': {
         tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino'],
         file: 'spectra/files/Orcus_deBergh2005.txt',
+        geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
+        // phase_function: ['Misc_Atlas.orange', 'phase coefficient', {beta: [0.07, 0.04]}],
+    },
+    '(90482) Orcus | Fornasier2009, Brown2018, Dobson2023': {
+        tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino'],
+        file: 'spectra/files/Fornasier2009/Orcus.txtU', // Fig. 4
         geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
         // phase_function: ['Misc_Atlas.orange', 'phase coefficient', {beta: [0.07, 0.04]}],
     },
@@ -3604,6 +3686,11 @@
         'DOI: 10.1093/mnras/staa3881', 'https://academic.oup.com/mnras/article/501/4/6062/6056489',
         'https://ui.adsabs.harvard.edu/abs/2021MNRAS.501.6062S/abstract'
     ],
+    '(95626) 2002 GZ32 | Fornasier2004, SantosSanz2020': {
+        tags: ['Solar System', 'minor body/centaur'],
+        file: 'spectra/files/Fornasier2004/2002GZ32.txtA', // Fig. 3
+        geometric_albedo: ['Generic_Bessell.V', [0.043, 0.007]],
+    },
     '(95626) 2002 GZ32 | MBOSS, SantosSanz2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
@@ -3786,6 +3873,12 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true
     },
+    '(119951) 2002 KX14 | AlvarezCandal2008, Helfenstein2025': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        file: 'spectra/files/AlvarezCandal2008/2002KX14.txtU', // Fig. 2
+        geometric_albedo: ['Generic_Bessell.V', [0.179, +0.027, -0.047]],
+        spherical_albedo: ['Generic_Bessell.V', [0.077, +0.012, -0.011]],
+    },
     '(119951) 2002 KX14 | MBOSS, Helfenstein2025': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
@@ -3810,6 +3903,11 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.167, +0.052, -0.037]],
     },
+    '(120061) 2003 CO1 | Fornasier2009, Müller2020': {
+        tags: ['Solar System', 'minor body/centaur'],
+        file: 'spectra/files/Fornasier2009/2003CO1.txtU', // Fig. 1
+        geometric_albedo: ['Generic_Bessell.V', [0.049, +0.005, -0.006]],
+    },
     '(120061) 2003 CO1 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
@@ -3818,6 +3916,11 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.049, +0.005, -0.006]],
     },
+    '(120132) 2003 FY128 | AlvarezCandal2008, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/detached TNO'],
+        file: 'spectra/files/AlvarezCandal2008/2003FY128.txtU', // Fig. 1
+        geometric_albedo: ['Generic_Bessell.V', [0.079, 0.010]],
+    },
     '(120132) 2003 FY128 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/detached TNO'],
         photometric_system: 'Generic_Bessell',
@@ -3825,6 +3928,11 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.079, 0.010]],
+    },
+    '(120178) 2003 OP32 | Fornasier2009, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
+        file: 'spectra/files/Fornasier2009/2003OP32.txtU', // Fig. 3
+        geometric_albedo: ['Generic_Bessell.V', [0.540, +0.110, -0.150]],
     },
     '(120178) 2003 OP32 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
@@ -3854,6 +3962,11 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.105, +0.081, -0.033]],
+    },
+    '(120216) 2004 EW95 | Seccull2018, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
+        file: 'spectra/files/Seccull2018/2004EW95_Seccull2018.txt',
+        geometric_albedo: ['Generic_Bessell.V', [0.044, +0.021, -0.015]],
     },
     '(120216) 2004 EW95 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -3925,6 +4038,11 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.14], // for minimum albedo of ~0.04
+    },
+    '(120348) 2004 TY364 | Fornasier2009, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
+        file: 'spectra/files/Fornasier2009/2004TY364.txtU', // Fig. 3
+        geometric_albedo: ['Generic_Bessell.V', [0.107, +0.020, -0.015]],
     },
     '(120348) 2004 TY364 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -4263,22 +4381,6 @@
         geometric_albedo: ['Generic_Bessell.V', [0.51, 0.02]],
         phase_integral: [0.454, +0.034, -0.047], // system
     },
-    '(136108) Haumea | GaiaDR3, Ortiz2017, Helfenstein2025': {
-        tags: ['Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
-        nm: [374, 418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
-        br: [
-            1.323241e+00, 9.822552e-01, 9.832631e-01, 9.894317e-01, 1.000000e+00, 1.009211e+00,
-            9.695849e-01, 1.017718e+00, 9.844497e-01, 1.007067e+00, 9.996480e-01, 9.880496e-01,
-            9.939994e-01, 1.060338e+00, 1.042458e+00, 1.203879e+00
-        ],
-        sd: [
-            6.961216e-02, 2.449598e-02, 1.838408e-02, 1.588869e-02, 1.572031e-02, 1.737997e-02,
-            1.728042e-02, 1.632474e-02, 1.594658e-02, 1.668646e-02, 1.658710e-02, 1.618312e-02,
-            1.721705e-02, 1.928095e-02, 2.508214e-02, 4.842987e-02
-        ],
-        geometric_albedo: ['Generic_Bessell.V', [0.51, 0.02]],
-        phase_integral: [0.454, +0.034, -0.047], // system
-    },
     '(136108) Haumea | MBOSS, Ortiz2017, Helfenstein2025': {
         tags: ['MBOSS', 'Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'Generic_Bessell',
@@ -4497,6 +4599,11 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.139, 0.027]],
     },
+    '(144897) 2004 UX10 | Fornasier2009, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
+        file: 'spectra/files/Fornasier2009/2004UX10.txtU', // average of two spectra from Fig. 3
+        geometric_albedo: ['Generic_Bessell.V', [0.141, +0.044, -0.031]],
+    },
     '(144897) 2004 UX10 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
         photometric_system: 'Generic_Bessell',
@@ -4504,6 +4611,11 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.141, +0.044, -0.031]],
+    },
+    '(145451) Rumina | Fornasier2009, FarkasTakacs2020': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        file: 'spectra/files/Fornasier2009/2005RM43.txtU', // Fig. 5
+        geometric_albedo: ['Generic_Bessell.V', [0.102, +0.057, -0.029]],
     },
     '(145451) Rumina | MBOSS, FarkasTakacs2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
@@ -4521,6 +4633,11 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.102, +0.057, -0.029]],
     },
+    '(145452) Ritona | AlvarezCandal2008, Vilenius2012': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
+        file: 'spectra/files/AlvarezCandal2008/2005RN43.txtU', // Fig. 2
+        geometric_albedo: ['Generic_Bessell.V', [0.107, +0.029, -0.018]],
+    },
     '(145452) Ritona | MBOSS, Vilenius2012': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
@@ -4528,6 +4645,11 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.107, +0.029, -0.018]],
+    },
+    '(145453) 2005 RR43 | AlvarezCandal2008, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
+        file: 'spectra/files/AlvarezCandal2008/2005RR43.txtU', // Fig. 2
+        geometric_albedo: ['Generic_Bessell.V', [0.440, +0.120, -0.100]],
     },
     '(145453) 2005 RR43 | PinillaAlonso2007, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
@@ -4715,8 +4837,13 @@
         'The mutual orbit, mass, and density of the large transneptunian binary system Varda and Ilmarë',
         'DOI: 10.1016/j.icarus.2015.04.036', 'https://arxiv.org/abs/1505.00510'
     ],
-    '(174567) Varda | Grundy2015, Souami2020': {
+    '(174567) Varda | Fornasier2009, Souami2020': {
         tags: ['featured', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
+        file: 'spectra/files/Fornasier2009/2003MW12.txtU', // Fig. 3
+        geometric_albedo: ['Generic_Bessell.V', [0.099, 0.002]],
+    },
+    '(174567) Varda | Grundy2015, Souami2020': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.892, 0.028], 'V-I': [1.133, 0.034]},
         calibration_system: 'Vega',
@@ -4817,8 +4944,18 @@
         slope: {start: 520, stop: 860, percent_per_100nm: [18.1, 2.0]},
         geometric_albedo: ['Generic_Bessell.V', [0.202, +0.084, -0.049]],
     },
+    '(208996) Achlys | Fornasier2004, Ortiz2019': {
+        tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
+        file: 'spectra/files/Fornasier2004/2003AZ84.txtA', // Fig. 5
+        geometric_albedo: ['Generic_Bessell.V', [0.094, 0.02]],
+    },
+    '(208996) Achlys | Fornasier2009, Ortiz2019': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
+        file: 'spectra/files/Fornasier2009/2003AZ84.txtU', // Fig. 4
+        geometric_albedo: ['Generic_Bessell.V', [0.094, 0.02]],
+    },
     '(208996) Achlys | MBOSS, Ortiz2019': {
-        tags: ['featured', 'MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.738, 0.090], 'V-R': [0.430, 0.062], 'R-I': [0.473, 0.105]},
         calibration_system: 'Vega',
@@ -4851,12 +4988,9 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.08], // assuming radius of 100 km
     },
-    '(229762) Gǃkúnǁʼhòmdímà | MBOSS, Ortiz2019': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/midsize TNO'],
-        photometric_system: 'Generic_Bessell',
-        color_indices: {'V-R': [0.582, 0.035], 'R-I': [0.470, 0.057]},
-        calibration_system: 'Vega',
-        is_reflecting_sunlight: true,
+    '(229762) Gǃkúnǁʼhòmdímà | Fornasier2009, Ortiz2019': {
+        tags: ['Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/midsize TNO'],
+        file: 'spectra/files/Fornasier2009/2007UK126.txtU', // Fig. 5
         geometric_albedo: ['Generic_Bessell.V', [0.142, 0.015]],
     },
     'Grundy2018': [
@@ -4913,6 +5047,11 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.052, +0.007, -0.006]],
     },
+    '(250112) 2002 KY14 | Fornasier2009, Müller2020': {
+        tags: ['Solar System', 'minor body/centaur'],
+        file: 'spectra/files/Fornasier2009/2002KY14.txtU', // Fig. 2
+        geometric_albedo: ['Generic_Bessell.V', [0.057, +0.011, -0.007]],
+    },
     '(250112) 2002 KY14 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
@@ -4935,6 +5074,11 @@
         color_indices: {'B-V': [1.020, 0.028], 'V-R': [0.590, 0.020], 'R-I': [0.500, 0.020]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
+    },
+    '(281371) 2008 FC76 | Fornasier2009, Müller2020': {
+        tags: ['Solar System', 'minor body/centaur'],
+        file: 'spectra/files/Fornasier2009/2008FC76.txtU', // Fig. 2
+        geometric_albedo: ['Generic_Bessell.V', [0.067, +0.017, -0.011]],
     },
     '(281371) 2008 FC76 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -5002,14 +5146,9 @@
         geometric_albedo: ['Generic_Bessell.V', [0.105, 0.015]],
         spherical_albedo: ['Generic_Bessell.V', [0.039, +0.005, -0.003]],
     },
-    'AlvarezCandal2008': [
-        'Visible spectroscopy of the new ESO large program on trans-Neptunian objects and Centaurs. Part 1',
-        'DOI: 10.1051/0004-6361:200809705', 'https://www.aanda.org/component/article?access=bibcode&bibcode=&bibcode=2008A%2526A...487..741AFUL',
-        'https://ui.adsabs.harvard.edu/abs/2008A&A...487..741A'
-    ],
     '(307616) 2003 QW90 | AlvarezCandal2008, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
-        slope: {start: 440, stop: 930, percent_per_100nm: [34.8, 1.0]},
+        file: 'spectra/files/AlvarezCandal2008/2003QW90.txtU', // Fig. 1
         geometric_albedo: ['Generic_Bessell.V', [0.084, +0.026, -0.022]],
     },
     '(307982) 2004 PG115 | MBOSS, FarkasTakacs2020': {
@@ -5069,6 +5208,11 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.083, +0.068, -0.039]],
+    },
+    '(309737) 2008 SJ236 | Fornasier2009, Müller2020': {
+        tags: ['Solar System', 'minor body/centaur'],
+        file: 'spectra/files/Fornasier2009/2008SJ236.txtU', // Fig. 2
+        geometric_albedo: ['Generic_Bessell.V', [0.074, 0.021]],
     },
     '(309737) 2008 SJ236 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -5302,6 +5446,11 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
+    '(416400) 2003 UZ117 | AlvarezCandal2008, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
+        file: 'spectra/files/AlvarezCandal2008/2003UZ117.txtU', // Fig. 1
+        geometric_albedo: ['Generic_Bessell.V', [0.290, +0.160, -0.110]],
+    },
     '(416400) 2003 UZ117 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'Generic_Bessell',
@@ -5423,14 +5572,9 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
-    'Fornasier2009': [
-        'Visible spectroscopy of the new ESO large programme on trans-Neptunian objects and Centaurs: final results',
-        'DOI: 10.1051/0004-6361/200912582', 'https://www.aanda.org/component/article?access=bibcode&bibcode=&bibcode=2009A%2526A...508..457FFUL',
-        'https://ui.adsabs.harvard.edu/abs/2009A%26A...508..457F/abstract'
-    ],
     '(455502) 2003 UZ413 | Fornasier2009, FarkasTakacs2020': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
-        slope: {start: 440, stop: 930, percent_per_100nm: [5.4, 0.7]}, // mean
+        file: 'spectra/files/Fornasier2009/2003UZ413.txtU', // average of three spectra from Fig. 4
         geometric_albedo: ['Generic_Bessell.V', [0.075, +0.076, -0.006]], // fixed η
     },
     '(459865) 2013 XZ8 | MBOSS, Vernazza2025, Dobson2023': {
@@ -5514,6 +5658,12 @@
         color_indices: {'B-V': [0.890, 0.010], 'V-R': [0.457, 0.084], 'R-I': [0.548, 0.089]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
+    },
+    '(469372) 2001 QF298 | Fornasier2004, Müller2020, Sheppard2003': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
+        file: 'spectra/files/Fornasier2004/2001QF298.txtA', // Fig. 4
+        geometric_albedo: ['Generic_Bessell.V', [0.071, +0.020, -0.014]],
+        phase_function: ['HG', {H: [4.95, 0.10], G: [-0.19, 0.10]}],
     },
     '(469372) 2001 QF298 | MBOSS, Müller2020, Sheppard2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -6004,12 +6154,23 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
-    '(527443) 2007 UM126 | MBOSS': {
+    'Barucci2011': [
+        'New insights on ices in Centaur and Transneptunian populations',
+        'DOI: 10.1016/j.icarus.2011.04.019', 'https://hal.science/hal-00768794',
+        'https://ui.adsabs.harvard.edu/abs/2011Icar..214..297B/abstract'
+    ],
+    '(527443) 2007 UM126 | Fornasier2009, Barucci2011': {
+        tags: ['Solar System', 'minor body/centaur'],
+        file: 'spectra/files/Fornasier2009/2007UM126.txtU', // Fig. 1
+        geometric_albedo: ['Generic_Bessell.V', 0.14],
+    },
+    '(527443) 2007 UM126 | MBOSS, Barucci2011': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.740, 0.030], 'V-R': [0.435, 0.035], 'R-I': [0.440, 0.042]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.14],
     },
     '(527603) 2007 VJ305 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/detached TNO'],
