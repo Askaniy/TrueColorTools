@@ -764,8 +764,8 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
-       phase_function: ['HG', {G: [0.09, 0.21]}], // Average of members with measured phase functions
-     },
+        phase_function: ['HG', {G: [0.09, 0.21]}], // Average of members with measured phase functions
+    },
     'Uranian irregulars | Graykowski2018, Grav2015': {
         tags: ['Solar System/Uranian system', 'natural satellite/irregular moon', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
