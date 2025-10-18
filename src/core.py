@@ -230,10 +230,6 @@ nm_red_limit = 3000 # nm
 # For the sake of simplifying work with the spectrum, its discretization step is fixed.
 nm_step = 5 # nm
 
-# To calculate color, it is necessary to achieve a definition of the spectrum in the visible range.
-# Boundaries have been defined based on the CMF (color matching functions) used, but can be any.
-visible_range = np.arange(390, 780, nm_step) # nm
-
 # When processing images through spectral cubes, performance is prioritized, and uncertainty is not saved (yet).
 # Therefore it is disabled by default.
 ignore_sd_for_cubes = True
@@ -1840,6 +1836,7 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
 # https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer
 # http://www.cvrl.org/cie.htm
 xyz_cmf = FilterSystem.from_list(('CIE_1931_2deg.x', 'CIE_1931_2deg.y', 'CIE_1931_2deg.z'))
+visible_range = xyz_cmf.nm
 
 # There are CMFs transformed from the CIE (2006) LMS functions, 2-deg
 # (https://cie.co.at/datatable/cie-2006-lms-cone-fundamentals-2-field-size-terms-energy)

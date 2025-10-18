@@ -447,6 +447,11 @@ spectral_plot = {
     'ru': 'Спектральная плотность энергии / альбедо',
     'de': 'Spektrale Energiedichte / Albedo'
 }
+limit_to_vis = {
+    'en': 'Limit to visible range',
+    'ru': 'Только видимый диапазон',
+    'de': 'Sichtbarer Spektralbereich' # Auf sichtbaren Spektralbereich begrenzen
+}
 normalize = {
     'en': 'Normalize at 550 nm',
     'ru': 'Нормализовать по 550 нм',

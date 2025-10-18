@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from cycler import cycler
 from collections.abc import Sequence
 
-from src.core import Spectrum, FilterSystem, ColorSystem, ColorPoint, get_filter, visible_range
+from src.core import Spectrum, FilterSystem, ColorSystem, ColorPoint, visible_range
 import src.strings as tr
 import src.gui as gui
 
@@ -52,6 +52,7 @@ def draw_figure(canvas, figure: Figure):
 
 def plot_spectra(
         dict_to_plot: dict[Spectrum, str],
+        limit_to_vis: bool,
         normalize_at_550nm: bool,
         light_theme: bool,
         lang: str,
@@ -63,37 +64,42 @@ def plot_spectra(
         fig, ax = plt.subplots(1, 1, figsize=figsize, dpi=dpi)
         ax.set_xlabel(tr.xaxis_text[lang])
         ax.set_ylabel(tr.yaxis_text[lang])
+        not_empty = not dict_to_plot == {}
         # Determining the scale for CMFs in the background
-        spectra = []
-        max_y = []
-        for spectrum in dict_to_plot.keys():
-            spectrum = spectrum.define_on_range(visible_range)
-            if normalize_at_550nm:
-                spectrum = spectrum.scaled_at(550)
-            spectra.append(spectrum)
-            max_y.append(spectrum.br.max())
-        k = max(max_y) / cmfs[2].br.max() if len(max_y) != 0 else 1
+        if not_empty:
+            spectra = []
+            max_y = []
+            for spectrum in dict_to_plot.keys():
+                spectrum = spectrum.define_on_range(visible_range, crop=limit_to_vis)
+                if normalize_at_550nm:
+                    spectrum = spectrum.scaled_at(550)
+                spectra.append(spectrum)
+                max_y.append(spectrum.br.max())
+            k = max(max_y) / cmfs[2].br.max()
+        else:
+            k = 1
         # Plotting the CMFs
         for i, cmf in enumerate(cmfs):
             ax.plot(cmf.nm, cmf.br * k, color=rgb_muted[i])
         # Plotting the spectra
-        for spectrum, color in zip(spectra, dict_to_plot.values()):
-            ax.plot(spectrum.nm, spectrum.br, label=spectrum.name(lang), color=color)
-            if spectrum.photospectrum is not None:
-                ax.errorbar(
-                    x=spectrum.photospectrum.filter_system.mean_nm(), y=spectrum.photospectrum.br,
-                    xerr=spectrum.photospectrum.filter_system.sd_of_nm(), yerr=spectrum.photospectrum.sd,
-                    fmt='o', color=errorbar_color
-                )
-            if spectrum.sd is not None:
-                # 1σ confidence band
-                y_lim = ax.get_ylim()
-                ax.fill_between(
-                    spectrum.nm, spectrum.br-spectrum.sd, spectrum.br+spectrum.sd,
-                    color=errorbar_color, alpha=0.25
-                )
-                ax.set_ylim(y_lim)
-        ax.legend()
+        if not_empty:
+            for spectrum, color in zip(spectra, dict_to_plot.values()):
+                ax.plot(spectrum.nm, spectrum.br, label=spectrum.name(lang), color=color)
+                if spectrum.photospectrum is not None:
+                    ax.errorbar(
+                        x=spectrum.photospectrum.filter_system.mean_nm(), y=spectrum.photospectrum.br,
+                        xerr=spectrum.photospectrum.filter_system.sd_of_nm(), yerr=spectrum.photospectrum.sd,
+                        fmt='o', color=errorbar_color
+                    )
+                if spectrum.sd is not None:
+                    # 1σ confidence band
+                    y_lim = ax.get_ylim()
+                    ax.fill_between(
+                        spectrum.nm, spectrum.br-spectrum.sd, spectrum.br+spectrum.sd,
+                        color=errorbar_color, alpha=0.25
+                    )
+                    ax.set_ylim(y_lim)
+            ax.legend()
         fig.tight_layout() # moving to subplots() causes UserWarning
         return fig
 
