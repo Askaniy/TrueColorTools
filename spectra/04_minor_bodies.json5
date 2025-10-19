@@ -1641,7 +1641,7 @@
         phase_function: ['HG', {H: 7.30, G: [0.16, 0.02]}],
     },
     '(5145) Pholus | SMASS, Duffard2014, Bauer2003': {
-        tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur'],
+        tags: ['SMASS', 'Solar System', 'minor body/centaur'],
         file: 'spectra/files/SMASS/a005145.1.txtA',
         geometric_albedo: ['Generic_Bessell.V', [0.155, +0.076, -0.049]],
         phase_function: ['HG', {H: 7.30, G: [0.16, 0.02]}],
@@ -2748,6 +2748,16 @@
         geometric_albedo: ['Generic_Bessell.V', [0.220, +0.832, -0.090]], // fixed η
         // phase_function: ['HG', {H: [3.75, 0.05], G: [-1.00, 0.30]}] // results in negative phase integral
     },
+    'AlvarezCandal2010': [
+        'The trans-Neptunian object (42355) Typhon: composition and dynamical evolution',
+        'DOI: 10.1051/0004-6361/200913102', 'https://www.aanda.org/articles/aa/full_html/2010/03/aa13102-09/aa13102-09.html',
+        'https://ui.adsabs.harvard.edu/abs/2010A&A...511A..35A/abstract'
+    ],
+    '(42355) Typhon | AlvarezCandal2010, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        file: 'spectra/files/Typhon_AlvarezCandal2010.txtU', // Fig. 4
+        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.003]], // system albedo
+    },
     '(42355) Typhon | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
         photometric_system: 'Generic_Bessell',
@@ -3034,31 +3044,6 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.65, 0.15]],
     },
-    'Licandro2006': [
-        'Trans-neptunian object (55636) 2002 TX300, a fresh icy surface in the outer solar system',
-        'DOI: 10.1051/0004-6361:20064906', 'https://www.aanda.org/articles/aa/full/2006/37/aa4906-06/aa4906-06.html',
-        'https://ui.adsabs.harvard.edu/abs/2006A%26A...457..329L/abstract'
-    ],
-    '(55636) 2002 TX300 | Licandro2006, Ortiz2019': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
-        slope: {start: 530, stop: 1200, percent_per_100nm: -1},
-        geometric_albedo: ['Generic_Bessell.V', [0.65, 0.15]],
-    },
-    '(55636) 2002 TX300 | GaiaDR3, Ortiz2019': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
-        nm: [418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990],
-        br: [
-            9.890256e-01, 1.102694e+00, 1.009958e+00, 1.000000e+00, 1.025782e+00, 9.879041e-01,
-            1.237357e+00, 1.103371e+00, 1.127149e+00, 1.108475e+00, 1.136647e+00, 1.119926e+00,
-            1.230715e+00, 1.545572e+00
-        ],
-        sd: [
-            1.524662e-01, 7.597827e-02, 5.861332e-02, 5.401912e-02, 5.537284e-02, 6.211829e-02,
-            6.940003e-02, 6.797095e-02, 6.859302e-02, 7.037257e-02, 7.300120e-02, 7.832822e-02,
-            1.031774e-01, 1.695214e-01
-        ],
-        geometric_albedo: ['Generic_Bessell.V', [0.65, 0.15]],
-    },
     'Lellouch2017': [
         'The thermal emission of Centaurs and trans-Neptunian objects at millimeter wavelengths from ALMA observations',
         'DOI: 10.1051/0004-6361/201731676', 'https://www.aanda.org/articles/aa/full_html/2017/12/aa31676-17/aa31676-17.html',
@@ -3151,11 +3136,28 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
+    'Seccull2019': [
+        '174P/Echeclus and Its Blue Coma Observed Post-outburst',
+        'DOI: 10.3847/1538-3881/aafbe4', 'https://iopscience.iop.org/article/10.3847/1538-3881/aafbe4',
+        'https://ui.adsabs.harvard.edu/abs/2019AJ....157...88S/abstract'
+    ],
     'Pereira2024': [
         'Physical properties of Centaur (60558) 174P/Echeclus from stellar occultations',
         'DOI: 10.1093/mnras/stad3318', 'https://academic.oup.com/mnras/article/527/2/3624/7332922',
         'https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.3624P/abstract'
     ],
+    '(60558) Echeclus: Pre-outburst | Seccull2019, Pereira2024, Rousselot2005a': { // 174P/Echeclus
+        tags: ['Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
+        file: 'spectra/files/Seccull2019/Echeclus_PreOutburst.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.050, 0.003]],
+        phase_function: ['Generic_Bessell.R', 'HG', {H: [9.03, 0.01], G: [-0.39, 0.08]}], // V-band value results in negative phase integral
+    },
+    '(60558) Echeclus: Post-outburst | Seccull2019, Pereira2024, Rousselot2005a': { // 174P/Echeclus
+        tags: ['Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
+        file: 'spectra/files/Seccull2019/Echeclus_PostOutburst.txtU', // 2016-10-08
+        geometric_albedo: ['Generic_Bessell.V', [0.050, 0.003]],
+        phase_function: ['Generic_Bessell.R', 'HG', {H: [9.03, 0.01], G: [-0.39, 0.08]}], // V-band value results in negative phase integral
+    },
     '(60558) Echeclus | AlvarezCandal2008, Pereira2024, Rousselot2005a': { // 174P/Echeclus
         tags: ['Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
         file: 'spectra/files/AlvarezCandal2008/Echeclus.txtU', // Fig. 2
@@ -3168,6 +3170,12 @@
         color_indices: {'B-V': [0.841, 0.072], 'V-R': [0.502, 0.065], 'R-I': [0.486, 0.095]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.050, 0.003]],
+        phase_function: ['Generic_Bessell.R', 'HG', {H: [9.03, 0.01], G: [-0.39, 0.08]}], // V-band value results in negative phase integral
+    },
+    '(60558) Echeclus: Coma | Seccull2019, Pereira2024, Rousselot2005a': { // 174P/Echeclus
+        tags: ['Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
+        file: 'spectra/files/Seccull2019/Echeclus_Coma.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.050, 0.003]],
         phase_function: ['Generic_Bessell.R', 'HG', {H: [9.03, 0.01], G: [-0.39, 0.08]}], // V-band value results in negative phase integral
     },
