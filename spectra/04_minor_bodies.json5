@@ -5064,13 +5064,13 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.142, 0.015]],
     },
-    '(229762 I) Gǃòʼé ǃHú | Grundy2018, Ortiz2019': {
+    '(229762 I) Gǃòʼé ǃHú | Grundy2018, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/detached TNO', 'natural satellite/minor planet moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-I': [1.803, 0.084]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.142, 0.015]], // Assumed to be equal to Gǃkúnǁʼhòmdímà as per Grundy2018 (may not be accurate)
+        geometric_albedo: ['Generic_Bessell.V', [0.167, +0.058, -0.038]], // system albedo
     },
     '(230965) 2004 XA192 | SsODNet, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
