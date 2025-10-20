@@ -5070,7 +5070,7 @@
         color_indices: {'V-I': [1.803, 0.084]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.142, 0.015]], // Assumed to be equal to Gǃkúnǁʼhòmdímà as per Grundy2018
+        geometric_albedo: ['Generic_Bessell.V', [0.142, 0.015]], // Assumed to be equal to Gǃkúnǁʼhòmdímà as per Grundy2018 (may not be accurate)
     },
     '(230965) 2004 XA192 | SsODNet, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
