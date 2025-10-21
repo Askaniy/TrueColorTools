@@ -2304,7 +2304,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.051, 0.017]],
         phase_function: ['HG1G2', {H: [11.246117, +0.185833, -0.224584], G_1: [0.645234, +0.621722, -0.860871], G_2: [0.125981, +0.527312, -0.398559]}],
     },
-    '(23871) 1998 RC76 | GaiaDR3, SsODNet': {
+    '(23871) Ousha | GaiaDR3, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
         nm: [418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990],
         br: [
@@ -3106,7 +3106,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
-    '(59980) 1999 SG6 | GaiaDR3, SsODNet': {
+    '(59980) Moza | GaiaDR3, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
         nm: [418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
         br: [
