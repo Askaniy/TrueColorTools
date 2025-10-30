@@ -7342,7 +7342,7 @@
         color_indices: {'g-r': [0.704, 0.075], 'r-z': [0.245, 0.075]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.333, 0.067]], // system abledo; calculated using occultation results with a derived system diameter of 73 km, and H = 7.5
+        geometric_albedo: ['Generic_Bessell.V', [0.333, 0.067]], // system albedo; calculated using occultation results with a derived system diameter of 73 km, and H = 7.5
     },
     '2007 VH305 | Merlin2017, Mainzer2019': {
         tags: ['Solar System', 'minor body/centaur'],
