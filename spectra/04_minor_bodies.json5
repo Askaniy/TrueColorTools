@@ -2216,32 +2216,40 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
-    '(19521) Chaos | MBOSS, Vilenius2012': {
+    'GomezLimon2024': [
+        'New evidence that (19521) Chaos might be a large compact binary',
+        'https://www.youtube.com/watch?v=Wz7azuTDTb8', 'https://tno2024.org/relation/abstract/129'
+    ],
+    '(19521) Chaos | MBOSS, GomezLimon2024': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.932, 0.054], 'V-R': [0.608, 0.041], 'R-I': [0.571, 0.087]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.050, +0.030, -0.016]], // may not be accurate
+        geometric_albedo: ['Generic_Bessell.V', [0.104, 0.029]], // calculated using occultation results and Hv = 4.987 ±0.065
     },
+    'Ligier2013': [
+        'Analysis of the stellar occultations of January 8, 2013 by Varuna and June 3, 2013 by Chariklo',
+        'https://sendaiuchukan.jp/data/occult/RapportM2.pdf'
+    ],
     'Hicks2005': [
         'Photometric behavior of 20000 Varuna at very small solar phase angles',
         'DOI: 10.1016/j.icarus.2005.01.013', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103505000333',
         'https://ui.adsabs.harvard.edu/abs/2005Icar..176..492H/abstract'
     ],
-    '(20000) Varuna | Fornasier2009, Müller2020, Hicks2005': {
+    '(20000) Varuna | Fornasier2009, Ligier2013, Hicks2005': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         file: 'spectra/files/Fornasier2009/Varuna.txtU', // Fig. 3
-        geometric_albedo: ['Generic_Bessell.V', [0.127, +0.040, -0.042]],
+        geometric_albedo: ['Generic_Bessell.V', [0.096, 0.022]], // calculated using occultation results with a derived diameter of 689 ±30 km, and Hv = 3.966 ±0.233
         phase_function: ['Generic_Bessell.R', 'HG', {H: [3.192, 0.025], G: [-0.354, 0.121]}],
     },
-    '(20000) Varuna | MBOSS, Müller2020, Hicks2005': {
+    '(20000) Varuna | MBOSS, Ligier2013, Hicks2005': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.906, 0.052], 'V-R': [0.626, 0.035], 'R-I': [0.628, 0.040]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.127, +0.040, -0.042]],
+        geometric_albedo: ['Generic_Bessell.V', [0.096, 0.022]], // calculated using occultation results with a derived diameter of 689 ±30 km, and Hv = 3.966 ±0.233
         phase_function: ['Generic_Bessell.R', 'HG', {H: [3.192, 0.025], G: [-0.354, 0.121]}],
     },
     '(20108) 1995 QZ9 | MBOSS': {
@@ -3680,14 +3688,19 @@
         geometric_albedo: ['Generic_Bessell.V', [0.23, 0.02]],
         // phase_function: ['Misc_Atlas.orange', 'phase coefficient', {beta: [0.07, 0.04]}],
     },
-    '(90482 I) Vanth | Brown2010, Brown2018': {
+    'Sickafoose2019': [
+        'A stellar occultation by Vanth, a satellite of (90482) Orcus',
+        'DOI: 10.1016/j.icarus.2018.10.016', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103517307996',
+        'https://ui.adsabs.harvard.edu/abs/2019Icar..319..657S/abstract'
+    ],
+    '(90482 I) Vanth | Brown2010, Sickafoose2019': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F606W', 'F814W'],
         mag: [[21.73, 0.01], [20.90, 0.02]],
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.08, 0.02]],
+        geometric_albedo: ['Generic_Bessell.V', [0.101, 0.007]], // calculated using occultation results and Hv = 4.88 ±0.05
     },
     '(90568) Goibniu | MBOSS, Vilenius2012': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
@@ -4213,6 +4226,11 @@
         geometric_albedo: ['Generic_Bessell.V', [0.506, +0.008, -0.012]],
         spherical_albedo: ['Generic_Bessell.V', [0.402, +0.055, -0.096]],
     },
+    'Buratti2017': [
+        'Global albedos of Pluto and Charon from LORRI New Horizons observations',
+        'DOI: 10.1016/j.icarus.2016.11.012', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103516307308',
+        'https://ui.adsabs.harvard.edu/abs/2017Icar..287..207B/abstract'
+    ],
     'Protopapa2020': [
         'Disk-resolved Photometric Properties of Pluto and the Coloring Materials across its Surface',
         'DOI: 10.3847/1538-3881/ab5e82', 'https://iopscience.iop.org/article/10.3847/1538-3881/ab5e82',
@@ -4223,39 +4241,71 @@
         'DOI: 10.3847/PSJ/ace3ab', 'https://iopscience.iop.org/article/10.3847/PSJ/ace3ab',
         'https://ui.adsabs.harvard.edu/abs/2023PSJ.....4..132H/abstract'
     ],
-    'Belton Regio (Pluto) | Hofgartner2023': {
+    'Baret Montes (Pluto) | Protopapa2020, Buratti2017': { // ROI d (Baret Montes + Viking Terra)
         tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
-        filters: ['Blue', 'Red'],
-        br: [0.07, 0.12], // MVIC NIR and CH4 filters not used
-        is_spherical_albedo: true,
+        filters: ['Blue', 'Red', 'NIR'],
+        br: [1, 1.34, 1.73], // Red/Blue ratio: 1.34 ±0.03, NIR/Red ratio: 1.29 ±0.07 (Averaged ratios)
+        sd: [0, 0.03, 0.10],
+        geometric_albedo: ['NewHorizons_LORRI.Pan', 0.18], // derived from Fig. 3
+        spherical_albedo: ['NewHorizons_LORRI.Pan', 0.13], // derived from Fig. 5
     },
-    'Belton Regio: Eastern part (Pluto) | Protopapa2020': {
+    'Belton Regio: Eastern part (Pluto) | Protopapa2020, Buratti2017, Hofgartner2023': {
         tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR', 'CH4'],
         br: [0.0585206947096734, 0.0996813841082071, 0.1730562863722947, 0.1840942372929328],
         sd: [0.0097710790150524, 0.0115207188360174, 0.0148026051295749, 0.0150387477568582],
-        is_albedo: true, // radiance factor (RADF)
+        geometric_albedo: ['NewHorizons_LORRI.Pan', [0.14, 0.06]], // normal reflectance range of 0.08-0.20
+        spherical_albedo: ['NewHorizons_LORRI.Pan', 0.10], // Table 4 (Hofgartner2023)
     },
-    'Lowell Regio (Pluto) | Protopapa2020': {
+    // the the Pan filters were removed, reconstructed spectrum should be yellow to fit them
+    'Belton Regio (Pluto) | Hofgartner2023, Buratti2017': {
+        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
+        photometric_system: 'NewHorizons_MVIC',
+        filters: ['Blue', 'Red'],
+        br: [0.07, 0.12], // Table 4 (MVIC NIR and CH4 filters not used)
+        is_spherical_albedo: true,
+        geometric_albedo: ['NewHorizons_LORRI.Pan', [0.14, 0.06]], // normal reflectance range of 0.08-0.20
+    },
+    'Lowell Regio (Pluto) | Protopapa2020, Buratti2017': {
         tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR', 'CH4'],
         br: [0.5333532883601964, 0.6891250091800001, 0.6730569209356718, 0.6399055600979812],
         sd: [0.0510219278077558, 0.0590445911622765, 0.0536593855929842, 0.0479830122025796],
-        is_albedo: true, // radiance factor (RADF)
+        geometric_albedo: ['NewHorizons_LORRI.Pan', 0.84], // derived from Fig. 3
+        spherical_albedo: ['NewHorizons_LORRI.Pan', 0.76], // derived from Fig. 5
     },
-    'Sputnik Planitia (Pluto) | Hofgartner2023': {
+    'Sputnik Planitia (Pluto) | Protopapa2020, Buratti2017, Hofgartner2023': { // ROI c (also includes similar misc. volatile-rich regions)
         tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
-        filters: ['Blue', 'Red'],
-        br: [0.78, 0.71], // MVIC NIR and CH4 filters not used
-        is_spherical_albedo: true,
+        filters: ['Blue', 'Red', 'NIR'],
+        br: [1, 1.15, 1.09], // Red/Blue ratio: 1.15 ±0.06, NIR/Red ratio: 0.95 ±0.03 (Averaged ratios)
+        sd: [0, 0.06, 0.07],
+        geometric_albedo: ['NewHorizons_LORRI.Pan', 0.89], // derived from Fig. 3
+        spherical_albedo: ['NewHorizons_LORRI.Pan', 0.86], // Table 4 (Hofgartner2023)
     },
-    '(134340 I) Charon | PinillaAlonso2007, Helfenstein2025': {
+    'Viking Terra (Pluto) | Protopapa2020, Buratti2017': { // ROI d (Baret Montes + Viking Terra)
+        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
+        photometric_system: 'NewHorizons_MVIC',
+        filters: ['Blue', 'Red', 'NIR'],
+        br: [1, 1.34, 1.73], // Red/Blue ratio: 1.34 ±0.03, NIR/Red ratio: 1.29 ±0.07 (Averaged ratios)
+        sd: [0, 0.03, 0.10],
+        geometric_albedo: ['NewHorizons_LORRI.Pan', 0.43], // derived from Fig. 3
+        spherical_albedo: ['NewHorizons_LORRI.Pan', 0.38], // derived from Fig. 5
+    },
+    'Cook2018': [
+        'Composition of Pluto’s small satellites: Analysis of New Horizons spectral images',
+        'DOI: 10.1016/j.icarus.2018.05.024', 'https://www.sciencedirect.com/science/article/pii/S0019103517304979',
+        'https://ui.adsabs.harvard.edu/abs/2018Icar..315...30C/abstract'
+    ],
+    '(134340 I) Charon | Cook2018, Helfenstein2025': {
         tags: ['featured', 'Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'Charon', 'spacecraft target/New Horizons target'],
-        file: 'spectra/files/PinillaAlonso2007/Charon_PinillaAlonso2007.txtU', // Fig. 1
+        photometric_system: 'NewHorizons_MVIC',
+        filters: ['Blue', 'Red', 'NIR'],
+        br: [0.99, 1, 1.04], // Blue/Red ratio: 0.99 ±0.08, Red/NIR ratio: 0.96 ±0.09 (Averaged ratios)
+        sd: [0.08, 0, 0.10],
         geometric_albedo: ['Generic_Bessell.V', [0.408, +0.004, -0.005]],
         spherical_albedo: ['Generic_Bessell.V', [0.228, +0.006, -0.039]],
     },
@@ -4265,6 +4315,12 @@
         filters: ['Blue', 'Red', 'NIR', 'CH4'],
         br: [0.292, 0.288, 0.288, 0.290], // traced from Fig. 11
         sd: [0.030, 0.027, 0.025, 0.026], // traced from Fig. 11
+        geometric_albedo: ['Generic_Bessell.V', [0.408, +0.004, -0.005]],
+        spherical_albedo: ['Generic_Bessell.V', [0.228, +0.006, -0.039]],
+    },
+    '(134340 I) Charon | PinillaAlonso2007, Helfenstein2025': {
+        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'Charon', 'spacecraft target/New Horizons target'],
+        file: 'spectra/files/PinillaAlonso2007/Charon_PinillaAlonso2007.txtU', // Fig. 1
         geometric_albedo: ['Generic_Bessell.V', [0.408, +0.004, -0.005]],
         spherical_albedo: ['Generic_Bessell.V', [0.228, +0.006, -0.039]],
     },
@@ -4310,11 +4366,15 @@
         geometric_albedo: ['NewHorizons_LORRI.Pan', 0.29], // derived from Fig. 4
         spherical_albedo: ['NewHorizons_LORRI.Pan', 0.19], // derived from Fig. 6
     },
-    'Buie2006': [
-        'Orbits and Photometry of Pluto’s Satellites: Charon, S/2005 P1, and S/2005 P2',
-        'DOI: 10.1086/504422', 'https://iopscience.iop.org/article/10.1086/504422',
-        'https://ui.adsabs.harvard.edu/abs/2006AJ....132..290B'
-    ],
+    'Mordor Macula (Charon) | Cook2018, Buratti2017': {
+        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'Charon', 'spacecraft target/New Horizons target'],
+        photometric_system: 'NewHorizons_MVIC',
+        filters: ['Blue', 'Red', 'NIR'],
+        br: [0.79, 1, 1.35], // Blue/Red ratio: 0.79 ±0.05, Red/NIR ratio: 0.74 ±0.06 (Averaged ratios)
+        sd: [0.05, 0, 0.11],
+        geometric_albedo: ['NewHorizons_LORRI.Pan', [0.28, 0.08]], // normal reflectance range of 0.20-0.35
+        spherical_albedo: ['NewHorizons_LORRI.Pan', 0.14], // derived from Fig. 6
+    },
     'Stern2009': [
         'Ejecta exchange and satellite color evolution in the Pluto system, with implications for KBOs and asteroids with satellites',
         'DOI: 10.1016/j.icarus.2008.10.006', 'https://arxiv.org/abs/0805.3482',
@@ -4329,8 +4389,17 @@
         'Charon: Colors and Photometric Properties',
         'DOI: 10.2548/azu_uapress_9780816540945-ch018', 'https://ui.adsabs.harvard.edu/abs/2021psnh.book..413H/abstract'
     ],
-    '(134340 II) Nix | Weaver2016, Howett2021b': {
+    '(134340 II) Nix | Cook2018, Weaver2016, Howett2021b': {
         tags: ['featured', 'Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
+        photometric_system: 'NewHorizons_MVIC',
+        filters: ['Blue', 'Red', 'NIR'],
+        br: [0.99, 1, 0.99], // Blue/Red ratio: 0.99 ±0.03, Red/NIR ratio: 1.01 ±0.02 (Averaged ratios)
+        sd: [0.03, 0, 0.02],
+        geometric_albedo: ['Generic_Bessell.V', [0.56, 0.05]],
+        spherical_albedo: ['Generic_Bessell.V', [0.24, 0.07]], // Table 3, p. 426 (Howett2021b)
+    },
+    '(134340 II) Nix | Weaver2016, Howett2021b': {
+        tags: ['Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.96, 1, 0.98], // Blue/Red ratio: ~0.96, Red/NIR ratio: ~1.02
@@ -4346,19 +4415,26 @@
         geometric_albedo: ['Generic_Bessell.V', [0.56, 0.05]],
         spherical_albedo: ['Generic_Bessell.V', [0.24, 0.07]],  // Table 3, p. 426 (Howett2021)
     },
-    '(134340 II) Nix | Buie2006, Weaver2016, Howett2021b': {
+    '(134340 II) Nix: Red blotch | Cook2018, Howett2021b': {
         tags: ['Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
-        photometric_system: 'Generic_Bessell',
-        filters: ['B', 'V'],
-        mag: [[24.291, 0.110], [23.384, 0.095]],
-        // color is significantly redder than other reported colors (Stern2009), and could possiblly be attributed to the reddish feature on Nix as observed by NH?
-        calibration_system: 'Vega',
-        is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.56, 0.05]],
-        phase_integral: [0.42, 0.08], // Table 3, p. 426 (Howett2021b)
+        photometric_system: 'NewHorizons_MVIC',
+        filters: ['Blue', 'Red', 'NIR'],
+        br: [0.97, 1, 1.04], // Blue/Red ratio: 0.97 ±0.03, Red/NIR ratio: 0.96 ±0.03 (Averaged ratios)
+        sd: [0.03, 0, 0.03],
+        geometric_albedo: ['Generic_Bessell.V', 0.45], // assumed to be similar contrast as Haumea’s DRS (~80%)
+        phase_integral: [0.42, 0.08],
+    },
+    '(134340 III) Hydra | Cook2018, Weaver2016, Howett2021b': {
+        tags: ['featured', 'Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
+        photometric_system: 'NewHorizons_MVIC',
+        filters: ['Blue', 'Red', 'NIR'],
+        br: [1.00, 1, 0.88], // Blue/Red ratio: 1.00 ±0.04, Red/NIR ratio: 1.14 ±0.07 (Averaged ratios)
+        sd: [0.04, 0, 0.05],
+        geometric_albedo: ['Generic_Bessell.V', [0.83, 0.08]],
+        spherical_albedo: ['Generic_Bessell.V', [0.32, 0.11]], // Table 3, p. 426 (Howett2021b)
     },
     '(134340 III) Hydra | Weaver2016, Howett2021b': {
-        tags: ['featured', 'Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [1.00, 1, 0.90], // Blue/Red ratio: ~1.00, Red/NIR ratio: ~1.11
@@ -4374,6 +4450,11 @@
         geometric_albedo: ['Generic_Bessell.V', [0.83, 0.08]],
         spherical_albedo: ['Generic_Bessell.V', [0.32, 0.11]], // Table 3, p. 426 (Howett2021)
     },
+    'Buie2006': [
+        'Orbits and Photometry of Pluto’s Satellites: Charon, S/2005 P1, and S/2005 P2',
+        'DOI: 10.1086/504422', 'https://iopscience.iop.org/article/10.1086/504422',
+        'https://ui.adsabs.harvard.edu/abs/2006AJ....132..290B'
+    ],
     '(134340 III) Hydra | Buie2006, Weaver2016, Howett2021b': {
         tags: ['Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         photometric_system: 'Generic_Bessell',
@@ -4465,11 +4546,13 @@
         'DOI: 10.1051/0004-6361/201630354', 'https://www.aanda.org/articles/aa/full_html/2017/08/aa30354-16/aa30354-16.html',
         'https://ui.adsabs.harvard.edu/abs/2017A%26A...604A..95S/abstract'
     ],
-    '(136108) Haumea: Dark red spot | Lacerda2009, SantosSanz2017': {
+    'Dark Red Spot (Haumea) | Lacerda2009, SantosSanz2017, Helfenstein2025': {
         tags: ['Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         filters: ['Generic_Bessell.B', 'Generic_Bessell.R', 'Generic_Bessell_JHKLM.J', 'Generic_Bessell_JHKLM.H'],
         br: [0.983, 1, 1.015, 1.040], // average of rotational phases 0.70 to 0.90 in Fig. 2b (DRS regions)
+        sd: [0.009, 0, 0.007, 0.012],
         geometric_albedo: ['Generic_Bessell.V', 0.41], // calculated from Ortiz2017 albedo with albedo constrast of ~80%
+        phase_integral: [0.454, +0.034, -0.047], // system
     },
     'Kalup2023': [
         'ALMA Band-7 Flux Density Prediction of the Haumea Ring System for Ongoing Observations',
@@ -4484,21 +4567,21 @@
     // these three models have the closest contribution percentage (1.6%) to Haumea’s total
     // brightness to the best-fit contribution (2.5%) of Ortiz et al. (2017)
     // 100 nm particles
-    'Rings of Haumea: Amorphous water ice | Kalup2024, Ortiz2017, Kalup2023': {
+    'Ring of Haumea: Amorphous water ice | Kalup2024, Ortiz2017, Kalup2023': {
         tags: ['Solar System/Haumean system', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family', 'ring'],
         file: 'spectra/files/Kalup2024/Haumea_rings_amorphous_water_ice.txtU', // Fig. 4 (Kalup2024)
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.09], // best-guess I/F for a 70 km wide ring (Ortiz2017)
         phase_integral: 0.26, // for low I/F of 0.09 (Kalup2023)
     },
-    'Rings of Haumea: Crystallized water ice | Kalup2024, Ortiz2017, Kalup2023': {
+    'Ring of Haumea: Crystallized water ice | Kalup2024, Ortiz2017, Kalup2023': {
         tags: ['Solar System/Haumean system', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family', 'ring'],
         file: 'spectra/files/Kalup2024/Haumea_rings_crystallized_water_ice.txtU', // Fig. 4 (Kalup2024)
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.09], // best-guess I/F for a 70 km wide ring (Ortiz2017)
         phase_integral: 0.26, // for low I/F of 0.09 (Kalup2023)
     },
-    'Rings of Haumea: Pyroxene | Kalup2024, Ortiz2017, Kalup2023': {
+    'Ring of Haumea: Pyroxene | Kalup2024, Ortiz2017, Kalup2023': {
         tags: ['Solar System/Haumean system', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family', 'ring'],
         file: 'spectra/files/Kalup2024/Haumea_rings_pyroxene.txtU', // Fig. 4 (Kalup2024)
         is_reflecting_sunlight: true,
@@ -4529,7 +4612,7 @@
         color_indices: {'F606W-F814W': [0.43, 0.47]}, // extracted from Fig. 2, uncertainty may be incorrect
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.72], // for D = 150 ±50 km and Hv = ~5.1
+        geometric_albedo: ['Generic_Bessell.V', [0.72, 0.48]], // calculated for D = 150 ±50 km and Hv ≈ 5.1
         phase_integral: [0.454, +0.034, -0.047], // system
     },
     '(136120) 2003 LG7 | Sheppard2012': {
@@ -5930,29 +6013,43 @@
         'Colors of (486958) 2014 MU69 as Observed by New Horizons’ Multi-Spectral Visible Imaging Camera (MVIC)',
         'https://ui.adsabs.harvard.edu/abs/2019LPI....50.1982H/abstract'
     ],
-    'Wenu Lobus (Arrokoth) | Howett2019': {
+    'Stern2019': [
+        'Initial results from the New Horizons exploration of 2014 MU69, a small Kuiper Belt object',
+        'DOI: 10.1126/science.aaw9771', 'https://www.science.org/doi/10.1126/science.aaw9771',
+        'https://ui.adsabs.harvard.edu/abs/2019Sci...364.9771S/abstract'
+    ],
+    '(486958) Arrokoth: Bright spots | Stern2019, Hofgartner2021': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'Arrokoth', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
-        filters: ['Blue', 'Red', 'NIR'],
-        br: [0.053, 0.079, 0.117], // phase angle = 11.68°
-        sd: [0.005, 0.005, 0.006],
-        is_albedo: true,
+        filters: ['Blue', 'Red', 'NIR'], // CH4 removed due to spectral reconstruction algorithm artifact
+        br: [[0.054, 0.007], [0.081, 0.010], [0.115, 0.014]], // Fig. 5D
+        geometric_albedo: ['NewHorizons_LORRI.Pan', 0.45], // brightest normal reflectance on Arrokoth that occurs at the neck and at bright spots
+        phase_integral: [0.37, 0.16],
     },
-    'Weeyo Lobus (Arrokoth) | Howett2019': {
+    'Wenu Lobus (Arrokoth) | Stern2019, Hofgartner2021': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'Arrokoth', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
-        filters: ['Blue', 'Red', 'NIR'],
-        br: [0.058, 0.084, 0.122], // phase angle = 11.68°
-        sd: [0.005, 0.004, 0.006],
-        is_albedo: true,
+        filters: ['Blue', 'Red', 'NIR', 'CH4'],
+        br: [[0.050, 0.006], [0.073, 0.008], [0.120, 0.012], [0.124, 0.012]], // Fig. 5D
+        // errors are approximated via averaging due to being obscured in Fig. 5D
+        geometric_albedo: ['NewHorizons_LORRI.Pan', [0.251, 0.034]], // normal reflectance
+        phase_integral: [0.37, 0.16],
     },
-    'Akasa Linea (Arrokoth) | Howett2019': {
+    'Weeyo Lobus (Arrokoth) | Stern2019, Hofgartner2021': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'Arrokoth', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
-        filters: ['Blue', 'Red', 'NIR'],
-        br: [0.066, 0.090, 0.125], // phase angle = 11.68°
-        sd: [0.004, 0.003, 0.001],
-        is_albedo: true,
+        filters: ['Blue', 'Red', 'NIR', 'CH4'],
+        br: [[0.048, 0.006], [0.071, 0.006], [0.116, 0.012], [0.121, 0.013]], // Fig. 5D
+        geometric_albedo: ['NewHorizons_LORRI.Pan', [0.244, 0.040]], // normal reflectance
+        phase_integral: [0.37, 0.16],
+    },
+    'Akasa Linea (Arrokoth) | Stern2019, Hofgartner2021': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'Arrokoth', 'spacecraft target/New Horizons target'],
+        photometric_system: 'NewHorizons_MVIC',
+        filters: ['Blue', 'Red', 'NIR', 'CH4'],
+        br: [[0.063, 0.004], [0.090, 0.008], [0.143, 0.011], [0.146, 0.011]], // Fig. 5D
+        geometric_albedo: ['NewHorizons_LORRI.Pan', 0.45], // brightest normal reflectance on Arrokoth that occurs at the neck and at bright spots
+        phase_integral: [0.37, 0.16],
     },
     '(506479) 2003 HB57 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
@@ -6352,7 +6449,7 @@
         color_indices: {'g-r': [0.88, 0.21], 'r-i': [0.34, 0.26], 'r-z': [0.13, 0.22]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.125], // calculated by Zel using occultation results
+        geometric_albedo: ['Generic_Bessell.V', 0.125], // calculated using occultation results with a derived diameter of 620 km, and H = 3.91
     },
     '(578992) 2014 JL80 | Thirouin2019': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
@@ -7250,7 +7347,7 @@
         color_indices: {'g-r': [0.704, 0.075], 'r-z': [0.245, 0.075]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.317], // system albedo calculated using occultation results
+        geometric_albedo: ['Generic_Bessell.V', [0.333, 0.067]], // system abledo; calculated using occultation results with a derived system diameter of 73 km, and H = 7.5
     },
     '2007 VH305 | Merlin2017, Mainzer2019': {
         tags: ['Solar System', 'minor body/centaur'],
@@ -7859,7 +7956,7 @@
         color_indices: {'g-r': [0.70, 0.10], 'r-i': [0.25, 0.06], 'i-z': [-0.27, 0.10]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.118], // Calculated using D = 60 ±7 m and Hv = 24.05 ±0.15
+        geometric_albedo: ['Generic_Bessell.V', [0.118, 0.032]], // calculated using D = 60 ±7 m and Hv = 24.05 ±0.15
     },
 
     // Periodic comets
@@ -8611,7 +8708,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
-    '(C/2001 M10) NEAT| MBOSS': {
+    '(C/2001 M10) NEAT | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'minor body/centaur/active centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.963, 0.233], 'V-R': [0.350, 0.060], 'R-I': [0.520, 0.080]},
