@@ -4343,11 +4343,6 @@
         'DOI: 10.1038/nature19340', 'https://www.nature.com/articles/nature19340',
         'https://ui.adsabs.harvard.edu/abs/2016Natur.539...65G/abstract'
     ],
-    'Buratti2017': [
-        'Global albedos of Pluto and Charon from LORRI New Horizons observations',
-        'DOI: 10.1016/j.icarus.2016.11.012', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103516307308',
-        'https://ui.adsabs.harvard.edu/abs/2017Icar..287..207B/abstract'
-    ],
     '(134340 I) Charon: 50°—60° N | Grundy2016, Buratti2017': {
         tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'Charon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
