@@ -1817,13 +1817,25 @@
         file: 'spectra/files/SMASS/a009969.4.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.34, 0.03]],
     },
+    'Guilbert2009': [
+        'A portrait of Centaur 10199 Chariklo',
+        'DOI: 10.1051/0004-6361/200911660', 'https://www.aanda.org/articles/aa/full_html/2009/26/aa11660-09/aa11660-09.html',
+        'https://ui.adsabs.harvard.edu/abs/2009A%26A...501..777G/abstract'
+    ],
     'Leiva2017': [
         'Size and Shape of Chariklo from Multi-epoch Stellar Occultations',
         'DOI: 10.3847/1538-3881/aa8956', 'https://iopscience.iop.org/article/10.3847/1538-3881/aa8956',
         'https://ui.adsabs.harvard.edu/abs/2017AJ....154..159L/abstract'
     ],
+    '(10199) Chariklo | Guilbert2009, Leiva2017, Bauer2003': {
+        tags: ['featured', 'Solar System', 'minor body/centaur'],
+        // spectrum used by Duffard2014b to model the continuum, with almost no ring contribution (aspect angle 90.4°)
+        file: 'spectra/files/Chariklo_Guilbert2009.txtU', // Fig. 1 (Alvarez-Candal et al.,2008)
+        geometric_albedo: ['Generic_Bessell.V', [0.037, 0.001]], // ellipsoid model
+        phase_function: ['HG', {H: 6.50, G: [0.08, 0.05]}],
+    },
     '(10199) Chariklo | SMASS, Leiva2017, Bauer2003': {
-        tags: ['featured', 'SMASS', 'Solar System', 'minor body/centaur'],
+        tags: ['SMASS', 'Solar System', 'minor body/centaur'],
         file: 'spectra/files/SMASS/a010199.2.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.037, 0.001]], // ellipsoid model
         phase_function: ['HG', {H: 6.50, G: [0.08, 0.05]}],
@@ -2517,8 +2529,14 @@
         geometric_albedo: ['Generic_Bessell.V', [0.066, 0.005]],
         phase_function: ['Palomar_ZTF.g', 'HG1G2', {H: [12.788, 0.274], G_1: [0.756, 0.784], G_2: [0.172, 0.422]}],
     },
-    '(28978) Ixion | Marchi2003, Helfenstein2025': {
+    '(28978) Ixion | AlvarezCandal2008, Helfenstein2025': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
+        file: 'spectra/files/AlvarezCandal2008/Ixion.txtU', // Fig. 2
+        geometric_albedo: ['Generic_Bessell.V', [0.101, 0.010]],
+        spherical_albedo: ['Generic_Bessell.V', [0.032, +0.003, -0.002]],
+    },
+    '(28978) Ixion | Marchi2003, Helfenstein2025': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
         file: 'spectra/files/Marchi2003/Ixion.txt',
         geometric_albedo: ['Generic_Bessell.V', [0.101, 0.010]],
         spherical_albedo: ['Generic_Bessell.V', [0.032, +0.003, -0.002]],
@@ -2704,7 +2722,7 @@
     ],
     '(38628) Huya | Merlin2017, SantosSanz2022, Sheppard2003': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
-        file: 'spectra/files/Merlin2017/Huya_Merlin2017.txtU', // mean spectrum
+        file: 'spectra/files/Merlin2017/Huya_Merlin2017.txt', // mean spectrum
         geometric_albedo: ['Generic_Bessell.V', [0.079, 0.004]],
         phase_function: ['HG', {H: [4.45, 0.01], G: [0.10, 0.03]}],
     },
@@ -2887,13 +2905,30 @@
         is_reflecting_sunlight: true,
         phase_function: ['HG', {H: 10.10, G: [-0.11, 0.08]}],
     },
+    'Barucci2015': [
+        '(50000) Quaoar: Surface composition variability',
+        'DOI: 10.1051/0004-6361/201526119', 'https://www.aanda.org/articles/aa/full_html/2015/12/aa26119-15/aa26119-15.html',
+        'https://ui.adsabs.harvard.edu/abs/2015A%26A...584A.107B/abstract'
+    ],
     'Kiss2024': [
         'The visible and thermal light curve of the large Kuiper belt object (50000) Quaoar',
         'DOI: 10.1051/0004-6361/202348054', 'https://www.aanda.org/articles/aa/full_html/2024/04/aa48054-23/aa48054-23.html',
         'https://ui.adsabs.harvard.edu/abs/2024A%26A...684A..50K/abstract'
     ],
-    '(50000) Quaoar | Marchi2003, Kiss2024, Helfenstein2025': {
+    '(50000) Quaoar | Barucci2015, Kiss2024, Helfenstein2025': {
         tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
+        file: 'spectra/files/Quaoar_Barucci2015.txt', // average of four spectra from Fig. 1
+        geometric_albedo: ['Generic_Bessell.V', [0.11, 0.01]],
+        phase_integral: [0.562, +0.020, -0.059],
+    },
+    '(50000) Quaoar | AlvarezCandal2008, Kiss2024, Helfenstein2025': {
+        tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
+        file: 'spectra/files/AlvarezCandal2008/Quaoar.txtU', // Fig. 2
+        geometric_albedo: ['Generic_Bessell.V', [0.11, 0.01]],
+        phase_integral: [0.562, +0.020, -0.059],
+    },
+    '(50000) Quaoar | Marchi2003, Kiss2024, Helfenstein2025': {
+        tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         file: 'spectra/files/Marchi2003/Quaoar.txt',
         geometric_albedo: ['Generic_Bessell.V', [0.11, 0.01]],
         phase_integral: [0.562, +0.020, -0.059],
@@ -2988,9 +3023,9 @@
         'DOI: 10.1051/0004-6361/202450833', 'https://www.aanda.org/articles/aa/abs/2024/09/aa50833-24/aa50833-24.html',
         'https://ui.adsabs.harvard.edu/abs/2024EPSC...17..530R/abstract'
     ],
-    '(54598) Bienor | Lazzarin2003, Rizos2024, Dobson2023': {
+    '(54598) Bienor | AlvarezCandal2008, Rizos2024, Dobson2023': {
         tags: ['Solar System', 'minor body/centaur'],
-        file: 'spectra/files/Lazzarin2003/2000QC243.txtA', // Fig. 2
+        file: 'spectra/files/AlvarezCandal2008/Bienor.txtU', // Fig. 2
         geometric_albedo: ['Generic_Bessell.V', [0.065, 0.005]],
         phase_function: ['Misc_Atlas.orange', 'phase coefficient', {beta: [0.062, 0.014]}],
     },
@@ -4617,18 +4652,14 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true
     },
-    '(136199) Eris | Lorenzi2016, Helfenstein2025': {
+    'AlvarezCandal2011': [
+        'The spectrum of (136199) Eris between 350 and 2350 nm: results with X-Shooter',
+        'DOI: 10.1051/0004-6361/201117069', 'https://www.aanda.org/articles/aa/full_html/2011/08/aa17069-11/aa17069-11.html',
+        'https://ui.adsabs.harvard.edu/abs/2011A%26A...532A.130A/abstract'
+    ],
+    '(136199) Eris | AlvarezCandal2011, Helfenstein2025': {
         tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/detached TNO'],
-        nm: [
-            417.357, 479.507, 532.699, 585.89, 601.008, 604.367, 622.844, 637.962, 653.08, 656.439,
-            659.239, 673.236, 679.955, 692.273, 702.912, 712.43, 734.267, 740.426, 747.704, 750.504,
-            765.062, 779.059, 788.578, 793.617, 809.295, 813.774, 826.652, 841.209, 860.246
-        ],
-        br: [
-            0.995, 1.059, 1.084, 1.101, 1.08, 1.104, 1.111, 1.103, 1.121, 1.104, 1.11, 1.097, 1.117,
-            1.034, 1.121, 1.13, 1.11, 1.073, 1.11, 1.077, 1.132, 1.138, 1.087, 1.126, 1.018, 1.079,
-            0.881, 1.072, 1.13
-        ],
+        file: 'spectra/files/Eris_AlvarezCandal2011.txt', // average of two spectra
         geometric_albedo: ['Generic_Bessell.V', [0.94, +0.16, -0.10]],
         spherical_albedo: ['Generic_Bessell.V', [0.931, +0.067, -0.049]],
     },
@@ -4735,7 +4766,7 @@
     },
     '(144897) 2004 UX10 | Fornasier2009, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino'],
-        file: 'spectra/files/Fornasier2009/2004UX10.txtU', // average of two spectra from Fig. 3
+        file: 'spectra/files/Fornasier2009/2004UX10.txt', // average of two spectra from Fig. 3
         geometric_albedo: ['Generic_Bessell.V', [0.141, +0.044, -0.031]],
     },
     '(144897) 2004 UX10 | MBOSS, Müller2020': {
@@ -5712,7 +5743,7 @@
     },
     '(455502) 2003 UZ413 | Fornasier2009, FarkasTakacs2020': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
-        file: 'spectra/files/Fornasier2009/2003UZ413.txtU', // average of three spectra from Fig. 4
+        file: 'spectra/files/Fornasier2009/2003UZ413.txt', // average of three spectra from Fig. 4
         geometric_albedo: ['Generic_Bessell.V', [0.075, +0.076, -0.006]], // fixed η
     },
     '(459865) 2013 XZ8 | MBOSS, Vernazza2025, Dobson2023': {
