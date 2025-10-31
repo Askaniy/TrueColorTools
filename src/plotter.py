@@ -100,10 +100,13 @@ def plot_spectra(
                     )
                     ax.set_ylim(y_lim)
             ax.legend()
-        fig.tight_layout() # moving to subplots() causes UserWarning
+        # Forcefully clip the X-axis range (required for photospectrum objects)
+        if limit_to_vis:
+            ax.set_xlim(visible_range[0], visible_range[-1])
+        fig.tight_layout()
         return fig
 
-def plot_filters(filters: Sequence[Spectrum], color_system: ColorSystem, lang: str, figsize: tuple, dpi: int):
+def plot_filters(filters: Sequence[Spectrum], color_system: ColorSystem, lang: str, figsize: tuple[float], dpi: int):
     """
     Creates a figure with plotted filter profiles and the color matching functions.
     The curves are normalized by their maximum value.
@@ -120,5 +123,5 @@ def plot_filters(filters: Sequence[Spectrum], color_system: ColorSystem, lang: s
         color.gamma_correction = True
         color.maximize_brightness = True
         ax.plot(profile.nm, profile.br / profile.br.max(), label=profile.name(lang), color=color.to_html())
-    fig.tight_layout() # moving to subplots() causes UserWarning
+    fig.tight_layout()
     return fig
