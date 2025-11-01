@@ -4124,7 +4124,7 @@
         'DOI: 10.48550/arXiv.2509.02734', 'https://arxiv.org/abs/2509.02734',
         'https://ui.adsabs.harvard.edu/abs/2025arXiv250902734C/abstract'
     ],
-    '(120347 I) Actaea: Bright areas | Stansberry2012, Collyer2025b': { // assumes all of the lightcurve amplitude is caused by non-uniform surface morphology 
+    '(120347 I) Actaea: Bright areas | Stansberry2012, Collyer2025b': { // assumes all of the lightcurve amplitude is caused by non-uniform surface morphology
         tags: ['Solar System', 'minor body/TNO/classical TNO/hot classical TNO', 'natural satellite/minor planet moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'V-I': [0.89, 0.02]},
@@ -8590,7 +8590,7 @@
         'DOI: 10.3847/1538-3881/ac6dcb', 'https://iopscience.iop.org/article/10.3847/1538-3881/ac6dcb',
         'https://ui.adsabs.harvard.edu/abs/2022AJ....164....1H/abstract'
     ],
-    '323P/SOHO 2: Nucleus, Feb 13 2021 | Hui2022': {
+    '323P/SOHO 2: Nucleus, 2021-02-13 | Hui2022': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.44, 0.06], 'r-i': [-0.08, 0.09]},
@@ -8598,7 +8598,7 @@
         is_reflecting_sunlight: true,
         phase_function: ['HG', {H: [21.33, 0.08], G: [0.17, 0.04]}], // Table 3
     },
-    '323P/SOHO 2: Nucleus, Mar 3 2021 | Hui2022': {
+    '323P/SOHO 2: Nucleus, 2021-03-03 | Hui2022': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.68, 0.05], 'r-i': [-0.16, 0.05]},
@@ -8606,7 +8606,7 @@
         is_reflecting_sunlight: true,
         phase_function: ['HG', {H: [21.33, 0.08], G: [0.17, 0.04]}], // Table 3
     },
-    '323P/SOHO 2: Dust ejecta, Feb 13 2021 | Hui2022': {
+    '323P/SOHO 2: Dust ejecta, 2021-02-13 | Hui2022': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.85, 0.07], 'r-i': [-0.07, 0.11]},
@@ -8614,7 +8614,7 @@
         is_reflecting_sunlight: true,
         phase_function: ['HG', {H: [21.33, 0.08], G: [0.17, 0.04]}], // Table 3
     },
-    '323P/SOHO 2: Dust ejecta, Mar 3 2021 | Hui2022': {
+    '323P/SOHO 2: Dust ejecta, 2021-03-03 | Hui2022': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.37, 0.05], 'r-i': [-0.11, 0.07]}, // Average
