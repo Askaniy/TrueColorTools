@@ -56,7 +56,7 @@ def plot_spectra(
         normalize_at_550nm: bool,
         light_theme: bool,
         lang: str,
-        figsize: tuple[float],
+        figsize: tuple[float, float],
         dpi: int
     ):
     """ Creates a figure with plotted spectra from the input list """
@@ -106,7 +106,7 @@ def plot_spectra(
         fig.tight_layout()
         return fig
 
-def plot_filters(filters: Sequence[Spectrum], color_system: ColorSystem, lang: str, figsize: tuple[float], dpi: int):
+def plot_filters(filters: Sequence[Spectrum], color_system: ColorSystem, lang: str, figsize: tuple[float, float], dpi: int):
     """
     Creates a figure with plotted filter profiles and the color matching functions.
     The curves are normalized by their maximum value.

@@ -1,6 +1,7 @@
 """ Responsible for the creation and translation of the graphical interface. """
 
 from collections.abc import Callable
+from typing import Any
 from time import strftime
 import platform
 import FreeSimpleGUI as sg
@@ -32,13 +33,13 @@ if platform.system() == 'Windows':
     sg.set_options(font=('Segoe UI', 10))
 
 
-def create_logger(window: sg.Window, key: str) -> Callable:
+def create_logger(window: sg.Window, key: str) -> Callable[[str, Any], None]:
     """ Creates a function that sends messages to the window main thread """
-    def logger(message: str, data=None):
+    def logger(message: str, data: Any = None) -> None:
         window.write_event_value((key, f'{strftime("%H:%M:%S")} {message}'), data)
     return logger
 
-def generate_plot_layout(lang: str, plot_size: tuple, limit_to_vis: bool, normalize_at_550nm: bool, light_theme: bool):
+def generate_plot_layout(lang: str, plot_size: tuple[int, int], limit_to_vis: bool, normalize_at_550nm: bool, light_theme: bool):
     """ Window 1 layout generator, the window of plot """
     return [
         [
@@ -67,10 +68,10 @@ def generate_menu_bar(lang: str):
     ]
 
 def generate_layout(
-        circle_size: tuple,
-        filters_plot_size: tuple,
-        img_preview_size: tuple,
-        filtersDB: tuple,
+        circle_size: tuple[int, int],
+        filters_plot_size: tuple[int, int],
+        img_preview_size: tuple[int, int],
+        filtersDB: tuple[str, ...],
         color_space: str,
         white_point: str,
         gamma: bool,
@@ -173,7 +174,7 @@ def generate_layout(
         ],
     ]
 
-    def frame(num: int, filtersDB: tuple, lang: str):
+    def frame(num: int, filtersDB: tuple[str, ...], lang: str):
         n = str(num)
         try:
             rgb_text = sg.Text(tr.gui_RGBcolors[lang][num], key='tab2_rgbText'+n)
@@ -317,7 +318,7 @@ def generate_layout(
     ]
 
 
-def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict, tab2_vis: int, lang: str):
+def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict[str, str], tab2_vis: int, lang: str):
     window['menu'].update(generate_menu_bar(lang))
     window['tab1'].update(title=tr.gui_tabs[lang][0])
     window['tab2'].update(title=tr.gui_tabs[lang][1])

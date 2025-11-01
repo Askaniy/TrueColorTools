@@ -108,7 +108,7 @@ def notes_list(obj_names: list[ObjectName], lang: str) -> list[str]:
 # Support of the filters database provided by Filter Profile Service
 # http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php
 
-def list_filters():
+def list_filters() -> tuple[str, ...]:
     """ Returns list of file names were found in the filters folder """
     files = sorted(Path('filters').glob('*.*'))
     return tuple(file.stem for file in files)

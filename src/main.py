@@ -4,6 +4,7 @@ import FreeSimpleGUI as sg
 from sigfig import round as sigfig_round
 from copy import deepcopy
 from time import strftime
+import numpy as np
 
 from src.core import Spectrum, ReflectingBody, ColorSystem, ColorPoint, FilterNotFoundError, \
     visible_range, sun_in_V, get_filter, database_parser
@@ -23,7 +24,7 @@ def launch_window(lang: str):
     objectsDB, refsDB = {}, {}
     namesDB = {}
     tagsDB = []
-    filtersDB = db.list_filters()
+    filtersDB: tuple[str, ...] = db.list_filters()
 
     # Processing configuration
     default_tag = 'featured'
@@ -38,7 +39,8 @@ def launch_window(lang: str):
 
     # GUI configuration
     tab2_num = 8 # max number of image bands
-    tab2_vis = tab2_num # current number of visible image bands
+    tab2_vis = 3 # current number of visible image bands
+    tab2_mode = 1 # default mode of the Tab 2 input data
     circle_r = 100 # radius in pixels of color preview circle
     circle_coord = (circle_r, circle_r+1)
     circle_size = (2*circle_r+1, 2*circle_r+1)
@@ -94,6 +96,8 @@ def launch_window(lang: str):
     tab1_albedo_note = tr.gui_blank_note
     tab2_preview = None
     tab2_filters = []
+    tab2_filters_checklist = np.zeros(tab2_num, dtype='bool')
+    tab2_filters_were_updated = False
     tab3_obj_name = tab3_html = tab3_spectrum = None
 
     def tab1_tab3_update_plot(fig, fig_canvas_agg, current_tab, limit_to_vis, normalize_at_550nm, light_theme: bool, lang: str):
@@ -433,25 +437,40 @@ def launch_window(lang: str):
                         window['tab2_path'].update(visible=tab2_single_file_flag)
                         window['tab2_pathText'].update(visible=tab2_single_file_flag)
 
-                    elif event.startswith('tab2_filter') or event.startswith('tab2_path') or event.startswith('tab2_eval'):
-                        # Getting filters and image paths
-                        tab2_files = []
+                    elif event.startswith('tab2_filter'):
+                        # Updates the list of filters and generates the checklist of valid inputs
+                        tab2_filters_old = tab2_filters
                         tab2_filters = []
-                        tab2_formulas = []
+                        tab2_filters_checklist_old = tab2_filters_checklist
+                        tab2_filters_checklist = np.zeros(tab2_num, dtype='bool')
                         for i in range(tab2_vis):
                             tab2_filter_name = values[f'tab2_filter{i}']
-                            if tab2_filter_name != '':
+                            if len(tab2_filter_name) > 2:
+                                # Starting with an input length of 3 because:
+                                # - Assuming that no filter names are so short
+                                # - The wavelength input is always more than three digits
                                 try:
                                     tab2_filter = get_filter(tab2_filter_name)
                                     tab2_filters.append(tab2_filter)
+                                    tab2_filters_checklist[i] = True
                                 except FilterNotFoundError:
                                     pass
-                                tab2_files.append(values[f'tab2_path{i}'])
-                                tab2_formulas.append(values[f'tab2_eval{i}'])
+                        # To not update the plot when the input is less than three digits or causes an error
+                        tab2_filters_were_updated = not (
+                            np.array_equal(tab2_filters_checklist_old, tab2_filters_checklist) and tab2_filters_old == tab2_filters
+                        )
 
                     # Image processing
                     elif event in ('tab2_preview_button', 'tab2_folder'):
-                        window.start_thread(
+                        # Reading files and formulas to evaluate
+                        tab2_files = []
+                        tab2_formulas = []
+                        for i in range(tab2_vis):
+                            if tab2_filters_checklist[i]:
+                                tab2_files.append(values[f'tab2_path{i}'])
+                                tab2_formulas.append(values[f'tab2_eval{i}'])
+                        # Starting the image processing thread
+                        _ = window.start_thread(
                             lambda: ip.image_parser(
                                 image_mode=tab2_mode,
                                 preview_flag=event=='tab2_preview_button',
@@ -494,7 +513,7 @@ def launch_window(lang: str):
                         window['tab2_preview'].update(data=tab2_preview_rgb.to_bytes())
 
                 # Updating filters profile plot
-                if (isinstance(event, str) and event.startswith('tab2_filter')) or event in ('-currentTab-', '-ColorSpace-', '-WhitePoint-'):
+                if event in ('-currentTab-', '-ColorSpace-', '-WhitePoint-') or tab2_filters_were_updated:
                     if not tab2_opened:
                         # The first tab opening
                         tab2_fig = pl.plot_filters((), color_system, lang, filters_figsize, filters_dpi)
@@ -505,6 +524,7 @@ def launch_window(lang: str):
                         tab2_fig = pl.plot_filters(tab2_dict_to_plot, color_system, lang, filters_figsize, filters_dpi)
                         tab2_fig_canvas_agg.get_tk_widget().forget()
                     tab2_fig_canvas_agg = pl.draw_figure(window['tab2_canvas'].TKCanvas, tab2_fig)
+                    tab2_filters_were_updated = False
 
 
             # ------------ Events in the tab "Blackbody & Redshifts" ------------
