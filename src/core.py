@@ -289,7 +289,8 @@ class _TrueColorToolsObject:
         if isinstance(where, str|int|float):
             where = get_filter(where)
         current_br, sd = self @ where
-        if current_br == 0:
+        if current_br <= 0:
+            # Prevents errors of dividing by zero and inversion
             return output
         if isinstance(how, Sequence):
             how = how[0] # likely a [value, std]
