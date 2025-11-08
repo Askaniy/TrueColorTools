@@ -50,7 +50,7 @@ def bw_reader(file: str) -> np.ndarray:
     br = br.transpose()
     if br.ndim == 3:
         print(f'# Note for the image "{Path(file).name}"')
-        print(f'- This is a multi-channel image, but should be single-channel. The brightest channel is extracted.')
+        print('- This is a multi-channel image, but should be single-channel. The brightest channel is extracted.')
         br = br[np.argmax(br.sum(axis=(1,2)))]
     return br
 
@@ -115,7 +115,7 @@ def img2array(img: Image.Image):
     mem = data.data.cast('B', (data.data.nbytes,))
     bufsize, s, offset = 65536, 0, 0
     while not s:
-        l, s, d = e.encode(bufsize)
+        _, s, d = e.encode(bufsize)
         mem[offset:offset + len(d)] = d
         offset += len(d)
     if s < 0:

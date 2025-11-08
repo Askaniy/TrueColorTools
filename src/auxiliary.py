@@ -90,7 +90,8 @@ def spectral_downscaling(nm0: Sequence, br0: np.ndarray, sd0: np.ndarray, nm1: S
     nm_mid = (nm0[1:] + nm0[:-1]) * 0.5
     # Calculates the continuous (smoothed by gaussian) density of the original spectral grid
     sd_local = gaussian_width(gaussian_convolution(nm_mid, nm_diff, nm1, step*2), step) # missing "blur"
-    factors = -0.5 / sd_local**2 # Gaussian exponent multipliers
+    # Gaussian exponent multipliers (0.001 is a small value to prevent zero division error like with 203 Pompeja)
+    factors = -0.5 / np.clip(sd_local, 0.001, None)**2
     # Convolution with Gaussian of variable standard deviation
     br1 = np.empty_like(nm1, dtype='float64')
     if cube_flag:
