@@ -1,0 +1,133 @@
+{
+    // Synthetic Martian H2O snow and ice
+    'Khuller2021': [
+        'Spectral Albedo of Dusty Martian H2O Snow and Ice',
+        'DOI: 10.1029/2021JE006910', 'https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2021JE006910',
+        'https://ui.adsabs.harvard.edu/abs/2021JGRE..12606910K/abstract'
+    ],
+    'Dust, 130 nm | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/dust_130nm.txtU',
+        is_albedo: true
+    },
+    'Dust, 165 nm | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/dust_165nm.txtU',
+        is_albedo: true
+    },
+    'Dust, 180 nm | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/dust_180nm.txtU',
+        is_albedo: true
+    },
+    'Snow, 100 μm | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/100_clean_snow.txtU',
+        is_albedo: true
+    },
+    'Snow, 100 μm and 0.01% dust | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/100_dusty_snow_content1e-4.txtU',
+        is_albedo: true
+    },
+    'Snow, 100 μm and 0.1% dust | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/100_dusty_snow_content1e-3.txtU',
+        is_albedo: true
+    },
+    'Snow, 100 μm and 1% dust | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/100_dusty_snow_content1e-2.txtU',
+        is_albedo: true
+    },
+    'Snow, 100 μm and 10% dust | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/100_dusty_snow_content1e-1.txtU',
+        is_albedo: true
+    },
+    'Snow, 350 μm | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/350_clean_snow.txtU',
+        is_albedo: true
+    },
+    'Snow, 350 μm and 0.015% dust | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/350_dusty_snow_content15e-5.txtU',
+        is_albedo: true
+    },
+    'Snow, 500 μm | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/500_clean_snow.txtU',
+        is_albedo: true
+    },
+    'Snow, 500 μm and 0.01% dust | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/500_dusty_snow_content1e-4.txtU',
+        is_albedo: true
+    },
+    'Snow, 500 μm and 0.1% dust | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/500_dusty_snow_content1e-3.txtU',
+        is_albedo: true
+    },
+    'Snow, 500 μm and 1% dust | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/500_dusty_snow_content1e-2.txtU',
+        is_albedo: true
+    },
+    'Snow, 500 μm and 10% dust | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/500_dusty_snow_content1e-1.txtU',
+        is_albedo: true
+    },
+    'Firn, 2500 μm | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/2500_clean_firn.txtU',
+        is_albedo: true
+    },
+    'Firn, 2500 μm and 0.01% dust | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/2500_dusty_firn_content1e-4.txtU',
+        is_albedo: true
+    },
+    'Firn, 2500 μm and 0.1% dust | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/2500_dusty_firn_content1e-3.txtU',
+        is_albedo: true
+    },
+    'Firn, 2500 μm and 1% dust | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/2500_dusty_firn_content1e-2.txtU',
+        is_albedo: true
+    },
+    'Firn, 2500 μm and 10% dust | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/2500_dusty_firn_content1e-1.txtU',
+        is_albedo: true
+    },
+    'Glacier, 14000 μm | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/14000_clean_ice.txtU',
+        is_albedo: true
+    },
+    'Glacier, 14000 μm and 0.01% dust | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/14000_dusty_ice_content1e-4.txtU',
+        is_albedo: true
+    },
+    'Glacier, 14000 μm and 0.1% dust | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/14000_dusty_ice_content1e-3.txtU',
+        is_albedo: true
+    },
+    'Glacier, 14000 μm and 1% dust | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/14000_dusty_ice_content1e-2.txtU',
+        is_albedo: true
+    },
+    'Glacier, 14000 μm and 10% dust | Khuller2021': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'Khuller2021'],
+        file: 'spectra/files/Khuller2021/14000_dusty_ice_content1e-1.txtU',
+        is_albedo: true
+    },
+}
