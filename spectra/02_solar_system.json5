@@ -2,7 +2,8 @@
     // Common references, used in several places
     'Crow2011': [
         'Views from EPOXI: colors in our Solar system as an analog for extrasolar planets',
-        'DOI: 10.1088/0004-637X/729/2/130', 'https://iopscience.iop.org/article/10.1088/0004-637X/729/2/130'
+        'DOI: 10.1088/0004-637X/729/2/130', 'https://iopscience.iop.org/article/10.1088/0004-637X/729/2/130',
+        'https://ui.adsabs.harvard.edu/abs/2011ApJ...729..130C/abstract'
     ],
     'Dyudina2016b': [
         'Reflected Light Curves, Spherical and Bond Albedos of Jupiter- and Saturn-like Exoplanets',
@@ -11,11 +12,13 @@
     ],
     'Grav2003': [
         'Photometric survey of the irregular satellites',
-        'DOI: 10.1016/j.icarus.2003.07.005', 'https://arxiv.org/abs/astro-ph/0301016'
+        'DOI: 10.1016/j.icarus.2003.07.005', 'https://arxiv.org/abs/astro-ph/0301016',
+        'https://ui.adsabs.harvard.edu/abs/2003Icar..166...33G/abstract'
     ],
     'Graykowski2018': [
         'Colors and Shapes of the Irregular Planetary Satellites',
-        'DOI: 10.3847/1538-3881/aab49b', 'https://iopscience.iop.org/article/10.3847/1538-3881/aab49b'
+        'DOI: 10.3847/1538-3881/aab49b', 'https://iopscience.iop.org/article/10.3847/1538-3881/aab49b',
+        'https://ui.adsabs.harvard.edu/abs/2018AJ....155..184G/abstract'
     ],
     'Karkoschka1994': [
         'Spectrophotometry of the Jovian Planets and Titan at 300- to 1000-nm Wavelength: The Methane Spectrum',
@@ -40,7 +43,8 @@
     ],
     'Pena2022': [
         'Colors of Irregular Satellites of Saturn with DECam',
-        'DOI: 10.3847/1538-3881/ac6258', 'https://arxiv.org/abs/2204.08391'
+        'DOI: 10.3847/1538-3881/ac6258', 'https://iopscience.iop.org/article/10.3847/1538-3881/ac6258/meta',
+        'https://ui.adsabs.harvard.edu/abs/2022AJ....163..274P/abstract'
     ],
     'Helfenstein2025': [
         'On Error Estimates for Hapke Photometric Model Parameters from Disk-integrated Phase Curves of Airless Planetary Bodies',
@@ -60,7 +64,8 @@
     ],
     'Mallama2017b': [
         'The Spherical Bolometric Albedo of Planet Mercury',
-        'DOI: 10.48550/arXiv.1703.02670', 'https://arxiv.org/abs/1703.02670'
+        'DOI: 10.48550/arXiv.1703.02670', 'https://arxiv.org/abs/1703.02670',
+        'https://ui.adsabs.harvard.edu/abs/2017arXiv170302670M/abstract'
     ],
     'Mercury | Mallama2017b, Mallama2017a': {
         tags: ['featured', 'Solar System', 'planetary body/planet'],
@@ -68,13 +73,13 @@
         geometric_albedo: ['Generic_Bessell.V', 0.142],
         bond_albedo: [0.088, 0.003],
     },
-    'Mercury | Mallama2017a': {
+    'Mercury | Mallama2017a, Mallama2017b': {
         tags: ['Solar System', 'planetary body/planet'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
         br_geometric: [0.087, 0.105, 0.142, 0.172, 0.208,
                        0.158, 0.180],
-        spherical_albedo: ['Generic_Bessell.V', 0.0166],
+        bond_albedo: [0.088, 0.003],
     },
     'Mercury | Domingue2011': {
         tags: ['Solar System', 'planetary body/planet'],
@@ -88,26 +93,37 @@
         nm: [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5],
         br: [0.61, 0.56, 0.66, 0.71, 0.86, 1.00, 1.37, 1.50, 1.77, 2.01],
         geometric_albedo: ['Generic_Bessell.V', 0.142],
-        spherical_albedo: ['Generic_Bessell.V', 0.0166],
+        bond_albedo: [0.088, 0.003],
     },
 
     // Venus
-    'Rodda2017': [
-        'Venus spectrum by T. Rodda uploaded to British Astronomical Association',
-        'https://britastro.org/specdb/data_graph.php?obs_id=1280'
+    'PerezHoyos2018': [
+        'Venus Upper Clouds and the UV Absorber From MESSENGER/MASCS Observations',
+        'DOI: 10.1002/2017JE005406', 'https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1002/2017JE005406',
+        'https://ui.adsabs.harvard.edu/abs/2018JGRE..123..145P/abstract'
     ],
-    'Venus | Rodda2017, Mallama2017a, Mallama2006': {
-        tags: ['featured', 'Solar System', 'planetary body/planet', 'Venus'],
-        file: 'spectra/files/BAA/_venus_20170109_725_TRO.fit',
-        is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.689],
-        phase_integral: 1.35, // Table 6
-    },
     'Mallama2006': [
         'Venus phase function and forward scattering from H2SO4',
         'DOI: 10.1016/j.icarus.2005.12.014', 'https://www.sciencedirect.com/science/article/pii/S0019103505005105',
         'https://ui.adsabs.harvard.edu/abs/2006Icar..182...10M/abstract'
     ],
+    'Venus | PerezHoyos2018, Mallama2017a, Mallama2006': { // phase angle 90°
+        tags: ['featured', 'Solar System', 'planetary body/planet', 'Venus'],
+        file: 'spectra/files/Venus_PerezHoyos2018.txtU', // Fig. 8
+        geometric_albedo: ['Generic_Bessell.V', 0.689],
+        phase_integral: 1.35, // Table 6
+    },
+    'Rodda2017': [
+        'Venus spectrum by T. Rodda uploaded to British Astronomical Association',
+        'https://britastro.org/specdb/data_graph.php?obs_id=1280'
+    ],
+    'Venus | Rodda2017, Mallama2017a, Mallama2006': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus'],
+        file: 'spectra/files/BAA/_venus_20170109_725_TRO.fit',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.689],
+        phase_integral: 1.35, // Table 6
+    },
     'Venus | Madden2018, Mallama2006': {
         tags: ['Solar System', 'planetary body/planet', 'Venus'],
         file: 'spectra/files/Madden2018/Venus_MeadowsSpencer_Albedo.txtU',
@@ -151,9 +167,28 @@
         br: [0.089, 0.092, 0.095, 0.097, 0.098, 0.099, 0.1, 0.1, 0.1],
         is_albedo: true,
     },
+    'Ekonomov1980': [
+        'Visible radiation observed near the surface of Venus: Results and their interpretation',
+        'DOI: 10.1016/0019-1035(80)90159-1', 'https://www.sciencedirect.com/science/article/abs/pii/0019103580901591',
+        'https://ui.adsabs.harvard.edu/abs/1980Icar...41...65E/abstract'
+    ],
+    'Surface of Venus: Venera 9 | Ekonomov1980': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus'],
+        nm: [540, 620, 670, 760, 870],
+        br: [0.013, 0.044, 0.034, 0.069, 0.096], // extracted from Fig. 8
+        sd: [0.008, 0.010, 0.010, 0.016, 0.023],
+        is_albedo: true,
+    },
+    'Surface of Venus: Venera 10 | Ekonomov1980': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus'],
+        nm: [540, 610, 660, 750, 880],
+        br: [0.044, 0.061, 0.066, 0.073, 0.158], // extracted from Fig. 8
+        sd: [0.012, 0.015, 0.016, 0.021, 0.047],
+        is_albedo: true,
+    },
     'Ekonomov1979': [
         'Spectrophotometric experiment aboard the launched instruments of Venera 11 and Venera 12. 1. Method, results and preliminary analysis of measurements.',
-        'DOI: 10.1007/s11208-005-0042-1', 'https://link.springer.com/article/10.1007/s11208-005-0042-1'
+        'https://ui.adsabs.harvard.edu/abs/1979KosIs..17..714E/abstract'
     ],
     'Surface of Venus: Venera 11 | Ekonomov1979': {
         // Obtained from the model of the lowest layers of the atmosphere.
@@ -179,7 +214,8 @@
     // Terran system
     'Robinson2025': [
         'Inferring and Interpreting the Visual Geometric Albedo and Phase Function of Earth',
-        'DOI: 10.48550/arXiv.2507.22258', 'https://arxiv.org/abs/2507.22258'
+        'DOI: 10.48550/arXiv.2507.22258', 'https://arxiv.org/abs/2507.22258',
+        'https://ui.adsabs.harvard.edu/abs/2025arXiv250722258R/abstract'
     ],
     'Earth | Robinson2025': {
         tags: ['featured', 'Solar System', 'planetary body/planet', 'Earth'],
@@ -188,26 +224,35 @@
         br_geometric: [[0.277, +0.005, -0.004], [0.226, 0.004], [0.221, 0.004]],
         spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
     },
-    'Pallé2003': [
-        'Earthshine and the Earth’s albedo: 2. Observations and simulations over 3 years',
-        'DOI: 10.1029/2003JD003611', 'https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2003JD003611',
-        'https://ui.adsabs.harvard.edu/abs/2003JGRD..108.4710P/abstract'
+    'Livengood2011': [
+        'Properties of an Earth-Like Planet Orbiting a Sun-Like Star: Earth Observed by the EPOXI Mission',
+        'DOI: 10.1089/ast.2011.0614', 'https://www.liebertpub.com/doi/abs/10.1089/ast.2011.0614',
+        'https://ui.adsabs.harvard.edu/abs/2011AsBio..11..907L/abstract'
     ],
-    'Earth | Crow2011, Mallama2017a, Pallé2003': { // phase angle 75.1°
+    'Earth | Livengood2011, Robinson2025': {
+        tags: ['Solar System', 'planetary body/planet', 'Earth'],
+        photometric_system: 'DeepImpact_HRI-VIS',
+        filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
+        br: [0.295, 0.229, 0.177, 0.168, 0.171, 0.189, 0.152], // phase-corrected values reported in Payne2025 (Fig. 4)
+        geometric_albedo: ['Generic_Bessell.V', [0.226, 0.004]],
+        spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
+    },
+    'Earth | Crow2011, Robinson2025': { // phase angle 75.1°
         tags: ['Solar System', 'planetary body/planet', 'Earth'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79],
-        geometric_albedo: ['Generic_Bessell.V', 0.434],
-        bond_albedo: [0.295, 0.002], // Section 5.1
+        geometric_albedo: ['Generic_Bessell.V', [0.226, 0.004]],
+        spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
     },
-    'Earth | Mallama2017a, Pallé2003': {
+    'Earth | Mallama2017a, Robinson2025': {
         tags: ['Solar System', 'planetary body/planet', 'Earth'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
-        br_geometric: [0.688, 0.512, 0.434, 0.418, 0.430,
+        br: [0.688, 0.512, 0.434, 0.418, 0.430,
                        0.392, 0.396],
-        bond_albedo: [0.295, 0.002], // Section 5.1
+        geometric_albedo: ['Generic_Bessell.V', [0.226, 0.004]],
+        spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
     },
     'Earth: Archean | VPL': { // Arney et al. 2017, "Hazy Archean Earth orbiting the Archean Sun", 1 bar, 1% CO2, 0.2% CH4
         tags: ['Solar System', 'planetary body/planet', 'Earth/history'],
@@ -219,10 +264,11 @@
         file: 'spectra/files/VPL/hi_o2_proterozoic_toa.txtU', // synthetic spectrum
         is_spherical_albedo: true, // at quadrature?
     },
-    'Earth: Synthetic spectrum | VPL': { // Robinson et al. 2011, "True disk-integrated Earth"
+    'Earth: Synthetic spectrum | VPL, Robinson2025': { // Robinson et al. 2011, "True disk-integrated Earth"
         tags: ['Solar System', 'planetary body/planet', 'Earth/history'],
         file: 'spectra/files/VPL/earth_quadrature_radiance_refl.txtU', // synthetic spectrum
-        spherical_albedo: [400, 0.2635], // at quadrature
+        geometric_albedo: ['Generic_Bessell.V', [0.226, 0.004]],
+        spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
     },
     'Gómez2014': [
         'Spectral Reflectance Analysis of the Caribbean Sea',
@@ -238,11 +284,13 @@
     // Moon
     'Velikodsky2011': [
         'New Earth-based absolute photometry of the Moon',
-        'DOI: 10.1016/j.icarus.2011.04.021', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103511001564'
+        'DOI: 10.1016/j.icarus.2011.04.021', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103511001564',
+        'https://ui.adsabs.harvard.edu/abs/2011Icar..214...30V/abstract'
     ],
     'Hillier1999': [
         'Multispectral Photometry of the Moon and Absolute Calibration of the Clementine UV/Vis Camera',
-        'DOI: 10.1006/icar.1999.6184', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103599961845'
+        'DOI: 10.1006/icar.1999.6184', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103599961845',
+        'https://ui.adsabs.harvard.edu/abs/1999Icar..141..205H/abstract'
     ],
     'Lane1973': [
         'Monochromatic phase curves and albedos for the lunar disk',
@@ -278,11 +326,23 @@
         br_geometric: [0.072, 0.085, 0.088, 0.098, 0.106, 0.162, 0.179, 0.179, 0.202], // excludes opposition effect
         br_spherical: [0.039, 0.049, 0.048, 0.056, 0.062, 0.098, 0.113, 0.118, 0.136],
     },
-    'Moon: Far side (E I) | Crow2011': { // phase angle 75.1°
+    'Caron2020': [
+        'Improved lunar edge response function for on-orbit modulation transfer function calibration using albedo flattening',
+        'DOI: 10.1117/1.JRS.14.032408', 'https://www.spiedigitallibrary.org/journals/journal-of-applied-remote-sensing/volume-14/issue-3/032408/Improved-lunar-edge-response-function-for-on-orbit-modulation-transfer/10.1117/1.JRS.14.032408.short',
+        'https://ui.adsabs.harvard.edu/abs/2020JARS...14c2408C/abstract'
+    ],
+    'Warell2004': [
+        'Properties of the Hermean regolith: IV. Photometric parameters of Mercury and the Moon contrasted with Hapke modelling',
+        'DOI: 10.1016/j.icarus.2003.10.010', 'https://www.sciencedirect.com/science/article/pii/S0019103503003543',
+        'https://ui.adsabs.harvard.edu/abs/2004Icar..167..271W/abstract'
+    ],
+    'Moon: Far side (E I) | Crow2011, Caron2020, Warell2004': { // phase angle 75.1°
         tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [13.83, 18.06, 22.54, 26.68, 30.74, 34.86, 34.14],
+        geometric_albedo: ['Clementine_UVVIS.750nm', 0.27], // derived from Fig. 1b
+        phase_integral: [0.452, 0.004],
     },
     'Moon: Highlands (E I) | Velikodsky2011': {
         tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
@@ -333,11 +393,6 @@
         'DOI: 10.1016/0019-1035(77)90169-5', 'https://www.sciencedirect.com/science/article/pii/0019103577901695',
         'https://ui.adsabs.harvard.edu/abs/1977Icar...30..341P/abstract'
     ],
-    'Singer1979': [
-        'Mars surface composition from reflectance spectroscopy: a summary',
-        'DOI: 10.1029/JB084iB14p08415', 'https://agupubs.onlinelibrary.wiley.com/doi/10.1029/JB084iB14p08415',
-        'https://ui.adsabs.harvard.edu/abs/1979JGR....84.8415S/abstract'
-    ],
     'Mars | Madden2018, Pleskot1977': {
         tags: ['featured', 'Solar System', 'planetary body/planet', 'Mars'],
         file: 'spectra/files/Madden2018/Mars_McCord1971_Albedo.txtU',
@@ -360,6 +415,11 @@
         geometric_albedo: ['Generic_Bessell.V', 0.170],
         phase_integral: 1.01, // extracted from Fig. 7 for 550 nm (q2)
     },
+    'Singer1979': [
+        'Mars surface composition from reflectance spectroscopy: a summary',
+        'DOI: 10.1029/JB084iB14p08415', 'https://agupubs.onlinelibrary.wiley.com/doi/10.1029/JB084iB14p08415',
+        'https://ui.adsabs.harvard.edu/abs/1979JGR....84.8415S/abstract'
+    ],
     'Mars: Bright areas | Singer1979, Pleskot1977': { // the average of a number of typical bright region spectra
         tags: ['Solar System', 'planetary body/planet', 'Mars'],
         file: 'spectra/files/Singer1979/Mars_bright.txtU', // figure 3
@@ -372,10 +432,11 @@
         geometric_albedo: [800, 0.21],
         phase_integral: 1.01, // extracted from Fig. 7 for 550 nm (q2)
     },
-    'Mars: Synthetic spectrum | VPL': { // Tyler Robinson, "Present-day Mars generated using SMART"
+    'Mars: Synthetic spectrum | VPL, Pleskot1977': { // Tyler Robinson, "Present-day Mars generated using SMART"
         tags: ['Solar System', 'planetary body/planet', 'Mars'],
         file: 'spectra/files/VPL/mars_flx_refl.txtU',
         is_geometric_albedo: true,
+        phase_integral: 1.01, // extracted from Fig. 7 for 550 nm (q2)
     },
     'Bell2007': [
         'High spectral resolution UV to near-IR observations of Mars using HST/STIS',
@@ -410,7 +471,8 @@
     // Phobos
     'Pajola2013': [
         'Phobos as a D-type Captured Asteroid, Spectral Modeling from 0.25 to 4.0 μm',
-        'DOI: 10.1088/0004-637X/777/2/127', 'https://iopscience.iop.org/article/10.1088/0004-637X/777/2/127'
+        'DOI: 10.1088/0004-637X/777/2/127', 'https://iopscience.iop.org/article/10.1088/0004-637X/777/2/127',
+        'https://ui.adsabs.harvard.edu/abs/2013ApJ...777..127P/abstract'
     ],
     'Fornasier2024a': [
         'Phobos photometric properties from Mars Express HRSC observations',
@@ -441,18 +503,15 @@
     // Deimos
     'Fraeman2013': [
         'Spectral absorptions on Phobos and Deimos in the visible/near infrared wavelengths and their compositional constraints',
-        'DOI: 10.1016/j.icarus.2013.11.021', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103513004934'
-    ],
-    'Pang1980': [
-        'Spectral evidence for a carbonaceous chondrite surface composition on Deimos',
-        'https://www.nature.com/articles/283277a0'
+        'DOI: 10.1016/j.icarus.2013.11.021', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103513004934',
+        'https://ui.adsabs.harvard.edu/abs/2014Icar..229..196F/abstract'
     ],
     'Wargnier2025': [
         'Deimos photometric properties: analysis of 20 years of observations (2004-2024) by the Mars Express HRSC camera',
         'DOI: 10.48550/arXiv.2509', 'https://arxiv.org/abs/2509.12804',
         'https://ui.adsabs.harvard.edu/abs/2025arXiv250912804W/abstract'
     ],
-    'Deimos (M II) | Fraeman2013, Pang1980, Wargnier2025': {
+    'Deimos (M II) | Fraeman2013, Wargnier2025': {
         tags: ['featured', 'Solar System', 'natural satellite/regular moon'],
         nm: [250, 300, 350, 400, 450, 500, 550, 600, 700, 750, 800],
         br: [0.04, 0.05, 0.051, 0.05, 0.049, 0.053, 0.055, 0.058, 0.062, 0.067, 0.069],
@@ -648,11 +707,13 @@
     ],
     'Spencer1995': [
         'Charge-coupled device spectra of the Galilean satellites: Molecular oxygen on Ganymede',
-        'DOI: 10.1029/95JE01503', 'https://agupubs.onlinelibrary.wiley.com/doi/10.1029/95JE01503'
+        'DOI: 10.1029/95JE01503', 'https://agupubs.onlinelibrary.wiley.com/doi/10.1029/95JE01503',
+        'https://ui.adsabs.harvard.edu/abs/1995JGR...10019049S/abstract'
     ],
     'Domingue1998': [
         'Supplementary Analysis of Io’s Disk-Integrated Solar Phase Curve',
-        'DOI: 10.1006/icar.1998.5940', 'https://www.sciencedirect.com/science/article/pii/S0019103598959401'
+        'DOI: 10.1006/icar.1998.5940', 'https://www.sciencedirect.com/science/article/pii/S0019103598959401',
+        'https://ui.adsabs.harvard.edu/abs/1998Icar..134..113D/abstract'
     ],
     'Io (J I) | Spencer1995, Domingue1998': {
         tags: ['featured', 'Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
@@ -663,18 +724,18 @@
         ], // traced from the Figure 2
         phase_integral: 0.59, // for 550 nm, and 0.61 for 470 nm; all for the leading hemisphere
     },
+    'Io (J I) | Madden2018, Simonelli1984': {
+        tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        file: 'spectra/files/Madden2018/Io_Fanale1974_Albedo.txtU',
+        is_geometric_albedo: true,
+        phase_integral: [0.78, 0.02],
+    },
     'Io (J I) | Simonelli1984': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['UV', 'Violet', 'Clear', 'Blue', 'Green', 'Orange'],
         br: [0.083, 0.242, 0.415, 0.483, 0.628, 0.633],
         sd: [0.01, 0.01, 0.02, 0.02, 0.02, 0.03],
-        is_geometric_albedo: true,
-        phase_integral: [0.78, 0.02],
-    },
-    'Io (J I) | Madden2018, Simonelli1984': {
-        tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
-        file: 'spectra/files/Madden2018/Io_Fanale1974_Albedo.txtU',
         is_geometric_albedo: true,
         phase_integral: [0.78, 0.02],
     },
@@ -702,6 +763,13 @@
         'DOI: 10.1126/science.1147623', 'https://www.science.org/doi/abs/10.1126/science.1147623',
         'https://ui.adsabs.harvard.edu/abs/2007Sci...318..234G/abstract'
     ],
+    'Europa: Leading hemisphere (J II) | Allen2022, Madden2018, Grundy2007a': { // Mid Julian Date 2459867.3924
+        tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        file: 'spectra/files/BAA/Europa_20221014_HughAllen.FIT',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.611],
+        phase_integral: [1.01, 0.04],
+    },
     'Europa: Leading hemisphere (J II) | Buratti1983, Grundy2007a': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
@@ -709,13 +777,6 @@
         br: [0.354, 0.469, 0.578, 0.606, 0.727, 0.725],
         sd: 0.049, // typical absolute error
         is_geometric_albedo: true,
-        phase_integral: [1.01, 0.04],
-    },
-    'Europa: Leading hemisphere (J II) | Allen2022, Madden2018, Grundy2007a': { // Mid Julian Date 2459867.3924
-        tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
-        file: 'spectra/files/BAA/Europa_20221014_HughAllen.FIT',
-        is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.611],
         phase_integral: [1.01, 0.04],
     },
     'Trumbo2020': [
@@ -735,18 +796,18 @@
         geometric_albedo: ['Generic_Bessell.V', 0.611],
         phase_integral: [1.01, 0.04],
     },
+    'Europa: Trailing hemisphere (J II) | Madden2018, Grundy2007a': {
+        tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        file: 'spectra/files/Madden2018/Europa_Spencer1999trailing_Albedo.txtU',
+        is_geometric_albedo: true,
+        phase_integral: [1.01, 0.04],
+    },
     'Europa: Trailing hemisphere (J II) | Buratti1983, Grundy2007a': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['UV', 'Violet', 'Clear', 'Blue', 'Green', 'Orange'],
         br: [0.172, 0.356, 0.457, 0.504, 0.593, 0.591],
         sd: 0.049, // typical absolute error
-        is_geometric_albedo: true,
-        phase_integral: [1.01, 0.04],
-    },
-    'Europa: Trailing hemisphere (J II) | Madden2018, Grundy2007a': {
-        tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
-        file: 'spectra/files/Madden2018/Europa_Spencer1999trailing_Albedo.txtU',
         is_geometric_albedo: true,
         phase_integral: [1.01, 0.04],
     },
@@ -779,11 +840,6 @@
         phase_integral: [1.01, 0.04],
     },
     // Ganymede
-    'Belgacem2021': [
-        'Regional study of Ganymede’s photometry',
-        'DOI: 10.1016/j.icarus.2021.114631', 'https://www.sciencedirect.com/science/article/pii/S001910352100292X',
-        'https://ui.adsabs.harvard.edu/abs/2021Icar..36914631B/abstract'
-    ],
     'Ganymede: Leading hemisphere (J III) | Clark1980a, Madden2018, Buratti1991': {
         tags: ['featured', 'Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Clark1980/Ganymede.txtU', // figure 13
@@ -796,6 +852,11 @@
         is_geometric_albedo: true,
         phase_integral: [0.78, 0.06],
     },
+    'Belgacem2021': [
+        'Regional study of Ganymede’s photometry',
+        'DOI: 10.1016/j.icarus.2021.114631', 'https://www.sciencedirect.com/science/article/pii/S001910352100292X',
+        'https://ui.adsabs.harvard.edu/abs/2021Icar..36914631B/abstract'
+    ],
     'Ganymede: Trailing hemisphere (J III) | Belgacem2021, Buratti1991': {
         tags: ['Solar System/Jovian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Ganymede_trailing_Belgacem2021.txt',
@@ -835,7 +896,7 @@
         'DOI: 10.1016/j.icarus.2015.05.022', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103515002328',
         'https://ui.adsabs.harvard.edu/abs/2016Icar..263...32D/abstract'
     ],
-    'Saturnian aurorae: High aurora | Dyudina2016a': {
+    'Aurorae of Saturn: High aurora | Dyudina2016a': {
         tags: ['Solar System/Saturnian system', 'aurora'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV1', 'UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR3'],
@@ -843,7 +904,7 @@
         sd: [0.405, 0.116, 0.247, 0.148, 0.235, 0.195, 0.122], // extracted from Fig. 8
         is_emissive: true,
     },
-    'Saturnian aurorae: Brightest aurora | Dyudina2016a': {
+    'Aurorae of Saturn: Brightest aurora | Dyudina2016a': {
         tags: ['Solar System/Saturnian system', 'aurora'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV1', 'UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR3'],
@@ -851,7 +912,7 @@
         sd: [0.104, 0.060, 0.056, 0.097, 0.143, 0.229, 0.468], // extracted from Fig. 8
         is_emissive: true,
     },
-    'Saturnian aurorae: Deep aurora | Dyudina2016a': {
+    'Aurorae of Saturn: Deep aurora | Dyudina2016a': {
         tags: ['Solar System/Saturnian system', 'aurora'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV1', 'UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR3'],
@@ -862,7 +923,8 @@
     // Saturnian rings
     'Clark1980b': [
         'The rings of Saturn: New near-infrared reflectance measurements and a 0.326–4.08 μm summary',
-        'DOI: 10.1016/0019-1035(80)90116-5', 'https://www.sciencedirect.com/science/article/abs/pii/0019103580901165'
+        'DOI: 10.1016/0019-1035(80)90116-5', 'https://www.sciencedirect.com/science/article/abs/pii/0019103580901165',
+        'https://ui.adsabs.harvard.edu/abs/1980Icar...43..161C/abstract'
     ],
     'Rings of Saturn | Clark1980b': {
         tags: ['featured', 'Solar System/Saturnian system', 'ring'],
@@ -1232,16 +1294,21 @@
         geometric_albedo: [550, [0.75, 0.02]],
         phase_integral: [0.80, 0.02],
     },
-    'Dione: Bright areas (S IV) | Clark2008, Buratti2022': {
+    'Buratti1990': [
+        'Albedo and color maps of the Saturnian satellites',
+        'DOI: 10.1016/0019-1035(90)90138-Y', 'https://www.sciencedirect.com/science/article/pii/001910359090138Y',
+        'https://ui.adsabs.harvard.edu/abs/1990Icar...87..339B/abstract'
+    ],
+    'Dione: Bright areas (S IV) | Clark2008, Buratti1990, Buratti2022': {
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Clark2008/Dione_Bright_Clark2008.txtU', // Fig. 2a (Clark2008)
-        is_spherical_albedo: true,
+        geometric_albedo: ['Voyager_ISS-NAC.Clear', 0.66], // highest albedo in Fig. 1D (Buratti1990)
         phase_integral: [0.80, 0.02],
     },
-    'Dione: Dark areas (S IV) | Clark2008, Buratti2022': {
+    'Dione: Dark areas (S IV) | Clark2008, Buratti1990, Buratti2022': {
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Clark2008/Dione_Dark_Clark2008.txtU', // Fig. 2a (Clark2008)
-        is_spherical_albedo: true,
+        geometric_albedo: ['Voyager_ISS-NAC.Clear', 0.42], // lowest albedo in Fig. 1D (Buratti1990)
         phase_integral: [0.80, 0.02],
     },
     // Dione trojans
@@ -1269,11 +1336,6 @@
         'DOI: 10.1016/0019-1035(84)90043-5', 'https://www.sciencedirect.com/science/article/abs/pii/0019103584900435',
         'https://ui.adsabs.harvard.edu/abs/1984Icar...58..265C/abstract'
     ],
-    'Pitman2010': [
-        'Disk-integrated bolometric Bond albedos and rotational light curves of saturnian satellites from Cassini Visual and Infrared Mapping Spectrometer',
-        'DOI: 10.1016/j.icarus.2009.12.001', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103509004801',
-        'https://ui.adsabs.harvard.edu/abs/2010Icar..206..537P/abstract'
-    ],
     'Filacchione2020': [
         'Photometric modelling and VIS-IR albedo maps of Rhea from Cassini-VIMS',
         'DOI: 10.1093/mnrasl/slaa162', 'https://academic.oup.com/mnrasl/article/499/1/L62/5905424',
@@ -1291,6 +1353,11 @@
         geometric_albedo: [550, [0.89, 0.01]],
         phase_integral: [0.71, 0.01],
     },
+    'Pitman2010': [
+        'Disk-integrated bolometric Bond albedos and rotational light curves of saturnian satellites from Cassini Visual and Infrared Mapping Spectrometer',
+        'DOI: 10.1016/j.icarus.2009.12.001', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103509004801',
+        'https://ui.adsabs.harvard.edu/abs/2010Icar..206..537P/abstract'
+    ],
     'Rhea: Leading hemisphere (S V) | Clark1984, Buratti2022, Pitman2010': {
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Rhea_Clark1984.txtU', // figure 4
@@ -1298,35 +1365,32 @@
         phase_integral: [0.65, 0.06], // 510 nm
     },
     // Titan
-    'Tomasko1982': [
-        'Photometry and polarimetry of Titan: Pioneer 11 observations and their implications for aerosol properties',
-        'DOI: 10.1016/0019-1035(82)90030-6', 'https://www.sciencedirect.com/science/article/pii/0019103582900306',
-        'https://ui.adsabs.harvard.edu/abs/1982Icar...51...65T/abstract'
-    ],
     'Karkoschka2012': [
         'The reflectivity spectrum and opposition effect of Titan’s surface observed by Huygens’ DISR spectrometers',
-        'DOI: 10.1016/j.pss.2011.10.014', 'https://www.sciencedirect.com/science/article/pii/S0032063311003254'
-    ],
-    'Vixie2012': [
-        'Mapping Titan’s surface features within the visible spectrum via Cassini VIMS',
-        'DOI: 10.1016/j.pss.2011.03.021', 'https://www.sciencedirect.com/science/article/pii/S0032063311001085',
-        'https://ui.adsabs.harvard.edu/abs/2012P%26SS...60...52V/abstract'
+        'DOI: 10.1016/j.pss.2011.10.014', 'https://www.sciencedirect.com/science/article/pii/S0032063311003254',
+        'https://ui.adsabs.harvard.edu/abs/2012P&SS...60..342K/abstract'
     ],
     'Karkoschka2016': [
         'Eight-color maps of Titan’s surface from spectroscopy with Huygens’ DISR',
-        'DOI: 10.1016/j.icarus.2015.06.010', 'https://www.sciencedirect.com/science/article/pii/S0019103515002547'
+        'DOI: 10.1016/j.icarus.2015.06.010', 'https://www.sciencedirect.com/science/article/pii/S0019103515002547',
+        'https://ui.adsabs.harvard.edu/abs/2016Icar..270..260K/abstract'
     ],
-    'Titan (S VI) | Karkoschka1998, Tomasko1982': {
+    'Muñoz2017': [
+        'Titan brighter at twilight than in daylight',
+        'DOI: 10.1038/s41550-017-0114', 'https://www.nature.com/articles/s41550-017-0114',
+        'https://ui.adsabs.harvard.edu/abs/2017NatAs...1E.114G/abstract'
+    ],
+    'Titan (S VI) | Karkoschka1998, Muñoz2017': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Karkoschka/Titan1995.txt',
         is_geometric_albedo: true,
-        phase_integral: [1.66, 0.10], // in both red and blue filters
+        phase_integral: [1.97, 0.09], // extracted from Fig. 4b for 550 nm
     },
-    'Titan (S VI) | Karkoschka1994, Tomasko1982': { // phase angle 2.7°
+    'Titan (S VI) | Karkoschka1994, Muñoz2017': { // phase angle 2.7°
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Karkoschka/Titan1993.txt',
         is_geometric_albedo: true,
-        phase_integral: [1.66, 0.10], // in both red and blue filters
+        phase_integral: [1.97, 0.09], // extracted from Fig. 4b for 550 nm
     },
     'Surface of Titan: Phase angle 45° (S VI) | Karkoschka2016': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
@@ -1344,6 +1408,11 @@
             0.446, 0.447, 0.448, 0.449, 0.449, 0.450, 0.450, 0.450, 0.449, 0.449, 0.448, 0.447
         ],
     },
+    'Vixie2012': [
+        'Mapping Titan’s surface features within the visible spectrum via Cassini VIMS',
+        'DOI: 10.1016/j.pss.2011.03.021', 'https://www.sciencedirect.com/science/article/pii/S0032063311001085',
+        'https://ui.adsabs.harvard.edu/abs/2012P%26SS...60...52V/abstract'
+    ],
     'Shangri-La: Northern part (Titan) | Vixie2012': {
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Shangri-La_Vixie2012.txtU', // Fig. 9
@@ -1407,7 +1476,8 @@
     },
     'Gudipati2003': [
         'Luminescence from Vacuum-Ultraviolet-irradiated Cosmic Ice Analogs and Residues',
-        'DOI: 10.1086/345349', 'https://iopscience.iop.org/article/10.1086/345349'
+        'DOI: 10.1086/345349', 'https://iopscience.iop.org/article/10.1086/345349',
+        'https://ui.adsabs.harvard.edu/abs/2003ApJ...583..514G/abstract'
     ],
     'Iapetus: Leading hemisphere (S VIII) | Gudipati2003': {
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
@@ -1441,13 +1511,14 @@
     'Iapetus: Polar region (S VIII) | Clark2008, Blackburn2011': { // roughly 60° − 80° N, 200° − 350° W
         tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         file: 'spectra/files/Clark2008/Iapetus_Polar_Clark2008.txtU', // Fig. 8 (Clark2008)
-        geometric_albedo: [530, 0.17], // average of 60° − 80° N on leading hemisphere in Fig. 3a (Blackburn2011)
-        is_spherical_albedo: true,
+        geometric_albedo: [530, 0.17], // average of 60° − 80° N on leading hemisphere in Fig. 3A (Blackburn2011)
+        spherical_albedo: [530, 0.08], // average of 60° − 80° N on leading hemisphere in Fig. 6A (Blackburn2011)
     },
     // Phoebe
     'Miller2011': [
         'Comparing Phoebe’s 2005 opposition surge in four visible light filters',
-        'DOI: 10.1016/j.icarus.2010.12.024', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103510004926'
+        'DOI: 10.1016/j.icarus.2010.12.024', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103510004926',
+        'https://ui.adsabs.harvard.edu/abs/2011Icar..212..819M/abstract'
     ],
     'Phoebe (S IX) | Filacchione2012, Miller2011': {
         tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/irregular moon'],
@@ -1496,17 +1567,17 @@
         'DOI: 10.1006/icar.1999.6077', 'https://www.sciencedirect.com/science/article/pii/S0019103599960773',
         'https://ui.adsabs.harvard.edu/abs/1999Icar..138..249S/abstract'
     ],
-    'Phoebe: Bright areas (S IX) | Clark2008, Simonelli1999': {
+    'Phoebe: Bright areas (S IX) | Clark2008, Simonelli1999, Miller2011': {
         tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         file: 'spectra/files/Clark2008/Phoebe_Bright_Clark2008.txtU', // Fig. 7 (Clark2008)
         geometric_albedo: ['Voyager_ISS-NAC.Clear', 0.13], // highest albedo in Fig. 4 (Simonelli1999)
-        is_spherical_albedo: true,
+        phase_integral: [0.311, 0.096],
     },
-    'Phoebe: Dark areas (S IX) | Clark2008, Simonelli1999': {
+    'Phoebe: Dark areas (S IX) | Clark2008, Simonelli1999, Miller2011': {
         tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         file: 'spectra/files/Clark2008/Phoebe_Dark_Clark2008.txtU', // Fig. 7 (Clark2008)
         geometric_albedo: ['Voyager_ISS-NAC.Clear', 0.06], // lowest albedo in Fig. 4 (Simonelli1999)
-        is_spherical_albedo: true,
+        phase_integral: [0.311, 0.096],
     },
 
     // Uranian system
@@ -1528,7 +1599,7 @@
         phase_integral: 1.35, // extracted from Fig. 2 for 550 nm
     },
     // Uranian rings
-    'Porco1987': [ // the Clear filter was removed, reconstructed spectrum should be cyan to fit it
+    'Porco1987': [ // the Clear filter was removed, reconstructed spectra should be cyan to fit it
         'The color of the Uranian rings',
         'DOI: 10.1016/0019-1035(87)90120-5', 'https://www.sciencedirect.com/science/article/pii/0019103587901205',
         'https://ui.adsabs.harvard.edu/abs/1987Icar...72...69P/abstract'
@@ -1540,7 +1611,8 @@
     ],
     'Karkoschka2001': [
         'Comprehensive Photometry of the Rings and 16 Satellites of Uranus with the Hubble Space Telescope',
-        'DOI: 10.1006/icar.2001.6596', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103501965960'
+        'DOI: 10.1006/icar.2001.6596', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103501965960',
+        'https://ui.adsabs.harvard.edu/abs/2001Icar..151...51K/abstract'
     ],
     'Rings of Uranus | Karkoschka2001': {
         tags: ['featured', 'Solar System/Uranian system', 'ring'],
@@ -1669,7 +1741,8 @@
     // Uranian major moons
     'Avramchuk2007': [
         'Photometric study of the major satellites of Uranus',
-        'DOI: 10.1134/S0038094607030021', 'https://link.springer.com/article/10.1134%2FS0038094607030021'
+        'DOI: 10.1134/S0038094607030021', 'https://link.springer.com/article/10.1134%2FS0038094607030021',
+        'https://ui.adsabs.harvard.edu/abs/2007SoSyR..41..186A/abstract'
     ],
     // Miranda
     'Miranda (U V) | Avramchuk2007, Karkoschka2001': {
@@ -1768,10 +1841,6 @@
         spherical_albedo: [550, [0.170, 0.015]], // Karkoschka2001
     },
     // Oberon
-    'Helfenstein1991': [
-        'Oberon: Color photometry from Voyager and its geological implications',
-        'DOI: 10.1016/0019-1035(91)90065-2', 'https://www.sciencedirect.com/science/article/pii/0019103591900652'
-    ],
     'Oberon (U IV) | Avramchuk2007, Karkoschka2001': {
         tags: ['featured', 'Solar System/Uranian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
@@ -1795,7 +1864,12 @@
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.140, 0.015]], // Karkoschka2001
     },
-    // the Clear filter was removed, reconstructed spectrum should be pink to fit it
+    'Helfenstein1991': [
+        'Oberon: Color photometry from Voyager and its geological implications',
+        'DOI: 10.1016/0019-1035(91)90065-2', 'https://www.sciencedirect.com/science/article/pii/0019103591900652',
+        'https://ui.adsabs.harvard.edu/abs/1991Icar...90...14H/abstract'
+    ],
+    // the Clear filter was removed, reconstructed spectra should be pink to fit it
     'Oberon (U IV) | Helfenstein1991, Karkoschka2001': { // average cratered
         tags: ['Solar System/Uranian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
@@ -1916,7 +1990,8 @@
     },
     'Pascu2006': [
         'HST BVI photometry of Triton and Proteus',
-        'DOI: 10.1016/j.icarus.2006.07.020', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103506002648'
+        'DOI: 10.1016/j.icarus.2006.07.020', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103506002648',
+        'https://ui.adsabs.harvard.edu/abs/2006Icar..185..487P/abstract'
     ],
     'Proteus: −33° East (N VIII) | Pascu2006, Karkoschka2003': { // visit 1, leading side
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
@@ -1957,7 +2032,8 @@
     // Triton
     'Tryka1999': [
         'A Visual Spectrum of Triton from the Hubble Space Telescope',
-        'DOI: 10.1006/icar.1999.6224', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103599962243'
+        'DOI: 10.1006/icar.1999.6224', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103599962243',
+        'https://ui.adsabs.harvard.edu/abs/1999Icar..142..571T/abstract'
     ],
     'Triton (N I) | Tryka1999, Helfenstein2025': {
         tags: ['featured', 'Solar System/Neptunian system', 'planetary body/planetary-mass moon', 'natural satellite/irregular moon', 'Triton'],
@@ -2053,7 +2129,8 @@
     ],
     'Schaefer2000': [
         'Nereid Has Complex Large-Amplitude Photometric Variability (Due to Chaotic Rotation)',
-        'DOI: 10.1006/icar.2000.6417', 'https://arxiv.org/abs/astro-ph/0005050v1'
+        'DOI: 10.1006/icar.2000.6417', 'https://arxiv.org/abs/astro-ph/0005050v1',
+        'https://ui.adsabs.harvard.edu/abs/2000Icar..146..541S/abstract'
     ],
     'Thomas1991b': [
         'Voyager observations of Nereid',
