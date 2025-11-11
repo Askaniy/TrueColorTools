@@ -159,7 +159,8 @@
     },
     'Maiorov2005': [
         'A New Analysis of the Spectra Obtained by the Venera Missions in the Venusian Atmosphere. I. The Analysis of the Data Received from the Venera-11 Probe at Altitudes Below 37 km in the 0.44–0.66 µm Wavelength Range',
-        'DOI: 10.1007/s11208-005-0042-1', 'https://link.springer.com/article/10.1007/s11208-005-0042-1'
+        'DOI: 10.1007/s11208-005-0042-1', 'https://link.springer.com/article/10.1007/s11208-005-0042-1',
+        'https://ui.adsabs.harvard.edu/abs/2005SoSyR..39..267M/abstract'
     ],
     'Surface of Venus | Maiorov2005': {
         tags: ['featured', 'Solar System', 'planetary body/planet', 'Venus'],
@@ -326,6 +327,11 @@
         br_geometric: [0.072, 0.085, 0.088, 0.098, 0.106, 0.162, 0.179, 0.179, 0.202], // excludes opposition effect
         br_spherical: [0.039, 0.049, 0.048, 0.056, 0.062, 0.098, 0.113, 0.118, 0.136],
     },
+    'Holsclaw2010': [
+        'A comparison of the ultraviolet to near-infrared spectral properties of Mercury and the Moon as observed by MESSENGER',
+        'DOI: 10.1016/j.icarus.2010.05.001', 'https://www.sciencedirect.com/science/article/pii/S001910351000182X',
+        'https://ui.adsabs.harvard.edu/abs/2010Icar..209..179H/abstract'
+    ],
     'Caron2020': [
         'Improved lunar edge response function for on-orbit modulation transfer function calibration using albedo flattening',
         'DOI: 10.1117/1.JRS.14.032408', 'https://www.spiedigitallibrary.org/journals/journal-of-applied-remote-sensing/volume-14/issue-3/032408/Improved-lunar-edge-response-function-for-on-orbit-modulation-transfer/10.1117/1.JRS.14.032408.short',
@@ -336,6 +342,12 @@
         'DOI: 10.1016/j.icarus.2003.10.010', 'https://www.sciencedirect.com/science/article/pii/S0019103503003543',
         'https://ui.adsabs.harvard.edu/abs/2004Icar..167..271W/abstract'
     ],
+    'Moon: Far side (E I) | Holsclaw2010, Caron2020, Warell2004': { // phase angle 65°
+        tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
+        file: 'spectra/files/Moon_Holsclaw2010.txt', // Fig. 5a (MASCS)
+        geometric_albedo: ['Clementine_UVVIS.750nm', 0.27], // derived from Fig. 1b
+        phase_integral: [0.452, 0.004],
+    },
     'Moon: Far side (E I) | Crow2011, Caron2020, Warell2004': { // phase angle 75.1°
         tags: ['Solar System', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Moon'],
         photometric_system: 'DeepImpact_HRI-VIS',
