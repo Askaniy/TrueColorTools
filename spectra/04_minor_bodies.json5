@@ -2932,19 +2932,19 @@
         geometric_albedo: ['Generic_Bessell.V', [0.124, 0.039]], // occultation-only fit
         phase_integral: [0.562, +0.020, -0.059],
     },
-    '(50000) Quaoar | AlvarezCandal2008, Kiss2024, Helfenstein2025': {
+    '(50000) Quaoar | AlvarezCandal2008, Margoti2024, Helfenstein2025': {
         tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         file: 'spectra/files/AlvarezCandal2008/Quaoar.txtU', // Fig. 2
         geometric_albedo: ['Generic_Bessell.V', [0.124, 0.039]], // occultation-only fit
         phase_integral: [0.562, +0.020, -0.059],
     },
-    '(50000) Quaoar | Marchi2003, Kiss2024, Helfenstein2025': {
+    '(50000) Quaoar | Marchi2003, Margoti2024, Helfenstein2025': {
         tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         file: 'spectra/files/Marchi2003/Quaoar.txt',
         geometric_albedo: ['Generic_Bessell.V', [0.124, 0.039]], // occultation-only fit
         phase_integral: [0.562, +0.020, -0.059],
     },
-    '(50000) Quaoar | MBOSS, Kiss2024, Helfenstein2025': {
+    '(50000) Quaoar | MBOSS, Margoti2024, Helfenstein2025': {
         tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.958, 0.035], 'V-R': [0.650, 0.020], 'R-I': [0.610, 0.028]},
