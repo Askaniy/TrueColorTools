@@ -6080,7 +6080,7 @@
         geometric_albedo: ['NewHorizons_LORRI.Pan', [0.244, 0.040]], // normal reflectance
         phase_integral: [0.37, 0.16],
     },
-    'Akasa Linea (Arrokoth) | Stern2019, Hofgartner2021': {
+    'Akasa Collum (Arrokoth) | Stern2019, Hofgartner2021': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'Arrokoth', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR', 'CH4'],
