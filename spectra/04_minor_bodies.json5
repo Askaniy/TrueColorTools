@@ -4629,17 +4629,18 @@
         geometric_albedo: ['Generic_Bessell.V', 0.09], // best-guess I/F for a 70 km wide ring (Ortiz2017)
         phase_integral: 0.26, // for low I/F of 0.09 (Kalup2023)
     },
-    'FernandezValenzuela2024': [
-        'Deciphering satellite formation in the trans-Neptunian region: the case of Weywot',
-        'https://www.youtube.com/watch?v=n5FFLJi2I8U', 'https://tno2024.org/relation/abstract/90'
+    'FernandezValenzuela2025': [
+        'Accurate geometric albedo, shape, and size of Hiʻiaka from a stellar occultation',
+        'DOI: 10.1038/s41467-025-65749-1', 'https://www.nature.com/articles/s41467-025-65749-1',
+        'https://ui.adsabs.harvard.edu/abs/2025NatCo..1610926F/abstract'
     ],
-    '(136108 I) Hiʻiaka | Brown2010, FernandezValenzuela2024, Helfenstein2025': {
+    '(136108 I) Hiʻiaka | Brown2010, FernandezValenzuela2025, Helfenstein2025': {
         tags: ['Solar System/Haumean system', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family', 'natural satellite/minor planet moon'],
         photometric_system: 'HST_WFPC2-PC',
         color_indices: {'F606W-F814W': [0.45, 0.14]}, // extracted from Fig. 2
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.76, 0.15]],
+        geometric_albedo: ['Generic_Bessell.V', [0.74, 0.15]],
         phase_integral: [0.454, +0.034, -0.047], // system
     },
     'Müller2019': [
