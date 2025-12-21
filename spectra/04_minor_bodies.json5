@@ -1331,6 +1331,37 @@
         geometric_albedo: ['Generic_Bessell.V', [0.076, 0.026]],
         phase_function: ['HG1G2', {H: [5.35, 0.03], G_1: 0, G_2: [0.626, 0.007]}], // 2017-2020 weighted mean
     },
+    'West1991': [
+        'A photometric study of (2060) Chiron and its coma',
+        'https://ui.adsabs.harvard.edu/abs/1991A&A...241..635W/abstract'
+    ],
+    '(2060) Chiron: Coma | West1991, BragaRibas2023, Betzler2022': { // 95P/Chiron
+        tags: ['Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet/Chiron-type comet'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.3, 0.1]}, // overall coma color
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.076, 0.026]],
+        phase_function: ['HG1G2', {H: [5.35, 0.03], G_1: 0, G_2: [0.626, 0.007]}], // 2017-2020 weighted mean
+    },
+    '(2060) Chiron: Inner coma | West1991, BragaRibas2023, Betzler2022': { // 95P/Chiron
+        tags: ['Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet/Chiron-type comet'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.37, 0.13]},
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.076, 0.026]],
+        phase_function: ['HG1G2', {H: [5.35, 0.03], G_1: 0, G_2: [0.626, 0.007]}], // 2017-2020 weighted mean
+    },
+    '(2060) Chiron: Extended coma | West1991, BragaRibas2023, Betzler2022': { // 95P/Chiron
+        tags: ['Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet/Chiron-type comet'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-V': [0.31, 0.02]}, // average of Table 6 (r = 10000—170000 km)
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.076, 0.026]],
+        phase_function: ['HG1G2', {H: [5.35, 0.03], G_1: 0, G_2: [0.626, 0.007]}], // 2017-2020 weighted mean
+    },
     'Benner1999': [
         'Radar Observations of Asteroid 2063 Bacchus',
         'DOI: 10.1006/icar.1999.6094', 'https://echo.jpl.nasa.gov/asteroids/benner.etal.1999.bacchus.pdf',
@@ -1883,12 +1914,13 @@
         // Intensities derived from Table 2 and 1-pN
         geometric_albedo: [550, [0.070, 0.010]],
     },
-    'C2R (Chariklo) | SantosSanz2025, Duffard2014b': {
+    // Second contact excluded due to an unreliable color caused by discrepancies in opacity
+    'C2R (Chariklo) | SantosSanz2025, Duffard2014b': { // First contact
         tags: ['Solar System', 'minor body/centaur', 'ring'],
         filters: ['Danish.Visual', 'Raptor.Empty', 'Danish.Red', 'LaSilla_DFOSC.Gunn_z_filter', 'JWST_NIRCam2025.F150W2', 'Paranal_HAWKI.Ks'],
-        br: [[0.662, 0.030], [0.734, 0.314], [0.722, 0.040], [0.939, 0.009], [0.936, 0.053], [0.958, 0.010]],
+        br: [[0.692, +0.112, -0.455], [0.734, 0.314], [0.762, +0.158, -0.475], [0.948, +0.012, -0.008], [0.883, +0.084, -0.000], [0.948, +0.013, -0.000]],
         // Intensities derived from Table 4 and 1-pN
-        // Average of First and Second contact, Raptor.Empty measurement from Second contact is excluded from average due to a discrepancy in opacity
+        // Weighted mean of Springbok and Gifberg observations used (565 nm)
         geometric_albedo: [550, [0.070, 0.010]],
     },
     '(10253) Westerwald | SsODNet': {
@@ -3223,6 +3255,20 @@
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.841, 0.072], 'V-R': [0.502, 0.065], 'R-I': [0.486, 0.095]},
         calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', [0.050, 0.003]],
+        phase_function: ['Generic_Bessell.R', 'HG', {H: [9.03, 0.01], G: [-0.39, 0.08]}], // V-band value results in negative phase integral
+    },
+    'Beck2025': [
+        'Photometric Constraints on Activity of Centaur 174P/Echeclus from 2021 Through 2024',
+        'DOI: 10.3847/2515-5172/ae122b', 'https://iopscience.iop.org/article/10.3847/2515-5172/ae122b',
+        'https://ui.adsabs.harvard.edu/abs/2025RNAAS...9..271B/abstract'
+    ],
+    '(60558) Echeclus | Beck2025, Pereira2024, Rousselot2005a': { // 174P/Echeclus
+        tags: ['Solar System', 'minor body/centaur/active centaur', 'minor body/comet/short period comet'],
+        photometric_system: 'Gemini_GMOS-N',
+        color_indices: {'g-r': [0.64, 0.03], 'r-i': [0.27, 0.03]},
+        calibration_system: 'AB',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.050, 0.003]],
         phase_function: ['Generic_Bessell.R', 'HG', {H: [9.03, 0.01], G: [-0.39, 0.08]}], // V-band value results in negative phase integral
@@ -6619,7 +6665,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
-    'Satellite of 2000 CF105 | Tegler2003': { // undesignated
+    'Moon of 2000 CF105 | Tegler2003': { // no provisional designation
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite/minor planet moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': [1.76, 0.15]}, // mean
@@ -7259,6 +7305,25 @@
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.43, 0.14], 'V-R': [0.41, 0.13], 'V-I': [1.03, 0.08]},
         calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+    },
+    'Petit2008':[
+        'The Extreme Kuiper Belt Binary 2001 QW322',
+        'DOI: 10.1126/science.1163148', 'https://hal.science/hal-02374710/file/Petit-etal_2008_Science_preprint_all.pdf',
+        'https://ui.adsabs.harvard.edu/abs/2008Sci...322..432P/abstract'
+    ],
+    '2001 QW322 | Petit2008': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Gemini_GMOS-N',
+        color_indices: {'g-r': [0.45, 0.13], 'r-i': [0.28, 0.13]}, // Fig. S2
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
+    'Moon of 2001 QW322 | Petit2008': { // no provisional designation
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite/minor planet moon'],
+        photometric_system: 'Gemini_GMOS-N',
+        color_indices: {'g-r': [0.47, 0.15], 'r-i': [0.37, 0.15]}, // Fig. S2
+        calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
     '2001 UP18 | Sheppard2012': {
