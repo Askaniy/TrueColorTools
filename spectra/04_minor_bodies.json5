@@ -6665,7 +6665,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
-    'Moon of 2000 CF105 | Tegler2003': { // no provisional designation
+    'Moon of (612147) 2000 CF105 | Tegler2003': { // no provisional designation
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite/minor planet moon'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-R': [1.76, 0.15]}, // mean
@@ -6955,6 +6955,25 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.076, +0.031, -0.025]],
+    },
+    'Bernardinelli2023': [
+        'Photometry of outer Solar System objects from the Dark Energy Survey I: photometric methods, light curve distributions and trans-Neptunian binaries',
+        'DOI: 10.3847/1538-4365/acf6bf', 'https://iopscience.iop.org/article/10.3847/1538-4365/acf6bf',
+        'https://ui.adsabs.harvard.edu/abs/2023ApJS..269...18B/abstract'
+    ],
+    '(671468) 2014 LQ28 | Bernardinelli2023': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'CTIO_DECam',
+        color_indices: {'g-r': [1.03, 0.29], 'r-i': [0.39, 0.08], 'i-z': [0.53, 0.12]}, // Average of Fig. 5
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
+    'Moon of (671468) 2014 LQ28 | Bernardinelli2023': { // no provisional designation
+        tags: ['Solar System', 'minor body/TNO/resonant TNO', 'natural satellite/minor planet moon'],
+        photometric_system: 'CTIO_DECam',
+        color_indices: {'g-r': [0.90, 0.25], 'r-i': [0.22, 0.01], 'i-z': [0.04, 0.14]}, // Average of Fig. 5
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
     },
     '(709487) 2013 BL76 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered', 'minor body/centaur/Damocloid'],
