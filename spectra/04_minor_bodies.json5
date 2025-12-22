@@ -80,11 +80,6 @@
         'DOI: 10.1051/0004-6361/201322047', 'https://www.aanda.org/articles/aa/full_html/2013/09/aa22047-13/aa22047-13.html',
         'https://ui.adsabs.harvard.edu/abs/2013A%26A...557A..60L/abstract'
     ],
-    'Lorenzi2016': [
-        'The Spectrum of Pluto, 0.40 - 0.93 um I. Secular and longitudinal distribution of ices and complex organics',
-        'DOI: 10.1051/0004-6361/201527281', 'https://www.aanda.org/articles/aa/full_html/2016/01/aa27281-15/aa27281-15.html',
-        'https://ui.adsabs.harvard.edu/abs/2016A%26A...585A.131L/abstract'
-    ],
     'Mainzer2019': [
         'NEOWISE Diameters and Albedos V2.0',
         'DOI: 10.26033/18S3-2Z54', 'https://ui.adsabs.harvard.edu/abs/2019PDSS..251.....M/abstract'
@@ -3119,7 +3114,7 @@
     },
     '(55636) 2002 TX300 | PinillaAlonso2007, Ortiz2019': { // IR extension of Licandro2006
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
-        file: 'spectra/files/PinillaAlonso2007/2002TX300_PinillaAlonso2007.txtU', // Fig. 1
+        file: 'spectra/files/PinillaAlonso2007/2002TX300.txtU', // Fig. 1
         geometric_albedo: ['Generic_Bessell.V', [0.65, 0.15]],
     },
     '(55636) 2002 TX300 | MBOSS, Ortiz2019': {
@@ -4309,6 +4304,17 @@
         is_geometric_albedo: true,
         phase_integral: [0.795, +0.094, -0.180],
     },
+    'Lorenzi2016': [
+        'The Spectrum of Pluto, 0.40 - 0.93 um I. Secular and longitudinal distribution of ices and complex organics',
+        'DOI: 10.1051/0004-6361/201527281', 'https://www.aanda.org/articles/aa/full_html/2016/01/aa27281-15/aa27281-15.html',
+        'https://ui.adsabs.harvard.edu/abs/2016A%26A...585A.131L/abstract'
+    ],
+    '(134340) Pluto | Lorenzi2016, Helfenstein2025': {
+        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
+        file: 'spectra/files/Pluto_Lorenzi2016.txtU', // Fig. 3
+        geometric_albedo: ['Generic_Bessell.V', [0.506, +0.008, -0.012]],
+        spherical_albedo: ['Generic_Bessell.V', [0.402, +0.055, -0.096]],
+    },
     '(134340) Pluto | MBOSS, Helfenstein2025': {
         tags: ['MBOSS', 'Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
         photometric_system: 'Generic_Bessell',
@@ -4412,7 +4418,7 @@
     },
     '(134340 I) Charon | PinillaAlonso2007, Helfenstein2025': {
         tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'Charon', 'spacecraft target/New Horizons target'],
-        file: 'spectra/files/PinillaAlonso2007/Charon_PinillaAlonso2007.txtU', // Fig. 1
+        file: 'spectra/files/PinillaAlonso2007/Charon.txtU', // Fig. 1
         geometric_albedo: ['Generic_Bessell.V', [0.408, +0.004, -0.005]],
         spherical_albedo: ['Generic_Bessell.V', [0.228, +0.006, -0.039]],
     },
@@ -4749,18 +4755,14 @@
         geometric_albedo: ['Generic_Bessell.V', [0.82, +0.11, -0.12]],
         spherical_albedo: ['Generic_Bessell.V', [0.62, +0.15, -0.09]],
     },
-    '(136472) Makemake | Lorenzi2016, Helfenstein2025': {
+    'Licandro2006': [
+        'The methane ice rich surface of large TNO 2005 FY9: a Pluto-twin in the trans-neptunian belt?',
+        'DOI: 10.1051/0004-6361:200500219', 'https://www.aanda.org/component/article?access=bibcode&bibcode=&bibcode=2006A%2526A...445L..35LFUL',
+        'https://ui.adsabs.harvard.edu/abs/2006A%26A...445L..35L/abstract'
+    ],
+    '(136472) Makemake | Licandro2006, Helfenstein2025': {
         tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
-        nm: [
-            417.357, 466.069, 588.13, 601.568, 609.406, 631.243, 642.441, 649.72, 656.439, 664.278,
-            672.116, 679.955, 691.153, 706.271, 715.789, 723.628, 729.787, 740.426, 744.345, 751.064,
-            766.181, 782.419, 788.578, 794.737, 809.295, 813.774, 826.652, 841.209, 860.246
-        ],
-        br: [
-            0.89, 0.971, 1.106, 1.059, 1.127, 1.133, 1.125, 1.157, 1.137, 1.155, 1.116, 1.139, 1.03,
-            1.179, 1.182, 1.143, 1.163, 1.088, 1.16, 1.084, 1.201, 1.201, 1.087, 1.159, 1.018, 1.079,
-            0.881, 1.072, 1.13
-        ],
+        file: 'spectra/files/Makemake_Licandro2006.txtU', // Fig. 1
         geometric_albedo: ['Generic_Bessell.V', [0.82, +0.11, -0.12]],
         spherical_albedo: ['Generic_Bessell.V', [0.62, +0.15, -0.09]],
     },
@@ -4876,7 +4878,7 @@
     },
     '(145453) 2005 RR43 | PinillaAlonso2007, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
-        file: 'spectra/files/PinillaAlonso2007/2005RR43_PinillaAlonso2007.txtU', // Fig. 1
+        file: 'spectra/files/PinillaAlonso2007/2005RR43.txtU', // Fig. 1
         geometric_albedo: ['Generic_Bessell.V', [0.440, +0.120, -0.100]],
     },
     '(145453) 2005 RR43 | MBOSS, Müller2020': {
