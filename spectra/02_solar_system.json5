@@ -211,6 +211,186 @@
         br: [0.845, 0.85, 0.83],
         is_albedo: true,
     },
+    // Venusian sky
+    'Sky of Venus: Venera 11 (0 km) | Maiorov2005': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Maiorov2005/0_km.txtU', // Fig. 1
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 11 (0 km) | Ekonomov1979': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Ekonomov1979/0_km.txtU', // Fig. 4
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 11 (8 km) | Ekonomov1979': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Ekonomov1979/8_km.txtU', // Fig. 4
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 11 (11.4 km) | Maiorov2005': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Maiorov2005/11.4_km.txtU', // Fig. 1
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 11 (16.2 km) | Ekonomov1979': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Ekonomov1979/16.2_km.txtU', // Fig. 4
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 11 (23.7 km) | Ekonomov1979': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Ekonomov1979/23.7_km.txtU', // Fig. 4
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 11 (37.7 km) | Ekonomov1979': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Ekonomov1979/37.7_km.txtU', // Fig. 4
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 11 (48.2 km) | Maiorov2005': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Maiorov2005/48.2_km.txtU', // Fig. 1
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 11 (48.6 km) | Ekonomov1979': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Ekonomov1979/48.6_km.txtU', // Fig. 4
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 11 (51 km) | Ekonomov1979': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Ekonomov1979/51_km.txtU', // Fig. 4
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 11 (56.1 km) | Ekonomov1979': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Ekonomov1979/56.1_km.txtU', // Fig. 4
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 11 (59.2 km) | Maiorov2005': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Maiorov2005/59.2_km.txtU', // Fig. 1
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 11 (62 km) | Ekonomov1979': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Ekonomov1979/62_km.txtU', // Fig. 4
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Moshkin1983': [
+        'Spectrophotometric experiment aboard the Venera 13 and Venera 14 apparatuses. 1. Method, results and preliminary analysis of measurements.',
+        'https://ui.adsabs.harvard.edu/abs/1983KosIs..21..236M/abstract'
+    ],
+    'Sky of Venus: Venera 13 (0 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V13_0_km.txtU', // Fig. 2 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 13 (1 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V13_1_km.txtU', // Fig. 2 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 13 (4.5 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V13_4.5_km.txtU', // Fig. 2 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 13 (10 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V13_10_km.txtU', // Fig. 2 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 13 (16.5 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V13_16.5_km.txtU', // Fig. 2 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 13 (25 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V13_25_km.txtU', // Fig. 2 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 13 (40 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V13_40_km.txtU', // Fig. 2 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 13 (49 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V13_49_km.txtU', // Fig. 2 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 13 (52 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V13_52_km.txtU', // Fig. 2 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 13 (55 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V13_55_km.txtU', // Fig. 2 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 13 (62 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V13_62_km.txtU', // Fig. 2 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 14 (0 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V14_0_km.txtU', // Fig. 4 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 14 (1.5 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V14_1.5_km.txtU', // Fig. 4 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 14 (4.5 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V14_4.5_km.txtU', // Fig. 4 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 14 (10 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V14_10_km.txtU', // Fig. 4 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 14 (16.5 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V14_16.5_km.txtU', // Fig. 4 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 14 (25 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V14_25_km.txtU', // Fig. 4 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 14 (40 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V14_40_km.txtU', // Fig. 4 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 14 (50 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V14_50_km.txtU', // Fig. 4 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 14 (52 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V14_52_km.txtU', // Fig. 4 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 14 (55 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V14_55_km.txtU', // Fig. 4 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
+    'Sky of Venus: Venera 14 (62 km) | Moshkin1983': {
+        tags: ['Solar System', 'planetary body/planet', 'Venus', 'sky/Venusian sky'],
+        file: 'spectra/files/Moshkin1983/V14_62_km.txtU', // Fig. 4 (from sky)
+        is_albedo: true, // in units of 1000 W / (m² μm steradian)
+    },
 
     // Terran system
     'Robinson2025': [
@@ -518,6 +698,36 @@
         tags: ['Solar System', 'planetary body/planet', 'Mars'],
         file: 'spectra/files/Blaney2009/mars_soil.txtU', // https://zenodo.org/records/4653768
         is_albedo: true,
+    },
+    // Martian sky
+    'Maki1999': [
+        'The color of Mars: Spectrophotometric measurements at the Pathfinder landing site',
+        'DOI: 10.1029/98JE01767', 'https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/98JE01767',
+        'https://ui.adsabs.harvard.edu/abs/1999JGR...104.8781M/abstract'
+    ],
+    'Sky of Mars: Pathfinder | Maki1999': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'sky/Martian sky'],
+        nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
+        br: [
+            0.19189, 0.27973, 0.36757, 0.50541, 0.47838, 0.42297,
+            0.37027, 0.30946, 0.28108, 0.25676, 0.23108, 0.21757
+        ], // extracted from Fig. 2
+        is_albedo: true, // in units of 100 W / (m² μm steradian)
+    },
+    'Bell2006': [
+        'Chromaticity of the Martian sky as observed by the Mars Exploration Rover Pancam instruments',
+        'DOI: 10.1029/2006JE002687', 'https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2006JE002687',
+        'https://ui.adsabs.harvard.edu/abs/2006JGRE..11112S05B/abstract'
+    ],
+    'Sky of Mars: Spirit | Bell2006': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'sky/Martian sky'],
+        file: 'spectra/files/Bell2006/Spirit_sky.txt', // Fig. 3
+        is_albedo: true, // normalized to maximum brightness
+    },
+    'Sky of Mars: Opportunity | Bell2006': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars', 'sky/Martian sky'],
+        file: 'spectra/files/Bell2006/Opportunity_sky.txt', // Fig. 3
+        is_albedo: true, // normalized to maximum brightness
     },
     // Phobos
     'Pajola2013': [
