@@ -246,6 +246,17 @@
         geometric_albedo: ['Generic_Bessell.V', [0.226, 0.004]],
         spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
     },
+    'Robinson2014': [
+        'Detection of Ocean Glint and Ozone Absorption Using LCROSS Earth Observations',
+        'DOI: 10.1088/0004-637X/787/2/171', 'https://iopscience.iop.org/article/10.1088/0004-637X/787/2/171',
+        'https://ui.adsabs.harvard.edu/abs/2014ApJ...787..171R/abstract'
+    ],
+    'Earth | Robinson2014, Robinson2025': { // phase angle 23°
+        tags: ['Solar System', 'planetary body/planet', 'Earth'],
+        file: 'spectra/files/Earth_Robinson2014.txtU', // Fig. 4 (Full-disk)
+        geometric_albedo: ['Generic_Bessell.V', [0.226, 0.004]],
+        spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
+    },
     'Earth | Mallama2017a, Robinson2025': {
         tags: ['Solar System', 'planetary body/planet', 'Earth'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
@@ -271,13 +282,41 @@
         geometric_albedo: ['Generic_Bessell.V', [0.226, 0.004]],
         spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
     },
+    'Wen2019': [
+        'A Relationship Between Blue and Near‐IR Global Spectral Reflectance and the Response of Global Average Reflectance to Change in Cloud Cover Observed From EPIC',
+        'DOI: 10.1029/2019EA000664', 'https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2019EA000664',
+        'http://ui.adsabs.harvard.edu/abs/2019E&SS....6.1416W/abstract'
+    ],
+    // "(a) Spectral reflectance for ocean, land, and vegetation without atmospheric effects and cloud 
+    // reflectance for optical depth of 10 without surface reflection and atmospheric scattering and gaseous 
+    // absorption."
+    'Surface of Earth: Deserted land | Wen2019': {
+        tags: ['Solar System', 'planetary body/planet', 'Earth/surface feature'],
+        file: 'spectra/files/Wen2019/Land.txt', // Fig. 2a
+        is_albedo: true, // reflectance
+    },
+    'Surface of Earth: Vegetated land | Wen2019': {
+        tags: ['Solar System', 'planetary body/planet', 'Earth/surface feature'],
+        file: 'spectra/files/Wen2019/Vegetation.txt', // Fig. 2a
+        is_albedo: true, // reflectance
+    },
+    'Clouds of Earth | Wen2019': {
+        tags: ['Solar System', 'planetary body/planet', 'Earth/surface feature'],
+        file: 'spectra/files/Wen2019/Cloud.txt', // Fig. 2a
+        is_albedo: true, // reflectance
+    },
+    'Oceans of Earth | Wen2019': {
+        tags: ['Solar System', 'planetary body/planet', 'Earth/surface feature'],
+        file: 'spectra/files/Wen2019/Ocean.txt', // Fig. 2a
+        is_albedo: true, // reflectance
+    },
     'Gómez2014': [
         'Spectral Reflectance Analysis of the Caribbean Sea',
         'DOI: 10.1016/S0016-7169(14)70073-X', 'http://revistagi.geofisica.unam.mx/index.php/RGI/article/view/545',
         'https://ui.adsabs.harvard.edu/abs/2014GeofI..53..385G/abstract'
     ],
     'Caribbean Sea (Earth) | Gómez2014': {
-        tags: ['Solar System', 'Earth/surface feature'],
+        tags: ['Solar System', 'planetary body/planet', 'Earth/surface feature'],
         nm: [380, 400, 425, 450, 475, 500, 520, 550, 600, 650, 700],
         br: [0.048, 0.047, 0.043, 0.037, 0.032, 0.02, 0.01, 0.007, 0.004, 0.002, 0.001],
         is_albedo: true,
