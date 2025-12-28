@@ -454,7 +454,7 @@ class _SpectralObject(_TrueColorToolsObject):
         if np.any(np.isnan(self.br)):
             self.br = np.nan_to_num(self.br)
             print(f'# Note for the SpectralObject "{self.name}"')
-            print(f'- NaN values detected during object initialization, they been replaced with zeros.')
+            print('- NaN values detected during object initialization, they been replaced with zeros.')
 
     @classmethod
     def from_array(cls, nm: np.ndarray, br: np.ndarray, sd: np.ndarray = None, name: str|ObjectName = None):
@@ -512,7 +512,7 @@ class _SpectralObject(_TrueColorToolsObject):
             return cls(nm, br, sd, name=name)
         except Exception:
             print(f'# Note for the {target_class_name} "{name}"')
-            print(f'- Something unexpected happened while trying to create an object from the array. It was replaced by a stub.')
+            print('- Something unexpected happened while trying to create an object from the array. It was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0).strip()}')
             return cls.stub(name)
 
@@ -570,7 +570,7 @@ class _SpectralObject(_TrueColorToolsObject):
             return np.average(aux.expand_1D_array(self.nm, self.shape), weights=self.br, axis=0)
         except ZeroDivisionError:
             print(f'# Note for the SpectralObject "{self.name}"')
-            print(f'- Bolometric brightness is zero, the mean wavelength cannot be calculated. Returns 0 nm.')
+            print('- Bolometric brightness is zero, the mean wavelength cannot be calculated. Returns 0 nm.')
             return 0.
 
     def sd_of_nm(self) -> np.ndarray[np.floating]:
@@ -1057,7 +1057,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
         if np.any(np.isnan(self.br)):
             self.br = np.nan_to_num(self.br)
             print(f'# Note for the PhotospectralObject object "{self.name}"')
-            print(f'- NaN values detected during object initialization, they been replaced with zeros.')
+            print('- NaN values detected during object initialization, they been replaced with zeros.')
 
     @property
     def nm(self) -> np.ndarray[np.integer]:
@@ -1611,7 +1611,7 @@ def _create_TCT_object(
         TCT_obj = Photospectrum(FilterSystem.from_list(filters, name=filter_system), br, sd, name=name)
     else:
         print(f'# Note for the database object "{name}"')
-        print(f'- No wavelength data. Spectrum stub object was created.')
+        print('- No wavelength data. Spectrum stub object was created.')
         TCT_obj = Spectrum.stub(name)
     if calib is not None:
         match calib.lower():
@@ -1670,7 +1670,7 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
             nm = stub.nm
             br = stub.br
             print(f'# Note for the Spectrum object "{name}"')
-            print(f'- Something unexpected happened during external file reading. The data was replaced by a stub.')
+            print('- Something unexpected happened during external file reading. The data was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0).strip()}')
     else:
         # Brightness reading
@@ -1806,7 +1806,7 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
                 geometric = spherical.scaled_at(geom_where, geom_how)
         if geometric is None and spherical is None:
             print(f'# Note for the database object "{name}"')
-            print(f'- No brightness data. Spectrum stub object was created.')
+            print('- No brightness data. Spectrum stub object was created.')
             TCT_obj = Spectrum.stub(name)
     else:
         TCT_obj = _create_TCT_object(name, nm, filters, br, sd, filter_system, calib, is_sun, is_emission)
@@ -1837,7 +1837,9 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
 # https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer
 # http://www.cvrl.org/cie.htm
 xyz_cmf = FilterSystem.from_list(('CIE_1931_2deg.x', 'CIE_1931_2deg.y', 'CIE_1931_2deg.z'))
-visible_range = xyz_cmf.nm
+visible_range = xyz_cmf.nm # original CMF definition range is 360-830 nm
+#visible_range = aux.grid(380, 730, 5) # for values greater than 0.001, saves 27% of memory used
+xyz_cmf = xyz_cmf.define_on_range(visible_range)
 
 # There are CMFs transformed from the CIE (2006) LMS functions, 2-deg
 # (https://cie.co.at/datatable/cie-2006-lms-cone-fundamentals-2-field-size-terms-energy)

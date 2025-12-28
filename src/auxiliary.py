@@ -280,8 +280,8 @@ def extrapolating(x: np.ndarray, y: np.ndarray, sd: np.ndarray, x_arr: np.ndarra
     The exponential growth of uncertainty is completely arbitrary and needs to be investigated.
     """
     obj_shape = y.shape[1:] # (,) for 1D; (n,) for 2D; (w, h) for 3D
-    if len(obj_shape) == 2:
-        # currently broken for spectral cubes
+    if len(obj_shape) >= 1:
+        # currently broken for spectral cubes and "squares"
         is_cube = True
     else:
         is_cube = False
