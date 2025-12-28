@@ -464,21 +464,22 @@ c = 299792458 # Speed of light
 k = 1.381e-23 # Boltzmann constant
 const1 = 2 * np.pi * h * c * c
 const2 = h * c / k
-r = 6.957e8 # Solar radius, meters
-au = 149597870700 # astronomical unit, meters
-w = (1 - np.sqrt(1 - (r / au)**2)) / 2 # dilution to compare with Solar light on Earth
-temp_coef_to_make_it_work = 1.8 / 0.448 # 1.8 is expected of irradiance(500, 5770), 0.448 is actual. TODO
 
-# Now it does not work as intended: the spectrum should be comparable to the sun_SI
-def irradiance(nm: int|float|np.ndarray, T: int|float) -> float|np.ndarray:
-    m = nm / 1e9
-    return temp_coef_to_make_it_work * w * const1 / (m**5 * (np.exp(const2 / (m * T)) - 1)) / 1e9 # per m -> per nm
+def planck_exitance(nm: int|float|np.ndarray, T: int|float) -> float|np.ndarray:
+    m = nm * 1e-9
+    exitance = const1 / (m**5 * (np.exp(const2 / (m * T)) - 1))
+    return exitance * 1e-9 # per m -> per nm
 
+def extended_log10(value: int|float):
+    if value != 0:
+        return np.log10(value)
+    else:
+        return 0
 
 
 # ------------ Database Processing Section ------------
 
-def parse_value_sd(data: float|Sequence[float]) -> tuple[float, float|None]:
+def parse_value_sd(data: float|Sequence[float]) -> tuple[float|None, float|None]:
     """
     Guarantees the output of the value and its standard deviation.
 
@@ -830,12 +831,24 @@ def normalize_string(string: str):
 
 superscript_digits = '⁰¹²³⁴⁵⁶⁷⁸⁹'
 
-def superscript(number: int):
-    """ Converts a number to be a superscript string """
+def superscript(number: int | str):
+    """ Converts a number to a superscript string """
     return ''.join([superscript_digits[int(digit)] for digit in str(number)])
 
 subscript_digits = '₀₁₂₃₄₅₆₇₈₉'
 
 def subscript(number: int | str):
-    """ Converts a number to be a subscript string """
+    """ Converts a number to a subscript string """
     return ''.join([subscript_digits[int(digit)] for digit in str(number)])
+
+subscript_signs = {
+    '+': '', #'⁺',
+    '-': '⁻'
+}
+
+def exponential_notation(value: float):
+    """ Converts a number to a string in exponential notation """
+    mantissa, exponent = f'{value:.2E}'.split('E')
+    sign = subscript_signs[exponent[0]]
+    exponent = superscript(exponent[1:])
+    return f'{mantissa} ⋅ 10{sign}{exponent}'

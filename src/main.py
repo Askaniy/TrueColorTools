@@ -7,7 +7,7 @@ from time import strftime
 import numpy as np
 
 from src.core import Spectrum, ReflectingBody, ColorSystem, ColorPoint, FilterNotFoundError, \
-    visible_range, sun_in_V, get_filter, database_parser
+    visible_range, get_filter, database_parser
 import src.gui as gui
 import src.auxiliary as aux
 import src.database as db
@@ -36,6 +36,7 @@ def launch_window(lang: str):
     brGeom = True # default albedo type (True==geometrical, False==spherical)
     bitness = 1
     rounding = 3
+    tab3_overexposure_limit = 3e5 # W/m²
 
     # GUI configuration
     tab2_num = 8 # max number of image bands
@@ -69,7 +70,7 @@ def launch_window(lang: str):
     window0 = sg.Window(
         title=window0_title, size=window0_size, icon=icon, finalize=True, resizable=True, margins=(0, 0),
         layout=gui.generate_layout(
-            circle_size, filters_plot_size, img_preview_size, filtersDB,
+            circle_size, filters_plot_size, img_preview_size, filtersDB, tab3_overexposure_limit,
             default_color_space, default_white_point, default_gamma_correction,
             brMax, brGeom, bitness, rounding, tab2_num, lang
         )
@@ -122,15 +123,15 @@ def launch_window(lang: str):
 
     # List of events that cause GUI output update
     tab1_update_gui_events = (
-        '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-',
-        '-AlbedoMode1-', '-AlbedoMode2-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load', '-currentTab-'
+        '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-', '-currentTab-',
+        '-AlbedoMode1-', '-AlbedoMode2-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load'
     )
     tab2_update_gui_events = (
-        '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-', '-currentTab-'
+        '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-', '-currentTab-',
     )
     tab3_update_gui_events = (
-        '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-',
-        '-bitness-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3', '-currentTab-'
+        '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-', '-currentTab-',
+        '-bitness-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3', 'tab3_overexposure_limit', 'tab3_slider4'
     )
 
     # GUI first loading flags
@@ -426,8 +427,8 @@ def launch_window(lang: str):
                                 if i < tab2_vis:
                                     window[f'tab2_band{i}'].update(visible=True)
                                     window[f'tab2_path{i}'].update(visible=values['-typeImage-'])
-                                    window[f'tab2_pathText{i}'].update(visible=values['-typeImage-'])
-                                    window[f'tab2_rgbText{i}'].update(visible=values['-typeImageRGB-'])
+                                    window[f'tab2_path_text{i}'].update(visible=values['-typeImage-'])
+                                    window[f'tab2_rgb_text{i}'].update(visible=values['-typeImageRGB-'])
                                 else:
                                     window[f'tab2_band{i}'].update(visible=False)
 
@@ -435,7 +436,7 @@ def launch_window(lang: str):
                         tab2_single_file_flag = tab2_mode > 0
                         window['tab2_step2'].update(visible=not tab2_single_file_flag)
                         window['tab2_path'].update(visible=tab2_single_file_flag)
-                        window['tab2_pathText'].update(visible=tab2_single_file_flag)
+                        window['tab2_path_text'].update(visible=tab2_single_file_flag)
 
                     elif event.startswith('tab2_filter'):
                         # Updates the list of filters and generates the checklist of valid inputs
@@ -533,9 +534,10 @@ def launch_window(lang: str):
 
                 if event in tab3_recalc_spectrum_events:
 
-                    # Spectral data processing and updating title
+                    # Spectral data processing, updating title and radiant exitance of surface
                     tab3_spectrum = Spectrum.from_blackbody_redshift(visible_range, values['tab3_slider1'], values['tab3_slider2'], values['tab3_slider3'])
-                    tab3_spectrum /= sun_in_V
+                    tab3_exitance = tab3_spectrum @ get_filter('Generic_Bessell.V')
+                    window['tab3_exitance'].update(aux.exponential_notation(tab3_exitance[0]))
                     tab3_obj_name = tab3_spectrum.name
                     window['tab3_title2'].update(tab3_obj_name.indexed_name(lang))
 
@@ -546,11 +548,33 @@ def launch_window(lang: str):
 
                 if event in tab3_update_gui_events and tab3_obj_name is not None:
 
-                    # Color postprocessing
+                    # Color processing
                     tab3_color_rgb = tab3_color_xyz.to_color_system(color_system)
+
+                    # Checking overexposure limit
+                    # In the "maximize brightness" mode it follows the data
+                    # else, it's a user input
+                    if values['-MaximizeBrightness-']:
+                        tab3_overexposure_limit = tab3_color_rgb.br.max()
+                        window['tab3_overexposure_limit'].update(round(tab3_overexposure_limit, 2))
+                        window['tab3_slider4'].update(aux.extended_log10(tab3_overexposure_limit))
+                    else:
+                        if event == 'tab3_slider4':
+                            tab3_overexposure_limit = 10**values['tab3_slider4']
+                            window['tab3_overexposure_limit'].update(round(tab3_overexposure_limit, 2))
+                        elif event == 'tab3_overexposure_limit':
+                            try:
+                                tab3_overexposure_limit = float(values['tab3_overexposure_limit'])
+                            except ValueError:
+                                tab3_overexposure_limit = 0
+                            window['tab3_slider4'].update(aux.extended_log10(tab3_overexposure_limit))
+                        if tab3_overexposure_limit != 0:
+                            tab3_color_rgb.br /= tab3_overexposure_limit
+
+                    # Color postprocessing
                     tab3_color_rgb.gamma_correction = values['-GammaCorrection-']
                     tab3_color_rgb.maximize_brightness = values['-MaximizeBrightness-']
-                    tab3_color_rgb.scale_factor = values['-ScaleFactor-']
+                    tab3_color_rgb.scale_factor = float(values['-ScaleFactor-'])
                     tab3_html = tab3_color_rgb.to_html()
 
                     # Output

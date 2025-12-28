@@ -5,6 +5,7 @@ from typing import Any
 from time import strftime
 import platform
 import FreeSimpleGUI as sg
+import numpy as np
 
 import src.strings as tr
 from src.core import ColorSystem
@@ -72,6 +73,7 @@ def generate_layout(
         filters_plot_size: tuple[int, int],
         img_preview_size: tuple[int, int],
         filtersDB: tuple[str, ...],
+        tab3_overexposure_limit: int|float,
         color_space: str,
         white_point: str,
         gamma: bool,
@@ -177,24 +179,24 @@ def generate_layout(
     def frame(num: int, filtersDB: tuple[str, ...], lang: str):
         n = str(num)
         try:
-            rgb_text = sg.Text(tr.gui_RGBcolors[lang][num], key='tab2_rgbText'+n)
+            rgb_text = sg.Text(tr.gui_RGBcolors[lang][num], key='tab2_rgb_text'+n)
         except IndexError:
-            rgb_text = sg.Text(key='tab2_rgbText'+n)
+            rgb_text = sg.Text(key='tab2_rgb_text'+n)
         l = [
             [
                 sg.Input(enable_events=True, size=1, key='tab2_path'+n, expand_x=True, visible=False),
                 # size=1 is VERY important to make column be depended on the max length of filter file names
                 # Depending on the radio box, FileBrowse or label is displayed below
-                sg.FileBrowse(button_text=tr.gui_browse[lang], size=browse_size, key='tab2_pathText'+n, visible=False),
+                sg.FileBrowse(button_text=tr.gui_browse[lang], size=browse_size, key='tab2_path_text'+n, visible=False),
                 # No need to use initial_folder='..' in the FileBrowse to make the path dynamic between the frames
                 rgb_text,
             ],
             [
-                sg.Text(tr.gui_filter_or_nm[lang], key='tab2_filterText'+n),
+                sg.Text(tr.gui_filter_or_nm[lang], key='tab2_filter_text'+n),
                 sg.Combo(('', *filtersDB), enable_events=True, enable_per_char_events=True, expand_x=True, key='tab2_filter'+n)
             ],
             [
-                sg.Text(tr.gui_evaluate[lang], key='tab2_evalText'+n, tooltip=tr.gui_evaluate_tooltip[lang]),
+                sg.Text(tr.gui_evaluate[lang], key='tab2_eval_text'+n, tooltip=tr.gui_evaluate_tooltip[lang]),
                 sg.Input('x', size=1, key='tab2_eval'+n, expand_x=True)
             ],
         ]
@@ -213,7 +215,7 @@ def generate_layout(
             sg.Input(enable_events=True, size=1, key='tab2_path', expand_x=True),
             sg.FileBrowse(
                 button_text=tr.gui_browse[lang], size=browse_size,
-                initial_folder='..', key='tab2_pathText'
+                initial_folder='..', key='tab2_path_text'
             ),
         ],
         [sg.Column(tab2_frames, scrollable=True, vertical_scroll_only=True, key='tab2_frames', expand_x=True, expand_y=True)],
@@ -226,7 +228,7 @@ def generate_layout(
     tab2_col2_2 = [
         [sg.Checkbox(tr.gui_upscale[lang], default=False, key='tab2_upscale', tooltip=tr.gui_upscale_tooltip[lang])],
         [
-            sg.Text(tr.gui_chunks[lang], key='tab2_chunksText', tooltip=tr.gui_chunks_tooltip[lang]),
+            sg.Text(tr.gui_chunks[lang], key='tab2_chunks_text', tooltip=tr.gui_chunks_tooltip[lang]),
             sg.Input('1', size=1, key='tab2_chunks', expand_x=True),
         ],
     ]
@@ -272,6 +274,23 @@ def generate_layout(
         #    sg.Slider(range=(-50, 0), default_value=-26.7, resolution=0.1, orientation='h', size=slider_size, enable_events=True, disabled=brMax, key='tab3_slider4', expand_x=True)
         #],
         #[sg.Text(tr.gui_mag_note[lang], key='tab3_mag_note')],
+        [sg.T()],
+        [sg.T()],
+        [sg.Push(), sg.Text('Exposure settings', font=title_font, key='tab3_exposure_settings'), sg.Push()],
+        [
+            sg.Text('Radiant exitance of surface in V band:', key='tab3_exitance_text'),
+            sg.Text('0', size=8, justification='center', key='tab3_exitance'),
+            sg.Text('W/m²', key='tab3_dimension1'),
+        ],
+        [
+            sg.Text('Overexposure limit:', key='tab3_limit_text'),
+            sg.Input(str(tab3_overexposure_limit), size=16, enable_events=True, key='tab3_overexposure_limit'),
+            sg.Text('W/m²', key='tab3_dimension2'),
+        ],
+        [
+            sg.Slider(range=(0.0001, 10), default_value=np.log10(tab3_overexposure_limit), resolution=0.01, orientation='h',
+            size=slider_size, disable_number_display=True, enable_events=True, key='tab3_slider4', expand_x=True)
+        ],
     ]
     tab3_col2 = [
         [sg.Text(font=title_font, key='tab3_title2')],
@@ -355,22 +374,22 @@ def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict[
     window['-typeImage-'].update(text=tr.gui_datatype[lang][0])
     window['-typeImageRGB-'].update(text=tr.gui_datatype[lang][1])
     window['-typeImageCube-'].update(text=tr.gui_datatype[lang][2])
-    window['tab2_rgbText0'].update(tr.gui_RGBcolors[lang][0])
-    window['tab2_rgbText1'].update(tr.gui_RGBcolors[lang][1])
-    window['tab2_rgbText2'].update(tr.gui_RGBcolors[lang][2])
+    window['tab2_rgb_text0'].update(tr.gui_RGBcolors[lang][0])
+    window['tab2_rgb_text1'].update(tr.gui_RGBcolors[lang][1])
+    window['tab2_rgb_text2'].update(tr.gui_RGBcolors[lang][2])
     window['tab2_step2'].update(tr.gui_step2[lang])
-    window['tab2_pathText'].update(tr.gui_browse[lang])
+    window['tab2_path_text'].update(tr.gui_browse[lang])
     for i in range(tab2_vis):
         window['tab2_band'+str(i)].update(f'{tr.gui_band[lang]} {i+1}')
-        window['tab2_filterText'+str(i)].update(tr.gui_filter_or_nm[lang])
-        window['tab2_pathText'+str(i)].update(tr.gui_browse[lang])
-        window['tab2_evalText'+str(i)].update(tr.gui_evaluate[lang])
+        window['tab2_filter_text'+str(i)].update(tr.gui_filter_or_nm[lang])
+        window['tab2_path_text'+str(i)].update(tr.gui_browse[lang])
+        window['tab2_eval_text'+str(i)].update(tr.gui_evaluate[lang])
     window['tab2_desun'].update(text=tr.gui_desun[lang])
     window['tab2_photons'].update(text=tr.gui_photons[lang]) #, tooltip=tr.gui_photons_tooltip[lang]) # doesn't work
     #window['tab2_autoalign'].update(text=tr.gui_autoalign[lang])
     #window['tab2_plotpixels'].update(text=tr.gui_plotpixels[lang])
     window['tab2_upscale'].update(text=tr.gui_upscale[lang])
-    window['tab2_chunksText'].update(tr.gui_chunks[lang])
+    window['tab2_chunks_text'].update(tr.gui_chunks[lang])
     window['tab2_preview_button'].update(tr.gui_preview[lang])
     window['tab2_process_button'].update(tr.gui_process[lang])
     #window['tab3_title1'].update(tr.gui_input[lang])

@@ -754,7 +754,7 @@ class Spectrum(_SpectralObject):
                 else:
                     physics = False
         if physics:
-            br = aux.irradiance(nm_arr*doppler*grav, temperature)
+            br = aux.planck_exitance(nm_arr*doppler*grav, temperature)
         else:
             br = np.zeros(nm_arr.size)
         return Spectrum(nm_arr, br, name=f'BB with T={round(temperature)} K')
