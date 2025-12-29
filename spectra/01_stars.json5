@@ -11,6 +11,12 @@
         'HST/STIS Stellar Spectral Library',
         'http://astro.wsu.edu/hststarlib/', 'https://ui.adsabs.harvard.edu/abs/2023ApJS..266...41P/abstract'
     ],
+    'Alekseeva1997': [
+        'The Pulkovo spectrophotometric catalog of bright stars in the range from 320 to 1080 nm',
+        'DOI: 10.1515/astro-1996-0401', 'https://articles.adsabs.harvard.edu/full/1996BaltA...5..603A',
+        'https://cdsarc.cds.unistra.fr/viz-bin/Cat?III/201#/article',
+        'https://ui.adsabs.harvard.edu/abs/1996BaltA...5..603A/abstract'
+    ],
     'Krisciunas2017': [
         'Spectrophotometry of Very Bright Stars in the Southern Sky',
         'https://iopscience.iop.org/article/10.1088/1538-3873/aa5f0e'
@@ -210,6 +216,11 @@
     'Ran (K2 V) | STIS_NGSLv2': {
         tags: ['featured', 'extrasolar', 'star/V dwarf'],
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd022049_v2.txtA',
+        is_emissive: true,
+    },
+    'Sceptrum (K2 III) | Alekseeva1997': { // l Eri
+        tags: ['extrasolar', 'star/III giant'],
+        file: 'spectra/files/Pulkovo/Sceptrum.dat',
         is_emissive: true,
     },
     'Alphard (K3 II-III) | Krisciunas2017': {
