@@ -462,13 +462,13 @@ def div_sd(br1, sd1, br2, sd2):
 h = 6.626e-34 # Planck constant
 c = 299792458 # Speed of light
 k = 1.381e-23 # Boltzmann constant
-const1 = 2 * np.pi * h * c * c
+const1 = 2 * h * c * c # * np.pi to get exitance (W/m2) in the assumption of Lambertian surface
 const2 = h * c / k
 
-def planck_exitance(nm: int|float|np.ndarray, T: int|float) -> float|np.ndarray:
+def planck_radiance(nm: int|float|np.ndarray, T: int|float) -> float|np.ndarray:
     m = nm * 1e-9
-    exitance = const1 / (m**5 * (np.exp(const2 / (m * T)) - 1))
-    return exitance * 1e-9 # per m -> per nm
+    radiance = const1 / (m**5 * (np.exp(const2 / (m * T)) - 1))
+    return radiance * 1e-9 # per m -> per nm
 
 def extended_log10(value: int|float):
     if value != 0:
@@ -850,5 +850,5 @@ def exponential_notation(value: float):
     """ Converts a number to a string in exponential notation """
     mantissa, exponent = f'{value:.2E}'.split('E')
     sign = subscript_signs[exponent[0]]
-    exponent = superscript(exponent[1:])
+    exponent = superscript(int(exponent[1:]))
     return f'{mantissa} ⋅ 10{sign}{exponent}'

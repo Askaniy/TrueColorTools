@@ -534,10 +534,10 @@ def launch_window(lang: str):
 
                 if event in tab3_recalc_spectrum_events:
 
-                    # Spectral data processing, updating title and radiant exitance of surface
+                    # Spectral data processing, updating title and radiance of surface
                     tab3_spectrum = Spectrum.from_blackbody_redshift(visible_range, values['tab3_slider1'], values['tab3_slider2'], values['tab3_slider3'])
-                    tab3_exitance = tab3_spectrum @ get_filter('Generic_Bessell.V')
-                    window['tab3_exitance'].update(aux.exponential_notation(tab3_exitance[0]))
+                    tab3_radiance = tab3_spectrum @ get_filter('Generic_Bessell.V')
+                    window['tab3_radiance'].update(aux.exponential_notation(tab3_radiance[0]))
                     tab3_obj_name = tab3_spectrum.name
                     window['tab3_title2'].update(tab3_obj_name.indexed_name(lang))
 

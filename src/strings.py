@@ -430,16 +430,26 @@ gui_vII = {
     'ru': 'II косм. ск. [c]',
     'de': 'Fluchtgeschw. [c]'
 }
-#gui_mag = {
-#    'en': 'App. magnitude*',
-#    'ru': 'Вид. зв. величина*',
-#    'de': 'scheinb. Helligkeit*'
-#}
-#gui_mag_note = {
-#    'en': '* if the Solar disk in the sky is replaced by this blackbody sphere',
-#    'ru': '* если диск Солнца на небе заменить данной чёрнотельной сферой',
-#    'de': '* wenn die Sonne am Taghimmel durch einen Schwarzkörper ersetzt würde'
-#}
+gui_exposure_settings = {
+    'en': 'Exposure settings',
+    'ru': 'Настройки экспозиции',
+    'de': 'Belichtungseinstellungen'
+}
+gui_radiance = {
+    'en': 'Radiance of surface in V band:',
+    'ru': 'Поверхностная яркость в фильтре V:',
+    'de': 'Strahlungsdichte der Oberfläche im V-Band:'
+}
+gui_overexposure_limit = {
+    'en': 'Clipping level (overexposure):',
+    'ru': 'Уровень клиппинга (переэкспозиция):',
+    'de': 'Clipping-Grenze (Überbelichtung):'
+}
+gui_dimension = {
+    'en': 'W/(m²·sr)',
+    'ru': 'Вт/(м²·ср)',
+    'de': 'W/(m²·sr)'
+}
 
 # Plots
 spectral_plot = {

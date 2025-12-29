@@ -268,24 +268,18 @@ def generate_layout(
             sg.Text(tr.gui_vII[lang], size=18, justification='right', key='tab3_vII'),
             sg.Slider(range=(0, 1), default_value=0, resolution=0.01, orientation='h', size=slider_size, enable_events=True, key='tab3_slider3', expand_x=True)
         ],
-        #[sg.T()],
-        #[
-        #    sg.Text(tr.gui_mag[lang], size=18, text_color=text_colors[not brMax], justification='right', key='tab3_mag'),
-        #    sg.Slider(range=(-50, 0), default_value=-26.7, resolution=0.1, orientation='h', size=slider_size, enable_events=True, disabled=brMax, key='tab3_slider4', expand_x=True)
-        #],
-        #[sg.Text(tr.gui_mag_note[lang], key='tab3_mag_note')],
         [sg.T()],
         [sg.T()],
-        [sg.Push(), sg.Text('Exposure settings', font=title_font, key='tab3_exposure_settings'), sg.Push()],
+        [sg.Push(), sg.Text(tr.gui_exposure_settings[lang], font=title_font, key='tab3_exposure_settings'), sg.Push()],
         [
-            sg.Text('Radiant exitance of surface in V band:', key='tab3_exitance_text'),
-            sg.Text('0', size=8, justification='center', key='tab3_exitance'),
-            sg.Text('W/m²', key='tab3_dimension1'),
+            sg.Text(tr.gui_radiance[lang], key='tab3_radiance_text'),
+            sg.Text('0', size=12, justification='center', key='tab3_radiance'),
+            sg.Text(tr.gui_dimension[lang], key='tab3_dimension1'),
         ],
         [
-            sg.Text('Overexposure limit:', key='tab3_limit_text'),
+            sg.Text(tr.gui_overexposure_limit[lang], key='tab3_overexposure_text'),
             sg.Input(str(tab3_overexposure_limit), size=16, enable_events=True, key='tab3_overexposure_limit'),
-            sg.Text('W/m²', key='tab3_dimension2'),
+            sg.Text(tr.gui_dimension[lang], key='tab3_dimension2'),
         ],
         [
             sg.Slider(range=(0.0001, 10), default_value=np.log10(tab3_overexposure_limit), resolution=0.01, orientation='h',
@@ -397,8 +391,11 @@ def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict[
     window['tab3_temp'].update(tr.gui_temp[lang])
     window['tab3_velocity'].update(tr.gui_velocity[lang])
     window['tab3_vII'].update(tr.gui_vII[lang])
-    #window['tab3_mag'].update(tr.gui_mag[lang])
-    #window['tab3_mag_note'].update(tr.gui_mag_note[lang])
+    window['tab3_exposure_settings'].update(tr.gui_exposure_settings[lang])
+    window['tab3_radiance_text'].update(tr.gui_radiance[lang])
+    window['tab3_overexposure_text'].update(tr.gui_overexposure_limit[lang])
+    window['tab3_dimension1'].update(tr.gui_dimension[lang])
+    window['tab3_dimension2'].update(tr.gui_dimension[lang])
     window['tab3_ColorObject'].update(tr.gui_rgb[lang])
     window['tab3_colorHEX'].update(tr.gui_hex[lang])
     window['tab3_plot'].update(tr.gui_plot[lang])
