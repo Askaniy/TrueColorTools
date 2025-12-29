@@ -29,6 +29,25 @@
         'https://britastro.org/vss/vsscads/VSSC175.pdf#page=15',
         'https://ui.adsabs.harvard.edu/abs/2018BAAVC.175...16B/abstract'
     ],
+    'FiorucciMunari2002': [
+        'The Asiago Database on Photometric Systems (ADPS). II. Band and reddening parameters',
+        'DOI: 10.1051/0004-6361:20030075', 'https://www.aanda.org/articles/aa/abs/2003/14/aa3021/aa3021.html',
+        'http://ulisse.pd.astro.it/Astro/ADPS/enter2.html',
+        'https://ui.adsabs.harvard.edu/abs/2003A%26A...401..781F/abstract'
+    ],
+
+    // "Average spectrum of the two Wolf-Rayet stars of nitrogen type HD 50896 and HD 96548"
+    'Wolf-Rayet stars, nitrogen type (WN) | FiorucciMunari2002': {
+        tags: ['star/Wolf-Rayet stars'],
+        file: 'spectra/files/FiorucciMunari2002/WR_N.datA',
+        is_emissive: true
+    },
+    // "Average spectrum of the two Wolf-Rayet stars of carbon type HD 136488 and HD 165763"
+    'Wolf-Rayet stars, carbon type (WC) | FiorucciMunari2002': {
+        tags: ['star/Wolf-Rayet stars'],
+        file: 'spectra/files/FiorucciMunari2002/WR_C.datA',
+        is_emissive: true
+    },
 
     'ξ Orionis (O9.7b+O9 III+B0 II-IV) | Krisciunas2017': {
         tags: ['extrasolar', 'star'],
@@ -375,6 +394,12 @@
     },
 
     // White dwarfs
+    // "Average spectrum of the white dwarfs of type A (hydrogen dominated spectra) EG 274, LTT 7987 and LTT 4816"
+    'White dwarfs (DA) | FiorucciMunari2002': {
+        tags: ['extrasolar', 'star/white dwarf'],
+        file: 'spectra/files/FiorucciMunari2002/WD.datA',
+        is_emissive: true
+    },
     'Barstow2005': [
         'Hubble Space Telescope spectroscopy of the Balmer lines in Sirius B*',
         'DOI: 10.1111/j.1365-2966.2005.09359.x', 'https://academic.oup.com/mnras/article/362/4/1134/988524',

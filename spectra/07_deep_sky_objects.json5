@@ -6,32 +6,32 @@
         'https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/the-kinney-calzetti-spetral-atlas'
     ],
     'Galaxy bulges | Kinney1996': {
-        tags: ['DSO/galaxy'],
+        tags: ['extrasolar', 'DSO/galaxy'],
         file: 'spectra/files/Kinney1996/bulge_template.fits',
         is_emissive: true
     },
     'Elliptical galaxies | Kinney1996': {
-        tags: ['featured', 'DSO/galaxy/galaxy type'],
+        tags: ['extrasolar', 'featured', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Kinney1996/elliptical_template.fits',
         is_emissive: true
     },
     'Spiral galaxies S0 | Kinney1996': {
-        tags: ['DSO/galaxy/galaxy type'],
+        tags: ['extrasolar', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Kinney1996/s0_template.fits',
         is_emissive: true
     },
     'Spiral galaxies Sa | Kinney1996': {
-        tags: ['DSO/galaxy/galaxy type'],
+        tags: ['extrasolar', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Kinney1996/sa_template.fits',
         is_emissive: true
     },
     'Spiral galaxies Sb | Kinney1996': {
-        tags: ['DSO/galaxy/galaxy type'],
+        tags: ['extrasolar', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Kinney1996/sb_template.fits',
         is_emissive: true
     },
     'Spiral galaxies Sc | Kinney1996': {
-        tags: ['featured', 'DSO/galaxy/galaxy type'],
+        tags: ['featured', 'extrasolar', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Kinney1996/sc_template.fits',
         is_emissive: true
     },
@@ -42,32 +42,32 @@
         'https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/the-kinney-calzetti-spetral-atlas'
     ],
     'Starburst galaxies with E(B-V) < 0.1 | Calzetti1994': {
-        tags: ['DSO/galaxy/galaxy type'],
+        tags: ['extrasolar', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Calzetti1994/starb1_template.fits',
         is_emissive: true
     },
     'Starburst galaxies with 0.11 < E(B-V) < 0.21 | Calzetti1994': {
-        tags: ['DSO/galaxy/galaxy type'],
+        tags: ['extrasolar', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Calzetti1994/starb2_template.fits',
         is_emissive: true
     },
     'Starburst galaxies with 0.25 < E(B-V) < 0.35 | Calzetti1994': {
-        tags: ['DSO/galaxy/galaxy type'],
+        tags: ['extrasolar', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Calzetti1994/starb3_template.fits',
         is_emissive: true
     },
     'Starburst galaxies with 0.39 < E(B-V) < 0.50 | Calzetti1994': {
-        tags: ['DSO/galaxy/galaxy type'],
+        tags: ['extrasolar', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Calzetti1994/starb4_template.fits',
         is_emissive: true
     },
     'Starburst galaxies with 0.51 < E(B-V) < 0.60 | Calzetti1994': {
-        tags: ['DSO/galaxy/galaxy type'],
+        tags: ['extrasolar', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Calzetti1994/starb5_template.fits',
         is_emissive: true
     },
     'Starburst galaxies with 0.61 < E(B-V) < 0.70 | Calzetti1994': {
-        tags: ['DSO/galaxy/galaxy type'],
+        tags: ['extrasolar', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Calzetti1994/starb6_template.fits',
         is_emissive: true
     },
@@ -78,7 +78,7 @@
         'https://ui.adsabs.harvard.edu/abs/2024A%26A...689A.109T/abstract'
     ],
     'Quasars | Trefoloni2024': {
-        tags: ['featured', 'DSO/galaxy/galaxy type'],
+        tags: ['featured', 'extrasolar', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Quasars_Trefoloni2024.txtA',
         is_emissive: true
     },
@@ -89,7 +89,7 @@
         'https://ui.adsabs.harvard.edu/abs/2024AJ....168...88Z/abstract'
     ],
     'Galactic cirri | Zhao2024': {
-        tags: ['DSO/interstellar dust'],
+        tags: ['extrasolar', 'DSO/interstellar dust'],
         photometric_system: 'BOK_BASS',
         filters: ['g', 'r'],
         br: [[0.41, +0.17, -0.18], [0.51, +0.16, -0.20]], // Figure 9
@@ -102,7 +102,7 @@
         'https://ui.adsabs.harvard.edu/abs/2003A%26A...401..985M/abstract'
     ],
     'Nebula of IRC +10216 | Mauron2003': {
-        tags: ['DSO/interstellar dust'],
+        tags: ['extrasolar', 'DSO/interstellar dust'],
         photometric_system: 'Generic_Bessell',
         filters: ['U', 'B', 'V'],
         mag: [[25.85, 0.15], [25.70, 0.10], [25.20, 0.10]], // mag/arcsec²
@@ -115,10 +115,42 @@
         'DOI: 10.1093/mnras/stad1940', 'https://academic.oup.com/mnras/article/524/2/2797/7209170'
     ],
     'LDN 1642 | Mattila2023': {
-        tags: ['DSO/interstellar dust'],
+        tags: ['extrasolar', 'DSO/interstellar dust'],
         photometric_system: 'Generic_Stromgren',
         filters: ['u', 384, 416, 'b', 'y'],
         br: [1., 1.38, 1.739, 1.443, 1.198], // Table 1
         is_emissive: true, // scattered light
     },
+
+    'FiorucciMunari2002': [
+        'The Asiago Database on Photometric Systems (ADPS). II. Band and reddening parameters',
+        'DOI: 10.1051/0004-6361:20030075', 'https://www.aanda.org/articles/aa/abs/2003/14/aa3021/aa3021.html',
+        'http://ulisse.pd.astro.it/Astro/ADPS/enter2.html',
+        'https://ui.adsabs.harvard.edu/abs/2003A%26A...401..781F/abstract'
+    ],
+
+    // "Spectrum of the compact planetary nebula M1–12, that
+    // is given as representative of high electron density conditions"
+    'Planetary nebula: Hydrogen emission lines dominating (M1–12) | FiorucciMunari2002': {
+        tags: ['extrasolar', 'DSO/nebula/planetary nebula'],
+        file: 'spectra/files/FiorucciMunari2002/PN_high_Ne.datA',
+        is_emissive: true
+    },
+
+    // "Spectrum of the compact planetary nebula M1–13, that
+    // is given as representative of low electron density conditions"
+    'Planetary nebula: Strong forbidden emission lines (M1–13) | FiorucciMunari2002': {
+        tags: ['extrasolar', 'DSO/nebula/planetary nebula'],
+        file: 'spectra/files/FiorucciMunari2002/PN_low_Ne.datA',
+        is_emissive: true
+    },
+
+    // "Average spectrum of the three novae Nova Lup 1993,
+    // Nova Cir 1995 and Nova Cen 1995 during their nebular phases"
+    'Nova, nebular phase | FiorucciMunari2002': {
+        tags: ['extrasolar', 'DSO/nebula'],
+        file: 'spectra/files/FiorucciMunari2002/Nova.datA',
+        is_emissive: true
+    },
+
 }
