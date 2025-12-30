@@ -914,6 +914,11 @@
         geometric_albedo: ['Generic_Bessell.V', [0.148, 0.071]], // Table 1 (mean)
         phase_function: ['HG', {G: [0.12, 0.46]}], // average of Sheppard2003 phase functions (other resonant TNOs)
     },
+    'Haumea family | PinillaAlonso2008': {
+        tags: ['Solar System', 'minor body/TNO/Haumea family', 'class/orbital class'],
+        slope: {start: 520, stop: 1000, percent_per_100nm: [0.4, 1.0]}, // collective wavelength range of averaged slopes
+        geometric_albedo: ['Generic_Bessell.V', 0.7], // Haumea-like albedo
+    },
     'Cubewano: Hot, inner objects | MBOSS, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'class/orbital class'],
         photometric_system: 'Generic_Bessell',
@@ -922,11 +927,6 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.102, 0.072]], // Table 1 (mean)
         phase_integral: [0.310, 0.058], // average of 2012 HZ84 (Verbiscer2019), and Máni (Helfenstein2025) phase integrals
-    },
-    'Haumea family | PinillaAlonso2008': {
-        tags: ['Solar System', 'minor body/TNO/Haumea family', 'class/orbital class'],
-        slope: {start: 520, stop: 1000, percent_per_100nm: [0.4, 1.0]}, // collective wavelength range of averaged slopes
-        geometric_albedo: ['Generic_Bessell.V', 0.7], // Haumea like albedo
     },
     'Cubewano: Cold, outer objects | MBOSS, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'class/orbital class'],

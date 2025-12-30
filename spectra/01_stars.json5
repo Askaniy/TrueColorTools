@@ -43,13 +43,13 @@
     ],
 
     // "Average spectrum of the two Wolf-Rayet stars of nitrogen type HD 50896 and HD 96548"
-    'Wolf-Rayet stars, nitrogen type (WN) | FiorucciMunari2002': {
+    'Wolf-Rayet stars: Nitrogen type (WN) | FiorucciMunari2002': {
         tags: ['star/Wolf-Rayet stars'],
         file: 'spectra/files/FiorucciMunari2002/WR_N.datA',
         is_emissive: true
     },
     // "Average spectrum of the two Wolf-Rayet stars of carbon type HD 136488 and HD 165763"
-    'Wolf-Rayet stars, carbon type (WC) | FiorucciMunari2002': {
+    'Wolf-Rayet stars: Carbon type (WC) | FiorucciMunari2002': {
         tags: ['star/Wolf-Rayet stars'],
         file: 'spectra/files/FiorucciMunari2002/WR_C.datA',
         is_emissive: true
@@ -218,7 +218,7 @@
         file: 'spectra/files/STIS_NGSLv2/h_stis_ngsl_hd022049_v2.txtA',
         is_emissive: true,
     },
-    'Sceptrum (K2 III) | Alekseeva1997': { // l Eri
+    'Sceptrum (K2 III) | Alekseeva1997': { // 53 Eri
         tags: ['extrasolar', 'star/III giant'],
         file: 'spectra/files/Pulkovo/Sceptrum.dat',
         is_emissive: true,
