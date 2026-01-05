@@ -1,6 +1,6 @@
 ![Header logo](logo_header.webp)
 
-Astronomy-focused set of Python tools with a GUI that uses spectrum construction and eye absorption to compute realistic colors.
+An astronomy-focused set of tools with a GUI that uses spectrum construction and eye absorption to compute realistic colors.
 
 Input data is accepted in the form of filters measurements (such as color indices) or continuous spectra, in irradiance units or in magnitudes. Stores a comprehensive catalog of photometry in a proprietary format. Can process spectral cubes, multiband spacecraft images and correct images in enhanced colors.
 
@@ -11,7 +11,7 @@ To calibrate the color of maps based on TCT data, I recommend using [Cylindrical
 
 ## Installation
 
-TrueColorTools works on Windows, macOS and Linux. Python version 3.11 or higher is required.
+TrueColorTools works on Windows and Linux (the GUI library might be unstable on macOS). Python version 3.11 or higher is required.
 
 1. Clone the repository or download the archive using the GitHub web interface;
 2. Open the console in the project root folder;
@@ -52,7 +52,7 @@ The **Database viewer** tab provides access to the spectra database and allows y
 
 The **Image processing** tab accepts regular images, a series of black and white images, or a spectral cube as input. Using the wavelength information, the image is "reshot" in true color. The internal operations are similar to reconstructing the spectrum for each pixel, but use efficient operations on arrays.
 
-The **Blackbody & Redshifts** tab calculates the influence of physical phenomena on color. Based on the blackbody spectrum, the program displays the color and brightness changes due to Doppler and gravitational redshifts. Brightness is normalized to the solar spectrum. Adjust the overexposure limit by changing the "Scale Factor" in the settings sidebar.
+The **Blackbody & Redshifts** tab calculates the influence of physical phenomena on color. Based on the blackbody spectrum, the program displays the color and brightness changes due to Doppler and gravitational redshifts. Surface brightness is tied to the `Maximize brightness` checkbox, otherwise can be adjusted with the slider.
 
 ### Features
 - Tag system: Any spectrum in the database can be assigned any set of tags. They form lists of categories for the *Database viewer* tab, which makes working with the database easier.
@@ -133,6 +133,8 @@ Short help on the UBVRI photometric system implementations:
 ## Acknowledgements
 
 My thanks to *arbodox* for the creation of the project logo.
+Thanks to *SevenSpheres* for the Windows releases compilation.
+Thanks to the Celestia community for the support.
 
 This research has made use of:
 - [Spanish Virtual Observatory](https://svo.cab.inta-csic.es) project funded by MCIN/AEI/10.13039/501100011033/ through grant PID2020-112949GB-I00
