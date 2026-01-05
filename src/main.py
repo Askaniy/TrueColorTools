@@ -61,7 +61,7 @@ def launch_window(lang: str):
     with open('src/window/icon', 'rb') as file:
         icon = file.read()
 
-    # Loading the window 0 title
+    # Loading the window 0 title (program name + version)
     with open('src/window/title.txt', 'rb') as file:
         window0_title = file.readline().decode().strip()
 
