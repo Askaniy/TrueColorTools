@@ -1281,6 +1281,8 @@ notes = {
     'Porous grains model': {'ru': 'Модель полых зёрен', 'de': 'Poröse Körner-Modell'},
     'Compact grains model': {'ru': 'Модель компактных зёрен', 'de': 'Kompakte Körner-Modell'},
     'Pyroxene': {'ru': 'Пироксен'},
+    'Solid methane': {'ru': 'Твёрдый метан', 'de': 'Festes Methan'},
+    'Liquid methane': {'ru': 'Жидкий метан', 'de': 'Flüssiges Methan'},
     'Nitrogen type': {'ru': 'Азотный тип', 'de': 'WN-Typ'}, # Wolf-Rayet stars
     'Carbon type': {'ru': 'Углеродный тип', 'de': 'WC-Typ'},
     'Hydrogen emission lines dominating': {'ru': 'Доминирование эмиссионных линий водорода', 'de': 'Wasserstoff-Emissionslinien dominieren'},

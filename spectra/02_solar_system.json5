@@ -467,8 +467,8 @@
         'DOI: 10.1029/2019EA000664', 'https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2019EA000664',
         'http://ui.adsabs.harvard.edu/abs/2019E&SS....6.1416W/abstract'
     ],
-    // "(a) Spectral reflectance for ocean, land, and vegetation without atmospheric effects and cloud 
-    // reflectance for optical depth of 10 without surface reflection and atmospheric scattering and gaseous 
+    // "(a) Spectral reflectance for ocean, land, and vegetation without atmospheric effects and cloud
+    // reflectance for optical depth of 10 without surface reflection and atmospheric scattering and gaseous
     // absorption."
     'Surface of Earth: Deserted land | Wen2019': {
         tags: ['Solar System', 'planetary body/planet', 'Earth/surface feature'],
@@ -1642,25 +1642,25 @@
         'https://ui.adsabs.harvard.edu/abs/2017NatAs...1E.114G/abstract'
     ],
     'Titan (S VI) | Karkoschka1998, Muñoz2017': {
-        tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Titan'],
         file: 'spectra/files/Karkoschka/Titan1995.txt',
         is_geometric_albedo: true,
         phase_integral: [1.97, 0.09], // extracted from Fig. 4b for 550 nm
     },
     'Titan (S VI) | Karkoschka1994, Muñoz2017': { // phase angle 2.7°
-        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Titan'],
         file: 'spectra/files/Karkoschka/Titan1993.txt',
         is_geometric_albedo: true,
         phase_integral: [1.97, 0.09], // extracted from Fig. 4b for 550 nm
     },
     'Surface of Titan: Phase angle 45° (S VI) | Karkoschka2016': {
-        tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Titan'],
         nm: [520, 563, 595, 642, 685, 754, 823, 830, 935, 940, 1070, 1280, 1550, 1590],
         br: [0.093, 0.107, 0.116, 0.130, 0.139, 0.147, 0.151, 0.151, 0.151, 0.151, 0.145, 0.124, 0.070, 0.071],
         is_albedo: true,
     },
     'Surface of Titan: Phase angle 0° (S VI) | Karkoschka2012': {
-        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon'],
+        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Titan'],
         nm_range: {start: 300, stop: 800, step: 10},
         br_geometric: [
             0.025, 0.035, 0.046, 0.059, 0.073, 0.089, 0.105, 0.122, 0.140, 0.158, 0.176, 0.194, 0.211,

@@ -130,4 +130,53 @@
         file: 'spectra/files/Khuller2021/14000_dusty_ice_content1e-1.txtU',
         is_albedo: true
     },
+
+    // Materials of Titan
+
+    // Singh et al. 2017 (https://scixplorer.org/abs/2017Ap%26SS.362..184S/abstract)
+    // shows direct visual observations of methane and ethane under Titan conditions
+    // (90-94 K, 1.5 bars): liquids are transparent.
+
+    'Adams2012': [
+        'Optical reflectivity of solid and liquid methane: Application to spectroscopy of Titan’s hydrocarbon lakes',
+        'DOI: 10.1029/2011GL049710', 'https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2011GL049710',
+        'https://scixplorer.org/abs/2012GeoRL..39.4309A/abstract'
+    ],
+    'Solid methane | Adams2012': {
+        tags: ['material/methane', 'Titan'],
+        file: 'spectra/files/Adams2012/Solid_CH4.txtU',
+        is_albedo: true
+    },
+    'Liquid methane | Adams2012': {
+        tags: ['material/methane', 'Titan'],
+        file: 'spectra/files/Adams2012/Liquid_CH4.txtU',
+        is_albedo: true
+    },
+
+    'MartonchikOrton1994': [
+        'Optical constants of liquid and solid methane',
+        'DOI: 10.1364/AO.33.008306', 'https://opg.optica.org/ao/abstract.cfm?uri=ao-33-36-8306',
+        'https://scixplorer.org/abs/1994ApOpt..33.8306M/abstract'
+    ],
+    // Python code used to calculate spherical albedo from n using Fresnel equations:
+    //     theta = np.linspace(0, 0.5 * np.pi, 10000)
+    //     sin_t = np.sin(theta)
+    //     cos_t = np.cos(theta)
+    //     cos_tt = np.sqrt(1 - (sin_t / n)**2)
+    //     Rs = ((cos_t - n * cos_tt) / (cos_t + n * cos_tt))**2
+    //     Rp = ((n * cos_t - cos_tt) / (n * cos_t + cos_tt))**2
+    //     R = 0.5 * (Rs + Rp)
+    //     sphe_albedo = 2 * np.trapezoid(R * cos_t * sin_t, theta)
+    // Formulas to calculate geometric albedo from n:
+    //     geom_albedo = π * I(0)/F
+    //     I(0)/F = R = ((n - 1) / (n + 1))^2
+    // NOTE: calculating color from the index of refraction may be not accurate!
+    // Tested on water: albedo is consistent, but color is much less blue than should be.
+    // The n used was from https://ui.adsabs.harvard.edu/abs/1973ApOpt..12..555H/abstract
+    'Liquid methane | MartonchikOrton1994': { // Table 1, column a, referring to Arakawa et al. 1986
+        tags: ['material/methane', 'Titan'],
+        nm: [400, 600, 800, 1000, 1200, 2000],
+        br_geometric: [0.04917, 0.04827, 0.04768, 0.04738, 0.04738, 0.04679],
+        br_spherical: [0.05886, 0.05837, 0.05804, 0.05788, 0.05788, 0.05755],
+    },
 }
