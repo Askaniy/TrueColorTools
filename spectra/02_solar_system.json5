@@ -684,21 +684,6 @@
         file: 'spectra/files/Bell2007/Valles_Marineris_Bell2007.txt', // Fig 3. (2003: Clear)
         is_albedo: true, // I/F
     },
-    'Blaney2009': [
-        'Multi-Spectral Imaging of the Phoenix Landing Site: Characteristics of Surface and Subsurface Ice, Rocks, and Soils',
-        'https://www.lpi.usra.edu/meetings/lpsc2009/pdf/2047.pdf',
-        'https://ui.adsabs.harvard.edu/abs/2009LPI....40.2047B/abstract'
-    ],
-    'Ice at Phoenix landing site (Mars) | Blaney2009': { // Sol 28
-        tags: ['Solar System', 'planetary body/planet', 'Mars'],
-        file: 'spectra/files/Blaney2009/mars_ice.txtU', // https://zenodo.org/records/4653768
-        is_albedo: true,
-    },
-    'Soil at Phoenix landing site (Mars) | Blaney2009': {
-        tags: ['Solar System', 'planetary body/planet', 'Mars'],
-        file: 'spectra/files/Blaney2009/mars_soil.txtU', // https://zenodo.org/records/4653768
-        is_albedo: true,
-    },
     // Martian sky
     'Maki1999': [
         'The color of Mars: Spectrophotometric measurements at the Pathfinder landing site',
