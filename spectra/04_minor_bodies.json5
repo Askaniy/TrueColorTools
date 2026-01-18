@@ -2565,26 +2565,31 @@
         geometric_albedo: ['Generic_Bessell.V', [0.066, 0.005]],
         phase_function: ['Palomar_ZTF.r', 'HG', {H: [12.06, +0.16, -0.17], G: [0.13, 0.26]}],
     },
-    '(28978) Ixion | AlvarezCandal2008, Helfenstein2025': {
+    'Kilic2026': [
+        'Constraining the size, shape, and albedo of the large Trans-Neptunian Object (28978) Ixion with multi-chord stellar occultations',
+        'DOI: 10.48550/arXiv.2601.09639', 'https://arxiv.org/abs/2601.09639',
+        'https://ui.adsabs.harvard.edu/abs/2026arXiv260109639K/abstract'
+    ],
+    '(28978) Ixion | AlvarezCandal2008, Kilic2026, Helfenstein2025': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
         file: 'spectra/files/AlvarezCandal2008/Ixion.txtU', // Fig. 2
-        geometric_albedo: ['Generic_Bessell.V', [0.101, 0.010]],
-        spherical_albedo: ['Generic_Bessell.V', [0.032, +0.003, -0.002]],
+        geometric_albedo: ['Generic_Bessell.V', [0.106, 0.003]],
+        phase_integral: [0.315, +0.032, -0.014],
     },
-    '(28978) Ixion | Marchi2003, Helfenstein2025': {
+    '(28978) Ixion | Marchi2003, Kilic2026, Helfenstein2025': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
         file: 'spectra/files/Marchi2003/Ixion.txt',
-        geometric_albedo: ['Generic_Bessell.V', [0.101, 0.010]],
-        spherical_albedo: ['Generic_Bessell.V', [0.032, +0.003, -0.002]],
+        geometric_albedo: ['Generic_Bessell.V', [0.106, 0.003]],
+        phase_integral: [0.315, +0.032, -0.014],
     },
-    '(28978) Ixion | MBOSS, Helfenstein2025': {
+    '(28978) Ixion | MBOSS, Kilic2026, Helfenstein2025': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.018, 0.041], 'V-R': [0.605, 0.030], 'R-I': [0.580, 0.040]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.101, 0.010]],
-        spherical_albedo: ['Generic_Bessell.V', [0.032, +0.003, -0.002]],
+        geometric_albedo: ['Generic_Bessell.V', [0.106, 0.003]],
+        phase_integral: [0.315, +0.032, -0.014],
     },
     'Rousselot2005b': [
         'Polarimetric and Photometric Phase Effects Observed on Transneptunian Object (29981) 1999 TD10',
