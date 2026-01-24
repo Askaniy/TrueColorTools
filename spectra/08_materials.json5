@@ -13,7 +13,7 @@
         'https://ui.adsabs.harvard.edu/abs/1999JGR...104.8679M/abstract'
     ],
     // Drift
-    'Bright red drift at Pathfinder Landing Site (Mars) | McSween1999': {
+    'Bright red drift at Pathfinder landing site (Mars) | McSween1999': {
         tags: ['material/drift and soil', 'Mars'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
@@ -23,7 +23,7 @@
         is_albedo: true, // reflectance
     },
     // Rocks
-    'Bright rock at Pathfinder Landing Site (Mars) | Smith1997': {
+    'Bright rock at Pathfinder landing site (Mars) | Smith1997': {
         tags: ['material/rock', 'Mars'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
@@ -32,7 +32,7 @@
         ], // extracted from Fig. 4
         is_albedo: true, // reflectance
     },
-    'Dark rock at Pathfinder Landing Site (Mars) | Smith1997': {
+    'Dark rock at Pathfinder landing site (Mars) | Smith1997': {
         tags: ['material/rock', 'Mars'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
@@ -41,7 +41,7 @@
         ], // extracted from Fig. 4
         is_albedo: true, // reflectance
     },
-    'Pink rock at Pathfinder Landing Site (Mars) | Smith1997': {
+    'Pink rock at Pathfinder landing site (Mars) | Smith1997': {
         tags: ['material/rock', 'Mars'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
@@ -50,7 +50,7 @@
         ], // extracted from Fig. 4
         is_albedo: true, // reflectance
     },
-    'Rock at Pathfinder Landing Site (Mars) | Maki1999': {
+    'Rock at Pathfinder landing site (Mars) | Maki1999': {
         tags: ['material/rock', 'Mars'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
@@ -60,7 +60,7 @@
         is_albedo: true, // in units of 100 W / (m² μm steradian)
     },
     // Soils
-    'Bright soil at Pathfinder Landing Site (Mars) | Smith1997': {
+    'Bright soil at Pathfinder landing site (Mars) | Smith1997': {
         tags: ['material/drift and soil', 'Mars'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
@@ -69,7 +69,7 @@
         ], // extracted from Fig. 3
         is_albedo: true, // reflectance
     },
-    'Dark soil at Pathfinder Landing Site (Mars) | Smith1997': {
+    'Dark soil at Pathfinder landing site (Mars) | Smith1997': {
         tags: ['material/drift and soil', 'Mars'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
@@ -78,7 +78,7 @@
         ], // extracted from Fig. 3
         is_albedo: true, // reflectance
     },
-    'Disturbed soil at Pathfinder Landing Site (Mars) | Smith1997': {
+    'Disturbed soil at Pathfinder landing site (Mars) | Smith1997': {
         tags: ['material/drift and soil', 'Mars'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
@@ -87,7 +87,7 @@
         ], // extracted from Fig. 3
         is_albedo: true, // reflectance
     },
-    'Lamb-like soil at Pathfinder Landing Site (Mars) | Smith1997': { // (has intermediate spectral-characteristics between bright and dark soils)
+    'Lamb-like soil at Pathfinder landing site (Mars) | Smith1997': { // (has intermediate spectral-characteristics between bright and dark soils)
         tags: ['material/drift and soil', 'Mars'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
@@ -96,7 +96,7 @@
         ], // extracted from Fig. 3
         is_albedo: true, // reflectance
     },
-    'Soil at Pathfinder Landing Site (Mars) | Maki1999': {
+    'Soil at Pathfinder landing site (Mars) | Maki1999': {
         tags: ['material/drift and soil', 'Mars'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
@@ -107,7 +107,7 @@
     },
     // Phoenix data
     'Blaney2009': [
-        'Multi-Spectral Imaging of the Phoenix Landing Site: Characteristics of Surface and Subsurface Ice, Rocks, and Soils',
+        'Multi-Spectral Imaging of the Phoenix landing site: Characteristics of Surface and Subsurface Ice, Rocks, and Soils',
         'https://www.lpi.usra.edu/meetings/lpsc2009/pdf/2047.pdf',
         'https://ui.adsabs.harvard.edu/abs/2009LPI....40.2047B/abstract'
     ],
