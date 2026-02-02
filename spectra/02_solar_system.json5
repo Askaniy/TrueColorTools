@@ -393,13 +393,25 @@
     },
 
     // Terran system
+    'Payne2025': [
+        'A comprehensive spectroscopic reference of the solar system and its application to exoplanet direct imaging',
+        'DOI: 10.48550/arXiv.2508.13368', 'https://arxiv.org/abs/2508.13368',
+        'https://ui.adsabs.harvard.edu/abs/2025arXiv250813368P/abstract'
+    ],
+    'Earth | Payne2025, Robinson2025': {
+        tags: ['featured', 'Solar System', 'planetary body/planet', 'Earth'],
+        photometric_system: 'DSCOVR_EPIC',
+        filters: ['317nm', '325nm', '388nm', '443nm', '551nm', '680nm', '779nm'],
+        br_geometric: [0.182, 0.276, 0.300, 0.268, 0.211, 0.205, 0.232], // Fig. 4
+        spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
+    },
     'Robinson2025': [
         'Inferring and Interpreting the Visual Geometric Albedo and Phase Function of Earth',
         'DOI: 10.48550/arXiv.2507.22258', 'https://arxiv.org/abs/2507.22258',
         'https://ui.adsabs.harvard.edu/abs/2025arXiv250722258R/abstract'
     ],
     'Earth | Robinson2025': {
-        tags: ['featured', 'Solar System', 'planetary body/planet', 'Earth'],
+        tags: ['Solar System', 'planetary body/planet', 'Earth'],
         photometric_system: 'Generic_Bessell',
         filters: ['B', 'V', 'R'],
         br_geometric: [[0.277, +0.005, -0.004], [0.226, 0.004], [0.221, 0.004]],
