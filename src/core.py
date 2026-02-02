@@ -39,7 +39,7 @@ Color:
 from io import BytesIO
 from copy import deepcopy
 from collections.abc import Sequence, Callable
-from typing import Self
+from typing import Self, ClassVar
 from pathlib import Path
 from functools import lru_cache
 from traceback import format_exc
@@ -241,11 +241,12 @@ class _TrueColorToolsObject:
     nm = np.empty(0)
     br = np.empty(0)
     sd = None
+    ndim: ClassVar[int] = NotImplemented
 
-    @property
-    def ndim(self):
-        """ Shortcut to get the number of dimensions """
-        return self.br.ndim
+    #@property
+    #def ndim(self):
+    #    """ Shortcut to get the number of dimensions """
+    #    return self.br.ndim
 
     @property
     def nm_len(self):
@@ -257,8 +258,8 @@ class _TrueColorToolsObject:
         """ Returns the spatial axes shape: number of filters or (width, height) """
         return self.br.shape[1:]
 
-    @staticmethod
-    def stub(name=None):
+    @classmethod
+    def stub(cls, name=None):
         """ Initializes an object in case of the data problems """
         raise NotImplementedError('Implemented in the inherited classes of SpectralObject and PhotospectralObject.')
 
@@ -457,6 +458,11 @@ class _SpectralObject(_TrueColorToolsObject):
             print('- NaN values detected during object initialization, they been replaced with zeros.')
 
     @classmethod
+    def stub(cls, name=None):
+        """ Initializes an object in case of the data problems """
+        return cls((555,), np.zeros((1,) * cls.ndim), name=name)
+
+    @classmethod
     def from_array(cls, nm: np.ndarray, br: np.ndarray, sd: np.ndarray = None, name: str|ObjectName = None):
         """
         Creates a SpectralObject from wavelength array with a check for uniformity and possible extrapolation.
@@ -498,11 +504,19 @@ class _SpectralObject(_TrueColorToolsObject):
                     sd = sd[mask]
             if np.any((diff := np.diff(nm)) != nm_step): # if not a uniform 5 nm grid
                 nm_uniform = aux.grid(nm[0], nm[-1], nm_step)
-                if diff.mean() >= nm_step: # interpolation, increasing resolution
+                if diff.mean() >= nm_step:
+                    # Option 1: loose spectral grid, increasing resolution
                     br = aux.interpolating(nm, br, nm_uniform, nm_step)
                     if sd is not None:
                         sd = aux.interpolating(nm, sd, nm_uniform, nm_step)
-                else: # decreasing resolution if step less than 5 nm
+                elif nm[-1] - nm[0] < 2 * nm_step:
+                    # Option 2: a very narrow spectrum
+                    template = cls.from_nm(np.average(nm, weights=br))
+                    nm_uniform = template.nm
+                    integral = np.sum(0.5 * (br[:-1] + br[1:]) * diff, axis=0) # Riemann sum
+                    br = template.br * integral
+                else:
+                    # Option 3: dense spectral grid, decreasing resolution
                     br, sd = aux.spectral_downscaling(nm, br, sd, nm_uniform, nm_step)
                 nm = nm_uniform
             #if br.min() < 0:
@@ -516,8 +530,34 @@ class _SpectralObject(_TrueColorToolsObject):
             print(f'- More precisely, {format_exc(limit=0).strip()}')
             return cls.stub(name)
 
+    @classmethod
+    def from_nm(cls, nm_point: int|float):
+        """
+        Creates a monochromatic SpectralObject on the 1- or 2-point spectral grid (normalized and with zeroed edges).
+        Make sure you use the rectangle method for integration, otherwise it won't be equal to 1.
+        """
+        nm_point /= nm_step
+        nm_point_int = int(nm_point)
+        nm0 = nm_point_int * nm_step
+        if nm_point == nm_point_int:
+            nm = (nm0-nm_step, nm0, nm0+nm_step)
+            br = (0., 1., 0.)
+        else:
+            proximity_factor = nm_point - nm_point_int
+            nm = (nm0-nm_step, nm0, nm0+nm_step, nm0+nm_step*2)
+            br = (0., 1.-proximity_factor, proximity_factor, 0.)
+        # Normalization
+        br = np.array(br) / nm_step
+        # Expending spatial dimension if needed (not tested!)
+        match cls.ndim:
+            case 2:
+                br = np.expand_dims(br, axis=1)
+            case 3:
+                br = np.expand_dims(br, axis=(1, 2))
+        return cls(nm, br, name=f'{nm_point} nm')
+
     def integrate(self) -> np.ndarray:
-        """ Collapses the SpectralObject along the spectral axis into a two-dimensional image """
+        """ Collapses the SpectralObject along the spectral axis, returns a numpy array or a float value """
         return aux.integrate(self.br, nm_step)
 
     def normalize(self):
@@ -648,6 +688,8 @@ class Spectrum(_SpectralObject):
     - `photospectrum` (Photospectrum): optional, way to store the pre-reconstructed data
     """
 
+    ndim: ClassVar[int] = 1
+
     def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None,
                  name: str|ObjectName = None, photospectrum=None):
         """
@@ -665,11 +707,6 @@ class Spectrum(_SpectralObject):
         self.photospectrum: Photospectrum = photospectrum
 
     @staticmethod
-    def stub(name=None):
-        """ Initializes an object in case of the data problems """
-        return Spectrum((555,), np.zeros(1), name=name)
-
-    @staticmethod
     @lru_cache(maxsize=32)
     def from_file(file: str, name: str|ObjectName = None):
         """ Creates a Spectrum object based on loaded data from the specified file """
@@ -680,25 +717,6 @@ class Spectrum(_SpectralObject):
         elif 'P' in extension:
             spectrum = spectrum.convert_from_photon_spectral_density()
         return spectrum
-
-    @staticmethod
-    def from_nm(nm_point: int|float):
-        """
-        Creates a point Spectrum on the uniform grid (normalized and with zeroed edges).
-        If the input on the grid, returns a single-point spectrum. Two-point otherwise.
-        Make sure you use the rectangle method for integration, otherwise it won't be equal to 1.
-        """
-        nm_point /= nm_step
-        nm_point_int = int(nm_point)
-        nm0 = nm_point_int * nm_step
-        if nm_point == nm_point_int:
-            nm = (nm0-nm_step, nm0, nm0+nm_step)
-            br = (0., 1., 0.)
-        else:
-            proximity_factor = nm_point - nm_point_int
-            nm = (nm0-nm_step, nm0, nm0+nm_step, nm0+nm_step*2)
-            br = (0., 1.-proximity_factor, proximity_factor, 0.)
-        return Spectrum(nm, np.array(br)/nm_step, name=f'{nm_point} nm')
 
     @staticmethod
     def from_spectral_lines(nm: Sequence, br: Sequence, sd: Sequence = None, name: str|ObjectName = None):
@@ -843,6 +861,8 @@ def get_filter(name: str|int|float) -> Spectrum:
 class _Square(_TrueColorToolsObject):
     """ Internal class for inheriting spatial data properties """
 
+    ndim: ClassVar[int] = 2
+
     @property
     def size(self):
         """ Returns the spatial axis length """
@@ -876,11 +896,6 @@ class SpectralSquare(_SpectralObject, _Square):
     def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
         super().__init__(2, nm, br, sd, name)
 
-    @staticmethod
-    def stub(name=None):
-        """ Initializes an object in case of the data problems """
-        return SpectralSquare((555,), np.zeros((1, 1)), name=name)
-
 
 class FilterSystem(SpectralSquare):
     """
@@ -899,14 +914,9 @@ class FilterSystem(SpectralSquare):
     """
 
     def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None,
-                 name: str|ObjectName = None, names: tuple[ObjectName] = ()):
+                 name: str|ObjectName = None, names: tuple[ObjectName] = (None,)):
         super().__init__(nm, br, sd, name)
         self.names = names
-
-    @staticmethod
-    def stub(name=None):
-        """ Initializes an object in case of the data problems """
-        return FilterSystem((555,), np.zeros((1, 1)), name=name, names=(None,))
 
     @staticmethod
     def from_list(filters: Sequence[str|Spectrum], name: str|ObjectName = None):
@@ -954,6 +964,8 @@ class FilterSystem(SpectralSquare):
 
 class _Cube(_TrueColorToolsObject):
     """ Internal class for inheriting spatial data properties """
+
+    ndim: ClassVar[int] = 3
 
     def downscale(self, pixels_limit: int):
         """ Brings the spatial resolution of the cube to approximately match the number of pixels """
@@ -1007,11 +1019,6 @@ class SpectralCube(_SpectralObject, _Cube):
         super().__init__(3, nm, br, sd, name)
 
     @staticmethod
-    def stub(name=None):
-        """ Initializes an object in case of the data problems """
-        return SpectralCube((555,), np.zeros((1, 1, 1)), name=name)
-
-    @staticmethod
     def from_file(file: str):
         """ Creates a SpectralCube object based on loaded data from the specified file """
         return SpectralCube.from_array(*ii.cube_reader(file))
@@ -1058,6 +1065,11 @@ class _PhotospectralObject(_TrueColorToolsObject):
             self.br = np.nan_to_num(self.br)
             print(f'# Note for the PhotospectralObject object "{self.name}"')
             print('- NaN values detected during object initialization, they been replaced with zeros.')
+
+    @classmethod
+    def stub(cls, name=None):
+        """ Initializes an object in case of the data problems """
+        return cls(stub_filter_system, np.zeros((2, 1, 1)[:cls.ndim]), name=name)
 
     @property
     def nm(self) -> np.ndarray[np.integer]:
@@ -1211,13 +1223,10 @@ class Photospectrum(_PhotospectralObject):
     - `name` (ObjectName): name as an instance of a class that stores its components
     """
 
+    ndim: ClassVar[int] = 1
+
     def __init__(self, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
         super().__init__(1, filter_system, br, sd, name)
-
-    @staticmethod
-    def stub(name=None):
-        """ Initializes an object in case of the data problems """
-        return Photospectrum(stub_filter_system, np.zeros(2), name=name)
 
 
 class PhotospectralSquare(_PhotospectralObject, _Square):
@@ -1235,11 +1244,6 @@ class PhotospectralSquare(_PhotospectralObject, _Square):
 
     def __init__(self, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
         super().__init__(2, filter_system, br, sd, name)
-
-    @staticmethod
-    def stub(name=None):
-        """ Initializes an object in case of the data problems """
-        return PhotospectralSquare(stub_filter_system, np.zeros((2, 1)), name=name)
 
 
 class PhotospectralCube(_PhotospectralObject, _Cube):
@@ -1260,11 +1264,6 @@ class PhotospectralCube(_PhotospectralObject, _Cube):
     def __init__(self, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
         super().__init__(3, filter_system, br, sd, name)
 
-    @staticmethod
-    def stub(name=None):
-        """ Initializes an object in case of the data problems """
-        return PhotospectralCube(stub_filter_system, np.zeros((2, 1, 1)), name=name)
-
 
 
 # ------------ Phase Photometry Section ------------
@@ -1276,8 +1275,8 @@ class _PhotometricModel:
     """
     params: dict = None
     filter_or_nm: str|int|float = None
-    geometric_albedo: [float, float] = None
-    phase_integral: [float, float] = None
+    geometric_albedo: list[float] = None
+    phase_integral: list[float] = None
 
     def __init__(self, params: dict = None, filter_or_nm: str|int|float = None) -> None:
         self.params = params
@@ -1300,7 +1299,7 @@ class _PhotometricModel:
         else:
             return None
 
-    def estimate_geometric_albedo(self, spherical_in_V: [float, float]):
+    def estimate_geometric_albedo(self, spherical_in_V: list[float]):
         """
         Returns exact or estimated value of geometric albedo with the flag showing the case.
 
@@ -1315,7 +1314,7 @@ class _PhotometricModel:
             geometric_in_V = (np.sqrt(0.359**2 + 4 * 0.47 * spherical_in_V[0]) - 0.359) / (2 * 0.47)
             return geometric_in_V, True
 
-    def estimate_spherical_albedo(self, geometric_in_V: [float, float]):
+    def estimate_spherical_albedo(self, geometric_in_V: list[float]):
         """
         Returns exact or estimated value of spherical albedo with the flag showing the case.
 

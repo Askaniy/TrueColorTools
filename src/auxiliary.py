@@ -240,7 +240,7 @@ def array2cube(arr: Sequence, shape: tuple[int, int]):
 def expand_1D_array(arr: np.ndarray, shape: int|tuple):
     """
     Gets the 1D array and expands its dimensions to a 2D or 3D array based on the slice shape.
-    Сan be rewritten with numpy.tile()?
+    Can be rewritten with numpy.tile()?
     """
     match len(shape):
         case 0:
