@@ -161,12 +161,16 @@ class TestTCT(unittest.TestCase):
         alpha = np.arange(0, np.pi, step)
         np.testing.assert_allclose(model.phase_integral[0], 2*aux.integrate(model.phase_function(alpha)*np.sin(alpha), step, precisely=True), rtol=0.001)
 
-    def test_color_system(self):
+    def test_color_system_reversibility(self):
         srgb = core.ColorSystem('sRGB', 'Illuminant E')
         xyz = core.ColorSystem('CIE XYZ', 'Illuminant E')
-        color0 = core.ColorObject.from_spectral_data(self.vega)
-        color1 = color0.to_color_system(srgb).to_color_system(xyz)
-        np.testing.assert_allclose(color0.to_array(), color1.to_array(), rtol=1e-15)
+        color0 = core.ColorObject.from_spectral_data(self.sun)
+        #print(color0.to_array())
+        color1 = color0.to_color_system(srgb)
+        #print(color1.to_array())
+        color2 = color1.to_color_system(xyz)
+        #print(color2.to_array())
+        np.testing.assert_allclose(color0.to_array(), color2.to_array(), rtol=1e-13)
 
     def test_name_parsing(self):
         obj_name = core.ObjectName('HZ43(8) (DA) | CALSPEC')

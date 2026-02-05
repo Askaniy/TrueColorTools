@@ -1832,7 +1832,7 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
 
 # ------------ Color Processing Section ------------
 
-# CIE XYZ (1931) color matching functions, 2-deg
+# CIE 1931 XYZ color matching functions, 2-deg
 # https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer
 # http://www.cvrl.org/cie.htm
 xyz_cmf = FilterSystem.from_list(('CIE_1931_2deg.x', 'CIE_1931_2deg.y', 'CIE_1931_2deg.z'))
@@ -1843,15 +1843,17 @@ xyz_cmf = xyz_cmf.define_on_range(visible_range)
 # There are CMFs transformed from the CIE (2006) LMS functions, 2-deg
 # (https://cie.co.at/datatable/cie-2006-lms-cone-fundamentals-2-field-size-terms-energy)
 # here: http://www.cvrl.org/database/text/cienewxyz/cie2012xyz2.htm, http://www.cvrl.org/ciexyzpr.htm
-# However, the CIE XYZ (1931) standard is still widely used.
+# However, the CIE 1931 XYZ standard is still widely used.
 
 
 class ColorSystem:
     """
     This class stores the parameters of a color space with white point
     and builds the CIE XYZ to RGB transformation matrix.
-    The implementation is a revised version of
-    https://scipython.com/blog/converting-a-spectrum-to-a-colour/
+    The implementation is based on
+    https://scipython.com/blog/converting-a-spectrum-to-a-colour/,
+    and http://brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
+    The formula derivation is simplified and is given in the (unpublished) paper.
     """
 
     def __init__(self, color_space: str, white_point: str):
@@ -1862,29 +1864,34 @@ class ColorSystem:
         # Save input names
         self.color_space_name = color_space
         self.white_point_name = white_point
-        # Reading color space coordinates
-        self.color_space = np.array(self.supported_color_spaces[color_space]).T
-        # Converting reduced (x, y) coordinates back to (x, y, z=1-x-y)
-        self.color_space =  np.vstack((self.color_space, 1 - self.color_space.sum(axis=0)))
-        # Calculate the inverse chromaticity matrix
-        inv_matrix = np.linalg.inv(self.color_space)
-        # White scaling array
-        self.white_point = self.supported_white_points[white_point]
-        self.white_point = np.array((*self.white_point, 1 - np.sum(self.white_point)))
-        white_scale = inv_matrix.dot(self.white_point)
+        # Reading chromaticity coordinates of the primary colors and the white point
+        matrix_M = np.array(self.supported_color_spaces[color_space]).T
+        vector_W = self.supported_white_points[white_point]
+        # Converting reduced chromaticity coordinates (x, y) to (x, y, z=1-x-y)
+        matrix_M = np.vstack((matrix_M, 1 - matrix_M.sum(axis=0)))
+        vector_W = np.array((*vector_W, 1 - np.sum(vector_W)))
+        # Scaling white point by brightness of the Y component
+        vector_W /= vector_W[1]
+        # Calculating the inverse chromaticity matrix
+        matrix_M_inv = np.linalg.inv(matrix_M)
+        # Calculating the scaling vector
+        vector_S = matrix_M_inv.dot(vector_W)[:, np.newaxis]
         # XYZ -> RGB transformation matrix
-        self.matrix = inv_matrix / white_scale[:, np.newaxis] / 3 # Why divide by 3? It just works
-        self.inv_matrix = np.linalg.inv(self.matrix)
+        self.inv_matrix = matrix_M_inv / vector_S
+        # RGB -> XYZ transformation matrix
+        self.matrix = np.linalg.inv(self.inv_matrix) # self.matrix = matrix_M * vector_S
+        # Using `self.matrix = np.linalg.inv(self.inv_matrix)` fixes the reversibility unit test
+        # and makes the result closer to http://brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
 
     def xyz_to_rgb(self, arr: np.ndarray) -> np.ndarray:
         """ Converts XYZ color array into a RGB color space array """
-        # 1D implementation: rgb = self.matrix.T.dot(xyz)
-        return np.tensordot(self.matrix, arr, axes=(1, 0))
+        # 1D implementation: rgb = self.inv_matrix.T.dot(xyz)
+        return np.tensordot(self.inv_matrix, arr, axes=(1, 0))
 
     def rgb_to_xyz(self, arr: np.ndarray) -> np.ndarray:
         """ Converts RGB color array into the XYZ color space array """
-        # 1D implementation: rgb = self.inv_matrix.T.dot(xyz)
-        return np.tensordot(self.inv_matrix, arr, axes=(1, 0))
+        # 1D implementation: rgb = self.matrix.T.dot(xyz)
+        return np.tensordot(self.matrix, arr, axes=(1, 0))
 
     @staticmethod
     def spectrum_to_white_point(spectrum: Spectrum) -> np.ndarray:
