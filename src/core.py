@@ -1875,13 +1875,11 @@ class ColorSystem:
         # Calculating the inverse chromaticity matrix
         matrix_M_inv = np.linalg.inv(matrix_M)
         # Calculating the scaling vector
-        vector_S = matrix_M_inv.dot(vector_W)[:, np.newaxis]
-        # XYZ -> RGB transformation matrix
-        self.inv_matrix = matrix_M_inv / vector_S
+        vector_S = matrix_M_inv.dot(vector_W)
         # RGB -> XYZ transformation matrix
-        self.matrix = np.linalg.inv(self.inv_matrix) # self.matrix = matrix_M * vector_S
-        # Using `self.matrix = np.linalg.inv(self.inv_matrix)` fixes the reversibility unit test
-        # and makes the result closer to http://brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
+        self.matrix = matrix_M * vector_S[np.newaxis, :]
+        # XYZ -> RGB transformation matrix
+        self.inv_matrix = matrix_M_inv / vector_S[:, np.newaxis]
 
     def xyz_to_rgb(self, arr: np.ndarray) -> np.ndarray:
         """ Converts XYZ color array into a RGB color space array """
