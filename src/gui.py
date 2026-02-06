@@ -101,11 +101,11 @@ def generate_layout(
                 expand_x=True, enable_events=True, key='-ColorSpace-', tooltip=tr.gui_color_space_tooltip[lang]
             )
         ],
-        [sg.Text(tr.gui_white_point[lang], key='-WhitePointText-', tooltip=tr.gui_white_point_tooltip[lang])],
+        [sg.Text(tr.gui_chromatic_adaptation[lang], key='-ChromaticAdaptationText-', tooltip=tr.gui_chromatic_adaptation_tooltip[lang])],
         [
             sg.Combo(
-                tuple(ColorSystem.supported_white_points.keys()), default_value=white_point, readonly=True,
-                expand_x=True, enable_events=True, key='-WhitePoint-', tooltip=tr.gui_white_point_tooltip[lang]
+                ('', *ColorSystem.supported_white_points.keys()), default_value=white_point, readonly=True,
+                expand_x=True, enable_events=True, key='-ChromaticAdaptation-', tooltip=tr.gui_chromatic_adaptation_tooltip[lang]
             )
         ],
         [sg.T()],
@@ -338,7 +338,7 @@ def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict[
     window['tab3'].update(title=tr.gui_tabs[lang][2])
     window['-settingsTitle-'].update(tr.gui_settings[lang])
     window['-ColorSpaceText-'].update(tr.gui_color_space[lang])
-    window['-WhitePointText-'].update(tr.gui_white_point[lang])
+    window['-ChromaticAdaptationText-'].update(tr.gui_chromatic_adaptation[lang])
     window['-GammaCorrection-'].update(text=tr.gui_gamma_correction[lang])
     window['-MaximizeBrightness-'].update(text=tr.gui_maximize[lang])
     window['-ScaleFactorText-'].update(tr.gui_scale_factor[lang])

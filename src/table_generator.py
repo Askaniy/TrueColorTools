@@ -64,10 +64,11 @@ def generate_table(
 
     # Constructing and placing info column
     brMode = tr.table_chromaticity if maximize_brightness else (tr.gui_geom if geom_albedo else tr.gui_sphe)
+    chromatic_adaptation = color_system.white_point_name if color_system.white_point_name else tr.table_bool_indicator[lang][0]
     info_list = [
         f'{l}/{len(objectsDB)} {tr.table_objects_number[lang]}',
         f'{tr.gui_color_space[lang]}: {color_system.color_space_name}',
-        f'{tr.gui_white_point[lang]}: {color_system.white_point_name}',
+        f'{tr.gui_chromatic_adaptation[lang]}: {chromatic_adaptation}',
         f'{tr.gui_gamma_correction[lang]}: {tr.table_bool_indicator[lang][gamma_correction]}',
         f'{tr.table_brightness_mode[lang]}: {brMode[lang]}'
     ]

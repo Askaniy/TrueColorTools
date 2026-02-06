@@ -1845,41 +1845,67 @@ xyz_cmf = xyz_cmf.define_on_range(visible_range)
 # here: http://www.cvrl.org/database/text/cienewxyz/cie2012xyz2.htm, http://www.cvrl.org/ciexyzpr.htm
 # However, the CIE 1931 XYZ standard is still widely used.
 
+# Bradford chromatic adaptation matrices
+# http://www.brucelindbloom.com/index.html?Eqn_ChromAdapt.html
+matrix_B = np.array((
+    ( 0.8951000,  0.2664000, -0.1614000),
+    (-0.7502000,  1.7135000,  0.0367000),
+    ( 0.0389000, -0.0685000,  1.0296000),
+))
+matrix_B_inv = np.array((
+    ( 0.9869929, -0.1470543,  0.1599627),
+    ( 0.4323053,  0.5183603,  0.0492912),
+    (-0.0085287,  0.0400428,  0.9684867),
+))
+
 
 class ColorSystem:
     """
     This class stores the parameters of a color space with white point
-    and builds the CIE XYZ to RGB transformation matrix.
+    and builds the CIE 1931 XYZ to RGB transformation matrix.
     The implementation is based on
     https://scipython.com/blog/converting-a-spectrum-to-a-colour/,
     and http://brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
     The formula derivation is simplified and is given in the (unpublished) paper.
     """
 
-    def __init__(self, color_space: str, white_point: str):
+    def __init__(self, color_space: str, adaptation_white_point: str = ''):
         """
         Initialize the ColorSystem object.
         The color space and white point must be among the supported options.
         """
         # Save input names
         self.color_space_name = color_space
-        self.white_point_name = white_point
+        self.white_point_name = adaptation_white_point
         # Reading chromaticity coordinates of the primary colors and the white point
-        matrix_M = np.array(self.supported_color_spaces[color_space]).T
-        vector_W = self.supported_white_points[white_point]
+        matrix_M, internal_white_point_name = self.supported_color_spaces[color_space]
+        matrix_M = np.array(matrix_M).T
+        vector_WPi = self.supported_white_points[internal_white_point_name]
         # Converting reduced chromaticity coordinates (x, y) to (x, y, z=1-x-y)
         matrix_M = np.vstack((matrix_M, 1 - matrix_M.sum(axis=0)))
-        vector_W = np.array((*vector_W, 1 - np.sum(vector_W)))
-        # Scaling white point by brightness of the Y component
-        vector_W /= vector_W[1]
+        vector_WPi = np.array((*vector_WPi, 1 - np.sum(vector_WPi)))
+        # Scaling white points by brightness of the Y component
+        vector_WPi /= vector_WPi[1]
         # Calculating the inverse chromaticity matrix
         matrix_M_inv = np.linalg.inv(matrix_M)
         # Calculating the scaling vector
-        vector_S = matrix_M_inv.dot(vector_W)
+        vector_S = matrix_M_inv.dot(vector_WPi)
         # RGB -> XYZ transformation matrix
         self.matrix = matrix_M * vector_S[np.newaxis, :]
         # XYZ -> RGB transformation matrix
         self.inv_matrix = matrix_M_inv / vector_S[:, np.newaxis]
+        # Optional chromatic adaptation
+        if adaptation_white_point != '' and adaptation_white_point != internal_white_point_name:
+            # White point preprocessing
+            vector_WPa = self.supported_white_points[adaptation_white_point]
+            vector_WPa = np.array((*vector_WPa, 1 - np.sum(vector_WPa)))
+            vector_WPa /= vector_WPa[1]
+            # White scale in cone response domain
+            cone_response_ratio = matrix_B.dot(vector_WPi) / matrix_B.dot(vector_WPa)
+            # Applying the matrix
+            matrix_A = matrix_B_inv @ np.diag(cone_response_ratio) @ matrix_B
+            self.matrix = np.linalg.inv(matrix_A) @ self.matrix
+            self.inv_matrix = self.inv_matrix @ matrix_A
 
     def xyz_to_rgb(self, arr: np.ndarray) -> np.ndarray:
         """ Converts XYZ color array into a RGB color space array """
@@ -1897,21 +1923,22 @@ class ColorSystem:
         xyz = (spectrum @ xyz_cmf).br
         return xyz[:2] / xyz.sum()
 
-    # Values are Color Primaries: (red, green, blue)
+    # Values are color primaries (red, green, blue) and white points used.
     # See https://en.wikipedia.org/wiki/RGB_color_spaces
+    # and http://brucelindbloom.com/index.html?WorkingSpaceInfo.html
     supported_color_spaces = {
-        'CIE XYZ': ((1, 0), (0, 1), (0, 0)),
-        'CIE RGB': ((0.73474284, 0.26525716), (0.27377903, 0.7174777), (0.16655563, 0.00891073)),
-        'sRGB': ((0.64, 0.33), (0.30, 0.60), (0.15, 0.06)),
-        'Display P3': ((0.68, 0.32), (0.265, 0.69), (0.15, 0.06)),
-        'Adobe RGB': ((0.64, 0.33), (0.21, 0.71), (0.15, 0.06)),
-        'Wide Gamut': ((0.7347, 0.2653), (0.1152, 0.8264), (0.1566, 0.0177)),
-        'ProPhoto RGB': ((0.734699, 0.265301), (0.159597, 0.840403), (0.036598, 0.000105)),
-        'HDTV': ((0.67, 0.33), (0.21, 0.71), (0.15, 0.06)),
-        'UHDTV': ((0.708, 0.292), (0.170, 0.797), (0.13, 0.046)),
+        'CIE 1931 XYZ': (((1, 0), (0, 1), (0, 0)), 'Illuminant E'),
+        'CIE 1931 RGB': (((0.73474284, 0.26525716), (0.27377903, 0.7174777), (0.16655563, 0.00891073)), 'Illuminant E'),
+        'sRGB': (((0.64, 0.33), (0.30, 0.60), (0.15, 0.06)), 'Illuminant D65'),
+        'Display P3': (((0.68, 0.32), (0.265, 0.69), (0.15, 0.06)), 'Illuminant D65'),
+        'Adobe RGB': (((0.64, 0.33), (0.21, 0.71), (0.15, 0.06)), 'Illuminant D65'),
+        'Wide Gamut RGB': (((0.7347, 0.2653), (0.1152, 0.8264), (0.1566, 0.0177)), 'Illuminant D50'),
+        'ProPhoto RGB': (((0.734699, 0.265301), (0.159597, 0.840403), (0.036598, 0.000105)), 'Illuminant D50'),
+        'HDTV': (((0.67, 0.33), (0.21, 0.71), (0.15, 0.06)), 'Illuminant D65'),
+        'UHDTV': (((0.708, 0.292), (0.170, 0.797), (0.13, 0.046)), 'Illuminant D65'),
     }
 
-    # Values are (x, y) coordinates
+    # Values are (x, y) coordinates.
     # https://en.wikipedia.org/wiki/Standard_illuminant#White_points_of_standard_illuminants
     supported_white_points = {
         'Illuminant A': (0.44758, 0.40745),
@@ -1928,7 +1955,7 @@ class ColorSystem:
     }
 
 
-xyz_color_system = ColorSystem('CIE XYZ', 'Illuminant E')
+xyz_color_system = ColorSystem('CIE 1931 XYZ', 'Illuminant E')
 
 
 class ColorObject:
@@ -1957,7 +1984,7 @@ class ColorObject:
 
     @classmethod
     def from_spectral_data(cls, data: _TrueColorToolsObject) -> Self:
-        """ Convolves (photo)spectrum with CIE XYZ color matching functions """
+        """ Convolves (photo)spectrum with CIE 1931 XYZ color matching functions """
         return cls((data @ xyz_cmf).br, xyz_color_system)
 
     def to_color_system(self, new_color_system: ColorSystem) -> Self:

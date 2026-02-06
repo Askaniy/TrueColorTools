@@ -123,14 +123,14 @@ def launch_window(lang: str):
 
     # List of events that cause GUI output update
     tab1_update_gui_events = (
-        '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-', '-currentTab-',
+        '-ColorSpace-', '-ChromaticAdaptation-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-', '-currentTab-',
         '-AlbedoMode1-', '-AlbedoMode2-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load'
     )
     tab2_update_gui_events = (
-        '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-', '-currentTab-',
+        '-ColorSpace-', '-ChromaticAdaptation-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-', '-currentTab-',
     )
     tab3_update_gui_events = (
-        '-ColorSpace-', '-WhitePoint-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-', '-currentTab-',
+        '-ColorSpace-', '-ChromaticAdaptation-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-', '-currentTab-',
         '-bitness-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3', 'tab3_overexposure_limit', 'tab3_slider4'
     )
 
@@ -226,9 +226,9 @@ def launch_window(lang: str):
             elif event == tr.gui_info[lang]:
                 sg.popup(f'{tr.link}\n{tr.auth_info[lang]}', title=event, icon=icon, non_blocking=True)
 
-            elif event == '-ColorSpace-' or event == '-WhitePoint-':
+            elif event == '-ColorSpace-' or event == '-ChromaticAdaptation-':
                 # Update color system
-                color_system = ColorSystem(values['-ColorSpace-'], values['-WhitePoint-'])
+                color_system = ColorSystem(values['-ColorSpace-'], values['-ChromaticAdaptation-'])
 
             # Checks for empty input
             elif event == '-bitness-':
@@ -514,7 +514,7 @@ def launch_window(lang: str):
                         window['tab2_preview'].update(data=tab2_preview_rgb.to_bytes())
 
                 # Updating filters profile plot
-                if event in ('-currentTab-', '-ColorSpace-', '-WhitePoint-') or tab2_filters_were_updated:
+                if event in ('-currentTab-', '-ColorSpace-', '-ChromaticAdaptation-') or tab2_filters_were_updated:
                     if not tab2_opened:
                         # The first tab opening
                         tab2_fig = pl.plot_filters((), color_system, lang, filters_figsize, filters_dpi)

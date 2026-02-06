@@ -60,15 +60,15 @@ gui_color_space_tooltip = {
     'ru': 'Цветовое пространство определяет диапазон цветов, кодирует технические возможности дисплея',
     'de': 'Der Farbraum definiert den Farbbereich und kodiert die technischen Möglichkeiten des Bildschirms'
 }
-gui_white_point = {
-    'en': 'White point',
-    'ru': 'Точка белого',
-    'de': 'Weißpunkt'
+gui_chromatic_adaptation = {
+    'en': 'Chromatic adaptation',
+    'ru': 'Хроматическая адаптация',
+    'de': 'Chromatische Anpassung'
 }
-gui_white_point_tooltip = {
-    'en': 'White point is a reference white, influencing color balance',
-    'ru': 'Точка белого — эталонный белый цвет, влияющий на цветовой баланс',
-    'de': 'Der Weißpunkt ist das Referenzweiß und beeinflusst den Farbabgleich'
+gui_chromatic_adaptation_tooltip = {
+    'en': 'Assigns white to the selected white point, calibrates by the sensitivity of the cones',
+    'ru': 'Назначает белой выбранную точку белого, калибруя по чувствительности колбочек',
+    'de': 'Weist dem ausgewählten Weißpunkt Weiß zu, kalibriert nach der Empfindlichkeit der Zapfen'
 }
 gui_gamma_correction = {
     'en': 'Gamma correction',

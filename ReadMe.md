@@ -32,8 +32,8 @@ An alternative way for Windows 8/10/11. Stable versions are compiled into an exe
 
 TCT converts photometric measurements into a continuous spectrum (if it isn't already a spectrum) and convolves it with eye color matching functions (CMFs). A set of photographs (e.g. taken by a spacecraft) is counted and processed in the same way as photometry.
 
-According to a common color processing procedure, after convolution from CMF to CIE XYZ color space, the color is converted by a 3×3 matrix to the selected color system.
-The matrix is formed from the specified color space and white point. The default is the most common color space (sRGB) with a natural-looking white point, equal-energy spectrum (illiminant E). It's important to note that sRGB is commonly used with D65 instead.
+According to a common color processing procedure, after convolution from CMF to CIE 1931 XYZ color space, the color is converted by a 3×3 matrix to the selected color system.
+The matrix is formed from the specified color space and (optional) white point for chromatic adaptation. The default is the most common color space (sRGB) with a natural-looking white point, equal-energy spectrum (illiminant E).
 
 The photometric measurements read from the database are calibrated at runtime using the specified calibration system and filter profiles. Zero points are not required. Spectra and filter profiles are stored on a grid with a 5-nm step in energy spectral density units (e.g., W/(m² nm)).
 
