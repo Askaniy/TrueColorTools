@@ -1846,7 +1846,7 @@ xyz_cmf = xyz_cmf.define_on_range(visible_range)
 # However, the CIE 1931 XYZ standard is still widely used.
 
 # Bradford chromatic adaptation matrices
-# http://www.brucelindbloom.com/index.html?Eqn_ChromAdapt.html
+# http://www.brucelindbloom.com/Eqn_ChromAdapt.html
 matrix_B = np.array((
     ( 0.8951000,  0.2664000, -0.1614000),
     (-0.7502000,  1.7135000,  0.0367000),
@@ -1861,18 +1861,19 @@ matrix_B_inv = np.array((
 
 class ColorSystem:
     """
-    This class stores the parameters of a color space with white point
-    and builds the CIE 1931 XYZ to RGB transformation matrix.
+    This class builds and stores RGB to XYZ (and inverse) transformation matrices.
     The implementation is based on
-    https://scipython.com/blog/converting-a-spectrum-to-a-colour/,
-    and http://brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
+    http://brucelindbloom.com/Eqn_RGB_XYZ_Matrix.html,
+    http://www.brucelindbloom.com/Eqn_ChromAdapt.html,
+    and https://scipython.com/blog/converting-a-spectrum-to-a-colour/.
     The formula derivation is simplified and is given in the (unpublished) paper.
     """
 
     def __init__(self, color_space: str, adaptation_white_point: str = ''):
         """
         Initialize the ColorSystem object.
-        The color space and white point must be among the supported options.
+        The color space and optional white point of the chromatic adaptation
+        must be among the supported options.
         """
         # Save input names
         self.color_space_name = color_space
@@ -1883,9 +1884,8 @@ class ColorSystem:
         vector_WPi = self.supported_white_points[internal_white_point_name]
         # Converting reduced chromaticity coordinates (x, y) to (x, y, z=1-x-y)
         matrix_M = np.vstack((matrix_M, 1 - matrix_M.sum(axis=0)))
-        vector_WPi = np.array((*vector_WPi, 1 - np.sum(vector_WPi)))
-        # Scaling white points by brightness of the Y component
-        vector_WPi /= vector_WPi[1]
+        # Also, scaling the white point by brightness of the Y component
+        vector_WPi = np.array((vector_WPi[0], vector_WPi[1], 1 - vector_WPi[0] - vector_WPi[1])) / vector_WPi[1]
         # Calculating the inverse chromaticity matrix
         matrix_M_inv = np.linalg.inv(matrix_M)
         # Calculating the scaling vector
@@ -1898,14 +1898,12 @@ class ColorSystem:
         if adaptation_white_point != '' and adaptation_white_point != internal_white_point_name:
             # White point preprocessing
             vector_WPa = self.supported_white_points[adaptation_white_point]
-            vector_WPa = np.array((*vector_WPa, 1 - np.sum(vector_WPa)))
-            vector_WPa /= vector_WPa[1]
+            vector_WPa = np.array((vector_WPa[0], vector_WPa[1], 1 - vector_WPa[0] - vector_WPa[1])) / vector_WPa[1]
             # White scale in cone response domain
-            cone_response_ratio = matrix_B.dot(vector_WPi) / matrix_B.dot(vector_WPa)
-            # Applying the matrix
-            matrix_A = matrix_B_inv @ np.diag(cone_response_ratio) @ matrix_B
-            self.matrix = np.linalg.inv(matrix_A) @ self.matrix
-            self.inv_matrix = self.inv_matrix @ matrix_A
+            vector_A = matrix_B.dot(vector_WPi) / matrix_B.dot(vector_WPa)
+            # Applying the chromatic adaptation
+            self.matrix = (matrix_B / vector_A[np.newaxis, :]) @ matrix_B_inv @ self.matrix
+            self.inv_matrix = self.inv_matrix @ matrix_B_inv @ (matrix_B * vector_A[:, np.newaxis])
 
     def xyz_to_rgb(self, arr: np.ndarray) -> np.ndarray:
         """ Converts XYZ color array into a RGB color space array """
