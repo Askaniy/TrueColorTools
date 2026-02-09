@@ -19,9 +19,9 @@ gui_info = {
 }
 link = 'github.com/Askaniy/TrueColorTools'
 auth_info = {
-    'en': 'Askaniy Anpilogov, 2020-2025',
-    'ru': 'Анпилогов Асканий, 2020-2025',
-    'de': 'Askaniy Anpilogov, 2020-2025'
+    'en': 'Askaniy Anpilogov, 2020-2026',
+    'ru': 'Асканий Анпилогов, 2020-2026',
+    'de': 'Askaniy Anpilogov, 2020-2026'
 }
 gui_exit = {
     'en': 'Exit',

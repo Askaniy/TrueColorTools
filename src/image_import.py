@@ -54,10 +54,13 @@ def bw_reader(file: str) -> np.ndarray:
         br = br[np.argmax(br.sum(axis=(1,2)))]
     return br
 
-def bw_list_reader(files: Sequence[str], formulas: list[str]) -> np.ndarray:
+def bw_list_reader(files: Sequence[str], formulas: list[str] = None) -> np.ndarray:
     """ Imports and combines the list of black and white images into one array """
-    br = np.stack([eval(formula, {'x': bw_reader(file)}) for file, formula in zip(files, formulas)])
-    return br
+    if formulas is None:
+        br = [bw_reader(file) for file in files]
+    else:
+        br = [eval(formula, {'x': bw_reader(file)}) for file, formula in zip(files, formulas)]
+    return np.stack(br)
 
 def to_supported_mode(mode: str):
     """ Corresponds the image mode of the Pillow library and supported one """
