@@ -55,6 +55,12 @@
         'Virtual Planetary Laboratory Spectral Explorer',
         'https://live-vpl-test.pantheonsite.io/models/vpl-spectral-explorer/'
     ],
+    'Payne2025': [
+        'A comprehensive spectroscopic reference of the solar system and its application to exoplanet direct imaging',
+        'DOI: 10.48550/arXiv.2508.13368', 'https://arxiv.org/abs/2508.13368',
+        'https://github.com/nasapsg/reference',
+        'https://ui.adsabs.harvard.edu/abs/2025arXiv250813368P/abstract'
+    ],
 
     // Mercury
     'Domingue2011': [
@@ -67,14 +73,20 @@
         'DOI: 10.48550/arXiv.1703.02670', 'https://arxiv.org/abs/1703.02670',
         'https://ui.adsabs.harvard.edu/abs/2017arXiv170302670M/abstract'
     ],
+    'Mercury | Payne2025, Mallama2017a': {
+        tags: ['featured', 'Solar System', 'planetary body/planet', 'Mercury'],
+        file: 'spectra/files/Payne2025/mercury_composite_data.txtU',
+        is_geometric_albedo: true,
+        bond_albedo: [0.088, 0.003],
+    },
     'Mercury | Mallama2017b, Mallama2017a': {
-        tags: ['featured', 'Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Mercury'],
         file: 'spectra/files/Madden2018/Mercury_Mallama2017_Albedo.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.142],
         bond_albedo: [0.088, 0.003],
     },
     'Mercury | Mallama2017a, Mallama2017b': {
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Mercury'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
         br_geometric: [0.087, 0.105, 0.142, 0.172, 0.208,
@@ -82,14 +94,14 @@
         bond_albedo: [0.088, 0.003],
     },
     'Mercury | Domingue2011': {
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Mercury'],
         photometric_system: 'Messenger_MDIS_WAC',
         filters: ['430BP40', '480BP10', '560BP5', '630BP5', '700BP5', '750BP5', '830BP5', '900BP5', '950BP7', '1000BP15'],
         br_geometric: [0.119, 0.134, 0.152, 0.165, 0.180, 0.192, 0.214, 0.234, 0.247, 0.254],
         br_spherical: [0.053, 0.061, 0.070, 0.077, 0.084, 0.089, 0.098, 0.105, 0.110, 0.113],
     },
     'Mercury | Crow2011, Mallama2017a, Mallama2017b': { // phase angle 77°
-        tags: ['Solar System', 'planetary body/planet'],
+        tags: ['Solar System', 'planetary body/planet', 'Mercury'],
         nm: [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5],
         br: [0.61, 0.56, 0.66, 0.71, 0.86, 1.00, 1.37, 1.50, 1.77, 2.01],
         geometric_albedo: ['Generic_Bessell.V', 0.142],
@@ -107,8 +119,14 @@
         'DOI: 10.1016/j.icarus.2005.12.014', 'https://www.sciencedirect.com/science/article/pii/S0019103505005105',
         'https://ui.adsabs.harvard.edu/abs/2006Icar..182...10M/abstract'
     ],
-    'Venus | PerezHoyos2018, Mallama2017a, Mallama2006': { // phase angle 90°
+    'Venus | Payne2025, Mallama2006': { // uses Vlasov2019 for UV, PerezHoyos2018 for VIS, Mallama2017a to scale, etc.
         tags: ['featured', 'Solar System', 'planetary body/planet', 'Venus'],
+        file: 'spectra/files/Payne2025/venus_composite_data.txtU',
+        is_geometric_albedo: true,
+        phase_integral: 1.35, // Table 6
+    },
+    'Venus | PerezHoyos2018, Mallama2017a, Mallama2006': { // phase angle 90°
+        tags: ['Solar System', 'planetary body/planet', 'Venus'],
         file: 'spectra/files/Venus_PerezHoyos2018.txtU', // Fig. 8
         geometric_albedo: ['Generic_Bessell.V', 0.689],
         phase_integral: 1.35, // Table 6
@@ -393,23 +411,34 @@
     },
 
     // Terran system
-    'Payne2025': [
-        'A comprehensive spectroscopic reference of the solar system and its application to exoplanet direct imaging',
-        'DOI: 10.48550/arXiv.2508.13368', 'https://arxiv.org/abs/2508.13368',
-        'https://ui.adsabs.harvard.edu/abs/2025arXiv250813368P/abstract'
-    ],
-    'Earth | Payne2025, Robinson2025': {
-        tags: ['featured', 'Solar System', 'planetary body/planet', 'Earth'],
-        photometric_system: 'DSCOVR_EPIC',
-        filters: ['317nm', '325nm', '388nm', '443nm', '551nm', '680nm', '779nm'],
-        br_geometric: [0.182, 0.276, 0.300, 0.268, 0.211, 0.205, 0.232], // Fig. 4
-        spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
-    },
     'Robinson2025': [
         'Inferring and Interpreting the Visual Geometric Albedo and Phase Function of Earth',
         'DOI: 10.48550/arXiv.2507.22258', 'https://arxiv.org/abs/2507.22258',
         'https://ui.adsabs.harvard.edu/abs/2025arXiv250722258R/abstract'
     ],
+    'Villanueva2018': [
+        'Planetary Spectrum Generator: An accurate online radiative transfer suite for atmospheres, comets, small bodies and exoplanets',
+        'DOI: 10.1016/j.jqsrt.2018.05.023', 'https://www.sciencedirect.com/science/article/abs/pii/S0022407318301572',
+        'https://scixplorer.org/abs/2018JQSRT.217...86V/abstract'
+    ],
+    'Earth: Synthetic spectrum | Villanueva2018, Payne2025, Robinson2025': { // see Payne2025 for the processing methods
+        tags: ['featured', 'Solar System', 'planetary body/planet', 'Earth'],
+        file: 'spectra/files/Payne2025/earth_composite_data.txtU',
+        is_geometric_albedo: true,
+        spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
+    },
+    'Marshak2018': [
+        'Earth Observations from DSCOVR EPIC Instrument',
+        'DOI: 10.1175/BAMS-D-17-0223.1', 'https://journals.ametsoc.org/view/journals/bams/99/9/bams-d-17-0223.1.xml',
+        'https://scixplorer.org/abs/2018BAMS...99.1829M/abstract'
+    ],
+    'Earth | Marshak2018, Payne2025, Robinson2025': {
+        tags: ['Solar System', 'planetary body/planet', 'Earth'],
+        photometric_system: 'DSCOVR_EPIC',
+        filters: ['317nm', '325nm', '388nm', '443nm', '551nm', '680nm', '779nm'],
+        br_geometric: [0.182, 0.276, 0.300, 0.268, 0.211, 0.205, 0.232], // Fig. 4
+        spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
+    },
     'Earth | Robinson2025': {
         tags: ['Solar System', 'planetary body/planet', 'Earth'],
         photometric_system: 'Generic_Bessell',
@@ -681,6 +710,12 @@
         is_geometric_albedo: true,
         phase_integral: 1.01, // extracted from Fig. 7 for 550 nm (q2)
     },
+    'Mars: Synthetic spectrum | Payne2025, Pleskot1977': {
+        tags: ['Solar System', 'planetary body/planet', 'Mars'],
+        file: 'spectra/files/Payne2025/mars_composite_data.txtU',
+        is_geometric_albedo: true,
+        phase_integral: 1.01, // extracted from Fig. 7 for 550 nm (q2)
+    },
     'Bell2007': [
         'High spectral resolution UV to near-IR observations of Mars using HST/STIS',
         'DOI: 10.1016/j.icarus.2007.05.019', 'https://www.sciencedirect.com/science/article/abs/pii/S0019103507002692',
@@ -778,8 +813,14 @@
     },
 
     // Jovian system
-    'Jupiter | Karkoschka1998, Dyudina2016b': { // phase angle 6.8°
+    'Jupiter | Karkoschka1998, Payne2025, Dyudina2016b': { // is Karkoschka1998 in visible range
         tags: ['featured', 'Solar System/Jovian system', 'planetary body/planet'],
+        file: 'spectra/files/Payne2025/jupiter_composite_data.txtU',
+        is_geometric_albedo: true,
+        spherical_albedo: ['Cassini_ISS_NAC.CB3', 0.57], // Table 4
+    },
+    'Jupiter | Karkoschka1998, Dyudina2016b': { // phase angle 6.8°
+        tags: ['Solar System/Jovian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Jupiter1995.txt',
         is_geometric_albedo: true,
         spherical_albedo: ['Cassini_ISS_NAC.CB3', 0.57], // Table 4
@@ -1136,8 +1177,14 @@
     },
 
     // Saturnian system
-    'Saturn | Karkoschka1998, Dyudina2016b': { // phase angle 5.7°, without rings
+    'Saturn | Karkoschka1998, Payne2025, Dyudina2016b': { // is Karkoschka1998 in visible range
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planet'],
+        file: 'spectra/files/Payne2025/saturn_composite_data.txtU',
+        is_geometric_albedo: true,
+        phase_integral: [1.4, 0.1], // Section 4
+    },
+    'Saturn | Karkoschka1998, Dyudina2016b': { // phase angle 5.7°, without rings
+        tags: ['Solar System/Saturnian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Saturn1995.txt',
         is_geometric_albedo: true,
         phase_integral: [1.4, 0.1], // Section 4
@@ -1638,8 +1685,14 @@
         'DOI: 10.1038/s41550-017-0114', 'https://www.nature.com/articles/s41550-017-0114',
         'https://ui.adsabs.harvard.edu/abs/2017NatAs...1E.114G/abstract'
     ],
-    'Titan (S VI) | Karkoschka1998, Muñoz2017': {
+    'Titan (S VI) | Karkoschka1998, Payne2025, Muñoz2017': { // is Karkoschka1998 in visible range
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Titan'],
+        file: 'spectra/files/Payne2025/titan_composite_data.txtU',
+        is_geometric_albedo: true,
+        phase_integral: [1.97, 0.09], // extracted from Fig. 4b for 550 nm
+    },
+    'Titan (S VI) | Karkoschka1998, Muñoz2017': {
+        tags: ['Solar System/Saturnian system', 'planetary body/planetary-mass moon', 'natural satellite/regular moon', 'Titan'],
         file: 'spectra/files/Karkoschka/Titan1995.txt',
         is_geometric_albedo: true,
         phase_integral: [1.97, 0.09], // extracted from Fig. 4b for 550 nm
@@ -1844,8 +1897,14 @@
         'DOI: 10.48550/arXiv.2502.18971', 'https://arxiv.org/abs/2502.18971',
         'https://ui.adsabs.harvard.edu/abs/2025arXiv250218971I/abstract'
     ],
-    'Uranus | Karkoschka1998, Irwin2025': {
+    'Uranus | Karkoschka1998, Payne2025, Irwin2025': { // is Karkoschka1998 in visible range
         tags: ['featured', 'Solar System/Uranian system', 'planetary body/planet'],
+        file: 'spectra/files/Payne2025/uranus_composite_data.txtU',
+        is_geometric_albedo: true,
+        phase_integral: 1.35, // extracted from Fig. 2 for 550 nm
+    },
+    'Uranus | Karkoschka1998, Irwin2025': {
+        tags: ['Solar System/Uranian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Uranus1995.txt',
         is_geometric_albedo: true,
         phase_integral: 1.35, // extracted from Fig. 2 for 550 nm
@@ -2159,15 +2218,21 @@
         'DOI: 10.1016/0019-1035(85)90185-X', 'https://www.sciencedirect.com/science/article/abs/pii/001910358590185X',
         'https://ui.adsabs.harvard.edu/abs/1985Icar...62..425N/abstract'
     ],
-    'Neptune | Karkoschka1998, Neff1985': {
+    'Neptune | Karkoschka1998, Payne2025, Neff1985': { // is Karkoschka1998 in visible range
         tags: ['featured', 'Solar System/Neptunian system', 'planetary body/planet'],
+        file: 'spectra/files/Payne2025/neptune_composite_data.txtU',
+        is_geometric_albedo: true,
+        phase_integral: 1.2, // adopted phase integral for both Uranus and Neptune
+    },
+    'Neptune | Karkoschka1998, Neff1985': {
+        tags: ['Solar System/Neptunian system', 'planetary body/planet'],
         file: 'spectra/files/Karkoschka/Neptune1995.txt',
         is_geometric_albedo: true,
         phase_integral: 1.2, // adopted phase integral for both Uranus and Neptune
     },
     'Neptune | Karkoschka1994, Neff1985': { // phase angle 0.4°
         tags: ['Solar System/Neptunian system', 'planetary body/planet'],
-        file: 'spectra/files/Karkoschka/Neptune1995.txt',
+        file: 'spectra/files/Karkoschka/Neptune1993.txt',
         is_geometric_albedo: true,
         phase_integral: 1.2, // adopted phase integral for both Uranus and Neptune
     },
