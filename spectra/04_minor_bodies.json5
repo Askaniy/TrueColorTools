@@ -138,7 +138,7 @@
         'DOI: 10.1051/0004-6361/201322416', 'https://www.aanda.org/articles/aa/full_html/2014/04/aa22416-13/aa22416-13.html',
         'https://ui.adsabs.harvard.edu/abs/2014A%26A...564A..35V/abstract'
     ],
-    'Mottola2023a': [
+    'Mottola2023': [
         'Shape Models of Lucy Targets (3548) Eurybates and (21900) Orus from Disk-integrated Photometry',
         'DOI: 10.3847/PSJ/acaf79', 'https://iopscience.iop.org/article/10.3847/PSJ/acaf79/meta',
         'https://ui.adsabs.harvard.edu/abs/2023PSJ.....4...18M/abstract'
@@ -1513,13 +1513,13 @@
         geometric_albedo: ['Generic_Bessell.V', [0.021, 0.004]], // Table 43
         phase_function: ['Palomar_ZTF.r', 'HG', {H: [8.19, 0.03], G: [0.18, 0.04]}],
     },
-    '(3548) Eurybates | Humes2022, Mottola2023a': {
+    '(3548) Eurybates | Humes2022, Mottola2023': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan', 'spacecraft target/Lucy target'],
         file: 'spectra/files/Humes2022/3548_Eurybates_albedo.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.003]],
         phase_function: ['HG1G2', {H: [9.800, 0.007], G_1: [0.862, 0.019], G_2: [-0.028, 0.011]}],
     },
-    '(3548) Eurybates | MBOSS, Mottola2023a': {
+    '(3548) Eurybates | MBOSS, Mottola2023': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan', 'spacecraft target/Lucy target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.677, 0.052], 'V-R': [0.352, 0.045], 'R-I': [0.339, 0.067]},
@@ -1528,7 +1528,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.044, 0.003]],
         phase_function: ['HG1G2', {H: [9.800, 0.007], G_1: [0.862, 0.019], G_2: [-0.028, 0.011]}],
     },
-    '(3548) Eurybates | Mottola2023a': {
+    '(3548) Eurybates | Mottola2023': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan', 'spacecraft target/Lucy target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.739, 0.026], 'V-R': [0.384, 0.021], 'R-I': [0.355, 0.015]},
@@ -2325,13 +2325,13 @@
         is_reflecting_sunlight: true,
         phase_function: ['Palomar_ZTF.r', 'HG', {H: [11.67, +0.12, -0.13], G: [0.44, +0.26, -0.25]}],
     },
-    '(21900) Orus | Humes2022, Mottola2023a': {
+    '(21900) Orus | Humes2022, Mottola2023': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan', 'spacecraft target/Lucy target'],
         file: 'spectra/files/Humes2022/21900_Orus_albedo.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.040, 0.002]],
         phase_function: ['HG1G2', {H: [10.204, 0.006], G_1: [0.689, 0.012], G_2: [0.193, 0.007]}],
     },
-    '(21900) Orus | Mottola2023a': {
+    '(21900) Orus | Mottola2023': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan', 'spacecraft target/Lucy target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.799, 0.031], 'V-R': [0.454, 0.021]},
@@ -4958,19 +4958,19 @@
         'DOI: 10.3847/2041-8213/acff61', 'https://iopscience.iop.org/article/10.3847/2041-8213/acff61',
         'https://ui.adsabs.harvard.edu/abs/2023ApJ...957L...2M/abstract'
     ],
-    'Mottola2023b': [
-        'Characterizing asteroid (152830) Dinkinesh in preparation for the encounter with the NASA Lucy mission: a photometric study',
-        'DOI: 10.1093/mnrasl/slad066', 'https://academic.oup.com/mnrasl/article/524/1/L1/7191263',
-        'https://ui.adsabs.harvard.edu/abs/2023MNRAS.524L...1M/abstract'
+    'Jackson2025': [
+        'Thermal-IR Observations of (152830) Dinkinesh during the Lucy Mission Flyby',
+        'DOI: 10.3847/PSJ/ade23c', 'https://iopscience.iop.org/article/10.3847/PSJ/ade23c',
+        'https://ui.adsabs.harvard.edu/abs/2025PSJ.....6..168J/abstract'
     ],
-    '(152830) Dinkinesh | Bolin2023b, McFadden2023, Mottola2023b': {
+    '(152830) Dinkinesh | Bolin2023b, McFadden2023, Jackson2025': {
         tags: ['featured', 'Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Lucy target'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.67, 0.03], 'r-i': [0.28, 0.03], 'i-z': [0.11, 0.02]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.27, +0.25, -0.06]],
-        phase_function: ['HG', {H: [17.62, 0.04], G: [0.378, 0.035]}],
+        spherical_albedo: ['NewHorizons_LORRI.Pan', 0.114], // rough-surface Bond albedo, presumably in the L'LORRI filter per the source cited by Jackson2025
     },
     '(153591) 2001 SN263 | SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Amor'],
