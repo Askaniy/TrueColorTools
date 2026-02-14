@@ -351,6 +351,11 @@
         'DOI: 10.3847/PSJ/adef30', 'https://iopscience.iop.org/article/10.3847/PSJ/adef30/meta',
         'https://ui.adsabs.harvard.edu/abs/2025PSJ.....6..201S/abstract'
     ],
+    'Terai2018': [
+        'Multi-band photometry of trans-Neptunian objects in the Subaru Hyper Suprime-Cam survey',
+        'DOI: 10.1093/pasj/psx105', 'https://academic.oup.com/pasj/article/70/SP1/S40/4571785',
+        'https://ui.adsabs.harvard.edu/abs/2018PASJ...70S..40T/abstract'
+    ],
 
     'Li2019': [
         'Spectrophotometric modeling and mapping of Ceres',
@@ -3208,6 +3213,14 @@
         geometric_albedo: ['Generic_Bessell.V', [0.1331, 0.0265]],
         phase_function: ['HG1G2', {H: [13.009767, +0.104947, -0.116899], G_1: [0.545874, +0.204576, -0.234137], G_2: [0.191298, +0.118304, -0.112887]}],
     },
+    '(60454) 2000 CH105 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[7.52, 0.21], [6.23, 0.14], [5.70, 0.11], [5.47, 0.11], [5.32, 0.27]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+    },
     '(60454) 2000 CH105 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
@@ -4084,6 +4097,15 @@
         file: 'spectra/files/Fornasier2009/2003OP32.txtU', // Fig. 3
         geometric_albedo: ['Generic_Bessell.V', [0.540, +0.110, -0.150]],
     },
+    '(120178) 2003 OP32 | Terai2018, Müller2020': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[4.18, 0.09], [3.62, 0.14], [3.20, 0.11], [3.11, 0.09], [3.03, 0.08]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+        geometric_albedo: ['Generic_Bessell.V', [0.540, +0.110, -0.150]],
+    },
     '(120178) 2003 OP32 | MBOSS, Müller2020': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'Generic_Bessell',
@@ -4868,6 +4890,15 @@
         file: 'spectra/files/AlvarezCandal2008/2005RN43.txtU', // Fig. 2
         geometric_albedo: ['Generic_Bessell.V', [0.107, +0.029, -0.018]],
     },
+    '(145452) Ritona | Terai2018, Vilenius2012': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[4.33, 0.06], [3.32, 0.04], [2.75, 0.04], [2.45, 0.07], [2.34, 0.06]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+        geometric_albedo: ['Generic_Bessell.V', [0.107, +0.029, -0.018]],
+    },
     '(145452) Ritona | MBOSS, Vilenius2012': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
@@ -5154,6 +5185,14 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.035, +0.019, -0.011]],
+    },
+    '(183963) 2004 DJ64 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[7.68, 0.17], [6.99, 0.12], [6.20, 0.15], [6.32, 0.59], [5.55, 0.27]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
     },
     '(192388) 1996 RD29 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -5733,6 +5772,14 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
+    '(434194) 2003 FK127 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[8.02, 0.16], [6.44, 0.10], [6.14, 0.12], [5.47, 0.47], [5.83, 0.40]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+    },
     '(434620) 2005 VD | Hromakina2021a': {
         tags: ['Solar System', 'minor body/centaur/Damocloid'],
         photometric_system: 'Generic_Bessell',
@@ -6076,6 +6123,14 @@
         tags: ['Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/extreme TNO'],
         slope: {start: 500, stop: 900, percent_per_100nm: [12, 2]}, // mean
     },
+    '(483002) 2014 QS441 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[5.64, 0.14], [5.14, 0.09], [4.85, 0.06], [4.74, 0.09], [4.82, 0.33]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+    },
     'Cruikshank2020': [
         'Organic Components of Small Bodies in the Outer Solar System: Some Results of the New Horizons Mission',
         'DOI: 10.3390/life10080126', 'https://www.mdpi.com/2075-1729/10/8/126',
@@ -6141,6 +6196,30 @@
         br: [[0.063, 0.004], [0.090, 0.008], [0.143, 0.011], [0.146, 0.011]], // Fig. 5D
         geometric_albedo: ['NewHorizons_LORRI.Pan', 0.45], // brightest normal reflectance on Arrokoth that occurs at the neck and at bright spots
         phase_integral: [0.37, 0.16],
+    },
+    '(495189) 2012 VR113 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[7.11, 0.12], [6.21, 0.05], [5.72, 0.10], [5.52, 0.20], [5.32, 0.30]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+    },
+    '(504555) 2008 SO266 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[7.25, 0.07], [6.23, 0.09], [5.42, 0.10], [5.21, 0.12], [4.95, 0.13]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+    },
+    '(505412) 2013 QO95 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[7.86, 0.31], [6.42, 0.10], [5.97, 0.34], [5.54, 0.15], [5.19, 0.47]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
     },
     '(506479) 2003 HB57 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/scattered'],
@@ -6235,6 +6314,14 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
+    '(523689) 2014 DL143 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'Y'],
+        mag: [[6.71, 0.08], [5.97, 0.09], [5.22, 0.10], [5.01, 0.31]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+    },
     'Precovery2014EZ51': [ // to be replaced with MPC later https://www.minorplanetcenter.net/db_search/show_object?utf8=%E2%9C%93&object_id=523692
         'Asteroid Institute: Precovery of 2014 EZ51',
         'https://b612.ai/platform/precovery/result/?run_id=4cde8b97-e7ab-4a73-9768-f357ba754f56'
@@ -6247,6 +6334,14 @@
         sd: [0.026, 0.039, 0.037, 0.054],
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
+    },
+    '(523695) 2014 GS53 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[7.41, 0.09], [6.14, 0.16], [5.37, 0.09], [5.01, 0.12], [4.83, 0.13]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
     },
     '(523727) 2014 NW65 | SsODNet': {
         tags: ['Solar System', 'minor body/centaur'],
@@ -6261,6 +6356,14 @@
         color_indices: {'g-r': [0.8649, 0.1125], 'r-i': [0.3654, 0.0932], 'i-z': [0.2788, 0.1868]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
+    },
+    '(523763) 2014 WZ509 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[5.87, 0.09], [5.17, 0.09], [4.67, 0.05], [4.40, 0.20], [4.39, 0.15]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
     },
     'Leiva2020': [
         'Stellar Occultation by the Resonant Trans-Neptunian Object (523764) 2014 WC510 Reveals a Close Binary TNO',
@@ -6506,6 +6609,14 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
+    '(536920) 2015 FM345 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[7.23, 0.30], [6.27, 0.09], [5.29, 0.14], [5.20, 0.23], [5.02, 0.41]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+    },
     '(543454) 2014 HZ199 | SsODNet': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'SLOAN_SDSS',
@@ -6519,6 +6630,14 @@
         color_indices: {'g-r': [0.73, 0.12], 'r-i': [0.38, 0.12]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
+    },
+    '(555915) 2014 GX53 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[6.03, 0.11], [4.98, 0.03], [4.59, 0.10], [4.24, 0.11], [4.03, 0.10]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
     },
     '(562274) 2015 XW379 | Williams2025': {
         tags: ['Solar System', 'minor body/centaur'],
@@ -7051,12 +7170,20 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
+    '1994 ES2 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[8.66, 0.39], [7.38, 0.25], [6.74, 0.24], [6.10, 0.51], [7.64, 1.74]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+    },
     '1994 ES2 | Trujillo2002': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.71, 0.15], 'B-R': [1.65, 0.21]},
         calibration_system: 'Vega',
-        is_reflecting_sunlight: true
+        is_reflecting_sunlight: false,
     },
     '1994 TA | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -7304,6 +7431,22 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true
     },
+    '2001 DC106 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[7.52, 0.11], [6.22, 0.12], [5.43, 0.07], [5.07, 0.11], [5.16, 0.23]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+    },
+    '2001 DD106 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[8.6, 0.34], [7.39, 0.1], [6.63, 0.22], [6.34, 0.28], [6.05, 0.57]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+    },
     '2001 FM194 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/detached TNO'],
         photometric_system: 'Generic_Bessell',
@@ -7366,12 +7509,44 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
+    '2002 CT154 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[7.79, 0.20], [6.83, 0.17], [5.87, 0.19], [5.84, 0.15], [5.48, 0.38]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+    },
+    '2002 CY154 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[7.93, 0.27], [6.57, 0.12], [5.86, 0.12], [5.69, 0.34], [4.86, 0.45]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+    },
+    '2002 FV6 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[8.01, 0.31], [6.13, 0.12], [5.78, 0.17], [5.52, 0.36], [4.90, 0.39]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+    },
     '2002 GS32 | Sheppard2012': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.90, 0.04], 'r-i': [0.41, 0.04]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true
+    },
+    '2002 PD155 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z'],
+        mag: [[8.28, 0.28], [7.14, 0.74], [6.53, 0.13], [6.61, 0.26]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
     },
     '2002 PQ152 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -7386,6 +7561,14 @@
         color_indices: {'g-r': [1.00, 0.02], 'r-i': [0.46, 0.02]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true
+    },
+    '2003 FL127 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[7.79, 0.17], [6.33, 0.12], [5.50, 0.22], [5.35, 0.20], [5.01, 0.16]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
     },
     '2003 FZ129 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/detached TNO'],
@@ -7408,6 +7591,14 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.R', [0.050, 0.021]],
+    },
+    '2004 DM71 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[8.33, 0.19], [7.12, 0.14], [6.59, 0.11], [6.46, 0.39], [7.18, 1.14]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
     },
     '2004 EG96 | Sheppard2012': {
         tags: ['Solar System', 'minor body/TNO/resonant TNO'],
@@ -7457,6 +7648,14 @@
         color_indices: {'sloan_g-sloan_r': [0.96, 0.06], 'sloan_g-sloan_i': [1.42, 0.05]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
+    },
+    '2005 GX186 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[7.68, 0.21], [6.29, 0.12], [6.15, 0.15], [5.60, 0.24], [5.46, 0.60]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
     },
     '2005 TN53 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/Neptune trojan'],
@@ -7711,12 +7910,28 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.028, 0.064]],
     },
+    '2013 QP95 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[7.68, 0.28], [7.00, 0.10], [6.47, 0.09], [6.13, 0.15], [6.05, 0.54]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+    },
     '2013 RC158 | Bolin2023a': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.32, 0.09], 'r-i': [0.27, 0.08]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
+    },
+    '2013 RD98 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/resonant TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[7.82, 0.17], [7.03, 0.13], [6.59, 0.27], [6.24, 0.36], [5.80, 0.33]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
     },
     '2013 RF98 | deLeón2017': {
         tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/TNO/extreme TNO'],
@@ -7811,6 +8026,14 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
+    '2014 NB66 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[5.96, 0.19], [5.49, 0.12], [4.70, 0.12], [4.12, 0.10], [4.40, 0.28]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+    },
     '2014 OS393 | Benecchi2019': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'HST_WFC3_UVIS1',
@@ -7869,6 +8092,22 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
+    '2014 TU85 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[8.92, 0.38], [7.93, 0.26], [7.64, 0.25], [7.25, 0.38], [6.88, 0.42]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+    },
+    '2014 UF224 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[7.52, 0.25], [6.94, 0.17], [6.43, 0.26], [6.07, 0.34], [5.79, 0.29]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
+    },
     '2014 UU240 | Bolin2023a': {
         tags: ['Solar System', 'minor body/Neptune trojan'],
         photometric_system: 'SLOAN_SDSS',
@@ -7902,6 +8141,14 @@
         color_indices: {'g-r': [0.42, 0.08], 'r-i': [0.15, 0.09]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
+    },
+    '2015 QT11 | Terai2018': {
+        tags: ['Solar System', 'minor body/TNO/scattered'],
+        photometric_system: 'Subaru_HSC',
+        filters: ['g', 'r', 'i', 'z', 'Y'],
+        mag: [[9.03, 0.17], [8.15, 0.16], [8.13, 0.64], [7.44, 0.40], [6.79, 0.26]],
+        calibration_system: 'AB',
+        is_reflecting_sunlight: false,
     },
     '2015 VU207 | Markwardt2023': {
         tags: ['Solar System', 'minor body/Neptune trojan'],

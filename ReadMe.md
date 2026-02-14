@@ -80,7 +80,7 @@ The following phase functions are supported:
 - `HG1G2`: requires `G_1` and `G_2` (`H` is optional), see [Muinonen et al. 2010](https://ui.adsabs.harvard.edu/abs/2010Icar..209..542M/abstract);
 - `Hapke`: requires `w`, `bo`, `h`, `b`, `c` and `theta`, see [Hapke, B. 1984](https://www.sciencedirect.com/science/article/abs/pii/001910358490054X).
 
-For photometry, it is necessary to specify calibration spectrum if it's not an equal-energy irradiance density by wavelengths ([this link](https://hst-docs.stsci.edu/acsdhb/chapter-5-acs-data-analysis/5-1-photometry#id-5.1Photometry-5.1.15.1.1PhotometricSystems,Units,andZeropoints) may help). Typically you need to specify `calibration_system: 'AB'` when working with Sloan filters and `calibration_system: 'Vega'` for all other cases.
+For photometry, it is necessary to specify calibration spectrum if it's not an equal-energy irradiance density by wavelengths ([this link](https://hst-docs.stsci.edu/acsdhb/chapter-5-acs-data-analysis/5-1-photometry#id-5.1Photometry-5.1.15.1.1PhotometricSystems,Units,andZeropoints) may help). Typically you need to specify `calibration_system: 'AB'` when working with Sloan filters (u, g, r, i, z) and `calibration_system: 'Vega'` for all other cases. For absolute magnitudes, use `is_reflecting_sunlight: false`.
 
 Supported input keys of a database unit:
 - `tags` (list): strings categorizing the spectral data, optional
