@@ -73,25 +73,25 @@
         'DOI: 10.48550/arXiv.1703.02670', 'https://arxiv.org/abs/1703.02670',
         'https://ui.adsabs.harvard.edu/abs/2017arXiv170302670M/abstract'
     ],
-    'Mercury | Payne2025, Mallama2017a': {
+    'Mercury | Payne2025, Domingue2011': {
         tags: ['featured', 'Solar System', 'planetary body/planet', 'Mercury'],
         file: 'spectra/files/Payne2025/mercury_composite_data.txtU',
         is_geometric_albedo: true,
-        bond_albedo: [0.088, 0.003],
+        spherical_albedo: ['Messenger_MDIS_WAC.560BP5', 0.070],
     },
-    'Mercury | Mallama2017b, Mallama2017a': {
+    'Mercury | Mallama2017b, Domingue2011': {
         tags: ['Solar System', 'planetary body/planet', 'Mercury'],
         file: 'spectra/files/Madden2018/Mercury_Mallama2017_Albedo.txtU',
         geometric_albedo: ['Generic_Bessell.V', 0.142],
-        bond_albedo: [0.088, 0.003],
+        spherical_albedo: ['Messenger_MDIS_WAC.560BP5', 0.070],
     },
-    'Mercury | Mallama2017a, Mallama2017b': {
+    'Mercury | Mallama2017a, Domingue2011': {
         tags: ['Solar System', 'planetary body/planet', 'Mercury'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
         br_geometric: [0.087, 0.105, 0.142, 0.172, 0.208,
                        0.158, 0.180],
-        bond_albedo: [0.088, 0.003],
+        spherical_albedo: ['Messenger_MDIS_WAC.560BP5', 0.070],
     },
     'Mercury | Domingue2011': {
         tags: ['Solar System', 'planetary body/planet', 'Mercury'],
@@ -100,12 +100,12 @@
         br_geometric: [0.119, 0.134, 0.152, 0.165, 0.180, 0.192, 0.214, 0.234, 0.247, 0.254],
         br_spherical: [0.053, 0.061, 0.070, 0.077, 0.084, 0.089, 0.098, 0.105, 0.110, 0.113],
     },
-    'Mercury | Crow2011, Mallama2017a, Mallama2017b': { // phase angle 77°
+    'Mercury | Crow2011, Payne2025, Domingue2011': { // phase angle 77°
         tags: ['Solar System', 'planetary body/planet', 'Mercury'],
         nm: [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5],
         br: [0.61, 0.56, 0.66, 0.71, 0.86, 1.00, 1.37, 1.50, 1.77, 2.01],
-        geometric_albedo: ['Generic_Bessell.V', 0.142],
-        bond_albedo: [0.088, 0.003],
+        geometric_albedo: ['Generic_Bessell.V', 0.138],
+        spherical_albedo: ['Messenger_MDIS_WAC.560BP5', 0.070],
     },
 
     // Venus
