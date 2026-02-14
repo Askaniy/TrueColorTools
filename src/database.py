@@ -62,10 +62,20 @@ def obj_names_dict(database: dict[ObjectName, dict], tag: str, searched: str, la
             if tag == 'ALL' or is_tag_in_obj(tag, obj_data):
                 names |= {obj_name(lang): obj_name}
     else:
+        # "Search engine"
         searched = searched.lower()
         for obj_name in database.keys():
-            if searched in obj_name.indexed_name(lang).lower() or searched in obj_name.info(lang).lower():
-                names |= {obj_name(lang): obj_name}
+            # commented construction similar to (_ or _ or _ or _)
+            # 1, 2. Search within English name and subscript numbers of provisional designation
+            if searched not in obj_name._name_raw.lower():
+                if searched not in obj_name._info_raw.lower():
+                    # 3, 4. Search within translated indexed name and additional information
+                    if searched not in obj_name.indexed_name(lang).lower():
+                        if searched not in obj_name.info(lang).lower():
+                            # This name doesn't fit
+                            continue
+            # Else, it fits
+            names |= {obj_name(lang): obj_name}
     return names
 
 # TODO: delete this funtion, and give `tab1_displayed_namesDB` to `generate_table()` instead of tag

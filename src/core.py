@@ -71,20 +71,22 @@ class ObjectName:
 
     unnamed_count = 0 # class attribute to track the number of unnamed objects
 
-    def __init__(self, name: str = ''):
+    def __init__(self, raw_input: str = ''):
         """
         Initializes the ObjectName with name parsing.
         The template is `(index) name: note (info) | reference`.
         If no name is specified, a numbered unnamed object will be created.
         """
-        self.index = self._note_en = self._info_en = self.reference = ''
-        if name == '':
+        self.index = self.reference = ''
+        self._note_raw = self._note_en = ''
+        self._info_raw = self._info_en = ''
+        if raw_input == '':
             ObjectName.unnamed_count += 1
-            self.raw_name = ObjectName.unnamed_count
-            self._name_en = f'Unnamed object {ObjectName.unnamed_count}'
+            self.raw_input = ObjectName.unnamed_count
+            self._name_raw = self._name_en = f'Unnamed object {ObjectName.unnamed_count}'
         else:
-            self.raw_name = name
-            name = name.replace('~', ' ')
+            self.raw_input = raw_input
+            name = raw_input.replace('~', ' ')
             # A tilde, as in LaTeX, denotes a (narrow) non-breaking space.
             # It is recommended to use it as a number group separator instead of a period or comma.
             if '|' in name:
@@ -97,15 +99,18 @@ class ObjectName:
             if name[-1] == ')': # stellar spectral type or something else
                 info, name = name[::-1].split('(', 1) # getting the last bracket
                 name = name[::-1] # reversing back
-                self._info_en = self.formatting_provisional_designation(info[::-1].split(')', 1)[0].strip())
+                self._info_raw = info[::-1].split(')', 1)[0].strip()
+                self._info_en = self.formatting_provisional_designation(self._info_raw)
             if ':' in name: # note
                 name, note = name.split(':', 1)
-                self._note_en = self.formatting_provisional_designation(note.strip())
+                self._note_raw = note.strip()
+                self._note_en = self.formatting_provisional_designation(self._note_raw)
             # the last check because "/" may encounter in info or notes:
             if '/' in name and name[name.index('/') - 1] in ('P', 'C', 'I'): # comet name
                 index, name = name.split('/', 1)
                 self.index = index.strip() + '/'
-            self._name_en = self.formatting_provisional_designation(name.strip())
+            self._name_raw = name.strip()
+            self._name_en = self.formatting_provisional_designation(self._name_raw)
 
     def name(self, lang: str = 'en') -> str:
         """ Returns the name in the specified language """
@@ -192,13 +197,13 @@ class ObjectName:
             return ObjectName(name)
 
     def __hash__(self) -> int:
-        """ Returns the hash value based on the object's raw name """
-        return hash(self.raw_name)
+        """ Returns the hash value based on the object's raw input """
+        return hash(self.raw_input)
 
     def __eq__(self, other) -> bool:
         """ Checks equality with another ObjectName instance """
         if isinstance(other, ObjectName):
-            return self.raw_name == other.raw_name
+            return self.raw_input == other.raw_input
         return False
 
     def __str__(self) -> str:
