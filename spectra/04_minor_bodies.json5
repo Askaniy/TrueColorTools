@@ -4634,22 +4634,36 @@
         geometric_albedo: ['Generic_Bessell.V', [0.51, 0.02]],
         phase_integral: [0.454, +0.034, -0.047], // system
     },
-    'Lacerda2009': [
-        'The Dark Red Spot on KBO Haumea',
-        'DOI: 10.48550/arXiv.0911.0009', 'https://arxiv.org/abs/0911.0009',
-        'https://ui.adsabs.harvard.edu/abs/2009epsc.conf..561L/abstract'
+    'Lacerda2008': [
+        'High-Precision Photometry of Extreme KBO 2003 EL61',
+        'DOI: 10.1088/0004-6256/135/5/1749', 'https://iopscience.iop.org/article/10.1088/0004-6256/135/5/1749',
+        'https://ui.adsabs.harvard.edu/abs/2008AJ....135.1749L/abstract'
     ],
     'SantosSanz2017': [
         '"TNOs are Cool": A survey of the trans-Neptunian region. XII. Thermal light curves of Haumea, 2003 VS2 and 2003 AZ84 with Herschel/PACS',
         'DOI: 10.1051/0004-6361/201630354', 'https://www.aanda.org/articles/aa/full_html/2017/08/aa30354-16/aa30354-16.html',
         'https://ui.adsabs.harvard.edu/abs/2017A%26A...604A..95S/abstract'
     ],
-    'Dark Red Spot (Haumea) | Lacerda2009, SantosSanz2017, Helfenstein2025': {
+    'Dark Red Spot: 25% maximum projected cross section (Haumea) | Lacerda2008, SantosSanz2017, Helfenstein2025': {
+        tags: ['Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
+        photometric_system: 'Generic_Bessell',
+        color_indices: {'B-R': 1.96}, // Fig. 7 for fractional area of 0.25 (Lacerda2008)
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.41], // calculated from Ortiz2017 albedo with albedo constrast of ~80%
+        phase_integral: [0.454, +0.034, -0.047], // system
+    },
+    'Lacerda2009': [
+        'The Dark Red Spot on KBO Haumea',
+        'DOI: 10.48550/arXiv.0911.0009', 'https://arxiv.org/abs/0911.0009',
+        'https://ui.adsabs.harvard.edu/abs/2009epsc.conf..561L/abstract'
+    ],
+    'Dark Red Spot: Unresolved photometry (Haumea) | Lacerda2009, Helfenstein2025': {
         tags: ['Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         filters: ['Generic_Bessell.B', 'Generic_Bessell.R', 'Generic_Bessell_JHKLM.J', 'Generic_Bessell_JHKLM.H'],
         br: [0.983, 1, 1.015, 1.040], // average of rotational phases 0.70 to 0.90 in Fig. 2b (DRS regions)
         sd: [0.009, 0, 0.007, 0.012],
-        geometric_albedo: ['Generic_Bessell.V', 0.41], // calculated from Ortiz2017 albedo with albedo constrast of ~80%
+        geometric_albedo: ['Generic_Bessell.V', 0.48], // calculated from Ortiz2017 albedo with albedo constrast of 95% (hemispheric model)
         phase_integral: [0.454, +0.034, -0.047], // system
     },
     'Kalup2023': [
