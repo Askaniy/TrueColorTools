@@ -271,21 +271,21 @@
         is_emissive: true,
     },
     'Debris disk of AU Microscopii | Krist2005': {
-        tags: ['extrasolar', 'debris disk'],
+        tags: ['extrasolar/debris disk'],
         photometric_system: 'HST_ACS_HRC',
         filters: ['F435W', 'F606W', 'F814W'],
         br: [1.02, 1, 0.936], // Total flux (illuminated by the host star)
         is_emissive: true, // scattered light
     },
     'Debris disk of AU Microscopii: Northwest midplane | Krist2005': {
-        tags: ['extrasolar', 'debris disk'],
+        tags: ['extrasolar/debris disk'],
         photometric_system: 'HST_ACS_HRC',
         filters: ['F435W', 'F606W', 'F814W'],
         br: [1.13, 1, 0.837], // Flux relative to the star
         is_emissive: true, // scattered light
     },
     'Debris disk of AU Microscopii: Southeast midplane | Krist2005': {
-        tags: ['extrasolar', 'debris disk'],
+        tags: ['extrasolar/debris disk'],
         photometric_system: 'HST_ACS_HRC',
         filters: ['F435W', 'F606W', 'F814W'],
         br: [1.15, 1, 0.799], // Flux relative to the star
@@ -301,14 +301,14 @@
     // absorb less energy than the porous ones (Table 5), suggesting a better fit
     // may be obtained with grain albedos in the 0.6–0.7 range"
     'Debris disk of AU Microscopii: Porous grains model | Fitzgerald2007': {
-        tags: ['extrasolar', 'debris disk'],
+        tags: ['extrasolar/debris disk'],
         filters: ['HST_ACS_HRC.F606W', 'Keck_NIRC2.H'],
         br: [0.52, 0.54], // Table 5
         is_albedo: true
     },
     // "the polarization curves in Figure 11 clearly rule out compact grains"
     'Debris disk of AU Microscopii: Compact grains model | Fitzgerald2007': {
-        tags: ['extrasolar', 'debris disk'],
+        tags: ['extrasolar/debris disk'],
         filters: ['HST_ACS_HRC.F606W', 'Keck_NIRC2.H'],
         br: [0.83, 0.81], // Table 5
         is_albedo: true,

@@ -363,7 +363,7 @@
         'https://ui.adsabs.harvard.edu/abs/2019Icar..322..144L/abstract'
     ],
     '(1) Ceres | SMASS, Li2019': {
-        tags: ['featured', 'SMASS', 'Solar System', 'planetary body/dwarf planet', 'minor body/asteroid/main belt', 'spacecraft target/Dawn target'],
+        tags: ['featured', 'SMASS', 'Solar System', 'planetary body/dwarf planet/Ceres', 'minor body/asteroid/main belt', 'spacecraft target/Dawn target'],
         file: 'spectra/files/SMASS/a000001.2.txtU',
         geometric_albedo: ['Dawn_FC.F2', [0.096, 0.006]],
         spherical_albedo: ['Dawn_FC.F2', [0.037, 0.002]],
@@ -379,14 +379,14 @@
         'https://ui.adsabs.harvard.edu/abs/2022EPSC...16...96L/abstract'
     ],
     'Ahuna Mons (Ceres) | Li2022': {
-        tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/asteroid/main belt', 'Ceres', 'spacecraft target/Dawn target'],
+        tags: ['Solar System', 'planetary body/dwarf planet/Ceres', 'minor body/asteroid/main belt', 'spacecraft target/Dawn target'],
         photometric_system: 'Dawn_FC',
         filters: ['F8', 'F2', 'F7', 'F3', 'F6', 'F4', 'F5'],
         br_geometric: [0.097, 0.103, 0.098, 0.094, 0.096, 0.092, 0.088],
         br_spherical: [0.039, 0.043, 0.042, 0.040, 0.042, 0.041, 0.039],
     },
     'Cerealia Facula (Ceres) | Schröder2017': {
-        tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/asteroid/main belt', 'Ceres', 'spacecraft target/Dawn target'],
+        tags: ['Solar System', 'planetary body/dwarf planet/Ceres', 'minor body/asteroid/main belt', 'spacecraft target/Dawn target'],
         photometric_system: 'Dawn_FC',
         filters: ['F8', 'F2', 'F7', 'F3', 'F6', 'F4', 'F5'],
         br: [0.186, 0.262, 0.281, 0.300, 0.308, 0.316, 0.317],
@@ -394,20 +394,20 @@
         geometric_albedo: ['Generic_Bessell.V', [0.6, 0.1]], // normal visual albedo at 1.3 km per pixel
     },
     'Haulani Crater (Ceres) | Li2022': { // Average
-        tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/asteroid/main belt', 'Ceres', 'spacecraft target/Dawn target'],
+        tags: ['Solar System', 'planetary body/dwarf planet/Ceres', 'minor body/asteroid/main belt', 'spacecraft target/Dawn target'],
         photometric_system: 'Dawn_FC',
         filters: ['F8', 'F2', 'F7', 'F3', 'F6', 'F4', 'F5'],
         br_geometric: [0.088, 0.093, 0.089, 0.087, 0.089, 0.086, 0.083],
         br_spherical: [0.034, 0.036, 0.035, 0.034, 0.036, 0.035, 0.033],
     },
     'Vinalia Faculae (Ceres) | Schröder2017': {
-        tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/asteroid/main belt', 'Ceres', 'spacecraft target/Dawn target'],
+        tags: ['Solar System', 'planetary body/dwarf planet/Ceres', 'minor body/asteroid/main belt', 'spacecraft target/Dawn target'],
         photometric_system: 'Dawn_FC',
         filters: ['F8', 'F2', 'F7', 'F3', 'F6', 'F4', 'F5'],
         br: [0.112, 0.123, 0.118, 0.120, 0.122, 0.122, 0.118],
     },
     'Yalode Crater (Ceres) | Li2022': { // Ejecta
-        tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/asteroid/main belt', 'Ceres', 'spacecraft target/Dawn target'],
+        tags: ['Solar System', 'planetary body/dwarf planet/Ceres', 'minor body/asteroid/main belt', 'spacecraft target/Dawn target'],
         photometric_system: 'Dawn_FC',
         filters: ['F8', 'F2', 'F7', 'F3', 'F6', 'F4', 'F5'],
         br_geometric: [0.088, 0.093, 0.090, 0.088, 0.091, 0.089, 0.085],
@@ -3214,7 +3214,7 @@
         phase_function: ['HG1G2', {H: [13.009767, +0.104947, -0.116899], G_1: [0.545874, +0.204576, -0.234137], G_2: [0.191298, +0.118304, -0.112887]}],
     },
     '(60454) 2000 CH105 | Terai2018': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/cold classical TNO'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z', 'Y'],
         mag: [[7.52, 0.21], [6.23, 0.14], [5.70, 0.11], [5.47, 0.11], [5.32, 0.27]],
@@ -3222,7 +3222,7 @@
         is_reflecting_sunlight: false,
     },
     '(60454) 2000 CH105 | MBOSS': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO/cold classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.019, 0.086], 'V-R': [0.643, 0.096], 'R-I': [0.583, 0.095]},
         calibration_system: 'Vega',
@@ -4093,12 +4093,12 @@
         geometric_albedo: ['Generic_Bessell.V', [0.079, 0.010]],
     },
     '(120178) 2003 OP32 | Fornasier2009, Müller2020': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/hot classical TNO', 'minor body/TNO/Haumea family'],
         file: 'spectra/files/Fornasier2009/2003OP32.txtU', // Fig. 3
         geometric_albedo: ['Generic_Bessell.V', [0.540, +0.110, -0.150]],
     },
     '(120178) 2003 OP32 | Terai2018, Müller2020': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/hot classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z', 'Y'],
         mag: [[4.18, 0.09], [3.62, 0.14], [3.20, 0.11], [3.11, 0.09], [3.03, 0.08]],
@@ -4107,7 +4107,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.540, +0.110, -0.150]],
     },
     '(120178) 2003 OP32 | MBOSS, Müller2020': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO/hot classical TNO', 'minor body/TNO/Haumea family'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.662, 0.057], 'V-R': [0.375, 0.044], 'R-I': [0.305, 0.078]},
         calibration_system: 'Vega',
@@ -4115,7 +4115,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.540, +0.110, -0.150]],
     },
     '(120178) 2003 OP32 | PinillaAlonso2008, Müller2020': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/hot classical TNO', 'minor body/TNO/Haumea family'],
         slope: {start: 520, stop: 860, percent_per_100nm: [1.7, 2.0]},
         geometric_albedo: ['Generic_Bessell.V', [0.540, +0.110, -0.150]],
     },
@@ -4326,7 +4326,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.047, +0.144, -0.025]],
     },
     '(134340) Pluto | Madden2018, Helfenstein2025': {
-        tags: ['featured', 'Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
+        tags: ['featured', 'Solar System/Plutonian system', 'planetary body/dwarf planet/Pluto', 'minor body/TNO/resonant TNO/plutino', 'spacecraft target/New Horizons target'],
         file: 'spectra/files/Madden2018/Pluto_LorenziProtopapa_Albedo.txtU',
         is_geometric_albedo: true,
         phase_integral: [0.795, +0.094, -0.180],
@@ -4337,13 +4337,13 @@
         'https://ui.adsabs.harvard.edu/abs/2016A%26A...585A.131L/abstract'
     ],
     '(134340) Pluto | Lorenzi2016, Helfenstein2025': {
-        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet/Pluto', 'minor body/TNO/resonant TNO/plutino', 'spacecraft target/New Horizons target'],
         file: 'spectra/files/Pluto_Lorenzi2016.txtU', // Fig. 3
         geometric_albedo: ['Generic_Bessell.V', [0.506, +0.008, -0.012]],
         spherical_albedo: ['Generic_Bessell.V', [0.402, +0.055, -0.096]],
     },
     '(134340) Pluto | MBOSS, Helfenstein2025': {
-        tags: ['MBOSS', 'Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
+        tags: ['MBOSS', 'Solar System/Plutonian system', 'planetary body/dwarf planet/Pluto', 'minor body/TNO/resonant TNO/plutino', 'spacecraft target/New Horizons target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.867, 0.016], 'V-R': [0.515, 0.035], 'R-I': [0.400, 0.010]},
         calibration_system: 'Vega',
@@ -4367,7 +4367,7 @@
         'https://ui.adsabs.harvard.edu/abs/2023PSJ.....4..132H/abstract'
     ],
     'Baret Montes (Pluto) | Protopapa2020, Buratti2017': { // ROI d (Baret Montes + Viking Terra)
-        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet/Pluto', 'minor body/TNO/resonant TNO/plutino', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [1, 1.34, 1.73], // Red/Blue ratio: 1.34 ±0.03, NIR/Red ratio: 1.29 ±0.07 (Averaged ratios)
@@ -4376,7 +4376,7 @@
         spherical_albedo: ['NewHorizons_LORRI.Pan', 0.13], // derived from Fig. 5
     },
     'Belton Regio: Eastern part (Pluto) | Protopapa2020, Buratti2017, Hofgartner2023': {
-        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet/Pluto', 'minor body/TNO/resonant TNO/plutino', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR', 'CH4'],
         br: [0.0585206947096734, 0.0996813841082071, 0.1730562863722947, 0.1840942372929328],
@@ -4386,7 +4386,7 @@
     },
     // the the Pan filters were removed, reconstructed spectrum should be yellow to fit them
     'Belton Regio (Pluto) | Hofgartner2023, Buratti2017': {
-        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet/Pluto', 'minor body/TNO/resonant TNO/plutino', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red'],
         br: [0.07, 0.12], // Table 4 (MVIC NIR and CH4 filters not used)
@@ -4394,7 +4394,7 @@
         geometric_albedo: ['NewHorizons_LORRI.Pan', [0.14, 0.06]], // normal reflectance range of 0.08-0.20
     },
     'Lowell Regio (Pluto) | Protopapa2020, Buratti2017': {
-        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet/Pluto', 'minor body/TNO/resonant TNO/plutino', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR', 'CH4'],
         br: [0.5333532883601964, 0.6891250091800001, 0.6730569209356718, 0.6399055600979812],
@@ -4403,7 +4403,7 @@
         spherical_albedo: ['NewHorizons_LORRI.Pan', 0.76], // derived from Fig. 5
     },
     'Sputnik Planitia (Pluto) | Protopapa2020, Buratti2017, Hofgartner2023': { // ROI c (also includes similar misc. volatile-rich regions)
-        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet/Pluto', 'minor body/TNO/resonant TNO/plutino', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [1, 1.15, 1.09], // Red/Blue ratio: 1.15 ±0.06, NIR/Red ratio: 0.95 ±0.03 (Averaged ratios)
@@ -4412,7 +4412,7 @@
         spherical_albedo: ['NewHorizons_LORRI.Pan', 0.86], // Table 4 (Hofgartner2023)
     },
     'Viking Terra (Pluto) | Protopapa2020, Buratti2017': { // ROI d (Baret Montes + Viking Terra)
-        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet', 'minor body/TNO/resonant TNO/plutino', 'Pluto', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'planetary body/dwarf planet/Pluto', 'minor body/TNO/resonant TNO/plutino', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [1, 1.34, 1.73], // Red/Blue ratio: 1.34 ±0.03, NIR/Red ratio: 1.29 ±0.07 (Averaged ratios)
@@ -4426,7 +4426,7 @@
         'https://ui.adsabs.harvard.edu/abs/2018Icar..315...30C/abstract'
     ],
     '(134340 I) Charon | Cook2018, Helfenstein2025': {
-        tags: ['featured', 'Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'Charon', 'spacecraft target/New Horizons target'],
+        tags: ['featured', 'Solar System/Plutonian system', 'planetary body/large moon/Charon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.99, 1, 1.04], // Blue/Red ratio: 0.99 ±0.08, Red/NIR ratio: 0.96 ±0.09 (Averaged ratios)
@@ -4435,7 +4435,7 @@
         spherical_albedo: ['Generic_Bessell.V', [0.228, +0.006, -0.039]],
     },
     '(134340 I) Charon | Protopapa2020, Helfenstein2025': {
-        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'Charon', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'planetary body/large moon/Charon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR', 'CH4'],
         br: [0.292, 0.288, 0.288, 0.290], // traced from Fig. 11
@@ -4444,7 +4444,7 @@
         spherical_albedo: ['Generic_Bessell.V', [0.228, +0.006, -0.039]],
     },
     '(134340 I) Charon | PinillaAlonso2007, Helfenstein2025': {
-        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'Charon', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'planetary body/large moon/Charon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         file: 'spectra/files/PinillaAlonso2007/Charon.txtU', // Fig. 1
         geometric_albedo: ['Generic_Bessell.V', [0.408, +0.004, -0.005]],
         spherical_albedo: ['Generic_Bessell.V', [0.228, +0.006, -0.039]],
@@ -4455,7 +4455,7 @@
         'https://ui.adsabs.harvard.edu/abs/2022PSJ.....3...95V/abstract'
     ],
     '(134340 I) Charon | Verbiscer2022, Helfenstein2025': {
-        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'Charon', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'planetary body/large moon/Charon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.7315, 0.0013], 'V-R': 0.4},
         calibration_system: 'Vega',
@@ -4469,7 +4469,7 @@
         'https://ui.adsabs.harvard.edu/abs/2016Natur.539...65G/abstract'
     ],
     '(134340 I) Charon: 50°—60° N | Grundy2016, Buratti2017': {
-        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'Charon', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'planetary body/large moon/Charon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.799, 0.853, 0.920],
@@ -4478,7 +4478,7 @@
         spherical_albedo: ['NewHorizons_LORRI.Pan', 0.27], // derived from Fig. 6
     },
     '(134340 I) Charon: 70°—80° N | Grundy2016, Buratti2017': {
-        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'Charon', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'planetary body/large moon/Charon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.426, 0.539, 0.720],
@@ -4487,7 +4487,7 @@
         spherical_albedo: ['NewHorizons_LORRI.Pan', 0.19], // derived from Fig. 6
     },
     'Mordor Macula (Charon) | Cook2018, Buratti2017': {
-        tags: ['Solar System/Plutonian system', 'planetary body/planetary-mass moon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'Charon', 'spacecraft target/New Horizons target'],
+        tags: ['Solar System/Plutonian system', 'planetary body/large moon/Charon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.79, 1, 1.35], // Blue/Red ratio: 0.79 ±0.05, Red/NIR ratio: 0.74 ±0.06 (Averaged ratios)
@@ -4886,12 +4886,12 @@
         geometric_albedo: ['Generic_Bessell.V', [0.102, +0.057, -0.029]],
     },
     '(145452) Ritona | AlvarezCandal2008, Vilenius2012': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/hot classical TNO', 'minor body/TNO/midsize TNO'],
         file: 'spectra/files/AlvarezCandal2008/2005RN43.txtU', // Fig. 2
         geometric_albedo: ['Generic_Bessell.V', [0.107, +0.029, -0.018]],
     },
     '(145452) Ritona | Terai2018, Vilenius2012': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/hot classical TNO'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z', 'Y'],
         mag: [[4.33, 0.06], [3.32, 0.04], [2.75, 0.04], [2.45, 0.07], [2.34, 0.06]],
@@ -4900,7 +4900,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.107, +0.029, -0.018]],
     },
     '(145452) Ritona | MBOSS, Vilenius2012': {
-        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
+        tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO/hot classical TNO', 'minor body/TNO/midsize TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [0.940, 0.047], 'V-R': [0.592, 0.043], 'R-I': [0.486, 0.064]},
         calibration_system: 'Vega',
@@ -5187,7 +5187,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.035, +0.019, -0.011]],
     },
     '(183963) 2004 DJ64 | Terai2018': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/cold classical TNO'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z', 'Y'],
         mag: [[7.68, 0.17], [6.99, 0.12], [6.20, 0.15], [6.32, 0.59], [5.55, 0.27]],
@@ -5773,7 +5773,7 @@
         is_reflecting_sunlight: true,
     },
     '(434194) 2003 FK127 | Terai2018': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/cold classical TNO'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z', 'Y'],
         mag: [[8.02, 0.16], [6.44, 0.10], [6.14, 0.12], [5.47, 0.47], [5.83, 0.40]],
@@ -6124,7 +6124,7 @@
         slope: {start: 500, stop: 900, percent_per_100nm: [12, 2]}, // mean
     },
     '(483002) 2014 QS441 | Terai2018': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/hot classical TNO'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z', 'Y'],
         mag: [[5.64, 0.14], [5.14, 0.09], [4.85, 0.06], [4.74, 0.09], [4.82, 0.33]],
@@ -6214,7 +6214,7 @@
         is_reflecting_sunlight: false,
     },
     '(505412) 2013 QO95 | Terai2018': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/hot classical TNO'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z', 'Y'],
         mag: [[7.86, 0.31], [6.42, 0.10], [5.97, 0.34], [5.54, 0.15], [5.19, 0.47]],
@@ -6610,7 +6610,7 @@
         is_reflecting_sunlight: true,
     },
     '(536920) 2015 FM345 | Terai2018': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/hot classical TNO'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z', 'Y'],
         mag: [[7.23, 0.30], [6.27, 0.09], [5.29, 0.14], [5.20, 0.23], [5.02, 0.41]],
@@ -7171,7 +7171,7 @@
         is_reflecting_sunlight: true,
     },
     '1994 ES2 | Terai2018': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/cold classical TNO'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z', 'Y'],
         mag: [[8.66, 0.39], [7.38, 0.25], [6.74, 0.24], [6.10, 0.51], [7.64, 1.74]],
@@ -7432,7 +7432,7 @@
         is_reflecting_sunlight: true
     },
     '2001 DC106 | Terai2018': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/cold classical TNO'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z', 'Y'],
         mag: [[7.52, 0.11], [6.22, 0.12], [5.43, 0.07], [5.07, 0.11], [5.16, 0.23]],
@@ -7440,7 +7440,7 @@
         is_reflecting_sunlight: false,
     },
     '2001 DD106 | Terai2018': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/cold classical TNO'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z', 'Y'],
         mag: [[8.6, 0.34], [7.39, 0.1], [6.63, 0.22], [6.34, 0.28], [6.05, 0.57]],
@@ -7510,7 +7510,7 @@
         is_reflecting_sunlight: true,
     },
     '2002 CT154 | Terai2018': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/cold classical TNO'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z', 'Y'],
         mag: [[7.79, 0.20], [6.83, 0.17], [5.87, 0.19], [5.84, 0.15], [5.48, 0.38]],
@@ -7518,7 +7518,7 @@
         is_reflecting_sunlight: false,
     },
     '2002 CY154 | Terai2018': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/cold classical TNO'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z', 'Y'],
         mag: [[7.93, 0.27], [6.57, 0.12], [5.86, 0.12], [5.69, 0.34], [4.86, 0.45]],
@@ -7526,7 +7526,7 @@
         is_reflecting_sunlight: false,
     },
     '2002 FV6 | Terai2018': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/cold classical TNO'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z', 'Y'],
         mag: [[8.01, 0.31], [6.13, 0.12], [5.78, 0.17], [5.52, 0.36], [4.90, 0.39]],
@@ -7541,7 +7541,7 @@
         is_reflecting_sunlight: true
     },
     '2002 PD155 | Terai2018': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/cold classical TNO'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z'],
         mag: [[8.28, 0.28], [7.14, 0.74], [6.53, 0.13], [6.61, 0.26]],
@@ -7593,7 +7593,7 @@
         geometric_albedo: ['Generic_Bessell.R', [0.050, 0.021]],
     },
     '2004 DM71 | Terai2018': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/cold classical TNO'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z', 'Y'],
         mag: [[8.33, 0.19], [7.12, 0.14], [6.59, 0.11], [6.46, 0.39], [7.18, 1.14]],
@@ -7650,7 +7650,7 @@
         is_reflecting_sunlight: true,
     },
     '2005 GX186 | Terai2018': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/cold classical TNO'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z', 'Y'],
         mag: [[7.68, 0.21], [6.29, 0.12], [6.15, 0.15], [5.60, 0.24], [5.46, 0.60]],
@@ -8027,7 +8027,7 @@
         is_reflecting_sunlight: true,
     },
     '2014 NB66 | Terai2018': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/cold classical TNO'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z', 'Y'],
         mag: [[5.96, 0.19], [5.49, 0.12], [4.70, 0.12], [4.12, 0.10], [4.40, 0.28]],
@@ -8101,7 +8101,7 @@
         is_reflecting_sunlight: false,
     },
     '2014 UF224 | Terai2018': {
-        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        tags: ['Solar System', 'minor body/TNO/classical TNO/hot classical TNO'],
         photometric_system: 'Subaru_HSC',
         filters: ['g', 'r', 'i', 'z', 'Y'],
         mag: [[7.52, 0.25], [6.94, 0.17], [6.43, 0.26], [6.07, 0.34], [5.79, 0.29]],

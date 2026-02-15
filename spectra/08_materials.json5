@@ -14,7 +14,7 @@
     ],
     // Drift
     'Bright red drift at Pathfinder landing site (Mars) | McSween1999': {
-        tags: ['material/drift and soil', 'Mars'],
+        tags: ['material/drift and soil'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
             0.049, 0.066, 0.094, 0.180, 0.236, 0.274,
@@ -24,7 +24,7 @@
     },
     // Rocks
     'Bright rock at Pathfinder landing site (Mars) | Smith1997': {
-        tags: ['material/rock', 'Mars'],
+        tags: ['material/rock'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
             0.067, 0.085, 0.111, 0.186, 0.224, 0.242,
@@ -33,7 +33,7 @@
         is_albedo: true, // reflectance
     },
     'Dark rock at Pathfinder landing site (Mars) | Smith1997': {
-        tags: ['material/rock', 'Mars'],
+        tags: ['material/rock'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
             0.048, 0.054, 0.072, 0.096, 0.112, 0.116,
@@ -42,7 +42,7 @@
         is_albedo: true, // reflectance
     },
     'Pink rock at Pathfinder landing site (Mars) | Smith1997': {
-        tags: ['material/rock', 'Mars'],
+        tags: ['material/rock'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
             0.050, 0.073, 0.113, 0.231, 0.310, 0.361,
@@ -51,7 +51,7 @@
         is_albedo: true, // reflectance
     },
     'Rock at Pathfinder landing site (Mars) | Maki1999': {
-        tags: ['material/rock', 'Mars'],
+        tags: ['material/rock'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
             0.05418, 0.08397, 0.10971, 0.15711, 0.14628, 0.13409,
@@ -61,7 +61,7 @@
     },
     // Soils
     'Bright soil at Pathfinder landing site (Mars) | Smith1997': {
-        tags: ['material/drift and soil', 'Mars'],
+        tags: ['material/drift and soil'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
             0.064, 0.085, 0.119, 0.223, 0.301, 0.351,
@@ -70,7 +70,7 @@
         is_albedo: true, // reflectance
     },
     'Dark soil at Pathfinder landing site (Mars) | Smith1997': {
-        tags: ['material/drift and soil', 'Mars'],
+        tags: ['material/drift and soil'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
             0.041, 0.053, 0.075, 0.133, 0.166, 0.185,
@@ -79,7 +79,7 @@
         is_albedo: true, // reflectance
     },
     'Disturbed soil at Pathfinder landing site (Mars) | Smith1997': {
-        tags: ['material/drift and soil', 'Mars'],
+        tags: ['material/drift and soil'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
             0.041, 0.060, 0.088, 0.168, 0.226, 0.261,
@@ -88,7 +88,7 @@
         is_albedo: true, // reflectance
     },
     'Lamb-like soil at Pathfinder landing site (Mars) | Smith1997': { // (has intermediate spectral-characteristics between bright and dark soils)
-        tags: ['material/drift and soil', 'Mars'],
+        tags: ['material/drift and soil'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
             0.042, 0.057, 0.079, 0.145, 0.193, 0.224,
@@ -97,7 +97,7 @@
         is_albedo: true, // reflectance
     },
     'Soil at Pathfinder landing site (Mars) | Maki1999': {
-        tags: ['material/drift and soil', 'Mars'],
+        tags: ['material/drift and soil'],
         nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
         br: [
             0.08668, 0.13138, 0.1842, 0.33318, 0.3535, 0.34266,
@@ -112,12 +112,12 @@
         'https://ui.adsabs.harvard.edu/abs/2009LPI....40.2047B/abstract'
     ],
     'Ice at Phoenix landing site (Mars) | Blaney2009': { // Sol 28
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Blaney2009/mars_ice.txtU', // https://zenodo.org/records/4653768
         is_albedo: true,
     },
     'Soil at Phoenix landing site (Mars) | Blaney2009': {
-        tags: ['material/drift and soil', 'Mars'],
+        tags: ['material/drift and soil'],
         file: 'spectra/files/Blaney2009/mars_soil.txtU', // https://zenodo.org/records/4653768
         is_albedo: true,
     },
@@ -128,127 +128,127 @@
         'https://ui.adsabs.harvard.edu/abs/2021JGRE..12606910K/abstract'
     ],
     'Martian dust, 130 nm | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/dust_130nm.txtU',
         is_albedo: true
     },
     'Martian dust, 165 nm | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/dust_165nm.txtU',
         is_albedo: true
     },
     'Martian dust, 180 nm | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/dust_180nm.txtU',
         is_albedo: true
     },
     'Martian snow, 100 μm | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/100_clean_snow.txtU',
         is_albedo: true
     },
     'Martian snow, 100 μm and 0.01% dust | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/100_dusty_snow_content1e-4.txtU',
         is_albedo: true
     },
     'Martian snow, 100 μm and 0.1% dust | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/100_dusty_snow_content1e-3.txtU',
         is_albedo: true
     },
     'Martian snow, 100 μm and 1% dust | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/100_dusty_snow_content1e-2.txtU',
         is_albedo: true
     },
     'Martian snow, 100 μm and 10% dust | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/100_dusty_snow_content1e-1.txtU',
         is_albedo: true
     },
     'Martian snow, 350 μm | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/350_clean_snow.txtU',
         is_albedo: true
     },
     'Martian snow, 350 μm and 0.015% dust | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/350_dusty_snow_content15e-5.txtU',
         is_albedo: true
     },
     'Martian snow, 500 μm | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/500_clean_snow.txtU',
         is_albedo: true
     },
     'Martian snow, 500 μm and 0.01% dust | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/500_dusty_snow_content1e-4.txtU',
         is_albedo: true
     },
     'Martian snow, 500 μm and 0.1% dust | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/500_dusty_snow_content1e-3.txtU',
         is_albedo: true
     },
     'Martian snow, 500 μm and 1% dust | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/500_dusty_snow_content1e-2.txtU',
         is_albedo: true
     },
     'Martian snow, 500 μm and 10% dust | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/500_dusty_snow_content1e-1.txtU',
         is_albedo: true
     },
     'Martian firn, 2500 μm | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/2500_clean_firn.txtU',
         is_albedo: true
     },
     'Martian firn, 2500 μm and 0.01% dust | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/2500_dusty_firn_content1e-4.txtU',
         is_albedo: true
     },
     'Martian firn, 2500 μm and 0.1% dust | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/2500_dusty_firn_content1e-3.txtU',
         is_albedo: true
     },
     'Martian firn, 2500 μm and 1% dust | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/2500_dusty_firn_content1e-2.txtU',
         is_albedo: true
     },
     'Martian firn, 2500 μm and 10% dust | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/2500_dusty_firn_content1e-1.txtU',
         is_albedo: true
     },
     'Martian glacier, 14000 μm | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/14000_clean_ice.txtU',
         is_albedo: true
     },
     'Martian glacier, 14000 μm and 0.01% dust | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/14000_dusty_ice_content1e-4.txtU',
         is_albedo: true
     },
     'Martian glacier, 14000 μm and 0.1% dust | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/14000_dusty_ice_content1e-3.txtU',
         is_albedo: true
     },
     'Martian glacier, 14000 μm and 1% dust | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/14000_dusty_ice_content1e-2.txtU',
         is_albedo: true
     },
     'Martian glacier, 14000 μm and 10% dust | Khuller2021': {
-        tags: ['material/ice and dust', 'Mars'],
+        tags: ['material/ice and dust'],
         file: 'spectra/files/Khuller2021/14000_dusty_ice_content1e-1.txtU',
         is_albedo: true
     },
@@ -265,12 +265,12 @@
         'https://scixplorer.org/abs/2012GeoRL..39.4309A/abstract'
     ],
     'Solid methane | Adams2012': {
-        tags: ['material/methane', 'Titan'],
+        tags: ['material/methane'],
         file: 'spectra/files/Adams2012/Solid_CH4.txtU',
         is_albedo: true
     },
     'Liquid methane | Adams2012': {
-        tags: ['material/methane', 'Titan'],
+        tags: ['material/methane'],
         file: 'spectra/files/Adams2012/Liquid_CH4.txtU',
         is_albedo: true
     },
@@ -296,7 +296,7 @@
     // Tested on water: albedo is consistent, but color is much less blue than should be.
     // The n used was from https://ui.adsabs.harvard.edu/abs/1973ApOpt..12..555H/abstract
     'Liquid methane | MartonchikOrton1994': { // Table 1, column a, referring to Arakawa et al. 1986
-        tags: ['material/methane', 'Titan'],
+        tags: ['material/methane'],
         nm: [400, 600, 800, 1000, 1200, 2000],
         br_geometric: [0.04917, 0.04827, 0.04768, 0.04738, 0.04738, 0.04679],
         br_spherical: [0.05886, 0.05837, 0.05804, 0.05788, 0.05788, 0.05755],
