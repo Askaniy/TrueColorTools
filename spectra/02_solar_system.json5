@@ -181,7 +181,7 @@
         'https://ui.adsabs.harvard.edu/abs/2005SoSyR..39..267M/abstract'
     ],
     'Surface of Venus | Maiorov2005': {
-        tags: ['featured', 'Solar System', 'planetary body/planet/Venus/Venusian surface feature'],
+        tags: ['featured', 'Solar System', 'planetary body/planet/Venus'],
         nm: [440, 450, 460, 470, 480, 490, 500, 505, 700],
         br: [0.089, 0.092, 0.095, 0.097, 0.098, 0.099, 0.1, 0.1, 0.1],
         is_albedo: true,
@@ -192,14 +192,14 @@
         'https://ui.adsabs.harvard.edu/abs/1980Icar...41...65E/abstract'
     ],
     'Surface of Venus: Venera 9 | Ekonomov1980': {
-        tags: ['Solar System', 'planetary body/planet/Venus/Venusian surface feature'],
+        tags: ['Solar System', 'planetary body/planet/Venus'],
         nm: [540, 620, 670, 760, 870],
         br: [0.013, 0.044, 0.034, 0.069, 0.096], // extracted from Fig. 8
         sd: [0.008, 0.010, 0.010, 0.016, 0.023],
         is_albedo: true,
     },
     'Surface of Venus: Venera 10 | Ekonomov1980': {
-        tags: ['Solar System', 'planetary body/planet/Venus/Venusian surface feature'],
+        tags: ['Solar System', 'planetary body/planet/Venus'],
         nm: [540, 610, 660, 750, 880],
         br: [0.044, 0.061, 0.066, 0.073, 0.158], // extracted from Fig. 8
         sd: [0.012, 0.015, 0.016, 0.021, 0.047],
@@ -211,7 +211,7 @@
     ],
     'Surface of Venus: Venera 11 | Ekonomov1979': {
         // Obtained from the model of the lowest layers of the atmosphere.
-        tags: ['Solar System', 'planetary body/planet/Venus/Venusian surface feature'],
+        tags: ['Solar System', 'planetary body/planet/Venus'],
         nm: [450, 500, 635],
         br: [0.07, 0.15, 0.23],
         is_albedo: true,
