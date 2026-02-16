@@ -1446,8 +1446,27 @@
         'DOI: 10.1016/j.icarus.2012.06.021', 'https://www.sciencedirect.com/science/article/pii/S0019103512002503',
         'https://ui.adsabs.harvard.edu/abs/2012Icar..221.1101S/abstract'
     ],
-    '(2867) Šteins | GaiaDR3, Spjuth2012': {
+    '(2867) Šteins | Keller2010, Spjuth2012': {
         tags: ['featured', 'Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Rosetta target'],
+        filters: [
+            'Rosetta_OSIRIS_WAC.UV245', 'Rosetta_OSIRIS_WAC.CS', 'Rosetta_OSIRIS_NAC.Far_UV', 'Rosetta_OSIRIS_WAC.UV295',
+            'Rosetta_OSIRIS_WAC.OH', 'Rosetta_OSIRIS_WAC.UV325', 'Rosetta_OSIRIS_WAC.NH', 'Rosetta_OSIRIS_NAC.Near_UV',
+            'Rosetta_OSIRIS_WAC.UV375', 'Rosetta_OSIRIS_WAC.CN', 'Rosetta_OSIRIS_NAC.Blue', 'Rosetta_OSIRIS_NAC.Green',
+            'Rosetta_OSIRIS_WAC.NH2', 'Rosetta_OSIRIS_WAC.NA', 'Rosetta_OSIRIS_WAC.OI', 'Rosetta_OSIRIS_NAC.Hydra',
+            'Rosetta_OSIRIS_NAC.Red', 'Rosetta_OSIRIS_NAC.Ortho', 'Rosetta_OSIRIS_NAC.Near_IR', 'Rosetta_OSIRIS_NAC.Fe2O3',
+        ],
+        br_geometric: [
+            0.184, 0.158, 0.152, 0.175, 0.220, 0.200, 0.235, 0.268, 0.278, 0.325,
+            0.294, 0.372, 0.381, 0.382, 0.401, 0.417, 0.431, 0.447, 0.463, 0.431
+        ],
+        sd_geometric: [
+            0.013, 0.010, 0.008, 0.009, 0.011, 0.008, 0.012, 0.010, 0.011, 0.014,
+            0.009, 0.009, 0.008, 0.008, 0.009, 0.007, 0.010, 0.011, 0.013, 0.013
+        ],
+        spherical_albedo: ['Rosetta_OSIRIS_WAC.OI', [0.24, 0.01]],
+    },
+    '(2867) Šteins | GaiaDR3, Spjuth2012': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Rosetta target'],
         nm: [374, 418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
         br: [
             9.569959e-01, 8.597602e-01, 8.654832e-01, 8.504506e-01, 1.000000e+00, 1.104244e+00,
@@ -1469,25 +1488,6 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Rosetta_OSIRIS_WAC.OI', [0.39, 0.02]],
-        spherical_albedo: ['Rosetta_OSIRIS_WAC.OI', [0.24, 0.01]],
-    },
-    '(2867) Šteins | Keller2010, Spjuth2012': {
-        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Rosetta target'],
-        filters: [
-            'Rosetta_OSIRIS_WAC.UV245', 'Rosetta_OSIRIS_WAC.CS', 'Rosetta_OSIRIS_NAC.Far_UV', 'Rosetta_OSIRIS_WAC.UV295',
-            'Rosetta_OSIRIS_WAC.OH', 'Rosetta_OSIRIS_WAC.UV325', 'Rosetta_OSIRIS_WAC.NH', 'Rosetta_OSIRIS_NAC.Near_UV',
-            'Rosetta_OSIRIS_WAC.UV375', 'Rosetta_OSIRIS_WAC.CN', 'Rosetta_OSIRIS_NAC.Blue', 'Rosetta_OSIRIS_NAC.Green',
-            'Rosetta_OSIRIS_WAC.NH2', 'Rosetta_OSIRIS_WAC.NA', 'Rosetta_OSIRIS_WAC.OI', 'Rosetta_OSIRIS_NAC.Hydra',
-            'Rosetta_OSIRIS_NAC.Red', 'Rosetta_OSIRIS_NAC.Ortho', 'Rosetta_OSIRIS_NAC.Near_IR', 'Rosetta_OSIRIS_NAC.Fe2O3',
-        ],
-        br_geometric: [
-            0.184, 0.158, 0.152, 0.175, 0.220, 0.200, 0.235, 0.268, 0.278, 0.325,
-            0.294, 0.372, 0.381, 0.382, 0.401, 0.417, 0.431, 0.447, 0.463, 0.431
-        ],
-        sd_geometric: [
-            0.013, 0.010, 0.008, 0.009, 0.011, 0.008, 0.012, 0.010, 0.011, 0.014,
-            0.009, 0.009, 0.008, 0.008, 0.009, 0.007, 0.010, 0.011, 0.013, 0.013
-        ],
         spherical_albedo: ['Rosetta_OSIRIS_WAC.OI', [0.24, 0.01]],
     },
     'Geem2022': [
