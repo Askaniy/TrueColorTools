@@ -1161,6 +1161,8 @@ names = {
     'Planetary nebula': {'ru': 'Планетарная туманность', 'de': 'Planetarischer Nebel'},
     'Nova, nebular phase': {'ru': 'Новая, фаза туманности', 'de': 'Nova, nebulöse Phase'},
     # Materials
+    'Soil at Venera 13 landing site': {'ru': 'Грунт на месте посадки Венеры-13', 'de': 'Boden am Landeplatz von Venera 13'},
+    'Rocks at Venera 13 landing site': {'ru': 'Камни на месте посадки Венеры-13', 'de': 'Felsen am Landeplatz von Venera 13'},
     'Bright red drift at Pathfinder landing site': {'ru': 'Ярко-красный нанос на м. посадки Pathfinder', 'de': 'Hellroter Drift am Pathfinder-Landeplatz'},
     'Bright rock at Pathfinder landing site': {'ru': 'Яркий камень на месте посадки Pathfinder', 'de': 'Heller Fels am Pathfinder-Landeplatz'},
     'Dark rock at Pathfinder landing site': {'ru': 'Тёмный камень на м. посадки Pathfinder', 'de': 'Dunkler Fels am Pathfinder-Landeplatz'},
@@ -1227,6 +1229,8 @@ notes = {
     'Dark boulder terrain': {'ru': 'Тёмные валуны', 'de': 'Terrain dunkler Felsbrocken'},
     'Red impact crater': {'ru': 'Красный кратер', 'de': 'Roter Einschlagkrater'},
     # 'Red blotch': {'ru': 'Красное пятно', 'de': 'Roter Fleck'}, # Gleti on Nix
+    'Unresolved photometry': {'ru': 'Неразрешённая фотометрия', 'de': 'Unaufgelöste Photometrie'}, # Dark Red Spot on Haumea
+    '25% of maximum cross-section': {'ru': '25% от максимального поперечного сечения', 'de': '25% des maximalen Querschnitts'},
     'Bright polar cap': {'ru': 'Яркая полярная шапка', 'de': 'Helle Polkappe'},
     'Dark polar cap': {'ru': 'Тёмная полярная шапка', 'de': 'Dunkle Polkappe'},
     'Polar region': {'ru': 'Полярный регион', 'de': 'Polargebiet'},
