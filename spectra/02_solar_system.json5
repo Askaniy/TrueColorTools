@@ -1493,6 +1493,11 @@
         is_geometric_albedo: true,
         phase_integral: [1.97, 0.09], // extracted from Fig. 4b for 550 nm
     },
+    'Schröder2008': [
+        'The reflectance spectrum of Titan’s surface at the Huygens landing site determined by the descent imager/spectral radiometer',
+        'DOI: 10.1016/j.pss.2007.10.011', 'https://www.sciencedirect.com/science/article/abs/pii/S0032063307003583',
+        'https://scixplorer.org/abs/2008P%26SS...56..753S/abstract'
+    ],
     'Surface of Titan: Phase angle 45° (S VI) | Karkoschka2016': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/large moon/Titan', 'natural satellite/regular moon'],
         nm: [520, 563, 595, 642, 685, 754, 823, 830, 935, 940, 1070, 1280, 1550, 1590],
@@ -1508,6 +1513,11 @@
             0.390, 0.398, 0.404, 0.411, 0.416, 0.421, 0.426, 0.430, 0.434, 0.437, 0.440, 0.442, 0.444,
             0.446, 0.447, 0.448, 0.449, 0.449, 0.450, 0.450, 0.450, 0.449, 0.449, 0.448, 0.447
         ],
+    },
+    'Surface of Titan: Phase angle 0° (S VI) | Schröder2008': {
+        tags: ['Solar System/Saturnian system', 'planetary body/large moon/Titan', 'natural satellite/regular moon'],
+        file: 'spectra/files/Titan_surface_Schröder2008.txt',
+        is_geometric_albedo: true,
     },
     'Vixie2012': [
         'Mapping Titan’s surface features within the visible spectrum via Cassini VIMS',
