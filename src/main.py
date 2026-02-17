@@ -438,8 +438,9 @@ def launch_window(lang: str):
                         window['tab2_path'].update(visible=tab2_single_file_flag)
                         window['tab2_path_text'].update(visible=tab2_single_file_flag)
 
-                    elif event.startswith('tab2_filter'):
+                    if event.startswith('tab2_filter') or event in ('-typeImage-', '-typeImageRGB-', '-typeImageCube-'):
                         # Updates the list of filters and generates the checklist of valid inputs
+                        # Changing the image type changes the `tab2_vis` and, consequently, the filter list
                         tab2_filters_old = tab2_filters
                         tab2_filters = []
                         tab2_filters_checklist_old = tab2_filters_checklist
