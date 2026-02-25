@@ -1660,6 +1660,7 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
     - `is_reflecting_sunlight` (bool): `true` to divide the data by the reflected Solar spectrum
     - `is_emission_spectrum` (bool): `true` to interpret the data points as spectral lines
     - `is_emissive` (bool): `true` not expect albedo data and always render in the chromaticity mode
+    - `is_photon_counter` (bool): `true` to convert the photon spectral density into the energy sp. density
     """
     br = []
     sd = None
@@ -1828,6 +1829,13 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
     #if 'tags' in content:
     #    for tag in content['tags']:
     #        tags |= set(tag.split('/'))
+    if 'is_photon_counter' in content:
+        if TCT_obj is not None:
+            TCT_obj = TCT_obj.convert_from_photon_spectral_density()
+        if geometric is not None:
+            geometric = geometric.convert_from_photon_spectral_density()
+        if spherical is not None:
+            spherical = spherical.convert_from_photon_spectral_density()
     if ('is_emissive' in content and content['is_emissive']) or is_emission:
         return EmittingBody(name, TCT_obj)
     else:

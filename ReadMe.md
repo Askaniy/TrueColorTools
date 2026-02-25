@@ -109,6 +109,7 @@ Supported input keys of a database unit:
 - `is_reflecting_sunlight` (bool): `true` to divide the data by the reflected Solar spectrum
 - `is_emission_spectrum` (bool): `true` to interpret the data points as spectral lines
 - `is_emissive` (bool): `true` not expect albedo data and always render in the chromaticity mode
+- `is_photon_counter` (bool): `true` to convert the photon spectral density into the energy sp. density
 
 Standard deviations are syntactically supported (but not always processed). Any brightness value in any of the data types can be replaced by a corresponding list of `[value, sd]` (or `[value, +sd, -sd]` for asymmetric standard deviation).
 
