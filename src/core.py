@@ -1669,14 +1669,15 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
     filter_system = None
     if 'file' in content:
         try:
-            nm, br, sd = di.file_reader(content['file'])
+            imported_spectrum = Spectrum.from_file(content['file'])
         except Exception:
-            stub = Spectrum.stub()
-            nm = stub.nm
-            br = stub.br
+            imported_spectrum = Spectrum.stub()
             print(f'# Note for the Spectrum object "{name}"')
             print('- Something unexpected happened during external file reading. The data was replaced by a stub.')
             print(f'- More precisely, {format_exc(limit=0).strip()}')
+        nm = imported_spectrum.nm
+        br = imported_spectrum.br
+        sd = imported_spectrum.sd
     else:
         # Brightness reading
         if 'br' in content:
