@@ -628,7 +628,6 @@ names = {
     'Venus': {'ru': 'Венера'},
     'Surface of Venus': {'ru': 'Поверхность Венеры', 'de': 'Oberfläche der Venus'},
     'Clouds of Venus': {'ru': 'Облака Венеры', 'de': 'Wolken der Venus'},
-    'Sky of Venus': {'ru': 'Небо Венеры', 'de': 'Himmel der Venus'},
     'Earth': {'ru': 'Земля', 'de': 'Erde'},
     'Surface of Earth': {'ru': 'Поверхность Земли', 'de': 'Oberfläche der Erde'},
     'Clouds of Earth': {'ru': 'Облака Земли', 'de': 'Wolken der Erde'},
@@ -637,7 +636,6 @@ names = {
     'Moon': {'ru': 'Луна', 'de': 'Mond'},
     'Guang Han Gong': {'ru': 'Гуанханьгун'},
     'Mars': {'ru': 'Марс'},
-    'Sky of Mars': {'ru': 'Небо Марса', 'de': 'Himmel vom Mars'},
     'Olympus Mons': {'ru': 'Олимп'},
     'Valles Marineris': {'ru': 'Долины Маринер'},
     'Phobos': {'ru': 'Фобос'},
@@ -1202,6 +1200,11 @@ names = {
     'Martian glacier, 14000 μm and 10% dust': {'ru': 'Марсианский ледник, 14000 мкм и 10% пыли', 'de': 'Mars-Gletschereis, 14000 μm und 10% Staub'},
     'Solid methane': {'ru': 'Твёрдый метан', 'de': 'Festes Methan'},
     'Liquid methane': {'ru': 'Жидкий метан', 'de': 'Flüssiges Methan'},
+    # Skies
+    'Sky of Venus': {'ru': 'Небо Венеры', 'de': 'Himmel der Venus'},
+    'Sky of Earth': {'ru': 'Небо Земли', 'de': 'Himmel der Erde'},
+    'Sky of Mars': {'ru': 'Небо Марса', 'de': 'Himmel vom Mars'},
+
     # Other
     'Equal-energy spectrum': {'ru': 'Плоский спектр', 'de': 'Homogenes Energiespektrum'}
 }
@@ -1303,6 +1306,9 @@ notes = {
     'Carbon type': {'ru': 'Углеродный тип', 'de': 'WC-Typ'},
     'Hydrogen emission lines dominating': {'ru': 'Доминирование эмиссионных линий водорода', 'de': 'Wasserstoff-Emissionslinien dominieren'},
     'Strong forbidden emission lines': {'ru': 'Сильные запрещённые эмиссионные линии', 'de': 'Starke verbotene Emissionslinien'},
+    'Clear': {'ru': 'Ясное', 'de': 'Klarer'},
+    'Overcast': {'ru': 'Пасмурное', 'de': 'Bewölkter'},
+    'Intermediate': {'ru': 'Переменное', 'de': 'Wechselhaftes'},
     'January': {'ru': 'Январь', 'de': 'Januar'},
     'February': {'ru': 'Февраль', 'de': 'Februar'},
     'March': {'ru': 'Март', 'de': 'März'},

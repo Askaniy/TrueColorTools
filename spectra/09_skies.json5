@@ -186,42 +186,42 @@
         file: 'spectra/files/Moshkin1983/V14_62_km.txtU', // Fig. 4 (from sky)
         is_albedo: true, // in units of 1000 W / (m² μm steradian)
     },
-	
+
 	// Terran sky
 	'Tohsing2014': [
         'Validation of spectral sky radiance derived from all-sky camera images - a case study',
         'DOI: 10.5194/amt-7-2137-2014', 'https://amt.copernicus.org/articles/7/2137/2014/amt-7-2137-2014.pdf',
         'https://ui.adsabs.harvard.edu/abs/2014AMT.....7.2137T/abstract'
     ],
-    'Sky of Earth: Clear (0° 36°) | Tohsing2014': {
-	tags: ['Solar System', 'planetary body/planet/Earth', 'sky/Terran sky'],
-        'file': 'spectra/files/Tohsing2014/clear_0_36.txt',
-		'is_albedo': true,
+    'Sky of Earth: Clear (a=0° z=36°) | Tohsing2014': {
+        tags: ['Solar System', 'planetary body/planet/Earth', 'sky/Terran sky'],
+        file: 'spectra/files/Tohsing2014/clear_0_36.txt',
+		is_albedo: true, // in units of 130 mW / (m² nm steradian)
     },
-    'Sky of Earth: Clear (105° 72°) | Tohsing2014': {
-	tags: ['Solar System', 'planetary body/planet/Earth', 'sky/Terran sky'],
-        'file': 'spectra/files/Tohsing2014/clear_105_72.txt',
-		'is_albedo': true,
+    'Sky of Earth: Clear (a=105° z=72°) | Tohsing2014': {
+        tags: ['Solar System', 'planetary body/planet/Earth', 'sky/Terran sky'],
+        file: 'spectra/files/Tohsing2014/clear_105_72.txt',
+		is_albedo: true, // in units of 130 mW / (m² nm steradian)
     },
-    'Sky of Earth: Overcast (Zenith) | Tohsing2014': {
-	tags: ['Solar System', 'planetary body/planet/Earth', 'sky/Terran sky'],
-        'file': 'spectra/files/Tohsing2014/overcast_zenith.txt',
-		'is_albedo': true,
+    'Sky of Earth: Overcast (z=0°) | Tohsing2014': {
+        tags: ['Solar System', 'planetary body/planet/Earth', 'sky/Terran sky'],
+        file: 'spectra/files/Tohsing2014/overcast_zenith.txt',
+		is_albedo: true, // in units of 130 mW / (m² nm steradian)
     },
-    'Sky of Earth: Overcast (202° 48°) | Tohsing2014': {
-	tags: ['Solar System', 'planetary body/planet/Earth', 'sky/Terran sky'],
-        'file': 'spectra/files/Tohsing2014/overcast_202_48.txt',
-		'is_albedo': true,
+    'Sky of Earth: Overcast (a=202° z=48°) | Tohsing2014': {
+        tags: ['Solar System', 'planetary body/planet/Earth', 'sky/Terran sky'],
+        file: 'spectra/files/Tohsing2014/overcast_202_48.txt',
+		is_albedo: true, // in units of 130 mW / (m² nm steradian)
     },
-    'Sky of Earth: Intermediate (67° 48°) | Tohsing2014': {
-	tags: ['Solar System', 'planetary body/planet/Earth', 'sky/Terran sky'],
-        'file': 'spectra/files/Tohsing2014/intermediate_67_48.txt',
-		'is_albedo': true,
+    'Sky of Earth: Intermediate (a=67° z=48°) | Tohsing2014': {
+        tags: ['Solar System', 'planetary body/planet/Earth', 'sky/Terran sky'],
+        file: 'spectra/files/Tohsing2014/intermediate_67_48.txt',
+		is_albedo: true, // in units of 130 mW / (m² nm steradian)
     },
-    'Sky of Earth: Intermediate (162° 60°) | Tohsing2014': {
-	tags: ['Solar System', 'planetary body/planet/Earth', 'sky/Terran sky'],
-        'file': 'spectra/files/Tohsing2014/intermediate_162_60.txt',
-		'is_albedo': true,
+    'Sky of Earth: Intermediate (a=162° z=60°) | Tohsing2014': {
+        tags: ['Solar System', 'planetary body/planet/Earth', 'sky/Terran sky'],
+        file: 'spectra/files/Tohsing2014/intermediate_162_60.txt',
+		is_albedo: true, // in units of 130 mW / (m² nm steradian)
     },
 
     // Martian sky
