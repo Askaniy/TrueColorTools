@@ -3050,7 +3050,7 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.139, +0.157, -0.064]],
     },
-    '(53311) Deucallion | Trujillo2002': {
+    '(53311) Deucalion | Trujillo2002': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.36, 0.16], 'B-R': [2.03, 0.16]},
