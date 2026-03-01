@@ -941,7 +941,7 @@ names = {
     'Donaldjohanson': {'ru': 'Дональдджохансон'},
     'Okyrhoe': {'ru': 'Окироя'},
     'Cyllarus': {'ru': 'Киллар'},
-    'Deucallion': {'ru': 'Девкалион'},
+    'Deucalion': {'ru': 'Девкалион'},
     'Bienor': {'ru': 'Биенор'},
     'Aya': {'ru': 'Айа'},
     'Amycus': {'ru': 'Амик'},
