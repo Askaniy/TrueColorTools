@@ -51,7 +51,6 @@ import numpy as np
 from src.data_import import file_reader
 import src.auxiliary as aux
 import src.strings as tr
-import src.data_import as di
 import src.image_import as ii
 
 

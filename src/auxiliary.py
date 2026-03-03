@@ -391,7 +391,7 @@ def sub_br(br1, br2):
     """
     if isinstance(br1, np.ndarray) and isinstance(br2, np.ndarray):
         br1, br2 = make_same_ndim(br1, br2)
-    return br1 + br2
+    return br1 - br2
 
 def sub_sd(br1, sd1, br2, sd2):
     """
