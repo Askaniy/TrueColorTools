@@ -4486,7 +4486,7 @@
         geometric_albedo: ['NewHorizons_LORRI.Pan', 0.29], // derived from Fig. 4
         spherical_albedo: ['NewHorizons_LORRI.Pan', 0.19], // derived from Fig. 6
     },
-    'Mordor Macula (Charon) | Cook2018, Buratti2017': {
+    'Neverland Regio (Charon) | Cook2018, Buratti2017': {
         tags: ['Solar System/Plutonian system', 'planetary body/large moon/Charon', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
