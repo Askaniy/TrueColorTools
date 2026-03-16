@@ -2123,16 +2123,12 @@ class ColorImage(ColorObject):
         #    output.sd = aux.spatial_downscaling(self.sd, pixels_limit)
         return output
 
-    def to_pillow_image(self):
-        """ Converts ColorImage to the Image object of the Pillow library """
-        # TODO: support export to 16 bit and other Pillow modes
-        arr = np.clip(self.to_array(), 0, 1) * 255 # 8 bit
-        return Image.fromarray(np.around(arr).astype('uint8').transpose())
-
     def to_bytes(self):
         """ Converts ColorImage to bytes """
         bio = BytesIO()
-        self.to_pillow_image().save(bio, format='png')
+        arr = np.round(np.clip(self.to_array(), 0, 1) * 255).astype('uint8')
+        img = Image.fromarray(arr.transpose())
+        img.save(bio, format='png')
         return bio.getvalue()
 
     @property

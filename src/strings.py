@@ -412,6 +412,11 @@ gui_process = {
     'ru': 'Обработать',
     'de': 'Bild generieren'
 }
+gui_format = {
+    'en': 'Image format',
+    'ru': 'Формат изображения',
+    'de': 'Bildformat'
+}
 
 
 # Tab 3 - Blackbody & Redshifts
@@ -977,7 +982,7 @@ names = {
     'Sputnik Planitia': {'ru': 'Равнина Спутник'},
     'Viking Terra': {'ru': 'Земля Викинг'},
     'Charon': {'ru': 'Харон'},
-    'Mordor Macula': {'ru': 'Макула Мордор'},
+    'Neverland Regio': {'ru': 'Область Неверленд'}, # Mordor Macula
     'Nix': {'ru': 'Никта'},
     'Gleti Crater': {'ru': 'Кратер Глети'},
     'Hydra': {'ru': 'Гидра'},

@@ -510,7 +510,9 @@ def launch_window(lang: str):
                             tab2_preview = tab2_img
                         else:
                             tab2_preview = tab2_img.downscale(img_preview_area)
-                            tab2_img.to_color_system(color_system).to_pillow_image().save(f'{values["tab2_folder"]}/TCT_{strftime("%Y-%m-%d_%H-%M-%S")}.png')
+                            tab2_image_name = f'{values["tab2_folder"]}/TCT_{strftime("%Y-%m-%d_%H-%M-%S")}'
+                            tab2_array = tab2_img.to_color_system(color_system).to_array()
+                            ip.save_image(tab2_array, values['tab2_format'], tab2_image_name)
                         tab2_preview_rgb = tab2_preview.to_color_system(color_system)
                         window['tab2_preview'].update(data=tab2_preview_rgb.to_bytes())
 

@@ -9,6 +9,7 @@ import numpy as np
 
 import src.strings as tr
 from src.core import ColorSystem
+from src.image_processing import supported_formats
 
 
 # TCT style colors
@@ -251,6 +252,15 @@ def generate_layout(
             ),
             sg.Push(),
         ],
+        [
+            sg.Push(),
+            sg.Text(tr.gui_format[lang], key='tab2_format_text'),
+            sg.Combo(
+                supported_formats, default_value='PNG int8', readonly=True,
+                expand_x=False, enable_events=True, key='tab2_format'
+            ),
+            sg.Push(),
+        ],
     ]
 
     tab3_col1 = [
@@ -386,6 +396,7 @@ def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict[
     window['tab2_chunks_text'].update(tr.gui_chunks[lang])
     window['tab2_preview_button'].update(tr.gui_preview[lang])
     window['tab2_process_button'].update(tr.gui_process[lang])
+    window['tab2_format_text'].update(tr.gui_format[lang])
     #window['tab3_title1'].update(tr.gui_input[lang])
     #window['tab3_title2'].update(tr.gui_output[lang])
     window['tab3_temp'].update(tr.gui_temp[lang])
