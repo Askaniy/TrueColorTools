@@ -282,12 +282,12 @@
         'https://scixplorer.org/abs/2012GeoRL..39.4309A/abstract'
     ],
     'Solid methane | Adams2012': {
-        tags: ['material/methane', 'planetary body/planet/Titan'],
+        tags: ['material/methane', 'planetary body/large moon/Titan'],
         file: 'spectra/files/Adams2012/Solid_CH4.txtU',
         is_albedo: true
     },
     'Liquid methane | Adams2012': {
-        tags: ['material/methane', 'planetary body/planet/Titan'],
+        tags: ['material/methane', 'planetary body/large moon/Titan'],
         file: 'spectra/files/Adams2012/Liquid_CH4.txtU',
         is_albedo: true
     },
@@ -313,7 +313,7 @@
     // Tested on water: albedo is consistent, but color is much less blue than should be.
     // The n used was from https://ui.adsabs.harvard.edu/abs/1973ApOpt..12..555H/abstract
     'Liquid methane | MartonchikOrton1994': { // Table 1, column a, referring to Arakawa et al. 1986
-        tags: ['material/methane', 'planetary body/planet/Titan'],
+        tags: ['material/methane', 'planetary body/large moon/Titan'],
         nm: [400, 600, 800, 1000, 1200, 2000],
         br_geometric: [0.04917, 0.04827, 0.04768, 0.04738, 0.04738, 0.04679],
         br_spherical: [0.05886, 0.05837, 0.05804, 0.05788, 0.05788, 0.05755],
