@@ -4509,7 +4509,7 @@
         'Charon: Colors and Photometric Properties',
         'DOI: 10.2548/azu_uapress_9780816540945-ch018', 'https://ui.adsabs.harvard.edu/abs/2021psnh.book..413H/abstract'
     ],
-    '(134340 II) Nix | Cook2018, Weaver2016, Howett2021b': {
+    '(134340 II) Nix | Cook2018, Weaver2016, Howett2021b': { // Areas without Gleti's contribution
         tags: ['featured', 'Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         photometric_system: 'NewHorizons_MVIC',
         filters: ['Blue', 'Red', 'NIR'],
@@ -4541,7 +4541,8 @@
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.97, 1, 1.04], // Blue/Red ratio: 0.97 ±0.03, Red/NIR ratio: 0.96 ±0.03 (Averaged ratios)
         sd: [0.03, 0, 0.03],
-        geometric_albedo: ['Generic_Bessell.V', 0.45], // assumed to be similar contrast as Haumea’s DRS (~80%)
+        geometric_albedo: ['Generic_Bessell.V', 0.44], 
+        // dark areas of the crater have an albedo of 0.60 ±0.02, 0.60 ±0.02 / 0.764 = a contrast value of 79% to the average albedo of the Nix map
         phase_integral: [0.42, 0.08],
     },
     '(134340 III) Hydra | Cook2018, Weaver2016, Howett2021b': {
