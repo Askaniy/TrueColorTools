@@ -60,6 +60,33 @@ def gaussian_convolution(nm0: Sequence, br0: Sequence, nm1: Sequence, step: int|
         br1[i] = np.average(br0, weights=br0_convolved)
     return br1
 
+def spectral_binning(
+        nm0: np.ndarray,
+        br0: np.ndarray,
+        sd0: np.ndarray | None,
+        nm1: np.ndarray,
+        step: int | float,
+        nm0_diff: np.ndarray
+    ) -> tuple[np.ndarray, np.ndarray | None]:
+    """
+    Cumulative-integral binning method for a uniform grid. Fast (O(N) complexity), vectorized.
+    Requires at least one measurement per bin; otherwise use `spectral_downscaling()`.
+    """
+    # Computing bin edges assuming that nm1 is a uniform grid
+    half_step = 0.5 * step
+    nm1_edges = np.append(nm1 - half_step, nm1[-1] + half_step)
+    nm0_diff = expand_1D_array(nm0_diff, br0.shape[1:])
+    # Cumulative distribution function
+    br_cdf = np.zeros(br0.shape, dtype=np.float64)
+    br_cdf[1:] = np.cumsum(0.5 * (br0[:-1] + br0[1:]) * nm0_diff, axis=0) # Riemann sum
+    br1 = np.diff(linear_interp(nm0, br_cdf, nm1_edges), axis=0) / step
+    sd1 = None
+    if sd0 is not None:
+        sd_cdf = np.zeros(nm0.shape, dtype=np.float64)
+        sd_cdf[1:] = np.cumsum(0.5 * (sd0[:-1] + sd0[1:]) * nm0_diff, axis=0)
+        sd1 = np.diff(linear_interp(nm0, sd_cdf, nm1_edges), axis=0) / step
+    return br1, sd1
+
 def spectral_downscaling(nm0: Sequence, br0: np.ndarray, sd0: np.ndarray, nm1: Sequence, step: int|float):
     """
     Returns spectrum brightness values with decreased resolution.
@@ -190,11 +217,13 @@ def expand2x(array0: np.ndarray):
 def linear_interp(x0: Sequence, y0: np.ndarray, x1: Sequence):
     """ Equivalent to the `np.interp()`, but also works for cubes """
     idx = np.searchsorted(x0, x1)
-    x_left = x0[idx-1]
+    idx = np.clip(idx, 1, len(x0) - 1) # extrapolation by using the first or last interval
+    x_left = x0[idx - 1]
     x_right = x0[idx]
-    y_left = y0[idx-1]
+    y_left = y0[idx - 1]
     y_right = y0[idx]
-    return y_left + ((x1 - x_left) / (x_right - x_left) * (y_right - y_left).T).T
+    t = (x1 - x_left) / (x_right - x_left)
+    return y_left + (t * (y_right - y_left).T).T
 
 def custom_interp(array0: np.ndarray, k=16):
     """
@@ -242,13 +271,10 @@ def expand_1D_array(arr: np.ndarray, shape: int|tuple):
     Gets the 1D array and expands its dimensions to a 2D or 3D array based on the slice shape.
     Can be rewritten with numpy.tile()?
     """
-    match len(shape):
-        case 0:
-            return arr
-        case 1:
-            return higher_dim(arr, shape)
-        case 2:
-            return array2cube(arr, shape)
+    if isinstance(shape, int):
+        shape = (shape,)
+    new_axes = len(shape) * (np.newaxis,)
+    return np.broadcast_to(arr[..., *new_axes], (*arr.shape, *shape))
 
 
 def custom_extrap(grid: Sequence, derivative: float|np.ndarray, corner_x: int|float, corner_y: float|np.ndarray) -> np.ndarray:

@@ -519,8 +519,11 @@ class _SpectralObject(_TrueColorToolsObject):
                     nm_uniform = template.nm
                     integral = np.sum(0.5 * (br[:-1] + br[1:]) * diff, axis=0) # Riemann sum
                     br = template.br * integral
+                elif diff.max() < nm_step:
+                    # Option 3: dense spectral grid -> flux-conserving binning cumulative-integral (CDF) method
+                    br, sd = aux.spectral_binning(nm, br, sd, nm_uniform, nm_step, diff)
                 else:
-                    # Option 3: dense spectral grid, decreasing resolution
+                    # Option 4: dense spectral grid with gaps -> convolution with variable core
                     br, sd = aux.spectral_downscaling(nm, br, sd, nm_uniform, nm_step)
                 nm = nm_uniform
             #if br.min() < 0:
