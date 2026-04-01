@@ -1862,6 +1862,11 @@
         'DOI: 10.1134/S0038094607030021', 'https://link.springer.com/article/10.1134%2FS0038094607030021',
         'https://ui.adsabs.harvard.edu/abs/2007SoSyR..41..186A/abstract'
     ],
+    'DeColibus2026': [
+        'Optical Spectroscopy of the Uranian Moons from Equinox to Northern Summer',
+        'DOI: 10.3847/PSJ/ae4a1b', 'https://iopscience.iop.org/article/10.3847/PSJ/ae4a1b/meta',
+        'https://zenodo.org/records/18745327', 'https://scixplorer.org/abs/2026PSJ.....7...67D/abstract',
+    ],
     // Miranda
     'Miranda (U V) | Avramchuk2007, Karkoschka2001': {
         tags: ['featured', 'Solar System/Uranian system', 'planetary body/large moon/Miranda', 'natural satellite/regular moon'],
@@ -1886,9 +1891,38 @@
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.200, 0.030]], // Karkoschka2001
     },
+    'Hillier1989': [
+        'Miranda: Color and Albedo Variations from Voyager Photometry',
+        'DOI: 10.1016/0019-1035(89)90041-9', 'https://www.sciencedirect.com/science/article/pii/0019103589900419',
+        'https://ui.adsabs.harvard.edu/abs/1989Icar...82..314H/abstract'
+    ],
+    'Miranda (U V) | Hillier1989, Karkoschka2001': { // B0 (16°) = 0.225-0.275
+        tags: ['Solar System/Uranian system', 'planetary body/large moon/Miranda', 'natural satellite/regular moon'],
+        photometric_system: 'Voyager_ISS-NAC',
+        filters: ['Violet', 'Green'],
+        br: [1.099, 1], // V/Cl ratio: 1.059 ±0.034, G/Cl ratio: 0.963 ±0.027
+        sd: [0.033, 0],
+        geometric_albedo: ['Voyager_ISS-NAC.Clear', 0.3], // Average normal reflectance (Table IV)
+        phase_integral: [0.44, 0.05],
+    },
+    'Miranda: Bright areas (U V) | Hillier1989, Karkoschka2001': { // B0 (16°) > 0.275
+        tags: ['Solar System/Uranian system', 'planetary body/large moon/Miranda', 'natural satellite/regular moon'],
+        photometric_system: 'Voyager_ISS-NAC',
+        filters: ['Violet', 'Green'],
+        br: [1.113, 1], // V/Cl ratio: 1.023 ±0.021, G/Cl ratio: 0.918 ±0.021
+        sd: [0.017, 0],
+        geometric_albedo: ['Voyager_ISS-NAC.Clear', 0.33], // Normal reflectance (Table IV)
+        phase_integral: [0.44, 0.05],
+    },
     // Ariel
-    'Ariel (U I) | Avramchuk2007, Karkoschka2001': {
+    'Ariel (U I) | DeColibus2026, Karkoschka2001': {
         tags: ['featured', 'Solar System/Uranian system', 'planetary body/large moon/Ariel', 'natural satellite/regular moon'],
+        file: 'spectra/files/DeColibus2026/Ariel_All_BothTel_GAvg.txtU',
+        geometric_albedo: [550, 0.533],
+        spherical_albedo: [550, [0.230, 0.025]],
+    },
+    'Ariel (U I) | Avramchuk2007, Karkoschka2001': {
+        tags: ['Solar System/Uranian system', 'planetary body/large moon/Ariel', 'natural satellite/regular moon'],
         nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         br: [0.50, 0.51, 0.51, 0.51, 0.51, 0.52, 0.53, 0.54],
         sd: [0.03, 0.02, 0.02, 0.01, 0.02, 0.01, 0.01, 0.01],
@@ -1910,9 +1944,27 @@
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.230, 0.025]], // Karkoschka2001
     },
+    'Ariel: Leading hemisphere (U I) | DeColibus2026, Karkoschka2001': {
+        tags: ['Solar System/Uranian system', 'planetary body/large moon/Ariel', 'natural satellite/regular moon'],
+        file: 'spectra/files/DeColibus2026/Ariel_LH_BothTel_GAvg.txtU',
+        geometric_albedo: [550, 0.533],
+        spherical_albedo: [550, [0.230, 0.025]],
+    },
+    'Ariel: Trailing hemisphere (U I) | DeColibus2026, Karkoschka2001': {
+        tags: ['Solar System/Uranian system', 'planetary body/large moon/Ariel', 'natural satellite/regular moon'],
+        file: 'spectra/files/DeColibus2026/Ariel_TH_BothTel_GAvg.txtU',
+        geometric_albedo: [550, 0.533],
+        spherical_albedo: [550, [0.230, 0.025]],
+    },
     // Umbriel
-    'Umbriel (U II) | Avramchuk2007, Karkoschka2001': {
+    'Umbriel (U II) | DeColibus2026, Karkoschka2001': {
         tags: ['featured', 'Solar System/Uranian system', 'planetary body/large moon/Umbriel', 'natural satellite/regular moon'],
+        file: 'spectra/files/DeColibus2026/Umbriel_All_BothTel_GAvg.txtU',
+        geometric_albedo: [550, 0.258],
+        spherical_albedo: [550, [0.100, 0.010]],
+    },
+    'Umbriel (U II) | Avramchuk2007, Karkoschka2001': {
+        tags: ['Solar System/Uranian system', 'planetary body/large moon/Umbriel', 'natural satellite/regular moon'],
         nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         br: [0.25, 0.25, 0.25, 0.25, 0.26, 0.26, 0.26, 0.26],
         sd: [0.01, 0.02, 0.02, 0.01, 0.01, 0.01, 0.01, 0.01],
@@ -1934,20 +1986,38 @@
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.100, 0.010]], // Karkoschka2001
     },
+    'Umbriel: Leading hemisphere (U II) | DeColibus2026, Karkoschka2001': {
+        tags: ['Solar System/Uranian system', 'planetary body/large moon/Umbriel', 'natural satellite/regular moon'],
+        file: 'spectra/files/DeColibus2026/Umbriel_LH_BothTel_GAvg.txtU',
+        geometric_albedo: [550, 0.258],
+        spherical_albedo: [550, [0.100, 0.010]],
+    },
+    'Umbriel: Trailing hemisphere (U II) | DeColibus2026, Karkoschka2001': {
+        tags: ['Solar System/Uranian system', 'planetary body/large moon/Umbriel', 'natural satellite/regular moon'],
+        file: 'spectra/files/DeColibus2026/Umbriel_TH_BothTel_GAvg.txtU',
+        geometric_albedo: [550, 0.258],
+        spherical_albedo: [550, [0.100, 0.010]],
+    },
     // Titania
-    'Titania (U III) | Avramchuk2007, Karkoschka2001': {
+    'Titania (U III) | DeColibus2026, Karkoschka2001': {
         tags: ['featured', 'Solar System/Uranian system', 'planetary body/large moon/Titania', 'natural satellite/regular moon'],
+        file: 'spectra/files/DeColibus2026/Titania_All_BothTel_GAvg.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.346, 0.020]], // Table 4 (Mean)
+        phase_integral: [0.46, 0.05],
+    },
+    'Titania (U III) | Avramchuk2007, DeColibus2026, Karkoschka2001': {
+        tags: ['Solar System/Uranian system', 'planetary body/large moon/Titania', 'natural satellite/regular moon'],
         nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         br: [0.30, 0.32, 0.33, 0.34, 0.36, 0.37, 0.41, 0.43],
         sd: [0.02, 0.02, 0.02, 0.03, 0.02, 0.01, 0.01, 0.01],
-        is_geometric_albedo: true,
-        spherical_albedo: [550, [0.170, 0.015]], // Karkoschka2001
+        geometric_albedo: ['Generic_Bessell.V', [0.346, 0.020]], // Table 4 (Mean)
+        phase_integral: [0.46, 0.05],
     },
-    'Titania (U III) | Karkoschka2001': {
+    'Titania (U III) | Karkoschka2001, DeColibus2026': {
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Titania', 'natural satellite/regular moon'],
         slope: {start: 270, stop: 1000, power: 0.18},
-        geometric_albedo: [550, 0.350],
-        spherical_albedo: [550, [0.170, 0.015]],
+        geometric_albedo: ['Generic_Bessell.V', [0.346, 0.020]], // Table 4 (Mean)
+        phase_integral: [0.46, 0.05],
     },
     'Titania (U III) | Karkoschka1997, Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'planetary body/large moon', 'natural satellite/regular moon'],
@@ -1958,20 +2028,38 @@
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.170, 0.015]], // Karkoschka2001
     },
+    'Titania: Leading hemisphere (U III) | DeColibus2026, Karkoschka2001': {
+        tags: ['Solar System/Uranian system', 'planetary body/large moon/Titania', 'natural satellite/regular moon'],
+        file: 'spectra/files/DeColibus2026/Titania_LH_BothTel_GAvg.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.323, 0.004]], // Table 4 (LH)
+        phase_integral: [0.46, 0.05],
+    },
+    'Titania: Trailing hemisphere (U III) | DeColibus2026, Karkoschka2001': {
+        tags: ['Solar System/Uranian system', 'planetary body/large moon/Titania', 'natural satellite/regular moon'],
+        file: 'spectra/files/DeColibus2026/Titania_TH_BothTel_GAvg.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.361, 0.010]], // Table 4 (TH)
+        phase_integral: [0.46, 0.05],
+    },
     // Oberon
-    'Oberon (U IV) | Avramchuk2007, Karkoschka2001': {
+    'Oberon (U IV) | DeColibus2026, Karkoschka2001': {
         tags: ['featured', 'Solar System/Uranian system', 'planetary body/large moon/Oberon', 'natural satellite/regular moon'],
+        file: 'spectra/files/DeColibus2026/Oberon_All_BothTel_GAvg.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.295, 0.015]], // Table 4 (Mean)
+        phase_integral: [0.46, 0.05],
+    },
+    'Oberon (U IV) | Avramchuk2007, DeColibus2026, Karkoschka2001': {
+        tags: ['Solar System/Uranian system', 'planetary body/large moon/Oberon', 'natural satellite/regular moon'],
         nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         br: [0.27, 0.29, 0.30, 0.31, 0.33, 0.35, 0.40, 0.43],
         sd: [0.04, 0.01, 0.02, 0.02, 0.01, 0.01, 0.02, 0.02],
-        is_geometric_albedo: true,
-        spherical_albedo: [550, [0.140, 0.015]], // Karkoschka2001
+        geometric_albedo: ['Generic_Bessell.V', [0.295, 0.015]], // Table 4 (Mean)
+        phase_integral: [0.46, 0.05],
     },
-    'Oberon (U IV) | Karkoschka2001': {
+    'Oberon (U IV) | Karkoschka2001, DeColibus2026': {
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Oberon', 'natural satellite/regular moon'],
         slope: {start: 270, stop: 1000, power: 0.15},
-        geometric_albedo: [550, 0.309],
-        spherical_albedo: [550, [0.140, 0.015]],
+        geometric_albedo: ['Generic_Bessell.V', [0.295, 0.015]], // Table 4 (Mean)
+        phase_integral: [0.46, 0.05],
     },
     'Oberon (U IV) | Karkoschka1997, Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Oberon', 'natural satellite/regular moon'],
@@ -1995,6 +2083,18 @@
         br: [[0.30, 0.04], [0.33, 0.04]], // Clear: [0.27, 0.03]
         is_geometric_albedo: true, // average normal albedo
         spherical_albedo: [550, [0.140, 0.015]], // Karkoschka2001
+    },
+    'Oberon: Leading hemisphere (U IV) | DeColibus2026, Karkoschka2001': {
+        tags: ['Solar System/Uranian system', 'planetary body/large moon/Oberon', 'natural satellite/regular moon'],
+        file: 'spectra/files/DeColibus2026/Oberon_LH_BothTel_GAvg.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.289, 0.008]], // Table 4 (LH)
+        phase_integral: [0.46, 0.05],
+    },
+    'Oberon: Trailing hemisphere (U IV) | DeColibus2026, Karkoschka2001': {
+        tags: ['Solar System/Uranian system', 'planetary body/large moon/Oberon', 'natural satellite/regular moon'],
+        file: 'spectra/files/DeColibus2026/Oberon_TH_BothTel_GAvg.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.312, 0.015]], // Table 4 (TH)
+        phase_integral: [0.46, 0.05],
     },
     'Oberon: Bright areas (U IV) | Helfenstein1991, Karkoschka2001': { // crater rays
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Oberon', 'natural satellite/regular moon'],
