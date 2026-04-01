@@ -621,6 +621,16 @@
         is_geometric_albedo: true,
         spherical_albedo: ['Cassini_ISS_NAC.CB3', 0.57], // Table 4
     },
+    'Brown2004': [
+        'The Cassini Visual And Infrared Mapping Spectrometer (VIMS) Investigation',
+        'DOI: 10.1007/s11214-004-1453-x', 'https://link.springer.com/article/10.1007/s11214-004-1453-x',
+        'https://ui.adsabs.harvard.edu/abs/2004SSRv..115..111B/abstract'
+    ],
+    'Great Red Spot (Jupiter) | Brown2004': {
+        tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter/GRS'],
+        file: 'spectra/files/GRS_Brown2004.txtU', // Fig. 16
+        is_albedo: true, // apparent reflectance
+    },
     'Simon2018': [
         'Historical and Contemporary Trends in the Size, Drift, and Color of Jupiter’s Great Red Spot',
         'DOI: 10.3847/1538-3881/aaae01', 'https://iopscience.iop.org/article/10.3847/1538-3881/aaae01',
@@ -702,7 +712,36 @@
         is_reflecting_sunlight: false,
         is_albedo: true, // I/F
     },
+    // Jovian aurorae
+    'Ingersoll1998': [
+        'Imaging Jupiter’s Aurora at Visible Wavelengths',
+        'DOI: 10.1006/icar.1998.5971', 'https://www.sciencedirect.com/science/article/pii/S0019103598959711',
+        'https://ui.adsabs.harvard.edu/abs/1998Icar..135..251I/abstract'
+    ],
+    'Aurorae of Jupiter | Ingersoll1998': {
+        tags: ['Solar System/Jovian system', 'aurora'],
+        photometric_system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', 'Clear', 'Red', '8890A'],
+        br: [1.3, 0.6, 0.8, 1.2, 1.6], // Table II (CLR filter is averaged)
+        is_emissive: true,
+    },
     // Jovian rings
+    'Throop2004': [
+        'The jovian rings: new results derived from Cassini, Galileo, Voyager, and Earth-based observations',
+        'DOI: 10.1016/j.icarus.2003.12.020', 'https://www.sciencedirect.com/science/article/pii/S0019103504000247',
+        'https://ui.adsabs.harvard.edu/abs/2004Icar..172...59T/abstract'
+    ],
+    // the 687 nm measurement was removed, reconstructed spectrum should be green to fit it
+    'Main ring (Jupiter) | Throop2004, Showalter1987': { // 122 500—129 000 km
+        tags: ['Solar System/Jovian system', 'ring'],
+        photometric_system: 'Cassini_ISS_NAC',
+        filters: ['BL1', 'GRN', 'RED', 'IR1', 'IR2', 944],
+        br: [
+            [1.83e-06, +3.49e-07, -3.37e-07], [3.06e-06, +1.28e-06, -2.53e-06], [3.71e-06, +7.53e-07, -8.00e-07],
+            [3.03e-06, +4.75e-07, -9.36e-07], [4.17e-06, +1.63e-06, -1.58e-06], [6.09e-06, +2.64e-06, -2.79e-06],
+        ], // traced from Fig. 6
+        phase_function: ['phase coefficient', {beta: [0.042, 0.008]}],
+    },
     'Showalter1987': [
         'Jupiter’s ring system: New results on structure and particle properties',
         'DOI: 10.1016/0019-1035(87)90018-2', 'https://www.sciencedirect.com/science/article/pii/0019103587900182',
@@ -788,6 +827,11 @@
         'https://britastro.org/specdb/data_graph.php?obs_id=12734',
         'https://britastro.org/specdb/data_graph.php?obs_id=12735'
     ],
+    'deKleer2023': [
+        'The optical aurorae of Europa, Ganymede, and Callisto',
+        'DOI: 10.3847/PSJ/acb53c', 'https://iopscience.iop.org/article/10.3847/PSJ/acb53c/meta',
+        'https://ui.adsabs.harvard.edu/abs/2023PSJ.....4...37D/abstract'
+    ],
     // Io
     'Simonelli1984': [
         'Voyager Disk-Integrated Photometry of Io',
@@ -840,6 +884,108 @@
         file: 'spectra/files/Clark1980/Io.txtU', // figure 10
         geometric_albedo: ['Generic_Bessell.V', [0.817, 4.57]], // 550 nm, V and Stromgren y filter data were combined
         phase_integral: 0.77, // 550 nm, "must be taken cautiously since there are no large phase angle observations to adequately constrain the Hapke model on which theis value is based"
+    },
+    'Geissler1999': [
+        'Galileo Imaging of Atmospheric Emissions from Io',
+        'DOI: 10.1126/science.285.5429.870', 'https://pirlwww.lpl.arizona.edu/HIIPS/Publications/geissler_papers/io_aurorae_science.pdf',
+        'https://ui.adsabs.harvard.edu/abs/1999Sci...285..870G/abstract'
+    ],
+    'Aurorae of Io: May 31 1998 (J I) | Geissler1999': {
+        tags: ['Solar System/Jovian system', 'aurora/Ionian aurorae'],
+        // VIO, GRN, CLR1, CLR2, RED
+        nm: [404, 560, 561, 562, 630],
+        // "Calculations assume emission at the following wavelengths:
+        // violet, 404 nm; green, 560 nm; red, 630 nm; and clear, 560 nm."
+        // CLR1 + CLR2 are excluded due to being defined as the same wavelength as green
+        br: [472, 335, 254], // Table 2 (Power (MW))
+        is_emission_spectrum: true,
+        is_emissive: true,
+    },
+    'Geissler2004': [
+        'Cassini observations of Io’s visible aurorae',
+        'DOI: 10.1016/j.icarus.2004.01.008', 'https://ciclops.org/media/sp/2007/2676_7438_0.pdf',
+        'https://ui.adsabs.harvard.edu/abs/2004Icar..172..127G/abstract'
+    ],
+    'Aurorae of Io: Jan 5 2001 (J I) | Geissler2004': {
+        tags: ['Solar System/Jovian system', 'aurora/Ionian aurorae'],
+        // UV3, BL1, GRN, R+G, Clear, CB1, RED, IR1
+        nm: [338, 451, 568, 601, 611, 619, 650, 752],
+        // "Powers were computed assuming that the emissions were at the center wavelengths of each filter."
+        br: [
+            [1.76e+9, 0.39e+9], [1.17e+9, 0.47e+9], [0.54e+9, 0.26e+9], [0.13e+9, 0.16e+9],
+            [3.59e+9, 0.22e+9], [0.37e+9, 0.14e+9], [0.62e+9, 0.02e+9], [0.29e+9, 0.1e+9]
+        ], // Table 4 (Radiated Power (W))
+        is_emission_spectrum: true,
+        is_emissive: true,
+    },
+    'Milby2025': [
+        'Detection of New Auroral Emissions at Io and Implications for Its Interaction with the Plasma Torus',
+        'DOI: 10.3847/PSJ/ade0b1', 'https://iopscience.iop.org/article/10.3847/PSJ/ade0b1/meta',
+        'https://ui.adsabs.harvard.edu/abs/2025PSJ.....6..181M/abstract'
+    ],
+    'Aurorae of Io: Nov 24 2022 (J I) | Milby2025': {
+        tags: ['Solar System/Jovian system', 'aurora/Ionian aurorae'],
+        nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 844.6, 922.3],
+        br: [
+            [395, 7], [16200, 300], [6340, 180], [5430, 30], [1768, 15], [39, 6], [116, 7],
+            [58, 6], [61, 6], [680, 30], [333, 7], [158, 7], [196, 7], [392, 10]
+        ], // Table 2
+        is_emission_spectrum: true,
+        is_emissive: true,
+    },
+    'Aurorae of Io: Aug 9 2023 (J I) | Milby2025': {
+        tags: ['Solar System/Jovian system', 'aurora/Ionian aurorae'],
+        nm: [406.9, 407.6, 458.9, 557.7, 589, 589.6, 630, 636.4],
+        br: [
+            [310, 18], [87, 11], [100, 8], [461, 12],
+            [12100, 300], [5070, 140], [6090, 110], [2200, 20]
+        ], // Table 2
+        is_emission_spectrum: true,
+        is_emissive: true,
+    },
+    'Aurorae of Io: Aug 25 2023 (J I) | Milby2025': {
+        tags: ['Solar System/Jovian system', 'aurora/Ionian aurorae'],
+        nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
+        br: [
+            [417, 7], [18820, 150], [8810, 90], [5630, 40], [1903, 12],
+            [61, 7], [133, 6], [48, 6], [47, 6], [982, 19],
+            [361, 7], [166, 7], [117, 19], [360, 20], [266, 9]
+        ], // Table 2
+        is_emission_spectrum: true,
+        is_emissive: true,
+    },
+    'Aurorae of Io: Sep 12 2024 (J I) | Milby2025': {
+        tags: ['Solar System/Jovian system', 'aurora/Ionian aurorae'],
+        nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
+        br: [
+            [481, 10], [20000, 200], [9160, 110], [6700, 50], [2361, 19],
+            [41, 9], [157, 9], [59, 8], [60, 10], [1240, 30],
+            [411, 12], [317, 11], [410, 30], [840, 30], [400, 15]
+        ], // Table 2
+        is_emission_spectrum: true,
+        is_emissive: true,
+    },
+    'Aurorae of Io: Oct 5 2024 (J I) | Milby2025': {
+        tags: ['Solar System/Jovian system', 'aurora/Ionian aurorae'],
+        nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
+        br: [
+            [440, 12], [14220, 160], [7500, 90], [6130, 50], [2092, 18],
+            [60, 10], [143, 13], [53, 10], [76, 15], [920, 30],
+            [351, 15], [190, 13], [210, 30], [350, 30], [281, 17]
+        ], // Table 2
+        is_emission_spectrum: true,
+        is_emissive: true,
+    },
+    'Aurorae of Io: Oct 21 2024 (J I) | Milby2025': {
+        tags: ['Solar System/Jovian system', 'aurora/Ionian aurorae'],
+        nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
+        br: [
+            [444, 12], [14610, 180], [7820, 110], [6160, 50], [1950, 20],
+            [89, 12], [121, 12], [22, 16], [53, 15], [1060, 40],
+            [371, 16], [269, 14], [90, 20], [240, 40], [250, 20]
+        ], // Table 2
+        is_emission_spectrum: true,
+        is_emissive: true,
     },
     // Europa
     'Buratti1983': [
@@ -928,6 +1074,13 @@
         geometric_albedo: ['Voyager_ISS-NAC.Blue', 0.4], // lowest albedo in blue filter; Fig. 12
         phase_integral: [1.01, 0.04],
     },
+    'Aurorae of Europa (J II) | deKleer2023': {
+        tags: ['Solar System/Jovian system', 'aurora'],
+        nm: [557.7, 630, 636.4, 777.4],
+        br: [[40, 3], [593, 9], [183, 4], [30, 15]], // Table 2 (Average)
+        is_emission_spectrum: true,
+        is_emissive: true,
+    },
     // Ganymede
     'Ganymede: Leading hemisphere (J III) | Clark1980a, Madden2018, Buratti1991': {
         tags: ['featured', 'Solar System/Jovian system', 'planetary body/large moon/Ganymede', 'natural satellite/regular moon'],
@@ -952,6 +1105,25 @@
         is_geometric_albedo: true,
         phase_integral: [0.78, 0.06],
     },
+    'Milby2024': [
+        'Short-timescale Spatial Variability of Ganymede’s Optical Aurora',
+        'DOI: 10.3847/PSJ/ad49a2', 'https://iopscience.iop.org/article/10.3847/PSJ/ad49a2',
+        'https://ui.adsabs.harvard.edu/abs/2024PSJ.....5..153M/abstract'
+    ],
+    'Aurorae of Ganymede (J III) | Milby2024': {
+        tags: ['Solar System/Jovian system', 'aurora'],
+        nm: [557.7, 630, 636.4, 656.3, 777.4, 844.6],
+        br: [[11.5, 0.6], [127, 3], [43, 1.2], [0, 2], [22, 1.3], [12.5, 1.3]], // Table 2 (Average)
+        is_emission_spectrum: true,
+        is_emissive: true,
+    },
+    'Aurorae of Ganymede (J III) | deKleer2023': {
+        tags: ['Solar System/Jovian system', 'aurora'],
+        nm: [557.7, 630, 636.4, 777.4, 844.6],
+        br: [[11, 1], [143, 2], [44, 1], [20, 2], [7.3, 1.4]], // Table 2 (Average)
+        is_emission_spectrum: true,
+        is_emissive: true,
+    },
     // Callisto
     'Callisto: Leading hemisphere (J IV) | Clark1980a, Madden2018, Buratti1991': {
         tags: ['featured', 'Solar System/Jovian system', 'planetary body/large moon/Callisto', 'natural satellite/regular moon'],
@@ -964,6 +1136,13 @@
         file: 'spectra/files/Madden2018/Callisto_Spencer1999leading_Albedo.txtU',
         is_geometric_albedo: true,
         phase_integral: [0.46, 0.06], // for leading hemisphere
+    },
+    'Aurorae of Callisto (J IV) | deKleer2023': {
+        tags: ['Solar System/Jovian system', 'aurora'],
+        nm: [630, 636.4],
+        br: [[6.1, 1.7], [3.3, 1.2]], // Table 2 (2021-7-4)
+        is_emission_spectrum: true,
+        is_emissive: true,
     },
 
     // Saturnian system
