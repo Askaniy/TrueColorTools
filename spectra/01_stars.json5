@@ -348,6 +348,15 @@
         file: 'spectra/files/υAndB_Lowrance2002.txtA',
         is_emissive: true,
     },
+    'Aspin1985': [
+        'Polarization structure and variability in the optical spectrum of VY Canis Majoris.',
+        'https://ui.adsabs.harvard.edu/abs/1985A%26A...151..169A/abstract'
+    ],
+    'VY Canis Majoris (M5 Iae) | Aspin1985': {
+        tags: ['extrasolar', 'star/I supergiant'],
+        file: 'spectra/files/VYCMa_Aspin1985.txtA', // Fig. 1 (Top) + Fig. 2 (Top)
+        is_emissive: true,
+    },
     'LHS 375 (esdM5) | Reid2000': {
         tags: ['extrasolar', 'star/subdwarf'],
         file: 'spectra/files/Reid2000/LHS375.txt',
