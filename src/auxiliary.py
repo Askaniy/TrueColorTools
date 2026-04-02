@@ -214,16 +214,13 @@ def expand2x(array0: np.ndarray):
     array1[1::2] = (array0[:-1] + array0[1:]) * 0.5
     return array1
 
-def linear_interp(x0: Sequence, y0: np.ndarray, x1: Sequence):
+def linear_interp(x0: np.ndarray, y0: np.ndarray, x1: np.ndarray):
     """ Equivalent to the `np.interp()`, but also works for cubes """
-    idx = np.searchsorted(x0, x1)
-    idx = np.clip(idx, 1, len(x0) - 1) # extrapolation by using the first or last interval
-    x_left = x0[idx - 1]
-    x_right = x0[idx]
-    y_left = y0[idx - 1]
-    y_right = y0[idx]
-    t = (x1 - x_left) / (x_right - x_left)
-    return y_left + (t * (y_right - y_left).T).T
+    idx = np.clip(np.searchsorted(x0, x1), 0, len(x0) - 1)
+    delta_x = x0[idx] - x0[idx - 1]
+    delta_y = y0[idx] - y0[idx - 1]
+    delta_x[0] = delta_x[1]
+    return y0[idx] + ((x1 - x0[idx]) / delta_x * delta_y.T).T
 
 def custom_interp(array0: np.ndarray, k=16):
     """
