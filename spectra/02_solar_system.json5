@@ -892,8 +892,8 @@
     ],
     'Aurorae of Io: May 31 1998 (J I) | Geissler1999': {
         tags: ['Solar System/Jovian system', 'aurora/Ionian aurorae'],
-        // VIO, GRN, CLR1, CLR2, RED
-        nm: [404, 560, 561, 562, 630],
+        // VIO, GRN, RED
+        nm: [404, 560, 630],
         // "Calculations assume emission at the following wavelengths:
         // violet, 404 nm; green, 560 nm; red, 630 nm; and clear, 560 nm."
         // CLR1 + CLR2 are excluded due to being defined as the same wavelength as green
