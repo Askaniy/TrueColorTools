@@ -356,6 +356,11 @@
         'DOI: 10.1093/pasj/psx105', 'https://academic.oup.com/pasj/article/70/SP1/S40/4571785',
         'https://ui.adsabs.harvard.edu/abs/2018PASJ...70S..40T/abstract'
     ],
+    'Licandro2011': [
+        'Testing the comet nature of main belt comets. The spectra of 133P/Elst-Pizarro and 176P/LINEAR',
+        'DOI: 10.1051/0004-6361/201117018', 'https://www.aanda.org/articles/aa/full_html/2011/08/aa17018-11/aa17018-11.html',
+        'https://ui.adsabs.harvard.edu/abs/2011A&A...532A..65L/abstract'
+    ],
 
     'Li2019': [
         'Spectrophotometric modeling and mapping of Ceres',
@@ -1432,37 +1437,20 @@
         geometric_albedo: ['Generic_Bessell.V', [0.1696, 0.0318]],
         phase_function: ['Palomar_ZTF.g', 'HG1G2', {H: [12.718, 0.084], G_1: [0.064, 0.073], G_2: [0.419, 0.019]}],
     },
-    'Hicks2004': [
-        '(2867) Steins',
-        'https://ui.adsabs.harvard.edu/abs/2004IAUC.8315....3H/abstract'
-    ],
-    'Keller2010': [
-        'E-Type Asteroid (2867) Steins as Imaged by OSIRIS on Board Rosetta',
-        'DOI: 10.1126/science.1179559', 'https://www.science.org/doi/abs/10.1126/science.1179559',
-        'https://ui.adsabs.harvard.edu/abs/2010Sci...327..190K/abstract'
+    'Fornasier2008': [
+        'Visible and near infrared spectroscopic investigation of E-type asteroids, including 2867 Steins, a target of the Rosetta mission',
+        'DOI: 10.1016/j.icarus.2008.02.015', 'https://hal.science/hal-00567271v1/document',
+        'https://ui.adsabs.harvard.edu/abs/2008Icar..196..119F/abstract'
     ],
     'Spjuth2012': [
         'Disk-resolved photometry of Asteroid (2867) Steins',
         'DOI: 10.1016/j.icarus.2012.06.021', 'https://www.sciencedirect.com/science/article/pii/S0019103512002503',
         'https://ui.adsabs.harvard.edu/abs/2012Icar..221.1101S/abstract'
     ],
-    '(2867) Šteins | Keller2010, Spjuth2012': {
+    '(2867) Šteins | Fornasier2008, Spjuth2012': {
         tags: ['featured', 'Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Rosetta target'],
-        filters: [
-            'Rosetta_OSIRIS_WAC.UV245', 'Rosetta_OSIRIS_WAC.CS', 'Rosetta_OSIRIS_NAC.Far_UV', 'Rosetta_OSIRIS_WAC.UV295',
-            'Rosetta_OSIRIS_WAC.OH', 'Rosetta_OSIRIS_WAC.UV325', 'Rosetta_OSIRIS_WAC.NH', 'Rosetta_OSIRIS_NAC.Near_UV',
-            'Rosetta_OSIRIS_WAC.UV375', 'Rosetta_OSIRIS_WAC.CN', 'Rosetta_OSIRIS_NAC.Blue', 'Rosetta_OSIRIS_NAC.Green',
-            'Rosetta_OSIRIS_WAC.NH2', 'Rosetta_OSIRIS_WAC.NA', 'Rosetta_OSIRIS_WAC.OI', 'Rosetta_OSIRIS_NAC.Hydra',
-            'Rosetta_OSIRIS_NAC.Red', 'Rosetta_OSIRIS_NAC.Ortho', 'Rosetta_OSIRIS_NAC.Near_IR', 'Rosetta_OSIRIS_NAC.Fe2O3',
-        ],
-        br_geometric: [
-            0.184, 0.158, 0.152, 0.175, 0.220, 0.200, 0.235, 0.268, 0.278, 0.325,
-            0.294, 0.372, 0.381, 0.382, 0.401, 0.417, 0.431, 0.447, 0.463, 0.431
-        ],
-        sd_geometric: [
-            0.013, 0.010, 0.008, 0.009, 0.011, 0.008, 0.012, 0.010, 0.011, 0.014,
-            0.009, 0.009, 0.008, 0.008, 0.009, 0.007, 0.010, 0.011, 0.013, 0.013
-        ],
+        file: 'spectra/files/Steins_Fornasier2008.txtU', // Fig. 13
+        geometric_albedo: ['Rosetta_OSIRIS_WAC.OI', [0.39, 0.02]],
         spherical_albedo: ['Rosetta_OSIRIS_WAC.OI', [0.24, 0.01]],
     },
     '(2867) Šteins | GaiaDR3, Spjuth2012': {
@@ -1481,6 +1469,10 @@
         geometric_albedo: ['Rosetta_OSIRIS_WAC.OI', [0.39, 0.02]],
         spherical_albedo: ['Rosetta_OSIRIS_WAC.OI', [0.24, 0.01]],
     },
+    'Hicks2004': [
+        '(2867) Steins',
+        'https://ui.adsabs.harvard.edu/abs/2004IAUC.8315....3H/abstract'
+    ],
     '(2867) Šteins | Hicks2004, Spjuth2012': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Rosetta target'],
         photometric_system: 'Generic_Bessell',
@@ -1488,6 +1480,30 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Rosetta_OSIRIS_WAC.OI', [0.39, 0.02]],
+        spherical_albedo: ['Rosetta_OSIRIS_WAC.OI', [0.24, 0.01]],
+    },
+    'Keller2010': [
+        'E-Type Asteroid (2867) Steins as Imaged by OSIRIS on Board Rosetta',
+        'DOI: 10.1126/science.1179559', 'https://www.science.org/doi/abs/10.1126/science.1179559',
+        'https://ui.adsabs.harvard.edu/abs/2010Sci...327..190K/abstract'
+    ],
+    '(2867) Šteins | Keller2010, Spjuth2012': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Rosetta target'],
+        filters: [
+            'Rosetta_OSIRIS_WAC.UV245', 'Rosetta_OSIRIS_WAC.CS', 'Rosetta_OSIRIS_NAC.Far_UV', 'Rosetta_OSIRIS_WAC.UV295',
+            'Rosetta_OSIRIS_WAC.OH', 'Rosetta_OSIRIS_WAC.UV325', 'Rosetta_OSIRIS_WAC.NH', 'Rosetta_OSIRIS_NAC.Near_UV',
+            'Rosetta_OSIRIS_WAC.UV375', 'Rosetta_OSIRIS_WAC.CN', 'Rosetta_OSIRIS_NAC.Blue', 'Rosetta_OSIRIS_NAC.Green',
+            'Rosetta_OSIRIS_WAC.NH2', 'Rosetta_OSIRIS_WAC.NA', 'Rosetta_OSIRIS_WAC.OI', 'Rosetta_OSIRIS_NAC.Hydra',
+            'Rosetta_OSIRIS_NAC.Red', 'Rosetta_OSIRIS_NAC.Ortho', 'Rosetta_OSIRIS_NAC.Near_IR', 'Rosetta_OSIRIS_NAC.Fe2O3',
+        ],
+        br_geometric: [
+            0.184, 0.158, 0.152, 0.175, 0.220, 0.200, 0.235, 0.268, 0.278, 0.325,
+            0.294, 0.372, 0.381, 0.382, 0.401, 0.417, 0.431, 0.447, 0.463, 0.431
+        ],
+        sd_geometric: [
+            0.013, 0.010, 0.008, 0.009, 0.011, 0.008, 0.012, 0.010, 0.011, 0.014,
+            0.009, 0.009, 0.008, 0.008, 0.009, 0.007, 0.010, 0.011, 0.013, 0.013
+        ],
         spherical_albedo: ['Rosetta_OSIRIS_WAC.OI', [0.24, 0.01]],
     },
     'Geem2022': [
@@ -1789,6 +1805,12 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.093, 0.023]],
         phase_function: ['Palomar_ZTF.r', 'HG', {H: [9.71, +0.03, -0.02], G: [0.12, +0.04, -0.03]}],
+    },
+    '(7968) Elst–Pizarro | Licandro2011, Bauer2012, Hsieh2023': { // 133P/Elst–Pizarro
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'minor body/asteroid/active asteroid', 'minor body/comet/short period comet'],
+        file: 'spectra/files/Licandro2011/133P.txtA', // Fig. 2
+        geometric_albedo: ['Generic_Bessell.V', [0.060, 0.020]],
+        phase_function: ['Generic_Bessell.R', 'HG', {H: [15.71, 0.04], G: [0.09, 0.05]}],
     },
     'Hsieh2010': [
         'The return of activity in main-belt comet 133P/Elst–Pizarro',
@@ -3979,6 +4001,12 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
+    '(118401) LINEAR | Licandro2011, Bauer2012, Hsieh2023': { // 176P/LINEAR
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'minor body/asteroid/active asteroid', 'minor body/comet/short period comet'],
+        file: 'spectra/files/Licandro2011/176P.txtA', // Fig. 2
+        geometric_albedo: ['Generic_Bessell.V', [0.070, 0.030]],
+        phase_function: ['Generic_Bessell.R', 'HG', {H: [15.25, 0.03], G: [0.16, 0.04]}],
+    },
     'Hsieh2011': [
         'Physical Properties of Main-belt Comet 176P/LINEAR',
         'DOI: 10.1088/0004-6256/142/1/29', 'https://iopscience.iop.org/article/10.1088/0004-6256/142/1/29',
@@ -4304,10 +4332,21 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true
     },
+    'Tubiana2007': [
+        'Photometric and spectroscopic observations of (132524) 2002 JF56: fly-by target of the New Horizons mission',
+        'DOI: 10.1051/0004-6361:20066518', 'https://www.aanda.org/articles/aa/abs/2007/09/aa6518-06/aa6518-06.html',
+        'https://ui.adsabs.harvard.edu/abs/2007A&A...463.1197T/abstract'
+    ],
     'Bernardi2006': [ // the last observation reported
         'Pluto New Horizons Mission — Supporting Observations for 2002 JF56 Encounter',
         'http://smass.mit.edu/2002jf56.html'
     ],
+    '(132524) APL | Tubiana2007, Bernardi2006, SsODNet': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/New Horizons target'],
+        file: 'spectra/files/APL_Tubiana2007.txtA', // Average of three spectra in Fig. 1 (Top)
+        geometric_albedo: ['Generic_Bessell.V', 0.18], // mean diameter = 2.5 km, H = 15.5
+        phase_function: ['HG1G2', {H: [15.269937, +0.154798, -0.178274], G_1: [0.843039, +0.387120, -0.500877], G_2: [0.018170, +0.245583, -0.201242]}],
+    },
     '(132524) APL | Bernardi2006, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/New Horizons target'],
         photometric_system: 'Generic_Bessell',
@@ -4994,9 +5033,9 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true
     },
-    'Bolin2023b': [
+    'deLeon2023': [
         'Keck and Gemini spectral characterization of Lucy mission fly-by target (152830) Dinkinesh',
-        'DOI: 10.1093/mnrasl/slad018', 'https://academic.oup.com/mnrasl/article/521/1/L29/7036802',
+        'DOI: 10.1016/j.icarus.2023.115562', 'https://arxiv.org/abs/2303.08130',
         'https://ui.adsabs.harvard.edu/abs/2023Icar..40015562B/abstract'
     ],
     'McFadden2023': [
@@ -5009,8 +5048,19 @@
         'DOI: 10.3847/PSJ/ade23c', 'https://iopscience.iop.org/article/10.3847/PSJ/ade23c',
         'https://ui.adsabs.harvard.edu/abs/2025PSJ.....6..168J/abstract'
     ],
-    '(152830) Dinkinesh | Bolin2023b, McFadden2023, Jackson2025': {
+    '(152830) Dinkinesh | deLeon2023, McFadden2023, Jackson2025': {
         tags: ['featured', 'Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Lucy target'],
+        file: 'spectra/files/Dinkinesh_deLeon2023.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.27, +0.25, -0.06]],
+        spherical_albedo: ['NewHorizons_LORRI.Pan', 0.114], // rough-surface Bond albedo, presumably in the L'LORRI filter per the source cited by Jackson2025
+    },
+    'Bolin2023b': [
+        'Keck and Gemini spectral characterization of Lucy mission fly-by target (152830) Dinkinesh',
+        'DOI: 10.1093/mnrasl/slad018', 'https://academic.oup.com/mnrasl/article/521/1/L29/7036802',
+        'https://ui.adsabs.harvard.edu/abs/2023Icar..40015562B/abstract'
+    ],
+    '(152830) Dinkinesh | Bolin2023b, McFadden2023, Jackson2025': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Lucy target'],
         photometric_system: 'SLOAN_SDSS',
         color_indices: {'g-r': [0.67, 0.03], 'r-i': [0.28, 0.03], 'i-z': [0.11, 0.02]},
         calibration_system: 'AB',
@@ -5375,6 +5425,16 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.067, +0.017, -0.011]],
+    },
+    'Licandro2013': [
+        'Exploring the nature of new main-belt comets with the 10.4 m GTC telescope: (300163) 2006 VW139',
+        'DOI: 10.1051/0004-6361/201220080', 'https://www.aanda.org/articles/aa/full_html/2013/02/aa20080-12/aa20080-12.html',
+        'https://ui.adsabs.harvard.edu/abs/2013A%26A...550A..17L/abstract'
+    ],
+    '(300163) 2006 VW139 | Licandro2013, Hsieh2023': { // 288P
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'minor body/asteroid/active asteroid', 'minor body/comet/short period comet'],
+        file: 'spectra/files/288P_Licandro2013.txtU', // Fig. 2
+        phase_function: ['Generic_Bessell.R', 'HG', {H: [16.96, 0.04], G: [0.25, 0.08]}],
     },
     'Agarwal2015': [
         'Hubble and Keck Telescope Observations of Active Asteroid 288P/300163 (2006 VW139)',
@@ -8641,13 +8701,24 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
+    'Filacchione2019': [
+        'Comet 67P/CG Nucleus Composition and Comparison to Other Comets',
+        'DOI: 10.1007/s11214-019-0580-3', 'https://hal.science/hal-02496584/document',
+        'https://ui.adsabs.harvard.edu/abs/2019SSRv..215...19F/abstract'
+    ],
     'Fornasier2015': [
         'Spectrophotometric properties of the nucleus of comet 67P/Churyumov-Gerasimenko from the OSIRIS instrument onboard the ROSETTA spacecraft',
         'DOI: 10.1051/0004-6361/201525901', 'https://www.aanda.org/articles/aa/full_html/2015/11/aa25901-15/aa25901-15.html',
         'https://ui.adsabs.harvard.edu/abs/2015A%26A...583A..30F/abstract'
     ],
-    '67P/Churyumov–Gerasimenko | Fornasier2015': {
+    '67P/Churyumov–Gerasimenko | Filacchione2019, Fornasier2015': {
         tags: ['featured', 'Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'Churyumov-Gerasimenko', 'spacecraft target/Rosetta target'],
+        file: 'spectra/files/67P_Filacchione2019.txtU', // Average of four spectra in Fig. 2 (Top)
+        geometric_albedo: ['Rosetta_OSIRIS_NAC.Green', [0.0589, 0.0034]],
+        spherical_albedo: ['Rosetta_OSIRIS_NAC.Green', [0.0123, 0.0001]],
+    },
+    '67P/Churyumov–Gerasimenko | Fornasier2015': {
+        tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'Churyumov-Gerasimenko', 'spacecraft target/Rosetta target'],
         filters: [ // the WAC filter didn't allow the use of `photometric_system` syntax
             'Rosetta_OSIRIS_WAC.F71', 'Rosetta_OSIRIS_NAC.Blue',
             'Rosetta_OSIRIS_NAC.Green', 'Rosetta_OSIRIS_NAC.Orange',
@@ -8706,6 +8777,26 @@
         color_indices: {'V-R': [0.41, 0.04]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
+    },
+    'Capaccioni2015': [
+        'The organic-rich surface of comet 67P/Churyumov-Gerasimenko as seen by VIRTIS/Rosetta',
+        'DOI: 10.1051/0004-6361:20065253', 'https://www.aanda.org/articles/aa/full/2006/41/aa5253-06/aa5253-06.html',
+        'https://ui.adsabs.harvard.edu/abs/2015Sci...347a0628C/abstract'
+    ],
+    '67P/Churyumov–Gerasimenko: Body | Capaccioni2015': {
+        tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'Churyumov-Gerasimenko', 'spacecraft target/Rosetta target'],
+        file: 'spectra/files/Capaccioni2015/67P_Body.txt',
+        is_albedo: true, // I/F
+    },
+    '67P/Churyumov–Gerasimenko: Head | Capaccioni2015': {
+        tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'Churyumov-Gerasimenko', 'spacecraft target/Rosetta target'],
+        file: 'spectra/files/Capaccioni2015/67P_Head.txt',
+        is_albedo: true, // I/F
+    },
+    'Hapi (67P/Churyumov–Gerasimenko) | Capaccioni2015': { // Neck
+        tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'Churyumov-Gerasimenko', 'spacecraft target/Rosetta target'],
+        file: 'spectra/files/Capaccioni2015/67P_Neck.txt',
+        is_albedo: true, // I/F
     },
     '73P/Schwassmann–Wachmann 3: Fragment 73P-C | Lamy2009': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet'],
