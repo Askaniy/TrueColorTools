@@ -217,10 +217,11 @@ def expand2x(array0: np.ndarray):
 def linear_interp(x0: np.ndarray, y0: np.ndarray, x1: np.ndarray):
     """ Equivalent to the `np.interp()`, but also works for cubes """
     idx = np.clip(np.searchsorted(x0, x1), 0, len(x0) - 1)
-    delta_x = x0[idx] - x0[idx - 1]
-    delta_y = y0[idx] - y0[idx - 1]
-    delta_x[0] = delta_x[1]
-    return y0[idx] + ((x1 - x0[idx]) / delta_x * delta_y.T).T
+    x_left = x0[idx - 1]
+    y_left = y0[idx - 1]
+    delta_x = x0[idx] - x_left
+    delta_y = y0[idx] - y_left
+    return y_left + ((x1 - x_left) / delta_x * delta_y.T).T
 
 def custom_interp(array0: np.ndarray, k=16):
     """
