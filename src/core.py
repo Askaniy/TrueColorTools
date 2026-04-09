@@ -715,9 +715,13 @@ class Spectrum(_SpectralObject):
 
     @staticmethod
     @lru_cache(maxsize=32)
-    def from_file(file: str, name: str|ObjectName = None):
+    def from_file(file: str, name: str|ObjectName = None, is_emission: bool = False):
         """ Creates a Spectrum object based on loaded data from the specified file """
-        spectrum = Spectrum.from_array(*file_reader(file), name=name)
+        nm, br, sd = file_reader(file)
+        if is_emission:
+            spectrum = Spectrum.from_spectral_lines(nm, br, sd, name=name)
+        else:
+            spectrum = Spectrum.from_array(nm, br, sd, name=name)
         extension = file.split('.')[-1].upper()
         if 'J' in extension:
             spectrum = spectrum.convert_from_energy_spectral_density_per_frequency()
@@ -1669,9 +1673,11 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
     nm = [] # Spectrum object indicator
     filters = [] # Photospectrum object indicator
     filter_system = None
+    is_emission = 'is_emission_spectrum' in content and content['is_emission_spectrum']
     if 'file' in content:
         try:
-            imported_spectrum = Spectrum.from_file(content['file'])
+            imported_spectrum = Spectrum.from_file(content['file'], name=content['file'], is_emission=is_emission)
+            is_emission = False
         except Exception:
             imported_spectrum = Spectrum.stub()
             print(f'# Note for the Spectrum object "{name}"')
@@ -1792,7 +1798,6 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
     # Main part
     calib = content['calibration_system'] if 'calibration_system' in content else None
     is_sun = 'is_reflecting_sunlight' in content and content['is_reflecting_sunlight']
-    is_emission = 'is_emission_spectrum' in content and content['is_emission_spectrum']
     # Goal is to create geometric and spherical albedo (photo)spectral objects
     TCT_obj = geometric = spherical = None
     if len(br) == 0:
