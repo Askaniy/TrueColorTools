@@ -5985,12 +5985,21 @@
         slope: {start: 400, stop: 900, percent_per_100nm: [12.88, 0.43]}, // mean
         geometric_albedo: ['Generic_Bessell.V', [0.079, 0.014]],
     },
+    'Zhang2026': [
+        'Tianwen-2 target asteroid (469219) Kamoʻoalewa probably develops an Itokawa-compositional but ultra-highly space-weathered surface',
+        'DOI: 10.48550/arXiv.2603.28102', 'https://arxiv.org/abs/2603.28102',
+        'http://scixplorer.org/abs/2026arXiv260328102Z/abstract'
+    ],
+    '(469219) Kamoʻoalewa | Zhang2026': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/quasi-satellite', 'spacecraft target/Tianwen-2 target'],
+        file: 'spectra/files/Kamooalewa_Zhang2026.txtU', // Fig. 1a
+    },
     'Sharkey2021': [
-        'Lunar-like silicate material forms the Earth quasi-satellite (469219) 2016 HO3 Kamo‘oalewa',
+        'Lunar-like silicate material forms the Earth quasi-satellite (469219) 2016 HO3 Kamoʻoalewa',
         'DOI: 10.1038/s43247-021-00303-7', 'https://www.nature.com/articles/s43247-021-00303-7',
         'https://ui.adsabs.harvard.edu/abs/2021ComEE...2..231S/abstract'
     ],
-    '(469219) Kamo‘oalewa | Sharkey2021': {
+    '(469219) Kamoʻoalewa | Sharkey2021': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/quasi-satellite', 'spacecraft target/Tianwen-2 target'],
         file: 'spectra/files/Kamooalewa_Sharkey2021.txtU'
     },
