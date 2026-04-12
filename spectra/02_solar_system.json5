@@ -5,11 +5,6 @@
         'DOI: 10.1088/0004-637X/729/2/130', 'https://iopscience.iop.org/article/10.1088/0004-637X/729/2/130',
         'https://ui.adsabs.harvard.edu/abs/2011ApJ...729..130C/abstract'
     ],
-    'Dyudina2016b': [
-        'Reflected Light Curves, Spherical and Bond Albedos of Jupiter- and Saturn-like Exoplanets',
-        'DOI: 10.3847/0004-637X/822/2/76', 'https://iopscience.iop.org/article/10.3847/0004-637X/822/2/76',
-        'https://ui.adsabs.harvard.edu/abs/2016ApJ...822...76D/abstract'
-    ],
     'Grav2003': [
         'Photometric survey of the irregular satellites',
         'DOI: 10.1016/j.icarus.2003.07.005', 'https://arxiv.org/abs/astro-ph/0301016',
@@ -603,23 +598,35 @@
     },
 
     // Jovian system
-    'Jupiter | Karkoschka1998, Payne2025, Dyudina2016b': { // is Karkoschka1998 in visible range
+    'Li2018': [
+        'Less absorbed solar energy and more internal heat for Jupiter',
+        'DOI: 10.1038/s41467-018-06107-2', 'https://www.nature.com/articles/s41467-018-06107-2',
+        'http://scixplorer.org/abs/2018NatCo...9.3709L/abstract'
+    ],
+    'Jupiter | Li2018': {
         tags: ['featured', 'Solar System/Jovian system', 'planetary body/planet/Jupiter'],
-        file: 'spectra/files/Payne2025/jupiter_composite_data.txtU',
+        file: 'spectra/files/Li2018/Jupiter_Geom.txt', // Fig. 3a
+        // file: 'spectra/files/Li2018/Jupiter_Bond.txt', // Fig. 3b // Uncomment when geometric/spherical spectral files are supported
         is_geometric_albedo: true,
-        spherical_albedo: ['Cassini_ISS_NAC.CB3', 0.57], // Table 4
+        spherical_albedo: [678, [0.797, 0.069]], // Results section
     },
-    'Jupiter | Karkoschka1998, Dyudina2016b': { // phase angle 6.8°
+    'Jupiter | Karkoschka1998, Payne2025, Li2018': { // is Karkoschka1998 in visible range
+        tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter'],
+        file: 'spectra/files/Payne2025/jupiter_composite_data.txtU',
+        geometric_albedo: [565, [0.652, 0.047]], // Results section
+        spherical_albedo: [678, [0.797, 0.069]], // Results section
+    },
+    'Jupiter | Karkoschka1998, Li2018': { // phase angle 6.8°
         tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter'],
         file: 'spectra/files/Karkoschka/Jupiter1995.txt',
-        is_geometric_albedo: true,
-        spherical_albedo: ['Cassini_ISS_NAC.CB3', 0.57], // Table 4
+        geometric_albedo: [565, [0.652, 0.047]], // Results section
+        spherical_albedo: [678, [0.797, 0.069]], // Results section
     },
-    'Jupiter | Karkoschka1994, Dyudina2016b': { // phase angle 9.8°
+    'Jupiter | Karkoschka1994, Li2018': { // phase angle 9.8°
         tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter'],
         file: 'spectra/files/Karkoschka/Jupiter1993.txt',
-        is_geometric_albedo: true,
-        spherical_albedo: ['Cassini_ISS_NAC.CB3', 0.57], // Table 4
+        geometric_albedo: [565, [0.652, 0.047]], // Results section
+        spherical_albedo: [678, [0.797, 0.069]], // Results section
     },
     'Brown2004': [
         'The Cassini Visual And Infrared Mapping Spectrometer (VIMS) Investigation',
@@ -832,6 +839,11 @@
         'DOI: 10.3847/PSJ/acb53c', 'https://iopscience.iop.org/article/10.3847/PSJ/acb53c/meta',
         'https://ui.adsabs.harvard.edu/abs/2023PSJ.....4...37D/abstract'
     ],
+    'Davis2025': [
+        'Spectroscopic Mapping of Callisto with HST/STIS and Implications for its Surface Composition',
+        'DOI: 10.3847/PSJ/addec7', 'https://iopscience.iop.org/article/10.3847/PSJ/addec7/meta',
+        'http://scixplorer.org/abs/2025PSJ.....6..161D/abstract'
+    ],
     // Io
     'Simonelli1984': [
         'Voyager Disk-Integrated Photometry of Io',
@@ -885,13 +897,38 @@
         geometric_albedo: ['Generic_Bessell.V', [0.817, 4.57]], // 550 nm, V and Stromgren y filter data were combined
         phase_integral: 0.77, // 550 nm, "must be taken cautiously since there are no large phase angle observations to adequately constrain the Hapke model on which theis value is based"
     },
+    'Trumbo2022': [
+        'Spectroscopic Mapping of Io’s Surface with HST/STIS: SO2 Frost, Sulfur Allotropes, and Large-scale Compositional Patterns',
+        'DOI: 10.3847/PSJ/aca46d', 'https://iopscience.iop.org/article/10.3847/PSJ/aca46d',
+        'http://scixplorer.org/abs/2022PSJ.....3..272T/abstract'
+    ],
+    'Simonelli2001': [
+        'Regolith variations on Io: Implications for bolometric albedos',
+        'DOI: 10.1029/2000JE001350', 'https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2000JE001350',
+        'http://scixplorer.org/abs/2001JGR...10633241S/abstract'
+    ],
+    'Io: White material (J I) | Trumbo2022, Simonelli2001': {
+        tags: ['Solar System/Jovian system', 'planetary body/large moon/Io', 'natural satellite/regular moon'],
+        file: 'spectra/files/Trumbo2022/Io_white.txt', // Fig. 1
+        albedo: ['Galileo_SSI.Green', 0.923], // normal reflectance at phase angle = 4°−14°; extracted from Fig 1b (top map)
+    },
+    'Io: Yellow material (J I) | Trumbo2022, Simonelli2001': {
+        tags: ['Solar System/Jovian system', 'planetary body/large moon/Io', 'natural satellite/regular moon'],
+        file: 'spectra/files/Trumbo2022/Io_yellow.txt', // Fig. 1
+        albedo: ['Galileo_SSI.Green', 0.741], // normal reflectance at phase angle = 4°−14°; extracted from Fig 1b (top map)
+    },
+    'Io: Red material (J I) | Trumbo2022, Simonelli2001': {
+        tags: ['Solar System/Jovian system', 'planetary body/large moon/Io', 'natural satellite/regular moon'],
+        file: 'spectra/files/Trumbo2022/Io_red.txt', // Fig. 1
+        albedo: ['Galileo_SSI.Green', 0.579], // normal reflectance at phase angle = 4°−14°; extracted from Fig 1b (top map)
+    },
     'Geissler1999': [
         'Galileo Imaging of Atmospheric Emissions from Io',
         'DOI: 10.1126/science.285.5429.870', 'https://pirlwww.lpl.arizona.edu/HIIPS/Publications/geissler_papers/io_aurorae_science.pdf',
         'https://ui.adsabs.harvard.edu/abs/1999Sci...285..870G/abstract'
     ],
     'Aurorae of Io: May 31 1998 (J I) | Geissler1999': {
-        tags: ['Solar System/Jovian system', 'aurora/Ionian aurorae'],
+        tags: ['Solar System/Jovian system', 'aurora'],
         // VIO, GRN, RED
         nm: [404, 560, 630],
         // "Calculations assume emission at the following wavelengths:
@@ -907,7 +944,7 @@
         'https://ui.adsabs.harvard.edu/abs/2004Icar..172..127G/abstract'
     ],
     'Aurorae of Io: Jan 5 2001 (J I) | Geissler2004': {
-        tags: ['Solar System/Jovian system', 'aurora/Ionian aurorae'],
+        tags: ['Solar System/Jovian system', 'aurora'],
         // UV3, BL1, GRN, R+G, Clear, CB1, RED, IR1
         nm: [338, 451, 568, 601, 611, 619, 650, 752],
         // "Powers were computed assuming that the emissions were at the center wavelengths of each filter."
@@ -924,7 +961,7 @@
         'https://ui.adsabs.harvard.edu/abs/2025PSJ.....6..181M/abstract'
     ],
     'Aurorae of Io: Nov 24 2022 (J I) | Milby2025': {
-        tags: ['Solar System/Jovian system', 'aurora/Ionian aurorae'],
+        tags: ['Solar System/Jovian system', 'aurora'],
         nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 844.6, 922.3],
         br: [
             [395, 7], [16200, 300], [6340, 180], [5430, 30], [1768, 15], [39, 6], [116, 7],
@@ -934,7 +971,7 @@
         is_emissive: true,
     },
     'Aurorae of Io: Aug 9 2023 (J I) | Milby2025': {
-        tags: ['Solar System/Jovian system', 'aurora/Ionian aurorae'],
+        tags: ['Solar System/Jovian system', 'aurora'],
         nm: [406.9, 407.6, 458.9, 557.7, 589, 589.6, 630, 636.4],
         br: [
             [310, 18], [87, 11], [100, 8], [461, 12],
@@ -944,7 +981,7 @@
         is_emissive: true,
     },
     'Aurorae of Io: Aug 25 2023 (J I) | Milby2025': {
-        tags: ['Solar System/Jovian system', 'aurora/Ionian aurorae'],
+        tags: ['Solar System/Jovian system', 'aurora'],
         nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
         br: [
             [417, 7], [18820, 150], [8810, 90], [5630, 40], [1903, 12],
@@ -955,7 +992,7 @@
         is_emissive: true,
     },
     'Aurorae of Io: Sep 12 2024 (J I) | Milby2025': {
-        tags: ['Solar System/Jovian system', 'aurora/Ionian aurorae'],
+        tags: ['Solar System/Jovian system', 'aurora'],
         nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
         br: [
             [481, 10], [20000, 200], [9160, 110], [6700, 50], [2361, 19],
@@ -966,7 +1003,7 @@
         is_emissive: true,
     },
     'Aurorae of Io: Oct 5 2024 (J I) | Milby2025': {
-        tags: ['Solar System/Jovian system', 'aurora/Ionian aurorae'],
+        tags: ['Solar System/Jovian system', 'aurora'],
         nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
         br: [
             [440, 12], [14220, 160], [7500, 90], [6130, 50], [2092, 18],
@@ -977,7 +1014,7 @@
         is_emissive: true,
     },
     'Aurorae of Io: Oct 21 2024 (J I) | Milby2025': {
-        tags: ['Solar System/Jovian system', 'aurora/Ionian aurorae'],
+        tags: ['Solar System/Jovian system', 'aurora'],
         nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
         br: [
             [444, 12], [14610, 180], [7820, 110], [6160, 50], [1950, 20],
@@ -988,16 +1025,22 @@
         is_emissive: true,
     },
     // Europa
-    'Buratti1983': [
-        'Voyager photometry of Europa',
-        'DOI: 10.1016/0019-1035(83)90053-2', 'https://www.sciencedirect.com/science/article/pii/0019103583900532',
-        'https://ui.adsabs.harvard.edu/abs/1983Icar...55...93B/abstract'
+    'Trumbo2019': [
+        'Sodium chloride on the surface of Europa',
+        'DOI: 10.1126/sciadv.aaw7123', 'https://www.science.org/doi/10.1126/sciadv.aaw7123',
+        'http://scixplorer.org/abs/2019SciA....5.7123T/abstract'
     ],
     'Grundy2007a': [
         'New Horizons Mapping of Europa and Ganymede',
         'DOI: 10.1126/science.1147623', 'https://www.science.org/doi/abs/10.1126/science.1147623',
         'https://ui.adsabs.harvard.edu/abs/2007Sci...318..234G/abstract'
     ],
+    'Europa: Leading hemisphere (J II) | Trumbo2019, Madden2018, Grundy2007a': { // Tara Regio
+        tags: ['Solar System/Jovian system', 'planetary body/large moon/Europa', 'natural satellite/regular moon'],
+        file: 'spectra/files/Europa_Trumbo2019.txt', // Fig. 1
+        geometric_albedo: ['Generic_Bessell.V', 0.611],
+        phase_integral: [1.01, 0.04],
+    },
     'Europa: Leading hemisphere (J II) | Allen2022, Madden2018, Grundy2007a': { // Mid Julian Date 2459867.3924
         tags: ['Solar System/Jovian system', 'planetary body/large moon/Europa', 'natural satellite/regular moon'],
         file: 'spectra/files/BAA/Europa_20221014_HughAllen.FIT',
@@ -1005,6 +1048,11 @@
         geometric_albedo: ['Generic_Bessell.V', 0.611],
         phase_integral: [1.01, 0.04],
     },
+    'Buratti1983': [
+        'Voyager photometry of Europa',
+        'DOI: 10.1016/0019-1035(83)90053-2', 'https://www.sciencedirect.com/science/article/pii/0019103583900532',
+        'https://ui.adsabs.harvard.edu/abs/1983Icar...55...93B/abstract'
+    ],
     'Europa: Leading hemisphere (J II) | Buratti1983, Grundy2007a': {
         tags: ['Solar System/Jovian system', 'planetary body/large moon/Europa', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
@@ -1082,8 +1130,14 @@
         is_emissive: true,
     },
     // Ganymede
-    'Ganymede: Leading hemisphere (J III) | Clark1980a, Madden2018, Buratti1991': {
+    'Ganymede: Leading hemisphere (J III) | Davis2025, Madden2018, Buratti1991': {
         tags: ['featured', 'Solar System/Jovian system', 'planetary body/large moon/Ganymede', 'natural satellite/regular moon'],
+        file: 'spectra/files/Davis2025/Ganymede_Leading.txt', // Fig. 11
+        geometric_albedo: ['Generic_Bessell.V', 0.464],
+        phase_integral: [0.78, 0.06],
+    },
+    'Ganymede: Leading hemisphere (J III) | Clark1980a, Madden2018, Buratti1991': {
+        tags: ['Solar System/Jovian system', 'planetary body/large moon/Ganymede', 'natural satellite/regular moon'],
         file: 'spectra/files/Clark1980/Ganymede.txtU', // figure 13
         geometric_albedo: ['Generic_Bessell.V', 0.464],
         phase_integral: [0.78, 0.06],
@@ -1099,6 +1153,12 @@
         'DOI: 10.1016/j.icarus.2021.114631', 'https://www.sciencedirect.com/science/article/pii/S001910352100292X',
         'https://ui.adsabs.harvard.edu/abs/2021Icar..36914631B/abstract'
     ],
+    'Ganymede: Trailing hemisphere (J III) | Davis2025, Belgacem2021, Buratti1991': {
+        tags: ['Solar System/Jovian system', 'planetary body/large moon/Ganymede', 'natural satellite/regular moon'],
+        file: 'spectra/files/Davis2025/Ganymede_Trailing.txt', // Fig. 11
+        geometric_albedo: [550, 0.461], // Belgacem2021
+        phase_integral: [0.78, 0.06],
+    },
     'Ganymede: Trailing hemisphere (J III) | Belgacem2021, Buratti1991': {
         tags: ['Solar System/Jovian system', 'planetary body/large moon/Ganymede', 'natural satellite/regular moon'],
         file: 'spectra/files/Ganymede_trailing_Belgacem2021.txt',
@@ -1125,8 +1185,14 @@
         is_emissive: true,
     },
     // Callisto
-    'Callisto: Leading hemisphere (J IV) | Clark1980a, Madden2018, Buratti1991': {
+    'Callisto: Leading hemisphere (J IV) | Davis2025, Madden2018, Buratti1991': {
         tags: ['featured', 'Solar System/Jovian system', 'planetary body/large moon/Callisto', 'natural satellite/regular moon'],
+        file: 'spectra/files/Davis2025/Callisto_Leading.txt', // Fig. 11
+        geometric_albedo: ['Generic_Bessell.V', 0.1688978],
+        phase_integral: [0.46, 0.06], // for leading hemisphere
+    },
+    'Callisto: Leading hemisphere (J IV) | Clark1980a, Madden2018, Buratti1991': {
+        tags: ['Solar System/Jovian system', 'planetary body/large moon/Callisto', 'natural satellite/regular moon'],
         file: 'spectra/files/Clark1980/Callisto.txtU', // figure 14
         geometric_albedo: ['Generic_Bessell.V', 0.1688978],
         phase_integral: [0.46, 0.06], // for leading hemisphere
@@ -1137,6 +1203,12 @@
         is_geometric_albedo: true,
         phase_integral: [0.46, 0.06], // for leading hemisphere
     },
+    'Callisto: Trailing hemisphere (J IV) | Davis2025, Madden2018, Buratti1991': {
+        tags: ['Solar System/Jovian system', 'planetary body/large moon/Callisto', 'natural satellite/regular moon'],
+        file: 'spectra/files/Davis2025/Callisto_Trailing.txt', // Fig. 11
+        geometric_albedo: ['Generic_Bessell.V', 0.1688978],
+        phase_integral: [0.56, 0.05], // for trailing hemisphere
+    },
     'Aurorae of Callisto (J IV) | deKleer2023': {
         tags: ['Solar System/Jovian system', 'aurora'],
         nm: [630, 636.4],
@@ -1146,6 +1218,11 @@
     },
 
     // Saturnian system
+    'Dyudina2016b': [
+        'Reflected Light Curves, Spherical and Bond Albedos of Jupiter- and Saturn-like Exoplanets',
+        'DOI: 10.3847/0004-637X/822/2/76', 'https://iopscience.iop.org/article/10.3847/0004-637X/822/2/76',
+        'https://ui.adsabs.harvard.edu/abs/2016ApJ...822...76D/abstract'
+    ],
     'Saturn | Karkoschka1998, Payne2025, Dyudina2016b': { // is Karkoschka1998 in visible range
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/planet/Saturn'],
         file: 'spectra/files/Payne2025/saturn_composite_data.txtU',
