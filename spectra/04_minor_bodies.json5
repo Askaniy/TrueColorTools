@@ -4580,7 +4580,7 @@
         filters: ['Blue', 'Red', 'NIR'],
         br: [0.97, 1, 1.04], // Blue/Red ratio: 0.97 ±0.03, Red/NIR ratio: 0.96 ±0.03 (Averaged ratios)
         sd: [0.03, 0, 0.03],
-        geometric_albedo: ['Generic_Bessell.V', 0.44], 
+        geometric_albedo: ['Generic_Bessell.V', 0.44],
         // dark areas of the crater have an albedo of 0.60 ±0.02, 0.60 ±0.02 / 0.764 = a contrast value of 79% to the average albedo of the Nix map
         phase_integral: [0.42, 0.08],
     },
@@ -5052,7 +5052,7 @@
         tags: ['featured', 'Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Lucy target'],
         file: 'spectra/files/Dinkinesh_deLeon2023.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.27, +0.25, -0.06]],
-        spherical_albedo: ['NewHorizons_LORRI.Pan', 0.114], // rough-surface Bond albedo, presumably in the L'LORRI filter per the source cited by Jackson2025
+        spherical_albedo: ['Lucy_LLORRI.Pan', 0.114],
     },
     'Bolin2023b': [
         'Keck and Gemini spectral characterization of Lucy mission fly-by target (152830) Dinkinesh',
@@ -5066,7 +5066,7 @@
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.27, +0.25, -0.06]],
-        spherical_albedo: ['NewHorizons_LORRI.Pan', 0.114], // rough-surface Bond albedo, presumably in the L'LORRI filter per the source cited by Jackson2025
+        spherical_albedo: ['Lucy_LLORRI.Pan', 0.114],
     },
     '(153591) 2001 SN263 | SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Amor'],
