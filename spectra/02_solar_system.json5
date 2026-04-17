@@ -2080,7 +2080,7 @@
         'Characterization of the Outer Uranian Rings in the Visual and Near-IR Using Keck, JWST, and HST Observations',
         'DOI: 10.1029/2025JE009404', 'https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2025JE009404'
     ],
-    'ν ring (Uranus) | dePater2026': { // 66 100–69 900 km
+    'ν ring (Uranus) | dePater2026': { // 66 100—69 900 km
         tags: ['Solar System/Uranian system', 'ring'],
         filters: [
             'HST_ACS_HRC.F475W', 'HST_ACS_HRC.CLEAR', 'HST_ACS_HRC.F775W', 'JWST_NIRCam2025.F115W'
@@ -2100,7 +2100,7 @@
     // the WFC3 F475W, F606W, and F814W filters were excluded,
     // due to their lower quality creating a spectral slope that is inconsistent 
     // with the models in Fig. 22
-    'μ ring (Uranus) | dePater2026': { // 86 000–103 000 km
+    'μ ring (Uranus) | dePater2026': { // 86 000—103 000 km
         tags: ['Solar System/Uranian system', 'ring'],
         filters: [
             'HST_ACS_HRC.F475W', 'HST_WFC3_UVIS1.F350LP', 'HST_ACS_HRC.CLEAR', 'HST_ACS_HRC.F606W',
