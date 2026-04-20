@@ -3939,21 +3939,28 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', [0.35, 0.10]],
     },
-    'LeCorre2019': [
-        'Investigating Surface Color Variegation on Near-Earth Asteroid Bennu Using OSIRIS-REx Mapcam Data',
-        'https://ui.adsabs.harvard.edu/abs/2019LPI....50.2794L/abstract'
-    ],
     'Li2021': [
         'Spectrophotometric Modeling and Mapping of (101955) Bennu',
         'DOI: 10.3847/PSJ/abfd2d', 'https://iopscience.iop.org/article/10.3847/PSJ/abfd2d',
         'https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..117L/abstract'
     ],
-    '(101955) Bennu | LeCorre2019, Li2021': {
+    '(101955) Bennu | Li2021': {
         tags: ['featured', 'Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/asteroid/active asteroid', 'spacecraft target/OSIRIS-REx target'],
+        file: 'spectra/files/Li2021/Bennu_Geom.txtU', // Fig. 10b, longitude-latitude scheme (median)
+        // file: 'spectra/files/Li2021/Bennu_Bond.txtU', // Fig. 17e, longitude-latitude scheme (median) // Uncomment when geometric/spherical spectral files are supported
+        is_geometric_albedo: true,
+        spherical_albedo: [550, 0.020],
+    },
+    'LeCorre2019': [
+        'Investigating Surface Color Variegation on Near-Earth Asteroid Bennu Using OSIRIS-REx Mapcam Data',
+        'https://ui.adsabs.harvard.edu/abs/2019LPI....50.2794L/abstract'
+    ],
+    '(101955) Bennu | LeCorre2019, Li2021': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/asteroid/active asteroid', 'spacecraft target/OSIRIS-REx target'],
         photometric_system: 'OSIRIS-REX_MapCam',
         filters: ['Bf', 'Vf', 'Wf', 'Xf'],
         br_spherical: [0.0175, 0.01736, 0.0174, 0.01727],
-        geometric_albedo: ['OSIRIS-REX_MapCam.Vf', [0.046, 0.007]],
+        geometric_albedo: [550, [0.046, 0.007]],
     },
     '(101955) Bennu: Dark boulder terrain | LeCorre2019': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/asteroid/active asteroid', 'spacecraft target/OSIRIS-REx target'],
@@ -5101,13 +5108,14 @@
         'DOI: 10.3847/PSJ/ac14ba', 'https://iopscience.iop.org/article/10.3847/PSJ/ac14ba',
         'https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..177Y/abstract'
     ],
-    '(162173) Ryugu | Yokota2021': {
+    '(162173) Ryugu | Yokota2021, Tatsumi2020': {
         tags: ['featured', 'Solar System', 'minor body/asteroid/NEO/Apollo', 'spacecraft target/Hayabusa2 target'],
         photometric_system: 'Hayabusa2_ONC-T',
         filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
         br: [0.0438, 0.0408, 0.0406, 0.0408, 0.0405, 0.0411, 0.03987],
         sd: [0.0012, 0.0011, 0.0010, 0.0009, 0.0008, 0.0006, 0.00050],
         is_geometric_albedo: true, // normal (=geometric) albedo spectrum from the Table 3
+        spherical_albedo: ['Hayabusa2_ONC-T.v', [0.014, 0.01]],
     },
     '(162173) Ryugu: Bright areas | Yokota2021': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'spacecraft target/Hayabusa2 target'],
