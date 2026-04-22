@@ -230,34 +230,41 @@
         is_albedo: true,
     },
     'Kuiper1969': [
-        tags: ['Solar System', 'planetary body/planet/Venus'],
         'https://sic.lpl.arizona.edu/sites/sic.lpl.arizona.edu/files/collection/journal/101_Kuiper_CommLPL_1968-69.pdf',
         'https://ui.adsabs.harvard.edu/abs/1969BAAS....1Q.351K/abstract'
     ],
     'Venus | Kuiper1969': {
         // Obtained from a spectrometer on a jet over the Pacific Ocean
         // Data is copied from Kuiper_1969_Venus_spectrum.xlsx (in geobica/planet_color_calibrator), which Geobica received from Sanjay Limaye
+        tags: ['Solar System', 'planetary body/planet/Venus'],
+        file: 'spectra/files/Venus_Kuiper1969.txtU',
+        geometric_albedo: ['Generic_Bessell.V', 0.85],
         is_spherical_albedo: true,
     },
     'Pellier2020': [
-        tags: ['Solar System', 'planetary body/planet/Venus'],
         'https://www.planetary-astronomy-and-imaging.com/en/venus-spectrum/'
     ],
     'Venus | Pellier2020': {
         // Collected with a Star Analyzer 100
         // The graph this was retrieved from had no units on the y-axis
+        // This is through the Earth's atmosphere, so it needs to be corrected
+        tags: ['Solar System', 'planetary body/planet/Venus'],
+        file: 'spectra/files/Venus_Pellier2020.txtA',
+        geometric_albedo: ['Generic_Bessell.V', 0.689],
         is_reflecting_sunlight: true,
     },
     'Selsis2008': [
-        tags: ['Solar System', 'planetary body/planet/Venus'],
         'DOI: 10.1088/0031-8949/2008/T130/014032',
         'https://www.researchgate.net/publication/231005038_Terrestrial_exoplanets_Diversity_habitability_and_characterization'
     ],
     'Venus | Selsis2008': {
         // Exact source unknown "from G Tinetti (private communication)"
-        // Extracted from Fig. 1
         // Units are "Intensity (photons μm^-1 m^-2 hr^-1)"
+        tags: ['Solar System', 'planetary body/planet/Venus'],
+        file: 'spectra/files/Venus_Selsis2008.txtUP', // Extracted from Fig. 1
+        geometric_albedo: ['Generic_Bessell.V', 0.689],
         is_photon_count: true,
+        is_reflecting_sunlight: true,
     },
 
     // Terran system
