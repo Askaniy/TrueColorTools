@@ -104,6 +104,7 @@
     },
 
     // Venus
+    // by default, Mallama2017a is used for geometric albedo and Mallama2006 for phase integral
     'PerezHoyos2018': [
         'Venus Upper Clouds and the UV Absorber From MESSENGER/MASCS Observations',
         'DOI: 10.1002/2017JE005406', 'https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1002/2017JE005406',
@@ -133,9 +134,53 @@
     'Venus | Rodda2017, Mallama2017a, Mallama2006': {
         tags: ['Solar System', 'planetary body/planet/Venus'],
         file: 'spectra/files/BAA/_venus_20170109_725_TRO.fit',
-        is_reflecting_sunlight: true,
         geometric_albedo: ['Generic_Bessell.V', 0.689],
         phase_integral: 1.35, // Table 6
+    },
+    'Pellier2020': [
+        'Commented spectrum of Venus',
+        'https://www.planetary-astronomy-and-imaging.com/en/venus-spectrum/'
+    ],
+    'Venus | Pellier2020, Mallama2017a, Mallama2006': {
+        // Collected with a Star Analyzer 100
+        // The graph this was retrieved from had no units on the y-axis
+        // This is through the Earth's atmosphere, so it needs to be corrected
+        tags: ['Solar System', 'planetary body/planet/Venus'],
+        file: 'spectra/files/Venus_Pellier2020.txtA',
+        geometric_albedo: ['Generic_Bessell.V', 0.689],
+        is_reflecting_sunlight: true,
+    },
+    'Selsis2008': [
+        'Terrestrial exoplanets: diversity, habitability and characterization',
+        'DOI: 10.1088/0031-8949/2008/T130/014032', 'https://iopscience.iop.org/article/10.1088/0031-8949/2008/T130/014032',
+        'https://scixplorer.org/abs/2008PhST..130a4032S/abstract'
+    ],
+    'Venus | Selsis2008, Mallama2017a, Mallama2006': {
+        // Exact source unknown "from G Tinetti (private communication)"
+        // Units are "Intensity (photons μm^-1 m^-2 hr^-1)"
+        tags: ['Solar System', 'planetary body/planet/Venus'],
+        file: 'spectra/files/Venus_Selsis2008.txtUP', // Extracted from Fig. 1
+        geometric_albedo: ['Generic_Bessell.V', 0.689],
+        is_reflecting_sunlight: true,
+    },
+    'Venus: Synthetic spectrum | VPL, Mallama2017a': {
+        tags: ['Solar System', 'planetary body/planet/Venus'],
+        file: 'spectra/files/VPL/dayside_venus_toa.txtU',
+        geometric_albedo: ['Generic_Bessell.V', 0.689],
+        is_spherical_albedo: true, // assumption, no clear data source
+    },
+    'Kuiper1969': [
+        'Identification of the Venus cloud layers',
+        'https://sic.lpl.arizona.edu/sites/sic.lpl.arizona.edu/files/collection/journal/101_Kuiper_CommLPL_1968-69.pdf',
+        'https://scixplorer.org/abs/1969CoLPL...6..229K/abstract'
+    ],
+    'Venus | Kuiper1969, Mallama2017a, Mallama2006': {
+        // Obtained from a spectrometer on a jet over the Pacific Ocean
+        // Data is copied from Kuiper_1969_Venus_spectrum.xlsx (in geobica/planet_color_calibrator), which Geobica received from Sanjay Limaye
+        tags: ['Solar System', 'planetary body/planet/Venus'],
+        file: 'spectra/files/Venus_Kuiper1969.txtU',
+        geometric_albedo: ['Generic_Bessell.V', 0.689],
+        is_spherical_albedo: true,
     },
     'Venus | Madden2018, Mallama2006': {
         tags: ['Solar System', 'planetary body/planet/Venus'],
@@ -163,12 +208,6 @@
         filters: ['Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I'],
         br_geometric: [0.64, 0.67, 0.69, 0.57],
         br_spherical: [0.81, 0.90, 0.89, 0.87],
-    },
-    'Venus: Synthetic spectrum | VPL, Mallama2017a': {
-        tags: ['Solar System', 'planetary body/planet/Venus'],
-        file: 'spectra/files/VPL/dayside_venus_toa.txtU',
-        geometric_albedo: ['Generic_Bessell.V', 0.689],
-        is_spherical_albedo: true, // assumption, no clear data source
     },
     'Maiorov2005': [
         'A New Analysis of the Spectra Obtained by the Venera Missions in the Venusian Atmosphere. I. The Analysis of the Data Received from the Venera-11 Probe at Altitudes Below 37 km in the 0.44–0.66 µm Wavelength Range',
@@ -223,43 +262,6 @@
         nm: [450, 500, 635],
         br: [0.845, 0.85, 0.83],
         is_albedo: true,
-    },
-    'Kuiper1969': [
-        'https://sic.lpl.arizona.edu/sites/sic.lpl.arizona.edu/files/collection/journal/101_Kuiper_CommLPL_1968-69.pdf',
-        'https://ui.adsabs.harvard.edu/abs/1969BAAS....1Q.351K/abstract'
-    ],
-    'Venus | Kuiper1969': {
-        // Obtained from a spectrometer on a jet over the Pacific Ocean
-        // Data is copied from Kuiper_1969_Venus_spectrum.xlsx (in geobica/planet_color_calibrator), which Geobica received from Sanjay Limaye
-        tags: ['Solar System', 'planetary body/planet/Venus'],
-        file: 'spectra/files/Venus_Kuiper1969.txtU',
-        geometric_albedo: ['Generic_Bessell.V', 0.85],
-        is_spherical_albedo: true,
-    },
-    'Pellier2020': [
-        'https://www.planetary-astronomy-and-imaging.com/en/venus-spectrum/'
-    ],
-    'Venus | Pellier2020': {
-        // Collected with a Star Analyzer 100
-        // The graph this was retrieved from had no units on the y-axis
-        // This is through the Earth's atmosphere, so it needs to be corrected
-        tags: ['Solar System', 'planetary body/planet/Venus'],
-        file: 'spectra/files/Venus_Pellier2020.txtA',
-        geometric_albedo: ['Generic_Bessell.V', 0.689],
-        is_reflecting_sunlight: true,
-    },
-    'Selsis2008': [
-        'DOI: 10.1088/0031-8949/2008/T130/014032',
-        'https://www.researchgate.net/publication/231005038_Terrestrial_exoplanets_Diversity_habitability_and_characterization'
-    ],
-    'Venus | Selsis2008': {
-        // Exact source unknown "from G Tinetti (private communication)"
-        // Units are "Intensity (photons μm^-1 m^-2 hr^-1)"
-        tags: ['Solar System', 'planetary body/planet/Venus'],
-        file: 'spectra/files/Venus_Selsis2008.txtUP', // Extracted from Fig. 1
-        geometric_albedo: ['Generic_Bessell.V', 0.689],
-        is_photon_count: true,
-        is_reflecting_sunlight: true,
     },
 
     // Terran system
@@ -2135,7 +2137,7 @@
         ], // Fig. 22 (bottom)
     },
     // the WFC3 F475W, F606W, and F814W filters were excluded,
-    // due to their lower quality creating a spectral slope that is inconsistent 
+    // due to their lower quality creating a spectral slope that is inconsistent
     // with the models in Fig. 22
     'μ ring (Uranus) | dePater2026': { // 86 000—103 000 km
         tags: ['Solar System/Uranian system', 'ring'],
