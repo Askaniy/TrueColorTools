@@ -667,6 +667,27 @@
         geometric_albedo: [565, [0.652, 0.047]], // Results section
         spherical_albedo: [678, [0.797, 0.069]], // Results section
     },
+    'Hammel2010': [
+        'Jupiter After the 2009 Impact: Hubble Space Telescope Imaging of the Impact-generated Debris and its Temporal Evolution',
+        'DOI: 10.1088/2041-8205/715/2/L150', 'https://iopscience.iop.org/article/10.1088/2041-8205/715/2/L150',
+        'https://scixplorer.org/abs/2010ApJ...715L.150H/abstract'
+    ],
+    'Jupiter: 34° S, 1994 | Hammel2010': {
+        tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter'],
+        photometric_system: 'HST_WFPC2-WF',
+        filters: ['F255W', 'F336W', 'F410M', 'F555W', 'FQCH4N_C', 'F953N'], // Filters from Table 1 of West et al. (1995)
+        br: [0.339, 0.305, 0.421, 0.528, 0.055, 0.514],
+        sd: [0.016, 0.015, 0.021, 0.027, 0.007, 0.027], // Fig. 2a
+        is_albedo: true, // Reflectivity
+    },
+    'Jupiter: 58° S, 2009 | Hammel2010': {
+        tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter'],
+        photometric_system: 'HST_WFC3_UVIS1',
+        filters: ['F225W', 'F275W', 'FQ378N', 'FQ437N', 'FQ508N', 'FQ634N', 'FQ727N', 'FQ889N', 'FQ906N', 'FQ924N'], // Filters from Table 1
+        br: [0.418, 0.247, 0.410, 0.507, 0.484, 0.532, 0.248, 0.043, 0.284, 0.464],
+        sd: [0.048, 0.029, 0.048, 0.060, 0.056, 0.063, 0.030, 0.008, 0.033, 0.054], // Fig. 2a
+        is_albedo: true, // Reflectivity
+    },
     'Brown2004': [
         'The Cassini Visual And Infrared Mapping Spectrometer (VIMS) Investigation',
         'DOI: 10.1007/s11214-004-1453-x', 'https://link.springer.com/article/10.1007/s11214-004-1453-x',
@@ -757,6 +778,22 @@
         br: [0.190, 0.120, 0.157, 0.321, 0.398, 0.515, 0.721, 0.752], // uncertainties are smaller than the symbol size
         is_reflecting_sunlight: false,
         is_albedo: true, // I/F
+    },
+    'D/Shoemaker–Levy 9 impact site: Fragment-E (Jupiter) | Hammel2010': { // August 24 1994 according to West et al. (1995)
+        tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter'],
+        photometric_system: 'HST_WFPC2-WF',
+        filters: ['F255W', 'F336W', 'F410M', 'F555W', 'FQCH4N_C', 'F953N'], // Filters from Table 1 of West et al. (1995)
+        br: [0.138, 0.130, 0.157, 0.162, 0.109, 0.202],
+        sd: [0.030, 0.007, 0.006, 0.005, 0.008, 0.006], // Fig. 2a
+        is_albedo: true, // Reflectivity
+    },
+    'Wesley impact impact site: Core, 56° S (Jupiter) | Hammel2010': { // July 23 and August 8 2009
+        tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter'],
+        photometric_system: 'HST_WFC3_UVIS1',
+        filters: ['F225W', 'F275W', 'FQ378N', 'FQ437N', 'FQ508N', 'FQ634N', 'FQ727N', 'FQ889N', 'FQ906N', 'FQ924N'], // Filters from Table 1
+        br: [0.104, 0.079, 0.115, 0.141, 0.140, 0.179, 0.128, 0.097, 0.168, 0.216],
+        sd: [0.013, 0.010, 0.014, 0.017, 0.017, 0.021, 0.024, 0.012, 0.019, 0.024], // Fig. 2a
+        is_albedo: true, // Reflectivity
     },
     // Jovian aurorae
     'Ingersoll1998': [
