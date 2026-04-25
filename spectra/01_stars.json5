@@ -338,6 +338,27 @@
         file: 'spectra/files/BarnardsStar_Dawson2004.txtU',
         is_emissive: true,
     },
+    'Kowalski2013': [
+        'Time-resolved properties and global trends in dMe flares from simultaneous photometry and spectra',
+        'DOI: 10.1088/0067-0049/207/1/15', 'https://iopscience.iop.org/article/10.1088/0067-0049/207/1/15',
+        'https://scixplorer.org/abs/2013ApJS..207...15K/abstract',
+        'https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/207/15'
+    ],
+    'YZ Canis Minoris (M4.5e V) | Kowalski2013': {
+        tags: ['extrasolar', 'star/V dwarf'],
+        file: 'spectra/files/Kowalski2013/YZ_CMi.txtA', // ergs / (cm² s A)
+        is_emissive: true,
+    },
+    'YZ Canis Minoris with flare IF3 (M4.5e V) | Kowalski2013': {
+        tags: ['extrasolar', 'star/V dwarf'],
+        file: 'spectra/files/Kowalski2013/YZ_CMi_IF3.txtA', // ergs / (cm² s A)
+        is_emissive: true,
+    },
+    'Flare IF3 of YZ Canis Minoris (M4.5e V) | Kowalski2013': {
+        tags: ['extrasolar', 'star/V dwarf'],
+        file: 'spectra/files/Kowalski2013/YZ_CMi_IF3_flare.txtA', // ergs / (cm² s A)
+        is_emissive: true,
+    },
     'Lowrance2002': [
         'A Distant Stellar Companion in the υ Andromedae System',
         'DOI: 10.1086/341554', 'https://iopscience.iop.org/article/10.1086/341554',
