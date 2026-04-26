@@ -267,7 +267,7 @@
     // Terran system
     'Robinson2025': [
         'Inferring and Interpreting the Visual Geometric Albedo and Phase Function of Earth',
-        'DOI: 10.48550/arXiv.2507.22258', 'https://arxiv.org/abs/2507.22258',
+        'DOI: 10.3847/PSJ/ae2ec6', 'https://iopscience.iop.org/article/10.3847/PSJ/ae2ec6',
         'https://ui.adsabs.harvard.edu/abs/2025arXiv250722258R/abstract'
     ],
     'Villanueva2018': [
@@ -305,7 +305,7 @@
         'DOI: 10.1089/ast.2011.0614', 'https://www.liebertpub.com/doi/abs/10.1089/ast.2011.0614',
         'https://ui.adsabs.harvard.edu/abs/2011AsBio..11..907L/abstract'
     ],
-    'Earth | Livengood2011, Robinson2025': {
+    'Earth | Livengood2011, Payne2025, Robinson2025': {
         tags: ['Solar System', 'planetary body/planet/Earth'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
@@ -318,6 +318,19 @@
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
         br: [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79],
+        geometric_albedo: ['Generic_Bessell.V', [0.226, 0.004]],
+        spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
+    },
+    'Strauss2024': [
+        'Exoplanet Analog Observations of Earth from Galileo Disk-integrated Photometry',
+        'DOI: 10.3847/1538-3881/ad1bd1', 'https://iopscience.iop.org/article/10.3847/1538-3881/ad1bd1',
+        'http://scixplorer.org/abs/2024AJ....167...87S/abstract'
+    ],
+    'Earth | Strauss2024, Robinson2025': {
+        tags: ['Solar System', 'planetary body/planet/Earth'],
+        photometric_system: 'Galileo_SSI',
+        filters: ['Violet', 'Green', 'Red', '7270A', '7560A', '9680A'],
+        br: [[0.381, 0.026], [0.262, 0.008], [0.252, 0.012], [0.252, 0.016], [0.227, 0.013], [0.245, 0.013]], // Fig. 7 (Galileo 1990)
         geometric_albedo: ['Generic_Bessell.V', [0.226, 0.004]],
         spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
     },
