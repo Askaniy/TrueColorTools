@@ -38,16 +38,26 @@
     //         are found to be spurious by:
     //             https://ui.adsabs.harvard.edu/abs/2015ApJ...813...48W/abstract (though itself erroneous according to Zel)
     //             https://ui.adsabs.harvard.edu/abs/2016MNRAS.459L.109B/abstract
+    'Evans2014': [
+        'Characterising exoplanet atmospheres: Bayesian techniques for transit lightcurves',
+        'https://ora.ox.ac.uk/objects/uuid:d5f10fa0-3ea1-45b4-bf97-3f43555de0ed',
+        'http://scixplorer.org/abs/2014PhDT.......107E/abstract'
+    ],
+    'HD 189733 b | Evans2014': { // (φ, ψ, x input values)
+        tags: ['extrasolar', 'extrasolar/exoplanet', 'planetary body/planet'],
+        nm: [325, 368, 416, 459, 502, 547], // 6 wavebins 
+        br_geometric: [[0.45, +0.60, -0.59], [0.48, 0.35], [0.32, +0.19, -0.18], [0.22, 0.16], [0.09, +0.16, -0.14], [0.09, +0.15, -0.14]], // Table 4.7
+    },
     'Evans2013': [
         'The Deep Blue Color of HD189733b: Albedo Measurements with Hubble Space Telescope/Space Telescope Imaging Spectrograph at Visible Wavelengths',
         'DOI: 10.1088/2041-8205/772/2/L16', 'https://iopscience.iop.org/article/10.1088/2041-8205/772/2/L16',
         'https://ui.adsabs.harvard.edu/abs/2013ApJ...772L..16E/abstract'
     ],
     'HD 189733 b | Evans2013': {
-        tags: ['extrasolar/exoplanet', 'planetary body/planet'],
-        nm: [325, 368, 413, 416, 459, 510, 547],
-        br_geometric: [0.45, 0.39, 0.40, 0.32, 0.17, 0.00, 0.02], // Table 1
-        sd_geometric: [0.55, 0.27, 0.12, 0.15, 0.12, 0.12, 0.14],
+        tags: ['extrasolar', 'extrasolar/exoplanet', 'planetary body/planet'],
+        nm: [325, 368, 416, 459, 547], // 6 wavebins (λc from Table 1)
+        br_geometric: [[0.45, 0.55], [0.39, 0.27], [0.32, 0.15], [0.17, +0.12, -0.11], [0.02, +0.14, -0.12]], // Table 1
+        // 480–525 nm is excluded due to a negative geometric albedo
     },
     'Schwartz2015': [
         'Balancing the energy budget of short-period giant planets: evidence for reflective clouds and optical absorbers',
@@ -57,7 +67,6 @@
     'HD 189733 b | Schwartz2015': {
         tags: ['extrasolar/exoplanet', 'planetary body/planet'],
         nm: [370, 510],
-        br_geometric: [0.374, 0.043], // Table 4
-        sd_geometric: [0.124, 0.079],
+        br_geometric: [[0.374, 0.124], [0.043, 0.079]], // Table 4 (Full correction)
     },
 }
