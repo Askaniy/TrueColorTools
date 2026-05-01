@@ -325,11 +325,6 @@ def launch_window(lang: str):
                         window['tab1_graph'].TKCanvas.itemconfig(tab1_preview, fill=tab1_html)
                         window['tab1_rgb'].update(tuple(tab1_color_rgb.to_bit(bitness).round(rounding)))
                         window['tab1_hex'].update(tab1_html)
-                        tab1_value, tab1_sd = tab1_spectrum @ get_filter(values['tab1_in_filter'])
-                        if tab1_sd is None:
-                            window['tab1_convolved'].update(sigfig_round(tab1_value, rounding, warn=False))
-                        else:
-                            window['tab1_convolved'].update(sigfig_round(tab1_value, uncertainty=tab1_sd, warn=False))
 
                         # Setting of notes
                         tab1_albedo_note = tr.gui_blank_note
@@ -349,6 +344,15 @@ def launch_window(lang: str):
                                 window0.ReturnValuesDictionary['-currentTab-'],
                                 limit_to_vis, normalize_at_550nm, light_theme, lang
                             )
+
+                    # Update synthetic photometry output
+                    if event in tab1_update_gui_events or event == 'tab1_in_filter':
+                        tab1_value, tab1_sd = tab1_spectrum @ get_filter(values['tab1_in_filter'])
+                        if tab1_sd is None:
+                            window['tab1_convolved'].update(sigfig_round(tab1_value, rounding, warn=False))
+                        else:
+                            window['tab1_convolved'].update(sigfig_round(tab1_value, uncertainty=tab1_sd, warn=False))
+
 
                 if event in ('tab1_tag_filter', 'tab1_searched'):
                     tab1_displayed_namesDB = db.obj_names_dict(objectsDB, values['tab1_tag_filter'], values['tab1_searched'], lang)
