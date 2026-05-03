@@ -1,5 +1,49 @@
 {
 
+    'Trefoloni2024': [
+        'Quasars as standard candles: VI. Spectroscopic validation of the cosmological sample',
+        'DOI: 10.1051/0004-6361/201424208', 'https://www.aanda.org/articles/aa/full_html/2024/09/aa48938-23/aa48938-23.html',
+        'https://ui.adsabs.harvard.edu/abs/2024A%26A...689A.109T/abstract'
+    ],
+    'Quasars | Trefoloni2024': {
+        tags: ['featured', 'extrasolar', 'DSO/galaxy/galaxy type'],
+        file: 'spectra/files/Quasars_Trefoloni2024.txtA',
+        is_emissive: true
+    },
+
+    'Assef2010': [
+        'Low-Resolution Spectral Templates for Active Galactic Nuclei and Galaxies from 0.03 to 30 μm',
+        'DOI: 10.1088/0004-637X/713/2/970', 'https://iopscience.iop.org/article/10.1088/0004-637X/713/2/970',
+        'https://vizier.cds.unistra.fr/viz-bin/VizieR-3?-source=J/ApJ/713/970/table1',
+        'https://ui.adsabs.harvard.edu/abs/2010ApJ...713..970A/abstract'
+    ],
+    // All templates are normalized to be at a distance of 10pc and to have an integrated luminosity between the wavelength boundaries of 10^10 L_sun
+    'Standard AGN | Assef2010': {
+        tags: ['extrasolar', 'featured', 'DSO/galaxy/galaxy type'],
+        file: 'spectra/files/Assef2010/AGN1.datJU', // 10^-11 erg/s/cm^2/Hz
+        is_emissive: true
+    },
+    'AGN: Using the SED by Richards2006 as a starting point | Assef2010': {
+        tags: ['extrasolar', 'featured', 'DSO/galaxy/galaxy type'],
+        file: 'spectra/files/Assef2010/AGN2.datJU', // 10^-14 erg/s/cm^2/Hz
+        is_emissive: true
+    },
+    'Elliptical galaxies | Assef2010': {
+        tags: ['extrasolar', 'featured', 'DSO/galaxy/galaxy type'],
+        file: 'spectra/files/Assef2010/E.datJU', // 10^-16 erg/s/cm^2/Hz
+        is_emissive: true
+    },
+    'Spiral galaxies Sbc | Assef2010': {
+        tags: ['extrasolar', 'DSO/galaxy/galaxy type'],
+        file: 'spectra/files/Assef2010/Sbc.datJU', // 10^-17 erg/s/cm^2/Hz
+        is_emissive: true
+    },
+    'Irregular galaxies Im | Assef2010': {
+        tags: ['extrasolar', 'DSO/galaxy/galaxy type'],
+        file: 'spectra/files/Assef2010/Im.datJU', // 10^-15 erg/s/cm^2/Hz
+        is_emissive: true
+    },
+
     'Kinney1996': [
         'Template Ultraviolet to Near-Infrared Spectra of Star-forming Galaxies and Their Application to K-Corrections',
         'DOI: 10.1086/177583', 'https://ui.adsabs.harvard.edu/abs/1996ApJ...467...38K/abstract',
@@ -69,17 +113,6 @@
     'Starburst galaxies with 0.61 < E(B-V) < 0.70 | Calzetti1994': {
         tags: ['extrasolar', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Calzetti1994/starb6_template.fits',
-        is_emissive: true
-    },
-
-    'Trefoloni2024': [
-        'Quasars as standard candles: VI. Spectroscopic validation of the cosmological sample',
-        'DOI: 10.1051/0004-6361/201424208', 'https://www.aanda.org/articles/aa/full_html/2024/09/aa48938-23/aa48938-23.html',
-        'https://ui.adsabs.harvard.edu/abs/2024A%26A...689A.109T/abstract'
-    ],
-    'Quasars | Trefoloni2024': {
-        tags: ['featured', 'extrasolar', 'DSO/galaxy/galaxy type'],
-        file: 'spectra/files/Quasars_Trefoloni2024.txtA',
         is_emissive: true
     },
 

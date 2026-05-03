@@ -584,7 +584,7 @@ class _SpectralObject(_TrueColorToolsObject):
         to energy spectral density per wavelength, using the fact that f_λ = f_ν c / λ².
         """
         scale_factors = 1 / self.nm / self.nm # squaring nm will overflow uint16
-        return (self / scale_factors).normalize()
+        return (self * scale_factors).normalize()
 
     def mean_spectrum(self):
         """ Returns the mean spectrum along the spatial axes """
