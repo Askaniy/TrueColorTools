@@ -79,13 +79,59 @@ def spectral_binning(
     # Cumulative distribution function
     br_cdf = np.zeros(br0.shape, dtype=np.float64)
     br_cdf[1:] = np.cumsum(0.5 * (br0[:-1] + br0[1:]) * nm0_diff, axis=0) # Riemann sum
-    br1 = np.diff(linear_interp(nm0, br_cdf, nm1_edges), axis=0) / step
+    br1 = np.diff(linear_interp(nm0, br_cdf, nm1_edges, extrap_mode='linear'), axis=0) / step
     sd1 = None
     if sd0 is not None:
         sd_cdf = np.zeros(nm0.shape, dtype=np.float64)
         sd_cdf[1:] = np.cumsum(0.5 * (sd0[:-1] + sd0[1:]) * nm0_diff, axis=0)
-        sd1 = np.diff(linear_interp(nm0, sd_cdf, nm1_edges), axis=0) / step
+        sd1 = np.diff(linear_interp(nm0, sd_cdf, nm1_edges, extrap_mode='linear'), axis=0) / step
     return br1, sd1
+
+def linear_interp(x0: np.ndarray, y0: np.ndarray, x1: np.ndarray, extrap_mode='constant'):
+    """
+    Equivalent to the `np.interp(x1, x0, y0)`, but also works for sets and cubes.
+    Allows two extrapolation modes: `constant` and `linear`.
+    `x0` must be sorted!
+    """
+    idx_all = np.searchsorted(x0, x1)
+    extrap_mask_left = idx_all == 0
+    extrap_mask_right = idx_all == len(x0)
+    extrap_mask = extrap_mask_left ^ extrap_mask_right
+    idx_interp = idx_all[~extrap_mask]
+    x_left = x0[idx_interp - 1]
+    y_left = y0[idx_interp - 1]
+    delta_x = x0[idx_interp] - x_left
+    delta_y = y0[idx_interp] - y_left
+    slope = delta_y.T / delta_x
+    interp_x = x1[~extrap_mask]
+    interp_y = y_left + (slope * (interp_x - x_left)).T
+    if np.any(extrap_mask):
+        # Extrapolation
+        y1 = np.empty(x1.size)
+        y1[~extrap_mask] = interp_y
+        match extrap_mode:
+            case 'constant':
+                if np.any(extrap_mask_left):
+                    y1[extrap_mask_left] = y0[0]
+                if np.any(extrap_mask_right):
+                    y1[extrap_mask_right] = y0[-1]
+            case 'linear':
+                if np.any(extrap_mask_left):
+                    delta_x = x0[0] - x0[1]
+                    delta_y = y0[0] - y0[1]
+                    slope = delta_y.T / delta_x
+                    extrap = y0[0] + slope * (x1[extrap_mask_left] - x0[0])
+                    y1[extrap_mask_left] = extrap
+                if np.any(extrap_mask_right):
+                    delta_x = x0[-1] - x0[-2]
+                    delta_y = y0[-1] - y0[-2]
+                    slope = delta_y.T / delta_x
+                    extrap = y0[-1] + slope * (x1[extrap_mask_right] - x0[-1])
+                    y1[extrap_mask_right] = extrap
+    else:
+        # Only interpolation
+        y1 = interp_y
+    return y1
 
 def spectral_downscaling(nm0: Sequence, br0: np.ndarray, sd0: np.ndarray, nm1: Sequence, step: int|float):
     """
@@ -214,15 +260,6 @@ def expand2x(array0: np.ndarray):
     array1[1::2] = (array0[:-1] + array0[1:]) * 0.5
     return array1
 
-def linear_interp(x0: np.ndarray, y0: np.ndarray, x1: np.ndarray):
-    """ Equivalent to the `np.interp()`, but also works for cubes """
-    idx = np.clip(np.searchsorted(x0, x1), 0, len(x0) - 1)
-    x_left = x0[idx - 1]
-    y_left = y0[idx - 1]
-    delta_x = x0[idx] - x_left
-    delta_y = y0[idx] - y_left
-    return y_left + ((x1 - x_left) / delta_x * delta_y.T).T
-
 def custom_interp(array0: np.ndarray, k=16):
     """
     Returns curve or cube values with twice the resolution. Can be used in a loop.
@@ -341,7 +378,8 @@ def extrapolating(x: np.ndarray, y: np.ndarray, sd: np.ndarray, x_arr: np.ndarra
                     corner_y = np.average(y_arr, weights=avg_weights, axis=0) - diff * avg_steps * weights_center_of_mass
                 y1 = custom_extrap(x1, diff/step, x[0], corner_y)
                 if not is_cube:
-                    sd1 = sd_left + expand_1D_array(extrap_sd(corner_y, np.arange(x[0]-x_arr[0], 0, -step) - step), obj_shape)
+                    sd1 = sd_left + expand_1D_array(extrap_sd(corner_y, np.arange(int(x[0]-x_arr[0]), 0, -step) - step), obj_shape)
+                    #                                                             ^^^ solves a bug with uint16
             x = np.append(x1, x)
             y = np.append(y1, y, axis=0)
             if not is_cube:
