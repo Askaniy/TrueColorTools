@@ -5957,7 +5957,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
-    '(463368) 2012 VU85 | MBOSS': {
+    '(463368) Eurytus | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         photometric_system: 'Generic_Bessell',
         color_indices: {'B-V': [1.070, 0.060], 'V-R': [0.630, 0.040]},
