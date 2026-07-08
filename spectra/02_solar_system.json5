@@ -809,7 +809,7 @@
         sd: [0.030, 0.007, 0.006, 0.005, 0.006], // Fig. 2a
         is_albedo: true, // Reflectivity
     },
-    'Wesley impact impact site: Core, 56° S (Jupiter) | Hammel2010': { // July 23 and August 8 2009
+    'Wesley impact scar: 56° S (Jupiter) | Hammel2010': { // Core, July 23 and August 8 2009
         tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter/Jovian feature'],
         photometric_system: 'HST_WFC3_UVIS1',
         filters: ['F225W', 'F275W', 'FQ378N', 'FQ437N', 'FQ508N', 'FQ634N', 'FQ727N', 'FQ889N', 'FQ906N', 'FQ924N'], // Filters from Table 1
@@ -1027,7 +1027,7 @@
         'DOI: 10.1126/science.285.5429.870', 'https://pirlwww.lpl.arizona.edu/HIIPS/Publications/geissler_papers/io_aurorae_science.pdf',
         'https://ui.adsabs.harvard.edu/abs/1999Sci...285..870G/abstract'
     ],
-    'Aurorae of Io: May 31 1998 (J I) | Geissler1999': {
+    'Aurorae of Io: 1998-05-31 (J I) | Geissler1999': {
         tags: ['Solar System/Jovian system', 'aurora'],
         // VIO, GRN, RED
         nm: [404, 560, 630],
@@ -1043,7 +1043,7 @@
         'DOI: 10.1016/j.icarus.2004.01.008', 'https://ciclops.org/media/sp/2007/2676_7438_0.pdf',
         'https://ui.adsabs.harvard.edu/abs/2004Icar..172..127G/abstract'
     ],
-    'Aurorae of Io: Jan 5 2001 (J I) | Geissler2004': {
+    'Aurorae of Io: 2001-01-05 (J I) | Geissler2004': {
         tags: ['Solar System/Jovian system', 'aurora'],
         // UV3, BL1, GRN, R+G, Clear, CB1, RED, IR1
         nm: [338, 451, 568, 601, 611, 619, 650, 752],
@@ -1060,7 +1060,7 @@
         'DOI: 10.3847/PSJ/ade0b1', 'https://iopscience.iop.org/article/10.3847/PSJ/ade0b1/meta',
         'https://ui.adsabs.harvard.edu/abs/2025PSJ.....6..181M/abstract'
     ],
-    'Aurorae of Io: Nov 24 2022 (J I) | Milby2025': {
+    'Aurorae of Io: 2022-11-24 (J I) | Milby2025': {
         tags: ['Solar System/Jovian system', 'aurora'],
         nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 844.6, 922.3],
         br: [
@@ -1070,7 +1070,7 @@
         is_emission_spectrum: true,
         is_emissive: true,
     },
-    'Aurorae of Io: Aug 9 2023 (J I) | Milby2025': {
+    'Aurorae of Io: 2023-08-09 (J I) | Milby2025': {
         tags: ['Solar System/Jovian system', 'aurora'],
         nm: [406.9, 407.6, 458.9, 557.7, 589, 589.6, 630, 636.4],
         br: [
@@ -1080,7 +1080,7 @@
         is_emission_spectrum: true,
         is_emissive: true,
     },
-    'Aurorae of Io: Aug 25 2023 (J I) | Milby2025': {
+    'Aurorae of Io: 2023-08-25 (J I) | Milby2025': {
         tags: ['Solar System/Jovian system', 'aurora'],
         nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
         br: [
@@ -1091,7 +1091,7 @@
         is_emission_spectrum: true,
         is_emissive: true,
     },
-    'Aurorae of Io: Sep 12 2024 (J I) | Milby2025': {
+    'Aurorae of Io: 2024-09-12 (J I) | Milby2025': {
         tags: ['Solar System/Jovian system', 'aurora'],
         nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
         br: [
@@ -1102,7 +1102,7 @@
         is_emission_spectrum: true,
         is_emissive: true,
     },
-    'Aurorae of Io: Oct 5 2024 (J I) | Milby2025': {
+    'Aurorae of Io: 2024-10-05 (J I) | Milby2025': {
         tags: ['Solar System/Jovian system', 'aurora'],
         nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
         br: [
@@ -1113,7 +1113,7 @@
         is_emission_spectrum: true,
         is_emissive: true,
     },
-    'Aurorae of Io: Oct 21 2024 (J I) | Milby2025': {
+    'Aurorae of Io: 2024-10-21 (J I) | Milby2025': {
         tags: ['Solar System/Jovian system', 'aurora'],
         nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
         br: [

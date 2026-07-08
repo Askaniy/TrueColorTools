@@ -23,7 +23,7 @@
         file: 'spectra/files/Assef2010/AGN1.datJU', // 10^-11 erg/s/cm^2/Hz
         is_emissive: true
     },
-    'AGN: Using the SED by Richards2006 as a starting point | Assef2010': {
+    'AGN: Starting point is SED by Richards et al. 2006 | Assef2010': {
         tags: ['extrasolar', 'featured', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Assef2010/AGN2.datJU', // 10^-14 erg/s/cm^2/Hz
         is_emissive: true
