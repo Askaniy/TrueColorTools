@@ -3026,12 +3026,21 @@
         'DOI: 10.1016/j.icarus.2019.113463', 'https://arxiv.org/abs/1907.11451',
         'https://ui.adsabs.harvard.edu/abs/2020Icar..33813463S/abstract'
     ],
-    '(52246) Donaldjohanson | SouzaFeliciano2020, SsODNet': {
+    'Marchi2025': [
+        'A Pre-flyby View on the Origin of Asteroid Donaldjohanson, a Target of the NASA Lucy Mission',
+        'DOI: 10.3847/PSJ/adb4f4', 'https://iopscience.iop.org/article/10.3847/PSJ/adb4f4',
+        'https://ui.adsabs.harvard.edu/abs/2025PSJ.....6...59M/abstract'
+    ],
+    'Marchi2026': [
+        'The Lucy flyby of (52246) Donaldjohanson: A bilobed asteroid with tumbling rotation',
+        'DOI: 10.1126/science.aec0503', 'https://www2.boulder.swri.edu/~bottke/Reprints/Marchi_2026_Science.aec0503._DJ_Asteroid.pdf'
+    ],
+    '(52246) Donaldjohanson | SouzaFeliciano2020, Marchi2025, Marchi2026': {
         tags: ['featured', 'Solar System', 'minor body/asteroid/main belt', 'spacecraft target/Lucy target'],
         nm_range: {start: 500, stop: 900, step: 50},
         br: [0.922, 1.000, 1.027, 1.044, 1.029, 1.030, 1.023, 1.001, 0.985], // traced from Fig. 2 (fit)
-        geometric_albedo: ['Generic_Bessell.V', [0.0622, 0.0115]],
-        phase_function: ['Misc_Atlas.orange', 'HG1G2', {H: [15.6692, +0.0621, -0.0787], G_1: [0.0182, +0.0345, -0.0182], G_2: [0.9325, +0.0641, -0.075]}],
+        geometric_albedo: ['Generic_Bessell.V', [0.103, 0.019]],
+        phase_function: ['HG1G2', {G_1: [0.63, 0.06], G_2: [0.18, 0.09]}], // Supplementary Materials, "Lightcurve data and rotation analysis"
     },
     '(52747) 1998 HM151 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO'],
@@ -5998,18 +6007,24 @@
         'DOI: 10.48550/arXiv.2603.28102', 'https://arxiv.org/abs/2603.28102',
         'http://scixplorer.org/abs/2026arXiv260328102Z/abstract'
     ],
-    '(469219) Kamoʻoalewa | Zhang2026': {
+    'Sharkey2026': [
+        'JWST Characterization of Earth Quasi-Satellite (469219) Kamo`oalewa',
+        'https://arxiv.org/abs/2606.24017'
+    ],
+    '(469219) Kamoʻoalewa | Zhang2026, Sharkey2026': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/quasi-satellite', 'spacecraft target/Tianwen-2 target'],
         file: 'spectra/files/Kamooalewa_Zhang2026.txtU', // Fig. 1a
+        geometric_albedo: ['Generic_Bessell.V', [0.59, +0.25, -0.17]],
     },
     'Sharkey2021': [
         'Lunar-like silicate material forms the Earth quasi-satellite (469219) 2016 HO3 Kamoʻoalewa',
         'DOI: 10.1038/s43247-021-00303-7', 'https://www.nature.com/articles/s43247-021-00303-7',
         'https://ui.adsabs.harvard.edu/abs/2021ComEE...2..231S/abstract'
     ],
-    '(469219) Kamoʻoalewa | Sharkey2021': {
+    '(469219) Kamoʻoalewa | Sharkey2021, Sharkey2026': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/quasi-satellite', 'spacecraft target/Tianwen-2 target'],
-        file: 'spectra/files/Kamooalewa_Sharkey2021.txtU'
+        file: 'spectra/files/Kamooalewa_Sharkey2021.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.59, +0.25, -0.17]],
     },
     '(469306) 1999 CD158 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/resonant TNO'],
