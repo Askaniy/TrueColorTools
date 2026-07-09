@@ -1636,7 +1636,7 @@
         geometric_albedo: ['Generic_Bessell.V', [0.99, 0.13]], // Table 2, p. 325 (Verbiscer2018)
     },
     'Janus (S X) | Ciarniello2024, Verbiscer2007': { // phase angle 50°
-        tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         file: 'spectra/files/Ciarniello2024/Janus.txt',
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.71, 0.02]],
     },
@@ -1667,7 +1667,7 @@
     },
     // Alkyonides
     'Methone (S XXXII) | Ciarniello2024, Thomas2013': { // phase angle 50°
-        tags: ['featured', 'Solar System/Saturnian system', 'natural satellite/regular moon'],
+        tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR2', 'IR3', 'IR4'],
         br: [0.878, 1.000, 1.000, 1.015, 1.032, 1.031, 1.011, 0.927],

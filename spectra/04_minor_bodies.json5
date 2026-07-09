@@ -3899,7 +3899,7 @@
         'https://ui.adsabs.harvard.edu/abs/2024A%26A...688L...7F/abstract'
     ],
     '(98943) Torifune | SMASS, Fornasier2024b': {
-        tags: ['SMASS', 'Solar System', 'minor body/asteroid/NEO/Apollo', 'spacecraft target/Hayabusa2 target/Hayabusa2# target'],
+        tags: ['featured', 'SMASS', 'Solar System', 'minor body/asteroid/NEO/Apollo', 'spacecraft target/Hayabusa2 target/Hayabusa2# target'],
         file: 'spectra/files/SMASS/au2001CC21.7.txtU',
         geometric_albedo: ['Generic_Bessell.V', [0.216, 0.016]],
         phase_function: ['HG1G2', {H: [18.92, 0.20], G_1: 0.2588, G_2: 0.3721}],
@@ -6012,7 +6012,7 @@
         'https://arxiv.org/abs/2606.24017'
     ],
     '(469219) Kamoʻoalewa | Zhang2026, Sharkey2026': {
-        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/quasi-satellite', 'spacecraft target/Tianwen-2 target'],
+        tags: ['featured', 'Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/quasi-satellite', 'spacecraft target/Tianwen-2 target'],
         file: 'spectra/files/Kamooalewa_Zhang2026.txtU', // Fig. 1a
         geometric_albedo: ['Generic_Bessell.V', [0.59, +0.25, -0.17]],
     },

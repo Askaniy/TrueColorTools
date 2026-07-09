@@ -19,17 +19,17 @@
     ],
     // All templates are normalized to be at a distance of 10pc and to have an integrated luminosity between the wavelength boundaries of 10^10 L_sun
     'Standard AGN | Assef2010': {
-        tags: ['extrasolar', 'featured', 'DSO/galaxy/galaxy type'],
+        tags: ['extrasolar', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Assef2010/AGN1.datJU', // 10^-11 erg/s/cm^2/Hz
         is_emissive: true
     },
     'AGN: Starting point is SED by Richards et al. 2006 | Assef2010': {
-        tags: ['extrasolar', 'featured', 'DSO/galaxy/galaxy type'],
+        tags: ['extrasolar', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Assef2010/AGN2.datJU', // 10^-14 erg/s/cm^2/Hz
         is_emissive: true
     },
     'Elliptical galaxies | Assef2010': {
-        tags: ['extrasolar', 'featured', 'DSO/galaxy/galaxy type'],
+        tags: ['extrasolar', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Assef2010/E.datJU', // 10^-16 erg/s/cm^2/Hz
         is_emissive: true
     },
@@ -55,7 +55,7 @@
         is_emissive: true
     },
     'Elliptical galaxies | Kinney1996': {
-        tags: ['extrasolar', 'featured', 'DSO/galaxy/galaxy type'],
+        tags: ['featured', 'extrasolar', 'DSO/galaxy/galaxy type'],
         file: 'spectra/files/Kinney1996/elliptical_template.fits',
         is_emissive: true
     },
