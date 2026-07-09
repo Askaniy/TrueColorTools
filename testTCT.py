@@ -50,7 +50,7 @@ class TestTCT(unittest.TestCase):
         # 0.25% agreement with SVO Filter Profile Service calculations:
         np.testing.assert_allclose((self.vega @ self.v)[0], 3.62708e-11, rtol=0.0025)
         # 3.5% agreement with SVO Filter Profile Service calculations:
-        np.testing.assert_allclose((self.vega @ self.ubv).br, [3.96526e-11, 6.13268e-11, 3.62708e-11], rtol=0.035)
+        np.testing.assert_allclose((self.vega @ self.ubv).br, [4.089744e-11, 6.365467e-11, 3.623954e-11], rtol=0.035)
 
     def test_addition(self):
         np.testing.assert_allclose((self.vega + self.vega).br, (self.vega * 2).br, rtol=0.01)

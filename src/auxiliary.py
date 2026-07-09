@@ -4,6 +4,7 @@ import numpy as np
 from scipy.interpolate import PchipInterpolator, CloughTocher2DInterpolator
 from math import sqrt, ceil
 from collections.abc import Sequence
+from typing import Literal
 
 
 
@@ -87,50 +88,56 @@ def spectral_binning(
         sd1 = np.diff(linear_interp(nm0, sd_cdf, nm1_edges, extrap_mode='linear'), axis=0) / step
     return br1, sd1
 
-def linear_interp(x0: np.ndarray, y0: np.ndarray, x1: np.ndarray, extrap_mode='constant'):
+def linear_interp(
+    x0: np.ndarray,
+    y0: np.ndarray,
+    x1: np.ndarray,
+    extrap_mode: Literal['linear', 'nearest'] = 'linear',
+):
     """
+    Multivariate linear interpolation with optional extrapolation.
     Equivalent to the `np.interp(x1, x0, y0)`, but also works for sets and cubes.
-    Allows two extrapolation modes: `constant` and `linear`.
+    Allows two extrapolation modes: `linear` and `nearest` (with constant).
     `x0` must be sorted!
     """
-    idx_all = np.searchsorted(x0, x1)
-    extrap_mask_left = idx_all == 0
-    extrap_mask_right = idx_all == len(x0)
-    extrap_mask = extrap_mask_left ^ extrap_mask_right
-    idx_interp = idx_all[~extrap_mask]
-    x_left = x0[idx_interp - 1]
-    y_left = y0[idx_interp - 1]
-    delta_x = x0[idx_interp] - x_left
-    delta_y = y0[idx_interp] - y_left
-    slope = delta_y.T / delta_x
-    interp_x = x1[~extrap_mask]
-    interp_y = y_left + (slope * (interp_x - x_left)).T
-    if np.any(extrap_mask):
-        # Extrapolation
-        y1 = np.empty(x1.size)
-        y1[~extrap_mask] = interp_y
-        match extrap_mode:
-            case 'constant':
-                if np.any(extrap_mask_left):
-                    y1[extrap_mask_left] = y0[0]
-                if np.any(extrap_mask_right):
-                    y1[extrap_mask_right] = y0[-1]
-            case 'linear':
-                if np.any(extrap_mask_left):
-                    delta_x = x0[0] - x0[1]
-                    delta_y = y0[0] - y0[1]
-                    slope = delta_y.T / delta_x
-                    extrap = y0[0] + slope * (x1[extrap_mask_left] - x0[0])
-                    y1[extrap_mask_left] = extrap
-                if np.any(extrap_mask_right):
-                    delta_x = x0[-1] - x0[-2]
-                    delta_y = y0[-1] - y0[-2]
-                    slope = delta_y.T / delta_x
-                    extrap = y0[-1] + slope * (x1[extrap_mask_right] - x0[-1])
-                    y1[extrap_mask_right] = extrap
+    len_x0 = len(x0)
+    if len_x0 < 2:
+        raise ValueError('x0 must contain at least 2 elements for interpolation')
+    idx_all = np.searchsorted(x0, x1, side='right')
+    on_right = x1 == x0[-1]
+    if np.any(on_right):
+        idx_all[on_right] = len_x0 - 1
+    interior_mask = (idx_all > 0) & (idx_all < len_x0)
+    idx_interp = idx_all[interior_mask]
+    extra_dims = (1,) * (y0.ndim - 1)  # empty tuple for 1D y0
+    if np.any(interior_mask):
+        # Interior interpolation
+        x_left = x0[idx_interp - 1]
+        y_left = y0[idx_interp - 1]
+        delta_x = x0[idx_interp] - x_left
+        delta_y = y0[idx_interp] - y_left
+        slopes = delta_y / delta_x.reshape(-1, *extra_dims)
+        interp_x = x1[interior_mask]
+        diff_x = (interp_x - x_left).reshape(-1, *extra_dims)
+        interp_y = y_left + slopes * diff_x
     else:
-        # Only interpolation
-        y1 = interp_y
+        interp_y = np.empty((0, *y0.shape[1:]))
+    if np.all(interior_mask):
+        # All points are interior, no extrapolation needed
+        return interp_y
+    # Prepare output array
+    y1 = np.empty((x1.size, *y0.shape[1:]))
+    y1[interior_mask] = interp_y
+    # Slopes for extrapolation
+    slope_L = slope_R = 0.
+    if extrap_mode == 'linear':
+        slope_L = (y0[1] - y0[0]) / (x0[1] - x0[0])
+        slope_R = (y0[-1] - y0[-2]) / (x0[-1] - x0[-2])
+    # Fill extrapolation points
+    exterior_mask_L = idx_all == 0
+    exterior_mask_R = idx_all == len_x0
+    y1[exterior_mask_L] = (y0[0] + slope_L * (x1[exterior_mask_L] - x0[0]).reshape(-1, *extra_dims))
+    y1[exterior_mask_R] = (y0[-1] + slope_R * (x1[exterior_mask_R] - x0[-1]).reshape(-1, *extra_dims))
     return y1
 
 def spectral_downscaling(nm0: Sequence, br0: np.ndarray, sd0: np.ndarray, nm1: Sequence, step: int|float):
