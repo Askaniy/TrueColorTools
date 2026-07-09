@@ -640,6 +640,8 @@ class _SpectralObject(_TrueColorToolsObject):
     def define_on_range(self, nm_arr: np.ndarray, crop: bool = False):
         """ Returns a new SpectralObject with a guarantee of definition on the requested wavelength array """
         extrapolated = self.__class__(*aux.extrapolating(self.nm, self.br, self.sd, nm_arr, nm_step), name=self.name)
+        if hasattr(self, 'names'):
+            extrapolated.names = self.names
         if crop:
             start = max(extrapolated.nm[0], nm_arr[0])
             end = min(extrapolated.nm[-1], nm_arr[-1])
@@ -970,7 +972,11 @@ class FilterSystem(SpectralSquare):
             non_zero_indices = np.nonzero(profile)[0]
             start = non_zero_indices[0] - 1
             end = non_zero_indices[-1] + 2
-            return Spectrum(self.nm[start:end], profile[start:end], name=self.names[index])
+            try:
+                name = self.names[index]
+            except IndexError:
+                name = None
+            return Spectrum(self.nm[start:end], profile[start:end], name=name)
 
 
 class _Cube(_TrueColorToolsObject):
@@ -1859,7 +1865,7 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
 xyz_cmf = FilterSystem.from_list(('CIE_1931_2deg.x', 'CIE_1931_2deg.y', 'CIE_1931_2deg.z'))
 visible_range = xyz_cmf.nm # original CMF definition range is 360-830 nm
 #visible_range = aux.grid(380, 730, 5) # for values greater than 0.001, saves 27% of memory used
-xyz_cmf = xyz_cmf.define_on_range(visible_range)
+#xyz_cmf = xyz_cmf.define_on_range(visible_range)
 
 # There are CMFs transformed from the CIE (2006) LMS functions, 2-deg
 # (https://cie.co.at/datatable/cie-2006-lms-cone-fundamentals-2-field-size-terms-energy)
