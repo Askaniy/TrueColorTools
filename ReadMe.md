@@ -6,7 +6,8 @@ Input data is accepted in the form of filters measurements (such as color indice
 
 To calibrate the color of maps based on TCT data, I recommend using [Cylindrical Texture Calibrator](https://github.com/Askaniy/CylindricalTextureCalibrator).
 
-![TCT screenshot](screenshot.png)
+<img src="screenshot_tab1.png" style="width: 600px; display: block; margin-left: auto; margin-right: auto;">
+<img src="screenshot_tab2.png" style="width: 600px; display: block; margin-left: auto; margin-right: auto;">
 
 
 ## Installation
