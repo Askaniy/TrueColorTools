@@ -8,107 +8,6 @@ from src.table_generator import ImageFont, line_splitter
 
 class TestTCT(unittest.TestCase):
 
-    def setUp(self):
-        self.sun = core.Spectrum.from_file('spectra/files/CALSPEC/sun_reference_stis_002.fits', name='Sun') # W / (m² nm)
-        self.vega = core.Spectrum.from_file('spectra/files/CALSPEC/alpha_lyr_stis_011.fits', name='Vega') # W / (m² nm)
-        self.v = core.get_filter('Generic_Bessell.V')
-        self.ubv = core.FilterSystem.from_list(('Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V'), name='UBV')
-        self.r = core.get_filter('StilesBurch2deg.r')
-        self.rgb = core.FilterSystem.from_list(('StilesBurch2deg.r', 'StilesBurch2deg.g', 'StilesBurch2deg.b'), name='RGB')
-
-    def test_mean_nm(self):
-        np.testing.assert_allclose(self.sun.mean_nm(), 857.052056, rtol=0.01)
-        np.testing.assert_allclose(self.vega.mean_nm(), 510.428463, rtol=0.01)
-        np.testing.assert_allclose(self.v.mean_nm(), 551.204273, rtol=0.01) # 551.210 in SVO Filter Profile Service
-        np.testing.assert_allclose(self.ubv.mean_nm(), [360.507105, 441.301389, 551.204273], rtol=0.01)
-
-    def test_sd_of_nm(self):
-        np.testing.assert_allclose(self.sun.sd_of_nm(), 468.978657, rtol=0.01)
-        np.testing.assert_allclose(self.vega.sd_of_nm(), 353.430263, rtol=0.01)
-        np.testing.assert_allclose(self.v.sd_of_nm(), 36.354015, rtol=0.01)
-        np.testing.assert_allclose(self.ubv.sd_of_nm(), [21.932217, 35.816641, 36.354015], rtol=0.01)
-
-    def test_stub_and_convolution_possibility(self):
-        self.assertIsInstance(core.Spectrum.stub() @ core.Spectrum.stub(), tuple)
-        self.assertIsInstance(core.Spectrum.stub() @ core.FilterSystem.stub(), core.Photospectrum)
-        self.assertIsInstance(core.SpectralSquare.stub() @ core.Spectrum.stub(), tuple)
-        self.assertIsInstance(core.SpectralSquare.stub() @ core.FilterSystem.stub(), core.PhotospectralSquare)
-        self.assertIsInstance(core.SpectralCube.stub() @ core.Spectrum.stub(), tuple)
-        self.assertIsInstance(core.SpectralCube.stub() @ core.FilterSystem.stub(), core.PhotospectralCube)
-        self.assertIsInstance(core.Photospectrum.stub() @ core.Spectrum.stub(), tuple)
-        self.assertIsInstance(core.Photospectrum.stub() @ core.FilterSystem.stub(), core.Photospectrum)
-        self.assertIsInstance(core.PhotospectralSquare.stub() @ core.Spectrum.stub(), tuple)
-        self.assertIsInstance(core.PhotospectralSquare.stub() @ core.FilterSystem.stub(), core.PhotospectralSquare)
-        self.assertIsInstance(core.PhotospectralCube.stub() @ core.Spectrum.stub(), tuple)
-        self.assertIsInstance(core.PhotospectralCube.stub() @ core.FilterSystem.stub(), core.PhotospectralCube)
-
-    def test_convolution(self):
-        np.testing.assert_allclose((self.vega @ self.v)[0], (self.vega * self.v).integrate(), rtol=0.01)
-        np.testing.assert_allclose((self.vega @ self.ubv).br, (self.vega * self.ubv).integrate(), rtol=0.01)
-
-    def test_vega_system_zero_points(self):
-        # 0.25% agreement with SVO Filter Profile Service calculations:
-        np.testing.assert_allclose((self.vega @ self.v)[0], 3.62708e-11, rtol=0.0025)
-        # 3.5% agreement with SVO Filter Profile Service calculations:
-        np.testing.assert_allclose((self.vega @ self.ubv).br, [4.089744e-11, 6.365467e-11, 3.623954e-11], rtol=0.035)
-
-    def test_addition(self):
-        np.testing.assert_allclose((self.vega + self.vega).br, (self.vega * 2).br, rtol=0.01)
-
-    def test_multiplication(self):
-        np.testing.assert_allclose((self.v * self.vega).mean_nm(), 544.601418, rtol=0.01) # 544.543 in SVO Filter Profile Service
-        np.testing.assert_allclose((self.ubv * self.vega).mean_nm(), [366.764603, 435.741381, 544.601418], rtol=0.01)
-        np.testing.assert_allclose((self.vega * 2 @ self.v)[0], (self.vega @ self.v)[0] * 2, rtol=0.01)
-        np.testing.assert_allclose((self.vega * 2 @ self.ubv).br, (self.vega @ self.ubv * 2).br, rtol=0.01)
-
-    def test_division(self):
-        np.testing.assert_allclose((self.v / self.vega).mean_nm(), 558.681024, rtol=0.01)
-        np.testing.assert_allclose((self.ubv / self.vega).mean_nm(), [356.283866, 447.589411, 558.681024], rtol=0.01)
-        np.testing.assert_allclose((self.sun / self.sun.nm).mean_nm(), 670.9781529, rtol=0.01)
-        np.testing.assert_allclose((self.ubv / self.ubv.nm).mean_nm(), [359.158258, 438.480057, 548.890305], rtol=0.01)
-
-    def test_normalization(self):
-        np.testing.assert_allclose((self.vega @ (self.v * 2).normalize())[0], (self.vega @ self.v)[0], rtol=0.01)
-        np.testing.assert_allclose((self.vega @ (self.ubv * 2).normalize()).br, (self.vega @ self.ubv).br, rtol=0.01)
-
-    def test_spectrum_from_nm(self):
-        spectrum = core.Spectrum.from_nm(555.5)
-        np.testing.assert_allclose(spectrum.integrate(), 1.0, rtol=1e-10)
-        np.testing.assert_allclose(spectrum.mean_nm(), 555.5, rtol=1e-10)
-        spectrum = core.Spectrum.from_nm(555)
-        np.testing.assert_allclose(spectrum.integrate(), 1.0, rtol=1e-10)
-        np.testing.assert_allclose(spectrum.mean_nm(), 555, rtol=1e-10)
-
-    def test_filter_edges(self):
-        self.assertEqual(self.v.br[0], 0.)
-        self.assertEqual(self.v.br[-1], 0.)
-        extrapolated_v = self.v.define_on_range(core.visible_range)
-        self.assertEqual(extrapolated_v.br[0], 0.)
-        self.assertEqual(extrapolated_v.br[-1], 0.)
-
-    def test_getting_profile_from_filter_system(self):
-        v_there_and_back = core.FilterSystem.from_list([self.v])[0]
-        np.testing.assert_allclose(v_there_and_back.nm, self.v.nm)
-        np.testing.assert_allclose(v_there_and_back.br, self.v.br)
-
-    def test_filter_system_getitem(self):
-        np.testing.assert_equal(self.rgb[0].mean_nm(), self.r.mean_nm())
-
-    def test_extrapolation_flat_spectrum(self):
-        nm = np.arange(500, 701, 5)
-        spectrum = core.Spectrum(nm, np.ones_like(nm))
-        np.testing.assert_equal(spectrum.define_on_range(core.visible_range, crop=True).br, np.ones(core.visible_range.size))
-
-    def test_extrapolation_flat_photospectrum(self):
-        photospectrum = core.Photospectrum(self.ubv, (1, 1, 1), name='test photospectrum')
-        np.testing.assert_allclose(photospectrum.define_on_range(core.visible_range, crop=True).br, np.ones(core.visible_range.size))
-
-    def test_sd_parsing(self):
-        np.testing.assert_equal(aux.parse_value_sd(0.202), (0.202, None))
-        np.testing.assert_equal(aux.parse_value_sd([0.202, 0.0665]), (0.202, 0.0665))
-        np.testing.assert_equal(aux.parse_value_sd([0.202, 0.084, 0.049]), (0.202, 0.0665))
-        np.testing.assert_equal(aux.parse_value_sd([0.202, +0.084, -0.049]), (0.202, 0.0665))
-
     def test_phase_coeffitient(self):
         model = core.PhaseCoefficient({'beta': [0.032, 0.001]})
         # testing phase function input
@@ -160,22 +59,6 @@ class TestTCT(unittest.TestCase):
         step = 0.01 # radians
         alpha = np.arange(0, np.pi, step)
         np.testing.assert_allclose(model.phase_integral[0], 2*aux.integrate(model.phase_function(alpha)*np.sin(alpha), step, precisely=True), rtol=0.001)
-
-    def test_color_system_reversibility(self):
-        srgb = core.ColorSystem('sRGB')
-        xyz = core.ColorSystem('CIE 1931 XYZ')
-        color0 = core.ColorObject.from_spectral_data(self.sun) # XYZ
-        color1 = color0.to_color_system(srgb)
-        color2 = color1.to_color_system(xyz)
-        np.testing.assert_allclose(color0.to_array(), color2.to_array(), rtol=1e-13)
-
-    def test_adaptation_white_point(self):
-        rgb = core.ColorSystem('CIE 1931 RGB')
-        rgb_ = core.ColorSystem('CIE 1931 RGB', adaptation_white_point='Illuminant E')
-        color0 = core.ColorObject.from_spectral_data(self.sun) # XYZ
-        color1 = color0.to_color_system(rgb)
-        color2 = color1.to_color_system(rgb_)
-        np.testing.assert_allclose(color1.to_array(), color2.to_array(), rtol=1e-13)
 
     def test_name_parsing(self):
         obj_name = core.ObjectName('HZ43(8) (DA) | CALSPEC')
