@@ -571,6 +571,13 @@ class _SpectralObject(_TrueColorToolsObject):
         """ Returns a new SpectralObject with each spectrum divided by its area """
         return self / self.integrate()
 
+    def convert_for_photon_counter(self) -> Self:
+        """
+        Modifies the filter profile to account for photon-counting observation.
+        See "Standard Photometric Systems" by Bessell, Michael S. (2005).
+        """
+        return (self * self.nm).normalize()
+
     def convert_from_photon_spectral_density(self):
         """
         Returns a new SpectralObject converted from photon spectral density
@@ -717,7 +724,7 @@ class Spectrum(_SpectralObject):
 
     @staticmethod
     @lru_cache(maxsize=32)
-    def from_file(file: str, name: str|ObjectName = None, is_emission: bool = False):
+    def from_file(file: str, name: str|ObjectName = None, is_emission: bool = False, is_filter: bool = False):
         """ Creates a Spectrum object based on loaded data from the specified file """
         nm, br, sd = file_reader(file)
         if is_emission:
@@ -728,7 +735,10 @@ class Spectrum(_SpectralObject):
         if 'J' in extension:
             spectrum = spectrum.convert_from_energy_spectral_density_per_frequency()
         elif 'P' in extension:
-            spectrum = spectrum.convert_from_photon_spectral_density()
+            if is_filter:
+                spectrum = spectrum.convert_for_photon_counter()
+            else:
+                spectrum = spectrum.convert_from_photon_spectral_density()
         return spectrum
 
     @staticmethod
@@ -865,7 +875,7 @@ def get_filter(name: str|int|float) -> Spectrum:
     except ValueError:
         try:
             file = str(next(Path('filters').glob(f'{name}.*')))
-            profile = Spectrum.from_file(file, name)
+            profile = Spectrum.from_file(file, name, is_filter=True)
         except StopIteration:
             raise FilterNotFoundError(name)
     return profile.edges_zeroed().normalize()
