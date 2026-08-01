@@ -90,6 +90,11 @@ gui_maximize = {
     'ru': 'Максимизировать яркость',
     'de': 'Helligkeit maximieren'
 }
+gui_maximize_tooltip = {
+    'en': 'Normalizes brightness by dividing all color values by the maximum value',
+    'ru': 'Нормализует яркость, деля все значения цвета на максимальное из них',
+    'de': 'Normalisiert die Helligkeit durch Division aller Farbwerte durch den Maximalwert'
+}
 gui_scale_factor = {
     'en': 'Scale factor',
     'ru': 'Умножить на',
@@ -124,6 +129,16 @@ gui_sphe_tooltip = {
     'en': 'Ratio of scattered light to incident light in all directions',
     'ru': 'Отношение рассеянного света к падающему по всем направлением',
     'de': 'Verhältnis von gestreutem zu einfallendem Licht über alle Richtungen'
+}
+gui_sun_multiply = {
+    'en': ('Multiply by Solar', 'spectrum'),
+    'ru': ('Умножить на спектр', 'Солнца'),
+    'de': ('Multiplikation mit', 'dem Sonnenspektrum')
+}
+gui_sun_multiply_tooltip = {
+    'en': 'Simulates solar reflectance by multiplying albedo (I/F) by the solar spectrum',
+    'ru': 'Моделирует отражение солнечного света, умножая альбедо (I/F) на спектр Солнца',
+    'de': 'Simuliert die Reflexion des Sonnenlichts durch Multiplikation der Albedo (I/F) mit dem Sonnenspektrum'
 }
 #gui_interp = {
 #    'en': ['Interpolator/extrapolator', 'old', 'new'],
@@ -290,6 +305,11 @@ table_scale_factor = {
     'ru': 'Множитель яркости',
     'de': 'Helligkeitsfaktor'
 }
+table_sun_multiply = {
+    'en': 'Contains the reflected Solar spectrum',
+    'ru': 'Содержит отражённый солнечный спектр',
+    'de': 'Enthält das reflektierte Sonnenspektrum'
+}
 table_notes = {
     'en': 'Notes',
     'ru': 'Примечания',
@@ -357,12 +377,12 @@ gui_evaluate_tooltip = {
     'ru': 'Применить функцию к значениям яркости (x), используется синтаксис Python',
     'de': 'Wende Funktion auf Helligkeitswerte (x) an, in Python Syntax geschrieben'
 }
-gui_desun = {
+gui_sun_divide = {
     'en': 'Divide by Solar spectrum',
     'ru': 'Делить на спектр Солнца',
     'de': 'Division durch Sonnenspektrum'
 }
-gui_desun_tooltip = {
+gui_sun_divide_tooltip = {
     'en': 'Removes the reflected color of the Sun, leaves the radiance factor (I/F)',
     'ru': 'Убирает отражённый цвет Солнца, оставляет отражательную способность (I/F)',
     'de': 'Entfernt die reflektierte Farbe der Sonne und belässt den Strahlungsfaktor (I/F)'

@@ -7,7 +7,7 @@ from time import strftime
 import numpy as np
 
 from src.core import Spectrum, ReflectingBody, ColorSystem, ColorPoint, FilterNotFoundError, \
-    visible_range, get_filter, database_parser
+    visible_range, get_filter, database_parser, sun_norm
 import src.gui as gui
 import src.auxiliary as aux
 import src.database as db
@@ -118,13 +118,13 @@ def launch_window(lang: str):
     tab3_recalc_spectrum_events = ('tab3_slider1', 'tab3_slider2', 'tab3_slider3')
 
     # List of events that cause color recalculation
-    tab1_recalc_color_events = ('-AlbedoMode1-', '-AlbedoMode2-', 'tab1_list', 'tab1_(re)load')
+    tab1_recalc_color_events = ('-AlbedoMode1-', '-AlbedoMode2-', '-SunMultiply0-', 'tab1_list', 'tab1_(re)load')
     tab3_recalc_color_events = ('tab3_slider1', 'tab3_slider2', 'tab3_slider3')
 
     # List of events that cause GUI output update
     tab1_update_gui_events = (
         '-ColorSpace-', '-ChromaticAdaptation-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-', '-currentTab-',
-        '-AlbedoMode1-', '-AlbedoMode2-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load'
+        '-AlbedoMode1-', '-AlbedoMode2-', '-SunMultiply0-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load'
     )
     tab2_update_gui_events = (
         '-ColorSpace-', '-ChromaticAdaptation-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-', '-currentTab-',
@@ -249,6 +249,8 @@ def launch_window(lang: str):
                 window['-AlbedoModeText-'].update(visible=is1tab)
                 window['-AlbedoMode1-'].update(visible=is1tab)
                 window['-AlbedoMode2-'].update(visible=is1tab)
+                window['-SunMultiply0-'].update(visible=is1tab)
+                window['-SunMultiply1-'].update(visible=is1tab)
                 window['-formattingText-'].update(visible=not2tab)
                 window['-bitnessText-'].update(visible=not2tab)
                 window['-roundingText-'].update(visible=not2tab)
@@ -308,6 +310,10 @@ def launch_window(lang: str):
 
                         # Apply albedo mode to calculated spectrum
                         tab1_spectrum, tab1_estimated = tab1_body.get_spectrum('geometric' if values['-AlbedoMode1-'] else 'spherical')
+
+                        if values['-SunMultiply0-'] and isinstance(tab1_body, ReflectingBody):
+                            # Multiply by Solar spectrum
+                            tab1_spectrum *= sun_norm
 
                         # Color calculation
                         tab1_color_xyz = ColorPoint.from_spectral_data(tab1_spectrum)
@@ -382,6 +388,10 @@ def launch_window(lang: str):
                             # Setting brightness mode
                             spectrum, estimated = body.get_spectrum('geometric' if values['-AlbedoMode1-'] else 'spherical')
 
+                            if values['-SunMultiply0-'] and isinstance(body, ReflectingBody):
+                                # Multiply by Solar spectrum
+                                spectrum *= sun_norm
+
                             # Color calculation
                             color = ColorPoint.from_spectral_data(spectrum).to_color_system(color_system)
                             color.maximize_brightness = values['-MaximizeBrightness-'] or estimated is None
@@ -404,7 +414,7 @@ def launch_window(lang: str):
                     else:
                         generate_table(
                             objectsDB, values['tab1_tag_filter'], color_system, values['-GammaCorrection-'], values['-MaximizeBrightness-'],
-                            values['-ScaleFactor-'], values['-AlbedoMode1-'], values['tab1_folder'], 'png', lang
+                            values['-ScaleFactor-'], values['-AlbedoMode1-'], values['-SunMultiply0-'], values['tab1_folder'], 'png', lang
                         )
 
             # ------------ Events in the tab "Image processing" ------------
@@ -486,7 +496,7 @@ def launch_window(lang: str):
                                 files=tab2_files,
                                 filters=tab2_filters,
                                 formulas=tab2_formulas,
-                                desun=values['tab2_desun'],
+                                sun_divide=values['tab2_sun_divide'],
                                 photons=values['tab2_photons'],
                                 upscale=values['tab2_upscale'],
                                 log=tab2_logger

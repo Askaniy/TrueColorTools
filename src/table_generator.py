@@ -11,7 +11,7 @@ import src.strings as tr
 
 def generate_table(
         objectsDB: dict, tag: str, color_system: ColorSystem, gamma_correction: bool, maximize_brightness: bool,
-        scale_factor: float, geom_albedo: bool, folder: str, extension: str, lang: str
+        scale_factor: float, geom_albedo: bool, sun_multiply: bool, folder: str, extension: str, lang: str
     ):
     """ Creates and saves a table of colored squares for each spectral data unit that has the specified tag """
     displayed_namesDB = db.obj_names_list(objectsDB, tag)
@@ -72,6 +72,8 @@ def generate_table(
         f'{tr.gui_gamma_correction[lang]}: {tr.table_bool_indicator[lang][gamma_correction]}',
         f'{tr.table_brightness_mode[lang]}: {brMode[lang]}'
     ]
+    if sun_multiply:
+        info_list.append(tr.table_sun_multiply[lang])
     if scale_factor != 1:
         info_list.append(f'{tr.table_scale_factor[lang]}: {scale_factor}')
     info_list.append(tr.link)
@@ -129,6 +131,10 @@ def generate_table(
         # Spectral data import and processing
         body = database_parser(obj_name, objectsDB[obj_name])
         spectrum, estimated = body.get_spectrum('geometric' if geom_albedo else 'spherical')
+
+        if sun_multiply and isinstance(body, ReflectingBody):
+            # Multiply by Solar spectrum
+            spectrum *= sun_norm
 
         # Color calculation
         color = ColorPoint.from_spectral_data(spectrum).to_color_system(color_system)
