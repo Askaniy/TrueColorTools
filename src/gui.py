@@ -121,8 +121,8 @@ def generate_layout(
         [sg.Radio(tr.gui_geom[lang], 'brRadio', enable_events=True, default=brGeom, key='-AlbedoMode1-', tooltip=tr.gui_geom_tooltip[lang])],
         [sg.Radio(tr.gui_sphe[lang], 'brRadio', enable_events=True, default=not brGeom, key='-AlbedoMode2-', tooltip=tr.gui_sphe_tooltip[lang])],
         [sg.T()],
-        [sg.Checkbox(tr.gui_sun_multiply[lang][0], enable_events=True, default=False, key='-SunMultiply0-', tooltip=tr.gui_sun_multiply_tooltip[lang])],
-        [sg.Text(tr.gui_sun_multiply[lang][1], key='-SunMultiply1-', tooltip=tr.gui_sun_multiply_tooltip[lang])],
+        [sg.Checkbox(tr.gui_sun_multiply_splitted[lang][0], enable_events=True, default=False, key='-SunMultiply0-', tooltip=tr.gui_sun_multiply_tooltip[lang])],
+        [sg.Text(tr.gui_sun_multiply_splitted[lang][1], key='-SunMultiply1-', tooltip=tr.gui_sun_multiply_tooltip[lang])],
         [sg.T()],
         [sg.Text(tr.gui_formatting[lang], key='-formattingText-')],
         [
@@ -226,6 +226,7 @@ def generate_layout(
     ]
     tab2_col2_1 = [
         [sg.Checkbox(tr.gui_sun_divide[lang], key='tab2_sun_divide', tooltip=tr.gui_sun_divide_tooltip[lang])],
+        [sg.Checkbox(tr.gui_sun_multiply[lang], key='tab2_sun_multiply', tooltip=tr.gui_sun_multiply_tooltip[lang])],
         [sg.Checkbox(tr.gui_photons[lang], key='tab2_photons', tooltip=tr.gui_photons_tooltip[lang])],
         #[sg.Checkbox(tr.gui_autoalign[lang], key='tab2_autoalign')],
     ]
@@ -358,8 +359,8 @@ def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict[
     window['-AlbedoModeText-'].update(tr.gui_albedo_mode[lang])
     window['-AlbedoMode1-'].update(text=tr.gui_geom[lang])
     window['-AlbedoMode2-'].update(text=tr.gui_sphe[lang])
-    window['-SunMultiply0-'].update(text=tr.gui_sun_multiply[lang][0])
-    window['-SunMultiply1-'].update(tr.gui_sun_multiply[lang][1])
+    window['-SunMultiply0-'].update(text=tr.gui_sun_multiply_splitted[lang][0])
+    window['-SunMultiply1-'].update(tr.gui_sun_multiply_splitted[lang][1])
     window['-formattingText-'].update(tr.gui_formatting[lang])
     window['-bitnessText-'].update(tr.gui_bit[lang])
     window['-roundingText-'].update(tr.gui_rnd[lang])
@@ -394,6 +395,7 @@ def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict[
         window['tab2_path_text'+str(i)].update(tr.gui_browse[lang])
         window['tab2_eval_text'+str(i)].update(tr.gui_evaluate[lang])
     window['tab2_sun_divide'].update(text=tr.gui_sun_divide[lang])
+    window['tab2_sun_multiply'].update(text=tr.gui_sun_multiply[lang])
     window['tab2_photons'].update(text=tr.gui_photons[lang]) #, tooltip=tr.gui_photons_tooltip[lang]) # doesn't work
     #window['tab2_autoalign'].update(text=tr.gui_autoalign[lang])
     #window['tab2_plotpixels'].update(text=tr.gui_plotpixels[lang])

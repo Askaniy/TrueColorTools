@@ -497,6 +497,7 @@ def launch_window(lang: str):
                                 filters=tab2_filters,
                                 formulas=tab2_formulas,
                                 sun_divide=values['tab2_sun_divide'],
+                                sun_multiply=values['tab2_sun_multiply'],
                                 photons=values['tab2_photons'],
                                 upscale=values['tab2_upscale'],
                                 log=tab2_logger

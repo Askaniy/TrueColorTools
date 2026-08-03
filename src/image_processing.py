@@ -15,7 +15,7 @@ import src.image_import as ii
 def image_parser(
         image_mode: int, preview_flag: bool, px_lower_limit: int, px_upper_limit: int,
         single_file: str, files: list, filters: list, formulas: list,
-        sun_divide: bool, photons: bool, upscale: bool, log: Callable
+        sun_divide: bool, sun_multiply: bool, photons: bool, upscale: bool, log: Callable
     ):
     """ Receives user input and performs processing in a parallel thread """
     log('Starting the image processing thread')
@@ -45,8 +45,11 @@ def image_parser(
             log('Converting photon spectral density to energy density')
             cube = cube.convert_from_photon_spectral_density()
         if sun_divide:
-            log('Removing Sun as emitter')
+            log('Dividing by Solar spectrum to remove the reflected color of the Sun')
             cube /= sun_norm
+        if sun_multiply:
+            log('Multiplying by Solar spectrum to simulate the reflection of sunlight')
+            cube *= sun_norm
         px_num = cube.size
         if preview_flag or px_num < px_upper_limit:
             log('Color calculating')

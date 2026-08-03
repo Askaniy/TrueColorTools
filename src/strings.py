@@ -130,13 +130,18 @@ gui_sphe_tooltip = {
     'ru': 'Отношение рассеянного света к падающему по всем направлением',
     'de': 'Verhältnis von gestreutem zu einfallendem Licht über alle Richtungen'
 }
-gui_sun_multiply = {
+gui_sun_multiply_splitted = {
     'en': ('Multiply by Solar', 'spectrum'),
     'ru': ('Умножить на спектр', 'Солнца'),
     'de': ('Multiplikation mit', 'dem Sonnenspektrum')
 }
+gui_sun_multiply = {
+    'en': 'Multiply by Solar spectrum',
+    'ru': 'Умножить на спектр Солнца',
+    'de': 'Multiplikation mit dem Sonnenspektrum'
+}
 gui_sun_multiply_tooltip = {
-    'en': 'Simulates solar reflectance by multiplying albedo (I/F) by the solar spectrum',
+    'en': 'Simulates the reflection of sunlight by multiplying albedo (I/F) by the Solar spectrum',
     'ru': 'Моделирует отражение солнечного света, умножая альбедо (I/F) на спектр Солнца',
     'de': 'Simuliert die Reflexion des Sonnenlichts durch Multiplikation der Albedo (I/F) mit dem Sonnenspektrum'
 }
