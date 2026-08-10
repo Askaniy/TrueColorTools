@@ -1,20 +1,30 @@
 """ Generates and launches a graphical interface that accesses other modules. """
 
-import FreeSimpleGUI as sg
-from sigfig import round as sigfig_round
 from copy import deepcopy
 from time import strftime
-import numpy as np
 
-from src.core import Spectrum, ReflectingBody, ColorSystem, ColorPoint, FilterNotFoundError, \
-    visible_range, get_filter, database_parser, sun_norm
-import src.gui as gui
+import FreeSimpleGUI as sg
+import numpy as np
+from sigfig import round as sigfig_round
+
 import src.auxiliary as aux
 import src.database as db
 import src.image_processing as ip
-from src.table_generator import generate_table
 import src.plotter as pl
 import src.strings as tr
+from src import gui
+from src.core import (
+    ColorPoint,
+    ColorSystem,
+    FilterNotFoundError,
+    ReflectingBody,
+    Spectrum,
+    database_parser,
+    get_filter,
+    sun_norm,
+    visible_range,
+)
+from src.table_generator import generate_table
 
 
 def launch_window(lang: str):
@@ -365,7 +375,7 @@ def launch_window(lang: str):
                     window['tab1_list'].update(tuple(tab1_displayed_namesDB.keys()))
 
                 elif event == 'tab1_pin' and values['tab1_list'] != []:
-                    if tab1_spectrum not in pinned_spectra_and_colors.keys():
+                    if tab1_spectrum not in pinned_spectra_and_colors:
                         pinned_spectra_and_colors |= {tab1_spectrum: tab1_html}
 
                 elif event == 'tab1_clear':

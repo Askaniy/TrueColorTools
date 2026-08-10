@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+
 from src.main import launch_window
 
 # CLI parsing

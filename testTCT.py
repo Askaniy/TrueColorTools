@@ -1,8 +1,9 @@
 import unittest
+
 import numpy as np
 
-import src.core as core
 import src.auxiliary as aux
+from src import core
 from src.table_generator import ImageFont, line_splitter
 
 

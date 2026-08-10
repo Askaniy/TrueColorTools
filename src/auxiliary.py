@@ -1,19 +1,18 @@
 """ File containing constant and functions required in various places, but without dependencies """
 
-import numpy as np
-from scipy.interpolate import PchipInterpolator, CloughTocher2DInterpolator
-from math import sqrt, ceil
 from collections.abc import Sequence
+from math import ceil, sqrt
 from typing import Literal
 
-
+import numpy as np
+from scipy.interpolate import CloughTocher2DInterpolator, PchipInterpolator
 
 # ------------ Core Section ------------
 
 # Constants needed for down scaling spectra and images
 fwhm_factor = np.sqrt(8 * np.log(2))
 
-def grid(start: int|float, end: int|float, step: int):
+def grid(start: float, end: float, step: int):
     """ Returns uniform grid points for the non-integer range that are divisible by the selected step """
     if (shift := start % step) != 0:
         start += step - shift
@@ -26,7 +25,7 @@ def is_smooth(array: Sequence|np.ndarray):
     diff2 = np.diff(np.diff(array, axis=0), axis=0)
     return np.all(diff2 <= 0) | np.all(diff2 >= 0)
 
-def integrate(array: Sequence|np.ndarray, step: int|float, precisely: bool = False):
+def integrate(array: Sequence|np.ndarray, step: float, precisely: bool = False):
     """
     Integration along the spectral axis.
     Uses the rectangle method by default and Riemann sum with midpoint in the "precise" mode.
@@ -44,7 +43,7 @@ def integrate(array: Sequence|np.ndarray, step: int|float, precisely: bool = Fal
 def gaussian_width(current_resolution, target_resolution):
     return np.sqrt(np.abs(target_resolution**2 - current_resolution**2)) / fwhm_factor
 
-def gaussian_convolution(nm0: Sequence, br0: Sequence, nm1: Sequence, step: int|float):
+def gaussian_convolution(nm0: Sequence, br0: Sequence, nm1: Sequence, step: float):
     """
     Applies Gaussian convolution to a non-uniform sparse mesh. Eliminates holes and noise from spectral axis.
 
@@ -66,7 +65,7 @@ def spectral_binning(
         br0: np.ndarray,
         sd0: np.ndarray | None,
         nm1: np.ndarray,
-        step: int | float,
+        step: float,
         nm0_diff: np.ndarray
     ) -> tuple[np.ndarray, np.ndarray | None]:
     """
@@ -140,7 +139,7 @@ def linear_interp(
     y1[exterior_mask_R] = (y0[-1] + slope_R * (x1[exterior_mask_R] - x0[-1]).reshape(-1, *extra_dims))
     return y1
 
-def spectral_downscaling(nm0: Sequence, br0: np.ndarray, sd0: np.ndarray, nm1: Sequence, step: int|float):
+def spectral_downscaling(nm0: Sequence, br0: np.ndarray, sd0: np.ndarray, nm1: Sequence, step: float):
     """
     Returns spectrum brightness values with decreased resolution.
     Incoming graphs or point clouds may have holes and areas of varying resolution.
@@ -289,7 +288,7 @@ def custom_interp(array0: np.ndarray, k=16):
     array1[1::2] += (delta_left - delta_right) / k
     return array1
 
-def interpolating(x0: Sequence, y0: np.ndarray, x1: Sequence, step: int|float) -> np.ndarray:
+def interpolating(x0: Sequence, y0: np.ndarray, x1: Sequence, step: float) -> np.ndarray:
     """
     Returns interpolated brightness values on uniform grid.
     Combination of custom_interp (which returns an uneven mesh) and linear interpolation after it.
@@ -300,7 +299,7 @@ def interpolating(x0: Sequence, y0: np.ndarray, x1: Sequence, step: int|float) -
         y0 = custom_interp(y0, k=11+i)
     return linear_interp(x0, y0, x1)
 
-def higher_dim(arr: Sequence|int|float, times: int, axis: int = 1):
+def higher_dim(arr: Sequence | float, times: int, axis: int = 1):
     """ Gets the array and repeats it along a new dimension """
     return np.repeat(np.expand_dims(arr, axis=axis), times, axis=axis)
 
@@ -319,7 +318,7 @@ def expand_1D_array(arr: np.ndarray, shape: int|tuple):
     return np.broadcast_to(arr[..., *new_axes], (*arr.shape, *shape))
 
 
-def custom_extrap(grid: Sequence, derivative: float|np.ndarray, corner_x: int|float, corner_y: float|np.ndarray) -> np.ndarray:
+def custom_extrap(grid: Sequence, derivative: float|np.ndarray, corner_x: float, corner_y: float|np.ndarray) -> np.ndarray:
     """
     Returns an intuitive continuation of the function on the grid using information about the last point.
     Extrapolation bases on function f(x) = exp( (1-x²)/2 ): f' has extrema of ±1 in (-1, 1) and (1, 1).
@@ -534,12 +533,12 @@ k = 1.381e-23 # Boltzmann constant
 const1 = 2 * h * c * c # * np.pi to get exitance (W/m2) in the assumption of Lambertian surface
 const2 = h * c / k
 
-def planck_radiance(nm: int|float|np.ndarray, T: int|float) -> float|np.ndarray:
+def planck_radiance(nm: float | np.ndarray, T: float) -> float|np.ndarray:
     m = nm * 1e-9
     radiance = const1 / (m**5 * (np.exp(const2 / (m * T)) - 1))
     return radiance * 1e-9 # per m -> per nm
 
-def extended_log10(value: int|float):
+def extended_log10(value: float):
     if value != 0:
         return np.log10(value)
     else:
@@ -602,7 +601,7 @@ def parse_value_sd_list(arr: Sequence):
             sds.append(sd)
         return np.array(values, dtype='float'), np.array(sds, dtype='float')
 
-def repeat_if_value(data: int|float|Sequence, arr_len: int):
+def repeat_if_value(data: float | Sequence, arr_len: int):
     """ If the input consists of a single number, stretches to 1D array """
     arr = np.array(data)
     if arr.ndim == 0:
@@ -611,11 +610,11 @@ def repeat_if_value(data: int|float|Sequence, arr_len: int):
     else:
         return arr
 
-def mag2irradiance(mag: int|float|np.ndarray, zero_point: float = 1.):
+def mag2irradiance(mag: float | np.ndarray, zero_point: float = 1.):
     """ Converts magnitudes to irradiance (by default in Vega units) """
     return zero_point * 10**(-0.4 * mag)
 
-def sd_mag2sd_irradiance(sd_mag: int|float|np.ndarray, irradiance: int|float|np.ndarray):
+def sd_mag2sd_irradiance(sd_mag: float | np.ndarray, irradiance: float | np.ndarray):
     """
     Converts standard deviation of the magnitude to a irradiance standard deviation.
 
@@ -851,8 +850,7 @@ def export_colors(rgb: tuple):
     for i in rgb:
         lst.append(str(i))
         l = len(lst[-1])
-        if l > mx:
-            mx = l
+        mx = max(mx, l)
     w = 8 if mx < 8 else mx+1
     return ''.join([i.ljust(w) for i in lst])
 

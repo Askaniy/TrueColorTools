@@ -1,12 +1,13 @@
 """ Responsible for converting measurement data into a working form. """
 
-from astropy.io import fits
-from astropy.table import Table
-import astropy.units as u
-import numpy as np
-
 # Disabling warnings about supplier non-compliance with FITS unit storage standards
 from warnings import filterwarnings
+
+import astropy.units as u
+import numpy as np
+from astropy.io import fits
+from astropy.table import Table
+
 filterwarnings(action='ignore', category=u.UnitsWarning, append=True)
 
 

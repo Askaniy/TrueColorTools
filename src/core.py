@@ -36,24 +36,23 @@ Color:
 - - ColorImage (3D)
 """
 
-from io import BytesIO
+from collections.abc import Callable, Sequence
 from copy import deepcopy
-from collections.abc import Sequence, Callable
-from typing import Self, ClassVar
+from functools import cache, lru_cache
+from io import BytesIO
 from pathlib import Path
-from functools import lru_cache
 from traceback import format_exc
-from PIL import Image
-from scipy.optimize import minimize
-from scipy.linalg import solve
+from typing import ClassVar, Self
+
 import numpy as np
+from PIL import Image
+from scipy.linalg import solve
+from scipy.optimize import minimize
 
-from src.data_import import file_reader
 import src.auxiliary as aux
-import src.strings as tr
 import src.image_import as ii
-
-
+import src.strings as tr
+from src.data_import import file_reader
 
 # ------------ Naming Section ------------
 
@@ -146,7 +145,7 @@ class ObjectName:
                 name = f'{self.index} {name}'
         return name
 
-    @lru_cache(maxsize=None)
+    @cache
     def __call__(self, lang: str = 'en') -> str:
         """ Returns a string composed of the available attributes """
         name = self.indexed_name(lang)
@@ -285,7 +284,7 @@ class _TrueColorToolsObject:
         """ Returns a new SpectralObject with a guarantee of definition on the requested wavelength array """
         raise NotImplementedError('Implemented in classes SpectralObject and PhotospectralObject.')
 
-    def scaled_at(self, where, how: int|float = 1, sd: int|float = None) -> Self:
+    def scaled_at(self, where, how: float = 1, sd: float = None) -> Self:
         """
         Returns a new object that matches the query brightness (1 by default)
         at the specified filter profile or wavelength.
@@ -538,7 +537,7 @@ class _SpectralObject(_TrueColorToolsObject):
             return cls.stub(name)
 
     @classmethod
-    def from_nm(cls, nm_point: int|float):
+    def from_nm(cls, nm_point: float):
         """
         Creates a monochromatic SpectralObject on the 1- or 2-point spectral grid (normalized and with zeroed edges).
         Make sure you use the rectangle method for integration, otherwise it won't be equal to 1.
@@ -762,10 +761,8 @@ class Spectrum(_SpectralObject):
                 spectral_line.sd = spectral_line.br * sd[i]
             spectral_line.br *= br[i]
             spectral_lines.append(spectral_line)
-            if spectral_line.nm[0] < nm_min:
-                nm_min = spectral_line.nm[0]
-            if spectral_line.nm[-1] > nm_max:
-                nm_max = spectral_line.nm[-1]
+            nm_min = min(nm_min, spectral_line.nm[0])
+            nm_max = max(nm_max, spectral_line.nm[-1])
         nm = aux.grid(nm_min, nm_max, nm_step)
         output = spectral_lines[0].define_on_range(nm)
         for line in spectral_lines[1:]:
@@ -774,7 +771,7 @@ class Spectrum(_SpectralObject):
         return output
 
     @staticmethod
-    def from_blackbody_redshift(nm_arr: np.ndarray, temperature: int|float, velocity=0., vII=0.):
+    def from_blackbody_redshift(nm_arr: np.ndarray, temperature: float, velocity=0., vII=0.):
         """ Creates a Spectrum object based on Planck's law and redshift formulas """
         if temperature == 0:
             physics = False
@@ -862,7 +859,7 @@ class FilterNotFoundError(Exception):
         super().__init__(f'Filter "{filter_name}" not found in the "filters" folder.')
 
 @lru_cache(maxsize=32)
-def get_filter(name: str|int|float) -> Spectrum:
+def get_filter(name: str | float) -> Spectrum:
     """
     Creates a scaled to the unit area (normalized) Spectrum object.
     Requires file name to be found in the `filters` folder to load profile
@@ -1305,7 +1302,7 @@ class _PhotometricModel:
     geometric_albedo: list[float] = None
     phase_integral: list[float] = None
 
-    def __init__(self, params: dict = None, filter_or_nm: str|int|float = None) -> None:
+    def __init__(self, params: dict = None, filter_or_nm: str | float = None) -> None:
         self.params = params
         self.filter_or_nm = filter_or_nm
         self._integrate()
@@ -1860,7 +1857,7 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
             geometric = geometric.convert_from_photon_spectral_density()
         if spherical is not None:
             spherical = spherical.convert_from_photon_spectral_density()
-    if ('is_emissive' in content and content['is_emissive']) or is_emission:
+    if content.get('is_emissive') or is_emission:
         return EmittingBody(name, TCT_obj)
     else:
         return ReflectingBody(name, TCT_obj, geometric, spherical, photometric_model)

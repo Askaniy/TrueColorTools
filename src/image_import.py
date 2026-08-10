@@ -1,11 +1,13 @@
 """ Responsible for converting image data into a working form. """
 
 from collections.abc import Sequence
-from pathlib import Path
 from functools import lru_cache
+from pathlib import Path
+
 import numpy as np
 from astropy.io import fits
 from PIL import Image
+
 
 @lru_cache(maxsize=1)
 def cube_reader(file: str) -> tuple[np.ndarray, np.ndarray]:

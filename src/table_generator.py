@@ -1,12 +1,13 @@
 """ Provides a table generation function, generate_table(). """
-from PIL import Image, ImageDraw, ImageFont
+from math import ceil, floor, sqrt
 from time import strftime
-from math import floor, ceil, sqrt
-import numpy as np
 
-from src.core import *
+import numpy as np
+from PIL import Image, ImageDraw, ImageFont
+
 import src.database as db
 import src.strings as tr
+from src.core import *
 
 
 def generate_table(

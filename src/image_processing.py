@@ -1,15 +1,24 @@
 """ Processes raw image input into a picture that can be shown and saved. """
 
 from collections.abc import Callable
-from traceback import format_exc
+from math import ceil, sqrt
 from time import monotonic
-from math import sqrt, ceil
+from traceback import format_exc
+
 import numpy as np
 from PIL import Image
 from tifffile import imwrite
 
-from src.core import FilterSystem, SpectralCube, PhotospectralCube, ColorLine, ColorImage, sun_norm, xyz_color_system
 import src.image_import as ii
+from src.core import (
+    ColorImage,
+    ColorLine,
+    FilterSystem,
+    PhotospectralCube,
+    SpectralCube,
+    sun_norm,
+    xyz_color_system,
+)
 
 
 def image_parser(

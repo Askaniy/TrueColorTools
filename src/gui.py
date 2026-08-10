@@ -1,16 +1,16 @@
 """ Responsible for the creation and translation of the graphical interface. """
 
-from collections.abc import Callable
-from typing import Any
-from time import strftime
 import platform
+from collections.abc import Callable
+from time import strftime
+from typing import Any
+
 import FreeSimpleGUI as sg
 import numpy as np
 
 import src.strings as tr
 from src.core import ColorSystem
 from src.image_processing import supported_formats
-
 
 # TCT style colors
 main_color = '#3884A9' # HSV 199.65° 66.86% 66.27%
@@ -74,7 +74,7 @@ def generate_layout(
         filters_plot_size: tuple[int, int],
         img_preview_size: tuple[int, int],
         filtersDB: tuple[str, ...],
-        tab3_overexposure_limit: int|float,
+        tab3_overexposure_limit: float,
         color_space: str,
         white_point: str,
         gamma: bool,

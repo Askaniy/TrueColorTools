@@ -1,15 +1,16 @@
 """ Provides plotting functions. """
 
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.figure import Figure
-from matplotlib import rc_context
-import matplotlib.pyplot as plt
-from cycler import cycler
 from collections.abc import Sequence
 
-from src.core import Spectrum, FilterSystem, ColorSystem, ColorPoint, visible_range
+import matplotlib.pyplot as plt
+from cycler import cycler
+from matplotlib import rc_context
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
+
 import src.strings as tr
-import src.gui as gui
+from src import gui
+from src.core import ColorPoint, ColorSystem, FilterSystem, Spectrum, visible_range
 
 # MatPlotLib custom theme
 # https://matplotlib.org/stable/tutorials/introductory/customizing.html
@@ -69,7 +70,7 @@ def plot_spectra(
         if not_empty:
             spectra = []
             max_y = []
-            for spectrum in dict_to_plot.keys():
+            for spectrum in dict_to_plot:
                 spectrum = spectrum.define_on_range(visible_range, crop=limit_to_vis)
                 if normalize_at_550nm:
                     spectrum = spectrum.scaled_at(550)

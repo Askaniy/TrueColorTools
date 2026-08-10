@@ -1,10 +1,9 @@
 """ Provides incomplete or unnecessary functionality. """
 
-import numpy as np
-from astropy.io import fits
 from collections.abc import Sequence
 
-
+import numpy as np
+from astropy.io import fits
 
 hanning_factor = 1129/977
 

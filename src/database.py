@@ -4,12 +4,12 @@ Describes the object name data storage class.
 """
 
 from collections.abc import Sequence
-from json5 import load as json5load
 from pathlib import Path
 from traceback import format_exc
 
-from src.core import ObjectName
+from json5 import load as json5load
 
+from src.core import ObjectName
 
 # Importing files
 
@@ -64,7 +64,7 @@ def obj_names_dict(database: dict[ObjectName, dict], tag: str, searched: str, la
     else:
         # "Search engine"
         searched = searched.lower()
-        for obj_name in database.keys():
+        for obj_name in database:
             # commented construction similar to (_ or _ or _ or _)
             # 1, 2. Search within English name and subscript numbers of provisional designation
             if searched not in obj_name._name_raw.lower():
