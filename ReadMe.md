@@ -84,12 +84,12 @@ For photometry, it is necessary to specify calibration spectrum if it's not an e
 
 Supported input keys of a database unit:
 - `tags` (list): strings categorizing the spectral data, optional
-- `nm` (list): list of wavelengths in nanometers
-- `br` (list): same-size list of "brightness" in energy spectral density per wavelength units
-- `mag` (list): same-size list of magnitudes
-- `sd` (list/number): same-size list of standard deviations (or a common value)
-- `nm_range` (dict): wavelength range definition in the format `{start: …, stop: …, step: …}`
-- `slope` (dict): spectrum definition in the format `{start: …, stop: …, power/percent_per_100nm: …}`
+- `wavelength_nm` (list): list of wavelengths in nanometers
+- `spectral_dist` (list): same-size list of "brightness" in energy spectral density per wavelength units
+- `magnitudes` (list): same-size list of magnitudes
+- `std` (list/number): same-size list of standard deviations (or a common uncertainty)
+- `wavelength_range` (dict): sets the wavelength grid in the format `{start: …, stop: …, step: …}`
+- `spectral_slope` (dict): sets the grid in the format `{start: …, stop: …, power/percent_per_100nm: …}`
 - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
 - `filters` (list): list of filter names present in the `filters` folder (can be mixed with nm values)
 - `color_indices` (list): dictionary of color indices, formatted `{'filter1-filter2': …, …}`
@@ -101,8 +101,8 @@ Supported input keys of a database unit:
 - `bond_albedo` (number): scales the data to spherical albedo spectrum using known Solar spectrum
 - `phase_integral` (number/list): transition factor from geometric albedo to spherical albedo
 - `phase_function` (list): phase function name and its parameters to compute phase integral
-- `br_geometric`, `br_spherical` (list): specifying unique spectra for different albedos
-- `sd_geometric`, `sd_spherical` (list/number): corresponding standard deviations or a common value
+- `sd_geometric`, `sd_spherical` (list): specifying unique spectra for different albedos
+- `std_geometric`, `std_spherical` (list/number): corresponding standard deviations or a common value
 - `is_geometric_albedo` (bool): `true` to interpret the data as a geometric albedo spectrum
 - `is_spherical_albedo` (bool): `true` to interpret the data as a spherical albedo spectrum
 - `is_albedo` (bool): `true` to interpret the data as a both geom. and sphe. albedo spectra
@@ -111,7 +111,7 @@ Supported input keys of a database unit:
 - `is_emissive` (bool): `true` not expect albedo data and always render in the chromaticity mode
 - `is_photon_counter` (bool): `true` to convert the photon spectral density into the energy sp. density
 
-Standard deviations are syntactically supported (but not always processed). Any brightness value in any of the data types can be replaced by a corresponding list of `[value, sd]` (or `[value, +sd, -sd]` for asymmetric standard deviation).
+Standard deviations are syntactically supported (but not always processed). Any brightness value in any of the data types can be replaced by a corresponding list of `[value, std]` (or `[value, +std, -std]` for asymmetric standard deviation).
 
 You can store the file with the spectrum outside of JSON5, and include a link in it. Text (`*.txt`, `*.dat`) and FITS (`*.fits`, `*.fit`) formats are supported for external files. A text file must contain at least wavelengths in the first column, irradiance in the second column, and optionally standard deviations in the third column and a mask in the fourth column ("good" rows in SMASS data marked with "1"). Data is assumed to be in the second HDU in FITS files. If you have problems reading FITS, contact me, I'll improve the parsing of the provided example.
 

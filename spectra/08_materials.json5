@@ -6,14 +6,14 @@
     ],
     'Soil at Venera 13 landing site | Shkuratov1987': { // Figure 5, pixel distribution peak 1
         tags: ['material/drift and soil', 'planetary body/planet/Venus'],
-        nm: [530, 620], // G and R filters
-        br: [0.02367, 0.03546],
+        wavelength_nm: [530, 620], // G and R filters
+        spectral_dist: [0.02367, 0.03546],
         is_albedo: true,
     },
     'Rocks at Venera 13 landing site | Shkuratov1987': { // Figure 5, pixel distribution peak 2
         tags: ['material/rock', 'planetary body/planet/Venus'],
-        nm: [530, 620], // G and R filters
-        br: [0.03561, 0.05324],
+        wavelength_nm: [530, 620], // G and R filters
+        spectral_dist: [0.03561, 0.05324],
         is_albedo: true,
     },
 
@@ -32,8 +32,8 @@
     // Drift
     'Bright red drift at Pathfinder landing site (Mars) | McSween1999': {
         tags: ['material/drift and soil', 'planetary body/planet/Mars'],
-        nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
-        br: [
+        wavelength_nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
+        spectral_dist: [
             0.049, 0.066, 0.094, 0.180, 0.236, 0.274,
             0.272, 0.267, 0.264, 0.264, 0.260, 0.260
         ], // extracted from Fig. 8a
@@ -42,8 +42,8 @@
     // Rocks
     'Bright rock at Pathfinder landing site (Mars) | Smith1997': {
         tags: ['material/rock', 'planetary body/planet/Mars'],
-        nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
-        br: [
+        wavelength_nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
+        spectral_dist: [
             0.067, 0.085, 0.111, 0.186, 0.224, 0.242,
             0.237, 0.231, 0.231, 0.230, 0.226, 0.222
         ], // extracted from Fig. 4
@@ -51,8 +51,8 @@
     },
     'Dark rock at Pathfinder landing site (Mars) | Smith1997': {
         tags: ['material/rock', 'planetary body/planet/Mars'],
-        nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
-        br: [
+        wavelength_nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
+        spectral_dist: [
             0.048, 0.054, 0.072, 0.096, 0.112, 0.116,
             0.112, 0.107, 0.105, 0.102, 0.098, 0.096
         ], // extracted from Fig. 4
@@ -60,8 +60,8 @@
     },
     'Pink rock at Pathfinder landing site (Mars) | Smith1997': {
         tags: ['material/rock', 'planetary body/planet/Mars'],
-        nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
-        br: [
+        wavelength_nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
+        spectral_dist: [
             0.050, 0.073, 0.113, 0.231, 0.310, 0.361,
             0.360, 0.358, 0.353, 0.351, 0.344, 0.343
         ], // extracted from Fig. 4
@@ -69,8 +69,8 @@
     },
     'Rock at Pathfinder landing site (Mars) | Maki1999': {
         tags: ['material/rock', 'planetary body/planet/Mars'],
-        nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
-        br: [
+        wavelength_nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
+        spectral_dist: [
             0.05418, 0.08397, 0.10971, 0.15711, 0.14628, 0.13409,
             0.12054, 0.09752, 0.09074, 0.08804, 0.07178, 0.07314
         ], // extracted from Fig. 2
@@ -79,8 +79,8 @@
     // Soils
     'Bright soil at Pathfinder landing site (Mars) | Smith1997': {
         tags: ['material/drift and soil', 'planetary body/planet/Mars'],
-        nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
-        br: [
+        wavelength_nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
+        spectral_dist: [
             0.064, 0.085, 0.119, 0.223, 0.301, 0.351,
             0.344, 0.335, 0.326, 0.325, 0.328, 0.325
         ], // extracted from Fig. 3
@@ -88,8 +88,8 @@
     },
     'Dark soil at Pathfinder landing site (Mars) | Smith1997': {
         tags: ['material/drift and soil', 'planetary body/planet/Mars'],
-        nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
-        br: [
+        wavelength_nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
+        spectral_dist: [
             0.041, 0.053, 0.075, 0.133, 0.166, 0.185,
             0.182, 0.176, 0.173, 0.171, 0.169, 0.166
         ], // extracted from Fig. 3
@@ -97,8 +97,8 @@
     },
     'Disturbed soil at Pathfinder landing site (Mars) | Smith1997': {
         tags: ['material/drift and soil', 'planetary body/planet/Mars'],
-        nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
-        br: [
+        wavelength_nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
+        spectral_dist: [
             0.041, 0.060, 0.088, 0.168, 0.226, 0.261,
             0.257, 0.251, 0.245, 0.242, 0.240, 0.232
         ], // extracted from Fig. 3
@@ -106,8 +106,8 @@
     },
     'Lamb-like soil at Pathfinder landing site (Mars) | Smith1997': { // (has intermediate spectral-characteristics between bright and dark soils)
         tags: ['material/drift and soil', 'planetary body/planet/Mars'],
-        nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
-        br: [
+        wavelength_nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
+        spectral_dist: [
             0.042, 0.057, 0.079, 0.145, 0.193, 0.224,
             0.220, 0.211, 0.204, 0.202, 0.207, 0.202
         ], // extracted from Fig. 3
@@ -115,8 +115,8 @@
     },
     'Soil at Pathfinder landing site (Mars) | Maki1999': {
         tags: ['material/drift and soil', 'planetary body/planet/Mars'],
-        nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
-        br: [
+        wavelength_nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
+        spectral_dist: [
             0.08668, 0.13138, 0.1842, 0.33318, 0.3535, 0.34266,
             0.30474, 0.25463, 0.23431, 0.2167, 0.20046, 0.18284
         ], // extracted from Fig. 2
@@ -314,8 +314,8 @@
     // The n used was from https://ui.adsabs.harvard.edu/abs/1973ApOpt..12..555H/abstract
     'Liquid methane | MartonchikOrton1994': { // Table 1, column a, referring to Arakawa et al. 1986
         tags: ['material/methane', 'planetary body/large moon/Titan'],
-        nm: [400, 600, 800, 1000, 1200, 2000],
-        br_geometric: [0.04917, 0.04827, 0.04768, 0.04738, 0.04738, 0.04679],
-        br_spherical: [0.05886, 0.05837, 0.05804, 0.05788, 0.05788, 0.05755],
+        wavelength_nm: [400, 600, 800, 1000, 1200, 2000],
+        sd_geometric: [0.04917, 0.04827, 0.04768, 0.04738, 0.04738, 0.04679],
+        sd_spherical: [0.05886, 0.05837, 0.05804, 0.05788, 0.05788, 0.05755],
     },
 }

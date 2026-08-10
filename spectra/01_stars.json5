@@ -266,7 +266,7 @@
     'AU Microscopii (M1 Ve) | Krist2005': { // 2004 Jul 24
         tags: ['extrasolar', 'star/V dwarf'],
         filters: ['Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Cousins.I'],
-        mag: [[9.96, 0.05], [8.64, 0.03], [6.60, 0.03]], // Table 2
+        magnitudes: [[9.96, 0.05], [8.64, 0.03], [6.60, 0.03]], // Table 2
         calibration_system: 'Vega',
         is_emissive: true,
     },
@@ -274,21 +274,21 @@
         tags: ['extrasolar/debris disk'],
         photometric_system: 'HST_ACS_HRC',
         filters: ['F435W', 'F606W', 'F814W'],
-        br: [1.02, 1, 0.936], // Total flux (illuminated by the host star)
+        spectral_dist: [1.02, 1, 0.936], // Total flux (illuminated by the host star)
         is_emissive: true, // scattered light
     },
     'Debris disk of AU Microscopii: Northwest midplane | Krist2005': {
         tags: ['extrasolar/debris disk'],
         photometric_system: 'HST_ACS_HRC',
         filters: ['F435W', 'F606W', 'F814W'],
-        br: [1.13, 1, 0.837], // Flux relative to the star
+        spectral_dist: [1.13, 1, 0.837], // Flux relative to the star
         is_emissive: true, // scattered light
     },
     'Debris disk of AU Microscopii: Southeast midplane | Krist2005': {
         tags: ['extrasolar/debris disk'],
         photometric_system: 'HST_ACS_HRC',
         filters: ['F435W', 'F606W', 'F814W'],
-        br: [1.15, 1, 0.799], // Flux relative to the star
+        spectral_dist: [1.15, 1, 0.799], // Flux relative to the star
         is_emissive: true, // scattered light
     },
     'Fitzgerald2007': [
@@ -303,14 +303,14 @@
     'Debris disk of AU Microscopii: Porous grains model | Fitzgerald2007': {
         tags: ['extrasolar/debris disk'],
         filters: ['HST_ACS_HRC.F606W', 'Keck_NIRC2.H'],
-        br: [0.52, 0.54], // Table 5
+        spectral_dist: [0.52, 0.54], // Table 5
         is_albedo: true
     },
     // "the polarization curves in Figure 11 clearly rule out compact grains"
     'Debris disk of AU Microscopii: Compact grains model | Fitzgerald2007': {
         tags: ['extrasolar/debris disk'],
         filters: ['HST_ACS_HRC.F606W', 'Keck_NIRC2.H'],
-        br: [0.83, 0.81], // Table 5
+        spectral_dist: [0.83, 0.81], // Table 5
         is_albedo: true,
     },
     'Gliese 411 (M2 V) | STIS_NGSLv2': {
@@ -481,7 +481,7 @@
         tags: ['extrasolar', 'star/neutron star'],
         photometric_system: 'Generic_Bessell',
         filters: ['U', 'B', 'V', 'R', 'I'],
-        mag: [[16.69, 0.03], [17.23, 0.02], [16.66, 0.03], [16.17, 0.02], [15.65, 0.02]], // Table 2
+        magnitudes: [[16.69, 0.03], [17.23, 0.02], [16.66, 0.03], [16.17, 0.02], [15.65, 0.02]], // Table 2
         calibration_system: 'Vega',
         is_emissive: true,
     },
@@ -489,7 +489,7 @@
         tags: ['extrasolar'], // not a neutron star, but a structure near it
         photometric_system: 'Generic_Bessell',
         filters: ['U', 'B', 'V', 'R', 'I'],
-        mag: [[21.57, 0.13], [21.91, 0.08], [20.72, 0.07], [20.02, 0.07], [19.26, 0.08]], // Table 2
+        magnitudes: [[21.57, 0.13], [21.91, 0.08], [20.72, 0.07], [20.02, 0.07], [19.26, 0.08]], // Table 2
         calibration_system: 'Vega',
         is_emissive: true,
     },
@@ -507,7 +507,7 @@
             'HST_WFPC2-PC.F555W', 'Subaru_Suprime.Rc_filter', 'Subaru_Suprime.Ic_filter',
             'HST_NICMOS2.F110W', 'HST_NICMOS2.F160W'
         ],
-        br: [1.79E-18, 5.77E-19, 3.10E-19, 1.53E-19, 1.25E-19, 9.30E-20, 4.22E-20, 2.73E-20],
+        spectral_dist: [1.79E-18, 5.77E-19, 3.10E-19, 1.53E-19, 1.25E-19, 9.30E-20, 4.22E-20, 2.73E-20],
         is_emissive: true,
     },
     'Geminga: With interstellar dust extinction | Shibanov2006': {
@@ -517,7 +517,7 @@
             'HST_WFPC2-PC.F555W', 'Subaru_Suprime.Rc_filter', 'Subaru_Suprime.Ic_filter',
             'HST_NICMOS2.F110W', 'HST_NICMOS2.F160W'
         ],
-        br: [1.49E-18, 5.18E-19, 2.83E-19, 1.43E-19, 1.19E-19, 8.93E-20, 4.12E-20, 2.70E-20],
+        spectral_dist: [1.49E-18, 5.18E-19, 2.83E-19, 1.43E-19, 1.19E-19, 8.93E-20, 4.12E-20, 2.70E-20],
         is_emissive: true,
     },
     'Kargaltsev2005': [
@@ -527,11 +527,11 @@
     ],
     'Geminga | Kargaltsev2005': {
         tags: ['extrasolar', 'star/neutron star'],
-        nm: [
+        wavelength_nm: [
             117.0, 125.3, 126.5, 127.6, 132.4, 133.9, 137.1, 139.3, 141.6, 145.1, 149.8, 161.3,
             230.1, 238.1, 344.2, 395.2, 534.2, 655.8, 806.9, 1113.9, 1573.3
         ],
-        br: [
+        spectral_dist: [
             1.38E-17, 9.46E-18, 7.63E-18, 9.79E-18, 7.13E-18, 8.15E-18, 5.34E-18, 6.80E-18,
             6.31E-18, 7.73E-18, 5.96E-18, 5.08E-18, 1.41E-18, 1.13E-18, 4.50E-19, 2.33E-19,
             1.75E-19, 1.27E-19, 1.18E-19, 4.01E-20, 2.77E-20
@@ -547,7 +547,7 @@
         tags: ['extrasolar', 'star/neutron star'],
         filters: ['LaSilla_EMMI.Bessel_U', 'LaSilla_EMMI.Bessel_B', 'HST_WFPC2-PC.F555W', 'LaSilla_EMMI.V', 'HST_WFPC2-PC.F675W', 'LaSilla_EMMI.R', 'HST_WFPC2-PC.F814W'],
         // note: LaSilla_EMMI filters are transparency only, without detector sensitivity
-        mag: [[23.38, 0.15], [23.89, 0.15], [23.64, 0.05], [23.65, 0.1], [24.30, 0.1], [23.93, 0.2], [24.40, 0.1]],
+        magnitudes: [[23.38, 0.15], [23.89, 0.15], [23.64, 0.05], [23.65, 0.1], [24.30, 0.1], [23.93, 0.2], [24.40, 0.1]],
         calibration_system: 'Vega',
         is_emissive: true,
     },
@@ -560,7 +560,7 @@
         tags: ['featured', 'extrasolar', 'star/neutron star'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F336W', 'F450W', 'F555W', 'F675W', 'F814W'],
-        mag: [[21.77, 0.17], [22.09, 0.05], [22.07, 0.05], [22.18, 0.04], [22.35, 0.03]],
+        magnitudes: [[21.77, 0.17], [22.09, 0.05], [22.07, 0.05], [22.18, 0.04], [22.35, 0.03]],
         calibration_system: 'Vega',
         is_emissive: true,
     },
@@ -573,7 +573,7 @@
     'PSR B0656+14 | Kurt1998': {
         tags: ['extrasolar', 'star/neutron star'],
         filters: ['Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Cousins.R', 'Generic_Cousins.I'],
-        mag: [[24.85, +0.19, -0.16], [24.90, +0.16, -0.14], [24.52, +0.12, -0.11], [23.81, +0.27, -0.21]],
+        magnitudes: [[24.85, +0.19, -0.16], [24.90, +0.16, -0.14], [24.52, +0.12, -0.11], [23.81, +0.27, -0.21]],
         calibration_system: 'Vega',
         is_emissive: true,
     },
@@ -587,7 +587,7 @@
     'PSR B1055-52 | Mignani2010b': {
         tags: ['extrasolar', 'star/neutron star'],
         filters: ['HST_FOC_F96.F342W', 'HST_WFPC2-PC.F555W', 'HST_WFPC2-PC.F702W'],
-        mag: [25.00, 25.43, 26.08], // Table 1 (observed magnitude)
+        magnitudes: [25.00, 25.43, 26.08], // Table 1 (observed magnitude)
         // magnitude limit in WFPC2 F450W: >24.97 mag
         calibration_system: 'Vega',
         is_emissive: true,
@@ -605,7 +605,7 @@
         tags: ['extrasolar', 'star/neutron star'],
         photometric_system: 'ULTRACAM_SuperSDSS',
         filters: ['u_s', 'g_s', 'i_s'],
-        mag: [20.4, 18.7, 18.0], // modulation amplitudes of 1.4 mag, 0.8 mag, and 0.6 mag
+        magnitudes: [20.4, 18.7, 18.0], // modulation amplitudes of 1.4 mag, 0.8 mag, and 0.6 mag
         calibration_system: 'AB',
         is_emissive: true,
     },
@@ -613,7 +613,7 @@
         tags: ['extrasolar', 'star/neutron star'],
         photometric_system: 'ULTRACAM_SuperSDSS',
         filters: ['u_s', 'g_s', 'i_s'],
-        mag: [19.4, 17.9, 17.3], // modulation amplitudes of 0.7 mag, 0.4 mag, and 0.3 mag
+        magnitudes: [19.4, 17.9, 17.3], // modulation amplitudes of 0.7 mag, 0.4 mag, and 0.3 mag
         calibration_system: 'AB',
         is_emissive: true,
     }

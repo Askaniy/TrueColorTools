@@ -89,14 +89,14 @@ def plot_spectra(
                 if spectrum.photospectrum is not None:
                     ax.errorbar(
                         x=spectrum.photospectrum.filter_system.mean_nm(), y=spectrum.photospectrum.br,
-                        xerr=spectrum.photospectrum.filter_system.sd_of_nm(), yerr=spectrum.photospectrum.sd,
+                        xerr=spectrum.photospectrum.filter_system.std_of_nm(), yerr=spectrum.photospectrum.std,
                         fmt='o', color=errorbar_color
                     )
-                if spectrum.sd is not None:
+                if spectrum.std is not None:
                     # 1σ confidence band
                     y_lim = ax.get_ylim()
                     ax.fill_between(
-                        spectrum.nm, spectrum.br-spectrum.sd, spectrum.br+spectrum.sd,
+                        spectrum.nm, spectrum.br-spectrum.std, spectrum.br+spectrum.std,
                         color=errorbar_color, alpha=0.25
                     )
                     ax.set_ylim(y_lim)

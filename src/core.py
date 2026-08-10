@@ -235,7 +235,7 @@ nm_step = 5 # nm
 
 # When processing images through spectral cubes, performance is prioritized, and uncertainty is not saved (yet).
 # Therefore it is disabled by default.
-ignore_sd_for_cubes = True
+ignore_std_for_cubes = True
 
 
 class _TrueColorToolsObject:
@@ -243,7 +243,7 @@ class _TrueColorToolsObject:
     name = ''
     nm = np.empty(0)
     br = np.empty(0)
-    sd = None
+    std = None
     ndim: ClassVar[int] = NotImplemented
 
     #@property
@@ -284,7 +284,7 @@ class _TrueColorToolsObject:
         """ Returns a new SpectralObject with a guarantee of definition on the requested wavelength array """
         raise NotImplementedError('Implemented in classes SpectralObject and PhotospectralObject.')
 
-    def scaled_at(self, where, how: float = 1, sd: float = None) -> Self:
+    def scaled_at(self, where, how: float = 1, std: float = None) -> Self:
         """
         Returns a new object that matches the query brightness (1 by default)
         at the specified filter profile or wavelength.
@@ -292,7 +292,7 @@ class _TrueColorToolsObject:
         output = deepcopy(self)
         if isinstance(where, str|int|float):
             where = get_filter(where)
-        current_br, sd = self @ where
+        current_br, std = self @ where
         if current_br <= 0:
             # Prevents errors of dividing by zero and inversion
             return output
@@ -300,43 +300,43 @@ class _TrueColorToolsObject:
             how = how[0] # likely a [value, std]
         return output * (how / current_br)
 
-    def apply_element_wise_operation(self, operand: Self, br_handling: Callable, sd_handling: Callable) -> Self:
+    def apply_element_wise_operation(self, operand: Self, br_handling: Callable, std_handling: Callable) -> Self:
         """ Returns a new object formed from element-wise operation """
         raise NotImplementedError('Implemented in classes SpectralObject and PhotospectralObject, use them instead.')
 
-    def apply_scalar_operation(self, operand, br_handling: Callable, sd_handling: Callable) -> Self:
+    def apply_scalar_operation(self, operand, br_handling: Callable, std_handling: Callable) -> Self:
         """
         Returns a new object of the same class transformed according to the operator.
         Operand is assumed to be a number or an array along the spectral axis.
         """
         output = deepcopy(self)
         output.br = br_handling(self.br, operand)
-        output.sd = sd_handling(self.br, self.sd, operand, None)
+        output.std = std_handling(self.br, self.std, operand, None)
         return output
 
     def __add__(self, other) -> Self:
         if isinstance(other, _TrueColorToolsObject):
-            return self.apply_element_wise_operation(other, aux.add_br, aux.add_sd)
+            return self.apply_element_wise_operation(other, aux.add_br, aux.add_std)
         else:
-            return self.apply_scalar_operation(other, aux.add_br, aux.add_sd)
+            return self.apply_scalar_operation(other, aux.add_br, aux.add_std)
 
     def __sub__(self, other) -> Self:
         if isinstance(other, _TrueColorToolsObject):
-            return self.apply_element_wise_operation(other, aux.sub_br, aux.sub_sd)
+            return self.apply_element_wise_operation(other, aux.sub_br, aux.sub_std)
         else:
-            return self.apply_scalar_operation(other, aux.sub_br, aux.sub_sd)
+            return self.apply_scalar_operation(other, aux.sub_br, aux.sub_std)
 
     def __mul__(self, other) -> Self:
         if isinstance(other, _TrueColorToolsObject):
-            return self.apply_element_wise_operation(other, aux.mul_br, aux.mul_sd)
+            return self.apply_element_wise_operation(other, aux.mul_br, aux.mul_std)
         else:
-            return self.apply_scalar_operation(other, aux.mul_br, aux.mul_sd)
+            return self.apply_scalar_operation(other, aux.mul_br, aux.mul_std)
 
     def __truediv__(self, other) -> Self:
         if isinstance(other, _TrueColorToolsObject):
-            return self.apply_element_wise_operation(other, aux.div_br, aux.div_sd)
+            return self.apply_element_wise_operation(other, aux.div_br, aux.div_std)
         else:
-            return self.apply_scalar_operation(other, aux.div_br, aux.div_sd)
+            return self.apply_scalar_operation(other, aux.div_br, aux.div_std)
 
     def __matmul__(self, other: Self):
         """
@@ -373,16 +373,16 @@ class _TrueColorToolsObject:
         match (operand1, operand2):
             case (_, Spectrum()):
                 br = aux.integrate(aux.mul_br(operand1.br, operand2.br), nm_step)
-                sd = aux.mul_sd(operand1.br, operand1.sd, operand2.br, operand2.sd)
-                if sd is not None:
-                    sd = aux.integrate(sd, nm_step)
-                return br, sd
+                std = aux.mul_std(operand1.br, operand1.std, operand2.br, operand2.std)
+                if std is not None:
+                    std = aux.integrate(std, nm_step)
+                return br, std
             case (Spectrum(), FilterSystem()):
                 br = aux.integrate(aux.mul_br(operand1.br, operand2.br), nm_step)
-                sd = aux.mul_sd(operand1.br, operand1.sd, operand2.br, operand2.sd)
-                if sd is not None:
-                    sd = aux.integrate(sd, nm_step)
-                return Photospectrum(operand2, br, sd, name=operand1.name)
+                std = aux.mul_std(operand1.br, operand1.std, operand2.br, operand2.std)
+                if std is not None:
+                    std = aux.integrate(std, nm_step)
+                return Photospectrum(operand2, br, std, name=operand1.name)
             case (SpectralSquare(), FilterSystem()):
                 br = aux.integrate(operand1.br[:, :, np.newaxis] * operand2.br[:, np.newaxis, :], nm_step).T
                 # TODO: uncertainty processing
@@ -431,11 +431,11 @@ class _SpectralObject(_TrueColorToolsObject):
     Attributes:
     - `nm` (np.ndarray): spectral axis, list of wavelengths in nanometers on a uniform grid
     - `br` (np.ndarray): array of "brightness" in energy density units (not a photon counter)
-    - `sd` (np.ndarray): optional array of standard deviations
+    - `std` (np.ndarray): optional array of standard deviations
     - `name` (ObjectName): name as an instance of a class that stores its components
     """
 
-    def __init__(self, ndim: int, nm: Sequence, br: Sequence, sd: Sequence = None, name: str|ObjectName = None):
+    def __init__(self, ndim: int, nm: Sequence, br: Sequence, std: Sequence = None, name: str|ObjectName = None):
         """
         It is assumed that the input wavelength grid can be trusted. If preprocessing is needed, see `SpectralObject.from_array`.
         There are no checks for negativity, since such spectra exist, for example, red CMF.
@@ -443,17 +443,17 @@ class _SpectralObject(_TrueColorToolsObject):
         Args:
         - `nm` (Sequence): spectral axis, list of wavelengths in nanometers on a uniform grid
         - `br` (Sequence): array of "brightness" in energy density units (not a photon counter)
-        - `sd` (Sequence): optional array of standard deviations
+        - `std` (Sequence): optional array of standard deviations
         - `name` (str|ObjectName): name as a string or an instance of a class that stores its components
         """
         self.nm = np.array(nm, dtype='int16')
         self.br = np.array(br, dtype='float64')
         if ndim != self.br.ndim:
             raise ValueError(f'Expected brightness array of dimension {ndim}, not {self.br.ndim}')
-        if sd is None or (ignore_sd_for_cubes and ndim == 3):
-            self.sd = None
+        if std is None or (ignore_std_for_cubes and ndim == 3):
+            self.std = None
         else:
-            self.sd = np.array(sd, dtype='float64')
+            self.std = np.array(std, dtype='float64')
         self.name = ObjectName.as_ObjectName(name)
         if np.any(np.isnan(self.br)):
             self.br = np.nan_to_num(self.br)
@@ -466,22 +466,22 @@ class _SpectralObject(_TrueColorToolsObject):
         return cls((555,), np.zeros((1,) * cls.ndim), name=name)
 
     @classmethod
-    def from_array(cls, nm: np.ndarray, br: np.ndarray, sd: np.ndarray = None, name: str|ObjectName = None):
+    def from_array(cls, nm: np.ndarray, br: np.ndarray, std: np.ndarray = None, name: str|ObjectName = None):
         """
         Creates a SpectralObject from wavelength array with a check for uniformity and possible extrapolation.
 
         Args:
         - `nm` (Sequence): list of wavelengths in nanometers on an arbitrary grid
         - `br` (Sequence): array of "brightness" in energy density units (not a photon counter)
-        - `sd` (Sequence): optional array of standard deviations
+        - `std` (Sequence): optional array of standard deviations
         - `name` (str|ObjectName): name as a string or an instance of a class that stores its components
         """
         nm = np.array(nm) # numpy decides int or float
         br = np.array(br, dtype='float64')
-        if ignore_sd_for_cubes and isinstance(cls, _Cube):
-            sd = None
-        if sd is not None:
-            sd = np.array(sd, dtype='float64')
+        if ignore_std_for_cubes and isinstance(cls, _Cube):
+            std = None
+        if std is not None:
+            std = np.array(std, dtype='float64')
         name = ObjectName.as_ObjectName(name)
         target_class_name = cls.__name__
         try:
@@ -489,29 +489,29 @@ class _SpectralObject(_TrueColorToolsObject):
                 print(f'# Note for the {target_class_name} "{name}"')
                 print(f'- Arrays of wavelengths and brightness do not match ({len_nm} vs {len_br}). {target_class_name} stub object was created.')
                 return cls.stub(name)
-            if sd is not None and (len_sd := sd.shape[0]) != len_br:
+            if std is not None and (len_std := std.shape[0]) != len_br:
                 print(f'# Note for the {target_class_name} "{name}"')
-                print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
-                sd = None
+                print(f'- Array of standard deviations do not match brightness array ({len_std} vs {len_br}). Uncertainty was erased.')
+                std = None
             if np.any(nm[:-1] > nm[1:]): # fast increasing check
                 order = np.argsort(nm)
                 nm = nm[order]
                 br = br[order]
-                if sd is not None:
-                    sd = sd[order]
+                if std is not None:
+                    std = std[order]
             if nm[-1] > nm_red_limit:
                 mask = np.where(nm < nm_red_limit + nm_step) # with reserve to be averaged
                 nm = nm[mask]
                 br = br[mask]
-                if sd is not None:
-                    sd = sd[mask]
+                if std is not None:
+                    std = std[mask]
             if np.any((diff := np.diff(nm)) != nm_step): # if not a uniform 5 nm grid
                 nm_uniform = aux.grid(nm[0], nm[-1], nm_step)
                 if diff.mean() >= nm_step:
                     # Option 1: loose spectral grid, increasing resolution
                     br = aux.interpolating(nm, br, nm_uniform, nm_step)
-                    if sd is not None:
-                        sd = aux.interpolating(nm, sd, nm_uniform, nm_step)
+                    if std is not None:
+                        std = aux.interpolating(nm, std, nm_uniform, nm_step)
                 elif nm[-1] - nm[0] < 2 * nm_step:
                     # Option 2: a very narrow spectrum
                     template = cls.from_nm(np.average(nm, weights=br))
@@ -520,16 +520,16 @@ class _SpectralObject(_TrueColorToolsObject):
                     br = template.br * integral
                 elif diff.max() < nm_step:
                     # Option 3: dense spectral grid -> flux-conserving binning cumulative-integral (CDF) method
-                    br, sd = aux.spectral_binning(nm, br, sd, nm_uniform, nm_step, diff)
+                    br, std = aux.spectral_binning(nm, br, std, nm_uniform, nm_step, diff)
                 else:
                     # Option 4: dense spectral grid with gaps -> convolution with variable core
-                    br, sd = aux.spectral_downscaling(nm, br, sd, nm_uniform, nm_step)
+                    br, std = aux.spectral_downscaling(nm, br, std, nm_uniform, nm_step)
                 nm = nm_uniform
             #if br.min() < 0:
             #    br = np.clip(br, 0, None)
             #    print(f'# Note for the {target_class_name} "{name}"')
             #    print(f'- Negative values detected while trying to create the object from array, they been replaced with zeros.')
-            return cls(nm, br, sd, name=name)
+            return cls(nm, br, std, name=name)
         except Exception:
             print(f'# Note for the {target_class_name} "{name}"')
             print('- Something unexpected happened while trying to create an object from the array. It was replaced by a stub.')
@@ -626,7 +626,7 @@ class _SpectralObject(_TrueColorToolsObject):
             print('- Bolometric brightness is zero, the mean wavelength cannot be calculated. Returns 0 nm.')
             return 0.
 
-    def sd_of_nm(self) -> np.ndarray[np.floating]:
+    def std_of_nm(self) -> np.ndarray[np.floating]:
         """ Returns uncorrected standard deviation or an array of uncorrected standard deviations """
         return np.sqrt(np.average((aux.expand_1D_array(self.nm, self.shape) - self.mean_nm())**2, weights=self.br, axis=0))
 
@@ -635,24 +635,24 @@ class _SpectralObject(_TrueColorToolsObject):
         # TODO: round the input up to a multiple of 5
         return self.br[(self.nm >= start) & (self.nm <= end)]
 
-    def get_sd_in_range(self, start: int, end: int) -> np.ndarray[np.floating]:
+    def get_std_in_range(self, start: int, end: int) -> np.ndarray[np.floating]:
         """ Returns standard deviation values over a range of wavelengths (ends included!) """
-        if self.sd is None:
+        if self.std is None:
             return None
         else:
             # TODO: round the input up to a multiple of 5
-            return self.sd[(self.nm >= start) & (self.nm <= end)]
+            return self.std[(self.nm >= start) & (self.nm <= end)]
 
     def define_on_range(self, nm_arr: np.ndarray, crop: bool = False):
         """ Returns a new SpectralObject with a guarantee of definition on the requested wavelength array """
-        extrapolated = self.__class__(*aux.extrapolating(self.nm, self.br, self.sd, nm_arr, nm_step), name=self.name)
+        extrapolated = self.__class__(*aux.extrapolating(self.nm, self.br, self.std, nm_arr, nm_step), name=self.name)
         if hasattr(self, 'names'):
             extrapolated.names = self.names
         if crop:
             start = max(extrapolated.nm[0], nm_arr[0])
             end = min(extrapolated.nm[-1], nm_arr[-1])
             extrapolated.br = extrapolated.get_br_in_range(start, end)
-            extrapolated.sd = extrapolated.get_sd_in_range(start, end)
+            extrapolated.std = extrapolated.get_std_in_range(start, end)
             extrapolated.nm = aux.grid(start, end, nm_step)
         return extrapolated
 
@@ -660,7 +660,7 @@ class _SpectralObject(_TrueColorToolsObject):
         """ Checks that the first and last brightness entries on the spectral axis are zero """
         return np.all(self.br[0] == 0) and np.all(self.br[-1] == 0)
 
-    def apply_element_wise_operation(self, other: _TrueColorToolsObject, br_handling: Callable, sd_handling: Callable) -> Self:
+    def apply_element_wise_operation(self, other: _TrueColorToolsObject, br_handling: Callable, std_handling: Callable) -> Self:
         """
         Returns a new SpectralObject formed from element-wise operation between SpectralObjects
         of the same nature or with a Spectrum.
@@ -685,8 +685,8 @@ class _SpectralObject(_TrueColorToolsObject):
                 br1 = self.get_br_in_range(start, end)
                 br2 = other.get_br_in_range(start, end)
                 br = br_handling(br1, br2)
-                sd = sd_handling(br1, self.get_sd_in_range(start, end), br2, other.get_sd_in_range(start, end))
-                return higher_dim.__class__(aux.grid(start, end, nm_step), br, sd, name=higher_dim.name)
+                std = std_handling(br1, self.get_std_in_range(start, end), br2, other.get_std_in_range(start, end))
+                return higher_dim.__class__(aux.grid(start, end, nm_step), br, std, name=higher_dim.name)
         else:
             return NotImplemented
 
@@ -698,14 +698,14 @@ class Spectrum(_SpectralObject):
     Attributes:
     - `nm` (np.ndarray): spectral axis, list of wavelengths in nanometers on a uniform grid
     - `br` (np.ndarray): array of "brightness" in energy density units (not a photon counter)
-    - `sd` (np.ndarray): optional array of standard deviations
+    - `std` (np.ndarray): optional array of standard deviations
     - `name` (ObjectName): name as an instance of a class that stores its components
     - `photospectrum` (Photospectrum): optional, way to store the pre-reconstructed data
     """
 
     ndim: ClassVar[int] = 1
 
-    def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None,
+    def __init__(self, nm: Sequence, br: Sequence, std: Sequence = None,
                  name: str|ObjectName = None, photospectrum=None):
         """
         It is assumed that the input wavelength grid can be trusted. If preprocessing is needed, see `SpectralObject.from_array`.
@@ -714,22 +714,22 @@ class Spectrum(_SpectralObject):
         Args:
         - `nm` (Sequence): spectral axis, list of wavelengths in nanometers on a uniform grid
         - `br` (Sequence): array of "brightness" in energy density units (not a photon counter)
-        - `sd` (Sequence): optional array of standard deviations
+        - `std` (Sequence): optional array of standard deviations
         - `name` (str|ObjectName): name as a string or an instance of a class that stores its components
         - `photospectrum` (Photospectrum): optional, way to store the pre-reconstructed data
         """
-        super().__init__(1, nm, br, sd, name)
+        super().__init__(1, nm, br, std, name)
         self.photospectrum: Photospectrum = photospectrum
 
     @staticmethod
     @lru_cache(maxsize=32)
     def from_file(file: str, name: str|ObjectName = None, is_emission: bool = False, is_filter: bool = False):
         """ Creates a Spectrum object based on loaded data from the specified file """
-        nm, br, sd = file_reader(file)
+        nm, br, std = file_reader(file)
         if is_emission:
-            spectrum = Spectrum.from_spectral_lines(nm, br, sd, name=name)
+            spectrum = Spectrum.from_spectral_lines(nm, br, std, name=name)
         else:
-            spectrum = Spectrum.from_array(nm, br, sd, name=name)
+            spectrum = Spectrum.from_array(nm, br, std, name=name)
         extension = file.split('.')[-1].upper()
         if 'J' in extension:
             spectrum = spectrum.convert_from_energy_spectral_density_per_frequency()
@@ -741,14 +741,14 @@ class Spectrum(_SpectralObject):
         return spectrum
 
     @staticmethod
-    def from_spectral_lines(nm: Sequence, br: Sequence, sd: Sequence = None, name: str|ObjectName = None):
+    def from_spectral_lines(nm: Sequence, br: Sequence, std: Sequence = None, name: str|ObjectName = None):
         """
         Creates an emission spectrum from the spectral lines wavelength and brightness lists.
 
         Args:
         - `nm` (Sequence): list of wavelengths in nanometers
         - `br` (Sequence): array of "brightness" in energy density units (not a photon counter)
-        - `sd` (Sequence): optional array of standard deviations
+        - `std` (Sequence): optional array of standard deviations
         - `name` (str|ObjectName): name as a string or an instance of a class that stores its components
         """
         nm = np.array(nm) # numpy decides int or float
@@ -757,8 +757,8 @@ class Spectrum(_SpectralObject):
         nm_max = 0
         for i in range(nm.size):
             spectral_line = Spectrum.from_nm(nm[i])
-            if sd is not None:
-                spectral_line.sd = spectral_line.br * sd[i]
+            if std is not None:
+                spectral_line.std = spectral_line.br * std[i]
             spectral_line.br *= br[i]
             spectral_lines.append(spectral_line)
             nm_min = min(nm_min, spectral_line.nm[0])
@@ -842,15 +842,15 @@ class Spectrum(_SpectralObject):
             extrapolated = self.photospectrum.define_on_range(nm_arr, crop)
         return extrapolated
 
-    def apply_scalar_operation(self, operand, br_handling: Callable, sd_handling: Callable):
+    def apply_scalar_operation(self, operand, br_handling: Callable, std_handling: Callable):
         """
         Returns a new object of the same class transformed according to the linear operator.
         Operand is assumed to be a number or an array along the spectral axis.
         Linearity is needed because values and uncertainty are handled uniformly.
         """
-        output = super().apply_scalar_operation(operand, br_handling, sd_handling)
+        output = super().apply_scalar_operation(operand, br_handling, std_handling)
         if output.photospectrum is not None:
-            output.photospectrum = output.photospectrum.apply_scalar_operation(operand, br_handling, sd_handling)
+            output.photospectrum = output.photospectrum.apply_scalar_operation(operand, br_handling, std_handling)
         return output
 
 
@@ -897,7 +897,7 @@ class _Square(_TrueColorToolsObject):
         if isinstance(item, slice):
             output = deepcopy(self)
             output.br = output.br[:,item]
-            output.sd = None if output.sd is None else output.sd[:,item]
+            output.std = None if output.std is None else output.std[:,item]
             return output
 
 
@@ -908,13 +908,13 @@ class SpectralSquare(_SpectralObject, _Square):
     Attributes:
     - `nm` (np.ndarray): spectral axis, list of wavelengths in nanometers on a uniform grid
     - `br` (np.ndarray): array of "brightness" in energy density units (not a photon counter)
-    - `sd` (np.ndarray): optional array of standard deviations
+    - `std` (np.ndarray): optional array of standard deviations
     - `name` (ObjectName): name as an instance of a class that stores its components
     - `size` (int): spatial axis length
     """
 
-    def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
-        super().__init__(2, nm, br, sd, name)
+    def __init__(self, nm: Sequence, br: Sequence, std: Sequence = None, name: str | ObjectName = None):
+        super().__init__(2, nm, br, std, name)
 
 
 class FilterSystem(SpectralSquare):
@@ -933,9 +933,9 @@ class FilterSystem(SpectralSquare):
     - `size` (int): spatial axis length
     """
 
-    def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None,
+    def __init__(self, nm: Sequence, br: Sequence, std: Sequence = None,
                  name: str|ObjectName = None, names: tuple[ObjectName] = (None,)):
-        super().__init__(nm, br, sd, name)
+        super().__init__(nm, br, std, name)
         self.names = names
 
     @staticmethod
@@ -995,19 +995,19 @@ class _Cube(_TrueColorToolsObject):
         """ Brings the spatial resolution of the cube to approximately match the number of pixels """
         output = deepcopy(self)
         output.br = aux.spatial_downscaling(self.br, pixels_limit)
-        output.sd = None
-        if self.sd is not None:
-            output.sd = aux.spatial_downscaling(self.sd, pixels_limit)
+        output.std = None
+        if self.std is not None:
+            output.std = aux.spatial_downscaling(self.std, pixels_limit)
         return output
 
     def flatten(self):
         """ Returns a (photo)spectral square with linearized spatial axis """
         br = self.br.reshape(self.nm_len, self.size)
-        sd = None if self.sd is None else self.br.reshape(self.nm_len, self.size)
+        std = None if self.std is None else self.br.reshape(self.nm_len, self.size)
         if isinstance(self, _SpectralObject):
-            return SpectralSquare(self.nm, br, sd, self.name)
+            return SpectralSquare(self.nm, br, std, self.name)
         elif isinstance(self, _PhotospectralObject):
-            return PhotospectralSquare(self.filter_system, br, sd, self.name)
+            return PhotospectralSquare(self.filter_system, br, std, self.name)
 
     @property
     def width(self):
@@ -1032,15 +1032,15 @@ class SpectralCube(_SpectralObject, _Cube):
     Attributes:
     - `nm` (np.ndarray): spectral axis, list of wavelengths in nanometers on a uniform grid
     - `br` (np.ndarray): array of "brightness" in energy density units (not a photon counter)
-    - `sd` (np.ndarray): optional array of standard deviations
+    - `std` (np.ndarray): optional array of standard deviations
     - `name` (ObjectName): name as an instance of a class that stores its components
     - `width` (int): horizontal spatial axis length
     - `height` (int): vertical spatial axis length
     - `size` (int): number of pixels
     """
 
-    def __init__(self, nm: Sequence, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
-        super().__init__(3, nm, br, sd, name)
+    def __init__(self, nm: Sequence, br: Sequence, std: Sequence = None, name: str | ObjectName = None):
+        super().__init__(3, nm, br, std, name)
 
     @staticmethod
     def from_file(file: str):
@@ -1056,16 +1056,16 @@ class _PhotospectralObject(_TrueColorToolsObject):
     - `filter_system` (FilterSystem): instance of the class storing filter profiles
     - `nm` (np.ndarray): shortcut for filter_system.nm, the definition range
     - `br` (np.ndarray): array of "brightness" in energy density units (not a photon counter)
-    - `sd` (np.ndarray): optional array of standard deviations
+    - `std` (np.ndarray): optional array of standard deviations
     - `name` (ObjectName): name as an instance of a class that stores its components
     """
 
-    def __init__(self, ndim: int, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str|ObjectName = None):
+    def __init__(self, ndim: int, filter_system: FilterSystem, br: Sequence, std: Sequence = None, name: str|ObjectName = None):
         """
         Args:
         - `filter_system` (FilterSystem): instance of the class storing filter profiles
         - `br` (Sequence): array of "brightness" in energy density units (not a photon counter)
-        - `sd` (Sequence): optional array of standard deviations
+        - `std` (Sequence): optional array of standard deviations
         - `name` (str|ObjectName): name as a string or an instance of a class that stores its components
         """
         self.br = np.array(br, dtype='float64')
@@ -1074,17 +1074,17 @@ class _PhotospectralObject(_TrueColorToolsObject):
         if not isinstance(filter_system, FilterSystem):
             raise ValueError('`filter_system` argument is not a FilterSystem instance')
         self.filter_system = filter_system
-        if sd is None or (ignore_sd_for_cubes and ndim == 3):
-            self.sd = None
+        if std is None or (ignore_std_for_cubes and ndim == 3):
+            self.std = None
         else:
-            self.sd = np.array(sd, dtype='float64')
+            self.std = np.array(std, dtype='float64')
         self.name = ObjectName.as_ObjectName(name)
         if (len_filters := len(filter_system)) != (len_br := self.br.shape[0]):
             raise ValueError(f'Arrays of wavelengths and brightness do not match ({len_filters} vs {len_br})')
-        if self.sd is not None and (len_sd := self.sd.shape[0]) != len_br:
+        if self.std is not None and (len_std := self.std.shape[0]) != len_br:
             print(f'# Note for the PhotospectralObject "{name}"')
-            print(f'- Array of standard deviations do not match brightness array ({len_sd} vs {len_br}). Uncertainty was erased.')
-            self.sd = None
+            print(f'- Array of standard deviations do not match brightness array ({len_std} vs {len_br}). Uncertainty was erased.')
+            self.std = None
         if np.any(np.isnan(self.br)):
             self.br = np.nan_to_num(self.br)
             print(f'# Note for the PhotospectralObject object "{self.name}"')
@@ -1142,10 +1142,10 @@ class _PhotospectralObject(_TrueColorToolsObject):
         try:
             nm0 = self.filter_system.mean_nm()
             br0 = self.br
-            sd0 = None if ignore_sd_for_cubes and self.ndim == 3 else self.sd
-            sd1 = None
+            std0 = None if ignore_std_for_cubes and self.ndim == 3 else self.std
+            std1 = None
             if len(self.filter_system) == 1: # single-point PhotospectralObject support
-                nm1, br1 = aux.extrapolating(nm0, br0, sd0, nm_arr, nm_step)
+                nm1, br1 = aux.extrapolating(nm0, br0, std0, nm_arr, nm_step)
             else:
                 filter_system = self.filter_system.define_on_range(nm_arr)
                 nm1 = filter_system.nm
@@ -1187,25 +1187,25 @@ class _PhotospectralObject(_TrueColorToolsObject):
                     if not result.success:
                         raise ValueError(f'Optimization failed: {result.message}')
                     br1 = result.x
-                if self.ndim == 1 and sd0 is not None:
+                if self.ndim == 1 and std0 is not None:
                     # Measurement confidence band calculation
                     # Confidence bands for spectral squares and cubes are not computed to save computational resources
                     A_inv = np.linalg.inv(A)
-                    sd1 = np.sqrt(np.diag(A_inv @ T.T @ np.diag(sd0**2) @ T @ A_inv))
+                    std1 = np.sqrt(np.diag(A_inv @ T.T @ np.diag(std0**2) @ T @ A_inv))
                     # An attempt to account for the sensitivity confidence band of the method
-                    sd1 = np.sqrt(sd1**2 + (0.01 * np.median(br1))**2 * np.diag(A_inv))
-                    # TODO: needs research, `0.01 * np.median(br1)` sd scale factor selected manually
+                    std1 = np.sqrt(std1**2 + (0.01 * np.median(br1))**2 * np.diag(A_inv))
+                    # TODO: needs research, `0.01 * np.median(br1)` std scale factor selected manually
             if self.ndim == 1:
                 # Retain the photometric data for the resulting spectral object.
-                spectral_obj = Spectrum(nm1, br1, sd1, name=self.name, photospectrum=deepcopy(self))
+                spectral_obj = Spectrum(nm1, br1, std1, name=self.name, photospectrum=deepcopy(self))
             else:
                 # It may be too costly to retain photometry for spectral squares and cubes.
-                spectral_obj = target_class(nm1, br1, sd1, name=self.name)
+                spectral_obj = target_class(nm1, br1, std1, name=self.name)
             if crop:
                 start = max(nm1[0], nm_arr[0])
                 end = min(nm1[-1], nm_arr[-1])
                 spectral_obj.br = spectral_obj.get_br_in_range(start, end)
-                spectral_obj.sd = spectral_obj.get_sd_in_range(start, end)
+                spectral_obj.std = spectral_obj.get_std_in_range(start, end)
                 spectral_obj.nm = aux.grid(start, end, nm_step)
             return spectral_obj
         except ZeroDivisionError:
@@ -1214,7 +1214,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
             print(f'- More precisely, {format_exc(limit=0).strip()}')
             return target_class.stub(self.name)
 
-    def apply_element_wise_operation(self, other: _TrueColorToolsObject, br_handling: Callable, sd_handling: Callable) -> Self:
+    def apply_element_wise_operation(self, other: _TrueColorToolsObject, br_handling: Callable, std_handling: Callable) -> Self:
         """
         Returns a new PhotospectralObject formed from element-wise operation with
         a SpectralObject or another PhotospectralObject. Operations between objects
@@ -1228,9 +1228,9 @@ class _PhotospectralObject(_TrueColorToolsObject):
             # Converting to a PhotospectralObject of the same filter system
             other = other @ filter_system
         br = br_handling(self.br, other.br)
-        sd = sd_handling(self.br, self.sd, other.br, other.sd)
+        std = std_handling(self.br, self.std, other.br, other.std)
         higher_dim = (self, other)[self.ndim < other.ndim]
-        return higher_dim.__class__(filter_system, br, sd, name=higher_dim.name)
+        return higher_dim.__class__(filter_system, br, std, name=higher_dim.name)
 
 
 stub_filter_system = FilterSystem.from_list(('Generic_Bessell.B', 'Generic_Bessell.V'))
@@ -1243,14 +1243,14 @@ class Photospectrum(_PhotospectralObject):
     - `filter_system` (FilterSystem): instance of the class storing filter profiles
     - `nm` (np.ndarray): shortcut for filter_system.nm, the definition range
     - `br` (np.ndarray): array of "brightness" in energy density units (not a photon counter)
-    - `sd` (np.ndarray): optional array of standard deviations
+    - `std` (np.ndarray): optional array of standard deviations
     - `name` (ObjectName): name as an instance of a class that stores its components
     """
 
     ndim: ClassVar[int] = 1
 
-    def __init__(self, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
-        super().__init__(1, filter_system, br, sd, name)
+    def __init__(self, filter_system: FilterSystem, br: Sequence, std: Sequence = None, name: str | ObjectName = None):
+        super().__init__(1, filter_system, br, std, name)
 
 
 class PhotospectralSquare(_PhotospectralObject, _Square):
@@ -1261,13 +1261,13 @@ class PhotospectralSquare(_PhotospectralObject, _Square):
     - `filter_system` (FilterSystem): instance of the class storing filter profiles
     - `nm` (np.ndarray): shortcut for filter_system.nm, the definition range
     - `br` (np.ndarray): array of "brightness" in energy density units (not a photon counter)
-    - `sd` (np.ndarray): optional array of standard deviations
+    - `std` (np.ndarray): optional array of standard deviations
     - `name` (ObjectName): name as an instance of a class that stores its components
     - `size` (int): spatial axis length
     """
 
-    def __init__(self, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
-        super().__init__(2, filter_system, br, sd, name)
+    def __init__(self, filter_system: FilterSystem, br: Sequence, std: Sequence = None, name: str | ObjectName = None):
+        super().__init__(2, filter_system, br, std, name)
 
 
 class PhotospectralCube(_PhotospectralObject, _Cube):
@@ -1278,15 +1278,15 @@ class PhotospectralCube(_PhotospectralObject, _Cube):
     - `filter_system` (FilterSystem): instance of the class storing filter profiles
     - `nm` (np.ndarray): shortcut for filter_system.nm, the definition range
     - `br` (np.ndarray): array of "brightness" in energy density units (not a photon counter)
-    - `sd` (np.ndarray): optional array of standard deviations
+    - `std` (np.ndarray): optional array of standard deviations
     - `name` (ObjectName): name as an instance of a class that stores its components
     - `width` (int): horizontal spatial axis length
     - `height` (int): vertical spatial axis length
     - `size` (int): number of pixels
     """
 
-    def __init__(self, filter_system: FilterSystem, br: Sequence, sd: Sequence = None, name: str | ObjectName = None):
-        super().__init__(3, filter_system, br, sd, name)
+    def __init__(self, filter_system: FilterSystem, br: Sequence, std: Sequence = None, name: str | ObjectName = None):
+        super().__init__(3, filter_system, br, std, name)
 
 
 
@@ -1318,8 +1318,8 @@ class _PhotometricModel:
     def spherical_albedo(self):
         if self.geometric_albedo is not None and self.phase_integral is not None:
             a = aux.mul_br(self.geometric_albedo[0], self.phase_integral[0])
-            a_sd = aux.mul_sd(self.geometric_albedo[0], self.geometric_albedo[1], self.phase_integral[0], self.phase_integral[1])
-            return a, a_sd
+            a_std = aux.mul_std(self.geometric_albedo[0], self.geometric_albedo[1], self.phase_integral[0], self.phase_integral[1])
+            return a, a_std
         else:
             return None
 
@@ -1374,19 +1374,19 @@ class PhaseCoefficient(_PhotometricModel):
     _k = 180 / np.pi * 0.4 * np.log(10) # ≈ 52.77
 
     def _integrate(self) -> None:
-        beta, beta_sd = aux.parse_value_sd(self.params['beta'])
+        beta, beta_std = aux.parse_value_std(self.params['beta'])
         beta *= self._k
         _exp = np.exp(-np.pi * beta)
         denominator = 1 + beta * beta
         phase_integral = 2 * (1 + _exp) / denominator
-        if beta_sd is not None:
-            phase_integral_sd = beta_sd * 2 * self._k * (np.pi * _exp + beta * phase_integral) / denominator
+        if beta_std is not None:
+            phase_integral_std = beta_std * 2 * self._k * (np.pi * _exp + beta * phase_integral) / denominator
         else:
-            phase_integral_sd = None
-        self.phase_integral = (phase_integral, phase_integral_sd)
+            phase_integral_std = None
+        self.phase_integral = (phase_integral, phase_integral_std)
 
     def phase_function(self, alpha):
-        beta, _ = aux.parse_value_sd(self.params['beta'])
+        beta, _ = aux.parse_value_std(self.params['beta'])
         return np.exp(-self._k * beta * np.array(alpha))
         # equivalent to 10**(-0.4 * beta * alpha / np.pi * 180)
 
@@ -1402,8 +1402,8 @@ class Exponentials(_PhotometricModel):
         self._A =  np.empty(n_exponentials)
         self._mu = np.empty(n_exponentials)
         for i in range(n_exponentials):
-            self._A[i] = aux.parse_value_sd(self.params[f'A_{i+1}'])[0]
-            self._mu[i] = aux.parse_value_sd(self.params[f'mu_{i+1}'])[0]
+            self._A[i] = aux.parse_value_std(self.params[f'A_{i+1}'])[0]
+            self._mu[i] = aux.parse_value_std(self.params[f'mu_{i+1}'])[0]
         if (zero_phase_angle := self._A.sum()) != 1:
             # if function was not normalized, it shows geometric albedo at 0 phase angle
             self.geometric_albedo = zero_phase_angle, None
@@ -1429,13 +1429,13 @@ class HG(_PhotometricModel):
     """
 
     def _integrate(self) -> None:
-        g, g_sd = aux.parse_value_sd(self.params['G'])
+        g, g_std = aux.parse_value_std(self.params['G'])
         q = 0.290 + 0.684 * g
-        q_sd = None if g_sd is None else 0.684 * g_sd
-        self.phase_integral = (q, q_sd)
+        q_std = None if g_std is None else 0.684 * g_std
+        self.phase_integral = (q, q_std)
 
     def phase_function(self, alpha):
-        g, _ = aux.parse_value_sd(self.params['G'])
+        g, _ = aux.parse_value_std(self.params['G'])
         alpha = np.array(alpha)
         alpha2 = 0.5 * alpha
         sin_alpha = np.sin(alpha)
@@ -1466,22 +1466,22 @@ class HG1G2(_PhotometricModel):
     """
 
     def _integrate(self) -> None:
-        g1, g1_sd = aux.parse_value_sd(self.params['G_1'])
-        g2, g2_sd = aux.parse_value_sd(self.params['G_2'])
+        g1, g1_std = aux.parse_value_std(self.params['G_1'])
+        g2, g2_std = aux.parse_value_std(self.params['G_2'])
         q = 0.009082 + 0.4061 * g1 + 0.8092 * g2
-        if g1_sd is None and g2_sd is None:
-            q_sd = None
+        if g1_std is None and g2_std is None:
+            q_std = None
         else:
-            if g1_sd is None:
-                g1_sd = 0
-            if g2_sd is None:
-                g2_sd = 0
-            q_sd = 0.4061 * g1_sd + 0.8092 * g2_sd
-        self.phase_integral = (q, q_sd)
+            if g1_std is None:
+                g1_std = 0
+            if g2_std is None:
+                g2_std = 0
+            q_std = 0.4061 * g1_std + 0.8092 * g2_std
+        self.phase_integral = (q, q_std)
 
     def phase_function(self, alpha):
-        g1, _ = aux.parse_value_sd(self.params['G_1'])
-        g2, _ = aux.parse_value_sd(self.params['G_2'])
+        g1, _ = aux.parse_value_std(self.params['G_1'])
+        g2, _ = aux.parse_value_std(self.params['G_2'])
         return g1 * aux.hg1g2_phi1(alpha) + g2 * aux.hg1g2_phi2(alpha) + (1 - g1 - g2) * aux.hg1g2_phi3(alpha)
 
 
@@ -1495,12 +1495,12 @@ class Hapke(_PhotometricModel):
     """
 
     def _integrate(self):
-        w, _ = aux.parse_value_sd(self.params['w']) # single particle scattering albedo
-        bo, _ = aux.parse_value_sd(self.params['bo']) # amplitude of opposition surge
-        h, _ = aux.parse_value_sd(self.params['h']) # width of opposition surge
-        b, _ = aux.parse_value_sd(self.params['b']) # Henyey-Greenstein single particle scattering function parameter
-        c, _ = aux.parse_value_sd(self.params['c']) # Henyey-Greenstein single particle scattering function parameter
-        theta = np.radians(aux.parse_value_sd(self.params['theta'])[0]) # macroscopic roughness angle
+        w, _ = aux.parse_value_std(self.params['w']) # single particle scattering albedo
+        bo, _ = aux.parse_value_std(self.params['bo']) # amplitude of opposition surge
+        h, _ = aux.parse_value_std(self.params['h']) # width of opposition surge
+        b, _ = aux.parse_value_std(self.params['b']) # Henyey-Greenstein single particle scattering function parameter
+        c, _ = aux.parse_value_std(self.params['c']) # Henyey-Greenstein single particle scattering function parameter
+        theta = np.radians(aux.parse_value_std(self.params['theta'])[0]) # macroscopic roughness angle
         gamma = np.sqrt(1 - w)
         r0 = (1 - gamma) / (1 + gamma) # bihemispherical  reflectance
         # geometric albedo:
@@ -1605,20 +1605,20 @@ class ReflectingBody:
 
 
 sun_SI = Spectrum.from_file('spectra/files/CALSPEC/sun_reference_stis_002.fits', name='Sun') # W / (m² nm)
-sun_SI.sd = None # removing uncertainty to facilitate calculations and simplify spectrum plots
+sun_SI.std = None # removing uncertainty to facilitate calculations and simplify spectrum plots
 sun_in_V, _ = sun_SI @ get_filter('Generic_Bessell.V')
 sun_norm = sun_SI.scaled_at(get_filter('Generic_Bessell.V'))
 sun_filter = sun_SI.normalize()
 
 vega_SI = Spectrum.from_file('spectra/files/CALSPEC/alpha_lyr_stis_011.fits', name='Vega') # W / (m² nm)
-vega_SI.sd = None # removing uncertainty to facilitate calculations and simplify spectrum plots
+vega_SI.std = None # removing uncertainty to facilitate calculations and simplify spectrum plots
 vega_in_V, _ = vega_SI @ get_filter('Generic_Bessell.V')
 vega_norm = vega_SI.scaled_at(get_filter('Generic_Bessell.V'))
 
 
 def _create_TCT_object(
         name: ObjectName, nm: Sequence[int|float], filters: Sequence[str], br: Sequence,
-        sd: Sequence = None, filter_system: str = None, calib: str = None,
+        std: Sequence = None, filter_system: str = None, calib: str = None,
         is_sun: bool = False, is_emission_spectrum: bool = False
     ):
     """
@@ -1627,11 +1627,11 @@ def _create_TCT_object(
     """
     if len(nm) > 0:
         if is_emission_spectrum:
-            TCT_obj = Spectrum.from_spectral_lines(nm, br, sd, name=name)
+            TCT_obj = Spectrum.from_spectral_lines(nm, br, std, name=name)
         else:
-            TCT_obj = Spectrum.from_array(nm, br, sd, name=name)
+            TCT_obj = Spectrum.from_array(nm, br, std, name=name)
     elif len(filters) > 0:
-        TCT_obj = Photospectrum(FilterSystem.from_list(filters, name=filter_system), br, sd, name=name)
+        TCT_obj = Photospectrum(FilterSystem.from_list(filters, name=filter_system), br, std, name=name)
     else:
         print(f'# Note for the database object "{name}"')
         print('- No wavelength data. Spectrum stub object was created.')
@@ -1654,12 +1654,12 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
 
     Supported input keys of a database unit:
     - `tags` (list): strings categorizing the spectral data, optional
-    - `nm` (list): list of wavelengths in nanometers
-    - `br` (list): same-size list of "brightness" in energy spectral density per wavelength units
-    - `mag` (list): same-size list of magnitudes
-    - `sd` (list/number): same-size list of standard deviations (or a common value)
-    - `nm_range` (dict): wavelength range definition in the format `{start: …, stop: …, step: …}`
-    - `slope` (dict): spectrum definition in the format `{start: …, stop: …, power/percent_per_100nm: …}`
+    - `wavelength_nm` (list): list of wavelengths in nanometers
+    - `spectral_dist` (list): same-size list of "brightness" in energy spectral density per wavelength units
+    - `magnitudes` (list): same-size list of magnitudes
+    - `std` (list/number): same-size list of standard deviations (or a common uncertainty)
+    - `wavelength_range` (dict): sets the wavelength grid in the format `{start: …, stop: …, step: …}`
+    - `spectral_slope` (dict): sets the grid in the format `{start: …, stop: …, power/percent_per_100nm: …}`
     - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
     - `filters` (list): list of filter names present in the `filters` folder (can be mixed with nm values)
     - `color_indices` (list): dictionary of color indices, formatted `{'filter1-filter2': …, …}`
@@ -1671,8 +1671,8 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
     - `bond_albedo` (number): scales the data to spherical albedo spectrum using known Solar spectrum
     - `phase_integral` (number/list): transition factor from geometric albedo to spherical albedo
     - `phase_function` (list): phase function name and its parameters to compute phase integral
-    - `br_geometric`, `br_spherical` (list): specifying unique spectra for different albedos
-    - `sd_geometric`, `sd_spherical` (list/number): corresponding standard deviations or a common value
+    - `sd_geometric`, `sd_spherical` (list): specifying unique spectra for different albedos
+    - `std_geometric`, `std_spherical` (list/number): corresponding standard deviations or a common value
     - `is_geometric_albedo` (bool): `true` to interpret the data as a geometric albedo spectrum
     - `is_spherical_albedo` (bool): `true` to interpret the data as a spherical albedo spectrum
     - `is_albedo` (bool): `true` to interpret the data as a both geom. and sphe. albedo spectra
@@ -1682,7 +1682,7 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
     - `is_photon_counter` (bool): `true` to convert the photon spectral density into the energy sp. density
     """
     br = []
-    sd = None
+    std = None
     nm = [] # Spectrum object indicator
     filters = [] # Photospectrum object indicator
     filter_system = None
@@ -1698,54 +1698,54 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
             print(f'- More precisely, {format_exc(limit=0).strip()}')
         nm = imported_spectrum.nm
         br = imported_spectrum.br
-        sd = imported_spectrum.sd
+        std = imported_spectrum.std
     else:
         # Brightness reading
-        if 'br' in content:
-            br, sd = aux.parse_value_sd_list(content['br'])
-            if 'sd' in content:
-                sd = aux.repeat_if_value(content['sd'], len(br))
-        elif 'mag' in content:
-            mag, sd = aux.parse_value_sd_list(content['mag'])
+        if 'spectral_dist' in content:
+            br, std = aux.parse_value_std_list(content['spectral_dist'])
+            if 'std' in content:
+                std = aux.repeat_if_value(content['std'], len(br))
+        elif 'magnitudes' in content:
+            mag, std = aux.parse_value_std_list(content['magnitudes'])
             br = aux.mag2irradiance(mag)
             br /= br.mean() # simple calibration for data not scaled by albedo
-            if 'sd' in content:
-                sd = aux.repeat_if_value(content['sd'], len(br))
-            if sd is not None:
-                sd = aux.sd_mag2sd_irradiance(sd, br)
+            if 'std' in content:
+                std = aux.repeat_if_value(content['std'], len(br))
+            if std is not None:
+                std = aux.std_mag2std_irradiance(std, br)
         # Spectrum reading
-        if 'nm' in content:
-            nm = content['nm']
+        if 'wavelength_nm' in content:
+            nm = content['wavelength_nm']
         elif 'nm_range' in content:
             nm_range = content['nm_range']
             nm = np.arange(nm_range['start'], nm_range['stop']+1, nm_range['step'])
             # important not to use aux.grid() here
-        elif 'slope' in content:
-            slope = content['slope']
+        elif 'spectral_slope' in content:
+            slope = content['spectral_slope']
             nm = aux.grid(slope['start'], slope['stop'], nm_step)
             if 'power' in slope:
                 # spectral gradient with γ (power law like in Karkoschka (2001) doi:10.1006/icar.2001.6596)
-                power, power_sd = aux.parse_value_sd(slope['power'])
+                power, power_std = aux.parse_value_std(slope['power'])
                 mid_nm = 0.5 * (slope['stop'] + slope['start'])
                 br = (nm / mid_nm)**power # br=1 at nm midpoint
-                if power_sd is not None:
-                    sd = br * np.abs((nm / mid_nm)**power_sd - 1)
+                if power_std is not None:
+                    std = br * np.abs((nm / mid_nm)**power_std - 1)
             elif 'percent_per_100nm' in slope:
                 # spectral gradient with S' (like in Jewitt (2002) doi:10.1086/338692)
-                pp100nm, pp100nm_sd = aux.parse_value_sd(slope['percent_per_100nm'])
+                pp100nm, pp100nm_std = aux.parse_value_std(slope['percent_per_100nm'])
                 # The exact exponential formula, but astronomers don't use it:
                 # br = (1 + 0.01 * percent_per_100nm)**(0.01 * nm)
                 # They use just a line:
                 nm_delta = slope['stop'] - slope['start']
                 nm_scaled = (nm - slope['start']) / nm_delta - 0.5
                 br = nm_delta * (0.5 + 0.01 * pp100nm * nm_scaled) # br=1 at nm midpoint
-                if pp100nm_sd is not None:
-                    sd = nm_delta * np.abs(0.01 * pp100nm_sd * nm_scaled)
+                if pp100nm_std is not None:
+                    std = nm_delta * np.abs(0.01 * pp100nm_std * nm_scaled)
         # Photospectrum reading
         elif 'filters' in content:
             filters = content['filters']
         elif 'color_indices' in content:
-            filters, br, sd = aux.color_indices_parser(content['color_indices'])
+            filters, br, std = aux.color_indices_parser(content['color_indices'])
         if 'photometric_system' in content:
             # regular filter if name is string, else "delta-filter" (wavelength)
             filter_system = content['photometric_system']
@@ -1780,7 +1780,7 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
     else:
         photometric_model = DefaultModel()
     if 'phase_integral' in content:
-        photometric_model.phase_integral = aux.parse_value_sd(content['phase_integral'])
+        photometric_model.phase_integral = aux.parse_value_std(content['phase_integral'])
     # Albedo reading
     geom_where = geom_how = sphe_where = sphe_how = None
     if photometric_model.geometric_albedo is not None:
@@ -1794,40 +1794,40 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
     if 'albedo' in content:
         where, how = content['albedo']
         geom_where = sphe_where = where
-        how = aux.parse_value_sd(how)
+        how = aux.parse_value_std(how)
         geom_how = sphe_how = how
     # "geometric albedo" parsing
     if 'is_geometric_albedo' in content:
         is_geom_albedo = content['is_geometric_albedo']
     if 'geometric_albedo' in content:
         geom_where, geom_how = content['geometric_albedo']
-        geom_how = aux.parse_value_sd(geom_how)
+        geom_how = aux.parse_value_std(geom_how)
     # "spherical albedo" parsing
     if 'is_spherical_albedo' in content:
         is_sphe_albedo = content['is_spherical_albedo']
     if 'spherical_albedo' in content:
         sphe_where, sphe_how = content['spherical_albedo']
-        sphe_how = aux.parse_value_sd(sphe_how)
+        sphe_how = aux.parse_value_std(sphe_how)
     # Main part
     calib = content['calibration_system'] if 'calibration_system' in content else None
     is_sun = 'is_reflecting_sunlight' in content and content['is_reflecting_sunlight']
     # Goal is to create geometric and spherical albedo (photo)spectral objects
     TCT_obj = geometric = spherical = None
     if len(br) == 0:
-        if 'br_geometric' in content:
-            br_geom, sd_geom = aux.parse_value_sd_list(content['br_geometric'])
-            if 'sd_geometric' in content:
-                sd_geom = aux.repeat_if_value(content['sd_geometric'], len(br_geom))
-            geometric = _create_TCT_object(name, nm, filters, br_geom, sd_geom, filter_system, calib, is_sun, is_emission)
+        if 'sd_geometric' in content:
+            sd_geom, std_geom = aux.parse_value_std_list(content['sd_geometric'])
+            if 'std_geometric' in content:
+                std_geom = aux.repeat_if_value(content['std_geometric'], len(sd_geom))
+            geometric = _create_TCT_object(name, nm, filters, sd_geom, std_geom, filter_system, calib, is_sun, is_emission)
             if sphe_where is not None and sphe_how is not None:
                 spherical = geometric.scaled_at(sphe_where, sphe_how)
             elif 'bond_albedo' in content:
-                spherical = geometric.scaled_at(sun_filter, *aux.parse_value_sd(content['bond_albedo']))
-        if 'br_spherical' in content:
-            br_sphe, sd_sphe = aux.parse_value_sd_list(content['br_spherical'])
-            if 'sd_spherical' in content:
-                sd_sphe = aux.repeat_if_value(content['sd_spherical'], len(br_sphe))
-            spherical = _create_TCT_object(name, nm, filters, br_sphe, sd_sphe, filter_system, calib, is_sun, is_emission)
+                spherical = geometric.scaled_at(sun_filter, *aux.parse_value_std(content['bond_albedo']))
+        if 'sd_spherical' in content:
+            sd_sphe, std_sphe = aux.parse_value_std_list(content['sd_spherical'])
+            if 'std_spherical' in content:
+                std_sphe = aux.repeat_if_value(content['std_spherical'], len(sd_sphe))
+            spherical = _create_TCT_object(name, nm, filters, sd_sphe, std_sphe, filter_system, calib, is_sun, is_emission)
             if geom_where is not None and geom_how is not None:
                 geometric = spherical.scaled_at(geom_where, geom_how)
         if geometric is None and spherical is None:
@@ -1835,7 +1835,7 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
             print('- No brightness data. Spectrum stub object was created.')
             TCT_obj = Spectrum.stub(name)
     else:
-        TCT_obj = _create_TCT_object(name, nm, filters, br, sd, filter_system, calib, is_sun, is_emission)
+        TCT_obj = _create_TCT_object(name, nm, filters, br, std, filter_system, calib, is_sun, is_emission)
         if is_geom_albedo:
             geometric = TCT_obj
         elif geom_where is not None and geom_how is not None:
@@ -1845,7 +1845,7 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
         elif sphe_where is not None and sphe_how is not None:
             spherical = TCT_obj.scaled_at(sphe_where, sphe_how)
         elif 'bond_albedo' in content:
-            spherical = TCT_obj.scaled_at(sun_filter, *aux.parse_value_sd(content['bond_albedo']))
+            spherical = TCT_obj.scaled_at(sun_filter, *aux.parse_value_std(content['bond_albedo']))
     #tags = set()
     #if 'tags' in content:
     #    for tag in content['tags']:
@@ -2139,9 +2139,9 @@ class ColorImage(ColorObject):
         """ Brings the resolution of the image to approximately match the number of pixels """
         output = deepcopy(self)
         output.br = aux.spatial_downscaling(self.br, pixels_limit)
-        #output.sd = None
-        #if self.sd is not None:
-        #    output.sd = aux.spatial_downscaling(self.sd, pixels_limit)
+        #output.std = None
+        #if self.std is not None:
+        #    output.std = aux.spatial_downscaling(self.std, pixels_limit)
         return output
 
     def to_bytes(self):

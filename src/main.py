@@ -363,11 +363,11 @@ def launch_window(lang: str):
 
                     # Update synthetic photometry output
                     if event in tab1_update_gui_events or event == 'tab1_in_filter':
-                        tab1_value, tab1_sd = tab1_spectrum @ get_filter(values['tab1_in_filter'])
-                        if tab1_sd is None:
+                        tab1_value, tab1_std = tab1_spectrum @ get_filter(values['tab1_in_filter'])
+                        if tab1_std is None:
                             window['tab1_convolved'].update(sigfig_round(tab1_value, rounding, warn=False))
                         else:
-                            window['tab1_convolved'].update(sigfig_round(tab1_value, uncertainty=tab1_sd, warn=False))
+                            window['tab1_convolved'].update(sigfig_round(tab1_value, uncertainty=tab1_std, warn=False))
 
 
                 if event in ('tab1_tag_filter', 'tab1_searched'):

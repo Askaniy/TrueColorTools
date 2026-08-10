@@ -85,7 +85,7 @@
         tags: ['Solar System', 'planetary body/planet/Mercury'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
-        br_geometric: [0.087, 0.105, 0.142, 0.172, 0.208,
+        sd_geometric: [0.087, 0.105, 0.142, 0.172, 0.208,
                        0.158, 0.180],
         spherical_albedo: ['Messenger_MDIS_WAC.560BP5', 0.070],
     },
@@ -93,13 +93,13 @@
         tags: ['Solar System', 'planetary body/planet/Mercury'],
         photometric_system: 'Messenger_MDIS_WAC',
         filters: ['430BP40', '480BP10', '560BP5', '630BP5', '700BP5', '750BP5', '830BP5', '900BP5', '950BP7', '1000BP15'],
-        br_geometric: [0.119, 0.134, 0.152, 0.165, 0.180, 0.192, 0.214, 0.234, 0.247, 0.254],
-        br_spherical: [0.053, 0.061, 0.070, 0.077, 0.084, 0.089, 0.098, 0.105, 0.110, 0.113],
+        sd_geometric: [0.119, 0.134, 0.152, 0.165, 0.180, 0.192, 0.214, 0.234, 0.247, 0.254],
+        sd_spherical: [0.053, 0.061, 0.070, 0.077, 0.084, 0.089, 0.098, 0.105, 0.110, 0.113],
     },
     'Mercury | Crow2011, Mallama2017a, Domingue2011': { // phase angle 77°
         tags: ['Solar System', 'planetary body/planet/Mercury'],
-        nm: [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5],
-        br: [0.61, 0.56, 0.66, 0.71, 0.86, 1.00, 1.37, 1.50, 1.77, 2.01],
+        wavelength_nm: [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5],
+        spectral_dist: [0.61, 0.56, 0.66, 0.71, 0.86, 1.00, 1.37, 1.50, 1.77, 2.01],
         geometric_albedo: ['Generic_Bessell.V', 0.142],
         spherical_albedo: ['Messenger_MDIS_WAC.560BP5', 0.070],
     },
@@ -193,22 +193,22 @@
         tags: ['Solar System', 'planetary body/planet/Venus'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
-        br_geometric: [0.348, 0.658, 0.689, 0.708, 0.584,
+        sd_geometric: [0.348, 0.658, 0.689, 0.708, 0.584,
                        0.658, 0.640],
         phase_integral: 1.35, // Table 6
     },
     'Venus | Crow2011, Mallama2017a, Mallama2006': { // phase angle 76°
         tags: ['Solar System', 'planetary body/planet/Venus'],
-        nm: [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5],
-        br: [0.59, 0.64, 0.72, 0.58, 0.95, 1.00, 1.16, 1.08, 1.16, 1.12],
+        wavelength_nm: [314.7, 359.0, 392.6, 415.5, 457.5, 501.2, 626.4, 729.7, 959.5, 1063.5],
+        spectral_dist: [0.59, 0.64, 0.72, 0.58, 0.95, 1.00, 1.16, 1.08, 1.16, 1.12],
         geometric_albedo: ['Generic_Bessell.V', 0.689],
         phase_integral: 1.35, // Table 6
     },
     'Venus | Mallama2006': {
         tags: ['Solar System', 'planetary body/planet/Venus'],
         filters: ['Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I'],
-        br_geometric: [0.64, 0.67, 0.69, 0.57],
-        br_spherical: [0.81, 0.90, 0.89, 0.87],
+        sd_geometric: [0.64, 0.67, 0.69, 0.57],
+        sd_spherical: [0.81, 0.90, 0.89, 0.87],
     },
     'Maiorov2005': [
         'A New Analysis of the Spectra Obtained by the Venera Missions in the Venusian Atmosphere. I. The Analysis of the Data Received from the Venera-11 Probe at Altitudes Below 37 km in the 0.44–0.66 µm Wavelength Range',
@@ -217,8 +217,8 @@
     ],
     'Surface of Venus | Maiorov2005': {
         tags: ['featured', 'Solar System', 'planetary body/planet/Venus'],
-        nm: [440, 450, 460, 470, 480, 490, 500, 505, 700],
-        br: [0.089, 0.092, 0.095, 0.097, 0.098, 0.099, 0.1, 0.1, 0.1],
+        wavelength_nm: [440, 450, 460, 470, 480, 490, 500, 505, 700],
+        spectral_dist: [0.089, 0.092, 0.095, 0.097, 0.098, 0.099, 0.1, 0.1, 0.1],
         is_albedo: true,
     },
     'Ekonomov1980': [
@@ -228,16 +228,16 @@
     ],
     'Surface of Venus: Venera 9 | Ekonomov1980': {
         tags: ['Solar System', 'planetary body/planet/Venus'],
-        nm: [540, 620, 670, 760, 870],
-        br: [0.013, 0.044, 0.034, 0.069, 0.096], // extracted from Fig. 8
-        sd: [0.008, 0.010, 0.010, 0.016, 0.023],
+        wavelength_nm: [540, 620, 670, 760, 870],
+        spectral_dist: [0.013, 0.044, 0.034, 0.069, 0.096], // extracted from Fig. 8
+        std: [0.008, 0.010, 0.010, 0.016, 0.023],
         is_albedo: true,
     },
     'Surface of Venus: Venera 10 | Ekonomov1980': {
         tags: ['Solar System', 'planetary body/planet/Venus'],
-        nm: [540, 610, 660, 750, 880],
-        br: [0.044, 0.061, 0.066, 0.073, 0.158], // extracted from Fig. 8
-        sd: [0.012, 0.015, 0.016, 0.021, 0.047],
+        wavelength_nm: [540, 610, 660, 750, 880],
+        spectral_dist: [0.044, 0.061, 0.066, 0.073, 0.158], // extracted from Fig. 8
+        std: [0.012, 0.015, 0.016, 0.021, 0.047],
         is_albedo: true,
     },
     'Ekonomov1979': [
@@ -247,21 +247,21 @@
     'Surface of Venus: Venera 11 | Ekonomov1979': {
         // Obtained from the model of the lowest layers of the atmosphere.
         tags: ['Solar System', 'planetary body/planet/Venus'],
-        nm: [450, 500, 635],
-        br: [0.07, 0.15, 0.23],
+        wavelength_nm: [450, 500, 635],
+        spectral_dist: [0.07, 0.15, 0.23],
         is_albedo: true,
     },
     //'Surface of Venus: Venera 12 | Ekonomov1979': {
     //    tags: ['Solar System', 'planetary body/planet/Venus'],
-    //    nm: [640], // 560-680 range
-    //    br: [[0.07, +0.05, -0.02]],
+    //    wavelength_nm: [640], // 560-680 range
+    //    spectral_dist: [[0.07, +0.05, -0.02]],
     //    is_albedo: true,
     //},
     'Clouds of Venus: Venera 11 | Ekonomov1979': {
         // Obtained from the model of the lowest layers of the atmosphere.
         tags: ['Solar System', 'planetary body/planet/Venus'],
-        nm: [450, 500, 635],
-        br: [0.845, 0.85, 0.83],
+        wavelength_nm: [450, 500, 635],
+        spectral_dist: [0.845, 0.85, 0.83],
         is_albedo: true,
     },
 
@@ -292,14 +292,14 @@
         tags: ['Solar System/Terran system', 'planetary body/planet/Earth'],
         photometric_system: 'DSCOVR_EPIC',
         filters: ['317nm', '325nm', '388nm', '443nm', '551nm', '680nm', '779nm'],
-        br_geometric: [0.182, 0.276, 0.300, 0.268, 0.211, 0.205, 0.232], // Fig. 4
+        sd_geometric: [0.182, 0.276, 0.300, 0.268, 0.211, 0.205, 0.232], // Fig. 4
         spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
     },
     'Earth | Robinson2025': {
         tags: ['Solar System/Terran system', 'planetary body/planet/Earth'],
         photometric_system: 'Generic_Bessell',
         filters: ['B', 'V', 'R'],
-        br_geometric: [[0.277, +0.005, -0.004], [0.226, 0.004], [0.221, 0.004]],
+        sd_geometric: [[0.277, +0.005, -0.004], [0.226, 0.004], [0.221, 0.004]],
         spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
     },
     'Livengood2011': [
@@ -311,7 +311,7 @@
         tags: ['Solar System/Terran system', 'planetary body/planet/Earth'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
-        br: [0.295, 0.229, 0.177, 0.168, 0.171, 0.189, 0.152], // phase-corrected values reported in Payne2025 (Fig. 4)
+        spectral_dist: [0.295, 0.229, 0.177, 0.168, 0.171, 0.189, 0.152], // phase-corrected values reported in Payne2025 (Fig. 4)
         geometric_albedo: ['Generic_Bessell.V', [0.226, 0.004]],
         spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
     },
@@ -319,7 +319,7 @@
         tags: ['Solar System/Terran system', 'planetary body/planet/Earth'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
-        br: [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79],
+        spectral_dist: [1610.47, 1342.71, 1059.02, 1014.27, 1062.25, 1168.00, 853.79],
         geometric_albedo: ['Generic_Bessell.V', [0.226, 0.004]],
         spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
     },
@@ -332,7 +332,7 @@
         tags: ['Solar System/Terran system', 'planetary body/planet/Earth'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7270A', '7560A', '9680A'],
-        br: [[0.381, 0.026], [0.262, 0.008], [0.252, 0.012], [0.252, 0.016], [0.227, 0.013], [0.245, 0.013]], // Fig. 7 (Galileo 1990)
+        spectral_dist: [[0.381, 0.026], [0.262, 0.008], [0.252, 0.012], [0.252, 0.016], [0.227, 0.013], [0.245, 0.013]], // Fig. 7 (Galileo 1990)
         geometric_albedo: ['Generic_Bessell.V', [0.226, 0.004]],
         spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
     },
@@ -351,7 +351,7 @@
         tags: ['Solar System/Terran system', 'planetary body/planet/Earth'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
-        br: [0.688, 0.512, 0.434, 0.418, 0.430,
+        spectral_dist: [0.688, 0.512, 0.434, 0.418, 0.430,
                        0.392, 0.396],
         geometric_albedo: ['Generic_Bessell.V', [0.226, 0.004]],
         spherical_albedo: ['Misc_Atlas.cyan', [0.294, 0.002]], // "broadband visual albedo", Misc_Atlas.cyan was the closest one
@@ -407,8 +407,8 @@
     ],
     'Caribbean Sea (Earth) | Gómez2014': {
         tags: ['Solar System/Terran system', 'planetary body/planet/Earth/Terran feature'],
-        nm: [380, 400, 425, 450, 475, 500, 520, 550, 600, 650, 700],
-        br: [0.048, 0.047, 0.043, 0.037, 0.032, 0.02, 0.01, 0.007, 0.004, 0.002, 0.001],
+        wavelength_nm: [380, 400, 425, 450, 475, 500, 520, 550, 600, 650, 700],
+        spectral_dist: [0.048, 0.047, 0.043, 0.037, 0.032, 0.02, 0.01, 0.007, 0.004, 0.002, 0.001],
         is_albedo: true,
     },
     // Moon
@@ -432,7 +432,7 @@
         tags: ['featured', 'Solar System/Terran system', 'planetary body/large moon/Moon', 'natural satellite/regular moon'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
-        br: [1894.24, 2387.17, 2832.17, 3269.35, 4091.49, 4787.91, 5506.36],
+        spectral_dist: [1894.24, 2387.17, 2832.17, 3269.35, 4091.49, 4787.91, 5506.36],
         geometric_albedo: ['Generic_Bessell.V', 0.113], // excludes opposition effect
         spherical_albedo: ['Generic_Bessell.V', 0.069],
     },
@@ -447,16 +447,16 @@
         tags: ['Solar System/Terran system', 'planetary body/large moon/Moon', 'natural satellite/regular moon'],
         photometric_system: 'Clementine_UVVIS',
         filters: ['415nm', '750nm', '900nm', '950nm', '1000nm'],
-        br_geometric: [0.176, 0.246, 0.252, 0.246, 0.231],
-        sd_geometric: [0.009, 0.010, 0.010, 0.014, 0.010],
-        br_spherical: [0.066, 0.109, 0.119, 0.122, 0.122],
-        sd_spherical: [0.001, 0.002, 0.002, 0.003, 0.002],
+        sd_geometric: [0.176, 0.246, 0.252, 0.246, 0.231],
+        std_geometric: [0.009, 0.010, 0.010, 0.014, 0.010],
+        sd_spherical: [0.066, 0.109, 0.119, 0.122, 0.122],
+        std_spherical: [0.001, 0.002, 0.002, 0.003, 0.002],
     },
     'Moon: Near side (E I) | Lane1973': {
         tags: ['Solar System/Terran system', 'planetary body/large moon/Moon', 'natural satellite/regular moon'],
-        nm: [359.0, 392.6, 415.5, 457.3, 501.2, 626.4, 729.7, 859.5, 1063.5],
-        br_geometric: [0.072, 0.085, 0.088, 0.098, 0.106, 0.162, 0.179, 0.179, 0.202], // excludes opposition effect
-        br_spherical: [0.039, 0.049, 0.048, 0.056, 0.062, 0.098, 0.113, 0.118, 0.136],
+        wavelength_nm: [359.0, 392.6, 415.5, 457.3, 501.2, 626.4, 729.7, 859.5, 1063.5],
+        sd_geometric: [0.072, 0.085, 0.088, 0.098, 0.106, 0.162, 0.179, 0.179, 0.202], // excludes opposition effect
+        sd_spherical: [0.039, 0.049, 0.048, 0.056, 0.062, 0.098, 0.113, 0.118, 0.136],
     },
     'Holsclaw2010': [
         'A comparison of the ultraviolet to near-infrared spectral properties of Mercury and the Moon as observed by MESSENGER',
@@ -483,7 +483,7 @@
         tags: ['Solar System/Terran system', 'planetary body/large moon/Moon', 'natural satellite/regular moon'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
-        br: [13.83, 18.06, 22.54, 26.68, 30.74, 34.86, 34.14],
+        spectral_dist: [13.83, 18.06, 22.54, 26.68, 30.74, 34.86, 34.14],
         geometric_albedo: ['Clementine_UVVIS.750nm', 0.27], // derived from Fig. 1b
         phase_integral: [0.452, 0.004],
     },
@@ -498,10 +498,10 @@
         tags: ['Solar System/Terran system', 'planetary body/large moon/Moon', 'natural satellite/regular moon'],
         photometric_system: 'Clementine_UVVIS',
         filters: ['415nm', '750nm', '900nm', '950nm', '1000nm'],
-        br_geometric: [0.20, 0.28, 0.29, 0.28, 0.29],
-        sd_geometric: [0.01, 0.01, 0.01, 0.02, 0.01],
-        br_spherical: [0.078, 0.127, 0.140, 0.144, 0.146],
-        sd_spherical: [0.002, 0.002, 0.003, 0.004, 0.003],
+        sd_geometric: [0.20, 0.28, 0.29, 0.28, 0.29],
+        std_geometric: [0.01, 0.01, 0.01, 0.02, 0.01],
+        sd_spherical: [0.078, 0.127, 0.140, 0.144, 0.146],
+        std_spherical: [0.002, 0.002, 0.003, 0.004, 0.003],
     },
     'Moon: Maria (E I) | Velikodsky2011': {
         tags: ['Solar System/Terran system', 'planetary body/large moon/Moon', 'natural satellite/regular moon'],
@@ -514,10 +514,10 @@
         tags: ['Solar System/Terran system', 'planetary body/large moon/Moon', 'natural satellite/regular moon'],
         photometric_system: 'Clementine_UVVIS',
         filters: ['415nm', '750nm', '900nm', '950nm', '1000nm'],
-        br_geometric: [0.13, 0.17, 0.18, 0.17, 0.16],
-        sd_geometric: [0.01, 0.02, 0.02, 0.02, 0.01],
-        br_spherical: [0.042, 0.074, 0.076, 0.076, 0.074],
-        sd_spherical: [0.001, 0.002, 0.002, 0.002, 0.002],
+        sd_geometric: [0.13, 0.17, 0.18, 0.17, 0.16],
+        std_geometric: [0.01, 0.02, 0.02, 0.02, 0.01],
+        sd_spherical: [0.042, 0.074, 0.076, 0.076, 0.074],
+        std_spherical: [0.001, 0.002, 0.002, 0.002, 0.002],
     },
     'Wu2018': [
         'The Absolute Reflectance and New Calibration Site of the Moon',
@@ -547,7 +547,7 @@
         tags: ['Solar System/Martian system', 'planetary body/planet/Mars'],
         filters: ['Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Bessell.R', 'Generic_Bessell.I',
                   'Generic_Cousins.R', 'Generic_Cousins.I'],
-        br_geometric: [0.060, 0.088, 0.170, 0.288, 0.330,
+        sd_geometric: [0.060, 0.088, 0.170, 0.288, 0.330,
                        0.250, 0.285],
         phase_integral: 1.01, // extracted from Fig. 7 for 550 nm (q2)
     },
@@ -555,7 +555,7 @@
         tags: ['Solar System/Martian system', 'planetary body/planet/Mars'],
         photometric_system: 'DeepImpact_HRI-VIS',
         filters: ['Violet', 'Blue', 'Green', 'Orange', 'Red', 'NIR', 'IR'],
-        br: [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31],
+        spectral_dist: [4.52, 6.87, 13.09, 21.60, 25.32, 26.55, 24.31],
         geometric_albedo: ['Generic_Bessell.V', 0.170],
         phase_integral: 1.01, // extracted from Fig. 7 for 550 nm (q2)
     },
@@ -625,11 +625,11 @@
             'Rosetta_OSIRIS_NAC.Red', 'Rosetta_OSIRIS_NAC.Ortho', 'Rosetta_OSIRIS_NAC.Near_IR', 'Rosetta_OSIRIS_NAC.Fe2O3',
             'Rosetta_OSIRIS_NAC.IR'
         ],
-        br: [
+        spectral_dist: [
             0.01305, 0.01312, 0.01484, 0.01489, 0.01699, 0.01766, 0.02037, 0.02137, 0.02177, 0.02641, 0.02769,
             0.02743, 0.02732, 0.02835, 0.03083, 0.03316, 0.03499, 0.03713, 0.03940, 0.04057, 0.03880
         ],
-        sd: [ // originally given as %
+        std: [ // originally given as %
             0.00450, 0.00299, 0.00402, 0.00348, 0.00314, 0.00272, 0.00257, 0.00199, 0.00059, 0.00071, 0.00078,
             0.00093, 0.00049, 0.00060, 0.00089, 0.00096, 0.00129, 0.00104, 0.00122, 0.00110, 0.00151
         ],
@@ -650,8 +650,8 @@
     ],
     'Deimos (M II) | Fraeman2013, Wargnier2025': {
         tags: ['featured', 'Solar System/Martian system', 'natural satellite/regular moon'],
-        nm: [250, 300, 350, 400, 450, 500, 550, 600, 700, 750, 800],
-        br: [0.04, 0.05, 0.051, 0.05, 0.049, 0.053, 0.055, 0.058, 0.062, 0.067, 0.069],
+        wavelength_nm: [250, 300, 350, 400, 450, 500, 550, 600, 700, 750, 800],
+        spectral_dist: [0.04, 0.05, 0.051, 0.05, 0.049, 0.053, 0.055, 0.058, 0.062, 0.067, 0.069],
         geometric_albedo: ['MEX_SRC.Pan', [0.080, 0.001]], // Table 4
         spherical_albedo: ['MEX_SRC.Pan', [0.018, 0.001]], // Table 4
     },
@@ -698,16 +698,16 @@
         tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter'],
         photometric_system: 'HST_WFPC2-WF',
         filters: ['F255W', 'F336W', 'F410M', 'F555W', 'F953N'], // Filters from Table 1 of West et al. (1995)
-        br: [0.339, 0.305, 0.421, 0.528, 0.514],
-        sd: [0.016, 0.015, 0.021, 0.027, 0.027], // Fig. 2a
+        spectral_dist: [0.339, 0.305, 0.421, 0.528, 0.514],
+        std: [0.016, 0.015, 0.021, 0.027, 0.027], // Fig. 2a
         is_albedo: true, // Reflectivity
     },
     'Jupiter: 58° S, 2009 | Hammel2010': {
         tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter'],
         photometric_system: 'HST_WFC3_UVIS1',
         filters: ['F225W', 'F275W', 'FQ378N', 'FQ437N', 'FQ508N', 'FQ634N', 'FQ727N', 'FQ889N', 'FQ906N', 'FQ924N'], // Filters from Table 1
-        br: [0.418, 0.247, 0.410, 0.507, 0.484, 0.532, 0.248, 0.043, 0.284, 0.464],
-        sd: [0.048, 0.029, 0.048, 0.060, 0.056, 0.063, 0.030, 0.008, 0.033, 0.054], // Fig. 2a
+        spectral_dist: [0.418, 0.247, 0.410, 0.507, 0.484, 0.532, 0.248, 0.043, 0.284, 0.464],
+        std: [0.048, 0.029, 0.048, 0.060, 0.056, 0.063, 0.030, 0.008, 0.033, 0.054], // Fig. 2a
         is_albedo: true, // Reflectivity
     },
     'Brown2004': [
@@ -729,8 +729,8 @@
         tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter/Jovian feature/GRS'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F336W', 'F410M', 'F555W', 'F673N', 'F953N'],
-        br: [0.257, 0.390, 0.638, 0.799, 0.697],
-        sd: [0.011, 0.013, 0.026, 0.039, 0.030],
+        spectral_dist: [0.257, 0.390, 0.638, 0.799, 0.697],
+        std: [0.011, 0.013, 0.026, 0.039, 0.030],
         is_reflecting_sunlight: false,
         is_albedo: true, // I/F
     },
@@ -738,8 +738,8 @@
         tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter/Jovian feature/GRS'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F410M', 'F555W', 'F673N', 'F953N'],
-        br: [0.334, 0.661, 0.818, 0.704],
-        sd: [0.016, 0.031, 0.030, 0.030],
+        spectral_dist: [0.334, 0.661, 0.818, 0.704],
+        std: [0.016, 0.031, 0.030, 0.030],
         is_reflecting_sunlight: false,
         is_albedo: true, // I/F
     },
@@ -747,8 +747,8 @@
         tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter/Jovian feature/GRS'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F255W', 'F343N', 'F410M', 'F673N', 'F953N'],
-        br: [0.255, 0.252, 0.395, 0.790, 0.682],
-        sd: [0.011, 0.012, 0.011, 0.012, 0.030],
+        spectral_dist: [0.255, 0.252, 0.395, 0.790, 0.682],
+        std: [0.011, 0.012, 0.011, 0.012, 0.030],
         is_reflecting_sunlight: false,
         is_albedo: true, // I/F
     },
@@ -756,8 +756,8 @@
         tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter/Jovian feature/GRS'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F255W', 'F343N', 'F375N', 'F390N', 'F410M', 'F437N', 'F469N', 'F502N', 'F673N'],
-        br: [0.283, 0.290, 0.327, 0.348, 0.416, 0.465, 0.542, 0.633, 0.820],
-        sd: [0.013, 0.011, 0.014, 0.017, 0.019, 0.021, 0.026, 0.030, 0.030],
+        spectral_dist: [0.283, 0.290, 0.327, 0.348, 0.416, 0.465, 0.542, 0.633, 0.820],
+        std: [0.013, 0.011, 0.014, 0.017, 0.019, 0.021, 0.026, 0.030, 0.030],
         is_reflecting_sunlight: false,
         is_albedo: true, // I/F
     },
@@ -765,7 +765,7 @@
         tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter/Jovian feature/GRS'],
         photometric_system: 'HST_WFC3_UVIS1',
         filters: ['F275W', 'FQ378N', 'FQ437N', 'FQ508N', 'FQ634N', 'FQ906N'],
-        br: [0.304, 0.312, 0.476, 0.678, 0.794, 0.448], // uncertainties are smaller than the symbol size
+        spectral_dist: [0.304, 0.312, 0.476, 0.678, 0.794, 0.448], // uncertainties are smaller than the symbol size
         is_reflecting_sunlight: false,
         is_albedo: true, // I/F
     },
@@ -773,7 +773,7 @@
         tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter/Jovian feature/GRS'],
         photometric_system: 'HST_WFC3_UVIS1',
         filters: ['F395N', 'F467M', 'F487N', 'F502N', 'F631N'],
-        br: [0.220, 0.406, 0.450, 0.489, 0.748], // uncertainties are smaller than the symbol size
+        spectral_dist: [0.220, 0.406, 0.450, 0.489, 0.748], // uncertainties are smaller than the symbol size
         is_reflecting_sunlight: false,
         is_albedo: true, // I/F
     },
@@ -781,7 +781,7 @@
         tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter/Jovian feature/GRS'],
         photometric_system: 'HST_WFC3_UVIS1',
         filters: ['F275W', 'F343N', 'F395N', 'F467M', 'F502N', 'F547M', 'F631N', 'F658N'],
-        br: [0.200, 0.156, 0.204, 0.365, 0.516, 0.569, 0.700, 0.718], // uncertainties are smaller than the symbol size
+        spectral_dist: [0.200, 0.156, 0.204, 0.365, 0.516, 0.569, 0.700, 0.718], // uncertainties are smaller than the symbol size
         is_reflecting_sunlight: false,
         is_albedo: true, // I/F
     },
@@ -789,7 +789,7 @@
         tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter/Jovian feature/GRS'],
         photometric_system: 'HST_WFC3_UVIS1',
         filters: ['F275W', 'F343N', 'F395N', 'F467M', 'F502N', 'F547M', 'F631N', 'F658N'],
-        br: [0.195, 0.128, 0.167, 0.328, 0.424, 0.518, 0.697, 0.732], // uncertainties are smaller than the symbol size
+        spectral_dist: [0.195, 0.128, 0.167, 0.328, 0.424, 0.518, 0.697, 0.732], // uncertainties are smaller than the symbol size
         is_reflecting_sunlight: false,
         is_albedo: true, // I/F
     },
@@ -797,7 +797,7 @@
         tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter/Jovian feature/GRS'],
         photometric_system: 'HST_WFC3_UVIS1',
         filters: ['F275W', 'F343N', 'F395N', 'F467M', 'F502N', 'F547M', 'F631N', 'F658N'],
-        br: [0.190, 0.120, 0.157, 0.321, 0.398, 0.515, 0.721, 0.752], // uncertainties are smaller than the symbol size
+        spectral_dist: [0.190, 0.120, 0.157, 0.321, 0.398, 0.515, 0.721, 0.752], // uncertainties are smaller than the symbol size
         is_reflecting_sunlight: false,
         is_albedo: true, // I/F
     },
@@ -805,16 +805,16 @@
         tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter/Jovian feature'],
         photometric_system: 'HST_WFPC2-WF',
         filters: ['F255W', 'F336W', 'F410M', 'F555W', 'F953N'], // Filters from Table 1 of West et al. (1995)
-        br: [0.138, 0.130, 0.157, 0.162, 0.202],
-        sd: [0.030, 0.007, 0.006, 0.005, 0.006], // Fig. 2a
+        spectral_dist: [0.138, 0.130, 0.157, 0.162, 0.202],
+        std: [0.030, 0.007, 0.006, 0.005, 0.006], // Fig. 2a
         is_albedo: true, // Reflectivity
     },
     'Wesley impact scar: 56° S (Jupiter) | Hammel2010': { // Core, July 23 and August 8 2009
         tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter/Jovian feature'],
         photometric_system: 'HST_WFC3_UVIS1',
         filters: ['F225W', 'F275W', 'FQ378N', 'FQ437N', 'FQ508N', 'FQ634N', 'FQ727N', 'FQ889N', 'FQ906N', 'FQ924N'], // Filters from Table 1
-        br: [0.104, 0.079, 0.115, 0.141, 0.140, 0.179, 0.128, 0.097, 0.168, 0.216],
-        sd: [0.013, 0.010, 0.014, 0.017, 0.017, 0.021, 0.024, 0.012, 0.019, 0.024], // Fig. 2a
+        spectral_dist: [0.104, 0.079, 0.115, 0.141, 0.140, 0.179, 0.128, 0.097, 0.168, 0.216],
+        std: [0.013, 0.010, 0.014, 0.017, 0.017, 0.021, 0.024, 0.012, 0.019, 0.024], // Fig. 2a
         is_albedo: true, // Reflectivity
     },
     // Jovian aurorae
@@ -827,7 +827,7 @@
         tags: ['Solar System/Jovian system', 'aurora'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Clear', 'Red', '8890A'],
-        br: [1.3, 0.6, 0.8, 1.2, 1.6], // Table II (CLR filter is averaged)
+        spectral_dist: [1.3, 0.6, 0.8, 1.2, 1.6], // Table II (CLR filter is averaged)
         is_emissive: true,
     },
     // Jovian rings
@@ -841,7 +841,7 @@
         photometric_system: 'Cassini_ISS_NAC',
         // BL1+CL2, CL1+GRN, RED+CLR2, CL1+CL2, CL1+IR1, IR2+CL2, CL1+IR3
         filters: [455.5, 569.3, 648.9, 651.1, 750.1, 861.1, 928.3], // wavelengths from Table 2
-        br: [
+        spectral_dist: [
             [1.825e-07, +3.568e-07, -3.547e-08], [3.060e-07, +1.273e-07, -1.269e-07], [3.031e-07, +4.919e-08, -4.957e-08],
             [2.892e-07, +8.006e-08, -8.685e-08], [4.173e-07, +1.571e-07, -1.589e-07], [3.693e-07, +7.636e-08, -8.006e-08],
             [6.020e-07, +2.665e-07, -2.690e-07]
@@ -857,8 +857,8 @@
         tags: ['Solar System/Jovian system', 'ring'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Clear', 'Green', 'Orange'],
-        br: [0.86, 1.00, 1.53, 1.67], // traced from Fig. 4.11
-        sd: [0.10, 0, 0.15, 0.16],
+        spectral_dist: [0.86, 1.00, 1.53, 1.67], // traced from Fig. 4.11
+        std: [0.10, 0, 0.15, 0.16],
         phase_function: ['phase coefficient', {beta: [0.042, 0.008]}],
     },
     // Jovian small inner satellites
@@ -876,8 +876,8 @@
         tags: ['Solar System/Jovian system', 'natural satellite/regular moon'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
-        br: [0.38, 1, 0.863, 0.85], // traced from Fig. 6
-        sd: [0.08, 0, 0.173, 0.19], // traced from Fig. 6, relative to the Green filter
+        spectral_dist: [0.38, 1, 0.863, 0.85], // traced from Fig. 6
+        std: [0.08, 0, 0.173, 0.19], // traced from Fig. 6, relative to the Green filter
         geometric_albedo: ['Galileo_SSI.Clear', [0.054, 0.003]], // Table III, log-scaled
         spherical_albedo: ['Galileo_SSI.Clear', [0.027, 0.002]], // Table III, log-scaled
     },
@@ -885,8 +885,8 @@
         tags: ['Solar System/Jovian system', 'natural satellite/regular moon'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '7560A'],
-        br: [0.54, 1, 1.14], // traced from Fig. 6
-        sd: [0.05, 0, 0.075], // traced from Fig. 6, relative to the Green filter
+        spectral_dist: [0.54, 1, 1.14], // traced from Fig. 6
+        std: [0.05, 0, 0.075], // traced from Fig. 6, relative to the Green filter
         geometric_albedo: ['Galileo_SSI.Clear', [0.101, 0.007]], // Table III, log-scaled
         spherical_albedo: ['Galileo_SSI.Clear', [0.036, 0.004]], // Table III, log-scaled
     },
@@ -894,8 +894,8 @@
         tags: ['featured', 'Solar System/Jovian system', 'natural satellite/regular moon'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
-        br: [0.47, 1, 1.225, 1], // traced from Fig. 6
-        sd: [0.0625, 0, 0.137, 0.15], // traced from Fig. 6, relative to the Green filter
+        spectral_dist: [0.47, 1, 1.225, 1], // traced from Fig. 6
+        std: [0.0625, 0, 0.137, 0.15], // traced from Fig. 6, relative to the Green filter
         geometric_albedo: ['Galileo_SSI.Clear', [0.080, 0.005]], // Table III, log-scaled
         spherical_albedo: ['Galileo_SSI.Clear', [0.029, 0.003]], // Table III, log-scaled
     },
@@ -903,8 +903,8 @@
         tags: ['Solar System/Jovian system', 'natural satellite/regular moon'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A'],
-        br: [0.7125, 1, 1.137], // traced from Fig. 6
-        sd: [0.067, 0, 0.117], // traced from Fig. 6, relative to the Green filter
+        spectral_dist: [0.7125, 1, 1.137], // traced from Fig. 6
+        std: [0.067, 0, 0.117], // traced from Fig. 6, relative to the Green filter
         geometric_albedo: ['Galileo_SSI.Clear', [0.053, 0.004]], // Table III, log-scaled
         spherical_albedo: ['Galileo_SSI.Clear', [0.022, 0.002]], // Table III, log-scaled
     },
@@ -912,8 +912,8 @@
         tags: ['Solar System/Jovian system', 'natural satellite/regular moon'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
-        br: [0.6, 1, 1.137, 1.07], // traced from Fig. 6
-        sd: [0.05, 0, 0.117, 0.15], // traced from Fig. 6, relative to the Green filter
+        spectral_dist: [0.6, 1, 1.137, 1.07], // traced from Fig. 6
+        std: [0.05, 0, 0.117, 0.15], // traced from Fig. 6, relative to the Green filter
         geometric_albedo: ['Galileo_SSI.Clear', [0.041, 0.003]], // Table III, log-scaled
         spherical_albedo: ['Galileo_SSI.Clear', [0.017, 0.002]], // Table III, log-scaled
     },
@@ -963,7 +963,7 @@
     'Io (J I) | Spencer1995, Domingue1998': {
         tags: ['featured', 'Solar System/Jovian system', 'planetary body/large moon/Io', 'natural satellite/regular moon'],
         nm_range: {start: 320, stop: 780, step: 20},
-        br_geometric: [
+        sd_geometric: [
             0.11, 0.12, 0.14, 0.18, 0.26, 0.36, 0.47, 0.56, 0.64, 0.71, 0.73, 0.74,
             0.75, 0.76, 0.78, 0.81, 0.83, 0.86, 0.88, 0.89, 0.89, 0.89, 0.89, 0.89
         ], // traced from the Figure 2
@@ -979,8 +979,8 @@
         tags: ['Solar System/Jovian system', 'planetary body/large moon/Io', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['UV', 'Violet', 'Clear', 'Blue', 'Green', 'Orange'],
-        br: [0.083, 0.242, 0.415, 0.483, 0.628, 0.633],
-        sd: [0.01, 0.01, 0.02, 0.02, 0.02, 0.03],
+        spectral_dist: [0.083, 0.242, 0.415, 0.483, 0.628, 0.633],
+        std: [0.01, 0.01, 0.02, 0.02, 0.02, 0.03],
         is_geometric_albedo: true,
         phase_integral: [0.78, 0.02],
     },
@@ -1030,11 +1030,11 @@
     'Aurorae of Io: 1998-05-31 (J I) | Geissler1999': {
         tags: ['Solar System/Jovian system', 'aurora'],
         // VIO, GRN, RED
-        nm: [404, 560, 630],
+        wavelength_nm: [404, 560, 630],
         // "Calculations assume emission at the following wavelengths:
         // violet, 404 nm; green, 560 nm; red, 630 nm; and clear, 560 nm."
         // CLR1 + CLR2 are excluded due to being defined as the same wavelength as green
-        br: [472, 335, 254], // Table 2 (Power (MW))
+        spectral_dist: [472, 335, 254], // Table 2 (Power (MW))
         is_emission_spectrum: true,
         is_emissive: true,
     },
@@ -1046,9 +1046,9 @@
     'Aurorae of Io: 2001-01-05 (J I) | Geissler2004': {
         tags: ['Solar System/Jovian system', 'aurora'],
         // UV3, BL1, GRN, R+G, Clear, CB1, RED, IR1
-        nm: [338, 451, 568, 601, 611, 619, 650, 752],
+        wavelength_nm: [338, 451, 568, 601, 611, 619, 650, 752],
         // "Powers were computed assuming that the emissions were at the center wavelengths of each filter."
-        br: [
+        spectral_dist: [
             [1.76e+9, 0.39e+9], [1.17e+9, 0.47e+9], [0.54e+9, 0.26e+9], [0.13e+9, 0.16e+9],
             [3.59e+9, 0.22e+9], [0.37e+9, 0.14e+9], [0.62e+9, 0.02e+9], [0.29e+9, 0.1e+9]
         ], // Table 4 (Radiated Power (W))
@@ -1062,8 +1062,8 @@
     ],
     'Aurorae of Io: 2022-11-24 (J I) | Milby2025': {
         tags: ['Solar System/Jovian system', 'aurora'],
-        nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 844.6, 922.3],
-        br: [
+        wavelength_nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 844.6, 922.3],
+        spectral_dist: [
             [395, 7], [16200, 300], [6340, 180], [5430, 30], [1768, 15], [39, 6], [116, 7],
             [58, 6], [61, 6], [680, 30], [333, 7], [158, 7], [196, 7], [392, 10]
         ], // Table 2
@@ -1072,8 +1072,8 @@
     },
     'Aurorae of Io: 2023-08-09 (J I) | Milby2025': {
         tags: ['Solar System/Jovian system', 'aurora'],
-        nm: [406.9, 407.6, 458.9, 557.7, 589, 589.6, 630, 636.4],
-        br: [
+        wavelength_nm: [406.9, 407.6, 458.9, 557.7, 589, 589.6, 630, 636.4],
+        spectral_dist: [
             [310, 18], [87, 11], [100, 8], [461, 12],
             [12100, 300], [5070, 140], [6090, 110], [2200, 20]
         ], // Table 2
@@ -1082,8 +1082,8 @@
     },
     'Aurorae of Io: 2023-08-25 (J I) | Milby2025': {
         tags: ['Solar System/Jovian system', 'aurora'],
-        nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
-        br: [
+        wavelength_nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
+        spectral_dist: [
             [417, 7], [18820, 150], [8810, 90], [5630, 40], [1903, 12],
             [61, 7], [133, 6], [48, 6], [47, 6], [982, 19],
             [361, 7], [166, 7], [117, 19], [360, 20], [266, 9]
@@ -1093,8 +1093,8 @@
     },
     'Aurorae of Io: 2024-09-12 (J I) | Milby2025': {
         tags: ['Solar System/Jovian system', 'aurora'],
-        nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
-        br: [
+        wavelength_nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
+        spectral_dist: [
             [481, 10], [20000, 200], [9160, 110], [6700, 50], [2361, 19],
             [41, 9], [157, 9], [59, 8], [60, 10], [1240, 30],
             [411, 12], [317, 11], [410, 30], [840, 30], [400, 15]
@@ -1104,8 +1104,8 @@
     },
     'Aurorae of Io: 2024-10-05 (J I) | Milby2025': {
         tags: ['Solar System/Jovian system', 'aurora'],
-        nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
-        br: [
+        wavelength_nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
+        spectral_dist: [
             [440, 12], [14220, 160], [7500, 90], [6130, 50], [2092, 18],
             [60, 10], [143, 13], [53, 10], [76, 15], [920, 30],
             [351, 15], [190, 13], [210, 30], [350, 30], [281, 17]
@@ -1115,8 +1115,8 @@
     },
     'Aurorae of Io: 2024-10-21 (J I) | Milby2025': {
         tags: ['Solar System/Jovian system', 'aurora'],
-        nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
-        br: [
+        wavelength_nm: [557.7, 589, 589.6, 630, 636.4, 671.6, 673.1, 732, 733, 766.4, 772.5, 777.4, 818.3, 819.5, 844.6],
+        spectral_dist: [
             [444, 12], [14610, 180], [7820, 110], [6160, 50], [1950, 20],
             [89, 12], [121, 12], [22, 16], [53, 15], [1060, 40],
             [371, 16], [269, 14], [90, 20], [240, 40], [250, 20]
@@ -1158,8 +1158,8 @@
         tags: ['Solar System/Jovian system', 'planetary body/large moon/Europa', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['UV', 'Violet', 'Clear', 'Blue', 'Green', 'Orange'],
-        br: [0.354, 0.469, 0.578, 0.606, 0.727, 0.725],
-        sd: 0.049, // typical absolute error
+        spectral_dist: [0.354, 0.469, 0.578, 0.606, 0.727, 0.725],
+        std: 0.049, // typical absolute error
         is_geometric_albedo: true,
         phase_integral: [1.01, 0.04],
     },
@@ -1190,8 +1190,8 @@
         tags: ['Solar System/Jovian system', 'planetary body/large moon/Europa', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['UV', 'Violet', 'Clear', 'Blue', 'Green', 'Orange'],
-        br: [0.172, 0.356, 0.457, 0.504, 0.593, 0.591],
-        sd: 0.049, // typical absolute error
+        spectral_dist: [0.172, 0.356, 0.457, 0.504, 0.593, 0.591],
+        std: 0.049, // typical absolute error
         is_geometric_albedo: true,
         phase_integral: [1.01, 0.04],
     },
@@ -1209,8 +1209,8 @@
         tags: ['Solar System/Jovian system', 'planetary body/large moon/Europa', 'natural satellite/regular moon'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
-        br: [1.112, 1.364, 1.450, 1.443, 1.454, 1.296], // extracted from Fig. 5
-        sd: [0.047, 0.030, 0.032, 0.029, 0.060, 0.064], // extracted from Fig. 5
+        spectral_dist: [1.112, 1.364, 1.450, 1.443, 1.454, 1.296], // extracted from Fig. 5
+        std: [0.047, 0.030, 0.032, 0.029, 0.060, 0.064], // extracted from Fig. 5
         geometric_albedo: ['Voyager_ISS-NAC.Blue', 0.8], // highest albedo in blue filter; Fig. 12
         phase_integral: [1.01, 0.04],
     },
@@ -1218,15 +1218,15 @@
         tags: ['Solar System/Jovian system', 'planetary body/large moon/Europa', 'natural satellite/regular moon'],
         photometric_system: 'Galileo_SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
-        br: [1.214, 1.405, 1.461, 1.424, 1.375, 1.203], // extracted from Fig. 5
-        sd: [0.030, 0.023, 0.028, 0.015, 0.025, 0.019], // extracted from Fig. 5
+        spectral_dist: [1.214, 1.405, 1.461, 1.424, 1.375, 1.203], // extracted from Fig. 5
+        std: [0.030, 0.023, 0.028, 0.015, 0.025, 0.019], // extracted from Fig. 5
         geometric_albedo: ['Voyager_ISS-NAC.Blue', 0.4], // lowest albedo in blue filter; Fig. 12
         phase_integral: [1.01, 0.04],
     },
     'Aurorae of Europa (J II) | deKleer2023': {
         tags: ['Solar System/Jovian system', 'aurora'],
-        nm: [557.7, 630, 636.4, 777.4],
-        br: [[40, 3], [593, 9], [183, 4], [30, 15]], // Table 2 (Average)
+        wavelength_nm: [557.7, 630, 636.4, 777.4],
+        spectral_dist: [[40, 3], [593, 9], [183, 4], [30, 15]], // Table 2 (Average)
         is_emission_spectrum: true,
         is_emissive: true,
     },
@@ -1274,15 +1274,15 @@
     ],
     'Aurorae of Ganymede (J III) | Milby2024': {
         tags: ['Solar System/Jovian system', 'aurora'],
-        nm: [557.7, 630, 636.4, 656.3, 777.4, 844.6],
-        br: [[11.5, 0.6], [127, 3], [43, 1.2], [0, 2], [22, 1.3], [12.5, 1.3]], // Table 2 (Average)
+        wavelength_nm: [557.7, 630, 636.4, 656.3, 777.4, 844.6],
+        spectral_dist: [[11.5, 0.6], [127, 3], [43, 1.2], [0, 2], [22, 1.3], [12.5, 1.3]], // Table 2 (Average)
         is_emission_spectrum: true,
         is_emissive: true,
     },
     'Aurorae of Ganymede (J III) | deKleer2023': {
         tags: ['Solar System/Jovian system', 'aurora'],
-        nm: [557.7, 630, 636.4, 777.4, 844.6],
-        br: [[11, 1], [143, 2], [44, 1], [20, 2], [7.3, 1.4]], // Table 2 (Average)
+        wavelength_nm: [557.7, 630, 636.4, 777.4, 844.6],
+        spectral_dist: [[11, 1], [143, 2], [44, 1], [20, 2], [7.3, 1.4]], // Table 2 (Average)
         is_emission_spectrum: true,
         is_emissive: true,
     },
@@ -1314,8 +1314,8 @@
     },
     'Aurorae of Callisto (J IV) | deKleer2023': {
         tags: ['Solar System/Jovian system', 'aurora'],
-        nm: [630, 636.4],
-        br: [[6.1, 1.7], [3.3, 1.2]], // Table 2 (2021-7-4)
+        wavelength_nm: [630, 636.4],
+        spectral_dist: [[6.1, 1.7], [3.3, 1.2]], // Table 2 (2021-7-4)
         is_emission_spectrum: true,
         is_emissive: true,
     },
@@ -1355,24 +1355,24 @@
         tags: ['Solar System/Saturnian system', 'aurora'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV1', 'UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR3'],
-        br: [0.627, 0.680, 1.113, 0.419, 0.957, 0.761, 1.259], // extracted from Fig. 8
-        sd: [0.405, 0.116, 0.247, 0.148, 0.235, 0.195, 0.122], // extracted from Fig. 8
+        spectral_dist: [0.627, 0.680, 1.113, 0.419, 0.957, 0.761, 1.259], // extracted from Fig. 8
+        std: [0.405, 0.116, 0.247, 0.148, 0.235, 0.195, 0.122], // extracted from Fig. 8
         is_emissive: true,
     },
     'Aurorae of Saturn: Brightest aurora | Dyudina2016a': {
         tags: ['Solar System/Saturnian system', 'aurora'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV1', 'UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR3'],
-        br: [0.792, 0.372, 0.546, 0.484, 1.020, 1.050, 1.821], // extracted from Fig. 8
-        sd: [0.104, 0.060, 0.056, 0.097, 0.143, 0.229, 0.468], // extracted from Fig. 8
+        spectral_dist: [0.792, 0.372, 0.546, 0.484, 1.020, 1.050, 1.821], // extracted from Fig. 8
+        std: [0.104, 0.060, 0.056, 0.097, 0.143, 0.229, 0.468], // extracted from Fig. 8
         is_emissive: true,
     },
     'Aurorae of Saturn: Deep aurora | Dyudina2016a': {
         tags: ['Solar System/Saturnian system', 'aurora'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV1', 'UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR3'],
-        br: [0.406, 0.200, 0.421, 0.412, 1.056, 0.759, 0.970], // extracted from Fig. 8
-        sd: [0.029, 0, 0, 0.126, 0, 0.217, 0.223], // extracted from Fig. 8
+        spectral_dist: [0.406, 0.200, 0.421, 0.412, 1.056, 0.759, 0.970], // extracted from Fig. 8
+        std: [0.029, 0, 0, 0.126, 0, 0.217, 0.223], // extracted from Fig. 8
         is_emissive: true,
     },
     // Saturnian rings
@@ -1471,84 +1471,84 @@
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
-        br: [0.2024, 0.2677, 0.3056, 0.3524, 0.3674], // extracted from Fig. 3
+        spectral_dist: [0.2024, 0.2677, 0.3056, 0.3524, 0.3674], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
     'C ring: 91~000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
-        br: [0.2562, 0.4766, 0.5952, 0.6735, 0.6884], // extracted from Fig. 3
+        spectral_dist: [0.2562, 0.4766, 0.5952, 0.6735, 0.6884], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
     'B ring: 96~000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
-        br: [0.2473, 0.4816, 0.6057, 0.6770, 0.6929], // extracted from Fig. 3
+        spectral_dist: [0.2473, 0.4816, 0.6057, 0.6770, 0.6929], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
     'B ring: 100~000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
-        br: [0.3335, 0.6147, 0.7503, 0.8180, 0.8240], // extracted from Fig. 3
+        spectral_dist: [0.3335, 0.6147, 0.7503, 0.8180, 0.8240], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
     'B ring: 103~000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
-        br: [0.3659, 0.6486, 0.7792, 0.8465, 0.8629], // extracted from Fig. 3
+        spectral_dist: [0.3659, 0.6486, 0.7792, 0.8465, 0.8629], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
     'B ring: 105~000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
-        br: [0.3370, 0.6356, 0.7852, 0.8564, 0.8684], // extracted from Fig. 3
+        spectral_dist: [0.3370, 0.6356, 0.7852, 0.8564, 0.8684], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
     'B ring: 109~000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
-        br: [0.3769, 0.6830, 0.8146, 0.8834, 0.8868], // extracted from Fig. 3
+        spectral_dist: [0.3769, 0.6830, 0.8146, 0.8834, 0.8868], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
     'B ring: 113~000 km | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
-        br: [0.3450, 0.6261, 0.7657, 0.8325, 0.8455], // extracted from Fig. 3
+        spectral_dist: [0.3450, 0.6261, 0.7657, 0.8325, 0.8455], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
     'Cassini Division: 119~000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
-        br: [0.2767, 0.4158, 0.4721, 0.5389, 0.5708], // extracted from Fig. 3
+        spectral_dist: [0.2767, 0.4158, 0.4721, 0.5389, 0.5708], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
     'A ring: 123~000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
-        br: [0.2797, 0.4826, 0.5793, 0.6356, 0.6550], // extracted from Fig. 3
+        spectral_dist: [0.2797, 0.4826, 0.5793, 0.6356, 0.6550], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
     'A ring: 128~000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
-        br: [0.2114, 0.4033, 0.5130, 0.5763, 0.5962], // extracted from Fig. 3
+        spectral_dist: [0.2114, 0.4033, 0.5130, 0.5763, 0.5962], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
     'A ring: 135~000 km (Saturn) | Porco2005': {
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR2'],
-        br: [0.2647, 0.4880, 0.5967, 0.6560, 0.6770], // extracted from Fig. 3
+        spectral_dist: [0.2647, 0.4880, 0.5967, 0.6560, 0.6770], // extracted from Fig. 3
         is_spherical_albedo: true,
     },
     'Poulet1999': [
@@ -1560,8 +1560,8 @@
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'HST_WFPC2-WF',
         filters: ['F336W', 'F410M', 'F467M', 'F588N', 'FQCH4N_B', 'F673N'],
-        br: [0.993, 1.107, 0.879, 0.950, 1.143, 0.864], // extracted from Fig. 5
-        sd: [0.329, 0.157, 0.186, 0.171, 0.079, 0.165], // extracted from Fig. 5
+        spectral_dist: [0.993, 1.107, 0.879, 0.950, 1.143, 0.864], // extracted from Fig. 5
+        std: [0.329, 0.157, 0.186, 0.171, 0.079, 0.165], // extracted from Fig. 5
         spherical_albedo: [550, 0.062], // phase angle 19°; Fig. 13 (Clark2014)
     },
     'F ring: 140~200 km (Saturn) | Clark2014': { // phase angle 19°
@@ -1578,15 +1578,15 @@
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'HST_WFPC2-WF',
         filters: ['F300W', 'F450W', 'F555W', 'F675W', 'FQCH4N_C'],
-        br: [0.626, 0.650, 0.743, 0.738, 1.100], // extracted from Fig. 3
-        sd: [0.120, 0.170, 0.170, 0.110, 0.600], // extracted from Fig. 3
+        spectral_dist: [0.626, 0.650, 0.743, 0.738, 1.100], // extracted from Fig. 3
+        std: [0.120, 0.170, 0.170, 0.110, 0.600], // extracted from Fig. 3
     },
     'E ring (Saturn) | dePater2006': { // 330 000 km
         tags: ['Solar System/Saturnian system', 'ring'],
         photometric_system: 'HST_WFPC2-WF',
         filters: ['F300W', 'F450W', 'F555W', 'F675W', 'FQCH4N_C'],
-        br: [8.001, 5.843, 5.259, 4.731, 4.482], // extracted from Fig. 3
-        sd: [0.192, 0.167, 0.429, 0.144, 0.217], // extracted from Fig. 3
+        spectral_dist: [8.001, 5.843, 5.259, 4.731, 4.482], // extracted from Fig. 3
+        std: [0.192, 0.167, 0.429, 0.144, 0.217], // extracted from Fig. 3
     },
     // Saturnian satellites
     'Buratti2022': [
@@ -1641,8 +1641,8 @@
     'Daphnis (S XXXV) | Thomas2018, Verbiscer2018': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         filters: ['Cassini_ISS_NAC.UV3', 'Cassini_ISS_NAC.IR3'],
-        br: [1, 2.30], // IR3/UV3 ratio: 2.30 ± 0.25
-        sd: [0, 0.25],
+        spectral_dist: [1, 2.30], // IR3/UV3 ratio: 2.30 ± 0.25
+        std: [0, 0.25],
         geometric_albedo: ['Generic_Bessell.V', [0.91, 0.07]], // Table 2, p. 325 (Verbiscer2018)
     },
     'Atlas (S XV) | Ciarniello2024, Verbiscer2018': { // phase angle 50°
@@ -1679,7 +1679,7 @@
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR3'],
-        br: [0.0865, 0.1181, 0.1342, 0.1406, 0.1551],
+        spectral_dist: [0.0865, 0.1181, 0.1342, 0.1406, 0.1551],
         geometric_albedo: [611, [0.25, 0.23]],
     },
     // Mimas
@@ -1695,14 +1695,14 @@
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         photometric_system: 'Cassini_ISS_NAC',
         filters: ['UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR2', 'IR3', 'IR4'],
-        br: [0.878, 1.000, 1.000, 1.015, 1.032, 1.031, 1.011, 0.927],
+        spectral_dist: [0.878, 1.000, 1.000, 1.015, 1.032, 1.031, 1.011, 0.927],
         geometric_albedo: [611, [0.57, 0.05]],
     },
     'Pallene (S XXXIII) | Thomas2018, Thomas2013': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         filters: ['Cassini_ISS_NAC.UV3', 'Cassini_ISS_NAC.IR3'],
-        br: [1, 1.17], // IR3/UV3 ratio: 1.17 ± 0.02
-        sd: [0, 0.02],
+        spectral_dist: [1, 1.17], // IR3/UV3 ratio: 1.17 ± 0.02
+        std: [0, 0.02],
         geometric_albedo: [611, [0.47, 0.11]],
     },
     // Enceladus
@@ -1734,9 +1734,9 @@
     },
     'Tethys (S III) | Filacchione2018, Buratti2022': {
         tags: ['Solar System/Saturnian system', 'planetary body/large moon/Tethys', 'natural satellite/regular moon'],
-        nm: [350, 440, 550, 700, 950, 1046, 1540, 1822, 2050, 2200],
-        br: [0.75042, 0.77108, 0.79707, 0.76842, 0.74823, 0.74563, 0.45171, 0.70383, 0.35282, 0.68231], // equigonal albedo
-        sd: [0.00106, 0.00100, 0.00111, 0.00110, 0.00102, 0.00174, 0.00090, 0.00160, 0.00059, 0.00127],
+        wavelength_nm: [350, 440, 550, 700, 950, 1046, 1540, 1822, 2050, 2200],
+        spectral_dist: [0.75042, 0.77108, 0.79707, 0.76842, 0.74823, 0.74563, 0.45171, 0.70383, 0.35282, 0.68231], // equigonal albedo
+        std: [0.00106, 0.00100, 0.00111, 0.00110, 0.00102, 0.00174, 0.00090, 0.00160, 0.00059, 0.00127],
         geometric_albedo: [550, [0.93, 0.02]],
         phase_integral: [0.79, 0.02],
     },
@@ -1772,9 +1772,9 @@
     },
     'Dione (S IV) | Filacchione2017, Buratti2022': {
         tags: ['Solar System/Saturnian system', 'planetary body/large moon/Dione', 'natural satellite/regular moon'],
-        nm: [350, 440, 550, 700, 950, 1046, 1540, 1822, 2050, 2200],
-        br: [0.57582, 0.61407, 0.61977, 0.58411, 0.58268, 0.55834, 0.40562, 0.55832, 0.24751, 0.51508], // equigonal albedo
-        sd: [0.00034, 0.00040, 0.00047, 0.00051, 0.00046, 0.00071, 0.00044, 0.00077, 0.00023, 0.00067],
+        wavelength_nm: [350, 440, 550, 700, 950, 1046, 1540, 1822, 2050, 2200],
+        spectral_dist: [0.57582, 0.61407, 0.61977, 0.58411, 0.58268, 0.55834, 0.40562, 0.55832, 0.24751, 0.51508], // equigonal albedo
+        std: [0.00034, 0.00040, 0.00047, 0.00051, 0.00046, 0.00071, 0.00044, 0.00077, 0.00023, 0.00067],
         geometric_albedo: [550, [0.75, 0.02]],
         phase_integral: [0.80, 0.02],
     },
@@ -1810,8 +1810,8 @@
     'Polydeuces (S XXXIV) | Thomas2018, Verbiscer2018': {
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         filters: ['Cassini_ISS_NAC.UV3', 'Cassini_ISS_NAC.IR3'],
-        br: [1, 1.17], // IR3/UV3 ratio: 1.17 ± 0.07
-        sd: [0, 0.07],
+        spectral_dist: [1, 1.17], // IR3/UV3 ratio: 1.17 ± 0.07
+        std: [0, 0.07],
         geometric_albedo: ['Generic_Bessell.V', [1.24, 0.09]], // Table 2, p. 325 (Verbiscer2018)
     },
     // Rhea
@@ -1891,14 +1891,14 @@
     ],
     'Surface of Titan: Phase angle 45° (S VI) | Karkoschka2016': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/large moon/Titan', 'natural satellite/regular moon'],
-        nm: [520, 563, 595, 642, 685, 754, 823, 830, 935, 940, 1070, 1280, 1550, 1590],
-        br: [0.093, 0.107, 0.116, 0.130, 0.139, 0.147, 0.151, 0.151, 0.151, 0.151, 0.145, 0.124, 0.070, 0.071],
+        wavelength_nm: [520, 563, 595, 642, 685, 754, 823, 830, 935, 940, 1070, 1280, 1550, 1590],
+        spectral_dist: [0.093, 0.107, 0.116, 0.130, 0.139, 0.147, 0.151, 0.151, 0.151, 0.151, 0.145, 0.124, 0.070, 0.071],
         is_albedo: true,
     },
     'Surface of Titan: Phase angle 0° (S VI) | Karkoschka2012': {
         tags: ['Solar System/Saturnian system', 'planetary body/large moon/Titan', 'natural satellite/regular moon'],
         nm_range: {start: 300, stop: 800, step: 10},
-        br_geometric: [
+        sd_geometric: [
             0.025, 0.035, 0.046, 0.059, 0.073, 0.089, 0.105, 0.122, 0.140, 0.158, 0.176, 0.194, 0.211,
             0.229, 0.245, 0.261, 0.277, 0.292, 0.306, 0.319, 0.331, 0.343, 0.354, 0.364, 0.373, 0.382,
             0.390, 0.398, 0.404, 0.411, 0.416, 0.421, 0.426, 0.430, 0.434, 0.437, 0.440, 0.442, 0.444,
@@ -1956,8 +1956,8 @@
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['UV', 'Violet', 'Clear', 'Blue', 'Green', 'Orange'],
-        br: [0.54, 0.65, 0.82, 0.85, 1.00, 1.04],
-        sd: [0.02, 0.04, 0.01, 0.03, 0, 0.03],
+        spectral_dist: [0.54, 0.65, 0.82, 0.85, 1.00, 1.04],
+        std: [0.02, 0.04, 0.01, 0.03, 0, 0.03],
         geometric_albedo: ['Voyager_ISS-NAC.Clear', [0.214, 0.006]], // normal reflectance
         bond_albedo: [0.33, 0.05],
     },
@@ -1986,15 +1986,15 @@
     ],
     'Iapetus: Leading hemisphere (S VIII) | Gudipati2003': {
         tags: ['Solar System/Saturnian system', 'planetary body/large moon/Iapetus', 'natural satellite/regular moon'],
-        nm: [330, 350, 380, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850],
-        br: [0.047, 0.051, 0.058, 0.063, 0.067, 0.071, 0.080, 0.087, 0.090, 0.093, 0.099, 0.102, 0.102],
+        wavelength_nm: [330, 350, 380, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850],
+        spectral_dist: [0.047, 0.051, 0.058, 0.063, 0.067, 0.071, 0.080, 0.087, 0.090, 0.093, 0.099, 0.102, 0.102],
         is_albedo: true,
     },
     'Iapetus: Leading hemisphere (S VIII) | Blackburn2010': {
         tags: ['Solar System/Saturnian system', 'planetary body/large moon/Iapetus', 'natural satellite/regular moon'],
-        nm: [350, 400, 510, 600, 700, 810, 900, 1000, 1520, 1800, 2020, 2230, 3600],
-        br_geometric: [0.031, 0.031, 0.032, 0.051, 0.056, 0.065, 0.059, 0.058, 0.106, 0.131, 0.104, 0.148, 0.055], // traced from Fig. 4
-        br_spherical: [0.005, 0.005, 0.008, 0.009, 0.012, 0.023, 0.015, 0.015, 0.033, 0.039, 0.038, 0.047, 0.019], // calculated from phase integrals in Table 2
+        wavelength_nm: [350, 400, 510, 600, 700, 810, 900, 1000, 1520, 1800, 2020, 2230, 3600],
+        sd_geometric: [0.031, 0.031, 0.032, 0.051, 0.056, 0.065, 0.059, 0.058, 0.106, 0.131, 0.104, 0.148, 0.055], // traced from Fig. 4
+        sd_spherical: [0.005, 0.005, 0.008, 0.009, 0.012, 0.023, 0.015, 0.015, 0.033, 0.039, 0.038, 0.047, 0.019], // calculated from phase integrals in Table 2
     },
     'Iapetus: Trailing hemisphere (S VIII) | Filacchione2007, Blackburn2010': {
         tags: ['featured', 'Solar System/Saturnian system', 'planetary body/large moon/Iapetus', 'natural satellite/regular moon'],
@@ -2004,9 +2004,9 @@
     },
     'Iapetus: Trailing hemisphere (S VIII) | Blackburn2010': {
         tags: ['Solar System/Saturnian system', 'planetary body/large moon/Iapetus', 'natural satellite/regular moon'],
-        nm: [350, 400, 510, 600, 700, 810, 900, 1000, 1520, 1800, 2020, 2230, 3600],
-        br_geometric: [0.42, 0.44, 0.46, 0.44, 0.42, 0.42, 0.44, 0.45, 0.25, 0.45, 0.14, 0.43, 0.08], // traced from Fig. 5
-        br_spherical: [0.21, 0.23, 0.28, 0.28, 0.27, 0.28, 0.29, 0.30, 0.12, 0.28, 0.07, 0.25, 0.02], // calculated from phase integrals in Table 2
+        wavelength_nm: [350, 400, 510, 600, 700, 810, 900, 1000, 1520, 1800, 2020, 2230, 3600],
+        sd_geometric: [0.42, 0.44, 0.46, 0.44, 0.42, 0.42, 0.44, 0.45, 0.25, 0.45, 0.14, 0.43, 0.08], // traced from Fig. 5
+        sd_spherical: [0.21, 0.23, 0.28, 0.28, 0.27, 0.28, 0.29, 0.30, 0.12, 0.28, 0.07, 0.25, 0.02], // calculated from phase integrals in Table 2
     },
     'Blackburn2011': [
         'A bolometric Bond albedo map of Iapetus: Observations from Cassini VIMS and ISS and Voyager ISS',
@@ -2045,10 +2045,10 @@
         tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         filters: ['B', 'V', 'R', 'I'],
-        br_geometric: [0.0855, 0.0857, 0.0843, 0.0839],
-        sd_geometric: [0.0031, 0.0022, 0.0016, 0.0021],
-        br_spherical: [0.0274, 0.0267, 0.0265, 0.0310],
-        sd_spherical: [0.0079, 0.0083, 0.0079, 0.0050],
+        sd_geometric: [0.0855, 0.0857, 0.0843, 0.0839],
+        std_geometric: [0.0031, 0.0022, 0.0016, 0.0021],
+        sd_spherical: [0.0274, 0.0267, 0.0265, 0.0310],
+        std_spherical: [0.0079, 0.0083, 0.0079, 0.0050],
     },
     'Phoebe (S IX) | Pena2022, Miller2011': {
         tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon'],
@@ -2129,7 +2129,7 @@
     ],
     'Rings of Uranus | Karkoschka2001': {
         tags: ['featured', 'Solar System/Uranian system', 'ring'],
-        slope: {start: 320, stop: 2050, power: 0.09},
+        spectral_slope: {start: 320, stop: 2050, power: 0.09},
         geometric_albedo: [550, 0.050],
         spherical_albedo: [550, [0.018, 0.003]],
     },
@@ -2137,8 +2137,8 @@
         tags: ['Solar System/Uranian system', 'ring'],
         //         620 nm                   910 nm
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F850LP'],
-        br: [0.056, 0.056],
-        sd: 0.007,
+        spectral_dist: [0.056, 0.056],
+        std: 0.007,
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.018, 0.003]], // average for rings
     },
@@ -2146,7 +2146,7 @@
         tags: ['Solar System/Uranian system', 'ring'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
-        br: [[0.546, 0.066], [0.610, 0.072]], // Clear: [0.710, 0.060]
+        spectral_dist: [[0.546, 0.066], [0.610, 0.072]], // Clear: [0.710, 0.060]
         geometric_albedo: ['HST_WFPC2-WF.FQCH4N33', [0.056, 0.007]], // at 1° phase angle
         spherical_albedo: [550, [0.018, 0.003]], // average for rings
     },
@@ -2154,7 +2154,7 @@
         tags: ['Solar System/Uranian system', 'ring'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
-        br: [[0.198, 0.054], [0.200, 0.060]], // Clear: [0.311, 0.025]
+        spectral_dist: [[0.198, 0.054], [0.200, 0.060]], // Clear: [0.311, 0.025]
         geometric_albedo: ['HST_WFPC2-WF.FQCH4N33', [0.056, 0.007]], // at 1° phase angle
         spherical_albedo: [550, [0.018, 0.003]], // average for rings
     },
@@ -2162,8 +2162,8 @@
         tags: ['Solar System/Uranian system', 'ring'],
         //         620 nm                   910 nm
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F850LP'],
-        br: [0.063, 0.064],
-        sd: 0.007,
+        spectral_dist: [0.063, 0.064],
+        std: 0.007,
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.018, 0.003]], // average for rings
     },
@@ -2171,7 +2171,7 @@
         tags: ['Solar System/Uranian system', 'ring'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
-        br: [[0.031, 0.009], [0.036, 0.010]], // Clear: [0.048, 0.005]
+        spectral_dist: [[0.031, 0.009], [0.036, 0.010]], // Clear: [0.048, 0.005]
         geometric_albedo: ['HST_WFPC2-WF.FQCH4N33', [0.063, 0.007]], // at 1° phase angle
         spherical_albedo: [550, [0.018, 0.003]], // average for rings
     },
@@ -2179,7 +2179,7 @@
         tags: ['Solar System/Uranian system', 'ring'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
-        br: [[0.559, 0.107], [0.602, 0.0165]], // Clear: [0.807, 0.198]
+        spectral_dist: [[0.559, 0.107], [0.602, 0.0165]], // Clear: [0.807, 0.198]
         geometric_albedo: ['HST_WFPC2-WF.FQCH4N33', [0.063, 0.007]], // at 1° phase angle
         spherical_albedo: [550, [0.018, 0.003]], // average for rings
     },
@@ -2187,7 +2187,7 @@
         tags: ['Solar System/Uranian system', 'ring'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
-        br: [[0.506, 0.083], [0.703, 0.266]], // Clear: [0.867, 0.092]
+        spectral_dist: [[0.506, 0.083], [0.703, 0.266]], // Clear: [0.867, 0.092]
         geometric_albedo: ['HST_WFPC2-WF.FQCH4N33', [0.063, 0.007]], // at 1° phase angle
         spherical_albedo: [550, [0.018, 0.003]], // average for rings
     },
@@ -2195,15 +2195,15 @@
         tags: ['Solar System/Uranian system', 'ring'],
         //         340 nm                470 nm                620 nm                   670 nm                730 nm                   910 nm
         filters: ['HST_WFPC2-PC.F336W', 'HST_WFPC2-WF.F467M', 'HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-WF.FQCH4N_B', 'HST_WFPC2-PC.F850LP'],
-        br: [0.044, 0.052, 0.055, 0.054, 0.058, 0.058],
-        sd: 0.004,
+        spectral_dist: [0.044, 0.052, 0.055, 0.054, 0.058, 0.058],
+        std: 0.004,
         geometric_albedo: [550, [0.052, 0.012]], // at 0.034° phase angle
         spherical_albedo: [550, [0.018, 0.003]], // average for rings
     },
     'ε ring (Uranus) | Karkoschka2001': { // 51 149 km
         tags: ['Solar System/Uranian system', 'ring'],
         filters: ['HST_WFPC2-PC.F336W', 'HST_WFPC2-PC.F547M', 'HST_WFPC2-PC.F631N', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-WF.FQCH4N_D', 'HST_WFPC2-PC.F850LP'],
-        br: [[0.042, 0.016], [0.052, 0.012], [0.053, 0.016], [0.050, 0.011], [0.054, 0.010], [0.051, 0.004]],
+        spectral_dist: [[0.042, 0.016], [0.052, 0.012], [0.053, 0.016], [0.050, 0.011], [0.054, 0.010], [0.051, 0.004]],
         is_geometric_albedo: true, // at 0.034° phase angle
         spherical_albedo: [550, [0.018, 0.003]], // average for rings
     },
@@ -2211,7 +2211,7 @@
         tags: ['Solar System/Uranian system', 'ring'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
-        br: [[0.609, 0.051], [0.744, 0.076]], // Clear: [0.737, 0.058]
+        spectral_dist: [[0.609, 0.051], [0.744, 0.076]], // Clear: [0.737, 0.058]
         geometric_albedo: [550, [0.052, 0.012]], // at 0.034° phase angle
         spherical_albedo: [550, [0.018, 0.003]], // average for rings
     },
@@ -2226,11 +2226,11 @@
             'JWST_NIRCam2025.F140M', 'JWST_NIRCam2025.F150W', 'Keck_NIRC2.H', 'JWST_NIRCam2025.F182M',
             'JWST_NIRCam2025.F210M', 'Keck_NIRC2.Kp', 'JWST_NIRCam2025.F277W', 'JWST_NIRCam2025.F300M'
         ],
-        br: [
+        spectral_dist: [
             0.398, 0.409, 0.450, 0.838, 0.843, 0.838, 0.900, 1.097, 1.071, 1.200,
             1.029, 0.621
         ],
-        sd: [
+        std: [
             0.150, 0.119, 0.217, 0.078, 0.026, 0.041, 0.140, 0.041, 0.041, 0.140,
             0.026, 0.020
         ], // Fig. 22 (bottom)
@@ -2247,11 +2247,11 @@
             'JWST_NIRCam2025.F182M', 'JWST_NIRCam2025.F210M', 'Keck_NIRC2.Kp', 'JWST_NIRCam2025.F277W',
             'JWST_NIRCam2025.F300M'
         ],
-        br: [
+        spectral_dist: [
             1.932, 1.870, 2.022, 1.698, 1.445, 1.464, 1.660, 1.560, 0.887,
             1.588, 1.569, 1.278, 0.930, 1.159, 0.911, 1.040, 0.277
         ],
-        sd: [
+        std: [
             0.286, 0.381, 0.286, 0.425, 0.649, 0.381, 0.567, 0.496, 0.749,
             0.062, 0.048, 0.053, 0.119, 0.048, 0.048, 0.119, 0.038
         ], // Fig. 22 (top)
@@ -2266,20 +2266,20 @@
         tags: ['Solar System/Uranian system', 'natural satellite/regular moon'],
         //         620 nm                   670 nm                730 nm                   910 nm
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-WF.FQCH4N_B', 'HST_WFPC2-PC.F850LP'],
-        br: [0.107, 0.104, 0.105, 0.123],
-        sd: 0.010,
+        spectral_dist: [0.107, 0.104, 0.105, 0.123],
+        std: 0.010,
         geometric_albedo: [500, [0.069, 0.008]],
         spherical_albedo: [550, [0.026, 0.005]], // Portia group
     },
     'Portia group | Karkoschka2001, Showalter2006': {
         tags: ['Solar System/Uranian system', 'natural satellite/regular moon', 'class'],
-        slope: {start: 570, stop: 1500, power: [0.09, 0.09]}, // error margin from Karkoschka2003
+        spectral_slope: {start: 570, stop: 1500, power: [0.09, 0.09]}, // error margin from Karkoschka2003
         geometric_albedo: [500, [0.070, 0.006]], // Showalter2006
         spherical_albedo: [550, [0.026, 0.005]],
     },
     'Puck (U XV) | Karkoschka2001': {
         tags: ['featured', 'Solar System/Uranian system', 'natural satellite/regular moon'],
-        slope: {start: 340, stop: 1500, power: 0.04},
+        spectral_slope: {start: 340, stop: 1500, power: 0.04},
         geometric_albedo: [550, 0.104],
         spherical_albedo: [550, [0.035, 0.006]],
     },
@@ -2287,8 +2287,8 @@
         tags: ['Solar System/Uranian system', 'natural satellite/regular moon'],
         //         620 nm                   670 nm                730 nm                   910 nm
         filters: ['HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-WF.FQCH4N_B', 'HST_WFPC2-PC.F850LP'],
-        br: [0.095, 0.091, 0.097, 0.101],
-        sd: 0.010,
+        spectral_dist: [0.095, 0.091, 0.097, 0.101],
+        std: 0.010,
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.035, 0.006]], // Karkoschka2001
     },
@@ -2307,15 +2307,15 @@
     // by default, Karkoschka2001 is used for geometric albedo and spherical albedo
     'Miranda (U V) | Avramchuk2007, Karkoschka2001': {
         tags: ['featured', 'Solar System/Uranian system', 'planetary body/large moon/Miranda', 'natural satellite/regular moon'],
-        nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
-        br: [0.51, 0.49, 0.48, 0.47, 0.46, 0.45, 0.41, 0.40],
-        sd: [0.02, 0.01, 0.02, 0.02, 0.02, 0.01, 0.01, 0.01],
+        wavelength_nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
+        spectral_dist: [0.51, 0.49, 0.48, 0.47, 0.46, 0.45, 0.41, 0.40],
+        std: [0.02, 0.01, 0.02, 0.02, 0.02, 0.01, 0.01, 0.01],
         is_geometric_albedo: true,
         spherical_albedo: [550, [0.200, 0.030]], // Karkoschka2001
     },
     'Miranda (U V) | Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Miranda', 'natural satellite/regular moon'],
-        slope: {start: 270, stop: 1000, power: -0.05},
+        spectral_slope: {start: 270, stop: 1000, power: -0.05},
         geometric_albedo: [550, 0.464],
         spherical_albedo: [550, [0.200, 0.030]],
     },
@@ -2323,8 +2323,8 @@
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Miranda', 'natural satellite/regular moon'],
         //         340 nm                470 nm                620 nm                   670 nm                730 nm                   910 nm
         filters: ['HST_WFPC2-PC.F336W', 'HST_WFPC2-WF.F467M', 'HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-WF.FQCH4N_B', 'HST_WFPC2-PC.F850LP'],
-        br: [0.320, 0.315, 0.310, 0.298, 0.294, 0.301],
-        sd: 0.012,
+        spectral_dist: [0.320, 0.315, 0.310, 0.298, 0.294, 0.301],
+        std: 0.012,
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.200, 0.030]], // Karkoschka2001
     },
@@ -2338,8 +2338,8 @@
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Miranda', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
-        br: [1.099, 1], // V/Cl ratio: 1.059 ±0.034, G/Cl ratio: 0.963 ±0.027
-        sd: [0.033, 0],
+        spectral_dist: [1.099, 1], // V/Cl ratio: 1.059 ±0.034, G/Cl ratio: 0.963 ±0.027
+        std: [0.033, 0],
         geometric_albedo: ['Voyager_ISS-NAC.Clear', 0.3], // Average normal reflectance (Table IV)
         phase_integral: [0.44, 0.05],
     },
@@ -2347,8 +2347,8 @@
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Miranda', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
-        br: [1.113, 1], // V/Cl ratio: 1.023 ±0.021, G/Cl ratio: 0.918 ±0.021
-        sd: [0.017, 0],
+        spectral_dist: [1.113, 1], // V/Cl ratio: 1.023 ±0.021, G/Cl ratio: 0.918 ±0.021
+        std: [0.017, 0],
         geometric_albedo: ['Voyager_ISS-NAC.Clear', 0.33], // Normal reflectance (Table IV)
         phase_integral: [0.44, 0.05],
     },
@@ -2356,8 +2356,8 @@
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Miranda', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
-        br: [1.088, 1], // V/Cl ratio: 1.076 ±0.029, G/Cl ratio: 0.986 ±0.027
-        sd: [0.029, 0],
+        spectral_dist: [1.088, 1], // V/Cl ratio: 1.076 ±0.029, G/Cl ratio: 0.986 ±0.027
+        std: [0.029, 0],
         geometric_albedo: ['Voyager_ISS-NAC.Clear', 0.27], // Normal reflectance (Table IV)
         phase_integral: [0.44, 0.05],
     },
@@ -2371,15 +2371,15 @@
     },
     'Ariel (U I) | Avramchuk2007, Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Ariel', 'natural satellite/regular moon'],
-        nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
-        br: [0.50, 0.51, 0.51, 0.51, 0.51, 0.52, 0.53, 0.54],
-        sd: [0.03, 0.02, 0.02, 0.01, 0.02, 0.01, 0.01, 0.01],
+        wavelength_nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
+        spectral_dist: [0.50, 0.51, 0.51, 0.51, 0.51, 0.52, 0.53, 0.54],
+        std: [0.03, 0.02, 0.02, 0.01, 0.02, 0.01, 0.01, 0.01],
         is_geometric_albedo: true,
         spherical_albedo: [550, [0.230, 0.025]], // Karkoschka2001
     },
     'Ariel (U I) | Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Ariel', 'natural satellite/regular moon'],
-        slope: {start: 270, stop: 1000, power: 0.07},
+        spectral_slope: {start: 270, stop: 1000, power: 0.07},
         geometric_albedo: [550, 0.533],
         spherical_albedo: [550, [0.230, 0.025]],
     },
@@ -2387,8 +2387,8 @@
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Ariel', 'natural satellite/regular moon'],
         //         340 nm                470 nm                620 nm                   670 nm                730 nm                   910 nm
         filters: ['HST_WFPC2-PC.F336W', 'HST_WFPC2-WF.F467M', 'HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-WF.FQCH4N_B', 'HST_WFPC2-PC.F850LP'],
-        br: [0.342, 0.350, 0.374, 0.343, 0.354, 0.371],
-        sd: 0.014,
+        spectral_dist: [0.342, 0.350, 0.374, 0.343, 0.354, 0.371],
+        std: 0.014,
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.230, 0.025]], // Karkoschka2001
     },
@@ -2414,15 +2414,15 @@
     },
     'Umbriel (U II) | Avramchuk2007, Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Umbriel', 'natural satellite/regular moon'],
-        nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
-        br: [0.25, 0.25, 0.25, 0.25, 0.26, 0.26, 0.26, 0.26],
-        sd: [0.01, 0.02, 0.02, 0.01, 0.01, 0.01, 0.01, 0.01],
+        wavelength_nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
+        spectral_dist: [0.25, 0.25, 0.25, 0.25, 0.26, 0.26, 0.26, 0.26],
+        std: [0.01, 0.02, 0.02, 0.01, 0.01, 0.01, 0.01, 0.01],
         is_geometric_albedo: true,
         spherical_albedo: [550, [0.100, 0.010]], // Karkoschka2001
     },
     'Umbriel (U II) | Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Umbriel', 'natural satellite/regular moon'],
-        slope: {start: 270, stop: 1000, power: 0.02},
+        spectral_slope: {start: 270, stop: 1000, power: 0.02},
         geometric_albedo: [550, 0.258],
         spherical_albedo: [550, [0.100, 0.010]],
     },
@@ -2430,8 +2430,8 @@
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Umbriel', 'natural satellite/regular moon'],
         //         340 nm                470 nm                620 nm                   670 nm                730 nm                   910 nm
         filters: ['HST_WFPC2-PC.F336W', 'HST_WFPC2-WF.F467M', 'HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-WF.FQCH4N_B', 'HST_WFPC2-PC.F850LP'],
-        br: [0.196, 0.185, 0.185, 0.190, 0.196, 0.203],
-        sd: 0.008,
+        spectral_dist: [0.196, 0.185, 0.185, 0.190, 0.196, 0.203],
+        std: 0.008,
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.100, 0.010]], // Karkoschka2001
     },
@@ -2457,15 +2457,15 @@
     },
     'Titania (U III) | Avramchuk2007, DeColibus2026, Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Titania', 'natural satellite/regular moon'],
-        nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
-        br: [0.30, 0.32, 0.33, 0.34, 0.36, 0.37, 0.41, 0.43],
-        sd: [0.02, 0.02, 0.02, 0.03, 0.02, 0.01, 0.01, 0.01],
+        wavelength_nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
+        spectral_dist: [0.30, 0.32, 0.33, 0.34, 0.36, 0.37, 0.41, 0.43],
+        std: [0.02, 0.02, 0.02, 0.03, 0.02, 0.01, 0.01, 0.01],
         geometric_albedo: ['Generic_Bessell.V', [0.346, 0.020]], // Table 4 (Mean)
         phase_integral: [0.46, 0.05],
     },
     'Titania (U III) | Karkoschka2001, DeColibus2026': {
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Titania', 'natural satellite/regular moon'],
-        slope: {start: 270, stop: 1000, power: 0.18},
+        spectral_slope: {start: 270, stop: 1000, power: 0.18},
         geometric_albedo: ['Generic_Bessell.V', [0.346, 0.020]], // Table 4 (Mean)
         phase_integral: [0.46, 0.05],
     },
@@ -2473,8 +2473,8 @@
         tags: ['Solar System/Uranian system', 'planetary body/large moon', 'natural satellite/regular moon'],
         //         340 nm                470 nm                620 nm                   670 nm                910 nm
         filters: ['HST_WFPC2-PC.F336W', 'HST_WFPC2-WF.F467M', 'HST_WFPC2-WF.FQCH4N33', 'HST_WFPC2-PC.F673N', 'HST_WFPC2-PC.F850LP'],
-        br: [0.219, 0.239, 0.234, 0.235, 0.265],
-        sd: 0.010,
+        spectral_dist: [0.219, 0.239, 0.234, 0.235, 0.265],
+        std: 0.010,
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.170, 0.015]], // Karkoschka2001
     },
@@ -2500,15 +2500,15 @@
     },
     'Oberon (U IV) | Avramchuk2007, DeColibus2026, Karkoschka2001': {
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Oberon', 'natural satellite/regular moon'],
-        nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
-        br: [0.27, 0.29, 0.30, 0.31, 0.33, 0.35, 0.40, 0.43],
-        sd: [0.04, 0.01, 0.02, 0.02, 0.01, 0.01, 0.02, 0.02],
+        wavelength_nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
+        spectral_dist: [0.27, 0.29, 0.30, 0.31, 0.33, 0.35, 0.40, 0.43],
+        std: [0.04, 0.01, 0.02, 0.02, 0.01, 0.01, 0.02, 0.02],
         geometric_albedo: ['Generic_Bessell.V', [0.295, 0.015]], // Table 4 (Mean)
         phase_integral: [0.46, 0.05],
     },
     'Oberon (U IV) | Karkoschka2001, DeColibus2026': {
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Oberon', 'natural satellite/regular moon'],
-        slope: {start: 270, stop: 1000, power: 0.15},
+        spectral_slope: {start: 270, stop: 1000, power: 0.15},
         geometric_albedo: ['Generic_Bessell.V', [0.295, 0.015]], // Table 4 (Mean)
         phase_integral: [0.46, 0.05],
     },
@@ -2516,8 +2516,8 @@
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Oberon', 'natural satellite/regular moon'],
         //         470 nm                910 nm
         filters: ['HST_WFPC2-WF.F467M', 'HST_WFPC2-PC.F850LP'],
-        br: [0.201, 0.218],
-        sd: 0.009,
+        spectral_dist: [0.201, 0.218],
+        std: 0.009,
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.140, 0.015]], // Karkoschka2001
     },
@@ -2531,7 +2531,7 @@
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Oberon', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
-        br: [[0.30, 0.04], [0.33, 0.04]], // Clear: [0.27, 0.03]
+        spectral_dist: [[0.30, 0.04], [0.33, 0.04]], // Clear: [0.27, 0.03]
         is_geometric_albedo: true, // average normal albedo
         spherical_albedo: [550, [0.140, 0.015]], // Karkoschka2001
     },
@@ -2551,7 +2551,7 @@
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Oberon', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
-        br: [[0.37, 0.04], [0.39, 0.03]], // Clear: [0.34, 0.03]
+        spectral_dist: [[0.37, 0.04], [0.39, 0.03]], // Clear: [0.34, 0.03]
         is_geometric_albedo: true, // average normal albedo
         phase_integral: [0.44, 0.05], // Karkoschka2001
     },
@@ -2559,7 +2559,7 @@
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Oberon', 'natural satellite/regular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
-        br: [[0.24, 0.03], [0.28, 0.03]], // Clear: [0.21, 0.02]
+        spectral_dist: [[0.24, 0.03], [0.28, 0.03]], // Clear: [0.21, 0.02]
         is_geometric_albedo: true, // average normal albedo
         phase_integral: [0.44, 0.05], // Karkoschka2001
     },
@@ -2624,43 +2624,43 @@
     'Naiad (N III) | Helfenbein2024, Karkoschka2003': {
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         filters: ['Voyager_ISS-NAC.Clear', 550, 'Keck_NIRC2.H'],
-        br: [[0.0707, 0.0127], [0.072, 0.013], [0.071, 0.0083]], // clear filter value phase-corrected with I/F at a 15° phase angle and phase function (Karkoschka2003)
+        spectral_dist: [[0.0707, 0.0127], [0.072, 0.013], [0.071, 0.0083]], // clear filter value phase-corrected with I/F at a 15° phase angle and phase function (Karkoschka2003)
         is_geometric_albedo: true,
         phase_function: ['phase coefficient', {beta: [0.037, 0.003]}], // average value
     },
     'Thalassa (N IV) | Karkoschka2003': {
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         filters: ['Voyager_ISS-NAC.Clear', 550],
-        br: [[0.0892, 0.0127], 0.091], // clear filter value phase-corrected with I/F at a 15° phase angle and phase function
+        spectral_dist: [[0.0892, 0.0127], 0.091], // clear filter value phase-corrected with I/F at a 15° phase angle and phase function
         is_geometric_albedo: true,
         phase_function: ['phase coefficient', {beta: [0.037, 0.003]}], // average value
     },
     'Despina (N V) | Helfenbein2024, Karkoschka2003, Thomas1991a': {
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         filters: ['Voyager_ISS-NAC.Clear', 550, 'Keck_NIRC2.H', 'HST_NICMOS2.F187W'],
-        br: [[0.0887, 0.0071], [0.090, 0.0072], [0.13, 0.013], [0.08, 0.05]], // clear filter value phase-corrected with I/F at a 15° phase angle and phase function (Karkoschka2003)
+        spectral_dist: [[0.0887, 0.0071], [0.090, 0.0072], [0.13, 0.013], [0.08, 0.05]], // clear filter value phase-corrected with I/F at a 15° phase angle and phase function (Karkoschka2003)
         is_geometric_albedo: true,
         phase_function: ['phase coefficient', {beta: 0.037}],
     },
     'Galatea (N VI) | Helfenbein2024, Karkoschka2003, Thomas1991a': {
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         filters: ['Voyager_ISS-NAC.Clear', 550, 'Keck_NIRC2.H', 'HST_NICMOS2.F187W', 'Keck_NIRC2.Kp'],
-        br: [[0.0775, 0.0071], [0.079, 0.0072], [0.13, 0.012], [0.12, 0.08], [0.12, 0.014]], // clear filter value phase-corrected with I/F at a 15° phase angle and phase function (Karkoschka2003)
+        spectral_dist: [[0.0775, 0.0071], [0.079, 0.0072], [0.13, 0.012], [0.12, 0.08], [0.12, 0.014]], // clear filter value phase-corrected with I/F at a 15° phase angle and phase function (Karkoschka2003)
         is_geometric_albedo: true,
         phase_function: ['phase coefficient', {beta: 0.034}],
     },
     'Larissa (N VII) | Lane1989, Karkoschka2003, Thomas1991a': {
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
-        nm: [260, 750],
-        br: [[0.06, 0.02], [0.07, 0.01]],
+        wavelength_nm: [260, 750],
+        spectral_dist: [[0.06, 0.02], [0.07, 0.01]],
         geometric_albedo: [550, [0.091, 0.0056]], // error margin from Helfenbein2024
         phase_function: ['phase coefficient', {beta: 0.031}],
     },
     'Proteus (N VIII) | Thomas1991a, Karkoschka2003': {
         tags: ['featured', 'Solar System/Neptunian system', 'natural satellite/regular moon'],
-        nm: [410, 471, 540],
-        br: [0.055, 0.060, 0.062],
-        sd: 0.004, // relative uncertainty
+        wavelength_nm: [410, 471, 540],
+        spectral_dist: [0.055, 0.060, 0.062],
+        std: 0.004, // relative uncertainty
         geometric_albedo: [550, [0.096, 0.0062]], // error margin from Helfenbein2024
         phase_function: ['phase coefficient', {beta: 0.039}],
     },
@@ -2673,7 +2673,7 @@
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
-        mag: [[5.81, 0.02], [5.09, 0.01], [4.36, 0.05]],
+        magnitudes: [[5.81, 0.02], [5.09, 0.01], [4.36, 0.05]],
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.093, 0.001]],
@@ -2683,7 +2683,7 @@
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
-        mag: [[5.80, 0.02], [5.09, 0.02], [4.35, 0.03]],
+        magnitudes: [[5.80, 0.02], [5.09, 0.02], [4.35, 0.03]],
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.093, 0.001]],
@@ -2693,7 +2693,7 @@
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
-        mag: [[5.90, 0.02], [5.19, 0.02], [4.45, 0.05]],
+        magnitudes: [[5.90, 0.02], [5.19, 0.02], [4.45, 0.05]],
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.084, 0.001]],
@@ -2701,7 +2701,7 @@
     },
     'Neptunian inner satellites | Karkoschka2003': {
         tags: ['Solar System/Neptunian system', 'natural satellite/regular moon', 'class'],
-        slope: {start: 480, stop: 1870, power: [0.13, 0.07]}, // wavelength range of Dumas et al. (2002)
+        spectral_slope: {start: 480, stop: 1870, power: [0.13, 0.07]}, // wavelength range of Dumas et al. (2002)
         geometric_albedo: [550, 0.085], // albedos range from 0.07 to 0.10
         phase_function: ['phase coefficient', {beta: [0.037, 0.003]}],
     },
@@ -2715,7 +2715,7 @@
     'Triton (N I) | Tryka1999, Helfenstein2025': {
         tags: ['featured', 'Solar System/Neptunian system', 'planetary body/large moon/Triton', 'natural satellite/irregular moon'],
         nm_range: {start: 300, stop: 900, step: 100},
-        br_geometric: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
+        sd_geometric: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
         phase_integral: [0.934, +0.100, -0.016],
     },
     'Hillier1994': [
@@ -2727,8 +2727,8 @@
         tags: ['Solar System/Neptunian system', 'planetary body/large moon/Triton', 'natural satellite/irregular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Blue', 'Green'],
-        br: [0.903, 0.961, 0.970],
-        sd: [0.037, 0.023, 0.151],
+        spectral_dist: [0.903, 0.961, 0.970],
+        std: [0.037, 0.023, 0.151],
         geometric_albedo: ['Generic_Bessell.V', [0.865, +0.079, -0.099]],
         spherical_albedo: ['Generic_Bessell.V', [0.808, +0.125, -0.060]],
     },
@@ -2736,8 +2736,8 @@
         tags: ['Solar System/Neptunian system', 'planetary body/large moon/Triton', 'natural satellite/irregular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
-        br: [1.052, 1.040],
-        sd: [0.014, 0.009],
+        spectral_dist: [1.052, 1.040],
+        std: [0.014, 0.009],
         geometric_albedo: ['Voyager_ISS-NAC.Green', [0.784, 0.007]],
         phase_integral: [1.113, 0.008], // Green filter
     },
@@ -2745,8 +2745,8 @@
         tags: ['Solar System/Neptunian system', 'planetary body/large moon/Triton', 'natural satellite/irregular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
-        br: [1.029, 1.021],
-        sd: [0.024, 0.030],
+        spectral_dist: [1.029, 1.021],
+        std: [0.024, 0.030],
         geometric_albedo: ['Voyager_ISS-NAC.Green', [0.792, 0.024]],
         phase_integral: [1.058, 0.025], // Green filter
     },
@@ -2754,8 +2754,8 @@
         tags: ['Solar System/Neptunian system', 'planetary body/large moon/Triton', 'natural satellite/irregular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
-        br: [0.997, 0.953],
-        sd: [0.034, 0.006],
+        spectral_dist: [0.997, 0.953],
+        std: [0.034, 0.006],
         geometric_albedo: ['Voyager_ISS-NAC.Green', [0.693, 0.004]],
         phase_integral: [1.249, 0.006], // Green filter
     },
@@ -2763,8 +2763,8 @@
         tags: ['Solar System/Neptunian system', 'planetary body/large moon/Triton', 'natural satellite/irregular moon'],
         photometric_system: 'Voyager_ISS-NAC',
         filters: ['Violet', 'Green'],
-        br: [0.627, 0.719],
-        sd: [0.011, 0.008],
+        spectral_dist: [0.627, 0.719],
+        std: [0.011, 0.008],
         geometric_albedo: ['Voyager_ISS-NAC.Green', [0.524, 0.007]],
         phase_integral: [1.429, 0.001], // Green filter
     },
@@ -2772,7 +2772,7 @@
         tags: ['Solar System/Neptunian system', 'planetary body/large moon/Triton', 'natural satellite/irregular moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
-        mag: [[-0.646, 0.009], [-1.343, 0.002], [-2.119, 0.006]],
+        magnitudes: [[-0.646, 0.009], [-1.343, 0.002], [-2.119, 0.006]],
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.84, 0.01]],
@@ -2782,7 +2782,7 @@
         tags: ['Solar System/Neptunian system', 'planetary body/large moon/Triton', 'natural satellite/irregular moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
-        mag: [[-0.637, 0.014], [-1.332, 0.001], [-2.088, 0.004]],
+        magnitudes: [[-0.637, 0.014], [-1.332, 0.001], [-2.088, 0.004]],
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.83, 0.01]],
@@ -2792,7 +2792,7 @@
         tags: ['Solar System/Neptunian system', 'planetary body/large moon/Triton', 'natural satellite/irregular moon'],
         photometric_system: 'HST_WFPC2-PC',
         filters: ['F439W', 'F555W', 'F791W'],
-        mag: [[-0.556, 0.005], [-1.255, 0.004], [-2.031, 0.006]],
+        magnitudes: [[-0.556, 0.005], [-1.255, 0.004], [-2.031, 0.006]],
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['HST_WFPC2-PC.F555W', [0.78, 0.01]],
@@ -2819,7 +2819,7 @@
         tags: ['featured', 'Solar System/Neptunian system', 'natural satellite/irregular moon'],
         photometric_system: 'Generic_Bessell',
         filters: ['U', 'B', 'V', 'R', 'I'],
-        br: [0.90, 0.93, 1, 1.13, 0.99],
+        spectral_dist: [0.90, 0.93, 1, 1.13, 0.99],
         geometric_albedo: ['Generic_Bessell.V', [0.24, 0.02]],
         phase_integral: 0.5,
     },

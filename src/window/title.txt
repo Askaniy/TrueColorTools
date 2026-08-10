@@ -1,1 +1,1 @@
-TrueColorTools v4.6.1+
+TrueColorTools v5.0.0-beta

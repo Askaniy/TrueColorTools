@@ -25,7 +25,7 @@ supported_extensions = ('txt', 'dat', 'fits', 'fit')
 
 def file_reader(file: str) -> tuple[np.ndarray]:
     """
-    Gets the file path within the TCT main folder (text or FITS) and returns the spectrum points (nm, br, sd).
+    Gets the file path within the TCT main folder (text or FITS) and returns the spectrum points (nm, br, std).
     The internal measurement standards are nanometers and energy spectral density ("energy counter").
     For FITS files, it will try to determine the wavelength unit from internal data.
     You can also forcefully specify the data type through letters in the file extension (.txt for example):
@@ -37,10 +37,10 @@ def file_reader(file: str) -> tuple[np.ndarray]:
     for ext in supported_extensions:
         type_info = type_info.removeprefix(ext)
     if extension.startswith('fit'):
-        nm, br, sd = fits_reader(file, type_info)
+        nm, br, std = fits_reader(file, type_info)
     else:
-        nm, br, sd = txt_reader(file, type_info)
-    return nm, br, sd
+        nm, br, std = txt_reader(file, type_info)
+    return nm, br, std
 
 def txt_reader(file: str, type_info: str) -> tuple[np.ndarray]:
     """ Imports spectral data from a text file """
@@ -54,14 +54,14 @@ def txt_reader(file: str, type_info: str) -> tuple[np.ndarray]:
         data = np.loadtxt(f).transpose()
         nm = data[0]
         br = data[1]
-        sd = data[2] if data.shape[0] >= 3 else None
+        std = data[2] if data.shape[0] >= 3 else None
         if data.shape[0] >= 4 and 1 in data[3]:
             # SMASS error indication in the 4th column
             mask = data[3] == 1
             nm = nm[mask]
             br = br[mask]
-            sd = sd[mask]
-    return nm*to_nm_factor, br, sd
+            std = std[mask]
+    return nm*to_nm_factor, br, std
 
 def fits_reader(file: str, type_info: str) -> tuple[np.ndarray]:
     """ Imports spectral data from a FITS file in standards of CALSPEC, VizeR, UVES, BAAVSS, etc """
@@ -73,7 +73,7 @@ def fits_reader(file: str, type_info: str) -> tuple[np.ndarray]:
         wl_unit = u.micron
     else:
         wl_unit = None
-    sd = None
+    std = None
     with fits.open(file) as hdul:
         #hdul.info()
         #print(repr(hdul[0].header))
@@ -96,17 +96,17 @@ def fits_reader(file: str, type_info: str) -> tuple[np.ndarray]:
                     br = br.transpose((0, 2, 1)) # like spectral cube?!
             # Standard deviation getting attempt
             if len(columns) > 2:
-                sd_id = search_column(columns.names, 'sd')
-                sd = tbl[columns[sd_id].name]
-                if len(sd.shape) > 1:
-                    sd = sd[0]
+                std_id = search_column(columns.names, 'std')
+                std = tbl[columns[std_id].name]
+                if len(std.shape) > 1:
+                    std = std[0]
             # Standardization of units of measurement
             if wl_unit is None:
                 wl_unit = u.Unit(columns[wl_id].unit)
             nm = (wl * wl_unit).to(u.nm)
             br = (br * u.Unit(columns[br_id].unit)).to(flux_density_SI)
-            if sd is not None:
-                sd = (sd * u.Unit(columns[sd_id].unit)).to(flux_density_SI)
+            if std is not None:
+                std = (std * u.Unit(columns[std_id].unit)).to(flux_density_SI)
         else:
             try:
                 # BAAVSS store wavelength info only in primary HDU
@@ -122,9 +122,9 @@ def fits_reader(file: str, type_info: str) -> tuple[np.ndarray]:
                 br = hdul[0].data[1]
     nm = np.array(nm)
     br = np.array(br)
-    if sd is not None:
-        sd = np.array(sd)
-    return nm, br, sd
+    if std is not None:
+        std = np.array(std)
+    return nm, br, std
 
 def search_column(names: list[str], target: str):
     """ Returns the index of the FITS column of interest """
@@ -135,7 +135,7 @@ def search_column(names: list[str], target: str):
             candidates = names_set & {'wavelength', 'wave', 'lambda'}
         case 'br':
             candidates = names_set & {'flux', 'sci'}
-        case 'sd':
+        case 'std':
             candidates = names_set & {'syserror'}
     try:
         return names.index(list(candidates)[0])
@@ -145,5 +145,5 @@ def search_column(names: list[str], target: str):
                 return 0 # by default the first column is wavelength
             case 'br':
                 return 1 # the second is flux
-            case 'sd':
+            case 'std':
                 return 2 # the third is standard deviation

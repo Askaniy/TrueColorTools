@@ -63,7 +63,7 @@ def gaussian_convolution(nm0: Sequence, br0: Sequence, nm1: Sequence, step: floa
 def spectral_binning(
         nm0: np.ndarray,
         br0: np.ndarray,
-        sd0: np.ndarray | None,
+        std0: np.ndarray | None,
         nm1: np.ndarray,
         step: float,
         nm0_diff: np.ndarray
@@ -80,12 +80,12 @@ def spectral_binning(
     br_cdf = np.zeros(br0.shape, dtype=np.float64)
     br_cdf[1:] = np.cumsum(0.5 * (br0[:-1] + br0[1:]) * nm0_diff, axis=0) # Riemann sum
     br1 = np.diff(linear_interp(nm0, br_cdf, nm1_edges, extrap_mode='linear'), axis=0) / step
-    sd1 = None
-    if sd0 is not None:
-        sd_cdf = np.zeros(nm0.shape, dtype=np.float64)
-        sd_cdf[1:] = np.cumsum(0.5 * (sd0[:-1] + sd0[1:]) * nm0_diff, axis=0)
-        sd1 = np.diff(linear_interp(nm0, sd_cdf, nm1_edges, extrap_mode='linear'), axis=0) / step
-    return br1, sd1
+    std1 = None
+    if std0 is not None:
+        std_cdf = np.zeros(nm0.shape, dtype=np.float64)
+        std_cdf[1:] = np.cumsum(0.5 * (std0[:-1] + std0[1:]) * nm0_diff, axis=0)
+        std1 = np.diff(linear_interp(nm0, std_cdf, nm1_edges, extrap_mode='linear'), axis=0) / step
+    return br1, std1
 
 def linear_interp(
     x0: np.ndarray,
@@ -139,7 +139,7 @@ def linear_interp(
     y1[exterior_mask_R] = (y0[-1] + slope_R * (x1[exterior_mask_R] - x0[-1]).reshape(-1, *extra_dims))
     return y1
 
-def spectral_downscaling(nm0: Sequence, br0: np.ndarray, sd0: np.ndarray, nm1: Sequence, step: float):
+def spectral_downscaling(nm0: Sequence, br0: np.ndarray, std0: np.ndarray, nm1: Sequence, step: float):
     """
     Returns spectrum brightness values with decreased resolution.
     Incoming graphs or point clouds may have holes and areas of varying resolution.
@@ -162,25 +162,25 @@ def spectral_downscaling(nm0: Sequence, br0: np.ndarray, sd0: np.ndarray, nm1: S
     notnan = ~np.isnan(br0)
     nm0 = nm0[notnan]
     br0 = br0[notnan]
-    if sd0 is not None:
-        sd0 = sd0[notnan]
+    if std0 is not None:
+        std0 = std0[notnan]
     # Obtaining a graph of standard deviations for a Gaussian
     nm_diff = np.diff(nm0)
     nm_mid = (nm0[1:] + nm0[:-1]) * 0.5
     # Calculates the continuous (smoothed by gaussian) density of the original spectral grid
-    sd_local = gaussian_width(gaussian_convolution(nm_mid, nm_diff, nm1, step*2), step) # missing "blur"
+    std_local = gaussian_width(gaussian_convolution(nm_mid, nm_diff, nm1, step*2), step) # missing "blur"
     # Gaussian exponent multipliers (0.001 is a small value to prevent zero division error like with 203 Pompeja)
-    factors = -0.5 / np.clip(sd_local, 0.001, None)**2
+    factors = -0.5 / np.clip(std_local, 0.001, None)**2
     # Convolution with Gaussian of variable standard deviation
     br1 = np.empty_like(nm1, dtype='float64')
     if cube_flag:
         br1 = array2cube(br1, br0.shape[1:3])
-    if sd0 is None:
-        sd1 = None
+    if std0 is None:
+        std1 = None
         uncertainty_weights = np.ones_like(nm0)
     else:
-        sd1 = np.empty_like(br1)
-        uncertainty_weights = sd0**(-2)
+        std1 = np.empty_like(br1)
+        uncertainty_weights = std0**(-2)
     for i in range(len(nm1)):
         # Variable convolution kernel
         gaussian_weights = np.exp(factors[i]*(nm0 - nm1[i])**2)
@@ -189,9 +189,9 @@ def spectral_downscaling(nm0: Sequence, br0: np.ndarray, sd0: np.ndarray, nm1: S
             weights = array2cube(weights, br0.shape[1:3])
         try:
             br1[i] = np.average(br0, weights=weights, axis=0)
-            if sd0 is not None:
+            if std0 is not None:
                 # Assumed formula, not proved
-                sd1[i] = np.sum(weights, axis=0)**(-0.5)
+                std1[i] = np.sum(weights, axis=0)**(-0.5)
                 # If we had normal binning (on a limited interval), the formula would be
                 # np.sum(uncertainty_weights[i])**(-0.5),
                 # and at the limit, it would give σ1 = σ0 / sqrt(N)
@@ -199,9 +199,9 @@ def spectral_downscaling(nm0: Sequence, br0: np.ndarray, sd0: np.ndarray, nm1: S
                 # at the center to 0 at infinity, I use them for summation of uncertainty_weights
         except ZeroDivisionError:
             br1[i] = np.average(br0, axis=0)
-            if sd0 is not None:
-                sd1[i] = 0
-    return br1, sd1
+            if std0 is not None:
+                std1[i] = 0
+    return br1, std1
 
 def spatial_downscaling(cube: np.ndarray, pixels_limit: int):
     """ Brings the spatial resolution of the cube to approximately match the number of pixels """
@@ -331,14 +331,14 @@ def custom_extrap(grid: Sequence, derivative: float|np.ndarray, corner_x: float,
         sign = np.sign(derivative)
         return np.exp((1 - (np.abs(derivative) * (grid - corner_x) / corner_y - sign)**2) / 2) * corner_y
 
-def extrap_sd(corner_y: float|np.ndarray, x_arr: np.ndarray):
+def extrap_std(corner_y: float|np.ndarray, x_arr: np.ndarray):
     """ The exponential growth of uncertainty is completely arbitrary and needs to be investigated """
     return corner_y * 0.05 * (1.01**x_arr - 1)
 
 
 weights_center_of_mass = 1 - 1 / np.sqrt(2)
 
-def extrapolating(x: np.ndarray, y: np.ndarray, sd: np.ndarray, x_arr: np.ndarray, step: int, avg_steps=20):
+def extrapolating(x: np.ndarray, y: np.ndarray, std: np.ndarray, x_arr: np.ndarray, step: int, avg_steps=20):
     """
     Defines a (multi-dimensional) curve an intuitive continuation on the x_arr, if needed.
     In TCT works for spectra, filter systems and spectral cubes.
@@ -352,17 +352,17 @@ def extrapolating(x: np.ndarray, y: np.ndarray, sd: np.ndarray, x_arr: np.ndarra
         is_cube = True
     else:
         is_cube = False
-        if sd is None:
-            sd = np.zeros_like(y)
-            sd_left = sd_right = 0.
+        if std is None:
+            std = np.zeros_like(y)
+            std_left = std_right = 0.
         else:
-            sd_left = sd[0]
-            sd_right = sd[-1]
+            std_left = std[0]
+            std_right = std[-1]
     if len(x) == 1: # filling with equal-energy spectrum
         x1 = grid(min(x_arr[0], x[0]), max(x_arr[-1], x[0]), step)
         y1 = higher_dim(y[0], x1.size, axis=0)
         if not is_cube:
-            sd = extrap_sd(y[0], np.abs(x1 - x[0]))
+            std = extrap_std(y[0], np.abs(x1 - x[0]))
         x = x1
         y = y1
     else:
@@ -371,7 +371,7 @@ def extrapolating(x: np.ndarray, y: np.ndarray, sd: np.ndarray, x_arr: np.ndarra
             x1 = np.arange(x_arr[0], x[0], step)
             if np.all(y[0] == 0):
                 # Corner point is zero -> no extrapolation needed: most likely it's a filter profile
-                y1 = sd1 = np.zeros((x1.size, *obj_shape))
+                y1 = std1 = np.zeros((x1.size, *obj_shape))
             else:
                 y_arr = y[:avg_steps]
                 if is_smooth(y_arr):
@@ -384,18 +384,18 @@ def extrapolating(x: np.ndarray, y: np.ndarray, sd: np.ndarray, x_arr: np.ndarra
                     corner_y = np.average(y_arr, weights=avg_weights, axis=0) - diff * avg_steps * weights_center_of_mass
                 y1 = custom_extrap(x1, diff/step, x[0], corner_y)
                 if not is_cube:
-                    sd1 = sd_left + expand_1D_array(extrap_sd(corner_y, np.arange(int(x[0]-x_arr[0]), 0, -step) - step), obj_shape)
+                    std1 = std_left + expand_1D_array(extrap_std(corner_y, np.arange(int(x[0]-x_arr[0]), 0, -step) - step), obj_shape)
                     #                                                             ^^^ solves a bug with uint16
             x = np.append(x1, x)
             y = np.append(y1, y, axis=0)
             if not is_cube:
-                sd = np.append(sd1, sd, axis=0)
+                std = np.append(std1, std, axis=0)
         if x[-1] < x_arr[-1]:
             # Extrapolation to red
             x1 = np.arange(x[-1], x_arr[-1], step) + step
             if np.all(y[0] == 0):
                 # Corner point is zero -> no extrapolation needed: most likely it's a filter profile
-                y1 = sd1 = np.zeros((x1.size, *obj_shape))
+                y1 = std1 = np.zeros((x1.size, *obj_shape))
             else:
                 y_arr = y[-avg_steps:]
                 if is_smooth(y_arr):
@@ -407,17 +407,17 @@ def extrapolating(x: np.ndarray, y: np.ndarray, sd: np.ndarray, x_arr: np.ndarra
                     corner_y = np.average(y_arr, weights=avg_weights, axis=0) + diff * avg_steps * weights_center_of_mass
                 y1 = custom_extrap(x1, diff/step, x[-1], corner_y)
                 if not is_cube:
-                    sd1 = sd_right + expand_1D_array(extrap_sd(corner_y, np.arange(0, x_arr[-1]-x[-1], step)), obj_shape)
+                    std1 = std_right + expand_1D_array(extrap_std(corner_y, np.arange(0, x_arr[-1]-x[-1], step)), obj_shape)
             x = np.append(x, x1)
             y = np.append(y, y1, axis=0)
             if not is_cube:
-                sd = np.append(sd, sd1, axis=0)
+                std = np.append(std, std1, axis=0)
     if is_cube:
-        sd = None
+        std = None
     else:
-        if sd.sum() == 0:
-            sd = None
-    return x, y, sd
+        if std.sum() == 0:
+            std = None
+    return x, y, std
 
 
 def make_same_ndim(arr1: np.ndarray, arr2: np.ndarray):
@@ -438,19 +438,19 @@ def add_br(br1, br2):
         br1, br2 = make_same_ndim(br1, br2)
     return br1 + br2
 
-def add_sd(br1, sd1, br2, sd2):
+def add_std(br1, std1, br2, std2):
     """
     Calculates the standard deviation of the sum.
     The input can be a numeric or a (multidimensional) numpy array.
     """
-    if sd1 is None:
-        return sd2
-    elif sd2 is None:
-        return sd1
+    if std1 is None:
+        return std2
+    elif std2 is None:
+        return std1
     else:
-        if isinstance(sd1, np.ndarray) and isinstance(sd2, np.ndarray):
-            sd1, sd2 = make_same_ndim(sd1, sd2)
-        return np.sqrt(sd1**2 + sd2**2)
+        if isinstance(std1, np.ndarray) and isinstance(std2, np.ndarray):
+            std1, std2 = make_same_ndim(std1, std2)
+        return np.sqrt(std1**2 + std2**2)
 
 def sub_br(br1, br2):
     """
@@ -461,12 +461,12 @@ def sub_br(br1, br2):
         br1, br2 = make_same_ndim(br1, br2)
     return br1 - br2
 
-def sub_sd(br1, sd1, br2, sd2):
+def sub_std(br1, std1, br2, std2):
     """
     Calculates the standard deviation of the difference.
     The input can be a numeric or a (multidimensional) numpy array.
     """
-    return add_sd(br1, sd1, br2, sd2)
+    return add_std(br1, std1, br2, std2)
 
 def mul_br(br1, br2):
     """
@@ -482,19 +482,19 @@ def mul_br(br1, br2):
             br1, br2 = br2, br1
         return (br1.T * br2).T
 
-def mul_sd(br1, sd1, br2, sd2):
+def mul_std(br1, std1, br2, std2):
     """
     Calculates the standard deviation of the product.
     The input can be a numeric or a (multidimensional) numpy array.
     """
-    if sd1 is None and sd2 is None:
+    if std1 is None and std2 is None:
         return None
     else:
-        if sd1 is None:
-            sd1 = np.zeros_like(br1)
-        if sd2 is None:
-            sd2 = np.zeros_like(br2)
-        return np.sqrt(mul_br(br1, sd2)**2 + mul_br(br2, sd1)**2 + mul_br(sd1, sd2)**2)
+        if std1 is None:
+            std1 = np.zeros_like(br1)
+        if std2 is None:
+            std2 = np.zeros_like(br2)
+        return np.sqrt(mul_br(br1, std2)**2 + mul_br(br2, std1)**2 + mul_br(std1, std2)**2)
 
 def div_br(br1, br2):
     """
@@ -510,19 +510,19 @@ def div_br(br1, br2):
             br1, br2 = br2, br1
         return (br1.T / br2).T
 
-def div_sd(br1, sd1, br2, sd2):
+def div_std(br1, std1, br2, std2):
     """
     Calculates the standard deviation of the private.
     The input can be a numeric or a (multidimensional) numpy array.
     """
-    if sd1 is None and sd2 is None:
+    if std1 is None and std2 is None:
         return None
     else:
-        if sd1 is None:
-            sd1 = np.zeros_like(br1)
-        if sd2 is None:
-            sd2 = np.zeros_like(br2)
-        return div_br(mul_sd(br1, sd1, br2, sd2), br2**2)
+        if std1 is None:
+            std1 = np.zeros_like(br1)
+        if std2 is None:
+            std2 = np.zeros_like(br2)
+        return div_br(mul_std(br1, std1, br2, std2), br2**2)
 
 
 # Blackbody spectra
@@ -533,7 +533,7 @@ k = 1.381e-23 # Boltzmann constant
 const1 = 2 * h * c * c # * np.pi to get exitance (W/m2) in the assumption of Lambertian surface
 const2 = h * c / k
 
-def planck_radiance(nm: float | np.ndarray, T: float) -> float|np.ndarray:
+def planck_radiance(wavelength_nm: float | np.ndarray, T: float) -> float|np.ndarray:
     m = nm * 1e-9
     radiance = const1 / (m**5 * (np.exp(const2 / (m * T)) - 1))
     return radiance * 1e-9 # per m -> per nm
@@ -547,15 +547,15 @@ def extended_log10(value: float):
 
 # ------------ Database Processing Section ------------
 
-def parse_value_sd(data: float|Sequence[float]) -> tuple[float|None, float|None]:
+def parse_value_std(data: float|Sequence[float]) -> tuple[float|None, float|None]:
     """
     Guarantees the output of the value and its standard deviation.
 
     Supported input types:
     - value
-    - [value, sd]
-    - [value, +sd1, -sd2]
-    - [value, -sd1, +sd2]
+    - [value, std]
+    - [value, +std1, -std2]
+    - [value, -std1, +std2]
     """
     if isinstance(data, int|float):
         # no standard deviation
@@ -567,13 +567,13 @@ def parse_value_sd(data: float|Sequence[float]) -> tuple[float|None, float|None]
                 return tuple(data)
             case 3:
                 # asymmetric standard deviation
-                value, sd1, sd2 = data
-                sd = 0.5 * (abs(sd1) + abs(sd2)) # reduced to regular
-                return value, sd
-    print(f'Invalid data input: {data}. Must be a numeric value or a [value, sd] list. Returning None.')
+                value, std1, std2 = data
+                std = 0.5 * (abs(std1) + abs(std2)) # reduced to regular
+                return value, std
+    print(f'Invalid data input: {data}. Must be a numeric value or a [value, std] list. Returning None.')
     return None, None
 
-def parse_value_sd_list(arr: Sequence):
+def parse_value_std_list(arr: Sequence):
     """ Splits the values and standard deviations into two arrays """
     try:
         arr = np.array(arr, dtype='float') # ValueError here means inhomogeneous shape
@@ -581,7 +581,7 @@ def parse_value_sd_list(arr: Sequence):
         # inhomogeneous standard deviation input
         values = []
         for data in arr:
-            value, _ = parse_value_sd(data)
+            value, _ = parse_value_std(data)
             values.append(value)
         return np.array(values, dtype='float'), None
     try:
@@ -589,17 +589,17 @@ def parse_value_sd_list(arr: Sequence):
         if arr.ndim == 0:
             arr = np.atleast_1d(arr)
         elif arr.ndim > 1:
-            raise ValueError # means sd is there
+            raise ValueError # means std is there
         return arr, None
     except ValueError:
         # standard deviation case
         values = []
-        sds = []
+        stds = []
         for data in arr:
-            value, sd = parse_value_sd(data)
+            value, std = parse_value_std(data)
             values.append(value)
-            sds.append(sd)
-        return np.array(values, dtype='float'), np.array(sds, dtype='float')
+            stds.append(std)
+        return np.array(values, dtype='float'), np.array(stds, dtype='float')
 
 def repeat_if_value(data: float | Sequence, arr_len: int):
     """ If the input consists of a single number, stretches to 1D array """
@@ -614,17 +614,17 @@ def mag2irradiance(mag: float | np.ndarray, zero_point: float = 1.):
     """ Converts magnitudes to irradiance (by default in Vega units) """
     return zero_point * 10**(-0.4 * mag)
 
-def sd_mag2sd_irradiance(sd_mag: float | np.ndarray, irradiance: float | np.ndarray):
+def std_mag2std_irradiance(std_mag: float | np.ndarray, irradiance: float | np.ndarray):
     """
     Converts standard deviation of the magnitude to a irradiance standard deviation.
 
     The formula is derived from the error propagation equation:
     I(mag) = zero_point ∙ 10^(-0.4 mag)
-    sd_I² = (d I / d mag)² ∙ sd_mag²
+    std_I² = (d I / d mag)² ∙ std_mag²
     I' = zero_point∙(10^(-0.4 mag))' = zero_point∙10^(-0.4 mag)∙ln(10^(-0.4)) = I∙(-0.4) ln(10)
-    sd_I = |I'| ∙ sd_mag = 0.4 ln(10) ∙ I ∙ sd_mag
+    std_I = |I'| ∙ std_mag = 0.4 ln(10) ∙ I ∙ std_mag
     """
-    return 0.4 * np.log(10) * irradiance * sd_mag
+    return 0.4 * np.log(10) * irradiance * std_mag
 
 def color_index_splitter(index: str):
     """
@@ -649,7 +649,7 @@ def color_indices_parser(indices: dict):
 
     For standard deviations the error propagation equation is used:
     f(x, y) = x - y
-    sd_f² = (df/dx)² sd_x² + (df/dy)² sd_y² = sd_x² + sd_y²
+    std_f² = (df/dx)² std_x² + (df/dy)² std_y² = std_x² + std_y²
     where x, y are magnitudes and f is a color index.
 
     Finding standard deviations of a photospectrum built from color indices is an ill-posed problem:
@@ -684,58 +684,58 @@ def color_indices_parser(indices: dict):
     """
     first_color_index = tuple(indices.keys())[0]
     filter0, _ = color_index_splitter(first_color_index)
-    _, sd0 = parse_value_sd(indices[first_color_index])
+    _, std0 = parse_value_std(indices[first_color_index])
     # Just photospectrum calculation
     uncertainty_flag = True
     filters = {filter0: 0} # mag=0 for the first point (arbitrarily)
     for key, value in indices.items():
         bluer_filter, redder_filter = color_index_splitter(key)
-        mag, sd = parse_value_sd(value)
-        if sd is None:
+        mag, std = parse_value_std(value)
+        if std is None:
             uncertainty_flag = False
         if bluer_filter in filters:
             filters |= {redder_filter: filters[bluer_filter] - mag}
         else:
             filters |= {bluer_filter: filters[redder_filter] + mag}
     irradiance = mag2irradiance(np.array(tuple(filters.values())))
-    filter_names = filters.keys() # name setting before using the variable for sd processing
-    sd = None
+    filter_names = filters.keys() # name setting before using the variable for std processing
+    std = None
     # Uncertainty calculation
     if uncertainty_flag:
         shot_noise_factor = np.sqrt(irradiance) # common Poisson noise factor
-        sd_of_sd = np.inf
-        for sd_assumed in np.linspace(0, sd0, 1001):
+        std_of_std = np.inf
+        for std_assumed in np.linspace(0, std0, 1001):
             impossible_assumption = False
             # Numerically select the best value of the standard deviation of the first point,
             # on which all other standard deviations clearly depend
-            filters = {filter0: sd_assumed}
+            filters = {filter0: std_assumed}
             for key, value in indices.items():
                 bluer_filter, redder_filter = color_index_splitter(key)
-                _, index_sd = parse_value_sd(value)
+                _, index_std = parse_value_std(value)
                 try:
                     if bluer_filter in filters:
-                        filters |= {redder_filter: sqrt(index_sd**2 - filters[bluer_filter]**2)}
+                        filters |= {redder_filter: sqrt(index_std**2 - filters[bluer_filter]**2)}
                     else:
-                        filters |= {bluer_filter: sqrt(index_sd**2 - filters[redder_filter]**2)}
+                        filters |= {bluer_filter: sqrt(index_std**2 - filters[redder_filter]**2)}
                 except ValueError:
                     # This means that the difference under the root is negative
                     # and the initial standard deviation assumption is not possible
                     impossible_assumption = True
                     break
             if not impossible_assumption:
-                new_sd = sd_mag2sd_irradiance(np.array(tuple(filters.values())), irradiance)
-                # Finding the minimum deviation between sd as solution quality criterion
+                new_std = std_mag2std_irradiance(np.array(tuple(filters.values())), irradiance)
+                # Finding the minimum deviation between std as solution quality criterion
                 # The standard deviations are scaled by the Poisson noise factor
-                new_sd_of_sd = np.std(new_sd * shot_noise_factor)
-                if new_sd_of_sd < sd_of_sd:
-                    sd = new_sd
-                    sd_of_sd = new_sd_of_sd
+                new_std_of_std = np.std(new_std * shot_noise_factor)
+                if new_std_of_std < std_of_std:
+                    std = new_std
+                    std_of_std = new_std_of_std
                     continue
                 else:
                     # Means that the best values of standard deviations were found
                     # in the last iteration and they started to diverge
                     break
-    return filter_names, irradiance, sd
+    return filter_names, irradiance, std
 
 
 

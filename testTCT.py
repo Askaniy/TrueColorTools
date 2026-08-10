@@ -23,11 +23,11 @@ class TestTCT(unittest.TestCase):
         np.testing.assert_allclose(self.v.mean_nm(), 551.204273, rtol=0.01) # 551.210 in SVO Filter Profile Service
         np.testing.assert_allclose(self.ubv.mean_nm(), [360.507105, 441.301389, 551.204273], rtol=0.01)
 
-    def test_sd_of_nm(self):
-        np.testing.assert_allclose(self.sun.sd_of_nm(), 468.978657, rtol=0.01)
-        np.testing.assert_allclose(self.vega.sd_of_nm(), 353.430263, rtol=0.01)
-        np.testing.assert_allclose(self.v.sd_of_nm(), 36.354015, rtol=0.01)
-        np.testing.assert_allclose(self.ubv.sd_of_nm(), [21.932217, 35.816641, 36.354015], rtol=0.01)
+    def test_std_of_nm(self):
+        np.testing.assert_allclose(self.sun.std_of_nm(), 468.978657, rtol=0.01)
+        np.testing.assert_allclose(self.vega.std_of_nm(), 353.430263, rtol=0.01)
+        np.testing.assert_allclose(self.v.std_of_nm(), 36.354015, rtol=0.01)
+        np.testing.assert_allclose(self.ubv.std_of_nm(), [21.932217, 35.816641, 36.354015], rtol=0.01)
 
     def test_stub_and_convolution_possibility(self):
         self.assertIsInstance(core.Spectrum.stub() @ core.Spectrum.stub(), tuple)
@@ -104,11 +104,11 @@ class TestTCT(unittest.TestCase):
         photospectrum = core.Photospectrum(self.ubv, (1, 1, 1), name='test photospectrum')
         np.testing.assert_allclose(photospectrum.define_on_range(core.visible_range, crop=True).br, np.ones(core.visible_range.size))
 
-    def test_sd_parsing(self):
-        np.testing.assert_equal(aux.parse_value_sd(0.202), (0.202, None))
-        np.testing.assert_equal(aux.parse_value_sd([0.202, 0.0665]), (0.202, 0.0665))
-        np.testing.assert_equal(aux.parse_value_sd([0.202, 0.084, 0.049]), (0.202, 0.0665))
-        np.testing.assert_equal(aux.parse_value_sd([0.202, +0.084, -0.049]), (0.202, 0.0665))
+    def test_std_parsing(self):
+        np.testing.assert_equal(aux.parse_value_std(0.202), (0.202, None))
+        np.testing.assert_equal(aux.parse_value_std([0.202, 0.0665]), (0.202, 0.0665))
+        np.testing.assert_equal(aux.parse_value_std([0.202, 0.084, 0.049]), (0.202, 0.0665))
+        np.testing.assert_equal(aux.parse_value_std([0.202, +0.084, -0.049]), (0.202, 0.0665))
 
     def test_phase_coeffitient(self):
         model = core.PhaseCoefficient({'beta': [0.032, 0.001]})
@@ -207,7 +207,7 @@ class TestTCT(unittest.TestCase):
                 'tags': ['featured', 'Solar System/Neptunian system', 'natural satellite/irregular moon'],
                 'photometric_system': 'Generic_Bessell',
                 'filters': ['U', 'B', 'V', 'R', 'I'],
-                'br': [0.90, 0.93, 1, 1.13, 0.99],
+                'spectral_dist': [0.90, 0.93, 1, 1.13, 0.99],
                 'geometric_albedo': ['Generic_Bessell.V', [0.24, 0.02]],
                 'phase_integral': 0.5,
             },

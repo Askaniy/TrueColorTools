@@ -232,8 +232,8 @@
     ],
     'Sky of Mars: Pathfinder | Maki1999': {
         tags: ['Solar System', 'planetary body/planet/Mars', 'sky/Martian sky'],
-        nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
-        br: [
+        wavelength_nm: [440, 480, 530, 600, 670, 750, 800, 860, 900, 930, 970, 1000],
+        spectral_dist: [
             0.19189, 0.27973, 0.36757, 0.50541, 0.47838, 0.42297,
             0.37027, 0.30946, 0.28108, 0.25676, 0.23108, 0.21757
         ], // extracted from Fig. 2

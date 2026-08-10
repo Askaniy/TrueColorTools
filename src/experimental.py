@@ -50,8 +50,8 @@ def cube_reader(file: str) -> tuple[np.ndarray, np.ndarray]:
 #        order = np.argsort(nm)
 #        self.filters = tuple(np.array(self.filters)[order])
 #        self.br = self.br[order]
-#        if self.sd is not None:
-#            self.sd = self.sd[order]
+#        if self.std is not None:
+#            self.std = self.std[order]
 #    return self
 
 # Align multiband image
@@ -251,12 +251,12 @@ def absolute_shifts(diffs):
 #    # Obtaining a graph of standard deviations for a Gaussian
 #    nm_diff = np.diff(nm0)
 #    nm_mid = (nm0[1:] + nm0[:-1]) * 0.5
-#    sd_local = gaussian_convolution(nm_mid, nm_diff, nm1, step*2) # 1D
+#    std_local = gaussian_convolution(nm_mid, nm_diff, nm1, step*2) # 1D
 #    # Convolution with Gaussian of variable standard deviation
 #    nm0_plane = expand(nm0, 1, len(nm1)) # 2D
 #    nm1_plane = expand(nm1, 0, len(nm0)) # 2D
-#    sd = gaussian_width(sd_local, step) # 1D
-#    factor = expand(-0.5 / sd**2, 0, len(nm0)) # 2D
+#    std = gaussian_width(std_local, step) # 1D
+#    factor = expand(-0.5 / std**2, 0, len(nm0)) # 2D
 #    gaussian = np.exp(factor*(nm0_plane - nm1_plane)**2) # 2D
 #    br0 = expand(br0, -1, len(nm1)) # 2D for spectra or 4D for cubes
 #    br1 = np.average(br0, weights=br0 * gaussian, axis=0) # 1D for spectra or 3D for cubes
@@ -299,9 +299,9 @@ def absolute_shifts(diffs):
 #
 #    # Spectral smoothing and down scaling
 #    current_resolution = aux.get_resolution(cube.spectral_axis.value)
-#    sd = aux.gaussian_width(current_resolution, nm_step) / current_resolution
+#    std = aux.gaussian_width(current_resolution, nm_step) / current_resolution
 #    print('Beginning spectral smoothing')
-#    cube = cube.spectral_smooth(Gaussian1DKernel(sd)) # parallel execution doesn't work
+#    cube = cube.spectral_smooth(Gaussian1DKernel(std)) # parallel execution doesn't work
 #    print('Beginning spectral down scaling')
 #    cube = cube.spectral_interpolate(nm * u.nm, suppress_smooth_warning=True, update_function=do_nothing)
 #
