@@ -265,28 +265,28 @@
     ],
     'AU Microscopii (M1 Ve) | Krist2005': { // 2004 Jul 24
         tags: ['extrasolar', 'star/V dwarf'],
-        filters: ['Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Cousins.I'],
+        filters: ['Generic/Bessell.B', 'Generic/Bessell.V', 'Generic/Cousins.I'],
         magnitudes: [[9.96, 0.05], [8.64, 0.03], [6.60, 0.03]], // Table 2
         calibration_system: 'Vega',
         is_emissive: true,
     },
     'Debris disk of AU Microscopii | Krist2005': {
         tags: ['extrasolar/debris disk'],
-        photometric_system: 'HST_ACS_HRC',
+        filter_set: 'HST/ACS_HRC',
         filters: ['F435W', 'F606W', 'F814W'],
         spectral_dist: [1.02, 1, 0.936], // Total flux (illuminated by the host star)
         is_emissive: true, // scattered light
     },
     'Debris disk of AU Microscopii: Northwest midplane | Krist2005': {
         tags: ['extrasolar/debris disk'],
-        photometric_system: 'HST_ACS_HRC',
+        filter_set: 'HST/ACS_HRC',
         filters: ['F435W', 'F606W', 'F814W'],
         spectral_dist: [1.13, 1, 0.837], // Flux relative to the star
         is_emissive: true, // scattered light
     },
     'Debris disk of AU Microscopii: Southeast midplane | Krist2005': {
         tags: ['extrasolar/debris disk'],
-        photometric_system: 'HST_ACS_HRC',
+        filter_set: 'HST/ACS_HRC',
         filters: ['F435W', 'F606W', 'F814W'],
         spectral_dist: [1.15, 1, 0.799], // Flux relative to the star
         is_emissive: true, // scattered light
@@ -302,14 +302,14 @@
     // may be obtained with grain albedos in the 0.6–0.7 range"
     'Debris disk of AU Microscopii: Porous grains model | Fitzgerald2007': {
         tags: ['extrasolar/debris disk'],
-        filters: ['HST_ACS_HRC.F606W', 'Keck_NIRC2.H'],
+        filters: ['HST/ACS_HRC.F606W', 'Keck/NIRC2.H'],
         spectral_dist: [0.52, 0.54], // Table 5
         is_albedo: true
     },
     // "the polarization curves in Figure 11 clearly rule out compact grains"
     'Debris disk of AU Microscopii: Compact grains model | Fitzgerald2007': {
         tags: ['extrasolar/debris disk'],
-        filters: ['HST_ACS_HRC.F606W', 'Keck_NIRC2.H'],
+        filters: ['HST/ACS_HRC.F606W', 'Keck/NIRC2.H'],
         spectral_dist: [0.83, 0.81], // Table 5
         is_albedo: true,
     },
@@ -479,7 +479,7 @@
     ],
     'Crab Pulsar | Sandberg2009': {
         tags: ['extrasolar', 'star/neutron star'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         filters: ['U', 'B', 'V', 'R', 'I'],
         magnitudes: [[16.69, 0.03], [17.23, 0.02], [16.66, 0.03], [16.17, 0.02], [15.65, 0.02]], // Table 2
         calibration_system: 'Vega',
@@ -487,7 +487,7 @@
     },
     'Crab Pulsar: Knot | Sandberg2009': {
         tags: ['extrasolar'], // not a neutron star, but a structure near it
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         filters: ['U', 'B', 'V', 'R', 'I'],
         magnitudes: [[21.57, 0.13], [21.91, 0.08], [20.72, 0.07], [20.02, 0.07], [19.26, 0.08]], // Table 2
         calibration_system: 'Vega',
@@ -503,9 +503,9 @@
     'Geminga | Shibanov2006': {
         tags: ['extrasolar', 'star/neutron star'],
         filters: [
-            'HST_STIS_NUV.F25SRF2', 'HST_FOC_F96.F342W', 'HST_FOC_F96.F430W',
-            'HST_WFPC2-PC.F555W', 'Subaru_Suprime.Rc_filter', 'Subaru_Suprime.Ic_filter',
-            'HST_NICMOS2.F110W', 'HST_NICMOS2.F160W'
+            'HST/STIS_NUV.F25SRF2', 'HST/FOC_F96.F342W', 'HST/FOC_F96.F430W',
+            'HST/WFPC2-PC.F555W', 'Subaru/Suprime.Rc_filter', 'Subaru/Suprime.Ic_filter',
+            'HST/NICMOS2.F110W', 'HST/NICMOS2.F160W'
         ],
         spectral_dist: [1.79E-18, 5.77E-19, 3.10E-19, 1.53E-19, 1.25E-19, 9.30E-20, 4.22E-20, 2.73E-20],
         is_emissive: true,
@@ -513,9 +513,9 @@
     'Geminga: With interstellar dust extinction | Shibanov2006': {
         tags: ['extrasolar', 'star/neutron star'],
         filters: [
-            'HST_STIS_NUV.F25SRF2', 'HST_FOC_F96.F342W', 'HST_FOC_F96.F430W',
-            'HST_WFPC2-PC.F555W', 'Subaru_Suprime.Rc_filter', 'Subaru_Suprime.Ic_filter',
-            'HST_NICMOS2.F110W', 'HST_NICMOS2.F160W'
+            'HST/STIS_NUV.F25SRF2', 'HST/FOC_F96.F342W', 'HST/FOC_F96.F430W',
+            'HST/WFPC2-PC.F555W', 'Subaru/Suprime.Rc_filter', 'Subaru/Suprime.Ic_filter',
+            'HST/NICMOS2.F110W', 'HST/NICMOS2.F160W'
         ],
         spectral_dist: [1.49E-18, 5.18E-19, 2.83E-19, 1.43E-19, 1.19E-19, 8.93E-20, 4.12E-20, 2.70E-20],
         is_emissive: true,
@@ -545,8 +545,8 @@
     ],
     'Vela Pulsar | Mignani2001': {
         tags: ['extrasolar', 'star/neutron star'],
-        filters: ['LaSilla_EMMI.Bessel_U', 'LaSilla_EMMI.Bessel_B', 'HST_WFPC2-PC.F555W', 'LaSilla_EMMI.V', 'HST_WFPC2-PC.F675W', 'LaSilla_EMMI.R', 'HST_WFPC2-PC.F814W'],
-        // note: LaSilla_EMMI filters are transparency only, without detector sensitivity
+        filters: ['LaSilla/EMMI.Bessel_U', 'LaSilla/EMMI.Bessel_B', 'HST/WFPC2-PC.F555W', 'LaSilla/EMMI.V', 'HST/WFPC2-PC.F675W', 'LaSilla/EMMI.R', 'HST/WFPC2-PC.F814W'],
+        // note: LaSilla/EMMI filters are transparency only, without detector sensitivity
         magnitudes: [[23.38, 0.15], [23.89, 0.15], [23.64, 0.05], [23.65, 0.1], [24.30, 0.1], [23.93, 0.2], [24.40, 0.1]],
         calibration_system: 'Vega',
         is_emissive: true,
@@ -558,7 +558,7 @@
     ],
     'PSR B0540-69 | Mignani2010a': { // 2007-06-21
         tags: ['featured', 'extrasolar', 'star/neutron star'],
-        photometric_system: 'HST_WFPC2-PC',
+        filter_set: 'HST/WFPC2-PC',
         filters: ['F336W', 'F450W', 'F555W', 'F675W', 'F814W'],
         magnitudes: [[21.77, 0.17], [22.09, 0.05], [22.07, 0.05], [22.18, 0.04], [22.35, 0.03]],
         calibration_system: 'Vega',
@@ -572,7 +572,7 @@
     ],
     'PSR B0656+14 | Kurt1998': {
         tags: ['extrasolar', 'star/neutron star'],
-        filters: ['Generic_Bessell.B', 'Generic_Bessell.V', 'Generic_Cousins.R', 'Generic_Cousins.I'],
+        filters: ['Generic/Bessell.B', 'Generic/Bessell.V', 'Generic/Cousins.R', 'Generic/Cousins.I'],
         magnitudes: [[24.85, +0.19, -0.16], [24.90, +0.16, -0.14], [24.52, +0.12, -0.11], [23.81, +0.27, -0.21]],
         calibration_system: 'Vega',
         is_emissive: true,
@@ -586,7 +586,7 @@
     // measurement in filter SBC F140LP (22.64 mag) was removed due to spectral reconstruction algorithm artifact
     'PSR B1055-52 | Mignani2010b': {
         tags: ['extrasolar', 'star/neutron star'],
-        filters: ['HST_FOC_F96.F342W', 'HST_WFPC2-PC.F555W', 'HST_WFPC2-PC.F702W'],
+        filters: ['HST/FOC_F96.F342W', 'HST/WFPC2-PC.F555W', 'HST/WFPC2-PC.F702W'],
         magnitudes: [25.00, 25.43, 26.08], // Table 1 (observed magnitude)
         // magnitude limit in WFPC2 F450W: >24.97 mag
         calibration_system: 'Vega',
@@ -598,12 +598,12 @@
         'DOI: 10.1093/mnras/stab2167', 'https://academic.oup.com/mnras/article/507/2/2174/6329690',
         'https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2174S/abstract'
     ],
-    // ULTRACAM_SuperSDSS system is filter bandpass alone, i.e. they do not include
+    // ULTRACAM/SuperSDSS system is filter bandpass alone, i.e. they do not include
     // the effects of atmosphere, New Technology Telescope (NTT) optics, its CCD QE.
     // from https://vikdhillon.staff.shef.ac.uk/ultracam/
     'PSR J1227-4853: With companion | Stringer2021': {
         tags: ['extrasolar', 'star/neutron star'],
-        photometric_system: 'ULTRACAM_SuperSDSS',
+        filter_set: 'ULTRACAM/SuperSDSS',
         filters: ['u_s', 'g_s', 'i_s'],
         magnitudes: [20.4, 18.7, 18.0], // modulation amplitudes of 1.4 mag, 0.8 mag, and 0.6 mag
         calibration_system: 'AB',
@@ -611,7 +611,7 @@
     },
     'PSR J1023+0038: With companion | Stringer2021': {
         tags: ['extrasolar', 'star/neutron star'],
-        photometric_system: 'ULTRACAM_SuperSDSS',
+        filter_set: 'ULTRACAM/SuperSDSS',
         filters: ['u_s', 'g_s', 'i_s'],
         magnitudes: [19.4, 17.9, 17.3], // modulation amplitudes of 0.7 mag, 0.4 mag, and 0.3 mag
         calibration_system: 'AB',

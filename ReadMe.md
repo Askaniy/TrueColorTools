@@ -92,8 +92,8 @@ Supported input keys of a database unit:
 - `spectral_slope` (dict): sets the grid in the format `{start: …, stop: …, power/percent_per_100nm: …}`
 - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
 - `filters` (list): list of filter names present in the `filters` folder (can be mixed with nm values)
+- `filter_set` (str): can be used to avoid repeating the name of the photometric system or instrument
 - `color_indices` (list): dictionary of color indices, formatted `{'filter1-filter2': …, …}`
-- `photometric_system` (str): a way to parenthesize the photometric system name (separator is a dot)
 - `calibration_system` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
 - `geometric_albedo` (list): scales the data to geometric albedo spectrum, syntax is `[filter/nm, value]`
 - `spherical_albedo` (list): scales the data to spherical albedo spectrum, syntax is `[filter/nm, value]`
@@ -126,9 +126,9 @@ The data in the `/spectra` folder can be modified by the user (except for [Sun](
 TCT uses filter sensitivity profiles for accurate spectrum restoration. They are provided by the [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php) and stored [here](/filters). To replenish the database, select a filter on the site, select the "ascii" data file and place it in the folder. You need also specify the wavelength unit (usually ångströms, so you get the `.datA` extension). If you see "Detector Type: **P**hoton counter" in the filter description there (instead of "Energy counter", which we need) you need to add `P` to the extension. (Do not edit the [V band filter](filters/Generic_Bessell.V.dat), it is needed for the program to work.)
 
 Short help on the UBVRI photometric system implementations:
-- `Generic_Johnson` takes into account the sensitivity of photomultiplier tubes, mostly affected on R and I bands. Use **only** if the measurements were actually taken on a PMT.
-- `Generic_Cousins` contains only R and I bands. Can be used directly with the U, B, V from the Johnson system, but the error is expected to be large.
-- `Generic_Bessell` is actually Johnson—Cousins system for CCD receivers. Recommended by default.
+- `Generic/Johnson` takes into account the sensitivity of photomultiplier tubes, mostly affected on R and I bands. Use **only** if the measurements were actually taken on a PMT.
+- `Generic/Cousins` contains only R and I bands. Can be used directly with the U, B, V from the Johnson system, but the error is expected to be large.
+- `Generic/Bessell` is actually Johnson—Cousins system for CCD receivers. Recommended by default.
 
 
 ## Acknowledgements

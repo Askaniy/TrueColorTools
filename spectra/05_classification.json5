@@ -13,73 +13,73 @@
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Mahlke taxonomy'],
         file: 'spectra/files/Mahlke2022/P.txtU',
         geometric_albedo: [550, [0.05, +0.02, -0.01]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.80, G_2: 0.05}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.80, G_2: 0.05}],
     },
     'C-type | Mahlke2022, Mahlke2020': { // 10.4%
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Mahlke taxonomy'],
         file: 'spectra/files/Mahlke2022/C.txtU',
         geometric_albedo: [550, [0.05, +0.02, -0.01]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
     },
     'Ch-type | Mahlke2022, Mahlke2020': { // 5.0%
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Mahlke taxonomy'],
         file: 'spectra/files/Mahlke2022/Ch.txtU',
         geometric_albedo: [550, [0.05, +0.02, -0.01]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.05}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.05}],
     },
     'B-type | Mahlke2022, Mahlke2020': { // 2.1%
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Mahlke taxonomy'],
         file: 'spectra/files/Mahlke2022/B.txtU',
         geometric_albedo: [550, [0.06, +0.05, -0.03]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
     },
     'D-type | Mahlke2022, Mahlke2020': { // 3.9%
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Mahlke taxonomy'],
         file: 'spectra/files/Mahlke2022/D.txtU',
         geometric_albedo: [550, [0.06, +0.03, -0.02]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
     },
     'Z-type | Mahlke2022, Mahlke2020': { // 1.1%
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Mahlke taxonomy'],
         file: 'spectra/files/Mahlke2022/Z.txtU',
         geometric_albedo: [550, [0.07, +0.04, -0.03]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
     },
     'K-type | Mahlke2022, Mahlke2020': { // 2.0%
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Mahlke taxonomy'],
         file: 'spectra/files/Mahlke2022/K.txtU',
         geometric_albedo: [550, [0.13, +0.04, -0.03]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.18, G_2: 0.40}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.18, G_2: 0.40}],
     },
     'M-type | Mahlke2022, Mahlke2020': { // 6.7%
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Mahlke taxonomy'],
         file: 'spectra/files/Mahlke2022/M.txtU',
         geometric_albedo: [550, [0.14, +0.05, -0.04]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.19, G_2: 0.34}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.19, G_2: 0.34}],
     },
     'L-type | Mahlke2022, Mahlke2020': { // 2.7%
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Mahlke taxonomy'],
         file: 'spectra/files/Mahlke2022/L.txtU',
         geometric_albedo: [550, [0.18, +0.07, -0.05]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.16, G_2: 0.37}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.16, G_2: 0.37}],
     },
     'S-type | Mahlke2022, Mahlke2020': { // 42.3%
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Mahlke taxonomy'],
         file: 'spectra/files/Mahlke2022/S.txtU',
         geometric_albedo: [550, [0.24, +0.10, -0.07]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
     'Q-type | Mahlke2022, Mahlke2020': { // 5.0%
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Mahlke taxonomy'],
         file: 'spectra/files/Mahlke2022/Q.txtU',
         geometric_albedo: [550, [0.24, +0.12, -0.08]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.36, G_2: 0.44}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.36, G_2: 0.44}],
     },
     'A-type | Mahlke2022, Mahlke2020': { // 1.5%
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Mahlke taxonomy'],
         file: 'spectra/files/Mahlke2022/A.txtU',
         geometric_albedo: [550, [0.25, +0.09, -0.07]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.30, G_2: 0.39}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.30, G_2: 0.39}],
     },
     'O-type | Mahlke2022': { // 0.1%
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Mahlke taxonomy'],
@@ -90,25 +90,25 @@
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Mahlke taxonomy'],
         file: 'spectra/files/Mahlke2022/V.txtU',
         geometric_albedo: [550, [0.29, +0.11, -0.08]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.10, G_2: 0.56}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.10, G_2: 0.56}],
     },
     'R-type | Mahlke2022, Mahlke2020': { // 0.5%
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Mahlke taxonomy'],
         file: 'spectra/files/Mahlke2022/R.txtU',
         geometric_albedo: [550, [0.30, +0.05, -0.04]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
     'E-type | Mahlke2022, Mahlke2020': { // 2.2%
         tags: ['featured', 'Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Mahlke taxonomy'],
         file: 'spectra/files/Mahlke2022/E.txtU',
         geometric_albedo: [550, [0.57, +0.15, -0.12]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.33, G_2: 0.45}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.33, G_2: 0.45}],
     },
     'X-type | Mahlke2022, Mahlke2020': { // 1.6%
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Mahlke taxonomy'],
         file: 'spectra/files/Mahlke2022/X.txtU',
         // no albedo by definition
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
     },
 
 
@@ -142,8 +142,8 @@
     'P-type | Fornasier2011, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         spectral_slope: {start: 550, stop: 800, percent_per_100nm: [3.34, 1.69]},
-        geometric_albedo: ['Generic_Bessell.V', [0.05, 0.02]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.80, G_2: 0.05}],
+        geometric_albedo: ['Generic/Bessell.V', [0.05, 0.02]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.80, G_2: 0.05}],
     },
 
     // Intermediate types of P and D complexes
@@ -154,136 +154,136 @@
     'PD-type | Dahlgren1995, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         spectral_slope: {start: 400, stop: 910, percent_per_100nm: 5.5}, // 5.0 ≤ S’ < 6.0
-        geometric_albedo: ['Generic_Bessell.V', [0.05, 0.02]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.80, G_2: 0.05}],
+        geometric_albedo: ['Generic/Bessell.V', [0.05, 0.02]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.80, G_2: 0.05}],
     },
     'DP-type | Dahlgren1995, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         spectral_slope: {start: 400, stop: 910, percent_per_100nm: 6.5}, // 6.0 ≤ S’ < 7.0
-        geometric_albedo: ['Generic_Bessell.V', [0.06, 0.02]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
+        geometric_albedo: ['Generic/Bessell.V', [0.06, 0.02]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
     },
 
     // D complex (D, DP)
     'D-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/D.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.06, 0.02]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
+        geometric_albedo: ['Generic/Bessell.V', [0.06, 0.02]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
     },
     'D-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.882, 0.951, 1.046, 1.098, 1.150, 1.199, 1.222, 1.247, 1.287],
         std: [0.029, 0.012, 0.005, 0.006, 0.010, 0.015, 0.018, 0.026, 0.067],
-        geometric_albedo: ['Generic_Bessell.V', [0.06, 0.02]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
+        geometric_albedo: ['Generic/Bessell.V', [0.06, 0.02]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.17}],
     },
 
     // Ch complex (Cgh, Ch)
     'Cgh-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/Cgh.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.06, 0.06]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.05}],
+        geometric_albedo: ['Generic/Bessell.V', [0.06, 0.06]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.05}],
     },
     'Cgh-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.870, 0.962, 0.997, 0.985, 0.972, 0.973, 0.987, 0.991, 0.980],
         std: [0.025, 0.014, 0.016, 0.027, 0.035, 0.038, 0.042, 0.047, 0.059],
-        geometric_albedo: ['Generic_Bessell.V', [0.06, 0.06]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.05}],
+        geometric_albedo: ['Generic/Bessell.V', [0.06, 0.06]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.05}],
     },
     'Ch-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/Ch.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.06, 0.06]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.05}],
+        geometric_albedo: ['Generic/Bessell.V', [0.06, 0.06]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.05}],
     },
     'Ch-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.941, 0.986, 0.991, 0.983, 0.977, 0.982, 0.991, 0.996, 0.993],
         std: [0.030, 0.010, 0.008, 0.013, 0.018, 0.021, 0.024, 0.028, 0.037],
-        geometric_albedo: ['Generic_Bessell.V', [0.06, 0.06]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.05}],
+        geometric_albedo: ['Generic/Bessell.V', [0.06, 0.06]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.77, G_2: 0.05}],
     },
 
     // B complex (B, F, FC)
     'B-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/B.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.08, 0.06]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
+        geometric_albedo: ['Generic/Bessell.V', [0.08, 0.06]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
     },
     'B-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [1.008, 1.004, 0.989, 0.985, 0.978, 0.975, 0.969, 0.961, 0.938],
         std: [0.022, 0.008, 0.007, 0.011, 0.015, 0.019, 0.023, 0.026, 0.039],
-        geometric_albedo: ['Generic_Bessell.V', [0.08, 0.06]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
+        geometric_albedo: ['Generic/Bessell.V', [0.08, 0.06]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
     },
 
     // C complex (C, CB, CD, CF, CG, CL, CO, Cb, Cg, Cgx, Co)
     'C-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/C.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.09, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
+        geometric_albedo: ['Generic/Bessell.V', [0.09, 0.09]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
     },
     'C-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.936, 0.979, 1.007, 1.013, 1.014, 1.016, 1.014, 1.008, 0.993],
         std: [0.025, 0.009, 0.009, 0.011, 0.013, 0.015, 0.017, 0.022, 0.034],
-        geometric_albedo: ['Generic_Bessell.V', [0.09, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
+        geometric_albedo: ['Generic/Bessell.V', [0.09, 0.09]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
     },
     'Cb-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/Cb.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.09, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
+        geometric_albedo: ['Generic/Bessell.V', [0.09, 0.09]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
     },
     'Cb-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.981, 0.995, 0.999, 1.002, 1.002, 1.005, 1.003, 0.994, 0.979],
         std: [0.018, 0.007, 0.005, 0.008, 0.010, 0.012, 0.015, 0.020, 0.031],
-        geometric_albedo: ['Generic_Bessell.V', [0.09, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
+        geometric_albedo: ['Generic/Bessell.V', [0.09, 0.09]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
     },
     'Cg-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/Cg.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.09, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
+        geometric_albedo: ['Generic/Bessell.V', [0.09, 0.09]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
     },
     'Cg-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.852, 0.945, 1.018, 1.028, 1.027, 1.025, 1.026, 1.022, 1.007],
         std: [0.013, 0.013, 0.012, 0.020, 0.020, 0.023, 0.027, 0.036, 0.044],
-        geometric_albedo: ['Generic_Bessell.V', [0.09, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
+        geometric_albedo: ['Generic/Bessell.V', [0.09, 0.09]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.82, G_2: 0.06}],
     },
 
     // T complex
     'T-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/T.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.12, 0.06]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.65, G_2: 0.19}],
+        geometric_albedo: ['Generic/Bessell.V', [0.12, 0.06]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.65, G_2: 0.19}],
     },
     'T-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.896, 0.956, 1.041, 1.083, 1.119, 1.149, 1.163, 1.174, 1.184],
         std: [0.027, 0.008, 0.011, 0.016, 0.019, 0.015, 0.015, 0.021, 0.037],
-        geometric_albedo: ['Generic_Bessell.V', [0.12, 0.06]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.65, G_2: 0.19}],
+        geometric_albedo: ['Generic/Bessell.V', [0.12, 0.06]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.65, G_2: 0.19}],
     },
 
     // M complex
@@ -291,48 +291,48 @@
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         spectral_slope: {start: 550, stop: 800, percent_per_100nm: [4.00, 1.97]}, // without the 900 nm band
         //spectral_slope: {start: 550, stop: 800, percent_per_100nm: [3.54, 0.90]}, // with the 900 nm band
-        geometric_albedo: ['Generic_Bessell.V', [0.15, 0.05]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.19, G_2: 0.34}],
+        geometric_albedo: ['Generic/Bessell.V', [0.15, 0.05]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.19, G_2: 0.34}],
     },
 
     // K complex
     'K-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/K.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.18, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.18, G_2: 0.40}],
+        geometric_albedo: ['Generic/Bessell.V', [0.18, 0.09]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.18, G_2: 0.40}],
     },
     'K-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.863, 0.943, 1.043, 1.087, 1.121, 1.138, 1.125, 1.110, 1.085],
         std: [0.024, 0.010, 0.010, 0.016, 0.019, 0.018, 0.020, 0.023, 0.038],
-        geometric_albedo: ['Generic_Bessell.V', [0.18, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.18, G_2: 0.40}],
+        geometric_albedo: ['Generic/Bessell.V', [0.18, 0.09]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.18, G_2: 0.40}],
     },
 
     // L complex (L, LQ, Ld)
     'L-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/L.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.19, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.16, G_2: 0.37}],
+        geometric_albedo: ['Generic/Bessell.V', [0.19, 0.09]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.16, G_2: 0.37}],
     },
     'L-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.818, 0.922, 1.066, 1.130, 1.179, 1.207, 1.201, 1.193, 1.188],
         std: [0.031, 0.013, 0.012, 0.020, 0.025, 0.024, 0.021, 0.020, 0.042],
-        geometric_albedo: ['Generic_Bessell.V', [0.19, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.16, G_2: 0.37}],
+        geometric_albedo: ['Generic/Bessell.V', [0.19, 0.09]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.16, G_2: 0.37}],
     },
     'Ld-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.799, 0.913, 1.080, 1.163, 1.228, 1.270, 1.280, 1.282, 1.288],
         std: [0.042, 0.021, 0.018, 0.027, 0.029, 0.034, 0.038, 0.041, 0.067],
-        geometric_albedo: ['Generic_Bessell.V', [0.19, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.16, G_2: 0.37}],
+        geometric_albedo: ['Generic/Bessell.V', [0.19, 0.09]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.16, G_2: 0.37}],
     },
 
     // O complex
@@ -341,172 +341,172 @@
     'O-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/O.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.21, 0.10]],
+        geometric_albedo: ['Generic/Bessell.V', [0.21, 0.10]],
     },
     'O-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.878, 0.952, 1.022, 1.042, 1.057, 1.036, 0.958, 0.870, 0.798],
         std: [0.026, 0.007, 0.006, 0.009, 0.012, 0.011, 0.015, 0.033, 0.048],
-        geometric_albedo: ['Generic_Bessell.V', [0.21, 0.10]],
+        geometric_albedo: ['Generic/Bessell.V', [0.21, 0.10]],
     },
 
     // S complex (S, SQ, SV, Sa, Sk, Sl, Sp, Sq, Sqw, Sr, Srw, Sv, Sw, R?)
     'S-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/S.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+        geometric_albedo: ['Generic/Bessell.V', [0.26, 0.08]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
     'S-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.813, 0.920, 1.060, 1.121, 1.170, 1.188, 1.145, 1.084, 1.034],
         std: [0.028, 0.011, 0.012, 0.018, 0.023, 0.024, 0.024, 0.028, 0.040],
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+        geometric_albedo: ['Generic/Bessell.V', [0.26, 0.08]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
     'Sa-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/Sa.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+        geometric_albedo: ['Generic/Bessell.V', [0.26, 0.08]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
     'Sa-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.748, 0.892, 1.094, 1.178, 1.243, 1.260, 1.216, 1.150, 1.091],
         std: [0.029, 0.011, 0.010, 0.014, 0.014, 0.019, 0.025, 0.036, 0.059],
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+        geometric_albedo: ['Generic/Bessell.V', [0.26, 0.08]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
     'Sk-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.859, 0.939, 1.039, 1.082, 1.115, 1.130, 1.092, 1.039, 1.001],
         std: [0.029, 0.011, 0.008, 0.010, 0.012, 0.013, 0.009, 0.011, 0.022],
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+        geometric_albedo: ['Generic/Bessell.V', [0.26, 0.08]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
     'Sl-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.790, 0.909, 1.076, 1.149, 1.209, 1.237, 1.205, 1.158, 1.131],
         std: [0.025, 0.009, 0.009, 0.013, 0.015, 0.017, 0.019, 0.026, 0.042],
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+        geometric_albedo: ['Generic/Bessell.V', [0.26, 0.08]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
     'Sq-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/Sq.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+        geometric_albedo: ['Generic/Bessell.V', [0.26, 0.08]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
     'Sq-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.851, 0.938, 1.039, 1.082, 1.115, 1.120, 1.069, 1.000, 0.936],
         std: [0.031, 0.011, 0.009, 0.017, 0.022, 0.028, 0.028, 0.028, 0.034],
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+        geometric_albedo: ['Generic/Bessell.V', [0.26, 0.08]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
     'Sr-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/Sr.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+        geometric_albedo: ['Generic/Bessell.V', [0.26, 0.08]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
     'Sr-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.777, 0.904, 1.069, 1.137, 1.188, 1.193, 1.123, 1.030, 0.936],
         std: [0.046, 0.023, 0.016, 0.024, 0.028, 0.031, 0.032, 0.028, 0.038],
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+        geometric_albedo: ['Generic/Bessell.V', [0.26, 0.08]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
     'Sv-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/Sv.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+        geometric_albedo: ['Generic/Bessell.V', [0.26, 0.08]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
     'Sw-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/Sw.txtU', // Fig. 8, wasn’t available on SMASS
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.08]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+        geometric_albedo: ['Generic/Bessell.V', [0.26, 0.08]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
     // no clear complex mapping of R-type in Mahlke2020, closest S was chosen
     // (it's in between of V and A and close to Sr according to Bus2002 fig 15)
     'R-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/R.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.11]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+        geometric_albedo: ['Generic/Bessell.V', [0.26, 0.11]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
     'R-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.792, 0.907, 1.073, 1.145, 1.209, 1.224, 1.110, 0.971, 0.889],
         std: [0.016, 0.006, 0.005, 0.006, 0.010, 0.010, 0.014, 0.015, 0.033],
-        geometric_albedo: ['Generic_Bessell.V', [0.26, 0.11]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
+        geometric_albedo: ['Generic/Bessell.V', [0.26, 0.11]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.08, G_2: 0.46}],
     },
 
     // A complex (A, AQ)
     'A-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/A.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.28, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.30, G_2: 0.39}],
+        geometric_albedo: ['Generic/Bessell.V', [0.28, 0.09]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.30, G_2: 0.39}],
     },
     'A-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.708, 0.868, 1.109, 1.214, 1.298, 1.311, 1.250, 1.187, 1.143],
         std: [0.026, 0.014, 0.013, 0.026, 0.038, 0.045, 0.059, 0.066, 0.063],
-        geometric_albedo: ['Generic_Bessell.V', [0.28, 0.09]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.30, G_2: 0.39}],
+        geometric_albedo: ['Generic/Bessell.V', [0.28, 0.09]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.30, G_2: 0.39}],
     },
 
     // Q complex (Q, QO, QV)
     'Q-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/Q.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.28, 0.11]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.36, G_2: 0.44}],
+        geometric_albedo: ['Generic/Bessell.V', [0.28, 0.11]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.36, G_2: 0.44}],
     },
     'Q-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.830, 0.930, 1.047, 1.087, 1.118, 1.107, 1.041, 0.952, 0.873],
         std: [0.044, 0.018, 0.018, 0.027, 0.032, 0.031, 0.023, 0.019, 0.032],
-        geometric_albedo: ['Generic_Bessell.V', [0.28, 0.11]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.36, G_2: 0.44}],
+        geometric_albedo: ['Generic/Bessell.V', [0.28, 0.11]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.36, G_2: 0.44}],
     },
 
     // V complex (V, Vw)
     'V-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/V.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.36, 0.11]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.10, G_2: 0.56}],
+        geometric_albedo: ['Generic/Bessell.V', [0.36, 0.11]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.10, G_2: 0.56}],
     },
     'V-type | Bus2002, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         wavelength_nm: [440, 500, 600, 650, 700, 750, 800, 850, 920],
         spectral_dist: [0.808, 0.916, 1.063, 1.124, 1.176, 1.183, 1.048, 0.879, 0.745],
         std: [0.052, 0.024, 0.019, 0.036, 0.049, 0.049, 0.039, 0.046, 0.056],
-        geometric_albedo: ['Generic_Bessell.V', [0.36, 0.11]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.10, G_2: 0.56}],
+        geometric_albedo: ['Generic/Bessell.V', [0.36, 0.11]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.10, G_2: 0.56}],
     },
 
     // E complex
     'E-type | Fornasier2011, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         spectral_slope: {start: 550, stop: 800, percent_per_100nm: [3.92, 1.73]},
-        geometric_albedo: ['Generic_Bessell.V', [0.46, 0.16]],
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.33, G_2: 0.45}],
+        geometric_albedo: ['Generic/Bessell.V', [0.46, 0.16]],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.33, G_2: 0.45}],
     },
     // E [I], [II] and [III] subgroups were first introduced in
     // https://www.lpi.usra.edu/meetings/lpsc2004/pdf/1812.pdf
@@ -514,23 +514,23 @@
     'E-type [I] | Fornasier2011, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         spectral_slope: {start: 550, stop: 800, percent_per_100nm: [4.60, 1.18]},
-        geometric_albedo: ['Generic_Bessell.V', 0.4],
+        geometric_albedo: ['Generic/Bessell.V', 0.4],
         // rounded mean albedo of 4 candidates (Fornasier2011) with SsoCard data as of February 2025
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.33, G_2: 0.45}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.33, G_2: 0.45}],
     },
     'E-type [II] | Fornasier2011, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         spectral_slope: {start: 550, stop: 800, percent_per_100nm: [5.15, 1.31]},
-        geometric_albedo: ['Generic_Bessell.V', 0.6],
+        geometric_albedo: ['Generic/Bessell.V', 0.6],
         // rounded mean albedo of 8 candidates (Fornasier2011) with SsoCard data as of February 2025
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.33, G_2: 0.45}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.33, G_2: 0.45}],
     },
     'E-type [III] | Fornasier2011, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type'],
         spectral_slope: {start: 550, stop: 800, percent_per_100nm: [2.43, 1.12]},
-        geometric_albedo: ['Generic_Bessell.V', 0.5],
+        geometric_albedo: ['Generic/Bessell.V', 0.5],
         // rounded mean albedo of 6 candidates (Fornasier2011) with SsoCard data as of February 2025
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.33, G_2: 0.45}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.33, G_2: 0.45}],
     },
 
     // X complex (X, XD, XL, Xe, Xk, Xt)
@@ -538,7 +538,7 @@
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/X.txtU',
         // no albedo by definition
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
     },
     'X-type | Bus2002': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
@@ -546,13 +546,13 @@
         spectral_dist: [0.940, 0.977, 1.013, 1.030, 1.045, 1.057, 1.062, 1.060, 1.058],
         std: [0.023, 0.008, 0.008, 0.012, 0.016, 0.019, 0.021, 0.026, 0.038],
         // no albedo by definition
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
     },
     'Xc-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/Xc.txtU',
         // no albedo by definition
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
     },
     'Xc-type | Bus2002': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
@@ -560,13 +560,13 @@
         spectral_dist: [0.920, 0.969, 1.019, 1.038, 1.049, 1.054, 1.047, 1.037, 1.020],
         std: [0.030, 0.012, 0.008, 0.010, 0.011, 0.012, 0.015, 0.020, 0.033],
         // no albedo by definition
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
     },
     'Xe-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/Xe.txtU',
         // no albedo by definition
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
     },
     'Xe-type | Bus2002': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
@@ -574,13 +574,13 @@
         spectral_dist: [0.921, 0.948, 1.032, 1.060, 1.082, 1.094, 1.093, 1.088, 1.078],
         std: [0.039, 0.023, 0.019, 0.033, 0.041, 0.039, 0.039, 0.041, 0.050],
         // no albedo by definition
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
     },
     'Xk-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/Xk.txtU',
         // no albedo by definition
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
     },
     'Xk-type | Bus2002': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
@@ -588,13 +588,13 @@
         spectral_dist: [0.900, 0.959, 1.033, 1.061, 1.084, 1.097, 1.098, 1.098, 1.098],
         std: [0.037, 0.012, 0.010, 0.013, 0.014, 0.018, 0.020, 0.023, 0.034],
         // no albedo by definition
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
     },
     'Xn-type | DeMeo2009, Mahlke2020': {
         tags: ['Solar System', 'minor body/asteroid', 'class/asteroid spectral type/Bus-DeMeo taxonomy'],
         file: 'spectra/files/DeMeo2009/Xn.txtU',
         // no albedo by definition
-        phase_function: ['Misc_Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
+        phase_function: ['Misc/Atlas.cyan', 'HG1G2', {G_1: 0.11, G_2: 0.45}],
     },
 
 
@@ -606,84 +606,84 @@
     ],
     'Class BB | Belskaya2015': { // Blue/Neutral
         tags: ['Solar System', 'minor body/centaur', 'minor body/TNO', 'class/distant object taxonomic class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.69, 0.05], 'V-R': [0.38, 0.03], 'V-I': [0.75, 0.04]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.112], // mean; dark
+        geometric_albedo: ['Generic/Bessell.V', 0.112], // mean; dark
     },
     'Class BB | Merlin2017, Belskaya2015': { // Blue/Neutral
         tags: ['featured', 'Solar System', 'minor body/centaur', 'minor body/TNO', 'class/distant object taxonomic class'],
         file: 'spectra/files/Merlin2017/BB.txtU',
-        geometric_albedo: ['Generic_Bessell.V', 0.112], // mean; dark
+        geometric_albedo: ['Generic/Bessell.V', 0.112], // mean; dark
     },
     'Class BR | Belskaya2015': { // Intermediate Blue-Red
         tags: ['Solar System', 'minor body/centaur', 'minor body/TNO', 'class/distant object taxonomic class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.74, 0.05], 'V-R': [0.48, 0.03], 'V-I': [0.96, 0.05]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.051], // mean
+        geometric_albedo: ['Generic/Bessell.V', 0.051], // mean
     },
     'Class BR | Merlin2017, Belskaya2015': { // Intermediate Blue-Red
         tags: ['featured', 'Solar System', 'minor body/centaur', 'minor body/TNO', 'class/distant object taxonomic class'],
         file: 'spectra/files/Merlin2017/BR.txtU',
-        geometric_albedo: ['Generic_Bessell.V', 0.051], // mean
+        geometric_albedo: ['Generic/Bessell.V', 0.051], // mean
     },
     'Class IR | Belskaya2015': { // Moderately Red
         tags: ['Solar System', 'minor body/centaur', 'minor body/TNO', 'class/distant object taxonomic class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.93, 0.06], 'V-R': [0.58, 0.04], 'V-I': [1.14, 0.07]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.110], // mean
+        geometric_albedo: ['Generic/Bessell.V', 0.110], // mean
     },
     'Class IR | Merlin2017, Belskaya2015': { // Moderately Red
         tags: ['featured', 'Solar System', 'minor body/centaur', 'minor body/TNO', 'class/distant object taxonomic class'],
         file: 'spectra/files/Merlin2017/IR.txtU',
-        geometric_albedo: ['Generic_Bessell.V', 0.110], // mean
+        geometric_albedo: ['Generic/Bessell.V', 0.110], // mean
     },
     'Class RR | Belskaya2015': { // Very Red
         tags: ['Solar System', 'minor body/centaur', 'minor body/TNO', 'class/distant object taxonomic class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [1.07, 0.06], 'V-R': [0.69, 0.04], 'V-I': [1.34, 0.09]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.131], // mean
+        geometric_albedo: ['Generic/Bessell.V', 0.131], // mean
     },
     'Class RR | Merlin2017, Belskaya2015': { // Very Red
         tags: ['featured', 'Solar System', 'minor body/centaur', 'minor body/TNO', 'class/distant object taxonomic class'],
         file: 'spectra/files/Merlin2017/RR.txtU',
-        geometric_albedo: ['Generic_Bessell.V', 0.131], // mean
+        geometric_albedo: ['Generic/Bessell.V', 0.131], // mean
     },
 
 
     // Orbital classes
     'Jovian irregulars | Graykowski2018, Grav2015': {
         tags: ['Solar System/Jovian system', 'natural satellite/irregular moon', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.75, 0.01], 'V-R': [0.44, 0.02]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
+        geometric_albedo: ['Generic/Bessell.V', [0.044, 0.012]], // mean including Sycorax
         phase_function: ['HG', {G: [0.10, 0.15]}],
     },
     'Jovian irregulars i=28° | Grav2003, Grav2015': { // Himalia group
         tags: ['Solar System/Jovian system', 'natural satellite/irregular moon', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.66, 0.02], 'V-R': [0.36, 0.01]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.043, 0.011]], // Average of members with measured albedos
+        geometric_albedo: ['Generic/Bessell.V', [0.043, 0.011]], // Average of members with measured albedos
         phase_function: ['HG', {G: [0.10, 0.15]}],
     },
     'Jovian irregulars i=149° | Grav2003, Grav2015': { // Pasiphae and Ananke groups
         tags: ['Solar System/Jovian system', 'natural satellite/irregular moon', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.75, 0.04], 'V-R': [0.41, 0.08]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.041, 0.008]], // Average of members with measured albedos
+        geometric_albedo: ['Generic/Bessell.V', [0.041, 0.008]], // Average of members with measured albedos
         phase_function: ['HG', {G: [0.10, 0.15]}],
     },
     'Schemel2021': [
@@ -693,12 +693,12 @@
     ],
     'Jupiter trojans | MBOSS, Schemel2021': {
         tags: ['featured', 'Solar System', 'minor body/Jupiter trojan', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'U-B': 0.100, 'B-V': [0.782, 0.096], 'V-R': [0.446, 0.056], 'R-I': [0.420, 0.061]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.052, 0.023]],
-        phase_function: ['Palomar_ZTF.r', 'HG', {G: [0.24, 0.16]}], // Table 2
+        geometric_albedo: ['Generic/Bessell.V', [0.052, 0.023]],
+        phase_function: ['Palomar/ZTF.r', 'HG', {G: [0.24, 0.16]}], // Table 2
     },
     'Fornasier2007': [
         'Visible spectroscopic and photometric survey of Jupiter Trojans: Final results on dynamical families',
@@ -708,14 +708,14 @@
     'Jupiter trojans: Greek camp (L4) | Fornasier2007, Schemel2021': { // Leading cloud
         tags: ['Solar System', 'minor body/Jupiter trojan', 'class/orbital class'],
         spectral_slope: {start: 550, stop: 800, percent_per_100nm: [7.33, 4.24]}, // Section 4.3; without Eurybates family
-        geometric_albedo: ['Generic_Bessell.V', [0.052, 0.023]],
-        phase_function: ['Palomar_ZTF.r', 'HG', {G: [0.24, 0.16]}], // Table 2
+        geometric_albedo: ['Generic/Bessell.V', [0.052, 0.023]],
+        phase_function: ['Palomar/ZTF.r', 'HG', {G: [0.24, 0.16]}], // Table 2
     },
     'Jupiter trojans: Trojan camp (L5) | Fornasier2007, Schemel2021': { // Trailing cloud
         tags: ['Solar System', 'minor body/Jupiter trojan', 'class/orbital class'],
         spectral_slope: {start: 550, stop: 800, percent_per_100nm: [9.15, 4.19]}, // Section 4.3
-        geometric_albedo: ['Generic_Bessell.V', [0.052, 0.023]],
-        phase_function: ['Palomar_ZTF.r', 'HG', {G: [0.24, 0.16]}], // Table 2
+        geometric_albedo: ['Generic/Bessell.V', [0.052, 0.023]],
+        phase_function: ['Palomar/ZTF.r', 'HG', {G: [0.24, 0.16]}], // Table 2
     },
     'Wong2017': [
         '0.72.5μm Spectra of Hilda Asteroids',
@@ -730,58 +730,58 @@
     'Jupiter trojans: Less-red | Wong2017, Emery2011, Schemel2021': {
         tags: ['Solar System', 'minor body/Jupiter trojan', 'class/orbital class'],
         file: 'spectra/files/Wong2017/LessRedTrojans_Wong2017.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.051, 0.016]],
-        phase_function: ['Palomar_ZTF.r', 'HG', {G: [0.14, 0.05]}],
+        geometric_albedo: ['Generic/Bessell.V', [0.051, 0.016]],
+        phase_function: ['Palomar/ZTF.r', 'HG', {G: [0.14, 0.05]}],
     },
     'Jupiter trojans: Red | Wong2017, Emery2011, Schemel2021': {
         tags: ['Solar System', 'minor body/Jupiter trojan', 'class/orbital class'],
         file: 'spectra/files/Wong2017/RedTrojans_Wong2017.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.055, 0.016]],
-        phase_function: ['Palomar_ZTF.r', 'HG', {G: [0.22, 0.07]}],
+        geometric_albedo: ['Generic/Bessell.V', [0.055, 0.016]],
+        phase_function: ['Palomar/ZTF.r', 'HG', {G: [0.22, 0.07]}],
     },
     'Saturnian irregulars | Graykowski2018, Grav2015': {
         tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.69, 0.04], 'V-R': [0.44, 0.03]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
+        geometric_albedo: ['Generic/Bessell.V', [0.044, 0.012]], // mean including Sycorax
         phase_function: ['HG', {G: [0.10, 0.15]}],
     },
     'Saturnian irregulars i=34° | Grav2003, Grav2007': { // Gallic group
         tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.91, 0.05], 'V-R': [0.48, 0.01]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
+        geometric_albedo: ['Generic/Bessell.V', [0.044, 0.012]], // mean including Sycorax
         phase_function: ['HG', {G: [0.39, 0.19]}], // Average of members with measured phase functions
     },
     'Saturnian irregulars i=46° | Grav2003, Grav2007': { // Inuit group
         tags: ['Solar System/Saturnian system', 'natural satellite/irregular moon', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.79, 0.01], 'V-R': [0.51, 0.02]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
+        geometric_albedo: ['Generic/Bessell.V', [0.044, 0.012]], // mean including Sycorax
         phase_function: ['HG', {G: [0.09, 0.21]}], // Average of members with measured phase functions
     },
     'Uranian irregulars | Graykowski2018, Grav2015': {
         tags: ['Solar System/Uranian system', 'natural satellite/irregular moon', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.84, 0.03], 'V-R': [0.53, 0.03]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
+        geometric_albedo: ['Generic/Bessell.V', [0.044, 0.012]], // mean including Sycorax
         phase_function: ['HG', {G: [0.10, 0.15]}],
     },
     'Neptunian irregulars | Graykowski2018, Grav2015': {
         tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.77, 0.11], 'V-R': [0.50, 0.09]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.012]], // mean including Sycorax
+        geometric_albedo: ['Generic/Bessell.V', [0.044, 0.012]], // mean including Sycorax
         phase_function: ['HG', {G: [0.10, 0.15]}],
     },
     'Jewitt2018': [
@@ -791,86 +791,86 @@
     ],
     'Neptune trojans | Jewitt2018': {
         tags: ['Solar System', 'minor body/Neptune trojan', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.77, 0.01], 'V-R': [0.44, 0.01]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.033], // assumed albedo from 2001 QR322
+        geometric_albedo: ['Generic/Bessell.V', 0.033], // assumed albedo from 2001 QR322
     },
     'Comets: Short-period | MBOSS, Ferrín2007': {
         tags: ['Solar System', 'minor body/comet/short period comet', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.868, 0.167], 'V-R': [0.497, 0.104], 'R-I': [0.446, 0.099]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.04], // estimation
+        geometric_albedo: ['Generic/Bessell.V', 0.04], // estimation
         phase_function: ['phase coefficient', {beta: [0.046, 0.013]}],
     },
     'Comets: Jupiter family | Jewitt2015, Snodgrass2011': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.87, 0.05], 'V-R': [0.50, 0.03], 'R-I': [0.46, 0.03]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.013]],
+        geometric_albedo: ['Generic/Bessell.V', [0.044, 0.013]],
         phase_function: ['phase coefficient', {beta: [0.053, 0.016]}],
     },
     'Comets: Jupiter family, active | Jewitt2015, Snodgrass2011': {
         tags: ['Solar System', 'minor body/comet/short period comet/Jupiter family comet', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.75, 0.02], 'V-R': [0.47, 0.02], 'R-I': [0.43, 0.02]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.044, 0.013]],
+        geometric_albedo: ['Generic/Bessell.V', [0.044, 0.013]],
         phase_function: ['phase coefficient', {beta: [0.053, 0.016]}],
     },
     'Comets: Long-period | MBOSS': {
         tags: ['Solar System', 'minor body/comet/long period comet', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.786, 0.070], 'V-R': [0.461, 0.060], 'R-I': [0.445, 0.071]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.101],
+        geometric_albedo: ['Generic/Bessell.V', 0.101],
     },
     'Comets: Long-period, active | Jewitt2015': {
         tags: ['Solar System', 'minor body/comet/long period comet', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.77, 0.02], 'V-R': [0.44, 0.02], 'R-I': [0.44, 0.02]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
     'Damocloids | Jewitt2015, Licandro2016': {
         tags: ['Solar System', 'minor body/centaur/Damocloid', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.80, 0.02], 'V-R': [0.51, 0.02], 'R-I': [0.47, 0.02]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.051, 0.023]],
+        geometric_albedo: ['Generic/Bessell.V', [0.051, 0.023]],
     },
     'Centaurs | MBOSS, Müller2020, Bauer2003': {
         tags: ['featured', 'Solar System', 'minor body/centaur', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.868, 0.167], 'V-R': [0.550, 0.109], 'R-I': [0.500, 0.129]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.074, 0.043]], // Table 1 (mean)
+        geometric_albedo: ['Generic/Bessell.V', [0.074, 0.043]], // Table 1 (mean)
         phase_function: ['HG', {G: [0.07, 0.13]}], // average of Bauer2003 phase functions
     },
     'Centaurs: Active | Jewitt2015, Jewitt2009': {
         tags: ['Solar System', 'minor body/centaur/active centaur', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.80, 0.03], 'V-R': [0.50, 0.03], 'R-I': [0.57, 0.03]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.R', 0.10], // assumed by Jewitt2009
+        geometric_albedo: ['Generic/Bessell.R', 0.10], // assumed by Jewitt2009
     },
     'Centaurs: Inactive | Jewitt2015, Müller2020, Bauer2003': {
         tags: ['Solar System', 'minor body/centaur', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.93, 0.04], 'V-R': [0.55, 0.03], 'R-I': [0.45, 0.02]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.074, 0.043]], // Table 1 (mean)
+        geometric_albedo: ['Generic/Bessell.V', [0.074, 0.043]], // Table 1 (mean)
         phase_function: ['HG', {G: [0.07, 0.13]}], // average of Bauer2003 phase functions
     },
     'Tegler2016': [
@@ -880,78 +880,78 @@
     ],
     'Centaurs: Gray | Tegler2016, Bauer2003': {
         tags: ['Solar System', 'minor body/centaur', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-R': [1.22, 0.07]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.059, 0.012]],
+        geometric_albedo: ['Generic/Bessell.V', [0.059, 0.012]],
         phase_function: ['HG', {G: [0.09, 0.12]}], // average of Bauer2003 phase functions (gray centaurs)
     },
     'Centaurs: Red | Tegler2016, Bauer2003': {
         tags: ['Solar System', 'minor body/centaur', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-R': [1.71, 0.14]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.12, 0.054]],
+        geometric_albedo: ['Generic/Bessell.V', [0.12, 0.054]],
         phase_function: ['HG', {G: [0.02, 0.21]}], // average of Bauer2003 phase functions (red centaurs)
     },
     'Plutinos | MBOSS, Müller2020': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.884, 0.168], 'V-R': [0.550, 0.111], 'R-I': [0.532, 0.136]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.114, 0.064]], // Table 1 (mean)
+        geometric_albedo: ['Generic/Bessell.V', [0.114, 0.064]], // Table 1 (mean)
         phase_integral: [0.289, 0.027], // average of Arawn (Verbiscer2019), and Ixion (Helfenstein2025) phase integrals
     },
     'Other resonances | MBOSS, Müller2020': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'U-B': [0.273, 0.090], 'B-V': [0.950, 0.126], 'V-R': [0.589, 0.105], 'R-I': [0.545, 0.093]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.148, 0.071]], // Table 1 (mean)
+        geometric_albedo: ['Generic/Bessell.V', [0.148, 0.071]], // Table 1 (mean)
         phase_function: ['HG', {G: [0.12, 0.46]}], // average of Sheppard2003 phase functions (other resonant TNOs)
     },
     'Haumea family | PinillaAlonso2008': {
         tags: ['Solar System', 'minor body/TNO/Haumea family', 'class/orbital class'],
         spectral_slope: {start: 520, stop: 1000, percent_per_100nm: [0.4, 1.0]}, // collective wavelength range of averaged slopes
-        geometric_albedo: ['Generic_Bessell.V', 0.7], // Haumea-like albedo
+        geometric_albedo: ['Generic/Bessell.V', 0.7], // Haumea-like albedo
     },
     'Cubewano: Hot, inner objects | MBOSS, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'U-B': [0.274, 0.168], 'B-V': [0.877, 0.174], 'V-R': [0.538, 0.108], 'R-I': [0.531, 0.151]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.102, 0.072]], // Table 1 (mean)
+        geometric_albedo: ['Generic/Bessell.V', [0.102, 0.072]], // Table 1 (mean)
         phase_integral: [0.310, 0.058], // average of 2012 HZ84 (Verbiscer2019), and Máni (Helfenstein2025) phase integrals
     },
     'Cubewano: Cold, outer objects | MBOSS, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'U-B': [0.593, 0.123], 'B-V': [1.005, 0.135], 'V-R': [0.630, 0.089], 'R-I': [0.594, 0.104]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.132, 0.045]], // Table 1 (mean)
+        geometric_albedo: ['Generic/Bessell.V', [0.132, 0.045]], // Table 1 (mean)
         phase_integral: [0.324, 0.067], // average of Arrokoth (Stern2019), 2011 HJ103, 2011 JY31 (Verbiscer2019), 2014 OE394, and 2002 KX14 (Helfenstein2025) phase integrals
     },
     'SDO | MBOSS, Müller2020': {
         tags: ['featured', 'Solar System', 'minor body/TNO/scattered', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'U-B': [0.334, 0.144], 'B-V': [0.846, 0.133], 'V-R': [0.515, 0.090], 'R-I': [0.515, 0.102]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', [0.075, 0.046]], // Table 1 (mean)
+        geometric_albedo: ['Generic/Bessell.V', [0.075, 0.046]], // Table 1 (mean)
         phase_function: ['HG', {G: [-0.13, 0.20]}], // average of Sheppard2002 + Sheppard2003 + Rousselot2005b phase functions (SDOs)
     },
     'Detached objects | MBOSS': {
         tags: ['featured', 'Solar System', 'minor body/TNO/detached TNO', 'class/orbital class'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         color_indices: {'U-B': [0.180, 0.156], 'B-V': [0.882, 0.118], 'V-R': [0.537, 0.092], 'R-I': [0.514, 0.098]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.108], // albedo from Zelario’s sheet
+        geometric_albedo: ['Generic/Bessell.V', 0.108], // albedo from Zelario’s sheet
     },
 }

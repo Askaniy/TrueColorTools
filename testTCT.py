@@ -12,10 +12,10 @@ class TestTCT(unittest.TestCase):
     def setUp(self):
         self.sun = core.Spectrum.from_file('spectra/files/CALSPEC/sun_reference_stis_002.fits', name='Sun') # W / (m² nm)
         self.vega = core.Spectrum.from_file('spectra/files/CALSPEC/alpha_lyr_stis_011.fits', name='Vega') # W / (m² nm)
-        self.v = core.get_filter('Generic_Bessell.V')
-        self.ubv = core.FilterSystem.from_list(('Generic_Bessell.U', 'Generic_Bessell.B', 'Generic_Bessell.V'), name='UBV')
-        self.r = core.get_filter('StilesBurch2deg.r')
-        self.rgb = core.FilterSystem.from_list(('StilesBurch2deg.r', 'StilesBurch2deg.g', 'StilesBurch2deg.b'), name='RGB')
+        self.v = core.get_filter('Generic/Bessell.V')
+        self.ubv = core.FilterSystem.from_list(('Generic/Bessell.U', 'Generic/Bessell.B', 'Generic/Bessell.V'), name='UBV')
+        self.r = core.get_filter('StilesBurch/2deg.r')
+        self.rgb = core.FilterSystem.from_list(('StilesBurch/2deg.r', 'StilesBurch/2deg.g', 'StilesBurch/2deg.b'), name='RGB')
 
     def test_mean_nm(self):
         np.testing.assert_allclose(self.sun.mean_nm(), 857.052056, rtol=0.01)
@@ -196,19 +196,19 @@ class TestTCT(unittest.TestCase):
         db = {
             'Phoebe (S IX) | Grav2003, Miller2011': {
                 'tags': ['featured', 'Solar System/Saturnian system', 'natural satellite/irregular moon'],
-                'photometric_system': 'Generic_Bessell',
+                'filter_set': 'Generic/Bessell',
                 'color_indices': {'B-V': 0.63, 'V-R': 0.35, 'V-I': 0.64},
                 'calibration_system': 'Vega',
                 'is_reflecting_sunlight': True,
-                'geometric_albedo': ['Generic_Bessell.V', [0.0857, 0.0022]],
-                'spherical_albedo': ['Generic_Bessell.V', [0.0267, 0.0083]],
+                'geometric_albedo': ['Generic/Bessell.V', [0.0857, 0.0022]],
+                'spherical_albedo': ['Generic/Bessell.V', [0.0267, 0.0083]],
             },
             'Nereid (N II) | Schaefer2000, Kiss2016, Thomas1991': {
                 'tags': ['featured', 'Solar System/Neptunian system', 'natural satellite/irregular moon'],
-                'photometric_system': 'Generic_Bessell',
+                'filter_set': 'Generic/Bessell',
                 'filters': ['U', 'B', 'V', 'R', 'I'],
                 'spectral_dist': [0.90, 0.93, 1, 1.13, 0.99],
-                'geometric_albedo': ['Generic_Bessell.V', [0.24, 0.02]],
+                'geometric_albedo': ['Generic/Bessell.V', [0.24, 0.02]],
                 'phase_integral': 0.5,
             },
         }

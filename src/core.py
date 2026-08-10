@@ -871,7 +871,7 @@ def get_filter(name: str | float) -> Spectrum:
         # "name.isnumeric() or not isinstance(name, str)"
     except ValueError:
         try:
-            file = str(next(Path('filters').glob(f'{name}.*')))
+            file = str(next(Path('filters').glob(f'{name.replace("/", "_")}.*')))
             profile = Spectrum.from_file(file, name, is_filter=True)
         except StopIteration:
             raise FilterNotFoundError(name)
@@ -1233,7 +1233,7 @@ class _PhotospectralObject(_TrueColorToolsObject):
         return higher_dim.__class__(filter_system, br, std, name=higher_dim.name)
 
 
-stub_filter_system = FilterSystem.from_list(('Generic_Bessell.B', 'Generic_Bessell.V'))
+stub_filter_system = FilterSystem.from_list(('Generic/Bessell.B', 'Generic/Bessell.V'))
 
 class Photospectrum(_PhotospectralObject):
     """
@@ -1588,32 +1588,32 @@ class ReflectingBody:
                 if self.geometric is not None:
                     return self.geometric, False
                 elif self.spherical is not None:
-                    spherical_in_V = self.spherical @ get_filter('Generic_Bessell.V')
+                    spherical_in_V = self.spherical @ get_filter('Generic/Bessell.V')
                     geometric_in_V, estimated = self.photometric_model.estimate_geometric_albedo(spherical_in_V)
-                    return self.spherical.scaled_at(get_filter('Generic_Bessell.V'), geometric_in_V), estimated
+                    return self.spherical.scaled_at(get_filter('Generic/Bessell.V'), geometric_in_V), estimated
                 else:
                     return self.unscaled, None
             case 'spherical':
                 if self.spherical is not None:
                     return self.spherical, False
                 elif self.geometric is not None:
-                    geometric_in_V = self.geometric @ get_filter('Generic_Bessell.V')
+                    geometric_in_V = self.geometric @ get_filter('Generic/Bessell.V')
                     spherical_in_V, estimated = self.photometric_model.estimate_spherical_albedo(geometric_in_V)
-                    return self.geometric.scaled_at(get_filter('Generic_Bessell.V'), spherical_in_V), estimated
+                    return self.geometric.scaled_at(get_filter('Generic/Bessell.V'), spherical_in_V), estimated
                 else:
                     return self.unscaled, None
 
 
 sun_SI = Spectrum.from_file('spectra/files/CALSPEC/sun_reference_stis_002.fits', name='Sun') # W / (m² nm)
 sun_SI.std = None # removing uncertainty to facilitate calculations and simplify spectrum plots
-sun_in_V, _ = sun_SI @ get_filter('Generic_Bessell.V')
-sun_norm = sun_SI.scaled_at(get_filter('Generic_Bessell.V'))
+sun_in_V, _ = sun_SI @ get_filter('Generic/Bessell.V')
+sun_norm = sun_SI.scaled_at(get_filter('Generic/Bessell.V'))
 sun_filter = sun_SI.normalize()
 
 vega_SI = Spectrum.from_file('spectra/files/CALSPEC/alpha_lyr_stis_011.fits', name='Vega') # W / (m² nm)
 vega_SI.std = None # removing uncertainty to facilitate calculations and simplify spectrum plots
-vega_in_V, _ = vega_SI @ get_filter('Generic_Bessell.V')
-vega_norm = vega_SI.scaled_at(get_filter('Generic_Bessell.V'))
+vega_in_V, _ = vega_SI @ get_filter('Generic/Bessell.V')
+vega_norm = vega_SI.scaled_at(get_filter('Generic/Bessell.V'))
 
 
 def _create_TCT_object(
@@ -1662,8 +1662,8 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
     - `spectral_slope` (dict): sets the grid in the format `{start: …, stop: …, power/percent_per_100nm: …}`
     - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
     - `filters` (list): list of filter names present in the `filters` folder (can be mixed with nm values)
+    - `filter_set` (str): can be used to avoid repeating the name of the photometric system or instrument
     - `color_indices` (list): dictionary of color indices, formatted `{'filter1-filter2': …, …}`
-    - `photometric_system` (str): a way to parenthesize the photometric system name (separator is a dot)
     - `calibration_system` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
     - `geometric_albedo` (list): scales the data to geometric albedo spectrum, syntax is `[filter/nm, value]`
     - `spherical_albedo` (list): scales the data to spherical albedo spectrum, syntax is `[filter/nm, value]`
@@ -1746,9 +1746,9 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
             filters = content['filters']
         elif 'color_indices' in content:
             filters, br, std = aux.color_indices_parser(content['color_indices'])
-        if 'photometric_system' in content:
+        if 'filter_set' in content:
             # regular filter if name is string, else "delta-filter" (wavelength)
-            filter_system = content['photometric_system']
+            filter_system = content['filter_set']
             filters = [f'{filter_system}.{short_name}' if isinstance(short_name, str) else short_name for short_name in filters]
     # Phase function reading
     if 'phase_function' in content:
@@ -1869,7 +1869,7 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
 # CIE 1931 XYZ color matching functions, 2-deg
 # https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer
 # http://www.cvrl.org/cie.htm
-xyz_cmf = FilterSystem.from_list(('CIE_1931_2deg.x', 'CIE_1931_2deg.y', 'CIE_1931_2deg.z'))
+xyz_cmf = FilterSystem.from_list(('CIE/1931_2deg.x', 'CIE/1931_2deg.y', 'CIE/1931_2deg.z'))
 visible_range = xyz_cmf.nm # original CMF definition range is 360-830 nm
 #visible_range = aux.grid(380, 730, 5) # for values greater than 0.001, saves 27% of memory used
 #xyz_cmf = xyz_cmf.define_on_range(visible_range)

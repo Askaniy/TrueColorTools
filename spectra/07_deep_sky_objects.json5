@@ -123,7 +123,7 @@
     ],
     'Galactic cirri | Zhao2024': {
         tags: ['extrasolar', 'DSO/interstellar dust'],
-        photometric_system: 'BOK_BASS',
+        filter_set: 'BOK/BASS',
         filters: ['g', 'r'],
         spectral_dist: [[0.41, +0.17, -0.18], [0.51, +0.16, -0.20]], // Figure 9
         is_albedo: true
@@ -137,7 +137,7 @@
     // CW Leonis or IRC +10216 is a variable carbon star
     'Envelope of CW Leonis | Mauron2003': {
         tags: ['extrasolar', 'DSO/interstellar dust', 'DSO/nebula'],
-        photometric_system: 'Generic_Bessell',
+        filter_set: 'Generic/Bessell',
         filters: ['U', 'B', 'V'],
         magnitudes: [[25.85, 0.15], [25.70, 0.10], [25.20, 0.10]], // mag/arcsec²
         calibration_system: 'Vega',
@@ -150,7 +150,7 @@
     ],
     'LDN 1642 | Mattila2023': {
         tags: ['extrasolar', 'DSO/interstellar dust'],
-        photometric_system: 'Generic_Stromgren',
+        filter_set: 'Generic/Stromgren',
         filters: ['u', 384, 416, 'b', 'y'],
         spectral_dist: [1., 1.38, 1.739, 1.443, 1.198], // Table 1
         is_emissive: true, // scattered light

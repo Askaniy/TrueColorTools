@@ -163,7 +163,7 @@ def generate_layout(
         [
             sg.Input(size=1, key='tab1_convolved', expand_x=True),
             sg.Text(tr.gui_in_filter[lang], key='tab1_in_filterN'),
-            sg.InputCombo(filtersDB, 'Generic_Bessell.V', enable_events=True, key='tab1_in_filter')
+            sg.InputCombo(filtersDB, 'Generic/Bessell.V', enable_events=True, key='tab1_in_filter')
         ],
         [sg.T()],
         [sg.Button(button_text=tr.gui_plot[lang], size=button_size, key='tab1_plot')],

@@ -37,7 +37,7 @@ plt.rcParams |= dark_theme
 
 
 # http://www.cvrl.org/stilesburch2_ind.htm
-cmfs = FilterSystem.from_list(('StilesBurch2deg.r', 'StilesBurch2deg.g', 'StilesBurch2deg.b'), name='RGB')
+cmfs = FilterSystem.from_list(('StilesBurch/2deg.r', 'StilesBurch/2deg.g', 'StilesBurch/2deg.b'), name='RGB')
 
 def close_figure(figure: Figure):
     """ Removes the figure from memory """
