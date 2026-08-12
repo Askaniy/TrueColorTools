@@ -1657,7 +1657,7 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
     - `wavelength_nm` (list): list of wavelengths in nanometers
     - `spectral_dist` (list): same-size list of "brightness" in energy spectral density per wavelength units
     - `magnitudes` (list): same-size list of magnitudes
-    - `std` (list/number): same-size list of standard deviations (or a common uncertainty)
+    - `uncertainty` (list/number): same-size list of standard deviations (or a common uncertainty)
     - `wavelength_range` (dict): sets the wavelength grid in the format `{start: …, stop: …, step: …}`
     - `spectral_slope` (dict): sets the grid in the format `{start: …, stop: …, power/percent_per_100nm: …}`
     - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
@@ -1703,14 +1703,14 @@ def database_parser(name: ObjectName, content: dict) -> EmittingBody | Reflectin
         # Brightness reading
         if 'spectral_dist' in content:
             br, std = aux.parse_value_std_list(content['spectral_dist'])
-            if 'std' in content:
-                std = aux.repeat_if_value(content['std'], len(br))
+            if 'uncertainty' in content:
+                std = aux.repeat_if_value(content['uncertainty'], len(br))
         elif 'magnitudes' in content:
             mag, std = aux.parse_value_std_list(content['magnitudes'])
             br = aux.mag2irradiance(mag)
             br /= br.mean() # simple calibration for data not scaled by albedo
-            if 'std' in content:
-                std = aux.repeat_if_value(content['std'], len(br))
+            if 'uncertainty' in content:
+                std = aux.repeat_if_value(content['uncertainty'], len(br))
             if std is not None:
                 std = aux.std_mag2std_irradiance(std, br)
         # Spectrum reading

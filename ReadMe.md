@@ -87,7 +87,7 @@ Supported input keys of a database unit:
 - `wavelength_nm` (list): list of wavelengths in nanometers
 - `spectral_dist` (list): same-size list of "brightness" in energy spectral density per wavelength units
 - `magnitudes` (list): same-size list of magnitudes
-- `std` (list/number): same-size list of standard deviations (or a common uncertainty)
+- `uncertainty` (list/number): same-size list of standard deviations (or a common uncertainty)
 - `wavelength_range` (dict): sets the wavelength grid in the format `{start: …, stop: …, step: …}`
 - `spectral_slope` (dict): sets the grid in the format `{start: …, stop: …, power/percent_per_100nm: …}`
 - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder

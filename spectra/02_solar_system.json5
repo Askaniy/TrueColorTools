@@ -230,14 +230,14 @@
         tags: ['Solar System', 'planetary body/planet/Venus'],
         wavelength_nm: [540, 620, 670, 760, 870],
         spectral_dist: [0.013, 0.044, 0.034, 0.069, 0.096], // extracted from Fig. 8
-        std: [0.008, 0.010, 0.010, 0.016, 0.023],
+        uncertainty: [0.008, 0.010, 0.010, 0.016, 0.023],
         is_albedo: true,
     },
     'Surface of Venus: Venera 10 | Ekonomov1980': {
         tags: ['Solar System', 'planetary body/planet/Venus'],
         wavelength_nm: [540, 610, 660, 750, 880],
         spectral_dist: [0.044, 0.061, 0.066, 0.073, 0.158], // extracted from Fig. 8
-        std: [0.012, 0.015, 0.016, 0.021, 0.047],
+        uncertainty: [0.012, 0.015, 0.016, 0.021, 0.047],
         is_albedo: true,
     },
     'Ekonomov1979': [
@@ -629,7 +629,7 @@
             0.01305, 0.01312, 0.01484, 0.01489, 0.01699, 0.01766, 0.02037, 0.02137, 0.02177, 0.02641, 0.02769,
             0.02743, 0.02732, 0.02835, 0.03083, 0.03316, 0.03499, 0.03713, 0.03940, 0.04057, 0.03880
         ],
-        std: [ // originally given as %
+        uncertainty: [ // originally given as %
             0.00450, 0.00299, 0.00402, 0.00348, 0.00314, 0.00272, 0.00257, 0.00199, 0.00059, 0.00071, 0.00078,
             0.00093, 0.00049, 0.00060, 0.00089, 0.00096, 0.00129, 0.00104, 0.00122, 0.00110, 0.00151
         ],
@@ -699,7 +699,7 @@
         filter_set: 'HST/WFPC2-WF',
         filters: ['F255W', 'F336W', 'F410M', 'F555W', 'F953N'], // Filters from Table 1 of West et al. (1995)
         spectral_dist: [0.339, 0.305, 0.421, 0.528, 0.514],
-        std: [0.016, 0.015, 0.021, 0.027, 0.027], // Fig. 2a
+        uncertainty: [0.016, 0.015, 0.021, 0.027, 0.027], // Fig. 2a
         is_albedo: true, // Reflectivity
     },
     'Jupiter: 58° S, 2009 | Hammel2010': {
@@ -707,7 +707,7 @@
         filter_set: 'HST/WFC3_UVIS1',
         filters: ['F225W', 'F275W', 'FQ378N', 'FQ437N', 'FQ508N', 'FQ634N', 'FQ727N', 'FQ889N', 'FQ906N', 'FQ924N'], // Filters from Table 1
         spectral_dist: [0.418, 0.247, 0.410, 0.507, 0.484, 0.532, 0.248, 0.043, 0.284, 0.464],
-        std: [0.048, 0.029, 0.048, 0.060, 0.056, 0.063, 0.030, 0.008, 0.033, 0.054], // Fig. 2a
+        uncertainty: [0.048, 0.029, 0.048, 0.060, 0.056, 0.063, 0.030, 0.008, 0.033, 0.054], // Fig. 2a
         is_albedo: true, // Reflectivity
     },
     'Brown2004': [
@@ -730,7 +730,7 @@
         filter_set: 'HST/WFPC2-PC',
         filters: ['F336W', 'F410M', 'F555W', 'F673N', 'F953N'],
         spectral_dist: [0.257, 0.390, 0.638, 0.799, 0.697],
-        std: [0.011, 0.013, 0.026, 0.039, 0.030],
+        uncertainty: [0.011, 0.013, 0.026, 0.039, 0.030],
         is_reflecting_sunlight: false,
         is_albedo: true, // I/F
     },
@@ -739,7 +739,7 @@
         filter_set: 'HST/WFPC2-PC',
         filters: ['F410M', 'F555W', 'F673N', 'F953N'],
         spectral_dist: [0.334, 0.661, 0.818, 0.704],
-        std: [0.016, 0.031, 0.030, 0.030],
+        uncertainty: [0.016, 0.031, 0.030, 0.030],
         is_reflecting_sunlight: false,
         is_albedo: true, // I/F
     },
@@ -748,7 +748,7 @@
         filter_set: 'HST/WFPC2-PC',
         filters: ['F255W', 'F343N', 'F410M', 'F673N', 'F953N'],
         spectral_dist: [0.255, 0.252, 0.395, 0.790, 0.682],
-        std: [0.011, 0.012, 0.011, 0.012, 0.030],
+        uncertainty: [0.011, 0.012, 0.011, 0.012, 0.030],
         is_reflecting_sunlight: false,
         is_albedo: true, // I/F
     },
@@ -757,7 +757,7 @@
         filter_set: 'HST/WFPC2-PC',
         filters: ['F255W', 'F343N', 'F375N', 'F390N', 'F410M', 'F437N', 'F469N', 'F502N', 'F673N'],
         spectral_dist: [0.283, 0.290, 0.327, 0.348, 0.416, 0.465, 0.542, 0.633, 0.820],
-        std: [0.013, 0.011, 0.014, 0.017, 0.019, 0.021, 0.026, 0.030, 0.030],
+        uncertainty: [0.013, 0.011, 0.014, 0.017, 0.019, 0.021, 0.026, 0.030, 0.030],
         is_reflecting_sunlight: false,
         is_albedo: true, // I/F
     },
@@ -806,7 +806,7 @@
         filter_set: 'HST/WFPC2-WF',
         filters: ['F255W', 'F336W', 'F410M', 'F555W', 'F953N'], // Filters from Table 1 of West et al. (1995)
         spectral_dist: [0.138, 0.130, 0.157, 0.162, 0.202],
-        std: [0.030, 0.007, 0.006, 0.005, 0.006], // Fig. 2a
+        uncertainty: [0.030, 0.007, 0.006, 0.005, 0.006], // Fig. 2a
         is_albedo: true, // Reflectivity
     },
     'Wesley impact scar: 56° S (Jupiter) | Hammel2010': { // Core, July 23 and August 8 2009
@@ -814,7 +814,7 @@
         filter_set: 'HST/WFC3_UVIS1',
         filters: ['F225W', 'F275W', 'FQ378N', 'FQ437N', 'FQ508N', 'FQ634N', 'FQ727N', 'FQ889N', 'FQ906N', 'FQ924N'], // Filters from Table 1
         spectral_dist: [0.104, 0.079, 0.115, 0.141, 0.140, 0.179, 0.128, 0.097, 0.168, 0.216],
-        std: [0.013, 0.010, 0.014, 0.017, 0.017, 0.021, 0.024, 0.012, 0.019, 0.024], // Fig. 2a
+        uncertainty: [0.013, 0.010, 0.014, 0.017, 0.017, 0.021, 0.024, 0.012, 0.019, 0.024], // Fig. 2a
         is_albedo: true, // Reflectivity
     },
     // Jovian aurorae
@@ -858,7 +858,7 @@
         filter_set: 'Voyager/ISS-NAC',
         filters: ['Violet', 'Clear', 'Green', 'Orange'],
         spectral_dist: [0.86, 1.00, 1.53, 1.67], // traced from Fig. 4.11
-        std: [0.10, 0, 0.15, 0.16],
+        uncertainty: [0.10, 0, 0.15, 0.16],
         phase_function: ['phase coefficient', {beta: [0.042, 0.008]}],
     },
     // Jovian small inner satellites
@@ -877,7 +877,7 @@
         filter_set: 'Galileo/SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         spectral_dist: [0.38, 1, 0.863, 0.85], // traced from Fig. 6
-        std: [0.08, 0, 0.173, 0.19], // traced from Fig. 6, relative to the Green filter
+        uncertainty: [0.08, 0, 0.173, 0.19], // traced from Fig. 6, relative to the Green filter
         geometric_albedo: ['Galileo/SSI.Clear', [0.054, 0.003]], // Table III, log-scaled
         spherical_albedo: ['Galileo/SSI.Clear', [0.027, 0.002]], // Table III, log-scaled
     },
@@ -886,7 +886,7 @@
         filter_set: 'Galileo/SSI',
         filters: ['Violet', 'Green', '7560A'],
         spectral_dist: [0.54, 1, 1.14], // traced from Fig. 6
-        std: [0.05, 0, 0.075], // traced from Fig. 6, relative to the Green filter
+        uncertainty: [0.05, 0, 0.075], // traced from Fig. 6, relative to the Green filter
         geometric_albedo: ['Galileo/SSI.Clear', [0.101, 0.007]], // Table III, log-scaled
         spherical_albedo: ['Galileo/SSI.Clear', [0.036, 0.004]], // Table III, log-scaled
     },
@@ -895,7 +895,7 @@
         filter_set: 'Galileo/SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         spectral_dist: [0.47, 1, 1.225, 1], // traced from Fig. 6
-        std: [0.0625, 0, 0.137, 0.15], // traced from Fig. 6, relative to the Green filter
+        uncertainty: [0.0625, 0, 0.137, 0.15], // traced from Fig. 6, relative to the Green filter
         geometric_albedo: ['Galileo/SSI.Clear', [0.080, 0.005]], // Table III, log-scaled
         spherical_albedo: ['Galileo/SSI.Clear', [0.029, 0.003]], // Table III, log-scaled
     },
@@ -904,7 +904,7 @@
         filter_set: 'Galileo/SSI',
         filters: ['Violet', 'Green', '8890A'],
         spectral_dist: [0.7125, 1, 1.137], // traced from Fig. 6
-        std: [0.067, 0, 0.117], // traced from Fig. 6, relative to the Green filter
+        uncertainty: [0.067, 0, 0.117], // traced from Fig. 6, relative to the Green filter
         geometric_albedo: ['Galileo/SSI.Clear', [0.053, 0.004]], // Table III, log-scaled
         spherical_albedo: ['Galileo/SSI.Clear', [0.022, 0.002]], // Table III, log-scaled
     },
@@ -913,7 +913,7 @@
         filter_set: 'Galileo/SSI',
         filters: ['Violet', 'Green', '8890A', '9680A'],
         spectral_dist: [0.6, 1, 1.137, 1.07], // traced from Fig. 6
-        std: [0.05, 0, 0.117, 0.15], // traced from Fig. 6, relative to the Green filter
+        uncertainty: [0.05, 0, 0.117, 0.15], // traced from Fig. 6, relative to the Green filter
         geometric_albedo: ['Galileo/SSI.Clear', [0.041, 0.003]], // Table III, log-scaled
         spherical_albedo: ['Galileo/SSI.Clear', [0.017, 0.002]], // Table III, log-scaled
     },
@@ -980,7 +980,7 @@
         filter_set: 'Voyager/ISS-NAC',
         filters: ['UV', 'Violet', 'Clear', 'Blue', 'Green', 'Orange'],
         spectral_dist: [0.083, 0.242, 0.415, 0.483, 0.628, 0.633],
-        std: [0.01, 0.01, 0.02, 0.02, 0.02, 0.03],
+        uncertainty: [0.01, 0.01, 0.02, 0.02, 0.02, 0.03],
         is_geometric_albedo: true,
         phase_integral: [0.78, 0.02],
     },
@@ -1159,7 +1159,7 @@
         filter_set: 'Voyager/ISS-NAC',
         filters: ['UV', 'Violet', 'Clear', 'Blue', 'Green', 'Orange'],
         spectral_dist: [0.354, 0.469, 0.578, 0.606, 0.727, 0.725],
-        std: 0.049, // typical absolute error
+        uncertainty: 0.049, // typical absolute error
         is_geometric_albedo: true,
         phase_integral: [1.01, 0.04],
     },
@@ -1191,7 +1191,7 @@
         filter_set: 'Voyager/ISS-NAC',
         filters: ['UV', 'Violet', 'Clear', 'Blue', 'Green', 'Orange'],
         spectral_dist: [0.172, 0.356, 0.457, 0.504, 0.593, 0.591],
-        std: 0.049, // typical absolute error
+        uncertainty: 0.049, // typical absolute error
         is_geometric_albedo: true,
         phase_integral: [1.01, 0.04],
     },
@@ -1210,7 +1210,7 @@
         filter_set: 'Galileo/SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         spectral_dist: [1.112, 1.364, 1.450, 1.443, 1.454, 1.296], // extracted from Fig. 5
-        std: [0.047, 0.030, 0.032, 0.029, 0.060, 0.064], // extracted from Fig. 5
+        uncertainty: [0.047, 0.030, 0.032, 0.029, 0.060, 0.064], // extracted from Fig. 5
         geometric_albedo: ['Voyager/ISS-NAC.Blue', 0.8], // highest albedo in blue filter; Fig. 12
         phase_integral: [1.01, 0.04],
     },
@@ -1219,7 +1219,7 @@
         filter_set: 'Galileo/SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         spectral_dist: [1.214, 1.405, 1.461, 1.424, 1.375, 1.203], // extracted from Fig. 5
-        std: [0.030, 0.023, 0.028, 0.015, 0.025, 0.019], // extracted from Fig. 5
+        uncertainty: [0.030, 0.023, 0.028, 0.015, 0.025, 0.019], // extracted from Fig. 5
         geometric_albedo: ['Voyager/ISS-NAC.Blue', 0.4], // lowest albedo in blue filter; Fig. 12
         phase_integral: [1.01, 0.04],
     },
@@ -1356,7 +1356,7 @@
         filter_set: 'Cassini/ISS_NAC',
         filters: ['UV1', 'UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR3'],
         spectral_dist: [0.627, 0.680, 1.113, 0.419, 0.957, 0.761, 1.259], // extracted from Fig. 8
-        std: [0.405, 0.116, 0.247, 0.148, 0.235, 0.195, 0.122], // extracted from Fig. 8
+        uncertainty: [0.405, 0.116, 0.247, 0.148, 0.235, 0.195, 0.122], // extracted from Fig. 8
         is_emissive: true,
     },
     'Aurorae of Saturn: Brightest aurora | Dyudina2016a': {
@@ -1364,7 +1364,7 @@
         filter_set: 'Cassini/ISS_NAC',
         filters: ['UV1', 'UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR3'],
         spectral_dist: [0.792, 0.372, 0.546, 0.484, 1.020, 1.050, 1.821], // extracted from Fig. 8
-        std: [0.104, 0.060, 0.056, 0.097, 0.143, 0.229, 0.468], // extracted from Fig. 8
+        uncertainty: [0.104, 0.060, 0.056, 0.097, 0.143, 0.229, 0.468], // extracted from Fig. 8
         is_emissive: true,
     },
     'Aurorae of Saturn: Deep aurora | Dyudina2016a': {
@@ -1372,7 +1372,7 @@
         filter_set: 'Cassini/ISS_NAC',
         filters: ['UV1', 'UV3', 'BL1', 'GRN', 'RED', 'IR1', 'IR3'],
         spectral_dist: [0.406, 0.200, 0.421, 0.412, 1.056, 0.759, 0.970], // extracted from Fig. 8
-        std: [0.029, 0, 0, 0.126, 0, 0.217, 0.223], // extracted from Fig. 8
+        uncertainty: [0.029, 0, 0, 0.126, 0, 0.217, 0.223], // extracted from Fig. 8
         is_emissive: true,
     },
     // Saturnian rings
@@ -1561,7 +1561,7 @@
         filter_set: 'HST/WFPC2-WF',
         filters: ['F336W', 'F410M', 'F467M', 'F588N', 'FQCH4N_B', 'F673N'],
         spectral_dist: [0.993, 1.107, 0.879, 0.950, 1.143, 0.864], // extracted from Fig. 5
-        std: [0.329, 0.157, 0.186, 0.171, 0.079, 0.165], // extracted from Fig. 5
+        uncertainty: [0.329, 0.157, 0.186, 0.171, 0.079, 0.165], // extracted from Fig. 5
         spherical_albedo: [550, 0.062], // phase angle 19°; Fig. 13 (Clark2014)
     },
     'F ring: 140~200 km (Saturn) | Clark2014': { // phase angle 19°
@@ -1579,14 +1579,14 @@
         filter_set: 'HST/WFPC2-WF',
         filters: ['F300W', 'F450W', 'F555W', 'F675W', 'FQCH4N_C'],
         spectral_dist: [0.626, 0.650, 0.743, 0.738, 1.100], // extracted from Fig. 3
-        std: [0.120, 0.170, 0.170, 0.110, 0.600], // extracted from Fig. 3
+        uncertainty: [0.120, 0.170, 0.170, 0.110, 0.600], // extracted from Fig. 3
     },
     'E ring (Saturn) | dePater2006': { // 330 000 km
         tags: ['Solar System/Saturnian system', 'ring'],
         filter_set: 'HST/WFPC2-WF',
         filters: ['F300W', 'F450W', 'F555W', 'F675W', 'FQCH4N_C'],
         spectral_dist: [8.001, 5.843, 5.259, 4.731, 4.482], // extracted from Fig. 3
-        std: [0.192, 0.167, 0.429, 0.144, 0.217], // extracted from Fig. 3
+        uncertainty: [0.192, 0.167, 0.429, 0.144, 0.217], // extracted from Fig. 3
     },
     // Saturnian satellites
     'Buratti2022': [
@@ -1642,7 +1642,7 @@
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         filters: ['Cassini/ISS_NAC.UV3', 'Cassini/ISS_NAC.IR3'],
         spectral_dist: [1, 2.30], // IR3/UV3 ratio: 2.30 ± 0.25
-        std: [0, 0.25],
+        uncertainty: [0, 0.25],
         geometric_albedo: ['Generic/Bessell.V', [0.91, 0.07]], // Table 2, p. 325 (Verbiscer2018)
     },
     'Atlas (S XV) | Ciarniello2024, Verbiscer2018': { // phase angle 50°
@@ -1702,7 +1702,7 @@
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         filters: ['Cassini/ISS_NAC.UV3', 'Cassini/ISS_NAC.IR3'],
         spectral_dist: [1, 1.17], // IR3/UV3 ratio: 1.17 ± 0.02
-        std: [0, 0.02],
+        uncertainty: [0, 0.02],
         geometric_albedo: [611, [0.47, 0.11]],
     },
     // Enceladus
@@ -1736,7 +1736,7 @@
         tags: ['Solar System/Saturnian system', 'planetary body/large moon/Tethys', 'natural satellite/regular moon'],
         wavelength_nm: [350, 440, 550, 700, 950, 1046, 1540, 1822, 2050, 2200],
         spectral_dist: [0.75042, 0.77108, 0.79707, 0.76842, 0.74823, 0.74563, 0.45171, 0.70383, 0.35282, 0.68231], // equigonal albedo
-        std: [0.00106, 0.00100, 0.00111, 0.00110, 0.00102, 0.00174, 0.00090, 0.00160, 0.00059, 0.00127],
+        uncertainty: [0.00106, 0.00100, 0.00111, 0.00110, 0.00102, 0.00174, 0.00090, 0.00160, 0.00059, 0.00127],
         geometric_albedo: [550, [0.93, 0.02]],
         phase_integral: [0.79, 0.02],
     },
@@ -1774,7 +1774,7 @@
         tags: ['Solar System/Saturnian system', 'planetary body/large moon/Dione', 'natural satellite/regular moon'],
         wavelength_nm: [350, 440, 550, 700, 950, 1046, 1540, 1822, 2050, 2200],
         spectral_dist: [0.57582, 0.61407, 0.61977, 0.58411, 0.58268, 0.55834, 0.40562, 0.55832, 0.24751, 0.51508], // equigonal albedo
-        std: [0.00034, 0.00040, 0.00047, 0.00051, 0.00046, 0.00071, 0.00044, 0.00077, 0.00023, 0.00067],
+        uncertainty: [0.00034, 0.00040, 0.00047, 0.00051, 0.00046, 0.00071, 0.00044, 0.00077, 0.00023, 0.00067],
         geometric_albedo: [550, [0.75, 0.02]],
         phase_integral: [0.80, 0.02],
     },
@@ -1811,7 +1811,7 @@
         tags: ['Solar System/Saturnian system', 'natural satellite/regular moon'],
         filters: ['Cassini/ISS_NAC.UV3', 'Cassini/ISS_NAC.IR3'],
         spectral_dist: [1, 1.17], // IR3/UV3 ratio: 1.17 ± 0.07
-        std: [0, 0.07],
+        uncertainty: [0, 0.07],
         geometric_albedo: ['Generic/Bessell.V', [1.24, 0.09]], // Table 2, p. 325 (Verbiscer2018)
     },
     // Rhea
@@ -1957,7 +1957,7 @@
         filter_set: 'Voyager/ISS-NAC',
         filters: ['UV', 'Violet', 'Clear', 'Blue', 'Green', 'Orange'],
         spectral_dist: [0.54, 0.65, 0.82, 0.85, 1.00, 1.04],
-        std: [0.02, 0.04, 0.01, 0.03, 0, 0.03],
+        uncertainty: [0.02, 0.04, 0.01, 0.03, 0, 0.03],
         geometric_albedo: ['Voyager/ISS-NAC.Clear', [0.214, 0.006]], // normal reflectance
         bond_albedo: [0.33, 0.05],
     },
@@ -2138,7 +2138,7 @@
         //         620 nm                   910 nm
         filters: ['HST/WFPC2-WF.FQCH4N33', 'HST/WFPC2-PC.F850LP'],
         spectral_dist: [0.056, 0.056],
-        std: 0.007,
+        uncertainty: 0.007,
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.018, 0.003]], // average for rings
     },
@@ -2163,7 +2163,7 @@
         //         620 nm                   910 nm
         filters: ['HST/WFPC2-WF.FQCH4N33', 'HST/WFPC2-PC.F850LP'],
         spectral_dist: [0.063, 0.064],
-        std: 0.007,
+        uncertainty: 0.007,
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.018, 0.003]], // average for rings
     },
@@ -2196,7 +2196,7 @@
         //         340 nm                470 nm                620 nm                   670 nm                730 nm                   910 nm
         filters: ['HST/WFPC2-PC.F336W', 'HST/WFPC2-WF.F467M', 'HST/WFPC2-WF.FQCH4N33', 'HST/WFPC2-PC.F673N', 'HST/WFPC2-WF.FQCH4N_B', 'HST/WFPC2-PC.F850LP'],
         spectral_dist: [0.044, 0.052, 0.055, 0.054, 0.058, 0.058],
-        std: 0.004,
+        uncertainty: 0.004,
         geometric_albedo: [550, [0.052, 0.012]], // at 0.034° phase angle
         spherical_albedo: [550, [0.018, 0.003]], // average for rings
     },
@@ -2230,7 +2230,7 @@
             0.398, 0.409, 0.450, 0.838, 0.843, 0.838, 0.900, 1.097, 1.071, 1.200,
             1.029, 0.621
         ],
-        std: [
+        uncertainty: [
             0.150, 0.119, 0.217, 0.078, 0.026, 0.041, 0.140, 0.041, 0.041, 0.140,
             0.026, 0.020
         ], // Fig. 22 (bottom)
@@ -2251,7 +2251,7 @@
             1.932, 1.870, 2.022, 1.698, 1.445, 1.464, 1.660, 1.560, 0.887,
             1.588, 1.569, 1.278, 0.930, 1.159, 0.911, 1.040, 0.277
         ],
-        std: [
+        uncertainty: [
             0.286, 0.381, 0.286, 0.425, 0.649, 0.381, 0.567, 0.496, 0.749,
             0.062, 0.048, 0.053, 0.119, 0.048, 0.048, 0.119, 0.038
         ], // Fig. 22 (top)
@@ -2267,7 +2267,7 @@
         //         620 nm                   670 nm                730 nm                   910 nm
         filters: ['HST/WFPC2-WF.FQCH4N33', 'HST/WFPC2-PC.F673N', 'HST/WFPC2-WF.FQCH4N_B', 'HST/WFPC2-PC.F850LP'],
         spectral_dist: [0.107, 0.104, 0.105, 0.123],
-        std: 0.010,
+        uncertainty: 0.010,
         geometric_albedo: [500, [0.069, 0.008]],
         spherical_albedo: [550, [0.026, 0.005]], // Portia group
     },
@@ -2288,7 +2288,7 @@
         //         620 nm                   670 nm                730 nm                   910 nm
         filters: ['HST/WFPC2-WF.FQCH4N33', 'HST/WFPC2-PC.F673N', 'HST/WFPC2-WF.FQCH4N_B', 'HST/WFPC2-PC.F850LP'],
         spectral_dist: [0.095, 0.091, 0.097, 0.101],
-        std: 0.010,
+        uncertainty: 0.010,
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.035, 0.006]], // Karkoschka2001
     },
@@ -2309,7 +2309,7 @@
         tags: ['featured', 'Solar System/Uranian system', 'planetary body/large moon/Miranda', 'natural satellite/regular moon'],
         wavelength_nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         spectral_dist: [0.51, 0.49, 0.48, 0.47, 0.46, 0.45, 0.41, 0.40],
-        std: [0.02, 0.01, 0.02, 0.02, 0.02, 0.01, 0.01, 0.01],
+        uncertainty: [0.02, 0.01, 0.02, 0.02, 0.02, 0.01, 0.01, 0.01],
         is_geometric_albedo: true,
         spherical_albedo: [550, [0.200, 0.030]], // Karkoschka2001
     },
@@ -2324,7 +2324,7 @@
         //         340 nm                470 nm                620 nm                   670 nm                730 nm                   910 nm
         filters: ['HST/WFPC2-PC.F336W', 'HST/WFPC2-WF.F467M', 'HST/WFPC2-WF.FQCH4N33', 'HST/WFPC2-PC.F673N', 'HST/WFPC2-WF.FQCH4N_B', 'HST/WFPC2-PC.F850LP'],
         spectral_dist: [0.320, 0.315, 0.310, 0.298, 0.294, 0.301],
-        std: 0.012,
+        uncertainty: 0.012,
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.200, 0.030]], // Karkoschka2001
     },
@@ -2339,7 +2339,7 @@
         filter_set: 'Voyager/ISS-NAC',
         filters: ['Violet', 'Green'],
         spectral_dist: [1.099, 1], // V/Cl ratio: 1.059 ±0.034, G/Cl ratio: 0.963 ±0.027
-        std: [0.033, 0],
+        uncertainty: [0.033, 0],
         geometric_albedo: ['Voyager/ISS-NAC.Clear', 0.3], // Average normal reflectance (Table IV)
         phase_integral: [0.44, 0.05],
     },
@@ -2348,7 +2348,7 @@
         filter_set: 'Voyager/ISS-NAC',
         filters: ['Violet', 'Green'],
         spectral_dist: [1.113, 1], // V/Cl ratio: 1.023 ±0.021, G/Cl ratio: 0.918 ±0.021
-        std: [0.017, 0],
+        uncertainty: [0.017, 0],
         geometric_albedo: ['Voyager/ISS-NAC.Clear', 0.33], // Normal reflectance (Table IV)
         phase_integral: [0.44, 0.05],
     },
@@ -2357,7 +2357,7 @@
         filter_set: 'Voyager/ISS-NAC',
         filters: ['Violet', 'Green'],
         spectral_dist: [1.088, 1], // V/Cl ratio: 1.076 ±0.029, G/Cl ratio: 0.986 ±0.027
-        std: [0.029, 0],
+        uncertainty: [0.029, 0],
         geometric_albedo: ['Voyager/ISS-NAC.Clear', 0.27], // Normal reflectance (Table IV)
         phase_integral: [0.44, 0.05],
     },
@@ -2373,7 +2373,7 @@
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Ariel', 'natural satellite/regular moon'],
         wavelength_nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         spectral_dist: [0.50, 0.51, 0.51, 0.51, 0.51, 0.52, 0.53, 0.54],
-        std: [0.03, 0.02, 0.02, 0.01, 0.02, 0.01, 0.01, 0.01],
+        uncertainty: [0.03, 0.02, 0.02, 0.01, 0.02, 0.01, 0.01, 0.01],
         is_geometric_albedo: true,
         spherical_albedo: [550, [0.230, 0.025]], // Karkoschka2001
     },
@@ -2388,7 +2388,7 @@
         //         340 nm                470 nm                620 nm                   670 nm                730 nm                   910 nm
         filters: ['HST/WFPC2-PC.F336W', 'HST/WFPC2-WF.F467M', 'HST/WFPC2-WF.FQCH4N33', 'HST/WFPC2-PC.F673N', 'HST/WFPC2-WF.FQCH4N_B', 'HST/WFPC2-PC.F850LP'],
         spectral_dist: [0.342, 0.350, 0.374, 0.343, 0.354, 0.371],
-        std: 0.014,
+        uncertainty: 0.014,
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.230, 0.025]], // Karkoschka2001
     },
@@ -2416,7 +2416,7 @@
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Umbriel', 'natural satellite/regular moon'],
         wavelength_nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         spectral_dist: [0.25, 0.25, 0.25, 0.25, 0.26, 0.26, 0.26, 0.26],
-        std: [0.01, 0.02, 0.02, 0.01, 0.01, 0.01, 0.01, 0.01],
+        uncertainty: [0.01, 0.02, 0.02, 0.01, 0.01, 0.01, 0.01, 0.01],
         is_geometric_albedo: true,
         spherical_albedo: [550, [0.100, 0.010]], // Karkoschka2001
     },
@@ -2431,7 +2431,7 @@
         //         340 nm                470 nm                620 nm                   670 nm                730 nm                   910 nm
         filters: ['HST/WFPC2-PC.F336W', 'HST/WFPC2-WF.F467M', 'HST/WFPC2-WF.FQCH4N33', 'HST/WFPC2-PC.F673N', 'HST/WFPC2-WF.FQCH4N_B', 'HST/WFPC2-PC.F850LP'],
         spectral_dist: [0.196, 0.185, 0.185, 0.190, 0.196, 0.203],
-        std: 0.008,
+        uncertainty: 0.008,
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.100, 0.010]], // Karkoschka2001
     },
@@ -2459,7 +2459,7 @@
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Titania', 'natural satellite/regular moon'],
         wavelength_nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         spectral_dist: [0.30, 0.32, 0.33, 0.34, 0.36, 0.37, 0.41, 0.43],
-        std: [0.02, 0.02, 0.02, 0.03, 0.02, 0.01, 0.01, 0.01],
+        uncertainty: [0.02, 0.02, 0.02, 0.03, 0.02, 0.01, 0.01, 0.01],
         geometric_albedo: ['Generic/Bessell.V', [0.346, 0.020]], // Table 4 (Mean)
         phase_integral: [0.46, 0.05],
     },
@@ -2474,7 +2474,7 @@
         //         340 nm                470 nm                620 nm                   670 nm                910 nm
         filters: ['HST/WFPC2-PC.F336W', 'HST/WFPC2-WF.F467M', 'HST/WFPC2-WF.FQCH4N33', 'HST/WFPC2-PC.F673N', 'HST/WFPC2-PC.F850LP'],
         spectral_dist: [0.219, 0.239, 0.234, 0.235, 0.265],
-        std: 0.010,
+        uncertainty: 0.010,
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.170, 0.015]], // Karkoschka2001
     },
@@ -2502,7 +2502,7 @@
         tags: ['Solar System/Uranian system', 'planetary body/large moon/Oberon', 'natural satellite/regular moon'],
         wavelength_nm: [250, 410, 480, 560, 750, 910, 1400, 1800],
         spectral_dist: [0.27, 0.29, 0.30, 0.31, 0.33, 0.35, 0.40, 0.43],
-        std: [0.04, 0.01, 0.02, 0.02, 0.01, 0.01, 0.02, 0.02],
+        uncertainty: [0.04, 0.01, 0.02, 0.02, 0.01, 0.01, 0.02, 0.02],
         geometric_albedo: ['Generic/Bessell.V', [0.295, 0.015]], // Table 4 (Mean)
         phase_integral: [0.46, 0.05],
     },
@@ -2517,7 +2517,7 @@
         //         470 nm                910 nm
         filters: ['HST/WFPC2-WF.F467M', 'HST/WFPC2-PC.F850LP'],
         spectral_dist: [0.201, 0.218],
-        std: 0.009,
+        uncertainty: 0.009,
         is_geometric_albedo: true, // at 1° phase angle
         spherical_albedo: [550, [0.140, 0.015]], // Karkoschka2001
     },
@@ -2660,7 +2660,7 @@
         tags: ['featured', 'Solar System/Neptunian system', 'natural satellite/regular moon'],
         wavelength_nm: [410, 471, 540],
         spectral_dist: [0.055, 0.060, 0.062],
-        std: 0.004, // relative uncertainty
+        uncertainty: 0.004, // relative uncertainty
         geometric_albedo: [550, [0.096, 0.0062]], // error margin from Helfenbein2024
         phase_function: ['phase coefficient', {beta: 0.039}],
     },
@@ -2728,7 +2728,7 @@
         filter_set: 'Voyager/ISS-NAC',
         filters: ['Violet', 'Blue', 'Green'],
         spectral_dist: [0.903, 0.961, 0.970],
-        std: [0.037, 0.023, 0.151],
+        uncertainty: [0.037, 0.023, 0.151],
         geometric_albedo: ['Generic/Bessell.V', [0.865, +0.079, -0.099]],
         spherical_albedo: ['Generic/Bessell.V', [0.808, +0.125, -0.060]],
     },
@@ -2737,7 +2737,7 @@
         filter_set: 'Voyager/ISS-NAC',
         filters: ['Violet', 'Green'],
         spectral_dist: [1.052, 1.040],
-        std: [0.014, 0.009],
+        uncertainty: [0.014, 0.009],
         geometric_albedo: ['Voyager/ISS-NAC.Green', [0.784, 0.007]],
         phase_integral: [1.113, 0.008], // Green filter
     },
@@ -2746,7 +2746,7 @@
         filter_set: 'Voyager/ISS-NAC',
         filters: ['Violet', 'Green'],
         spectral_dist: [1.029, 1.021],
-        std: [0.024, 0.030],
+        uncertainty: [0.024, 0.030],
         geometric_albedo: ['Voyager/ISS-NAC.Green', [0.792, 0.024]],
         phase_integral: [1.058, 0.025], // Green filter
     },
@@ -2755,7 +2755,7 @@
         filter_set: 'Voyager/ISS-NAC',
         filters: ['Violet', 'Green'],
         spectral_dist: [0.997, 0.953],
-        std: [0.034, 0.006],
+        uncertainty: [0.034, 0.006],
         geometric_albedo: ['Voyager/ISS-NAC.Green', [0.693, 0.004]],
         phase_integral: [1.249, 0.006], // Green filter
     },
@@ -2764,7 +2764,7 @@
         filter_set: 'Voyager/ISS-NAC',
         filters: ['Violet', 'Green'],
         spectral_dist: [0.627, 0.719],
-        std: [0.011, 0.008],
+        uncertainty: [0.011, 0.008],
         geometric_albedo: ['Voyager/ISS-NAC.Green', [0.524, 0.007]],
         phase_integral: [1.429, 0.001], // Green filter
     },

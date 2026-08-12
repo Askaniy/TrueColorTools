@@ -395,7 +395,7 @@
         filter_set: 'Dawn/FC',
         filters: ['F8', 'F2', 'F7', 'F3', 'F6', 'F4', 'F5'],
         spectral_dist: [0.186, 0.262, 0.281, 0.300, 0.308, 0.316, 0.317],
-        std: [0.016, 0.015, 0.013, 0.013, 0.014, 0.014, 0.013],
+        uncertainty: [0.016, 0.015, 0.013, 0.013, 0.014, 0.014, 0.013],
         geometric_albedo: ['Generic/Bessell.V', [0.6, 0.1]], // normal visual albedo at 1.3 km per pixel
     },
     'Haulani Crater (Ceres) | Li2022': { // Average
@@ -583,7 +583,7 @@
         filter_set: 'HST/WFPC2-PC',
         filters: ['F439W', 'F673N', 'F791W', 'F1042M'], // F953N excluded
         magnitudes: [19.079, 17.884, 17.465, 17.678],
-        std: [0.06, 0.07, 0.11, 0.99],
+        uncertainty: [0.06, 0.07, 0.11, 0.99],
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic/Bessell.V', 0.065], // from Eugenia
@@ -628,7 +628,7 @@
         filter_set: 'HST/WFPC2-PC',
         filters: ['F439W', 'F673N', 'F791W', 'F1042M'], // F953N excluded
         magnitudes: [18.512, 17.277, 16.935, 17.020],
-        std: [0.04, 0.07, 0.07, 0.67],
+        uncertainty: [0.04, 0.07, 0.07, 0.67],
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['HST/WFPC2-PC.F439W', 0.018], // calculated using occultation results with H(F439W) ≈ 13.16 from magnitude differences
@@ -644,7 +644,7 @@
         filter_set: 'HST/WFPC2-PC',
         filters: ['F439W', 'F673N', 'F791W', 'F1042M'], // F953N excluded
         magnitudes: [19.515, 18.840, 18.034, 17.034],
-        std: [0.07, 0.24, 0.15, 0.67],
+        uncertainty: [0.07, 0.24, 0.15, 0.67],
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['HST/WFPC2-PC.F439W', 0.035], // calculated using occultation results with H(F439W) ≈ 14.16 from magnitude differences
@@ -673,7 +673,7 @@
         filter_set: 'HST/WFPC2-PC',
         filters: ['F439W', 'F673N', 'F791W', 'F1042M'], // F953N excluded
         magnitudes: [19.935, 18.444, 18.329, 16.781],
-        std: [0.11, 0.12, 0.25, 0.08],
+        uncertainty: [0.11, 0.12, 0.25, 0.08],
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['HST/WFPC2-PC.F439W', [0.044, 0.007]], // from Minerva
@@ -701,7 +701,7 @@
         filter_set: 'HST/WFPC2-PC',
         filters: ['F439W', 'F673N', 'F791W', 'F1042M'], // F953N excluded
         magnitudes: [18.628, 17.186, 17.126, 17.077],
-        std: [0.06, 0.07, 0.11, 0.60],
+        uncertainty: [0.06, 0.07, 0.11, 0.60],
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['HST/WFPC2-PC.F439W', [0.041, 0.006]], // from Camilla
@@ -718,7 +718,7 @@
         filter_set: 'HST/WFPC2-PC',
         filters: ['F439W', 'F673N', 'F791W', 'F1042M'],
         magnitudes: [18.450, 17.245, 17.245, 16.289],
-        std: [0.05, 0.07, 0.12, 0.32],
+        uncertainty: [0.05, 0.07, 0.12, 0.32],
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['HST/WFPC2-PC.F439W', [0.029, 0.009]], // from Hermione
@@ -773,7 +773,7 @@
         filter_set: 'Galileo/SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         spectral_dist: [0.756, 0.892, 0.978, 1.000, 0.936, 0.917],
-        std: 0.018,
+        uncertainty: 0.018,
         geometric_albedo: ['Galileo/SSI.Green', [0.217, 0.026]], // normal albedo of Terrain B, Fig. 7
         phase_integral: [0.34, 0.02], // Table VIII
     },
@@ -782,7 +782,7 @@
         filter_set: 'Galileo/SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         spectral_dist: [0.690, 0.856, 0.956, 1.000, 0.979, 0.965],
-        std: 0.018,
+        uncertainty: 0.018,
         geometric_albedo: ['Galileo/SSI.Green', [0.204, 0.016]], // normal albedo of Terrain A, Fig. 7
         phase_integral: [0.34, 0.02], // Table VIII
     },
@@ -791,7 +791,7 @@
         filter_set: 'Galileo/SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         spectral_dist: [0.700, 0.894, 0.992, 1.000, 0.909, 0.882],
-        std: 0.018,
+        uncertainty: 0.018,
         geometric_albedo: ['Galileo/SSI.Green', [0.198, +0.050, -0.032]], // Table VIII
         spherical_albedo: ['Galileo/SSI.Green', [0.063, +0.018, -0.012]], // Table VIII
     },
@@ -853,7 +853,7 @@
             9.555181e-01, 9.513133e-01, 9.621309e-01, 9.615998e-01, 9.649159e-01, 9.586472e-01,
             9.537609e-01, 9.704162e-01, 1.002010e+00, 1.039104e+00
         ],
-        std: [
+        uncertainty: [
             1.281077e-03, 8.367703e-04, 8.124417e-04, 8.216822e-04, 8.437843e-04, 9.166687e-04,
             8.636664e-04, 7.487576e-04, 7.651465e-04, 7.878566e-04, 7.850427e-04, 7.699932e-04,
             7.798685e-04, 7.922384e-04, 8.732584e-04, 1.089767e-03
@@ -869,7 +869,7 @@
             1.011391e+00, 1.021726e+00, 1.023916e+00, 1.038569e+00, 1.048518e+00, 1.073669e+00,
             1.069842e+00, 1.127259e+00, 1.177349e+00, 1.250971e+00
         ],
-        std: [
+        uncertainty: [
             3.549867e-02, 1.220435e-02, 8.786119e-03, 8.153688e-03, 7.822789e-03, 8.154543e-03,
             8.797064e-03, 8.195351e-03, 8.318945e-03, 8.672749e-03, 8.356223e-03, 8.276571e-03,
             8.683519e-03, 9.606810e-03, 1.268815e-02, 2.186269e-02
@@ -891,7 +891,7 @@
             1.025850e+00, 1.094536e+00, 1.129263e+00, 1.157449e+00, 1.221273e+00, 1.255083e+00,
             1.314281e+00, 1.385913e+00, 1.406973e+00, 1.467296e+00
         ],
-        std: [
+        uncertainty: [
             2.698069e-02, 1.027654e-02, 8.172306e-03, 7.420461e-03, 7.948638e-03, 7.760149e-03,
             8.599193e-03, 8.059071e-03, 8.518910e-03, 8.732826e-03, 9.277143e-03, 9.609589e-03,
             1.045705e-02, 1.100233e-02, 1.340484e-02, 2.089048e-02
@@ -938,7 +938,7 @@
             1.028834e+00, 1.025593e+00, 1.045870e+00, 1.064329e+00, 1.082985e+00, 1.100841e+00,
             1.113934e+00, 1.128405e+00, 1.140737e+00, 1.179379e+00
         ],
-        std: [
+        uncertainty: [
             5.061042e-03, 2.382602e-03, 2.008669e-03, 1.945844e-03, 1.975309e-03, 2.053912e-03,
             2.071514e-03, 1.945770e-03, 2.008729e-03, 2.044305e-03, 2.108037e-03, 2.157879e-03,
             2.174494e-03, 2.307703e-03, 2.581060e-03, 3.737699e-03
@@ -954,7 +954,7 @@
             1.075038e+00, 1.132591e+00, 1.191990e+00, 1.236406e+00, 1.285124e+00, 1.339667e+00,
             1.372807e+00, 1.445096e+00, 1.494113e+00, 1.579852e+00
         ],
-        std: [
+        uncertainty: [
             5.647785e-03, 2.730782e-03, 2.341937e-03, 2.364197e-03, 2.381620e-03, 2.562413e-03,
             2.686922e-03, 2.447661e-03, 2.667990e-03, 2.805160e-03, 2.903609e-03, 2.994654e-03,
             3.081398e-03, 3.324679e-03, 3.750030e-03, 5.073070e-03
@@ -970,7 +970,7 @@
             1.000124e+00, 1.030508e+00, 1.056544e+00, 1.071437e+00, 1.087028e+00, 1.083698e+00,
             1.108920e+00, 1.123050e+00, 1.139558e+00, 1.143074e+00
         ],
-        std: [
+        uncertainty: [
             1.679948e-02, 5.875591e-03, 4.473978e-03, 4.187082e-03, 4.221219e-03, 4.311582e-03,
             4.576978e-03, 4.251986e-03, 4.411517e-03, 4.615133e-03, 4.561328e-03, 4.486196e-03,
             4.721856e-03, 5.222359e-03, 6.546084e-03, 1.071352e-02
@@ -992,7 +992,7 @@
             1.020959e+00, 1.034676e+00, 1.047463e+00, 1.058783e+00, 1.073622e+00, 1.083511e+00,
             1.090540e+00, 1.100464e+00, 1.120553e+00, 1.143777e+00
         ],
-        std: [
+        uncertainty: [
             2.668028e-03, 1.428997e-03, 1.196515e-03, 1.178561e-03, 1.175952e-03, 1.270339e-03,
             1.305311e-03, 1.170762e-03, 1.212433e-03, 1.295871e-03, 1.292290e-03, 1.281974e-03,
             1.239847e-03, 1.330842e-03, 1.482579e-03, 2.025007e-03
@@ -1008,7 +1008,7 @@
             1.024240e+00, 1.078720e+00, 1.107014e+00, 1.170626e+00, 1.198601e+00, 1.243794e+00,
             1.300036e+00, 1.370464e+00, 1.473724e+00, 1.654073e+00
         ],
-        std: [
+        uncertainty: [
             3.292000e-02, 1.133338e-02, 8.633629e-03, 7.999465e-03, 7.779832e-03, 8.317725e-03,
             8.732212e-03, 8.372672e-03, 8.538527e-03, 9.301986e-03, 9.219869e-03, 9.097902e-03,
             9.940188e-03, 1.091953e-02, 1.363944e-02, 2.211111e-02
@@ -1024,7 +1024,7 @@
             1.063721e+00, 1.102767e+00, 1.148163e+00, 1.206349e+00, 1.245204e+00, 1.294332e+00,
             1.343991e+00, 1.407892e+00, 1.475912e+00, 1.638448e+00
         ],
-        std: [
+        uncertainty: [
             1.354648e-02, 5.725508e-03, 4.364018e-03, 4.175547e-03, 4.175260e-03, 4.535955e-03,
             4.758894e-03, 4.451864e-03, 4.656452e-03, 4.906095e-03, 4.928027e-03, 5.093985e-03,
             5.382436e-03, 5.742557e-03, 7.222007e-03, 1.083169e-02
@@ -1059,7 +1059,7 @@
         filter_set: 'Galileo/SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         spectral_dist: [0.17, 0.23, 0.26, 0.27, 0.26, 0.26],
-        std: [0.05, 0.06, 0.07, 0.07, 0.07, 0.06],
+        uncertainty: [0.05, 0.06, 0.07, 0.07, 0.07, 0.06],
         is_geometric_albedo: true, // global mean normal albedo from the Table VI
         spherical_albedo: ['Galileo/SSI.Green', [0.11, 0.03]], // Table VIII
     },
@@ -1068,7 +1068,7 @@
         filter_set: 'Galileo/SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         spectral_dist: [0.19, 0.25, 0.27, 0.28, 0.27, 0.26],
-        std: [0.03, 0.06, 0.06, 0.04, 0.05, 0.05],
+        uncertainty: [0.03, 0.06, 0.06, 0.04, 0.05, 0.05],
         is_geometric_albedo: true, // normal albedo of PC2-α material from the Table VI
         phase_integral: [0.47, 0.04], // Table VIII
     },
@@ -1077,7 +1077,7 @@
         filter_set: 'Galileo/SSI',
         filters: ['Violet', 'Green', 'Red', '7560A', '8890A', '9680A'],
         spectral_dist: [0.16, 0.22, 0.26, 0.27, 0.26, 0.26],
-        std: [0.04, 0.04, 0.05, 0.04, 0.03, 0.02],
+        uncertainty: [0.04, 0.04, 0.05, 0.04, 0.03, 0.02],
         is_geometric_albedo: true, // normal albedo of PC2-γ material from the Table VI
         phase_integral: [0.47, 0.04], // Table VIII
     },
@@ -1095,7 +1095,7 @@
             1.072575e+00, 1.110597e+00, 1.171022e+00, 1.223325e+00, 1.280218e+00, 1.315259e+00,
             1.351772e+00, 1.425097e+00, 1.477871e+00, 1.508863e+00
         ],
-        std: [
+        uncertainty: [
             1.840417e-02, 6.621206e-03, 5.191721e-03, 4.811943e-03, 4.819398e-03, 5.220781e-03,
             5.339378e-03, 4.982301e-03, 5.363752e-03, 5.704895e-03, 5.933753e-03, 6.066997e-03,
             6.504736e-03, 7.267416e-03, 8.853423e-03, 1.278062e-02
@@ -1134,7 +1134,7 @@
             1.013578e+00, 1.033812e+00, 1.022914e+00, 1.051119e+00, 1.079304e+00, 1.102348e+00,
             1.112232e+00, 1.145989e+00, 1.136283e+00, 1.258855e+00
         ],
-        std: [
+        uncertainty: [
             3.251312e-02, 1.080808e-02, 8.002813e-03, 7.237534e-03, 7.191608e-03, 7.174147e-03,
             7.573305e-03, 7.292415e-03, 7.375472e-03, 7.643554e-03, 8.230836e-03, 8.035135e-03,
             8.156635e-03, 9.467691e-03, 1.143895e-02, 2.037733e-02
@@ -1156,7 +1156,7 @@
             9.685131e-01, 1.046549e+00, 1.088114e+00, 1.110140e+00, 1.138076e+00, 1.177870e+00,
             1.201298e+00, 1.233327e+00, 1.315930e+00, 1.334296e+00
         ],
-        std: [
+        uncertainty: [
             7.558791e-02, 2.186765e-02, 1.580277e-02, 1.384149e-02, 1.301651e-02, 1.371833e-02,
             1.315871e-02, 1.384376e-02, 1.465210e-02, 1.507849e-02, 1.530273e-02, 1.575237e-02,
             1.635831e-02, 1.921168e-02, 2.478614e-02, 4.263803e-02
@@ -1177,7 +1177,7 @@
             1.022999e+00, 1.038853e+00, 1.062791e+00, 1.076626e+00, 1.102167e+00, 1.120832e+00,
             1.136413e+00, 1.161546e+00, 1.197026e+00, 1.235315e+00
         ],
-        std: [
+        uncertainty: [
             1.335766e-02, 5.50399e-03, 4.297354e-03, 3.994009e-03, 3.931999e-03, 4.044399e-03,
             4.343260e-03, 3.9888636e-03, 4.133246e-03, 4.222369e-03, 4.359174e-03, 4.341886e-03,
             4.443408e-03, 4.929783e-03, 6.055926e-03, 9.194760e-03
@@ -1193,7 +1193,7 @@
             1.074408e+00, 1.123814e+00, 1.174089e+00, 1.223533e+00, 1.270950e+00, 1.316657e+00,
             1.377144e+00, 1.419409e+00, 1.487031e+00, 1.578615e+00
         ],
-        std: [
+        uncertainty: [
             1.375863e-02, 5.351271e-03, 4.197879e-03, 3.915816e-03, 3.895063e-03, 4.268973e-03,
             4.327061e-03, 4.148718e-03, 4.408674e-03, 4.652219e-03, 4.785185e-03, 4.819964e-03,
             5.082108e-03, 5.499757e-03, 6.673079e-03, 1.009168e-02
@@ -1220,7 +1220,7 @@
             1.054233e+00, 1.104389e+00, 1.137269e+00, 1.232077e+00, 1.244899e+00, 1.318457e+00,
             1.337228e+00, 1.405284e+00, 1.519101e+00, 1.590797e+00
         ],
-        std: [
+        uncertainty: [
             9.930061e-02, 2.161015e-02, 1.428705e-02, 1.340588e-02, 1.308799e-02, 1.317031e-02,
             1.438023e-02, 1.379560e-02, 1.469848e-02, 1.563601e-02, 1.607718e-02, 1.711475e-02,
             1.816173e-02, 2.156186e-02, 2.842992e-02, 5.257179e-02
@@ -1236,7 +1236,7 @@
             1.051387e+00, 1.122712e+00, 1.165102e+00, 1.195463e+00, 1.258972e+00, 1.284706e+00,
             1.342370e+00, 1.416833e+00, 1.480169e+00, 1.554868e+00
         ],
-        std: [
+        uncertainty: [
             4.462063e-02, 1.351968e-02, 1.030380e-02, 9.851995e-03, 9.457929e-03, 1.015874e-02,
             1.076679e-02, 1.042399e-02, 1.085132e-02, 1.114368e-02, 1.164756e-02, 1.162850e-02,
             1.258882e-02, 1.405325e-02, 1.758068e-02, 2.799377e-02
@@ -1252,7 +1252,7 @@
             1.074729e+00, 1.109658e+00, 1.180162e+00, 1.233059e+00, 1.281160e+00, 1.326593e+00,
             1.373603e+00, 1.452483e+00, 1.477960e+00, 1.592955e+00
         ],
-        std: [
+        uncertainty: [
             1.149524e-02, 4.471147e-03, 3.475714e-03, 3.333213e-03, 3.313542e-03, 3.491246e-03,
             3.700620e-03, 3.421970e-03, 3.760464e-03, 3.924176e-03, 4.022260e-03, 4.121465e-03,
             4.350798e-03, 4.753889e-03, 5.697554e-03, 8.711923e-03
@@ -1268,7 +1268,7 @@
             1.098412e+00, 1.175750e+00, 1.201604e+00, 1.319704e+00, 1.297737e+00, 1.400617e+00,
             1.424844e+00, 1.488755e+00, 1.555487e+00, 1.780857e+00
         ],
-        std: [
+        uncertainty: [
             2.102299e-01, 2.726724e-02, 1.720489e-02, 1.481268e-02, 1.519906e-02, 1.614658e-02,
             1.712361e-02, 1.696244e-02, 1.769992e-02, 1.915250e-02, 1.931461e-02, 2.062949e-02,
             2.185729e-02, 2.481944e-02, 3.88400e-02, 6.245309e-02
@@ -1293,7 +1293,7 @@
             1.007201e+00, 1.047483e+00, 1.073099e+00, 1.111879e+00, 1.108192e+00, 1.165779e+00,
             1.246971e+00, 1.308093e+00, 1.366269e+00, 1.572199e+00
         ],
-        std: [
+        uncertainty: [
             3.819503e-02, 2.480072e-02, 2.098712e-02, 2.055285e-02, 2.074407e-02,
             2.316376e-02, 2.323411e-02, 2.314584e-02, 2.453043e-02, 2.390332e-02, 2.489437e-02,
             2.713286e-02, 3.151723e-02, 4.572012e-02, 9.028406e-02
@@ -1309,7 +1309,7 @@
             1.013667e+00, 1.044945e+00, 1.126523e+00, 1.153176e+00, 1.222491e+00, 1.236935e+00,
             1.277792e+00, 1.290073e+00, 1.395249e+00, 1.606796e+00
         ],
-        std: [
+        uncertainty: [
             8.606534e-02, 2.171606e-02, 1.451594e-02, 1.268314e-02, 1.288723e-02, 1.303280e-02,
             1.441962e-02, 1.370233e-02, 1.436513e-02, 1.513482e-02, 1.578670e-02, 1.626297e-02,
             1.679096e-02, 1.928877e-02, 2.566347e-02, 4.930480e-02
@@ -1435,7 +1435,7 @@
             1.060441e+00, 1.109147e+00, 1.172294e+00, 1.195968e+00, 1.195690e+00, 1.168398e+00,
             1.134610e+00, 1.140906e+00, 1.185437e+00, 1.296530e+00
         ],
-        std: [
+        uncertainty: [
             1.337643e-02, 5.505352e-03, 4.557772e-03, 4.533180e-03, 4.690734e-03, 4.960654e-03,
             5.279303e-03, 4.803777e-03, 5.210856e-03, 5.370556e-03, 5.401075e-03, 5.234710e-03,
             5.284412e-03, 5.568944e-03, 6.554313e-03, 1.008741e-02
@@ -1467,7 +1467,7 @@
             1.137703e+00, 1.186176e+00, 1.233508e+00, 1.244713e+00, 1.288404e+00, 1.310184e+00,
             1.323883e+00, 1.290840e+00, 1.405740e+00, 1.622912e+00
         ],
-        std: [
+        uncertainty: [
             6.255197e-02, 2.073814e-02, 1.615201e-02, 1.410506e-02, 1.564612e-02, 1.590950e-02,
             1.730564e-02, 1.619520e-02, 1.765306e-02, 1.828653e-02, 1.884078e-02, 1.877293e-02,
             1.892729e-02, 2.098539e-02, 2.664670e-02, 4.336645e-02
@@ -1622,7 +1622,7 @@
             9.649079e-01, 9.869791e-01, 9.953704e-01, 1.004150e+00, 1.007024e+00, 1.027961e+00,
             1.019941e+00, 1.047410e+00, 1.072671e+00, 1.130533e+00
         ],
-        std: [
+        uncertainty: [
             1.5263155e-02, 6.357885e-03, 4.985058e-03, 4.579146e-03, 4.505808e-03, 4.664800e-03,
             4.825082e-03, 4.410610e-03, 4.583385e-03, 4.696866e-03, 4.627782e-03, 4.701064e-03,
             4.757151e-03, 5.102596e-03, 6.551875e-03, 1.032498e-02
@@ -1647,7 +1647,7 @@
             1.132645e+00, 1.037996e+00, 1.323333e+00, 1.207698e+00, 9.469700e-01, 1.043615e+00,
             1.009874e+00, 1.065422e+00
         ],
-        std: [
+        uncertainty: [
             1.354549e-01, 7.769241e-02, 5.681788e-02, 6.246930e-02, 5.481006e-02, 5.490795e-02,
             8.204103e-02, 6.455651e-02, 7.666945e-02, 9.508438e-02, 7.734357e-02, 8.797529e-02,
             1.081630e-01, 1.424269e-01
@@ -1671,7 +1671,7 @@
             1.093678e+00, 1.068996e+00, 1.083214e+00, 1.18820e+00, 1.155129e+00, 1.162581e+00,
             1.161017e+00, 1.172039e+00, 1.286144e+00, 1.463154e+00
         ],
-        std: [
+        uncertainty: [
             8.070689e-02, 3.153763e-02, 2.477140e-02, 2.214380e-02, 2.309722e-02, 2.459496e-02,
             2.807345e-02, 2.372964e-02, 2.492126e-02, 2.655846e-02, 2.651612e-02, 2.683823e-02,
             2.664563e-02, 3.029618e-02, 3.746990e-02, 5.706313e-02
@@ -1736,7 +1736,7 @@
             1.091497e+00, 1.150037e+00, 1.138663e+00, 1.137241e+00, 1.125035e+00, 1.116319e+00,
             1.190838e+00, 1.356980e+00
         ],
-        std: [
+        uncertainty: [
             3.112106e-02, 2.693639e-02, 2.789510e-02, 3.052887e-02, 3.401165e-02, 3.032549e-02,
             3.186626e-02, 3.409739e-02, 3.245889e-02, 3.202504e-02, 3.452274e-02, 3.874216e-02,
             5.279231e-02, 8.471225e-02
@@ -2051,7 +2051,7 @@
             9.475574e-01, 9.559998e-01, 9.717301e-01, 9.965193e-01, 9.958198e-01, 1.040413e+00,
             9.421372e-01, 1.048762e+00, 1.116237e+00, 1.312982e+00
         ],
-        std: [
+        uncertainty: [
             1.709926e-01, 4.295485e-02, 2.893583e-02, 2.336168e-02, 2.432462e-02, 2.248825e-02,
             2.463936e-02, 2.324755e-02, 2.482959e-02, 2.572201e-02, 2.732877e-02, 2.834329e-02,
             2.696698e-02, 3.319068e-02, 4.586819e-02, 8.981603e-02
@@ -2211,7 +2211,7 @@
             9.798251e-01, 1.106838e+00, 1.088915e+00, 1.109975e+00, 1.079336e+00, 1.144490e+00,
             1.084187e+00, 1.179736e+00, 1.205623e+00, 1.552276e+00
         ],
-        std: [
+        uncertainty: [
             1.727222e-01, 3.567474e-02, 2.289240e-02, 1.975103e-02, 1.918790e-02, 1.912623e-02,
             2.109850e-02, 2.242620e-02, 2.251774e-02, 2.373885e-02, 2.321315e-02, 2.423642e-02,
             2.501571e-02, 2.956880e-02, 4.429197e-02, 1.1001789e-02
@@ -2347,7 +2347,7 @@
         // ECAS   u    b    v    w    x    p
         filters: [359, 437, 550, 701, 853, 948],
         magnitudes: [18.277, 18.158, 18.065, 17.923, 17.824, 17.609],
-        std: [0.072, 0.032, 0.014, 0.019, 0.044, 0.046],
+        uncertainty: [0.072, 0.032, 0.014, 0.019, 0.044, 0.046],
         geometric_albedo: ['Generic/Bessell.V', [0.03, 0.01]],
     },
     '(20738) 1999 XG191 | MBOSS, Schemel2021': {
@@ -2399,7 +2399,7 @@
             1.041513e+00, 1.033285e+00, 1.116874e+00, 1.093232e+00, 9.587399e-01, 1.217547e+00,
             1.039413e+00, 1.333119e+00
         ],
-        std: [
+        uncertainty: [
             1.326054e-01, 7.349496e-02, 6.324432e-02, 5.764853e-02, 5.885974e-02, 6.365982e-02,
             6.794762e-02, 6.923109e-02, 7.724921e-02, 7.345232e-02, 7.583167e-02, 8.726881e-02,
             1.180805e-01, 1.539106e-01
@@ -3242,7 +3242,7 @@
             1.070805e+00, 1.090945e+00, 1.078412e+00, 1.128532e+00, 1.124714e+00, 1.177929e+00,
             1.209035e+00, 1.160600e+00, 1.598629e+00
         ],
-        std: [
+        uncertainty: [
             4.572164e-02, 2.788956e-02, 2.470873e-02, 2.495641e-02, 2.540741e-02, 2.856116e-02,
             2.757330e-02, 2.735725e-02, 2.872656e-02, 2.946765e-02, 2.926992e-02, 3.250777e-02,
             3.723569e-02, 5.029930e-02, 1.350532e-01
@@ -3430,7 +3430,7 @@
         filter_set: 'HST/WFPC2-PC',
         filters: ['F606W', 'F814W'],
         magnitudes: [21.44, 20.58], // mean
-        std: 0.04, // uncertainty from note
+        uncertainty: 0.04, // uncertainty from note
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic/Bessell.V', [0.056, 0.006]], // system albedo
@@ -3440,7 +3440,7 @@
         filter_set: 'HST/WFPC2-PC',
         filters: ['F606W', 'F814W'],
         magnitudes: [22.01, 21.18], // mean
-        std: 0.04, // uncertainty from note
+        uncertainty: 0.04, // uncertainty from note
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic/Bessell.V', [0.056, 0.006]], // system albedo
@@ -3499,7 +3499,7 @@
         filter_set: 'HST/ACS_HRC',
         filters: ['F475W', 'F775W', 1129, 1607],
         spectral_dist: [0.115, 0.214, 0.441, 0.463], // extracted from Fig. 4
-        std: [0.012, 0.009, 0.019, 0.017], // extracted from Fig. 4
+        uncertainty: [0.012, 0.009, 0.019, 0.017], // extracted from Fig. 4
         geometric_albedo: ['Generic/Bessell.V', [0.236, +0.438, -0.077]], // system albedo
     },
     '(66652 I) Pabu | Noll2004, Müller2020': {
@@ -3507,7 +3507,7 @@
         filter_set: 'HST/ACS_HRC',
         filters: ['F475W', 'F775W', 1129, 1607],
         spectral_dist: [0.116, 0.234, 0.414, 0.457], // extracted from Fig. 4
-        std: [0.011, 0.008, 0.016, 0.013], // extracted from Fig. 4
+        uncertainty: [0.011, 0.008, 0.016, 0.013], // extracted from Fig. 4
         geometric_albedo: ['Generic/Bessell.V', [0.236, +0.438, -0.077]], // system albedo
     },
     '(69986) 1998 WW24 | MBOSS': {
@@ -4432,7 +4432,7 @@
         filter_set: 'NewHorizons/MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         spectral_dist: [1, 1.34, 1.73], // Red/Blue ratio: 1.34 ±0.03, NIR/Red ratio: 1.29 ±0.07 (Averaged ratios)
-        std: [0, 0.03, 0.10],
+        uncertainty: [0, 0.03, 0.10],
         geometric_albedo: ['NewHorizons/LORRI.Pan', 0.18], // derived from Fig. 3
         spherical_albedo: ['NewHorizons/LORRI.Pan', 0.13], // derived from Fig. 5
     },
@@ -4441,7 +4441,7 @@
         filter_set: 'NewHorizons/MVIC',
         filters: ['Blue', 'Red', 'NIR', 'CH4'],
         spectral_dist: [0.0585206947096734, 0.0996813841082071, 0.1730562863722947, 0.1840942372929328],
-        std: [0.0097710790150524, 0.0115207188360174, 0.0148026051295749, 0.0150387477568582],
+        uncertainty: [0.0097710790150524, 0.0115207188360174, 0.0148026051295749, 0.0150387477568582],
         geometric_albedo: ['NewHorizons/LORRI.Pan', [0.14, 0.06]], // normal reflectance range of 0.08-0.20
         spherical_albedo: ['NewHorizons/LORRI.Pan', 0.10], // Table 4 (Hofgartner2023)
     },
@@ -4459,7 +4459,7 @@
         filter_set: 'NewHorizons/MVIC',
         filters: ['Blue', 'Red', 'NIR', 'CH4'],
         spectral_dist: [0.5333532883601964, 0.6891250091800001, 0.6730569209356718, 0.6399055600979812],
-        std: [0.0510219278077558, 0.0590445911622765, 0.0536593855929842, 0.0479830122025796],
+        uncertainty: [0.0510219278077558, 0.0590445911622765, 0.0536593855929842, 0.0479830122025796],
         geometric_albedo: ['NewHorizons/LORRI.Pan', 0.84], // derived from Fig. 3
         spherical_albedo: ['NewHorizons/LORRI.Pan', 0.76], // derived from Fig. 5
     },
@@ -4468,7 +4468,7 @@
         filter_set: 'NewHorizons/MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         spectral_dist: [1, 1.15, 1.09], // Red/Blue ratio: 1.15 ±0.06, NIR/Red ratio: 0.95 ±0.03 (Averaged ratios)
-        std: [0, 0.06, 0.07],
+        uncertainty: [0, 0.06, 0.07],
         geometric_albedo: ['NewHorizons/LORRI.Pan', 0.89], // derived from Fig. 3
         spherical_albedo: ['NewHorizons/LORRI.Pan', 0.86], // Table 4 (Hofgartner2023)
     },
@@ -4477,7 +4477,7 @@
         filter_set: 'NewHorizons/MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         spectral_dist: [1, 1.34, 1.73], // Red/Blue ratio: 1.34 ±0.03, NIR/Red ratio: 1.29 ±0.07 (Averaged ratios)
-        std: [0, 0.03, 0.10],
+        uncertainty: [0, 0.03, 0.10],
         geometric_albedo: ['NewHorizons/LORRI.Pan', 0.43], // derived from Fig. 3
         spherical_albedo: ['NewHorizons/LORRI.Pan', 0.38], // derived from Fig. 5
     },
@@ -4491,7 +4491,7 @@
         filter_set: 'NewHorizons/MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         spectral_dist: [0.99, 1, 1.04], // Blue/Red ratio: 0.99 ±0.08, Red/NIR ratio: 0.96 ±0.09 (Averaged ratios)
-        std: [0.08, 0, 0.10],
+        uncertainty: [0.08, 0, 0.10],
         geometric_albedo: ['Generic/Bessell.V', [0.408, +0.004, -0.005]],
         spherical_albedo: ['Generic/Bessell.V', [0.228, +0.006, -0.039]],
     },
@@ -4500,7 +4500,7 @@
         filter_set: 'NewHorizons/MVIC',
         filters: ['Blue', 'Red', 'NIR', 'CH4'],
         spectral_dist: [0.292, 0.288, 0.288, 0.290], // traced from Fig. 11
-        std: [0.030, 0.027, 0.025, 0.026], // traced from Fig. 11
+        uncertainty: [0.030, 0.027, 0.025, 0.026], // traced from Fig. 11
         geometric_albedo: ['Generic/Bessell.V', [0.408, +0.004, -0.005]],
         spherical_albedo: ['Generic/Bessell.V', [0.228, +0.006, -0.039]],
     },
@@ -4534,7 +4534,7 @@
         filter_set: 'NewHorizons/MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         spectral_dist: [0.799, 0.853, 0.920],
-        std: [0.088, 0.082, 0.078],
+        uncertainty: [0.088, 0.082, 0.078],
         geometric_albedo: ['NewHorizons/LORRI.Pan', 0.40], // derived from Fig. 4
         spherical_albedo: ['NewHorizons/LORRI.Pan', 0.27], // derived from Fig. 6
     },
@@ -4543,7 +4543,7 @@
         filter_set: 'NewHorizons/MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         spectral_dist: [0.426, 0.539, 0.720],
-        std: [0.088, 0.088, 0.077],
+        uncertainty: [0.088, 0.088, 0.077],
         geometric_albedo: ['NewHorizons/LORRI.Pan', 0.29], // derived from Fig. 4
         spherical_albedo: ['NewHorizons/LORRI.Pan', 0.19], // derived from Fig. 6
     },
@@ -4552,7 +4552,7 @@
         filter_set: 'NewHorizons/MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         spectral_dist: [0.79, 1, 1.35], // Blue/Red ratio: 0.79 ±0.05, Red/NIR ratio: 0.74 ±0.06 (Averaged ratios)
-        std: [0.05, 0, 0.11],
+        uncertainty: [0.05, 0, 0.11],
         geometric_albedo: ['NewHorizons/LORRI.Pan', [0.28, 0.08]], // normal reflectance range of 0.20-0.35
         spherical_albedo: ['NewHorizons/LORRI.Pan', 0.14], // derived from Fig. 6
     },
@@ -4575,7 +4575,7 @@
         filter_set: 'NewHorizons/MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         spectral_dist: [0.99, 1, 0.99], // Blue/Red ratio: 0.99 ±0.03, Red/NIR ratio: 1.01 ±0.02 (Averaged ratios)
-        std: [0.03, 0, 0.02],
+        uncertainty: [0.03, 0, 0.02],
         geometric_albedo: ['Generic/Bessell.V', [0.56, 0.05]],
         spherical_albedo: ['Generic/Bessell.V', [0.24, 0.07]], // Table 3, p. 426 (Howett2021b)
     },
@@ -4601,7 +4601,7 @@
         filter_set: 'NewHorizons/MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         spectral_dist: [0.97, 1, 1.04], // Blue/Red ratio: 0.97 ±0.03, Red/NIR ratio: 0.96 ±0.03 (Averaged ratios)
-        std: [0.03, 0, 0.03],
+        uncertainty: [0.03, 0, 0.03],
         geometric_albedo: ['Generic/Bessell.V', 0.44],
         // dark areas of the crater have an albedo of 0.60 ±0.02, 0.60 ±0.02 / 0.764 = a contrast value of 79% to the average albedo of the Nix map
         phase_integral: [0.42, 0.08],
@@ -4611,7 +4611,7 @@
         filter_set: 'NewHorizons/MVIC',
         filters: ['Blue', 'Red', 'NIR'],
         spectral_dist: [1.00, 1, 0.88], // Blue/Red ratio: 1.00 ±0.04, Red/NIR ratio: 1.14 ±0.07 (Averaged ratios)
-        std: [0.04, 0, 0.05],
+        uncertainty: [0.04, 0, 0.05],
         geometric_albedo: ['Generic/Bessell.V', [0.83, 0.08]],
         spherical_albedo: ['Generic/Bessell.V', [0.32, 0.11]], // Table 3, p. 426 (Howett2021b)
     },
@@ -4732,7 +4732,7 @@
         tags: ['Solar System/Haumean system', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
         filters: ['Generic/Bessell.B', 'Generic/Bessell.R', 'Generic/Bessell_JHKLM.J', 'Generic/Bessell_JHKLM.H'],
         spectral_dist: [0.983, 1, 1.015, 1.040], // average of rotational phases 0.70 to 0.90 in Fig. 2b (DRS regions)
-        std: [0.009, 0, 0.007, 0.012],
+        uncertainty: [0.009, 0, 0.007, 0.012],
         geometric_albedo: ['Generic/Bessell.V', 0.48], // calculated from Ortiz2017 albedo with albedo constrast of 95% (hemispheric model)
         phase_integral: [0.454, +0.034, -0.047], // system
     },
@@ -5128,7 +5128,7 @@
         filter_set: 'Hayabusa2/ONC-T',
         filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
         spectral_dist: [0.0438, 0.0408, 0.0406, 0.0408, 0.0405, 0.0411, 0.03987],
-        std: [0.0012, 0.0011, 0.0010, 0.0009, 0.0008, 0.0006, 0.00050],
+        uncertainty: [0.0012, 0.0011, 0.0010, 0.0009, 0.0008, 0.0006, 0.00050],
         is_geometric_albedo: true, // normal (=geometric) albedo spectrum from the Table 3
         spherical_albedo: ['Hayabusa2/ONC-T.v', [0.014, 0.01]],
     },
@@ -5137,7 +5137,7 @@
         filter_set: 'Hayabusa2/ONC-T',
         filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
         spectral_dist: [0.0473, 0.0445, 0.0439, 0.0439, 0.0430, 0.0427, 0.0410],
-        std: [0.0018, 0.0017, 0.0016, 0.0015, 0.0011, 0.0009, 0.0008],
+        uncertainty: [0.0018, 0.0017, 0.0016, 0.0015, 0.0011, 0.0009, 0.0008],
         is_geometric_albedo: true, // normal (=geometric) albedo spectrum of N-pole bright area from the Table 6
     },
     '(162173) Ryugu: Dark areas | Yokota2021': {
@@ -5145,7 +5145,7 @@
         filter_set: 'Hayabusa2/ONC-T',
         filters: ['ul', 'b', 'v', 'Na', 'w', 'x', 'p'],
         spectral_dist: [0.0427, 0.0398, 0.0398, 0.0400, 0.0399, 0.0407, 0.0396],
-        std: [0.0006, 0.0006, 0.0005, 0.0004, 0.0003, 0.0003, 0.0002],
+        uncertainty: [0.0006, 0.0006, 0.0005, 0.0004, 0.0003, 0.0003, 0.0002],
         is_geometric_albedo: true, // normal (=geometric) albedo spectrum of N-Plain area from the Table 6
     },
     '(162173) Ryugu | MITHNEOS, Tatsumi2020': {
@@ -6444,7 +6444,7 @@
         filter_set: 'SLOAN/SDSS',
         filters: ['g', 'r', 'i', 'z'],
         magnitudes: [21.914, 21.303, 21.087, 20.981],
-        std: [0.026, 0.039, 0.037, 0.054],
+        uncertainty: [0.026, 0.039, 0.037, 0.054],
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
@@ -8582,7 +8582,7 @@
         filter_set: 'Generic/Bessell',
         filters: ['V', 'R', 'I'],
         spectral_dist: [1, 0.9, 0.7], // extracted from Fig. 2a
-        std: [0, 1.645, 0.848], // extracted from Fig. 2a
+        uncertainty: [0, 1.645, 0.848], // extracted from Fig. 2a
         geometric_albedo: ['Generic/Bessell.R', [0.06, 0.02]],
         phase_function: ['phase coefficient', {beta: [0.043, 0.009]}],
     },
@@ -8789,7 +8789,7 @@
         filter_set: 'Rosetta/OSIRIS_NAC',
         filters: ['Blue', 'Green', 'Orange', 'Hydra', 'Red'],
         spectral_dist: [0.054, 0.059, 0.074, 0.077, 0.080],
-        std: [0.002, 0.002, 0.002, 0.002, 0.003],
+        uncertainty: [0.002, 0.002, 0.002, 0.002, 0.003],
         phase_function: ['HG', {H: [15.74, 0.02], G: [-0.13, 0.01]}],
         is_geometric_albedo: true, // Table 1
     },
@@ -9670,7 +9670,7 @@
         filter_set: 'SLOAN/SDSS',
         filters: ['g', 'r', 'i'],
         magnitudes: [23.51, 23.10, 22.87],
-        std: [0.22, 0.09, 0.23],
+        uncertainty: [0.22, 0.09, 0.23],
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
     },
@@ -9726,7 +9726,7 @@
         filter_set: 'SLOAN/SDSS',
         filters: ['gprime_filter', 'rprime_filter', 'iprime_filter', 'z'], // TODO: replace with FTN/MuSCAT3 filters g', r', u', z_s
         spectral_dist: [0.816, 1.198, 1.368, 1.596],
-        std: [0.018, 0.011, 0.029, 0.081],
+        uncertainty: [0.018, 0.011, 0.029, 0.081],
     },
     'Opitom2025': [
         'Snapshot of a new interstellar comet: 3I/ATLAS has a red and featureless spectrum',
