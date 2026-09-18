@@ -710,16 +710,6 @@
         uncertainty: [0.048, 0.029, 0.048, 0.060, 0.056, 0.063, 0.030, 0.008, 0.033, 0.054], // Fig. 2a
         is_albedo: true, // Reflectivity
     },
-    'Brown2004': [
-        'The Cassini Visual And Infrared Mapping Spectrometer (VIMS) Investigation',
-        'DOI: 10.1007/s11214-004-1453-x', 'https://link.springer.com/article/10.1007/s11214-004-1453-x',
-        'https://ui.adsabs.harvard.edu/abs/2004SSRv..115..111B/abstract'
-    ],
-    'Great Red Spot (Jupiter) | Brown2004': {
-        tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter/GRS'],
-        file: 'spectra/files/GRS_Brown2004.txtU', // Fig. 16
-        is_albedo: true, // apparent reflectance
-    },
     'Simon2018': [
         'Historical and Contemporary Trends in the Size, Drift, and Color of Jupiter’s Great Red Spot',
         'DOI: 10.3847/1538-3881/aaae01', 'https://iopscience.iop.org/article/10.3847/1538-3881/aaae01',
@@ -742,6 +732,17 @@
         uncertainty: [0.016, 0.031, 0.030, 0.030],
         is_reflecting_sunlight: false,
         is_albedo: true, // I/F
+    },
+    'Brown2004': [
+        'The Cassini Visual And Infrared Mapping Spectrometer (VIMS) Investigation',
+        'DOI: 10.1007/s11214-004-1453-x', 'https://link.springer.com/article/10.1007/s11214-004-1453-x',
+        'https://www.academia.edu/download/47355461/s11214-004-1453-x20160719-32080-lrraxf.pdf',
+        'https://ui.adsabs.harvard.edu/abs/2004SSRv..115..111B/abstract'
+    ],
+    'Great Red Spot: December 2000 (Jupiter) | Brown2004': { // month is not specified in the source!
+        tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter/GRS'],
+        file: 'spectra/files/GRS_Brown2004.txtU', // Fig. 16
+        is_albedo: true, // apparent reflectance
     },
     'Great Red Spot: February 2007 (Jupiter) | Simon2018': {
         tags: ['Solar System/Jovian system', 'planetary body/planet/Jupiter/Jovian feature/GRS'],
@@ -1411,7 +1412,7 @@
         file: 'spectra/files/Clark2014/A_ring_inner_Clark2014.txtU', // Fig. 13
         is_spherical_albedo: true,
     },
-    'A ring: 134~000—136~700 (Saturn) | Clark2014': { // Outer; phase angle 19°
+    'A ring: 134~000—136~700 km (Saturn) | Clark2014': { // Outer; phase angle 19°
         tags: ['Solar System/Saturnian system', 'ring'],
         file: 'spectra/files/Clark2014/A_ring_outer_Clark2014.txtU', // Fig. 13
         is_spherical_albedo: true,
@@ -2715,7 +2716,7 @@
     'Triton (N I) | Tryka1999, Helfenstein2025': {
         tags: ['featured', 'Solar System/Neptunian system', 'planetary body/large moon/Triton', 'natural satellite/irregular moon'],
         nm_range: {start: 300, stop: 900, step: 100},
-        sd_geometric: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79],
+        sd_geometric: [0.57, 0.67, 0.75, 0.77, 0.82, 0.81, 0.79], // TODO: retrace! The paper provides higher resolution.
         phase_integral: [0.934, +0.100, -0.016],
     },
     'Hillier1994': [
@@ -2805,26 +2806,13 @@
         'DOI: 10.1093/mnras/stw081', 'https://academic.oup.com/mnras/article/457/3/2908/2588900',
         'https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.2908K/abstract'
     ],
-    'Schaefer2000': [
-        'Nereid Has Complex Large-Amplitude Photometric Variability (Due to Chaotic Rotation)',
-        'DOI: 10.1006/icar.2000.6417', 'https://arxiv.org/abs/astro-ph/0005050v1',
-        'https://ui.adsabs.harvard.edu/abs/2000Icar..146..541S/abstract'
-    ],
     'Thomas1991b': [
         'Voyager observations of Nereid',
         'DOI: 10.1029/91JA01735', 'https://agupubs.onlinelibrary.wiley.com/doi/10.1029/91JA01735',
         'https://ui.adsabs.harvard.edu/abs/1991JGR....9619253T/abstract'
     ],
-    'Nereid (N II) | Schaefer2000, Kiss2016, Thomas1991b': {
-        tags: ['featured', 'Solar System/Neptunian system', 'natural satellite/irregular moon'],
-        filter_set: 'Generic/Bessell',
-        filters: ['U', 'B', 'V', 'R', 'I'],
-        spectral_dist: [0.90, 0.93, 1, 1.13, 0.99],
-        geometric_albedo: ['Generic/Bessell.V', [0.24, 0.02]],
-        phase_integral: 0.5,
-    },
     'Nereid (N II) | Graykowski2018, Kiss2016, Thomas1991b': {
-        tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
+        tags: ['featured', 'Solar System/Neptunian system', 'natural satellite/irregular moon'],
         filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.67, 0.02], 'V-R': [0.38, 0.01]},
         calibration_system: 'Vega',
@@ -2838,6 +2826,19 @@
         color_indices: {'B-V': [0.66, 0.01], 'V-R': [0.39, 0.01]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic/Bessell.V', [0.24, 0.02]],
+        phase_integral: 0.5,
+    },
+    'Schaefer2000': [
+        'Nereid Has Complex Large-Amplitude Photometric Variability (Due to Chaotic Rotation)',
+        'DOI: 10.1006/icar.2000.6417', 'https://arxiv.org/abs/astro-ph/0005050v1',
+        'https://ui.adsabs.harvard.edu/abs/2000Icar..146..541S/abstract'
+    ],
+    'Nereid (N II) | Schaefer2000, Kiss2016, Thomas1991b': {
+        tags: ['Solar System/Neptunian system', 'natural satellite/irregular moon'],
+        filter_set: 'Generic/Bessell',
+        filters: ['U', 'B', 'V', 'R', 'I'],
+        spectral_dist: [0.90, 0.93, 1, 1.13, 0.99], // the color is suspicious: from three sources it's the only red one
         geometric_albedo: ['Generic/Bessell.V', [0.24, 0.02]],
         phase_integral: 0.5,
     },
