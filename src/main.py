@@ -171,9 +171,9 @@ def launch_window(lang: str):
                 pl.close_figure(tab1_tab3_fig)
                 tab1_tab3_fig_canvas_agg.get_tk_widget().forget()
             dict_to_plot = deepcopy(pinned_spectra_and_colors)
-            if tab1_obj_name and tab1_spectrum not in dict_to_plot.keys():
+            if tab1_obj_name and tab1_spectrum not in dict_to_plot:
                 dict_to_plot |= {tab1_spectrum: tab1_html}
-            if tab3_obj_name and tab3_spectrum not in dict_to_plot.keys():
+            if tab3_obj_name and tab3_spectrum not in dict_to_plot:
                 dict_to_plot |= {tab3_spectrum: tab3_html}
             tab1_tab3_fig = pl.plot_spectra(dict_to_plot, limit_to_vis, normalize_at_550nm, light_theme, lang, spectra_figsize, spectra_dpi)
             tab1_tab3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, tab1_tab3_fig)
@@ -190,7 +190,7 @@ def launch_window(lang: str):
             )
 
         # Run-time translation
-        elif event in tr.langs.keys():
+        elif event in tr.langs:
             lang = tr.langs[event]
             window0 = gui.translate_win0(window0, tab1_loaded, tab1_albedo_note, tab2_vis, lang)
             match values['-currentTab-']:
@@ -622,7 +622,7 @@ def launch_window(lang: str):
                     window['tab3_slider1'].update(range=(0, int(values['tab3_maxtemp_num'])))
 
                 elif event == 'tab3_pin':
-                    if tab3_spectrum not in pinned_spectra_and_colors.keys():
+                    if tab3_spectrum not in pinned_spectra_and_colors:
                         pinned_spectra_and_colors |= {tab3_spectrum: tab3_html}
 
                 elif event == 'tab3_clear':

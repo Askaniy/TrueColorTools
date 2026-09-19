@@ -65,20 +65,17 @@ def obj_names_dict(database: dict[ObjectName, dict], tag: str, searched: str, la
         # "Search engine"
         searched = searched.lower()
         for obj_name in database:
-            # commented construction similar to (_ or _ or _ or _)
             # 1, 2. Search within English name and subscript numbers of provisional designation
-            if searched not in obj_name._name_raw.lower():
-                if searched not in obj_name._info_raw.lower():
-                    # 3, 4. Search within translated indexed name and additional information
-                    if searched not in obj_name.indexed_name(lang).lower():
-                        if searched not in obj_name.info(lang).lower():
-                            # This name doesn't fit
-                            continue
-            # Else, it fits
-            names |= {obj_name(lang): obj_name}
+            # 3, 4. Search within translated indexed name and additional information
+            if searched in obj_name._name_raw.lower() or \
+               searched in obj_name._info_raw.lower() or \
+               searched in obj_name.indexed_name(lang).lower() or \
+               searched in obj_name.info(lang).lower():
+                # It fits
+                names |= {obj_name(lang): obj_name}
     return names
 
-# TODO: delete this funtion, and give `tab1_displayed_namesDB` to `generate_table()` instead of tag
+# TODO: delete this function, and give `tab1_displayed_namesDB` to `generate_table()` instead of tag
 def obj_names_list(database: dict[ObjectName, dict], tag: str) -> list[ObjectName]:
     """ Lists the names of eligible objects for color table """
     names = []
@@ -92,7 +89,7 @@ def tag_list(database: dict[ObjectName, dict]) -> list[str]:
     Generates a list of tags found in the spectra database.
     Tags can be written as `A/B/C`, which reads as {A, A/B, A/B/C}.
     """
-    tag_set = set(['ALL'])
+    tag_set = {'ALL'}
     for obj_data in database.values():
         if 'tags' in obj_data:
             for tag in obj_data['tags']:

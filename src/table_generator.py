@@ -105,7 +105,7 @@ def generate_table(
 
     # Calculating grid heights
     h0 = border_space + name_size
-    h1 = h0 + 2*half_square * int(ceil(l / objects_per_row)) + border_space//2
+    h1 = h0 + 2*half_square * ceil(l / objects_per_row) + border_space//2
     h2 = h1 + help_step
     h = h1 + help_step + notes_per_column*note_step + border_space//2 # total image height
 
@@ -298,7 +298,7 @@ def width(line: str, font: ImageFont.FreeTypeFont):
     """ Alias for measuring line width in pixels """
     return font.getlength(line)
 
-def check_ref(ref: str, font: ImageFont.FreeTypeFont, maxW: int):
+def check_ref(ref: str, font: ImageFont.FreeTypeFont, maxW: float):
     """ Shortens the reference name if it exceeds the maximum width """
     ref = ref.strip()
     if len(ref) > 4 and (year := ref[-4:]).isnumeric() and (ref[-5].isalpha() or ref[-5] in separators):
@@ -312,7 +312,7 @@ def check_ref(ref: str, font: ImageFont.FreeTypeFont, maxW: int):
         ref = ref + '…'
     return ref + year
 
-def line_splitter(line: str, font: ImageFont.FreeTypeFont, maxW: int) -> list[str]:
+def line_splitter(line: str, font: ImageFont.FreeTypeFont, maxW: float) -> list[str]:
     """ Performs an adaptive line break at the specified width in pixels """
     if width(line, font) < maxW:
         return [line]
@@ -337,7 +337,7 @@ def get_numeric_end(word: str):
             break
     return number
 
-def recursive_split(lst: list, font: ImageFont.FreeTypeFont, maxW: int):
+def recursive_split(lst: list, font: ImageFont.FreeTypeFont, maxW: float):
     """ A function that recursively splits and joins the list of strings to match `maxW` """
     words_widths = tuple(width(word, font) for word in lst)
     if len(lst) > 10:

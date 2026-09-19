@@ -32,7 +32,7 @@ def cached_open(file: str):
     else:
         return Image.open(file)
 
-def rgb_reader(file: str, formulas: list = None) -> np.ndarray:
+def rgb_reader(file: str, formulas: list[str] | None = None) -> np.ndarray:
     """ Imports spectral data from a RGB image """
     img = cached_open(file)
     img = img.convert(to_supported_mode(img.mode))
@@ -56,7 +56,7 @@ def bw_reader(file: str) -> np.ndarray:
         br = br[np.argmax(br.sum(axis=(1,2)))]
     return br
 
-def bw_list_reader(files: Sequence[str], formulas: list[str] = None) -> np.ndarray:
+def bw_list_reader(files: Sequence[str], formulas: list[str] | None = None) -> np.ndarray:
     """ Imports and combines the list of black and white images into one array """
     if formulas is None:
         br = [bw_reader(file) for file in files]

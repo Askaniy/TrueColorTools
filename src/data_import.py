@@ -138,7 +138,7 @@ def search_column(names: list[str], target: str):
         case 'std':
             candidates = names_set & {'syserror'}
     try:
-        return names.index(list(candidates)[0])
+        return names.index(next(iter(candidates)))
     except IndexError:
         match target:
             case 'wl':
