@@ -272,7 +272,7 @@ def generate_layout(
         [sg.Push(), sg.Text('max ='), sg.InputText('20000', size=8, enable_events=True, key='tab3_maxtemp_num'), sg.Text('K')],
         [
             sg.Text(tr.gui_temp[lang], justification='right', size=18, key='tab3_temp'),
-            sg.Slider(range=(0, 20000), default_value=0, resolution=100, orientation='h', size=slider_size, enable_events=True, key='tab3_slider1', expand_x=True)
+            sg.Slider(range=(0, 20000), default_value=0, resolution=10, orientation='h', size=slider_size, enable_events=True, key='tab3_slider1', expand_x=True)
         ],
         [
             sg.Text(tr.gui_velocity[lang], justification='right', size=18, key='tab3_velocity'),
