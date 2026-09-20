@@ -533,7 +533,7 @@ k = 1.381e-23 # Boltzmann constant
 const1 = 2 * h * c * c # * np.pi to get exitance (W/m2) in the assumption of Lambertian surface
 const2 = h * c / k
 
-def planck_radiance(wavelength_nm: float | np.ndarray, T: float) -> float|np.ndarray:
+def planck_radiance(nm: float | np.ndarray, T: float) -> float|np.ndarray:
     m = nm * 1e-9
     radiance = const1 / (m**5 * (np.exp(const2 / (m * T)) - 1))
     return radiance * 1e-9 # per m -> per nm
