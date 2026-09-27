@@ -35,7 +35,11 @@
     'Collyer2025a': [
         'The Surfaces of Small to Midsize Plutinos: Evidence of an Association between Inclination and Surface Type',
         'DOI: 10.3847/PSJ/adef36', 'https://iopscience.iop.org/article/10.3847/PSJ/adef36',
-        'https://ui.adsabs.harvard.edu/abs/2025arXiv250710766C/abstract'
+        'https://ui.adsabs.harvard.edu/abs/2025PSJ.....6..211C/abstract'
+    ],
+    'Erasmus2026': [
+        'Long-baseline ATLAS photometry of the seven main-belt asteroid targets of the Emirates Mission to the Asteroid Belt',
+        'https://arxiv.org/abs/2609.07404'
     ],
     'Fernandez2005': [
         'Albedos of Asteroids in Comet-Like Orbits',
@@ -89,11 +93,6 @@
         'DOI: 10.1051/0004-6361:20031142', 'https://www.aanda.org/articles/aa/abs/2003/36/aaff101/aaff101.html',
         'https://ui.adsabs.harvard.edu/abs/2003A%26A...408L..17M/abstract'
     ],
-    'Marchis2012': [
-        'Multiple asteroid systems: Dimensions and thermal properties from Spitzer Space Telescope and ground-based observations',
-        'DOI: 10.1016/j.icarus.2012.09.013', 'https://arxiv.org/abs/1604.05384',
-        'https://ui.adsabs.harvard.edu/abs/2012Icar..221.1130M/abstract'
-    ],
     'Markwardt2023': [
         'Photometric Survey of neptune trojan Asteroids. I. The Color Distribution',
         'DOI: 10.3847/PSJ/ace528', 'https://iopscience.iop.org/article/10.3847/PSJ/ace528',
@@ -106,7 +105,7 @@
     ],
     'Pravec2012': [
         'Absolute magnitudes of asteroids and a revision of asteroid albedo estimates from WISE thermal observations',
-        'DOI: 10.1016/j.icarus.2012.07.026', 'https://www.asu.cas.cz/~ppravec/pravecetal2012b.pdf',
+        'DOI: 10.1016/j.icarus.2012.07.026', 'https://space.asu.cas.cz/~ppravec/pravecetal2012b.pdf',
         'https://ui.adsabs.harvard.edu/abs/2012Icar..221..365P/abstract'
     ],
     'Shevchenko2022': [
@@ -566,19 +565,29 @@
         geometric_albedo: ['Generic/Bessell.V', 0.052],
         phase_function: ['HG', {H: [7.13, 0.10], G: [-0.01, 0.05]}], // average H
     },
-    '(44) Nysa | SMASS, SsODNet': {
+    'Shepard2008': [
+        'Radar observations of E-class Asteroids 44 Nysa and 434 Hungaria',
+        'DOI: 10.1016/j.icarus.2007.12.018', 'https://www.sciencedirect.com/science/article/pii/S0019103508000286',
+        'https://ui.adsabs.harvard.edu/abs/2008Icar..195..220S/abstract'
+    ],
+    '(44) Nysa | SMASS, Shepard2008, Shevchenko2022': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
-        file: 'spectra/files/SMASS/44_nysa.txtU',
-        geometric_albedo: ['Generic/Bessell.V', [0.5647, 0.143]],
-        phase_function: ['HG1G2', {H: [6.904, 0.006], G_1: [0.05, 0.03], G_2: [0.67, 0.01]}],
+        file: 'spectra/files/SMASS/a000044.2.txtU',
+        geometric_albedo: ['Generic_Bessell.V', [0.44, 0.10]],
+        phase_function: ['HG1G2', {H: [6.904, 0.006], G_1: [0.05, 0.03], G_2: [0.670, 0.010]}],
     },
-    '(45) Eugenia | SMASS, Vernazza2021, Pravec2012': {
+    'Harris1999': [
+        'Asteroid Lightcurve Observations from 1981 to 1983',
+        'DOI: 10.1006/icar.1999.6181', 'https://www.sciencedirect.com/science/article/abs/pii/S001910359996181X',
+        'https://ui.adsabs.harvard.edu/abs/1999Icar..142..173H/abstract'
+    ],
+    '(45) Eugenia | SMASS, Vernazza2021, Harris1999': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000045.2.txtU',
         geometric_albedo: ['Generic/Bessell.V', 0.065],
-        phase_function: ['HG', {H: [7.422, 0.030], G: [0.130, 0.006]}],
+        phase_function: ['HG', {H: [7.422, 0.005], G: [0.135, 0.006]}],
     },
-    '(45 I) Petit-Prince | Storrs2025, Vernazza2021, Pravec2012': { // mean of two epochs
+    '(45 I) Petit-Prince | Storrs2025, Vernazza2021, Harris1999': { // mean of two epochs
         tags: ['Solar System', 'minor body/asteroid/main belt', 'natural satellite/minor planet moon'],
         filter_set: 'HST/WFPC2-PC',
         filters: ['F439W', 'F673N', 'F791W', 'F1042M'], // F953N excluded
@@ -587,7 +596,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic/Bessell.V', 0.065], // from Eugenia
-        phase_function: ['HG', {H: [7.422, 0.030], G: [0.130, 0.006]}], // from Eugenia
+        phase_function: ['HG', {H: [7.422, 0.005], G: [0.135, 0.006]}], // from Eugenia
     },
     '(48) Doris | SMASS, Vernazza2021, SsODNet': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
@@ -811,11 +820,11 @@
         'DOI: 10.3847/PSJ/adb28c', 'https://iopscience.iop.org/article/10.3847/PSJ/adb28c',
         'https://ui.adsabs.harvard.edu/abs/2025PSJ.....6...61B/abstract'
     ],
-    '(269) Justitia | SMASS, Buie2025, SsODNet': {
+    '(269) Justitia | SMASS, Buie2025, Erasmus2026': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
         file: 'spectra/files/SMASS/a000269.2.txtU',
         geometric_albedo: ['Generic/Bessell.V', [0.072, 0.007]],
-        phase_function: ['HG1G2', {H: [9.654725, +0.102008, -0.112125], G_1: [0.159771, +0.138945, -0.159532], G_2: [0.495732, +0.067168, -0.064874]}],
+        phase_function: ['Misc/Atlas.cyan', 'HG', {H: [10.00, 0.01], G: [0.25, 0.01]}],
     },
     'deLeon2010': [
         'Observations, compositional, and physical characterization of near-Earth and Mars-crosser asteroids from a spectroscopic survey',
@@ -915,22 +924,26 @@
         'DOI: 10.1016/j.icarus.2009.07.043', 'https://arxiv.org/abs/0908.4198',
         'https://ui.adsabs.harvard.edu/abs/2010Icar..205..505M/abstract'
     ],
-    '(617) Patroclus-Menoetius | Humes2022, Mueller2010, Schemel2021': {
+    'Warner2025': [
+        'Follow-Up Observations of 617 Patroclus-Menoetius Mutual Events: 2024 November to 2025 January',
+        'https://ui.adsabs.harvard.edu/abs/2025MPBu...52..178W/abstract'
+    ],
+    '(617) Patroclus-Menoetius | Humes2022, Mueller2010, Warner2025': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan', 'spacecraft target/Lucy target'],
         file: 'spectra/files/Humes2022/617_Patroclus_albedo.txtU',
         geometric_albedo: ['Generic/Bessell.V', [0.045, 0.009]],
-        phase_function: ['Palomar/ZTF.r', 'HG', {H: [8.04, 0.02], G: [0.20, 0.03]}],
+        phase_function: ['HG', {H: [8.032, 0.042], G: [0.075, 0.066]}],
     },
-    '(617) Patroclus-Menoetius | Chatelain2016, Mueller2010, Schemel2021': {
+    '(617) Patroclus-Menoetius | Chatelain2016, Mueller2010, Warner2025': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan', 'spacecraft target/Lucy target'],
         filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.710, 0.050], 'V-R': [0.420, 0.030], 'V-I': [0.830, 0.020]}, // as reported in LCDB
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic/Bessell.V', [0.045, 0.009]],
-        phase_function: ['Palomar/ZTF.r', 'HG', {H: [8.04, 0.02], G: [0.20, 0.03]}],
+        phase_function: ['HG', {H: [8.032, 0.042], G: [0.075, 0.066]}],
     },
-    '(623) Chimaera | GaiaDR3, SsODNet': {
+    '(623) Chimaera | GaiaDR3, SsODNet, Erasmus2026': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
         wavelength_nm: [374, 418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
         spectral_dist: [
@@ -944,7 +957,7 @@
             2.174494e-03, 2.307703e-03, 2.581060e-03, 3.737699e-03
         ],
         geometric_albedo: ['Generic/Bessell.V', [0.053, 0.0105]],
-        phase_function: ['HG1G2', {H: [10.004629, +0.385774, -0.601341], G_1: [0.061868, +0.237863, -0.544161], G_2: [0.22148, +0.140916, -0.072153]}],
+        phase_function: ['Misc/Atlas.cyan', 'HG', {H: [11.00, 0.03], G: [0.18, 0.03]}],
     },
     '(624) Hektor | GaiaDR3, Gradovski2025, Schemel2021': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -1016,7 +1029,12 @@
         geometric_albedo: ['Generic/Bessell.V', [0.044, 0.002]],
         phase_function: ['HG1G2', {H: [8.937, 0.007], G_1: [0.780, 0.050], G_2: [0.170, 0.030]}],
     },
-    '(911) Agamemnon | GaiaDR3, Gradovski2025, SsODNet': {
+    'Gradovski2026': [
+        'Rigorous Use of Light-curve Inversion and Stellar Occultation Techniques for Deriving a Scaled Three-dimensional Shape for the Jupiter Trojan (911) Agamemnon',
+        'DOI: 10.3847/1538-4357/ae8b97', 'https://iopscience.iop.org/article/10.3847/1538-4357/ae8b97',
+        'https://ui.adsabs.harvard.edu/abs/2026ApJ..1007..102D/abstract'
+    ],
+    '(911) Agamemnon | GaiaDR3, Gradovski2026, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         wavelength_nm: [374, 418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
         spectral_dist: [
@@ -1029,7 +1047,7 @@
             4.758894e-03, 4.451864e-03, 4.656452e-03, 4.906095e-03, 4.928027e-03, 5.093985e-03,
             5.382436e-03, 5.742557e-03, 7.222007e-03, 1.083169e-02
         ],
-        geometric_albedo: ['Generic/Bessell.V', [0.058, 0.001]], // Table 71
+        geometric_albedo: ['GAIA_GAIA2r.G', [0.051, 0.005]],
         phase_function: ['Misc/Atlas.cyan', 'HG1G2', {H: [8.1130, +0.0548, -0.0636], G_1: [0.8096, +0.1601, -0.1733], G_2: [0.1182, +0.0991, -0.0932]}],
     },
     'Licandro2016': [
@@ -1206,11 +1224,16 @@
         'DOI: 10.1051/0004-6361/201323090', 'https://www.aanda.org/articles/aa/full_html/2014/08/aa23090-13/aa23090-13.html',
         'https://ui.adsabs.harvard.edu/abs/2014A%26A...568A..43R/abstract'
     ],
-    '(1620) Geographos | SMASS, Rozitis2014': {
+    'Magnusson1996': [
+        'Photometric Observations and Modeling of Asteroid 1620 Geographos',
+        'DOI: 10.1006/icar.1996.0151', 'https://www.academia.edu/download/41707974/Photometric_Observations_and_Modeling_of20160128-6824-1rkqpy3.pdf',
+        'https://ui.adsabs.harvard.edu/abs/1996Icar..123..227M/abstract'
+    ],
+    '(1620) Geographos | SMASS, Rozitis2014, Magnusson1996': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/NEO/Apollo'],
         file: 'spectra/files/SMASS/a001620.8.txtU',
         geometric_albedo: ['Generic/Bessell.V', [0.168, 0.017]], // light-curve, fixed diameter model
-        phase_function: ['HG', {H: [15.6, 0.1], G: 0.15}],
+        phase_function: ['HG', {H: [15.6, 0.1], G: [0.31, 0.04]}], // G_max
     },
     '(1647) Menelaus | GaiaDR3, Grav2012, Schemel2021': {
         tags: ['Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -1373,16 +1396,21 @@
         geometric_albedo: ['Generic/Bessell.V', [0.076, 0.026]],
         phase_function: ['HG1G2', {H: [5.35, 0.03], G_1: 0, G_2: [0.626, 0.007]}], // 2017-2020 weighted mean
     },
-    'Benner1999': [
-        'Radar Observations of Asteroid 2063 Bacchus',
-        'DOI: 10.1006/icar.1999.6094', 'https://echo.jpl.nasa.gov/asteroids/benner.etal.1999.bacchus.pdf',
-        'https://ui.adsabs.harvard.edu/abs/1999Icar..139..309B/abstract'
+    'Fornasier2026': [
+        'Physical properties of accessible Near Earth Objects, including the primitive (68278) 2001 FC7',
+        'DOI: 10.1016/j.icarus.2026.117072', 'https://www.sciencedirect.com/science/article/pii/S0019103526001387',
+        'https://ui.adsabs.harvard.edu/abs/2026Icar..45317072F/abstract'
     ],
-    '(2063) Bacchus | SMASS, Benner1999, Pravec2012': {
+    'Pravec1998': [
+        'Lightcurves of 26 Near-Earth Asteroids',
+        'DOI: 10.1006/icar.1998.5993', 'https://www.researchgate.net/publication/222129106_Lightcurves_of_26_Near-Earth_Asteroids',
+        'https://ui.adsabs.harvard.edu/abs/1998Icar..136..124P/abstract'
+    ],
+    '(2063) Bacchus | SMASS, Fornasier2026, Pravec1998': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/NEO/Apollo'],
         file: 'spectra/files/SMASS/a002063.7.txtU',
-        geometric_albedo: ['Generic/Bessell.V', [0.56, +0.12, -0.18]],
-        phase_function: ['HG', {H: [17.250, 0.202], G: [0.230, 0.100]}],
+        geometric_albedo: ['Generic/Bessell.V', [0.222, 0.021]],
+        phase_function: ['Generic/Bessell.R', 'HG', {H: [16.83, 0.14], G: [0.23, 0.10]}],
     },
     'Ferreira2025': [
         'Size and Shape of Jupiter Trojan (2207) Antenor from Stellar Occultations',
@@ -1528,10 +1556,15 @@
         geometric_albedo: ['Generic/Bessell.V', 0.10], // "Note added in proof" section
         phase_function: ['HG', {H: [14.23, 0.02], G: [0.040, 0.008]}],
     },
-    '(3317) Paris | SMASS, Grav2012, Schemel2021': {
+    'Catani2026': [
+        'An Irregular Shape of the Jupiter Trojan (3317) Paris Revealed by Stellar Occultations and Rotational Light Curves',
+        'DOI: 10.3847/1538-3881/ae88f3', 'https://iopscience.iop.org/article/10.3847/1538-3881/ae88f3',
+        'https://ui.adsabs.harvard.edu/abs/2026AJ....172..120C/abstract'
+    ],
+    '(3317) Paris | SMASS, Catani2026, Schemel2021': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
         file: 'spectra/files/SMASS/a003317.2.txtU',
-        geometric_albedo: ['Generic/Bessell.V', [0.055, 0.009]],
+        geometric_albedo: ['Generic/Bessell.V', [0.045, 0.002]],
         phase_function: ['Palomar/ZTF.r', 'HG', {H: [8.26, +0.03, -0.02], G: [0.19, 0.03]}],
     },
     '(3451) Mentor | SMASS, Gradovski2025, Schemel2021': {
@@ -1775,7 +1808,7 @@
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/NEO/Apollo'],
         file: 'spectra/files/SMASS/a006489visir8.visir.txtU',
         geometric_albedo: ['Generic/Bessell.V', [0.151, 0.023]],
-        phase_function: ['HG', {H: [19.074, 0.029], G: [0.138, 0.013]}],
+        phase_function: ['HG', {H: [19.074, 0.029], G: [0.370, 0.016]}], // H is mean, G is from light-curve maxima
     },
     '(6545) Leitus | MBOSS, Grav2012, Schemel2021': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -1951,14 +1984,14 @@
         // Weighted mean of Springbok and Gifberg observations used (565 nm)
         geometric_albedo: [550, [0.070, 0.010]],
     },
-    '(10253) Westerwald | SsODNet': {
+    '(10253) Westerwald | SsODNet, Erasmus2026': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
         filter_set: 'SLOAN/SDSS',
         color_indices: {'u-g': [1.8065, 0.0613], 'g-r': [0.7074, 0.034], 'r-i': [0.2228, 0.0273], 'i-z': [-0.0529, 0.047]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic/Bessell.V', [0.2712, 0.073]],
-        phase_function: ['HG1G2', {H: [15.023914, +0.107685, -0.12172], G_1: [0.536426, +0.198095, -0.238198], G_2: [0.207543, +0.095334, -0.085078]}],
+        phase_function: ['Misc/Atlas.cyan', 'HG', {H: [15.53, 0.02], G: [0.31, 0.03]}],
     },
     '(10370) Hylonome | MBOSS, Müller2020, Bauer2003': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
@@ -2043,7 +2076,7 @@
         geometric_albedo: ['Generic/Bessell.V', [0.074, 0.006]],
         phase_function: ['HG1G2', {H: [10.892119, +0.180562, -0.215830], G_1: [0.657746, +0.504328, -0.670967], G_2: [0.068832, +0.396052, -0.308696]}],
     },
-    '(13294) Rockox | GaiaDR3, SsODNet': {
+    '(13294) Rockox | GaiaDR3, SsODNet, Erasmus2026': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
         wavelength_nm: [374, 418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
         spectral_dist: [
@@ -2057,7 +2090,7 @@
             2.696698e-02, 3.319068e-02, 4.586819e-02, 8.981603e-02
         ],
         geometric_albedo: ['Generic/Bessell.V', [0.113, 0.0209]],
-        phase_function: ['HG1G2', {H: [14.078838, +0.192652, -0.235609], G_1: [0.392066, +0.236526, -0.334636], G_2: [0.268238, +0.108478, -0.095037]}],
+        phase_function: ['Misc/Atlas.cyan', 'HG', {H: [14.42, 0.03], G: [0.15, 0.03]}],
     },
     '(13463) Antiphos | MBOSS, Grav2012, Schemel2021': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -2391,7 +2424,7 @@
         geometric_albedo: ['Generic/Bessell.V', [0.051, 0.017]],
         phase_function: ['Palomar/ZTF.r', 'HG', {H: [11.58, +0.14, -0.13], G: [0.61, 0.23]}],
     },
-    '(23871) Ousha | GaiaDR3, SsODNet': {
+    '(23871) Ousha | GaiaDR3, SsODNet, Erasmus2026': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
         wavelength_nm: [418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990],
         spectral_dist: [
@@ -2405,7 +2438,7 @@
             1.180805e-01, 1.539106e-01
         ],
         geometric_albedo: ['Generic/Bessell.V', [0.0543, 0.0306]],
-        phase_function: ['HG1G2', {H: [14.719804, +0.200922, -0.248872], G_1: [0.766349, +0.344896, -0.510463], G_2: [0.095253, +0.190407, -0.147288]}],
+        phase_function: ['Misc/Atlas.cyan', 'HG', {H: [15.17, 0.06], G: [0.11, 0.05]}],
     },
     '(24233) 1999 XD94 | MBOSS, Grav2012, SsODNet': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -2490,8 +2523,8 @@
     },
     'Ortiz2025': [
         'A high geometric albedo and small size of the Haumea cluster member (24835) 1995 SM55 from a stellar occultation and photometric observations',
-        'DOI: 10.48550/arXiv.2509.15384', 'https://arxiv.org/abs/2509.15384',
-        'https://ui.adsabs.harvard.edu/abs/2025arXiv250915384O/abstract'
+        'DOI: 10.1051/0004-6361/202556498', 'https://www.aanda.org/articles/aa/full_html/2025/11/aa56498-25/aa56498-25.html',
+        'https://ui.adsabs.harvard.edu/abs/2025A%26A...703A.147O/abstract'
     ],
     '(24835) 1995 SM55 | MBOSS, Ortiz2025': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/Haumea family'],
@@ -2599,9 +2632,9 @@
         phase_function: ['Palomar/ZTF.r', 'HG', {H: [12.06, +0.16, -0.17], G: [0.13, 0.26]}],
     },
     'Kilic2026': [
-        'Constraining the size, shape, and albedo of the large Trans-Neptunian Object (28978) Ixion with multi-chord stellar occultations',
-        'DOI: 10.48550/arXiv.2601.09639', 'https://arxiv.org/abs/2601.09639',
-        'https://ui.adsabs.harvard.edu/abs/2026arXiv260109639K/abstract'
+        'Constraining the size, shape, and albedo of the large trans-Neptunian object (28978) Ixion with multi-chord stellar occultations',
+        'DOI: 10.1051/0004-6361/202557970', 'https://www.aanda.org/articles/aa/full_html/2026/03/aa57970-25/aa57970-25.html',
+        'https://ui.adsabs.harvard.edu/abs/2026A%26A...707A..70K/abstract'
     ],
     '(28978) Ixion | AlvarezCandal2008, Kilic2026, Helfenstein2025': {
         tags: ['featured', 'Solar System', 'minor body/TNO/resonant TNO/plutino', 'minor body/TNO/midsize TNO'],
@@ -3234,7 +3267,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
     },
-    '(59980) Moza | GaiaDR3, SsODNet': {
+    '(59980) Moza | GaiaDR3, SsODNet, Erasmus2026': {
         tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
         wavelength_nm: [418, 462, 506, 550, 594, 638, 682, 726, 770, 814, 858, 902, 946, 990, 1034],
         spectral_dist: [
@@ -3248,7 +3281,7 @@
             3.723569e-02, 5.029930e-02, 1.350532e-01
         ],
         geometric_albedo: ['Generic/Bessell.V', [0.1331, 0.0265]],
-        phase_function: ['HG1G2', {H: [13.009767, +0.104947, -0.116899], G_1: [0.545874, +0.204576, -0.234137], G_2: [0.191298, +0.118304, -0.112887]}],
+        phase_function: ['Misc/Atlas.cyan', 'HG', {H: [13.45, 0.03], G: [0.18, 0.03]}],
     },
     '(60454) 2000 CH105 | Terai2018': {
         tags: ['Solar System', 'minor body/TNO/classical TNO/cold classical TNO'],
@@ -3731,6 +3764,15 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic/Bessell.V', [0.104, +0.114, -0.051]],
     },
+    '(88055) Ghaf | Erasmus2026, SsODNet': {
+        tags: ['Solar System', 'minor body/asteroid/main belt', 'spacecraft target/MBR Explorer target'],
+        filter_set: 'Misc/Atlas',
+        color_indices: {'cyan-orange': [0.34, 0.02]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic/Bessell.V', [0.0448, 0.0028]],
+        phase_function: ['Misc/Atlas.cyan', 'HG', {H: [15.47, 0.05], G: [0.28, 0.06]}],
+    },
     '(88269) 2001 KF77 | MBOSS': {
         tags: ['MBOSS', 'Solar System', 'minor body/centaur'],
         filter_set: 'Generic/Bessell',
@@ -3932,6 +3974,7 @@
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic/Bessell.V', [0.35, 0.10]],
+        // phase_function: ['HG', {G: [0.24, 0.11]}], // assumed
     },
     'Yoshida2021': [
         'Photometric observations of the potentially hazardous asteroid (99942) Apophis from Kawabe Cosmic Park',
@@ -4249,9 +4292,9 @@
         geometric_albedo: ['Generic/Bessell.V', [0.021, 0.004]],
     },
     'Collyer2025b': [
-        'Synchronous Rotation in the (120347) Salacia-Actaea System',
-        'DOI: 10.48550/arXiv.2509.02734', 'https://arxiv.org/abs/2509.02734',
-        'https://ui.adsabs.harvard.edu/abs/2025arXiv250902734C/abstract'
+        'Synchronous Rotation in the (120347) Salacia–Actaea System',
+        'DOI: 10.3847/PSJ/ae0b6a', 'https://iopscience.iop.org/article/10.3847/PSJ/ae0b6a',
+        'https://ui.adsabs.harvard.edu/abs/2025PSJ.....6..270C/abstract'
     ],
     '(120347 I) Actaea: Bright areas | Stansberry2012, Collyer2025b': { // assumes all of the lightcurve amplitude is caused by non-uniform surface morphology
         tags: ['Solar System', 'minor body/TNO/classical TNO/hot classical TNO', 'natural satellite/minor planet moon'],
@@ -4590,7 +4633,7 @@
     '(134340 II) Nix | Stern2009, Weaver2016, Howett2021b': {
         tags: ['Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         filter_set: 'Generic/Bessell',
-        color_indices: {'B-V': [0.653, 0.026]}, // as reported in preprint
+        color_indices: {'B-V': [0.653, 0.026]}, // as reported in preprint
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic/Bessell.V', [0.56, 0.05]],
@@ -4626,7 +4669,7 @@
     '(134340 III) Hydra | Stern2009, Weaver2016, Howett2021b': {
         tags: ['Solar System/Plutonian system', 'minor body/TNO/resonant TNO/plutino', 'natural satellite/minor planet moon', 'spacecraft target/New Horizons target'],
         filter_set: 'Generic/Bessell',
-        color_indices: {'B-V': [0.654, 0.065]}, // as reported in preprint
+        color_indices: {'B-V': [0.654, 0.065]}, // as reported in preprint
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic/Bessell.V', [0.83, 0.08]],
@@ -5090,6 +5133,24 @@
         geometric_albedo: ['Generic/Bessell.V', [0.27, +0.25, -0.06]],
         spherical_albedo: ['Lucy/LLORRI.Pan', 0.114],
     },
+    'Kuznetsov2022': [
+        'Determination of the dynamic and physical parameters of near-Earth asteroids from observations',
+        'DOI: 10.51194/INASAN.2022.7.1.011', 'https://ui.adsabs.harvard.edu/abs/2022INASR...7...62K/abstract'
+    ],
+    'Delbo2011': [
+        'The cool surfaces of binary near-Earth asteroids',
+        'DOI: 10.1016/j.icarus.2010.12.011', 'https://hal.science/hal-00725402/',
+        'https://ui.adsabs.harvard.edu/abs/2011Icar..212..138D/abstract'
+    ],
+    '(153591) 2001 SN263 | Kuznetsov2022, Delbo2011, SsODNet': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Amor'],
+        filter_set: 'Generic/Bessell',
+        color_indices: {'B-V': [0.779, 0.010], 'V-R': [0.276, 0.008], 'R-I': [0.251, 0.009]},
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic/Bessell.V', [0.048, 0.015]],
+        phase_function: ['HG1G2', {H: [16.126924, +0.332337, -0.481132], G_1: [0.28448, +0.218325, -0.43003], G_2: [0.140601, +0.09084, -0.061737]}],
+    },
     '(153591) 2001 SN263 | SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Amor'],
         filter_set: 'SkyMapper/SkyMapper',
@@ -5371,7 +5432,7 @@
         color_indices: {'V-I': [1.803, 0.084]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic/Bessell.V', [0.167, +0.058, -0.038]], // system albedo
+        geometric_albedo: ['Generic/Bessell.V', [0.167, +0.058, -0.038]], // system albedo
     },
     '(230965) 2004 XA192 | SsODNet, Müller2020': {
         tags: ['Solar System', 'minor body/TNO/classical TNO'],
@@ -6009,9 +6070,9 @@
         geometric_albedo: ['Generic/Bessell.V', [0.079, 0.014]],
     },
     'Zhang2026': [
-        'Tianwen-2 target asteroid (469219) Kamoʻoalewa probably develops an Itokawa-compositional but ultra-highly space-weathered surface',
-        'DOI: 10.48550/arXiv.2603.28102', 'https://arxiv.org/abs/2603.28102',
-        'http://scixplorer.org/abs/2026arXiv260328102Z/abstract'
+        'Tianwen-2 mission target asteroid (469219) Kamoʻoalewa probably develops an Itokawa-compositional but more space-weathered surface',
+        'DOI: 10.1038/s41467-026-73284-w', 'https://www.nature.com/articles/s41467-026-73284-w',
+        'https://ui.adsabs.harvard.edu/abs/2026NatCo..17.7275Z/abstract'
     ],
     'Sharkey2026': [
         'JWST Characterization of Earth Quasi-Satellite (469219) Kamo`oalewa',
@@ -6021,6 +6082,7 @@
         tags: ['featured', 'Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/quasi-satellite', 'spacecraft target/Tianwen-2 target'],
         file: 'spectra/files/Kamooalewa_Zhang2026.txtU', // Fig. 1a
         geometric_albedo: ['Generic/Bessell.V', [0.59, +0.25, -0.17]],
+        // phase_function: ['HG', {G: 0.5}], // assumed
     },
     'Sharkey2021': [
         'Lunar-like silicate material forms the Earth quasi-satellite (469219) 2016 HO3 Kamoʻoalewa',
@@ -8336,9 +8398,9 @@
         is_reflecting_sunlight: true,
     },
     'Cheng2025': [
-        'Discovery of a dwarf planet candidate in an extremely wide orbit: 2017 OF201',
-        'DOI: 10.48550/arXiv.2505.15806', 'https://arxiv.org/abs/2505.15806',
-        'https://ui.adsabs.harvard.edu/abs/2025arXiv250515806C/abstract'
+        'Discovery of a Dwarf Planet Candidate in an Extremely Wide Orbit: 2017 OF201',
+        'DOI: 10.3847/2041-8213/ae3a75', 'https://iopscience.iop.org/article/10.3847/2041-8213/ae3a75',
+        'https://ui.adsabs.harvard.edu/abs/2026ApJ...998L...6C/abstract'
     ],
     '2017 OF201 | Cheng2025': {
         tags: ['Solar System', 'minor body/TNO/detached TNO', 'minor body/TNO/extreme TNO', 'minor body/TNO/midsize TNO'],
@@ -8446,17 +8508,19 @@
         'DOI: 10.3847/2041-8213/adc910', 'https://iopscience.iop.org/article/10.3847/2041-8213/adc910',
         'https://ui.adsabs.harvard.edu/abs/2025ApJ...984L..25B/abstract'
     ],
-    'Rivkin2025': [ // Diameter source
-        'JWST Observations of Potential Impactor 2024 YR4',
-        'https://iawn.net/obscamp/2024YR4/gallery/YR4_memo_final_27mar25.pdf'
+    'Müller2026': [
+        'Thermophysical characterization of the potentially hazardous near-Earth object 2024 YR4',
+        'https://arxiv.org/abs/2609.15756'
     ],
-    '2024 YR4 | Bolin2025b, Rivkin2025': {
+    '2024 YR4 | Bolin2025b, Müller2026': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Apollo'],
-        filter_set: 'SLOAN/SDSS',
-        color_indices: {'g-r': [0.70, 0.10], 'r-i': [0.25, 0.06], 'i-z': [-0.27, 0.10]},
+        filter_set: 'Gemini_GMOS-S',
+        filters: ['g', 'r', 'i', 'Zc'],
+        magnitudes: [[24.01, 0.09], [23.31, 0.04], [23.06, 0.04], [23.34, 0.09]],
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic/Bessell.V', [0.118, 0.032]], // calculated using D = 60 ±7 m and Hv = 24.05 ±0.15
+        geometric_albedo: ['Generic/Bessell.V', [0.11, 0.05, 0.03]],
+        phase_function: ['Generic/Bessell.R', 'HG', {H: [24.14, 0.25], G: [0.51, 0.11]}],
     },
 
     // Periodic comets
