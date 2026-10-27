@@ -3019,37 +3019,51 @@
         'DOI: 10.1051/0004-6361/201526119', 'https://www.aanda.org/articles/aa/full_html/2015/12/aa26119-15/aa26119-15.html',
         'https://ui.adsabs.harvard.edu/abs/2015A%26A...584A.107B/abstract'
     ],
-    'Margoti2024': [
-        'Determination of the Three-Dimensional Shape of (50000) Quaoar by Stellar Occultations Using a Genetic Algorithm for Minimization',
-        'https://web.archive.org/web/20251111081820/https://drive.google.com/file/d/19dI1CH_YucoTngyhH5qYR4mi0IgXRwTe/view',
-        'https://repositorio.utfpr.edu.br/jspui/handle/1/35286'
+    'Margoti2026': [
+        'Ellipsoidal Modeling Framework for TNOs: the triaxial shape of (50000) Quaoar and its implications for Weywot and the dynamical environment',
+        'DOI: 10.48550/arXiv.2610.30494', 'https://arxiv.org/abs/2610.30494',
+        'https://scixplorer.org/abs/2026arXiv261030494M/abstract'
     ],
-    '(50000) Quaoar | Barucci2015, Margoti2024, Helfenstein2025': {
+    '(50000) Quaoar | Barucci2015, Margoti2026, Helfenstein2025': {
         tags: ['featured', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         file: 'spectra/files/Quaoar_Barucci2015.txt', // average of four spectra from Fig. 1
-        geometric_albedo: ['Generic/Bessell.V', [0.124, 0.039]], // occultation-only fit
+        geometric_albedo: ['Generic/Bessell.V', [0.111, 0.012]],
         phase_integral: [0.562, +0.020, -0.059],
     },
-    '(50000) Quaoar | AlvarezCandal2008, Margoti2024, Helfenstein2025': {
+    '(50000) Quaoar | AlvarezCandal2008, Margoti2026, Helfenstein2025': {
         tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         file: 'spectra/files/AlvarezCandal2008/Quaoar.txtU', // Fig. 2
-        geometric_albedo: ['Generic/Bessell.V', [0.124, 0.039]], // occultation-only fit
+        geometric_albedo: ['Generic/Bessell.V', [0.111, 0.012]],
         phase_integral: [0.562, +0.020, -0.059],
     },
-    '(50000) Quaoar | Marchi2003, Margoti2024, Helfenstein2025': {
+    '(50000) Quaoar | Marchi2003, Margoti2026, Helfenstein2025': {
         tags: ['Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         file: 'spectra/files/Marchi2003/Quaoar.txt',
-        geometric_albedo: ['Generic/Bessell.V', [0.124, 0.039]], // occultation-only fit
+        geometric_albedo: ['Generic/Bessell.V', [0.111, 0.012]],
         phase_integral: [0.562, +0.020, -0.059],
     },
-    '(50000) Quaoar | MBOSS, Margoti2024, Helfenstein2025': {
+    '(50000) Quaoar | MBOSS, Margoti2026, Helfenstein2025': {
         tags: ['MBOSS', 'Solar System', 'planetary body/dwarf planet', 'minor body/TNO/classical TNO'],
         filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.958, 0.035], 'V-R': [0.650, 0.020], 'R-I': [0.610, 0.028]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic/Bessell.V', [0.124, 0.039]], // occultation-only fit
+        geometric_albedo: ['Generic/Bessell.V', [0.111, 0.012]],
         phase_integral: [0.562, +0.020, -0.059],
+    },
+    'Collyer2026': [
+        'Size, Shape, and Geometric Albedo of Dwarf Planet Quaoar’s Largest Satellite Weywot',
+        'DOI: 10.48550/arXiv.2610.11988', 'https://arxiv.org/abs/2610.11988',
+        'https://scixplorer.org/abs/2026arXiv261011988C/abstract'
+    ],
+    '(50000 I) Weywot | Collyer2026': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO', 'natural satellite/minor planet moon'],
+        filter_set: 'HST/WFC3_UVIS1',
+        color_indices: {'F606W-F350LP': [0.015, 0.029]}, // Table 2
+        calibration_system: 'Vega',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic/Bessell.V', [0.036, +0.010, -0.006]],
+        // phase_function: ['phase coefficient', {beta: [0.277, 0.027]}], // Table 2
     },
     '(51359) 2000 SC17 | MBOSS, Grav2012, Schemel2021': {
         tags: ['MBOSS', 'Solar System', 'minor body/asteroid', 'minor body/Jupiter trojan'],
@@ -3156,28 +3170,33 @@
         geometric_albedo: ['Generic/Bessell.V', [0.065, 0.005]],
         phase_function: ['Misc/Atlas.orange', 'phase coefficient', {beta: [0.062, 0.014]}],
     },
-    '(55565) Aya | Fornasier2004, Vilenius2014': {
+    'Arimatsu2026': [
+        'Size, atmospheric, and ring constraints on the large Kuiper belt object (55565) Aya from a stellar occultation',
+        'DOI: 10.48550/arXiv.2610.17889', 'https://arxiv.org/abs/2610.17889',
+        'https://scixplorer.org/abs/2026arXiv261017889A/abstract'
+    ],
+    '(55565) Aya | Fornasier2004, Arimatsu2026': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         file: 'spectra/files/Fornasier2004/2002AW197.txtA', // Fig. 4
-        geometric_albedo: ['Generic/Bessell.V', [0.112, +0.012, -0.011]],
+        geometric_albedo: ['Generic/Bessell.V', [0.101, +0.023, -0.013]],
     },
     'Barucci2020': [
         'Surface composition of Trans-Neptunian objects',
         'DOI: 10.1016/B978-0-12-816490-7.00005-9', 'https://www.sciencedirect.com/science/article/abs/pii/B9780128164907000059',
         'https://ui.adsabs.harvard.edu/abs/2020tnss.book..109B/abstract'
     ],
-    '(55565) Aya | Barucci2020, Vilenius2014': {
+    '(55565) Aya | Barucci2020, Arimatsu2026': {
         tags: ['Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         file: 'spectra/files/2002AW197_Barucci2020.txtU',
-        geometric_albedo: ['Generic/Bessell.V', [0.112, +0.012, -0.011]],
+        geometric_albedo: ['Generic/Bessell.V', [0.101, +0.023, -0.013]],
     },
-    '(55565) Aya | MBOSS, Vilenius2014': {
+    '(55565) Aya | MBOSS, Arimatsu2026': {
         tags: ['MBOSS', 'Solar System', 'minor body/TNO/classical TNO', 'minor body/TNO/midsize TNO'],
         filter_set: 'Generic/Bessell',
         color_indices: {'B-V': [0.915, 0.035], 'V-R': [0.589, 0.030], 'R-I': [0.581, 0.037]},
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic/Bessell.V', [0.112, +0.012, -0.011]],
+        geometric_albedo: ['Generic/Bessell.V', [0.101, +0.023, -0.013]],
     },
     '(55576) Amycus | Fornasier2004, Müller2020': {
         tags: ['Solar System', 'minor body/centaur'],
@@ -7317,7 +7336,7 @@
         'DOI: 10.3847/1538-3881/aad042', 'https://iopscience.iop.org/article/10.3847/1538-3881/aad042',
         'https://ui.adsabs.harvard.edu/abs/2018AJ....156...81B/abstract'
     ],
-    '(768325) 2015 BP519 | Becker2018': {
+    '(768325) Geyagugv | Becker2018': {
         tags: ['Solar System', 'minor body/TNO/scattered', 'minor body/TNO/extreme TNO'],
         filter_set: 'SLOAN/SDSS',
         color_indices: {'g-r': [0.79, 0.17], 'r-i': [0.19, 0.12], 'i-z': [0.23, 0.15]},
