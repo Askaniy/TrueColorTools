@@ -1442,7 +1442,7 @@ sun_in_V, _ = sun_SI @ get_filter('Generic/Bessell.V')
 sun_norm = sun_SI.scaled_at(get_filter('Generic/Bessell.V'))
 sun_filter = sun_SI.normalize()
 
-vega_SI = Spectrum.from_file('spectra/files/CALSPEC/alpha_lyr_stis_011.fits', name='Vega') # W / (m² nm)
+vega_SI = Spectrum.from_file('spectra/files/CALSPEC/alpha_lyr_stis_012.fits', name='Vega') # W / (m² nm)
 vega_SI.std = None # removing uncertainty to facilitate calculations and simplify spectrum plots
 vega_in_V, _ = vega_SI @ get_filter('Generic/Bessell.V')
 vega_norm = vega_SI.scaled_at(get_filter('Generic/Bessell.V'))

@@ -87,7 +87,7 @@
     },
     'Vega (A0 V) | CALSPEC': {
         tags: ['featured', 'extrasolar', 'star/V dwarf'],
-        file: 'spectra/files/CALSPEC/alpha_lyr_stis_011.fits',
+        file: 'spectra/files/CALSPEC/alpha_lyr_stis_012.fits',
         is_emissive: true,
     },
     'θ Virginis (A1 IV s+A9m) | Krisciunas2017': {
