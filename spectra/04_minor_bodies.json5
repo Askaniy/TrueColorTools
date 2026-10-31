@@ -5243,6 +5243,33 @@
         geometric_albedo: ['Generic/Bessell.V', [0.053, 0.010]],
         phase_function: ['Palomar/ZTF.r', 'HG1G2', {H: [12.474, 0.102], G_1: [0.510, 0.307], G_2: [0.141, 0.188]}],
     },
+    'Bolin2026': [
+        'The dark surface of (163693) Atira and implications for inner-Earth asteroid origins',
+        'DOI: 10.48550/arXiv.2610.40114', 'https://arxiv.org/abs/2610.40114'
+    ],
+    'Rondón2022': [
+        'A photometric study of members of the NEOs Atiras population',
+        'DOI: 10.1016/j.icarus.2021.114723', 'https://www.sciencedirect.com/science/article/pii/S001910352100378X',
+        'https://ui.adsabs.harvard.edu/abs/2022Icar..37214723R/abstract'
+    ],
+    '(163693) Atira | Bolin2026, Rondón2022': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Atira'],
+        filter_set: 'SLOAN/SDSS',
+        color_indices: {'g-r': [0.49, 0.03], 'r-i': [0.20, 0.02], 'i-z': [0.02, 0.03]},
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.021], // Section 4
+        phase_function: ['Generic_Bessell.R', 'phase coefficient', {beta: [0.03584, 0.0035]}], // Table 4
+    },
+    '(163693) Atira | Rondón2022': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Atira'],
+        filter_set: 'SLOAN/SDSS',
+        color_indices: {'g-r': [0.5154, 0.0444], 'r-i': [0.2017, 0.0716], 'i-z': [0.1485, 0.8140]}, // Weighted mean of Table A.4
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+        geometric_albedo: ['Generic_Bessell.V', 0.021], // Section 4
+        phase_function: ['Generic_Bessell.R', 'phase coefficient', {beta: [0.03584, 0.0035]}], // Table 4
+    },
     '(164207) Cardea | Ieva2020, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/quasi-satellite'],
         filter_set: 'Generic/Bessell',
@@ -8540,6 +8567,45 @@
         is_reflecting_sunlight: true,
         geometric_albedo: ['Generic/Bessell.V', [0.11, 0.05, 0.03]],
         phase_function: ['Generic/Bessell.R', 'HG', {H: [24.14, 0.25], G: [0.51, 0.11]}],
+    },
+    'Schwamb2026': [
+        'NSF-DOE Vera C. Rubin Observatory’s First View of the Neptune Trojan L5 (Trailing) Cloud: Two New Long-term Stable Trojans',
+        'DOI: 10.3847/2041-8213/aead9a', 'https://iopscience.iop.org/article/10.3847/2041-8213/aead9a',
+    ],
+    '2025 MD138 | Schwamb2026': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        filter_set: 'SLOAN/SDSS',
+        color_indices: {'g-r': [0.37, 0.06], 'r-i': [0.39, 0.05]}, // Table 3
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
+    '2025 MH348 | Schwamb2026': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        filter_set: 'SLOAN/SDSS',
+        color_indices: {'g-r': [0.46, 0.08], 'r-i': [0.45, 0.09]}, // Table 3
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+    },
+    '2025 NN80 | Schwamb2026': {
+        tags: ['Solar System', 'minor body/Neptune trojan'],
+        filter_set: 'SLOAN/SDSS',
+        color_indices: {'g-r': [0.47, 0.05], 'r-i': [0.30, 0.04], 'r-z': [0.42, 0.05]}, // Table 3
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+        // phase_function: ['SLOAN/SDSS.r', 'phase coefficient', {beta: [0.253, 0.055]}], // Table 3
+    },
+    'Holman2026': [
+        '2026 ED138: A Large Trans-Neptunian Object in Early Rubin Observatory Data, and How Many More May Remain',
+        'DOI: 10.48550/arXiv.2610.38693', 'https://arxiv.org/abs/2610.38693'
+    ],
+    '2026 ED138 | Holman2026': {
+        tags: ['Solar System', 'minor body/TNO/classical TNO'],
+        filter_set: 'SLOAN/SDSS',
+        filters: ['u', 'g', 'r', 'i', 'z'],
+        magnitudes: [[5.05, 0.07], [3.50, 0.05], [2.87, 0.04], [2.61, 0.04], [2.49, 0.05]], // Table 3
+        calibration_system: 'AB',
+        is_reflecting_sunlight: true,
+        // phase_function: ['phase coefficient', {beta: [0.14, 0.03]}], // Table 3
     },
 
     // Periodic comets
