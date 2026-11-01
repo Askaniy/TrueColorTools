@@ -3513,7 +3513,7 @@
         'DOI: 10.1038/s41586-023-06998-2', 'https://www.nature.com/articles/s41586-023-06998-2',
         'https://scixplorer.org/abs/2024Natur.627..505D/abstract'
     ],
-    '(65803 I) Dimorphos: Inner ejecta | Dotto2024, Rozitis2024': {
+    '(65803 I) Dimorphos: Inner ejecta plume | Dotto2024, Rozitis2024': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/asteroid/active asteroid', 'natural satellite/minor planet moon', 'spacecraft target/DART target'],
         filter_set: 'LICIACube/LUKE',
         filters: ['Blue', 'Red'],
@@ -3521,7 +3521,7 @@
         geometric_albedo: ['Generic/Bessell.V', [0.17, 0.01]],
         spherical_albedo: ['Generic/Bessell.V', [0.07, 0.01]],
     },
-    '(65803 I) Dimorphos: Outer ejecta | Dotto2024, Rozitis2024': {
+    '(65803 I) Dimorphos: Outer ejecta plume | Dotto2024, Rozitis2024': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/asteroid/active asteroid', 'natural satellite/minor planet moon', 'spacecraft target/DART target'],
         filter_set: 'LICIACube/LUKE',
         filters: ['Blue', 'Red'],
