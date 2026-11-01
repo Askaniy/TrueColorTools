@@ -3508,6 +3508,27 @@
         geometric_albedo: ['Generic/Bessell.V', [0.17, 0.01]],
         spherical_albedo: ['Generic/Bessell.V', [0.07, 0.01]],
     },
+    'Dotto2024': [
+        'The Dimorphos ejecta plume properties revealed by LICIACube',
+        'DOI: 10.1038/s41586-023-06998-2', 'https://www.nature.com/articles/s41586-023-06998-2',
+        'https://scixplorer.org/abs/2024Natur.627..505D/abstract'
+    ],
+    '(65803 I) Dimorphos: Inner ejecta | Dotto2024, Rozitis2024': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/asteroid/active asteroid', 'natural satellite/minor planet moon', 'spacecraft target/DART target'],
+        filter_set: 'LICIACube/LUKE',
+        filters: ['Blue', 'Red'],
+        spectral_dist: [1, 0.57], // Red/Blue ratio: 0.57
+        geometric_albedo: ['Generic/Bessell.V', [0.17, 0.01]],
+        spherical_albedo: ['Generic/Bessell.V', [0.07, 0.01]],
+    },
+    '(65803 I) Dimorphos: Outer ejecta | Dotto2024, Rozitis2024': {
+        tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/asteroid/active asteroid', 'natural satellite/minor planet moon', 'spacecraft target/DART target'],
+        filter_set: 'LICIACube/LUKE',
+        filters: ['Blue', 'Red'],
+        spectral_dist: [1, 0.96], // Red/Blue ratio: 0.96
+        geometric_albedo: ['Generic/Bessell.V', [0.17, 0.01]],
+        spherical_albedo: ['Generic/Bessell.V', [0.07, 0.01]],
+    },
     'Carbognani2019': [
         'The Color Indices of the NEA (66391) 1999 KW4',
         'https://articles.adsabs.harvard.edu/pdf/2019MPBu...46..444C', 'https://ui.adsabs.harvard.edu/abs/2019MPBu...46..444C/abstract'
