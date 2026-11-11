@@ -10,8 +10,8 @@ from traceback import format_exc
 
 from json5 import load as json5load
 
-import src.auxiliary as aux
-import src.strings as tr
+import truecolortools.auxiliary as aux
+import truecolortools.strings as tr
 
 
 class ObjectName:

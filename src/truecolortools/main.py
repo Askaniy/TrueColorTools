@@ -1,19 +1,20 @@
 """ Generates and launches a graphical interface that accesses other modules. """
 
 from copy import deepcopy
+from pathlib import Path
 from time import strftime
 
 import FreeSimpleGUI as sg
 import numpy as np
 from sigfig import round as sigfig_round
 
-import src.auxiliary as aux
-import src.database as db
-import src.image_processing as ip
-import src.plotter as pl
-import src.strings as tr
-from src import gui
-from src.core import (
+import truecolortools.auxiliary as aux
+import truecolortools.database as db
+import truecolortools.image_processing as ip
+import truecolortools.plotter as pl
+import truecolortools.strings as tr
+from truecolortools import gui
+from truecolortools.core import (
     ColorPoint,
     ColorSystem,
     FilterNotFoundError,
@@ -24,7 +25,10 @@ from src.core import (
     sun_norm,
     visible_range,
 )
-from src.table_generator import generate_table
+from truecolortools.table_generator import generate_table
+
+
+PACKAGE_DIR = Path(__file__).parent
 
 
 def launch_window(lang: str):
@@ -68,11 +72,11 @@ def launch_window(lang: str):
     filters_figsize = (filters_plot_size[0] / filters_dpi, filters_plot_size[1] / filters_dpi)
 
     # Loading the icon
-    with open('src/window/icon', 'rb') as file:
+    with open(PACKAGE_DIR / 'window' / 'icon', 'rb') as file:
         icon = file.read()
 
     # Loading the window 0 title (program name + version)
-    with open('src/window/title.txt', 'rb') as file:
+    with open(PACKAGE_DIR / 'window' / 'title.txt', 'rb') as file:
         window0_title = file.readline().decode().strip()
 
     # Launching the main window

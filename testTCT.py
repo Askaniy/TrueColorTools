@@ -2,16 +2,16 @@ import unittest
 
 import numpy as np
 
-import src.auxiliary as aux
-from src import core
-from src.table_generator import ImageFont, line_splitter
+import truecolortools.auxiliary as aux
+from truecolortools import core
+from truecolortools.table_generator import FONT_DIR, ImageFont, line_splitter
 
 
 class TestTCT(unittest.TestCase):
 
     def setUp(self):
         self.sun = core.Spectrum.from_file('spectra/files/CALSPEC/sun_reference_stis_002.fits', name='Sun') # W / (m² nm)
-        self.vega = core.Spectrum.from_file('spectra/files/CALSPEC/alpha_lyr_stis_011.fits', name='Vega') # W / (m² nm)
+        self.vega = core.Spectrum.from_file('spectra/files/CALSPEC/alpha_lyr_stis_012.fits', name='Vega') # W / (m² nm)
         self.v = core.get_filter('Generic/Bessell.V')
         self.ubv = core.FilterSystem.from_list(('Generic/Bessell.U', 'Generic/Bessell.B', 'Generic/Bessell.V'), name='UBV')
         self.r = core.get_filter('StilesBurch/2deg.r')
@@ -216,7 +216,7 @@ class TestTCT(unittest.TestCase):
             body = core.database_parser(key, value)
 
     def test_line_splitter(self):
-        object_font = ImageFont.truetype('src/fonts/FiraSansExtraCondensed-Regular.ttf', 20, layout_engine=ImageFont.Layout.BASIC)
+        object_font = ImageFont.truetype(str(FONT_DIR / 'FiraSansExtraCondensed-Regular.ttf'), 20, layout_engine=ImageFont.Layout.BASIC)
         self.assertEqual(line_splitter('Sun', object_font, 114), ['Sun'])
         self.assertEqual(line_splitter('2MASSW J0746425+200032', object_font, 114), ['2MASSW', 'J0746425+', '+200032'])
         self.assertEqual(line_splitter('Rings of Uranus', object_font, 114), ['Rings of', 'Uranus'])
@@ -230,4 +230,5 @@ class TestTCT(unittest.TestCase):
         # ("Бернардинелл-" doesn't fit the square)
         self.assertEqual(line_splitter('136472', object_font, 32), ['136-', '472'])
 
-unittest.main()
+if __name__ == '__main__':
+    unittest.main()

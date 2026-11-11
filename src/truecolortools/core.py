@@ -49,10 +49,10 @@ from PIL import Image
 from scipy.linalg import solve
 from scipy.optimize import minimize
 
-import src.auxiliary as aux
-import src.image_import as ii
-from src.data_import import file_reader
-from src.database import ObjectName
+import truecolortools.auxiliary as aux
+import truecolortools.image_import as ii
+from truecolortools.data_import import file_reader
+from truecolortools.database import ObjectName
 
 # ------------ Data Section ------------
 

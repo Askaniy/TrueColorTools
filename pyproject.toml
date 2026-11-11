@@ -1,0 +1,56 @@
+[build-system]
+requires = ["uv_build>=0.13.7,<0.14.0"]
+build-backend = "uv_build"
+
+[project]
+name = "truecolortools"
+version = "5.0.0b1"
+description = "GUI application for calculating human-visible colors of celestial bodies from their photometric data"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE.txt"]
+authors = [
+    { name = "Askaniy Anpilogov", email = "aaskaniy@gmail.com" },
+]
+requires-python = ">=3.12"
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+
+dependencies = [
+    "astropy>=8.0.2",
+    "cycler>=0.12.1",
+    "FreeSimpleGUI>=5.3.0.post1",
+    "json-five>=1.1.2",
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.4",
+    "Pillow>=13.0.0",
+    "scipy>=1.18.1",
+    "scipy-stubs>=1.18.1.1",
+    "sigfig>=1.4.0",
+    "tifffile>=2026.11.8",
+]
+
+[project.urls]
+Homepage = "https://github.com/Askaniy/TrueColorTools"
+Repository = "https://github.com/Askaniy/TrueColorTools"
+Issues = "https://github.com/Askaniy/TrueColorTools/issues"
+Changelog = "https://github.com/Askaniy/TrueColorTools/releases"
+
+[dependency-groups]
+dev = [
+    "basedpyright>=1.40.2",
+    "pytest>=9.2.0",
+]
+
+[tool.basedpyright]
+reportImportCycles = false
+extraPaths = ["src"]
+exclude = ["temp"]
+
+[tool.pytest.ini_options]
+python_files = ["test_*.py", "testTCT.py"]

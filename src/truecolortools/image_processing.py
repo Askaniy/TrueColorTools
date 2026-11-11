@@ -9,8 +9,8 @@ import numpy as np
 from PIL import Image
 from tifffile import imwrite
 
-import src.image_import as ii
-from src.core import (
+import truecolortools.image_import as ii
+from truecolortools.core import (
     ColorImage,
     ColorLine,
     FilterSystem,

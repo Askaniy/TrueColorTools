@@ -8,9 +8,9 @@ from matplotlib import rc_context
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 
-import src.strings as tr
-from src import gui
-from src.core import ColorPoint, ColorSystem, FilterSystem, Spectrum, visible_range
+import truecolortools.strings as tr
+from truecolortools import gui
+from truecolortools.core import ColorPoint, ColorSystem, FilterSystem, Spectrum, visible_range
 
 # MatPlotLib custom theme
 # https://matplotlib.org/stable/tutorials/introductory/customizing.html

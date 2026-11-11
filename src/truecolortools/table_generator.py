@@ -1,13 +1,17 @@
 """ Provides a table generation function, generate_table(). """
 from math import ceil, floor, sqrt
+from pathlib import Path
 from time import strftime
 
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
-import src.database as db
-import src.strings as tr
-from src.core import *
+import truecolortools.database as db
+import truecolortools.strings as tr
+from truecolortools.core import *
+
+
+FONT_DIR = Path(__file__).parent / 'fonts'
 
 
 def generate_table(
@@ -33,11 +37,11 @@ def generate_table(
     note_size = 16
     note_step = 4 + note_size
     engine = ImageFont.Layout.BASIC # see https://github.com/python-pillow/Pillow/issues/7765
-    name_font = ImageFont.truetype('src/fonts/FiraSans-Bold.ttf', name_size, layout_engine=engine)
-    object_font = ImageFont.truetype('src/fonts/FiraSansExtraCondensed-Regular.ttf', object_size, layout_engine=engine)
-    help_font = ImageFont.truetype('src/fonts/FiraSansCondensed-Bold.ttf', help_size, layout_engine=engine)
-    note_font = ImageFont.truetype('src/fonts/FiraSansCondensed-Regular.ttf', note_size, layout_engine=engine)
-    small_font = ImageFont.truetype('src/fonts/FiraSansExtraCondensed-Light.ttf', 13, layout_engine=engine)
+    name_font = ImageFont.truetype(str(FONT_DIR / 'FiraSans-Bold.ttf'), name_size, layout_engine=engine)
+    object_font = ImageFont.truetype(str(FONT_DIR / 'FiraSansExtraCondensed-Regular.ttf'), object_size, layout_engine=engine)
+    help_font = ImageFont.truetype(str(FONT_DIR / 'FiraSansCondensed-Bold.ttf'), help_size, layout_engine=engine)
+    note_font = ImageFont.truetype(str(FONT_DIR / 'FiraSansCondensed-Regular.ttf'), note_size, layout_engine=engine)
+    small_font = ImageFont.truetype(str(FONT_DIR / 'FiraSansExtraCondensed-Light.ttf'), 13, layout_engine=engine)
 
     # Layout
     border_space = 20

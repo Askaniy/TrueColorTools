@@ -5,3 +5,11 @@ spectra_extras/
 .ropeproject/
 **/__pycache__/
 **/tempCodeRunnerFile.py
+
+# Python-generated files
+*.py[oc]
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.basedpyright/

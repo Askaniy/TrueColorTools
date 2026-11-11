@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 
-from src.main import launch_window
+from truecolortools.main import launch_window
 
 # CLI parsing
 parser = ArgumentParser(description='See ReadMe on the GitHub page: https://github.com/Askaniy/TrueColorTools#readme')

@@ -8,9 +8,9 @@ from typing import Any
 import FreeSimpleGUI as sg
 import numpy as np
 
-import src.strings as tr
-from src.core import ColorSystem
-from src.image_processing import supported_formats
+import truecolortools.strings as tr
+from truecolortools.core import ColorSystem
+from truecolortools.image_processing import supported_formats
 
 # TCT style colors
 main_color = '#3884A9' # HSV 199.65° 66.86% 66.27%

@@ -11,13 +11,15 @@ To calibrate the color of maps based on TCT data, I recommend using [Cylindrical
 
 ## Installation
 
-TrueColorTools works on Windows and Linux (the GUI library might be unstable on macOS). Python version 3.11 or higher is required.
+TrueColorTools works on Windows and Linux (the GUI library might be unstable on macOS). Python version 3.12 or higher is required.
 
-1. Clone the repository or download the archive using the GitHub web interface;
-2. Open the console in the project root folder;
-3. Create a virtual environment with `python3 -m venv .venv`;
-4. Install the dependencies with `.venv/bin/pip install -r requirements.txt`;
-5. Execute `.venv/bin/python runTCT.py`.
+1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/);
+2. Clone the repository or download the archive using the GitHub web interface;
+3. Open the console in the project root folder;
+4. Install the dependencies with `uv sync`;
+5. Execute `uv run runTCT.py`.
+
+For development, install the dev dependencies with `uv sync --group dev`, run the test suite with `uv run pytest`, and run the type checker with `uv run basedpyright`.
 
 ### Executable file
 
@@ -42,7 +44,7 @@ Interpolation is not used to reconstruct the spectrum from the photometry becaus
 
 ## How to use?
 
-Interaction with TrueColorTools is implied through the GUI. However, if you are an advanced Python user, you can import the core (`from src.core import *`) and use it as a spectral processing library.
+Interaction with TrueColorTools is implied through the GUI. However, if you are an advanced Python user, you can import the core (`from truecolortools.core import *`) and use it as a spectral processing library.
 
 If you are running the GUI from the command line, you can set the startup language <!--- and CLI verbosity level--> (run with `--help` for details). No Internet connection is required, the databases are stored in the appropriate repository folders, and you can replenish them.
 
@@ -57,7 +59,7 @@ The **Blackbody & Redshifts** tab calculates the influence of physical phenomena
 ### Features
 - Tag system: Any spectrum in the database can be assigned any set of tags. They form lists of categories for the *Database viewer* tab, which makes working with the database easier.
 - Reference system: Each object in the database can be easily linked to one or more data sources by its short name. You can see the list in `Menu`→`References`.
-- Multilingual support: The language can be changed from the top menu at runtime. TCT supports English, German and Russian. If you want to add support for your language, you can do it similar to [`strings.py`](src/strings.py) and make a commit or contact me.
+- Multilingual support: The language can be changed from the top menu at runtime. TCT supports English, German and Russian. If you want to add support for your language, you can do it similar to [`strings.py`](src/truecolortools/strings.py) and make a commit or contact me.
 
 
 ## Databases
@@ -120,7 +122,7 @@ As in JSON5, the default wavelengths for external files are in nanometers and th
 - `.txtE` for energy counters per wavelength (by default), `.txtJ` for energy counters per frequency (like jansky), `.txtP` for photon counters.
 
 ### Spectra database extension
-The data in the `/spectra` folder can be modified by the user (except for [Sun](spectra/files/CALSPEC/sun_reference_stis_002.fits) and [Vega](spectra/files/CALSPEC/alpha_lyr_stis_011.fits), which are used for calibration). The display order in the *Database viewer* is determined by the file names and the order within the file. If the spectrum header is repeated in the database, the last spectrum will replace the previous one. The tag list is created and completed while reading files. `/spectra_extras` is recommended as the storage location for user files and add-ons; they will be shown last in the GUI. There is a [pinned issue](https://github.com/Askaniy/TrueColorTools/issues/26) for sharing "official" and user add-ons. Pull requests are welcome too.
+The data in the `/spectra` folder can be modified by the user (except for [Sun](spectra/files/CALSPEC/sun_reference_stis_002.fits) and [Vega](spectra/files/CALSPEC/alpha_lyr_stis_012.fits), which are used for calibration). The display order in the *Database viewer* is determined by the file names and the order within the file. If the spectrum header is repeated in the database, the last spectrum will replace the previous one. The tag list is created and completed while reading files. `/spectra_extras` is recommended as the storage location for user files and add-ons; they will be shown last in the GUI. There is a [pinned issue](https://github.com/Askaniy/TrueColorTools/issues/26) for sharing "official" and user add-ons. Pull requests are welcome too.
 
 ### Filters database extension
 TCT uses filter sensitivity profiles for accurate spectrum restoration. They are provided by the [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php) and stored [here](/filters). To replenish the database, select a filter on the site, select the "ascii" data file and place it in the folder. You need also specify the wavelength unit (usually ångströms, so you get the `.datA` extension). If you see "Detector Type: **P**hoton counter" in the filter description there (instead of "Energy counter", which we need) you need to add `P` to the extension. (Do not edit the [V band filter](filters/Generic_Bessell.V.dat), it is needed for the program to work.)
