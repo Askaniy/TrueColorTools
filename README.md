@@ -35,7 +35,7 @@ An alternative way for Windows 8/10/11. Stable versions are compiled into an exe
 TCT converts photometric measurements into a continuous spectrum (if it isn't already a spectrum) and convolves it with eye color matching functions (CMFs). A set of photographs (e.g. taken by a spacecraft) is counted and processed in the same way as photometry.
 
 According to a common color processing procedure, after convolution from CMF to CIE 1931 XYZ color space, the color is converted by a 3×3 matrix to the selected color system.
-The matrix is formed from the specified color space and (optional) white point for chromatic adaptation. The default is the most common color space (sRGB) with a natural-looking white point, equal-energy spectrum (illiminant E).
+The matrix is formed from the specified color space and (optional) white point for chromatic adaptation. The default is the most common color space (sRGB) with a natural-looking white point, equal-energy spectrum (illuminant E).
 
 The photometric measurements read from the database are calibrated at runtime using the specified calibration system and filter profiles. Zero points are not required. Spectra and filter profiles are stored on a grid with a 5-nm step in energy spectral density units (e.g., W/(m² nm)).
 
@@ -52,7 +52,7 @@ Program interface is functionally divided into tabs: *Database viewer*, *Image p
 
 The **Database viewer** tab provides access to the spectra database and allows you to calculate a color with the selected settings by simply clicking on an object. It is possible to plot one or more spectra from the database in a pop-up window. You can process the colors of an entire category at once and get the output in text form or as a graphical table ([examples](tables/)).
 
-The **Image processing** tab accepts regular images, a series of black and white images, or a spectral cube as input. Using the wavelength information, the image is "reshot" in true color. The internal operations are similar to reconstructing the spectrum for each pixel, but use efficient operations on arrays.
+The **Image processing** tab accepts regular images, a series of black and white images, or a spectral cube as input. Using the wavelength information, the image is "re-shot" in true color. The internal operations are similar to reconstructing the spectrum for each pixel, but use efficient operations on arrays.
 
 The **Blackbody & Redshifts** tab calculates the influence of physical phenomena on color. Based on the blackbody spectrum, the program displays the color and brightness changes due to Doppler and gravitational redshifts. Surface brightness is tied to the `Maximize brightness` checkbox, otherwise can be adjusted with the slider.
 
@@ -122,7 +122,7 @@ As in JSON5, the default wavelengths for external files are in nanometers and th
 - `.txtE` for energy counters per wavelength (by default), `.txtJ` for energy counters per frequency (like jansky), `.txtP` for photon counters.
 
 ### Spectra database extension
-The data in the `/spectra` folder can be modified by the user (except for [Sun](spectra/files/CALSPEC/sun_reference_stis_002.fits) and [Vega](spectra/files/CALSPEC/alpha_lyr_stis_012.fits), which are used for calibration). The display order in the *Database viewer* is determined by the file names and the order within the file. If the spectrum header is repeated in the database, the last spectrum will replace the previous one. The tag list is created and completed while reading files. `/spectra_extras` is recommended as the storage location for user files and add-ons; they will be shown last in the GUI. There is a [pinned issue](https://github.com/Askaniy/TrueColorTools/issues/26) for sharing "official" and user add-ons. Pull requests are welcome too.
+The data in the `/spectra` folder can be modified by the user (except for [Sun](spectra/files/CALSPEC/sun_reference_stis_002.fits) and [Vega](spectra/files/CALSPEC/alpha_lyr_stis_012.fits), which are used for calibration). The display order in the *Database viewer* is determined by the file names and the order within the file. If the spectrum header is repeated in the database, the last spectrum will replace the previous one. The tag list is created and completed while reading files. `/spectra_extras` is recommended as the storage location for user files and addons; they will be shown last in the GUI. There is a [pinned issue](https://github.com/Askaniy/TrueColorTools/issues/26) for sharing "official" and user addons. Pull requests are welcome too.
 
 ### Filters database extension
 TCT uses filter sensitivity profiles for accurate spectrum restoration. They are provided by the [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php) and stored [here](/filters). To replenish the database, select a filter on the site, select the "ascii" data file and place it in the folder. You need also specify the wavelength unit (usually ångströms, so you get the `.datA` extension). If you see "Detector Type: **P**hoton counter" in the filter description there (instead of "Energy counter", which we need) you need to add `P` to the extension. (Do not edit the [V band filter](filters/Generic_Bessell.V.dat), it is needed for the program to work.)
