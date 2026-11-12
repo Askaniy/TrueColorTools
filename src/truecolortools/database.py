@@ -8,6 +8,7 @@ from functools import cache
 from pathlib import Path
 from traceback import format_exc
 
+import astrocolor as ac
 from json5 import load as json5load
 
 import truecolortools.auxiliary as aux
@@ -285,6 +286,20 @@ def notes_list(obj_names: list[ObjectName], lang: str) -> list[str]:
 # http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php
 
 def list_filters() -> tuple[str, ...]:
-    """ Returns list of file names were found in the filters folder """
-    files = sorted(Path('filters').glob('*.*'))
-    return tuple(file.stem for file in files)
+    """
+    Returns filter identifiers available locally.
+
+    AstroColor searches bundled, cached and custom folders in that order.
+    Profiles that are not present locally are downloaded from SVO FPS on the
+    first `Filter.get()` call, so they cannot be listed in advance.
+    """
+    filter_ids: set[str] = set()
+    folders = [ac.Config.get_bundled_filters_folder(), ac.Config.get_cached_filters_folder()]
+    custom = ac.Config.get_custom_filters_folder()
+    if custom is not None:
+        folders.append(custom)
+    for folder in folders:
+        for path in folder.glob('*/*'):
+            if path.is_file():
+                filter_ids.add(f'{path.parent.name}/{path.stem}')
+    return tuple(sorted(filter_ids))

@@ -1,24 +1,19 @@
 """ Processes raw image input into a picture that can be shown and saved. """
 
 from collections.abc import Callable
-from math import ceil, sqrt
+from io import BytesIO
+from math import sqrt
 from time import monotonic
 from traceback import format_exc
+from typing import cast
 
+import astrocolor as ac
 import numpy as np
 from PIL import Image
 from tifffile import imwrite
 
 import truecolortools.image_import as ii
-from truecolortools.core import (
-    ColorImage,
-    ColorLine,
-    FilterSystem,
-    PhotospectralCube,
-    SpectralCube,
-    sun_norm,
-    xyz_color_system,
-)
+from truecolortools.core import sun_norm
 
 
 def image_parser(
@@ -30,53 +25,50 @@ def image_parser(
     log('Starting the image processing thread')
     start_time = monotonic()
     try:
+        # AstroColor splits large color cubes into batches internally.
+        ac.Config.pixel_upper_limit = px_upper_limit
         match image_mode:
             case 0: # Multiband image
-                files = np.array(files)
-                not_empty_files = np.where(files != '')
-                files = files[not_empty_files]
-                filters = np.array(filters)[not_empty_files]
-                formulas = np.array(formulas)[not_empty_files]
-                filter_system = FilterSystem.from_list(filters)
+                selected = [
+                    (file, filter_obj, formula)
+                    for file, filter_obj, formula in zip(files, filters, formulas)
+                    if file != ''
+                ]
+                files = [item[0] for item in selected]
+                selected_filters = [item[1] for item in selected]
+                formulas = [item[2] for item in selected]
+                filter_set = ac.FilterSet.from_filters(selected_filters)
                 log('Importing the images')
-                cube = PhotospectralCube(filter_system, ii.bw_list_reader(files, formulas))
+                cube: ac.PhotospectralCube | ac.SpectralCube = ac.PhotospectralCube(
+                    filter_set,
+                    ii.bw_list_reader(files, formulas),
+                )
             case 1: # RGB image
-                filter_system = FilterSystem.from_list(filters)
+                filter_set = ac.FilterSet.from_filters(filters)
                 log('Importing the RGB image')
-                cube = PhotospectralCube(filter_system, ii.rgb_reader(single_file, formulas))
+                cube = ac.PhotospectralCube(filter_set, ii.rgb_reader(single_file, formulas))
             case 2: # Spectral cube
                 log('Importing the spectral cube')
-                cube = SpectralCube.from_file(single_file)
+                wavelength_nm, spectral_dist = ii.cube_reader(single_file)
+                cube = ac.SpectralCube(wavelength_nm, spectral_dist)
+            case _:
+                raise ValueError(f'Unknown image mode: {image_mode}')
         if preview_flag:
             log('Downscaling')
             cube = cube.downscale(px_lower_limit)
         if photons:
             log('Converting photon spectral density to energy density')
             cube = cube.convert_from_photon_spectral_density()
+        sun = cast(ac.Spectrum, sun_norm)
         if sun_divide:
             log('Dividing by Solar spectrum to remove the reflected color of the Sun')
-            cube /= sun_norm
+            cube = cube / sun
         if sun_multiply:
             log('Multiplying by Solar spectrum to simulate the reflection of sunlight')
-            cube *= sun_norm
-        px_num = cube.size
-        if preview_flag or px_num < px_upper_limit:
-            log('Color calculating')
-            img = ColorImage.from_spectral_data(cube)
-        else:
-            square = cube.flatten()
-            chunk_num = ceil(px_num / px_upper_limit)
-            img_array = np.empty((3, px_num))
-            for i in range(chunk_num):
-                j = i+1
-                try:
-                    chunk = square[i*px_upper_limit:j*px_upper_limit]
-                except IndexError:
-                    chunk = square[i*px_upper_limit:]
-                img_chunk = ColorLine.from_spectral_data(chunk)
-                img_array[:,i*px_upper_limit:j*px_upper_limit] = img_chunk.br
-                log(f'Color calculated for {j} chunks out of {chunk_num}')
-            img = ColorImage(img_array.reshape(3, cube.width, cube.height), xyz_color_system)
+            cube = cube * sun
+        px_num = cube.spatial_size
+        log('Color calculating')
+        img = ac.ColorImage.from_spectral_data(cube)
         if upscale and px_num < px_lower_limit and (times := round(sqrt(px_lower_limit / px_num))) != 1:
             log('Upscaling')
             img = img.upscale(times)
@@ -88,9 +80,17 @@ def image_parser(
             log('Sending the preview to the main thread', img)
         else:
             log('Sending the image to the main thread', img)
-    except Exception:
+    except Exception:  # noqa: BLE001
         log(f'Image processing failed with {format_exc(limit=0).strip()}')
         print(format_exc())
+
+
+def color_image_to_bytes(img: ac.ColorImage, settings: ac.DisplaySettings) -> bytes:
+    """ Renders a linear color image and encodes it as PNG bytes for the GUI. """
+    arr = np.round(np.clip(img.render(settings), 0, 1) * 255).astype('uint8')
+    bio = BytesIO()
+    Image.fromarray(arr.transpose((1, 2, 0))).save(bio, format='png')
+    return bio.getvalue()
 
 
 supported_formats = ('JPEG int8', 'PNG int8', 'TIFF int16', 'TIFF int32', 'TIFF float16', 'TIFF float32', 'TIFF float64')

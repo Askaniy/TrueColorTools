@@ -3,19 +3,20 @@ from math import ceil, floor, sqrt
 from pathlib import Path
 from time import strftime
 
+import astrocolor as ac
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
+import truecolortools.auxiliary as aux
 import truecolortools.database as db
 import truecolortools.strings as tr
-from truecolortools.core import *
-
+from truecolortools.core import DatabaseEntry, sun_norm
 
 FONT_DIR = Path(__file__).parent / 'fonts'
 
 
 def generate_table(
-        objectsDB: dict, tag: str, color_system: ColorSystem, gamma_correction: bool, maximize_brightness: bool,
+        objectsDB: dict, tag: str, color_system: ac.ColorSystem, gamma_correction: bool, maximize_brightness: bool,
         scale_factor: float, geom_albedo: bool, sun_multiply: bool, folder: str, extension: str, lang: str
     ):
     """ Creates and saves a table of colored squares for each spectral data unit that has the specified tag """
@@ -100,6 +101,8 @@ def generate_table(
     name_size *= len(title_lines)
 
     # Notes calculations
+    notes_numbered: list[str] = []
+    w_notes = 0
     if notes_flag:
         notes_numbered = [f'{aux.superscript(note_num+1)} {note}' for note_num, note in enumerate(notes)]
         w_notes = w0 + max(width(note_text, note_font) for note_text in notes_numbered) # notes columns width
@@ -134,23 +137,26 @@ def generate_table(
     for n, obj_name in enumerate(displayed_namesDB):
 
         # Spectral data import and processing
-        body = database_parser(obj_name, objectsDB[obj_name])
+        body = DatabaseEntry(obj_name, objectsDB[obj_name])
         spectrum, estimated = body.get_spectrum('geometric' if geom_albedo else 'spherical')
 
-        if sun_multiply and isinstance(body, ReflectingBody):
+        if sun_multiply and not body.is_emissive:
             # Multiply by Solar spectrum
             spectrum *= sun_norm
 
         # Color calculation
-        color = ColorPoint.from_spectral_data(spectrum).to_color_system(color_system)
-        color.gamma_correction = gamma_correction
-        color.maximize_brightness = maximize_brightness or estimated is None
-        color.scale_factor = scale_factor
-        color_array = color.to_array()
+        color = ac.ColorPoint.from_spectral_data(spectrum).to_color_system(color_system)
+        settings = ac.DisplaySettings(
+            color_system=color_system,
+            gamma_correction=gamma_correction,
+            maximize_brightness=maximize_brightness or estimated is None,
+            scale_factor=scale_factor,
+        )
+        color_array = color.render(settings)
 
         # Setting of notes and shape
         is_filled = True
-        if maximize_brightness or isinstance(body, EmittingBody):
+        if maximize_brightness or body.is_emissive:
             object_notes.append(None)
         else:
             match estimated:
@@ -256,15 +262,15 @@ def generate_table(
         if notes_flag and (note := obj_name.note(lang)):
             name += aux.superscript(notes.index(note) + 1)
 
-        splitted = line_splitter(name, object_font, 2*r_active)
-        match len(splitted):
+        split = line_splitter(name, object_font, 2*r_active)
+        match len(split):
             case 1:
                 shift = 0.5 * object_size
             case 4:
                 shift = object_size + workaround_shift # not related, just works to move up the line a bit
             case _:
                 shift = object_size
-        draw.multiline_text((center_x-r_active, center_y-shift), '\n'.join(splitted), fill=text_color, font=object_font, spacing=1)
+        draw.multiline_text((center_x-r_active, center_y-shift), '\n'.join(split), fill=text_color, font=object_font, spacing=1)
 
     file_name = f'TCT_{strftime("%Y-%m-%d_%H-%M-%S")}_{aux.normalize_string(tag)}.{extension}'
     img.save(f'{folder}/{file_name}')

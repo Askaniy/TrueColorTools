@@ -3,6 +3,7 @@
 from collections.abc import Sequence
 from functools import lru_cache
 from pathlib import Path
+from typing import Any, cast
 
 import numpy as np
 from astropy.io import fits
@@ -15,8 +16,8 @@ def cube_reader(file: str) -> tuple[np.ndarray, np.ndarray]:
     with fits.open(file) as hdul:
         #hdul.info()
         #print(repr(hdul[0].header))
-        br = np.array(hdul['sci'].data).transpose((0, 2, 1))
-        nm = np.array(hdul['wavelength'].data)
+        br = np.array(cast(Any, hdul['sci']).data).transpose((0, 2, 1))
+        nm = np.array(cast(Any, hdul['wavelength']).data)
     return nm, br
 
 @lru_cache(maxsize=8)
@@ -27,7 +28,7 @@ def cached_open(file: str):
         with fits.open(file) as hdul:
             #hdul.info()
             #print(repr(hdul[0].header))
-            array = hdul[0].data
+            array = cast(Any, hdul[0]).data
         return Image.fromarray(array)
     else:
         return Image.open(file)

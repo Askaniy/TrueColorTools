@@ -1,15 +1,18 @@
 """ Responsible for the creation and translation of the graphical interface. """
 
+# FreeSimpleGUI stubs type `update(*args)` incorrectly; widget values are dynamic.
+# pyright: reportArgumentType=false, reportCallIssue=false, reportOptionalSubscript=false, reportOptionalMemberAccess=false, reportPossiblyUnboundVariable=false
+
 import platform
 from collections.abc import Callable
 from time import strftime
 from typing import Any
 
+import astrocolor as ac
 import FreeSimpleGUI as sg
 import numpy as np
 
 import truecolortools.strings as tr
-from truecolortools.core import ColorSystem
 from truecolortools.image_processing import supported_formats
 
 # TCT style colors
@@ -98,14 +101,14 @@ def generate_layout(
         [sg.Text(tr.gui_color_space[lang], key='-ColorSpaceText-', tooltip=tr.gui_color_space_tooltip[lang])],
         [
             sg.Combo(
-                tuple(ColorSystem.supported_color_spaces.keys()), default_value=color_space, readonly=True,
+                tuple(ac.ColorSystem.supported_color_spaces.keys()), default_value=color_space, readonly=True,
                 expand_x=True, enable_events=True, key='-ColorSpace-', tooltip=tr.gui_color_space_tooltip[lang]
             )
         ],
         [sg.Text(tr.gui_chromatic_adaptation[lang], key='-ChromaticAdaptationText-', tooltip=tr.gui_chromatic_adaptation_tooltip[lang])],
         [
             sg.Combo(
-                ('', *ColorSystem.supported_white_points.keys()), default_value=white_point, readonly=True,
+                ('', *ac.ColorSystem.supported_white_points.keys()), default_value=white_point, readonly=True,
                 expand_x=True, enable_events=True, key='-ChromaticAdaptation-', tooltip=tr.gui_chromatic_adaptation_tooltip[lang]
             )
         ],

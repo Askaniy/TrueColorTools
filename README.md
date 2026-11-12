@@ -34,6 +34,8 @@ An alternative way for Windows 8/10/11. Stable versions are compiled into an exe
 
 TCT converts photometric measurements into a continuous spectrum (if it isn't already a spectrum) and convolves it with eye color matching functions (CMFs). A set of photographs (e.g. taken by a spacecraft) is counted and processed in the same way as photometry.
 
+The computational core is [AstroColor](https://github.com/Askaniy/AstroColor): it owns spectra, filter profiles, synthetic photometry, spectral reconstruction, phase models and color transforms. TCT adds the JSON5 database, `ObjectName` parsing, external file import, the GUI and the color-table renderer.
+
 According to a common color processing procedure, after convolution from CMF to CIE 1931 XYZ color space, the color is converted by a 3×3 matrix to the selected color system.
 The matrix is formed from the specified color space and (optional) white point for chromatic adaptation. The default is the most common color space (sRGB) with a natural-looking white point, equal-energy spectrum (illuminant E).
 
@@ -44,9 +46,9 @@ Interpolation is not used to reconstruct the spectrum from the photometry becaus
 
 ## How to use?
 
-Interaction with TrueColorTools is implied through the GUI. However, if you are an advanced Python user, you can import the core (`from truecolortools.core import *`) and use it as a spectral processing library.
+Interaction with TrueColorTools is implied through the GUI. Advanced Python users should use `astrocolor` as the spectral processing library; TCT's `core.py` is now a thin database/file adapter (`DatabaseEntry`, `read_spectrum_file`, `get_filter`) rather than a second spectral library.
 
-If you are running the GUI from the command line, you can set the startup language <!--- and CLI verbosity level--> (run with `--help` for details). No Internet connection is required, the databases are stored in the appropriate repository folders, and you can replenish them.
+If you are running the GUI from the command line, you can set the startup language <!--- and CLI verbosity level--> (run with `--help` for details). Bundled and custom filter profiles work offline. Profiles not yet cached are downloaded from SVO FPS on first use; this requires an Internet connection.
 
 Program interface is functionally divided into tabs: *Database viewer*, *Image processing* and *Blackbody & Redshifts*. Color output formatting, often common to tabs, is located in the sidebar settings.
 
@@ -93,7 +95,8 @@ Supported input keys of a database unit:
 - `wavelength_range` (dict): sets the wavelength grid in the format `{start: …, stop: …, step: …}`
 - `spectral_slope` (dict): sets the grid in the format `{start: …, stop: …, power/percent_per_100nm: …}`
 - `file` (str): path to a text or FITS file, recommended placing in `spectra` or `spectra_extras` folder
-- `filters` (list): list of filter names present in the `filters` folder (can be mixed with nm values)
+- `file_geometric`, `file_spherical` (str): paths to separate geometric and spherical albedo spectra
+- `filters` (list): list of filter identifiers known to AstroColor/SVO FPS (can be mixed with nm values)
 - `filter_set` (str): can be used to avoid repeating the name of the photometric system or instrument
 - `color_indices` (list): dictionary of color indices, formatted `{'filter1-filter2': …, …}`
 - `calibration_system` (str): `Vega` or `AB` filters zero points calibration, `ST` is assumed by default
@@ -124,8 +127,14 @@ As in JSON5, the default wavelengths for external files are in nanometers and th
 ### Spectra database extension
 The data in the `/spectra` folder can be modified by the user (except for [Sun](spectra/files/CALSPEC/sun_reference_stis_002.fits) and [Vega](spectra/files/CALSPEC/alpha_lyr_stis_012.fits), which are used for calibration). The display order in the *Database viewer* is determined by the file names and the order within the file. If the spectrum header is repeated in the database, the last spectrum will replace the previous one. The tag list is created and completed while reading files. `/spectra_extras` is recommended as the storage location for user files and addons; they will be shown last in the GUI. There is a [pinned issue](https://github.com/Askaniy/TrueColorTools/issues/26) for sharing "official" and user addons. Pull requests are welcome too.
 
-### Filters database extension
-TCT uses filter sensitivity profiles for accurate spectrum restoration. They are provided by the [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php) and stored [here](/filters). To replenish the database, select a filter on the site, select the "ascii" data file and place it in the folder. You need also specify the wavelength unit (usually ångströms, so you get the `.datA` extension). If you see "Detector Type: **P**hoton counter" in the filter description there (instead of "Energy counter", which we need) you need to add `P` to the extension. (Do not edit the [V band filter](filters/Generic_Bessell.V.dat), it is needed for the program to work.)
+### Filters
+TCT uses filter sensitivity profiles for accurate spectrum restoration. AstroColor searches for them in this order:
+
+1. profiles bundled with AstroColor (currently the Bessell UBVRI, Sloan SDSS g/r and CIE 1931 CMFs);
+2. `cached_filters/`, populated automatically from the [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/svo/theory/fps3/index.php);
+3. `custom_filters/`, for profiles that are not available in SVO FPS (these are maintained in this repository).
+
+A profile is identified as `Group/Name.Filter`, for example `Generic/Bessell.V`. The folder layout mirrors that identifier: `custom_filters/Group/Name.Filter.datA`. An extension can specify the wavelength unit (`A` for ångströms, `U` for micrometers) and detector type (`P` for photon counting, `J` for energy per frequency). Profiles downloaded from SVO FPS are cached locally, so they are read from disk on subsequent launches.
 
 Short help on the UBVRI photometric system implementations:
 - `Generic/Johnson` takes into account the sensitivity of photomultiplier tubes, mostly affected on R and I bands. Use **only** if the measurements were actually taken on a PMT.
@@ -145,4 +154,4 @@ This research has made use of:
     - [The SVO Filter Profile Service. Rodrigo, C., Solano, E., 2020](https://ui.adsabs.harvard.edu/abs/2020sea..confE.182R/abstract);
 - [Colour & Vision Research laboratory and database](http://www.cvrl.org/)
     - [CIE 1931 2-deg, XYZ colour matching functions](http://www.cvrl.org/cie.htm);
-    - [Stiles & Burch (1955) 2-deg colour matching functions](http://www.cvrl.org/stilesburch2_ind.htm).
+- [AstroColor](https://github.com/Askaniy/AstroColor), the spectral and color engine used by TCT.
