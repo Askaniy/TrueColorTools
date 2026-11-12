@@ -573,7 +573,7 @@
     '(44) Nysa | SMASS, Shepard2008, Shevchenko2022': {
         tags: ['SMASS', 'Solar System', 'minor body/asteroid/main belt'],
         file: 'spectra/files/SMASS/a000044.2.txtU',
-        geometric_albedo: ['Generic_Bessell.V', [0.44, 0.10]],
+        geometric_albedo: ['Generic/Bessell.V', [0.44, 0.10]],
         phase_function: ['HG1G2', {H: [6.904, 0.006], G_1: [0.05, 0.03], G_2: [0.670, 0.010]}],
     },
     'Harris1999': [
@@ -1047,7 +1047,7 @@
             4.758894e-03, 4.451864e-03, 4.656452e-03, 4.906095e-03, 4.928027e-03, 5.093985e-03,
             5.382436e-03, 5.742557e-03, 7.222007e-03, 1.083169e-02
         ],
-        geometric_albedo: ['GAIA_GAIA2r.G', [0.051, 0.005]],
+        geometric_albedo: ['GAIA/GAIA2r.G', [0.051, 0.005]],
         phase_function: ['Misc/Atlas.cyan', 'HG1G2', {H: [8.1130, +0.0548, -0.0636], G_1: [0.8096, +0.1601, -0.1733], G_2: [0.1182, +0.0991, -0.0932]}],
     },
     'Licandro2016': [
@@ -1423,7 +1423,7 @@
         color_indices: {'B-V': [0.770, 0.050], 'V-R': [0.450, 0.030], 'V-I': [0.920, 0.023]}, // as reported in LCDB
         calibration_system: 'Vega',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['PAN-STARRS/PS1', [0.046, +0.008, -0.007]],
+        geometric_albedo: ['PAN-STARRS/PS1.g', [0.046, +0.008, -0.007]], // and ['PAN-STARRS/PS1.r', [0.050, +0.008, -0.007]]
         phase_function: ['HG1G2', {H: [8.928759, +0.113335, -0.130712], G_1: [0.532648, +0.392839, -0.457939], G_2: [0.177517, +0.286677, -0.258727]}],
     },
     'Mainzer2011': [
@@ -5279,8 +5279,8 @@
         color_indices: {'g-r': [0.49, 0.03], 'r-i': [0.20, 0.02], 'i-z': [0.02, 0.03]},
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.021], // Section 4
-        phase_function: ['Generic_Bessell.R', 'phase coefficient', {beta: [0.03584, 0.0035]}], // Table 4
+        geometric_albedo: ['Generic/Bessell.V', 0.021], // Section 4
+        phase_function: ['Generic/Bessell.R', 'phase coefficient', {beta: [0.03584, 0.0035]}], // Table 4
     },
     '(163693) Atira | Rondón2022': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Atira'],
@@ -5288,8 +5288,8 @@
         color_indices: {'g-r': [0.5154, 0.0444], 'r-i': [0.2017, 0.0716], 'i-z': [0.1485, 0.8140]}, // Weighted mean of Table A.4
         calibration_system: 'AB',
         is_reflecting_sunlight: true,
-        geometric_albedo: ['Generic_Bessell.V', 0.021], // Section 4
-        phase_function: ['Generic_Bessell.R', 'phase coefficient', {beta: [0.03584, 0.0035]}], // Table 4
+        geometric_albedo: ['Generic/Bessell.V', 0.021], // Section 4
+        phase_function: ['Generic/Bessell.R', 'phase coefficient', {beta: [0.03584, 0.0035]}], // Table 4
     },
     '(164207) Cardea | Ieva2020, SsODNet': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Apollo', 'minor body/quasi-satellite'],
@@ -8581,7 +8581,7 @@
     ],
     '2024 YR4 | Bolin2025b, Müller2026': {
         tags: ['Solar System', 'minor body/asteroid/NEO/Apollo'],
-        filter_set: 'Gemini_GMOS-S',
+        filter_set: 'Gemini/GMOS-S',
         filters: ['g', 'r', 'i', 'Zc'],
         magnitudes: [[24.01, 0.09], [23.31, 0.04], [23.06, 0.04], [23.34, 0.09]],
         calibration_system: 'AB',
