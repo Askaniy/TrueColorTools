@@ -1,5 +1,6 @@
 from argparse import ArgumentParser
 
+from truecolortools.core import configure_filter_paths
 from truecolortools.main import launch_window
 
 # CLI parsing
@@ -8,4 +9,6 @@ parser = ArgumentParser(description='See ReadMe on the GitHub page: https://gith
 parser.add_argument('-l', '--lang', '--language', type=str, default='en', help='set startup language, editable in GUI (en, de, ru)')
 args = parser.parse_args()
 
+# AstroColor must search TCT's local filter folders before the GUI starts.
+configure_filter_paths()
 launch_window(args.lang)

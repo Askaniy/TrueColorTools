@@ -8,6 +8,17 @@ import numpy as np
 import truecolortools.image_processing as ip
 import truecolortools.plotter as pl
 from truecolortools import core, gui
+from truecolortools.main import compose_plot_data
+
+
+def test_spectral_objects_are_hashable():
+    spectrum = ac.sun_calspec
+    photometry = ac.Photospectrum(ac.FilterSet.get('Generic/Bessell.V'), [1.])
+    assert hash(spectrum) == hash(ac.sun_calspec)
+    assert hash(photometry) == hash(ac.Photospectrum(ac.FilterSet.get('Generic/Bessell.V'), [1.]))
+    pinned = {spectrum: '#ffffff', photometry: '#000000'}
+    assert spectrum in pinned
+    assert photometry in pinned
 
 
 def test_photometry_uses_astrocolor():
@@ -59,7 +70,7 @@ def test_color_image_png_bytes():
 def test_plot_spectra(tmp_path: Path):
     spectrum = ac.sun_calspec
     fig = pl.plot_spectra(
-        [(spectrum, '#ffffff')], False, False, False, 'en', (3, 2), 70
+        {spectrum: '#ffffff'}, False, False, False, 'en', (3, 2), 70
     )
     path = tmp_path / 'spectra.png'
     fig.savefig(path)
@@ -80,6 +91,27 @@ def test_plot_filters():
     pl.close_figure(fig)
 
 
+def test_blackbody_is_not_plotted_as_pinned_on_other_tab():
+    database_spectrum = ac.sun_calspec
+    blackbody = core.blackbody_spectrum(ac.visible_range, 3000)
+    tab1_item = (database_spectrum, '#111111')
+    tab3_item = (blackbody, '#222222')
+
+    on_tab1 = compose_plot_data({}, True, 'tab1', tab1_item, tab3_item)
+    assert database_spectrum in on_tab1
+    assert blackbody not in on_tab1
+
+    on_tab3 = compose_plot_data({}, True, 'tab3', tab1_item, tab3_item)
+    assert blackbody in on_tab3
+    assert database_spectrum not in on_tab3
+
+    cleared = compose_plot_data({}, False, 'tab3', tab1_item, tab3_item)
+    assert cleared == {}
+
+    pinned = compose_plot_data({blackbody: '#222222'}, False, 'tab1', tab1_item, tab3_item)
+    assert pinned == {blackbody: '#222222'}
+
+
 def test_gui_layout_smoke():
     layout = gui.generate_layout(
         circle_size=(201, 201),
@@ -92,7 +124,7 @@ def test_gui_layout_smoke():
         gamma=True,
         brMax=False,
         brGeom=True,
-        bitness=1,
+        bit_depth=1,
         rounding=3,
         tab2_num=8,
         lang='en',

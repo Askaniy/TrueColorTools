@@ -155,7 +155,7 @@ gui_formatting = {
     'ru': 'Форматирование',
     'de': 'Ausgabeformatierung'
 }
-gui_bit = {
+gui_color_depth = {
     'en': 'Color depth (bit)',
     'ru': 'Глубина цвета',
     'de': 'Farbtiefe (bit)'

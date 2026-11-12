@@ -92,7 +92,7 @@ def to_supported_mode(mode: str):
             return 'RGB'
 
 def color_depth(mode: str):
-    """ Corresponds the image mode of the Pillow library and its bitness """
+    """ Corresponds the image mode of the Pillow library and its bit depth """
     match mode:
         case 'RGB' | 'RGBA' | 'L' | 'LA':
             # 8-bit int

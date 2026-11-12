@@ -83,7 +83,7 @@ def generate_layout(
         gamma: bool,
         brMax: bool,
         brGeom: bool,
-        bitness: int,
+        bit_depth: int,
         rounding: int,
         tab2_num: int,
         lang: str):
@@ -129,10 +129,10 @@ def generate_layout(
         [sg.T()],
         [sg.Text(tr.gui_formatting[lang], key='-formattingText-')],
         [
-            sg.Text(tr.gui_bit[lang], key='-bitnessText-'),
+            sg.Text(tr.gui_color_depth[lang], key='-bitDepthText-'),
             sg.InputText(
-                str(bitness), size=1, disabled_readonly_background_color=inputOFF_color,
-                expand_x=True, enable_events=True, key='-bitness-'
+                str(bit_depth), size=1, disabled_readonly_background_color=inputOFF_color,
+                expand_x=True, enable_events=True, key='-bitDepth-'
             ),
         ],
         [
@@ -365,7 +365,7 @@ def translate_win0(window: sg.Window, tab1_loaded: bool, tab1_albedo_note: dict[
     window['-SunMultiply0-'].update(text=tr.gui_sun_multiply_splitted[lang][0])
     window['-SunMultiply1-'].update(tr.gui_sun_multiply_splitted[lang][1])
     window['-formattingText-'].update(tr.gui_formatting[lang])
-    window['-bitnessText-'].update(tr.gui_bit[lang])
+    window['-bitDepthText-'].update(tr.gui_color_depth[lang])
     window['-roundingText-'].update(tr.gui_rnd[lang])
     #window['tab1_title1'].update(tr.gui_database[lang])
     #window['tab1_title2'].update(tr.gui_output[lang])

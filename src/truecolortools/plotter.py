@@ -1,6 +1,6 @@
 """ Provides plotting functions. """
 
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from typing import Any, cast
 
 import astrocolor as ac
@@ -56,7 +56,7 @@ def draw_figure(canvas, figure: Figure):
 
 
 def plot_spectra(
-        dict_to_plot: Sequence[tuple[ac.Spectrum | ac.Photospectrum, str]],
+        dict_to_plot: Mapping[ac.Spectrum | ac.Photospectrum, str],
         limit_to_vis: bool,
         normalize_at_550nm: bool,
         light_theme: bool,
@@ -74,7 +74,7 @@ def plot_spectra(
         # Determining the scale for CMFs in the background
         if not_empty:
             max_y = []
-            for spectrum, _ in dict_to_plot:
+            for spectrum in dict_to_plot:
                 resolved = ac.get_spectrometry(
                     spectrum, ac.visible_range, strictly=limit_to_vis
                 )
@@ -91,7 +91,7 @@ def plot_spectra(
             ax.plot(cmf.wavelength_nm, cmf.spectral_dist * k, color=rgb_muted[i])
         # Plotting the spectra
         if not_empty:
-            for spectrum, color in zip(spectra, [color for _, color in dict_to_plot]):
+            for spectrum, color in zip(spectra, dict_to_plot.values()):
                 ax.plot(
                     spectrum.wavelength_nm,
                     spectrum.spectral_dist,

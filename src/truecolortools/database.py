@@ -4,7 +4,6 @@ Describes the object name data storage class.
 """
 
 from collections.abc import Sequence
-from functools import cache
 from pathlib import Path
 from traceback import format_exc
 
@@ -104,7 +103,6 @@ class ObjectName:
                 name = f'{self.index} {name}'
         return name
 
-    @cache
     def __call__(self, lang: str = 'en') -> str:
         """ Returns a string composed of the available attributes """
         name = self.indexed_name(lang)

@@ -1,11 +1,11 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.12"
 
 [[package]]
 name = "astrocolor"
 version = "0.1.0b3"
-source = { git = "https://github.com/Askaniy/AstroColor.git#16c0bb08ab23676cddb6d279b7b4d8ac4ff29a63" }
+source = { git = "https://github.com/Askaniy/AstroColor.git#f187a2675600436f831941679184dc6a55d8f757" }
 dependencies = [
     { name = "certifi" },
     { name = "numpy" },

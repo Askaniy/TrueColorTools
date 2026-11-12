@@ -4,6 +4,7 @@
 # The event loop is dynamic by design; suppress only GUI-related diagnostics.
 # pyright: reportArgumentType=false, reportAttributeAccessIssue=false, reportOptionalSubscript=false, reportOptionalMemberAccess=false, reportPossiblyUnboundVariable=false
 
+from collections.abc import Mapping
 from pathlib import Path
 from time import strftime
 
@@ -22,7 +23,6 @@ from truecolortools import gui
 from truecolortools.core import (
     DatabaseEntry,
     blackbody_spectrum,
-    configure_filter_paths,
     get_filter,
     sun_norm,
 )
@@ -30,6 +30,43 @@ from truecolortools.database import ObjectName
 from truecolortools.table_generator import generate_table
 
 PACKAGE_DIR = Path(__file__).parent
+
+type PlotItem = tuple[ac.Spectrum | ac.Photospectrum, str]
+type PlotData = dict[ac.Spectrum | ac.Photospectrum, str]
+
+
+def _current_plot_item(obj_name: object, spectrum: ac.Spectrum | ac.Photospectrum | None, html: str | None) -> PlotItem | None:
+    """ Returns a plot item only when the current tab has a complete spectrum. """
+    if obj_name and spectrum is not None and html is not None:
+        return spectrum, html
+    return None
+
+
+def compose_plot_data(
+    pinned: Mapping[ac.Spectrum | ac.Photospectrum, str],
+    plot_current: bool,
+    current_tab: str,
+    tab1_item: PlotItem | None,
+    tab3_item: PlotItem | None,
+) -> PlotData:
+    """
+    Builds the plot contents from pinned spectra and the current tab only.
+
+    A spectrum from another tab is never added: it is a transient preview, not
+    a pinned object, and must disappear when the user switches tabs.
+    """
+    data = dict(pinned)
+    if not plot_current:
+        return data
+    if current_tab == 'tab1':
+        current_item = tab1_item
+    elif current_tab == 'tab3':
+        current_item = tab3_item
+    else:
+        current_item = None
+    if current_item is not None:
+        data[current_item[0]] = current_item[1]
+    return data
 
 
 def _safe_scale_factor(value: object) -> float:
@@ -42,9 +79,6 @@ def _safe_scale_factor(value: object) -> float:
 
 
 def launch_window(lang: str):
-
-    # AstroColor must search TCT's local filter folders before the GUI starts.
-    configure_filter_paths()
 
     # Databases declaration
     database_folders = ('spectra', 'spectra_extras')
@@ -61,7 +95,7 @@ def launch_window(lang: str):
     default_gamma_correction = True
     brMax = False # albedo/chromaticity mode switcher
     brGeom = True # default albedo type (True==geometrical, False==spherical)
-    bitness = 1
+    bit_depth = 1
     rounding = 3
     tab3_overexposure_limit = 3e5 # W/m²
 
@@ -99,11 +133,12 @@ def launch_window(lang: str):
         layout=gui.generate_layout(
             circle_size, filters_plot_size, img_preview_size, filtersDB, tab3_overexposure_limit,
             default_color_space, default_white_point, default_gamma_correction,
-            brMax, brGeom, bitness, rounding, tab2_num, lang
+            brMax, brGeom, bit_depth, rounding, tab2_num, lang
         )
     )
     # Creating the plot window stub
     window1 = None
+    tab1_tab3_fig = tab1_tab3_fig_canvas_agg = None
 
     # Connection to the parallel thread of image processing
     tab2_logger = gui.create_logger(window0, 'tab2_thread')
@@ -116,7 +151,9 @@ def launch_window(lang: str):
     limit_to_vis = False
     normalize_at_550nm = False
     light_theme = False
-    pinned_spectra_and_colors: list[tuple[ac.Spectrum | ac.Photospectrum, str]] = [] # for tabs 1 and 3
+    # AstroColor hashes spectral content; never mutate a pinned spectrum.
+    pinned_spectra_and_colors: dict[ac.Spectrum | ac.Photospectrum, str] = {} # for tabs 1 and 3
+    plot_current = True # show the current tab's spectrum in addition to pinned ones
     mean_spectrum = [] # for tab 2
 
     # Default values to avoid errors
@@ -131,13 +168,13 @@ def launch_window(lang: str):
     def tab1_tab3_update_plot(fig, fig_canvas_agg, current_tab, limit_to_vis, normalize_at_550nm, light_theme: bool, lang: str):
         pl.close_figure(fig)
         fig_canvas_agg.get_tk_widget().forget()
-        dict_to_plot = list(pinned_spectra_and_colors)
-        if current_tab == 'tab1' and tab1_obj_name and tab1_spectrum is not None and tab1_html is not None \
-                and not any(s is tab1_spectrum for s, _ in dict_to_plot):
-            dict_to_plot.append((tab1_spectrum, tab1_html))
-        if current_tab == 'tab3' and tab3_obj_name and tab3_spectrum is not None and tab3_html is not None \
-                and not any(s is tab3_spectrum for s, _ in dict_to_plot):
-            dict_to_plot.append((tab3_spectrum, tab3_html))
+        dict_to_plot = compose_plot_data(
+            pinned_spectra_and_colors,
+            plot_current,
+            current_tab,
+            _current_plot_item(tab1_obj_name, tab1_spectrum, tab1_html),
+            _current_plot_item(tab3_obj_name, tab3_spectrum, tab3_html),
+        )
         fig = pl.plot_spectra(dict_to_plot, limit_to_vis, normalize_at_550nm, light_theme, lang, spectra_figsize, spectra_dpi)
         fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, fig)
         return fig, fig_canvas_agg
@@ -152,15 +189,15 @@ def launch_window(lang: str):
 
     # List of events that cause GUI output update
     tab1_update_gui_events = (
-        '-ColorSpace-', '-ChromaticAdaptation-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-', '-currentTab-',
-        '-AlbedoMode1-', '-AlbedoMode2-', '-SunMultiply0-', '-bitness-', '-rounding-', 'tab1_list', 'tab1_(re)load'
+        '-ColorSpace-', '-ChromaticAdaptation-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-',
+        '-AlbedoMode1-', '-AlbedoMode2-', '-SunMultiply0-', '-bitDepth-', '-rounding-', 'tab1_list', 'tab1_(re)load'
     )
     tab2_update_gui_events = (
         '-ColorSpace-', '-ChromaticAdaptation-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-', '-currentTab-',
     )
     tab3_update_gui_events = (
-        '-ColorSpace-', '-ChromaticAdaptation-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-', '-currentTab-',
-        '-bitness-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3', 'tab3_overexposure_limit', 'tab3_slider4'
+        '-ColorSpace-', '-ChromaticAdaptation-', '-GammaCorrection-', '-MaximizeBrightness-', '-ScaleFactor-',
+        '-bitDepth-', '-rounding-', 'tab3_slider1', 'tab3_slider2', 'tab3_slider3', 'tab3_overexposure_limit', 'tab3_slider4'
     )
 
     # GUI first loading flags
@@ -181,6 +218,7 @@ def launch_window(lang: str):
 
         # Events with the plot window
         elif isinstance(event, str) and event.endswith('plot'):
+            plot_current = True
             if not window1:
                 window1 = sg.Window(
                     tr.spectral_plot[lang], gui.generate_plot_layout(lang, spectra_plot_size, limit_to_vis, normalize_at_550nm, light_theme), icon=icon,
@@ -189,13 +227,13 @@ def launch_window(lang: str):
             else:
                 pl.close_figure(tab1_tab3_fig)
                 tab1_tab3_fig_canvas_agg.get_tk_widget().forget()
-            dict_to_plot = list(pinned_spectra_and_colors)
-            if tab1_obj_name and tab1_spectrum is not None and tab1_html is not None \
-                    and not any(s is tab1_spectrum for s, _ in dict_to_plot):
-                dict_to_plot.append((tab1_spectrum, tab1_html))
-            if tab3_obj_name and tab3_spectrum is not None and tab3_html is not None \
-                    and not any(s is tab3_spectrum for s, _ in dict_to_plot):
-                dict_to_plot.append((tab3_spectrum, tab3_html))
+            dict_to_plot = compose_plot_data(
+                pinned_spectra_and_colors,
+                plot_current,
+                window0.ReturnValuesDictionary['-currentTab-'],
+                _current_plot_item(tab1_obj_name, tab1_spectrum, tab1_html),
+                _current_plot_item(tab3_obj_name, tab3_spectrum, tab3_html),
+            )
             tab1_tab3_fig = pl.plot_spectra(dict_to_plot, limit_to_vis, normalize_at_550nm, light_theme, lang, spectra_figsize, spectra_dpi)
             tab1_tab3_fig_canvas_agg = pl.draw_figure(window1['W1_canvas'].TKCanvas, tab1_tab3_fig)
         elif event == 'W1_path':
@@ -262,9 +300,9 @@ def launch_window(lang: str):
                 color_system = ac.ColorSystem(values['-ColorSpace-'], values['-ChromaticAdaptation-'])
 
             # Checks for empty input
-            elif event == '-bitness-':
+            elif event == '-bitDepth-':
                 try:
-                    bitness = int(values['-bitness-'])
+                    bit_depth = int(values['-bitDepth-'])
                 except ValueError:
                     pass
             elif event == '-rounding-':
@@ -283,9 +321,9 @@ def launch_window(lang: str):
                 window['-SunMultiply0-'].update(visible=is1tab)
                 window['-SunMultiply1-'].update(visible=is1tab)
                 window['-formattingText-'].update(visible=not2tab)
-                window['-bitnessText-'].update(visible=not2tab)
+                window['-bitDepthText-'].update(visible=not2tab)
                 window['-roundingText-'].update(visible=not2tab)
-                window['-bitness-'].update(visible=not2tab)
+                window['-bitDepth-'].update(visible=not2tab)
                 window['-rounding-'].update(visible=not2tab)
 
             # ------------ Events in the tab "Database viewer" ------------
@@ -336,6 +374,7 @@ def launch_window(lang: str):
 
                         # Spectral data import and processing
                         tab1_body = DatabaseEntry(tab1_obj_name, objectsDB[tab1_obj_name])
+                        plot_current = True
 
                     if event in tab1_recalc_color_events:
 
@@ -363,7 +402,7 @@ def launch_window(lang: str):
 
                         # Output
                         window['tab1_graph'].TKCanvas.itemconfig(tab1_preview, fill=tab1_html)
-                        window['tab1_rgb'].update(tuple(tab1_color_rgb.to_bit(bitness, settings=settings).round(rounding)))
+                        window['tab1_rgb'].update(tuple(tab1_color_rgb.to_bit(bit_depth, settings=settings).round(rounding)))
                         window['tab1_hex'].update(tab1_html)
 
                         # Setting of notes
@@ -399,11 +438,13 @@ def launch_window(lang: str):
                     window['tab1_list'].update(tuple(tab1_displayed_namesDB.keys()))
 
                 elif event == 'tab1_pin' and values['tab1_list'] != []:
-                    if tab1_spectrum is not None and tab1_html is not None and not any(s is tab1_spectrum for s, _ in pinned_spectra_and_colors):
-                        pinned_spectra_and_colors.append((tab1_spectrum, tab1_html))
+                    if tab1_spectrum is not None and tab1_html is not None:
+                        pinned_spectra_and_colors[tab1_spectrum] = tab1_html
+                        plot_current = True
 
                 elif event == 'tab1_clear':
                     pinned_spectra_and_colors.clear()
+                    plot_current = False
                     if window1:
                         tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
@@ -434,7 +475,7 @@ def launch_window(lang: str):
                                 maximize_brightness=values['-MaximizeBrightness-'] or estimated is None,
                                 scale_factor=_safe_scale_factor(values['-ScaleFactor-']),
                             )
-                            rgb = tuple(color.to_bit(bitness, settings=settings).round(rounding))
+                            rgb = tuple(color.to_bit(bit_depth, settings=settings).round(rounding))
 
                             # Output
                             tab1_export += f'\n{aux.export_colors(rgb)}\t{obj_name(lang)}'
@@ -595,6 +636,7 @@ def launch_window(lang: str):
                 if event in tab3_recalc_spectrum_events:
 
                     # Spectral data processing, updating title and radiance of surface
+                    plot_current = True
                     tab3_spectrum = blackbody_spectrum(ac.visible_range, values['tab3_slider1'], values['tab3_slider2'], values['tab3_slider3'])
                     tab3_radiance = ac.get_photometry(tab3_spectrum, get_filter('Generic/Bessell.V'))
                     window['tab3_radiance'].update(aux.exponential_notation(tab3_radiance[0]))
@@ -642,7 +684,7 @@ def launch_window(lang: str):
 
                     # Output
                     window['tab3_graph'].TKCanvas.itemconfig(tab3_preview, fill=tab3_html)
-                    window['tab3_rgb'].update(tuple(tab3_color_rgb.to_bit(bitness, settings=settings).round(rounding)))
+                    window['tab3_rgb'].update(tuple(tab3_color_rgb.to_bit(bit_depth, settings=settings).round(rounding)))
                     window['tab3_hex'].update(tab3_html)
 
                     # Dynamical plotting
@@ -657,14 +699,26 @@ def launch_window(lang: str):
                     window['tab3_slider1'].update(range=(0, int(values['tab3_maxtemp_num'])))
 
                 elif event == 'tab3_pin':
-                    if tab3_spectrum is not None and tab3_html is not None and not any(s is tab3_spectrum for s, _ in pinned_spectra_and_colors):
-                        pinned_spectra_and_colors.append((tab3_spectrum, tab3_html))
+                    if tab3_spectrum is not None and tab3_html is not None:
+                        pinned_spectra_and_colors[tab3_spectrum] = tab3_html
+                        plot_current = True
 
                 elif event == 'tab3_clear':
                     pinned_spectra_and_colors.clear()
+                    plot_current = False
                     if window1:
                         tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
                             tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
                             window0.ReturnValuesDictionary['-currentTab-'],
                             limit_to_vis, normalize_at_550nm, light_theme, lang
                         )
+
+            # A transient current spectrum must not outlive the tab switch.
+            if event == '-currentTab-':
+                plot_current = True
+            if event == '-currentTab-' and window1 and tab1_tab3_fig is not None and tab1_tab3_fig_canvas_agg is not None:
+                tab1_tab3_fig, tab1_tab3_fig_canvas_agg = tab1_tab3_update_plot(
+                    tab1_tab3_fig, tab1_tab3_fig_canvas_agg,
+                    values['-currentTab-'],
+                    limit_to_vis, normalize_at_550nm, light_theme, lang
+                )

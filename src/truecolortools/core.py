@@ -5,7 +5,7 @@ AstroColor owns spectra, filter profiles, photometric models, database
 parsing and color processing. This module keeps only the glue that is
 specific to TCT:
 
-- configuration of the filter search folders;
+- an explicit configuration helper for AstroColor's filter search folders;
 - reading TCT spectrum files with TCT extension conventions;
 - the `DatabaseEntry` wrapper that adds database metadata (`tags`) and
   file-based albedo spectra to `astrocolor.CelestialObject`;
@@ -48,9 +48,6 @@ def configure_filter_paths(base_dir: str | Path | None = None) -> None:
     custom = root / 'custom_filters'
     if custom.is_dir():
         ac.Config.set_custom_filters_folder(custom)
-
-
-configure_filter_paths()
 
 
 def _clip_arrays_to_tct_range(
